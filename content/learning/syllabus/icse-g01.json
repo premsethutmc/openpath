@@ -1,0 +1,402 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 1,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Curriculum: Mathematics, Class I",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE curriculum, Classes I–V",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 1 Maths Syllabus (theme list)",
+   "publisher": "BYJU'S",
+   "edition": "2023-24",
+   "academicYear": "2023-24",
+   "url": "https://byjus.com/icse-class-1-maths-syllabus",
+   "accessed": "2026-11-15",
+   "used_for": "the six theme titles; key concepts are only partly confirmed by a search snippet of a copy of the Class I curriculum"
+  },
+  {
+   "kind": "secondary",
+   "title": "Class 1 Maths Syllabus (copy of the CISCE Class I curriculum, Theme 1 seen in a search snippet)",
+   "publisher": "Scribd upload",
+   "edition": "n/a",
+   "academicYear": "n/a",
+   "url": "https://www.scribd.com/document/626101576/Class-1-Maths-Syllabus",
+   "accessed": "2026-11-15",
+   "used_for": "Theme 1 key concepts (numbers to 20, numerals to 99, zero)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE publishes a curriculum for Classes 1–5 organised by themes; schools choose their own books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g01-c01",
+   "number": 1,
+   "term": null,
+   "title": "Theme 1: Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c01-s01",
+     "title": "Numbers to 20"
+    },
+    {
+     "id": "icse-g01-c01-s02",
+     "title": "Numbers to 99"
+    },
+    {
+     "id": "icse-g01-c01-s03",
+     "title": "Zero"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c01-o01",
+     "statement": "Count, compare and order collections of up to 20 objects.",
+     "concepts": [
+      "counting",
+      "more and less"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.count-objects",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.count-objects"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g01-c01-o02",
+     "statement": "Read and write numerals and number names up to 99 using tens and ones.",
+     "concepts": [
+      "tens and ones",
+      "number names"
+     ],
+     "questionTypes": [
+      "numeric",
+      "text"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.place-value-tens",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.place-value-tens"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g01-c01-o03",
+     "statement": "Understand zero as nothing left.",
+     "concepts": [
+      "zero"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.zero",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.zero"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    }
+   ]
+  },
+  {
+   "id": "icse-g01-c02",
+   "number": 2,
+   "term": null,
+   "title": "Theme 2: Number Operations",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c02-s01",
+     "title": "Addition and subtraction"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c02-o01",
+     "statement": "Add and subtract numbers up to 20 using objects, pictures and symbols.",
+     "concepts": [
+      "addition",
+      "subtraction"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.addition",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.subtraction",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.addition",
+      "MATH.number.subtraction"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    }
+   ]
+  },
+  {
+   "id": "icse-g01-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theme 3: Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c03-s01",
+     "title": "Shapes and space"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c03-o01",
+     "statement": "Describe positions (top, bottom, inside, near) and name common 2D and 3D shapes.",
+     "concepts": [
+      "position words",
+      "shapes"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.positions",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.shapes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.positions",
+      "MATH.geometry.shapes"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g01-c04",
+   "number": 4,
+   "term": null,
+   "title": "Theme 4: Measurement",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c04-s01",
+     "title": "Length, weight, capacity and time"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c04-o01",
+     "statement": "Compare length and weight with direct comparison and non-standard units.",
+     "concepts": [
+      "longer",
+      "heavier"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.length-comparison",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.mass-comparison",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.non-standard-units",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.length-comparison",
+      "MATH.measurement.mass-comparison",
+      "MATH.measurement.non-standard-units"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    },
+    {
+     "id": "icse-g01-c04-o02",
+     "statement": "Order daily events and use days of the week.",
+     "concepts": [
+      "before and after",
+      "days of the week"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.time-order",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.calendar",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.calendar",
+      "MATH.measurement.time-order"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    }
+   ]
+  },
+  {
+   "id": "icse-g01-c05",
+   "number": 5,
+   "term": null,
+   "title": "Theme 5: Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c05-s01",
+     "title": "Collecting and sorting"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c05-o01",
+     "statement": "Sort objects by an attribute and read simple picture data.",
+     "concepts": [
+      "sorting",
+      "picture data"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.sort-by-attribute",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.picture-data",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.sort-by-attribute",
+      "MATH.statistics.picture-data"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Data Handling"
+    }
+   ]
+  },
+  {
+   "id": "icse-g01-c06",
+   "number": 6,
+   "term": null,
+   "title": "Theme 6: Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g01-c06-s01",
+     "title": "Repeating patterns"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g01-c06-o01",
+     "statement": "Copy and extend repeating patterns of shapes and numbers.",
+     "concepts": [
+      "repeating pattern"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.repeating-patterns"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Theme 6: Patterns"
+    }
+   ]
+  }
+ ]
+}

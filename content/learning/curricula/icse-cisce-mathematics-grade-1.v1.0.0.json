@@ -1,0 +1,387 @@
+{
+ "id": "icse-cisce-mathematics-grade-1",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 1,
+ "title": "CISCE Curriculum: Mathematics, Class I — Grade 1 Mathematics (CISCE / ICSE)",
+ "hash": "0a37af07",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE Curriculum: Mathematics, Class I",
+  "edition": "CISCE curriculum, Classes I–V",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g01.json. 6 of 6 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://byjus.com/icse-class-1-maths-syllabus https://www.scribd.com/document/626101576/Class-1-Maths-Syllabus. Notes: UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false. A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g01-c01",
+     "number": 1,
+     "title": "Theme 1: Numbers",
+     "outcomes": [
+      {
+       "id": "icse-g01-c01-o01",
+       "text": "Count, compare and order collections of up to 20 objects.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.count-objects",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g01-c01-o02",
+       "text": "Read and write numerals and number names up to 99 using tens and ones.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.place-value-tens",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, text)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c01-s01",
+       "number": "1.1",
+       "title": "Numbers to 20",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g01-c01-s02",
+       "number": "1.2",
+       "title": "Numbers to 99",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g01-c01-s03",
+       "number": "1.3",
+       "title": "Zero",
+       "outcomes": [
+        {
+         "id": "icse-g01-c01-o03",
+         "text": "Understand zero as nothing left.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.zero",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g01-c02",
+     "number": 2,
+     "title": "Theme 2: Number Operations",
+     "outcomes": [
+      {
+       "id": "icse-g01-c02-o01",
+       "text": "Add and subtract numbers up to 20 using objects, pictures and symbols.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c02-s01",
+       "number": "2.1",
+       "title": "Addition and subtraction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g01-c06",
+     "number": 6,
+     "title": "Theme 6: Patterns",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c06-s01",
+       "number": "6.1",
+       "title": "Repeating patterns",
+       "outcomes": [
+        {
+         "id": "icse-g01-c06-o01",
+         "text": "Copy and extend repeating patterns of shapes and numbers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.repeating-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g01-c03",
+     "number": 3,
+     "title": "Theme 3: Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c03-s01",
+       "number": "3.1",
+       "title": "Shapes and space",
+       "outcomes": [
+        {
+         "id": "icse-g01-c03-o01",
+         "text": "Describe positions (top, bottom, inside, near) and name common 2D and 3D shapes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.positions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.shapes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "icse-g01-c04",
+     "number": 4,
+     "title": "Theme 4: Measurement",
+     "outcomes": [
+      {
+       "id": "icse-g01-c04-o02",
+       "text": "Order daily events and use days of the week.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.calendar",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.time-order",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c04-s01",
+       "number": "4.1",
+       "title": "Length, weight, capacity and time",
+       "outcomes": [
+        {
+         "id": "icse-g01-c04-o01",
+         "text": "Compare length and weight with direct comparison and non-standard units.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.length-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.mass-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.non-standard-units",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "icse-g01-c05",
+     "number": 5,
+     "title": "Theme 5: Data Handling",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g01-c05-s01",
+       "number": "5.1",
+       "title": "Collecting and sorting",
+       "outcomes": [
+        {
+         "id": "icse-g01-c05-o01",
+         "text": "Sort objects by an attribute and read simple picture data.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.sort-by-attribute",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.picture-data",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    }
+   ]
+  }
+ ]
+}

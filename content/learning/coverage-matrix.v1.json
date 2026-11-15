@@ -24,11 +24,11 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1452,
+  "requirements": 1505,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 335,
+   "partial": 388,
    "unsupported": 0,
    "not-implemented": 12
   },
@@ -85,7 +85,7 @@
    "insufficient": 0
   },
   "educatorPart": {
-   "requirementsWithoutWrittenTask": 33
+   "requirementsWithoutWrittenTask": 36
   }
  },
  "diversity": [],
@@ -102,6 +102,21 @@
     "validated": 0,
     "awaiting": 43,
     "partial": 0,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "title": "CISCE Curriculum: Mathematics, Class I — Grade 1 Mathematics (CISCE / ICSE)",
+   "chapters": 6,
+   "requirements": 9,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 9,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -137,6 +152,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-2",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "title": "CISCE Curriculum: Mathematics, Class II — Grade 2 Mathematics (CISCE / ICSE)",
+   "chapters": 6,
+   "requirements": 13,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 13,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-2",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 2,
@@ -167,6 +197,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-3",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "title": "CISCE Curriculum: Mathematics, Class III — Grade 3 Mathematics (CISCE / ICSE)",
+   "chapters": 6,
+   "requirements": 13,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 13,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-3",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 3,
@@ -192,6 +237,21 @@
     "validated": 0,
     "awaiting": 57,
     "partial": 4,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "title": "CISCE Curriculum: Mathematics, Class IV — Grade 4 Mathematics (CISCE / ICSE)",
+   "chapters": 7,
+   "requirements": 18,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 18,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -12567,6 +12627,148 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": null,
+   "outcome": "icse-g01-c01-o01",
+   "text": "Count, compare and order collections of up to 20 objects.",
+   "competencies": [
+    "MATH.number.compare-numbers",
+    "MATH.number.count-objects"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": null,
+   "outcome": "icse-g01-c01-o02",
+   "text": "Read and write numerals and number names up to 99 using tens and ones.",
+   "competencies": [
+    "MATH.number.place-value-tens"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Zero",
+   "outcome": "icse-g01-c01-o03",
+   "text": "Understand zero as nothing left.",
+   "competencies": [
+    "MATH.number.zero"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g01-c02-o01",
+   "text": "Add and subtract numbers up to 20 using objects, pictures and symbols.",
+   "competencies": [
+    "MATH.number.addition",
+    "MATH.number.subtraction"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Algebra",
+   "chapter": "Theme 6: Patterns",
+   "section": "Repeating patterns",
+   "outcome": "icse-g01-c06-o01",
+   "text": "Copy and extend repeating patterns of shapes and numbers.",
+   "competencies": [
+    "MATH.algebra.repeating-patterns"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "Shapes and space",
+   "outcome": "icse-g01-c03-o01",
+   "text": "Describe positions (top, bottom, inside, near) and name common 2D and 3D shapes.",
+   "competencies": [
+    "MATH.geometry.positions",
+    "MATH.geometry.shapes"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": null,
+   "outcome": "icse-g01-c04-o02",
+   "text": "Order daily events and use days of the week.",
+   "competencies": [
+    "MATH.measurement.calendar",
+    "MATH.measurement.time-order"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": "Length, weight, capacity and time",
+   "outcome": "icse-g01-c04-o01",
+   "text": "Compare length and weight with direct comparison and non-standard units.",
+   "competencies": [
+    "MATH.measurement.length-comparison",
+    "MATH.measurement.mass-comparison",
+    "MATH.measurement.non-standard-units"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-1@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 1,
+   "domain": "Data handling and statistics",
+   "chapter": "Theme 5: Data Handling",
+   "section": "Collecting and sorting",
+   "outcome": "icse-g01-c05-o01",
+   "text": "Sort objects by an attribute and read simple picture data.",
+   "competencies": [
+    "MATH.reasoning.sort-by-attribute",
+    "MATH.statistics.picture-data"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-1@1.0.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 1,
@@ -13185,6 +13387,209 @@
    ],
    "class": "awaiting",
    "why": "Awaiting educator review."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": null,
+   "outcome": "icse-g02-c01-o02",
+   "text": "Find place and face value in three-digit numbers and compare and order them.",
+   "competencies": [
+    "MATH.number.compare-numbers",
+    "MATH.number.hundreds"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Numbers up to 999",
+   "outcome": "icse-g02-c01-o01",
+   "text": "Read and write numbers up to 999 and their number names.",
+   "competencies": [
+    "MATH.number.hundreds"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g02-c02-o01",
+   "text": "Add and subtract two-digit numbers with and without regrouping, including word problems.",
+   "competencies": [
+    "MATH.number.addition-regroup",
+    "MATH.number.subtraction-regroup"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g02-c02-o03",
+   "text": "Estimate sums and differences.",
+   "competencies": [
+    "MATH.number.mental-arithmetic",
+    "MATH.reasoning.estimate-check"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Addition and subtraction",
+   "outcome": "icse-g02-c02-o02",
+   "text": "Use the commutative property, zero in addition, and add or subtract mentally.",
+   "competencies": [
+    "MATH.number.addition",
+    "MATH.number.mental-arithmetic"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Addition and subtraction",
+   "outcome": "icse-g02-c02-o04",
+   "text": "Know the multiplication tables of 2, 3, 4 and 5 as repeated addition.",
+   "competencies": [
+    "MATH.number.equal-groups",
+    "MATH.number.multiplication-tables"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Addition and subtraction",
+   "outcome": "icse-g02-c02-o05",
+   "text": "Share equally and see division as repeated subtraction.",
+   "competencies": [
+    "MATH.number.sharing"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Algebra",
+   "chapter": "Theme 6: Patterns",
+   "section": "Repeating patterns",
+   "outcome": "icse-g02-c06-o01",
+   "text": "Find the unit of repeat and extend or create patterns.",
+   "competencies": [
+    "MATH.algebra.number-patterns",
+    "MATH.algebra.repeating-patterns"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "2D shapes and lines",
+   "outcome": "icse-g02-c03-o01",
+   "text": "Describe 2D shapes by sides and corners.",
+   "competencies": [
+    "MATH.geometry.shape-properties"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "2D shapes and lines",
+   "outcome": "icse-g02-c03-o02",
+   "text": "Draw horizontal, vertical, straight and curved lines.",
+   "competencies": [
+    "MATH.geometry.line-types"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": "Length, weight and capacity",
+   "outcome": "icse-g02-c04-o01",
+   "text": "Measure lengths with non-standard units and compare weights with a simple balance.",
+   "competencies": [
+    "MATH.measurement.mass-comparison",
+    "MATH.measurement.non-standard-units"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": "Length, weight and capacity",
+   "outcome": "icse-g02-c04-o02",
+   "text": "Order containers by capacity.",
+   "competencies": [
+    "MATH.measurement.capacity"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 2,
+   "domain": "Data handling and statistics",
+   "chapter": "Theme 5: Data Handling",
+   "section": "Everyday charts",
+   "outcome": "icse-g02-c05-o01",
+   "text": "Read simple charts from daily life such as timetables and height charts.",
+   "competencies": [
+    "MATH.statistics.pictographs",
+    "MATH.statistics.picture-data"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-2@1.0.0",
@@ -13972,6 +14377,213 @@
    ],
    "class": "awaiting",
    "why": "Awaiting educator review."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": null,
+   "outcome": "icse-g03-c01-o02",
+   "text": "Form the greatest and smallest numbers from given digits.",
+   "competencies": [
+    "MATH.number.compare-numbers",
+    "MATH.number.thousands"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Numbers up to 9999",
+   "outcome": "icse-g03-c01-o01",
+   "text": "Read, write, compare and order numbers up to 9999 using place value and expanded form.",
+   "competencies": [
+    "MATH.number.thousands"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g03-c02-o01",
+   "text": "Add and subtract numbers up to three digits with the standard method.",
+   "competencies": [
+    "MATH.number.multi-digit-add-subtract"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g03-c02-o02",
+   "text": "Know the tables of 2, 3, 4, 5, 7, 9 and 10 and multiply a two-digit number by a one-digit number, including the lattice method.",
+   "competencies": [
+    "MATH.number.multiplication-tables"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g03-c02-o04",
+   "text": "Compute mentally and estimate sums, differences and products, then check.",
+   "competencies": [
+    "MATH.number.mental-arithmetic",
+    "MATH.reasoning.estimate-check"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Multiplication",
+   "outcome": "icse-g03-c02-o03",
+   "text": "Divide by equal grouping and sharing and link division facts to multiplication.",
+   "competencies": [
+    "MATH.number.division-remainders",
+    "MATH.number.sharing"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Algebra",
+   "chapter": "Theme 6: Patterns",
+   "section": "Patterns",
+   "outcome": "icse-g03-c06-o01",
+   "text": "Extend patterns using a rule and create new patterns.",
+   "competencies": [
+    "MATH.algebra.growing-patterns",
+    "MATH.algebra.number-patterns"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "Shapes, tiling and maps",
+   "outcome": "icse-g03-c03-o01",
+   "text": "Draw straight and curved lines and shapes on dot grids and make shapes with tangram pieces.",
+   "competencies": [
+    "MATH.geometry.lines-segments",
+    "MATH.geometry.shape-properties"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "Shapes, tiling and maps",
+   "outcome": "icse-g03-c03-o02",
+   "text": "Find which shapes tile a surface.",
+   "competencies": [
+    "MATH.geometry.shape-tiling"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Geometry",
+   "chapter": "Theme 3: Geometry",
+   "section": "Shapes, tiling and maps",
+   "outcome": "icse-g03-c03-o03",
+   "text": "Read simple maps and line drawings of 3D objects.",
+   "competencies": [
+    "MATH.geometry.maps-directions"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": "Length, weight and capacity",
+   "outcome": "icse-g03-c04-o01",
+   "text": "Measure in centimetres and metres and convert between them; weigh with a balance; compare capacity.",
+   "competencies": [
+    "MATH.measurement.capacity",
+    "MATH.measurement.length-conversion",
+    "MATH.measurement.standard-length",
+    "MATH.measurement.standard-mass"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Measurement",
+   "chapter": "Theme 4: Measurement",
+   "section": "Time",
+   "outcome": "icse-g03-c04-o02",
+   "text": "Use calendars, read clock time with a.m. and p.m., use 12- and 24-hour clocks, and convert days to hours and hours to minutes.",
+   "competencies": [
+    "MATH.measurement.24-hour-clock",
+    "MATH.measurement.calendar",
+    "MATH.measurement.clock",
+    "MATH.measurement.time-unit-conversion"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 3,
+   "domain": "Data handling and statistics",
+   "chapter": "Theme 5: Data Handling",
+   "section": "Tables and pictographs",
+   "outcome": "icse-g03-c05-o01",
+   "text": "Record data with tally marks in tables and pictographs and draw conclusions.",
+   "competencies": [
+    "MATH.statistics.pictographs",
+    "MATH.statistics.tables"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-3@1.0.0",
@@ -14963,6 +15575,291 @@
    ],
    "class": "awaiting",
    "why": "Awaiting educator review."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Numbers up to one lakh",
+   "outcome": "icse-g04-c01-o01",
+   "text": "Read, write, compare and order numbers up to one lakh in the Indian system, with place value and expanded form.",
+   "competencies": [
+    "MATH.number.indian-international-numeration",
+    "MATH.number.large-numbers"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Roman numerals",
+   "outcome": "icse-g04-c01-o02",
+   "text": "Read and write Roman numerals up to 39.",
+   "competencies": [
+    "MATH.number.roman-numerals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": "Fractions",
+   "outcome": "icse-g04-c01-o03",
+   "text": "Use halves, quarters and three-quarters, equivalent fractions, and add or subtract like fractions.",
+   "competencies": [
+    "MATH.number.equivalent-fractions",
+    "MATH.number.fraction-add-like",
+    "MATH.number.fraction-models"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": null,
+   "outcome": "icse-g04-c02-o02",
+   "text": "Multiply two- and three-digit numbers, including the lattice method, and divide by a one-digit number.",
+   "competencies": [
+    "MATH.number.division-remainders",
+    "MATH.number.multi-multiplication"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Four operations",
+   "outcome": "icse-g04-c02-o01",
+   "text": "Add and subtract numbers up to four digits.",
+   "competencies": [
+    "MATH.number.multi-digit-add-subtract"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 2: Number Operations",
+   "section": "Four operations",
+   "outcome": "icse-g04-c02-o03",
+   "text": "Solve and frame word problems with the four operations and estimate answers.",
+   "competencies": [
+    "MATH.reasoning.estimate-check",
+    "MATH.reasoning.operation-choice"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 3: Playing with Numbers",
+   "section": "Factors and multiples",
+   "outcome": "icse-g04-c03-o01",
+   "text": "Find factors, multiples, primes and composites and use divisibility tests for 2, 3, 4, 5, 9 and 10.",
+   "competencies": [
+    "MATH.number.factors-multiples",
+    "MATH.number.primes",
+    "MATH.reasoning.divisibility"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 3: Playing with Numbers",
+   "section": "Factors and multiples",
+   "outcome": "icse-g04-c03-o02",
+   "text": "Find prime factors with a factor tree and the HCF and LCM.",
+   "competencies": [
+    "MATH.number.hcf-lcm",
+    "MATH.number.prime-factorisation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Algebra",
+   "chapter": "Theme 7: Patterns",
+   "section": "Growing and reducing patterns",
+   "outcome": "icse-g04-c07-o01",
+   "text": "Extend growing and reducing patterns with a rule.",
+   "competencies": [
+    "MATH.algebra.growing-patterns",
+    "MATH.algebra.pattern-rules"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Geometry",
+   "chapter": "Theme 4: Geometry",
+   "section": null,
+   "outcome": "icse-g04-c04-o02",
+   "text": "Name the centre, radius and diameter of a circle.",
+   "competencies": [
+    "MATH.geometry.circles"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Geometry",
+   "chapter": "Theme 4: Geometry",
+   "section": "Shapes and tiling",
+   "outcome": "icse-g04-c04-o01",
+   "text": "Tile regions with shapes and make shapes with tangrams.",
+   "competencies": [
+    "MATH.geometry.shape-tiling",
+    "MATH.geometry.tessellations"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Geometry",
+   "chapter": "Theme 4: Geometry",
+   "section": "Symmetry",
+   "outcome": "icse-g04-c04-o03",
+   "text": "Find lines of symmetry.",
+   "competencies": [
+    "MATH.geometry.symmetry-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Geometry",
+   "chapter": "Theme 4: Geometry",
+   "section": "Solids and views",
+   "outcome": "icse-g04-c04-o04",
+   "text": "Make cubes and cuboids from nets and draw top, front and side views.",
+   "competencies": [
+    "MATH.geometry.nets",
+    "MATH.geometry.solid-views"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Geometry",
+   "chapter": "Theme 4: Geometry",
+   "section": "Lines",
+   "outcome": "icse-g04-c04-o05",
+   "text": "Name points, lines, segments, rays and parallel, intersecting and perpendicular lines.",
+   "competencies": [
+    "MATH.geometry.lines-segments"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Measurement",
+   "chapter": "Theme 5: Measurement",
+   "section": null,
+   "outcome": "icse-g04-c05-o01",
+   "text": "Convert m to cm, kg to g and L to mL, and solve measurement problems.",
+   "competencies": [
+    "MATH.measurement.compute-with-measures",
+    "MATH.measurement.unit-conversions"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Measurement",
+   "chapter": "Theme 5: Measurement",
+   "section": "Area and perimeter",
+   "outcome": "icse-g04-c05-o02",
+   "text": "Find area and perimeter of simple shapes by counting unit squares.",
+   "competencies": [
+    "MATH.measurement.area-squares",
+    "MATH.measurement.perimeter-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Measurement",
+   "chapter": "Theme 5: Measurement",
+   "section": "Time",
+   "outcome": "icse-g04-c05-o03",
+   "text": "Use 12- and 24-hour clocks and find time intervals.",
+   "competencies": [
+    "MATH.measurement.24-hour-clock",
+    "MATH.measurement.elapsed-time"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 4,
+   "domain": "Data handling and statistics",
+   "chapter": "Theme 6: Data Handling",
+   "section": "Pictographs and bar graphs",
+   "outcome": "icse-g04-c06-o01",
+   "text": "Collect data and read and draw pictographs and bar graphs.",
+   "competencies": [
+    "MATH.statistics.bar-charts",
+    "MATH.statistics.pictographs"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-4@1.0.0",

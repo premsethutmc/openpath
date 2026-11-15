@@ -1,0 +1,691 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 4,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Curriculum: Mathematics, Class IV",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE curriculum, Classes I–V",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 4 Maths Syllabus (a third-party copy of the Class IV mathematics pages of the CISCE curriculum)",
+   "publisher": "BYJU'S",
+   "edition": "CISCE curriculum, Classes I–V",
+   "academicYear": "2026-27",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-4-Maths-Syllabus.pdf",
+   "accessed": "2026-11-15",
+   "used_for": "themes and key concepts (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE publishes a curriculum for Classes 1–5 organised by themes; schools choose their own books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g04-c01",
+   "number": 1,
+   "term": null,
+   "title": "Theme 1: Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c01-s01",
+     "title": "Numbers up to one lakh"
+    },
+    {
+     "id": "icse-g04-c01-s02",
+     "title": "Roman numerals"
+    },
+    {
+     "id": "icse-g04-c01-s03",
+     "title": "Fractions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c01-o01",
+     "statement": "Read, write, compare and order numbers up to one lakh in the Indian system, with place value and expanded form.",
+     "concepts": [
+      "lakh",
+      "expanded form"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.indian-international-numeration",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.indian-international-numeration",
+      "MATH.number.large-numbers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g04-c01-o02",
+     "statement": "Read and write Roman numerals up to 39.",
+     "concepts": [
+      "Roman numerals"
+     ],
+     "questionTypes": [
+      "text"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.roman-numerals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.roman-numerals"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g04-c01-o03",
+     "statement": "Use halves, quarters and three-quarters, equivalent fractions, and add or subtract like fractions.",
+     "concepts": [
+      "equivalent fractions",
+      "like fractions"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-add-like",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions",
+      "MATH.number.fraction-add-like",
+      "MATH.number.fraction-models"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c02",
+   "number": 2,
+   "term": null,
+   "title": "Theme 2: Number Operations",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c02-s01",
+     "title": "Four operations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c02-o01",
+     "statement": "Add and subtract numbers up to four digits.",
+     "concepts": [
+      "regrouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g04-c02-o02",
+     "statement": "Multiply two- and three-digit numbers, including the lattice method, and divide by a one-digit number.",
+     "concepts": [
+      "lattice method",
+      "division"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.multi-multiplication"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g04-c02-o03",
+     "statement": "Solve and frame word problems with the four operations and estimate answers.",
+     "concepts": [
+      "word problems",
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.estimate-check",
+      "MATH.reasoning.operation-choice"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theme 3: Playing with Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c03-s01",
+     "title": "Factors and multiples"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c03-o01",
+     "statement": "Find factors, multiples, primes and composites and use divisibility tests for 2, 3, 4, 5, 9 and 10.",
+     "concepts": [
+      "factors",
+      "divisibility"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples",
+      "MATH.number.primes",
+      "MATH.reasoning.divisibility"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Playing with Numbers"
+    },
+    {
+     "id": "icse-g04-c03-o02",
+     "statement": "Find prime factors with a factor tree and the HCF and LCM.",
+     "concepts": [
+      "factor tree",
+      "HCF",
+      "LCM"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hcf-lcm",
+      "MATH.number.prime-factorisation"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Playing with Numbers"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c04",
+   "number": 4,
+   "term": null,
+   "title": "Theme 4: Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c04-s01",
+     "title": "Shapes and tiling"
+    },
+    {
+     "id": "icse-g04-c04-s02",
+     "title": "Circles"
+    },
+    {
+     "id": "icse-g04-c04-s03",
+     "title": "Symmetry"
+    },
+    {
+     "id": "icse-g04-c04-s04",
+     "title": "Solids and views"
+    },
+    {
+     "id": "icse-g04-c04-s05",
+     "title": "Lines"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c04-o01",
+     "statement": "Tile regions with shapes and make shapes with tangrams.",
+     "concepts": [
+      "tessellation"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.tessellations",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.shape-tiling",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-tiling",
+      "MATH.geometry.tessellations"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Geometry"
+    },
+    {
+     "id": "icse-g04-c04-o02",
+     "statement": "Name the centre, radius and diameter of a circle.",
+     "concepts": [
+      "radius",
+      "diameter"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circles"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Geometry"
+    },
+    {
+     "id": "icse-g04-c04-o03",
+     "statement": "Find lines of symmetry.",
+     "concepts": [
+      "reflection symmetry"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Geometry"
+    },
+    {
+     "id": "icse-g04-c04-o04",
+     "statement": "Make cubes and cuboids from nets and draw top, front and side views.",
+     "concepts": [
+      "nets",
+      "plan and elevation"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.solid-views"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Geometry"
+    },
+    {
+     "id": "icse-g04-c04-o05",
+     "statement": "Name points, lines, segments, rays and parallel, intersecting and perpendicular lines.",
+     "concepts": [
+      "ray",
+      "perpendicular"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.lines-segments",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.lines-segments"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c05",
+   "number": 5,
+   "term": null,
+   "title": "Theme 5: Measurement",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c05-s01",
+     "title": "Units"
+    },
+    {
+     "id": "icse-g04-c05-s02",
+     "title": "Area and perimeter"
+    },
+    {
+     "id": "icse-g04-c05-s03",
+     "title": "Time"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c05-o01",
+     "statement": "Convert m to cm, kg to g and L to mL, and solve measurement problems.",
+     "concepts": [
+      "unit conversion"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.compute-with-measures",
+      "MATH.measurement.unit-conversions"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Measurement"
+    },
+    {
+     "id": "icse-g04-c05-o02",
+     "statement": "Find area and perimeter of simple shapes by counting unit squares.",
+     "concepts": [
+      "area",
+      "perimeter"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.area-squares",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.area-squares",
+      "MATH.measurement.perimeter-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Measurement"
+    },
+    {
+     "id": "icse-g04-c05-o03",
+     "statement": "Use 12- and 24-hour clocks and find time intervals.",
+     "concepts": [
+      "24-hour clock",
+      "time interval"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.24-hour-clock",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.elapsed-time",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.24-hour-clock",
+      "MATH.measurement.elapsed-time"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Measurement"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c06",
+   "number": 6,
+   "term": null,
+   "title": "Theme 6: Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c06-s01",
+     "title": "Pictographs and bar graphs"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c06-o01",
+     "statement": "Collect data and read and draw pictographs and bar graphs.",
+     "concepts": [
+      "bar graph"
+     ],
+     "questionTypes": [
+      "numeric",
+      "drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.bar-charts",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.bar-charts",
+      "MATH.statistics.pictographs"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Theme 6: Data Handling"
+    }
+   ]
+  },
+  {
+   "id": "icse-g04-c07",
+   "number": 7,
+   "term": null,
+   "title": "Theme 7: Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g04-c07-s01",
+     "title": "Growing and reducing patterns"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g04-c07-o01",
+     "statement": "Extend growing and reducing patterns with a rule.",
+     "concepts": [
+      "growing pattern"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.growing-patterns",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.growing-patterns",
+      "MATH.algebra.pattern-rules"
+     ],
+     "coverage": "full",
+     "source": "Unit 7: Theme 7: Patterns"
+    }
+   ]
+  }
+ ]
+}

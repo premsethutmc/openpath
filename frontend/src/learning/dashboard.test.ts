@@ -35,8 +35,8 @@ test("real counts come from the repository, not constants", () => {
   assert.equal(index.releases.length, boardReleases.length);
   assert.ok(index.releases.every((e) => e.grade >= 1 && e.grade <= 12));
   for (const g of [1, 5, 10, 12]) for (const b of ["cbse", "tn"] as const) assert.ok(index.releases.some((e) => e.board === b && e.grade === g), `${b} grade ${g}`);
-  // icse@1: CISCE / ICSE has Classes 5–12 only
-  assert.deepEqual(index.releases.filter((e) => e.board === "icse").map((e) => e.grade), [5, 6, 7, 8, 9, 10, 11, 12]);
+  // icse@1: CISCE / ICSE has Classes 1–12 only
+  assert.deepEqual(index.releases.filter((e) => e.board === "icse").map((e) => e.grade), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 });
 
 test("mapping integrity: exactly the release's accepted mappings, the same stable ids, one scope per board", () => {
