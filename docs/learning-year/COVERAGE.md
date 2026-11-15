@@ -268,15 +268,15 @@ Every competency that has some content:
 | Calculate frustum surface area and volume (`MATH.measurement.frustum`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amfrust draft). |
 | Calculate sector and segment areas (`MATH.measurement.sectors`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiwiper draft, amseg draft, amclock draft, amsecinv draft). |
 | Use Euclidean algorithm and prime factorisation (`MATH.number.euclid-algorithm`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families hcf draft, aeeuc draft, agediv draft, agfta draft). |
-| Compute Goods and Services Tax on a bill (`MATH.number.gst`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqgst missing). |
+| Compute Goods and Services Tax on a bill (`MATH.number.gst`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqgst draft). |
 | Use congruence modulo n (`MATH.number.modular-arithmetic`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anmod draft, ancong draft, anweek draft). |
-| Find the interest and maturity value of a recurring deposit (`MATH.number.recurring-deposit`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqrd missing). |
-| Calculate dividends and returns on shares (`MATH.number.shares-dividends`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqshare missing). |
+| Find the interest and maturity value of a recurring deposit (`MATH.number.recurring-deposit`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqrd draft). |
+| Calculate dividends and returns on shares (`MATH.number.shares-dividends`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqshare draft). |
 | Use complementary events (`MATH.probability.complements`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ancomp draft, anunion draft, anvalid draft, ansure draft). |
 | Choose and justify a mathematical model (`MATH.reasoning.model-selection`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anpair draft, anquad draft). |
 | Sum special series of natural numbers (`MATH.sequences.power-sums`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alsum draft, alsumr draft, alsump draft). |
 | Calculate grouped mean median and mode (`MATH.statistics.grouped-mean`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families angmean draft, angmedian draft, angmode draft, angstep draft, anfmed draft, anempir draft). |
-| Read the median and quartiles from a cumulative frequency curve (`MATH.statistics.ogive-quartiles`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqogive missing). |
+| Read the median and quartiles from a cumulative frequency curve (`MATH.statistics.ogive-quartiles`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqogive draft). |
 | Solve height and distance problems (`MATH.trigonometry.heights-distances`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anheight draft, antwo draft). |
 | Prove elementary trigonometric identities (`MATH.trigonometry.identities`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ansecpt draft, anidsimp draft). |
 | Use trigonometric ratios (`MATH.trigonometry.ratios`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anstd draft, anratio draft, ancompa draft, ancomps draft, antable draft). |
@@ -1504,7 +1504,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 345 (hand-written 24, synthesised from blueprints 321)
 - Problem families (generated questions with independent checks): 1108
-- Review registry (repository copy): draft 1432, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1440, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
