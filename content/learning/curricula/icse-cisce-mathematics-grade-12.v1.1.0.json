@@ -1,0 +1,705 @@
+{
+ "id": "icse-cisce-mathematics-grade-12",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 12,
+ "title": "CISCE ISC Syllabus: Mathematics, Class XII — Grade 12 Mathematics (CISCE / ICSE)",
+ "hash": "20bf28fa",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE ISC Syllabus: Mathematics, Class XII",
+  "edition": "ISC examination 2028 (Class XII document); unit list cross-checked for 2026-27",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g12.json. 7 of 7 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://docs.aglasem.com/view/5a933230-f4c0-11e9-b688-02f21f5619c4 https://www.shaalaa.com/syllabus/cisce-mathematics-12th_9201. Notes: UNOFFICIAL SOURCE (a copy of the official text): the text of CISCE's own ISC Mathematics (860) syllabus documents, read through copies hosted by AglaSem Docs (cisce.org is not reachable from the build environment). Class XI was checked against two copies (ISC 2027 and ISC 2028) that agree; Class XII against the ISC 2028 document and a 2026-27 chapter list from Shaalaa, which agree. Every unit stays sourceVerified: false until the official site or a school copy is compared. CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. From ISC 2027 the Mathematics (860) paper has no optional sections: the statistics, correlation, index-number, regression and business-calculus units moved to a separate subject, Applied Mathematics (885), which may not be taken with Mathematics and is not recorded here.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g12-c01",
+     "number": 1,
+     "title": "Relations and Functions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c01-s01",
+       "number": "1.1",
+       "title": "Relations and functions",
+       "outcomes": [
+        {
+         "id": "icse-g12-c01-o01",
+         "text": "Test relations for reflexivity, symmetry and transitivity, and identify equivalence relations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.sets-relations.relation-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, proof)."
+         }
+        },
+        {
+         "id": "icse-g12-c01-o02",
+         "text": "Classify functions as one-one or onto, compose them, find inverses of invertible functions and sketch graphs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.function-types",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c01-s02",
+       "number": "1.2",
+       "title": "Inverse trigonometric functions",
+       "outcomes": [
+        {
+         "id": "icse-g12-c01-o03",
+         "text": "Use the domains, ranges, principal value branches, graphs and properties of inverse trigonometric functions, including the formulae for 2 sin⁻¹x, 2 cos⁻¹x, 2 tan⁻¹x and 3 tan⁻¹x.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g12-c02",
+     "number": 2,
+     "title": "Algebra",
+     "outcomes": [
+      {
+       "id": "icse-g12-c02-o03",
+       "text": "Decide whether a system of linear equations is consistent and how many solutions it has, and solve it with the inverse of a matrix.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.matrix-systems",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.matrices.system-consistency",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; tuple)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c02-s01",
+       "number": "2.1",
+       "title": "Matrices",
+       "outcomes": [
+        {
+         "id": "icse-g12-c02-o01",
+         "text": "Use types of matrices, transposes, symmetric and skew-symmetric matrices, matrix operations and invertible matrices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.transpose-symmetry",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c02-s02",
+       "number": "2.2",
+       "title": "Determinants",
+       "outcomes": [
+        {
+         "id": "icse-g12-c02-o02",
+         "text": "Evaluate determinants up to order 3 using their properties, find minors, cofactors, the adjoint and the inverse, and the area of a triangle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.adjoint-inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g12-c06",
+     "number": 6,
+     "title": "Linear Programming",
+     "outcomes": [
+      {
+       "id": "icse-g12-c06-o01",
+       "text": "Formulate linear programming problems and solve them graphically in two variables, with bounded or unbounded feasible regions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.inequalities-two-variables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-programming",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, drawing)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c06-s01",
+       "number": "6.1",
+       "title": "Graphical method",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g12-c07",
+     "number": 7,
+     "title": "Probability",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c07-s01",
+       "number": "7.1",
+       "title": "Conditional probability",
+       "outcomes": [
+        {
+         "id": "icse-g12-c07-o01",
+         "text": "Use conditional probability, the multiplication theorem, independent events, total probability and Bayes' theorem.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.bayes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.conditional",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.independent-events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.total-probability",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        },
+        {
+         "id": "icse-g12-c07-o02",
+         "text": "Find the probability distribution of a discrete random variable and its mean.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.random-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c07-s02",
+       "number": "7.2",
+       "title": "Random variables",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-probability",
+      "number": 2,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "icse-g12-c03",
+     "number": 3,
+     "title": "Calculus",
+     "outcomes": [
+      {
+       "id": "icse-g12-c03-o03",
+       "text": "Integrate by substitution, partial fractions and parts, including standard forms.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.indefinite-integrals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.calculus.integration-methods",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.calculus.partial-fractions-integration",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+       }
+      },
+      {
+       "id": "icse-g12-c03-o05",
+       "text": "Find the area under simple curves and the area between two curves.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.area-integrals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c03-s01",
+       "number": "3.1",
+       "title": "Continuity and differentiability",
+       "outcomes": [
+        {
+         "id": "icse-g12-c03-o01",
+         "text": "Test continuity and differentiability, and differentiate with the chain rule, implicitly, parametrically and logarithmically, including second derivatives.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.continuity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.derivative-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.differentiability",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.higher-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.implicit-parametric-differentiation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c03-s02",
+       "number": "3.2",
+       "title": "Applications of derivatives",
+       "outcomes": [
+        {
+         "id": "icse-g12-c03-o02",
+         "text": "Use derivatives for rates of change, increasing and decreasing functions, tangents and normals, and maxima and minima with the first and second derivative tests.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.monotonicity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c03-s03",
+       "number": "3.3",
+       "title": "Integrals",
+       "outcomes": [
+        {
+         "id": "icse-g12-c03-o04",
+         "text": "Evaluate definite integrals with the fundamental theorem and their properties.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integral-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c03-s04",
+       "number": "3.4",
+       "title": "Application of integrals",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c03-s05",
+       "number": "3.5",
+       "title": "Differential equations",
+       "outcomes": [
+        {
+         "id": "icse-g12-c03-o06",
+         "text": "Form differential equations and solve variable-separable, homogeneous and linear first-order equations (no second-order equations).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.homogeneous-de",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.linear-first-order-de",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "icse-g12-c05",
+     "number": 5,
+     "title": "Three-dimensional Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c05-s01",
+       "number": "5.1",
+       "title": "Lines",
+       "outcomes": [
+        {
+         "id": "icse-g12-c05-o01",
+         "text": "Write lines in space in vector and Cartesian form, find angles between them, decide whether they are coplanar or skew, and find the shortest distance between two lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.skew-line-distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g12-c05-s02",
+       "number": "5.2",
+       "title": "Planes",
+       "outcomes": [
+        {
+         "id": "icse-g12-c05-o02",
+         "text": "Write planes in normal, intercept and one-point form, find the distance of a point from a plane, where a line meets a plane, and angles between planes and between a line and a plane.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-planes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 4,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "icse-g12-c04",
+     "number": 4,
+     "title": "Vector Algebra",
+     "outcomes": [
+      {
+       "id": "icse-g12-c04-o02",
+       "text": "Use dot and cross products for angles, projections, areas of triangles and parallelograms, and collinearity (no proofs of geometrical theorems).",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.vectors.products",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g12-c04-s01",
+       "number": "4.1",
+       "title": "Vectors",
+       "outcomes": [
+        {
+         "id": "icse-g12-c04-o01",
+         "text": "Use magnitude, direction cosines and ratios, position vectors, the section formula, and vector addition and scalar multiples.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.algebra",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.direction-cosines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; tuple)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-vectors",
+      "number": 5,
+      "title": "Vectors and three-dimensional geometry"
+     }
+    }
+   ]
+  }
+ ]
+}
