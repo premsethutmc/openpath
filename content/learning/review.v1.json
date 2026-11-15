@@ -35328,7 +35328,7 @@
    "competency": "MATH.algebra.repeating-patterns",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "81c8d531",
+   "contentHash": "7d0099a1",
    "state": "draft",
    "history": [
     {
@@ -35377,6 +35377,14 @@
      "role": "engineer",
      "at": "2026-11-15T09:44:50.381Z",
      "contentHash": "81c8d531",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:48:17.678Z",
+     "contentHash": "7d0099a1",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

@@ -37,7 +37,7 @@ Every competency that has some content:
 
 | Competency | Grades | Status | Why |
 |---|---|---|---|
-| Extend repeating patterns (`MATH.algebra.repeating-patterns`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aapatn draft, aapatu draft, aaweave draft, aapat2 missing). |
+| Extend repeating patterns (`MATH.algebra.repeating-patterns`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aapatn draft, aapatu draft, aaweave draft, aapat2 draft). |
 | Describe relative positions (`MATH.geometry.positions`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aarow draft, aashelf draft, aawhere draft). |
 | Recognise plane and solid shapes (`MATH.geometry.shapes`) | 1–1 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aasolid draft, aaflat draft). |
 | Read and use a calendar (`MATH.measurement.calendar`) | 1–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aacald draft, aacalc draft, aacalgap draft, aacalmo draft, aaweek draft, aaseason draft, aamdays draft, aaddmm draft, aaage draft, aaday draft). |
@@ -105,7 +105,7 @@ Every competency that has some content:
 | Calculate with measured quantities in mixed units (`MATH.measurement.compute-with-measures`) | 4–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aemix draft, aemulm draft, aedivm draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Convert common metric units (`MATH.measurement.unit-conversions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeconv draft, aeparts draft, aeconvu draft, aeconvd draft, aewcmp draft, aeftin draft, aecf draft). |
-| Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aedec draft, aedecc draft, aedpv draft, aedord draft, aedfr draft, aedfrl missing, aedlike missing). |
+| Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aedec draft, aedecc draft, aedpv draft, aedord draft, aedfr draft, aedfrl draft, aedlike draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
 | Classify numbers as even or odd (`MATH.number.even-odd`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeeven draft, aepair draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
@@ -137,13 +137,13 @@ Every competency that has some content:
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol draft, abdisp draft, avvcmp draft). |
 | Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange draft). |
 | Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft, agcomf draft, agjump draft). |
-| Add unlike fractions (`MATH.number.fraction-add`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft, aefword missing). |
+| Add unlike fractions (`MATH.number.fraction-add`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft, aefword draft). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, avfwq draft, mul draft). |
 | Find common factors, common multiples, HCF and LCM (`MATH.number.hcf-lcm`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aglcm draft, aghcf3 draft, agcop draft, aglcm3 draft, aghlw draft, aghlp draft). |
 | Convert between mixed and improper fractions (`MATH.number.mixed-fractions`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agimp draft, agmix draft, agnl draft, agclass draft, mul draft). |
 | Evaluate arithmetic expressions using brackets and operation precedence (`MATH.number.order-of-operations`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agbod draft, agwrite draft, agterm draft, mul draft). |
-| Represent percentages as hundredths (`MATH.number.percent-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft, agpgrid missing). |
-| Distinguish prime and composite numbers (`MATH.number.primes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft, agptest draft, agtwin missing). |
+| Represent percentages as hundredths (`MATH.number.percent-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft, agpgrid draft). |
+| Distinguish prime and composite numbers (`MATH.number.primes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft, agptest draft, agtwin draft). |
 | Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agcex draft). |
 | Find and interpret a mean (`MATH.statistics.averages-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mean4 submitted, avmiss draft). |
 | Read line graphs of data (`MATH.statistics.line-graphs`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adline draft). |
@@ -1496,7 +1496,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 341 (hand-written 24, synthesised from blueprints 317)
 - Problem families (generated questions with independent checks): 1104
-- Review registry (repository copy): draft 1426, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1432, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
@@ -1586,12 +1586,12 @@ By grade (a competency spanning grades counts in each):
 | Competency | Status | Why |
 |---|---|---|
 | Find factors and multiples (`MATH.number.factors-multiples`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft, agcomf draft, agjump draft). |
-| Distinguish prime and composite numbers (`MATH.number.primes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft, agptest draft, agtwin missing). |
+| Distinguish prime and composite numbers (`MATH.number.primes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft, agptest draft, agtwin draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
-| Add unlike fractions (`MATH.number.fraction-add`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft, aefword missing). |
+| Add unlike fractions (`MATH.number.fraction-add`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft, aefword draft). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, avfwq draft, mul draft). |
 | Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange draft). |
-| Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft, agpgrid missing). |
+| Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft, agpgrid draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect draft). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol draft, abdisp draft, avvcmp draft). |
 | Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families afletter draft, afmatch draft). |

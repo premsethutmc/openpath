@@ -15761,6 +15761,43 @@
    "serves": [
     "icse-g05-c02-o06"
    ]
+  },
+  {
+   "id": "wr:pat:two-ways-own",
+   "competency": "MATH.algebra.repeating-patterns",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Make your own pattern of at least 12 shapes in which TWO things change at once, each with its own repeat: for example the shape repeats every 2 and the colour every 3. Draw it or write it as words (\"red circle, blue square, …\"). Then say how often the shape repeats, how often the colour repeats, and what the 13th item will be.",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "two-changes",
+     "criterion": "The pattern changes in two ways at once (for example shape and colour, or shape and size)",
+     "points": 1
+    },
+    {
+     "id": "own-repeats",
+     "criterion": "Each of the two changes repeats regularly, and the two repeats are of different lengths",
+     "points": 1
+    },
+    {
+     "id": "describes",
+     "criterion": "States correctly how often each change repeats",
+     "points": 1
+    },
+    {
+     "id": "next",
+     "criterion": "Gives the 13th item correctly for their own pattern",
+     "points": 1
+    }
+   ],
+   "guidance": "Any two attributes count (shape, colour, size, direction, filled or empty). A pattern in which both change together with the same repeat earns the first point only. Colours may be written as words if the learner has no colours.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "icse-g05-c10-o03"
+   ]
   }
  ]
 }
