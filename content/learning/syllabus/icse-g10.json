@@ -30,12 +30,23 @@
    "url": "https://shaalaa.com/hin/subjects/cisce-mathematics-syllabus_3232",
    "accessed": "2026-11-14",
    "used_for": "cross-check of the unit and chapter order"
+  },
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 10 Maths Syllabus 2026-27 (republished from cisce.org)",
+   "publisher": "Oswal Publishers",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://oswalpublishers.com/?p=29003",
+   "accessed": "2026-11-15",
+   "used_for": "cross-check for 2026-27: Commercial Mathematics (GST with inverse cases, banking, shares and dividends) and the unit list agree"
   }
  ],
  "notes": [
   "UNOFFICIAL SOURCE: cisce.org could not be read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
   "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
-  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing."
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "Cross-checked for 2026-27 against two independent copies (Oswal Publishers, republished from cisce.org, and Shaalaa's 2026-27 chapter list); they agree with the units recorded here."
  ],
  "gaps": [
   {

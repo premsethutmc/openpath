@@ -2,12 +2,12 @@
  "schema": "outcome-assessment@1",
  "version": "2.2.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse-oam@1): the 308 CISCE outcomes of Classes 1–12 (content/learning/syllabus/icse-g*.json) judged by an AI assessor working to the same brief, from sampled problems of every family of the mapped competencies and the written tasks; where the assessing content sat under a skill the outcome was not yet mapped to, that skill was added to the outcome's mapping as a partial fit (23 additions). 260 full, 37 partial, 11 none (GST, recurring deposits, shares and dividends, ogives and quartiles, deciles and percentiles, correlation, index numbers, moving averages and regression). The assessor did not write the content. Provisional: not educator-reviewed.",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse-oam@1): the 297 CISCE outcomes of Classes 1–12 (content/learning/syllabus/icse-g*.json) judged by an AI assessor working to the same brief, from sampled problems of every family of the mapped competencies and the written tasks; where the assessing content sat under a skill the outcome was not yet mapped to, that skill was added to the outcome's mapping as a partial fit. 254 full, 38 partial, 5 none (GST, recurring deposits, shares and dividends, ogives and quartiles). Classes 11–12 follow the ISC Mathematics (860) syllabus from ISC 2027 on, which has no optional sections. The assessor did not write the content. Provisional: not educator-reviewed.",
  "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4: branch feat/icse-oam",
  "counts": {
-  "full": 1393,
-  "none": 11,
-  "partial": 101
+  "full": 1387,
+  "none": 5,
+  "partial": 102
  },
  "outcomes": [
   {
@@ -19181,9 +19181,10 @@
    "outcome": "icse-g11-c01-o01",
    "verdict": "full",
    "families": [
+    "aosetcl",
+    "aosub",
     "aosetop",
-    "aosetlaw",
-    "aoven3"
+    "aonlread"
    ],
    "written": [],
    "authored": false,
@@ -19198,28 +19199,28 @@
     "aocart",
     "aorel",
     "aodom",
-    "aorange"
+    "aorange",
+    "alfop"
    ],
    "written": [],
    "authored": false,
-   "missing": "The range of functions other than quadratics (rational, square-root or modulus functions) is not asked; Cartesian products, relations, functions and domains are.",
+   "missing": "The range of functions other than quadratics (rational, square-root or modulus) is not asked, and the sum, product or quotient of two functions is never written out as an expression; Cartesian products, relations, functions and domains are.",
    "grade": "fit",
    "judged": "oam@4"
   },
   {
    "outcome": "icse-g11-c01-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "aograph",
     "aostd",
-    "alfop"
+    "aograph"
    ],
    "written": [
     "wr:std:sketch-recip-sgn-step",
     "wr:std:sketch-exp-log"
    ],
    "authored": false,
-   "missing": "Writing a combined function such as (f + g)(x) or (fg)(x) as an expression is not asked; sketching and reading the standard functions is.",
+   "missing": "",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19228,12 +19229,12 @@
    "verdict": "full",
    "families": [
     "atrad",
+    "atarc",
     "atval",
-    "atcomp",
-    "atdbl"
+    "atsign"
    ],
    "written": [
-    "wr:gap:double-angle-proof"
+    "wr:gap:trig-graphs"
    ],
    "authored": false,
    "missing": "",
@@ -19244,11 +19245,14 @@
    "outcome": "icse-g11-c01-o05",
    "verdict": "full",
    "families": [
-    "atgen",
-    "atsiner",
-    "atcosr"
+    "atcomp",
+    "atdbl",
+    "athalf",
+    "atp2s"
    ],
-   "written": [],
+   "written": [
+    "wr:gap:double-angle-proof"
+   ],
    "authored": false,
    "missing": "",
    "grade": "fit",
@@ -19256,16 +19260,16 @@
   },
   {
    "outcome": "icse-g11-c02-o01",
-   "verdict": "full",
-   "families": [],
-   "written": [
-    "wr:ind:sum",
-    "wr:ind:div",
-    "wr:ind:odd",
-    "wr:ind:ineq"
+   "verdict": "partial",
+   "families": [
+    "ascop",
+    "ascmod",
+    "asarg",
+    "ascsqrt"
    ],
+   "written": [],
    "authored": false,
-   "missing": "",
+   "missing": "The cube roots of unity are never asked; complex arithmetic, polar form, modulus, argument and square roots are.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19273,26 +19277,26 @@
    "outcome": "icse-g11-c02-o02",
    "verdict": "partial",
    "families": [
-    "ascop",
-    "ascmod",
-    "asarg"
+    "aocq",
+    "auqf",
+    "disc"
    ],
    "written": [],
    "authored": false,
-   "missing": "The cube roots of unity are never asked; complex arithmetic, modulus and argument are.",
+   "missing": "Equations reducible to quadratic form and equations with a common root are never asked; solving, the nature of roots and the relation between roots and coefficients are.",
    "grade": "fit",
    "judged": "oam@4"
   },
   {
    "outcome": "icse-g11-c02-o03",
-   "verdict": "full",
+   "verdict": "partial",
    "families": [
-    "aocq",
-    "aoqin"
+    "alqline",
+    "alqtab"
    ],
    "written": [],
    "authored": false,
-   "missing": "",
+   "missing": "The greatest or least value of a quadratic function is never asked; reading and using its graph is.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19300,9 +19304,9 @@
    "outcome": "icse-g11-c02-o04",
    "verdict": "full",
    "families": [
-    "aonpr",
-    "aoncr",
-    "aomix"
+    "lineq",
+    "aoqin",
+    "aorat"
    ],
    "written": [],
    "authored": false,
@@ -19312,10 +19316,26 @@
   },
   {
    "outcome": "icse-g11-c02-o05",
+   "verdict": "partial",
+   "families": [
+    "aonpr",
+    "aoncr",
+    "aomix",
+    "aoarr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Circular permutations are never asked; restricted and repeated-element arrangements and selections are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o06",
    "verdict": "full",
    "families": [
     "aobinexp",
-    "aobinmid"
+    "aobinmid",
+    "aobinco"
    ],
    "written": [],
    "authored": false,
@@ -19324,17 +19344,19 @@
    "judged": "oam@4"
   },
   {
-   "outcome": "icse-g11-c02-o06",
-   "verdict": "full",
+   "outcome": "icse-g11-c02-o07",
+   "verdict": "partial",
    "families": [
+    "auaps",
     "aogpsum",
-    "aoagp",
+    "aogpinf",
     "apamgm",
-    "alsum"
+    "alsum",
+    "aptel"
    ],
    "written": [],
    "authored": false,
-   "missing": "",
+   "missing": "Finding the nth term of a series by the method of differences is never asked; progressions, means, the sums of n, n² and n³ and telescoping sums are.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19345,7 +19367,9 @@
     "asslope",
     "asfam",
     "asparld",
-    "aslineq"
+    "aslineq",
+    "aslocus",
+    "altria"
    ],
    "written": [],
    "authored": false,
@@ -19359,11 +19383,38 @@
    "families": [
     "arcircle",
     "arcirceq",
-    "astan"
+    "arcircpos"
    ],
    "written": [],
    "authored": false,
-   "missing": "The diameter form and the parametric form of a circle are never asked; the standard and general forms and tangents are.",
+   "missing": "The diameter form and the parametric form of a circle are never asked; the standard and general forms and the position of a point are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c03-o03",
+   "verdict": "full",
+   "families": [
+    "arparabola",
+    "areccentric",
+    "arconeq"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c03-o04",
+   "verdict": "full",
+   "families": [
+    "asdist3",
+    "assect3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19384,7 +19435,9 @@
    "outcome": "icse-g11-c04-o02",
    "verdict": "full",
    "families": [
-    "aqfp"
+    "aqfp",
+    "dprod",
+    "audquo"
    ],
    "written": [],
    "authored": false,
@@ -19398,11 +19451,12 @@
    "families": [
     "atmdmean",
     "atvar",
-    "atsd"
+    "atsd",
+    "anavgav"
    ],
    "written": [],
    "authored": false,
-   "missing": "Quartiles are never asked; range, mean deviation, variance and standard deviation are.",
+   "missing": "The combined standard deviation of two groups is never asked; range, mean deviation, variance, standard deviation and the combined mean are.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19417,137 +19471,6 @@
    "written": [],
    "authored": false,
    "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c06-o01",
-   "verdict": "full",
-   "families": [
-    "arparabola",
-    "areccentric",
-    "arconeq",
-    "aspair"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c06-o02",
-   "verdict": "full",
-   "families": [
-    "astan",
-    "astanc"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c07-o01",
-   "verdict": "full",
-   "families": [
-    "asdist3",
-    "assect3"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c08-o01",
-   "verdict": "full",
-   "families": [
-    "atstmt",
-    "atconv"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c08-o02",
-   "verdict": "full",
-   "families": [
-    "atcex"
-   ],
-   "written": [
-    "wr:logic:converse-counter"
-   ],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c09-o01",
-   "verdict": "partial",
-   "families": [
-    "anavgav",
-    "anwmean"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "The combined standard deviation of two groups is never asked; the combined mean is.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c09-o02",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c10-o01",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c10-o02",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c11-o01",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g11-c11-o02",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19591,7 +19514,7 @@
     "wr:inv:four-branches"
    ],
    "authored": false,
-   "missing": "The 3 tan⁻¹x formula is not asked and the graphs of cot⁻¹, sec⁻¹ and cosec⁻¹ are not drawn; principal values, the domains and ranges of all six (wr:inv:four-branches) and 2 tan⁻¹x identities are.",
+   "missing": "The 3 tan⁻¹x formula is not asked and the graphs of cot⁻¹, sec⁻¹ and cosec⁻¹ are not drawn; principal value branches, domains and ranges of all six and the 2 tan⁻¹x identities are.",
    "grade": "fit",
    "judged": "oam@4"
   },
@@ -19615,7 +19538,8 @@
    "families": [
     "audt3",
     "apadj3",
-    "auinv"
+    "auinv",
+    "audk"
    ],
    "written": [],
    "authored": false,
@@ -19628,7 +19552,9 @@
    "verdict": "full",
    "families": [
     "apsys2",
-    "apsys3"
+    "apsys3",
+    "aqrank",
+    "aqsolset"
    ],
    "written": [],
    "authored": false,
@@ -19640,6 +19566,8 @@
    "outcome": "icse-g12-c03-o01",
    "verdict": "full",
    "families": [
+    "aqcontk",
+    "aqdiffab",
     "audch",
     "arimpl",
     "arparam",
@@ -19656,24 +19584,10 @@
    "outcome": "icse-g12-c03-o02",
    "verdict": "full",
    "families": [
-    "arrolle",
-    "armvt",
-    "arlhop",
-    "arlhinf"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c03-o03",
-   "verdict": "full",
-   "families": [
     "aqrr",
     "aqtann",
     "aqext",
+    "aqd2test",
     "armono"
    ],
    "written": [],
@@ -19683,7 +19597,7 @@
    "judged": "oam@4"
   },
   {
-   "outcome": "icse-g12-c03-o04",
+   "outcome": "icse-g12-c03-o03",
    "verdict": "full",
    "families": [
     "subst",
@@ -19698,12 +19612,25 @@
    "judged": "oam@4"
   },
   {
-   "outcome": "icse-g12-c03-o05",
+   "outcome": "icse-g12-c03-o04",
    "verdict": "full",
    "families": [
     "cint",
     "aqking",
     "aqodd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o05",
+   "verdict": "full",
+   "families": [
+    "aqarea",
+    "aqcarea"
    ],
    "written": [],
    "authored": false,
@@ -19730,8 +19657,10 @@
    "outcome": "icse-g12-c04-o01",
    "verdict": "full",
    "families": [
-    "condp",
-    "atindt"
+    "atmag",
+    "atdc",
+    "atlin",
+    "atsec"
    ],
    "written": [],
    "authored": false,
@@ -19743,8 +19672,10 @@
    "outcome": "icse-g12-c04-o02",
    "verdict": "full",
    "families": [
-    "attotal",
-    "asbayes"
+    "atang",
+    "atcross",
+    "atproj",
+    "atvarea"
    ],
    "written": [],
    "authored": false,
@@ -19754,36 +19685,6 @@
   },
   {
    "outcome": "icse-g12-c05-o01",
-   "verdict": "full",
-   "families": [
-    "atmag",
-    "atdc",
-    "atlin"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c05-o02",
-   "verdict": "full",
-   "families": [
-    "atang",
-    "atcross",
-    "atvarea",
-    "atstp",
-    "atcopl"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c06-o01",
    "verdict": "full",
    "families": [
     "asleq",
@@ -19798,7 +19699,7 @@
    "judged": "oam@4"
   },
   {
-   "outcome": "icse-g12-c06-o02",
+   "outcome": "icse-g12-c05-o02",
    "verdict": "full",
    "families": [
     "asplaneq",
@@ -19813,42 +19714,7 @@
    "judged": "oam@4"
   },
   {
-   "outcome": "icse-g12-c07-o01",
-   "verdict": "full",
-   "families": [
-    "aqarea",
-    "aqcarea"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c08-o01",
-   "verdict": "partial",
-   "families": [
-    "aqrr"
-   ],
-   "written": [],
-   "authored": false,
-   "missing": "Cost, average cost, profit functions and break-even points are not asked; marginal revenue is.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c09-o01",
-   "verdict": "none",
-   "families": [],
-   "written": [],
-   "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
-   "grade": "fit",
-   "judged": "oam@4"
-  },
-  {
-   "outcome": "icse-g12-c10-o01",
+   "outcome": "icse-g12-c06-o01",
    "verdict": "full",
    "families": [
     "aplpfeas",
@@ -19858,6 +19724,34 @@
    "written": [
     "wr:lp:formulate-bags"
    ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c07-o01",
+   "verdict": "full",
+   "families": [
+    "condp",
+    "atindt",
+    "attotal",
+    "asbayes"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c07-o02",
+   "verdict": "full",
+   "families": [
+    "atpmf",
+    "atrvmean"
+   ],
+   "written": [],
    "authored": false,
    "missing": "",
    "grade": "fit",
