@@ -1498,13 +1498,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aqshare: Dividend, investment and return on shares | `MATH.number.shares-dividends` | 400 | 0 | 167/172/61 | `789d5f42` |
 | aqogive: Cumulative frequency, median and quartiles from a less-than ogive | `MATH.statistics.ogive-quartiles` | 300 | 0 | 60/60/180 | `95f361d9` |
 | aeintl: Large numbers in the international system | `MATH.number.indian-international-numeration` | 400 | 0 | 14/386/0 | `abc575d2` |
-| aeexpb: From expanded form back to the number | `MATH.number.large-numbers` | 360 | 0 | 160/200/0 | `f4aa8f42` |
+| aeexpb: From expanded form back to the number | `MATH.number.large-numbers` | 360 | 0 | 160/200/0 | `3a5c8c5c` |
 | aedesc: Large numbers in descending order | `MATH.number.compare-numbers` | 240 | 0 | 120/120/0 | `d75048a8` |
-| aeestq: Estimating a quotient by rounding | `MATH.reasoning.estimate-check` | 300 | 0 | 64/236/0 | `44acf2e0` |
+| aeestq: Estimating a quotient by rounding | `MATH.reasoning.estimate-check` | 300 | 0 | 64/236/0 | `2ad42d86` |
 | aecomp: Composite and prime numbers | `MATH.number.primes` | 400 | 0 | 284/116/0 | `549503b1` |
 | aeints: Which numbers are integers | `MATH.number.integers` | 300 | 0 | 150/150/0 | `97e9e09f` |
 | aeidesc: Integers in descending order | `MATH.number.integers` | 250 | 0 | 137/113/0 | `51276c95` |
-| aefpct: Fractions and decimals as percentages | `MATH.number.percent-intro` | 208 | 0 | 116/92/0 | `12560e53` |
+| aefpct: Fractions and decimals as percentages | `MATH.number.percent-intro` | 208 | 0 | 116/92/0 | `b8906acd` |
 
 ## Whole competency graph
 

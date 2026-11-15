@@ -42309,6 +42309,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:e6a75a5bc295190f2eeb11ae113716742133bd0ec8f2718c384f49d2e3294395"
+    },
+    {
+     "contentHash": "sha256:ed3347bc92dd3c456a7966799696856cbf34b572d507bd9096e060f5cdf01258",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T20:04:20.654Z",
+      "note": "content changed: the decision on sha256:5f7bcc80c588 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:5f7bcc80c58857d672320a6a29e99f1f4d5b4d069d848907de7e48fd97dbed9b"
     }
    ]
   },

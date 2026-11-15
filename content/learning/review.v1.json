@@ -6086,7 +6086,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "44acf2e0",
+   "contentHash": "2ad42d86",
    "state": "draft",
    "history": [
     {
@@ -6096,6 +6096,14 @@
      "at": "2026-11-15T17:51:32.019Z",
      "contentHash": "44acf2e0",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T19:53:54.416Z",
+     "contentHash": "2ad42d86",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -6165,7 +6173,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "f4aa8f42",
+   "contentHash": "3a5c8c5c",
    "state": "draft",
    "history": [
     {
@@ -6175,6 +6183,14 @@
      "at": "2026-11-15T17:51:32.019Z",
      "contentHash": "f4aa8f42",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T19:53:54.416Z",
+     "contentHash": "3a5c8c5c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -6186,7 +6202,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "12560e53",
+   "contentHash": "b8906acd",
    "state": "draft",
    "history": [
     {
@@ -6196,6 +6212,14 @@
      "at": "2026-11-15T17:51:32.019Z",
      "contentHash": "12560e53",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T19:53:54.416Z",
+     "contentHash": "b8906acd",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -48716,7 +48740,7 @@
    "competency": "MATH.reasoning.estimate-check",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "9eabf838",
+   "contentHash": "b761f257",
    "state": "draft",
    "history": [
     {
@@ -48773,6 +48797,14 @@
      "role": "engineer",
      "at": "2026-11-15T17:51:32.019Z",
      "contentHash": "9eabf838",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T19:53:54.416Z",
+     "contentHash": "b761f257",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

@@ -28483,7 +28483,7 @@
       "Estimate 1789 ÷ 88: round 1789 to the nearest hundred and 88 to the nearest ten, then divide.",
       "1789 to the nearest 100 is 1800",
       "88 to the nearest 10 is 90",
-      "1800 ÷ 90 = 20"
+      "Divide the rounded numbers: 1800 ÷ 90 = 20"
      ],
      "widget": {
       "type": "table",
