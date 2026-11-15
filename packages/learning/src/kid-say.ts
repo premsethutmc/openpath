@@ -79,6 +79,10 @@ const OWN: Record<string, Own> = {
     const m = grab(/order \(smallest first\): ([\d,; ]+)\./, q.prompt);
     return { say: "Put them in order, smallest first.", ask: { kind: "order", items: m[1].split(/;\s*/), first: "smallest" } };
   },
+  aecmpd: (q) => {
+    const m = grab(/order \(greatest first\): ([\d,; ]+)\./, q.prompt);
+    return { say: "Put them in order, biggest first.", ask: { kind: "order", items: m[1].split(/;\s*/), first: "biggest" } };
+  },
   aedord: (q) => {
     const m = grab(/order \(smallest first\): ([\d.; ]+)\./, q.prompt);
     return { say: "Put them in order, smallest first.", ask: { kind: "order", items: m[1].split(/;\s*/), first: "smallest" } };

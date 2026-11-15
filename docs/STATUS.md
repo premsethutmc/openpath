@@ -44,6 +44,9 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
 - prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, ON by default since 2026-11-12, order by learner-vector@1): before pausing for a person, check and teach
   the skill below, then explain this skill again. TN 5 synthetic: prerequisite found and taught 3 of 43 (off) vs 22 of 43 (on).
+- icse5-map@1 / icse5-gaps@1 (2026-11-15, `docs/milestones/ICSE_GRADE5.md`): the 77 ICSE Class 5 outcomes judged against the content (oam@4/@5);
+  14 new families (`fam/b28.ts`) for the parts no question asked, long division mapped to c02-o01. ICSE 5: 70 complete, 7 partial
+  (6 person-marked parts without a written task, pie-chart graph relations).
 - learner-vector@2 (`docs/product/LEARNER_VECTOR.md`, SHADOW): per-skill estimates using difficulty and the prerequisite graph; @2 adds forgetting (memory stability, recall, review dates); recall feeds only quick-review@1, an optional "Quick review" card on the maths home.
   TN 5 synthetic: the missing skill is the first one checked in 57% of cases (graph order: 24%). Read only by recovery's order.
 - grade5-lessons@1: number-line and integers lessons repaired; ICSE Grade 5 release 1.2.0 has 59 skills, 3 gaps (Roman

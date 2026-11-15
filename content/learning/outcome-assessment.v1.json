@@ -1,12 +1,12 @@
 {
  "schema": "outcome-assessment@1",
- "version": "2.2.0",
+ "version": "2.3.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks.",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks. oam@5 (icse5-gaps@1, 2026-11-15): 15 ICSE Class 5 outcomes judged again after the b28 families (aeexpn, aecmpd, aeintw, aedfrm, aeqest, agcomp, agtwin, agfstry, agdeqv, ajisint, ajordd, agpgrid, agpfr, abcest) and the long-division mapping were added; judged by the author of those families, so not independent.",
  "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4 (ICSE Class 5): main at eb690f4",
  "counts": {
-  "full": 1191,
-  "partial": 83
+  "full": 1206,
+  "partial": 68
  },
  "outcomes": [
   {
@@ -15688,43 +15688,44 @@
   },
   {
    "outcome": "icse-g05-c01-o02",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "ajmilr",
-    "ajmill"
+    "ajmill",
+    "aeintw"
    ],
    "written": [],
    "authored": false,
-   "missing": "writing numbers in the international system (figures with commas, number names); the questions only convert millions to lakhs and crores",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c01-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "aenumf"
+    "aenumf",
+    "aeexpn"
    ],
    "written": [],
    "authored": false,
-   "missing": "turning an expanded form back into the number (only number → expanded form is asked)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c01-o04",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "aecmp",
-    "ajcrcmp",
-    "aasign",
-    "aaordx"
+    "aecmpd",
+    "aasign"
    ],
    "written": [],
    "authored": false,
-   "missing": "descending order of large numbers (descending order is asked only for numbers up to 3 digits)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c01-o05",
@@ -15792,15 +15793,16 @@
   },
   {
    "outcome": "icse-g05-c01-o10",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "aedfr"
+    "aedfr",
+    "aedfrm"
    ],
    "written": [],
    "authored": false,
-   "missing": "simple fractions written as decimals in length and money (for example 1/4 m or ½ of a rupee); only bare fractions are asked",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c01-o11",
@@ -15832,17 +15834,18 @@
   },
   {
    "outcome": "icse-g05-c02-o01",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "aecol4",
     "adcolx",
-    "avpp"
+    "avpp",
+    "avdiv"
    ],
    "written": [],
    "authored": false,
-   "missing": "dividing numbers beyond 1000 (no division is mapped to this outcome)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c02-o02",
@@ -15858,19 +15861,20 @@
   },
   {
    "outcome": "icse-g05-c02-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "aeest",
     "aeestp",
     "avpest",
     "aechk",
-    "adestchk"
+    "adestchk",
+    "aeqest"
    ],
    "written": [],
    "authored": false,
-   "missing": "estimating a quotient",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c02-o04",
@@ -15916,17 +15920,18 @@
   },
   {
    "outcome": "icse-g05-c02-o07",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "agfac",
     "agjump",
-    "agprime"
+    "agprime",
+    "agcomp"
    ],
    "written": [],
    "authored": false,
-   "missing": "composite numbers are never named or picked out",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c02-o08",
@@ -16008,16 +16013,15 @@
   },
   {
    "outcome": "icse-g05-c03-o05",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "faddu",
-    "avfas"
+    "agfstry"
    ],
    "written": [],
    "authored": false,
-   "missing": "word problems: no question puts adding or subtracting fractions in a story",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c03-o06",
@@ -16110,15 +16114,16 @@
   },
   {
    "outcome": "icse-g05-c03-o13",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "aedecc"
+    "aedecc",
+    "agdeqv"
    ],
    "written": [],
    "authored": false,
-   "missing": "equivalent decimals (0.5 = 0.50) and like or unlike decimals are never asked",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c03-o14",
@@ -16209,16 +16214,18 @@
   },
   {
    "outcome": "icse-g05-c04-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "agcop",
-    "agprime"
+    "agprime",
+    "agcomp",
+    "agtwin"
    ],
    "written": [],
    "authored": false,
-   "missing": "twin primes and composite numbers are never asked",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c04-o04",
@@ -16313,16 +16320,17 @@
   },
   {
    "outcome": "icse-g05-c05-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "ajintl",
-    "ajord"
+    "ajord",
+    "ajisint"
    ],
    "written": [],
    "authored": false,
-   "missing": "no question asks which numbers are integers (counting numbers, zero, negatives)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c05-o04",
@@ -16339,15 +16347,16 @@
   },
   {
    "outcome": "icse-g05-c05-o05",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "ajord"
+    "ajord",
+    "ajordd"
    ],
    "written": [],
    "authored": false,
-   "missing": "descending order of integers (only increasing order is asked)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c08-o01",
@@ -16363,28 +16372,29 @@
   },
   {
    "outcome": "icse-g05-c08-o02",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "agpct",
-    "agpctd"
+    "agpctd",
+    "agpfr"
    ],
    "written": [],
    "authored": false,
-   "missing": "fractions other than hundredths are never related to percentages or decimals in this skill",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c08-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "agpct"
+    "agpgrid"
    ],
    "written": [],
    "authored": false,
-   "missing": "no question shows a percentage as a picture, such as a shaded hundred grid",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c08-o04",
@@ -16586,16 +16596,17 @@
   },
   {
    "outcome": "icse-g05-c07-o02",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "abcup",
-    "abjug"
+    "abjug",
+    "abcest"
    ],
    "written": [],
    "authored": false,
-   "missing": "making an estimate of how much a container holds (the questions read measured counts)",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g05-c07-o03",

@@ -12915,6 +12915,19 @@
       "81 + 125 = 206 pieces of size 1/30",
       "In simplest form: 6 13/15"
      ]
+    },
+    {
+     "title": "Adding and subtracting fractions in a story",
+     "text": [
+      "Fractions can be added or subtracted only when they count pieces of the same size, so both are first renamed with the same bottom number.",
+      "Decide from the story whether to add (both together) or subtract (what is left). Find a common bottom number, rename both fractions, then add or subtract the top numbers."
+     ],
+     "math": [
+      "Divya's garden plot is 9/10 of a field. Divya plants beans on 1/6 of the field. What fraction of the field is left for other plants?",
+      "A common bottom number for 10 and 6: 30",
+      "Rename both: 27/30, 5/30",
+      "Subtract the tops: 22/30"
+     ]
     }
    ],
    "diagnostics": [
@@ -13003,7 +13016,8 @@
     "gen:faddu:2,3,3,6",
     "gen:faddu:8,9,4,10:mc",
     "gen:faddu:1,2,2,6",
-    "gen:avfas:1,5,8,2,2,7,0"
+    "gen:avfas:1,5,8,2,2,7,0",
+    "gen:agfstry:0,1,4,8,11"
    ],
    "transfer": [
     "gen:faddu:1,6,7,9:mc",
@@ -13025,6 +13039,10 @@
     },
     {
      "family": "avfas",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agfstry",
      "version": "1.0.0"
     }
    ],
@@ -22373,6 +22391,39 @@
       ],
       "scale": 1
      }
+    },
+    {
+     "title": "Estimating how many small measures fill a container",
+     "text": [
+      "To estimate how many small measures fill a container, put both amounts in the same unit and divide. One litre is 1000 mL.",
+      "Change the container's litres into millilitres, then work out how many of the small measure make that amount."
+     ],
+     "math": [
+      "A cup holds about 150 mL of water and a cooking pot holds about 3 L. About how many cups of water fill the cooking pot?",
+      "3 L is 3000 mL",
+      "3000 mL ÷ 150 mL = 20",
+      "About 20: that is option D, so the answer is D"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "Holds about",
+       "In mL"
+      ],
+      "rows": [
+       [
+        "cooking pot",
+        "3 L",
+        "3000 mL"
+       ],
+       [
+        "cup",
+        "150 mL",
+        "150 mL"
+       ]
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -22488,7 +22539,8 @@
     "gen:abcup:3,7,5,0,0:mc",
     "gen:abcup:10,11,4,1,0",
     "gen:abjug:2,12,0",
-    "gen:abcupord:4,16,0,1"
+    "gen:abcupord:4,16,0,1",
+    "gen:abcest:8,7"
    ],
    "transfer": [
     "gen:abcup:9,11,10,2,0:w",
@@ -22515,6 +22567,10 @@
     },
     {
      "family": "abcupord",
+     "version": "1.0.0"
+    },
+    {
+     "family": "abcest",
      "version": "1.0.0"
     }
    ],
@@ -31494,6 +31550,34 @@
      ],
      "role": "worked-example",
      "instance": "gen:aedfr:1,28"
+    },
+    {
+     "title": "Fractions of a metre or a rupee as decimals",
+     "text": [
+      "A fraction whose bottom number divides a hundred can be renamed as hundredths, and hundredths are the second place after the decimal point.",
+      "Find what to multiply the bottom number by to make a hundred, multiply the top by the same, and write the hundredths after the point. Whole metres or rupees go before the point."
+     ],
+     "math": [
+      "A sticker costs 2 4/5 rupees. Which shows this amount in rupees as a decimal?",
+      "4/5 = 80/100",
+      "Write the whole metres or rupees, then the hundredths after the point: 2.8",
+      "That is option A, so the answer is A"
+     ],
+     "role": "worked-example",
+     "instance": "gen:aedfrm:1,6,2"
+    },
+    {
+     "title": "Equivalent, like and unlike decimals",
+     "text": [
+      "Adding zeros at the end of a decimal does not change its value. Decimals with the same number of decimal places are like decimals; with different numbers they are unlike.",
+      "To compare values, give both decimals the same number of places by adding zeros at the end. To tell like from unlike, count the digits after the point in each."
+     ],
+     "math": [
+      "Unlike decimals have different numbers of decimal places. Which pair are unlike decimals?",
+      "4.3 and 7.36: that is option C, so the answer is C"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agdeqv:2,4,3,7"
     }
    ],
    "diagnostics": [
@@ -31589,7 +31673,9 @@
     "gen:aedecc:3,6,1,5",
     "gen:aedpv:0,114",
     "gen:aedord:43",
-    "gen:aedfr:1,29"
+    "gen:aedfr:1,29",
+    "gen:aedfrm:0,12,3",
+    "gen:agdeqv:1,7,9,5"
    ],
    "transfer": [
     "gen:aedec:1,4,1:w",
@@ -31624,6 +31710,14 @@
     },
     {
      "family": "aedfr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aedfrm",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agdeqv",
      "version": "1.0.0"
     }
    ],
@@ -31899,6 +31993,55 @@
      ],
      "role": "worked-example",
      "instance": "gen:aenumf:1,30"
+    },
+    {
+     "title": "Writing the number for an expanded form",
+     "text": [
+      "An expanded form shows a number as the sum of its place values. The number of zeros in each part tells which place its digit goes in.",
+      "Write a place-value chart. Put each part's first digit under the place it names, write 0 in every empty place, then read the digits from the left."
+     ],
+     "math": [
+      "Write the number 40,00,000 + 9,00,000 + 8,000 + 1 in figures. Type the digits without commas.",
+      "Add the place values; a place with no part gets a 0: 4908001"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "TL",
+       "L",
+       "TTh",
+       "Th",
+       "H",
+       "T",
+       "O"
+      ],
+      "rows": [
+       [
+        "4",
+        "9",
+        "0",
+        "8",
+        "0",
+        "0",
+        "1"
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aeexpn:7"
+    },
+    {
+     "title": "Putting large numbers in descending order",
+     "text": [
+      "A number with more digits is greater. When two numbers have the same number of digits, the first place from the left where their digits differ decides.",
+      "Count the digits of each number. Put the longest numbers first; compare numbers of the same length digit by digit from the left, and write the greater one first."
+     ],
+     "math": [
+      "Write these numbers in descending order (greatest first): 7,97,528; 89,725; 7,97,258; 7,79,258. Write the list in brackets without commas inside the numbers, for example (5678, 1234, …).",
+      "Most digits first; numbers with the same number of digits are compared place by place from the left: (797528, 797258, 779258, 89725)"
+     ],
+     "role": "worked-example",
+     "instance": "gen:aecmpd:150"
     }
    ],
    "diagnostics": [
@@ -32022,7 +32165,9 @@
     "gen:aeind:7,4,9,17:mc",
     "gen:aeind:3,86,5,4",
     "gen:aecmp:260",
-    "gen:aenumf:4,46"
+    "gen:aenumf:4,46",
+    "gen:aeexpn:4",
+    "gen:aecmpd:151"
    ],
    "transfer": [
     "gen:aeind:1,51,7,2:w",
@@ -32049,6 +32194,14 @@
     },
     {
      "family": "aenumf",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeexpn",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aecmpd",
      "version": "1.0.0"
     }
    ],
@@ -32478,6 +32631,21 @@
      ],
      "role": "worked-example",
      "instance": "gen:avpest:6205,71"
+    },
+    {
+     "title": "Estimating a quotient",
+     "text": [
+      "Rounding both numbers first turns a hard division into an easy one, and the answer is close to the exact quotient.",
+      "Round each number to its greatest place, then divide the rounded numbers, cancelling the same number of zeros from both."
+     ],
+     "math": [
+      "Estimate 262 ÷ 46 by rounding each number to its greatest place (for example 4,870 to 5,000 and 36 to 40), then dividing.",
+      "Round 262 to its greatest place: 300",
+      "Round 46 to its greatest place: 50",
+      "300 ÷ 50 = 6"
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeqest:338"
     }
    ],
    "diagnostics": [
@@ -32575,7 +32743,8 @@
     "gen:aeestp:1,248,24",
     "gen:aechk:1,56",
     "gen:aerdec:2,2",
-    "gen:avpest:3244,86"
+    "gen:avpest:3244,86",
+    "gen:aeqest:339"
    ],
    "transfer": [
     "gen:aeround:3,7043:w",
@@ -32618,6 +32787,10 @@
     },
     {
      "family": "avpest",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeqest",
      "version": "1.0.0"
     }
    ],
@@ -36829,6 +37002,40 @@
      },
      "role": "worked-example",
      "instance": "gen:agpctd:43"
+    },
+    {
+     "title": "A shaded grid as a percentage",
+     "text": [
+      "Per cent means out of 100. A shaded grid shows a fraction of the whole, and renaming that fraction as hundredths gives the percentage.",
+      "Count the shaded squares and all the squares to get a fraction. Multiply the top and bottom by the same number to make the bottom 100; the top is the percentage."
+     ],
+     "math": [
+      "The grid in the picture has 100 equal squares. What percentage of the grid is shaded?",
+      "3 of the 100 squares are shaded: 3/100",
+      "3/100 = 3/100 = 3%"
+     ],
+     "widget": {
+      "type": "grid",
+      "rows": 10,
+      "cols": 10,
+      "shaded": 3
+     },
+     "role": "worked-example",
+     "instance": "gen:agpgrid:0,3"
+    },
+    {
+     "title": "Writing a fraction as a percentage",
+     "text": [
+      "Per cent means out of 100, so a percentage is a fraction with 100 as its bottom number.",
+      "Find what to multiply the bottom number by to make 100. Multiply the top by the same number; the new top is the percentage."
+     ],
+     "math": [
+      "Write 17/20 as a percentage.",
+      "Multiply the top and bottom by 5: 85/100",
+      "85 hundredths is 85%"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agpfr:17,20"
     }
    ],
    "diagnostics": [
@@ -36922,7 +37129,9 @@
     "gen:agpct:1,27",
     "gen:agpct:1,26:mc",
     "gen:agpct:1,25",
-    "gen:agpctd:40"
+    "gen:agpctd:40",
+    "gen:agpgrid:0,2",
+    "gen:agpfr:34,50"
    ],
    "transfer": [
     "gen:agpct:1,24:w",
@@ -36944,6 +37153,14 @@
     },
     {
      "family": "agpctd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agpgrid",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agpfr",
      "version": "1.0.0"
     }
    ],
@@ -36992,6 +37209,28 @@
       "To decide whether 541 is prime, Ravi divides it by the primes 2, 3, 5, 7, … in order. If none of them divides 541 exactly, what is the largest prime Ravi needs to have tried before saying 541 is prime?",
       "√541 is a little more than 23 (23² = 529)",
       "The largest prime not more than 23 is 23"
+     ]
+    },
+    {
+     "title": "Listing the composite numbers in a range",
+     "text": [
+      "A composite number has more than two factors: it can be split into a product of two smaller whole numbers. 1 is neither prime nor composite.",
+      "For each number, try dividing by 2, 3, 5 and 7. If one of them divides it exactly (and is not the number itself), the number is composite."
+     ],
+     "math": [
+      "A composite number has more than two factors. List all the composite numbers from 22 to 32.",
+      "Numbers from 22 to 32 with a factor other than 1 and themselves: 22, 24, 25, 26, 27, 28, 30, 32"
+     ]
+    },
+    {
+     "title": "Picking out twin primes",
+     "text": [
+      "Twin primes are pairs of prime numbers that are 2 apart, such as 11 and 13. Every number of the pair must be prime.",
+      "Check that the two numbers differ by 2, then check each one is prime by trying 2, 3, 5 and 7 as factors."
+     ],
+     "math": [
+      "Twin primes are two prime numbers whose difference is 2. Which pair are twin primes?",
+      "5 and 7 are both prime and differ by 2. That is option A, so the answer is A"
      ]
     }
    ],
@@ -37079,7 +37318,9 @@
     "gen:agprime:47,17",
     "gen:agprime:11,17",
     "gen:agprime:34,17",
-    "gen:agptest:1,127"
+    "gen:agptest:1,127",
+    "gen:agcomp:63,7",
+    "gen:agtwin:1,24"
    ],
    "transfer": [
     "gen:agprime:11,16:w",
@@ -37101,6 +37342,14 @@
     },
     {
      "family": "agptest",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agcomp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agtwin",
      "version": "1.0.0"
     }
    ],
@@ -42849,6 +43098,58 @@
       "step": 2,
       "marks": []
      }
+    },
+    {
+     "title": "Telling integers from other numbers",
+     "text": [
+      "The integers are the counting numbers (1, 2, 3, …), zero, and the negatives of the counting numbers (−1, −2, −3, …). Fractions and decimals with a part are not integers.",
+      "For each number, ask: is it a whole number, counted forwards or backwards from zero? If it has a fraction part, it is not an integer."
+     ],
+     "math": [
+      "Integers are the counting numbers, zero and the negatives of the counting numbers. Which of these numbers is NOT an integer?",
+      "Only whole numbers (counting numbers, zero and their negatives) are integers. That is option C, so the answer is C"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": -5,
+      "to": 5,
+      "marks": [
+       -5,
+       -4,
+       -3,
+       -2,
+       -1,
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    },
+    {
+     "title": "Ordering integers from greatest to smallest",
+     "text": [
+      "On a number line, numbers get greater to the right. Every positive number is greater than zero, and zero is greater than every negative number; among negatives, the one closer to zero is greater.",
+      "Write the positive numbers first, from greatest to smallest, then zero if it is there, then the negative numbers starting with the one closest to zero."
+     ],
+     "math": [
+      "Arrange these integers in decreasing order (greatest first): −10, 9, 1, −15. Write them separated by commas.",
+      "On the number line, numbers decrease from right to left: (9, 1, −10, −15)"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": -15,
+      "to": 15,
+      "step": 5,
+      "marks": [
+       -10,
+       9,
+       1,
+       -15
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -42941,7 +43242,9 @@
     "gen:ajord:-4,1,5,-3",
     "gen:ajord:-5,-1,-2,9:mc",
     "gen:ajord:-2,4,-1,-9",
-    "gen:ajintl:2,-11,1"
+    "gen:ajintl:2,-11,1",
+    "gen:ajisint:0,48",
+    "gen:ajordd:-15,-9,-5,3"
    ],
    "transfer": [
     "gen:ajord:6,-2,-6,-9:w",
@@ -42963,6 +43266,14 @@
     },
     {
      "family": "ajintl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajisint",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajordd",
      "version": "1.0.0"
     }
    ],
@@ -43871,6 +44182,36 @@
      ],
      "role": "worked-example",
      "instance": "gen:ajmilr:74,0"
+    },
+    {
+     "title": "Writing a number named in the international system",
+     "text": [
+      "In the international system the digits are grouped in threes from the right: ones, thousands, millions. Each group is read like a number below a thousand, with its group name after it.",
+      "Write the millions, then the thousands as three digits, then the ones as three digits. Fill any empty place in a group with a zero."
+     ],
+     "math": [
+      "Write the number \"ninety-five million nine hundred eighty thousand two hundred eighty-one\" in figures. Type the digits without commas.",
+      "95 millions = 95000000",
+      "980 thousands = 980000",
+      "Put the groups together, three digits for each group after the millions: 95980281"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Millions",
+       "Thousands",
+       "Ones"
+      ],
+      "rows": [
+       [
+        "95",
+        "980",
+        "281"
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aeintw:95,980,281"
     }
    ],
    "diagnostics": [
@@ -43989,7 +44330,8 @@
     "gen:ajmill:97,3",
     "gen:ajcrore:0,73,76,3",
     "gen:ajcrcmp:401",
-    "gen:ajmilr:85,0"
+    "gen:ajmilr:85,0",
+    "gen:aeintw:26,24,310"
    ],
    "transfer": [
     "gen:ajmill:97,0:w",
@@ -44020,6 +44362,10 @@
     },
     {
      "family": "ajmilr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeintw",
      "version": "1.0.0"
     }
    ],

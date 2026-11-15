@@ -87978,6 +87978,1017 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "aeexpn",
+   "version": "1.0.0",
+   "title": "Writing the number for an expanded form",
+   "competency": "MATH.number.large-numbers",
+   "skill": "MATH.number.large-numbers",
+   "type": "integer",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     399
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 134,
+    "2": 133,
+    "3": 133
+   },
+   "examples": [
+    "gen:aeexpn:132",
+    "gen:aeexpn:267",
+    "gen:aeexpn:133",
+    "gen:aeexpn:265",
+    "gen:aeexpn:134",
+    "gen:aeexpn:266"
+   ],
+   "explanations": [
+    "zero-places-dropped (conceptual): Only the non-zero digits were written next to each other. A place with nothing in it still needs a 0, or every digit before it moves to the wrong place."
+   ],
+   "teach": {
+    "idea": "An expanded form shows a number as the sum of its place values. The number of zeros in each part tells which place its digit goes in.",
+    "method": "Write a place-value chart. Put each part's first digit under the place it names, write 0 in every empty place, then read the digits from the left.",
+    "alternatives": [
+     {
+      "id": "add_up",
+      "title": "Add the parts",
+      "kind": "procedural",
+      "text": [
+       "Add the parts from the largest down, one at a time.",
+       "Adding 0 for an empty place changes nothing, so the zeros stay where they are."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "f84c48d5",
+   "validation": {
+    "family": "aeexpn",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aecmpd",
+   "version": "1.0.0",
+   "title": "Putting large numbers in descending order",
+   "competency": "MATH.number.large-numbers",
+   "skill": "MATH.number.large-numbers",
+   "type": "tuple",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     299
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 0,
+    "2": 150,
+    "3": 150
+   },
+   "examples": [
+    "gen:aecmpd:100",
+    "gen:aecmpd:200:mc",
+    "gen:aecmpd:101",
+    "gen:aecmpd:201:mc"
+   ],
+   "explanations": [
+    "ascending (procedural): The list was written from smallest to greatest; descending order starts with the greatest.",
+    "first-digit-only (conceptual): The numbers were compared by their first digits only. A number with more digits is always greater, so count the digits first."
+   ],
+   "teach": {
+    "idea": "A number with more digits is greater. When two numbers have the same number of digits, the first place from the left where their digits differ decides.",
+    "method": "Count the digits of each number. Put the longest numbers first; compare numbers of the same length digit by digit from the left, and write the greater one first.",
+    "alternatives": [
+     {
+      "id": "chart",
+      "title": "Line them up in a chart",
+      "kind": "procedural",
+      "text": [
+       "Write each number in a place-value chart so the ones are in one column.",
+       "Read down from the left: the number with the larger digit in the first column where they differ is greater."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "98d796c0",
+   "validation": {
+    "family": "aecmpd",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeintw",
+   "version": "1.0.0",
+   "title": "Writing a number named in the international system",
+   "competency": "MATH.number.indian-international-numeration",
+   "skill": "MATH.number.indian-international-numeration",
+   "type": "integer",
+   "multipleChoice": false,
+   "domain": [
+    [
+     1,
+     99
+    ],
+    [
+     0,
+     999
+    ],
+    [
+     0,
+     999
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 105,
+    "2": 292,
+    "3": 3
+   },
+   "examples": [
+    "gen:aeintw:33,680,637",
+    "gen:aeintw:70,910,893",
+    "gen:aeintw:37,60,743",
+    "gen:aeintw:67,746,53",
+    "gen:aeintw:33,0,471",
+    "gen:aeintw:78,0,865"
+   ],
+   "explanations": [
+    "groups-not-padded (conceptual): The groups were written one after another without their zeros. In the international system every group after the millions has exactly three digits: write 5 thousand as 005.",
+    "million-as-lakh (conceptual): A million was taken as a lakh. One million is ten lakh (10,00,000)."
+   ],
+   "teach": {
+    "idea": "In the international system the digits are grouped in threes from the right: ones, thousands, millions. Each group is read like a number below a thousand, with its group name after it.",
+    "method": "Write the millions, then the thousands as three digits, then the ones as three digits. Fill any empty place in a group with a zero.",
+    "alternatives": [
+     {
+      "id": "commas",
+      "title": "Write the commas first",
+      "kind": "procedural",
+      "text": [
+       "Write the millions, then a comma, then three boxes, a comma, and three more boxes.",
+       "Fill the thousands and ones boxes from the name, with 0 in any empty box, then remove the commas."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "51b01589",
+   "validation": {
+    "family": "aeintw",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aedfrm",
+   "version": "1.0.0",
+   "title": "Fractions of a metre or a rupee as decimals",
+   "competency": "MATH.number.decimal-tenths",
+   "skill": "MATH.number.decimal-tenths",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     14
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 88,
+   "excluded": [],
+   "difficulty": {
+    "1": 6,
+    "2": 50,
+    "3": 32
+   },
+   "examples": [
+    "gen:aedfrm:0,2,0",
+    "gen:aedfrm:1,1,0",
+    "gen:aedfrm:0,4,3",
+    "gen:aedfrm:1,2,3",
+    "gen:aedfrm:0,13,2",
+    "gen:aedfrm:1,12,1"
+   ],
+   "explanations": [
+    "digits-after-point (conceptual): The top and bottom numbers were written after the point. A decimal counts tenths and hundredths: 1/50 = 2/100, so write the hundredths.",
+    "top-after-point (conceptual): Only the top number was written after the point. That works only for tenths; first rename 1/50 as hundredths.",
+    "one-place-off (procedural): The digits are one place too far to the left. Tenths go in the first place after the point and hundredths in the second."
+   ],
+   "teach": {
+    "idea": "A fraction whose bottom number divides a hundred can be renamed as hundredths, and hundredths are the second place after the decimal point.",
+    "method": "Find what to multiply the bottom number by to make a hundred, multiply the top by the same, and write the hundredths after the point. Whole metres or rupees go before the point.",
+    "alternatives": [
+     {
+      "id": "money",
+      "title": "Think in paise or centimetres",
+      "kind": "conceptual",
+      "text": [
+       "A rupee is a hundred paise and a metre is a hundred centimetres.",
+       "Find the fraction of a hundred paise (or centimetres), then write that many hundredths of a rupee (or metre) after the point."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "c02ebbce",
+   "validation": {
+    "family": "aedfrm",
+    "deterministic": {
+     "checked": 88,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeqest",
+   "version": "1.0.0",
+   "title": "Estimating a quotient",
+   "competency": "MATH.number.rounding",
+   "skill": "MATH.number.rounding",
+   "type": "integer",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     399
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 0,
+    "2": 174,
+    "3": 226
+   },
+   "examples": [
+    "gen:aeqest:136",
+    "gen:aeqest:265",
+    "gen:aeqest:126",
+    "gen:aeqest:267"
+   ],
+   "explanations": [
+    "worked-exactly (procedural): The division was worked out exactly (or nearly). An estimate rounds first, so the division becomes easy.",
+    "rounded-down (conceptual): The number was cut down instead of rounded. Look at the next digit: 5 or more rounds up."
+   ],
+   "teach": {
+    "idea": "Rounding both numbers first turns a hard division into an easy one, and the answer is close to the exact quotient.",
+    "method": "Round each number to its greatest place, then divide the rounded numbers, cancelling the same number of zeros from both.",
+    "alternatives": [
+     {
+      "id": "multiply_back",
+      "title": "Check by multiplying",
+      "kind": "procedural",
+      "text": [
+       "After dividing the rounded numbers, multiply your estimate by the rounded divisor.",
+       "It should give the rounded dividend; if it does not, divide again."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "88a8e2a6",
+   "validation": {
+    "family": "aeqest",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agcomp",
+   "version": "1.0.0",
+   "title": "Listing the composite numbers in a range",
+   "competency": "MATH.number.primes",
+   "skill": "MATH.number.primes",
+   "type": "set",
+   "multipleChoice": false,
+   "domain": [
+    [
+     1,
+     94
+    ],
+    [
+     6,
+     10
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 71,
+    "2": 99,
+    "3": 130
+   },
+   "examples": [
+    "gen:agcomp:6,10",
+    "gen:agcomp:15,8",
+    "gen:agcomp:32,10",
+    "gen:agcomp:46,6",
+    "gen:agcomp:65,10",
+    "gen:agcomp:80,7"
+   ],
+   "explanations": [
+    "one-composite (conceptual): 1 was counted as composite. 1 has only one factor, so it is neither prime nor composite.",
+    "only-even (conceptual): Only the even numbers were listed. Odd numbers can be composite too: 9 = 3 × 3 and 15 = 3 × 5 have more than two factors."
+   ],
+   "teach": {
+    "idea": "A composite number has more than two factors: it can be split into a product of two smaller whole numbers. 1 is neither prime nor composite.",
+    "method": "For each number, try dividing by 2, 3, 5 and 7. If one of them divides it exactly (and is not the number itself), the number is composite.",
+    "alternatives": [
+     {
+      "id": "rectangle",
+      "title": "More than one rectangle",
+      "kind": "conceptual",
+      "text": [
+       "Try to arrange the number as dots in a rectangle with more than one row.",
+       "If you can, the number is composite; if the only rectangle is a single row, it is prime."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "3aff9a04",
+   "validation": {
+    "family": "agcomp",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agtwin",
+   "version": "1.0.0",
+   "title": "Picking out twin primes",
+   "competency": "MATH.number.primes",
+   "skill": "MATH.number.primes",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     39
+    ]
+   ],
+   "poolSize": 320,
+   "excluded": [],
+   "difficulty": {
+    "1": 120,
+    "2": 120,
+    "3": 80
+   },
+   "examples": [
+    "gen:agtwin:1,0",
+    "gen:agtwin:2,0",
+    "gen:agtwin:4,0",
+    "gen:agtwin:5,0",
+    "gen:agtwin:6,26",
+    "gen:agtwin:7,13"
+   ],
+   "explanations": [
+    "odd-not-prime (conceptual): One number of that pair is not prime. Twin primes must both be prime, not just odd numbers 2 apart.",
+    "difference-not-two (recall): Both numbers are prime, but they are not 2 apart. Twin primes differ by exactly 2."
+   ],
+   "teach": {
+    "idea": "Twin primes are pairs of prime numbers that are 2 apart, such as 11 and 13. Every number of the pair must be prime.",
+    "method": "Check that the two numbers differ by 2, then check each one is prime by trying 2, 3, 5 and 7 as factors.",
+    "alternatives": [
+     {
+      "id": "list",
+      "title": "List the primes first",
+      "kind": "procedural",
+      "text": [
+       "List the primes up to 100.",
+       "Twin primes are the neighbours in the list that are only 2 apart."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "ae5078e1",
+   "validation": {
+    "family": "agtwin",
+    "deterministic": {
+     "checked": 320,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agfstry",
+   "version": "1.0.0",
+   "title": "Adding and subtracting fractions in a story",
+   "competency": "MATH.number.fraction-add",
+   "skill": "MATH.number.fraction-add",
+   "type": "fraction",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     11
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     1,
+     11
+    ],
+    [
+     2,
+     12
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 35,
+    "2": 56,
+    "3": 309
+   },
+   "examples": [
+    "gen:agfstry:2,1,2,1,4",
+    "gen:agfstry:3,1,5,1,10",
+    "gen:agfstry:2,1,6,1,10",
+    "gen:agfstry:4,5,6,1,9",
+    "gen:agfstry:1,9,10,8,9",
+    "gen:agfstry:3,11,12,10,11"
+   ],
+   "explanations": [
+    "tops-and-bottoms (conceptual): The top numbers and the bottom numbers were combined separately. The pieces are different sizes, so first rename both fractions with the same bottom number.",
+    "wrong-operation (procedural): The fractions were added. What is left after taking some away means subtracting."
+   ],
+   "teach": {
+    "idea": "Fractions can be added or subtracted only when they count pieces of the same size, so both are first renamed with the same bottom number.",
+    "method": "Decide from the story whether to add (both together) or subtract (what is left). Find a common bottom number, rename both fractions, then add or subtract the top numbers.",
+    "alternatives": [
+     {
+      "id": "strip",
+      "title": "Draw a strip",
+      "kind": "conceptual",
+      "text": [
+       "Draw a strip and cut it into as many equal parts as the common bottom number.",
+       "Shade the first amount, then shade more (adding) or rub some out (subtracting), and count the shaded parts."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "65eb8aa2",
+   "validation": {
+    "family": "agfstry",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 20,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agdeqv",
+   "version": "1.0.0",
+   "title": "Equivalent, like and unlike decimals",
+   "competency": "MATH.number.decimal-tenths",
+   "skill": "MATH.number.decimal-tenths",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "poolSize": 500,
+   "excluded": [],
+   "difficulty": {
+    "1": 419,
+    "2": 81,
+    "3": 0
+   },
+   "examples": [
+    "gen:agdeqv:1,6,8,1",
+    "gen:agdeqv:2,3,4,5",
+    "gen:agdeqv:0,3,4,1",
+    "gen:agdeqv:0,6,7,1"
+   ],
+   "explanations": [
+    "zero-inside (conceptual): A zero was put straight after the point. That moves the digit to the hundredths place: 9.08 is 8 hundredths, not 8 tenths. A zero added at the END does not change a decimal."
+   ],
+   "teach": {
+    "idea": "Adding zeros at the end of a decimal does not change its value. Decimals with the same number of decimal places are like decimals; with different numbers they are unlike.",
+    "method": "To compare values, give both decimals the same number of places by adding zeros at the end. To tell like from unlike, count the digits after the point in each.",
+    "alternatives": [
+     {
+      "id": "money",
+      "title": "Think of money",
+      "kind": "conceptual",
+      "text": [
+       "Two rupees and five tenths of a rupee is the same amount as two rupees and fifty hundredths: fifty paise either way.",
+       "A zero straight after the point is different: it leaves the tenths empty, so the amount is only a few paise."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "39dfa764",
+   "validation": {
+    "family": "agdeqv",
+    "deterministic": {
+     "checked": 500,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "ajisint",
+   "version": "1.0.0",
+   "title": "Telling integers from other numbers",
+   "competency": "MATH.number.integers",
+   "skill": "MATH.number.integers",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     199
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 200,
+    "2": 200,
+    "3": 0
+   },
+   "examples": [
+    "gen:ajisint:0,66",
+    "gen:ajisint:0,133",
+    "gen:ajisint:1,66",
+    "gen:ajisint:1,133"
+   ],
+   "explanations": [
+    "negatives-not-integers (conceptual): A negative number was taken as not an integer. The negatives of the counting numbers (−1, −2, −3, …) are integers too.",
+    "zero-not-integer (conceptual): 0 was taken as not an integer. Zero is an integer: it is between the negatives and the counting numbers.",
+    "fraction-is-integer (conceptual): A fraction or a decimal with a part after the point is not an integer. Integers are whole numbers, counted forwards or backwards from zero."
+   ],
+   "teach": {
+    "idea": "The integers are the counting numbers (1, 2, 3, …), zero, and the negatives of the counting numbers (−1, −2, −3, …). Fractions and decimals with a part are not integers.",
+    "method": "For each number, ask: is it a whole number, counted forwards or backwards from zero? If it has a fraction part, it is not an integer.",
+    "alternatives": [
+     {
+      "id": "number_line",
+      "title": "Look for a mark",
+      "kind": "conceptual",
+      "text": [
+       "Draw a number line with a mark at every whole number, on both sides of zero.",
+       "A number that falls exactly on a mark is an integer; one that falls between marks is not."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "9825deb4",
+   "validation": {
+    "family": "ajisint",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "ajordd",
+   "version": "1.0.0",
+   "title": "Ordering integers from greatest to smallest",
+   "competency": "MATH.number.integers",
+   "skill": "MATH.number.integers",
+   "type": "tuple",
+   "multipleChoice": true,
+   "domain": [
+    [
+     -15,
+     15
+    ],
+    [
+     -15,
+     15
+    ],
+    [
+     -15,
+     15
+    ],
+    [
+     -15,
+     15
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 31,
+    "2": 228,
+    "3": 141
+   },
+   "examples": [
+    "gen:ajordd:-4,1,-6,8",
+    "gen:ajordd:-1,-6,7,4:mc",
+    "gen:ajordd:-7,13,10,-15",
+    "gen:ajordd:4,-13,-10,5:mc",
+    "gen:ajordd:-10,12,-1,-11",
+    "gen:ajordd:-3,-9,4,-6:mc"
+   ],
+   "explanations": [
+    "ignore-sign (conceptual): The numbers were ordered by their size without the minus sign. A negative number is less than zero and less than every positive number.",
+    "negatives-reversed (conceptual): Among the negative numbers, the one with the bigger digit was taken as greater. −2 is closer to zero than −8, so −2 is greater.",
+    "increasing (procedural): The numbers were written smallest first; decreasing order starts with the greatest."
+   ],
+   "teach": {
+    "idea": "On a number line, numbers get greater to the right. Every positive number is greater than zero, and zero is greater than every negative number; among negatives, the one closer to zero is greater.",
+    "method": "Write the positive numbers first, from greatest to smallest, then zero if it is there, then the negative numbers starting with the one closest to zero.",
+    "alternatives": [
+     {
+      "id": "temperature",
+      "title": "Think of temperatures",
+      "kind": "conceptual",
+      "text": [
+       "A temperature a little below zero is warmer than one far below zero.",
+       "Put the warmest temperature first and the coldest last."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "5c956c8a",
+   "validation": {
+    "family": "ajordd",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agpgrid",
+   "version": "1.0.0",
+   "title": "A shaded grid as a percentage",
+   "competency": "MATH.number.percent-intro",
+   "skill": "MATH.number.percent-intro",
+   "type": "integer",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     99
+    ]
+   ],
+   "poolSize": 200,
+   "excluded": [],
+   "difficulty": {
+    "1": 99,
+    "2": 9,
+    "3": 92
+   },
+   "examples": [
+    "gen:agpgrid:0,34",
+    "gen:agpgrid:0,67",
+    "gen:agpgrid:3,4",
+    "gen:agpgrid:3,7",
+    "gen:agpgrid:2,12",
+    "gen:agpgrid:4,19"
+   ],
+   "explanations": [
+    "unshaded (procedural): The unshaded part was given. The question asks about the shaded squares.",
+    "count-as-percent (conceptual): The shaded squares were counted as the percentage. Per cent means out of 100, and this grid has 50 squares, so first find how many hundredths are shaded."
+   ],
+   "teach": {
+    "idea": "Per cent means out of 100. A shaded grid shows a fraction of the whole, and renaming that fraction as hundredths gives the percentage.",
+    "method": "Count the shaded squares and all the squares to get a fraction. Multiply the top and bottom by the same number to make the bottom 100; the top is the percentage.",
+    "alternatives": [
+     {
+      "id": "each_square",
+      "title": "What is one square worth?",
+      "kind": "procedural",
+      "text": [
+       "Divide 100% by the number of squares to find what one square is worth.",
+       "Multiply by the number of shaded squares."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "509baadb",
+   "validation": {
+    "family": "agpgrid",
+    "deterministic": {
+     "checked": 200,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agpfr",
+   "version": "1.0.0",
+   "title": "Writing a fraction as a percentage",
+   "competency": "MATH.number.percent-intro",
+   "skill": "MATH.number.percent-intro",
+   "type": "integer",
+   "multipleChoice": false,
+   "domain": [
+    [
+     1,
+     49
+    ],
+    [
+     2,
+     50
+    ]
+   ],
+   "poolSize": 109,
+   "excluded": [],
+   "difficulty": {
+    "1": 8,
+    "2": 28,
+    "3": 73
+   },
+   "examples": [
+    "gen:agpfr:1,5",
+    "gen:agpfr:3,4",
+    "gen:agpfr:5,20",
+    "gen:agpfr:10,20",
+    "gen:agpfr:13,25",
+    "gen:agpfr:25,50"
+   ],
+   "explanations": [
+    "top-as-percent (conceptual): The top number was taken as the percentage. Per cent means out of 100, so first rename 49/50 with 100 as the bottom number.",
+    "added-to-100 (conceptual): The same number was added to the top and the bottom to make 100. Equivalent fractions come from multiplying: 49/50 = 98/100."
+   ],
+   "teach": {
+    "idea": "Per cent means out of 100, so a percentage is a fraction with 100 as its bottom number.",
+    "method": "Find what to multiply the bottom number by to make 100. Multiply the top by the same number; the new top is the percentage.",
+    "alternatives": [
+     {
+      "id": "grid",
+      "title": "Shade a hundred grid",
+      "kind": "conceptual",
+      "text": [
+       "A hundred grid has a hundred equal squares.",
+       "Shade the fraction of it and count the shaded squares: that count is the percentage."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "401b4b55",
+   "validation": {
+    "family": "agpfr",
+    "deterministic": {
+     "checked": 109,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "abcest",
+   "version": "1.0.0",
+   "title": "Estimating how many small measures fill a container",
+   "competency": "MATH.measurement.capacity",
+   "skill": "MATH.measurement.capacity",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     15
+    ],
+    [
+     0,
+     7
+    ]
+   ],
+   "poolSize": 95,
+   "excluded": [],
+   "difficulty": {
+    "1": 20,
+    "2": 40,
+    "3": 35
+   },
+   "examples": [
+    "gen:abcest:5,0",
+    "gen:abcest:6,4",
+    "gen:abcest:2,5",
+    "gen:abcest:9,5",
+    "gen:abcest:5,7",
+    "gen:abcest:11,3"
+   ],
+   "explanations": [
+    "litre-as-100 (recall): A litre was taken as 100 mL. One litre is 1000 mL, so a container holds ten times more than that gives.",
+    "litre-as-10000 (recall): Too many zeros were added when changing litres into millilitres. One litre is 1000 mL."
+   ],
+   "teach": {
+    "idea": "To estimate how many small measures fill a container, put both amounts in the same unit and divide. One litre is 1000 mL.",
+    "method": "Change the container's litres into millilitres, then work out how many of the small measure make that amount.",
+    "alternatives": [
+     {
+      "id": "build_up",
+      "title": "Build up to one litre",
+      "kind": "procedural",
+      "text": [
+       "First find how many small measures make one litre.",
+       "Then multiply by the number of litres the container holds."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "ed1922c6",
+   "validation": {
+    "family": "abcest",
+    "deterministic": {
+     "checked": 95,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }

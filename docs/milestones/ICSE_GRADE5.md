@@ -247,3 +247,32 @@ What the 22 partial outcomes still lack:
 | Estimating how much a container holds | c07-o02 |
 | A part only a person can mark (making a word problem, drawing angles, folding, nets, bar graphs, a two-way pattern): no written task | c02-o06, c06-o01, c06-o04, c06-o06, c09-o01, c10-o03 |
 | Pie charts: the skill has no prerequisite relations in the graph | c09-o02 |
+
+## New question families for the gaps (icse5-gaps@1, 2026-11-15)
+
+Fourteen families (`packages/learning/src/fam/b28.ts`), each in an existing skill's module, and one mapping fix:
+
+| Family | Asks | Outcome |
+|---|---|---|
+| `aeexpn` | an expanded form back into the number | c01-o03 |
+| `aecmpd` | large numbers in descending order | c01-o04 |
+| `aeintw` | a number named in the international system, in figures | c01-o02 |
+| `aedfrm` | a fraction of a metre or a rupee as a decimal | c01-o10 |
+| `aeqest` | estimating a quotient | c02-o03 |
+| `agcomp`, `agtwin` | composite numbers; twin primes | c02-o07, c04-o03 |
+| `agfstry` | adding or subtracting fractions in a story | c03-o05 |
+| `agdeqv` | equivalent, like and unlike decimals | c03-o13 |
+| `ajisint`, `ajordd` | which numbers are integers; integers in decreasing order | c05-o03, c05-o05 |
+| `agpgrid`, `agpfr` | a shaded grid as a percentage; a fraction as a percentage | c08-o03, c08-o02 |
+| `abcest` | estimating how many small measures fill a container | c07-o02 |
+| mapping | `MATH.number.long-division` added to c02-o01 (dividing beyond 1000) | c02-o01 |
+
+Checks: every family passes `check-family.ts`; answer keys verified by independent references
+(`tools/mathematics/answer-key-certification/refs/icse_g5_2026_11b.py`): 4,312 of 4,312 released questions; grading audit
+(`grading-audit:results-2026-11-15`, 2,874 cases on the app and the server routes): no blocking finding, all 14 certified and
+admitted by machine validation. The references and the re-judgement (oam@5) were written by the author of the families, not
+by a separate assessor.
+
+Result: ICSE Class 5 coverage 70 complete (awaiting review), 7 partial. Still partial: the parts only a person can mark
+(c02-o06 making a word problem, c06-o01 folding, c06-o04 drawing angles, c06-o06 making nets, c09-o01 drawing a bar graph,
+c10-o03 making a pattern) and c09-o02 (the pie-chart skill has no prerequisite relations in the graph).

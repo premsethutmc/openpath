@@ -1517,6 +1517,35 @@
    ]
   },
   {
+   "item": "family:abcest",
+   "kind": "family",
+   "competency": "MATH.measurement.capacity",
+   "family": "abcest",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "ed1922c6",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "bd239f42",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "ed1922c6",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
    "item": "family:abchange",
    "kind": "family",
    "competency": "MATH.measurement.money-change",
@@ -5327,6 +5356,27 @@
    ]
   },
   {
+   "item": "family:aecmpd",
+   "kind": "family",
+   "competency": "MATH.number.large-numbers",
+   "family": "aecmpd",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "98d796c0",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "98d796c0",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:aecol4",
    "kind": "family",
    "competency": "MATH.number.multi-digit-add-subtract",
@@ -5647,6 +5697,35 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "830ab233",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:aedfrm",
+   "kind": "family",
+   "competency": "MATH.number.decimal-tenths",
+   "family": "aedfrm",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "c02ebbce",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "3fd47f32",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "c02ebbce",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -6000,6 +6079,27 @@
    ]
   },
   {
+   "item": "family:aeexpn",
+   "kind": "family",
+   "competency": "MATH.number.large-numbers",
+   "family": "aeexpn",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "f84c48d5",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "f84c48d5",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:aeftin",
    "kind": "family",
    "competency": "MATH.measurement.unit-conversions",
@@ -6193,6 +6293,35 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "b216acc9",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:aeintw",
+   "kind": "family",
+   "competency": "MATH.number.indian-international-numeration",
+   "family": "aeintw",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "51b01589",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "866cfa37",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T11:57:38.056Z",
+     "contentHash": "51b01589",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -6664,6 +6793,27 @@
      "at": "2026-11-13T11:15:20.831Z",
      "contentHash": "1b4e9f54",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:aeqest",
+   "kind": "family",
+   "competency": "MATH.number.rounding",
+   "family": "aeqest",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "88a8e2a6",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "88a8e2a6",
+     "note": "added"
     }
    ]
   },
@@ -8272,6 +8422,27 @@
    ]
   },
   {
+   "item": "family:agcomp",
+   "kind": "family",
+   "competency": "MATH.number.primes",
+   "family": "agcomp",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "3aff9a04",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "3aff9a04",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:agcop",
    "kind": "family",
    "competency": "MATH.number.hcf-lcm",
@@ -8333,6 +8504,35 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "0952afe7",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:agdeqv",
+   "kind": "family",
+   "competency": "MATH.number.decimal-tenths",
+   "family": "agdeqv",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "39dfa764",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "1770d36e",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "39dfa764",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -8437,6 +8637,27 @@
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "4afb29b5",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:agfstry",
+   "kind": "family",
+   "competency": "MATH.number.fraction-add",
+   "family": "agfstry",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "65eb8aa2",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "65eb8aa2",
+     "note": "added"
     }
    ]
   },
@@ -8834,6 +9055,35 @@
    ]
   },
   {
+   "item": "family:agpfr",
+   "kind": "family",
+   "competency": "MATH.number.percent-intro",
+   "family": "agpfr",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "401b4b55",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "3fbc4f15",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "401b4b55",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
    "item": "family:agpfrac",
    "kind": "family",
    "competency": "MATH.number.percentage",
@@ -8859,6 +9109,27 @@
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "413950eb",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:agpgrid",
+   "kind": "family",
+   "competency": "MATH.number.percent-intro",
+   "family": "agpgrid",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "509baadb",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "509baadb",
+     "note": "added"
     }
    ]
   },
@@ -9046,6 +9317,27 @@
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "3af0c614",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:agtwin",
+   "kind": "family",
+   "competency": "MATH.number.primes",
+   "family": "agtwin",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "ae5078e1",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "ae5078e1",
+     "note": "added"
     }
    ]
   },
@@ -12603,6 +12895,27 @@
    ]
   },
   {
+   "item": "family:ajisint",
+   "kind": "family",
+   "competency": "MATH.number.integers",
+   "family": "ajisint",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "9825deb4",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "9825deb4",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:ajlaw",
    "kind": "family",
    "competency": "MATH.number.exponents",
@@ -12759,6 +13072,35 @@
      "role": "engineer",
      "at": "2026-11-12T02:22:48.554Z",
      "contentHash": "1c3da191",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:ajordd",
+   "kind": "family",
+   "competency": "MATH.number.integers",
+   "family": "ajordd",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "5c956c8a",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "70ae7c82",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "5c956c8a",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -40484,7 +40826,7 @@
    "competency": "MATH.measurement.capacity",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "4a7b2c37",
+   "contentHash": "5b65e122",
    "state": "draft",
    "history": [
     {
@@ -40541,6 +40883,14 @@
      "role": "engineer",
      "at": "2026-11-12T12:09:01.006Z",
      "contentHash": "4a7b2c37",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "5b65e122",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -43184,7 +43534,7 @@
    "competency": "MATH.number.decimal-tenths",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "a6fe682a",
+   "contentHash": "f76a5d34",
    "state": "draft",
    "history": [
     {
@@ -43233,6 +43583,22 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "a6fe682a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "e77fdc8c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T10:57:10.302Z",
+     "contentHash": "f76a5d34",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -43744,7 +44110,7 @@
    "competency": "MATH.number.fraction-add",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "b8a5bdb2",
+   "contentHash": "b98191d4",
    "state": "draft",
    "history": [
     {
@@ -43833,6 +44199,14 @@
      "role": "engineer",
      "at": "2026-11-12T09:15:15.552Z",
      "contentHash": "b8a5bdb2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "b98191d4",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -44424,7 +44798,7 @@
    "competency": "MATH.number.indian-international-numeration",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "e97856b6",
+   "contentHash": "c1af9a34",
    "state": "draft",
    "history": [
     {
@@ -44489,6 +44863,22 @@
      "role": "engineer",
      "at": "2026-11-12T20:00:24.576Z",
      "contentHash": "e97856b6",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "f60ff1ae",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T11:57:38.056Z",
+     "contentHash": "c1af9a34",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -44649,7 +45039,7 @@
    "competency": "MATH.number.integers",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "b9ddc4fa",
+   "contentHash": "2d257678",
    "state": "draft",
    "history": [
     {
@@ -44707,6 +45097,14 @@
      "at": "2026-11-12T02:22:48.554Z",
      "contentHash": "b9ddc4fa",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "2d257678",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -44735,7 +45133,7 @@
    "competency": "MATH.number.large-numbers",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "da3280a3",
+   "contentHash": "bbbc615f",
    "state": "draft",
    "history": [
     {
@@ -44784,6 +45182,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "da3280a3",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "bbbc615f",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -45597,7 +46003,7 @@
    "competency": "MATH.number.percent-intro",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "a611006f",
+   "contentHash": "8699dedf",
    "state": "draft",
    "history": [
     {
@@ -45638,6 +46044,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "a611006f",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "8699dedf",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -45913,7 +46327,7 @@
    "competency": "MATH.number.primes",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "b542dcfb",
+   "contentHash": "f2c5c55b",
    "state": "draft",
    "history": [
     {
@@ -45946,6 +46360,14 @@
      "role": "engineer",
      "at": "2026-10-30T01:41:15.619Z",
      "contentHash": "b542dcfb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "f2c5c55b",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -46423,7 +46845,7 @@
    "competency": "MATH.number.rounding",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "7de143b2",
+   "contentHash": "6bd1ed84",
    "state": "draft",
    "history": [
     {
@@ -46480,6 +46902,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "7de143b2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-15T09:53:54.886Z",
+     "contentHash": "6bd1ed84",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
