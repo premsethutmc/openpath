@@ -169,7 +169,7 @@ const fracDec: Def = {
     s.id === "scale"
       ? `Multiply top and bottom by ${s.inputs[2]}: ${s.inputs[0]}/${s.inputs[1]} = ${s.value}`
       : s.id === "tenths"
-        ? `${s.inputs[0]} = ${dec(s.value as number)}`
+        ? `Tenths go in the first place after the point and hundredths in the second: ${s.inputs[0]} = ${dec(s.value as number)}`
         : `Put the whole ${s.inputs[0]} in front: ${s.inputs[0]} + ${s.inputs[1]} = ${dec(s.value as number)}`,
   domain: [[0, 9], [0, SIMPLE.length - 1], [0, MEASURE.length - 1]],
   difficulty: ([n, k]) => (SIMPLE[k][1] === 10 || SIMPLE[k][1] === 2 ? 1 : n ? 3 : 2),

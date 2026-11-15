@@ -1488,7 +1488,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | amf69: Times tables: 6, 7, 8 and 9 | `MATH.number.multiplication-tables` | 160 | 0 | 64/16/80 | `69eadd2f` |
 | amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `2ab9da60` |
 | aefword: Adding and subtracting fractions in everyday stories | `MATH.number.fraction-add` | 400 | 0 | 38/221/141 | `8179163e` |
-| aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `6eb864fe` |
+| aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `04ed595e` |
 | aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `22f402ce` |
 | agtwin: Twin primes | `MATH.number.primes` | 300 | 0 | 152/148/0 | `351b222a` |
 | agpgrid: A percentage read from a shaded hundred grid | `MATH.number.percent-intro` | 198 | 0 | 9/90/99 | `70fa79ec` |
