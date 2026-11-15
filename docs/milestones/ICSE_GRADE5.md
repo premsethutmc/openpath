@@ -225,3 +225,25 @@ and lakhs in figures", shown with billions; "percentage of one quantity in anoth
 left out of the Class 5 lesson although Class 5 practice has their Class 5 kinds. Choosing every example from the earliest
 grade was tried and withdrawn: it left Grade 7 and 8 lessons without an on-grade section (lesson-checks@1). This is one
 reader's judgement of level, not a teacher's.
+
+## Outcome-assessment map (icse5-map@1, 2026-11-15)
+
+The 77 outcomes were judged against the content itself (oam@4 in `content/learning/outcome-assessment.v1.json`): sampled
+problems of every family of the mapped skills and the distinct question shapes of each family, by an assessor who did not
+write the content. Only families a mapped skill's module actually serves are credited. Result: 58 full, 19 partial.
+Coverage (`content/learning/coverage-matrix.v1.json`): 55 complete (awaiting review), 22 partial (before: 0 and 77).
+
+What the 22 partial outcomes still lack:
+
+| Missing | Outcomes |
+|---|---|
+| Expanded form back to the number; descending order of large numbers; international system written out | c01-o02, c01-o03, c01-o04 |
+| Simple fractions as decimals in length and money | c01-o10 |
+| Division beyond 1000 (no division skill mapped); estimating a quotient | c02-o01, c02-o03 |
+| Composite numbers; twin primes | c02-o07, c04-o03 |
+| Fraction add/subtract word problems; equivalent, like and unlike decimals | c03-o05, c03-o13 |
+| What an integer is; descending order of integers | c05-o03, c05-o05 |
+| Fractions (not hundredths) related to percentages; a percentage as a shaded hundred grid | c08-o02, c08-o03 |
+| Estimating how much a container holds | c07-o02 |
+| A part only a person can mark (making a word problem, drawing angles, folding, nets, bar graphs, a two-way pattern): no written task | c02-o06, c06-o01, c06-o04, c06-o06, c09-o01, c10-o03 |
+| Pie charts: the skill has no prerequisite relations in the graph | c09-o02 |

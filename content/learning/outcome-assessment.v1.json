@@ -1,12 +1,12 @@
 {
  "schema": "outcome-assessment@1",
- "version": "2.1.0",
+ "version": "2.2.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it.",
- "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks.",
+ "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4 (ICSE Class 5): main at eb690f4",
  "counts": {
-  "full": 1133,
-  "partial": 64
+  "full": 1191,
+  "partial": 83
  },
  "outcomes": [
   {
@@ -15670,6 +15670,1014 @@
    "authored": false,
    "missing": "",
    "grade": "fit"
+  },
+  {
+   "outcome": "icse-g05-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aenumf",
+    "ajcrore",
+    "aeind",
+    "ajcrcmp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o02",
+   "verdict": "partial",
+   "families": [
+    "ajmilr",
+    "ajmill"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "writing numbers in the international system (figures with commas, number names); the questions only convert millions to lakhs and crores",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o03",
+   "verdict": "partial",
+   "families": [
+    "aenumf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "turning an expanded form back into the number (only number → expanded form is asked)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o04",
+   "verdict": "partial",
+   "families": [
+    "aecmp",
+    "ajcrcmp",
+    "aasign",
+    "aaordx"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "descending order of large numbers (descending order is asked only for numbers up to 3 digits)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o05",
+   "verdict": "full",
+   "families": [
+    "aadigmax"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o06",
+   "verdict": "full",
+   "families": [
+    "aeround"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o07",
+   "verdict": "full",
+   "families": [
+    "adfname",
+    "adshade"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o08",
+   "verdict": "full",
+   "families": [
+    "adfcol",
+    "adfmeas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o09",
+   "verdict": "full",
+   "families": [
+    "eqfrac",
+    "avfold",
+    "avlow"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o10",
+   "verdict": "partial",
+   "families": [
+    "aedfr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "simple fractions written as decimals in length and money (for example 1/4 m or ½ of a rupee); only bare fractions are asked",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o11",
+   "verdict": "full",
+   "families": [
+    "mul",
+    "avtab",
+    "amf69",
+    "amf2510"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o12",
+   "verdict": "full",
+   "families": [
+    "akromr",
+    "akromw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o01",
+   "verdict": "partial",
+   "families": [
+    "aecol4",
+    "adcolx",
+    "avpp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "dividing numbers beyond 1000 (no division is mapped to this outcome)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o02",
+   "verdict": "full",
+   "families": [
+    "avdiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o03",
+   "verdict": "partial",
+   "families": [
+    "aeest",
+    "aeestp",
+    "avpest",
+    "aechk",
+    "adestchk"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "estimating a quotient",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o04",
+   "verdict": "full",
+   "families": [
+    "aecol4",
+    "adcolx",
+    "avpp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o05",
+   "verdict": "full",
+   "families": [
+    "aeshop",
+    "aebig",
+    "aetrip",
+    "aetab",
+    "acstory4"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o06",
+   "verdict": "partial",
+   "families": [
+    "acstory4"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "making up one's own word problem for a number statement (needs a written task; the questions only solve given stories)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o07",
+   "verdict": "partial",
+   "families": [
+    "agfac",
+    "agjump",
+    "agprime"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "composite numbers are never named or picked out",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o08",
+   "verdict": "full",
+   "families": [
+    "agfac",
+    "agcomf",
+    "ajpf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o09",
+   "verdict": "full",
+   "families": [
+    "agprime",
+    "agptest"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o01",
+   "verdict": "full",
+   "families": [
+    "agclass"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o02",
+   "verdict": "full",
+   "families": [
+    "eqfrac",
+    "avlow"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o03",
+   "verdict": "full",
+   "families": [
+    "adford",
+    "adfordu"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o04",
+   "verdict": "full",
+   "families": [
+    "faddu",
+    "avfas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o05",
+   "verdict": "partial",
+   "families": [
+    "faddu",
+    "avfas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "word problems: no question puts adding or subtracting fractions in a story",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o06",
+   "verdict": "full",
+   "families": [
+    "avfwq",
+    "adfcol",
+    "fmulw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o07",
+   "verdict": "full",
+   "families": [
+    "fmulw",
+    "aifmul"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o08",
+   "verdict": "full",
+   "families": [
+    "aiwdiv",
+    "aifdiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o09",
+   "verdict": "full",
+   "families": [
+    "aedfr",
+    "aedpv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o10",
+   "verdict": "full",
+   "families": [
+    "aedec"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o11",
+   "verdict": "full",
+   "families": [
+    "aedpv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o12",
+   "verdict": "full",
+   "families": [
+    "aedpv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o13",
+   "verdict": "partial",
+   "families": [
+    "aedecc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "equivalent decimals (0.5 = 0.50) and like or unlike decimals are never asked",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o14",
+   "verdict": "full",
+   "families": [
+    "aedecc",
+    "aedord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o15",
+   "verdict": "full",
+   "families": [
+    "agdec",
+    "agrupee"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o16",
+   "verdict": "full",
+   "families": [
+    "agmeas",
+    "agchange"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o17",
+   "verdict": "full",
+   "families": [
+    "aidp10"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o18",
+   "verdict": "full",
+   "families": [
+    "aidmul"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o01",
+   "verdict": "full",
+   "families": [
+    "agjump"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o02",
+   "verdict": "full",
+   "families": [
+    "agfac"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o03",
+   "verdict": "partial",
+   "families": [
+    "agcop",
+    "agprime"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "twin primes and composite numbers are never asked",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o04",
+   "verdict": "full",
+   "families": [
+    "akdsort",
+    "akdivd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o05",
+   "verdict": "full",
+   "families": [
+    "ajpf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o06",
+   "verdict": "full",
+   "families": [
+    "agcomf",
+    "aghcf3",
+    "aghlw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o07",
+   "verdict": "full",
+   "families": [
+    "aglcm",
+    "aglcm3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o08",
+   "verdict": "full",
+   "families": [
+    "aghlp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o01",
+   "verdict": "full",
+   "families": [
+    "aiint",
+    "aitemp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o02",
+   "verdict": "full",
+   "families": [
+    "acnlpos",
+    "acnljump",
+    "acnlcmp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o03",
+   "verdict": "partial",
+   "families": [
+    "ajintl",
+    "ajord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "no question asks which numbers are integers (counting numbers, zero, negatives)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o04",
+   "verdict": "full",
+   "families": [
+    "ajintl",
+    "ajord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o05",
+   "verdict": "partial",
+   "families": [
+    "ajord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "descending order of integers (only increasing order is asked)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o01",
+   "verdict": "full",
+   "families": [
+    "agpct"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o02",
+   "verdict": "partial",
+   "families": [
+    "agpct",
+    "agpctd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "fractions other than hundredths are never related to percentages or decimals in this skill",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o03",
+   "verdict": "partial",
+   "families": [
+    "agpct"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "no question shows a percentage as a picture, such as a shaded hundred grid",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o04",
+   "verdict": "full",
+   "families": [
+    "agpct",
+    "agpfrac",
+    "agfdec"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o05",
+   "verdict": "full",
+   "families": [
+    "agpct",
+    "agpctd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o06",
+   "verdict": "full",
+   "families": [
+    "pct",
+    "avpctof"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o01",
+   "verdict": "full",
+   "families": [
+    "aapatn",
+    "aapatu"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o02",
+   "verdict": "full",
+   "families": [
+    "aepat",
+    "acgrow",
+    "acsticks"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o03",
+   "verdict": "partial",
+   "families": [
+    "aapatn",
+    "aapatu"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "making one's own pattern that changes in two ways (needs a written task)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o04",
+   "verdict": "full",
+   "families": [
+    "affig",
+    "affigrel"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o01",
+   "verdict": "full",
+   "families": [
+    "aertang",
+    "aeang"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o02",
+   "verdict": "full",
+   "families": [
+    "aertang"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o03",
+   "verdict": "full",
+   "families": [
+    "aeangk",
+    "aeang"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o04",
+   "verdict": "partial",
+   "families": [
+    "afprot"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "drawing and tracing angles (needs a written task); reading the size is asked",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o05",
+   "verdict": "full",
+   "families": [
+    "aesym",
+    "aedsym",
+    "afrot"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o06",
+   "verdict": "full",
+   "families": [
+    "afnet",
+    "afcube"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o07",
+   "verdict": "full",
+   "families": [
+    "aesym3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o01",
+   "verdict": "full",
+   "families": [
+    "aeconv",
+    "aeparts",
+    "adhmin",
+    "adday",
+    "acp2r"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o02",
+   "verdict": "partial",
+   "families": [
+    "abcup",
+    "abjug"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "making an estimate of how much a container holds (the questions read measured counts)",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o03",
+   "verdict": "full",
+   "families": [
+    "aemix",
+    "aemulm",
+    "aedivm",
+    "acelhm"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o04",
+   "verdict": "full",
+   "families": [
+    "aearea",
+    "aeperar",
+    "adperim"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o05",
+   "verdict": "full",
+   "families": [
+    "rect",
+    "rperim",
+    "avfence"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o01",
+   "verdict": "partial",
+   "families": [
+    "adtally",
+    "adrec",
+    "adbar",
+    "afbar"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "drawing a bar graph (needs a written task); recording and reading are asked",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o02",
+   "verdict": "full",
+   "families": [
+    "afpie"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o03",
+   "verdict": "full",
+   "families": [
+    "adline"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
   }
  ]
 }
