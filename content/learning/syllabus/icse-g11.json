@@ -7,59 +7,37 @@
  "textbook": {
   "title": "CISCE ISC Syllabus: Mathematics, Class XI",
   "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
-  "edition": "ISC examination 2028 (Class 11 in 2026-27)",
+  "edition": "ISC examination 2028 (Class XI in 2026-27)",
   "terms": null
  },
  "sources": [
   {
-   "kind": "secondary",
-   "title": "CISCE Class 11 Mathematics syllabus 2026-27 (unit and sub-topic list)",
-   "publisher": "Shaalaa",
-   "edition": "ISC examination 2028 (Class 11 in 2026-27)",
+   "kind": "curriculum",
+   "title": "ISC Mathematics (860) syllabus, Class XI, examination year 2028 (text of the CISCE document)",
+   "publisher": "CISCE; text hosted by AglaSem Docs",
+   "edition": "ISC 2028",
    "academicYear": "2026-27",
-   "url": "https://www.shaalaa.com/syllabus/cisce-mathematics_8244",
+   "url": "https://docs.aglasem.com/view/2c3d53b8-4c2c-4a93-ac69-440c8f24f599",
    "accessed": "2026-11-15",
-   "used_for": "unit and sub-topic list (read through a text summary)"
+   "used_for": "units, sub-topics and inclusion notes (read through a text summary)"
   },
   {
-   "kind": "secondary",
-   "title": "ISC Class 11 Maths syllabus (section split)",
-   "publisher": "Extramarks",
-   "edition": "2023-24",
-   "academicYear": "2023-24",
-   "url": "https://www.extramarks.com/study-material/icse-class-11/mathematics",
+   "kind": "curriculum",
+   "title": "ISC Mathematics (860) syllabus, Class XI, examination year 2027 (text of the CISCE document)",
+   "publisher": "CISCE; text hosted by AglaSem Docs",
+   "edition": "ISC 2027",
+   "academicYear": "2025-26",
+   "url": "https://docs.aglasem.com/view/8d496346-52f9-4b7d-8eec-8e068344564f",
    "accessed": "2026-11-15",
-   "used_for": "which units sit in Sections A, B and C"
+   "used_for": "cross-check: the same units and sub-topics"
   }
  ],
  "notes": [
-  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
-  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
-  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
-  "Section A is compulsory; candidates take either Section B or Section C. Both optional sections are recorded."
+  "UNOFFICIAL SOURCE (a copy of the official text): the text of CISCE's own ISC Mathematics (860) syllabus documents, read through copies hosted by AglaSem Docs (cisce.org is not reachable from the build environment). Class XI was checked against two copies (ISC 2027 and ISC 2028) that agree; Class XII against the ISC 2028 document and a 2026-27 chapter list from Shaalaa, which agree. Every unit stays sourceVerified: false until the official site or a school copy is compared.",
+  "CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "From ISC 2027 the Mathematics (860) paper has no optional sections: the statistics, correlation, index-number, regression and business-calculus units moved to a separate subject, Applied Mathematics (885), which may not be taken with Mathematics and is not recorded here."
  ],
- "gaps": [
-  {
-   "outcome": "icse-g11-c09-o02",
-   "statement": "Find deciles and percentiles of grouped data."
-  },
-  {
-   "outcome": "icse-g11-c10-o01",
-   "statement": "Find covariance and Karl Pearson's correlation coefficient and interpret it."
-  },
-  {
-   "outcome": "icse-g11-c10-o02",
-   "statement": "Find Spearman's rank correlation, including tied ranks."
-  },
-  {
-   "outcome": "icse-g11-c11-o01",
-   "statement": "Construct simple and weighted price index numbers (Laspeyres, Paasche, Fisher, Marshall–Edgeworth) and cost-of-living indices."
-  },
-  {
-   "outcome": "icse-g11-c11-o02",
-   "statement": "Find moving averages, including centred averages for an even period, and use them to show trend."
-  }
- ],
+ "gaps": [],
  "chapters": [
   {
    "id": "icse-g11-c01",
@@ -84,11 +62,11 @@
    "outcomes": [
     {
      "id": "icse-g11-c01-o01",
-     "statement": "Represent sets, use Venn diagrams, unions, intersections, complements and De Morgan's laws.",
+     "statement": "Represent sets, intervals and power sets, and use Venn diagrams, unions, intersections, differences and complements.",
      "concepts": [
-      "sets",
-      "Venn diagram",
-      "De Morgan's laws"
+      "power set",
+      "intervals",
+      "Venn diagram"
      ],
      "questionTypes": [
       "set"
@@ -99,26 +77,32 @@
       {
        "id": "MATH.algebra.sets",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.sets"
+      "MATH.algebra.sets",
+      "MATH.sets-relations.real-intervals"
      ],
      "coverage": "full",
      "source": "Unit 1: Sets and Functions"
     },
     {
      "id": "icse-g11-c01-o02",
-     "statement": "Form Cartesian products, describe relations and functions, and find domain and range.",
+     "statement": "Form Cartesian products, describe relations and functions with their domain, co-domain and range, and add, subtract, multiply and divide functions.",
      "concepts": [
       "Cartesian product",
       "domain",
-      "range"
+      "range",
+      "algebra of functions"
      ],
      "questionTypes": [
       "set",
-      "interval"
+      "expression"
      ],
      "difficulty": "core",
      "assessment": "auto",
@@ -134,33 +118,6 @@
       {
        "id": "MATH.algebra.functions",
        "fit": "exact"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.algebra.functions",
-      "MATH.algebra.relations",
-      "MATH.sets-relations.cartesian-product"
-     ],
-     "coverage": "full",
-     "source": "Unit 1: Sets and Functions"
-    },
-    {
-     "id": "icse-g11-c01-o03",
-     "statement": "Sketch standard functions (modulus, signum, greatest integer, exponential, logarithmic) and combine functions.",
-     "concepts": [
-      "graphs of functions"
-     ],
-     "questionTypes": [
-      "drawing",
-      "expression"
-     ],
-     "difficulty": "core",
-     "assessment": "both",
-     "competencies": [
-      {
-       "id": "MATH.algebra.standard-function-graphs",
-       "fit": "exact"
       },
       {
        "id": "MATH.algebra.function-operations",
@@ -170,6 +127,35 @@
      "proposed": [],
      "mapped": [
       "MATH.algebra.function-operations",
+      "MATH.algebra.functions",
+      "MATH.algebra.relations",
+      "MATH.sets-relations.cartesian-product"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Sets and Functions"
+    },
+    {
+     "id": "icse-g11-c01-o03",
+     "statement": "Recognise and sketch the constant, identity, polynomial, rational, modulus, signum, exponential, logarithmic and greatest integer functions.",
+     "concepts": [
+      "modulus function",
+      "signum function",
+      "greatest integer function"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.standard-function-graphs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
       "MATH.algebra.standard-function-graphs"
      ],
      "coverage": "full",
@@ -177,14 +163,15 @@
     },
     {
      "id": "icse-g11-c01-o04",
-     "statement": "Measure angles in radians and use trigonometric functions, compound and multiple-angle identities.",
+     "statement": "Measure angles in degrees and radians, find arc lengths and sector areas, and use the six trigonometric functions, their signs and graphs.",
      "concepts": [
       "radian",
-      "compound angle"
+      "arc length",
+      "graphs of trigonometric functions"
      ],
      "questionTypes": [
       "numeric",
-      "proof"
+      "drawing"
      ],
      "difficulty": "core",
      "assessment": "both",
@@ -196,15 +183,10 @@
       {
        "id": "MATH.trigonometry.functions",
        "fit": "exact"
-      },
-      {
-       "id": "MATH.trigonometry.compound-angle-identities",
-       "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.trigonometry.compound-angle-identities",
       "MATH.trigonometry.functions",
       "MATH.trigonometry.radians"
      ],
@@ -213,31 +195,26 @@
     },
     {
      "id": "icse-g11-c01-o05",
-     "statement": "Solve trigonometric equations and solve triangles with the sine, cosine and projection rules.",
+     "statement": "Use compound-angle, multiple- and sub-multiple-angle, sum-to-product and product-to-sum identities.",
      "concepts": [
-      "general solution",
-      "sine rule",
-      "cosine rule"
+      "compound angle",
+      "product to sum"
      ],
      "questionTypes": [
-      "numeric"
+      "numeric",
+      "proof"
      ],
      "difficulty": "core",
-     "assessment": "auto",
+     "assessment": "both",
      "competencies": [
       {
-       "id": "MATH.trigonometry.equations",
-       "fit": "exact"
-      },
-      {
-       "id": "MATH.trigonometry.triangle-laws",
+       "id": "MATH.trigonometry.compound-angle-identities",
        "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.trigonometry.equations",
-      "MATH.trigonometry.triangle-laws"
+      "MATH.trigonometry.compound-angle-identities"
      ],
      "coverage": "full",
      "source": "Unit 1: Sets and Functions"
@@ -253,61 +230,32 @@
    "sections": [
     {
      "id": "icse-g11-c02-s01",
-     "title": "Mathematical induction"
-    },
-    {
-     "id": "icse-g11-c02-s02",
      "title": "Complex numbers"
     },
     {
-     "id": "icse-g11-c02-s03",
-     "title": "Quadratic equations"
+     "id": "icse-g11-c02-s02",
+     "title": "Quadratic equations and inequalities"
     },
     {
-     "id": "icse-g11-c02-s04",
+     "id": "icse-g11-c02-s03",
      "title": "Permutations and combinations"
     },
     {
-     "id": "icse-g11-c02-s05",
+     "id": "icse-g11-c02-s04",
      "title": "Binomial theorem"
     },
     {
-     "id": "icse-g11-c02-s06",
+     "id": "icse-g11-c02-s05",
      "title": "Sequences and series"
     }
    ],
    "outcomes": [
     {
      "id": "icse-g11-c02-o01",
-     "statement": "Prove statements for all natural numbers by mathematical induction.",
-     "concepts": [
-      "induction"
-     ],
-     "questionTypes": [
-      "proof"
-     ],
-     "difficulty": "core",
-     "assessment": "human",
-     "competencies": [
-      {
-       "id": "MATH.reasoning.mathematical-induction",
-       "fit": "exact"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.reasoning.mathematical-induction"
-     ],
-     "coverage": "full",
-     "source": "Unit 2: Algebra"
-    },
-    {
-     "id": "icse-g11-c02-o02",
-     "statement": "Calculate with complex numbers, show them on the Argand plane, and use modulus, argument and cube roots of unity.",
+     "statement": "Calculate with complex numbers on the Argand plane, in polar form, find square roots and use the cube roots of unity.",
      "concepts": [
       "Argand plane",
-      "modulus",
-      "argument",
+      "polar form",
       "cube roots of unity"
      ],
      "questionTypes": [
@@ -334,15 +282,16 @@
      "source": "Unit 2: Algebra"
     },
     {
-     "id": "icse-g11-c02-o03",
-     "statement": "Solve quadratic equations with complex roots and quadratic inequalities.",
+     "id": "icse-g11-c02-o02",
+     "statement": "Solve quadratic equations (including those reducible to quadratic form and those with common roots), relate roots and coefficients, and form an equation from its roots.",
      "concepts": [
-      "complex roots",
-      "quadratic inequality"
+      "nature of roots",
+      "sum and product of roots",
+      "common roots"
      ],
      "questionTypes": [
       "roots",
-      "interval"
+      "expression"
      ],
      "difficulty": "core",
      "assessment": "auto",
@@ -352,24 +301,84 @@
        "fit": "exact"
       },
       {
-       "id": "MATH.algebra.nonlinear-inequalities",
+       "id": "MATH.algebra.quadratics",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.quadratic-discriminant",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratic-complex",
+      "MATH.algebra.quadratic-discriminant",
+      "MATH.algebra.quadratics"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g11-c02-o03",
+     "statement": "Find the sign, graph and greatest or least value of a quadratic function.",
+     "concepts": [
+      "quadratic function",
+      "maximum and minimum value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratic-graphs",
        "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.algebra.nonlinear-inequalities",
-      "MATH.algebra.quadratic-complex"
+      "MATH.algebra.quadratic-graphs"
      ],
      "coverage": "full",
      "source": "Unit 2: Algebra"
     },
     {
      "id": "icse-g11-c02-o04",
-     "statement": "Count arrangements and selections with permutations and combinations.",
+     "statement": "Solve linear, quadratic and rational inequalities by the method of intervals.",
      "concepts": [
-      "permutation",
-      "combination"
+      "method of intervals"
+     ],
+     "questionTypes": [
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.nonlinear-inequalities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities",
+      "MATH.algebra.nonlinear-inequalities"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g11-c02-o05",
+     "statement": "Count arrangements and selections, including restricted, circular and repeated-element permutations and word and digit formation.",
+     "concepts": [
+      "circular permutations",
+      "combinations"
      ],
      "questionTypes": [
       "numeric"
@@ -390,14 +399,15 @@
      "source": "Unit 2: Algebra"
     },
     {
-     "id": "icse-g11-c02-o05",
-     "statement": "Expand with the binomial theorem and find general and middle terms.",
+     "id": "icse-g11-c02-o06",
+     "statement": "Expand with the binomial theorem for positive integral indices and find general and middle terms and binomial coefficients.",
      "concepts": [
-      "binomial theorem",
-      "general term"
+      "general term",
+      "middle term"
      ],
      "questionTypes": [
-      "expression"
+      "expression",
+      "numeric"
      ],
      "difficulty": "core",
      "assessment": "auto",
@@ -415,13 +425,13 @@
      "source": "Unit 2: Algebra"
     },
     {
-     "id": "icse-g11-c02-o06",
-     "statement": "Use arithmetic, geometric and arithmetico-geometric progressions, means and the AM–GM inequality, and sum special series.",
+     "id": "icse-g11-c02-o07",
+     "statement": "Use arithmetic and geometric progressions (finite and infinite), arithmetic and geometric means, the sums of n, n² and n³, and the method of differences.",
      "concepts": [
       "AP",
       "GP",
-      "AGP",
-      "AM-GM"
+      "sum to infinity",
+      "method of differences"
      ],
      "questionTypes": [
       "numeric"
@@ -430,11 +440,11 @@
      "assessment": "auto",
      "competencies": [
       {
-       "id": "MATH.algebra.geometric-sequences",
-       "fit": "exact"
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "partial"
       },
       {
-       "id": "MATH.sequences.agp-hp",
+       "id": "MATH.algebra.geometric-sequences",
        "fit": "exact"
       },
       {
@@ -444,14 +454,19 @@
       {
        "id": "MATH.sequences.power-sums",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.sequences.series-summation",
+       "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.algebra.arithmetic-sequences",
       "MATH.algebra.geometric-sequences",
-      "MATH.sequences.agp-hp",
       "MATH.sequences.am-gm-relation",
-      "MATH.sequences.power-sums"
+      "MATH.sequences.power-sums",
+      "MATH.sequences.series-summation"
      ],
      "coverage": "full",
      "source": "Unit 2: Algebra"
@@ -472,19 +487,29 @@
     {
      "id": "icse-g11-c03-s02",
      "title": "Circles"
+    },
+    {
+     "id": "icse-g11-c03-s03",
+     "title": "Conic sections"
+    },
+    {
+     "id": "icse-g11-c03-s04",
+     "title": "Three-dimensional geometry"
     }
    ],
    "outcomes": [
     {
      "id": "icse-g11-c03-o01",
-     "statement": "Use slope, the forms of a line, families of lines, angle bisectors and distances from a line.",
+     "statement": "Use slope, the forms of a line, families of lines, distances from a line and between parallel lines, angle bisectors, locus, the section formula and the area of a triangle.",
      "concepts": [
       "slope",
       "family of lines",
-      "distance of a point from a line"
+      "angle bisectors",
+      "locus"
      ],
      "questionTypes": [
-      "expression"
+      "expression",
+      "numeric"
      ],
      "difficulty": "core",
      "assessment": "auto",
@@ -492,10 +517,20 @@
       {
        "id": "MATH.coordinate.straight-lines",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.locus",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.polygon-area",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.coordinate.locus",
+      "MATH.coordinate.polygon-area",
       "MATH.coordinate.straight-lines"
      ],
      "coverage": "full",
@@ -503,32 +538,82 @@
     },
     {
      "id": "icse-g11-c03-o02",
-     "statement": "Write circles in standard, diameter, general and parametric form and find tangents.",
+     "statement": "Write circles in standard, diameter, general and parametric form, find centre, radius and intercepts, and decide how two circles lie.",
      "concepts": [
       "circle",
-      "tangent"
+      "parametric form",
+      "touching circles"
      ],
      "questionTypes": [
-      "expression"
+      "expression",
+      "numeric"
      ],
      "difficulty": "core",
      "assessment": "auto",
      "competencies": [
       {
        "id": "MATH.coordinate.conics",
-       "fit": "partial"
-      },
-      {
-       "id": "MATH.coordinate.conic-tangents-normals",
-       "fit": "partial"
+       "fit": "exact"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.coordinate.conic-tangents-normals",
       "MATH.coordinate.conics"
      ],
-     "coverage": "partial",
+     "coverage": "full",
+     "source": "Unit 3: Coordinate Geometry"
+    },
+    {
+     "id": "icse-g11-c03-o03",
+     "statement": "Find the foci, directrices, latus rectum and eccentricity of a parabola, ellipse or hyperbola and sketch it.",
+     "concepts": [
+      "focus",
+      "directrix",
+      "eccentricity"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Coordinate Geometry"
+    },
+    {
+     "id": "icse-g11-c03-o04",
+     "statement": "Locate points in space and use the distance, section and mid-point formulas.",
+     "concepts": [
+      "octants",
+      "section formula in space"
+     ],
+     "questionTypes": [
+      "tuple",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-coordinates",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-coordinates"
+     ],
+     "coverage": "full",
      "source": "Unit 3: Coordinate Geometry"
     }
    ]
@@ -546,16 +631,16 @@
     },
     {
      "id": "icse-g11-c04-s02",
-     "title": "Derivatives"
+     "title": "Differentiation"
     }
    ],
    "outcomes": [
     {
      "id": "icse-g11-c04-o01",
-     "statement": "Evaluate one-sided and standard algebraic, trigonometric, exponential and logarithmic limits.",
+     "statement": "Evaluate one-sided and standard algebraic, trigonometric, exponential and logarithmic limits, including indeterminate forms.",
      "concepts": [
       "left and right limits",
-      "standard limits"
+      "indeterminate form"
      ],
      "questionTypes": [
       "numeric"
@@ -577,10 +662,11 @@
     },
     {
      "id": "icse-g11-c04-o02",
-     "statement": "Differentiate from first principles and differentiate algebraic functions.",
+     "statement": "Differentiate from first principles and differentiate sums, products and quotients of algebraic and trigonometric functions.",
      "concepts": [
       "first principles",
-      "derivative"
+      "product rule",
+      "quotient rule"
      ],
      "questionTypes": [
       "expression"
@@ -591,10 +677,15 @@
       {
        "id": "MATH.calculus.derivatives",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.calculus.derivative-rules",
       "MATH.calculus.derivatives"
      ],
      "coverage": "full",
@@ -621,11 +712,11 @@
    "outcomes": [
     {
      "id": "icse-g11-c05-o01",
-     "statement": "Find range, quartiles, mean deviation, variance and standard deviation.",
+     "statement": "Find range, mean deviation about the mean, variance and standard deviation of ungrouped and grouped data, and the combined mean and standard deviation of two groups.",
      "concepts": [
       "mean deviation",
       "standard deviation",
-      "quartiles"
+      "combined standard deviation"
      ],
      "questionTypes": [
       "numeric"
@@ -640,22 +731,27 @@
       {
        "id": "MATH.statistics.dispersion",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.weighted-mean",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.statistics.dispersion",
-      "MATH.statistics.mean-deviation"
+      "MATH.statistics.mean-deviation",
+      "MATH.statistics.weighted-mean"
      ],
      "coverage": "full",
      "source": "Unit 5: Statistics and Probability"
     },
     {
      "id": "icse-g11-c05-o02",
-     "statement": "Use the addition theorem, complementary events and the axiomatic approach to probability.",
+     "statement": "Use sample spaces, types of events, the axiomatic approach and the addition theorem.",
      "concepts": [
-      "addition theorem",
-      "axioms of probability"
+      "axioms of probability",
+      "addition theorem"
      ],
      "questionTypes": [
       "fraction"
@@ -679,365 +775,6 @@
      ],
      "coverage": "full",
      "source": "Unit 5: Statistics and Probability"
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c06",
-   "number": 6,
-   "term": null,
-   "title": "Conic Sections (Section B)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c06-s01",
-     "title": "Parabola, ellipse and hyperbola"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c06-o01",
-     "statement": "Find foci, directrices, latus rectum and axes of a parabola, ellipse or hyperbola, and identify a general second-degree curve.",
-     "concepts": [
-      "focus",
-      "directrix",
-      "eccentricity"
-     ],
-     "questionTypes": [
-      "expression",
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [
-      {
-       "id": "MATH.coordinate.conics",
-       "fit": "exact"
-      },
-      {
-       "id": "MATH.coordinate.pair-of-lines",
-       "fit": "partial"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.coordinate.conics",
-      "MATH.coordinate.pair-of-lines"
-     ],
-     "coverage": "full",
-     "source": "Unit 6: Conic Sections (Section B)"
-    },
-    {
-     "id": "icse-g11-c06-o02",
-     "statement": "Find tangents to conics.",
-     "concepts": [
-      "tangent to a conic"
-     ],
-     "questionTypes": [
-      "expression"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [
-      {
-       "id": "MATH.coordinate.conic-tangents-normals",
-       "fit": "exact"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.coordinate.conic-tangents-normals"
-     ],
-     "coverage": "full",
-     "source": "Unit 6: Conic Sections (Section B)"
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c07",
-   "number": 7,
-   "term": null,
-   "title": "Introduction to Three-dimensional Geometry (Section B)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c07-s01",
-     "title": "Coordinates in space"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c07-o01",
-     "statement": "Locate points in space and use the distance, section and mid-point formulas.",
-     "concepts": [
-      "octants",
-      "section formula in space"
-     ],
-     "questionTypes": [
-      "tuple",
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [
-      {
-       "id": "MATH.coordinate.space-coordinates",
-       "fit": "exact"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.coordinate.space-coordinates"
-     ],
-     "coverage": "full",
-     "source": "Unit 7: Introduction to Three-dimensional Geometry (Section B)"
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c08",
-   "number": 8,
-   "term": null,
-   "title": "Mathematical Reasoning (Section B)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c08-s01",
-     "title": "Statements and connectives"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c08-o01",
-     "statement": "Form compound statements with and, or, implies and if and only if, and write converses and contrapositives.",
-     "concepts": [
-      "connectives",
-      "contrapositive"
-     ],
-     "questionTypes": [
-      "multiple-choice"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [
-      {
-       "id": "MATH.reasoning.logic",
-       "fit": "exact"
-      },
-      {
-       "id": "MATH.reasoning.propositional-logic",
-       "fit": "partial"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.reasoning.logic",
-      "MATH.reasoning.propositional-logic"
-     ],
-     "coverage": "full",
-     "source": "Unit 8: Mathematical Reasoning (Section B)"
-    },
-    {
-     "id": "icse-g11-c08-o02",
-     "statement": "Validate statements by direct proof, contradiction and counterexample.",
-     "concepts": [
-      "contradiction",
-      "counterexample"
-     ],
-     "questionTypes": [
-      "proof"
-     ],
-     "difficulty": "core",
-     "assessment": "human",
-     "competencies": [
-      {
-       "id": "MATH.reasoning.logic",
-       "fit": "exact"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.reasoning.logic"
-     ],
-     "coverage": "full",
-     "source": "Unit 8: Mathematical Reasoning (Section B)"
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c09",
-   "number": 9,
-   "term": null,
-   "title": "Statistics (Section C)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c09-s01",
-     "title": "Combined measures"
-    },
-    {
-     "id": "icse-g11-c09-s02",
-     "title": "Deciles and percentiles"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c09-o01",
-     "statement": "Find the combined mean and standard deviation of two groups.",
-     "concepts": [
-      "combined mean",
-      "combined standard deviation"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [
-      {
-       "id": "MATH.statistics.weighted-mean",
-       "fit": "exact"
-      },
-      {
-       "id": "MATH.statistics.dispersion",
-       "fit": "partial"
-      }
-     ],
-     "proposed": [],
-     "mapped": [
-      "MATH.statistics.dispersion",
-      "MATH.statistics.weighted-mean"
-     ],
-     "coverage": "full",
-     "source": "Unit 9: Statistics (Section C)"
-    },
-    {
-     "id": "icse-g11-c09-o02",
-     "statement": "Find deciles and percentiles of grouped data.",
-     "concepts": [
-      "deciles",
-      "percentiles"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 9: Statistics (Section C)",
-     "note": "No OpenPath skill yet."
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c10",
-   "number": 10,
-   "term": null,
-   "title": "Correlation Analysis (Section C)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c10-s01",
-     "title": "Covariance and correlation"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c10-o01",
-     "statement": "Find covariance and Karl Pearson's correlation coefficient and interpret it.",
-     "concepts": [
-      "covariance",
-      "correlation coefficient"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 10: Correlation Analysis (Section C)",
-     "note": "No OpenPath skill yet."
-    },
-    {
-     "id": "icse-g11-c10-o02",
-     "statement": "Find Spearman's rank correlation, including tied ranks.",
-     "concepts": [
-      "rank correlation"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 10: Correlation Analysis (Section C)",
-     "note": "No OpenPath skill yet."
-    }
-   ]
-  },
-  {
-   "id": "icse-g11-c11",
-   "number": 11,
-   "term": null,
-   "title": "Index Numbers and Moving Averages (Section C)",
-   "verified": false,
-   "sections": [
-    {
-     "id": "icse-g11-c11-s01",
-     "title": "Index numbers"
-    },
-    {
-     "id": "icse-g11-c11-s02",
-     "title": "Moving averages"
-    }
-   ],
-   "outcomes": [
-    {
-     "id": "icse-g11-c11-o01",
-     "statement": "Construct simple and weighted price index numbers (Laspeyres, Paasche, Fisher, Marshall–Edgeworth) and cost-of-living indices.",
-     "concepts": [
-      "index number",
-      "cost of living index"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 11: Index Numbers and Moving Averages (Section C)",
-     "note": "No OpenPath skill yet."
-    },
-    {
-     "id": "icse-g11-c11-o02",
-     "statement": "Find moving averages, including centred averages for an even period, and use them to show trend.",
-     "concepts": [
-      "moving average",
-      "trend"
-     ],
-     "questionTypes": [
-      "numeric"
-     ],
-     "difficulty": "core",
-     "assessment": "auto",
-     "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 11: Index Numbers and Moving Averages (Section C)",
-     "note": "No OpenPath skill yet."
     }
    ]
   }

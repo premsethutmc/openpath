@@ -338,8 +338,7 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04",
-    "icse-g11-c02-o01"
+    "tn-g11-c04-o04"
    ]
   },
   {
@@ -375,8 +374,7 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04",
-    "icse-g11-c02-o01"
+    "tn-g11-c04-o04"
    ]
   },
   {
@@ -1454,9 +1452,7 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "serves": [
-    "icse-g11-c02-o01"
-   ]
+   "serves": []
   },
   {
    "id": "wr:ind:ineq",
@@ -1491,8 +1487,7 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04",
-    "icse-g11-c02-o01"
+    "tn-g11-c04-o04"
    ]
   },
   {
@@ -7030,8 +7025,7 @@
    "review": "provisional",
    "serves": [
     "cbse-g09-c09-o01",
-    "cbse-g09-c09-o02",
-    "icse-g11-c08-o02"
+    "cbse-g09-c09-o02"
    ]
   },
   {
@@ -10428,7 +10422,7 @@
    "serves": [
     "cbse-g12-c12-o01",
     "cbse-g12-c12-o02",
-    "icse-g12-c10-o01"
+    "icse-g12-c06-o01"
    ]
   },
   {
@@ -14771,7 +14765,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g11-c03-o03"
+    "cbse-g11-c03-o03",
+    "icse-g11-c01-o04"
    ]
   },
   {
@@ -14810,7 +14805,7 @@
    "serves": [
     "cbse-g11-c03-o05",
     "tn-g11-c03-o03",
-    "icse-g11-c01-o04"
+    "icse-g11-c01-o05"
    ]
   },
   {
