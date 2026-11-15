@@ -44,6 +44,15 @@ INTO_EXISTING = [
     ('MATH.number.fraction-multiply', 'MATH.number.multiplication-tables', 'support', 'a fraction of a whole number multiplies and divides whole numbers'),
     ('MATH.algebra.quadratics', 'MATH.algebra.polynomial-zeros', 'support', 'roots of a quadratic are the zeros of the polynomial'),
 ]
+# grade-aware links (pie-relations@1): a prerequisite that starts in a later grade than the competency is disputed, but some
+# are needed only for the later-grade part of it. They become "support" (helpful background, never a gate); and a
+# relation the younger grade does need can be added. (target, from, type, reason)
+LATER_PART = [
+    ('MATH.statistics.pie-charts', 'MATH.geometry.angle-measure', 'support', 'drawing a pie chart (Grades 7–8) measures each sector\'s angle; reading one in Grade 4 does not'),
+    ('MATH.statistics.pie-charts', 'MATH.number.percentage', 'support', 'pie charts labelled in per cent (Grades 7–8) use percentages; reading one in Grade 4 does not'),
+    ('MATH.statistics.pie-charts', 'MATH.number.fraction-models', 'plausible', 'a sector of a pie chart is a fraction of the whole circle'),
+]
+LATER = {(t, f): (ty, why) for t, f, ty, why in LATER_PART}
 STRAND = {'matrices': 'algebra', 'sets-relations': 'algebra', 'sequences': 'algebra'}
 
 
@@ -103,6 +112,8 @@ def main():
             if p not in allids:
                 dropped.append({'target': tid, 'from': p, 'reason': 'unknown competency'})
                 continue
+            if (tid, p) in LATER:
+                continue  # pie-relations@1: added below with its own type and reason
             if grade_of.get(p, 0) > e['lo']:
                 disputed.append({'target': tid, 'from': p, 'reason': f'the prerequisite starts in Grade {grade_of[p]}, after the competency (Grade {e["lo"]}): it would hold a younger learner back'})
                 continue
@@ -111,6 +122,9 @@ def main():
             if s == tid or s not in allids:
                 continue
             relations.append({'target': tid, 'from': s, 'type': 'support', 'reason': 'helpful background named by the curriculum inventory; never a gate'})
+    for t, f, ty, why in LATER_PART:
+        if t in allids and f in allids and not any(r['target'] == t and r['from'] == f for r in relations):
+            relations.append({'target': t, 'from': f, 'type': ty, 'reason': why})
     for t, f, ty, why in INTO_EXISTING:
         if t in allids and f in allids:
             relations.append({'target': t, 'from': f, 'type': ty, 'reason': why})

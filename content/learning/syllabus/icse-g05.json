@@ -1614,11 +1614,11 @@
       "angle measure"
      ],
      "questionTypes": [
-      "diagram-drawing",
+      "on-screen-drawing",
       "numeric"
      ],
      "difficulty": "core",
-     "assessment": "both",
+     "assessment": "auto",
      "competencies": [
       {
        "id": "MATH.geometry.angle-measure",
@@ -1629,9 +1629,9 @@
      "mapped": [
       "MATH.geometry.angle-measure"
      ],
-     "coverage": "partial",
+     "coverage": "full",
      "source": "Theme 6, learning outcome 7 and the key concept on angle measures (p. 110 onwards)",
-     "note": "Reading an angle from a protractor is practised; a drawn angle needs a person to check it."
+     "note": "Reading an angle from a protractor is practised, and an angle is made by turning an arm on an on-screen protractor (draw@1), checked automatically."
     },
     {
      "id": "icse-g05-c06-o05",
@@ -2100,10 +2100,10 @@
      ],
      "questionTypes": [
       "numeric",
-      "diagram-drawing"
+      "on-screen-drawing"
      ],
      "difficulty": "core",
-     "assessment": "both",
+     "assessment": "auto",
      "competencies": [
       {
        "id": "MATH.statistics.tables",
@@ -2124,9 +2124,9 @@
       "MATH.statistics.scaled-bars",
       "MATH.statistics.tables"
      ],
-     "coverage": "partial",
+     "coverage": "full",
      "source": "Theme 9, learning outcome 1 (p. 114 onwards)",
-     "note": "Collecting data and drawing a graph by hand are outside OpenPath."
+     "note": "Collecting the data happens off screen; recording a list in a table, drawing the bar graph on the screen (draw@1) and reading a bar graph are checked automatically."
     },
     {
      "id": "icse-g05-c09-o02",

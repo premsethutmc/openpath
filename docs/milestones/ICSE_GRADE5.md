@@ -276,3 +276,18 @@ by a separate assessor.
 Result: ICSE Class 5 coverage 70 complete (awaiting review), 7 partial. Still partial: the parts only a person can mark
 (c02-o06 making a word problem, c06-o01 folding, c06-o04 drawing angles, c06-o06 making nets, c09-o01 drawing a bar graph,
 c10-o03 making a pattern) and c09-o02 (the pie-chart skill has no prerequisite relations in the graph).
+
+## Drawing on the screen and pie-chart relations (draw@1, pie-relations@1, 2026-11-15)
+
+- `afmkang` (make an angle by turning an arm on an on-screen protractor) and `adbarmk` (raise each bar of a bar graph to its
+  value on the scale) — `packages/learning/src/fam/b29.ts`. In the child app (kid-say@1, `Learn.tsx`) the protractor arm is
+  turned with a slider or ±5° buttons and the bars with + / −; the answer handed back is the angle made or the bar heights, so
+  the existing marking and certification apply (answer keys 990 / 990; grading audit results-2026-11-15b clean). In typed
+  (non-child) builds the same questions show a number box, which asks much less than drawing does.
+- c06-o04 (draw angles) and c09-o01 (show data in a bar graph) are now marked automatically (oam@6).
+- Pie charts (`content/learning/src/expansion.py`, LATER_PART): angle measure and percentage, needed only for drawing pie charts
+  in Grades 7–8, become support relations instead of disputed ones, and fraction-models is added as the prerequisite a Grade 4
+  reader needs.
+
+Still partial: c02-o06 (making a word problem), c06-o01 (folding paper), c06-o06 (making solids from nets) and c10-o03
+(making a two-way pattern).

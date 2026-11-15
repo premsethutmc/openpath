@@ -2,11 +2,11 @@
  "schema": "outcome-assessment@1",
  "version": "2.3.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks. oam@5 (icse5-gaps@1, 2026-11-15): 15 ICSE Class 5 outcomes judged again after the b28 families (aeexpn, aecmpd, aeintw, aedfrm, aeqest, agcomp, agtwin, agfstry, agdeqv, ajisint, ajordd, agpgrid, agpfr, abcest) and the long-division mapping were added; judged by the author of those families, so not independent.",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks. oam@5 (icse5-gaps@1, 2026-11-15): 15 ICSE Class 5 outcomes judged again after the b28 families (aeexpn, aecmpd, aeintw, aedfrm, aeqest, agcomp, agtwin, agfstry, agdeqv, ajisint, ajordd, agpgrid, agpfr, abcest) and the long-division mapping were added; judged by the author of those families, so not independent. oam@6 (draw@1, 2026-11-15): icse-g05-c06-o04 and c09-o01 judged full after afmkang (turn an arm on an on-screen protractor) and adbarmk (raise bars on a scale) were added; judged by their author.",
  "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4 (ICSE Class 5): main at eb690f4",
  "counts": {
-  "full": 1206,
-  "partial": 68
+  "full": 1208,
+  "partial": 66
  },
  "outcomes": [
   {
@@ -16529,15 +16529,16 @@
   },
   {
    "outcome": "icse-g05-c06-o04",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
-    "afprot"
+    "afprot",
+    "afmkang"
    ],
    "written": [],
    "authored": false,
-   "missing": "drawing and tracing angles (needs a written task); reading the size is asked",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@6"
   },
   {
    "outcome": "icse-g05-c06-o05",
@@ -16653,18 +16654,19 @@
   },
   {
    "outcome": "icse-g05-c09-o01",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "adtally",
     "adrec",
     "adbar",
-    "afbar"
+    "afbar",
+    "adbarmk"
    ],
    "written": [],
    "authored": false,
-   "missing": "drawing a bar graph (needs a written task); recording and reading are asked",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@6"
   },
   {
    "outcome": "icse-g05-c09-o02",

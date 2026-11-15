@@ -189,6 +189,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-5",
+   "version": "1.5.0",
+   "grade": 5,
+   "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
+   "hash": "48434da3",
+   "file": "icse-cisce-mathematics-grade-5.v1.5.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-5",
    "version": "1.0.0",
    "grade": 5,

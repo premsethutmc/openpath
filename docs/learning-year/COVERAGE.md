@@ -93,7 +93,7 @@ Every competency that has some content:
 | Use multiplication facts (`MATH.number.multiplication-tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 draft, amf34 draft, amf69 draft, amderive draft). |
 | Represent numbers to thousands (`MATH.number.thousands`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adexp draft, ad1000 draft, adbetw draft, adname draft, adseq draft). |
 | Estimate and check an answer (`MATH.reasoning.estimate-check`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adest draft, adwtcap draft, adestchk draft, adestcost draft). |
-| Read simple bar charts (`MATH.statistics.bar-charts`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adbar draft, adbartf draft). |
+| Read simple bar charts (`MATH.statistics.bar-charts`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adbar draft, adbartf draft, adbarmk draft). |
 | Organise counts in tables (`MATH.statistics.tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adtally draft, adtwo draft, advenn draft, adrec draft). |
 | Express pattern rules in words (`MATH.algebra.pattern-rules`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aepat draft, aehund draft, aerev draft, aecons draft). |
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
@@ -122,7 +122,7 @@ Every competency that has some content:
 | Interpret scaled bar charts (`MATH.statistics.scaled-bars`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afbar draft). |
 | Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afletter draft, afmatch draft). |
 | Relate figurate number sequences to their dot and shape pictures (`MATH.algebra.figurate-numbers`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families affig draft, affigrel draft, affrule draft). |
-| Measure and draw angles (`MATH.geometry.angle-measure`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afprot draft). |
+| Measure and draw angles (`MATH.geometry.angle-measure`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afprot draft, afmkang draft). |
 | Use linear pairs, vertically opposite, complementary and supplementary angles (`MATH.geometry.angle-pairs`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afpair draft, afcross draft). |
 | Describe angles as fractions of a turn and direction of turning (`MATH.geometry.angles-as-turns`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afturn draft, afclock draft, afface draft). |
 | Describe iterative fractal constructions and quantify each stage (`MATH.geometry.fractal-iteration`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families affrac draft). |
@@ -1485,26 +1485,28 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `2ab9da60` |
 | aeexpn: Writing the number for an expanded form | `MATH.number.large-numbers` | 400 | 0 | 134/133/133 | `f84c48d5` |
 | aecmpd: Putting large numbers in descending order | `MATH.number.large-numbers` | 300 | 0 | 0/150/150 | `98d796c0` |
-| aeintw: Writing a number named in the international system | `MATH.number.indian-international-numeration` | 400 | 0 | 105/292/3 | `51b01589` |
-| aedfrm: Fractions of a metre or a rupee as decimals | `MATH.number.decimal-tenths` | 88 | 0 | 6/50/32 | `c02ebbce` |
-| aeqest: Estimating a quotient | `MATH.number.rounding` | 400 | 0 | 0/174/226 | `88a8e2a6` |
+| aeintw: Writing a number named in the international system | `MATH.number.indian-international-numeration` | 400 | 0 | 105/292/3 | `decbd197` |
+| aedfrm: Fractions of a metre or a rupee as decimals | `MATH.number.decimal-tenths` | 88 | 0 | 6/50/32 | `abdfd93a` |
+| aeqest: Estimating a quotient | `MATH.number.rounding` | 400 | 0 | 0/174/226 | `17c46ba8` |
 | agcomp: Listing the composite numbers in a range | `MATH.number.primes` | 300 | 0 | 71/99/130 | `3aff9a04` |
 | agtwin: Picking out twin primes | `MATH.number.primes` | 320 | 0 | 120/120/80 | `ae5078e1` |
 | agfstry: Adding and subtracting fractions in a story | `MATH.number.fraction-add` | 400 | 0 | 35/56/309 | `65eb8aa2` |
 | agdeqv: Equivalent, like and unlike decimals | `MATH.number.decimal-tenths` | 500 | 0 | 419/81/0 | `39dfa764` |
 | ajisint: Telling integers from other numbers | `MATH.number.integers` | 400 | 0 | 200/200/0 | `9825deb4` |
 | ajordd: Ordering integers from greatest to smallest | `MATH.number.integers` | 400 | 0 | 31/228/141 | `5c956c8a` |
-| agpgrid: A shaded grid as a percentage | `MATH.number.percent-intro` | 200 | 0 | 99/9/92 | `509baadb` |
-| agpfr: Writing a fraction as a percentage | `MATH.number.percent-intro` | 109 | 0 | 8/28/73 | `401b4b55` |
-| abcest: Estimating how many small measures fill a container | `MATH.measurement.capacity` | 95 | 0 | 20/40/35 | `ed1922c6` |
+| agpgrid: A shaded grid as a percentage | `MATH.number.percent-intro` | 200 | 0 | 99/9/92 | `4832d1e4` |
+| agpfr: Writing a fraction as a percentage | `MATH.number.percent-intro` | 109 | 0 | 8/28/73 | `643b32e9` |
+| abcest: Estimating how many small measures fill a container | `MATH.measurement.capacity` | 95 | 0 | 20/40/35 | `bf5d7778` |
+| afmkang: Making an angle on a protractor | `MATH.geometry.angle-measure` | 192 | 0 | 48/48/96 | `c53b0326` |
+| adbarmk: Drawing a bar graph from a table | `MATH.statistics.bar-charts` | 798 | 0 | 198/400/200 | `6793044d` |
 
 ## Whole competency graph
 
 - Competencies (not counting micro-skills): **343**
 - With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 341 (hand-written 24, synthesised from blueprints 317)
-- Problem families (generated questions with independent checks): 1112
-- Review registry (repository copy): draft 1440, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Problem families (generated questions with independent checks): 1114
+- Review registry (repository copy): draft 1442, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|

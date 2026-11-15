@@ -22400,8 +22400,8 @@
      ],
      "math": [
       "A cup holds about 150 mL of water and a cooking pot holds about 3 L. About how many cups of water fill the cooking pot?",
-      "3 L is 3000 mL",
-      "3000 mL ÷ 150 mL = 20",
+      "Change litres into millilitres: 3 L is 3000 mL",
+      "How many measures make it: 3000 mL ÷ 150 mL = 20",
       "About 20: that is option D, so the answer is D"
      ],
      "widget": {
@@ -28644,6 +28644,31 @@
       ],
       "scale": 1
      }
+    },
+    {
+     "title": "Drawing a bar graph from a table",
+     "text": [
+      "In a bar graph, each bar's height shows a value from the table, read on the scale. The scale says how much each line stands for.",
+      "For each row of the table, find its value on the scale (count the lines and multiply by what one line stands for) and make the bar reach exactly there."
+     ],
+     "math": [
+      "The table shows: Rainy days in each month. Draw the bar graph: make each bar as tall as the table says, on a scale where each line is 1 rainy day. Give the bar heights in the order of the table, as a list in brackets, for example (1, 2, 3).",
+      "How many lines tall each bar is: 3, 8, 5",
+      "So the bar heights, in order, are (3, 8, 5)"
+     ],
+     "widget": {
+      "type": "bars",
+      "labels": [
+       "June",
+       "July",
+       "August"
+      ],
+      "values": [
+       3,
+       8,
+       5
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -28767,7 +28792,8 @@
     "gen:adbar:3,27,1,1",
     "gen:adbar:2,28,1,0:mc",
     "gen:adbar:2,28,1,1",
-    "gen:adbartf:1,15,1,0"
+    "gen:adbartf:1,15,1,0",
+    "gen:adbarmk:1,2,33"
    ],
    "transfer": [
     "gen:adbar:1,27,3,0:w",
@@ -28789,6 +28815,10 @@
     },
     {
      "family": "adbartf",
+     "version": "1.0.0"
+    },
+    {
+     "family": "adbarmk",
      "version": "1.0.0"
     }
    ],
@@ -31559,7 +31589,7 @@
      ],
      "math": [
       "A sticker costs 2 4/5 rupees. Which shows this amount in rupees as a decimal?",
-      "4/5 = 80/100",
+      "Rename the fraction as hundredths: 4/5 = 80/100",
       "Write the whole metres or rupees, then the hundredths after the point: 2.8",
       "That is option A, so the answer is A"
      ],
@@ -32642,7 +32672,7 @@
       "Estimate 262 ÷ 46 by rounding each number to its greatest place (for example 4,870 to 5,000 and 36 to 40), then dividing.",
       "Round 262 to its greatest place: 300",
       "Round 46 to its greatest place: 50",
-      "300 ÷ 50 = 6"
+      "Divide the rounded numbers: 300 ÷ 50 = 6"
      ],
      "role": "worked-example",
      "instance": "gen:aeqest:338"
@@ -34038,6 +34068,24 @@
      "tip": "One reading came from the inner scale and the other from the outer scale. Use the same scale for both arms.",
      "role": "concept",
      "instance": "gen:afprot:29,15"
+    },
+    {
+     "title": "Making an angle on a protractor",
+     "text": [
+      "A protractor has two scales. To make an angle, start from the scale that reads 0 on the fixed arm and count up on that same scale.",
+      "Find the 0 on the fixed arm. Follow that scale round to the size you want and turn the other arm to that mark."
+     ],
+     "math": [
+      "Make an angle of 150° on the protractor. One arm lies along the line marked 0 on the inner scale. Turn the other arm until ∠PQR is 150°. How big is the angle you made, in degrees?",
+      "Use the inner scale: it reads 0 on the fixed arm",
+      "Turn the other arm to 150 on that scale: the angle is 150°"
+     ],
+     "widget": {
+      "type": "protractor",
+      "arms": [
+       0
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -34127,20 +34175,31 @@
    "practice": [
     "gen:afprot:29,17",
     "gen:afprot:8,26:mc",
-    "gen:afprot:1,33"
+    "gen:afprot:1,33",
+    "gen:afmkang:34,1,1"
    ],
    "transfer": [
     "gen:afprot:29,16:w"
    ],
    "retention": [
     "gen:afprot:31,13",
-    "gen:afprot:15,35:mc"
+    "gen:afmkang:24,0,1"
    ],
    "probes": [],
    "pool": {
     "family": "afprot",
     "version": "1.0.0"
    },
+   "pools": [
+    {
+     "family": "afprot",
+     "version": "1.0.0"
+    },
+    {
+     "family": "afmkang",
+     "version": "1.0.0"
+    }
+   ],
    "provenance": {
     "origin": "synthesised",
     "policy": "library@2+template@2",
@@ -37012,7 +37071,7 @@
      "math": [
       "The grid in the picture has 100 equal squares. What percentage of the grid is shaded?",
       "3 of the 100 squares are shaded: 3/100",
-      "3/100 = 3/100 = 3%"
+      "Rename it as hundredths, which is the percentage: 3%"
      ],
      "widget": {
       "type": "grid",
@@ -37032,7 +37091,7 @@
      "math": [
       "Write 17/20 as a percentage.",
       "Multiply the top and bottom by 5: 85/100",
-      "85 hundredths is 85%"
+      "85 hundredths is 85 per cent: 85%"
      ],
      "role": "worked-example",
      "instance": "gen:agpfr:17,20"
@@ -44191,8 +44250,8 @@
      ],
      "math": [
       "Write the number \"ninety-five million nine hundred eighty thousand two hundred eighty-one\" in figures. Type the digits without commas.",
-      "95 millions = 95000000",
-      "980 thousands = 980000",
+      "The millions group: 95 millions = 95000000",
+      "The thousands group: 980 thousands = 980000",
       "Put the groups together, three digits for each group after the millions: 95980281"
      ],
      "widget": {

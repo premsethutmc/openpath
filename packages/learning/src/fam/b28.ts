@@ -419,7 +419,7 @@ export const B28: Def[] = [
         { id: "million-as-lakh", kind: "conceptual", competency: INTL, says: "A million was taken as a lakh. One million is ten lakh (10,00,000).", predict: m * 100000 + t * 1000 + u },
       ]),
     variants: () => [],
-    explain: (x) => (x.id === "total" ? `Put the groups together, three digits for each group after the millions: ${x.value}` : `${x.inputs[0]} ${x.id} = ${x.value}`),
+    explain: (x) => (x.id === "total" ? `Put the groups together, three digits for each group after the millions: ${x.value}` : `The ${x.id} group: ${x.inputs[0]} ${x.id} = ${x.value}`),
     domain: [[1, 99], [0, 999], [0, 999]],
     keep: ([, t, u]) => t < 100 || u < 100 || t % 10 === 0,
     cap: 400,
@@ -482,7 +482,7 @@ export const B28: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (x) => (x.id === "pick" ? `That is option ${LETTERS[Number(x.value)]}, so the answer is ${LETTERS[Number(x.value)]}` : x.id === "hundredths" ? `${x.inputs[0]}/${x.inputs[1]} = ${x.value}` : `Write the whole metres or rupees, then the hundredths after the point: ${x.value}`),
+    explain: (x) => (x.id === "pick" ? `That is option ${LETTERS[Number(x.value)]}, so the answer is ${LETTERS[Number(x.value)]}` : x.id === "hundredths" ? `Rename the fraction as hundredths: ${x.inputs[0]}/${x.inputs[1]} = ${x.value}` : `Write the whole metres or rupees, then the hundredths after the point: ${x.value}`),
     domain: [[0, 1], [0, DFR.length - 1], [0, 3]],
     difficulty: ([, k, w]) => (k <= 2 && !w ? 1 : DFR[k][1] <= 10 ? 2 : 3),
     teach: {
@@ -527,7 +527,7 @@ export const B28: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (x) => (x.id === "divide" ? `${x.inputs[0]} ÷ ${x.inputs[1]} = ${x.value}` : `Round ${x.inputs[0]} to its greatest place: ${x.value}`),
+    explain: (x) => (x.id === "divide" ? `Divide the rounded numbers: ${x.inputs[0]} ÷ ${x.inputs[1]} = ${x.value}` : `Round ${x.inputs[0]} to its greatest place: ${x.value}`),
     domain: [[0, 399]],
     difficulty: ([s]) => (qestOf(s).R >= 1000 ? 3 : 2),
     teach: {
@@ -870,7 +870,7 @@ export const B28: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (x) => (x.id === "fraction" ? `${x.inputs[0]} of the ${x.inputs[1]} squares are shaded: ${x.value}` : `${x.inputs[0]}/${x.inputs[1]} = ${x.value}/100 = ${x.value}%`),
+    explain: (x) => (x.id === "fraction" ? `${x.inputs[0]} of the ${x.inputs[1]} squares are shaded: ${x.value}` : `Rename it as hundredths, which is the percentage: ${x.value}%`),
     domain: [[0, GRIDS.length - 1], [1, 99]],
     keep: ([g, k]) => k < GRIDS[g][0] * GRIDS[g][1] && (k * 100) % (GRIDS[g][0] * GRIDS[g][1]) === 0,
     difficulty: ([g]) => (g === 0 ? 1 : g === 3 ? 2 : 3),
@@ -907,7 +907,7 @@ export const B28: Def[] = [
         { id: "added-to-100", kind: "conceptual", competency: PCT, says: `The same number was added to the top and the bottom to make 100. Equivalent fractions come from multiplying: ${n}/${d} = ${(n * 100) / d}/100.`, predict: n + 100 - d <= 100 ? n + 100 - d : null },
       ]),
     variants: () => [],
-    explain: (x) => (x.id === "scale" ? `Multiply the top and bottom by ${x.inputs[2]}: ${x.value}` : `${x.inputs[0]} hundredths is ${x.value}%`),
+    explain: (x) => (x.id === "scale" ? `Multiply the top and bottom by ${x.inputs[2]}: ${x.value}` : `${x.inputs[0]} hundredths is ${x.value} per cent: ${x.value}%`),
     domain: [[1, 49], [2, 50]],
     keep: ([n, d]) => [2, 4, 5, 10, 20, 25, 50].includes(d) && n < d,
     difficulty: ([, d]) => (d <= 5 ? 1 : d <= 20 ? 2 : 3),
@@ -960,7 +960,7 @@ export const B28: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (x) => (x.id === "convert" ? `${x.inputs[0]} is ${x.value}` : x.id === "divide" ? `${x.inputs[0]} mL ÷ ${x.inputs[1]} mL = ${x.value}` : `About ${x.inputs[0]}: that is option ${LETTERS[Number(x.value)]}, so the answer is ${LETTERS[Number(x.value)]}`),
+    explain: (x) => (x.id === "convert" ? `Change litres into millilitres: ${x.inputs[0]} is ${x.value}` : x.id === "divide" ? `How many measures make it: ${x.inputs[0]} mL ÷ ${x.inputs[1]} mL = ${x.value}` : `About ${x.inputs[0]}: that is option ${LETTERS[Number(x.value)]}, so the answer is ${LETTERS[Number(x.value)]}`),
     domain: [[0, CONTAINERS.length - 1], [0, MEASURES.length - 1]],
     difficulty: ([ci, mi]) => (CONTAINERS[ci].L <= 5 && MEASURES[mi].ml >= 100 ? 1 : CONTAINERS[ci].L >= 500 || MEASURES[mi].ml <= 10 ? 3 : 2),
     teach: {
