@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "523ce4f3692b5d9dce3141bc07e0eb232c34a3096d22a95aeb05adf7e6e9ba52",
+ "sha256": "888061813de133117deb0e22f5e336ae545627d2babf4243e16c5cb4cc9852af",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -110,7 +110,7 @@
   "content/learning/curricula/tn-samacheer-mathematics-grade-9.v1.1.0.json": "ad5a8fd8d2b87f71f29c9e96d958efb86412ada62b66d70f4a2b5b6d194e9963",
   "content/learning/explanation-blocklist.v1.json": "117b86561dcfa1f7225cdc83f3a1c868a2d8141f62029d0bc5f5b50dd5b21fa0",
   "content/learning/explanation-review.v1.json": "d4d25204316c7426f0fd0885305b3c2148b5ca53e873ef87b7315df0856e1f29",
-  "content/learning/form-rules.v1.json": "f8fbfaef8f039d29016f204c174bda20d3567b89faceb278e597b1ec841e7392",
+  "content/learning/form-rules.v1.json": "080134b795b0f174443e6a716f87e24c9184bc1f481db7a89fe1454c1a1b5083",
   "content/learning/goals.v1.json": "ce68e02e772b6944ee20ab45186ec070da33f64af6b7aa81ab32b87af9f55dcf",
   "content/learning/grading-certifications.v1.json": "bbe81a5110398aaf97016ce6e1046f8d63e6f7acc354a7f28c56cfb1190edefa",
   "content/learning/graph-audit.v1.json": "ffd060491b7bf9895351c27e254ebd88b2eba04ab695eae8a21ab0ec31d69c30",

@@ -290,7 +290,7 @@ test("written work: a drawn answer is pending, shared with an educator, marked i
   await shot(page, "written-1-pending");
   // the parent shares written work with the educator; the educator marks it in the review app
   await page.getByText("Who marks written work").click();
-  await page.getByLabel("Educator's email").fill(educator.email);
+  await page.getByLabel("Educator's code or email").fill(educator.email);
   await page.getByRole("button", { name: "Share written work" }).click();
   await educator.page.reload();
   await educator.page.getByRole("tab", { name: /Marking/ }).click().catch(async () => educator.page.getByRole("button", { name: /Marking/ }).click());

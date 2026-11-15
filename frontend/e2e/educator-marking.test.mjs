@@ -126,7 +126,7 @@ async function share(L, tag) {
   await ww.waitFor();
   assert.match(await ww.getByRole("status").first().innerText(), /1 answer is waiting for an educator/);
   await ww.locator("summary").click();
-  await ww.getByLabel("Educator's email").fill(educator);
+  await ww.getByLabel("Educator's code or email").fill(educator);
   await ww.getByRole("button", { name: "Share written work" }).click();
   await ww.getByText("Shared.").waitFor();
   const link = ww.getByRole("link", { name: /\/review\/#marking/ });
