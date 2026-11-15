@@ -34,9 +34,8 @@ jobs:
       - run: pip install -r backend/requirements.txt
       - run: npm ci
         working-directory: frontend
-      - run: python manage.py test --noinput
-        working-directory: backend
-      - run: npm run typecheck && npm test
+      # test-dedupe@1: the full frontend and backend suites run in CI on every pull request (ci.yml); not repeated here
+      - run: npm run typecheck
         working-directory: frontend
       - run: node scripts/build-mathematics-journey.mjs
         working-directory: frontend

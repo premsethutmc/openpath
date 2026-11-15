@@ -41,7 +41,7 @@ jobs:
         run: |
           node --import tsx ../tools/mathematics/audit.mts > /tmp/mathematics-audit.json
           cmp /tmp/mathematics-audit.json ../docs/mathematics/audit.v1.json
-      - run: npm test
+      # test-dedupe@1: the full frontend suites run in CI on every pull request (ci.yml); not repeated here
       - run: node scripts/build-mathematics.mjs
       - run: npx playwright install --with-deps chromium
       - name: Mathematics browser flows
