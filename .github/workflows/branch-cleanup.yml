@@ -1,0 +1,35 @@
+# One-off branch clean-up (15 Nov 2026), run by hand: Actions → "Branch clean-up" → Run workflow.
+# Reads tools/cleanup/branches-2026-11-15.txt. "delete" branches are already fully in main. "archive" branches are first
+# saved as tags archive/2026-11-15/<branch>, so nothing is lost. Branches not in the list (main, open PRs, other agents'
+# work in progress, the Render preview branch) are never touched. A branch whose tip moved since the list was made is skipped.
+name: Branch clean-up
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list what would happen"
+        type: boolean
+        default: true
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with: { fetch-depth: 0 }
+      - name: Clean up
+        env: { DRY: "${{ inputs.dry_run }}" }
+        run: |
+          set -u
+          git config user.name "github-actions"; git config user.email "github-actions@users.noreply.github.com"
+          deleted=0; archived=0; skipped=0
+          while read -r action branch; do
+            case "$action" in delete|archive) ;; *) continue;; esac
+            if ! git rev-parse -q --verify "refs/remotes/origin/$branch" >/dev/null; then skipped=$((skipped+1)); continue; fi
+            if [ "$action" = delete ] && ! git merge-base --is-ancestor "origin/$branch" origin/main; then echo "skip (new commits): $branch"; skipped=$((skipped+1)); continue; fi
+            if [ "$DRY" = "true" ]; then echo "$action $branch"; continue; fi
+            if [ "$action" = archive ]; then git push -q origin "refs/remotes/origin/$branch:refs/tags/archive/2026-11-15/$branch" && archived=$((archived+1)) || { skipped=$((skipped+1)); continue; }; fi
+            git push -q origin --delete "$branch" && { [ "$action" = delete ] && deleted=$((deleted+1)); true; } || skipped=$((skipped+1))
+          done < tools/cleanup/branches-2026-11-15.txt
+          echo "deleted $deleted, archived $archived, skipped $skipped (dry run: $DRY)" | tee -a "$GITHUB_STEP_SUMMARY"
