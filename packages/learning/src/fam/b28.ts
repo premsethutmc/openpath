@@ -106,7 +106,7 @@ const fword: Def = {
     method: "Write both fractions with a common denominator, then add or subtract the tops. Write the answer in its simplest form.",
     visual: ([a, b, c, d]) => ({ type: "strips", top: b, shaded: a, bottom: d, bottomShaded: c, labels: [`${a}/${b}`, `${c}/${d}`] }),
     alternatives: [
-      { id: "same_pieces", title: "Cut both into the same pieces", kind: "concrete", text: ["Draw two strips of the same length, one cut into the first denominator's pieces and one into the second's.", "Cut both again until every piece is the same size. Now count the shaded pieces together, or take one count from the other."] },
+      { id: "same_pieces", title: "Cut both into the same pieces", kind: "conceptual", text: ["Draw two strips of the same length, one cut into the first denominator's pieces and one into the second's.", "Cut both again until every piece is the same size. Now count the shaded pieces together, or take one count from the other."] },
     ],
   },
   limits: "Two proper fractions with different denominators up to 8, in four everyday settings; mixed numbers and three fractions are not included.",
@@ -178,7 +178,7 @@ const fracDec: Def = {
     method: "Make the denominator 10 or 100 by multiplying top and bottom by the same number. Then write the tenths or hundredths after the point, and put any whole number in front.",
     visual: ([, k]) => ({ type: "grid", rows: 10, cols: 10, shaded: Math.round((SIMPLE[k][0] / SIMPLE[k][1]) * 100) }),
     alternatives: [
-      { id: "money", title: "Think of money", kind: "concrete", text: ["One rupee is 100 paise. A half of a rupee is 50 paise, a quarter is 25 paise and a fifth is 20 paise.", "So a half is 0.50 (0.5), a quarter is 0.25 and a fifth is 0.20 (0.2) of a rupee: the same decimals work for metres, kilograms and litres."] },
+      { id: "money", title: "Think of money", kind: "conceptual", text: ["One rupee is 100 paise. A half of a rupee is 50 paise, a quarter is 25 paise and a fifth is 20 paise.", "So a half is 0.50 (0.5), a quarter is 0.25 and a fifth is 0.20 (0.2) of a rupee: the same decimals work for metres, kilograms and litres."] },
     ],
   },
   limits: "Halves, quarters, three-quarters, fifths and tenths, with a whole number up to 9; eighths and thousandths are not included.",
@@ -262,7 +262,7 @@ const likeDec: Def = {
     method: "To compare places, count the digits after the point in each number. To make unlike decimals like, add zeros at the end until they have the same number of places.",
     visual: () => ({ type: "table", head: ["Number", "Digits after the point"], rows: [["2.3", 1], ["2.30", 2], ["4.71", 2]] }),
     alternatives: [
-      { id: "money", title: "Think of rupees and paise", kind: "concrete", text: ["₹2.3 and ₹2.30 are the same money: 2 rupees 30 paise.", "Writing the zero shows the paise in two places, so it is easy to line up with ₹4.71."] },
+      { id: "money", title: "Think of rupees and paise", kind: "conceptual", text: ["₹2.3 and ₹2.30 are the same money: 2 rupees 30 paise.", "Writing the zero shows the paise in two places, so it is easy to line up with ₹4.71."] },
     ],
   },
   limits: "Decimals with up to three places and one-digit whole parts; ordering and comparing values are asked by other families.",
@@ -325,7 +325,7 @@ const twin: Def = {
     method: "For each pair, first check the gap is 2. Then test each number: try dividing by 2, 3, 5 and 7. If neither number divides, the pair are twin primes.",
     visual: () => ({ type: "table", head: ["Pair", "Gap", "Both prime?"], rows: [["11, 13", 2, "yes"], ["23, 25", 2, "no: 25 = 5 × 5"], ["7, 11", 4, "yes, but 4 apart"]] }),
     alternatives: [
-      { id: "number_grid", title: "Find them on a number grid", kind: "visual", text: ["Circle the prime numbers on a 1 to 100 grid.", "Look for two circled numbers with exactly one number between them: those are twin primes."] },
+      { id: "number_grid", title: "Find them on a number grid", kind: "procedural", text: ["Circle the prime numbers on a 1 to 100 grid.", "Look for two circled numbers with exactly one number between them: those are twin primes."] },
     ],
   },
   limits: "Pairs below 100, chosen from four options; listing every twin-prime pair in a range is not asked.",
@@ -452,7 +452,7 @@ const pat2: Def = {
     method: "Look at the shapes on their own and find how often they repeat. Then look at the colours on their own. Continue each one separately, then put the next shape and the next colour together.",
     visual: () => ({ type: "table", head: ["Item", "1", "2", "3", "4", "5", "6"], rows: [["Shape", "circle", "square", "circle", "square", "circle", "square"], ["Colour", "red", "blue", "green", "red", "blue", "green"]] }),
     alternatives: [
-      { id: "two_rows", title: "Split it into two rows", kind: "visual", text: ["Write the shapes in one row and the colours in another row underneath.", "Each row is now a simple repeating pattern. Continue both rows by one, and read the new item from top to bottom."] },
+      { id: "two_rows", title: "Split it into two rows", kind: "procedural", text: ["Write the shapes in one row and the colours in another row underneath.", "Each row is now a simple repeating pattern. Continue both rows by one, and read the new item from top to bottom."] },
     ],
   },
   limits: "Two attributes (shape and colour) with repeats of 2 and 3; patterns with three changing attributes or growing patterns are asked elsewhere.",

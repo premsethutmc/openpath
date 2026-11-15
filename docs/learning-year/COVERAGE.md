@@ -10,11 +10,11 @@ One status per competency of the 200-competency graph (which is itself only a st
 
 | Status | Competencies |
 |---|---|
-| Complete and educator-approved | 0/343 (0%) |
-| Complete, awaiting review | 332/343 (97%) |
-| Partially supported | 9/343 (3%) |
-| Unsupported question type | 1/343 (0%) |
-| No content | 1/343 (0%) |
+| Complete and educator-approved | 0/347 (0%) |
+| Complete, awaiting review | 336/347 (97%) |
+| Partially supported | 9/347 (3%) |
+| Unsupported question type | 1/347 (0%) |
+| No content | 1/347 (0%) |
 
 By grade:
 
@@ -29,7 +29,7 @@ By grade:
 | 7 | 0 | 47 | 1 | 0 | 0 |
 | 8 | 0 | 43 | 1 | 0 | 0 |
 | 9 | 0 | 27 | 3 | 0 | 0 |
-| 10 | 0 | 38 | 2 | 0 | 0 |
+| 10 | 0 | 42 | 2 | 0 | 0 |
 | 11 | 0 | 52 | 1 | 0 | 0 |
 | 12 | 0 | 70 | 0 | 1 | 0 |
 
@@ -268,11 +268,15 @@ Every competency that has some content:
 | Calculate frustum surface area and volume (`MATH.measurement.frustum`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families amfrust draft). |
 | Calculate sector and segment areas (`MATH.measurement.sectors`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiwiper draft, amseg draft, amclock draft, amsecinv draft). |
 | Use Euclidean algorithm and prime factorisation (`MATH.number.euclid-algorithm`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families hcf draft, aeeuc draft, agediv draft, agfta draft). |
+| Compute Goods and Services Tax on a bill (`MATH.number.gst`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqgst missing). |
 | Use congruence modulo n (`MATH.number.modular-arithmetic`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anmod draft, ancong draft, anweek draft). |
+| Find the interest and maturity value of a recurring deposit (`MATH.number.recurring-deposit`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqrd missing). |
+| Calculate dividends and returns on shares (`MATH.number.shares-dividends`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqshare missing). |
 | Use complementary events (`MATH.probability.complements`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ancomp draft, anunion draft, anvalid draft, ansure draft). |
 | Choose and justify a mathematical model (`MATH.reasoning.model-selection`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anpair draft, anquad draft). |
 | Sum special series of natural numbers (`MATH.sequences.power-sums`) | 10–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alsum draft, alsumr draft, alsump draft). |
 | Calculate grouped mean median and mode (`MATH.statistics.grouped-mean`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families angmean draft, angmedian draft, angmode draft, angstep draft, anfmed draft, anempir draft). |
+| Read the median and quartiles from a cumulative frequency curve (`MATH.statistics.ogive-quartiles`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aqogive missing). |
 | Solve height and distance problems (`MATH.trigonometry.heights-distances`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anheight draft, antwo draft). |
 | Prove elementary trigonometric identities (`MATH.trigonometry.identities`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ansecpt draft, anidsimp draft). |
 | Use trigonometric ratios (`MATH.trigonometry.ratios`) | 10–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families anstd draft, anratio draft, ancompa draft, ancomps draft, antable draft). |
@@ -1483,29 +1487,33 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | amf34: Times tables: 3 and 4 | `MATH.number.multiplication-tables` | 92 | 0 | 36/16/40 | `c446449a` |
 | amf69: Times tables: 6, 7, 8 and 9 | `MATH.number.multiplication-tables` | 160 | 0 | 64/16/80 | `69eadd2f` |
 | amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `2ab9da60` |
-| aefword: Adding and subtracting fractions in everyday stories | `MATH.number.fraction-add` | 400 | 0 | 38/221/141 | `7062d7d4` |
-| aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `ea380c2a` |
-| aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `963d78fe` |
-| agtwin: Twin primes | `MATH.number.primes` | 300 | 0 | 152/148/0 | `5dd13d1e` |
+| aefword: Adding and subtracting fractions in everyday stories | `MATH.number.fraction-add` | 400 | 0 | 38/221/141 | `8179163e` |
+| aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `6eb864fe` |
+| aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `22f402ce` |
+| agtwin: Twin primes | `MATH.number.primes` | 300 | 0 | 152/148/0 | `351b222a` |
 | agpgrid: A percentage read from a shaded hundred grid | `MATH.number.percent-intro` | 198 | 0 | 9/90/99 | `70fa79ec` |
-| aapat2: A pattern that changes in two ways at once | `MATH.algebra.repeating-patterns` | 128 | 0 | 0/64/64 | `11b99a15` |
+| aapat2: A pattern that changes in two ways at once | `MATH.algebra.repeating-patterns` | 128 | 0 | 0/64/64 | `864b49e5` |
+| aqgst: GST on a bill, and the price before GST | `MATH.number.gst` | 400 | 0 | 77/285/38 | `5287a1ea` |
+| aqrd: Interest and maturity value of a recurring deposit | `MATH.number.recurring-deposit` | 400 | 0 | 142/129/129 | `6c2acbc9` |
+| aqshare: Dividend, investment and return on shares | `MATH.number.shares-dividends` | 400 | 0 | 167/172/61 | `789d5f42` |
+| aqogive: Cumulative frequency, median and quartiles from a less-than ogive | `MATH.statistics.ogive-quartiles` | 300 | 0 | 60/60/180 | `95f361d9` |
 
 ## Whole competency graph
 
-- Competencies (not counting micro-skills): **343**
-- With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
-- Modules: 341 (hand-written 24, synthesised from blueprints 317)
-- Problem families (generated questions with independent checks): 1104
+- Competencies (not counting micro-skills): **347**
+- With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
+- Modules: 345 (hand-written 24, synthesised from blueprints 321)
+- Problem families (generated questions with independent checks): 1108
 - Review registry (repository copy): draft 1432, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
-| Diagnostic questions | 341/343 (99%) |
-| Teaching strategies | 341/343 (99%) |
-| Practice (≥ 2) | 341/343 (99%) |
-| Independent assessment | 338/343 (99%) |
-| Retention check | 341/343 (99%) |
-| Educator-approved | 0/343 (0%) |
+| Diagnostic questions | 345/347 (99%) |
+| Teaching strategies | 345/347 (99%) |
+| Practice (≥ 2) | 345/347 (99%) |
+| Independent assessment | 342/347 (99%) |
+| Retention check | 345/347 (99%) |
+| Educator-approved | 0/347 (0%) |
 
 By grade (a competency spanning grades counts in each):
 
@@ -1520,7 +1528,7 @@ By grade (a competency spanning grades counts in each):
 | 7 | 48 | 48 | 0 |
 | 8 | 44 | 44 | 0 |
 | 9 | 30 | 30 | 0 |
-| 10 | 40 | 40 | 0 |
+| 10 | 44 | 44 | 0 |
 | 11 | 53 | 53 | 0 |
 | 12 | 71 | 70 | 0 |
 

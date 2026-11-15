@@ -1,0 +1,809 @@
+{
+ "id": "icse-cisce-mathematics-grade-10",
+ "version": "1.3.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
+ "hash": "676b8df8",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE Syllabus: Mathematics, Class X",
+  "edition": "ICSE examination 2026, units cross-checked for 2027",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g10.json. 7 of 7 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://www.oswaal360.com/pluginfile.php/10939/mod_folder/content/0/Syllabus/ICSE%20Class%2010/2025-26/Math%202026.pdf https://shaalaa.com/hin/subjects/cisce-mathematics-syllabus_3232 https://oswalpublishers.com/?p=29003. Notes: UNOFFICIAL SOURCE: cisce.org could not be read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false. A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g10-c01",
+     "number": 1,
+     "title": "Commercial Mathematics",
+     "outcomes": [
+      {
+       "id": "icse-g10-c01-o01",
+       "text": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.gst",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g10-c01-o03",
+       "text": "Find the interest and maturity value of a recurring deposit account.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.recurring-deposit",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c01-s01",
+       "number": "1.1",
+       "title": "Goods and Services Tax",
+       "outcomes": [
+        {
+         "id": "icse-g10-c01-o02",
+         "text": "Solve inverse GST problems: find the price before tax or the rate from the amount paid.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.gst",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c01-s02",
+       "number": "1.2",
+       "title": "Banking",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c01-s03",
+       "number": "1.3",
+       "title": "Shares and Dividends",
+       "outcomes": [
+        {
+         "id": "icse-g10-c01-o04",
+         "text": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.shares-dividends",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g10-c02",
+     "number": 2,
+     "title": "Algebra",
+     "outcomes": [
+      {
+       "id": "icse-g10-c02-o05",
+       "text": "Factorise polynomials up to degree 3 using the remainder and factor theorems.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.factor-theorem",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+       }
+      },
+      {
+       "id": "icse-g10-c02-o08",
+       "text": "Reflect points in the axes, the origin and lines x = a or y = a, and find invariant points.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.transformations",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; tuple)."
+       }
+      },
+      {
+       "id": "icse-g10-c02-o09",
+       "text": "Use the section and mid-point formulas (internal division) and find the centroid of a triangle.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; tuple)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c02-s01",
+       "number": "2.1",
+       "title": "Linear inequations",
+       "outcomes": [
+        {
+         "id": "icse-g10-c02-o01",
+         "text": "Solve linear inequations in one unknown over N, W, Z or R and show the solution set on a number line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inequalities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, interval)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s02",
+       "number": "2.2",
+       "title": "Quadratic equations",
+       "outcomes": [
+        {
+         "id": "icse-g10-c02-o02",
+         "text": "Solve quadratic equations by factorisation and by the formula, and judge the nature of roots from the discriminant.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; roots)."
+         }
+        },
+        {
+         "id": "icse-g10-c02-o03",
+         "text": "Form and solve quadratic equations from word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "icse-g10-c02-o10",
+         "text": "Write the equation of a line in slope-intercept and two-point form, and use slopes of parallel and perpendicular lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s03",
+       "number": "2.3",
+       "title": "Ratio and proportion",
+       "outcomes": [
+        {
+         "id": "icse-g10-c02-o04",
+         "text": "Use continued and mean proportion and the componendo, dividendo, alternendo and invertendo properties.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.ratio",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s04",
+       "number": "2.4",
+       "title": "Factorisation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s05",
+       "number": "2.5",
+       "title": "Matrices",
+       "outcomes": [
+        {
+         "id": "icse-g10-c02-o06",
+         "text": "Add, subtract and multiply 2×2 matrices and decide when a product is defined.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s06",
+       "number": "2.6",
+       "title": "Arithmetic and geometric progressions",
+       "outcomes": [
+        {
+         "id": "icse-g10-c02-o07",
+         "text": "Find the nth term and the sum of n terms of arithmetic and geometric progressions and apply them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.geometric-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c02-s07",
+       "number": "2.7",
+       "title": "Coordinate geometry",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g10-c03",
+     "number": 3,
+     "title": "Geometry",
+     "outcomes": [
+      {
+       "id": "icse-g10-c03-o01",
+       "text": "Use similar triangles (SSS, SAS, AA), the basic proportionality theorem and area ratios, including maps and models.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.similarity",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+       }
+      },
+      {
+       "id": "icse-g10-c03-o04",
+       "text": "Use properties of tangents and secants, including the tangent–secant relation.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.circle-tangents",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+       }
+      },
+      {
+       "id": "icse-g10-c03-o05",
+       "text": "Construct tangents from an external point and the circumcircle and incircle of a triangle or a regular hexagon.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.circle-tangents",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.constructions-bisectors",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.triangle-concurrency",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c03-s01",
+       "number": "3.1",
+       "title": "Similarity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c03-s02",
+       "number": "3.2",
+       "title": "Loci",
+       "outcomes": [
+        {
+         "id": "icse-g10-c03-o02",
+         "text": "Describe and construct loci: fixed distance from a point, equidistant from two points or from two lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.locus",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.constructions-bisectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c03-s03",
+       "number": "3.3",
+       "title": "Circles",
+       "outcomes": [
+        {
+         "id": "icse-g10-c03-o03",
+         "text": "Prove and use angle properties of circles and of cyclic quadrilaterals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-theorems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c03-s04",
+       "number": "3.4",
+       "title": "Constructions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "icse-g10-c04",
+     "number": 4,
+     "title": "Mensuration",
+     "outcomes": [
+      {
+       "id": "icse-g10-c04-o02",
+       "text": "Solve problems on cost, inner and outer volumes, melting and recasting, and combined solids (no frustum).",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.combined-solids",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c04-s01",
+       "number": "4.1",
+       "title": "Cylinder, cone and sphere",
+       "outcomes": [
+        {
+         "id": "icse-g10-c04-o01",
+         "text": "Find surface areas and volumes of cylinders, cones and spheres.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.cones-spheres",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.cylinder",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "icse-g10-c06",
+     "number": 6,
+     "title": "Statistics",
+     "outcomes": [
+      {
+       "id": "icse-g10-c06-o01",
+       "text": "Find mean, median and mode of raw, arrayed and grouped data, using direct, short-cut and step-deviation methods for the mean.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.grouped-mean",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g10-c06-o02",
+       "text": "Draw a histogram and find the mode from it.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.grouped-mean",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.histograms",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; drawing, numeric)."
+       }
+      },
+      {
+       "id": "icse-g10-c06-o03",
+       "text": "Draw a less-than ogive and read the median, quartiles and interquartile range from it.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.ogive-quartiles",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; drawing, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c06-s01",
+       "number": "6.1",
+       "title": "Measures of central tendency",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c06-s02",
+       "number": "6.2",
+       "title": "Graphs",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "icse-g10-c07",
+     "number": 7,
+     "title": "Probability",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c07-s01",
+       "number": "7.1",
+       "title": "Probability of single events",
+       "outcomes": [
+        {
+         "id": "icse-g10-c07-o01",
+         "text": "Find the probability of a single event from a sample space of equally likely outcomes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.classical",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.sample-space",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-probability",
+      "number": 6,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "icse-g10-c05",
+     "number": 5,
+     "title": "Trigonometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g10-c05-s01",
+       "number": "5.1",
+       "title": "Identities",
+       "outcomes": [
+        {
+         "id": "icse-g10-c05-o01",
+         "text": "Prove simple trigonometric identities for angles from 0° to 90°.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g10-c05-s02",
+       "number": "5.2",
+       "title": "Heights and distances",
+       "outcomes": [
+        {
+         "id": "icse-g10-c05-o02",
+         "text": "Solve height and distance problems with angles of elevation and depression (up to two right triangles).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.heights-distances",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 7,
+      "title": "Trigonometry"
+     }
+    }
+   ]
+  }
+ ]
+}

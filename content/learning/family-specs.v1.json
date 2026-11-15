@@ -88040,7 +88040,7 @@
      {
       "id": "same_pieces",
       "title": "Cut both into the same pieces",
-      "kind": "concrete",
+      "kind": "conceptual",
       "text": [
        "Draw two strips of the same length, one cut into the first denominator's pieces and one into the second's.",
        "Cut both again until every piece is the same size. Now count the shaded pieces together, or take one count from the other."
@@ -88048,7 +88048,7 @@
      }
     ]
    },
-   "fingerprint": "7062d7d4",
+   "fingerprint": "8179163e",
    "validation": {
     "family": "aefword",
     "deterministic": {
@@ -88116,7 +88116,7 @@
      {
       "id": "money",
       "title": "Think of money",
-      "kind": "concrete",
+      "kind": "conceptual",
       "text": [
        "One rupee is 100 paise. A half of a rupee is 50 paise, a quarter is 25 paise and a fifth is 20 paise.",
        "So a half is 0.50 (0.5), a quarter is 0.25 and a fifth is 0.20 (0.2) of a rupee: the same decimals work for metres, kilograms and litres."
@@ -88124,7 +88124,7 @@
      }
     ]
    },
-   "fingerprint": "ea380c2a",
+   "fingerprint": "6eb864fe",
    "validation": {
     "family": "aedfrl",
     "deterministic": {
@@ -88185,7 +88185,7 @@
      {
       "id": "money",
       "title": "Think of rupees and paise",
-      "kind": "concrete",
+      "kind": "conceptual",
       "text": [
        "₹2.3 and ₹2.30 are the same money: 2 rupees 30 paise.",
        "Writing the zero shows the paise in two places, so it is easy to line up with ₹4.71."
@@ -88193,7 +88193,7 @@
      }
     ]
    },
-   "fingerprint": "963d78fe",
+   "fingerprint": "22f402ce",
    "validation": {
     "family": "aedlike",
     "deterministic": {
@@ -88262,7 +88262,7 @@
      {
       "id": "number_grid",
       "title": "Find them on a number grid",
-      "kind": "visual",
+      "kind": "procedural",
       "text": [
        "Circle the prime numbers on a 1 to 100 grid.",
        "Look for two circled numbers with exactly one number between them: those are twin primes."
@@ -88270,7 +88270,7 @@
      }
     ]
    },
-   "fingerprint": "5dd13d1e",
+   "fingerprint": "351b222a",
    "validation": {
     "family": "agtwin",
     "deterministic": {
@@ -88414,7 +88414,7 @@
      {
       "id": "two_rows",
       "title": "Split it into two rows",
-      "kind": "visual",
+      "kind": "procedural",
       "text": [
        "Write the shapes in one row and the colours in another row underneath.",
        "Each row is now a simple repeating pattern. Continue both rows by one, and read the new item from top to bottom."
@@ -88422,7 +88422,7 @@
      }
     ]
    },
-   "fingerprint": "11b99a15",
+   "fingerprint": "864b49e5",
    "validation": {
     "family": "aapat2",
     "deterministic": {
@@ -88435,6 +88435,335 @@
     },
     "boundary": {
      "cases": 20,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aqgst",
+   "version": "1.0.0",
+   "title": "GST on a bill, and the price before GST",
+   "competency": "MATH.number.gst",
+   "skill": "MATH.number.gst",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     40
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 77,
+    "2": 285,
+    "3": 38
+   },
+   "examples": [
+    "gen:aqgst:12,0,2,1",
+    "gen:aqgst:26,0,0,0:mc",
+    "gen:aqgst:12,4,2,1",
+    "gen:aqgst:26,4,3,0:mc",
+    "gen:aqgst:12,0,2,2",
+    "gen:aqgst:26,0,0,2:mc"
+   ],
+   "explanations": [
+    "half-tax (conceptual): Only half the GST was added. The buyer pays both CGST and SGST.",
+    "whole-gst (conceptual): That is the whole GST. CGST is half of it (the other half is SGST).",
+    "take-off-percent (conceptual): 5% of the amount paid was taken away. The GST was 5% of the price BEFORE tax, so the amount paid is 105% of that price: divide by 105 and multiply by 100.",
+    "tax-on-list (procedural): The tax was worked out on the list price. GST is charged on the price after the discount.",
+    "no-discount (procedural): The discount was left out. Take the discount off the list price first, then add GST."
+   ],
+   "teach": {
+    "idea": "GST is a tax on the price at which goods are sold. Within a state it is split into two equal halves, CGST (for the central government) and SGST (for the state).",
+    "method": "Take any discount off the list price first. GST is the rate per cent of that price; CGST and SGST are each half of it. The buyer pays the price plus the whole GST. To go back from the amount paid, divide it by (100 + rate) and multiply by 100.",
+    "alternatives": [
+     {
+      "id": "bill",
+      "title": "Read it like a bill",
+      "kind": "procedural",
+      "text": [
+       "A GST bill lists the price, then CGST and SGST on separate lines, each at half the rate.",
+       "Add the three lines to get the total. For the price before tax, remember the total is (100 + rate)% of it."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "5287a1ea",
+   "validation": {
+    "family": "aqgst",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aqrd",
+   "version": "1.0.0",
+   "title": "Interest and maturity value of a recurring deposit",
+   "competency": "MATH.number.recurring-deposit",
+   "skill": "MATH.number.recurring-deposit",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     20
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     10
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 142,
+    "2": 129,
+    "3": 129
+   },
+   "examples": [
+    "gen:aqrd:8,0,9,0",
+    "gen:aqrd:15,1,4,1:mc",
+    "gen:aqrd:7,3,6,0",
+    "gen:aqrd:14,4,9,0:mc",
+    "gen:aqrd:7,3,8,1",
+    "gen:aqrd:14,4,9,1:mc"
+   ],
+   "explanations": [
+    "whole-sum-whole-time (conceptual): Interest was worked out as if all the money was in the bank for the whole time. Each deposit stays for fewer months: use the sum of the months, N(N + 1)/2.",
+    "years-not-months (procedural): The rate is per year but the time is counted in months: divide by 12.",
+    "interest-only (conceptual): That is only the interest. The maturity value is all the money deposited plus the interest.",
+    "one-deposit (procedural): Only one month's deposit was added to the interest. 36 deposits of ₹2000 were made."
+   ],
+   "teach": {
+    "idea": "In a recurring deposit the same amount is paid in every month. The first deposit earns interest for all N months, the last for only one month, so the money earns interest as if one deposit stayed for N(N + 1)/2 months.",
+    "method": "Interest I = P × N(N + 1)/2 × r/100 × 1/12, where P is the monthly deposit and r the yearly rate. The maturity value is P × N + I.",
+    "alternatives": [
+     {
+      "id": "add_months",
+      "title": "Add the months up",
+      "kind": "procedural",
+      "text": [
+       "Write how many months each deposit stays in the bank: N, N − 1, …, 2, 1.",
+       "Their total is N(N + 1)/2. Interest is simple interest on one deposit for that many months."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "6c2acbc9",
+   "validation": {
+    "family": "aqrd",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aqshare",
+   "version": "1.0.0",
+   "title": "Dividend, investment and return on shares",
+   "competency": "MATH.number.shares-dividends",
+   "skill": "MATH.number.shares-dividends",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     50
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 167,
+    "2": 172,
+    "3": 61
+   },
+   "examples": [
+    "gen:aqshare:1,1,37,5,1",
+    "gen:aqshare:2,3,27,0,1:mc",
+    "gen:aqshare:1,2,1,0,0",
+    "gen:aqshare:2,3,5,5,0:mc",
+    "gen:aqshare:1,3,21,3,2",
+    "gen:aqshare:2,4,9,0,2:mc"
+   ],
+   "explanations": [
+    "dividend-on-market (conceptual): The dividend was worked out on the market value. A dividend is always a percentage of the FACE value.",
+    "face-value (conceptual): The shares were costed at their face value. You pay the MARKET value for each share.",
+    "rate-is-return (conceptual): The dividend rate was given as the return. The 15% is on the face value; the return compares the income with what was PAID (the market value).",
+    "upside-down (procedural): The fraction was turned upside down. Return = income ÷ money invested × 100."
+   ],
+   "teach": {
+    "idea": "A share has a face value (printed on it) and a market value (what it costs to buy today). A dividend is a percentage of the face value, but the money you pay is the market value.",
+    "method": "Investment = number of shares × market value. Income = number of shares × dividend% of the face value. Return % = income ÷ investment × 100 (for one share: dividend on the face value ÷ market value × 100).",
+    "alternatives": [
+     {
+      "id": "one_share",
+      "title": "Think about one share",
+      "kind": "procedural",
+      "text": [
+       "Work out what one share costs and what one share earns in a year.",
+       "Multiply by the number of shares for the totals; the return is the same for one share as for all of them."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "789d5f42",
+   "validation": {
+    "family": "aqshare",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 20,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aqogive",
+   "version": "1.0.0",
+   "title": "Cumulative frequency, median and quartiles from a less-than ogive",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "skill": "MATH.statistics.ogive-quartiles",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     60
+    ],
+    [
+     0,
+     4
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 60,
+    "2": 60,
+    "3": 180
+   },
+   "examples": [
+    "gen:aqogive:1,0,0,0",
+    "gen:aqogive:2,0,0,0:mc",
+    "gen:aqogive:1,0,0,2",
+    "gen:aqogive:2,0,0,2:mc",
+    "gen:aqogive:1,0,0,1",
+    "gen:aqogive:2,0,0,1:mc"
+   ],
+   "explanations": [
+    "one-class (conceptual): That is the frequency of one class. A cumulative frequency adds up every class below the limit.",
+    "class-middle (procedural): The middle of the class was given. Read along the ogive: how far into the class the position lies decides the value.",
+    "plus-one (conceptual): The position was taken as (n + 1)/2 or (n + 1)/4. For an ogive of grouped data use n/2 for the median and n/4, 3n/4 for the quartiles (n = 40).",
+    "q3-only (procedural): That is Q3 itself. The interquartile range is Q3 − Q1."
+   ],
+   "teach": {
+    "idea": "A cumulative frequency counts everything up to a value. Plotted at the upper class limits and joined by straight lines, it makes a less-than ogive, and the value at any count can be read from it.",
+    "method": "Find the total n. The median is at n/2, the lower quartile at n/4 and the upper quartile at 3n/4. Find the class where the cumulative frequency reaches that position and read across: lower limit + (position − cumulative frequency before) ÷ class frequency × class width. The interquartile range is Q3 − Q1.",
+    "alternatives": [
+     {
+      "id": "draw_it",
+      "title": "Draw the ogive",
+      "kind": "procedural",
+      "text": [
+       "Plot (upper limit, cumulative frequency) for each class and join the points with straight lines, starting at the first lower limit on the horizontal axis.",
+       "Draw a horizontal line from the position (n/2, n/4 or 3n/4) to the curve and down to the marks axis: that reading is the answer."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "95f361d9",
+   "validation": {
+    "family": "aqogive",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
      "failures": []
     },
     "excluded": 0,

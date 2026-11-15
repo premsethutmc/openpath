@@ -2,11 +2,10 @@
  "schema": "outcome-assessment@1",
  "version": "2.2.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks. oam@4b (icse-oam@1): the 220 CISCE outcomes of Classes 1–4 and 6–12 judged by a second AI assessor working to the same brief, from sampled problems of every family of the mapped competencies and the written tasks; where the assessing content sat under a skill the outcome was not yet mapped to, that skill was added to the outcome's mapping as a partial fit. 184 full, 31 partial, 5 none (GST, recurring deposits, shares and dividends, ogives and quartiles). Classes 11–12 follow the ISC Mathematics (860) syllabus from ISC 2027 on, which has no optional sections. That assessor did not write the content. oam@5 (cisce5-gaps@1): ten ICSE Class 5 outcomes judged partial in oam@4 judged again: seven after six families (aefword, aedfrl, aedlike, agtwin, agpgrid, aapat2) and two written tasks (wr:story:fit-sentence, wr:pat:two-ways-own) were added, three because existing written tasks that do exactly what was missing were linked to them (wr:ang:protractor-draw-measure, wr:bar:draw-scale, wr:est-capacity). Nine are full; one stays partial (composite numbers). The same AI wrote the new content and judged it, so these ten need an independent check. Provisional: not educator-reviewed.",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse5-map@1, 2026-11-15): the 77 CISCE (ICSE) Class 5 outcomes judged from sampled problems of every family of the mapped competencies (and the distinct question shapes of each family), by an assessor who did not write the content: 58 full, 19 partial, each partial naming what no question asks. oam@4b (icse-oam@1): the 220 CISCE outcomes of Classes 1–4 and 6–12 judged by a second AI assessor working to the same brief, from sampled problems of every family of the mapped competencies and the written tasks; where the assessing content sat under a skill the outcome was not yet mapped to, that skill was added to the outcome's mapping as a partial fit. 184 full, 31 partial, 5 none (GST, recurring deposits, shares and dividends, ogives and quartiles). Classes 11–12 follow the ISC Mathematics (860) syllabus from ISC 2027 on, which has no optional sections. That assessor did not write the content. oam@5 (cisce5-gaps@1): ten ICSE Class 5 outcomes judged partial in oam@4 judged again: seven after six families (aefword, aedfrl, aedlike, agtwin, agpgrid, aapat2) and two written tasks (wr:story:fit-sentence, wr:pat:two-ways-own) were added, three because existing written tasks that do exactly what was missing were linked to them (wr:ang:protractor-draw-measure, wr:bar:draw-scale, wr:est-capacity). Nine are full; one stays partial (composite numbers). The same AI wrote the new content and judged it, so these ten need an independent check. Provisional: not educator-reviewed. oam@5 (icse10-gaps@1): the five ICSE Class 10 outcomes with nothing built (GST twice, recurring deposits, shares and dividends, ogives and quartiles) judged full after four skills, four families (aqgst, aqrd, aqshare, aqogive) and a written ogive task (wr:ogive:draw) were added; again self-judged by the AI that wrote them, so they need an independent check.",
  "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4 (ICSE Class 5): main at eb690f4",
  "counts": {
-  "full": 1384,
-  "none": 5,
+  "full": 1389,
   "partial": 105
  },
  "outcomes": [
@@ -18850,43 +18849,51 @@
   },
   {
    "outcome": "icse-g10-c01-o01",
-   "verdict": "none",
-   "families": [],
+   "verdict": "full",
+   "families": [
+    "aqgst"
+   ],
    "written": [],
    "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g10-c01-o02",
-   "verdict": "none",
-   "families": [],
+   "verdict": "full",
+   "families": [
+    "aqgst"
+   ],
    "written": [],
    "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g10-c01-o03",
-   "verdict": "none",
-   "families": [],
+   "verdict": "full",
+   "families": [
+    "aqrd"
+   ],
    "written": [],
    "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g10-c01-o04",
-   "verdict": "none",
-   "families": [],
+   "verdict": "full",
+   "families": [
+    "aqshare"
+   ],
    "written": [],
    "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g10-c02-o01",
@@ -19182,13 +19189,17 @@
   },
   {
    "outcome": "icse-g10-c06-o03",
-   "verdict": "none",
-   "families": [],
-   "written": [],
+   "verdict": "full",
+   "families": [
+    "aqogive"
+   ],
+   "written": [
+    "wr:ogive:draw"
+   ],
    "authored": false,
-   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@4"
+   "judged": "oam@5"
   },
   {
    "outcome": "icse-g10-c07-o01",

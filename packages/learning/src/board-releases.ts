@@ -58,22 +58,23 @@ import b54 from "../../../content/learning/curricula/cbse-ncert-mathematics-grad
 import b55 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-10.v1.0.0.json";
 import b56 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-10.v1.1.0.json";
 import b57 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-10.v1.2.0.json";
-import b58 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-10.v1.0.0.json";
-import b59 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-10.v1.1.0.json";
-import b60 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-11.v1.0.0.json";
-import b61 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-11.v1.1.0.json";
-import b62 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-11.v1.0.0.json";
-import b63 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-11.v1.1.0.json";
-import b64 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-11.v1.0.0.json";
-import b65 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-11.v1.1.0.json";
-import b66 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-12.v1.0.0.json";
-import b67 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-12.v1.1.0.json";
-import b68 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-12.v1.0.0.json";
-import b69 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-12.v1.1.0.json";
-import b70 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-12.v1.0.0.json";
-import b71 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-12.v1.1.0.json";
+import b58 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-10.v1.3.0.json";
+import b59 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-10.v1.0.0.json";
+import b60 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-10.v1.1.0.json";
+import b61 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-11.v1.0.0.json";
+import b62 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-11.v1.1.0.json";
+import b63 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-11.v1.0.0.json";
+import b64 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-11.v1.1.0.json";
+import b65 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-11.v1.0.0.json";
+import b66 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-11.v1.1.0.json";
+import b67 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-12.v1.0.0.json";
+import b68 from "../../../content/learning/curricula/cbse-ncert-mathematics-grade-12.v1.1.0.json";
+import b69 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-12.v1.0.0.json";
+import b70 from "../../../content/learning/curricula/icse-cisce-mathematics-grade-12.v1.1.0.json";
+import b71 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-12.v1.0.0.json";
+import b72 from "../../../content/learning/curricula/tn-samacheer-mathematics-grade-12.v1.1.0.json";
 
 /** The latest version of each board release. */
-export const boardReleases = [b1, b2, b3, b5, b7, b8, b9, b11, b12, b14, b16, b17, b19, b24, b25, b27, b29, b31, b34, b36, b39, b41, b43, b46, b48, b50, b52, b54, b57, b59, b61, b63, b65, b67, b69, b71] as unknown as CurriculumRelease[];
+export const boardReleases = [b1, b2, b3, b5, b7, b8, b9, b11, b12, b14, b16, b17, b19, b24, b25, b27, b29, b31, b34, b36, b39, b41, b43, b46, b48, b50, b52, b54, b58, b60, b62, b64, b66, b68, b70, b72] as unknown as CurriculumRelease[];
 /** Every version ever released (a learner enrolled on an earlier one still finds it). */
-export const boardReleaseHistory = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47, b48, b49, b50, b51, b52, b53, b54, b55, b56, b57, b58, b59, b60, b61, b62, b63, b64, b65, b66, b67, b68, b69, b70, b71] as unknown as CurriculumRelease[];
+export const boardReleaseHistory = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40, b41, b42, b43, b44, b45, b46, b47, b48, b49, b50, b51, b52, b53, b54, b55, b56, b57, b58, b59, b60, b61, b62, b63, b64, b65, b66, b67, b68, b69, b70, b71, b72] as unknown as CurriculumRelease[];

@@ -48,28 +48,7 @@
   "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
   "Cross-checked for 2026-27 against two independent copies (Oswal Publishers, republished from cisce.org, and Shaalaa's 2026-27 chapter list); they agree with the units recorded here."
  ],
- "gaps": [
-  {
-   "outcome": "icse-g10-c01-o01",
-   "statement": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss."
-  },
-  {
-   "outcome": "icse-g10-c01-o02",
-   "statement": "Solve inverse GST problems: find the price before tax or the rate from the amount paid."
-  },
-  {
-   "outcome": "icse-g10-c01-o03",
-   "statement": "Find the interest and maturity value of a recurring deposit account."
-  },
-  {
-   "outcome": "icse-g10-c01-o04",
-   "statement": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage)."
-  },
-  {
-   "outcome": "icse-g10-c06-o03",
-   "statement": "Draw a less-than ogive and read the median, quartiles and interquartile range from it."
-  }
- ],
+ "gaps": [],
  "chapters": [
   {
    "id": "icse-g10-c01",
@@ -107,11 +86,28 @@
      "difficulty": "core",
      "assessment": "auto",
      "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 1: Commercial Mathematics",
-     "note": "No OpenPath skill yet."
+     "proposed": [
+      {
+       "id": "MATH.number.gst",
+       "name": "Compute Goods and Services Tax on a bill",
+       "strand": "number",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.percentage",
+        "MATH.number.profit-loss"
+       ],
+       "supports": [],
+       "why": "No existing competency covers indirect tax: CGST and SGST on a sale, with list price, discount and the amount paid."
+      }
+     ],
+     "mapped": [
+      "MATH.number.gst"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Commercial Mathematics"
     },
     {
      "id": "icse-g10-c01-o02",
@@ -124,12 +120,18 @@
      ],
      "difficulty": "core",
      "assessment": "auto",
-     "competencies": [],
+     "competencies": [
+      {
+       "id": "MATH.number.gst",
+       "fit": "exact"
+      }
+     ],
      "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 1: Commercial Mathematics",
-     "note": "No OpenPath skill yet."
+     "mapped": [
+      "MATH.number.gst"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Commercial Mathematics"
     },
     {
      "id": "icse-g10-c01-o03",
@@ -144,11 +146,27 @@
      "difficulty": "core",
      "assessment": "auto",
      "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 1: Commercial Mathematics",
-     "note": "No OpenPath skill yet."
+     "proposed": [
+      {
+       "id": "MATH.number.recurring-deposit",
+       "name": "Find the interest and maturity value of a recurring deposit",
+       "strand": "number",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.profit-loss"
+       ],
+       "supports": [],
+       "why": "No existing competency covers a monthly recurring deposit: simple interest on a growing balance and the maturity value."
+      }
+     ],
+     "mapped": [
+      "MATH.number.recurring-deposit"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Commercial Mathematics"
     },
     {
      "id": "icse-g10-c01-o04",
@@ -164,11 +182,27 @@
      "difficulty": "core",
      "assessment": "auto",
      "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 1: Commercial Mathematics",
-     "note": "No OpenPath skill yet."
+     "proposed": [
+      {
+       "id": "MATH.number.shares-dividends",
+       "name": "Calculate dividends and returns on shares",
+       "strand": "number",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.number.percentage"
+       ],
+       "supports": [],
+       "why": "No existing competency covers shares: face value, market value, dividend income and the return on an investment."
+      }
+     ],
+     "mapped": [
+      "MATH.number.shares-dividends"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Commercial Mathematics"
     }
    ]
   },
@@ -880,11 +914,28 @@
      "difficulty": "core",
      "assessment": "both",
      "competencies": [],
-     "proposed": [],
-     "mapped": [],
-     "coverage": "none",
-     "source": "Unit 6: Statistics",
-     "note": "No OpenPath skill yet."
+     "proposed": [
+      {
+       "id": "MATH.statistics.ogive-quartiles",
+       "name": "Read the median and quartiles from a cumulative frequency curve",
+       "strand": "statistics",
+       "gradeRange": [
+        10,
+        10
+       ],
+       "prerequisites": [
+        "MATH.statistics.grouped-mean",
+        "MATH.statistics.histograms"
+       ],
+       "supports": [],
+       "why": "No existing competency covers cumulative frequency (less-than ogives) and the quartiles and interquartile range read from them."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.ogive-quartiles"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Statistics"
     }
    ]
   },

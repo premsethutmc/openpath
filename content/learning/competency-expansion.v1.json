@@ -1613,6 +1613,23 @@
    "status": "provisional"
   },
   {
+   "id": "MATH.number.gst",
+   "name": "Compute Goods and Services Tax on a bill",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Compute Goods and Services Tax on a bill"
+   ],
+   "evidence": [
+    "icse-g10:icse-g10-c01-o01"
+   ],
+   "status": "provisional"
+  },
+  {
    "id": "MATH.number.hcf-lcm",
    "name": "Find common factors, common multiples, HCF and LCM",
    "strand": "number",
@@ -1915,6 +1932,23 @@
    "status": "provisional"
   },
   {
+   "id": "MATH.number.recurring-deposit",
+   "name": "Find the interest and maturity value of a recurring deposit",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Find the interest and maturity value of a recurring deposit"
+   ],
+   "evidence": [
+    "icse-g10:icse-g10-c01-o03"
+   ],
+   "status": "provisional"
+  },
+  {
    "id": "MATH.number.roman-numerals",
    "name": "Read and write Roman numerals",
    "strand": "number",
@@ -1971,6 +2005,23 @@
     "tn-g05:tn-g05-t3-c02-o01",
     "tn-g06:tn-g06-t1-c01-o04",
     "tn-g07:tn-g07-t3-c01-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.shares-dividends",
+   "name": "Calculate dividends and returns on shares",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Calculate dividends and returns on shares"
+   ],
+   "evidence": [
+    "icse-g10:icse-g10-c01-o04"
    ],
    "status": "provisional"
   },
@@ -2574,6 +2625,23 @@
    ],
    "evidence": [
     "cbse-g11:cbse-g11-c13-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles",
+   "name": "Read the median and quartiles from a cumulative frequency curve",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Read the median and quartiles from a cumulative frequency curve"
+   ],
+   "evidence": [
+    "icse-g10:icse-g10-c06-o03"
    ],
    "status": "provisional"
   },
@@ -4067,6 +4135,18 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
+   "target": "MATH.number.gst",
+   "from": "MATH.number.percentage",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.gst",
+   "from": "MATH.number.profit-loss",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
    "target": "MATH.number.hcf-lcm",
    "from": "MATH.number.factors-multiples",
    "type": "plausible",
@@ -4355,6 +4435,12 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
+   "target": "MATH.number.recurring-deposit",
+   "from": "MATH.number.profit-loss",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
    "target": "MATH.number.roman-numerals",
    "from": "MATH.number.multi-digit-add-subtract",
    "type": "plausible",
@@ -4425,6 +4511,12 @@
    "from": "MATH.reasoning.estimate-check",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.shares-dividends",
+   "from": "MATH.number.percentage",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
   },
   {
    "target": "MATH.probability.binomial-distribution",
@@ -4815,6 +4907,18 @@
    "from": "MATH.statistics.dispersion",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.ogive-quartiles",
+   "from": "MATH.statistics.grouped-mean",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.ogive-quartiles",
+   "from": "MATH.statistics.histograms",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
   },
   {
    "target": "MATH.statistics.pie-charts",

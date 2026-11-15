@@ -15798,6 +15798,62 @@
    "serves": [
     "icse-g05-c10-o03"
    ]
+  },
+  {
+   "id": "wr:ogive:draw",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "kind": "construction",
+   "grade": 10,
+   "prompt": "The table gives the weights of 40 school bags. Weight (kg): 0–2: 4 bags; 2–4: 9; 4–6: 14; 6–8: 8; 8–10: 5. (a) Make a cumulative frequency table. (b) On the axes, draw a less-than ogive (weight on the horizontal axis, 2 cm for 2 kg; cumulative frequency on the vertical axis). (c) Use your ogive to estimate the median, the lower quartile and the upper quartile, showing the lines you drew. (d) Find the interquartile range.",
+   "answer": "drawing",
+   "rubric": [
+    {
+     "id": "table",
+     "criterion": "Cumulative frequencies 4, 13, 27, 35, 40 against the upper limits 2, 4, 6, 8, 10",
+     "points": 1
+    },
+    {
+     "id": "plot",
+     "criterion": "Points plotted at the upper limits (and starting at (0, 0)), joined by a smooth curve or straight lines",
+     "points": 1
+    },
+    {
+     "id": "median",
+     "criterion": "Median read at the 20th bag from the drawn ogive (about 5 kg) with the reading lines shown",
+     "points": 1
+    },
+    {
+     "id": "quartiles",
+     "criterion": "Q1 read at the 10th bag (about 3.3 kg) and Q3 at the 30th bag (about 6.8 kg) with lines shown",
+     "points": 1
+    },
+    {
+     "id": "iqr",
+     "criterion": "Interquartile range Q3 − Q1 found from their readings (about 3.5 kg)",
+     "points": 1
+    }
+   ],
+   "guidance": "Readings within 0.2 kg of the values given are correct for a hand-drawn curve. A curve drawn through the class mid-points earns no plotting point. Award the IQR point for a correct subtraction of the learner's own readings.",
+   "canvas": {
+    "grid": true,
+    "axes": {
+     "x": [
+      0,
+      10
+     ],
+     "y": [
+      0,
+      40
+     ],
+     "step": 2
+    }
+   },
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "icse-g10-c06-o03"
+   ]
   }
  ]
 }

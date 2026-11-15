@@ -28,26 +28,26 @@
   "classes": {
    "validated": 0,
    "awaiting": 1352,
-   "partial": 137,
+   "partial": 142,
    "unsupported": 0,
-   "not-implemented": 5
+   "not-implemented": 0
   },
-  "competenciesRequired": 341,
+  "competenciesRequired": 345,
   "competenciesComplete": 334,
   "competenciesApproved": 0,
   "graph": {
-   "competencies": 343,
+   "competencies": 347,
    "inventory": 200,
-   "expansion": 143,
-   "relations": 376,
+   "expansion": 147,
+   "relations": 382,
    "disputed": 8
   },
   "families": {
-   "count": 1104,
-   "problems": 348216,
+   "count": 1108,
+   "problems": 349716,
    "answerTypes": {
     "integer": 426,
-    "fraction": 154,
+    "fraction": 158,
     "set": 27,
     "choice": 174,
     "exact": 128,
@@ -60,28 +60,28 @@
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 313,
+   "withPictures": 314,
    "withEverydayForm": 775,
-   "withAlternatives": 1066
+   "withAlternatives": 1070
   },
-  "modules": 341,
-  "writtenTasks": 378,
+  "modules": 345,
+  "writtenTasks": 379,
   "writtenByKind": {
    "proof": 83,
-   "construction": 44,
+   "construction": 45,
    "explanation": 145,
    "drawing": 85,
    "sketch": 21
   },
-  "drawnTasks": 148,
+  "drawnTasks": 149,
   "diversity": {
    "familiesWithRepeatedQuestions": 0,
    "repeatedQuestionsNotReleased": 0,
    "ambiguous": 0
   },
   "poolSufficiency": {
-   "modulesWithPools": 332,
-   "sufficient": 332,
+   "modulesWithPools": 336,
+   "sufficient": 336,
    "insufficient": 0
   },
   "educatorPart": {
@@ -521,9 +521,9 @@
    "classes": {
     "validated": 0,
     "awaiting": 13,
-    "partial": 9,
+    "partial": 14,
     "unsupported": 0,
-    "not-implemented": 5
+    "not-implemented": 0
    }
   },
   {
@@ -7840,6 +7840,38 @@
    "complete": true
   },
   {
+   "id": "MATH.number.gst",
+   "name": "Compute Goods and Services Tax on a bill",
+   "grades": [
+    10,
+    10
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": false,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "independent",
+    "review"
+   ],
+   "families": [
+    "aqgst"
+   ],
+   "writtenTasks": 0,
+   "complete": false
+  },
+  {
    "id": "MATH.number.hcf-lcm",
    "name": "Find common factors, common multiples, HCF and LCM",
    "grades": [
@@ -8920,6 +8952,38 @@
    "complete": true
   },
   {
+   "id": "MATH.number.recurring-deposit",
+   "name": "Find the interest and maturity value of a recurring deposit",
+   "grades": [
+    10,
+    10
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": false,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "independent",
+    "review"
+   ],
+   "families": [
+    "aqrd"
+   ],
+   "writtenTasks": 0,
+   "complete": false
+  },
+  {
    "id": "MATH.number.roman-numerals",
    "name": "Read and write Roman numerals",
    "grades": [
@@ -9051,6 +9115,38 @@
    ],
    "writtenTasks": 0,
    "complete": true
+  },
+  {
+   "id": "MATH.number.shares-dividends",
+   "name": "Calculate dividends and returns on shares",
+   "grades": [
+    10,
+    10
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": false,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "independent",
+    "review"
+   ],
+   "families": [
+    "aqshare"
+   ],
+   "writtenTasks": 0,
+   "complete": false
   },
   {
    "id": "MATH.number.sharing",
@@ -11274,6 +11370,38 @@
    ],
    "writtenTasks": 2,
    "complete": true
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles",
+   "name": "Read the median and quartiles from a cumulative frequency curve",
+   "grades": [
+    10,
+    10
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": false,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "independent",
+    "review"
+   ],
+   "families": [
+    "aqogive"
+   ],
+   "writtenTasks": 1,
+   "complete": false
   },
   {
    "id": "MATH.statistics.pictographs",
@@ -29178,7 +29306,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29186,12 +29314,14 @@
    "section": null,
    "outcome": "icse-g10-c01-o01",
    "text": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss.",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.number.gst"
+   ],
+   "class": "partial",
+   "why": "Compute Goods and Services Tax on a bill: missing independent"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29199,12 +29329,14 @@
    "section": null,
    "outcome": "icse-g10-c01-o03",
    "text": "Find the interest and maturity value of a recurring deposit account.",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.number.recurring-deposit"
+   ],
+   "class": "partial",
+   "why": "Find the interest and maturity value of a recurring deposit: missing independent"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29212,12 +29344,14 @@
    "section": "Goods and Services Tax",
    "outcome": "icse-g10-c01-o02",
    "text": "Solve inverse GST problems: find the price before tax or the rate from the amount paid.",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.number.gst"
+   ],
+   "class": "partial",
+   "why": "Compute Goods and Services Tax on a bill: missing independent"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29225,12 +29359,14 @@
    "section": "Shares and Dividends",
    "outcome": "icse-g10-c01-o04",
    "text": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage).",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.number.shares-dividends"
+   ],
+   "class": "partial",
+   "why": "Calculate dividends and returns on shares: missing independent"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29245,7 +29381,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29261,7 +29397,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29276,7 +29412,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29291,7 +29427,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29307,7 +29443,7 @@
    "why": "Solve quadratic equations: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29322,7 +29458,7 @@
    "why": "Solve quadratic equations: missing relations; not every part is assessed: Forming the quadratic equation from the situation is never itself asked: auqwp gives the situation and asks only for the answer."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29337,7 +29473,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29354,7 +29490,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29370,7 +29506,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29386,7 +29522,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29401,7 +29537,7 @@
    "why": "not every part is assessed: Maps and models (a scale factor k giving areas in k² and volumes in k³) are not asked; similar triangles, the basic proportionality theorem and area ratios are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29416,7 +29552,7 @@
    "why": "not every part is assessed: The tangent–secant relation (PA × PB = PT²) is never asked; tangent properties are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29433,7 +29569,7 @@
    "why": "Locate and construct triangle centres: missing relations; not every part is assessed: Circumscribing or inscribing a circle on a regular hexagon is never asked; tangents from an external point and the circumcircle and incircle of a triangle are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29449,7 +29585,7 @@
    "why": "not every part is assessed: As constructions of loci, the fixed distance from a point and the equidistant from two lines are not asked; equidistant from two points is (wr:bis:same-distance-wells)."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29464,7 +29600,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Measurement",
@@ -29479,7 +29615,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Measurement",
@@ -29495,7 +29631,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29510,7 +29646,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29526,7 +29662,7 @@
    "why": "not every part is assessed: Estimating the mode from a histogram (by drawing on it) is never asked; drawing histograms, naming the modal class (wr:hist:plants) and the grouped mode by formula are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29534,12 +29670,14 @@
    "section": null,
    "outcome": "icse-g10-c06-o03",
    "text": "Draw a less-than ogive and read the median, quartiles and interquartile range from it.",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.statistics.ogive-quartiles"
+   ],
+   "class": "partial",
+   "why": "Read the median and quartiles from a cumulative frequency curve: missing independent"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Probability",
@@ -29555,7 +29693,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Trigonometry",
@@ -29570,7 +29708,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.2.0",
+   "release": "icse-cisce-mathematics-grade-10@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Trigonometry",
@@ -35273,6 +35411,62 @@
    "demand": 8,
    "missing": [
     "relations",
+    "review"
+   ]
+  },
+  {
+   "id": "MATH.number.gst",
+   "name": "Compute Goods and Services Tax on a bill",
+   "grades": [
+    10,
+    10
+   ],
+   "depth": 2,
+   "demand": 2,
+   "missing": [
+    "independent",
+    "review"
+   ]
+  },
+  {
+   "id": "MATH.number.recurring-deposit",
+   "name": "Find the interest and maturity value of a recurring deposit",
+   "grades": [
+    10,
+    10
+   ],
+   "depth": 2,
+   "demand": 1,
+   "missing": [
+    "independent",
+    "review"
+   ]
+  },
+  {
+   "id": "MATH.number.shares-dividends",
+   "name": "Calculate dividends and returns on shares",
+   "grades": [
+    10,
+    10
+   ],
+   "depth": 2,
+   "demand": 1,
+   "missing": [
+    "independent",
+    "review"
+   ]
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles",
+   "name": "Read the median and quartiles from a cumulative frequency curve",
+   "grades": [
+    10,
+    10
+   ],
+   "depth": 5,
+   "demand": 1,
+   "missing": [
+    "independent",
     "review"
    ]
   }

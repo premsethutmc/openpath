@@ -32219,6 +32219,110 @@
    ]
   },
   {
+   "id": "MATH.number.gst#bill",
+   "subject": "mathematics",
+   "competency": "MATH.number.gst",
+   "strategy": "bill",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d16a20f82aafa3f4efadeb1cc5754c3138db685f252738ab3e593c8160a3f7ca",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.098Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.gst#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.number.gst",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:c3b92cc9a623c038d98295634cb348bcd726b0ae80f333a4f9ef50ce2f8f84a2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.098Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.gst#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.number.gst",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "take-off-percent",
+   "revisions": [
+    {
+     "contentHash": "sha256:21e9695d39bf4333733edd5c8f08c2da8b351d9f6a636d0eacf54c215f4f47e3",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.098Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.gst#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.number.gst",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:dcf5224314b2cfae0bd9dedf252cbc85669398924b898d0b832a36648d7b5b93",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.097Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.number.hcf-lcm#chapter",
    "subject": "mathematics",
    "competency": "MATH.number.hcf-lcm",
@@ -37575,6 +37679,110 @@
    ]
   },
   {
+   "id": "MATH.number.recurring-deposit#add_months",
+   "subject": "mathematics",
+   "competency": "MATH.number.recurring-deposit",
+   "strategy": "add_months",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b40ac40daa6321dc4cc6ab813a695331ffd55eeb031d1b0ecc8e5e8f32662607",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.099Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.recurring-deposit#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.number.recurring-deposit",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:deaafcde9131827dfd860ef93ad87ac72bb81f76d4144a5be808783ec7c8f0b4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.099Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.recurring-deposit#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.number.recurring-deposit",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "whole-sum-whole-time",
+   "revisions": [
+    {
+     "contentHash": "sha256:5b6e6b0417226de006c4318d78f87857e1026f5463cb2204d7faa550b7a6f839",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.099Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.recurring-deposit#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.number.recurring-deposit",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:8abe42362c533169f8e988a359348e5b717376967a919742a9022bd81e059162",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.098Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.number.roman-numerals#chapter",
    "subject": "mathematics",
    "competency": "MATH.number.roman-numerals",
@@ -38089,6 +38297,110 @@
       "demonstration"
      ],
      "supersedes": "sha256:a6d1d544e98a2c3a0eb2c765cffaf118709a560fe5ebecd1a836f38dba2b5305"
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.shares-dividends#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.number.shares-dividends",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:ac4bd86022eb125a9e6b38dace33d302aa8a3907babcc46e6be2c5171d0fff98",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.100Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.shares-dividends#one_share",
+   "subject": "mathematics",
+   "competency": "MATH.number.shares-dividends",
+   "strategy": "one_share",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b37aac87ba9356342d25028da2ddf80cfb889f5525b4fae1e2bdabfaa45a0852",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.100Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.shares-dividends#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.number.shares-dividends",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "rate-is-return",
+   "revisions": [
+    {
+     "contentHash": "sha256:5d49a200caa81f2712f3881e513b2c9a67e888adc7692a434ab32c04bee80b8b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.100Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.shares-dividends#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.number.shares-dividends",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5ae2e85ccc0e4ed261b289ea92b175b318bfe44602e920286ac4a9359a78e924",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.100Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -47328,6 +47640,110 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.620Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4368ee183fb7b282255d21134106619e1fcfe58d44583946359a32571fe694b9",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.102Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles#draw_it",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "strategy": "draw_it",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:07c2fbfb1c1bd9331028ee683e65031c655c866ac4007aa1e4e6b059ab090d6a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.101Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "strategy": "spot_the_mistake",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "q3-only",
+   "revisions": [
+    {
+     "contentHash": "sha256:d3221a29d7d9e1079f2374a2af1a803c007a7fec3e145958123f2283df0b6a4b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.102Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.ogive-quartiles#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.ogive-quartiles",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:1e36539c07cd8bb491fe9eda2bcd0743f343d17e0d755d0b1cab96e82e2df37a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-15T12:34:57.101Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

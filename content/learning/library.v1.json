@@ -72659,6 +72659,758 @@
      "gen:adline:2,2,21"
     ]
    }
+  },
+  {
+   "competency": "MATH.number.gst",
+   "title": "GST on a bill, and the price before GST",
+   "chapter": [
+    {
+     "title": "GST on a bill, and the price before GST",
+     "text": [
+      "GST is a tax on the price at which goods are sold. Within a state it is split into two equal halves, CGST (for the central government) and SGST (for the state)."
+     ],
+     "math": [
+      "A shop in Priya's town sells a ceiling fan at its list price of ₹1700. GST is charged at 18% on the selling price, shared equally as CGST and SGST because the sale is within the state. How much CGST is charged, in rupees?",
+      "GST = 18% of ₹1700 = ₹306",
+      "CGST is half of the GST: ₹306 ÷ 2 = ₹153"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "₹"
+      ],
+      "rows": [
+       [
+        "List price",
+        1700
+       ],
+       [
+        "Discount",
+        "0"
+       ],
+       [
+        "Price after discount",
+        "1700"
+       ],
+       [
+        "CGST (9%)",
+        "153"
+       ],
+       [
+        "SGST (9%)",
+        "153"
+       ]
+      ]
+     },
+     "tip": "That is the whole GST. CGST is half of it (the other half is SGST).",
+     "role": "concept",
+     "instance": "gen:aqgst:17,0,2,1"
+    }
+   ],
+   "diagnostics": [
+    "gen:aqgst:13,2,3,0",
+    "gen:aqgst:1,4,3,1",
+    "gen:aqgst:21,0,2,2"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Take any discount off the list price first. GST is the rate per cent of that price; CGST and SGST are each half of it. The buyer pays the price plus the whole GST. To go back from the amount paid, divide it by (100 + rate) and multiply by 100."
+       ],
+       "math": [
+        "A shop in Kavya's town sells a pressure cooker with a list price of ₹1200 at a discount of 5%. GST is charged at 12% on the price after discount, shared equally as CGST and SGST because the sale is within the state. How much does Kavya pay for it, in rupees?",
+        "Price after a 5% discount: ₹1200 − 5% of ₹1200 = ₹1140",
+        "GST = 12% of ₹1140 = ₹136.80",
+        "Amount paid = ₹1140 + ₹136.80 = ₹1276.80"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "₹"
+        ],
+        "rows": [
+         [
+          "List price",
+          1200
+         ],
+         [
+          "Discount",
+          "60"
+         ],
+         [
+          "Price after discount",
+          "1140"
+         ],
+         [
+          "CGST (6%)",
+          "68.40"
+         ],
+         [
+          "SGST (6%)",
+          "68.40"
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aqgst:12,1,1,0"
+      }
+     ],
+     "guided": "gen:aqgst:35,2,0,0",
+     "check": "gen:aqgst:25,2,1,1"
+    },
+    {
+     "id": "bill",
+     "title": "Read it like a bill",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read it like a bill",
+       "text": [
+        "A GST bill lists the price, then CGST and SGST on separate lines, each at half the rate.",
+        "Add the three lines to get the total. For the price before tax, remember the total is (100 + rate)% of it."
+       ],
+       "math": [
+        "A shop in Selvi's town sells a mixer grinder at its list price of ₹1400. GST is charged at 28% on the selling price, shared equally as CGST and SGST because the sale is within the state. How much does Selvi pay for it, in rupees?",
+        "GST = 28% of ₹1400 = ₹392",
+        "Amount paid = ₹1400 + ₹392 = ₹1792"
+       ],
+       "role": "strategy",
+       "instance": "gen:aqgst:14,0,3,0"
+      }
+     ],
+     "guided": "gen:aqgst:17,0,2,0",
+     "check": "gen:aqgst:25,2,1,0:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqgst:16,0,0,2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Divya paid ₹1680 for an air cooler, including GST at 5%. What was the price of the air cooler before GST, in rupees?” A common wrong answer is 1596.",
+        "5% of the amount paid was taken away. The GST was 5% of the price BEFORE tax, so the amount paid is 105% of that price: divide by 105 and multiply by 100."
+       ],
+       "math": [
+        "Not 1596, but 1600"
+       ]
+      }
+     ],
+     "guided": "gen:aqgst:12,1,1,1",
+     "check": "gen:aqgst:13,3,0,0:mc"
+    }
+   ],
+   "practice": [
+    "gen:aqgst:29,3,1,0",
+    "gen:aqgst:12,4,3,0:mc",
+    "gen:aqgst:29,3,1,1"
+   ],
+   "transfer": [
+    "gen:aqgst:6,3,2,0:mc"
+   ],
+   "retention": [
+    "gen:aqgst:14,0,3,1",
+    "gen:aqgst:12,4,3,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqgst",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aqgst",
+    "seed": [
+     17,
+     0,
+     2,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqgst:17,0,2,1",
+     "gen:aqgst:16,0,0,2",
+     "gen:aqgst:12,1,1,0"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.number.recurring-deposit",
+   "title": "Interest and maturity value of a recurring deposit",
+   "chapter": [
+    {
+     "title": "Interest and maturity value of a recurring deposit",
+     "text": [
+      "In a recurring deposit the same amount is paid in every month. The first deposit earns interest for all N months, the last for only one month, so the money earns interest as if one deposit stayed for N(N + 1)/2 months."
+     ],
+     "math": [
+      "Imran deposits ₹700 every month in a recurring deposit account for 24 months. The bank pays simple interest at 5% per year. How much interest does the account earn, in rupees?",
+      "Money is in the account for 24 + 23 + … + 1 = 24 × 25 ÷ 2 = 300 month-deposits",
+      "Interest = ₹700 × 300 × 5/100 × 1/12 = ₹875"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Month",
+       "Deposit (₹)",
+       "Months it earns interest"
+      ],
+      "rows": [
+       [
+        1,
+        700,
+        24
+       ],
+       [
+        2,
+        700,
+        23
+       ],
+       [
+        "…",
+        "…",
+        "…"
+       ],
+       [
+        24,
+        700,
+        1
+       ]
+      ]
+     },
+     "tip": "Interest was worked out as if all the money was in the bank for the whole time. Each deposit stays for fewer months: use the sum of the months, N(N + 1)/2.",
+     "role": "concept",
+     "instance": "gen:aqrd:7,3,5,0"
+    }
+   ],
+   "diagnostics": [
+    "gen:aqrd:14,0,5,1",
+    "gen:aqrd:16,1,10,0",
+    "gen:aqrd:13,0,8,1"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Interest I = P × N(N + 1)/2 × r/100 × 1/12, where P is the monthly deposit and r the yearly rate. The maturity value is P × N + I."
+       ],
+       "math": [
+        "Selvi deposits ₹2000 every month in a recurring deposit account for 12 months. The bank pays simple interest at 6% per year. What is the maturity value (the money paid out at the end), in rupees?",
+        "Money is in the account for 12 + 11 + … + 1 = 12 × 13 ÷ 2 = 78 month-deposits",
+        "Interest = ₹2000 × 78 × 6/100 × 1/12 = ₹780",
+        "Maturity value = ₹24000 deposited + ₹780 interest = ₹24780"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "Month",
+         "Deposit (₹)",
+         "Months it earns interest"
+        ],
+        "rows": [
+         [
+          1,
+          2000,
+          12
+         ],
+         [
+          2,
+          2000,
+          11
+         ],
+         [
+          "…",
+          "…",
+          "…"
+         ],
+         [
+          12,
+          2000,
+          1
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aqrd:20,1,6,1"
+      }
+     ],
+     "guided": "gen:aqrd:1,0,7,0",
+     "check": "gen:aqrd:9,0,6,0"
+    },
+    {
+     "id": "add_months",
+     "title": "Add the months up",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Add the months up",
+       "text": [
+        "Write how many months each deposit stays in the bank: N, N − 1, …, 2, 1.",
+        "Their total is N(N + 1)/2. Interest is simple interest on one deposit for that many months."
+       ],
+       "math": [
+        "Selvi deposits ₹200 every month in a recurring deposit account for 6 months. The bank pays simple interest at 5% per year. How much interest does the account earn, in rupees?",
+        "Money is in the account for 6 + 5 + … + 1 = 6 × 7 ÷ 2 = 21 month-deposits",
+        "Interest = ₹200 × 21 × 5/100 × 1/12 = ₹17.50"
+       ],
+       "role": "strategy",
+       "instance": "gen:aqrd:2,0,5,0"
+      }
+     ],
+     "guided": "gen:aqrd:1,4,4,0",
+     "check": "gen:aqrd:9,0,6,1:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqrd:18,3,10,0",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Ravi deposits ₹1800 every month in a recurring deposit account for 24 months. The bank pays simple interest at 10% per year. How much interest does the account earn, in rupees?” A common wrong answer is 8640.",
+        "Interest was worked out as if all the money was in the bank for the whole time. Each deposit stays for fewer months: use the sum of the months, N(N + 1)/2."
+       ],
+       "math": [
+        "Not 8640, but 4500"
+       ]
+      }
+     ],
+     "guided": "gen:aqrd:17,3,8,0",
+     "check": "gen:aqrd:5,0,9,1:mc"
+    }
+   ],
+   "practice": [
+    "gen:aqrd:7,3,5,1",
+    "gen:aqrd:18,3,10,1:mc",
+    "gen:aqrd:2,0,5,1"
+   ],
+   "transfer": [
+    "gen:aqrd:1,4,4,1:mc"
+   ],
+   "retention": [
+    "gen:aqrd:14,0,5,0",
+    "gen:aqrd:15,3,6,0:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqrd",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aqrd",
+    "seed": [
+     7,
+     3,
+     5,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqrd:7,3,5,0",
+     "gen:aqrd:18,3,10,0",
+     "gen:aqrd:20,1,6,1"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.number.shares-dividends",
+   "title": "Dividend, investment and return on shares",
+   "chapter": [
+    {
+     "title": "Dividend, investment and return on shares",
+     "text": [
+      "A share has a face value (printed on it) and a market value (what it costs to buy today). A dividend is a percentage of the face value, but the money you pay is the market value."
+     ],
+     "math": [
+      "Priya buys 60 shares of face value ₹10 each, at ₹9 each (at a discount). The company pays a dividend of 8% (on the face value). What is Priya's yearly income from the dividend, in rupees?",
+      "Dividend on one share = 8% of ₹10 = ₹0.80",
+      "Income = 60 × ₹0.80 = ₹48"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "One share"
+      ],
+      "rows": [
+       [
+        "Face value",
+        "₹10"
+       ],
+       [
+        "Market value",
+        "₹9"
+       ],
+       [
+        "Dividend (8% of face value)",
+        "₹0.80"
+       ]
+      ]
+     },
+     "tip": "The dividend was worked out on the market value. A dividend is always a percentage of the FACE value.",
+     "role": "concept",
+     "instance": "gen:aqshare:0,1,6,2,0"
+    }
+   ],
+   "diagnostics": [
+    "gen:aqshare:0,3,15,5,2",
+    "gen:aqshare:2,4,41,5,0",
+    "gen:aqshare:0,0,41,4,1"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Investment = number of shares × market value. Income = number of shares × dividend% of the face value. Return % = income ÷ investment × 100 (for one share: dividend on the face value ÷ market value × 100)."
+       ],
+       "math": [
+        "Arjun buys 190 shares of face value ₹50 each, at ₹40 each (at a discount). The company pays a dividend of 8% (on the face value). What is Arjun's yearly income from the dividend, in rupees?",
+        "Dividend on one share = 8% of ₹50 = ₹4",
+        "Income = 190 × ₹4 = ₹760"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "One share"
+        ],
+        "rows": [
+         [
+          "Face value",
+          "₹50"
+         ],
+         [
+          "Market value",
+          "₹40"
+         ],
+         [
+          "Dividend (8% of face value)",
+          "₹4"
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aqshare:2,0,19,2,0"
+      }
+     ],
+     "guided": "gen:aqshare:3,5,47,1,1",
+     "check": "gen:aqshare:0,3,32,2,0"
+    },
+    {
+     "id": "one_share",
+     "title": "Think about one share",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Think about one share",
+       "text": [
+        "Work out what one share costs and what one share earns in a year.",
+        "Multiply by the number of shares for the totals; the return is the same for one share as for all of them."
+       ],
+       "math": [
+        "Ravi buys 90 shares of face value ₹100 each, at ₹200 each",
+        "Money invested = 90 × ₹200 = ₹18000"
+       ],
+       "role": "strategy",
+       "instance": "gen:aqshare:3,5,9,4,1"
+      }
+     ],
+     "guided": "gen:aqshare:1,4,6,0,0",
+     "check": "gen:aqshare:0,2,37,2,1:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqshare:3,2,44,3,2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Meena buys 440 shares of face value ₹100 each, at ₹110 each (at a premium). The company pays a dividend of 10% (on the face value). What percentage return does Meena get on the money invested?” A common wrong answer is 10.",
+        "The dividend rate was given as the return. The 10% is on the face value; the return compares the income with what was PAID (the market value)."
+       ],
+       "math": [
+        "Not 10, but 100/11"
+       ]
+      }
+     ],
+     "guided": "gen:aqshare:0,3,41,4,0",
+     "check": "gen:aqshare:0,1,27,3,1:mc"
+    }
+   ],
+   "practice": [
+    "gen:aqshare:3,3,23,5,1",
+    "gen:aqshare:1,2,7,0,1:mc",
+    "gen:aqshare:3,3,11,1,0"
+   ],
+   "transfer": [
+    "gen:aqshare:3,4,2,4,0:mc"
+   ],
+   "retention": [
+    "gen:aqshare:0,0,17,0,0",
+    "gen:aqshare:1,5,37,4,0:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqshare",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aqshare",
+    "seed": [
+     0,
+     1,
+     6,
+     2,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqshare:0,1,6,2,0",
+     "gen:aqshare:3,2,44,3,2",
+     "gen:aqshare:2,0,19,2,0"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.statistics.ogive-quartiles",
+   "title": "Cumulative frequency, median and quartiles from a less-than ogive",
+   "chapter": [
+    {
+     "title": "Cumulative frequency, median and quartiles from a less-than ogive",
+     "text": [
+      "A cumulative frequency counts everything up to a value. Plotted at the upper class limits and joined by straight lines, it makes a less-than ogive, and the value at any count can be read from it."
+     ],
+     "math": [
+      "The table in the picture shows the marks of a group of students. A less-than ogive is drawn by plotting each cumulative frequency at the upper limit of its class and joining the points with straight lines, starting from (40, 0). Estimate the median. Read the position as n/4, n/2 or 3n/4 of the total n, along the straight line between the points.",
+      "Total frequency n = 3 + 12 + 9 + 5 + 11 = 40",
+      "Position 20 lies in the class starting at 60: 60 + (20 − 15) ÷ 9 × 10 = 65.56"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Marks less than",
+       "Cumulative frequency"
+      ],
+      "rows": [
+       [
+        50,
+        3
+       ],
+       [
+        60,
+        15
+       ],
+       [
+        70,
+        24
+       ],
+       [
+        80,
+        29
+       ],
+       [
+        90,
+        40
+       ]
+      ]
+     },
+     "tip": "The position was taken as (n + 1)/2 or (n + 1)/4. For an ogive of grouped data use n/2 for the median and n/4, 3n/4 for the quartiles (n = 40).",
+     "role": "concept",
+     "instance": "gen:aqogive:1,4,10,2"
+    }
+   ],
+   "diagnostics": [
+    "gen:aqogive:2,4,7,2",
+    "gen:aqogive:0,0,3,4",
+    "gen:aqogive:1,2,0,0"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Find the total n. The median is at n/2, the lower quartile at n/4 and the upper quartile at 3n/4. Find the class where the cumulative frequency reaches that position and read across: lower limit + (position − cumulative frequency before) ÷ class frequency × class width. The interquartile range is Q3 − Q1."
+       ],
+       "math": [
+        "The table in the picture shows the marks of a group of students. A less-than ogive is drawn by plotting each cumulative frequency at the upper limit of its class and joining the points with straight lines, starting from (40, 0). Estimate the upper quartile (Q3). Read the position as n/4, n/2 or 3n/4 of the total n, along the straight line between the points.",
+        "Total frequency n = 6 + 5 + 3 + 11 + 7 = 32",
+        "Position 24 lies in the class starting at 70: 70 + (24 − 14) ÷ 11 × 10 = 79.09"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "Marks less than",
+         "Cumulative frequency"
+        ],
+        "rows": [
+         [
+          50,
+          6
+         ],
+         [
+          60,
+          11
+         ],
+         [
+          70,
+          14
+         ],
+         [
+          80,
+          25
+         ],
+         [
+          90,
+          32
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aqogive:1,4,7,3"
+      }
+     ],
+     "guided": "gen:aqogive:1,4,7,2",
+     "check": "gen:aqogive:1,4,7,1"
+    },
+    {
+     "id": "draw_it",
+     "title": "Draw the ogive",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Draw the ogive",
+       "text": [
+        "Plot (upper limit, cumulative frequency) for each class and join the points with straight lines, starting at the first lower limit on the horizontal axis.",
+        "Draw a horizontal line from the position (n/2, n/4 or 3n/4) to the curve and down to the marks axis: that reading is the answer."
+       ],
+       "math": [
+        "The table in the picture shows the marks of a group of students. A less-than ogive is drawn by plotting each cumulative frequency at the upper limit of its class and joining the points with straight lines, starting from (40, 0). Estimate the lower quartile (Q1). Read the position as n/4, n/2 or 3n/4 of the total n, along the straight line between the points.",
+        "Total frequency n = 3 + 12 + 9 + 5 + 11 = 40",
+        "Position 10 lies in the class starting at 50: 50 + (10 − 3) ÷ 12 × 10 = 55.83"
+       ],
+       "role": "strategy",
+       "instance": "gen:aqogive:1,4,10,1"
+      }
+     ],
+     "guided": "gen:aqogive:1,4,10,0",
+     "check": "gen:aqogive:1,4,7,0:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqogive:1,4,7,4",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “The table in the picture shows the marks of a group of students. A less-than ogive is drawn by plotting each cumulative frequency at the upper limit of its class and joining the points with straight lines, starting from (40, 0). Estimate the interquartile range (Q3 − Q1). Read the position as n/4, n/2 or 3n/4 of the total n, along the straight line between the points.” A common wrong answer is 870/11.",
+        "That is Q3 itself. The interquartile range is Q3 − Q1."
+       ],
+       "math": [
+        "Not 870/11, but 276/11"
+       ]
+      }
+     ],
+     "guided": "gen:aqogive:1,1,3,2",
+     "check": "gen:aqogive:1,4,10,4:mc"
+    }
+   ],
+   "practice": [
+    "gen:aqogive:1,1,3,3",
+    "gen:aqogive:1,1,3,0:mc",
+    "gen:aqogive:1,1,3,1"
+   ],
+   "transfer": [
+    "gen:aqogive:2,0,0,2:mc"
+   ],
+   "retention": [
+    "gen:aqogive:1,4,10,3",
+    "gen:aqogive:1,1,3,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqogive",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aqogive",
+    "seed": [
+     1,
+     4,
+     10,
+     2
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqogive:1,4,10,2",
+     "gen:aqogive:1,4,7,4",
+     "gen:aqogive:1,4,7,3"
+    ]
+   }
   }
  ],
  "authoredPools": {
