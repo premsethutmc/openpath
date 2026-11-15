@@ -600,6 +600,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-10",
+   "version": "1.2.0",
+   "grade": 10,
+   "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
+   "hash": "f43f0f4b",
+   "file": "icse-cisce-mathematics-grade-10.v1.2.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-10",
    "version": "1.0.0",
    "grade": 10,
@@ -662,6 +671,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-11",
+   "version": "1.1.0",
+   "grade": 11,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XI — Grade 11 Mathematics (CISCE / ICSE)",
+   "hash": "b8661ee2",
+   "file": "icse-cisce-mathematics-grade-11.v1.1.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-11",
    "version": "1.0.0",
    "grade": 11,
@@ -721,6 +739,15 @@
    "title": "CISCE ISC Syllabus: Mathematics, Class XII — Grade 12 Mathematics (CISCE / ICSE)",
    "hash": "de3036a4",
    "file": "icse-cisce-mathematics-grade-12.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-12",
+   "version": "1.1.0",
+   "grade": 12,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XII — Grade 12 Mathematics (CISCE / ICSE)",
+   "hash": "20bf28fa",
+   "file": "icse-cisce-mathematics-grade-12.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {

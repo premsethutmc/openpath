@@ -1,0 +1,690 @@
+{
+ "id": "icse-cisce-mathematics-grade-11",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 11,
+ "title": "CISCE ISC Syllabus: Mathematics, Class XI — Grade 11 Mathematics (CISCE / ICSE)",
+ "hash": "b8661ee2",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE ISC Syllabus: Mathematics, Class XI",
+  "edition": "ISC examination 2028 (Class XI in 2026-27)",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g11.json. 5 of 5 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://docs.aglasem.com/view/2c3d53b8-4c2c-4a93-ac69-440c8f24f599 https://docs.aglasem.com/view/8d496346-52f9-4b7d-8eec-8e068344564f. Notes: UNOFFICIAL SOURCE (a copy of the official text): the text of CISCE's own ISC Mathematics (860) syllabus documents, read through copies hosted by AglaSem Docs (cisce.org is not reachable from the build environment). Class XI was checked against two copies (ISC 2027 and ISC 2028) that agree; Class XII against the ISC 2028 document and a 2026-27 chapter list from Shaalaa, which agree. Every unit stays sourceVerified: false until the official site or a school copy is compared. CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. From ISC 2027 the Mathematics (860) paper has no optional sections: the statistics, correlation, index-number, regression and business-calculus units moved to a separate subject, Applied Mathematics (885), which may not be taken with Mathematics and is not recorded here.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g11-c01",
+     "number": 1,
+     "title": "Sets and Functions",
+     "outcomes": [
+      {
+       "id": "icse-g11-c01-o05",
+       "text": "Use compound-angle, multiple- and sub-multiple-angle, sum-to-product and product-to-sum identities.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.trigonometry.compound-angle-identities",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g11-c01-s01",
+       "number": "1.1",
+       "title": "Sets",
+       "outcomes": [
+        {
+         "id": "icse-g11-c01-o01",
+         "text": "Represent sets, intervals and power sets, and use Venn diagrams, unions, intersections, differences and complements.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.sets",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.real-intervals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c01-s02",
+       "number": "1.2",
+       "title": "Relations and functions",
+       "outcomes": [
+        {
+         "id": "icse-g11-c01-o02",
+         "text": "Form Cartesian products, describe relations and functions with their domain, co-domain and range, and add, subtract, multiply and divide functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.function-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.cartesian-product",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, expression)."
+         }
+        },
+        {
+         "id": "icse-g11-c01-o03",
+         "text": "Recognise and sketch the constant, identity, polynomial, rational, modulus, signum, exponential, logarithmic and greatest integer functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.standard-function-graphs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; drawing, numeric)."
+         }
+        },
+        {
+         "id": "icse-g11-c01-o04",
+         "text": "Measure angles in degrees and radians, find arc lengths and sector areas, and use the six trigonometric functions, their signs and graphs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.trigonometry.radians",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c01-s03",
+       "number": "1.3",
+       "title": "Trigonometry",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g11-c02",
+     "number": 2,
+     "title": "Algebra",
+     "outcomes": [
+      {
+       "id": "icse-g11-c02-o07",
+       "text": "Use arithmetic and geometric progressions (finite and infinite), arithmetic and geometric means, the sums of n, n² and n³, and the method of differences.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.arithmetic-sequences",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.geometric-sequences",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.sequences.am-gm-relation",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.sequences.power-sums",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.sequences.series-summation",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g11-c02-s01",
+       "number": "2.1",
+       "title": "Complex numbers",
+       "outcomes": [
+        {
+         "id": "icse-g11-c02-o01",
+         "text": "Calculate with complex numbers on the Argand plane, in polar form, find square roots and use the cube roots of unity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.complex-polar-form",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c02-s02",
+       "number": "2.2",
+       "title": "Quadratic equations and inequalities",
+       "outcomes": [
+        {
+         "id": "icse-g11-c02-o02",
+         "text": "Solve quadratic equations (including those reducible to quadratic form and those with common roots), relate roots and coefficients, and form an equation from its roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratic-complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; roots, expression)."
+         }
+        },
+        {
+         "id": "icse-g11-c02-o03",
+         "text": "Find the sign, graph and greatest or least value of a quadratic function.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratic-graphs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, drawing)."
+         }
+        },
+        {
+         "id": "icse-g11-c02-o04",
+         "text": "Solve linear, quadratic and rational inequalities by the method of intervals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inequalities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.nonlinear-inequalities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; interval)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c02-s03",
+       "number": "2.3",
+       "title": "Permutations and combinations",
+       "outcomes": [
+        {
+         "id": "icse-g11-c02-o05",
+         "text": "Count arrangements and selections, including restricted, circular and repeated-element permutations and word and digit formation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.permutations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c02-s04",
+       "number": "2.4",
+       "title": "Binomial theorem",
+       "outcomes": [
+        {
+         "id": "icse-g11-c02-o06",
+         "text": "Expand with the binomial theorem for positive integral indices and find general and middle terms and binomial coefficients.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.binomial",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c02-s05",
+       "number": "2.5",
+       "title": "Sequences and series",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g11-c05",
+     "number": 5,
+     "title": "Statistics and Probability",
+     "outcomes": [
+      {
+       "id": "icse-g11-c05-o01",
+       "text": "Find range, mean deviation about the mean, variance and standard deviation of ungrouped and grouped data, and the combined mean and standard deviation of two groups.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.dispersion",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.mean-deviation",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.weighted-mean",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g11-c05-o02",
+       "text": "Use sample spaces, types of events, the axiomatic approach and the addition theorem.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.probability.complements",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.probability.events",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g11-c05-s01",
+       "number": "5.1",
+       "title": "Statistics",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c05-s02",
+       "number": "5.2",
+       "title": "Probability",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 2,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "icse-g11-c04",
+     "number": 4,
+     "title": "Calculus",
+     "outcomes": [
+      {
+       "id": "icse-g11-c04-o02",
+       "text": "Differentiate from first principles and differentiate sums, products and quotients of algebraic and trigonometric functions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.derivative-rules",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.calculus.derivatives",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g11-c04-s01",
+       "number": "4.1",
+       "title": "Limits",
+       "outcomes": [
+        {
+         "id": "icse-g11-c04-o01",
+         "text": "Evaluate one-sided and standard algebraic, trigonometric, exponential and logarithmic limits, including indeterminate forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.limits",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c04-s02",
+       "number": "4.2",
+       "title": "Differentiation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "icse-g11-c03",
+     "number": 3,
+     "title": "Coordinate Geometry",
+     "outcomes": [
+      {
+       "id": "icse-g11-c03-o03",
+       "text": "Find the foci, directrices, latus rectum and eccentricity of a parabola, ellipse or hyperbola and sketch it.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.conics",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g11-c03-s01",
+       "number": "3.1",
+       "title": "Straight lines",
+       "outcomes": [
+        {
+         "id": "icse-g11-c03-o01",
+         "text": "Use slope, the forms of a line, families of lines, distances from a line and between parallel lines, angle bisectors, locus, the section formula and the area of a triangle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.locus",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.polygon-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c03-s02",
+       "number": "3.2",
+       "title": "Circles",
+       "outcomes": [
+        {
+         "id": "icse-g11-c03-o02",
+         "text": "Write circles in standard, diameter, general and parametric form, find centre, radius and intercepts, and decide how two circles lie.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c03-s03",
+       "number": "3.3",
+       "title": "Conic sections",
+       "outcomes": [
+        {
+         "id": "icse-g11-c03-o04",
+         "text": "Locate points in space and use the distance, section and mid-point formulas.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-coordinates",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; tuple, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g11-c03-s04",
+       "number": "3.4",
+       "title": "Three-dimensional geometry",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 4,
+      "title": "Coordinate geometry"
+     }
+    }
+   ]
+  }
+ ]
+}
