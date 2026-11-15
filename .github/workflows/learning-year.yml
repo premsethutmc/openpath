@@ -42,9 +42,20 @@ permissions:
 jobs:
   # regen@1: every generated learning file is regenerated with Node, in order (tools/regen.mjs), and must equal the commit.
   # CI never commits the result: a diff fails here and says to run `node tools/regen.mjs` and commit.
+  # regen-split@1: the steps run in parallel jobs, each against the committed inputs (see tools/regen.mjs); the slowest
+  # steps get a job each, the quick ones share one
   generated:
-    name: Generated files are up to date (tools/regen.mjs --check)
+    name: Generated files are up to date (tools/regen.mjs --check, ${{ matrix.part.name }})
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        part:
+          - { name: specs, steps: "specs" }
+          - { name: coverage, steps: "coverage" }
+          - { name: compiled coverage, steps: "compile-coverage" }
+          - { name: review, steps: "review sync" }
+          - { name: the rest, steps: "library,problem-templates,families-parity,expansion,board-releases,explanation-review sync,grader bundle" }
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
@@ -57,7 +68,7 @@ jobs:
           python-version: "3.12"
       - run: npm ci
         working-directory: frontend
-      - run: node tools/regen.mjs --check
+      - run: node tools/regen.mjs --check --only "${{ matrix.part.steps }}"
   # recert@1: a family that changed since it was certified no longer counts as validated (machine-validation@1). This fails
   # when a family needs re-certification or the committed registry is not current, and says to run tools/recertify.sh.
   machine-validation:
@@ -73,8 +84,15 @@ jobs:
       - run: npm ci
         working-directory: frontend
       - run: tools/recertify.sh --check
+  # year-split@1: the browser journeys run in three parallel jobs, each with its own API, database and preview server,
+  # balanced by CI time (about 13 minutes each). The backend suite runs in CI's backend jobs, not here.
   year:
+    name: year (${{ matrix.group }})
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [journeys, expansion, grade7-educator]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
@@ -90,8 +108,6 @@ jobs:
       - run: pip install -r backend/requirements.txt
       - run: npm ci
         working-directory: frontend
-      - run: python manage.py test --noinput
-        working-directory: backend
       # the full frontend suite (npm test) runs in CI's parallel "Frontend tests" jobs (test-shards@1); the generated files are
       # checked by the "generated" job, in parallel with this one
       - run: npm run typecheck
@@ -134,21 +150,23 @@ jobs:
             echo "$name: $status ($((SECONDS - t0))s)"
           }
           export OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH=''
-          suite learning-year env YEAR_MANAGE="python backend/manage.py" YEAR_API=django SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs
-          suite curriculum env YEAR_API=django SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs
+          GROUP="${{ matrix.group }}"
+          [ "$GROUP" = journeys ] && suite learning-year env YEAR_MANAGE="python backend/manage.py" YEAR_API=django SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs
+          [ "$GROUP" = journeys ] && suite curriculum env YEAR_API=django SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs
           # geometry/dice integration: two dice misconceptions and two geometry skills, each through the Year UI and this API: one
           # wrong answer, the engine's investigation, the explanation (pending review), guided, a fresh same-skill recheck, reload;
           # nine days on a wrong delayed check, the skill's general explanation, a fresh same-skill recheck, reload
-          suite integrated-skills env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
+          [ "$GROUP" = grade7-educator ] && suite integrated-skills env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
           # maths expansion: one wrong answer → explanation (pending review) → guided → fresh recheck → reload, then a wrong
           # delayed check nine days on → a fresh question on the same competency → reload, for six blueprint modules
-          suite maths-expansion env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/maths-expansion-fail MATHS_EXPANSION_RESULTS=/tmp/year-screens/maths-expansion-browser.json node --import tsx e2e/maths-expansion-browser.test.mts
-          suite method-alignment env PATHWAY_API=http://127.0.0.1:8014 ALIGNMENT_CASE=1 CASE="calculus teaching" CALCULUS_SHOTS=/tmp/year-screens/method-alignment MATHS_EXPANSION_RESULTS=/tmp/year-screens/method-alignment.json node --import tsx e2e/maths-expansion-browser.test.mts
+          [ "$GROUP" = expansion ] && suite maths-expansion env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/maths-expansion-fail MATHS_EXPANSION_RESULTS=/tmp/year-screens/maths-expansion-browser.json node --import tsx e2e/maths-expansion-browser.test.mts
+          [ "$GROUP" = journeys ] && suite method-alignment env PATHWAY_API=http://127.0.0.1:8014 ALIGNMENT_CASE=1 CASE="calculus teaching" CALCULUS_SHOTS=/tmp/year-screens/method-alignment MATHS_EXPANSION_RESULTS=/tmp/year-screens/method-alignment.json node --import tsx e2e/maths-expansion-browser.test.mts
           # deep-recovery@0 (RESEARCH, off by default): the switch exists only in a --test --deep-recovery build; single and multiple
           # gaps to a fresh unaided goal question, reload / sign-out / resume, a failed save, missing content, no fresh question, switch off
           # three builds: the research switch (main cases), a lower sitting limit (pause and resume), the shipped build (switch absent)
-          suite deep-recovery env DEEP_API=http://127.0.0.1:8014 DEEP_OUT=/tmp/year-screens/deep-recovery bash e2e/run-deep-recovery.sh
+          [ "$GROUP" = expansion ] && suite deep-recovery env DEEP_API=http://127.0.0.1:8014 DEEP_OUT=/tmp/year-screens/deep-recovery bash e2e/run-deep-recovery.sh
           # Keyboard integration uses the actual provisional-content builds, not the educator-review fixture.
+          if [ "$GROUP" = grade7-educator ]; then
           node scripts/build-year.mjs
           node scripts/build-curriculum.mjs
           suite writing-keyboard-components node --test e2e/writing-components.test.mjs e2e/keyboard-policy-components.test.mjs
@@ -162,6 +180,7 @@ jobs:
           # sets through manage.py in this throwaway database (no secret, no real account).
           suite educator-marking env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-marking/ node --import tsx --test e2e/educator-marking.test.mjs
           suite educator-access env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-access/ node --import tsx --test e2e/educator-access.test.mjs
+          fi
           python3 ../.github/scripts/year-summary.py /tmp/year-results.tsv "$LOGS" /tmp/year-screens/summary.json
           if grep -q $'\tfail\t' /tmp/year-results.tsv; then
             tail -20 /tmp/year-api.log | while IFS= read -r line; do echo "::warning::api: $line"; done
@@ -170,7 +189,7 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: my-learning-year-screens
+          name: my-learning-year-screens-${{ matrix.group }}
           path: /tmp/year-screens/
           retention-days: 14
           if-no-files-found: ignore

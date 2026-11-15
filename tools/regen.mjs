@@ -66,8 +66,20 @@ if (!process.env.TS_IMPORT && !existsSync(join(fe, "node_modules/tsx"))) {
   console.error("regen@1: tsx is missing: run `npm ci` in frontend (or set TS_IMPORT to another TypeScript loader).");
   process.exit(2);
 }
+// regen-split@1: `--check --only a,b` runs only the named steps against the committed inputs and checks the generated
+// files. CI runs every step this way in parallel jobs: if each step reproduces the committed files from the committed
+// files before it, the whole chain does (the first step reads only sources), so the split check equals the full one.
+const oi = process.argv.indexOf("--only");
+const only = oi > 0 ? new Set(String(process.argv[oi + 1] ?? "").split(",").map((x) => x.trim()).filter(Boolean)) : null;
+if (only) {
+  const unknown = [...only].filter((n) => !STEPS.some(([name]) => name === n));
+  if (!only.size || unknown.length || mode !== "check") {
+    console.error(mode !== "check" ? "regen@1: --only is for --check (a partial write could leave later files stale)" : `regen@1: no such step: ${unknown.join(", ") || "(none given)"} (see --list)`);
+    process.exit(2);
+  }
+}
 const t0 = Date.now();
-for (const [name, s] of STEPS) {
+for (const [name, s] of STEPS.filter(([name]) => !only || only.has(name))) {
   const t = Date.now();
   const r = spawnSync(s.cmd, s.args, { cwd: s.cwd, env: { ...process.env, ...(s.env ?? {}) }, stdio: ["ignore", "pipe", "inherit"], maxBuffer: 1 << 28 });
   const tail = String(r.stdout ?? "").trim().split("\n").at(-1)?.slice(0, 160) ?? "";

@@ -9,6 +9,8 @@ Short reference for the daily loop. Commands run from the repository root unless
   server grader bundle). Commit what it writes, with the change that caused it.
 - `node tools/regen.mjs --check`: the same, then fails if any generated file differs from git. CI runs it
   ("Generated files are up to date"); CI never commits. `--list` prints the steps and files.
+  `--check --only "specs,coverage"` checks just those steps against the committed inputs; CI runs the steps this way
+  in five parallel jobs (regen-split@1), which together equal the full check.
 - **Node only.** Bun computes a few float results differently in the last digit, which changes three families'
   fingerprints (`anncr`, `atgen`, `avfexp`); the script refuses Bun. Fingerprints are not rounded on purpose: the `atgen`
   difference is a validator that accepts different answers on the two engines, and rounding would hide that kind of change.
