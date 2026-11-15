@@ -122,10 +122,21 @@ function App() {
 type Grant = { email: string; active: boolean; grantedAt: string; grantedVia: string; removedAt: string | null };
 function EducatorAccess({ onChange }: { onChange: () => Promise<void> }) {
   const [grants, setGrants] = useState<Grant[] | null>(null);
+  const [requests, setRequests] = useState<{ email: string; at: string }[]>([]);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [note, setNote] = useState("");
-  const load = () => api.request<{ educators: Grant[] }>("GET", "/educator-access/").then((r) => setGrants(r.educators)).catch((e) => setError(String(e.message ?? e)));
+  const load = () => api.request<{ educators: Grant[]; requests?: { email: string; at: string }[] }>("GET", "/educator-access/").then((r) => { setGrants(r.educators); setRequests(r.requests ?? []); }).catch((e) => setError(String(e.message ?? e)));
+  const decline = async (who: string) => {
+    setError("");
+    try {
+      await api.request("POST", "/educator-access/decline/", { email: who });
+      setNote(`Declined the request from ${who}.`);
+      await load();
+    } catch (e) {
+      setError(String((e as Error).message ?? e));
+    }
+  };
   useEffect(() => {
     load();
   }, []);
@@ -152,6 +163,20 @@ function EducatorAccess({ onChange }: { onChange: () => Promise<void> }) {
       </form>
       {note && <p className="small" role="status">{note}</p>}
       {error && <p className="error" role="alert">{error}</p>}
+      {requests.length > 0 && (
+        <div className="panel" data-testid="educator-requests">
+          <h3>Asked to be an educator</h3>
+          <table className="matrix small"><tbody>
+            {requests.map((r) => (
+              <tr key={r.email}>
+                <td>{r.email}</td>
+                <td>Asked {r.at.slice(0, 10)}</td>
+                <td><button className="primary" onClick={() => act("POST", r.email)} aria-label={`Give the educator role to ${r.email}`}>Give the educator role</button>{" "}<button className="secondary" onClick={() => decline(r.email)} aria-label={`Decline the request from ${r.email}`}>Decline</button></td>
+              </tr>
+            ))}
+          </tbody></table>
+        </div>
+      )}
       {!grants ? <p className="muted">Loading…</p> : !grants.length ? <p className="muted">No educators yet.</p> : (
         <table className="matrix small"><thead><tr><th>Account</th><th>Educator role</th><th></th></tr></thead><tbody>
           {grants.map((g) => (
@@ -177,12 +202,13 @@ function Marking({ roles }: { roles: string[] }) {
   useEffect(() => {
     if (roles.includes("educator")) load();
   }, []);
-  if (!roles.includes("educator")) return <p className="muted">Marking written answers needs the educator role.</p>;
+  if (!roles.includes("educator")) return <AskToMark />;
   if (error) return <p className="error" role="alert">{error}</p>;
   if (!rows) return <p className="muted">Loading the marking queue…</p>;
   return (
     <section>
       <h2>Written answers to mark</h2>
+      <MyCode />
       <p className="small muted">Only learners whose parents chose to share their written work with you appear here, under a pseudonym. Each answer is marked once; marks are kept and cannot be changed. Only full marks count as correct.</p>
       {!rows.length && <p className="muted">Nothing to mark.</p>}
       {rows.map((r) => <MarkOne key={`${r.pupil}:${r.attemptId}`} r={r} onDone={load} />)}
@@ -191,6 +217,48 @@ function Marking({ roles }: { roles: string[] }) {
     </section>
   );
 }
+/** educator-invite@1: the code an educator gives parents, so the parent never needs the educator's email. */
+function MyCode() {
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    api.request<{ code: string }>("GET", "/written/my-code/").then((r) => setCode(r.code)).catch(() => setCode(""));
+  }, []);
+  if (!code) return null;
+  return (
+    <p className="panel small" data-testid="educator-code">
+      Your educator code: <strong style={{ fontFamily: "monospace", fontSize: "1.2em" }}>{code}</strong>. Give it to a parent; they type it under <em>Written work → Who marks written work</em> to share their child's written answers with you.
+    </p>
+  );
+}
+
+/** educator-invite@1: an account without the role asks an administrator for it. */
+function AskToMark() {
+  const [state, setState] = useState<{ status: string; at?: string } | null>(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    api.request<{ status: string; at?: string }>("GET", "/educator-request/").then(setState).catch(() => setState({ status: "none" }));
+  }, []);
+  const ask = async () => {
+    setError("");
+    try {
+      setState(await api.request<{ status: string; at?: string }>("POST", "/educator-request/"));
+    } catch (e) {
+      setError(String((e as Error).message ?? e));
+    }
+  };
+  return (
+    <section>
+      <p className="muted">Marking written answers needs the educator role.</p>
+      {state?.status === "pending" ? <p className="small" role="status" data-testid="educator-request">You asked to be an educator on {state.at?.slice(0, 10)}. An OpenPath administrator will look at it.</p>
+        : state && <>
+          {state.status === "declined" && <p className="small">Your last request was declined. You can ask again.</p>}
+          <button className="primary" onClick={ask}>Ask to be an educator</button>
+        </>}
+      {error && <p className="error" role="alert">{error}</p>}
+    </section>
+  );
+}
+
 function MarkOne({ r, onDone }: { r: QueueRow; onDone: () => void }) {
   const total = r.task.rubric.reduce((n, x) => n + x.points, 0);
   const [got, setGot] = useState<Record<string, number>>({});

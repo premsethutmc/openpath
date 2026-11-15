@@ -56,7 +56,13 @@ An administrator gives an existing account the educator role, or removes it, in 
   - the administrator removes the role and Marking closes.
   - Screenshots are in `screens/`.
 
+## Codes and requests (educator-invite@1)
+
+- **Educator code.** Every educator sees a code (like `ABCD-2345`) at the top of Marking. A parent types it under *Written work → Who marks written work* instead of an email. The code is derived from the account and the server secret, so nothing is stored and it stops working the moment the role is removed. A wrong code is refused with no hint about who it might belong to. Email still works.
+- **Asking for the role.** An account without the role sees *Ask to be an educator* in Marking (`POST /api/educator-request/`; `GET` gives `none`, `pending`, `declined` or `educator`). An administrator sees open requests above the grants in Educator access and either gives the role (which settles the request) or declines (`POST /api/educator-access/decline/ {email}`). Declining is audited by account id; the account may ask again.
+- Tests: `backend/family/test_educator_invite.py`.
+
 ## Still open
 
-- The parent must still know the educator's email to share written work.
-- There is no invite or self-service request: the educator registers first, then an administrator grants the role.
+- A code cannot be changed without removing and giving the role again (a new code needs a new server secret or account).
+- There is no email notification of new requests or new written work; the educator and the administrator see them when they sign in.

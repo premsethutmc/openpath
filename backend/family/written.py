@@ -7,9 +7,12 @@ each one once against its rubric, and the mark is kept append-only. The parent's
 """
 from __future__ import annotations
 
+import base64
 import hashlib
+import hmac
 import re
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import IntegrityError, transaction
 from django.shortcuts import get_object_or_404
@@ -26,6 +29,25 @@ from .views import AccountBase
 
 def _is_educator(user):
     return ContentReviewer.objects.filter(user=user, role='educator', revoked_at__isnull=True).exists()
+
+
+def educator_code(user) -> str:
+    """educator-invite@1: the code an educator gives parents instead of their email (8 letters and digits, shown as
+    ABCD-2345). Derived from the account and the server secret, so it needs no storage and stops working the moment the
+    educator role is removed."""
+    digest = hmac.new(settings.SECRET_KEY.encode(), f'educator-code:{user.pk}'.encode(), hashlib.sha256).digest()
+    raw = base64.b32encode(digest).decode()[:8]
+    return f'{raw[:4]}-{raw[4:]}'
+
+
+def _educator_by_code(code: str):
+    want = re.sub(r'[^A-Z0-9]', '', code.upper())
+    if len(want) != 8:
+        return None
+    for grant in ContentReviewer.objects.filter(role='educator', revoked_at__isnull=True).select_related('user'):
+        if grant.user.is_active and hmac.compare_digest(educator_code(grant.user).replace('-', ''), want):
+            return grant.user
+    return None
 
 
 def _alias(pupil_id):
@@ -51,7 +73,8 @@ def _mark_json(m, with_marker=False):
 
 
 class MarkingShareView(AccountBase):
-    """The parent shares (POST {email}) or stops sharing (DELETE {email}) one pupil's written answers with an educator."""
+    """The parent shares (POST {code} or {email}) or stops sharing (DELETE {email}) one pupil's written answers with an
+    educator. The code (educator-invite@1) is what the educator gives the parent, so neither needs the other's email."""
 
     def get(self, request, pupil_id):
         pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
@@ -59,14 +82,20 @@ class MarkingShareView(AccountBase):
 
     def post(self, request, pupil_id):
         pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
-        email = str(request.data.get('email', '')).strip().lower()
-        reviewer = get_user_model().objects.filter(email__iexact=email).first() if email else None
-        # the same answer whether the account does not exist or is not an educator: no account discovery
-        if not reviewer or not _is_educator(reviewer) or reviewer == request.user:
-            raise ValidationError({'email': 'That address is not an OpenPath educator who can mark written answers.'})
+        code = str(request.data.get('code', '')).strip()
+        if code:
+            reviewer = _educator_by_code(code)
+            if not reviewer or reviewer == request.user:
+                raise ValidationError({'code': 'That code does not belong to an OpenPath educator. Check it with your educator.'})
+        else:
+            email = str(request.data.get('email', '')).strip().lower()
+            reviewer = get_user_model().objects.filter(email__iexact=email).first() if email else None
+            # the same answer whether the account does not exist or is not an educator: no account discovery
+            if not reviewer or not _is_educator(reviewer) or reviewer == request.user:
+                raise ValidationError({'email': 'That address is not an OpenPath educator who can mark written answers.'})
         if not pupil.marking_shares.filter(reviewer=reviewer, revoked_at__isnull=True).exists():
             MarkingShare.objects.create(pupil=pupil, reviewer=reviewer)
-        return Response({'shared': True}, status=status.HTTP_201_CREATED)
+        return Response({'shared': True, 'email': reviewer.email}, status=status.HTTP_201_CREATED)
 
     def delete(self, request, pupil_id):
         pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
@@ -133,3 +162,12 @@ class WrittenMarkView(AccountBase):
         except IntegrityError:
             return Response({'detail': 'This answer is already marked; marks are not changed.'}, status=status.HTTP_409_CONFLICT)
         return Response(_mark_json(m, with_marker=True), status=status.HTTP_201_CREATED)
+
+
+class EducatorCodeView(AccountBase):
+    """educator-invite@1: GET the signed-in educator's code to give to parents. 403 for anyone without the role."""
+
+    def get(self, request):
+        if not _is_educator(request.user):
+            raise PermissionDenied('Only an educator has a code.')
+        return Response({'code': educator_code(request.user)})
