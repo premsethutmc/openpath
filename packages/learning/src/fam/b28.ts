@@ -334,7 +334,7 @@ export const B28: Def[] = [
     variants: () => [],
     explain: (x) => `Add the place values; a place with no part gets a 0: ${x.value}`,
     domain: [[0, 399]],
-    difficulty: ([s]) => 1 + (s % 3),
+    difficulty: ([s]) => (1 + (s % 3)) as 1 | 2 | 3,
     teach: {
       idea: "An expanded form shows a number as the sum of its place values. The number of zeros in each part tells which place its digit goes in.",
       method: "Write a place-value chart. Put each part's first digit under the place it names, write 0 in every empty place, then read the digits from the left.",
