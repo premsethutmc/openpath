@@ -87978,6 +87978,468 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "aefword",
+   "version": "1.0.0",
+   "title": "Adding and subtracting fractions in everyday stories",
+   "competency": "MATH.number.fraction-add",
+   "skill": "MATH.number.fraction-add",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     10
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     10
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 38,
+    "2": 221,
+    "3": 141
+   },
+   "examples": [
+    "gen:aefword:3,4,5,8,1,0",
+    "gen:aefword:5,8,1,2,1,0:mc",
+    "gen:aefword:2,7,3,8,0,0",
+    "gen:aefword:5,6,3,5,0,0:mc",
+    "gen:aefword:4,5,1,4,1,1",
+    "gen:aefword:6,7,1,4,0,1:mc"
+   ],
+   "explanations": [
+    "tops-and-bottoms (conceptual): The tops and the bottoms were taken away separately. Fractions with different pieces must first be written with the same pieces.",
+    "tops-not-scaled (procedural): A common denominator, 56, was chosen but the tops were not changed to match it.",
+    "wrong-operation (conceptual): The amounts were added, but the story takes one amount away from the other."
+   ],
+   "teach": {
+    "idea": "Decide from the story whether the amounts are put together (add) or one is taken from the other (subtract). Fractions can be added or subtracted only when they count the same size of piece.",
+    "method": "Write both fractions with a common denominator, then add or subtract the tops. Write the answer in its simplest form.",
+    "alternatives": [
+     {
+      "id": "same_pieces",
+      "title": "Cut both into the same pieces",
+      "kind": "concrete",
+      "text": [
+       "Draw two strips of the same length, one cut into the first denominator's pieces and one into the second's.",
+       "Cut both again until every piece is the same size. Now count the shaded pieces together, or take one count from the other."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "7062d7d4",
+   "validation": {
+    "family": "aefword",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 24,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aedfrl",
+   "version": "1.0.0",
+   "title": "Halves, quarters, fifths and tenths as decimals, with lengths and money",
+   "competency": "MATH.number.decimal-tenths",
+   "skill": "MATH.number.decimal-tenths",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     10
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 440,
+   "excluded": [],
+   "difficulty": {
+    "1": 200,
+    "2": 24,
+    "3": 216
+   },
+   "examples": [
+    "gen:aedfrl:3,7,2",
+    "gen:aedfrl:6,9,1:mc",
+    "gen:aedfrl:0,3,0",
+    "gen:aedfrl:0,5,0:mc",
+    "gen:aedfrl:4,1,0",
+    "gen:aedfrl:7,1,0:mc"
+   ],
+   "explanations": [
+    "digits-as-decimal (conceptual): The top and bottom numbers were written after the point. A fraction is a division: 9/10 means 9 ÷ 10, which is 0.9.",
+    "denominator-as-tenths (conceptual): The bottom number was written after the point. 4/5 is not 4 × 0.5: write 4/5 with a denominator of 10 or 100 first.",
+    "top-as-tenths (conceptual): The top number was read as tenths. 4/5 is 4 out of 5 equal parts, not 4 tenths."
+   ],
+   "teach": {
+    "idea": "A decimal is a fraction with a denominator of 10, 100 or 1000. A half, a quarter, a fifth and a tenth can each be written as tenths or hundredths, and so as a decimal.",
+    "method": "Make the denominator 10 or 100 by multiplying top and bottom by the same number. Then write the tenths or hundredths after the point, and put any whole number in front.",
+    "alternatives": [
+     {
+      "id": "money",
+      "title": "Think of money",
+      "kind": "concrete",
+      "text": [
+       "One rupee is 100 paise. A half of a rupee is 50 paise, a quarter is 25 paise and a fifth is 20 paise.",
+       "So a half is 0.50 (0.5), a quarter is 0.25 and a fifth is 0.20 (0.2) of a rupee: the same decimals work for metres, kilograms and litres."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "ea380c2a",
+   "validation": {
+    "family": "aedfrl",
+    "deterministic": {
+     "checked": 440,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aedlike",
+   "version": "1.0.0",
+   "title": "Like, unlike and equivalent decimals",
+   "competency": "MATH.number.decimal-tenths",
+   "skill": "MATH.number.decimal-tenths",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3239
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 200,
+    "2": 200,
+    "3": 0
+   },
+   "examples": [
+    "gen:aedlike:0,888",
+    "gen:aedlike:0,2005",
+    "gen:aedlike:1,853",
+    "gen:aedlike:1,1681"
+   ],
+   "explanations": [
+    "same-whole (conceptual): Like decimals are about the places after the point, not the whole-number part. Count the digits after the point in each number.",
+    "zero-inside (conceptual): A zero was put straight after the point, which changes the value: 0.0 something is hundredths, not tenths. A zero added at the END keeps the value the same."
+   ],
+   "teach": {
+    "idea": "Like decimals have the same number of decimal places (2.35 and 4.71); unlike decimals do not (2.3 and 4.71). Adding zeros at the end of a decimal does not change its value, so 2.3 and 2.30 are equivalent.",
+    "method": "To compare places, count the digits after the point in each number. To make unlike decimals like, add zeros at the end until they have the same number of places.",
+    "alternatives": [
+     {
+      "id": "money",
+      "title": "Think of rupees and paise",
+      "kind": "concrete",
+      "text": [
+       "₹2.3 and ₹2.30 are the same money: 2 rupees 30 paise.",
+       "Writing the zero shows the paise in two places, so it is easy to line up with ₹4.71."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "963d78fe",
+   "validation": {
+    "family": "aedlike",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agtwin",
+   "version": "1.0.0",
+   "title": "Twin primes",
+   "competency": "MATH.number.primes",
+   "skill": "MATH.number.primes",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 152,
+    "2": 148,
+    "3": 0
+   },
+   "examples": [
+    "gen:agtwin:1,6,7,0",
+    "gen:agtwin:2,7,6,3",
+    "gen:agtwin:5,7,2,3",
+    "gen:agtwin:6,8,1,3"
+   ],
+   "explanations": [
+    "odd-not-prime (conceptual): Both numbers are odd and differ by 2, but one of them is not prime. Check each number: does anything other than 1 and itself divide it?",
+    "gap-not-two (conceptual): Both numbers are prime, but they differ by 4, not 2. Twin primes are exactly 2 apart."
+   ],
+   "teach": {
+    "idea": "Twin primes are pairs of prime numbers that are 2 apart, such as 11 and 13. Both numbers must be prime, and the gap must be exactly 2.",
+    "method": "For each pair, first check the gap is 2. Then test each number: try dividing by 2, 3, 5 and 7. If neither number divides, the pair are twin primes.",
+    "alternatives": [
+     {
+      "id": "number_grid",
+      "title": "Find them on a number grid",
+      "kind": "visual",
+      "text": [
+       "Circle the prime numbers on a 1 to 100 grid.",
+       "Look for two circled numbers with exactly one number between them: those are twin primes."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "5dd13d1e",
+   "validation": {
+    "family": "agtwin",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agpgrid",
+   "version": "1.0.0",
+   "title": "A percentage read from a shaded hundred grid",
+   "competency": "MATH.number.percent-intro",
+   "skill": "MATH.number.percent-intro",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     99
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "poolSize": 198,
+   "excluded": [],
+   "difficulty": {
+    "1": 9,
+    "2": 90,
+    "3": 99
+   },
+   "examples": [
+    "gen:agpgrid:40,0",
+    "gen:agpgrid:70,0:mc",
+    "gen:agpgrid:34,0",
+    "gen:agpgrid:67,0:mc",
+    "gen:agpgrid:34,1",
+    "gen:agpgrid:67,1:mc"
+   ],
+   "explanations": [
+    "other-part (conceptual): That is the part that IS shaded. The question asks for the part that is not shaded: 100 take away the shaded squares.",
+    "rows-only (procedural): Only the full rows were counted. Count the squares in the part-filled row too: each square is 1%."
+   ],
+   "teach": {
+    "idea": "A hundred grid has 100 equal squares, so each square is one hundredth, or 1%, of the whole grid.",
+    "method": "Count the shaded squares: count the full rows of 10 first, then the squares in the part-filled row. That number is the percentage. The part not shaded is 100 take away that.",
+    "alternatives": [
+     {
+      "id": "fraction_first",
+      "title": "Write the fraction first",
+      "kind": "procedural",
+      "text": [
+       "Write the shaded part as a fraction of 100: for 37 squares, 37/100.",
+       "Per cent means out of a hundred, so 37/100 is 37%."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "70fa79ec",
+   "validation": {
+    "family": "agpgrid",
+    "deterministic": {
+     "checked": 198,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aapat2",
+   "version": "1.0.0",
+   "title": "A pattern that changes in two ways at once",
+   "competency": "MATH.algebra.repeating-patterns",
+   "skill": "MATH.algebra.repeating-patterns",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     7,
+     10
+    ]
+   ],
+   "poolSize": 128,
+   "excluded": [],
+   "difficulty": {
+    "1": 0,
+    "2": 64,
+    "3": 64
+   },
+   "examples": [
+    "gen:aapat2:2,3,2,2,8",
+    "gen:aapat2:3,2,1,1,7",
+    "gen:aapat2:2,3,2,2,10",
+    "gen:aapat2:3,2,1,1,9"
+   ],
+   "explanations": [
+    "colour-only (conceptual): The colour is right but the shape is not. Follow the shapes on their own: they repeat in their own group, which is a different length from the colours'.",
+    "shape-only (conceptual): The shape is right but the colour is not. Follow the colours on their own: they repeat in their own group, which is a different length from the shapes'."
+   ],
+   "teach": {
+    "idea": "A pattern can change in two ways at once: the shapes can repeat in one group while the colours repeat in another group of a different length.",
+    "method": "Look at the shapes on their own and find how often they repeat. Then look at the colours on their own. Continue each one separately, then put the next shape and the next colour together.",
+    "alternatives": [
+     {
+      "id": "two_rows",
+      "title": "Split it into two rows",
+      "kind": "visual",
+      "text": [
+       "Write the shapes in one row and the colours in another row underneath.",
+       "Each row is now a simple repeating pattern. Continue both rows by one, and read the new item from top to bottom."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "11b99a15",
+   "validation": {
+    "family": "aapat2",
+    "deterministic": {
+     "checked": 128,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 20,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }

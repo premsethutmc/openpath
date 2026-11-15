@@ -12915,6 +12915,31 @@
       "81 + 125 = 206 pieces of size 1/30",
       "In simplest form: 6 13/15"
      ]
+    },
+    {
+     "title": "Adding and subtracting fractions in everyday stories",
+     "text": [
+      "Decide from the story whether the amounts are put together (add) or one is taken from the other (subtract). Fractions can be added or subtracted only when they count the same size of piece.",
+      "Write both fractions with a common denominator, then add or subtract the tops. Write the answer in its simplest form."
+     ],
+     "math": [
+      "Priya walks 2/5 km to the market and then 5/6 km to the temple. How many kilometres does Priya walk in all?",
+      "The story puts two amounts together, so add",
+      "A common denominator of 5 and 6: 30",
+      "Write both with that denominator: 12 and 25 of those pieces",
+      "12 + 25 = 37 pieces of 30: 37/30"
+     ],
+     "widget": {
+      "type": "strips",
+      "top": 5,
+      "shaded": 2,
+      "bottom": 6,
+      "bottomShaded": 5,
+      "labels": [
+       "2/5",
+       "5/6"
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -13003,7 +13028,8 @@
     "gen:faddu:2,3,3,6",
     "gen:faddu:8,9,4,10:mc",
     "gen:faddu:1,2,2,6",
-    "gen:avfas:1,5,8,2,2,7,0"
+    "gen:avfas:1,5,8,2,2,7,0",
+    "gen:aefword:2,3,5,8,1,1"
    ],
    "transfer": [
     "gen:faddu:1,6,7,9:mc",
@@ -13025,6 +13051,10 @@
     },
     {
      "family": "avfas",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aefword",
      "version": "1.0.0"
     }
    ],
@@ -15966,6 +15996,52 @@
        ]
       ]
      }
+    },
+    {
+     "title": "A pattern that changes in two ways at once",
+     "text": [
+      "A pattern can change in two ways at once: the shapes can repeat in one group while the colours repeat in another group of a different length.",
+      "Look at the shapes on their own and find how often they repeat. Then look at the colours on their own. Continue each one separately, then put the next shape and the next colour together."
+     ],
+     "math": [
+      "In this pattern both the shape and the colour change, each in its own repeat: red circle, blue square, red triangle, blue circle, red square, blue triangle, red circle, blue square, … What comes next?",
+      "The shape repeats every 3",
+      "The colour repeats every 2",
+      "So the next item is a red triangle",
+      "That is option B, so the answer is B"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Item",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5",
+       "6"
+      ],
+      "rows": [
+       [
+        "Shape",
+        "circle",
+        "square",
+        "circle",
+        "square",
+        "circle",
+        "square"
+       ],
+       [
+        "Colour",
+        "red",
+        "blue",
+        "green",
+        "red",
+        "blue",
+        "green"
+       ]
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -16130,7 +16206,8 @@
     "gen:aapatn:0,6,1,0:mc",
     "gen:aapatn:2,5,7,0",
     "gen:aapatu:1,11,1",
-    "gen:aaweave:2,1,40,0"
+    "gen:aaweave:2,1,40,0",
+    "gen:aapat2:3,2,2,1,9"
    ],
    "transfer": [
     "gen:aapatn:5,2,8,0:w",
@@ -16157,6 +16234,10 @@
     },
     {
      "family": "aaweave",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aapat2",
      "version": "1.0.0"
     }
    ],
@@ -31494,6 +31575,61 @@
      ],
      "role": "worked-example",
      "instance": "gen:aedfr:1,28"
+    },
+    {
+     "title": "Halves, quarters, fifths and tenths as decimals, with lengths and money",
+     "text": [
+      "A decimal is a fraction with a denominator of 10, 100 or 1000. A half, a quarter, a fifth and a tenth can each be written as tenths or hundredths, and so as a decimal.",
+      "Make the denominator 10 or 100 by multiplying top and bottom by the same number. Then write the tenths or hundredths after the point, and put any whole number in front."
+     ],
+     "math": [
+      "Arjun needs 4 7/10 metres of cloth for a bag. Write this length in metres as a decimal.",
+      "7/10 = 0.7",
+      "Put the whole 4 in front: 4 + 0.7 = 4.7"
+     ],
+     "widget": {
+      "type": "grid",
+      "rows": 10,
+      "cols": 10,
+      "shaded": 70
+     },
+     "role": "worked-example",
+     "instance": "gen:aedfrl:4,9,0"
+    },
+    {
+     "title": "Like, unlike and equivalent decimals",
+     "text": [
+      "Like decimals have the same number of decimal places (2.35 and 4.71); unlike decimals do not (2.3 and 4.71). Adding zeros at the end of a decimal does not change its value, so 2.3 and 2.30 are equivalent.",
+      "To compare places, count the digits after the point in each number. To make unlike decimals like, add zeros at the end until they have the same number of places."
+     ],
+     "math": [
+      "Like decimals have the same number of decimal places. Which pair are like decimals?",
+      "3.74 and 4.47: both numbers have the same number of decimal places",
+      "That is option B, so the answer is B"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number",
+       "Digits after the point"
+      ],
+      "rows": [
+       [
+        "2.3",
+        1
+       ],
+       [
+        "2.30",
+        2
+       ],
+       [
+        "4.71",
+        2
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aedlike:0,1143"
     }
    ],
    "diagnostics": [
@@ -31589,7 +31725,9 @@
     "gen:aedecc:3,6,1,5",
     "gen:aedpv:0,114",
     "gen:aedord:43",
-    "gen:aedfr:1,29"
+    "gen:aedfr:1,29",
+    "gen:aedfrl:0,10,3",
+    "gen:aedlike:0,3228"
    ],
    "transfer": [
     "gen:aedec:1,4,1:w",
@@ -31624,6 +31762,14 @@
     },
     {
      "family": "aedfr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aedfrl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aedlike",
      "version": "1.0.0"
     }
    ],
@@ -36829,6 +36975,25 @@
      },
      "role": "worked-example",
      "instance": "gen:agpctd:43"
+    },
+    {
+     "title": "A percentage read from a shaded hundred grid",
+     "text": [
+      "A hundred grid has 100 equal squares, so each square is one hundredth, or 1%, of the whole grid.",
+      "Count the shaded squares: count the full rows of 10 first, then the squares in the part-filled row. That number is the percentage. The part not shaded is 100 take away that."
+     ],
+     "math": [
+      "The grid in the picture has 100 equal squares. What percentage of the grid is shaded?",
+      "10 of the 100 squares are shaded, so 10% is shaded"
+     ],
+     "widget": {
+      "type": "grid",
+      "rows": 10,
+      "cols": 10,
+      "shaded": 10
+     },
+     "role": "worked-example",
+     "instance": "gen:agpgrid:10,0"
     }
    ],
    "diagnostics": [
@@ -36922,7 +37087,8 @@
     "gen:agpct:1,27",
     "gen:agpct:1,26:mc",
     "gen:agpct:1,25",
-    "gen:agpctd:40"
+    "gen:agpctd:40",
+    "gen:agpgrid:10,1"
    ],
    "transfer": [
     "gen:agpct:1,24:w",
@@ -36944,6 +37110,10 @@
     },
     {
      "family": "agpctd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agpgrid",
      "version": "1.0.0"
     }
    ],
@@ -36993,6 +37163,43 @@
       "√541 is a little more than 23 (23² = 529)",
       "The largest prime not more than 23 is 23"
      ]
+    },
+    {
+     "title": "Twin primes",
+     "text": [
+      "Twin primes are pairs of prime numbers that are 2 apart, such as 11 and 13. Both numbers must be prime, and the gap must be exactly 2.",
+      "For each pair, first check the gap is 2. Then test each number: try dividing by 2, 3, 5 and 7. If neither number divides, the pair are twin primes."
+     ],
+     "math": [
+      "Twin primes are two prime numbers that differ by 2. Which pair are twin primes?",
+      "59 and 61 are both prime, and 61 − 59 = 2",
+      "That is option D, so the answer is D"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Pair",
+       "Gap",
+       "Both prime?"
+      ],
+      "rows": [
+       [
+        "11, 13",
+        2,
+        "yes"
+       ],
+       [
+        "23, 25",
+        2,
+        "no: 25 = 5 × 5"
+       ],
+       [
+        "7, 11",
+        4,
+        "yes, but 4 apart"
+       ]
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -37079,7 +37286,8 @@
     "gen:agprime:47,17",
     "gen:agprime:11,17",
     "gen:agprime:34,17",
-    "gen:agptest:1,127"
+    "gen:agptest:1,127",
+    "gen:agtwin:7,7,2,0"
    ],
    "transfer": [
     "gen:agprime:11,16:w",
@@ -37101,6 +37309,10 @@
     },
     {
      "family": "agptest",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agtwin",
      "version": "1.0.0"
     }
    ],

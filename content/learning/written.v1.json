@@ -13492,8 +13492,7 @@
    "review": "provisional",
    "serves": [
     "cbse-g01-c05-o03",
-    "icse-g04-c02-o03",
-    "icse-g05-c02-o06"
+    "icse-g04-c02-o03"
    ]
   },
   {
@@ -15725,6 +15724,43 @@
    "canvas": {
     "grid": true
    }
+  },
+  {
+   "id": "wr:story:fit-sentence",
+   "competency": "MATH.reasoning.operation-choice",
+   "kind": "explanation",
+   "grade": 5,
+   "prompt": "Write an everyday word problem for each number sentence, so that the number sentence is exactly how you would solve it. Then give the answer in words. (1) 245 − 78 = ? (2) 36 × 12 = ? (3) 450 ÷ 15 = ?",
+   "answer": "text",
+   "rubric": [
+    {
+     "id": "subtract-story",
+     "criterion": "Problem (1) is a take-away, comparison or 'how many are left' situation that uses 245 and 78 and is solved by 245 − 78",
+     "points": 1
+    },
+    {
+     "id": "multiply-story",
+     "criterion": "Problem (2) is an equal-groups, rate or price situation (for example 36 packets of 12) solved by 36 × 12",
+     "points": 1
+    },
+    {
+     "id": "divide-story",
+     "criterion": "Problem (3) is a sharing or grouping situation (for example 450 sweets shared equally by 15 children) solved by 450 ÷ 15",
+     "points": 1
+    },
+    {
+     "id": "answers",
+     "criterion": "Gives the right answers (167, 432, 30) with the unit or thing named in each story",
+     "points": 1
+    }
+   ],
+   "guidance": "Any everyday setting counts (money, sweets, books, buses). A story that needs a different operation from the one given earns no point for that part, even if its own answer is right. Spelling and grammar are not marked.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "serves": [
+    "icse-g05-c02-o06"
+   ]
   }
  ]
 }
