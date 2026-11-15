@@ -1801,12 +1801,17 @@
       {
        "id": "MATH.measurement.volume-cubes",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.measurement.capacity",
-      "MATH.measurement.volume-cubes"
+      "MATH.measurement.volume-cubes",
+      "MATH.reasoning.estimate-check"
      ],
      "coverage": "full",
      "source": "Theme 7, learning outcome 2 (p. 112 onwards)"

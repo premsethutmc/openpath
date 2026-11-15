@@ -151,11 +151,21 @@
       {
        "id": "MATH.number.subtraction-regroup",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.addition",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.subtraction",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.addition",
       "MATH.number.addition-regroup",
+      "MATH.number.subtraction",
       "MATH.number.subtraction-regroup"
      ],
      "coverage": "full",
@@ -181,12 +191,17 @@
       {
        "id": "MATH.number.addition",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.number.zero",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.addition",
-      "MATH.number.mental-arithmetic"
+      "MATH.number.mental-arithmetic",
+      "MATH.number.zero"
      ],
      "coverage": "full",
      "source": "Unit 2: Theme 2: Number Operations"
@@ -265,10 +280,15 @@
       {
        "id": "MATH.number.sharing",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.division-remainders",
       "MATH.number.sharing"
      ],
      "coverage": "full",

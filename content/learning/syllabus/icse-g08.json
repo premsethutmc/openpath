@@ -572,10 +572,15 @@
       {
        "id": "MATH.geometry.constructions-bisectors",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.basic-constructions",
       "MATH.geometry.construction-quadrilaterals",
       "MATH.geometry.constructions-bisectors"
      ],

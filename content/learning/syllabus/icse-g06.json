@@ -87,10 +87,15 @@
       {
        "id": "MATH.number.large-numbers",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.compare-numbers",
       "MATH.number.large-numbers"
      ],
      "coverage": "full",
@@ -172,12 +177,17 @@
       {
        "id": "MATH.algebra.figurate-numbers",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.number-grid-puzzles",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.algebra.figurate-numbers",
-      "MATH.number.operation-properties"
+      "MATH.number.operation-properties",
+      "MATH.reasoning.number-grid-puzzles"
      ],
      "coverage": "full",
      "source": "Unit 1: Number System"
@@ -456,12 +466,17 @@
       {
        "id": "MATH.number.mixed-fractions",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.fraction-add",
       "MATH.number.fraction-multiply",
+      "MATH.number.fraction-product",
       "MATH.number.mixed-fractions"
      ],
      "coverage": "full",
@@ -482,11 +497,16 @@
       {
        "id": "MATH.number.decimal-operations",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.decimal-operations"
+      "MATH.number.decimal-operations",
+      "MATH.number.decimal-tenths"
      ],
      "coverage": "full",
      "source": "Unit 2: Ratio and Proportion"
@@ -596,10 +616,15 @@
       {
        "id": "MATH.algebra.expressions-intro",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.algebra.algebra-simplify",
       "MATH.algebra.expressions-intro",
       "MATH.algebra.variables"
      ],
@@ -981,10 +1006,15 @@
       {
        "id": "MATH.measurement.rectangle-area",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.measurement.perimeter-intro",
       "MATH.measurement.rectangle-area",
       "MATH.measurement.rectangle-perimeter"
      ],
@@ -1031,11 +1061,16 @@
       {
        "id": "MATH.statistics.scaled-bars",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.statistics.data-frequency",
+      "MATH.statistics.pictographs",
       "MATH.statistics.scaled-bars"
      ],
      "coverage": "full",

@@ -35,7 +35,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g10-c01-o04"
+    "cbse-g10-c01-o04",
+    "icse-g09-c01-o03"
    ]
   },
   {
@@ -102,7 +103,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g10-c01-o05"
+    "cbse-g10-c01-o05",
+    "icse-g09-c01-o03"
    ]
   },
   {
@@ -166,7 +168,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "icse-g08-c04-o02"
+   ]
   },
   {
    "id": "wr:con:basic60",
@@ -195,7 +200,10 @@
    "source": "Original, written for OpenPath",
    "licence": "CC0",
    "review": "provisional",
-   "answer": "drawing"
+   "answer": "drawing",
+   "serves": [
+    "icse-g06-c04-o02"
+   ]
   },
   {
    "id": "wr:con:scaled",
@@ -260,7 +268,9 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "tn-g08-c05-o05"
+    "tn-g08-c05-o05",
+    "icse-g08-c04-o02",
+    "icse-g09-c04-o05"
    ]
   },
   {
@@ -328,7 +338,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04"
+    "tn-g11-c04-o04",
+    "icse-g11-c02-o01"
    ]
   },
   {
@@ -364,7 +375,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04"
+    "tn-g11-c04-o04",
+    "icse-g11-c02-o01"
    ]
   },
   {
@@ -427,7 +439,8 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "tn-g06-t2-c04-o04"
+    "tn-g06-t2-c04-o04",
+    "icse-g07-c04-o01"
    ]
   },
   {
@@ -538,7 +551,8 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "cbse-g07-t1-c07-o01"
+    "cbse-g07-t1-c07-o01",
+    "icse-g07-c04-o02"
    ]
   },
   {
@@ -575,7 +589,8 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "cbse-g07-t1-c07-o02"
+    "cbse-g07-t1-c07-o02",
+    "icse-g07-c04-o02"
    ]
   },
   {
@@ -818,7 +833,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c09-o04"
+    "cbse-g09-c09-o04",
+    "icse-g09-c04-o01"
    ]
   },
   {
@@ -1152,7 +1168,8 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "tn-g08-c05-o05"
+    "tn-g08-c05-o05",
+    "icse-g09-c04-o05"
    ]
   },
   {
@@ -1223,7 +1240,9 @@
    "review": "provisional",
    "answer": "drawing",
    "serves": [
-    "tn-g08-c05-o05"
+    "tn-g08-c05-o05",
+    "icse-g08-c04-o02",
+    "icse-g09-c04-o05"
    ]
   },
   {
@@ -1434,7 +1453,10 @@
    "guidance": "The (k + 1)-th odd number is 2(k + 1) − 1 = 2k + 1; check the learner adds this term and not 2k − 1 again.",
    "source": "Original, written for OpenPath",
    "licence": "CC0",
-   "review": "provisional"
+   "review": "provisional",
+   "serves": [
+    "icse-g11-c02-o01"
+   ]
   },
   {
    "id": "wr:ind:ineq",
@@ -1469,7 +1491,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g11-c04-o04"
+    "tn-g11-c04-o04",
+    "icse-g11-c02-o01"
    ]
   },
   {
@@ -1937,7 +1960,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g02-c07-o04",
-    "tn-g04-t3-c03-o03"
+    "tn-g04-t3-c03-o03",
+    "icse-g05-c07-o02"
    ]
   },
   {
@@ -1974,7 +1998,10 @@
    "serves": [
     "cbse-g01-c09-o02",
     "cbse-g02-c04-o03",
-    "tn-g04-t1-c03-o01"
+    "tn-g04-t1-c03-o01",
+    "icse-g01-c06-o01",
+    "icse-g02-c06-o01",
+    "icse-g05-c10-o03"
    ]
   },
   {
@@ -2123,7 +2150,9 @@
    "serves": [
     "cbse-g04-c14-o01",
     "cbse-g05-c15-o01",
-    "tn-g04-t1-c06-o02"
+    "tn-g04-t1-c06-o02",
+    "icse-g03-c05-o01",
+    "icse-g05-c09-o01"
    ]
   },
   {
@@ -2229,7 +2258,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g02-c05-o02"
+    "cbse-g02-c05-o02",
+    "icse-g02-c03-o02"
    ]
   },
   {
@@ -2387,7 +2417,8 @@
    "serves": [
     "cbse-g03-c14-o03",
     "cbse-g04-c11-o04",
-    "tn-g04-t3-c01-o01"
+    "tn-g04-t3-c01-o01",
+    "icse-g03-c03-o02"
    ]
   },
   {
@@ -2465,7 +2496,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g04-c01-o03"
+    "cbse-g04-c01-o03",
+    "icse-g05-c06-o01"
    ]
   },
   {
@@ -2660,7 +2692,8 @@
    "serves": [
     "cbse-g04-c02-o04",
     "cbse-g05-c14-o01",
-    "tn-g04-t2-c07-o01"
+    "tn-g04-t2-c07-o01",
+    "icse-g03-c03-o03"
    ]
   },
   {
@@ -2807,7 +2840,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g04-c05-o01"
+    "cbse-g04-c05-o01",
+    "icse-g04-c01-o03"
    ]
   },
   {
@@ -3093,7 +3127,8 @@
    "serves": [
     "tn-g04-t2-c01-o03",
     "cbse-g06-c09-o01",
-    "tn-g06-t3-c04-o01"
+    "tn-g06-t3-c04-o01",
+    "icse-g06-c04-o06"
    ]
   },
   {
@@ -3159,7 +3194,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g04-c14-o04",
-    "tn-g04-t1-c06-o02"
+    "tn-g04-t1-c06-o02",
+    "icse-g04-c06-o01"
    ]
   },
   {
@@ -3402,7 +3438,8 @@
    "review": "provisional",
    "serves": [
     "tn-g04-t1-c03-o01",
-    "tn-g04-t3-c01-o01"
+    "tn-g04-t3-c01-o01",
+    "icse-g03-c06-o01"
    ]
   },
   {
@@ -4233,7 +4270,9 @@
    "serves": [
     "cbse-g06-c04-o04",
     "tn-g06-t1-c05-o03",
-    "tn-g05-t1-c06-o04"
+    "tn-g05-t1-c06-o04",
+    "icse-g05-c09-o01",
+    "icse-g06-c06-o01"
    ]
   },
   {
@@ -4448,7 +4487,8 @@
    "serves": [
     "cbse-g06-c02-o01",
     "tn-g06-t1-c04-o01",
-    "cbse-g07-t1-c05-o02"
+    "cbse-g07-t1-c05-o02",
+    "icse-g04-c04-o05"
    ]
   },
   {
@@ -5327,7 +5367,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g07-t2-c06-o02",
-    "cbse-g07-t2-c06-o03"
+    "cbse-g07-t2-c06-o03",
+    "icse-g04-c04-o01"
    ]
   },
   {
@@ -5598,7 +5639,9 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g05-t1-c01-o04"
+    "tn-g05-t1-c01-o04",
+    "icse-g04-c04-o04",
+    "icse-g05-c06-o06"
    ]
   },
   {
@@ -6045,7 +6088,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g10-c04-o05"
+    "tn-g10-c04-o05",
+    "icse-g09-c04-o03"
    ]
   },
   {
@@ -6201,7 +6245,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g08-t2-c07-o01",
-    "cbse-g09-c06-o03"
+    "cbse-g09-c06-o03",
+    "icse-g09-c04-o06"
    ]
   },
   {
@@ -6358,7 +6403,8 @@
    "review": "provisional",
    "serves": [
     "tn-g08-c03-o06",
-    "cbse-g09-c13-o02"
+    "cbse-g09-c13-o02",
+    "icse-g09-c08-o02"
    ]
   },
   {
@@ -6540,7 +6586,8 @@
    "serves": [
     "cbse-g09-c05-o03",
     "cbse-g09-c05-o04",
-    "tn-g09-c04-o03"
+    "tn-g09-c04-o03",
+    "icse-g09-c04-o07"
    ]
   },
   {
@@ -6983,7 +7030,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g09-c09-o01",
-    "cbse-g09-c09-o02"
+    "cbse-g09-c09-o02",
+    "icse-g11-c08-o02"
    ]
   },
   {
@@ -7225,7 +7273,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g09-c12-o02",
-    "cbse-g09-c12-o03"
+    "cbse-g09-c12-o03",
+    "icse-g09-c04-o04"
    ]
   },
   {
@@ -7325,7 +7374,8 @@
    "serves": [
     "cbse-g09-c13-o04",
     "cbse-g10-c03-o02",
-    "tn-g09-c03-o07"
+    "tn-g09-c03-o07",
+    "icse-g09-c08-o02"
    ]
   },
   {
@@ -7469,7 +7519,8 @@
     "cbse-g10-c06-o03",
     "tn-g10-c04-o01",
     "cbse-g10-c06-o02",
-    "tn-g10-c04-o03"
+    "tn-g10-c04-o03",
+    "icse-g10-c03-o01"
    ]
   },
   {
@@ -7550,7 +7601,8 @@
    "serves": [
     "cbse-g10-c08-o04",
     "cbse-g10-c08-o05",
-    "tn-g10-c06-o02"
+    "tn-g10-c06-o02",
+    "icse-g10-c05-o01"
    ]
   },
   {
@@ -7642,7 +7694,8 @@
     "cbse-g10-c10-o02",
     "cbse-g10-c10-o03",
     "cbse-g10-c10-o04",
-    "tn-g10-c04-o06"
+    "tn-g10-c04-o06",
+    "icse-g10-c03-o04"
    ]
   },
   {
@@ -7684,7 +7737,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g10-c04-o07"
+    "tn-g10-c04-o07",
+    "icse-g10-c03-o05"
    ]
   },
   {
@@ -8255,7 +8309,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g08-c05-o04"
+    "tn-g08-c05-o04",
+    "icse-g10-c03-o05"
    ]
   },
   {
@@ -8333,7 +8388,9 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g08-c06-o03"
+    "tn-g08-c06-o03",
+    "icse-g09-c05-o02",
+    "icse-g10-c06-o02"
    ]
   },
   {
@@ -8691,7 +8748,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g12-c01-o01",
-    "cbse-g12-c01-o02"
+    "cbse-g12-c01-o02",
+    "icse-g12-c01-o01"
    ]
   },
   {
@@ -10369,7 +10427,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g12-c12-o01",
-    "cbse-g12-c12-o02"
+    "cbse-g12-c12-o02",
+    "icse-g12-c10-o01"
    ]
   },
   {
@@ -11311,7 +11370,9 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g05-c07-o04"
+    "cbse-g05-c07-o04",
+    "icse-g03-c03-o01",
+    "icse-g04-c04-o01"
    ]
   },
   {
@@ -11472,7 +11533,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g06-c08-o04"
+    "cbse-g06-c08-o04",
+    "icse-g10-c03-o02"
    ]
   },
   {
@@ -11686,7 +11748,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g07-t1-c05-o04"
+    "tn-g07-t1-c05-o04",
+    "icse-g08-c04-o02"
    ]
   },
   {
@@ -11985,7 +12048,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c03-o04"
+    "cbse-g09-c03-o04",
+    "icse-g09-c01-o03"
    ]
   },
   {
@@ -12154,7 +12218,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c09-o04"
+    "cbse-g09-c09-o04",
+    "icse-g09-c04-o01"
    ]
   },
   {
@@ -13114,7 +13179,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g03-c01-o02"
+    "cbse-g03-c01-o02",
+    "icse-g01-c01-o02"
    ]
   },
   {
@@ -13431,7 +13497,9 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g01-c05-o03"
+    "cbse-g01-c05-o03",
+    "icse-g04-c02-o03",
+    "icse-g05-c02-o06"
    ]
   },
   {
@@ -13688,7 +13756,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g06-c02-o03",
-    "tn-g06-t1-c04-o02"
+    "tn-g06-t1-c04-o02",
+    "icse-g05-c06-o04"
    ]
   },
   {
@@ -13765,7 +13834,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "tn-g10-c04-o05"
+    "tn-g10-c04-o05",
+    "icse-g09-c04-o03"
    ]
   },
   {
@@ -14060,7 +14130,8 @@
    "serves": [
     "cbse-g06-c04-o01",
     "tn-g06-t1-c05-o01",
-    "tn-g07-t3-c05-o01"
+    "tn-g07-t3-c05-o01",
+    "icse-g06-c06-o01"
    ]
   },
   {
@@ -14178,7 +14249,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c12-o03"
+    "cbse-g09-c12-o03",
+    "icse-g09-c04-o04"
    ]
   },
   {
@@ -14214,7 +14286,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c12-o04"
+    "cbse-g09-c12-o04",
+    "icse-g09-c04-o02"
    ]
   },
   {
@@ -14256,7 +14329,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g10-c06-o03",
-    "tn-g10-c04-o03"
+    "tn-g10-c04-o03",
+    "icse-g10-c03-o01"
    ]
   },
   {
@@ -14410,7 +14484,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g09-c05-o06"
+    "cbse-g09-c05-o06",
+    "icse-g10-c03-o03"
    ]
   },
   {
@@ -14450,7 +14525,8 @@
     "cbse-g09-c13-o05",
     "cbse-g10-c03-o04",
     "cbse-g10-c03-o05",
-    "tn-g09-c03-o07"
+    "tn-g09-c03-o07",
+    "icse-g09-c03-o03"
    ]
   },
   {
@@ -14733,7 +14809,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g11-c03-o05",
-    "tn-g11-c03-o03"
+    "tn-g11-c03-o03",
+    "icse-g11-c01-o04"
    ]
   },
   {
@@ -14993,7 +15070,8 @@
    "review": "provisional",
    "serves": [
     "cbse-g11-c02-o04",
-    "tn-g11-c01-o07"
+    "tn-g11-c01-o07",
+    "icse-g11-c01-o03"
    ]
   },
   {
@@ -15043,7 +15121,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g11-c02-o04"
+    "cbse-g11-c02-o04",
+    "icse-g11-c01-o03"
    ]
   },
   {
@@ -15300,7 +15379,8 @@
    "licence": "CC0",
    "review": "provisional",
    "serves": [
-    "cbse-g12-c02-o01"
+    "cbse-g12-c02-o01",
+    "icse-g12-c01-o03"
    ]
   },
   {

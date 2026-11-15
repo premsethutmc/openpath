@@ -370,10 +370,15 @@
       {
        "id": "MATH.geometry.shape-tiling",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.shape-properties",
       "MATH.geometry.shape-tiling",
       "MATH.geometry.tessellations"
      ],

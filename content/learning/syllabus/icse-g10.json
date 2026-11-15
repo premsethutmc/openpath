@@ -626,10 +626,15 @@
       {
        "id": "MATH.geometry.constructions-bisectors",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.geometry.circle-tangents",
       "MATH.geometry.constructions-bisectors",
       "MATH.geometry.triangle-concurrency"
      ],

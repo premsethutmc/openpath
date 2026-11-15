@@ -1,12 +1,13 @@
 {
  "schema": "outcome-assessment@1",
- "version": "2.1.0",
+ "version": "2.2.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it.",
- "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it. oam@4 (icse-oam@1): the 308 CISCE outcomes of Classes 1–12 (content/learning/syllabus/icse-g*.json) judged by an AI assessor working to the same brief, from sampled problems of every family of the mapped competencies and the written tasks; where the assessing content sat under a skill the outcome was not yet mapped to, that skill was added to the outcome's mapping as a partial fit (23 additions). 260 full, 37 partial, 11 none (GST, recurring deposits, shares and dividends, ogives and quartiles, deciles and percentiles, correlation, index numbers, moving averages and regression). The assessor did not write the content. Provisional: not educator-reviewed.",
+ "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage; oam@4: branch feat/icse-oam",
  "counts": {
-  "full": 1133,
-  "partial": 64
+  "full": 1393,
+  "none": 11,
+  "partial": 101
  },
  "outcomes": [
   {
@@ -15670,6 +15671,4197 @@
    "authored": false,
    "missing": "",
    "grade": "fit"
+  },
+  {
+   "outcome": "icse-g01-c01-o01",
+   "verdict": "full",
+   "families": [
+    "cnt",
+    "aacmp",
+    "aagrp",
+    "aaordn"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c01-o02",
+   "verdict": "full",
+   "families": [
+    "aatens",
+    "aaword",
+    "aaname"
+   ],
+   "written": [
+    "wr:pv-number-words"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c01-o03",
+   "verdict": "full",
+   "families": [
+    "aazero"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c02-o01",
+   "verdict": "full",
+   "families": [
+    "aaadd",
+    "aasub",
+    "aasenadd",
+    "aasensub"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c03-o01",
+   "verdict": "full",
+   "families": [
+    "aashelf",
+    "aawhere",
+    "aasolid",
+    "aaflat"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c04-o01",
+   "verdict": "full",
+   "families": [
+    "aalong",
+    "aaheavy",
+    "aaclip",
+    "aaspan"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c04-o02",
+   "verdict": "full",
+   "families": [
+    "aaseq",
+    "aaweek"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c05-o01",
+   "verdict": "full",
+   "families": [
+    "absort",
+    "abpic"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g01-c06-o01",
+   "verdict": "full",
+   "families": [
+    "aapatn",
+    "aapatu"
+   ],
+   "written": [
+    "wr:rep-own"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c01-o01",
+   "verdict": "partial",
+   "families": [
+    "abhto",
+    "abreg"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Number names of three-digit numbers are not asked: number-name questions stop at 99 (aaname) and start again at four digits (adname, under thousands).",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c01-o02",
+   "verdict": "partial",
+   "families": [
+    "abhto",
+    "aaordx",
+    "aasign"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Place value and face value of a digit in a three-digit number are not asked (aadigit stops at two-digit numbers); comparing and ordering three-digit numbers is asked.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c02-o01",
+   "verdict": "full",
+   "families": [
+    "addr",
+    "acsub2",
+    "aastadd",
+    "aastsub"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c02-o02",
+   "verdict": "partial",
+   "families": [
+    "acaddten",
+    "aazero"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "The commutative property of addition is never asked; adding zero and mental addition and subtraction are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c02-o03",
+   "verdict": "full",
+   "families": [
+    "adest"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c02-o04",
+   "verdict": "full",
+   "families": [
+    "abrep",
+    "amf2510",
+    "amf34"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c02-o05",
+   "verdict": "full",
+   "families": [
+    "acshare",
+    "avrsub"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c03-o01",
+   "verdict": "full",
+   "families": [
+    "abside",
+    "abdiag"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c03-o02",
+   "verdict": "full",
+   "families": [
+    "abline"
+   ],
+   "written": [
+    "wr:lines-picture"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c04-o01",
+   "verdict": "full",
+   "families": [
+    "aaclip",
+    "aaheavy"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c04-o02",
+   "verdict": "full",
+   "families": [
+    "abcupord",
+    "abcup"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c05-o01",
+   "verdict": "partial",
+   "families": [
+    "abpic",
+    "acpict"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Everyday charts such as timetables and height charts are not read at this level; only picture records and pictographs are asked.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g02-c06-o01",
+   "verdict": "full",
+   "families": [
+    "aapatu",
+    "aapatn",
+    "abseq"
+   ],
+   "written": [
+    "wr:rep-own"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c01-o01",
+   "verdict": "full",
+   "families": [
+    "adexp",
+    "adname",
+    "aasign",
+    "aaordx"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c01-o02",
+   "verdict": "full",
+   "families": [
+    "aadigmax"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c02-o01",
+   "verdict": "full",
+   "families": [
+    "adcol3",
+    "aeadd3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c02-o02",
+   "verdict": "full",
+   "families": [
+    "mul",
+    "amf2510",
+    "amf34",
+    "amf69",
+    "avlat"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c02-o03",
+   "verdict": "full",
+   "families": [
+    "acshare",
+    "divr",
+    "avdfact"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c02-o04",
+   "verdict": "full",
+   "families": [
+    "acaddten",
+    "adest",
+    "adestchk",
+    "aeestp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c03-o01",
+   "verdict": "partial",
+   "families": [
+    "abcurve",
+    "abside"
+   ],
+   "written": [
+    "wr:shp:tangram"
+   ],
+   "authored": false,
+   "missing": "Drawing straight and curved lines and shapes on a dot grid is never asked; tangram shapes (wr:shp:tangram) and straight or curved sides are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c03-o02",
+   "verdict": "full",
+   "families": [
+    "actile"
+   ],
+   "written": [
+    "wr:tile-floor"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c03-o03",
+   "verdict": "partial",
+   "families": [
+    "abdir",
+    "abroute"
+   ],
+   "written": [
+    "wr:map-route"
+   ],
+   "authored": false,
+   "missing": "Line drawings of 3D objects are not read at this level; simple maps are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c04-o01",
+   "verdict": "full",
+   "families": [
+    "ablen",
+    "acmcm",
+    "abkg",
+    "abcup"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c04-o02",
+   "verdict": "full",
+   "families": [
+    "abclock",
+    "aet24",
+    "aacald",
+    "adday",
+    "adhmin"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c05-o01",
+   "verdict": "full",
+   "families": [
+    "adtally",
+    "acpict"
+   ],
+   "written": [
+    "wr:tab-tally"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g03-c06-o01",
+   "verdict": "full",
+   "families": [
+    "acgrow",
+    "abseq"
+   ],
+   "written": [
+    "wr:grow-own"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aeind",
+    "aenumf",
+    "aecmp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c01-o02",
+   "verdict": "full",
+   "families": [
+    "akromw",
+    "akromr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c01-o03",
+   "verdict": "full",
+   "families": [
+    "adshade",
+    "adfname",
+    "eqfrac",
+    "fadd"
+   ],
+   "written": [
+    "wr:frac-quarters"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c02-o01",
+   "verdict": "full",
+   "families": [
+    "adcolx",
+    "aecol4"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c02-o02",
+   "verdict": "full",
+   "families": [
+    "mmul",
+    "avlat",
+    "divr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c02-o03",
+   "verdict": "full",
+   "families": [
+    "acstory",
+    "acstory4",
+    "adestchk"
+   ],
+   "written": [
+    "wr:story9-own"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c03-o01",
+   "verdict": "full",
+   "families": [
+    "agfac",
+    "agcomf",
+    "agptest",
+    "agprime",
+    "akdivd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c03-o02",
+   "verdict": "full",
+   "families": [
+    "ajpf",
+    "aghcf3",
+    "aglcm"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c04-o01",
+   "verdict": "full",
+   "families": [
+    "actile",
+    "ahtile"
+   ],
+   "written": [
+    "wr:tes:tiling",
+    "wr:shp:tangram"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c04-o02",
+   "verdict": "full",
+   "families": [
+    "aecpart"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c04-o03",
+   "verdict": "full",
+   "families": [
+    "aesym",
+    "aedsym"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c04-o04",
+   "verdict": "full",
+   "families": [
+    "afnet",
+    "afview",
+    "aisolid"
+   ],
+   "written": [
+    "wr:net:cube-cylinder"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c04-o05",
+   "verdict": "full",
+   "families": [
+    "acparl",
+    "aclines"
+   ],
+   "written": [
+    "wr:line:rays-segments"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c05-o01",
+   "verdict": "full",
+   "families": [
+    "aeconv",
+    "aeconvu",
+    "aemix"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c05-o02",
+   "verdict": "full",
+   "families": [
+    "aearea",
+    "adperim"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c05-o03",
+   "verdict": "full",
+   "families": [
+    "aet24",
+    "aeel24",
+    "acelapsed"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c06-o01",
+   "verdict": "full",
+   "families": [
+    "adbar",
+    "acpict"
+   ],
+   "written": [
+    "wr:bar-birds"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g04-c07-o01",
+   "verdict": "full",
+   "families": [
+    "acgrow",
+    "aepat",
+    "aecons"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o01",
+   "verdict": "full",
+   "families": [
+    "ajcrore",
+    "aeind",
+    "aenumf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o02",
+   "verdict": "full",
+   "families": [
+    "ajmill",
+    "ajmilr",
+    "ajcrcmp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o03",
+   "verdict": "full",
+   "families": [
+    "aenumf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o04",
+   "verdict": "full",
+   "families": [
+    "aecmp",
+    "aaordx"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o05",
+   "verdict": "full",
+   "families": [
+    "aadigmax"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o06",
+   "verdict": "full",
+   "families": [
+    "aernd",
+    "aeround"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o07",
+   "verdict": "full",
+   "families": [
+    "adfname",
+    "adshade",
+    "adfbuild"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o08",
+   "verdict": "full",
+   "families": [
+    "adfcol"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o09",
+   "verdict": "full",
+   "families": [
+    "eqfrac",
+    "avfold"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o10",
+   "verdict": "partial",
+   "families": [
+    "aedfr",
+    "acp2r"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Halves, quarters and fifths as decimals are asked only rarely (a few aedfr items), and never with lengths; money in paise and rupees is asked.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o11",
+   "verdict": "full",
+   "families": [
+    "mul",
+    "avtab"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c01-o12",
+   "verdict": "full",
+   "families": [
+    "akromw",
+    "akromr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o01",
+   "verdict": "full",
+   "families": [
+    "adcolx",
+    "mmul"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o02",
+   "verdict": "full",
+   "families": [
+    "avdiv",
+    "ldiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o03",
+   "verdict": "full",
+   "families": [
+    "aeest",
+    "aeestp",
+    "adestchk"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o04",
+   "verdict": "full",
+   "families": [
+    "adcolx",
+    "aecol4",
+    "mmul",
+    "avpp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o05",
+   "verdict": "full",
+   "families": [
+    "aeshop",
+    "aetrip",
+    "acstory"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o06",
+   "verdict": "partial",
+   "families": [
+    "acstory"
+   ],
+   "written": [
+    "wr:story9-own"
+   ],
+   "authored": false,
+   "missing": "Making up a story for a GIVEN number statement is not asked; making up one's own number stories is (wr:story9-own).",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o07",
+   "verdict": "full",
+   "families": [
+    "agfac",
+    "agprime"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o08",
+   "verdict": "full",
+   "families": [
+    "agfac",
+    "ajpf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c02-o09",
+   "verdict": "full",
+   "families": [
+    "agptest",
+    "agprime"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o01",
+   "verdict": "full",
+   "families": [
+    "agclass",
+    "agimp",
+    "agmix"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o02",
+   "verdict": "full",
+   "families": [
+    "eqfrac",
+    "avlow"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o03",
+   "verdict": "full",
+   "families": [
+    "adford",
+    "adfcmp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o04",
+   "verdict": "full",
+   "families": [
+    "faddu",
+    "avfas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o05",
+   "verdict": "partial",
+   "families": [
+    "faddu",
+    "avfas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Fraction word problems are not asked: faddu and avfas are bare calculations.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o06",
+   "verdict": "full",
+   "families": [
+    "adfcol",
+    "fmulw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o07",
+   "verdict": "full",
+   "families": [
+    "fmulw",
+    "aifmul"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o08",
+   "verdict": "full",
+   "families": [
+    "aiwdiv",
+    "aifdiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o09",
+   "verdict": "full",
+   "families": [
+    "aedfr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o10",
+   "verdict": "full",
+   "families": [
+    "aedec"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o11",
+   "verdict": "full",
+   "families": [
+    "aedpv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o12",
+   "verdict": "full",
+   "families": [
+    "aedpv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o13",
+   "verdict": "partial",
+   "families": [
+    "aedecc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Equivalent, like and unlike decimals are never named or asked; comparing decimals is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o14",
+   "verdict": "full",
+   "families": [
+    "aedecc",
+    "aedord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o15",
+   "verdict": "full",
+   "families": [
+    "agdec"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o16",
+   "verdict": "full",
+   "families": [
+    "agrupee",
+    "agmeas"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o17",
+   "verdict": "full",
+   "families": [
+    "aidp10",
+    "aemult"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c03-o18",
+   "verdict": "full",
+   "families": [
+    "aidmul"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o01",
+   "verdict": "full",
+   "families": [
+    "agcomf",
+    "agjump"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o02",
+   "verdict": "full",
+   "families": [
+    "agfac"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o03",
+   "verdict": "partial",
+   "families": [
+    "agptest",
+    "agcop"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Twin primes are never asked; prime, composite and co-prime numbers are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o04",
+   "verdict": "full",
+   "families": [
+    "akdivd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o05",
+   "verdict": "full",
+   "families": [
+    "ajpf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o06",
+   "verdict": "full",
+   "families": [
+    "aghcf3",
+    "aghlw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o07",
+   "verdict": "full",
+   "families": [
+    "aglcm",
+    "aglcm3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c04-o08",
+   "verdict": "full",
+   "families": [
+    "aghlp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o01",
+   "verdict": "full",
+   "families": [
+    "aiint"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o02",
+   "verdict": "full",
+   "families": [
+    "acnlpos"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o03",
+   "verdict": "full",
+   "families": [
+    "ajintl"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o04",
+   "verdict": "full",
+   "families": [
+    "ajintl"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c05-o05",
+   "verdict": "full",
+   "families": [
+    "ajord"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o01",
+   "verdict": "full",
+   "families": [
+    "aeang",
+    "aertang"
+   ],
+   "written": [
+    "wr:ang-kinds"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o02",
+   "verdict": "full",
+   "families": [
+    "aertang"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o03",
+   "verdict": "full",
+   "families": [
+    "aeangk"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o04",
+   "verdict": "full",
+   "families": [
+    "afprot"
+   ],
+   "written": [
+    "wr:ang:protractor-draw-measure"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o05",
+   "verdict": "full",
+   "families": [
+    "afrot",
+    "aesym"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o06",
+   "verdict": "full",
+   "families": [
+    "afnet",
+    "afsolid"
+   ],
+   "written": [
+    "wr:net:cube-cylinder"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c06-o07",
+   "verdict": "full",
+   "families": [
+    "aesym3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o01",
+   "verdict": "full",
+   "families": [
+    "acmcm",
+    "adday",
+    "aeconv",
+    "acp2r"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o02",
+   "verdict": "full",
+   "families": [
+    "abcup"
+   ],
+   "written": [
+    "wr:est-capacity"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o03",
+   "verdict": "full",
+   "families": [
+    "aemix",
+    "acelapsed",
+    "acbill"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o04",
+   "verdict": "full",
+   "families": [
+    "aearea",
+    "adperim"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c07-o05",
+   "verdict": "full",
+   "families": [
+    "rect",
+    "rperim"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o01",
+   "verdict": "full",
+   "families": [
+    "agpct"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o02",
+   "verdict": "full",
+   "families": [
+    "agpct",
+    "agpctd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o03",
+   "verdict": "partial",
+   "families": [
+    "agpct"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Showing a percentage as a shaded hundred grid is never asked; percentages as fractions over 100 are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o04",
+   "verdict": "full",
+   "families": [
+    "agpct",
+    "agpfrac"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o05",
+   "verdict": "full",
+   "families": [
+    "agpctd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c08-o06",
+   "verdict": "full",
+   "families": [
+    "pct",
+    "avpctof"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o01",
+   "verdict": "full",
+   "families": [
+    "adtally",
+    "adbar",
+    "afbar"
+   ],
+   "written": [
+    "wr:bar:draw-scale",
+    "wr:tab-tally"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o02",
+   "verdict": "full",
+   "families": [
+    "afpie"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c09-o03",
+   "verdict": "full",
+   "families": [
+    "adline"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o01",
+   "verdict": "full",
+   "families": [
+    "aapatu",
+    "aapatn"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o02",
+   "verdict": "full",
+   "families": [
+    "acgrow",
+    "aepat"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o03",
+   "verdict": "partial",
+   "families": [
+    "aapatu"
+   ],
+   "written": [
+    "wr:rep-own"
+   ],
+   "authored": false,
+   "missing": "A pattern that changes in two ways at once (such as shape and colour) is never asked; one-attribute repeating patterns are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g05-c10-o04",
+   "verdict": "full",
+   "families": [
+    "affig"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aecmp",
+    "aadigmax"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o02",
+   "verdict": "full",
+   "families": [
+    "ajcrcmp",
+    "ajmill"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o03",
+   "verdict": "full",
+   "families": [
+    "aeest",
+    "aeestp",
+    "avpest"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o04",
+   "verdict": "full",
+   "families": [
+    "ajprop",
+    "affig",
+    "akmagic"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o05",
+   "verdict": "full",
+   "families": [
+    "ajintl",
+    "aiint"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o06",
+   "verdict": "full",
+   "families": [
+    "ajpf",
+    "aghcf3",
+    "aglcm",
+    "agprime"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o07",
+   "verdict": "full",
+   "families": [
+    "agbod",
+    "aeeven",
+    "akdivd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c01-o08",
+   "verdict": "full",
+   "families": [
+    "aosetform",
+    "aosetcl"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o01",
+   "verdict": "full",
+   "families": [
+    "ajrat",
+    "ajeqr",
+    "ajrdiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o02",
+   "verdict": "partial",
+   "families": [
+    "avprop",
+    "avpmiss"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Continued proportion (and the mean or third proportional) is never asked; testing proportion and finding a missing term are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o03",
+   "verdict": "full",
+   "families": [
+    "ajrate",
+    "ahinv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o04",
+   "verdict": "full",
+   "families": [
+    "faddu",
+    "fmulw",
+    "agmix",
+    "aifdiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o05",
+   "verdict": "full",
+   "families": [
+    "agdec",
+    "agrupee",
+    "aedfr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o06",
+   "verdict": "full",
+   "families": [
+    "agpct",
+    "avpctof"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c02-o07",
+   "verdict": "partial",
+   "families": [
+    "agspd",
+    "agspdc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Average speed for a journey in parts and converting speed units (km/h and m/s) are not asked; distance per unit time at a steady speed is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c03-o01",
+   "verdict": "full",
+   "families": [
+    "linev",
+    "afletter",
+    "ahlike"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c03-o02",
+   "verdict": "full",
+   "families": [
+    "ahlike",
+    "ahsub",
+    "ahcoef"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c03-o03",
+   "verdict": "full",
+   "families": [
+    "ahthink",
+    "ahmatch"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c03-o04",
+   "verdict": "full",
+   "families": [
+    "lin",
+    "aulwp",
+    "ahone"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o01",
+   "verdict": "full",
+   "families": [
+    "ahname",
+    "ahpar"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o02",
+   "verdict": "full",
+   "families": [
+    "afprot",
+    "afpair",
+    "afcross"
+   ],
+   "written": [
+    "wr:con:basic60"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o03",
+   "verdict": "full",
+   "families": [
+    "aftri",
+    "ahtri",
+    "ahext",
+    "afquad"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o04",
+   "verdict": "full",
+   "families": [
+    "aipolyreg",
+    "aipolymiss"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o05",
+   "verdict": "partial",
+   "families": [
+    "aecpart"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Secant and tangent are never named; centre, radius, diameter, chord, arc, sector and segment are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o06",
+   "verdict": "full",
+   "families": [
+    "aesym",
+    "aemirror"
+   ],
+   "written": [
+    "wr:sym-letters"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c04-o07",
+   "verdict": "full",
+   "families": [
+    "afsolid",
+    "afnet",
+    "aisolid"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c05-o01",
+   "verdict": "full",
+   "families": [
+    "rect",
+    "rperim",
+    "adpreg"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c06-o01",
+   "verdict": "full",
+   "families": [
+    "akfreq",
+    "afbar",
+    "acpict"
+   ],
+   "written": [
+    "wr:freq:tally-table",
+    "wr:bar:draw-scale"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g06-c06-o02",
+   "verdict": "full",
+   "families": [
+    "mean4",
+    "akmed"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aiintx",
+    "ajimul",
+    "ajidiv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c01-o02",
+   "verdict": "full",
+   "families": [
+    "ajrline",
+    "ajrstd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c01-o03",
+   "verdict": "full",
+   "families": [
+    "aifmul",
+    "aifdiv",
+    "aidmul",
+    "aiddiv",
+    "aep10"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c01-o04",
+   "verdict": "full",
+   "families": [
+    "ajlaw",
+    "pow",
+    "avzero"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c02-o01",
+   "verdict": "full",
+   "families": [
+    "ajrdiv",
+    "avprop"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c02-o02",
+   "verdict": "full",
+   "families": [
+    "ajwork",
+    "ajrate",
+    "agspd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c02-o03",
+   "verdict": "full",
+   "families": [
+    "pct",
+    "ajpl",
+    "ajdisc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c02-o04",
+   "verdict": "full",
+   "families": [
+    "ajsi"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c03-o01",
+   "verdict": "full",
+   "families": [
+    "ahcoef",
+    "ahlike"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c03-o02",
+   "verdict": "full",
+   "families": [
+    "lin",
+    "aulwp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c03-o03",
+   "verdict": "full",
+   "families": [
+    "aeineqz"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c03-o04",
+   "verdict": "full",
+   "families": [
+    "aosub",
+    "aoinex"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o01",
+   "verdict": "full",
+   "families": [
+    "ahpar",
+    "ahparx"
+   ],
+   "written": [
+    "wr:bas:parallel"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o02",
+   "verdict": "full",
+   "families": [
+    "ahtri",
+    "ahext"
+   ],
+   "written": [
+    "wr:tri:sss",
+    "wr:tri:sas"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o03",
+   "verdict": "full",
+   "families": [
+    "ahpyth",
+    "ahgen"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o04",
+   "verdict": "full",
+   "families": [
+    "afrot",
+    "aesym"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o05",
+   "verdict": "full",
+   "families": [
+    "afsolid",
+    "aieuler"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o06",
+   "verdict": "full",
+   "families": [
+    "ahcong",
+    "ahcfig"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c04-o07",
+   "verdict": "full",
+   "families": [
+    "aitri",
+    "aipara",
+    "aicircum",
+    "aicarea",
+    "airing",
+    "amcshape"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c05-o01",
+   "verdict": "full",
+   "families": [
+    "mean4",
+    "akmed",
+    "akmode",
+    "afbar"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g07-c05-o02",
+   "verdict": "full",
+   "families": [
+    "akexp",
+    "akchance"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c01-o01",
+   "verdict": "full",
+   "families": [
+    "ajrq",
+    "ajrline",
+    "ajinv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c01-o02",
+   "verdict": "full",
+   "families": [
+    "ajneg",
+    "ajlaw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c01-o03",
+   "verdict": "full",
+   "families": [
+    "ahsqd",
+    "aksqf",
+    "root",
+    "ajcube"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c01-o04",
+   "verdict": "full",
+   "families": [
+    "akdivd",
+    "akcrypt"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c01-o05",
+   "verdict": "full",
+   "families": [
+    "aosetop",
+    "aosetlaw",
+    "aoven3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c02-o01",
+   "verdict": "full",
+   "families": [
+    "pct",
+    "avmarked",
+    "ajdisc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c02-o02",
+   "verdict": "full",
+   "families": [
+    "ajsi",
+    "ajci",
+    "ajcip"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c02-o03",
+   "verdict": "full",
+   "families": [
+    "avdirv",
+    "ahinv",
+    "ahwork"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c03-o01",
+   "verdict": "full",
+   "families": [
+    "alpmul",
+    "alpdiv",
+    "alpdeg"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c03-o02",
+   "verdict": "full",
+   "families": [
+    "ahid",
+    "ahcube",
+    "expand"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c03-o03",
+   "verdict": "full",
+   "families": [
+    "factor",
+    "ajfgrp",
+    "ajfsq",
+    "alsplit"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c03-o04",
+   "verdict": "full",
+   "families": [
+    "lbrk",
+    "ahfrac",
+    "aelinw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c03-o05",
+   "verdict": "full",
+   "families": [
+    "aeineqz"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c04-o01",
+   "verdict": "full",
+   "families": [
+    "aipolymiss",
+    "aipgram",
+    "aiquad"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c04-o02",
+   "verdict": "full",
+   "families": [],
+   "written": [
+    "wr:bas:special-angles",
+    "wr:con:angbis",
+    "wr:con:quad",
+    "wr:quad:rhombus"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c04-o03",
+   "verdict": "full",
+   "families": [
+    "aieuler",
+    "aisolid"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c04-o04",
+   "verdict": "full",
+   "families": [
+    "aecpart",
+    "aesym"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c05-o01",
+   "verdict": "full",
+   "families": [
+    "aitrap",
+    "aipara",
+    "airhomb",
+    "aisplit",
+    "aicarea"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c05-o02",
+   "verdict": "full",
+   "families": [
+    "aitsa",
+    "aicvol",
+    "aicylv",
+    "aicap"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c06-o01",
+   "verdict": "partial",
+   "families": [
+    "akgroup",
+    "anfreq"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Cumulative frequency tables are not built; grouped frequency tables with class intervals are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g08-c06-o02",
+   "verdict": "full",
+   "families": [
+    "akss",
+    "akdice"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c01-o01",
+   "verdict": "full",
+   "families": [
+    "amnline",
+    "amclass",
+    "amirr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c01-o02",
+   "verdict": "full",
+   "families": [
+    "aerat",
+    "surd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c01-o03",
+   "verdict": "full",
+   "families": [],
+   "written": [
+    "wr:irr:sqrt2",
+    "wr:irr:sum",
+    "wr:irr:sqrt2-sqrt3-g9"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c02-o01",
+   "verdict": "full",
+   "families": [
+    "ajci"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c02-o02",
+   "verdict": "full",
+   "families": [
+    "ajcip",
+    "ajsi"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c02-o03",
+   "verdict": "full",
+   "families": [
+    "ajgrow",
+    "aogpgr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c03-o01",
+   "verdict": "full",
+   "families": [
+    "ahid",
+    "ahcube",
+    "expand"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c03-o02",
+   "verdict": "full",
+   "families": [
+    "factor",
+    "ajfgrp",
+    "ajfspl",
+    "ajfcub"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c03-o03",
+   "verdict": "full",
+   "families": [
+    "alsys",
+    "alsysw",
+    "almeth"
+   ],
+   "written": [
+    "wr:gap:named-methods"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c03-o04",
+   "verdict": "full",
+   "families": [
+    "ajneg",
+    "avfexp",
+    "aoexpeq"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c03-o05",
+   "verdict": "full",
+   "families": [
+    "aolog",
+    "aologlaw",
+    "aochb"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o01",
+   "verdict": "full",
+   "families": [
+    "ahcong",
+    "amcrit"
+   ],
+   "written": [
+    "wr:tpf:isosceles-base-angles",
+    "wr:tpf:isosceles-converse"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o02",
+   "verdict": "partial",
+   "families": [
+    "ammid",
+    "ammidc"
+   ],
+   "written": [
+    "wr:mid:converse-proof"
+   ],
+   "authored": false,
+   "missing": "The equal intercept theorem is never asked; the mid-point theorem and its converse are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o03",
+   "verdict": "full",
+   "families": [
+    "ahpyth",
+    "ahconv"
+   ],
+   "written": [
+    "wr:pyth:converse-proof",
+    "wr:pyth:similarity-proof"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o04",
+   "verdict": "full",
+   "families": [
+    "ampgx",
+    "aipgram"
+   ],
+   "written": [
+    "wr:para:sides-test",
+    "wr:para:converse-tests"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o05",
+   "verdict": "partial",
+   "families": [],
+   "written": [
+    "wr:con:quad",
+    "wr:quad:rhombus",
+    "wr:quad:trapezium"
+   ],
+   "authored": false,
+   "missing": "Constructing a regular hexagon is never asked; quadrilaterals from given data are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o06",
+   "verdict": "partial",
+   "families": [],
+   "written": [
+    "wr:area:parallels-median"
+   ],
+   "authored": false,
+   "missing": "Parallelograms on the same base and between the same parallels, and the theorems linking their areas to triangles, are not asked; one written task proves triangles on the same base between the same parallels are equal in area.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c04-o07",
+   "verdict": "full",
+   "families": [
+    "alchord",
+    "altheo"
+   ],
+   "written": [
+    "wr:circ:chords-equidistant"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c05-o01",
+   "verdict": "full",
+   "families": [
+    "akgroup",
+    "akfreq",
+    "anfreq"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c05-o02",
+   "verdict": "full",
+   "families": [
+    "akhist"
+   ],
+   "written": [
+    "wr:hist:plants"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c05-o03",
+   "verdict": "full",
+   "families": [
+    "mean4",
+    "akmed"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c06-o01",
+   "verdict": "full",
+   "families": [
+    "amheron",
+    "amherq",
+    "aipara"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c06-o02",
+   "verdict": "full",
+   "families": [
+    "aicircum",
+    "aicarea",
+    "airing"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c06-o03",
+   "verdict": "partial",
+   "families": [
+    "aitsa",
+    "aicvol"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Open boxes (surface area without a lid) are never asked; closed cubes and cuboids are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c07-o01",
+   "verdict": "full",
+   "families": [
+    "anratio"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c07-o02",
+   "verdict": "full",
+   "families": [
+    "anstd",
+    "antable"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c07-o03",
+   "verdict": "full",
+   "families": [
+    "ancompa",
+    "ancomps"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c08-o01",
+   "verdict": "full",
+   "families": [
+    "ahread",
+    "ahquad"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c08-o02",
+   "verdict": "full",
+   "families": [
+    "alsol2",
+    "alrule"
+   ],
+   "written": [
+    "wr:sys:intersect",
+    "wr:lin:graph-parallels"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g09-c08-o03",
+   "verdict": "full",
+   "families": [
+    "aldist",
+    "altri"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c01-o01",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c01-o02",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c01-o03",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c01-o04",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o01",
+   "verdict": "full",
+   "families": [
+    "lineq",
+    "aeineqw"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o02",
+   "verdict": "full",
+   "families": [
+    "auqf",
+    "quad",
+    "disc",
+    "aodk"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o03",
+   "verdict": "partial",
+   "families": [
+    "auqwp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Forming the quadratic equation from the situation is never itself asked: auqwp gives the situation and asks only for the answer.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o04",
+   "verdict": "partial",
+   "families": [
+    "avpmiss",
+    "avprop"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Continued and mean proportion and the componendo, dividendo, alternendo and invertendo properties are never asked; finding a missing term of a proportion is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o05",
+   "verdict": "full",
+   "families": [
+    "alrem",
+    "alfack",
+    "alcub"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o06",
+   "verdict": "full",
+   "families": [
+    "apmmul",
+    "apmtype",
+    "apmcon"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o07",
+   "verdict": "full",
+   "families": [
+    "apn",
+    "auaps",
+    "aogp",
+    "aogpsum"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o08",
+   "verdict": "partial",
+   "families": [
+    "aerefl"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Reflection in the origin and invariant points are never asked; reflection in lines x = a and y = a is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o09",
+   "verdict": "full",
+   "families": [
+    "ausec",
+    "aucen"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c02-o10",
+   "verdict": "full",
+   "families": [
+    "aslineq",
+    "asslope",
+    "asperpd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c03-o01",
+   "verdict": "partial",
+   "families": [
+    "ambpt",
+    "amsim",
+    "amsarea"
+   ],
+   "written": [
+    "wr:sim:bpt-trapezium",
+    "wr:sim:converses"
+   ],
+   "authored": false,
+   "missing": "Maps and models (a scale factor k giving areas in k² and volumes in k³) are not asked; similar triangles, the basic proportionality theorem and area ratios are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c03-o02",
+   "verdict": "partial",
+   "families": [],
+   "written": [
+    "wr:bis:same-distance-wells"
+   ],
+   "authored": false,
+   "missing": "As constructions of loci, the fixed distance from a point and the equidistant from two lines are not asked; equidistant from two points is (wr:bis:same-distance-wells).",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c03-o03",
+   "verdict": "full",
+   "families": [
+    "alcyc",
+    "alangle"
+   ],
+   "written": [
+    "wr:gap:cyclic-converse"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c03-o04",
+   "verdict": "partial",
+   "families": [
+    "amtang",
+    "amtlen"
+   ],
+   "written": [
+    "wr:tan:proofs"
+   ],
+   "authored": false,
+   "missing": "The tangent–secant relation (PA × PB = PT²) is never asked; tangent properties are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c03-o05",
+   "verdict": "partial",
+   "families": [],
+   "written": [
+    "wr:tan:construct",
+    "wr:conc:circum-in"
+   ],
+   "authored": false,
+   "missing": "Circumscribing or inscribing a circle on a regular hexagon is never asked; tangents from an external point and the circumcircle and incircle of a triangle are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c04-o01",
+   "verdict": "full",
+   "families": [
+    "amcone",
+    "amsph",
+    "aicylv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c04-o02",
+   "verdict": "full",
+   "families": [
+    "amrecast",
+    "amcombv",
+    "amcombs"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c05-o01",
+   "verdict": "full",
+   "families": [
+    "anidsimp"
+   ],
+   "written": [
+    "wr:trig:identities"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c05-o02",
+   "verdict": "full",
+   "families": [
+    "anheight",
+    "antwo"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c06-o01",
+   "verdict": "full",
+   "families": [
+    "angmean",
+    "angstep",
+    "angmedian",
+    "angmode"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c06-o02",
+   "verdict": "partial",
+   "families": [
+    "akhist",
+    "angmode"
+   ],
+   "written": [
+    "wr:hist:plants"
+   ],
+   "authored": false,
+   "missing": "Estimating the mode from a histogram (by drawing on it) is never asked; drawing histograms, naming the modal class (wr:hist:plants) and the grouped mode by formula are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c06-o03",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g10-c07-o01",
+   "verdict": "full",
+   "families": [
+    "anbag",
+    "andice"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aosetop",
+    "aosetlaw",
+    "aoven3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c01-o02",
+   "verdict": "partial",
+   "families": [
+    "aocart",
+    "aorel",
+    "aodom",
+    "aorange"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "The range of functions other than quadratics (rational, square-root or modulus functions) is not asked; Cartesian products, relations, functions and domains are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c01-o03",
+   "verdict": "partial",
+   "families": [
+    "aograph",
+    "aostd",
+    "alfop"
+   ],
+   "written": [
+    "wr:std:sketch-recip-sgn-step",
+    "wr:std:sketch-exp-log"
+   ],
+   "authored": false,
+   "missing": "Writing a combined function such as (f + g)(x) or (fg)(x) as an expression is not asked; sketching and reading the standard functions is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c01-o04",
+   "verdict": "full",
+   "families": [
+    "atrad",
+    "atval",
+    "atcomp",
+    "atdbl"
+   ],
+   "written": [
+    "wr:gap:double-angle-proof"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c01-o05",
+   "verdict": "full",
+   "families": [
+    "atgen",
+    "atsiner",
+    "atcosr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o01",
+   "verdict": "full",
+   "families": [],
+   "written": [
+    "wr:ind:sum",
+    "wr:ind:div",
+    "wr:ind:odd",
+    "wr:ind:ineq"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o02",
+   "verdict": "partial",
+   "families": [
+    "ascop",
+    "ascmod",
+    "asarg"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "The cube roots of unity are never asked; complex arithmetic, modulus and argument are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o03",
+   "verdict": "full",
+   "families": [
+    "aocq",
+    "aoqin"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o04",
+   "verdict": "full",
+   "families": [
+    "aonpr",
+    "aoncr",
+    "aomix"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o05",
+   "verdict": "full",
+   "families": [
+    "aobinexp",
+    "aobinmid"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c02-o06",
+   "verdict": "full",
+   "families": [
+    "aogpsum",
+    "aoagp",
+    "apamgm",
+    "alsum"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c03-o01",
+   "verdict": "full",
+   "families": [
+    "asslope",
+    "asfam",
+    "asparld",
+    "aslineq"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c03-o02",
+   "verdict": "partial",
+   "families": [
+    "arcircle",
+    "arcirceq",
+    "astan"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "The diameter form and the parametric form of a circle are never asked; the standard and general forms and tangents are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c04-o01",
+   "verdict": "full",
+   "families": [
+    "lim",
+    "aulstd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c04-o02",
+   "verdict": "full",
+   "families": [
+    "aqfp"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c05-o01",
+   "verdict": "partial",
+   "families": [
+    "atmdmean",
+    "atvar",
+    "atsd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Quartiles are never asked; range, mean deviation, variance and standard deviation are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c05-o02",
+   "verdict": "full",
+   "families": [
+    "asaddp",
+    "ancomp",
+    "asevset"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c06-o01",
+   "verdict": "full",
+   "families": [
+    "arparabola",
+    "areccentric",
+    "arconeq",
+    "aspair"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c06-o02",
+   "verdict": "full",
+   "families": [
+    "astan",
+    "astanc"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c07-o01",
+   "verdict": "full",
+   "families": [
+    "asdist3",
+    "assect3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c08-o01",
+   "verdict": "full",
+   "families": [
+    "atstmt",
+    "atconv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c08-o02",
+   "verdict": "full",
+   "families": [
+    "atcex"
+   ],
+   "written": [
+    "wr:logic:converse-counter"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c09-o01",
+   "verdict": "partial",
+   "families": [
+    "anavgav",
+    "anwmean"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "The combined standard deviation of two groups is never asked; the combined mean is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c09-o02",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c10-o01",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c10-o02",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c11-o01",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g11-c11-o02",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c01-o01",
+   "verdict": "full",
+   "families": [
+    "aqrel",
+    "aqeqcl"
+   ],
+   "written": [
+    "wr:relp:counterexample"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c01-o02",
+   "verdict": "full",
+   "families": [
+    "aqonto",
+    "apinvf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c01-o03",
+   "verdict": "partial",
+   "families": [
+    "atinv",
+    "atinvd",
+    "atinveq"
+   ],
+   "written": [
+    "wr:inv:four-branches"
+   ],
+   "authored": false,
+   "missing": "The 3 tan⁻¹x formula is not asked and the graphs of cot⁻¹, sec⁻¹ and cosec⁻¹ are not drawn; principal values, the domains and ranges of all six (wr:inv:four-branches) and 2 tan⁻¹x identities are.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c02-o01",
+   "verdict": "full",
+   "families": [
+    "apmtype",
+    "apmmul",
+    "aqsym"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c02-o02",
+   "verdict": "full",
+   "families": [
+    "audt3",
+    "apadj3",
+    "auinv"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c02-o03",
+   "verdict": "full",
+   "families": [
+    "apsys2",
+    "apsys3"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o01",
+   "verdict": "full",
+   "families": [
+    "audch",
+    "arimpl",
+    "arparam",
+    "arlogdiff",
+    "aqd2"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o02",
+   "verdict": "full",
+   "families": [
+    "arrolle",
+    "armvt",
+    "arlhop",
+    "arlhinf"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o03",
+   "verdict": "full",
+   "families": [
+    "aqrr",
+    "aqtann",
+    "aqext",
+    "armono"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o04",
+   "verdict": "full",
+   "families": [
+    "subst",
+    "auparts",
+    "arpfint",
+    "austd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o05",
+   "verdict": "full",
+   "families": [
+    "cint",
+    "aqking",
+    "aqodd"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c03-o06",
+   "verdict": "full",
+   "families": [
+    "aqorddeg",
+    "aqsep",
+    "aqhom",
+    "arlinde"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c04-o01",
+   "verdict": "full",
+   "families": [
+    "condp",
+    "atindt"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c04-o02",
+   "verdict": "full",
+   "families": [
+    "attotal",
+    "asbayes"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c05-o01",
+   "verdict": "full",
+   "families": [
+    "atmag",
+    "atdc",
+    "atlin"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c05-o02",
+   "verdict": "full",
+   "families": [
+    "atang",
+    "atcross",
+    "atvarea",
+    "atstp",
+    "atcopl"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c06-o01",
+   "verdict": "full",
+   "families": [
+    "asleq",
+    "asangl",
+    "asskew",
+    "aslrel"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c06-o02",
+   "verdict": "full",
+   "families": [
+    "asplaneq",
+    "asplaned",
+    "asmeet",
+    "asplang"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c07-o01",
+   "verdict": "full",
+   "families": [
+    "aqarea",
+    "aqcarea"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c08-o01",
+   "verdict": "partial",
+   "families": [
+    "aqrr"
+   ],
+   "written": [],
+   "authored": false,
+   "missing": "Cost, average cost, profit functions and break-even points are not asked; marginal revenue is.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c09-o01",
+   "verdict": "none",
+   "families": [],
+   "written": [],
+   "authored": false,
+   "missing": "No OpenPath skill or content assesses this outcome yet.",
+   "grade": "fit",
+   "judged": "oam@4"
+  },
+  {
+   "outcome": "icse-g12-c10-o01",
+   "verdict": "full",
+   "families": [
+    "aplpfeas",
+    "aplpmax",
+    "aocorner"
+   ],
+   "written": [
+    "wr:lp:formulate-bags"
+   ],
+   "authored": false,
+   "missing": "",
+   "grade": "fit",
+   "judged": "oam@4"
   }
  ]
 }
