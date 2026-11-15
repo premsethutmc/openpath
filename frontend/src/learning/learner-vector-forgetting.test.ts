@@ -1,6 +1,6 @@
 /**
  * learner-vector@2 (shadow): forgetting. Each skill gets a memory stability from the spacing of the learner's answers; `recall`
- * is the estimate faded by the time since the skill was last answered. Nothing in the product reads recall or the review queue.
+ * is the estimate faded by the time since the skill was last answered. Only the optional quick review (quick-review@1) reads it.
  * The synthetic learners at the end forget along a power law too (as people do), but with their own curve, their own memory
  * rule and an ability the model does not know, so this checks calibration; it is synthetic, not evidence about children.
  */
@@ -11,6 +11,7 @@ import { DAY } from "../../../packages/learning/src/evidence";
 import { difficultyOf, FAMILIES, pool } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
 import { STABILITY_START, learnerVector, REVIEW_AT, reviewQueue } from "../../../packages/learning/src/learner-vector";
+import { QUICK_REVIEW_LIMIT, quickReview } from "../../../packages/learning/src/quick-review";
 import type { LearnerRecords } from "../../../packages/learning/src/records";
 
 const T0 = Date.parse("2026-11-01T09:00:00Z");
@@ -61,9 +62,10 @@ test("reviewDueAt is when recall reaches REVIEW_AT; the review queue holds shown
   assert.equal(weak.recall, weak.estimate, "an estimate below even does not fade");
 });
 
-test("shadow: recovery reads only the estimate; nothing in the product reads recall or the review queue", () => {
+test("recovery reads only the estimate; only the optional quick review (quick-review@1) reads recall", () => {
   const src = (f: string) => readFileSync(new URL(`../../../packages/learning/src/${f}`, import.meta.url), "utf8");
-  assert.ok(!/\.recall\b|reviewQueue|reviewDueAt|stabilityDays/.test(src("intervention.ts")));
+  assert.ok(!/\.recall\b|reviewQueue|reviewDueAt|stabilityDays|quick-review/.test(src("intervention.ts")));
+  for (const f of ["evidence.ts", "plan.ts", "tiles.ts", "dashboard.ts"]) assert.ok(!src(f).includes("quick-review"), f);
   for (const f of ["evidence.ts", "plan.ts", "tiles.ts", "dashboard.ts"]) assert.ok(!src(f).includes("learner-vector"), f);
 });
 
@@ -102,4 +104,14 @@ test("synthetic learners who forget (power law): recall predicts later answers b
   console.log(`log-loss on later answers: with forgetting ${r.toFixed(3)}, without ${e.toFixed(3)} (n=${n}); after >14 days away: ${rl.toFixed(3)} vs ${el.toFixed(3)} (n=${nLong})`);
   assert.ok(r < e, "forgetting improves prediction overall");
   assert.ok(rl < el - 0.02, "and clearly after long gaps");
+});
+
+test("quick review: up to three faded skills, most faded first, leaving out what cannot be offered and what is already Next", () => {
+  const r = records(rights([0, 3, 10, 30]));
+  const due = Date.parse(at(r, T0 + 30 * DAY).reviewDueAt!);
+  assert.deepEqual(quickReview(r, due - DAY, () => true), []);
+  assert.deepEqual(quickReview(r, due + DAY, () => true).map((x) => x.skill), [skill]);
+  assert.deepEqual(quickReview(r, due + DAY, () => false), [], "no fresh question: not offered");
+  assert.deepEqual(quickReview(r, due + DAY, () => true, [skill]), [], "already Next: not repeated");
+  assert.ok(QUICK_REVIEW_LIMIT === 3);
 });

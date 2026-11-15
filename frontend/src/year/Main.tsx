@@ -17,7 +17,9 @@ import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type Cur
 import { UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
-import { decompose, problemOf } from "../../../packages/learning/src/families";
+import { decompose, exposureKey, problemOf } from "../../../packages/learning/src/families";
+import { quickReview } from "../../../packages/learning/src/quick-review";
+import { teachingPracticeIds } from "../curriculum/TeachingContent";
 import { sameAnswer, solve } from "../../../packages/learning/src/solve";
 import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
@@ -548,7 +550,7 @@ function App() {
       </div>
       {events && (()=>{const done=[...events].reverse().find((e:any)=>e.record==='study_session'&&e.phase==='ended'&&events.some((p:any)=>p.id===e.planId&&p.academicYear===st.enrolment?.academicYear&&p.curriculum?.id===release.id&&p.curriculum?.hash===release.hash)) as StudyRecord|undefined;if(!done?.summary)return null;const plan=events.find((e:any)=>e.id===done.planId) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return plan?<p className="small">Last study session: {done.summary.correctIds.length} correct, {done.summary.incorrectIds.length} incorrect. <a href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(plan.target)}&diagnostic=topic`}>View session summary</a> · Performance is separate from verified mastery.</p>:null;})()}
       {/* today-plan@1: one clear thing to do, the day's goal and the run of days, before anything else on the page */}
-      <TodayStrip st={st} now={now} />
+      <TodayStrip st={st} now={now} exclude={next.competency} onReview={(c) => setView({ name: "curriculum-practice", competency: c, stage: "practice", back: { name: "year" } })} />
       {next.kind !== "none" ? (
         <div className="next">
           <p className="eyebrow">Next</p>
@@ -1011,6 +1013,8 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
   // today-plan@2: the warm-up is on what she last worked on; when "Up next" is something new, it is offered first, separately
   const lastSkill = st.records.attempts.reduce<{ at: string; c: string } | null>((m, a) => (!m || a.at > m.at ? { at: a.at, c: a.competency } : m), null)?.c ?? null;
   const warmSeparate = warm && !!lastSkill && next.kind !== "continue" && next.kind !== "review" && next.kind !== "retention" && !!moduleFor(lastSkill);
+  // quick-review@1: one skill she knew that has probably faded; never the same as anything else offered above it
+  const review = useMemo(() => fadedSkills(st, now, [next.competency, warmSeparate ? lastSkill : null, focus?.competency])[0] ?? null, [st, now, next.competency, warmSeparate, lastSkill, focus]);
   return (
     <div className="kid">
       <h1 className="kid-hi">{warm ? `Welcome back, ${name}!` : `Hi, ${name}!`} <span aria-hidden="true">👋</span></h1>
@@ -1047,6 +1051,13 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
           <p className="kid-focus-title">{focus.title}</p>
           <p className="kid-focus-why">{focus.why}</p>
           <button className="secondary" onClick={() => onFocus(focus.competency)}>Practise →</button>
+        </section>
+      )}
+      {review && onFocus && (
+        <section className="kid-focus" aria-label="Quick review" data-quick-review>
+          <p className="kid-focus-title">Quick review: {kidName(review.skill, shortName(graph.get(review.skill).name))}</p>
+          <p className="kid-focus-why">You knew this! A few questions keep it fresh.</p>
+          <button className="secondary" onClick={() => onFocus(review.skill)}>Review →</button>
         </section>
       )}
       <section aria-label="Chapters">
@@ -1086,8 +1097,17 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
 /** today-plan@1: the day's goal (questions answered today, of DAILY_GOAL) and the run of days. Counts only; the goal is a
  *  number of questions tried, never a number right, so a hard day still counts. */
 const DAILY_GOAL = 10;
-function TodayStrip({ st, now }: { st: NonNullable<ReturnType<typeof learnerState>>; now: number }) {
+/** quick-review@1: faded skills (learner-vector@2) that have a fresh practice question for this learner, most faded first */
+function fadedSkills(st: NonNullable<ReturnType<typeof learnerState>>, now: number, exclude: (string | null | undefined)[]) {
+  const grade = st.enrolment?.grade ?? null, seen = new Set(st.records.attempts.map((a) => exposureKey(a.questionId)));
+  const offerable = (c: string) => !!moduleFor(c) && teachingPracticeIds(c, grade).some((id) => !seen.has(exposureKey(id)));
+  try { return quickReview(st.records, now, offerable, exclude); } catch { return []; }
+}
+
+function TodayStrip({ st, now, exclude, onReview }: { st: NonNullable<ReturnType<typeof learnerState>>; now: number; exclude?: string | null; onReview: (competency: string) => void }) {
   const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
+  // quick-review@1: skills shown before that have probably faded (learner-vector@2), offered only where a fresh practice question exists
+  const review = useMemo(() => fadedSkills(st, now, [exclude]), [st, now, exclude]);
   const done = Math.min(r.today.answered, DAILY_GOAL), reached = r.today.answered >= DAILY_GOAL;
   return (
     <section className="today" aria-label="Today">
@@ -1097,6 +1117,14 @@ function TodayStrip({ st, now }: { st: NonNullable<ReturnType<typeof learnerStat
       </div>
       <p className="today-goal">{reached ? <><b>Goal reached:</b> {r.today.answered} questions today. Anything more is a bonus.</> : <><b>{done} of {DAILY_GOAL}</b> questions today</>}</p>
       <span className="bar today-bar" role="progressbar" aria-label="Today's goal" aria-valuemin={0} aria-valuemax={DAILY_GOAL} aria-valuenow={done}><span style={{ width: `${(done / DAILY_GOAL) * 100}%` }} /></span>
+      {review.length > 0 && (
+        <div className="quick-review" data-quick-review>
+          <p className="today-goal"><b>Quick review</b> · you knew these. A few questions keep them fresh.</p>
+          <div className="quick-review-row">
+            {review.map((x) => <button key={x.skill} className="secondary" onClick={() => onReview(x.skill)}>{graph.get(x.skill).name}</button>)}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

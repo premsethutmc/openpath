@@ -243,6 +243,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .today-streak { font-weight: 700; font-size: 0.95rem; }
 .today-goal { margin: 0; }
 .today-bar { height: 10px; }
+.quick-review { display: grid; gap: 6px; }
+.quick-review-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .year-foot { margin-top: 18px; padding-top: 6px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
 .year-foot .year-actions { margin-top: 12px; }
 /* competency-profile@1 */

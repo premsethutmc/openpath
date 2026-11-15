@@ -49,7 +49,11 @@ Each skill also gets a **memory stability** (days after which what the learner s
 - `recall` is the estimate faded by the time since the skill was last answered, along FSRS-4.5's power-law forgetting curve
   (fast at first, then slowly). Only a positive estimate fades, towards an even chance.
 - `reviewDueAt` is when recall falls to 0.7; `reviewQueue(vector)` lists shown skills that have faded below it, most faded first.
-- `estimate` is unchanged, so recovery's order (which reads it) is unchanged. Nothing reads `recall` or the review queue yet.
+- `estimate` is unchanged, so recovery's order (which reads it) is unchanged.
+- quick-review@1 (`packages/learning/src/quick-review.ts`, approved 2026-11-15) is the only reader of `recall`: the maths home
+  shows one "Quick review" card (the most faded skill that has a fresh practice question and is not already Next, the
+  warm-up or the practice focus); the full test-build Today strip lists up to three. A tap opens ordinary practice. It is
+  optional and changes nothing about mastery, the delayed check or Next.
 
 Measurement (synthetic): 400 learners who learn a skill in one sitting and come back three times at random gaps of up to
 90 days. They forget along their own power law with their own memory rule and an ability the model does not know. Each
@@ -70,7 +74,7 @@ not that children forget this way. The constants are design values until real an
 ## Next
 
 0. Forgetting: once family-site learners have answered the same skills weeks apart, check recall against their answers and
-   fit the starting stability and spacing gain; then offer the review queue as an optional "quick review" (needs approval).
+   fit the starting stability and spacing gain, and see whether quick-review taps are used and answered well.
 
 1. Record, alongside each recovery, what the vector would have checked first (still shadow), once real learners use it.
 2. Let recovery (prereq-after-own@1) use `suspectsBelow` for its order, behind a switch, and compare on the Grade 5 sweep.
