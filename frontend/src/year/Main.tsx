@@ -742,12 +742,15 @@ function WrittenWork({ records, learner }: { records: ReturnType<typeof learnerS
       <details className="panel">
         <summary>Who marks written work</summary>
         <p className="small">Written answers are shown only to the educators you choose (under a pseudonym). {shares?.length ? `Shared with: ${shares.map((s) => s.email).join(", ")}.` : "Not shared with anyone yet."}</p>
-        <label className="field">Educator's email<input value={email} onChange={(e) => setEmail(e.target.value)} type="email" autoComplete="off" /></label>
+        <label className="field">Educator's code or email<input value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder="ABCD-2345" /></label>
+        <p className="small muted">Ask your educator for their code: they see it when they sign in to Content review → Marking.</p>
         <div className="actions">
           <button className="secondary" disabled={!email.trim()} onClick={async () => {
             try {
-              await api.request("POST", `/pupils/${learner}/marking-share/`, { email });
-              setShares([...(shares ?? []), { email }]);
+              const typed = email.trim();
+              const r = await api.request<{ email?: string }>("POST", `/pupils/${learner}/marking-share/`, typed.includes("@") ? { email: typed } : { code: typed });
+              const who = r.email ?? typed;
+              setShares([...(shares ?? []).filter((x) => x.email !== who), { email: who }]);
               setMsg("Shared."); setEmail("");
             } catch (e) {
               setMsg(String((e as Error).message ?? e));

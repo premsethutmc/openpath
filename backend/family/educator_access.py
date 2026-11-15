@@ -7,6 +7,9 @@ Who is an administrator: an active Django superuser. That flag is never set by t
 create_user); only the server operator sets it (`manage.py createsuperuser`, or the Django shell for an existing
 account). Parents, learners, educators, release managers and developers cannot grant roles.
 
+Requests (educator-invite@1): any signed-in account can ask for the educator role (EducatorRequestView); the
+administrator sees open requests beside the grants and either grants the role (which settles the request) or declines.
+
 What an administrator sees: the educator grants (account email, active or removed, when, how). Nothing about pupils
 or their records. Every grant and removal is written to the audit log by account id, not email.
 """
@@ -21,7 +24,7 @@ from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
 
 from .developer import audit
-from .models import ContentReviewer
+from .models import ContentReviewer, EducatorRequest
 from .views import AccountBase
 
 
@@ -41,6 +44,10 @@ def _grant_json(g):
             'removedAt': g.revoked_at.isoformat().replace('+00:00', 'Z') if g.revoked_at else None}
 
 
+def _iso(t):
+    return t.isoformat().replace('+00:00', 'Z')
+
+
 def _account(request):
     email = str(request.data.get('email') or '').strip().lower()
     if not email:
@@ -58,12 +65,15 @@ class EducatorAccessView(AccountBase):
 
     def get(self, request):
         grants = ContentReviewer.objects.filter(role='educator').select_related('user').order_by('-revoked_at', 'user__username')
-        return Response({'educators': [_grant_json(g) for g in grants]})
+        open_requests = EducatorRequest.objects.filter(decision='').select_related('user')
+        return Response({'educators': [_grant_json(g) for g in grants],
+                         'requests': [{'email': r.user.email or r.user.username, 'at': _iso(r.requested_at)} for r in open_requests]})
 
     def post(self, request):
         user = _account(request)
         g, _ = ContentReviewer.objects.update_or_create(user=user, role='educator', defaults={'granted_via': f'administrator {request.user.pk}', 'revoked_at': None})
         audit(request.user, 'educator-grant', detail=f'account {user.pk}')
+        EducatorRequest.objects.filter(user=user, decision='').update(decision='granted', decided_at=timezone.now())
         return Response(_grant_json(g), status=status.HTTP_201_CREATED)
 
     def delete(self, request):
@@ -72,4 +82,44 @@ class EducatorAccessView(AccountBase):
         if not n:
             raise ValidationError({'email': 'That account does not have the educator role.'})
         audit(request.user, 'educator-revoke', detail=f'account {user.pk}')
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def _request_json(user):
+    if ContentReviewer.objects.filter(user=user, role='educator', revoked_at__isnull=True).exists():
+        return {'status': 'educator'}
+    r = EducatorRequest.objects.filter(user=user).order_by('-requested_at', '-id').first()
+    if r is None:
+        return {'status': 'none'}
+    return {'status': {'': 'pending', 'granted': 'none', 'declined': 'declined'}[r.decision], 'at': _iso(r.requested_at)}
+
+
+class EducatorRequestView(AccountBase):
+    """educator-invite@1. GET: the signed-in account's own request status (none, pending, declined, educator).
+    POST: ask for the educator role (one open request at a time; an educator need not ask)."""
+
+    def get(self, request):
+        return Response(_request_json(request.user))
+
+    def post(self, request):
+        state = _request_json(request.user)
+        if state['status'] == 'educator':
+            raise ValidationError({'detail': 'You already have the educator role.'})
+        if state['status'] != 'pending':
+            EducatorRequest.objects.create(user=request.user)
+            audit(request.user, 'educator-request', detail=f'account {request.user.pk}')
+        return Response(_request_json(request.user), status=status.HTTP_201_CREATED)
+
+
+class EducatorRequestDeclineView(AccountBase):
+    """educator-invite@1. POST {email}: an administrator declines that account's open request."""
+
+    permission_classes = [IsAuthenticated, IsAdministrator]
+
+    def post(self, request):
+        user = _account(request)
+        n = EducatorRequest.objects.filter(user=user, decision='').update(decision='declined', decided_at=timezone.now())
+        if not n:
+            raise ValidationError({'email': 'That account has no open request.'})
+        audit(request.user, 'educator-decline', detail=f'account {user.pk}')
         return Response(status=status.HTTP_204_NO_CONTENT)

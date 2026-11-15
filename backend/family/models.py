@@ -205,6 +205,19 @@ class ContentDecision(models.Model):
 # ---------------------------------------------------------------- written answers marked by an educator (written@1)
 
 
+class EducatorRequest(models.Model):
+    """educator-invite@1: an account asks to be given the educator role. An administrator grants it (educator_access.py)
+    or declines it. One open request per account; the decision is kept."""
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="educator_requests")
+    requested_at = models.DateTimeField(auto_now_add=True)
+    decided_at = models.DateTimeField(null=True, blank=True)
+    decision = models.CharField(max_length=10, blank=True, default="")  # "", "granted" or "declined"
+
+    class Meta:
+        ordering = ["requested_at", "id"]
+
+
 class MarkingShare(models.Model):
     """A parent's explicit choice to let one educator read and mark one pupil's written answers (proofs,
     constructions, explanations). Nothing is shared by default; revoking stops access from then on."""
