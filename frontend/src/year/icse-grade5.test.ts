@@ -78,7 +78,8 @@ test("icse@1: every outcome is mapped to competencies that exist, or is listed a
   assert.equal(outcomes.length, 77);
   assert.equal(inventory.gaps.length, 0);
   assert.equal(allOutcomesOf(release).length, outcomes.length, "the release carries exactly the mapped outcomes");
-  assert.deepEqual({ full: outcomes.filter((o) => o.coverage === "full").length, partial: outcomes.filter((o) => o.coverage === "partial").length }, { full: 61, partial: 16 });
+  // draw@1: c06-o04 (draw angles) and c09-o01 (bar graph) are drawn and checked on screen, so their inventory coverage is full
+  assert.deepEqual({ full: outcomes.filter((o) => o.coverage === "full").length, partial: outcomes.filter((o) => o.coverage === "partial").length }, { full: 63, partial: 14 });
   for (const o of outcomes) {
     assert.ok(o.mapped.length > 0, `${o.id}: an outcome with no competency belongs under gaps`);
     for (const id of o.mapped) assert.ok(graph.byId.has(id) && moduleFor(graph.evidenceTarget(id)), `${o.id}: ${id} exists and has a module`);
