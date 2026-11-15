@@ -1,0 +1,1077 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 6,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE ICSE Syllabus: Mathematics, Class VI",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE syllabus as listed for 2025-26",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "CISCE ICSE Class 6 Mathematics syllabus (unit and chapter list)",
+   "publisher": "Shaalaa",
+   "edition": "2025-26 syllabus as shown on the page",
+   "academicYear": "2025-26",
+   "url": "https://www.shaalaa.com/syllabus/cisce-mathematics_8598",
+   "accessed": "2026-11-15",
+   "used_for": "theme, chapter and sub-topic list (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE sets the syllabus for Classes 6–8 and schools set the exams; most schools use privately published books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g06-c01",
+   "number": 1,
+   "term": null,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c01-s01",
+     "title": "Numbers and place value"
+    },
+    {
+     "id": "icse-g06-c01-s02",
+     "title": "Estimation"
+    },
+    {
+     "id": "icse-g06-c01-s03",
+     "title": "Indian and international systems"
+    },
+    {
+     "id": "icse-g06-c01-s04",
+     "title": "Natural and whole numbers"
+    },
+    {
+     "id": "icse-g06-c01-s05",
+     "title": "Negative numbers and integers"
+    },
+    {
+     "id": "icse-g06-c01-s06",
+     "title": "HCF and LCM"
+    },
+    {
+     "id": "icse-g06-c01-s07",
+     "title": "Playing with numbers"
+    },
+    {
+     "id": "icse-g06-c01-s08",
+     "title": "Sets"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c01-o01",
+     "statement": "Compare and order large numbers and form the greatest and smallest numbers from given digits.",
+     "concepts": [
+      "comparing numbers",
+      "place value"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.large-numbers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o02",
+     "statement": "Read and write numbers in the Indian and international systems and convert between them.",
+     "concepts": [
+      "lakh and crore",
+      "million"
+     ],
+     "questionTypes": [
+      "text",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.indian-international-numeration",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.indian-international-numeration"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o03",
+     "statement": "Round numbers and estimate sums, differences, products and quotients.",
+     "concepts": [
+      "rounding",
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rounding",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o04",
+     "statement": "Use properties of whole numbers and number patterns such as squares, triangular numbers and magic squares.",
+     "concepts": [
+      "properties of whole numbers",
+      "triangular numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.operation-properties",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.figurate-numbers",
+      "MATH.number.operation-properties"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o05",
+     "statement": "Order integers on the number line and add and subtract them.",
+     "concepts": [
+      "integers",
+      "number line"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integers",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add",
+      "MATH.number.integers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o06",
+     "statement": "Find factors, primes, prime factorisations, HCF and LCM.",
+     "concepts": [
+      "prime factorisation",
+      "HCF",
+      "LCM"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hcf-lcm",
+      "MATH.number.prime-factorisation",
+      "MATH.number.primes"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o07",
+     "statement": "Use BODMAS with brackets, even and odd numbers and divisibility rules.",
+     "concepts": [
+      "BODMAS",
+      "divisibility"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.order-of-operations",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.even-odd",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.even-odd",
+      "MATH.number.order-of-operations",
+      "MATH.reasoning.divisibility"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g06-c01-o08",
+     "statement": "Describe sets in roster and rule form, name types of sets and find cardinality.",
+     "concepts": [
+      "roster form",
+      "cardinality"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ],
+     "coverage": "partial",
+     "source": "Unit 1: Number System",
+     "note": "OpenPath teaches sets from Class 11; a Class 6 introduction is not separate yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g06-c02",
+   "number": 2,
+   "term": null,
+   "title": "Ratio and Proportion",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c02-s01",
+     "title": "Ratio"
+    },
+    {
+     "id": "icse-g06-c02-s02",
+     "title": "Proportion"
+    },
+    {
+     "id": "icse-g06-c02-s03",
+     "title": "Unitary method"
+    },
+    {
+     "id": "icse-g06-c02-s04",
+     "title": "Fractions"
+    },
+    {
+     "id": "icse-g06-c02-s05",
+     "title": "Decimal fractions"
+    },
+    {
+     "id": "icse-g06-c02-s06",
+     "title": "Percentage"
+    },
+    {
+     "id": "icse-g06-c02-s07",
+     "title": "Speed, distance and time"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c02-o01",
+     "statement": "Compare quantities as ratios, simplify ratios and divide a quantity in a ratio.",
+     "concepts": [
+      "ratio",
+      "dividing in a ratio"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.ratio",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.ratio-division",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.ratio",
+      "MATH.number.ratio-division"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o02",
+     "statement": "Test proportion, find a missing term and use continued proportion.",
+     "concepts": [
+      "proportion",
+      "continued proportion"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.proportion"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o03",
+     "statement": "Use the unitary method for direct and inverse variation.",
+     "concepts": [
+      "unitary method"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion",
+      "MATH.number.unit-rate"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o04",
+     "statement": "Add, subtract, multiply and divide fractions and mixed numbers.",
+     "concepts": [
+      "fractions",
+      "mixed numbers"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-multiply",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.mixed-fractions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add",
+      "MATH.number.fraction-multiply",
+      "MATH.number.mixed-fractions"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o05",
+     "statement": "Convert between decimals and fractions and calculate with decimals in daily-life problems.",
+     "concepts": [
+      "decimals"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-operations"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o06",
+     "statement": "Convert percentages and find percentage of a quantity and percentage increase or decrease.",
+     "concepts": [
+      "percentage"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.percentage",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro",
+      "MATH.number.percentage"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g06-c02-o07",
+     "statement": "Solve speed, distance and time problems, including unit conversions and average speed.",
+     "concepts": [
+      "speed",
+      "average speed"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.time-speed-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.time-speed-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    }
+   ]
+  },
+  {
+   "id": "icse-g06-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c03-s01",
+     "title": "Fundamental concepts"
+    },
+    {
+     "id": "icse-g06-c03-s02",
+     "title": "Operations"
+    },
+    {
+     "id": "icse-g06-c03-s03",
+     "title": "Substitution"
+    },
+    {
+     "id": "icse-g06-c03-s04",
+     "title": "Framing expressions"
+    },
+    {
+     "id": "icse-g06-c03-s05",
+     "title": "Simple linear equations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c03-o01",
+     "statement": "Use variables, constants, terms, like and unlike terms and simple powers.",
+     "concepts": [
+      "variable",
+      "like terms"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.variables",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.expressions-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.expressions-intro",
+      "MATH.algebra.variables"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g06-c03-o02",
+     "statement": "Add, subtract, multiply and divide simple algebraic expressions, and substitute values.",
+     "concepts": [
+      "simplifying",
+      "substitution"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.expressions-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify",
+      "MATH.algebra.expressions-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g06-c03-o03",
+     "statement": "Form expressions and formulas from statements and patterns.",
+     "concepts": [
+      "framing expressions"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.generalise-with-expressions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.generalise-with-expressions"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g06-c03-o04",
+     "statement": "Solve simple linear equations by transposition and use them for word problems.",
+     "concepts": [
+      "transposition"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations",
+      "MATH.algebra.linear-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    }
+   ]
+  },
+  {
+   "id": "icse-g06-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c04-s01",
+     "title": "Fundamental concepts"
+    },
+    {
+     "id": "icse-g06-c04-s02",
+     "title": "Angles"
+    },
+    {
+     "id": "icse-g06-c04-s03",
+     "title": "Lines and angles"
+    },
+    {
+     "id": "icse-g06-c04-s04",
+     "title": "Triangles"
+    },
+    {
+     "id": "icse-g06-c04-s05",
+     "title": "Quadrilaterals"
+    },
+    {
+     "id": "icse-g06-c04-s06",
+     "title": "Polygons"
+    },
+    {
+     "id": "icse-g06-c04-s07",
+     "title": "The circle"
+    },
+    {
+     "id": "icse-g06-c04-s08",
+     "title": "Symmetry"
+    },
+    {
+     "id": "icse-g06-c04-s09",
+     "title": "Recognition of solids"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c04-o01",
+     "statement": "Name points, lines, rays, segments, parallel and intersecting lines.",
+     "concepts": [
+      "ray",
+      "segment",
+      "parallel lines"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro",
+      "MATH.geometry.parallel-angles"
+     ],
+     "coverage": "partial",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o02",
+     "statement": "Measure, classify and construct angles and use angle pairs and vertically opposite angles.",
+     "concepts": [
+      "protractor",
+      "vertically opposite angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angle-measure",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.angle-pairs",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angle-measure",
+      "MATH.geometry.angle-pairs",
+      "MATH.geometry.basic-constructions"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o03",
+     "statement": "Classify triangles and quadrilaterals and use the angle-sum and exterior-angle properties.",
+     "concepts": [
+      "angle sum",
+      "exterior angle"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-types",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.quadrilateral-classification",
+      "MATH.geometry.triangle-properties",
+      "MATH.geometry.triangle-types"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o04",
+     "statement": "Name polygons and use interior and exterior angle sums of regular polygons.",
+     "concepts": [
+      "polygon",
+      "regular polygon"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.polygon-angles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.polygon-angles"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o05",
+     "statement": "Name parts of a circle: radius, diameter, chord, arc, sector, segment, secant and tangent.",
+     "concepts": [
+      "chord",
+      "sector",
+      "tangent"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circles"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o06",
+     "statement": "Find lines of symmetry and complete symmetric figures.",
+     "concepts": [
+      "line of symmetry"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g06-c04-o07",
+     "statement": "Identify faces, edges and vertices of solids, their nets and views.",
+     "concepts": [
+      "nets",
+      "faces edges vertices"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.solid-views"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g06-c05",
+   "number": 5,
+   "term": null,
+   "title": "Mensuration",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c05-s01",
+     "title": "Perimeter and area"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c05-o01",
+     "statement": "Find the perimeter and area of rectangles and squares and the perimeter of equilateral triangles.",
+     "concepts": [
+      "perimeter",
+      "area"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-perimeter",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.rectangle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.rectangle-area",
+      "MATH.measurement.rectangle-perimeter"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Mensuration"
+    }
+   ]
+  },
+  {
+   "id": "icse-g06-c06",
+   "number": 6,
+   "term": null,
+   "title": "Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g06-c06-s01",
+     "title": "Data and graphs"
+    },
+    {
+     "id": "icse-g06-c06-s02",
+     "title": "Mean and median"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g06-c06-o01",
+     "statement": "Organise data in frequency tables and draw pictographs and bar graphs.",
+     "concepts": [
+      "pictograph",
+      "bar graph"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency",
+      "MATH.statistics.scaled-bars"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Data Handling"
+    },
+    {
+     "id": "icse-g06-c06-o02",
+     "statement": "Find the mean and median of a small data set.",
+     "concepts": [
+      "mean",
+      "median"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.median-mode"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Data Handling"
+    }
+   ]
+  }
+ ]
+}

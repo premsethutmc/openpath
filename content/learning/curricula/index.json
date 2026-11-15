@@ -224,6 +224,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-6",
+   "version": "1.0.0",
+   "grade": 6,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VI — Grade 6 Mathematics (CISCE / ICSE)",
+   "hash": "7de6c975",
+   "file": "icse-cisce-mathematics-grade-6.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-6",
    "version": "1.0.0",
    "grade": 6,
@@ -267,6 +276,15 @@
    "hash": "44dafdae",
    "file": "cbse-ncert-mathematics-grade-7.v1.2.0.json",
    "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-7",
+   "version": "1.0.0",
+   "grade": 7,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VII — Grade 7 Mathematics (CISCE / ICSE)",
+   "hash": "5ce1501a",
+   "file": "icse-cisce-mathematics-grade-7.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "openpath-sample-mathematics-grade-7",
@@ -329,6 +347,15 @@
    "hash": "f0d7add0",
    "file": "cbse-ncert-mathematics-grade-8.v1.1.0.json",
    "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-8",
+   "version": "1.0.0",
+   "grade": 8,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VIII — Grade 8 Mathematics (CISCE / ICSE)",
+   "hash": "585d94aa",
+   "file": "icse-cisce-mathematics-grade-8.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "openpath-sample-mathematics-grade-8",

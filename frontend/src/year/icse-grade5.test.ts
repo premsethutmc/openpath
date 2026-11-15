@@ -61,10 +61,10 @@ test("icse@1: a valid CISCE Class 5 release, one of the board releases, honest a
   assert.equal(release.source.board, "CISCE (ICSE)");
   assert.equal(release.review!.educatorReviewed, false, "never claimed as an educator review");
   assert.match(release.review!.note, /UNOFFICIAL SOURCE/);
-  // CISCE is recorded for Classes 5 and 9–12 only; each recorded class is honest about its unofficial source
+  // CISCE is recorded for Classes 5–12 only; each recorded class is honest about its unofficial source
   for (let g = 1; g <= 12; g++) {
     const r = boardFor("icse", g);
-    if (![5, 9, 10, 11, 12].includes(g)) assert.equal(r, null, `no CISCE release for Grade ${g}`);
+    if (![5, 6, 7, 8, 9, 10, 11, 12].includes(g)) assert.equal(r, null, `no CISCE release for Grade ${g}`);
     else assert.match(r!.review!.note, /UNOFFICIAL SOURCE/, `Grade ${g}`);
   }
   // the themes of the curriculum are the chapters; none could be checked against the official document

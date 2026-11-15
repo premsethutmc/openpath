@@ -24,11 +24,11 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1381,
+  "requirements": 1452,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 264,
+   "partial": 335,
    "unsupported": 0,
    "not-implemented": 12
   },
@@ -85,7 +85,7 @@
    "insufficient": 0
   },
   "educatorPart": {
-   "requirementsWithoutWrittenTask": 27
+   "requirementsWithoutWrittenTask": 33
   }
  },
  "diversity": [],
@@ -272,6 +272,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-6",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VI — Grade 6 Mathematics (CISCE / ICSE)",
+   "chapters": 6,
+   "requirements": 29,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 29,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-6",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 6,
@@ -302,6 +317,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-7",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VII — Grade 7 Mathematics (CISCE / ICSE)",
+   "chapters": 5,
+   "requirements": 21,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 21,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-7",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
@@ -327,6 +357,21 @@
     "validated": 0,
     "awaiting": 51,
     "partial": 6,
+    "unsupported": 0,
+    "not-implemented": 0
+   }
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VIII — Grade 8 Mathematics (CISCE / ICSE)",
+   "chapters": 6,
+   "requirements": 21,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 21,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -19669,6 +19714,470 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": null,
+   "outcome": "icse-g06-c01-o01",
+   "text": "Compare and order large numbers and form the greatest and smallest numbers from given digits.",
+   "competencies": [
+    "MATH.number.large-numbers"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": null,
+   "outcome": "icse-g06-c01-o03",
+   "text": "Round numbers and estimate sums, differences, products and quotients.",
+   "competencies": [
+    "MATH.number.rounding",
+    "MATH.reasoning.estimate-check"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": null,
+   "outcome": "icse-g06-c01-o04",
+   "text": "Use properties of whole numbers and number patterns such as squares, triangular numbers and magic squares.",
+   "competencies": [
+    "MATH.algebra.figurate-numbers",
+    "MATH.number.operation-properties"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": null,
+   "outcome": "icse-g06-c01-o07",
+   "text": "Use BODMAS with brackets, even and odd numbers and divisibility rules.",
+   "competencies": [
+    "MATH.number.even-odd",
+    "MATH.number.order-of-operations",
+    "MATH.reasoning.divisibility"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Indian and international systems",
+   "outcome": "icse-g06-c01-o02",
+   "text": "Read and write numbers in the Indian and international systems and convert between them.",
+   "competencies": [
+    "MATH.number.indian-international-numeration"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Negative numbers and integers",
+   "outcome": "icse-g06-c01-o05",
+   "text": "Order integers on the number line and add and subtract them.",
+   "competencies": [
+    "MATH.number.integer-add",
+    "MATH.number.integers"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "HCF and LCM",
+   "outcome": "icse-g06-c01-o06",
+   "text": "Find factors, primes, prime factorisations, HCF and LCM.",
+   "competencies": [
+    "MATH.number.hcf-lcm",
+    "MATH.number.prime-factorisation",
+    "MATH.number.primes"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Sets",
+   "outcome": "icse-g06-c01-o08",
+   "text": "Describe sets in roster and rule form, name types of sets and find cardinality.",
+   "competencies": [
+    "MATH.algebra.sets"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Ratio",
+   "outcome": "icse-g06-c02-o01",
+   "text": "Compare quantities as ratios, simplify ratios and divide a quantity in a ratio.",
+   "competencies": [
+    "MATH.number.ratio",
+    "MATH.number.ratio-division"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Proportion",
+   "outcome": "icse-g06-c02-o02",
+   "text": "Test proportion, find a missing term and use continued proportion.",
+   "competencies": [
+    "MATH.number.proportion"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Unitary method",
+   "outcome": "icse-g06-c02-o03",
+   "text": "Use the unitary method for direct and inverse variation.",
+   "competencies": [
+    "MATH.algebra.inverse-proportion",
+    "MATH.number.unit-rate"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Fractions",
+   "outcome": "icse-g06-c02-o04",
+   "text": "Add, subtract, multiply and divide fractions and mixed numbers.",
+   "competencies": [
+    "MATH.number.fraction-add",
+    "MATH.number.fraction-multiply",
+    "MATH.number.mixed-fractions"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Decimal fractions",
+   "outcome": "icse-g06-c02-o05",
+   "text": "Convert between decimals and fractions and calculate with decimals in daily-life problems.",
+   "competencies": [
+    "MATH.number.decimal-operations"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Percentage",
+   "outcome": "icse-g06-c02-o06",
+   "text": "Convert percentages and find percentage of a quantity and percentage increase or decrease.",
+   "competencies": [
+    "MATH.number.percent-intro",
+    "MATH.number.percentage"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Speed, distance and time",
+   "outcome": "icse-g06-c02-o07",
+   "text": "Solve speed, distance and time problems, including unit conversions and average speed.",
+   "competencies": [
+    "MATH.measurement.time-speed-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Framing expressions",
+   "outcome": "icse-g06-c03-o02",
+   "text": "Add, subtract, multiply and divide simple algebraic expressions, and substitute values.",
+   "competencies": [
+    "MATH.algebra.algebra-simplify",
+    "MATH.algebra.expressions-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Framing expressions",
+   "outcome": "icse-g06-c03-o03",
+   "text": "Form expressions and formulas from statements and patterns.",
+   "competencies": [
+    "MATH.algebra.generalise-with-expressions"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simple linear equations",
+   "outcome": "icse-g06-c03-o01",
+   "text": "Use variables, constants, terms, like and unlike terms and simple powers.",
+   "competencies": [
+    "MATH.algebra.expressions-intro",
+    "MATH.algebra.variables"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simple linear equations",
+   "outcome": "icse-g06-c03-o04",
+   "text": "Solve simple linear equations by transposition and use them for word problems.",
+   "competencies": [
+    "MATH.algebra.linear-equations",
+    "MATH.algebra.linear-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Angles",
+   "outcome": "icse-g06-c04-o02",
+   "text": "Measure, classify and construct angles and use angle pairs and vertically opposite angles.",
+   "competencies": [
+    "MATH.geometry.angle-measure",
+    "MATH.geometry.angle-pairs",
+    "MATH.geometry.basic-constructions"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Lines and angles",
+   "outcome": "icse-g06-c04-o01",
+   "text": "Name points, lines, rays, segments, parallel and intersecting lines.",
+   "competencies": [
+    "MATH.geometry.angles-intro",
+    "MATH.geometry.parallel-angles"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Lines and angles",
+   "outcome": "icse-g06-c04-o06",
+   "text": "Find lines of symmetry and complete symmetric figures.",
+   "competencies": [
+    "MATH.geometry.symmetry-lines"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g06-c04-o03",
+   "text": "Classify triangles and quadrilaterals and use the angle-sum and exterior-angle properties.",
+   "competencies": [
+    "MATH.geometry.quadrilateral-classification",
+    "MATH.geometry.triangle-properties",
+    "MATH.geometry.triangle-types"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Polygons",
+   "outcome": "icse-g06-c04-o04",
+   "text": "Name polygons and use interior and exterior angle sums of regular polygons.",
+   "competencies": [
+    "MATH.geometry.polygon-angles"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "The circle",
+   "outcome": "icse-g06-c04-o05",
+   "text": "Name parts of a circle: radius, diameter, chord, arc, sector, segment, secant and tangent.",
+   "competencies": [
+    "MATH.geometry.circles"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Recognition of solids",
+   "outcome": "icse-g06-c04-o07",
+   "text": "Identify faces, edges and vertices of solids, their nets and views.",
+   "competencies": [
+    "MATH.geometry.nets",
+    "MATH.geometry.solid-views"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": "Perimeter and area",
+   "outcome": "icse-g06-c05-o01",
+   "text": "Find the perimeter and area of rectangles and squares and the perimeter of equilateral triangles.",
+   "competencies": [
+    "MATH.measurement.rectangle-area",
+    "MATH.measurement.rectangle-perimeter"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": "Data and graphs",
+   "outcome": "icse-g06-c06-o01",
+   "text": "Organise data in frequency tables and draw pictographs and bar graphs.",
+   "competencies": [
+    "MATH.statistics.data-frequency",
+    "MATH.statistics.scaled-bars"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 6,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": "Mean and median",
+   "outcome": "icse-g06-c06-o02",
+   "text": "Find the mean and median of a small data set.",
+   "competencies": [
+    "MATH.statistics.averages-intro",
+    "MATH.statistics.median-mode"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-6@1.1.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 6,
@@ -21431,6 +21940,336 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Integers",
+   "outcome": "icse-g07-c01-o01",
+   "text": "Multiply and divide integers and use their properties in word problems.",
+   "competencies": [
+    "MATH.number.integer-multiply"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Rational numbers",
+   "outcome": "icse-g07-c01-o02",
+   "text": "Represent rational numbers on a number line and as decimals.",
+   "competencies": [
+    "MATH.number.rational-numbers"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Decimal fractions",
+   "outcome": "icse-g07-c01-o03",
+   "text": "Multiply and divide fractions and decimals, including by powers of 10.",
+   "competencies": [
+    "MATH.number.decimal-product",
+    "MATH.number.fraction-product",
+    "MATH.number.multiply-divide-powers-of-ten"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Exponents",
+   "outcome": "icse-g07-c01-o04",
+   "text": "Use exponents and the laws of exponents.",
+   "competencies": [
+    "MATH.number.exponents"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Arithmetic",
+   "section": "Ratio and proportion",
+   "outcome": "icse-g07-c02-o01",
+   "text": "Share quantities in a ratio and test proportion.",
+   "competencies": [
+    "MATH.number.proportion",
+    "MATH.number.ratio-division"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Arithmetic",
+   "section": "Unitary method",
+   "outcome": "icse-g07-c02-o02",
+   "text": "Use the unitary method for time and work and for speed, distance and time.",
+   "competencies": [
+    "MATH.measurement.time-speed-intro",
+    "MATH.number.unit-rate"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Arithmetic",
+   "section": "Profit, loss and discount",
+   "outcome": "icse-g07-c02-o03",
+   "text": "Convert percentages and find profit, loss and discount for a single transaction.",
+   "competencies": [
+    "MATH.number.percentage",
+    "MATH.number.profit-loss"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Arithmetic",
+   "section": "Simple interest",
+   "outcome": "icse-g07-c02-o04",
+   "text": "Calculate simple interest and find principal, rate or time.",
+   "competencies": [
+    "MATH.number.profit-loss"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g07-c03-o01",
+   "text": "Identify terms, factors and coefficients and add or subtract algebraic expressions.",
+   "competencies": [
+    "MATH.algebra.algebra-simplify"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simple linear equations and inequalities",
+   "outcome": "icse-g07-c03-o02",
+   "text": "Solve simple linear equations, including word problems.",
+   "competencies": [
+    "MATH.algebra.linear-equations"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simple linear equations and inequalities",
+   "outcome": "icse-g07-c03-o03",
+   "text": "Solve simple linear inequalities in one variable over a given set.",
+   "competencies": [
+    "MATH.algebra.inequations-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Set concepts",
+   "outcome": "icse-g07-c03-o04",
+   "text": "Use universal sets, subsets and cardinality.",
+   "competencies": [
+    "MATH.algebra.sets"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Lines and angles",
+   "outcome": "icse-g07-c04-o01",
+   "text": "Use angles made by parallel lines and a transversal, and construct parallel lines.",
+   "competencies": [
+    "MATH.geometry.basic-constructions",
+    "MATH.geometry.parallel-angles"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g07-c04-o02",
+   "text": "Use the angle-sum and exterior-angle properties and construct triangles.",
+   "competencies": [
+    "MATH.geometry.construction-triangles",
+    "MATH.geometry.triangle-properties"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g07-c04-o06",
+   "text": "Recognise congruent triangles by SSS, SAS, ASA and RHS.",
+   "competencies": [
+    "MATH.geometry.congruence"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g07-c04-o07",
+   "text": "Find perimeter, circumference and area of triangles, parallelograms, circles, rings and combined figures.",
+   "competencies": [
+    "MATH.measurement.circle-area",
+    "MATH.measurement.parallelogram-rhombus-area",
+    "MATH.measurement.triangle-area"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Pythagoras theorem",
+   "outcome": "icse-g07-c04-o03",
+   "text": "Use Pythagoras' theorem in right triangles.",
+   "competencies": [
+    "MATH.geometry.pythagoras"
+   ],
+   "class": "partial",
+   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Symmetry",
+   "outcome": "icse-g07-c04-o04",
+   "text": "Find line and rotational symmetry.",
+   "competencies": [
+    "MATH.geometry.rotational-symmetry",
+    "MATH.geometry.symmetry-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Recognition of solids",
+   "outcome": "icse-g07-c04-o05",
+   "text": "Identify faces, edges and vertices of solids.",
+   "competencies": [
+    "MATH.geometry.nets",
+    "MATH.geometry.polyhedra-euler"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": null,
+   "outcome": "icse-g07-c05-o02",
+   "text": "Estimate chance from experiments with coins and dice.",
+   "competencies": [
+    "MATH.probability.chance-language",
+    "MATH.probability.experimental"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 7,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": "Data handling",
+   "outcome": "icse-g07-c05-o01",
+   "text": "Organise data and find mean, median and mode, and draw bar graphs.",
+   "competencies": [
+    "MATH.statistics.averages-intro",
+    "MATH.statistics.median-mode",
+    "MATH.statistics.scaled-bars"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
@@ -23159,6 +23998,342 @@
    ],
    "class": "awaiting",
    "why": "Awaiting educator review."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": null,
+   "outcome": "icse-g08-c01-o04",
+   "text": "Use the general form of numbers, divisibility tests and cryptarithms.",
+   "competencies": [
+    "MATH.reasoning.digit-puzzles",
+    "MATH.reasoning.divisibility"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Rational numbers",
+   "outcome": "icse-g08-c01-o01",
+   "text": "Operate on rational numbers and find rational numbers between two given ones.",
+   "competencies": [
+    "MATH.number.rational-numbers"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Exponents",
+   "outcome": "icse-g08-c01-o02",
+   "text": "Use laws of exponents with negative integral exponents.",
+   "competencies": [
+    "MATH.number.exponents",
+    "MATH.number.scientific-notation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Squares and square roots",
+   "outcome": "icse-g08-c01-o03",
+   "text": "Find squares and square roots by factorisation and division, and cubes and cube roots.",
+   "competencies": [
+    "MATH.number.cubes",
+    "MATH.number.square-roots"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Number System",
+   "section": "Sets",
+   "outcome": "icse-g08-c01-o05",
+   "text": "Use subsets, complements, set difference, De Morgan's laws and Venn diagrams.",
+   "competencies": [
+    "MATH.algebra.sets"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Profit, loss and discount",
+   "outcome": "icse-g08-c02-o01",
+   "text": "Use percentages, including overheads, discount, profit and loss.",
+   "competencies": [
+    "MATH.number.percentage",
+    "MATH.number.profit-loss"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Interest",
+   "outcome": "icse-g08-c02-o02",
+   "text": "Calculate simple and compound interest, including half-yearly compounding.",
+   "competencies": [
+    "MATH.number.compound-interest",
+    "MATH.number.profit-loss"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Numbers and operations",
+   "chapter": "Ratio and Proportion",
+   "section": "Direct and inverse variation",
+   "outcome": "icse-g08-c02-o03",
+   "text": "Solve direct and inverse variation problems, including time and work.",
+   "competencies": [
+    "MATH.algebra.inverse-proportion",
+    "MATH.number.proportion"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g08-c03-o01",
+   "text": "Multiply and divide polynomials and find their degree.",
+   "competencies": [
+    "MATH.algebra.algebra-simplify",
+    "MATH.algebra.polynomials"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g08-c03-o03",
+   "text": "Factorise by common factors, grouping, difference of squares and trinomials.",
+   "competencies": [
+    "MATH.algebra.factorisation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Identities",
+   "outcome": "icse-g08-c03-o02",
+   "text": "Expand with standard identities, including cubes of binomials.",
+   "competencies": [
+    "MATH.algebra.identities",
+    "MATH.algebra.identities-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Linear equations",
+   "outcome": "icse-g08-c03-o04",
+   "text": "Solve linear equations in one variable, including those reducible to linear form.",
+   "competencies": [
+    "MATH.algebra.linear-equations",
+    "MATH.algebra.linear-rational"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Linear inequations",
+   "outcome": "icse-g08-c03-o05",
+   "text": "Solve linear inequations over a replacement set and show the solution set on a number line.",
+   "competencies": [
+    "MATH.algebra.inequations-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g08-c04-o03",
+   "text": "Draw views and nets of solids and use Euler's formula.",
+   "competencies": [
+    "MATH.geometry.polyhedra-euler",
+    "MATH.geometry.solid-views"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Special quadrilaterals",
+   "outcome": "icse-g08-c04-o01",
+   "text": "Use interior and exterior angle sums of polygons and properties of special quadrilaterals.",
+   "competencies": [
+    "MATH.geometry.polygon-angles",
+    "MATH.geometry.quadrilaterals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Special quadrilaterals",
+   "outcome": "icse-g08-c04-o02",
+   "text": "Construct angles of 30°, 45°, 60° and 90°, bisectors and quadrilaterals.",
+   "competencies": [
+    "MATH.geometry.construction-quadrilaterals",
+    "MATH.geometry.constructions-bisectors"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Symmetry",
+   "outcome": "icse-g08-c04-o04",
+   "text": "Use symmetry and the parts of a circle.",
+   "competencies": [
+    "MATH.geometry.circles",
+    "MATH.geometry.symmetry-lines"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": "Area of trapezium and polygon",
+   "outcome": "icse-g08-c05-o01",
+   "text": "Find areas of trapeziums, parallelograms, rhombuses, polygons and circles.",
+   "competencies": [
+    "MATH.measurement.circle-area",
+    "MATH.measurement.parallelogram-rhombus-area",
+    "MATH.measurement.trapezium-area"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": "Surface area, volume and capacity",
+   "outcome": "icse-g08-c05-o02",
+   "text": "Find surface area and volume of cubes, cuboids and cylinders, and capacity.",
+   "competencies": [
+    "MATH.measurement.cube-volume",
+    "MATH.measurement.cylinder",
+    "MATH.measurement.surface-area-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": null,
+   "outcome": "icse-g08-c06-o01",
+   "text": "Make grouped frequency and cumulative frequency tables with class intervals.",
+   "competencies": [
+    "MATH.statistics.data-frequency",
+    "MATH.statistics.grouped-data"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 8,
+   "domain": "Data handling and statistics",
+   "chapter": "Data Handling",
+   "section": "Probability",
+   "outcome": "icse-g08-c06-o02",
+   "text": "Find the probability of simple events.",
+   "competencies": [
+    "MATH.probability.experimental",
+    "MATH.probability.sample-space"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-8@1.2.0",
@@ -33317,7 +34492,7 @@
     10
    ],
    "depth": 2,
-   "demand": 7,
+   "demand": 8,
    "missing": [
     "relations",
     "review"

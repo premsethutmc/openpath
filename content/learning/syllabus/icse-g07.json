@@ -1,0 +1,765 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 7,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE ICSE Syllabus: Mathematics, Class VII",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE syllabus as listed for 2025-26",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "CISCE ICSE Class 7 Mathematics syllabus (unit and chapter list)",
+   "publisher": "Shaalaa",
+   "edition": "2025-26 syllabus as shown on the page",
+   "academicYear": "2025-26",
+   "url": "https://www.shaalaa.com/syllabus/cisce-mathematics_8596",
+   "accessed": "2026-11-15",
+   "used_for": "theme, chapter and sub-topic list (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE sets the syllabus for Classes 6–8 and schools set the exams; most schools use privately published books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g07-c01",
+   "number": 1,
+   "term": null,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g07-c01-s01",
+     "title": "Integers"
+    },
+    {
+     "id": "icse-g07-c01-s02",
+     "title": "Rational numbers"
+    },
+    {
+     "id": "icse-g07-c01-s03",
+     "title": "Fractions"
+    },
+    {
+     "id": "icse-g07-c01-s04",
+     "title": "Decimal fractions"
+    },
+    {
+     "id": "icse-g07-c01-s05",
+     "title": "Exponents"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g07-c01-o01",
+     "statement": "Multiply and divide integers and use their properties in word problems.",
+     "concepts": [
+      "integers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-multiply",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-multiply"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g07-c01-o02",
+     "statement": "Represent rational numbers on a number line and as decimals.",
+     "concepts": [
+      "rational numbers"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g07-c01-o03",
+     "statement": "Multiply and divide fractions and decimals, including by powers of 10.",
+     "concepts": [
+      "reciprocal",
+      "powers of 10"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multiply-divide-powers-of-ten",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product",
+      "MATH.number.fraction-product",
+      "MATH.number.multiply-divide-powers-of-ten"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g07-c01-o04",
+     "statement": "Use exponents and the laws of exponents.",
+     "concepts": [
+      "laws of exponents"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    }
+   ]
+  },
+  {
+   "id": "icse-g07-c02",
+   "number": 2,
+   "term": null,
+   "title": "Commercial Arithmetic",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g07-c02-s01",
+     "title": "Ratio and proportion"
+    },
+    {
+     "id": "icse-g07-c02-s02",
+     "title": "Unitary method"
+    },
+    {
+     "id": "icse-g07-c02-s03",
+     "title": "Percentage"
+    },
+    {
+     "id": "icse-g07-c02-s04",
+     "title": "Profit, loss and discount"
+    },
+    {
+     "id": "icse-g07-c02-s05",
+     "title": "Simple interest"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g07-c02-o01",
+     "statement": "Share quantities in a ratio and test proportion.",
+     "concepts": [
+      "sharing in a ratio"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.ratio-division",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.proportion",
+      "MATH.number.ratio-division"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Arithmetic"
+    },
+    {
+     "id": "icse-g07-c02-o02",
+     "statement": "Use the unitary method for time and work and for speed, distance and time.",
+     "concepts": [
+      "time and work"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.time-speed-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.time-speed-intro",
+      "MATH.number.unit-rate"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Arithmetic"
+    },
+    {
+     "id": "icse-g07-c02-o03",
+     "statement": "Convert percentages and find profit, loss and discount for a single transaction.",
+     "concepts": [
+      "discount",
+      "profit"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage",
+      "MATH.number.profit-loss"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Arithmetic"
+    },
+    {
+     "id": "icse-g07-c02-o04",
+     "statement": "Calculate simple interest and find principal, rate or time.",
+     "concepts": [
+      "simple interest"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.profit-loss"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Arithmetic"
+    }
+   ]
+  },
+  {
+   "id": "icse-g07-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g07-c03-s01",
+     "title": "Fundamental concepts"
+    },
+    {
+     "id": "icse-g07-c03-s02",
+     "title": "Simple linear equations and inequalities"
+    },
+    {
+     "id": "icse-g07-c03-s03",
+     "title": "Set concepts"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g07-c03-o01",
+     "statement": "Identify terms, factors and coefficients and add or subtract algebraic expressions.",
+     "concepts": [
+      "coefficient",
+      "terms"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g07-c03-o02",
+     "statement": "Solve simple linear equations, including word problems.",
+     "concepts": [
+      "linear equation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g07-c03-o03",
+     "statement": "Solve simple linear inequalities in one variable over a given set.",
+     "concepts": [
+      "inequality"
+     ],
+     "questionTypes": [
+      "set",
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequations-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequations-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g07-c03-o04",
+     "statement": "Use universal sets, subsets and cardinality.",
+     "concepts": [
+      "universal set",
+      "cardinal number"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ],
+     "coverage": "partial",
+     "source": "Unit 3: Algebra",
+     "note": "OpenPath teaches sets from Class 11; an introduction is not separate yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g07-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g07-c04-s01",
+     "title": "Lines and angles"
+    },
+    {
+     "id": "icse-g07-c04-s02",
+     "title": "Triangles"
+    },
+    {
+     "id": "icse-g07-c04-s03",
+     "title": "Pythagoras theorem"
+    },
+    {
+     "id": "icse-g07-c04-s04",
+     "title": "Symmetry"
+    },
+    {
+     "id": "icse-g07-c04-s05",
+     "title": "Recognition of solids"
+    },
+    {
+     "id": "icse-g07-c04-s06",
+     "title": "Congruency"
+    },
+    {
+     "id": "icse-g07-c04-s07",
+     "title": "Mensuration"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g07-c04-o01",
+     "statement": "Use angles made by parallel lines and a transversal, and construct parallel lines.",
+     "concepts": [
+      "transversal",
+      "alternate angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallel-angles",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.parallel-angles"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o02",
+     "statement": "Use the angle-sum and exterior-angle properties and construct triangles.",
+     "concepts": [
+      "angle sum",
+      "construction of triangles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-properties",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.construction-triangles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.construction-triangles",
+      "MATH.geometry.triangle-properties"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o03",
+     "statement": "Use Pythagoras' theorem in right triangles.",
+     "concepts": [
+      "Pythagoras"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o04",
+     "statement": "Find line and rotational symmetry.",
+     "concepts": [
+      "rotational symmetry"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.rotational-symmetry",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.rotational-symmetry",
+      "MATH.geometry.symmetry-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o05",
+     "statement": "Identify faces, edges and vertices of solids.",
+     "concepts": [
+      "solids"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.polyhedra-euler",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.polyhedra-euler"
+     ],
+     "coverage": "partial",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o06",
+     "statement": "Recognise congruent triangles by SSS, SAS, ASA and RHS.",
+     "concepts": [
+      "congruence criteria"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g07-c04-o07",
+     "statement": "Find perimeter, circumference and area of triangles, parallelograms, circles, rings and combined figures.",
+     "concepts": [
+      "circumference",
+      "area of a ring"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.triangle-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area",
+      "MATH.measurement.parallelogram-rhombus-area",
+      "MATH.measurement.triangle-area"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g07-c05",
+   "number": 5,
+   "term": null,
+   "title": "Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g07-c05-s01",
+     "title": "Data handling"
+    },
+    {
+     "id": "icse-g07-c05-s02",
+     "title": "Probability"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g07-c05-o01",
+     "statement": "Organise data and find mean, median and mode, and draw bar graphs.",
+     "concepts": [
+      "mode",
+      "bar graph"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.median-mode",
+      "MATH.statistics.scaled-bars"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Data Handling"
+    },
+    {
+     "id": "icse-g07-c05-o02",
+     "statement": "Estimate chance from experiments with coins and dice.",
+     "concepts": [
+      "experimental probability"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.experimental",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.chance-language",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.chance-language",
+      "MATH.probability.experimental"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Data Handling"
+    }
+   ]
+  }
+ ]
+}

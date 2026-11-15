@@ -1,0 +1,815 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 8,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE ICSE Syllabus: Mathematics, Class VIII",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE syllabus as listed for 2025-26",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "CISCE ICSE Class 8 Mathematics syllabus (unit and chapter list)",
+   "publisher": "Shaalaa",
+   "edition": "2025-26 syllabus as shown on the page",
+   "academicYear": "2025-26",
+   "url": "https://www.shaalaa.com/syllabus/cisce-mathematics_8597",
+   "accessed": "2026-11-15",
+   "used_for": "theme, chapter and sub-topic list (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE sets the syllabus for Classes 6–8 and schools set the exams; most schools use privately published books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g08-c01",
+   "number": 1,
+   "term": null,
+   "title": "Number System",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c01-s01",
+     "title": "Rational numbers"
+    },
+    {
+     "id": "icse-g08-c01-s02",
+     "title": "Exponents"
+    },
+    {
+     "id": "icse-g08-c01-s03",
+     "title": "Squares and square roots"
+    },
+    {
+     "id": "icse-g08-c01-s04",
+     "title": "Cubes and cube roots"
+    },
+    {
+     "id": "icse-g08-c01-s05",
+     "title": "Playing with numbers"
+    },
+    {
+     "id": "icse-g08-c01-s06",
+     "title": "Sets"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c01-o01",
+     "statement": "Operate on rational numbers and find rational numbers between two given ones.",
+     "concepts": [
+      "rational numbers"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rational-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rational-numbers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g08-c01-o02",
+     "statement": "Use laws of exponents with negative integral exponents.",
+     "concepts": [
+      "negative exponents"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.scientific-notation",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents",
+      "MATH.number.scientific-notation"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g08-c01-o03",
+     "statement": "Find squares and square roots by factorisation and division, and cubes and cube roots.",
+     "concepts": [
+      "square root",
+      "cube root"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.square-roots",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.cubes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.cubes",
+      "MATH.number.square-roots"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g08-c01-o04",
+     "statement": "Use the general form of numbers, divisibility tests and cryptarithms.",
+     "concepts": [
+      "divisibility",
+      "cryptarithm"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.digit-puzzles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.digit-puzzles",
+      "MATH.reasoning.divisibility"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    },
+    {
+     "id": "icse-g08-c01-o05",
+     "statement": "Use subsets, complements, set difference, De Morgan's laws and Venn diagrams.",
+     "concepts": [
+      "complement",
+      "Venn diagram"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Number System"
+    }
+   ]
+  },
+  {
+   "id": "icse-g08-c02",
+   "number": 2,
+   "term": null,
+   "title": "Ratio and Proportion",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c02-s01",
+     "title": "Percentage"
+    },
+    {
+     "id": "icse-g08-c02-s02",
+     "title": "Profit, loss and discount"
+    },
+    {
+     "id": "icse-g08-c02-s03",
+     "title": "Interest"
+    },
+    {
+     "id": "icse-g08-c02-s04",
+     "title": "Direct and inverse variation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c02-o01",
+     "statement": "Use percentages, including overheads, discount, profit and loss.",
+     "concepts": [
+      "overhead",
+      "discount"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage",
+      "MATH.number.profit-loss"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g08-c02-o02",
+     "statement": "Calculate simple and compound interest, including half-yearly compounding.",
+     "concepts": [
+      "compound interest"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compound-interest",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compound-interest",
+      "MATH.number.profit-loss"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    },
+    {
+     "id": "icse-g08-c02-o03",
+     "statement": "Solve direct and inverse variation problems, including time and work.",
+     "concepts": [
+      "inverse variation",
+      "time and work"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion",
+      "MATH.number.proportion"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Ratio and Proportion"
+    }
+   ]
+  },
+  {
+   "id": "icse-g08-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c03-s01",
+     "title": "Algebraic expressions"
+    },
+    {
+     "id": "icse-g08-c03-s02",
+     "title": "Identities"
+    },
+    {
+     "id": "icse-g08-c03-s03",
+     "title": "Factorisation"
+    },
+    {
+     "id": "icse-g08-c03-s04",
+     "title": "Linear equations"
+    },
+    {
+     "id": "icse-g08-c03-s05",
+     "title": "Linear inequations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c03-o01",
+     "statement": "Multiply and divide polynomials and find their degree.",
+     "concepts": [
+      "degree",
+      "polynomial"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.polynomials",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.algebra-simplify",
+      "MATH.algebra.polynomials"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g08-c03-o02",
+     "statement": "Expand with standard identities, including cubes of binomials.",
+     "concepts": [
+      "identities"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.identities-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities",
+      "MATH.algebra.identities-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g08-c03-o03",
+     "statement": "Factorise by common factors, grouping, difference of squares and trinomials.",
+     "concepts": [
+      "factorisation"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factorisation"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g08-c03-o04",
+     "statement": "Solve linear equations in one variable, including those reducible to linear form.",
+     "concepts": [
+      "linear equations"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-rational",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.linear-equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-equations",
+      "MATH.algebra.linear-rational"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g08-c03-o05",
+     "statement": "Solve linear inequations over a replacement set and show the solution set on a number line.",
+     "concepts": [
+      "replacement set",
+      "solution set"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequations-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequations-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    }
+   ]
+  },
+  {
+   "id": "icse-g08-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c04-s01",
+     "title": "Understanding shapes"
+    },
+    {
+     "id": "icse-g08-c04-s02",
+     "title": "Special quadrilaterals"
+    },
+    {
+     "id": "icse-g08-c04-s03",
+     "title": "Constructions"
+    },
+    {
+     "id": "icse-g08-c04-s04",
+     "title": "Representing 3-D in 2-D"
+    },
+    {
+     "id": "icse-g08-c04-s05",
+     "title": "Symmetry"
+    },
+    {
+     "id": "icse-g08-c04-s06",
+     "title": "Circles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c04-o01",
+     "statement": "Use interior and exterior angle sums of polygons and properties of special quadrilaterals.",
+     "concepts": [
+      "polygon angle sum",
+      "trapezium",
+      "rhombus"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.polygon-angles",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.polygon-angles",
+      "MATH.geometry.quadrilaterals"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g08-c04-o02",
+     "statement": "Construct angles of 30°, 45°, 60° and 90°, bisectors and quadrilaterals.",
+     "concepts": [
+      "angle bisector",
+      "construction"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.construction-quadrilaterals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.construction-quadrilaterals",
+      "MATH.geometry.constructions-bisectors"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g08-c04-o03",
+     "statement": "Draw views and nets of solids and use Euler's formula.",
+     "concepts": [
+      "Euler's formula",
+      "nets"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.polyhedra-euler",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.polyhedra-euler",
+      "MATH.geometry.solid-views"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g08-c04-o04",
+     "statement": "Use symmetry and the parts of a circle.",
+     "concepts": [
+      "symmetry",
+      "circle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circles",
+      "MATH.geometry.symmetry-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g08-c05",
+   "number": 5,
+   "term": null,
+   "title": "Mensuration",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c05-s01",
+     "title": "Area of trapezium and polygon"
+    },
+    {
+     "id": "icse-g08-c05-s02",
+     "title": "Surface area, volume and capacity"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c05-o01",
+     "statement": "Find areas of trapeziums, parallelograms, rhombuses, polygons and circles.",
+     "concepts": [
+      "area of a trapezium"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area",
+      "MATH.measurement.parallelogram-rhombus-area",
+      "MATH.measurement.trapezium-area"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Mensuration"
+    },
+    {
+     "id": "icse-g08-c05-o02",
+     "statement": "Find surface area and volume of cubes, cuboids and cylinders, and capacity.",
+     "concepts": [
+      "surface area",
+      "capacity"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.surface-area-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.cube-volume",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.cylinder",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cube-volume",
+      "MATH.measurement.cylinder",
+      "MATH.measurement.surface-area-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Mensuration"
+    }
+   ]
+  },
+  {
+   "id": "icse-g08-c06",
+   "number": 6,
+   "term": null,
+   "title": "Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g08-c06-s01",
+     "title": "Data handling"
+    },
+    {
+     "id": "icse-g08-c06-s02",
+     "title": "Probability"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g08-c06-o01",
+     "statement": "Make grouped frequency and cumulative frequency tables with class intervals.",
+     "concepts": [
+      "class interval",
+      "cumulative frequency"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-data",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency",
+      "MATH.statistics.grouped-data"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Data Handling"
+    },
+    {
+     "id": "icse-g08-c06-o02",
+     "statement": "Find the probability of simple events.",
+     "concepts": [
+      "probability"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.experimental",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.experimental",
+      "MATH.probability.sample-space"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Data Handling"
+    }
+   ]
+  }
+ ]
+}
