@@ -27,10 +27,10 @@
   "requirements": 1505,
   "classes": {
    "validated": 0,
-   "awaiting": 1105,
-   "partial": 388,
+   "awaiting": 1360,
+   "partial": 134,
    "unsupported": 0,
-   "not-implemented": 12
+   "not-implemented": 11
   },
   "competenciesRequired": 341,
   "competenciesComplete": 334,
@@ -85,7 +85,7 @@
    "insufficient": 0
   },
   "educatorPart": {
-   "requirementsWithoutWrittenTask": 36
+   "requirementsWithoutWrittenTask": 0
   }
  },
  "diversity": [],
@@ -115,8 +115,8 @@
    "requirements": 9,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 9,
+    "awaiting": 9,
+    "partial": 0,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -160,8 +160,8 @@
    "requirements": 13,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 13,
+    "awaiting": 9,
+    "partial": 4,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -205,8 +205,8 @@
    "requirements": 13,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 13,
+    "awaiting": 11,
+    "partial": 2,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -250,8 +250,8 @@
    "requirements": 18,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 18,
+    "awaiting": 18,
+    "partial": 0,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -295,8 +295,8 @@
    "requirements": 77,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 77,
+    "awaiting": 69,
+    "partial": 8,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -340,8 +340,8 @@
    "requirements": 29,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 29,
+    "awaiting": 26,
+    "partial": 3,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -385,8 +385,8 @@
    "requirements": 21,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 21,
+    "awaiting": 20,
+    "partial": 1,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -430,8 +430,8 @@
    "requirements": 21,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 21,
+    "awaiting": 20,
+    "partial": 1,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -475,10 +475,10 @@
    "requirements": 30,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 29,
+    "awaiting": 25,
+    "partial": 5,
     "unsupported": 0,
-    "not-implemented": 1
+    "not-implemented": 0
    }
   },
   {
@@ -520,8 +520,8 @@
    "requirements": 27,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 22,
+    "awaiting": 13,
+    "partial": 9,
     "unsupported": 0,
     "not-implemented": 5
    }
@@ -565,8 +565,8 @@
    "requirements": 28,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 23,
+    "awaiting": 16,
+    "partial": 7,
     "unsupported": 0,
     "not-implemented": 5
    }
@@ -610,8 +610,8 @@
    "requirements": 22,
    "classes": {
     "validated": 0,
-    "awaiting": 0,
-    "partial": 21,
+    "awaiting": 19,
+    "partial": 2,
     "unsupported": 0,
     "not-implemented": 1
    }
@@ -12639,8 +12639,8 @@
     "MATH.number.compare-numbers",
     "MATH.number.count-objects"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12654,8 +12654,8 @@
    "competencies": [
     "MATH.number.place-value-tens"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12669,8 +12669,8 @@
    "competencies": [
     "MATH.number.zero"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12685,8 +12685,8 @@
     "MATH.number.addition",
     "MATH.number.subtraction"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12700,8 +12700,8 @@
    "competencies": [
     "MATH.algebra.repeating-patterns"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12716,8 +12716,8 @@
     "MATH.geometry.positions",
     "MATH.geometry.shapes"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12732,8 +12732,8 @@
     "MATH.measurement.calendar",
     "MATH.measurement.time-order"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12749,8 +12749,8 @@
     "MATH.measurement.mass-comparison",
     "MATH.measurement.non-standard-units"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-1@1.0.0",
@@ -12765,8 +12765,8 @@
     "MATH.reasoning.sort-by-attribute",
     "MATH.statistics.picture-data"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-1@1.0.0",
@@ -13389,7 +13389,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13402,10 +13402,10 @@
     "MATH.number.hundreds"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Place value and face value of a digit in a three-digit number are not asked (aadigit stops at two-digit numbers); comparing and ordering three-digit numbers is asked."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13417,10 +13417,10 @@
     "MATH.number.hundreds"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Number names of three-digit numbers are not asked: number-name questions stop at 99 (aaname) and start again at four digits (adname, under thousands)."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13429,14 +13429,16 @@
    "outcome": "icse-g02-c02-o01",
    "text": "Add and subtract two-digit numbers with and without regrouping, including word problems.",
    "competencies": [
+    "MATH.number.addition",
     "MATH.number.addition-regroup",
+    "MATH.number.subtraction",
     "MATH.number.subtraction-regroup"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13448,11 +13450,11 @@
     "MATH.number.mental-arithmetic",
     "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13462,13 +13464,14 @@
    "text": "Use the commutative property, zero in addition, and add or subtract mentally.",
    "competencies": [
     "MATH.number.addition",
-    "MATH.number.mental-arithmetic"
+    "MATH.number.mental-arithmetic",
+    "MATH.number.zero"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The commutative property of addition is never asked; adding zero and mental addition and subtraction are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13480,11 +13483,11 @@
     "MATH.number.equal-groups",
     "MATH.number.multiplication-tables"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Numbers and operations",
@@ -13493,13 +13496,14 @@
    "outcome": "icse-g02-c02-o05",
    "text": "Share equally and see division as repeated subtraction.",
    "competencies": [
+    "MATH.number.division-remainders",
     "MATH.number.sharing"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Algebra",
@@ -13511,11 +13515,11 @@
     "MATH.algebra.number-patterns",
     "MATH.algebra.repeating-patterns"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Geometry",
@@ -13526,11 +13530,11 @@
    "competencies": [
     "MATH.geometry.shape-properties"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Geometry",
@@ -13541,11 +13545,11 @@
    "competencies": [
     "MATH.geometry.line-types"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Measurement",
@@ -13557,11 +13561,11 @@
     "MATH.measurement.mass-comparison",
     "MATH.measurement.non-standard-units"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Measurement",
@@ -13572,11 +13576,11 @@
    "competencies": [
     "MATH.measurement.capacity"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-2@1.0.0",
+   "release": "icse-cisce-mathematics-grade-2@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 2,
    "domain": "Data handling and statistics",
@@ -13589,7 +13593,7 @@
     "MATH.statistics.picture-data"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Everyday charts such as timetables and height charts are not read at this level; only picture records and pictographs are asked."
   },
   {
    "release": "tn-samacheer-mathematics-grade-2@1.0.0",
@@ -14379,7 +14383,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14391,11 +14395,11 @@
     "MATH.number.compare-numbers",
     "MATH.number.thousands"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14404,13 +14408,14 @@
    "outcome": "icse-g03-c01-o01",
    "text": "Read, write, compare and order numbers up to 9999 using place value and expanded form.",
    "competencies": [
+    "MATH.number.compare-numbers",
     "MATH.number.thousands"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14421,11 +14426,11 @@
    "competencies": [
     "MATH.number.multi-digit-add-subtract"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14434,13 +14439,14 @@
    "outcome": "icse-g03-c02-o02",
    "text": "Know the tables of 2, 3, 4, 5, 7, 9 and 10 and multiply a two-digit number by a one-digit number, including the lattice method.",
    "competencies": [
+    "MATH.number.multi-multiplication",
     "MATH.number.multiplication-tables"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14450,13 +14456,14 @@
    "text": "Compute mentally and estimate sums, differences and products, then check.",
    "competencies": [
     "MATH.number.mental-arithmetic",
+    "MATH.number.rounding",
     "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Numbers and operations",
@@ -14468,11 +14475,11 @@
     "MATH.number.division-remainders",
     "MATH.number.sharing"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Algebra",
@@ -14484,11 +14491,11 @@
     "MATH.algebra.growing-patterns",
     "MATH.algebra.number-patterns"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Geometry",
@@ -14501,10 +14508,10 @@
     "MATH.geometry.shape-properties"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Drawing straight and curved lines and shapes on a dot grid is never asked; tangram shapes (wr:shp:tangram) and straight or curved sides are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Geometry",
@@ -14515,11 +14522,11 @@
    "competencies": [
     "MATH.geometry.shape-tiling"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Geometry",
@@ -14531,10 +14538,10 @@
     "MATH.geometry.maps-directions"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Line drawings of 3D objects are not read at this level; simple maps are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Measurement",
@@ -14548,11 +14555,11 @@
     "MATH.measurement.standard-length",
     "MATH.measurement.standard-mass"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Measurement",
@@ -14566,11 +14573,11 @@
     "MATH.measurement.clock",
     "MATH.measurement.time-unit-conversion"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-3@1.0.0",
+   "release": "icse-cisce-mathematics-grade-3@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 3,
    "domain": "Data handling and statistics",
@@ -14582,8 +14589,8 @@
     "MATH.statistics.pictographs",
     "MATH.statistics.tables"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-3@1.0.0",
@@ -15577,7 +15584,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15589,11 +15596,11 @@
     "MATH.number.indian-international-numeration",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15604,11 +15611,11 @@
    "competencies": [
     "MATH.number.roman-numerals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15621,11 +15628,11 @@
     "MATH.number.fraction-add-like",
     "MATH.number.fraction-models"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15637,11 +15644,11 @@
     "MATH.number.division-remainders",
     "MATH.number.multi-multiplication"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15652,11 +15659,11 @@
    "competencies": [
     "MATH.number.multi-digit-add-subtract"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15668,11 +15675,11 @@
     "MATH.reasoning.estimate-check",
     "MATH.reasoning.operation-choice"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15685,11 +15692,11 @@
     "MATH.number.primes",
     "MATH.reasoning.divisibility"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Numbers and operations",
@@ -15701,11 +15708,11 @@
     "MATH.number.hcf-lcm",
     "MATH.number.prime-factorisation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Algebra",
@@ -15717,11 +15724,11 @@
     "MATH.algebra.growing-patterns",
     "MATH.algebra.pattern-rules"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Geometry",
@@ -15732,11 +15739,11 @@
    "competencies": [
     "MATH.geometry.circles"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Geometry",
@@ -15745,14 +15752,15 @@
    "outcome": "icse-g04-c04-o01",
    "text": "Tile regions with shapes and make shapes with tangrams.",
    "competencies": [
+    "MATH.geometry.shape-properties",
     "MATH.geometry.shape-tiling",
     "MATH.geometry.tessellations"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Geometry",
@@ -15763,11 +15771,11 @@
    "competencies": [
     "MATH.geometry.symmetry-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Geometry",
@@ -15779,11 +15787,11 @@
     "MATH.geometry.nets",
     "MATH.geometry.solid-views"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Geometry",
@@ -15794,11 +15802,11 @@
    "competencies": [
     "MATH.geometry.lines-segments"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Measurement",
@@ -15810,11 +15818,11 @@
     "MATH.measurement.compute-with-measures",
     "MATH.measurement.unit-conversions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Measurement",
@@ -15826,11 +15834,11 @@
     "MATH.measurement.area-squares",
     "MATH.measurement.perimeter-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Measurement",
@@ -15842,11 +15850,11 @@
     "MATH.measurement.24-hour-clock",
     "MATH.measurement.elapsed-time"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-4@1.0.0",
+   "release": "icse-cisce-mathematics-grade-4@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 4,
    "domain": "Data handling and statistics",
@@ -15858,8 +15866,8 @@
     "MATH.statistics.bar-charts",
     "MATH.statistics.pictographs"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-4@1.0.0",
@@ -17758,7 +17766,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17770,11 +17778,11 @@
     "MATH.number.indian-international-numeration",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17785,12 +17793,12 @@
    "competencies": [
     "MATH.number.indian-international-numeration"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17801,11 +17809,11 @@
    "competencies": [
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17817,11 +17825,11 @@
     "MATH.number.compare-numbers",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17832,12 +17840,12 @@
    "competencies": [
     "MATH.number.compare-numbers"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17848,11 +17856,11 @@
    "competencies": [
     "MATH.number.rounding"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17863,12 +17871,12 @@
    "competencies": [
     "MATH.number.fraction-models"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17879,11 +17887,11 @@
    "competencies": [
     "MATH.number.fraction-of-collection"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17894,11 +17902,11 @@
    "competencies": [
     "MATH.number.equivalent-fractions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17911,10 +17919,10 @@
     "MATH.number.decimal-tenths"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Halves, quarters and fifths as decimals are asked only rarely (a few aedfr items), and never with lengths; money in paise and rupees is asked."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17925,12 +17933,12 @@
    "competencies": [
     "MATH.number.multiplication-tables"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17941,11 +17949,11 @@
    "competencies": [
     "MATH.number.roman-numerals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17957,11 +17965,11 @@
     "MATH.number.multi-digit-add-subtract",
     "MATH.number.multi-multiplication"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17973,11 +17981,11 @@
     "MATH.number.division-remainders",
     "MATH.number.long-division"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17989,11 +17997,11 @@
     "MATH.number.rounding",
     "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18005,11 +18013,11 @@
     "MATH.number.multi-digit-add-subtract",
     "MATH.number.multi-multiplication"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18021,11 +18029,11 @@
     "MATH.reasoning.multi-step",
     "MATH.reasoning.operation-choice"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18037,11 +18045,11 @@
     "MATH.reasoning.operation-choice"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "not every part is assessed: Making up a story for a GIVEN number statement is not asked; making up one's own number stories is (wr:story9-own).",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18053,11 +18061,11 @@
     "MATH.number.factors-multiples",
     "MATH.number.primes"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18069,11 +18077,11 @@
     "MATH.number.factors-multiples",
     "MATH.number.prime-factorisation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18084,11 +18092,11 @@
    "competencies": [
     "MATH.number.primes"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18099,11 +18107,11 @@
    "competencies": [
     "MATH.number.mixed-fractions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18114,11 +18122,11 @@
    "competencies": [
     "MATH.number.equivalent-fractions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18129,12 +18137,12 @@
    "competencies": [
     "MATH.number.fraction-comparison"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18145,11 +18153,11 @@
    "competencies": [
     "MATH.number.fraction-add"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18161,10 +18169,10 @@
     "MATH.number.fraction-add"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Fraction word problems are not asked: faddu and avfas are bare calculations."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18176,11 +18184,11 @@
     "MATH.number.fraction-multiply",
     "MATH.number.fraction-of-collection"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18192,11 +18200,11 @@
     "MATH.number.fraction-multiply",
     "MATH.number.fraction-product"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18207,11 +18215,11 @@
    "competencies": [
     "MATH.number.fraction-product"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18222,11 +18230,11 @@
    "competencies": [
     "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18237,11 +18245,11 @@
    "competencies": [
     "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18252,11 +18260,11 @@
    "competencies": [
     "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18267,11 +18275,11 @@
    "competencies": [
     "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18283,10 +18291,10 @@
     "MATH.number.decimal-tenths"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Equivalent, like and unlike decimals are never named or asked; comparing decimals is."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18297,11 +18305,11 @@
    "competencies": [
     "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18312,11 +18320,11 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18327,11 +18335,11 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18343,11 +18351,11 @@
     "MATH.number.decimal-product",
     "MATH.number.multiply-divide-powers-of-ten"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18358,11 +18366,11 @@
    "competencies": [
     "MATH.number.decimal-product"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18373,11 +18381,11 @@
    "competencies": [
     "MATH.number.factors-multiples"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18388,11 +18396,11 @@
    "competencies": [
     "MATH.number.factors-multiples"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18405,10 +18413,10 @@
     "MATH.number.primes"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Twin primes are never asked; prime, composite and co-prime numbers are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18419,11 +18427,11 @@
    "competencies": [
     "MATH.reasoning.divisibility"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18434,11 +18442,11 @@
    "competencies": [
     "MATH.number.prime-factorisation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18450,11 +18458,11 @@
     "MATH.number.factors-multiples",
     "MATH.number.hcf-lcm"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18465,11 +18473,11 @@
    "competencies": [
     "MATH.number.hcf-lcm"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18480,11 +18488,11 @@
    "competencies": [
     "MATH.number.hcf-lcm"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18495,11 +18503,11 @@
    "competencies": [
     "MATH.number.integer-add"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18510,11 +18518,11 @@
    "competencies": [
     "MATH.number.number-line"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18525,11 +18533,11 @@
    "competencies": [
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18540,11 +18548,11 @@
    "competencies": [
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18555,11 +18563,11 @@
    "competencies": [
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18570,11 +18578,11 @@
    "competencies": [
     "MATH.number.percent-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18585,11 +18593,11 @@
    "competencies": [
     "MATH.number.percent-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18601,10 +18609,10 @@
     "MATH.number.percent-intro"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Showing a percentage as a shaded hundred grid is never asked; percentages as fractions over 100 are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18616,11 +18624,11 @@
     "MATH.number.percent-intro",
     "MATH.number.percentage"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18631,11 +18639,11 @@
    "competencies": [
     "MATH.number.percent-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18646,12 +18654,12 @@
    "competencies": [
     "MATH.number.percentage"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18662,12 +18670,12 @@
    "competencies": [
     "MATH.algebra.repeating-patterns"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18679,11 +18687,11 @@
     "MATH.algebra.growing-patterns",
     "MATH.algebra.pattern-rules"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18695,11 +18703,11 @@
     "MATH.algebra.repeating-patterns"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "not every part is assessed: A pattern that changes in two ways at once (such as shape and colour) is never asked; one-attribute repeating patterns are.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18710,11 +18718,11 @@
    "competencies": [
     "MATH.algebra.figurate-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18725,11 +18733,11 @@
    "competencies": [
     "MATH.geometry.angles-intro"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18740,11 +18748,11 @@
    "competencies": [
     "MATH.geometry.angles-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18755,11 +18763,11 @@
    "competencies": [
     "MATH.geometry.angles-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18770,11 +18778,11 @@
    "competencies": [
     "MATH.geometry.angle-measure"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18786,11 +18794,11 @@
     "MATH.geometry.rotational-symmetry",
     "MATH.geometry.symmetry-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18801,11 +18809,11 @@
    "competencies": [
     "MATH.geometry.nets"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18816,11 +18824,11 @@
    "competencies": [
     "MATH.geometry.symmetry-3d"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18834,11 +18842,11 @@
     "MATH.measurement.time-unit-conversion",
     "MATH.measurement.unit-conversions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18848,13 +18856,14 @@
    "text": "Estimate how much a solid or a container holds in a known unit, such as mugs in a bucket.",
    "competencies": [
     "MATH.measurement.capacity",
-    "MATH.measurement.volume-cubes"
+    "MATH.measurement.volume-cubes",
+    "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18867,11 +18876,11 @@
     "MATH.measurement.elapsed-time",
     "MATH.measurement.money-decimals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18883,11 +18892,11 @@
     "MATH.measurement.area-squares",
     "MATH.measurement.perimeter-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18899,11 +18908,11 @@
     "MATH.measurement.rectangle-area",
     "MATH.measurement.rectangle-perimeter"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -18916,11 +18925,11 @@
     "MATH.statistics.scaled-bars",
     "MATH.statistics.tables"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -18932,10 +18941,10 @@
     "MATH.statistics.pie-charts"
    ],
    "class": "partial",
-   "why": "Read and draw pie charts: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Read and draw pie charts: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "release": "icse-cisce-mathematics-grade-5@1.4.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -18946,8 +18955,8 @@
    "competencies": [
     "MATH.statistics.line-graphs"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-5@1.0.0",
@@ -20611,7 +20620,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20620,14 +20629,15 @@
    "outcome": "icse-g06-c01-o01",
    "text": "Compare and order large numbers and form the greatest and smallest numbers from given digits.",
    "competencies": [
+    "MATH.number.compare-numbers",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20639,11 +20649,11 @@
     "MATH.number.rounding",
     "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20653,13 +20663,14 @@
    "text": "Use properties of whole numbers and number patterns such as squares, triangular numbers and magic squares.",
    "competencies": [
     "MATH.algebra.figurate-numbers",
-    "MATH.number.operation-properties"
+    "MATH.number.operation-properties",
+    "MATH.reasoning.number-grid-puzzles"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20672,11 +20683,11 @@
     "MATH.number.order-of-operations",
     "MATH.reasoning.divisibility"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20687,11 +20698,11 @@
    "competencies": [
     "MATH.number.indian-international-numeration"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20703,11 +20714,11 @@
     "MATH.number.integer-add",
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20720,11 +20731,11 @@
     "MATH.number.prime-factorisation",
     "MATH.number.primes"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20735,12 +20746,12 @@
    "competencies": [
     "MATH.algebra.sets"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20752,11 +20763,11 @@
     "MATH.number.ratio",
     "MATH.number.ratio-division"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20768,10 +20779,10 @@
     "MATH.number.proportion"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Continued proportion (and the mean or third proportional) is never asked; testing proportion and finding a missing term are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20783,11 +20794,11 @@
     "MATH.algebra.inverse-proportion",
     "MATH.number.unit-rate"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20798,13 +20809,14 @@
    "competencies": [
     "MATH.number.fraction-add",
     "MATH.number.fraction-multiply",
+    "MATH.number.fraction-product",
     "MATH.number.mixed-fractions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20813,13 +20825,14 @@
    "outcome": "icse-g06-c02-o05",
    "text": "Convert between decimals and fractions and calculate with decimals in daily-life problems.",
    "competencies": [
-    "MATH.number.decimal-operations"
+    "MATH.number.decimal-operations",
+    "MATH.number.decimal-tenths"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20831,11 +20844,11 @@
     "MATH.number.percent-intro",
     "MATH.number.percentage"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Numbers and operations",
@@ -20847,10 +20860,10 @@
     "MATH.measurement.time-speed-intro"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Average speed for a journey in parts and converting speed units (km/h and m/s) are not asked; distance per unit time at a steady speed is."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Algebra",
@@ -20862,11 +20875,11 @@
     "MATH.algebra.algebra-simplify",
     "MATH.algebra.expressions-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Algebra",
@@ -20877,11 +20890,11 @@
    "competencies": [
     "MATH.algebra.generalise-with-expressions"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Algebra",
@@ -20890,14 +20903,15 @@
    "outcome": "icse-g06-c03-o01",
    "text": "Use variables, constants, terms, like and unlike terms and simple powers.",
    "competencies": [
+    "MATH.algebra.algebra-simplify",
     "MATH.algebra.expressions-intro",
     "MATH.algebra.variables"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Algebra",
@@ -20909,11 +20923,11 @@
     "MATH.algebra.linear-equations",
     "MATH.algebra.linear-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -20926,11 +20940,11 @@
     "MATH.geometry.angle-pairs",
     "MATH.geometry.basic-constructions"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -20942,11 +20956,11 @@
     "MATH.geometry.angles-intro",
     "MATH.geometry.parallel-angles"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -20957,12 +20971,12 @@
    "competencies": [
     "MATH.geometry.symmetry-lines"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -20975,11 +20989,11 @@
     "MATH.geometry.triangle-properties",
     "MATH.geometry.triangle-types"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -20990,12 +21004,12 @@
    "competencies": [
     "MATH.geometry.polygon-angles"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -21007,11 +21021,11 @@
     "MATH.geometry.circles"
    ],
    "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "not every part is assessed: Secant and tangent are never named; centre, radius, diameter, chord, arc, sector and segment are.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Geometry",
@@ -21023,11 +21037,11 @@
     "MATH.geometry.nets",
     "MATH.geometry.solid-views"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Measurement",
@@ -21036,14 +21050,15 @@
    "outcome": "icse-g06-c05-o01",
    "text": "Find the perimeter and area of rectangles and squares and the perimeter of equilateral triangles.",
    "competencies": [
+    "MATH.measurement.perimeter-intro",
     "MATH.measurement.rectangle-area",
     "MATH.measurement.rectangle-perimeter"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Data handling and statistics",
@@ -21053,13 +21068,14 @@
    "text": "Organise data in frequency tables and draw pictographs and bar graphs.",
    "competencies": [
     "MATH.statistics.data-frequency",
+    "MATH.statistics.pictographs",
     "MATH.statistics.scaled-bars"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-6@1.0.0",
+   "release": "icse-cisce-mathematics-grade-6@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 6,
    "domain": "Data handling and statistics",
@@ -21071,8 +21087,8 @@
     "MATH.statistics.averages-intro",
     "MATH.statistics.median-mode"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-6@1.1.0",
@@ -22837,7 +22853,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22848,11 +22864,11 @@
    "competencies": [
     "MATH.number.integer-multiply"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22863,11 +22879,11 @@
    "competencies": [
     "MATH.number.rational-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22880,11 +22896,11 @@
     "MATH.number.fraction-product",
     "MATH.number.multiply-divide-powers-of-ten"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22895,11 +22911,11 @@
    "competencies": [
     "MATH.number.exponents"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22911,11 +22927,11 @@
     "MATH.number.proportion",
     "MATH.number.ratio-division"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22927,11 +22943,11 @@
     "MATH.measurement.time-speed-intro",
     "MATH.number.unit-rate"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22943,11 +22959,11 @@
     "MATH.number.percentage",
     "MATH.number.profit-loss"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -22958,11 +22974,11 @@
    "competencies": [
     "MATH.number.profit-loss"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Algebra",
@@ -22973,11 +22989,11 @@
    "competencies": [
     "MATH.algebra.algebra-simplify"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Algebra",
@@ -22988,11 +23004,11 @@
    "competencies": [
     "MATH.algebra.linear-equations"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Algebra",
@@ -23003,11 +23019,11 @@
    "competencies": [
     "MATH.algebra.inequations-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Algebra",
@@ -23018,12 +23034,12 @@
    "competencies": [
     "MATH.algebra.sets"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23035,11 +23051,11 @@
     "MATH.geometry.basic-constructions",
     "MATH.geometry.parallel-angles"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23051,11 +23067,11 @@
     "MATH.geometry.construction-triangles",
     "MATH.geometry.triangle-properties"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23066,11 +23082,11 @@
    "competencies": [
     "MATH.geometry.congruence"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23081,13 +23097,14 @@
    "competencies": [
     "MATH.measurement.circle-area",
     "MATH.measurement.parallelogram-rhombus-area",
+    "MATH.measurement.trapezium-area",
     "MATH.measurement.triangle-area"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23099,10 +23116,10 @@
     "MATH.geometry.pythagoras"
    ],
    "class": "partial",
-   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23114,11 +23131,11 @@
     "MATH.geometry.rotational-symmetry",
     "MATH.geometry.symmetry-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Geometry",
@@ -23130,11 +23147,11 @@
     "MATH.geometry.nets",
     "MATH.geometry.polyhedra-euler"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -23146,11 +23163,11 @@
     "MATH.probability.chance-language",
     "MATH.probability.experimental"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-7@1.0.0",
+   "release": "icse-cisce-mathematics-grade-7@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -23163,8 +23180,8 @@
     "MATH.statistics.median-mode",
     "MATH.statistics.scaled-bars"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-7@1.2.0",
@@ -24897,7 +24914,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24909,11 +24926,11 @@
     "MATH.reasoning.digit-puzzles",
     "MATH.reasoning.divisibility"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24924,11 +24941,11 @@
    "competencies": [
     "MATH.number.rational-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24940,11 +24957,11 @@
     "MATH.number.exponents",
     "MATH.number.scientific-notation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24956,11 +24973,11 @@
     "MATH.number.cubes",
     "MATH.number.square-roots"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24971,12 +24988,12 @@
    "competencies": [
     "MATH.algebra.sets"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -24988,11 +25005,11 @@
     "MATH.number.percentage",
     "MATH.number.profit-loss"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -25004,11 +25021,11 @@
     "MATH.number.compound-interest",
     "MATH.number.profit-loss"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -25020,11 +25037,11 @@
     "MATH.algebra.inverse-proportion",
     "MATH.number.proportion"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Algebra",
@@ -25036,11 +25053,11 @@
     "MATH.algebra.algebra-simplify",
     "MATH.algebra.polynomials"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Algebra",
@@ -25051,11 +25068,11 @@
    "competencies": [
     "MATH.algebra.factorisation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Algebra",
@@ -25067,11 +25084,11 @@
     "MATH.algebra.identities",
     "MATH.algebra.identities-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Algebra",
@@ -25083,11 +25100,11 @@
     "MATH.algebra.linear-equations",
     "MATH.algebra.linear-rational"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Algebra",
@@ -25098,11 +25115,11 @@
    "competencies": [
     "MATH.algebra.inequations-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Geometry",
@@ -25114,11 +25131,11 @@
     "MATH.geometry.polyhedra-euler",
     "MATH.geometry.solid-views"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Geometry",
@@ -25130,11 +25147,11 @@
     "MATH.geometry.polygon-angles",
     "MATH.geometry.quadrilaterals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Geometry",
@@ -25143,14 +25160,15 @@
    "outcome": "icse-g08-c04-o02",
    "text": "Construct angles of 30°, 45°, 60° and 90°, bisectors and quadrilaterals.",
    "competencies": [
+    "MATH.geometry.basic-constructions",
     "MATH.geometry.construction-quadrilaterals",
     "MATH.geometry.constructions-bisectors"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Geometry",
@@ -25162,12 +25180,12 @@
     "MATH.geometry.circles",
     "MATH.geometry.symmetry-lines"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Measurement",
@@ -25180,11 +25198,11 @@
     "MATH.measurement.parallelogram-rhombus-area",
     "MATH.measurement.trapezium-area"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Measurement",
@@ -25197,11 +25215,11 @@
     "MATH.measurement.cylinder",
     "MATH.measurement.surface-area-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Data handling and statistics",
@@ -25214,10 +25232,10 @@
     "MATH.statistics.grouped-data"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Cumulative frequency tables are not built; grouped frequency tables with class intervals are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-8@1.0.0",
+   "release": "icse-cisce-mathematics-grade-8@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 8,
    "domain": "Data handling and statistics",
@@ -25229,8 +25247,8 @@
     "MATH.probability.experimental",
     "MATH.probability.sample-space"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-8@1.2.0",
@@ -27036,7 +27054,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27047,11 +27065,11 @@
    "competencies": [
     "MATH.number.radicals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27062,11 +27080,11 @@
    "competencies": [
     "MATH.number.real-numbers"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27077,11 +27095,11 @@
    "competencies": [
     "MATH.number.irrationality-proofs"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27092,11 +27110,11 @@
    "competencies": [
     "MATH.number.compound-interest"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27108,11 +27126,11 @@
     "MATH.number.compound-interest",
     "MATH.number.profit-loss"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Numbers and operations",
@@ -27121,14 +27139,15 @@
    "outcome": "icse-g09-c02-o03",
    "text": "Use the compound-interest formula for growth and depreciation.",
    "competencies": [
+    "MATH.algebra.geometric-sequences",
     "MATH.number.compound-interest",
     "MATH.number.exponential-growth"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Algebra",
@@ -27139,11 +27158,11 @@
    "competencies": [
     "MATH.algebra.identities"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Algebra",
@@ -27154,11 +27173,11 @@
    "competencies": [
     "MATH.algebra.factorisation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Algebra",
@@ -27169,11 +27188,11 @@
    "competencies": [
     "MATH.algebra.linear-systems"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Algebra",
@@ -27182,14 +27201,15 @@
    "outcome": "icse-g09-c03-o04",
    "text": "Use the laws of indices, including zero, negative and fractional indices, and solve simple exponential equations.",
    "competencies": [
-    "MATH.number.exponents"
+    "MATH.algebra.logarithms",
+    "MATH.number.exponents",
+    "MATH.number.radicals"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
-   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Algebra",
@@ -27200,12 +27220,12 @@
    "competencies": [
     "MATH.algebra.logarithms"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27217,11 +27237,11 @@
     "MATH.geometry.parallelogram-proofs",
     "MATH.geometry.quadrilaterals"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27234,10 +27254,10 @@
     "MATH.geometry.construction-quadrilaterals"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Constructing a regular hexagon is never asked; quadrilaterals from given data are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27249,11 +27269,11 @@
     "MATH.geometry.congruence",
     "MATH.geometry.triangle-proof"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27261,12 +27281,15 @@
    "section": "Triangles",
    "outcome": "icse-g09-c04-o06",
    "text": "Prove and use that parallelograms and triangles on the same base and between the same parallels have related areas.",
-   "competencies": [],
-   "class": "not-implemented",
-   "why": "No competency is mapped to this outcome."
+   "competencies": [
+    "MATH.measurement.triangle-area"
+   ],
+   "class": "partial",
+   "why": "not every part is assessed: Parallelograms on the same base and between the same parallels, and the theorems linking their areas to triangles, are not asked; one written task proves triangles on the same base between the same parallels are equal in area.",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27278,10 +27301,10 @@
     "MATH.geometry.midpoint-theorem"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The equal intercept theorem is never asked; the mid-point theorem and its converse are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27293,10 +27316,10 @@
     "MATH.geometry.pythagoras"
    ],
    "class": "partial",
-   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Geometry",
@@ -27307,11 +27330,11 @@
    "competencies": [
     "MATH.geometry.circle-theorems"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Measurement",
@@ -27323,11 +27346,11 @@
     "MATH.measurement.heron",
     "MATH.measurement.parallelogram-rhombus-area"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Measurement",
@@ -27340,11 +27363,11 @@
     "MATH.measurement.surface-area-intro"
    ],
    "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "not every part is assessed: Open boxes (surface area without a lid) are never asked; closed cubes and cuboids are.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Measurement",
@@ -27355,12 +27378,12 @@
    "competencies": [
     "MATH.measurement.circle-area"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Data handling and statistics",
@@ -27372,11 +27395,11 @@
     "MATH.statistics.data-frequency",
     "MATH.statistics.grouped-data"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Data handling and statistics",
@@ -27387,11 +27410,11 @@
    "competencies": [
     "MATH.statistics.histograms"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Data handling and statistics",
@@ -27403,12 +27426,12 @@
     "MATH.statistics.averages-intro",
     "MATH.statistics.median-mode"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Coordinate geometry",
@@ -27420,11 +27443,11 @@
     "MATH.algebra.linear-systems",
     "MATH.algebra.linear-two-variables"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Coordinate geometry",
@@ -27435,11 +27458,11 @@
    "competencies": [
     "MATH.coordinate.cartesian"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Coordinate geometry",
@@ -27451,11 +27474,11 @@
     "MATH.coordinate.distance",
     "MATH.coordinate.distance-intro"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Trigonometry",
@@ -27466,11 +27489,11 @@
    "competencies": [
     "MATH.trigonometry.ratios"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Trigonometry",
@@ -27481,11 +27504,11 @@
    "competencies": [
     "MATH.trigonometry.ratios"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "release": "icse-cisce-mathematics-grade-9@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 9,
    "domain": "Trigonometry",
@@ -27497,8 +27520,8 @@
     "MATH.trigonometry.identities",
     "MATH.trigonometry.ratios"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-9@1.1.0",
@@ -29149,7 +29172,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29162,7 +29185,7 @@
    "why": "No competency is mapped to this outcome."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29175,7 +29198,7 @@
    "why": "No competency is mapped to this outcome."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29188,7 +29211,7 @@
    "why": "No competency is mapped to this outcome."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Numbers and operations",
@@ -29201,7 +29224,7 @@
    "why": "No competency is mapped to this outcome."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29212,11 +29235,11 @@
    "competencies": [
     "MATH.algebra.factor-theorem"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29228,11 +29251,11 @@
     "MATH.geometry.transformations"
    ],
    "class": "partial",
-   "why": "Perform and describe reflections, translations and rotations of figures: missing relations; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "Perform and describe reflections, translations and rotations of figures: missing relations; not every part is assessed: Reflection in the origin and invariant points are never asked; reflection in lines x = a and y = a is.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29243,11 +29266,11 @@
    "competencies": [
     "MATH.coordinate.distance"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29258,11 +29281,11 @@
    "competencies": [
     "MATH.algebra.inequalities"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29275,10 +29298,10 @@
     "MATH.algebra.quadratics"
    ],
    "class": "partial",
-   "why": "Solve quadratic equations: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Solve quadratic equations: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29290,10 +29313,10 @@
     "MATH.algebra.quadratics"
    ],
    "class": "partial",
-   "why": "Solve quadratic equations: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Solve quadratic equations: missing relations; not every part is assessed: Forming the quadratic equation from the situation is never itself asked: auqwp gives the situation and asks only for the answer."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29304,11 +29327,11 @@
    "competencies": [
     "MATH.coordinate.straight-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29321,11 +29344,11 @@
     "MATH.number.ratio"
    ],
    "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "why": "not every part is assessed: Continued and mean proportion and the componendo, dividendo, alternendo and invertendo properties are never asked; finding a missing term of a proportion is.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29336,12 +29359,12 @@
    "competencies": [
     "MATH.algebra.matrices"
    ],
-   "class": "partial",
-   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Algebra",
@@ -29353,11 +29376,11 @@
     "MATH.algebra.arithmetic-sequences",
     "MATH.algebra.geometric-sequences"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29369,10 +29392,10 @@
     "MATH.geometry.similarity"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Maps and models (a scale factor k giving areas in k² and volumes in k³) are not asked; similar triangles, the basic proportionality theorem and area ratios are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29384,10 +29407,10 @@
     "MATH.geometry.circle-tangents"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The tangent–secant relation (PA × PB = PT²) is never asked; tangent properties are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29396,14 +29419,15 @@
    "outcome": "icse-g10-c03-o05",
    "text": "Construct tangents from an external point and the circumcircle and incircle of a triangle or a regular hexagon.",
    "competencies": [
+    "MATH.geometry.circle-tangents",
     "MATH.geometry.constructions-bisectors",
     "MATH.geometry.triangle-concurrency"
    ],
    "class": "partial",
-   "why": "Locate and construct triangle centres: missing relations; the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "Locate and construct triangle centres: missing relations; not every part is assessed: Circumscribing or inscribing a circle on a regular hexagon is never asked; tangents from an external point and the circumcircle and incircle of a triangle are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29416,10 +29440,10 @@
     "MATH.geometry.constructions-bisectors"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: As constructions of loci, the fixed distance from a point and the equidistant from two lines are not asked; equidistant from two points is (wr:bis:same-distance-wells)."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Geometry",
@@ -29430,11 +29454,11 @@
    "competencies": [
     "MATH.geometry.circle-theorems"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Measurement",
@@ -29445,11 +29469,11 @@
    "competencies": [
     "MATH.measurement.combined-solids"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Measurement",
@@ -29461,11 +29485,11 @@
     "MATH.measurement.cones-spheres",
     "MATH.measurement.cylinder"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29476,11 +29500,11 @@
    "competencies": [
     "MATH.statistics.grouped-mean"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29493,10 +29517,10 @@
     "MATH.statistics.histograms"
    ],
    "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Estimating the mode from a histogram (by drawing on it) is never asked; drawing histograms, naming the modal class (wr:hist:plants) and the grouped mode by formula are."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Data handling and statistics",
@@ -29509,7 +29533,7 @@
    "why": "No competency is mapped to this outcome."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Probability",
@@ -29521,11 +29545,11 @@
     "MATH.probability.classical",
     "MATH.probability.sample-space"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Trigonometry",
@@ -29536,11 +29560,11 @@
    "competencies": [
     "MATH.trigonometry.identities"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "release": "icse-cisce-mathematics-grade-10@1.1.0",
    "board": "CISCE (ICSE)",
    "grade": 10,
    "domain": "Trigonometry",
@@ -29551,8 +29575,8 @@
    "competencies": [
     "MATH.trigonometry.heights-distances"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-10@1.1.0",
@@ -31533,8 +31557,8 @@
     "MATH.trigonometry.equations",
     "MATH.trigonometry.triangle-laws"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31548,8 +31572,8 @@
    "competencies": [
     "MATH.algebra.sets"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31566,7 +31590,7 @@
     "MATH.sets-relations.cartesian-product"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The range of functions other than quadratics (rational, square-root or modulus functions) is not asked; Cartesian products, relations, functions and domains are."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31582,7 +31606,7 @@
     "MATH.algebra.standard-function-graphs"
    ],
    "class": "partial",
-   "why": "Combine functions by sum, difference, product, quotient and composition: missing relations; the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "why": "Combine functions by sum, difference, product, quotient and composition: missing relations; not every part is assessed: Writing a combined function such as (f + g)(x) or (fg)(x) as an expression is not asked; sketching and reading the standard functions is."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31598,8 +31622,8 @@
     "MATH.trigonometry.functions",
     "MATH.trigonometry.radians"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31613,8 +31637,8 @@
    "competencies": [
     "MATH.reasoning.mathematical-induction"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31630,7 +31654,7 @@
     "MATH.number.complex-polar-form"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The cube roots of unity are never asked; complex arithmetic, modulus and argument are."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31645,8 +31669,8 @@
     "MATH.algebra.nonlinear-inequalities",
     "MATH.algebra.quadratic-complex"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31660,8 +31684,8 @@
    "competencies": [
     "MATH.algebra.permutations"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31675,8 +31699,8 @@
    "competencies": [
     "MATH.algebra.binomial"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31694,7 +31718,7 @@
     "MATH.sequences.power-sums"
    ],
    "class": "partial",
-   "why": "Sum special series of natural numbers: missing relations; not yet judged against the content (outcome-assessment map)"
+   "why": "Sum special series of natural numbers: missing relations"
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31710,7 +31734,7 @@
     "MATH.statistics.mean-deviation"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Quartiles are never asked; range, mean deviation, variance and standard deviation are."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31725,8 +31749,8 @@
     "MATH.probability.complements",
     "MATH.probability.events"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31742,7 +31766,7 @@
     "MATH.statistics.weighted-mean"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The combined standard deviation of two groups is never asked; the combined mean is."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31770,8 +31794,8 @@
     "MATH.reasoning.logic",
     "MATH.reasoning.propositional-logic"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31785,8 +31809,8 @@
    "competencies": [
     "MATH.reasoning.logic"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31800,8 +31824,8 @@
    "competencies": [
     "MATH.calculus.derivatives"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31815,8 +31839,8 @@
    "competencies": [
     "MATH.calculus.limits"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31830,8 +31854,8 @@
    "competencies": [
     "MATH.coordinate.straight-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31847,7 +31871,7 @@
     "MATH.coordinate.conics"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The diameter form and the parametric form of a circle are never asked; the standard and general forms and tangents are."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31861,8 +31885,8 @@
    "competencies": [
     "MATH.coordinate.conic-tangents-normals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31877,8 +31901,8 @@
     "MATH.coordinate.conics",
     "MATH.coordinate.pair-of-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-11@1.0.0",
@@ -31892,8 +31916,8 @@
    "competencies": [
     "MATH.coordinate.space-coordinates"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-11@1.1.0",
@@ -34006,8 +34030,8 @@
    "competencies": [
     "MATH.sets-relations.relation-properties"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34022,8 +34046,8 @@
     "MATH.algebra.inverse-functions",
     "MATH.sets-relations.function-types"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34038,7 +34062,7 @@
     "MATH.trigonometry.inverse"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: The 3 tan⁻¹x formula is not asked and the graphs of cot⁻¹, sec⁻¹ and cosec⁻¹ are not drawn; principal values, the domains and ranges of all six (wr:inv:four-branches) and 2 tan⁻¹x identities are."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34052,8 +34076,8 @@
    "competencies": [
     "MATH.algebra.matrix-systems"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34068,8 +34092,8 @@
     "MATH.algebra.matrices",
     "MATH.matrices.transpose-symmetry"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34084,8 +34108,8 @@
     "MATH.algebra.determinants",
     "MATH.matrices.adjoint-inverse"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34100,8 +34124,8 @@
     "MATH.algebra.inequalities-two-variables",
     "MATH.algebra.linear-programming"
    ],
-   "class": "partial",
-   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34116,8 +34140,8 @@
     "MATH.probability.conditional",
     "MATH.probability.independent-events"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34132,8 +34156,8 @@
     "MATH.probability.bayes",
     "MATH.probability.total-probability"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34148,8 +34172,8 @@
     "MATH.calculus.lhopital",
     "MATH.calculus.mean-value-theorems"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34165,8 +34189,8 @@
     "MATH.calculus.integration-methods",
     "MATH.calculus.partial-fractions-integration"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34182,8 +34206,8 @@
     "MATH.calculus.higher-derivatives",
     "MATH.calculus.implicit-parametric-differentiation"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34198,8 +34222,8 @@
     "MATH.calculus.applications",
     "MATH.calculus.monotonicity"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34214,8 +34238,8 @@
     "MATH.calculus.definite-integral-properties",
     "MATH.calculus.definite-integrals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34231,8 +34255,8 @@
     "MATH.calculus.homogeneous-de",
     "MATH.calculus.linear-first-order-de"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34246,8 +34270,8 @@
    "competencies": [
     "MATH.calculus.area-integrals"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34262,7 +34286,7 @@
     "MATH.calculus.applications"
    ],
    "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "why": "not every part is assessed: Cost, average cost, profit functions and break-even points are not asked; marginal revenue is."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34277,8 +34301,8 @@
     "MATH.coordinate.skew-line-distance",
     "MATH.coordinate.space-lines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34292,8 +34316,8 @@
    "competencies": [
     "MATH.coordinate.space-planes"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34308,8 +34332,8 @@
     "MATH.vectors.algebra",
     "MATH.vectors.direction-cosines"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-12@1.0.0",
@@ -34324,8 +34348,8 @@
     "MATH.vectors.products",
     "MATH.vectors.triple-products"
    ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "tn-samacheer-mathematics-grade-12@1.1.0",

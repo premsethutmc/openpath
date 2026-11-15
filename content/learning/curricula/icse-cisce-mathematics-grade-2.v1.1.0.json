@@ -1,0 +1,481 @@
+{
+ "id": "icse-cisce-mathematics-grade-2",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 2,
+ "title": "CISCE Curriculum: Mathematics, Class II — Grade 2 Mathematics (CISCE / ICSE)",
+ "hash": "0b039ba7",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE Curriculum: Mathematics, Class II",
+  "edition": "CISCE curriculum, Classes I–V",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g02.json. 6 of 6 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://batesountracentle.blogspot.com/2021/11/icse-class-2-mathematics-pdf.html https://byjus.com/icse-class-2-maths-syllabus. Notes: UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false. A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g02-c01",
+     "number": 1,
+     "title": "Theme 1: Numbers",
+     "outcomes": [
+      {
+       "id": "icse-g02-c01-o02",
+       "text": "Find place and face value in three-digit numbers and compare and order them.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.hundreds",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c01-s01",
+       "number": "1.1",
+       "title": "Numbers up to 999",
+       "outcomes": [
+        {
+         "id": "icse-g02-c01-o01",
+         "text": "Read and write numbers up to 999 and their number names.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.hundreds",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, text)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g02-c02",
+     "number": 2,
+     "title": "Theme 2: Number Operations",
+     "outcomes": [
+      {
+       "id": "icse-g02-c02-o01",
+       "text": "Add and subtract two-digit numbers with and without regrouping, including word problems.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.addition-regroup",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.subtraction-regroup",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g02-c02-o03",
+       "text": "Estimate sums and differences.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.mental-arithmetic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c02-s01",
+       "number": "2.1",
+       "title": "Addition and subtraction",
+       "outcomes": [
+        {
+         "id": "icse-g02-c02-o02",
+         "text": "Use the commutative property, zero in addition, and add or subtract mentally.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.addition",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.mental-arithmetic",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.zero",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "icse-g02-c02-o04",
+         "text": "Know the multiplication tables of 2, 3, 4 and 5 as repeated addition.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.equal-groups",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.multiplication-tables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "icse-g02-c02-o05",
+         "text": "Share equally and see division as repeated subtraction.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.division-remainders",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.sharing",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g02-c02-s02",
+       "number": "2.2",
+       "title": "Multiplication",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g02-c02-s03",
+       "number": "2.3",
+       "title": "Division",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g02-c06",
+     "number": 6,
+     "title": "Theme 6: Patterns",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c06-s01",
+       "number": "6.1",
+       "title": "Repeating patterns",
+       "outcomes": [
+        {
+         "id": "icse-g02-c06-o01",
+         "text": "Find the unit of repeat and extend or create patterns.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.number-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.repeating-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g02-c03",
+     "number": 3,
+     "title": "Theme 3: Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c03-s01",
+       "number": "3.1",
+       "title": "2D shapes and lines",
+       "outcomes": [
+        {
+         "id": "icse-g02-c03-o01",
+         "text": "Describe 2D shapes by sides and corners.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.shape-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "icse-g02-c03-o02",
+         "text": "Draw horizontal, vertical, straight and curved lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.line-types",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "icse-g02-c04",
+     "number": 4,
+     "title": "Theme 4: Measurement",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c04-s01",
+       "number": "4.1",
+       "title": "Length, weight and capacity",
+       "outcomes": [
+        {
+         "id": "icse-g02-c04-o01",
+         "text": "Measure lengths with non-standard units and compare weights with a simple balance.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.mass-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.non-standard-units",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "icse-g02-c04-o02",
+         "text": "Order containers by capacity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.capacity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "icse-g02-c05",
+     "number": 5,
+     "title": "Theme 5: Data Handling",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g02-c05-s01",
+       "number": "5.1",
+       "title": "Everyday charts",
+       "outcomes": [
+        {
+         "id": "icse-g02-c05-o01",
+         "text": "Read simple charts from daily life such as timetables and height charts.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.pictographs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.picture-data",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    }
+   ]
+  }
+ ]
+}

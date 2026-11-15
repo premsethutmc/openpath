@@ -1,0 +1,1058 @@
+{
+ "id": "icse-cisce-mathematics-grade-6",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 6,
+ "title": "CISCE ICSE Syllabus: Mathematics, Class VI — Grade 6 Mathematics (CISCE / ICSE)",
+ "hash": "7863b70f",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE ICSE Syllabus: Mathematics, Class VI",
+  "edition": "CISCE syllabus as listed for 2025-26",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g06.json. 6 of 6 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://www.shaalaa.com/syllabus/cisce-mathematics_8598. Notes: UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false. A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words. Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g06-c01",
+     "number": 1,
+     "title": "Number System",
+     "outcomes": [
+      {
+       "id": "icse-g06-c01-o01",
+       "text": "Compare and order large numbers and form the greatest and smallest numbers from given digits.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g06-c01-o03",
+       "text": "Round numbers and estimate sums, differences, products and quotients.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rounding",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g06-c01-o04",
+       "text": "Use properties of whole numbers and number patterns such as squares, triangular numbers and magic squares.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.figurate-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.operation-properties",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.number-grid-puzzles",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g06-c01-o07",
+       "text": "Use BODMAS with brackets, even and odd numbers and divisibility rules.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.even-odd",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.order-of-operations",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.divisibility",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c01-s01",
+       "number": "1.1",
+       "title": "Numbers and place value",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s02",
+       "number": "1.2",
+       "title": "Estimation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s03",
+       "number": "1.3",
+       "title": "Indian and international systems",
+       "outcomes": [
+        {
+         "id": "icse-g06-c01-o02",
+         "text": "Read and write numbers in the Indian and international systems and convert between them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.indian-international-numeration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; text, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s04",
+       "number": "1.4",
+       "title": "Natural and whole numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s05",
+       "number": "1.5",
+       "title": "Negative numbers and integers",
+       "outcomes": [
+        {
+         "id": "icse-g06-c01-o05",
+         "text": "Order integers on the number line and add and subtract them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.integer-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.integers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s06",
+       "number": "1.6",
+       "title": "HCF and LCM",
+       "outcomes": [
+        {
+         "id": "icse-g06-c01-o06",
+         "text": "Find factors, primes, prime factorisations, HCF and LCM.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.hcf-lcm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.prime-factorisation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.primes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s07",
+       "number": "1.7",
+       "title": "Playing with numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c01-s08",
+       "number": "1.8",
+       "title": "Sets",
+       "outcomes": [
+        {
+         "id": "icse-g06-c01-o08",
+         "text": "Describe sets in roster and rule form, name types of sets and find cardinality.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.sets",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g06-c02",
+     "number": 2,
+     "title": "Ratio and Proportion",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c02-s01",
+       "number": "2.1",
+       "title": "Ratio",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o01",
+         "text": "Compare quantities as ratios, simplify ratios and divide a quantity in a ratio.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.ratio",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.ratio-division",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s02",
+       "number": "2.2",
+       "title": "Proportion",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o02",
+         "text": "Test proportion, find a missing term and use continued proportion.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s03",
+       "number": "2.3",
+       "title": "Unitary method",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o03",
+         "text": "Use the unitary method for direct and inverse variation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.unit-rate",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s04",
+       "number": "2.4",
+       "title": "Fractions",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o04",
+         "text": "Add, subtract, multiply and divide fractions and mixed numbers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-add",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.fraction-multiply",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.fraction-product",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.mixed-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s05",
+       "number": "2.5",
+       "title": "Decimal fractions",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o05",
+         "text": "Convert between decimals and fractions and calculate with decimals in daily-life problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.decimal-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.decimal-tenths",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s06",
+       "number": "2.6",
+       "title": "Percentage",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o06",
+         "text": "Convert percentages and find percentage of a quantity and percentage increase or decrease.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.percent-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.percentage",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c02-s07",
+       "number": "2.7",
+       "title": "Speed, distance and time",
+       "outcomes": [
+        {
+         "id": "icse-g06-c02-o07",
+         "text": "Solve speed, distance and time problems, including unit conversions and average speed.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.time-speed-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g06-c03",
+     "number": 3,
+     "title": "Algebra",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c03-s01",
+       "number": "3.1",
+       "title": "Fundamental concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c03-s02",
+       "number": "3.2",
+       "title": "Operations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c03-s03",
+       "number": "3.3",
+       "title": "Substitution",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c03-s04",
+       "number": "3.4",
+       "title": "Framing expressions",
+       "outcomes": [
+        {
+         "id": "icse-g06-c03-o02",
+         "text": "Add, subtract, multiply and divide simple algebraic expressions, and substitute values.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.algebra-simplify",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.expressions-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        },
+        {
+         "id": "icse-g06-c03-o03",
+         "text": "Form expressions and formulas from statements and patterns.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.generalise-with-expressions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c03-s05",
+       "number": "3.5",
+       "title": "Simple linear equations",
+       "outcomes": [
+        {
+         "id": "icse-g06-c03-o01",
+         "text": "Use variables, constants, terms, like and unlike terms and simple powers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.algebra-simplify",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.expressions-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        },
+        {
+         "id": "icse-g06-c03-o04",
+         "text": "Solve simple linear equations by transposition and use them for word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.linear-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g06-c04",
+     "number": 4,
+     "title": "Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c04-s01",
+       "number": "4.1",
+       "title": "Fundamental concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s02",
+       "number": "4.2",
+       "title": "Angles",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o02",
+         "text": "Measure, classify and construct angles and use angle pairs and vertically opposite angles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angle-measure",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.angle-pairs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.basic-constructions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s03",
+       "number": "4.3",
+       "title": "Lines and angles",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o01",
+         "text": "Name points, lines, rays, segments, parallel and intersecting lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.parallel-angles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        },
+        {
+         "id": "icse-g06-c04-o06",
+         "text": "Find lines of symmetry and complete symmetric figures.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; drawing, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s04",
+       "number": "4.4",
+       "title": "Triangles",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o03",
+         "text": "Classify triangles and quadrilaterals and use the angle-sum and exterior-angle properties.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.quadrilateral-classification",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.triangle-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.triangle-types",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s05",
+       "number": "4.5",
+       "title": "Quadrilaterals",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s06",
+       "number": "4.6",
+       "title": "Polygons",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o04",
+         "text": "Name polygons and use interior and exterior angle sums of regular polygons.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.polygon-angles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s07",
+       "number": "4.7",
+       "title": "The circle",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o05",
+         "text": "Name parts of a circle: radius, diameter, chord, arc, sector, segment, secant and tangent.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s08",
+       "number": "4.8",
+       "title": "Symmetry",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c04-s09",
+       "number": "4.9",
+       "title": "Recognition of solids",
+       "outcomes": [
+        {
+         "id": "icse-g06-c04-o07",
+         "text": "Identify faces, edges and vertices of solids, their nets and views.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.nets",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.solid-views",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "icse-g06-c05",
+     "number": 5,
+     "title": "Mensuration",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c05-s01",
+       "number": "5.1",
+       "title": "Perimeter and area",
+       "outcomes": [
+        {
+         "id": "icse-g06-c05-o01",
+         "text": "Find the perimeter and area of rectangles and squares and the perimeter of equilateral triangles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.perimeter-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.rectangle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.rectangle-perimeter",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "icse-g06-c06",
+     "number": 6,
+     "title": "Data Handling",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "icse-g06-c06-s01",
+       "number": "6.1",
+       "title": "Data and graphs",
+       "outcomes": [
+        {
+         "id": "icse-g06-c06-o01",
+         "text": "Organise data in frequency tables and draw pictographs and bar graphs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.data-frequency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.pictographs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.scaled-bars",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; drawing, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "icse-g06-c06-s02",
+       "number": "6.2",
+       "title": "Mean and median",
+       "outcomes": [
+        {
+         "id": "icse-g06-c06-o02",
+         "text": "Find the mean and median of a small data set.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.averages-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.median-mode",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    }
+   ]
+  }
+ ]
+}
