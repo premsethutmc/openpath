@@ -64,6 +64,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-2",
+   "version": "1.1.0",
+   "grade": 2,
+   "title": "CISCE Curriculum: Mathematics, Class II — Grade 2 Mathematics (CISCE / ICSE)",
+   "hash": "0b039ba7",
+   "file": "icse-cisce-mathematics-grade-2.v1.1.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-2",
    "version": "1.0.0",
    "grade": 2,
@@ -88,6 +97,15 @@
    "title": "CISCE Curriculum: Mathematics, Class III — Grade 3 Mathematics (CISCE / ICSE)",
    "hash": "3931b005",
    "file": "icse-cisce-mathematics-grade-3.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-3",
+   "version": "1.1.0",
+   "grade": 3,
+   "title": "CISCE Curriculum: Mathematics, Class III — Grade 3 Mathematics (CISCE / ICSE)",
+   "hash": "aea8cdbc",
+   "file": "icse-cisce-mathematics-grade-3.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {
@@ -133,6 +151,15 @@
    "title": "CISCE Curriculum: Mathematics, Class IV — Grade 4 Mathematics (CISCE / ICSE)",
    "hash": "80cfe20c",
    "file": "icse-cisce-mathematics-grade-4.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-4",
+   "version": "1.1.0",
+   "grade": 4,
+   "title": "CISCE Curriculum: Mathematics, Class IV — Grade 4 Mathematics (CISCE / ICSE)",
+   "hash": "887ab42d",
+   "file": "icse-cisce-mathematics-grade-4.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {
@@ -216,6 +243,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-5",
+   "version": "1.4.0",
+   "grade": 5,
+   "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
+   "hash": "09cf958e",
+   "file": "icse-cisce-mathematics-grade-5.v1.4.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-5",
    "version": "1.0.0",
    "grade": 5,
@@ -266,6 +302,15 @@
    "title": "CISCE ICSE Syllabus: Mathematics, Class VI — Grade 6 Mathematics (CISCE / ICSE)",
    "hash": "7de6c975",
    "file": "icse-cisce-mathematics-grade-6.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-6",
+   "version": "1.1.0",
+   "grade": 6,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VI — Grade 6 Mathematics (CISCE / ICSE)",
+   "hash": "7863b70f",
+   "file": "icse-cisce-mathematics-grade-6.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {
@@ -320,6 +365,15 @@
    "title": "CISCE ICSE Syllabus: Mathematics, Class VII — Grade 7 Mathematics (CISCE / ICSE)",
    "hash": "5ce1501a",
    "file": "icse-cisce-mathematics-grade-7.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-7",
+   "version": "1.1.0",
+   "grade": 7,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VII — Grade 7 Mathematics (CISCE / ICSE)",
+   "hash": "77e65179",
+   "file": "icse-cisce-mathematics-grade-7.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {
@@ -394,6 +448,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-8",
+   "version": "1.1.0",
+   "grade": 8,
+   "title": "CISCE ICSE Syllabus: Mathematics, Class VIII — Grade 8 Mathematics (CISCE / ICSE)",
+   "hash": "44097c49",
+   "file": "icse-cisce-mathematics-grade-8.v1.1.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-8",
    "version": "1.0.0",
    "grade": 8,
@@ -465,6 +528,15 @@
    "board": "CISCE (ICSE)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-9",
+   "version": "1.1.0",
+   "grade": 9,
+   "title": "CISCE Syllabus: Mathematics, Class IX — Grade 9 Mathematics (CISCE / ICSE)",
+   "hash": "4ce76ba8",
+   "file": "icse-cisce-mathematics-grade-9.v1.1.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-9",
    "version": "1.0.0",
    "grade": 9,
@@ -516,6 +588,15 @@
    "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
    "hash": "db72897f",
    "file": "icse-cisce-mathematics-grade-10.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-10",
+   "version": "1.1.0",
+   "grade": 10,
+   "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
+   "hash": "b960759e",
+   "file": "icse-cisce-mathematics-grade-10.v1.1.0.json",
    "board": "CISCE (ICSE)"
   },
   {
