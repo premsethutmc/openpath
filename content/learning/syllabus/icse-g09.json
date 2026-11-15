@@ -214,10 +214,15 @@
       {
        "id": "MATH.number.exponential-growth",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.algebra.geometric-sequences",
       "MATH.number.compound-interest",
       "MATH.number.exponential-growth"
      ],
@@ -348,11 +353,21 @@
       {
        "id": "MATH.number.exponents",
        "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.logarithms",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.radicals",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
-      "MATH.number.exponents"
+      "MATH.algebra.logarithms",
+      "MATH.number.exponents",
+      "MATH.number.radicals"
      ],
      "coverage": "partial",
      "source": "Unit 3: Algebra"
@@ -571,10 +586,17 @@
      ],
      "difficulty": "core",
      "assessment": "both",
-     "competencies": [],
+     "competencies": [
+      {
+       "id": "MATH.measurement.triangle-area",
+       "fit": "partial"
+      }
+     ],
      "proposed": [],
-     "mapped": [],
-     "coverage": "none",
+     "mapped": [
+      "MATH.measurement.triangle-area"
+     ],
+     "coverage": "partial",
      "source": "Unit 4: Geometry",
      "note": "No OpenPath skill yet."
     },

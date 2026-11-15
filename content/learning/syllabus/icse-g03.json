@@ -59,10 +59,15 @@
       {
        "id": "MATH.number.thousands",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.compare-numbers",
       "MATH.number.thousands"
      ],
      "coverage": "full",
@@ -160,10 +165,15 @@
       {
        "id": "MATH.number.multiplication-tables",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.multi-multiplication",
       "MATH.number.multiplication-tables"
      ],
      "coverage": "full",
@@ -218,11 +228,16 @@
       {
        "id": "MATH.reasoning.estimate-check",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.rounding",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
       "MATH.number.mental-arithmetic",
+      "MATH.number.rounding",
       "MATH.reasoning.estimate-check"
      ],
      "coverage": "full",
