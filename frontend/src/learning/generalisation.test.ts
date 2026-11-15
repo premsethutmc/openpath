@@ -410,10 +410,10 @@ test("L: two textbooks saying the same mathematics differently map to the same s
   // a vague outcome is flagged, not guessed
   assert.equal(out(b).find((o) => o.text.startsWith("solve word problems"))!.mapping.verdict, "uncertain");
   assert.equal(interpret("solve word problems involving fractions", 4).verdict, "uncertain");
-  // both sample boards coexist as releases for Grade 4, beside the CBSE and Tamil Nadu releases (boards@1), and
-  // evidence is shared (same competency ids)
+  // both sample boards coexist as releases for Grade 4, beside the CBSE, Tamil Nadu and CISCE releases (boards@1,
+  // icse@1), and evidence is shared (same competency ids)
   const g4 = releasesFor(4).map((r) => r.id).sort();
-  assert.equal(g4.filter((id) => !/^(cbse-ncert|tn-samacheer)-/.test(id)).length, 2, g4.join(" "));
+  assert.equal(g4.filter((id) => !/^(cbse-ncert|tn-samacheer|icse-cisce)-/.test(id)).length, 2, g4.join(" "));
   assert.deepEqual(g4.filter((id) => /^(cbse-ncert|tn-samacheer)-/.test(id)), ["cbse-ncert-mathematics-grade-4", "tn-samacheer-mathematics-grade-4"]);
 });
 
