@@ -88769,6 +88769,596 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "aeintl",
+   "version": "1.0.0",
+   "title": "Large numbers in the international system",
+   "competency": "MATH.number.indian-international-numeration",
+   "skill": "MATH.number.indian-international-numeration",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     1,
+     99
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 14,
+    "2": 386,
+    "3": 0
+   },
+   "examples": [
+    "gen:aeintl:4,9,0,0",
+    "gen:aeintl:5,6,0,1",
+    "gen:aeintl:35,8,0,0",
+    "gen:aeintl:61,6,1,2"
+   ],
+   "explanations": [
+    "indian-commas (conceptual): Those are the Indian commas (3, then 2, 2). In the international system every group is three digits.",
+    "from-left (procedural): The digits were grouped from the left. Always start grouping from the ones on the right.",
+    "indian-name (conceptual): That is the name in the Indian system (lakhs and crores). The international system uses thousands and millions."
+   ],
+   "teach": {
+    "idea": "The international system groups digits in threes from the right: ones, thousands, millions. One million is 10 lakh, and ten million is one crore.",
+    "method": "Start at the right and put a comma after every three digits. Read each group of three with its name: so many million, so many thousand, and the rest.",
+    "alternatives": [
+     {
+      "id": "compare",
+      "title": "Compare with the Indian system",
+      "kind": "conceptual",
+      "text": [
+       "Indian: 3 digits, then groups of 2 (thousand, lakh, crore).",
+       "International: groups of 3 all the way (thousand, million).",
+       "The digits are the same; only the commas and names change."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "abc575d2",
+   "validation": {
+    "family": "aeintl",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeexpb",
+   "version": "1.0.0",
+   "title": "From expanded form back to the number",
+   "competency": "MATH.number.large-numbers",
+   "skill": "MATH.number.large-numbers",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     5,
+     8
+    ],
+    [
+     0,
+     99
+    ]
+   ],
+   "poolSize": 360,
+   "excluded": [],
+   "difficulty": {
+    "1": 160,
+    "2": 200,
+    "3": 0
+   },
+   "examples": [
+    "gen:aeexpb:5,53",
+    "gen:aeexpb:6,46:mc",
+    "gen:aeexpb:7,66",
+    "gen:aeexpb:8,33:mc"
+   ],
+   "explanations": [
+    "no-zero (conceptual): The digits were written side by side, but a place with nothing in it needs a 0. Check every place from the largest down to the ones."
+   ],
+   "teach": {
+    "idea": "An expanded form shows what each digit is worth. Putting it back together means writing each digit in its place, with 0 in any place that is missing.",
+    "method": "Find the largest place (it tells you how many digits). Write the digit for each place from left to right; write 0 where a place is not in the sum.",
+    "alternatives": [
+     {
+      "id": "add",
+      "title": "Just add",
+      "kind": "procedural",
+      "text": [
+       "Work out each product, such as 3 × 10000 = 30000.",
+       "Add them in a column, lining up the ones."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "f4aa8f42",
+   "validation": {
+    "family": "aeexpb",
+    "deterministic": {
+     "checked": 360,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aedesc",
+   "version": "1.0.0",
+   "title": "Large numbers in descending order",
+   "competency": "MATH.number.compare-numbers",
+   "skill": "MATH.number.compare-numbers",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     79
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "poolSize": 240,
+   "excluded": [],
+   "difficulty": {
+    "1": 120,
+    "2": 120,
+    "3": 0
+   },
+   "examples": [
+    "gen:aedesc:26,3",
+    "gen:aedesc:52,4:mc",
+    "gen:aedesc:27,3",
+    "gen:aedesc:53,4:mc"
+   ],
+   "explanations": [
+    "ascending (conceptual): The numbers were put smallest first. Descending order starts with the LARGEST."
+   ],
+   "teach": {
+    "idea": "Descending order goes from the largest to the smallest. With the same number of digits, the first place where the digits differ decides which is larger.",
+    "method": "Line the numbers up by place. Compare the digits from the left; at the first place they differ, the larger digit gives the larger number. Write the largest first.",
+    "alternatives": [
+     {
+      "id": "cross_off",
+      "title": "Find and cross off",
+      "kind": "procedural",
+      "text": [
+       "Find the largest number and write it down; cross it off.",
+       "Repeat with what is left until all five are written."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "d75048a8",
+   "validation": {
+    "family": "aedesc",
+    "deterministic": {
+     "checked": 240,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeestq",
+   "version": "1.0.0",
+   "title": "Estimating a quotient by rounding",
+   "competency": "MATH.reasoning.estimate-check",
+   "skill": "MATH.reasoning.estimate-check",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     2,
+     9
+    ],
+    [
+     2,
+     60
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     4
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 64,
+    "2": 236,
+    "3": 0
+   },
+   "examples": [
+    "gen:aeestq:6,30,6,3",
+    "gen:aeestq:8,20,5,1:mc",
+    "gen:aeestq:4,35,2,1",
+    "gen:aeestq:6,45,6,0:mc"
+   ],
+   "explanations": [
+    "exact (procedural): That is the exact quotient worked out. An estimate uses the rounded numbers so it can be done in your head.",
+    "round-down-tens (procedural): The dividend was rounded to the nearest ten. Round it to the nearest hundred as asked."
+   ],
+   "teach": {
+    "idea": "An estimate is a quick, close answer. Rounding both numbers to friendly ones makes the division easy to do in your head.",
+    "method": "Round the dividend to the nearest hundred and the divisor to the nearest ten. Divide the rounded numbers. Use the estimate to check an exact answer is sensible.",
+    "alternatives": [
+     {
+      "id": "tens",
+      "title": "Cancel the zeros",
+      "kind": "procedural",
+      "text": [
+       "Both rounded numbers end in 0: take one 0 off each.",
+       "Now divide the smaller numbers, for example 2400 ÷ 40 = 240 ÷ 4 = 60."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "44acf2e0",
+   "validation": {
+    "family": "aeestq",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aecomp",
+   "version": "1.0.0",
+   "title": "Composite and prime numbers",
+   "competency": "MATH.number.primes",
+   "skill": "MATH.number.primes",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     24
+    ],
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 284,
+    "2": 116,
+    "3": 0
+   },
+   "examples": [
+    "gen:aecomp:1,2,0,0",
+    "gen:aecomp:1,13,9,1",
+    "gen:aecomp:0,15,1,3",
+    "gen:aecomp:0,19,9,1"
+   ],
+   "explanations": [
+    "odd-is-prime (conceptual): An odd number is not always prime, and a prime is not always odd. Count the factors.",
+    "one (conceptual): 1 has only one factor, so it is neither prime nor composite."
+   ],
+   "teach": {
+    "idea": "A prime number has exactly two factors, 1 and itself. A composite number has more than two. 1 is neither.",
+    "method": "Try dividing the number by 2, 3, 5 and 7. If one of them divides it exactly (and it is not the number itself), the number is composite.",
+    "alternatives": [
+     {
+      "id": "rectangles",
+      "title": "Make rectangles",
+      "kind": "conceptual",
+      "text": [
+       "Arrange that many counters in a rectangle with at least two rows.",
+       "If you can, the number is composite; if the only way is a single row, it is prime."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "549503b1",
+   "validation": {
+    "family": "aecomp",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeints",
+   "version": "1.0.0",
+   "title": "Which numbers are integers",
+   "competency": "MATH.number.integers",
+   "skill": "MATH.number.integers",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     11
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 300,
+   "excluded": [],
+   "difficulty": {
+    "1": 150,
+    "2": 150,
+    "3": 0
+   },
+   "examples": [
+    "gen:aeints:0,4,0,2",
+    "gen:aeints:0,8,0,2",
+    "gen:aeints:1,4,4,2",
+    "gen:aeints:1,7,7,0"
+   ],
+   "explanations": [
+    "negatives-not-integers (conceptual): Negative whole numbers ARE integers. Only fractions and decimals between whole numbers are not.",
+    "zero (conceptual): Zero is an integer.",
+    "fraction (conceptual): A fraction or decimal is not an integer at all. The answer must be zero or a negative whole number."
+   ],
+   "teach": {
+    "idea": "Integers are the whole numbers going both ways along the number line: …, −3, −2, −1, 0, 1, 2, 3, … Counting numbers are only 1, 2, 3, …",
+    "method": "Ask: is it a whole number with no fraction or decimal part? If yes, it is an integer, whether it is positive, zero or negative.",
+    "alternatives": [
+     {
+      "id": "number_line",
+      "title": "Look at the number line",
+      "kind": "conceptual",
+      "text": [
+       "Mark the whole-number points on a number line on both sides of 0.",
+       "A number that lands exactly on one of those marks is an integer."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "97e9e09f",
+   "validation": {
+    "family": "aeints",
+    "deterministic": {
+     "checked": 300,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aeidesc",
+   "version": "1.0.0",
+   "title": "Integers in descending order",
+   "competency": "MATH.number.integers",
+   "skill": "MATH.number.integers",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     99
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "poolSize": 250,
+   "excluded": [],
+   "difficulty": {
+    "1": 137,
+    "2": 113,
+    "3": 0
+   },
+   "examples": [
+    "gen:aeidesc:33,3",
+    "gen:aeidesc:66,4:mc",
+    "gen:aeidesc:32,4",
+    "gen:aeidesc:67,1:mc"
+   ],
+   "explanations": [
+    "size-not-sign (conceptual): The numbers were ordered by size without their signs. A negative number is less than zero: −9 is smaller than −2.",
+    "ascending (procedural): That is ascending order (smallest first). Descending starts with the largest."
+   ],
+   "teach": {
+    "idea": "On a number line, numbers get larger to the right. Every positive number is larger than 0, and 0 is larger than every negative number. Of two negatives, the one closer to 0 is larger.",
+    "method": "Put the positives first (largest first), then 0, then the negatives starting with the one closest to 0.",
+    "alternatives": [
+     {
+      "id": "line",
+      "title": "Mark them on a number line",
+      "kind": "procedural",
+      "text": [
+       "Mark all five integers on a number line.",
+       "Read them from right to left: that is descending order."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "51276c95",
+   "validation": {
+    "family": "aeidesc",
+    "deterministic": {
+     "checked": 250,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aefpct",
+   "version": "1.0.0",
+   "title": "Fractions and decimals as percentages",
+   "competency": "MATH.number.percent-intro",
+   "skill": "MATH.number.percent-intro",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     99
+    ]
+   ],
+   "poolSize": 208,
+   "excluded": [],
+   "difficulty": {
+    "1": 116,
+    "2": 92,
+    "3": 0
+   },
+   "examples": [
+    "gen:aefpct:1,0,22",
+    "gen:aefpct:1,0,61:mc",
+    "gen:aefpct:0,5,12",
+    "gen:aefpct:0,6,19:mc"
+   ],
+   "explanations": [
+    "numerator (conceptual): The top number was given as the percentage. Make the bottom number 100 first.",
+    "denominator (procedural): The bottom number was used. A percentage is how many out of 100.",
+    "tenths (conceptual): Per cent means hundredths: 0.07 is 7 hundredths, so 7%."
+   ],
+   "teach": {
+    "idea": "Per cent means 'out of 100'. A fraction with 100 at the bottom, or a decimal in hundredths, can be read straight off as a percentage.",
+    "method": "For a fraction, find what to multiply the bottom number by to make 100, and multiply the top by the same. For a decimal, the hundredths are the percentage: 0.35 = 35%.",
+    "alternatives": [
+     {
+      "id": "grid",
+      "title": "Shade a hundred grid",
+      "kind": "conceptual",
+      "text": [
+       "Shade the fraction of a 10 × 10 grid.",
+       "Count the shaded squares: that number is the percentage."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "12560e53",
+   "validation": {
+    "family": "aefpct",
+    "deterministic": {
+     "checked": 208,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }

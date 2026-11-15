@@ -27,8 +27,8 @@
   "requirements": 1494,
   "classes": {
    "validated": 0,
-   "awaiting": 1352,
-   "partial": 142,
+   "awaiting": 1361,
+   "partial": 133,
    "unsupported": 0,
    "not-implemented": 0
   },
@@ -43,13 +43,13 @@
    "disputed": 8
   },
   "families": {
-   "count": 1108,
-   "problems": 349716,
+   "count": 1116,
+   "problems": 352174,
    "answerTypes": {
-    "integer": 426,
+    "integer": 431,
     "fraction": 158,
     "set": 27,
-    "choice": 174,
+    "choice": 177,
     "exact": 128,
     "interval": 16,
     "expression": 31,
@@ -62,7 +62,7 @@
    },
    "withPictures": 314,
    "withEverydayForm": 775,
-   "withAlternatives": 1070
+   "withAlternatives": 1078
   },
   "modules": 345,
   "writtenTasks": 379,
@@ -295,8 +295,8 @@
    "requirements": 77,
    "classes": {
     "validated": 0,
-    "awaiting": 66,
-    "partial": 11,
+    "awaiting": 75,
+    "partial": 2,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -7001,7 +7001,8 @@
     "aabig",
     "aaordx",
     "aasign",
-    "aadigmax"
+    "aadigmax",
+    "aedesc"
    ],
    "writtenTasks": 1,
    "complete": true
@@ -7968,7 +7969,8 @@
     "ajmill",
     "ajcrore",
     "ajcrcmp",
-    "ajmilr"
+    "ajmilr",
+    "aeintl"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -8066,7 +8068,9 @@
    ],
    "families": [
     "ajord",
-    "ajintl"
+    "ajintl",
+    "aeints",
+    "aeidesc"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -8128,7 +8132,8 @@
    "families": [
     "aeind",
     "aecmp",
-    "aenumf"
+    "aenumf",
+    "aeexpb"
    ],
    "writtenTasks": 1,
    "complete": true
@@ -8568,7 +8573,8 @@
    "families": [
     "agpct",
     "agpctd",
-    "agpgrid"
+    "agpgrid",
+    "aefpct"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -8704,7 +8710,8 @@
    "families": [
     "agprime",
     "agptest",
-    "agtwin"
+    "agtwin",
+    "aecomp"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -10102,7 +10109,8 @@
     "adest",
     "adwtcap",
     "adestchk",
-    "adestcost"
+    "adestcost",
+    "aeestq"
    ],
    "writtenTasks": 4,
    "complete": true
@@ -17900,7 +17908,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17916,7 +17924,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17927,12 +17935,12 @@
    "competencies": [
     "MATH.number.indian-international-numeration"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: writing numbers in the international system (figures with commas, number names); the questions only convert millions to lakhs and crores",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17943,11 +17951,11 @@
    "competencies": [
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: turning an expanded form back into the number (only number → expanded form is asked)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17960,10 +17968,10 @@
     "MATH.number.large-numbers"
    ],
    "class": "partial",
-   "why": "not every part is assessed: descending order of large numbers (descending order is asked only for numbers up to 3 digits)"
+   "why": "the map credits content no module of a mapped competency serves (ajcrcmp)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17979,7 +17987,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17994,7 +18002,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18010,7 +18018,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18025,7 +18033,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18040,7 +18048,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18056,7 +18064,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18072,7 +18080,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18087,7 +18095,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18096,14 +18104,15 @@
    "outcome": "icse-g05-c02-o01",
    "text": "Use place value beyond 1000 when adding, subtracting, multiplying and dividing.",
    "competencies": [
+    "MATH.number.long-division",
     "MATH.number.multi-digit-add-subtract",
     "MATH.number.multi-multiplication"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: dividing numbers beyond 1000 (no division is mapped to this outcome)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18119,7 +18128,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18131,11 +18140,11 @@
     "MATH.number.rounding",
     "MATH.reasoning.estimate-check"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: estimating a quotient"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18151,7 +18160,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18167,7 +18176,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18183,7 +18192,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18195,11 +18204,11 @@
     "MATH.number.factors-multiples",
     "MATH.number.primes"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: composite numbers are never named or picked out"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18215,7 +18224,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18230,7 +18239,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18245,7 +18254,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18260,7 +18269,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18276,7 +18285,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18291,7 +18300,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18306,7 +18315,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18322,7 +18331,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18338,7 +18347,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18353,7 +18362,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18368,7 +18377,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18383,7 +18392,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18398,7 +18407,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18413,7 +18422,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18428,7 +18437,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18443,7 +18452,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18458,7 +18467,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18473,7 +18482,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18489,7 +18498,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18504,7 +18513,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18519,7 +18528,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18534,7 +18543,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18546,11 +18555,11 @@
     "MATH.number.hcf-lcm",
     "MATH.number.primes"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: composite numbers are never named or picked out; twin primes are asked (agtwin)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18565,7 +18574,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18580,7 +18589,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18596,7 +18605,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18611,7 +18620,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18626,7 +18635,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18641,7 +18650,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18656,7 +18665,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18667,11 +18676,11 @@
    "competencies": [
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: no question asks which numbers are integers (counting numbers, zero, negatives)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18686,7 +18695,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18697,11 +18706,11 @@
    "competencies": [
     "MATH.number.integers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: descending order of integers (only increasing order is asked)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18716,7 +18725,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18727,11 +18736,11 @@
    "competencies": [
     "MATH.number.percent-intro"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: fractions other than hundredths are never related to percentages or decimals in this skill"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18746,7 +18755,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18762,7 +18771,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18777,7 +18786,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -18793,7 +18802,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18809,7 +18818,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18825,7 +18834,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18841,7 +18850,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -18856,7 +18865,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18871,7 +18880,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18886,7 +18895,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18901,7 +18910,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18916,7 +18925,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18932,7 +18941,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18947,7 +18956,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -18962,7 +18971,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18980,7 +18989,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -18997,7 +19006,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -19014,7 +19023,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -19030,7 +19039,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -19046,7 +19055,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -19063,7 +19072,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -19078,7 +19087,7 @@
    "why": "Read and draw pie charts: missing relations"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.4.0",
+   "release": "icse-cisce-mathematics-grade-5@1.5.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",

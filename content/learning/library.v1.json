@@ -19738,6 +19738,41 @@
        ]
       ]
      }
+    },
+    {
+     "title": "Large numbers in descending order",
+     "text": [
+      "Descending order goes from the largest to the smallest. With the same number of digits, the first place where the digits differ decides which is larger.",
+      "Line the numbers up by place. Compare the digits from the left; at the first place they differ, the larger digit gives the larger number. Write the largest first."
+     ],
+     "math": [
+      "Arrange these numbers in descending order (largest first): 5035930, 5030587, 5043830, 5010115, 5093050. Which number is fourth?",
+      "Compare place by place from the left: 5093050 > 5043830 > 5035930 > 5030587 > 5010115",
+      "Position 4 is 5030587"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number"
+      ],
+      "rows": [
+       [
+        5035930
+       ],
+       [
+        5030587
+       ],
+       [
+        5043830
+       ],
+       [
+        5010115
+       ],
+       [
+        5093050
+       ]
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -19840,7 +19875,8 @@
     "gen:aabig:7,10,0",
     "gen:aaordx:4,16,0",
     "gen:aasign:0,21",
-    "gen:aadigmax:3,2,1,0"
+    "gen:aadigmax:3,2,1,0",
+    "gen:aedesc:27,4"
    ],
    "transfer": [
     "gen:aacmp:81,73,0:w",
@@ -19887,6 +19923,10 @@
     },
     {
      "family": "aadigmax",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aedesc",
      "version": "1.0.0"
     }
    ],
@@ -28432,6 +28472,41 @@
      },
      "role": "worked-example",
      "instance": "gen:adestcost:3,42"
+    },
+    {
+     "title": "Estimating a quotient by rounding",
+     "text": [
+      "An estimate is a quick, close answer. Rounding both numbers to friendly ones makes the division easy to do in your head.",
+      "Round the dividend to the nearest hundred and the divisor to the nearest ten. Divide the rounded numbers. Use the estimate to check an exact answer is sensible."
+     ],
+     "math": [
+      "Estimate 1789 ÷ 88: round 1789 to the nearest hundred and 88 to the nearest ten, then divide.",
+      "1789 to the nearest 100 is 1800",
+      "88 to the nearest 10 is 90",
+      "1800 ÷ 90 = 20"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "Number",
+       "Rounded"
+      ],
+      "rows": [
+       [
+        "Dividend",
+        1789,
+        1800
+       ],
+       [
+        "Divisor",
+        88,
+        90
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aeestq:9,20,3,0"
     }
    ],
    "diagnostics": [
@@ -28554,7 +28629,8 @@
     "gen:adest:98,72,0",
     "gen:adwtcap:3,25",
     "gen:adestchk:0,2,2",
-    "gen:adestcost:4,14"
+    "gen:adestcost:4,14",
+    "gen:aeestq:6,35,2,1"
    ],
    "transfer": [
     "gen:adest:93,11,1:w",
@@ -28585,6 +28661,10 @@
     },
     {
      "family": "adestcost",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeestq",
      "version": "1.0.0"
     }
    ],
@@ -32045,6 +32125,40 @@
      ],
      "role": "worked-example",
      "instance": "gen:aenumf:1,30"
+    },
+    {
+     "title": "From expanded form back to the number",
+     "text": [
+      "An expanded form shows what each digit is worth. Putting it back together means writing each digit in its place, with 0 in any place that is missing.",
+      "Find the largest place (it tells you how many digits). Write the digit for each place from left to right; write 0 where a place is not in the sum."
+     ],
+     "math": [
+      "Which number is 5 × 100000 + 5 × 10000 + 8 × 100 + 5 × 10 + 9 × 1?",
+      "Adding the places: 500000 + 50000 + 800 + 50 + 9 = 550859"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "100000",
+       "10000",
+       "1000",
+       "100",
+       "10",
+       "1"
+      ],
+      "rows": [
+       [
+        5,
+        5,
+        0,
+        8,
+        5,
+        9
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aeexpb:6,57"
     }
    ],
    "diagnostics": [
@@ -32168,7 +32282,8 @@
     "gen:aeind:7,4,9,17:mc",
     "gen:aeind:3,86,5,4",
     "gen:aecmp:260",
-    "gen:aenumf:4,46"
+    "gen:aenumf:4,46",
+    "gen:aeexpb:6,27"
    ],
    "transfer": [
     "gen:aeind:1,51,7,2:w",
@@ -32195,6 +32310,10 @@
     },
     {
      "family": "aenumf",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeexpb",
      "version": "1.0.0"
     }
    ],
@@ -36994,6 +37113,34 @@
      },
      "role": "worked-example",
      "instance": "gen:agpgrid:10,0"
+    },
+    {
+     "title": "Fractions and decimals as percentages",
+     "text": [
+      "Per cent means 'out of 100'. A fraction with 100 at the bottom, or a decimal in hundredths, can be read straight off as a percentage.",
+      "For a fraction, find what to multiply the bottom number by to make 100, and multiply the top by the same. For a decimal, the hundredths are the percentage: 0.35 = 35%."
+     ],
+     "math": [
+      "Write 5/50 as a percentage.",
+      "5/50 = 10/100 (multiply top and bottom by 2), so 10%"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Fraction",
+       "Decimal",
+       "Percentage"
+      ],
+      "rows": [
+       [
+        "5/50",
+        "0.10",
+        "10%"
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aefpct:0,6,5"
     }
    ],
    "diagnostics": [
@@ -37088,7 +37235,8 @@
     "gen:agpct:1,26:mc",
     "gen:agpct:1,25",
     "gen:agpctd:40",
-    "gen:agpgrid:10,1"
+    "gen:agpgrid:10,1",
+    "gen:aefpct:0,6,2"
    ],
    "transfer": [
     "gen:agpct:1,24:w",
@@ -37114,6 +37262,10 @@
     },
     {
      "family": "agpgrid",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aefpct",
      "version": "1.0.0"
     }
    ],
@@ -37197,6 +37349,43 @@
         "7, 11",
         4,
         "yes, but 4 apart"
+       ]
+      ]
+     }
+    },
+    {
+     "title": "Composite and prime numbers",
+     "text": [
+      "A prime number has exactly two factors, 1 and itself. A composite number has more than two. 1 is neither.",
+      "Try dividing the number by 2, 3, 5 and 7. If one of them divides it exactly (and it is not the number itself), the number is composite."
+     ],
+     "math": [
+      "A prime number has exactly two factors: 1 and itself. Which of these numbers is prime?",
+      "The factors of 31 are 1, 31",
+      "That is option A"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number",
+       "Factors",
+       "Kind"
+      ],
+      "rows": [
+       [
+        1,
+        "1",
+        "neither"
+       ],
+       [
+        13,
+        "1, 13",
+        "prime"
+       ],
+       [
+        51,
+        "1, 3, 17, 51",
+        "composite"
        ]
       ]
      }
@@ -37287,7 +37476,8 @@
     "gen:agprime:11,17",
     "gen:agprime:34,17",
     "gen:agptest:1,127",
-    "gen:agtwin:7,7,2,0"
+    "gen:agtwin:7,7,2,0",
+    "gen:aecomp:0,7,4,0"
    ],
    "transfer": [
     "gen:agprime:11,16:w",
@@ -37313,6 +37503,10 @@
     },
     {
      "family": "agtwin",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aecomp",
      "version": "1.0.0"
     }
    ],
@@ -43061,6 +43255,63 @@
       "step": 2,
       "marks": []
      }
+    },
+    {
+     "title": "Which numbers are integers",
+     "text": [
+      "Integers are the whole numbers going both ways along the number line: …, −3, −2, −1, 0, 1, 2, 3, … Counting numbers are only 1, 2, 3, …",
+      "Ask: is it a whole number with no fraction or decimal part? If yes, it is an integer, whether it is positive, zero or negative."
+     ],
+     "math": [
+      "The integers are the counting numbers (1, 2, 3, …), zero and the negatives of the counting numbers. Which of these is an integer but NOT a counting number?",
+      "0 is an integer, not a counting number",
+      "That is option D"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": -5,
+      "to": 5,
+      "marks": [
+       -3,
+       0,
+       2
+      ]
+     }
+    },
+    {
+     "title": "Integers in descending order",
+     "text": [
+      "On a number line, numbers get larger to the right. Every positive number is larger than 0, and 0 is larger than every negative number. Of two negatives, the one closer to 0 is larger.",
+      "Put the positives first (largest first), then 0, then the negatives starting with the one closest to 0."
+     ],
+     "math": [
+      "Put these integers in descending order (largest first): −4, 7, 0, −16, −2. Which integer is fifth?",
+      "On a number line the larger number is further right: 7 > 0 > −2 > −4 > −16",
+      "Position 5 is −16"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Integer"
+      ],
+      "rows": [
+       [
+        -4
+       ],
+       [
+        7
+       ],
+       [
+        0
+       ],
+       [
+        -16
+       ],
+       [
+        -2
+       ]
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -43153,7 +43404,9 @@
     "gen:ajord:-4,1,5,-3",
     "gen:ajord:-5,-1,-2,9:mc",
     "gen:ajord:-2,4,-1,-9",
-    "gen:ajintl:2,-11,1"
+    "gen:ajintl:2,-11,1",
+    "gen:aeints:1,4,4,0",
+    "gen:aeidesc:61,3"
    ],
    "transfer": [
     "gen:ajord:6,-2,-6,-9:w",
@@ -43175,6 +43428,14 @@
     },
     {
      "family": "ajintl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeints",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeidesc",
      "version": "1.0.0"
     }
    ],
@@ -44083,6 +44344,35 @@
      ],
      "role": "worked-example",
      "instance": "gen:ajmilr:74,0"
+    },
+    {
+     "title": "Large numbers in the international system",
+     "text": [
+      "The international system groups digits in threes from the right: ones, thousands, millions. One million is 10 lakh, and ten million is one crore.",
+      "Start at the right and put a comma after every three digits. Read each group of three with its name: so many million, so many thousand, and the rest."
+     ],
+     "math": [
+      "In the international system, digits are put in groups of three from the right: ones, thousands, millions. Which shows 64533396 with its commas in the international system?",
+      "64533396 in the international system is 64,533,396",
+      "That is option C"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Millions",
+       "Thousands",
+       "Ones"
+      ],
+      "rows": [
+       [
+        "64",
+        "533",
+        "396"
+       ]
+      ]
+     },
+     "role": "worked-example",
+     "instance": "gen:aeintl:64,9,0,2"
     }
    ],
    "diagnostics": [
@@ -44201,7 +44491,8 @@
     "gen:ajmill:97,3",
     "gen:ajcrore:0,73,76,3",
     "gen:ajcrcmp:401",
-    "gen:ajmilr:85,0"
+    "gen:ajmilr:85,0",
+    "gen:aeintl:50,0,0,2"
    ],
    "transfer": [
     "gen:ajmill:97,0:w",
@@ -44232,6 +44523,10 @@
     },
     {
      "family": "ajmilr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeintl",
      "version": "1.0.0"
     }
    ],

@@ -424,10 +424,15 @@
       {
        "id": "MATH.number.multi-multiplication",
        "fit": "exact"
+      },
+      {
+       "id": "MATH.number.long-division",
+       "fit": "partial"
       }
      ],
      "proposed": [],
      "mapped": [
+      "MATH.number.long-division",
       "MATH.number.multi-digit-add-subtract",
       "MATH.number.multi-multiplication"
      ],
