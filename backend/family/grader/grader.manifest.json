@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "ad96dcf49774a3d468aa6098269ab02be7f8bc336141e6b70592c1bd7c316f27",
+ "sha256": "c017f2a58d47a05c4ac276a67ebd58e68268d29a24b0ed29171e119a613296f5",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -47,6 +47,8 @@
   "content/learning/curricula/cbse-ncert-mathematics-grade-9.v1.1.0.json": "85655cfbd4dd6213e7f8ed4399cd2794c2b796364837a98b1d2822165dfaaf44",
   "content/learning/curricula/discovering-mathematics-learner-s-book-4.v1.1.0.json": "4c2262b31426975de17cf8c03c150c638e10b8b2fbe9c24f3633873a67be59f8",
   "content/learning/curricula/icse-cisce-mathematics-grade-10.v1.0.0.json": "1e73570c0096487382b73e82ef175e705f090e6193338572c8c26e76d89bebf6",
+  "content/learning/curricula/icse-cisce-mathematics-grade-11.v1.0.0.json": "c96e8f07a40820ec795caff7a94f13a04b51e0c74d083b30ffbc2f3ca8a2701e",
+  "content/learning/curricula/icse-cisce-mathematics-grade-12.v1.0.0.json": "0ac3bb5f658c0628ea3d447f937603452294441db07b5acf20c51b6613df726e",
   "content/learning/curricula/icse-cisce-mathematics-grade-5.v1.0.0.json": "39ea956c019cd258fa6adfb2fa11a91420066b4a0d828e338fe6e7a6148decad",
   "content/learning/curricula/icse-cisce-mathematics-grade-5.v1.1.0.json": "334270cb582c9feed2c8960eed3634100c89cad2591054b4ce653736a7b250e1",
   "content/learning/curricula/icse-cisce-mathematics-grade-5.v1.2.0.json": "c9448eb1cd05e72053d3296798eaa0dc291746806e56a85161ab600d9500a14d",
@@ -132,7 +134,7 @@
   "packages/learning/src/answer-first.ts": "dbc3df963008b3357eea8b730479d7f0cc122dc569bf4d1a9b2a76cab0f810ca",
   "packages/learning/src/answer-types.ts": "ab7e36efdd8d1ec1f0ee0f352e93bfb9c504d08e2189ffdc1803a659f7c07b58",
   "packages/learning/src/assessment.ts": "9d98c10bb84bb7e92177e30e0244bcacea87f06e4954db9c514eaff436101830",
-  "packages/learning/src/board-releases.ts": "797a4e9c5ae2ddd1f9f8d4d2bceaa7f110c21bc2eaed98f9c5a5c5cd6a2b8c2c",
+  "packages/learning/src/board-releases.ts": "4984f9dc373ef4bb68179e5b4b4ad178c7c64b7f45e49d0fb8e3f6d63021bef6",
   "packages/learning/src/calculus-binder-e5.ts": "f31889b6be1bbd43adfbe826c5d618c73e0641688589cf98e0b2804dd27bec40",
   "packages/learning/src/calculus-core.ts": "f575363b1e682fdfb66fe7fc7f28ec48a7a7b15ad56a33a14d7e4229004af5b1",
   "packages/learning/src/calculus-methods.ts": "72d5cfc16594e2594cdeadc30cd89d9f6071f4ab06686de2a51eb8f8c740e352",

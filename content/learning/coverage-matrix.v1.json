@@ -24,13 +24,13 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1331,
+  "requirements": 1381,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 220,
+   "partial": 264,
    "unsupported": 0,
-   "not-implemented": 6
+   "not-implemented": 12
   },
   "competenciesRequired": 341,
   "competenciesComplete": 334,
@@ -85,7 +85,7 @@
    "insufficient": 0
   },
   "educatorPart": {
-   "requirementsWithoutWrittenTask": 21
+   "requirementsWithoutWrittenTask": 27
   }
  },
  "diversity": [],
@@ -452,6 +452,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-11",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XI — Grade 11 Mathematics (CISCE / ICSE)",
+   "chapters": 11,
+   "requirements": 28,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 23,
+    "unsupported": 0,
+    "not-implemented": 5
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-11",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 11,
@@ -479,6 +494,21 @@
     "partial": 2,
     "unsupported": 0,
     "not-implemented": 0
+   }
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XII — Grade 12 Mathematics (CISCE / ICSE)",
+   "chapters": 10,
+   "requirements": 22,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 21,
+    "unsupported": 0,
+    "not-implemented": 1
    }
   },
   {
@@ -29367,6 +29397,433 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Numbers and operations",
+   "chapter": "Correlation Analysis (Section C)",
+   "section": "Covariance and correlation",
+   "outcome": "icse-g11-c10-o01",
+   "text": "Find covariance and Karl Pearson's correlation coefficient and interpret it.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Numbers and operations",
+   "chapter": "Correlation Analysis (Section C)",
+   "section": "Covariance and correlation",
+   "outcome": "icse-g11-c10-o02",
+   "text": "Find Spearman's rank correlation, including tied ranks.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Numbers and operations",
+   "chapter": "Index Numbers and Moving Averages (Section C)",
+   "section": "Index numbers",
+   "outcome": "icse-g11-c11-o01",
+   "text": "Construct simple and weighted price index numbers (Laspeyres, Paasche, Fisher, Marshall–Edgeworth) and cost-of-living indices.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Numbers and operations",
+   "chapter": "Index Numbers and Moving Averages (Section C)",
+   "section": "Moving averages",
+   "outcome": "icse-g11-c11-o02",
+   "text": "Find moving averages, including centred averages for an even period, and use them to show trend.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Sets and Functions",
+   "section": null,
+   "outcome": "icse-g11-c01-o05",
+   "text": "Solve trigonometric equations and solve triangles with the sine, cosine and projection rules.",
+   "competencies": [
+    "MATH.trigonometry.equations",
+    "MATH.trigonometry.triangle-laws"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Sets and Functions",
+   "section": "Sets",
+   "outcome": "icse-g11-c01-o01",
+   "text": "Represent sets, use Venn diagrams, unions, intersections, complements and De Morgan's laws.",
+   "competencies": [
+    "MATH.algebra.sets"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Sets and Functions",
+   "section": "Relations and functions",
+   "outcome": "icse-g11-c01-o02",
+   "text": "Form Cartesian products, describe relations and functions, and find domain and range.",
+   "competencies": [
+    "MATH.algebra.functions",
+    "MATH.algebra.relations",
+    "MATH.sets-relations.cartesian-product"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Sets and Functions",
+   "section": "Relations and functions",
+   "outcome": "icse-g11-c01-o03",
+   "text": "Sketch standard functions (modulus, signum, greatest integer, exponential, logarithmic) and combine functions.",
+   "competencies": [
+    "MATH.algebra.function-operations",
+    "MATH.algebra.standard-function-graphs"
+   ],
+   "class": "partial",
+   "why": "Combine functions by sum, difference, product, quotient and composition: missing relations; the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Sets and Functions",
+   "section": "Relations and functions",
+   "outcome": "icse-g11-c01-o04",
+   "text": "Measure angles in radians and use trigonometric functions, compound and multiple-angle identities.",
+   "competencies": [
+    "MATH.trigonometry.compound-angle-identities",
+    "MATH.trigonometry.functions",
+    "MATH.trigonometry.radians"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Mathematical induction",
+   "outcome": "icse-g11-c02-o01",
+   "text": "Prove statements for all natural numbers by mathematical induction.",
+   "competencies": [
+    "MATH.reasoning.mathematical-induction"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Complex numbers",
+   "outcome": "icse-g11-c02-o02",
+   "text": "Calculate with complex numbers, show them on the Argand plane, and use modulus, argument and cube roots of unity.",
+   "competencies": [
+    "MATH.number.complex",
+    "MATH.number.complex-polar-form"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Quadratic equations",
+   "outcome": "icse-g11-c02-o03",
+   "text": "Solve quadratic equations with complex roots and quadratic inequalities.",
+   "competencies": [
+    "MATH.algebra.nonlinear-inequalities",
+    "MATH.algebra.quadratic-complex"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Permutations and combinations",
+   "outcome": "icse-g11-c02-o04",
+   "text": "Count arrangements and selections with permutations and combinations.",
+   "competencies": [
+    "MATH.algebra.permutations"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Binomial theorem",
+   "outcome": "icse-g11-c02-o05",
+   "text": "Expand with the binomial theorem and find general and middle terms.",
+   "competencies": [
+    "MATH.algebra.binomial"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Sequences and series",
+   "outcome": "icse-g11-c02-o06",
+   "text": "Use arithmetic, geometric and arithmetico-geometric progressions, means and the AM–GM inequality, and sum special series.",
+   "competencies": [
+    "MATH.algebra.geometric-sequences",
+    "MATH.sequences.agp-hp",
+    "MATH.sequences.am-gm-relation",
+    "MATH.sequences.power-sums"
+   ],
+   "class": "partial",
+   "why": "Sum special series of natural numbers: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics and Probability",
+   "section": null,
+   "outcome": "icse-g11-c05-o01",
+   "text": "Find range, quartiles, mean deviation, variance and standard deviation.",
+   "competencies": [
+    "MATH.statistics.dispersion",
+    "MATH.statistics.mean-deviation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics and Probability",
+   "section": "Probability",
+   "outcome": "icse-g11-c05-o02",
+   "text": "Use the addition theorem, complementary events and the axiomatic approach to probability.",
+   "competencies": [
+    "MATH.probability.complements",
+    "MATH.probability.events"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics (Section C)",
+   "section": "Combined measures",
+   "outcome": "icse-g11-c09-o01",
+   "text": "Find the combined mean and standard deviation of two groups.",
+   "competencies": [
+    "MATH.statistics.dispersion",
+    "MATH.statistics.weighted-mean"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics (Section C)",
+   "section": "Deciles and percentiles",
+   "outcome": "icse-g11-c09-o02",
+   "text": "Find deciles and percentiles of grouped data.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Mathematical reasoning",
+   "chapter": "Mathematical Reasoning (Section B)",
+   "section": "Statements and connectives",
+   "outcome": "icse-g11-c08-o01",
+   "text": "Form compound statements with and, or, implies and if and only if, and write converses and contrapositives.",
+   "competencies": [
+    "MATH.reasoning.logic",
+    "MATH.reasoning.propositional-logic"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Mathematical reasoning",
+   "chapter": "Mathematical Reasoning (Section B)",
+   "section": "Statements and connectives",
+   "outcome": "icse-g11-c08-o02",
+   "text": "Validate statements by direct proof, contradiction and counterexample.",
+   "competencies": [
+    "MATH.reasoning.logic"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": null,
+   "outcome": "icse-g11-c04-o02",
+   "text": "Differentiate from first principles and differentiate algebraic functions.",
+   "competencies": [
+    "MATH.calculus.derivatives"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": "Limits",
+   "outcome": "icse-g11-c04-o01",
+   "text": "Evaluate one-sided and standard algebraic, trigonometric, exponential and logarithmic limits.",
+   "competencies": [
+    "MATH.calculus.limits"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Coordinate geometry",
+   "chapter": "Coordinate Geometry",
+   "section": "Straight lines",
+   "outcome": "icse-g11-c03-o01",
+   "text": "Use slope, the forms of a line, families of lines, angle bisectors and distances from a line.",
+   "competencies": [
+    "MATH.coordinate.straight-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Coordinate geometry",
+   "chapter": "Coordinate Geometry",
+   "section": "Circles",
+   "outcome": "icse-g11-c03-o02",
+   "text": "Write circles in standard, diameter, general and parametric form and find tangents.",
+   "competencies": [
+    "MATH.coordinate.conic-tangents-normals",
+    "MATH.coordinate.conics"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Coordinate geometry",
+   "chapter": "Conic Sections (Section B)",
+   "section": null,
+   "outcome": "icse-g11-c06-o02",
+   "text": "Find tangents to conics.",
+   "competencies": [
+    "MATH.coordinate.conic-tangents-normals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Coordinate geometry",
+   "chapter": "Conic Sections (Section B)",
+   "section": "Parabola, ellipse and hyperbola",
+   "outcome": "icse-g11-c06-o01",
+   "text": "Find foci, directrices, latus rectum and axes of a parabola, ellipse or hyperbola, and identify a general second-degree curve.",
+   "competencies": [
+    "MATH.coordinate.conics",
+    "MATH.coordinate.pair-of-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-11@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 11,
+   "domain": "Coordinate geometry",
+   "chapter": "Introduction to Three-dimensional Geometry (Section B)",
+   "section": "Coordinates in space",
+   "outcome": "icse-g11-c07-o01",
+   "text": "Locate points in space and use the distance, section and mid-point formulas.",
+   "competencies": [
+    "MATH.coordinate.space-coordinates"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-11@1.1.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 11,
@@ -31453,6 +31910,352 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Numbers and operations",
+   "chapter": "Linear Regression (Section C)",
+   "section": "Lines of regression",
+   "outcome": "icse-g12-c09-o01",
+   "text": "Find the regression lines of y on x and x on y, use regression coefficients and estimate one variable from the other.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Relations and Functions",
+   "section": "Relations and functions",
+   "outcome": "icse-g12-c01-o01",
+   "text": "Test relations for reflexivity, symmetry and transitivity, and identify equivalence relations.",
+   "competencies": [
+    "MATH.sets-relations.relation-properties"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Relations and Functions",
+   "section": "Relations and functions",
+   "outcome": "icse-g12-c01-o02",
+   "text": "Classify functions as one-one or onto, compose them and find inverses of invertible functions.",
+   "competencies": [
+    "MATH.algebra.inverse-functions",
+    "MATH.sets-relations.function-types"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Relations and Functions",
+   "section": "Inverse trigonometric functions",
+   "outcome": "icse-g12-c01-o03",
+   "text": "Use the domains, ranges, principal values, graphs and identities of inverse trigonometric functions, including 2 tan⁻¹x and 3 tan⁻¹x.",
+   "competencies": [
+    "MATH.trigonometry.inverse"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Algebra: Matrices and Determinants",
+   "section": null,
+   "outcome": "icse-g12-c02-o03",
+   "text": "Solve systems of linear equations in two or three variables with a unique solution by the matrix method.",
+   "competencies": [
+    "MATH.algebra.matrix-systems"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Algebra: Matrices and Determinants",
+   "section": "Matrices",
+   "outcome": "icse-g12-c02-o01",
+   "text": "Use types of matrices, transposes, symmetric and skew-symmetric matrices, and matrix operations.",
+   "competencies": [
+    "MATH.algebra.matrices",
+    "MATH.matrices.transpose-symmetry"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Algebra: Matrices and Determinants",
+   "section": "Determinants",
+   "outcome": "icse-g12-c02-o02",
+   "text": "Evaluate determinants up to order 3 using their properties, and find minors, cofactors, adjoint and inverse.",
+   "competencies": [
+    "MATH.algebra.determinants",
+    "MATH.matrices.adjoint-inverse"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Algebra",
+   "chapter": "Linear Programming (Section C)",
+   "section": null,
+   "outcome": "icse-g12-c10-o01",
+   "text": "Formulate linear programming problems and solve them graphically in two variables.",
+   "competencies": [
+    "MATH.algebra.inequalities-two-variables",
+    "MATH.algebra.linear-programming"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Probability",
+   "chapter": "Probability",
+   "section": "Conditional probability",
+   "outcome": "icse-g12-c04-o01",
+   "text": "Use conditional probability, the multiplication theorem and independence of events.",
+   "competencies": [
+    "MATH.probability.conditional",
+    "MATH.probability.independent-events"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Probability",
+   "chapter": "Probability",
+   "section": "Bayes' theorem",
+   "outcome": "icse-g12-c04-o02",
+   "text": "Use the theorem of total probability and Bayes' theorem.",
+   "competencies": [
+    "MATH.probability.bayes",
+    "MATH.probability.total-probability"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": null,
+   "outcome": "icse-g12-c03-o02",
+   "text": "State Rolle's and Lagrange's mean value theorems and use l'Hôpital's rule for 0/0 and ∞/∞ forms.",
+   "competencies": [
+    "MATH.calculus.lhopital",
+    "MATH.calculus.mean-value-theorems"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": null,
+   "outcome": "icse-g12-c03-o04",
+   "text": "Integrate by substitution, partial fractions and parts, including standard forms.",
+   "competencies": [
+    "MATH.calculus.indefinite-integrals",
+    "MATH.calculus.integration-methods",
+    "MATH.calculus.partial-fractions-integration"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": "Applications of derivatives",
+   "outcome": "icse-g12-c03-o01",
+   "text": "Differentiate with the chain rule, implicitly, parametrically and logarithmically, including second derivatives.",
+   "competencies": [
+    "MATH.calculus.derivative-rules",
+    "MATH.calculus.higher-derivatives",
+    "MATH.calculus.implicit-parametric-differentiation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": "Applications of derivatives",
+   "outcome": "icse-g12-c03-o03",
+   "text": "Use derivatives for rates of change, increasing and decreasing functions, tangents and normals, and maxima and minima.",
+   "competencies": [
+    "MATH.calculus.applications",
+    "MATH.calculus.monotonicity"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": "Integrals",
+   "outcome": "icse-g12-c03-o05",
+   "text": "Evaluate definite integrals with the fundamental theorem and their properties.",
+   "competencies": [
+    "MATH.calculus.definite-integral-properties",
+    "MATH.calculus.definite-integrals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Calculus",
+   "section": "Differential equations",
+   "outcome": "icse-g12-c03-o06",
+   "text": "Form differential equations and solve variable-separable, homogeneous and linear first-order equations.",
+   "competencies": [
+    "MATH.calculus.differential-equations",
+    "MATH.calculus.homogeneous-de",
+    "MATH.calculus.linear-first-order-de"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Application of Integrals (Section B)",
+   "section": "Areas",
+   "outcome": "icse-g12-c07-o01",
+   "text": "Find the area bounded by simple curves and axes, or between two curves.",
+   "competencies": [
+    "MATH.calculus.area-integrals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Calculus",
+   "chapter": "Application of Calculus (Section C)",
+   "section": "Cost, revenue and profit",
+   "outcome": "icse-g12-c08-o01",
+   "text": "Use cost, average and marginal cost, revenue and marginal revenue, profit and break-even points.",
+   "competencies": [
+    "MATH.calculus.applications"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Coordinate geometry",
+   "chapter": "Three-dimensional Geometry (Section B)",
+   "section": "Lines",
+   "outcome": "icse-g12-c06-o01",
+   "text": "Write lines in space in vector and Cartesian form, find angles between lines, and decide whether lines meet or are skew.",
+   "competencies": [
+    "MATH.coordinate.skew-line-distance",
+    "MATH.coordinate.space-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Coordinate geometry",
+   "chapter": "Three-dimensional Geometry (Section B)",
+   "section": "Lines",
+   "outcome": "icse-g12-c06-o02",
+   "text": "Write planes in their standard forms, find distances, intersections with lines, and angles between planes or a line and a plane.",
+   "competencies": [
+    "MATH.coordinate.space-planes"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Vectors and three-dimensional geometry",
+   "chapter": "Vectors (Section B)",
+   "section": "Vector algebra",
+   "outcome": "icse-g12-c05-o01",
+   "text": "Use magnitude, direction cosines, position vectors, and vector addition and scalar multiples.",
+   "competencies": [
+    "MATH.vectors.algebra",
+    "MATH.vectors.direction-cosines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-12@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 12,
+   "domain": "Vectors and three-dimensional geometry",
+   "chapter": "Vectors (Section B)",
+   "section": "Products",
+   "outcome": "icse-g12-c05-o02",
+   "text": "Use dot and cross products for angles, areas and collinearity, and the scalar triple product for volume and coplanarity.",
+   "competencies": [
+    "MATH.vectors.products",
+    "MATH.vectors.triple-products"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-12@1.1.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 12,
@@ -32444,7 +33247,7 @@
     12
    ],
    "depth": 0,
-   "demand": 5,
+   "demand": 6,
    "missing": [
     "relations",
     "review"
@@ -32500,7 +33303,7 @@
     11
    ],
    "depth": 1,
-   "demand": 2,
+   "demand": 3,
    "missing": [
     "relations",
     "review"

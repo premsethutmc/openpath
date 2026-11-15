@@ -1,0 +1,866 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 12,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE ISC Syllabus: Mathematics, Class XII",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "ISC examination 2026; units cross-checked for 2027",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "ISC Class 12 Maths syllabus (units, sub-topics and exclusions)",
+   "publisher": "Toprankers",
+   "edition": "ISC examination 2026",
+   "academicYear": "2025-26",
+   "url": "https://www.toprankers.com/isc-class-12-maths-syllabus",
+   "accessed": "2026-11-15",
+   "used_for": "unit and sub-topic list, exclusions (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "Section A is compulsory; candidates take either Section B or Section C. Both optional sections are recorded."
+ ],
+ "gaps": [
+  {
+   "outcome": "icse-g12-c09-o01",
+   "statement": "Find the regression lines of y on x and x on y, use regression coefficients and estimate one variable from the other."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "icse-g12-c01",
+   "number": 1,
+   "term": null,
+   "title": "Relations and Functions",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c01-s01",
+     "title": "Relations and functions"
+    },
+    {
+     "id": "icse-g12-c01-s02",
+     "title": "Inverse trigonometric functions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c01-o01",
+     "statement": "Test relations for reflexivity, symmetry and transitivity, and identify equivalence relations.",
+     "concepts": [
+      "equivalence relation"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.sets-relations.relation-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.sets-relations.relation-properties"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Relations and Functions"
+    },
+    {
+     "id": "icse-g12-c01-o02",
+     "statement": "Classify functions as one-one or onto, compose them and find inverses of invertible functions.",
+     "concepts": [
+      "one-one",
+      "onto",
+      "composite",
+      "inverse"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.sets-relations.function-types",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.inverse-functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-functions",
+      "MATH.sets-relations.function-types"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Relations and Functions"
+    },
+    {
+     "id": "icse-g12-c01-o03",
+     "statement": "Use the domains, ranges, principal values, graphs and identities of inverse trigonometric functions, including 2 tan⁻¹x and 3 tan⁻¹x.",
+     "concepts": [
+      "principal value",
+      "inverse trigonometric identities"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.inverse"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Relations and Functions"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c02",
+   "number": 2,
+   "term": null,
+   "title": "Algebra: Matrices and Determinants",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c02-s01",
+     "title": "Matrices"
+    },
+    {
+     "id": "icse-g12-c02-s02",
+     "title": "Determinants"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c02-o01",
+     "statement": "Use types of matrices, transposes, symmetric and skew-symmetric matrices, and matrix operations.",
+     "concepts": [
+      "transpose",
+      "symmetric matrix"
+     ],
+     "questionTypes": [
+      "matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.matrices.transpose-symmetry",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices",
+      "MATH.matrices.transpose-symmetry"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra: Matrices and Determinants"
+    },
+    {
+     "id": "icse-g12-c02-o02",
+     "statement": "Evaluate determinants up to order 3 using their properties, and find minors, cofactors, adjoint and inverse.",
+     "concepts": [
+      "determinant",
+      "cofactor",
+      "adjoint"
+     ],
+     "questionTypes": [
+      "numeric",
+      "matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.determinants",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.matrices.adjoint-inverse",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.determinants",
+      "MATH.matrices.adjoint-inverse"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra: Matrices and Determinants"
+    },
+    {
+     "id": "icse-g12-c02-o03",
+     "statement": "Solve systems of linear equations in two or three variables with a unique solution by the matrix method.",
+     "concepts": [
+      "matrix method"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrix-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrix-systems"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra: Matrices and Determinants"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c03",
+   "number": 3,
+   "term": null,
+   "title": "Calculus",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c03-s01",
+     "title": "Differentiation"
+    },
+    {
+     "id": "icse-g12-c03-s02",
+     "title": "Applications of derivatives"
+    },
+    {
+     "id": "icse-g12-c03-s03",
+     "title": "Integrals"
+    },
+    {
+     "id": "icse-g12-c03-s04",
+     "title": "Differential equations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c03-o01",
+     "statement": "Differentiate with the chain rule, implicitly, parametrically and logarithmically, including second derivatives.",
+     "concepts": [
+      "chain rule",
+      "logarithmic differentiation"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.implicit-parametric-differentiation",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.higher-derivatives",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.higher-derivatives",
+      "MATH.calculus.implicit-parametric-differentiation"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    },
+    {
+     "id": "icse-g12-c03-o02",
+     "statement": "State Rolle's and Lagrange's mean value theorems and use l'Hôpital's rule for 0/0 and ∞/∞ forms.",
+     "concepts": [
+      "mean value theorem",
+      "indeterminate form"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.mean-value-theorems",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.lhopital",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.lhopital",
+      "MATH.calculus.mean-value-theorems"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    },
+    {
+     "id": "icse-g12-c03-o03",
+     "statement": "Use derivatives for rates of change, increasing and decreasing functions, tangents and normals, and maxima and minima.",
+     "concepts": [
+      "rate of change",
+      "maxima and minima"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.monotonicity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications",
+      "MATH.calculus.monotonicity"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    },
+    {
+     "id": "icse-g12-c03-o04",
+     "statement": "Integrate by substitution, partial fractions and parts, including standard forms.",
+     "concepts": [
+      "substitution",
+      "integration by parts"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.indefinite-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.integration-methods",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.partial-fractions-integration",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.indefinite-integrals",
+      "MATH.calculus.integration-methods",
+      "MATH.calculus.partial-fractions-integration"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    },
+    {
+     "id": "icse-g12-c03-o05",
+     "statement": "Evaluate definite integrals with the fundamental theorem and their properties.",
+     "concepts": [
+      "fundamental theorem",
+      "properties of definite integrals"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.definite-integrals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.definite-integral-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.definite-integral-properties",
+      "MATH.calculus.definite-integrals"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    },
+    {
+     "id": "icse-g12-c03-o06",
+     "statement": "Form differential equations and solve variable-separable, homogeneous and linear first-order equations.",
+     "concepts": [
+      "order and degree",
+      "variable separable",
+      "integrating factor"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.differential-equations",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.homogeneous-de",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.calculus.linear-first-order-de",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.differential-equations",
+      "MATH.calculus.homogeneous-de",
+      "MATH.calculus.linear-first-order-de"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Calculus"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c04",
+   "number": 4,
+   "term": null,
+   "title": "Probability",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c04-s01",
+     "title": "Conditional probability"
+    },
+    {
+     "id": "icse-g12-c04-s02",
+     "title": "Bayes' theorem"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c04-o01",
+     "statement": "Use conditional probability, the multiplication theorem and independence of events.",
+     "concepts": [
+      "conditional probability",
+      "independent events"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.conditional",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.independent-events",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.conditional",
+      "MATH.probability.independent-events"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Probability"
+    },
+    {
+     "id": "icse-g12-c04-o02",
+     "statement": "Use the theorem of total probability and Bayes' theorem.",
+     "concepts": [
+      "total probability",
+      "Bayes' theorem"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.total-probability",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.bayes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.bayes",
+      "MATH.probability.total-probability"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Probability"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c05",
+   "number": 5,
+   "term": null,
+   "title": "Vectors (Section B)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c05-s01",
+     "title": "Vector algebra"
+    },
+    {
+     "id": "icse-g12-c05-s02",
+     "title": "Products"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c05-o01",
+     "statement": "Use magnitude, direction cosines, position vectors, and vector addition and scalar multiples.",
+     "concepts": [
+      "direction cosines",
+      "position vector"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.algebra",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.vectors.direction-cosines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.algebra",
+      "MATH.vectors.direction-cosines"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Vectors (Section B)"
+    },
+    {
+     "id": "icse-g12-c05-o02",
+     "statement": "Use dot and cross products for angles, areas and collinearity, and the scalar triple product for volume and coplanarity.",
+     "concepts": [
+      "dot product",
+      "cross product",
+      "scalar triple product"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.vectors.products",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.vectors.triple-products",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.vectors.products",
+      "MATH.vectors.triple-products"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Vectors (Section B)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c06",
+   "number": 6,
+   "term": null,
+   "title": "Three-dimensional Geometry (Section B)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c06-s01",
+     "title": "Lines"
+    },
+    {
+     "id": "icse-g12-c06-s02",
+     "title": "Planes"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c06-o01",
+     "statement": "Write lines in space in vector and Cartesian form, find angles between lines, and decide whether lines meet or are skew.",
+     "concepts": [
+      "skew lines",
+      "angle between lines"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.skew-line-distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.skew-line-distance",
+      "MATH.coordinate.space-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Three-dimensional Geometry (Section B)"
+    },
+    {
+     "id": "icse-g12-c06-o02",
+     "statement": "Write planes in their standard forms, find distances, intersections with lines, and angles between planes or a line and a plane.",
+     "concepts": [
+      "equation of a plane",
+      "distance from a plane"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-planes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-planes"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Three-dimensional Geometry (Section B)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c07",
+   "number": 7,
+   "term": null,
+   "title": "Application of Integrals (Section B)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c07-s01",
+     "title": "Areas"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c07-o01",
+     "statement": "Find the area bounded by simple curves and axes, or between two curves.",
+     "concepts": [
+      "area under a curve",
+      "area between curves"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.area-integrals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.area-integrals"
+     ],
+     "coverage": "full",
+     "source": "Unit 7: Application of Integrals (Section B)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c08",
+   "number": 8,
+   "term": null,
+   "title": "Application of Calculus (Section C)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c08-s01",
+     "title": "Cost, revenue and profit"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c08-o01",
+     "statement": "Use cost, average and marginal cost, revenue and marginal revenue, profit and break-even points.",
+     "concepts": [
+      "marginal cost",
+      "marginal revenue",
+      "break-even"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.applications",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.applications"
+     ],
+     "coverage": "partial",
+     "source": "Unit 8: Application of Calculus (Section C)",
+     "note": "Business uses of derivatives are not taught by an OpenPath skill yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c09",
+   "number": 9,
+   "term": null,
+   "title": "Linear Regression (Section C)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c09-s01",
+     "title": "Lines of regression"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c09-o01",
+     "statement": "Find the regression lines of y on x and x on y, use regression coefficients and estimate one variable from the other.",
+     "concepts": [
+      "regression line",
+      "regression coefficient"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 9: Linear Regression (Section C)",
+     "note": "No OpenPath skill yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g12-c10",
+   "number": 10,
+   "term": null,
+   "title": "Linear Programming (Section C)",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g12-c10-s01",
+     "title": "Graphical method"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g12-c10-o01",
+     "statement": "Formulate linear programming problems and solve them graphically in two variables.",
+     "concepts": [
+      "objective function",
+      "feasible region"
+     ],
+     "questionTypes": [
+      "numeric",
+      "drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-programming",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.inequalities-two-variables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities-two-variables",
+      "MATH.algebra.linear-programming"
+     ],
+     "coverage": "full",
+     "source": "Unit 10: Linear Programming (Section C)"
+    }
+   ]
+  }
+ ]
+}

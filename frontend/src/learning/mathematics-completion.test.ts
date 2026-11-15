@@ -70,8 +70,8 @@ test("written@1: an unmarked written answer is pending and never evidence; only 
 });
 
 test("boards@1: CBSE and Tamil Nadu releases for Grades 1–12, valid, through one builder and the same hierarchy", () => {
-  // 24 CBSE and Tamil Nadu releases, and CISCE (ICSE) Classes 5, 9 and 10 (icse@1; Class 5 checks are in year/icse-grade5.test.ts)
-  assert.equal(boardReleases.length, 27);
+  // 24 CBSE and Tamil Nadu releases, and CISCE (ICSE) Classes 5 and 9–12 (icse@1; Class 5 checks are in year/icse-grade5.test.ts)
+  assert.equal(boardReleases.length, 29);
   assert.equal(boardReleases.filter((r) => /^(cbse-ncert|tn-samacheer)-/.test(r.id)).length, 24);
   for (const board of ["cbse", "tn"] as const)
     for (let g = 1; g <= 12; g++) {

@@ -509,6 +509,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-11",
+   "version": "1.0.0",
+   "grade": 11,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XI — Grade 11 Mathematics (CISCE / ICSE)",
+   "hash": "2b03d040",
+   "file": "icse-cisce-mathematics-grade-11.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-11",
    "version": "1.0.0",
    "grade": 11,
@@ -560,6 +569,15 @@
    "hash": "6dfb8196",
    "file": "cbse-ncert-mathematics-grade-12.v1.1.0.json",
    "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-12",
+   "version": "1.0.0",
+   "grade": 12,
+   "title": "CISCE ISC Syllabus: Mathematics, Class XII — Grade 12 Mathematics (CISCE / ICSE)",
+   "hash": "de3036a4",
+   "file": "icse-cisce-mathematics-grade-12.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "openpath-sample-mathematics-grade-12",
