@@ -70,8 +70,10 @@ export interface FractionScene extends Base { kind: "fraction"; target: [number,
  *  number off the screen (for finding a number by counting marks); `near` shows how far the point is from the multiples
  *  of that number on each side (for rounding); `jump` draws the move from the start as a jump (for adding integers). */
 export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean }
-/** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. */
-export interface ArrayScene extends Base { kind: "array"; total: number; rows?: number }
+/** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. With `share`,
+ *  the total is being shared out: `left` is how many are left over once the rows are as full as they can be (999 until
+ *  then, and when too many are used), and the readout says how many are left over. */
+export interface ArrayScene extends Base { kind: "array"; total: number; rows?: number; share?: boolean }
 export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
@@ -226,7 +228,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
     return { n, k, miss: Math.abs(cross) / (n * td), ahead: cross / (n * td), behind: -cross / (n * td), other: cross === 0 && n !== td ? 0 : 1, exact: n === td && k === tn ? 0 : 1 };
   }
   if (s.kind === "numberline") return { x: state.x, moved: r6(state.x - s.start) };
-  if (s.kind === "array") { const { rows, cols } = arrOf(s, state); return { rows, cols, count: rows * cols, off: Math.abs(rows * cols - s.total) }; }
+  if (s.kind === "array") { const { rows, cols } = arrOf(s, state); const spare = s.total - rows * cols; return { rows, cols, count: rows * cols, off: Math.abs(spare), left: spare >= 0 && spare < rows ? spare : 999 }; }
   if (s.kind === "rectangle") {
     const { w, h } = state, perimeter = 2 * (w + h), area = w * h;
     // the largest area a whole-number rectangle of the asked perimeter can have: its sides as nearly equal as they can be
@@ -248,7 +250,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -273,6 +275,7 @@ export function readout(s: Scene, state: SceneState): string {
     if (s.near) { const lo = Math.floor(m.x / s.near + 1e-9) * s.near; return Math.abs(m.x - lo) < 1e-9 ? `At ${fmt(m.x)}` : `At ${fmt(m.x)} · ${fmt(m.x - lo)} from ${fmt(lo)} · ${fmt(lo + s.near - m.x)} from ${fmt(lo + s.near)}`; }
     return `At ${fmt(m.x)}`;
   }
+  if (s.kind === "array" && s.share) return `${m.rows} ${m.rows === 1 ? "row" : "rows"} of ${m.cols} = ${m.count} · ${m.count > s.total ? `${m.off} too many` : `${m.off} left over`}`;
   if (s.kind === "array") return `${m.rows} ${m.rows === 1 ? "row" : "rows"} of ${m.cols} = ${m.count}${m.off ? ` · ${m.off} ${m.count < s.total ? "short of" : "more than"} ${s.total}` : ""}`;
   if (s.kind === "rectangle") { const [p, a] = s.words ?? ["perimeter", "area"]; return `${m.w} by ${m.h} · ${p} ${m.perimeter} · ${a} ${m.area}`; }
   if (s.kind === "join") return s.mode === "shift" ? `From the left: ${fmt(m.left)} · from the right: ${fmt(m.right)}` : `Both sides head for ${fmt(m.left)} · the point is at ${fmt(m.point)}`;
@@ -335,6 +338,8 @@ export function draw(s: Scene, state: SceneState): Shape[] {
   if (s.kind === "array") {
     const { rows, cols } = arrOf(s, state), U = 19;
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) out.push({ t: "circle", cx: 37 + c * U, cy: 24 + r * U, r: 7, role: "cell" });
+    // when sharing out, the counters not yet placed wait in a line underneath
+    if (s.share) for (let i = 0; i < Math.min(15, Math.max(0, s.total - rows * cols)); i++) out.push({ t: "circle", cx: 37 + i * U, cy: 208, r: 7, role: "blank" });
     return out;
   }
   if (s.kind === "rectangle") {
@@ -551,6 +556,7 @@ export function check(v: unknown): string[] {
   } else if (s.kind === "array") {
     if (!(Number.isInteger(s.total) && s.total >= 2 && s.total <= 150)) bad.push("total must be a whole number from 2 to 150");
     if (s.rows !== undefined && !(Number.isInteger(s.rows) && s.rows >= 1 && s.rows <= 10)) bad.push("rows must be 1 to 10");
+    if (s.share && s.rows !== undefined && s.rows > 9) bad.push("a shared-out array needs at most 9 rows");
   } else   if (s.kind === "rectangle") {
     const whole = (v: unknown, hi: number) => v === undefined || (Number.isInteger(v) && (v as number) >= 1 && (v as number) <= hi);
     if (!whole(s.perimeter, 36) || !whole(s.area, 81)) bad.push("perimeter and area must be whole numbers a 9 by 9 grid can hold");

@@ -32,6 +32,11 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Class 5 lessons, second batch (2026-11-16, branch `feat/class5-recipes-2`, draft PR, not merged)
+- Seven more Class 5 recipes (28 in all); 20 of the 62 CISCE Class 5 skills open with a recipe. The counters picture can
+  share out a total and show what is left over.
+- Open: 42 Class 5 skills; pictures for mixed numbers (more than one whole), clocks, solids, angles and charts.
+
 ## Class 5 lessons (2026-11-16, branch `feat/class5-recipes`, draft PR, not merged)
 - scene@5 adds three kinds: `fraction` (bar or hundred-square), `numberline` (point, hidden number, nearest ten, jump) and
   `array` (counters in equal rows).
