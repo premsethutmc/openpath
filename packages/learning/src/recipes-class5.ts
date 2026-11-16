@@ -9,6 +9,7 @@ import type { Scene } from "./scene";
 const frac = (target: [number, number], rest: Omit<Extract<Scene, { kind: "fraction" }>, "type" | "kind" | "target">): Scene => ({ type: "scene", kind: "fraction", target, ...rest });
 const line = (rest: Omit<Extract<Scene, { kind: "numberline" }>, "type" | "kind">): Scene => ({ type: "scene", kind: "numberline", ...rest });
 const rows = (total: number, rest: Omit<Extract<Scene, { kind: "array" }>, "type" | "kind" | "total">): Scene => ({ type: "scene", kind: "array", total, ...rest });
+const commas = (digits: string, style: "indian" | "international", rest: Omit<Extract<Scene, { kind: "commas" }>, "type" | "kind" | "digits" | "style">): Scene => ({ type: "scene", kind: "commas", digits, style, ...rest });
 const rect = (rest: Omit<Extract<Scene, { kind: "rectangle" }>, "type" | "kind">): Scene => ({ type: "scene", kind: "rectangle", ...rest });
 
 export const CLASS5_RECIPES: Recipe[] = [
@@ -651,6 +652,76 @@ export const CLASS5_RECIPES: Recipe[] = [
         { label: "207", reply: "Yes. 2 rupees are 200 paise, and 7 more.", right: true },
         { label: "27", reply: "Each rupee is 100 paise, so 2 rupees are 200 paise. Then add the 7." },
         { label: "270", reply: "That would be ₹2.70. The 07 after the point means 7 paise." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.indian-international-numeration",
+    type: "idea",
+    title: "Two ways to put the commas",
+    question: [
+      "A newspaper in Chennai says a film earned 21,10,00,000 rupees. A website in London says the same film earned 211,000,000 rupees.",
+      "Has one of them made a mistake?",
+    ],
+    predict: {
+      ask: "What do you think?",
+      choices: [
+        { label: "Yes, the two numbers are different", reply: "Look closely: the digits are the same, in the same order. Only the commas have moved. Let's move them ourselves." },
+        { label: "No, it is the same number", reply: "Good eye. Let's move the commas ourselves.", right: true },
+      ],
+    },
+    missions: [
+      commas("211000000", "international", { prompt: "Put the commas the way the London website does: groups of three, counting from the right.", success: "211,000,000. The group in front of the second comma counts the millions: 211 million.", goal: { measure: "miss", equals: 0 } }),
+      commas("211000000", "indian", { prompt: "Now the Chennai way: one group of three on the right, then groups of two.", success: "21,10,00,000. Reading the groups from the left: 21 crore 10 lakh.", goal: { measure: "miss", equals: 0 } }),
+      commas("45000000", "international", { prompt: "4,50,00,000 is 4 crore 50 lakh. Here are its digits: group them in threes.", success: "45,000,000 is 45 million. So 4 crore 50 lakh is 45 million.", goal: { measure: "miss", equals: 0 } }),
+    ],
+    names: ["international system", "indian system"],
+    name: [
+      "Grouping in threes is called the international system: thousands, then millions. One group of three and then twos is the Indian system: thousands, lakhs, crores.",
+      "The number itself never changes. To change from one to the other, write the same digits with the other commas and read the groups. Useful to know: 1 million = 10 lakh, and 1 crore = 10 million.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "How many millions is 3 crore?",
+      choices: [
+        { label: "30", reply: "Yes. 3,00,00,000 regrouped is 30,000,000: 30 million.", right: true },
+        { label: "3", reply: "A crore is bigger than a million: 1 crore = 10 million." },
+        { label: "300", reply: "1 crore is 10 million, not 100. So 3 crore is 30 million." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.large-numbers",
+    type: "idea",
+    title: "Where do the commas go?",
+    question: [
+      "A scooter costs ₹759403. Ravi tries to read the price aloud and gets lost in the digits. His grandmother looks once and says: seven lakh fifty-nine thousand four hundred three.",
+      "How does she read it so quickly?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "She has seen this price before", reply: "She can do it with any number. Let's find her trick." },
+        { label: "She splits the digits into small groups", reply: "Good thinking. Let's split them ourselves.", right: true },
+      ],
+    },
+    missions: [
+      commas("759403", "indian", { prompt: "Split the price the Indian way: three digits on the right, then groups of two.", success: "7,59,403. Now it reads easily: 7 lakh, 59 thousand, 403.", goal: { measure: "miss", equals: 0 } }),
+      commas("1250000", "indian", { prompt: "Split this number the same way: three on the right, then twos.", success: "12,50,000 reads as 12 lakh 50 thousand.", goal: { measure: "miss", equals: 0 } }),
+      commas("30405060", "indian", { prompt: "A bigger one. Three on the right, then twos.", success: "3,04,05,060: 3 crore, 4 lakh, 5 thousand and 60. A 0 keeps each empty place.", goal: { measure: "miss", equals: 0 } }),
+    ],
+    names: ["period"],
+    name: [
+      "Each group of digits between commas is called a period. From the right: ones (three digits), then thousands, lakhs and crores (two digits each).",
+      "To read a number, say each period with its name. To write one from words, fill every period, using 0 for any place that is not said: four lakh six thousand twenty is 4,06,020.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "Write in figures: two lakh five thousand thirty.",
+      choices: [
+        { label: "2,05,030", reply: "Yes. 2 lakh, 05 thousand, and 030 in the ones.", right: true },
+        { label: "2,5,30", reply: "Every place needs a digit. The thousands need two digits (05) and the ones need three (030)." },
+        { label: "25,030", reply: "That is twenty-five thousand thirty. The 2 lakh needs its own group, and the thousands are 05." },
       ],
     },
   },

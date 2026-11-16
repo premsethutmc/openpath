@@ -10,6 +10,7 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@6 adds a `commas` kind (the digits of a whole number, with commas the learner places).
  * scene@5 adds a `fraction` kind (a bar or a hundred-square cut into equal pieces, some shaded), a `numberline` kind (a
  * point on a number line, or a jump from a start) and an `array` kind (counters in equal rows).
  * scene@4 adds a `rectangle` kind (width and height on a grid; perimeter and area) and a `join` kind (two pieces of a graph
@@ -74,7 +75,10 @@ export interface NumberLineScene extends Base { kind: "numberline"; from: number
  *  the total is being shared out: `left` is how many are left over once the rows are as full as they can be (999 until
  *  then, and when too many are used), and the readout says how many are left over. */
 export interface ArrayScene extends Base { kind: "array"; total: number; rows?: number; share?: boolean }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene;
+/** The digits of a whole number with commas the learner places: in threes from the right (`international`), or one group
+ *  of three and then twos (`indian`). `miss` is how many commas are wrongly placed or missing. */
+export interface CommasScene extends Base { kind: "commas"; digits: string; style: "indian" | "international" }
+export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -163,6 +167,7 @@ export function controls(s: Scene): Control[] {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
     return [{ key: "a", label: "Angle A", min: 10, max: 150, step: 1, start: near ? 40 : 60 }, { key: "b", label: "Angle B", min: 10, max: 150, step: 1, start: near ? 95 : 60 }];
   }
+  if (s.kind === "commas") return commaPlaces(s).map((_, i, all) => ({ key: "abc"[i], label: ["First comma", "Second comma", "Third comma"][i], min: 1, max: s.digits.length - 1, step: 1, start: all.length - i }));
   if (s.kind === "fraction") {
     const top = s.pieces ?? s.max ?? 12;
     return [...(s.pieces === undefined ? [{ key: "n", label: "Pieces", min: 1, max: top, step: 1, start: 1 }] : []), ...(s.shaded === undefined ? [{ key: "k", label: "Shaded", min: 0, max: top, step: 1, start: 0 }] : [])];
@@ -207,6 +212,15 @@ function scales(s: CurveScene | LineScene) {
 /** The line of a line scene for a state: its slope and where it meets the y-axis. */
 function lineOf(s: LineScene, state: SceneState) { const m = state.m; return { m, c: s.through ? s.through[1] - m * s.through[0] : state.c ?? 0 }; }
 
+/** Where a commas scene's commas belong: each as the number of digits to its right. */
+function commaPlaces(s: CommasScene): number[] {
+  const out: number[] = [];
+  for (let p = 3; p < s.digits.length; p += s.style === "indian" ? 2 : 3) out.push(p);
+  return out;
+}
+/** A commas scene's layout: the gap between digits, and where the last digit sits. */
+const commaGrid = (s: CommasScene) => { const gap = Math.min(30, 280 / s.digits.length); return { gap, right: px(170 + ((s.digits.length - 1) * gap) / 2) }; };
+const commaX = (s: CommasScene, p: number) => { const g = commaGrid(s); return px(g.right - (p - 1) * g.gap - g.gap / 2); };
 /** A fraction scene's pieces and shaded pieces (never more shaded than there are pieces). */
 function fracOf(s: FractionScene, state: SceneState) { const n = s.pieces ?? state.n, k = Math.min(s.shaded ?? state.k, n); return { n, k }; }
 const arrOf = (s: ArrayScene, state: SceneState) => ({ rows: s.rows ?? state.r, cols: state.c });
@@ -222,6 +236,10 @@ function joinOf(s: JoinScene, state: SceneState) {
 
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
+  if (s.kind === "commas") {
+    const want = commaPlaces(s), have = new Set(want.map((_, i) => state["abc"[i]]));
+    return { ...Object.fromEntries(want.map((_, i) => ["abc"[i], state["abc"[i]]])), miss: want.filter((p) => !have.has(p)).length };
+  }
   if (s.kind === "fraction") {
     // compared by cross-multiplying, so equal fractions are exactly equal
     const { n, k } = fracOf(s, state), [tn, td] = s.target, cross = k * td - tn * n;
@@ -250,7 +268,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -268,6 +286,11 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
+  if (s.kind === "commas") {
+    // the number as it now reads, comma by comma (the digits never change, so this gives nothing away)
+    const at = new Set(commaPlaces(s).map((_, i) => state["abc"[i]]));
+    return [...s.digits].map((d, i) => (at.has(s.digits.length - i) && i > 0 ? `,${d}` : d)).join("");
+  }
   if (s.kind === "fraction") return `${m.k} of ${m.n} equal ${m.n === 1 ? "piece" : "pieces"} shaded`;
   if (s.kind === "numberline") {
     if (s.hide) return "Count the marks from a number you can see.";
@@ -300,6 +323,15 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   const out: Shape[] = [];
+  if (s.kind === "commas") {
+    const g = commaGrid(s), n = s.digits.length;
+    [...s.digits].forEach((d, i) => out.push({ t: "text", x: px(g.right - (n - 1 - i) * g.gap), y: 104, s: d, role: "digit" }));
+    commaPlaces(s).forEach((_, i) => {
+      const x = commaX(s, state["abc"[i]]);
+      out.push({ t: "text", x, y: 110, s: ",", role: "comma" }, { t: "line", x1: x, y1: 118, x2: x, y2: 140, role: "edge" }, { t: "circle", cx: x, cy: 152, r: 12, role: "handle" });
+    });
+    return out;
+  }
   if (s.kind === "fraction") {
     const { n, k } = fracOf(s, state), [tn, td] = s.target, x0 = 30, W = 280;
     const bar = (y: number, h: number, pieces: number, shaded: number, role: string) => {
@@ -438,6 +470,11 @@ export const draggable = (s: Scene) => s.kind !== "strips" && s.kind !== "line" 
 /** Which handle a touch at a point takes hold of: 0 or 1 for a transform's two arrows (−1 when it is far from both),
  *  0 for every other scene. The player keeps this for the length of a drag, so one arrow can be dragged across the other. */
 export function grip(s: Scene, state: SceneState, x: number, y: number): number {
+  if (s.kind === "commas") {
+    // the comma nearest the finger
+    const d = commaPlaces(s).map((_, i) => Math.abs(commaX(s, state["abc"[i]]) - x));
+    return d.indexOf(Math.min(...d));
+  }
   if (s.kind !== "transform") return 0;
   const mx = (x - 170) / TU, my = (110 - y) / TU, d0 = Math.hypot(mx - state.a, my - state.b), d1 = Math.hypot(mx - state.c, my - state.d);
   return Math.min(d0, d1) > 1.6 ? -1 : d0 <= d1 ? 0 : 1;
@@ -453,6 +490,7 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
     const next = set(s, set(s, state, "a", a), "b", b);
     return next.a + next.b > 170 ? state : next;
   }
+  if (s.kind === "commas") { const g = commaGrid(s); return set(s, state, "abc"[hold ?? grip(s, state, x, y)], (g.right - g.gap / 2 - x) / g.gap + 1); }
   if (s.kind === "fraction") {
     if (s.shaded !== undefined) return state;
     const n = s.pieces ?? state.n;
@@ -484,6 +522,7 @@ export function describe(s: Scene): string {
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
+  if (s.kind === "commas") return `The digits of the number ${s.digits}, with ${commaPlaces(s).length === 1 ? "a comma" : "commas"} that can be moved between them by dragging or with sliders. ${s.prompt}`;
   if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
   if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}. ${s.prompt}`;
   if (s.kind === "array") return `An interactive set of counters in equal rows. ${s.rows === undefined ? "Sliders set the number of rows and how many are in each row" : `There are ${s.rows} rows, and a slider sets how many are in each row`}. ${s.prompt}`;
@@ -536,7 +575,11 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "fraction") {
+  if (s.kind === "commas") {
+    if (!(typeof s.digits === "string" && /^[1-9]\d{3,9}$/.test(s.digits))) bad.push("digits must be a whole number of 4 to 10 digits");
+    if (s.style !== "indian" && s.style !== "international") bad.push("style must be indian or international");
+    if (!bad.length && commaPlaces(s).length > 3) bad.push("at most three commas");
+  } else   if (s.kind === "fraction") {
     const int = (v: unknown, lo: number, hi: number) => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi;
     if (!(Array.isArray(s.target) && s.target.length === 2 && int(s.target[1], 1, 100) && int(s.target[0], 0, s.target[1]))) bad.push("target must be a fraction of at most one whole, in whole numbers");
     if (s.pieces !== undefined && !(int(s.pieces, 1, 12) || s.pieces === 100)) bad.push("pieces must be 1 to 12, or 100");

@@ -33,7 +33,9 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
   counts as evidence.
 
 ## Class 5 lessons, second batch (2026-11-16, branch `feat/class5-recipes-2`, draft PR, not merged)
-- Seven more Class 5 recipes (28 in all); 20 of the 62 CISCE Class 5 skills open with a recipe. The counters picture can
+- scene@6 adds `commas`; two recipes use it (lakhs, crores and millions; big numbers), after the owner's note that the
+  old lesson only tells.
+- Nine more Class 5 recipes (30 in all); 22 of the 62 CISCE Class 5 skills open with a recipe. The counters picture can
   share out a total and show what is left over.
 - Open: 42 Class 5 skills; pictures for mixed numbers (more than one whole), clocks, solids, angles and charts.
 

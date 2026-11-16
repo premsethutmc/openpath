@@ -14,7 +14,7 @@ import { taughtExposureKeys } from "../../../packages/learning/src/teaching-expo
 import { exposureKey } from "../../../packages/learning/src/families";
 
 test("every recipe passes its checks, belongs to a real module and is offered", () => {
-  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.measurement.area-squares", "MATH.measurement.money-decimals", "MATH.measurement.rectangle-perimeter", "MATH.number.decimal-operations", "MATH.number.decimal-tenths", "MATH.number.division-remainders", "MATH.number.equivalent-fractions", "MATH.number.fraction-add", "MATH.number.fraction-comparison", "MATH.number.fraction-models", "MATH.number.fraction-of-collection", "MATH.number.integer-add", "MATH.number.integers", "MATH.number.multiply-divide-powers-of-ten", "MATH.number.number-line", "MATH.number.percent-intro", "MATH.number.percentage", "MATH.number.primes", "MATH.number.rounding", "MATH.reasoning.estimate-check"]);
+  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.measurement.area-squares", "MATH.measurement.money-decimals", "MATH.measurement.rectangle-perimeter", "MATH.number.decimal-operations", "MATH.number.decimal-tenths", "MATH.number.division-remainders", "MATH.number.equivalent-fractions", "MATH.number.fraction-add", "MATH.number.fraction-comparison", "MATH.number.fraction-models", "MATH.number.fraction-of-collection", "MATH.number.indian-international-numeration", "MATH.number.integer-add", "MATH.number.integers", "MATH.number.large-numbers", "MATH.number.multiply-divide-powers-of-ten", "MATH.number.number-line", "MATH.number.percent-intro", "MATH.number.percentage", "MATH.number.primes", "MATH.number.rounding", "MATH.reasoning.estimate-check"]);
   assert.equal(new Set(ALL_RECIPES.map((r) => r.competency)).size, ALL_RECIPES.length, "one recipe per competency");
   for (const r of ALL_RECIPES) {
     assert.deepEqual(checkRecipe(r), [], r.competency);
@@ -200,4 +200,17 @@ test("the second Class 5 batch: sharing out, leftovers, estimates and money", ()
   // the two lessons with nothing to explore are methods, carried by their worked steps
   for (const c of ["MATH.number.decimal-operations", "MATH.number.multiply-divide-powers-of-ten"]) { const r = recipeFor(c)!; assert.equal(r.type, "method"); assert.equal(r.missions.length, 0); assert.ok(workedFor(c)); }
   assert.equal(workedFor("MATH.number.decimal-operations")!.answer, "17.58", "the story's own sum is the one worked");
+});
+
+test("moving the commas: the same digits read the Indian and the international way", () => {
+  const [intl, indian, regroup] = recipeFor("MATH.number.indian-international-numeration")!.missions;
+  assert.ok(!met(intl, initial(intl)) && met(intl, { a: 3, b: 6 }) && met(intl, { a: 6, b: 3 }) && !met(intl, { a: 3, b: 5 }));
+  assert.equal(readout(intl, { a: 3, b: 6 }), "211,000,000");
+  assert.ok(met(indian, { a: 3, b: 5, c: 7 }) && !met(indian, { a: 3, b: 6, c: 7 }) && !met(indian, { a: 3, b: 5, c: 5 }));
+  assert.equal(readout(indian, { a: 3, b: 5, c: 7 }), "21,10,00,000");
+  assert.equal(readout(regroup, { a: 3, b: 6 }), "45,000,000");
+  const [price, lakhs, crore] = recipeFor("MATH.number.large-numbers")!.missions;
+  assert.equal(readout(price, { a: 3, b: 5 }), "7,59,403"); assert.ok(met(price, { a: 3, b: 5 }) && !met(price, { a: 3, b: 4 }));
+  assert.equal(readout(lakhs, { a: 3, b: 5 }), "12,50,000"); assert.equal(readout(crore, { a: 3, b: 5, c: 7 }), "3,04,05,060");
+  for (const m of [intl, indian, price, crore]) for (const st of states(m)) assert.equal(readout(m, st).replaceAll(",", ""), (m as { digits: string }).digits, "the digits never change");
 });
