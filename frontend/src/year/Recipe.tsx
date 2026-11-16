@@ -10,11 +10,12 @@
  * lesson-part@1: when a part is finished, how long it took is sent as a measurement (a name from a fixed list, a number and
  * which part), so that the part where learners leave a lesson can be found. It says nothing about right or wrong.
  */
-import { useEffect, useRef, useState, type JSX } from "react";
+import { useEffect, useRef, useState, type JSX, type ReactNode } from "react";
 import { useResume } from "./resume";
 import type { Scene } from "../../../packages/learning/src/scene";
 import { stepsOf, workedFor, type Choice, type Recipe, type RecipeStep } from "../../../packages/learning/src/recipe";
 import { layoutFor } from "./recipe-layout";
+import type { Guess } from "../../../packages/learning/src/families";
 import { FeedbackBox } from "./Feedback";
 import { Figure } from "./Figure";
 import { KID } from "./kid";
@@ -28,14 +29,37 @@ const headingOf = (recipe: Recipe, s: RecipeStep) => (s.kind === "mission" ? (re
 
 const cookie = (name: string) => (typeof document === "undefined" ? "" : document.cookie.split("; ").find((c) => c.startsWith(`${name}=`))?.slice(name.length + 1) ?? "");
 /** lesson-part@1: one measurement, sent and forgotten (a site with no server for it, or a failure, changes nothing). */
-function partDone(recipe: Recipe, part: string, since: number) {
+function partDone(recipe: Recipe, part: string, since: number) { mark(where(recipe, part), since); }
+function mark(detail: string, since: number) {
   try {
     void fetch("/api/telemetry/", {
       method: "POST", credentials: "same-origin", keepalive: true,
       headers: { "Content-Type": "application/json", "X-CSRFToken": decodeURIComponent(cookie("csrftoken")) },
-      body: JSON.stringify({ metrics: [{ name: "lesson_part", ms: Math.min(599_999, Math.max(0, Date.now() - since)), detail: where(recipe, part) }] }),
+      body: JSON.stringify({ metrics: [{ name: "lesson_part", ms: Math.min(599_999, Math.max(0, Date.now() - since)), detail }] }),
     }).catch(() => undefined);
   } catch { /* measurements never get in the way of a lesson */ }
+}
+
+/**
+ * guess-first@1: a worked example in a skill's opening lesson is not shown at once. The learner sees its question and the
+ * answers to choose from (the right one and the family's own predicted wrong ones, `guessOf`), and the working opens when
+ * one is chosen, or when "Show me how" is tapped. A wrong choice is answered with why that answer comes out. The lesson's
+ * own Next button is untouched, the guess is not evidence, and what is recorded is only whether it was right, wrong or
+ * skipped (a `lesson_part` measurement).
+ */
+export function GuessFirst({ guess, competency, children }: { guess: Guess; competency: string; children: ReactNode }) {
+  const [picked, setPicked] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+  const since = useRef(Date.now());
+  const reveal = (how: string) => { if (!open) mark(clean(`guess:${competency}:${how}`), since.current); setOpen(true); };
+  return (
+    <div className="guess-first" data-guess={open ? "open" : "closed"}>
+      {!open && <p className="eyebrow">Have a guess first</p>}
+      <Choices ask={guess.prompt} choices={guess.choices} picked={picked} onPick={(i) => { setPicked(i); reveal(guess.choices[i].right ? "right" : "wrong"); }} untilRight={false} />
+      {!open && <button type="button" className="secondary guess-skip" onClick={() => reveal("skipped")}>Show me how</button>}
+      <div hidden={!open}>{children}</div>
+    </div>
+  );
 }
 
 function Choices({ ask, choices, picked, onPick, untilRight }: { ask: string; choices: Choice[]; picked: number | null; onPick: (i: number) => void; untilRight: boolean }) {

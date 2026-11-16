@@ -32,6 +32,12 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Guess first (2026-11-16, branch `feat/guess-first`, draft PR, not merged)
+- guess-first@1: in every skill's opening lesson, a worked example opens after a guess among the verified answer and the
+  family's own predicted wrong answers (`guessOf`). No writing per skill: 190 of 244 mapped skills get it, 27 more have a
+  recipe.
+- Open: the 27 skills with neither; a guess is not yet offered in the lessons shown after a mistake.
+
 ## Class 5 lessons, second batch (2026-11-16, branch `feat/class5-recipes-2`, draft PR, not merged)
 - scene@6 adds `commas`; two recipes use it (lakhs, crores and millions; big numbers), after the owner's note that the
   old lesson only tells.

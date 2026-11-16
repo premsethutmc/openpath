@@ -13,7 +13,7 @@ import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
-import { RecipeLesson } from "./Recipe";
+import { GuessFirst, RecipeLesson } from "./Recipe";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { sceneForQuestion } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -25,7 +25,7 @@ import { answerFeedback } from "../../../packages/learning/src/answer-feedback";
 import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
 import { sitting, tiring } from "../../../packages/learning/src/session-fatigue";
 import { graph } from "../../../packages/learning/src/graph";
-import { problemOf } from "../../../packages/learning/src/families";
+import { guessOf, problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
 import { compose, kidQuestion, type Ask as KidAsk } from "../../../packages/learning/src/kid-say";
@@ -611,15 +611,21 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const last = i === screens.length - 1;
   // scenes@2: a section about a generated question gets that question's interactive scene (its own numbers), under any picture
   const scene = raw.instance ? sceneForQuestion(raw.instance) : null;
+  // guess-first@1: in a new skill's opening lesson, the working of an example opens after a guess at its answer
+  const guess = opening && competency && raw.instance && sc.math ? guessOf(raw.instance) : null;
+  // a picture that is not the question's own belongs to the working (it would give the answer away), so it waits with it
+  const later = !!guess && !guess.pictured && !!sc.widget;
+  const picture = sc.widget && <Picture w={sc.widget} competency={competency} />;
+  const working = sc.math && <>{later && picture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div></>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
-        {sc.widget && <Picture w={sc.widget} competency={competency} />}
+        {!later && picture}
         {scene && <ScenePlayer key={raw.instance} scene={scene} />}
-        {sc.math && <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}
+        {guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
         {sc.tip && <p className="hint">{sc.tip}</p>}
         {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
       </div>

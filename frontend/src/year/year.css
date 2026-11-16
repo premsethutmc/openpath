@@ -373,6 +373,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 @media print { .scene-controls { display: none; } }
 
 /* recipe@1: the lesson recipe player (Recipe.tsx) */
+.guess-first { margin: 12px 0; }
+.guess-first .guess-skip { min-height: 44px; }
 .recipe-choices { display: grid; gap: 10px; margin: 10px 0; }
 .recipe-choices button { min-height: 48px; text-align: left; }
 .recipe-choices button.picked { outline: 3px solid var(--brand, #6a55f0); outline-offset: 1px; }
