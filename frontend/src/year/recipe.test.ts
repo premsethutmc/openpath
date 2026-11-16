@@ -7,7 +7,10 @@ import assert from "node:assert/strict";
 import { moduleFor } from "../../../packages/learning/src/content";
 import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { check, initial, measures, met, readout, set, states } from "../../../packages/learning/src/scene";
-import { ALL_RECIPES, checkRecipe, recipeFor, stepsOf, type Recipe } from "../../../packages/learning/src/recipe";
+import { ALL_RECIPES, checkRecipe, recipeFor, stepsOf, workedFor, type Recipe } from "../../../packages/learning/src/recipe";
+import { problemOf } from "../../../packages/learning/src/families";
+import { taughtExposureKeys } from "../../../packages/learning/src/teaching-exposure";
+import { exposureKey } from "../../../packages/learning/src/families";
 
 test("every recipe passes its checks, belongs to a real module and is offered", () => {
   assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties"]);
@@ -51,6 +54,22 @@ test("the other lessons' missions give the numbers their words state", () => {
   for (const t of by("MATH.geometry.triangle-properties")) { const [a, b] = (t as { angles: [number, number] }).angles; assert.equal(measures(t, { a, b }).c, 180 - a - b); }
 });
 
+test("how to solve it: every lesson shows its own worked example, with the family's verified steps, counted as shown", () => {
+  for (const r of ALL_RECIPES) {
+    const w = workedFor(r.competency), m = moduleFor(r.competency)!;
+    assert.ok(w && w.steps.length >= 1 && w.prompt && w.answer, `${r.competency} has a worked example`);
+    const id = m.chapter.find((s) => s.instance)!.instance!, p = problemOf(id)!;
+    assert.equal(w!.answer, p.answer);
+    assert.equal(p.competency, r.competency, "the example is a question of this skill");
+    assert.deepEqual(stepsOf(r, true).map((s) => s.kind).filter((k) => k !== "mission"), ["question", "predict", "name", "solve", "choose"]);
+    // once the teaching of any lesson of the skill is recorded, the example counts as shown (never as unaided evidence)
+    const records = { teaching: [{ at: "2026-01-01T00:00:00Z", rule: "teach-first@1", strategy: m.strategies[0].id, competency: r.competency, session: "s" }] } as unknown as Parameters<typeof taughtExposureKeys>[0];
+    assert.ok(taughtExposureKeys(records).has(exposureKey(id)), `${r.competency}: the example is counted as shown`);
+    assert.ok(r.choose.kind === "try" || r.choose.kind === "think");
+  }
+  assert.equal(workedFor("MATH.no.such.skill"), null);
+});
+
 test("a recipe opens only a skill whose opening lesson can record its teaching", () => {
   // the recipe rides inside the skill's opening lesson, which records the teaching when it ends; a skill with no eligible
   // lesson has no such record, so its answers would wrongly count as unaided
@@ -71,6 +90,7 @@ test("malformed recipes are refused", () => {
     ["a choice with no reply", { ...good, predict: { ...good.predict, choices: [{ label: "a", reply: "" }, { label: "b", reply: "ok", right: true }] } }],
     ["duplicate labels", { ...good, predict: { ...good.predict, choices: [{ label: "a", reply: "no" }, { label: "a", reply: "yes", right: true }] } }],
     ["no missions", { ...good, missions: [] }],
+    ["no kind on the last step", { ...good, choose: { ask: good.choose.ask, choices: good.choose.choices } }],
     ["five missions", { ...good, missions: [...good.missions, ...good.missions].slice(0, 5) }],
     ["a mission that cannot be finished", { ...good, missions: [{ ...good.missions[0], goal: { measure: "x", equals: 99 } }] }],
     ["a bad variable", { ...good, missions: [{ ...good.missions[0], variable: "time" }] }],

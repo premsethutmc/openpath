@@ -8,6 +8,8 @@ import { useState } from "react";
 const KINDS = [
   ["wrong", "The answer or explanation is wrong"],
   ["lesson", "The lesson didn't help"],
+  ["unclear", "It doesn't explain it"],
+  ["dislike", "I don't like this"],
   ["cluttered", "Too cluttered or hard to read"],
   ["broken", "Something looks broken"],
 ] as const;

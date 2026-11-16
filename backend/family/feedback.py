@@ -15,7 +15,7 @@ from .developer import IsDeveloper
 from .models import Feedback
 from .views import AccountBase
 
-KINDS = {"wrong", "lesson", "cluttered", "broken"}
+KINDS = {"wrong", "lesson", "unclear", "dislike", "cluttered", "broken"}
 WHERE = re.compile(r"^[A-Za-z0-9:_.,\-/ ]{1,160}$")
 EMAIL = re.compile(r"[^\s@]+@[^\s@]+")
 DAILY = 60

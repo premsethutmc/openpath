@@ -301,7 +301,7 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       for await (const c of req) { size += c.length; if (size > 4096) return text(res, 413, "Too long"); chunks.push(c); }
       let body;
       try { body = JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { return text(res, 400, "Bad request"); }
-      const kinds = Array.isArray(body?.kinds) ? body.kinds.filter((k) => ["wrong", "lesson", "cluttered", "broken"].includes(k)) : [];
+      const kinds = Array.isArray(body?.kinds) ? body.kinds.filter((k) => ["wrong", "lesson", "unclear", "dislike", "cluttered", "broken"].includes(k)) : [];
       const where = String(body?.where ?? "");
       if (!kinds.length || !/^[A-Za-z0-9:_.,\-/ ]{1,160}$/.test(where)) return text(res, 400, "Tick at least one box");
       const note = String(body?.note ?? "").replace(/[^\s@]+@[^\s@]+/g, "[email]").slice(0, 300);
