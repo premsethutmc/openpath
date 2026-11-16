@@ -250,7 +250,7 @@
   "packages/learning/src/fam/core.ts": "44e37a55e54c721ec977855dcc50382696ab0aba046d517f0da50c27436ed5ac",
   "packages/learning/src/fam/index.ts": "9c94d440f22bd21ea6cd1f10958b0df733e54e51619b41568bb1d90f5364449d",
   "packages/learning/src/fam/linear-teaching.ts": "dda131607d6c27336c788b3bf9df2c7a559d3326a11978b38f5dfb8f5e43c947",
-  "packages/learning/src/families.ts": "4a08a8ac394647234557ef5767408c460b7f6777fc3b9eff10262ba7b2bb616a",
+  "packages/learning/src/families.ts": "9854563b9a8a228b7e4eea42b1e2c358113b0d0eaf15a4c5f1dd33e66fa6139d",
   "packages/learning/src/family-kit.ts": "3ee33230a7ca880083147ee0dfa17378f1a9a9dd5036d4d2f8ba4564f92e5e3a",
   "packages/learning/src/foundation-runtime.ts": "3413cfae1ffb0be03261805a6b2f50fadaf98444331a011f9bc4b3afe29e050c",
   "packages/learning/src/foundation.ts": "226a5ae7f8b63d96991273ca80d6b0ed38d18a051b1e7fce493fedfd96fc7284",
