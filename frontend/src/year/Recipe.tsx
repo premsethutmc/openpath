@@ -13,7 +13,8 @@
 import { useEffect, useRef, useState, type JSX } from "react";
 import { useResume } from "./resume";
 import type { Scene } from "../../../packages/learning/src/scene";
-import { layoutFor, stepsOf, workedFor, type Choice, type Recipe, type RecipeStep } from "../../../packages/learning/src/recipe";
+import { stepsOf, workedFor, type Choice, type Recipe, type RecipeStep } from "../../../packages/learning/src/recipe";
+import { layoutFor } from "./recipe-layout";
 import { FeedbackBox } from "./Feedback";
 import { Figure } from "./Figure";
 import { KID } from "./kid";

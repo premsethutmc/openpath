@@ -23,7 +23,7 @@ export interface Choice { label: string; reply: string; right?: true }
 export interface Recipe {
   competency: string;
   /** What kind of skill the lesson is for: a new idea, a method with many steps, or a fact or definition. The layout and
-   *  the weight of each part follow from it (see `layoutFor`). */
+   *  the weight of each part follow from it (see `layoutFor` in the player's `recipe-layout.ts`). */
   type: "idea" | "method" | "fact";
   /** A short title for the top of every step. */
   title: string;
@@ -93,18 +93,6 @@ export function stepsOf(r: Recipe, solve = false): RecipeStep[] {
   if (r.type === "fact") return [{ kind: "name" }, ...missions, ...end];
   return [...(r.question ? [{ kind: "question" as const }] : []), ...(r.predict ? [{ kind: "predict" as const }] : []), ...missions, { kind: "name" }, ...end];
 }
-
-/**
- * layout@1: how a recipe is laid out, decided by rule and not written for each lesson.
- *   "steps"  one thing on the screen at a time, with Next. For Classes 1 to 5: a young child loses their place on a page
- *            that scrolls.
- *   "flow"   one page that grows: each part appears under the last once that one is done, and what is done stays in view
- *            (a finished mission shrinks to one line). A new screen is only needed where showing the next thing would spoil
- *            the present one, and a part that waits its turn does that without one.
- * The class is the learner's (null when it is not known: then the page that grows).
- */
-export type RecipeLayout = "steps" | "flow";
-export const layoutFor = (_r: Recipe, grade: number | null): RecipeLayout => (grade !== null && grade <= 5 ? "steps" : "flow");
 
 /** The worked example for "how to solve it": the question the skill's lesson already opens on, with the steps and answer
  *  its family verifies. It is the lesson's own example on purpose: showing it is already counted as shown when the
