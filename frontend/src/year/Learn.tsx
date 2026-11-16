@@ -553,7 +553,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
   // with no worked example to follow, the recipe is the whole lesson (and is what a learner sees on coming back to it)
-  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
+  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} resumeKey={resumeKey && `${resumeKey}:recipe-step@1`} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
   const raw = screens[i];
   // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
   const kq = KID && raw.instance ? safeKid(question(raw.instance)) : null;

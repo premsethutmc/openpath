@@ -347,6 +347,15 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scene .sc-wedge2 { fill: #f8d5c4; stroke: #b4532a; stroke-width: 1; }
 .scene .sc-value { fill: #1f2a37; font-size: 13px; font-weight: 700; }
 .scene .sc-pivot { fill: #5a47d6; stroke: #fff; stroke-width: 2; }
+.scene .sc-grid { stroke: #e3e8f0; stroke-width: 1; }
+.scene .sc-ghost { fill: none; stroke: #9aa5b8; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.scene .sc-moved { fill: #f8d5c4; fill-opacity: 0.75; stroke: #b4532a; stroke-width: 2; stroke-linejoin: round; }
+.scene .sc-arrow0 { stroke: #5a47d6; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-arrow1 { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-handle0 { fill: #5a47d6; stroke: #fff; stroke-width: 3; }
+.scene .sc-handle1 { fill: #0f7a5d; stroke: #fff; stroke-width: 3; }
+.scene-controls.many > summary { cursor: pointer; font-weight: 700; color: var(--brand, #6a55f0); padding: 10px 0; min-height: 44px; }
+.scene-controls.many label span { min-width: 9.5em; font-size: 0.9rem; }
 .scene-controls label { display: flex; align-items: center; gap: 12px; margin: 8px 0 0; font-weight: 600; }
 .scene-controls label span { min-width: 3.2em; }
 .scene-controls input { flex: 1; min-height: 44px; accent-color: var(--brand, #6a55f0); }

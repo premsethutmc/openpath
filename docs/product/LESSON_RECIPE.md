@@ -36,9 +36,17 @@ In the **opening lesson** of a skill the learner has never met, once per learner
 
 ## Recipes now
 
-| Skill | Recipe |
-|---|---|
-| `MATH.calculus.indefinite-integrals` (where integrals are first met) | A slowly opening tap: guess the water after 3 minutes; a steady tap (rate × time); slices of time (9 litres); the total so far is t²; the slope of t² is the pouring rate; then "integrating", the antiderivative and the power rule |
+| Skill | The question | Missions |
+|---|---|---|
+| `MATH.calculus.indefinite-integrals` (integrals as first met) | a slowly opening tap: how much water after 3 minutes? | steady tap; slices of time; the total so far is t²; the slope of t² is the pouring rate |
+| `MATH.calculus.derivative-rules` | a ball on a ramp: how fast at exactly t = 3? | slope of t² at 3; where the speed is 2; slope of t³ at 2 |
+| `MATH.algebra.matrices` | how can four numbers move a picture? | make it twice as wide; mirror it; quarter turn |
+| `MATH.algebra.determinants` | how much bigger did the picture get? | area × 6; flip it (area × −1); squash it flat (area × 0) |
+| `MATH.coordinate.straight-lines` | how steep is the road, as one number? | turn a line about A to pass through B, uphill and downhill |
+| `MATH.geometry.triangle-properties` | what do a triangle's three torn-off corners make? | three very different triangles, each making 180° |
+
+Each recipe lists the words that name its idea (`names`). `checkRecipe` refuses a recipe that uses one before the name step,
+or whose name step uses none of them.
 
 ## Adding one
 
@@ -47,8 +55,9 @@ it. The hard part is the question: it has to make the idea needed before it is n
 
 ## Limits (open)
 
-- One recipe. `MATH.calculus.definite-integrals` (area below the axis is taken away) has a mission ready in the engine but
-  no eligible opening lesson to carry it, so it is not attached yet.
-- A recipe left part-way starts again from its first step.
+- Six recipes; every other skill still opens with its written lesson.
+- `MATH.calculus.definite-integrals` has no eligible opening lesson to carry a recipe (its lesson has not been through the
+  teaching checks), so "area below the axis is taken away" is not taught by a recipe yet.
+- A recipe left part-way comes back at the same step; a mission that was open is done again.
 - Checked in a desktop browser at phone size with touch events; not yet on a physical Android phone.
 - Whether it teaches better than the text it replaces can only be seen with real learners.

@@ -29,6 +29,8 @@ export interface Recipe {
   missions: Scene[];
   /** Step 4: the name and the short way, in one to three short paragraphs. */
   name: string[];
+  /** The words that name the idea. None may appear before step 4 (checked), and step 4 must use at least one. */
+  names: string[];
   /** Step 5: where it applies. */
   choose: { ask: string; choices: Choice[] };
 }
@@ -54,6 +56,13 @@ export function checkRecipe(v: unknown): string[] {
   bad.push(...choices(r.predict, "predict"), ...choices(r.choose, "choose"));
   if (!Array.isArray(r.missions) || r.missions.length < 1 || r.missions.length > 4) bad.push("one to four missions");
   else r.missions.forEach((m, i) => { const p = check(m); if (p.length) bad.push(`mission ${i + 1}: ${p[0]}`); });
+  if (!Array.isArray(r.names) || r.names.length < 1 || r.names.length > 5 || !r.names.every((n) => text(n, 30) && n.trim().length >= 3)) bad.push("names: one to five words that name the idea");
+  if (bad.length) return bad;
+  // the idea is found before it is named: none of its names in the question, the guess or the missions
+  const early = [...r.question, r.predict.ask, ...r.predict.choices.flatMap((c) => [c.label, c.reply]), ...r.missions.flatMap((m) => [m.prompt, m.success])].join(" ").toLowerCase();
+  const said = r.names.filter((n) => early.includes(n.toLowerCase()));
+  if (said.length) bad.push(`named before the name step: ${said.join(", ")}`);
+  if (!r.names.some((n) => r.name.join(" ").toLowerCase().includes(n.toLowerCase()))) bad.push("the name step does not use any of the names");
   return bad;
 }
 
@@ -85,6 +94,7 @@ const RECIPES: Recipe[] = [
       { type: "scene", kind: "accumulate", variable: "t", poly: [0, 2], from: 0, to: 3, step: 0.05, prompt: "Slices are slow. Drag the edge to t = 3 and watch the total at t = 1, 2 and 3.", success: "Totals 1, 4, 9 at t = 1, 2, 3. The total so far is always t².", goal: { measure: "x", equals: 3 } },
       { type: "scene", kind: "slope", variable: "t", poly: [0, 0, 1], from: 0, to: 3, step: 0.05, prompt: "This curve is t², the total so far. Slide to where its slope is 4.", success: "At t = 2 the slope of t² is 4, which is 2t: the slope of the total is the pouring rate.", goal: { measure: "slope", equals: 4 } },
     ],
+    names: ["integra", "antiderivative"],
     name: [
       "Adding up something that keeps changing is called integrating. The total is the area under the graph, written ∫ from 0 to 3 of 2t dt = 9.",
       "t² is an antiderivative of 2t: the curve whose slope is 2t. The short way is to find it, put in the end, put in the start, and subtract: 3² − 0² = 9.",
@@ -96,6 +106,178 @@ const RECIPES: Recipe[] = [
         { label: "6t", reply: "6t is the slope of 3t², one step the other way. We want the curve whose slope is 3t²." },
         { label: "t³", reply: "Yes. Raise the power to 3, divide by 3: 3t³ ⁄ 3 = t³. Its slope is 3t².", right: true },
         { label: "3t³", reply: "Raise the power, then also divide by the new power: 3t³ ⁄ 3 = t³." },
+      ],
+    },
+  },
+  // Differentiation, as first met: how fast, at one instant.
+  {
+    competency: "MATH.calculus.derivative-rules",
+    title: "How fast, right now?",
+    question: [
+      "A ball rolls down a ramp, faster and faster. After t seconds it has rolled t² metres: 1 after one second, 4 after two, 9 after three.",
+      "How fast is it going at exactly t = 3?",
+    ],
+    predict: {
+      ask: "Before working anything out, what is your guess?",
+      choices: [
+        { label: "3 metres a second", reply: "3 is its average over the whole 3 seconds. It started slow, so by now it is faster than that. Let's find out." },
+        { label: "6 metres a second", reply: "Good instinct. Let's see why.", right: true },
+        { label: "9 metres a second", reply: "9 is how far it has rolled, not how fast it is going. Let's find out." },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "slope", variable: "t", poly: [0, 0, 1], from: 0, to: 4, step: 0.05, prompt: "This curve is the distance, t². Its steepness is the speed. Slide the point to t = 3.", success: "At t = 3 the slope is 6: the ball is doing 6 metres a second at that instant.", goal: { measure: "x", equals: 3 } },
+      { type: "scene", kind: "slope", variable: "t", poly: [0, 0, 1], from: 0, to: 4, step: 0.05, prompt: "Now find the moment when the speed is exactly 2.", success: "Speed 2 at t = 1, and it was 6 at t = 3. The slope of t² is always 2t.", goal: { measure: "slope", equals: 2 } },
+      { type: "scene", kind: "slope", variable: "t", poly: [0, 0, 0, 1], from: 0, to: 3, step: 0.05, prompt: "A steeper ramp: distance t³. Slide to t = 2 and read the speed.", success: "At t = 2 the slope of t³ is 12, which is 3 × 2². The power came down in front and dropped by one.", goal: { measure: "x", equals: 2 } },
+    ],
+    names: ["derivative", "differentiat"],
+    name: [
+      "The slope of a curve at one point is called its derivative there. Finding it is called differentiating.",
+      "The short way for a power: bring the power down in front, then lower the power by one. t² gives 2t, and t³ gives 3t².",
+    ],
+    choose: {
+      ask: "What is the slope of t⁴ at any moment t?",
+      choices: [
+        { label: "4t³", reply: "Yes. The 4 comes down in front and the power drops to 3.", right: true },
+        { label: "t³", reply: "The power dropped by one, but the old power must also come down in front: 4t³." },
+        { label: "4t⁴", reply: "The 4 came down, but the power must also drop by one: 4t³." },
+      ],
+    },
+  },
+  // What a matrix does, before multiplying two of them.
+  {
+    competency: "MATH.algebra.matrices",
+    title: "Four numbers that move a shape",
+    question: [
+      "A drawing app can stretch a picture, flip it like a mirror, or turn it. Inside, each of these moves is stored as just four numbers.",
+      "How can four numbers say where every point of the picture should go?",
+    ],
+    predict: {
+      ask: "Two arrows start as one step right and one step up. To make the picture twice as wide, what would you change?",
+      choices: [
+        { label: "Make the right arrow twice as long", reply: "Good instinct. Let's try it.", right: true },
+        { label: "Make the up arrow twice as long", reply: "That makes it twice as tall, not twice as wide. Let's try both." },
+        { label: "Make both arrows twice as long", reply: "That makes it bigger in both directions. Let's try it and see." },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "transform", target: [2, 0, 0, 1], prompt: "Drag the arrows. Make the shape twice as wide.", success: "The first arrow now lands at (2, 0), and everything followed it: twice as wide.", goal: { measure: "miss", equals: 0 } },
+      { type: "scene", kind: "transform", target: [-1, 0, 0, 1], prompt: "Flip the shape left to right, like a mirror.", success: "The first arrow points backwards, at (−1, 0), and the shape is its own mirror image.", goal: { measure: "miss", equals: 0 } },
+      { type: "scene", kind: "transform", target: [0, 1, -1, 0], prompt: "Turn the shape a quarter turn to the left.", success: "Both arrows turned together: the first to (0, 1), the second to (−1, 0).", goal: { measure: "miss", equals: 0 } },
+    ],
+    names: ["matrix", "matrices"],
+    name: [
+      "Those four numbers are a matrix. Its first column is where the first arrow lands, and its second column is where the second arrow lands.",
+      "Multiplying two matrices means doing one move and then the other. That is why each entry comes from a row of one and a column of the other.",
+    ],
+    choose: {
+      ask: "Turn then stretch, or stretch then turn: do the two orders always give the same picture?",
+      choices: [
+        { label: "Yes, always", reply: "Try it in your head: widen then turn makes it tall; turn then widen makes it wide. The order matters." },
+        { label: "No, the order can matter", reply: "Yes. That is why AB and BA can be different matrices.", right: true },
+      ],
+    },
+  },
+  // The determinant as what the move does to area.
+  {
+    competency: "MATH.algebra.determinants",
+    title: "How much bigger did it get?",
+    question: [
+      "Four numbers move a picture: the first pair says where a one-step-right arrow lands, the second pair where a one-step-up arrow lands.",
+      "Can you tell from the four numbers alone how much bigger the picture gets?",
+    ],
+    predict: {
+      ask: "The arrows land at (2, 0) and (0, 3). The picture's area is multiplied by what?",
+      choices: [
+        { label: "5", reply: "5 is 2 + 3. Twice as wide and three times as tall multiplies the area. Let's check." },
+        { label: "6", reply: "Good instinct. Let's check it, and then try stranger moves.", right: true },
+        { label: "3", reply: "3 is only the taller direction. It also got twice as wide. Let's check." },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "transform", target: [2, 0, 0, 3], prompt: "Set the arrows to (2, 0) and (0, 3), and read the area.", success: "Area × 6: twice as wide times three times as tall.", goal: { measure: "miss", equals: 0 } },
+      { type: "scene", kind: "transform", prompt: "Now flip the shape over without changing its size. Watch the area number.", success: "Area × −1. Same size, but turned over: a negative sign means the picture was flipped.", goal: { measure: "det", equals: -1 } },
+      { type: "scene", kind: "transform", prompt: "Squash the shape completely flat, onto one line.", success: "Area × 0. Everything is crushed onto a line, and there is no way back from that.", goal: { measure: "det", equals: 0 } },
+    ],
+    names: ["determinant"],
+    name: [
+      "That area number is the determinant. For arrows landing at (a, b) and (c, d) it is ad − bc.",
+      "Negative means flipped. Zero means squashed flat, and then the move cannot be undone: the matrix has no inverse.",
+    ],
+    choose: {
+      ask: "The arrows land at (2, 1) and (4, 2). What does ad − bc tell you?",
+      choices: [
+        { label: "2 × 2 − 1 × 4 = 0: squashed flat", reply: "Yes. Both arrows point along the same line, so the picture is crushed onto it.", right: true },
+        { label: "2 × 2 + 1 × 4 = 8: eight times bigger", reply: "The two products are subtracted, not added: 4 − 4 = 0." },
+        { label: "2 × 4 − 1 × 2 = 6: six times bigger", reply: "Multiply across the corners: a with d, and b with c. That gives 4 − 4 = 0." },
+      ],
+    },
+  },
+  // The slope of a line through two points.
+  {
+    competency: "MATH.coordinate.straight-lines",
+    title: "How steep is the road?",
+    question: [
+      "A straight road runs from A(−2, −1) to B(3, 2) on a map.",
+      "How would you tell someone exactly how steep it is, with one number?",
+    ],
+    predict: {
+      ask: "From A to B the road goes 5 across and 3 up. Which number says how steep it is?",
+      choices: [
+        { label: "3 ÷ 5", reply: "Good instinct. Let's check it.", right: true },
+        { label: "5 ÷ 3", reply: "That grows when the road gets flatter. Steeper should mean a bigger number. Let's check." },
+        { label: "5 + 3", reply: "8 is how far you travel across and up together, not how steep it is. Let's check." },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "line", mLabel: "Tilt", through: [-2, -1], targets: [[3, 2]], window: [-7, 7, -7, 7], m: [-3, 3, 0.2], prompt: "Turn the line about A(−2, −1) until it passes through B(3, 2).", success: "It passes through B at 0.6, which is 3 ÷ 5: up 3 for every 5 across.", goal: { measure: "miss", below: 1e-4 } },
+      { type: "scene", kind: "line", mLabel: "Tilt", through: [-2, 3], targets: [[2, -1]], window: [-7, 7, -7, 7], m: [-3, 3, 0.5], prompt: "A road going downhill: turn the line about A(−2, 3) until it passes through B(2, −1).", success: "It passes through B at −1: down 4 for every 4 across. Downhill is a negative number.", goal: { measure: "miss", below: 1e-4 } },
+    ],
+    names: ["slope", "gradient"],
+    name: [
+      "That number is the slope of the line: the change in y divided by the change in x between any two of its points.",
+      "With the slope m and one point, the whole line is fixed: y = mx + c, where c is where it crosses the y-axis.",
+    ],
+    choose: {
+      ask: "A line passes through (1, 2) and (3, 10). What is its slope?",
+      choices: [
+        { label: "4", reply: "Yes. Up 8 for 2 across: 8 ÷ 2 = 4.", right: true },
+        { label: "8", reply: "8 is the change in y. Divide it by the change in x, which is 2." },
+        { label: "1/4", reply: "That is across divided by up. The slope is up divided by across: 8 ÷ 2." },
+      ],
+    },
+  },
+  // The angles of a triangle.
+  {
+    competency: "MATH.geometry.triangle-properties",
+    title: "The three corners",
+    question: [
+      "Draw any triangle on paper: tall, flat, lopsided. Tear off its three corners and put them side by side, point to point.",
+      "What do the three corners make together?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "A square corner", reply: "A square corner is 90°. Three corners make more than that. Let's find out." },
+        { label: "A straight line", reply: "Good instinct. Let's see if it is true for every triangle.", right: true },
+        { label: "It depends on the triangle", reply: "It feels that way, because the corners change. Let's see what happens to all three together." },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "triangle", angles: [40, 75], prompt: "Set angle A to 40° and angle B to 75°. Watch the third corner.", success: "The third corner is 65°, and 40 + 75 + 65 = 180: a straight line.", goal: { measure: "miss", equals: 0 } },
+      { type: "scene", kind: "triangle", angles: [90, 30], prompt: "A very different triangle: set A to 90° and B to 30°.", success: "The third corner is 60°, and 90 + 30 + 60 = 180 again.", goal: { measure: "miss", equals: 0 } },
+      { type: "scene", kind: "triangle", angles: [20, 20], prompt: "A flat one: set A to 20° and B to 20°.", success: "The third corner opens to 140°, and the three still make 180.", goal: { measure: "miss", equals: 0 } },
+    ],
+    names: ["angle sum"],
+    name: [
+      "This is the angle sum of a triangle: its three angles always add up to 180°, a straight line.",
+      "So when you know two angles you know the third: take both away from 180°.",
+    ],
+    choose: {
+      ask: "Someone says a triangle has angles of 100° and 90°. Can it?",
+      choices: [
+        { label: "Yes, the third is small", reply: "100 + 90 is already 190, more than 180. There is nothing left for a third corner." },
+        { label: "No", reply: "Yes: 100 + 90 is already more than 180, so no triangle has both.", right: true },
       ],
     },
   },

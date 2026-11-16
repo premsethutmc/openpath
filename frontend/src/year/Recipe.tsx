@@ -6,7 +6,8 @@
  * recorded as evidence; the module's own practice and checks follow the recipe and keep the record.
  */
 import { useState } from "react";
-import { met, initial, type Scene } from "../../../packages/learning/src/scene";
+import { useResume } from "./resume";
+import type { Scene } from "../../../packages/learning/src/scene";
 import { stepsOf, type Choice, type Recipe } from "../../../packages/learning/src/recipe";
 import { ScenePlayer } from "./Scene";
 
@@ -32,21 +33,26 @@ function Mission({ scene, onReached }: { scene: Scene; onReached: () => void }) 
   return <ScenePlayer scene={scene} onReached={onReached} />;
 }
 
-export function RecipeLesson({ recipe, onDone, doneLabel = "Next" }: { recipe: Recipe; onDone: () => void; doneLabel?: string }) {
+export function RecipeLesson({ recipe, onDone, doneLabel = "Next", resumeKey }: { recipe: Recipe; onDone: () => void; doneLabel?: string; resumeKey?: string }) {
   const steps = stepsOf(recipe);
-  const [i, setI] = useState(0);
-  const [guess, setGuess] = useState<number | null>(null);
+  // the place in the recipe and the guess made are kept for a learner who leaves part-way (a cursor only, never evidence);
+  // a mission that was open is done again
+  const [kept, keep] = useResume<{ i: number; guess: number | null }>(resumeKey, { i: 0, guess: null });
+  const i = kept && Number.isInteger(kept.i) && kept.i >= 0 && kept.i < steps.length ? kept.i : 0;
+  const guess = kept && Number.isInteger(kept.guess) && kept.guess! >= 0 && kept.guess! < recipe.predict.choices.length ? kept.guess : null;
+  const setI = (n: number) => keep({ i: n, guess });
+  const setGuess = (g: number) => keep({ i, guess: g });
   const [choice, setChoice] = useState<number | null>(null);
   const [reached, setReached] = useState<Record<number, boolean>>({});
   const [nudge, setNudge] = useState("");
   const step = steps[i];
   const last = i === steps.length - 1;
   // a guess only has to be made; a mission has to be finished; the last choice has to be the right one
-  const ready = step.kind === "predict" ? guess !== null : step.kind === "mission" ? !!reached[step.index] || met(recipe.missions[step.index], initial(recipe.missions[step.index])) : step.kind === "choose" ? choice !== null && !!recipe.choose.choices[choice].right : true;
+  const ready = step.kind === "predict" ? guess !== null : step.kind === "mission" ? !!reached[step.index] : step.kind === "choose" ? choice !== null && !!recipe.choose.choices[choice].right : true;
   const next = () => {
     if (!ready) { setNudge(step.kind === "mission" ? "Finish this one first." : step.kind === "predict" ? "Make a guess first. A wrong guess is fine." : choice === null ? "Choose one first." : "Try another one."); return; }
     setNudge("");
-    if (last) onDone(); else setI(i + 1);
+    if (last) { keep({ i: 0, guess: null }); onDone(); } else setI(i + 1);
   };
   return (
     <div className="stack enter" key={`recipe-${i}`} data-recipe={recipe.competency} data-recipe-step={step.kind}>

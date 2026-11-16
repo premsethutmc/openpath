@@ -27,8 +27,10 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - recipe@1 (`docs/product/LESSON_RECIPE.md`): a skill's opening lesson as question → guess → missions (scenes) → name →
   when to use it, from data (`packages/learning/src/recipe.ts`, player `frontend/src/year/Recipe.tsx`). The worked examples,
   practice and checks follow as before; nothing in a recipe is evidence; teaching is recorded as before.
-- One recipe: integrals as first met (`MATH.calculus.indefinite-integrals`). Open: more recipes; definite integrals has no
-  eligible opening lesson to carry one.
+- Six recipes: integrals as first met, differentiation, matrices, determinants, straight lines, triangle angles. scene@3
+  adds a `transform` kind (two arrows are a matrix that moves a shape). A recipe left part-way resumes at its step.
+- Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
+  counts as evidence.
 
 ## This milestone (2026-11-11, CISCE / ICSE Class 5, branch `feat/icse-grade5`, draft PR, not merged)
 - icse@1 (`docs/milestones/ICSE_GRADE5.md`): a third board for Grade 5 only, `boardFor("icse", 5)`, from

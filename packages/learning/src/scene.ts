@@ -1,5 +1,5 @@
 /**
- * scene@2: the deterministic scene engine for interactive teaching pictures.
+ * scene@3: the deterministic scene engine for interactive teaching pictures.
  *
  * A scene is DATA (a `Scene`): what to draw, what the learner can move, and a goal to reach by moving it. One engine reads
  * any scene; the app has one player (`frontend/src/year/Scene.tsx`) that draws what this file returns. A new topic is a new
@@ -9,6 +9,8 @@
  * always draws, measures and checks the same way on every device.
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
+ *
+ * scene@3 adds a `transform` kind: two arrows set a 2 × 2 matrix, and a shape is moved by it.
  *
  * scene@2 adds: curves beyond polynomials (`terms`: powers, sine, cosine, exponential, natural logarithm, with exact slopes
  * and areas), a `triangle` kind (two angles set, the third follows), and a line that turns about a fixed point (`through`).
@@ -41,10 +43,13 @@ export interface SlopeScene extends Base, Curve { kind: "slope"; step?: number }
 /** The signed area collected from the left edge to a right edge the learner drags. */
 export interface AccumulateScene extends Base, Curve { kind: "accumulate"; step?: number }
 /** A straight line set by sliders. With `through`, the line turns about that point and only its slope is set. */
-export interface LineScene extends Base { kind: "line"; targets: [number, number][]; window: [number, number, number, number]; m: [number, number, number]; c?: [number, number, number]; through?: [number, number] }
+export interface LineScene extends Base { kind: "line"; targets: [number, number][]; window: [number, number, number, number]; m: [number, number, number]; c?: [number, number, number]; through?: [number, number]; /** What the slope slider is called (default "Slope"; a lesson that has not yet named the slope calls it something plainer). */ mLabel?: string }
 /** A triangle whose angles at A and B are set (whole degrees); the angle at C follows. `angles` are the two asked for. */
 export interface TriangleScene extends Base { kind: "triangle"; angles: [number, number] }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene;
+/** A 2 × 2 matrix as a machine: its columns are where two arrows land (set by dragging them to whole-number points), and a shape is moved by it.
+ *  `target`, when given, is the matrix [a, b, c, d] (first column a, b; second column c, d) that `miss` is measured to. */
+export interface TransformScene extends Base { kind: "transform"; target?: [number, number, number, number] }
+export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -133,8 +138,9 @@ export function controls(s: Scene): Control[] {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
     return [{ key: "a", label: "Angle A", min: 10, max: 150, step: 1, start: near ? 40 : 60 }, { key: "b", label: "Angle B", min: 10, max: 150, step: 1, start: near ? 95 : 60 }];
   }
+  if (s.kind === "transform") return [["a", "First arrow, across", 1], ["b", "First arrow, up", 0], ["c", "Second arrow, across", 0], ["d", "Second arrow, up", 1]].map(([key, label, start]) => ({ key: key as string, label: label as string, min: -3, max: 3, step: 1, start: start as number }));
   if (s.kind === "line") {
-    const m: Control = { key: "m", label: "Slope", min: s.m[0], max: s.m[1], step: s.m[2], start: s.m[0] };
+    const m: Control = { key: "m", label: s.mLabel ?? "Slope", min: s.m[0], max: s.m[1], step: s.m[2], start: s.m[0] };
     return s.through || !s.c ? [m] : [m, { key: "c", label: "Start", min: s.c[0], max: s.c[1], step: s.c[2], start: s.c[0] }];
   }
   const step = s.step ?? ((s.to - s.from) <= 8 ? 0.05 : 0.1);
@@ -171,6 +177,7 @@ function lineOf(s: LineScene, state: SceneState) { const m = state.m; return { m
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "triangle") { const t = tri(state); return { ...t, sum: t.a + t.b + t.c, miss: Math.abs(state.a - s.angles[0]) + Math.abs(state.b - s.angles[1]) }; }
+  if (s.kind === "transform") { const { a, b, c, d } = state, t = s.target; return { a, b, c, d, det: a * d - b * c, miss: t ? Math.abs(a - t[0]) + Math.abs(b - t[1]) + Math.abs(c - t[2]) + Math.abs(d - t[3]) : 0 }; }
   if (s.kind === "line") { const l = lineOf(s, state); return { ...l, miss: s.targets.reduce((t, [x, y]) => t + Math.abs(l.m * x + l.c - y), 0) }; }
   const f = curveOf(s);
   if (s.kind === "strips") {
@@ -183,7 +190,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -201,6 +208,7 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
+  if (s.kind === "transform") return `Arrows land at (${fmt(m.a)}, ${fmt(m.b)}) and (${fmt(m.c)}, ${fmt(m.d)}) · area × ${fmt(m.det)}`;
   return `y = ${fmt(m.m)}x ${m.c < 0 ? "−" : "+"} ${fmt(Math.abs(m.c))}`;
 }
 
@@ -214,9 +222,24 @@ function corners(state: SceneState) {
   return { t, pts: raw.map(([x, y]) => [px(ox + k * x), px(oy + k * y)] as [number, number]) };
 }
 
+/** The shape a transform scene moves (a letter F, so a flip and a turn can be told apart), and its place in the box. */
+const F_SHAPE: [number, number][] = [[0, 0], [0.25, 0], [0.25, 0.5], [0.6, 0.5], [0.6, 0.75], [0.25, 0.75], [0.25, 1], [0.75, 1], [0.75, 1.25], [0, 1.25]];
+const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 - TU * y);
+
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   const out: Shape[] = [];
+  if (s.kind === "transform") {
+    const { a, b, c, d } = state;
+    for (let k = -6; k <= 6; k++) out.push({ t: "line", x1: TX(k), y1: 6, x2: TX(k), y2: 214, role: k ? "grid" : "axis" });
+    for (let k = -4; k <= 4; k++) out.push({ t: "line", x1: 14, y1: TY(k), x2: 326, y2: TY(k), role: k ? "grid" : "axis" });
+    const path = (f: (p: [number, number]) => [number, number]) => `${F_SHAPE.map((p, i) => { const q = f(p); return `${i ? "L" : "M"}${TX(q[0])} ${TY(q[1])}`; }).join("")}Z`;
+    out.push({ t: "path", d: path((p) => p), role: "ghost" });
+    out.push({ t: "path", d: path(([x, y]) => [a * x + c * y, b * x + d * y]), role: "moved" });
+    out.push({ t: "line", x1: TX(0), y1: TY(0), x2: TX(a), y2: TY(b), role: "arrow0" }, { t: "line", x1: TX(0), y1: TY(0), x2: TX(c), y2: TY(d), role: "arrow1" });
+    out.push({ t: "circle", cx: TX(a), cy: TY(b), r: 12, role: "handle0" }, { t: "circle", cx: TX(c), cy: TY(d), r: 12, role: "handle1" });
+    return out;
+  }
   if (s.kind === "triangle") {
     const { t, pts } = corners(state), [A, Bp, C] = pts, deg = [t.a, t.b, t.c];
     out.push({ t: "path", d: `M${A[0]} ${A[1]}L${Bp[0]} ${Bp[1]}L${C[0]} ${C[1]}Z`, role: "shape" });
@@ -274,16 +297,30 @@ export function draw(s: Scene, state: SceneState): Shape[] {
 }
 
 /** Whether a scene follows a finger on the picture (the others are set by their sliders only). */
-export const draggable = (s: Scene) => s.kind === "slope" || s.kind === "accumulate" || s.kind === "triangle";
+export const draggable = (s: Scene) => s.kind === "slope" || s.kind === "accumulate" || s.kind === "triangle" || s.kind === "transform";
 
-/** A touch or drag at a point of the 340 × 220 box. Draggable scenes follow the finger; others are unchanged. */
-export function pointer(s: Scene, state: SceneState, x: number, y: number): SceneState {
+/** Which handle a touch at a point takes hold of: 0 or 1 for a transform's two arrows (−1 when it is far from both),
+ *  0 for every other scene. The player keeps this for the length of a drag, so one arrow can be dragged across the other. */
+export function grip(s: Scene, state: SceneState, x: number, y: number): number {
+  if (s.kind !== "transform") return 0;
+  const mx = (x - 170) / TU, my = (110 - y) / TU, d0 = Math.hypot(mx - state.a, my - state.b), d1 = Math.hypot(mx - state.c, my - state.d);
+  return Math.min(d0, d1) > 1.6 ? -1 : d0 <= d1 ? 0 : 1;
+}
+
+/** A touch or drag at a point of the 340 × 220 box. Draggable scenes follow the finger; others are unchanged.
+ *  `hold` is the handle taken at the start of the drag (see `grip`); without it the nearer handle is taken. */
+export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?: number): SceneState {
   if (s.kind === "triangle") {
     // the angles the finger makes with the two ends of an unscaled base (60..280 at y = 185), in whole degrees
     const up = Math.max(8, 185 - y);
     const a = Math.round((Math.atan2(up, x - 60) * 180) / Math.PI), b = Math.round((Math.atan2(up, 280 - x) * 180) / Math.PI);
     const next = set(s, set(s, state, "a", a), "b", b);
     return next.a + next.b > 170 ? state : next;
+  }
+  if (s.kind === "transform") {
+    // the arrow tip nearer the finger follows it; a touch far from both tips moves nothing
+    const mx = (x - 170) / TU, my = (110 - y) / TU, h = hold ?? grip(s, state, x, y);
+    return h === 0 ? set(s, set(s, state, "a", mx), "b", my) : h === 1 ? set(s, set(s, state, "c", mx), "d", my) : state;
   }
   if (s.kind !== "slope" && s.kind !== "accumulate") return state;
   const k = scales(s);
@@ -295,6 +332,7 @@ export function describe(s: Scene): string {
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
+  if (s.kind === "transform") return `An interactive grid with a shape and two arrows. Moving the arrows, or their four sliders, stretches, flips and turns the shape. ${s.prompt}`;
   if (s.kind === "triangle") return `An interactive triangle ABC. Two sliders set the angles at A and B, and the angle at C follows. ${s.prompt}`;
   return `An interactive graph with ${s.targets.length} marked ${s.targets.length === 1 ? "point" : "points"} and a straight line ${s.through ? "that turns about a fixed point, set by a slope slider" : "set by two sliders"}. ${s.prompt}`;
 }
@@ -314,6 +352,7 @@ export function* states(s: Scene, cap = 20000): Generator<SceneState> {
 function likely(s: Scene): SceneState | null {
   let st = initial(s);
   if (s.kind === "triangle") return set(s, set(s, st, "a", s.angles[0]), "b", s.angles[1]);
+  if (s.kind === "transform") { if (!s.target) return null; ["a", "b", "c", "d"].forEach((k, i) => { st = set(s, st, k, s.target![i]); }); return st; }
   if (s.kind === "line") {
     const [p, q] = s.through ? [s.through, s.targets[0]] : [s.targets[0], s.targets[1]];
     if (!p || !q || p[0] === q[0]) return null;
@@ -340,7 +379,10 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "triangle") {
+  if (s.kind === "transform") {
+    if (s.target !== undefined && !(Array.isArray(s.target) && s.target.length === 4 && s.target.every((v) => Number.isInteger(v) && Math.abs(v) <= 3))) bad.push("target must be four whole numbers from −3 to 3");
+    if (g && g.measure === "miss" && s.target === undefined) bad.push("a goal on miss needs a target");
+  } else if (s.kind === "triangle") {
     if (!Array.isArray(s.angles) || s.angles.length !== 2 || !s.angles.every((a) => Number.isInteger(a) && a >= 10 && a <= 150) || s.angles[0] + s.angles[1] > 170) bad.push("angles must be two whole angles of 10° to 150° with a sum of at most 170°");
   } else if (s.kind === "line") {
     const rng = (r: unknown) => Array.isArray(r) && r.length === 3 && r.every(fin) && r[0] < r[1] && r[2] > 0 && (r[1] - r[0]) / r[2] <= 400;
@@ -349,6 +391,7 @@ export function check(v: unknown): string[] {
     if (!Array.isArray(s.window) || s.window.length !== 4 || !s.window.every(fin) || s.window[0] >= s.window[1] || s.window[2] >= s.window[3]) bad.push("window must be [x0, x1, y0, y1]");
     if (s.through !== undefined ? !pt(s.through) || s.c !== undefined : !rng(s.c)) bad.push("a line needs either a point to turn about or a start range, not both");
     if (!rng(s.m)) bad.push("slider ranges must be [min, max, step]");
+    if (s.mLabel !== undefined && !(typeof s.mLabel === "string" && s.mLabel.trim() && s.mLabel.length <= 20)) bad.push("mLabel must be 1 to 20 characters");
   } else {
     const okPoly = Array.isArray(s.poly) && s.poly.length >= 1 && s.poly.length <= 8 && s.poly.every(fin);
     const okTerms = Array.isArray(s.terms) && s.terms.length >= 1 && s.terms.length <= 6 && s.terms.every((t) => t && ["pow", "sin", "cos", "exp", "ln"].includes(t.f) && fin(t.a) && (t.b === undefined || (fin(t.b) && (t.f === "pow" ? Number.isInteger(t.b) && t.b >= 0 && t.b <= 8 : t.f === "ln" ? t.b === 1 : t.b !== 0))));
@@ -358,7 +401,7 @@ export function check(v: unknown): string[] {
     if (s.kind === "strips" ? s.max !== undefined && !(Number.isInteger(s.max) && s.max >= 2 && s.max <= 200) : s.step !== undefined && !(fin(s.step) && s.step > 0 && (s.to - s.from) / s.step <= 2000)) bad.push("control range is out of bounds");
   }
   if (bad.length) return bad;
-  if (s.kind !== "triangle" && s.kind !== "line") { const f = curveOf(s); for (let i = 0; i <= 40; i++) if (!fin(f.value(s.from + ((s.to - s.from) * i) / 40))) return ["the curve is not finite on its range"]; }
+  if (s.kind !== "triangle" && s.kind !== "line" && s.kind !== "transform") { const f = curveOf(s); for (let i = 0; i <= 40; i++) if (!fin(f.value(s.from + ((s.to - s.from) * i) / 40))) return ["the curve is not finite on its range"]; }
   if (met(s, initial(s))) bad.push("the goal is already reached at the start");
   const guess = likely(s);
   let reachable = !!guess && met(s, guess);
