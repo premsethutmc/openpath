@@ -22,6 +22,9 @@ import { explainStep, problemOf } from "./families";
 export interface Choice { label: string; reply: string; right?: true }
 export interface Recipe {
   competency: string;
+  /** What kind of skill the lesson is for: a new idea, a method with many steps, or a fact or definition. The layout and
+   *  the weight of each part follow from it (see `layoutFor`). */
+  type: "idea" | "method" | "fact";
   /** A short title for the top of every step. */
   title: string;
   /** Step 1: the question, in one to three short paragraphs. No rule, no name of the idea. */
@@ -55,6 +58,7 @@ export function checkRecipe(v: unknown): string[] {
   const r = v as Recipe, bad: string[] = [];
   if (!r || typeof r !== "object") return ["not a recipe"];
   if (!text(r.competency, 80) || !text(r.title, 60)) bad.push("a recipe needs a competency and a short title");
+  if (r.type !== "idea" && r.type !== "method" && r.type !== "fact") bad.push("a recipe needs a type: idea, method or fact");
   if (!paragraphs(r.question)) bad.push("the question is one to three short paragraphs");
   if (!paragraphs(r.name)) bad.push("the name step is one to three short paragraphs");
   bad.push(...choices(r.predict, "predict"), ...choices(r.choose, "choose"));
@@ -76,6 +80,18 @@ export type RecipeStep = { kind: "question" } | { kind: "predict" } | { kind: "m
 /** The steps in order. `solve` is included when the lesson has a worked example to show (see `workedFor`). */
 export const stepsOf = (r: Recipe, solve = false): RecipeStep[] => [{ kind: "question" }, { kind: "predict" }, ...r.missions.map((_, index) => ({ kind: "mission" as const, index })), { kind: "name" }, ...(solve ? [{ kind: "solve" as const }] : []), { kind: "choose" }];
 
+/**
+ * layout@1: how a recipe is laid out, decided by rule and not written for each lesson.
+ *   "steps"  one thing on the screen at a time, with Next. For Classes 1 to 5: a young child loses their place on a page
+ *            that scrolls.
+ *   "flow"   one page that grows: each part appears under the last once that one is done, and what is done stays in view
+ *            (a finished mission shrinks to one line). A new screen is only needed where showing the next thing would spoil
+ *            the present one, and a part that waits its turn does that without one.
+ * The class is the learner's (null when it is not known: then the page that grows).
+ */
+export type RecipeLayout = "steps" | "flow";
+export const layoutFor = (_r: Recipe, grade: number | null): RecipeLayout => (grade !== null && grade <= 5 ? "steps" : "flow");
+
 /** The worked example for "how to solve it": the question the skill's lesson already opens on, with the steps and answer
  *  its family verifies. It is the lesson's own example on purpose: showing it is already counted as shown when the
  *  teaching is recorded, so it cannot later be taken as an answer given unaided. Null when the lesson has none. */
@@ -91,6 +107,7 @@ const RECIPES: Recipe[] = [
   // exists and records its teaching, so the recipe opens it.
   {
     competency: "MATH.calculus.indefinite-integrals",
+    type: "idea",
     title: "Adding up something that changes",
     question: [
       "A tap opens slowly. After t minutes it is pouring 2t litres a minute: nothing at first, 2 after one minute, 6 after three.",
@@ -129,6 +146,7 @@ const RECIPES: Recipe[] = [
   // Differentiation, as first met: how fast, at one instant.
   {
     competency: "MATH.calculus.derivative-rules",
+    type: "idea",
     title: "How fast, right now?",
     question: [
       "A ball rolls down a ramp, faster and faster. After t seconds it has rolled t² metres: 1 after one second, 4 after two, 9 after three.",
@@ -165,6 +183,7 @@ const RECIPES: Recipe[] = [
   // What a matrix does, before multiplying two of them.
   {
     competency: "MATH.algebra.matrices",
+    type: "idea",
     title: "Four numbers that move a shape",
     question: [
       "A drawing app can stretch a picture, flip it like a mirror, or turn it. Inside, each of these moves is stored as just four numbers.",
@@ -200,6 +219,7 @@ const RECIPES: Recipe[] = [
   // The determinant as what the move does to area.
   {
     competency: "MATH.algebra.determinants",
+    type: "idea",
     title: "How much bigger did it get?",
     question: [
       "Four numbers move a picture: the first pair says where a one-step-right arrow lands, the second pair where a one-step-up arrow lands.",
@@ -236,6 +256,7 @@ const RECIPES: Recipe[] = [
   // The slope of a line through two points.
   {
     competency: "MATH.coordinate.straight-lines",
+    type: "idea",
     title: "How steep is the road?",
     question: [
       "A straight road runs from A(−2, −1) to B(3, 2) on a map.",
@@ -271,6 +292,7 @@ const RECIPES: Recipe[] = [
   // The angles of a triangle.
   {
     competency: "MATH.geometry.triangle-properties",
+    type: "idea",
     title: "The three corners",
     question: [
       "Draw any triangle on paper: tall, flat, lopsided. Tear off its three corners and put them side by side, point to point.",

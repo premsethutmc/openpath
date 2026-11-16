@@ -27,6 +27,20 @@ later re-check. Those were already there and already keep the evidence.
 One player draws every recipe (`frontend/src/year/Recipe.tsx`). A recipe is data; `checkRecipe` must find no problem
 (lengths, exactly one right choice per set, every mission a scene that passes its own checks), or it is not shown.
 
+## Layout (layout@1)
+
+How a recipe is laid out is decided by rule (`layoutFor`), not written for each lesson:
+
+- **The page that grows** (Class 6 and up, and when the class is not known). One scrolling page. Each part appears under the
+  last once that one is done; what is done stays in view, and a finished mission shrinks to one line. Nothing is shown before
+  the learner has done what comes before it, so there is no Next between parts: only the button at the end.
+- **One thing at a time** (Classes 1 to 5). One part on the screen, with Next. A young child loses their place on a page
+  that scrolls.
+
+Each recipe states its `type` (`idea`, `method`, `fact`). All six are ideas today; a method (many worked steps, little to
+explore) and a fact (one short screen, then practice) will take their own shapes from the same rule when the first of each
+is written.
+
 ## Where it appears
 
 In the **opening lesson** of a skill the learner has never met, once per learner, when the skill has a recipe (`Lesson`,
@@ -65,6 +79,7 @@ it. The hard part is the question: it has to make the idea needed before it is n
 - Six recipes; every other skill still opens with its written lesson.
 - `MATH.calculus.definite-integrals` has no eligible opening lesson to carry a recipe (its lesson has not been through the
   teaching checks), so "area below the axis is taken away" is not taught by a recipe yet.
-- A recipe left part-way comes back at the same step; a mission that was open is done again.
+- A recipe left part-way comes back where it was; a mission that was open is done again.
+- Where a learner leaves a lesson is not recorded yet (it would show which part is too long or unclear).
 - Checked in a desktop browser at phone size with touch events; not yet on a physical Android phone.
 - Whether it teaches better than the text it replaces can only be seen with real learners.

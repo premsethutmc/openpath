@@ -372,4 +372,9 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .recipe-reply { margin: 8px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--warn-soft, #fff1e0); }
 .recipe-reply.right { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
 .recipe-steps { margin: 8px 0 12px; padding-left: 1.4em; display: grid; gap: 8px; }
+.recipe-flow .recipe-part { scroll-margin-top: 12px; padding-top: 6px; }
+.recipe-flow .recipe-part + .recipe-part, .recipe-flow .recipe-done + .recipe-part { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line, #e6e6f2); }
+.recipe-end { margin-top: 18px; }
+.recipe-end .primary { width: 100%; }
+.recipe-done { margin: 12px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 600; }
 .recipe-nudge { margin: 8px 0 0; color: var(--bad-ink, #8f4524); font-weight: 600; }
