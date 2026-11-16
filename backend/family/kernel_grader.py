@@ -157,17 +157,27 @@ def _ask_server(requests):
 atexit.register(stop_server)
 
 
+_WARMED = {'at': None}
+
+
 def warm():
     """grader-warm@1: start the kept grader ahead of the first answer, in the background. Called when a learner's work is
     opened, so the seconds it takes to start are spent while they read the lesson and not while their first answer is
     "Saving". It asks the grader nothing (an empty list), decides nothing, and any failure is ignored: the first answer then
-    starts it as before."""
+    starts it as before.
+
+    It is tried at most once in `OPENPATH_GRADER_WARM_EVERY` seconds (300): where the kept grader cannot stay up (it is
+    stopped for every one-shot run, such as geometry working), opening a ledger must not start a program each time."""
     try:
         if not (enabled() and serve_enabled()):
             return False
         child = _SERVE['child']
         if child is not None and child.poll() is None:
             return False
+        now = time.monotonic()
+        if _WARMED['at'] is not None and now - _WARMED['at'] < _number('OPENPATH_GRADER_WARM_EVERY', '300', 0):
+            return False
+        _WARMED['at'] = now
         thread = threading.Thread(target=_ask_server, args=([],), daemon=True)
         thread.start()
         return True

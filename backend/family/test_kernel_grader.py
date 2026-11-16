@@ -168,6 +168,7 @@ class KeptGraderTests(unittest.TestCase):
         kg.stop_server()
         self.addCleanup(kg.stop_server)
         self.assertIsNone(kg._SERVE['child'])
+        kg._WARMED['at'] = None
         self.assertTrue(kg.warm(), 'a grader that is not running is started')
         for _ in range(200):
             with kg._SERVE_LOCK:
@@ -181,8 +182,19 @@ class KeptGraderTests(unittest.TestCase):
         # the first real answer uses the grader that warming started (no second start)
         self.assertIsNotNone(kg.run([{'id': 'gen:nosuch:1', 'response': '1'}]))
         self.assertIs(kg._SERVE['child'], first)
+        # stopped soon after (as a one-shot run does): it is not started again for every ledger that is opened
+        kg.stop_server()
+        self.assertFalse(kg.warm(), 'not tried again within the waiting time')
+        self.assertIsNone(kg._SERVE['child'])
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_WARM_EVERY': '0'}):
+            self.assertTrue(kg.warm(), 'tried again once the waiting time has passed')
+            for _ in range(200):
+                if kg._SERVE['count'] >= 1:
+                    break
+                time.sleep(0.05)
         with mock.patch.dict(os.environ, {'OPENPATH_GRADER_SERVE': 'off'}):
             kg.stop_server()
+            kg._WARMED['at'] = None
             self.assertFalse(kg.warm(), 'nothing is kept when the kept grader is switched off')
             self.assertIsNone(kg._SERVE['child'])
 
