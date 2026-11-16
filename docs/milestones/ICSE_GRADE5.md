@@ -247,3 +247,16 @@ What the 22 partial outcomes still lack:
 | Estimating how much a container holds | c07-o02 |
 | A part only a person can mark (making a word problem, drawing angles, folding, nets, bar graphs, a two-way pattern): no written task | c02-o06, c06-o01, c06-o04, c06-o06, c09-o01, c10-o03 |
 | Pie charts: the skill has no prerequisite relations in the graph | c09-o02 |
+
+## Drawing on the screen and pie-chart relations (draw@1, pie-relations@1, 2026-11-16)
+
+- `afmkang` (make an angle by turning an arm on an on-screen protractor) and `adbarmk` (raise each bar of a bar graph to its
+  value on the scale), `packages/learning/src/fam/b31.ts`. In the child app (kid-say@1, `Learn.tsx`) the arm turns with a
+  slider or ±5° buttons and the bars with + / −; the answer handed back is the angle made or the bar heights, so the existing
+  marking applies (answer keys certified; grading audit results-2026-11-15b clean). Typed builds show a number box. These add
+  automatic checking alongside the written tasks for c06-o04 and c09-o01.
+- Pie charts (`content/learning/src/expansion.py`, LATER_PART): angle measure and percentage, needed only for drawing pie
+  charts in Grades 7–8, become support relations; fraction models is the Grade 4 prerequisite.
+- c01-o04 credits only families its skills' modules serve.
+
+Result: ICSE Class 5 coverage 77 complete (awaiting review), 0 partial.

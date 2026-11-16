@@ -18,7 +18,11 @@ export type Ask =
   | { kind: "order"; items: string[]; first: string; prefix?: string }
   | { kind: "tap"; items: { label: string; value: string }[] }
   /** numbers multiplied together, typed as 3 × 3 × 11 (read back as the list the marking wants) */
-  | { kind: "product" };
+  | { kind: "product" }
+  /** draw@1: turn an arm on a protractor; the fixed arm lies on 0 of the inner (0, right) or outer (180, left) scale */
+  | { kind: "turn"; fixed: 0 | 180 }
+  /** draw@1: raise and lower bars on a scale (each line is `step`, up to `lines` lines) */
+  | { kind: "bars"; labels: string[]; step: number; lines: number };
 export interface KidQ {
   say: string;
   ask: Ask;
@@ -78,6 +82,17 @@ const OWN: Record<string, Own> = {
   aecmp: (q) => {
     const m = grab(/order \(smallest first\): ([\d,; ]+)\./, q.prompt);
     return { say: "Put them in order, smallest first.", ask: { kind: "order", items: m[1].split(/;\s*/), first: "smallest" } };
+  },
+  afmkang: (q) => {
+    const m = grab(/Make an angle of (\d+)° on the protractor\. One arm lies along the line marked 0 on the (inner|outer) scale\./, q.prompt);
+    return { say: `Turn the arm that moves to make an angle of ${m[1]}°.`, ask: { kind: "turn", fixed: m[2] === "inner" ? 0 : 180 }, figure: NONE };
+  },
+  adbarmk: (q) => {
+    const m = grab(/The table shows: (.+)\. Draw the bar graph: .*each line is (\d+) ([a-z ]+)\./, q.prompt);
+    const f = q.figure as { rows?: string[][] } | undefined;
+    const labels = (f?.rows ?? []).map((r) => r[0]);
+    if (!labels.length) throw NOT_THIS;
+    return { say: `${m[1]}. Draw the bar graph: make each bar as tall as the table says. Each line is ${m[2]} ${m[3]}.`, ask: { kind: "bars", labels, step: Number(m[2]), lines: 10 } };
   },
   aedord: (q) => {
     const m = grab(/order \(smallest first\): ([\d.; ]+)\./, q.prompt);
@@ -410,7 +425,8 @@ export function keepPicture(q: Q, say: string): boolean {
 export function compose(ask: Ask, parts: string[], answer?: string, type?: string): string {
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
-  if (ask.kind === "tap") return parts[0] ?? "";
+  if (ask.kind === "tap" || ask.kind === "turn") return parts[0] ?? "";
+  if (ask.kind === "bars") return `(${parts.join(", ")})`;
   if (ask.kind === "product") return `(${(parts[0] ?? "").split(/\s*[×x*.,]\s*|\s+/i).filter(Boolean).map(Number).filter((n) => n > 0).sort((a, b) => a - b).join(", ")})`;
   const xs = (ask.kind === "order" ? parts.map((p) => p.replace(/,(?=\d{2,3}\b)/g, "")) : parts.map((p) => p.trim()));
   const list = xs.join(", ");

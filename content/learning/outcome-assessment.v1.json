@@ -15718,7 +15718,6 @@
    "verdict": "full",
    "families": [
     "aecmp",
-    "ajcrcmp",
     "aasign",
     "aaordx",
     "aedesc"

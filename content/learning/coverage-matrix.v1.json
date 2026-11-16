@@ -27,42 +27,42 @@
   "requirements": 1494,
   "classes": {
    "validated": 0,
-   "awaiting": 1361,
-   "partial": 133,
+   "awaiting": 1365,
+   "partial": 129,
    "unsupported": 0,
    "not-implemented": 0
   },
   "competenciesRequired": 345,
-  "competenciesComplete": 334,
+  "competenciesComplete": 335,
   "competenciesApproved": 0,
   "graph": {
    "competencies": 347,
    "inventory": 200,
    "expansion": 147,
-   "relations": 382,
-   "disputed": 8
+   "relations": 385,
+   "disputed": 6
   },
   "families": {
-   "count": 1116,
-   "problems": 352174,
+   "count": 1118,
+   "problems": 353164,
    "answerTypes": {
-    "integer": 431,
+    "integer": 432,
     "fraction": 158,
     "set": 27,
     "choice": 177,
     "exact": 128,
     "interval": 16,
     "expression": 31,
-    "tuple": 111,
+    "tuple": 112,
     "mixed": 7,
     "ratio": 3,
     "antiderivative": 10,
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 314,
+   "withPictures": 316,
    "withEverydayForm": 775,
-   "withAlternatives": 1078
+   "withAlternatives": 1080
   },
   "modules": 345,
   "writtenTasks": 379,
@@ -265,8 +265,8 @@
    "requirements": 57,
    "classes": {
     "validated": 0,
-    "awaiting": 55,
-    "partial": 2,
+    "awaiting": 56,
+    "partial": 1,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -295,8 +295,8 @@
    "requirements": 77,
    "classes": {
     "validated": 0,
-    "awaiting": 75,
-    "partial": 2,
+    "awaiting": 77,
+    "partial": 0,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -415,8 +415,8 @@
    "requirements": 57,
    "classes": {
     "validated": 0,
-    "awaiting": 51,
-    "partial": 6,
+    "awaiting": 52,
+    "partial": 5,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -4005,7 +4005,8 @@
     "review"
    ],
    "families": [
-    "afprot"
+    "afprot",
+    "afmkang"
    ],
    "writtenTasks": 3,
    "complete": true
@@ -11078,7 +11079,8 @@
    ],
    "families": [
     "adbar",
-    "adbartf"
+    "adbartf",
+    "adbarmk"
    ],
    "writtenTasks": 2,
    "complete": true
@@ -11487,7 +11489,7 @@
    "mode": "automatic",
    "met": {
     "graph": true,
-    "relations": false,
+    "relations": true,
     "diagnostic": true,
     "misconception": true,
     "strategy": true,
@@ -11500,7 +11502,6 @@
     "review": false
    },
    "missing": [
-    "relations",
     "review"
    ],
    "families": [
@@ -11508,7 +11509,7 @@
     "afpieang"
    ],
    "writtenTasks": 2,
-   "complete": false
+   "complete": true
   },
   {
    "id": "MATH.statistics.scaled-bars",
@@ -16896,8 +16897,8 @@
    "competencies": [
     "MATH.statistics.pie-charts"
    ],
-   "class": "partial",
-   "why": "Read and draw pie charts: missing relations"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-5@1.1.0",
@@ -17967,8 +17968,8 @@
     "MATH.number.compare-numbers",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "the map credits content no module of a mapped competency serves (ajcrcmp)"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-5@1.5.0",
@@ -19083,8 +19084,8 @@
    "competencies": [
     "MATH.statistics.pie-charts"
    ],
-   "class": "partial",
-   "why": "Read and draw pie charts: missing relations"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "icse-cisce-mathematics-grade-5@1.5.0",
@@ -24520,8 +24521,8 @@
    "competencies": [
     "MATH.statistics.pie-charts"
    ],
-   "class": "partial",
-   "why": "Read and draw pie charts: missing relations"
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-8@1.1.0",
@@ -35348,20 +35349,6 @@
    ],
    "depth": 0,
    "demand": 6,
-   "missing": [
-    "relations",
-    "review"
-   ]
-  },
-  {
-   "id": "MATH.statistics.pie-charts",
-   "name": "Read and draw pie charts",
-   "grades": [
-    4,
-    8
-   ],
-   "depth": 0,
-   "demand": 3,
    "missing": [
     "relations",
     "review"
