@@ -47,8 +47,14 @@ Each recipe states its `type`, and the type decides which steps it has (`stepsOf
 | `method` | a way of working; little to explore | question, guess (optional), missions (optional, may be none), name, how to solve it, try |
 | `fact` | a definition or convention | name it first, then missions that show it, how to solve it, try. No question or guess: there is nothing to guess about a definition |
 
-Nine recipes: the first six are ideas; continuity (Class 12) is a fact; same perimeter / different area (Class 5) is an
-idea and is the first recipe for Classes 1 to 5; adding fractions with different denominators (Class 5) is a method.
+Twenty-one recipes. Nine are in `recipe.ts`: six ideas for Classes 11 and 12, continuity (a fact), same perimeter /
+different area (Class 5, an idea) and adding fractions (Class 5, a method). Twelve more for Class 5 are in
+`recipes-class5.ts`: what a fraction is, equal fractions, comparing fractions, per cent, tenths and hundredths (a fact), the
+number line, negative numbers, adding integers (a method with missions), rounding, prime numbers, area by counting squares,
+and the perimeter of a rectangle.
+
+Three of them (what a fraction is, equal fractions, comparing fractions) have no "how to solve it" step: those skills have
+no worked example of their own yet, so the lesson goes from the name to the try.
 
 ## Where a learner leaves (lesson-part@1)
 
