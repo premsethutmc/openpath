@@ -109,7 +109,7 @@ export function sceneForQuestion(qid: string): Scene | null {
  *  or null where the question's answer is not one number. */
 export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "triangle") return 180 - s.angles[0] - s.angles[1];
-  if (s.kind === "line" || s.kind === "transform") return null;
+  if (s.kind === "line" || s.kind === "transform" || s.kind === "rectangle" || s.kind === "join") return null;
   const f = curveOf(s);
   if (s.kind === "strips") return f.area(s.from, s.to);
   if (s.goal.measure !== "x" || s.goal.equals === undefined) return null;

@@ -27,11 +27,11 @@ export interface Recipe {
   type: "idea" | "method" | "fact";
   /** A short title for the top of every step. */
   title: string;
-  /** Step 1: the question, in one to three short paragraphs. No rule, no name of the idea. */
-  question: string[];
-  /** Step 2: the guess. */
-  predict: { ask: string; choices: Choice[] };
-  /** Step 3: one to four missions, each a scene with its own goal. */
+  /** The question, in one to three short paragraphs. No rule, no name of the idea. (Not for a fact: it opens on its name.) */
+  question?: string[];
+  /** The guess. (An idea always has one; a method may; a fact has none.) */
+  predict?: { ask: string; choices: Choice[] };
+  /** Up to four missions, each a scene with its own goal. (An idea and a fact have at least one; a method may have none.) */
   missions: Scene[];
   /** Step 4: the name and the short way, in one to three short paragraphs. */
   name: string[];
@@ -54,21 +54,29 @@ function choices(v: unknown, name: string): string[] {
   return [];
 }
 /** The problems with a recipe; an empty list means it may be shown. */
+/**
+ * The order of a recipe's parts, by its type (shape@1):
+ *   idea    question, guess, missions, name, how to solve it, try      found out before it is named
+ *   method  question, (guess), (missions), name, how to solve it, try  the worked steps are the heart of it, so it must have them
+ *   fact    name, missions, how to solve it, try                       a definition cannot be found out, so it is said first, then seen
+ */
 export function checkRecipe(v: unknown): string[] {
   const r = v as Recipe, bad: string[] = [];
   if (!r || typeof r !== "object") return ["not a recipe"];
   if (!text(r.competency, 80) || !text(r.title, 60)) bad.push("a recipe needs a competency and a short title");
   if (r.type !== "idea" && r.type !== "method" && r.type !== "fact") bad.push("a recipe needs a type: idea, method or fact");
-  if (!paragraphs(r.question)) bad.push("the question is one to three short paragraphs");
+  const fact = r.type === "fact";
+  if (fact ? r.question !== undefined || r.predict !== undefined : !paragraphs(r.question)) bad.push(fact ? "a fact opens on its name: no question or guess" : "the question is one to three short paragraphs");
   if (!paragraphs(r.name)) bad.push("the name step is one to three short paragraphs");
-  bad.push(...choices(r.predict, "predict"), ...choices(r.choose, "choose"));
+  if (r.type === "idea" || (r.type === "method" && r.predict !== undefined)) bad.push(...choices(r.predict, "predict"));
+  bad.push(...choices(r.choose, "choose"));
   if (r.choose && r.choose.kind !== "try" && r.choose.kind !== "think") bad.push("choose needs a kind: try or think");
-  if (!Array.isArray(r.missions) || r.missions.length < 1 || r.missions.length > 4) bad.push("one to four missions");
+  if (!Array.isArray(r.missions) || r.missions.length < (r.type === "method" ? 0 : 1) || r.missions.length > 4) bad.push(r.type === "method" ? "at most four missions" : "one to four missions");
   else r.missions.forEach((m, i) => { const p = check(m); if (p.length) bad.push(`mission ${i + 1}: ${p[0]}`); });
   if (!Array.isArray(r.names) || r.names.length < 1 || r.names.length > 5 || !r.names.every((n) => text(n, 30) && n.trim().length >= 3)) bad.push("names: one to five words that name the idea");
   if (bad.length) return bad;
   // the idea is found before it is named: none of its names in the question, the guess or the missions
-  const early = [...r.question, r.predict.ask, ...r.predict.choices.flatMap((c) => [c.label, c.reply]), ...r.missions.flatMap((m) => [m.prompt, m.success])].join(" ").toLowerCase();
+  const early = fact ? "" : [...(r.question ?? []), ...(r.predict ? [r.predict.ask, ...r.predict.choices.flatMap((c) => [c.label, c.reply])] : []), ...r.missions.flatMap((m) => [m.prompt, m.success])].join(" ").toLowerCase();
   const said = r.names.filter((n) => early.includes(n.toLowerCase()));
   if (said.length) bad.push(`named before the name step: ${said.join(", ")}`);
   if (!r.names.some((n) => r.name.join(" ").toLowerCase().includes(n.toLowerCase()))) bad.push("the name step does not use any of the names");
@@ -77,8 +85,14 @@ export function checkRecipe(v: unknown): string[] {
 
 /** The steps of a recipe, in order: what the player walks through. */
 export type RecipeStep = { kind: "question" } | { kind: "predict" } | { kind: "mission"; index: number } | { kind: "name" } | { kind: "solve" } | { kind: "choose" };
-/** The steps in order. `solve` is included when the lesson has a worked example to show (see `workedFor`). */
-export const stepsOf = (r: Recipe, solve = false): RecipeStep[] => [{ kind: "question" }, { kind: "predict" }, ...r.missions.map((_, index) => ({ kind: "mission" as const, index })), { kind: "name" }, ...(solve ? [{ kind: "solve" as const }] : []), { kind: "choose" }];
+/** The steps in order, by the recipe's type (shape@1). `solve` is included when the lesson has a worked example to show
+ *  (see `workedFor`). */
+export function stepsOf(r: Recipe, solve = false): RecipeStep[] {
+  const missions = r.missions.map((_, index) => ({ kind: "mission" as const, index }));
+  const end: RecipeStep[] = [...(solve ? [{ kind: "solve" as const }] : []), { kind: "choose" }];
+  if (r.type === "fact") return [{ kind: "name" }, ...missions, ...end];
+  return [...(r.question ? [{ kind: "question" as const }] : []), ...(r.predict ? [{ kind: "predict" as const }] : []), ...missions, { kind: "name" }, ...end];
+}
 
 /**
  * layout@1: how a recipe is laid out, decided by rule and not written for each lesson.
@@ -322,6 +336,99 @@ const RECIPES: Recipe[] = [
       choices: [
         { label: "Yes, the third is small", reply: "100 + 90 is already 190, more than 180. There is nothing left for a third corner." },
         { label: "No", reply: "Yes: 100 + 90 is already more than 180, so no triangle has both.", right: true },
+      ],
+    },
+  },
+  // A fact: what continuous means. It is said first, then seen by closing a jump and filling a hole.
+  {
+    competency: "MATH.calculus.continuity",
+    type: "fact",
+    title: "No jump and no gap",
+    missions: [
+      { type: "scene", kind: "join", mode: "shift", left: [1, 1], right: [0, 0.5], at: 2, from: 0, to: 4, k: [-1, 4, 0.5], start: 0, prompt: "This graph jumps at x = 2. Slide the right-hand piece until the jump closes.", success: "Both pieces now arrive at 3, so a pen drawing the graph never has to lift.", goal: { measure: "gap", equals: 0 } },
+      { type: "scene", kind: "join", mode: "point", left: [1, 1], right: [5, -1], at: 2, from: 0, to: 4, k: [0, 5, 0.5], start: 1, prompt: "Both sides head for the same height, but the point at x = 2 is somewhere else. Move it to fill the hole.", success: "The point is at 3, where both sides were heading. Choosing that height is what 'find k' asks for.", goal: { measure: "miss", equals: 0 } },
+    ],
+    names: ["continuous"],
+    name: [
+      "A graph is continuous at a point when you can draw through it without lifting your pen.",
+      "That needs three heights to be the same number: the one the graph heads for from the left, the one it heads for from the right, and the one at the point itself.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "f(x) = 2x + 1 for x ≠ 3, and f(3) = k. Which k makes f continuous at x = 3?",
+      choices: [
+        { label: "3", reply: "3 is the x where the hole is. We need the height the graph heads for there: put 3 into 2x + 1." },
+        { label: "7", reply: "Yes. Near x = 3 the graph heads for 2 × 3 + 1 = 7, so the point must be at 7.", right: true },
+        { label: "1", reply: "1 is where the graph crosses the y-axis. We need the height it heads for at x = 3: 2 × 3 + 1." },
+      ],
+    },
+  },
+  // Class 5: the same fence does not give the same room.
+  {
+    competency: "MATH.measurement.area-perimeter-relation",
+    type: "idea",
+    title: "Same fence, same room?",
+    question: [
+      "Meena has 20 metres of fence for a vegetable patch shaped like a rectangle. She wants as much room to grow as she can.",
+      "If she uses all 20 metres either way, does the shape of the patch matter?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "No. Same fence, same room", reply: "It feels that way. Let's build some patches and count." },
+        { label: "Yes. Long and thin has more room", reply: "Let's build a long thin one and count its room." },
+        { label: "Yes. Sides nearly equal has more room", reply: "Good instinct. Let's build some patches and count.", right: true },
+      ],
+    },
+    missions: [
+      { type: "scene", kind: "rectangle", perimeter: 20, area: 16, words: ["fence", "room"], prompt: "Drag the corner. Use all 20 metres of fence and make the room exactly 16.", success: "8 by 2: fence 20, room 16. A long thin patch.", goal: { measure: "off", equals: 0 } },
+      { type: "scene", kind: "rectangle", perimeter: 20, area: 24, words: ["fence", "room"], prompt: "Same 20 metres of fence. Now make the room 24.", success: "6 by 4: the same fence, but 8 more room than before.", goal: { measure: "off", equals: 0 } },
+      { type: "scene", kind: "rectangle", perimeter: 20, words: ["fence", "room"], prompt: "Still 20 metres of fence. Find the patch with the most room of all.", success: "5 by 5: room 25. No other patch with 20 metres of fence has more.", goal: { measure: "shortOfBest", equals: 0 } },
+    ],
+    names: ["square"],
+    name: [
+      "The fence is the perimeter and the room is the area. The same perimeter can give different areas.",
+      "A rectangle with all four sides equal is a square. For a given perimeter, the square has the biggest area.",
+    ],
+    choose: {
+      kind: "think",
+      ask: "Two patches both have room 24: one is 6 by 4, the other 12 by 2. Do they need the same length of fence?",
+      choices: [
+        { label: "Yes, the room is the same", reply: "Count the fence: 6 by 4 needs 20 metres, but 12 by 2 needs 28. The same area can have different perimeters." },
+        { label: "No", reply: "Yes: 6 by 4 needs 20 metres and 12 by 2 needs 28. The same area can have different perimeters.", right: true },
+      ],
+    },
+  },
+  // A method: adding fractions with different denominators. No mission; the worked steps carry it.
+  {
+    competency: "MATH.number.fraction-add",
+    type: "method",
+    title: "Pieces of different sizes",
+    question: [
+      "Anu eats half of a dosa. Ravi eats a third of the same dosa.",
+      "How much of the dosa have they eaten together?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "2/5", reply: "That adds the tops and the bottoms. But 2/5 is less than a half, and Anu alone ate a half. Let's see how." },
+        { label: "5/6", reply: "Good instinct. Let's see why.", right: true },
+        { label: "1/6", reply: "1/6 is how much is left on the plate. Let's see how much they ate." },
+      ],
+    },
+    missions: [],
+    names: ["common denominator"],
+    name: [
+      "Pieces have to be the same size before they can be counted together. Halves and thirds can both be cut into sixths: 1/2 = 3/6 and 1/3 = 2/6, so together 5/6.",
+      "The 6 is called a common denominator: a number both bottoms divide into. Change both fractions to it, then add the tops.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "1/4 + 1/2 = ?",
+      choices: [
+        { label: "2/6", reply: "That adds the tops and the bottoms. Change 1/2 into quarters first: 2/4." },
+        { label: "3/4", reply: "Yes. 1/2 = 2/4, and 1/4 + 2/4 = 3/4.", right: true },
+        { label: "1/8", reply: "That multiplies the bottoms and keeps one piece. Change 1/2 into quarters, then add the tops." },
       ],
     },
   },

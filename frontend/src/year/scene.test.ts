@@ -157,6 +157,30 @@ test("the transform: two arrows are a matrix; the area number is its determinant
   assert.ok(check({ ...flat, goal: { measure: "det", equals: 99 } }).length > 0);
 });
 
+test("the rectangle and the joined graph", () => {
+  const patch: Scene = { type: "scene", kind: "rectangle", perimeter: 20, area: 24, prompt: "Make it.", success: "6 by 4.", goal: { measure: "off", equals: 0 } };
+  const jump: Scene = { type: "scene", kind: "join", mode: "shift", left: [1, 1], right: [0, 0.5], at: 2, from: 0, to: 4, k: [-1, 4, 0.5], start: 0, prompt: "Close it.", success: "Closed.", goal: { measure: "gap", equals: 0 } };
+  const hole: Scene = { type: "scene", kind: "join", mode: "point", left: [1, 1], right: [5, -1], at: 2, from: 0, to: 4, k: [0, 5, 0.5], start: 1, prompt: "Fill it.", success: "Filled.", goal: { measure: "miss", equals: 0 } };
+  for (const s of [patch, jump, hole]) {
+    assert.deepEqual(check(s), [], s.kind); assert.ok(draggable(s) && describe(s).length > 20 && !met(s, initial(s)));
+    for (const st of states(s)) { for (const v of Object.values(measures(s, st))) assert.ok(Number.isFinite(v)); assert.ok(!JSON.stringify(draw(s, st)).includes("null")); assert.ok(!/NaN|undefined/.test(readout(s, st))); }
+  }
+  assert.deepEqual(measures(patch, { w: 6, h: 4 }), { w: 6, h: 4, perimeter: 20, area: 24, off: 0, shortOfBest: 1 });
+  assert.equal(measures(patch, { w: 5, h: 5 }).shortOfBest, 0);
+  assert.equal(measures(patch, { w: 6, h: 6 }).shortOfBest, 999, "another perimeter is not in the running");
+  assert.equal(readout(patch, { w: 6, h: 4 }), "6 by 4 · perimeter 20 · area 24");
+  assert.deepEqual(pointer(patch, initial(patch), 60 + 6 * 20, 196 - 4 * 20), { w: 6, h: 4 });
+  assert.deepEqual(pointer(patch, initial(patch), 9999, -9999), { w: 9, h: 9 });
+  assert.equal(readout(jump, { k: 2 }), "From the left: 3 · from the right: 3");
+  assert.equal(readout(hole, { k: 1 }), "Both sides head for 3 · the point is at 1");
+  // dragging the point to the height both sides head for fills the hole (the same scale as the drawing)
+  const target = draw(hole, { k: 3 }).filter((x) => x.t === "circle" && x.role === "handle")[0] as { cx: number; cy: number };
+  assert.ok(met(hole, pointer(hole, initial(hole), target.cx, target.cy)));
+  const grip2 = draw(jump, { k: 2 }).filter((x) => x.t === "circle" && x.role === "handle")[0] as { cx: number; cy: number };
+  assert.ok(met(jump, pointer(jump, initial(jump), grip2.cx, grip2.cy)));
+  assert.ok(check({ ...patch, perimeter: 99 }).length > 0 && check({ ...jump, at: 9 }).length > 0 && check({ ...jump, mode: "slide" }).length > 0 && check({ ...hole, start: 9 }).length > 0);
+});
+
 test("malformed or impossible scenes are refused", () => {
   const bad: [string, unknown][] = [
     ["not a scene", { type: "strips" }],

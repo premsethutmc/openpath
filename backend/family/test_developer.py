@@ -240,6 +240,10 @@ class TelemetryAndErrorTests(DevTestCase):
         self.assertEqual(r.json()["stored"], 3)
         self.assertEqual(sorted(ClientMetric.objects.values_list("name", flat=True)), ["rebuild_ms", "runtime_error", "save_ms"])
         self.assertEqual(ClientMetric.objects.get(name="runtime_error").detail, "x is undefined near [email]")
+        # lesson-part@1: how long a part of a lesson recipe took, and which part
+        r = p.post("/api/telemetry/", {"app_version": "abc1234", "metrics": [{"name": "lesson_part", "ms": 41000, "detail": "recipe:MATH.calculus.continuity:mission-1"}]}, format="json")
+        self.assertEqual(r.json()["stored"], 1)
+        self.assertEqual(ClientMetric.objects.get(name="lesson_part").detail, "recipe:MATH.calculus.continuity:mission-1")
         self.assertIsNone(ClientMetric.objects.get(name="rebuild_ms").ms, "a boolean is not a duration")
         self.assertEqual(p.post("/api/telemetry/", {"metrics": [{"name": "save_ms"}] * 51}, format="json").status_code, 400)
         o = self.developer().get("/api/developer/overview/").json()
