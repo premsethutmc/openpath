@@ -44,6 +44,7 @@ import { workingFeedback } from "../journey/renderer-adapter";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 import { Icon } from "./icons";
 import type { LearnerRecords, LearningActivity, ServerDecision } from "../../../packages/learning/src/records";
+import { currentEnrolment } from "../../../packages/learning/src/records";
 import { authoritativeView } from "../../../packages/learning/src/grading/view";
 import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
@@ -588,7 +589,7 @@ function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competen
   );
 }
 
-export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency, opening = false }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string; opening?: boolean }) {
+export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency, opening = false, grade = null }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string; opening?: boolean; grade?: number | null }) {
   const [stored, setI] = useResume(resumeKey, 0);
   // recipe@1: the opening lesson of a new skill that has a lesson recipe starts with it (question, guess, missions, name,
   // when to use it); of the written sections only the worked examples follow. Other lessons of the skill (another way of
@@ -601,7 +602,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
   // with no worked example to follow, the recipe is the whole lesson (and is what a learner sees on coming back to it)
-  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} resumeKey={resumeKey && `${resumeKey}:recipe-step@1`} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
+  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} grade={grade} resumeKey={resumeKey && `${resumeKey}:recipe-step@1`} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
   const raw = screens[i];
   // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
   const kq = KID && raw.instance ? safeKid(question(raw.instance)) : null;
@@ -718,7 +719,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {!embedded && <h1>{name}</h1>}
         <p className="kid-new">✨ New skill — let's learn it first.</p>
-        <Lesson opening competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
+        <Lesson opening grade={currentEnrolment(ctx.records)?.grade ?? null} competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
         <button className="link kid-skip" onClick={() => setTestMe(true)}>I know this — test me</button>
       </div>
     );

@@ -8,6 +8,7 @@ import { moduleFor } from "../../../packages/learning/src/content";
 import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { check, initial, measures, met, readout, set, states } from "../../../packages/learning/src/scene";
 import { ALL_RECIPES, checkRecipe, recipeFor, stepsOf, workedFor, type Recipe } from "../../../packages/learning/src/recipe";
+import { layoutFor } from "./recipe-layout";
 import { problemOf } from "../../../packages/learning/src/families";
 import { taughtExposureKeys } from "../../../packages/learning/src/teaching-exposure";
 import { exposureKey } from "../../../packages/learning/src/families";
@@ -70,6 +71,15 @@ test("how to solve it: every lesson shows its own worked example, with the famil
   assert.equal(workedFor("MATH.no.such.skill"), null);
 });
 
+test("layout@1: one thing at a time for Classes 1 to 5, the page that grows from Class 6 and when the class is not known", () => {
+  for (const r of ALL_RECIPES) {
+    assert.ok(["idea", "method", "fact"].includes(r.type));
+    for (const g of [1, 3, 5]) assert.equal(layoutFor(r, g), "steps");
+    for (const g of [6, 8, 12]) assert.equal(layoutFor(r, g), "flow");
+    assert.equal(layoutFor(r, null), "flow");
+  }
+});
+
 test("a recipe opens only a skill whose opening lesson can record its teaching", () => {
   // the recipe rides inside the skill's opening lesson, which records the teaching when it ends; a skill with no eligible
   // lesson has no such record, so its answers would wrongly count as unaided
@@ -90,6 +100,7 @@ test("malformed recipes are refused", () => {
     ["a choice with no reply", { ...good, predict: { ...good.predict, choices: [{ label: "a", reply: "" }, { label: "b", reply: "ok", right: true }] } }],
     ["duplicate labels", { ...good, predict: { ...good.predict, choices: [{ label: "a", reply: "no" }, { label: "a", reply: "yes", right: true }] } }],
     ["no missions", { ...good, missions: [] }],
+    ["no type", { ...good, type: undefined }],
     ["no kind on the last step", { ...good, choose: { ask: good.choose.ask, choices: good.choose.choices } }],
     ["five missions", { ...good, missions: [...good.missions, ...good.missions].slice(0, 5) }],
     ["a mission that cannot be finished", { ...good, missions: [{ ...good.missions[0], goal: { measure: "x", equals: 99 } }] }],
