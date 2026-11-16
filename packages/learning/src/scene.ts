@@ -10,6 +10,8 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@5 adds a `fraction` kind (a bar or a hundred-square cut into equal pieces, some shaded), a `numberline` kind (a
+ * point on a number line, or a jump from a start) and an `array` kind (counters in equal rows).
  * scene@4 adds a `rectangle` kind (width and height on a grid; perimeter and area) and a `join` kind (two pieces of a graph
  * that meet or fail to meet at a point).
  *
@@ -59,7 +61,18 @@ export interface RectangleScene extends Base { kind: "rectangle"; perimeter?: nu
 /** Two pieces of a graph that meet (or fail to meet) at x = `at`. In "shift" mode the right-hand piece is slid up and down
  *  (its height is right(x) + k); in "point" mode the single point at x = `at` is moved (its height is k). */
 export interface JoinScene extends Base { kind: "join"; mode: "shift" | "point"; left: Poly; right: Poly; at: number; from: number; to: number; k: [number, number, number]; start?: number }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene;
+/** A bar cut into equal pieces with some shaded (a hundred-square when there are 100 pieces). `target` is the fraction the
+ *  measures compare with; `show` draws it as a second bar above. `pieces` or `shaded`, when given, fix that number so only
+ *  the other is set. `other` is 0 only when the same amount is shown with a different number of pieces than the target's;
+ *  `exact` is 0 only for the target's own pieces and shaded pieces. */
+export interface FractionScene extends Base { kind: "fraction"; target: [number, number]; show?: boolean; pieces?: number; shaded?: number; max?: number }
+/** A point on a number line. `label` is the gap between numbered marks (default: every mark); `hide` keeps the point's
+ *  number off the screen (for finding a number by counting marks); `near` shows how far the point is from the multiples
+ *  of that number on each side (for rounding); `jump` draws the move from the start as a jump (for adding integers). */
+export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean }
+/** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. */
+export interface ArrayScene extends Base { kind: "array"; total: number; rows?: number }
+export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -148,6 +161,12 @@ export function controls(s: Scene): Control[] {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
     return [{ key: "a", label: "Angle A", min: 10, max: 150, step: 1, start: near ? 40 : 60 }, { key: "b", label: "Angle B", min: 10, max: 150, step: 1, start: near ? 95 : 60 }];
   }
+  if (s.kind === "fraction") {
+    const top = s.pieces ?? s.max ?? 12;
+    return [...(s.pieces === undefined ? [{ key: "n", label: "Pieces", min: 1, max: top, step: 1, start: 1 }] : []), ...(s.shaded === undefined ? [{ key: "k", label: "Shaded", min: 0, max: top, step: 1, start: 0 }] : [])];
+  }
+  if (s.kind === "numberline") return [{ key: "x", label: "The point", min: s.from, max: s.to, step: s.step, start: s.start }];
+  if (s.kind === "array") return [...(s.rows === undefined ? [{ key: "r", label: "Rows", min: 1, max: 10, step: 1, start: 1 }] : []), { key: "c", label: "In each row", min: 1, max: 15, step: 1, start: 1 }];
   if (s.kind === "rectangle") return [{ key: "w", label: "Width", min: 1, max: 9, step: 1, start: 2 }, { key: "h", label: "Height", min: 1, max: 9, step: 1, start: 1 }];
   if (s.kind === "join") return [{ key: "k", label: s.mode === "shift" ? "Right piece" : "The point", min: s.k[0], max: s.k[1], step: s.k[2], start: s.start ?? s.k[0] }];
   if (s.kind === "transform") return [["a", "First arrow, across", 1], ["b", "First arrow, up", 0], ["c", "Second arrow, across", 0], ["d", "Second arrow, up", 1]].map(([key, label, start]) => ({ key: key as string, label: label as string, min: -3, max: 3, step: 1, start: start as number }));
@@ -186,6 +205,13 @@ function scales(s: CurveScene | LineScene) {
 /** The line of a line scene for a state: its slope and where it meets the y-axis. */
 function lineOf(s: LineScene, state: SceneState) { const m = state.m; return { m, c: s.through ? s.through[1] - m * s.through[0] : state.c ?? 0 }; }
 
+/** A fraction scene's pieces and shaded pieces (never more shaded than there are pieces). */
+function fracOf(s: FractionScene, state: SceneState) { const n = s.pieces ?? state.n, k = Math.min(s.shaded ?? state.k, n); return { n, k }; }
+const arrOf = (s: ArrayScene, state: SceneState) => ({ rows: s.rows ?? state.r, cols: state.c });
+/** Where a number sits across a number-line picture. */
+const NL = 24, NR = 316;
+const lineX = (s: NumberLineScene, v: number) => px(NL + ((v - s.from) / (s.to - s.from)) * (NR - NL));
+
 /** The two heights a join scene compares at its meeting point, and the height of the point itself. */
 function joinOf(s: JoinScene, state: SceneState) {
   const left = evalPoly(s.left, s.at), right = evalPoly(s.right, s.at) + (s.mode === "shift" ? state.k : 0);
@@ -194,6 +220,13 @@ function joinOf(s: JoinScene, state: SceneState) {
 
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
+  if (s.kind === "fraction") {
+    // compared by cross-multiplying, so equal fractions are exactly equal
+    const { n, k } = fracOf(s, state), [tn, td] = s.target, cross = k * td - tn * n;
+    return { n, k, miss: Math.abs(cross) / (n * td), ahead: cross / (n * td), behind: -cross / (n * td), other: cross === 0 && n !== td ? 0 : 1, exact: n === td && k === tn ? 0 : 1 };
+  }
+  if (s.kind === "numberline") return { x: state.x, moved: r6(state.x - s.start) };
+  if (s.kind === "array") { const { rows, cols } = arrOf(s, state); return { rows, cols, count: rows * cols, off: Math.abs(rows * cols - s.total) }; }
   if (s.kind === "rectangle") {
     const { w, h } = state, perimeter = 2 * (w + h), area = w * h;
     // the largest area a whole-number rectangle of the asked perimeter can have: its sides as nearly equal as they can be
@@ -215,7 +248,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -233,6 +266,14 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
+  if (s.kind === "fraction") return `${m.k} of ${m.n} equal ${m.n === 1 ? "piece" : "pieces"} shaded`;
+  if (s.kind === "numberline") {
+    if (s.hide) return "Count the marks from a number you can see.";
+    if (s.jump) return m.moved === 0 ? `Start at ${fmt(s.start)}` : `Start at ${fmt(s.start)} · ${fmt(Math.abs(m.moved))} ${m.moved < 0 ? "back" : "forward"} · now at ${fmt(m.x)}`;
+    if (s.near) { const lo = Math.floor(m.x / s.near + 1e-9) * s.near; return Math.abs(m.x - lo) < 1e-9 ? `At ${fmt(m.x)}` : `At ${fmt(m.x)} · ${fmt(m.x - lo)} from ${fmt(lo)} · ${fmt(lo + s.near - m.x)} from ${fmt(lo + s.near)}`; }
+    return `At ${fmt(m.x)}`;
+  }
+  if (s.kind === "array") return `${m.rows} ${m.rows === 1 ? "row" : "rows"} of ${m.cols} = ${m.count}${m.off ? ` · ${m.off} ${m.count < s.total ? "short of" : "more than"} ${s.total}` : ""}`;
   if (s.kind === "rectangle") { const [p, a] = s.words ?? ["perimeter", "area"]; return `${m.w} by ${m.h} · ${p} ${m.perimeter} · ${a} ${m.area}`; }
   if (s.kind === "join") return s.mode === "shift" ? `From the left: ${fmt(m.left)} · from the right: ${fmt(m.right)}` : `Both sides head for ${fmt(m.left)} · the point is at ${fmt(m.point)}`;
   if (s.kind === "transform") return `Arrows land at (${fmt(m.a)}, ${fmt(m.b)}) and (${fmt(m.c)}, ${fmt(m.d)}) · area × ${fmt(m.det)}`;
@@ -256,6 +297,46 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   const out: Shape[] = [];
+  if (s.kind === "fraction") {
+    const { n, k } = fracOf(s, state), [tn, td] = s.target, x0 = 30, W = 280;
+    const bar = (y: number, h: number, pieces: number, shaded: number, role: string) => {
+      for (let i = 0; i < pieces; i++) out.push({ t: "rect", x: px(x0 + (i * W) / pieces), y, w: px(W / pieces), h, role: i < shaded ? role : "blank" });
+      out.push({ t: "path", d: `M${x0} ${y}h${W}v${h}h${-W}Z`, role: "outline" });
+    };
+    if (s.show) bar(14, 30, td, tn, "wedge1");
+    if (n === 100) {
+      // a hundred-square, filled a row at a time
+      const U = 15, gx = 95, gy = s.show ? 58 : 34;
+      for (let i = 0; i < 100; i++) out.push({ t: "rect", x: gx + (i % 10) * U, y: gy + Math.floor(i / 10) * U, w: U, h: U, role: i < k ? "cell" : "blank" });
+      out.push({ t: "path", d: `M${gx} ${gy}h${10 * U}v${10 * U}h${-10 * U}Z`, role: "outline" });
+    } else {
+      bar(s.show ? 84 : 60, 64, n, k, "cell");
+      if (s.shaded === undefined) out.push({ t: "circle", cx: px(x0 + (k * W) / n), cy: s.show ? 116 : 92, r: 12, role: "handle" });
+    }
+    return out;
+  }
+  if (s.kind === "numberline") {
+    const y0 = 124, count = Math.round((s.to - s.from) / s.step), gap = s.label ?? s.step;
+    out.push({ t: "line", x1: NL - 10, y1: y0, x2: NR + 10, y2: y0, role: "axis" });
+    for (let i = 0; i <= count; i++) {
+      const v = r6(s.from + i * s.step), numbered = Math.abs(v / gap - Math.round(v / gap)) < 1e-9;
+      if (count <= 60 || numbered) out.push({ t: "line", x1: lineX(s, v), y1: y0 - (numbered ? 9 : 5), x2: lineX(s, v), y2: y0 + (numbered ? 9 : 5), role: "axis" });
+      if (numbered && (count / Math.max(1, Math.round(gap / s.step)) <= 21)) out.push({ t: "text", x: lineX(s, v), y: y0 + 26, s: fmt(v), role: "label" });
+    }
+    if (s.jump) {
+      const a = lineX(s, s.start), b = lineX(s, state.x);
+      if (a !== b) out.push({ t: "path", d: `M${a} ${y0 - 14}Q${px((a + b) / 2)} ${px(y0 - 14 - Math.min(70, Math.abs(b - a) / 2 + 14))} ${b} ${y0 - 14}`, role: "curve2" });
+      out.push({ t: "circle", cx: a, cy: y0, r: 6, role: "open" });
+    }
+    out.push({ t: "circle", cx: lineX(s, state.x), cy: y0, r: 11, role: "handle" });
+    if (!s.hide) out.push({ t: "text", x: lineX(s, state.x), y: y0 + 48, s: fmt(state.x), role: "value" });
+    return out;
+  }
+  if (s.kind === "array") {
+    const { rows, cols } = arrOf(s, state), U = 19;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) out.push({ t: "circle", cx: 37 + c * U, cy: 24 + r * U, r: 7, role: "cell" });
+    return out;
+  }
   if (s.kind === "rectangle") {
     const { w, h } = state, U = 20, x0 = 60, y0 = 196;
     for (let i = 0; i <= 9; i++) out.push({ t: "line", x1: x0 + i * U, y1: y0 - 9 * U, x2: x0 + i * U, y2: y0, role: "grid" }, { t: "line", x1: x0, y1: y0 - i * U, x2: x0 + 9 * U, y2: y0 - i * U, role: "grid" });
@@ -347,7 +428,7 @@ export function draw(s: Scene, state: SceneState): Shape[] {
 }
 
 /** Whether a scene follows a finger on the picture (the others are set by their sliders only). */
-export const draggable = (s: Scene) => s.kind !== "strips" && s.kind !== "line";
+export const draggable = (s: Scene) => s.kind !== "strips" && s.kind !== "line" && !(s.kind === "fraction" && s.shaded !== undefined);
 
 /** Which handle a touch at a point takes hold of: 0 or 1 for a transform's two arrows (−1 when it is far from both),
  *  0 for every other scene. The player keeps this for the length of a drag, so one arrow can be dragged across the other. */
@@ -367,6 +448,14 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
     const next = set(s, set(s, state, "a", a), "b", b);
     return next.a + next.b > 170 ? state : next;
   }
+  if (s.kind === "fraction") {
+    if (s.shaded !== undefined) return state;
+    const n = s.pieces ?? state.n;
+    if (n === 100) { const gy = s.show ? 58 : 34, row = Math.max(0, Math.min(9, Math.floor((y - gy) / 15))), col = Math.max(0, Math.min(10, Math.round((x - 95) / 15))); return set(s, state, "k", y < gy ? 0 : y > gy + 150 ? 100 : row * 10 + col); }
+    return set(s, state, "k", Math.min(n, ((x - 30) / 280) * n));
+  }
+  if (s.kind === "numberline") return set(s, state, "x", s.from + ((x - NL) / (NR - NL)) * (s.to - s.from));
+  if (s.kind === "array") { const next = set(s, state, "c", (x - 37) / 19 + 1); return s.rows === undefined ? set(s, next, "r", (y - 24) / 19 + 1) : next; }
   if (s.kind === "rectangle") return set(s, set(s, state, "w", (x - 60) / 20), "h", (196 - y) / 20);
   if (s.kind === "join") {
     // the same vertical scale as the drawing: the finger's height becomes the piece's (or the point's) height
@@ -390,6 +479,9 @@ export function describe(s: Scene): string {
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
+  if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
+  if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}. ${s.prompt}`;
+  if (s.kind === "array") return `An interactive set of counters in equal rows. ${s.rows === undefined ? "Sliders set the number of rows and how many are in each row" : `There are ${s.rows} rows, and a slider sets how many are in each row`}. ${s.prompt}`;
   if (s.kind === "rectangle") return `An interactive rectangle on a grid of unit squares. Its width and height are set by two sliders or by dragging its corner. ${s.prompt}`;
   if (s.kind === "join") return `An interactive graph in two pieces that meet at x = ${fmt(s.at)}. ${s.mode === "shift" ? "The right-hand piece can be slid up and down." : "The single point at the meeting place can be moved up and down."} ${s.prompt}`;
   if (s.kind === "transform") return `An interactive grid with a shape and two arrows. Moving the arrows, or their four sliders, stretches, flips and turns the shape. ${s.prompt}`;
@@ -439,7 +531,27 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "rectangle") {
+  if (s.kind === "fraction") {
+    const int = (v: unknown, lo: number, hi: number) => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi;
+    if (!(Array.isArray(s.target) && s.target.length === 2 && int(s.target[1], 1, 100) && int(s.target[0], 0, s.target[1]))) bad.push("target must be a fraction of at most one whole, in whole numbers");
+    if (s.pieces !== undefined && !(int(s.pieces, 1, 12) || s.pieces === 100)) bad.push("pieces must be 1 to 12, or 100");
+    if (s.shaded !== undefined && !int(s.shaded, 0, 12)) bad.push("shaded must be 0 to 12");
+    if (s.max !== undefined && !int(s.max, 2, 12)) bad.push("max must be 2 to 12");
+    if (s.pieces !== undefined && s.shaded !== undefined) bad.push("pieces and shaded cannot both be fixed");
+    if (s.show && Array.isArray(s.target) && s.target[1] > 12) bad.push("a shown fraction needs at most 12 pieces");
+  } else if (s.kind === "numberline") {
+    if (![s.from, s.to, s.step, s.start].every(fin) || !(s.from < s.to) || !(s.step > 0)) bad.push("from, to, step and start must be finite, in order");
+    else {
+      const count = (s.to - s.from) / s.step, at = (s.start - s.from) / s.step;
+      if (Math.abs(count - Math.round(count)) > 1e-6 || count > 400) bad.push("the line must be a whole number of steps, at most 400");
+      if (s.start < s.from || s.start > s.to || Math.abs(at - Math.round(at)) > 1e-6) bad.push("start must be a mark on the line");
+    }
+    if (s.label !== undefined && !(fin(s.label) && s.label > 0)) bad.push("label must be a positive gap");
+    if (s.near !== undefined && !(fin(s.near) && s.near > 0)) bad.push("near must be positive");
+  } else if (s.kind === "array") {
+    if (!(Number.isInteger(s.total) && s.total >= 2 && s.total <= 150)) bad.push("total must be a whole number from 2 to 150");
+    if (s.rows !== undefined && !(Number.isInteger(s.rows) && s.rows >= 1 && s.rows <= 10)) bad.push("rows must be 1 to 10");
+  } else   if (s.kind === "rectangle") {
     const whole = (v: unknown, hi: number) => v === undefined || (Number.isInteger(v) && (v as number) >= 1 && (v as number) <= hi);
     if (!whole(s.perimeter, 36) || !whole(s.area, 81)) bad.push("perimeter and area must be whole numbers a 9 by 9 grid can hold");
     if (s.words !== undefined && !(Array.isArray(s.words) && s.words.length === 2 && s.words.every((t) => typeof t === "string" && t.trim() && t.length <= 14))) bad.push("words must be two short words");

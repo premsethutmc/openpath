@@ -181,6 +181,44 @@ test("the rectangle and the joined graph", () => {
   assert.ok(check({ ...patch, perimeter: 99 }).length > 0 && check({ ...jump, at: 9 }).length > 0 && check({ ...jump, mode: "slide" }).length > 0 && check({ ...hole, start: 9 }).length > 0);
 });
 
+test("the fraction bar, the number line and the rows of counters", () => {
+  const bar: Scene = { type: "scene", kind: "fraction", target: [2, 3], show: true, prompt: "Show it.", success: "Same.", goal: { measure: "other", equals: 0 } };
+  const hundred: Scene = { type: "scene", kind: "fraction", target: [1, 4], pieces: 100, prompt: "Shade it.", success: "25.", goal: { measure: "miss", equals: 0 } };
+  const one: Scene = { type: "scene", kind: "fraction", target: [1, 4], shaded: 1, prompt: "Smaller.", success: "Smaller.", goal: { measure: "ahead", below: 0 } };
+  const jump: Scene = { type: "scene", kind: "numberline", from: -10, to: 10, step: 1, start: 3, label: 5, jump: true, prompt: "Jump.", success: "There.", goal: { measure: "x", equals: -2 } };
+  const near: Scene = { type: "scene", kind: "numberline", from: 340, to: 350, step: 1, start: 347, near: 10, prompt: "Nearest.", success: "350.", goal: { measure: "x", equals: 350 } };
+  const dots: Scene = { type: "scene", kind: "array", total: 12, rows: 3, prompt: "Make 12.", success: "3 rows of 4.", goal: { measure: "off", equals: 0 } };
+  const free: Scene = { type: "scene", kind: "array", total: 13, prompt: "Make 13.", success: "One row.", goal: { measure: "off", equals: 0 } };
+  for (const s of [bar, hundred, one, jump, near, dots, free]) {
+    assert.deepEqual(check(s), [], s.kind); assert.ok(describe(s).length > 20 && !met(s, initial(s)));
+    for (const st of states(s)) {
+      for (const v of Object.values(measures(s, st))) assert.ok(Number.isFinite(v));
+      const shapes = JSON.stringify(draw(s, st));
+      assert.ok(!shapes.includes("null") && !/NaN|undefined/.test(shapes + readout(s, st)));
+      for (const sh of draw(s, st)) { const xs = sh.t === "rect" ? [sh.x, sh.x + sh.w] : sh.t === "circle" ? [sh.cx - sh.r, sh.cx + sh.r] : sh.t === "line" ? [sh.x1, sh.x2] : []; for (const x of xs) assert.ok(x >= 0 && x <= 340, `${s.kind} stays in the box`); }
+    }
+  }
+  // fractions are compared exactly: 4/6, 6/9 and 8/12 are 2/3, and never more shaded than there are pieces
+  assert.equal(measures(bar, { n: 6, k: 4 }).miss, 0); assert.equal(measures(bar, { n: 3, k: 2 }).other, 1); assert.equal(measures(bar, { n: 3, k: 2 }).exact, 0);
+  assert.equal(measures(bar, { n: 4, k: 9 }).k, 4);
+  assert.equal(readout(bar, { n: 6, k: 4 }), "4 of 6 equal pieces shaded"); assert.equal(readout(bar, { n: 1, k: 1 }), "1 of 1 equal piece shaded");
+  assert.equal(draw(bar, { n: 6, k: 4 }).filter((x) => x.role === "cell").length, 4); assert.equal(draw(bar, { n: 6, k: 4 }).filter((x) => x.role === "wedge1").length, 2);
+  assert.equal(draw(hundred, { k: 25 }).filter((x) => x.role === "cell").length, 25);
+  assert.ok(draggable(bar) && draggable(hundred) && !draggable(one), "a bar with its shaded pieces fixed has nothing to drag");
+  assert.deepEqual(pointer(bar, { n: 6, k: 0 }, 30 + (280 * 4) / 6, 90), { n: 6, k: 4 });
+  assert.deepEqual(pointer(hundred, { k: 0 }, 95 + 5 * 15, 34 + 2 * 15 + 7), { k: 25 });
+  assert.deepEqual(pointer(one, { n: 3 }, 200, 90), { n: 3 });
+  // the number line: the point follows the finger to the nearest mark
+  const at = draw(jump, { x: -2 }).filter((x) => x.t === "circle" && x.role === "handle")[0] as { cx: number; cy: number };
+  assert.deepEqual(pointer(jump, initial(jump), at.cx, at.cy), { x: -2 });
+  assert.deepEqual(measures(jump, { x: -2 }), { x: -2, moved: -5 });
+  assert.equal(readout(near, { x: 350 }), "At 350");
+  assert.deepEqual(measures(dots, { c: 4 }), { rows: 3, cols: 4, count: 12, off: 0 });
+  assert.equal(readout(dots, { c: 5 }), "3 rows of 5 = 15 · 3 more than 12"); assert.equal(readout(free, { r: 1, c: 13 }), "1 row of 13 = 13");
+  assert.deepEqual(pointer(free, initial(free), 37 + 3 * 19, 24 + 1 * 19), { r: 2, c: 4 });
+  for (const bad of [{ ...bar, target: [5, 3] }, { ...hundred, pieces: 50 }, { ...one, pieces: 4 }, { ...jump, start: 3.5 }, { ...jump, step: 0 }, { ...near, from: 400 }, { ...dots, total: 1 }, { ...dots, rows: 11 }]) assert.ok(check(bad).length > 0, JSON.stringify(bad).slice(0, 80));
+});
+
 test("malformed or impossible scenes are refused", () => {
   const bad: [string, unknown][] = [
     ["not a scene", { type: "strips" }],

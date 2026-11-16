@@ -14,7 +14,7 @@ import { taughtExposureKeys } from "../../../packages/learning/src/teaching-expo
 import { exposureKey } from "../../../packages/learning/src/families";
 
 test("every recipe passes its checks, belongs to a real module and is offered", () => {
-  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.number.fraction-add"]);
+  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.measurement.area-squares", "MATH.measurement.rectangle-perimeter", "MATH.number.decimal-tenths", "MATH.number.equivalent-fractions", "MATH.number.fraction-add", "MATH.number.fraction-comparison", "MATH.number.fraction-models", "MATH.number.integer-add", "MATH.number.integers", "MATH.number.number-line", "MATH.number.percent-intro", "MATH.number.primes", "MATH.number.rounding"]);
   assert.equal(new Set(ALL_RECIPES.map((r) => r.competency)).size, ALL_RECIPES.length, "one recipe per competency");
   for (const r of ALL_RECIPES) {
     assert.deepEqual(checkRecipe(r), [], r.competency);
@@ -61,6 +61,8 @@ test("the other lessons' missions give the numbers their words state", () => {
 test("how to solve it: every lesson shows its own worked example, with the family's verified steps, counted as shown", () => {
   for (const r of ALL_RECIPES) {
     const w = workedFor(r.competency), m = moduleFor(r.competency)!;
+    // three fraction skills have no worked example of their own yet: their lessons go from the name straight to the try
+    if (["MATH.number.fraction-models", "MATH.number.equivalent-fractions", "MATH.number.fraction-comparison"].includes(r.competency)) { assert.equal(w, null); assert.notEqual(r.type, "method"); assert.ok(!stepsOf(r, false).some((x) => x.kind === "solve")); continue; }
     assert.ok(w && w.steps.length >= 1 && w.prompt && w.answer, `${r.competency} has a worked example`);
     const id = m.chapter.find((s) => s.instance)!.instance!, p = problemOf(id)!;
     assert.equal(w!.answer, p.answer);
@@ -137,4 +139,43 @@ test("malformed recipes are refused", () => {
   ];
   for (const [name, r] of bad) assert.ok(checkRecipe(r as Recipe).length > 0, name);
   for (const v of [null, undefined, 3, "recipe", []]) assert.ok(checkRecipe(v).length > 0);
+});
+
+test("the Class 5 lessons: their missions give the numbers their words state", () => {
+  const ms = (c: string) => recipeFor(c)!.missions;
+  const [three4, two5] = ms("MATH.number.fraction-models");
+  assert.ok(met(three4, { n: 4, k: 3 }) && !met(three4, { n: 8, k: 6 }) && met(two5, { n: 5, k: 2 }), "the asked pieces, not just the same amount");
+  const [half, quarters, any] = ms("MATH.number.equivalent-fractions");
+  assert.ok(met(half, { k: 4 }) && !met(half, { k: 3 }) && met(quarters, { k: 9 }));
+  assert.ok(met(any, { n: 6, k: 4 }) && met(any, { n: 9, k: 6 }) && met(any, { n: 12, k: 8 }) && !met(any, { n: 3, k: 2 }) && !met(any, { n: 6, k: 3 }), "the same amount with other pieces");
+  const [more, smaller] = ms("MATH.number.fraction-comparison");
+  assert.ok(met(more, { k: 4 }) && !met(more, { k: 3 }) && !met(more, { k: 2 }));
+  assert.ok(met(smaller, { n: 5 }) && !met(smaller, { n: 4 }) && !met(smaller, { n: 3 }), "1/5 is less than 1/4; 1/4 is not");
+  const [q, t] = ms("MATH.number.percent-intro");
+  assert.ok(met(q, { k: 25 }) && !met(q, { k: 24 }) && met(t, { k: 30 }));
+  const [d7, d25, d3] = ms("MATH.number.decimal-tenths");
+  assert.ok(met(d7, { k: 7 }) && met(d25, { k: 25 }) && met(d3, { k: 30 }) && !met(d3, { k: 3 }));
+  const [p30, p35, p320] = ms("MATH.number.number-line");
+  assert.ok(met(p30, { x: 30 }) && met(p35, { x: 35 }) && met(p320, { x: 320 }) && !met(p320, { x: 300 }));
+  for (const m of [p30, p35, p320]) for (const st of states(m)) assert.ok(!/\d/.test(readout(m, st)), "the hidden point's number is never shown");
+  const [leh, colder, between] = ms("MATH.number.integers");
+  assert.ok(met(leh, { x: -7 }) && met(colder, { x: -5 }) && !met(colder, { x: -4 }) && !met(colder, { x: 2 }));
+  assert.deepEqual([...states(between)].filter((st) => met(between, st)).map((st) => st.x), [-2, -1]);
+  const [lift, up, back] = ms("MATH.number.integer-add");
+  assert.ok(met(lift, { x: -2 }) && met(up, { x: 2 }) && met(back, { x: -7 }));
+  assert.equal(readout(lift, { x: -2 }), "Start at 3 · 5 back · now at −2");
+  assert.equal(readout(up, { x: 2 }), "Start at −4 · 6 forward · now at 2");
+  const [ten, thousand, middle] = ms("MATH.number.rounding");
+  assert.ok(met(ten, { x: 350 }) && !met(ten, { x: 340 }) && met(thousand, { x: 2000 }) && !met(thousand, { x: 3000 }) && met(middle, { x: 70 }));
+  assert.equal(readout(ten, initial(ten)), "At 347 · 7 from 340 · 3 from 350");
+  const [r3, r2, thirteen] = ms("MATH.number.primes");
+  assert.ok(met(r3, { c: 4 }) && met(r2, { c: 6 }) && !met(r2, { c: 4 }));
+  assert.deepEqual([...states(thirteen)].filter((st) => met(thirteen, st)), [{ r: 1, c: 13 }], "13 makes only one row");
+  const [a24, a18, sq] = ms("MATH.measurement.area-squares");
+  assert.ok(met(a24, { w: 6, h: 4 }) && met(a24, { w: 3, h: 8 }) && !met(a24, { w: 5, h: 5 }) && met(a18, { w: 9, h: 2 }));
+  assert.deepEqual([...states(sq)].filter((st) => met(sq, st)), [{ w: 4, h: 4 }]);
+  assert.ok(!readout(a24, { w: 6, h: 4 }).includes("area"), "the name is not on the screen before it is given");
+  const [f14, f18, sq3] = ms("MATH.measurement.rectangle-perimeter");
+  assert.ok(met(f14, { w: 3, h: 4 }) && met(f14, { w: 6, h: 1 }) && !met(f14, { w: 4, h: 4 }) && met(f18, { w: 5, h: 4 }));
+  assert.deepEqual([...states(sq3)].filter((st) => met(sq3, st)), [{ w: 3, h: 3 }]);
 });
