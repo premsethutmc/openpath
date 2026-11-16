@@ -1,5 +1,5 @@
 /**
- * scene@1: the one player for every interactive scene (packages/learning/src/scene.ts).
+ * scene@2: the one player for every interactive scene (packages/learning/src/scene.ts).
  *
  * The player holds no mathematics. It asks the engine what to draw for the current state, passes touches and slider moves
  * back to the engine, and shows the engine's readout and whether the goal is reached. A scene the engine finds a problem
@@ -8,7 +8,7 @@
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
 import { useMemo, useRef, useState, type JSX, type PointerEvent } from "react";
-import { SCENE_BOX, check, controls, describe, draw, initial, met, pointer, readout, set, type Scene, type SceneState, type Shape } from "../../../packages/learning/src/scene";
+import { SCENE_BOX, check, controls, describe, draw, draggable as follows, initial, met, pointer, readout, set, type Scene, type SceneState, type Shape } from "../../../packages/learning/src/scene";
 
 function shape(s: Shape, i: number): JSX.Element {
   const c = `sc-${s.role}`;
@@ -27,7 +27,7 @@ export function ScenePlayer({ scene }: { scene: Scene }) {
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const cs = controls(scene);
-  const draggable = cs.some((c) => c.key === "x");
+  const draggable = follows(scene);
   const apply = (next: SceneState) => { setState(next); if (met(scene, next)) setReached(true); };
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();

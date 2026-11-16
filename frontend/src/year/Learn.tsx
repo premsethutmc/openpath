@@ -550,8 +550,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const swap = (t: string) => (t === question(raw.instance!).prompt ? kq!.say : t);
   const sc = kq ? { ...raw, text: raw.text.map(swap), math: raw.math?.map(swap), widget: (kq.figure as typeof raw.widget) ?? raw.widget } : raw;
   const last = i === s.screens.length - 1;
-  // scenes@1: a section about a generated question that has no picture gets that question's interactive scene (its own numbers)
-  const scene = !sc.widget && raw.instance ? sceneForQuestion(raw.instance) : null;
+  // scenes@2: a section about a generated question gets that question's interactive scene (its own numbers), under any picture
+  const scene = raw.instance ? sceneForQuestion(raw.instance) : null;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">

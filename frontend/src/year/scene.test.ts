@@ -6,15 +6,19 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
-import { numericValue } from "../../../packages/learning/src/answer-types";
-import { check, controls, derivative, describe, draw, evalPoly, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
-import { SCENE_FAMILIES, sceneAnswer, sceneForQuestion } from "../../../packages/learning/src/scenes";
+import { evaluate, numericValue, parse, rhs } from "../../../packages/learning/src/answer-types";
+import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
+import { SCENE_FAMILIES, sceneAnswer, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
 
 const strips: Scene = { type: "scene", kind: "strips", poly: [0.5, 0, 0.25], from: 0, to: 4, prompt: "Add strips.", success: "Done.", goal: { measure: "gap", below: 0.1 } };
 const slope: Scene = { type: "scene", kind: "slope", poly: [0, -2, 0, 1 / 6], from: -3.6, to: 3.6, step: 0.05, prompt: "Find slope 0.", success: "Flat.", goal: { measure: "slope", equals: 0 } };
 const collect: Scene = { type: "scene", kind: "accumulate", poly: [2, -1], from: 0, to: 4, step: 0.05, prompt: "Collect.", success: "Peak.", goal: { measure: "total", equals: 2 } };
 const line: Scene = { type: "scene", kind: "line", targets: [[1, 3], [3, 7]], window: [-1, 5, -1, 9], m: [-3, 3, 0.5], c: [-2, 6, 0.5], prompt: "Through both.", success: "y = 2x + 1.", goal: { measure: "miss", below: 0.01 } };
-const ALL = [strips, slope, collect, line];
+const pivot: Scene = { type: "scene", kind: "line", through: [-2, -1], targets: [[3, 2]], window: [-7, 7, -7, 7], m: [-3, 3, 0.2], prompt: "Turn the line.", success: "Slope 3/5.", goal: { measure: "miss", below: 1e-4 } };
+const triangle: Scene = { type: "scene", kind: "triangle", angles: [40, 75], prompt: "Set the two angles.", success: "65°.", goal: { measure: "miss", equals: 0 } };
+const wave: Scene = { type: "scene", kind: "accumulate", terms: [{ f: "sin", a: 2 }], from: 0, to: 6.3, step: 0.05, prompt: "Collect.", success: "Peak.", goal: { measure: "total", equals: 4, tol: 0.01 } };
+const growth: Scene = { type: "scene", kind: "slope", terms: [{ f: "exp", a: 1, b: 1 }, { f: "ln", a: -2 }], from: 0.25, to: 2, step: 0.05, prompt: "Slide to 1.", success: "e − 2.", goal: { measure: "x", equals: 1 } };
+const ALL = [strips, slope, collect, line, pivot, triangle, wave, growth];
 
 test("polynomials: value, derivative and exact integral", () => {
   assert.equal(evalPoly([1, -3, 5], 2), 15);
@@ -77,6 +81,42 @@ test("dragging follows the finger on scenes with a point, and does nothing on sl
   assert.equal(pointer(collect, initial(collect), 9999, 0).x, 4);
   assert.deepEqual(pointer(strips, initial(strips), 200, 100), initial(strips));
   assert.deepEqual(pointer(line, initial(line), 200, 100), initial(line));
+  assert.deepEqual(ALL.map(draggable), [false, true, true, false, false, true, true, true]);
+  // a finger straight above the middle of the base makes two equal angles; every finger position leaves a real triangle
+  const mid = pointer(triangle, initial(triangle), 170, 75);
+  assert.equal(mid.a, mid.b);
+  assert.equal(mid.a, 45);
+  for (let x = 0; x <= 340; x += 17) for (let y = 0; y <= 220; y += 11) { const t = pointer(triangle, mid, x, y), m = measures(triangle, t); assert.ok(m.a + m.b + m.c === 180 && m.c >= 10, `finger at ${x}, ${y}`); }
+});
+
+test("curves beyond polynomials: exact slopes and areas for sine, cosine, exponential and logarithm", () => {
+  const sin = curveOf({ terms: [{ f: "sin", a: 2 }], from: 0, to: 1 });
+  assert.ok(Math.abs(sin.area(0, Math.PI) - 4) < 1e-12);
+  assert.ok(Math.abs(sin.slope(0) - 2) < 1e-12);
+  const mix = curveOf({ terms: [{ f: "exp", a: 3, b: 2 }, { f: "ln", a: -6 }, { f: "cos", a: 1, b: 3 }, { f: "pow", a: 5, b: 2 }], from: 1, to: 2 });
+  const h = 1e-6;
+  for (const x of [0.5, 1, 1.7]) {
+    assert.ok(Math.abs(mix.slope(x) - (mix.value(x + h) - mix.value(x - h)) / (2 * h)) < 1e-4 * Math.max(1, Math.abs(mix.slope(x))), `slope at ${x}`);
+    let simpson = 0; const n = 2000, w = (x + 1 - x) / n;
+    for (let i = 0; i <= n; i++) simpson += (i === 0 || i === n ? 1 : i % 2 ? 4 : 2) * mix.value(x + i * w);
+    assert.ok(Math.abs(mix.area(x, x + 1) - (simpson * w) / 3) < 1e-6 * Math.max(1, Math.abs(mix.area(x, x + 1))), `area from ${x}`);
+  }
+  assert.equal(curveText({ terms: [{ f: "exp", a: 2, b: 3 }, { f: "ln", a: -6 }], from: 1, to: 2 }), "2e^(3x) − 6 ln x");
+  assert.equal(curveText({ terms: [{ f: "sin", a: 1 }, { f: "cos", a: -1, b: 2 }, { f: "exp", a: 1 }], from: 0, to: 1 }), "sin(x) − cos(2x) + eˣ");
+  assert.ok(check({ ...growth, from: 0 }).length > 0, "a logarithm from 0 is refused");
+  assert.ok(check({ ...growth, poly: [1] }).length > 0, "a curve cannot be both a polynomial and terms");
+  assert.ok(check({ ...growth, terms: [{ f: "tan", a: 1 }] }).length > 0);
+  assert.ok(check({ ...growth, terms: [{ f: "sin", a: 1, b: 0 }] }).length > 0);
+});
+
+test("the triangle: three whole angles that always make 180°, finished only at the two asked angles", () => {
+  for (const st of states(triangle)) { const m = measures(triangle, st); assert.equal(m.a + m.b + m.c, 180); assert.ok(m.c >= 10 && m.a >= 10 && m.b >= 10); }
+  assert.ok(met(triangle, { a: 40, b: 75 }) && !met(triangle, { a: 41, b: 75 }) && !met(triangle, { a: 75, b: 40 }));
+  assert.equal(readout(triangle, { a: 40, b: 75 }), "40° + 75° + 65° = 180°");
+  assert.ok(check({ ...triangle, angles: [100, 90] }).length > 0);
+  assert.ok(check({ ...triangle, angles: [40.5, 60] }).length > 0);
+  assert.ok(met(pivot, { m: 0.6 }) && !met(pivot, { m: 0.4 }));
+  assert.ok(check({ ...pivot, c: [-2, 6, 0.5] }).length > 0, "a turning line has no start slider");
 });
 
 test("goals: the slope scene is finished only on flat ground; the collected area peaks where the curve crosses zero", () => {
@@ -116,9 +156,12 @@ test("malformed or impossible scenes are refused", () => {
   for (const v of [null, undefined, 3, "scene", []]) assert.ok(check(v).length > 0);
 });
 
-test("every released question of a scene family gets a scene that states that question's own answer", () => {
-  assert.deepEqual([...SCENE_FAMILIES].sort(), ["cint", "dpow", "pint"]);
-  const counts: Record<string, [number, number]> = {};
+test("every scene of a released question states that question's own mathematics", () => {
+  // every released question of these families has a scene; `audel` has one for its first form only (c·e^(ax) + d·log x)
+  const WHOLE = ["ahtri", "asline", "audfp", "audsum", "cint", "dpow", "pint"];
+  assert.deepEqual([...SCENE_FAMILIES].sort(), [...WHOLE, "audel"].sort());
+  const near = (a: number, b: number) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
+  let scenes = 0;
   for (const fam of SCENE_FAMILIES) {
     const def = FAMILIES.get(fam)!;
     let shown = 0, total = 0;
@@ -128,16 +171,26 @@ test("every released question of a scene family gets a scene that states that qu
       if (!s) continue;
       shown++;
       assert.deepEqual(check(s), [], q.id);
-      const mine = sceneAnswer(s), theirs = numericValue(q.answer);
-      assert.ok(mine !== null && theirs !== null && Math.abs(mine - theirs) < 1e-9 * Math.max(1, Math.abs(theirs)), `${q.id}: scene ${mine} vs answer ${q.answer}`);
-      assert.ok(def.validate(q.params, mine), `${q.id}: the family's independent check accepts the scene's number`);
-      for (const b of def.bugs(q.params)) if (typeof b.predict === "number" && Math.abs(b.predict - theirs) > 1e-9) assert.ok(Math.abs(b.predict - mine) > 1e-9, `${q.id}: the scene does not state the ${b.id} mistake`);
-      assert.ok(s.prompt.length <= 160 && s.success.length <= 160);
+      assert.ok(s.prompt.length <= 160 && s.success.length <= 160, q.id);
+      const mine = sceneAnswer(s), theirs = numericValue(q.answer), probes = sceneProbes(s);
+      if (mine !== null && theirs !== null && !/[a-zA-Z]/.test(q.answer)) {
+        // a number: the scene's own number is the verified answer, the family's independent check accepts it, and it is no predicted mistake
+        assert.ok(near(mine, theirs), `${q.id}: scene ${mine} vs answer ${q.answer}`);
+        assert.ok(def.validate(q.params, mine), `${q.id}: independent check`);
+        for (const b of def.bugs(q.params)) if (typeof b.predict === "number" && !near(b.predict, theirs)) assert.ok(!near(b.predict, mine), `${q.id}: not the ${b.id} mistake`);
+      } else {
+        // an expression in x: the verified answer passes through every point the scene states
+        assert.ok(probes.length > 0, `${q.id}: nothing to hold against ${q.answer}`);
+        const tree = parse(rhs(q.answer));
+        for (const [x, y] of probes) assert.ok(Math.abs(evaluate(tree, { x }) - y) <= 1e-9 * Math.max(1, Math.abs(y)), `${q.id}: answer ${q.answer} at x = ${x} is not ${y}`);
+      }
     }
-    counts[fam] = [shown, total];
+    scenes += shown;
     assert.ok(total >= 80, `${fam} pool`);
-    assert.equal(shown, total, `${fam}: every released question has a scene`);
+    if (WHOLE.includes(fam)) assert.equal(shown, total, `${fam}: every released question has a scene`);
+    else assert.ok(shown >= 20, `${fam}: ${shown} of ${total}`);
   }
+  assert.ok(scenes >= 3000, `${scenes} scenes`);
   assert.equal(sceneForQuestion("gen:pint:1,3,5,2:mc")?.kind, "strips");
   assert.equal(sceneForQuestion("gen:nosuch:1,2"), null);
   assert.equal(sceneForQuestion("gen:constructor:1"), null);
