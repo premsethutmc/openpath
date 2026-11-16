@@ -12,7 +12,14 @@ Every recipe has the same steps, in this order (`packages/learning/src/recipe.ts
 2. **Your guess.** Two to four choices; each has its own reply. A wrong guess is fine and moves on.
 3. **Find out.** One to four missions. Each is a scene (`SCENE_ENGINE.md`) with one goal; the next opens when it is reached.
 4. **Name it.** Only now: what the idea is called and the short way of doing it.
-5. **When to use it.** One choice about where the idea applies; the right one must be chosen to finish.
+5. **How to solve it.** One worked example, a step at a time: the lesson's own opening example, with the steps and answer
+   its question family verifies (`workedFor`). It is the lesson's own example so that showing it is already counted as shown
+   when the teaching is recorded.
+6. **Try one / Think about it.** One choice: a first go at the method, or a question about the idea. The right one must be
+   chosen to finish.
+
+Every step carries the testers' feedback box (`FeedbackBox`, feedback@1), as every lesson section does. Two ticks were added
+for it: "It doesn't explain it" and "I don't like this".
 
 Then the skill's lesson carries on as before: its worked examples, then practice with help, the checks that count, and the
 later re-check. Those were already there and already keep the evidence.

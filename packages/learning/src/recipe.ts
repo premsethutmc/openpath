@@ -5,7 +5,8 @@
  *   2. predict        the learner guesses first; each guess gets its own reply
  *   3. missions       the learner finds it out by moving something (scenes, one goal each, in order)
  *   4. name it        only now: what it is called and the short way of doing it
- *   5. when to use it one choice about where the idea applies and where it does not
+ *   5. how to solve it one worked example, a step at a time (the lesson's own example, with the family's verified steps)
+ *   6. try one        one choice: a first go at it, or a question to think about
  *
  * After the recipe the module carries on as before: worked examples, guided practice and the checks that count. Those are
  * the "do one with help", "do one alone" and "come back later" parts, and they already keep the evidence. Nothing in a
@@ -14,6 +15,8 @@
  * A recipe is data. `checkRecipe` must find no problem with it, or it is not shown. No model or network is involved.
  */
 import { check, type Scene } from "./scene";
+import { moduleFor } from "./content";
+import { explainStep, problemOf } from "./families";
 
 /** One choice the learner can tap, with what is said back. Exactly one choice of a set is `right`. */
 export interface Choice { label: string; reply: string; right?: true }
@@ -31,8 +34,9 @@ export interface Recipe {
   name: string[];
   /** The words that name the idea. None may appear before step 4 (checked), and step 4 must use at least one. */
   names: string[];
-  /** Step 5: where it applies. */
-  choose: { ask: string; choices: Choice[] };
+  /** The last step: "try" is a first go at the method (headed "Try one"); "think" is a question about the idea (headed
+   *  "Think about it"). */
+  choose: { kind: "try" | "think"; ask: string; choices: Choice[] };
 }
 
 const text = (t: unknown, max: number) => typeof t === "string" && t.trim().length > 0 && t.length <= max;
@@ -54,6 +58,7 @@ export function checkRecipe(v: unknown): string[] {
   if (!paragraphs(r.question)) bad.push("the question is one to three short paragraphs");
   if (!paragraphs(r.name)) bad.push("the name step is one to three short paragraphs");
   bad.push(...choices(r.predict, "predict"), ...choices(r.choose, "choose"));
+  if (r.choose && r.choose.kind !== "try" && r.choose.kind !== "think") bad.push("choose needs a kind: try or think");
   if (!Array.isArray(r.missions) || r.missions.length < 1 || r.missions.length > 4) bad.push("one to four missions");
   else r.missions.forEach((m, i) => { const p = check(m); if (p.length) bad.push(`mission ${i + 1}: ${p[0]}`); });
   if (!Array.isArray(r.names) || r.names.length < 1 || r.names.length > 5 || !r.names.every((n) => text(n, 30) && n.trim().length >= 3)) bad.push("names: one to five words that name the idea");
@@ -67,8 +72,19 @@ export function checkRecipe(v: unknown): string[] {
 }
 
 /** The steps of a recipe, in order: what the player walks through. */
-export type RecipeStep = { kind: "question" } | { kind: "predict" } | { kind: "mission"; index: number } | { kind: "name" } | { kind: "choose" };
-export const stepsOf = (r: Recipe): RecipeStep[] => [{ kind: "question" }, { kind: "predict" }, ...r.missions.map((_, index) => ({ kind: "mission" as const, index })), { kind: "name" }, { kind: "choose" }];
+export type RecipeStep = { kind: "question" } | { kind: "predict" } | { kind: "mission"; index: number } | { kind: "name" } | { kind: "solve" } | { kind: "choose" };
+/** The steps in order. `solve` is included when the lesson has a worked example to show (see `workedFor`). */
+export const stepsOf = (r: Recipe, solve = false): RecipeStep[] => [{ kind: "question" }, { kind: "predict" }, ...r.missions.map((_, index) => ({ kind: "mission" as const, index })), { kind: "name" }, ...(solve ? [{ kind: "solve" as const }] : []), { kind: "choose" }];
+
+/** The worked example for "how to solve it": the question the skill's lesson already opens on, with the steps and answer
+ *  its family verifies. It is the lesson's own example on purpose: showing it is already counted as shown when the
+ *  teaching is recorded, so it cannot later be taken as an answer given unaided. Null when the lesson has none. */
+export function workedFor(competency: string): { prompt: string; steps: string[]; answer: string; figure?: { type: string; [k: string]: unknown } } | null {
+  const id = moduleFor(competency)?.chapter.find((s) => s.instance)?.instance;
+  const p = id ? problemOf(id) : null;
+  if (!p || !p.steps.length) return null;
+  return { prompt: p.prompt, steps: p.steps.map((s) => explainStep(p, s)), answer: p.answer, ...(p.figure ? { figure: p.figure } : {}) };
+}
 
 const RECIPES: Recipe[] = [
   // Integrals, as a learner first meets them (the skill that integrates powers of x). The opening lesson of this skill
@@ -101,9 +117,10 @@ const RECIPES: Recipe[] = [
       "For a power: raise the power by one, then divide by the new power. xⁿ becomes xⁿ⁺¹ ⁄ (n + 1).",
     ],
     choose: {
-      ask: "Which curve undoes 3t² (has slope 3t²)?",
+      kind: "try",
+      ask: "A different tap pours 3t² litres a minute. Which gives the total after t minutes?",
       choices: [
-        { label: "6t", reply: "6t is the slope of 3t², one step the other way. We want the curve whose slope is 3t²." },
+        { label: "6t", reply: "6t is how fast the pouring rate itself changes, one step the wrong way. We want the curve whose slope is 3t²." },
         { label: "t³", reply: "Yes. Raise the power to 3, divide by 3: 3t³ ⁄ 3 = t³. Its slope is 3t².", right: true },
         { label: "3t³", reply: "Raise the power, then also divide by the new power: 3t³ ⁄ 3 = t³." },
       ],
@@ -136,7 +153,8 @@ const RECIPES: Recipe[] = [
       "The short way for a power: bring the power down in front, then lower the power by one. t² gives 2t, and t³ gives 3t².",
     ],
     choose: {
-      ask: "What is the slope of t⁴ at any moment t?",
+      kind: "try",
+      ask: "Another ramp: the ball has rolled t⁴ metres after t seconds. How fast is it going at time t?",
       choices: [
         { label: "4t³", reply: "Yes. The 4 comes down in front and the power drops to 3.", right: true },
         { label: "t³", reply: "The power dropped by one, but the old power must also come down in front: 4t³." },
@@ -171,6 +189,7 @@ const RECIPES: Recipe[] = [
       "Multiplying two matrices means doing one move and then the other. That is why each entry comes from a row of one and a column of the other.",
     ],
     choose: {
+      kind: "think",
       ask: "Turn then stretch, or stretch then turn: do the two orders always give the same picture?",
       choices: [
         { label: "Yes, always", reply: "Try it in your head: widen then turn makes it tall; turn then widen makes it wide. The order matters." },
@@ -205,6 +224,7 @@ const RECIPES: Recipe[] = [
       "Negative means flipped. Zero means squashed flat, and then the move cannot be undone: the matrix has no inverse.",
     ],
     choose: {
+      kind: "try",
       ask: "The arrows land at (2, 1) and (4, 2). What does ad − bc tell you?",
       choices: [
         { label: "2 × 2 − 1 × 4 = 0: squashed flat", reply: "Yes. Both arrows point along the same line, so the picture is crushed onto it.", right: true },
@@ -239,6 +259,7 @@ const RECIPES: Recipe[] = [
       "With the slope m and one point, the whole line is fixed: y = mx + c, where c is where it crosses the y-axis.",
     ],
     choose: {
+      kind: "try",
       ask: "A line passes through (1, 2) and (3, 10). What is its slope?",
       choices: [
         { label: "4", reply: "Yes. Up 8 for 2 across: 8 ÷ 2 = 4.", right: true },
@@ -274,6 +295,7 @@ const RECIPES: Recipe[] = [
       "So when you know two angles you know the third: take both away from 180°.",
     ],
     choose: {
+      kind: "think",
       ask: "Someone says a triangle has angles of 100° and 90°. Can it?",
       choices: [
         { label: "Yes, the third is small", reply: "100 + 90 is already 190, more than 180. There is nothing left for a third corner." },

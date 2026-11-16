@@ -22,3 +22,6 @@ class FeedbackTests(DevTestCase):
         tester = self.parent("tester2@example.org")
         self.assertEqual(tester.post("/api/feedback/", {"where": "gen:x:1", "kinds": []}, format="json").status_code, 400)
         self.assertEqual(tester.post("/api/feedback/", {"where": "<script>", "kinds": ["wrong"]}, format="json").status_code, 400)
+        # a lesson recipe's step, with the two ticks about liking and explaining (feedback@1 additions)
+        r = tester.post("/api/feedback/", {"where": "recipe:MATH.calculus.indefinite-integrals:8:choose", "kinds": ["dislike", "unclear"], "note": ""}, format="json")
+        self.assertIn(r.status_code, (200, 201))
