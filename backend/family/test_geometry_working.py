@@ -47,7 +47,8 @@ class GeometryWorkingTests(LearningBase):
         if os.name != 'posix': self.skipTest('private process groups are POSIX')
         child=mock.MagicMock(); child.pid=987654; child.communicate.side_effect=[subprocess.TimeoutExpired('node',.5),('', '')]
         child.__enter__.return_value=child
-        with mock.patch.object(kg,'enabled',return_value=True),mock.patch.object(kg.subprocess,'Popen',return_value=child) as start,mock.patch.object(kg.os,'killpg') as kill:
+        # this is the one-shot run's own timeout: the kept grader (grader-serve@1) is switched off so that only it starts a process
+        with mock.patch.dict(os.environ,{'OPENPATH_GRADER_SERVE':'off'}),mock.patch.object(kg,'enabled',return_value=True),mock.patch.object(kg.subprocess,'Popen',return_value=child) as start,mock.patch.object(kg.os,'killpg') as kill:
             self.assertIsNone(kg.run([{'id':'gen:ahtri:36,26','response':'118'}]))
         self.assertTrue(start.call_args.kwargs['start_new_session']);kill.assert_called_once_with(987654,signal.SIGKILL)
         self.assertEqual(child.communicate.call_count,2)

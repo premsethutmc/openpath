@@ -104,3 +104,17 @@ calculation. About 50 of the wordiest Class 5 families have their own rewrite; t
 `kid-say.test.ts` checks every Class 5 family: no typing instructions left, no number that the question did not give,
 and every tap, order and two-box answer rebuilds an answer the existing marking accepts. Test and review builds keep
 the full wording.
+
+## Speed of saves (grader-serve@1, 16 Nov 2026)
+
+- **The grader is kept running.** Checking one answer used to start a program and read the whole 15 MB grader each time
+  (about 0.8 s on a development machine, more on the free server). The same bundle is now started once with `--serve` and
+  asked one line at a time: about 1 ms an answer after the first. The decisions come from the same code; a test holds the
+  kept grader's replies against one-shot runs. Any trouble (no reply in time, an unexpected reply, a dead process) falls back
+  to a one-shot run. It is stopped after 120 quiet seconds (`OPENPATH_GRADER_IDLE`) and restarted every 300 answers
+  (`OPENPATH_GRADER_RECYCLE`). It holds about 300 MB while it runs, the same as one one-shot run at its peak, and the two
+  are never in memory together. `OPENPATH_GRADER_SERVE=off` returns to a one-shot run for every answer.
+- **Database connections are reused** for up to a minute and checked before each request (`CONN_MAX_AGE = 60`,
+  `CONN_HEALTH_CHECKS`), so the saves of one sitting do not each open a new encrypted connection.
+- Not measured on the live server (the free plan gives no timings). Open: the size of the app itself (14.8 MB of code,
+  2.9 MB to download) and the server's small processor.

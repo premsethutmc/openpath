@@ -54,24 +54,47 @@ export async function gradeRequestAsync(r: GraderRequest, observe?: (request: Re
 }
 
 if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.test(process.argv[1])) {
+  const run = async (x: any) => {
+    if (x?.operation === "reentry") return reentryEligibility(x as ReentryRequest);
+    const reply=gradeRequest(x as GraderRequest), d=reply.decision;
+    // Operator-selected, per owned persisted opt-in; never a field accepted from client JSON.
+    if(process.env.OPENPATH_GEOMETRY_ROOT && process.env.OPENPATH_GEOMETRY_PYTHON && d?.working) {
+      const working=await geometryWorking(d.questionId,d.response.working,d.response.raw,d.working,{root:process.env.OPENPATH_GEOMETRY_ROOT,python:process.env.OPENPATH_GEOMETRY_PYTHON});
+      return {...reply,decision:{...d,working}};
+    }
+    if (d?.working && isCalculusWorking(d.questionId)) return { ...reply, decision: { ...d, working: await calculusWorking(d.questionId, d.response.working, d.working) } };
+    return reply;
+  };
+  const answer = async (input: unknown) => (Array.isArray(input) ? await Promise.all(input.slice(0, 500).map(run)) : await run(input));
+  if (process.argv.includes("--serve")) {
+    // grader-serve@1: the same grader kept running, so the server does not start a program and read this whole file for
+    // every answer. One request per line in (the same JSON as a one-shot run), one reply per line out, in order. The
+    // decisions are made by exactly the same code as a one-shot run; only how requests arrive differs. A line that
+    // cannot be read or graded gets the reply `null`, and the server falls back to a one-shot run for it.
+    let buffer = "", chain: Promise<void> = Promise.resolve();
+    process.stdin.setEncoding("utf8");
+    process.stdin.on("data", (d) => {
+      buffer += d;
+      if (buffer.length > 2_000_000) process.exit(2);
+      for (let at = buffer.indexOf("\n"); at >= 0; at = buffer.indexOf("\n")) {
+        const line = buffer.slice(0, at); buffer = buffer.slice(at + 1);
+        chain = chain.then(async () => {
+          let out: unknown = null;
+          try { out = await answer(JSON.parse(line)); } catch { out = null; }
+          process.stdout.write(JSON.stringify(out ?? null) + "\n");
+        });
+      }
+    });
+    process.stdin.on("end", () => { void chain.then(() => { stopGeometryWorkers(); process.exit(0); }); });
+  } else {
   let raw = "";
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", (d) => { raw += d; if (raw.length > 1_000_000) process.exit(2); });
   process.stdin.on("end", async () => {
     let input: unknown;
     try { input = JSON.parse(raw); } catch { process.stdout.write(JSON.stringify({ v: SERVER_GRADER_VERSION, known: false, verdict: "unknown", credit: null, reason: "unreadable request" })); return; }
-    const run = async (x: any) => {
-      if (x?.operation === "reentry") return reentryEligibility(x as ReentryRequest);
-      const reply=gradeRequest(x as GraderRequest), d=reply.decision;
-      // Operator-selected, per owned persisted opt-in; never a field accepted from client JSON.
-      if(process.env.OPENPATH_GEOMETRY_ROOT && process.env.OPENPATH_GEOMETRY_PYTHON && d?.working) {
-        const working=await geometryWorking(d.questionId,d.response.working,d.response.raw,d.working,{root:process.env.OPENPATH_GEOMETRY_ROOT,python:process.env.OPENPATH_GEOMETRY_PYTHON});
-        return {...reply,decision:{...d,working}};
-      }
-      if (d?.working && isCalculusWorking(d.questionId)) return { ...reply, decision: { ...d, working: await calculusWorking(d.questionId, d.response.working, d.working) } };
-      return reply;
-    };
-    try { const out=Array.isArray(input)?await Promise.all(input.slice(0,500).map(run)):await run(input); process.stdout.write(JSON.stringify(out)); }
+    try { process.stdout.write(JSON.stringify(await answer(input))); }
     finally { stopGeometryWorkers(); }
   });
+  }
 }

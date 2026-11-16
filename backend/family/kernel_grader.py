@@ -7,14 +7,18 @@ this server stores for the question (parity); otherwise, or when the grader cann
 
 Standard library only (no Django), so it can be tested on its own.
 """
+import atexit
 import hashlib
 import json
 import os
 import re
+import select
 import shutil
 import subprocess
 import sys
 import signal
+import threading
+import time
 from functools import lru_cache
 from pathlib import Path
 
@@ -49,10 +53,116 @@ def enabled():
     return os.environ.get('OPENPATH_GRADER', 'on') != 'off' and bool(node_path()) and bundle_intact()
 
 
+# grader-serve@1: the grader kept running between answers. Starting it afresh for every answer means starting a program
+# and reading the whole bundle each time (most of a second on a fast machine, several on a small server). The same bundle is
+# started once with --serve and asked one line at a time; the decisions come from exactly the same code. It is stopped after
+# a quiet spell (so a sleeping site holds no memory for it) and restarted now and then. Anything unexpected (no reply in
+# time, a reply that is not a list of the right length, a dead process) falls back to the one-shot run below, so an answer
+# is never lost or decided differently. Geometry working needs its own environment and always uses the one-shot run.
+_SERVE = {'child': None, 'count': 0, 'timer': None, 'buffer': b'', 'node': None}
+_SERVE_LOCK = threading.Lock()
+
+
+def _number(name, default, low):
+    try:
+        return max(low, float(os.environ.get(name, default)))
+    except ValueError:
+        return float(default)
+
+
+def serve_enabled():
+    return os.name == 'posix' and os.environ.get('OPENPATH_GRADER_SERVE', 'on') != 'off'
+
+
+def _stop_server():
+    child, _SERVE['child'], _SERVE['count'], _SERVE['buffer'] = _SERVE['child'], None, 0, b''
+    if _SERVE['timer'] is not None:
+        _SERVE['timer'].cancel()
+        _SERVE['timer'] = None
+    if child is not None:
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except (ProcessLookupError, PermissionError, OSError):
+            pass
+        try:
+            child.wait(timeout=2)
+        except (subprocess.SubprocessError, OSError):
+            pass
+        for stream in (child.stdin, child.stdout):
+            try:
+                stream.close()
+            except (OSError, ValueError, AttributeError):
+                pass
+
+
+def stop_server():
+    """Stop the kept grader (used when it has been quiet, at exit, and by tests)."""
+    with _SERVE_LOCK:
+        _stop_server()
+
+
+def _quiet(child):
+    with _SERVE_LOCK:
+        if _SERVE['child'] is child:
+            _stop_server()
+
+
+def _ask_server(requests):
+    """The kept grader's replies for one list of requests, or None (then the caller runs the grader once, as before)."""
+    with _SERVE_LOCK:
+        try:
+            child, node = _SERVE['child'], node_path()
+            # the kept grader belongs to the Node it was started with: a different one (or none) starts afresh
+            if child is None or child.poll() is not None or _SERVE['node'] != node:
+                _stop_server()
+                _SERVE['node'] = node
+                child = subprocess.Popen([node, str(BUNDLE), '--serve'], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                         stderr=subprocess.DEVNULL, env={'PATH': os.environ.get('PATH', '')}, start_new_session=True)
+                _SERVE['child'] = child
+            if _SERVE['timer'] is not None:
+                _SERVE['timer'].cancel()
+            child.stdin.write(json.dumps(requests).encode() + b'\n')
+            child.stdin.flush()
+            fd, deadline, buffer = child.stdout.fileno(), time.monotonic() + _timeout(), _SERVE['buffer']
+            while b'\n' not in buffer:
+                left = deadline - time.monotonic()
+                if left <= 0 or not select.select([fd], [], [], left)[0]:
+                    _stop_server()
+                    return None
+                chunk = os.read(fd, 65536)
+                if not chunk:
+                    _stop_server()
+                    return None
+                buffer += chunk
+            line, _, _SERVE['buffer'] = buffer.partition(b'\n')
+            out = json.loads(line)
+            _SERVE['count'] += 1
+            if _SERVE['count'] >= _number('OPENPATH_GRADER_RECYCLE', '300', 1):
+                _stop_server()
+            else:
+                timer = threading.Timer(_number('OPENPATH_GRADER_IDLE', '120', 1), _quiet, args=(child,))
+                timer.daemon = True
+                timer.start()
+                _SERVE['timer'] = timer
+            return out
+        except Exception:  # noqa: BLE001 - whatever went wrong with the kept grader, the one-shot run decides instead
+            _stop_server()
+            return None
+
+
+atexit.register(stop_server)
+
+
 def run(requests, geometry=False):
     """Raw replies for a list of {id, response, working?} (None if the grader could not run)."""
     if not enabled():
         return None
+    if not geometry and serve_enabled():
+        out = _ask_server(requests)
+        if isinstance(out, list) and len(out) == len(requests) and all(isinstance(r, dict) for r in out):
+            return out
+    # a one-shot run follows: the kept grader is stopped first, so the two are never in memory together
+    stop_server()
     try:
         env = {'PATH': os.environ.get('PATH', '')}
         if geometry and geometry_intact():

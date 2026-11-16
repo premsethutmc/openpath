@@ -14,8 +14,10 @@ if DATABASES['default']['ENGINE'] != 'django.db.backends.postgresql':
     raise ImproperlyConfigured('The pilot keeps real records: set DATABASE_URL to its PostgreSQL database.')
 # the database is reached over the internet: never without encryption (the query part of DATABASE_URL is not read)
 DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
-# a hosted database may sleep when idle; a connection is opened for each request and checked before use
-DATABASES['default']['CONN_MAX_AGE'] = 0
+# a hosted database may sleep when idle. A connection is kept for up to a minute so that the saves of one sitting do not each
+# open a new encrypted connection over the internet, and it is checked before each request (a closed one is replaced).
+DATABASES['default']['CONN_MAX_AGE'] = 60
+DATABASES['default']['CONN_HEALTH_CHECKS'] = True
 
 # readiness at /healthz/ (reveals no account information)
 ROOT_URLCONF = 'config.preview_urls'
