@@ -114,3 +114,51 @@ class KernelGraderTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+@unittest.skipUnless(HAVE and kg.serve_enabled(), 'needs Node, the grader bundle and a POSIX system')
+class KeptGraderTests(unittest.TestCase):
+    """grader-serve@1: the grader kept running gives exactly the one-shot decisions, and any trouble falls back to a one-shot run."""
+
+    def setUp(self):
+        kg.stop_server()
+        self.addCleanup(kg.stop_server)
+
+    @staticmethod
+    def _plain(replies):
+        return [{k: v for k, v in r.items() if k != 'ms'} for r in replies]
+
+    def test_the_same_decisions_as_a_one_shot_run(self):
+        requests = [[{'id': DET, 'response': r, 'working': []}] for r in ('-4', '-5', 'abc', ' -4.0 ')] + [[{'id': MEAN, 'response': '6/2', 'working': ['1 + 2 + 3 + 6 = 12', '12 / 4 = 3']}]]
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_SERVE': 'off'}):
+            once = [kg.run(r) for r in requests]
+            self.assertIsNone(kg._SERVE['child'])
+        kept = [kg.run(r) for r in requests]
+        self.assertIsNotNone(kg._SERVE['child'])
+        self.assertEqual(kg._SERVE['count'], len(requests))
+        for a, b in zip(once, kept):
+            self.assertEqual(self._plain(a), self._plain(b))
+        self.assertEqual(kg.kernel_decision(DET, '-4', '-4')['credit'], True)
+        self.assertEqual(kg.kernel_decision(DET, '4', '-4')['credit'], False)
+
+    def test_a_dead_grader_is_replaced_and_a_quiet_one_is_stopped(self):
+        self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
+        first = kg._SERVE['child']
+        first.kill()
+        first.wait(timeout=5)
+        self.assertEqual(kg.run([{'id': DET, 'response': '-5', 'working': []}])[0]['verdict'], 'incorrect')
+        self.assertIsNot(kg._SERVE['child'], first)
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_RECYCLE': '1'}):
+            self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
+            self.assertIsNone(kg._SERVE['child'], 'restarted after the set number of answers')
+
+    def test_a_reply_that_is_not_what_was_asked_for_falls_back_to_a_one_shot_run(self):
+        for bad in (None, [], [None], 'x', [{}, {}]):
+            with mock.patch.object(kg, '_ask_server', return_value=bad):
+                self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
+
+    def test_geometry_working_never_uses_the_kept_grader(self):
+        with mock.patch.object(kg, '_ask_server') as ask:
+            kg.run([{'id': DET, 'response': '-4', 'working': []}], geometry=True)
+            ask.assert_not_called()
+
