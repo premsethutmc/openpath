@@ -19,7 +19,7 @@ function shape(s: Shape, i: number): JSX.Element {
   return <text key={i} className={c} x={s.x} y={s.y} textAnchor="middle">{s.s}</text>;
 }
 
-export function ScenePlayer({ scene }: { scene: Scene }) {
+export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: () => void }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
   const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
   const [reached, setReached] = useState(false);
@@ -28,7 +28,7 @@ export function ScenePlayer({ scene }: { scene: Scene }) {
 
   const cs = controls(scene);
   const draggable = follows(scene);
-  const apply = (next: SceneState) => { setState(next); if (met(scene, next)) setReached(true); };
+  const apply = (next: SceneState) => { setState(next); if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); } };
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     apply(pointer(scene, state, ((e.clientX - r.left) * SCENE_BOX.w) / r.width, ((e.clientY - r.top) * SCENE_BOX.h) / r.height));

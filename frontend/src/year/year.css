@@ -355,3 +355,11 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scene-goal { margin: 6px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft, #f1eeff); color: var(--brand-text, #5545c4); }
 .scene-goal.done { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
 @media print { .scene-controls { display: none; } }
+
+/* recipe@1: the lesson recipe player (Recipe.tsx) */
+.recipe-choices { display: grid; gap: 10px; margin: 10px 0; }
+.recipe-choices button { min-height: 48px; text-align: left; }
+.recipe-choices button.picked { outline: 3px solid var(--brand, #6a55f0); outline-offset: 1px; }
+.recipe-reply { margin: 8px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--warn-soft, #fff1e0); }
+.recipe-reply.right { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
+.recipe-nudge { margin: 8px 0 0; color: var(--bad-ink, #8f4524); font-weight: 600; }

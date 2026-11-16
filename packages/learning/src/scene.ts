@@ -29,6 +29,8 @@ interface Base {
   /** Shown once the goal is reached: what the learner has just seen. */
   success: string;
   goal: SceneGoal;
+  /** The letter the horizontal quantity is called in the readout and description (default x; t for time). */
+  variable?: string;
 }
 /** A curve is given either as a polynomial or as a sum of terms (exactly one of the two). */
 interface Curve { poly?: Poly; terms?: Term[]; from: number; to: number }
@@ -136,7 +138,7 @@ export function controls(s: Scene): Control[] {
     return s.through || !s.c ? [m] : [m, { key: "c", label: "Start", min: s.c[0], max: s.c[1], step: s.c[2], start: s.c[0] }];
   }
   const step = s.step ?? ((s.to - s.from) <= 8 ? 0.05 : 0.1);
-  return [{ key: "x", label: "x", min: s.from, max: s.to, step, start: s.kind === "accumulate" ? s.from : r6(s.from + Math.round((s.to - s.from) / step / 6) * step) }];
+  return [{ key: "x", label: s.variable ?? "x", min: s.from, max: s.to, step, start: s.kind === "accumulate" ? s.from : r6(s.from + Math.round((s.to - s.from) / step / 6) * step) }];
 }
 export const initial = (s: Scene): SceneState => Object.fromEntries(controls(s).map((c) => [c.key, c.start]));
 /** Set one control: clamped to its range and snapped to its grid. Unknown keys and non-numbers change nothing. */
@@ -190,13 +192,14 @@ export function met(s: Scene, state: SceneState): boolean {
   return s.goal.equals !== undefined ? Math.abs(v - s.goal.equals) <= (s.goal.tol ?? 1e-6) : s.goal.below !== undefined ? v < s.goal.below : false;
 }
 
+const named = (s: Scene, text: string) => (s.variable && s.variable !== "x" ? text.replaceAll("x", s.variable) : text);
 /** The one line of numbers under the picture. It never states the answer before the learner has reached it by moving
  *  something (the strips line gives what is missing, not the true area). */
 export function readout(s: Scene, state: SceneState): string {
   const m = measures(s, state);
+  if (s.kind === "slope") return named(s, `At x = ${fmt(m.x)} the slope is ${fmt(m.slope)}`);
+  if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
-  if (s.kind === "slope") return `At x = ${fmt(m.x)} the slope is ${fmt(m.slope)}`;
-  if (s.kind === "accumulate") return `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
   return `y = ${fmt(m.m)}x ${m.c < 0 ? "−" : "+"} ${fmt(Math.abs(m.c))}`;
 }
@@ -289,9 +292,9 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number): Scen
 
 /** The picture in words, for a screen reader. It says what can be moved, never the answer. */
 export function describe(s: Scene): string {
-  if (s.kind === "strips") return `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}. A slider sets how many strips are drawn under the curve. ${s.prompt}`;
-  if (s.kind === "slope") return `An interactive graph of y = ${curveText(s)}. A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
-  if (s.kind === "accumulate") return `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}. ${s.prompt}`;
+  if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
+  if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
+  if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
   if (s.kind === "triangle") return `An interactive triangle ABC. Two sliders set the angles at A and B, and the angle at C follows. ${s.prompt}`;
   return `An interactive graph with ${s.targets.length} marked ${s.targets.length === 1 ? "point" : "points"} and a straight line ${s.through ? "that turns about a fixed point, set by a slope slider" : "set by two sliders"}. ${s.prompt}`;
 }
@@ -333,6 +336,7 @@ export function check(v: unknown): string[] {
   if (!Object.prototype.hasOwnProperty.call(MEASURES, s.kind)) return [`unknown kind ${String(s.kind)}`];
   const words = (t: unknown, name: string) => { if (typeof t !== "string" || !t.trim() || t.length > 160) bad.push(`${name} must be 1 to 160 characters`); };
   words(s.prompt, "prompt"); words(s.success, "success");
+  if (s.variable !== undefined && !(typeof s.variable === "string" && /^[a-df-z]$/.test(s.variable))) bad.push("variable must be one small letter (not e)");
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");

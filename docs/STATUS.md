@@ -23,6 +23,13 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
   family's verified answer. Not evidence of a skill.
 - Open: a drag answer that counts (a new answer type; grading unchanged here); a physical Android check.
 
+## Lesson recipe (2026-11-16, branch `feat/lesson-recipe`, on top of `feat/scene-engine`, draft PR, not merged)
+- recipe@1 (`docs/product/LESSON_RECIPE.md`): a skill's opening lesson as question → guess → missions (scenes) → name →
+  when to use it, from data (`packages/learning/src/recipe.ts`, player `frontend/src/year/Recipe.tsx`). The worked examples,
+  practice and checks follow as before; nothing in a recipe is evidence; teaching is recorded as before.
+- One recipe: integrals as first met (`MATH.calculus.indefinite-integrals`). Open: more recipes; definite integrals has no
+  eligible opening lesson to carry one.
+
 ## This milestone (2026-11-11, CISCE / ICSE Class 5, branch `feat/icse-grade5`, draft PR, not merged)
 - icse@1 (`docs/milestones/ICSE_GRADE5.md`): a third board for Grade 5 only, `boardFor("icse", 5)`, from
   `content/learning/syllabus/icse-g05.json` through the same builder. Existing skills only; nothing written for it.

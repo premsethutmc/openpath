@@ -13,6 +13,8 @@ import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
+import { RecipeLesson } from "./Recipe";
+import { recipeFor } from "../../../packages/learning/src/recipe";
 import { sceneForQuestion } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
@@ -538,24 +540,32 @@ function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competen
   );
 }
 
-export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string }) {
+export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency, opening = false }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string; opening?: boolean }) {
   const [stored, setI] = useResume(resumeKey, 0);
-  const i = Number.isInteger(stored) && stored >= 0 && stored < s.screens.length ? stored : 0;
+  // recipe@1: the opening lesson of a new skill that has a lesson recipe starts with it (question, guess, missions, name,
+  // when to use it); of the written sections only the worked examples follow. Other lessons of the skill (another way of
+  // explaining after a mistake, a review) are unchanged. Nothing in a recipe is evidence.
+  const recipe = opening && competency && "id" in s ? recipeFor(competency) : null;
+  const [recipeDone, setRecipeDone] = useResume<boolean>(resumeKey && recipe ? `${resumeKey}:recipe@1` : undefined, false);
+  const screens = recipe ? s.screens.filter((x) => x.role === "worked-example") : s.screens;
+  const i = Number.isInteger(stored) && stored >= 0 && stored < screens.length ? stored : 0;
   const m = competency ? moduleFor(competency) : null;
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
-  const raw = s.screens[i];
+  // with no worked example to follow, the recipe is the whole lesson (and is what a learner sees on coming back to it)
+  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
+  const raw = screens[i];
   // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
   const kq = KID && raw.instance ? safeKid(question(raw.instance)) : null;
   const swap = (t: string) => (t === question(raw.instance!).prompt ? kq!.say : t);
   const sc = kq ? { ...raw, text: raw.text.map(swap), math: raw.math?.map(swap), widget: (kq.figure as typeof raw.widget) ?? raw.widget } : raw;
-  const last = i === s.screens.length - 1;
+  const last = i === screens.length - 1;
   // scenes@2: a section about a generated question gets that question's interactive scene (its own numbers), under any picture
   const scene = raw.instance ? sceneForQuestion(raw.instance) : null;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
-        <p className="eyebrow">{s.title}{s.screens.length > 1 ? ` · ${i + 1} of ${s.screens.length}` : ""}</p>
+        <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {sc.widget && <Picture w={sc.widget} competency={competency} />}
@@ -660,7 +670,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {!embedded && <h1>{name}</h1>}
         <p className="kid-new">✨ New skill — let's learn it first.</p>
-        <Lesson competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
+        <Lesson opening competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
         <button className="link kid-skip" onClick={() => setTestMe(true)}>I know this — test me</button>
       </div>
     );
