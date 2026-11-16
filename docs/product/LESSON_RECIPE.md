@@ -65,6 +65,21 @@ When a part is finished, the player posts one `lesson_part` metric to the existi
 not evidence, and failing to send it changes nothing for the learner. The last part recorded for a learner who did not
 finish is where they left.
 
+## Guess first, for every skill (guess-first@1)
+
+A recipe is written for one skill. The owner's note (16 Nov 2026): that cannot be the only way, or every skill waits for its
+own writing. So the engine also makes the plain lesson interactive by itself, from what every question family already holds.
+
+In a skill's opening lesson, a worked example is not shown at once. The learner sees its question and two or three answers:
+the verified one and the wrong ones the family's own written misunderstandings predict for those numbers (`guessOf`,
+`packages/learning/src/families.ts`). Choosing one opens the working; a wrong choice is first answered with that
+misunderstanding's own explanation. "Show me how" opens it without a guess. A picture that belongs to the working waits with
+it; the question's own picture stays. Nothing is written per skill, nothing is invented, the guess is not evidence, and the
+lesson's Next button is as it was. What is recorded is one `lesson_part` measurement: right, wrong or skipped.
+
+Of the 244 skills the curricula map to, 27 open with a recipe and 190 more get a guess from this rule; 27 have neither (no
+predicted wrong answer, a choice question, or no worked example).
+
 ## Where it appears
 
 In the **opening lesson** of a skill the learner has never met, once per learner, when the skill has a recipe (`Lesson`,

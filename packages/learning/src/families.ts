@@ -1420,6 +1420,32 @@ export function problemOf(id: string): Problem | null {
     return null;
   }
 }
+/**
+ * guess-first@1: a question as something to guess before its working is shown. The choices are the verified answer and up
+ * to two answers that the family's own written misunderstandings predict for these numbers; a wrong choice is answered
+ * with that misunderstanding's own explanation. Nothing is invented: a question whose family predicts no wrong answer
+ * (or whose answer is not one number or one short text) has no guess. The order is fixed by the question, not random.
+ */
+/** `pictured`: the question has a picture of its own, which is needed to answer it (any other picture on the screen belongs
+ *  to the working and waits with it). */
+export interface Guess { prompt: string; pictured: boolean; choices: { label: string; reply: string; right?: true }[] }
+export function guessOf(id: string): Guess | null {
+  const p = problemOf(id.replace(/:(mc|w)$/, "")), def = p && FAMILIES.get(p.family);
+  if (!p || !def || p.type === "choice" || def.type === "set" || !p.answer || p.answer.length > 40) return null;
+  const used = new Set([p.answer]), wrong: Guess["choices"] = [];
+  for (const b of p.bugs) {
+    if (wrong.length >= 2 || !b.says || b.says.length > 220) continue;
+    const vals = b.predict === null ? [] : Array.isArray(b.predict) ? b.predict : [b.predict];
+    const label = vals.filter((v) => typeof v === "number" || typeof v === "string").map((v) => shown(def, v as Value)).find((t) => t.length <= 40 && !used.has(t) && !predictsAnswer(def, t, p.answer));
+    if (label === undefined) continue;
+    used.add(label); wrong.push({ label, reply: b.says });
+  }
+  if (!wrong.length) return null;
+  // where the right answer sits is fixed by the question's own text
+  let h = 0; for (const c of p.id) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const choices = [...wrong]; choices.splice(h % (wrong.length + 1), 0, { label: p.answer, reply: "Yes. Now see how to get there.", right: true });
+  return { prompt: p.prompt, pictured: !!p.figure, choices };
+}
 export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)])).filter((v) => selectable(v.id));
 /** teaching-contract@1 (adaptive-loop repair, square roots): the teaching for √(n²) from this question's own number: for a
  *  one-digit root the square fact; for a larger root, the tens it lies between, the last digit, and the check. */
