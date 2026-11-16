@@ -5,6 +5,8 @@
  */
 import type { JSX } from "react";
 import { TriangleAngleLab } from "../geometry/TriangleAngleLab";
+import { ScenePlayer } from "./Scene";
+import { check as checkScene, describe as describeScene, type Scene } from "../../../packages/learning/src/scene";
 type V = { type: string; [k: string]: unknown };
 const num = (v: unknown, d = 0) => (typeof v === "number" && Number.isFinite(v) ? v : d);
 const arr = <T,>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
@@ -177,6 +179,9 @@ function anglesOf(v: V): { label: string; deg: number }[] | null {
 }
 export function describe(v: V): string {
   switch (v.type) {
+    case "scene":
+      // scene@1: an interactive scene describes itself (what can be moved, never the answer)
+      return checkScene(v).length === 0 ? describeScene(v as unknown as Scene) : "This picture is not available.";
     case "dots":
       return `${num(v.count)} objects`;
     case "tenframe":
@@ -311,6 +316,7 @@ const SOFT = "var(--soft, #dbe6f7)";
 
 export function Figure({ v }: { v: V }) {
   if (v.type === "triangle-angle-lab") return <TriangleAngleLab proof={v.proof !== false} />;
+  if (v.type === "scene") return <ScenePlayer scene={v as unknown as Scene} />;
   const label = describe(v);
   const box = (w: number, h: number, body: JSX.Element | JSX.Element[]) => (
     <figure className="figure" aria-label={label} role="img">

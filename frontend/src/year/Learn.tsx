@@ -12,6 +12,8 @@ import { useState, useRef } from "react";
 import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
+import { ScenePlayer } from "./Scene";
+import { sceneForQuestion } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
@@ -446,6 +448,9 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
   const mixup = fb.right || undecided ? null : answerFeedback(q, fb.response);
   const trusted = fb.decision?.decidedBy === "server" && fb.decision.questionId === fb.qid ? fb.decision as unknown as GradingDecision : null;
   const judged = trusted ? workingFeedback(trusted) : null;
+  // scenes@1: after a wrong answer, where the worked solution is shown (never before a retry: the scene states the answer),
+  // the same question is also shown as its interactive scene
+  const scene = !fb.right && !undecided && !onRetry ? sceneForQuestion(fb.qid) : null;
   return (
     <div className="stack enter">
       <div className={`feedback ${undecided ? "" : fb.right ? "good" : "bad"}${KID && !undecided ? (fb.right ? " kid-cheer" : " kid-soft") : ""}`} role="status">
@@ -458,6 +463,7 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
           : <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>)}
         {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
         {(!onRetry || fb.right) && (KID ? (fb.right ? <details className="kid-why"><summary>How it works</summary><p>{q.solution}</p></details> : <StepByStep key={fb.qid} solution={q.solution} />) : <p>{q.solution}</p>)}
+        {scene && <ScenePlayer key={fb.qid} scene={scene} />}
         {onRetry && !fb.right && <><p>{KID ? "Have another go, or ask for a hint." : "Your answer and working are saved. A wrong answer alone does not tell us why."}</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
       {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
@@ -592,6 +598,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const swap = (t: string) => (t === question(raw.instance!).prompt ? kq!.say : t);
   const sc = kq ? { ...raw, text: raw.text.map(swap), math: raw.math?.map(swap), widget: (kq.figure as typeof raw.widget) ?? raw.widget } : raw;
   const last = i === s.screens.length - 1;
+  // scenes@2: a section about a generated question gets that question's interactive scene (its own numbers), under any picture
+  const scene = raw.instance ? sceneForQuestion(raw.instance) : null;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
@@ -599,6 +607,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {sc.widget && <Picture w={sc.widget} competency={competency} />}
+        {scene && <ScenePlayer key={raw.instance} scene={scene} />}
         {sc.math && <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}
         {sc.tip && <p className="hint">{sc.tip}</p>}
         {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
