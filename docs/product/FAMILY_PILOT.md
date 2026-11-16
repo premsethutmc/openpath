@@ -111,7 +111,10 @@ the full wording.
   (about 0.8 s on a development machine, more on the free server). The same bundle is now started once with `--serve` and
   asked one line at a time: about 1 ms an answer after the first. The decisions come from the same code; a test holds the
   kept grader's replies against one-shot runs. Any trouble (no reply in time, an unexpected reply, a dead process) falls back
-  to a one-shot run. It is stopped after 120 quiet seconds (`OPENPATH_GRADER_IDLE`) and restarted every 300 answers
+  to a one-shot run. It is stopped after 1200 quiet seconds (`OPENPATH_GRADER_IDLE`; 120 at first, which stopped it during any lesson longer than
+  two minutes, so the next answer paid the start again: 13 s measured on the family site on 16 Nov 2026, against 25 to 77 ms
+  for the answers after it). grader-warm@1 starts it in the background when a learner's mathematics is opened, so the start
+  is spent while a lesson is read; a grader just started is allowed `OPENPATH_GRADER_START` seconds (30). It is and restarted every 300 answers
   (`OPENPATH_GRADER_RECYCLE`). It holds about 300 MB while it runs, the same as one one-shot run at its peak, and the two
   are never in memory together. `OPENPATH_GRADER_SERVE=off` returns to a one-shot run for every answer.
 - **Database connections are reused** for up to a minute and checked before each request (`CONN_MAX_AGE = 60`,
