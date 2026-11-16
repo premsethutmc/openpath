@@ -157,6 +157,12 @@ class KeptGraderTests(unittest.TestCase):
             with mock.patch.object(kg, '_ask_server', return_value=bad):
                 self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
 
+    def test_any_failure_inside_the_kept_grader_falls_back(self):
+        # for example a process object that does not behave like one (as a test double does)
+        with mock.patch.object(kg.select, 'select', side_effect=TypeError('not a file')):
+            self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
+        self.assertIsNone(kg._SERVE['child'])
+
     def test_geometry_working_never_uses_the_kept_grader(self):
         with mock.patch.object(kg, '_ask_server') as ask:
             kg.run([{'id': DET, 'response': '-4', 'working': []}], geometry=True)

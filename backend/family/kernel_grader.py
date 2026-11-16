@@ -145,7 +145,7 @@ def _ask_server(requests):
                 timer.start()
                 _SERVE['timer'] = timer
             return out
-        except (OSError, ValueError, subprocess.SubprocessError):
+        except Exception:  # noqa: BLE001 - whatever went wrong with the kept grader, the one-shot run decides instead
             _stop_server()
             return None
 
