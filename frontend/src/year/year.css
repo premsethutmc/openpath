@@ -324,3 +324,28 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .kid-focus-title { margin: 0; font-weight: 800; font-size: 1.05rem; color: #5a3d00; }
 .kid-focus-why { margin: 0; color: #6b5a3a; font-size: 0.95rem; }
 .kid-focus button { justify-self: start; }
+
+/* scene@1: the interactive scene player (Scene.tsx). The drawing sits on white, like every figure, so its colours are fixed. */
+.scene { margin: 10px 0 14px; padding: 0; max-width: 460px; }
+.scene svg { width: 100%; height: auto; display: block; background: #fff; border-radius: 14px; }
+.scene svg.scene-drag { touch-action: none; cursor: ew-resize; }
+.scene .sc-axis { stroke: #9aa5b8; stroke-width: 1; }
+.scene .sc-curve { fill: none; stroke: #1f2a37; stroke-width: 2.2; stroke-linejoin: round; }
+.scene .sc-strip { fill: #d9d3ff; stroke: #5a47d6; stroke-width: 0.6; }
+.scene .sc-fill { fill: #d9d3ff; stroke: none; }
+.scene .sc-edge { stroke: #5a47d6; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.scene .sc-accent { stroke: #5a47d6; stroke-width: 3; stroke-linecap: round; }
+.scene .sc-handle { fill: #5a47d6; stroke: #fff; stroke-width: 3; }
+.scene .sc-up { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-down { stroke: #b4532a; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-flat { stroke: #5f6b84; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-target { fill: #b4532a; stroke: #fff; stroke-width: 2; }
+.scene .sc-label { fill: #5f6b84; font-size: 12px; }
+.scene-controls label { display: flex; align-items: center; gap: 12px; margin: 8px 0 0; font-weight: 600; }
+.scene-controls label span { min-width: 3.2em; }
+.scene-controls input { flex: 1; min-height: 44px; accent-color: var(--brand, #6a55f0); }
+.scene-controls :focus-visible { outline: 3px solid var(--brand, #6a55f0); outline-offset: 3px; }
+.scene-readout { margin: 6px 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
+.scene-goal { margin: 6px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft, #f1eeff); color: var(--brand-text, #5545c4); }
+.scene-goal.done { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
+@media print { .scene-controls { display: none; } }

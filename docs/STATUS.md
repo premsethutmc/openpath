@@ -13,6 +13,14 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - `main` holds the whole maths line. Branch from `main`; short branches, merged back within a day or two.
 - Still open: #121 (dot, method alignment; already inside `main`), #123 (dot, TN Grades 1–3 ingestion; do not touch).
 
+## Scene engine (2026-11-16, branch `feat/scene-engine`, draft PR, not merged)
+- scene@1 / scenes@1 (`docs/product/SCENE_ENGINE.md`): interactive teaching pictures as data. One deterministic engine
+  (`packages/learning/src/scene.ts`), one player (`frontend/src/year/Scene.tsx`), one builder per question family
+  (`scenes.ts`; families untouched). Kinds: strips, slope, accumulate, line. No model or network call for a learner.
+- Shown in a lesson section that has no picture and after a wrong answer where the solution is shown. Families: `cint`,
+  `pint`, `dpow` (1,290 released questions, each checked against the family's verified answer). Not evidence of a skill.
+- Open: a physical Android check; a `polygon` kind for geometry; curves beyond polynomials; a drag answer that counts.
+
 ## This milestone (2026-11-11, CISCE / ICSE Class 5, branch `feat/icse-grade5`, draft PR, not merged)
 - icse@1 (`docs/milestones/ICSE_GRADE5.md`): a third board for Grade 5 only, `boardFor("icse", 5)`, from
   `content/learning/syllabus/icse-g05.json` through the same builder. Existing skills only; nothing written for it.
