@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
 import { evaluate, numericValue, parse, rhs } from "../../../packages/learning/src/answer-types";
-import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
+import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, grip, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
 import { SCENE_FAMILIES, sceneAnswer, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
 
 const strips: Scene = { type: "scene", kind: "strips", poly: [0.5, 0, 0.25], from: 0, to: 4, prompt: "Add strips.", success: "Done.", goal: { measure: "gap", below: 0.1 } };
@@ -132,6 +132,29 @@ test("the strips line says what is missing, not the true area", () => {
   const s = { ...strips, poly: [0, 0, 5], from: 1, to: 3 } as Scene; // true area 130/3 = 43.33
   for (const st of states(s)) assert.ok(!readout(s, st).includes("43.33"), readout(s, st));
   assert.match(readout(s, initial(s)), /^4 strips add up to 33\.75 · missing 22\.12%$/);
+});
+
+test("the transform: two arrows are a matrix; the area number is its determinant", () => {
+  const wide: Scene = { type: "scene", kind: "transform", target: [2, 0, 0, 1], prompt: "Twice as wide.", success: "Done.", goal: { measure: "miss", equals: 0 } };
+  const flat: Scene = { type: "scene", kind: "transform", prompt: "Squash it.", success: "Flat.", goal: { measure: "det", equals: 0 } };
+  for (const s of [wide, flat]) { assert.deepEqual(check(s), []); assert.equal(met(s, initial(s)), false); assert.ok(draggable(s)); assert.ok(describe(s).length > 20); }
+  assert.deepEqual(initial(wide), { a: 1, b: 0, c: 0, d: 1 });
+  assert.equal(measures(wide, { a: 2, b: 1, c: -1, d: 3 }).det, 7);
+  assert.equal(readout(wide, { a: 2, b: 0, c: 0, d: 1 }), "Arrows land at (2, 0) and (0, 1) · area × 2");
+  // box point (222, 110) is model point (2, 0): the first arrow's tip is nearer and follows; the second does not move
+  assert.deepEqual(pointer(wide, initial(wide), 222, 110), { a: 2, b: 0, c: 0, d: 1 });
+  assert.deepEqual(pointer(wide, initial(wide), 170, 58), { a: 1, b: 0, c: 0, d: 2 });
+  assert.deepEqual(pointer(wide, initial(wide), 20, 210), initial(wide), "a touch far from both arrows moves nothing");
+  // a held arrow can be dragged right across the other one without letting go of it
+  assert.equal(grip(wide, initial(wide), 170, 84), 1);
+  assert.deepEqual(pointer(wide, initial(wide), 196, 110, 1), { a: 1, b: 0, c: 1, d: 0 });
+  assert.deepEqual(pointer(wide, { a: 1, b: 0, c: 1, d: 0 }, 222, 110, 1), { a: 1, b: 0, c: 2, d: 0 });
+  assert.equal(grip(wide, initial(wide), 20, 210), -1);
+  for (const st of [{ a: -3, b: 3, c: 3, d: -3 }, { a: 0, b: 0, c: 0, d: 0 }]) assert.ok(!JSON.stringify(draw(wide, st)).includes("null"));
+  assert.ok(check({ ...wide, target: [9, 0, 0, 1] }).length > 0);
+  assert.ok(check({ ...flat, goal: { measure: "miss", equals: 0 } }).length > 0, "miss needs a target");
+  assert.ok(check({ ...wide, target: [1, 0, 0, 1] }).length > 0, "already there at the start");
+  assert.ok(check({ ...flat, goal: { measure: "det", equals: 99 } }).length > 0);
 });
 
 test("malformed or impossible scenes are refused", () => {

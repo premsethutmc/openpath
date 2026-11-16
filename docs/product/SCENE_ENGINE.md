@@ -1,4 +1,4 @@
-# Interactive scenes (scene@2, scenes@2)
+# Interactive scenes (scene@3, scenes@2)
 
 The owner's direction (16 Nov 2026): maths should be learned by moving things, "not like another maths book"; it must be an
 engine, not hundreds of hand-built screens; and it must be deterministic for learners, with no AI call per use.
@@ -16,7 +16,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
   every question of that family gets its own picture with nothing written for it. The families are not changed (fingerprints,
   pools and certification are as they were).
 
-## Kinds (scene@2)
+## Kinds (scene@3)
 
 | Kind | The learner | Measures |
 |---|---|---|
@@ -25,6 +25,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
 | `accumulate` | drags the right edge of a shaded area (area below the axis is taken away) | `x`, `height`, `total`, `width` |
 | `line` | sets slope and start of a straight line, or (with `through`) turns a line about a fixed point | `m`, `c`, `miss` |
 | `triangle` | sets two angles by slider or by dragging the top corner; the third follows | `a`, `b`, `c`, `sum`, `miss` |
+| `transform` | drags two arrows to whole-number points; they are the columns of a 2 × 2 matrix, and a shape is moved by it | `a`, `b`, `c`, `d`, `det`, `miss` |
 
 A curve is a polynomial (`poly`, its coefficients) or a sum of terms (`terms`: powers, sine, cosine, exponential, natural
 logarithm). Slopes and areas are exact in both, from the derivative and the antiderivative in closed form, not estimated.

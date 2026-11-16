@@ -1,5 +1,5 @@
 /**
- * scene@2: the one player for every interactive scene (packages/learning/src/scene.ts).
+ * scene@3: the one player for every interactive scene (packages/learning/src/scene.ts).
  *
  * The player holds no mathematics. It asks the engine what to draw for the current state, passes touches and slider moves
  * back to the engine, and shows the engine's readout and whether the goal is reached. A scene the engine finds a problem
@@ -8,7 +8,7 @@
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
 import { useMemo, useRef, useState, type JSX, type PointerEvent } from "react";
-import { SCENE_BOX, check, controls, describe, draw, draggable as follows, initial, met, pointer, readout, set, type Scene, type SceneState, type Shape } from "../../../packages/learning/src/scene";
+import { SCENE_BOX, check, controls, describe, draw, draggable as follows, grip, initial, met, pointer, readout, set, type Scene, type SceneState, type Shape } from "../../../packages/learning/src/scene";
 
 function shape(s: Shape, i: number): JSX.Element {
   const c = `sc-${s.role}`;
@@ -19,42 +19,44 @@ function shape(s: Shape, i: number): JSX.Element {
   return <text key={i} className={c} x={s.x} y={s.y} textAnchor="middle">{s.s}</text>;
 }
 
-export function ScenePlayer({ scene }: { scene: Scene }) {
+export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: () => void }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
   const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
   const [reached, setReached] = useState(false);
   const dragging = useRef(false);
+  const hold = useRef(0);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const cs = controls(scene);
   const draggable = follows(scene);
-  const apply = (next: SceneState) => { setState(next); if (met(scene, next)) setReached(true); };
+  const apply = (next: SceneState) => { setState(next); if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); } };
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
-    apply(pointer(scene, state, ((e.clientX - r.left) * SCENE_BOX.w) / r.width, ((e.clientY - r.top) * SCENE_BOX.h) / r.height));
+    return [((e.clientX - r.left) * SCENE_BOX.w) / r.width, ((e.clientY - r.top) * SCENE_BOX.h) / r.height] as const;
   };
+  const move = (e: PointerEvent<SVGSVGElement>) => { const [x, y] = at(e); apply(pointer(scene, state, x, y, hold.current)); };
   const done = reached || met(scene, state);
+  // every control is also a native slider (keyboard and switch access); more than two are folded away under the picture
+  const sliders = cs.map((c) => (
+    <label key={c.key}>
+      <span>{c.label}</span>
+      <input type="range" min={c.min} max={c.max} step={c.step} value={state[c.key]} onChange={(e) => apply(set(scene, state, c.key, Number(e.target.value)))} />
+    </label>
+  ));
   return (
     <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"}>
       <svg
         viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`}
         aria-hidden="true"
         className={draggable ? "scene-drag" : undefined}
-        onPointerDown={draggable ? (e) => { dragging.current = true; e.currentTarget.setPointerCapture?.(e.pointerId); at(e); } : undefined}
-        onPointerMove={draggable ? (e) => { if (dragging.current) at(e); } : undefined}
+        onPointerDown={draggable ? (e) => { const [x, y] = at(e); hold.current = grip(scene, state, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
+        onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? () => { dragging.current = false; } : undefined}
         onPointerCancel={draggable ? () => { dragging.current = false; } : undefined}
       >
         {draw(scene, state).map(shape)}
       </svg>
-      <div className="scene-controls">
-        {cs.map((c) => (
-          <label key={c.key}>
-            <span>{c.label}</span>
-            <input type="range" min={c.min} max={c.max} step={c.step} value={state[c.key]} onChange={(e) => apply(set(scene, state, c.key, Number(e.target.value)))} />
-          </label>
-        ))}
-      </div>
+      {cs.length > 2 ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>
       <p className={`scene-goal${done ? " done" : ""}`} role="status">{done ? scene.success : scene.prompt}</p>
     </figure>
