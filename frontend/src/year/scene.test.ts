@@ -213,10 +213,25 @@ test("the fraction bar, the number line and the rows of counters", () => {
   assert.deepEqual(pointer(jump, initial(jump), at.cx, at.cy), { x: -2 });
   assert.deepEqual(measures(jump, { x: -2 }), { x: -2, moved: -5 });
   assert.equal(readout(near, { x: 350 }), "At 350");
-  assert.deepEqual(measures(dots, { c: 4 }), { rows: 3, cols: 4, count: 12, off: 0 });
+  assert.deepEqual(measures(dots, { c: 4 }), { rows: 3, cols: 4, count: 12, off: 0, left: 0 });
   assert.equal(readout(dots, { c: 5 }), "3 rows of 5 = 15 · 3 more than 12"); assert.equal(readout(free, { r: 1, c: 13 }), "1 row of 13 = 13");
   assert.deepEqual(pointer(free, initial(free), 37 + 3 * 19, 24 + 1 * 19), { r: 2, c: 4 });
   for (const bad of [{ ...bar, target: [5, 3] }, { ...hundred, pieces: 50 }, { ...one, pieces: 4 }, { ...jump, start: 3.5 }, { ...jump, step: 0 }, { ...near, from: 400 }, { ...dots, total: 1 }, { ...dots, rows: 11 }]) assert.ok(check(bad).length > 0, JSON.stringify(bad).slice(0, 80));
+});
+
+test("the commas: each follows the finger; only the asked grouping finishes", () => {
+  const s: Scene = { type: "scene", kind: "commas", digits: "211000000", style: "international", prompt: "Group in threes.", success: "211 million.", goal: { measure: "miss", equals: 0 } };
+  assert.deepEqual(check(s), []); assert.ok(draggable(s) && !met(s, initial(s)));
+  assert.deepEqual(controls(s).map((c) => [c.key, c.min, c.max, c.start]), [["a", 1, 8, 2], ["b", 1, 8, 1]]);
+  assert.equal(measures(s, { a: 3, b: 6 }).miss, 0); assert.equal(measures(s, { a: 3, b: 3 }).miss, 1); assert.equal(measures(s, { a: 1, b: 2 }).miss, 2);
+  for (const st of states(s)) { const shapes = draw(s, st); assert.ok(!/NaN|undefined|null/.test(JSON.stringify(shapes))); assert.equal(shapes.filter((x) => x.role === "digit").length, 9); assert.equal(shapes.filter((x) => x.role === "comma").length, 2); for (const sh of shapes) if (sh.t === "text" || sh.t === "circle") { const x = sh.t === "text" ? sh.x : sh.cx; assert.ok(x > 10 && x < 330); } }
+  // take hold of the comma nearer the finger and drop it between the third and fourth digits from the right
+  const handles = (st: Record<string, number>) => draw(s, st).filter((x) => x.t === "circle") as { cx: number; cy: number }[];
+  const [ha, hb] = handles(initial(s)), goal = handles({ a: 3, b: 6 });
+  assert.equal(grip(s, initial(s), ha.cx, ha.cy), 0); assert.equal(grip(s, initial(s), hb.cx - 20, hb.cy), 0, "the nearer comma is taken");
+  const moved = pointer(s, initial(s), goal[0].cx, goal[0].cy, 0);
+  assert.equal(moved.a, 3); assert.ok(met(s, pointer(s, moved, goal[1].cx, goal[1].cy, 1)));
+  assert.ok(check({ ...s, digits: "012345" }).length > 0 && check({ ...s, digits: "123" }).length > 0 && check({ ...s, style: "roman" }).length > 0 && check({ ...s, digits: "1234567890", style: "indian" }).length > 0);
 });
 
 test("malformed or impossible scenes are refused", () => {

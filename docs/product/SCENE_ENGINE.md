@@ -1,4 +1,4 @@
-# Interactive scenes (scene@5, scenes@2)
+# Interactive scenes (scene@6, scenes@2)
 
 The owner's direction (16 Nov 2026): maths should be learned by moving things, "not like another maths book"; it must be an
 engine, not hundreds of hand-built screens; and it must be deterministic for learners, with no AI call per use.
@@ -16,7 +16,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
   every question of that family gets its own picture with nothing written for it. The families are not changed (fingerprints,
   pools and certification are as they were).
 
-## Kinds (scene@5)
+## Kinds (scene@6)
 
 | Kind | The learner | Measures |
 |---|---|---|
@@ -30,7 +30,8 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
 | `join` | two pieces of a graph meet at one x: slides the right piece up or down (`shift`), or moves the single point at the join (`point`) | `k`, `left`, `right`, `point`, `gap`, `miss` |
 | `fraction` | cuts a bar into equal pieces and shades some (a hundred-square for 100 pieces); a second bar can show a fraction to match or beat | `n`, `k`, `miss`, `ahead`, `behind`, `other`, `exact` |
 | `numberline` | slides a point along a number line; the number can be hidden, the distances to the nearest tens shown, or the move drawn as a jump | `x`, `moved` |
-| `array` | sets counters out in equal rows | `rows`, `cols`, `count`, `off` |
+| `array` | sets counters out in equal rows; with `share`, a total is shared out and what is left over waits underneath | `rows`, `cols`, `count`, `off`, `left` |
+| `commas` | moves the commas between the digits of a whole number, the Indian or the international way | `a`, `b`, `c`, `miss` |
 
 A curve is a polynomial (`poly`, its coefficients) or a sum of terms (`terms`: powers, sine, cosine, exponential, natural
 logarithm). Slopes and areas are exact in both, from the derivative and the antiderivative in closed form, not estimated.

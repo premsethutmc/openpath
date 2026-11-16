@@ -14,7 +14,7 @@ import { taughtExposureKeys } from "../../../packages/learning/src/teaching-expo
 import { exposureKey } from "../../../packages/learning/src/families";
 
 test("every recipe passes its checks, belongs to a real module and is offered", () => {
-  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.measurement.area-squares", "MATH.measurement.rectangle-perimeter", "MATH.number.decimal-tenths", "MATH.number.equivalent-fractions", "MATH.number.fraction-add", "MATH.number.fraction-comparison", "MATH.number.fraction-models", "MATH.number.integer-add", "MATH.number.integers", "MATH.number.number-line", "MATH.number.percent-intro", "MATH.number.primes", "MATH.number.rounding"]);
+  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.measurement.area-squares", "MATH.measurement.money-decimals", "MATH.measurement.rectangle-perimeter", "MATH.number.decimal-operations", "MATH.number.decimal-tenths", "MATH.number.division-remainders", "MATH.number.equivalent-fractions", "MATH.number.fraction-add", "MATH.number.fraction-comparison", "MATH.number.fraction-models", "MATH.number.fraction-of-collection", "MATH.number.indian-international-numeration", "MATH.number.integer-add", "MATH.number.integers", "MATH.number.large-numbers", "MATH.number.multiply-divide-powers-of-ten", "MATH.number.number-line", "MATH.number.percent-intro", "MATH.number.percentage", "MATH.number.primes", "MATH.number.rounding", "MATH.reasoning.estimate-check"]);
   assert.equal(new Set(ALL_RECIPES.map((r) => r.competency)).size, ALL_RECIPES.length, "one recipe per competency");
   for (const r of ALL_RECIPES) {
     assert.deepEqual(checkRecipe(r), [], r.competency);
@@ -178,4 +178,39 @@ test("the Class 5 lessons: their missions give the numbers their words state", (
   const [f14, f18, sq3] = ms("MATH.measurement.rectangle-perimeter");
   assert.ok(met(f14, { w: 3, h: 4 }) && met(f14, { w: 6, h: 1 }) && !met(f14, { w: 4, h: 4 }) && met(f18, { w: 5, h: 4 }));
   assert.deepEqual([...states(sq3)].filter((st) => met(sq3, st)), [{ w: 3, h: 3 }]);
+});
+
+test("the second Class 5 batch: sharing out, leftovers, estimates and money", () => {
+  const ms = (c: string) => recipeFor(c)!.missions;
+  const [third, quarter, fifth] = ms("MATH.number.fraction-of-collection");
+  assert.ok(met(third, { c: 4 }) && !met(third, { c: 3 }) && met(quarter, { c: 5 }) && met(fifth, { c: 3 }));
+  const [m39, m23, m24] = ms("MATH.number.division-remainders");
+  // finished only when the rows are as full as they can be: 7 each with 4 over, never 6 each with 9 over
+  assert.deepEqual([...states(m39)].filter((st) => met(m39, st)), [{ c: 7 }]);
+  assert.deepEqual([...states(m23)].filter((st) => met(m23, st)), [{ c: 5 }]);
+  assert.deepEqual([...states(m24)].filter((st) => met(m24, st)), [{ c: 4 }]);
+  assert.equal(measures(m39, { c: 7 }).left, 4); assert.equal(measures(m24, { c: 4 }).left, 0);
+  assert.equal(readout(m39, { c: 7 }), "5 rows of 7 = 35 · 4 left over"); assert.equal(readout(m39, { c: 8 }), "5 rows of 8 = 40 · 1 too many");
+  const [e38, e87] = ms("MATH.reasoning.estimate-check");
+  assert.ok(met(e38, { x: 40 }) && !met(e38, { x: 30 }) && met(e87, { x: 90 }));
+  const [ten, quarter100] = ms("MATH.number.percentage");
+  assert.ok(met(ten, { k: 10 }) && met(quarter100, { k: 25 }));
+  const [fifty, five] = ms("MATH.measurement.money-decimals");
+  assert.ok(met(fifty, { k: 50 }) && met(five, { k: 5 }) && !met(five, { k: 50 }));
+  // the two lessons with nothing to explore are methods, carried by their worked steps
+  for (const c of ["MATH.number.decimal-operations", "MATH.number.multiply-divide-powers-of-ten"]) { const r = recipeFor(c)!; assert.equal(r.type, "method"); assert.equal(r.missions.length, 0); assert.ok(workedFor(c)); }
+  assert.equal(workedFor("MATH.number.decimal-operations")!.answer, "17.58", "the story's own sum is the one worked");
+});
+
+test("moving the commas: the same digits read the Indian and the international way", () => {
+  const [intl, indian, regroup] = recipeFor("MATH.number.indian-international-numeration")!.missions;
+  assert.ok(!met(intl, initial(intl)) && met(intl, { a: 3, b: 6 }) && met(intl, { a: 6, b: 3 }) && !met(intl, { a: 3, b: 5 }));
+  assert.equal(readout(intl, { a: 3, b: 6 }), "211,000,000");
+  assert.ok(met(indian, { a: 3, b: 5, c: 7 }) && !met(indian, { a: 3, b: 6, c: 7 }) && !met(indian, { a: 3, b: 5, c: 5 }));
+  assert.equal(readout(indian, { a: 3, b: 5, c: 7 }), "21,10,00,000");
+  assert.equal(readout(regroup, { a: 3, b: 6 }), "45,000,000");
+  const [price, lakhs, crore] = recipeFor("MATH.number.large-numbers")!.missions;
+  assert.equal(readout(price, { a: 3, b: 5 }), "7,59,403"); assert.ok(met(price, { a: 3, b: 5 }) && !met(price, { a: 3, b: 4 }));
+  assert.equal(readout(lakhs, { a: 3, b: 5 }), "12,50,000"); assert.equal(readout(crore, { a: 3, b: 5, c: 7 }), "3,04,05,060");
+  for (const m of [intl, indian, price, crore]) for (const st of states(m)) assert.equal(readout(m, st).replaceAll(",", ""), (m as { digits: string }).digits, "the digits never change");
 });

@@ -9,6 +9,7 @@ import type { Scene } from "./scene";
 const frac = (target: [number, number], rest: Omit<Extract<Scene, { kind: "fraction" }>, "type" | "kind" | "target">): Scene => ({ type: "scene", kind: "fraction", target, ...rest });
 const line = (rest: Omit<Extract<Scene, { kind: "numberline" }>, "type" | "kind">): Scene => ({ type: "scene", kind: "numberline", ...rest });
 const rows = (total: number, rest: Omit<Extract<Scene, { kind: "array" }>, "type" | "kind" | "total">): Scene => ({ type: "scene", kind: "array", total, ...rest });
+const commas = (digits: string, style: "indian" | "international", rest: Omit<Extract<Scene, { kind: "commas" }>, "type" | "kind" | "digits" | "style">): Scene => ({ type: "scene", kind: "commas", digits, style, ...rest });
 const rect = (rest: Omit<Extract<Scene, { kind: "rectangle" }>, "type" | "kind">): Scene => ({ type: "scene", kind: "rectangle", ...rest });
 
 export const CLASS5_RECIPES: Recipe[] = [
@@ -425,6 +426,302 @@ export const CLASS5_RECIPES: Recipe[] = [
         { label: "26 cm", reply: "Yes. 2 × (8 + 5) = 2 × 13.", right: true },
         { label: "13 cm", reply: "That is one length and one breadth: halfway round. Double it." },
         { label: "40 cm", reply: "8 × 5 counts the squares inside. Around the edge is 2 × (8 + 5)." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.fraction-of-collection",
+    type: "idea",
+    title: "A share of many",
+    question: [
+      "Amma makes 12 laddoos. She says a third of them are for the neighbours.",
+      "How many laddoos go next door?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "3", reply: "3 is how many equal groups there are, not how many are in one group. Let's share them out." },
+        { label: "4", reply: "Good instinct. Let's share them out and see.", right: true },
+        { label: "9", reply: "Taking away 3 gives 9, but a third means one of three equal groups. Let's share them out." },
+      ],
+    },
+    missions: [
+      rows(12, { rows: 3, prompt: "Share the 12 laddoos into 3 equal rows.", success: "Each row has 4. One row out of three is a third of 12: 4.", goal: { measure: "off", equals: 0 } }),
+      rows(20, { rows: 4, prompt: "Now share 20 into 4 equal rows.", success: "Each row has 5, so a quarter of 20 is 5.", goal: { measure: "off", equals: 0 } }),
+      rows(15, { rows: 5, prompt: "Share 15 into 5 equal rows.", success: "Each row has 3. One fifth of 15 is 3, so two fifths is two rows: 6.", goal: { measure: "off", equals: 0 } }),
+    ],
+    names: ["divide"],
+    name: [
+      "The bottom number says how many equal groups to make. So to find 1/3 of a number, divide it by 3: 1/3 of 12 = 12 ÷ 3 = 4.",
+      "For more than one part, divide first, then multiply by the top number: 2/5 of 15 = (15 ÷ 5) × 2 = 6.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "What is 3/4 of 20?",
+      choices: [
+        { label: "15", reply: "Yes. A quarter of 20 is 5, and three quarters is 3 × 5.", right: true },
+        { label: "5", reply: "That is one quarter. Three quarters is three of those groups." },
+        { label: "60", reply: "That multiplies by 3 only. Share 20 into 4 equal groups first, then take 3 of them." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.division-remainders",
+    type: "idea",
+    title: "When it does not share exactly",
+    question: [
+      "Ravi has 39 marbles to share equally among 5 friends. He gives out as many as he can, so that everyone has the same number.",
+      "How many marbles are still in his hand?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "None", reply: "That would need a number of marbles that 5 shares exactly, like 35 or 40. Let's share out 39." },
+        { label: "4", reply: "Good instinct. Let's share them out and see.", right: true },
+        { label: "7", reply: "7 is how many each friend gets. Let's see how many stay in his hand." },
+      ],
+    },
+    missions: [
+      rows(39, { rows: 5, share: true, prompt: "Each row is one friend. Give every friend the same number, as many as you can.", success: "5 rows of 7 use 35 marbles. The 4 left are not enough for another round.", goal: { measure: "left", below: 5 } }),
+      rows(23, { rows: 4, share: true, prompt: "Now share 23 among 4 friends, as many each as you can.", success: "4 rows of 5 use 20, and 3 are left over.", goal: { measure: "left", below: 4 } }),
+      rows(24, { rows: 6, share: true, prompt: "Share 24 among 6 friends.", success: "6 rows of 4 use all 24. This time nothing is left over.", goal: { measure: "left", below: 6 } }),
+    ],
+    names: ["remainder", "quotient"],
+    name: [
+      "What is left over after sharing equally is called the remainder. 39 ÷ 5 = 7 remainder 4, because 5 × 7 = 35 and 39 − 35 = 4. The 7 is called the quotient.",
+      "The remainder is always smaller than the number you are dividing by. If it is not, there is enough for another round.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "47 ÷ 6 = 7 remainder ?",
+      choices: [
+        { label: "5", reply: "Yes. 6 × 7 = 42, and 47 − 42 = 5.", right: true },
+        { label: "1", reply: "6 × 7 is 42, not 46. Take 42 away from 47." },
+        { label: "6", reply: "With 6 left over there would be enough for another round. 6 × 7 = 42, and 47 − 42 = 5." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.reasoning.estimate-check",
+    type: "method",
+    title: "About how much?",
+    question: [
+      "A child's ticket costs ₹38 and an adult's ticket costs ₹87. Asha has ₹120 and needs one of each. The queue is moving and she has no time to add exactly.",
+      "Is ₹120 enough?",
+    ],
+    predict: {
+      ask: "What do you think?",
+      choices: [
+        { label: "Yes, it is enough", reply: "Let's find a quick way to be sure." },
+        { label: "No, it is not enough", reply: "Good instinct. Let's find a quick way to be sure.", right: true },
+      ],
+    },
+    missions: [
+      line({ from: 30, to: 40, step: 1, start: 38, near: 10, prompt: "38 sits between two tens. Move the point to the nearer one.", success: "38 is only 2 away from 40.", goal: { measure: "x", equals: 40 } }),
+      line({ from: 80, to: 90, step: 1, start: 87, near: 10, prompt: "Now 87. Move the point to the nearer ten.", success: "87 is 3 away from 90. So the two tickets cost about 40 + 90 = 130.", goal: { measure: "x", equals: 90 } }),
+    ],
+    names: ["estimate"],
+    name: [
+      "A quick answer made with easy numbers is called an estimate. Round each number to the nearest ten (or hundred), then add or subtract the round numbers: 38 + 87 is about 40 + 90 = 130.",
+      "An estimate also checks an exact answer. If you worked out 38 + 87 = 215, the estimate of 130 tells you something went wrong.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "Estimate 62 + 29 by rounding each number to the nearest ten.",
+      choices: [
+        { label: "90", reply: "Yes. 60 + 30 = 90.", right: true },
+        { label: "80", reply: "62 goes to 60, but 29 is nearer to 30 than to 20." },
+        { label: "100", reply: "62 is nearer to 60 than to 70. 60 + 30 = 90." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.percentage",
+    type: "method",
+    title: "A percentage of an amount",
+    question: [
+      "A shop takes 10% off everything today. A cricket bat costs ₹200.",
+      "How many rupees come off the price of the bat?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "₹10", reply: "10% means 10 out of every 100, and the bat costs two hundreds. Let's see it on a hundred-square." },
+        { label: "₹20", reply: "Good instinct. Let's see it on a hundred-square.", right: true },
+        { label: "₹190", reply: "That takes ₹10 off and gives the new price. The question is how much comes off. Let's see it on a hundred-square." },
+      ],
+    },
+    missions: [
+      frac([10, 100], { pieces: 100, prompt: "The whole square is the price, ₹200. Shade 10% of it.", success: "10 of the 100 squares. Each small square is worth ₹2, so 10 squares are ₹20.", goal: { measure: "miss", equals: 0 } }),
+      frac([25, 100], { pieces: 100, prompt: "Now the whole square is ₹400. Shade 25% of it.", success: "25 squares. Each small square is worth ₹4, so 25% of ₹400 is ₹100.", goal: { measure: "miss", equals: 0 } }),
+    ],
+    names: ["one per cent"],
+    name: [
+      "First find one per cent: divide the amount by 100. Then multiply by the number of per cent. 10% of 200 = (200 ÷ 100) × 10 = 20.",
+      "Some are worth knowing by heart: 50% is a half, 25% is a quarter and 10% is a tenth.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "What is 30% of 50?",
+      choices: [
+        { label: "15", reply: "Yes. 1% of 50 is 0.5, and 30 of those make 15.", right: true },
+        { label: "30", reply: "30% of 100 is 30. Here the amount is 50, so it is half of that." },
+        { label: "1500", reply: "That multiplies 30 by 50 but never divides by 100." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.decimal-operations",
+    type: "method",
+    title: "Line up the point",
+    question: [
+      "Ravi buys a pen for ₹15.20 and an eraser for ₹2.38. He writes 15.2 with 2.38 under it, their last digits in line, and adds.",
+      "He gets ₹3.90. Is he right?",
+    ],
+    predict: {
+      ask: "What do you think?",
+      choices: [
+        { label: "Yes", reply: "₹3.90 is less than the pen alone costs. Something went wrong with where the digits sit." },
+        { label: "No: it must be more than ₹15", reply: "Good thinking. Let's see where the digits should sit.", right: true },
+      ],
+    },
+    missions: [],
+    names: ["decimal point"],
+    name: [
+      "Write the numbers so that each decimal point is exactly under the one above. Then tens are under tens, ones under ones and tenths under tenths.",
+      "Fill any empty place with 0 (15.2 is 15.20). Add or subtract as usual, and put the point in the answer directly under the others.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "4.5 + 1.25 = ?",
+      choices: [
+        { label: "5.75", reply: "Yes. 4.50 + 1.25, with the points in line.", right: true },
+        { label: "1.70", reply: "That lines up the last digits, so the 4 ones were added as tenths. Line up the points: 4.50 + 1.25." },
+        { label: "5.30", reply: "The ones are right. In the pieces, 0.50 + 0.25 is 0.75." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.multiply-divide-powers-of-ten",
+    type: "method",
+    title: "Times ten",
+    question: [
+      "Meena says: to multiply by 10, just write a 0 at the end. 974 × 10 = 9740.",
+      "Does her trick work for 2.5 × 10?",
+    ],
+    predict: {
+      ask: "What do you think?",
+      choices: [
+        { label: "Yes: 2.50", reply: "2.50 is the same amount as 2.5, so nothing was multiplied. Let's see what really happens." },
+        { label: "No: the answer is 25", reply: "Good thinking. Let's see what really happens to the digits.", right: true },
+      ],
+    },
+    missions: [],
+    names: ["place value"],
+    name: [
+      "Multiplying by 10 makes every digit worth ten times as much, so each digit moves one place to the left: 2.5 becomes 25 and 974 becomes 9740. Dividing by 10 moves each digit one place to the right.",
+      "For 100 the digits move two places, and for 1000 three. This is place value at work: the 0 at the end of 9740 only fills the empty ones place.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "36 ÷ 10 = ?",
+      choices: [
+        { label: "3.6", reply: "Yes. Each digit moves one place to the right.", right: true },
+        { label: "360", reply: "That is 36 × 10. Dividing makes the number smaller: the digits move to the right." },
+        { label: "0.36", reply: "That moves the digits two places, which is dividing by 100." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.measurement.money-decimals",
+    type: "fact",
+    title: "Rupees and paise",
+    names: ["paise", "paisa"],
+    name: [
+      "100 paise make 1 rupee, so 1 paisa is one hundredth of a rupee: ₹0.01. The two digits after the point are the paise.",
+      "₹3.05 is 3 rupees and 5 paise, which is 305 paise. ₹3.50 is 3 rupees and 50 paise, which is 350 paise.",
+    ],
+    missions: [
+      frac([50, 100], { pieces: 100, prompt: "The square is one rupee, and each small square is 1 paisa. Shade 50 paise.", success: "50 of 100: half a rupee, written ₹0.50.", goal: { measure: "miss", equals: 0 } }),
+      frac([5, 100], { pieces: 100, prompt: "Now shade just 5 paise.", success: "5 of 100 is written ₹0.05. (₹0.5 would be 50 paise.)", goal: { measure: "miss", equals: 0 } }),
+    ],
+    choose: {
+      kind: "try",
+      ask: "How many paise make ₹2.07?",
+      choices: [
+        { label: "207", reply: "Yes. 2 rupees are 200 paise, and 7 more.", right: true },
+        { label: "27", reply: "Each rupee is 100 paise, so 2 rupees are 200 paise. Then add the 7." },
+        { label: "270", reply: "That would be ₹2.70. The 07 after the point means 7 paise." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.indian-international-numeration",
+    type: "idea",
+    title: "Two ways to put the commas",
+    question: [
+      "A newspaper in Chennai says a film earned 21,10,00,000 rupees. A website in London says the same film earned 211,000,000 rupees.",
+      "Has one of them made a mistake?",
+    ],
+    predict: {
+      ask: "What do you think?",
+      choices: [
+        { label: "Yes, the two numbers are different", reply: "Look closely: the digits are the same, in the same order. Only the commas have moved. Let's move them ourselves." },
+        { label: "No, it is the same number", reply: "Good eye. Let's move the commas ourselves.", right: true },
+      ],
+    },
+    missions: [
+      commas("211000000", "international", { prompt: "Put the commas the way the London website does: groups of three, counting from the right.", success: "211,000,000. The group in front of the second comma counts the millions: 211 million.", goal: { measure: "miss", equals: 0 } }),
+      commas("211000000", "indian", { prompt: "Now the Chennai way: one group of three on the right, then groups of two.", success: "21,10,00,000. Reading the groups from the left: 21 crore 10 lakh.", goal: { measure: "miss", equals: 0 } }),
+      commas("45000000", "international", { prompt: "4,50,00,000 is 4 crore 50 lakh. Here are its digits: group them in threes.", success: "45,000,000 is 45 million. So 4 crore 50 lakh is 45 million.", goal: { measure: "miss", equals: 0 } }),
+    ],
+    names: ["international system", "indian system"],
+    name: [
+      "Grouping in threes is called the international system: thousands, then millions. One group of three and then twos is the Indian system: thousands, lakhs, crores.",
+      "The number itself never changes. To change from one to the other, write the same digits with the other commas and read the groups. Useful to know: 1 million = 10 lakh, and 1 crore = 10 million.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "How many millions is 3 crore?",
+      choices: [
+        { label: "30", reply: "Yes. 3,00,00,000 regrouped is 30,000,000: 30 million.", right: true },
+        { label: "3", reply: "A crore is bigger than a million: 1 crore = 10 million." },
+        { label: "300", reply: "1 crore is 10 million, not 100. So 3 crore is 30 million." },
+      ],
+    },
+  },
+  {
+    competency: "MATH.number.large-numbers",
+    type: "idea",
+    title: "Where do the commas go?",
+    question: [
+      "A scooter costs ₹759403. Ravi tries to read the price aloud and gets lost in the digits. His grandmother looks once and says: seven lakh fifty-nine thousand four hundred three.",
+      "How does she read it so quickly?",
+    ],
+    predict: {
+      ask: "What is your guess?",
+      choices: [
+        { label: "She has seen this price before", reply: "She can do it with any number. Let's find her trick." },
+        { label: "She splits the digits into small groups", reply: "Good thinking. Let's split them ourselves.", right: true },
+      ],
+    },
+    missions: [
+      commas("759403", "indian", { prompt: "Split the price the Indian way: three digits on the right, then groups of two.", success: "7,59,403. Now it reads easily: 7 lakh, 59 thousand, 403.", goal: { measure: "miss", equals: 0 } }),
+      commas("1250000", "indian", { prompt: "Split this number the same way: three on the right, then twos.", success: "12,50,000 reads as 12 lakh 50 thousand.", goal: { measure: "miss", equals: 0 } }),
+      commas("30405060", "indian", { prompt: "A bigger one. Three on the right, then twos.", success: "3,04,05,060: 3 crore, 4 lakh, 5 thousand and 60. A 0 keeps each empty place.", goal: { measure: "miss", equals: 0 } }),
+    ],
+    names: ["period"],
+    name: [
+      "Each group of digits between commas is called a period. From the right: ones (three digits), then thousands, lakhs and crores (two digits each).",
+      "To read a number, say each period with its name. To write one from words, fill every period, using 0 for any place that is not said: four lakh six thousand twenty is 4,06,020.",
+    ],
+    choose: {
+      kind: "try",
+      ask: "Write in figures: two lakh five thousand thirty.",
+      choices: [
+        { label: "2,05,030", reply: "Yes. 2 lakh, 05 thousand, and 030 in the ones.", right: true },
+        { label: "2,5,30", reply: "Every place needs a digit. The thousands need two digits (05) and the ones need three (030)." },
+        { label: "25,030", reply: "That is twenty-five thousand thirty. The 2 lakh needs its own group, and the thousands are 05." },
       ],
     },
   },
