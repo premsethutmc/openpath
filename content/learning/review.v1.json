@@ -3978,6 +3978,27 @@
    ]
   },
   {
+   "item": "family:adbarmk",
+   "kind": "family",
+   "competency": "MATH.statistics.bar-charts",
+   "family": "adbarmk",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "6793044d",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-16T04:12:06.137Z",
+     "contentHash": "6793044d",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:adbartf",
    "kind": "family",
    "competency": "MATH.statistics.bar-charts",
@@ -7993,6 +8014,27 @@
      "role": "engineer",
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "44a810ed",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:afmkang",
+   "kind": "family",
+   "competency": "MATH.geometry.angle-measure",
+   "family": "afmkang",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "c53b0326",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-16T04:12:06.137Z",
+     "contentHash": "c53b0326",
      "note": "added"
     }
    ]
@@ -38284,7 +38326,7 @@
    "competency": "MATH.geometry.angle-measure",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "0190e7fa",
+   "contentHash": "4a77b09b",
    "state": "draft",
    "history": [
     {
@@ -38317,6 +38359,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "0190e7fa",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-16T04:12:06.137Z",
+     "contentHash": "4a77b09b",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -50222,7 +50272,7 @@
    "competency": "MATH.statistics.bar-charts",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "da8686c2",
+   "contentHash": "ff9ff9d8",
    "state": "draft",
    "history": [
     {
@@ -50263,6 +50313,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "da8686c2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-16T04:12:06.137Z",
+     "contentHash": "ff9ff9d8",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
