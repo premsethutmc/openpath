@@ -32,6 +32,13 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Lesson types (2026-11-16, branch `feat/recipe-types`, draft PR, not merged)
+- shape@1: a recipe's `type` (`idea`, `method`, `fact`) decides its steps. scene@4 adds `rectangle` and `join`.
+- Three recipes added (nine in all): continuity (fact), same perimeter / different area (Class 5, idea, one thing at a
+  time), adding fractions (Class 5, method).
+- lesson-part@1: each finished part is recorded (`lesson_part` metric), so where learners leave a lesson can be read.
+- Open: recipes for the other skills; drag answers that count as evidence; a physical Android check.
+
 ## This milestone (2026-11-11, CISCE / ICSE Class 5, branch `feat/icse-grade5`, draft PR, not merged)
 - icse@1 (`docs/milestones/ICSE_GRADE5.md`): a third board for Grade 5 only, `boardFor("icse", 5)`, from
   `content/learning/syllabus/icse-g05.json` through the same builder. Existing skills only; nothing written for it.

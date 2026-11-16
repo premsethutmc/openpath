@@ -14,14 +14,17 @@ import { taughtExposureKeys } from "../../../packages/learning/src/teaching-expo
 import { exposureKey } from "../../../packages/learning/src/families";
 
 test("every recipe passes its checks, belongs to a real module and is offered", () => {
-  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties"]);
+  assert.deepEqual(ALL_RECIPES.map((r) => r.competency).sort(), ["MATH.algebra.determinants", "MATH.algebra.matrices", "MATH.calculus.continuity", "MATH.calculus.derivative-rules", "MATH.calculus.indefinite-integrals", "MATH.coordinate.straight-lines", "MATH.geometry.triangle-properties", "MATH.measurement.area-perimeter-relation", "MATH.number.fraction-add"]);
   assert.equal(new Set(ALL_RECIPES.map((r) => r.competency)).size, ALL_RECIPES.length, "one recipe per competency");
   for (const r of ALL_RECIPES) {
     assert.deepEqual(checkRecipe(r), [], r.competency);
     assert.ok(moduleFor(r.competency), `${r.competency} has a module`);
     assert.equal(recipeFor(r.competency), r);
-    assert.equal(stepsOf(r).length, 4 + r.missions.length);
-    assert.deepEqual(stepsOf(r).map((s) => s.kind).filter((k) => k !== "mission"), ["question", "predict", "name", "choose"]);
+    // shape@1: the order of the parts follows the type
+    assert.deepEqual(stepsOf(r, true).map((s) => s.kind).filter((k) => k !== "mission"), r.type === "fact" ? ["name", "solve", "choose"] : ["question", "predict", "name", "solve", "choose"]);
+    assert.equal(stepsOf(r, true).filter((s) => s.kind === "mission").length, r.missions.length);
+    if (r.type === "fact") assert.equal(stepsOf(r)[0].kind, "name", "a fact opens on its name"); else assert.ok(stepsOf(r).findIndex((s) => s.kind === "name") > stepsOf(r).findIndex((s) => s.kind === "mission" || s.kind === "predict"), "an idea is found before it is named");
+    if (r.type === "method") assert.ok(workedFor(r.competency), "a method lesson has worked steps");
     for (const m of r.missions) { assert.deepEqual(check(m), []); assert.equal(met(m, initial(m)), false); assert.ok([...states(m, 40000)].some((st) => met(m, st))); }
   }
   assert.equal(recipeFor("MATH.no.such.skill"), null);
@@ -62,7 +65,6 @@ test("how to solve it: every lesson shows its own worked example, with the famil
     const id = m.chapter.find((s) => s.instance)!.instance!, p = problemOf(id)!;
     assert.equal(w!.answer, p.answer);
     assert.equal(p.competency, r.competency, "the example is a question of this skill");
-    assert.deepEqual(stepsOf(r, true).map((s) => s.kind).filter((k) => k !== "mission"), ["question", "predict", "name", "solve", "choose"]);
     // once the teaching of any lesson of the skill is recorded, the example counts as shown (never as unaided evidence)
     const records = { teaching: [{ at: "2026-01-01T00:00:00Z", rule: "teach-first@1", strategy: m.strategies[0].id, competency: r.competency, session: "s" }] } as unknown as Parameters<typeof taughtExposureKeys>[0];
     assert.ok(taughtExposureKeys(records).has(exposureKey(id)), `${r.competency}: the example is counted as shown`);
@@ -80,6 +82,21 @@ test("layout@1: one thing at a time for Classes 1 to 5, the page that grows from
   }
 });
 
+test("the fact, the Class 5 idea and the method: their missions give the numbers their words state", () => {
+  const [jump, hole] = recipeFor("MATH.calculus.continuity")!.missions;
+  assert.ok(met(jump, { k: 2 }) && !met(jump, { k: 1.5 }) && Math.abs(measures(jump, { k: 2 }).left - 3) < 1e-9);
+  assert.ok(met(hole, { k: 3 }) && !met(hole, { k: 2.5 }) && measures(hole, { k: 1 }).gap < 1e-9, "both sides already agree; only the point is off");
+  const [thin, wider, best] = recipeFor("MATH.measurement.area-perimeter-relation")!.missions;
+  assert.ok(met(thin, { w: 8, h: 2 }) && met(thin, { w: 2, h: 8 }) && !met(thin, { w: 4, h: 4 }));
+  assert.ok(met(wider, { w: 6, h: 4 }) && !met(wider, { w: 8, h: 3 }), "area 24 with another perimeter does not count");
+  assert.ok(met(best, { w: 5, h: 5 }) && !met(best, { w: 6, h: 4 }) && !met(best, { w: 6, h: 6 }), "the most room with exactly 20 of fence");
+  assert.equal(measures(best, { w: 5, h: 5 }).area, 25);
+  assert.equal(readout(thin, { w: 8, h: 2 }), "8 by 2 · fence 20 · room 16");
+  const m = recipeFor("MATH.number.fraction-add")!;
+  assert.equal(m.missions.length, 0);
+  assert.deepEqual(stepsOf(m, true).map((s) => s.kind), ["question", "predict", "name", "solve", "choose"]);
+});
+
 test("a recipe opens only a skill whose opening lesson can record its teaching", () => {
   // the recipe rides inside the skill's opening lesson, which records the teaching when it ends; a skill with no eligible
   // lesson has no such record, so its answers would wrongly count as unaided
@@ -90,8 +107,15 @@ test("a recipe opens only a skill whose opening lesson can record its teaching",
 });
 
 test("malformed recipes are refused", () => {
-  const good = ALL_RECIPES[0];
+  const good = ALL_RECIPES[0] as Required<Recipe>;
+  const fact = ALL_RECIPES.find((r) => r.type === "fact")!, method = ALL_RECIPES.find((r) => r.type === "method")!;
+  assert.deepEqual(new Set(ALL_RECIPES.map((r) => r.type)), new Set(["idea", "method", "fact"]));
   const bad: [string, unknown][] = [
+    ["an idea with no guess", { ...good, predict: undefined }],
+    ["an idea with no missions", { ...good, missions: [] }],
+    ["a fact with a question", { ...fact, question: ["Why?"] }],
+    ["a fact with no mission", { ...fact, missions: [] }],
+    ["a method with five missions", { ...method, missions: Array(5).fill(good.missions[0]) }],
     ["no question", { ...good, question: [] }],
     ["a long paragraph", { ...good, name: ["x".repeat(221)] }],
     ["no right guess", { ...good, predict: { ...good.predict, choices: good.predict.choices.map(({ right: _r, ...c }) => c) } }],

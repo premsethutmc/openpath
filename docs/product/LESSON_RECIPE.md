@@ -37,9 +37,25 @@ How a recipe is laid out is decided by rule (`layoutFor`, in the player: `fronte
 - **One thing at a time** (Classes 1 to 5). One part on the screen, with Next. A young child loses their place on a page
   that scrolls.
 
-Each recipe states its `type` (`idea`, `method`, `fact`). All six are ideas today; a method (many worked steps, little to
-explore) and a fact (one short screen, then practice) will take their own shapes from the same rule when the first of each
-is written.
+## Shape by type (shape@1)
+
+Each recipe states its `type`, and the type decides which steps it has (`stepsOf`, checked by `checkRecipe`):
+
+| Type | For | Steps |
+|---|---|---|
+| `idea` | something to discover | question, guess, missions, name, how to solve it, try / think |
+| `method` | a way of working; little to explore | question, guess (optional), missions (optional, may be none), name, how to solve it, try |
+| `fact` | a definition or convention | name it first, then missions that show it, how to solve it, try. No question or guess: there is nothing to guess about a definition |
+
+Nine recipes: the first six are ideas; continuity (Class 12) is a fact; same perimeter / different area (Class 5) is an
+idea and is the first recipe for Classes 1 to 5; adding fractions with different denominators (Class 5) is a method.
+
+## Where a learner leaves (lesson-part@1)
+
+When a part is finished, the player posts one `lesson_part` metric to the existing telemetry endpoint
+(`/api/telemetry/`, `ClientMetric`): the recipe, the part, and how long the part took. It holds no answer and no text, is
+not evidence, and failing to send it changes nothing for the learner. The last part recorded for a learner who did not
+finish is where they left.
 
 ## Where it appears
 
