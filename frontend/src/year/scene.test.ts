@@ -234,6 +234,31 @@ test("the commas: each follows the finger; only the asked grouping finishes", ()
   assert.ok(check({ ...s, digits: "012345" }).length > 0 && check({ ...s, digits: "123" }).length > 0 && check({ ...s, style: "roman" }).length > 0 && check({ ...s, digits: "1234567890", style: "indian" }).length > 0);
 });
 
+test("the cards: dragged into order, smallest on the left", () => {
+  const s: Scene = { type: "scene", kind: "order", values: [82, 48, 28, 84], ask: "largest", prompt: "Order them.", success: "Done.", goal: { measure: "wrong", equals: 0 } };
+  assert.deepEqual(check(s), []); assert.ok(draggable(s) && !met(s, initial(s)));
+  assert.equal(readout(s, initial(s)), "Now: 82, 48, 28, 84"); assert.equal(measures(s, initial(s)).wrong, 2);
+  // take the 28 (third card) and drop it in the first slot; the others close up and every card has its own place
+  const cards = (st: Record<string, number>) => draw(s, st).filter((x) => x.t === "rect") as { x: number; w: number }[];
+  const c = cards(initial(s)), mid = (k: number) => c[k].x + c[k].w / 2;
+  assert.equal(grip(s, initial(s), mid(2), 100), 2);
+  let st = pointer(s, initial(s), mid(0), 100, 2);
+  assert.equal(readout(s, st), "Now: 28, 82, 48, 84"); assert.deepEqual(Object.values(st).sort(), [1, 2, 3, 4]);
+  st = pointer(s, st, mid(2), 100, grip(s, st, mid(1), 100));
+  assert.equal(readout(s, st), "Now: 28, 48, 82, 84"); assert.ok(met(s, st)); assert.equal(sceneAnswer(s), 82);
+  // sliders may give two cards the same place: the picture still shows every card once, in a fixed order
+  for (const any of states(s)) { const shapes = draw(s, any); assert.equal(shapes.filter((x) => x.role === "card").length, 4); assert.ok(!/NaN|undefined|null/.test(JSON.stringify(shapes) + readout(s, any))); }
+  // cards given already in order start out of order, so there is something to do
+  const sorted: Scene = { ...s, values: [1, 2, 3] };
+  assert.deepEqual(check(sorted), []); assert.equal(readout(sorted, initial(sorted)), "Now: 2, 3, 1");
+  assert.ok(check({ ...s, values: [5] }).length > 0 && check({ ...s, values: [5, 5] }).length > 0 && check({ ...s, values: [1, 2, 3, 4, 5, 6] }).length > 0 && check({ ...s, ask: "middle" }).length > 0);
+  // from the registry: a compare question brings its digit-swapped look-alikes, and a rounding question its own number line
+  const cmp = sceneForQuestion("gen:aacmp:82,48,1")!;
+  assert.deepEqual((cmp as { values: number[] }).values, [82, 48, 28, 84]); assert.equal(sceneAnswer(cmp), 48, "less: of the two asked about, not of the look-alikes");
+  const rnd = sceneForQuestion("gen:aeround:3,2854")!;
+  assert.equal(readout(rnd, initial(rnd)), "At 2854 · 854 from 2000 · 146 from 3000"); assert.equal(sceneAnswer(rnd), 3000);
+});
+
 test("malformed or impossible scenes are refused", () => {
   const bad: [string, unknown][] = [
     ["not a scene", { type: "strips" }],
@@ -258,7 +283,7 @@ test("malformed or impossible scenes are refused", () => {
 
 test("every scene of a released question states that question's own mathematics", () => {
   // every released question of these families has a scene; `audel` has one for its first form only (c·e^(ax) + d·log x)
-  const WHOLE = ["ahtri", "asline", "audfp", "audsum", "cint", "dpow", "pint"];
+  const WHOLE = ["aacmp", "aeround", "ahtri", "ajord", "asline", "audfp", "audsum", "cint", "dpow", "pint"];
   assert.deepEqual([...SCENE_FAMILIES].sort(), [...WHOLE, "audel"].sort());
   const near = (a: number, b: number) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
   let scenes = 0;
@@ -273,7 +298,13 @@ test("every scene of a released question states that question's own mathematics"
       assert.deepEqual(check(s), [], q.id);
       assert.ok(s.prompt.length <= 160 && s.success.length <= 160, q.id);
       const mine = sceneAnswer(s), theirs = numericValue(q.answer), probes = sceneProbes(s);
-      if (mine !== null && theirs !== null && !/[a-zA-Z]/.test(q.answer)) {
+      if (s.kind === "order" && mine === null) {
+        // a list to put in order: the cards are the question's own numbers, and the order that finishes the scene is the verified answer
+        const listed = (q.answer.match(/[−-]?\d+/g) ?? []).map((t) => Number(t.replace("−", "-")));
+        assert.deepEqual([...s.values].sort((a, b) => a - b), listed, q.id);
+        const done = Object.fromEntries(listed.map((v, at) => [`p${s.values.indexOf(v)}`, at + 1]));
+        assert.ok(met(s, done) && readout(s, done) === `Now: ${listed.map(fmt).join(", ")}`, q.id);
+      } else if (mine !== null && theirs !== null && !/[a-zA-Z]/.test(q.answer)) {
         // a number: the scene's own number is the verified answer, the family's independent check accepts it, and it is no predicted mistake
         assert.ok(near(mine, theirs), `${q.id}: scene ${mine} vs answer ${q.answer}`);
         assert.ok(def.validate(q.params, mine), `${q.id}: independent check`);

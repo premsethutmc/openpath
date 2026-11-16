@@ -13,7 +13,7 @@ import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
-import { GuessFirst, RecipeLesson } from "./Recipe";
+import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { sceneForQuestion } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -612,7 +612,9 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // scenes@2: a section about a generated question gets that question's interactive scene (its own numbers), under any picture
   const scene = raw.instance ? sceneForQuestion(raw.instance) : null;
   // guess-first@1: in a new skill's opening lesson, the working of an example opens after a guess at its answer
-  const guess = opening && competency && raw.instance && sc.math ? guessOf(raw.instance) : null;
+  // play-first@1: where the example has a picture to move, that comes first instead (it would give a guess away)
+  const play = opening && !!competency && !!scene && !!sc.math;
+  const guess = !play && opening && competency && raw.instance && sc.math ? guessOf(raw.instance) : null;
   // a picture that is not the question's own belongs to the working (it would give the answer away), so it waits with it
   const later = !!guess && !guess.pictured && !!sc.widget;
   const picture = sc.widget && <Picture w={sc.widget} competency={competency} />;
@@ -624,8 +626,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {!later && picture}
-        {scene && <ScenePlayer key={raw.instance} scene={scene} />}
-        {guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
+        {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
+        {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
         {sc.tip && <p className="hint">{sc.tip}</p>}
         {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
       </div>

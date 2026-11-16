@@ -62,6 +62,22 @@ export function GuessFirst({ guess, competency, children }: { guess: Guess; comp
   );
 }
 
+/** play-first@1: where a worked example has a picture to move, that comes first: the working opens once the picture's goal
+ *  is reached (or on "Show me how"). The picture would give a guess away, so there is no guess here. Not evidence. */
+export function PlayFirst({ scene, competency, children }: { scene: Scene; competency: string; children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const since = useRef(Date.now());
+  const reveal = (how: string) => { if (!open) mark(clean(`play:${competency}:${how}`), since.current); setOpen(true); };
+  return (
+    <div className="guess-first" data-play={open ? "open" : "closed"}>
+      {!open && <p className="eyebrow">Try it yourself first</p>}
+      <ScenePlayer scene={scene} onReached={() => reveal("done")} />
+      {!open && <button type="button" className="secondary guess-skip" onClick={() => reveal("skipped")}>Show me how</button>}
+      <div hidden={!open}>{children}</div>
+    </div>
+  );
+}
+
 function Choices({ ask, choices, picked, onPick, untilRight }: { ask: string; choices: Choice[]; picked: number | null; onPick: (i: number) => void; untilRight: boolean }) {
   const chosen = picked === null ? null : choices[picked];
   return (

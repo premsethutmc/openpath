@@ -87,6 +87,39 @@ const BUILDERS: Record<string, Builder> = {
       goal: { measure: "x", equals: 1 },
     };
   },
+  // aacmp [a, b, kind]: which of two numbers is more (or less). The two numbers are cards to put in order; for two-digit
+  // numbers their digit-swapped forms join them, because the documented slip is to compare the ones first.
+  aacmp: ([a, b, kind]) => {
+    const swap = (n: number) => (n >= 10 ? (n % 10) * 10 + Math.floor(n / 10) : n);
+    const values = [...new Set([a, b, swap(a), swap(b)])].filter((v) => v >= 1);
+    const big = Math.max(a, b), small = Math.min(a, b);
+    return {
+      type: "scene", kind: "order", values, ask: kind === 0 ? "largest" : "smallest",
+      prompt: "Drag the cards into order, smallest on the left.",
+      success: a >= 10 && b >= 10 ? `${big} has ${Math.floor(big / 10)} tens and ${small} has ${Math.floor(small / 10)}: the tens decide, so ${big} is more than ${small}.` : `${small} comes before ${big}, so ${big} is more.`,
+      goal: { measure: "wrong", equals: 0 },
+    };
+  },
+  // ajord [four integers]: put them in increasing order. The four are the cards.
+  ajord: (p) => {
+    const sorted = [...p].sort((x, y) => x - y);
+    return {
+      type: "scene", kind: "order", values: p,
+      prompt: "Drag the cards into order, smallest on the left.",
+      success: `${sorted.map(fmt).join(", ")}. Below zero, the bigger-looking number is the smaller one.`,
+      goal: { measure: "wrong", equals: 0 },
+    };
+  },
+  // aeround [k, n]: round n to the nearest 10^k. The point starts on n, between the two round numbers; move it to the nearer.
+  aeround: ([k, n]) => {
+    const unit = 10 ** k, lo = Math.floor(n / unit) * unit, hi = lo + unit, up = n - lo >= unit / 2, word = ["", "ten", "hundred", "thousand"][k];
+    return {
+      type: "scene", kind: "numberline", from: lo, to: hi, step: 1, start: n, near: unit, label: k === 1 ? 1 : unit / 5,
+      prompt: `The point is on ${n}. Move it to the nearest ${word}.`,
+      success: n - lo === unit / 2 ? `${n} is exactly halfway, and halfway goes up: ${hi}.` : `${n} is ${n - lo} from ${lo} and ${hi - n} from ${hi}, so the nearest ${word} is ${up ? hi : lo}.`,
+      goal: { measure: "x", equals: up ? hi : lo },
+    };
+  },
 };
 const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a);
 
@@ -109,7 +142,9 @@ export function sceneForQuestion(qid: string): Scene | null {
  *  or null where the question's answer is not one number. */
 export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "triangle") return 180 - s.angles[0] - s.angles[1];
-  if (s.kind === "line" || s.kind === "transform" || s.kind === "rectangle" || s.kind === "join" || s.kind === "fraction" || s.kind === "numberline" || s.kind === "array" || s.kind === "commas") return null;
+  if (s.kind === "line" || s.kind === "transform" || s.kind === "rectangle" || s.kind === "join" || s.kind === "fraction" || s.kind === "array" || s.kind === "commas") return null;
+  if (s.kind === "order") return s.ask === "largest" ? Math.max(s.values[0], s.values[1]) : s.ask === "smallest" ? Math.min(s.values[0], s.values[1]) : null;
+  if (s.kind === "numberline") return s.goal.measure === "x" && s.goal.equals !== undefined ? s.goal.equals : null;
   const f = curveOf(s);
   if (s.kind === "strips") return f.area(s.from, s.to);
   if (s.goal.measure !== "x" || s.goal.equals === undefined) return null;

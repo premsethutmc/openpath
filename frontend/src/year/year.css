@@ -351,6 +351,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scene .sc-cell { fill: #d9d3ff; stroke: #b9b0f5; stroke-width: 1; }
 .scene .sc-outline { fill: none; stroke: #5a47d6; stroke-width: 3; stroke-linejoin: round; }
 .scene .sc-curve2 { fill: none; stroke: #5a47d6; stroke-width: 2.6; }
+.scene .sc-card { fill: #fff; stroke: #5a47d6; stroke-width: 2.5; }
+.scene .sc-cardtext { fill: #1f2a37; font-size: 20px; font-weight: 700; }
 .scene .sc-digit { fill: #1f2a37; font-size: 30px; font-weight: 700; }
 .scene .sc-comma { fill: #5a47d6; font-size: 34px; font-weight: 700; }
 .scene .sc-blank { fill: #fff; stroke: #b9b0f5; stroke-width: 1; }
