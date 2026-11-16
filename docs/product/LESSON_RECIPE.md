@@ -29,7 +29,7 @@ One player draws every recipe (`frontend/src/year/Recipe.tsx`). A recipe is data
 
 ## Layout (layout@1)
 
-How a recipe is laid out is decided by rule (`layoutFor`), not written for each lesson:
+How a recipe is laid out is decided by rule (`layoutFor`, in the player: `frontend/src/year/recipe-layout.ts`; the learning engine has no branch by class), not written for each lesson:
 
 - **The page that grows** (Class 6 and up, and when the class is not known). One scrolling page. Each part appears under the
   last once that one is done; what is done stays in view, and a finished mission shrinks to one line. Nothing is shown before
