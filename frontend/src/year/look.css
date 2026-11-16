@@ -258,3 +258,16 @@ details.working summary, .hint { color: var(--ink); }
 .kid-break { margin: 10px 0; padding: 14px 16px; border-radius: 18px; background: #eaf6ff; border: 1px solid #b9dcf5; }
 .kid-break p { margin: 0 0 8px; }
 .kid-break-actions { display: flex; gap: 12px; align-items: center; }
+
+/* fold@1: one half of each letter folds over the dashed line and back; the ✓/✗ appears once it has landed */
+.figure .fold-v { animation: fold-v 3.2s ease-in-out infinite; }
+.figure .fold-h { animation: fold-h 3.2s ease-in-out infinite; }
+.figure .fold-mark { animation: fold-mark 3.2s ease-in-out infinite; }
+@keyframes fold-v { 0%, 15% { transform: scaleX(1); } 45%, 75% { transform: scaleX(-1); } 100% { transform: scaleX(1); } }
+@keyframes fold-h { 0%, 15% { transform: scaleY(1); } 45%, 75% { transform: scaleY(-1); } 100% { transform: scaleY(1); } }
+@keyframes fold-mark { 0%, 40% { opacity: 0; } 50%, 80% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .figure .fold-v { animation: none; transform: scaleX(-1); }
+  .figure .fold-h { animation: none; transform: scaleY(-1); }
+  .figure .fold-mark { animation: none; opacity: 1; }
+}

@@ -63,6 +63,14 @@ describe("kid-say@1 (Class 5 child wording)", () => {
       if (a.kind === "tap") {
         const right = a.items.filter((x) => isCorrect(q, compose(a, [x.value], q.answer)));
         if (right.length !== 1) bad.push(`${id}: ${right.length} right taps`);
+      } else if (a.kind === "turn") {
+        // draw@1: the arm turned to the asked angle is right; the same mark read on the other scale is not
+        if (!isCorrect(q, compose(a, [q.answer], q.answer))) bad.push(`${id}: the asked angle is not accepted`);
+        if (q.answer !== "90" && isCorrect(q, compose(a, [String(180 - Number(q.answer))], q.answer))) bad.push(`${id}: the other scale is accepted`);
+      } else if (a.kind === "bars") {
+        const hs = q.answer.replace(/^\(|\)$/g, "").split(/,\s*/);
+        if (hs.length !== a.labels.length || !hs.every((h) => Number(h) % a.step === 0 && Number(h) / a.step <= a.lines)) bad.push(`${id}: the bars cannot reach ${q.answer}`);
+        else if (!isCorrect(q, compose(a, hs, q.answer))) bad.push(`${id}: bars do not rebuild ${q.answer}`);
       } else if (a.kind === "fields") {
         const m = q.answer.match(/^\((−?[\d.]+), (−?[\d.]+)\)$/);
         if (!m || !isCorrect(q, compose(a, [m[1], m[2]], q.answer))) bad.push(`${id}: fields do not rebuild ${q.answer}`);

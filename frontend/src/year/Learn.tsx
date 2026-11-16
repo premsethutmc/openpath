@@ -316,6 +316,54 @@ function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; ans
       </div>
     );
   }
+  // draw@1: turn an arm on the protractor (5° steps); the answer is the angle between the two arms
+  if (ask.kind === "turn") {
+    const arm = parts[0] === undefined ? (ask.fixed === 0 ? 90 : 90) : ask.fixed === 0 ? Number(parts[0]) : 180 - Number(parts[0]);
+    const set = (inner: number) => { const a = Math.max(0, Math.min(180, inner)); put([String(Math.abs(a - ask.fixed))], true); };
+    return (
+      <div className="kid-draw">
+        <Figure v={{ type: "protractor", arms: [ask.fixed, arm] } as never} />
+        <input type="range" min={0} max={180} step={5} value={arm} disabled={disabled} aria-label="Turn the arm" onChange={(e) => set(Number(e.target.value))} style={{ width: "100%" }} />
+        <div className="kid-taps">
+          <button type="button" className="kid-tap" disabled={disabled} onClick={() => set(arm + 5)}>◀ 5°</button>
+          <button type="button" className="kid-tap" disabled={disabled} onClick={() => set(arm - 5)}>5° ▶</button>
+        </div>
+      </div>
+    );
+  }
+  // draw@1: raise and lower each bar on the scale; the answer is the list of bar heights
+  if (ask.kind === "bars") {
+    const h = ask.labels.map((_, i) => Number(parts[i] ?? 0));
+    const setBar = (i: number, lines: number) => { const n = h.map((v, j) => (j === i ? Math.max(0, Math.min(ask.lines, lines)) * ask.step : v)); put(n.map(String), n.every((v) => v > 0)); };
+    const W = 60 * ask.labels.length + 50, H = 230, top = 15, bottom = 195, unit = (bottom - top) / ask.lines;
+    return (
+      <div className="kid-draw">
+        <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: 420 }} role="img" aria-label="Your bar graph">
+          {Array.from({ length: ask.lines + 1 }, (_, k) => (
+            <g key={k}>
+              <line x1={40} x2={W - 5} y1={bottom - k * unit} y2={bottom - k * unit} stroke="#d0d7e2" strokeWidth={k ? 1 : 2} />
+              <text x={34} y={bottom - k * unit + 4} fontSize={10} textAnchor="end" fill="#334">{k * ask.step}</text>
+            </g>
+          ))}
+          {ask.labels.map((l, i) => (
+            <g key={l}>
+              <rect x={50 + 60 * i} y={bottom - (h[i] / ask.step) * unit} width={36} height={(h[i] / ask.step) * unit} fill="#6a55f0" rx={3} />
+              <text x={68 + 60 * i} y={bottom + 16} fontSize={10} textAnchor="middle" fill="#334">{l}</text>
+            </g>
+          ))}
+        </svg>
+        <div className="kid-bars">
+          {ask.labels.map((l, i) => (
+            <div key={l} className="kid-taps" aria-label={`Bar for ${l}`}>
+              <span>{l}</span>
+              <button type="button" className="kid-tap" disabled={disabled} aria-label={`Lower the bar for ${l}`} onClick={() => setBar(i, h[i] / ask.step - 1)}>−</button>
+              <button type="button" className="kid-tap" disabled={disabled} aria-label={`Raise the bar for ${l}`} onClick={() => setBar(i, h[i] / ask.step + 1)}>+</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   if (ask.kind === "fields")
     return (
       <div className="kid-fields">

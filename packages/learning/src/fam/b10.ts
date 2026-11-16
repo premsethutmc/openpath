@@ -1956,7 +1956,7 @@ export const B10: Def[] = [
     cap: 400,
     difficulty: ([s]) => (s % 3 === 0 ? 1 : 2),
     word: ([s]) => `Four companies reported their yearly sales in rupees: ${cmpSet(s).opts.map(inr).join(";  ")}. Which is the largest amount of sales?`,
-    teach: {
+    teach: { visual: ([s]) => ({ type: "table", head: ["Number", "Crores", "Lakhs", "Thousands", "Hundreds, tens, ones"], rows: cmpSet(s).opts.map((n) => [inr(n), Math.floor(n / 1e7), Math.floor(n / 1e5) % 100, Math.floor(n / 1000) % 100, String(n % 1000).padStart(3, "0")]) }),
       idea: "A number with more digits is greater. With the same number of digits, compare place by place from the left: crores, then lakhs, then thousands.",
       method: "Count the digits of each number. Among those with the most digits, compare the crores, then the lakhs, and so on.",
       alternatives: [

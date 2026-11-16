@@ -5023,6 +5023,24 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.geometry.angle-measure",
+   "type": "support",
+   "reason": "drawing a pie chart (Grades 7–8) measures each sector's angle; reading one in Grade 4 does not"
+  },
+  {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.number.percentage",
+   "type": "support",
+   "reason": "pie charts labelled in per cent (Grades 7–8) use percentages; reading one in Grade 4 does not"
+  },
+  {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.number.fraction-models",
+   "type": "plausible",
+   "reason": "a sector of a pie chart is a fraction of the whole circle"
+  },
+  {
    "target": "MATH.number.addition-regroup",
    "from": "MATH.number.place-value-tens",
    "type": "plausible",
@@ -5103,16 +5121,6 @@
    "target": "MATH.sequences.power-sums",
    "from": "MATH.sequences.sequence-notation",
    "reason": "the prerequisite starts in Grade 11, after the competency (Grade 10): it would hold a younger learner back"
-  },
-  {
-   "target": "MATH.statistics.pie-charts",
-   "from": "MATH.geometry.angle-measure",
-   "reason": "the prerequisite starts in Grade 5, after the competency (Grade 4): it would hold a younger learner back"
-  },
-  {
-   "target": "MATH.statistics.pie-charts",
-   "from": "MATH.number.percentage",
-   "reason": "the prerequisite starts in Grade 7, after the competency (Grade 4): it would hold a younger learner back"
   },
   {
    "target": "MATH.geometry.transformations",

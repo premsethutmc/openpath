@@ -707,7 +707,7 @@ export const B07: Def[] = [
     cap: 400,
     difficulty: ([a, b, c]) => (c <= 36 ? 1 : gcd(a, b) === gcd(gcd(a, b), c) ? 2 : 3),
     word: ([a, b, c]) => `A tailor has three ribbons, ${a} cm, ${b} cm and ${c} cm long. She cuts all of them into pieces of the same length, as long as possible, with nothing left over. How long is each piece, in cm?`,
-    teach: {
+    teach: { visual: ([a, b, c]) => ({ type: "table", head: ["Number", "Its factors"], rows: [a, b, c].map((n) => [n, Array.from({ length: n }, (_, i) => i + 1).filter((f) => n % f === 0).join(", ")]) }),
       idea: "The HCF is the biggest number that divides every one of the numbers exactly.",
       method: "Find the HCF of the first two numbers, then find the HCF of that result and the third number.",
       alternatives: [
