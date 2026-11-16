@@ -594,7 +594,7 @@ const F: Def[] = [
     domain: [[2, 20], [1, 19]],
     keep: ([l, w]) => l > w,
     difficulty: ([l, w]) => (l + w <= 12 ? 1 : l + w <= 24 ? 2 : 3),
-    teach: { idea: "The perimeter is the distance all the way around a shape: add the lengths of every side.", method: "A rectangle has two lengths and two widths: add one length and one width, then double." },
+    teach: { visual: ([l, w]) => ({ type: "shape", kind: "rectangle", outline: true, lengths: [`${l} cm`, `${w} cm`] }), idea: "The perimeter is the distance all the way around a shape: add the lengths of every side.", method: "A rectangle has two lengths and two widths: add one length and one width, then double." },
   },
   {
     id: "mmul",
@@ -1204,9 +1204,9 @@ const F: Def[] = [
 /** The specification of the families written before families@2: their approved domains, difficulty and teaching hints
  * (the generators themselves are unchanged), and a multiple-choice form for the numeric ones. */
 const SPEC_V1: Record<string, Partial<Def>> = {
-  mul: { mc: true, domain: [[2, 12], [2, 12]], difficulty: ([a, b]) => (a <= 5 && b <= 5 ? 1 : a <= 9 && b <= 9 ? 2 : 3), teach: { idea: "a × b counts a groups of b: the same as b groups of a.", method: "Rebuild a fact from one you know: double, add or take away one group, or split a factor." } },
-  rect: { mc: true, domain: [[2, 12], [2, 12]], difficulty: ([l, w]) => (l * w <= 30 ? 1 : l * w <= 70 ? 2 : 3), teach: { idea: "Area counts the unit squares that cover a shape.", method: "A rectangle has rows of equal squares: rows × squares in a row." } },
-  eqfrac: { mc: true, domain: [[1, 9], [2, 10], [4, 100]], keep: ([a, b, d]) => a < b && d % b === 0 && d / b <= 10, difficulty: ([, b, d]) => (d / b <= 3 ? 1 : d / b <= 6 ? 2 : 3), teach: { idea: "Equal fractions cover the same amount: cutting every piece into k smaller pieces multiplies top and bottom by k.", method: "Find what the bottom was multiplied by, and multiply the top by the same number." } },
+  mul: { mc: true, domain: [[2, 12], [2, 12]], difficulty: ([a, b]) => (a <= 5 && b <= 5 ? 1 : a <= 9 && b <= 9 ? 2 : 3), teach: { visual: ([a, b]) => ({ type: "grid", rows: a, cols: b }), idea: "a × b counts a groups of b: the same as b groups of a.", method: "Rebuild a fact from one you know: double, add or take away one group, or split a factor." } },
+  rect: { mc: true, domain: [[2, 12], [2, 12]], difficulty: ([l, w]) => (l * w <= 30 ? 1 : l * w <= 70 ? 2 : 3), teach: { visual: ([l, w]) => (l <= 12 && w <= 12 ? { type: "grid", rows: w, cols: l } : null), idea: "Area counts the unit squares that cover a shape.", method: "A rectangle has rows of equal squares: rows × squares in a row." } },
+  eqfrac: { mc: true, domain: [[1, 9], [2, 10], [4, 100]], keep: ([a, b, d]) => a < b && d % b === 0 && d / b <= 10, difficulty: ([, b, d]) => (d / b <= 3 ? 1 : d / b <= 6 ? 2 : 3), teach: { visual: ([a, b, d]) => (d <= 24 && d % b === 0 ? { type: "strips", top: b, shaded: a, bottom: d, bottomShaded: (a * d) / b, labels: [`${a}/${b}`, `${(a * d) / b}/${d}`] } : null), idea: "Equal fractions cover the same amount: cutting every piece into k smaller pieces multiplies top and bottom by k.", method: "Find what the bottom was multiplied by, and multiply the top by the same number." } },
   fadd: { mc: true, domain: [[1, 11], [1, 11], [2, 12], [-1, 1]], keep: ([a, b, n, sgn]) => sgn !== 0 && (sgn > 0 ? a + b < n : b < a), difficulty: ([, , n]) => (n <= 6 ? 1 : n <= 9 ? 2 : 3), teach: { idea: "Like fractions count the same size of piece: add or take away the pieces.", method: "Add or subtract the tops; the bottom (the size of the pieces) stays." } },
   cint: { mc: true, domain: [[0, 8], [1, 12], [1, 12]], keep: ([a, b]) => b > a && b - a <= 9, difficulty: ([a, b, c]) => (a === 0 && c * (b - a) <= 30 ? 1 : c * (b - a) <= 60 ? 2 : 3), teach: { idea: "The integral of a constant c from a to b is the area of a rectangle: width b − a, height c.", method: "Width (upper minus lower) times height." } },
   quad: { domain: [[-10, 10], [-30, 30]], difficulty: ([p, q]) => (q > 0 && p < 0 ? 1 : q > 0 ? 2 : 3), teach: { idea: "If a product is zero, one of its factors is zero.", method: "Factorise x² + px + q = (x − r)(x − s), then each bracket gives a solution." } },

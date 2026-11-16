@@ -931,7 +931,7 @@ const P2: Def[] = [
         : b * k <= 60
           ? `In a class of ${b * k} students, ${a * k} come to school by bus. What fraction of the class comes by bus? Give it in its lowest terms.`
           : `A school has ${b * k} students in Grade 7, and ${a * k} of them come to school by bus. What fraction of these students come by bus? Give it in its lowest terms.`,
-    teach: {
+    teach: { visual: ([a, b, k]) => (b * k <= 24 ? { type: "strips", top: b * k, shaded: a * k, bottom: b / gcd(a, b), bottomShaded: a / gcd(a, b), labels: [`${a * k}/${b * k}`, `${a / gcd(a, b)}/${b / gcd(a, b)}`] } : null),
       idea: "Dividing the top and the bottom by the same number gives an equal fraction; in lowest terms they have no common factor except 1.",
       method: "Find the highest common factor of the top and the bottom and divide both by it (or keep dividing by common factors until none is left).",
       alternatives: [
@@ -2439,7 +2439,7 @@ const P3: Def[] = [
       l >= 20
         ? `A school playground is a rectangle ${l} m long and ${w} m wide. A white line is painted all the way round its edge, and painting costs ₹${5 * k} for each metre. What does the painting cost, in rupees?`
         : `A flower bed in a park is a rectangle ${l} m long and ${w} m wide. A border of bricks is laid all the way round its edge, and the border costs ₹${5 * k} for each metre. What does the border cost, in rupees?`,
-    teach: {
+    teach: { visual: ([l, w]) => ({ type: "shape", kind: "rectangle", outline: true, lengths: [`${l} m`, `${w} m`, `${l} m`, `${w} m`] }),
       idea: "A fence (or a border) runs along the edge, so its length is the perimeter; the cost is that length times the price of one metre.",
       method: "Perimeter = 2 × (length + width); then multiply by the cost per metre.",
       alternatives: [

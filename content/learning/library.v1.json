@@ -11923,6 +11923,15 @@
       "One length and one width: 13 + 9 = 22",
       "Twice round that pair: 2 × 22 = 44"
      ],
+     "widget": {
+      "type": "shape",
+      "kind": "rectangle",
+      "outline": true,
+      "lengths": [
+       "13 cm",
+       "9 cm"
+      ]
+     },
      "tip": "The space inside (area) was found; the perimeter is the distance around the edge.",
      "role": "concept",
      "instance": "gen:rperim:13,9"
@@ -11938,7 +11947,18 @@
       "One length and one width: 22 + 10 = 32 m",
       "Perimeter: 2 × 32 = 64 m",
       "64 m × ₹5 = ₹320"
-     ]
+     ],
+     "widget": {
+      "type": "shape",
+      "kind": "rectangle",
+      "outline": true,
+      "lengths": [
+       "22 m",
+       "10 m",
+       "22 m",
+       "10 m"
+      ]
+     }
     }
    ],
    "diagnostics": [
@@ -11963,6 +11983,15 @@
         "One length and one width: 5 + 2 = 7",
         "Twice round that pair: 2 × 7 = 14"
        ],
+       "widget": {
+        "type": "shape",
+        "kind": "rectangle",
+        "outline": true,
+        "lengths": [
+         "5 cm",
+         "2 cm"
+        ]
+       },
        "role": "worked-example",
        "instance": "gen:rperim:5,2"
       }
@@ -12042,7 +12071,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "rperim",
     "seed": [
      13,
@@ -30033,6 +30062,62 @@
       "Look at these capital letters: M  V  G  F  A. How many of them have a vertical line of symmetry (a fold going straight up and down, so that the two halves match exactly)?",
       "M, V, A have a vertical line of symmetry: 3"
      ],
+     "widget": {
+      "type": "fold",
+      "axis": "v",
+      "items": [
+       {
+        "label": "M",
+        "rows": [
+         "#...#",
+         "##.##",
+         "#.#.#",
+         "#...#",
+         "#...#"
+        ]
+       },
+       {
+        "label": "V",
+        "rows": [
+         "#...#",
+         "#...#",
+         "#...#",
+         ".#.#.",
+         "..#.."
+        ]
+       },
+       {
+        "label": "G",
+        "rows": [
+         ".####",
+         "#....",
+         "#..##",
+         "#...#",
+         ".###."
+        ]
+       },
+       {
+        "label": "F",
+        "rows": [
+         "#####",
+         "#....",
+         "####.",
+         "#....",
+         "#...."
+        ]
+       },
+       {
+        "label": "A",
+        "rows": [
+         ".###.",
+         "#...#",
+         "#####",
+         "#...#",
+         "#...#"
+        ]
+       }
+      ]
+     },
      "tip": "The letters were folded the other way (across); a vertical line goes up and down, so the left half must match the right half.",
      "role": "concept",
      "instance": "gen:aesym:0,229"
@@ -30046,7 +30131,36 @@
      "math": [
       "The picture shows a square design made of shaded and white squares. How many lines of symmetry does the design have?",
       "Fold along each of the four lines: 0 folds make the halves match"
-     ]
+     ],
+     "widget": {
+      "type": "table",
+      "rows": [
+       [
+        "□",
+        "■",
+        "□",
+        "□"
+       ],
+       [
+        "□",
+        "■",
+        "□",
+        "■"
+       ],
+       [
+        "■",
+        "■",
+        "■",
+        "□"
+       ],
+       [
+        "□",
+        "□",
+        "■",
+        "□"
+       ]
+      ]
+     }
     },
     {
      "title": "Lines of symmetry in digits and numbers",
@@ -30092,6 +30206,62 @@
         "Look at these capital letters: E  A  D  T  M. How many of them have a horizontal line of symmetry (a fold going straight across, left to right, so that the two halves match exactly)?",
         "E, D have a horizontal line of symmetry: 2"
        ],
+       "widget": {
+        "type": "fold",
+        "axis": "h",
+        "items": [
+         {
+          "label": "E",
+          "rows": [
+           "#####",
+           "#....",
+           "####.",
+           "#....",
+           "#####"
+          ]
+         },
+         {
+          "label": "A",
+          "rows": [
+           ".###.",
+           "#...#",
+           "#####",
+           "#...#",
+           "#...#"
+          ]
+         },
+         {
+          "label": "D",
+          "rows": [
+           "####.",
+           "#...#",
+           "#...#",
+           "#...#",
+           "####."
+          ]
+         },
+         {
+          "label": "T",
+          "rows": [
+           "#####",
+           "..#..",
+           "..#..",
+           "..#..",
+           "..#.."
+          ]
+         },
+         {
+          "label": "M",
+          "rows": [
+           "#...#",
+           "##.##",
+           "#.#.#",
+           "#...#",
+           "#...#"
+          ]
+         }
+        ]
+       },
        "role": "worked-example",
        "instance": "gen:aesym:1,51"
       }
@@ -31657,6 +31827,25 @@
       "What is the place value of the digit 7 in 19.753?",
       "In 19.753, that digit is in the tenths place"
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Tens",
+       "Ones",
+       "Tenths",
+       "Hundredths",
+       "Thousandths"
+      ],
+      "rows": [
+       [
+        1,
+        9,
+        7,
+        5,
+        3
+       ]
+      ]
+     },
      "role": "worked-example",
      "instance": "gen:aedpv:0,85"
     },
@@ -31670,6 +31859,46 @@
       "Write these decimals in ascending order (smallest first): 0.5; 0.41; 0.501; 0.51. Write them in brackets, separated by commas, for example (0.1, 0.25, 0.3, 0.4).",
       "Give every number three decimal places (0.500, 0.410, 0.501, 0.510) and compare: (0.41, 0.5, 0.501, 0.51)"
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number",
+       "Ones",
+       "Tenths",
+       "Hundredths",
+       "Thousandths"
+      ],
+      "rows": [
+       [
+        "0.5",
+        0,
+        5,
+        0,
+        0
+       ],
+       [
+        "0.41",
+        0,
+        4,
+        1,
+        0
+       ],
+       [
+        "0.501",
+        0,
+        5,
+        0,
+        1
+       ],
+       [
+        "0.51",
+        0,
+        5,
+        1,
+        0
+       ]
+      ]
+     },
      "role": "worked-example",
      "instance": "gen:aedord:40"
     },
@@ -32993,6 +33222,35 @@
       "The table in the picture shows a school's order from a stationery shop; some values are missing (?). What is the price of one notebook, in rupees?",
       "₹330 ÷ 11 = 30"
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Item",
+       "How many",
+       "Price of one (₹)",
+       "Cost (₹)"
+      ],
+      "rows": [
+       [
+        "rulers",
+        10,
+        24,
+        "?"
+       ],
+       [
+        "notebooks",
+        11,
+        "?",
+        330
+       ],
+       [
+        "packets of crayons",
+        "?",
+        35,
+        210
+       ]
+      ]
+     },
      "role": "worked-example",
      "instance": "gen:aetab:1,151"
     },
@@ -36302,6 +36560,27 @@
       "HCF of 28 and 64 is 4",
       "Now with 68: the HCF of 4 and 68 is 4"
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number",
+       "Its factors"
+      ],
+      "rows": [
+       [
+        28,
+        "1, 2, 4, 7, 14, 28"
+       ],
+       [
+        64,
+        "1, 2, 4, 8, 16, 32, 64"
+       ],
+       [
+        68,
+        "1, 2, 4, 17, 34, 68"
+       ]
+      ]
+     },
      "role": "worked-example",
      "instance": "gen:aghcf3:28,64,68"
     },
@@ -44387,6 +44666,46 @@
       "The greatest is 69,36,47,609: it has the most crores and lakhs.",
       "No other option is bigger, so choose 69,36,47,609."
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Number",
+       "Crores",
+       "Lakhs",
+       "Thousands",
+       "Hundreds, tens, ones"
+      ],
+      "rows": [
+       [
+        "9,43,54,850",
+        9,
+        43,
+        54,
+        "850"
+       ],
+       [
+        "69,36,47,609",
+        69,
+        36,
+        47,
+        "609"
+       ],
+       [
+        "68,98,61,059",
+        68,
+        98,
+        61,
+        "059"
+       ],
+       [
+        "69,31,82,351",
+        69,
+        31,
+        82,
+        "351"
+       ]
+      ]
+     },
      "role": "worked-example",
      "instance": "gen:ajcrcmp:243"
     },

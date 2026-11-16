@@ -524,6 +524,8 @@ export const B05: Def[] = [
     teach: {
       idea: "A line of symmetry is a fold line where the two halves of a shape match exactly, like a mirror image.",
       method: `Imagine folding each letter along the line (or stand a mirror on it): if the half you see in the mirror finishes the letter exactly, the letter has that line of symmetry.`,
+      // fold@1: the example's letters, each folding along the asked line (the picture works out the ✓/✗ from the drawing)
+      visual: ([axis, seed]) => ({ type: "fold", axis: axis ? "h" : "v", items: symLetters(seed).map((c) => ({ label: c, rows: BITMAP[c] })) }),
       alternatives: [
         { id: "mirror", title: "Use a mirror", kind: "conceptual", text: ["Write the letter big and stand a small mirror on the line down its middle (or across its middle).", "If the letter you see, half on paper and half in the mirror, looks just like the real letter, that line is a line of symmetry."] },
       ],
@@ -2533,7 +2535,7 @@ const GEO_MORE: Def[] = [
     difficulty: ([kind, s]) => (kind === 1 ? (SSHAPES[s].lines >= 5 ? 3 : 2) : design(s).g.some((l) => l === "d" || l === "e") ? 3 : design(s).g.length ? 2 : 1),
     figure: ([kind, s]) => (kind === 0 ? designFig(design(s).cells) : SSHAPES[s].fig),
     word: ([kind, s]) => (kind === 0 ? `${name(s)} makes a square kolam-style tile pattern, shown in the picture with shaded and white squares. In how many different ways can the pattern be folded so that the two halves match exactly?` : `${name(s)} cuts ${SSHAPES[s].name} out of paper for a festival decoration. In how many different ways can it be folded so that the two halves match exactly?`),
-    teach: {
+    teach: { visual: ([kind, s]) => (kind === 0 ? designFig(design(s).cells) : SSHAPES[s].fig),
       idea: "A line of symmetry is a fold line where one half lands exactly on the other. A shape can have none, one, or several.",
       method: "Try each possible fold: up and down, across, and along the diagonals (and, for regular shapes, through every corner and every side's middle). Count only the folds where every part matches.",
       alternatives: [
@@ -4201,7 +4203,7 @@ const MIX_MORE: Def[] = [
       const rows = tabData(s);
       return `${name(s)} finds a torn bill from the class's stationery order; the picture shows what can still be read (? marks a torn-off value). ${[`How much did the whole order cost, in rupees?`, `What did one ${rows[1].item[1]} cost, in rupees?`, `How many ${rows[2].item[0]} were bought?`][kind]}`;
     },
-    teach: {
+    teach: { visual: ([, s]) => tabFig(s),
       idea: "In each row, cost = how many × price of one. Knowing any two of the three gives the third: multiply for the cost, divide the cost to find the number or the price.",
       method: "Fill each missing value first (multiply or divide in its row), then answer the question, adding the costs for a total.",
       alternatives: [
@@ -4586,7 +4588,7 @@ const DEC_MORE: Def[] = [
       if (p[0] === 1) return `${name(p[1])} measures the length of the school corridor as ${d3(q.th)} m and writes it as a sum of place values. Which sum is right?`;
       return `A lab reading, in millilitres, has ${dpvDigits(q.ds)}. Which number is the reading?`;
     },
-    teach: {
+    teach: { visual: (p) => ({ type: "table", head: ["Tens", "Ones", "Tenths", "Hundredths", "Thousandths"], rows: [dpvQ(p).ds] }),
       idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths, hundredths and thousandths. A digit's place value is the digit times its place.",
       method: "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits.",
       alternatives: [
@@ -4641,7 +4643,7 @@ const DEC_MORE: Def[] = [
       // long jumps only for 2 to 5 m; seedlings under 1 m; bamboo poles otherwise
       return w === 0 ? `In a science class, four seedlings were measured as ${m} tall. List the heights from shortest to tallest, as numbers in brackets.` : w < 2 || w > 5 ? `Four bamboo poles for a festival pandal were measured as ${m} long. List the lengths from shortest to longest, as numbers in brackets.` : `In a long-jump event, four jumps were measured as ${m}. List the jumps from shortest to longest, as numbers in brackets.`;
     },
-    teach: {
+    teach: { visual: ([s]) => ({ type: "table", head: ["Number", "Ones", "Tenths", "Hundredths", "Thousandths"], rows: dordNums(s).map((th) => [d3(th), Math.floor(th / 1000), Math.floor(th / 100) % 10, Math.floor(th / 10) % 10, th % 10]) }),
       idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of decimal places, by adding zeros at the end, makes this easy.",
       method: "Fill each number with zeros at the end so that all have the same number of decimal places, then compare them like whole numbers.",
       alternatives: [

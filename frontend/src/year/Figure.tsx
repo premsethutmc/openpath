@@ -271,6 +271,12 @@ export function describe(v: V): string {
       if (!T) return NA;
       return `A factor tree for ${num(v.n)}: ${T.splits.map(([m, p, r]) => `${m} splits into ${p} and ${r}`).join("; ")}. The prime numbers at the ends of the branches are ${T.primes.join(", ")}`;
     }
+    case "fold": {
+      const F = foldOf(v);
+      if (!F) return NA;
+      const yes = F.items.filter((x) => x.match).map((x) => x.label), no = F.items.filter((x) => !x.match).map((x) => x.label);
+      return `The letters ${F.items.map((x) => x.label).join(", ")}, each folded along a ${F.axis === "v" ? "line going up and down through its middle" : "line going straight across its middle"}. ${yes.length ? `The halves match for ${yes.join(", ")}` : "No letter's halves match"}${no.length ? `; they do not match for ${no.join(", ")}` : ""}.`;
+    }
     default:
       return "A picture";
   }
@@ -283,6 +289,22 @@ const ivText = (i: Iv) =>
   : i.lo === null ? `everything ${i.hiClosed ? "up to and including" : "below"} ${minus(i.hi!)}`
   : i.hi === null ? `everything ${i.loClosed ? "from and including" : "above"} ${minus(i.lo)}`
   : `from ${minus(i.lo)} (${i.loClosed ? "included" : "not included"}) to ${minus(i.hi)} (${i.hiClosed ? "included" : "not included"})`;
+/** fold@1: letters drawn on a 5 × 5 grid with a dashed fold line; one half folds over onto the other (animated), and
+ * each letter is marked by whether its halves land exactly on each other, worked out here from the drawing itself. */
+function foldOf(v: V): { axis: "v" | "h"; items: { label: string; rows: string[]; match: boolean }[] } | null {
+  const axis = v.axis === "h" ? "h" : v.axis === "v" ? "v" : null;
+  const items = arr<{ label: string; rows: string[] }>(v.items);
+  if (!axis || items.length < 1 || items.length > 6) return null;
+  if (!items.every((x) => x && typeof x.label === "string" && Array.isArray(x.rows) && x.rows.length === 5 && x.rows.every((r) => typeof r === "string" && /^[#.]{5}$/.test(r)))) return null;
+  return {
+    axis,
+    items: items.map((x) => ({
+      label: x.label,
+      rows: x.rows,
+      match: axis === "v" ? x.rows.every((r) => r === [...r].reverse().join("")) : x.rows.every((r, i, R) => r === R[4 - i]),
+    })),
+  };
+}
 const INK = "var(--ink, #1f2a37)";
 const ACC = "var(--accent, #2f6fde)";
 const SOFT = "var(--soft, #dbe6f7)";
@@ -694,6 +716,28 @@ export function Figure({ v }: { v: V }) {
       arr<[[number, number], [number, number]]>(v.segments).forEach(([a, b], i) => out.push(<line key={`s${i}`} x1={X(a[0])} y1={Y(a[1])} x2={X(b[0])} y2={Y(b[1])} stroke={ACC} strokeWidth={2} />));
       arr<[number, number, string?]>(v.points).forEach(([x, y, l], i) => out.push(<circle key={`p${i}`} cx={X(x)} cy={Y(y)} r={4} fill={ACC} />, <text key={`pl${i}`} x={X(x) + 6} y={Y(y) - 6} fontSize={12} fill={INK}>{l ?? ""}</text>));
       return box(220, 220, out);
+    }
+    case "fold": {
+      const F = foldOf(v);
+      if (!F) return unavailable;
+      const c = 14, gap = 22, W = 5 * c, H = 5 * c, top = 12, n = F.items.length;
+      const w = n * W + (n - 1) * gap + 20, h = top + H + 40;
+      return box(w, h, F.items.flatMap((it, k) => {
+        const x0 = 10 + k * (W + gap), cx = x0 + W / 2, cy = top + H / 2;
+        const cells = (pick: (i: number, j: number) => boolean, fill: string, key: string) =>
+          it.rows.flatMap((r, i) => [...r].map((ch, j) => (ch === "#" && pick(i, j) ? <rect key={`${key}${i}-${j}`} x={x0 + j * c} y={top + i * c} width={c - 1} height={c - 1} fill={fill} /> : null)).filter(Boolean)) as JSX.Element[];
+        // the half that folds: left columns (up-and-down line) or top rows (line across); the middle column/row stays
+        const moving = (i: number, j: number) => (F.axis === "v" ? j < 2 : i < 2);
+        return [
+          ...cells(() => true, SOFT, `b${k}`),
+          ...cells((i, j) => !moving(i, j), INK, `s${k}`),
+          <g key={`m${k}`} className={`fold-${F.axis}`} style={{ transformOrigin: `${cx}px ${cy}px` }}>{cells(moving, ACC, `m${k}`)}</g>,
+          F.axis === "v"
+            ? <line key={`l${k}`} x1={cx} y1={top - 6} x2={cx} y2={top + H + 6} stroke={INK} strokeWidth={1.5} strokeDasharray="4 3" />
+            : <line key={`l${k}`} x1={x0 - 6} y1={cy} x2={x0 + W + 6} y2={cy} stroke={INK} strokeWidth={1.5} strokeDasharray="4 3" />,
+          <text key={`t${k}`} className="fold-mark" x={cx} y={top + H + 30} fontSize={20} textAnchor="middle" fill={it.match ? "#1e8e3e" : "#c5221f"}>{it.match ? "✓" : "✗"}</text>,
+        ];
+      }));
     }
     case "factortree": {
       const T = factorTree(v);

@@ -199,7 +199,9 @@ const OWN: Record<string, Own> = {
   },
   aesym: (q) => {
     const m = grab(/letters: ([A-Z ]+?)\. How many/, q.prompt);
-    return { say: `How many of these letters have a line of symmetry going up and down? ${m[1].split(/\s+/).join("  ")}` };
+    // the line is the one the question asks for: up and down (vertical) or straight across (horizontal)
+    const across = /horizontal line of symmetry/.test(q.prompt);
+    return { say: `How many of these letters have a line of symmetry going ${across ? "straight across" : "up and down"}? ${m[1].split(/\s+/).join("  ")}` };
   },
   aedsym: () => ({ say: "How many lines of symmetry does the design have?", note: "Count fold lines: up and down, across, and the two diagonals." }),
   afpaint: (q) => {
