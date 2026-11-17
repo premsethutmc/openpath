@@ -130,12 +130,12 @@ const OWN: Record<string, Own> = {
   // scene-aid@1: the number itself, with commas the child moves from one way of grouping to the other (an aid: it fades)
   ajmill: (q) => {
     const m = grab(/^([\d,]+) is (\d+ crore(?: \d+ lakh)?)\. How many millions is it\?/, q.prompt);
-    const scene = commasAid(m[1].replace(/,/g, ""), "international", "Move the commas into groups of three, counting from the right.", "Now read the group in front of the second comma: that is the millions.");
+    const scene = commasAid(m[1].replace(/,/g, ""), "international", "Drag the commas into groups of three, counting from the right.", "Now read the group in front of the second comma: that is the millions.");
     return { say: `${m[2]} is how many millions?`, note: "1 crore = 10 million", aids: [{ name: "commas", figure: scene }] };
   },
   ajmilr: (q) => {
     const m = grab(/^(\d+) million is ([\d,]+) in the international system\. How many lakh is it\?/, q.prompt);
-    const scene = commasAid(m[2].replace(/,/g, ""), "indian", "Move the commas the Indian way: one group of three on the right, then groups of two.", "Now read the groups from the left: crore, then lakh.");
+    const scene = commasAid(m[2].replace(/,/g, ""), "indian", "Drag the commas the Indian way: one group of three on the right, then groups of two.", "Now read the groups from the left: crore, then lakh.");
     return { say: `${m[1]} million is how many lakh?`, note: "1 million = 10 lakh", aids: [{ name: "commas", figure: scene }] };
   },
   aematch: (q) => {

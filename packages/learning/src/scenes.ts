@@ -233,6 +233,22 @@ export function sceneIsPicture(qid: string): boolean {
 }
 
 const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
+/**
+ * scene-aid@2: a question's own scene as an aid in practice, where moving it is doing the idea and not typing the answer
+ * another way. Rounding: the point starts on the number and is carried to each round number in turn, with the steps
+ * counted ("Start at 557 · 3 forward · now at 560"), so the learner sees which is nearer; the distances are not printed
+ * before they move. Null for every other question (their scenes stay in lessons).
+ */
+export function practiceScene(qid: string): Scene | null {
+  const m = GEN.exec(qid);
+  if (!m || m[3] || m[1] !== "aeround") return null;
+  const s = sceneForQuestion(qid);
+  if (!s || s.kind !== "numberline") return null;
+  const word = s.prompt.match(/nearest (\w+)\./)?.[1] ?? "round number";
+  const { near: _near, ...rest } = s;
+  const out: Scene = { ...rest, jump: true, prompt: `Drag the point from ${s.start} to the ${word} on each side, and count the steps. Leave it on the nearer ${word}.` };
+  return check(out).length === 0 ? out : null;
+}
 /** The scene for a generated question ("gen:<family>:<params>"), or null: no builder, or a scene with any problem. */
 export function sceneForQuestion(qid: string): Scene | null {
   const m = GEN.exec(qid);
