@@ -7,6 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
+import { deepen } from "./deepen";
 import { moduleFor } from "./content";
 import { explainStep, problemOf } from "./families";
 import { graph } from "./graph";
@@ -28,6 +29,8 @@ export interface StepHelp {
   shown: string;
   /** The other skill this step leans on (null when it is the question's own skill). */
   needs: string | null;
+  /** deepen@1: a line of the working inside one of the question's own steps (made by rule, not one of its steps). */
+  finer?: true;
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -65,9 +68,17 @@ const NEXT: Record<string, string> = { note: "notice what the question gives you
 export function stepsHelp(qid: string): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
-  return p.steps.map((s, i) => ({
-    next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${NEXT[s.op] ?? s.op}.`,
-    shown: explainStep(p, s),
-    needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
-  }));
+  return p.steps.flatMap((s, i) => {
+    const own: StepHelp = {
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${NEXT[s.op] ?? s.op}.`,
+      shown: explainStep(p, s),
+      needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
+    };
+    // deepen@1: the working inside the step, line by line, comes before the step itself (which then sums it up)
+    const finer = deepen(own.shown);
+    if (finer.length < 2) return [own];
+    const lines: StepHelp[] = finer.map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true }));
+    // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
+    return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
+  });
 }

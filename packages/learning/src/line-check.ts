@@ -259,3 +259,9 @@ export function checkWorkingLines(lines: readonly string[]): LineCheck[] {
     return { state: "unreadable" };
   });
 }
+
+/** For deepen@1: the same reader, so a step that is deepened is read exactly as a typed line would be. */
+export type ExprNode = Node;
+export const readExpression = parse;
+export const variablesOf = (n: ExprNode): string[] => [...varsOf(n)];
+export const valueOf = (n: ExprNode, env: Record<string, number>): number => one(n, env);

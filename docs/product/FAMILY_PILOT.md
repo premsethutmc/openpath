@@ -220,3 +220,16 @@ arithmetic.
 Open: 47 of 85 calculus question types (766 of 1,118 in all, many of them rightly one-step) hold two steps or fewer,
 so "I'm stuck" has little to say on them; matrices, vectors and inequalities are not read; two unknowns only when the
 equation is of first degree in the second.
+
+## Finer steps inside a step (deepen@1)
+
+`packages/learning/src/deepen.ts` reads the calculation in a step's own words and works it the way it is taught; each
+line becomes a step of "I'm stuck" (`stepsHelp`, marked `finer`): whole-number × ÷ + − by place value; a definite
+integral of powers of x (terms, antiderivative, upper limit, lower limit, difference); `∫ … dx` and `d/dx (…)` term by
+term. Every line is checked true by the line checker in the tests, for every question type. 182 question types gain
+finer steps.
+
+Open: of the 745 question types with two steps or fewer (mid-range question), 679 still have two or fewer: about 100
+are rightly one step (look, count, recall); the rest state a method without working it (chain rule, limits, matrices,
+word problems) and need their steps written into the question type itself, which then needs its answer key
+re-certified. Calculus: 43 of 85 types.
