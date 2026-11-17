@@ -251,7 +251,7 @@
   "packages/learning/src/fam/index.ts": "9c94d440f22bd21ea6cd1f10958b0df733e54e51619b41568bb1d90f5364449d",
   "packages/learning/src/fam/linear-teaching.ts": "dda131607d6c27336c788b3bf9df2c7a559d3326a11978b38f5dfb8f5e43c947",
   "packages/learning/src/families.ts": "7adcadff3ef93accd9ac4460e1db56a9dd3faeca0bc524ab70f2ce4941488927",
-  "packages/learning/src/family-kit.ts": "e57a2f5a7ae1c043835a0b0f4466c74045a9736c274a42583311696b7caa06a7",
+  "packages/learning/src/family-kit.ts": "0858e762c2260162ddc7f77337d690a8bf639a81e5368cee313881bff0973ecf",
   "packages/learning/src/foundation-runtime.ts": "3413cfae1ffb0be03261805a6b2f50fadaf98444331a011f9bc4b3afe29e050c",
   "packages/learning/src/foundation.ts": "226a5ae7f8b63d96991273ca80d6b0ed38d18a051b1e7fce493fedfd96fc7284",
   "packages/learning/src/geometry-binder-e5.ts": "de4ef926c1533d5671252a427c4f4683c27b44df0af958d42c1de8031b98b8a4",
