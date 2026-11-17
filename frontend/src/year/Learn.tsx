@@ -15,6 +15,9 @@ import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { Explore } from "./Explore";
+import { StepCoach } from "./StepCoach";
+import { SmallAsk as StepHelp } from "./SmallAsk";
+import { stepsHelp } from "../../../packages/learning/src/step-help";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -51,7 +54,7 @@ import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 import { KID, kidName } from "./kid";
 import { FeedbackBox } from "./Feedback";
-import { checkLines, simplerFor, type Simpler } from "../../../packages/learning/src/working";
+import { checkLines, simplerFor } from "../../../packages/learning/src/working";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -154,26 +157,6 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
  *  next-step@1: the next empty line is there as soon as the last one has something in it (up to eight lines), so there
  *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
-/** teach-there@1: the smaller question for a slipped step, asked under the step itself. A right answer says so and leaves
- *  the child to mend the step; two wrong ones show it worked. Made on the device from the step's own numbers. */
-function StepHelp({ ask }: { ask: Simpler }) {
-  const [v, setV] = useState("");
-  const [tries, setTries] = useState(0);
-  const n = v.trim() === "" ? null : Number(v.trim());
-  const right = n !== null && n === ask.answer;
-  const shown = ask.ask.includes("× ?") ? ask.ask.replace("?", String(ask.answer)) : ask.ask.replace("= ?", `= ${ask.answer}`);
-  return (
-    <div className="ws-help" data-step-help={right ? "right" : tries >= 2 ? "shown" : "asked"}>
-      <span className="ws-q" aria-hidden="true">?</span>
-      <span>{ask.lead}</span>
-      <label className="ws-ask">
-        <span>{ask.ask}</span>
-        <input aria-label="A smaller question" inputMode="numeric" autoComplete="off" value={v} disabled={right} onChange={(e) => setV(e.target.value.replace(/[^0-9]/g, "").slice(0, 7))} onBlur={() => { if (n !== null && !right) setTries(tries + 1); }} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); if (n !== null && !right) setTries(tries + 1); } }} />
-      </label>
-      {right ? <span className="ws-mark ok" role="status">Yes. Now put that right in your step.</span> : tries >= 2 ? <span className="ws-mark" role="status">{shown}. Now put that right in your step.</span> : tries === 1 ? <span className="ws-mark bad" role="status">Not yet. Have another go.</span> : null}
-    </div>
-  );
-}
 function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v: string) => void; check: boolean }) {
   const typed = value ? value.split("\n") : [""];
   // the box for the next step is always waiting under the last one written
@@ -501,7 +484,7 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
           ? <p className="kid-slip" data-feedback="answer-feedback@1"><b>That's a common slip.</b>{mixup.principle ? ` ${mixup.principle}` : " Check each step."}</p>
           : <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>)}
         {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
-        {(!onRetry || fb.right) && (KID ? (fb.right ? <details className="kid-why"><summary>How it works</summary><p>{q.solution}</p></details> : <StepByStep key={fb.qid} solution={q.solution} />) : <p>{q.solution}</p>)}
+        {(!onRetry || fb.right) && (KID ? (fb.right ? <details className="kid-why"><summary>How it works</summary><p>{q.solution}</p></details> : (stepsHelp(fb.qid) ? <StepCoach key={fb.qid} qid={fb.qid} opener="Show me how, one step at a time" /> : <StepByStep key={fb.qid} solution={q.solution} />)) : <p>{q.solution}</p>)}
         {scene && <ScenePlayer key={fb.qid} scene={scene} />}
         {onRetry && !fb.right && <><p>{KID ? "Have another go, or ask for a hint." : "Your answer and working are saved. A wrong answer alone does not tell us why."}</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
@@ -558,6 +541,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {(hint || showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
+        {/* step-help@1: in practice with help, a stuck child asks for one rung at a time; using it is recorded as help (a hint) */}
+        {hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
         <button
           className="primary"
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}

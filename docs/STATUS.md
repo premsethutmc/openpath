@@ -32,6 +32,12 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Stuck at a step (2026-11-17, branch `feat/step-help`, draft PR, not merged)
+- step-help@1: "I'm stuck" in practice with help, and the working after a wrong answer, give one rung at a time from the
+  question's own steps: what to do next, the skill the step needs (a card), a smaller question, then the step.
+- 336 of 337 skills have a card by rule (325 with an example); quality not yet reviewed.
+- Open: the review screen for cards; counting stumbles against the leaned-on skill; notation cards.
+
 ## Change the numbers (2026-11-17, branch `feat/explore`, draft PR, not merged)
 - explore@1: under a worked example in a lesson, one of its own numbers can be changed and the family remakes the question,
   picture and working; only to questions outside the released pool. 119 of 315 pictured families.

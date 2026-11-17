@@ -376,6 +376,13 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 
 /* recipe@1: the lesson recipe player (Recipe.tsx) */
 .explore-open { margin-top: 12px; min-height: 44px; }
+.coach-open { min-height: 44px; }
+.coach { display: grid; gap: 10px; margin: 10px 0; padding: 12px 14px; border-radius: 16px; background: var(--brand-soft, #f1eeff); }
+.coach > * { grid-column: 1 / -1; min-width: 0; }
+.coach-next { margin: 0; font-weight: 700; font-size: 1.1rem; }
+.coach-chip { justify-self: start; min-height: 40px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--brand, #6a55f0); background: transparent; color: var(--brand-text, #4b3bd1); font-weight: 700; }
+.coach-card { padding: 10px 12px; border-radius: 12px; background: var(--card, #fff); border: 1px solid var(--line, #e3e8f0); }
+.coach-card p { margin: 0 0 6px; }
 .explore { margin-top: 14px; padding: 12px 14px; border-radius: 16px; border: 2px dashed var(--brand, #6a55f0); }
 .explore-dial { display: grid; gap: 4px; margin: 8px 0; font-weight: 700; }
 .explore-dial input { width: 100%; min-height: 36px; }

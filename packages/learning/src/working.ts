@@ -294,3 +294,10 @@ export function simplerFor(line: string): Simpler | null {
   if (b < 10 && a % 10 !== 0 && a % 10 < b) return { lead: "Go down to the ten first:", ask: `${a} − ${a % 10} = ?`, answer: a - (a % 10) };
   return null;
 }
+
+/** step-help@1: the smaller question for a TRUE calculation ("50 × 2 = 100"), for a learner who is stuck before doing
+ *  it: the same question a slip in it would get. Null when the calculation is not a single whole-number one. */
+export function smallerOf(calc: string): Simpler | null {
+  const m = /^\s*(\d{1,6})\s*([×÷+−-])\s*(\d{1,6})\s*=\s*(\d{1,9})\s*$/.exec(calc);
+  return m ? simplerFor(`${m[1]} ${m[2]} ${m[3]} = ${Number(m[4]) + 1}`) : null;
+}
