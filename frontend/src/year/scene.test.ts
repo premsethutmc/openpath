@@ -8,7 +8,7 @@ import assert from "node:assert/strict";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
 import { evaluate, numericValue, parse, rhs } from "../../../packages/learning/src/answer-types";
 import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, grip, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
-import { FIGURE_SCENES, SCENE_FAMILIES, sceneAnswer, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
+import { FIGURE_SCENES, SCENE_FAMILIES, sceneAnswer, sceneIsPicture, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
 
 const strips: Scene = { type: "scene", kind: "strips", poly: [0.5, 0, 0.25], from: 0, to: 4, prompt: "Add strips.", success: "Done.", goal: { measure: "gap", below: 0.1 } };
 const slope: Scene = { type: "scene", kind: "slope", poly: [0, -2, 0, 1 / 6], from: -3.6, to: 3.6, step: 0.05, prompt: "Find slope 0.", success: "Flat.", goal: { measure: "slope", equals: 0 } };
@@ -260,7 +260,7 @@ test("the cards: dragged into order, smallest on the left", () => {
 });
 
 test("scenes@4: a picture becomes a scene only when the scene arrives at the question's verified answer", () => {
-  assert.deepEqual([...FIGURE_SCENES].sort(), ["array", "grid", "shape", "triangle"]);
+  assert.deepEqual([...FIGURE_SCENES].sort(), ["array", "bars", "grid", "shape", "triangle"]);
   const near = (a: number, b: number) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
   const made = new Map<string, number>();
   let families = 0;
@@ -282,13 +282,36 @@ test("scenes@4: a picture becomes a scene only when the scene arrives at the que
     }
     if (any) families++;
   }
-  assert.ok(families >= 10 && [...FIGURE_SCENES].every((t) => (made.get(t) ?? 0) > 0), `families ${families}; ${JSON.stringify([...made])}`);
+  assert.ok(families >= 13 && [...FIGURE_SCENES].every((t) => (made.get(t) ?? 0) > 0), `families ${families}; ${JSON.stringify([...made])}`);
   // a rectangle whose area is asked and one whose perimeter is asked get different closing words, from the same picture
   const area = sceneForQuestion(pool("rect").items.find((q) => sceneForQuestion(q.id))!.id)!, edge = sceneForQuestion(pool("rperim").items.find((q) => sceneForQuestion(q.id))!.id)!;
   assert.ok(/area is \d+\.$/.test(area.success) && /perimeter is \d+\.$/.test(edge.success));
   // no scene where the picture's own numbers do not give the answer: a shape that is not a rectangle has none
   const odd = [...FAMILIES.keys()].flatMap((f) => pool(f).items).find((q) => (q.figure as unknown as { type?: string; kind?: string } | undefined)?.type === "shape" && !["rectangle", "square"].includes((q.figure as unknown as { kind: string }).kind));
   assert.ok(odd && sceneForQuestion(odd.id) === null);
+});
+
+test("the bar chart: a level line slid to a bar's top reads the scale; for 'how many more', the gap above the shorter bar", () => {
+  const birds = { labels: ["Crow", "Sparrow", "Parrot", "Myna"], values: [9, 2, 6, 4] };
+  const read: Scene = { type: "scene", kind: "bars", ...birds, ask: { read: 2 }, prompt: "Read Parrot.", success: "6.", goal: { measure: "miss", equals: 0 } };
+  const more: Scene = { type: "scene", kind: "bars", ...birds, ask: { more: [0, 1] }, prompt: "Crow above Sparrow.", success: "7 more.", goal: { measure: "miss", equals: 0 } };
+  for (const s of [read, more]) {
+    assert.deepEqual(check(s), []); assert.ok(draggable(s) && !met(s, initial(s)));
+    for (const st of states(s)) { const shapes = draw(s, st); assert.ok(!/NaN|undefined|null/.test(JSON.stringify(shapes) + readout(s, st))); assert.equal(shapes.filter((x) => x.role === "cell").length, 4); for (const sh of shapes) if (sh.t === "rect") assert.ok(sh.x >= 0 && sh.x + sh.w <= 340 && sh.y >= 0 && sh.h >= 0); }
+  }
+  assert.ok(met(read, { y: 6 }) && !met(read, { y: 5 }) && !met(read, { y: 9 })); assert.equal(sceneAnswer(read), 6);
+  assert.equal(readout(read, { y: 6 }), "The line is at 6");
+  assert.ok(met(more, { y: 2 }) && !met(more, { y: 9 })); assert.equal(sceneAnswer(more), 7);
+  assert.equal(readout(more, { y: 2 }), "The line is at 2 · Crow rises 7 above it"); assert.equal(readout(more, { y: 9 }), "The line is at 2 · Crow is level with it".replace("2", "9"));
+  // the line follows the finger to the height of a bar's top
+  const top = (draw(read, initial(read)).filter((x) => x.t === "rect")[2] as { y: number }).y;
+  assert.ok(met(read, pointer(read, initial(read), 200, top)));
+  // from the registry: the question's own words choose the bars, and only if they give the verified answer
+  const q = pool("adbar").items.find((x) => /How many more/.test(x.prompt) && sceneForQuestion(x.id))!, s = sceneForQuestion(q.id)!;
+  assert.ok("more" in (s as { ask: object }).ask); assert.equal(sceneAnswer(s), Number(q.answer));
+  assert.ok(sceneIsPicture(q.id) && !sceneIsPicture("gen:aacmp:82,48,0") && !sceneIsPicture(pool("aaheavy").items[0].id), "only a scene made from the picture stands in for it");
+  assert.equal(sceneForQuestion(pool("aaheavy").items[0].id), null, "a 'which one' question is not a reading of the scale");
+  assert.ok(check({ ...read, ask: { read: 7 } }).length > 0 && check({ ...read, labels: ["a"] }).length > 0 && check({ ...more, ask: { more: [1, 1] } }).length > 0 && check({ ...read, values: [0, 0, 0, 0] }).length > 0);
 });
 
 test("malformed or impossible scenes are refused", () => {

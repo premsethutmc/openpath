@@ -35,7 +35,9 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 ## Scenes from pictures (2026-11-17, branch `feat/figure-scenes`, draft PR, not merged)
 - scenes@4: a question with no builder gets a scene from its own picture, by kind of picture (rectangle, shaded grid, equal
   rows, triangle), only when the scene arrives at the verified answer. 10 more families, 568 released questions.
-- Open: converters for tables, number lines, the coordinate plane, solids, blocks, bars, pictographs and clocks.
+- scene@8 adds `bars` (a reading line on a bar chart), after the owner's screenshot of the bar-chart lesson: 3 more
+  families, 757 questions.
+- Open: converters for tables, number lines, the coordinate plane, solids, blocks, pictographs and clocks.
 
 ## Arrange and play first (2026-11-16, branch `feat/arrange`, draft PR, not merged)
 - scene@7 adds `order` (number cards dragged into order). scenes@3: builders for comparing two numbers, ordering integers
