@@ -112,6 +112,30 @@ Nothing is fetched, saved or written per lesson for it.
 Open: the same for fractions, decimals, algebra, trigonometry and calculus lines (the line check reads only arithmetic
 today); counting the stumble against the skill the step leans on, and going back to that skill when it repeats.
 
+## Stuck at a step (step-help@1)
+
+The owner's direction (17 Nov 2026): take mathematics as a whole to Class 12 and work out what a learner can need at a
+step; the app already holds the working, so it should be able to help there.
+
+What the app holds: 1,118 families, about 353,000 released questions, every one with its verified working as steps; each
+step names its operation and the skill it leans on (337 skills in all). About 3 steps in 10 lean on a skill other than the
+question's own (a division's first step is "multiply", skill "Use multiplication facts"). Mistakes are labelled recall,
+procedural, conceptual or prerequisite, and 18 in 100 point at another skill.
+
+What a learner can need at a step: a fact; a small procedure; what to do next; what a word or symbol means; the idea
+itself; a slip caught; going back to an earlier skill. `packages/learning/src/step-help.ts` gives the first rungs for every
+question, in order and only as asked (`frontend/src/year/StepCoach.tsx`, "I'm stuck" in practice with help, and the working
+after a wrong answer): what to do next (the operation, nothing worked); "This needs: <skill>", which opens that skill's
+card (its own lesson's words and example); a smaller question where the step is a plain calculation (`smallerOf`); then the
+step. Using it in practice is recorded as help, as a hint is. Never in a test.
+
+Cards: 336 of the 337 skills get one by rule, 325 with a worked example. They are the lesson's first words, which are
+sometimes about one example and not the rule (multiplication facts opens on 7 × 8); 10 are very short. These are to be
+raised for review, and the thin ones rewritten once and approved, before the cards are relied on.
+
+Open: the review screen for cards; counting a stumble against the skill the step leans on and going back to it when it
+repeats; notation cards (f(x), ∫, sin); smaller questions beyond whole-number calculations.
+
 ## Where it appears
 
 In the **opening lesson** of a skill the learner has never met, once per learner, when the skill has a recipe (`Lesson`,
