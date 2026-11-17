@@ -164,6 +164,28 @@ class KeptGraderTests(unittest.TestCase):
             self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
         self.assertIsNone(kg._SERVE['child'])
 
+    def test_only_warming_gives_a_fresh_grader_longer_to_start(self):
+        # an answer waits _timeout() whether or not the grader is fresh; only the warm-up (which asks nothing) waits longer
+        kg.stop_server()
+        self.addCleanup(kg.stop_server)
+        seen = []
+        real = kg.select.select
+
+        def watch(r, w, x, left):
+            seen.append(left)
+            return real(r, w, x, left)
+
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_TIMEOUT': '6', 'OPENPATH_GRADER_START': '40'}), mock.patch.object(kg.select, 'select', side_effect=watch):
+            self.assertIsNotNone(kg._ask_server([{'id': 'gen:nosuch:1', 'response': '1'}]))
+            self.assertTrue(seen and max(seen) <= 6.0, 'a real answer on a fresh grader is not given the starting time')
+            kg.stop_server()
+            seen.clear()
+            self.assertEqual(kg._ask_server([], True), [])
+            self.assertTrue(seen and 6.0 < max(seen) <= 40.0, 'the warm-up is')
+            seen.clear()
+            self.assertEqual(kg._ask_server([], True), [])
+            self.assertTrue(not seen or max(seen) <= 6.0, 'a grader already running is not given it again')
+
     def test_warming_starts_the_kept_grader_ahead_of_the_first_answer(self):
         kg.stop_server()
         self.addCleanup(kg.stop_server)

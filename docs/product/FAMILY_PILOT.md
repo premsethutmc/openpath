@@ -122,6 +122,14 @@ the full wording.
 - Not measured on the live server (the free plan gives no timings). Open: the size of the app itself (14.8 MB of code,
   2.9 MB to download) and the server's small processor.
 
+## The first answer after opening (grader-warm@1, 17 Nov 2026)
+
+Measured on the family site: the first answer after the grader has stopped takes 10 to 13 s (the grader starting on 0.15 of
+a CPU); later ones 25 to 130 ms. The grader is now started in the background when a learner's mathematics ledger is read (at
+most once in five minutes), so the start is spent while the lesson is read. Only that warm-up, which asks nothing, gives a
+fresh grader longer to start (`OPENPATH_GRADER_START`, 30 s). An earlier version gave every fresh start that time: a slow
+working check then held an answer for half a minute, and the Grade 10/12 browser journey timed out four times running.
+
 ## An answer that cannot be read (ask-first@1, 17 Nov 2026)
 
 On the family site the owner wrote two answers the checker could not read, eight seconds apart, and the skill was paused for
