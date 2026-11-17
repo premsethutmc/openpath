@@ -14,6 +14,7 @@ import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Fi
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
+import { Explore } from "./Explore";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -149,10 +150,14 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
   );
 }
 /** working-steps@1: a child writes her working one line per box, with × ÷ keys. In practice each line is checked as she
- *  goes (a true calculation gets a tick; a slip says what it should be); in a test nothing is marked until the end. */
+ *  goes (a true calculation gets a tick; a slip says what it should be); in a test nothing is marked until the end.
+ *  next-step@1: the next empty line is there as soon as the last one has something in it (up to eight lines), so there
+ *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
 function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v: string) => void; check: boolean }) {
-  const lines = value ? value.split("\n") : [""];
+  const typed = value ? value.split("\n") : [""];
+  // the box for the next step is always waiting under the last one written
+  const lines = typed[typed.length - 1].trim() && typed.length < 8 ? [...typed, ""] : typed;
   const [focus, setFocus] = useState(0);
   const [done, setDone] = useState<Set<number>>(new Set());
   const put = (ls: string[]) => setValue(ls.join("\n"));
@@ -171,14 +176,13 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
           <span className="ws-n">{i + 1}</span>
           <input aria-label={`Step ${i + 1}`} inputMode="text" autoComplete="off" value={l} placeholder={i === 0 ? "e.g. 90 × 7 = 630" : ""}
             onFocus={() => setFocus(i)} onBlur={() => setDone(new Set(done).add(i))}
-            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); setDone(new Set(done).add(i)); if (i === lines.length - 1 && lines.length < 8) { put([...lines, ""]); setFocus(i + 1); } } }}
+            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); setDone(new Set(done).add(i)); const next = e.currentTarget.closest(".ws")?.querySelectorAll<HTMLInputElement>(".ws-line input")[i + 1]; if (next) { setFocus(i + 1); next.focus(); } } }}
             onChange={(e) => { put(lines.map((x, j) => (j === i ? e.target.value : x))); const d = new Set(done); d.delete(i); setDone(d); }} />
           {mark(i)}
         </div>
       ))}
       <div className="ws-keys">
         {KEYS.map((k) => <button key={k} type="button" className="ws-key" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(k)}>{k}</button>)}
-        {lines.length < 8 && <button type="button" className="ws-key ws-add" onClick={() => { setDone(new Set(done).add(lines.length - 1)); put([...lines, ""]); setFocus(lines.length); }}>+ Step</button>}
       </div>
       <p className="small muted">{check ? "One step per line. Each line gets a tick when it's right." : "One step per line. It's checked with your answer at the end."}</p>
     </div>
@@ -622,7 +626,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // a picture that is not the question's own belongs to the working (it would give the answer away), so it waits with it
   const later = !!guess && !guess.pictured && !!sc.widget;
   const picture = sc.widget && <Picture w={sc.widget} competency={competency} />;
-  const working = sc.math && <>{later && picture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div></>;
+  // explore@1: under the working of an example, its own numbers can be changed (lessons only)
+  const working = sc.math && <>{later && picture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
