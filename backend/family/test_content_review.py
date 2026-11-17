@@ -46,8 +46,8 @@ class ContentReviewTests(ReviewBase):
         here = items()
         self.assertGreater(len(here), 60)
         for item, meta in here.items():
-            if item.startswith('curriculum:'):
-                continue  # a release's hash is its own (checked by the release tests); not in the repository registry
+            if item.startswith(('curriculum:', 'recipe:', 'card:')):
+                continue  # a release's hash is its own (checked by the release tests), a lesson's or card's is generated (teaching.v1.json): not in the repository registry
             self.assertEqual(meta['hash'], repo.get(item), item)
 
     def test_roles_workflow_and_history(self):
@@ -217,7 +217,7 @@ class TeachingReviewTests(ReviewBase):
         item = next(i for i in self.items() if i.startswith('card:'))
         self.assertEqual(self.post(self.learner_parent, item, 'approve').status_code, 403)
         self.assertEqual(self.post(self.educator, item, 'reject').status_code, 400)  # needs the reason
-        self.assertEqual(self.post(self.educator, item, 'release').status_code, 400)
+        self.assertEqual(self.post(self.manager, item, 'release').status_code, 400)  # no release step
         self.assertEqual(self.post(self.educator, item, 'approve').status_code, 201)
         self.assertEqual(self.items()[item]['state'], 'approved')
         self.assertEqual(self.post(self.educator, item, 'request_changes', 'about one example, not the rule').status_code, 201)
@@ -227,6 +227,10 @@ class TeachingReviewTests(ReviewBase):
     def test_a_decision_on_an_earlier_version_no_longer_applies(self):
         item = next(i for i in self.items() if i.startswith('recipe:'))
         self.assertEqual(self.post(self.educator, item, 'approve').status_code, 201)
-        ContentDecision.objects.filter(item=item).update(content_hash='00000000')
-        t = self.items()[item]
+        d = ContentDecision.objects.get(item=item)
+        other = next(i for i in self.items() if i.startswith('recipe:') and i != item)
+        # the same approval, made on a version that is no longer the current one
+        ContentDecision.objects.create(item=other, content_hash='00000000', version='', decision='approve', reviewer=d.reviewer, reviewer_label=d.reviewer_label, role='educator', note='')
+        t = self.items()[other]
         self.assertEqual((t['state'], t['changed'], t['history'][0]['current']), ('submitted', True, False))
+        self.assertEqual(self.items()[item]['state'], 'approved')
