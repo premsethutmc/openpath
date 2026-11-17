@@ -30,6 +30,9 @@ test("integrals without limits and derivatives", () => {
   assert.equal(states("∫ (6 − 2x) dx = 6x − x² + C", "∫ (6 − 2x) dx = 6x − 2x² + C", "∫ cos x dx = sin x + c"), "rwr");
   assert.equal(states("d/dx (x³ + 2x) = 3x² + 2", "d/dx (x³) = 3x", "d/dx (sin x) = cos x"), "rwr");
 });
+test("log is read both ways: natural in calculus, base ten in a logarithms chapter", () => {
+  assert.equal(states("d/dx (log x) = 1/x", "d/dx (6 log x) = 6/x", "log 100 = 2", "d/dx (log x) = 2/x", "log 100 = 3"), "rrrww");
+});
 test("what cannot be read is never called wrong", () => {
   assert.equal(states("area = base × height", "∫ (6 − 2x)", "the line meets the axes at 3 and 6", "y = mx + c"), "uuuu");
   // units and words are not unknowns: nothing is ticked or crossed on their account

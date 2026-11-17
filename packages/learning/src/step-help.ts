@@ -8,6 +8,7 @@
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
 import { deepen } from "./deepen";
+import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
 import { explainStep, problemOf } from "./families";
 import { graph } from "./graph";
@@ -68,6 +69,8 @@ const NEXT: Record<string, string> = { note: "notice what the question gives you
 export function stepsHelp(qid: string): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
+  // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
+  const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   return p.steps.flatMap((s, i) => {
     const own: StepHelp = {
       next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${NEXT[s.op] ?? s.op}.`,
@@ -75,6 +78,7 @@ export function stepsHelp(qid: string): StepHelp[] | null {
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
     };
     // deepen@1: the working inside the step, line by line, comes before the step itself (which then sums it up)
+    if (worked.length) return i === 0 ? [own, ...worked] : [own];
     const finer = deepen(own.shown);
     if (finer.length < 2) return [own];
     const lines: StepHelp[] = finer.map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true }));

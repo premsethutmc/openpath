@@ -233,3 +233,19 @@ Open: of the 745 question types with two steps or fewer (mid-range question), 67
 are rightly one step (look, count, recall); the rest state a method without working it (chain rule, limits, matrices,
 word problems) and need their steps written into the question type itself, which then needs its answer key
 re-certified. Calculus: 43 of 85 types.
+
+## Worked steps for calculus (deeper-calculus@1)
+
+`packages/learning/src/deeper-calculus.ts` writes the working a calculus question's own steps leave out, per question
+type, from the question's printed function (no question, answer or fingerprint changes): first principles, velocity
+and marginal revenue, continuity with an unknown k, concavity, differentiability at a join, limits at infinity, the
+chain and quotient rules, e^(ax) and log x, standard integrals, ∫ f(ax + b) dx, integration by parts (x times
+e^(ax), sin, cos), partial derivatives, and any definite integral printed in the question (with |…| split where it
+changes sign). The lines sit between the question's first step and its last in "I'm stuck". A shape it does not know
+gets nothing. `deeper-calculus.test.ts` checks every calculation on about 660 questions with the line checker, and
+that a working ending in a number ends at the keyed answer. Calculus types with two steps of help or fewer: 46 → 28.
+
+The line checker now reads `log` both ways (natural in calculus, base ten in a logarithms chapter).
+
+Open: the 28 remaining types (inverse trig, sin² and cos², products with log, limits by standard results, implicit
+differentiation, series, several variables) and the variants of the handled types it does not read yet.

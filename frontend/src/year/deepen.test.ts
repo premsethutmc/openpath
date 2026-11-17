@@ -21,7 +21,7 @@ test("the area under 2x + y = 6: the integral is worked term by term and between
   assert.deepEqual(shown("Area = 2∫₀^1 2√(1x) dx").slice(-2), ["4/3 − 0 = 4/3", "2 × 4/3 = 8/3"]);
   assert.deepEqual(shown("∫ (6 − 2x) dx"), ["∫ −2x dx = −x²", "∫ 6 dx = 6x", "−x² + 6x + C"]);
   assert.deepEqual(shown("d/dx (x³ + 2x) = 3x² + 2"), ["d/dx (x³) = 3x²", "d/dx (2x) = 2", "3x² + 2"]);
-  assert.deepEqual(shown("V = π∫ from 0 to 2 of 4x² dx = 32π/3"), ["∫ (4x²) dx = 4x³/3", "At x = 2: 32/3", "At x = 0: 0", "32/3 − 0 = 32/3"]);
+  assert.deepEqual(shown("V = π∫ from 0 to 2 of 4x² dx = 32π/3"), ["∫ (4x²) dx = 4x³/3", "At x = 2: 32/3", "At x = 0: 0", "32/3 − 0 = 32/3", "π × 32/3 = 32π/3"]);
   assert.deepEqual(shown("∫₀^π sin x dx"), []); // not powers of x: left as it was
 });
 test("every line it writes for every question type is true (read by the line checker)", () => {
