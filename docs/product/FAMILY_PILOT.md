@@ -249,3 +249,12 @@ The line checker now reads `log` both ways (natural in calculus, base ten in a l
 
 Open: the 28 remaining types (inverse trig, sin² and cos², products with log, limits by standard results, implicit
 differentiation, series, several variables) and the variants of the handled types it does not read yet.
+
+## Doing a step of help (step-ask@1)
+
+In "I'm stuck", a step that ends in a result the line checker can judge ("Bring the power down: 8 × 4 = 32") is shown
+with the result left out, and the learner enters it (`packages/learning/src/step-ask.ts`, `StepEntry` in
+`StepCoach.tsx`). An entry is right when the line it completes is true, so an equal number or expression counts; a
+right entry moves to the next step by itself. "Show me this step" stays. About a third of all steps of help (2,991 of
+9,160 sampled, in 455 question types) can be entered; the rest are shown as before. The open help now takes the full
+width, so the Check button keeps its size. The working box has ³ and ^ keys.
