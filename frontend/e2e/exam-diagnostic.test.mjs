@@ -62,3 +62,26 @@ test('pilot build refuses diagnostic route',async t=>{
  assert.match(await page.locator('body').innerText(),/not available|not included|pilot/i);
  assert.equal(await page.locator('textarea,fieldset').count(),0);
 });
+
+test('fixed offline writing example verifies checks without using learner text',async t=>{
+ const {page,errors,outside}=await open(t);
+ await page.getByText('Explore the offline synthetic writing example',{exact:true}).click();
+ const demo=page.locator('[data-synthetic-writing-demo]');
+ await demo.getByRole('button',{name:'Run fixed simulated example'}).click();
+ await demo.getByRole('heading',{name:'Answer separate questions'}).waitFor();
+ assert.equal(await demo.getByText(/Fixture suggestion:/).count(),0);
+ // Both pairs wrong: deterministic policy should offer both targeted lessons.
+ await demo.locator('fieldset button').nth(1).click();
+ await demo.locator('fieldset button').nth(0).click();
+ await demo.locator('fieldset button').nth(0).click();
+ await demo.locator('fieldset button').nth(1).click();
+ await demo.getByRole('button',{name:'Show deterministic check results'}).click();
+ await demo.getByRole('heading',{name:'Deterministic check results'}).waitFor();
+ assert.equal(await demo.getByRole('heading',{name:'Targeted lesson'}).count(),2);
+ assert.match(await demo.innerText(),/Your saved writing remains unassessed/);
+ await demo.getByRole('button',{name:'Reset simulated example'}).click();
+ await demo.getByRole('button',{name:'Run fixed simulated example'}).click();
+ await demo.getByRole('heading',{name:'Deterministic check results'}).waitFor();
+ assert.equal(await demo.locator('fieldset').count(),0);
+ assert.deepEqual(errors,[]);assert.deepEqual(outside,[]);
+});
