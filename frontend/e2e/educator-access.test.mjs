@@ -85,6 +85,8 @@ test("an administrator grants and removes the educator role; the educator reache
   await admin.page.getByRole("button", { name: "Give the educator role" }).click();
   await admin.page.getByRole("status").filter({ hasText: `${EDUCATOR} can now mark written answers` }).waitFor();
   const row = admin.page.locator("tr").filter({ hasText: EDUCATOR });
+  // The success note precedes the asynchronous table refresh. Wait for its actual state.
+  await row.getByRole("cell", { name: /^Since \d{4}-\d{2}-\d{2}$/ }).waitFor();
   assert.match(await row.innerText(), /Since \d{4}-\d{2}-\d{2}/);
   await admin.page.screenshot({ path: `${shots}1-admin-granted.png`, fullPage: true });
 
@@ -99,6 +101,7 @@ test("an administrator grants and removes the educator role; the educator reache
   // the administrator removes it; the educator's marking screen closes on the next load
   await admin.page.getByRole("button", { name: `Remove the educator role from ${EDUCATOR}` }).click();
   await admin.page.getByRole("status").filter({ hasText: `${EDUCATOR} no longer has the educator role.` }).waitFor();
+  await row.getByRole("cell", { name: /^Removed \d{4}-\d{2}-\d{2}$/ }).waitFor();
   assert.match(await row.innerText(), /Removed/);
   await admin.page.screenshot({ path: `${shots}3-admin-removed.png`, fullPage: true });
   assert.equal((await call(edu.page, "/written/queue/")).status, 403);

@@ -925,6 +925,8 @@ async function learnReleasedTopic(page, learner, path, shotPrefix, target, expec
     assert.notEqual(attempt.activity, "retention", "re-entry is not a delayed mastery check");
     await page.reload();
     assert.deepEqual(await records(page, learner), after);
+    // The API read may finish before React has loaded the year dashboard.
+    await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
     await home(page);
     for (const t of path.slice(0, -1)) await tile(page, t);
     assert.notEqual(await tileStatus(page, path.at(-1)), "verified", "releasing content cannot verify untaught methods");

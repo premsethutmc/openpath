@@ -219,3 +219,14 @@ def _commit() -> str:
 
 OPENPATH_COMMIT = _commit()
 OPENPATH_CLAIM_TTL_HOURS = 24
+
+# Shared AI infrastructure: credentials remain server-only and require explicit opt-in.
+# These aggregate call caps apply even when tasks retain their separate legacy credentials.
+# Call caps are not a currency/billing guarantee. Existing feature/data-use gates still apply.
+OPENPATH_AI_SHARED_CONFIG = os.environ.get('OPENPATH_AI_SHARED_CONFIG', 'off')
+OPENPATH_AI_PROVIDER = os.environ.get('OPENPATH_AI_PROVIDER', 'anthropic')
+OPENPATH_AI_MODEL = os.environ.get('OPENPATH_AI_MODEL', '')
+OPENPATH_AI_BASE_URL = os.environ.get('OPENPATH_AI_BASE_URL', 'https://api.anthropic.com')
+OPENPATH_AI_API_KEY = os.environ.get('OPENPATH_AI_API_KEY', '')
+OPENPATH_AI_DAILY_REQUESTS = int(os.environ.get('OPENPATH_AI_DAILY_REQUESTS', '1000'))
+OPENPATH_AI_USER_DAILY_REQUESTS = int(os.environ.get('OPENPATH_AI_USER_DAILY_REQUESTS', '50'))

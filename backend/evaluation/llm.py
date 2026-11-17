@@ -26,13 +26,16 @@ This file does not import Django, so it can be tested on its own.
 from __future__ import annotations
 
 import json
+import math
+import http.client
 import re
-import socket
 import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
 from typing import Callable
+
+MAX_RESPONSE_BYTES = 2_000_000
 
 PROVIDERS = ("anthropic", "openai_compatible")
 
@@ -60,27 +63,49 @@ class LLMConfig:
         p = []
         if self.provider not in PROVIDERS:
             p.append(f"provider must be one of {', '.join(PROVIDERS)}")
-        if not self.model:
-            p.append("a model name is required")
-        if not (self.base_url.startswith("https://") or _loopback(self.base_url)):
-            p.append("base_url must be an https:// URL (plain http only to this machine, e.g. a local mock provider)")
-        if not self.api_key:
-            p.append("an API key is required (set it in the server environment, never in code)")
-        if not (1 <= self.max_output_tokens <= 16_000):
-            p.append("max_output_tokens must be between 1 and 16000")
-        if not (1 <= self.timeout_s <= 300):
+        if not isinstance(self.model, str) or not self.model.strip() or len(self.model) > 200:
+            p.append("a model name of at most 200 characters is required")
+        if not _valid_url(self.base_url):
+            p.append("base_url must be HTTPS (or loopback HTTP), without credentials, query or fragment")
+        if not isinstance(self.api_key, str) or not self.api_key or len(self.api_key) > 4096 or any(ord(c) < 32 or ord(c) > 126 for c in self.api_key):
+            p.append("a valid API key is required in the server environment")
+        for name, value, low, high in (("max_output_tokens", self.max_output_tokens, 1, 16000), ("max_input_chars", self.max_input_chars, 1, 1_000_000), ("retries", self.retries, 0, 3)):
+            if type(value) is not int or not low <= value <= high:
+                p.append(f"{name} must be an integer between {low} and {high}")
+        if type(self.timeout_s) not in (int, float) or not math.isfinite(self.timeout_s) or not 1 <= self.timeout_s <= 300:
             p.append("timeout_s must be between 1 and 300 seconds")
-        if not (0 <= self.retries <= 3):
-            p.append("retries must be between 0 and 3")
+        if self.temperature is not None and (type(self.temperature) not in (int, float) or not math.isfinite(self.temperature) or not 0 <= self.temperature <= 2):
+            p.append("temperature must be finite and between 0 and 2")
+        if not isinstance(self.anthropic_version, str) or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", self.anthropic_version):
+            p.append("anthropic_version must use YYYY-MM-DD")
         return p
 
 
-def _loopback(url: str) -> bool:
-    """Plain http is allowed only to this machine (127.0.0.1, localhost or ::1): nothing leaves it unencrypted."""
-    from urllib.parse import urlparse
+def _valid_url(url: str) -> bool:
+    from urllib.parse import urlsplit
+    if not isinstance(url, str) or not url or any(c.isspace() or ord(c) < 32 for c in url) or "\\" in url:
+        return False
+    try:
+        u = urlsplit(url)
+        port = u.port
+        return bool(u.hostname and not u.username and not u.password and "@" not in u.netloc
+                    and "?" not in url and "#" not in url
+                    and (port is None or 1 <= port <= 65535)
+                    and (u.scheme == "https" or (u.scheme == "http" and u.hostname in ("127.0.0.1", "localhost", "::1"))))
+    except ValueError:
+        return False
 
-    u = urlparse(url)
-    return u.scheme == "http" and u.hostname in ("127.0.0.1", "localhost", "::1")
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def _bounded_read(response) -> bytes:
+    raw = response.read(MAX_RESPONSE_BYTES + 1)
+    if len(raw) > MAX_RESPONSE_BYTES:
+        raise LLMError("the model provider's reply exceeded the size limit")
+    return raw
 
 
 @dataclass(frozen=True)
@@ -90,23 +115,35 @@ class Completion:
     output_tokens: int
 
 
+def _completion(text, input_tokens, output_tokens) -> Completion:
+    if not isinstance(text, str) or not text.strip() or any(type(n) is not int or n < 0 or n > 100_000_000 for n in (input_tokens, output_tokens)):
+        raise LLMError("the model provider's reply had an unexpected shape")
+    return Completion(text, input_tokens, output_tokens)
+
+
 # (url, headers, body bytes, timeout) -> (status, body bytes). Replaced in tests; never logs anything.
 Transport = Callable[[str, dict, bytes, float], tuple[int, bytes]]
 
 
 def urllib_transport(url: str, headers: dict, body: bytes, timeout: float) -> tuple[int, bytes]:
-    req = urllib.request.Request(url, data=body, headers=headers, method="POST")
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:  # noqa: S310 (https enforced by LLMConfig)
-            return r.status, r.read()
+        req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+        with urllib.request.build_opener(_NoRedirect()).open(req, timeout=timeout) as r:  # noqa: S310 (https enforced by LLMConfig)
+            return r.status, _bounded_read(r)
     except urllib.error.HTTPError as e:
         try:
-            body = e.read()
-        except Exception:  # noqa: BLE001
-            body = b""
-        return e.code, body
-    except (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError) as e:
-        raise LLMError(f"the model provider could not be reached ({type(e).__name__})") from None
+            # Never read a redirect body or forward any authentication headers.
+            return e.code, b"" if 300 <= e.code < 400 else _bounded_read(e)
+        except LLMError:
+            raise
+        except Exception:
+            raise LLMError("the model provider reply could not be read") from None
+        finally:
+            e.close()
+    except LLMError:
+        raise
+    except (urllib.error.URLError, OSError, ValueError, http.client.HTTPException):
+        raise LLMError("the model provider could not be reached") from None
 
 
 TRANSIENT = {429, 500, 504, 529}
@@ -116,8 +153,8 @@ def _error_type(raw: bytes) -> str:
     """The provider's error type (for example rate_limit_error), never its message: messages could echo input."""
     try:
         t = json.loads(raw.decode("utf-8")).get("error", {}).get("type", "")
-        return t if isinstance(t, str) and re.fullmatch(r"[a-z_]{1,40}", t) else ""
-    except (UnicodeDecodeError, json.JSONDecodeError, AttributeError):
+        return t if t in ("invalid_request_error", "authentication_error", "permission_error", "not_found_error", "request_too_large", "rate_limit_error", "api_error", "overloaded_error") else ""
+    except (UnicodeDecodeError, json.JSONDecodeError, AttributeError, TypeError, RecursionError):
         return ""
 
 
@@ -126,6 +163,8 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
     bad = config.problems()
     if bad:
         raise LLMError("the LLM evaluator is not configured: " + "; ".join(bad))
+    if not isinstance(system, str) or not isinstance(user, str):
+        raise LLMError("the request must contain text")
     if len(system) + len(user) > config.max_input_chars:
         raise LLMError("the request is larger than the configured input limit")
     base = config.base_url.rstrip("/")
@@ -156,10 +195,14 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
     while True:
         try:
             status, raw = transport(url, headers, payload, config.timeout_s)
-        except LLMError:
+        except Exception:
             if attempt >= config.retries:
-                raise
+                raise LLMError("the model provider could not be reached") from None
             status, raw = -1, b""
+        if type(status) is not int or not isinstance(raw, bytes):
+            raise LLMError("the model provider returned an invalid response")
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise LLMError("the model provider reply exceeded the size limit")
         if status == 200:
             break
         if (status in TRANSIENT or status == -1) and attempt < config.retries:
@@ -168,11 +211,13 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
             continue
         if status == -1:
             raise LLMError("the model provider could not be reached")
+        if status != -1 and not 100 <= status <= 599:
+            raise LLMError("the model provider returned an invalid status")
         kind = _error_type(raw)
         raise LLMError(f"the model provider answered with status {status}{f' ({kind})' if kind else ''}")
     try:
         data = json.loads(raw.decode("utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError):
+    except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
         raise LLMError("the model provider's reply was not JSON") from None
     try:
         if config.provider == "anthropic":
@@ -185,12 +230,14 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
                 raise LLMError("the request was larger than the model's context window")
             text = "".join(b.get("text", "") for b in data["content"] if b.get("type") == "text")
             usage = data.get("usage") or {}
-            return Completion(text, int(usage.get("input_tokens", 0)), int(usage.get("output_tokens", 0)))
+            return _completion(text, usage.get("input_tokens", 0), usage.get("output_tokens", 0))
         choice = data["choices"][0]
+        if choice.get("finish_reason") == "content_filter" or choice.get("message", {}).get("refusal"):
+            raise LLMError("the model declined to answer (refusal)")
         if choice.get("finish_reason") == "length":
             raise LLMError("the model's answer was cut off at the output limit")
         usage = data.get("usage") or {}
-        return Completion(choice["message"]["content"] or "", int(usage.get("prompt_tokens", 0)), int(usage.get("completion_tokens", 0)))
+        return _completion(choice["message"]["content"], usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0))
     except LLMError:
         raise
     except (KeyError, IndexError, TypeError, ValueError, AttributeError):
