@@ -508,7 +508,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
         : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={setValue} disabled={ctx.saving} />}
-      {clarify && <p className="small" role="status">{clarify}</p>}
+      {clarify && <p className={KID ? "recipe-reply" : "small"} role="status">{clarify}</p>}
       {workable && (
         <details className="working" open={workingOpen}>
           {/* Save activation before a queued native toggle can race editing/reload.
@@ -533,6 +533,10 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             if (lines.length > maxLines || lines.some((line) => line.length > maxChars)) { setClarify(`Your work is still here. Use at most ${maxLines} lines, with at most ${maxChars} characters per line, before checking.`); return; }
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
             const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
+            // ask-first@1 (the child build): an answer that cannot be read is not sent. The child is shown how to write it and
+            // tries again at once; nothing is recorded, so writing "7 birds" twice can no longer pause the skill (pause@1
+            // counts unreadable answers that were sent). Elsewhere the first unreadable answer is recorded as before.
+            if (KID && preview?.clarification && preview.credit === null && preview.feedback.kind === "clarify") { setClarify(`${preview.clarification.prompt} Nothing has been sent yet: change your answer and tap Check again.`); return; }
             submitting.current = true;
             let ok: boolean;
             try { ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }

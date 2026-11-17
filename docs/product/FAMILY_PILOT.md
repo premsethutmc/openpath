@@ -118,3 +118,15 @@ the full wording.
   `CONN_HEALTH_CHECKS`), so the saves of one sitting do not each open a new encrypted connection.
 - Not measured on the live server (the free plan gives no timings). Open: the size of the app itself (14.8 MB of code,
   2.9 MB to download) and the server's small processor.
+
+## An answer that cannot be read (ask-first@1, 17 Nov 2026)
+
+On the family site the owner wrote two answers the checker could not read, eight seconds apart, and the skill was paused for
+two days with "this needs a person" (pause@1 counts unreadable answers that were sent; the checker reads a bare number, so
+"7 birds", "seven" and "9-2" are all unreadable). In the child build an answer the app's own preview cannot read is no
+longer sent: the child is shown how to write it ("Type just your final answer, for example 7") and tries again at once.
+Nothing is recorded, so this can no longer pause a skill. Other builds are unchanged: the first unreadable answer is
+recorded and asked about, as before.
+
+Open: reading the plain cases as the number ("7 birds"); whether pause@1 should ever apply to unreadable answers.
+
