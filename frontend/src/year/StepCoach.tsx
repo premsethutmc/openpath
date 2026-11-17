@@ -27,6 +27,7 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
         <span>{ask.lead}</span>
         <input aria-label="Your answer for this step" inputMode={/^[\d.]+$/.test(ask.value) ? "decimal" : "text"} autoComplete="off" value={v} disabled={state === "right"}
           onChange={(e) => { setV(e.target.value); setState(""); }} onBlur={check} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); check(); } }} />
+        {ask.unit && <span className="step-unit">{ask.unit}</span>}
       </label>
       <button type="button" className="secondary" disabled={!v.trim() || state === "right"} onClick={check}>Check this step</button>
       {state === "right" ? <span className="ws-mark ok" role="status">Yes.</span> : state === "wrong" ? <span className="ws-mark bad" role="status">Not yet. Have another go, or ask to see it.</span> : null}
@@ -34,9 +35,11 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
   );
 }
 
-export function StepCoach({ qid, onUsed, opener = "I'm stuck" }: { qid: string; onUsed?: () => void; opener?: string }) {
+/** `startOpen`: in a lesson's worked example the steps are there to be done from the start (no button to ask for them);
+ *  `onDone` is called when the last step has been done or shown. */
+export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void }) {
   const steps = useMemo(() => stepsHelp(qid), [qid]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(startOpen);
   const [at, setAt] = useState(0);
   const [card, setCard] = useState(false);
   if (!steps) return null;
@@ -48,7 +51,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck" }: { qid: string; 
   const entry = now ? askOf(now.shown) : null;
   // stay-open@1: a step that has been done stays on the page with what was done and why; the next step's "what to do"
   // is there straight away, and an opened rule stays open while the next step uses the same rule
-  const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); };
+  const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); if (at + 1 >= steps.length) onDone?.(); };
   return (
     <div className="coach" data-coach-step={at}>
       {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
@@ -69,7 +72,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck" }: { qid: string; 
           <button type="button" className="secondary" onClick={advance}>{at === steps.length - 1 ? "Show me the last step" : "Show me this step"}</button>
         </>
       )}
-      {!now && <p className="small muted">That is every step. Now try it yourself.</p>}
+      {!now && <p className="small muted">{startOpen ? "That is every step." : "That is every step. Now try it yourself."}</p>}
     </div>
   );
 }
