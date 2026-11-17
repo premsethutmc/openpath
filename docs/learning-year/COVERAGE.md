@@ -431,12 +431,12 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | lineq: Solving a linear inequality | `MATH.algebra.inequalities` | 500 | 0 | 114/101/285 | `443e98ea` |
 | lneg: Solving a linear equation with negative numbers | `MATH.algebra.linear-rational` | 500 | 0 | 92/98/310 | `7a32e481` |
 | dprod: Differentiating k xⁿ times sin(ax) or cos(ax) | `MATH.calculus.derivative-rules` | 120 | 0 | 10/70/40 | `31ee105e` |
-| aapatn: What comes next in a repeating pattern | `MATH.algebra.repeating-patterns` | 400 | 0 | 67/201/132 | `7fdf5590` |
+| aapatn: What comes next in a repeating pattern | `MATH.algebra.repeating-patterns` | 400 | 0 | 67/201/132 | `4999e3a2` |
 | aapatu: How many shapes are in the part that repeats | `MATH.algebra.repeating-patterns` | 228 | 0 | 24/108/96 | `0c2c00b7` |
-| aarow: Places in a row: left and right | `MATH.geometry.positions` | 300 | 0 | 27/118/155 | `c4248b2b` |
+| aarow: Places in a row: left and right | `MATH.geometry.positions` | 300 | 0 | 27/118/155 | `de0ebccb` |
 | aashelf: Above and below on shelves | `MATH.geometry.positions` | 120 | 0 | 24/24/72 | `54f5aaf9` |
 | aasolid: Things shaped like a sphere, cylinder, cube or cone | `MATH.geometry.shapes` | 300 | 0 | 63/120/117 | `8d59a7df` |
-| aaflat: Finding triangles, squares and circles turned different ways | `MATH.geometry.shapes` | 300 | 0 | 29/109/162 | `dd78cfd8` |
+| aaflat: Finding triangles, squares and circles turned different ways | `MATH.geometry.shapes` | 300 | 0 | 29/109/162 | `97de1fde` |
 | aacald: The date of the first, second … Monday on a calendar | `MATH.measurement.calendar` | 300 | 0 | 89/119/92 | `57949a8e` |
 | aacalc: How many Mondays (or other days) are in a month | `MATH.measurement.calendar` | 168 | 0 | 14/90/64 | `dbdbe993` |
 | aacalgap: Days from one date to another in the same month | `MATH.measurement.calendar` | 300 | 0 | 138/102/60 | `f5a34d9a` |
@@ -459,15 +459,15 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aaordn: Putting numbers up to 99 in order | `MATH.number.compare-numbers` | 300 | 0 | 82/82/136 | `2402136d` |
 | aatens: Tens and ones: what number do the blocks show | `MATH.number.place-value-tens` | 130 | 0 | 9/81/40 | `fe301eaa` |
 | aadigit: The value of a digit in a two-digit number | `MATH.number.place-value-tens` | 234 | 0 | 36/117/81 | `04a20ec2` |
-| aagreat: The greatest and smallest two-digit number from digit cards | `MATH.number.place-value-tens` | 240 | 0 | 0/204/36 | `c55e2a5d` |
+| aagreat: The greatest and smallest two-digit number from digit cards | `MATH.number.place-value-tens` | 240 | 0 | 0/204/36 | `ccf87773` |
 | aaword: Writing a number name as a number | `MATH.number.place-value-tens` | 89 | 0 | 8/9/72 | `f51d94df` |
 | aasub: Taking away within 20 | `MATH.number.subtraction` | 190 | 0 | 36/64/90 | `ce233fd8` |
 | aamore: How many more: comparing two groups in a picture | `MATH.number.subtraction` | 300 | 0 | 90/76/134 | `d7151c6a` |
 | aazero: Adding and taking away 0 (and taking away all) | `MATH.number.zero` | 80 | 0 | 60/20/0 | `7f6fbe00` |
-| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `781705a2` |
+| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `e1eb783e` |
 | aagrp: Which group has more or fewer, or are they the same | `MATH.number.compare-numbers` | 243 | 0 | 84/84/75 | `3ff16f44` |
 | aabig: Which of two things is bigger or smaller | `MATH.number.compare-numbers` | 90 | 0 | 42/30/18 | `e3097b86` |
-| aaordx: Ordering numbers from 9 up to crores, ascending or descending | `MATH.number.compare-numbers` | 394 | 0 | 113/114/167 | `1c5cbcf6` |
+| aaordx: Ordering numbers from 9 up to crores, ascending or descending | `MATH.number.compare-numbers` | 394 | 0 | 113/114/167 | `5cf4ed7d` |
 | aasign: Comparing two numbers with <, > or = | `MATH.number.compare-numbers` | 189 | 0 | 29/80/80 | `61337c14` |
 | aadigmax: The greatest or smallest number made from given digits | `MATH.number.compare-numbers` | 300 | 0 | 60/165/75 | `5af85daf` |
 | aapass: Sorting a list by comparing neighbours (passes of swaps) | `MATH.reasoning.algorithms-flowcharts` | 174 | 0 | 40/80/54 | `ad63e19f` |
@@ -493,13 +493,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abpicmore: How many more in a picture record | `MATH.statistics.picture-data` | 400 | 0 | 154/71/175 | `c57ab305` |
 | abseq: What comes next when skip counting | `MATH.algebra.number-patterns` | 400 | 0 | 151/201/48 | `65f75907` |
 | abmiss: The missing number in a counting pattern | `MATH.algebra.number-patterns` | 400 | 0 | 171/73/156 | `ac5c5756` |
-| abline: Letters made of straight or curved lines | `MATH.geometry.line-types` | 93 | 0 | 32/28/33 | `6d8c837f` |
+| abline: Letters made of straight or curved lines | `MATH.geometry.line-types` | 93 | 0 | 32/28/33 | `9838eb84` |
 | abgrid: The shortest path along a grid | `MATH.geometry.maps-directions` | 300 | 0 | 78/167/55 | `11f6c953` |
 | abmove: Where you end after moves on a grid | `MATH.geometry.maps-directions` | 300 | 0 | 78/153/69 | `cb290fd0` |
 | abside: Counting sides and corners of flat shapes | `MATH.geometry.shape-properties` | 284 | 0 | 4/20/260 | `414fc773` |
 | abroll: Things that roll and things that slide | `MATH.geometry.shape-properties` | 300 | 0 | 99/102/99 | `ff7be260` |
 | absolid: Faces, edges and corners of solids | `MATH.geometry.shape-properties` | 93 | 0 | 3/24/66 | `960677ce` |
-| absym: Letters that fold onto themselves | `MATH.geometry.symmetry-fold` | 92 | 0 | 17/25/50 | `3a7f619f` |
+| absym: Letters that fold onto themselves | `MATH.geometry.symmetry-fold` | 92 | 0 | 17/25/50 | `d5c5b8ad` |
 | abcup: Comparing how many cups containers hold | `MATH.measurement.capacity` | 400 | 0 | 216/121/63 | `3b148f97` |
 | abjug: Reading millilitres on a measuring jug | `MATH.measurement.capacity` | 94 | 0 | 27/47/20 | `66d7f85e` |
 | abclock: Reading the time on a clock | `MATH.measurement.clock` | 144 | 0 | 24/24/96 | `3fc4e023` |
@@ -512,7 +512,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abreg: Building a number from extra tens or ones | `MATH.number.hundreds` | 400 | 0 | 33/178/189 | `a79008cf` |
 | abdir: The four directions: North, South, East and West | `MATH.geometry.maps-directions` | 104 | 0 | 80/8/16 | `4fb78280` |
 | abroute: Distances on a map: using a scale and choosing the shortest route | `MATH.geometry.maps-directions` | 174 | 0 | 42/58/74 | `7f9241b9` |
-| abcurve: Shapes with straight sides, curved sides or both | `MATH.geometry.shape-properties` | 264 | 0 | 42/134/88 | `e6d7d379` |
+| abcurve: Shapes with straight sides, curved sides or both | `MATH.geometry.shape-properties` | 264 | 0 | 42/134/88 | `7980c471` |
 | abdiag: Sides, corners and diagonals of flat shapes, and sorting by them | `MATH.geometry.shape-properties` | 300 | 0 | 1/247/52 | `1f1f1de4` |
 | abcurved: Faces, curved surfaces, edges and corners of cylinders, cones and spheres | `MATH.geometry.shape-properties` | 300 | 0 | 4/64/232 | `37afccde` |
 | abobj: Everyday things with straight or curved edges | `MATH.geometry.line-types` | 120 | 0 | 60/60/0 | `aec6bb2a` |
@@ -558,12 +558,12 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acequal: Are the parts equal? Checking halves and quarters | `MATH.number.unit-fractions` | 144 | 0 | 48/66/30 | `7e1eece2` |
 | acnlcmp: Comparing four-digit numbers by where they lie on a number line | `MATH.number.number-line` | 400 | 0 | 200/100/100 | `7ff7d494` |
 | acmcmp: Comparing lengths written in metres and centimetres | `MATH.measurement.length-conversion` | 400 | 0 | 0/357/43 | `38bf04f2` |
-| acplace: Placing digit cards to make the largest or smallest sum or difference | `MATH.algebra.missing-number` | 300 | 0 | 100/100/100 | `d3ce09d8` |
+| acplace: Placing digit cards to make the largest or smallest sum or difference | `MATH.algebra.missing-number` | 300 | 0 | 100/100/100 | `cb27e8a6` |
 | acelhm: Time intervals in hours and minutes | `MATH.measurement.elapsed-time` | 400 | 0 | 43/166/191 | `5cc34d46` |
 | acpicttab: Pictographs and tables: completing, totals and the largest group | `MATH.statistics.pictographs` | 300 | 0 | 16/236/48 | `452eea7c` |
 | acfacts: Related facts: addition and subtraction, multiplication and division | `MATH.algebra.missing-number` | 280 | 0 | 80/160/40 | `b259f1a1` |
 | acmmkm: Millimetres, centimetres, metres and kilometres | `MATH.measurement.length-conversion` | 400 | 0 | 144/143/113 | `2993636f` |
-| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `853f58ee` |
+| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `ed6a1e0c` |
 | acpicthalf: Reading a pictograph with half pictures | `MATH.statistics.pictographs` | 300 | 0 | 123/119/58 | `991e6a03` |
 | acdecu: Writing a length in a larger unit as a decimal | `MATH.measurement.length-conversion` | 400 | 0 | 87/239/74 | `a683d111` |
 | acparl: Parallel, perpendicular or neither | `MATH.geometry.lines-segments` | 300 | 0 | 36/182/82 | `3d78c3ab` |
@@ -644,7 +644,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeangk: Classifying angles, including reflex angles | `MATH.geometry.angles-intro` | 142 | 0 | 36/36/70 | `0d9ab0bb` |
 | aearms: The vertex and arms of an angle, and comparing angles by turning | `MATH.geometry.angles-intro` | 145 | 0 | 60/70/15 | `9cf59d6c` |
 | aecpart: Naming the parts of a circle | `MATH.geometry.circles` | 196 | 0 | 68/64/64 | `d20f565c` |
-| aedsym: Counting the lines of symmetry of a design or a shape | `MATH.geometry.symmetry-lines` | 146 | 0 | 28/71/47 | `40624fda` |
+| aedsym: Counting the lines of symmetry of a design or a shape | `MATH.geometry.symmetry-lines` | 146 | 0 | 28/71/47 | `55c77a2c` |
 | aedigsym: Lines of symmetry in digits and numbers | `MATH.geometry.symmetry-lines` | 347 | 0 | 0/187/160 | `b932cf0c` |
 | aemirror: Which word looks the same in a mirror | `MATH.geometry.symmetry-lines` | 400 | 0 | 0/200/200 | `9b7ca11d` |
 | aepair: Even or odd by putting things in pairs | `MATH.number.even-odd` | 92 | 0 | 16/38/38 | `db9b6a8c` |
@@ -666,7 +666,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aetrip: Problems that combine time, distance and money | `MATH.reasoning.multi-step` | 400 | 0 | 103/132/165 | `5935f345` |
 | aebig: Multi-step problems with large numbers | `MATH.reasoning.multi-step` | 300 | 0 | 0/100/200 | `eea4fbd7` |
 | aematch: An attribute-matching puzzle | `MATH.reasoning.multi-step` | 200 | 0 | 0/26/174 | `24fe92f1` |
-| aeirr: Estimating the area of an irregular shape and comparing two areas | `MATH.measurement.area-squares` | 370 | 0 | 173/87/110 | `c66c85e3` |
+| aeirr: Estimating the area of an irregular shape and comparing two areas | `MATH.measurement.area-squares` | 370 | 0 | 173/87/110 | `433ef693` |
 | aedpv: Place value, expanded form and place-value form of decimals with thousandths | `MATH.number.decimal-tenths` | 404 | 0 | 0/282/122 | `c0388856` |
 | aedord: Ordering decimals | `MATH.number.decimal-tenths` | 300 | 0 | 0/30/270 | `05a0deca` |
 | aedfr: Decimals as fractions and fractions as decimals | `MATH.number.decimal-tenths` | 119 | 0 | 59/30/30 | `830ab233` |
@@ -713,7 +713,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | afkind: Naming a quadrilateral from its properties (kites and trapeziums included) | `MATH.geometry.quadrilateral-classification` | 120 | 0 | 40/40/40 | `164b3e28` |
 | afpside: Unknown sides of a parallelogram or rhombus | `MATH.geometry.quadrilateral-classification` | 400 | 0 | 149/126/125 | `914a740a` |
 | afhidden: Counting the rectangles, squares or triangles hidden in a figure | `MATH.reasoning.systematic-enumeration` | 84 | 0 | 12/48/24 | `954b6643` |
-| afcube: Cube nets: opposite faces, and which shapes fold into a cube | `MATH.geometry.nets` | 400 | 0 | 72/116/212 | `bf4fbcb8` |
+| afcube: Cube nets: opposite faces, and which shapes fold into a cube | `MATH.geometry.nets` | 400 | 0 | 72/116/212 | `60e990d2` |
 | afnet: Matching solids with their nets and views | `MATH.geometry.nets` | 87 | 0 | 23/22/42 | `9507076c` |
 | afview: Top, front and side views of a building of cubes | `MATH.geometry.nets` | 180 | 0 | 60/68/52 | `e446fe97` |
 | affrule: Which rule makes the sequence? | `MATH.algebra.figurate-numbers` | 189 | 0 | 133/29/27 | `05a5fe55` |
@@ -1440,7 +1440,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avtab: Building the 13 to 19 times tables | `MATH.number.multiplication-tables` | 99 | 0 | 49/30/20 | `735892dd` |
 | avstrat: Products by doubling and halving or a nearest multiple | `MATH.number.multi-multiplication` | 320 | 0 | 105/138/77 | `68ff7bc1` |
 | avpp: Multiplying with partial products | `MATH.number.multi-multiplication` | 420 | 0 | 3/42/375 | `fbb074f9` |
-| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `87ab5c4d` |
+| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `b5cccce9` |
 | avdiv: Long division with a remainder, and dividend = divisor × quotient + remainder | `MATH.number.long-division` | 500 | 0 | 15/60/425 | `8c52379a` |
 | avmdiv: Dividing mentally by splitting or by halving | `MATH.number.long-division` | 360 | 0 | 93/161/106 | `80e34949` |
 | avfold: Equal fractions from folding paper | `MATH.number.equivalent-fractions` | 112 | 0 | 25/52/35 | `c46e9b0b` |

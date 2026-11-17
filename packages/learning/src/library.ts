@@ -16,6 +16,7 @@
  * same modules; a test checks that the file is exactly what the blueprints synthesise.
  */
 import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
+import { pictured, type Visual } from "./family-kit";
 import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
 import { selectable } from "./question-status";
@@ -292,7 +293,8 @@ export function fromTemplate(family: string, competency: string, version: string
   const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name);
   const vis = (f: ((p: number[]) => unknown) | undefined, p: Problem) => {
     const w = f?.(p.params);
-    return w ? { widget: w as Screen["widget"] } : {};
+    // picture-words@1: the lesson's picture stands beside the same words, so it is drawn the way they name it
+    return w ? { widget: ((w as { type?: string }).type === "table" ? pictured(p.prompt, w as Visual) : w) as Screen["widget"] } : {};
   };
   const strategies: Strategy[] = [
     { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [inst

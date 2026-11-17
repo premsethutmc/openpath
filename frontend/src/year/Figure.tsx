@@ -204,6 +204,7 @@ export function describe(v: V): string {
     case "pictograph":
       return `A pictograph where one picture stands for ${num(v.key, 1)}: ${arr<string>(v.labels).map((l, i) => `${l} ${arr<number>(v.counts)[i] / num(v.key, 1)} pictures`).join(", ")}`;
     case "table":
+      if (v.as === "tiles") return `A picture of ${arr<(string | number)[]>(v.rows).length > 1 ? "rows of cards" : "a row of cards"}: ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
       return `A table: ${arr<string>(v.head).join(", ")}; ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
     case "shape":
       if (!shapeOk(v)) return NA;
@@ -479,6 +480,20 @@ export function Figure({ v }: { v: V }) {
     case "table": {
       const head = arr<string>(v.head);
       const rows = arr<(string | number)[]>(v.rows);
+      // picture-words@1: a row of things the words call a picture is drawn as cards, not as a table of data
+      if (v.as === "tiles") {
+        // a heading that only counts the places (1, 2, 3 or Card 1) says nothing: only words such as "left" are kept
+        const caps = head.map((h) => (/^(?:|\d+|cards?(?: \d+)?|word|first|second|third|fourth|fifth|sixth)$/i.test(String(h).trim()) ? "" : String(h)));
+        return (
+          <figure className="figure tiles" aria-label={label}>
+            {rows.map((r, i) => (
+              <div className="tile-row" key={i}>
+                {r.map((c, j) => <span className={`tile${c === "?" ? " ask" : ""}${String(c).trim() === "" ? " gap" : ""}`} key={j}>{i === 0 && caps[j] ? <small>{caps[j]}</small> : null}{typeof c === "number" ? minus(c) : c}</span>)}
+              </div>
+            ))}
+          </figure>
+        );
+      }
       return (
         <figure className="figure" aria-label={label}>
           <table className="data">

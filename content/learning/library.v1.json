@@ -15943,7 +15943,8 @@
         6,
         "?"
        ]
-      ]
+      ],
+      "as": "tiles"
      },
      "tip": "The pattern was started again from its first number, but the last repeating part is not finished yet.",
      "role": "concept",
@@ -16120,7 +16121,8 @@
          [
           "?"
          ]
-        ]
+        ],
+        "as": "tiles"
        },
        "role": "worked-example",
        "instance": "gen:aapatn:5,2,4,0"
@@ -16173,7 +16175,8 @@
           8,
           "?"
          ]
-        ]
+        ],
+        "as": "tiles"
        },
        "role": "strategy",
        "instance": "gen:aapatn:5,2,8,2"
@@ -16322,7 +16325,8 @@
         "dog",
         "hen"
        ]
-      ]
+      ],
+      "as": "tiles"
      },
      "tip": "The counting started from the right. Start at the box marked left and count towards the right.",
      "role": "concept",
@@ -16486,7 +16490,8 @@
           "cow",
           "parrot"
          ]
-        ]
+        ],
+        "as": "tiles"
        },
        "role": "worked-example",
        "instance": "gen:aarow:5,1,0,2"

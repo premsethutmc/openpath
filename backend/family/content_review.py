@@ -142,7 +142,11 @@ def teaching():
 
 
 def roles_of(user):
-    return sorted(r.role for r in ContentReviewer.objects.filter(user=user, revoked_at__isnull=True))
+    """The user's granted roles; the owner (OPENPATH_OWNER_EMAILS on the server) reviews as an educator without a grant."""
+    roles = {r.role for r in ContentReviewer.objects.filter(user=user, revoked_at__isnull=True)}
+    if (user.email or user.username or '').strip().lower() in getattr(settings, 'OWNER_EMAILS', ()):
+        roles.add('educator')
+    return sorted(roles)
 
 
 class ContentReviewView(AccountBase):

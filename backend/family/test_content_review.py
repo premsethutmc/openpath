@@ -234,3 +234,10 @@ class TeachingReviewTests(ReviewBase):
         t = self.items()[other]
         self.assertEqual((t['state'], t['changed'], t['history'][0]['current']), ('submitted', True, False))
         self.assertEqual(self.items()[item]['state'], 'approved')
+
+    def test_the_owner_named_on_the_server_reviews_without_a_grant(self):
+        item = next(i for i in self.items() if i.startswith('card:'))
+        with self.settings(OWNER_EMAILS={'parent@example.org'}):
+            self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 200)
+            self.assertEqual(self.post(self.learner_parent, item, 'approve').status_code, 201)
+        self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 403)

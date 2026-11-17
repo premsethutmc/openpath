@@ -400,3 +400,11 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .recipe-end .primary { width: 100%; }
 .recipe-done { margin: 12px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 600; }
 .recipe-nudge { margin: 8px 0 0; color: var(--bad-ink, #8f4524); font-weight: 600; }
+/* picture-words@1: a row of cards (a table the words call a picture) */
+/* a row stays one row (a pattern or a queue read across must not wrap by accident): a long row scrolls sideways */
+.figure.tiles { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%; overflow-x: auto; }
+.figure.tiles .tile-row { display: flex; flex-wrap: nowrap; gap: 6px; }
+.figure.tiles .tile { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 auto; min-width: 1.9rem; min-height: 3rem; padding: 4px 8px; white-space: nowrap; border: 2px solid var(--line, #c9d3e0); border-radius: 10px; background: var(--soft, #eef3fb); font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.figure.tiles .tile small { font-size: 0.7rem; font-weight: 500; opacity: 0.75; }
+.figure.tiles .tile.ask { border-style: dashed; background: transparent; }
+.figure.tiles .tile.gap { visibility: hidden; }
