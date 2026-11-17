@@ -187,8 +187,18 @@ function calculus(line: string): LineCheck | null {
   return null;
 }
 
-/** Every line of working in order. A line that starts with "=" carries on from the line before. */
+/**
+ * Every line of working in order. A line that starts with "=" carries on from the line before.
+ * "log" is the natural logarithm in calculus (d/dx log x = 1/x) and base ten in a logarithms chapter (log 100 = 2):
+ * a line with log in it is right when it is true either way, and is called wrong only when it is wrong both ways.
+ */
 export function checkWorkingLines(lines: readonly string[]): LineCheck[] {
+  if (!lines.some((l) => /log/.test(l))) return checkOnce(lines);
+  const ten = checkOnce(lines);
+  FNS.log = Math.log;
+  try { const e = checkOnce(lines); return ten.map((t, i) => (t.state === "right" || e[i].state === "right" ? { state: "right" as const } : t.state === "wrong" && e[i].state === "wrong" ? t : { state: "unreadable" as const })); } finally { FNS.log = Math.log10; }
+}
+function checkOnce(lines: readonly string[]): LineCheck[] {
   let prevSide = "";
   let eq: Eq | null = null;
   return lines.map((raw): LineCheck => {

@@ -57,10 +57,10 @@ function arithmetic(a: number, op: string, b: number): Finer[] {
 }
 
 // ---------------------------------------------------------------- powers of x
-interface Term { c: number; p: number }
-const tidy = (ts: Term[]): Term[] => { const m = new Map<number, number>(); for (const t of ts) m.set(t.p, (m.get(t.p) ?? 0) + t.c); return [...m].filter(([, c]) => Math.abs(c) > 1e-12).map(([p, c]) => ({ c, p })).sort((a, b) => b.p - a.p); };
+export interface Term { c: number; p: number }
+export const tidy = (ts: Term[]): Term[] => { const m = new Map<number, number>(); for (const t of ts) m.set(t.p, (m.get(t.p) ?? 0) + t.c); return [...m].filter(([, c]) => Math.abs(c) > 1e-12).map(([p, c]) => ({ c, p })).sort((a, b) => b.p - a.p); };
 /** An expression as a sum of c·xᵖ, or null when it is not one (a sine, a quotient by a sum, an unknown power). */
-function terms(n: ExprNode, v: string): Term[] | null {
+export function terms(n: ExprNode, v: string): Term[] | null {
   switch (n.k) {
     case "num": return [{ c: n.v, p: 0 }];
     case "var": return n.n === v ? [{ c: 1, p: 1 }] : null;
@@ -87,7 +87,7 @@ function terms(n: ExprNode, v: string): Term[] | null {
   }
 }
 /** A number as a child writes it: a whole number, or a fraction in lowest terms (null when it is neither, to 1/360). */
-function frac(v: number): string | null {
+export function frac(v: number): string | null {
   if (!Number.isFinite(v)) return null;
   for (let d = 1; d <= 360; d++) { const n = Math.round(v * d); if (Math.abs(v * d - n) < 1e-9) return d === 1 ? String(n).replace("-", "−") : `${n < 0 ? "−" : ""}${Math.abs(n)}/${d}`; }
   return null;
@@ -102,7 +102,7 @@ function power(v: string, p: number): string | null {
   return f ? `${v}^(${f})` : null;
 }
 /** One term as written (6x, −x², x³/3, 4√x); null when it cannot be written simply. */
-function termText(t: Term, v: string): string | null {
+export function termText(t: Term, v: string): string | null {
   const pw = power(v, t.p), c = frac(t.c);
   if (pw === null || c === null) return null;
   if (!pw) return c;
@@ -110,15 +110,15 @@ function termText(t: Term, v: string): string | null {
   const [n, d] = mag.split("/");
   return `${neg ? "−" : ""}${n === "1" ? "" : n}${pw}${d ? `/${d}` : ""}`;
 }
-function sumText(ts: Term[], v: string): string | null {
+export function sumText(ts: Term[], v: string): string | null {
   if (!ts.length) return "0";
   const parts = ts.map((t) => termText(t, v));
   if (parts.some((p) => p === null)) return null;
   return (parts as string[]).map((p, i) => (i === 0 ? p : p.startsWith("−") ? `− ${p.slice(1)}` : `+ ${p}`)).join(" ");
 }
-const at = (ts: Term[], x: number) => sum(ts.map((t) => t.c * x ** t.p));
+export const at = (ts: Term[], x: number) => sum(ts.map((t) => t.c * x ** t.p));
 /** The value of a sum of powers at x, written out: 6(3) − 3² = 9. */
-function substituted(ts: Term[], x: number): string | null {
+export function substituted(ts: Term[], x: number): string | null {
   const xs = frac(x), total = frac(at(ts, x));
   if (xs === null || total === null) return null;
   if (x === 0) return total;
@@ -127,39 +127,76 @@ function substituted(ts: Term[], x: number): string | null {
   const line = (parts as string[]).map((p, i) => (i === 0 ? p : p.startsWith("−") ? `− ${p.slice(1)}` : `+ ${p}`)).join(" ");
   return ts.length > 1 ? `${line} = ${total}` : total;
 }
-const antiderivative = (ts: Term[]): Term[] | null => (ts.some((t) => t.p === -1) ? null : ts.map((t) => ({ c: t.c / (t.p + 1), p: t.p + 1 })));
-const derivative = (ts: Term[]): Term[] => tidy(ts.filter((t) => t.p !== 0).map((t) => ({ c: t.c * t.p, p: t.p - 1 })));
+export const antiderivative = (ts: Term[]): Term[] | null => (ts.some((t) => t.p === -1) ? null : ts.map((t) => ({ c: t.c / (t.p + 1), p: t.p + 1 })));
+export const derivative = (ts: Term[]): Term[] => tidy(ts.filter((t) => t.p !== 0).map((t) => ({ c: t.c * t.p, p: t.p - 1 })));
 
 const SUBS = "₀₁₂₃₄₅₆₇₈₉", SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
-const limit = (s: string): number => { const t = [...s.trim().replace(/^\(|\)$/g, "")].map((c) => (c === "₋" || c === "⁻" ? "−" : SUBS.includes(c) ? String(SUBS.indexOf(c)) : SUPS.includes(c) ? String(SUPS.indexOf(c)) : c)).join(""); const n = readExpression(t); return n && !variablesOf(n).length ? valueOf(n, {}) : NaN; };
+export const limit = (s: string): number => { const t = [...s.trim().replace(/^\(|\)$/g, "")].map((c) => (c === "₋" || c === "⁻" ? "−" : SUBS.includes(c) ? String(SUBS.indexOf(c)) : SUPS.includes(c) ? String(SUPS.indexOf(c)) : c)).join(""); const n = readExpression(t); return n && !variablesOf(n).length ? valueOf(n, {}) : NaN; };
 /** Every definite integral written in a step's words: ∫₀^3 … dx, ∫₋₄⁻³ … dx, with a number in front when there is one. */
 function integrals(text: string): Finer[] {
   const out: Finer[] = [];
   // the two ways a step writes its limits: ∫₀^3 … dx (or ∫₋₄⁻³ … dx) and "∫ from 0 to 3 of … dx"
   const found = [
     ...[...text.matchAll(/(\d+(?:\/\d+)?)?\s*∫\s*([₋₀-₉.]+)\s*(?:\^\s*(\([^)]*\)|[-−\d./π]+)|([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+))\s*(.+?)\s*d([a-z])(?![a-z])/g)].map((m) => [m[0], m[1], m[2], m[3] ?? m[4], m[5], m[6]]),
-    ...[...text.matchAll(/(\d+(?:\/\d+)?)?\s*∫\s*from\s+(\S+)\s+to\s+(\S+)\s+of\s+(.+?)\s*d([a-z])(?![a-z])/g)].map((m) => [m[0], m[1], m[2], m[3], m[4], m[5]]),
+    ...[...text.matchAll(/(\d+(?:\/\d+)?|π)?\s*∫\s*from\s+(\S+)\s+to\s+(\S+)\s+of\s+(.+?)\s*d([a-z])(?![a-z])/g)].map((m) => [m[0], m[1], m[2], m[3], m[4], m[5]]),
   ];
   for (const g of found) {
     const m = [g[0], g[1], g[2], g[3], "", g[4], g[5]] as (string | undefined)[] as string[];
+    // |…|: the size of what is inside. It is integrated piece by piece, each piece with the sign that makes it positive.
+    const bars = m[5].trim().match(/^\|(.+)\|$/);
+    if (bars) { out.push(...absolute(bars[1], limit(m[2]), limit(m[3]), m[6])); continue; }
     const a = limit(m[2]), b = limit(m[3]), v = m[6], f = readExpression(m[5]);
     const ts = f && variablesOf(f).every((x) => x === v) ? terms(f, v) : null;
     const F = ts && antiderivative(tidy(ts));
     if (!ts || !F || !Number.isFinite(a) || !Number.isFinite(b)) continue;
     const fText = sumText(tidy(ts), v), FText = sumText(F, v), up = substituted(F, b), low = substituted(F, a), value = frac(at(F, b) - at(F, a)), fb = frac(at(F, b)), fa = frac(at(F, a)), as = frac(a), bs = frac(b);
     if ([fText, FText, up, low, value, fb, fa, as, bs].some((x) => x === null)) continue;
-    const k = m[1] ? limit(m[1]) : 1;
+    const k = m[1] && m[1] !== "π" ? limit(m[1]) : 1;
     const lines: Finer[] = [];
-    if (tidy(ts).length > 1 || fText !== m[5].trim()) lines.push({ next: "Write what is being integrated as separate powers of " + v + ".", shown: `${m[5].trim()} = ${fText}` });
+    if (fText !== m[5].trim().replace(/^\((.*)\)$/, "$1")) lines.push({ next: "Write what is being integrated as separate powers of " + v + ".", shown: `${m[5].trim()} = ${fText}` });
     lines.push({ next: `Integrate each term: raise the power by one and divide by the new power.`, shown: `∫ (${fText}) d${v} = ${FText}` });
     lines.push({ next: `Put the upper limit, ${bs}, in for ${v}.`, shown: `At ${v} = ${bs}: ${up}` });
     lines.push({ next: `Put the lower limit, ${as}, in for ${v}.`, shown: `At ${v} = ${as}: ${low}` });
     lines.push({ next: "Upper value minus lower value.", shown: `${fb} − ${fa!.startsWith("−") ? `(${fa})` : fa} = ${value}` });
-    if (k !== 1) { const total = frac(k * (at(F, b) - at(F, a))); if (total === null) continue; lines.push({ next: `Multiply by the ${m[1]} in front.`, shown: `${m[1]} × ${value} = ${total}` }); }
+    if (m[1] === "π") lines.push({ next: "Multiply by the π in front.", shown: `π × ${value} = ${value === "1" ? "π" : value!.includes("/") ? `${value!.split("/")[0] === "1" ? "" : value!.split("/")[0]}π/${value!.split("/")[1]}` : `${value}π`}` });
+    else if (k !== 1) { const total = frac(k * (at(F, b) - at(F, a))); if (total === null) continue; lines.push({ next: `Multiply by the ${m[1]} in front.`, shown: `${m[1]} × ${value} = ${total}` }); }
     out.push(...lines);
   }
   return out;
 }
+/** ∫ |f| dx between a and b, f a sum of powers: split where f changes sign, each piece integrated with its own sign. */
+function absolute(body: string, a: number, b: number, v: string): Finer[] {
+  const f = readExpression(body), ts = f && variablesOf(f).every((x) => x === v) ? terms(f, v) : null;
+  if (!ts || !Number.isFinite(a) || !Number.isFinite(b) || a >= b) return [];
+  const t = tidy(ts), F0 = antiderivative(t);
+  if (!F0) return [];
+  // where it crosses zero strictly between the limits (a sign change on a fine grid, then closed in on)
+  const cuts: number[] = [];
+  const N = 2000;
+  for (let i = 0; i < N; i++) { const x0 = a + ((b - a) * i) / N, x1 = a + ((b - a) * (i + 1)) / N, y0 = at(t, x0), y1 = at(t, x1); if (y0 === 0 && i > 0) cuts.push(x0); else if (y0 * y1 < 0) { let lo = x0, hi = x1; for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (at(t, lo) * at(t, mid) <= 0) hi = mid; else lo = mid; } cuts.push((lo + hi) / 2); } }
+  const edges = [a, ...cuts.filter((c, i) => c > a + 1e-9 && c < b - 1e-9 && (i === 0 || Math.abs(c - cuts[i - 1]) > 1e-7)), b];
+  if (edges.length > 4 || edges.some((e) => frac(e) === null)) return [];
+  const lines: Finer[] = [];
+  const fText = sumText(t, v);
+  if (!fText) return [];
+  if (edges.length > 2) lines.push({ next: `Find where ${fText} is zero between the limits: the area is worked on each side of it.`, shown: `${fText} = 0 at ${v} = ${edges.slice(1, -1).map((e) => frac(e)).join(" and ")}` });
+  const values: number[] = [];
+  for (let i = 0; i + 1 < edges.length; i++) {
+    const lo = edges[i], hi = edges[i + 1], sign = at(t, (lo + hi) / 2) >= 0 ? 1 : -1;
+    const piece = t.map((x) => ({ c: sign * x.c, p: x.p })), F = antiderivative(piece)!;
+    const pText = sumText(piece, v), FText = sumText(F, v), up = substituted(F, hi), low = substituted(F, lo), fb = frac(at(F, hi)), fa = frac(at(F, lo)), val = frac(at(F, hi) - at(F, lo)), los = frac(lo), his = frac(hi);
+    if ([pText, FText, up, low, fb, fa, val, los, his].some((x) => x === null)) return [];
+    lines.push({ next: `Between ${los} and ${his}, is ${fText} above or below zero? Write its size without the bars.`, shown: `From ${los} to ${his}, ${fText} is ${sign > 0 ? "positive" : "negative"}, so its size is ${pText}` });
+    lines.push({ next: "Integrate each term: raise the power by one and divide by the new power.", shown: `∫ (${pText}) d${v} = ${FText}` });
+    lines.push({ next: `Put the upper limit, ${his}, in for ${v}.`, shown: `At ${v} = ${his}: ${up}` });
+    lines.push({ next: `Put the lower limit, ${los}, in for ${v}.`, shown: `At ${v} = ${los}: ${low}` });
+    lines.push({ next: "Upper value minus lower value.", shown: `${fb} − ${fa!.startsWith("−") ? `(${fa})` : fa} = ${val}` });
+    values.push(at(F, hi) - at(F, lo));
+  }
+  if (values.length > 1) { const total = frac(sum(values)); if (!total) return []; lines.push({ next: "Add the pieces.", shown: `${values.map((x) => frac(x)).join(" + ")} = ${total}` }); }
+  return lines;
+}
+
 /** ∫ … dx = … with no limits, and d/dx (…) = …: term by term. */
 function termByTerm(text: string): Finer[] {
   const out: Finer[] = [];

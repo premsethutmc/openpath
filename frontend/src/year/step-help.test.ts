@@ -13,7 +13,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
     const all = stepsHelp(q.id);
     // deepen@1: lines of working made by rule sit between the question's own steps; they tell what to do without its result
     for (const f of all!.filter((x) => x.finer)) {
-      assert.ok(/\.$/.test(f.next) && f.next.length <= 110 && !f.next.includes("="), `${q.id}: ${f.next} / ${f.shown}`);
+      assert.ok(/[.?]$/.test(f.next) && f.next.length <= 110 && !f.next.replace(/[a-z] = [−\d./]+/g, "").replace("∫ u dv = uv − ∫ v du", "").includes("="), `${q.id}: ${f.next} / ${f.shown}`);
     }
     const h = all && all.filter((x) => !x.finer);
     assert.ok(h && h.length === q.steps.length, q.id);
