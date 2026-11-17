@@ -139,7 +139,10 @@ longer sent: the child is shown how to write it ("Type just your final answer, f
 Nothing is recorded, so this can no longer pause a skill. Other builds are unchanged: the first unreadable answer is
 recorded and asked about, as before.
 
-Open: reading the plain cases as the number ("7 birds"); whether pause@1 should ever apply to unreadable answers.
+plain-answer@1: "7 birds" for "How many birds…?" is read as 7 (`packages/learning/src/plain-answer.ts`): only when the answer is a
+whole number and every word after it is a thing the question names; never a unit ("7 cm"), never another word.
+
+Open: "seven" and "9-2"; whether pause@1 should ever apply to unreadable answers.
 
 
 ## Teaching dashboard (teaching-review@1)

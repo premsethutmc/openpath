@@ -7,6 +7,7 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
+import { plainAnswer } from "../../../packages/learning/src/plain-answer";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useState, useRef } from "react";
 import {useResume} from "./resume";
@@ -548,25 +549,27 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
             if (submitting.current) return;
+            // plain-answer@1: "7 birds" for "How many birds…?" is the number 7 (never a unit, never a word the question does not use)
+            const sent = plainAnswer(q.prompt, q.type, value);
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
             // calculus-working@1: a calculus derivation may run to 100 lines of 200 characters
             const [maxLines, maxChars] = /calculus|differentia|integra|limit/.test(q.competency) ? [100, 200] : [8, 80];
             if (lines.length > maxLines || lines.some((line) => line.length > maxChars)) { setClarify(`Your work is still here. Use at most ${maxLines} lines, with at most ${maxChars} characters per line, before checking.`); return; }
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
-            const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
+            const preview = needsMarking(q) ? null : decide(qid, sent, lines, asked);
             // ask-first@1 (the child build): an answer that cannot be read is not sent. The child is shown how to write it and
             // tries again at once; nothing is recorded, so writing "7 birds" twice can no longer pause the skill (pause@1
             // counts unreadable answers that were sent). Elsewhere the first unreadable answer is recorded as before.
             if (KID && preview?.clarification && preview.credit === null && preview.feedback.kind === "clarify") { setClarify(`${preview.clarification.prompt} Nothing has been sent yet: change your answer and tap Check again.`); return; }
             submitting.current = true;
             let ok: boolean;
-            try { ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
+            try { ok = await ctx.answer(qid, sent, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
             if (!ok) return;
             // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
             const a = authoritativeView(preview, ctx.recorded?.() ?? null);
             if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
             setClarify(null);
-            onAnswered?.({ qid, response: value, activity, ...(ctx.recorded?.() ? { decision: ctx.recorded()! } : {}), right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
+            onAnswered?.({ qid, response: sent, activity, ...(ctx.recorded?.() ? { decision: ctx.recorded()! } : {}), right: a ? a.credit === true : creditOf(qid, sent) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
