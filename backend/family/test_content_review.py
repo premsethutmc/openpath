@@ -193,3 +193,40 @@ class ReleasedContentEvidenceTests(ReviewBase):
             self.assertEqual(save('attempt', questionId='gen:mmul:51,4', response='204', activity='retention', hints=0, solution=False, competency='MATH.number.multi-multiplication').status_code, 400, 'not before seven full days')
         with mock.patch('family.learning.timezone.now', return_value=tz.now() + timedelta(days=7, minutes=5)):
             self.assertEqual(save('attempt', questionId='gen:mmul:51,4', response='204', activity='retention', hints=0, solution=False, competency='MATH.number.multi-multiplication').status_code, 201)
+
+
+class TeachingReviewTests(ReviewBase):
+    """teaching-review@1: story lessons and help cards, approved by the owner in one step."""
+
+    def items(self, client=None):
+        return {t['item']: t for t in (client or self.educator).get('/api/content-review/teaching/').json()['items']}
+
+    def post(self, client, item, decision, note=''):
+        return client.post('/api/content-review/decisions/', {'item': item, 'decision': decision, 'contentHash': self.items()[item]['contentHash'], 'note': note}, format='json')
+
+    def test_lessons_and_cards_are_listed_for_reviewers_only_and_stay_out_of_the_learners_registry(self):
+        ts = self.items()
+        self.assertTrue(any(t['kind'] == 'recipe' and t['source'] == 'written' for t in ts.values()))
+        self.assertTrue(any(t['kind'] == 'card' and t['source'] == 'rule' and 'ICSE 5' in t['classes'] for t in ts.values()))
+        self.assertTrue(all(t['state'] == 'submitted' for t in ts.values()))
+        self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 403)
+        kinds = {e['kind'] for e in self.learner_parent.get('/api/content-review/').json()['registry']['entries']}
+        self.assertFalse(kinds & {'recipe', 'card'})
+
+    def test_one_step_decisions_a_note_only_to_say_what_is_wrong_and_a_view_can_change(self):
+        item = next(i for i in self.items() if i.startswith('card:'))
+        self.assertEqual(self.post(self.learner_parent, item, 'approve').status_code, 403)
+        self.assertEqual(self.post(self.educator, item, 'reject').status_code, 400)  # needs the reason
+        self.assertEqual(self.post(self.educator, item, 'release').status_code, 400)
+        self.assertEqual(self.post(self.educator, item, 'approve').status_code, 201)
+        self.assertEqual(self.items()[item]['state'], 'approved')
+        self.assertEqual(self.post(self.educator, item, 'request_changes', 'about one example, not the rule').status_code, 201)
+        t = self.items()[item]
+        self.assertEqual((t['state'], len(t['history']), t['history'][-1]['note']), ('changes_requested', 2, 'about one example, not the rule'))
+
+    def test_a_decision_on_an_earlier_version_no_longer_applies(self):
+        item = next(i for i in self.items() if i.startswith('recipe:'))
+        self.assertEqual(self.post(self.educator, item, 'approve').status_code, 201)
+        ContentDecision.objects.filter(item=item).update(content_hash='00000000')
+        t = self.items()[item]
+        self.assertEqual((t['state'], t['changed'], t['history'][0]['current']), ('submitted', True, False))

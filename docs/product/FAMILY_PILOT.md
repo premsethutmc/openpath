@@ -141,3 +141,12 @@ recorded and asked about, as before.
 
 Open: reading the plain cases as the number ("7 birds"); whether pause@1 should ever apply to unreadable answers.
 
+
+## Teaching dashboard (teaching-review@1)
+
+`/review/#teaching` lists every story lesson and help card, by class (Class 5 first), as the child sees it: a lesson
+can be played there. Each shows where it came from (written by hand, or made by rule from the skill's lesson) and is
+approved, rejected or sent back in one step by an account with the educator role (`manage.py content_reviewer grant
+<email> --role educator`). A decision applies to the version shown: when the lesson or card changes it returns to "To
+review". Decisions are a record only; they do not yet hide anything from learners. The items and their hashes are in
+`content/learning/teaching.v1.json` (generated: `node tools/regen.mjs`).

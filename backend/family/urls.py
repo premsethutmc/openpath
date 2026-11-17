@@ -38,6 +38,7 @@ urlpatterns = [
     path("educator-access/decline/", educator_access.EducatorRequestDeclineView.as_view(), name="educator-request-decline"),
     path("educator-request/", educator_access.EducatorRequestView.as_view(), name="educator-request"),
     path("written/my-code/", written.EducatorCodeView.as_view(), name="educator-code"),
+    path("content-review/teaching/", content_review.TeachingReviewView.as_view(), name="content-review-teaching"),
     path("content-review/decisions/", content_review.ContentDecisionView.as_view(), name="content-review-decisions"),
     path("solver/read/", word_problem.WordProblemView.as_view(), name="solver-read"),
     path("telemetry/", developer.TelemetryView.as_view(), name="telemetry"),

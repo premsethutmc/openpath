@@ -44,6 +44,8 @@ export const STEPS = [
   // a module or family that changed goes back to draft, stamped with the current time (a real change must be committed anyway)
   ["review sync", node("../packages/learning/scripts/review.ts", "sync")],
   ["explanation-review sync", node("../packages/learning/scripts/explanation-review.ts", "sync")],
+  // teaching-review@1: the story lessons and help cards the owner approves (their current hashes)
+  ["teaching", node("../packages/learning/scripts/teaching.ts")],
   ["grader bundle", { cmd: process.execPath, args: ["tools/mathematics/server-grader/build.mjs"], cwd: root, env: { ESBUILD: esbuild } }],
 ];
 /** Every file the steps write (the check compares these with git, including new untracked files under them). */
@@ -52,7 +54,7 @@ export const GENERATED = [
   "content/learning/families-parity.v1.json", "docs/learning-year/COVERAGE.md", "content/learning/competency-expansion.v1.json",
   "content/learning/syllabus", "content/learning/curricula", "packages/learning/src/board-releases.ts",
   "content/learning/coverage-matrix.v1.json", "docs/mathematics/COVERAGE_MATRIX.md", "content/learning/marking-parity.v1.json",
-  "content/learning/review.v1.json", "content/learning/explanation-review.v1.json", "content/learning/explanation-blocklist.v1.json",
+  "content/learning/review.v1.json", "content/learning/explanation-review.v1.json", "content/learning/explanation-blocklist.v1.json", "content/learning/teaching.v1.json",
   "backend/family/grader/grader.mjs", "backend/family/grader/grader.manifest.json",
 ];
 
