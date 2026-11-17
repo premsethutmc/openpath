@@ -271,7 +271,7 @@ test("scenes@4: a picture becomes a scene only when the scene arrives at the que
       const s = sceneForQuestion(q.id);
       if (!s) continue;
       any = true;
-      const type = (q.figure as { type: string } | undefined)?.type;
+      const type = (q.figure as unknown as { type: string } | undefined)?.type;
       assert.ok(type && FIGURE_SCENES.includes(type), `${q.id}: a scene with no builder comes from the question's picture`);
       made.set(type!, (made.get(type!) ?? 0) + 1);
       assert.deepEqual(check(s), [], q.id); assert.ok(s.prompt.length <= 160 && s.success.length <= 160 && !met(s, initial(s)), q.id);
@@ -287,7 +287,7 @@ test("scenes@4: a picture becomes a scene only when the scene arrives at the que
   const area = sceneForQuestion(pool("rect").items.find((q) => sceneForQuestion(q.id))!.id)!, edge = sceneForQuestion(pool("rperim").items.find((q) => sceneForQuestion(q.id))!.id)!;
   assert.ok(/area is \d+\.$/.test(area.success) && /perimeter is \d+\.$/.test(edge.success));
   // no scene where the picture's own numbers do not give the answer: a shape that is not a rectangle has none
-  const odd = [...FAMILIES.keys()].flatMap((f) => pool(f).items).find((q) => (q.figure as { type?: string; kind?: string } | undefined)?.type === "shape" && !["rectangle", "square"].includes((q.figure as { kind: string }).kind));
+  const odd = [...FAMILIES.keys()].flatMap((f) => pool(f).items).find((q) => (q.figure as unknown as { type?: string; kind?: string } | undefined)?.type === "shape" && !["rectangle", "square"].includes((q.figure as unknown as { kind: string }).kind));
   assert.ok(odd && sceneForQuestion(odd.id) === null);
 });
 
