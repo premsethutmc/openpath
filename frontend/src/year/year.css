@@ -446,3 +446,5 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .slip { margin-top: 12px; padding: 12px 14px; border-radius: 16px; border: 2px dashed var(--line, #c9d3e0); }
 .slip-choices { display: grid; gap: 8px; }
 .slip-choices button { text-align: left; white-space: normal; font-weight: 600; }
+/* nudge@1 */
+.scene-nudge { margin: 6px 0 0; font-size: 0.95rem; color: #9a5b00; }

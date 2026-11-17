@@ -312,6 +312,23 @@ export function met(s: Scene, state: SceneState): boolean {
 const named = (s: Scene, text: string) => (s.variable && s.variable !== "x" ? text.replaceAll("x", s.variable) : text);
 /** The one line of numbers under the picture. It never states the answer before the learner has reached it by moving
  *  something (the strips line gives what is missing, not the true area). */
+/**
+ * nudge@1: while a scene's goal is not reached, one line about what is still out of place, never the answer. Commas:
+ * counting groups from the right, the first group that has the wrong number of digits (and how many it should have,
+ * which the instruction already says). Null where the scene has no nudge, or its goal is reached.
+ */
+export function nudge(s: Scene, state: SceneState): string | null {
+  if (s.kind !== "commas") return null;
+  const want = commaPlaces(s), have = want.map((_, i) => state["abc"[i]]).sort((a, b) => a - b);
+  for (let i = 0; i < want.length; i++) {
+    if (have[i] === want[i]) continue;
+    const size = have[i] - (i ? have[i - 1] : 0), should = want[i] - (i ? want[i - 1] : 0);
+    const which = i === 0 ? "The last group on the right" : i === 1 ? "The group before it" : "The next group to the left";
+    return size === 0 ? "Two commas are in the same place. Drag one of them away." : `${i > 0 ? `${i === 1 ? "The last group is right. " : "The groups on the right are right. "}` : ""}${which} has ${size} digit${size === 1 ? "" : "s"}; it should have ${should}.`;
+  }
+  return null;
+}
+
 export function readout(s: Scene, state: SceneState): string {
   const m = measures(s, state);
   if (s.kind === "slope") return named(s, `At x = ${fmt(m.x)} the slope is ${fmt(m.slope)}`);
