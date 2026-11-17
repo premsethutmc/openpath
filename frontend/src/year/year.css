@@ -441,3 +441,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .coach-done li { margin-bottom: 6px; }
 .coach-did { display: block; font-size: 0.9rem; opacity: 0.8; }
 .coach-shown { font-weight: 700; }
+/* lesson-interactions@1 */
+.worked-by-you { margin: 10px 0; }
+.slip { margin-top: 12px; padding: 12px 14px; border-radius: 16px; border: 2px dashed var(--line, #c9d3e0); }
+.slip-choices { display: grid; gap: 8px; }
+.slip-choices button { text-align: left; white-space: normal; font-weight: 600; }

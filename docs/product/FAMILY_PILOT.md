@@ -271,3 +271,16 @@ A practice question can carry a scene (a picture the child moves) as an aid, so 
 (support-ladder@1) and is never shown in a test. First users: lakh, crore and million questions (`ajmill`, `ajmilr`)
 show their own number with commas to move from one way of grouping to the other. Before this, only 18 of 1,118
 question types had a movable picture in practice; the movable pictures of the story lessons were in lessons only.
+
+## A worked example the learner does (lesson-interactions@1)
+
+In the child build a lesson's worked example is no longer only read (`WorkedByYou.tsx`): the working is done one step
+at a time with the stuck-help coach opened from the start (a step with a result is entered; "Show me this step" stays),
+and then, where the question holds the wrong answers learners give, "Someone answered 37. What went wrong?" with the
+reason that predicts that answer as the right choice (`packages/learning/src/lesson-interactions.ts`, from `guessOf`).
+Nothing is recorded; none of it is in a test. Coverage (three questions sampled per type): 931 of 1,118 question
+types get at least one of the two (910 spot-the-mistake, 490 with a step to enter); ICSE Class 5: 199 of 235 types,
+and 59 of its 62 skills have a worked example. A result with a unit, ₹ or commas can now be entered (step-ask@1).
+
+Tried and dropped: "What would you do first?" made from the kinds of step ("Add" against "Convert" is not a fair
+choice). Not built: putting shuffled steps in order (some steps can fairly go in either order).

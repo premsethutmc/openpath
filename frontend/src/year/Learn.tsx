@@ -22,6 +22,7 @@ import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach } from "./StepCoach";
+import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
 import { recipeFor } from "../../../packages/learning/src/recipe";
@@ -693,7 +694,9 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const picture = pics.before && <Picture w={pics.before} competency={competency} />;
   const laterPicture = pics.withWorking && <Picture w={pics.withWorking} competency={competency} />;
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
-  const working = sc.math && <>{later && laterPicture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
+  const byYou = KID && !!raw.instance && !!stepsHelp(raw.instance);
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
