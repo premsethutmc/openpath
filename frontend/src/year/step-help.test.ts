@@ -10,7 +10,12 @@ const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items
 test("every question's help is its own steps, in order, with nothing worked in the 'what to do' line", () => {
   let needing = 0;
   for (const q of sample) {
-    const h = stepsHelp(q.id);
+    const all = stepsHelp(q.id);
+    // deepen@1: lines of working made by rule sit between the question's own steps; they tell what to do without its result
+    for (const f of all!.filter((x) => x.finer)) {
+      assert.ok(/\.$/.test(f.next) && f.next.length <= 110 && !f.next.includes("="), `${q.id}: ${f.next} / ${f.shown}`);
+    }
+    const h = all && all.filter((x) => !x.finer);
     assert.ok(h && h.length === q.steps.length, q.id);
     h!.forEach((x, i) => {
       assert.equal(x.shown, explainStep(q, q.steps[i]), q.id);
@@ -20,7 +25,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
       // the other skill a step leans on is named only when it is another skill, and only when it has a card
       if (x.needs) { needing++; assert.notEqual(x.needs, q.competency); assert.equal(x.needs, q.steps[i].competency); assert.ok(cardFor(x.needs)); }
     });
-    assert.deepEqual(stepsHelp(`${q.id}`), h);
+    assert.deepEqual(stepsHelp(`${q.id}`), all);
   }
   assert.ok(needing > 500, `steps that lean on another skill: ${needing}`);
   assert.equal(stepsHelp("not-a-question"), null);
