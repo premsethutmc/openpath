@@ -111,7 +111,7 @@ def _ask_server(requests):
     """The kept grader's replies for one list of requests, or None (then the caller runs the grader once, as before)."""
     with _SERVE_LOCK:
         try:
-            child, node = _SERVE['child'], node_path()
+            child, node, fresh = _SERVE['child'], node_path(), False
             # the kept grader belongs to the Node it was started with: a different one (or none) starts afresh
             if child is None or child.poll() is not None or _SERVE['node'] != node:
                 _stop_server()
@@ -119,11 +119,17 @@ def _ask_server(requests):
                 child = subprocess.Popen([node, str(BUNDLE), '--serve'], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                          stderr=subprocess.DEVNULL, env={'PATH': os.environ.get('PATH', '')}, start_new_session=True)
                 _SERVE['child'] = child
+                fresh = True
             if _SERVE['timer'] is not None:
                 _SERVE['timer'].cancel()
             child.stdin.write(json.dumps(requests).encode() + b'\n')
             child.stdin.flush()
-            fd, deadline, buffer = child.stdout.fileno(), time.monotonic() + _timeout(), _SERVE['buffer']
+            # a grader just started has the whole bundle to read first (seconds on a small server); a one-shot run would
+            # take as long, so it is given that time instead of being stopped and started again
+            # (the longer allowance for a fresh start is not applied yet: OPENPATH_GRADER_START is read only when set, while the
+            # cause of the Grade 10/12 browser journey timing out with this branch is being separated)
+            allowed = max(_timeout(), _number('OPENPATH_GRADER_START', '0', 0)) if fresh else _timeout()
+            fd, deadline, buffer = child.stdout.fileno(), time.monotonic() + allowed, _SERVE['buffer']
             while b'\n' not in buffer:
                 left = deadline - time.monotonic()
                 if left <= 0 or not select.select([fd], [], [], left)[0]:
@@ -140,7 +146,7 @@ def _ask_server(requests):
             if _SERVE['count'] >= _number('OPENPATH_GRADER_RECYCLE', '300', 1):
                 _stop_server()
             else:
-                timer = threading.Timer(_number('OPENPATH_GRADER_IDLE', '120', 1), _quiet, args=(child,))
+                timer = threading.Timer(_number('OPENPATH_GRADER_IDLE', '1200', 1), _quiet, args=(child,))
                 timer.daemon = True
                 timer.start()
                 _SERVE['timer'] = timer
@@ -151,6 +157,34 @@ def _ask_server(requests):
 
 
 atexit.register(stop_server)
+
+
+_WARMED = {'at': None}
+
+
+def warm():
+    """grader-warm@1: start the kept grader ahead of the first answer, in the background. Called when a learner's work is
+    opened, so the seconds it takes to start are spent while they read the lesson and not while their first answer is
+    "Saving". It asks the grader nothing (an empty list), decides nothing, and any failure is ignored: the first answer then
+    starts it as before.
+
+    It is tried at most once in `OPENPATH_GRADER_WARM_EVERY` seconds (300): where the kept grader cannot stay up (it is
+    stopped for every one-shot run, such as geometry working), opening a ledger must not start a program each time."""
+    try:
+        if not (enabled() and serve_enabled()):
+            return False
+        child = _SERVE['child']
+        if child is not None and child.poll() is None:
+            return False
+        now = time.monotonic()
+        if _WARMED['at'] is not None and now - _WARMED['at'] < _number('OPENPATH_GRADER_WARM_EVERY', '300', 0):
+            return False
+        _WARMED['at'] = now
+        thread = threading.Thread(target=_ask_server, args=([],), daemon=True)
+        thread.start()
+        return True
+    except Exception:  # noqa: BLE001 - warming is a convenience and never gets in the way of a request
+        return False
 
 
 def run(requests, geometry=False):

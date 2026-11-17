@@ -45,6 +45,9 @@ class GeometryWorkingTests(LearningBase):
         from . import kernel_grader as kg
         import os, signal, subprocess
         if os.name != 'posix': self.skipTest('private process groups are POSIX')
+        # a grader kept from an earlier request (grader-warm@1 starts one when a ledger is read) is stopped first, so the only
+        # process this test sees is the one-shot run's own
+        kg.stop_server()
         child=mock.MagicMock(); child.pid=987654; child.communicate.side_effect=[subprocess.TimeoutExpired('node',.5),('', '')]
         child.__enter__.return_value=child
         # this is the one-shot run's own timeout: the kept grader (grader-serve@1) is switched off so that only it starts a process

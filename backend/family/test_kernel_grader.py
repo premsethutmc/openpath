@@ -1,6 +1,7 @@
 """The trusted grader as the server uses it, with no Django: real Node, the real bundle, real generated questions."""
 import json
 import os
+import time
 import shutil
 import tempfile
 import unittest
@@ -162,6 +163,40 @@ class KeptGraderTests(unittest.TestCase):
         with mock.patch.object(kg.select, 'select', side_effect=TypeError('not a file')):
             self.assertEqual(kg.run([{'id': DET, 'response': '-4', 'working': []}])[0]['verdict'], 'correct')
         self.assertIsNone(kg._SERVE['child'])
+
+    def test_warming_starts_the_kept_grader_ahead_of_the_first_answer(self):
+        kg.stop_server()
+        self.addCleanup(kg.stop_server)
+        self.assertIsNone(kg._SERVE['child'])
+        kg._WARMED['at'] = None
+        self.assertTrue(kg.warm(), 'a grader that is not running is started')
+        for _ in range(200):
+            with kg._SERVE_LOCK:
+                child = kg._SERVE['child']
+            if child is not None and kg._SERVE['count'] >= 1:
+                break
+            time.sleep(0.05)
+        self.assertIsNotNone(kg._SERVE['child'], 'the kept grader is running after warming')
+        first = kg._SERVE['child']
+        self.assertFalse(kg.warm(), 'a running grader is left alone')
+        # the first real answer uses the grader that warming started (no second start)
+        self.assertIsNotNone(kg.run([{'id': 'gen:nosuch:1', 'response': '1'}]))
+        self.assertIs(kg._SERVE['child'], first)
+        # stopped soon after (as a one-shot run does): it is not started again for every ledger that is opened
+        kg.stop_server()
+        self.assertFalse(kg.warm(), 'not tried again within the waiting time')
+        self.assertIsNone(kg._SERVE['child'])
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_WARM_EVERY': '0'}):
+            self.assertTrue(kg.warm(), 'tried again once the waiting time has passed')
+            for _ in range(200):
+                if kg._SERVE['count'] >= 1:
+                    break
+                time.sleep(0.05)
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_SERVE': 'off'}):
+            kg.stop_server()
+            kg._WARMED['at'] = None
+            self.assertFalse(kg.warm(), 'nothing is kept when the kept grader is switched off')
+            self.assertIsNone(kg._SERVE['child'])
 
     def test_geometry_working_never_uses_the_kept_grader(self):
         with mock.patch.object(kg, '_ask_server') as ask:
