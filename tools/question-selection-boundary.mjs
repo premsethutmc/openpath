@@ -11,6 +11,10 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       // keyboardOffered(), the grade ceiling and, after teaching, the taught method; see frontend/src/journey/deep-select.test.ts
       "packages/learning/src/deep-recovery.ts",
       "packages/learning/src/exact/verify.ts",
+      // explore.ts: added with explore@1 (lessons only). It reads pool() for one purpose: to know which questions are released, so that a
+      // changed example is NEVER one of them. It serves no released question and selects nothing for practice or a test; see
+      // frontend/src/year/explore.test.ts ("never a question a learner is tested on")
+      "packages/learning/src/explore.ts",
       // gated-mastery.ts: added in a reviewed change (M1, shadow only). proposedRetentionPlan reads phasePool (which applies selectable()) for
       // a due sub-skill's delayed-check items; it is never read by the engine, the plan or the app (the module's own selector is unchanged)
       "packages/learning/src/gated-mastery.ts",
