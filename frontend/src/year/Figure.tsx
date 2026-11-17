@@ -774,8 +774,9 @@ export function Figure({ v }: { v: V }) {
       const out: JSX.Element[] = [];
       values.forEach((val, i) => {
         const a1 = a0 + (val / total) * 2 * Math.PI;
-        const [x0, y0, x1, y1] = [100 + 80 * Math.cos(a0), 100 + 80 * Math.sin(a0), 100 + 80 * Math.cos(a1), 100 + 80 * Math.sin(a1)];
-        out.push(<path key={`s${i}`} d={`M 100 100 L ${x0} ${y0} A 80 80 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1} ${y1} Z`} fill={colours[i % colours.length]} stroke="#fff" />);
+        // the pie sits in the middle of its box (it was 10 to the left of it)
+        const [x0, y0, x1, y1] = [110 + 80 * Math.cos(a0), 100 + 80 * Math.sin(a0), 110 + 80 * Math.cos(a1), 100 + 80 * Math.sin(a1)];
+        out.push(<path key={`s${i}`} d={`M 110 100 L ${x0} ${y0} A 80 80 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1} ${y1} Z`} fill={colours[i % colours.length]} stroke="#fff" />);
         // the key goes under the pie, in letters a child can read on a phone
         out.push(<text key={`l${i}`} x={10} y={208 + i * 24} fontSize={16} fill={INK}><tspan fill={colours[i % colours.length]}>■</tspan> {labels[i]}</text>);
         a0 = a1;
