@@ -51,7 +51,7 @@ import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 import { KID, kidName } from "./kid";
 import { FeedbackBox } from "./Feedback";
-import { checkLines } from "../../../packages/learning/src/working";
+import { checkLines, simplerFor, type Simpler } from "../../../packages/learning/src/working";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -154,19 +154,51 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
  *  next-step@1: the next empty line is there as soon as the last one has something in it (up to eight lines), so there
  *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
+/** teach-there@1: the smaller question for a slipped step, asked under the step itself. A right answer says so and leaves
+ *  the child to mend the step; two wrong ones show it worked. Made on the device from the step's own numbers. */
+function StepHelp({ ask }: { ask: Simpler }) {
+  const [v, setV] = useState("");
+  const [tries, setTries] = useState(0);
+  const n = v.trim() === "" ? null : Number(v.trim());
+  const right = n !== null && n === ask.answer;
+  const shown = ask.ask.includes("× ?") ? ask.ask.replace("?", String(ask.answer)) : ask.ask.replace("= ?", `= ${ask.answer}`);
+  return (
+    <div className="ws-help" data-step-help={right ? "right" : tries >= 2 ? "shown" : "asked"}>
+      <span className="ws-q" aria-hidden="true">?</span>
+      <span>{ask.lead}</span>
+      <label className="ws-ask">
+        <span>{ask.ask}</span>
+        <input aria-label="A smaller question" inputMode="numeric" autoComplete="off" value={v} disabled={right} onChange={(e) => setV(e.target.value.replace(/[^0-9]/g, "").slice(0, 7))} onBlur={() => { if (n !== null && !right) setTries(tries + 1); }} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); if (n !== null && !right) setTries(tries + 1); } }} />
+      </label>
+      {right ? <span className="ws-mark ok" role="status">Yes. Now put that right in your step.</span> : tries >= 2 ? <span className="ws-mark" role="status">{shown}. Now put that right in your step.</span> : tries === 1 ? <span className="ws-mark bad" role="status">Not yet. Have another go.</span> : null}
+    </div>
+  );
+}
 function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v: string) => void; check: boolean }) {
   const typed = value ? value.split("\n") : [""];
   // the box for the next step is always waiting under the last one written
   const lines = typed[typed.length - 1].trim() && typed.length < 8 ? [...typed, ""] : typed;
   const [focus, setFocus] = useState(0);
   const [done, setDone] = useState<Set<number>>(new Set());
+  // live@1: a step is looked at as soon as the child pauses on a finished calculation (… = a number), not only on leaving
+  // the box; all of it on the device (nothing is fetched or saved for it)
+  const pause = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const settle = (i: number, text: string) => {
+    if (pause.current) clearTimeout(pause.current);
+    if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
+  };
   const put = (ls: string[]) => setValue(ls.join("\n"));
   const insert = (k: string) => put(lines.map((l, i) => (i === focus ? `${l}${/\s$|^$/.test(l) ? "" : " "}${k} ` : l)));
   const mark = (i: number) => {
     if (!check || !done.has(i)) return null;
     const r = checkLines(lines)[i] ?? { state: "unreadable" };
     if (r.state === "right") return <span className="ws-mark ok" aria-label="Right">✓</span>;
-    if (r.state === "wrong") { const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "Check this step"}</span>; }
+    if (r.state === "wrong") {
+      // a smaller question about the same numbers where one can be made; otherwise the plain note
+      const smaller = simplerFor(lines[i]);
+      if (smaller) return <StepHelp key={lines[i]} ask={smaller} />;
+      const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "Check this step"}</span>;
+    }
     return null;
   };
   return (
@@ -177,7 +209,7 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
           <input aria-label={`Step ${i + 1}`} inputMode="text" autoComplete="off" value={l} placeholder={i === 0 ? "e.g. 90 × 7 = 630" : ""}
             onFocus={() => setFocus(i)} onBlur={() => setDone(new Set(done).add(i))}
             onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); setDone(new Set(done).add(i)); const next = e.currentTarget.closest(".ws")?.querySelectorAll<HTMLInputElement>(".ws-line input")[i + 1]; if (next) { setFocus(i + 1); next.focus(); } } }}
-            onChange={(e) => { put(lines.map((x, j) => (j === i ? e.target.value : x))); const d = new Set(done); d.delete(i); setDone(d); }} />
+            onChange={(e) => { put(lines.map((x, j) => (j === i ? e.target.value : x))); const d = new Set(done); d.delete(i); setDone(d); settle(i, e.target.value); }} />
           {mark(i)}
         </div>
       ))}

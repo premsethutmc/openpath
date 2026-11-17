@@ -97,6 +97,21 @@ neighbours inside the released pool and need an exposure record before they can 
 
 Lessons only: a test shows no picture to move, no guess and no explorer.
 
+## Teaching at the step (teach-there@1, live@1)
+
+The owner's direction (17 Nov 2026): not everything is a picture. When a child working a division writes 3 × 2 = 5, the app
+should ask a simpler thing right there, at once, and not send them away or make a call for it.
+
+In practice (never in a test) each line of working is looked at as soon as the child pauses on a finished calculation, on
+the device. A right line gets its tick. A slip in a single whole-number calculation gets a smaller question about the same
+numbers under the step (`simplerFor`, `packages/learning/src/working.ts`): a times fact as the same thing added up, or split
+at five; a times with a ten in it as the fact underneath; a division turned round into a times fact; adding and taking away
+by the tens first, or through the ten. A right answer leaves the child to mend the step; two wrong ones show it worked.
+Nothing is fetched, saved or written per lesson for it.
+
+Open: the same for fractions, decimals, algebra, trigonometry and calculus lines (the line check reads only arithmetic
+today); counting the stumble against the skill the step leans on, and going back to that skill when it repeats.
+
 ## Where it appears
 
 In the **opening lesson** of a skill the learner has never met, once per learner, when the skill has a recipe (`Lesson`,

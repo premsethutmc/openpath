@@ -250,3 +250,47 @@ export function checkLine(line: string): { state: "right" | "wrong" | "unreadabl
   if (r.valid) return { state: "right" };
   return /could not be read|is not one number|empty/.test(r.why ?? "") ? { state: "unreadable" } : { state: "wrong", why: r.why };
 }
+
+/**
+ * teach-there@1: a slip in one line of working is answered with a smaller question about the same numbers, asked right
+ * where the slip is, and not with the answer. It is made from the line itself (no content is written for it, and nothing
+ * is fetched): a times fact becomes the same thing added up, or split at five; a times with a ten in it becomes the fact
+ * underneath; a division becomes the times fact turned round; adding and taking away go by the tens first, or through the
+ * ten. Only a single whole-number calculation that is wrong gets one; anything else is left to the plain note.
+ */
+export interface Simpler { lead: string; ask: string; answer: number }
+export function simplerFor(line: string): Simpler | null {
+  const m = /^\s*(\d{1,6})\s*([×x*·÷/:+\-−])\s*(\d{1,6})\s*=\s*(-?\d{1,9})\s*$/i.exec(line.replace(/\u2212/g, "−"));
+  if (!m) return null;
+  const a = Number(m[1]), b = Number(m[3]), said = Number(m[4]), op = /[×x*·]/i.test(m[2]) ? "×" : /[÷/:]/.test(m[2]) ? "÷" : m[2] === "+" ? "+" : "−";
+  if (op === "×") {
+    if (said === a * b) return null;
+    const small = Math.min(a, b), big = Math.max(a, b);
+    if (small < 2) return null;
+    if (big <= 12) {
+      if (small <= 5) return { lead: `${small} lots of ${big}. Add them up:`, ask: `${Array(small).fill(big).join(" + ")} = ?`, answer: a * b };
+      return { lead: `${small} lots of ${big} is 5 lots of ${big} and ${small - 5} more ${small - 5 === 1 ? "lot" : "lots"} of ${big}:`, ask: `${5 * big} + ${(small - 5) * big} = ?`, answer: a * b };
+    }
+    // a ten, hundred or thousand in it: the fact underneath first
+    const tens = (n: number) => (n % 1000 === 0 ? 1000 : n % 100 === 0 ? 100 : n % 10 === 0 ? 10 : 1);
+    const [round, other] = tens(a) > 1 && a / tens(a) <= 12 && b <= 12 ? [a, b] : tens(b) > 1 && b / tens(b) <= 12 && a <= 12 ? [b, a] : [0, 0];
+    if (!round || other < 2 || round / tens(round) < 2) return null;
+    const t = tens(round), word = t === 10 ? "tens" : t === 100 ? "hundreds" : "thousands";
+    return { lead: `${round} is ${round / t} ${word}. Start with the fact underneath:`, ask: `${round / t} × ${other} = ?`, answer: (round / t) * other };
+  }
+  if (op === "÷") {
+    if (b === 0 || a % b !== 0 || said === a / b || b < 2 || a / b > 12 || b > 12) return null;
+    return { lead: "Turn it round into a times fact:", ask: `${b} × ? = ${a}`, answer: a / b };
+  }
+  if (op === "+") {
+    if (said === a + b) return null;
+    const big = Math.max(a, b), small = Math.min(a, b);
+    if (small >= 10 && small % 10 !== 0) return { lead: `Add the tens of ${small} first:`, ask: `${big} + ${Math.floor(small / 10) * 10} = ?`, answer: big + Math.floor(small / 10) * 10 };
+    if (small < 10 && big % 10 !== 0 && (big % 10) + small > 10) return { lead: "Go up to the next ten first:", ask: `${big} + ${10 - (big % 10)} = ?`, answer: big + 10 - (big % 10) };
+    return null;
+  }
+  if (a < b || said === a - b) return null;
+  if (b >= 10 && b % 10 !== 0) return { lead: `Take away the tens of ${b} first:`, ask: `${a} − ${Math.floor(b / 10) * 10} = ?`, answer: a - Math.floor(b / 10) * 10 };
+  if (b < 10 && a % 10 !== 0 && a % 10 < b) return { lead: "Go down to the ten first:", ask: `${a} − ${a % 10} = ?`, answer: a - (a % 10) };
+  return null;
+}
