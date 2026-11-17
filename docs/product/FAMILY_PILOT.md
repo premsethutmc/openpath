@@ -199,3 +199,10 @@ the step from the child's practice answers on that question type: two right in a
 two wrong in a row move down. "Show me the coins" (the step below) is always offered; an answer given with it is
 recorded as helped. A test is always bare. The rule is general: any question that names aids fades the same way.
 Money sums are the first to name aids. A picture that is the question's data (a bill, a chart) is never an aid.
+
+## Try it as a child (try-as-child@1)
+
+`/year/#try` is the owner's view of the app as a child gets it: search any skill of any class and board, then open
+the whole journey, the lesson alone, a practice question or a test question. It uses the child app's own screens
+(`Module`, `Lesson`, `Ask`, `Feedback`) on a sandbox learner kept in the page's memory (`frontend/src/year/Try.tsx`):
+no server call is made and no record is saved. The review page links to it.

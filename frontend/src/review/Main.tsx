@@ -544,7 +544,7 @@ function Decision({ e, roles, decide }: { e: ReviewEntry | null; roles: string[]
 function Shell({ children, error }: { children: React.ReactNode; error?: string }) {
   return (
     <>
-      <header className="topbar"><div className="topbar-row wide"><span><a className="link" href="/year/">My Learning Year</a></span><strong>Content review</strong><span /></div></header>
+      <header className="topbar"><div className="topbar-row wide"><span><a className="link" href="/year/">My Learning Year</a> · <a className="link" href="/year/#try">Try as a child</a></span><strong>Content review</strong><span /></div></header>
       <main className="page wide review">{error && <p className="error" role="alert">{error}</p>}{children}</main>
     </>
   );

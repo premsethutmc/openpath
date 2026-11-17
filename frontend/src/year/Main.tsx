@@ -33,6 +33,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
 import { withDecisions, type HandoverAcknowledgement, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { delayedCheckFact } from "../../../packages/learning/src/due-display";
+import { TryAsChild } from "./Try";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { KEYBOARD_UNAVAILABLE, withheldDrawings, writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
@@ -1647,4 +1648,6 @@ if (SHELL_CACHE && "serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", (e) => { if ((e.data as { type?: string } | null)?.type === "openpath-updated" && !touched && performance.now() < 15_000) location.reload(); });
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+// try-as-child@1: /year/#try opens the owner's sandbox view of any skill (nothing saved); everything else is the app
+createRoot(document.getElementById("root")!).render(location.hash === "#try" ? <TryAsChild /> : <App />);
+addEventListener("hashchange", () => { if ((location.hash === "#try") !== !!document.querySelector(".try-page")) location.reload(); });

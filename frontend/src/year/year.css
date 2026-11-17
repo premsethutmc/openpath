@@ -423,3 +423,11 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .money-say.ok { color: #1d7a46; font-weight: 600; }
 .money-say.over { color: #b3261e; }
 .money-change { margin-top: 8px; }
+/* try-as-child@1 */
+.try-page { max-width: 640px; }
+.try-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.try-page .field input, .try-page .field select { width: 100%; min-height: 48px; font: inherit; font-size: 1.05rem; padding: 8px 12px; border-radius: 12px; border: 2px solid var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1f2a37); }
+.try-list li { padding: 10px 0; border-bottom: 1px solid var(--line, #e3e3ea); }
+.try-list .try-chapter { font-weight: 700; padding-top: 18px; border-bottom: 0; color: var(--muted, #5f6b84); }
+.try-modes { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
+.try-modes button { flex: 1 1 auto; }
