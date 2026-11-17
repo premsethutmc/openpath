@@ -9,6 +9,7 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
  */
 import { plainAnswer } from "../../../packages/learning/src/plain-answer";
 import { supportStep } from "../../../packages/learning/src/support-ladder";
+import { checkWorkingLines } from "../../../packages/learning/src/line-check";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useMemo, useState, useRef } from "react";
 import {useResume} from "./resume";
@@ -160,7 +161,10 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
  *  next-step@1: the next empty line is there as soon as the last one has something in it (up to eight lines), so there
  *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
-function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v: string) => void; check: boolean }) {
+/** line-check@1: the keys a question beyond arithmetic needs under its working (an unknown, a power, a root, an integral) */
+const MORE_KEYS = ["x", "²", "√", "π", "∫", "to", "[", "]", "sin", "cos", "tan"];
+const beyondArithmetic = (competency: string) => /algebra|calculus|trig|function|equation|polynomial|quadratic|coordinate|logarithm/i.test(competency);
+function WorkingSteps({ value, setValue, check, more = false }: { value: string; setValue: (v: string) => void; check: boolean; more?: boolean }) {
   const typed = value ? value.split("\n") : [""];
   // the box for the next step is always waiting under the last one written
   const lines = typed[typed.length - 1].trim() && typed.length < 8 ? [...typed, ""] : typed;
@@ -171,19 +175,20 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
   const pause = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settle = (i: number, text: string) => {
     if (pause.current) clearTimeout(pause.current);
-    if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
+    // … = a number, or (line-check@1) a finished line with an unknown, a bracket or limits at its end
+    if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text) || /=.*[\dxyC)\]²³°]\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
   };
   const put = (ls: string[]) => setValue(ls.join("\n"));
   const insert = (k: string) => put(lines.map((l, i) => (i === focus ? `${l}${/\s$|^$/.test(l) ? "" : " "}${k} ` : l)));
   const mark = (i: number) => {
     if (!check || !done.has(i)) return null;
-    const r = checkLines(lines)[i] ?? { state: "unreadable" };
+    const r = checkWorkingLines(lines)[i] ?? { state: "unreadable" };
     if (r.state === "right") return <span className="ws-mark ok" aria-label="Right">✓</span>;
     if (r.state === "wrong") {
       // a smaller question about the same numbers where one can be made; otherwise the plain note
       const smaller = simplerFor(lines[i]);
       if (smaller) return <StepHelp key={lines[i]} ask={smaller} />;
-      const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "Check this step"}</span>;
+      const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m && /^[-−\d.,\s]+$/.test(m[3]) ? `${m[1]} is ${m[2]}, not ${m[3]}` : r.why ?? "Check this step"}</span>;
     }
     return null;
   };
@@ -200,7 +205,7 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
         </div>
       ))}
       <div className="ws-keys">
-        {KEYS.map((k) => <button key={k} type="button" className="ws-key" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(k)}>{k}</button>)}
+        {[...KEYS, ...(more ? MORE_KEYS : [])].map((k) => <button key={k} type="button" className="ws-key" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(k)}>{k}</button>)}
       </div>
       <p className="small muted">{check ? "One step per line. Each line gets a tick when it's right." : "One step per line. It's checked with your answer at the end."}</p>
     </div>
@@ -567,7 +572,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
               Summary still supplies native focus and Enter/Space activation. */}
           <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Work it out step by step" : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
-          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
+          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
         </details>
       )}

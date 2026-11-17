@@ -206,3 +206,17 @@ Money sums are the first to name aids. A picture that is the question's data (a 
 the whole journey, the lesson alone, a practice question or a test question. It uses the child app's own screens
 (`Module`, `Lesson`, `Ask`, `Feedback`) on a sandbox learner kept in the page's memory (`frontend/src/year/Try.tsx`):
 no server call is made and no record is saved. The review page links to it.
+
+## Lines of working beyond arithmetic (line-check@1)
+
+`packages/learning/src/line-check.ts` reads a line of working as mathematics on the device: numbers with powers,
+roots, π, sin/cos/tan, percentages; a definite integral (`∫ 0 to 3 (6 − 2x) dx`) and an antiderivative between limits
+(`[6x − x²] 0 to 3`); an identity; an equation against the equation before it (same solutions); `∫ f dx = F + C` and
+`d/dx (f) = g`. Each line must be worth the same as the line before; the first that is not is marked where it is.
+Words, units and anything it cannot read are never called wrong. It does not use the question's stored steps, so any
+valid route is accepted. The working box has keys for x, ², √, π, ∫, to, [ ], sin, cos, tan on questions beyond
+arithmetic.
+
+Open: 47 of 85 calculus question types (766 of 1,118 in all, many of them rightly one-step) hold two steps or fewer,
+so "I'm stuck" has little to say on them; matrices, vectors and inequalities are not read; two unknowns only when the
+equation is of first degree in the second.
