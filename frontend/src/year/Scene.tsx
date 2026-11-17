@@ -61,7 +61,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
       {cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>
-      <p className={`scene-goal${done ? " done" : ""}`} role="status">{done ? scene.success : scene.prompt}</p>
+      <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>
       {!done && touched && nudge(scene, state) && <p className="scene-nudge" role="status">{nudge(scene, state)}</p>}
     </figure>
   );

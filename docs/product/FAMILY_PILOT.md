@@ -290,3 +290,10 @@ choice). Not built: putting shuffled steps in order (some steps can fairly go in
 ("Start at 557 · 3 forward · now at 560"); nothing is printed before it moves, and a nudge at the farther end counts
 those steps and points to the other. Then the still number line, then the bare question (support-ladder@1).
 `nudge@1`: commas name the group that is still the wrong size. Commas are dragged; their sliders are folded away.
+
+`practice-tool@1` (`practiceScene` in `scenes.ts`): a question's own picture becomes a tool in practice by rule, not type
+by type. A number line drawn with the starting number becomes a point to carry, the steps counted; the bar to shade, the
+rectangle to build and the bars to read come from the lesson's converters. Tools are `quiet` (the goal is never
+announced; the answer is still typed in its box), are offered only where the rule fits every drawn question of the type,
+and never where their words or first readout hold the answer. First audit of Class 5 (235 types): 141 words and a box,
+64 a still picture, 22 something to do, 8 movable in the lesson only.

@@ -39,6 +39,9 @@ interface Base {
   /** Shown once the goal is reached: what the learner has just seen. */
   success: string;
   goal: SceneGoal;
+  /** practice-tool@1: a tool to think with, beside a question that is still answered in its own box. Reaching the goal is
+   *  never announced, so the answer cannot be found by sweeping the picture until it says so. */
+  quiet?: boolean;
   /** The letter the horizontal quantity is called in the readout and description (default x; t for time). */
   variable?: string;
 }
@@ -319,7 +322,7 @@ const named = (s: Scene, text: string) => (s.variable && s.variable !== "x" ? te
  */
 export function nudge(s: Scene, state: SceneState): string | null {
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
-  if (s.kind === "numberline" && s.jump && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
+  if (s.kind === "numberline" && s.jump && !s.quiet && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
     const steps = Math.abs(r6(state.x - s.start));
     return `That is ${fmt(steps)} step${steps === 1 ? "" : "s"} from ${fmt(s.start)}. Now count the steps to ${fmt(state.x === s.from ? s.to : s.from)}.`;
   }
