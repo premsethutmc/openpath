@@ -157,7 +157,7 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 
 /* pictures for questions and lessons (Figure.tsx) */
 .figure { margin: 8px 0 14px; display: flex; justify-content: flex-start; overflow-x: auto; }
-.figure svg { height: auto; display: block; }
+.figure svg { height: auto; display: block; margin-inline: auto; }
 .figure table.data { border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .figure table.data th, .figure table.data td { border: 1px solid var(--line, #c9d3e0); padding: 4px 10px; text-align: center; }
 .figure table.data th { background: var(--soft, #eef3fb); font-weight: 600; }
@@ -375,6 +375,10 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 @media print { .scene-controls { display: none; } }
 
 /* recipe@1: the lesson recipe player (Recipe.tsx) */
+.explore-open { margin-top: 12px; min-height: 44px; }
+.explore { margin-top: 14px; padding: 12px 14px; border-radius: 16px; border: 2px dashed var(--brand, #6a55f0); }
+.explore-dial { display: grid; gap: 4px; margin: 8px 0; font-weight: 700; }
+.explore-dial input { width: 100%; min-height: 36px; }
 .guess-first { margin: 12px 0; }
 .guess-first .guess-skip { min-height: 44px; }
 .recipe-choices { display: grid; gap: 10px; margin: 10px 0; }

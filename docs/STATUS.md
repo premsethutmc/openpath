@@ -32,6 +32,13 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Change the numbers (2026-11-17, branch `feat/explore`, draft PR, not merged)
+- explore@1: under a worked example in a lesson, one of its own numbers can be changed and the family remakes the question,
+  picture and working; only to questions outside the released pool. 119 of 315 pictured families.
+- next-step@1: the next line of working appears by itself; the "+ Step" button is gone. The pie chart is centred.
+- Open: the 196 pictured families whose neighbours are all released (needs an exposure record); a step check for algebra,
+  trigonometry, calculus and matrices; loading by class to cut the download.
+
 ## Scenes from pictures (2026-11-17, branch `feat/figure-scenes`, draft PR, not merged)
 - scenes@4: a question with no builder gets a scene from its own picture, by kind of picture (rectangle, shaded grid, equal
   rows, triangle), only when the scene arrives at the verified answer. 10 more families, 568 released questions.

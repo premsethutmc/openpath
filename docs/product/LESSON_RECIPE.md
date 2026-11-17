@@ -80,6 +80,23 @@ lesson's Next button is as it was. What is recorded is one `lesson_part` measure
 Of the 244 skills the curricula map to, 27 open with a recipe and 190 more get a guess from this rule; 27 have neither (no
 predicted wrong answer, a choice question, or no worked example).
 
+## What if the numbers change? (explore@1)
+
+The owner's direction (17 Nov 2026): a lesson should let the learner play with the numbers and watch the picture answer, so
+the idea is seen and not memorised; and this must be a strategy the engine applies, not something built screen by screen.
+
+A question family is a recipe: from its numbers it writes the question, draws the picture and works the answer. So under
+the working of an example in a lesson the learner can change one of the example's own numbers, and the family makes the
+question, the picture and the working again (`packages/learning/src/explore.ts`, `frontend/src/year/Explore.tsx`). One
+number at a time. Nothing is written for any lesson.
+
+Evidence stays clean: a changed question is never one of the released questions (nor the same question under other numbers),
+so nothing a learner explores is something they are later asked on their own. Where too few such values exist the number is
+not offered. Of 315 families with a picture, 119 can be explored under that rule today; the others have all their valid
+neighbours inside the released pool and need an exposure record before they can be opened up.
+
+Lessons only: a test shows no picture to move, no guess and no explorer.
+
 ## Where it appears
 
 In the **opening lesson** of a skill the learner has never met, once per learner, when the skill has a recipe (`Lesson`,
