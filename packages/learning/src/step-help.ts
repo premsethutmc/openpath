@@ -32,6 +32,8 @@ export interface StepHelp {
   needs: string | null;
   /** deepen@1: a line of the working inside one of the question's own steps (made by rule, not one of its steps). */
   finer?: true;
+  /** The skill the step belongs to (its own skill or the one it leans on), when that skill has a card: the rule behind the step. */
+  rule?: string;
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -76,12 +78,13 @@ export function stepsHelp(qid: string): StepHelp[] | null {
       next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${NEXT[s.op] ?? s.op}.`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
+      ...(cardFor(s.competency) ? { rule: s.competency } : {}),
     };
     // deepen@1: the working inside the step, line by line, comes before the step itself (which then sums it up)
-    if (worked.length) return i === 0 ? [own, ...worked] : [own];
+    if (worked.length) return i === 0 ? [own, ...worked.map((w) => ({ ...w, ...(own.rule ? { rule: own.rule } : {}) }))] : [own];
     const finer = deepen(own.shown);
     if (finer.length < 2) return [own];
-    const lines: StepHelp[] = finer.map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true }));
+    const lines: StepHelp[] = finer.map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}) }));
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });

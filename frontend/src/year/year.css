@@ -431,3 +431,13 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .try-list .try-chapter { font-weight: 700; padding-top: 18px; border-bottom: 0; color: var(--muted, #5f6b84); }
 .try-modes { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
 .try-modes button { flex: 1 1 auto; }
+/* step-ask@1: a step the child enters; and the open help takes the full width (Check moves under it, at its normal size) */
+.actions > .coach { flex: 1 1 100%; }
+.coach .step-entry { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.coach .step-entry label { display: flex; flex-direction: column; align-items: stretch; gap: 6px; margin: 0; font-size: 1.1rem; font-weight: 700; }
+.coach .step-entry input { width: 100%; max-width: 16rem; min-height: 48px; padding: 8px 12px; font: inherit; font-size: 1.15rem; border-radius: 12px; border: 2px solid var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1f2a37); }
+.coach .step-entry button { align-self: flex-start; }
+/* stay-open@1: the steps already done stay, each with what was done (small) and the step itself */
+.coach-done li { margin-bottom: 6px; }
+.coach-did { display: block; font-size: 0.9rem; opacity: 0.8; }
+.coach-shown { font-weight: 700; }

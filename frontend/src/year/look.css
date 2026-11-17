@@ -245,7 +245,8 @@ details.working summary, .hint { color: var(--ink); }
 .ws-ask { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 1.15rem; }
 .ws-ask input { width: 5.5em; font-size: 1.15rem; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: inherit; }
 .ws-mark.bad { color: #b4441b; }
-.ws-keys { display: flex; flex-wrap: wrap; gap: 6px; }
+/* an even grid: every key the same size, rows filled from the left */
+.ws-keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 6px; }
 .ws-key { min-width: 44px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.15rem; font-weight: 800; }
 .ws-add { font-size: 0.95rem; color: var(--brand-text); }
 

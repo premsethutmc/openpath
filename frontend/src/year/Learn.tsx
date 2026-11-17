@@ -10,6 +10,7 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
 import { plainAnswer } from "../../../packages/learning/src/plain-answer";
 import { supportStep } from "../../../packages/learning/src/support-ladder";
 import { checkWorkingLines } from "../../../packages/learning/src/line-check";
+import { MORE_KEYS, typeKey } from "./working-keys";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useMemo, useState, useRef } from "react";
 import {useResume} from "./resume";
@@ -162,7 +163,6 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
  *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
 /** line-check@1: the keys a question beyond arithmetic needs under its working (an unknown, a power, a root, an integral) */
-const MORE_KEYS = ["x", "²", "√", "π", "∫", "to", "[", "]", "sin", "cos", "tan"];
 const beyondArithmetic = (competency: string) => /algebra|calculus|trig|function|equation|polynomial|quadratic|coordinate|logarithm/i.test(competency);
 function WorkingSteps({ value, setValue, check, more = false }: { value: string; setValue: (v: string) => void; check: boolean; more?: boolean }) {
   const typed = value ? value.split("\n") : [""];
@@ -179,7 +179,7 @@ function WorkingSteps({ value, setValue, check, more = false }: { value: string;
     if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text) || /=.*[\dxyC)\]²³°]\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
   };
   const put = (ls: string[]) => setValue(ls.join("\n"));
-  const insert = (k: string) => put(lines.map((l, i) => (i === focus ? `${l}${/\s$|^$/.test(l) ? "" : " "}${k} ` : l)));
+  const insert = (k: string) => put(lines.map((l, i) => (i === focus ? typeKey(l, k) : l)));
   const mark = (i: number) => {
     if (!check || !done.has(i)) return null;
     const r = checkWorkingLines(lines)[i] ?? { state: "unreadable" };
