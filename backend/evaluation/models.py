@@ -77,3 +77,13 @@ class EssayEvaluationRecord(models.Model):
 
     class Meta:
         ordering = ["created_at", "id"]
+
+
+class AIUsageBucket(models.Model):
+    """Atomic daily call reservations only. No prompts, responses, identity text or credentials."""
+    day = models.DateField()
+    scope = models.CharField(max_length=100)
+    requests = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['day', 'scope'], name='ai_usage_day_scope_unique')]

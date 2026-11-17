@@ -115,6 +115,70 @@ class LLMClientTests(unittest.TestCase):
         for local in ["http://127.0.0.1:8791", "http://localhost:8791"]:
             self.assertEqual(cfg(base_url=local).problems(), [])
 
+    def test_strict_configuration_before_transport(self):
+        for url in ["https://", "https://user:secret@example.test", "https://example.test?x=secret", "https://example.test#secret", "https://example.test:bad", "https://example.test\\evil", "https://example.test/\n"]:
+            t = Recorder()
+            with self.assertRaises(LLMError):
+                complete(cfg(base_url=url), "S", "U", transport=t)
+            self.assertEqual(t.calls, [])
+        for patch in [{"max_output_tokens": True}, {"max_input_chars": 0}, {"max_input_chars": 1.5}, {"retries": 1.5}, {"timeout_s": float("nan")}, {"temperature": float("inf")}, {"api_key": "secret\r\nInjected: yes"}]:
+            with self.assertRaises(LLMError):
+                complete(cfg(**patch), "S", "U", transport=Recorder())
+
+    def test_size_limit_and_transport_error_redaction(self):
+        from evaluation.llm import MAX_RESPONSE_BYTES, _bounded_read
+        from io import BytesIO
+        with self.assertRaises(LLMError):
+            _bounded_read(BytesIO(b"x" * (MAX_RESPONSE_BYTES + 1)))
+        for status in [200, 400]:
+            with self.assertRaises(LLMError):
+                complete(cfg(), "S", "U", transport=lambda *a: (status, b"x" * (MAX_RESPONSE_BYTES + 1)))
+        def broken(*a):
+            raise ValueError(KEY + " learner-secret")
+        with self.assertRaises(LLMError) as error:
+            complete(cfg(retries=0), "S", "U", transport=broken)
+        self.assertNotIn(KEY, str(error.exception))
+        self.assertNotIn("learner-secret", str(error.exception))
+        with self.assertRaises(LLMError) as error:
+            complete(cfg(), "S", "U", transport=Recorder(status=400, body={"error":{"type":"learner_secret"}}))
+        self.assertNotIn("learner_secret", str(error.exception))
+
+    def test_transport_denies_redirect_and_bounds_read(self):
+        from unittest.mock import patch, MagicMock
+        from evaluation.llm import urllib_transport, MAX_RESPONSE_BYTES
+        opener = MagicMock()
+        response = opener.open.return_value.__enter__.return_value
+        response.status = 200
+        response.read.return_value = b"{}"
+        with patch("evaluation.llm.urllib.request.build_opener", return_value=opener) as factory:
+            self.assertEqual(urllib_transport("https://example.test", {"x-api-key":KEY}, b"{}", 10), (200,b"{}"))
+            handler = factory.call_args.args[0]
+            self.assertIsNone(handler.redirect_request(None,None,302,"",{},"https://other.test"))
+            response.read.assert_called_once_with(MAX_RESPONSE_BYTES + 1)
+
+    def test_http_redirect_never_followed_and_error_body_bounded(self):
+        from unittest.mock import patch, MagicMock
+        from io import BytesIO
+        from urllib.error import HTTPError
+        from evaluation.llm import urllib_transport, MAX_RESPONSE_BYTES
+        opener = MagicMock()
+        for status in [301, 302, 303, 307, 308]:
+            stream = MagicMock()
+            opener.open.side_effect = HTTPError("https://example.test", status, "secret", {"Location":"https://other.test"}, stream)
+            with patch("evaluation.llm.urllib.request.build_opener", return_value=opener):
+                self.assertEqual(urllib_transport("https://example.test", {"x-api-key":KEY}, b"{}", 10), (status,b""))
+            stream.read.assert_not_called()
+            stream.close.assert_called_once()
+        opener.open.side_effect = HTTPError("https://example.test", 400, "secret", {}, BytesIO(b"x"*(MAX_RESPONSE_BYTES+1)))
+        with patch("evaluation.llm.urllib.request.build_opener", return_value=opener):
+            with self.assertRaises(LLMError):
+                urllib_transport("https://example.test", {"x-api-key":KEY}, b"{}", 10)
+
+    def test_invalid_success_payload_fails_closed(self):
+        for body in [{"choices":[{"message":{"content":{"secret":"x"}}}]}, {"choices":[{"message":{"content":"{}"}}],"usage":{"prompt_tokens":-1}}, {"choices":[{"message":{"content":"{}","refusal":"secret"}}]}]:
+            with self.assertRaises(LLMError):
+                complete(cfg(provider="openai_compatible"), "S", "U", transport=Recorder(body=body))
+
     def test_extract_json(self):
         self.assertEqual(extract_json('```json\n{"a": 1}\n```'), {"a": 1})
         self.assertEqual(extract_json('Here it is: {"a": [1, 2]}'), {"a": [1, 2]})

@@ -25,7 +25,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
 
-from evaluation import llm
+from evaluation import llm, gateway
 
 from .models import WordProblemUse
 from .views import AccountBase
@@ -45,12 +45,15 @@ def enabled() -> str | None:
     """None when the reader can be used, else why not (for the developer's eyes; the app shows its own words)."""
     if settings.OPENPATH_WORD_PROBLEMS != "on":
         return "switched off"
-    problems = _config().problems()
+    try:
+        problems = _config().problems()
+    except gateway.GatewayDenied:
+        return "AI configuration is invalid"
     return "; ".join(problems) if problems else None
 
 
 def _config() -> llm.LLMConfig:
-    return llm.LLMConfig(
+    return gateway.config_for("maths.word_problem", llm.LLMConfig(
         provider=settings.OPENPATH_WORD_PROBLEM_PROVIDER,
         model=settings.OPENPATH_WORD_PROBLEM_MODEL,
         base_url=settings.OPENPATH_WORD_PROBLEM_BASE_URL,
@@ -59,7 +62,7 @@ def _config() -> llm.LLMConfig:
         max_input_chars=8_000,
         timeout_s=20.0,
         retries=1,
-    )
+    ))
 
 
 def parse(reply: str) -> dict:
@@ -87,9 +90,9 @@ def parse(reply: str) -> dict:
     return {"calculation": calc, "reading": reading, "unit": unit}
 
 
-def read(text: str, transport: llm.Transport = llm.urllib_transport) -> tuple[dict, int, int]:
+def read(text: str, transport: llm.Transport = llm.urllib_transport, *, user_id: int | None = None) -> tuple[dict, int, int]:
     """(result, input tokens, output tokens). Raises llm.LLMError or Unreadable."""
-    done = llm.complete(_config(), PROMPT["system"], f"{PROMPT['userPrefix']}{text}{PROMPT['userSuffix']}", transport=transport)
+    done = gateway.execute("maths.word_problem", {"text": text}, user_id, transport=transport)
     return parse(done.text), done.input_tokens, done.output_tokens
 
 
@@ -131,7 +134,9 @@ class WordProblemView(AccountBase):
             WordProblemUse.objects.filter(pk=use.pk).update(requests=F("requests") + 1)
         left = max(0, settings.OPENPATH_WORD_PROBLEM_DAILY - use.requests - 1)
         try:
-            result, tokens_in, tokens_out = read(text, transport=self.transport)
+            result, tokens_in, tokens_out = read(text, transport=self.transport, user_id=request.user.pk)
+        except gateway.GatewayDenied:
+            return Response({"detail": "AI capacity is unavailable today. Typed calculations still work.", "left": 0}, status=status.HTTP_429_TOO_MANY_REQUESTS)
         except (llm.LLMError, Unreadable):
             # no provider text and no reason that could carry it: the app shows its usual refusal
             return Response({"cannot": "OpenPath could not read this one. Try typing just the calculation.", "left": left})

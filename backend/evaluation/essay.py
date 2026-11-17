@@ -31,7 +31,7 @@ from rest_framework.response import Response
 from family.developer import is_developer
 from family.views import AccountBase
 
-from . import llm
+from . import llm, gateway
 from .hashing import fnv1a
 from .models import EssayEvaluationRecord
 from .scrub import scrub_identifiers
@@ -163,7 +163,7 @@ def _prompt(protocol: str) -> str:
 
 
 def _config() -> llm.LLMConfig:
-    return llm.LLMConfig(
+    return gateway.config_for("essay.observe", llm.LLMConfig(
         provider=settings.OPENPATH_LLM_PROVIDER,
         model=settings.OPENPATH_LLM_MODEL,
         base_url=settings.OPENPATH_LLM_BASE_URL,
@@ -171,7 +171,7 @@ def _config() -> llm.LLMConfig:
         max_output_tokens=settings.OPENPATH_LLM_MAX_OUTPUT_TOKENS,
         timeout_s=settings.OPENPATH_LLM_TIMEOUT_S,
         retries=getattr(settings, "OPENPATH_LLM_RETRIES", 1),
-    )
+    ))
 
 
 def _adapter() -> tuple[str, str, str | None]:
@@ -183,8 +183,12 @@ def _adapter() -> tuple[str, str, str | None]:
         return name, "", "the essay evaluator is switched off on this server"
     if name == "replay":
         return name, "replay", None if settings.OPENPATH_ESSAY_REPLAY_FILE else "no replay file is configured"
-    problems = _config().problems()
-    return name, settings.OPENPATH_LLM_MODEL, "; ".join(problems) or None
+    try:
+        config = _config()
+    except gateway.GatewayDenied:
+        return name, "", "AI configuration is invalid"
+    problems = config.problems()
+    return name, config.model, "; ".join(problems) or None
 
 
 def _over_budget() -> str | None:
@@ -267,9 +271,11 @@ class EssayEvaluationView(DeveloperOnly):
                     raise llm.LLMError("no recording for this text")
                 output = recordings[key]
             else:
-                completion = llm.complete(_config(), _prompt(req["protocol"]), json.dumps(req, ensure_ascii=False), transport=TRANSPORT)
+                completion = gateway.execute(f"essay.{task}", req, request.user.pk, transport=TRANSPORT)
                 record.input_tokens, record.output_tokens = completion.input_tokens, completion.output_tokens
                 output = llm.extract_json(completion.text)
+            if not isinstance(output, dict):
+                raise llm.LLMError("the model answer was not an object")
             if task == "questions":
                 if output.get("request_id") != req["request_id"]:
                     raise llm.LLMError("the model's answer names a different question request")
@@ -281,7 +287,7 @@ class EssayEvaluationView(DeveloperOnly):
             record.status, record.reason = "failed", str(e)[:200]
             record.latency_ms = int((time.monotonic() - started) * 1000)
             record.save()
-            return Response({"error": str(e), "fallback": FALLBACK}, status=status.HTTP_502_BAD_GATEWAY)
+            return Response({"error": str(e), "fallback": FALLBACK}, status=status.HTTP_429_TOO_MANY_REQUESTS if isinstance(e, gateway.GatewayDenied) else status.HTTP_502_BAD_GATEWAY)
         record.status = "answered"
         record.latency_ms = int((time.monotonic() - started) * 1000)
         record.save()
