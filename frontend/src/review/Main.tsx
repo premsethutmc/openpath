@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Figure } from "../year/Figure";
 import { Handoffs } from "./Handoffs";
+import { Teaching } from "./Teaching";
 import { Api } from "../english/logic/account";
 import { creditOf } from "../../../packages/learning/src/grade";
 import { misconceptionOf, modules, moduleOrigin, question } from "../../../packages/learning/src/content";
@@ -27,7 +28,7 @@ import "../year/year.css";
 import "./review.css";
 
 const api = new Api();
-type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string } | { name: "marking" } | { name: "educators" };
+type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string } | { name: "marking" } | { name: "educators" } | { name: "teaching" };
 const STATE_WORD: Record<string, string> = { draft: "Draft", submitted: "Awaiting review", changes_requested: "Changes requested", rejected: "Rejected", approved: "Approved, not released", released: "Released", missing: "Not in the registry" };
 const fams = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
 
@@ -68,7 +69,7 @@ function App() {
   const [error, setError] = useState("");
   const [data, setData] = useState<{ roles: string[]; registry: Registry; canManageEducators?: boolean } | null>(null);
   // #marking (the link the parent's Written work section gives) opens the educator's marking queue directly
-  const [view, setView] = useState<View>(() => (location.hash.startsWith("#family=") ? { name: "family", id: location.hash.slice(8) } : location.hash === "#marking" ? { name: "marking" } : { name: "overview" }));
+  const [view, setView] = useState<View>(() => (location.hash.startsWith("#family=") ? { name: "family", id: location.hash.slice(8) } : location.hash === "#marking" ? { name: "marking" } : location.hash === "#teaching" ? { name: "teaching" } : { name: "overview" }));
   const load = async () => {
     const r = await api.request<{ roles: string[]; registry: Registry; canManageEducators?: boolean }>("GET", "/content-review/");
     setActiveRegistry(r.registry);
@@ -98,7 +99,7 @@ function App() {
   };
   const nav = (
     <nav className="review-nav" aria-label="Review sections">
-      {([["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"], ["marking", "Marking"], ...(data.canManageEducators ? [["educators", "Educator access"]] : [])] as [string, string][]).map(([n, label]) => (
+      {([...(data.roles.length ? [["teaching", "Teaching"]] : []), ["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"], ["marking", "Marking"], ...(data.canManageEducators ? [["educators", "Educator access"]] : [])] as [string, string][]).map(([n, label]) => (
         <button key={n} className={view.name.startsWith(n.slice(0, -1)) || view.name === n ? "primary" : "secondary"} onClick={() => setView({ name: n } as View)}>{label}</button>
       ))}
     </nav>
@@ -112,6 +113,7 @@ function App() {
     : view.name === "module" ? <ModuleDetail competency={view.competency} e={entry(`module:${view.competency}`)} reg={data.registry} roles={data.roles} decide={decide} openFamily={(id) => setView({ name: "family", id })} />
     : view.name === "curricula" ? <CurriculumList reg={data.registry} open={(item) => setView({ name: "curriculum", item })} />
     : view.name === "marking" ? <Marking roles={data.roles} />
+    : view.name === "teaching" ? <Teaching api={api} canDecide={data.roles.includes("educator")} onError={setError} />
     : view.name === "educators" ? (data.canManageEducators ? <EducatorAccess onChange={load} /> : <p className="muted">Managing educator access needs an OpenPath administrator account.</p>)
     : <CurriculumDetail item={view.item} e={entry(view.item)} roles={data.roles} decide={decide} />;
   return <Shell error={error}>{nav}{roles}{body}</Shell>;

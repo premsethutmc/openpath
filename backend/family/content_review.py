@@ -9,6 +9,11 @@ changed family or module must be reviewed again.
 Roles (ContentReviewer, granted by `manage.py content_reviewer`, or educator by an administrator: educator_access.py): an educator approves, rejects or requests changes; a
 release manager releases approved content; any reviewer may submit a draft. Learners' apps read the registry to know
 which questions are released (only released content can contribute to verified mastery).
+
+Teaching (teaching-review@1, content/learning/teaching.v1.json): story lessons (recipes) and help cards are reviewed by
+the owner in one step. They are already written, so they start as "awaiting review"; an educator approves, rejects or
+asks for changes, and there is no release step. They are kept out of the learners' registry (`registry`) and listed by
+`teaching` for the dashboard only.
 """
 
 from __future__ import annotations
@@ -30,6 +35,7 @@ from .views import AccountBase
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
 NEXT = {'draft': {'submit'}, 'changes_requested': {'submit'}, 'submitted': {'approve', 'request_changes', 'reject'}, 'approved': {'release'}, 'rejected': set(), 'released': set()}
 STATE_AFTER = {'submit': 'submitted', 'approve': 'approved', 'request_changes': 'changes_requested', 'reject': 'rejected', 'release': 'released'}
+TEACHING = ('recipe', 'card')
 ROLE_FOR = {'submit': {'educator', 'release_manager'}, 'approve': {'educator'}, 'request_changes': {'educator'}, 'reject': {'educator'}, 'release': {'release_manager'}}
 
 
@@ -71,16 +77,19 @@ def items():
         listed = [q for q in [*m['diagnostics'], *m['practice'], *m['transfer'], *m['retention'], *m['probes'], *[x for s in m['strategies'] for x in (s['guided'], s['check'])]] if q.startswith('gen:')]
         fams = sorted({*([m['pool']['family']] if m.get('pool') else []), *(p['family'] for p in m.get('pools', [])), *(q.split(':')[1] for q in listed)})
         out[f"module:{m['competency']}"] = {'hash': hash_of(m), 'version': '', 'kind': 'module', 'competency': m['competency'], 'families': fams, 'title': m['title'], 'author': author if author != 'authored' else 'OpenPath (written with AI assistance; not educator-reviewed)', 'valid': True}
+    for t in _load('teaching.v1.json')['items']:
+        out[t['item']] = {'hash': t['hash'], 'version': '', 'kind': t['kind'], 'competency': t['competency'], 'families': [], 'title': t['title'], 'author': 'OpenPath (written with AI assistance)' if t['source'] == 'written' else 'OpenPath (made by rule from the lesson)', 'valid': True, 'source': t['source'], 'from': t.get('from'), 'classes': t['classes']}
     return out
 
 
-def replay(item, current_hash, decisions):
+def replay(item, current_hash, decisions, start='draft'):
     """The state of an item from the decisions on its current hash (and when it was released)."""
-    state, released_at = 'draft', None
+    state, released_at = start, None
     for d in decisions:
         if d.content_hash != current_hash:
             continue
-        if d.decision in NEXT[state]:
+        # a lesson or card (it starts as submitted) takes the owner's latest decision: a view can be changed
+        if d.decision in NEXT[state] or (start == 'submitted' and d.decision in NEXT['submitted']):
             state = STATE_AFTER[d.decision]
             if state == 'released':
                 released_at = d.at
@@ -96,6 +105,8 @@ def registry(show_reviewers=True):
         by_item.setdefault(d.item, []).append(d)
     entries = []
     for item, meta in items().items():
+        if meta['kind'] in TEACHING:
+            continue
         ds = by_item.get(item, [])
         state, released_at = replay(item, meta['hash'], ds)
         entries.append({
@@ -113,6 +124,23 @@ def registry(show_reviewers=True):
     return {'schema': 'content-review@2', 'note': 'The server registry (backend/family/content_review.py).', 'entries': entries}
 
 
+def teaching():
+    """Every story lesson and help card with its state on its current version, and its history (all versions)."""
+    by_item = {}
+    for d in ContentDecision.objects.filter(item__regex=r'^(recipe|card):'):
+        by_item.setdefault(d.item, []).append(d)
+    out = []
+    for item, meta in items().items():
+        if meta['kind'] not in TEACHING:
+            continue
+        ds = by_item.get(item, [])
+        state, _ = replay(item, meta['hash'], ds, 'submitted')
+        out.append({'item': item, 'kind': meta['kind'], 'competency': meta['competency'], 'title': meta['title'], 'source': meta['source'], 'from': meta['from'], 'classes': meta['classes'], 'contentHash': meta['hash'], 'state': state,
+                    'changed': any(d.content_hash != meta['hash'] for d in ds) and not any(d.content_hash == meta['hash'] for d in ds),
+                    'history': [{'state': STATE_AFTER[d.decision], 'by': d.reviewer_label, 'at': d.at.isoformat().replace('+00:00', 'Z'), 'note': d.note, 'current': d.content_hash == meta['hash']} for d in ds]})
+    return out
+
+
 def roles_of(user):
     return sorted(r.role for r in ContentReviewer.objects.filter(user=user, revoked_at__isnull=True))
 
@@ -123,6 +151,16 @@ class ContentReviewView(AccountBase):
     def get(self, request):
         roles = roles_of(request.user)
         return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles)), 'canManageEducators': is_admin(request.user)})
+
+
+class TeachingReviewView(AccountBase):
+    """GET: the story lessons and help cards with their review state (reviewers only)."""
+
+    def get(self, request):
+        roles = roles_of(request.user)
+        if not roles:
+            return Response({'detail': 'Reviewing teaching needs a review role.'}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'roles': roles, 'items': teaching()})
 
 
 class ContentDecisionView(AccountBase):
@@ -143,14 +181,19 @@ class ContentDecisionView(AccountBase):
             return Response({'detail': 'You do not have the role this decision needs (educator to approve, reject or request changes; release manager to release).'}, status=status.HTTP_403_FORBIDDEN)
         if h != meta['hash']:
             return Response({'detail': 'This is not the current version of the item: reload and review the current one.'}, status=status.HTTP_409_CONFLICT)
-        if decision in ('approve', 'request_changes', 'reject') and not note:
+        teach = meta['kind'] in TEACHING
+        if teach and decision not in ('approve', 'request_changes', 'reject'):
+            return Response({'detail': 'A story lesson or help card is approved, rejected or sent back for changes.'}, status=status.HTTP_400_BAD_REQUEST)
+        # the owner approves a lesson by looking at it: a note is needed only to say what is wrong
+        if decision in ('request_changes', 'reject', *(() if teach else ('approve',))) and not note:
             return Response({'detail': 'A review needs a note: what was checked, or what to change.'}, status=status.HTTP_400_BAD_REQUEST)
         if decision == 'submit' and not meta['valid']:
             return Response({'detail': 'This item does not pass its validation, so it cannot be submitted.'}, status=status.HTTP_400_BAD_REQUEST)
         with transaction.atomic():
             ds = list(ContentDecision.objects.select_for_update().filter(item=item))
-            state, _ = replay(item, meta['hash'], ds)
-            if decision not in NEXT[state]:
+            state, _ = replay(item, meta['hash'], ds, 'submitted' if teach else 'draft')
+            # a decision on a lesson or card can be changed: it is the owner's own view, on this version
+            if decision not in (NEXT['submitted'] if teach else NEXT[state]):
                 return Response({'detail': f'The item is {state.replace("_", " ")}: it cannot be {STATE_AFTER[decision].replace("_", " ")} now.'}, status=status.HTTP_409_CONFLICT)
             # four eyes: the person who releases is not the person who approved this version
             if decision == 'release':
