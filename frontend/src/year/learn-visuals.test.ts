@@ -69,7 +69,9 @@ test("every learner path passes the lesson's competency to the picture", () => {
     const calls = [...text.matchAll(/<Lesson\b[^>]*>/g)].map((m) => m[0]);
     assert.ok(calls.length > 0 && calls.every((c) => c.includes("competency={competency}")), `${name}: every <Lesson> passes competency`);
   }
-  assert.match(learn, /<Picture w=\{sc\.widget\} competency=\{competency\} \/>/);
+  // guess-picture@1: the picture before a guess and the one that waits with the working both carry the competency
+  assert.match(learn, /<Picture w=\{pics\.before\} competency=\{competency\} \/>/);
+  assert.match(learn, /<Picture w=\{pics\.withWorking\} competency=\{competency\} \/>/);
   assert.match(teaching, /<TeachingBlock [^>]*competency=\{competency\}/);
   assert.match(teaching, /<Figure v=\{stripsFor\(block\.widget[^}]*\}?, competency\)\} \/>/);
 });

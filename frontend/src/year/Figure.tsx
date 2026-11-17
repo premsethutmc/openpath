@@ -3,6 +3,8 @@
  * always exactly the mathematics of its question. Every picture has a text description (aria-label) that says the
  * same thing in words, so a learner using a screen reader gets the same question.
  */
+import { MoneyPiles } from "./MoneyPiles";
+import type { MoneyPicture } from "../../../packages/learning/src/money-piles";
 import type { JSX } from "react";
 import { TriangleAngleLab } from "../geometry/TriangleAngleLab";
 import { ScenePlayer } from "./Scene";
@@ -192,6 +194,10 @@ export function describe(v: V): string {
       return `A number line from ${minus(num(v.from))} to ${minus(num(v.to))}${arr<number>(v.marks).length ? `, marked at ${arr<number>(v.marks).map(minus).join(", ")}` : ""}${arr<[number, number]>(v.jumps).length ? `, with jumps ${arr<[number, number]>(v.jumps).map(([a, b]) => `${minus(a)} to ${minus(b)}`).join(", ")}` : ""}${arr<Iv>(v.intervals).length ? `, with ${arr<Iv>(v.intervals).map(ivText).join(" and ")} shaded` : ""}`;
     case "clock":
       return "A clock face (read the time from the hands)";
+    case "money": {
+      const [a, pa] = arr<number>(v.have), [b, pb] = arr<number>(v.other);
+      return `Coins: ${a} rupees and ${pa} paise${v.take ? `, to pay ${b} rupees and ${pb} paise from` : `, and ${b} rupees and ${pb} paise more`}`;
+    }
     case "coins":
       return `Money: ${arr<number>(v.items).map((x) => `₹${x}`).join(", ")}`;
     case "bars":
@@ -409,6 +415,8 @@ export function Figure({ v }: { v: V }) {
         <circle key="c" cx={100} cy={100} r={5} fill={INK} />,
       ]);
     }
+    case "money":
+      return <MoneyPiles m={v as unknown as MoneyPicture} />;
     case "coins": {
       const items = arr<number>(v.items);
       let x = 6;

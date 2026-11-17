@@ -19,3 +19,10 @@
 .review select { min-height: 2.6rem; font-size: 1rem; }
 .review .decision .actions { flex-wrap: wrap; }
 .review .decision .actions button { flex: 1 1 auto; min-width: 7.5rem; }
+/* child-view@1: the child's answer boxes on the review page (the child app styles them in look.css) */
+.review .kid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+.review label.kid-unit { display: flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; font-size: 1.1rem; font-weight: 700; min-width: 0; }
+.review .kid-unit input { flex: 1 1 auto; width: 100%; min-width: 0; font-size: 1.1rem; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line, #c9d3e0); }
+.review .kid-taps { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.review .kid-tap { padding: 10px 14px; border-radius: 12px; border: 2px solid var(--line, #c9d3e0); background: #fff; font-size: 1.05rem; font-weight: 700; cursor: pointer; }
+.review .kid-tap.picked, .review .kid-tap.placed { border-color: var(--brand, #5b4bd6); }

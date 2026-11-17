@@ -26,7 +26,9 @@ describe("kid-say@1 (Class 5 child wording)", () => {
       const where = `${id}: "${k.say}"`;
       if (/Write the (answer|list|time)|for example|in brackets|Choose one|without commas|Write it like/.test(k.say)) bad.push(`instruction left in ${where}`);
       if (!k.say.trim()) bad.push(`empty ${where}`);
-      const given = new Set([...nums(q.prompt), ...nums(JSON.stringify(q.figure ?? {})), 1, 2, 3, 10, 100]);
+      // money-say@1: ₹17.75 is said as 17 rupees and 75 paise (the same amount, in its two parts)
+      const parts = [...q.prompt.matchAll(/₹(\d+)\.(\d\d)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+      const given = new Set([...nums(q.prompt), ...nums(JSON.stringify(q.figure ?? {})), ...parts, 1, 2, 3, 10, 100]);
       const extra = nums(k.say).filter((n) => !given.has(n));
       if (extra.length) bad.push(`numbers ${extra} not in the question: ${where}`);
       if (words(k.say) > 40) bad.push(`${words(k.say)} words: ${where}`);
@@ -45,7 +47,9 @@ describe("kid-say@1 (Class 5 child wording)", () => {
     expect(kidQuestion(question("gen:aepat:21,9,8")).figure).toBeUndefined();
     expect(kidQuestion(question("gen:aeshop:11,3,17,2,2")).figure).toBeUndefined();
     expect(kidQuestion(question("gen:acgrow:2,1,7")).figure).toBeDefined();
-    expect(kidQuestion(question("gen:acpaise:3,10,1")).figure).toBeDefined();
+    // money-say@2: the amount is now said in its two parts (3 rupees and 10 paise), so the ₹ | paise table would say it twice
+    expect(kidQuestion(question("gen:acpaise:3,10,1")).figure).toBeUndefined();
+    expect(kidQuestion(question("gen:acpaise:3,10,1")).note).toBe("1 rupee is 100 paise.");
   });
   test("the answer shape gives back an answer the marking accepts", () => {
     const bad: string[] = [];
@@ -71,6 +75,12 @@ describe("kid-say@1 (Class 5 child wording)", () => {
         const hs = q.answer.replace(/^\(|\)$/g, "").split(/,\s*/);
         if (hs.length !== a.labels.length || !hs.every((h) => Number(h) % a.step === 0 && Number(h) / a.step <= a.lines)) bad.push(`${id}: the bars cannot reach ${q.answer}`);
         else if (!isCorrect(q, compose(a, hs, q.answer))) bad.push(`${id}: bars do not rebuild ${q.answer}`);
+      } else if (a.kind === "money") {
+        // the rupees and the paise of the answer, as a child counts them, rebuild it; paise in the rupees box do not
+        const paise = Math.round(Number(q.answer.replace(/,/g, "")) * 100);
+        const [r, p] = [Math.floor(paise / 100), paise % 100];
+        if (!isCorrect(q, compose(a, [String(r), String(p)], q.answer))) bad.push(`${id}: rupees and paise do not rebuild ${q.answer}`);
+        if (p !== r && isCorrect(q, compose(a, [String(p), String(r)], q.answer))) bad.push(`${id}: swapped boxes also marked right`);
       } else if (a.kind === "fields") {
         const m = q.answer.match(/^\((−?[\d.]+), (−?[\d.]+)\)$/);
         if (!m || !isCorrect(q, compose(a, [m[1], m[2]], q.answer))) bad.push(`${id}: fields do not rebuild ${q.answer}`);

@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 const require = createRequire(new URL("../frontend/package.json", import.meta.url));
 const ts = require("typescript");
 
-export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts",
+export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx",
+      // Try.tsx: added in a reviewed change (try-as-child@1). The owner's sandbox view shows a module's own practice and
+      // retention questions (modulePhasePool, which applies selectable()) to a learner kept in memory; nothing is recorded.
+      "frontend/src/year/Try.tsx", "packages/learning/src/compiler.ts",
       // deep-recovery.ts: added in a reviewed change (deep-select@1, research, off by default). Every question it chooses passes selectable(),
       // keyboardOffered(), the grade ceiling and, after teaching, the taught method; see frontend/src/journey/deep-select.test.ts
       "packages/learning/src/deep-recovery.ts",

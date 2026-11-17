@@ -139,7 +139,10 @@ longer sent: the child is shown how to write it ("Type just your final answer, f
 Nothing is recorded, so this can no longer pause a skill. Other builds are unchanged: the first unreadable answer is
 recorded and asked about, as before.
 
-Open: reading the plain cases as the number ("7 birds"); whether pause@1 should ever apply to unreadable answers.
+plain-answer@1: "7 birds" for "How many birds…?" is read as 7 (`packages/learning/src/plain-answer.ts`): only when the answer is a
+whole number and every word after it is a thing the question names; never a unit ("7 cm"), never another word.
+
+Open: "seven" and "9-2"; whether pause@1 should ever apply to unreadable answers.
 
 
 ## Teaching dashboard (teaching-review@1)
@@ -160,3 +163,60 @@ as a table with no real headings, the row is drawn as cards (`pictured` in `fami
 never drawn as a table of data.
 
 The owner reviews teaching without a database grant when their account's email is in `OPENPATH_OWNER_EMAILS`.
+
+## Money as coins (money-say@1, money-piles@1)
+
+A bare sum of money (`₹7.55 − ₹3.15 = ?`, families `acmoneyadd`, `agrupee` and any other that prints that shape) is a
+decimal calculation to a child who has not met decimals. By rule (`moneySum` in `kid-say.ts`) the child is told what
+happens to the money in rupees and paise ("You have 7 rupees and 55 paise. You pay 3 rupees and 15 paise."), sees the
+coins (`money-piles.ts`, `MoneyPiles.tsx`) and answers in two boxes, rupees and paise, which are joined into the
+decimal the marking wants. Taking away, the child pays by tapping coins; when the paise are too few, one rupee is
+changed into 100 paise. Adding, 100 paise are changed into ₹1. The piles are built so the amount can always be paid
+exactly; the picture never states the answer. In a test the coins are shown but cannot be worked with.
+
+`child-view@1`: the review page's "Try them" box shows the question as the child is asked it (their words, picture and
+answer boxes), with the written form underneath.
+
+money-say@2 (every money question, by rule in `general`): where a question wants paise in its answer, the child
+answers in the rupees and paise boxes; wherever paise come into a question, an amount is said in its two parts
+(₹3.15 → 3 rupees and 15 paise) and "1 rupee is 100 paise." is kept under it. This covers paise to rupees, rupees to
+paise, multiplying and sharing an amount, and bills. Coins are drawn for adding and taking away only.
+
+Open: coins for changing, sharing and multiplying an amount; fading from coins to columns to numbers alone.
+
+## The picture beside a guess (guess-picture@1)
+
+Before a "have a guess" only the question's own picture is shown. The lesson's teaching picture (a worked layout, such
+as a pattern stacked so the ? sits under its answer) waits with the working (`frontend/src/year/guess-picture.ts`).
+Before this, 108 lesson screens across 79 question types showed the teaching picture first. Tests check every lesson
+with a guess, and that no question's own picture puts the ? under its answer.
+
+## Fading help (support-ladder@1)
+
+A question may name its aids, most help first (`aids` in `kid-say.ts`; a sum of money: the coins, then the amounts in
+columns); after the last aid comes the bare question. `supportStep` (`packages/learning/src/support-ladder.ts`) picks
+the step from the child's practice answers on that question type: two right in a row without help move up a step,
+two wrong in a row move down. "Show me the coins" (the step below) is always offered; an answer given with it is
+recorded as helped. A test is always bare. The rule is general: any question that names aids fades the same way.
+Money sums are the first to name aids. A picture that is the question's data (a bill, a chart) is never an aid.
+
+## Try it as a child (try-as-child@1)
+
+`/year/#try` is the owner's view of the app as a child gets it: search any skill of any class and board, then open
+the whole journey, the lesson alone, a practice question or a test question. It uses the child app's own screens
+(`Module`, `Lesson`, `Ask`, `Feedback`) on a sandbox learner kept in the page's memory (`frontend/src/year/Try.tsx`):
+no server call is made and no record is saved. The review page links to it.
+
+## Lines of working beyond arithmetic (line-check@1)
+
+`packages/learning/src/line-check.ts` reads a line of working as mathematics on the device: numbers with powers,
+roots, π, sin/cos/tan, percentages; a definite integral (`∫ 0 to 3 (6 − 2x) dx`) and an antiderivative between limits
+(`[6x − x²] 0 to 3`); an identity; an equation against the equation before it (same solutions); `∫ f dx = F + C` and
+`d/dx (f) = g`. Each line must be worth the same as the line before; the first that is not is marked where it is.
+Words, units and anything it cannot read are never called wrong. It does not use the question's stored steps, so any
+valid route is accepted. The working box has keys for x, ², √, π, ∫, to, [ ], sin, cos, tan on questions beyond
+arithmetic.
+
+Open: 47 of 85 calculus question types (766 of 1,118 in all, many of them rightly one-step) hold two steps or fewer,
+so "I'm stuck" has little to say on them; matrices, vectors and inequalities are not read; two unknowns only when the
+equation is of first degree in the second.

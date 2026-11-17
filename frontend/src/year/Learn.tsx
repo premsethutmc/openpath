@@ -7,13 +7,17 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
+import { plainAnswer } from "../../../packages/learning/src/plain-answer";
+import { supportStep } from "../../../packages/learning/src/support-ladder";
+import { checkWorkingLines } from "../../../packages/learning/src/line-check";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
-import { useState, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
 import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
+import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach } from "./StepCoach";
 import { SmallAsk as StepHelp } from "./SmallAsk";
@@ -157,7 +161,10 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
  *  next-step@1: the next empty line is there as soon as the last one has something in it (up to eight lines), so there
  *  is no button to ask for it; Enter moves to it. */
 const KEYS = ["×", "÷", "+", "−", "=", "(", ")"];
-function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v: string) => void; check: boolean }) {
+/** line-check@1: the keys a question beyond arithmetic needs under its working (an unknown, a power, a root, an integral) */
+const MORE_KEYS = ["x", "²", "√", "π", "∫", "to", "[", "]", "sin", "cos", "tan"];
+const beyondArithmetic = (competency: string) => /algebra|calculus|trig|function|equation|polynomial|quadratic|coordinate|logarithm/i.test(competency);
+function WorkingSteps({ value, setValue, check, more = false }: { value: string; setValue: (v: string) => void; check: boolean; more?: boolean }) {
   const typed = value ? value.split("\n") : [""];
   // the box for the next step is always waiting under the last one written
   const lines = typed[typed.length - 1].trim() && typed.length < 8 ? [...typed, ""] : typed;
@@ -168,19 +175,20 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
   const pause = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settle = (i: number, text: string) => {
     if (pause.current) clearTimeout(pause.current);
-    if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
+    // … = a number, or (line-check@1) a finished line with an unknown, a bracket or limits at its end
+    if (/=\s*-?\d+(?:\.\d+)?\s*$/.test(text) || /=.*[\dxyC)\]²³°]\s*$/.test(text)) pause.current = setTimeout(() => setDone((d) => new Set(d).add(i)), 700);
   };
   const put = (ls: string[]) => setValue(ls.join("\n"));
   const insert = (k: string) => put(lines.map((l, i) => (i === focus ? `${l}${/\s$|^$/.test(l) ? "" : " "}${k} ` : l)));
   const mark = (i: number) => {
     if (!check || !done.has(i)) return null;
-    const r = checkLines(lines)[i] ?? { state: "unreadable" };
+    const r = checkWorkingLines(lines)[i] ?? { state: "unreadable" };
     if (r.state === "right") return <span className="ws-mark ok" aria-label="Right">✓</span>;
     if (r.state === "wrong") {
       // a smaller question about the same numbers where one can be made; otherwise the plain note
       const smaller = simplerFor(lines[i]);
       if (smaller) return <StepHelp key={lines[i]} ask={smaller} />;
-      const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "Check this step"}</span>;
+      const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m && /^[-−\d.,\s]+$/.test(m[3]) ? `${m[1]} is ${m[2]}, not ${m[3]}` : r.why ?? "Check this step"}</span>;
     }
     return null;
   };
@@ -197,7 +205,7 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
         </div>
       ))}
       <div className="ws-keys">
-        {KEYS.map((k) => <button key={k} type="button" className="ws-key" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(k)}>{k}</button>)}
+        {[...KEYS, ...(more ? MORE_KEYS : [])].map((k) => <button key={k} type="button" className="ws-key" onMouseDown={(e) => e.preventDefault()} onClick={() => insert(k)}>{k}</button>)}
       </div>
       <p className="small muted">{check ? "One step per line. Each line gets a tick when it's right." : "One step per line. It's checked with your answer at the end."}</p>
     </div>
@@ -305,10 +313,12 @@ function KidText({ text }: { text: string[] }) {
     </>
   );
 }
+/** money-piles@1: in a test a picture that can be worked with is only shown (tests stay free of help). */
+const still = <T extends { type?: string }>(v: T, test: boolean): T => (test && v.type === "money" ? { ...v, still: true } : v);
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
-function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
   const [parts, setParts] = useState<string[]>([]);
   const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
   if (ask.kind === "tap")
@@ -384,6 +394,17 @@ function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; ans
       </div>
     );
   }
+  if (ask.kind === "money")
+    return (
+      <div className="kid-fields">
+        {["rupees", "paise"].map((l, i) => (
+          <label key={l} className="kid-unit">
+            <input aria-label={`Your answer: ${l}`} inputMode="numeric" autoComplete="off" value={parts[i] ?? ""} disabled={disabled} onChange={(e) => { const n = [0, 1].map((j) => (j === i ? e.target.value.replace(/\D/g, "") : parts[j] ?? "")); put(n, n.every((x) => x.trim())); }} />
+            <span>{l}</span>
+          </label>
+        ))}
+      </div>
+    );
   if (ask.kind === "fields")
     return (
       <div className="kid-fields">
@@ -516,13 +537,30 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const workable = q.type !== "written" && !q.picks?.length;
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && q.type !== "written" ? safeKid(q) : null;
+  // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
+  // alone (coins → columns → the bare question); a test is always bare. The step below can be asked for: the answer
+  // then counts as helped.
+  const aids = kq?.aids;
+  const famKey = qid.split(":").slice(0, 2).join(":") + ":";
+  const autoStep = useMemo(() => {
+    if (!aids) return 0;
+    if (isTest(activity)) return aids.length;
+    const tried = ctx.records.attempts.filter((a) => a.questionId.startsWith(famKey) && !isTest(a.activity)).map((a) => ({ right: creditOf(a.questionId, a.response) === true, helped: a.hints > 0 || a.solution || a.n > 1 }));
+    return supportStep(tried, aids.length);
+    // the step is settled when the question opens: saving its own answer must not change the picture under the child
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qid]);
+  const [lower, setLower] = useResume(resumeKey && `${resumeKey}:support`, 0);
+  const step = Math.max(0, autoStep - lower);
+  const figure = aids ? aids[step]?.figure : kq ? kq.figure : q.figure;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {(kq ? kq.figure : q.figure) && <Figure v={(kq ? kq.figure : q.figure)!} />}
+      {figure && <Figure v={still(figure, isTest(activity))} />}
+      {aids && step > 0 && !isTest(activity) && <p><button type="button" className="link" data-testid="support-down" onClick={() => setLower(lower + 1)}>Show me the {aids[step - 1].name}</button></p>}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
@@ -534,7 +572,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
               Summary still supplies native focus and Enter/Space activation. */}
           <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Work it out step by step" : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
-          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
+          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
         </details>
       )}
@@ -548,25 +586,27 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
             if (submitting.current) return;
+            // plain-answer@1: "7 birds" for "How many birds…?" is the number 7 (never a unit, never a word the question does not use)
+            const sent = plainAnswer(q.prompt, q.type, value);
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
             // calculus-working@1: a calculus derivation may run to 100 lines of 200 characters
             const [maxLines, maxChars] = /calculus|differentia|integra|limit/.test(q.competency) ? [100, 200] : [8, 80];
             if (lines.length > maxLines || lines.some((line) => line.length > maxChars)) { setClarify(`Your work is still here. Use at most ${maxLines} lines, with at most ${maxChars} characters per line, before checking.`); return; }
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
-            const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
+            const preview = needsMarking(q) ? null : decide(qid, sent, lines, asked);
             // ask-first@1 (the child build): an answer that cannot be read is not sent. The child is shown how to write it and
             // tries again at once; nothing is recorded, so writing "7 birds" twice can no longer pause the skill (pause@1
             // counts unreadable answers that were sent). Elsewhere the first unreadable answer is recorded as before.
             if (KID && preview?.clarification && preview.credit === null && preview.feedback.kind === "clarify") { setClarify(`${preview.clarification.prompt} Nothing has been sent yet: change your answer and tap Check again.`); return; }
             submitting.current = true;
             let ok: boolean;
-            try { ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
+            try { ok = await ctx.answer(qid, sent, activity, { hints: hint || showHint || lower > 0 ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
             if (!ok) return;
             // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
             const a = authoritativeView(preview, ctx.recorded?.() ?? null);
             if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
             setClarify(null);
-            onAnswered?.({ qid, response: value, activity, ...(ctx.recorded?.() ? { decision: ctx.recorded()! } : {}), right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
+            onAnswered?.({ qid, response: sent, activity, ...(ctx.recorded?.() ? { decision: ctx.recorded()! } : {}), right: a ? a.credit === true : creditOf(qid, sent) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
@@ -640,11 +680,15 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // play-first@1: where the example has a picture to move, that comes first instead (it would give a guess away)
   const play = opening && !!competency && !!scene && !!sc.math;
   const guess = !play && opening && competency && raw.instance && sc.math ? guessOf(raw.instance) : null;
-  // a picture that is not the question's own belongs to the working (it would give the answer away), so it waits with it
-  const later = !!guess && !guess.pictured && !!sc.widget;
-  const picture = sc.widget && <Picture w={sc.widget} competency={competency} />;
+  // guess-picture@1: before a guess only the question's own picture shows; the lesson's teaching picture (a worked
+  // layout that would give the answer away) waits with the working
+  const own = raw.instance ? ((kq?.figure ?? question(raw.instance).figure) as typeof raw.widget | undefined) : undefined;
+  const pics = guessPictures(!!guess, own, sc.widget);
+  const later = !!pics.withWorking;
+  const picture = pics.before && <Picture w={pics.before} competency={competency} />;
+  const laterPicture = pics.withWorking && <Picture w={pics.withWorking} competency={competency} />;
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
-  const working = sc.math && <>{later && picture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
@@ -652,7 +696,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {/* a scene made from the question's own picture replaces the still picture */}
-        {!later && !(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
+        {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
         {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
         {sc.tip && <p className="hint">{sc.tip}</p>}

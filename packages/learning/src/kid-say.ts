@@ -15,6 +15,8 @@ import type { Visual } from "./family-kit";
 export type Ask =
   | { kind: "box"; before?: string; after?: string }
   | { kind: "fields"; labels: string[] }
+  /** money-say@1: two boxes, rupees and paise, read back as the decimal the marking wants (4 and 40 → 4.40) */
+  | { kind: "money" }
   | { kind: "order"; items: string[]; first: string; prefix?: string }
   | { kind: "tap"; items: { label: string; value: string }[] }
   /** numbers multiplied together, typed as 3 × 3 × 11 (read back as the list the marking wants) */
@@ -31,6 +33,9 @@ export interface KidQ {
   figure?: Visual;
   /** One short line under the picture (a key). */
   note?: string;
+  /** support-ladder@1: pictures that only help (the question is whole without them), most help first; `figure` is the
+   *  first. They fade as the child gets such questions right. A picture that is the question's data is never an aid. */
+  aids?: { name: string; figure: Visual }[];
 }
 interface Q {
   id: string;
@@ -318,6 +323,25 @@ function pickOne(q: Q, re: RegExp, word: string): Partial<KidQ> & { say: string 
 
 // ------------------------------------------------------------------ rules for every question
 
+/**
+ * money-say@1: a bare sum of money (₹7.55 − ₹3.15 = ?) is a decimal calculation to a child who has not met decimals.
+ * It is said as what happens to the money, in rupees and paise; the picture is the coins themselves; the answer is two
+ * boxes. (The one place a calculation is given a frame: an amount of money is a thing held, not a number.)
+ */
+const amount = (r: number, p: number) => [r ? `${r} rupee${r === 1 ? "" : "s"}` : "", p || !r ? `${p} paise` : ""].filter(Boolean).join(" and ");
+function moneySum(q: Q): KidQ | null {
+  const m = q.prompt.match(/^₹(\d+)\.(\d\d) ([+−]) ₹(\d+)\.(\d\d) = \?/);
+  if (!m) return null;
+  const [a, pa, b, pb] = [m[1], m[2], m[4], m[5]].map(Number), take = m[3] === "−";
+  const coins = { type: "money", have: [a, pa], other: [b, pb], take } as unknown as Visual;
+  return {
+    say: take ? `You have ${amount(a, pa)}. You pay ${amount(b, pb)}. How much do you have left?` : `You have ${amount(a, pa)}. You get ${amount(b, pb)} more. How much do you have now?`,
+    ask: { kind: "money" },
+    figure: coins,
+    aids: [{ name: "coins", figure: coins }, { name: "columns", figure: { type: "table", head: ["", "rupees", "paise"], rows: [["", a, pa], [take ? "−" : "+", b, pb]] } }],
+  };
+}
+
 /** Turn the existing prompt into one short ask plus an answer shape. */
 function general(q: Q): KidQ {
   let t = q.prompt.replace(/\s*Choose one\.$/, "");
@@ -350,9 +374,24 @@ function general(q: Q): KidQ {
   }
   // 3. money: ₹ before the box
   const money = /\bin rupees\b|like 4\.50|\(for example, write 12\.50/.test(all);
-  if (money && ask.kind === "box") {
+  // money-say@2: where the question wants paise in the answer (it says "like 4.50"), the answer is rupees and paise in
+  // two boxes, never a decimal to type; where it wants whole rupees, one box with ₹ before it
+  const withPaise = /like 4\.50|\(for example, write 12\.50/.test(all);
+  if (money && ask.kind === "box" && withPaise && q.type === "fraction") ask = { kind: "money" };
+  else if (money && ask.kind === "box") {
     ask = { kind: "box", before: "₹" };
     t = t.replace(/, in rupees,/, "").replace(/,? in rupees(?=\?)/, "").replace(/\s+Write (?:it|the answer in rupees),? like 4\.50\./, "").replace(/\s+Give the answer in rupees[^.]*\./, "");
+  }
+  let moneyNote: string | undefined;
+  if (ask.kind === "money") {
+    t = t.replace(/, in rupees,/, "").replace(/,? in rupees(?=\?)/, "").replace(/\s+Write (?:it|the answer in rupees),? like 4\.50\./, "").replace(/\s+Give the answer in rupees[^.]*\./, "");
+  }
+  // wherever paise come into it, an amount is said in its two parts (₹3.15 → 3 rupees and 15 paise; ₹1 and 10 paise →
+  // 1 rupee and 10 paise): no decimal point to read, and the one fact every such question leans on is kept in view
+  if (ask.kind === "money" || /\bpaise\b/.test(all)) {
+    t = t.replace(/₹\s?([\d,]+)\.(\d\d)\b/g, (_m, r: string, p: string) => amount(Number(r.replace(/,/g, "")), Number(p)))
+      .replace(/₹\s?([\d,]+) and (\d+) paise/g, (_m, r: string, p: string) => amount(Number(r.replace(/,/g, "")), Number(p)));
+    moneyNote = "1 rupee is 100 paise.";
   }
   // 4. a unit after the box: "…, in cm?" / "… in degrees?"
   if (ask.kind === "box" && !ask.before) {
@@ -369,7 +408,7 @@ function general(q: Q): KidQ {
   // the marking wants the simplest form: say so once, under the question
   const note = q.type === "mixed" && /simplest|lowest/.test(dropped + all) && !/simplest|lowest/.test(t) ? "Simplest form; a mixed number if it is more than 1." : undefined;
   t = t.replace(/\b1 floors\b/g, "1 floor");
-  return { say: t.replace(/\s{2,}/g, " ").trim(), ask, ...(note ? { note } : {}) };
+  return { say: t.replace(/\s{2,}/g, " ").trim(), ask, ...(note ?? moneyNote ? { note: note ?? moneyNote } : {}) };
 }
 
 /** How the options read to a child: (8, 30) as 8 h 30 min when the question names the units; brackets dropped. */
@@ -387,7 +426,7 @@ function kidOptions(q: Q, ask: Ask): string[] | undefined {
 
 export function kidQuestion(q: Q): KidQ {
   if (form(q.id) === "w") return { say: q.prompt, ask: { kind: "box" }, options: q.options };
-  const base = general(q);
+  const base = moneySum(q) ?? general(q);
   const own = OWN[fam(q.id)];
   let o: ReturnType<Own> | null = null;
   try { o = own ? own(q) : null; } catch (e) { if (e !== NOT_THIS) throw e; }
@@ -395,10 +434,10 @@ export function kidQuestion(q: Q): KidQ {
   // multiple choice keeps its buttons; a tap or order ask is for the typed form only
   if (form(q.id) === "mc" || q.type === "choice") ask = { kind: "box" };
   let say = o?.say ?? base.say;
-  const fig = o?.figure ? (o.figure === NONE ? undefined : o.figure) : q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined;
+  const fig = o?.figure ? (o.figure === NONE ? undefined : o.figure) : base.figure ?? (q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined);
   // with the table left out, the sentence no longer points at it
   if (q.figure && !fig) say = say.replace(/^The table shows (?:the )?/, "Here are the ").replace(/^The number cards in the picture make /, "These numbers make ");
-  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}) };
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(base.aids && fig === base.figure ? { aids: base.aids } : {}) };
 }
 
 /** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a
@@ -428,6 +467,8 @@ export function compose(ask: Ask, parts: string[], answer?: string, type?: strin
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "tap" || ask.kind === "turn") return parts[0] ?? "";
+  // an empty rupees box is no rupees; paise keep what was typed ("140" stays 140, so the slip is seen, not hidden)
+  if (ask.kind === "money") return `${(parts[0] ?? "").trim() || "0"}.${(parts[1] ?? "").trim().padStart(2, "0")}`;
   if (ask.kind === "bars") return `(${parts.join(", ")})`;
   if (ask.kind === "product") return `(${(parts[0] ?? "").split(/\s*[×x*.,]\s*|\s+/i).filter(Boolean).map(Number).filter((n) => n > 0).sort((a, b) => a - b).join(", ")})`;
   const xs = (ask.kind === "order" ? parts.map((p) => p.replace(/,(?=\d{2,3}\b)/g, "")) : parts.map((p) => p.trim()));
