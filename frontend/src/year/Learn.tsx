@@ -15,7 +15,7 @@ import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { recipeFor } from "../../../packages/learning/src/recipe";
-import { sceneForQuestion } from "../../../packages/learning/src/scenes";
+import { sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
@@ -625,7 +625,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
-        {!later && picture}
+        {/* a scene made from the question's own picture replaces the still picture */}
+        {!later && !(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
         {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
         {sc.tip && <p className="hint">{sc.tip}</p>}

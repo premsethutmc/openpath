@@ -1,4 +1,4 @@
-# Interactive scenes (scene@7, scenes@4)
+# Interactive scenes (scene@8, scenes@4)
 
 The owner's direction (16 Nov 2026): maths should be learned by moving things, "not like another maths book"; it must be an
 engine, not hundreds of hand-built screens; and it must be deterministic for learners, with no AI call per use.
@@ -16,7 +16,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
   every question of that family gets its own picture with nothing written for it. The families are not changed (fingerprints,
   pools and certification are as they were).
 
-## Kinds (scene@7)
+## Kinds (scene@8)
 
 | Kind | The learner | Measures |
 |---|---|---|
@@ -33,6 +33,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
 | `array` | sets counters out in equal rows; with `share`, a total is shared out and what is left over waits underneath | `rows`, `cols`, `count`, `off`, `left` |
 | `commas` | moves the commas between the digits of a whole number, the Indian or the international way | `a`, `b`, `c`, `miss` |
 | `order` | drags two to five number cards into order, smallest on the left | `wrong`, `first`, `last` |
+| `bars` | slides a level line up a bar chart's scale to a bar's top; for two bars, sees how far the taller rises above the shorter | `y`, `miss`, `above` |
 
 A curve is a polynomial (`poly`, its coefficients) or a sum of terms (`terms`: powers, sine, cosine, exponential, natural
 logarithm). Slopes and areas are exact in both, from the derivative and the antiderivative in closed form, not estimated.
@@ -64,10 +65,11 @@ scene only when the scene's own mathematics arrives at the question's verified a
 | `grid` (equal parts, some shaded) | `fraction` bar to copy | the fraction shaded |
 | `array` (equal rows) | `array` to set out | rows × number in a row |
 | `triangle` (two angles given) | `triangle` | the third angle |
+| `bars` (a bar chart) | `bars` with a reading line | the value of the bar named in the asking sentence ("how many"), or the difference of the two bars named ("how many more") |
 
-Of 1,118 families, 301 have a picture. 11 have their own builder; the four converters add 10 families (568 released
-questions). Pictures with no converter yet, by number of families: table 121, number line 26, coordinate plane 22, solid 19,
-place-value blocks 13, bars 12, pictograph 10, clock 6.
+Of 1,118 families, 301 have a picture. 11 have their own builder; the five converters add 13 families (1,325 released
+questions). A scene made from the picture is shown in place of the still picture. Pictures with no converter yet, by number of families: table 121, number line 26, coordinate plane 22, solid 19,
+place-value blocks 13, pictograph 10, clock 6 (and the bar charts that ask which bar, a percentage or true/false).
 
 Every scene from a builder is held against the family's verified answer for every released question (the scene test).
 

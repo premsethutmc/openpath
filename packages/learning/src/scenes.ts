@@ -138,7 +138,7 @@ export const SCENE_FAMILIES: readonly string[] = Object.keys(BUILDERS);
 type Fig = { type: string; [k: string]: unknown };
 const whole = (v: unknown, lo: number, hi: number): v is number => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi;
 const same = (a: number, b: number | null) => b !== null && Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a));
-const FIGURES: Record<string, (f: Fig, answer: number | null, text: string) => Scene | null> = {
+const FIGURES: Record<string, (f: Fig, answer: number | null, text: string, prompt: string) => Scene | null> = {
   // a rectangle or square with its two side lengths: build it on the grid, and its squares or its edge are counted
   shape: (f, answer) => {
     if ((f.kind !== "rectangle" && f.kind !== "square") || !Array.isArray(f.lengths) || f.lengths.length !== 2) return null;
@@ -176,6 +176,33 @@ const FIGURES: Record<string, (f: Fig, answer: number | null, text: string) => S
       goal: { measure: "off", equals: 0 },
     };
   },
+  // a bar chart: slide a level line to the top of the bar asked about and read the scale; for "how many more", to the top
+  // of the shorter bar, and see how far the taller one rises above it. Which bars are meant is taken from the question's
+  // own words (their labels), and kept only if those bars give the verified answer.
+  bars: (f, answer, _text, whole) => {
+    const values = f.values as number[], labels = f.labels as string[];
+    // only the sentence that asks (the last one ending in a question mark) says which bars are meant
+    const prompt = (whole.match(/[^.?!]*\?/g) ?? []).pop() ?? "";
+    if (answer === null || !Array.isArray(values) || !Array.isArray(labels) || values.length !== labels.length || f.histogram) return null;
+    const said = (i: number) => new RegExp(`(^|[^A-Za-z0-9])${labels[i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^A-Za-z0-9]|$)`, "i").test(prompt);
+    const scale = typeof f.scale === "number" ? f.scale : 1, unit = Math.max(...values) <= 60 ? 1 : scale;
+    const base = { type: "scene" as const, kind: "bars" as const, labels, values, scale, unit, goal: { measure: "miss", equals: 0 } };
+    if (/\bhow (many|much) (more|fewer|less)\b|\bdifference\b/i.test(prompt)) {
+      const pairs: [number, number][] = [];
+      values.forEach((a, i) => values.forEach((b, j) => { if (i !== j && same(a - b, answer) && a > b) pairs.push([i, j]); }));
+      const hi = values.indexOf(Math.max(...values)), lo = values.indexOf(Math.min(...values));
+      const pick = pairs.filter(([i, j]) => said(i) && said(j))[0] ?? (/\b(tallest|shortest|most|least|longest)\b/i.test(prompt) ? pairs.find(([i, j]) => i === hi && j === lo) : undefined) ?? (pairs.length === 1 ? pairs[0] : undefined);
+      if (!pick) return null;
+      const [i, j] = pick;
+      return { ...base, ask: { more: [i, j] }, prompt: `Slide the line up to the top of the ${labels[j]} bar. Then see how far ${labels[i]} rises above it.`, success: `${labels[i]} is ${fmt(values[i])} and ${labels[j]} is ${fmt(values[j])}: ${fmt(values[i])} − ${fmt(values[j])} = ${fmt(values[i] - values[j])} more.` };
+    }
+    // reading one bar: only where the question asks how many (not which bar, a percentage or a statement to judge)
+    if (!/\bhow (many|much)\b/i.test(prompt)) return null;
+    const hits = values.map((v, i) => i).filter((i) => same(values[i], answer) && said(i));
+    if (hits.length !== 1) return null;
+    const i = hits[0];
+    return { ...base, ask: { read: i }, prompt: `Slide the line up to the top of the ${labels[i]} bar and read the scale.`, success: `The top of the ${labels[i]} bar is level with ${fmt(values[i])} on the scale.` };
+  },
   // a triangle with two angles given and one asked: set the two and watch the third
   triangle: (f, answer) => {
     if (!Array.isArray(f.angles) || f.angles.length !== 3) return null;
@@ -196,7 +223,13 @@ function fromFigure(qid: string): Scene | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   const fig = p?.figure as Fig | undefined;
   if (!p || !fig || !Object.prototype.hasOwnProperty.call(FIGURES, fig.type) || p.type === "choice") return null;
-  return FIGURES[fig.type](fig, numericValue(p.answer), p.answer);
+  return FIGURES[fig.type](fig, numericValue(p.answer), p.answer, p.prompt);
+}
+
+/** Whether a question's scene is its own picture made movable (then the still picture need not be shown beside it). */
+export function sceneIsPicture(qid: string): boolean {
+  const m = GEN.exec(qid);
+  return !!m && !Object.prototype.hasOwnProperty.call(BUILDERS, m[1]) && sceneForQuestion(qid) !== null;
 }
 
 const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
@@ -218,6 +251,7 @@ export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "rectangle") return s.ask === "area" ? s.area ?? null : s.ask === "perimeter" ? s.perimeter ?? null : null;
   if (s.kind === "fraction") return s.goal.measure === "exact" ? s.target[0] / s.target[1] : null;
   if (s.kind === "array") return s.rows !== undefined && s.goal.measure === "off" ? s.total : null;
+  if (s.kind === "bars") return "read" in s.ask ? s.values[s.ask.read] : s.values[s.ask.more[0]] - s.values[s.ask.more[1]];
   if (s.kind === "line" || s.kind === "transform" || s.kind === "join" || s.kind === "commas") return null;
   if (s.kind === "order") return s.ask === "largest" ? Math.max(s.values[0], s.values[1]) : s.ask === "smallest" ? Math.min(s.values[0], s.values[1]) : null;
   if (s.kind === "numberline") return s.goal.measure === "x" && s.goal.equals !== undefined ? s.goal.equals : null;

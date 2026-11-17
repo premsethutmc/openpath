@@ -10,6 +10,7 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@8 adds a `bars` kind (a bar chart with a reading line the learner slides up to a bar's top).
  * scene@7 adds an `order` kind (number cards the learner arranges, smallest on the left).
  * scene@6 adds a `commas` kind (the digits of a whole number, with commas the learner places).
  * scene@5 adds a `fraction` kind (a bar or a hundred-square cut into equal pieces, some shaded), a `numberline` kind (a
@@ -82,7 +83,12 @@ export interface CommasScene extends Base { kind: "commas"; digits: string; styl
 /** Two to five different numbers on cards, arranged by dragging: smallest on the left. `wrong` counts the neighbours that
  *  are the wrong way round (0 when the cards are in order). `ask`, when given, says the question is about the first two cards: which of them is the larger, or the smaller. */
 export interface OrderScene extends Base { kind: "order"; values: number[]; ask?: "largest" | "smallest" }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene;
+/** A bar chart with a level line the learner slides up the scale. `ask.read` is the bar whose top the line is to reach
+ *  (reading its value off the scale); `ask.more` is two bars, [taller, shorter]: the line goes to the top of the shorter,
+ *  and how far the taller rises above it is their difference. `scale` is the gap between numbered lines of the scale;
+ *  `unit` is the grid the line moves on (default 1). */
+export interface BarsScene extends Base { kind: "bars"; labels: string[]; values: number[]; scale?: number; unit?: number; ask: { read: number } | { more: [number, number] } }
+export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -171,6 +177,7 @@ export function controls(s: Scene): Control[] {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
     return [{ key: "a", label: "Angle A", min: 10, max: 150, step: 1, start: near ? 40 : 60 }, { key: "b", label: "Angle B", min: 10, max: 150, step: 1, start: near ? 95 : 60 }];
   }
+  if (s.kind === "bars") return [{ key: "y", label: "Reading line", min: 0, max: barsTop(s), step: s.unit ?? 1, start: 0 }];
   if (s.kind === "order") {
     // the cards start in the order given, unless that is already in order: then the first card starts at the far end
     const sorted = s.values.every((v, i) => i === 0 || s.values[i - 1] < v);
@@ -221,6 +228,11 @@ function scales(s: CurveScene | LineScene) {
 /** The line of a line scene for a state: its slope and where it meets the y-axis. */
 function lineOf(s: LineScene, state: SceneState) { const m = state.m; return { m, c: s.through ? s.through[1] - m * s.through[0] : state.c ?? 0 }; }
 
+/** A bar chart's scale: its top (the first numbered line at or above the tallest bar) and the bar the line is to reach. */
+const barsTop = (s: BarsScene) => { const g = s.scale ?? 1; return Math.max(g, Math.ceil(Math.max(...s.values) / g) * g); };
+const barsAim = (s: BarsScene) => ("read" in s.ask ? s.ask.read : s.ask.more[1]);
+const BX = 46, BW = 280, BY0 = 176, BH = 150;
+const barY = (s: BarsScene, v: number) => px(BY0 - (v / barsTop(s)) * BH);
 /** An order scene's cards from left to right: by the place each is given, and by the order given where two share a place. */
 function orderOf(s: OrderScene, state: SceneState): number[] { return s.values.map((_, i) => i).sort((a, b) => state[`p${a}`] - state[`p${b}`] || a - b); }
 const cardGrid = (s: OrderScene) => { const w = Math.min(64, 300 / s.values.length); return { w, left: px(170 - (s.values.length * w) / 2) }; };
@@ -248,6 +260,10 @@ function joinOf(s: JoinScene, state: SceneState) {
 
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
+  if (s.kind === "bars") {
+    const y = state.y, more = "more" in s.ask ? s.values[s.ask.more[0]] - y : 0;
+    return { y, miss: Math.abs(y - s.values[barsAim(s)]), above: more };
+  }
   if (s.kind === "order") {
     const row = orderOf(s, state).map((i) => s.values[i]);
     return { wrong: row.filter((v, i) => i > 0 && row[i - 1] > v).length, first: row[0], last: row[row.length - 1] };
@@ -284,7 +300,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -302,6 +318,11 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
+  if (s.kind === "bars") {
+    if ("read" in s.ask) return `The line is at ${fmt(m.y)}`;
+    const tall = s.labels[s.ask.more[0]];
+    return `The line is at ${fmt(m.y)} · ${tall} ${m.above > 0 ? `rises ${fmt(m.above)} above it` : m.above < 0 ? `stops ${fmt(-m.above)} below it` : "is level with it"}`;
+  }
   if (s.kind === "order") return `Now: ${orderOf(s, state).map((i) => fmt(s.values[i])).join(", ")}`;
   if (s.kind === "commas") {
     // the number as it now reads, comma by comma (the digits never change, so this gives nothing away)
@@ -340,6 +361,21 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   const out: Shape[] = [];
+  if (s.kind === "bars") {
+    const top = barsTop(s), g = s.scale ?? 1, lines = Math.round(top / g), every = lines > 12 ? Math.ceil(lines / 10) : 1, n = s.values.length, slot = BW / n;
+    for (let i = 0; i <= lines; i++) {
+      const v = i * g;
+      out.push({ t: "line", x1: BX, y1: barY(s, v), x2: BX + BW, y2: barY(s, v), role: i === 0 ? "axis" : "grid" });
+      if (i % every === 0) out.push({ t: "text", x: BX - 16, y: barY(s, v) + 4, s: fmt(v), role: "label" });
+    }
+    s.values.forEach((v, i) => {
+      const x = px(BX + i * slot + slot * 0.15);
+      out.push({ t: "rect", x, y: barY(s, v), w: px(slot * 0.7), h: px(BY0 - barY(s, v)), role: "cell" }, { t: "text", x: px(BX + i * slot + slot / 2), y: BY0 + 16, s: s.labels[i].length > 9 ? `${s.labels[i].slice(0, 8)}…` : s.labels[i], role: "label" });
+    });
+    if ("more" in s.ask && state.y !== s.values[s.ask.more[0]]) { const x = px(BX + s.ask.more[0] * slot + slot / 2); out.push({ t: "line", x1: x, y1: barY(s, state.y), x2: x, y2: barY(s, s.values[s.ask.more[0]]), role: "edge" }); }
+    out.push({ t: "line", x1: BX - 6, y1: barY(s, state.y), x2: BX + BW, y2: barY(s, state.y), role: "accent" }, { t: "circle", cx: BX + BW, cy: barY(s, state.y), r: 12, role: "handle" });
+    return out;
+  }
   if (s.kind === "order") {
     const g = cardGrid(s);
     orderOf(s, state).forEach((card, slot) => {
@@ -517,6 +553,7 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
     const next = set(s, set(s, state, "a", a), "b", b);
     return next.a + next.b > 170 ? state : next;
   }
+  if (s.kind === "bars") return set(s, state, "y", ((BY0 - y) / BH) * barsTop(s));
   if (s.kind === "order") {
     // the card held is dropped into the slot under the finger; the others close up, and every card gets its own place
     const g = cardGrid(s), card = hold ?? grip(s, state, x, y), slot = Math.max(0, Math.min(s.values.length - 1, Math.floor((x - g.left) / g.w)));
@@ -556,6 +593,7 @@ export function describe(s: Scene): string {
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
+  if (s.kind === "bars") return `An interactive bar chart of ${s.labels.join(", ")}, with a level line that slides up and down its scale by dragging or with a slider. ${s.prompt}`;
   if (s.kind === "order") return `${s.values.length} number cards in a row: ${s.values.map(fmt).join(", ")}. They can be put in order by dragging, or by giving each its place with a slider. ${s.prompt}`;
   if (s.kind === "commas") return `The digits of the number ${s.digits}, with ${commaPlaces(s).length === 1 ? "a comma" : "commas"} that can be moved between them by dragging or with sliders. ${s.prompt}`;
   if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
@@ -610,7 +648,14 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "order") {
+  if (s.kind === "bars") {
+    const n = Array.isArray(s.values) ? s.values.length : 0, at = (v: unknown) => Number.isInteger(v) && (v as number) >= 0 && (v as number) < n;
+    if (n < 2 || n > 8 || !s.values.every((v) => fin(v) && v >= 0 && v <= 100000) || !(Array.isArray(s.labels) && s.labels.length === n && s.labels.every((t) => typeof t === "string" && t.trim() && t.length <= 24))) bad.push("a bar chart needs 2 to 8 labelled bars");
+    if ((s.scale !== undefined && !(fin(s.scale) && s.scale > 0)) || (s.unit !== undefined && !(fin(s.unit) && s.unit > 0))) bad.push("scale and unit must be positive");
+    const a = s.ask as { read?: unknown; more?: unknown };
+    if (!a || typeof a !== "object" || !(at(a.read) || (Array.isArray(a.more) && a.more.length === 2 && a.more.every(at) && a.more[0] !== a.more[1]))) bad.push("ask must name one bar to read, or two to compare");
+    if (!bad.length && barsTop(s) / (s.unit ?? 1) > 1000) bad.push("the scale has too many places for the line");
+  } else   if (s.kind === "order") {
     if (!(Array.isArray(s.values) && s.values.length >= 2 && s.values.length <= 5 && s.values.every((v) => fin(v) && Math.abs(v) < 1e6) && new Set(s.values).size === s.values.length)) bad.push("values must be 2 to 5 different numbers");
     if (s.ask !== undefined && s.ask !== "largest" && s.ask !== "smallest") bad.push("ask must be largest or smallest");
   } else   if (s.kind === "commas") {
