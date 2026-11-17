@@ -47,7 +47,9 @@ describe("kid-say@1 (Class 5 child wording)", () => {
     expect(kidQuestion(question("gen:aepat:21,9,8")).figure).toBeUndefined();
     expect(kidQuestion(question("gen:aeshop:11,3,17,2,2")).figure).toBeUndefined();
     expect(kidQuestion(question("gen:acgrow:2,1,7")).figure).toBeDefined();
-    expect(kidQuestion(question("gen:acpaise:3,10,1")).figure).toBeDefined();
+    // money-say@2: the amount is now said in its two parts (3 rupees and 10 paise), so the ₹ | paise table would say it twice
+    expect(kidQuestion(question("gen:acpaise:3,10,1")).figure).toBeUndefined();
+    expect(kidQuestion(question("gen:acpaise:3,10,1")).note).toBe("1 rupee is 100 paise.");
   });
   test("the answer shape gives back an answer the marking accepts", () => {
     const bad: string[] = [];
@@ -75,7 +77,8 @@ describe("kid-say@1 (Class 5 child wording)", () => {
         else if (!isCorrect(q, compose(a, hs, q.answer))) bad.push(`${id}: bars do not rebuild ${q.answer}`);
       } else if (a.kind === "money") {
         // the rupees and the paise of the answer, as a child counts them, rebuild it; paise in the rupees box do not
-        const [r, p] = [Math.floor(Number(q.answer)), Math.round((Number(q.answer) % 1) * 100)];
+        const paise = Math.round(Number(q.answer.replace(/,/g, "")) * 100);
+        const [r, p] = [Math.floor(paise / 100), paise % 100];
         if (!isCorrect(q, compose(a, [String(r), String(p)], q.answer))) bad.push(`${id}: rupees and paise do not rebuild ${q.answer}`);
         if (p !== r && isCorrect(q, compose(a, [String(p), String(r)], q.answer))) bad.push(`${id}: swapped boxes also marked right`);
       } else if (a.kind === "fields") {

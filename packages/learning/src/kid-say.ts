@@ -369,9 +369,24 @@ function general(q: Q): KidQ {
   }
   // 3. money: ₹ before the box
   const money = /\bin rupees\b|like 4\.50|\(for example, write 12\.50/.test(all);
-  if (money && ask.kind === "box") {
+  // money-say@2: where the question wants paise in the answer (it says "like 4.50"), the answer is rupees and paise in
+  // two boxes, never a decimal to type; where it wants whole rupees, one box with ₹ before it
+  const withPaise = /like 4\.50|\(for example, write 12\.50/.test(all);
+  if (money && ask.kind === "box" && withPaise && q.type === "fraction") ask = { kind: "money" };
+  else if (money && ask.kind === "box") {
     ask = { kind: "box", before: "₹" };
     t = t.replace(/, in rupees,/, "").replace(/,? in rupees(?=\?)/, "").replace(/\s+Write (?:it|the answer in rupees),? like 4\.50\./, "").replace(/\s+Give the answer in rupees[^.]*\./, "");
+  }
+  let moneyNote: string | undefined;
+  if (ask.kind === "money") {
+    t = t.replace(/, in rupees,/, "").replace(/,? in rupees(?=\?)/, "").replace(/\s+Write (?:it|the answer in rupees),? like 4\.50\./, "").replace(/\s+Give the answer in rupees[^.]*\./, "");
+  }
+  // wherever paise come into it, an amount is said in its two parts (₹3.15 → 3 rupees and 15 paise; ₹1 and 10 paise →
+  // 1 rupee and 10 paise): no decimal point to read, and the one fact every such question leans on is kept in view
+  if (ask.kind === "money" || /\bpaise\b/.test(all)) {
+    t = t.replace(/₹\s?([\d,]+)\.(\d\d)\b/g, (_m, r: string, p: string) => amount(Number(r.replace(/,/g, "")), Number(p)))
+      .replace(/₹\s?([\d,]+) and (\d+) paise/g, (_m, r: string, p: string) => amount(Number(r.replace(/,/g, "")), Number(p)));
+    moneyNote = "1 rupee is 100 paise.";
   }
   // 4. a unit after the box: "…, in cm?" / "… in degrees?"
   if (ask.kind === "box" && !ask.before) {
@@ -388,7 +403,7 @@ function general(q: Q): KidQ {
   // the marking wants the simplest form: say so once, under the question
   const note = q.type === "mixed" && /simplest|lowest/.test(dropped + all) && !/simplest|lowest/.test(t) ? "Simplest form; a mixed number if it is more than 1." : undefined;
   t = t.replace(/\b1 floors\b/g, "1 floor");
-  return { say: t.replace(/\s{2,}/g, " ").trim(), ask, ...(note ? { note } : {}) };
+  return { say: t.replace(/\s{2,}/g, " ").trim(), ask, ...(note ?? moneyNote ? { note: note ?? moneyNote } : {}) };
 }
 
 /** How the options read to a child: (8, 30) as 8 h 30 min when the question names the units; brackets dropped. */

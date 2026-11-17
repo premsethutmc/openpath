@@ -177,8 +177,12 @@ exactly; the picture never states the answer. In a test the coins are shown but 
 `child-view@1`: the review page's "Try them" box shows the question as the child is asked it (their words, picture and
 answer boxes), with the written form underneath.
 
-Open: fading from coins to columns to numbers alone as a child gets them right; the other money families (paise to
-rupees, bills, multiplying an amount).
+money-say@2 (every money question, by rule in `general`): where a question wants paise in its answer, the child
+answers in the rupees and paise boxes; wherever paise come into a question, an amount is said in its two parts
+(₹3.15 → 3 rupees and 15 paise) and "1 rupee is 100 paise." is kept under it. This covers paise to rupees, rupees to
+paise, multiplying and sharing an amount, and bills. Coins are drawn for adding and taking away only.
+
+Open: coins for changing, sharing and multiplying an amount; fading from coins to columns to numbers alone.
 
 ## The picture beside a guess (guess-picture@1)
 
