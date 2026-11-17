@@ -8,6 +8,8 @@
  * A scene is only offered when `check` finds no problem with it. `sceneAnswer` states the number the scene's own
  * mathematics arrives at, so a test can hold it against the family's verified answer for the same question.
  */
+import { numericValue } from "./answer-types";
+import { problemOf } from "./families";
 import { check, curveOf, evalPoly, derivative, fmt, initial, integral, measures, type Scene, type Term } from "./scene";
 
 const mono = (k: number, n: number) => [...Array(n).fill(0), k];
@@ -126,15 +128,86 @@ const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a);
 /** The families that have a scene. */
 export const SCENE_FAMILIES: readonly string[] = Object.keys(BUILDERS);
 
+/**
+ * scenes@4: a scene from a question's own PICTURE, for any family that has no builder of its own. One converter per kind
+ * of picture (not per family), filled from the picture's data. A converter gives a scene only when the scene's own
+ * mathematics arrives at the question's verified answer (the area or the perimeter of the rectangle drawn, the fraction
+ * shaded, the rows times the number in a row, the third angle); otherwise there is no scene, so a picture is never made
+ * to move in a way that is beside the question.
+ */
+type Fig = { type: string; [k: string]: unknown };
+const whole = (v: unknown, lo: number, hi: number): v is number => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi;
+const same = (a: number, b: number | null) => b !== null && Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(a));
+const FIGURES: Record<string, (f: Fig, answer: number | null, text: string) => Scene | null> = {
+  // a rectangle or square with its two side lengths: build it on the grid, and its squares or its edge are counted
+  shape: (f, answer) => {
+    if ((f.kind !== "rectangle" && f.kind !== "square") || !Array.isArray(f.lengths) || f.lengths.length !== 2) return null;
+    const [w, h] = (f.lengths as unknown[]).map((t) => { const m = /^(\d+)(?:\s|$)/.exec(String(t)); return m ? Number(m[1]) : NaN; });
+    if (!whole(w, 1, 9) || !whole(h, 1, 9)) return null;
+    const area = w * h, perimeter = 2 * (w + h), ask = same(area, answer) && area !== perimeter ? "area" : same(perimeter, answer) && area !== perimeter ? "perimeter" : null;
+    if (!ask) return null;
+    return {
+      type: "scene", kind: "rectangle", area, perimeter, ask,
+      prompt: `Drag the corner to build the rectangle: ${w} by ${h}.`,
+      success: ask === "area" ? `${h} ${h === 1 ? "row" : "rows"} of ${w} squares: the area is ${area}.` : `${w} + ${h} + ${w} + ${h}: the perimeter is ${perimeter}.`,
+      goal: { measure: "off", equals: 0 },
+    };
+  },
+  // a shape cut into equal parts with some shaded: copy it onto a bar
+  grid: (f, answer, text) => {
+    const total = whole(f.rows, 1, 12) && whole(f.cols, 1, 12) ? (f.rows as number) * (f.cols as number) : 0;
+    if (total < 2 || total > 12 || !whole(f.shaded, 1, total) || !same((f.shaded as number) / total, answer)) return null;
+    const k = f.shaded as number;
+    return {
+      type: "scene", kind: "fraction", target: [k, total],
+      prompt: "Copy the picture onto the bar: the same number of equal pieces, and the same number shaded.",
+      success: `${k} of ${total} equal pieces are shaded${text === `${k}/${total}` ? `: ${text}.` : `: ${k}/${total}, which is ${text}.`}`,
+      goal: { measure: "exact", equals: 0 },
+    };
+  },
+  // equal rows of things: set out the rows and count them all
+  array: (f, answer) => {
+    if (!whole(f.rows, 1, 10) || !whole(f.cols, 2, 15) || !same((f.rows as number) * (f.cols as number), answer)) return null;
+    const r = f.rows as number, c = f.cols as number;
+    return {
+      type: "scene", kind: "array", total: r * c, rows: r,
+      prompt: `There ${r === 1 ? "is 1 row" : `are ${r} rows`}. Put ${c} in each row.`,
+      success: `${r} ${r === 1 ? "row" : "rows"} of ${c} make ${r * c}.`,
+      goal: { measure: "off", equals: 0 },
+    };
+  },
+  // a triangle with two angles given and one asked: set the two and watch the third
+  triangle: (f, answer) => {
+    if (!Array.isArray(f.angles) || f.angles.length !== 3) return null;
+    const known = (f.angles as unknown[]).map((t) => /^(\d+)°$/.exec(String(t))).filter(Boolean).map((m) => Number(m![1]));
+    if (known.length !== 2 || !same(180 - known[0] - known[1], answer)) return null;
+    const [a, b] = known;
+    return {
+      type: "scene", kind: "triangle", angles: [a, b],
+      prompt: `Set angle A to ${a}° and angle B to ${b}°, and watch the third angle.`,
+      success: `${a}° + ${b}° + ${180 - a - b}° = 180°. The third angle is ${180 - a - b}°.`,
+      goal: { measure: "miss", equals: 0 },
+    };
+  },
+};
+/** The kinds of picture that can become a scene. */
+export const FIGURE_SCENES: readonly string[] = Object.keys(FIGURES);
+function fromFigure(qid: string): Scene | null {
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""));
+  const fig = p?.figure as Fig | undefined;
+  if (!p || !fig || !Object.prototype.hasOwnProperty.call(FIGURES, fig.type) || p.type === "choice") return null;
+  return FIGURES[fig.type](fig, numericValue(p.answer), p.answer);
+}
+
 const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
 /** The scene for a generated question ("gen:<family>:<params>"), or null: no builder, or a scene with any problem. */
 export function sceneForQuestion(qid: string): Scene | null {
   const m = GEN.exec(qid);
-  const build = m && Object.prototype.hasOwnProperty.call(BUILDERS, m[1]) ? BUILDERS[m[1]] : null;
-  if (!build) return null;
-  const p = m![2].split(",").map(Number);
+  if (!m) return null;
+  const build = Object.prototype.hasOwnProperty.call(BUILDERS, m[1]) ? BUILDERS[m[1]] : null;
   let s: Scene | null = null;
-  try { s = build(p); } catch { return null; }
+  // a family's own builder first; otherwise the question's picture, if a converter can make it a scene (scenes@4)
+  try { s = build ? build(m[2].split(",").map(Number)) : fromFigure(qid); } catch { return null; }
   return s && check(s).length === 0 ? s : null;
 }
 
@@ -142,7 +215,10 @@ export function sceneForQuestion(qid: string): Scene | null {
  *  or null where the question's answer is not one number. */
 export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "triangle") return 180 - s.angles[0] - s.angles[1];
-  if (s.kind === "line" || s.kind === "transform" || s.kind === "rectangle" || s.kind === "join" || s.kind === "fraction" || s.kind === "array" || s.kind === "commas") return null;
+  if (s.kind === "rectangle") return s.ask === "area" ? s.area ?? null : s.ask === "perimeter" ? s.perimeter ?? null : null;
+  if (s.kind === "fraction") return s.goal.measure === "exact" ? s.target[0] / s.target[1] : null;
+  if (s.kind === "array") return s.rows !== undefined && s.goal.measure === "off" ? s.total : null;
+  if (s.kind === "line" || s.kind === "transform" || s.kind === "join" || s.kind === "commas") return null;
   if (s.kind === "order") return s.ask === "largest" ? Math.max(s.values[0], s.values[1]) : s.ask === "smallest" ? Math.min(s.values[0], s.values[1]) : null;
   if (s.kind === "numberline") return s.goal.measure === "x" && s.goal.equals !== undefined ? s.goal.equals : null;
   const f = curveOf(s);

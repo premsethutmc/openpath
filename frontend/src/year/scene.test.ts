@@ -8,7 +8,7 @@ import assert from "node:assert/strict";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
 import { evaluate, numericValue, parse, rhs } from "../../../packages/learning/src/answer-types";
 import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, grip, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
-import { SCENE_FAMILIES, sceneAnswer, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
+import { FIGURE_SCENES, SCENE_FAMILIES, sceneAnswer, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
 
 const strips: Scene = { type: "scene", kind: "strips", poly: [0.5, 0, 0.25], from: 0, to: 4, prompt: "Add strips.", success: "Done.", goal: { measure: "gap", below: 0.1 } };
 const slope: Scene = { type: "scene", kind: "slope", poly: [0, -2, 0, 1 / 6], from: -3.6, to: 3.6, step: 0.05, prompt: "Find slope 0.", success: "Flat.", goal: { measure: "slope", equals: 0 } };
@@ -257,6 +257,38 @@ test("the cards: dragged into order, smallest on the left", () => {
   assert.deepEqual((cmp as { values: number[] }).values, [82, 48, 28, 84]); assert.equal(sceneAnswer(cmp), 48, "less: of the two asked about, not of the look-alikes");
   const rnd = sceneForQuestion("gen:aeround:3,2854")!;
   assert.equal(readout(rnd, initial(rnd)), "At 2854 · 854 from 2000 · 146 from 3000"); assert.equal(sceneAnswer(rnd), 3000);
+});
+
+test("scenes@4: a picture becomes a scene only when the scene arrives at the question's verified answer", () => {
+  assert.deepEqual([...FIGURE_SCENES].sort(), ["array", "grid", "shape", "triangle"]);
+  const near = (a: number, b: number) => Math.abs(a - b) <= 1e-9 * Math.max(1, Math.abs(b));
+  const made = new Map<string, number>();
+  let families = 0;
+  for (const [fam] of FAMILIES) {
+    if (SCENE_FAMILIES.includes(fam)) continue;
+    let any = false;
+    for (const q of pool(fam).items) {
+      const s = sceneForQuestion(q.id);
+      if (!s) continue;
+      any = true;
+      const type = (q.figure as unknown as { type: string } | undefined)?.type;
+      assert.ok(type && FIGURE_SCENES.includes(type), `${q.id}: a scene with no builder comes from the question's picture`);
+      made.set(type!, (made.get(type!) ?? 0) + 1);
+      assert.deepEqual(check(s), [], q.id); assert.ok(s.prompt.length <= 160 && s.success.length <= 160 && !met(s, initial(s)), q.id);
+      const mine = sceneAnswer(s), theirs = numericValue(q.answer);
+      assert.ok(mine !== null && theirs !== null && near(mine, theirs), `${q.id}: scene ${mine} vs answer ${q.answer}`);
+      assert.ok(s.success.includes(fmt(Math.round(mine! * 1e6) / 1e6)) || s.success.includes(q.answer), `${q.id}: the closing words state the answer`);
+      assert.ok([...states(s, 40000)].some((st) => met(s, st)), q.id);
+    }
+    if (any) families++;
+  }
+  assert.ok(families >= 10 && [...FIGURE_SCENES].every((t) => (made.get(t) ?? 0) > 0), `families ${families}; ${JSON.stringify([...made])}`);
+  // a rectangle whose area is asked and one whose perimeter is asked get different closing words, from the same picture
+  const area = sceneForQuestion(pool("rect").items.find((q) => sceneForQuestion(q.id))!.id)!, edge = sceneForQuestion(pool("rperim").items.find((q) => sceneForQuestion(q.id))!.id)!;
+  assert.ok(/area is \d+\.$/.test(area.success) && /perimeter is \d+\.$/.test(edge.success));
+  // no scene where the picture's own numbers do not give the answer: a shape that is not a rectangle has none
+  const odd = [...FAMILIES.keys()].flatMap((f) => pool(f).items).find((q) => (q.figure as unknown as { type?: string; kind?: string } | undefined)?.type === "shape" && !["rectangle", "square"].includes((q.figure as unknown as { kind: string }).kind));
+  assert.ok(odd && sceneForQuestion(odd.id) === null);
 });
 
 test("malformed or impossible scenes are refused", () => {

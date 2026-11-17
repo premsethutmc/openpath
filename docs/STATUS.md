@@ -32,6 +32,11 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Scenes from pictures (2026-11-17, branch `feat/figure-scenes`, draft PR, not merged)
+- scenes@4: a question with no builder gets a scene from its own picture, by kind of picture (rectangle, shaded grid, equal
+  rows, triangle), only when the scene arrives at the verified answer. 10 more families, 568 released questions.
+- Open: converters for tables, number lines, the coordinate plane, solids, blocks, bars, pictographs and clocks.
+
 ## Arrange and play first (2026-11-16, branch `feat/arrange`, draft PR, not merged)
 - scene@7 adds `order` (number cards dragged into order). scenes@3: builders for comparing two numbers, ordering integers
   and rounding, each checked against every released question of its family.
