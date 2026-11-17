@@ -8,8 +8,9 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
 import { plainAnswer } from "../../../packages/learning/src/plain-answer";
+import { supportStep } from "../../../packages/learning/src/support-ladder";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
-import { useState, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
 import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
@@ -531,13 +532,30 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const workable = q.type !== "written" && !q.picks?.length;
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && q.type !== "written" ? safeKid(q) : null;
+  // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
+  // alone (coins → columns → the bare question); a test is always bare. The step below can be asked for: the answer
+  // then counts as helped.
+  const aids = kq?.aids;
+  const famKey = qid.split(":").slice(0, 2).join(":") + ":";
+  const autoStep = useMemo(() => {
+    if (!aids) return 0;
+    if (isTest(activity)) return aids.length;
+    const tried = ctx.records.attempts.filter((a) => a.questionId.startsWith(famKey) && !isTest(a.activity)).map((a) => ({ right: creditOf(a.questionId, a.response) === true, helped: a.hints > 0 || a.solution || a.n > 1 }));
+    return supportStep(tried, aids.length);
+    // the step is settled when the question opens: saving its own answer must not change the picture under the child
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qid]);
+  const [lower, setLower] = useResume(resumeKey && `${resumeKey}:support`, 0);
+  const step = Math.max(0, autoStep - lower);
+  const figure = aids ? aids[step]?.figure : kq ? kq.figure : q.figure;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {(kq ? kq.figure : q.figure) && <Figure v={still((kq ? kq.figure : q.figure)!, isTest(activity))} />}
+      {figure && <Figure v={still(figure, isTest(activity))} />}
+      {aids && step > 0 && !isTest(activity) && <p><button type="button" className="link" data-testid="support-down" onClick={() => setLower(lower + 1)}>Show me the {aids[step - 1].name}</button></p>}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
@@ -577,7 +595,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             if (KID && preview?.clarification && preview.credit === null && preview.feedback.kind === "clarify") { setClarify(`${preview.clarification.prompt} Nothing has been sent yet: change your answer and tap Check again.`); return; }
             submitting.current = true;
             let ok: boolean;
-            try { ok = await ctx.answer(qid, sent, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
+            try { ok = await ctx.answer(qid, sent, activity, { hints: hint || showHint || lower > 0 ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
             if (!ok) return;
             // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
             const a = authoritativeView(preview, ctx.recorded?.() ?? null);

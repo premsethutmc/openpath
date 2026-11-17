@@ -33,6 +33,9 @@ export interface KidQ {
   figure?: Visual;
   /** One short line under the picture (a key). */
   note?: string;
+  /** support-ladder@1: pictures that only help (the question is whole without them), most help first; `figure` is the
+   *  first. They fade as the child gets such questions right. A picture that is the question's data is never an aid. */
+  aids?: { name: string; figure: Visual }[];
 }
 interface Q {
   id: string;
@@ -330,10 +333,12 @@ function moneySum(q: Q): KidQ | null {
   const m = q.prompt.match(/^₹(\d+)\.(\d\d) ([+−]) ₹(\d+)\.(\d\d) = \?/);
   if (!m) return null;
   const [a, pa, b, pb] = [m[1], m[2], m[4], m[5]].map(Number), take = m[3] === "−";
+  const coins = { type: "money", have: [a, pa], other: [b, pb], take } as unknown as Visual;
   return {
     say: take ? `You have ${amount(a, pa)}. You pay ${amount(b, pb)}. How much do you have left?` : `You have ${amount(a, pa)}. You get ${amount(b, pb)} more. How much do you have now?`,
     ask: { kind: "money" },
-    figure: { type: "money", have: [a, pa], other: [b, pb], take } as unknown as Visual,
+    figure: coins,
+    aids: [{ name: "coins", figure: coins }, { name: "columns", figure: { type: "table", head: ["", "rupees", "paise"], rows: [["", a, pa], [take ? "−" : "+", b, pb]] } }],
   };
 }
 
@@ -432,7 +437,7 @@ export function kidQuestion(q: Q): KidQ {
   const fig = o?.figure ? (o.figure === NONE ? undefined : o.figure) : base.figure ?? (q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined);
   // with the table left out, the sentence no longer points at it
   if (q.figure && !fig) say = say.replace(/^The table shows (?:the )?/, "Here are the ").replace(/^The number cards in the picture make /, "These numbers make ");
-  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}) };
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(base.aids && fig === base.figure ? { aids: base.aids } : {}) };
 }
 
 /** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a

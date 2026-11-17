@@ -190,3 +190,12 @@ Before a "have a guess" only the question's own picture is shown. The lesson's t
 as a pattern stacked so the ? sits under its answer) waits with the working (`frontend/src/year/guess-picture.ts`).
 Before this, 108 lesson screens across 79 question types showed the teaching picture first. Tests check every lesson
 with a guess, and that no question's own picture puts the ? under its answer.
+
+## Fading help (support-ladder@1)
+
+A question may name its aids, most help first (`aids` in `kid-say.ts`; a sum of money: the coins, then the amounts in
+columns); after the last aid comes the bare question. `supportStep` (`packages/learning/src/support-ladder.ts`) picks
+the step from the child's practice answers on that question type: two right in a row without help move up a step,
+two wrong in a row move down. "Show me the coins" (the step below) is always offered; an answer given with it is
+recorded as helped. A test is always bare. The rule is general: any question that names aids fades the same way.
+Money sums are the first to name aids. A picture that is the question's data (a bill, a chart) is never an aid.
