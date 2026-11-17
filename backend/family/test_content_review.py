@@ -241,3 +241,13 @@ class TeachingReviewTests(ReviewBase):
             self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 200)
             self.assertEqual(self.post(self.learner_parent, item, 'approve').status_code, 201)
         self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 403)
+
+    def test_a_family_site_can_open_teaching_review_to_its_profiles_but_nothing_else(self):
+        item = next(i for i in self.items() if i.startswith('card:'))
+        with self.settings(TEACHING_REVIEW_OPEN=True):
+            self.assertTrue(self.learner_parent.get('/api/content-review/').json()['canReviewTeaching'])
+            self.assertEqual(self.post(self.learner_parent, item, 'approve').status_code, 201)
+            fam = next(e for e in self.learner_parent.get('/api/content-review/').json()['registry']['entries'] if e['kind'] == 'family')
+            r = self.learner_parent.post('/api/content-review/decisions/', {'item': fam['item'], 'decision': 'submit', 'contentHash': fam['contentHash'], 'note': ''}, format='json')
+            self.assertEqual(r.status_code, 403)
+        self.assertFalse(self.learner_parent.get('/api/content-review/').json()['canReviewTeaching'])

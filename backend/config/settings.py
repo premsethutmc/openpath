@@ -92,6 +92,9 @@ def _database(url: str | None) -> dict:
 
 DATABASES = {"default": _database(os.environ.get("DATABASE_URL"))}
 # owner-review@1: the accounts (emails, comma-separated) that review teaching as the owner without a grant in the database
+# family-review@1: on a small family site (one shared site password) every profile on it may review teaching: no email
+# sign-in is needed. Off unless OPENPATH_TEACHING_REVIEW=open.
+TEACHING_REVIEW_OPEN = os.environ.get("OPENPATH_TEACHING_REVIEW", "") == "open"
 OWNER_EMAILS = {e.strip().lower() for e in os.environ.get("OPENPATH_OWNER_EMAILS", "").split(",") if e.strip()}
 
 REST_FRAMEWORK = {

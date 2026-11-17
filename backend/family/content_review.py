@@ -154,17 +154,21 @@ class ContentReviewView(AccountBase):
 
     def get(self, request):
         roles = roles_of(request.user)
-        return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles)), 'canManageEducators': is_admin(request.user)})
+        return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles)), 'canManageEducators': is_admin(request.user), 'canReviewTeaching': bool(roles) or reviews_teaching(request.user)})
+
+
+def reviews_teaching(user):
+    """Who may decide on story lessons and help cards: an educator, or any profile where the site opens it (family-review@1)."""
+    return 'educator' in roles_of(user) or bool(getattr(settings, 'TEACHING_REVIEW_OPEN', False))
 
 
 class TeachingReviewView(AccountBase):
     """GET: the story lessons and help cards with their review state (reviewers only)."""
 
     def get(self, request):
-        roles = roles_of(request.user)
-        if not roles:
+        if not (roles_of(request.user) or reviews_teaching(request.user)):
             return Response({'detail': 'Reviewing teaching needs a review role.'}, status=status.HTTP_403_FORBIDDEN)
-        return Response({'roles': roles, 'items': teaching()})
+        return Response({'roles': roles_of(request.user), 'canDecide': reviews_teaching(request.user), 'items': teaching()})
 
 
 class ContentDecisionView(AccountBase):
@@ -180,6 +184,8 @@ class ContentDecisionView(AccountBase):
         if decision not in STATE_AFTER:
             return Response({'detail': 'Unknown decision.'}, status=status.HTTP_400_BAD_REQUEST)
         roles = set(roles_of(request.user))
+        if meta['kind'] in TEACHING and reviews_teaching(request.user):
+            roles.add('educator')
         role = next((r for r in ('educator', 'release_manager') if r in roles and r in ROLE_FOR[decision]), None)
         if role is None:
             return Response({'detail': 'You do not have the role this decision needs (educator to approve, reject or request changes; release manager to release).'}, status=status.HTTP_403_FORBIDDEN)
