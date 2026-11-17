@@ -264,6 +264,13 @@ Object.assign(HANDLERS, {
   },
 } as Record<string, Handler>);
 
+// the area between a curve (or a line), the x-axis and two upright lines: the size of y, integrated between them
+const areaBetween: Handler = (q) => {
+  const m = q.prompt.match(/(?:curve|line) y = (.+?), the x-axis and the lines x = ([\d./−-]+) and x = ([\d./−-]+)\./);
+  return m ? deepen(`∫ from ${m[2]} to ${m[3]} of |${m[1]}| dx`) : null;
+};
+Object.assign(HANDLERS, { aqarea: areaBetween, aqlarea: areaBetween } as Record<string, Handler>);
+
 /** The working between a calculus question's first step and its last; empty when there is none to add. */
 export function deeperCalculus(q: Q): Finer[] {
   try {

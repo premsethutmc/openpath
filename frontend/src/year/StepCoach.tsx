@@ -38,32 +38,35 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck" }: { qid: string; 
   const steps = useMemo(() => stepsHelp(qid), [qid]);
   const [open, setOpen] = useState(false);
   const [at, setAt] = useState(0);
-  const [told, setTold] = useState(false);
   const [card, setCard] = useState(false);
   if (!steps) return null;
-  if (!open) return <button type="button" className="secondary coach-open" onClick={() => { setOpen(true); setTold(true); onUsed?.(); }}>{opener}</button>;
+  if (!open) return <button type="button" className="secondary coach-open" onClick={() => { setOpen(true); onUsed?.(); }}>{opener}</button>;
   const now = at < steps.length ? steps[at] : null;
-  const needs = now?.needs ? cardFor(now.needs) : null;
+  // why@1: the rule behind a step can always be opened: the other skill it leans on, or the question's own skill
+  const ruleOf = now?.needs ?? now?.rule ?? null;
+  const rule = ruleOf ? cardFor(ruleOf) : null;
   const entry = now ? askOf(now.shown) : null;
+  // stay-open@1: a step that has been done stays on the page with what was done and why; the next step's "what to do"
+  // is there straight away, and an opened rule stays open while the next step uses the same rule
+  const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); };
   return (
-    <div className="coach" data-coach-step={at} data-coach-told={told ? "yes" : "no"}>
-      {at > 0 && <ol className="recipe-steps">{steps.slice(0, at).map((s, i) => <li key={i}>{s.shown}</li>)}</ol>}
-      {now && !told && <button type="button" className="secondary" onClick={() => setTold(true)}>What do I do next?</button>}
-      {now && told && (
+    <div className="coach" data-coach-step={at}>
+      {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
+      {now && (
         <>
           <p className="coach-next" role="status">{now.next}</p>
-          {needs && <button type="button" className="coach-chip" aria-expanded={card} onClick={() => setCard(!card)}>This needs: {needs.name}</button>}
-          {needs && card && (
-            <aside className="coach-card" aria-label={needs.name}>
-              {needs.rule.map((t, i) => <p key={i}>{t}</p>)}
-              {needs.example && <><p className="small muted">For example: {needs.example.prompt}</p><ol className="recipe-steps">{needs.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
+          {rule && <button type="button" className="coach-chip" aria-expanded={card} onClick={() => setCard(!card)}>{now.needs ? `This needs: ${rule.name}` : card ? "Hide the rule" : "Why? Show me the rule"}</button>}
+          {rule && card && (
+            <aside className="coach-card" aria-label={rule.name}>
+              {rule.rule.map((t, i) => <p key={i}>{t}</p>)}
+              {rule.example && <><p className="small muted">For example: {rule.example.prompt}</p><ol className="recipe-steps">{rule.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
             </aside>
           )}
           {/* step-ask@1: a step with a result is done by the child: they enter it, and a right entry moves on */}
-          {entry && <StepEntry key={`${qid}:${at}`} ask={entry} onRight={() => { setAt(at + 1); setTold(false); setCard(false); }} />}
+          {entry && <StepEntry key={`${qid}:${at}`} ask={entry} onRight={advance} />}
           {/* a calculation the child can be helped to do, before it is shown: the same smaller question a slip would get */}
           {(() => { const ask = smallerOf(now.shown); return ask ? <SmallAsk key={now.shown} ask={ask} after="Now finish this step yourself, or ask to see it." /> : null; })()}
-          <button type="button" className="secondary" onClick={() => { setAt(at + 1); setTold(false); setCard(false); }}>{at === steps.length - 1 ? "Show me the last step" : "Show me this step"}</button>
+          <button type="button" className="secondary" onClick={advance}>{at === steps.length - 1 ? "Show me the last step" : "Show me this step"}</button>
         </>
       )}
       {!now && <p className="small muted">That is every step. Now try it yourself.</p>}

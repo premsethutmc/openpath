@@ -258,3 +258,9 @@ with the result left out, and the learner enters it (`packages/learning/src/step
 right entry moves to the next step by itself. "Show me this step" stays. About a third of all steps of help (2,991 of
 9,160 sampled, in 455 question types) can be entered; the rest are shown as before. The open help now takes the full
 width, so the Check button keeps its size. The working box has ³ and ^ keys.
+
+`stay-open@1` and `why@1` (StepCoach): a step that has been done stays on the page with what was done and the step
+itself; the next step's "what to do" is shown straight away (no extra tap, nothing folds away); every step whose skill
+has a card offers "Why? Show me the rule" (the other skill it leans on, or the question's own), and an opened rule
+stays open while the next step uses the same one. Areas between a curve, the x-axis and two lines are worked from the
+question's own limits (21 calculus types have worked steps).
