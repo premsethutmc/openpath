@@ -107,8 +107,13 @@ def _quiet(child):
             _stop_server()
 
 
-def _ask_server(requests):
-    """The kept grader's replies for one list of requests, or None (then the caller runs the grader once, as before)."""
+def _ask_server(requests, starting=False):
+    """The kept grader's replies for one list of requests, or None (then the caller runs the grader once, as before).
+
+    `starting` is set only by `warm`, which asks nothing: a grader just started then has `OPENPATH_GRADER_START` seconds
+    (30) to read its bundle and say it is ready. An answer is never given that longer wait, whether or not the grader is
+    fresh: its time is `_timeout()` as it always was (a longer wait for a real answer made a slow working check hold a
+    request for half a minute, which is what broke the Grade 10/12 browser journey)."""
     with _SERVE_LOCK:
         try:
             child, node, fresh = _SERVE['child'], node_path(), False
@@ -124,11 +129,7 @@ def _ask_server(requests):
                 _SERVE['timer'].cancel()
             child.stdin.write(json.dumps(requests).encode() + b'\n')
             child.stdin.flush()
-            # a grader just started has the whole bundle to read first (seconds on a small server); a one-shot run would
-            # take as long, so it is given that time instead of being stopped and started again
-            # (the longer allowance for a fresh start is not applied yet: OPENPATH_GRADER_START is read only when set, while the
-            # cause of the Grade 10/12 browser journey timing out with this branch is being separated)
-            allowed = max(_timeout(), _number('OPENPATH_GRADER_START', '0', 0)) if fresh else _timeout()
+            allowed = max(_timeout(), _number('OPENPATH_GRADER_START', '30', 1)) if fresh and starting else _timeout()
             fd, deadline, buffer = child.stdout.fileno(), time.monotonic() + allowed, _SERVE['buffer']
             while b'\n' not in buffer:
                 left = deadline - time.monotonic()
@@ -180,7 +181,7 @@ def warm():
         if _WARMED['at'] is not None and now - _WARMED['at'] < _number('OPENPATH_GRADER_WARM_EVERY', '300', 0):
             return False
         _WARMED['at'] = now
-        thread = threading.Thread(target=_ask_server, args=([],), daemon=True)
+        thread = threading.Thread(target=_ask_server, args=([], True), daemon=True)
         thread.start()
         return True
     except Exception:  # noqa: BLE001 - warming is a convenience and never gets in the way of a request

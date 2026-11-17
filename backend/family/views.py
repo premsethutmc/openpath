@@ -430,8 +430,11 @@ class PupilEventsView(AccountBase):
 
             # which policy is authoritative, so the app shows that result and never a conflicting preview (release preparation, check A)
             out["gradingMode"] = effective_grading_mode(bodies)
-            # grader-warm@1 (start the grader when a ledger is read) is written in kernel_grader.warm but not called yet: with
-            # it the Grade 10/12 browser journey timed out three times running; it stays off until the cause is known
+            # grader-warm@1: a learner's mathematics has been opened, so answers are coming: start the grader now, in the
+            # background (at most once in five minutes), so its start is not paid by the first answer
+            from .kernel_grader import warm
+
+            warm()
             stored = {b.get("id"): (b.get("decision") or {}).get("decisionId") for b in bodies if b.get("record") == "attempt"}
             out["decisions"] = {k: d for k, d in latest(pupil, subject).items() if k in stored and stored[k] != d.get("decisionId")}
         return Response(out)
