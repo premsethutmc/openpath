@@ -26,7 +26,7 @@ import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
 import { recipeFor } from "../../../packages/learning/src/recipe";
-import { sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
+import { practiceScene, sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
@@ -542,7 +542,10 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
   // alone (coins → columns → the bare question); a test is always bare. The step below can be asked for: the answer
   // then counts as helped.
-  const aids = kq?.aids;
+  // scene-aid@2: a question whose own scene is the idea done by hand (rounding on a number line) offers it first, then its
+  // still picture, then the bare question
+  const sceneAid = useMemo(() => (KID && kq && !kq.aids ? practiceScene(qid) : null), [qid]); // eslint-disable-line react-hooks/exhaustive-deps
+  const aids = kq?.aids ?? (sceneAid ? [{ name: "number line to move", figure: sceneAid as never }, ...(kq?.figure ? [{ name: "number line", figure: kq.figure }] : [])] : undefined);
   const famKey = qid.split(":").slice(0, 2).join(":") + ":";
   const autoStep = useMemo(() => {
     if (!aids) return 0;

@@ -318,6 +318,11 @@ const named = (s: Scene, text: string) => (s.variable && s.variable !== "x" ? te
  * which the instruction already says). Null where the scene has no nudge, or its goal is reached.
  */
 export function nudge(s: Scene, state: SceneState): string | null {
+  // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
+  if (s.kind === "numberline" && s.jump && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
+    const steps = Math.abs(r6(state.x - s.start));
+    return `That is ${fmt(steps)} step${steps === 1 ? "" : "s"} from ${fmt(s.start)}. Now count the steps to ${fmt(state.x === s.from ? s.to : s.from)}.`;
+  }
   if (s.kind !== "commas") return null;
   const want = commaPlaces(s), have = want.map((_, i) => state["abc"[i]]).sort((a, b) => a - b);
   for (let i = 0; i < want.length; i++) {

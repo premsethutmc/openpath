@@ -284,3 +284,9 @@ and 59 of its 62 skills have a worked example. A result with a unit, ₹ or comm
 
 Tried and dropped: "What would you do first?" made from the kinds of step ("Add" against "Convert" is not a fair
 choice). Not built: putting shuffled steps in order (some steps can fairly go in either order).
+
+`scene-aid@2` (rounding): a rounding question in practice starts with its number line to move (`practiceScene` in
+`scenes.ts`): the point starts on the number and is carried to the round number on each side with the steps counted
+("Start at 557 · 3 forward · now at 560"); nothing is printed before it moves, and a nudge at the farther end counts
+those steps and points to the other. Then the still number line, then the bare question (support-ladder@1).
+`nudge@1`: commas name the group that is still the wrong size. Commas are dragged; their sliders are folded away.
