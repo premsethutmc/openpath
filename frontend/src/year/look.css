@@ -240,6 +240,10 @@ details.working summary, .hint { color: var(--ink); }
 .ws-line input { font-size: 1.15rem; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink); min-width: 0; }
 .ws-mark { grid-column: 2; font-size: 0.95rem; font-weight: 700; }
 .ws-mark.ok { color: #1f8a4c; }
+.ws-help { grid-column: 2; display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; border: 2px dashed var(--brand, #6a55f0); font-weight: 700; }
+.ws-q { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--brand, #6a55f0); color: #fff; }
+.ws-ask { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 1.15rem; }
+.ws-ask input { width: 5.5em; font-size: 1.15rem; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: inherit; }
 .ws-mark.bad { color: #b4441b; }
 .ws-keys { display: flex; flex-wrap: wrap; gap: 6px; }
 .ws-key { min-width: 44px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.15rem; font-weight: 800; }
