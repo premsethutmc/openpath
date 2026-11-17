@@ -126,7 +126,9 @@ def _ask_server(requests):
             child.stdin.flush()
             # a grader just started has the whole bundle to read first (seconds on a small server); a one-shot run would
             # take as long, so it is given that time instead of being stopped and started again
-            allowed = max(_timeout(), _number('OPENPATH_GRADER_START', '30', 1)) if fresh else _timeout()
+            # (the longer allowance for a fresh start is not applied yet: OPENPATH_GRADER_START is read only when set, while the
+            # cause of the Grade 10/12 browser journey timing out with this branch is being separated)
+            allowed = max(_timeout(), _number('OPENPATH_GRADER_START', '0', 0)) if fresh else _timeout()
             fd, deadline, buffer = child.stdout.fileno(), time.monotonic() + allowed, _SERVE['buffer']
             while b'\n' not in buffer:
                 left = deadline - time.monotonic()
