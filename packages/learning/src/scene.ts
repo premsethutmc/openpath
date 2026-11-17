@@ -59,7 +59,7 @@ export interface TransformScene extends Base { kind: "transform"; target?: [numb
 /** A rectangle on a grid of unit squares, its width and height set by dragging a corner. `perimeter` and `area`, when given,
  *  are what `off` is measured to; `shortOfBest` is how far the area is from the largest a rectangle of that perimeter can
  *  have. `words` are what the perimeter and the area are called in the readout (a story may call them fence and room). */
-export interface RectangleScene extends Base { kind: "rectangle"; perimeter?: number; area?: number; words?: [string, string] }
+export interface RectangleScene extends Base { kind: "rectangle"; perimeter?: number; area?: number; words?: [string, string]; ask?: "area" | "perimeter" }
 /** Two pieces of a graph that meet (or fail to meet) at x = `at`. In "shift" mode the right-hand piece is slid up and down
  *  (its height is right(x) + k); in "point" mode the single point at x = `at` is moved (its height is k). */
 export interface JoinScene extends Base { kind: "join"; mode: "shift" | "point"; left: Poly; right: Poly; at: number; from: number; to: number; k: [number, number, number]; start?: number }

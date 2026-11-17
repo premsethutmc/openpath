@@ -1,4 +1,4 @@
-# Interactive scenes (scene@7, scenes@3)
+# Interactive scenes (scene@7, scenes@4)
 
 The owner's direction (16 Nov 2026): maths should be learned by moving things, "not like another maths book"; it must be an
 engine, not hundreds of hand-built screens; and it must be deterministic for learners, with no AI call per use.
@@ -51,6 +51,23 @@ asks the learner to do, with one builder per question family filling the scene f
 | measure a shape | `rectangle`, `triangle` | `ahtri` |
 | regroup digits | `commas` | (recipes only) |
 | read a curve | `strips`, `slope`, `accumulate`, `line` | `cint`, `pint`, `dpow`, `audfp`, `audsum`, `audel`, `asline` |
+
+### From the question's picture (scenes@4)
+
+A builder is written for one family. So that the engine is not built one family at a time, a question with no builder gets
+its scene from its own PICTURE: one converter per kind of picture, filled from the picture's data. A converter gives a
+scene only when the scene's own mathematics arrives at the question's verified answer; otherwise there is none.
+
+| Picture | Becomes | Offered when the answer is |
+|---|---|---|
+| `shape` (rectangle or square with two side lengths) | `rectangle` to build | its area, or its perimeter |
+| `grid` (equal parts, some shaded) | `fraction` bar to copy | the fraction shaded |
+| `array` (equal rows) | `array` to set out | rows × number in a row |
+| `triangle` (two angles given) | `triangle` | the third angle |
+
+Of 1,118 families, 301 have a picture. 11 have their own builder; the four converters add 10 families (568 released
+questions). Pictures with no converter yet, by number of families: table 121, number line 26, coordinate plane 22, solid 19,
+place-value blocks 13, bars 12, pictograph 10, clock 6.
 
 Every scene from a builder is held against the family's verified answer for every released question (the scene test).
 
