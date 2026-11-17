@@ -464,7 +464,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aasub: Taking away within 20 | `MATH.number.subtraction` | 190 | 0 | 36/64/90 | `ce233fd8` |
 | aamore: How many more: comparing two groups in a picture | `MATH.number.subtraction` | 300 | 0 | 90/76/134 | `d7151c6a` |
 | aazero: Adding and taking away 0 (and taking away all) | `MATH.number.zero` | 80 | 0 | 60/20/0 | `7f6fbe00` |
-| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `e1eb783e` |
+| aawhere: Inside or outside, near or far, in front of or behind | `MATH.geometry.positions` | 240 | 0 | 80/80/80 | `781705a2` |
 | aagrp: Which group has more or fewer, or are they the same | `MATH.number.compare-numbers` | 243 | 0 | 84/84/75 | `3ff16f44` |
 | aabig: Which of two things is bigger or smaller | `MATH.number.compare-numbers` | 90 | 0 | 42/30/18 | `e3097b86` |
 | aaordx: Ordering numbers from 9 up to crores, ascending or descending | `MATH.number.compare-numbers` | 394 | 0 | 113/114/167 | `5cf4ed7d` |
@@ -563,7 +563,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acpicttab: Pictographs and tables: completing, totals and the largest group | `MATH.statistics.pictographs` | 300 | 0 | 16/236/48 | `452eea7c` |
 | acfacts: Related facts: addition and subtraction, multiplication and division | `MATH.algebra.missing-number` | 280 | 0 | 80/160/40 | `b259f1a1` |
 | acmmkm: Millimetres, centimetres, metres and kilometres | `MATH.measurement.length-conversion` | 400 | 0 | 144/143/113 | `2993636f` |
-| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `ed6a1e0c` |
+| accal: Patterns in calendars and on the clock | `MATH.measurement.elapsed-time` | 411 | 0 | 15/204/192 | `853f58ee` |
 | acpicthalf: Reading a pictograph with half pictures | `MATH.statistics.pictographs` | 300 | 0 | 123/119/58 | `991e6a03` |
 | acdecu: Writing a length in a larger unit as a decimal | `MATH.measurement.length-conversion` | 400 | 0 | 87/239/74 | `a683d111` |
 | acparl: Parallel, perpendicular or neither | `MATH.geometry.lines-segments` | 300 | 0 | 36/182/82 | `3d78c3ab` |
@@ -644,7 +644,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeangk: Classifying angles, including reflex angles | `MATH.geometry.angles-intro` | 142 | 0 | 36/36/70 | `0d9ab0bb` |
 | aearms: The vertex and arms of an angle, and comparing angles by turning | `MATH.geometry.angles-intro` | 145 | 0 | 60/70/15 | `9cf59d6c` |
 | aecpart: Naming the parts of a circle | `MATH.geometry.circles` | 196 | 0 | 68/64/64 | `d20f565c` |
-| aedsym: Counting the lines of symmetry of a design or a shape | `MATH.geometry.symmetry-lines` | 146 | 0 | 28/71/47 | `55c77a2c` |
+| aedsym: Counting the lines of symmetry of a design or a shape | `MATH.geometry.symmetry-lines` | 146 | 0 | 28/71/47 | `40624fda` |
 | aedigsym: Lines of symmetry in digits and numbers | `MATH.geometry.symmetry-lines` | 347 | 0 | 0/187/160 | `b932cf0c` |
 | aemirror: Which word looks the same in a mirror | `MATH.geometry.symmetry-lines` | 400 | 0 | 0/200/200 | `9b7ca11d` |
 | aepair: Even or odd by putting things in pairs | `MATH.number.even-odd` | 92 | 0 | 16/38/38 | `db9b6a8c` |
@@ -666,7 +666,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aetrip: Problems that combine time, distance and money | `MATH.reasoning.multi-step` | 400 | 0 | 103/132/165 | `5935f345` |
 | aebig: Multi-step problems with large numbers | `MATH.reasoning.multi-step` | 300 | 0 | 0/100/200 | `eea4fbd7` |
 | aematch: An attribute-matching puzzle | `MATH.reasoning.multi-step` | 200 | 0 | 0/26/174 | `24fe92f1` |
-| aeirr: Estimating the area of an irregular shape and comparing two areas | `MATH.measurement.area-squares` | 370 | 0 | 173/87/110 | `433ef693` |
+| aeirr: Estimating the area of an irregular shape and comparing two areas | `MATH.measurement.area-squares` | 370 | 0 | 173/87/110 | `c66c85e3` |
 | aedpv: Place value, expanded form and place-value form of decimals with thousandths | `MATH.number.decimal-tenths` | 404 | 0 | 0/282/122 | `c0388856` |
 | aedord: Ordering decimals | `MATH.number.decimal-tenths` | 300 | 0 | 0/30/270 | `05a0deca` |
 | aedfr: Decimals as fractions and fractions as decimals | `MATH.number.decimal-tenths` | 119 | 0 | 59/30/30 | `830ab233` |
@@ -713,7 +713,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | afkind: Naming a quadrilateral from its properties (kites and trapeziums included) | `MATH.geometry.quadrilateral-classification` | 120 | 0 | 40/40/40 | `164b3e28` |
 | afpside: Unknown sides of a parallelogram or rhombus | `MATH.geometry.quadrilateral-classification` | 400 | 0 | 149/126/125 | `914a740a` |
 | afhidden: Counting the rectangles, squares or triangles hidden in a figure | `MATH.reasoning.systematic-enumeration` | 84 | 0 | 12/48/24 | `954b6643` |
-| afcube: Cube nets: opposite faces, and which shapes fold into a cube | `MATH.geometry.nets` | 400 | 0 | 72/116/212 | `60e990d2` |
+| afcube: Cube nets: opposite faces, and which shapes fold into a cube | `MATH.geometry.nets` | 400 | 0 | 72/116/212 | `bf4fbcb8` |
 | afnet: Matching solids with their nets and views | `MATH.geometry.nets` | 87 | 0 | 23/22/42 | `9507076c` |
 | afview: Top, front and side views of a building of cubes | `MATH.geometry.nets` | 180 | 0 | 60/68/52 | `e446fe97` |
 | affrule: Which rule makes the sequence? | `MATH.algebra.figurate-numbers` | 189 | 0 | 133/29/27 | `05a5fe55` |
@@ -1440,7 +1440,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avtab: Building the 13 to 19 times tables | `MATH.number.multiplication-tables` | 99 | 0 | 49/30/20 | `735892dd` |
 | avstrat: Products by doubling and halving or a nearest multiple | `MATH.number.multi-multiplication` | 320 | 0 | 105/138/77 | `68ff7bc1` |
 | avpp: Multiplying with partial products | `MATH.number.multi-multiplication` | 420 | 0 | 3/42/375 | `fbb074f9` |
-| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `b5cccce9` |
+| avlat: Multiplying with the lattice method | `MATH.number.multi-multiplication` | 320 | 0 | 33/161/126 | `87ab5c4d` |
 | avdiv: Long division with a remainder, and dividend = divisor × quotient + remainder | `MATH.number.long-division` | 500 | 0 | 15/60/425 | `8c52379a` |
 | avmdiv: Dividing mentally by splitting or by halving | `MATH.number.long-division` | 360 | 0 | 93/161/106 | `80e34949` |
 | avfold: Equal fractions from folding paper | `MATH.number.equivalent-fractions` | 112 | 0 | 25/52/35 | `c46e9b0b` |
