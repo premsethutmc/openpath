@@ -408,3 +408,18 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .figure.tiles .tile small { font-size: 0.7rem; font-weight: 500; opacity: 0.75; }
 .figure.tiles .tile.ask { border-style: dashed; background: transparent; }
 .figure.tiles .tile.gap { visibility: hidden; }
+/* money-piles@1: coins to count and pay with (on white, like every picture, so they read in dark mode) */
+.figure.money { display: block; background: #fff; color: #1f2a37; border-radius: 14px; padding: 12px; max-width: 460px; }
+.money-pile { margin-bottom: 10px; }
+.money-name { display: block; font-size: 0.8rem; font-weight: 600; color: #5f6b84; margin-bottom: 4px; }
+.money-coins { display: flex; flex-wrap: wrap; gap: 6px; }
+.money .coin { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; border: 2px solid #b0791a; background: #f8e3a8; color: #5a3a05; font: inherit; font-size: 0.85rem; font-weight: 700; }
+.money .coin.note { width: 68px; border-radius: 8px; border-color: #3f7d5a; background: #d9efe2; color: #1d4a33; }
+.money .coin.paisa { width: 38px; height: 38px; border-color: #7a8291; background: #e8ebf0; color: #333b49; font-size: 0.75rem; }
+.money .coin.more { border-style: dotted; }
+.money button.coin { cursor: pointer; touch-action: manipulation; }
+.money .coin.paid { background: transparent; border-style: dashed; color: #9aa3b2; text-decoration: line-through; }
+.money-say { margin: 4px 0 0; font-size: 0.95rem; color: #445066; }
+.money-say.ok { color: #1d7a46; font-weight: 600; }
+.money-say.over { color: #b3261e; }
+.money-change { margin-top: 8px; }

@@ -306,10 +306,12 @@ function KidText({ text }: { text: string[] }) {
     </>
   );
 }
+/** money-piles@1: in a test a picture that can be worked with is only shown (tests stay free of help). */
+const still = <T extends { type?: string }>(v: T, test: boolean): T => (test && v.type === "money" ? { ...v, still: true } : v);
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
-function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
   const [parts, setParts] = useState<string[]>([]);
   const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
   if (ask.kind === "tap")
@@ -385,6 +387,17 @@ function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; ans
       </div>
     );
   }
+  if (ask.kind === "money")
+    return (
+      <div className="kid-fields">
+        {["rupees", "paise"].map((l, i) => (
+          <label key={l} className="kid-unit">
+            <input aria-label={`Your answer: ${l}`} inputMode="numeric" autoComplete="off" value={parts[i] ?? ""} disabled={disabled} onChange={(e) => { const n = [0, 1].map((j) => (j === i ? e.target.value.replace(/\D/g, "") : parts[j] ?? "")); put(n, n.every((x) => x.trim())); }} />
+            <span>{l}</span>
+          </label>
+        ))}
+      </div>
+    );
   if (ask.kind === "fields")
     return (
       <div className="kid-fields">
@@ -523,7 +536,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {(kq ? kq.figure : q.figure) && <Figure v={(kq ? kq.figure : q.figure)!} />}
+      {(kq ? kq.figure : q.figure) && <Figure v={still((kq ? kq.figure : q.figure)!, isTest(activity))} />}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />

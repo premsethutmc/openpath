@@ -163,3 +163,19 @@ as a table with no real headings, the row is drawn as cards (`pictured` in `fami
 never drawn as a table of data.
 
 The owner reviews teaching without a database grant when their account's email is in `OPENPATH_OWNER_EMAILS`.
+
+## Money as coins (money-say@1, money-piles@1)
+
+A bare sum of money (`₹7.55 − ₹3.15 = ?`, families `acmoneyadd`, `agrupee` and any other that prints that shape) is a
+decimal calculation to a child who has not met decimals. By rule (`moneySum` in `kid-say.ts`) the child is told what
+happens to the money in rupees and paise ("You have 7 rupees and 55 paise. You pay 3 rupees and 15 paise."), sees the
+coins (`money-piles.ts`, `MoneyPiles.tsx`) and answers in two boxes, rupees and paise, which are joined into the
+decimal the marking wants. Taking away, the child pays by tapping coins; when the paise are too few, one rupee is
+changed into 100 paise. Adding, 100 paise are changed into ₹1. The piles are built so the amount can always be paid
+exactly; the picture never states the answer. In a test the coins are shown but cannot be worked with.
+
+`child-view@1`: the review page's "Try them" box shows the question as the child is asked it (their words, picture and
+answer boxes), with the written form underneath.
+
+Open: fading from coins to columns to numbers alone as a child gets them right; the other money families (paise to
+rupees, bills, multiplying an amount).

@@ -21,7 +21,8 @@ import { poolDepth } from "../../../packages/learning/src/library";
 import { familiesOf, setActiveRegistry, type Registry, type ReviewEntry } from "../../../packages/learning/src/review";
 import { familySpec, validateFamily, type ValidationReport } from "../../../packages/learning/src/spec";
 import { validateModule } from "../../../packages/learning/src/validate";
-import { AnswerInput } from "../year/Learn";
+import { AnswerInput, KidAnswer } from "../year/Learn";
+import { kidQuestion } from "../../../packages/learning/src/kid-say";
 import { isDrawing, SketchView } from "../year/SketchPad";
 import "../mathematics/chapter/chapter.css";
 import "../year/year.css";
@@ -411,12 +412,18 @@ function TryQuestion({ qid }: { qid: string }) {
   const [value, setValue] = useState("");
   const [checked, setChecked] = useState<null | boolean>(null);
   const says = checked === false ? misconceptionOf(q, value)?.says : null;
+  const kq = (() => { try { return kidQuestion(q); } catch { return null; } })();
   return (
     <div className="qcard try" data-qid={qid}>
       <p className="small muted">{qid}{p ? ` · difficulty ${FAMILIES.get(p.family)?.difficulty?.(p.params) ?? 2}` : ""}</p>
-      <p className="prompt">{q.prompt}</p>
-      {q.figure && <Figure v={q.figure} />}
-      <AnswerInput q={q} value={value} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />
+      {/* child-view@1: the question as a child is asked it (their words, picture and answer boxes); the written form is kept below for the reviewer */}
+      <p className="prompt">{kq ? kq.say : q.prompt}</p>
+      {(kq?.figure ?? q.figure) && <Figure v={(kq?.figure ?? q.figure)!} />}
+      {kq?.note && <p className="kid-note">{kq.note}</p>}
+      {kq && !q.options
+        ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />
+        : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />}
+      {kq && kq.say !== q.prompt && <p className="small muted">Written form: {q.prompt}</p>}
       <div className="actions"><button className="secondary" disabled={!value.trim()} onClick={() => setChecked(creditOf(q.id, value) === true)}>Check</button></div>
       {checked !== null && (
         <div role="status" className={checked ? "right" : "wrong"}>
