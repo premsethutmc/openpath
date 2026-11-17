@@ -186,6 +186,23 @@ export interface Problem {
 }
 /** A picture for a teaching screen (rendered by the app; ten frames, base-ten blocks, number lines, fraction strips,
  * arrays, a grid of squares, a right triangle, a balance). */
+/** picture-words@1: the words that point a learner at a picture ("the cards in the picture", "The picture shows"). */
+export const POINTS_AT_PICTURE = /\b(?:in|on) the picture\b|\bthe picture (?:shows|below)\b/i;
+const LABEL_ONLY = /^(?:|\d+|cards?(?: \d+)?|word|left|right|first|second|third|fourth|fifth|sixth)$/i;
+/**
+ * A table whose columns are only places (no real headings) is a row of things, not a table of data. Where the words
+ * call it a picture it is drawn as tiles (`as: "tiles"`), so a learner told to look at "the cards in the picture" sees
+ * cards. A table with real headings (a bill, a price list, a timetable) stays a table.
+ */
+export function pictured(prompt: string, fig: Visual): Visual {
+  if (fig.type !== "table" || fig.as || !POINTS_AT_PICTURE.test(prompt)) return fig;
+  const head = Array.isArray(fig.head) ? (fig.head as unknown[]) : [];
+  // a table with empty cells is a layout (a net, a queue with gaps), not a row of things: it is left as it is drawn
+  const full = (Array.isArray(fig.rows) ? (fig.rows as unknown[][]) : []).every((r) => r.every((c) => String(c).trim() !== ""));
+  // with no heading at all it is a grid drawn for its shape (squares of a net, a block of dates): also left as it is
+  const named = head.some((h) => String(h).trim() !== "");
+  return full && named && head.every((h) => LABEL_ONLY.test(String(h).trim())) ? { ...fig, as: "tiles" } : fig;
+}
 export interface Visual {
   type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid" | "angles" | "protractor" | "fold";
   [k: string]: unknown;

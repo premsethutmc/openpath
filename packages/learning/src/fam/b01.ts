@@ -331,6 +331,7 @@ export const B01: Def[] = [
       method: "Find the part that repeats and say the pattern aloud part by part. See where the last part stops: the next number is the one that comes after it in the part.",
       visual: (p) => {
         const { seq, L } = patSeq(p);
+        // one row for each time the part comes round, so the ? sits under the number it repeats
         return table([...Array(L)].map((_, i) => ORD[i + 1]), chunks([...seq, "?"], L));
       },
       alternatives: [

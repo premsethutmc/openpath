@@ -20,7 +20,7 @@ import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
 
 import type { InstanceTeaching } from "./family-kit";
-import { EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
+import { pictured, EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
 import { twoStepTeaching } from "./fam/linear-teaching";
 export { show, neighbours, factId, type Bug, type Problem, type Step, type Value, type Def } from "./family-kit";
 
@@ -1355,7 +1355,8 @@ function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Probl
     const keep = (b.predict as Value[]).filter((v) => !predictsAnswer(def, v as Value, answer)) as number[];
     return keep.length ? [{ ...b, predict: keep }] : [];
   });
-  const fig = def.figure?.(p) ?? null;
+  const drawn = def.figure?.(p) ?? null;
+  const fig = drawn ? pictured(def.prompt(p), drawn) : null;
   const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps, ...(fig ? { figure: fig } : {}) };
   // pick@1: only the typed form taps (a multiple-choice form has its own options; a word form is read as a story)
   const picks = form === "typed" ? def.picks?.(p) : undefined;

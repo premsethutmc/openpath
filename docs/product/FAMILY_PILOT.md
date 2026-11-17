@@ -150,3 +150,13 @@ approved, rejected or sent back in one step by an account with the educator role
 <email> --role educator`). A decision applies to the version shown: when the lesson or card changes it returns to "To
 review". Decisions are a record only; they do not yet hide anything from learners. The items and their hashes are in
 `content/learning/teaching.v1.json` (generated: `node tools/regen.mjs`).
+
+## Words and picture agree (picture-words@1)
+
+Where a question's words point at a picture ("the number cards in the picture") and the family draws a row of things
+as a table with no real headings, the row is drawn as cards (`pictured` in `family-kit.ts`, `as: "tiles"` in
+`Figure.tsx`), in the question and in its lesson. A table with real headings (a bill, a price list) stays a table.
+`frontend/src/year/picture-words.test.ts` checks every family: words that point at a picture have one, and cards are
+never drawn as a table of data.
+
+The owner reviews teaching without a database grant when their account's email is in `OPENPATH_OWNER_EMAILS`.

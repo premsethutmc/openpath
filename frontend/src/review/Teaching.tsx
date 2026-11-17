@@ -21,13 +21,14 @@ export const sourceOf = (t: Pick<TeachingItem, "kind" | "source" | "from">) => (
 export const classesOf = (items: TeachingItem[]) => [...new Set(items.flatMap((t) => t.classes.map((c) => c.split(" ")[1])))].sort((a, b) => Number(a) - Number(b));
 export const inClass = (t: TeachingItem, cls: string) => cls === "all" || t.classes.some((c) => c.split(" ")[1] === cls);
 
-export function Teaching({ api, canDecide, onError }: { api: Api; canDecide: boolean; onError: (e: string) => void }) {
+export function Teaching({ api, onError }: { api: Api; onError: (e: string) => void }) {
   const [items, setItems] = useState<TeachingItem[] | null>(null);
   const [cls, setCls] = useState("5");
   const [kind, setKind] = useState<"all" | "recipe" | "card">("all");
   const [state, setState] = useState("submitted");
   const [open, setOpen] = useState<string | null>(null);
-  const load = () => api.request<{ items: TeachingItem[] }>("GET", "/content-review/teaching/").then((r) => setItems(r.items)).catch((e) => onError(String(e.message ?? e)));
+  const [canDecide, setCanDecide] = useState(false);
+  const load = () => api.request<{ items: TeachingItem[]; canDecide?: boolean }>("GET", "/content-review/teaching/").then((r) => { setItems(r.items); setCanDecide(!!r.canDecide); }).catch((e) => onError(String(e.message ?? e)));
   useEffect(() => { load(); }, []);
   const inScope = useMemo(() => (items ?? []).filter((t) => inClass(t, cls) && (kind === "all" || t.kind === kind)), [items, cls, kind]);
   if (!items) return <p className="muted">Loading the teaching…</p>;
