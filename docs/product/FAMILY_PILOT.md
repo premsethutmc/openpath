@@ -264,3 +264,10 @@ itself; the next step's "what to do" is shown straight away (no extra tap, nothi
 has a card offers "Why? Show me the rule" (the other skill it leans on, or the question's own), and an opened rule
 stays open while the next step uses the same one. Areas between a curve, the x-axis and two lines are worked from the
 question's own limits (21 calculus types have worked steps).
+
+## A picture to move, in practice (scene-aid@1)
+
+A practice question can carry a scene (a picture the child moves) as an aid, so it fades like any other aid
+(support-ladder@1) and is never shown in a test. First users: lakh, crore and million questions (`ajmill`, `ajmilr`)
+show their own number with commas to move from one way of grouping to the other. Before this, only 18 of 1,118
+question types had a movable picture in practice; the movable pictures of the story lessons were in lessons only.

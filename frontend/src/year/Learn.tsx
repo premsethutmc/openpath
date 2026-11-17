@@ -17,6 +17,7 @@ import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
+import type { Scene } from "../../../packages/learning/src/scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
@@ -559,7 +560,9 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {figure && <Figure v={still(figure, isTest(activity))} />}
+      {figure && ((figure as { type?: string }).type === "scene"
+        ? <ScenePlayer key={`${qid}:${step}`} scene={figure as unknown as Scene} />
+        : <Figure v={still(figure, isTest(activity))} />)}
       {aids && step > 0 && !isTest(activity) && <p><button type="button" className="link" data-testid="support-down" onClick={() => setLower(lower + 1)}>Show me the {aids[step - 1].name}</button></p>}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
@@ -621,6 +624,8 @@ function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competen
   // visuals@2: strips that state both fractions (bottomShaded / labels) are drawn by Figure (equal wholes, independent shading).
   // Legacy strips (top, bottom, shaded) state only the first fraction: the existing two-row picture with the derived equivalent
   // shading is kept only in an equivalence lesson, when that shading is exact; otherwise Figure says so in text (no guessed picture).
+  // scene-aid@1: a picture the child moves (a question's own aid) is played, not drawn still
+  if ((w as { type?: string }).type === "scene") return <ScenePlayer scene={w as unknown as Scene} />;
   if (w.type !== "strips" && w.type !== "array") return <Figure v={w} />;
   if (w.type === "strips") {
     const v = stripsFor(w, competency);
