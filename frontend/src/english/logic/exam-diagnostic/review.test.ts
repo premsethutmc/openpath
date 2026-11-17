@@ -24,3 +24,26 @@ test('exposure prevents a previously revealed writing pair from becoming fresh e
   assert.equal(result.outcome,'inconclusive'); assert.equal(result.lesson,null);
  }
 });
+
+test('writing bank and answer options are runtime immutable',()=>{
+ assert.ok(Object.isFrozen(WRITING_CHECKS));
+ for(const q of WRITING_CHECKS){
+  assert.ok(Object.isFrozen(q)); assert.ok(Object.isFrozen(q.options));
+  assert.throws(()=>{ (q as {answer:number}).answer=99; },TypeError);
+  assert.throws(()=>{ (q.options as string[])[0]='altered'; },TypeError);
+ }
+});
+
+test('late successful fixture reply cannot resurrect a reset workflow',async()=>{
+ const {SyntheticWritingWorkflow}=await import('./workflow.ts');
+ let release!:(value:unknown)=>void;
+ let payload:{essay:{id:string};rubric:string}|undefined;
+ const flow=new SyntheticWritingWorkflow(body=>{
+  payload=body.request as typeof payload;
+  return new Promise(resolve=>{release=resolve;});
+ });
+ const pending=flow.analyse(); flow.reset();
+ release({evaluator:{id:'local-exam-fixture',version:'fixture@1',model:'simulated-not-a-model',rubric:payload!.rubric,protocol:'essay-observe.v2'},output:{essay_id:payload!.essay.id,rubric:payload!.rubric,not_observable:[],observations:[]}});
+ await pending;
+ assert.equal(flow.snapshot().phase,'idle'); assert.deepEqual(flow.snapshot().observations,[]); assert.deepEqual(flow.snapshot().seenIds,[]);
+});

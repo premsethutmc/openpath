@@ -8,6 +8,9 @@ export const WRITING_CHECKS: readonly WritingCheck[] = [
   {id:'writing-articles-1',skill:'articles',prompt:'The researcher proposed ___ useful alternative.',options:['an','a'],answer:1,explanation:'Useful begins with a consonant /y/ sound, so use a.'},
   {id:'writing-articles-2',skill:'articles',prompt:'We waited for ___ hour before the meeting.',options:['an','a'],answer:0,explanation:'Hour begins with a vowel sound because h is silent, so use an.'},
 ];
+// Prevent consumers changing the answer key used for deterministic scoring.
+WRITING_CHECKS.forEach(q => { Object.freeze(q.options); Object.freeze(q); });
+Object.freeze(WRITING_CHECKS);
 const LESSONS: Record<WritingSkill,string> = {
   subject_verb_agreement:'Find the main subject before choosing the verb. A singular subject such as each takes has or is; a plural subject such as reports takes have or are. Ignore intervening phrases when identifying the subject.',
   articles:'Choose a or an by the next spoken sound, not the first written letter: a useful idea, an hour. This check covers only the a/an distinction, not all article usage.',

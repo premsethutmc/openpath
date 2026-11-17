@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SyntheticWritingDemo } from "./SyntheticWritingDemo";
 import {
   PASSAGE, QUESTIONS, WRITING_PROMPT, LESSONS, CHECKS,
   initialSession, validSession, answer, submitWriting, revise, report,
@@ -112,6 +113,7 @@ export function ExamDiagnostic({ storage }: { storage?: StorageLike }) {
           </div>)}
         </section>}
       </section>}
+      <details><summary>Explore the offline synthetic writing example</summary><SyntheticWritingDemo /></details>
       {opened.store && <button type="button" className="secondary" onClick={() => setClearAsked(true)}>Clear only this preview</button>}
       <p><a href="/">Return to OpenPath</a></p>
       {(session?.phase === "writing" || session?.phase === "report") && <p className="small">Typing is not saved until you submit or save it. Copy any unsaved text before leaving or reloading.</p>}
