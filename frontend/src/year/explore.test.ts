@@ -28,7 +28,8 @@ test("every dial offers only valid, pictured questions outside the released pool
         if (v === own) { assert.equal(x!.prompt, problemOf(e.base)!.prompt); continue; }
         variants++;
         const params = [...e.params]; params[d.index] = v;
-        const id = `gen:${e.family}:${params.join(",")}`, p = problemOf(id)!;
+        const id: string = `gen:${e.family}:${params.join(",")}`;
+        const p = problemOf(id)!;
         assert.ok(!inPool(id) && !released.has(exposureKey(id)), `${id}: never a question a learner is tested on`);
         assert.equal(x!.answer, p.answer, "the answer shown is the family's verified answer for those numbers");
       }
