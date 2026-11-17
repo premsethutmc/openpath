@@ -71,6 +71,9 @@ const lead = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
 // ------------------------------------------------------------------ one family at a time (the wordiest ones)
 
+/** A whole number whose commas the child places (the scene engine's "commas" picture), as a picture that only helps. */
+const commasAid = (digits: string, style: "indian" | "international", prompt: string, success: string): Visual =>
+  ({ type: "scene", kind: "commas", digits, style, prompt, success, goal: { measure: "miss", equals: 0 } }) as unknown as Visual;
 type Own = (q: Q) => Partial<KidQ> & { say: string };
 const OWN: Record<string, Own> = {
   avfold: (q) => {
@@ -124,13 +127,16 @@ const OWN: Record<string, Own> = {
     const m = grab(/\(smallest first\): ([−\d, ]+)\./, q.prompt);
     return { say: "Put them in order, smallest first.", ask: { kind: "order", items: m[1].split(/,\s*/), first: "smallest" } };
   },
+  // scene-aid@1: the number itself, with commas the child moves from one way of grouping to the other (an aid: it fades)
   ajmill: (q) => {
-    const m = grab(/is (\d+ crore(?: \d+ lakh)?)\. How many millions is it\?/, q.prompt);
-    return { say: `${m[1]} is how many millions?`, note: "1 crore = 10 million" };
+    const m = grab(/^([\d,]+) is (\d+ crore(?: \d+ lakh)?)\. How many millions is it\?/, q.prompt);
+    const scene = commasAid(m[1].replace(/,/g, ""), "international", "Move the commas into groups of three, counting from the right.", "Now read the group in front of the second comma: that is the millions.");
+    return { say: `${m[2]} is how many millions?`, note: "1 crore = 10 million", aids: [{ name: "commas", figure: scene }] };
   },
   ajmilr: (q) => {
-    const m = grab(/^(\d+) million is [\d,]+ in the international system\. How many lakh is it\?/, q.prompt);
-    return { say: `${m[1]} million is how many lakh?`, note: "1 million = 10 lakh" };
+    const m = grab(/^(\d+) million is ([\d,]+) in the international system\. How many lakh is it\?/, q.prompt);
+    const scene = commasAid(m[2].replace(/,/g, ""), "indian", "Move the commas the Indian way: one group of three on the right, then groups of two.", "Now read the groups from the left: crore, then lakh.");
+    return { say: `${m[1]} million is how many lakh?`, note: "1 million = 10 lakh", aids: [{ name: "commas", figure: scene }] };
   },
   aematch: (q) => {
     const m = grab(/^(.+?) each (.+?): (.+?)\. Clues: (.+?) (Who [^?]+\?)$/, q.prompt);
@@ -434,10 +440,11 @@ export function kidQuestion(q: Q): KidQ {
   // multiple choice keeps its buttons; a tap or order ask is for the typed form only
   if (form(q.id) === "mc" || q.type === "choice") ask = { kind: "box" };
   let say = o?.say ?? base.say;
-  const fig = o?.figure ? (o.figure === NONE ? undefined : o.figure) : base.figure ?? (q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined);
+  // a picture that only helps (its own aids) is the first of them; otherwise the rule's picture, or the question's own
+  const fig = o?.aids ? o.aids[0].figure : o?.figure ? (o.figure === NONE ? undefined : o.figure) : base.figure ?? (q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined);
   // with the table left out, the sentence no longer points at it
   if (q.figure && !fig) say = say.replace(/^The table shows (?:the )?/, "Here are the ").replace(/^The number cards in the picture make /, "These numbers make ");
-  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(base.aids && fig === base.figure ? { aids: base.aids } : {}) };
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(o?.aids ? { aids: o.aids } : base.aids && fig === base.figure ? { aids: base.aids } : {}) };
 }
 
 /** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a

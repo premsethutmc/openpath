@@ -206,7 +206,7 @@ export function pictured(prompt: string, fig: Visual): Visual {
   return full && named && head.every((h) => LABEL_ONLY.test(String(h).trim())) ? { ...fig, as: "tiles" } : fig;
 }
 export interface Visual {
-  type: "money" | "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid" | "angles" | "protractor" | "fold";
+  type: "scene" | "money" | "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid" | "angles" | "protractor" | "fold";
   [k: string]: unknown;
 }
 export interface TeachAlternative {

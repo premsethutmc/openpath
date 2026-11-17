@@ -418,7 +418,7 @@ function TryQuestion({ qid }: { qid: string }) {
       <p className="small muted">{qid}{p ? ` · difficulty ${FAMILIES.get(p.family)?.difficulty?.(p.params) ?? 2}` : ""}</p>
       {/* child-view@1: the question as a child is asked it (their words, picture and answer boxes); the written form is kept below for the reviewer */}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {(kq?.figure ?? q.figure) && <Figure v={(kq?.figure ?? q.figure)!} />}
+      {(kq?.figure ?? q.figure) && ((kq?.figure as { type?: string } | undefined)?.type === "scene" ? <p className="small muted">A picture the child moves (see it in “Try as a child”).</p> : <Figure v={(kq?.figure ?? q.figure)!} />)}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && !q.options
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />
