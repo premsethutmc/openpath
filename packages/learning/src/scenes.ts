@@ -9,8 +9,8 @@
  * mathematics arrives at, so a test can hold it against the family's verified answer for the same question.
  */
 import { numericValue } from "./answer-types";
-import { problemOf } from "./families";
-import { check, curveOf, evalPoly, derivative, fmt, initial, integral, measures, type Scene, type Term } from "./scene";
+import { pool, problemOf } from "./families";
+import { check, curveOf, evalPoly, derivative, fmt, initial, integral, measures, met, readout, type Scene, type Term } from "./scene";
 
 const mono = (k: number, n: number) => [...Array(n).fill(0), k];
 
@@ -234,20 +234,73 @@ export function sceneIsPicture(qid: string): boolean {
 
 const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
 /**
- * scene-aid@2: a question's own scene as an aid in practice, where moving it is doing the idea and not typing the answer
- * another way. Rounding: the point starts on the number and is carried to each round number in turn, with the steps
- * counted ("Start at 557 · 3 forward · now at 560"), so the learner sees which is nearer; the distances are not printed
- * before they move. Null for every other question (their scenes stay in lessons).
+ * practice-tool@1: what a question's own picture becomes in practice, by rule and not family by family.
+ *
+ * 1. Rounding (scene-aid@2): the point starts on the number and is carried to the round number on each side, the steps
+ *    counted, so the learner sees which is nearer.
+ * 2. A number line drawn with the question's starting number on it becomes a point to carry from that number, the steps
+ *    counted ("Start at −40 · 36 back · now at −76"). Kept only when the line's own arithmetic is the question's verified
+ *    answer: where the point must land, or how far apart the two marked numbers are.
+ * 3. Any other picture a converter can make movable (the bar to shade, the rectangle to build, the bars to read).
+ *
+ * 2 and 3 are quiet: a tool beside the question, which is still answered in its own box. A tool whose words or first
+ * readout already hold the answer is not offered.
  */
+const TOOL_STEPS = 120;
+function lineTool(fig: Fig, answer: number | null): Scene | null {
+  const from = fig.from, to = fig.to, marks = Array.isArray(fig.marks) ? (fig.marks as unknown[]) : [];
+  if (answer === null || !Number.isInteger(answer) || !Number.isInteger(from) || !Number.isInteger(to) || fig.jumps || fig.unknown !== undefined || !marks.every((v) => Number.isInteger(v))) return null;
+  const lo = from as number, hi = to as number, given = (marks as number[]).length > 1 ? (marks as number[]).filter((v) => v !== 0) : (marks as number[]);
+  const coarse = Number.isInteger(fig.step) && (fig.step as number) > 0 ? (fig.step as number) : 1;
+  const step = hi - lo <= TOOL_STEPS ? 1 : coarse;
+  const on = (v: number) => v >= lo && v <= hi && (v - lo) % step === 0;
+  const label = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000].find((l) => l % step === 0 && (hi - lo) / l <= 12) ?? step;
+  const base = { type: "scene" as const, kind: "numberline" as const, from: lo, to: hi, step, label, jump: true, quiet: true, success: "" };
+  // one starting number, and the answer is where the point lands
+  if (given.length === 1 && on(given[0]) && on(answer) && answer !== given[0])
+    return { ...base, start: given[0], prompt: `The point is on ${fmt(given[0])}. Carry it the way the question says, and read where it lands.`, success: `The point has moved from ${fmt(given[0])}.`, goal: { measure: "x", equals: answer } };
+  // two numbers, and the answer is how far apart they are
+  if (given.length === 2 && on(given[0]) && on(given[1]) && Math.abs(given[1] - given[0]) === answer && answer !== 0)
+    return { ...base, start: given[0], prompt: `Carry the point from ${fmt(given[0])} to ${fmt(given[1])}, and count the steps.`, success: `The point has gone from ${fmt(given[0])} to ${fmt(given[1])}.`, goal: { measure: "x", equals: given[1] } };
+  return null;
+}
+/** A rule can fit one question by accident (two marked numbers that happen to be the answer apart). So the line is a tool
+ *  for a type only when the rule fits every one of its questions that is drawn on a number line (a spread of 24). */
+const FITS = new Map<string, boolean>();
+function lineFits(family: string): boolean {
+  let ok = FITS.get(family);
+  if (ok === undefined) {
+    const drawn = pool(family).items.filter((q) => (q.figure as Fig | undefined)?.type === "numberline" && !/:(mc|w)$/.test(q.id));
+    const spread = drawn.filter((_, i) => i % Math.max(1, Math.floor(drawn.length / 24)) === 0);
+    ok = spread.length > 0 && spread.every((q) => { try { return q.type !== "choice" && lineTool(q.figure as Fig, numericValue(q.answer)) !== null; } catch { return false; } });
+    FITS.set(family, ok);
+  }
+  return ok;
+}
+/** The kinds of lesson scene that are the question's idea done by hand (not a check of an answer already worked out). */
+const TOOL_KINDS = new Set(["fraction", "rectangle", "bars", "order", "array"]);
 export function practiceScene(qid: string): Scene | null {
   const m = GEN.exec(qid);
-  if (!m || m[3] || m[1] !== "aeround") return null;
-  const s = sceneForQuestion(qid);
-  if (!s || s.kind !== "numberline") return null;
-  const word = s.prompt.match(/nearest (\w+)\./)?.[1] ?? "round number";
-  const { near: _near, ...rest } = s;
-  const out: Scene = { ...rest, jump: true, prompt: `Drag the point from ${s.start} to the ${word} on each side, and count the steps. Leave it on the nearer ${word}.` };
-  return check(out).length === 0 ? out : null;
+  if (!m || m[3]) return null;
+  if (m[1] === "aeround") {
+    const s = sceneForQuestion(qid);
+    if (!s || s.kind !== "numberline") return null;
+    const word = s.prompt.match(/nearest (\w+)\./)?.[1] ?? "round number";
+    const { near: _near, ...rest } = s;
+    const out: Scene = { ...rest, jump: true, prompt: `Drag the point from ${s.start} to the ${word} on each side, and count the steps. Leave it on the nearer ${word}.` };
+    return check(out).length === 0 ? out : null;
+  }
+  const p = problemOf(qid);
+  if (!p || p.type === "choice") return null;
+  const fig = p.figure as Fig | undefined;
+  let s: Scene | null = null;
+  try { s = fig?.type === "numberline" && lineFits(m[1]) ? lineTool(fig, numericValue(p.answer)) : null; } catch { s = null; }
+  if (!s) { const l = sceneForQuestion(qid); s = l && TOOL_KINDS.has(l.kind) ? { ...l, quiet: true } : null; }
+  if (!s || check(s).length) return null;
+  // the proof: neither the tool's words nor what it reads before it is touched hold the answer
+  const said = `${s.prompt} ${readout(s, initial(s))}`, a = p.answer.replace(/^-/, "−");
+  const holds = new RegExp(`(^|[^\\d.,/])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(said.replace(/,(?=\d)/g, ""));
+  return holds || met(s, initial(s)) ? null : s;
 }
 /** The scene for a generated question ("gen:<family>:<params>"), or null: no builder, or a scene with any problem. */
 export function sceneForQuestion(qid: string): Scene | null {

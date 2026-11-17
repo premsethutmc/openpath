@@ -545,7 +545,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   // scene-aid@2: a question whose own scene is the idea done by hand (rounding on a number line) offers it first, then its
   // still picture, then the bare question
   const sceneAid = useMemo(() => (KID && kq && !kq.aids ? practiceScene(qid) : null), [qid]); // eslint-disable-line react-hooks/exhaustive-deps
-  const aids = kq?.aids ?? (sceneAid ? [{ name: "number line to move", figure: sceneAid as never }, ...(kq?.figure ? [{ name: "number line", figure: kq.figure }] : [])] : undefined);
+  const aids = kq?.aids ?? (sceneAid ? [{ name: sceneAid.kind === "numberline" ? "number line to move" : "picture to move", figure: sceneAid as never }, ...(kq?.figure ? [{ name: sceneAid.kind === "numberline" ? "number line" : "picture", figure: kq.figure }] : [])] : undefined);
   const famKey = qid.split(":").slice(0, 2).join(":") + ":";
   const autoStep = useMemo(() => {
     if (!aids) return 0;
