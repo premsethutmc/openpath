@@ -1,4 +1,4 @@
-# Interactive scenes (scene@6, scenes@2)
+# Interactive scenes (scene@7, scenes@3)
 
 The owner's direction (16 Nov 2026): maths should be learned by moving things, "not like another maths book"; it must be an
 engine, not hundreds of hand-built screens; and it must be deterministic for learners, with no AI call per use.
@@ -16,7 +16,7 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
   every question of that family gets its own picture with nothing written for it. The families are not changed (fingerprints,
   pools and certification are as they were).
 
-## Kinds (scene@6)
+## Kinds (scene@7)
 
 | Kind | The learner | Measures |
 |---|---|---|
@@ -32,9 +32,31 @@ engine, not hundreds of hand-built screens; and it must be deterministic for lea
 | `numberline` | slides a point along a number line; the number can be hidden, the distances to the nearest tens shown, or the move drawn as a jump | `x`, `moved` |
 | `array` | sets counters out in equal rows; with `share`, a total is shared out and what is left over waits underneath | `rows`, `cols`, `count`, `off`, `left` |
 | `commas` | moves the commas between the digits of a whole number, the Indian or the international way | `a`, `b`, `c`, `miss` |
+| `order` | drags two to five number cards into order, smallest on the left | `wrong`, `first`, `last` |
 
 A curve is a polynomial (`poly`, its coefficients) or a sum of terms (`terms`: powers, sine, cosine, exponential, natural
 logarithm). Slopes and areas are exact in both, from the derivative and the antiderivative in closed form, not estimated.
+
+## Choosing the interaction by rule (scenes@3)
+
+The owner's question (16 Nov 2026): how do we come up with the interaction for each lesson? By rule, from what the question
+asks the learner to do, with one builder per question family filling the scene from that question's own numbers:
+
+| The question asks the learner to | Scene kind | Builders so far |
+|---|---|---|
+| compare or order | `order` | `aacmp` (which is more or less, with the digit-swapped look-alikes), `ajord` (order four integers) |
+| find or place a number | `numberline` | `aeround` (round to the nearest ten, hundred or thousand) |
+| share or group | `array` | (recipes only) |
+| take part of a whole | `fraction` | (recipes only) |
+| measure a shape | `rectangle`, `triangle` | `ahtri` |
+| regroup digits | `commas` | (recipes only) |
+| read a curve | `strips`, `slope`, `accumulate`, `line` | `cint`, `pint`, `dpow`, `audfp`, `audsum`, `audel`, `asline` |
+
+Every scene from a builder is held against the family's verified answer for every released question (the scene test).
+
+In a skill's opening lesson, a worked example with a scene shows the scene first (play-first@1): the working opens when the
+scene's goal is reached, or on "Show me how". Where there is no scene, the guess comes first instead (guess-first@1,
+`LESSON_RECIPE.md`).
 
 ## What is checked before a scene is shown
 

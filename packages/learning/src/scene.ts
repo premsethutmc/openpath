@@ -10,6 +10,7 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@7 adds an `order` kind (number cards the learner arranges, smallest on the left).
  * scene@6 adds a `commas` kind (the digits of a whole number, with commas the learner places).
  * scene@5 adds a `fraction` kind (a bar or a hundred-square cut into equal pieces, some shaded), a `numberline` kind (a
  * point on a number line, or a jump from a start) and an `array` kind (counters in equal rows).
@@ -78,7 +79,10 @@ export interface ArrayScene extends Base { kind: "array"; total: number; rows?: 
 /** The digits of a whole number with commas the learner places: in threes from the right (`international`), or one group
  *  of three and then twos (`indian`). `miss` is how many commas are wrongly placed or missing. */
 export interface CommasScene extends Base { kind: "commas"; digits: string; style: "indian" | "international" }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene;
+/** Two to five different numbers on cards, arranged by dragging: smallest on the left. `wrong` counts the neighbours that
+ *  are the wrong way round (0 when the cards are in order). `ask`, when given, says the question is about the first two cards: which of them is the larger, or the smaller. */
+export interface OrderScene extends Base { kind: "order"; values: number[]; ask?: "largest" | "smallest" }
+export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -167,6 +171,11 @@ export function controls(s: Scene): Control[] {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
     return [{ key: "a", label: "Angle A", min: 10, max: 150, step: 1, start: near ? 40 : 60 }, { key: "b", label: "Angle B", min: 10, max: 150, step: 1, start: near ? 95 : 60 }];
   }
+  if (s.kind === "order") {
+    // the cards start in the order given, unless that is already in order: then the first card starts at the far end
+    const sorted = s.values.every((v, i) => i === 0 || s.values[i - 1] < v);
+    return s.values.map((v, i) => ({ key: `p${i}`, label: `Place of ${fmt(v)}`, min: 1, max: s.values.length, step: 1, start: sorted ? ((i + s.values.length - 1) % s.values.length) + 1 : i + 1 }));
+  }
   if (s.kind === "commas") return commaPlaces(s).map((_, i, all) => ({ key: "abc"[i], label: ["First comma", "Second comma", "Third comma"][i], min: 1, max: s.digits.length - 1, step: 1, start: all.length - i }));
   if (s.kind === "fraction") {
     const top = s.pieces ?? s.max ?? 12;
@@ -212,6 +221,9 @@ function scales(s: CurveScene | LineScene) {
 /** The line of a line scene for a state: its slope and where it meets the y-axis. */
 function lineOf(s: LineScene, state: SceneState) { const m = state.m; return { m, c: s.through ? s.through[1] - m * s.through[0] : state.c ?? 0 }; }
 
+/** An order scene's cards from left to right: by the place each is given, and by the order given where two share a place. */
+function orderOf(s: OrderScene, state: SceneState): number[] { return s.values.map((_, i) => i).sort((a, b) => state[`p${a}`] - state[`p${b}`] || a - b); }
+const cardGrid = (s: OrderScene) => { const w = Math.min(64, 300 / s.values.length); return { w, left: px(170 - (s.values.length * w) / 2) }; };
 /** Where a commas scene's commas belong: each as the number of digits to its right. */
 function commaPlaces(s: CommasScene): number[] {
   const out: number[] = [];
@@ -236,6 +248,10 @@ function joinOf(s: JoinScene, state: SceneState) {
 
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
+  if (s.kind === "order") {
+    const row = orderOf(s, state).map((i) => s.values[i]);
+    return { wrong: row.filter((v, i) => i > 0 && row[i - 1] > v).length, first: row[0], last: row[row.length - 1] };
+  }
   if (s.kind === "commas") {
     const want = commaPlaces(s), have = new Set(want.map((_, i) => state["abc"[i]]));
     return { ...Object.fromEntries(want.map((_, i) => ["abc"[i], state["abc"[i]]])), miss: want.filter((p) => !have.has(p)).length };
@@ -268,7 +284,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -286,6 +302,7 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
   if (s.kind === "strips") return `${m.n} ${m.n === 1 ? "strip" : "strips"} add up to ${fmt(m.sum)} · missing ${fmt(m.gapPercent)}%`;
   if (s.kind === "triangle") return `${m.a}° + ${m.b}° + ${m.c}° = 180°`;
+  if (s.kind === "order") return `Now: ${orderOf(s, state).map((i) => fmt(s.values[i])).join(", ")}`;
   if (s.kind === "commas") {
     // the number as it now reads, comma by comma (the digits never change, so this gives nothing away)
     const at = new Set(commaPlaces(s).map((_, i) => state["abc"[i]]));
@@ -323,6 +340,15 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   const out: Shape[] = [];
+  if (s.kind === "order") {
+    const g = cardGrid(s);
+    orderOf(s, state).forEach((card, slot) => {
+      const x = px(g.left + slot * g.w);
+      out.push({ t: "rect", x: x + 3, y: 70, w: px(g.w - 6), h: 64, role: "card" }, { t: "text", x: px(x + g.w / 2), y: 110, s: fmt(s.values[card]), role: "cardtext" });
+    });
+    out.push({ t: "text", x: px(g.left + 26), y: 158, s: "smallest", role: "label" }, { t: "text", x: px(g.left + s.values.length * g.w - 24), y: 158, s: "largest", role: "label" });
+    return out;
+  }
   if (s.kind === "commas") {
     const g = commaGrid(s), n = s.digits.length;
     [...s.digits].forEach((d, i) => out.push({ t: "text", x: px(g.right - (n - 1 - i) * g.gap), y: 104, s: d, role: "digit" }));
@@ -470,6 +496,7 @@ export const draggable = (s: Scene) => s.kind !== "strips" && s.kind !== "line" 
 /** Which handle a touch at a point takes hold of: 0 or 1 for a transform's two arrows (−1 when it is far from both),
  *  0 for every other scene. The player keeps this for the length of a drag, so one arrow can be dragged across the other. */
 export function grip(s: Scene, state: SceneState, x: number, y: number): number {
+  if (s.kind === "order") { const g = cardGrid(s); return orderOf(s, state)[Math.max(0, Math.min(s.values.length - 1, Math.floor((x - g.left) / g.w)))]; }
   if (s.kind === "commas") {
     // the comma nearest the finger
     const d = commaPlaces(s).map((_, i) => Math.abs(commaX(s, state["abc"[i]]) - x));
@@ -489,6 +516,13 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
     const a = Math.round((Math.atan2(up, x - 60) * 180) / Math.PI), b = Math.round((Math.atan2(up, 280 - x) * 180) / Math.PI);
     const next = set(s, set(s, state, "a", a), "b", b);
     return next.a + next.b > 170 ? state : next;
+  }
+  if (s.kind === "order") {
+    // the card held is dropped into the slot under the finger; the others close up, and every card gets its own place
+    const g = cardGrid(s), card = hold ?? grip(s, state, x, y), slot = Math.max(0, Math.min(s.values.length - 1, Math.floor((x - g.left) / g.w)));
+    const row = orderOf(s, state).filter((i) => i !== card);
+    row.splice(slot, 0, card);
+    return Object.fromEntries(row.map((i, at) => [`p${i}`, at + 1]));
   }
   if (s.kind === "commas") { const g = commaGrid(s); return set(s, state, "abc"[hold ?? grip(s, state, x, y)], (g.right - g.gap / 2 - x) / g.gap + 1); }
   if (s.kind === "fraction") {
@@ -522,6 +556,7 @@ export function describe(s: Scene): string {
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
+  if (s.kind === "order") return `${s.values.length} number cards in a row: ${s.values.map(fmt).join(", ")}. They can be put in order by dragging, or by giving each its place with a slider. ${s.prompt}`;
   if (s.kind === "commas") return `The digits of the number ${s.digits}, with ${commaPlaces(s).length === 1 ? "a comma" : "commas"} that can be moved between them by dragging or with sliders. ${s.prompt}`;
   if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
   if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}. ${s.prompt}`;
@@ -575,7 +610,10 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "commas") {
+  if (s.kind === "order") {
+    if (!(Array.isArray(s.values) && s.values.length >= 2 && s.values.length <= 5 && s.values.every((v) => fin(v) && Math.abs(v) < 1e6) && new Set(s.values).size === s.values.length)) bad.push("values must be 2 to 5 different numbers");
+    if (s.ask !== undefined && s.ask !== "largest" && s.ask !== "smallest") bad.push("ask must be largest or smallest");
+  } else   if (s.kind === "commas") {
     if (!(typeof s.digits === "string" && /^[1-9]\d{3,9}$/.test(s.digits))) bad.push("digits must be a whole number of 4 to 10 digits");
     if (s.style !== "indian" && s.style !== "international") bad.push("style must be indian or international");
     if (!bad.length && commaPlaces(s).length > 3) bad.push("at most three commas");
@@ -591,7 +629,7 @@ export function check(v: unknown): string[] {
     if (![s.from, s.to, s.step, s.start].every(fin) || !(s.from < s.to) || !(s.step > 0)) bad.push("from, to, step and start must be finite, in order");
     else {
       const count = (s.to - s.from) / s.step, at = (s.start - s.from) / s.step;
-      if (Math.abs(count - Math.round(count)) > 1e-6 || count > 400) bad.push("the line must be a whole number of steps, at most 400");
+      if (Math.abs(count - Math.round(count)) > 1e-6 || count > 1000) bad.push("the line must be a whole number of steps, at most 1000");
       if (s.start < s.from || s.start > s.to || Math.abs(at - Math.round(at)) > 1e-6) bad.push("start must be a mark on the line");
     }
     if (s.label !== undefined && !(fin(s.label) && s.label > 0)) bad.push("label must be a positive gap");

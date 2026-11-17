@@ -32,6 +32,12 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Open: recipes for the other skills; definite integrals has no eligible opening lesson to carry one; a drag answer that
   counts as evidence.
 
+## Arrange and play first (2026-11-16, branch `feat/arrange`, draft PR, not merged)
+- scene@7 adds `order` (number cards dragged into order). scenes@3: builders for comparing two numbers, ordering integers
+  and rounding, each checked against every released question of its family.
+- play-first@1: a worked example with a scene shows the scene first; the working opens when it is done.
+- Open: builders for the other Class 5 picture types (tables, bars, clocks, charts, solids).
+
 ## Guess first (2026-11-16, branch `feat/guess-first`, draft PR, not merged)
 - guess-first@1: in every skill's opening lesson, a worked example opens after a guess among the verified answer and the
   family's own predicted wrong answers (`guessOf`). No writing per skill: 190 of 244 mapped skills get it, 27 more have a
