@@ -194,6 +194,8 @@ const LABEL_ONLY = /^(?:|\d+|cards?(?: \d+)?|word|left|right|first|second|third|
  * call it a picture it is drawn as tiles (`as: "tiles"`), so a learner told to look at "the cards in the picture" sees
  * cards. A table with real headings (a bill, a price list, a timetable) stays a table.
  */
+/** Whether a table's headings only name places (1, 2, 3; first, second; Card): its columns then mean "the same place". */
+export const placesOnly = (head: unknown): boolean => Array.isArray(head) && head.every((h) => LABEL_ONLY.test(String(h).trim()));
 export function pictured(prompt: string, fig: Visual): Visual {
   if (fig.type !== "table" || fig.as || !POINTS_AT_PICTURE.test(prompt)) return fig;
   const head = Array.isArray(fig.head) ? (fig.head as unknown[]) : [];

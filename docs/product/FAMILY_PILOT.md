@@ -179,3 +179,10 @@ answer boxes), with the written form underneath.
 
 Open: fading from coins to columns to numbers alone as a child gets them right; the other money families (paise to
 rupees, bills, multiplying an amount).
+
+## The picture beside a guess (guess-picture@1)
+
+Before a "have a guess" only the question's own picture is shown. The lesson's teaching picture (a worked layout, such
+as a pattern stacked so the ? sits under its answer) waits with the working (`frontend/src/year/guess-picture.ts`).
+Before this, 108 lesson screens across 79 question types showed the teaching picture first. Tests check every lesson
+with a guess, and that no question's own picture puts the ? under its answer.

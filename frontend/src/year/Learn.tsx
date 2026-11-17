@@ -15,6 +15,7 @@ import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Fi
 import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
+import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach } from "./StepCoach";
 import { SmallAsk as StepHelp } from "./SmallAsk";
@@ -656,11 +657,15 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // play-first@1: where the example has a picture to move, that comes first instead (it would give a guess away)
   const play = opening && !!competency && !!scene && !!sc.math;
   const guess = !play && opening && competency && raw.instance && sc.math ? guessOf(raw.instance) : null;
-  // a picture that is not the question's own belongs to the working (it would give the answer away), so it waits with it
-  const later = !!guess && !guess.pictured && !!sc.widget;
-  const picture = sc.widget && <Picture w={sc.widget} competency={competency} />;
+  // guess-picture@1: before a guess only the question's own picture shows; the lesson's teaching picture (a worked
+  // layout that would give the answer away) waits with the working
+  const own = raw.instance ? ((kq?.figure ?? question(raw.instance).figure) as typeof raw.widget | undefined) : undefined;
+  const pics = guessPictures(!!guess, own, sc.widget);
+  const later = !!pics.withWorking;
+  const picture = pics.before && <Picture w={pics.before} competency={competency} />;
+  const laterPicture = pics.withWorking && <Picture w={pics.withWorking} competency={competency} />;
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
-  const working = sc.math && <>{later && picture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}<div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
@@ -668,7 +673,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {/* a scene made from the question's own picture replaces the still picture */}
-        {!later && !(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
+        {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
         {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
         {sc.tip && <p className="hint">{sc.tip}</p>}
