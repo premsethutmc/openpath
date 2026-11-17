@@ -2,6 +2,7 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { EssayJourney } from "./essay/EssayJourney.tsx";
 import { EssayLive } from "./essay/EssayLive.tsx";
+import { ExamDiagnostic } from "./ExamDiagnostic.tsx";
 import { App } from "./App.tsx";
 import { Developer } from "./Developer.tsx";
 import { BUILD_CONTENT_MODE } from "../logic/content.ts";
@@ -16,7 +17,7 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
   }
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error("OpenPath English stopped:", error, info.componentStack);
-    record({ name: "runtime_error", ok: false, detail: error });
+    if (!examDiagnostic) record({ name: "runtime_error", ok: false, detail: error });
   }
   render() {
     if (!this.state.error) return this.props.children;
@@ -37,9 +38,10 @@ class CrashScreen extends Component<{ children: ReactNode }, { error: Error | nu
 
 const experience = new URLSearchParams(location.search).get("experience");
 const essayDemo = experience === "essay-demo";
+const examDiagnostic = experience === "exam-diagnostic";
 // the essay studio connected to the engine: synthetic essays on an on-device test learner (refused in a pilot build)
 const essayLive = experience === "essay-live";
-if (!essayDemo && !essayLive) installBrowserHooks();
+if (!essayDemo && !essayLive && !examDiagnostic) installBrowserHooks();
 const root = document.getElementById("root")!;
 root.dataset.started = "1";
 // the developer diagnostics live at /developer (the server decides who may use them)
@@ -56,7 +58,8 @@ const NotInPilot = ({ feature = "developer" }: { feature?: string }) => (
 );
 // This opt-in preview is part of the existing app, not another tutor or live assessment route.
 const entryView = () => {
-  if (BUILD_CONTENT_MODE === "pilot" && (developer || essayDemo || essayLive)) return <NotInPilot feature={essayDemo ? "essay-demo" : essayLive ? "essay-live" : "developer"} />;
+  if (BUILD_CONTENT_MODE === "pilot" && (developer || essayDemo || essayLive || examDiagnostic)) return <NotInPilot feature={examDiagnostic ? "exam-diagnostic" : essayDemo ? "essay-demo" : essayLive ? "essay-live" : "developer"} />;
+  if (examDiagnostic) return <ExamDiagnostic />;
   if (developer) return <Developer />;
   if (essayDemo) return <EssayJourney />;
   if (essayLive) return <EssayLive />;
@@ -65,7 +68,7 @@ const entryView = () => {
 createRoot(root).render(<CrashScreen>{entryView()}</CrashScreen>);
 
 // Offline use: a service worker keeps the app's own files (never any learner data, which stays in IndexedDB).
-if (!essayDemo && !essayLive && "serviceWorker" in navigator && location.protocol !== "file:" && !location.search.includes("no-sw")) {
+if (!essayDemo && !essayLive && !examDiagnostic && "serviceWorker" in navigator && location.protocol !== "file:" && !location.search.includes("no-sw")) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").catch(() => {
       /* offline use is a convenience; the app works without it */
