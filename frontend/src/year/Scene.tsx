@@ -8,7 +8,7 @@
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
 import { useMemo, useRef, useState, type JSX, type PointerEvent } from "react";
-import { SCENE_BOX, check, controls, describe, draw, draggable as follows, grip, initial, met, nudge, pointer, readout, set, type Scene, type SceneState, type Shape } from "../../../packages/learning/src/scene";
+import { SCENE_BOX, check, controls, describe, draw, draggable as follows, grip, initial, met, nudge, pointer, readout, set, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 function shape(s: Shape, i: number): JSX.Element {
   const c = `sc-${s.role}`;
@@ -27,6 +27,8 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const [touched, setTouched] = useState(false);
   // decide@1: the picture stays still until the learner has made its one choice
   const [picked, setPicked] = useState<number | null>(null);
+  // tried@1: the numbers of rows tried so far, in the order they were first tried
+  const [tried, setTried] = useState<number[]>([]);
   const dragging = useRef(false);
   const hold = useRef(0);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
@@ -34,7 +36,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const gate = scene.first && picked !== scene.first.right ? scene.first : null;
   const cs = controls(scene);
   const draggable = follows(scene) && !gate;
-  const apply = (next: SceneState) => { setTouched(true); setState(next); if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); } };
+  const apply = (next: SceneState) => { setTouched(true); setState(next); if (scene.kind === "array" && scene.log && triedLine(scene, next.r) && !tried.includes(next.r)) setTried([...tried, next.r]); if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); } };
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     return [((e.clientX - r.left) * SCENE_BOX.w) / r.width, ((e.clientY - r.top) * SCENE_BOX.h) / r.height] as const;
@@ -74,6 +76,12 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
       {gate ? null : cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>}
       {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>}
+      {tried.length > 0 && (
+        <div className="scene-tried" data-testid="scene-tried">
+          <p className="small muted">What you have tried</p>
+          <ul>{[...tried].sort((a, b) => a - b).map((r) => <li key={r}>{triedLine(scene, r)}</li>)}</ul>
+        </div>
+      )}
       {!done && touched && nudge(scene, state) && <p className="scene-nudge" role="status">{nudge(scene, state)}</p>}
     </figure>
   );

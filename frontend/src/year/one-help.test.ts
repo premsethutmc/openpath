@@ -27,3 +27,21 @@ test("scribble@1: the pad is scratch paper: nothing is read, saved or sent, and 
   assert.match(learn, /\{KID && workable && <ScribblePad key=\{qid\} \/>\}/);
   assert.match(pad, /<textarea className="scribble-notes"/, "scribble@2: the pad can be typed on");
 });
+
+test("rows-of-people@1 and tried@1: children are drawn, the left over stand underneath, and each try is kept", async () => {
+  const { check, draw, initial, set, triedLine } = await import("../../../packages/learning/src/scene");
+  const { recipeFor } = await import("../../../packages/learning/src/recipe");
+  const r = recipeFor("MATH.number.primes")!;
+  const s13 = r.missions[2];
+  assert.ok(s13.kind === "array" && s13.people && s13.log && s13.total === 13);
+  assert.deepEqual(check(s13), []);
+  // 3 rows of 4: twelve children in rows and one underneath
+  const st = set(s13, set(s13, initial(s13), "r", 3), "c", 4), shapes = draw(s13, st);
+  assert.equal(shapes.filter((x) => x.t === "circle" && x.role === "cell").length, 12);
+  assert.equal(shapes.filter((x) => x.t === "circle" && x.role === "blank").length, 1);
+  assert.equal(triedLine(s13, 3), "3 rows: 4 in each, 1 left over");
+  assert.equal(triedLine(s13, 5), "5 rows: 2 in each, 3 left over");
+  assert.equal(triedLine(s13, 1), null);
+  assert.equal(triedLine(r.missions[0], 3), null, "no log on a scene that keeps none");
+  assert.equal(triedLine({ ...s13, total: 12 } as typeof s13, 4), "4 rows: 3 in each, nobody left over");
+});

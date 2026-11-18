@@ -196,6 +196,8 @@ function RecipeSteps({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe;
         <h3>{step.kind === "predict" && storyWithGuess ? LABEL.question : headingOf(recipe, step)}</h3>
         {(step.kind === "question" || (step.kind === "predict" && storyWithGuess)) && recipe.question!.map((t, k) => <p key={k}>{t}</p>)}
         {step.kind === "predict" && <Choices ask={recipe.predict!.ask} choices={recipe.predict!.choices} picked={guess} onPick={(k) => { keep({ g: k }); setNudge(""); }} untilRight={false} />}
+        {/* try-first@1: a learner with no guess to make can go and try it; the guess is not evidence, so nothing is lost */}
+        {step.kind === "predict" && guess === null && steps[i + 1]?.kind === "mission" && <button type="button" className="link" data-testid="try-first" onClick={() => go(i + 1)}>Not sure? Try it first</button>}
         {step.kind === "mission" && <ScenePlayer key={step.index} scene={recipe.missions[step.index]} onReached={() => { setReached((r) => ({ ...r, [step.index]: true })); setNudge(""); }} />}
         {step.kind === "name" && recipe.name.map((t, k) => <p key={k}>{t}</p>)}
         {step.kind === "solve" && worked && <Worked worked={worked} shown={shown} more={() => { keep({ s: shown + 1 }); setNudge(""); }} />}
