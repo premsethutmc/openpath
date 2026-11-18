@@ -55,7 +55,8 @@ export function GuessFirst({ guess, competency, children }: { guess: Guess; comp
   return (
     <div className="guess-first" data-guess={open ? "open" : "closed"}>
       {!open && <p className="eyebrow">Have a guess first</p>}
-      <Choices ask={guess.prompt} choices={guess.choices} picked={picked} onPick={(i) => { setPicked(i); reveal(guess.choices[i].right ? "right" : "wrong"); }} untilRight={false} />
+      {/* a bare number offered as an angle is shown as an angle (105°), as the picture labels it */}
+      <Choices ask={guess.prompt} choices={/\bangles?\b/i.test(guess.prompt) ? guess.choices.map((c) => (/^\d+(\.\d+)?$/.test(c.label) ? { ...c, label: `${c.label}°` } : c)) : guess.choices} picked={picked} onPick={(i) => { setPicked(i); reveal(guess.choices[i].right ? "right" : "wrong"); }} untilRight={false} />
       {!open && <button type="button" className="secondary guess-skip" onClick={() => reveal("skipped")}>Show me how</button>}
       <div hidden={!open}>{children}</div>
     </div>

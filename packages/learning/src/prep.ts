@@ -58,11 +58,61 @@ function exchange(prompt: string, answer: number): PrepAsk | null {
   return { kind: "prep", steps, then: small ? `Now ${big * f} + ${small} =` : `Now ${big} × ${f} =` };
 }
 
+/** teaching-cards@1, card 4: a two-digit number times one digit is done in its tens and its ones (the documented slips
+ *  are multiplying the tens digit as if it were ones, and losing the carry). */
+function splitMul(prompt: string, answer: number): PrepAsk | null {
+  const m = /^(\d{1,2}) × (\d{1,2}) = \?$/.exec(prompt);
+  if (!m) return null;
+  const x = Number(m[1]), y = Number(m[2]);
+  const [big, small] = x >= 10 && y <= 9 ? [x, y] : y >= 10 && x <= 9 ? [y, x] : [0, 0];
+  if (big < 11 || big % 10 === 0 || small < 2 || big * small !== answer) return null;
+  const tens = Math.floor(big / 10) * 10, ones = big % 10;
+  const step = (part: number, what: string): PrepStep => ({ lead: `${part} × ${small} =`, value: String(part * small), why: what, tell: `${part} × ${small} = ${part * small}.` });
+  return { kind: "prep", steps: [step(tens, `${big} is ${tens} and ${ones}. ${tens} is ${tens / 10} tens: ${tens / 10} × ${small} tens.`), step(ones, `Now the ones: ${ones} lots of ${small}.`)], then: `Now ${tens * small} + ${ones * small} =` };
+}
+/** Card 4: a times fact that is not yet known is built from two that are (5 of them, and the rest). */
+function timesFact(prompt: string, answer: number): PrepAsk | null {
+  const m = /^(\d) × ([6-9]) = \?$/.exec(prompt);
+  if (!m) return null;
+  const a = Number(m[1]), b = Number(m[2]), rest = b - 5;
+  if (a < 2 || a * b !== answer) return null;
+  const step = (k: number): PrepStep => ({ lead: `${a} × ${k} =`, value: String(a * k), why: `${b} is 5 and ${rest}. Do ${a} × ${k}: count in ${a}s, ${k} times.`, tell: `${a} × ${k} = ${a * k}.` });
+  return { kind: "prep", steps: [step(5), step(rest)], then: `Now ${a * 5} + ${a * rest} =` };
+}
+/** Card 4: a remainder is what is left after the groups are taken (the documented slip gives the number of groups). */
+function remainder(prompt: string, answer: number): PrepAsk | null {
+  const m = /^(\d+) ÷ (\d+) = (\d+) remainder □/.exec(prompt);
+  if (!m) return null;
+  const n = Number(m[1]), d = Number(m[2]), q = Number(m[3]);
+  if (n - q * d !== answer || q < 1) return null;
+  return { kind: "prep", steps: [{ lead: `${q} groups of ${d}: ${q} × ${d} =`, value: String(q * d), why: `How many are used up by ${q} groups of ${d}?`, tell: `${q} × ${d} = ${q * d}.` }], then: `Now ${n} − ${q * d} =` };
+}
+/** Card 5: an equal fraction multiplies the top by what the bottom was multiplied by (the documented slips add, or
+ *  change only the bottom). */
+function equalFraction(prompt: string, answer: number): PrepAsk | null {
+  const m = /^(\d+)\/(\d+) = □\/(\d+)$/.exec(prompt);
+  if (!m) return null;
+  const a = Number(m[1]), b = Number(m[2]), c = Number(m[3]), k = c / b;
+  if (!Number.isInteger(k) || k < 2 || a * k !== answer) return null;
+  return { kind: "prep", steps: [{ lead: `The bottom: ${b} ×`, after: `= ${c}`, value: String(k), why: `What was ${b} multiplied by to make ${c}?`, tell: `${b} × ${k} = ${c}.` }], then: `Do the same to the top. Now ${a} × ${k} =` };
+}
+const gcd = (x: number, y: number): number => (y ? gcd(y, x % y) : x);
+/** Card 5: unlike fractions are first written in same-size pieces (the documented slip adds tops and bottoms). */
+function unlikeAdd(prompt: string, answer: string): PrepAsk | null {
+  const m = /^(\d+)\/(\d+) \+ (\d+)\/(\d+) = \?/.exec(prompt), ans = /^(\d+)\/(\d+)$/.exec(answer) ?? /^(\d+)$/.exec(answer);
+  if (!m || !ans) return null;
+  const [a, b, c, d] = m.slice(1).map(Number), L = (b * d) / gcd(b, d), p = (a * L) / b, q = (c * L) / d;
+  if (b === d || L > 200 || (p + q) * Number(ans[2] ?? 1) !== Number(ans[1]) * L) return null;
+  const piece = (n: number, den: number, v: number): PrepStep => ({ lead: `${n}/${den} =`, after: `/${L}`, value: String(v), why: `${den} × ${L / den} = ${L}. Do the same to the top: ${n} × ${L / den}.`, tell: `${n}/${den} = ${v}/${L}.` });
+  return { kind: "prep", steps: [{ lead: `Same-size pieces. Both ${b} and ${d} go into`, value: String(L), why: `Count in ${b}s and in ${d}s. Where do they first meet?`, tell: `They first meet at ${L}.` }, piece(a, b, p), piece(c, d, q)], then: `Now ${p}/${L} + ${q}/${L} =` };
+}
+
 export function prepOf(prompt: string, type: string, answer: string): PrepAsk | null {
+  if (type === "fraction" && /\//.test(answer)) return unlikeAdd(prompt, answer);
   if (type !== "integer" && type !== "fraction") return null;
   const v = Number(answer);
   if (!Number.isFinite(v) || !/^-?[\d.]+$/.test(answer)) return null;
-  const p = estimate(prompt, v) ?? exchange(prompt, v);
+  const p = estimate(prompt, v) ?? exchange(prompt, v) ?? splitMul(prompt, v) ?? timesFact(prompt, v) ?? remainder(prompt, v) ?? equalFraction(prompt, v) ?? unlikeAdd(prompt, answer);
   return p && p.steps.every((s) => Number(s.value) !== v) ? p : null;
 }
 /** Whether what was typed into a prep box is its value (commas and spaces forgiven). */
