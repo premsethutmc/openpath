@@ -72,3 +72,30 @@ test('article checks are independently scored and observed strengths never seed 
   assert.equal(verifyWritingSkill('articles',{[checks[0].id]:NaN,[checks[1].id]:-1}).outcome,'inconclusive');
   assert.deepEqual(planWritingChecks([{...base,kind:'strength'}]),[]);
 });
+
+
+test('preserves explicit not-observable coverage mapped to every supported writing skill', async () => {
+  const ids = ['EN.GRM.VERB.sva', 'EN.GRM.NOUN.articles', 'EN.WRITE.source_fidelity', 'EN.WRITE.evidence_reasoning'];
+  const result = await analyseSyntheticWriting(text, info, transport(o => {
+    o.observations = [];
+    o.not_observable = ids;
+  }));
+  assert.deepEqual(result.notObservable, ['subject_verb_agreement', 'articles', 'source_fidelity', 'evidence_reasoning']);
+  assert.deepEqual(result.observations, []);
+  const partial = await analyseSyntheticWriting(text, info, transport(o => { o.not_observable = ['EN.WRITE.source_fidelity']; }));
+  assert.deepEqual(partial.notObservable, ['source_fidelity']);
+  assert.equal(partial.observations[0].skill, 'subject_verb_agreement');
+  assert.deepEqual((await analyseSyntheticWriting(text, info, transport())).notObservable, []);
+});
+
+test('rejects malformed, duplicate and contradictory not-observable coverage', async () => {
+  for (const coverage of [undefined, null, 'EN.GRM.NOUN.articles', ['unknown'], [null], [{}], ['EN.GRM.NOUN.articles', 'EN.GRM.NOUN.articles']]) {
+    await assert.rejects(analyseSyntheticWriting(text, info, transport(o => { o.not_observable = coverage; })));
+  }
+  for (const patch of [{}, {kind:'strength', correction:undefined}, {kind:'style', verification:'not_required'}, {confidence:'low'}]) {
+    await assert.rejects(analyseSyntheticWriting(text, info, transport(o => {
+      o.observations = [{...observation, ...patch}];
+      o.not_observable = ['EN.GRM.VERB.sva'];
+    })), /Invalid writing observation coverage/);
+  }
+});

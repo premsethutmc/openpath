@@ -32,7 +32,8 @@ test('partial mixed checks are inconclusive, repeated answer cannot alter outcom
  for(const q of checks.slice(1))f.answer(q.id,key(q.id));f.finishChecks();assert.equal(f.snapshot().results[0].outcome,'inconclusive');
 });
 test('exposure survives new controller; revealed checks or retests are never reused as fresh',async()=>{
- const f=ready();await f.analyse(EXAMPLE_WRITING,true);const g=ready(new ExamJourney(undefined,undefined,f.snapshot().seen));await g.analyse(EXAMPLE_WRITING,true);assert.equal(g.snapshot().checks.length,0);
+ const f=ready();await f.analyse(EXAMPLE_WRITING,true);const g=ready(new ExamJourney(undefined,undefined,f.snapshot().seen));await g.analyse(EXAMPLE_WRITING,true);assert.equal(g.snapshot().checks.length,8);assert.ok(g.snapshot().checks.every(q=>!f.snapshot().seen.includes(q.id)));
+ const exhausted=ready(new ExamJourney(undefined,undefined,g.snapshot().seen));await exhausted.analyse(EXAMPLE_WRITING,true);assert.equal(exhausted.snapshot().checks.length,0);
  const h=ready(new ExamJourney(undefined,undefined,REASSESSMENT.map(q=>q.id)));await h.analyse(EXAMPLE_WRITING,true);
  for(const q of h.snapshot().checks)h.answer(q.id,1-key(q.id));h.finishChecks();for(const s of h.snapshot().lessons)h.markTaught(s);h.startReassessment();assert.equal(h.snapshot().phase,'complete');assert.ok(h.summary().every(r=>r.after===null));
 });
@@ -61,4 +62,16 @@ test('legacy synthetic grammar exposure cannot be recycled as journey evidence',
  assert.deepEqual(grammar.map(q=>key(q.id)),[0,1,1,0]);
  for(const q of f.snapshot().checks)f.answer(q.id,1-key(q.id));f.finishChecks();
  assert.ok(f.summary().every(r=>r.correct===0));
+});
+test('answer review and next actions stay hidden until independent sitting completes',async()=>{
+ const f=ready();await f.analyse(EXAMPLE_WRITING,true);assert.deepEqual(f.review(),[]);assert.deepEqual(f.practicePlan(),[]);
+ for(const q of f.snapshot().checks)f.answer(q.id,key(q.id));f.finishChecks();
+ assert.equal(f.review().length,8);assert.ok(f.review().every(r=>r.correct&&r.expected===r.selected&&r.explanation));assert.ok(f.practicePlan().every(r=>/broader ability is still unknown/.test(r.next)));
+ const before=JSON.stringify(f.summary());f.saveRevision(EXAMPLE_WRITING.replace('researcher write','researcher writes'));
+ assert.equal(JSON.stringify(f.summary()),before);assert.ok(f.snapshot().session.revision.includes('researcher writes'));
+ assert.throws(()=>f.saveRevision(EXAMPLE_WRITING),/changed/);assert.throws(()=>f.saveRevision('too short'),/50/);
+});
+test('revision cannot replace independent checks or trigger model calls',async()=>{
+ let calls=0;const f=ready(new ExamJourney(SIMULATED_INFO,b=>{calls++;return simulatedPost(b);}));assert.throws(()=>f.saveRevision(EXAMPLE_WRITING));
+ await f.analyse(EXAMPLE_WRITING,true);assert.throws(()=>f.saveRevision(EXAMPLE_WRITING));assert.equal(calls,1);
 });
