@@ -9,7 +9,8 @@ import type { Learner } from "../logic/learner.ts";
 import { sourceProgress } from "../logic/spelling.ts";
 import { LIST_LIMITS, type ListWord, type Parsed, type WordList, listText, listWords, parseWords } from "../logic/wordlists.ts";
 
-export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: Learner; onPractise: (l: WordList) => void; onLeave: () => void; onChanged: () => void }) {
+/** `parentOf`: opened from the parent view for that child: lists are added, edited and read here, not practised. */
+export function MyWords({ learner, onPractise, onLeave, onChanged, parentOf }: { learner: Learner; onPractise?: (l: WordList) => void; onLeave: () => void; onChanged: () => void; parentOf?: string }) {
   const [editing, setEditing] = useState<WordList | "new" | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   if (editing) return <ListEditor learner={learner} list={editing === "new" ? null : editing} onDone={() => (setEditing(null), onChanged())} />;
@@ -20,14 +21,14 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
     <main className="page my-words" aria-labelledby="mywords-title">
       <p>
         <button type="button" className="link" onClick={onLeave}>
-          ← Home
+          {parentOf ? "← Your children" : "← Home"}
         </button>
       </p>
-      <p className="eyebrow">Spelling lists from a parent</p>
+      <p className="eyebrow">{parentOf ? `For parents · ${parentOf}` : "Spelling lists from a parent"}</p>
       <h1 id="mywords-title" className="hero">
-        My Words
+        {parentOf ? `Word lists for ${parentOf}` : "My Words"}
       </h1>
-      <p className="sub">Type, paste or upload the words to practise. When the learner practises, each word is only spoken, never shown.</p>
+      <p className="sub">Type, paste or upload the words. A practice list teaches them: a new word is shown first and help is there when asked. A test list only speaks each word and marks nothing until the end.</p>
       <p className="small where-kept">{keptWhere(learner)}</p>
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         New word list
@@ -55,9 +56,11 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
                   {p.reviewList ? ` · ${p.reviewList} to review` : ""}
                 </p>
                 <div className="row">
-                  <button type="button" className="primary" onClick={() => onPractise(l)}>
-                    {l.mode === "test" ? "Take the test" : "Practise"}
-                  </button>
+                  {onPractise && (
+                    <button type="button" className="primary" onClick={() => onPractise(l)}>
+                      {l.mode === "test" ? "Take the test" : "Practise"}
+                    </button>
+                  )}
                   <button type="button" className="secondary" onClick={() => setEditing(l)}>
                     Edit
                   </button>
@@ -184,6 +187,7 @@ function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordLis
         <span>Words: one per line, or separated by commas. Write another accepted spelling after a slash, for example colour/color.</span>
         <textarea value={text} onChange={(e) => setText(e.target.value)} rows={8} autoCapitalize="off" autoCorrect="off" spellCheck={false} />
       </label>
+      <p className="small photo-tip">From a photo of a printed list: use your phone's own text scanner (Google Lens, or "Scan Text" on an iPhone), copy the words and paste them here. Check them before saving.</p>
       <label className="field file">
         <span>Or add words from a .txt or .csv file</span>
         <input type="file" accept=".txt,.csv,text/plain,text/csv" onChange={(e) => void onFile(e)} />

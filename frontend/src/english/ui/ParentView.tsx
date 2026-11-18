@@ -1,0 +1,141 @@
+/**
+ * For parents: every child of this account (or on this device), with what they have practised, the words to work
+ * on, and their word lists. A parent adds a practice or a test list for a child here; the child finds it under
+ * My Words. Read from each child's own record; only saving or deleting a list writes anything.
+ */
+import { useEffect, useMemo, useState } from "react";
+import type { AppContent } from "../logic/content.ts";
+import { Learner } from "../logic/learner.ts";
+import { type ChildSummary, childSummary, gateQuestion } from "../logic/parent-view.ts";
+import type { Repo } from "../logic/store.ts";
+import { MyWords } from "./MyWords.tsx";
+
+const day = (iso: string | null) => (iso ? iso.slice(0, 10) : "not yet");
+const KIND = { practice: "Practice list", test: "Test list", plain: "Word list" } as const;
+
+export function ParentGate({ seed, onPass, onBack }: { seed: number; onPass: () => void; onBack: () => void }) {
+  const q = useMemo(() => gateQuestion(seed), [seed]);
+  const [text, setText] = useState("");
+  const [wrong, setWrong] = useState(false);
+  return (
+    <main className="page parent" data-phase="gate" aria-labelledby="parent-gate-title">
+      <button type="button" className="link" onClick={onBack}>
+        ← Back
+      </button>
+      <p className="eyebrow">For parents</p>
+      <h1 id="parent-gate-title" className="hero">
+        Grown-ups only
+      </h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (Number(text.trim()) === q.answer) onPass();
+          else setWrong(true);
+        }}
+      >
+        <label htmlFor="parent-gate">
+          What is {q.a} × {q.b}?
+        </label>
+        <p className="ruled">
+          <input id="parent-gate" inputMode="numeric" autoComplete="off" value={text} onChange={(e) => (setText(e.target.value), setWrong(false))} />
+        </p>
+        {wrong && <p className="warning">That is not it. Ask a grown-up.</p>}
+        <button type="submit" className="primary" disabled={!text.trim()}>
+          Continue
+        </button>
+      </form>
+    </main>
+  );
+}
+
+export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }) {
+  const work = s.lists.flatMap((l) => l.toWorkOn).slice(0, 6);
+  return (
+    <section className="hub-card plain parent-child" aria-label={s.name} data-child={s.id}>
+      <h2>{s.name}</h2>
+      <p className="small">
+        Last active: {day(s.lastActive)} · practised spelling on {s.daysPractisedThisWeek} of the last 7 days
+      </p>
+      {s.words && <p className="small">Word check: about {s.words.estimate.toLocaleString("en-IN")} word families</p>}
+      {s.bee && (
+        <p className="small">
+          Spelling Bee: level {s.bee.level} ({s.bee.levelName}), {s.bee.practised} of {s.bee.total} words practised
+        </p>
+      )}
+      {s.lists.length ? (
+        <ul className="parent-lists">
+          {s.lists.map((l) => (
+            <li key={l.id}>
+              <span>
+                <b>{l.name}</b> <span className="small">{KIND[l.mode]}</span>
+              </span>
+              <span className="small">
+                {l.lastTest ? `last test ${l.lastTest.right} of ${l.lastTest.total} · ` : ""}
+                {l.unaided} of {l.words} on their own
+                {l.withHelp ? ` · ${l.withHelp} with help` : ""}
+                {l.wrong ? ` · ${l.wrong} wrong` : ""}
+                {l.notTried ? ` · ${l.notTried} not tried` : ""}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="small">No word lists yet.</p>
+      )}
+      {work.length > 0 && (
+        <p>
+          <b>Words to work on:</b> {work.join(", ")}
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.lists.length ? "Word lists and results" : "Add a word list"}
+      </button>
+    </section>
+  );
+}
+
+export function ParentView({ content, repo, clock, onLeave }: { content: AppContent; repo: Repo; clock: () => string; onLeave: () => void }) {
+  const [passed, setPassed] = useState(false);
+  const [children, setChildren] = useState<Learner[] | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
+  const [open, setOpen] = useState<string | null>(null);
+  const [, setTick] = useState(0);
+  const seed = useMemo(() => Math.floor(Date.parse(clock()) / 1000) % 97, [clock]);
+  useEffect(() => {
+    if (!passed) return;
+    let live = true;
+    void (async () => {
+      try {
+        const profiles = await repo.profiles();
+        const all: Learner[] = [];
+        for (const p of profiles) all.push(await Learner.open(content, repo, p.id, clock));
+        if (live) setChildren(all);
+      } catch (e) {
+        if (live) setProblem(e instanceof Error ? e.message : "The children's records could not be read.");
+      }
+    })();
+    return () => {
+      live = false;
+    };
+  }, [passed, content, repo, clock]);
+  if (!passed) return <ParentGate seed={seed} onPass={() => setPassed(true)} onBack={onLeave} />;
+  const child = open ? children?.find((l) => l.profileId === open) : null;
+  if (child) return <MyWords learner={child} parentOf={child.state.profile?.name ?? "this child"} onChanged={() => setTick((t) => t + 1)} onLeave={() => setOpen(null)} />;
+  return (
+    <main className="page parent" data-phase="children" aria-labelledby="parent-title">
+      <button type="button" className="link" onClick={onLeave}>
+        ← Back to the child's screen
+      </button>
+      <p className="eyebrow">For parents</p>
+      <h1 id="parent-title" className="hero">
+        Your children
+      </h1>
+      <p className="sub">What each child has practised, the words to work on, and their word lists. Add a practice list or a test list here; your child will find it under My Words.</p>
+      {problem && <p className="warning">{problem}</p>}
+      {!children && !problem && <p className="loading">Reading the records…</p>}
+      {children && !children.length && <p>No children yet. Add a learner first.</p>}
+      {children?.map((l) => <ChildCard key={l.profileId} s={childSummary(l, clock())} onOpen={() => setOpen(l.profileId)} />)}
+      <p className="small">This page shows the children in this account, or on this phone if there is no account. Everything shown is a count of what happened, not a grade.</p>
+    </main>
+  );
+}

@@ -2159,3 +2159,29 @@ h3.sub {
   font-weight: 800;
   padding: 0 6px;
 }
+
+/* ------------------------------------------------------------ Parent view (ui/ParentView.tsx) */
+.parent-child h2 {
+  margin: 0 0 4px;
+}
+.parent-lists {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: grid;
+  gap: 8px;
+}
+.parent-lists li {
+  display: grid;
+  gap: 2px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+.parent .primary,
+.parent-child .secondary {
+  margin-top: 12px;
+}
+.parent-entry {
+  text-align: center;
+  margin-top: 22px;
+}
