@@ -2053,3 +2053,35 @@ h3.sub {
 .bee-quiet {
   text-align: center;
 }
+
+/* ------------------------------------------------------------ Word check (ui/VocabularyCheck.tsx) */
+.vocab-word {
+  font-size: 34px;
+  text-align: center;
+  margin: 18px 0 22px;
+}
+.vocab .option.vocab-unknown {
+  border-style: dashed;
+  color: var(--muted);
+  justify-content: center;
+}
+.vocab .primary {
+  margin-top: 16px;
+}
+.vocab-bands {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  gap: 8px;
+}
+.vocab-bands li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+.vocab-note {
+  padding-top: 0;
+}

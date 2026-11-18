@@ -6,6 +6,7 @@
  * including hints and second tries, settings, reported problems — is an app event in the same list, so
  * one export holds the whole record and a rebuild always gives the same state.
  */
+import type { VocabRecord } from "./vocabulary/size-check.ts";
 import type { EvidenceEvent, EvidenceUse, LedgerEvent, Response } from "../../../../packages/english-core/src/index.ts";
 
 export const APP_VERSION = "openpath-english-web@1";
@@ -364,14 +365,22 @@ export interface BookDeleteEvent {
 }
 export type SpellEvent = SpellSessionEvent | SpellAnswerEvent | SpellEndEvent | WordListEvent | WordListDeleteEvent | BookEvent | BookReviewEvent | BookAnswerEvent | BookDeleteEvent;
 
-export type AppEvent = ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
+/** Vocabulary size check (logic/vocabulary): a sitting started, a word answered, a result. Practice-only: never engine evidence. */
+export interface VocabEvent {
+  kind: "vocab";
+  id: string;
+  at: string;
+  record: VocabRecord;
+}
+
+export type AppEvent = VocabEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 
 const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke", "presented", "hint", "assisted_response", "intervention", "essay"]);
 /** Events the engine's ledger folds: evidence and provenance (presented, hint, assisted_response, intervention), and essay records (never an estimate change). */
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay"]);
+const KINDS = new Set(["profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay", "vocab"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end", "essay"]);
 const ESSAY_RECORDS = new Set(["submission", "analysis", "diagnostic", "journey", "rewrite"]);
@@ -395,6 +404,7 @@ export function eventProblem(e: unknown): string | null {
   }
   if (x.kind === "book_review" && (typeof x.book !== "string" || typeof x.fingerprint !== "string" || !Array.isArray(x.approved) || !(x.approved as unknown[]).every((a) => typeof a === "string"))) return `event ${x.id} is a book review without its approvals`;
   if (x.kind === "book_answer" && (typeof x.book !== "string" || typeof x.question !== "string" || typeof x.correct !== "boolean")) return `event ${x.id} is a book answer without its question`;
+  if (x.kind === "vocab" && typeof (x.record as { type?: unknown } | undefined)?.type !== "string") return `event ${x.id} is a vocabulary record without its type`;
   if (x.kind === "book_delete" && typeof x.book !== "string") return `event ${x.id} names no book`;
   if (x.kind === "essay") {
     const r = x.record as { type?: unknown } | undefined;
