@@ -138,6 +138,8 @@ export function seenItems(events: readonly LedgerEvent[]): Set<string> {
 /** Items already set aside by a diagnostic request, a journey or a planned check, so no question is used twice. */
 export function reservedItems(events: readonly LedgerEvent[]): Set<string> {
   const r = new Set<string>();
+  for (const { record } of essayRecords(events, "argument_concept_support")) for (const i of record.support.items) r.add(i.id);
+  for (const { record } of essayRecords(events, "argument_probe")) for (const i of [...record.probe.items,...record.probe.guided]) r.add(i.id);
   for (const { record } of essayRecords(events, "diagnostic")) for (const i of record.request.items) r.add(i.id);
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind !== "teach") for (const ref of s.content.refs) r.add(ref);

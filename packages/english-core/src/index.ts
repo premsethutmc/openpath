@@ -36,3 +36,5 @@ export * from "./essay/lessons.ts";
 export * from "./shadow.ts";
 
 export * from './essay/argument.ts';
+
+export * from './essay/argument-plan.ts';

@@ -140,6 +140,8 @@ export function usedItems(events: readonly LedgerEvent[]): Set<string> {
   const used = new Set<string>();
   for (const e of events) if (e.kind === "evidence" || e.kind === "presented" || e.kind === "assisted_response") used.add(e.item.id);
   for (const e of events) if (e.kind === "intervention") for (const i of e.items ?? []) used.add(i);
+  for (const { record } of essayRecords(events, "argument_concept_support")) for (const i of record.support.items) used.add(i.id);
+  for (const { record } of essayRecords(events, "argument_probe")) for (const i of [...record.probe.items,...record.probe.guided]) used.add(i.id);
   for (const { record } of essayRecords(events, "diagnostic")) for (const i of record.request.items) used.add(i.id);
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind !== "teach") for (const ref of s.content.refs) used.add(ref);
@@ -155,6 +157,9 @@ export function assistedItems(events: readonly LedgerEvent[]): Set<string> {
     else if (e.kind === "presented" && (e.purpose === "teaching" || e.purpose === "practice")) out.add(e.item.id);
     else if (e.kind === "intervention") for (const i of e.items ?? []) out.add(i);
   }
+  // Concept support reservations carry the same assistance boundary as existing journey practice.
+  for (const { record } of essayRecords(events, "argument_probe")) for (const i of record.probe.guided) out.add(i.id);
+  for (const { record } of essayRecords(events, "argument_concept_support")) for (const i of record.support.items) out.add(i.id);
   // practice steps of a journey count once planned: their questions are for practice, whether answered yet or not
   for (const { record } of essayRecords(events, "journey"))
     for (const t of record.journey.trees) for (const n of t.nodes) for (const s of n.steps) if (s.kind === "guided_practice") for (const ref of s.content.refs) out.add(ref);

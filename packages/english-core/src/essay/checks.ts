@@ -24,7 +24,7 @@ import { checkPassed, VERIFY_AT_LEVEL_MIN } from "../retention.ts";
 import { PILOT_VERIFICATION } from "../verification.ts";
 import { isIndependentProvenance, type CapabilityId, type EssayEvent, type EvidenceEvent, type LedgerEvent, type SessionObservation } from "../types.ts";
 import { Ledger } from "../updater.ts";
-import { ABOVE_TARGET, pickForRole } from "./allocation.ts";
+import { ABOVE_TARGET, pickForRole, itemEligibility } from "./allocation.ts";
 import { essayRecords, EssayRefusal, type EventMeta } from "./analysis.ts";
 import { engineClaim, essayView, type EssayContext } from "./competencies.ts";
 import { ESSAY_CONTRACT, type CompetencyOutcome, type LearningJourney, type PlannedCheck } from "./contract.ts";
@@ -175,6 +175,7 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
   // a review's check is counted with the review, not against the later checks a journey allows
   const verificationsUsed = checks.filter((c) => c.kind === "verification" && !c.review).length;
   const lastVerification = progress.filter((x) => x.check.kind === "verification").at(-1);
+  const conceptSupportAt = completedConceptSupport(ectx, events, capability, lastVerification, now);
   let next: CompetencyOutcome["next"] = null;
   let pending: string | null = null;
   const fmt = (iso: string) => iso.slice(0, 10);
@@ -194,13 +195,13 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
     else if (journeyCompleted === false) pending = `the journey's steps for ${name} are not finished`;
     else if (verificationsUsed >= p.followUpChecks) pending = `not yet shown at band ${target} without help; the ${p.followUpChecks} later check${p.followUpChecks === 1 ? "" : "s"} this policy allows have been used, so it is recommended for the next essay or a later assessment`;
     // a later check with no right answer at all: another check now would not help; teaching comes first
-    else if (lastVerification?.complete && lastVerification.valid.length > 0 && lastVerification.valid.every((x) => !x.correct))
+    else if (lastVerification?.complete && lastVerification.valid.length > 0 && lastVerification.valid.every((x) => !x.correct) && !conceptSupportAt)
       pending = `not yet shown at band ${target} without help, and the last later check had no right answers: teaching again (a new essay or lesson) is recommended before another check`;
     else if (available < p.checkItems) pending = `not yet shown at band ${target} without help, and the question bank has only ${available} unseen question${available === 1 ? "" : "s"} between band ${target} and ${target + ABOVE_TARGET} (${p.checkItems} needed): more reviewed questions are needed before it can be checked again`;
     else {
       // spaced: from the journey for the first later check, then from the previous check's last answer
       const spacing = p.followUpSpacingDays[Math.min(verificationsUsed, p.followUpSpacingDays.length - 1)] ?? 1;
-      const from = lastVerification?.completedAt ?? (journey?.at && journey.at > lastActivity(events) ? journey.at : lastActivity(events));
+      const from = later(lastVerification?.completedAt ?? null, conceptSupportAt) ?? ((journey?.at && journey.at > lastActivity(events) ? journey.at : lastActivity(events)) || now);
       const notBefore = addDays(from, spacing);
       next = { kind: "verification", notBefore, itemsAvailable: available, planned: null };
       pending = `not yet shown at band ${target} without help: a later check, in a new sitting, is recommended from ${fmt(notBefore)}`;
@@ -233,6 +234,34 @@ export function competencyOutcome(ectx: EssayContext, events: readonly LedgerEve
     if (eligible < VERIFY_AT_LEVEL_MIN) pending = `${pending ?? ""} Its questions are not ${eligible ? "all " : ""}reviewed by an educator and released, so under the pilot policy this check records retention but cannot verify mastery.`.trim();
   }
   return { competency: capability, target, journeyCompleted, demonstrated, verified, currentLevel: claim.currentLevel, targetShownAt: shownAt, retention, retentionDueAt: dueAt, pending, next, ...(review ? { review } : {}) };
+}
+
+/** Only an exact, completed concept remediation can reopen an all-wrong concept check.
+ * No estimates change here, and the existing follow-up cap, freshness and spacing still apply.
+ */
+function completedConceptSupport(ectx:EssayContext,events:readonly LedgerEvent[],capability:CapabilityId,failed:CheckProgress|undefined,now:string):string|null {
+ if(!ectx.profile.profile.id.startsWith('argument-concepts-')||!failed?.complete||!failed.completedAt||failed.check.kind!=='verification'||!failed.valid.length||!failed.valid.every(a=>!a.correct))return null;
+ const record=essayRecords(events,'argument_concept_support').filter(r=>r.record.support.afterCheck===failed.check.id).at(-1);
+ if(!record)return null;
+ const support=record.record.support,position=events.findIndex(e=>e.id===record.event.id);
+ const probe=essayRecords(events,'argument_probe').find(r=>r.record.probe.id===support.probeId)?.record.probe;
+ if(!probe||probe.scope!=='concept_only'||probe.capability!==capability||support.at!==record.event.at||support.at<failed.completedAt||support.at>now||support.items.length<2||new Set(support.items.map(i=>i.id)).size!==support.items.length)return null;
+ const lessons=ectx.lessons.get(capability)??[];if(!lessons.length)return null;
+ const after=events.slice(position+1).filter(e=>e.at>=support.at&&e.at<=now);
+ let completed=support.at;let lastLessonPosition=-1;
+ for(const lesson of lessons){
+  const index=after.reduce((found,e,i)=>e.kind==='intervention'&&e.capability===capability&&e.strategy==='lesson'&&e.content===lesson?i:found,-1);
+  if(index<0)return null;const event=after[index];lastLessonPosition=Math.max(lastLessonPosition,index);completed=later(completed,event.at)!;
+ }
+ const lessonCompletedAt=completed;
+ const eligibility=itemEligibility(ectx,capability);
+ for(const ref of support.items){
+  const item=ectx.ctx.content.items.get(ref.id);
+  if(!item||item.kind!=='code'||item.target!==capability||item.version!==ref.version||!eligibility.find(i=>i.item===ref.id)?.roles.includes('guided_practice'))return null;
+  const response=after.slice(lastLessonPosition+1).find(e=>e.kind==='assisted_response'&&e.item.id===ref.id&&e.item.version===ref.version&&e.at>=lessonCompletedAt);
+  if(!response)return null;completed=later(completed,response.at)!;
+ }
+ return completed;
 }
 
 function lastActivity(events: readonly LedgerEvent[]): string {
