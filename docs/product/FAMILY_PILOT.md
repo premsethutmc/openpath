@@ -332,6 +332,6 @@ entry. 42 of the 62 Class 5 skills so far. No pictures yet.
 photo as a matrix, dosa, fence, tiles, ball, 3-4-5 corner, temple tower), and entries for the other classes: 99 skills of
 345 in all, including matrices, determinants, derivatives, integrals, trigonometry, logarithms and probability.
 
-`scribble@1` (`ScribblePad.tsx`): scratch paper under a question. The child draws or writes with a finger; nothing is
+`scribble@1`, `scribble@2` (`ScribblePad.tsx`): scratch paper under a question, drawn on with a finger or typed on; nothing is
 read, marked, saved or sent (checked working is typed). Not help, so it is there in tests too. Undo, Clear, Hide; the
 strokes last for the question.

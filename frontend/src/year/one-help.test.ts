@@ -25,4 +25,5 @@ test("scribble@1: the pad is scratch paper: nothing is read, saved or sent, and 
   assert.ok(!/fetch\(|localStorage|setValue|setWorking|onUsed|setHint/.test(pad), "the pad talks to nothing");
   assert.match(pad, /touch-action|onPointerDown=\{down\}/);
   assert.match(learn, /\{KID && workable && <ScribblePad key=\{qid\} \/>\}/);
+  assert.match(pad, /<textarea className="scribble-notes"/, "scribble@2: the pad can be typed on");
 });
