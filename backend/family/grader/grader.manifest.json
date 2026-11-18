@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "2571cc29ea0e020b3b0f1e1f84b10894e8263bbdb2207ba61a04495f1abc01f1",
+ "sha256": "cebc478f2e2b6bdf1c7b1dc26f2bfe266ec3d3cabf3f5ba30617bf5fb5df3c7c",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -116,7 +116,7 @@
   "content/learning/grading-certifications.v1.json": "79e4144eb331173f070c9fa09826a7414856523dbd8ffdb09e78c6b629cd08a7",
   "content/learning/graph-audit.v1.json": "ffd060491b7bf9895351c27e254ebd88b2eba04ab695eae8a21ab0ec31d69c30",
   "content/learning/library.v1.json": "679e82c23481486247c20d7f2cec8d5c9ddc626e8730f1f21f668694433389c0",
-  "content/learning/machine-validation.v1.json": "a570326c09bd7d43fa630f7968886f755e82208d984e7f457e97cdea2df3ed39",
+  "content/learning/machine-validation.v1.json": "8b58603cf8289da944869912ef2aba9c84ffb5309cf34547474014cf54420ed4",
   "content/learning/mapping-exemplars.v1.json": "2e321587d70fccd32e395f21cf24d4ac4bbfbe52abc7d631b6acecc07dab8f61",
   "content/learning/method-alignment.v1.json": "e3b54d558be674f818bbe4fc9c73049a0f44d4f151711cd56f694a60bc3d4d4b",
   "content/learning/modules.v1.json": "664c61dc66700e8e5d40023ac78ed89afaedf4ac9ceaf78bbeecd1c878e9db04",
