@@ -7,7 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
-import { workedWays } from "./worked-out";
+import { SOLE_WAYS, workedWays } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -109,7 +109,7 @@ export function helpMethods(qid: string): string[] {
   if (!ways) return ["Step by step"];
   // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
   // the type's own steps for unlike fractions and for decimals are the same method, only shorter: not a second way
-  if (ways.length === 1 && (ways[0].name === "Same bottom (LCM)" || p.family === "agdec")) return [ways[0].name];
+  if (ways.length === 1 && (SOLE_WAYS.includes(ways[0].name) || p.family === "agdec")) return [ways[0].name];
   return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
 }
 const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };

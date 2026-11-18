@@ -258,3 +258,24 @@ test("decimals in columns: the points are lined up in one column and the bottom 
   console.log(n, "decimal layouts,", filled, "with zeros filled in");
   assert.ok(n > 350 && filled > 100, `${n} ${filled}`);
 });
+
+test("mixed numbers, improper fractions and percentages: the written working ends on the answer and every line is true", () => {
+  const seen: Record<string, number> = {};
+  for (const f of ["agmix", "agimp", "pct"]) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const h = stepsHelp(item.id)!, q = question(item.id), ways = helpMethods(item.id);
+    assert.equal(ways.length, 1, item.id);
+    assert.ok(["Divide", "Whole × bottom + top", "Out of 100"].includes(ways[0]), `${item.id}: ${ways[0]}`);
+    seen[ways[0]] = (seen[ways[0]] ?? 0) + 1;
+    assert.equal(h.at(-1)!.board!.at(-1)!.replace(/^.*= /, ""), q.answer.replace(/,/g, ""), item.id);
+    for (const s of h) {
+      for (const c of s.shown.matchAll(/(\d+) × (\d+) = (\d+)/g)) assert.equal(Number(c[1]) * Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+      for (const c of s.shown.matchAll(/(\d+) \+ (\d+) = (\d+)/g)) assert.equal(Number(c[1]) + Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+      for (const c of s.shown.matchAll(/(\d+) − (\d+) = (\d+)/g)) assert.equal(Number(c[1]) - Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+      for (const c of s.shown.matchAll(/(\d+) ÷ 100 = ([\d.]+)/g)) assert.ok(Math.abs(Number(c[1]) / 100 - Number(c[2])) < 1e-9, `${item.id}: ${c[0]}`);
+    }
+    assert.ok(!h.slice(0, -1).some((s) => new RegExp(`(^|[^\\d/.])${q.answer}$`).test(s.shown) && q.answer.length > 3), `${item.id}: the answer is not said before the end`);
+  }
+  console.log(JSON.stringify(seen));
+  assert.ok(seen.Divide > 200 && seen["Whole × bottom + top"] > 200 && seen["Out of 100"] > 300, JSON.stringify(seen));
+});

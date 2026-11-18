@@ -317,6 +317,47 @@ function decimals(prompt: string | undefined, answer: string): Worked[] | null {
   return out;
 }
 
+/** Improper fraction ↔ mixed number, and a percentage of an amount: each in the way it is written at school. */
+function fractionForms(prompt: string | undefined, answer: string): { name: string; steps: Worked[] } | null {
+  const text = prompt?.trim() ?? "", want = answer.replace(/\s+/g, " ").trim();
+  let m = /^Write (\d+)\/(\d+) as a mixed number/.exec(text);
+  if (m) {
+    const n = Number(m[1]), d = Number(m[2]), w = Math.floor(n / d), r = n - w * d, g = gcd2(r, d);
+    if (d < 2 || w < 1 || r < 1) return null;
+    const plain = `${w} ${r}/${d}`, simple = `${w} ${r / g}/${d / g}`;
+    if (want !== simple) return null;
+    const steps: Worked[] = [
+      { next: `First: ${d} pieces make one whole. How many ${d}s fit in ${n}?`, shown: `${d} × ${w} = ${w * d}, and ${d} × ${w + 1} = ${(w + 1) * d} is too many: ${w} whole ones.`, board: [`${n} ÷ ${d} = ${w} remainder ?`] },
+      { next: "How many pieces are left over?", shown: `${n} − ${w * d} = ${r}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`] },
+      { next: `${g > 1 ? "Write" : "Last: write"} the whole ones, then the left-over pieces over the same bottom.`, shown: `${n}/${d} = ${plain}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`, `${n}/${d} = ${plain}`] },
+    ];
+    if (g > 1) steps.push({ next: `Last: can ${r}/${d} be made simpler?`, shown: `Divide top and bottom by ${g}: ${simple}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`, `${n}/${d} = ${plain}`, `= ${simple}`] });
+    return { name: "Divide", steps };
+  }
+  m = /^Write the mixed number (\d+) (\d+)\/(\d+) as an improper fraction/.exec(text);
+  if (m) {
+    const w = Number(m[1]), n = Number(m[2]), d = Number(m[3]), top = w * d + n;
+    if (want !== `${top}/${d}`) return null;
+    return { name: "Whole × bottom + top", steps: [
+      { next: `First: each whole is ${d} pieces. How many pieces are in ${w} whole${w === 1 ? "" : "s"}?`, shown: `${w} × ${d} = ${w * d}`, board: [`${w} ${n}/${d} = (${w} × ${d} + ${n})/${d}`] },
+      { next: `Add the ${n} piece${n === 1 ? "" : "s"} from the fraction.`, shown: `${w * d} + ${n} = ${top}`, board: [`${w} ${n}/${d} = (${w} × ${d} + ${n})/${d}`, `= (${w * d} + ${n})/${d}`] },
+      { next: "Last: write the pieces over the same bottom.", shown: `${w} ${n}/${d} = ${top}/${d}`, board: [`${w} ${n}/${d} = (${w} × ${d} + ${n})/${d}`, `= (${w * d} + ${n})/${d}`, `= ${top}/${d}`] },
+    ] };
+  }
+  m = /^What is (\d+)% of (\d+)\?$/.exec(text);
+  if (m) {
+    const pc = Number(m[1]), amount = Number(m[2]), product = pc * amount, value = product / 100;
+    if (Math.abs(value - Number(answer.replace(/,/g, ""))) > 1e-9) return null;
+    const head = `${pc}% of ${amount}`;
+    return { name: "Out of 100", steps: [
+      { next: `First: per cent means "out of 100". Write ${pc}% as a fraction.`, shown: `${pc}% = ${pc}/100`, board: [head, `= ${pc}/100 × ${amount}`] },
+      { next: `"Of" means multiply. Multiply the top by ${amount}.`, shown: `${pc} × ${amount} = ${product}`, board: [head, `= ${pc}/100 × ${amount}`, `= ${product}/100`] },
+      { next: "Last: divide by 100.", shown: `${product} ÷ 100 = ${value}`, board: [head, `= ${pc}/100 × ${amount}`, `= ${product}/100`, `= ${value}`] },
+    ] };
+  }
+  return null;
+}
+
 /**
  * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
  * must end on the verified answer or it is not offered.
@@ -391,6 +432,8 @@ export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** methods@1: the school method's name for a type that has one written here (the first tab of its step help). */
 const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division" };
 /** methods@2: every way written for a question, the taught one first, each with its name; null when none is written. */
+/** Ways whose type's own steps are the same method in a shorter form: no second tab is offered beside them. */
+export const SOLE_WAYS: readonly string[] = ["Same bottom (LCM)", "Divide", "Whole × bottom + top", "Out of 100"];
 export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
   try {
     if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
@@ -399,6 +442,8 @@ export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
     if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }
     const mu = multiply(q.prompt, q.answer);
     if (mu && mu.length >= 2) return [{ name: "In columns", steps: mu }];
+    const ff = fractionForms(q.prompt, q.answer);
+    if (ff) return [ff];
     const de = decimals(q.prompt, q.answer);
     if (de) return [{ name: "In columns", steps: de }];
     const fr = unlikeFractions(q.prompt, q.answer);

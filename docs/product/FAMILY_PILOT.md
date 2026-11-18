@@ -428,3 +428,6 @@ first), and the rows are added. 193 full layouts and 227 tens-row questions, eac
 Unlike fractions (`unlikeFractions`): improper first, both renamed over the LCM, tops added, made simple, written as a
 chain of equal lines; 1,290 questions proved. Decimals (`decimals`): points lined up, zeros filled, columns worked as for
 whole numbers with the point kept in its column; 500 questions proved.
+`fractionForms`: improper → mixed by dividing, mixed → improper by whole × bottom + top, and a percentage of an amount as
+a fraction out of 100; 938 questions proved. These and unlike fractions show one tab (`SOLE_WAYS`): the type's own steps
+were the same method, shorter.
