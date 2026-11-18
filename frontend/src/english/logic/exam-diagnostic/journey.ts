@@ -2,6 +2,7 @@ import type {EssayGatewayInfo} from '../../../../../packages/english-core/src/es
 import {analyseSyntheticWriting, EXAM_WRITING_RUBRIC, type SyntheticWritingPost, type ModelWritingObservation} from './model.ts';
 import {initialSession,answer,submitWriting,revise,words,type Session} from './session.ts';
 import {planWritingChecks,verifyWritingSkill,JOURNEY_WRITING_CHECKS,WRITING_LESSONS,type WritingCheck,type WritingSkill} from './verification.ts';
+import {GuidedTeaching} from './guided-teaching.ts';
 import {reassessmentFor} from './reassessment.ts';
 
 export type JourneyPhase='reading'|'writing'|'analysing'|'checks'|'teaching'|'reassessment'|'complete'|'error';
@@ -28,6 +29,7 @@ export const simulatedPost:SyntheticWritingPost=async body=>{
 /** One in-memory synthetic sitting. Model responses select checks; only fixed answer keys score them. */
 export class ExamJourney {
  private generation=0;
+ private guided=new Map<WritingSkill,GuidedTeaching>();
  private priorSeen:string[]=[];
  private state:JourneyState;
  private info:EssayGatewayInfo;
@@ -47,6 +49,7 @@ export class ExamJourney {
   if(!syntheticConfirmed)throw Error('Confirm this is invented test writing, not a real learner sample.');
   if(this.state.mode==='simulated'&&text!==EXAMPLE_WRITING)throw Error('Simulated mode only supports the fixed invented sample.');
   const session=submitWriting({...this.state.session,phase:'writing',writing:'',revision:''},text);
+  this.guided.clear();
   const generation=++this.generation; this.priorSeen=[...this.state.seen];
   this.state={...this.state,session,phase:'analysing',error:'',observations:[],notObservable:[],checks:[],results:[],lessons:[],taught:[],fresh:[],answers:{},freshAnswers:{}};
   try{
@@ -68,10 +71,20 @@ export class ExamJourney {
   const results=skills.map(skill=>verifyWritingSkill(skill,this.state.answers,this.priorSeen,JOURNEY_WRITING_CHECKS));
   // Mixed evidence warrants practice too, but is explicitly inconclusive, never a confirmed gap.
   const lessons=results.filter(r=>r.outcome!=='no_gap_shown').map(r=>r.skill);
+  for(const skill of lessons)this.guided.set(skill,new GuidedTeaching(skill));
   this.state={...this.state,results,lessons,phase:lessons.length?'teaching':'complete'};
  }
  lesson(skill:WritingSkill){return this.state.lessons.includes(skill)?WRITING_LESSONS[skill]:null;}
- markTaught(skill:WritingSkill){if(this.state.phase==='teaching'&&this.state.lessons.includes(skill)&&!this.state.taught.includes(skill))this.state={...this.state,taught:[...this.state.taught,skill]};}
+ teachingSnapshot(skill:WritingSkill){return this.guided.get(skill)?.snapshot()??null;}
+ guidedAction(skill:WritingSkill,action:'start'|'hint'|'answer'|'retry'|'reveal'|'complete',index?:number){
+  if(this.state.phase!=='teaching')return;
+  const lesson=this.guided.get(skill);if(!lesson)return;
+  if(action==='start')lesson.startPractice();else if(action==='hint')lesson.showHint();
+  else if(action==='answer'&&index!==undefined)lesson.answer(index);else if(action==='retry')lesson.retry();
+  else if(action==='reveal')lesson.revealAnswer();else if(action==='complete')lesson.complete();
+  if(lesson.snapshot().phase==='complete')this.markTaught(skill);
+ }
+ markTaught(skill:WritingSkill){if(this.state.phase==='teaching'&&this.guided.get(skill)?.snapshot().phase==='complete'&&!this.state.taught.includes(skill))this.state={...this.state,taught:[...this.state.taught,skill]};}
  startReassessment(){
   if(this.state.phase!=='teaching'||!this.state.lessons.every(s=>this.state.taught.includes(s)))return;
   const fresh=reassessmentFor(this.state.lessons,this.state.seen);
