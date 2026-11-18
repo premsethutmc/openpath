@@ -465,3 +465,10 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .kid-prep .step-entry label, .kid-prep-then { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 1.2rem; font-weight: 700; }
 .kid-prep input { width: 6.5rem; min-height: 48px; padding: 8px 12px; font: inherit; font-size: 1.2rem; border-radius: 12px; border: 2px solid var(--line, #c9d3e0); background: var(--card, #fff); color: inherit; }
 .kid-prep [data-prep="right"] input { border-color: var(--ok, #2e9e6b); }
+
+/* where-used@1: an optional door under a lesson */
+.where-used-open { align-self: center; min-height: 44px; }
+.where-used { display: grid; gap: 8px; padding: 14px 16px; border-radius: 16px; background: var(--brand-soft, #f1eeff); }
+.where-used h3 { margin: 0; }
+.where-used p { margin: 0; }
+.where-used-q { font-weight: 700; margin-top: 4px; }
