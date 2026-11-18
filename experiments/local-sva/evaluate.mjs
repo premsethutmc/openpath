@@ -1,0 +1,11 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {inspect} from './rules.mjs';
+const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
+const rules=fs.readFileSync(new URL('rules.mjs',import.meta.url),'utf8'),source=fs.readFileSync(new URL('heldout.json',import.meta.url),'utf8');
+assert.equal(hash(rules),'576391140fd53016cd859fd63a2a6b6b8f4587cf8f982bf2d7db6a34ec27b919');
+assert.equal(hash(source),'042f28f184b930e8c015665ed7ac3a589e59012c7c8baf3e0b29666696f6e5f7');
+const counts={detected:0,missed:0,falseAlerts:0,correctAbstentions:0};
+const cases=JSON.parse(source).map(c=>{const output=inspect(c.text),hit=output.findings.length>0;counts[c.expected==='finding'?(hit?'detected':'missed'):(hit?'falseAlerts':'correctAbstentions')]++;return {...c,output};});
+const suite=JSON.parse(fs.readFileSync(new URL('../../content/english/essay/benchmark/workspace-writing-acceptance-v2.json',import.meta.url)));
+const originalSuite=suite.cases.map(c=>({id:c.id,status:inspect(c.text).status}));
+const report={status:'rejected for integration: insufficient natural-writing coverage',ruleSha256:hash(rules),heldoutSha256:hash(source),counts,limitations:'Independent AI-authored synthetic cases frozen before implementation inspection; not calibrated accuracy or proof of zero false positives. No tuning after held-out exposure.',originalSuite,cases};
+fs.writeFileSync(new URL('results.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(counts);console.log('Original suite candidates:',originalSuite.filter(c=>c.status==='candidate_findings').length);
