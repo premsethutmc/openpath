@@ -313,3 +313,9 @@ by rule. Three cards so far.
 inside the working) opens the working with the next step asked there, a box to fill; a step the child cannot do is
 shown by "Help: show me this step", and the next one loads. The child's own free lines are for working alone and are
 not help; asking for a step is recorded as help, as before. Questions with no working panel keep the old button.
+
+`prep@1` (`packages/learning/src/prep.ts`): "before you answer". The one thing a group's documented mistake skips is
+asked in its own boxes before the answer box appears: an estimate rounds each number first ("12 is about ▢"); a length,
+time or money amount in two units changes the bigger unit first ("1 m = ▢ cm", "So 8 m = ▢ cm"). A wrong entry gets a
+question, a second one the fact. Read from the question's words by rule, kept only when the prep's arithmetic gives the
+verified answer, never holding the answer. An aid: it fades to the plain box and is never in a test. 13 types so far.

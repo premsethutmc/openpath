@@ -10,6 +10,7 @@
  *  3. A picture only where the maths is visual, and the sentence never does the picture's work.
  *  4. A calculation stays a calculation: no story is added.
  */
+import { prepOf, type PrepAsk } from "./prep";
 import type { Visual } from "./family-kit";
 
 export type Ask =
@@ -39,7 +40,7 @@ export interface KidQ {
   note?: string;
   /** support-ladder@1: pictures that only help (the question is whole without them), most help first; `figure` is the
    *  first. They fade as the child gets such questions right. A picture that is the question's data is never an aid. */
-  aids?: { name: string; figure?: Visual; ask?: PlacesAsk }[];
+  aids?: { name: string; figure?: Visual; ask?: PlacesAsk | PrepAsk }[];
 }
 interface Q {
   id: string;
@@ -451,7 +452,9 @@ export function kidQuestion(q: Q): KidQ {
   const aids = o?.aids ? o.aids : base.aids && fig === base.figure ? base.aids : undefined;
   // places@1: with no picture aid of its own, a number asked for in figures is first written into its seats
   const seats = !aids && !fig && ask.kind === "box" && form(q.id) !== "mc" && typeof (q as { answer?: unknown }).answer === "string" ? placesAsk(q.prompt, q.type, (q as { answer?: string }).answer!) : null;
-  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(aids ? { aids } : seats ? { aids: [{ name: "place-value chart", ask: seats }] } : {}) };
+  // prep@1: the one thing the documented mistake skips (round first; change the bigger unit first), asked before the answer
+  const prep = !aids && !seats && ask.kind === "box" && !ask.before && !ask.after && form(q.id) !== "mc" && typeof (q as { answer?: unknown }).answer === "string" ? prepOf(q.prompt, q.type, (q as { answer?: string }).answer!) : null;
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(aids ? { aids } : seats ? { aids: [{ name: "place-value chart", ask: seats }] } : prep ? { aids: [{ name: "first steps", ask: prep, ...(fig ? { figure: fig } : {}) }] } : {}) };
 }
 
 /** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a
@@ -491,10 +494,12 @@ export function placesAsk(prompt: string, type: string, answer: string): PlacesA
   for (let left = answer.length, i = 0; left > 0 && i < 4; i++) { const w = Math.min(widths[i], left); seats.unshift({ label: names[i], width: w }); left -= w; }
   return seats.length >= 2 && seats.reduce((n, x) => n + x.width, 0) === answer.length ? { kind: "places", seats } : null;
 }
-export function compose(ask: Ask | PlacesAsk, parts: string[], answer?: string, type?: string): string {
+export function compose(ask: Ask | PlacesAsk | PrepAsk, parts: string[], answer?: string, type?: string): string {
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "tap" || ask.kind === "turn") return parts[0] ?? "";
+  // prep@1: only the last box is the answer; the boxes before it were the help
+  if (ask.kind === "prep") { const v = (parts[parts.length - 1] ?? "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "places") return parts.map((x) => x.trim()).join("").replace(/^0+(?=\d)/, "");
   // an empty rupees box is no rupees; paise keep what was typed ("140" stays 140, so the slip is seen, not hidden)
   if (ask.kind === "money") return `${(parts[0] ?? "").trim() || "0"}.${(parts[1] ?? "").trim().padStart(2, "0")}`;

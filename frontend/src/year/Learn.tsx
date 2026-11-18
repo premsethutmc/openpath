@@ -39,6 +39,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { guessOf, problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
+import { prepRight, type PrepAsk } from "../../../packages/learning/src/prep";
 import { compose, kidQuestion, type Ask as KidAsk, type PlacesAsk } from "../../../packages/learning/src/kid-say";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
 import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
@@ -320,7 +321,7 @@ const still = <T extends { type?: string }>(v: T, test: boolean): T => (test && 
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
-export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk | PlacesAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk | PlacesAsk | PrepAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
   const [parts, setParts] = useState<string[]>([]);
   const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
   if (ask.kind === "tap")
@@ -407,6 +408,34 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
         ))}
       </div>
     );
+  if (ask.kind === "prep") {
+    // prep@1: the steps before the answer are checked as they are typed; the answer box comes when they are done
+    const n = ask.steps.length, ok = (i: number) => prepRight(ask.steps[i], parts[i] ?? ""), all = ask.steps.every((_, i) => ok(i));
+    const tries = (i: number) => Number(parts[n + 1 + i] ?? "0");
+    const setPart = (i: number, v: string) => { const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === i ? v : parts[j] ?? "")); put(next, false); };
+    const judge = (i: number) => { if (!(parts[i] ?? "").trim() || ok(i)) return; const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === n + 1 + i ? String(tries(i) + 1) : parts[j] ?? "")); put(next, false); };
+    return (
+      <div className="kid-prep" data-testid="kid-prep">
+        {ask.steps.map((st, i) => (
+          <div key={st.lead} className="step-entry" data-prep={ok(i) ? "right" : tries(i) ? "wrong" : "asked"}>
+            <label>
+              <span>{st.lead}</span>
+              <input aria-label={`First: ${st.lead}`} inputMode="decimal" autoComplete="off" value={parts[i] ?? ""} disabled={disabled || ok(i)} onChange={(e) => setPart(i, e.target.value)} onBlur={() => judge(i)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); judge(i); } }} />
+              {st.after && <span className="step-unit">{st.after}</span>}
+              {ok(i) && <span className="ws-mark ok" role="status">Yes.</span>}
+            </label>
+            {!ok(i) && tries(i) > 0 && <p className="kid-note" role="status">{tries(i) > 1 ? st.tell : st.why}</p>}
+          </div>
+        ))}
+        {all && (
+          <label className="kid-prep-then">
+            <span>{ask.then}</span>
+            <input aria-label="Your answer" inputMode="decimal" autoComplete="off" value={parts[n] ?? ""} disabled={disabled} onChange={(e) => { const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === n ? e.target.value : parts[j] ?? "")); setParts(next); setValue(e.target.value.trim() ? compose(ask, [e.target.value], answer, type) : ""); }} />
+          </label>
+        )}
+      </div>
+    );
+  }
   if (ask.kind === "places") {
     // places@1: every seat needs its digit before the number can be checked, so an empty place has to be given its zero
     const full = (n: string[]) => ask.seats.every((x, j) => (n[j] ?? "").length === x.width || (j === 0 && (n[j] ?? "").length >= 1 && (n[j] ?? "").length <= x.width));
