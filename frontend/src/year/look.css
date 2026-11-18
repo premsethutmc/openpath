@@ -3,14 +3,19 @@
    never what a screen says or does. (Screens that are simplified for a child also use the kid-* classes below.) */
 
 :root {
-  --brand: #6a55f0;
-  --brand-deep: #4a36c9;
-  --brand-soft: #f1eeff;
-  --brand-text: #5545c4;
+  /* blue-orange@1 (owner's choice, 18 Nov 2026): blue is the action colour, orange the warm accent (Chintu, the helper), on
+     a cream page. Green stays "right" and the terracotta red "not yet". */
+  --brand: #2563eb;
+  --accent: #f59e0b;
+  --accent-soft: #fff1d6;
+  --accent-ink: #7a4a00;
+  --brand-deep: #1d4ed8;
+  --brand-soft: #eaf1ff;
+  --brand-text: #1e40af;
   --ink: #203047;
   --muted: #5f6b84;
-  --line: #e6e6f2;
-  --bg: #f8f9ff;
+  --line: #e9e1d2;
+  --bg: #fff7ea;
   --card: #ffffff;
   --good: #0f7a5d;
   --good-soft: #e9faf4;
@@ -20,24 +25,27 @@
   --bad-ink: #8f4524;
   --warn-soft: #fff1e0;
   --radius: 22px;
-  --shadow-card: 0 6px 20px -12px rgba(40, 30, 110, 0.35);
-  --bg-a: #f5eaff;
-  --bg-b: #dff8f2;
+  --shadow-card: 0 6px 20px -12px rgba(30, 50, 110, 0.3);
+  --bg-a: #ffe9c2;
+  --bg-b: #dfeaff;
   color-scheme: light dark;
   font-family: ui-rounded, "SF Pro Rounded", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
   font-size: 17px;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --brand: #8c7bff;
-    --brand-deep: #5a4bc4;
-    --brand-soft: #2a2852;
-    --brand-text: #c2b8ff;
+    --brand: #3574e6;
+    --accent: #f5a524;
+    --accent-soft: #3a2a10;
+    --accent-ink: #ffd89a;
+    --brand-deep: #2452b8;
+    --brand-soft: #1c2a4e;
+    --brand-text: #b9d0ff;
     --ink: #eceefe;
     --muted: #b2b8d4;
-    --line: #2d2f55;
-    --bg: #12142a;
-    --card: #1b1d36;
+    --line: #2b3654;
+    --bg: #0f172a;
+    --card: #172238;
     --good: #6fd9b3;
     --good-soft: #163a31;
     --good-ink: #9be8cc;
@@ -46,12 +54,12 @@
     --bad-ink: #ffc3a8;
     --warn-soft: #3d2c19;
     --shadow-card: none;
-    --bg-a: #231b44;
-    --bg-b: #10291f;
+    --bg-a: #2a2010;
+    --bg-b: #10203f;
     --verified-soft: #163a31;
     --shown-soft: #1c2a4a;
     --active-soft: #3d2c19;
-    --idle-soft: #24264a;
+    --idle-soft: #212c48;
   }
 }
 
@@ -177,14 +185,14 @@ details.working summary, .hint { color: var(--ink); }
   body:has(.year-paper) { background: #fbfaf6; }
   .year-paper {
     color-scheme: light;
-    --brand: #6954c8; --brand-deep: #4a36c9; --brand-soft: #f1eeff; --brand-text: #5545c4;
+    --brand: #2563eb; --brand-deep: #1d4ed8; --brand-soft: #eaf1ff; --brand-text: #1e40af; --accent: #f59e0b; --accent-soft: #fff1d6; --accent-ink: #7a4a00;
     --ink: #1d2130; --muted: #5f6b84; --line: #e6e2db; --bg: #fbfaf6; --card: #ffffff;
     --good: #0f7a5d; --good-soft: #e9faf4; --good-ink: #126c55; --bad: #b4532a; --bad-soft: #fff0e9; --bad-ink: #8f4524;
     --warn-soft: #fff1e0; --verified-soft: #e3f6ec; --shown-soft: #e6effd; --active-soft: #fff1e0; --idle-soft: #f0f2f7;
     color: var(--ink);
   }
   body:has(.year-paper) .topbar { background: rgba(251, 250, 246, 0.92); color: #1d2130; }
-  body:has(.year-paper) .topbar .link { color: #5545c4; }
+  body:has(.year-paper) .topbar .link { color: #1e40af; }
 }
 /* teach-first@1 */
 .kid-new { margin: 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft); color: var(--brand-text); font-weight: 800; }
@@ -197,7 +205,7 @@ details.working summary, .hint { color: var(--ink); }
 .kid-note { margin: -4px 0 4px; color: var(--muted); font-size: 0.95rem; }
 .kid-taps { display: flex; flex-wrap: wrap; gap: 10px; }
 .kid-tap { min-width: 64px; padding: 14px 18px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.25rem; font-weight: 800; cursor: pointer; }
-.kid-tap.picked, .kid-tap.placed { border-color: var(--brand, #6a55f0); background: var(--brand-soft); color: var(--brand-text); }
+.kid-tap.picked, .kid-tap.placed { border-color: var(--brand, #2563eb); background: var(--brand-soft); color: var(--brand-text); }
 .kid-taps .kid-tap { flex: 1 1 0; }
 .kid-order { display: grid; gap: 12px; }
 .kid-slots { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
@@ -240,8 +248,8 @@ details.working summary, .hint { color: var(--ink); }
 .ws-line input { font-size: 1.15rem; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink); min-width: 0; }
 .ws-mark { grid-column: 2; font-size: 0.95rem; font-weight: 700; }
 .ws-mark.ok { color: #1f8a4c; }
-.ws-help { grid-column: 2; display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; border: 2px dashed var(--brand, #6a55f0); font-weight: 700; }
-.ws-q { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--brand, #6a55f0); color: #fff; }
+.ws-help { grid-column: 2; display: grid; gap: 6px; padding: 10px 12px; border-radius: 12px; border: 2px dashed var(--brand, #2563eb); font-weight: 700; }
+.ws-q { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--brand, #2563eb); color: #fff; }
 .ws-ask { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 1.15rem; }
 .ws-ask input { width: 5.5em; font-size: 1.15rem; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: inherit; }
 .ws-mark.bad { color: #b4441b; }

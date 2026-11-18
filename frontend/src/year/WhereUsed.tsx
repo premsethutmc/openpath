@@ -6,7 +6,7 @@ import { useFor, type UseArt } from "../../../packages/learning/src/uses";
 /** where-used@2: our own drawings (no photographs). Plain shapes in the page's ink, so they work in light and dark. */
 function Art({ art }: { art: UseArt }) {
   const ink = { fill: "none", stroke: "currentColor", strokeWidth: 3, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  const soft = { fill: "var(--brand, #7c6cf5)", opacity: 0.35 };
+  const soft = { fill: "var(--brand, #2563eb)", opacity: 0.35 };
   const label = { fill: "currentColor", fontSize: 16, fontWeight: 700, textAnchor: "middle" as const };
   const body =
     art === "tower" ? <>
@@ -23,7 +23,7 @@ function Art({ art }: { art: UseArt }) {
       <rect x="60" y="35" width="200" height="110" {...ink} strokeDasharray="2 12" strokeWidth={7} /><rect x="60" y="35" width="200" height="110" {...soft} />
       <text x="160" y="26" {...label}>5 m</text><text x="286" y="96" {...label}>3 m</text>
     </> : art === "tiles" ? <>
-      {[0, 1, 2].flatMap((r) => [0, 1, 2, 3].map((c) => <rect key={`${r}${c}`} x={80 + c * 40} y={25 + r * 40} width="40" height="40" {...ink} strokeWidth={2} fill={(r + c) % 2 ? "var(--brand, #7c6cf5)" : "none"} fillOpacity={0.3} />))}
+      {[0, 1, 2].flatMap((r) => [0, 1, 2, 3].map((c) => <rect key={`${r}${c}`} x={80 + c * 40} y={25 + r * 40} width="40" height="40" {...ink} strokeWidth={2} fill={(r + c) % 2 ? "var(--brand, #2563eb)" : "none"} fillOpacity={0.3} />))}
     </> : art === "ball" ? <>
       <line x1="20" y1="150" x2="300" y2="150" {...ink} /><path d="M40 150 Q160 -70 280 150" {...ink} strokeDasharray="4 8" /><circle cx="160" cy="42" r="9" fill="currentColor" />
     </> : art === "triangle345" ? <>

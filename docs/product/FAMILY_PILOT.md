@@ -368,3 +368,7 @@ nothing shows. To add one: host the reviewed mp4 or webm on https, then add the 
 questions of Classes 1 to 5 (`classOfQuestion`: the question's own class, else the first class any board teaches its
 skill). "Hear it" reads his words with the phone's own voice where it has one; nothing is recorded, downloaded or sent.
 He speaks only when help is asked for. Not yet beside nudges, lessons or "Where is this used?".
+
+`blue-orange@1` (owner's choice, 18 Nov 2026): the child's app is blue (actions) and orange (the warm accent: Chintu's
+bubble) on a cream page, in place of purple; dark mode is navy with the same two colours. Green stays "right" and the
+terracotta red "not yet". Colours are the variables at the top of `look.css` (`--brand*`, `--accent*`, `--bg`).
