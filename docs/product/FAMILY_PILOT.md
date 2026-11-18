@@ -393,3 +393,8 @@ learner to the earlier lesson itself.
 `worked-out@1`, long division (`avdiv`): the type's own steps stated the quotient at once and then checked it by
 multiplying. The step help is now the method: from the left, how many fit in this digit, what is left over, bring the
 next digit down, and the answer is read off the top at the end. 500 questions.
+
+`help-audit@1` (`frontend/src/year/help-audit.test.ts`): every question type's step help is checked by machine on each
+change, with a ceiling on each fault count so it can only go down. First reading, of 941 types: the answer is in the
+first line of help in 28, said in a "what to do" cue in 1, the help is a single step in 161, and the cues are mostly one
+word in 478. It cannot see whether the steps are the method a teacher would use.
