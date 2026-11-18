@@ -23,12 +23,12 @@ class WorkspaceBenchmarkTests(DevTestCase):
         self.path = self.root / 'requests.json'; self.out = self.root / 'out.json'
         self.write_manifest([{'id': 'draft:1', 'body': request()}])
 
-    def write_manifest(self, rows):
+    def write_manifest(self, rows, version=1):
         digest = hashlib.sha256(json.dumps(rows, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         policy_files = ['backend/evaluation/argument.py','backend/evaluation/foundation.py','backend/evaluation/essay.py','backend/evaluation/gateway.py','content/english/prompts/essay-observe.v2.md']
         policy = hashlib.sha256('\n'.join((Path(settings.REPO_DIR)/p).read_text() for p in policy_files).encode()).hexdigest()
-        reference = hashlib.sha256((Path(settings.REPO_DIR)/'content/english/essay/benchmark/workspace-writing-acceptance-v1.json').read_bytes()).hexdigest()
-        self.path.write_text(json.dumps({'server_policy_digest':policy,'reference_digest':reference,'suite':'workspace-writing-acceptance@1', 'data_use':'synthetic_test', 'request_digest':digest, 'requests':rows}))
+        reference = hashlib.sha256((Path(settings.REPO_DIR)/f'content/english/essay/benchmark/workspace-writing-acceptance-v{version}.json').read_bytes()).hexdigest()
+        self.path.write_text(json.dumps({'server_policy_digest':policy,'reference_digest':reference,'suite':f'workspace-writing-acceptance@{version}', 'data_use':'synthetic_test', 'request_digest':digest, 'requests':rows}))
 
     def run_command(self, **kw):
         call_command('workspace_writing_benchmark', requests=str(self.path), out=str(self.out), stdout=StringIO(), **kw)
@@ -104,3 +104,13 @@ class WorkspaceBenchmarkTests(DevTestCase):
         self.assertGreater(result['reserved_cost_bound_usd'],0)
         self.assertTrue(result['prompt_digests']['draft:1'])
         with self.assertRaises(CommandError):self.run_command(**options)
+
+    def test_version_two_and_revision_context_validate_without_network(self):
+        b=request();b['request']['task_context']['stage']='revision';b['request']['task_context']['previous']='Earlier invented draft for bounded revision context.'
+        self.write_manifest([{'id':'draft:1','body':b}],version=2)
+        with mock.patch.object(essay,'TRANSPORT') as transport:self.run_command()
+        transport.assert_not_called();self.assertEqual(json.loads(self.out.read_text())['suite'],'workspace-writing-acceptance@2')
+
+    def test_reference_digest_cannot_be_relabelled_as_another_suite(self):
+        data=json.loads(self.path.read_text());data['suite']='workspace-writing-acceptance@2';self.path.write_text(json.dumps(data))
+        with self.assertRaises(CommandError):self.run_command()
