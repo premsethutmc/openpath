@@ -19,7 +19,7 @@ import { SketchPad } from "./SketchPad";
 import { ScenePlayer } from "./Scene";
 import type { Scene } from "../../../packages/learning/src/scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
-import { guessPictures } from "./guess-picture";
+import { lessonPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
@@ -766,17 +766,17 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // guess-picture@1: before a guess only the question's own picture shows; the lesson's teaching picture (a worked
   // layout that would give the answer away) waits with the working
   const own = raw.instance ? ((kq?.figure ?? question(raw.instance).figure) as typeof raw.widget | undefined) : undefined;
-  const pics = guessPictures(!!guess, own, sc.widget);
+  // no-spoiler@1: a teaching picture that shows the answer waits until the child has done the steps
+  const byYou = KID && !!raw.instance && !!stepsHelp(raw.instance);
+  const asked = byYou ? question(raw.instance!) : null;
+  const pics = lessonPictures(!!guess, own, sc.widget, byYou, asked ? String(asked.answer) : "", asked?.prompt ?? "");
   const later = !!pics.withWorking;
   const picture = pics.before && <Picture w={pics.before} competency={competency} />;
   const laterPicture = pics.withWorking && <Picture w={pics.withWorking} competency={competency} />;
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
-  const byYou = KID && !!raw.instance && !!stepsHelp(raw.instance);
-  // no-spoiler@1: a picture that is the finished written working (a long division with its answer on top) is not
-  // shown above steps the child is about to do: the steps build the same layout line by line
-  const spoils = byYou && (pics.withWorking as { as?: string } | undefined)?.as === "written";
-  const working = sc.math && <>{later && !spoils && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
