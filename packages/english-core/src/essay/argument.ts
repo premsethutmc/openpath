@@ -13,10 +13,17 @@ export type WorkspaceDifficulty='foundation'|'developing'|'stretch';
 export interface WorkspacePreferences {version:'workspace-preferences@1';goal:WorkspaceGoal;difficulty:WorkspaceDifficulty;at:string}
 export interface ArgumentArtifact {
  version:'argument-artifact@1';id:string;cycle:string;at:string;goal:WorkspaceGoal;difficulty:WorkspaceDifficulty;
- stage:ArgumentStage;topic:string;prompt:string;text:string;words:number;dataUse:'synthetic_test';
+ stage:ArgumentStage|'transfer';topic:string;prompt:string;text:string;words:number;dataUse:'synthetic_test';
  /** Revisions remain supported writing, even when no model feedback was available. */
- assistance:'initial_independent'|'perspective_prompt'|'supported_revision';revisionOf?:string;sourceEssayId?:string;
+ assistance:'initial_independent'|'perspective_prompt'|'supported_revision'|'independent_transfer';revisionOf?:string;sourceEssayId?:string;
+ transferReservationId?:string;independenceDeclaration?:{unaided:true;proctored:false;at:string};
 }
+/** A finite authored task. IDs and families do not reset when a difficulty preference changes. */
+export interface ArgumentTransferTask {id:string;version:number;family:string;topic:string;prompt:string;allowedGoals:readonly WorkspaceGoal[]}
+export interface ArgumentTransferReservation {version:'argument-transfer-reservation@1';id:string;at:string;cycle:string;goal:WorkspaceGoal;difficulty:WorkspaceDifficulty;task:ArgumentTransferTask}
+export const ARGUMENT_TRANSFER_LIMITATION='A new task in this learner’s recorded history. Writing is declared unaided but unproctored; outside assistance cannot be verified. Feedback is tentative and does not establish improvement, retained writing ability or an exam result.';
+/** Exact normalized reuse detection only, not semantic plagiarism or authorship detection. */
+export const normalizeArgumentWriting=(text:string)=>text.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 export interface ArgumentFinding {area:ArgumentArea;quote:string;question:string;hint:string}
 export interface ArgumentFeedback {
  version:'argument-feedback@1';artifactId:string;at:string;status:'observations_only'|'unavailable';
@@ -31,7 +38,7 @@ export interface ArgumentPractice {
 /** Teaching sequence, never an inferred severity ranking. */
 export const ARGUMENT_PRACTICE_ORDER:readonly ArgumentArea[]=['claim','reasons','evidence','warrant','counterargument','organization','clarity'];
 export interface ArgumentGatewayInfo {available:boolean;id:string;version:string;model:string;rubric:string;protocols:{observe:string;rewrite?:string}}
-export interface ArgumentRequest {protocol:'essay-observe.v2';rubric:typeof ARGUMENT_RUBRIC;request_id:string;grade:0|7;essay:{id:string;text:string;words:number};max_observations:number;task_context:{stage:ArgumentStage;topic:string;prompt:string;previous?:string}}
+export interface ArgumentRequest {protocol:'essay-observe.v2';rubric:typeof ARGUMENT_RUBRIC;request_id:string;grade:0|7;essay:{id:string;text:string;words:number};max_observations:number;task_context:{stage:ArgumentStage|'transfer';topic:string;prompt:string;previous?:string}}
 export type ArgumentPost=(body:{task:'observe';request:ArgumentRequest;data_use:'synthetic_test'})=>Promise<unknown>;
 export const ARGUMENT_LIMITATION='Tentative questions about this writing, not confirmed learner gaps, an ability score, retained learning or an exam prediction.';
 const object=(x:unknown,keys:readonly string[])=>{if(!x||typeof x!=='object'||Array.isArray(x)||Object.keys(x).some(k=>!keys.includes(k)))throw Error('Invalid argument feedback schema');return x as Record<string,unknown>;};
@@ -52,15 +59,20 @@ export function validateArgumentFeedback(raw:unknown,request:ArgumentRequest,inf
 }
 export function argumentRequest(artifact:ArgumentArtifact,grade:0|7,previous?:ArgumentArtifact):ArgumentRequest{
  const text=scrubIdentifiers(artifact.text);
- return {protocol:'essay-observe.v2',rubric:ARGUMENT_RUBRIC,request_id:`argument:${artifact.id}`,grade,essay:{id:artifact.id,text,words:wordCount(text)},max_observations:8,task_context:{stage:artifact.stage,topic:artifact.topic,prompt:artifact.prompt,...(previous?{previous:scrubIdentifiers(previous.text)}:{})}};
+ // Never let transfer retries accidentally include the earlier argument, revision or coaching.
+ const transfer=artifact.assistance==='independent_transfer'||artifact.stage==='transfer';
+ const prior=transfer?undefined:previous;
+ return {protocol:'essay-observe.v2',rubric:ARGUMENT_RUBRIC,request_id:`argument:${artifact.id}`,grade,essay:{id:artifact.id,text,words:wordCount(text)},max_observations:8,task_context:{stage:transfer?'transfer':artifact.stage,topic:artifact.topic,prompt:artifact.prompt,...(prior?{previous:scrubIdentifiers(prior.text)}:{})}};
 }
 export function argumentArtifactEvent(meta:EventMeta,artifact:ArgumentArtifact):EssayEvent{return {kind:'essay',...meta,record:{type:'argument_artifact',artifact}};}
 export function argumentFeedbackEvent(meta:EventMeta,feedback:ArgumentFeedback):EssayEvent{return {kind:'essay',...meta,record:{type:'argument_feedback',feedback}};}
 export function argumentRecords(events:readonly LedgerEvent[]){
  const artifacts=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_artifact'?[e.record.artifact]:[]);
  const feedback=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_feedback'?[e.record.feedback]:[]);
+ const reservations=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_transfer_reserved'?[e.record.reservation]:[]);
+ const abandoned=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_transfer_abandoned'?[{reservationId:e.record.reservationId,at:e.at}]:[]);
  const practice=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_practice'?[e.record.practice]:[]);
- return {artifacts:structuredClone(artifacts),feedback:structuredClone(feedback),practice:structuredClone(practice)};
+ return {artifacts:structuredClone(artifacts),feedback:structuredClone(feedback),practice:structuredClone(practice),reservations:structuredClone(reservations),abandoned:structuredClone(abandoned)};
 }
 export const SELF_REVIEW_QUESTIONS:Record<ArgumentArea,string>={
  claim:'What exactly are you asking the reader to accept, and where have you stated it?',
