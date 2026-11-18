@@ -17,13 +17,23 @@ Logic: `frontend/src/english/logic/parent-view.ts`. Screens: `ui/ParentView.tsx`
 
 ## How parent and child are connected
 
-Through what already exists: a parent account holds its pupils, and a phone without an account holds its own
-learners. A parent signed in to the same account on another phone sees the same children and their results.
+**Same account.** A parent account holds its pupils, and a phone without an account holds its own learners. A
+parent signed in to the same account on another phone sees the same children and their results.
+
+**A code, for two phones with no email or password (link@1, branch `feat/family-link-code`).** On the child's
+phone: For parents → Connect another phone → Show a code. On the parent's phone: For parents → Connect another
+phone → type the code. The parent's phone is then signed in to the child's account and sees the same children,
+in English and maths alike. The code is eight characters, works once, lasts 15 minutes, is stored on the server
+only as a keyed hash, and a new code cancels the last (`backend/family/link.py`).
+
+- A phone that types a code leaves the account it was in; children already on it stay in that account and are
+  not merged.
+- The joined phone stays signed in by its session only. If that ends, it needs a new code.
+- **The server part has not been run.** This workspace has no Django, so `backend/family/test_link.py` (four
+  tests) and migration `0015_familylinkcode` are written but untested. They must pass in CI before this is merged.
 
 ## Not done
 
-- **Linking a parent to a child who started on another phone without an account** (for example by a code). That
-  needs server work, which could not be tested in this workspace.
 - The sum is a child-gate, not security: anyone who can multiply gets in.
 - Reading and maths results are not in this view; it covers spelling and the word check.
 - Loading words from a photo inside the app (see `SPELLING_PRACTICE_AND_TEST.md`). The editor tells parents to use
