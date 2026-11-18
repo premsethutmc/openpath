@@ -4,6 +4,11 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## Writing evaluator coverage v2 (2026-11-18, isolated follow-up)
+- Branch `feat/english-evaluator-coverage-2026-11-18` preserves green #225 unchanged. 30 candidate samples, all seven argument areas represented, stretch preferences and three current/previous-draft revision cases; historical 16-case v1 retained.
+- Fixes short/full quotation matching and overgeneralized Chennai note; independent AI review refined article/countability, optional stylistic concerns and revision task wording.
+- Local81backend/357core/86essay-live tests, both English typechecks and build pass; independent AI review reran15acceptance tests. No provider call, new spending permission, real learner data, merge or deployment. See `docs/product/english/writing-evaluator-coverage.md`; counts are coverage, not measured accuracy.
+
 ## Writing evaluator acceptance (2026-11-18, in progress)
 - Branch `feat/english-writing-evaluator-2026-11-18`, layered on #221. No provider activated or real learner text accepted.
 - 16 synthetic workspace cases; actual request builders/client validators, opt-in exact server view/shared quotas, bounded spend/request limits and interrupted-run checkpoints.

@@ -6,7 +6,7 @@ This increment makes that gap measurable without pretending to close it. No prov
 
 ## What is covered
 
-`workspace-writing-acceptance-v1.json` contains 16 invented cases:
+`workspace-writing-acceptance-v1.json` is the historical 16-case suite. The current CLI defaults to [version 2 with 30 samples](writing-evaluator-coverage.md); both versions remain supported. The original suite contains:
 
 - Eight language samples: repeated agreement errors, tense errors, articles/prepositions, correct writing, valid alternatives, a one-off lapse, British/Indian usage including maths and lakh, and legitimate changes of time frame.
 - Eight argument samples: circular reasoning, causal/generalisation leap, unsupported precise prediction, an explicit fair objection, a defensible assigned opposing position, a short school explanation, embedded malicious instructions, and fresh transfer without prior-draft context.
@@ -21,7 +21,7 @@ Generate requests through the **actual frontend/core builders and selected works
 
 ```sh
 # From repository root; frontend dependencies must be installed.
-node --import ./frontend/node_modules/tsx/dist/loader.mjs frontend/scripts/workspace-writing-acceptance.mts > /tmp/workspace-requests.json
+node --import ./frontend/node_modules/tsx/dist/loader.mjs frontend/scripts/workspace-writing-acceptance.mts --suite 1 > /tmp/workspace-requests.json
 python backend/manage.py workspace_writing_benchmark \
   --requests /tmp/workspace-requests.json --out /tmp/workspace-dry.json
 node --import ./frontend/node_modules/tsx/dist/loader.mjs frontend/scripts/workspace-writing-acceptance.mts \

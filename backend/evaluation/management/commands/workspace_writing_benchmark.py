@@ -38,13 +38,16 @@ class Command(BaseCommand):
             rows = data['requests']
             policy_files = ['backend/evaluation/argument.py','backend/evaluation/foundation.py','backend/evaluation/essay.py','backend/evaluation/gateway.py','content/english/prompts/essay-observe.v2.md']
             policy_digest = hashlib.sha256('\n'.join((Path(settings.REPO_DIR) / p).read_text() for p in policy_files).encode()).hexdigest()
-            reference_digest = hashlib.sha256((Path(settings.REPO_DIR) / 'content/english/essay/benchmark/workspace-writing-acceptance-v1.json').read_bytes()).hexdigest()
+            suites = {'workspace-writing-acceptance@1': 'workspace-writing-acceptance-v1.json', 'workspace-writing-acceptance@2': 'workspace-writing-acceptance-v2.json'}
+            if data.get('suite') not in suites:
+                raise ValueError('unknown suite')
+            reference_digest = hashlib.sha256((Path(settings.REPO_DIR) / 'content/english/essay/benchmark' / suites[data['suite']]).read_bytes()).hexdigest()
             if data['server_policy_digest'] != policy_digest or data['reference_digest'] != reference_digest:
                 raise ValueError('stale policy/reference')
             # The manifest hash is provenance, not proof that its contents are safe.
             canonical = json.dumps(rows, ensure_ascii=False, separators=(',', ':'))
             digest = hashlib.sha256(canonical.encode()).hexdigest()
-            if data['suite'] != 'workspace-writing-acceptance@1' or data['data_use'] != 'synthetic_test' or data['request_digest'] != digest:
+            if data['data_use'] != 'synthetic_test' or data['request_digest'] != digest:
                 raise ValueError('manifest identity')
             if not isinstance(rows, list) or not 1 <= len(rows) <= 100 or len({r['id'] for r in rows}) != len(rows):
                 raise ValueError('case count or identity')
