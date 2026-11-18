@@ -116,6 +116,8 @@ test("My Words and My Books in a parent account: told where they are kept, saved
   // the learner practises: the shared Spelling Bee screen; one wrong on purpose
   let w = await advance(page, "Practise");
   for (let k = 0; k < 3; k++) {
+    // a practice list (the default): a word never met is shown first, then hidden before it is typed
+    await page.getByRole("button", { name: "Hide it. I'll spell it" }).click();
     await page.locator(".ruled input").fill(k === 1 ? `${w}x` : w);
     await page.getByRole("button", { name: "Submit" }).click();
     await page.locator(".bee-feedback").waitFor();
@@ -123,7 +125,7 @@ test("My Words and My Books in a parent account: told where they are kept, saved
     else await page.getByRole("button", { name: "See how you did" }).click();
   }
   await page.getByRole("button", { name: "Back to My Words" }).click();
-  assert.match(await card.innerText(), /practised 3 of 3 · 2 of 3 right · 1 to review/);
+  assert.match(await card.innerText(), /practised 3 of 3 · 2 of 3 right · 3 to review/);
   // stored in Zoe's own record on the server, with every answer traced to the list
   const events = (await api(page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events;
   const list = events.find((e) => e.kind === "word_list");
@@ -169,7 +171,7 @@ test("another phone signed in to the same account sees the list, the book and th
   await signIn(second.page, PARENT);
   await second.page.getByRole("button", { name: /Zoe/ }).click();
   await second.page.getByRole("button", { name: "Open My Words" }).click();
-  assert.match(await second.page.locator(".word-lists li", { hasText: "Week 5" }).innerText(), /practised 3 of 3 · 2 of 3 right · 1 to review/);
+  assert.match(await second.page.locator(".word-lists li", { hasText: "Week 5" }).innerText(), /practised 3 of 3 · 2 of 3 right · 3 to review/);
   await shot(second.page, "2-second-phone");
   await second.page.getByRole("button", { name: "← Home" }).click();
   await second.page.getByRole("button", { name: "Open My Books" }).click();

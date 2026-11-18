@@ -2085,3 +2085,77 @@ h3.sub {
 .vocab-note {
   padding-top: 0;
 }
+
+/* ------------------------------------------------------------ Spelling: learning help, letter marks, test and parent results */
+.bee-look {
+  text-align: center;
+}
+.bee-look-word {
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: 2px;
+  margin: 10px 0 16px;
+}
+.bee-help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+.bee-pattern {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.bee-marks {
+  font-size: 30px;
+  font-weight: 850;
+  letter-spacing: 3px;
+}
+.bee-marks .miss {
+  color: var(--wrong);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+.bee-test-result,
+.list-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+}
+.bee-test-result li,
+.list-results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+.bee-test-result .miss,
+.list-results li[data-status="wrong"] span:first-child {
+  color: var(--wrong);
+}
+.list-results summary {
+  font-weight: 800;
+  margin-top: 10px;
+}
+.list-mode {
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin: 14px 0;
+  display: grid;
+  gap: 10px;
+}
+.list-mode legend {
+  font-weight: 800;
+  padding: 0 6px;
+}

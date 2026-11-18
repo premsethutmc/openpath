@@ -144,8 +144,10 @@ export function spellingState(events: readonly AppEvent[]): SpellingState {
       if (!w) st.words.set(key, (w = { key, id: e.word.id, text: e.word.text, source: e.source, level: e.word.level, answers: [], box: null, due: null, reviewed: false }));
       w.answers.push(e);
       w.text = e.word.text;
-      // review: wrong puts it on the list (due next session); right when due moves it on; right at the end takes it off
-      if (!e.correct) {
+      // an answer reached with help, or just after being shown the word, is practice: the word still has to be spelt unaided
+      const unaided = e.correct && !e.help && !e.studied;
+      // review: wrong (or not unaided) puts it on the list (due next session); right when due moves it on; right at the end takes it off
+      if (!unaided) {
         w.box = 0;
         w.due = e.at;
         w.reviewed = false;
@@ -165,7 +167,7 @@ export function spellingState(events: readonly AppEvent[]): SpellingState {
         let L = st.levels.get(k);
         if (!L) st.levels.set(k, (L = { level: 1, window: [], changes: [] }));
         if (e.word.level === L.level) {
-          L.window.push(e.correct);
+          L.window.push(unaided);
           const right = L.window.filter(Boolean).length;
           const wrong = L.window.length - right;
           const move = L.window.length >= SPELLING.window && right >= SPELLING.up ? 1 : wrong >= SPELLING.down ? -1 : 0;
