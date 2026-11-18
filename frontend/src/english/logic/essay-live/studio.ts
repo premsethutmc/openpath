@@ -56,6 +56,8 @@ import {
   generatePractice,
   nextPracticeQuestion,
   planDiagnosticFor,
+  planObservationCheck,
+  availableObservationChecks,
   questionSets,
   recommendNext,
   EssayRefusal,
@@ -185,6 +187,7 @@ export interface NextStep {
 }
 
 export interface StudioView {
+  observationChecks: string[];
   stage: Stage;
   essays: EssaySubmission[];
   essay: EssaySubmission | null;
@@ -238,6 +241,8 @@ export class EssayStudio {
   readonly verification: VerificationPolicy;
   private readonly options: EssayStudioOptions;
   private readonly configuredEvaluator: boolean;
+  private writingPending=false;
+  private observationCheckPending=false;
 
   constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator(), verification: VerificationPolicy = PILOT_VERIFICATION, options: EssayStudioOptions = {}) {
     this.options = structuredClone(options);
@@ -312,9 +317,10 @@ export class EssayStudio {
     const due = dueCheck(this.ectx, events, now);
     const laterItem = due ? this.item(due.item) : undefined;
     const laterCheck = due && laterItem ? { check: due.check, item: laterItem, position: due.position, total: due.total } : null;
-    const stage: Stage = !essay ? "write" : nextDiagnostic || nextPracticeQuestion(this.ectx, events) ? "diagnose" : !journey ? "plan" : rewrite ? "done" : journey.finalRewrite.available ? "rewrite" : "learn";
+    const stage: Stage = !essay || !analysis || analysis.status === "rejected" ? "write" : nextDiagnostic || nextPracticeQuestion(this.ectx, events) ? "diagnose" : !journey ? "plan" : rewrite ? "done" : journey.finalRewrite.available ? "rewrite" : "learn";
     return {
       stage,
+      observationChecks:availableObservationChecks(this.ectx,events),
       essays,
       essay,
       analysis,
@@ -389,6 +395,11 @@ export class EssayStudio {
 
   /** Submit a synthetic essay, analyse it, and plan diagnostic questions for any suspected gap. */
   async submit(text: string, source: { kind: "typed" | "synthetic"; prompt?: string } = { kind: "synthetic" }): Promise<StudioView> {
+    if(this.writingPending)throw new EssayRefusal('Writing analysis is already in progress');
+    this.writingPending=true;
+    try{return await this.submitWriting(text,source);}finally{this.writingPending=false;}
+  }
+  private async submitWriting(text: string, source: { kind: "typed" | "synthetic"; prompt?: string }): Promise<StudioView> {
     const [m1, m2] = await this.learner.essayMeta(2);
     const essayId = `essay:${this.essays().length + 1}`;
     const s = submitEssay(this.ectx, this.events, m1, { essayId, learner: this.learner.profileId, text, source: { kind: source.kind, dataUse: "synthetic_test", ...(source.prompt ? { prompt: source.prompt } : {}) } });
@@ -408,6 +419,40 @@ export class EssayStudio {
       if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
     }
     return this.view();
+  }
+
+  /** Retry only a failed/unassessed current saved draft. Never manufacture a second writing sample. */
+  async retryAnalysis():Promise<StudioView> {
+    if(this.writingPending)throw new EssayRefusal('Writing analysis is already in progress');
+    const essay=this.latestEssay();
+    if(!essay)throw new EssayRefusal('No saved writing to analyse');
+    if(!this.connected)throw new EssayRefusal('Reconnect the configured evaluator and reopen this workspace; your writing remains saved');
+    if(essayRecords(this.events,'analysis').some(r=>r.record.analysis.essay===essay.id&&r.record.analysis.status==='accepted'))throw new EssayRefusal('This draft already has accepted observations; use its checks or write a genuinely new draft');
+    this.writingPending=true;
+    try {
+      const [m]=await this.learner.essayMeta(1);
+      const result=await analyseEssay(this.ectx,this.events,this.evaluator,essay.id,m);
+      await this.learner.recordEssay(result.event);
+      if(result.analysis.status==='accepted'&&!this.canGenerate){
+        const metas=await this.learner.essayMeta(20);
+        const planned=planDiagnostics(this.ectx,this.events,n=>metas[n]);
+        if(planned.events.length)await this.learner.recordEssay(...planned.events as EssayEvent[]);
+      }
+      return this.view();
+    } finally {this.writingPending=false;}
+  }
+
+  /** A voluntary bank check, not a diagnosis from one model observation. */
+  async checkObservation(competency:string):Promise<StudioView> {
+    if(this.observationCheckPending||this.writingPending)throw new EssayRefusal('Finish the current writing action first');
+    const essay=this.latestEssay();if(!essay)throw new EssayRefusal('No saved writing');
+    this.observationCheckPending=true;
+    try {
+      const [m]=await this.learner.essayMeta(1);
+      const d=planObservationCheck(this.ectx,this.events,essay.id,competency,m);
+      await this.learner.recordEssay(d.event as EssayEvent);
+      return this.view();
+    } finally {this.observationCheckPending=false;}
   }
 
   /**

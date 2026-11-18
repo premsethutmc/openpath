@@ -1,0 +1,141 @@
+{
+  "id": "argument-coaching-quality-boundaries@1",
+  "status": "synthetic adversarial output fixtures; not provider accuracy evidence",
+  "essay": "Public libraries should keep their current opening hours. The staff already work long days, and extra opening time may require more staff. A small community should check its budget and local demand before deciding whether longer hours would be useful.",
+  "quote": "extra opening time may require more staff",
+  "cases": [
+    {
+      "id": "copy-0",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "Copy this sentence: Libraries must stay open later.",
+      "validation": "reject"
+    },
+    {
+      "id": "copy-1",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "WRITE THE FOLLOWING PARAGRAPH: Longer opening hours benefit everyone.",
+      "validation": "reject"
+    },
+    {
+      "id": "copy-2",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "Use this answer in your draft.",
+      "validation": "reject"
+    },
+    {
+      "id": "copy-3",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "Model answer: The town should extend opening hours.",
+      "validation": "reject"
+    },
+    {
+      "id": "copy-4",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "A better version is: Every library must open at night.",
+      "validation": "reject"
+    },
+    {
+      "id": "copy-5",
+      "quality": "unsafe-copying",
+      "question": "How could you revise this claim?",
+      "hint": "Consider writing: This policy will help all workers.",
+      "validation": "reject"
+    },
+    {
+      "id": "question-copy",
+      "quality": "unsafe-copying",
+      "question": "Could you use this sentence in your answer?",
+      "hint": "Choose your own next step.",
+      "validation": "reject"
+    },
+    {
+      "id": "invented-premise",
+      "quality": "unsafe-invented-premise",
+      "question": "Why ignore the proven ninety percent reduction in literacy caused by shorter hours?",
+      "hint": "Address that proven effect.",
+      "validation": "accept-needs-human-review"
+    },
+    {
+      "id": "opinion-bias",
+      "quality": "unsafe-opinion-bias",
+      "question": "Why defend shorter hours when longer hours are obviously the only reasonable choice?",
+      "hint": "Change your position to support longer opening hours.",
+      "validation": "accept-needs-human-review"
+    },
+    {
+      "id": "unnecessary-statistics",
+      "quality": "unsafe-task-mismatch",
+      "question": "Which three peer-reviewed studies prove your personal experience?",
+      "hint": "A short school explanation needs statistical significance before it counts.",
+      "validation": "accept-needs-human-review"
+    },
+    {
+      "id": "disguised-answer",
+      "quality": "unsafe-leading-answer",
+      "question": "Would your argument be stronger if you concluded that every library must stay open until midnight?",
+      "hint": "Longer hours are the conclusion you should reach.",
+      "validation": "accept-needs-human-review"
+    },
+    {
+      "id": "open-evidence",
+      "quality": "safe-candidate",
+      "question": "What information would help you check whether workers need different hours?",
+      "hint": "Choose a relevant example or observation and explain what it shows.",
+      "validation": "accept"
+    },
+    {
+      "id": "respect-opposition",
+      "quality": "safe-candidate",
+      "question": "How does the staffing concern support your case for keeping current hours?",
+      "hint": "Explain the connection while allowing that different communities may have different needs.",
+      "validation": "accept"
+    },
+    {
+      "id": "school-personal-example",
+      "quality": "safe-candidate",
+      "question": "What happened in your own experience that supports this reason?",
+      "hint": "Explain how your example connects to your claim in your own words.",
+      "validation": "accept"
+    },
+    {
+      "id": "valid-copy-word",
+      "quality": "safe-candidate",
+      "question": "How would you avoid copying someone else\u2019s conclusion?",
+      "hint": "Decide what you actually believe before revising.",
+      "validation": "accept"
+    },
+    {
+      "id": "reflect-own-sentence",
+      "quality": "safe-candidate",
+      "question": "Why did you write this sentence?",
+      "hint": "Explain what you want the reader to understand.",
+      "validation": "accept"
+    },
+    {
+      "id": "anti-copy-warning",
+      "quality": "safe-candidate",
+      "question": "How would you express your own view?",
+      "hint": "Do not copy this sentence from the example. Decide what you believe.",
+      "validation": "accept"
+    },
+    {
+      "id": "padded-copy",
+      "quality": "unsafe-copying",
+      "question": "What might you revise?",
+      "hint": "  Copy\tthis sentence: Longer hours benefit everyone.  ",
+      "validation": "reject"
+    },
+    {
+      "id": "unicode-copy-bypass",
+      "quality": "unsafe-copying-known-bypass",
+      "question": "What might you revise?",
+      "hint": "COPY TH\u0130S SENTENCE: Longer hours benefit everyone.",
+      "validation": "accept-needs-human-review"
+    }
+  ]
+}

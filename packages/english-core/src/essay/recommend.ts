@@ -10,10 +10,10 @@ import { essayRecords } from "./analysis.ts";
 import { allocateItems, pickForRole } from "./allocation.ts";
 import type { EssayContext } from "./competencies.ts";
 import type { GapHypothesis } from "./contract.ts";
-import { gapHypotheses } from "./gaps.ts";
+import { availableObservationChecks, gapHypotheses } from "./gaps.ts";
 import { formativeOutcomes, nextPracticeQuestion } from "./questions.ts";
 
-export type NextActivityKind = "answer_questions" | "finish_practice" | "check_skill" | "practise" | "learn" | "practise_and_check" | "write_again";
+export type NextActivityKind = "review_saved_writing" | "check_observation" | "answer_questions" | "finish_practice" | "check_skill" | "practise" | "learn" | "practise_and_check" | "write_again";
 
 export interface NextActivity {
   kind: NextActivityKind;
@@ -48,6 +48,8 @@ export function recommendNext(ectx: EssayContext, events: readonly LedgerEvent[]
   const essays = essayRecords(events, "submission").map((r) => r.record.submission.id);
   const latest = essays.at(-1);
   if (!latest) return null;
+  const analysis=essayRecords(events,'analysis').filter(r=>r.record.analysis.essay===latest).at(-1)?.record.analysis;
+  if(!analysis||analysis.status==='rejected')return {kind:'review_saved_writing',competency:null,title:'Your writing is saved, not assessed',reason:'Analysis is unavailable. Retry the saved draft when the evaluator is connected; no gaps or success were inferred.',history:[],verification:null};
   const all = gapHypotheses(ectx, events);
   const formative = formativeOutcomes(ectx, events);
   const name = (cap: CapabilityId) => ectx.profile.byCapability.get(cap)?.name ?? cap;
@@ -63,9 +65,14 @@ export function recommendNext(ectx: EssayContext, events: readonly LedgerEvent[]
   if (practice) return { kind: "finish_practice", competency: practice.set.competency, title: `Finish the practice questions on ${name(practice.set.competency)}`, reason: `${practice.position - 1} of ${practice.total} answered. Practice questions are formative only.`, history: history(practice.set.competency), verification: null };
   const ranked = [...now].sort((a, b) => STATUS_RANK[a.status] - STATUS_RANK[b.status] || b.observations.length - a.observations.length);
   const top = ranked[0];
+  if(!top||top.status==='weakened'){
+    const eligible=availableObservationChecks(ectx,events);
+    const observed=analysis.observations.find(o=>eligible.includes(o.competency));
+    if(observed)return {kind:'check_observation',competency:observed.competency,title:`Explore ${name(observed.competency)} with a short check`,reason:'One tentative concern may be a slip or a model mistake. Choose fresh bank questions before deciding whether teaching would help. This does not prove a gap in your own writing.',history:history(observed.competency),verification:verificationAvailability(ectx,events,observed.competency)};
+  }
   if (!top || top.status === "weakened") {
     const others = ranked.filter((h) => h.status === "weakened").map((h) => name(h.competency));
-    return { kind: "write_again", competency: null, title: "Write another essay", reason: others.length ? `Questions answered without help were right for ${others.join(", ")}: nothing to teach now. That is not mastery; the next essay shows whether it holds.` : "This essay suggests no gap to check.", history: [], verification: null };
+    return { kind: "write_again", competency: null, title: "Write another essay", reason: others.length ? `Questions answered without help were right for ${others.join(", ")}: nothing to teach now. That is not mastery; the next essay shows whether it holds.` : "No confirmed learning target is established. Missing findings do not prove that the writing is correct.", history: [], verification: null };
   }
   const cap = top.competency;
   const h = history(cap);
@@ -79,7 +86,7 @@ export function recommendNext(ectx: EssayContext, events: readonly LedgerEvent[]
       kind: "learn",
       competency: cap,
       title: lesson ? `Learn: ${name(cap)}, then practise with help` : `${name(cap)}: no lesson in the app yet`,
-      reason: `${top.diagnostic?.reason ?? ""}${again ? " An earlier essay showed the same difficulty, so it comes first." : ""}${practised} ${verification.available ? "After the lesson and practice, a check without help on bank questions not seen before." : verification.reason}`.trim(),
+      reason: `${top.exploratory ? "Several independent bank answers suggest focused practice; they do not prove a recurring gap in free writing. " : ""}${top.diagnostic?.reason ?? ""}${again ? " An earlier essay showed the same difficulty, so it comes first." : ""}${practised} ${verification.available ? "After the lesson and practice, a check without help on bank questions not seen before." : verification.reason}`.trim(),
       ...(lesson ? { lesson } : {}),
       history: h,
       verification,

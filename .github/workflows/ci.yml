@@ -330,6 +330,14 @@ jobs:
         run: |
           npm run english:e2e-vocabulary 2>&1 | tee english-vocabulary-e2e.log
           ../.github/scripts/require-tests.sh english-vocabulary-e2e.log "Word check end-to-end"
+      - name: New words and Listen and write in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/daily
+        run: |
+          npm run english:e2e-daily 2>&1 | tee english-daily-e2e.log
+          ../.github/scripts/require-tests.sh english-daily-e2e.log "New words and Listen and write end-to-end"
       - name: Serve the English web app with its account API
         working-directory: frontend
         run: |
@@ -524,6 +532,8 @@ jobs:
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4190/ -o /tmp/essay-index.html
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4191/ -o /tmp/essay-pilot-index.html
       - run: npm run essay:e2e
+      - name: Writing observation check and saved-draft retry (mocked API only)
+        run: ESSAY_E2E_URL=http://127.0.0.1:4190 node --test e2e/writing-observation-check.test.mjs
       - run: node --test e2e/exam-diagnostic.test.mjs e2e/exam-journey.test.mjs e2e/english-workspace.test.mjs e2e/argument-concept-plan.test.mjs e2e/argument-writing-transfer.test.mjs
       - name: Essay-to-diagnostic workflow against a mocked server (deterministic; no paid call)
         run: |

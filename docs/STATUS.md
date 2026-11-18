@@ -4,6 +4,12 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## Writing evaluator acceptance (2026-11-18, in progress)
+- Branch `feat/english-writing-evaluator-2026-11-18`, layered on #221. No provider activated or real learner text accepted.
+- 16 synthetic workspace cases; actual request builders/client validators, opt-in exact server view/shared quotas, bounded spend/request limits and interrupted-run checkpoints.
+- Request/reference/server-policy provenance, valid-usage alarms and required-anchor agreement; schema acceptance is not correctness. Independent AI review corrected an unsupported baseline misconception label and found duplicate argument concerns, now refused server/client.
+- See `docs/product/english/writing-evaluator-acceptance.md`. Live accuracy, learner benefit and release readiness remain unestablished; full exact-head CI pending.
+
 ## Independent writing transfer (2026-11-18, in progress)
 - Branch `feat/english-writing-transfer-2026-11-18`, based on merged #216 main `4ce5f7a9`.
 - Reserved unseen authored task after own revision; hidden coaching, explicit unproctored unaided declaration, saved writing and tentative shared-evaluator observations. Offline/error remains unassessed.

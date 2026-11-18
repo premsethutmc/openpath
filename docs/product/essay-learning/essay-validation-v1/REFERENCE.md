@@ -8,7 +8,7 @@
 |---|---|---|---|
 | error | Subject–verb agreement | “my sister walk” | Singular subject needs walks. |
 | error | Subject–verb agreement | “She say” | She needs says. |
-| error | Subject–verb agreement | “the traffic near the market are” | The subject is traffic (singular); the verb wrongly agrees with the nearer noun, market. |
+| error | Subject–verb agreement | “the traffic near the market are” | The singular subject traffic requires is, not are. This does not by itself identify the cause of the error. |
 | error | Subject–verb agreement | “My parents worries” | Plural subject needs worry. |
 | error | Subject–verb agreement | “The school bus come” | Singular subject needs comes. |
 | error | Subject–verb agreement | “the town need” | Singular subject needs needs. |

@@ -52,7 +52,7 @@ async function withLists() {
 
 test("SH-3 practice: a new word is flagged to be shown first; help or a first look is recorded and does not count as known", async () => {
   const { l, practice } = await withLists();
-  await l.startSpelling({ type: "list", id: practice });
+  await l.startSpelling({ type: "list", id: practice }, "device_voice", { again: true });
   let s = l.spellingSession()!;
   assert.equal(s.mode, "practice");
   assert.equal(s.fresh, true, "never answered: shown first");
@@ -67,19 +67,22 @@ test("SH-3 practice: a new word is flagged to be shown first; help or a first lo
   s = l.spellingSession()!;
   order.push(s.word!.word);
   await l.answerSpelling(s.word!.word, 1);
-  assert.equal(l.spellingSession(), null, "the session ended after its last word");
+  // the word that needed help and the word that was wrong come round again in this same session, asked not shown
+  let back = l.spellingSession()!;
+  assert.deepEqual([back.word!.word, back.fresh, back.total], [order[1], false, 6]);
+  await l.answerSpelling(order[1], 1);
+  back = l.spellingSession()!;
+  assert.equal(back.word!.word, order[2]);
+  await l.answerSpelling(order[2], 1);
+  assert.equal(l.spellingSession(), null, "the session ended after the repeats");
   const by = Object.fromEntries(l.listResults(practice).map((r) => [r.word, r]));
-  assert.deepEqual(order.map((w) => by[w].status), ["with_help", "with_help", "wrong", "unaided"]);
-  assert.equal(by[order[2]].lastTyped, "zzz");
-  assert.deepEqual(l.listResults(practice).map((r) => r.status), ["wrong", "with_help", "with_help", "unaided"], "hardest first");
-  // the three that were not spelt unaided come back next session as reviews; the one that was does not
+  assert.deepEqual(order.map((w) => by[w].status), ["with_help", "unaided", "unaided", "unaided"]);
+  // only the word that was merely shown and copied is still due at once; the two repeated ones moved a step on
   const st = l.spelling();
-  const due = order.filter((w) => st.words.get(`list:${practice}/${w}`)!.box === 0);
-  assert.deepEqual(due, order.slice(0, 3));
+  assert.deepEqual(order.map((w) => st.words.get(`list:${practice}/${w}`)!.box), [0, 1, 1, null]);
   await l.startSpelling({ type: "list", id: practice });
   const again = l.spellingSession()!;
-  assert.equal(again.fresh, false, "a word met before is asked, not shown");
-  assert.ok(order.slice(0, 3).includes(again.word!.word));
+  assert.deepEqual([again.word!.word, again.fresh], [order[0], false], "the copied word comes back next session, asked not shown");
 });
 
 test("SH-4 a test: no help can be recorded, and a plain list behaves as before", async () => {

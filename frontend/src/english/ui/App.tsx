@@ -30,6 +30,8 @@ import { MyWords } from "./MyWords.tsx";
 import { BookQuestions, MyBooks } from "./MyBooks.tsx";
 import type { Book } from "../logic/books.ts";
 import { VocabularyCheck } from "./VocabularyCheck.tsx";
+import { NewWords } from "./NewWords.tsx";
+import { ListenWrite } from "./ListenWrite.tsx";
 import { ParentView } from "./ParentView.tsx";
 import type { SpellSource } from "../logic/events.ts";
 
@@ -106,6 +108,8 @@ export function App() {
   const [inMyBooks, setInMyBooks] = useState(false);
   const [bookQuiz, setBookQuiz] = useState<Book | null>(null);
   const [inVocab, setInVocab] = useState(false);
+  const [inNewWords, setInNewWords] = useState(false);
+  const [inListenWrite, setInListenWrite] = useState(false);
   const [inParent, setInParent] = useState(false);
   const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
@@ -148,6 +152,8 @@ export function App() {
       setInMyBooks(false);
       setBookQuiz(null);
       setInVocab(false);
+      setInNewWords(false);
+      setInListenWrite(false);
       setInParent(false);
       setScreen({ name: "app" });
     } catch (e) {
@@ -443,6 +449,34 @@ export function App() {
         />
       </div>
     );
+  if (inNewWords)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <NewWords
+          learner={learner}
+          voice={voice}
+          onChanged={changed}
+          onLeave={() => {
+            setInNewWords(false);
+            changed();
+          }}
+        />
+      </div>
+    );
+  if (inListenWrite)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <ListenWrite
+          learner={learner}
+          voice={voice}
+          onChanged={changed}
+          onLeave={() => {
+            setInListenWrite(false);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (inVocab)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -551,6 +585,8 @@ export function App() {
           onMyWords={() => setInMyWords(true)}
           onMyBooks={() => setInMyBooks(true)}
           onVocab={() => (setInVocab(true), scrollTo(0, 0))}
+          onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
+          onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
         />
       )}

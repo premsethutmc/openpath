@@ -57,6 +57,16 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
         Last active: {day(s.lastActive)} · practised spelling on {s.daysPractisedThisWeek} of the last 7 days
       </p>
       {s.words && <p className="small">Word check: about {s.words.estimate.toLocaleString("en-IN")} word families</p>}
+      {s.newWords && (
+        <p className="small" data-line="new-words">
+          New words: {s.newWords.learnt} learnt, {s.newWords.learning} still learning{s.newWords.tricky.length ? `. Finding hard: ${s.newWords.tricky.join(", ")}` : ""}
+        </p>
+      )}
+      {s.dictation && (
+        <p className="small" data-line="dictation">
+          Listen and write: {s.dictation.perfectFirst} of {s.dictation.sentences} sentences right first time (level {s.dictation.level}){s.dictation.missed.length ? `. Words missed: ${s.dictation.missed.join(", ")}` : ""}
+        </p>
+      )}
       {s.bee && (
         <p className="small">
           Spelling Bee: level {s.bee.level} ({s.bee.levelName}), {s.bee.practised} of {s.bee.total} words practised
@@ -81,6 +91,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
         </ul>
       ) : (
         <p className="small">No word lists yet.</p>
+      )}
+      {s.patterns.length > 0 && (
+        <p className="parent-patterns">
+          <b>Keeps missing:</b> {s.patterns.slice(0, 3).map((p) => `${p.name} (${p.times})`).join("; ")}
+        </p>
       )}
       {work.length > 0 && (
         <p>

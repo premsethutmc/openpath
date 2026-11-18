@@ -43,14 +43,20 @@ export type ArgumentPost=(body:{task:'observe';request:ArgumentRequest;data_use:
 export const ARGUMENT_LIMITATION='Tentative questions about this writing, not confirmed learner gaps, an ability score, retained learning or an exam prediction.';
 const object=(x:unknown,keys:readonly string[])=>{if(!x||typeof x!=='object'||Array.isArray(x)||Object.keys(x).some(k=>!keys.includes(k)))throw Error('Invalid argument feedback schema');return x as Record<string,unknown>;};
 const bounded=(x:unknown,max:number):x is string=>typeof x==='string'&&x.trim().length>0&&x.length<=max;
+/** Reject only recognizable copying directives, never claim this checks reasoning quality. */
+export function overtArgumentAnswerDirective(text:string):boolean {
+ return /(?:^|[.!?]\s+)(?:(?:please|you (?:can|could|should)|could you|would you)\s+)?(?:copy|write|use)\s+(?:this|the following)\s+(?:sentence|paragraph|answer|argument)\b|\b(?:model answer|suggested answer|replacement paragraph|a better version)\s*(?:is\s*)?:|\b(?:consider writing|write instead)\s*:/i.test(text.replace(/\s+/g,' ').trim());
+}
 export function validateArgumentFeedback(raw:unknown,request:ArgumentRequest,info:ArgumentGatewayInfo):Omit<ArgumentFeedback,'artifactId'|'at'> {
  // The gateway record identifier is transport metadata, never learner evidence.
  const envelope=object(raw,['evaluator','output','record']);const who=object(envelope.evaluator,['id','version','model','rubric','protocol']);
  if(who.id!==info.id||who.version!==info.version||who.model!==info.model||who.rubric!==ARGUMENT_RUBRIC||who.protocol!=='essay-observe.v2')throw Error('Argument evaluator provenance differs');
  const output=object(envelope.output,['essay_id','rubric','findings','not_observable']);
  if(output.essay_id!==request.essay.id||output.rubric!==ARGUMENT_RUBRIC||!Array.isArray(output.findings)||output.findings.length>request.max_observations||!Array.isArray(output.not_observable)||output.not_observable.length>ARGUMENT_AREAS.length)throw Error('Invalid argument feedback envelope');
+ const seen=new Set<string>();
  const findings=output.findings.map(value=>{const f=object(value,['area','quote','question','hint']);
-  if(!ARGUMENT_AREAS.includes(f.area as ArgumentArea)||!bounded(f.quote,1000)||!request.essay.text.includes(f.quote)||!bounded(f.question,600)||!f.question.trimEnd().endsWith('?')||!bounded(f.hint,600)||instructionLike(f.question)||instructionLike(f.hint))throw Error('Invalid argument finding');
+  if(!ARGUMENT_AREAS.includes(f.area as ArgumentArea)||!bounded(f.quote,1000)||!request.essay.text.includes(f.quote)||!bounded(f.question,600)||!f.question.trimEnd().endsWith('?')||!bounded(f.hint,600)||instructionLike(f.question)||instructionLike(f.hint)||overtArgumentAnswerDirective(f.question)||overtArgumentAnswerDirective(f.hint))throw Error('Invalid argument finding');
+  const key=JSON.stringify([f.area,f.quote]);if(seen.has(key))throw Error('Duplicate argument finding');seen.add(key);
   return {area:f.area as ArgumentArea,quote:f.quote,question:f.question,hint:f.hint};
  });
  const notObservable=output.not_observable as ArgumentArea[];
