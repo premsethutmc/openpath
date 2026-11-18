@@ -3,7 +3,7 @@ import { WORKED_OUT } from "../../../packages/learning/src/worked-out";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, explainStep, pool, problemOf } from "../../../packages/learning/src/families";
-import { cardFor, stepsHelp } from "../../../packages/learning/src/step-help";
+import { cardFor, stepsHelp, helpMethods } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 
 const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items; return [items[0], items[items.length >> 1]].filter(Boolean); });
@@ -12,7 +12,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
   let needing = 0;
   for (const q of sample) {
     // worked-out@1: a type with its whole working written for it is proved in worked-out.test.ts
-    if (WORKED_OUT.includes(q.family)) continue;
+    if (WORKED_OUT.includes(q.family) || helpMethods(q.id)[0] !== "Step by step") continue;
     const all = stepsHelp(q.id);
     // deepen@1: lines of working made by rule sit between the question's own steps; they tell what to do without its result
     for (const f of all!.filter((x) => x.finer)) {

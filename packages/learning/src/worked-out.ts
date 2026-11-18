@@ -13,7 +13,7 @@ export interface Worked {
   /** board@1: the written layout as it stands once this step is done (long division's bracket), one text line per row */
   board?: string[];
 }
-type Q = { family: string; params: number[]; answer: string };
+type Q = { family: string; params: number[]; answer: string; prompt?: string };
 
 const primesTo = (k: number) => { const out: number[] = []; for (let n = 2; n <= k; n++) if (out.every((p) => n % p)) out.push(n); return out; };
 
@@ -99,10 +99,67 @@ function divide(n: number, d: number, want: "quotient" | "remainder", answer: st
 const longDivision = ({ params: [d, q, r, mode], answer }: Q): Worked[] | null => (r >= 0 && r < d ? divide(d * q + r, d, mode === 1 ? "remainder" : "quotient", answer) : null);
 const exactDivision = ({ params: [q, d], answer }: Q): Worked[] | null => divide(q * d, d, "quotient", answer);
 
+/**
+ * Column addition and subtraction as written in school: the numbers one under the other, ones first, carrying a ten up or
+ * borrowing one from the next column. For any question that is two whole numbers added or subtracted ("104 + 737 = ?"),
+ * whatever its type: it is read from the question's own words and kept only when it ends on the verified answer.
+ */
+const PLACES = ["ones", "tens", "hundreds", "thousands", "ten thousands", "lakhs", "ten lakhs", "crores"];
+function columns(prompt: string | undefined, answer: string): Worked[] | null {
+  const m = prompt ? /^([\d,]+) ([+−-]) ([\d,]+) = \?$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const a = Number(m[1].replace(/,/g, "")), b = Number(m[3].replace(/,/g, "")), plus = m[2] === "+";
+  if (!Number.isInteger(a) || !Number.isInteger(b) || Math.max(a, b) < 10 || a > 99999999 || b > 99999999 || (!plus && a < b)) return null;
+  const result = plus ? a + b : a - b;
+  if (String(result) !== answer.replace(/,/g, "")) return null;
+  const width = Math.max(String(a).length, String(b).length, String(result).length) + 2;
+  const row = (t: string) => t.padStart(width, " ");
+  const da = String(a).split("").reverse().map(Number), db = String(b).split("").reverse().map(Number), n = Math.max(da.length, db.length);
+  const carries: string[] = Array(width).fill(" "), done: string[] = [];
+  const board = () => [...(carries.some((c) => c !== " ") ? [carries.join("").replace(/\s+$/, "")] : []), row(String(a)), `${plus ? "+" : "−"}${row(String(b)).slice(1)}`, "-".repeat(width), row(done.join(""))];
+  const out: Worked[] = [];
+  let carry = 0;
+  for (let i = 0; i < n; i++) {
+    const x = da[i] ?? 0, y = db[i] ?? 0, place = PLACES[i], next = PLACES[i + 1], lead = i === 0 ? "First: start on the right, with the ones. " : "";
+    if (plus) {
+      const sum = x + y + carry, last = i === n - 1;
+      out.push({ next: `${lead}Add the ${place}${carry ? ", and the 1 that was carried" : ""}.`, shown: `${x} + ${y}${carry ? " + 1" : ""} = ${sum}` });
+      if (sum >= 10 && !last) carries[width - 2 - i] = "1";
+      done.unshift(last ? String(sum) : String(sum % 10));
+      if (sum >= 10) out.push({ next: `${sum} is more than 9. What is written, and what is carried?`, shown: last ? `There is no column left, so write ${sum}.` : `Write ${sum % 10} under the ${place} and carry 1 to the ${next}.`, board: board() });
+      else out[out.length - 1].board = board();
+      carry = sum >= 10 ? 1 : 0;
+    } else {
+      const have = x - carry;
+      if (have < y) {
+        out.push({ next: `${lead}The ${place}: can ${y} be taken from ${Math.max(have, 0)}?`, shown: carry ? (x === 0 ? `No. This column has already lent 1, so borrow 1 from the ${next}: 10, less the 1 it lent, is 9.` : `No. It lent 1, so it has ${have}. Borrow 1 from the ${next}: ${have + 10}.`) : `No: ${x} is less than ${y}. Borrow 1 from the ${next}, which makes ${x + 10}.` });
+        out.push({ next: `Now take away in the ${place}.`, shown: `${have + 10} − ${y} = ${have + 10 - y}` });
+        done.unshift(String(have + 10 - y));
+        carry = 1;
+      } else {
+        out.push({ next: `${lead}Take away in the ${place}${carry ? " (it lent 1)" : ""}.`, shown: `${have} − ${y} = ${have - y}` });
+        done.unshift(String(have - y));
+        carry = 0;
+      }
+      out[out.length - 1].board = board();
+    }
+  }
+  if (Number(done.join("")) !== result) return null;
+  out.push({ next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${result}.`, board: [...board().slice(0, -1), row(String(result))] });
+  return out;
+}
+
 const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
-/** The full working for a question of a type that has one, or null. */
-export function workedOut(q: Q): Worked[] | null {
-  if (!Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) return null;
-  try { const w = HANDLERS[q.family](q); return w && w.length >= 2 ? w : null; } catch { return null; }
+/** methods@1: the school method's name for a type that has one written here (the first tab of its step help). */
+const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division" };
+/** The full working for a question in the taught method, with that method's name; null when none is written. */
+export function workedOut(q: Q): (Worked[] & { method?: string }) | null {
+  let w: Worked[] | null = null, name = "";
+  try {
+    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { w = HANDLERS[q.family](q); name = NAMES[q.family] ?? "The usual way"; }
+    if (!w) { w = columns(q.prompt, q.answer); name = "In columns"; }
+  } catch { w = null; }
+  if (!w || w.length < 2) return null;
+  return Object.assign(w, { method: name });
 }

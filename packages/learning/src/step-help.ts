@@ -97,11 +97,25 @@ function cueWith(op: string, inputs: unknown, value: unknown, shown: string, giv
   return null;
 }
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
-export function stepsHelp(qid: string): StepHelp[] | null {
+/**
+ * methods@1: the ways a question's help can be worked, by name, the taught method first. Where the taught method is
+ * written out (worked-out@1) and the type's own steps are a real alternative (two steps or more), there are two: the
+ * learner can switch between them. One name otherwise.
+ */
+export function helpMethods(qid: string): string[] {
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""));
+  if (!p || !p.steps.length) return [];
+  const full = workedOut(p);
+  if (!full) return ["Step by step"];
+  return p.steps.length >= 2 ? [full.method ?? "The usual way", ALT[p.family] ?? "Another way"] : [full.method ?? "The usual way"];
+}
+const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };
+/** The steps of a question as help, in order (in its `method`-th way: see helpMethods); null when it is not a generated question or has no steps. */
+export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
-  const full = workedOut(p);
+  const full = method === 0 ? workedOut(p) : null;
   if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];

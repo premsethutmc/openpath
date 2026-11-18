@@ -408,3 +408,9 @@ The layout is proved on every division question (1,037 layouts, 2,212 take-aways
 bracket line is the question, every row above a rule is a multiple of the divisor, every difference is right and smaller
 than the divisor, and the bottom row is the remainder. The 167 questions that give divisor, quotient and remainder and
 ask for the number divided keep their own steps.
+
+`methods@1` (owner's direction, 18 Nov 2026): the taught method for each Class 5 topic is listed in
+`docs/product/METHODS_CLASS5.md`. In the step help the taught method is the first tab; where the type's own steps are a
+real alternative they are a second tab ("1 · Long division", "2 · In easy parts"). Column addition and subtraction are
+built: any question of two whole numbers added or subtracted is set out in columns, ones first, with carrying or
+borrowing, the layout shown as it grows (3,844 questions in 10 types).

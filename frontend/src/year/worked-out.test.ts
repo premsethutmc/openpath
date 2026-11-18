@@ -2,10 +2,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { question } from "../../../packages/learning/src/content";
-import { pool } from "../../../packages/learning/src/families";
+import { FAMILIES, pool } from "../../../packages/learning/src/families";
+const FAMILIES_ALL = () => [...FAMILIES.keys()];
 import { checkWorkingLines } from "../../../packages/learning/src/line-check";
 import { askOf } from "../../../packages/learning/src/step-ask";
-import { stepsHelp } from "../../../packages/learning/src/step-help";
+import { helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { WORKED_OUT } from "../../../packages/learning/src/worked-out";
 
 test("every question of a worked-out type gets the whole working, every calculation in it is true, and it ends on the answer", () => {
@@ -102,4 +103,40 @@ test("the written layout of every division question is right: top line, bracket 
   }
   console.log(n, "division layouts,", rules, "take-aways checked");
   assert.ok(n > 1000 && rules > 2000, `${n} ${rules}`);
+});
+
+test("column addition and subtraction: every question of two whole numbers is set out in columns and ends on the answer", () => {
+  let n = 0, carried = 0, borrowed = 0;
+  for (const f of FAMILIES_ALL()) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const m = /^([\d,]+) ([+−]) ([\d,]+) = \?$/.exec(item.prompt);
+    if (!m) continue;
+    const a = Number(m[1].replace(/,/g, "")), b = Number(m[3].replace(/,/g, ""));
+    const h = stepsHelp(item.id)!, last = h.at(-1)!;
+    if (!last.board) { assert.ok(Math.max(a, b) < 10 || (m[2] === "−" && a < b), `${item.id} has no columns`); continue; }
+    n++;
+    const want = m[2] === "+" ? a + b : a - b, rows = last.board;
+    assert.equal(Number(rows.at(-1)!.trim()), want, item.id);
+    assert.equal(String(want), question(item.id).answer.replace(/,/g, ""), item.id);
+    assert.ok(new Set(rows.slice(-4).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
+    assert.equal(Number(rows.at(-4)!.trim()), a, item.id);
+    assert.equal(Number(rows.at(-3)!.slice(1).trim()), b, item.id);
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+(?: [+−] \d+)+) = (\d+)/g)) assert.equal(checkWorkingLines([`${c[1]} = ${c[2]}`])[0].state, "right", `${item.id}: ${c[0]}`);
+    if (h.some((s) => /carry 1/.test(s.shown))) carried++;
+    if (h.some((s) => /Borrow 1/.test(s.shown))) borrowed++;
+    assert.ok(!h.slice(0, -1).some((s) => String(want).length >= 3 && s.shown.includes(String(want))), `${item.id}: the answer is not said before the end`);
+  }
+  console.log(n, "column layouts,", carried, "with carrying,", borrowed, "with borrowing");
+  assert.ok(n > 3000 && carried > 500 && borrowed > 300, `${n} ${carried} ${borrowed}`);
+});
+
+test("methods@1: the taught method is the first tab, and the type's own steps are a second way where they are a real alternative", () => {
+  const id = pool("ldiv").items.find((p) => /^348 ÷ 6/.test(p.prompt))!.id;
+  assert.deepEqual(helpMethods(id), ["Long division", "In easy parts"]);
+  assert.match(stepsHelp(id, 0)![0].next, /How many 6s fit in 34/);
+  assert.equal(stepsHelp(id, 1)![0].next, "First: multiply.");
+  assert.equal(stepsHelp(id, 1)!.some((s) => s.board), false);
+  assert.deepEqual(helpMethods("gen:adcol3:104,737,0"), ["In columns", "Another way"]);
+  assert.deepEqual(stepsHelp("gen:adcol3:104,737,0")!.at(-1)!.board, ["   1", "  104", "+ 737", "-----", "  841"]);
+  assert.deepEqual(helpMethods("not-a-question"), []);
 });
