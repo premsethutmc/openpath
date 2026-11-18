@@ -1,4 +1,5 @@
 """Bounded, synthetic-only coaching questions; never replacement prose or assessment claims."""
+import re
 from rest_framework.exceptions import ValidationError
 from . import llm
 
@@ -33,7 +34,25 @@ Do not demand counterarguments in every short draft or infer inability from omis
 Do not repeat a finding for the same area and exact quoted passage.
 Use not_observable for absent evidence; never also report a finding for the same area.
 Do not use tools or external facts. Never invent supporting statistics or sources.
+Do not smuggle an unsupported premise into a question (for example, "Why ignore the proven harm?").
+Ask whether or how a claim could be checked instead of presupposing that outside facts are true.
+A defensible opposing position is not a reasoning error. Critique the support and connection, not the side.
+Match evidence demands to the task: personal examples may be sufficient for a short school explanation.
+Do not demand statistics, citations, or a formal opposing section merely to fill a rubric area.
+Do not disguise a model answer as a hint, suggested claim, leading question, or sentence to copy.
+Prefer a short thinking step and an open question that leave the position and wording to the learner.
+If no specific concern is supported by this draft, return fewer or no findings; never manufacture gaps.
 '''
+
+# Narrow overt copy-directive guard, NOT a semantic correctness/safety classifier.
+# Keep aligned with overtArgumentAnswerDirective in the independent client validator.
+_COPY_DIRECTIVE = re.compile(
+    r"(?:^|[.!?]\s+)(?:(?:please|you (?:can|could|should)|could you|would you)\s+)?(?:copy|write|use)\s+(?:this|the following)\s+(?:sentence|paragraph|answer|argument)\b"
+    r"|\b(?:model answer|suggested answer|replacement paragraph|a better version)\s*(?:is\s*)?:"
+    r"|\b(?:consider writing|write instead)\s*:", re.IGNORECASE | re.ASCII)
+
+def overt_answer_directive(text):
+    return bool(_COPY_DIRECTIVE.search(re.sub(r"\s+", " ", text).strip()))
 
 def bounded(value, maximum):
     return isinstance(value, str) and bool(value.strip()) and len(value) <= maximum
@@ -83,6 +102,8 @@ def validate_output(output, req):
         if not isinstance(f['area'], str) or f['area'] not in AREAS or f['area'] in missing:
             fail()
         if not bounded(f['quote'], 1000) or f['quote'] not in req['essay']['text'] or not bounded(f['question'], 600) or not f['question'].rstrip().endswith('?') or not bounded(f['hint'], 600):
+            fail()
+        if overt_answer_directive(f['question']) or overt_answer_directive(f['hint']):
             fail()
         key = (f['area'], f['quote'])
         if key in seen:
