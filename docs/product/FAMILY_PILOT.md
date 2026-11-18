@@ -404,3 +404,7 @@ division types (`ldiv` exact, `avdiv` with remainders) are helped the same way: 
 How many fit (the product goes underneath), take it away, bring the next digit down; when the divisor is more than the
 first digit the first two are taken together. Each step carries the layout as it stands (`board`), shown in the step help
 as it grows. The earlier chunking help for `ldiv` ("50 × 6 = 300, then 48 ÷ 6") is replaced.
+The layout is proved on every division question (1,037 layouts, 2,212 take-aways): the top line is the quotient, the
+bracket line is the question, every row above a rule is a multiple of the divisor, every difference is right and smaller
+than the divisor, and the bottom row is the remainder. The 167 questions that give divisor, quotient and remainder and
+ask for the number divided keep their own steps.

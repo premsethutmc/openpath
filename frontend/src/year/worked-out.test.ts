@@ -74,3 +74,32 @@ test("long division is the school layout: how many fit, the product underneath, 
   // every row of every board is as wide as the layout needs and no wider
   for (const s of h) for (const row of s.board!) assert.ok(row.length <= 7, row);
 });
+
+test("the written layout of every division question is right: top line, bracket line, every product and every difference", async () => {
+  const { pool, problemOf } = await import("../../../packages/learning/src/families");
+  let n = 0, rules = 0;
+  for (const f of ["ldiv", "avdiv"]) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const p = (item as { params: number[] }).params, [num, d] = f === "ldiv" ? [p[0] * p[1], p[1]] : [p[0] * p[1] + p[2], p[0]];
+    const b = stepsHelp(item.id)!.at(-1)!.board, pad = String(d).length + 3;
+    // a question that gives the divisor, quotient and remainder and asks for the number divided is not a division to lay out
+    if (!b) { assert.ok(f === "avdiv" && p[3] === 2, item.id); continue; }
+    n++;
+    assert.equal(Number(b[0].trim()), Math.floor(num / d), `${item.id}: the top line is the quotient`);
+    assert.equal(b[1], `${d} ) ${num}`, item.id);
+    assert.equal(Number(b[b.length - 1].trim()), num % d, `${item.id}: what is left at the bottom is the remainder`);
+    // at every rule: the row above is a product of the divisor, it is taken from the row above that (or from the leading
+    // digits of the number), and the row below is what is left, with the next digit beside it if one was brought down
+    for (let j = 2; j < b.length; j++) {
+      if (!/^\s*-+$/.test(b[j])) continue;
+      rules++;
+      const product = Number(b[j - 1].trim()), have = j - 2 >= 2 ? Number(b[j - 2].trim()) : Number(String(num).slice(0, b[j - 1].length - pad));
+      const left = have - product, below = b[j + 1].trim();
+      assert.ok(product > 0 && product % d === 0, `${item.id}: ${product} is not a multiple of ${d}`);
+      assert.ok(left >= 0 && left < d, `${item.id}: ${have} − ${product}`);
+      assert.ok(below === String(left) || (below.length >= 1 && Number(below.slice(0, -1) || "0") === left), `${item.id}: under the rule is ${below}, expected ${left}`);
+    }
+  }
+  console.log(n, "division layouts,", rules, "take-aways checked");
+  assert.ok(n > 1000 && rules > 2000, `${n} ${rules}`);
+});
