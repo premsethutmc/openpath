@@ -9,6 +9,7 @@ const label=(s:string)=>s.replaceAll('_',' ');
 export function ExamJourney(){
  const [flow,setFlow]=useState<Journey|null>(null);
  const [state,setState]=useState<ReturnType<Journey['snapshot']>|null>(null);
+ const [supportedWriting,setSupportedWriting]=useState(false);
  const [reading,setReading]=useState<ReadingFollowUp|null>(null);
  const [readingState,setReadingState]=useState<ReturnType<ReadingFollowUp['snapshot']>|null>(null);
  const [revision,setRevision]=useState('');const [draft,setDraft]=useState(EXAMPLE_WRITING);const [confirmed,setConfirmed]=useState(false);
@@ -40,9 +41,9 @@ export function ExamJourney(){
  }
  function act(fn:()=>void){if(blocked||conflict.current)return;try{fn();setError('');if(flow)sync(flow);}catch(e){setError(e instanceof Error?e.message:'Could not continue.');}}
  async function analyse(){if(!flow||blocked||conflict.current)return;const token=generation.current;const pending=flow.analyse(draft,confirmed);sync(flow);try{await pending;}catch(e){if(token!==generation.current)return;setError(e instanceof Error?e.message:'Could not analyse.');}if(token===generation.current)sync(flow);}
- function startReading(){if(!state||blocked||conflict.current)return;try{const r=new ReadingFollowUp(state.session,ledger.current!.read());setReading(r);setReadingState(r.snapshot());}catch{setBlocked(true);setError('Could not read exposure history. Reading follow-up is paused.');}}
+ function startReading(){if(!state||blocked||conflict.current)return;try{const r=new ReadingFollowUp(state.session,ledger.current!.read());setReading(r);setReadingState(r.snapshot());if(state.phase!=='complete')setSupportedWriting(true);}catch{setBlocked(true);setError('Could not read exposure history. Reading follow-up is paused.');}}
  function readingAct(fn:()=>void){if(!reading||blocked||conflict.current)return;try{fn();const next=reading.snapshot();expose(next.seenIds);setReadingState(next);}catch{setBlocked(true);setError('Could not save exposure history. This sitting is paused.');}}
- function reset(){generation.current++;flow?.cancel();active.current=null;ledger.current=null;conflict.current=false;setFlow(null);setState(null);setReading(null);setReadingState(null);setConfirmed(false);setDraft(EXAMPLE_WRITING);setRevision('');setResetAsked(false);setConnecting(false);setBlocked(false);setError('');}
+ function reset(){generation.current++;flow?.cancel();active.current=null;ledger.current=null;conflict.current=false;setFlow(null);setState(null);setReading(null);setReadingState(null);setSupportedWriting(false);setConfirmed(false);setDraft(EXAMPLE_WRITING);setRevision('');setResetAsked(false);setConnecting(false);setBlocked(false);setError('');}
  const q=state?.phase==='reading'?QUESTIONS.find(q=>state.session.answers[q.id]===undefined):null;
  const bank=state?.phase==='checks'?state.checks:state?.phase==='reassessment'?state.fresh:[];
  const answers=state?.phase==='checks'?state.answers:state?.freshAnswers??{};
@@ -58,7 +59,7 @@ export function ExamJourney(){
  <p role="status">Mode: {state.mode==='server'?'configured server; synthetic only':'offline simulation; no model call'} · Step: {state.phase}</p>
  {q&&<section><h2>Read and reason</h2><p>{PASSAGE}</p><fieldset key={q.id}><legend>{q.prompt}</legend>{q.options.map((o,i)=><button key={i} onClick={()=>act(()=>flow.reading(q.id,i))}>{o}</button>)}</fieldset></section>}
  {['writing','error'].includes(state.phase)&&<section><h2>Invented written explanation</h2><p>{PASSAGE}</p><p>{WRITING_PROMPT}</p><label htmlFor="synthetic-exam-text">Synthetic writing (50–250 words)</label><textarea id="synthetic-exam-text" rows={9} readOnly={state.mode==='simulated'} value={draft} onChange={e=>setDraft(e.target.value)}/><label><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/>This is invented test text, not a real learner’s work.</label><button disabled={!confirmed} onClick={()=>void analyse()}>Analyse invented writing</button></section>}
- {reading&&state.phase==='error'&&<p>Reading help has been opened. Any retried writing is supported practice, not a new independent writing sample.</p>}
+ {supportedWriting&&<p>Reading help has been opened. Any retried writing is supported practice, not a new independent writing sample.</p>}
  {state.phase==='analysing'&&<button onClick={()=>act(()=>flow.cancel())}>Cancel analysis</button>}
  {['checks','teaching','reassessment','complete'].includes(state.phase)&&<p>Model observations are hypotheses. Independent questions, not the model, decide which practice to offer.</p>}
  {(state.phase==='checks'||state.phase==='reassessment')&&<section><h2>{state.phase==='checks'?'Check possible writing gaps':'Fresh reassessment without help'}</h2>{current?<fieldset key={current.id}><legend>{current.prompt}</legend>{current.options.map((o,i)=><button key={i} onClick={()=>act(()=>flow.answer(current.id,i))}>{o}</button>)}</fieldset>:<button onClick={()=>act(()=>state.phase==='checks'?flow.finishChecks():flow.finish())}>{state.phase==='checks'?'Choose targeted teaching':'Finish reassessment'}</button>}</section>}

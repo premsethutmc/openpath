@@ -44,10 +44,11 @@ test('configured server uses exam context and fails closed without fallback',asy
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||undefined});try{
  const page=await browser.newPage();const calls=[];
  await page.route('**/api/evaluation/essays/status/**',r=>r.fulfill({json:{available:true,id:'mock',version:'1',model:'synthetic',rubric:'openpath.exam-writing@1',synthetic_only:true,protocols:{observe:'essay-observe.v2',rewrite:'essay-rewrite.v2'}}}));
- await page.route('**/api/evaluation/essays/',r=>{calls.push(r.request().postDataJSON());return r.fulfill({status:503,json:{detail:'unavailable'}});});
+ await page.route('**/api/evaluation/essays/',r=>{calls.push(r.request().postDataJSON());return calls.length===1?r.fulfill({status:503,json:{detail:'unavailable'}}):r.fulfill({json:{evaluator:{id:'mock',version:'1',model:'synthetic',rubric:'openpath.exam-writing@1',protocol:'essay-observe.v2'},output:{essay_id:calls.at(-1).request.essay.id,rubric:'openpath.exam-writing@1',observations:[],not_observable:[]}}});});
  await page.goto(`${BASE}/?experience=exam-diagnostic&mode=synthetic`);await page.getByLabel(/Use configured server evaluator/).check();await page.getByRole('button',{name:'Start synthetic journey',exact:true}).click();
  for(let i=0;i<4;i++)await page.locator('fieldset button').first().click();await page.getByLabel('This is invented test text, not a real learner’s work.').check();await page.getByRole('button',{name:'Analyse invented writing'}).click();
  await page.getByText(/Analysis unavailable or rejected/).waitFor();await page.getByRole('button',{name:'Teach and recheck reading gaps'}).click();await page.getByRole('heading',{name:'Reading follow-up'}).waitFor();
  assert.equal(calls.length,1);assert.equal(calls[0].data_use,'synthetic_test');assert.equal(calls[0].request.rubric,'openpath.exam-writing@1');assert.ok(calls[0].request.task_context.passage.length>100);assert.equal(calls[0].request.grade,0);assert.equal(await page.getByRole('heading',{name:'Check possible writing gaps'}).count(),0);
+ await page.getByRole('button',{name:'Analyse invented writing'}).click();await page.getByRole('heading',{name:'Evidence from this sitting'}).waitFor();assert.equal(calls.length,2);await page.getByText(/Any retried writing is supported practice/).waitFor();
  }finally{await browser.close();}
 });
