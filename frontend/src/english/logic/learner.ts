@@ -23,6 +23,7 @@ import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
 import type { VocabRecord } from "./vocabulary/size-check.ts";
 import type { WordResult } from "./spelling-help.ts";
+import { type PatternId, diagnose } from "./spelling-patterns.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
@@ -329,14 +330,15 @@ export class Learner {
   }
 
   /** Start a spelling session (an unfinished one is ended as stopped first). Practice only: never engine evidence. */
-  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice"): Promise<void> {
+  /** `again`: a word missed or spelt only with help is asked once more later in the same session (the app's screens ask for this; never in a test). */
+  async startSpelling(source: SpellSource = BANK, delivery: "device_voice" | "adult_reader" = "device_voice", opts: { again?: boolean } = {}): Promise<void> {
     this.guardSpelling(source);
     const open = this.spelling().open;
     if (open) await this.stopSpelling();
     const plan = planSession(this.spelling(), this.spellingWords(source), this.clock());
     if (!plan.ids.length) throw new Error("there are no words to practise in this list");
     const mode = source.type === "list" ? this.wordLists().find((l) => l.id === source.id)?.mode : undefined;
-    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery, ...(mode ? { mode } : {}) });
+    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery, ...(mode ? { mode } : {}), ...(opts.again && mode !== "test" ? { again: true } : {}) });
   }
 
   /** The open spelling session: the word to ask next (null when it is done) and the counts so far. */
@@ -351,18 +353,19 @@ export class Learner {
   }
 
   /** Answer the current word. Returns whether it was right and the word (to show its spelling now, after the answer). */
-  async answerSpelling(response: string, plays: number, aid: { help?: number; studied?: boolean } = {}): Promise<{ correct: boolean; word: SpellWord }> {
+  async answerSpelling(response: string, plays: number, aid: { help?: number; studied?: boolean } = {}): Promise<{ correct: boolean; word: SpellWord; pattern: PatternId | null }> {
     const cur = this.spellingSession();
     if (cur) this.guardSpelling(cur.source);
     if (!cur?.word) throw new Error("no spelling word is waiting for an answer");
     const w = cur.word;
     const before = this.spelling().words.get(wordKey(w.source, w.id));
     const correct = checkSpelling(w, response);
-    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null, ...(cur.mode !== "test" && aid.help ? { help: Math.min(99, Math.floor(aid.help)) } : {}), ...(cur.mode !== "test" && aid.studied ? { studied: true } : {}) });
+    const pattern = correct ? null : diagnose(w.word, response);
+    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null, ...(cur.mode !== "test" && aid.help ? { help: Math.min(99, Math.floor(aid.help)) } : {}), ...(cur.mode !== "test" && aid.studied ? { studied: true } : {}), ...(pattern ? { pattern } : {}) });
     // the session ends by itself after its last word
     const after = this.spellingSession();
     if (after && !after.word) await this.add({ kind: "spell_end", id: this.nextId(), at: this.clock(), session: cur.session, reason: "finished" });
-    return { correct, word: w };
+    return { correct, word: w, pattern };
   }
 
   /** For the parent: each word of a list with its latest standing, hardest first (wrong, with help, not tried, unaided). */

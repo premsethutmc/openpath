@@ -82,6 +82,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
       ) : (
         <p className="small">No word lists yet.</p>
       )}
+      {s.patterns.length > 0 && (
+        <p className="parent-patterns">
+          <b>Keeps missing:</b> {s.patterns.slice(0, 3).map((p) => `${p.name} (${p.times})`).join("; ")}
+        </p>
+      )}
       {work.length > 0 && (
         <p>
           <b>Words to work on:</b> {work.join(", ")}

@@ -282,6 +282,11 @@ export interface SpellSessionEvent {
    * the end. Absent: the Spelling Bee and lists saved before modes existed (hear, type, feedback).
    */
   mode?: "practice" | "test";
+  /**
+   * A word that was missed, or spelt only with help, is asked once more a few words later in this same session
+   * (never in a test). Absent on sessions recorded before this existed: they replay exactly as they ran.
+   */
+  again?: boolean;
   /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
   scrubbed?: boolean;
 }
@@ -303,6 +308,8 @@ export interface SpellAnswerEvent {
   help?: number;
   /** The word was shown to the learner in this session before it was asked (practice mode, a word never met). */
   studied?: boolean;
+  /** The kind of mistake, when it is a clear one (logic/spelling-patterns.ts): "double_missing", "ie_ei", … */
+  pattern?: string;
   /** Its source was deleted: the word and the answer are removed, right/wrong kept (logic/scrub.ts). */
   scrubbed?: boolean;
 }

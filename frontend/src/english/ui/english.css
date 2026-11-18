@@ -2197,3 +2197,21 @@ h3.sub {
   display: grid;
   gap: 6px;
 }
+.bee-rule {
+  text-align: left;
+  margin: 12px 0;
+}
+.bee-drill {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+.bee-drill-marks {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-weight: 800;
+}
+.bee-drill-marks .miss {
+  color: var(--wrong);
+}

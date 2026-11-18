@@ -257,12 +257,36 @@ export function sourceProgress(st: SpellingState, words: readonly SpellWord[], n
   };
 }
 
+/** How many other words come between a miss and the same word being asked again in the session. */
+export const AGAIN_AFTER = 3;
+
+/**
+ * The order a session with `again` asks its words in: the planned words, and each word that was missed or spelt
+ * only with help once more, AGAIN_AFTER words later (or at the end). Rebuilt from the answers, so a reload or a
+ * replay gives the same order.
+ */
+export function sessionQueue(s: SpellSessionState): string[] {
+  const queue = [...s.event.words];
+  const again = new Set<string>();
+  s.answers.forEach((a, k) => {
+    if ((a.correct && !a.help) || again.has(a.word.id) || queue[k] !== a.word.id) return;
+    again.add(a.word.id);
+    queue.splice(Math.min(k + 1 + AGAIN_AFTER, queue.length), 0, a.word.id);
+  });
+  return queue;
+}
+
 /** Where a session stands: the next word to ask (or null when it is done), and the answers so far. */
 export function sessionView(s: SpellSessionState): { next: string | null; position: number; total: number; right: number; wrong: number } {
-  const asked = new Set(s.answers.map((a) => a.word.id));
-  const next = s.end ? null : (s.event.words.find((id) => !asked.has(id)) ?? null);
   const right = s.answers.filter((a) => a.correct).length;
-  return { next, position: s.answers.length + (next ? 1 : 0), total: s.event.words.length, right, wrong: s.answers.length - right };
+  if (!s.event.again) {
+    const asked = new Set(s.answers.map((a) => a.word.id));
+    const next = s.end ? null : (s.event.words.find((id) => !asked.has(id)) ?? null);
+    return { next, position: s.answers.length + (next ? 1 : 0), total: s.event.words.length, right, wrong: s.answers.length - right };
+  }
+  const queue = sessionQueue(s);
+  const next = s.end ? null : (queue[s.answers.length] ?? null);
+  return { next, position: s.answers.length + (next ? 1 : 0), total: queue.length, right, wrong: s.answers.length - right };
 }
 
 /**
