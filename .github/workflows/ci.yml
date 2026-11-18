@@ -338,6 +338,22 @@ jobs:
         run: |
           npm run english:e2e-daily 2>&1 | tee english-daily-e2e.log
           ../.github/scripts/require-tests.sh english-daily-e2e.log "New words and Listen and write end-to-end"
+      - name: Find my level and the streams in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/level
+        run: |
+          npm run english:e2e-level 2>&1 | tee english-level-e2e.log
+          ../.github/scripts/require-tests.sh english-level-e2e.log "Find my level end-to-end"
+      - name: Reading course in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/reading
+        run: |
+          npm run english:e2e-reading 2>&1 | tee english-reading-e2e.log
+          ../.github/scripts/require-tests.sh english-reading-e2e.log "Reading course end-to-end"
       - name: Serve the English web app with its account API
         working-directory: frontend
         run: |

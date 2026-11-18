@@ -157,8 +157,12 @@ export class SizeCheckSession {
   private visits = new Map<number, number>();
   private result: Result | null = null;
 
-  constructor(check: SizeCheck, start: number, history: readonly VocabRecord[] = []) {
+  private readonly rounds: number;
+
+  /** `rounds`: fewer than the full eight for a quick check (the level check uses four). */
+  constructor(check: SizeCheck, start: number, history: readonly VocabRecord[] = [], rounds = ROUNDS) {
     this.check = check;
+    this.rounds = Math.max(1, Math.min(ROUNDS, rounds));
     this.used = seenWords(history);
     this.band = Math.min(check.bands.length, Math.max(1, start));
     this.log.push({ type: "start", check: `${check.version}`, band: this.band });
@@ -201,7 +205,7 @@ export class SizeCheckSession {
     const next = Math.min(this.check.bands.length, Math.max(1, this.band + (up ? 1 : -1)));
     this.visits.set(this.band, (this.visits.get(this.band) ?? 0) + 1);
     // settled: the next band has already been tried twice (the learner is moving between two neighbouring bands)
-    if (this.round >= ROUNDS || (this.visits.get(next) ?? 0) >= 2) {
+    if (this.round >= this.rounds || (this.visits.get(next) ?? 0) >= 2) {
       this.result = estimate(this.check, this.answers);
       this.log.push({ type: "result", check: `${this.check.version}`, estimate: this.result.estimate, low: this.result.low, high: this.result.high, band: this.result.band, answered: this.result.answered });
       return;

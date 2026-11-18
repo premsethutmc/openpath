@@ -125,3 +125,20 @@ test('intervening write after successful session CAS stops stale transfer select
  assert.equal(after.filter(e=>e.kind==='essay'&&e.record.type==='argument_artifact'&&e.record.artifact.stage==='transfer').length,0);
  assert.deepEqual(learner.events,after);assert.equal(flow.view().busy,false);
 });
+
+test('post-attempt concerns return to own-word teaching across reload and a new cycle without changing independent evidence',async()=>{
+ const {ledger}=await completed();let unavailable=false;
+ const post:ArgumentPost=async body=>{if(unavailable)throw Error('offline');const raw=output(body);return {...raw,output:{...raw.output,not_observable:[],findings:[{area:'reasons',quote:'A trial would allow the people involved to describe their experience',question:'How would their experience help decide whether the proposal works?',hint:'Explain the link between the trial and your decision.'}]}};};
+ const flow=new ArgumentWorkspace(ledger,{goal:'general',difficulty:'foundation',info,post});
+ const reservation=(await flow.startTransfer()).transfer.active!.reservation.id;
+ let view=await flow.submitTransfer(reservation,fresh,{syntheticConfirmed:true,unaidedConfirmed:true});
+ const concern=view.concerns[0],artifact=structuredClone(view.transfer.history[0].artifact!);
+ assert.equal(concern.sourceStage,'transfer');assert.equal(concern.artifactId,artifact.id);assert.equal(concern.sourceTopic,artifact.topic);
+ await flow.savePractice(concern.artifactId,0,'I would explain which experience supports the decision and which limitations remain.',{syntheticConfirmed:true,feedbackEventId:concern.feedbackEventId});
+ flow.startNewCycle();await flow.submit(text,{syntheticConfirmed:true});const restored=new ArgumentWorkspace(ledger,{goal:'general',difficulty:'foundation',info,post});view=restored.view();
+ assert.equal(view.stage,'for');assert.equal(view.concerns.length,1);assert.equal(view.concerns[0].practice.length,1);assert.equal(view.practice.length,1);assert.deepEqual(view.transfer.history[0].artifact,artifact);
+ const otherGoal=new ArgumentWorkspace(ledger,{goal:'grade7',difficulty:'foundation'});assert.equal(otherGoal.view().concerns.length,0);
+ await assert.rejects(otherGoal.savePractice(concern.artifactId,0,'This must not attach to a different goal.',{syntheticConfirmed:true,feedbackEventId:concern.feedbackEventId}));
+ unavailable=true;await restored.retryAnalysis(artifact.id);assert.equal(restored.view().concerns.length,0);assert.equal(restored.view().practice.length,1);
+ await assert.rejects(restored.savePractice(concern.artifactId,0,'This must not attach to stale feedback.',{syntheticConfirmed:true,feedbackEventId:concern.feedbackEventId}));
+});

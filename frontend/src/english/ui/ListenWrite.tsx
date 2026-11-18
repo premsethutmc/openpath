@@ -202,7 +202,7 @@ export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: L
     void playWord(slow ? slowText(text) : text, voice).then(setHeard);
   };
   const begin = () => {
-    const s = new DictationSitting(DICTATION, levelFor(DICTATION, learner.dictationRecords(), startLevel(learner.state.preferences?.band)), learner.dictationRecords());
+    const s = new DictationSitting(DICTATION, levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band))), learner.dictationRecords());
     plays.current = 0;
     setSitting(s);
     play(s, false); // started by the tap on Start, so the browser allows it
@@ -213,7 +213,7 @@ export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: L
     onLeave();
   };
   if (!sitting) {
-    const level = levelFor(DICTATION, learner.dictationRecords(), startLevel(learner.state.preferences?.band));
+    const level = levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band)));
     const l = DICTATION.levels.find((x) => x.id === level)!;
     return <ListenWriteIntro level={level} levelLabel={l.name} about={l.about} done={dictationSummary(learner.dictationRecords())} canSpeak={speechPossible()} onStart={begin} onBack={leave} />;
   }
