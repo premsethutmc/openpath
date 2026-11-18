@@ -327,3 +327,7 @@ above the guess it asks for instead of on a page of its own (one Next fewer; no 
 button: one everyday place the skill lives (two short lines) and one playful question. Never shown unless asked for,
 nothing recorded, not in practice or tests. Written once per skill as data; a skill with no honest everyday use has no
 entry. 42 of the 62 Class 5 skills so far. No pictures yet.
+
+`where-used@2`: our own drawings (plain SVG in the page's ink, no photographs) for eight entries so far (leaning tower,
+photo as a matrix, dosa, fence, tiles, ball, 3-4-5 corner, temple tower), and entries for the other classes: 99 skills of
+345 in all, including matrices, determinants, derivatives, integrals, trigonometry, logarithms and probability.

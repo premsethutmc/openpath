@@ -472,3 +472,4 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .where-used h3 { margin: 0; }
 .where-used p { margin: 0; }
 .where-used-q { font-weight: 700; margin-top: 4px; }
+.where-used-art { width: 100%; max-width: 320px; height: auto; justify-self: center; }
