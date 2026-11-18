@@ -4,12 +4,18 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
-## Argument concept learning (2026-11-18, in progress)
+## Independent writing transfer (2026-11-18, in progress)
+- Branch `feat/english-writing-transfer-2026-11-18`, based on merged #216 main `4ce5f7a9`.
+- Reserved unseen authored task after own revision; hidden coaching, explicit unproctored unaided declaration, saved writing and tentative shared-evaluator observations. Offline/error remains unassessed.
+- 14 immutable topic families (10 Grade7 eligible); spent/abandoned tasks are not recycled, exposure local to learner ledger. No concept-score substitution, provider activation or real data.
+- Local 162 English/store/learner tests, 357 core tests, 71 backend evaluation tests and English typecheck/build pass. See `docs/product/english/independent-writing-transfer.md`; exact-head browser/full CI pending. Atomic device-store writes prevent stale-window duplicate reservations; active transfers lock learning navigation.
+
+## Argument concept learning (2026-11-18, merged)
 - Branch `feat/english-reasoning-plan-2026-11-18`, based on verified main `d24845b4`.
 - Finding-linked or self-selected concept probes → response-led teaching/practice → fresh/later checks, reusing existing engines in an isolated linked concept record.
 - Task response, idea development, paragraphing and persuasion concepts; no concept result may inflate source writing ability or establish argument validity.
 - Exact source provenance, family/exposure protection and privacy/provider safeguards retained. See `docs/product/english/argument-concept-plan.md`.
-- Local 136 essay/diagnostic and 353 core tests pass; English typecheck/build pass. Exact-head browser/full CI pending; not yet merged.
+- PR #216 merged as `4ce5f7a9`; all 19 exact-head CI + Learning Year passed. Combined latest maths tree passed 148 tests/typecheck/build; remote tree matched.
 
 ## Integrated English workspace (2026-11-18, merged)
 - Branch `feat/english-workspace-2026-11-18`, PR #212; initial head `419fca60` based on main `dc7572e8` (#209).
@@ -19,32 +25,10 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Synthetic only, optional configured evaluator fails closed; no provider activation, real learner data, audio or maths changes. See `docs/product/english/learner-workspace.md`.
 - PR #210 merged as `ba8d1106`; PR #212 merged as `d24845b4`. Exact English head passed 19 CI jobs + Learning Year; combined latest-maths tree passed 123 targeted tests/typecheck/build. Still synthetic, not live-learner-ready.
 
-## English reading teaching milestone (2026-11-18)
-- Branch `feat/english-reading-guided-2026-11-18`, based on main `dc7572e8` (PR #209).
-- Four worked reading passages + distinct guided questions with hints/retry/reveal; independent transfer remains separate.
-- Reuses one supported-lesson engine and shared UI for writing and reading; completion never awards evidence/mastery.
-- Existing synthetic/provider/privacy controls unchanged. Exact-head browser/aggregate CI required before merge.
-
-
-## English guided teaching milestone (2026-11-18)
-- Branch `feat/english-guided-teaching-2026-11-18`, based on main `4552ce4a` (PR #207).
-- Four worked examples with reasoning, separate guided practice, hints/retry/reveal and supported completion gate.
-- Supported teaching never changes independent results; fresh checks remain separate and unaided.
-- Local validation: 66 diagnostic/UI tests, English typecheck/build; updated phone-flow test required in CI.
-
-## English evidence improvements (2026-11-18)
-- Branch `feat/english-evidence-next-2026-11-18`, based on main `2fb7c108` (PR #203, includes #202).
-- Second unseen writing verification/retest forms, answer review, bounded next-step report and explicit bank exhaustion.
-- Retained not-observable coverage; reading follow-up available during writing outages; optional memory-only unassessed revision.
-- Local validation: 59 diagnostic/UI tests, English typecheck/build; browser and aggregate CI required before merge.
-- External educator approval is not an owner-required gate. AI/content checks do not imply human review or calibrated accuracy.
-
-## English diagnostic milestone (2026-11-18)
-- Branch `feat/english-e2e-2026-11-18`, based on main `10648a43` (PR #199).
-- Complete synthetic reading/writing → model hypotheses → deterministic checks → teaching → fresh reassessment.
-- Four narrow writing areas; separate fresh reading and writing banks. Default offline; optional shared API developer mode.
-- No provider activation, spending, real learner submission or maths changes. Pilot route stays refused.
-- Details and limitations: `docs/product/english/exam-writing-synthetic.md`.
+## Earlier English milestones
+- #202 synthetic reading/writing diagnostic, #207 fresh forms and explicit unobserved coverage, #209 writing guided lessons, #210 reading guided lessons are merged.
+- Candidate content and deterministic checks are not human-reviewed validation or exam prediction. Teacher completion never establishes independent mastery.
+- Details: `docs/product/english/exam-writing-synthetic.md`.
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.

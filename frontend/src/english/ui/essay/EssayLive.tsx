@@ -6,7 +6,7 @@
  * essays, on a dedicated on-device synthetic profile; it never uses a child's profile or the parent account.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
+import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, argumentRecords, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
 import type {WorkspaceSelection} from './EnglishWorkspace.tsx';
 import {withWorkspaceBank} from '../../logic/essay-live/workspace-bank.ts';
 import {withWorkspaceLessons} from '../../logic/essay-live/workspace-lessons.ts';
@@ -68,6 +68,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
   const [draft, setDraft] = useState("");
   const [rewrite, setRewrite] = useState("");
   const [busy, setBusy] = useState(false);
+  const [argumentNavigationLocked,setArgumentNavigationLocked]=useState(false);
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState<{ item: string; f: Feedback } | null>(null);
   const [lessonAnswer, setLessonAnswer] = useState<number | null>(null);
@@ -97,7 +98,9 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
         const v = s.view();
         setStudio(s);
         setView(v);
-        setScreen(screenFor(v));
+        const argumentsSaved=argumentRecords(learner.events.filter(e=>e.kind==='essay'));
+        const reserved=!!workspace&&argumentsSaved.reservations.some(r=>!argumentsSaved.abandoned.some(a=>a.reservationId===r.id)&&!argumentsSaved.artifacts.some(a=>a.transferReservationId===r.id));
+        setArgumentNavigationLocked(reserved);setScreen(reserved?'argument':screenFor(v));
         document.documentElement.dataset.essayStore = repo.kind;
       } catch (e) {
         setError(e instanceof Error ? e.message : "The essay studio could not open.");
@@ -235,7 +238,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
       {v && (
         <nav className="essay-nav" aria-label="Essay journey">
           {(workspace?[...NAV.slice(0,2),{screen:"argument" as const,label:"Articulate both sides"},...NAV.slice(2)]:NAV).map((n) => (
-            <button type="button" key={n.screen} aria-current={screen === n.screen ? "step" : undefined} disabled={busy || !enabled(n.screen)} onClick={() => {if(studio)setView(studio.view());setScreen(n.screen);}}>
+            <button type="button" key={n.screen} aria-current={screen === n.screen ? "step" : undefined} disabled={busy || (argumentNavigationLocked&&n.screen!=="argument") || !enabled(n.screen)} onClick={() => {if(studio)setView(studio.view());setScreen(n.screen);}}>
               {n.label}
             </button>
           ))}
@@ -295,7 +298,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
             </form>
           </>
         )}
-        {workspace&&studio&&essay&&screen==="argument"&&<ArgumentWorkspaceView studio={studio} selection={workspace} initialText={essay.text} initialEssayId={essay.id}/>}
+        {workspace&&studio&&essay&&screen==="argument"&&<ArgumentWorkspaceView studio={studio} selection={workspace} initialText={essay.text} initialEssayId={essay.id} onNavigationLock={setArgumentNavigationLocked}/>}
         {v && screen === "skills" && essay && (
           <>
             <p className="essay-note" data-testid="analysed-by">

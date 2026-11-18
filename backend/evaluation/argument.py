@@ -19,6 +19,12 @@ rewritten sentences, replacement paragraphs, model answers or completed argument
 Questions and hints must help the writer decide and revise in their own words, without supplying the content.
 Use stage initial for articulation exploration; for/against for the assigned position; revision for
 reflection on changes, not proof of improvement. previous is context only: quote current essay only.
+Stage transfer is a new submitted writing sample after coaching, not a supported revision.
+Observe only this submitted sample; no previous draft, coaching history or model answer is supplied.
+Do not reconstruct earlier work, compare performance, or infer improvement, independent ability,
+retention, transfer success or mastery. The client records task exposure and assistance separately;
+the stage label alone is not evidence of independence. Return only tentative findings about this text.
+Questions and hints are post-submission feedback, never evidence that the sample was written unaided.
 Do not demand counterarguments in every short draft or infer inability from omission.
 Use not_observable for absent evidence; never also report a finding for the same area.
 Do not use tools or external facts. Never invent supporting statistics or sources.
@@ -35,8 +41,12 @@ def validate_request(task, req):
     context = req.get('task_context')
     if not isinstance(context, dict) or not {'stage', 'topic', 'prompt'} <= set(context) or set(context) - {'stage', 'topic', 'prompt', 'previous'}:
         raise ValidationError('invalid argument task context')
-    if context['stage'] not in ('initial', 'for', 'against', 'revision') or not bounded(context['topic'], 1000) or not bounded(context['prompt'], 2000):
+    if context['stage'] not in ('initial', 'for', 'against', 'revision', 'transfer') or not bounded(context['topic'], 1000) or not bounded(context['prompt'], 2000):
         raise ValidationError('invalid argument stage, topic or prompt')
+    # Transfer must not carry a prior draft, including an empty placeholder.
+    # The context allowlist also rejects coaching/history/feedback fields.
+    if context['stage'] == 'transfer' and 'previous' in context:
+        raise ValidationError('transfer requests must not include a previous draft')
     if 'previous' in context and not bounded(context['previous'], 10000):
         raise ValidationError('invalid previous draft')
     e = req.get('essay')
