@@ -21,10 +21,10 @@ Generate requests through the **actual frontend/core builders and selected works
 
 ```sh
 # From repository root; frontend dependencies must be installed.
-node --import ./frontend/node_modules/tsx/dist/loader.mjs tools/english/workspace-writing-acceptance.ts > /tmp/workspace-requests.json
+node --import ./frontend/node_modules/tsx/dist/loader.mjs frontend/scripts/workspace-writing-acceptance.mts > /tmp/workspace-requests.json
 python backend/manage.py workspace_writing_benchmark \
   --requests /tmp/workspace-requests.json --out /tmp/workspace-dry.json
-node --import ./frontend/node_modules/tsx/dist/loader.mjs tools/english/workspace-writing-acceptance.ts \
+node --import ./frontend/node_modules/tsx/dist/loader.mjs frontend/scripts/workspace-writing-acceptance.mts \
   --recorded /tmp/workspace-dry.json > /tmp/workspace-dry-score.json
 ```
 
@@ -86,3 +86,5 @@ python backend/manage.py test evaluation --noinput
 ```
 
 All automated provider tests use mocked transport. They test gating, actual prompt/endpoint use, quota accounting, fail-closed responses, interrupted-run checkpoints, stale provenance and scorer arithmetic, **not linguistic performance**.
+
+The browser-backed CLI lives under `frontend/scripts`, not the Node-only `tools/english` core compilation boundary. Both the frontend English and standalone English-core typechecks are required.

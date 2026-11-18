@@ -3,9 +3,9 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {argumentRequest,validateArgumentFeedback,buildObservationRequest,validateObservations,fingerprint,wordCount,type ArgumentArtifact,type ArgumentRequest,type EssaySubmission,type WorkspaceGoal,type WorkspaceDifficulty} from '../../packages/english-core/src/index.ts';
-import {loadContent} from '../../frontend/src/english/logic/content.ts';
-import {essayContext} from '../../frontend/src/english/logic/essay-live/studio.ts';
-import {createWorkspaceProfile} from '../../frontend/src/english/logic/essay-live/workspace-profiles.ts';
+import {loadContent} from '../src/english/logic/content.ts';
+import {essayContext} from '../src/english/logic/essay-live/studio.ts';
+import {createWorkspaceProfile} from '../src/english/logic/essay-live/workspace-profiles.ts';
 export interface AcceptanceCase {id:string;kind:'language'|'argument';goal:WorkspaceGoal;difficulty:WorkspaceDifficulty;stage?:ArgumentArtifact['stage'];prompt:string;text:string;annotations:{competency?:string;area?:string;kind?:string;quote:string;note:string;optional?:boolean;acceptAlso?:string[];acceptKinds?:string[]}[];protected:{quote:string;area?:string;why:string}[]}
 export const SUITE_FILE=fileURLToPath(new URL('../../content/english/essay/benchmark/workspace-writing-acceptance-v1.json',import.meta.url));
 export const serverPolicyDigest=()=>createHash('sha256').update(['backend/evaluation/argument.py','backend/evaluation/foundation.py','backend/evaluation/essay.py','backend/evaluation/gateway.py','content/english/prompts/essay-observe.v2.md'].map(p=>readFileSync(fileURLToPath(new URL('../../'+p,import.meta.url)),'utf8')).join('\n')).digest('hex');

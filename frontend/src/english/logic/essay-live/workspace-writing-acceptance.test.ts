@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {acceptanceManifest,acceptanceRequest,loadAcceptanceSuite,scoreAcceptance,anchorMatch,protectedOverlap,type AcceptanceRecording} from '../../../../../tools/english/workspace-writing-acceptance.ts';
+import {acceptanceManifest,acceptanceRequest,loadAcceptanceSuite,scoreAcceptance,anchorMatch,protectedOverlap,type AcceptanceRecording} from '../../../../scripts/workspace-writing-acceptance.mts';
 import {validateArgumentFeedback} from '../../../../../packages/english-core/src/index.ts';
 const manifest=acceptanceManifest(),suite=loadAcceptanceSuite();
 function recording():AcceptanceRecording{return {suite:manifest.suite,request_digest:manifest.request_digest,server_policy_digest:manifest.server_policy_digest,reference_digest:manifest.reference_digest,mode:'mocked-contract-test',results:[]};}
