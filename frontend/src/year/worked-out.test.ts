@@ -164,3 +164,48 @@ test("HCF and LCM: each way that is offered ends on the answer, and every produc
   assert.ok(n > 2000 && (seen.get("Prime factors") ?? 0) > 1500 && (seen.get("Division method") ?? 0) > 500 && (seen.get("Division ladder") ?? 0) > 200, String(n));
   assert.deepEqual(helpMethods("gen:hcf:12,18"), ["Prime factors", "List the factors", "Division method"]);
 });
+
+test("column multiplication: by one digit, or by a number like 90, is set out in columns and ends on the answer", () => {
+  let n = 0, carried = 0, zeros = 0;
+  for (const f of FAMILIES_ALL()) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const m = /^([\d,]+) × ([\d,]+) = \?$/.exec(item.prompt);
+    if (!m) continue;
+    const a = Number(m[1].replace(/,/g, "")), b = Number(m[2].replace(/,/g, "")), lead = Number(String(b).replace(/0+$/, ""));
+    const h = stepsHelp(item.id), last = h?.at(-1);
+    if (!last?.board) { assert.ok(a < 13 || lead < 2 || lead > 9, `${item.id} ${item.prompt} has no columns`); continue; }
+    n++;
+    const rows = last.board, h2 = h!;
+    assert.equal(Number(rows.at(-1)!.trim()), a * b, item.id);
+    assert.equal(String(a * b), question(item.id).answer.replace(/,/g, ""), item.id);
+    assert.ok(new Set(rows.slice(-4).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
+    assert.equal(Number(rows.at(-4)!.trim()), a, item.id);
+    assert.equal(Number(rows.at(-3)!.replace(/[\s×]/g, "")), b, item.id);
+    for (const s of h2) for (const c of s.shown.matchAll(/(\d+) × (\d+) = (\d+)/g)) assert.equal(Number(c[1]) * Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    for (const s of h2) for (const c of s.shown.matchAll(/(\d+) \+ (\d+) = (\d+)/g)) assert.equal(Number(c[1]) + Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    if (h2.some((s) => /carry \d/.test(s.shown))) carried++;
+    if (b >= 10) zeros++;
+    assert.ok(!h2.slice(0, -1).some((s) => String(a * b).length >= 3 && s.shown.includes(String(a * b))), `${item.id}: the answer is not said before the end`);
+    assert.equal(helpMethods(item.id)[0], "In columns", item.id);
+  }
+  console.log(n, "multiplication layouts,", carried, "with carrying,", zeros, "by tens or hundreds");
+  assert.ok(n > 800 && carried > 400 && zeros > 200, `${n} ${carried} ${zeros}`);
+});
+
+test("long multiplication: a two-digit multiplier gets one row for its ones, one for its tens, and the rows are added", () => {
+  let full = 0, part = 0;
+  for (const item of pool("avpp").items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const q = question(item.id), want = Number(q.answer.replace(/,/g, "")), h = stepsHelp(item.id)!, rows = h.at(-1)!.board!;
+    assert.ok(rows, `${item.id} has no columns`);
+    assert.equal(helpMethods(item.id)[0], "In columns", item.id);
+    assert.equal(Number(rows.at(-1)!.trim()), want, item.id);
+    assert.ok(new Set((rows.length === 7 ? rows : rows.slice(-4)).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+) × (\d+) = (\d+)/g)) assert.equal(Number(c[1]) * Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+) \+ (\d+) = (\d+)/g)) assert.equal(Number(c[1]) + Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    assert.ok(!h.slice(0, -1).some((s) => s.shown.includes(String(want))), `${item.id}: the answer is not said before the end`);
+    if (rows.length === 7) { full++; assert.equal(Number(rows[3].trim()) + Number(rows[4].trim()), want, `${item.id}: the rows add to the answer`); } else part++;
+  }
+  console.log(full, "long multiplications,", part, "tens rows");
+  assert.ok(full > 100 && part > 100, `${full} ${part}`);
+});

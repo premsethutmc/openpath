@@ -159,6 +159,82 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
 }
 
 /**
+ * Column multiplication the way it is written at school: by one digit, right to left, carrying; a multiplier like 90 or
+ * 900 has its zeros written first. Read from the question's own words and offered only when it ends on the answer.
+ */
+function multiply(prompt: string | undefined, answer: string): Worked[] | null {
+  const m = prompt ? /^([\d,]+) × ([\d,]+) = \?$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const a = Number(m[1].replace(/,/g, "")), b = Number(m[2].replace(/,/g, ""));
+  const zeros = /0*$/.exec(String(b))![0].length, d = b / 10 ** zeros, result = a * b;
+  if (a < 13 || a > 999999 || d < 2 || d > 9 || zeros > 3 || String(result) !== answer.replace(/,/g, "")) return null;
+  const width = Math.max(String(result).length, String(b).length) + 2, row = (t: string) => t.padStart(width, " ");
+  const da = String(a).split("").reverse().map(Number), n = da.length;
+  const carries: string[] = Array(width).fill(" "), done: string[] = Array(zeros).fill("0");
+  const board = () => [...(carries.some((c) => c !== " ") ? [carries.join("").replace(/\s+$/, "")] : []), row(String(a)), `×${row(String(b)).slice(1)}`, "-".repeat(width), row(done.join(""))];
+  const out: Worked[] = [];
+  if (zeros) out.push({ next: `First: ${b} is ${d} ${["", "tens", "hundreds", "thousands"][zeros]}. What is written before multiplying by ${d}?`, shown: `Write ${zeros === 1 ? "0 in the ones place" : `${zeros} zeros on the right`}. Then multiply by ${d}.`, board: board() });
+  let carry = 0;
+  for (let i = 0; i < n; i++) {
+    const x = da[i], prod = x * d + carry, last = i === n - 1, place = PLACES[i];
+    const lead = i === 0 && !zeros ? "First: start on the right, with the ones. " : "";
+    const sum = carry ? `${x} × ${d} = ${x * d}, and ${x * d} + ${carry} = ${prod}` : `${x} × ${d} = ${prod}`;
+    out.push({ next: `${lead}Multiply the ${place} of ${a} by ${d}${carry ? `, then add the ${carry} that was carried` : ""}.`, shown: last && prod >= 10 ? `${sum}. No column is left, so write ${prod}.` : sum });
+    if (prod >= 10 && !last) {
+      carries[width - 2 - i] = String(Math.floor(prod / 10));
+      done.unshift(String(prod % 10));
+      out.push({ next: `${prod} is more than 9. What is written, and what is carried?`, shown: `Write ${prod % 10} and carry ${Math.floor(prod / 10)} to the ${PLACES[i + 1]} of ${a}.`, board: board() });
+      carry = Math.floor(prod / 10);
+    } else { done.unshift(String(prod)); out[out.length - 1].board = board(); carry = 0; }
+  }
+  if (Number(done.join("")) !== result) return null;
+  out.push({ next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${result}.`, board: board() });
+  return out;
+}
+
+/**
+ * avpp [a, b, k]: a × b with a two-digit b, written as long multiplication: one row for the ones of b, one row for its
+ * tens (a 0 first), then the rows are added. k 1 asks only for the tens row.
+ */
+function longMultiply({ params: [a, b, k], answer }: Q): Worked[] | null {
+  const o = b % 10, T = b - o, t = T / 10, result = a * b;
+  if (k === 1 && t === 1) {
+    // a × 10: the 0 is written, and the number moves one place to the left
+    if (String(a * 10) !== answer.replace(/,/g, "")) return null;
+    const w = String(a * 10).length + 2, r = (x: string) => x.padStart(w, " "), top = [r(String(a)), `×${r("10").slice(1)}`, "-".repeat(w)];
+    return [
+      { next: `First: 10 is 1 ten. What is written before multiplying by 1?`, shown: "Write 0 in the ones place.", board: [...top, r("0")] },
+      { next: `Now multiply ${a} by 1 and write it to the left of the 0.`, shown: `${a} × 1 = ${a}, written one place to the left.`, board: [...top, r(String(a * 10))] },
+      { next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${a * 10}.`, board: [...top, r(String(a * 10))] },
+    ];
+  }
+  if (k === 1) return multiply(`${a} × ${T} = ?`, answer);
+  if (k !== 0 || o < 1 || t < 1 || t > 9 || a < 10 || a > 9999 || String(result) !== answer.replace(/,/g, "")) return null;
+  const width = String(result).length + 2, row = (x: string) => x.padStart(width, " ");
+  const rows: string[] = [], da = String(a).split("").reverse().map(Number);
+  const board = (total = false) => [row(String(a)), `×${row(String(b)).slice(1)}`, "-".repeat(width), ...rows, ...(total ? ["-".repeat(width), row(String(result))] : [])];
+  const out: Worked[] = [];
+  const pass = (d: number, zero: boolean, at: number) => {
+    const done: string[] = zero ? ["0"] : [];
+    if (zero) { rows[at] = row("0"); out.push({ next: `Second row: ${a} × ${T}. The ${t} in ${b} stands for ${T}. What is written first?`, shown: `Write 0 in the ones place. Then multiply ${a} by ${t}.`, board: board() }); }
+    let carry = 0;
+    da.forEach((x, i) => {
+      const prod = x * d + carry, last = i === da.length - 1, c = Math.floor(prod / 10);
+      const lead = i === 0 && !zero ? `First row: ${a} × ${d}, the ones of ${b}. Start on the right. ` : "";
+      const sum = carry ? `${x} × ${d} = ${x * d}, and ${x * d} + ${carry} = ${prod}` : `${x} × ${d} = ${prod}`;
+      done.unshift(last ? String(prod) : String(prod % 10));
+      rows[at] = row(done.join(""));
+      out.push({ next: `${lead}Multiply the ${PLACES[i]} of ${a} by ${d}${carry ? `, then add the ${carry} carried` : ""}.`, shown: prod >= 10 && !last ? `${sum}. Write ${prod % 10}, carry ${c}.` : `${sum}. Write ${prod}.`, board: board() });
+      carry = last ? 0 : c;
+    });
+    return Number(done.join(""));
+  };
+  if (pass(o, false, 0) !== a * o || pass(t, true, 1) !== a * T) return null;
+  out.push({ next: "Last: add the two rows.", shown: `${a * o} + ${a * T} = ${result}`, board: board(true) });
+  return out;
+}
+
+/**
  * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
  * must end on the verified answer or it is not offered.
  */
@@ -237,6 +313,9 @@ export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
     if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
     const c = columns(q.prompt, q.answer);
     if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
+    if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }
+    const mu = multiply(q.prompt, q.answer);
+    if (mu && mu.length >= 2) return [{ name: "In columns", steps: mu }];
     return hcfLcm(q.prompt, q.answer);
   } catch { return null; }
 }
