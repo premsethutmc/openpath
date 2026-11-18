@@ -59,9 +59,9 @@ test("no-spoiler@1: in every lesson whose steps the child does, no picture above
     pictures++;
     const q = question(sc.instance);
     for (const guessing of [true, false]) {
-      const p = lessonPictures(guessing, q.figure ?? null, sc.widget, true, q.answer, q.prompt);
+      const p: { before: unknown; withWorking: unknown; after: unknown } = lessonPictures<unknown>(guessing, q.figure ?? null, sc.widget, true, q.answer, q.prompt);
       for (const shown of [p.before, p.withWorking]) if (shown && JSON.stringify(shown) !== JSON.stringify(q.figure ?? null) && pictureGivesAnswer(shown, q.answer, q.prompt)) bad.push(sc.instance);
-      if (!guessing && p.after) { held++; const t = (p.after as { type: string }).type; types[t] = (types[t] ?? 0) + 1; assert.ok(!p.before || !p.withWorking || true); }
+      if (!guessing && p.after) { held++; const t = (p.after as { type: string }).type; types[t] = (types[t] ?? 0) + 1; }
     }
   }
   assert.deepEqual(bad, []);
