@@ -454,3 +454,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .qcard .kid-places label.kid-unit { flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; flex: 0 1 auto; }
 .qcard .kid-places .kid-unit input { flex: none; width: var(--seats); max-width: 100%; text-align: center; letter-spacing: 0.2em; font-variant-numeric: tabular-nums; padding: 12px 4px; font-size: 1.3rem; }
 .scene-first { margin-top: 6px; }
+
+/* one-help@1: the step help sits inside the working */
+.coach-help { min-height: 44px; }
+.working .coach { margin: 10px 0 0; padding: 0; background: none; grid-template-columns: minmax(0, 1fr); }
+.working .coach > * { grid-column: 1; min-width: 0; }

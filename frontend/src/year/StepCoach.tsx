@@ -37,13 +37,16 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
 
 /** `startOpen`: in a lesson's worked example the steps are there to be done from the start (no button to ask for them);
  *  `onDone` is called when the last step has been done or shown. */
-export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void }) {
+/** one-help@1: in practice the coach lives inside the child's own working ("Work it out step by step"), not beside it:
+ *  `shown` opens it from outside (the "I'm stuck" button and the "Help" button in the working are the same thing). */
+export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone, shown }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void; shown?: boolean }) {
   const steps = useMemo(() => stepsHelp(qid), [qid]);
   const [open, setOpen] = useState(startOpen);
   const [at, setAt] = useState(0);
   const [card, setCard] = useState(false);
   if (!steps) return null;
-  if (!open) return <button type="button" className="secondary coach-open" onClick={() => { setOpen(true); onUsed?.(); }}>{opener}</button>;
+  if (shown === false) return null;
+  if (!open && !shown) return <button type="button" className="secondary coach-open" onClick={() => { setOpen(true); onUsed?.(); }}>{opener}</button>;
   const now = at < steps.length ? steps[at] : null;
   // why@1: the rule behind a step can always be opened: the other skill it leans on, or the question's own skill
   const ruleOf = now?.needs ?? now?.rule ?? null;
@@ -69,7 +72,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
           {entry && <StepEntry key={`${qid}:${at}`} ask={entry} onRight={advance} />}
           {/* a calculation the child can be helped to do, before it is shown: the same smaller question a slip would get */}
           {(() => { const ask = smallerOf(now.shown); return ask ? <SmallAsk key={now.shown} ask={ask} after="Now finish this step yourself, or ask to see it." /> : null; })()}
-          <button type="button" className="secondary" onClick={advance}>{at === steps.length - 1 ? "Show me the last step" : "Show me this step"}</button>
+          <button type="button" className="secondary coach-help" onClick={advance}><span aria-hidden="true">✋ </span>{at === steps.length - 1 ? "Help: show me the last step" : "Help: show me this step"}</button>
         </>
       )}
       {!now && <p className="small muted">{startOpen ? "That is every step." : "That is every step. Now try it yourself."}</p>}

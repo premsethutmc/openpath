@@ -308,3 +308,8 @@ by rule. Three cards so far.
   answer; the way (left or right) is chosen before the point moves.
 - Place value (`places@1`, an aid that is a way of answering): a number asked for in figures is written into its seats
   (crore, lakh, thousand, ones); it cannot be checked until every seat has its digit. Fades to the plain box.
+
+`one-help@1`: "I'm stuck" and "Work it out step by step" are one place. Being stuck (or "Help me with the next step"
+inside the working) opens the working with the next step asked there, a box to fill; a step the child cannot do is
+shown by "Help: show me this step", and the next one loads. The child's own free lines are for working alone and are
+not help; asking for a step is recorded as help, as before. Questions with no working panel keep the old button.

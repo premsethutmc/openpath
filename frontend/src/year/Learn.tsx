@@ -556,6 +556,12 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const submitting = useRef(false);
   // nothing to work out when the answer is tapped from the ones shown
   const workable = q.type !== "written" && !q.picks?.length;
+  // one-help@1: "I'm stuck" and "Work it out step by step" are one place. Being stuck opens the working with the next
+  // step asked there (a box to fill); a step the child cannot do is shown by its "Help" button, and the next one loads.
+  // Typing one's own working is not help; asking for a step is, and is recorded as before.
+  const [coach, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
+  const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
+  const askHelp = () => { setCoach(true); setWorkingOpen(true); setHint(true); };
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && q.type !== "written" ? safeKid(q) : null;
   // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
@@ -600,15 +606,20 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
               Summary still supplies native focus and Enter/Space activation. */}
           <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Work it out step by step" : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
-          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
+          {KID && coach && canCoach ? null : KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
+          {canCoach && (coach
+            ? <StepCoach key={qid} qid={qid} shown />
+            : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
         </details>
       )}
-      {(hint || showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
+      {(hint || showHint) && !(coach && canCoach && !q.hint && !showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         {/* step-help@1: in practice with help, a stuck child asks for one rung at a time; using it is recorded as help (a hint) */}
-        {hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
+        {canCoach
+          ? !coach && <button type="button" className="secondary coach-open" onClick={askHelp}>I'm stuck</button>
+          : hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
         <button
           className="primary"
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
