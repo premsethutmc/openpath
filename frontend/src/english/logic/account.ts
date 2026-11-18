@@ -244,8 +244,8 @@ export class Api {
   examEvaluatorStatus() {
     return this.request<EssayGatewayInfo & { reason: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/?rubric=openpath.exam-writing@1");
   }
-  essayEvaluatorStatus() {
-    return this.request<EssayGatewayInfo & { reason: string; adapter: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/");
+  essayEvaluatorStatus(rubric?:string) {
+    return this.request<EssayGatewayInfo & { reason: string; adapter: string; synthetic_only: boolean }>("GET", `/evaluation/essays/status/${rubric?`?rubric=${encodeURIComponent(rubric)}`:""}`);
   }
   /** One essay evaluation through the server, which holds the provider credentials. Allows time for a model. */
   essayEvaluate(body: { task: "observe" | "rewrite" | "questions"; request: unknown; data_use: "synthetic_test" }) {

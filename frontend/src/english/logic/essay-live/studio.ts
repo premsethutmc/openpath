@@ -84,6 +84,7 @@ import {
 import g8Profile from "../../../../../content/english/essay/g8-writing.json";
 import samplesJson from "../../../../../content/english/essay/samples.json";
 import type { AppContent, Lesson } from "../content.ts";
+import type { WorkspaceBankContent } from "./workspace-bank.ts";
 import type { Feedback } from "../feedback.ts";
 import type { Learner } from "../learner.ts";
 
@@ -154,17 +155,22 @@ export async function connectEvaluator(api: {
  * The essay context for the app's content. `verification` is the eligibility policy for verified mastery: the pilot
  * policy (reviewed, released questions only, answered after release) unless a developer test asks for the developer policy (verification-eligibility@2).
  */
-export function essayContext(content: AppContent, verification: VerificationPolicy = PILOT_VERIFICATION): EssayContext {
+export function essayContext(content: AppContent, verification: VerificationPolicy = PILOT_VERIFICATION, profile: CompetencyProfile = g8Profile as unknown as CompetencyProfile): EssayContext {
   const lessons = new Map<CapabilityId, string[]>();
   const teachingText = new Map<CapabilityId, string[]>();
   for (const l of content.lessons.values()) {
     lessons.set(l.capability, [...(lessons.get(l.capability) ?? []), l.id]);
-    const shown = [l.rule, ...l.examples.map((e) => e.text), l.tip ?? "", l.check.prompt, ...l.check.options, l.check.explain].filter(Boolean);
+    const shown = [l.rule, ...l.examples.flatMap((e) => [e.text, e.note ?? ""]), l.tip ?? "", l.check.prompt, ...l.check.options, l.check.explain].filter(Boolean);
     teachingText.set(l.capability, [...(teachingText.get(l.capability) ?? []), ...shown]);
   }
   // the pilot's pools are existing item-role metadata: a question reserved for one use is never taken for another
   const pools = new Map([...content.pilot.pools].map(([id, p]) => [id, p.pool]));
-  return { ctx: content.ctx, profile: indexCompetencyProfile(g8Profile as unknown as CompetencyProfile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT, verification };
+  // Workspace-only authored roles augment, never rewrite, the reviewed pilot manifest.
+  for (const [id,pool] of (content as Partial<WorkspaceBankContent>).workspacePools ?? []) {
+    if (pools.has(id) && pools.get(id) !== pool) throw new Error("Conflicting assessment role metadata.");
+    pools.set(id,pool);
+  }
+  return { ctx: content.ctx, profile: indexCompetencyProfile(profile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT, verification };
 }
 
 export type Stage = "write" | "diagnose" | "plan" | "learn" | "rewrite" | "done";
@@ -213,6 +219,13 @@ export interface StudioView {
   laterCheck: { check: PlannedCheck; item: Item; position: number; total: number } | null;
 }
 
+/** Opt-in workspace configuration; omitted options preserve the legacy synthetic studio. */
+export interface EssayStudioOptions {
+ profile?: CompetencyProfile;
+ /** Reject unavailable/invalid model analysis without invoking the pattern or recorded fallback. */
+ failClosed?: boolean;
+ useFallback?: boolean;
+}
 export class EssayStudio {
   readonly learner: Learner;
   private ectxCache: { content: AppContent; ectx: EssayContext } | null = null;
@@ -223,17 +236,27 @@ export class EssayStudio {
 
   /** Which evidence may verify mastery here (the pilot policy unless a developer test chose otherwise). */
   readonly verification: VerificationPolicy;
+  private readonly options: EssayStudioOptions;
+  private readonly configuredEvaluator: boolean;
 
-  constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator(), verification: VerificationPolicy = PILOT_VERIFICATION) {
+  constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator(), verification: VerificationPolicy = PILOT_VERIFICATION, options: EssayStudioOptions = {}) {
+    this.options = structuredClone(options);
+    this.configuredEvaluator = evaluator !== null;
     this.verification = verification;
     this.learner = learner;
     this.fallback = fallback;
-    this.evaluator = evaluator ?? fallback;
+    const noFallback = options.failClosed === true || options.useFallback === false;
+    this.evaluator = evaluator ?? (noFallback ? {
+      id: "workspace-unavailable", version: "unavailable@1", model: "none",
+      protocols: {observe: "essay-observe.v2" as const, rewrite: "essay-rewrite.v2" as const},
+      observe: async () => { throw new Error("No configured evaluator is available. No analysis was inferred."); },
+      rewrite: async () => { throw new Error("No configured evaluator is available. No rewrite judgment was inferred."); },
+    } : fallback);
   }
 
   /** The essay context for the learner's current content (which grows when generated questions are recorded). */
   get ectx(): EssayContext {
-    if (this.ectxCache?.content !== this.learner.content) this.ectxCache = { content: this.learner.content, ectx: essayContext(this.learner.content, this.verification) };
+    if (this.ectxCache?.content !== this.learner.content) this.ectxCache = { content: this.learner.content, ectx: essayContext(this.learner.content, this.verification, this.options.profile) };
     return this.ectxCache.ectx;
   }
 
@@ -243,11 +266,11 @@ export class EssayStudio {
   }
 
   get connected(): boolean {
-    return this.evaluator !== this.fallback;
+    return this.configuredEvaluator && this.evaluator !== this.fallback;
   }
 
   private analysedBy(analysis: EssayAnalysis | null, text: string): AnalysedBy | null {
-    if (!analysis) return null;
+    if (!analysis || ((this.options.failClosed || this.options.useFallback === false) && analysis.status !== "accepted")) return null;
     if (analysis.evaluator.id === "openpath-gateway:llm") return "llm";
     if (analysis.evaluator.id === "openpath-gateway:replay") return "replay";
     return this.fallback.source(text);
@@ -373,13 +396,13 @@ export class EssayStudio {
     const a = await analyseEssay(this.ectx, this.events, this.evaluator, essayId, m2);
     await this.learner.recordEssay(a.event);
     // the server's evaluator failed or answered invalidly: that is recorded above; the local fallback answers next
-    if (this.connected && a.analysis.status === "rejected") {
+    if (this.connected && a.analysis.status === "rejected" && !this.options.failClosed && this.options.useFallback !== false) {
       const [m3] = await this.learner.essayMeta(1);
       await this.learner.recordEssay((await analyseEssay(this.ectx, this.events, this.fallback, essayId, m3)).event);
     }
     // with a question writer connected, the learner chooses a competency and fresh questions are written for it;
     // otherwise diagnostic questions come from the bank at once
-    if (!this.canGenerate) {
+    if (!this.canGenerate && (!(this.options.failClosed || this.options.useFallback === false) || a.analysis.status === "accepted")) {
       const metas = await this.learner.essayMeta(20);
       const d = planDiagnostics(this.ectx, this.events, (n) => metas[n]);
       if (d.events.length) await this.learner.recordEssay(...(d.events as EssayEvent[]));
@@ -524,7 +547,7 @@ export class EssayStudio {
     const [m] = await this.learner.essayMeta(1);
     // the server's evaluator judges any rewrite; locally, only the built-in sample rewrite has a recorded judgement
     const known = SAMPLES.rewrites.some((r) => r.fingerprint === fingerprint(text));
-    const judge = this.connected ? this.evaluator : known ? this.fallback : null;
+    const judge = this.connected ? this.evaluator : known && !this.options.failClosed && this.options.useFallback !== false ? this.fallback : null;
     const r = await evaluateRewrite(this.ectx, this.events, judge, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
     await this.learner.recordEssay(r.event);
     return this.view();

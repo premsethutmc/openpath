@@ -4,11 +4,20 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## Integrated English workspace (2026-11-18, work in progress)
+- Branch `feat/english-workspace-2026-11-18`, PR #212; initial head `419fca60` based on main `dc7572e8` (#209).
+- Owner clarified comprehensive ongoing grammar/articulation practice, goal-dependent tasks, for/against arguments and own-text repair, not canned rewrites or isolated milestones.
+- Reuses EssayStudio/learner ledger for hypotheses, verification, plans, teaching, independent checks and retention; separate argument observations never imply mastery.
+- Grade7/general/CAT/GRE/GMAT self-selected candidate profiles; 17 specified competencies have teaching, 3 observation-only. 192 candidate role-separated tasks deepen 4 skills × 3 references (12/51 cells); other fresh-check shortages remain.
+- Synthetic only, optional configured evaluator fails closed; no provider activation, real learner data, audio or maths changes. See `docs/product/english/learner-workspace.md`.
+- PR #210 merged as `ba8d1106` after19checks; reading work integrated. Initial workspace CI phone journey/core/build passed; expanded bank and durable own-word drills require new exact-head CI. Not yet merged or live-ready.
+
 ## English reading teaching milestone (2026-11-18)
 - Branch `feat/english-reading-guided-2026-11-18`, based on main `dc7572e8` (PR #209).
 - Four worked reading passages + distinct guided questions with hints/retry/reveal; independent transfer remains separate.
 - Reuses one supported-lesson engine and shared UI for writing and reading; completion never awards evidence/mastery.
 - Existing synthetic/provider/privacy controls unchanged. Exact-head browser/aggregate CI required before merge.
+
 
 ## English guided teaching milestone (2026-11-18)
 - Branch `feat/english-guided-teaching-2026-11-18`, based on main `4552ce4a` (PR #207).
@@ -32,7 +41,7 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
-- One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.
+- Latest English direction: build the coherent ongoing learner journey rather than successive isolated milestones; report exact tested coverage and remaining gaps.
 - Long jobs run in GitHub Actions; schedule a check-in instead of waiting. How-to: `docs/runbooks/DEV.md`.
 
 ## Branches

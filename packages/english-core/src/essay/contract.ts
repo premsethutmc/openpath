@@ -1,3 +1,4 @@
+import type {ArgumentArtifact,ArgumentFeedback,ArgumentPractice,WorkspacePreferences} from './argument.ts';
 /**
  * Essay-to-mastery shared API contract (essay-contract@1).
  *
@@ -689,6 +690,10 @@ export interface EssayLearnerProfile {
  * The engine records them and changes no estimate; essay projections read them back.
  */
 export type EssayRecord =
+  | { type: "argument_artifact"; artifact: ArgumentArtifact }
+  | { type: "argument_feedback"; feedback: ArgumentFeedback }
+  | { type: "argument_practice"; practice: ArgumentPractice }
+  | { type: "workspace_preferences"; preferences: WorkspacePreferences }
   | { type: "submission"; submission: EssaySubmission }
   | { type: "analysis"; analysis: EssayAnalysis }
   | { type: "diagnostic"; request: DiagnosticRequest }
