@@ -210,6 +210,7 @@ export function describe(v: V): string {
     case "pictograph":
       return `A pictograph where one picture stands for ${num(v.key, 1)}: ${arr<string>(v.labels).map((l, i) => `${l} ${arr<number>(v.counts)[i] / num(v.key, 1)} pictures`).join(", ")}`;
     case "table":
+      if (v.as === "written") return `${arr<string>(v.head)[0] ?? "Working"}, written out: ${arr<(string | number)[]>(v.rows).map((r) => String(r[0]).trim()).filter(Boolean).join("; ")}`;
       if (v.as === "tiles") return `A picture of ${arr<(string | number)[]>(v.rows).length > 1 ? "rows of cards" : "a row of cards"}: ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
       return `A table: ${arr<string>(v.head).join(", ")}; ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
     case "shape":
@@ -488,6 +489,8 @@ export function Figure({ v }: { v: V }) {
     case "table": {
       const head = arr<string>(v.head);
       const rows = arr<(string | number)[]>(v.rows);
+      // written@1: working as it is written on paper (a long division), kept in fixed-width rows so the columns line up
+      if (v.as === "written") return <figure className="figure written" aria-label={label}><pre className="coach-board">{rows.map((r) => String(r[0] ?? "")).join("\n")}</pre></figure>;
       // picture-words@1: a row of things the words call a picture is drawn as cards, not as a table of data
       if (v.as === "tiles") {
         // a heading that only counts the places (1, 2, 3 or Card 1) says nothing: only words such as "left" are kept

@@ -3904,7 +3904,7 @@
    "kind": "card",
    "competency": "MATH.number.long-division",
    "title": "Divide multi-digit numbers",
-   "hash": "30c31429",
+   "hash": "b6953a1c",
    "source": "rule",
    "from": "lesson",
    "classes": [

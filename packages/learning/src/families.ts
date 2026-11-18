@@ -18,6 +18,7 @@ import { selectable } from "./question-status";
 import { b1Object, laObject, m2Object } from "./typed-contract.ts";
 import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
+import { divide } from "./worked-out";
 
 import type { InstanceTeaching } from "./family-kit";
 import { pictured, EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
@@ -699,7 +700,9 @@ const F: Def[] = [
     explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "whole" ? `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([q, d]) => (d <= 5 && q < 30 ? 1 : q < 60 ? 2 : 3),
-    teach: { idea: "Dividing undoes multiplying: it asks how many lots of the divisor make the number.", method: "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts.", visual: ([q, d]) => { const chunk = Math.floor(q / 10) * 10, rest = q - chunk; const cols = [chunk, rest].filter((x) => x > 0); return { type: "grid", rows: 1, cols: cols.length, rowLabels: [String(d)], colLabels: cols.map(String), labels: cols.map((x) => String(x * d)) }; } },
+    teach: { idea: "Dividing undoes multiplying: it asks how many lots of the divisor make the number.", method: "Set it out as a long division, with the divisor outside the bracket. See how many times it fits in the first digits, write that on top, take away, bring down the next digit, and repeat.",
+      // school-division@1: the picture is the finished written layout, a row of the table for each line a child writes
+      visual: ([q, d]) => { const w = divide(q * d, d, "quotient", String(q)), rows = w?.at(-1)?.board; return rows ? { type: "table", as: "written", head: ["Long division"], rows: rows.map((r) => [r]) } : { type: "grid", rows: 1, cols: 1, rowLabels: [String(d)], colLabels: [String(q)], labels: [String(q * d)] }; } },
   },
   {
     id: "fmulw",

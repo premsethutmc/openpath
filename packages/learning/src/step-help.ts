@@ -138,9 +138,9 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     // lead-in@1: the first line of each calculation's working says which calculation it is, so "16 = 10 + 6" never
     // arrives from nowhere; the step itself then closes the working instead of opening it
     const sums = [...own.shown.replace(/(\d),(?=\d{3}\b)/g, "$1").matchAll(/(?<![\d.\/−-])(\d{1,7})\s*([×÷+−])\s*(\d{1,7})\s*=\s*\d{1,12}(?![\d.\/])/g)];
-    const led = sums.flatMap((m) => deepen(m[0]).map((f, k) => (k === 0 ? { ...f, next: `To work out ${m[1]} ${m[2]} ${m[3]}: ${f.next.charAt(0).toLowerCase()}${f.next.slice(1)}` } : f)));
+    const led = sums.flatMap((m) => deepen(m[0]).map((f, k) => (k === 0 && !/^To work out /.test(f.next) ? { ...f, next: `To work out ${m[1]} ${m[2]} ${m[3]}: ${f.next.charAt(0).toLowerCase()}${f.next.slice(1)}` } : f)));
     const calc = !/∫|d\s*\/\s*d[a-z]/.test(own.shown) && led.length === finer.length;
-    const lines: StepHelp[] = (calc ? led : finer).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}) }));
+    const lines: StepHelp[] = (calc ? led : finer).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}), ...(f.board ? { board: f.board } : {}) }));
     if (calc) { if (i === 0) lines[0].next = `First: ${lines[0].next.charAt(0).toLowerCase()}${lines[0].next.slice(1)}`; own.next = own.next.replace(/^First: /, "Now: "); }
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];

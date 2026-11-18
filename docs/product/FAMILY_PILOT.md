@@ -435,3 +435,8 @@ were the same method, shorter.
 `lead-in@1`: where a step's calculation is worked line by line before the step (deepen@1), the first of those lines
 names the calculation ("To work out 30 − 25: take away the tens"), so a line such as "16 = 10 + 6" never arrives from
 nowhere. The step that follows then reads "Now: …" where it used to read "First: …".
+
+`school-division@1`: a division worked inside any step (deepen@1) is set out as the school long division, with the
+layout drawn, in place of round-number chunks; a table fact and a division by 10, 100 or 1000 get no working. The long
+division lesson teaches the same bracket method, and its picture is the finished written layout (`as: "written"` in
+Figure). Decimal and fraction layouts were checked at 390 px: both fit.

@@ -13,8 +13,9 @@
  * missing, never wrong. What it cannot read is left as the step was.
  */
 import { readExpression, valueOf, variablesOf, type ExprNode } from "./line-check";
+import { divide } from "./worked-out";
 
-export interface Finer { next: string; shown: string }
+export interface Finer { next: string; shown: string; /** board@1: the written layout once this line is done */ board?: string[] }
 
 // ---------------------------------------------------------------- whole numbers, by place value
 const places = (n: number): number[] => String(n).split("").map((d, i, a) => Number(d) * 10 ** (a.length - 1 - i)).filter((v) => v > 0);
@@ -32,6 +33,17 @@ function arithmetic(a: number, op: string, b: number): Finer[] {
   }
   if (op === "÷") {
     if (b < 2 || a % b !== 0 || a / b <= 12) return [];
+    // dividing by 10, 100 or 1000 moves the digits: there is nothing to work
+    if (b === 10 || b === 100 || b === 1000) return [];
+    // school-division@1: worked as it is written at school (6 ) 348, a digit at a time), the same layout the long-division
+    // questions use; the round-number shortcut below is kept only for divisors the layout does not take
+    const school = divide(a, b, "quotient", String(a / b));
+    if (school && school.length > 2) {
+      return [
+        { next: `To work out ${a} ÷ ${b}, set it out as a long division.`, shown: `${b} goes outside the bracket, ${a} inside.`, board: ["", `${b} ) ${a}`] },
+        ...school.slice(0, -1).map((w) => ({ next: w.next.replace(/^First: (.)/, (_, c: string) => c.toUpperCase()), shown: w.shown, ...(w.board ? { board: w.board } : {}) })),
+      ];
+    }
     const q = places(a / b);
     if (q.length < 2) return [];
     let left = a;
