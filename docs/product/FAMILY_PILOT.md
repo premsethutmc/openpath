@@ -431,3 +431,7 @@ whole numbers with the point kept in its column; 500 questions proved.
 `fractionForms`: improper → mixed by dividing, mixed → improper by whole × bottom + top, and a percentage of an amount as
 a fraction out of 100; 938 questions proved. These and unlike fractions show one tab (`SOLE_WAYS`): the type's own steps
 were the same method, shorter.
+
+`lead-in@1`: where a step's calculation is worked line by line before the step (deepen@1), the first of those lines
+names the calculation ("To work out 30 − 25: take away the tens"), so a line such as "16 = 10 + 6" never arrives from
+nowhere. The step that follows then reads "Now: …" where it used to read "First: …".

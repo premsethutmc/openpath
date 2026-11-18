@@ -18,12 +18,15 @@ test("every question's help is its own steps, in order, with nothing worked in t
     for (const f of all!.filter((x) => x.finer)) {
       assert.ok(/[.?]$/.test(f.next) && f.next.length <= 110 && !f.next.replace(/[a-z] = [−\d./]+/g, "").replace("∫ u dv = uv − ∫ v du", "").includes("="), `${q.id}: ${f.next} / ${f.shown}`);
     }
+    // lead-in@1: a run of arithmetic working opens by naming the calculation it works out, and the help opens with "First"
+    all!.forEach((x, i) => { if (x.finer && !all![i - 1]?.finer && /^\d+ = \d+ \+ \d+$|which leaves/.test(x.shown)) assert.ok(/^(First: t|T)o work out \d+ [×÷+−] \d+: /.test(x.next), `${q.id}: ${x.next}`); });
+    assert.ok(/^First: /.test(all![0].next), `${q.id}: ${all![0].next}`);
     const h = all && all.filter((x) => !x.finer);
     assert.ok(h && h.length === q.steps.length, q.id);
     h!.forEach((x, i) => {
       assert.equal(x.shown, explainStep(q, q.steps[i]), q.id);
       // what to do is the step's operation in words; it never contains the step's own result
-      assert.ok(/^(First|Next|Last): .+\.$/.test(x.next), `${q.id}: ${x.next}`);
+      assert.ok(/^(First|Next|Last|Now): .+\.$/.test(x.next), `${q.id}: ${x.next}`);
       assert.ok(x.next.length <= 80 && x.next !== `${i === 0 ? "First" : "Next"}: ${x.shown}.`, `${q.id}: ${x.next}`);
       // the other skill a step leans on is named only when it is another skill, and only when it has a card
       if (x.needs) { needing++; assert.notEqual(x.needs, q.competency); assert.equal(x.needs, q.steps[i].competency); assert.ok(cardFor(x.needs)); }
