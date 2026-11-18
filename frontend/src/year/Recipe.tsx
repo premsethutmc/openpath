@@ -14,7 +14,7 @@ import { useEffect, useRef, useState, type JSX, type ReactNode } from "react";
 import { useResume } from "./resume";
 import type { Scene } from "../../../packages/learning/src/scene";
 import { stepsOf, workedFor, type Choice, type Recipe, type RecipeStep } from "../../../packages/learning/src/recipe";
-import { layoutFor } from "./recipe-layout";
+import { layoutFor, playFirst } from "./recipe-layout";
 import type { Guess } from "../../../packages/learning/src/families";
 import { FeedbackBox } from "./Feedback";
 import { Figure } from "./Figure";
@@ -123,7 +123,7 @@ function useProgress(recipe: Recipe, resumeKey: string | undefined) {
  */
 function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; onDone: () => void; doneLabel: string; resumeKey?: string }) {
   const worked = workedFor(recipe.competency);
-  const steps = stepsOf(recipe, !!worked);
+  const steps = playFirst(stepsOf(recipe, !!worked));
   const { guess, missions, shown, keep, reset } = useProgress(recipe, resumeKey);
   const [choice, setChoice] = useState<number | null>(null);
   const done = (s: RecipeStep) => (s.kind === "predict" ? guess !== null : s.kind === "mission" ? missions > s.index : s.kind === "solve" ? shown > worked!.steps.length : s.kind === "choose" ? choice !== null && !!recipe.choose.choices[choice].right : true);
@@ -149,13 +149,14 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
     <div className="stack enter" data-recipe={recipe.competency} data-recipe-layout="flow" data-recipe-step={steps[open].kind}>
       <div className="panel lesson recipe recipe-flow">
         <p className="eyebrow">{recipe.title}</p>
-        {steps.slice(0, open + 1).map((s, i) => (s.kind === "mission" && done(s)
+        {/* play-first@1: the first thing to do is at the top of the screen, with the story it belongs to under it */}
+        {(open >= 1 && steps[0].kind === "question" && steps[1].kind === "mission" ? [steps[1], steps[0], ...steps.slice(2, open + 1)] : steps.slice(0, open + 1)).map((s) => (s.kind === "mission" && done(s)
           ? <p key={keyOf(s)} className="recipe-done" data-recipe-part={keyOf(s)}><span aria-hidden="true">✓ </span>{recipe.missions[s.index].success}</p>
           : (
-            <section key={keyOf(s)} className="recipe-part" data-recipe-part={keyOf(s)} ref={i === open ? (el) => { newest.current = el; } : undefined}>
+            <section key={keyOf(s)} className="recipe-part" data-recipe-part={keyOf(s)} ref={s === steps[open] ? (el) => { newest.current = el; } : undefined}>
               <h3>{headingOf(recipe, s)}</h3>
               {body(s)}
-              {KID && <FeedbackBox key={`fb-${keyOf(s)}`} where={where(recipe, keyOf(s))} />}
+              {KID && s.kind !== "question" && <FeedbackBox key={`fb-${keyOf(s)}`} where={where(recipe, keyOf(s))} />}
             </section>
           )))}
         {/* the way on sits at the end of the page it belongs to (a bar fixed to the bottom would cover a long page) */}

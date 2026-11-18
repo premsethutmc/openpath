@@ -8,7 +8,7 @@ import { moduleFor } from "../../../packages/learning/src/content";
 import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { check, initial, measures, met, readout, set, states } from "../../../packages/learning/src/scene";
 import { ALL_RECIPES, checkRecipe, recipeFor, stepsOf, workedFor, type Recipe } from "../../../packages/learning/src/recipe";
-import { layoutFor } from "./recipe-layout";
+import { layoutFor, playFirst } from "./recipe-layout";
 import { problemOf } from "../../../packages/learning/src/families";
 import { taughtExposureKeys } from "../../../packages/learning/src/teaching-exposure";
 import { exposureKey } from "../../../packages/learning/src/families";
@@ -78,8 +78,13 @@ test("how to solve it: every lesson shows its own worked example, with the famil
 test("layout@1: one thing at a time for Classes 1 to 5, the page that grows from Class 6 and when the class is not known", () => {
   for (const r of ALL_RECIPES) {
     assert.ok(["idea", "method", "fact"].includes(r.type));
-    for (const g of [1, 3, 5]) assert.equal(layoutFor(r, g), "steps");
-    for (const g of [6, 8, 12]) assert.equal(layoutFor(r, g), "flow");
+    for (const g of [1, 2, 3]) assert.equal(layoutFor(r, g), "steps");
+    for (const g of [4, 5, 6, 8, 12]) assert.equal(layoutFor(r, g), "flow");
+    // play-first@1: on the page that grows, the guess comes just before the last thing to find out (when there are two or more)
+    const kinds = playFirst(stepsOf(r, true)).map((s) => s.kind), n = r.missions.length;
+    assert.equal(kinds.length, stepsOf(r, true).length);
+    if (r.type !== "fact" && n >= 2) { assert.equal(kinds[0], "question"); assert.equal(kinds[1], "mission"); assert.equal(kinds[kinds.lastIndexOf("mission") - 1], "predict"); }
+    if (r.type !== "fact" && n === 1) assert.deepEqual(kinds.slice(0, 3), ["question", "predict", "mission"]);
     assert.equal(layoutFor(r, null), "flow");
   }
 });

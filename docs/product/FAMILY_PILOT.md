@@ -342,3 +342,7 @@ Prime-numbers lesson (the pattern for a story lesson done fully):
 - `tried@1` (`log`): the scene keeps each number of rows tried and who was left over ("3 rows: 4 in each, 1 left over"),
   so the pattern across the tries can be read; the closing sentence says why trying 2 and 3 rows was enough.
 - `try-first@1`: on the guess page, "Not sure? Try it first" goes straight to the rows (the guess is not evidence).
+
+`play-first@1` (`recipe-layout.ts`, owner's decision 18 Nov 2026): from Class 4 a story lesson is one screen that grows
+(no Next between parts), and it opens on the thing to play with, the story under it. The guess is asked just before the
+last thing to find out, when the learner has something to guess from. Classes 1 to 3 keep one part at a time.
