@@ -39,7 +39,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { guessOf, problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
-import { compose, kidQuestion, type Ask as KidAsk } from "../../../packages/learning/src/kid-say";
+import { compose, kidQuestion, type Ask as KidAsk, type PlacesAsk } from "../../../packages/learning/src/kid-say";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
 import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
@@ -320,7 +320,7 @@ const still = <T extends { type?: string }>(v: T, test: boolean): T => (test && 
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
-export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk | PlacesAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
   const [parts, setParts] = useState<string[]>([]);
   const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
   if (ask.kind === "tap")

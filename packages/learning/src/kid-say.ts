@@ -19,15 +19,16 @@ export type Ask =
   | { kind: "money" }
   | { kind: "order"; items: string[]; first: string; prefix?: string }
   | { kind: "tap"; items: { label: string; value: string }[] }
-  /** places@1: a place-value chart to fill, one box for each group of seats (crore, lakh, thousand, ones). Every seat
-   *  needs its digit, so an empty place has to be given its zero; the boxes are read back as the one number. */
-  | { kind: "places"; seats: { label: string; width: number }[] }
   /** numbers multiplied together, typed as 3 × 3 × 11 (read back as the list the marking wants) */
   | { kind: "product" }
   /** draw@1: turn an arm on a protractor; the fixed arm lies on 0 of the inner (0, right) or outer (180, left) scale */
   | { kind: "turn"; fixed: 0 | 180 }
   /** draw@1: raise and lower bars on a scale (each line is `step`, up to `lines` lines) */
   | { kind: "bars"; labels: string[]; step: number; lines: number };
+/** places@1: a place-value chart to fill, one box for each group of seats (crore, lakh, thousand, ones). Every seat needs
+ *  its digit, so an empty place has to be given its zero; the boxes are read back as the one number. Only ever an aid: a
+ *  question's own ask is never this. */
+export type PlacesAsk = { kind: "places"; seats: { label: string; width: number }[] };
 export interface KidQ {
   say: string;
   ask: Ask;
@@ -38,7 +39,7 @@ export interface KidQ {
   note?: string;
   /** support-ladder@1: pictures that only help (the question is whole without them), most help first; `figure` is the
    *  first. They fade as the child gets such questions right. A picture that is the question's data is never an aid. */
-  aids?: { name: string; figure?: Visual; ask?: Ask }[];
+  aids?: { name: string; figure?: Visual; ask?: PlacesAsk }[];
 }
 interface Q {
   id: string;
@@ -481,7 +482,7 @@ export function keepPicture(q: Q, say: string): boolean {
  * (the documented slip is to write the spoken parts side by side, with no zeros for the empty places). The seats are those
  * of the answer: groups of three for millions, else the Indian groups. Null for anything else.
  */
-export function placesAsk(prompt: string, type: string, answer: string): Ask | null {
+export function placesAsk(prompt: string, type: string, answer: string): PlacesAsk | null {
   if (type !== "integer" || !/\bin figures\b/i.test(prompt) || !/^\d{4,12}$/.test(answer)) return null;
   const intl = /\bmillion|\bbillion|international/i.test(prompt);
   const names = intl ? ["ones", "thousand", "million", "billion"] : ["ones", "thousand", "lakh", "crore"];
@@ -490,7 +491,7 @@ export function placesAsk(prompt: string, type: string, answer: string): Ask | n
   for (let left = answer.length, i = 0; left > 0 && i < 4; i++) { const w = Math.min(widths[i], left); seats.unshift({ label: names[i], width: w }); left -= w; }
   return seats.length >= 2 && seats.reduce((n, x) => n + x.width, 0) === answer.length ? { kind: "places", seats } : null;
 }
-export function compose(ask: Ask, parts: string[], answer?: string, type?: string): string {
+export function compose(ask: Ask | PlacesAsk, parts: string[], answer?: string, type?: string): string {
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "tap" || ask.kind === "turn") return parts[0] ?? "";
