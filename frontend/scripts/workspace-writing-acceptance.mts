@@ -33,6 +33,30 @@ export function anchorMatch(text:string,quote:string,anchor:string){
  const q=text.indexOf(quote),a=text.indexOf(anchor),overlap=Math.max(0,Math.min(q+quote.length,a+anchor.length)-Math.max(q,a));
  return overlap>=anchor.length*.5&&overlap>=quote.length*.5;
 }
+/** A localized lexical edit, not a semantic correctness judgment. Unchanged
+ * context is excluded only when a non-empty replacement has an unambiguous token diff. */
+export function correctionFocus(quote:string,correction?:string):string|null{
+ if(!correction||correction===quote)return null;
+ const a=[...quote.matchAll(/\S+/g)],b=[...correction.matchAll(/\S+/g)];
+ let first=0,last=a.length,end=b.length;
+ while(first<last&&first<end&&a[first][0]===b[first][0])first++;
+ while(last>first&&end>first&&a[last-1][0]===b[end-1][0]){last--;end--;}
+ if(first===last||first===end)return null; // pure insertion/deletion remains conservative
+ const focus=quote.slice(a[first].index!,a[last-1].index!+a[last-1][0].length);
+ return /[A-Za-z]{2}/.test(focus)?focus:null;
+}
+export function correctionAnchorMatch(text:string,quote:string,anchor:string,correction?:string){
+ if(anchorMatch(text,quote,anchor))return true;
+ const focus=correctionFocus(quote,correction);
+ // Only localized edits wholly inside a reference anchor, with unique source spans.
+ // Broad/full-draft rewrites and adjacent edits must not gain reference credit.
+ if(!focus||!quote.includes(anchor)||quote.length>Math.max(120,anchor.length*4)||
+    (quote===text&&quote.length>anchor.length*2)||
+    text.indexOf(quote)!==text.lastIndexOf(quote)||text.indexOf(anchor)!==text.lastIndexOf(anchor)||
+    quote.indexOf(focus)!==quote.lastIndexOf(focus))return false;
+ const q=text.indexOf(quote),a=text.indexOf(anchor),f=q+quote.indexOf(focus);
+ return q>=0&&a>=0&&f>=a&&f+focus.length<=a+anchor.length;
+}
 /** Protected spans are a conservative review alarm: even one short alleged error inside valid text matters.
  * Unlike required-anchor credit, ambiguity cannot suppress an alarm. */
 export function protectedOverlap(text:string,quote:string,protectedQuote:string){
@@ -53,10 +77,10 @@ export function scoreAcceptance(recording:AcceptanceRecording){
  if(evaluators.size>1)throw Error('Mixed evaluator identities cannot be aggregated. Score separate runs.');
  const cases=suite.cases.map(c=>{
   const run=recording.results.find(r=>r.id===c.id);const req=acceptanceRequest(c);const required=c.annotations.filter(a=>!a.optional&&(c.kind==='argument'||a.kind==='error'));
-  const base={id:c.id,kind:c.kind,goal:c.goal,required:required.length,matched:0,missed:required.map(a=>a.quote),protectedFlags:[] as string[],unmatched:[] as string[],rejected:0,review:[] as unknown[]};
+  const base={id:c.id,kind:c.kind,goal:c.goal,required:required.length,matched:0,missed:required.map(a=>a.quote),protectedFlags:[] as string[],contextOnlyProtectedOverlaps:[] as string[],strictMatched:0,unmatched:[] as string[],rejected:0,review:[] as unknown[]};
   if(!run||run.status!==200)return {...base,status:'unavailable',accepted:0};
   const envelope=run.response as any;
-  let observations:{area:string;quote:string;kind:string;review:unknown}[]=[];
+  let observations:{area:string;quote:string;kind:string;correction?:string;review:unknown}[]=[];
   try{
    if(c.kind==='argument'){
     const who=envelope?.evaluator;
@@ -69,22 +93,32 @@ export function scoreAcceptance(recording:AcceptanceRecording){
     const result=validateObservations(context(c),submission(c),envelope.output,{id:who.id,version:who.version,model:who.model,protocol:who.protocol},`acceptance:${c.id}`);
     base.rejected=result.rejected.length;
     if(result.status!=='accepted')return {...base,status:'rejected',accepted:0};
-    observations=result.observations.map(o=>({area:o.competency,quote:o.span.quote,kind:o.kind??'error',review:o}));
+    observations=result.observations.map(o=>({area:o.competency,quote:o.span.quote,kind:o.kind??'error',correction:o.correction,review:o}));
    }
   }catch{return {...base,status:'rejected',accepted:0,rejected:Math.max(base.rejected,1)};}
   const relevant=observations.filter(o=>c.kind==='argument'||o.kind==='error');
-  const matches=(o:typeof relevant[number],a:AcceptanceCase['annotations'][number])=>(c.kind==='argument'||a.kind==='error')&&[(a.area??a.competency),...(a.acceptAlso??[])].includes(o.area)&&anchorMatch(c.text,o.quote,a.quote);
+  const matches=(o:typeof relevant[number],a:AcceptanceCase['annotations'][number])=>(c.kind==='argument'||a.kind==='error')&&[(a.area??a.competency),...(a.acceptAlso??[])].includes(o.area)&&correctionAnchorMatch(c.text,o.quote,a.quote,o.correction);
+  const strictUsed=new Set<number>();
+  const strictMatched=required.filter(a=>{const i=relevant.findIndex((o,i)=>!strictUsed.has(i)&&matches(o,a)&&anchorMatch(c.text,o.quote,a.quote));if(i<0)return false;strictUsed.add(i);return true;}).length;
   const used=new Set<number>();
   const missed=required.filter(a=>{const i=relevant.findIndex((o,i)=>!used.has(i)&&matches(o,a));if(i<0)return true;used.add(i);return false;});
   // Unmatched findings need review, not an automatic false-positive verdict: references are incomplete.
   const unmatched=relevant.filter(o=>!c.annotations.some(a=>matches(o,a))).map(o=>`${o.area}: ${o.quote}`);
-  const protectedFlags=relevant.filter(o=>c.protected.some(p=>(!p.area||p.area===o.area)&&protectedOverlap(c.text,o.quote,p.quote))).map(o=>`${o.area}: ${o.quote}`);
-  return {...base,status:'accepted',accepted:observations.length,matched:required.length-missed.length,missed:missed.map(a=>a.quote),unmatched,protectedFlags,review:observations.map(o=>o.review)};
+  const overlaps=relevant.filter(o=>c.protected.some(p=>(!p.area||p.area===o.area)&&protectedOverlap(c.text,o.quote,p.quote)));
+  const contextOnly=(o:typeof relevant[number])=>{
+   const focus=correctionFocus(o.quote,o.correction);
+   return !!focus&&o.quote.indexOf(focus)===o.quote.lastIndexOf(focus)&&
+    c.text.indexOf(o.quote)===c.text.lastIndexOf(o.quote)&&
+    !c.protected.some(p=>(!p.area||p.area===o.area)&&protectedOverlap(c.text,focus,p.quote));
+  };
+  const protectedFlags=overlaps.filter(o=>!contextOnly(o)).map(o=>`${o.area}: ${o.quote}`);
+  const contextOnlyProtectedOverlaps=overlaps.filter(contextOnly).map(o=>`${o.area}: ${o.quote}`);
+  return {...base,status:'accepted',accepted:observations.length,matched:required.length-missed.length,missed:missed.map(a=>a.quote),unmatched,protectedFlags,contextOnlyProtectedOverlaps,strictMatched,review:observations.map(o=>o.review)};
  });
  const sum=(key:'required'|'matched'|'accepted'|'rejected')=>cases.reduce((n,c)=>n+c[key],0);
- return {suite:suite.id,mode:recording.mode,evaluator:evaluators.size?JSON.parse([...evaluators][0]):null,serverPolicyDigest:recording.server_policy_digest,referenceDigest:recording.reference_digest,referenceStatus:suite.status,releaseReady:false,liveAccuracyEstablished:false,
-  limits:[...suite.limitations,'Accepted means app schema/provenance accepted, not correct teaching. Every successful response still requires qualitative review.','Missing/rejected responses stay in the required-anchor denominator; they cannot inflate recall.'],
-  totals:{cases:cases.length,available:cases.filter(c=>c.status==='accepted').length,unavailable:cases.filter(c=>c.status==='unavailable').length,rejectedCases:cases.filter(c=>c.status==='rejected').length,acceptedObservations:sum('accepted'),rejectedObservations:sum('rejected'),requiredAnchors:sum('required'),matchedRequiredAnchors:sum('matched'),anchorRecall:sum('required')?sum('matched')/sum('required'):null,protectedSpanFlags:cases.reduce((n,c)=>n+c.protectedFlags.length,0),unmatchedForReview:cases.reduce((n,c)=>n+c.unmatched.length,0)},cases};
+ return {suite:suite.id,scorerVersion:2,mode:recording.mode,evaluator:evaluators.size?JSON.parse([...evaluators][0]):null,serverPolicyDigest:recording.server_policy_digest,referenceDigest:recording.reference_digest,referenceStatus:suite.status,releaseReady:false,liveAccuracyEstablished:false,
+  limits:[...suite.limitations,'Correction-aware matches use localized changed tokens; neither strict nor correction-aware agreement proves the correction is right. Unchanged protected context remains listed for review.','Accepted means app schema/provenance accepted, not correct teaching. Every successful response still requires qualitative review.','Missing/rejected responses stay in the required-anchor denominator; they cannot inflate recall.'],
+  totals:{cases:cases.length,available:cases.filter(c=>c.status==='accepted').length,unavailable:cases.filter(c=>c.status==='unavailable').length,rejectedCases:cases.filter(c=>c.status==='rejected').length,acceptedObservations:sum('accepted'),rejectedObservations:sum('rejected'),requiredAnchors:sum('required'),matchedRequiredAnchors:sum('matched'),strictMatchedRequiredAnchors:cases.reduce((n,c)=>n+c.strictMatched,0),contextOnlyProtectedOverlaps:cases.reduce((n,c)=>n+c.contextOnlyProtectedOverlaps.length,0),anchorRecall:sum('required')?sum('matched')/sum('required'):null,protectedSpanFlags:cases.reduce((n,c)=>n+c.protectedFlags.length,0),unmatchedForReview:cases.reduce((n,c)=>n+c.unmatched.length,0)},cases};
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  const args=process.argv.slice(2),i=args.indexOf('--recorded');
