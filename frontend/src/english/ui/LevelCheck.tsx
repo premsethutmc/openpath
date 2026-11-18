@@ -4,9 +4,10 @@
  */
 import { useRef, useState } from "react";
 import { DICTATION, startLevel, wordsOf } from "../logic/dictation/dictation.ts";
+import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
 import type { Learner } from "../logic/learner.ts";
 import { COURSE } from "../logic/reading/course.ts";
-import { LISTENING_STEPS, ListeningPlacement, PARTS, ReadingPlacement, WORD_ROUNDS, readingStart, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
+import { LISTENING_STEPS, ListeningPlacement, PARTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, readingStart, spellingStart, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
 import { BANDS } from "../logic/vocabulary/daily-words.ts";
 import { CHECK, SizeCheckSession, startBand } from "../logic/vocabulary/size-check.ts";
 import { slowText } from "./ListenWrite.tsx";
@@ -14,7 +15,7 @@ import { NoteBox } from "./Note.tsx";
 import { speechPossible } from "./speech.ts";
 import { playWord, stopWord, type PlayOutcome } from "./wordPlayer.ts";
 
-const PART_NAME: Record<Part, string> = { words: "Words", reading: "Reading", listening: "Listening" };
+const PART_NAME: Record<Part, string> = { words: "Words", reading: "Reading", listening: "Listening", spelling: "Spelling" };
 
 function PartHead({ part, onSkip, onStop }: { part: Part; onSkip: () => void; onStop: () => void }) {
   return (
@@ -42,7 +43,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
       <h1 id="level-title" className="hero">
         Where should you start?
       </h1>
-      <p className="sub">Three short parts, about eight minutes in all. Then the app shows your level in each and where to begin.</p>
+      <p className="sub">Four short parts, about ten minutes in all. Then the app shows your level in each and where to begin.</p>
       <ol className="level-parts">
         <li>
           <b>Words</b>: pick the meaning of about twelve words.
@@ -52,6 +53,9 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
         </li>
         <li>
           <b>Listening</b>: hear three sentences and write them.
+        </li>
+        <li>
+          <b>Spelling</b>: hear six words and spell them.
         </li>
       </ol>
       <p className="small">It is not a test. If you do not know something, say so or have a go: it only helps the app choose the right place to start. You can skip a part.</p>
@@ -152,7 +156,48 @@ export function LevelListening({ id, index, heard, onPlay, onDone, onSkip, onSto
   );
 }
 
-export function LevelResult({ levels, skipped, onDone }: { levels: Levels; skipped: Part[]; onDone: () => void }) {
+export function LevelSpelling({ id, index, heard, onPlay, onDone, onSkip, onStop }: { id: string; index: number; heard: PlayOutcome | null; onPlay: (wordOnly: boolean) => void; onDone: (typed: string) => void; onSkip: () => void; onStop: () => void }) {
+  const [text, setText] = useState("");
+  const [shown, setShown] = useState(id);
+  if (shown !== id) {
+    setShown(id);
+    setText("");
+  }
+  return (
+    <main className="page vocab level dict" data-phase="spelling" data-word-id={id}>
+      <PartHead part="spelling" onSkip={onSkip} onStop={onStop} />
+      <p className="small">
+        Word {index + 1} of {SPELLING_STEPS}. You will hear the word, a sentence with it, and the word again. Type the word.
+      </p>
+      <div className="dict-play">
+        <button type="button" className="primary" onClick={() => onPlay(false)}>
+          🔊 Hear the word
+        </button>
+        <button type="button" className="secondary" onClick={() => onPlay(true)}>
+          Word only
+        </button>
+      </div>
+      {heard === "blocked" && <p className="small" role="status">Tap “Hear the word” to listen.</p>}
+      {heard === "failed" && <p className="warning" role="alert">The word could not be read aloud. Check that the phone's sound is on and tap again, or skip this part.</p>}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (text.trim()) onDone(text);
+        }}
+      >
+        <label htmlFor="spell-box" className="small">
+          Type the word here
+        </label>
+        <input id="spell-box" type="text" value={text} onChange={(e) => setText(e.target.value)} autoCapitalize="none" autoCorrect="off" autoComplete="off" spellCheck={false} enterKeyHint="done" />
+        <button type="submit" className="primary" disabled={!text.trim()}>
+          Next
+        </button>
+      </form>
+    </main>
+  );
+}
+
+export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Levels; skipped: Part[]; onDone: () => void; onGrammar?: () => void }) {
   const reading = levels.reading && COURSE.levels.find((l) => l.id === levels.reading!.start)!;
   const line = (part: Part) => skipped.includes(part) && <span className="small"> Skipped: the app starts you by age here.</span>;
   return (
@@ -183,10 +228,26 @@ export function LevelResult({ levels, skipped, onDone }: { levels: Levels; skipp
           </span>
           <span className="status">{levels.listening && !skipped.includes("listening") ? `Level ${levels.listening.level} of ${DICTATION.levels.length}` : "—"}</span>
         </li>
+        <li data-part="spelling">
+          <span>
+            <b>🐝 Spelling</b>
+            {line("spelling")}
+          </span>
+          <span className="status">{levels.spelling && !skipped.includes("spelling") ? `${LEVEL_NAMES[levels.spelling.level]} (level ${levels.spelling.level} of ${Object.keys(LEVEL_NAMES).length})` : "—"}</span>
+        </li>
       </ul>
-      <p className="small">
-        Each level is a first estimate from a few answers, on our own scales. It moves as you practise: up when things go well, down when they are too hard. Spelling and grammar find their own level as you use them.
-      </p>
+      <p className="small">Each level is a first estimate from a few answers, on our own scales. It moves as you practise: up when things go well, down when they are too hard.</p>
+      {onGrammar && (
+        <section className="tile lilac level-grammar" aria-labelledby="level-grammar-title">
+          <b id="level-grammar-title">
+            <span aria-hidden="true">🧩</span> One more: grammar and rules
+          </b>
+          <p>Grammar has its own longer check: about 15 to 20 questions. You can do it now or any time from the home screen, and stop and carry on later.</p>
+          <button type="button" className="secondary" onClick={onGrammar}>
+            Do the grammar check now
+          </button>
+        </section>
+      )}
       <button type="button" className="primary" onClick={onDone}>
         See what to do today
       </button>
@@ -194,7 +255,7 @@ export function LevelResult({ levels, skipped, onDone }: { levels: Levels; skipp
   );
 }
 
-export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Learner; voice: SpeechSynthesisVoice | null; onLeave: () => void; onChanged: () => void }) {
+export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { learner: Learner; voice: SpeechSynthesisVoice | null; onLeave: () => void; onChanged: () => void; onGrammar?: () => void }) {
   const age = learner.state.preferences?.band;
   const [part, setPart] = useState<Part | "intro" | "result">("intro");
   const [, setTick] = useState(0);
@@ -203,6 +264,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Le
   const words = useRef<SizeCheckSession | null>(null);
   const reading = useRef<ReadingPlacement | null>(null);
   const listening = useRef<ListeningPlacement | null>(null);
+  const spelling = useRef<SpellingPlacement | null>(null);
   const skipped = useRef<Part[]>([]);
   const plays = useRef(0);
   const unsaved = useRef<(() => Promise<void>)[]>([]);
@@ -228,16 +290,21 @@ export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Le
     plays.current++;
     void playWord(slow ? slowText(text) : text, voice).then(setHeard);
   };
+  const sayWord = (wordOnly: boolean) => {
+    const text = spelling.current?.spoken(wordOnly);
+    if (text) void playWord(text, voice).then(setHeard);
+  };
+  const after = (p: Part): Part | "result" => PARTS[PARTS.indexOf(p) + 1] ?? "result";
   /** Open a part (started by a tap, so the first sentence may be spoken straight away). */
   const open = (next: Part | "result", extra: (() => Promise<void>)[] = []) => {
     scrollTo(0, 0);
     if (next === "words") words.current = new SizeCheckSession(CHECK, startBand(age), learner.vocabRecords(), WORD_ROUNDS);
     if (next === "reading") reading.current = new ReadingPlacement(COURSE, readingStart(age));
+    if ((next === "listening" || next === "spelling") && !speechPossible()) {
+      skipped.current.push(next);
+      return open(after(next), [...extra, level({ type: "skipped", part: next })]);
+    }
     if (next === "listening") {
-      if (!speechPossible()) {
-        skipped.current.push("listening");
-        return open("result", [...extra, level({ type: "skipped", part: "listening" })]);
-      }
       listening.current = new ListeningPlacement(DICTATION, startLevel(age), learner.dictationRecords());
       plays.current = 0;
       setHeard(null);
@@ -245,11 +312,17 @@ export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Le
       say(false);
       return void save(...extra);
     }
+    if (next === "spelling") {
+      spelling.current = new SpellingPlacement(learner.spellingWords(BANK), spellingStart(age));
+      setHeard(null);
+      setPart(next);
+      sayWord(false);
+      return void save(...extra);
+    }
     setPart(next);
     const takeWords = next === "words" ? [() => learner.recordVocab(words.current!.take())] : [];
     void save(...extra, ...takeWords, ...(next === "result" ? [level({ type: "done" })] : []));
   };
-  const after = (p: Part): Part | "result" => PARTS[PARTS.indexOf(p) + 1] ?? "result";
   const skip = (p: Part) => {
     stopWord();
     skipped.current.push(p);
@@ -340,9 +413,36 @@ export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Le
               const records = s.take();
               plays.current = 0;
               setHeard(null);
-              if (s.finished) return open("result", [() => learner.recordDictation(records), level({ type: "listening", ...s.result() })]);
+              if (s.finished) return open("spelling", [() => learner.recordDictation(records), level({ type: "listening", ...s.result() })]);
               say(false); // started by the tap on Next
               void save(() => learner.recordDictation(records));
+            }}
+          />
+        )}
+      </>
+    );
+  }
+  if (part === "spelling") {
+    const s = spelling.current!;
+    const v = s.snapshot();
+    return (
+      <>
+        {warn}
+        {v.id && (
+          <LevelSpelling
+            id={v.id}
+            index={v.index}
+            heard={heard}
+            onPlay={sayWord}
+            onStop={stop}
+            onSkip={() => skip("spelling")}
+            onDone={(typed) => {
+              stopWord();
+              s.answer(typed);
+              setHeard(null);
+              if (s.finished) return open("result", [level({ type: "spelling", ...s.result() })]);
+              sayWord(false); // started by the tap on Next
+              setTick((t) => t + 1);
             }}
           />
         )}
@@ -352,7 +452,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged }: { learner: Le
   return (
     <>
       {warn}
-      <LevelResult levels={learner.levels()} skipped={skipped.current} onDone={onLeave} />
+      <LevelResult levels={learner.levels()} skipped={skipped.current} onDone={onLeave} onGrammar={onGrammar} />
       <div className="page vocab-note">
         <NoteBox learner={learner} screen="level-check:result" label="Do these levels look right? Was any part confusing?" />
       </div>

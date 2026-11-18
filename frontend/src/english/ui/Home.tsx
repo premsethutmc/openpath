@@ -255,7 +255,7 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
         <h2 id="level-cta-title">
           <span aria-hidden="true">🧭 </span>Start here: find your level
         </h2>
-        <p>Three short parts, about eight minutes: words, reading and listening. Then the app shows where to begin in each.</p>
+        <p>Four short parts, about ten minutes: words, reading, listening and spelling. Then the app shows where to begin in each.</p>
         <button type="button" className="primary" onClick={onLevelCheck}>
           Find my level
         </button>

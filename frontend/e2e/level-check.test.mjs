@@ -1,7 +1,7 @@
 /**
  * End-to-end: Find my level and the streams panel on an Android-sized phone (Chromium emulating 412×915; not a
  * physical phone, and the automated browser has no voice, so nothing here checks what is heard). A learner who knows
- * the first three word bands, reads everything right and writes every sentence right is told where to start in each
+ * the first three word bands, reads everything right, writes every sentence right and spells up to level 3 is told where to start in each
  * stream; the home screen then shows each stream with its level and opens the right one. Another learner skips a part.
  * Device-only, against the production build; nothing is requested elsewhere.
  *
@@ -21,6 +21,8 @@ const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.62
 const read = (p) => JSON.parse(readFileSync(new globalThis.URL(`../../content/english/${p}`, import.meta.url), "utf8"));
 const WORD_KEY = new Map(read("vocabulary/size-check.json").words.map(([band, word, right]) => [word, { band, right }]));
 const SENTENCES = new Map(read("dictation/sentences.json").sentences.map(([id, level, text]) => [id, { level, text }]));
+const DICT = new Map(read("spelling/dictation-bank.json").items.map((it) => [it.id, it.answers[0]]));
+const BEE = new Map(read("spelling/spelling-bee.json").words.map((w) => [w.id, { level: w.level, word: w.word ?? DICT.get(w.item?.id) }]));
 const READING_KEY = new Map();
 const walk = (x) => {
   if (Array.isArray(x)) return x.forEach(walk);
@@ -76,7 +78,7 @@ async function wordsPart(page, knowsUpTo) {
   return n;
 }
 
-test("Find my level: three parts, a level for each stream, and a home screen that says where to go", async () => {
+test("Find my level: four parts, a level for each stream, and a home screen that says where to go", async () => {
   const { context, page, errors, foreign, fits } = await start("Level");
   await page.getByRole("heading", { name: "Start here: find your level" }).waitFor();
   assert.equal(await page.locator(".stream-rows").count(), 0, "no levels shown before the check");
@@ -86,12 +88,12 @@ test("Find my level: three parts, a level for each stream, and a home screen tha
   await page.getByRole("heading", { name: "Where should you start?" }).waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
 
-  await page.getByText("Part 1 of 3: Words").waitFor();
+  await page.getByText("Part 1 of 4: Words").waitFor();
   await fits();
   const asked = await wordsPart(page, 3);
   assert.ok(asked >= 6 && asked <= 12, `${asked} words`);
 
-  await page.getByText("Part 2 of 3: Reading").waitFor();
+  await page.getByText("Part 2 of 4: Reading").waitFor();
   await fits();
   await shot(page, "2-reading");
   const levels = new Set();
@@ -111,7 +113,7 @@ test("Find my level: three parts, a level for each stream, and a home screen tha
   }
   assert.deepEqual([...levels], ["2", "3"], "a level up after the first text");
 
-  await page.getByText("Part 3 of 3: Listening").waitFor();
+  await page.getByText("Part 3 of 4: Listening").waitFor();
   await fits();
   await shot(page, "3-listening");
   for (let i = 1; i <= 3; i++) {
@@ -121,7 +123,20 @@ test("Find my level: three parts, a level for each stream, and a home screen tha
     await page.locator("#dict-box").fill(s.text);
     await page.getByRole("button", { name: "Next", exact: true }).click();
   }
+  await page.getByText("Part 4 of 4: Spelling").waitFor();
+  await fits();
+  await shot(page, "3b-spelling");
+  for (let i = 1; i <= 6; i++) {
+    await page.getByText(`Word ${i} of 6.`, { exact: false }).waitFor();
+    const w = BEE.get(await page.locator("main").getAttribute("data-word-id"));
+    assert.equal(await page.getByText(w.word, { exact: true }).count(), 0, "the word is not on screen");
+    assert.equal(await page.locator("#spell-box").getAttribute("autocapitalize"), "none");
+    await page.locator("#spell-box").fill(w.level <= 3 ? w.word : `${w.word}x`);
+    await page.getByRole("button", { name: "Next", exact: true }).click();
+  }
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
+  await page.locator('[data-part="spelling"] .status', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
+  await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Level 4 of 8" }).waitFor();
   await page.locator('[data-part="reading"] .status', { hasText: "Challenger (level 3 of 3)" }).waitFor();
   await page.locator('[data-part="listening"] .status', { hasText: "Level 3 of 3" }).waitFor();
@@ -134,7 +149,7 @@ test("Find my level: three parts, a level for each stream, and a home screen tha
   await page.locator('[data-stream="words"]', { hasText: "Level 4 of 8" }).waitFor();
   await page.locator('[data-stream="reading"]', { hasText: "Challenger" }).waitFor();
   await page.locator('[data-stream="listening"]', { hasText: "Level 3 of 3" }).waitFor();
-  await page.locator('[data-stream="spelling"]', { hasText: "level 1 of 5" }).waitFor();
+  await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
   await page.locator('[data-stream="grammar"]', { hasText: "Not checked yet" }).waitFor();
   await page.getByRole("heading", { name: "School work" }).waitFor();
   await fits();
@@ -163,19 +178,22 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   const { context, page, errors, fits } = await start("Skipper");
   await page.getByRole("button", { name: "Find my level" }).click();
   await page.getByRole("button", { name: "Start", exact: true }).click();
-  await page.getByText("Part 1 of 3: Words").waitFor();
+  await page.getByText("Part 1 of 4: Words").waitFor();
   await wordsPart(page, 0);
-  await page.getByText("Part 2 of 3: Reading").waitFor();
+  await page.getByText("Part 2 of 4: Reading").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
-  await page.getByText("Part 3 of 3: Listening").waitFor();
+  await page.getByText("Part 3 of 4: Listening").waitFor();
+  await page.getByRole("button", { name: "Skip this part" }).click();
+  await page.getByText("Part 4 of 4: Spelling").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Level 1 of 8" }).waitFor();
-  assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 2);
+  assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 3);
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();
   await page.locator('[data-stream="reading"]', { hasText: "Starter" }).waitFor();
   await page.locator('[data-stream="listening"]', { hasText: "Level 2 of 3" }).waitFor();
+  await page.locator('[data-stream="spelling"]', { hasText: "level 1 of 5" }).waitFor();
   await page.getByRole("button", { name: "Check my level again" }).click();
   await page.getByRole("button", { name: "Check again" }).waitFor();
   assert.deepEqual(errors, []);
