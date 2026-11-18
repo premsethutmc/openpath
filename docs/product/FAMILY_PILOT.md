@@ -363,3 +363,8 @@ divide cues.
 outside the app (the file lists only where each lives). Second-level help: the "Watch" button is inside the opened
 "This needs" / "Why?" card, after the written rule; nothing is fetched until tapped. No clips are registered yet, so
 nothing shows. To add one: host the reviewed mp4 or webm on https, then add the skill to `CLIPS`.
+
+`chintu@1` (`Chintu.tsx`): Chintu the cat (our own drawing) says the step help's "what to do" in a speech bubble on
+questions of Classes 1 to 5 (`classOfQuestion`: the question's own class, else the first class any board teaches its
+skill). "Hear it" reads his words with the phone's own voice where it has one; nothing is recorded, downloaded or sent.
+He speaks only when help is asked for. Not yet beside nudges, lessons or "Where is this used?".
