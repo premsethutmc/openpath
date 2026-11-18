@@ -420,3 +420,6 @@ factors, the division method. LCM: prime factors, listing the multiples (when th
 (when a prime divides two of the numbers), with the ladder drawn. 2,455 questions, every way proved to end on the answer.
 `borrow@1`: a subtraction is set out with room above each digit for what it becomes after borrowing (8 6 0 → 5 10 above).
 The place-value alternative to columns is named "By place value".
+
+Column multiplication (`multiply` in worked-out.ts): a bare `a × b = ?` with a one-digit multiplier, or one like 90 or
+400 (zeros written first), is set out in columns with the carried digits above. 1,025 questions, each layout proved.

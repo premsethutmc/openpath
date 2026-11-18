@@ -159,6 +159,40 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
 }
 
 /**
+ * Column multiplication the way it is written at school: by one digit, right to left, carrying; a multiplier like 90 or
+ * 900 has its zeros written first. Read from the question's own words and offered only when it ends on the answer.
+ */
+function multiply(prompt: string | undefined, answer: string): Worked[] | null {
+  const m = prompt ? /^([\d,]+) × ([\d,]+) = \?$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const a = Number(m[1].replace(/,/g, "")), b = Number(m[2].replace(/,/g, ""));
+  const zeros = /0*$/.exec(String(b))![0].length, d = b / 10 ** zeros, result = a * b;
+  if (a < 13 || a > 999999 || d < 2 || d > 9 || zeros > 3 || String(result) !== answer.replace(/,/g, "")) return null;
+  const width = Math.max(String(result).length, String(b).length) + 2, row = (t: string) => t.padStart(width, " ");
+  const da = String(a).split("").reverse().map(Number), n = da.length;
+  const carries: string[] = Array(width).fill(" "), done: string[] = Array(zeros).fill("0");
+  const board = () => [...(carries.some((c) => c !== " ") ? [carries.join("").replace(/\s+$/, "")] : []), row(String(a)), `×${row(String(b)).slice(1)}`, "-".repeat(width), row(done.join(""))];
+  const out: Worked[] = [];
+  if (zeros) out.push({ next: `First: ${b} is ${d} ${["", "tens", "hundreds", "thousands"][zeros]}. What is written before multiplying by ${d}?`, shown: `Write ${zeros === 1 ? "0 in the ones place" : `${zeros} zeros on the right`}. Then multiply by ${d}.`, board: board() });
+  let carry = 0;
+  for (let i = 0; i < n; i++) {
+    const x = da[i], prod = x * d + carry, last = i === n - 1, place = PLACES[i];
+    const lead = i === 0 && !zeros ? "First: start on the right, with the ones. " : "";
+    const sum = carry ? `${x} × ${d} = ${x * d}, and ${x * d} + ${carry} = ${prod}` : `${x} × ${d} = ${prod}`;
+    out.push({ next: `${lead}Multiply the ${place} of ${a} by ${d}${carry ? `, then add the ${carry} that was carried` : ""}.`, shown: last && prod >= 10 ? `${sum}. No column is left, so write ${prod}.` : sum });
+    if (prod >= 10 && !last) {
+      carries[width - 2 - i] = String(Math.floor(prod / 10));
+      done.unshift(String(prod % 10));
+      out.push({ next: `${prod} is more than 9. What is written, and what is carried?`, shown: `Write ${prod % 10} and carry ${Math.floor(prod / 10)} to the ${PLACES[i + 1]} of ${a}.`, board: board() });
+      carry = Math.floor(prod / 10);
+    } else { done.unshift(String(prod)); out[out.length - 1].board = board(); carry = 0; }
+  }
+  if (Number(done.join("")) !== result) return null;
+  out.push({ next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${result}.`, board: board() });
+  return out;
+}
+
+/**
  * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
  * must end on the verified answer or it is not offered.
  */
@@ -237,6 +271,8 @@ export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
     if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
     const c = columns(q.prompt, q.answer);
     if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
+    const mu = multiply(q.prompt, q.answer);
+    if (mu && mu.length >= 2) return [{ name: "In columns", steps: mu }];
     return hcfLcm(q.prompt, q.answer);
   } catch { return null; }
 }

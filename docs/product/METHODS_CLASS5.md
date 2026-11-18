@@ -12,8 +12,8 @@ written layout where it has one, and proved on every question by `frontend/src/y
 | Division by a 1- or 2-digit number | Long division: the bracket, one digit at a time | In easy parts | yes |
 | Division with a remainder | Long division; the last row is the remainder | Check: quotient × divisor + remainder | yes |
 | Prime test, smallest prime factor | Try each prime in turn up to the square root | | yes |
-| Multiplication by 1 digit | Columns, ones first, carrying | Tens and ones separately | no (first steps only) |
-| Multiplication by 2 digits | Columns: one row for each digit of the multiplier, then add the rows | Lattice | no |
+| Multiplication by 1 digit | Columns, ones first, carrying | Tens and ones separately | yes (two tabs; also by 90, 400: zeros first) |
+| Multiplication by 2 digits | Columns: one row for each digit of the multiplier, then add the rows | Lattice | no: there is no plain question type (47 × 36 = ?) yet, only partial-product and lattice questions |
 | Rounding | Look at the digit to the right: 5 or more goes up | Number line: which is nearer | partly (line) |
 | Estimating | Round each number first, then work | | partly (first steps) |
 | Place value, lakhs and crores | Place-value chart; a zero for every empty place | Commas, Indian and international | partly (chart) |
