@@ -22,6 +22,7 @@ import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, pla
 import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
 import type { VocabRecord } from "./vocabulary/size-check.ts";
+import type { WordResult } from "./spelling-help.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
@@ -202,14 +203,14 @@ export class Learner {
   }
 
   /** Save a word list (new, or a new version of an existing one). Words must already be checked (parseWords). */
-  async saveWordList(name: string, words: ListWord[], id?: string): Promise<string> {
+  async saveWordList(name: string, words: ListWord[], id?: string, mode?: "practice" | "test"): Promise<string> {
     this.guard("My Words");
     const n = name.trim().slice(0, LIST_LIMITS.nameLength);
     if (!n) throw new Error("give the list a name");
     if (!words.length) throw new Error("the list has no words");
     if (words.length > LIST_LIMITS.words) throw new Error(`a list holds at most ${LIST_LIMITS.words} words`);
     const listId = id ?? `list:${this.events.length + 1}`;
-    const e: AppEvent = { kind: "word_list", id: this.nextId(), at: this.clock(), list: { id: listId, name: n, words } };
+    const e: AppEvent = { kind: "word_list", id: this.nextId(), at: this.clock(), list: { id: listId, name: n, words, ...(mode ? { mode } : {}) } };
     this.fits(e, "This list");
     await this.add(e);
     return listId;
@@ -334,31 +335,49 @@ export class Learner {
     if (open) await this.stopSpelling();
     const plan = planSession(this.spelling(), this.spellingWords(source), this.clock());
     if (!plan.ids.length) throw new Error("there are no words to practise in this list");
-    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery });
+    const mode = source.type === "list" ? this.wordLists().find((l) => l.id === source.id)?.mode : undefined;
+    await this.add({ kind: "spell_session", id: this.nextId(), at: this.clock(), session: `sp:${this.events.length + 1}`, source, words: plan.ids, ...(plan.level !== undefined ? { level: plan.level } : {}), delivery, ...(mode ? { mode } : {}) });
   }
 
   /** The open spelling session: the word to ask next (null when it is done) and the counts so far. */
-  spellingSession(): { source: SpellSource; session: string; delivery: "device_voice" | "adult_reader"; level?: number; word: SpellWord | null; position: number; total: number; right: number; wrong: number } | null {
+  spellingSession(): { source: SpellSource; session: string; delivery: "device_voice" | "adult_reader"; level?: number; mode?: "practice" | "test"; fresh: boolean; word: SpellWord | null; position: number; total: number; right: number; wrong: number } | null {
     const open = this.spelling().open;
     if (!open) return null;
     const v = sessionView(open);
     const word = v.next ? (this.spellingWords(open.event.source).find((w) => w.id === v.next) ?? null) : null;
-    return { source: open.event.source, session: open.event.session, delivery: open.event.delivery, level: open.event.level, word, position: v.position, total: v.total, right: v.right, wrong: v.wrong };
+    // fresh: this learner has never answered this word in this source (practice mode shows such a word first)
+    const fresh = !!word && !this.spelling().words.has(wordKey(word.source, word.id));
+    return { source: open.event.source, session: open.event.session, delivery: open.event.delivery, level: open.event.level, mode: open.event.mode, fresh, word, position: v.position, total: v.total, right: v.right, wrong: v.wrong };
   }
 
   /** Answer the current word. Returns whether it was right and the word (to show its spelling now, after the answer). */
-  async answerSpelling(response: string, plays: number): Promise<{ correct: boolean; word: SpellWord }> {
+  async answerSpelling(response: string, plays: number, aid: { help?: number; studied?: boolean } = {}): Promise<{ correct: boolean; word: SpellWord }> {
     const cur = this.spellingSession();
     if (cur) this.guardSpelling(cur.source);
     if (!cur?.word) throw new Error("no spelling word is waiting for an answer");
     const w = cur.word;
     const before = this.spelling().words.get(wordKey(w.source, w.id));
     const correct = checkSpelling(w, response);
-    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null });
+    await this.add({ kind: "spell_answer", id: this.nextId(), at: this.clock(), session: cur.session, source: w.source, word: { id: w.id, text: w.word, ...(w.level !== undefined ? { level: w.level } : {}) }, response: response.slice(0, 100), correct, plays: Math.max(0, Math.floor(plays)), review: !!before && before.box !== null, ...(cur.mode !== "test" && aid.help ? { help: Math.min(99, Math.floor(aid.help)) } : {}), ...(cur.mode !== "test" && aid.studied ? { studied: true } : {}) });
     // the session ends by itself after its last word
     const after = this.spellingSession();
     if (after && !after.word) await this.add({ kind: "spell_end", id: this.nextId(), at: this.clock(), session: cur.session, reason: "finished" });
     return { correct, word: w };
+  }
+
+  /** For the parent: each word of a list with its latest standing, hardest first (wrong, with help, not tried, unaided). */
+  listResults(listId: string): WordResult[] {
+    const list = this.wordLists().find((l) => l.id === listId);
+    if (!list) return [];
+    const st = this.spelling();
+    const rank = { wrong: 0, with_help: 1, not_tried: 2, unaided: 3 } as const;
+    return list.words
+      .map((w): WordResult => {
+        const last = st.words.get(wordKey({ type: "list", id: listId }, w.id))?.answers.at(-1);
+        const status = !last ? "not_tried" : !last.correct ? "wrong" : last.help || last.studied ? "with_help" : "unaided";
+        return { id: w.id, word: w.word, status, lastTyped: last && !last.correct ? last.response : "" };
+      })
+      .sort((a, b) => rank[a.status] - rank[b.status]);
   }
 
   async stopSpelling(): Promise<void> {

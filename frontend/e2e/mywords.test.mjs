@@ -105,13 +105,16 @@ test("My Words: type, paste and upload a list, see problems, edit, save, practis
   assert.match(await card.innerText(), /4 words · practised 0 of 4/);
   await fits(page);
   await shot(page, "2-lists");
-  // 6. practise: the same Spelling Bee screen; each word spoken, never in the page; the variant is accepted
+  // 6. practise: the same Spelling Bee screen; a new word is shown, hidden, then never in the page while typed; the variant is accepted
   let w = await advance(page, "Practise");
   await page.getByText("Word 1 of 4").waitFor();
   assert.match(await page.locator(".eyebrow").innerText(), /Week 3 spellings/i);
   const answers = { colour: "color", because: "becuase", listen: "listen", castle: "Castle" };
   for (let k = 0; k < 4; k++) {
     assert.ok(w in answers, `asked a word from the list (${w})`);
+    // a practice list: a word never met is shown first, then hidden before it is typed
+    assert.equal(await page.locator(".bee-look-word").innerText(), w);
+    await page.getByRole("button", { name: "Hide it. I'll spell it" }).click();
     const m = new RegExp(`.{0,60}\\b${w}\\b.{0,30}`).exec(await perceivable(page));
     assert.ok(!m, `"${w}" can be seen before it was answered: ${m?.[0]}`);
     await page.locator(".ruled input").fill(answers[w]);
@@ -123,13 +126,13 @@ test("My Words: type, paste and upload a list, see problems, edit, save, practis
     else await page.getByRole("button", { name: "See how you did" }).click();
   }
   await page.getByRole("heading", { name: "Session complete" }).waitFor();
-  assert.match(await page.locator(".bee-done").innerText(), /3 of 4 right \(75%\)[\s\S]*4 of 4 words practised[\s\S]*1 word on your review list/);
+  assert.match(await page.locator(".bee-done").innerText(), /3 of 4 right \(75%\)[\s\S]*4 of 4 words practised[\s\S]*4 words on your review list/);
   await fits(page);
   await shot(page, "3-done");
   // 7. back to My Words: progress for this list
   await page.getByRole("button", { name: "Back to My Words" }).click();
   await page.getByRole("heading", { name: "My Words" }).waitFor();
-  assert.match(await card.innerText(), /practised 4 of 4 · 3 of 4 right · 1 to review/);
+  assert.match(await card.innerText(), /practised 4 of 4 · 3 of 4 right · 4 to review/);
   // 8. reload: the list and its progress are still there
   await page.reload();
   await page.getByRole("button", { name: "Open My Words" }).click();

@@ -11,10 +11,17 @@ import { type FormEvent, useEffect, useRef, useState } from "react";
 import type { SpellSource } from "../logic/events.ts";
 import type { Learner } from "../logic/learner.ts";
 import { BANK, LEVEL_NAMES, type SpellWord, avoiding, levelOf, sourceKey, sourceProgress } from "../logic/spelling.ts";
+import { helpPattern, letterMarks, maxHelpTaps } from "../logic/spelling-help.ts";
 import { speechPossible } from "./speech.ts";
 import { type PlayOutcome, onPlaying, onVoicesChanged, playWord, stopWord } from "./wordPlayer.ts";
 
-type Result = { correct: boolean; word: SpellWord; typed: string };
+type Result = { correct: boolean; word: SpellWord; typed: string; helped: boolean };
+
+/** How long a requested look at the word lasts before it hides again (a test can set window.__beePeekMs). */
+const peekMs = () => {
+  const t = typeof window !== "undefined" ? (window as unknown as { __beePeekMs?: number }).__beePeekMs : undefined;
+  return typeof t === "number" ? t : 3000;
+};
 
 /** How long the answer stays on screen before the next word comes by itself (a test can set window.__beeAdvanceMs). */
 const advanceMs = (correct: boolean) => {
@@ -61,11 +68,14 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
   const done = session ? st.sessions.get(session) : undefined;
   const leveled = words.some((w) => w.level !== undefined);
 
-  const submit = async (typed: string) => {
+  const submit = async (typed: string, aid: { help?: number; studied?: boolean } = {}) => {
     setBusy(true);
+    const test = mine()?.mode === "test";
     try {
-      const r = await learner.answerSpelling(typed, plays.current);
-      setResult({ ...r, typed });
+      const r = await learner.answerSpelling(typed, plays.current, aid);
+      // a test marks nothing until the end: straight on to the next word
+      if (test) plays.current = 0;
+      else setResult({ ...r, typed, helped: !!aid.help || !!aid.studied });
       onChanged();
     } catch (e) {
       setProblem(e instanceof Error ? e.message : "Could not save the answer");
@@ -154,9 +164,11 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
             busy={busy}
             safe={safe}
             onPlay={() => (plays.current += 1)}
-            onSubmit={(typed) => {
+            mode={cur.mode}
+            study={cur.mode === "practice" && cur.fresh}
+            onSubmit={(typed, aid) => {
               stopWord();
-              void submit(typed);
+              void submit(typed, aid);
             }}
           />
         </>
@@ -182,12 +194,17 @@ type Status = "loading" | "playing" | "ready" | "tap" | "failed";
  * again; the speaker then plays the word alone, as often as wanted. If the browser wants a tap first, the speaker
  * asks for one; if nothing can be heard at all, a grown-up can be shown the word, as a last resort only.
  */
-function BeeAsk({ word, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, onPlay, onSubmit }: { word: SpellWord; voice: SpeechSynthesisVoice | null; autoplay: boolean; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; busy: boolean; safe: (...options: string[]) => string; onPlay: () => void; onSubmit: (typed: string) => void }) {
+function BeeAsk({ word, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, onPlay, onSubmit, mode, study }: { word: SpellWord; voice: SpeechSynthesisVoice | null; autoplay: boolean; speechOff: boolean; onTurnSpeechOn: () => Promise<void>; busy: boolean; safe: (...options: string[]) => string; onPlay: () => void; onSubmit: (typed: string, aid: { help?: number; studied?: boolean }) => void; mode?: "practice" | "test"; study: boolean }) {
   const [status, setStatus] = useState<Status>(autoplay ? "loading" : "ready");
   const [heardOnce, setHeardOnce] = useState(false);
   const [failures, setFailures] = useState(0);
   const [adult, setAdult] = useState(false);
   const [text, setText] = useState("");
+  // learning help (never in a test): the word shown first when it is new, then steps of help on request
+  const [looking, setLooking] = useState(study);
+  const [taps, setTaps] = useState(0);
+  const [peeks, setPeeks] = useState(0);
+  const [peeking, setPeeking] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const full = word.sentence ? `${word.word}. ${word.sentence} ${word.word}.` : `${word.word}.`;
   const play = async (kind: "full" | "word") => {
@@ -216,17 +233,21 @@ function BeeAsk({ word, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, 
     return onVoicesChanged(() => void play("full"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [heardOnce, status]);
+  // the answer box is not on the page while the word is shown; when it comes back, the cursor goes into it
+  useEffect(() => {
+    if (!looking && !peeking) input.current?.focus({ preventScroll: true });
+  }, [looking, peeking]);
   const noSpeech = !speechPossible();
   const speaker = () => void play(heardOnce ? "word" : "full");
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (text.trim() && !busy) onSubmit(text);
+    if (text.trim() && !busy && !looking && !peeking) onSubmit(text, { help: taps + peeks, studied: study });
   };
   const label = status === "tap" ? safe("Tap to hear the word", "Tap to hear it", "Tap 🔊") : status === "failed" ? safe("Tap to try again", "Try again", "↻") : status === "loading" ? safe("Getting the word…", "One moment…", "…") : heardOnce ? safe("Hear it again", "Again", "🔁") : safe("Hear the word", "Listen", "🔊");
   return (
     <section className="bee-ask" aria-labelledby="bee-title">
       <h1 id="bee-title" className="hero">
-        {safe("Listen, then type the word.", "Type what you hear.", "Spell it.", "🔊 ⌨️")}
+        {mode === "test" ? safe("Spelling test: listen, then type the word.", "Test: type what you hear.", "Test", "🔊 ⌨️") : safe("Listen, then type the word.", "Type what you hear.", "Spell it.", "🔊 ⌨️")}
       </h1>
       {speechOff && (
         <p className="small bee-quiet">
@@ -260,15 +281,66 @@ function BeeAsk({ word, voice, autoplay, speechOff, onTurnSpeechOn, busy, safe, 
         </p>
       )}
       {adult && <AdultReader word={word} safe={safe} onDone={() => setAdult(false)} />}
-      <form className="answer bee-answer" onSubmit={submit}>
-        <label className="ruled">
-          <span className="sr-only">{safe("Type the word", "Your answer", "✎")}</span>
-          <input ref={input} value={text} onChange={(e) => setText(e.target.value)} disabled={busy} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} enterKeyHint="go" inputMode="text" name="spelling-answer" placeholder={safe("Type it here", "Type here", "✎")} />
-        </label>
-        <button type="submit" className="primary" disabled={busy || !text.trim()}>
-          {safe("Submit", "Check", "Done", "✓")}
-        </button>
-      </form>
+      {(looking || peeking) && (
+        <div className="tile lilac bee-look" data-look={looking ? "study" : "peek"}>
+          <p className="small">{looking ? "A new word. Look at it, say it, then hide it and spell it." : "Look carefully. It hides again in a moment."}</p>
+          <p className="bee-look-word">{word.word}</p>
+          {looking && (
+            <button
+              type="button"
+              className="primary"
+              onClick={() => {
+                setLooking(false);
+                input.current?.focus({ preventScroll: true });
+              }}
+            >
+              Hide it. I'll spell it
+            </button>
+          )}
+        </div>
+      )}
+      {mode !== "test" && !looking && !peeking && (
+        <div className="bee-help">
+          {taps > 0 && (
+            <p className="bee-pattern" aria-label="Help: the letters so far">
+              {helpPattern(word.word, taps)}
+            </p>
+          )}
+          {taps < maxHelpTaps(word.word) && (
+            <button type="button" className="link" onClick={() => setTaps((n) => n + 1)}>
+              {taps === 0 ? safe("Help me", "Help", "?") : safe("One more letter", "Another letter", "+1")}
+            </button>
+          )}
+          {taps > 0 && (
+            <button
+              type="button"
+              className="link"
+              onClick={() => {
+                setPeeks((n) => n + 1);
+                setPeeking(true);
+                setText("");
+                setTimeout(() => {
+                  setPeeking(false);
+                  input.current?.focus({ preventScroll: true });
+                }, peekMs());
+              }}
+            >
+              {safe("Show me the word, then hide it", "Show it, then hide it", "👁")}
+            </button>
+          )}
+        </div>
+      )}
+      {!looking && !peeking && (
+        <form className="answer bee-answer" onSubmit={submit}>
+          <label className="ruled">
+            <span className="sr-only">{safe("Type the word", "Your answer", "✎")}</span>
+            <input ref={input} value={text} onChange={(e) => setText(e.target.value)} disabled={busy} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} enterKeyHint="go" inputMode="text" name="spelling-answer" placeholder={safe("Type it here", "Type here", "✎")} />
+          </label>
+          <button type="submit" className="primary" disabled={busy || !text.trim()}>
+            {safe("Submit", "Check", "Done", "✓")}
+          </button>
+        </form>
+      )}
     </section>
   );
 }
@@ -312,8 +384,17 @@ function Feedback({ result, last, onNext }: { result: Result; last: boolean; onN
         {result.correct ? "You spelt " : "The spelling is "}
         <strong className="written">{result.word.word}</strong>.
       </p>
+      {result.correct && result.helped && <p className="small">You had some help this time, so it comes back next session for you to spell on your own.</p>}
       {!result.correct && (
         <>
+          <p className="bee-marks" aria-label="The letters you had, and the ones to look at">
+            {letterMarks(result.word.word, result.typed).map((m, i) => (
+              <span key={i} className={m.ok ? "ok" : "miss"}>
+                {m.ch}
+              </span>
+            ))}
+          </p>
+          <p className="small">The marked letters are the ones to look at.</p>
           <p>
             You wrote <span className="written typed-was">{result.typed.trim() || "nothing"}</span>.
           </p>
@@ -339,11 +420,21 @@ function Summary({ learner, sessionId, source, onAgain, onLeave, busy, backTo }:
   return (
     <section className="tile bee-done" aria-labelledby="bee-title">
       <h1 id="bee-title" className="hero">
-        Session complete
+        {s.event.mode === "test" ? "Test complete" : "Session complete"}
       </h1>
       <p className="big">
         {right} of {n} right{n ? ` (${Math.round((100 * right) / n)}%)` : ""}
       </p>
+      {s.event.mode === "test" && (
+        <ul className="bee-test-result" aria-label="Test result, word by word">
+          {s.answers.map((a) => (
+            <li key={a.id} className={a.correct ? "ok" : "miss"}>
+              <span>{a.correct ? "✓" : "✗"} {a.word.text}</span>
+              {!a.correct && <span className="small">you wrote {a.response.trim() || "nothing"}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
       {before !== undefined && now !== before && <p>{now > before ? `Well done: you move up to level ${now}, ${LEVEL_NAMES[now]}.` : `Next time: level ${now}, ${LEVEL_NAMES[now]}, for some practice.`}</p>}
       <ul className="bee-facts">
         <li>

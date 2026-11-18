@@ -276,6 +276,12 @@ export interface SpellSessionEvent {
   /** The practice level the session was planned at (Spelling Bee levels 1–5), if the source has levels. */
   level?: number;
   delivery: "device_voice" | "adult_reader";
+  /**
+   * How the list is to be used (set by the parent on the list): "practice" teaches (a new word is shown first, help
+   * is offered, feedback follows each answer); "test" only speaks the word, offers no help and marks nothing until
+   * the end. Absent: the Spelling Bee and lists saved before modes existed (hear, type, feedback).
+   */
+  mode?: "practice" | "test";
   /** Its source was deleted: the word ids are "removed-1", … (logic/scrub.ts). */
   scrubbed?: boolean;
 }
@@ -293,6 +299,10 @@ export interface SpellAnswerEvent {
   plays: number;
   /** Asked again because it was misspelt before (a review), not for the first time. */
   review: boolean;
+  /** Steps of help taken before answering (hear slowly, letter count, letters, a look at the word). Absent: none. */
+  help?: number;
+  /** The word was shown to the learner in this session before it was asked (practice mode, a word never met). */
+  studied?: boolean;
   /** Its source was deleted: the word and the answer are removed, right/wrong kept (logic/scrub.ts). */
   scrubbed?: boolean;
 }
@@ -314,7 +324,7 @@ export interface WordListEvent {
   kind: "word_list";
   id: string;
   at: string;
-  list: { id: string; name: string; words: ListWord[] };
+  list: { id: string; name: string; words: ListWord[]; mode?: "practice" | "test" };
   /** The list was deleted: this saved version's name and words are removed (logic/scrub.ts). */
   scrubbed?: boolean;
 }
