@@ -1,0 +1,68 @@
+/**
+ * The English streams, as the home screen shows them once a level is found: for each stream its level in its own
+ * terms, the next thing to do, and whether something was done in it today. Read from the learner's record; nothing
+ * is written and nothing here is an estimate of the engine's.
+ */
+import { DICTATION, levelFor, startLevel } from "../dictation/dictation.ts";
+import type { Learner } from "../learner.ts";
+import { COURSE } from "../reading/course.ts";
+import { progress as readingProgress, recommend } from "../reading/session.ts";
+import { BANK, LEVEL_NAMES, levelOf } from "../spelling.ts";
+import { BANDS, NEW_PER_DAY, WORDS, baseBand, progress as wordProgress, summary as wordSummary, teachBand } from "../vocabulary/daily-words.ts";
+import { latestResult } from "../vocabulary/size-check.ts";
+import { asReadingLevel } from "./level-check.ts";
+
+export type StreamId = "words" | "reading" | "listening" | "spelling" | "grammar";
+export interface StreamRow {
+  id: StreamId;
+  icon: string;
+  name: string;
+  /** The level in the stream's own terms. */
+  level: string;
+  /** The next thing to do. */
+  next: string;
+  doneToday: boolean;
+  /** Nothing to open right now (grammar with nothing on its plan). */
+  idle?: boolean;
+}
+
+const KINDS: Record<StreamId, string[]> = {
+  words: ["word_learn"],
+  reading: ["reading"],
+  listening: ["dictation"],
+  spelling: ["spell_answer"],
+  grammar: ["attempt", "lesson"],
+};
+
+export function streamRows(learner: Learner, now: string): StreamRow[] {
+  const dayOf = learner.dayFn();
+  const today = dayOf(now);
+  const active = new Set<string>();
+  for (const e of learner.state.events) if (dayOf(e.at) === today) active.add(e.kind);
+  const did = (id: StreamId) => KINDS[id].some((k) => active.has(k));
+  const age = learner.state.preferences?.band;
+  const levels = learner.levels();
+
+  const history = learner.wordLearnRecords();
+  const ws = wordSummary(history, now, dayOf);
+  const band = teachBand(WORDS, wordProgress(history), baseBand(levels.words?.band ?? latestResult(learner.vocabRecords())?.band, age));
+  const wordsDone = ws.newToday >= NEW_PER_DAY && ws.dueNow === 0;
+
+  const start = asReadingLevel(levels.reading?.start);
+  const rec = recommend(COURSE, readingProgress(COURSE, learner.readingRecords()), start);
+  const readingLevel = rec?.unit.level ?? COURSE.levels.at(-1)!.id;
+
+  const listening = levelFor(DICTATION, learner.dictationRecords(), levels.listening?.level ?? startLevel(age));
+  const bee = levelOf(learner.spelling(), BANK);
+  const profile = learner.profile();
+  const checked = profile.capabilities.filter((x) => x.standing !== "not_checked").length;
+  const plan = profile.activities[0];
+
+  return [
+    { id: "words", icon: "🌱", name: "Words", level: `Level ${band} of ${BANDS}`, next: ws.dueNow ? `${ws.dueNow} ${ws.dueNow === 1 ? "word" : "words"} to see again` : wordsDone ? "Done for today" : "Five new words", doneToday: wordsDone },
+    { id: "reading", icon: "📖", name: "Reading", level: `${COURSE.levels.find((l) => l.id === readingLevel)!.name} (level ${readingLevel} of ${COURSE.levels.length})`, next: rec ? COURSE.skills.find((s) => s.id === rec.unit.skill)!.name : "Every skill done", doneToday: did("reading") },
+    { id: "listening", icon: "🎧", name: "Listening and writing", level: `Level ${listening} of ${DICTATION.levels.length}`, next: "Five sentences to hear and write", doneToday: learner.state.events.some((e) => e.kind === "dictation" && e.record.type === "end" && dayOf(e.at) === today) },
+    { id: "spelling", icon: "🐝", name: "Spelling", level: `${LEVEL_NAMES[bee]} (level ${bee} of ${Object.keys(LEVEL_NAMES).length})`, next: "A round of the Spelling Bee", doneToday: did("spelling") },
+    { id: "grammar", icon: "🧩", name: "Grammar and rules", level: checked ? `${checked} ${checked === 1 ? "skill" : "skills"} checked` : "Not checked yet", next: plan ? plan.title : "Nothing due today", doneToday: did("grammar"), idle: !plan },
+  ];
+}

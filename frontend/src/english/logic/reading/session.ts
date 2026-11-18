@@ -98,10 +98,11 @@ export const passed = (p: Progress, u: Unit) => ["passed_own", "passed_after_hel
  * What to do next, by rule:
  *   1. a level above Starter that was checked and not passed, while the level below is not passed: step back to it;
  *   2. a unit whose check was not passed and which still has a fresh check: practise it again;
- *   3. otherwise the lowest level not yet passed, taking the skills in turn (every skill at Starter before Builder).
+ *   3. otherwise the lowest level not yet passed, taking the skills in turn (every skill at Starter before Builder);
+ *      with a start level from the level check, that level and those above come first.
  * Null when every unit is passed.
  */
-export function recommend(course: Course, p: Progress): { unit: Unit; why: "step_back" | "practise_again" | "next" } | null {
+export function recommend(course: Course, p: Progress, start: Level = 1): { unit: Unit; why: "step_back" | "practise_again" | "next" } | null {
   const all = LEVELS.flatMap((level) => course.skills.map((s) => ({ skill: s.id, level })));
   for (const u of all) {
     const st = statusOf(p, u);
@@ -112,7 +113,9 @@ export function recommend(course: Course, p: Progress): { unit: Unit; why: "step
   }
   const again = all.find((u) => statusOf(p, u) === "needs_practice");
   if (again) return { unit: again, why: "practise_again" };
-  const next = all.find((u) => !passed(p, u) && statusOf(p, u) !== "no_fresh_check");
+  // a start level (from the level check) puts that level and those above it first; the levels below stay open
+  const from = [...all.filter((u) => u.level >= start), ...all.filter((u) => u.level < start)];
+  const next = from.find((u) => !passed(p, u) && statusOf(p, u) !== "no_fresh_check");
   return next ? { unit: next, why: "next" } : null;
 }
 

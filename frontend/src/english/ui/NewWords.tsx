@@ -185,7 +185,7 @@ export function NewWords({ learner, voice, onLeave, onChanged }: { learner: Lear
         s={summary(learner.wordLearnRecords(), learner.clock(), learner.dayFn())}
         onBack={onLeave}
         onStart={(extra) => {
-          const base = baseBand(latestResult(learner.vocabRecords())?.band, learner.state.preferences?.band);
+          const base = baseBand(latestResult(learner.vocabRecords())?.band, learner.state.preferences?.band) /* the level check's words part writes a word check result, so it is included */;
           const s = new WordSitting(WORDS, base, learner.wordLearnRecords(), learner.clock(), { dayOf: learner.dayFn(), extra });
           setSitting(s);
           void step(s);

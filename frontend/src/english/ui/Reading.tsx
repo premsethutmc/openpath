@@ -5,6 +5,7 @@
  */
 import { useMemo, useRef, useState } from "react";
 import { COURSE, LEVELS, unitKey, type Course, type Level, type Passage, type SkillId, type Unit } from "../logic/reading/course.ts";
+import { asReadingLevel } from "../logic/streams/level-check.ts";
 import { ReadingUnitSession, progress, recommend, statusOf, type Mode, type Progress, type ReadingRecord, type Snapshot, type UnitStatus } from "../logic/reading/session.ts";
 import type { Learner } from "../logic/learner.ts";
 import { NoteBox } from "./Note.tsx";
@@ -43,8 +44,8 @@ export function PassageView({ passage, highlight }: { passage: Passage; highligh
   );
 }
 
-export function ReadingMap({ course, progress: p, onOpen, onBack }: { course: Course; progress: Progress; onOpen: (u: Unit, mode: Mode) => void; onBack: () => void }) {
-  const next = recommend(course, p);
+export function ReadingMap({ course, progress: p, start, onOpen, onBack }: { course: Course; progress: Progress; start?: Level; onOpen: (u: Unit, mode: Mode) => void; onBack: () => void }) {
+  const next = recommend(course, p, start);
   const done = [...p.units.values()].filter((u) => u.status === "passed_own" || u.status === "passed_after_help").length;
   return (
     <main className="page reading" aria-labelledby="reading-title">
@@ -364,7 +365,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   if (!session)
     return (
       <>
-        <ReadingMap course={COURSE} progress={p} onOpen={open} onBack={onLeave} />
+        <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
           <NoteBox learner={learner} screen="reading" label="Anything confusing or wrong on this screen? Tell us." />
         </div>

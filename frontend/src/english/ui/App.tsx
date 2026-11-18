@@ -32,6 +32,7 @@ import type { Book } from "../logic/books.ts";
 import { VocabularyCheck } from "./VocabularyCheck.tsx";
 import { NewWords } from "./NewWords.tsx";
 import { ListenWrite } from "./ListenWrite.tsx";
+import { LevelCheck } from "./LevelCheck.tsx";
 import { ParentView } from "./ParentView.tsx";
 import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
@@ -111,6 +112,7 @@ export function App() {
   const [inVocab, setInVocab] = useState(false);
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
+  const [inLevelCheck, setInLevelCheck] = useState(false);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
   const [inJourney, setInJourney] = useState(false);
@@ -156,6 +158,7 @@ export function App() {
       setInVocab(false);
       setInNewWords(false);
       setInListenWrite(false);
+      setInLevelCheck(false);
       setInParent(false);
       setInReading(false);
       setScreen({ name: "app" });
@@ -452,6 +455,21 @@ export function App() {
         />
       </div>
     );
+  if (inLevelCheck)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <LevelCheck
+          learner={learner}
+          voice={voice}
+          onChanged={changed}
+          onLeave={() => {
+            setInLevelCheck(false);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (inNewWords)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -603,6 +621,7 @@ export function App() {
           onVocab={() => (setInVocab(true), scrollTo(0, 0))}
           onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
           onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
+          onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />

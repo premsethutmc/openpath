@@ -2309,6 +2309,8 @@ h3.sub {
   font-size: 1.3rem;
   font-weight: 700;
   margin: 6px 0 12px;
+}
+
 /* ------------------------------------------------------------ Reading course (ui/Reading.tsx) */
 .reading-passage h2 {
   font-size: 1.05rem;
@@ -2400,4 +2402,67 @@ h3.sub {
 }
 .reading-note {
   padding-top: 0;
+}
+
+/* ------------------------------------------------------------ Find my level (ui/LevelCheck.tsx) and the streams panel (ui/Home.tsx) */
+.level-cta {
+  border: 2px solid var(--violet, #6957de);
+}
+.level-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+.level-head .pill {
+  margin: 0;
+}
+.level-skip {
+  margin-left: auto;
+}
+.level-parts {
+  padding-left: 1.3rem;
+  line-height: 1.6;
+}
+.level .reading-passage {
+  margin: 12px 0;
+}
+.level-result li {
+  align-items: center;
+}
+.level-result .status {
+  text-align: right;
+  font-weight: 700;
+}
+.stream-rows {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: grid;
+  gap: 10px;
+}
+.stream-rows li {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.stream-rows p {
+  margin: 0;
+}
+.stream-rows .stream-level {
+  font-weight: 700;
+}
+.stream-rows li[data-done="true"] .stream-icon {
+  opacity: 0.55;
+}
+.stream-rows .secondary {
+  margin: 0;
+  min-width: 64px;
+}
+.stream-icon {
+  font-size: 24px;
+  text-align: center;
 }

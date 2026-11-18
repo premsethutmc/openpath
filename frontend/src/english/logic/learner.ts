@@ -25,6 +25,7 @@ import type { VocabRecord } from "./vocabulary/size-check.ts";
 import type { Dated, WordRecord } from "./vocabulary/daily-words.ts";
 import type { DictationRecord } from "./dictation/dictation.ts";
 import { calendarDay, dayBasis } from "./calendar.ts";
+import { levelsFrom, type LevelCheckRecord, type Levels } from "./streams/level-check.ts";
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
 import type { ReadingRecord } from "./reading/session.ts";
@@ -267,6 +268,16 @@ export class Learner {
   /** Store steps of a Listen and write sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordDictation(records: readonly DictationRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "dictation", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The latest level found by Find my level for each part (logic/streams/level-check.ts). */
+  levels(): Levels {
+    return levelsFrom(this.events.flatMap((e) => (e.kind === "level_check" ? [e.record] : [])));
+  }
+
+  /** Store steps of a level check, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordLevelCheck(records: readonly LevelCheckRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "level_check", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's calendar day for a time (their recorded time zone, else UTC). */
