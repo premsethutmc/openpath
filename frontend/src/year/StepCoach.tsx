@@ -11,6 +11,15 @@ import { cardFor, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 import { SmallAsk } from "./SmallAsk";
 import { askOf, judge, type StepAsk } from "../../../packages/learning/src/step-ask";
+import { clipFor } from "../../../packages/learning/src/clips";
+
+function ClipButton({ competency }: { competency: string | null }) {
+  const clip = clipFor(competency);
+  const [open, setOpen] = useState(false);
+  if (!clip) return null;
+  if (!open) return <button type="button" className="secondary coach-clip" data-testid="coach-clip" onClick={() => setOpen(true)}><span aria-hidden="true">▶ </span>Watch: {clip.title} ({clip.seconds < 60 ? `${clip.seconds} s` : `${Math.round(clip.seconds / 60)} min`})</button>;
+  return <video className="coach-video" src={clip.url} controls autoPlay playsInline preload="metadata" aria-label={clip.title} />;
+}
 
 /** step-ask@1: the step with its result left out, for the child to enter. Right moves on by itself; wrong says so and
  *  leaves the smaller question and "Show me this step" to help. Nothing is recorded: it is part of the help. */
@@ -66,6 +75,8 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
             <aside className="coach-card" aria-label={rule.name}>
               {rule.rule.map((t, i) => <p key={i}>{t}</p>)}
               {rule.example && <><p className="small muted">For example: {rule.example.prompt}</p><ol className="recipe-steps">{rule.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
+              {/* clips@1: second-level help, after the written rule; nothing is fetched until it is asked for */}
+              <ClipButton key={ruleOf} competency={ruleOf} />
             </aside>
           )}
           {/* step-ask@1: a step with a result is done by the child: they enter it, and a right entry moves on */}

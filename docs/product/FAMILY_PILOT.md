@@ -358,3 +358,8 @@ prime in turn (even? digit sum? last digit? how many fit and what is left over),
 are given (in the question or from an earlier step; a number the step itself chooses, like the 50 of a long division's
 "50 × 6", is never named), and the result is not one of them. About a quarter of the bare add, subtract, multiply and
 divide cues.
+
+`clips@1` (`packages/learning/src/clips.ts`): a short recorded explanation of a building-block skill, made once and kept
+outside the app (the file lists only where each lives). Second-level help: the "Watch" button is inside the opened
+"This needs" / "Why?" card, after the written rule; nothing is fetched until tapped. No clips are registered yet, so
+nothing shows. To add one: host the reviewed mp4 or webm on https, then add the skill to `CLIPS`.

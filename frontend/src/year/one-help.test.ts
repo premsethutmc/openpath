@@ -45,3 +45,16 @@ test("rows-of-people@1 and tried@1: children are drawn, the left over stand unde
   assert.equal(triedLine(r.missions[0], 3), null, "no log on a scene that keeps none");
   assert.equal(triedLine({ ...s13, total: 12 } as typeof s13, 4), "4 rows: 3 in each, nobody left over");
 });
+
+test("clips@1: a clip is second-level help inside the opened rule card, lives outside the app, and shows nothing when there is none", async () => {
+  const { CLIPS, clipFor, clipOk } = await import("../../../packages/learning/src/clips");
+  for (const [c, clip] of Object.entries(CLIPS)) assert.ok(clipOk(clip), c);
+  assert.equal(clipFor("MATH.number.long-division"), CLIPS["MATH.number.long-division"] ?? null);
+  assert.equal(clipFor(null), null);
+  assert.ok(clipOk({ url: "https://example.org/a/long-division.mp4", title: "Long division", seconds: 70 }));
+  assert.ok(!clipOk({ url: "http://example.org/a.mp4", title: "x", seconds: 70 }), "https only");
+  assert.ok(!clipOk({ url: "https://example.org/a.mp4", title: "Long division", seconds: 900 }), "short clips only");
+  // offered only inside the opened card, and not fetched before it is tapped
+  assert.match(coach, /\{rule && card && \([\s\S]*<ClipButton key=\{ruleOf\} competency=\{ruleOf\} \/>/);
+  assert.match(coach, /if \(!open\) return <button[^>]*data-testid="coach-clip"/);
+});
