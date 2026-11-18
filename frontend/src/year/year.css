@@ -473,3 +473,10 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .where-used p { margin: 0; }
 .where-used-q { font-weight: 700; margin-top: 4px; }
 .where-used-art { width: 100%; max-width: 320px; height: auto; justify-self: center; }
+
+/* scribble@1: scratch paper */
+.scribble-open { align-self: flex-start; min-height: 44px; }
+.scribble { display: grid; gap: 6px; }
+.scribble canvas { width: 100%; height: auto; aspect-ratio: 640 / 420; border-radius: 16px; border: 2px dashed var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1d2433); touch-action: none; cursor: crosshair; }
+.scribble-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.scribble-bar .small { flex: 1 1 auto; margin: 0; }

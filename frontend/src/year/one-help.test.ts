@@ -19,3 +19,10 @@ test("one-page-story@1: a lesson's opening story is shown above its guess, not o
   assert.match(recipe, /every\.filter\(\(s, k\) => !\(s\.kind === "question" && every\[k \+ 1\]\?\.kind === "predict"\)\)/);
   assert.match(recipe, /\(step\.kind === "question" \|\| \(step\.kind === "predict" && storyWithGuess\)\) && recipe\.question!\.map/);
 });
+
+test("scribble@1: the pad is scratch paper: nothing is read, saved or sent, and it is there for any question with working", () => {
+  const pad = readFileSync(new URL("./ScribblePad.tsx", import.meta.url), "utf8");
+  assert.ok(!/fetch\(|localStorage|setValue|setWorking|onUsed|setHint/.test(pad), "the pad talks to nothing");
+  assert.match(pad, /touch-action|onPointerDown=\{down\}/);
+  assert.match(learn, /\{KID && workable && <ScribblePad key=\{qid\} \/>\}/);
+});
