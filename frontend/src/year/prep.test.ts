@@ -14,17 +14,18 @@ test("a prep is offered only where its own arithmetic gives the verified answer,
       const q = question(id), k = kidQuestion(q as never), ask = k.aids?.[0]?.ask;
       if (!ask || ask.kind !== "prep") continue;
       by.set(f, (by.get(f) ?? 0) + 1);
-      assert.ok(ask.steps.length >= 1 && ask.steps.length <= 2, id);
-      for (const s of ask.steps) { assert.notEqual(Number(s.value), Number(q.answer), id); assert.ok(prepRight(s, s.value) && !prepRight(s, "") && s.why && s.tell, id); }
-      // the line above the answer box works out to the answer
-      const m = /^Now ([\d.]+) ([+−×÷]) ([\d.]+) =$/.exec(ask.then)!;
-      const v = { "+": Number(m[1]) + Number(m[3]), "−": Number(m[1]) - Number(m[3]), "×": Number(m[1]) * Number(m[3]), "÷": Number(m[1]) / Number(m[3]) }[m[2]]!;
-      assert.ok(Math.abs(v - Number(q.answer)) < 1e-9, `${id}: ${ask.then} vs ${q.answer}`);
+      assert.ok(ask.steps.length >= 1 && ask.steps.length <= 3, id);
+      for (const s of ask.steps) { assert.notEqual(s.value, q.answer, id); assert.ok(prepRight(s, s.value) && !prepRight(s, "") && s.why && s.tell, id); }
+      // the line above the answer box works out to the answer (whole numbers, decimals, or fractions over one denominator)
+      const val = (t: string) => { const f = /^(\d+)\/(\d+)$/.exec(t); return f ? Number(f[1]) / Number(f[2]) : Number(t); };
+      const m = /Now ([\d./]+) ([+−×÷]) ([\d./]+) =$/.exec(ask.then)!;
+      const v = { "+": val(m[1]) + val(m[3]), "−": val(m[1]) - val(m[3]), "×": val(m[1]) * val(m[3]), "÷": val(m[1]) / val(m[3]) }[m[2]]!;
+      assert.ok(Math.abs(v - val(q.answer)) < 1e-9, `${id}: ${ask.then} vs ${q.answer}`);
       assert.equal(compose(ask, ["x", "y", q.answer], q.answer, q.type), q.answer, id);
     }
   }
   console.log([...by].map(([f, n]) => `${f}:${n}`).join(" "));
-  for (const f of ["aeest", "aeestp", "adest", "aeestq", "avpest", "acmcm", "adhmin", "adsec", "aeconv"]) assert.ok((by.get(f) ?? 0) > 5, f);
+  for (const f of ["aeest", "aeestp", "adest", "aeestq", "avpest", "acmcm", "adhmin", "adsec", "aeconv", "mmul", "divr", "faddu", "eqfrac"]) assert.ok((by.get(f) ?? 0) > 5, f);
 });
 
 test("prep reads the question's own words", () => {
@@ -37,4 +38,20 @@ test("prep reads the question's own words", () => {
   assert.equal(prepOf("How many minutes are there in 1 hour?", "integer", "60"), null, "the fact would be the answer");
   assert.equal(prepOf("How many paise are there in ₹8 and 50 paise?", "integer", "850")!.steps[0].lead, "₹1 =");
   assert.equal(prepOf("Estimate 12 + 67 by rounding each number to the nearest ten first.", "integer", "79"), null);
+});
+
+test("cards 4 and 5: multiplication in tens and ones, a remainder after the groups, and fractions in same-size pieces", () => {
+  const m = prepOf("56 × 2 = ?", "integer", "112")!;
+  assert.deepEqual(m.steps.map((s) => [s.lead, s.value]), [["50 × 2 =", "100"], ["6 × 2 =", "12"]]);
+  assert.equal(m.then, "Now 100 + 12 =");
+  assert.equal(prepOf("7 × 7 = ?", "integer", "49")!.then, "Now 35 + 14 =");
+  assert.equal(prepOf("2 × 2 = ?", "integer", "4"), null, "an easy fact has no steps");
+  const r = prepOf("56 ÷ 9 = 6 remainder □. What is the remainder?", "integer", "2")!;
+  assert.deepEqual([r.steps[0].value, r.then], ["54", "Now 56 − 54 ="]);
+  const e = prepOf("3/9 = □/54", "integer", "18")!;
+  assert.deepEqual([e.steps[0].lead, e.steps[0].after, e.steps[0].value], ["The bottom: 9 ×", "= 54", "6"]);
+  const f = prepOf("1/2 + 1/3 = ? (A fraction is fine.)", "fraction", "5/6")!;
+  assert.deepEqual(f.steps.map((s) => s.value), ["6", "3", "2"]);
+  assert.equal(f.then, "Now 3/6 + 2/6 =");
+  assert.equal(prepOf("1/2 + 1/3 = ? (A fraction is fine.)", "fraction", "2/5"), null);
 });

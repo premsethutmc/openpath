@@ -372,3 +372,10 @@ He speaks only when help is asked for. Not yet beside nudges, lessons or "Where 
 `blue-orange@1` (owner's choice, 18 Nov 2026): the child's app is blue (actions) and orange (the warm accent: Chintu's
 bubble) on a cream page, in place of purple; dark mode is navy with the same two colours. Green stays "right" and the
 terracotta red "not yet". Colours are the variables at the top of `look.css` (`--brand*`, `--accent*`, `--bg`).
+
+Teaching cards 4 and 5, as `prep@1` rules (`prep.ts`): a two-digit number times one digit is done in its tens and its
+ones; a times fact by 6 to 9 is built from 5 of them and the rest; a remainder is found after the groups are worked out;
+an equal fraction multiplies the top by what the bottom was multiplied by; unlike fractions are first written in
+same-size pieces. The steps appear one at a time (a later one may show what an earlier one asked for), and "I can do it
+without these steps" leaves only the answer box. 21 types have first steps now. A bare number offered as an angle in a
+lesson's guess is shown with its degree sign.

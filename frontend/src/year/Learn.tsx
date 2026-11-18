@@ -412,13 +412,15 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
     );
   if (ask.kind === "prep") {
     // prep@1: the steps before the answer are checked as they are typed; the answer box comes when they are done
-    const n = ask.steps.length, ok = (i: number) => prepRight(ask.steps[i], parts[i] ?? ""), all = ask.steps.every((_, i) => ok(i));
+    // a learner who does not need the steps can leave them: the answer box is then all there is (parts[2n+1] keeps it)
+    const n = ask.steps.length, ok = (i: number) => prepRight(ask.steps[i], parts[i] ?? ""), skipped = parts[2 * n + 1] === "skip", all = skipped || ask.steps.every((_, i) => ok(i));
     const tries = (i: number) => Number(parts[n + 1 + i] ?? "0");
-    const setPart = (i: number, v: string) => { const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === i ? v : parts[j] ?? "")); put(next, false); };
-    const judge = (i: number) => { if (!(parts[i] ?? "").trim() || ok(i)) return; const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === n + 1 + i ? String(tries(i) + 1) : parts[j] ?? "")); put(next, false); };
+    const setPart = (i: number, v: string) => { const next = Array.from({ length: 2 * n + 2 }, (_, j) => (j === i ? v : parts[j] ?? "")); put(next, false); };
+    const judge = (i: number) => { if (!(parts[i] ?? "").trim() || ok(i)) return; const next = Array.from({ length: 2 * n + 2 }, (_, j) => (j === n + 1 + i ? String(tries(i) + 1) : parts[j] ?? "")); put(next, false); };
     return (
       <div className="kid-prep" data-testid="kid-prep">
-        {ask.steps.map((st, i) => (
+        {/* one at a time: a later step can show what an earlier one asked for (the common denominator) */}
+        {!skipped && ask.steps.map((st, i) => (ask.steps.slice(0, i).every((_, j) => ok(j)) ? (
           <div key={st.lead} className="step-entry" data-prep={ok(i) ? "right" : tries(i) ? "wrong" : "asked"}>
             <label>
               <span>{st.lead}</span>
@@ -428,13 +430,14 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
             </label>
             {!ok(i) && tries(i) > 0 && <p className="kid-note" role="status">{tries(i) > 1 ? st.tell : st.why}</p>}
           </div>
-        ))}
+        ) : null))}
         {all && (
           <label className="kid-prep-then">
-            <span>{ask.then}</span>
-            <input aria-label="Your answer" inputMode="decimal" autoComplete="off" value={parts[n] ?? ""} disabled={disabled} onChange={(e) => { const next = Array.from({ length: 2 * n + 1 }, (_, j) => (j === n ? e.target.value : parts[j] ?? "")); setParts(next); setValue(e.target.value.trim() ? compose(ask, [e.target.value], answer, type) : ""); }} />
+            <span>{skipped ? "Your answer:" : ask.then}</span>
+            <input aria-label="Your answer" inputMode={/[/ ]/.test(answer) ? "text" : "decimal"} autoComplete="off" value={parts[n] ?? ""} disabled={disabled} onChange={(e) => { const next = Array.from({ length: 2 * n + 2 }, (_, j) => (j === n ? e.target.value : parts[j] ?? "")); setParts(next); setValue(e.target.value.trim() ? compose(ask, [e.target.value], answer, type) : ""); }} />
           </label>
         )}
+        {!all && <button type="button" className="link" data-testid="prep-skip" onClick={() => { const next = Array.from({ length: 2 * n + 2 }, (_, j) => (j === 2 * n + 1 ? "skip" : parts[j] ?? "")); put(next, false); }}>I can do it without these steps</button>}
       </div>
     );
   }
