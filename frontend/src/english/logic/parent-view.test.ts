@@ -54,3 +54,26 @@ test("PV-2 the gate is a sum with one right answer", () => {
     assert.ok(g.a >= 6 && g.a <= 9 && g.b >= 7 && g.b <= 9);
   }
 });
+
+test("PV-4 new words and Listen and write show on the child's summary, and only on that child's", async () => {
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const a = await Learner.create(c, repo, "Anu", "guardian", clock, "p-anu2");
+  const b = await Learner.create(c, repo, "Bala", "guardian", clock, "p-bala2");
+  assert.deepEqual([childSummary(a, clock()).newWords, childSummary(a, clock()).dictation], [null, null]);
+  await a.recordWordLearn([
+    { type: "meet", word: "brave", band: 2 },
+    { type: "meet", word: "crowd", band: 2 },
+    { type: "result", word: "brave", clean: false },
+    { type: "result", word: "crowd", clean: true },
+  ]);
+  await a.recordDictation([
+    { type: "start", sitting: "d1", level: 2 },
+    { type: "answer", sitting: "d1", id: "d2.01", level: 2, tries: 2, perfectFirst: false, perfect: true, right: 6, total: 7, missed: ["umbrella"], capitals: 0, end: true, plays: 2, typed: "Where did you put my blue umbrela?" },
+    { type: "answer", sitting: "d1", id: "d2.02", level: 2, tries: 1, perfectFirst: true, perfect: true, right: 7, total: 7, missed: [], capitals: 0, end: true, plays: 1, typed: "x" },
+  ]);
+  const s = childSummary(a, clock());
+  assert.deepEqual(s.newWords, { learnt: 0, learning: 2, tricky: ["brave"] });
+  assert.deepEqual(s.dictation, { sentences: 2, perfectFirst: 1, level: 2, missed: ["umbrella"] });
+  assert.deepEqual([childSummary(b, clock()).newWords, childSummary(b, clock()).dictation], [null, null]);
+});
