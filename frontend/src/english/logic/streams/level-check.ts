@@ -8,19 +8,24 @@
  *   listening  three dictated sentences, one try each, a level up after a perfect sentence and down otherwise:
  *              the level is the highest one written perfectly.
  *
- * Spelling and grammar keep their own checks (the Spelling Bee's levels, the starting check) and are shown beside
- * these. Any part can be skipped. Practice-only: nothing here is evidence for the engine. The reading part uses a
+ *   spelling   six dictated Spelling Bee words, a level up after a right one and down otherwise: the level is the
+ *              highest one spelt right, and the Spelling Bee starts there.
+ *
+ * Grammar keeps its own, longer starting check (the engine's, which is real evidence); the result screen offers it
+ * as the last step. Any part can be skipped. Practice-only: nothing here is evidence for the engine. The reading part uses a
  * practice text of the course, never one kept for the course's fresh checks.
  */
 import { mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
+import { checkSpelling, type SpellWord } from "../spelling.ts";
 import type { Course, Level, Passage, Question, SkillId } from "../reading/course.ts";
 
-export type Part = "words" | "reading" | "listening";
-export const PARTS: Part[] = ["words", "reading", "listening"];
+export type Part = "words" | "reading" | "listening" | "spelling";
+export const PARTS: Part[] = ["words", "reading", "listening", "spelling"];
 export const WORD_ROUNDS = 4;
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
 export const READING_PASS = 3;
 export const LISTENING_STEPS = 3;
+export const SPELLING_STEPS = 6;
 
 export type LevelCheckRecord =
   | { type: "start" }
@@ -28,6 +33,7 @@ export type LevelCheckRecord =
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; steps: { id: string; level: number; perfect: boolean }[] }
+  | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
 
@@ -38,16 +44,18 @@ export interface Levels {
   /** `start`: the reading level to begin at. */
   reading: { passed: number; start: number } | null;
   listening: { level: number } | null;
+  spelling: { level: number } | null;
 }
 
 /** The latest level found for each part. */
 export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 3): Levels {
-  const out: Levels = { done: false, words: null, reading: null, listening: null };
+  const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
     if (r.type === "reading") out.reading = { passed: r.passed, start: Math.min(readingLevels, r.passed + 1) };
     if (r.type === "listening") out.listening = { level: r.level };
+    if (r.type === "spelling") out.spelling = { level: r.level };
   }
   return out;
 }
@@ -182,3 +190,60 @@ export class ListeningPlacement {
 
 /** The reading level type, for callers that pass the start level to the course. */
 export const asReadingLevel = (n: number | null | undefined): Level | undefined => (n === 1 || n === 2 || n === 3 ? n : undefined);
+
+export const spellingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : age === "older" ? 3 : 2);
+
+function hash(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193) >>> 0;
+  return h;
+}
+
+/** The spelling part: six dictated words of the Spelling Bee, one try each, a level up after a right one and down otherwise. */
+export class SpellingPlacement {
+  private readonly words: SpellWord[];
+  private readonly top: number;
+  private level: number;
+  private current: SpellWord | null = null;
+  private steps: { word: string; level: number; correct: boolean }[] = [];
+
+  constructor(words: readonly SpellWord[], start: number) {
+    this.words = words.filter((w) => w.level !== undefined).map((w) => ({ w, k: hash(`level-check|${w.id}`) })).sort((a, b) => a.k - b.k || (a.w.id < b.w.id ? -1 : 1)).map((x) => x.w);
+    this.top = Math.max(1, ...this.words.map((w) => w.level!));
+    this.level = Math.min(this.top, Math.max(1, start));
+    this.load();
+  }
+
+  private load(): void {
+    const used = new Set(this.steps.map((s) => s.word));
+    this.current = this.words.find((w) => w.level === this.level && !used.has(w.word)) ?? null;
+  }
+
+  get finished(): boolean {
+    return this.steps.length >= SPELLING_STEPS || !this.current;
+  }
+
+  /** What to say aloud: the word, its sentence, the word again. For the speaker only. */
+  spoken(wordOnly = false): string | null {
+    const w = this.current;
+    if (this.finished || !w) return null;
+    return w.sentence && !wordOnly ? `${w.word}. ${w.sentence} ${w.word}.` : `${w.word}.`;
+  }
+
+  answer(typed: string): void {
+    const w = this.current;
+    if (this.finished || !w || !typed.trim()) return;
+    const correct = checkSpelling(w, typed);
+    this.steps.push({ word: w.word, level: w.level!, correct });
+    this.level = Math.min(this.top, Math.max(1, this.level + (correct ? 1 : -1)));
+    this.load();
+  }
+
+  result(): { level: number; steps: { word: string; level: number; correct: boolean }[] } {
+    return { level: Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level)), steps: [...this.steps] };
+  }
+
+  snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
+    return this.finished ? { phase: "done", index: this.steps.length, total: SPELLING_STEPS, id: null } : { phase: "write", index: this.steps.length, total: SPELLING_STEPS, id: this.current!.id };
+  }
+}

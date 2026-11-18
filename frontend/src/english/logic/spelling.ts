@@ -129,6 +129,14 @@ export const wordKey = (s: SpellSource, id: string) => `${sourceKey(s)}/${id}`;
 export function spellingState(events: readonly AppEvent[]): SpellingState {
   const st: SpellingState = { words: new Map(), sessions: new Map(), open: null, levels: new Map() };
   for (const e of events) {
+    // Find my level (logic/streams/level-check.ts): its spelling part sets where the Spelling Bee starts
+    if (e.kind === "level_check" && e.record.type === "spelling") {
+      const k = sourceKey(BANK);
+      const from = st.levels.get(k);
+      const to = Math.min(SPELLING.levels, Math.max(1, e.record.level));
+      st.levels.set(k, { level: to, window: [], changes: [...(from?.changes ?? []), ...(to !== (from?.level ?? 1) ? [{ at: e.at, from: from?.level ?? 1, to }] : [])] });
+      continue;
+    }
     if (e.kind === "spell_session") {
       const s = { event: e, answers: [], end: null };
       st.sessions.set(e.session, s);

@@ -13,7 +13,8 @@ import { COURSE } from "../reading/course.ts";
 import { progress, recommend } from "../reading/session.ts";
 import { MemoryRepo } from "../store.ts";
 import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
-import { LISTENING_STEPS, ListeningPlacement, READING_SKILLS, ReadingPlacement, WORD_ROUNDS, levelsFrom, readingStart, type LevelCheckRecord } from "./level-check.ts";
+import { BANK, levelOf } from "../spelling.ts";
+import { LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { streamRows } from "./streams.ts";
 
 const keyFor = (prompt: string, level: number) => COURSE.questions.find((q) => q.prompt === prompt && q.level === level && q.role === "practice")!;
@@ -92,9 +93,9 @@ test("LC-3 the words part is the word check, cut to four rounds", () => {
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {
   const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
-  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 2 } });
-  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "done" }];
-  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 2, start: 3 }, listening: { level: 3 } });
+  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 2 }, spelling: null });
+  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
+  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 2, start: 3 }, listening: { level: 3 }, spelling: { level: 4 } });
 });
 
 test("LC-5 the levels steer the streams: reading begins at its start level, with the levels below still open", () => {
@@ -124,6 +125,12 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.match(row("reading").level, /^Builder \(level 2 of 3\)$/);
   assert.equal(row("listening").level, "Level 3 of 3");
   assert.match(row("spelling").level, /level 1 of 5/);
+  await l.recordLevelCheck([{ type: "spelling", level: 3, steps: [] }]);
+  assert.equal(levelOf(l.spelling(), BANK), 3, "the Spelling Bee starts at the level found");
+  assert.match(row("spelling").level, /^Intermediate \(level 3 of 5\)$/);
+  assert.equal(l.spellingSession(), null);
+  await l.startSpelling();
+  assert.ok(l.spellingSession()!.word, "and offers a word from there");
   assert.equal(row("grammar").level, "Not checked yet");
   assert.ok(streamRows(l, clock()).every((r) => !r.doneToday));
   await l.recordDictation([{ type: "start", sitting: "d1", level: 3 }, { type: "end", sitting: "d1", level: 3, asked: 5, perfectFirst: 5 }]);
@@ -136,4 +143,33 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.ok(!events.some((e) => e.kind === "evidence" || e.kind === "session"));
   assert.equal(picture(), before);
   assert.match(String(eventProblem({ kind: "level_check", id: "x", at: clock(), record: {} })), /without its type/);
+});
+
+test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one; the level is the highest spelt right", async () => {
+  assert.deepEqual(PARTS, ["words", "reading", "listening", "spelling"]);
+  assert.deepEqual([spellingStart("early"), spellingStart("school"), spellingStart("older")], [1, 2, 3]);
+  const c = loadContent({ mode: "development" });
+  const l = await Learner.create(c, new MemoryRepo(), "Speller", "guardian", testClock(), "p-spell");
+  const bank = l.spellingWords(BANK);
+  const byText = new Map(bank.map((w) => [w.word, w]));
+  const spell = (start: number, can: number) => {
+    const s = new SpellingPlacement(bank, start);
+    const seen: string[] = [];
+    while (!s.finished) {
+      const said = s.spoken()!;
+      const word = s.spoken(true)!.replace(/\.$/, "");
+      assert.ok(said.startsWith(`${word}.`) && said.endsWith(`${word}.`), "the word, its sentence, the word again");
+      seen.push(word);
+      s.answer(byText.get(word)!.level! <= can ? ` ${word.toUpperCase()} ` : `${word}x`);
+    }
+    return { ...s.result(), seen };
+  };
+  assert.deepEqual([spell(2, 5).level, spell(2, 3).level, spell(2, 1).level, spell(2, 0).level, spell(1, 2).level], [5, 3, 1, 1, 2]);
+  const r = spell(2, 3);
+  assert.equal(r.seen.length, SPELLING_STEPS);
+  assert.equal(new Set(r.seen).size, SPELLING_STEPS, "no word twice");
+  assert.deepEqual(r.steps.map((s) => s.level), [2, 3, 4, 3, 4, 3]);
+  const s = new SpellingPlacement(bank, 2);
+  s.answer("   ");
+  assert.equal(s.snapshot().index, 0, "nothing typed is not an answer");
 });

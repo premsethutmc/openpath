@@ -462,6 +462,15 @@ export function App() {
           learner={learner}
           voice={voice}
           onChanged={changed}
+          onGrammar={
+            learner.plan()[0]?.type === "placement"
+              ? () => {
+                  setInLevelCheck(false);
+                  scrollTo(0, 0);
+                  void start(learner.plan()[0]);
+                }
+              : undefined
+          }
           onLeave={() => {
             setInLevelCheck(false);
             scrollTo(0, 0);
