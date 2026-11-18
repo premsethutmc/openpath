@@ -1,0 +1,1 @@
+{"name":"openpath-harper-offline-experiment","private":true,"type":"module","scripts":{"benchmark":"node benchmark.mjs"},"dependencies":{"harper.js":"3.2.0"}}
