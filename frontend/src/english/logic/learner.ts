@@ -21,6 +21,7 @@ import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
 import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
+import type { VocabRecord } from "./vocabulary/size-check.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
@@ -226,6 +227,18 @@ export class Learner {
     await this.repo.scrub(this.profileId, { type: "list", id });
     await this.reload();
     await this.add({ kind: "word_list_delete", id: this.nextId(), at: this.clock(), list: id });
+  }
+
+  // ------------------------------------------------------------------ Vocabulary size check (logic/vocabulary)
+
+  /** The learner's vocabulary-check record, in order. */
+  vocabRecords(): VocabRecord[] {
+    return this.events.flatMap((e) => (e.kind === "vocab" ? [e.record] : []));
+  }
+
+  /** Store steps of a vocabulary check, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordVocab(records: readonly VocabRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "vocab", id: this.nextId(), at: this.clock(), record });
   }
 
   // ------------------------------------------------------------------ My Books (logic/books.ts)

@@ -308,6 +308,14 @@ jobs:
         run: |
           npm run english:e2e-books 2>&1 | tee english-books-e2e.log
           ../.github/scripts/require-tests.sh english-books-e2e.log "My Books end-to-end"
+      - name: Word check in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/vocabulary
+        run: |
+          npm run english:e2e-vocabulary 2>&1 | tee english-vocabulary-e2e.log
+          ../.github/scripts/require-tests.sh english-vocabulary-e2e.log "Word check end-to-end"
       - name: Serve the English web app with its account API
         working-directory: frontend
         run: |
