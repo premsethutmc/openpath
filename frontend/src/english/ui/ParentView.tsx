@@ -94,7 +94,73 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
   );
 }
 
-export function ParentView({ content, repo, clock, onLeave }: { content: AppContent; repo: Repo; clock: () => string; onLeave: () => void }) {
+export interface Linking {
+  /** This phone is signed in to an account: it can show a code for another phone. */
+  canShow: boolean;
+  showCode: () => Promise<{ code: string; expires_in: number }>;
+  /** Sign this phone in to the account a code belongs to; the app then opens that account's children. */
+  join: (code: string) => Promise<void>;
+}
+
+/** Connect a parent's phone and a child's phone: one shows a code, the other types it, and both then see the same children. */
+export function ConnectPhones({ linking }: { linking: Linking }) {
+  const [shown, setShown] = useState<{ code: string; minutes: number } | null>(null);
+  const [typed, setTyped] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [problem, setProblem] = useState<string | null>(null);
+  const run = async (f: () => Promise<void>) => {
+    setBusy(true);
+    setProblem(null);
+    try {
+      await f();
+    } catch (e) {
+      setProblem(e instanceof Error ? e.message : "That did not work. Try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <section className="hub-card plain parent-connect" aria-labelledby="connect-title">
+      <h2 id="connect-title">Connect another phone</h2>
+      <p className="small">For a parent's phone and a child's phone. One phone shows a code, the other types it. Both then see the same children and the same results.</p>
+      {linking.canShow && !shown && (
+        <button type="button" className="secondary" disabled={busy} onClick={() => void run(async () => { const r = await linking.showCode(); setShown({ code: r.code, minutes: Math.round(r.expires_in / 60) }); })}>
+          Show a code on this phone
+        </button>
+      )}
+      {shown && (
+        <div className="tile lilac" role="status">
+          <p className="small">Type this on the other phone, under For parents → Connect another phone:</p>
+          <p className="connect-code">{shown.code}</p>
+          <p className="small">It works once, for {shown.minutes} minutes. Share it only with your own family: whoever types it sees these children's records.</p>
+        </div>
+      )}
+      <form
+        className="connect-join"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (typed.trim()) void run(() => linking.join(typed.trim()));
+        }}
+      >
+        <label htmlFor="connect-code-input">Or type the code shown on the other phone</label>
+        <p className="ruled">
+          <input id="connect-code-input" value={typed} onChange={(e) => setTyped(e.target.value)} autoComplete="off" autoCapitalize="characters" spellCheck={false} placeholder="ABCD-EFGH" maxLength={12} />
+        </p>
+        <p className="small">This phone will then open the other phone's family. Children already on this phone stay in its own record and are not merged.</p>
+        <button type="submit" className="secondary" disabled={busy || !typed.trim()}>
+          Connect
+        </button>
+      </form>
+      {problem && (
+        <p className="warning" role="alert">
+          {problem}
+        </p>
+      )}
+    </section>
+  );
+}
+
+export function ParentView({ content, repo, clock, onLeave, linking }: { content: AppContent; repo: Repo; clock: () => string; onLeave: () => void; linking?: Linking }) {
   const [passed, setPassed] = useState(false);
   const [children, setChildren] = useState<Learner[] | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -135,6 +201,7 @@ export function ParentView({ content, repo, clock, onLeave }: { content: AppCont
       {!children && !problem && <p className="loading">Reading the records…</p>}
       {children && !children.length && <p>No children yet. Add a learner first.</p>}
       {children?.map((l) => <ChildCard key={l.profileId} s={childSummary(l, clock())} onOpen={() => setOpen(l.profileId)} />)}
+      {linking && <ConnectPhones linking={linking} />}
       <p className="small">This page shows the children in this account, or on this phone if there is no account. Everything shown is a count of what happened, not a grade.</p>
     </main>
   );

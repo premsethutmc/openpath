@@ -422,6 +422,19 @@ export function App() {
           content={content}
           repo={repo}
           clock={clock}
+          linking={
+            accounts
+              ? {
+                  canShow: mode === "account",
+                  showCode: () => api.linkCode(),
+                  join: async (code) => {
+                    // this phone now belongs to the other phone's family: open that account's children
+                    await signedIn(await api.linkJoin(code));
+                    setInParent(false);
+                  },
+                }
+              : undefined
+          }
           onLeave={async () => {
             // a list added for this child from the parent view is in the stored record: read it again
             await openLearner(repo, learner.profileId);

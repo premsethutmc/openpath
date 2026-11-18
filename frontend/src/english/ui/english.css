@@ -2185,3 +2185,15 @@ h3.sub {
   text-align: center;
   margin-top: 22px;
 }
+.connect-code {
+  font-size: 32px;
+  font-weight: 850;
+  letter-spacing: 4px;
+  text-align: center;
+  margin: 8px 0;
+}
+.connect-join {
+  margin-top: 14px;
+  display: grid;
+  gap: 6px;
+}

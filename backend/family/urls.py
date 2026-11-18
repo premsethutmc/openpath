@@ -1,7 +1,7 @@
 from . import writing_views
 from django.urls import path
 
-from . import written, content_review, developer, educator_access, feedback, handoff, handover, views, word_problem
+from . import written, content_review, developer, educator_access, feedback, handoff, handover, link, views, word_problem
 
 urlpatterns = [
     path("pupils/<uuid:pupil_id>/writing/", writing_views.WritingLessonsView.as_view(), name="writing-lessons"),
@@ -16,6 +16,8 @@ urlpatterns = [
     path("account/password-reset/", views.PasswordResetView.as_view(), name="account-password-reset"),
     path("account/password-reset/confirm/", views.PasswordResetConfirmView.as_view(), name="account-password-reset-confirm"),
     path("account/claim/", views.ClaimAccountView.as_view(), name="account-claim"),
+    path("account/link-code/", link.LinkCodeView.as_view(), name="account-link-code"),
+    path("account/link/", link.LinkJoinView.as_view(), name="account-link"),
     path("account/delete/", views.DeleteAccountView.as_view(), name="account-delete"),
     path("pupils/", views.PupilsView.as_view(), name="pupils"),
     path("pupils/<uuid:pupil_id>/", views.PupilView.as_view(), name="pupil"),
