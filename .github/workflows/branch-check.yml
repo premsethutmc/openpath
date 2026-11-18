@@ -1,0 +1,67 @@
+# TEMPORARY (remove before merging): runs the server tests and the frontend typecheck for this branch on push and
+# writes the outcome to the branch ci-results/family-link-code, so the result can be read without opening GitHub.
+name: Branch check (temporary)
+
+on:
+  push:
+    branches: ["feat/family-link-code"]
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: openpath
+          POSTGRES_USER: openpath
+          POSTGRES_PASSWORD: openpath
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U openpath"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Run and record
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/out
+          R=/tmp/out/RESULT.md
+          echo "# Branch check for $GITHUB_SHA" > $R
+          echo "run: $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT at $(date -u +%FT%TZ)" >> $R
+          cd backend
+          pip install -q -r requirements.txt > /tmp/out/pip.log 2>&1; echo "pip_install_exit=$?" >> $R
+          python manage.py check > /tmp/out/check.log 2>&1; echo "django_check_exit=$?" >> $R
+          python manage.py makemigrations --check --dry-run > /tmp/out/migrations.log 2>&1; echo "migrations_up_to_date_exit=$?" >> $R
+          DATABASE_URL=postgres://openpath:openpath@127.0.0.1:5432/openpath python manage.py test family.test_link family.test_claim > /tmp/out/link-postgres.log 2>&1; echo "link_tests_postgres_exit=$?" >> $R
+          python manage.py test family.test_link > /tmp/out/link-sqlite.log 2>&1; echo "link_tests_sqlite_exit=$?" >> $R
+          DATABASE_URL=postgres://openpath:openpath@127.0.0.1:5432/openpath python manage.py test > /tmp/out/all-postgres.log 2>&1; echo "all_backend_tests_postgres_exit=$?" >> $R
+          cd ../frontend
+          npm ci > /tmp/out/npm.log 2>&1; echo "npm_ci_exit=$?" >> $R
+          npm run typecheck > /tmp/out/typecheck.log 2>&1; echo "frontend_typecheck_exit=$?" >> $R
+          for f in check migrations link-postgres link-sqlite all-postgres typecheck; do
+            echo -e "\n## $f (last 40 lines)\n\`\`\`" >> $R; tail -40 /tmp/out/$f.log >> $R; echo '```' >> $R
+          done
+      - name: Publish the result to a branch
+        shell: bash
+        run: |
+          cd /tmp/out
+          git init -q -b ci-results/family-link-code
+          git config user.name "branch-check"
+          git config user.email "branch-check@users.noreply.github.com"
+          git add RESULT.md
+          git commit -q -m "Branch check result for $GITHUB_SHA"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-results/family-link-code
