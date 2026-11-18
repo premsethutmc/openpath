@@ -160,7 +160,8 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
   /** The recommended next activity, as an action. */
   function follow(kind: string, cap: string | null) {
     const h = cap ? view?.hypotheses.filter((x) => x.competency === cap).at(-1) : undefined;
-    if (kind === "learn" || kind === "practise_and_check") void act(async () => (view?.journey && view.journey.essay === view.essay?.id ? view : await studio!.plan()), () => setScreen("path"));
+    if (kind === "learn" || kind === "practise_and_check") void act(async () => (view?.journey && view.journey.essay === view.essay?.id && view.journey.trees.some(t=>t.root===cap) ? view : await studio!.plan()), () => setScreen("path"));
+    else if (kind === "check_observation" && cap) void act(()=>studio!.checkObservation(cap),()=>setScreen('check'));
     else if (kind === "check_skill" && h) void checkSkill(h.id);
     else if (kind === "practise" && h) void practise(h.id);
     else if (kind === "answer_questions" || kind === "finish_practice") setScreen("check");
@@ -209,7 +210,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
         {(v.recommendation.kind !== "practise" || v.canGenerate) && (
           <button className="primary essay-primary" disabled={busy} onClick={() => follow(v.recommendation!.kind, v.recommendation!.competency)}>
             {
-              ({ learn: "Start learning", practise_and_check: "Go to my learning path", answer_questions: "Back to the questions", finish_practice: "Back to the practice", check_skill: "Check this skill", practise: "Practise: 5 new questions", write_again: "Write another essay" } as Record<string, string>)[v.recommendation.kind]
+              ({ review_saved_writing: "Review my saved draft", check_observation: "Check this concern", learn: "Start learning", practise_and_check: "Go to my learning path", answer_questions: "Back to the questions", finish_practice: "Back to the practice", check_skill: "Check this skill", practise: "Practise: 5 new questions", write_again: "Write another essay" } as Record<string, string>)[v.recommendation.kind]
             }
           </button>
         )}
@@ -255,6 +256,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
           </div>
         )}
         {!v && !error && <p role="status">Opening the essay studio…</p>}
+        {workspace&&v?.essay&&(!v.analysis||v.analysis.status==='rejected')&&<section className="essay-card" data-writing-unassessed><h2>Your draft is saved, not assessed</h2><details><summary>Read my saved draft</summary><p style={{whiteSpace:'pre-wrap'}}>{v.essay.text}</p></details><p>No learning targets or successful completion were inferred. Retrying uses this same draft, not a second writing sample.</p>{studio?.connected?<button disabled={busy} onClick={()=>void act(()=>studio!.retryAnalysis(),()=>setScreen('skills'))}>Retry analysis of this saved draft</button>:<p>Reconnect the evaluator and reopen this same workspace to retry. Your committed draft is kept.</p>}</section>}
         {v && screen === "essay" && (
           <>
             {essay && (
@@ -304,14 +306,15 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
             <p className="essay-note" data-testid="analysed-by">
               {
                 workspace&&!v.analysedBy?"Saved, not assessed. No model judgment or pattern substitute was used.":{
-                  llm: "Analysis: an AI model on OpenPath's server, checked word for word by the engine.",
+                  llm: "Analysis: an AI model on OpenPath's server. Structure and quoted text are checked, not semantic correctness.",
                   replay: "Analysis: a recorded server answer (test mode), checked by the engine.",
                   recorded: "Analysis: recorded evaluator output for this built-in sample, checked by the engine.",
                   patterns: "Analysis: the simple pattern stand-in (it misses most errors), checked by the engine.",
                 }[v.analysedBy ?? "patterns"]
               }{" "}
-              {v.failedAnalyses.length > 0 && (workspace?"Analysis was unavailable or rejected. No gaps were inferred. ":"The server's evaluator failed for this essay, so the local stand-in answered. ")}One essay gives clues, not conclusions.
+              {v.failedAnalyses.length > 0 && (workspace?(v.analysis?.status==='accepted'?"An earlier analysis attempt failed; these are the accepted retry observations, still tentative. ":"Analysis was unavailable or rejected. No gaps were inferred. "):"The server's evaluator failed for this essay, so the local stand-in answered. ")}One essay gives clues, not conclusions.
             </p>
+            {v.analysis?.repeatOf&&<p>This repeats saved writing. It is not new evidence; use the original draft’s check or write a genuinely new sample.</p>}
             <Recommendation />
             <div className="essay-competencies" data-dashboard>
               {[...new Set(v.analysis?.observations.map((o) => o.competency) ?? [])].map((cap) => {
@@ -327,9 +330,9 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                       <h2>{name(cap)}</h2>
                     </div>
                     <Status cap={cap} />
-                    {h && <p data-gap={h.status}>{GAP[h.status]}</p>}
+                    {h && <p data-gap={h.status}>{h.exploratory?(h.status==='suspected'?'You chose to check a tentative concern. No gap is confirmed.':h.status==='confirmed'?'Independent bank answers suggest this skill needs practice. This does not prove a recurring problem in your own writing.':h.status==='weakened'?'Bank answers did not support this concern. No writing improvement or mastery is inferred.':GAP[h.status]):GAP[h.status]}</p>}
                     <p className="small">
-                      {errors.length ? `${errors.length} thing${errors.length === 1 ? "" : "s"} to check` : "Done well"}
+                      {errors.length ? `${errors.length} thing${errors.length === 1 ? "" : "s"} to check` : obs.some(o=>o.kind==='style') ? "Style suggestions to consider, not errors" : "Strengths observed, not verified"}
                       {h && h.essays.length > 1 ? ` · also seen in ${h.essays.length - 1} earlier essay${h.essays.length === 2 ? "" : "s"}` : ""}
                     </p>
                     <ul className="essay-quotes">
@@ -339,7 +342,8 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                         </li>
                       ))}
                     </ul>
-                    {h && v.canGenerate && h.status === "suspected" && !asked && (
+                    {workspace&&v.observationChecks.includes(cap)&&<button type="button" className="essay-primary" data-observation-check={cap} disabled={busy} onClick={()=>void act(()=>studio!.checkObservation(cap),()=>setScreen('check'))}>Check this concern before accepting it</button>}
+                    {h && h.status === "suspected" && !asked && (
                       <button type="button" className="essay-primary" data-check={cap} disabled={busy} onClick={() => void checkSkill(h.id)}>
                         Check this skill (questions from the bank)
                       </button>
@@ -349,6 +353,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                         {failed ? "Try again: practise with 5 new questions" : "Practise with 5 new questions (provisional)"}
                       </button>
                     )}
+                    {workspace&&workspaceProfile?.coverage.find(c=>c.capability===cap)?.specified===false&&<p className="small">This area has no specified independent check yet. Treat the comment as a tentative observation: explain what you meant and revise in your own words if it helps. No confirmed gap or mastery is recorded.</p>}
                     {failed && (
                       <p className="small" role="status" data-questions-rejected>
                         The questions written for this skill did not pass OpenPath&apos;s checks, so none is used: {[...failed.reasons, ...failed.rejected.flatMap((r) => r.reasons.map((x) => `question ${r.index + 1}: ${x}`))].slice(0, 3).join("; ")}.
@@ -456,7 +461,8 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
         )}
         {v && screen === "path" && (
           <>
-            {!v.journey ? (
+            {v.journey?.trees.length===0&&<p role="status">No learning targets have been established. This is not a completed learning path or evidence of correct writing. Return to Skills to explore a tentative concern.</p>}
+            {!v.journey || v.journey.trees.length===0 ? (
               <button className="primary essay-primary" disabled={busy || !!v.nextDiagnostic} onClick={() => void act(() => studio!.plan())}>
                 Build my learning path
               </button>

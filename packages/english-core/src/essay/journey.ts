@@ -196,7 +196,7 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
       }
     };
     const why =
-      h.status === "confirmed"
+      h.exploratory ? `You chose to explore a tentative observation. Bank checks are ${h.status}; this is not proof of a recurring gap in independent writing.` : h.status === "confirmed"
         ? `The essay showed it (${h.basis[0]}) and questions answered without help agreed.`
         : h.status === "unresolved"
           ? `The essay showed it (${h.basis[0]}); the questions were mixed, so practice and a fresh check follow.`
@@ -226,8 +226,8 @@ export function createJourney(ectx: EssayContext, events: readonly LedgerEvent[]
     skipped,
     contentGaps: dedupe(contentGaps),
     limits: { maxTrees: p.maxTrees, maxStepsPerNode: 3, totalSteps },
-    finalRewrite: { available: trees.length === 0, reason: trees.length === 0 ? "Nothing to work on first: the rewrite can start now." : "After the journey's steps (lessons, practice and checks)." },
-    complete: trees.length === 0,
+    finalRewrite: { available: false, reason: trees.length === 0 ? "No learning targets have been established. This is not evidence that the writing is correct." : "After the journey's steps (lessons, practice and checks)." },
+    complete: false,
   };
   return { event: { kind: "essay", id: meta.id, at: meta.at, session: meta.session, record: { type: "journey", journey } }, journey };
 }
@@ -313,11 +313,11 @@ export function journeyStatus(ectx: EssayContext, events: readonly LedgerEvent[]
     stepsBlocked: all.filter((s) => s.status === "blocked").length,
     lessonsAssigned: lessons.length,
     lessonsCompleted: lessons.filter(doneish).length,
-    percent: all.length ? Math.round((100 * all.filter(doneish).length) / all.length) : 100,
+    percent: all.length ? Math.round((100 * all.filter(doneish).length) / all.length) : 0,
   };
   j.reviews = reviewsFor(ectx, events, j, ledger, now);
-  j.complete = targets.length === 0 || targets.every((n) => n.green);
-  j.finalRewrite = finished
+  j.complete = targets.length > 0 && targets.every((n) => n.green);
+  j.finalRewrite = targets.length===0 ? {available:false,reason:"No learning targets have been established. This is not evidence that the writing is correct."} : finished
     ? { available: true, reason: j.complete ? "Every skill in the journey is shown: time for the 50-word rewrite." : "All steps are done. Some skills are not yet shown without help; the rewrite can still go ahead." }
     : { available: false, reason: "After the journey's steps (lessons, practice and checks)." };
   return j;

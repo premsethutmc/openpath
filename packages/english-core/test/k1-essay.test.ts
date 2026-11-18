@@ -157,7 +157,8 @@ test("K1-5 an isolated slip is observed, never suspected or taught; strong writi
   const j = createJourney(ectx(), events, meta(5), "essay:slip").journey;
   assert.equal(j.trees.length, 0);
   assert.match(j.skipped.find((s) => s.competency === "EN.GRM.NOUN.articles")!.reason, /may be a slip/);
-  assert.equal(j.finalRewrite.available, true);
+  assert.equal(j.finalRewrite.available, false, "No targets is not successful learning or a prerequisite to assessed revision");
+  assert.equal(j.complete, false);
 
   const strong: LedgerEvent[] = [];
   await essay(strong, "essay:strong", ESSAY_STRONG, 0);

@@ -384,6 +384,8 @@ export type HypothesisStatus = "suspected" | "confirmed" | "weakened" | "unresol
 
 /** A suspected gap from essay evidence, and what diagnosis has found since. Derived; never an estimate. */
 export interface GapHypothesis {
+  /** Learner requested a check of a single tentative observation, not repeated-error evidence. */
+  exploratory?: boolean;
   id: string;
   competency: CapabilityId;
   status: HypothesisStatus;
@@ -413,6 +415,8 @@ export interface GapHypothesis {
 
 /** Questions chosen to check one hypothesis. Answers are ordinary ledger evidence with provenance. */
 export interface DiagnosticRequest {
+  /** Explicit check requested from an observed concern; never automatic diagnosis. */
+  observationCheck?: true;
   contract: EssayContractVersion;
   id: string;
   essay: string;
