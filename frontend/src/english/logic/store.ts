@@ -19,6 +19,8 @@ export interface Repo {
   profiles(): Promise<ProfileSummary[]>;
   load(profile: string): Promise<AppEvent[]>;
   append(profile: string, event: AppEvent): Promise<void>;
+  /** Atomic compare-and-append. Unsupported stores must fail closed for guarded writing. */
+  appendIfUnchanged?(profile: string, expected: readonly AppEvent[], event: AppEvent): Promise<boolean>;
   /** Replace a profile's whole record (import). */
   replaceAll(profile: string, events: AppEvent[]): Promise<void>;
   remove(profile: string): Promise<void>;
@@ -42,6 +44,12 @@ export class MemoryRepo implements Repo {
   }
   async append(profile: string, event: AppEvent) {
     this.data.set(profile, [...(this.data.get(profile) ?? []), structuredClone(event)]);
+  }
+  async appendIfUnchanged(profile: string, expected: readonly AppEvent[], event: AppEvent) {
+    const current = this.data.get(profile) ?? [];
+    if (JSON.stringify(current) !== JSON.stringify(expected)) return false;
+    this.data.set(profile, [...current, structuredClone(event)]);
+    return true;
   }
   async replaceAll(profile: string, events: AppEvent[]) {
     this.data.set(profile, structuredClone(events));
@@ -117,6 +125,23 @@ export class IndexedDbRepo implements Repo {
     await done(tx);
   }
 
+  async appendIfUnchanged(profile: string, expected: readonly AppEvent[], event: AppEvent) {
+    // IndexedDB serializes readwrite transactions across connections/tabs. Compare and
+    // append occur in the SAME transaction; no process-local lock is relied upon.
+    const tx = this.tx(["profiles", "events"], "readwrite");
+    const finished = done(tx);
+    const store = tx.objectStore("events");
+    const rows = await req(store.index("profile").getAll(IDBKeyRange.only(profile))) as {seq:number;event:AppEvent}[];
+    const current = rows.sort((a,b)=>a.seq-b.seq).map(r=>r.event);
+    if (JSON.stringify(current) !== JSON.stringify(expected)) {
+      await finished;
+      return false;
+    }
+    store.add({profile, seq: rows.length ? Math.max(...rows.map(r=>r.seq))+1 : 0, event});
+    tx.objectStore("profiles").put(summaryOf(profile, [...current, event]));
+    await finished;
+    return true;
+  }
   async replaceAll(profile: string, events: AppEvent[]) {
     const tx = this.tx(["profiles", "events"], "readwrite");
     const store = tx.objectStore("events");

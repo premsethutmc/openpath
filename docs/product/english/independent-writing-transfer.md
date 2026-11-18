@@ -6,7 +6,9 @@ The argument workspace now separates coached revision from a subsequent independ
 
 After the initial/for/against/revision cycle, the learner can explicitly open an authored transfer topic. Opening reserves the topic in the existing essay evidence ledger before it is shown. The reserved prompt resumes after reload. Leaving consumes the topic without an inferred result. A completed cycle permits one submitted transfer attempt, not unlimited opportunities to select a favorable result.
 
-The attempt screen hides earlier writing, coaching questions, worked examples and concept practice. It asks for a fresh own-word response and explicit synthetic-test and unaided declarations. This is unproctored: external help, other tabs and semantic paraphrases cannot be reliably detected. Freshness is scoped to this device learner's recorded history; separate goal/challenge histories are not a global exposure registry.
+The attempt screen hides earlier writing, coaching questions, worked examples and concept practice. Internal learning tabs are locked until submission or explicit abandonment, and reload resumes an active reservation directly. It asks for a fresh own-word response and explicit synthetic-test and unaided declarations. This is unproctored: external help, other tabs and semantic paraphrases cannot be reliably detected. Freshness is scoped to this device learner's recorded history; separate goal/challenge histories are not a global exposure registry.
+
+Argument ledger writes use atomic compare-and-append in the device store. A stale second window reloads the current record and fails closed instead of reserving or submitting twice; stores without this operation cannot save argument records. This does not make the attempt proctored.
 
 Unsaved editor text is not persisted. The interface says this before the learner leaves. Committed writing remains in the existing ledger and is never replaced by model prose.
 

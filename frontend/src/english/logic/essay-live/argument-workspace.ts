@@ -4,6 +4,7 @@ import {ARGUMENT_RUBRIC,ARGUMENT_TRANSFER_LIMITATION,normalizeArgumentWriting,AR
 import type {AppEvent} from '../events.ts';
 export interface ArgumentLedger {
  readonly events:readonly AppEvent[];
+ argumentMeta?(count?:number):Promise<{id:string;at:string;session:string}[]>;
  essayMeta(count?:number):Promise<{id:string;at:string;session:string}[]>;
  recordEssay(...events:EssayEvent[]):Promise<void>;
 }
@@ -62,7 +63,7 @@ export class ArgumentWorkspace {
   if(this.busy)throw Error('A writing operation is already in progress.');
   const view=this.view(),candidate=this.transferState(view.cycle,view.stage===null).nextTask;if(!view.transfer.available||!candidate)throw Error(view.transfer.blockedReason??'No fresh task is available.');
   const lock=this.acquireTransfer();const token=++this.operation;this.lastStartedOperation=token;this.busy=true;
-  try{const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();
+  try{const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return this.view();
    const reservation:ArgumentTransferReservation={version:'argument-transfer-reservation@1',id:`transfer:${meta.id}`,at:meta.at,cycle:view.cycle,goal:this.options.goal,difficulty:this.options.difficulty,task:structuredClone(candidate)};
    await this.commitTransfer({kind:'essay',...meta,record:{type:'argument_transfer_reserved',reservation}});
   }finally{this.releaseTransfer(lock);if(this.lastStartedOperation===token)this.busy=false;}
@@ -72,7 +73,7 @@ export class ArgumentWorkspace {
   if(this.busy)throw Error('A writing operation is already in progress.');
   const active=this.view().transfer.active;if(!active||active.reservation.id!==reservationId)throw Error('This independent task is not active.');
   const lock=this.acquireTransfer();const token=++this.operation;this.lastStartedOperation=token;this.busy=true;
-  try{const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();await this.commitTransfer({kind:'essay',...meta,record:{type:'argument_transfer_abandoned',reservationId}});}finally{this.releaseTransfer(lock);if(this.lastStartedOperation===token)this.busy=false;}
+  try{const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return this.view();await this.commitTransfer({kind:'essay',...meta,record:{type:'argument_transfer_abandoned',reservationId}});}finally{this.releaseTransfer(lock);if(this.lastStartedOperation===token)this.busy=false;}
   return this.view();
  }
  async submitTransfer(reservationId:string,text:string,options:{syntheticConfirmed:boolean;unaidedConfirmed:boolean}){
@@ -84,7 +85,7 @@ export class ArgumentWorkspace {
   const previous=[...records.artifacts.map(a=>a.text),...records.practice.map(p=>p.text),...this.ledger.events.flatMap(e=>e.kind==='essay'&&e.record.type==='submission'?[e.record.submission.text]:[])];
   if(previous.some(old=>normalizeArgumentWriting(old)===normalized))throw Error('Write a new response rather than reuse earlier saved writing. This checks exact normalized reuse, not authorship or semantic copying.');
   const lock=this.acquireTransfer();const token=++this.operation;this.lastStartedOperation=token;this.busy=true;
-  try{const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();
+  try{const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return this.view();
    const r=active.reservation;const artifact:ArgumentArtifact={version:'argument-artifact@1',id:`argument:${meta.id}`,cycle:r.cycle,at:meta.at,goal:r.goal,difficulty:r.difficulty,stage:'transfer',topic:r.task.topic,prompt:r.task.prompt,text:text.trim(),words:wordCount(text),dataUse:'synthetic_test',assistance:'independent_transfer',transferReservationId:r.id,independenceDeclaration:{unaided:true,proctored:false,at:meta.at}};
    await this.commitTransfer(argumentArtifactEvent(meta,artifact));this.releaseTransfer(lock);
    if(token===this.operation&&this.view().analysisAvailable)await this.analyse(artifact,token);
@@ -107,7 +108,7 @@ export class ArgumentWorkspace {
   if(initialPrompt!==undefined&&(!initialPrompt.trim()||initialPrompt.length>1500))throw Error('The source writing prompt is too long or empty.');
   const token=++this.operation;this.lastStartedOperation=token;this.busy=true;
   try{
-   const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();
+   const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return this.view();
    const artifact:ArgumentArtifact={version:'argument-artifact@1',id:`argument:${meta.id}`,cycle:v.cycle,at:meta.at,goal:this.options.goal,difficulty:this.options.difficulty,stage:v.stage,topic:initialPrompt?'Initial writing sample':v.task.topic,prompt:initialPrompt??v.task.prompt,text:text.trim(),words,dataUse:'synthetic_test',assistance:v.stage==='initial'?'initial_independent':v.stage==='revision'?'supported_revision':'perspective_prompt',...(previous?{revisionOf:previous.id}:{}),...(options.sourceEssayId?{sourceEssayId:options.sourceEssayId}:{})};
    await this.ledger.recordEssay(argumentArtifactEvent(meta,artifact));
    if(token===this.operation&&v.analysisAvailable)await this.analyse(artifact,token);
@@ -121,7 +122,7 @@ export class ArgumentWorkspace {
   try{const raw=await this.options.post!({task:'observe',request,data_use:'synthetic_test'});feedback=validateArgumentFeedback(raw,request,info);}
   catch{feedback={version:'argument-feedback@1',status:'unavailable',evaluator:null,findings:[],notObservable:[],limitation:'Analysis unavailable or rejected. Writing was saved, not assessed. No gaps or improvement were inferred. Retry explicitly when available.'};}
   if(token!==this.operation)return;
-  const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return;
+  const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return;
   await this.ledger.recordEssay(argumentFeedbackEvent(meta,{...feedback,artifactId:artifact.id,at:meta.at}));
  }
  async savePractice(artifactId:string,findingIndex:number,text:string,options:{syntheticConfirmed:boolean;feedbackEventId:string}){
@@ -135,7 +136,7 @@ export class ArgumentWorkspace {
   const finding=source.record.feedback.findings[findingIndex];if(!finding)throw Error('No validated coaching concern is available.');
   const token=++this.operation;this.lastStartedOperation=token;this.busy=true;
   try{
-   const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();
+   const [meta]=await (this.ledger.argumentMeta?.bind(this.ledger)??this.ledger.essayMeta.bind(this.ledger))(1);if(token!==this.operation)return this.view();
    const practice:ArgumentPractice={version:'argument-practice@1',id:`practice:${meta.id}`,at:meta.at,artifactId,feedbackEventId:source.id,findingIndex,finding:structuredClone(finding),prompt:ARGUMENT_COACHING[finding.area].practicePrompt,text:text.trim(),dataUse:'synthetic_test',assistance:'coached_practice'};
    await this.ledger.recordEssay({kind:'essay',...meta,record:{type:'argument_practice',practice}});
    if(token===this.operation)this.busy=false;return this.view();

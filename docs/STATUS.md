@@ -8,7 +8,7 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Branch `feat/english-writing-transfer-2026-11-18`, based on merged #216 main `4ce5f7a9`.
 - Reserved unseen authored task after own revision; hidden coaching, explicit unproctored unaided declaration, saved writing and tentative shared-evaluator observations. Offline/error remains unassessed.
 - 14 immutable topic families (10 Grade7 eligible); spent/abandoned tasks are not recycled, exposure local to learner ledger. No concept-score substitution, provider activation or real data.
-- Local 143 English tests, 357 core tests, 71 backend evaluation tests and English typecheck/build pass. See `docs/product/english/independent-writing-transfer.md`; exact-head browser/full CI pending.
+- Local 162 English/store/learner tests, 357 core tests, 71 backend evaluation tests and English typecheck/build pass. See `docs/product/english/independent-writing-transfer.md`; exact-head browser/full CI pending. Atomic device-store writes prevent stale-window duplicate reservations; active transfers lock learning navigation.
 
 ## Argument concept learning (2026-11-18, merged)
 - Branch `feat/english-reasoning-plan-2026-11-18`, based on verified main `d24845b4`.

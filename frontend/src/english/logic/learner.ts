@@ -766,6 +766,31 @@ export class Learner {
     return Array.from({ length: count }, (_, i) => ({ id: `${this.profileId}:essay:${base}:${i + 1}`, at, session }));
   }
 
+  /** Snapshot-guarded metadata for argument writing, including any session transition. */
+  async argumentMeta(count = 1): Promise<{id:string;at:string;session:string}[]> {
+    this.guard("the essay studio");
+    if (!activityAllowed(this.content, "essay")) throw new PilotRefusal("essay");
+    if (!this.repo.appendIfUnchanged) throw new Error("This store cannot safely save argument writing. Use a supported device store.");
+    if (this.state.open?.event.type !== "essay") {
+      if (this.state.open) await this.appendArgument({kind:"session_end",id:this.nextId(),at:this.clock(),session:this.state.open.event.session,reason:"stopped"});
+      await this.appendArgument({kind:"session",id:this.nextId(),at:this.clock(),session:`s:${this.events.length+1}`,type:"essay"});
+    }
+    const session = this.state.open?.event;
+    if (session?.type !== "essay") throw new Error("Writing session changed in another window. Review the saved record before trying again.");
+    const at = this.clock(), base = this.events.length + 1;
+    return Array.from({length:count},(_,i)=>({id:`${this.profileId}:essay:${base}:${i+1}`,at,session:session.session}));
+  }
+
+  private async appendArgument(e: AppEvent): Promise<void> {
+    if (!this.repo.appendIfUnchanged) throw new Error("This store cannot safely save argument writing. Use a supported device store.");
+    const expectedAfter = JSON.stringify([...this.events, e]);
+    const saved = await this.repo.appendIfUnchanged(this.profileId, this.events, e);
+    this.events = await this.repo.load(this.profileId);
+    this.content = withRecordedQuestions(this.base, this.events);
+    this.state = fold(this.content, this.events);
+    if (!saved || JSON.stringify(this.events) !== expectedAfter) throw new Error("Writing changed in another window. Some changes may already be saved. The latest saved record was loaded; review it before trying again.");
+  }
+
   /** Store essay records from the core. The engine records them and changes no estimate. */
   async recordEssay(...records: EssayEvent[]): Promise<void> {
     this.guard("the essay studio");
@@ -773,7 +798,11 @@ export class Learner {
       const open = this.state.open;
       if (e.kind !== "essay") throw new Error("only essay records are stored here");
       if (!open || open.event.type !== "essay" || e.session !== open.event.session) throw new Error("an essay record belongs to the open essay session");
-      await this.add(e);
+      // Argument writing is snapshot-sensitive: a second tab must not reserve the
+      // same unseen topic or submit/abandon an already consumed reservation.
+      if (e.record.type.startsWith("argument_")) {
+        await this.appendArgument(e);
+      } else await this.add(e);
     }
   }
 
