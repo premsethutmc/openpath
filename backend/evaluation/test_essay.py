@@ -64,7 +64,7 @@ MODEL_OUTPUT = {
 def anthropic_reply(text, status=200):
     def transport(url, headers, body, timeout):
         transport.calls.append((url, headers, json.loads(body)))
-        return status, json.dumps({"content": [{"type": "text", "text": text}], "usage": {"input_tokens": 1200, "output_tokens": 300}, "stop_reason": "end_turn"}).encode()
+        return status, json.dumps({"content": [{"type": "text", "text": text}], "usage": {"input_tokens": 1200, "output_tokens": 300, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}, "stop_reason": "end_turn"}).encode()
 
     transport.calls = []
     return transport
@@ -135,9 +135,12 @@ class EssayGatewayTests(DevTestCase):
         def unreachable(*a):
             raise essay.llm.LLMError("the model provider could not be reached (TimeoutError)")
 
-        with mock.patch.object(essay, "TRANSPORT", unreachable):
-            self.assertEqual(dev.post(URL, observe_request(), format="json").status_code, 502)
-        self.assertEqual(EssayEvaluationRecord.objects.filter(status="failed").count(), 4)
+        # The previous provider error had unknown usage: fail closed without
+        # making another provider call, rather than treating it as zero tokens.
+        with mock.patch.object(essay, "TRANSPORT", side_effect=unreachable) as transport:
+            self.assertEqual(dev.post(URL, observe_request(), format="json").status_code, 429)
+            transport.assert_not_called()
+        self.assertEqual(EssayEvaluationRecord.objects.filter(status="failed").count(), 3)
         for rec in EssayEvaluationRecord.objects.all():
             self.assertNotIn("library", rec.reason)
 

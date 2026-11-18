@@ -93,6 +93,10 @@ def parse(reply: str) -> dict:
 def read(text: str, transport: llm.Transport = llm.urllib_transport, *, user_id: int | None = None) -> tuple[dict, int, int]:
     """(result, input tokens, output tokens). Raises llm.LLMError or Unreadable."""
     done = gateway.execute("maths.word_problem", {"text": text}, user_id, transport=transport)
+    if done.input_tokens is None or done.output_tokens is None:
+        # This older aggregate table cannot represent unknown per-call usage.
+        # Preserve the charged request and existing refusal, never add None or zero.
+        raise llm.LLMError("provider usage was unavailable")
     return parse(done.text), done.input_tokens, done.output_tokens
 
 

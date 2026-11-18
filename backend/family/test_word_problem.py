@@ -40,6 +40,16 @@ class WordProblemTests(TestCase):
     def ask(self, text="Ravi has 5 apples and eats 2. How many are left?"):
         return self.c.post("/api/solver/read/", {"text": text}, format="json")
 
+    @override_settings(**ON)
+    def test_missing_provider_usage_keeps_charged_request_without_null_arithmetic(self):
+        def transport(*args):
+            return 200,json.dumps({"content":[{"type":"text","text":json.dumps({"calculation":"5 - 2","reading":"Subtract two."})}],"stop_reason":"end_turn"}).encode()
+        self.use(transport)
+        response=self.ask()
+        self.assertEqual(response.status_code,200)
+        self.assertIn("cannot",response.data)
+        self.assertEqual(WordProblemUse.objects.get().requests,1)
+
     def test_off_by_default_and_nothing_is_sent(self):
         t = self.use(reply({"calculation": "5 - 2", "reading": "x", "unit": "apples"}))
         r = self.ask()

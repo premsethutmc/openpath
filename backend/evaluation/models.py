@@ -70,8 +70,13 @@ class EssayEvaluationRecord(models.Model):
     text_chars = models.PositiveIntegerField(default=0)
     status = models.CharField(max_length=16, choices=STATUS)
     reason = models.CharField(max_length=200, blank=True)
-    input_tokens = models.PositiveIntegerField(default=0)
-    output_tokens = models.PositiveIntegerField(default=0)
+    input_tokens = models.PositiveIntegerField(null=True, default=None)
+    output_tokens = models.PositiveIntegerField(null=True, default=None)
+    cached_input_tokens = models.PositiveIntegerField(null=True, default=None)
+    cache_creation_input_tokens = models.PositiveIntegerField(null=True, default=None)
+    reasoning_output_tokens = models.PositiveIntegerField(null=True, default=None)
+    # Blank denotes historical records without a known usage contract.
+    usage_provider = models.CharField(max_length=24, blank=True, default="")
     latency_ms = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 

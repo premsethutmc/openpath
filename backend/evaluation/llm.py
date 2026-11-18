@@ -32,7 +32,7 @@ import re
 import time
 import urllib.error
 import urllib.request
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Callable
 
 MAX_RESPONSE_BYTES = 2_000_000
@@ -42,6 +42,7 @@ PROVIDERS = ("anthropic", "openai_compatible")
 
 class LLMError(Exception):
     """The model could not give a usable answer. The message never contains essay text or credentials."""
+    usage = None  # Validated numeric metadata only, never the model response.
 
 
 @dataclass(frozen=True)
@@ -111,14 +112,61 @@ def _bounded_read(response) -> bytes:
 @dataclass(frozen=True)
 class Completion:
     text: str
-    input_tokens: int
-    output_tokens: int
+    # Provider's own totals; Anthropic input excludes cache reads/writes.
+    # Missing usage is unknown, never fabricated as zero.
+    input_tokens: int | None
+    output_tokens: int | None
+    cached_input_tokens: int | None = None
+    cache_creation_input_tokens: int | None = None
+    reasoning_output_tokens: int | None = None
+    usage_provider: str = ""
 
 
-def _completion(text, input_tokens, output_tokens) -> Completion:
-    if not isinstance(text, str) or not text.strip() or any(type(n) is not int or n < 0 or n > 100_000_000 for n in (input_tokens, output_tokens)):
+def _token_count(value):
+    if value is None:
+        return None
+    if type(value) is not int or not 0 <= value <= 100_000_000:
+        raise LLMError("the model provider's usage had an unexpected shape")
+    return value
+
+
+def _completion(text, input_tokens, output_tokens, *, cached_input_tokens=None,
+                cache_creation_input_tokens=None, reasoning_output_tokens=None, usage_provider="") -> Completion:
+    if not isinstance(text, str) or not text.strip():
         raise LLMError("the model provider's reply had an unexpected shape")
-    return Completion(text, input_tokens, output_tokens)
+    counts = tuple(_token_count(v) for v in (input_tokens, output_tokens, cached_input_tokens,
+                                           cache_creation_input_tokens, reasoning_output_tokens))
+    i, o, cached, created, reasoning = counts
+    if (usage_provider == "openai_compatible" and i is not None and cached is not None and cached > i) or (o is not None and reasoning is not None and reasoning > o):
+        raise LLMError("the model provider's usage had an unexpected shape")
+    return Completion(text, *counts, usage_provider=usage_provider)
+
+
+def _usage_object(value):
+    if value is None:
+        return {}
+    if not isinstance(value, dict):
+        raise LLMError("the model provider's usage had an unexpected shape")
+    return value
+
+
+def _reported_usage(provider, data):
+    usage = _usage_object(data.get("usage"))
+    if provider == "anthropic":
+        return _completion("usage metadata only", usage.get("input_tokens"), usage.get("output_tokens"),
+                           cached_input_tokens=usage.get("cache_read_input_tokens"),
+                           cache_creation_input_tokens=usage.get("cache_creation_input_tokens"),
+                           usage_provider=provider)
+    return _completion("usage metadata only", usage.get("prompt_tokens"), usage.get("completion_tokens"),
+                       cached_input_tokens=_usage_object(usage.get("prompt_tokens_details")).get("cached_tokens"),
+                       reasoning_output_tokens=_usage_object(usage.get("completion_tokens_details")).get("reasoning_tokens"),
+                       usage_provider=provider)
+
+
+def _with_text(usage, text):
+    if not isinstance(text, str) or not text.strip():
+        raise LLMError("the model provider's reply had an unexpected shape")
+    return replace(usage, text=text)
 
 
 # (url, headers, body bytes, timeout) -> (status, body bytes). Replaced in tests; never logs anything.
@@ -219,7 +267,9 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
         data = json.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
         raise LLMError("the model provider's reply was not JSON") from None
+    reported = None
     try:
+        reported = _reported_usage(config.provider, data)
         if config.provider == "anthropic":
             stop = data.get("stop_reason")
             if stop == "max_tokens":
@@ -229,19 +279,21 @@ def complete(config: LLMConfig, system: str, user: str, transport: Transport = u
             if stop == "model_context_window_exceeded":
                 raise LLMError("the request was larger than the model's context window")
             text = "".join(b.get("text", "") for b in data["content"] if b.get("type") == "text")
-            usage = data.get("usage") or {}
-            return _completion(text, usage.get("input_tokens", 0), usage.get("output_tokens", 0))
+            return _with_text(reported, text)
         choice = data["choices"][0]
         if choice.get("finish_reason") == "content_filter" or choice.get("message", {}).get("refusal"):
             raise LLMError("the model declined to answer (refusal)")
         if choice.get("finish_reason") == "length":
             raise LLMError("the model's answer was cut off at the output limit")
-        usage = data.get("usage") or {}
-        return _completion(choice["message"]["content"], usage.get("prompt_tokens", 0), usage.get("completion_tokens", 0))
-    except LLMError:
+        return _with_text(reported, choice["message"]["content"])
+    except LLMError as error:
+        error.usage = reported
         raise
     except (KeyError, IndexError, TypeError, ValueError, AttributeError):
-        raise LLMError("the model provider's reply had an unexpected shape") from None
+        error = LLMError("the model provider's reply had an unexpected shape")
+        error.usage = reported
+        raise error from None
+
 
 
 _FENCE = re.compile(r"^```(?:json)?\s*|\s*```$", re.IGNORECASE)

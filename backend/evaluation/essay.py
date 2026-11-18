@@ -22,7 +22,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from django.conf import settings
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -201,12 +201,30 @@ def _adapter() -> tuple[str, str, str | None]:
     return name, config.model, "; ".join(problems) or None
 
 
+def _record_usage(record, usage):
+    for name in ("input_tokens", "output_tokens", "cached_input_tokens", "cache_creation_input_tokens",
+                 "reasoning_output_tokens", "usage_provider"):
+        setattr(record, name, getattr(usage, name))
+
+
 def _over_budget() -> str | None:
     today = EssayEvaluationRecord.objects.filter(adapter="llm", created_at__date=timezone.localdate()).exclude(status="refused")
     if today.count() >= settings.OPENPATH_ESSAY_DAILY_REQUESTS:
         return "the daily request limit for the essay evaluator is reached"
-    tokens = today.aggregate(i=Sum("input_tokens"), o=Sum("output_tokens"))
-    if (tokens["i"] or 0) + (tokens["o"] or 0) >= settings.OPENPATH_ESSAY_DAILY_TOKENS:
+    # A previous real attempt with unknown totals cannot be counted as free.
+    # The current request has not been saved yet; replay/refused records are excluded.
+    incomplete = (Q(input_tokens__isnull=True) | Q(output_tokens__isnull=True) |
+                  ~Q(usage_provider__in=("openai_compatible", "anthropic")) |
+                  (Q(usage_provider="anthropic") &
+                   (Q(cached_input_tokens__isnull=True) | Q(cache_creation_input_tokens__isnull=True))))
+    if today.filter(incomplete).exists():
+        return "previous provider usage is unknown; further essay calls are paused for this day"
+    # Cache read/write tokens are additional input only for Anthropic; OpenAI
+    # cached input and reasoning are already included in its reported totals.
+    tokens = today.aggregate(i=Sum("input_tokens"), o=Sum("output_tokens"),
+                             cached=Sum("cached_input_tokens", filter=Q(usage_provider="anthropic")),
+                             created=Sum("cache_creation_input_tokens", filter=Q(usage_provider="anthropic")))
+    if sum(value or 0 for value in tokens.values()) >= settings.OPENPATH_ESSAY_DAILY_TOKENS:
         return "the daily token limit for the essay evaluator is reached"
     return None
 
@@ -284,7 +302,7 @@ class EssayEvaluationView(DeveloperOnly):
                 output = recordings[key]
             else:
                 completion = gateway.execute(f"essay.{task}", req, request.user.pk, transport=TRANSPORT)
-                record.input_tokens, record.output_tokens = completion.input_tokens, completion.output_tokens
+                _record_usage(record, completion)
                 output = llm.extract_json(completion.text)
             if req["rubric"] == exam.RUBRIC:
                 exam.validate_output(output, req)
@@ -300,10 +318,12 @@ class EssayEvaluationView(DeveloperOnly):
                 if output.get("essay_id" if task == "observe" else "rewrite_id") != expected:
                     raise llm.LLMError("the model's answer names a different essay or rewrite")
         except llm.LLMError as e:
+            if e.usage is not None:
+                _record_usage(record, e.usage)
             record.status, record.reason = "failed", str(e)[:200]
             record.latency_ms = int((time.monotonic() - started) * 1000)
             record.save()
-            return Response({"error": str(e), "fallback": FALLBACK}, status=status.HTTP_429_TOO_MANY_REQUESTS if isinstance(e, gateway.GatewayDenied) else status.HTTP_502_BAD_GATEWAY)
+            return Response({"error": str(e), "fallback": FALLBACK, "record": record.pk}, status=status.HTTP_429_TOO_MANY_REQUESTS if isinstance(e, gateway.GatewayDenied) else status.HTTP_502_BAD_GATEWAY)
         record.status = "answered"
         record.latency_ms = int((time.monotonic() - started) * 1000)
         record.save()

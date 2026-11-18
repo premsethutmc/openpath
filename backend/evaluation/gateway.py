@@ -73,7 +73,12 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
             system = essay.argument.PROMPT
         if cleaned["rubric"] in essay.foundation.RUBRICS:
             system = essay.foundation.prompt(system)
-        user = json.dumps(cleaned, ensure_ascii=False)
+        compact_observe = (task == 'essay.observe' and cleaned['rubric'] in essay.foundation.RUBRICS
+                           and essay.foundation.compact_observation_enabled())
+        if compact_observe:
+            cleaned = essay.foundation.observation_payload(cleaned)
+            system = essay.foundation.observation_prompt(system)
+        user = json.dumps(cleaned, ensure_ascii=False, **({'separators': (',', ':')} if compact_observe else {}))
     else:
         from family import word_problem
         if settings.OPENPATH_WORD_PROBLEMS != 'on':
