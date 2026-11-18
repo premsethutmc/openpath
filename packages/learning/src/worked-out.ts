@@ -114,9 +114,16 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
   if (String(result) !== answer.replace(/,/g, "")) return null;
   const width = Math.max(String(a).length, String(b).length, String(result).length) + 2;
   const row = (t: string) => t.padStart(width, " ");
+  // borrow@1: a subtraction is set out with room above each digit for what it becomes after borrowing (860 → 8 5 10),
+  // the way a child writes the small numbers above the crossed-out ones
+  const cells = String(a).length, wide = (xs: (string | number)[], sign = " ") => `${sign} ${xs.map((x) => String(x).padStart(2, " ")).join(" ")}`;
+  const now: (number | "")[] = Array(cells).fill("");
   const da = String(a).split("").reverse().map(Number), db = String(b).split("").reverse().map(Number), n = Math.max(da.length, db.length);
   const carries: string[] = Array(width).fill(" "), done: string[] = [];
-  const board = () => [...(carries.some((c) => c !== " ") ? [carries.join("").replace(/\s+$/, "")] : []), row(String(a)), `${plus ? "+" : "−"}${row(String(b)).slice(1)}`, "-".repeat(width), row(done.join(""))];
+  const spread = (v: string) => v.padStart(cells, " ").split("");
+  const board = () => (plus
+    ? [...(carries.some((c) => c !== " ") ? [carries.join("").replace(/\s+$/, "")] : []), row(String(a)), `+${row(String(b)).slice(1)}`, "-".repeat(width), row(done.join(""))]
+    : [...(now.some((v) => v !== "") ? [wide(now).replace(/\s+$/, "")] : []), wide(spread(String(a))), wide(spread(String(b)), "−"), "-".repeat(2 + cells * 3 - 1), wide(spread(done.join("")))]);
   const out: Worked[] = [];
   let carry = 0;
   for (let i = 0; i < n; i++) {
@@ -135,6 +142,8 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
         out.push({ next: `${lead}The ${place}: can ${y} be taken from ${Math.max(have, 0)}?`, shown: carry ? (x === 0 ? `No. This column has already lent 1, so borrow 1 from the ${next}: 10, less the 1 it lent, is 9.` : `No. It lent 1, so it has ${have}. Borrow 1 from the ${next}: ${have + 10}.`) : `No: ${x} is less than ${y}. Borrow 1 from the ${next}, which makes ${x + 10}.` });
         out.push({ next: `Now take away in the ${place}.`, shown: `${have + 10} − ${y} = ${have + 10 - y}` });
         done.unshift(String(have + 10 - y));
+        now[cells - 1 - i] = have + 10;
+        if (cells - 2 - i >= 0) now[cells - 2 - i] = (da[i + 1] ?? 0) - 1 < 0 ? "" : (da[i + 1] ?? 0) - 1;
         carry = 1;
       } else {
         out.push({ next: `${lead}Take away in the ${place}${carry ? " (it lent 1)" : ""}.`, shown: `${have} − ${y} = ${have - y}` });
@@ -145,21 +154,94 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
     }
   }
   if (Number(done.join("")) !== result) return null;
-  out.push({ next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${result}.`, board: [...board().slice(0, -1), row(String(result))] });
+  out.push({ next: "Last: read the answer off the bottom line.", shown: `The bottom line is the answer: ${result}.`, board: [...board().slice(0, -1), plus ? row(String(result)) : wide(spread(String(result)))] });
   return out;
+}
+
+/**
+ * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
+ * must end on the verified answer or it is not offered.
+ */
+const primesOf = (n: number) => { const out: number[] = []; for (let p = 2; n > 1; p++) while (n % p === 0) { out.push(p); n /= p; } return out; };
+const factorsOf = (n: number) => { const out: number[] = []; for (let k = 1; k <= n; k++) if (n % k === 0) out.push(k); return out; };
+const times = (xs: number[]) => (xs.length ? xs.join(" × ") : "1");
+const gcd2 = (x: number, y: number): number => (y ? gcd2(y, x % y) : x);
+function hcfLcm(prompt: string | undefined, answer: string): { name: string; steps: Worked[] }[] | null {
+  const m = prompt ? /^What is the (highest common factor \(HCF\)|lowest common multiple \(LCM\)) of ([\d, and]+)\?$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const ns = m[2].split(/,\s*|\s+and\s+/).map((t) => Number(t.trim())).filter((x) => Number.isInteger(x) && x > 0), hcf = /HCF/.test(m[1]);
+  if (ns.length < 2 || ns.length > 3 || ns.some((x) => x > 999)) return null;
+  const want = hcf ? ns.reduce(gcd2) : ns.reduce((x, y) => (x * y) / gcd2(x, y));
+  if (String(want) !== answer) return null;
+  const ways: { name: string; steps: Worked[] }[] = [], lists = ns.map(primesOf), all = [...new Set(lists.flat())].sort((x, y) => x - y);
+  const count = (list: number[], p: number) => list.filter((x) => x === p).length;
+  // 1. prime factors
+  const picked = all.flatMap((p) => Array(hcf ? Math.min(...lists.map((l) => count(l, p))) : Math.max(...lists.map((l) => count(l, p)))).fill(p) as number[]);
+  if (ns.every((x) => x > 1)) ways.push({ name: "Prime factors", steps: [
+    ...ns.map((x, i): Worked => ({ next: `${i === 0 ? "First: " : ""}Write ${x} as a product of primes.`, shown: `${x} is ${times(lists[i])}.` })),
+    { next: hcf ? "Which primes are in every list? Take each one as many times as it is in all of them." : "Take every prime, as many times as it appears in the list where it appears most.", shown: picked.length ? `That gives ${times(picked)}.` : "No prime is in every list, so the only common factor is 1." },
+    ...(picked.length > 1 ? [{ next: "Multiply them.", shown: `${times(picked)} = ${want}` }] : []),
+    { next: `Last: say the ${hcf ? "HCF" : "LCM"}.`, shown: `The ${hcf ? "HCF" : "LCM"} is ${want}.` },
+  ] });
+  // 2. listing
+  if (hcf) {
+    const common = factorsOf(ns[0]).filter((k) => ns.every((x) => x % k === 0));
+    if (ns.every((x) => factorsOf(x).length <= 16)) ways.push({ name: "List the factors", steps: [
+      ...ns.map((x, i): Worked => ({ next: `${i === 0 ? "First: " : ""}List every factor of ${x}.`, shown: `Factors of ${x}: ${factorsOf(x).join(", ")}.` })),
+      { next: "Which numbers are in every list?", shown: `Common factors: ${common.join(", ")}.` },
+      { next: "Last: the biggest of them is the HCF.", shown: `The HCF is ${want}.` },
+    ] });
+  } else if (ns.every((x) => want / x <= 12)) {
+    ways.push({ name: "List the multiples", steps: [
+      ...ns.map((x, i): Worked => ({ next: `${i === 0 ? "First: " : ""}Count in ${x}s.`, shown: `Multiples of ${x}: ${Array.from({ length: want / x }, (_, k) => x * (k + 1)).join(", ")}, …` })),
+      { next: "Which is the first number in every list?", shown: `${want} is the first one they share.` },
+      { next: "Last: say the LCM.", shown: `The LCM is ${want}.` },
+    ] });
+  }
+  // 3. division
+  if (hcf) {
+    const steps: Worked[] = []; let g = ns[0];
+    ns.slice(1).forEach((x, k) => {
+      let big = Math.max(g, x), small = Math.min(g, x);
+      if (k > 0) steps.push({ next: `Now do the same with ${g} and the next number, ${x}.`, shown: `The HCF so far is ${g}.` });
+      for (let guard = 0; small > 0 && guard < 20; guard++) {
+        const q = Math.floor(big / small), r = big - q * small;
+        steps.push({ next: `${steps.length === 0 ? "First: divide the bigger number by the smaller. " : ""}Divide ${big} by ${small}. What is left over?`, shown: `${small} × ${q} = ${small * q}. Left over: ${big} − ${small * q} = ${r}` });
+        if (r === 0) { g = small; break; }
+        steps.push({ next: "Something is left over. What is divided next?", shown: `Divide the divisor, ${small}, by the remainder, ${r}.` });
+        big = small; small = r;
+      }
+    });
+    if (g === want) ways.push({ name: "Division method", steps: [...steps, { next: "Last: the divisor that left nothing over is the HCF.", shown: `The HCF is ${want}.` }] });
+  } else {
+    const rows: number[][] = [ns.slice()], by: number[] = [];
+    for (let guard = 0; guard < 20; guard++) { const cur = rows[rows.length - 1], p = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31].find((q) => cur.filter((x) => x % q === 0).length >= 2); if (!p) break; by.push(p); rows.push(cur.map((x) => (x % p === 0 ? x / p : x))); }
+    const lastRow = rows[rows.length - 1], parts = [...by, ...lastRow.filter((x) => x !== 1)];
+    const board = (k: number) => rows.slice(0, k + 1).map((r, i) => `${i < k ? String(by[i]).padStart(2, " ") : "  "} | ${r.map((x) => String(x).padStart(3, " ")).join(",")}`);
+    if (by.length && parts.reduce((x, y) => x * y, 1) === want) ways.push({ name: "Division ladder", steps: [
+      ...by.map((p, i): Worked => ({ next: `${i === 0 ? "First: write the numbers in a row. " : ""}Find a prime that divides at least two of ${rows[i].join(", ")}, and divide.`, shown: `Divide by ${p}: ${rows[i + 1].join(", ")}. (A number it does not divide is brought down as it is.)`, board: board(i + 1) })),
+      { next: "No prime divides two of them now. Multiply everything down the side and along the bottom.", shown: `${times(parts)} = ${want}`, board: board(by.length) },
+      { next: "Last: say the LCM.", shown: `The LCM is ${want}.`, board: board(by.length) },
+    ] });
+  }
+  return ways.length ? ways : null;
 }
 
 const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** methods@1: the school method's name for a type that has one written here (the first tab of its step help). */
 const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division" };
+/** methods@2: every way written for a question, the taught one first, each with its name; null when none is written. */
+export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
+  try {
+    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
+    const c = columns(q.prompt, q.answer);
+    if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
+    return hcfLcm(q.prompt, q.answer);
+  } catch { return null; }
+}
 /** The full working for a question in the taught method, with that method's name; null when none is written. */
 export function workedOut(q: Q): (Worked[] & { method?: string }) | null {
-  let w: Worked[] | null = null, name = "";
-  try {
-    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { w = HANDLERS[q.family](q); name = NAMES[q.family] ?? "The usual way"; }
-    if (!w) { w = columns(q.prompt, q.answer); name = "In columns"; }
-  } catch { w = null; }
-  if (!w || w.length < 2) return null;
-  return Object.assign(w, { method: name });
+  const ways = workedWays(q);
+  return ways ? Object.assign(ways[0].steps, { method: ways[0].name }) : null;
 }

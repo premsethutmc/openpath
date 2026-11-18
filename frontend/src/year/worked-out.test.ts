@@ -116,11 +116,11 @@ test("column addition and subtraction: every question of two whole numbers is se
     if (!last.board) { assert.ok(Math.max(a, b) < 10 || (m[2] === "−" && a < b), `${item.id} has no columns`); continue; }
     n++;
     const want = m[2] === "+" ? a + b : a - b, rows = last.board;
-    assert.equal(Number(rows.at(-1)!.trim()), want, item.id);
+    assert.equal(Number(rows.at(-1)!.replace(/[\s−+]/g, "")), want, item.id);
     assert.equal(String(want), question(item.id).answer.replace(/,/g, ""), item.id);
     assert.ok(new Set(rows.slice(-4).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
-    assert.equal(Number(rows.at(-4)!.trim()), a, item.id);
-    assert.equal(Number(rows.at(-3)!.slice(1).trim()), b, item.id);
+    assert.equal(Number(rows.at(-4)!.replace(/[\s−+]/g, "")), a, item.id);
+    assert.equal(Number(rows.at(-3)!.replace(/[\s−+]/g, "")), b, item.id);
     for (const s of h) for (const c of s.shown.matchAll(/(\d+(?: [+−] \d+)+) = (\d+)/g)) assert.equal(checkWorkingLines([`${c[1]} = ${c[2]}`])[0].state, "right", `${item.id}: ${c[0]}`);
     if (h.some((s) => /carry 1/.test(s.shown))) carried++;
     if (h.some((s) => /Borrow 1/.test(s.shown))) borrowed++;
@@ -136,7 +136,31 @@ test("methods@1: the taught method is the first tab, and the type's own steps ar
   assert.match(stepsHelp(id, 0)![0].next, /How many 6s fit in 34/);
   assert.equal(stepsHelp(id, 1)![0].next, "First: multiply.");
   assert.equal(stepsHelp(id, 1)!.some((s) => s.board), false);
-  assert.deepEqual(helpMethods("gen:adcol3:104,737,0"), ["In columns", "Another way"]);
+  assert.deepEqual(helpMethods("gen:adcol3:104,737,0"), ["In columns", "By place value"]);
+  // borrow@1: what each digit becomes after borrowing is written above it
+  assert.deepEqual(stepsHelp("gen:adcol3:860,737,1")!.at(-1)!.board, ["      5 10", "   8  6  0", "−  7  3  7", "----------", "   1  2  3"]);
   assert.deepEqual(stepsHelp("gen:adcol3:104,737,0")!.at(-1)!.board, ["   1", "  104", "+ 737", "-----", "  841"]);
   assert.deepEqual(helpMethods("not-a-question"), []);
+});
+
+test("HCF and LCM: each way that is offered ends on the answer, and every product and take-away in it is true", () => {
+  const seen = new Map<string, number>(); let n = 0;
+  for (const f of FAMILIES_ALL()) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id) || !/^What is the (highest common factor \(HCF\)|lowest common multiple \(LCM\)) of [\d, and]+\?$/.test(item.prompt)) continue;
+    const names = helpMethods(item.id), answer = question(item.id).answer;
+    assert.ok(names.length >= 1 && names[0] !== "Step by step", `${item.id}: ${names}`);
+    n++;
+    names.forEach((name, k) => {
+      const h = stepsHelp(item.id, k)!;
+      seen.set(name, (seen.get(name) ?? 0) + 1);
+      // the type's own steps, offered as a second way where only one is written, end on the answer in their own words
+      if (name === "Another way") assert.ok(h.at(-1)!.shown.includes(answer), `${item.id} ${name}`);
+      else assert.match(h.at(-1)!.shown, new RegExp(`(HCF|LCM) is ${answer}\\.$`), `${item.id} ${name}`);
+      for (const s of h) for (const c of s.shown.matchAll(/(\d+(?: [×+−] \d+)+) = (\d+)/g)) assert.equal(checkWorkingLines([`${c[1]} = ${c[2]}`])[0].state, "right", `${item.id} ${name}: ${c[0]}`);
+      for (const s of h) { const m = /^(\d+) is ((?:\d+ × )*\d+)\.$/.exec(s.shown); if (m) assert.equal(m[2].split(" × ").map(Number).reduce((x, y) => x * y, 1), Number(m[1]), `${item.id}: ${s.shown}`); }
+    });
+  }
+  console.log(n, "HCF and LCM questions;", [...seen].map(([k, v]) => `${k}: ${v}`).join(", "));
+  assert.ok(n > 2000 && (seen.get("Prime factors") ?? 0) > 1500 && (seen.get("Division method") ?? 0) > 500 && (seen.get("Division ladder") ?? 0) > 200, String(n));
+  assert.deepEqual(helpMethods("gen:hcf:12,18"), ["Prime factors", "List the factors", "Division method"]);
 });

@@ -414,3 +414,9 @@ ask for the number divided keep their own steps.
 real alternative they are a second tab ("1 · Long division", "2 · In easy parts"). Column addition and subtraction are
 built: any question of two whole numbers added or subtracted is set out in columns, ones first, with carrying or
 borrowing, the layout shown as it grows (3,844 questions in 10 types).
+
+`methods@2`: a question can have several written ways (`workedWays`), each a tab. HCF: prime factors, listing the
+factors, the division method. LCM: prime factors, listing the multiples (when the lists are short), the division ladder
+(when a prime divides two of the numbers), with the ladder drawn. 2,455 questions, every way proved to end on the answer.
+`borrow@1`: a subtraction is set out with room above each digit for what it becomes after borrowing (8 6 0 → 5 10 above).
+The place-value alternative to columns is named "By place value".

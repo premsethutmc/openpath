@@ -18,8 +18,8 @@ written layout where it has one, and proved on every question by `frontend/src/y
 | Estimating | Round each number first, then work | | partly (first steps) |
 | Place value, lakhs and crores | Place-value chart; a zero for every empty place | Commas, Indian and international | partly (chart) |
 | Factors | Pair them: 1 × n, 2 × ?, 3 × ? … | | no |
-| HCF | Prime factorisation: common primes | Listing common factors; division method | no |
-| LCM | Prime factorisation: every prime, highest count | Listing multiples; common division ladder | no |
+| HCF | Prime factorisation: common primes | Listing common factors; division method | yes (three tabs) |
+| LCM | Prime factorisation: every prime, highest count | Listing multiples; common division ladder | yes (up to three tabs) |
 | Equivalent fractions | Multiply (or divide) top and bottom by the same number | | partly (first steps) |
 | Lowest terms | Divide top and bottom by their HCF | Divide by common factors in turn | no |
 | Mixed ↔ improper fractions | Whole × denominator + numerator, over the denominator | Divide for the other direction | no |

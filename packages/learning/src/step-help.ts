@@ -7,7 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
-import { workedOut } from "./worked-out";
+import { workedWays } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -105,9 +105,10 @@ function cueWith(op: string, inputs: unknown, value: unknown, shown: string, giv
 export function helpMethods(qid: string): string[] {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return [];
-  const full = workedOut(p);
-  if (!full) return ["Step by step"];
-  return p.steps.length >= 2 ? [full.method ?? "The usual way", ALT[p.family] ?? "Another way"] : [full.method ?? "The usual way"];
+  const ways = workedWays(p);
+  if (!ways) return ["Step by step"];
+  // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
+  return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
 }
 const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };
 /** The steps of a question as help, in order (in its `method`-th way: see helpMethods); null when it is not a generated question or has no steps. */
@@ -115,7 +116,7 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
-  const full = method === 0 ? workedOut(p) : null;
+  const ways = workedWays(p), full = ways && method < ways.length ? ways[method].steps : null;
   if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
