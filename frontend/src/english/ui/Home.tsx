@@ -26,7 +26,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -128,6 +128,13 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           For a grown-up: why these?
         </button>
       </p>
+      {onParent && !learner.content.gate && (
+        <p className="small parent-entry">
+          <button type="button" className="link" onClick={onParent}>
+            For parents: word lists and results
+          </button>
+        </p>
+      )}
     </main>
   );
 }
