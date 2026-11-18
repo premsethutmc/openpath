@@ -6,7 +6,13 @@
  * One handler per type (data and plain arithmetic; nothing is generated when the learner asks). Add a type here when its
  * steps leap over the work.
  */
-export interface Worked { next: string; shown: string }
+export interface Worked {
+  next: string; shown: string;
+  /** another skill this step leans on (its card is offered), where there is one */
+  needs?: string;
+  /** board@1: the written layout as it stands once this step is done (long division's bracket), one text line per row */
+  board?: string[];
+}
 type Q = { family: string; params: number[]; answer: string };
 
 const primesTo = (k: number) => { const out: number[] = []; for (let n = 2; n <= k; n++) if (out.every((p) => n % p)) out.push(n); return out; };
@@ -43,36 +49,57 @@ function primeTest({ params: [mode, n], answer }: Q): Worked[] | null {
 }
 
 /**
- * avdiv [d, q, r, mode]: long division of n = d·q + r by d; mode 0 asks the quotient, 1 the remainder. The type's own
- * steps state the quotient at once and then check it by multiplying, which is not how it is done. This is the method
- * itself: one digit at a time, from the left: how many fit, what is left over, bring the next digit down.
+ * Long division as it is written in school: the bracket, one digit at a time from the left. How many fit, write the
+ * product underneath, take it away, bring the next digit down. When the divisor is more than the first digit, the first
+ * two digits are taken together. Each step carries the layout as it then stands.
+ *
+ * avdiv [d, q, r, mode]: n = d·q + r; mode 0 asks the quotient, 1 the remainder. ldiv [q, d]: n = d·q exactly.
  */
-function longDivision({ params: [d, q, r, mode], answer }: Q): Worked[] | null {
-  const n = d * q + r;
-  if (!Number.isInteger(n) || d < 2 || d > 99 || n < 10 || n > 999999 || r < 0 || r >= d) return null;
-  if (String(mode === 1 ? r : q) !== answer) return null;
+function divide(n: number, d: number, want: "quotient" | "remainder", answer: string): Worked[] | null {
+  const q = Math.floor(n / d), r = n - q * d;
+  if (!Number.isInteger(n) || d < 2 || d > 99 || n < 10 || n > 999999) return null;
+  if (String(want === "remainder" ? r : q) !== answer) return null;
   const digits = String(n).split("").map(Number), PLACE = ["ones", "tens", "hundreds", "thousands", "ten thousands", "lakhs"];
+  const pad = String(d).length + 3, at = (text: string, endCol: number) => " ".repeat(Math.max(0, pad + endCol + 1 - text.length)) + text;
+  const top: string[] = digits.map(() => " "), under: string[] = [];
+  const board = () => [" ".repeat(pad) + top.join("").replace(/\s+$/, ""), `${d} ) ${n}`, ...under];
   const out: Worked[] = [];
-  let carry = 0, quotient = "";
+  let carry = 0, started = false, opening = "";
   digits.forEach((digit, i) => {
     const place = PLACE[digits.length - 1 - i], cur = carry * 10 + digit, fit = Math.floor(cur / d), left = cur - fit * d, last = i === digits.length - 1;
-    const where = i === 0 ? `First: start at the left, with the ${place}. ` : "";
-    if (fit === 0) {
-      out.push({ next: `${where}How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 above the ${place}${last ? "" : ` and keep the ${cur}`}.` });
-    } else {
-      out.push({ next: `${where}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 99 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} above the ${place}.` });
-      out.push({ next: `What is left over from the ${cur}?`, shown: `${cur} − ${d * fit} = ${left}` });
+    if (!started && fit === 0 && !last) {
+      // the divisor is more than what there is so far: take the next digit with it (nothing is written yet)
+      opening = `${d} is more than ${cur}, so take the next digit with it. `;
+      carry = cur;
+      return;
     }
-    quotient += String(fit);
+    const first = !started ? `First: ${opening}` : "";
+    started = true;
+    if (fit === 0) {
+      top[i] = "0";
+      out.push({ next: `How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 on top${last ? "" : `, and keep the ${cur}`}.`, board: board() });
+    } else {
+      top[i] = String(fit);
+      under.push(at(String(d * fit), i));
+      out.push({ next: `${first}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 999 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} on top and ${d * fit} under the ${cur}.`, needs: "MATH.number.multiplication-tables", board: board() });
+      under.push(at("-".repeat(String(cur).length), i), at(String(left), i));
+      out.push({ next: `Take it away. What is left from the ${cur}?`, shown: `${cur} − ${d * fit} = ${left}`, board: board() });
+    }
     carry = left;
-    if (!last) out.push({ next: `Bring down the next digit, ${digits[i + 1]}, beside the ${left}.`, shown: `${left === 0 ? `Nothing was left over, so it is just ${digits[i + 1]}` : `${left} and ${digits[i + 1]} side by side make ${left * 10 + digits[i + 1]}`}.` });
+    if (!last) {
+      if (fit !== 0) under[under.length - 1] = at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1); else under.push(at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1));
+      out.push({ next: `Bring down the next digit, ${digits[i + 1]}.`, shown: left === 0 ? `Nothing was left, so there is just ${digits[i + 1]} to share.` : `${left} with ${digits[i + 1]} beside it makes ${left * 10 + digits[i + 1]}.`, board: board() });
+    }
+    void place;
   });
-  if (Number(quotient) !== q || carry !== r) return null;
-  out.push({ next: "Last: read the answer off the top.", shown: mode === 1 ? `The digits on top make ${q}, and what is left at the end is the remainder: ${r}.` : `The digits on top make the quotient: ${q}.${r ? ` (${r} is left over.)` : ""}` });
+  if (!started || carry !== r) return null;
+  out.push({ next: "Last: read the answer off the top.", shown: want === "remainder" ? `The top line says ${q}, and what is left at the bottom is the remainder: ${r}.` : `The top line is the answer: ${q}.${r ? ` (${r} is left over.)` : ""}`, board: board() });
   return out;
 }
+const longDivision = ({ params: [d, q, r, mode], answer }: Q): Worked[] | null => (r >= 0 && r < d ? divide(d * q + r, d, mode === 1 ? "remainder" : "quotient", answer) : null);
+const exactDivision = ({ params: [q, d], answer }: Q): Worked[] | null => divide(q * d, d, "quotient", answer);
 
-const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision };
+const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** The full working for a question of a type that has one, or null. */
 export function workedOut(q: Q): Worked[] | null {

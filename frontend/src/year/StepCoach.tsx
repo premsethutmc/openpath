@@ -90,6 +90,8 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   return (
     <div className="coach" data-coach-step={at}>
       {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
+      {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <pre className="coach-board" aria-label="The working so far" data-testid="coach-board">{b.join("\n")}</pre> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

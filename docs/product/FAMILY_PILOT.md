@@ -398,3 +398,9 @@ next digit down, and the answer is read off the top at the end. 500 questions.
 change, with a ceiling on each fault count so it can only go down. First reading, of 941 types: the answer is in the
 first line of help in 28, said in a "what to do" cue in 1, the help is a single step in 161, and the cues are mostly one
 word in 478. It cannot see whether the steps are the method a teacher would use.
+
+`board@1` and division as it is written in school (`worked-out.ts` `divide`, owner's correction 18 Nov 2026): both
+division types (`ldiv` exact, `avdiv` with remainders) are helped the same way: the bracket layout, one digit at a time.
+How many fit (the product goes underneath), take it away, bring the next digit down; when the divisor is more than the
+first digit the first two are taken together. Each step carries the layout as it stands (`board`), shown in the step help
+as it grows. The earlier chunking help for `ldiv` ("50 × 6 = 300, then 48 ÷ 6") is replaced.

@@ -35,6 +35,8 @@ export interface StepHelp {
   finer?: true;
   /** The skill the step belongs to (its own skill or the one it leans on), when that skill has a card: the rule behind the step. */
   rule?: string;
+  /** board@1: the written layout once this step is done (long division), a text line per row */
+  board?: string[];
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -100,7 +102,7 @@ export function stepsHelp(qid: string): StepHelp[] | null {
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
   const full = workedOut(p);
-  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: null, ...(cardFor(p.competency) ? { rule: p.competency } : {}) }));
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);

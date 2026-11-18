@@ -37,7 +37,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
 test("the owner's example: a division's first step leans on multiplication facts, and that skill has a card", () => {
   const fam = [...FAMILIES.entries()].find(([, d]) => d.competency === "MATH.number.long-division")![0];
   const q = pool(fam).items[0], h = stepsHelp(q.id)!;
-  assert.equal(h[0].next, "First: multiply.");
+  assert.match(h[0].next, /^First: .*How many \d+s fit in \d+, without going over\?$/);
   assert.equal(h[0].needs, "MATH.number.multiplication-tables");
   // and before the step is shown, a stuck child is asked the fact underneath it
   assert.deepEqual(smallerOf("50 × 2 = 100"), { lead: "50 is 5 tens. Start with the fact underneath:", ask: "5 × 2 = ?", answer: 10 });

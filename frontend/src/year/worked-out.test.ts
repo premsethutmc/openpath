@@ -56,18 +56,21 @@ test("cue-numbers@1: a plain calculation's cue names its numbers and never its r
   assert.ok(named > 20, String(named));
 });
 
-test("long division of 373 by 3 is the method itself: how many fit, what is left, bring down", async () => {
-  const { problemOf } = await import("../../../packages/learning/src/families");
-  assert.ok(problemOf("gen:avdiv:3,124,1,0"));
-  const h = stepsHelp("gen:avdiv:3,124,1,0")!;
+test("long division is the school layout: how many fit, the product underneath, take away, bring down", async () => {
+  const { pool } = await import("../../../packages/learning/src/families");
+  const id = pool("ldiv").items.find((p) => /^348 ÷ 6/.test(p.prompt))!.id, h = stepsHelp(id)!;
   assert.deepEqual(h.map((s) => s.next), [
-    "First: start at the left, with the hundreds. How many 3s fit in 3, without going over?", "What is left over from the 3?", "Bring down the next digit, 7, beside the 0.",
-    "How many 3s fit in 7, without going over?", "What is left over from the 7?", "Bring down the next digit, 3, beside the 1.",
-    "How many 3s fit in 13, without going over?", "What is left over from the 13?", "Last: read the answer off the top.",
+    "First: 6 is more than 3, so take the next digit with it. How many 6s fit in 34, without going over?", "Take it away. What is left from the 34?", "Bring down the next digit, 8.",
+    "How many 6s fit in 48, without going over?", "Take it away. What is left from the 48?", "Last: read the answer off the top.",
   ]);
-  assert.equal(h[4].shown, "7 − 6 = 1");
-  assert.equal(h[5].shown, "1 and 3 side by side make 13.");
-  assert.equal(h[8].shown, "The digits on top make the quotient: 124. (1 is left over.)");
+  assert.equal(h[1].shown, "34 − 30 = 4");
+  assert.deepEqual(h.at(-1)!.board, ["     58", "6 ) 348", "    30", "    --", "     48", "     48", "     --", "      0"]);
+  assert.equal(h[0].needs, "MATH.number.multiplication-tables");
+  assert.ok(!h.slice(0, -1).some((s) => /58/.test(s.next + s.shown)), "the answer is not said before the end");
+  // with a remainder, and the remainder asked for
+  const r = stepsHelp("gen:avdiv:3,124,1,0")!;
+  assert.deepEqual(r.at(-1)!.board, ["    124", "3 ) 373", "    3", "    -", "     7", "     6", "     -", "     13", "     12", "     --", "      1"]);
   assert.match(stepsHelp("gen:avdiv:3,124,1,1")!.at(-1)!.shown, /remainder: 1\.$/);
-  assert.ok(!h.slice(0, -1).some((s) => /124/.test(s.next + s.shown)), "the quotient is not said before the end");
+  // every row of every board is as wide as the layout needs and no wider
+  for (const s of h) for (const row of s.board!) assert.ok(row.length <= 7, row);
 });
