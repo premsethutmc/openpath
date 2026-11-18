@@ -7,7 +7,7 @@
  * Practice and feedback only: never in a test.
  */
 import { useMemo, useState } from "react";
-import { cardFor, stepsHelp } from "../../../packages/learning/src/step-help";
+import { cardFor, helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 import { SmallAsk } from "./SmallAsk";
 import { askOf, judge, type StepAsk } from "../../../packages/learning/src/step-ask";
@@ -70,7 +70,10 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
 /** one-help@1: in practice the coach lives inside the child's own working ("Work it out step by step"), not beside it:
  *  `shown` opens it from outside (the "I'm stuck" button and the "Help" button in the working are the same thing). */
 export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone, shown }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void; shown?: boolean }) {
-  const steps = useMemo(() => stepsHelp(qid), [qid]);
+  // methods@1: where a question can be worked more than one way, the ways are tabs (the taught method first)
+  const methods = useMemo(() => helpMethods(qid), [qid]);
+  const [method, setMethod] = useState(0);
+  const steps = useMemo(() => stepsHelp(qid, method), [qid, method]);
   // chintu@1: on a question of Classes 1 to 5, Chintu the cat says what to do next
   const buddy = useMemo(() => { const g = classOfQuestion(qid); return g !== null && g <= LAST_CHINTU_CLASS; }, [qid]);
   const [open, setOpen] = useState(startOpen);
@@ -88,8 +91,15 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   // is there straight away, and an opened rule stays open while the next step uses the same rule
   const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); if (at + 1 >= steps.length) onDone?.(); };
   return (
-    <div className="coach" data-coach-step={at}>
+    <div className="coach" data-coach-step={at} data-coach-method={method}>
+      {methods.length > 1 && (
+        <div className="coach-methods" role="tablist" aria-label="Ways to work it out">
+          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); } }}>{i + 1} · {name}</button>)}
+        </div>
+      )}
       {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
+      {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <pre className="coach-board" aria-label="The working so far" data-testid="coach-board">{b.join("\n")}</pre> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

@@ -7,7 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
-import { workedOut } from "./worked-out";
+import { workedWays } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -35,6 +35,8 @@ export interface StepHelp {
   finer?: true;
   /** The skill the step belongs to (its own skill or the one it leans on), when that skill has a card: the rule behind the step. */
   rule?: string;
+  /** board@1: the written layout once this step is done (long division), a text line per row */
+  board?: string[];
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -95,12 +97,27 @@ function cueWith(op: string, inputs: unknown, value: unknown, shown: string, giv
   return null;
 }
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
-export function stepsHelp(qid: string): StepHelp[] | null {
+/**
+ * methods@1: the ways a question's help can be worked, by name, the taught method first. Where the taught method is
+ * written out (worked-out@1) and the type's own steps are a real alternative (two steps or more), there are two: the
+ * learner can switch between them. One name otherwise.
+ */
+export function helpMethods(qid: string): string[] {
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""));
+  if (!p || !p.steps.length) return [];
+  const ways = workedWays(p);
+  if (!ways) return ["Step by step"];
+  // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
+  return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
+}
+const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };
+/** The steps of a question as help, in order (in its `method`-th way: see helpMethods); null when it is not a generated question or has no steps. */
+export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
-  const full = workedOut(p);
-  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: null, ...(cardFor(p.competency) ? { rule: p.competency } : {}) }));
+  const ways = workedWays(p), full = ways && method < ways.length ? ways[method].steps : null;
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);

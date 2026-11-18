@@ -398,3 +398,25 @@ next digit down, and the answer is read off the top at the end. 500 questions.
 change, with a ceiling on each fault count so it can only go down. First reading, of 941 types: the answer is in the
 first line of help in 28, said in a "what to do" cue in 1, the help is a single step in 161, and the cues are mostly one
 word in 478. It cannot see whether the steps are the method a teacher would use.
+
+`board@1` and division as it is written in school (`worked-out.ts` `divide`, owner's correction 18 Nov 2026): both
+division types (`ldiv` exact, `avdiv` with remainders) are helped the same way: the bracket layout, one digit at a time.
+How many fit (the product goes underneath), take it away, bring the next digit down; when the divisor is more than the
+first digit the first two are taken together. Each step carries the layout as it stands (`board`), shown in the step help
+as it grows. The earlier chunking help for `ldiv` ("50 × 6 = 300, then 48 ÷ 6") is replaced.
+The layout is proved on every division question (1,037 layouts, 2,212 take-aways): the top line is the quotient, the
+bracket line is the question, every row above a rule is a multiple of the divisor, every difference is right and smaller
+than the divisor, and the bottom row is the remainder. The 167 questions that give divisor, quotient and remainder and
+ask for the number divided keep their own steps.
+
+`methods@1` (owner's direction, 18 Nov 2026): the taught method for each Class 5 topic is listed in
+`docs/product/METHODS_CLASS5.md`. In the step help the taught method is the first tab; where the type's own steps are a
+real alternative they are a second tab ("1 · Long division", "2 · In easy parts"). Column addition and subtraction are
+built: any question of two whole numbers added or subtracted is set out in columns, ones first, with carrying or
+borrowing, the layout shown as it grows (3,844 questions in 10 types).
+
+`methods@2`: a question can have several written ways (`workedWays`), each a tab. HCF: prime factors, listing the
+factors, the division method. LCM: prime factors, listing the multiples (when the lists are short), the division ladder
+(when a prime divides two of the numbers), with the ladder drawn. 2,455 questions, every way proved to end on the answer.
+`borrow@1`: a subtraction is set out with room above each digit for what it becomes after borrowing (8 6 0 → 5 10 above).
+The place-value alternative to columns is named "By place value".

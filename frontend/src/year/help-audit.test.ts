@@ -9,7 +9,7 @@ import { question } from "../../../packages/learning/src/content";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
 
-const CEILING = { answerFirst: 28, answerInCue: 1, oneStep: 161, oneWordCues: 478 };
+const CEILING = { answerFirst: 28, answerInCue: 1, oneStep: 160, oneWordCues: 468 };
 const esc = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 test("the step help of every question type: answers given away, single steps and one-word cues can only go down", () => {
