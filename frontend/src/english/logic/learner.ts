@@ -21,6 +21,7 @@ import { MASTERY_GATE } from "./mastery-policy.ts";
 import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, planSession, sessionView, spellingState, wordKey } from "./spelling.ts";
 import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
+import type { ReadingRecord } from "./reading/session.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
@@ -226,6 +227,18 @@ export class Learner {
     await this.repo.scrub(this.profileId, { type: "list", id });
     await this.reload();
     await this.add({ kind: "word_list_delete", id: this.nextId(), at: this.clock(), list: id });
+  }
+
+  // ------------------------------------------------------------------ Reading course (logic/reading)
+
+  /** The learner's reading-course record, in order (progress is rebuilt from it: logic/reading/session.ts). */
+  readingRecords(): ReadingRecord[] {
+    return this.events.flatMap((e) => (e.kind === "reading" ? [e.record] : []));
+  }
+
+  /** Store steps of a reading unit, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordReading(records: readonly ReadingRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "reading", id: this.nextId(), at: this.clock(), record });
   }
 
   // ------------------------------------------------------------------ My Books (logic/books.ts)

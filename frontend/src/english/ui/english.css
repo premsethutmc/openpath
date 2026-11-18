@@ -2053,3 +2053,96 @@ h3.sub {
 .bee-quiet {
   text-align: center;
 }
+
+/* ------------------------------------------------------------ Reading course (ui/Reading.tsx) */
+.reading-passage h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.4rem;
+  color: var(--violet-text);
+}
+.reading-passage mark {
+  background: var(--peach);
+  color: var(--peach-text);
+  border-radius: 6px;
+  padding: 1px 3px;
+}
+.reading .rule {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.reading-worked ol {
+  padding-left: 1.3rem;
+  line-height: 1.6;
+}
+.reading-worked li {
+  margin-bottom: 0.5rem;
+}
+.reading .option.crossed {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+.reading-hints {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+  display: grid;
+  gap: 8px;
+}
+.reading-hints .hint {
+  background: var(--lilac);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 10px 14px;
+}
+.reading .feedback blockquote {
+  margin: 0.5rem 0 0;
+  padding-left: 12px;
+  border-left: 3px solid currentColor;
+  font-style: italic;
+}
+.reading .primary,
+.reading .secondary {
+  margin-top: 14px;
+}
+.reading-skill h3 {
+  margin: 0;
+}
+.reading-levels {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.reading-levels li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.reading-level-name {
+  font-weight: 800;
+  display: grid;
+}
+.reading-level-name .status {
+  text-align: left;
+  font-weight: 600;
+}
+.reading-level-go {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reading-level-go .secondary {
+  margin-top: 0;
+}
+.reading-level-go .link {
+  white-space: nowrap;
+}
+.reading-note {
+  padding-top: 0;
+}
