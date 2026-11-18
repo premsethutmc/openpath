@@ -49,9 +49,9 @@ function primeTest({ params: [mode, n], answer }: Q): Worked[] | null {
  */
 function longDivision({ params: [d, q, r, mode], answer }: Q): Worked[] | null {
   const n = d * q + r;
-  if (!Number.isInteger(n) || d < 2 || d > 12 || n < 10 || n > 99999 || r < 0 || r >= d) return null;
+  if (!Number.isInteger(n) || d < 2 || d > 99 || n < 10 || n > 999999 || r < 0 || r >= d) return null;
   if (String(mode === 1 ? r : q) !== answer) return null;
-  const digits = String(n).split("").map(Number), PLACE = ["ones", "tens", "hundreds", "thousands", "ten thousands"];
+  const digits = String(n).split("").map(Number), PLACE = ["ones", "tens", "hundreds", "thousands", "ten thousands", "lakhs"];
   const out: Worked[] = [];
   let carry = 0, quotient = "";
   digits.forEach((digit, i) => {
