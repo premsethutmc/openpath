@@ -346,3 +346,9 @@ Prime-numbers lesson (the pattern for a story lesson done fully):
 `play-first@1` (`recipe-layout.ts`, owner's decision 18 Nov 2026): from Class 4 a story lesson is one screen that grows
 (no Next between parts), and it opens on the thing to play with, the story under it. The guess is asked just before the
 last thing to find out, when the learner has something to guess from. Classes 1 to 3 keep one part at a time.
+
+`worked-out@1` (`packages/learning/src/worked-out.ts`): for a type whose own steps are a summary, the whole working a
+learner would do, written once for the type from its own numbers; it replaces the type's steps in the step help and is
+kept only when it ends on the verified answer. First type: the prime test (`agptest`): how far to try (k × k), then each
+prime in turn (even? digit sum? last digit? how many fit and what is left over), then what was found. 393 questions,
+2,869 steps, 1,603 of them boxes to fill.

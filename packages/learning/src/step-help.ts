@@ -7,6 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
+import { workedOut } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -71,6 +72,9 @@ const NEXT: Record<string, string> = { note: "notice what the question gives you
 export function stepsHelp(qid: string): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
+  // worked-out@1: a type whose own steps leap over the work has the whole working written for it
+  const full = workedOut(p);
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: null, ...(cardFor(p.competency) ? { rule: p.competency } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   return p.steps.flatMap((s, i) => {

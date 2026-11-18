@@ -1,4 +1,5 @@
 /** step-help@1: help at a step is made from the question's own verified steps; a card from the skill's own lesson. */
+import { WORKED_OUT } from "../../../packages/learning/src/worked-out";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, explainStep, pool, problemOf } from "../../../packages/learning/src/families";
@@ -10,6 +11,8 @@ const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items
 test("every question's help is its own steps, in order, with nothing worked in the 'what to do' line", () => {
   let needing = 0;
   for (const q of sample) {
+    // worked-out@1: a type with its whole working written for it is proved in worked-out.test.ts
+    if (WORKED_OUT.includes(q.family)) continue;
     const all = stepsHelp(q.id);
     // deepen@1: lines of working made by rule sit between the question's own steps; they tell what to do without its result
     for (const f of all!.filter((x) => x.finer)) {
