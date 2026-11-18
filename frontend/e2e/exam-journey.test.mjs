@@ -33,7 +33,9 @@ test('mobile synthetic journey completes without network, hides clues, preserves
  await page.getByText(/Revision saved for this sitting, not assessed/).waitFor();
  await page.getByRole('button',{name:'Teach and recheck reading gaps'}).click();
  while(await page.getByRole('button',{name:'Try a new reading question'}).count()){
-  await page.getByRole('button',{name:'Try a new reading question'}).click();await page.locator('fieldset button').first().click();await page.getByRole('button',{name:'Continue reading follow-up'}).click();
+  assert.equal(await page.getByRole('button',{name:'Try a new reading question'}).isDisabled(),true);
+  await page.getByRole('button',{name:'Try guided practice',exact:true}).click();await page.getByRole('button',{name:'Show a hint',exact:true}).click();await page.getByRole('button',{name:'Show the worked answer',exact:true}).click();await page.getByRole('button',{name:'Finish supported lesson',exact:true}).click();
+  await page.getByRole('button',{name:'Try a new reading question'}).click();assert.equal(await page.locator('[data-supported-teaching]').count(),0);await page.locator('fieldset button').first().click();await page.getByRole('button',{name:'Continue reading follow-up'}).click();
  }
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  const keys=await page.evaluate(()=>Object.keys(localStorage));assert.deepEqual(keys,['openpath.exam-exposure@1']);
