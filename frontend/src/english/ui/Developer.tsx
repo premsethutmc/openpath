@@ -11,9 +11,11 @@ import { type AppContent, loadContent } from "../logic/content.ts";
 import { type Access, checkAccess } from "../logic/developer-access.ts";
 import { type Diagnosis, type Report, type TimelineEntry, NOT_RECORDED, bankCoverage, buildReport, diagnose } from "../logic/diagnostics.ts";
 import type { AppEvent, SelectionTrace } from "../logic/events.ts";
+import { type ModelCheck, modelCheck } from "../logic/model-check.ts";
+import { CANDIDATE_MODEL_VERSION } from "../../../../packages/english-core/src/index.ts";
 import { APP_BUILD } from "../logic/telemetry.ts";
 
-type View = { name: "overview" } | { name: "pupils" } | { name: "pupil"; id: string } | { name: "content" } | { name: "audit" };
+type View = { name: "overview" } | { name: "pupils" } | { name: "pupil"; id: string } | { name: "content" } | { name: "model" } | { name: "audit" };
 
 const fmtTime = (iso: string) => iso.replace("T", " ").slice(0, 16);
 
@@ -109,6 +111,7 @@ export function Developer() {
                 ["overview", "Health"],
                 ["pupils", "Pupils"],
                 ["content", "Question bank"],
+                ["model", "Model check"],
                 ["audit", "Audit log"],
               ] as const
             ).map(([id, label]) => (
@@ -122,6 +125,7 @@ export function Developer() {
             {view.name === "pupils" && <Pupils api={api} onOpen={(id) => setView({ name: "pupil", id })} />}
             {view.name === "pupil" && <PupilDiagnostics api={api} id={view.id} serverCommit={commit} onBack={() => setView({ name: "pupils" })} />}
             {view.name === "content" && <Coverage />}
+            {view.name === "model" && <ModelCheckView api={api} />}
             {view.name === "audit" && <Audit api={api} />}
           </main>
         </>
@@ -742,6 +746,68 @@ function Coverage() {
           r.lesson ? "yes" : "–",
         ])}
       />
+    </div>
+  );
+}
+
+/**
+ * The live estimator and the research candidate on the same recorded answers (logic/model-check.ts). It runs only
+ * when asked, because it reads every listed pupil's record (each read is audited). Nothing is written anywhere.
+ */
+function ModelCheckView({ api }: { api: Api }) {
+  const content = useMemo<AppContent>(() => loadContent(), []);
+  const pupils = useLoad<DeveloperPupil[]>(() => api.developerPupils());
+  const [state, setState] = useState<{ phase: "idle" } | { phase: "running"; done: number } | { phase: "done"; check: ModelCheck } | { phase: "failed"; message: string }>({ phase: "idle" });
+  if (pupils.problem) return <Problem message={pupils.problem} onRetry={pupils.reload} />;
+  if (!pupils.data) return <p className="loading">Loading…</p>;
+  const list = pupils.data;
+  const run = async () => {
+    try {
+      const records: { id: string; events: AppEvent[] }[] = [];
+      for (const p of list) {
+        setState({ phase: "running", done: records.length });
+        records.push({ id: p.id, events: (await api.developerPupilEvents(p.id)).events });
+      }
+      setState({ phase: "done", check: modelCheck(content, records) });
+    } catch (e) {
+      setState({ phase: "failed", message: (e as Error).message });
+    }
+  };
+  const f = (x: number | undefined) => (x === undefined ? "–" : x.toFixed(4));
+  return (
+    <div className="stack" data-model-check={state.phase}>
+      <h1>Model check</h1>
+      <p className="small">
+        Scores the live English estimator and the research model ({CANDIDATE_MODEL_VERSION}) on the same recorded answers: each model states the chance of a right answer before it sees the answer. The research model decides nothing in the app; this page is the only place it runs.
+      </p>
+      <p>
+        <button type="button" className="primary" disabled={state.phase === "running" || !list.length} onClick={() => void run()}>
+          {state.phase === "running" ? `Reading records… ${state.done} of ${list.length}` : `Run on ${list.length} ${list.length === 1 ? "pupil" : "pupils"}`}
+        </button>
+      </p>
+      <p className="small">Reads each listed pupil's record once; every read is written to the audit log.</p>
+      {state.phase === "failed" && <p className="warning">{state.message}</p>}
+      {state.phase === "done" && (
+        <>
+          <p className={state.check.comparison.enough ? "" : "warning"}>
+            <b>{state.check.verdict}</b>
+          </p>
+          <div className="dev-stats">
+            <Stat label="Learners" value={state.check.comparison.learners} />
+            <Stat label="Scored answers" value={state.check.comparison.answers} note="fresh, unaided, code-scored" />
+            <Stat label="Trust in hand-set difficulty" value={state.check.comparison.trust.toFixed(2)} note="1 = at face value" />
+          </div>
+          <Table
+            label="Model scores"
+            head={["Model", "Log loss", "Brier", "Calibration error"]}
+            rows={[
+              [`Live (${state.check.comparison.liveModel})`, f(state.check.comparison.live?.logLoss), f(state.check.comparison.live?.brier), f(state.check.comparison.live?.calibrationError)],
+              [`Research (${state.check.comparison.candidateModel})`, f(state.check.comparison.candidate?.logLoss), f(state.check.comparison.candidate?.brier), f(state.check.comparison.candidate?.calibrationError)],
+            ]}
+          />
+          <p className="small">Lower is better in every column. The research model's step sizes were tuned on simulated learners and are provisional.</p>
+        </>
+      )}
     </div>
   );
 }
