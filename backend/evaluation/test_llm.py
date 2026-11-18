@@ -29,7 +29,7 @@ class LLMClientTests(unittest.TestCase):
     def test_anthropic_wire_format_and_usage(self):
         t = Recorder(body={"content": [{"type": "text", "text": '{"ok": true}'}], "usage": {"input_tokens": 11, "output_tokens": 7}, "stop_reason": "end_turn"})
         out = complete(cfg(max_output_tokens=900, timeout_s=20), "SYSTEM", "USER", transport=t)
-        self.assertEqual(out, Completion('{"ok": true}', 11, 7))
+        self.assertEqual(out, Completion('{"ok": true}', 11, 7, usage_provider='anthropic'))
         url, headers, body, timeout = t.calls[0]
         self.assertEqual(url, "https://llm.example.test/v1/messages")
         self.assertEqual(headers["x-api-key"], KEY)

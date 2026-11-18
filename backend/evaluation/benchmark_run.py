@@ -38,6 +38,7 @@ import time
 from pathlib import Path
 
 from evaluation import llm
+from evaluation.usage import usage_summary, standard_rate_estimate
 
 REPO = Path(__file__).resolve().parents[2]
 PROMPTS = REPO / "content" / "english" / "prompts"
@@ -120,6 +121,8 @@ def run(args, transport=llm.urllib_transport, sleep=time.sleep, env=os.environ) 
         problems.append("--price-input and --price-output (USD per million tokens) are required for a live run")
     if args.max_cost_usd is None or args.max_cost_usd <= 0:
         problems.append("--max-cost-usd must be set above zero for a live run")
+    if args.retries != 0:
+        problems.append("--retries must be 0 for bounded live comparison; no blind paid retries")
     problems += config.problems()
     if problems:
         raise SystemExit("refused: " + "; ".join(problems))
@@ -127,7 +130,8 @@ def run(args, transport=llm.urllib_transport, sleep=time.sleep, env=os.environ) 
         report["warning"] = f"the worst case ({est['cost_worst_case_usd']} USD) exceeds the cap; the run stops at the cap"
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    spent = 0.0
+    spent = 0.0  # known-usage standard-rate estimate, never an invoice
+    reserved = 0.0
     usage = []
     runs = []
     recorded = {"evaluator": {**EVALUATOR, "model": config.model}, "observations": {}, "rewrites": {}}
@@ -135,23 +139,31 @@ def run(args, transport=llm.urllib_transport, sleep=time.sleep, env=os.environ) 
     stopped = None
     for c in calls:
         worst = cost(math.ceil((len(c["system"]) + len(c["user"])) / CHARS_PER_TOKEN), config.max_output_tokens)
-        if spent + worst > args.max_cost_usd:
-            stopped = f"stopped before {c['task']} {c['id']} run {c['run']}: the cap of {args.max_cost_usd} USD could be exceeded (spent {round(spent, 4)})"
+        if reserved + worst > args.max_cost_usd:
+            stopped = f"stopped before {c['task']} {c['id']} run {c['run']}: the cap of {args.max_cost_usd} USD could be exceeded (reserved {round(reserved, 4)})"
             break
+        reserved += worst  # failed/missing usage never frees a call reservation
+        comp = None
         started = time.monotonic()
         rec = {"task": c["task"], "id": c["id"], "run": c["run"]}
         try:
             comp = llm.complete(config, c["system"], c["user"], transport=transport, sleep=sleep)
-            spent += cost(comp.input_tokens, comp.output_tokens)
-            rec.update(status="answered", input_tokens=comp.input_tokens, output_tokens=comp.output_tokens)
+            rec.update(status="answered")
             try:
                 output = llm.extract_json(comp.text)
             except llm.LLMError as e:
                 output = None
                 rec.update(status="unparseable", error=str(e))
         except llm.LLMError as e:
+            comp = e.usage
             output = None
             rec.update(status="failed", error=str(e))
+        info = usage_summary(comp) if comp is not None else None
+        observed_estimate = standard_rate_estimate(info, args.price_input, args.price_output) if info else None
+        rec.update(provider_usage=info, input_tokens=info['total_input_tokens'] if info else None,
+                   output_tokens=info['output_tokens'] if info else None, standard_rate_estimate_usd=observed_estimate)
+        if observed_estimate is not None:
+            spent += observed_estimate
         rec["latency_ms"] = int((time.monotonic() - started) * 1000)
         usage.append(rec)
         runs.append({**rec, "output": output})
@@ -159,15 +171,23 @@ def run(args, transport=llm.urllib_transport, sleep=time.sleep, env=os.environ) 
         target = recorded["observations"] if c["task"] == "observe" else recorded["rewrites"]
         if c["run"] == 1 and output is not None:
             target[c["id"]] = output
+        if rec["status"] != "answered" or observed_estimate is None or observed_estimate > worst:
+            stopped = "stopped after failed/unparseable output, unknown usage or usage beyond the estimated reservation; review before any new run"
+            break
     summary = {
         **report,
         "calls_made": len(usage),
         "answered": sum(1 for u in usage if u["status"] == "answered"),
         "failed": sum(1 for u in usage if u["status"] == "failed"),
         "unparseable": sum(1 for u in usage if u["status"] == "unparseable"),
-        "input_tokens": sum(u.get("input_tokens", 0) for u in usage),
-        "output_tokens": sum(u.get("output_tokens", 0) for u in usage),
-        "cost_usd": round(spent, 4),
+        "input_tokens": None if any(u['input_tokens'] is None for u in usage) else sum(u['input_tokens'] for u in usage),
+        "output_tokens": None if any(u['output_tokens'] is None for u in usage) else sum(u['output_tokens'] for u in usage),
+        "known_input_tokens": sum(u['input_tokens'] for u in usage if u['input_tokens'] is not None),
+        "known_output_tokens": sum(u['output_tokens'] for u in usage if u['output_tokens'] is not None),
+        "cost_usd": None if any(u['standard_rate_estimate_usd'] is None for u in usage) else round(spent, 4),
+        "known_usage_standard_rate_estimate_usd": round(spent, 4),
+        "reserved_estimated_cost_usd": reserved,
+        "cost_interpretation": "Legacy cost_usd is a standard-rate estimate, not an invoice; null if any usage is unknown. Cache discounts/premiums and other billing adjustments are not applied. Reasoning is already in output. Reservation uses a character-ratio heuristic, not a token upper bound or hard billing cap.",
         "approved_by": args.approved_by,
         "stopped": stopped,
         "rewrite_consistency": rewrite_consistency(runs),
@@ -187,7 +207,7 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--repeats-rewrite", type=int, default=3)
     p.add_argument("--max-output-tokens", type=int, default=4000)
     p.add_argument("--timeout-s", type=float, default=60)
-    p.add_argument("--retries", type=int, default=1)
+    p.add_argument("--retries", type=int, default=0)
     p.add_argument("--price-input", type=float, default=None, help="USD per million input tokens")
     p.add_argument("--price-output", type=float, default=None, help="USD per million output tokens")
     p.add_argument("--max-cost-usd", type=float, default=None)

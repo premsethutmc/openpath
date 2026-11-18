@@ -53,7 +53,9 @@ class WorkspaceBenchmarkTests(DevTestCase):
         self.assertEqual(r['results'][0]['response']['output'],output())
         self.assertEqual(transport.calls[0][2]['system'],argument.PROMPT)
         self.assertEqual(AIUsageBucket.objects.get(scope='global').requests,1)
-        self.assertGreater(r['reserved_cost_bound_usd'],r['reported_cost_usd'])
+        self.assertIsNotNone(r['standard_rate_estimate_usd'])
+        self.assertEqual(r['calls_with_unknown_usage'],0)
+        self.assertGreater(r['reserved_cost_bound_usd'],0)
         self.assertNotIn(LLM['OPENPATH_LLM_API_KEY'],self.out.read_text())
 
     @override_settings(**LLM)

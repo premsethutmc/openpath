@@ -141,6 +141,8 @@ OPENPATH_EVALUATION_REPLAY_FILE = os.environ.get("OPENPATH_EVALUATION_REPLAY_FIL
 # consent, retention and deletion policies are approved (that switch is not configurable here).
 OPENPATH_ESSAY_EVALUATOR = os.environ.get("OPENPATH_ESSAY_EVALUATOR", "disabled")
 OPENPATH_ESSAY_REPLAY_FILE = os.environ.get("OPENPATH_ESSAY_REPLAY_FILE") or None
+# Experimental observe-only rubric compaction; enable only for explicit evaluation.
+OPENPATH_ESSAY_COMPACT_OBSERVE = os.environ.get("OPENPATH_ESSAY_COMPACT_OBSERVE", "0") == "1"
 OPENPATH_ESSAY_EVALUATOR_VERSION = os.environ.get("OPENPATH_ESSAY_EVALUATOR_VERSION", "essay-llm@1")
 OPENPATH_LLM_PROVIDER = os.environ.get("OPENPATH_LLM_PROVIDER", "anthropic")
 OPENPATH_LLM_MODEL = os.environ.get("OPENPATH_LLM_MODEL", "")

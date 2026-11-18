@@ -31,7 +31,7 @@ class Fake:
 
 
 def ok(obj, i=1000, o=200):
-    return 200, {"content": [{"type": "text", "text": json.dumps(obj)}], "usage": {"input_tokens": i, "output_tokens": o}, "stop_reason": "end_turn"}
+    return 200, {"content": [{"type": "text", "text": json.dumps(obj)}], "usage": {"input_tokens": i, "output_tokens": o, "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}, "stop_reason": "end_turn"}
 
 
 class BenchmarkRunTests(unittest.TestCase):
@@ -67,13 +67,15 @@ class BenchmarkRunTests(unittest.TestCase):
         dims = lambda rating: {"dimensions": [{"dimension": "meaning_preservation", "rating": "mostly"}, {"dimension": "concision", "rating": rating}]}  # noqa: E731
         t = Fake([ok({"observations": []}), (400, {"type": "error", "error": {"type": "invalid_request_error", "message": "secret detail"}}), ok({"observations": []}), ok(dims("fully")), ok(dims("fully")), ok(dims("partly"))])
         r = br.run(self.args("--live", "--approved-by", "owner 2026-10-18", "--price-input", "2", "--price-output", "10", "--max-cost-usd", "5", "--retries", "0"), transport=t, sleep=lambda s: None, env=ENV)
-        self.assertEqual((r["calls_made"], r["answered"], r["failed"]), (6, 5, 1))
-        self.assertEqual((r["input_tokens"], r["output_tokens"]), (5000, 1000))
-        self.assertAlmostEqual(r["cost_usd"], (5000 * 2 + 1000 * 10) / 1e6)
-        self.assertEqual(r["rewrite_consistency"]["per_rewrite"]["r1"], {"repeats": 3, "dimensions": 2, "identical": 1, "share_identical": 0.5})
+        self.assertEqual((r["calls_made"], r["answered"], r["failed"]), (2, 1, 1))
+        self.assertEqual((r["known_input_tokens"], r["known_output_tokens"]), (1000, 200))
+        self.assertIsNone(r["input_tokens"])
+        self.assertIsNone(r["output_tokens"])
+        self.assertIsNone(r["cost_usd"])
+        self.assertAlmostEqual(r["known_usage_standard_rate_estimate_usd"], (1000 * 2 + 200 * 10) / 1e6)
         rec = json.loads((self.dir / "out" / "recorded.json").read_text())
-        self.assertEqual(sorted(rec["observations"]), ["e0", "e2"], "the failed essay is missing, so the scorer counts it")
-        self.assertEqual(list(rec["rewrites"]), ["r1"])
+        self.assertEqual(sorted(rec["observations"]), ["e0"], "failed and uncalled essays remain missing")
+        self.assertEqual(list(rec["rewrites"]), [])
         self.assertEqual(rec["evaluator"]["model"], "test-model")
         for f in (self.dir / "out").iterdir():
             text = f.read_text()
@@ -90,7 +92,31 @@ class BenchmarkRunTests(unittest.TestCase):
         r = br.run(self.args("--live", "--approved-by", "owner", "--price-input", "2", "--price-output", "10", "--max-cost-usd", "0.1"), transport=t, sleep=lambda s: None, env=ENV)
         self.assertLess(r["calls_made"], 6)
         self.assertLessEqual(r["cost_usd"], 0.1)
-        self.assertIn("stopped before", r["stopped"])
+        self.assertIn("stopped", r["stopped"])
+
+    def test_missing_usage_keeps_answer_unknown_cost_and_full_reservations(self):
+        status, payload = ok({"observations": []})
+        payload.pop("usage")
+        t = Fake([(status, payload)])
+        r = br.run(self.args("--live", "--approved-by", "test only", "--price-input", "2", "--price-output", "10", "--max-cost-usd", "0.1"), transport=t, env=ENV)
+        self.assertIsNone(r["cost_usd"])
+        self.assertIsNone(r["input_tokens"])
+        self.assertGreater(r["reserved_estimated_cost_usd"], 0)
+        self.assertLess(r["calls_made"], 6)
+        self.assertEqual(r["answered"],r["calls_made"])
+
+    def test_legacy_live_comparison_rejects_automatic_retries(self):
+        t = Fake([ok({})])
+        with self.assertRaisesRegex(SystemExit,"retries must be 0"):
+            br.run(self.args("--live","--approved-by","test","--price-input","2","--price-output","10","--max-cost-usd","1","--retries","1"),transport=t,env=ENV)
+        self.assertFalse(t.calls)
+
+    def test_successful_rewrite_consistency_still_runs(self):
+        dims=lambda rating:{"dimensions":[{"dimension":"meaning_preservation","rating":"mostly"},{"dimension":"concision","rating":rating}]}
+        t=Fake([ok({"observations":[]})]*3+[ok(dims("fully")),ok(dims("fully")),ok(dims("partly"))])
+        r=br.run(self.args("--live","--approved-by","test","--price-input","2","--price-output","10","--max-cost-usd","5"),transport=t,env=ENV)
+        self.assertEqual(r["answered"],6)
+        self.assertEqual(r["rewrite_consistency"]["per_rewrite"]["r1"],{"repeats":3,"dimensions":2,"identical":1,"share_identical":0.5})
 
     def test_prompts_are_the_versioned_instructions(self):
         s = br.system_prompt("essay-observe.v2")

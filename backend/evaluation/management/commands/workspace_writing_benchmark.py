@@ -15,6 +15,7 @@ from django.core.management.base import BaseCommand, CommandError
 from rest_framework.test import APIRequestFactory, force_authenticate
 from evaluation import essay
 from evaluation.models import EssayEvaluationRecord
+from evaluation.usage import usage_summary, standard_rate_estimate
 from family.developer import is_developer
 
 
@@ -105,13 +106,23 @@ class Command(BaseCommand):
         report['model'] = config.model
         report['max_cost_usd'] = o['max_cost_usd']
         report['reserved_cost_bound_usd'] = 0
-        report['reported_cost_usd'] = 0
-        report['configuration'] = {'provider': config.provider, 'model': config.model, 'max_output_tokens': config.max_output_tokens, 'retries': config.retries}
+        report['usage_accounting_version'] = 2
+        report['standard_rate_estimate_usd'] = 0
+        report['standard_rate_estimate_known_usage_usd'] = 0
+        report['calls_with_unknown_usage'] = 0
+        report['cost_interpretation'] = 'Provider-reported token counts at supplied standard rates, not an invoice. No cache discounts, cache-write premiums, taxes or other billing adjustments. Reasoning is already in output tokens. Unknown usage is not free; failed calls keep their reservation.'
+        report['standard_prices_usd_per_million'] = {'input': o['price_input'], 'output': o['price_output']}
+        report['configuration'] = {'provider': config.provider, 'model': config.model, 'max_output_tokens': config.max_output_tokens, 'retries': config.retries, 'compact_observe': essay.foundation.compact_observation_enabled()}
         reserve_output()
         factory = APIRequestFactory()
         for row in rows[:o['max_calls']]:
             req, _ = essay.validate_essay_request('observe', row['body']['request'])
             system = essay.argument.PROMPT if req['rubric'] == essay.argument.RUBRIC else essay.foundation.prompt(essay._prompt(req['protocol']))
+            compact = req['rubric'] in essay.foundation.RUBRICS and essay.foundation.compact_observation_enabled()
+            if compact:
+                system = essay.foundation.observation_prompt(system)
+            effective_req = essay.foundation.observation_payload(req) if compact else req
+            effective_user = json.dumps(effective_req, ensure_ascii=False, **({'separators': (',', ':')} if compact else {}))
             # UTF-8 byte count + an envelope allowance is conservative for supported byte-based tokenizers.
             # Failed calls keep their full reservation; provider billing is not inferred from absent usage.
             input_bound = len(system.encode()) + len(json.dumps(req, ensure_ascii=False).encode()) + 4096
@@ -122,6 +133,7 @@ class Command(BaseCommand):
             report['reserved_cost_bound_usd'] += bound
             report['pending_case'] = row['id']
             report.setdefault('prompt_digests', {})[row['id']] = hashlib.sha256(system.encode()).hexdigest()
+            report.setdefault('effective_request_digests', {})[row['id']] = hashlib.sha256(effective_user.encode()).hexdigest()
             checkpoint()
             request = factory.post('/api/evaluation/essays/', row['body'], format='json')
             force_authenticate(request, user=user)
@@ -129,16 +141,26 @@ class Command(BaseCommand):
             result = {'id': row['id'], 'status': response.status_code}
             if response.status_code == 200:
                 result['response'] = response.data
-                record = EssayEvaluationRecord.objects.get(pk=response.data['record'])
-                billed = (record.input_tokens * o['price_input'] + record.output_tokens * o['price_output']) / 1e6
-                report['reported_cost_usd'] += billed
-                if billed > bound:
-                    report['stopped'] = 'Provider usage exceeded the conservative reservation; stop and review billing.'
             else:
                 result['error'] = 'Endpoint refused or could not assess this sample. No assessment was substituted.'
-                # Stop on operational/auth/quota failures rather than spending on every remaining case.
-                if response.status_code != 502:
-                    report['stopped'] = 'Endpoint unavailable, unauthorized or request/quota refused.'
+                # No blind retry after a provider/schema/operational failure.
+                report['stopped'] = 'Endpoint unavailable, unauthorized or request/quota refused.'
+            # Only use a record returned by this endpoint for this authenticated user.
+            # A response without attributable usage remains unknown, never zero.
+            record_id = response.data.get('record') if isinstance(response.data, dict) else None
+            record = EssayEvaluationRecord.objects.filter(pk=record_id, user=user).first() if type(record_id) is int else None
+            usage = usage_summary(record) if record is not None else None
+            result['usage'] = usage
+            estimate = standard_rate_estimate(usage, o['price_input'], o['price_output']) if usage is not None else None
+            result['standard_rate_estimate_usd'] = estimate
+            if estimate is None:
+                report['calls_with_unknown_usage'] += 1
+                report['stopped'] = 'Provider usage is unknown; stop before further calls and review provider usage.'
+            else:
+                report['standard_rate_estimate_known_usage_usd'] += estimate
+                if estimate > bound:
+                    report['stopped'] = 'Standard-rate usage estimate exceeded the reservation; stop and review provider billing.'
+            report['standard_rate_estimate_usd'] = None if report['calls_with_unknown_usage'] else report['standard_rate_estimate_known_usage_usd']
             report['results'].append(result)
             report.pop('pending_case', None)
             checkpoint()
