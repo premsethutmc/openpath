@@ -2,8 +2,8 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {ExamJourney,EXAMPLE_WRITING,SIMULATED_INFO,simulatedPost} from './journey.ts';
 import {QUESTIONS} from './session.ts';
 import {REASSESSMENT} from './reassessment.ts';
-import {WRITING_CHECKS} from './verification.ts';
-const key=(id:string)=>[...WRITING_CHECKS,...REASSESSMENT].find(q=>q.id===id)!.answer;
+import {WRITING_CHECKS,JOURNEY_WRITING_CHECKS} from './verification.ts';
+const key=(id:string)=>[...JOURNEY_WRITING_CHECKS,...REASSESSMENT].find(q=>q.id===id)!.answer;
 function ready(flow=new ExamJourney()){for(const q of QUESTIONS)flow.reading(q.id,q.answer);return flow;}
 test('reading and writing -> validated contextual/grammar hypotheses -> checks -> teaching -> fresh retest',async()=>{
  const f=ready();await f.analyse(EXAMPLE_WRITING,true);assert.equal(f.snapshot().checks.length,8);
@@ -49,4 +49,16 @@ test('outage has no diagnostic inference; explicit retry succeeds',async()=>{
 test('snapshot mutation and invalid submissions cannot change keys or teaching gates',async()=>{
  const f=ready();await f.analyse(EXAMPLE_WRITING,true);const s=f.snapshot();assert.equal('answer' in s.checks[0],false);assert.equal('explanation' in s.checks[0],false);s.checks[0].prompt='changed';s.seen.length=0;
  f.answer(s.checks[0].id,NaN);f.answer('unknown',0);assert.deepEqual(f.snapshot().answers,{});assert.equal(f.snapshot().seen.length,8);
+});
+
+test('legacy synthetic grammar exposure cannot be recycled as journey evidence',async()=>{
+ const legacy=WRITING_CHECKS.filter(q=>q.skill==='articles'||q.skill==='subject_verb_agreement');
+ const f=ready(new ExamJourney(undefined,undefined,legacy.map(q=>q.id)));await f.analyse(EXAMPLE_WRITING,true);
+ assert.equal(f.snapshot().checks.length,8);
+ const grammar=f.snapshot().checks.filter(q=>q.skill==='articles'||q.skill==='subject_verb_agreement');
+ assert.equal(grammar.length,4);
+ assert.ok(grammar.every(q=>legacy.every(old=>old.id!==q.id&&old.prompt!==q.prompt)));
+ assert.deepEqual(grammar.map(q=>key(q.id)),[0,1,1,0]);
+ for(const q of f.snapshot().checks)f.answer(q.id,1-key(q.id));f.finishChecks();
+ assert.ok(f.summary().every(r=>r.correct===0));
 });

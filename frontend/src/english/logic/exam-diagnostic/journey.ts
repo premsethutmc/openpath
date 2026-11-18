@@ -1,7 +1,7 @@
 import type {EssayGatewayInfo} from '../../../../../packages/english-core/src/essay/evaluators.ts';
 import {analyseSyntheticWriting, EXAM_WRITING_RUBRIC, type SyntheticWritingPost, type ModelWritingObservation} from './model.ts';
 import {initialSession,answer,submitWriting,type Session} from './session.ts';
-import {planWritingChecks,verifyWritingSkill,WRITING_LESSONS,type WritingCheck,type WritingSkill} from './verification.ts';
+import {planWritingChecks,verifyWritingSkill,JOURNEY_WRITING_CHECKS,WRITING_LESSONS,type WritingCheck,type WritingSkill} from './verification.ts';
 import {reassessmentFor} from './reassessment.ts';
 
 export type JourneyPhase='reading'|'writing'|'analysing'|'checks'|'teaching'|'reassessment'|'complete'|'error';
@@ -52,7 +52,7 @@ export class ExamJourney {
   try{
    const output=await analyseSyntheticWriting(session.writing,this.info,this.post);
    if(generation!==this.generation)return;
-   const checks=planWritingChecks(output.observations,this.priorSeen);
+   const checks=planWritingChecks(output.observations,this.priorSeen,JOURNEY_WRITING_CHECKS);
    this.state={...this.state,observations:output.observations,checks,seen:[...new Set([...this.state.seen,...checks.map(q=>q.id)])],phase:checks.length?'checks':'complete'};
   }catch{if(generation===this.generation)this.state={...this.state,phase:'error',error:'Analysis unavailable or rejected. No writing gap, lesson or improvement was inferred. Your draft remains here; retry explicitly.'};}
  }
@@ -65,7 +65,7 @@ export class ExamJourney {
  finishChecks(){
   if(this.state.phase!=='checks'||!this.state.checks.every(q=>Object.hasOwn(this.state.answers,q.id)))return;
   const skills=[...new Set(this.state.checks.map(q=>q.skill))];
-  const results=skills.map(skill=>verifyWritingSkill(skill,this.state.answers,this.priorSeen));
+  const results=skills.map(skill=>verifyWritingSkill(skill,this.state.answers,this.priorSeen,JOURNEY_WRITING_CHECKS));
   // Mixed evidence warrants practice too, but is explicitly inconclusive, never a confirmed gap.
   const lessons=results.filter(r=>r.outcome!=='no_gap_shown').map(r=>r.skill);
   this.state={...this.state,results,lessons,phase:lessons.length?'teaching':'complete'};
