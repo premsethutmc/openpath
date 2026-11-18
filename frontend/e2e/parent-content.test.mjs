@@ -207,7 +207,7 @@ test("deleting a list and a book in a parent account: gone from the server recor
   const events = (await api(first.page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events;
   const text = JSON.stringify(events);
   for (const secret of ["colour", "color", "because", "island", "Week 5"]) assert.ok(!text.includes(secret), `"${secret}" is still in the server record`);
-  assert.equal(events.filter((e) => e.kind === "spell_answer" && e.source.type === "list").length, 3);
+  assert.equal(events.filter((e) => e.kind === "spell_answer" && e.source.type === "list").length, 4, "three words and the one repeat");
   const exported = JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/export/`)).json);
   assert.ok(!exported.includes("because"), "nor in the account export");
   // the stale phone tries to practise its old copy: refused, and nothing is written back
