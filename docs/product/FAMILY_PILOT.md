@@ -319,3 +319,6 @@ asked in its own boxes before the answer box appears: an estimate rounds each nu
 time or money amount in two units changes the bigger unit first ("1 m = ▢ cm", "So 8 m = ▢ cm"). A wrong entry gets a
 question, a second one the fact. Read from the question's words by rule, kept only when the prep's arithmetic gives the
 verified answer, never holding the answer. An aid: it fades to the plain box and is never in a test. 13 types so far.
+
+`one-page-story@1`: in the one-part-per-screen lesson (Classes 1 to 5) the opening story is a few lines, so it is shown
+above the guess it asks for instead of on a page of its own (one Next fewer; no going Back to read the question).

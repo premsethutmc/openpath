@@ -13,3 +13,9 @@ test("being stuck opens the working with the step help inside it, and asking is 
   assert.match(learn, /onClick=\{askHelp\}>I'm stuck<\/button>/);
   assert.match(coach, /Help: show me this step/);
 });
+
+test("one-page-story@1: a lesson's opening story is shown above its guess, not on a page of its own", () => {
+  const recipe = readFileSync(new URL("./Recipe.tsx", import.meta.url), "utf8");
+  assert.match(recipe, /every\.filter\(\(s, k\) => !\(s\.kind === "question" && every\[k \+ 1\]\?\.kind === "predict"\)\)/);
+  assert.match(recipe, /\(step\.kind === "question" \|\| \(step\.kind === "predict" && storyWithGuess\)\) && recipe\.question!\.map/);
+});

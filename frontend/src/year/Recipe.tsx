@@ -168,7 +168,10 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
 /** layout@1 "steps": one part on the screen at a time, with Next (Classes 1 to 5). */
 function RecipeSteps({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; onDone: () => void; doneLabel: string; resumeKey?: string }) {
   const worked = workedFor(recipe.competency);
-  const steps = stepsOf(recipe, !!worked);
+  // one-page-story@1: the opening story is a few lines, so it is not a page of its own: it sits above the guess it asks for
+  const every = stepsOf(recipe, !!worked);
+  const steps = every.filter((s, k) => !(s.kind === "question" && every[k + 1]?.kind === "predict"));
+  const storyWithGuess = steps.length < every.length;
   const { guess, shown, keep, reset } = useProgress(recipe, resumeKey && `${resumeKey}:p`);
   const [storedI, setStoredI] = useResume<number>(resumeKey && `${resumeKey}:i`, 0);
   const i = Number.isInteger(storedI) && storedI >= 0 && storedI < steps.length ? storedI : 0;
@@ -190,8 +193,8 @@ function RecipeSteps({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe;
     <div className="stack enter" key={`recipe-${i}`} data-recipe={recipe.competency} data-recipe-layout="steps" data-recipe-step={step.kind}>
       <div className="panel lesson recipe">
         <p className="eyebrow">{recipe.title} · {i + 1} of {steps.length}</p>
-        <h3>{headingOf(recipe, step)}</h3>
-        {step.kind === "question" && recipe.question!.map((t, k) => <p key={k}>{t}</p>)}
+        <h3>{step.kind === "predict" && storyWithGuess ? LABEL.question : headingOf(recipe, step)}</h3>
+        {(step.kind === "question" || (step.kind === "predict" && storyWithGuess)) && recipe.question!.map((t, k) => <p key={k}>{t}</p>)}
         {step.kind === "predict" && <Choices ask={recipe.predict!.ask} choices={recipe.predict!.choices} picked={guess} onPick={(k) => { keep({ g: k }); setNudge(""); }} untilRight={false} />}
         {step.kind === "mission" && <ScenePlayer key={step.index} scene={recipe.missions[step.index]} onReached={() => { setReached((r) => ({ ...r, [step.index]: true })); setNudge(""); }} />}
         {step.kind === "name" && recipe.name.map((t, k) => <p key={k}>{t}</p>)}
