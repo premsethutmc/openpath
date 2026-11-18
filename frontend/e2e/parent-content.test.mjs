@@ -132,7 +132,7 @@ test("My Words and My Books in a parent account: told where they are kept, saved
   const list = events.find((e) => e.kind === "word_list");
   assert.deepEqual(list.list.words.map((x) => x.word), ["colour", "because", "island"]);
   const answers = events.filter((e) => e.kind === "spell_answer");
-  assert.equal(answers.length, 3);
+  assert.equal(answers.length, 4, "three words and the one repeat");
   assert.ok(answers.every((e) => e.source.type === "list" && e.source.id === list.list.id));
   // My Books: told where the text is kept; two spelling words and the vocabulary questions approved
   await page.getByRole("button", { name: "← Home" }).click();
