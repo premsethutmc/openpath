@@ -189,6 +189,14 @@ export class Api {
   login(email: string, password: string) {
     return this.request<AccountInfo>("POST", "/account/login/", { email, password });
   }
+  /** link@1: a code that signs another phone in to this account. Valid once, for 15 minutes; a new code replaces the last. */
+  linkCode() {
+    return this.request<{ code: string; expires_in: number }>("POST", "/account/link-code/", {});
+  }
+  /** link@1: sign this phone in to the account a code belongs to (the phone leaves any account it was signed in to). */
+  linkJoin(code: string) {
+    return this.request<AccountInfo>("POST", "/account/link/", { code });
+  }
   logout() {
     return this.request<void>("POST", "/account/logout/");
   }

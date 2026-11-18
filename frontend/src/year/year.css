@@ -509,3 +509,16 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .chintu-bubble .coach-next { margin: 0; color: inherit; }
 .chintu-bubble .link { color: inherit; }
 .chintu-hear { min-height: 36px; padding: 0; }
+
+/* term-links@1: a word that opens an earlier skill's rule */
+.term { display: inline; padding: 0 1px; margin: 0; border: 0; background: none; font: inherit; color: var(--brand-text, #1e40af); text-decoration: underline dotted; text-underline-offset: 3px; cursor: pointer; min-height: 0; border-radius: 4px; }
+.term[aria-expanded="true"] { background: var(--brand-soft, #eaf1ff); }
+.term-card { margin: 6px 0 10px; }
+
+/* board@1: long division's written layout */
+.coach-board { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--card, #fff); border: 2px solid var(--line, #c9d3e0); color: var(--ink, #1d2433); font: 700 1.25rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-x: auto; }
+
+/* methods@1: the ways to work it out, as tabs */
+.coach-methods { display: flex; flex-wrap: wrap; gap: 6px; }
+.coach-method { min-height: 40px; padding: 6px 12px; border-radius: 999px; border: 2px solid var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1d2433); font: inherit; font-weight: 700; font-size: 0.95rem; }
+.coach-method.on { border-color: var(--brand, #2563eb); background: var(--brand-soft, #eaf1ff); color: var(--brand-text, #1e40af); }

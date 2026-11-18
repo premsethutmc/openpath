@@ -212,8 +212,10 @@ test("an empty voice list (like Chrome on many Samsung phones): the word is stil
   await page.getByLabel("List name").fill("Week 1");
   await page.getByLabel(/Words: one per line/).fill("castle, island");
   await page.getByRole("button", { name: "Check the words" }).click();
+  // a test list: the word is only spoken (a practice list shows a new word first: e2e/spelling-modes.test.mjs)
+  await page.locator(".list-mode input").nth(1).check();
   await page.getByRole("button", { name: "Save the list" }).click();
-  const w = await clickFor(page, "Practise");
+  const w = await clickFor(page, "Take the test");
   assert.ok(["castle", "island"].includes(w.word));
   assert.equal(w.voice, null);
   await page.getByLabel("Hear it again").waitFor();

@@ -9,6 +9,7 @@ import { type PlanStep, patternTitle } from "../logic/plan.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { dueWords } from "../logic/state.ts";
 import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
+import { latestResult } from "../logic/vocabulary/size-check.ts";
 
 const STATUS_WORDS: Record<string, string> = {
   not_started: "not started",
@@ -25,7 +26,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -53,6 +54,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
       <BeeCard learner={learner} onBee={onBee} />
       <MyWordsCard learner={learner} onOpen={onMyWords} />
       <MyBooksCard learner={learner} onOpen={onMyBooks} />
+      <VocabCard learner={learner} onOpen={onVocab} />
       <h2 className="section-title general-title">General English</h2>
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
@@ -126,6 +128,13 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           For a grown-up: why these?
         </button>
       </p>
+      {onParent && !learner.content.gate && (
+        <p className="small parent-entry">
+          <button type="button" className="link" onClick={onParent}>
+            For parents: word lists and results
+          </button>
+        </p>
+      )}
     </main>
   );
 }
@@ -186,6 +195,24 @@ function MyBooksCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
       {n > 0 && <p className="small">{n === 1 ? "1 book saved" : `${n} books saved`}</p>}
       <button type="button" className="secondary" onClick={onOpen}>
         {n ? "Open My Books" : "Add a book"}
+      </button>
+    </section>
+  );
+}
+
+/** The word check (logic/vocabulary): candidate content, so never offered in a pilot build. */
+function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const last = latestResult(learner.vocabRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="vocab-card-title">
+      <h2 id="vocab-card-title">
+        <span aria-hidden="true">🔤 </span>Word check
+      </h2>
+      <p>Find out roughly how many English words you know. Three to five minutes.</p>
+      {last && <p className="small">Last time: about {last.estimate.toLocaleString("en-IN")} word families</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {last ? "Check again" : "Check my words"}
       </button>
     </section>
   );

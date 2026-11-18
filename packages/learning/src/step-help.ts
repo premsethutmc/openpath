@@ -7,7 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
-import { workedOut } from "./worked-out";
+import { SOLE_WAYS, workedWays } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -35,6 +35,8 @@ export interface StepHelp {
   finer?: true;
   /** The skill the step belongs to (its own skill or the one it leans on), when that skill has a card: the rule behind the step. */
   rule?: string;
+  /** board@1: the written layout once this step is done (long division), a text line per row */
+  board?: string[];
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -95,12 +97,29 @@ function cueWith(op: string, inputs: unknown, value: unknown, shown: string, giv
   return null;
 }
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
-export function stepsHelp(qid: string): StepHelp[] | null {
+/**
+ * methods@1: the ways a question's help can be worked, by name, the taught method first. Where the taught method is
+ * written out (worked-out@1) and the type's own steps are a real alternative (two steps or more), there are two: the
+ * learner can switch between them. One name otherwise.
+ */
+export function helpMethods(qid: string): string[] {
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""));
+  if (!p || !p.steps.length) return [];
+  const ways = workedWays(p);
+  if (!ways) return ["Step by step"];
+  // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
+  // the type's own steps for unlike fractions and for decimals are the same method, only shorter: not a second way
+  if (ways.length === 1 && (SOLE_WAYS.includes(ways[0].name) || p.family === "agdec")) return [ways[0].name];
+  return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
+}
+const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };
+/** The steps of a question as help, in order (in its `method`-th way: see helpMethods); null when it is not a generated question or has no steps. */
+export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
-  const full = workedOut(p);
-  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: null, ...(cardFor(p.competency) ? { rule: p.competency } : {}) }));
+  const ways = workedWays(p), full = ways && method < ways.length ? ways[method].steps : null;
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
@@ -116,7 +135,13 @@ export function stepsHelp(qid: string): StepHelp[] | null {
     if (worked.length) return i === 0 ? [own, ...worked.map((w) => ({ ...w, ...(own.rule ? { rule: own.rule } : {}) }))] : [own];
     const finer = deepen(own.shown);
     if (finer.length < 2) return [own];
-    const lines: StepHelp[] = finer.map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}) }));
+    // lead-in@1: the first line of each calculation's working says which calculation it is, so "16 = 10 + 6" never
+    // arrives from nowhere; the step itself then closes the working instead of opening it
+    const sums = [...own.shown.replace(/(\d),(?=\d{3}\b)/g, "$1").matchAll(/(?<![\d.\/−-])(\d{1,7})\s*([×÷+−])\s*(\d{1,7})\s*=\s*\d{1,12}(?![\d.\/])/g)];
+    const led = sums.flatMap((m) => deepen(m[0]).map((f, k) => (k === 0 ? { ...f, next: `To work out ${m[1]} ${m[2]} ${m[3]}: ${f.next.charAt(0).toLowerCase()}${f.next.slice(1)}` } : f)));
+    const calc = !/∫|d\s*\/\s*d[a-z]/.test(own.shown) && led.length === finer.length;
+    const lines: StepHelp[] = (calc ? led : finer).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}) }));
+    if (calc) { if (i === 0) lines[0].next = `First: ${lines[0].next.charAt(0).toLowerCase()}${lines[0].next.slice(1)}`; own.next = own.next.replace(/^First: /, "Now: "); }
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });

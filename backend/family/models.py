@@ -392,3 +392,20 @@ class Feedback(models.Model):
     note = models.CharField(max_length=300, blank=True)
     app_version = models.CharField(max_length=40, blank=True)
     width = models.PositiveIntegerField(null=True, blank=True)
+
+
+class FamilyLinkCode(models.Model):
+    """link@1 (family/link.py): a single-use, short-lived code that signs another device in to the same account.
+    Only a keyed hash of the code is stored."""
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="link_codes")
+    code_hash = models.CharField(max_length=64, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["created_at", "id"]
+
+    def __str__(self) -> str:
+        return f"link code {self.pk}"

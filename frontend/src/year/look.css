@@ -195,7 +195,8 @@ details.working summary, .hint { color: var(--ink); }
   body:has(.year-paper) .topbar .link { color: #1e40af; }
 }
 /* teach-first@1 */
-.kid-new { margin: 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft); color: var(--brand-text); font-weight: 800; }
+/* a note, not a button: it must not look like something to tap (the lesson is the card under it) */
+.kid-new { margin: 0; padding: 0; background: none; color: var(--muted); font-weight: 700; font-size: 0.95rem; }
 .kid-skip { justify-self: center; margin-top: 4px; font-weight: 700; }
 /* tables in lessons and questions: readable in both themes */
 .stack table th, .qcard table th, .figure table.data th { background: var(--brand-soft); color: var(--ink); }

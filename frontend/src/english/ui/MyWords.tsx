@@ -9,7 +9,8 @@ import type { Learner } from "../logic/learner.ts";
 import { sourceProgress } from "../logic/spelling.ts";
 import { LIST_LIMITS, type ListWord, type Parsed, type WordList, listText, listWords, parseWords } from "../logic/wordlists.ts";
 
-export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: Learner; onPractise: (l: WordList) => void; onLeave: () => void; onChanged: () => void }) {
+/** `parentOf`: opened from the parent view for that child: lists are added, edited and read here, not practised. */
+export function MyWords({ learner, onPractise, onLeave, onChanged, parentOf }: { learner: Learner; onPractise?: (l: WordList) => void; onLeave: () => void; onChanged: () => void; parentOf?: string }) {
   const [editing, setEditing] = useState<WordList | "new" | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   if (editing) return <ListEditor learner={learner} list={editing === "new" ? null : editing} onDone={() => (setEditing(null), onChanged())} />;
@@ -20,14 +21,14 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
     <main className="page my-words" aria-labelledby="mywords-title">
       <p>
         <button type="button" className="link" onClick={onLeave}>
-          ← Home
+          {parentOf ? "← Your children" : "← Home"}
         </button>
       </p>
-      <p className="eyebrow">Spelling lists from a parent</p>
+      <p className="eyebrow">{parentOf ? `For parents · ${parentOf}` : "Spelling lists from a parent"}</p>
       <h1 id="mywords-title" className="hero">
-        My Words
+        {parentOf ? `Word lists for ${parentOf}` : "My Words"}
       </h1>
-      <p className="sub">Type, paste or upload the words to practise. When the learner practises, each word is only spoken, never shown.</p>
+      <p className="sub">Type, paste or upload the words. A practice list teaches them: a new word is shown first and help is there when asked. A test list only speaks each word and marks nothing until the end.</p>
       <p className="small where-kept">{keptWhere(learner)}</p>
       <button type="button" className="primary" onClick={() => setEditing("new")}>
         New word list
@@ -46,15 +47,20 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
             return (
               <li key={l.id} className="tile" data-list={l.id}>
                 <h2>{l.name}</h2>
+                <p className="pill" data-mode={l.mode ?? "plain"}>
+                  {l.mode === "test" ? "Test list" : l.mode === "practice" ? "Practice list" : "Word list"}
+                </p>
                 <p className="small">
                   {l.words.length} word{l.words.length === 1 ? "" : "s"} · practised {p.practised} of {p.total}
                   {p.answers ? ` · ${p.right} of ${p.answers} right` : ""}
                   {p.reviewList ? ` · ${p.reviewList} to review` : ""}
                 </p>
                 <div className="row">
-                  <button type="button" className="primary" onClick={() => onPractise(l)}>
-                    Practise
-                  </button>
+                  {onPractise && (
+                    <button type="button" className="primary" onClick={() => onPractise(l)}>
+                      {l.mode === "test" ? "Take the test" : "Practise"}
+                    </button>
+                  )}
                   <button type="button" className="secondary" onClick={() => setEditing(l)}>
                     Edit
                   </button>
@@ -75,6 +81,7 @@ export function MyWords({ learner, onPractise, onLeave, onChanged }: { learner: 
                     Delete
                   </button>
                 </div>
+                <ListResults learner={learner} listId={l.id} />
               </li>
             );
           })}
@@ -91,12 +98,42 @@ export function keptWhere(learner: Learner, what = "Lists", content = "its words
     : `${what} are saved in this learner's record on this device only. Nothing is sent anywhere. Deleting one removes ${content} from the learner's record; the learner's answers stay, without the words.`;
 }
 
+const STANDING = { wrong: "wrong last time", with_help: "right with help", not_tried: "not tried yet", unaided: "right on their own" } as const;
+
+/** For the parent: how each word of the list stands, hardest first. Closed until asked for. */
+function ListResults({ learner, listId }: { learner: Learner; listId: string }) {
+  const rows = learner.listResults(listId);
+  const tried = rows.filter((r) => r.status !== "not_tried").length;
+  if (!tried) return null;
+  const own = rows.filter((r) => r.status === "unaided").length;
+  return (
+    <details className="list-results">
+      <summary>
+        Results: {own} of {rows.length} right on their own
+      </summary>
+      <ul>
+        {rows.map((r) => (
+          <li key={r.id} data-status={r.status}>
+            <span>{r.word}</span>
+            <span className="small">
+              {STANDING[r.status]}
+              {r.lastTyped ? ` (wrote "${r.lastTyped}")` : ""}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
 function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordList | null; onDone: () => void }) {
   const [name, setName] = useState(list?.name ?? "");
   const [text, setText] = useState(list ? listText(list.words) : "");
   const [checked, setChecked] = useState<Parsed | null>(list ? { words: list.words, problems: [], empty: 0 } : null);
   const [problem, setProblem] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // a new list is for practice unless the parent says it is a test; a list saved before modes existed keeps its plain behaviour until changed
+  const [mode, setMode] = useState<"practice" | "test" | undefined>(list ? list.mode : "practice");
 
   const check = (t = text) => setChecked(parseWords(t));
   const onFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -122,7 +159,7 @@ function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordLis
     if (!checked) return;
     setBusy(true);
     try {
-      await learner.saveWordList(name, checked.words, list?.id);
+      await learner.saveWordList(name, checked.words, list?.id, mode);
       onDone();
     } catch (e) {
       setProblem(e instanceof Error ? e.message : "Could not save the list");
@@ -150,6 +187,7 @@ function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordLis
         <span>Words: one per line, or separated by commas. Write another accepted spelling after a slash, for example colour/color.</span>
         <textarea value={text} onChange={(e) => setText(e.target.value)} rows={8} autoCapitalize="off" autoCorrect="off" spellCheck={false} />
       </label>
+      <p className="small photo-tip">From a photo of a printed list: use your phone's own text scanner (Google Lens, or "Scan Text" on an iPhone), copy the words and paste them here. Check them before saving.</p>
       <label className="field file">
         <span>Or add words from a .txt or .csv file</span>
         <input type="file" accept=".txt,.csv,text/plain,text/csv" onChange={(e) => void onFile(e)} />
@@ -194,6 +232,15 @@ function ListEditor({ learner, list, onDone }: { learner: Learner; list: WordLis
           {checked.empty > 0 && <p className="small">{checked.empty} empty entr{checked.empty === 1 ? "y was" : "ies were"} ignored.</p>}
         </section>
       )}
+      <fieldset className="list-mode">
+        <legend>What is this list for?</legend>
+        <label>
+          <input type="radio" name="list-mode" checked={mode === "practice"} onChange={() => setMode("practice")} /> <b>Practice</b>: the child learns these words. A new word is shown first, help is there when asked, and each answer is checked at once.
+        </label>
+        <label>
+          <input type="radio" name="list-mode" checked={mode === "test"} onChange={() => setMode("test")} /> <b>Test</b>: each word is only spoken. No help, and nothing is marked until the end.
+        </label>
+      </fieldset>
       <button type="button" className="primary" disabled={busy || !checked || !checked.words.length || !name.trim() || !!stale} onClick={() => void save()}>
         Save the list
       </button>

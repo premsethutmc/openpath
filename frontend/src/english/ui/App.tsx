@@ -29,6 +29,8 @@ import { SpellingBee } from "./SpellingBee.tsx";
 import { MyWords } from "./MyWords.tsx";
 import { BookQuestions, MyBooks } from "./MyBooks.tsx";
 import type { Book } from "../logic/books.ts";
+import { VocabularyCheck } from "./VocabularyCheck.tsx";
+import { ParentView } from "./ParentView.tsx";
 import type { SpellSource } from "../logic/events.ts";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
@@ -103,6 +105,8 @@ export function App() {
   const [inMyWords, setInMyWords] = useState(false);
   const [inMyBooks, setInMyBooks] = useState(false);
   const [bookQuiz, setBookQuiz] = useState<Book | null>(null);
+  const [inVocab, setInVocab] = useState(false);
+  const [inParent, setInParent] = useState(false);
   const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -143,6 +147,8 @@ export function App() {
       setInMyWords(false);
       setInMyBooks(false);
       setBookQuiz(null);
+      setInVocab(false);
+      setInParent(false);
       setScreen({ name: "app" });
     } catch (e) {
       setProblem((e as Error).message);
@@ -409,6 +415,47 @@ export function App() {
         }}
       />
     );
+  if (inParent && repo)
+    return (
+      <div className="parent-screen" data-tick={tick} data-mode={mode}>
+        <ParentView
+          content={content}
+          repo={repo}
+          clock={clock}
+          linking={
+            accounts
+              ? {
+                  canShow: mode === "account",
+                  showCode: () => api.linkCode(),
+                  join: async (code) => {
+                    // this phone now belongs to the other phone's family: open that account's children
+                    await signedIn(await api.linkJoin(code));
+                    setInParent(false);
+                  },
+                }
+              : undefined
+          }
+          onLeave={async () => {
+            // a list added for this child from the parent view is in the stored record: read it again
+            await openLearner(repo, learner.profileId);
+            setInParent(false);
+          }}
+        />
+      </div>
+    );
+  if (inVocab)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <VocabularyCheck
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setInVocab(false);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (inMyWords)
     return (
       <MyWords
@@ -503,6 +550,8 @@ export function App() {
           onBee={() => setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" })}
           onMyWords={() => setInMyWords(true)}
           onMyBooks={() => setInMyBooks(true)}
+          onVocab={() => (setInVocab(true), scrollTo(0, 0))}
+          onParent={() => (setInParent(true), scrollTo(0, 0))}
         />
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}

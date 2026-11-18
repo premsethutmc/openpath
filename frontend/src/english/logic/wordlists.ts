@@ -80,6 +80,8 @@ export interface WordList {
   id: string;
   name: string;
   words: ListWord[];
+  /** What the parent set the list up for; absent on lists saved before modes existed (plain hear-and-type practice). */
+  mode?: "practice" | "test";
   created: string;
   updated: string;
 }
@@ -94,7 +96,7 @@ export function wordLists(events: readonly AppEvent[]): WordList[] {
         continue;
       }
       const old = lists.get(e.list.id);
-      lists.set(e.list.id, { id: e.list.id, name: e.list.name, words: e.list.words, created: old?.created ?? e.at, updated: e.at });
+      lists.set(e.list.id, { id: e.list.id, name: e.list.name, words: e.list.words, ...(e.list.mode ? { mode: e.list.mode } : {}), created: old?.created ?? e.at, updated: e.at });
     } else if (e.kind === "word_list_delete") lists.delete(e.list);
   }
   return [...lists.values()].sort((a, b) => b.updated.localeCompare(a.updated));
