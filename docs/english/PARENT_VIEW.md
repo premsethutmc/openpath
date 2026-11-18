@@ -20,7 +20,7 @@ Logic: `frontend/src/english/logic/parent-view.ts`. Screens: `ui/ParentView.tsx`
 **Same account.** A parent account holds its pupils, and a phone without an account holds its own learners. A
 parent signed in to the same account on another phone sees the same children and their results.
 
-**A code, for two phones with no email or password (link@1, branch `feat/family-link-code`).** On the child's
+**A code, for two phones with no email or password (link@1).** On the child's
 phone: For parents → Connect another phone → Show a code. On the parent's phone: For parents → Connect another
 phone → type the code. The parent's phone is then signed in to the child's account and sees the same children,
 in English and maths alike. The code is eight characters, works once, lasts 15 minutes, is stored on the server
@@ -29,8 +29,8 @@ only as a keyed hash, and a new code cancels the last (`backend/family/link.py`)
 - A phone that types a code leaves the account it was in; children already on it stay in that account and are
   not merged.
 - The joined phone stays signed in by its session only. If that ends, it needs a new code.
-- **The server part has not been run.** This workspace has no Django, so `backend/family/test_link.py` (four
-  tests) and migration `0015_familylinkcode` are written but untested. They must pass in CI before this is merged.
+- Server tests: `backend/family/test_link.py` (four tests) and the whole server suite (434 tests) passed on GitHub
+  for this branch on 18 November 2026, on PostgreSQL, with migration `0015_familylinkcode` applied.
 
 ## Not done
 
