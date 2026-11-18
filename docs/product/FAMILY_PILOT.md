@@ -352,3 +352,9 @@ learner would do, written once for the type from its own numbers; it replaces th
 kept only when it ends on the verified answer. First type: the prime test (`agptest`): how far to try (k × k), then each
 prime in turn (even? digit sum? last digit? how many fit and what is left over), then what was found. 393 questions,
 2,869 steps, 1,603 of them boxes to fill.
+
+`cue-numbers@1` (`step-help.ts`): where a step is one plain calculation, its cue names the numbers ("take 72 away from
+100") instead of the bare word ("subtract."). Used only when the calculation named gives the step's value, both numbers
+are given (in the question or from an earlier step; a number the step itself chooses, like the 50 of a long division's
+"50 × 6", is never named), and the result is not one of them. About a quarter of the bare add, subtract, multiply and
+divide cues.
