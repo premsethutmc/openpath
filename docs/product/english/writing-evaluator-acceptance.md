@@ -88,3 +88,24 @@ python backend/manage.py test evaluation --noinput
 All automated provider tests use mocked transport. They test gating, actual prompt/endpoint use, quota accounting, fail-closed responses, interrupted-run checkpoints, stale provenance and scorer arithmetic, **not linguistic performance**.
 
 The browser-backed CLI lives under `frontend/scripts`, not the Node-only `tools/english` core compilation boundary. Both the frontend English and standalone English-core typechecks are required.
+
+## Scorer v2: quoted context is not necessarily the edited error
+
+`strictMatchedRequiredAnchors` preserves the original half-overlap baseline.
+The primary reference-agreement count additionally accepts a bounded, unique
+quoted context when its localized token edit lies wholly within a reference
+anchor. Full-draft rewrites, ambiguous repeated quotes, pure insertions/deletions,
+and edits outside the anchor receive no extra credit. This is lexical alignment,
+not proof that the correction is linguistically right.
+
+Protected-span overlaps wholly outside the changed tokens remain visible in
+`contextOnlyProtectedOverlaps`; actual changed protected text and observations
+without a usable correction remain conservative `protectedFlags`. Review both.
+Missing and rejected cases stay in the denominator. `releaseReady` and
+`liveAccuracyEstablished` remain false. Never equate an alignment percentage with
+model accuracy or learning effectiveness.
+
+The argument system prompt explicitly requests JSON. Object-shaped examples
+alone do not satisfy OpenAI Chat Completions JSON mode's explicit JSON instruction
+requirement. Mocked transport tests exercise this contract across all argument
+stages; they do not establish live argument quality.

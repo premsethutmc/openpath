@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {acceptanceManifest,acceptanceRequest,loadAcceptanceSuite,scoreAcceptance,anchorMatch,protectedOverlap,type AcceptanceRecording} from '../../../../scripts/workspace-writing-acceptance.mts';
+import {acceptanceManifest,acceptanceRequest,loadAcceptanceSuite,scoreAcceptance,anchorMatch,protectedOverlap,correctionFocus,correctionAnchorMatch,type AcceptanceRecording} from '../../../../scripts/workspace-writing-acceptance.mts';
 import {validateArgumentFeedback} from '../../../../../packages/english-core/src/index.ts';
 const manifest=acceptanceManifest(),suite=loadAcceptanceSuite();
 function recording():AcceptanceRecording{return {suite:manifest.suite,request_digest:manifest.request_digest,server_policy_digest:manifest.server_policy_digest,reference_digest:manifest.reference_digest,mode:'mocked-contract-test',results:[]};}
@@ -67,4 +67,33 @@ test('changed reference or server policy and mixed model outputs cannot be score
  assert.throws(()=>scoreAcceptance({...recording(),server_policy_digest:'changed'}));
  const r=recording(),a=argumentResponse('argument-circular'),b=argumentResponse('argument-transfer');b.evaluator.model='different';
  r.results=[{id:'argument-circular',status:200,response:a},{id:'argument-transfer',status:200,response:b}];assert.throws(()=>scoreAcceptance(r),/Mixed evaluator/);
+});
+
+test('localized corrections match wide tense context without granting broad rewrite credit',()=>{
+ const text='We saw the elephants first and then we walk. The lion was sleeping, so we decide to leave.';
+ assert.equal(correctionFocus('was sleeping, so we decide','was sleeping, so we decided'),'decide');
+ assert.equal(correctionAnchorMatch(text,'saw the elephants first and then we walk','we walk','saw the elephants first and then we walked'),true);
+ assert.equal(correctionAnchorMatch(text,'was sleeping, so we decide','we decide','was sleeping, so we decided'),true);
+ assert.equal(correctionAnchorMatch(text,'was sleeping, so we decide','was sleeping','was sleeping, so we decided'),false);
+ assert.equal(correctionAnchorMatch(text,text,'we walk',text.replace('walk','walked')),false);
+ assert.equal(correctionFocus('walk','walk'),null);
+ assert.equal(correctionFocus('we walk','we walk often'),null);
+ assert.equal(correctionAnchorMatch(text,'was sleeping, so we decide','we decide','is sleeping, so we decided'),false);
+ const repeated='we walk and we walk';assert.equal(correctionAnchorMatch(repeated,'we walk','we walk','we walked'),false);
+});
+test('scoring separates unchanged protected context and retains strict baseline',()=>{
+ const r=recording(),c=suite.cases.find(c=>c.id==='workspace-b02-tense')!,req=acceptanceRequest(c);
+ const evaluator={id:'openpath-gateway:llm',version:'test',model:'mock',rubric:req.rubric,protocol:'essay-observe.v2'};
+ const observation={competency:'EN.GRM.VERB.present_past_simple',kind:'error',quote:'was sleeping, so we decide',explanation:'Use decided for the past event; was sleeping sets the background.',correction:'was sleeping, so we decided',confidence:'high',verification:'required',possible_slip:false};
+ const response={evaluator,output:{essay_id:c.id,rubric:req.rubric,observations:[observation],not_observable:[]}};
+ r.results.push({id:c.id,status:200,response});
+ let result=scoreAcceptance(r).cases.find(x=>x.id===c.id)!;
+ assert.equal(result.matched,1);assert.equal(result.strictMatched,0);
+ assert.equal(result.protectedFlags.length,0);assert.equal(result.contextOnlyProtectedOverlaps.length,1);
+ observation.correction='is sleeping, so we decided';
+ result=scoreAcceptance(r).cases.find(x=>x.id===c.id)!;
+ assert.equal(result.protectedFlags.length,1);assert.equal(result.contextOnlyProtectedOverlaps.length,0);
+ observation.correction='';
+ result=scoreAcceptance(r).cases.find(x=>x.id===c.id)!;
+ assert.equal(result.protectedFlags.length,1);
 });
