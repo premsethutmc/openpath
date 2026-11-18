@@ -21,7 +21,7 @@ import type { Scene } from "../../../packages/learning/src/scene";
 import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
-import { StepCoach } from "./StepCoach";
+import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { ScribblePad } from "./ScribblePad";
 import { WorkedByYou } from "./WorkedByYou";
@@ -303,8 +303,13 @@ function StepByStep({ solution }: { solution: string }) {
 const KID_TITLES: Record<string, string> = { "The method": "How to do it", "The idea": "The big idea", "A common wrong answer": "Watch out for this" };
 const kidTitle = (t: string) => KID_TITLES[t] ?? t;
 const firstSentence = (t: string) => { const m = t.match(/^.+?[.!?](?=\s+[A-Z(])/); return m && m[0].length < t.length ? [m[0], t.slice(m[0].length).trim()] : [t, ""]; };
-function KidText({ text }: { text: string[] }) {
-  const parts = text.map(firstSentence);
+/** fold@2: text is folded only for young readers (Classes 1 to 5) and only when there is enough to fold: a single short
+ *  line behind "Tell me more" is a tap for nothing, and an older learner reads the whole explanation. */
+const FOLD_AT_LEAST = 140;
+function KidText({ text, fold = true }: { text: string[]; fold?: boolean }) {
+  const split = text.map(firstSentence);
+  const worth = fold && split.map(([, rest]) => rest).join(" ").length >= FOLD_AT_LEAST;
+  const parts = worth ? split : text.map((t) => [t, ""] as [string, string]);
   const more = parts.map(([, rest]) => rest).filter(Boolean);
   return (
     <>
@@ -773,7 +778,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
-        {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
+        {KID ? <KidText fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {/* a scene made from the question's own picture replaces the still picture */}
         {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}

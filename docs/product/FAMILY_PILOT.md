@@ -379,3 +379,7 @@ an equal fraction multiplies the top by what the bottom was multiplied by; unlik
 same-size pieces. The steps appear one at a time (a later one may show what an earlier one asked for), and "I can do it
 without these steps" leaves only the answer box. 21 types have first steps now. A bare number offered as an angle in a
 lesson's guess is shown with its degree sign.
+
+`fold@2`: a lesson's text is folded behind "Tell me more" only for Classes 1 to 5 (the learner's class, else the class
+the skill is first taught in) and only when at least 140 characters would be folded. Older learners read the whole
+explanation; a single short line is never hidden. The "New skill" line above a first lesson is a plain note.

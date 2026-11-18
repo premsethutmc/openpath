@@ -20,13 +20,18 @@ export const LAST_CHINTU_CLASS = 5;
 /** The class a question belongs to: its own (where a type marks some of its questions as later work), else the first
  *  class in which any board's book teaches its skill. Null when neither is known. */
 let FIRST_CLASS: Map<string, number> | null = null;
+/** The first class in which any board's book teaches a skill, or null. */
+export function classOfSkill(competency: string | undefined): number | null {
+  if (!competency) return null;
+  if (!FIRST_CLASS) { FIRST_CLASS = new Map(); for (const k of allSkills()) if ((FIRST_CLASS.get(k.competency) ?? 99) > k.release.grade) FIRST_CLASS.set(k.competency, k.release.grade); }
+  return FIRST_CLASS.get(competency) ?? null;
+}
 export function classOfQuestion(qid: string): number | null {
   const base = qid.replace(/:(mc|w)$/, ""), own = gradeOfQuestion(base);
   if (own !== null) return own;
   const p = problemOf(base);
   if (!p) return null;
-  if (!FIRST_CLASS) { FIRST_CLASS = new Map(); for (const k of allSkills()) if ((FIRST_CLASS.get(k.competency) ?? 99) > k.release.grade) FIRST_CLASS.set(k.competency, k.release.grade); }
-  return FIRST_CLASS.get(p.competency) ?? null;
+  return classOfSkill(p.competency);
 }
 
 function ClipButton({ competency }: { competency: string | null }) {
