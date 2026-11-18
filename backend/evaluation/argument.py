@@ -25,7 +25,11 @@ Do not reconstruct earlier work, compare performance, or infer improvement, inde
 retention, transfer success or mastery. The client records task exposure and assistance separately;
 the stage label alone is not evidence of independence. Return only tentative findings about this text.
 Questions and hints are post-submission feedback, never evidence that the sample was written unaided.
+For grade 7, use short everyday questions and explain any necessary reasoning term in plain words.
+Respect the assigned side and task length. A short personal explanation does not require statistics,
+formal citations or a counterargument unless the task calls for them. A qualified statement is not a certainty.
 Do not demand counterarguments in every short draft or infer inability from omission.
+Do not repeat a finding for the same area and exact quoted passage.
 Use not_observable for absent evidence; never also report a finding for the same area.
 Do not use tools or external facts. Never invent supporting statistics or sources.
 '''
@@ -71,6 +75,7 @@ def validate_output(output, req):
         fail()
     if any(not isinstance(a, str) or a not in AREAS for a in missing) or len(set(missing)) != len(missing):
         fail()
+    seen = set()
     for f in findings:
         if not isinstance(f, dict) or set(f) != {'area', 'quote', 'question', 'hint'}:
             fail()
@@ -78,3 +83,7 @@ def validate_output(output, req):
             fail()
         if not bounded(f['quote'], 1000) or f['quote'] not in req['essay']['text'] or not bounded(f['question'], 600) or not f['question'].rstrip().endswith('?') or not bounded(f['hint'], 600):
             fail()
+        key = (f['area'], f['quote'])
+        if key in seen:
+            fail()
+        seen.add(key)

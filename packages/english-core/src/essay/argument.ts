@@ -49,8 +49,10 @@ export function validateArgumentFeedback(raw:unknown,request:ArgumentRequest,inf
  if(who.id!==info.id||who.version!==info.version||who.model!==info.model||who.rubric!==ARGUMENT_RUBRIC||who.protocol!=='essay-observe.v2')throw Error('Argument evaluator provenance differs');
  const output=object(envelope.output,['essay_id','rubric','findings','not_observable']);
  if(output.essay_id!==request.essay.id||output.rubric!==ARGUMENT_RUBRIC||!Array.isArray(output.findings)||output.findings.length>request.max_observations||!Array.isArray(output.not_observable)||output.not_observable.length>ARGUMENT_AREAS.length)throw Error('Invalid argument feedback envelope');
+ const seen=new Set<string>();
  const findings=output.findings.map(value=>{const f=object(value,['area','quote','question','hint']);
   if(!ARGUMENT_AREAS.includes(f.area as ArgumentArea)||!bounded(f.quote,1000)||!request.essay.text.includes(f.quote)||!bounded(f.question,600)||!f.question.trimEnd().endsWith('?')||!bounded(f.hint,600)||instructionLike(f.question)||instructionLike(f.hint))throw Error('Invalid argument finding');
+  const key=JSON.stringify([f.area,f.quote]);if(seen.has(key))throw Error('Duplicate argument finding');seen.add(key);
   return {area:f.area as ArgumentArea,quote:f.quote,question:f.question,hint:f.hint};
  });
  const notObservable=output.not_observable as ArgumentArea[];
