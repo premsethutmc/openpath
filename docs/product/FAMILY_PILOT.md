@@ -383,3 +383,9 @@ lesson's guess is shown with its degree sign.
 `fold@2`: a lesson's text is folded behind "Tell me more" only for Classes 1 to 5 (the learner's class, else the class
 the skill is first taught in) and only when at least 140 characters would be folded. Older learners read the whole
 explanation; a single short line is never hidden. The "New skill" line above a first lesson is a plain note.
+
+`term-links@1` (`packages/learning/src/terms.ts`, `Terms.tsx`): a word in a lesson that names an earlier skill ("sin",
+"denominator", "HCF") is a link that opens that skill's own rule and example in place, without leaving the lesson. The
+vocabulary is a list of words and the skill each belongs to (35 skills). A word is linked once per paragraph, never
+inside its own skill, and never to a skill taught in a later class. Lesson pages only so far; it does not yet take the
+learner to the earlier lesson itself.

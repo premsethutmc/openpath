@@ -23,6 +23,7 @@ import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
+import { TermText } from "./Terms";
 import { ScribblePad } from "./ScribblePad";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
@@ -306,18 +307,18 @@ const firstSentence = (t: string) => { const m = t.match(/^.+?[.!?](?=\s+[A-Z(])
 /** fold@2: text is folded only for young readers (Classes 1 to 5) and only when there is enough to fold: a single short
  *  line behind "Tell me more" is a tap for nothing, and an older learner reads the whole explanation. */
 const FOLD_AT_LEAST = 140;
-function KidText({ text, fold = true }: { text: string[]; fold?: boolean }) {
+function KidText({ text, fold = true, competency }: { text: string[]; fold?: boolean; competency?: string }) {
   const split = text.map(firstSentence);
   const worth = fold && split.map(([, rest]) => rest).join(" ").length >= FOLD_AT_LEAST;
   const parts = worth ? split : text.map((t) => [t, ""] as [string, string]);
   const more = parts.map(([, rest]) => rest).filter(Boolean);
   return (
     <>
-      {parts.map(([head], k) => <p key={k}>{head}</p>)}
+      {parts.map(([head], k) => <TermText key={k} text={head} competency={competency} />)}
       {more.length > 0 && (
         <details className="kid-more">
           <summary>Tell me more</summary>
-          {more.map((t, k) => <p key={k}>{t}</p>)}
+          {more.map((t, k) => <TermText key={k} text={t} competency={competency} />)}
         </details>
       )}
     </>
@@ -778,7 +779,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
-        {KID ? <KidText fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
+        {KID ? <KidText competency={competency} fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {/* a scene made from the question's own picture replaces the still picture */}
         {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}

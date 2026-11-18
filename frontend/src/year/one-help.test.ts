@@ -77,7 +77,7 @@ test("chintu@1: Chintu says the step help on questions of Classes 1 to 5 only, a
 
 test("fold@2: lesson text is folded only for Classes 1 to 5, and only when there is enough to fold", async () => {
   assert.match(learn, /const worth = fold && split\.map\(\(\[, rest\]\) => rest\)\.join\(" "\)\.length >= FOLD_AT_LEAST;/);
-  assert.match(learn, /<KidText fold=\{\(grade \?\? classOfSkill\(competency\) \?\? 1\) <= 5\}/);
+  assert.match(learn, /<KidText competency=\{competency\} fold=\{\(grade \?\? classOfSkill\(competency\) \?\? 1\) <= 5\}/);
   const { classOfSkill } = await import("./StepCoach");
   assert.ok(classOfSkill("MATH.trigonometry.compound-angle-identities")! >= 11);
   assert.ok(classOfSkill("MATH.number.rounding")! <= 5);

@@ -509,3 +509,8 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .chintu-bubble .coach-next { margin: 0; color: inherit; }
 .chintu-bubble .link { color: inherit; }
 .chintu-hear { min-height: 36px; padding: 0; }
+
+/* term-links@1: a word that opens an earlier skill's rule */
+.term { display: inline; padding: 0 1px; margin: 0; border: 0; background: none; font: inherit; color: var(--brand-text, #1e40af); text-decoration: underline dotted; text-underline-offset: 3px; cursor: pointer; min-height: 0; border-radius: 4px; }
+.term[aria-expanded="true"] { background: var(--brand-soft, #eaf1ff); }
+.term-card { margin: 6px 0 10px; }
