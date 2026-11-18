@@ -4,6 +4,7 @@
  */
 import type { Learner } from "./learner.ts";
 import { BANK, LEVEL_NAMES, levelOf, sourceProgress } from "./spelling.ts";
+import { patternCounts } from "./spelling-patterns.ts";
 import { latestResult } from "./vocabulary/size-check.ts";
 
 export interface ListSummary {
@@ -31,6 +32,8 @@ export interface ChildSummary {
   daysPractisedThisWeek: number;
   lists: ListSummary[];
   bee: { level: number; levelName: string; practised: number; total: number; reviewList: number } | null;
+  /** Kinds of spelling mistake made in the last 30 days, most frequent first (clear cases only). */
+  patterns: { id: string; name: string; times: number }[];
   /** The latest word check, if one was finished. */
   words: { estimate: number; low: number; high: number } | null;
 }
@@ -71,6 +74,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     daysPractisedThisWeek: days.size,
     lists,
     bee: p.practised ? { level, levelName: LEVEL_NAMES[level], practised: p.practised, total: p.total, reviewList: p.reviewList } : null,
+    patterns: patternCounts([...st.sessions.values()].flatMap((s) => s.answers.filter((a) => Date.parse(now) - Date.parse(a.at) < 30 * DAY).map((a) => a.pattern))),
     words: w ? { estimate: w.estimate, low: w.low, high: w.high } : null,
   };
 }

@@ -12,10 +12,11 @@ import type { SpellSource } from "../logic/events.ts";
 import type { Learner } from "../logic/learner.ts";
 import { BANK, LEVEL_NAMES, type SpellWord, avoiding, levelOf, sourceKey, sourceProgress } from "../logic/spelling.ts";
 import { helpPattern, letterMarks, maxHelpTaps } from "../logic/spelling-help.ts";
+import { PATTERNS, type PatternId, drillWords } from "../logic/spelling-patterns.ts";
 import { speechPossible } from "./speech.ts";
 import { type PlayOutcome, onPlaying, onVoicesChanged, playWord, stopWord } from "./wordPlayer.ts";
 
-type Result = { correct: boolean; word: SpellWord; typed: string; helped: boolean };
+type Result = { correct: boolean; word: SpellWord; typed: string; helped: boolean; pattern: PatternId | null };
 
 /** How long a requested look at the word lasts before it hides again (a test can set window.__beePeekMs). */
 const peekMs = () => {
@@ -46,7 +47,8 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
     setProblem(null);
     setBusy(true);
     try {
-      await learner.startSpelling(source, delivery);
+      // a parent's list brings a missed word back in the same session; the Spelling Bee and books keep fixed sessions for now
+      await learner.startSpelling(source, delivery, { again: source.type === "list" });
       setSession(learner.spellingSession()?.session ?? null);
       setResult(null);
       onChanged();
@@ -90,7 +92,8 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
   };
   // the next word comes by itself after the answer has been seen (the button skips the wait); the last one shows the summary
   useEffect(() => {
-    if (!result) return;
+    // a miss with a rule to learn stays until the learner moves on
+    if (!result || result.pattern) return;
     const t = setTimeout(next, advanceMs(result.correct));
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -151,7 +154,7 @@ export function SpellingBee({ learner, voice, speechOff, onTurnSpeechOn, onLeave
       )}
 
       {result ? (
-        <Feedback result={result} last={!cur} onNext={next} />
+        <Feedback result={result} last={!cur} onNext={next} voice={voice} canSpeak={!speechOff && speechPossible()} again={!!(session && st.sessions.get(session)?.event.again)} />
       ) : cur?.word ? (
         <>
           <BeeAsk
@@ -373,7 +376,63 @@ function AdultReader({ word, safe, onDone }: { word: SpellWord; safe: (...option
   );
 }
 
-function Feedback({ result, last, onNext }: { result: Result; last: boolean; onNext: () => void }) {
+/** After a miss with a clear pattern: the rule, examples, and two other words that follow it to hear and type. Practice only: not recorded. */
+function PatternLesson({ id, missed, voice, canSpeak }: { id: PatternId; missed: string; voice: SpeechSynthesisVoice | null; canSpeak: boolean }) {
+  const p = PATTERNS[id];
+  const words = canSpeak ? drillWords(id, missed) : [];
+  const [at, setAt] = useState(-1);
+  const [text, setText] = useState("");
+  const [marks, setMarks] = useState<boolean[]>([]);
+  const say = (i: number) => void playWord(`${words[i]}.`, voice);
+  const done = marks.length >= words.length;
+  return (
+    <div className="tile lilac bee-rule" data-pattern={id}>
+      <p className="kicker">The rule</p>
+      <p>{p.rule}</p>
+      {p.examples.length > 0 && <p className="small">{p.examples.join(" · ")}</p>}
+      {words.length > 0 && at < 0 && (
+        <button type="button" className="secondary" onClick={() => (setAt(0), say(0))}>
+          Try {words.length === 1 ? "one" : "two"} more like it
+        </button>
+      )}
+      {at >= 0 && !done && (
+        <form
+          className="bee-drill"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!text.trim()) return;
+            const ok = text.trim().toLowerCase() === words[at];
+            setMarks((m) => [...m, ok]);
+            setText("");
+            if (at + 1 < words.length) (setAt(at + 1), say(at + 1));
+          }}
+        >
+          <button type="button" className="link" onClick={() => say(at)}>
+            Hear it again
+          </button>
+          <label className="ruled">
+            <span className="sr-only">Type the word you hear</span>
+            <input value={text} onChange={(e) => setText(e.target.value)} autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} name="drill-answer" placeholder="Type it here" />
+          </label>
+          <button type="submit" className="secondary" disabled={!text.trim()}>
+            Check
+          </button>
+        </form>
+      )}
+      {marks.length > 0 && (
+        <ul className="bee-drill-marks">
+          {marks.map((ok, i) => (
+            <li key={i} className={ok ? "ok" : "miss"}>
+              {ok ? "✓" : "✗"} {words[i]}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function Feedback({ result, last, onNext, voice, canSpeak, again }: { result: Result; last: boolean; onNext: () => void; voice: SpeechSynthesisVoice | null; canSpeak: boolean; again: boolean }) {
   return (
     <section className={`feedback bee-feedback ${result.correct ? "right" : "wrong"}`} role="status" aria-live="polite" aria-labelledby="bee-title">
       <h1 id="bee-title" className="verdict">
@@ -395,10 +454,11 @@ function Feedback({ result, last, onNext }: { result: Result; last: boolean; onN
             ))}
           </p>
           <p className="small">The marked letters are the ones to look at.</p>
+          {result.pattern && <PatternLesson id={result.pattern} missed={result.word.word} voice={voice} canSpeak={canSpeak} />}
           <p>
             You wrote <span className="written typed-was">{result.typed.trim() || "nothing"}</span>.
           </p>
-          <p className="small">It goes on your review list and comes back in your next session.</p>
+          <p className="small">{again ? "It comes back in a few words for another go, and it goes on your review list for next session." : "It goes on your review list and comes back in your next session."}</p>
         </>
       )}
       <button type="button" className="primary" onClick={onNext} autoFocus>

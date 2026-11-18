@@ -1,0 +1,63 @@
+# TEMPORARY (remove before merging): runs this branch's checks on push and writes the outcome to the branch
+# ci-results/spelling-teach-patterns, so the result can be read without opening GitHub.
+name: Branch check (temporary)
+
+on:
+  push:
+    branches: ["feat/spelling-teach-patterns"]
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Run and record
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/out
+          R=/tmp/out/RESULT.md
+          echo "# Branch check for $GITHUB_SHA" > $R
+          echo "run: $GITHUB_RUN_ID at $(date -u +%FT%TZ)" >> $R
+          pip install -q -r backend/requirements.txt > /tmp/out/pip.log 2>&1; echo "pip_install_exit=$?" >> $R
+          cd frontend
+          npm ci > /tmp/out/npm.log 2>&1; echo "npm_ci_exit=$?" >> $R
+          npx playwright install --with-deps chromium > /tmp/out/pw.log 2>&1; echo "playwright_install_exit=$?" >> $R
+          npm run typecheck > /tmp/out/typecheck.log 2>&1; echo "frontend_typecheck_exit=$?" >> $R
+          node --import tsx --test "src/english/**/*.test.ts" > /tmp/out/unit.log 2>&1; echo "english_unit_tests_exit=$?" >> $R
+          npm run english:build > /tmp/out/build.log 2>&1; echo "english_build_exit=$?" >> $R
+          (cd ../backend && python manage.py migrate > /tmp/out/migrate.log 2>&1; echo "migrate_exit=$?" >> $R; nohup python manage.py runserver 127.0.0.1:8000 --noreload > /tmp/out/api.log 2>&1 &)
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8000/
+          nohup npm run english:preview > /tmp/out/web.log 2>&1 &
+          PORT=4175 API_TARGET=http://127.0.0.1:8000 nohup npm run english:preview > /tmp/out/web-api.log 2>&1 &
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4174/
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4175/
+          for t in mywords spelling-modes parent-view vocabulary bee books english; do
+            E2E_URL=http://127.0.0.1:4174 node --test e2e/$t.test.mjs > /tmp/out/e2e-$t.log 2>&1; echo "e2e_${t}_exit=$?" >> $R
+          done
+          for t in parent-content accounts; do
+            E2E_URL=http://127.0.0.1:4175 node --test e2e/$t.test.mjs > /tmp/out/e2e-$t.log 2>&1; echo "e2e_account_${t}_exit=$?" >> $R
+          done
+          for f in typecheck unit e2e-parent-content e2e-accounts e2e-spelling-modes e2e-mywords; do
+            echo -e "\n## $f (last 30 lines)\n\`\`\`" >> $R; tail -30 /tmp/out/$f.log >> $R; echo '```' >> $R
+          done
+      - name: Publish the result to a branch
+        shell: bash
+        run: |
+          cd /tmp/out
+          git init -q -b ci-results/spelling-teach-patterns
+          git config user.name "branch-check"
+          git config user.email "branch-check@users.noreply.github.com"
+          git add RESULT.md
+          git commit -q -m "Branch check result for $GITHUB_SHA"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-results/spelling-teach-patterns
