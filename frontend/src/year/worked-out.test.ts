@@ -16,7 +16,7 @@ test("every question of a worked-out type gets the whole working, every calculat
       if (/:(mc|w)$/.test(id)) continue;
       const h = stepsHelp(id)!, q = question(id);
       n++;
-      assert.ok(h.length >= 3, `${id}: ${h.length} steps`);
+      assert.ok(h.length + h.reduce((k, x) => k + (x.how?.lines.length ?? 0), 0) >= 3, `${id}: ${h.length} steps`);
       // the first thing a stuck learner is told never holds the answer
       assert.ok(!new RegExp(`(^|\\D)${q.answer}(\\D|$)`).test(h[0].next) || q.answer.length === 1 || q.prompt.includes(q.answer), `${id}: ${h[0].next}`);
       assert.ok(new RegExp(`(^|\\D)${q.answer}(\\D|$)`).test(h[h.length - 1].shown), `${id}: ${h[h.length - 1].shown}`);

@@ -435,3 +435,16 @@ were the same method, shorter.
 `lead-in@1`: where a step's calculation is worked line by line before the step (deepen@1), the first of those lines
 names the calculation ("To work out 30 − 25: take away the tens"), so a line such as "16 = 10 + 6" never arrives from
 nowhere. The step that follows then reads "Now: …" where it used to read "First: …".
+
+`school-division@1`: a division worked inside any step (deepen@1) is set out as the school long division, with the
+layout drawn, in place of round-number chunks; a table fact and a division by 10, 100 or 1000 get no working. The long
+division lesson teaches the same bracket method, and its picture is the finished written layout (`as: "written"` in
+Figure). Decimal and fraction layouts were checked at 390 px: both fit.
+
+`how@1`: arithmetic inside a step is no longer walked through as steps of its own. The step shows its one line, and a
+"How?" button on a step that has been done opens the working: the lines, or the finished long-division layout, and for
+a division a button that opens the long division rule. Long division questions themselves stay step by step. Opening
+the help is what is recorded; "How?" is inside it. The audit counts folded lines as lines of help.
+
+`below-the-work@1`: in the child's lesson the "Let's try" / "Next" button sits after the worked steps and no longer
+floats over them. The scribble pad is offered under a lesson's "Work it with me" as well as on questions.

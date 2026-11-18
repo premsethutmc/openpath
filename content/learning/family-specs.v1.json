@@ -1288,9 +1288,9 @@
    ],
    "teach": {
     "idea": "Dividing undoes multiplying: it asks how many lots of the divisor make the number.",
-    "method": "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
+    "method": "Set it out as a long division, with the divisor outside the bracket. See how many times it fits in the first digits, write that on top, take away, bring down the next digit, and repeat."
    },
-   "fingerprint": "fedc67a3",
+   "fingerprint": "bbbda908",
    "validation": {
     "family": "ldiv",
     "deterministic": {

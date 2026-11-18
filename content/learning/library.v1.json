@@ -12546,17 +12546,27 @@
       "So 120 ÷ 3 = 40"
      ],
      "widget": {
-      "type": "grid",
-      "rows": 1,
-      "cols": 1,
-      "rowLabels": [
-       "3"
+      "type": "table",
+      "as": "written",
+      "head": [
+       "Long division"
       ],
-      "colLabels": [
-       "40"
-      ],
-      "labels": [
-       "120"
+      "rows": [
+       [
+        "     40"
+       ],
+       [
+        "3 ) 120"
+       ],
+       [
+        "    12"
+       ],
+       [
+        "    --"
+       ],
+       [
+        "      0"
+       ]
       ]
      },
      "tip": "A zero in the answer was left out: when the divisor does not go into a step, write 0 there.",
@@ -12605,7 +12615,7 @@
       {
        "title": "The method",
        "text": [
-        "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
+        "Set it out as a long division, with the divisor outside the bracket. See how many times it fits in the first digits, write that on top, take away, bring down the next digit, and repeat."
        ],
        "math": [
         "711 ÷ 9 = ?",
@@ -12615,19 +12625,36 @@
         "70 + 9 = 79"
        ],
        "widget": {
-        "type": "grid",
-        "rows": 1,
-        "cols": 2,
-        "rowLabels": [
-         "9"
+        "type": "table",
+        "as": "written",
+        "head": [
+         "Long division"
         ],
-        "colLabels": [
-         "70",
-         "9"
-        ],
-        "labels": [
-         "630",
-         "81"
+        "rows": [
+         [
+          "     79"
+         ],
+         [
+          "9 ) 711"
+         ],
+         [
+          "    63"
+         ],
+         [
+          "    --"
+         ],
+         [
+          "     81"
+         ],
+         [
+          "     81"
+         ],
+         [
+          "     --"
+         ],
+         [
+          "      0"
+         ]
         ]
        },
        "role": "worked-example",
@@ -12670,7 +12697,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
+        "Then the method is: Set it out as a long division, with the divisor outside the bracket. See how many times it fits in the first digits, write that on top, take away, bring down the next digit, and repeat."
        ]
       }
      ],

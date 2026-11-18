@@ -773,7 +773,10 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const byYou = KID && !!raw.instance && !!stepsHelp(raw.instance);
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  // no-spoiler@1: a picture that is the finished written working (a long division with its answer on top) is not
+  // shown above steps the child is about to do: the steps build the same layout line by line
+  const spoils = byYou && (pics.withWorking as { as?: string } | undefined)?.as === "written";
+  const working = sc.math && <>{later && !spoils && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
@@ -787,7 +790,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         {sc.tip && <p className="hint">{sc.tip}</p>}
         {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
       </div>
-      <div className="actions sticky">
+      {/* below-the-work@1: in the child's lesson the button comes after the steps; it never floats over them */}
+      <div className={KID ? "actions" : "actions sticky"}>
         {i > 0 && <button className="secondary" onClick={() => setI(i - 1)}>Back</button>}
         <button className="primary" disabled={saving} onClick={() => (last ? (setI(0), onDone()) : setI(i + 1))}>{last ? (saving ? "Saving…" : doneLabel) : "Next"}</button>
       </div>

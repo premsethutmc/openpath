@@ -55,7 +55,7 @@ function primeTest({ params: [mode, n], answer }: Q): Worked[] | null {
  *
  * avdiv [d, q, r, mode]: n = d·q + r; mode 0 asks the quotient, 1 the remainder. ldiv [q, d]: n = d·q exactly.
  */
-function divide(n: number, d: number, want: "quotient" | "remainder", answer: string): Worked[] | null {
+export function divide(n: number, d: number, want: "quotient" | "remainder", answer: string): Worked[] | null {
   const q = Math.floor(n / d), r = n - q * d;
   if (!Number.isInteger(n) || d < 2 || d > 99 || n < 10 || n > 999999) return null;
   if (String(want === "remainder" ? r : q) !== answer) return null;
