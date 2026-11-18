@@ -17,7 +17,10 @@ import { type BankItem, pickForRole } from "./allocation.ts";
 import { ESSAY_CONTRACT, type DiagnosticOutcome, type DiagnosticRequest, type EssayAnalysis, type EssayObservation, type GapHypothesis } from "./contract.ts";
 
 /** Analyses that count: accepted, and not a repeat of an essay already analysed. */
-export const countedAnalyses = (events: readonly LedgerEvent[]): EssayAnalysis[] => analyses(events).filter((a) => a.status === "accepted" && !a.repeatOf);
+export const countedAnalyses = (events: readonly LedgerEvent[]): EssayAnalysis[] => {
+ const seen=new Set<string>();
+ return analyses(events).filter(a=>{if(a.status!=="accepted"||a.repeatOf||seen.has(a.essay))return false;seen.add(a.essay);return true;});
+};
 
 const ledgerUpTo = (ectx: EssayContext, events: readonly LedgerEvent[], id: string, learner: string): Ledger => {
   const i = events.findIndex((e) => e.id === id);
@@ -30,7 +33,7 @@ const learnerOf = (events: readonly LedgerEvent[]): string => essayRecords(event
  * Every hypothesis formed so far, oldest first, with its current status. One hypothesis per (essay,
  * competency) that met the rule; earlier essays' errors count as support for a later one.
  */
-export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]): GapHypothesis[] {
+export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[], exploratoryFor?: {essay:string;competency:string}): GapHypothesis[] {
   const p = ectx.policy;
   const learner = learnerOf(events);
   const out: GapHypothesis[] = [];
@@ -45,7 +48,10 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
       const sentences = new Set(obs.map((o) => o.span.sentence)).size;
       const prior = earlier.get(cap);
       const suspected = sentences >= p.suspectMinSentences || (prior !== undefined && prior.essays.size > 0);
-      if (suspected) {
+      const id = `hyp:${a.essay}:${cap}`;
+      const requested = essayRecords(events, "diagnostic").some(r=>r.record.request.hypothesis===id&&r.record.request.observationCheck===true);
+      const exploratory = !suspected && (requested || exploratoryFor?.essay===a.essay&&exploratoryFor.competency===cap);
+      if (suspected || exploratory) {
         ledger ??= ledgerUpTo(ectx, events, analysisEvents.get(a.id) ?? a.id, learner);
         const total = sentences + (prior?.sentences ?? 0);
         const view = essayView(ectx, ledger.composite, cap, lastAt(events, analysisEvents.get(a.id)));
@@ -55,15 +61,16 @@ export function gapHypotheses(ectx: EssayContext, events: readonly LedgerEvent[]
         const claim = engineClaim(ectx, cap, view, upTo, lastAt(events, analysisEvents.get(a.id)));
         const reassessment = reassessmentOf(ectx, view, claim.level, sentences);
         const basis = [
-          `${obs.length} error${obs.length === 1 ? "" : "s"} in ${sentences} sentence${sentences === 1 ? "" : "s"} of essay ${a.essay}`,
+          exploratory ? `Learner requested a check of a tentative observation in essay ${a.essay}; no repeated writing gap is established` : `${obs.length} error${obs.length === 1 ? "" : "s"} in ${sentences} sentence${sentences === 1 ? "" : "s"} of essay ${a.essay}`,
           ...(prior ? [`also seen in ${prior.essays.size} earlier essay${prior.essays.size === 1 ? "" : "s"} (${[...prior.essays].join(", ")})`] : []),
           ...(reassessment ? [reassessment.note] : []),
         ];
         out.push({
-          id: `hyp:${a.essay}:${cap}`,
+          id,
+          ...(exploratory ? {exploratory:true} : {}),
           competency: cap,
           status: "suspected",
-          uncertainty: total >= 4 ? "low" : total >= 2 ? "medium" : "high",
+          uncertainty: exploratory ? "high" : total >= 4 ? "low" : total >= 2 ? "medium" : "high",
           essays: [...(prior?.essays ?? []), a.essay],
           observations: [...(prior?.observations ?? []), ...obs.map((o) => o.id)],
           misconceptions: [...new Set(obs.map((o) => o.misconception).filter((m): m is string => !!m))],
@@ -217,6 +224,30 @@ export function planDiagnosticFor(ectx: EssayContext, events: readonly LedgerEve
   const why = h.reassessment ? (h.reassessment.diagnose ? h.reassessment.note : opts.explicitReason) : undefined;
   if (why) (out.request as DiagnosticRequest).reassessment = why;
   return out;
+}
+
+/** Eligible explicit checks use the same counted, non-repeated writing as the planner. */
+export function availableObservationChecks(ectx:EssayContext,events:readonly LedgerEvent[]):string[]{
+ const latest=essayRecords(events,'submission').at(-1)?.record.submission.id;
+ const analysis=countedAnalyses(events).find(a=>a.essay===latest);
+ if(!analysis)return [];
+ const existing=new Set(gapHypotheses(ectx,events).filter(h=>h.essays.at(-1)===latest).map(h=>h.competency));
+ return [...new Set(analysis.observations.filter(o=>o.kind==='error'&&o.confidence!=='low'&&ectx.profile.byCapability.get(o.competency)?.specified&&!existing.has(o.competency)).map(o=>o.competency))];
+}
+
+/** Voluntary exploration of a single accepted error observation. No model claim alone confirms a gap. */
+export function planObservationCheck(ectx:EssayContext, events:readonly LedgerEvent[], essay:string, competency:string, meta:EventMeta):{event:LedgerEvent;request:DiagnosticRequest} {
+ const latest=essayRecords(events,'submission').at(-1)?.record.submission;
+ if(latest?.id!==essay)throw new EssayRefusal('Only the current saved writing can start an observation check');
+ const ref=ectx.profile.byCapability.get(competency);
+ if(!ref?.specified)throw new EssayRefusal('This concern has no specified independent check; it remains observation only');
+ const h=gapHypotheses(ectx,events,{essay,competency}).find(h=>h.id===`hyp:${essay}:${competency}`);
+ if(!h?.exploratory)throw new EssayRefusal('Choose a single tentative error observation; existing hypotheses use their own check');
+ if(essayRecords(events,'diagnostic').some(r=>r.record.request.hypothesis===h.id&&r.record.request.source!=='generated'))throw new EssayRefusal('This observation already has a check');
+ const out=diagnosticRequestFor(ectx,events,h,meta);
+ out.request.observationCheck=true;
+ out.request.reassessment='Learner explicitly chose to explore a tentative observation; not a confirmed writing gap.';
+ return out;
 }
 
 /** What the answers to a diagnostic request show so far. */
