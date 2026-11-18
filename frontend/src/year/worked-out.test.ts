@@ -191,3 +191,21 @@ test("column multiplication: by one digit, or by a number like 90, is set out in
   console.log(n, "multiplication layouts,", carried, "with carrying,", zeros, "by tens or hundreds");
   assert.ok(n > 800 && carried > 400 && zeros > 200, `${n} ${carried} ${zeros}`);
 });
+
+test("long multiplication: a two-digit multiplier gets one row for its ones, one for its tens, and the rows are added", () => {
+  let full = 0, part = 0;
+  for (const item of pool("avpp").items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const q = question(item.id), want = Number(q.answer.replace(/,/g, "")), h = stepsHelp(item.id)!, rows = h.at(-1)!.board!;
+    assert.ok(rows, `${item.id} has no columns`);
+    assert.equal(helpMethods(item.id)[0], "In columns", item.id);
+    assert.equal(Number(rows.at(-1)!.trim()), want, item.id);
+    assert.ok(new Set((rows.length === 7 ? rows : rows.slice(-4)).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+) × (\d+) = (\d+)/g)) assert.equal(Number(c[1]) * Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+) \+ (\d+) = (\d+)/g)) assert.equal(Number(c[1]) + Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    assert.ok(!h.slice(0, -1).some((s) => s.shown.includes(String(want))), `${item.id}: the answer is not said before the end`);
+    if (rows.length === 7) { full++; assert.equal(Number(rows[3].trim()) + Number(rows[4].trim()), want, `${item.id}: the rows add to the answer`); } else part++;
+  }
+  console.log(full, "long multiplications,", part, "tens rows");
+  assert.ok(full > 100 && part > 100, `${full} ${part}`);
+});
