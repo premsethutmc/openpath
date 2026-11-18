@@ -42,6 +42,9 @@ interface Base {
   /** practice-tool@1: a tool to think with, beside a question that is still answered in its own box. Reaching the goal is
    *  never announced, so the answer cannot be found by sweeping the picture until it says so. */
   quiet?: boolean;
+  /** decide@1: one choice the learner makes before the picture will move (which two tens, which way). It is the choice the
+   *  documented mistake gets wrong; a wrong pick is answered with `why` and asked again. Never the question's answer. */
+  first?: { ask: string; choices: string[]; right: number; why: string[]; /** the picture would give the choice away: it is drawn once the choice is made */ hide?: boolean };
   /** The letter the horizontal quantity is called in the readout and description (default x; t for time). */
   variable?: string;
 }
@@ -703,6 +706,7 @@ export function check(v: unknown): string[] {
       if (s.start < s.from || s.start > s.to || Math.abs(at - Math.round(at)) > 1e-6) bad.push("start must be a mark on the line");
     }
     if (s.label !== undefined && !(fin(s.label) && s.label > 0)) bad.push("label must be a positive gap");
+    if (s.first && !(typeof s.first.ask === "string" && s.first.ask.trim() && Array.isArray(s.first.choices) && s.first.choices.length >= 2 && s.first.choices.length <= 4 && new Set(s.first.choices).size === s.first.choices.length && Number.isInteger(s.first.right) && s.first.right >= 0 && s.first.right < s.first.choices.length && Array.isArray(s.first.why) && s.first.why.length === s.first.choices.length && s.first.why.every((w, i) => i === s.first!.right || (typeof w === "string" && w.trim())))) bad.push("first must be 2 to 4 different choices, one right, with a reply to each wrong one");
     if (s.near !== undefined && !(fin(s.near) && s.near > 0)) bad.push("near must be positive");
   } else if (s.kind === "array") {
     if (!(Number.isInteger(s.total) && s.total >= 2 && s.total <= 150)) bad.push("total must be a whole number from 2 to 150");

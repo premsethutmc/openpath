@@ -247,10 +247,15 @@ const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
  * readout already hold the answer is not offered.
  */
 const TOOL_STEPS = 120;
-function lineTool(fig: Fig, answer: number | null): Scene | null {
+const WAY = (right: boolean, many: boolean): NonNullable<Scene["first"]> => ({
+  ask: many ? "Which way does the point go first?" : "Which way does the point go?",
+  choices: ["Left, to smaller numbers", "Right, to bigger numbers"], right: right ? 1 : 0,
+  why: ["Moving left gives smaller numbers. Read the question again: is the number getting bigger or smaller?", "Moving right gives bigger numbers. Read the question again: is the number getting bigger or smaller?"],
+});
+function lineTool(fig: Fig, answer: number | null, moves?: number[], pair?: [number, number]): Scene | null {
   const from = fig.from, to = fig.to, marks = Array.isArray(fig.marks) ? (fig.marks as unknown[]) : [];
   if (answer === null || !Number.isInteger(answer) || !Number.isInteger(from) || !Number.isInteger(to) || fig.jumps || fig.unknown !== undefined || !marks.every((v) => Number.isInteger(v))) return null;
-  const lo = from as number, hi = to as number, given = (marks as number[]).length > 1 ? (marks as number[]).filter((v) => v !== 0) : (marks as number[]);
+  const lo = from as number, hi = to as number, given = pair ?? ((marks as number[]).length > 1 ? (marks as number[]).filter((v) => v !== 0) : (marks as number[]));
   const coarse = Number.isInteger(fig.step) && (fig.step as number) > 0 ? (fig.step as number) : 1;
   const step = hi - lo <= TOOL_STEPS ? 1 : coarse;
   const on = (v: number) => v >= lo && v <= hi && (v - lo) % step === 0;
@@ -258,7 +263,7 @@ function lineTool(fig: Fig, answer: number | null): Scene | null {
   const base = { type: "scene" as const, kind: "numberline" as const, from: lo, to: hi, step, label, jump: true, quiet: true, success: "" };
   // one starting number, and the answer is where the point lands
   if (given.length === 1 && on(given[0]) && on(answer) && answer !== given[0])
-    return { ...base, start: given[0], prompt: `The point is on ${fmt(given[0])}. Carry it the way the question says, and read where it lands.`, success: `The point has moved from ${fmt(given[0])}.`, goal: { measure: "x", equals: answer } };
+    return { ...base, start: given[0], first: WAY(moves?.length ? moves[0] > 0 : answer > given[0], (moves?.length ?? 1) > 1), prompt: (moves?.length ?? 1) > 1 ? `The point is on ${fmt(given[0])}. Carry it one change at a time, and read where it lands.` : `The point is on ${fmt(given[0])}. Carry it the way the question says, and read where it lands.`, success: `The point has moved from ${fmt(given[0])}.`, goal: { measure: "x", equals: answer } };
   // two numbers, and the answer is how far apart they are
   if (given.length === 2 && on(given[0]) && on(given[1]) && Math.abs(given[1] - given[0]) === answer && answer !== 0)
     return { ...base, start: given[0], prompt: `Carry the point from ${fmt(given[0])} to ${fmt(given[1])}, and count the steps.`, success: `The point has gone from ${fmt(given[0])} to ${fmt(given[1])}.`, goal: { measure: "x", equals: given[1] } };
@@ -277,29 +282,74 @@ function lineFits(family: string): boolean {
   }
   return ok;
 }
+/**
+ * teaching-cards@1, integers: types that have no picture but whose numbers are a walk on the line. One line of data per
+ * type: where the point starts and the moves it makes, or the two numbers whose distance is asked. The line is drawn from
+ * these, and kept only when the walk ends on the question's verified answer.
+ */
+const WALKS: Record<string, (p: number[]) => { start: number; moves: number[] } | { apart: [number, number] } | null> = {
+  aimulti: ([, s, x, y, z]) => ({ start: s, moves: [x, -y, z] }),
+  ajintl: ([m, a, b]) => (m === 0 ? { start: a, moves: [b] } : m === 3 ? { apart: [a, b] } : null),
+};
+function walkTool(family: string, params: number[], answer: number | null): Scene | null {
+  const w = Object.prototype.hasOwnProperty.call(WALKS, family) ? WALKS[family](params) : null;
+  if (!w || answer === null) return null;
+  if ("apart" in w) { const [a, b] = w.apart; return lineTool({ type: "numberline", from: Math.min(a, b, 0) - 1, to: Math.max(a, b, 0) + 1, marks: [a, b] }, answer, undefined, [a, b]); }
+  const path = [w.start]; for (const d of w.moves) path.push(path[path.length - 1] + d);
+  if (path[path.length - 1] !== answer || w.moves.some((d) => d === 0)) return null;
+  return lineTool({ type: "numberline", from: Math.min(...path, 0) - 1, to: Math.max(...path, 0) + 1, marks: [w.start] }, answer, w.moves);
+}
+/**
+ * teaching-cards@1, rounding: any question that asks for one whole number rounded to a named place ("Round 557 to the
+ * nearest ten", or the same inside a story). The number and the place are read from the question's own words and kept
+ * only when rounding that number to that place gives the verified answer. First the learner picks the two round numbers
+ * it sits between (the documented slips are the wrong place, and zeros put on without looking); then the point is carried
+ * to each, the steps counted.
+ */
+const PLACES: [RegExp, number, string][] = [[/nearest ten thousand\b/, 10000, "ten thousand"], [/nearest (ten|₹\s?10)\b(?! thousand| lakh)/, 10, "ten"], [/nearest (hundred|₹\s?100)\b/, 100, "hundred"], [/nearest thousand\b/, 1000, "thousand"]];
+function roundTool(prompt: string, answer: number | null): Scene | null {
+  const place = PLACES.find(([re]) => re.test(prompt));
+  // an estimate rounds each of its numbers and then works with them: that is not one number on one line
+  if (!place || answer === null || !Number.isInteger(answer) || /\beach\b|\bestimate\b/i.test(prompt)) return null;
+  const [, unit, word] = place;
+  const up = (n: number) => Math.floor(n / unit + 0.5) * unit;
+  const found = [...new Set((prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number).filter((n) => Number.isInteger(n) && n % unit !== 0 && up(n) === answer))];
+  if (found.length !== 1) return null;
+  const n = found[0], lo = Math.floor(n / unit) * unit, hi = lo + unit, big = unit * 10, bl = Math.floor(n / big) * big;
+  const right = `${fmt(lo)} and ${fmt(hi)}`;
+  const wrong: [string, string][] = [
+    [`${fmt(bl)} and ${fmt(bl + big)}`, `Those are too far apart for the nearest ${word}. Count in ${word}s: which two is ${fmt(n)} between?`],
+    [`${fmt(hi)} and ${fmt(hi + unit)}`, `${fmt(n)} is not between those. It is less than ${fmt(hi)}.`],
+  ];
+  const all = [[right, ""], ...wrong].filter(([c], i, a) => a.findIndex(([d]) => d === c) === i);
+  const turn = n % all.length, choices = [...all.slice(turn), ...all.slice(0, turn)];
+  return {
+    type: "scene", kind: "numberline", from: lo, to: hi, step: 1, start: n, jump: true, label: unit === 10 ? 1 : unit / 5,
+    first: { ask: `Which two ${word}s is ${fmt(n)} between?`, choices: choices.map(([c]) => c), right: choices.findIndex(([c]) => c === right), why: choices.map(([, w]) => w), hide: true },
+    prompt: `Drag the point from ${fmt(n)} to the ${word} on each side, and count the steps. Leave it on the nearer ${word}.`,
+    success: n - lo === unit / 2 ? `${fmt(n)} is exactly halfway, and halfway goes up: ${fmt(hi)}.` : `${fmt(n)} is ${fmt(n - lo)} from ${fmt(lo)} and ${fmt(hi - n)} from ${fmt(hi)}, so the nearest ${word} is ${fmt(answer)}.`,
+    goal: { measure: "x", equals: answer },
+  };
+}
 /** The kinds of lesson scene that are the question's idea done by hand (not a check of an answer already worked out). */
 const TOOL_KINDS = new Set(["fraction", "rectangle", "bars", "order", "array"]);
 export function practiceScene(qid: string): Scene | null {
   const m = GEN.exec(qid);
   if (!m || m[3]) return null;
-  if (m[1] === "aeround") {
-    const s = sceneForQuestion(qid);
-    if (!s || s.kind !== "numberline") return null;
-    const word = s.prompt.match(/nearest (\w+)\./)?.[1] ?? "round number";
-    const { near: _near, ...rest } = s;
-    const out: Scene = { ...rest, jump: true, prompt: `Drag the point from ${s.start} to the ${word} on each side, and count the steps. Leave it on the nearer ${word}.` };
-    return check(out).length === 0 ? out : null;
-  }
   const p = problemOf(qid);
   if (!p || p.type === "choice") return null;
+  const round = roundTool(p.prompt, numericValue(p.answer));
+  if (round) return check(round).length === 0 ? round : null;
   const fig = p.figure as Fig | undefined;
   let s: Scene | null = null;
+  try { s = walkTool(m[1], m[2].split(",").map(Number), numericValue(p.answer)); } catch { s = null; }
+  if (s) return check(s).length === 0 ? s : null; // drawn from the type's own numbers and ended on its answer: proved above
   try { s = fig?.type === "numberline" && lineFits(m[1]) ? lineTool(fig, numericValue(p.answer)) : null; } catch { s = null; }
   if (!s) { const l = sceneForQuestion(qid); s = l && TOOL_KINDS.has(l.kind) ? { ...l, quiet: true } : null; }
   if (!s || check(s).length) return null;
   // the proof: neither the tool's words nor what it reads before it is touched hold the answer
   const said = `${s.prompt} ${readout(s, initial(s))}`, a = p.answer.replace(/^-/, "−");
-  const holds = new RegExp(`(^|[^\\d.,/])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(said.replace(/,(?=\d)/g, ""));
+  const holds = new RegExp(`(^|[^\\d.,/−])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(said.replace(/,(?=\d)/g, ""));
   return holds || met(s, initial(s)) ? null : s;
 }
 /** The scene for a generated question ("gen:<family>:<params>"), or null: no builder, or a scene with any problem. */

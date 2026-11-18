@@ -297,3 +297,14 @@ rectangle to build and the bars to read come from the lesson's converters. Tools
 announced; the answer is still typed in its box), are offered only where the rule fits every drawn question of the type,
 and never where their words or first readout hold the answer. First audit of Class 5 (235 types): 141 words and a box,
 64 a still picture, 22 something to do, 8 movable in the lesson only.
+
+`teaching-cards@1`: how a group of types is taught is decided per group, from the mistakes we store for it, then applied
+by rule. Three cards so far.
+- Rounding (`roundTool`): any question asking for one whole number rounded to ten, hundred or thousand, read from its own
+  words and kept only when that rounding gives the verified answer. `decide@1` (`first` on a scene): the learner first
+  picks the two round numbers the number sits between (the line is hidden until then), then carries the point to each.
+  Estimates (two numbers) and places above a thousand are not covered.
+- Integers (`WALKS`, one line of data per type): a walk drawn from the type's own numbers, kept only when it ends on the
+  answer; the way (left or right) is chosen before the point moves.
+- Place value (`places@1`, an aid that is a way of answering): a number asked for in figures is written into its seats
+  (crore, lakh, thousand, ones); it cannot be checked until every seat has its digit. Fades to the plain box.

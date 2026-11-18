@@ -19,6 +19,9 @@ export type Ask =
   | { kind: "money" }
   | { kind: "order"; items: string[]; first: string; prefix?: string }
   | { kind: "tap"; items: { label: string; value: string }[] }
+  /** places@1: a place-value chart to fill, one box for each group of seats (crore, lakh, thousand, ones). Every seat
+   *  needs its digit, so an empty place has to be given its zero; the boxes are read back as the one number. */
+  | { kind: "places"; seats: { label: string; width: number }[] }
   /** numbers multiplied together, typed as 3 × 3 × 11 (read back as the list the marking wants) */
   | { kind: "product" }
   /** draw@1: turn an arm on a protractor; the fixed arm lies on 0 of the inner (0, right) or outer (180, left) scale */
@@ -35,7 +38,7 @@ export interface KidQ {
   note?: string;
   /** support-ladder@1: pictures that only help (the question is whole without them), most help first; `figure` is the
    *  first. They fade as the child gets such questions right. A picture that is the question's data is never an aid. */
-  aids?: { name: string; figure: Visual }[];
+  aids?: { name: string; figure?: Visual; ask?: Ask }[];
 }
 interface Q {
   id: string;
@@ -444,7 +447,10 @@ export function kidQuestion(q: Q): KidQ {
   const fig = o?.aids ? o.aids[0].figure : o?.figure ? (o.figure === NONE ? undefined : o.figure) : base.figure ?? (q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined);
   // with the table left out, the sentence no longer points at it
   if (q.figure && !fig) say = say.replace(/^The table shows (?:the )?/, "Here are the ").replace(/^The number cards in the picture make /, "These numbers make ");
-  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(o?.aids ? { aids: o.aids } : base.aids && fig === base.figure ? { aids: base.aids } : {}) };
+  const aids = o?.aids ? o.aids : base.aids && fig === base.figure ? base.aids : undefined;
+  // places@1: with no picture aid of its own, a number asked for in figures is first written into its seats
+  const seats = !aids && !fig && ask.kind === "box" && form(q.id) !== "mc" && typeof (q as { answer?: unknown }).answer === "string" ? placesAsk(q.prompt, q.type, (q as { answer?: string }).answer!) : null;
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}), ...(aids ? { aids } : seats ? { aids: [{ name: "place-value chart", ask: seats }] } : {}) };
 }
 
 /** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a
@@ -470,10 +476,25 @@ export function keepPicture(q: Q, say: string): boolean {
 }
 
 /** What the child tapped or typed, as the answer string the marking already reads. */
+/**
+ * teaching-cards@1, place value: a number given in words and asked for in figures is first written into a chart of seats
+ * (the documented slip is to write the spoken parts side by side, with no zeros for the empty places). The seats are those
+ * of the answer: groups of three for millions, else the Indian groups. Null for anything else.
+ */
+export function placesAsk(prompt: string, type: string, answer: string): Ask | null {
+  if (type !== "integer" || !/\bin figures\b/i.test(prompt) || !/^\d{4,12}$/.test(answer)) return null;
+  const intl = /\bmillion|\bbillion|international/i.test(prompt);
+  const names = intl ? ["ones", "thousand", "million", "billion"] : ["ones", "thousand", "lakh", "crore"];
+  const widths = intl ? [3, 3, 3, 3] : [3, 2, 2, 5];
+  const seats: { label: string; width: number }[] = [];
+  for (let left = answer.length, i = 0; left > 0 && i < 4; i++) { const w = Math.min(widths[i], left); seats.unshift({ label: names[i], width: w }); left -= w; }
+  return seats.length >= 2 && seats.reduce((n, x) => n + x.width, 0) === answer.length ? { kind: "places", seats } : null;
+}
 export function compose(ask: Ask, parts: string[], answer?: string, type?: string): string {
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "tap" || ask.kind === "turn") return parts[0] ?? "";
+  if (ask.kind === "places") return parts.map((x) => x.trim()).join("").replace(/^0+(?=\d)/, "");
   // an empty rupees box is no rupees; paise keep what was typed ("140" stays 140, so the slip is seen, not hidden)
   if (ask.kind === "money") return `${(parts[0] ?? "").trim() || "0"}.${(parts[1] ?? "").trim().padStart(2, "0")}`;
   if (ask.kind === "bars") return `(${parts.join(", ")})`;

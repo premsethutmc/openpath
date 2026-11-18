@@ -407,6 +407,25 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
         ))}
       </div>
     );
+  if (ask.kind === "places") {
+    // places@1: every seat needs its digit before the number can be checked, so an empty place has to be given its zero
+    const full = (n: string[]) => ask.seats.every((x, j) => (n[j] ?? "").length === x.width || (j === 0 && (n[j] ?? "").length >= 1 && (n[j] ?? "").length <= x.width));
+    // said once the last seat is reached with a seat still unfilled (not while the child is still typing along)
+    const some = !!(parts[ask.seats.length - 1] ?? "") && !full(parts);
+    return (
+      <div>
+        <div className="kid-fields kid-places">
+          {ask.seats.map((x, i) => (
+            <label key={x.label} className="kid-unit">
+              <input aria-label={`${x.label}: ${x.width} digit${x.width === 1 ? "" : "s"}`} inputMode="numeric" autoComplete="off" maxLength={x.width} style={{ ["--seats" as never]: `${x.width * 0.95 + 1.1}em` }} placeholder={"·".repeat(x.width)} value={parts[i] ?? ""} disabled={disabled} onChange={(e) => { const n = ask.seats.map((_, j) => (j === i ? e.target.value.replace(/\D/g, "").slice(0, x.width) : parts[j] ?? "")); put(n, full(n)); }} />
+              <span>{x.label}</span>
+            </label>
+          ))}
+        </div>
+        {some && <p className="kid-note" role="status">Every seat needs a digit. Which seats are empty? An empty seat holds 0.</p>}
+      </div>
+    );
+  }
   if (ask.kind === "fields")
     return (
       <div className="kid-fields">
@@ -558,6 +577,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [lower, setLower] = useResume(resumeKey && `${resumeKey}:support`, 0);
   const step = Math.max(0, autoStep - lower);
   const figure = aids ? aids[step]?.figure : kq ? kq.figure : q.figure;
+  // an aid can also be a way of answering (the place-value chart); it fades to the question's own box like a picture
+  const ask = aids?.[step]?.ask ?? kq?.ask;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
@@ -569,8 +590,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         : <Figure v={still(figure, isTest(activity))} />)}
       {aids && step > 0 && !isTest(activity) && <p><button type="button" className="link" data-testid="support-down" onClick={() => setLower(lower + 1)}>Show me the {aids[step - 1].name}</button></p>}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
-      {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
-        ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
+      {kq && ask && q.type !== "choice" && !q.picks?.length && (ask.kind !== "box" || ask.before || ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
+        ? <KidAnswer key={`${qid}:${step}`} ask={ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
         : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={setValue} disabled={ctx.saving} />}
       {clarify && <p className={KID ? "recipe-reply" : "small"} role="status">{clarify}</p>}
       {workable && (

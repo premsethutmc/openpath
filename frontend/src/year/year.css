@@ -448,3 +448,9 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .slip-choices button { text-align: left; white-space: normal; font-weight: 600; }
 /* nudge@1 */
 .scene-nudge { margin: 6px 0 0; font-size: 0.95rem; color: #9a5b00; }
+
+/* places@1: the place-value chart to fill; one row, each box as wide as its seats, its name underneath */
+.qcard .kid-fields.kid-places { display: flex; flex-wrap: nowrap; gap: 6px; align-items: flex-start; }
+.qcard .kid-places label.kid-unit { flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; flex: 0 1 auto; }
+.qcard .kid-places .kid-unit input { flex: none; width: var(--seats); max-width: 100%; text-align: center; letter-spacing: 0.2em; font-variant-numeric: tabular-nums; padding: 12px 4px; font-size: 1.3rem; }
+.scene-first { margin-top: 6px; }

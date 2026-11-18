@@ -14,7 +14,7 @@ test("a practice tool is valid, is quiet, and does not hold the answer in its wo
     const ids = pool(f).items.map((p) => p.id).filter((id) => !/:(mc|w)$/.test(id));
     for (const id of ids.filter((_, i) => i % Math.max(1, Math.floor(ids.length / 25)) === 0)) {
       const s = practiceScene(id);
-      if (!s) continue;
+      if (!s || !s.quiet) continue; // rounding lines announce their two ends: teaching-cards.test.ts
       n++;
       (kinds.get(s.kind) ?? kinds.set(s.kind, new Set()).get(s.kind)!).add(f);
       const q = question(id), start = initial(s);
@@ -22,7 +22,7 @@ test("a practice tool is valid, is quiet, and does not hold the answer in its wo
       assert.equal(s.quiet, true, id);
       assert.ok(!met(s, start), id);
       const a = q.answer.replace(/^-/, "−");
-      assert.ok(!new RegExp(`(^|[^\\d.,/])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(`${s.prompt} ${readout(s, start)}`.replace(/,(?=\d)/g, "")), `${id}: ${s.prompt} ${readout(s, start)}`);
+      assert.ok(!new RegExp(`(^|[^\\d.,/−])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(`${s.prompt} ${readout(s, start)}`.replace(/,(?=\d)/g, "")), `${id}: ${s.prompt} ${readout(s, start)}`);
       if (s.kind === "numberline" && s.goal.measure === "x") {
         // carried to where the question's own arithmetic ends, the line reads the steps taken
         const end = set(s, start, "x", s.goal.equals!);

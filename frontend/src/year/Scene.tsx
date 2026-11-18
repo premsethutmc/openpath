@@ -25,12 +25,15 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const [reached, setReached] = useState(false);
   // nudge@1: said only once the learner has moved something (not before they have tried)
   const [touched, setTouched] = useState(false);
+  // decide@1: the picture stays still until the learner has made its one choice
+  const [picked, setPicked] = useState<number | null>(null);
   const dragging = useRef(false);
   const hold = useRef(0);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
+  const gate = scene.first && picked !== scene.first.right ? scene.first : null;
   const cs = controls(scene);
-  const draggable = follows(scene);
+  const draggable = follows(scene) && !gate;
   const apply = (next: SceneState) => { setTouched(true); setState(next); if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); } };
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -47,7 +50,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   ));
   return (
     <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"}>
-      <svg
+      {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`}
         aria-hidden="true"
         className={draggable ? "scene-drag" : undefined}
@@ -57,11 +60,20 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
         onPointerCancel={draggable ? () => { dragging.current = false; } : undefined}
       >
         {draw(scene, state).map(shape)}
-      </svg>
+      </svg>}
+      {gate && (
+        <div className="scene-first" data-testid="scene-first">
+          <p className="scene-goal">{gate.ask}</p>
+          <div className="kid-taps" role="radiogroup" aria-label={gate.ask}>
+            {gate.choices.map((c, i) => <button key={c} type="button" className={`kid-tap${picked === i ? " on" : ""}`} role="radio" aria-checked={picked === i} onClick={() => setPicked(i)}>{c}</button>)}
+          </div>
+          {picked !== null && <p className="scene-nudge" role="status">{gate.why[picked]}</p>}
+        </div>
+      )}
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
-      {cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
-      <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>
-      <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>
+      {gate ? null : cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
+      {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>}
+      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>}
       {!done && touched && nudge(scene, state) && <p className="scene-nudge" role="status">{nudge(scene, state)}</p>}
     </figure>
   );
