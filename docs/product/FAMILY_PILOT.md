@@ -322,3 +322,8 @@ verified answer, never holding the answer. An aid: it fades to the plain box and
 
 `one-page-story@1`: in the one-part-per-screen lesson (Classes 1 to 5) the opening story is a few lines, so it is shown
 above the guess it asks for instead of on a page of its own (one Next fewer; no going Back to read the question).
+
+`where-used@1` (`packages/learning/src/uses.ts`, `WhereUsed.tsx`): under a lesson, an optional "Where is this used?"
+button: one everyday place the skill lives (two short lines) and one playful question. Never shown unless asked for,
+nothing recorded, not in practice or tests. Written once per skill as data; a skill with no honest everyday use has no
+entry. 42 of the 62 Class 5 skills so far. No pictures yet.

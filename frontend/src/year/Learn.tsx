@@ -22,6 +22,7 @@ import { GuessFirst, PlayFirst, RecipeLesson } from "./Recipe";
 import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach } from "./StepCoach";
+import { WhereUsed } from "./WhereUsed";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
@@ -737,7 +738,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
   // with no worked example to follow, the recipe is the whole lesson (and is what a learner sees on coming back to it)
-  if (recipe && (recipeDone !== true || !screens.length)) return <RecipeLesson recipe={recipe} grade={grade} resumeKey={resumeKey && `${resumeKey}:recipe-step@1`} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />;
+  if (recipe && (recipeDone !== true || !screens.length)) return <><RecipeLesson recipe={recipe} grade={grade} resumeKey={resumeKey && `${resumeKey}:recipe-step@1`} doneLabel={screens.length ? "Next" : doneLabel} onDone={() => { setRecipeDone(true); if (!screens.length) { setI(0); onDone(); } }} />{KID && <WhereUsed competency={competency} />}</>;
   const raw = screens[i];
   // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
   const kq = KID && raw.instance ? safeKid(question(raw.instance)) : null;
@@ -778,6 +779,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         {i > 0 && <button className="secondary" onClick={() => setI(i - 1)}>Back</button>}
         <button className="primary" disabled={saving} onClick={() => (last ? (setI(0), onDone()) : setI(i + 1))}>{last ? (saving ? "Saving…" : doneLabel) : "Next"}</button>
       </div>
+      {KID && <WhereUsed competency={competency} />}
     </div>
   );
 }
