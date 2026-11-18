@@ -12,6 +12,9 @@ import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
+import { streamRows, type StreamId } from "../logic/streams/streams.ts";
+import { COURSE } from "../logic/reading/course.ts";
+import { progress } from "../logic/reading/session.ts";
 
 const STATUS_WORDS: Record<string, string> = {
   not_started: "not started",
@@ -28,7 +31,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -53,12 +56,31 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
-      <BeeCard learner={learner} onBee={onBee} />
-      <MyWordsCard learner={learner} onOpen={onMyWords} />
-      <MyBooksCard learner={learner} onOpen={onMyBooks} />
-      <NewWordsCard learner={learner} onOpen={onNewWords} />
-      <ListenWriteCard learner={learner} onOpen={onListenWrite} />
-      <VocabCard learner={learner} onOpen={onVocab} />
+      {learner.content.gate ? (
+        <>
+          <BeeCard learner={learner} onBee={onBee} />
+          <MyWordsCard learner={learner} onOpen={onMyWords} />
+          <MyBooksCard learner={learner} onOpen={onMyBooks} />
+        </>
+      ) : (
+        <>
+          <LevelPanel
+            learner={learner}
+            onLevelCheck={onLevelCheck}
+            onGo={(id) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? onBee() : activities[0] && onStart(activities[0].step))}
+          />
+          <h2 className="section-title">Practise</h2>
+          <NewWordsCard learner={learner} onOpen={onNewWords} />
+          <ReadingCard learner={learner} onOpen={onReading} />
+          <ListenWriteCard learner={learner} onOpen={onListenWrite} />
+          <BeeCard learner={learner} onBee={onBee} />
+          <VocabCard learner={learner} onOpen={onVocab} />
+          <h2 className="section-title">School work</h2>
+          <p className="small">Words and texts from school: a parent or the learner adds them, and the app turns them into practice.</p>
+          <MyWordsCard learner={learner} onOpen={onMyWords} />
+          <MyBooksCard learner={learner} onOpen={onMyBooks} />
+        </>
+      )}
       <h2 className="section-title general-title">General English</h2>
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
@@ -222,6 +244,55 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
   );
 }
 
+/**
+ * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
+ * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
+ */
+function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId) => void }) {
+  if (!learner.levels().done)
+    return (
+      <section className="hub-card level-cta" aria-labelledby="level-cta-title">
+        <h2 id="level-cta-title">
+          <span aria-hidden="true">🧭 </span>Start here: find your level
+        </h2>
+        <p>Three short parts, about eight minutes: words, reading and listening. Then the app shows where to begin in each.</p>
+        <button type="button" className="primary" onClick={onLevelCheck}>
+          Find my level
+        </button>
+      </section>
+    );
+  const rows = streamRows(learner, learner.clock());
+  const left = rows.filter((r) => !r.doneToday && !r.idle).length;
+  return (
+    <section className="hub-card plain levels" aria-labelledby="levels-title">
+      <h2 id="levels-title">
+        <span aria-hidden="true">🧭 </span>Your English today
+      </h2>
+      <p className="small">{left ? "Your level in each stream, and the next thing to do. Pick any; a little of each is best." : "You have done something in every stream today. Well done!"}</p>
+      <ul className="stream-rows">
+        {rows.map((r) => (
+          <li key={r.id} data-stream={r.id} data-done={r.doneToday}>
+            <span className="stream-icon" aria-hidden="true">
+              {r.icon}
+            </span>
+            <div>
+              <b>{r.name}</b>
+              <p className="small stream-level">{r.level}</p>
+              <p className="small">{r.doneToday ? `✓ Done today${r.id === "words" ? "" : ` · next: ${r.next}`}` : r.next}</p>
+            </div>
+            <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id)}>
+              Go
+            </button>
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="link" onClick={onLevelCheck}>
+        Check my level again
+      </button>
+    </section>
+  );
+}
+
 /** New words (logic/vocabulary/daily-words.ts): candidate content, so never offered in a pilot build. */
 function NewWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
   if (learner.content.gate) return null;
@@ -262,6 +333,25 @@ function ListenWriteCard({ learner, onOpen }: { learner: Learner; onOpen: () => 
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.sentences ? "Write five more" : "Try Listen and write"}
+      </button>
+    </section>
+  );
+}
+
+/** The reading course (logic/reading): candidate content, so never offered in a pilot build. */
+function ReadingCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const p = progress(COURSE, learner.readingRecords());
+  const done = [...p.units.values()].filter((u) => u.status === "passed_own" || u.status === "passed_after_help").length;
+  return (
+    <section className="hub-card plain" aria-labelledby="reading-card-title">
+      <h2 id="reading-card-title">
+        <span aria-hidden="true">📖 </span>Reading
+      </h2>
+      <p>Short texts with questions: learn a reading skill from an example, practise with hints, then try new questions on your own.</p>
+      {p.units.size > 0 && <p className="small">{done} of {COURSE.skills.length * COURSE.levels.length} skill levels done</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {p.units.size ? "Carry on reading" : "Start reading"}
       </button>
     </section>
   );
