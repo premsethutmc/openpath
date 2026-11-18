@@ -23,6 +23,7 @@ import { guessPictures } from "./guess-picture";
 import { Explore } from "./Explore";
 import { StepCoach } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
+import { ScribblePad } from "./ScribblePad";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
@@ -643,6 +644,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
         </details>
       )}
+      {/* scribble@1: scratch paper, never read; like paper on the desk it is there in tests too */}
+      {KID && workable && <ScribblePad key={qid} />}
       {(hint || showHint) && !(coach && canCoach && !q.hint && !showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
