@@ -1,0 +1,2261 @@
+{
+  "engine": "harper.js@3.2.0",
+  "suite": "workspace-writing-acceptance@2",
+  "suiteSha256": "94625d5f765341b322d75ee8009dbc6993fa7daab3966d4412ef60f83eaadad8",
+  "status": "experimental; unvalidated; no production routing",
+  "limitations": [
+    "Overlap is only a review candidate, not correct category or valid feedback.",
+    "No matched span does not mean correct writing.",
+    "Argument quality is not assessed by this grammar checker.",
+    "Synthetic reference annotations are AI-authored, not educator validated."
+  ],
+  "dialects": [
+    {
+      "dialect": "Indian",
+      "summary": {
+        "cases": 30,
+        "languageCases": 14,
+        "lints": 11,
+        "languageRequired": 31,
+        "languageRequiredWithOverlap": 9,
+        "protectedWithOverlap": 0
+      },
+      "cases": [
+        {
+          "id": "workspace-b01-agreement",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "PronounVerbAgreement",
+              "start": 61,
+              "end": 64,
+              "quote": "say",
+              "kind": "Agreement",
+              "message": "The form of the verb must agree in grammatical number with the pronoun.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "says"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "my sister walk",
+              "note": "Singular subject needs walks.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "She say",
+              "note": "She needs says.",
+              "misconception": "third_person_s",
+              "overlapCandidates": [
+                {
+                  "rule": "PronounVerbAgreement",
+                  "start": 61,
+                  "end": 64,
+                  "quote": "say",
+                  "kind": "Agreement",
+                  "message": "The form of the verb must agree in grammatical number with the pronoun.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "says"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "the traffic near the market are",
+              "note": "The singular subject traffic requires is, not are. This does not by itself identify the cause of the error.",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "My parents worries",
+              "note": "Plural subject needs worry.",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "The school bus come",
+              "note": "Singular subject needs comes.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "the town need",
+              "note": "Singular subject needs needs.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "everyone could reach school safely",
+              "why": "Correct modal use.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b02-tense",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we walk",
+              "note": "The story is in the past: walked.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we decide",
+              "note": "Past narrative: decided.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "a parrot copies",
+              "note": "Past narrative: copied.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we eat ice cream",
+              "note": "Past narrative: ate.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "The lion was sleeping",
+              "why": "Past progressive is correct for an ongoing action.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b03-articles-prepositions",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "OnFloor",
+              "start": 108,
+              "end": 110,
+              "quote": "at",
+              "kind": "WordChoice",
+              "message": "Corrects `at` to `on` when talking about position inside a building",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "on"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "born on 2012",
+              "note": "Years take in: in 2012.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "my mother is teacher",
+              "note": "A singular job noun needs an article: a teacher.",
+              "misconception": "article_omission",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "at the second floor",
+              "note": "Floors take on: on the second floor.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": [
+                {
+                  "rule": "OnFloor",
+                  "start": 108,
+                  "end": 110,
+                  "quote": "at",
+                  "kind": "WordChoice",
+                  "message": "Corrects `at` to `on` when talking about position inside a building",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "on"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "on the night",
+              "note": "Use at night.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "to the Chennai",
+              "note": "Chennai normally takes no definite article in this sentence.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "go to a beach",
+              "why": "\"a beach\" and \"the beach\" are both acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "an engineer",
+              "why": "Correct article.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "in the morning",
+              "why": "Correct preposition.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b08-clean-library",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "the busiest room",
+              "why": "Correct superlative.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "before classes, during lunch and after school",
+              "why": "A list without a final comma is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "I hope the school gives",
+              "why": "Correct agreement.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b09-clean-alternatives",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "different from most",
+              "why": "Standard.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "And honestly, nobody minds.",
+              "why": "Beginning a sentence with And is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "The data on student opinions is clear",
+              "why": "Data as a mass noun is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Everyone has their own style",
+              "why": "Singular they is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "at weekends",
+              "why": "British usage, standard in Indian English.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "grey",
+              "why": "British spelling.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b11-single-slip",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "PronounVerbAgreement",
+              "start": 187,
+              "end": 190,
+              "quote": "say",
+              "kind": "Agreement",
+              "message": "The form of the verb must agree in grammatical number with the pronoun.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "says"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "He say",
+              "note": "He says; the same form is correct elsewhere, so this may be a slip.",
+              "misconception": "third_person_s",
+              "slip": true,
+              "overlapCandidates": [
+                {
+                  "rule": "PronounVerbAgreement",
+                  "start": 187,
+                  "end": 190,
+                  "quote": "say",
+                  "kind": "Agreement",
+                  "message": "The form of the verb must agree in grammatical number with the pronoun.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "says"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "My brother and I help",
+              "why": "Correct compound subject.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "as if they were friends",
+              "why": "Correct subjunctive.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "neighbours",
+              "why": "British spelling.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-circular",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "reasons",
+              "quote": "because having a reading hour is a good idea.",
+              "note": "The reason repeats the recommendation rather than supporting it.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-causal-leap",
+          "kind": "argument",
+          "lints": [
+            {
+              "rule": "DiscourseMarkers",
+              "start": 63,
+              "end": 72,
+              "quote": "Therefore",
+              "kind": "Punctuation",
+              "message": "Discourse markers at the beginning of a sentence should be followed by a comma.",
+              "suggestions": [
+                {
+                  "kind": 2,
+                  "text": ","
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "area": "warrant",
+              "quote": "Therefore every shop in the city should stay open later",
+              "note": "One instance does not establish universal causal benefit.",
+              "overlapCandidates": [
+                {
+                  "rule": "DiscourseMarkers",
+                  "start": 63,
+                  "end": 72,
+                  "quote": "Therefore",
+                  "kind": "Punctuation",
+                  "message": "Discourse markers at the beginning of a sentence should be followed by a comma.",
+                  "suggestions": [
+                    {
+                      "kind": 2,
+                      "text": ","
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-unsupported-number",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "evidence",
+              "quote": "forty percent",
+              "note": "The precise prediction lacks supporting evidence; do not invent a figure.",
+              "acceptQuotes": [
+                "it will increase profits by exactly forty percent."
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-fair-objection",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Staff costs are a reasonable objection, so the trial should record attendance and costs before any longer commitment is made.",
+              "area": "counterargument",
+              "why": "The draft explicitly considers the strongest stated cost objection; do not claim it is absent.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-opposite-view",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "A permanent ban on private cars could make essential journeys difficult for people who cannot use the available buses.",
+              "area": "claim",
+              "why": "A clear position against a ban answers the assigned side; disagreement is not a deficit.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-short-school",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "A quiet place would let me finish my book.",
+              "area": "evidence",
+              "why": "A personal explanation does not require published statistics or a formal research study.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-instruction-data",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": []
+        },
+        {
+          "id": "argument-transfer",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "However, the selected branch should resemble the others, or the results may not generalise.",
+              "area": "warrant",
+              "why": "The writer explicitly qualifies generalisation; do not claim that limitation was ignored.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "regional-valid",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Our school organised a maths programme last month.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Each pupil brought their own notebook.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "The library received two lakh rupees for new books.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "We chose stories about local history, and the teachers helped us compare different accounts.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "tense-valid",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Yesterday we visited the library near our school.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "It opens every morning and closes at six in the evening.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Tomorrow we will return to borrow another book.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "I enjoyed the visit because the librarian explained how the books are arranged.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b04-sentence-boundaries",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.SEN.CMP.run_ons",
+              "kind": "error",
+              "quote": "Our class planted trees last week it was hard work",
+              "note": "Two sentences fused without punctuation.",
+              "misconception": "fused_sentence",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.CMP.fragments",
+              "kind": "error",
+              "quote": "Because the soil was dry.",
+              "note": "A subordinate clause on its own is a fragment.",
+              "misconception": "subordinate_fragment",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.CMP.run_ons",
+              "kind": "error",
+              "quote": "The teacher was pleased, she said",
+              "note": "Comma splice.",
+              "misconception": "comma_splice",
+              "acceptAlso": [
+                "EN.GRM.PUN.commas"
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "Next month we will plant flowers near the gate.",
+              "why": "Correct sentence.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b05-vocabulary",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "did a big mistake",
+              "note": "We make a mistake.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "make my homework",
+              "note": "We do homework.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "take more attention",
+              "note": "We pay attention.",
+              "misconception": "word_by_word",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "do an effort",
+              "note": "We make an effort.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "study every day",
+              "why": "Correct.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b06-connectives",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.SEN.COH.connectives",
+              "kind": "error",
+              "quote": "However, they help",
+              "note": "However signals contrast, but this sentence supports the claim.",
+              "misconception": "wrong_connective",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.COH.connectives",
+              "kind": "error",
+              "quote": "Therefore, phones can be useful",
+              "note": "Therefore signals a result that does not follow from the previous sentence.",
+              "misconception": "wrong_connective",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "In conclusion, schools should make clear rules.",
+              "why": "Appropriate concluding connective.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Some students play games in class.",
+              "why": "A complete counterpoint need not always carry an explicit connective; a style suggestion is permitted.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b07-concision",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Reading helps us learn new words and new ideas.",
+              "why": "Correct.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "In my opinion, I think",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "due to the fact that",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "At this point in time",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Each and every",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b15-a-an",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "AnA",
+              "start": 6,
+              "end": 7,
+              "quote": "a",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "an"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 22,
+              "end": 24,
+              "quote": "an",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "a"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 65,
+              "end": 67,
+              "quote": "an",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "a"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 110,
+              "end": 111,
+              "quote": "a",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "an"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "a ice cream",
+              "note": "An before a vowel sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 6,
+                  "end": 7,
+                  "quote": "a",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "an"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "an banana",
+              "note": "A before a consonant sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 22,
+                  "end": 24,
+                  "quote": "an",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "a"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "an useful book",
+              "note": "Useful starts with the consonant sound /j/, so use a useful book.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 65,
+                  "end": 67,
+                  "quote": "an",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "a"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "a umbrella",
+              "note": "An before a vowel sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 110,
+                  "end": 111,
+                  "quote": "a",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "an"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "An hour later",
+              "why": "An before a silent h is correct.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "adult-countability-preposition",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "DependOf",
+              "start": 119,
+              "end": 121,
+              "quote": "of",
+              "kind": "Usage",
+              "message": "In English it's `depend on`, not `depend of`.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "on"
+                }
+              ]
+            },
+            {
+              "rule": "MassNouns",
+              "start": 32,
+              "end": 44,
+              "quote": "informations",
+              "kind": "Grammar",
+              "message": "The word `information` is a mass noun and should not be pluralized.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "information"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.NOUN.plurals_countability",
+              "kind": "error",
+              "quote": "several informations",
+              "note": "Information is uncountable here; several pieces of information or more information would fit.",
+              "overlapCandidates": [
+                {
+                  "rule": "MassNouns",
+                  "start": 32,
+                  "end": 44,
+                  "quote": "informations",
+                  "kind": "Grammar",
+                  "message": "The word `information` is a mass noun and should not be pluralized.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "information"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.PREP.dependent",
+              "kind": "error",
+              "quote": "depends of",
+              "note": "The preposition in this construction is on: depends on.",
+              "overlapCandidates": [
+                {
+                  "rule": "DependOf",
+                  "start": 119,
+                  "end": 121,
+                  "quote": "of",
+                  "kind": "Usage",
+                  "message": "In English it's `depend on`, not `depend of`.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "on"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "the results would need to be interpreted cautiously if the pilot location differed from the other branches",
+              "why": "This is a legitimate qualification, not a tense inconsistency.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-claim-conflict",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "claim",
+              "quote": "These are both my final recommendation.",
+              "note": "The draft presents mutually incompatible recommendations without resolving or qualifying them.",
+              "acceptQuotes": [
+                "I support a permanent ban on every private car in the town centre, without exceptions.",
+                "At the same time, I oppose any ban on private cars there, without exceptions."
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-unclear-reference",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "clarity",
+              "quote": "They said they should decide because it belongs to them.",
+              "note": "The reader cannot identify which club the pronouns refer to; ask the writer to name it.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-strawman",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "counterargument",
+              "quote": "They simply hate books and want children to fail.",
+              "note": "The response misrepresents a stated cost objection instead of addressing it; do not supply the rebuttal.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-topic-detour",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "organization",
+              "quote": "My favourite film has a detective who wears a blue coat.",
+              "note": "The middle paragraph interrupts the route from problem to trial with unrelated material; ask about its purpose.",
+              "acceptAlso": [
+                "reasons"
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-revision-qualified",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "area": "warrant",
+              "quote": "One profitable branch does not establish that every location will perform similarly.",
+              "why": "The current draft explicitly rejects universal generalisation. Do not repeat the earlier resolved concern or claim improvement/mastery.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-revision-unresolved",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "evidence",
+              "quote": "every resident wants one",
+              "note": "The universal support claim remains unsupported in the current draft, despite other changes.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-stretch-qualified-against",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "area": "counterargument",
+              "quote": "Outcome measures are also imperfect, since causes may be difficult to separate",
+              "why": "The writer acknowledges a limitation in the preferred alternative; do not call the argument wholly one-sided.",
+              "overlapCandidates": []
+            },
+            {
+              "area": "claim",
+              "quote": "Public services should not be judged solely by easily measured outputs.",
+              "why": "The qualified position answers the assigned against task.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-revision-injection",
+          "kind": "argument",
+          "lints": [
+            {
+              "rule": "MissingPreposition",
+              "start": 4,
+              "end": 11,
+              "quote": "school ",
+              "kind": "Miscellaneous",
+              "message": "You may be missing a preposition here.",
+              "suggestions": []
+            }
+          ],
+          "required": [],
+          "protected": [
+            {
+              "area": "evidence",
+              "quote": "A short trial would show how many students use it.",
+              "why": "The proposal is to collect evidence rather than falsely claim that usage has already been measured.",
+              "overlapCandidates": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dialect": "British",
+      "summary": {
+        "cases": 30,
+        "languageCases": 14,
+        "lints": 12,
+        "languageRequired": 31,
+        "languageRequiredWithOverlap": 9,
+        "protectedWithOverlap": 1
+      },
+      "cases": [
+        {
+          "id": "workspace-b01-agreement",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "PronounVerbAgreement",
+              "start": 61,
+              "end": 64,
+              "quote": "say",
+              "kind": "Agreement",
+              "message": "The form of the verb must agree in grammatical number with the pronoun.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "says"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "my sister walk",
+              "note": "Singular subject needs walks.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "She say",
+              "note": "She needs says.",
+              "misconception": "third_person_s",
+              "overlapCandidates": [
+                {
+                  "rule": "PronounVerbAgreement",
+                  "start": 61,
+                  "end": 64,
+                  "quote": "say",
+                  "kind": "Agreement",
+                  "message": "The form of the verb must agree in grammatical number with the pronoun.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "says"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "the traffic near the market are",
+              "note": "The singular subject traffic requires is, not are. This does not by itself identify the cause of the error.",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "My parents worries",
+              "note": "Plural subject needs worry.",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "The school bus come",
+              "note": "Singular subject needs comes.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "the town need",
+              "note": "Singular subject needs needs.",
+              "misconception": "third_person_s",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "everyone could reach school safely",
+              "why": "Correct modal use.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b02-tense",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we walk",
+              "note": "The story is in the past: walked.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we decide",
+              "note": "Past narrative: decided.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "a parrot copies",
+              "note": "Past narrative: copied.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.VERB.present_past_simple",
+              "kind": "error",
+              "quote": "we eat ice cream",
+              "note": "Past narrative: ate.",
+              "misconception": "tense_shift",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "The lion was sleeping",
+              "why": "Past progressive is correct for an ongoing action.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b03-articles-prepositions",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "OnFloor",
+              "start": 108,
+              "end": 110,
+              "quote": "at",
+              "kind": "WordChoice",
+              "message": "Corrects `at` to `on` when talking about position inside a building",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "on"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "born on 2012",
+              "note": "Years take in: in 2012.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "my mother is teacher",
+              "note": "A singular job noun needs an article: a teacher.",
+              "misconception": "article_omission",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "at the second floor",
+              "note": "Floors take on: on the second floor.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": [
+                {
+                  "rule": "OnFloor",
+                  "start": 108,
+                  "end": 110,
+                  "quote": "at",
+                  "kind": "WordChoice",
+                  "message": "Corrects `at` to `on` when talking about position inside a building",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "on"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.PREP.time_place",
+              "kind": "error",
+              "quote": "on the night",
+              "note": "Use at night.",
+              "misconception": "in_on_at_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "to the Chennai",
+              "note": "Chennai normally takes no definite article in this sentence.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "go to a beach",
+              "why": "\"a beach\" and \"the beach\" are both acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "an engineer",
+              "why": "Correct article.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "in the morning",
+              "why": "Correct preposition.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b08-clean-library",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "the busiest room",
+              "why": "Correct superlative.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "before classes, during lunch and after school",
+              "why": "A list without a final comma is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "I hope the school gives",
+              "why": "Correct agreement.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b09-clean-alternatives",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "different from most",
+              "why": "Standard.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "And honestly, nobody minds.",
+              "why": "Beginning a sentence with And is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "The data on student opinions is clear",
+              "why": "Data as a mass noun is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Everyone has their own style",
+              "why": "Singular they is acceptable.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "at weekends",
+              "why": "British usage, standard in Indian English.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "grey",
+              "why": "British spelling.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b11-single-slip",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "PronounVerbAgreement",
+              "start": 187,
+              "end": 190,
+              "quote": "say",
+              "kind": "Agreement",
+              "message": "The form of the verb must agree in grammatical number with the pronoun.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "says"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.VERB.sva",
+              "kind": "error",
+              "quote": "He say",
+              "note": "He says; the same form is correct elsewhere, so this may be a slip.",
+              "misconception": "third_person_s",
+              "slip": true,
+              "overlapCandidates": [
+                {
+                  "rule": "PronounVerbAgreement",
+                  "start": 187,
+                  "end": 190,
+                  "quote": "say",
+                  "kind": "Agreement",
+                  "message": "The form of the verb must agree in grammatical number with the pronoun.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "says"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "My brother and I help",
+              "why": "Correct compound subject.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "as if they were friends",
+              "why": "Correct subjunctive.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "neighbours",
+              "why": "British spelling.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-circular",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "reasons",
+              "quote": "because having a reading hour is a good idea.",
+              "note": "The reason repeats the recommendation rather than supporting it.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-causal-leap",
+          "kind": "argument",
+          "lints": [
+            {
+              "rule": "DiscourseMarkers",
+              "start": 63,
+              "end": 72,
+              "quote": "Therefore",
+              "kind": "Punctuation",
+              "message": "Discourse markers at the beginning of a sentence should be followed by a comma.",
+              "suggestions": [
+                {
+                  "kind": 2,
+                  "text": ","
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "area": "warrant",
+              "quote": "Therefore every shop in the city should stay open later",
+              "note": "One instance does not establish universal causal benefit.",
+              "overlapCandidates": [
+                {
+                  "rule": "DiscourseMarkers",
+                  "start": 63,
+                  "end": 72,
+                  "quote": "Therefore",
+                  "kind": "Punctuation",
+                  "message": "Discourse markers at the beginning of a sentence should be followed by a comma.",
+                  "suggestions": [
+                    {
+                      "kind": 2,
+                      "text": ","
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-unsupported-number",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "evidence",
+              "quote": "forty percent",
+              "note": "The precise prediction lacks supporting evidence; do not invent a figure.",
+              "acceptQuotes": [
+                "it will increase profits by exactly forty percent."
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-fair-objection",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Staff costs are a reasonable objection, so the trial should record attendance and costs before any longer commitment is made.",
+              "area": "counterargument",
+              "why": "The draft explicitly considers the strongest stated cost objection; do not claim it is absent.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-opposite-view",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "A permanent ban on private cars could make essential journeys difficult for people who cannot use the available buses.",
+              "area": "claim",
+              "why": "A clear position against a ban answers the assigned side; disagreement is not a deficit.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-short-school",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "A quiet place would let me finish my book.",
+              "area": "evidence",
+              "why": "A personal explanation does not require published statistics or a formal research study.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-instruction-data",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": []
+        },
+        {
+          "id": "argument-transfer",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "However, the selected branch should resemble the others, or the results may not generalise.",
+              "area": "warrant",
+              "why": "The writer explicitly qualifies generalisation; do not claim that limitation was ignored.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "regional-valid",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "SpellCheck",
+              "start": 115,
+              "end": 119,
+              "quote": "lakh",
+              "kind": "Spelling",
+              "message": "Did you mean to spell `lakh` this way?",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "lake"
+                },
+                {
+                  "kind": 0,
+                  "text": "lash"
+                },
+                {
+                  "kind": 0,
+                  "text": "lath"
+                }
+              ]
+            }
+          ],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Our school organised a maths programme last month.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Each pupil brought their own notebook.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "The library received two lakh rupees for new books.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": [
+                {
+                  "rule": "SpellCheck",
+                  "start": 115,
+                  "end": 119,
+                  "quote": "lakh",
+                  "kind": "Spelling",
+                  "message": "Did you mean to spell `lakh` this way?",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "lake"
+                    },
+                    {
+                      "kind": 0,
+                      "text": "lash"
+                    },
+                    {
+                      "kind": 0,
+                      "text": "lath"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "quote": "We chose stories about local history, and the teachers helped us compare different accounts.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "tense-valid",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Yesterday we visited the library near our school.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "It opens every morning and closes at six in the evening.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Tomorrow we will return to borrow another book.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "I enjoyed the visit because the librarian explained how the books are arranged.",
+              "why": "Valid usage and coherent time frame, not an error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b04-sentence-boundaries",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.SEN.CMP.run_ons",
+              "kind": "error",
+              "quote": "Our class planted trees last week it was hard work",
+              "note": "Two sentences fused without punctuation.",
+              "misconception": "fused_sentence",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.CMP.fragments",
+              "kind": "error",
+              "quote": "Because the soil was dry.",
+              "note": "A subordinate clause on its own is a fragment.",
+              "misconception": "subordinate_fragment",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.CMP.run_ons",
+              "kind": "error",
+              "quote": "The teacher was pleased, she said",
+              "note": "Comma splice.",
+              "misconception": "comma_splice",
+              "acceptAlso": [
+                "EN.GRM.PUN.commas"
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "Next month we will plant flowers near the gate.",
+              "why": "Correct sentence.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b05-vocabulary",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "did a big mistake",
+              "note": "We make a mistake.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "make my homework",
+              "note": "We do homework.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "take more attention",
+              "note": "We pay attention.",
+              "misconception": "word_by_word",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.VOC.REL.collocations",
+              "kind": "error",
+              "quote": "do an effort",
+              "note": "We make an effort.",
+              "misconception": "make_do_confusion",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "study every day",
+              "why": "Correct.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b06-connectives",
+          "kind": "language",
+          "lints": [],
+          "required": [
+            {
+              "competency": "EN.SEN.COH.connectives",
+              "kind": "error",
+              "quote": "However, they help",
+              "note": "However signals contrast, but this sentence supports the claim.",
+              "misconception": "wrong_connective",
+              "overlapCandidates": []
+            },
+            {
+              "competency": "EN.SEN.COH.connectives",
+              "kind": "error",
+              "quote": "Therefore, phones can be useful",
+              "note": "Therefore signals a result that does not follow from the previous sentence.",
+              "misconception": "wrong_connective",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": [
+            {
+              "quote": "In conclusion, schools should make clear rules.",
+              "why": "Appropriate concluding connective.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Some students play games in class.",
+              "why": "A complete counterpoint need not always carry an explicit connective; a style suggestion is permitted.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b07-concision",
+          "kind": "language",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "quote": "Reading helps us learn new words and new ideas.",
+              "why": "Correct.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "In my opinion, I think",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "due to the fact that",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "At this point in time",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            },
+            {
+              "quote": "Each and every",
+              "why": "Wordy but grammatical wording: style advice is permitted; do not call it a grammar error.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "workspace-b15-a-an",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "AnA",
+              "start": 6,
+              "end": 7,
+              "quote": "a",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "an"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 22,
+              "end": 24,
+              "quote": "an",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "a"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 65,
+              "end": 67,
+              "quote": "an",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "a"
+                }
+              ]
+            },
+            {
+              "rule": "AnA",
+              "start": 110,
+              "end": 111,
+              "quote": "a",
+              "kind": "Miscellaneous",
+              "message": "Incorrect indefinite article.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "an"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "a ice cream",
+              "note": "An before a vowel sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 6,
+                  "end": 7,
+                  "quote": "a",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "an"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "an banana",
+              "note": "A before a consonant sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 22,
+                  "end": 24,
+                  "quote": "an",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "a"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "an useful book",
+              "note": "Useful starts with the consonant sound /j/, so use a useful book.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 65,
+                  "end": 67,
+                  "quote": "an",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "a"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.NOUN.articles",
+              "kind": "error",
+              "quote": "a umbrella",
+              "note": "An before a vowel sound.",
+              "misconception": "a_an_sound",
+              "overlapCandidates": [
+                {
+                  "rule": "AnA",
+                  "start": 110,
+                  "end": 111,
+                  "quote": "a",
+                  "kind": "Miscellaneous",
+                  "message": "Incorrect indefinite article.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "an"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "An hour later",
+              "why": "An before a silent h is correct.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "adult-countability-preposition",
+          "kind": "language",
+          "lints": [
+            {
+              "rule": "DependOf",
+              "start": 119,
+              "end": 121,
+              "quote": "of",
+              "kind": "Usage",
+              "message": "In English it's `depend on`, not `depend of`.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "on"
+                }
+              ]
+            },
+            {
+              "rule": "MassNouns",
+              "start": 32,
+              "end": 44,
+              "quote": "informations",
+              "kind": "Grammar",
+              "message": "The word `information` is a mass noun and should not be pluralized.",
+              "suggestions": [
+                {
+                  "kind": 0,
+                  "text": "information"
+                }
+              ]
+            }
+          ],
+          "required": [
+            {
+              "competency": "EN.GRM.NOUN.plurals_countability",
+              "kind": "error",
+              "quote": "several informations",
+              "note": "Information is uncountable here; several pieces of information or more information would fit.",
+              "overlapCandidates": [
+                {
+                  "rule": "MassNouns",
+                  "start": 32,
+                  "end": 44,
+                  "quote": "informations",
+                  "kind": "Grammar",
+                  "message": "The word `information` is a mass noun and should not be pluralized.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "information"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "competency": "EN.GRM.PREP.dependent",
+              "kind": "error",
+              "quote": "depends of",
+              "note": "The preposition in this construction is on: depends on.",
+              "overlapCandidates": [
+                {
+                  "rule": "DependOf",
+                  "start": 119,
+                  "end": 121,
+                  "quote": "of",
+                  "kind": "Usage",
+                  "message": "In English it's `depend on`, not `depend of`.",
+                  "suggestions": [
+                    {
+                      "kind": 0,
+                      "text": "on"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "protected": [
+            {
+              "quote": "the results would need to be interpreted cautiously if the pilot location differed from the other branches",
+              "why": "This is a legitimate qualification, not a tense inconsistency.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-claim-conflict",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "claim",
+              "quote": "These are both my final recommendation.",
+              "note": "The draft presents mutually incompatible recommendations without resolving or qualifying them.",
+              "acceptQuotes": [
+                "I support a permanent ban on every private car in the town centre, without exceptions.",
+                "At the same time, I oppose any ban on private cars there, without exceptions."
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-unclear-reference",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "clarity",
+              "quote": "They said they should decide because it belongs to them.",
+              "note": "The reader cannot identify which club the pronouns refer to; ask the writer to name it.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-strawman",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "counterargument",
+              "quote": "They simply hate books and want children to fail.",
+              "note": "The response misrepresents a stated cost objection instead of addressing it; do not supply the rebuttal.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-topic-detour",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "organization",
+              "quote": "My favourite film has a detective who wears a blue coat.",
+              "note": "The middle paragraph interrupts the route from problem to trial with unrelated material; ask about its purpose.",
+              "acceptAlso": [
+                "reasons"
+              ],
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-revision-qualified",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "area": "warrant",
+              "quote": "One profitable branch does not establish that every location will perform similarly.",
+              "why": "The current draft explicitly rejects universal generalisation. Do not repeat the earlier resolved concern or claim improvement/mastery.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-revision-unresolved",
+          "kind": "argument",
+          "lints": [],
+          "required": [
+            {
+              "area": "evidence",
+              "quote": "every resident wants one",
+              "note": "The universal support claim remains unsupported in the current draft, despite other changes.",
+              "overlapCandidates": []
+            }
+          ],
+          "protected": []
+        },
+        {
+          "id": "argument-stretch-qualified-against",
+          "kind": "argument",
+          "lints": [],
+          "required": [],
+          "protected": [
+            {
+              "area": "counterargument",
+              "quote": "Outcome measures are also imperfect, since causes may be difficult to separate",
+              "why": "The writer acknowledges a limitation in the preferred alternative; do not call the argument wholly one-sided.",
+              "overlapCandidates": []
+            },
+            {
+              "area": "claim",
+              "quote": "Public services should not be judged solely by easily measured outputs.",
+              "why": "The qualified position answers the assigned against task.",
+              "overlapCandidates": []
+            }
+          ]
+        },
+        {
+          "id": "argument-revision-injection",
+          "kind": "argument",
+          "lints": [
+            {
+              "rule": "MissingPreposition",
+              "start": 4,
+              "end": 11,
+              "quote": "school ",
+              "kind": "Miscellaneous",
+              "message": "You may be missing a preposition here.",
+              "suggestions": []
+            }
+          ],
+          "required": [],
+          "protected": [
+            {
+              "area": "evidence",
+              "quote": "A short trial would show how many students use it.",
+              "why": "The proposal is to collect evidence rather than falsely claim that usage has already been measured.",
+              "overlapCandidates": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "attemptedNetworkCalls": 0
+}
