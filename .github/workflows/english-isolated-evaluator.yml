@@ -1,0 +1,75 @@
+name: Isolated English evaluator (manual, synthetic, spending)
+on:
+  workflow_dispatch:
+    inputs:
+      approval:
+        description: 'Type APPROVE SYNTHETIC TEST to authorize up to 16 calls, USD 0.25 reservation, temporary local developer and deletion of raw results'
+        required: true
+        type: string
+      model:
+        description: 'Exact OpenAI model ID, with prices verified before this run'
+        required: true
+        type: string
+      input_price:
+        description: 'Verified USD per million input tokens (positive)'
+        required: true
+        type: string
+      output_price:
+        description: 'Verified USD per million output tokens (positive)'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: isolated-english-paid-evaluation
+  cancel-in-progress: false
+jobs:
+  synthetic:
+    if: >-
+      github.repository == 'premsethutmc/openpath' &&
+      github.ref == 'refs/heads/main' &&
+      github.actor == 'premsethutmc' && github.run_attempt == 1 &&
+      inputs.approval == 'APPROVE SYNTHETIC TEST'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    # Must be PRE-CREATED with main-only branch policy and owner approval.
+    # Never put this key in repository-wide secrets.
+    environment: english-isolated-evaluation
+    env:
+      EVALUATOR_SHA: 256d54f5d28cd546d0790d7001ed4ec3a307bd37
+    steps:
+      - name: Require independently configured owner gate
+        env:
+          ENABLED: ${{ vars.ISOLATED_ENGLISH_EVAL_ENABLED }}
+        run: test "$ENABLED" = 'APPROVED'
+      - name: Fetch public immutable sources (no checkout credential)
+        run: |
+          set -eu
+          mkdir control source
+          for dir in control source; do
+            git -C "$dir" init -q
+            git -C "$dir" remote add origin https://github.com/premsethutmc/openpath.git
+          done
+          git -C control fetch -q --depth=1 origin "$GITHUB_SHA"
+          git -C control checkout -q --detach FETCH_HEAD
+          git -C source fetch -q --depth=1 origin "$EVALUATOR_SHA"
+          git -C source checkout -q --detach FETCH_HEAD
+          test "$(git -C source rev-parse HEAD)" = "$EVALUATOR_SHA"
+      - name: Install pinned dependencies without provider credentials
+        run: |
+          set -eu
+          python3 -m venv .venv
+          .venv/bin/pip install -r source/backend/requirements.txt
+          cd source/frontend
+          npm ci --ignore-scripts --no-audit --no-fund
+      - name: Isolated run (key only in this step; no raw output)
+        env:
+          OPENPATH_LLM_API_KEY: ${{ secrets.OPENAI_SYNTHETIC_TEST_KEY }}
+          TEST_MODEL: ${{ inputs.model }}
+          TEST_INPUT_PRICE: ${{ inputs.input_price }}
+          TEST_OUTPUT_PRICE: ${{ inputs.output_price }}
+        run: .venv/bin/python control/tools/english-ci/isolated_evaluator.py source
+      - name: Remove runner-local database, reports and source
+        if: always()
+        run: |
+          rm -rf -- "$GITHUB_WORKSPACE/source" "$GITHUB_WORKSPACE/control" "$GITHUB_WORKSPACE/.venv"
