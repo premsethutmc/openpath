@@ -43,7 +43,7 @@ test('two synthetic sittings get separate checks and retests; third sitting repo
   const flow=new ExamJourney(undefined,undefined,seen);for(const q of QUESTIONS)flow.reading(q.id,q.answer);
   await flow.analyse(EXAMPLE_WRITING,true);assert.equal(flow.snapshot().checks.length,8);
   for(const q of flow.snapshot().checks){assert.ok(!oldIds.has(q.id));oldIds.add(q.id);flow.answer(q.id,1-BANK.find(item=>item.id===q.id)!.answer);}
-  flow.finishChecks();for(const skill of flow.snapshot().lessons)flow.markTaught(skill);flow.startReassessment();
+  flow.finishChecks();for(const skill of flow.snapshot().lessons){flow.guidedAction(skill,'start');flow.guidedAction(skill,'reveal');flow.guidedAction(skill,'complete');}flow.startReassessment();
   assert.equal(flow.snapshot().fresh.length,8);
   for(const q of flow.snapshot().fresh){assert.ok(!oldIds.has(q.id));oldIds.add(q.id);flow.answer(q.id,REASSESSMENT.find(item=>item.id===q.id)!.answer);}
   flow.finish();assert.ok(flow.summary().every(r=>r.correct===0&&r.after===2));seen=flow.snapshot().seen;

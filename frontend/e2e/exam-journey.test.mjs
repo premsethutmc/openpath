@@ -17,8 +17,12 @@ test('mobile synthetic journey completes without network, hides clues, preserves
  assert.equal(await page.getByText('Expected answer:',{exact:false}).count(),0);
  for(const wrong of [1,0,0,1,0,0,0,0])await page.locator('fieldset button').nth(wrong).click();
  await page.getByRole('button',{name:'Choose targeted teaching'}).click();
- const lessons=page.getByRole('button',{name:'I have read this lesson',exact:true});while(await lessons.count())await lessons.first().click();
+ assert.equal(await page.getByRole('button',{name:'Start fresh questions',exact:true}).isDisabled(),true);
+ const cards=page.locator('[data-guided-skill]');assert.equal(await cards.count(),4);
+ for(let i=0;i<4;i++){const card=cards.nth(i);await card.getByRole('button',{name:'Try guided practice',exact:true}).click();await card.getByRole('button',{name:'Show a hint',exact:true}).click();await card.getByRole('button',{name:'Show the worked answer',exact:true}).click();await card.getByRole('button',{name:'Finish supported lesson',exact:true}).click();}
+ assert.equal(await page.getByText('Supported lesson complete.',{exact:false}).count(),4);
  await page.getByRole('button',{name:'Start fresh questions'}).click();
+ assert.equal(await page.locator('[data-guided-skill]').count(),0);assert.equal(await page.getByRole('button',{name:'Show a hint',exact:true}).count(),0);
  for(let i=0;i<8;i++)await page.locator('fieldset button').first().click();
  await page.getByRole('button',{name:'Finish reassessment'}).click();
  await page.getByRole('heading',{name:'Evidence from this sitting'}).waitFor();

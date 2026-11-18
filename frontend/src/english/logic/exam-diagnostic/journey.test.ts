@@ -11,7 +11,7 @@ test('reading and writing -> validated contextual/grammar hypotheses -> checks -
  f.startReassessment();assert.equal(f.snapshot().phase,'checks');
  for(const q of f.snapshot().checks)f.answer(q.id,1-key(q.id));f.finishChecks();assert.equal(f.snapshot().phase,'teaching');
  f.startReassessment();assert.equal(f.snapshot().phase,'teaching');
- for(const s of f.snapshot().lessons){assert.ok(f.lesson(s));f.markTaught(s);}f.startReassessment();assert.equal(f.snapshot().phase,'reassessment');
+ for(const s of f.snapshot().lessons){assert.ok(f.lesson(s));f.guidedAction(s,'start');f.guidedAction(s,'reveal');f.guidedAction(s,'complete');}f.startReassessment();assert.equal(f.snapshot().phase,'reassessment');
  assert.ok(f.snapshot().fresh.every(q=>!('answer' in q)&&!('explanation' in q)));
  const ids=f.snapshot().checks.map(q=>q.id);assert.ok(f.snapshot().fresh.every(q=>!ids.includes(q.id)));
  f.finish();assert.equal(f.snapshot().phase,'reassessment');for(const q of f.snapshot().fresh)f.answer(q.id,key(q.id));f.finish();
@@ -35,7 +35,7 @@ test('exposure survives new controller; revealed checks or retests are never reu
  const f=ready();await f.analyse(EXAMPLE_WRITING,true);const g=ready(new ExamJourney(undefined,undefined,f.snapshot().seen));await g.analyse(EXAMPLE_WRITING,true);assert.equal(g.snapshot().checks.length,8);assert.ok(g.snapshot().checks.every(q=>!f.snapshot().seen.includes(q.id)));
  const exhausted=ready(new ExamJourney(undefined,undefined,g.snapshot().seen));await exhausted.analyse(EXAMPLE_WRITING,true);assert.equal(exhausted.snapshot().checks.length,0);
  const h=ready(new ExamJourney(undefined,undefined,REASSESSMENT.map(q=>q.id)));await h.analyse(EXAMPLE_WRITING,true);
- for(const q of h.snapshot().checks)h.answer(q.id,1-key(q.id));h.finishChecks();for(const s of h.snapshot().lessons)h.markTaught(s);h.startReassessment();assert.equal(h.snapshot().phase,'complete');assert.ok(h.summary().every(r=>r.after===null));
+ for(const q of h.snapshot().checks)h.answer(q.id,1-key(q.id));h.finishChecks();for(const s of h.snapshot().lessons){h.guidedAction(s,'start');h.guidedAction(s,'reveal');h.guidedAction(s,'complete');}h.startReassessment();assert.equal(h.snapshot().phase,'complete');assert.ok(h.summary().every(r=>r.after===null));
 });
 test('late result and repeated clicks cannot revive cancelled analysis or double-send',async()=>{
  let resolve!:(x:unknown)=>void,calls=0,body:Parameters<typeof simulatedPost>[0];
@@ -74,4 +74,11 @@ test('answer review and next actions stay hidden until independent sitting compl
 test('revision cannot replace independent checks or trigger model calls',async()=>{
  let calls=0;const f=ready(new ExamJourney(SIMULATED_INFO,b=>{calls++;return simulatedPost(b);}));assert.throws(()=>f.saveRevision(EXAMPLE_WRITING));
  await f.analyse(EXAMPLE_WRITING,true);assert.throws(()=>f.saveRevision(EXAMPLE_WRITING));assert.equal(calls,1);
+});
+test('read acknowledgement cannot skip guided learning; support never changes independent evidence',async()=>{
+ const f=ready();await f.analyse(EXAMPLE_WRITING,true);for(const q of f.snapshot().checks)f.answer(q.id,1-key(q.id));f.finishChecks();
+ const before=JSON.stringify(f.summary());for(const skill of f.snapshot().lessons){f.markTaught(skill);f.guidedAction(skill,'complete');}f.startReassessment();assert.equal(f.snapshot().phase,'teaching');assert.deepEqual(f.snapshot().taught,[]);
+ for(const skill of f.snapshot().lessons){f.guidedAction(skill,'start');f.guidedAction(skill,'hint');f.guidedAction(skill,'reveal');f.guidedAction(skill,'complete');}
+ assert.equal(JSON.stringify(f.summary()),before);f.startReassessment();assert.equal(f.snapshot().phase,'reassessment');
+ const snapshot=f.snapshot();f.guidedAction(snapshot.lessons[0],'retry');assert.deepEqual(f.snapshot(),snapshot);
 });

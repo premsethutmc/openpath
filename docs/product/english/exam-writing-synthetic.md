@@ -33,4 +33,13 @@ The next milestone adds a second independent verification and reassessment form 
 
 After independent checks finish, a review explains each selected and expected answer and gives a bounded next step. Optional own-writing revision is memory-only and explicitly unassessed: completing it does not change scores or establish writing transfer. Reading follow-up is also accessible after a failed writing analysis; if opened, later writing retries are labelled supported practice. Validated not-observable coverage is retained instead of silently discarded.
 
-Still open: more reading passages and transfer forms, interactive worked-example teaching, genuinely independently assessed natural-writing transfer, wider language coverage, measured diagnostic accuracy and delayed retention. Existing English-core retention/planner modules should be reused when an approved learner-mode integration is built, not duplicated into a synthetic mastery ledger. AI/content review is required; external educator approval is not an owner-required gate, and no human validation is claimed.
+Still open: more reading passages and transfer forms, deeper reading teaching, genuinely independently assessed natural-writing transfer, wider language coverage, measured diagnostic accuracy and delayed retention. Existing English-core retention/planner modules should be reused when an approved learner-mode integration is built, not duplicated into a synthetic mastery ledger. AI/content review is required; external educator approval is not an owner-required gate, and no human validation is claimed.
+
+
+## Guided teaching depth (2026-11-18)
+
+Each targeted writing area now has a worked example with explicit reasoning steps and a separate guided practice question. Learners can request a hint, retry after an incorrect answer or deliberately reveal the worked answer. Incorrect feedback does not immediately expose the key. The old read-acknowledgement cannot unlock reassessment: the supported lesson must reach its own completion state first.
+
+This follows the existing English-core essay lesson programme’s distinction between intervention progress and assessment evidence. No synthetic mastery ledger is created. A correct guided response, hint, reveal or lesson completion never alters the independent check score. Guided content disappears before the separate fresh unaided reassessment. Teaching examples and questions are distinct from every verification/reassessment form.
+
+These are narrow authored worked examples, not calibrated courses. Reading teaching remains shorter, natural-writing revision remains unassessed, and delayed retention/general writing transfer remain unestablished. Content underwent AI review; no external educator or human validation is claimed or required as a gate.
