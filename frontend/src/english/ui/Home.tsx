@@ -10,6 +10,8 @@ import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { dueWords } from "../logic/state.ts";
 import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
+import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
+import { dictationSummary } from "../logic/dictation/dictation.ts";
 
 const STATUS_WORDS: Record<string, string> = {
   not_started: "not started",
@@ -26,7 +28,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -54,6 +56,8 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
       <BeeCard learner={learner} onBee={onBee} />
       <MyWordsCard learner={learner} onOpen={onMyWords} />
       <MyBooksCard learner={learner} onOpen={onMyBooks} />
+      <NewWordsCard learner={learner} onOpen={onNewWords} />
+      <ListenWriteCard learner={learner} onOpen={onListenWrite} />
       <VocabCard learner={learner} onOpen={onVocab} />
       <h2 className="section-title general-title">General English</h2>
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
@@ -213,6 +217,51 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
       {last && <p className="small">Last time: about {last.estimate.toLocaleString("en-IN")} word families</p>}
       <button type="button" className="secondary" onClick={onOpen}>
         {last ? "Check again" : "Check my words"}
+      </button>
+    </section>
+  );
+}
+
+/** New words (logic/vocabulary/daily-words.ts): candidate content, so never offered in a pilot build. */
+function NewWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = wordsSummary(learner.wordLearnRecords(), learner.clock(), learner.dayFn());
+  const todayDone = s.newToday >= NEW_PER_DAY && s.dueNow === 0;
+  return (
+    <section className="hub-card plain" aria-labelledby="new-words-card-title">
+      <h2 id="new-words-card-title">
+        <span aria-hidden="true">🌱 </span>New words
+      </h2>
+      <p>Five new words a day, with meanings and sentences. They come back until you know them.</p>
+      {s.learning + s.learnt > 0 && (
+        <p className="small">
+          {s.learnt} learnt · {s.learning} still learning{todayDone ? " · done for today" : s.dueNow ? ` · ${s.dueNow} to see again` : ""}
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.learning + s.learnt ? "Open New words" : "Learn new words"}
+      </button>
+    </section>
+  );
+}
+
+/** Listen and write (logic/dictation): candidate content, so never offered in a pilot build. */
+function ListenWriteCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = dictationSummary(learner.dictationRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="listen-write-card-title">
+      <h2 id="listen-write-card-title">
+        <span aria-hidden="true">🎧 </span>Listen and write
+      </h2>
+      <p>Hear a sentence and write it: spelling, capital letters and full stops together. Five sentences.</p>
+      {s.sentences > 0 && (
+        <p className="small">
+          {s.perfectFirst} of {s.sentences} sentences right first time
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.sentences ? "Write five more" : "Try Listen and write"}
       </button>
     </section>
   );

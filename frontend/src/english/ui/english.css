@@ -2215,3 +2215,98 @@ h3.sub {
 .bee-drill-marks .miss {
   color: var(--wrong);
 }
+
+/* ------------------------------------------------------------ New words (ui/NewWords.tsx) and Listen and write (ui/ListenWrite.tsx) */
+.words-bar {
+  width: 100%;
+  height: 8px;
+  margin: 8px 0 12px;
+}
+.word-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 12px 0 16px;
+  text-align: center;
+}
+.word-card .vocab-word {
+  margin: 6px 0 2px;
+}
+.word-say {
+  font-size: 24px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.word-kind {
+  margin: 0 0 10px;
+}
+.word-meaning {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.word-sentence {
+  margin: 0;
+}
+.word-gap {
+  font-size: 1.25rem;
+  margin: 14px 0 18px;
+}
+.words-know {
+  margin-top: 10px;
+}
+.words-verdict {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 12px 0 4px;
+}
+.words-verdict.right {
+  color: var(--good, #1a7f37);
+}
+.dict-play {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+.dict-play .primary,
+.dict-play .secondary {
+  margin-top: 0;
+}
+.dict textarea {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 6px 0 4px;
+}
+.dict-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+.dict-marks .dict-wrong {
+  text-decoration: underline wavy;
+  text-decoration-color: var(--bad, #b42318);
+  color: var(--bad, #b42318);
+}
+.dict-marks .dict-capital {
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
+}
+.dict-marks .dict-extra {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.dict-marks .dict-missing {
+  color: var(--bad, #b42318);
+}
+.dict-fixes {
+  margin: 4px 0 12px;
+  padding-left: 20px;
+}
+.dict-reveal {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 6px 0 12px;
+}

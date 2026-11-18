@@ -22,6 +22,9 @@ import { type SpellingState, type SpellWord, BANK, bankWords, checkSpelling, pla
 import type { SpellSource } from "./events.ts";
 import { type ListWord, type WordList, LIST_LIMITS, listWords, wordLists } from "./wordlists.ts";
 import type { VocabRecord } from "./vocabulary/size-check.ts";
+import type { Dated, WordRecord } from "./vocabulary/daily-words.ts";
+import type { DictationRecord } from "./dictation/dictation.ts";
+import { calendarDay, dayBasis } from "./calendar.ts";
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
@@ -241,6 +244,34 @@ export class Learner {
   /** Store steps of a vocabulary check, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordVocab(records: readonly VocabRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "vocab", id: this.nextId(), at: this.clock(), record });
+  }
+
+  // ------------------------------------------------------------------ New words and Listen and write (practice-only)
+
+  /** The learner's new-words record with the time of each step, in order. */
+  wordLearnRecords(): Dated[] {
+    return this.events.flatMap((e) => (e.kind === "word_learn" ? [{ record: e.record, at: e.at }] : []));
+  }
+
+  /** Store steps of a new-words sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordWordLearn(records: readonly WordRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "word_learn", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's Listen and write record, in order. */
+  dictationRecords(): DictationRecord[] {
+    return this.events.flatMap((e) => (e.kind === "dictation" ? [e.record] : []));
+  }
+
+  /** Store steps of a Listen and write sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordDictation(records: readonly DictationRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "dictation", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's calendar day for a time (their recorded time zone, else UTC). */
+  dayFn(): (iso: string) => string {
+    const basis = dayBasis(this.state);
+    return (iso) => calendarDay(iso, basis);
   }
 
   // ------------------------------------------------------------------ My Books (logic/books.ts)
