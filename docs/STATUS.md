@@ -4,6 +4,12 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## English reading teaching milestone (2026-11-18)
+- Branch `feat/english-reading-guided-2026-11-18`, based on main `dc7572e8` (PR #209).
+- Four worked reading passages + distinct guided questions with hints/retry/reveal; independent transfer remains separate.
+- Reuses one supported-lesson engine and shared UI for writing and reading; completion never awards evidence/mastery.
+- Existing synthetic/provider/privacy controls unchanged. Exact-head browser/aggregate CI required before merge.
+
 ## English guided teaching milestone (2026-11-18)
 - Branch `feat/english-guided-teaching-2026-11-18`, based on main `4552ce4a` (PR #207).
 - Four worked examples with reasoning, separate guided practice, hints/retry/reveal and supported completion gate.

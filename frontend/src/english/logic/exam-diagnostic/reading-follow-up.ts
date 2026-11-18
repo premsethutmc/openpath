@@ -1,4 +1,5 @@
 /** Small, deterministic reading transfer loop. No model, score prediction or mastery write. */
+import {ReadingGuidedTeaching,type ReadingSkill} from './reading-guided-teaching.ts';
 import { LESSONS, report, validSession, type Session } from './session.ts';
 
 // Separate from the legacy preview's CHECKS, whose exposures were never recorded.
@@ -37,10 +38,11 @@ const scope = 'This is one new question immediately after a lesson, not proof of
 /**
  * A visit-scoped controller. Persist seenIds outside this class before rendering a check if
  * freshness must survive reload. A supplied seen ID includes display without submission.
- * Completing a lesson acknowledges display; it does not claim the learner understood it.
+ * Completing supported practice records teaching progress, not independent understanding.
  */
 export class ReadingFollowUp {
   private state: ReadingFollowUpState;
+  private guided:ReadingGuidedTeaching|null=null;
   constructor(session: Session, previouslySeen: readonly string[] = []) {
     if (!validSession(session) || session.phase !== 'report') throw new Error('Finish the initial diagnostic first.');
     this.state = {
@@ -55,6 +57,7 @@ export class ReadingFollowUp {
       const skill = this.state.skills[this.state.position];
       const q = bank.find(q => q.skill === skill && !this.state.seenIds.includes(q.id));
       if (q && lessons[skill]) {
+        this.guided=new ReadingGuidedTeaching(skill as ReadingSkill);
         this.state = { ...this.state, phase: 'lesson', lesson: { skill, text: lessons[skill] }, question: null, answer: null };
         return;
       }
@@ -62,11 +65,20 @@ export class ReadingFollowUp {
         skill, initial: 'possible_gap', outcome: 'no_fresh_item', itemId: null, explanation: 'No unseen transfer question is available. Previously displayed items cannot count as fresh evidence.', quote: '', scope,
       }] };
     }
+    this.guided=null;
     this.state = { ...this.state, phase: 'complete', lesson: null, question: null, answer: null };
+  }
+  teachingSnapshot(){return this.state.phase==='lesson'?this.guided?.snapshot()??null:null;}
+  guidedAction(action:'start'|'hint'|'answer'|'retry'|'reveal'|'complete',index?:number){
+    if(this.state.phase!=='lesson'||!this.guided)return;
+    const lesson=this.guided;
+    if(action==='start')lesson.startPractice();else if(action==='hint')lesson.showHint();
+    else if(action==='answer'&&index!==undefined)lesson.answer(index);else if(action==='retry')lesson.retry();
+    else if(action==='reveal')lesson.revealAnswer();else if(action==='complete')lesson.complete();
   }
   /** Transition before displaying the item; record its exposure even if the learner abandons it. */
   completeLesson(): void {
-    if (this.state.phase !== 'lesson' || !this.state.lesson) return;
+    if (this.state.phase !== 'lesson' || !this.state.lesson || this.guided?.snapshot().phase!=='complete') return;
     const q = bank.find(q => q.skill === this.state.lesson!.skill && !this.state.seenIds.includes(q.id));
     if (!q) return;
     this.state = { ...this.state, phase: 'check', lesson: null,
