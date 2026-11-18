@@ -42,4 +42,11 @@ Each targeted writing area now has a worked example with explicit reasoning step
 
 This follows the existing English-core essay lesson programme’s distinction between intervention progress and assessment evidence. No synthetic mastery ledger is created. A correct guided response, hint, reveal or lesson completion never alters the independent check score. Guided content disappears before the separate fresh unaided reassessment. Teaching examples and questions are distinct from every verification/reassessment form.
 
-These are narrow authored worked examples, not calibrated courses. Reading teaching remains shorter, natural-writing revision remains unassessed, and delayed retention/general writing transfer remain unestablished. Content underwent AI review; no external educator or human validation is claimed or required as a gate.
+These are narrow authored worked examples, not calibrated courses. Natural-writing revision remains unassessed, and delayed retention/general writing transfer remain unestablished. Content underwent AI review; no external educator or human validation is claimed or required as a gate.
+
+
+## Deeper reading teaching (2026-11-18)
+
+The four reading follow-up skills now use the same supported-lesson state machine and UI as writing: a worked passage with explicit reasoning, a distinct guided question, optional hint, incorrect-answer retry and deliberate answer reveal. The unaided transfer question stays locked until supported completion. Guided work does not enter the transfer results or exposure history, and its answers/hints disappear when the independent question begins.
+
+Worked/guided passages are distinct from the original library task, legacy practice and private transfer bank. Correctness in supported practice remains intervention progress only, following the existing English-core lesson/evidence boundary. AI/content review is not human validation or calibration. Reading still has one independent transfer item per skill; more passages, equivalently calibrated forms, independent natural writing and delayed retention remain open.

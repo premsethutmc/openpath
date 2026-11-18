@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
 import type {WorkspaceSelection} from './EnglishWorkspace.tsx';
+import {withWorkspaceBank} from '../../logic/essay-live/workspace-bank.ts';
 import {withWorkspaceLessons} from '../../logic/essay-live/workspace-lessons.ts';
 import {createWorkspaceProfile} from '../../logic/essay-live/workspace-profiles.ts';
 import {ArgumentWorkspaceView} from './ArgumentWorkspaceView.tsx';
@@ -57,7 +58,7 @@ const GAP = { suspected: "Suspected from your essay: not checked with bank quest
 const screenFor = (v: StudioView): Screen => (v.stage === "write" ? "essay" : v.stage === "diagnose" ? "check" : v.stage === "plan" || v.stage === "learn" ? "path" : v.stage === "rewrite" ? "rewrite" : "profile");
 
 export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
-  const content = useMemo(() => workspace ? withWorkspaceLessons(loadContent()) : loadContent(), [workspace]);
+  const content = useMemo(() => workspace ? withWorkspaceBank(withWorkspaceLessons(loadContent())) : loadContent(), [workspace]);
   const workspaceProfile=useMemo(()=>workspace?createWorkspaceProfile(workspace.goal,workspace.difficulty,content):null,[workspace,content]);
   const profileId=workspace?`english-workspace-synthetic-${workspace.goal}-${workspace.difficulty}`:STUDIO_PROFILE_ID;
   const [syntheticConfirmed,setSyntheticConfirmed]=useState(false);
@@ -465,7 +466,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                       <Status cap={t.root} />
                       {t.nodes.some((n) => n.competency === t.root && n.steps.some((x) => x.kind === "independent_check" && x.status === "blocked")) && (
                         <p className="small" data-verification="unavailable">
-                          Mastery verification is not available for {name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the selected provisional practice target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.
+                          {workspace?`Candidate independent checking is not available for ${name(t.root)} yet: eligible unseen questions are insufficient after exposure and retention reservations. Teaching remains available; missing content is not a learner deficit.`:`Mastery verification is not available for ${name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the selected provisional practice target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.`}
                         </p>
                       )}
                       {(() => {
@@ -503,7 +504,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                                 <li key={s.id} data-step={s.kind} data-status={s.status}>
                                   <span className="essay-node" />
                                   {STEP_LABEL[s.kind]}
-                                  <small>{s.status === "blocked" ? s.content.note : STEP_STATUS[s.status]}</small>
+                                  <small>{s.status === "blocked" ? s.content.note : workspace&&s.status==="green"?"Shown on candidate independent practice checks":workspaceText(STEP_STATUS[s.status])}</small>
                                 </li>
                               ))}
                             </ol>

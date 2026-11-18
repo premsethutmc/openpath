@@ -42,7 +42,7 @@ export function feedbackFor(c: AppContent, item: Item, response: Response): Feed
   // dictation: the rule's examples could be words still to come in the check, so only the pattern's name is given
   if (item.format === "typed:dictation") explanation = lesson && !mentionsDictationWord(c, lesson.title, item) ? `This word follows the pattern "${lesson.title}".` : "";
   let variantNote: string | null = null;
-  if (correct && response.kind === "typed" && item.answers && item.answers.length > 1) {
+  if (correct && response.kind === "typed" && item.format !== "typed:grammar" && item.answers && item.answers.length > 1) {
     const typed = response.text.trim().toLowerCase();
     if (typed !== item.answers[0].toLowerCase()) variantNote = `"${response.text.trim()}" is also correct (another accepted spelling). OpenPath teaches British spelling: ${item.answers[0]}.`;
   }

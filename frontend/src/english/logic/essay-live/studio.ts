@@ -84,6 +84,7 @@ import {
 import g8Profile from "../../../../../content/english/essay/g8-writing.json";
 import samplesJson from "../../../../../content/english/essay/samples.json";
 import type { AppContent, Lesson } from "../content.ts";
+import type { WorkspaceBankContent } from "./workspace-bank.ts";
 import type { Feedback } from "../feedback.ts";
 import type { Learner } from "../learner.ts";
 
@@ -164,6 +165,11 @@ export function essayContext(content: AppContent, verification: VerificationPoli
   }
   // the pilot's pools are existing item-role metadata: a question reserved for one use is never taken for another
   const pools = new Map([...content.pilot.pools].map(([id, p]) => [id, p.pool]));
+  // Workspace-only authored roles augment, never rewrite, the reviewed pilot manifest.
+  for (const [id,pool] of (content as Partial<WorkspaceBankContent>).workspacePools ?? []) {
+    if (pools.has(id) && pools.get(id) !== pool) throw new Error("Conflicting assessment role metadata.");
+    pools.set(id,pool);
+  }
   return { ctx: content.ctx, profile: indexCompetencyProfile(profile, content.index), lessons, teachingText, pools, policy: ESSAY_POLICY_DRAFT, verification };
 }
 

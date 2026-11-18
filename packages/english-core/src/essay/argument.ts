@@ -23,6 +23,13 @@ export interface ArgumentFeedback {
  evaluator:{id:string;version:string;model:string}|null;findings:ArgumentFinding[];notObservable:ArgumentArea[];
  limitation:string;
 }
+/** A learner-authored response to coaching, not an answer key or assessment. */
+export interface ArgumentPractice {
+ version:'argument-practice@1';id:string;at:string;artifactId:string;feedbackEventId:string;findingIndex:number;
+ finding:ArgumentFinding;prompt:string;text:string;dataUse:'synthetic_test';assistance:'coached_practice';
+}
+/** Teaching sequence, never an inferred severity ranking. */
+export const ARGUMENT_PRACTICE_ORDER:readonly ArgumentArea[]=['claim','reasons','evidence','warrant','counterargument','organization','clarity'];
 export interface ArgumentGatewayInfo {available:boolean;id:string;version:string;model:string;rubric:string;protocols:{observe:string;rewrite?:string}}
 export interface ArgumentRequest {protocol:'essay-observe.v2';rubric:typeof ARGUMENT_RUBRIC;request_id:string;grade:0|7;essay:{id:string;text:string;words:number};max_observations:number;task_context:{stage:ArgumentStage;topic:string;prompt:string;previous?:string}}
 export type ArgumentPost=(body:{task:'observe';request:ArgumentRequest;data_use:'synthetic_test'})=>Promise<unknown>;
@@ -52,7 +59,8 @@ export function argumentFeedbackEvent(meta:EventMeta,feedback:ArgumentFeedback):
 export function argumentRecords(events:readonly LedgerEvent[]){
  const artifacts=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_artifact'?[e.record.artifact]:[]);
  const feedback=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_feedback'?[e.record.feedback]:[]);
- return {artifacts:structuredClone(artifacts),feedback:structuredClone(feedback)};
+ const practice=events.flatMap(e=>e.kind==='essay'&&e.record.type==='argument_practice'?[e.record.practice]:[]);
+ return {artifacts:structuredClone(artifacts),feedback:structuredClone(feedback),practice:structuredClone(practice)};
 }
 export const SELF_REVIEW_QUESTIONS:Record<ArgumentArea,string>={
  claim:'What exactly are you asking the reader to accept, and where have you stated it?',

@@ -59,3 +59,23 @@ test('initial writing link preserves its original prompt and cannot impersonate 
  assert.equal(result.stage,'for');assert.ok(result.task.topic.includes('business'));
  assert.throws(()=>new ArgumentWorkspace(learner,{goal:'general',difficulty:'foundation',grade:7}));
 });
+
+test('own-word practice links exact finding and persists without changing stage or estimates',async()=>{
+ const content=loadContent(),repo=new MemoryRepo(),clock=()=> '2026-11-18T09:00:00Z';
+ const learner=await Learner.create(content,repo,'Synthetic practice','learner',clock,'argument-practice-test','this_device_only');
+ const flow=new ArgumentWorkspace(learner,{goal:'general',difficulty:'foundation',info,post:async b=>output(b)});
+ await flow.submit(text,{syntheticConfirmed:true});const id=flow.view().artifacts[0].artifact.id,before=JSON.stringify(learner.state.ledger.composite.nodes);
+ await assert.rejects(flow.savePractice(id,0,'An invented response with enough detail.',{syntheticConfirmed:false,feedbackEventId:flow.view().concerns[0].feedbackEventId}));
+ await assert.rejects(flow.savePractice(id,9,'An invented response with enough detail.',{syntheticConfirmed:true,feedbackEventId:flow.view().concerns[0].feedbackEventId}));
+ const v=await flow.savePractice(id,0,'I would ask who uses the space before claiming it serves everyone.',{syntheticConfirmed:true,feedbackEventId:flow.view().concerns[0].feedbackEventId});
+ assert.equal(v.busy,false);assert.equal(v.stage,'for');assert.equal(v.practice.length,1);assert.equal(v.concerns[0].practice.length,1);assert.equal(v.practice[0].assistance,'coached_practice');assert.equal(v.practice[0].finding.quote,v.artifacts[0].feedback!.findings[0].quote);assert.ok(v.practice[0].feedbackEventId);assert.equal(JSON.stringify(learner.state.ledger.composite.nodes),before);
+ const staleFeedbackId=v.concerns[0].feedbackEventId;await flow.retryAnalysis(id);await assert.rejects(flow.savePractice(id,0,'A response to the previously displayed concern.',{syntheticConfirmed:true,feedbackEventId:staleFeedbackId}));assert.equal(flow.view().practice.length,1);assert.equal(flow.view().concerns[0].practice.length,0);
+ const reloaded=await Learner.open(content,repo,'argument-practice-test',clock);assert.equal(new ArgumentWorkspace(reloaded,{goal:'general',difficulty:'foundation'}).view().practice[0].text,v.practice[0].text);
+ for(const stage of ['for','against','revision'])await flow.submit(text+(stage==='revision'?' A revised qualification.':''),{syntheticConfirmed:true});flow.startNewCycle();assert.equal(flow.view().practice.length,1);assert.equal(flow.view().concerns.length,0);await assert.rejects(flow.savePractice(id,0,'An invented response with enough detail.',{syntheticConfirmed:true,feedbackEventId:'old-feedback'}));
+});
+test('practice double submit and cancellation before persistence cannot create extra responses',async()=>{
+ const store=ledger(),flow=new ArgumentWorkspace(store,{goal:'general',difficulty:'foundation',info,post:async b=>output(b)});await flow.submit(text,{syntheticConfirmed:true});const id=flow.view().artifacts[0].artifact.id;
+ let release!:(x:{id:string;at:string;session:string}[])=>void;store.essayMeta=()=>new Promise(r=>{release=r;});
+ const pending=flow.savePractice(id,0,'I would ask what evidence supports my own reason.',{syntheticConfirmed:true,feedbackEventId:flow.view().concerns[0].feedbackEventId});
+ await assert.rejects(flow.savePractice(id,0,'A second response must not be saved concurrently.',{syntheticConfirmed:true,feedbackEventId:flow.view().concerns[0].feedbackEventId}),/already/);flow.cancel();release([{id:'cancelled',at:'now',session:'s'}]);await pending;assert.equal(flow.view().practice.length,0);assert.equal(flow.view().busy,false);
+});

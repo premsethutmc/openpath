@@ -1,5 +1,5 @@
 /** One ledger-backed writing cycle. No model response is an ability estimate or a mastery update. */
-import {ARGUMENT_RUBRIC,ARGUMENT_LIMITATION,SELF_REVIEW_QUESTIONS,argumentTask,argumentRecords,argumentRequest,argumentArtifactEvent,argumentFeedbackEvent,validateArgumentFeedback,wordCount,type ArgumentArtifact,type ArgumentFeedback,type ArgumentGatewayInfo,type ArgumentPost,type ArgumentStage,type WorkspaceGoal,type WorkspaceDifficulty,type EssayEvent} from '../../../../../packages/english-core/src/index.ts';
+import {ARGUMENT_RUBRIC,ARGUMENT_COACHING,ARGUMENT_PRACTICE_ORDER,ARGUMENT_LIMITATION,SELF_REVIEW_QUESTIONS,argumentTask,argumentRecords,argumentRequest,argumentArtifactEvent,argumentFeedbackEvent,validateArgumentFeedback,wordCount,type ArgumentArtifact,type ArgumentPractice,type ArgumentFeedback,type ArgumentGatewayInfo,type ArgumentPost,type ArgumentStage,type WorkspaceGoal,type WorkspaceDifficulty,type EssayEvent} from '../../../../../packages/english-core/src/index.ts';
 import type {AppEvent} from '../events.ts';
 export interface ArgumentLedger {
  readonly events:readonly AppEvent[];
@@ -26,8 +26,10 @@ export class ArgumentWorkspace {
   const artifacts=records.artifacts.filter(a=>a.cycle===cycle).map(decorate);
   const history=records.artifacts.filter(a=>a.goal===this.options.goal&&a.difficulty===this.options.difficulty&&a.cycle!==cycle).map(decorate);
   const stage=stages.find(s=>!artifacts.some(a=>a.artifact.stage===s))??null;
+  const feedbackEventIdFor=(id:string)=>this.ledger.events.filter((e):e is EssayEvent=>e.kind==='essay'&&e.record.type==='argument_feedback'&&e.record.feedback.artifactId===id).at(-1)!.id;
+  const concerns=artifacts.flatMap(({artifact,feedback})=>feedback?.status==='observations_only'?feedback.findings.map((finding,findingIndex)=>({artifactId:artifact.id,feedbackEventId:feedbackEventIdFor(artifact.id),findingIndex,finding,practice:records.practice.filter(p=>p.artifactId===artifact.id&&p.feedbackEventId===feedbackEventIdFor(artifact.id)&&p.findingIndex===findingIndex&&JSON.stringify(p.finding)===JSON.stringify(finding))})):[]).sort((a,b)=>ARGUMENT_PRACTICE_ORDER.indexOf(a.finding.area)-ARGUMENT_PRACTICE_ORDER.indexOf(b.finding.area));
   const info=this.options.info;const analysisAvailable=!!(info?.available&&info.rubric===ARGUMENT_RUBRIC&&info.protocols.observe==='essay-observe.v2'&&this.options.post);
-  return {cycle,cycleNumber:this.cycleNumber,stage,task:argumentTask(this.options.goal,this.options.difficulty,this.cycleNumber,stage??'revision'),artifacts,history,selfReviewQuestions:structuredClone(SELF_REVIEW_QUESTIONS),analysisAvailable,busy:this.busy,limitations:[ARGUMENT_LIMITATION,'Self-review prompts are general questions, not detected mistakes. A saved revision is not proof of improvement.','The selected goal and starting difficulty are preferences, not measured proficiency. Topics are practice, not official exam questions.','All writing here must be invented test text. Committed artifacts live in the existing device learner record; no audio is collected.']};
+  return {cycle,cycleNumber:this.cycleNumber,stage,task:argumentTask(this.options.goal,this.options.difficulty,this.cycleNumber,stage??'revision'),artifacts,history,concerns,practice:records.practice.filter(p=>[...artifacts,...history].some(a=>a.artifact.id===p.artifactId)),selfReviewQuestions:structuredClone(SELF_REVIEW_QUESTIONS),analysisAvailable,busy:this.busy,limitations:[ARGUMENT_LIMITATION,'Self-review prompts are general questions, not detected mistakes. A saved revision is not proof of improvement.','The selected goal and starting difficulty are preferences, not measured proficiency. Topics are practice, not official exam questions.','All writing here must be invented test text. Committed artifacts live in the existing device learner record; no audio is collected.']};
  }
  async submit(text:string,options:{syntheticConfirmed:boolean;revisionOf?:string;sourceEssayId?:string;initialPrompt?:string}){
   if(this.busy)throw Error('A writing operation is already in progress.');
@@ -60,6 +62,22 @@ export class ArgumentWorkspace {
   if(token!==this.operation)return;
   const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return;
   await this.ledger.recordEssay(argumentFeedbackEvent(meta,{...feedback,artifactId:artifact.id,at:meta.at}));
+ }
+ async savePractice(artifactId:string,findingIndex:number,text:string,options:{syntheticConfirmed:boolean;feedbackEventId:string}){
+  if(this.busy)throw Error('A writing operation is already in progress.');
+  if(options.syntheticConfirmed!==true)throw Error('Confirm this is invented test writing, not a real person’s work.');
+  if(typeof text!=='string'||text.trim().length<20||text.length>4000)throw Error('Write your own response in 20–4,000 characters.');
+  if(!this.view().artifacts.some(a=>a.artifact.id===artifactId))throw Error('Choose a concern from the current writing cycle.');
+  const source=this.ledger.events.filter((e):e is EssayEvent=>e.kind==='essay'&&e.record.type==='argument_feedback'&&e.record.feedback.artifactId===artifactId).at(-1);
+  if(!source||source.id!==options.feedbackEventId||source.record.type!=='argument_feedback'||source.record.feedback.status!=='observations_only'||!Number.isInteger(findingIndex)||findingIndex<0)throw Error('No validated coaching concern is available.');
+  const finding=source.record.feedback.findings[findingIndex];if(!finding)throw Error('No validated coaching concern is available.');
+  const token=++this.operation;this.busy=true;
+  try{
+   const [meta]=await this.ledger.essayMeta(1);if(token!==this.operation)return this.view();
+   const practice:ArgumentPractice={version:'argument-practice@1',id:`practice:${meta.id}`,at:meta.at,artifactId,feedbackEventId:source.id,findingIndex,finding:structuredClone(finding),prompt:ARGUMENT_COACHING[finding.area].practicePrompt,text:text.trim(),dataUse:'synthetic_test',assistance:'coached_practice'};
+   await this.ledger.recordEssay({kind:'essay',...meta,record:{type:'argument_practice',practice}});
+   if(token===this.operation)this.busy=false;return this.view();
+  }finally{if(token===this.operation)this.busy=false;}
  }
  async retryAnalysis(artifactId:string){
   if(this.busy)throw Error('A writing operation is already in progress.');
