@@ -22,7 +22,7 @@ test('offline chosen concept adapts to answers, resumes support and keeps own wr
   for(let i=0;i<2;i++){await page.getByRole('button',{name:'Open next concept probe',exact:true}).click();await answer(page,false);if(i===0)assert.equal(await page.getByText('Review completed concept probes',{exact:true}).count(),0);}
   await page.locator('[data-concept-phase="lesson"]').waitFor();assert.equal(await page.getByText('Review completed concept probes',{exact:true}).count(),1);
   await setup(page);await page.getByRole('button',{name:'Articulate both sides',exact:true}).click();const plan=page.locator('[data-concept-phase="lesson"]');await plan.waitFor();assert.match(await plan.textContent(),/not diagnosed from your writing/);
-  await plan.getByRole('button').first().click();await plan.getByRole('button',{name:'Record supported lesson and continue',exact:true}).click();
+  await plan.locator('[data-concept-lesson]').getByRole('button').first().click();await plan.getByRole('button',{name:'Record supported lesson and continue',exact:true}).click();
   for(let i=0;i<2;i++){await page.getByRole('button',{name:'Open supported concept practice',exact:true}).click();await answer(page,true);}
   const next=page.getByRole('button',{name:'Plan the next fresh concept check',exact:true});await next.waitFor();await next.click();await page.locator('[data-concept-phase="waiting"], [data-concept-phase="check"], [data-concept-phase="blocked"]').waitFor();
   await mkdir('../docs/product/essay-learning/screenshots/',{recursive:true});await page.screenshot({path:'../docs/product/essay-learning/screenshots/argument-concept-plan-phone.png',fullPage:true});

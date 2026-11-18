@@ -76,7 +76,7 @@ export function ArgumentConceptPlanView({source,selection,concerns,writingBusy}:
 }
 function ConceptLesson({lesson,locked,complete}:{lesson:NonNullable<Plan['lessons'][number]['content']>;locked:boolean;complete:(correct:boolean)=>Promise<unknown>}){
  const [answer,setAnswer]=useState<number|null>(null);
- return <section><h5>{lesson.title}</h5><p>{lesson.rule}</p>{lesson.examples.map((example,i)=><div key={i}><blockquote>{example.text}</blockquote>{example.note&&<p>{example.note}</p>}</div>)}{lesson.tip&&<p>{lesson.tip}</p>}
+ return <section data-concept-lesson={lesson.id}><h5>{lesson.title}</h5><p>{lesson.rule}</p>{lesson.examples.map((example,i)=><div key={i}><blockquote>{example.text}</blockquote>{example.note&&<p>{example.note}</p>}</div>)}{lesson.tip&&<p>{lesson.tip}</p>}
   <p>{lesson.check.prompt}</p>{lesson.check.options.map((option,i)=><button type="button" key={option} disabled={locked||answer!==null} onClick={()=>setAnswer(i)}>{option}</button>)}
   {answer!==null&&<><p>{answer===lesson.check.answer?'That fits this example.':'Compare your choice with the reasoning.'} {lesson.check.explain}</p><button type="button" disabled={locked} onClick={()=>void complete(answer===lesson.check.answer)}>Record supported lesson and continue</button></>}
  </section>;
