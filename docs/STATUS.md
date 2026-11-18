@@ -4,13 +4,20 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
-## Integrated English workspace (2026-11-18, work in progress)
+## Argument concept learning (2026-11-18, in progress)
+- Branch `feat/english-reasoning-plan-2026-11-18`, based on verified main `d24845b4`.
+- Finding-linked or self-selected concept probes → response-led teaching/practice → fresh/later checks, reusing existing engines in an isolated linked concept record.
+- Task response, idea development, paragraphing and persuasion concepts; no concept result may inflate source writing ability or establish argument validity.
+- Exact source provenance, family/exposure protection and privacy/provider safeguards retained. See `docs/product/english/argument-concept-plan.md`.
+- Local 136 essay/diagnostic and 353 core tests pass; English typecheck/build pass. Exact-head browser/full CI pending; not yet merged.
+
+## Integrated English workspace (2026-11-18, merged)
 - Branch `feat/english-workspace-2026-11-18`, PR #212; initial head `419fca60` based on main `dc7572e8` (#209).
 - Owner clarified comprehensive ongoing grammar/articulation practice, goal-dependent tasks, for/against arguments and own-text repair, not canned rewrites or isolated milestones.
 - Reuses EssayStudio/learner ledger for hypotheses, verification, plans, teaching, independent checks and retention; separate argument observations never imply mastery.
 - Grade7/general/CAT/GRE/GMAT self-selected candidate profiles; 17 specified competencies have teaching, 3 observation-only. 192 candidate role-separated tasks deepen 4 skills × 3 references (12/51 cells); other fresh-check shortages remain.
 - Synthetic only, optional configured evaluator fails closed; no provider activation, real learner data, audio or maths changes. See `docs/product/english/learner-workspace.md`.
-- PR #210 merged as `ba8d1106` after19checks; reading work integrated. Initial workspace CI phone journey/core/build passed; expanded bank and durable own-word drills require new exact-head CI. Not yet merged or live-ready.
+- PR #210 merged as `ba8d1106`; PR #212 merged as `d24845b4`. Exact English head passed 19 CI jobs + Learning Year; combined latest-maths tree passed 123 targeted tests/typecheck/build. Still synthetic, not live-learner-ready.
 
 ## English reading teaching milestone (2026-11-18)
 - Branch `feat/english-reading-guided-2026-11-18`, based on main `dc7572e8` (PR #209).
