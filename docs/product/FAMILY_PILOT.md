@@ -335,3 +335,10 @@ photo as a matrix, dosa, fence, tiles, ball, 3-4-5 corner, temple tower), and en
 `scribble@1`, `scribble@2` (`ScribblePad.tsx`): scratch paper under a question, drawn on with a finger or typed on; nothing is
 read, marked, saved or sent (checked working is typed). Not help, so it is there in tests too. Undo, Clear, Hide; the
 strokes last for the question.
+
+Prime-numbers lesson (the pattern for a story lesson done fully):
+- `rows-of-people@1` (`people` on an array scene): the counters are drawn as children, and whoever does not fit in the
+  rows stands underneath, so "left over" is seen.
+- `tried@1` (`log`): the scene keeps each number of rows tried and who was left over ("3 rows: 4 in each, 1 left over"),
+  so the pattern across the tries can be read; the closing sentence says why trying 2 and 3 rows was enough.
+- `try-first@1`: on the guess page, "Not sure? Try it first" goes straight to the rows (the guess is not evidence).

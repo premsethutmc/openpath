@@ -338,9 +338,9 @@ export const CLASS5_RECIPES: Recipe[] = [
       ],
     },
     missions: [
-      rows(12, { rows: 3, prompt: "Here are 3 rows. Make exactly 12 counters.", success: "3 rows of 4 make 12.", goal: { measure: "off", equals: 0 } }),
-      rows(12, { rows: 2, prompt: "Now 2 rows. Make exactly 12 again.", success: "2 rows of 6 as well. 12 can be shared equally by 1, 2, 3, 4, 6 and 12.", goal: { measure: "off", equals: 0 } }),
-      rows(13, { prompt: "Now 13. Try 2 rows, 3 rows, 4 rows. Finish with any equal rows that make exactly 13.", success: "Only one row of 13 works. No other number shares 13 equally.", goal: { measure: "off", equals: 0 } }),
+      rows(12, { rows: 3, people: true, prompt: "Here are 3 rows. Put all 12 children in them.", success: "3 rows of 4 make 12. Nobody is left over.", goal: { measure: "off", equals: 0 } }),
+      rows(12, { rows: 2, people: true, prompt: "Now 2 rows. Put all 12 children in them again.", success: "2 rows of 6 as well. 12 can be shared equally by 1, 2, 3, 4, 6 and 12.", goal: { measure: "off", equals: 0 } }),
+      rows(13, { people: true, log: true, prompt: "Now 13 children. Try 2 rows, then 3, then 4, and watch who is left over. Finish with any equal rows that take all 13.", success: "Only one row of 13 works: every other way leaves someone over. Trying 2 and 3 rows was enough: 4 or more rows is one of those turned on its side.", goal: { measure: "off", equals: 0 } }),
     ],
     names: ["prime", "composite"],
     name: [

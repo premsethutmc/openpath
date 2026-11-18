@@ -82,7 +82,15 @@ export interface NumberLineScene extends Base { kind: "numberline"; from: number
 /** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. With `share`,
  *  the total is being shared out: `left` is how many are left over once the rows are as full as they can be (999 until
  *  then, and when too many are used), and the readout says how many are left over. */
-export interface ArrayScene extends Base { kind: "array"; total: number; rows?: number; share?: boolean }
+export interface ArrayScene extends Base {
+  kind: "array"; total: number; rows?: number; share?: boolean;
+  /** rows-of-people@1: the counters are drawn as children (a story about people standing in rows), and anyone who does
+   *  not fit in the rows stands underneath, so "left over" is seen and not only said. */
+  people?: boolean;
+  /** tried@1: the scene keeps what the learner has tried (each number of rows, and who was left over), so the pattern
+   *  across the tries can be read at the end. */
+  log?: boolean;
+}
 /** The digits of a whole number with commas the learner places: in threes from the right (`international`), or one group
  *  of three and then twos (`indian`). `miss` is how many commas are wrongly placed or missing. */
 export interface CommasScene extends Base { kind: "commas"; digits: string; style: "indian" | "international" }
@@ -323,6 +331,16 @@ const named = (s: Scene, text: string) => (s.variable && s.variable !== "x" ? te
  * counting groups from the right, the first group that has the wrong number of digits (and how many it should have,
  * which the instruction already says). Null where the scene has no nudge, or its goal is reached.
  */
+/**
+ * tried@1: one line for a number of rows the learner has tried: the fullest equal rows that many rows can make from the
+ * total, and who is left over ("3 rows: 4 in each, 1 left over"). Null for a scene that keeps no log, or a try that is
+ * not an arrangement (one row, or more rows than things).
+ */
+export function triedLine(s: Scene, rows: number): string | null {
+  if (s.kind !== "array" || !s.log || !Number.isInteger(rows) || rows < 2 || rows > s.total) return null;
+  const each = Math.floor(s.total / rows), over = s.total - rows * each;
+  return `${rows} rows: ${each} in each, ${over === 0 ? "nobody left over" : `${over} left over`}`;
+}
 export function nudge(s: Scene, state: SceneState): string | null {
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
   if (s.kind === "numberline" && s.jump && !s.quiet && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
@@ -459,9 +477,11 @@ export function draw(s: Scene, state: SceneState): Shape[] {
   }
   if (s.kind === "array") {
     const { rows, cols } = arrOf(s, state), U = 19;
-    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) out.push({ t: "circle", cx: 37 + c * U, cy: 24 + r * U, r: 7, role: "cell" });
-    // when sharing out, the counters not yet placed wait in a line underneath
-    if (s.share) for (let i = 0; i < Math.min(15, Math.max(0, s.total - rows * cols)); i++) out.push({ t: "circle", cx: 37 + i * U, cy: 208, r: 7, role: "blank" });
+    // a child: a head on shoulders (the same footprint as a counter)
+    const child = (cx: number, cy: number, role: string) => { out.push({ t: "circle", cx, cy: cy - 3.5, r: 4, role }, { t: "path", d: `M${cx - 6.5} ${cy + 8}a6.5 6.5 0 0 1 13 0Z`, role }); };
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { if (s.people) child(37 + c * U, 24 + r * U, "cell"); else out.push({ t: "circle", cx: 37 + c * U, cy: 24 + r * U, r: 7, role: "cell" }); }
+    // when sharing out, the counters not yet placed wait in a line underneath; so do the children who do not fit in the rows
+    if (s.share || s.people) for (let i = 0; i < Math.min(15, Math.max(0, s.total - rows * cols)); i++) { if (s.people) child(37 + i * U, 209, "blank"); else out.push({ t: "circle", cx: 37 + i * U, cy: 208, r: 7, role: "blank" }); }
     return out;
   }
   if (s.kind === "rectangle") {
