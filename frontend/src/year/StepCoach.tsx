@@ -79,6 +79,9 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   const [open, setOpen] = useState(startOpen);
   const [at, setAt] = useState(0);
   const [card, setCard] = useState(false);
+  // how@1: the working of a calculation inside a step that has been done, opened only when asked for
+  const [how, setHow] = useState<number | null>(null);
+  const [howCard, setHowCard] = useState(false);
   if (!steps) return null;
   if (shown === false) return null;
   if (!open && !shown) return <button type="button" className="secondary coach-open" onClick={() => { setOpen(true); onUsed?.(); }}>{opener}</button>;
@@ -94,10 +97,29 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
     <div className="coach" data-coach-step={at} data-coach-method={method}>
       {methods.length > 1 && (
         <div className="coach-methods" role="tablist" aria-label="Ways to work it out">
-          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); } }}>{i + 1} · {name}</button>)}
+          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); setHow(null); setHowCard(false); } }}>{i + 1} · {name}</button>)}
         </div>
       )}
-      {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
+      {at > 0 && (
+        <ol className="recipe-steps coach-done">
+          {steps.slice(0, at).map((s, i) => {
+            const skill = s.how?.skill ? cardFor(s.how.skill) : null;
+            return (
+              <li key={i}>
+                <span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span>
+                {s.how && <> <button type="button" className="coach-chip coach-how" aria-expanded={how === i} onClick={() => { setHow(how === i ? null : i); setHowCard(false); }}>{how === i ? "Hide the working" : "How?"}</button></>}
+                {s.how && how === i && (
+                  <aside className="coach-card coach-how-card" aria-label="How it is worked out" data-testid="coach-how">
+                    <pre className="coach-board">{(s.how.board ?? s.how.lines).join("\n")}</pre>
+                    {skill && <button type="button" className="coach-chip" aria-expanded={howCard} onClick={() => setHowCard(!howCard)}>{howCard ? "Hide the rule" : `This is ${skill.name.charAt(0).toLowerCase()}${skill.name.slice(1)}: show me the rule`}</button>}
+                    {skill && howCard && <>{skill.rule.map((t, k) => <p key={k}>{t}</p>)}</>}
+                  </aside>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      )}
       {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
       {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <pre className="coach-board" aria-label="The working so far" data-testid="coach-board">{b.join("\n")}</pre> : null; })()}
       {now && (

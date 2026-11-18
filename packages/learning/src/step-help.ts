@@ -37,6 +37,12 @@ export interface StepHelp {
   rule?: string;
   /** board@1: the written layout once this step is done (long division), a text line per row */
   board?: string[];
+  /**
+   * how@1: the working of a calculation inside this step, folded away. The step is about its own skill; how 247 ÷ 19
+   * is worked is opened only when asked for ("How?"): the lines of working, the finished written layout where there
+   * is one, and the skill that teaches it where that skill has a card.
+   */
+  how?: { lines: string[]; board?: string[]; skill?: string };
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -141,7 +147,13 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     const led = sums.flatMap((m) => deepen(m[0]).map((f, k) => (k === 0 && !/^To work out /.test(f.next) ? { ...f, next: `To work out ${m[1]} ${m[2]} ${m[3]}: ${f.next.charAt(0).toLowerCase()}${f.next.slice(1)}` } : f)));
     const calc = !/∫|d\s*\/\s*d[a-z]/.test(own.shown) && led.length === finer.length;
     const lines: StepHelp[] = (calc ? led : finer).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true, ...(own.rule ? { rule: own.rule } : {}), ...(f.board ? { board: f.board } : {}) }));
-    if (calc) { if (i === 0) lines[0].next = `First: ${lines[0].next.charAt(0).toLowerCase()}${lines[0].next.slice(1)}`; own.next = own.next.replace(/^First: /, "Now: "); }
+    if (calc) {
+      // how@1: arithmetic inside a step is not walked through line by line: it is one tap away on the step itself
+      const boards = lines.map((l) => l.board).filter(Boolean) as string[][];
+      const op = sums.find((m) => deepen(m[0]).length)?.[2];
+      const skill = op === "÷" ? "MATH.number.long-division" : null;
+      return [{ ...own, how: { lines: lines.filter((l) => !/set it out as a long division/.test(l.next)).map((l) => l.shown), ...(boards.length ? { board: boards[boards.length - 1] } : {}), ...(skill && skill !== p.competency && cardFor(skill) ? { skill } : {}) } }];
+    }
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });

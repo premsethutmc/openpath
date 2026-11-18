@@ -29,8 +29,10 @@ test("the step help of every question type: answers given away, single steps and
       const given = has(q.prompt);
       if (!given && h.length >= 2 && has(h[0].shown)) first++;
       if (!given && a.length >= 2 && h.slice(0, -1).some((s) => has(s.next))) cue++;
-      if (h.length === 1) one++;
-      for (const s of h) { steps++; if (/^(First|Next|Last): [a-z-]+\.$/.test(s.next)) bare++; }
+      // how@1: a single step with its working one tap away is not a thin help
+      if (h.length === 1 && !h[0].how) one++;
+      // how@1: folded lines of working count as lines of help, as they did when they were steps (the measure stays comparable)
+      for (const s of h) { steps += 1 + (s.how?.lines.length ?? 0); if (/^(First|Next|Last): [a-z-]+\.$/.test(s.next)) bare++; }
     }
     if (!n) continue;
     count.types++;

@@ -9,7 +9,7 @@ import { smallerOf } from "../../../packages/learning/src/working";
 const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items; return [items[0], items[items.length >> 1]].filter(Boolean); });
 
 test("every question's help is its own steps, in order, with nothing worked in the 'what to do' line", () => {
-  let needing = 0;
+  let needing = 0, folded = 0, boards = 0;
   for (const q of sample) {
     // worked-out@1: a type with its whole working written for it is proved in worked-out.test.ts
     if (WORKED_OUT.includes(q.family) || helpMethods(q.id)[0] !== "Step by step") continue;
@@ -21,6 +21,11 @@ test("every question's help is its own steps, in order, with nothing worked in t
     // lead-in@1: a run of arithmetic working opens by naming the calculation it works out, and the help opens with "First"
     all!.forEach((x, i) => { if (x.finer && !all![i - 1]?.finer && /^\d+ = \d+ \+ \d+$|which leaves/.test(x.shown)) assert.ok(/^(First: t|T)o work out \d+ [×÷+−] \d+: /.test(x.next), `${q.id}: ${x.next}`); });
     assert.ok(/^First: /.test(all![0].next), `${q.id}: ${all![0].next}`);
+    // how@1: arithmetic inside a step is folded onto the step, never walked through as steps of its own
+    for (const x of all!) {
+      assert.ok(/calculus|integra|differen/.test(q.competency) || !(x.finer && /^\d+ [×÷+−] \d+ = \d+(, which leaves \d+)?$|^\d+ = \d+( \+ \d+)+$/.test(x.shown)), `${q.id}: ${x.shown} is still a step`);
+      if (x.how) { folded++; assert.ok(x.how.lines.length >= 2 && !x.finer, q.id); if (x.how.board) { boards++; assert.ok(/ \) /.test(x.how.board[1]), q.id); } }
+    }
     const h = all && all.filter((x) => !x.finer);
     assert.ok(h && h.length === q.steps.length, q.id);
     h!.forEach((x, i) => {
@@ -34,6 +39,8 @@ test("every question's help is its own steps, in order, with nothing worked in t
     assert.deepEqual(stepsHelp(`${q.id}`), all);
   }
   assert.ok(needing > 500, `steps that lean on another skill: ${needing}`);
+  console.log(`how@1: ${folded} steps carry folded working, ${boards} with a written layout`);
+  assert.ok(folded > 200 && boards > 5, `${folded} ${boards}`);
   assert.equal(stepsHelp("not-a-question"), null);
 });
 

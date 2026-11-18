@@ -440,3 +440,8 @@ nowhere. The step that follows then reads "Now: …" where it used to read "Firs
 layout drawn, in place of round-number chunks; a table fact and a division by 10, 100 or 1000 get no working. The long
 division lesson teaches the same bracket method, and its picture is the finished written layout (`as: "written"` in
 Figure). Decimal and fraction layouts were checked at 390 px: both fit.
+
+`how@1`: arithmetic inside a step is no longer walked through as steps of its own. The step shows its one line, and a
+"How?" button on a step that has been done opens the working: the lines, or the finished long-division layout, and for
+a division a button that opens the long division rule. Long division questions themselves stay step by step. Opening
+the help is what is recorded; "How?" is inside it. The audit counts folded lines as lines of help.
