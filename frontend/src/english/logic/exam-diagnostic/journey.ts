@@ -1,12 +1,12 @@
 import type {EssayGatewayInfo} from '../../../../../packages/english-core/src/essay/evaluators.ts';
 import {analyseSyntheticWriting, EXAM_WRITING_RUBRIC, type SyntheticWritingPost, type ModelWritingObservation} from './model.ts';
-import {initialSession,answer,submitWriting,type Session} from './session.ts';
+import {initialSession,answer,submitWriting,revise,words,type Session} from './session.ts';
 import {planWritingChecks,verifyWritingSkill,JOURNEY_WRITING_CHECKS,WRITING_LESSONS,type WritingCheck,type WritingSkill} from './verification.ts';
 import {reassessmentFor} from './reassessment.ts';
 
 export type JourneyPhase='reading'|'writing'|'analysing'|'checks'|'teaching'|'reassessment'|'complete'|'error';
 export interface JourneyState {
- phase:JourneyPhase; session:Session; observations:ModelWritingObservation[]; checks:WritingCheck[];
+ phase:JourneyPhase; session:Session; observations:ModelWritingObservation[]; notObservable:WritingSkill[]; checks:WritingCheck[];
  answers:Record<string,number>; results:ReturnType<typeof verifyWritingSkill>[];
  lessons:WritingSkill[]; taught:WritingSkill[]; fresh:WritingCheck[]; freshAnswers:Record<string,number>;
  seen:string[]; error:string; mode:'simulated'|'server';
@@ -34,7 +34,7 @@ export class ExamJourney {
  private post:SyntheticWritingPost;
  constructor(info:EssayGatewayInfo=SIMULATED_INFO,post:SyntheticWritingPost=simulatedPost,seen:readonly string[]=[],mode:'simulated'|'server'='simulated'){
   this.info=info;this.post=post;
-  this.state={phase:'reading',session:initialSession(),observations:[],checks:[],answers:{},results:[],lessons:[],taught:[],fresh:[],freshAnswers:{},seen:[...new Set(seen)],error:'',mode};
+  this.state={phase:'reading',session:initialSession(),observations:[],notObservable:[],checks:[],answers:{},results:[],lessons:[],taught:[],fresh:[],freshAnswers:{},seen:[...new Set(seen)],error:'',mode};
  }
  snapshot(){
   const {checks,fresh,...rest}=structuredClone(this.state);
@@ -48,12 +48,12 @@ export class ExamJourney {
   if(this.state.mode==='simulated'&&text!==EXAMPLE_WRITING)throw Error('Simulated mode only supports the fixed invented sample.');
   const session=submitWriting({...this.state.session,phase:'writing',writing:'',revision:''},text);
   const generation=++this.generation; this.priorSeen=[...this.state.seen];
-  this.state={...this.state,session,phase:'analysing',error:'',observations:[],checks:[],results:[],lessons:[],taught:[],fresh:[],answers:{},freshAnswers:{}};
+  this.state={...this.state,session,phase:'analysing',error:'',observations:[],notObservable:[],checks:[],results:[],lessons:[],taught:[],fresh:[],answers:{},freshAnswers:{}};
   try{
    const output=await analyseSyntheticWriting(session.writing,this.info,this.post);
    if(generation!==this.generation)return;
    const checks=planWritingChecks(output.observations,this.priorSeen,JOURNEY_WRITING_CHECKS);
-   this.state={...this.state,observations:output.observations,checks,seen:[...new Set([...this.state.seen,...checks.map(q=>q.id)])],phase:checks.length?'checks':'complete'};
+   this.state={...this.state,observations:output.observations,notObservable:output.notObservable,checks,seen:[...new Set([...this.state.seen,...checks.map(q=>q.id)])],phase:checks.length?'checks':'complete'};
   }catch{if(generation===this.generation)this.state={...this.state,phase:'error',error:'Analysis unavailable or rejected. No writing gap, lesson or improvement was inferred. Your draft remains here; retry explicitly.'};}
  }
  answer(id:string,index:number){
@@ -79,6 +79,27 @@ export class ExamJourney {
  }
  finish(){if(this.state.phase==='reassessment'&&this.state.fresh.every(q=>Object.hasOwn(this.state.freshAnswers,q.id)))this.state={...this.state,phase:'complete'};}
  cancel(){++this.generation;if(this.state.phase==='analysing')this.state={...this.state,phase:'writing',error:'Analysis cancelled locally. A dispatched server call may still finish and consume its reserved quota.'};}
+ /** Explanations are only available after the entire independent sitting ends. */
+ review(){
+  if(this.state.phase!=='complete')return [];
+  return [...this.state.checks.map(q=>({q,stage:'verification' as const,answer:this.state.answers[q.id]})),...this.state.fresh.map(q=>({q,stage:'reassessment' as const,answer:this.state.freshAnswers[q.id]}))]
+   .filter(x=>Number.isInteger(x.answer)).map(({q,stage,answer})=>({id:q.id,skill:q.skill,stage,prompt:q.prompt,selected:q.options[answer],expected:q.options[q.answer],correct:answer===q.answer,explanation:q.explanation}));
+ }
+ coverage(){
+  if(this.state.phase!=='complete')return [];
+  const skills=[...new Set(this.state.observations.filter(o=>o.requiresCheck).map(o=>o.skill))];
+  return skills.map(skill=>({skill,checksAvailable:this.state.checks.some(q=>q.skill===skill),retestAvailable:this.state.fresh.some(q=>q.skill===skill),taught:this.state.taught.includes(skill)}));
+ }
+ saveRevision(text:string){
+  if(this.state.phase!=='complete')throw Error('Finish the independent checks before revising.');
+  if(words(text)<50||words(text)>250||text.trim()===this.state.session.writing.trim())throw Error('Write a changed 50–250 word explanation. This practice is saved, not assessed.');
+  this.state={...this.state,session:revise(this.state.session,text)};
+ }
+ practicePlan(){
+  if(this.state.phase!=='complete')return [];
+  return this.summary().map(r=>({...r,next:r.after===null?(r.outcome==='no_gap_shown'?'No gap shown on these two checks. Try explaining the idea in your own writing; broader ability is still unknown.':'Fresh reassessment was unavailable. Revisit the lesson, then seek an unseen check before drawing a conclusion.'):
+   r.after<2?'Revisit the explanation for each missed fresh item. Try the idea in a new paragraph; the original concern remains unresolved.':'Both fresh items were correct. Try using the idea in a new paragraph; retention and independent writing transfer remain untested.'}));
+ }
  summary(){return this.state.results.map(r=>{
   const items=this.state.fresh.filter(q=>q.skill===r.skill);
   const done=items.length===2&&items.every(q=>Object.hasOwn(this.state.freshAnswers,q.id));

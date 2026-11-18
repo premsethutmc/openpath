@@ -13,7 +13,7 @@ The exam diagnostic preview keeps learner writing on the device and does not ass
 
 ## Before real writing can be assessed
 
-The synthetic gateway implementation below is now available. Permitted learner-data handling, approved provider/security configuration, educator review and evaluated linguistic accuracy are still needed. Passing these software fixtures proves contract behavior only, not diagnostic accuracy. Never replace these checks with an assertion that a hosted model is reliable merely because its JSON is valid.
+The synthetic gateway implementation below is now available. Permitted learner-data handling, approved provider/security configuration, rigorous AI/content review and evaluated linguistic accuracy are still needed. Passing these software fixtures proves contract behavior only, not diagnostic accuracy. Never replace these checks with an assertion that a hosted model is reliable merely because its JSON is valid.
 
 ## Complete journey (2026-11-18)
 
@@ -23,6 +23,14 @@ The complete journey covers four narrow areas: subject–verb agreement, a/an, s
 
 Default mode is a fixed invented paragraph and a clearly labelled simulated response, with no network call. Optional server mode uses the existing shared essay API with `openpath.exam-writing@1`, a server-owned prompt and source context. The endpoint remains developer-only, synthetic-only and subject to shared admission limits. No provider was enabled, no real learner data sent, and no paid call made for this implementation. Server failures fail closed, without a simulated assessment fallback.
 
-Writing and responses are memory-only; exposed item IDs persist on this device to prevent reused checks being reported as fresh. Reload discards the sitting; restart retains exposure history. The public pilot still refuses this route. This is a developer rehearsal, not permission to use real learners. Linguistic calibration, educator review, privacy approval, larger fresh-item banks and real-device acceptance remain prerequisites for learner use.
+Writing and responses are memory-only; exposed item IDs persist on this device to prevent reused checks being reported as fresh. Reload discards the sitting; restart retains exposure history. The public pilot still refuses this route. This is a developer rehearsal, not permission to use real learners. Linguistic calibration, rigorous AI/content review, privacy approval and real-device acceptance remain prerequisites for learner use. External educator approval is not a required gate; do not claim human validation.
 
 Tests: `node --import tsx --test src/english/logic/exam-diagnostic/*.test.ts` in frontend; `node --test e2e/exam-journey.test.mjs` against the normal English preview; backend `evaluation` test suite. Browser tests use synthetic local fixtures only.
+
+## Evidence and repeat-use improvements (2026-11-18)
+
+The next milestone adds a second independent verification and reassessment form per writing area. Selection takes an entire unseen pair; a partly exposed pair is skipped, never mixed with other forms. Banks remain finite and uncalibrated. Exhaustion is named per skill rather than reported as success.
+
+After independent checks finish, a review explains each selected and expected answer and gives a bounded next step. Optional own-writing revision is memory-only and explicitly unassessed: completing it does not change scores or establish writing transfer. Reading follow-up is also accessible after a failed writing analysis; if opened, later writing retries are labelled supported practice. Validated not-observable coverage is retained instead of silently discarded.
+
+Still open: more reading passages and transfer forms, interactive worked-example teaching, genuinely independently assessed natural-writing transfer, wider language coverage, measured diagnostic accuracy and delayed retention. Existing English-core retention/planner modules should be reused when an approved learner-mode integration is built, not duplicated into a synthetic mastery ledger. AI/content review is required; external educator approval is not an owner-required gate, and no human validation is claimed.

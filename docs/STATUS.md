@@ -4,6 +4,13 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## English evidence improvements (2026-11-18)
+- Branch `feat/english-evidence-next-2026-11-18`, based on main `2fb7c108` (PR #203, includes #202).
+- Second unseen writing verification/retest forms, answer review, bounded next-step report and explicit bank exhaustion.
+- Retained not-observable coverage; reading follow-up available during writing outages; optional memory-only unassessed revision.
+- Local validation: 59 diagnostic/UI tests, English typecheck/build; browser and aggregate CI required before merge.
+- External educator approval is not an owner-required gate. AI/content checks do not imply human review or calibrated accuracy.
+
 ## English diagnostic milestone (2026-11-18)
 - Branch `feat/english-e2e-2026-11-18`, based on main `10648a43` (PR #199).
 - Complete synthetic reading/writing → model hypotheses → deterministic checks → teaching → fresh reassessment.

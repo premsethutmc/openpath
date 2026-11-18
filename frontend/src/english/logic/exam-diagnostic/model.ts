@@ -56,5 +56,8 @@ export async function analyseSyntheticWriting(text: string, info: EssayGatewayIn
       ...(typeof o.correction === 'string' ? {correction: o.correction} : {}), kind: o.kind as ModelWritingObservation['kind'], confidence: o.confidence as ModelWritingObservation['confidence'],
       requiresCheck: o.kind === 'error' && o.verification === 'required' && o.possible_slip !== true && o.confidence !== 'low'};
   });
-  return {status: 'observations_only' as const, rubric: EXAM_WRITING_RUBRIC, evaluator: {id: info.id, version: info.version, model: info.model}, observations};
+  const notObservable = output.not_observable.map(id => SKILLS[id as keyof typeof SKILLS]);
+  // Reject ambiguous coverage rather than silently choosing between conflicting claims.
+  if (new Set(notObservable).size !== notObservable.length || notObservable.some(skill => observations.some(o => o.skill === skill))) throw new Error('Invalid writing observation coverage');
+  return {status: 'observations_only' as const, rubric: EXAM_WRITING_RUBRIC, evaluator: {id: info.id, version: info.version, model: info.model}, observations, notObservable};
 }

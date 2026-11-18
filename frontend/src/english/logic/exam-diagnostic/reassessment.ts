@@ -1,4 +1,4 @@
-import type {WritingCheck, WritingSkill} from './verification.ts';
+import {firstUnseenPair,type WritingCheck,type WritingSkill} from './verification.ts';
 /** These items never appear in the diagnostic or worked examples. Still uncalibrated. */
 export const REASSESSMENT:readonly WritingCheck[] = [
  {id:'fresh-sva-1',skill:'subject_verb_agreement',prompt:'The list of required documents ___ on the desk.',options:['is','are'],answer:0,explanation:'List is singular; of documents does not change the subject.'},
@@ -9,11 +9,16 @@ export const REASSESSMENT:readonly WritingCheck[] = [
  {id:'fresh-source-2',skill:'source_fidelity',prompt:'“Exercise helps sleep, but cannot resolve every cause of sleeplessness.” Which summary is faithful?',options:['Exercise helps but may not solve all sleep problems.','Exercise does not help sleep.'],answer:0,explanation:'A limit does not negate a benefit.'},
  {id:'fresh-reason-1',skill:'evidence_reasoning',prompt:'A factory makes more items but has not checked faults. Which evidence would test whether useful output improved?',options:['Count the items again.','Compare the number of items meeting the same quality standard.'],answer:1,explanation:'Usable output requires evidence of quality as well as volume.'},
  {id:'fresh-reason-2',skill:'evidence_reasoning',prompt:'Sales rose after prices fell and a rival closed. Can the price cut alone be credited?',options:['No; the rival’s closure is another possible cause.','Yes; any rise proves the price change worked.'],answer:0,explanation:'The simultaneous change limits a single-cause conclusion.'},
+ {form:'2',id:'fresh-sva-3',skill:'subject_verb_agreement',prompt:'The captain of the two teams ___ the rules.',options:['explains','explain'],answer:0,explanation:'Captain is singular, so it takes explains.'},
+ {form:'2',id:'fresh-sva-4',skill:'subject_verb_agreement',prompt:'These boxes of equipment ___ upstairs.',options:['belongs','belong'],answer:1,explanation:'Boxes is the plural subject.'},
+ {form:'2',id:'fresh-article-3',skill:'articles',prompt:'They travelled in ___ European city.',options:['an','a'],answer:1,explanation:'European begins with the consonant /y/ sound.'},
+ {form:'2',id:'fresh-article-4',skill:'articles',prompt:'She bought ___ umbrella before the storm.',options:['an','a'],answer:0,explanation:'Umbrella begins with a vowel sound.'},
+ {form:'2',id:'fresh-source-3',skill:'source_fidelity',prompt:'“The seedlings grew faster in the greenhouse; their growth outside has not been measured.” Which summary is faithful?',options:['The seedlings grew faster everywhere.','Faster greenhouse growth was observed; outdoor growth is unknown.'],answer:1,explanation:'The result applies to the measured setting only.'},
+ {form:'2',id:'fresh-source-4',skill:'source_fidelity',prompt:'“Maps aid navigation, but walkers must also watch for changed paths.” Which statement matches?',options:['Maps are helpful but do not remove the need to observe paths.','Maps are useless because paths can change.'],answer:0,explanation:'A caution supplements rather than negates the benefit.'},
+ {form:'2',id:'fresh-reason-3',skill:'evidence_reasoning',prompt:'A delivery service handles more parcels but does not record arrival dates. Which measure best tests whether punctuality improved?',options:['The total number of parcels handled.','The proportion arriving by the promised date, compared with before.'],answer:1,explanation:'The promised date measures punctuality; volume alone does not.'},
+ {form:'2',id:'fresh-reason-4',skill:'evidence_reasoning',prompt:'Electricity use fell after new lights were fitted and the office shortened its opening hours. What can be concluded?',options:['Both changes could contribute; the lights’ separate effect is uncertain.','Only the new lights can explain the fall.'],answer:0,explanation:'Shorter opening hours provide another plausible explanation.'},
 ];
 REASSESSMENT.forEach(q=>{Object.freeze(q.options);Object.freeze(q);});Object.freeze(REASSESSMENT);
 export function reassessmentFor(skills:readonly WritingSkill[],seen:readonly string[]) {
- return [...new Set(skills)].flatMap(skill=>{
-  const pair=REASSESSMENT.filter(q=>q.skill===skill);
-  return pair.every(q=>!seen.includes(q.id))?pair.map(q=>({...q,options:[...q.options]})):[];
- });
+ return [...new Set(skills)].flatMap(skill=>firstUnseenPair(REASSESSMENT,skill,seen));
 }
