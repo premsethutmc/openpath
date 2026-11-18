@@ -33,6 +33,7 @@ import { VocabularyCheck } from "./VocabularyCheck.tsx";
 import { NewWords } from "./NewWords.tsx";
 import { ListenWrite } from "./ListenWrite.tsx";
 import { ParentView } from "./ParentView.tsx";
+import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
 
 /** Real time, plus an offset in days that only tests set (to check reviews without waiting). */
@@ -111,6 +112,7 @@ export function App() {
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
   const [inParent, setInParent] = useState(false);
+  const [inReading, setInReading] = useState(false);
   const [inJourney, setInJourney] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
@@ -155,6 +157,7 @@ export function App() {
       setInNewWords(false);
       setInListenWrite(false);
       setInParent(false);
+      setInReading(false);
       setScreen({ name: "app" });
     } catch (e) {
       setProblem((e as Error).message);
@@ -490,6 +493,19 @@ export function App() {
         />
       </div>
     );
+  if (inReading)
+    return (
+      <div className="reading-screen" data-tick={tick} data-mode={mode}>
+        <Reading
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setInReading(false);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (inMyWords)
     return (
       <MyWords
@@ -588,6 +604,7 @@ export function App() {
           onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
           onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
+          onReading={() => (setInReading(true), scrollTo(0, 0))}
         />
       )}
       {tab === "journey" && <PathView learner={learner} onStart={start} />}

@@ -12,6 +12,8 @@ import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
+import { COURSE } from "../logic/reading/course.ts";
+import { progress } from "../logic/reading/session.ts";
 
 const STATUS_WORDS: Record<string, string> = {
   not_started: "not started",
@@ -28,7 +30,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -59,6 +61,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
       <NewWordsCard learner={learner} onOpen={onNewWords} />
       <ListenWriteCard learner={learner} onOpen={onListenWrite} />
       <VocabCard learner={learner} onOpen={onVocab} />
+      <ReadingCard learner={learner} onOpen={onReading} />
       <h2 className="section-title general-title">General English</h2>
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
@@ -262,6 +265,25 @@ function ListenWriteCard({ learner, onOpen }: { learner: Learner; onOpen: () => 
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.sentences ? "Write five more" : "Try Listen and write"}
+      </button>
+    </section>
+  );
+}
+
+/** The reading course (logic/reading): candidate content, so never offered in a pilot build. */
+function ReadingCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const p = progress(COURSE, learner.readingRecords());
+  const done = [...p.units.values()].filter((u) => u.status === "passed_own" || u.status === "passed_after_help").length;
+  return (
+    <section className="hub-card plain" aria-labelledby="reading-card-title">
+      <h2 id="reading-card-title">
+        <span aria-hidden="true">📖 </span>Reading
+      </h2>
+      <p>Short texts with questions: learn a reading skill from an example, practise with hints, then try new questions on your own.</p>
+      {p.units.size > 0 && <p className="small">{done} of {COURSE.skills.length * COURSE.levels.length} skill levels done</p>}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {p.units.size ? "Carry on reading" : "Start reading"}
       </button>
     </section>
   );

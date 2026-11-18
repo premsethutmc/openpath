@@ -1,0 +1,98 @@
+/** Reading screens: what each step shows, and that nothing a learner must work out is on screen early. */
+import test from "node:test";
+import assert from "node:assert/strict";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { COURSE, type Unit } from "../logic/reading/course.ts";
+import { LABEL_AFTER_HELP, ReadingUnitSession, progress, type Snapshot } from "../logic/reading/session.ts";
+(globalThis as { React?: unknown }).React = React;
+const { ReadingMap, ReadingUnitView } = await import("./Reading.tsx");
+
+const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, open() {}, leave() {} };
+const html = (snap: Snapshot) => renderToStaticMarkup(React.createElement(ReadingUnitView, { course: COURSE, snap, on })).replaceAll("&#x27;", "'").replaceAll("&quot;", '"');
+const byId = new Map(COURSE.questions.map((q) => [q.id, q]));
+const unit: Unit = { skill: "cause", level: 2 };
+
+test("RU-1 the map offers every skill at every level, with the rule-chosen next step first", () => {
+  const map = (records = [] as Parameters<typeof progress>[1]) => renderToStaticMarkup(React.createElement(ReadingMap, { course: COURSE, progress: progress(COURSE, records), onOpen() {}, onBack() {} }));
+  const fresh = map();
+  assert.match(fresh, /Finding details · Starter/);
+  assert.equal(fresh.match(/data-unit="/g)!.length, 18);
+  assert.equal(fresh.match(/>Check me</g)!.length, 18);
+  assert.match(fresh, /0 of 18 done/);
+  const s = new ReadingUnitSession(COURSE, { skill: "detail", level: 1 }, "check_me");
+  for (let snap = s.snapshot(); snap.phase === "check"; snap = s.snapshot()) s.answerCheck(byId.get(snap.question.id)!.answer);
+  const after = map(s.take());
+  assert.match(after, /1 of 18 done/);
+  assert.match(after, /shown on your own/);
+  assert.match(after, /Order of events · Starter/);
+  assert.equal(after.match(/>Check me</g)!.length, 17, "a passed level is not checked again");
+});
+
+test("RU-2 lesson, practice, check and result show what they should and hold back what they must", () => {
+  const s = new ReadingUnitSession(COURSE, unit, "learn");
+  let page = html(s.snapshot());
+  const lesson = COURSE.lessons.find((l) => l.skill === unit.skill && l.level === unit.level)!;
+  assert.match(page, /Worked example/);
+  assert.ok(page.includes(lesson.worked.steps[0]) && !page.includes(lesson.worked.steps[1]) && !page.includes(lesson.worked.answer), "one step at a time, the answer last");
+  assert.match(page, /Next step \(1 of 3\)/);
+  s.nextStep();
+  s.nextStep();
+  page = html(s.snapshot());
+  assert.ok(page.includes(lesson.worked.answer));
+  assert.match(page, /Now you try/);
+  s.startPractice();
+  let snap = s.snapshot();
+  assert.ok(snap.phase === "practice");
+  const q = byId.get(snap.practice.question.id)!;
+  page = html(snap);
+  assert.match(page, /Practice 1 of 2 · hints allowed/);
+  assert.match(page, /Give me a hint/);
+  assert.ok(!page.includes(q.explain) && !page.includes("<mark>"));
+  s.hint();
+  s.hint();
+  s.hint();
+  page = html(s.snapshot());
+  assert.ok(page.includes(lesson.tip) && page.includes(q.hint!) && page.includes(`<mark>${q.evidence}</mark>`));
+  assert.ok(!page.includes(q.explain) && !page.includes("Give me a hint") && !page.includes("Another hint"));
+  s.answerPractice(q.answer);
+  page = html(s.snapshot());
+  assert.ok(page.includes(q.explain));
+  assert.match(page, /Next practice question/);
+  s.nextPractice();
+  snap = s.snapshot();
+  assert.ok(snap.phase === "practice");
+  s.answerPractice(byId.get(snap.practice.question.id)!.answer);
+  s.nextPractice();
+  snap = s.snapshot();
+  assert.ok(snap.phase === "check");
+  const c = byId.get(snap.question.id)!;
+  page = html(snap);
+  assert.match(page, /On your own: question 1 of 2 · no hints · marked at the end/);
+  assert.ok(!page.includes(c.explain) && !page.includes("<mark>") && !page.includes("hint<") && !page.includes("is-right"));
+  assert.match(page, /disabled=""[^>]*>Lock in and go on/);
+  s.answerCheck(c.answer);
+  snap = s.snapshot();
+  assert.ok(snap.phase === "check");
+  s.answerCheck((byId.get(snap.question.id)!.answer + 1) % 3);
+  page = html(s.snapshot());
+  assert.match(page, /1 of 2 right/);
+  assert.match(page, /Not yet/);
+  assert.ok(page.includes(c.explain) && !page.includes(LABEL_AFTER_HELP));
+  assert.match(page, /Step back to Starter first/);
+});
+
+test("RU-3 a pass after teaching is named as after help, and running out of new questions is said plainly", () => {
+  const s = new ReadingUnitSession(COURSE, { skill: "detail", level: 1 }, "learn");
+  s.nextStep();
+  s.nextStep();
+  s.startPractice();
+  for (let snap = s.snapshot(); snap.phase === "practice"; snap = s.snapshot()) (s.answerPractice(byId.get(snap.practice.question.id)!.answer), s.nextPractice());
+  for (let snap = s.snapshot(); snap.phase === "check"; snap = s.snapshot()) s.answerCheck(byId.get(snap.question.id)!.answer);
+  const page = html(s.snapshot());
+  assert.match(page, /2 of 2 right/);
+  assert.ok(page.includes(LABEL_AFTER_HELP));
+  assert.match(page, /not that it will last/);
+  assert.match(page, /Go up to Builder/);
+  assert.match(html({ phase: "no_fresh_check", unit }), /none is repeated/);
+});
