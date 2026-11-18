@@ -39,7 +39,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { guessOf, problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
-import { compose, kidQuestion, type Ask as KidAsk } from "../../../packages/learning/src/kid-say";
+import { compose, kidQuestion, type Ask as KidAsk, type PlacesAsk } from "../../../packages/learning/src/kid-say";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
 import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
@@ -320,7 +320,7 @@ const still = <T extends { type?: string }>(v: T, test: boolean): T => (test && 
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
-export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk | PlacesAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
   const [parts, setParts] = useState<string[]>([]);
   const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
   if (ask.kind === "tap")
@@ -407,6 +407,25 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
         ))}
       </div>
     );
+  if (ask.kind === "places") {
+    // places@1: every seat needs its digit before the number can be checked, so an empty place has to be given its zero
+    const full = (n: string[]) => ask.seats.every((x, j) => (n[j] ?? "").length === x.width || (j === 0 && (n[j] ?? "").length >= 1 && (n[j] ?? "").length <= x.width));
+    // said once the last seat is reached with a seat still unfilled (not while the child is still typing along)
+    const some = !!(parts[ask.seats.length - 1] ?? "") && !full(parts);
+    return (
+      <div>
+        <div className="kid-fields kid-places">
+          {ask.seats.map((x, i) => (
+            <label key={x.label} className="kid-unit">
+              <input aria-label={`${x.label}: ${x.width} digit${x.width === 1 ? "" : "s"}`} inputMode="numeric" autoComplete="off" maxLength={x.width} style={{ ["--seats" as never]: `${x.width * 0.95 + 1.1}em` }} placeholder={"·".repeat(x.width)} value={parts[i] ?? ""} disabled={disabled} onChange={(e) => { const n = ask.seats.map((_, j) => (j === i ? e.target.value.replace(/\D/g, "").slice(0, x.width) : parts[j] ?? "")); put(n, full(n)); }} />
+              <span>{x.label}</span>
+            </label>
+          ))}
+        </div>
+        {some && <p className="kid-note" role="status">Every seat needs a digit. Which seats are empty? An empty seat holds 0.</p>}
+      </div>
+    );
+  }
   if (ask.kind === "fields")
     return (
       <div className="kid-fields">
@@ -537,6 +556,12 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const submitting = useRef(false);
   // nothing to work out when the answer is tapped from the ones shown
   const workable = q.type !== "written" && !q.picks?.length;
+  // one-help@1: "I'm stuck" and "Work it out step by step" are one place. Being stuck opens the working with the next
+  // step asked there (a box to fill); a step the child cannot do is shown by its "Help" button, and the next one loads.
+  // Typing one's own working is not help; asking for a step is, and is recorded as before.
+  const [coach, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
+  const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
+  const askHelp = () => { setCoach(true); setWorkingOpen(true); setHint(true); };
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && q.type !== "written" ? safeKid(q) : null;
   // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
@@ -558,6 +583,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [lower, setLower] = useResume(resumeKey && `${resumeKey}:support`, 0);
   const step = Math.max(0, autoStep - lower);
   const figure = aids ? aids[step]?.figure : kq ? kq.figure : q.figure;
+  // an aid can also be a way of answering (the place-value chart); it fades to the question's own box like a picture
+  const ask = aids?.[step]?.ask ?? kq?.ask;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
@@ -569,8 +596,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         : <Figure v={still(figure, isTest(activity))} />)}
       {aids && step > 0 && !isTest(activity) && <p><button type="button" className="link" data-testid="support-down" onClick={() => setLower(lower + 1)}>Show me the {aids[step - 1].name}</button></p>}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
-      {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
-        ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
+      {kq && ask && q.type !== "choice" && !q.picks?.length && (ask.kind !== "box" || ask.before || ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
+        ? <KidAnswer key={`${qid}:${step}`} ask={ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
         : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={setValue} disabled={ctx.saving} />}
       {clarify && <p className={KID ? "recipe-reply" : "small"} role="status">{clarify}</p>}
       {workable && (
@@ -579,15 +606,20 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
               Summary still supplies native focus and Enter/Space activation. */}
           <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Work it out step by step" : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
-          {KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
+          {KID && coach && canCoach ? null : KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
+          {canCoach && (coach
+            ? <StepCoach key={qid} qid={qid} shown />
+            : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
         </details>
       )}
-      {(hint || showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
+      {(hint || showHint) && !(coach && canCoach && !q.hint && !showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         {/* step-help@1: in practice with help, a stuck child asks for one rung at a time; using it is recorded as help (a hint) */}
-        {hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
+        {canCoach
+          ? !coach && <button type="button" className="secondary coach-open" onClick={askHelp}>I'm stuck</button>
+          : hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
         <button
           className="primary"
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
