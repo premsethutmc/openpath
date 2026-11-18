@@ -6,7 +6,11 @@
  * essays, on a dedicated on-device synthetic profile; it never uses a child's profile or the parent account.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, wordCount } from "../../../../../packages/english-core/src/index.ts";
+import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
+import type {WorkspaceSelection} from './EnglishWorkspace.tsx';
+import {withWorkspaceLessons} from '../../logic/essay-live/workspace-lessons.ts';
+import {createWorkspaceProfile} from '../../logic/essay-live/workspace-profiles.ts';
+import {ArgumentWorkspaceView} from './ArgumentWorkspaceView.tsx';
 import { Brand } from "../Onboarding";
 import { ItemView } from "../ItemView";
 import { BUILD_CONTENT_MODE, loadContent } from "../../logic/content.ts";
@@ -29,7 +33,7 @@ const clock = () => {
   return new Date(Date.now() + days * 86_400_000).toISOString();
 };
 
-type Screen = "essay" | "skills" | "check" | "path" | "rewrite" | "profile";
+type Screen = "argument" | "essay" | "skills" | "check" | "path" | "rewrite" | "profile";
 const NAV: { screen: Screen; label: string }[] = [
   { screen: "essay", label: "Essay" },
   { screen: "skills", label: "Skills" },
@@ -52,8 +56,11 @@ const GAP = { suspected: "Suspected from your essay: not checked with bank quest
 
 const screenFor = (v: StudioView): Screen => (v.stage === "write" ? "essay" : v.stage === "diagnose" ? "check" : v.stage === "plan" || v.stage === "learn" ? "path" : v.stage === "rewrite" ? "rewrite" : "profile");
 
-export function EssayLive() {
-  const content = useMemo(() => loadContent(), []);
+export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
+  const content = useMemo(() => workspace ? withWorkspaceLessons(loadContent()) : loadContent(), [workspace]);
+  const workspaceProfile=useMemo(()=>workspace?createWorkspaceProfile(workspace.goal,workspace.difficulty,content):null,[workspace,content]);
+  const profileId=workspace?`english-workspace-synthetic-${workspace.goal}-${workspace.difficulty}`:STUDIO_PROFILE_ID;
+  const [syntheticConfirmed,setSyntheticConfirmed]=useState(false);
   const [studio, setStudio] = useState<EssayStudio | null>(null);
   const [view, setView] = useState<StudioView | null>(null);
   const [screen, setScreen] = useState<Screen>("essay");
@@ -75,16 +82,17 @@ export function EssayLive() {
         // the device store only: essays never go to a parent account or a server
         const repo = await openRepo();
         const profiles = await repo.profiles();
-        const learner = profiles.some((p) => p.id === STUDIO_PROFILE_ID)
-          ? await Learner.open(content, repo, STUDIO_PROFILE_ID, clock)
-          : await Learner.create(content, repo, STUDIO_PROFILE_NAME, "guardian", clock, STUDIO_PROFILE_ID, "this_device_only");
+        const learner = profiles.some((p) => p.id === profileId)
+          ? await Learner.open(content, repo, profileId, clock)
+          : await Learner.create(content, repo, workspace?"English workspace (synthetic)":STUDIO_PROFILE_NAME, "guardian", clock, profileId, "this_device_only");
         // the server's evaluator only on explicit opt-in (&evaluator=server): otherwise nothing leaves the device
-        const wantServer = new URLSearchParams(location.search).get("evaluator") === "server";
-        const evaluator = wantServer ? await connectEvaluator(new Api()) : null;
-        if (wantServer && !evaluator) setError("The server's essay evaluator is not available (sign in with a developer account, and ask for it to be switched on). Using the recorded samples and the pattern stand-in.");
+        const wantServer = workspace?workspace.server:new URLSearchParams(location.search).get("evaluator") === "server";
+        const api=new Api();
+        const evaluator = wantServer ? await connectEvaluator(workspaceProfile?{essayEvaluatorStatus:()=>api.essayEvaluatorStatus(workspaceProfile.rubric),essayEvaluate:b=>api.essayEvaluate(b)}:api) : null;
+        if (wantServer && !evaluator) setError(workspace?"The configured evaluator is unavailable. Work remains unassessed; no pattern fallback was substituted.":"The server's essay evaluator is not available (sign in with a developer account, and ask for it to be switched on). Using the recorded samples and the pattern stand-in.");
         // developer testing only: unreviewed questions may verify, and every such result says so
         const developer = BUILD_CONTENT_MODE !== "pilot" && new URLSearchParams(location.search).get("verification") === "developer";
-        const s = new EssayStudio(learner, evaluator, undefined, developer ? DEVELOPER_VERIFICATION : PILOT_VERIFICATION);
+        const s = new EssayStudio(learner, evaluator, undefined, workspace||developer ? DEVELOPER_VERIFICATION : PILOT_VERIFICATION, workspaceProfile?{profile:workspaceProfile.profile,failClosed:true,useFallback:false}:undefined);
         const v = s.view();
         setStudio(s);
         setView(v);
@@ -156,13 +164,15 @@ export function EssayLive() {
   }
   const keyOf = (it: Item | undefined) => (it?.kind === "code" ? (it.options && it.answer !== undefined ? it.options[it.answer] : (it.answers?.[0] ?? "")) : "");
 
+  const workspaceText=(text:string)=>workspace?text.replace(/the grade target/gi,'the selected practice reference').replace(/Grade 0/gi,'non-school practice').replace(/Grade 8 target/gi,'selected practice reference'):text;
+  const presentEvidence=(label:ReturnType<typeof evidenceLabel>)=>workspace?{...label,label:label.key==='verified'||label.key==='verified_developer'?'Retained on candidate practice checks':label.key==='shown'||label.key==='shown_unreviewed_check'?'Shown on candidate independent checks':label.key==='confirmed'?'Concern supported by candidate checks':workspaceText(label.label),detail:workspaceText(label.detail)+' This is candidate practice evidence, not validated proficiency or an exam prediction.'}:label;
   const v = view;
   const essay = v?.essay;
   const name = (cap: string) => studio?.ectx.profile.byCapability.get(cap)?.name ?? cap;
   const STATUS_CLASS: Record<EvidenceKey, string> = { none: "not-started", seen: "needs-verification", suspected: "needs-verification", confirmed: "learning", unsettled: "needs-verification", not_confirmed: "needs-verification", shown: "independently-demonstrated", shown_unreviewed_check: "independently-demonstrated", verified: "verified", verified_developer: "independently-demonstrated" };
   const labelFor = (cap: string) => {
     const c = v?.profile.competencies.find((x) => x.competency === cap);
-    return c ? evidenceLabel(c) : null;
+    return c ? presentEvidence(evidenceLabel(c)) : null;
   };
   /** The evidence state, worded for what the evidence actually shows (evidence-labels.ts). */
   const Status = ({ cap }: { cap: string }) => {
@@ -179,10 +189,10 @@ export function EssayLive() {
       <section className="essay-card essay-recommendation" data-recommendation={v.recommendation.kind} aria-label="What to do next">
         <p className="kicker">Next</p>
         <h2>{v.recommendation.title}</h2>
-        <p className="small">{v.recommendation.reason}</p>
+        <p className="small">{workspaceText(v.recommendation.reason)}</p>
         {v.recommendation.verification && !v.recommendation.verification.available && (
           <p className="small" data-verification="unavailable">
-            {v.recommendation.verification.reason}
+            {workspaceText(v.recommendation.verification.reason)}
           </p>
         )}
         {v.recommendation.history.length > 0 && (
@@ -213,27 +223,27 @@ export function EssayLive() {
         </a>
       </header>
       <aside className="essay-demo-banner" aria-label="What is real here">
-        <strong>Essay studio · connected to the learning engine</strong>
+        <strong>{workspace?"English workspace · one learning history":"Essay studio · connected to the learning engine"}</strong>
         <span>
-          Synthetic essays only, on a test learner kept on this device. {studio?.verification.eligibility === "counted" ? "Developer test: answers on unreviewed questions may verify, and such results are labelled so; this is not the pilot policy." : "Verified mastery needs educator-reviewed questions, answered after their release (the pilot policy)."} Questions, lessons and every status come from the real engine.{" "}
+          Synthetic essays only, on a test learner kept on this device. {workspace?"Candidate practice evidence only, not validated adult proficiency or exam readiness. Lesson completion and model feedback do not establish mastery.":studio?.verification.eligibility === "counted" ? "Developer test: answers on unreviewed questions may verify, and such results are labelled so; this is not the pilot policy." : "Verified mastery needs educator-reviewed questions, answered after their release (the pilot policy)."} Questions, lessons and every status come from the real engine.{" "}
           {studio?.connected
-            ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Only the essay text and its quoted evidence are sent to the server. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
-            : "Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
+            ? `Essay analysis${studio.canGenerate ? " and fresh questions" : ""}: OpenPath's server evaluator (${studio.evaluator.model ?? "model"}), checked by the engine. Synthetic text, quoted evidence, task prompts and practice-profile metadata are sent to the server. Argument revision analysis also includes the previous draft. Questions written by the model are provisional: they inform your profile but never count as showing a skill.`
+            : workspace?"No evaluator connected: writing is saved but unassessed. Self-review prompts are available; no pattern judgment is substituted.":"Essay analysis: recorded outputs for the built-in samples (other text: a simple pattern stand-in). No AI model is connected."}
         </span>
       </aside>
       {v && (
         <nav className="essay-nav" aria-label="Essay journey">
-          {NAV.map((n) => (
-            <button type="button" key={n.screen} aria-current={screen === n.screen ? "step" : undefined} disabled={busy || !enabled(n.screen)} onClick={() => setScreen(n.screen)}>
+          {(workspace?[...NAV.slice(0,2),{screen:"argument" as const,label:"Articulate both sides"},...NAV.slice(2)]:NAV).map((n) => (
+            <button type="button" key={n.screen} aria-current={screen === n.screen ? "step" : undefined} disabled={busy || !enabled(n.screen)} onClick={() => {if(studio)setView(studio.view());setScreen(n.screen);}}>
               {n.label}
             </button>
           ))}
         </nav>
       )}
       <main id="essay-main" className="page essay-main" aria-busy={busy}>
-        <p className="eyebrow">Grade 8 · writing</p>
+        <p className="eyebrow">{workspace?`${workspace.goal} · ${workspace.difficulty} starting practice, not a measured level`:"Grade 8 · writing"}</p>
         <h1 className="hero" ref={heading} tabIndex={-1}>
-          {{ essay: "Your essay", skills: "What your essay shows", check: "A few questions", path: "Your learning path", rewrite: "Same ideas, at most 50 words", profile: "Your writing profile" }[screen]}
+          {{ argument:"Build and test your argument", essay: "Your essay", skills: "What your essay shows", check: "A few questions", path: "Your learning path", rewrite: "Same ideas, at most 50 words", profile: "Your writing profile" }[screen]}
         </h1>
         {error && (
           <div role="alert" className="essay-error">
@@ -250,8 +260,8 @@ export function EssayLive() {
             )}
             <section className="essay-prompt">
               <p className="kicker">Use invented text only</p>
-              <p>Pick a built-in synthetic sample, or type invented writing. Do not paste a real child&apos;s work.</p>
-              {SAMPLES.essays.map((s) => (
+              <p>{workspace?argumentTask(workspace!.goal,workspace!.difficulty,1,"initial").prompt:"Pick a built-in synthetic sample, or type invented writing. Do not paste a real child’s work."}</p>
+              {!workspace&&SAMPLES.essays.map((s) => (
                 <button key={s.id} type="button" className="link" data-sample={s.id} onClick={() => setDraft(s.text)}>
                   Use sample: {s.title}
                 </button>
@@ -260,8 +270,9 @@ export function EssayLive() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if(workspace&&(!syntheticConfirmed||wordCount(draft)>800))return;
                 void act(
-                  () => studio!.submit(draft, { kind: SAMPLES.essays.some((s) => s.text === draft) ? "synthetic" : "typed" }),
+                  () => studio!.submit(draft, { kind: SAMPLES.essays.some((s) => s.text === draft) ? "synthetic" : "typed", ...(workspaceProfile?{prompt:argumentTask(workspace!.goal,workspace!.difficulty,1,"initial").prompt}:{}) }),
                   (nv) => {
                     setDraft("");
                     setScreen("skills");
@@ -271,29 +282,31 @@ export function EssayLive() {
               }}
             >
               <label htmlFor="essay-live-draft">Essay</label>
-              <textarea id="essay-live-draft" rows={10} maxLength={10000} value={draft} onChange={(e) => setDraft(e.target.value)} />
+              <textarea id="essay-live-draft" disabled={!!workspace&&busy} rows={10} maxLength={10000} value={draft} onChange={(e) => setDraft(e.target.value)} />
               <div className="essay-editor-foot">
-                <span>At least 30 words</span>
+                <span>{workspace ? "30–800 words" : "At least 30 words"}</span>
                 <output aria-live="polite">{wordCount(draft)} words</output>
               </div>
-              <button type="submit" className="primary essay-primary" disabled={busy || wordCount(draft) < 30}>
+              <label>{workspace&&<><input type="checkbox" checked={syntheticConfirmed} onChange={e=>setSyntheticConfirmed(e.target.checked)}/>This is invented test writing, not real learner work.</>}</label>
+              <button type="submit" className="primary essay-primary" disabled={busy || wordCount(draft) < 30 || (!!workspace&&(!syntheticConfirmed||wordCount(draft)>800))}>
                 Analyse this essay
               </button>
             </form>
           </>
         )}
+        {workspace&&studio&&essay&&screen==="argument"&&<ArgumentWorkspaceView studio={studio} selection={workspace} initialText={essay.text} initialEssayId={essay.id}/>}
         {v && screen === "skills" && essay && (
           <>
             <p className="essay-note" data-testid="analysed-by">
               {
-                {
+                workspace&&!v.analysedBy?"Saved, not assessed. No model judgment or pattern substitute was used.":{
                   llm: "Analysis: an AI model on OpenPath's server, checked word for word by the engine.",
                   replay: "Analysis: a recorded server answer (test mode), checked by the engine.",
                   recorded: "Analysis: recorded evaluator output for this built-in sample, checked by the engine.",
                   patterns: "Analysis: the simple pattern stand-in (it misses most errors), checked by the engine.",
                 }[v.analysedBy ?? "patterns"]
               }{" "}
-              {v.failedAnalyses.length > 0 && "The server's evaluator failed for this essay, so the local stand-in answered. "}One essay gives clues, not conclusions.
+              {v.failedAnalyses.length > 0 && (workspace?"Analysis was unavailable or rejected. No gaps were inferred. ":"The server's evaluator failed for this essay, so the local stand-in answered. ")}One essay gives clues, not conclusions.
             </p>
             <Recommendation />
             <div className="essay-competencies" data-dashboard>
@@ -318,7 +331,7 @@ export function EssayLive() {
                     <ul className="essay-quotes">
                       {obs.map((o) => (
                         <li key={o.id} data-quote={o.span.quote}>
-                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{o.correction ? ` → ${o.correction}` : ""}
+                          {o.kind === "error" ? "Check: " : o.kind === "style" ? "Style (a suggestion, not an error): " : "Good: "}“{o.span.quote}”{!workspace&&o.correction ? ` → ${o.correction}` : ""}{workspace&&o.kind==='error'?" Which part would you change, and why? Check it before accepting this concern.":""}
                         </li>
                       ))}
                     </ul>
@@ -452,7 +465,7 @@ export function EssayLive() {
                       <Status cap={t.root} />
                       {t.nodes.some((n) => n.competency === t.root && n.steps.some((x) => x.kind === "independent_check" && x.status === "blocked")) && (
                         <p className="small" data-verification="unavailable">
-                          Mastery verification is not available for {name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the Grade 8 target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.
+                          Mastery verification is not available for {name(t.root)} yet: the question bank does not have enough reviewed, unseen questions at the selected provisional practice target band for a check without help. The lessons and practice still work, and nothing will be claimed until a real check is possible.
                         </p>
                       )}
                       {(() => {
@@ -524,7 +537,7 @@ export function EssayLive() {
                         <dt>{name(o.competency)}</dt>
                         <dd>Path: {yesNo(o.journeyCompleted, "completed", "not finished")}</dd>
                         <dd>Shown without help at band {o.target}: {o.demonstrated ? "yes" : "not yet"}</dd>
-                        <dd>Verified (a later check passed): {o.verified ? "yes" : "not yet"}</dd>
+                        <dd>{workspace?"Retained on candidate later checks":"Verified (a later check passed)"}: {o.verified ? "yes" : "not yet"}</dd>
                         <dd>Retention: {RETENTION[o.retention]}{o.retentionDueAt && (o.retention === "pending" || o.retention === "due") ? ` (from ${o.retentionDueAt.slice(0, 10)})` : ""}</dd>
                         {o.pending && <dd className="small">{o.pending}</dd>}
                       </dl>
@@ -676,7 +689,7 @@ export function EssayLive() {
               <summary>Your essay</summary>
               <p>{essay.text}</p>
             </details>
-            {SAMPLES.rewrites.some((r) => SAMPLES.essays.find((s) => s.id === r.essay)?.text === essay.text) && (
+            {!workspace&&SAMPLES.rewrites.some((r) => SAMPLES.essays.find((s) => s.id === r.essay)?.text === essay.text) && (
               <button type="button" className="link" data-sample-rewrite onClick={() => setRewrite(SAMPLES.rewrites.find((r) => SAMPLES.essays.find((s) => s.id === r.essay)?.text === essay.text)!.text)}>
                 Use the synthetic sample rewrite
               </button>
@@ -718,7 +731,7 @@ export function EssayLive() {
               </section>
             )}
             <section>
-              <h2>Skills in Grade 8 writing</h2>
+              <h2>{workspace?"Writing foundations and observed evidence":"Skills in Grade 8 writing"}</h2>
               <ul className="essay-profile-list">
                 {v.profile.competencies
                   .filter((c) => c.state !== "unknown")
@@ -730,11 +743,11 @@ export function EssayLive() {
                       {lessonLabel(c) && (
                         <small data-lessons={c.lessons!.percent}>{lessonLabel(c)}</small>
                       )}
-                      <small data-estimate={c.engine.estimate ? c.engine.estimate.mean.toFixed(1) : "none"}>{estimateLabel(c)}</small>
+                      <small data-estimate={c.engine.estimate ? c.engine.estimate.mean.toFixed(1) : "none"}>{workspace?estimateLabel(c).replace("the Grade 8 target", "the self-selected practice reference"):estimateLabel(c)}</small>
                       {formativeLabel(c) && <small data-formative={c.formative!.status}>{formativeLabel(c)}</small>}
                       {c.provenance.provisional.length > 0 && <small data-held={c.provenance.provisional.length}>{c.provenance.provisional.length} answer{c.provenance.provisional.length === 1 ? "" : "s"} on model-written practice questions: kept, never counted as evidence of the skill</small>}
                       {c.notes.map((n) => (
-                        <small key={n}>{n}</small>
+                        <small key={n}>{workspaceText(n)}</small>
                       ))}
                     </li>
                   ))}
@@ -747,6 +760,7 @@ export function EssayLive() {
             </div>
           </>
         )}
+        {workspaceProfile&&<details><summary>What this workspace can and cannot assess</summary>{workspaceProfile.limitations.map((note,i)=><p key={i}>{note}</p>)}<p>{workspaceProfile.summary.withLessons} competencies have candidate lesson or mini-lesson content; {workspaceProfile.summary.withoutLessons} have missing teaching. Missing content is not a learner deficit.</p><ul>{workspaceProfile.coverage.map(c=><li key={c.capability}>{c.name}: {c.status.replaceAll('_',' ')}; {c.lessonIds.length} lesson parts; {c.itemsAtPracticeTarget} raw items at the practice reference (eligibility and freshness still apply).</li>)}</ul></details>}
       </main>
     </div>
   );

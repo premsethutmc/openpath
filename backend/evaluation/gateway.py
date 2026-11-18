@@ -69,6 +69,10 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
         cleaned, _ = essay.validate_essay_request(task.split('.')[1], request)
         config = essay._config()
         system = essay.exam.PROMPT if cleaned["rubric"] == essay.exam.RUBRIC else essay._prompt(cleaned["protocol"])
+        if cleaned["rubric"] == essay.argument.RUBRIC:
+            system = essay.argument.PROMPT
+        if cleaned["rubric"] in essay.foundation.RUBRICS:
+            system = essay.foundation.prompt(system)
         user = json.dumps(cleaned, ensure_ascii=False)
     else:
         from family import word_problem

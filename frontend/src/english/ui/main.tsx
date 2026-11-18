@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { EssayJourney } from "./essay/EssayJourney.tsx";
+import {EnglishWorkspace} from './essay/EnglishWorkspace.tsx';
 import { EssayLive } from "./essay/EssayLive.tsx";
 import { ExamJourney } from "./ExamJourney.tsx";
 import { ExamDiagnostic } from "./ExamDiagnostic.tsx";
@@ -41,7 +42,8 @@ const experience = new URLSearchParams(location.search).get("experience");
 const essayDemo = experience === "essay-demo";
 const examDiagnostic = experience === "exam-diagnostic";
 // the essay studio connected to the engine: synthetic essays on an on-device test learner (refused in a pilot build)
-const essayLive = experience === "essay-live";
+const workspace = experience === "english-workspace";
+const essayLive = experience === "essay-live" || workspace;
 if (!essayDemo && !essayLive && !examDiagnostic) installBrowserHooks();
 const root = document.getElementById("root")!;
 root.dataset.started = "1";
@@ -63,6 +65,7 @@ const entryView = () => {
   if (examDiagnostic) return new URLSearchParams(location.search).get("mode") === "synthetic" ? <ExamJourney /> : <ExamDiagnostic />;
   if (developer) return <Developer />;
   if (essayDemo) return <EssayJourney />;
+  if (workspace) return <EnglishWorkspace />;
   if (essayLive) return <EssayLive />;
   return <App />;
 };

@@ -4,6 +4,14 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## Integrated English workspace (2026-11-18, work in progress)
+- Branch `feat/english-workspace-2026-11-18`, based on main `dc7572e8` (#209).
+- Owner clarified comprehensive ongoing grammar/articulation practice, goal-dependent tasks, for/against arguments and own-text repair, not canned rewrites or isolated milestones.
+- Reuses EssayStudio/learner ledger for hypotheses, verification, plans, teaching, independent checks and retention; separate argument observations never imply mastery.
+- Grade7/general/CAT/GRE/GMAT self-selected candidate profiles; 17 specified competencies have teaching, 3 observation-only. Actual fresh-check shortages remain.
+- Synthetic only, optional configured evaluator fails closed; no provider activation, real learner data, audio or maths changes. See `docs/product/english/learner-workspace.md`.
+- Validation/CI still in progress; do not call this merged or live-ready.
+
 ## English guided teaching milestone (2026-11-18)
 - Branch `feat/english-guided-teaching-2026-11-18`, based on main `4552ce4a` (PR #207).
 - Four worked examples with reasoning, separate guided practice, hints/retry/reveal and supported completion gate.
@@ -26,7 +34,7 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
-- One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.
+- Latest English direction: build the coherent ongoing learner journey rather than successive isolated milestones; report exact tested coverage and remaining gaps.
 - Long jobs run in GitHub Actions; schedule a check-in instead of waiting. How-to: `docs/runbooks/DEV.md`.
 
 ## Branches
