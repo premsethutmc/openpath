@@ -15,6 +15,8 @@ test("where a skill is used: real skills, two short lines, one playful question 
   const have = c5.filter((s) => useFor(s.competency)).length;
   console.log(`${have} of ${c5.length} Class 5 skills`);
   assert.ok(have >= 35);
+  assert.ok(Object.keys(USES).length >= 95, String(Object.keys(USES).length));
+  assert.equal(useFor("MATH.algebra.matrices")!.art, "pixels");
   assert.equal(useFor("MATH.number.primes"), null, "no forced use");
   assert.equal(useFor(undefined), null);
 });
