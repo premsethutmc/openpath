@@ -97,3 +97,27 @@ test('concept retention uses existing delayed checks and failed retention reques
  }
  assert.equal(retention,true,'existing engine must schedule delayed concept retention after sufficient independent concept evidence');assert.equal(JSON.stringify(x.source.state.ledger.composite.nodes),baseline);
 });
+
+test('independent-writing concern leads to teaching and fresh retest without promoting writing ability',async()=>{
+ const {ArgumentWorkspace}=await import('./argument-workspace.ts');
+ const {ARGUMENT_RUBRIC}=await import('../../../../../packages/english-core/src/index.ts');
+ const x=await setup();const before=JSON.stringify(x.source.state.ledger.composite.nodes);
+ const text='A community should improve its shared spaces because these places let people meet and learn together. A useful plan would explain who can use the space and how access will be maintained. Costs and competing needs should also be considered before a decision is made.';
+ const fresh='A trial would let residents explain their experience before a permanent decision is made. The proposal could work if access remains fair. We should consider costs and practical difficulties rather than assume that everyone benefits equally from this change.';
+ const info={available:true,id:'fixture',version:'1',model:'fixture',rubric:ARGUMENT_RUBRIC,protocols:{observe:'essay-observe.v2' as const}};
+ const writing=new ArgumentWorkspace(x.source,{goal:'general',difficulty:'foundation',info,post:async body=>({evaluator:{id:info.id,version:info.version,model:info.model,rubric:ARGUMENT_RUBRIC,protocol:'essay-observe.v2'},output:{essay_id:body.request.essay.id,rubric:ARGUMENT_RUBRIC,findings:body.request.task_context.stage==='transfer'?[{area:'reasons',quote:'A trial would let residents explain their experience',question:'How would the experience inform the decision?',hint:'Explain what the trial would help decide.'}]:[],not_observable:[]}})});
+ for(const stage of ['initial','for','against','revision'])await writing.submit(text+(stage==='revision'?' This adds a qualification.':''),{syntheticConfirmed:true});
+ const reservation=(await writing.startTransfer()).transfer.active!.reservation.id;
+ const view=await writing.submitTransfer(reservation,fresh,{syntheticConfirmed:true,unaidedConfirmed:true});const c=view.concerns[0];assert.equal(c.sourceStage,'transfer');
+ const p=(await x.flow.startProbe({artifactId:c.artifactId,feedbackEventId:c.feedbackEventId,findingIndex:c.findingIndex,capability:x.origin.capability})).plans[0];
+ assert.equal(p.probe.artifactId,c.artifactId);await answer(x.flow,p.probe.id,false);await answer(x.flow,p.probe.id,false);
+ for(const lesson of x.flow.view().plans[0].lessons)await x.flow.finishLesson(p.probe.id,lesson.id,true);
+ await answer(x.flow,p.probe.id,true);await answer(x.flow,p.probe.id,true);
+ const check=(await x.flow.planNextCheck(p.probe.id)).plans[0].check!;
+ assert.ok(check.items.every(i=>![...p.probe.items,...p.probe.guided].some(old=>old.id===i.id)));
+ x.setTime(new Date(Date.parse(check.notBefore)+1000).toISOString());await answer(x.flow,p.probe.id,true);await answer(x.flow,p.probe.id,true);
+ assert.equal(JSON.stringify(x.source.state.ledger.composite.nodes),before);
+ const reopened=await Learner.open(x.content,x.repo,x.concept.profileId,x.clock);const resumed=new ArgumentConceptPlan(x.source,reopened,x.context);
+ assert.equal(resumed.view().plans[0].checks[0].complete,true);await assert.rejects(resumed.startProbe({...x.origin,artifactId:c.artifactId,feedbackEventId:c.feedbackEventId}),/existing/);
+ assert.equal(writing.view().transfer.history[0].artifact!.text,fresh);
+});
