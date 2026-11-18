@@ -382,7 +382,7 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
           ))}
           {ask.labels.map((l, i) => (
             <g key={l}>
-              <rect x={50 + 60 * i} y={bottom - (h[i] / ask.step) * unit} width={36} height={(h[i] / ask.step) * unit} fill="#6a55f0" rx={3} />
+              <rect x={50 + 60 * i} y={bottom - (h[i] / ask.step) * unit} width={36} height={(h[i] / ask.step) * unit} style={{ fill: "var(--brand, #2563eb)" }} rx={3} />
               <text x={68 + 60 * i} y={bottom + 16} fontSize={10} textAnchor="middle" fill="#334">{l}</text>
             </g>
           ))}

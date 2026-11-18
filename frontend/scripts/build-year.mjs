@@ -61,7 +61,7 @@ await esbuild.build({
 });
 await writeFile(
   `${out}/index.html`,
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f6fc"><title>My Learning Year · OpenPath</title><link rel="stylesheet" href="app.css"><style>${BOOT_CSS}</style></head><body><div id="root">${BOOT_HTML}</div><script type="module" src="app.js"></script></body></html>`,
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff7ea"><title>My Learning Year · OpenPath</title><link rel="stylesheet" href="app.css"><style>${BOOT_CSS}</style></head><body><div id="root">${BOOT_HTML}</div><script type="module" src="app.js"></script></body></html>`,
 );
 if (shellCache)
   await writeFile(
@@ -99,7 +99,7 @@ self.addEventListener("fetch", (e) => {
 const rout = `${root}/${process.env.DIST ?? "dist-english"}/review`;
 await mkdir(rout, { recursive: true });
 await esbuild.build({ entryPoints: [`${root}/src/review/Main.tsx`], bundle: true, format: "esm", target: "es2022", minify: !test, sourcemap: test ? "inline" : false, outdir: rout, entryNames: "app", define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: "false" } });
-await writeFile(`${rout}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f6fc"><title>Content review · OpenPath</title><link rel="stylesheet" href="app.css"></head><body><div id="root"></div><script type="module" src="app.js"></script></body></html>`);
+await writeFile(`${rout}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff7ea"><title>Content review · OpenPath</title><link rel="stylesheet" href="app.css"></head><body><div id="root"></div><script type="module" src="app.js"></script></body></html>`);
 console.log(`Built My Learning Year at /year/${device ? " (DEVICE BUILD: records stay in this browser)" : ""}${test ? " (TEST BUILD: review fixture on)" : ""}${deep ? ` (deep-recovery research switch available with ?deep=1${sitting ? `, ${sitting} per sitting` : ""})` : ""} and content review at /review/.`);
 
 // Exact scoped denominator and migration gaps accompany every Year build.
