@@ -4,6 +4,13 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## English diagnostic milestone (2026-11-18)
+- Branch `feat/english-e2e-2026-11-18`, based on main `10648a43` (PR #199).
+- Complete synthetic reading/writing → model hypotheses → deterministic checks → teaching → fresh reassessment.
+- Four narrow writing areas; separate fresh reading and writing banks. Default offline; optional shared API developer mode.
+- No provider activation, spending, real learner submission or maths changes. Pilot route stays refused.
+- Details and limitations: `docs/product/english/exam-writing-synthetic.md`.
+
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
 - One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.

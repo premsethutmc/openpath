@@ -81,6 +81,7 @@ export function ExamDiagnostic({ storage }: { storage?: StorageLike }) {
   }
   return <main className="welcome" data-exam-diagnostic="1">
     <h1>English: reading and writing preview</h1>
+    <p><a href="?experience=exam-diagnostic&mode=synthetic">Try the complete synthetic diagnostic, teaching and reassessment journey</a></p>
     <p>Two short exercises to explore your reading and written explanation. Allow about ten minutes; this version is untimed.</p>
     <p>This is original exam-oriented practice, not an official CAT, GRE, UPSC or TNPSC test. It does not predict a score, percentile or admission outcome.</p>
     <p className="small">Your work stays on this device. No model is called and your writing is not sent anywhere. Writing analysis is not connected in this preview. Avoid personal details. If you have seen these questions before, treat this as practice rather than fresh evidence.</p>
