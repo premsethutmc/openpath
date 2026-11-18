@@ -42,7 +42,37 @@ function primeTest({ params: [mode, n], answer }: Q): Worked[] | null {
   return out;
 }
 
-const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest };
+/**
+ * avdiv [d, q, r, mode]: long division of n = d·q + r by d; mode 0 asks the quotient, 1 the remainder. The type's own
+ * steps state the quotient at once and then check it by multiplying, which is not how it is done. This is the method
+ * itself: one digit at a time, from the left: how many fit, what is left over, bring the next digit down.
+ */
+function longDivision({ params: [d, q, r, mode], answer }: Q): Worked[] | null {
+  const n = d * q + r;
+  if (!Number.isInteger(n) || d < 2 || d > 99 || n < 10 || n > 999999 || r < 0 || r >= d) return null;
+  if (String(mode === 1 ? r : q) !== answer) return null;
+  const digits = String(n).split("").map(Number), PLACE = ["ones", "tens", "hundreds", "thousands", "ten thousands", "lakhs"];
+  const out: Worked[] = [];
+  let carry = 0, quotient = "";
+  digits.forEach((digit, i) => {
+    const place = PLACE[digits.length - 1 - i], cur = carry * 10 + digit, fit = Math.floor(cur / d), left = cur - fit * d, last = i === digits.length - 1;
+    const where = i === 0 ? `First: start at the left, with the ${place}. ` : "";
+    if (fit === 0) {
+      out.push({ next: `${where}How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 above the ${place}${last ? "" : ` and keep the ${cur}`}.` });
+    } else {
+      out.push({ next: `${where}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 99 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} above the ${place}.` });
+      out.push({ next: `What is left over from the ${cur}?`, shown: `${cur} − ${d * fit} = ${left}` });
+    }
+    quotient += String(fit);
+    carry = left;
+    if (!last) out.push({ next: `Bring down the next digit, ${digits[i + 1]}, beside the ${left}.`, shown: `${left === 0 ? `Nothing was left over, so it is just ${digits[i + 1]}` : `${left} and ${digits[i + 1]} side by side make ${left * 10 + digits[i + 1]}`}.` });
+  });
+  if (Number(quotient) !== q || carry !== r) return null;
+  out.push({ next: "Last: read the answer off the top.", shown: mode === 1 ? `The digits on top make ${q}, and what is left at the end is the remainder: ${r}.` : `The digits on top make the quotient: ${q}.${r ? ` (${r} is left over.)` : ""}` });
+  return out;
+}
+
+const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** The full working for a question of a type that has one, or null. */
 export function workedOut(q: Q): Worked[] | null {

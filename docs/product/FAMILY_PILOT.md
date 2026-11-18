@@ -379,3 +379,22 @@ an equal fraction multiplies the top by what the bottom was multiplied by; unlik
 same-size pieces. The steps appear one at a time (a later one may show what an earlier one asked for), and "I can do it
 without these steps" leaves only the answer box. 21 types have first steps now. A bare number offered as an angle in a
 lesson's guess is shown with its degree sign.
+
+`fold@2`: a lesson's text is folded behind "Tell me more" only for Classes 1 to 5 (the learner's class, else the class
+the skill is first taught in) and only when at least 140 characters would be folded. Older learners read the whole
+explanation; a single short line is never hidden. The "New skill" line above a first lesson is a plain note.
+
+`term-links@1` (`packages/learning/src/terms.ts`, `Terms.tsx`): a word in a lesson that names an earlier skill ("sin",
+"denominator", "HCF") is a link that opens that skill's own rule and example in place, without leaving the lesson. The
+vocabulary is a list of words and the skill each belongs to (35 skills). A word is linked once per paragraph, never
+inside its own skill, and never to a skill taught in a later class. Lesson pages only so far; it does not yet take the
+learner to the earlier lesson itself.
+
+`worked-out@1`, long division (`avdiv`): the type's own steps stated the quotient at once and then checked it by
+multiplying. The step help is now the method: from the left, how many fit in this digit, what is left over, bring the
+next digit down, and the answer is read off the top at the end. 500 questions.
+
+`help-audit@1` (`frontend/src/year/help-audit.test.ts`): every question type's step help is checked by machine on each
+change, with a ceiling on each fault count so it can only go down. First reading, of 941 types: the answer is in the
+first line of help in 28, said in a "what to do" cue in 1, the help is a single step in 161, and the cues are mostly one
+word in 478. It cannot see whether the steps are the method a teacher would use.
