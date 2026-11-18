@@ -7,6 +7,7 @@
  * needs and that skill's own rule (a card), and then the step itself. Nothing is written per question and nothing is
  * fetched. A card is assembled from the skill's own lesson; `source` says how, so a person can review the thin ones.
  */
+import { workedOut } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
@@ -67,15 +68,46 @@ export function cardFor(competency: string): Card | null {
 }
 
 const NEXT: Record<string, string> = { note: "notice what the question gives you", evaluate: "work out the value", "choose the option": "pick the option that fits", read: "read it off the picture", write: "write it down in the form asked", recall: "remember the fact you need", check: "check it" };
+/**
+ * cue-numbers@1: "multiply." tells a stuck child nothing. Where a step is one plain calculation, the cue names the numbers
+ * it is done with ("multiply 50 by 6", "take 300 away from 348"), never its result. The numbers are the step's own
+ * inputs, and the wording is used only when the calculation it describes gives the step's own value, both numbers are
+ * there in the step as it is shown, both are given (in the question, or worked out in an earlier step), and the result
+ * is not one of them (5 × 1 would say its own answer).
+ */
+function cueWith(op: string, inputs: unknown, value: unknown, shown: string, given: Set<number>): string | null {
+  if (!Array.isArray(inputs) || typeof value !== "number" || !Number.isFinite(value)) return null;
+  const xs = inputs as number[];
+  // a number that is neither in the question nor the result of an earlier step is this step's own choice (the 50 in
+  // "50 × 6" of a long division): naming it would do the thinking for the learner
+  if (!xs.every((x) => given.has(x))) return null;
+  if (xs.length < 2 || xs.length > 3 || !xs.every((x) => typeof x === "number" && Number.isFinite(x) && x >= 0 && Math.abs(x * 1000 - Math.round(x * 1000)) < 1e-6)) return null;
+  const near = (a: number, b: number) => Math.abs(a - b) < 1e-9;
+  const said = (x: number) => String(Math.round(x * 1000) / 1000);
+  const flat = shown.replace(/(\d),(?=\d)/g, "$1");
+  if (xs.some((x) => near(x, value)) || !xs.every((x) => new RegExp(`(^|[^\\d.])${said(x).replace(".", "\\.")}([^\\d]|\\.(?!\\d)|$)`).test(flat))) return null;
+  const [a, b] = xs, n = (x: number) => said(x).replace(/\B(?=(\d{3})+(?!\d))/g, x >= 10000 && Number.isInteger(x) ? "," : "");
+  if (op === "add" && near(xs.reduce((t, x) => t + x, 0), value)) return xs.length === 2 ? `add ${n(a)} and ${n(b)}` : `add ${n(xs[0])}, ${n(xs[1])} and ${n(xs[2])}`;
+  if (xs.length !== 2) return null;
+  if (op === "subtract") return near(a - b, value) ? `take ${n(b)} away from ${n(a)}` : near(b - a, value) ? `take ${n(a)} away from ${n(b)}` : null;
+  if (op === "multiply") return near(a * b, value) ? `multiply ${n(a)} by ${n(b)}` : null;
+  if (op === "divide") return b !== 0 && near(a / b, value) ? `divide ${n(a)} by ${n(b)}` : a !== 0 && near(b / a, value) ? `divide ${n(b)} by ${n(a)}` : null;
+  return null;
+}
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
 export function stepsHelp(qid: string): StepHelp[] | null {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return null;
+  // worked-out@1: a type whose own steps leap over the work has the whole working written for it
+  const full = workedOut(p);
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: null, ...(cardFor(p.competency) ? { rule: p.competency } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
+  const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
   return p.steps.flatMap((s, i) => {
+    const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).map((t) => (t as { value?: unknown }).value).filter((v): v is number => typeof v === "number")]);
     const own: StepHelp = {
-      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${NEXT[s.op] ?? s.op}.`,
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cueWith(s.op, (s as { inputs?: unknown }).inputs, (s as { value?: unknown }).value, explainStep(p, s), given) ?? NEXT[s.op] ?? s.op}.`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
       ...(cardFor(s.competency) ? { rule: s.competency } : {}),

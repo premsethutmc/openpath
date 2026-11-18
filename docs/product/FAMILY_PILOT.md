@@ -346,3 +346,25 @@ Prime-numbers lesson (the pattern for a story lesson done fully):
 `play-first@1` (`recipe-layout.ts`, owner's decision 18 Nov 2026): from Class 4 a story lesson is one screen that grows
 (no Next between parts), and it opens on the thing to play with, the story under it. The guess is asked just before the
 last thing to find out, when the learner has something to guess from. Classes 1 to 3 keep one part at a time.
+
+`worked-out@1` (`packages/learning/src/worked-out.ts`): for a type whose own steps are a summary, the whole working a
+learner would do, written once for the type from its own numbers; it replaces the type's steps in the step help and is
+kept only when it ends on the verified answer. First type: the prime test (`agptest`): how far to try (k × k), then each
+prime in turn (even? digit sum? last digit? how many fit and what is left over), then what was found. 393 questions,
+2,869 steps, 1,603 of them boxes to fill.
+
+`cue-numbers@1` (`step-help.ts`): where a step is one plain calculation, its cue names the numbers ("take 72 away from
+100") instead of the bare word ("subtract."). Used only when the calculation named gives the step's value, both numbers
+are given (in the question or from an earlier step; a number the step itself chooses, like the 50 of a long division's
+"50 × 6", is never named), and the result is not one of them. About a quarter of the bare add, subtract, multiply and
+divide cues.
+
+`clips@1` (`packages/learning/src/clips.ts`): a short recorded explanation of a building-block skill, made once and kept
+outside the app (the file lists only where each lives). Second-level help: the "Watch" button is inside the opened
+"This needs" / "Why?" card, after the written rule; nothing is fetched until tapped. No clips are registered yet, so
+nothing shows. To add one: host the reviewed mp4 or webm on https, then add the skill to `CLIPS`.
+
+`chintu@1` (`Chintu.tsx`): Chintu the cat (our own drawing) says the step help's "what to do" in a speech bubble on
+questions of Classes 1 to 5 (`classOfQuestion`: the question's own class, else the first class any board teaches its
+skill). "Hear it" reads his words with the phone's own voice where it has one; nothing is recorded, downloaded or sent.
+He speaks only when help is asked for. Not yet beside nudges, lessons or "Where is this used?".

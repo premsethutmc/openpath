@@ -45,3 +45,32 @@ test("rows-of-people@1 and tried@1: children are drawn, the left over stand unde
   assert.equal(triedLine(r.missions[0], 3), null, "no log on a scene that keeps none");
   assert.equal(triedLine({ ...s13, total: 12 } as typeof s13, 4), "4 rows: 3 in each, nobody left over");
 });
+
+test("clips@1: a clip is second-level help inside the opened rule card, lives outside the app, and shows nothing when there is none", async () => {
+  const { CLIPS, clipFor, clipOk } = await import("../../../packages/learning/src/clips");
+  for (const [c, clip] of Object.entries(CLIPS)) assert.ok(clipOk(clip), c);
+  assert.equal(clipFor("MATH.number.long-division"), CLIPS["MATH.number.long-division"] ?? null);
+  assert.equal(clipFor(null), null);
+  assert.ok(clipOk({ url: "https://example.org/a/long-division.mp4", title: "Long division", seconds: 70 }));
+  assert.ok(!clipOk({ url: "http://example.org/a.mp4", title: "x", seconds: 70 }), "https only");
+  assert.ok(!clipOk({ url: "https://example.org/a.mp4", title: "Long division", seconds: 900 }), "short clips only");
+  // offered only inside the opened card, and not fetched before it is tapped
+  assert.match(coach, /\{rule && card && \([\s\S]*<ClipButton key=\{ruleOf\} competency=\{ruleOf\} \/>/);
+  assert.match(coach, /if \(!open\) return <button[^>]*data-testid="coach-clip"/);
+});
+
+test("chintu@1: Chintu says the step help on questions of Classes 1 to 5 only, and reads maths the way it is said", async () => {
+  const { spoken } = await import("./Chintu");
+  assert.equal(spoken("First: multiply 11 by 2."), "First: multiply 11 by 2.");
+  assert.equal(spoken("7 × 78 = 546. Left over: 551 − 546 = 5"), "7 times 78 equals 546. Left over: 551 minus 546 equals 5");
+  assert.equal(spoken("348 ÷ 6 = ?"), "348 divided by 6 equals what");
+  assert.match(coach, /g !== null && g <= LAST_CHINTU_CLASS/);
+  const { classOfQuestion } = await import("./StepCoach");
+  const { pool } = await import("../../../packages/learning/src/families");
+  assert.ok(classOfQuestion(pool("ldiv").items[0].id)! <= 5, "long division is primary-school work");
+  assert.ok(classOfQuestion(pool("dpow").items[0].id)! >= 11, "differentiation is not");
+  assert.equal(classOfQuestion("not-a-question"), null);
+  assert.match(coach, /export const LAST_CHINTU_CLASS = 5;/);
+  const cat = readFileSync(new URL("./Chintu.tsx", import.meta.url), "utf8");
+  assert.ok(!/fetch\(|<audio|<video|https?:/.test(cat), "nothing is downloaded or sent");
+});

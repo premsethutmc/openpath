@@ -489,3 +489,22 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scene-tried { margin: 6px 0 0; }
 .scene-tried p { margin: 0 0 2px; }
 .scene-tried ul { margin: 0; padding-left: 20px; display: grid; gap: 2px; font-weight: 700; }
+
+/* clips@1 */
+.coach-clip { min-height: 44px; justify-self: start; }
+.coach-video { width: 100%; border-radius: 12px; background: #000; }
+
+/* chintu@1 */
+.chintu { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: start; }
+.chintu-cat { width: 56px; height: 56px; }
+.chintu-fur { fill: #f6b26b; stroke: #b7742c; stroke-width: 1.5; stroke-linejoin: round; }
+.chintu-ear { fill: #f9d7c0; }
+.chintu-eye { fill: #2b2140; }
+.chintu-nose { fill: #e8788a; }
+.chintu-mouth { fill: none; stroke: #2b2140; stroke-width: 1.6; stroke-linecap: round; }
+.chintu-mouth.open { fill: #e8788a; }
+.chintu-whisker { fill: none; stroke: #2b2140; stroke-width: 1; stroke-linecap: round; opacity: 0.6; }
+.chintu-bubble { position: relative; padding: 10px 14px; border-radius: 16px; background: var(--card, #fff); border: 2px solid var(--line, #c9d3e0); }
+.chintu-bubble::before { content: ""; position: absolute; left: -9px; top: 18px; width: 14px; height: 14px; background: inherit; border-left: 2px solid var(--line, #c9d3e0); border-bottom: 2px solid var(--line, #c9d3e0); transform: rotate(45deg); }
+.chintu-bubble .coach-next { margin: 0; }
+.chintu-hear { min-height: 36px; padding: 0; }

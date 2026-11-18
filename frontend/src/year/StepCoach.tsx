@@ -11,6 +11,31 @@ import { cardFor, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 import { SmallAsk } from "./SmallAsk";
 import { askOf, judge, type StepAsk } from "../../../packages/learning/src/step-ask";
+import { clipFor } from "../../../packages/learning/src/clips";
+import { gradeOfQuestion, problemOf } from "../../../packages/learning/src/families";
+import { allSkills } from "./try-skills";
+import { Chintu } from "./Chintu";
+
+export const LAST_CHINTU_CLASS = 5;
+/** The class a question belongs to: its own (where a type marks some of its questions as later work), else the first
+ *  class in which any board's book teaches its skill. Null when neither is known. */
+let FIRST_CLASS: Map<string, number> | null = null;
+export function classOfQuestion(qid: string): number | null {
+  const base = qid.replace(/:(mc|w)$/, ""), own = gradeOfQuestion(base);
+  if (own !== null) return own;
+  const p = problemOf(base);
+  if (!p) return null;
+  if (!FIRST_CLASS) { FIRST_CLASS = new Map(); for (const k of allSkills()) if ((FIRST_CLASS.get(k.competency) ?? 99) > k.release.grade) FIRST_CLASS.set(k.competency, k.release.grade); }
+  return FIRST_CLASS.get(p.competency) ?? null;
+}
+
+function ClipButton({ competency }: { competency: string | null }) {
+  const clip = clipFor(competency);
+  const [open, setOpen] = useState(false);
+  if (!clip) return null;
+  if (!open) return <button type="button" className="secondary coach-clip" data-testid="coach-clip" onClick={() => setOpen(true)}><span aria-hidden="true">▶ </span>Watch: {clip.title} ({clip.seconds < 60 ? `${clip.seconds} s` : `${Math.round(clip.seconds / 60)} min`})</button>;
+  return <video className="coach-video" src={clip.url} controls autoPlay playsInline preload="metadata" aria-label={clip.title} />;
+}
 
 /** step-ask@1: the step with its result left out, for the child to enter. Right moves on by itself; wrong says so and
  *  leaves the smaller question and "Show me this step" to help. Nothing is recorded: it is part of the help. */
@@ -41,6 +66,8 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
  *  `shown` opens it from outside (the "I'm stuck" button and the "Help" button in the working are the same thing). */
 export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone, shown }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void; shown?: boolean }) {
   const steps = useMemo(() => stepsHelp(qid), [qid]);
+  // chintu@1: on a question of Classes 1 to 5, Chintu the cat says what to do next
+  const buddy = useMemo(() => { const g = classOfQuestion(qid); return g !== null && g <= LAST_CHINTU_CLASS; }, [qid]);
   const [open, setOpen] = useState(startOpen);
   const [at, setAt] = useState(0);
   const [card, setCard] = useState(false);
@@ -60,12 +87,14 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
       {at > 0 && <ol className="recipe-steps coach-done">{steps.slice(0, at).map((s, i) => <li key={i}><span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span></li>)}</ol>}
       {now && (
         <>
-          <p className="coach-next" role="status">{now.next}</p>
+          {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}
           {rule && <button type="button" className="coach-chip" aria-expanded={card} onClick={() => setCard(!card)}>{now.needs ? `This needs: ${rule.name}` : card ? "Hide the rule" : "Why? Show me the rule"}</button>}
           {rule && card && (
             <aside className="coach-card" aria-label={rule.name}>
               {rule.rule.map((t, i) => <p key={i}>{t}</p>)}
               {rule.example && <><p className="small muted">For example: {rule.example.prompt}</p><ol className="recipe-steps">{rule.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
+              {/* clips@1: second-level help, after the written rule; nothing is fetched until it is asked for */}
+              <ClipButton key={ruleOf} competency={ruleOf} />
             </aside>
           )}
           {/* step-ask@1: a step with a result is done by the child: they enter it, and a right entry moves on */}
