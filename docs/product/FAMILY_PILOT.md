@@ -445,3 +445,6 @@ Figure). Decimal and fraction layouts were checked at 390 px: both fit.
 "How?" button on a step that has been done opens the working: the lines, or the finished long-division layout, and for
 a division a button that opens the long division rule. Long division questions themselves stay step by step. Opening
 the help is what is recorded; "How?" is inside it. The audit counts folded lines as lines of help.
+
+`below-the-work@1`: in the child's lesson the "Let's try" / "Next" button sits after the worked steps and no longer
+floats over them. The scribble pad is offered under a lesson's "Work it with me" as well as on questions.
