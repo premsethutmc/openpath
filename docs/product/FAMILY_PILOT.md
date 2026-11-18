@@ -448,3 +448,9 @@ the help is what is recorded; "How?" is inside it. The audit counts folded lines
 
 `below-the-work@1`: in the child's lesson the "Let's try" / "Next" button sits after the worked steps and no longer
 floats over them. The scribble pad is offered under a lesson's "Work it with me" as well as on questions.
+
+`no-spoiler@1`: in a lesson whose steps the child does, a teaching picture that writes the answer (a number line whose
+jump lands on it, a triangle labelled with it, a finished written working) is not shown above the steps; it appears
+under "See it in a picture" once the last step is done. Pictures the child counts or reads (ten-frames, coins, grids,
+tables of data) stay. guess-picture.test.ts walks every lesson: 1,089 worked by the child, 265 with a teaching picture,
+19 held back.

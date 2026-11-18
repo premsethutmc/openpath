@@ -3,11 +3,12 @@
  * time (each step with a result is entered; "Show me this step" is always there), and then, where the question holds
  * the wrong answers learners give, a "what went wrong?" about one of them. Lesson only: nothing is recorded.
  */
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { mistake } from "../../../packages/learning/src/lesson-interactions";
 import { StepCoach } from "./StepCoach";
 
-export function WorkedByYou({ qid }: { qid: string }) {
+/** `after`: something that would give the answer away (the finished picture), shown only once every step is done. */
+export function WorkedByYou({ qid, after }: { qid: string; after?: ReactNode }) {
   const slip = useMemo(() => mistake(qid), [qid]);
   const [done, setDone] = useState(false);
   const [picked, setPicked] = useState<number | null>(null);
@@ -16,6 +17,7 @@ export function WorkedByYou({ qid }: { qid: string }) {
     <div className="worked-by-you" data-worked={done ? "done" : "working"}>
       <p className="eyebrow">Work it with me</p>
       <StepCoach qid={qid} startOpen onDone={() => setDone(true)} />
+      {after && done && <div className="worked-after" data-testid="worked-after"><p className="eyebrow">See it in a picture</p>{after}</div>}
       {slip && done && (
         <div className="slip" data-testid="spot-the-mistake">
           <p className="eyebrow">Spot the mistake</p>
