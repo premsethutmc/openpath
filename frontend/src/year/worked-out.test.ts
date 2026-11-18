@@ -16,6 +16,8 @@ test("every question of a worked-out type gets the whole working, every calculat
       const h = stepsHelp(id)!, q = question(id);
       n++;
       assert.ok(h.length >= 3, `${id}: ${h.length} steps`);
+      // the first thing a stuck learner is told never holds the answer
+      assert.ok(!new RegExp(`(^|\\D)${q.answer}(\\D|$)`).test(h[0].next) || q.answer.length === 1 || q.prompt.includes(q.answer), `${id}: ${h[0].next}`);
       assert.ok(new RegExp(`(^|\\D)${q.answer}(\\D|$)`).test(h[h.length - 1].shown), `${id}: ${h[h.length - 1].shown}`);
       for (const s of h) {
         lines++;
@@ -26,7 +28,7 @@ test("every question of a worked-out type gets the whole working, every calculat
       }
     }
     console.log(f, n, "questions,", lines, "steps,", boxes, "to fill");
-    assert.ok(n > 50 && boxes / lines > 0.3, f);
+    assert.ok(n > 50 && boxes / lines > 0.2, f);
   }
 });
 
@@ -52,4 +54,20 @@ test("cue-numbers@1: a plain calculation's cue names its numbers and never its r
     if (r !== null) { assert.ok(s.shown.replace(/(\d),(?=\d)/g, "$1").includes(String(Math.round(r * 1000) / 1000)), `${id}: ${s.next} / ${s.shown}`); assert.ok(r !== a && r !== b, id); }
   }
   assert.ok(named > 20, String(named));
+});
+
+test("long division of 373 by 3 is the method itself: how many fit, what is left, bring down", async () => {
+  const { problemOf } = await import("../../../packages/learning/src/families");
+  assert.ok(problemOf("gen:avdiv:3,124,1,0"));
+  const h = stepsHelp("gen:avdiv:3,124,1,0")!;
+  assert.deepEqual(h.map((s) => s.next), [
+    "First: start at the left, with the hundreds. How many 3s fit in 3, without going over?", "What is left over from the 3?", "Bring down the next digit, 7, beside the 0.",
+    "How many 3s fit in 7, without going over?", "What is left over from the 7?", "Bring down the next digit, 3, beside the 1.",
+    "How many 3s fit in 13, without going over?", "What is left over from the 13?", "Last: read the answer off the top.",
+  ]);
+  assert.equal(h[4].shown, "7 − 6 = 1");
+  assert.equal(h[5].shown, "1 and 3 side by side make 13.");
+  assert.equal(h[8].shown, "The digits on top make the quotient: 124. (1 is left over.)");
+  assert.match(stepsHelp("gen:avdiv:3,124,1,1")!.at(-1)!.shown, /remainder: 1\.$/);
+  assert.ok(!h.slice(0, -1).some((s) => /124/.test(s.next + s.shown)), "the quotient is not said before the end");
 });

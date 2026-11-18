@@ -389,3 +389,7 @@ explanation; a single short line is never hidden. The "New skill" line above a f
 vocabulary is a list of words and the skill each belongs to (35 skills). A word is linked once per paragraph, never
 inside its own skill, and never to a skill taught in a later class. Lesson pages only so far; it does not yet take the
 learner to the earlier lesson itself.
+
+`worked-out@1`, long division (`avdiv`): the type's own steps stated the quotient at once and then checked it by
+multiplying. The step help is now the method: from the left, how many fit in this digit, what is left over, bring the
+next digit down, and the answer is read off the top at the end. 500 questions.
