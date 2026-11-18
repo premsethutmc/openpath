@@ -33,3 +33,4 @@ Logic: `frontend/src/english/logic/spelling-help.ts`, `spelling.ts`, `learner.ts
 - The built-in Spelling Bee still has 100 words.
 - A word that needed help returns in the next session, not later in the same one.
 - Not tried on a physical phone.
+- `e2e/parent-content.test.mjs` was updated for practice lists but could not be run here: it needs the account server.
