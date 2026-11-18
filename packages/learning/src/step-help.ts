@@ -108,6 +108,8 @@ export function helpMethods(qid: string): string[] {
   const ways = workedWays(p);
   if (!ways) return ["Step by step"];
   // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
+  // the type's own steps for unlike fractions and for decimals are the same method, only shorter: not a second way
+  if (ways.length === 1 && (ways[0].name === "Same bottom (LCM)" || p.family === "agdec")) return [ways[0].name];
   return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
 }
 const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };

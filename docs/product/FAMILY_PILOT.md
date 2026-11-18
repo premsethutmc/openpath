@@ -425,3 +425,6 @@ Column multiplication (`multiply` in worked-out.ts): a bare `a × b = ?` with a 
 400 (zeros written first), is set out in columns with the carried digits above. 1,025 questions, each layout proved.
 Long multiplication (`longMultiply`, type avpp): a two-digit multiplier gets a row for its ones, a row for its tens (0
 first), and the rows are added. 193 full layouts and 227 tens-row questions, each proved.
+Unlike fractions (`unlikeFractions`): improper first, both renamed over the LCM, tops added, made simple, written as a
+chain of equal lines; 1,290 questions proved. Decimals (`decimals`): points lined up, zeros filled, columns worked as for
+whole numbers with the point kept in its column; 500 questions proved.

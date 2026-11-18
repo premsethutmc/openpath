@@ -105,7 +105,8 @@ const exactDivision = ({ params: [q, d], answer }: Q): Worked[] | null => divide
  * whatever its type: it is read from the question's own words and kept only when it ends on the verified answer.
  */
 const PLACES = ["ones", "tens", "hundreds", "thousands", "ten thousands", "lakhs", "ten lakhs", "crores"];
-function columns(prompt: string | undefined, answer: string): Worked[] | null {
+function columns(prompt: string | undefined, answer: string, dp = 0): Worked[] | null {
+  const PLACES_HERE = dp ? [...["thousandths", "hundredths", "tenths"].slice(3 - dp), ...PLACES] : PLACES;
   const m = prompt ? /^([\d,]+) ([+−-]) ([\d,]+) = \?$/.exec(prompt.trim()) : null;
   if (!m) return null;
   const a = Number(m[1].replace(/,/g, "")), b = Number(m[3].replace(/,/g, "")), plus = m[2] === "+";
@@ -127,7 +128,7 @@ function columns(prompt: string | undefined, answer: string): Worked[] | null {
   const out: Worked[] = [];
   let carry = 0;
   for (let i = 0; i < n; i++) {
-    const x = da[i] ?? 0, y = db[i] ?? 0, place = PLACES[i], next = PLACES[i + 1], lead = i === 0 ? "First: start on the right, with the ones. " : "";
+    const x = da[i] ?? 0, y = db[i] ?? 0, place = PLACES_HERE[i], next = PLACES_HERE[i + 1], lead = i === 0 ? `First: start on the right, with the ${PLACES_HERE[0]}. ` : "";
     if (plus) {
       const sum = x + y + carry, last = i === n - 1;
       out.push({ next: `${lead}Add the ${place}${carry ? ", and the 1 that was carried" : ""}.`, shown: `${x} + ${y}${carry ? " + 1" : ""} = ${sum}` });
@@ -235,6 +236,88 @@ function longMultiply({ params: [a, b, k], answer }: Q): Worked[] | null {
 }
 
 /**
+ * Adding and subtracting fractions with different bottoms, the way it is written at school: mixed numbers become
+ * improper fractions, both are renamed over the LCM of the bottoms, the tops are added, and the result is made simple.
+ * Read from the question's own words; offered only when it ends on the verified answer.
+ */
+function unlikeFractions(prompt: string | undefined, answer: string): Worked[] | null {
+  const m = prompt ? /^(?:(\d+) )?(\d+)\/(\d+) ([+−]) (?:(\d+) )?(\d+)\/(\d+) = \?/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const [w1, n1, d1, w2, n2, d2] = [m[1], m[2], m[3], m[5], m[6], m[7]].map((x) => Number(x ?? 0)), plus = m[4] === "+";
+  if (!d1 || !d2 || d1 > 99 || d2 > 99 || (d1 === d2 && !w1 && !w2)) return null;
+  const a = w1 * d1 + n1, b = w2 * d2 + n2, L = (d1 * d2) / gcd2(d1, d2), A = a * (L / d1), B = b * (L / d2), R = plus ? A + B : A - B;
+  if (R <= 0) return null;
+  const g = gcd2(R, L), n = R / g, d = L / g, whole = Math.floor(n / d), rest = n - whole * d;
+  const want = answer.replace(/\s+/g, " ").trim();
+  const form = d === 1 ? String(n) : want === `${n}/${d}` ? `${n}/${d}` : `${whole} ${rest}/${d}`;
+  if (form !== want) return null;
+  const lines = [`${m[1] ? `${w1} ` : ""}${n1}/${d1} ${m[4]} ${m[5] ? `${w2} ` : ""}${n2}/${d2}`];
+  const out: Worked[] = [], put = (next: string, shown: string, line?: string) => { if (line) lines.push(`= ${line}`); out.push({ next: out.length ? next : `First: ${next.charAt(0).toLowerCase()}${next.slice(1)}`, shown, board: [...lines] }); };
+  if (w1 || w2) {
+    const parts = [[w1, n1, d1, a], [w2, n2, d2, b]].filter(([w]) => w).map(([w, nn, dd, t]) => `${w} ${nn}/${dd} = (${w} × ${dd} + ${nn})/${dd} = ${t}/${dd}`);
+    put(`${w1 && w2 ? "Write the mixed numbers as improper fractions" : "Write the mixed number as an improper fraction"}: whole × bottom + top.`, parts.join("; "), `${a}/${d1} ${m[4]} ${b}/${d2}`);
+  }
+  if (d1 !== d2) {
+    put(`The bottoms are ${d1} and ${d2}. What is the smallest number both go into?`, L === d1 * d2 ? `${d1} × ${d2} = ${L}, and nothing smaller works: the LCM is ${L}.` : `The LCM of ${d1} and ${d2} is ${L} (${L} = ${d1} × ${L / d1} = ${d2} × ${L / d2}).`);
+    const ren = ([t, dd, T]: number[]) => (dd === L ? null : `${L} ÷ ${dd} = ${L / dd}, so multiply top and bottom by ${L / dd}: ${t}/${dd} = ${T}/${L}`);
+    const r1 = ren([a, d1, A]), r2 = ren([b, d2, B]);
+    if (r1) put(`Rename ${a}/${d1} with ${L} at the bottom.`, r1, r2 ? undefined : `${A}/${L} ${m[4]} ${B}/${L}`);
+    if (r2) put(`Rename ${b}/${d2} with ${L} at the bottom.`, r2, `${A}/${L} ${m[4]} ${B}/${L}`);
+  }
+  put(`The pieces are now the same size. ${plus ? "Add" : "Subtract"} the tops and keep ${L} at the bottom.`, `${A} ${m[4]} ${B} = ${R}, so ${R}/${L}`, `${R}/${L}`);
+  if (g > 1) put(`Can ${R}/${L} be made simpler?`, d === 1 ? `Divide top and bottom by ${g}: ${n}` : `Divide top and bottom by ${g}: ${n}/${d}`, d === 1 ? String(n) : `${n}/${d}`);
+  if (d > 1 && form !== `${n}/${d}`) put("The top is bigger than the bottom. Write it as a mixed number.", `${n} ÷ ${d} = ${whole} remainder ${rest}: ${form}`, form);
+  if (out.length < 2) return null;
+  const last = out[out.length - 1];
+  last.next = `Last: ${last.next.charAt(0).toLowerCase()}${last.next.slice(1)}`;
+  return out;
+}
+
+/**
+ * Adding and subtracting decimals as written at school: the points are lined up, gaps are filled with zeros, and the
+ * columns are worked from the right exactly as for whole numbers, with the point kept in its column.
+ */
+function decimals(prompt: string | undefined, answer: string): Worked[] | null {
+  const m = prompt ? /^Work out (\d+(?:\.\d+)?) ([+−]) (\d+(?:\.\d+)?)\.$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const places = (t: string) => (t.split(".")[1] ?? "").length, dp = Math.max(places(m[1]), places(m[3])), plus = m[2] === "+";
+  if (!dp || dp > 3) return null;
+  const A = Math.round(Number(m[1]) * 10 ** dp), B = Math.round(Number(m[3]) * 10 ** dp), R = plus ? A + B : A - B;
+  if (R < 0 || A < 10 ** dp || Math.abs(R / 10 ** dp - Number(answer)) > 1e-9) return null;
+  const inner = columns(`${A} ${m[2]} ${B} = ?`, String(R), dp);
+  if (!inner) return null;
+  const set = (r: string, i: number, c: string) => r.slice(0, i) + c + r.slice(i + 1);
+  // the point goes in its own column; a number row is filled with zeros up to the ones, a row still being written is not
+  const pointed = (rows: string[], final: boolean) => {
+    const dash = rows.findIndex((r) => /^-+$/.test(r)), L = rows[dash].length;
+    return rows.map((r, k) => {
+      if (k === dash) return plus ? `${r}-` : r;
+      const whole = k === dash - 2 || k === dash - 1 || (k > dash && final);
+      if (plus) {
+        const i = L - dp;
+        if (k < dash - 2) return r.length > i ? `${r.slice(0, i)} ${r.slice(i)}` : r;
+        let t = r;
+        if (whole) for (let j = i - 1; j < L; j++) if (t[j] === " ") t = set(t, j, "0");
+        return `${t.slice(0, i)}${t[i] === " " ? " " : "."}${t.slice(i)}`;
+      }
+      const i = L - 3 * dp;
+      if (k < dash - 2) return r;
+      let t = r.padEnd(L, " ");
+      if (whole) for (let j = i - 1; j < L; j += 3) if (t[j] === " ") t = set(t, j, "0");
+      return t[i + 2] === " " ? t : set(t, i, ".");
+    });
+  };
+  const pad = (t: string) => (places(t) < dp ? `${t} = ${t.includes(".") ? t : `${t}.`}${"0".repeat(dp - places(t))}` : null);
+  const fills = [pad(m[1]), pad(m[3])].filter(Boolean);
+  const out: Worked[] = [{ next: "First: line up the decimal points. Do both numbers have the same number of decimal places?", shown: fills.length ? `Fill the gap with ${dp - Math.min(places(m[1]), places(m[3])) === 1 ? "a zero" : "zeros"}: ${fills.join(" and ")}.` : `Yes: both have ${dp}. The points sit one under the other.` }];
+  inner.forEach((st, k) => {
+    const last = k === inner.length - 1;
+    out.push({ ...st, next: k === 0 ? st.next.replace(/^First: s/, "S") : st.next, shown: last ? `Put the point in its column. The answer is ${answer}.` : st.shown, board: st.board ? pointed(st.board, last) : undefined });
+  });
+  return out;
+}
+
+/**
  * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
  * must end on the verified answer or it is not offered.
  */
@@ -316,6 +399,10 @@ export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
     if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }
     const mu = multiply(q.prompt, q.answer);
     if (mu && mu.length >= 2) return [{ name: "In columns", steps: mu }];
+    const de = decimals(q.prompt, q.answer);
+    if (de) return [{ name: "In columns", steps: de }];
+    const fr = unlikeFractions(q.prompt, q.answer);
+    if (fr) return [{ name: "Same bottom (LCM)", steps: fr }];
     return hcfLcm(q.prompt, q.answer);
   } catch { return null; }
 }

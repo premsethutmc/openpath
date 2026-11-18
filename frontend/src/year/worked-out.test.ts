@@ -209,3 +209,52 @@ test("long multiplication: a two-digit multiplier gets one row for its ones, one
   console.log(full, "long multiplications,", part, "tens rows");
   assert.ok(full > 100 && part > 100, `${full} ${part}`);
 });
+
+test("unlike fractions: both are renamed over the LCM, every renaming is an equal fraction, and the working ends on the answer", () => {
+  let n = 0, mixed = 0, simpler = 0;
+  const val = (t: string) => { const m = /^(?:(\d+) )?(\d+)\/(\d+)$/.exec(t.trim()); return m ? Number(m[1] ?? 0) + Number(m[2]) / Number(m[3]) : Number(t); };
+  for (const f of FAMILIES_ALL()) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const m = /^(?:(\d+) )?(\d+)\/(\d+) ([+−]) (?:(\d+) )?(\d+)\/(\d+) = \?/.exec(item.prompt);
+    if (!m || (m[3] === m[7] && !m[1] && !m[5])) continue;
+    const h = stepsHelp(item.id)!, q = question(item.id);
+    if (helpMethods(item.id)[0] !== "Same bottom (LCM)") continue;
+    n++;
+    const x = val(`${m[1] ? m[1] + " " : ""}${m[2]}/${m[3]}`), y = val(`${m[5] ? m[5] + " " : ""}${m[6]}/${m[7]}`), want = m[4] === "+" ? x + y : x - y;
+    const rows = h.at(-1)!.board!;
+    assert.equal(rows.at(-1)!.replace(/^= /, ""), q.answer, item.id);
+    for (const r of rows.slice(1)) { const t = r.replace(/^= /, ""), parts = t.split(/ [+−] /); const v = parts.length === 2 ? (m[4] === "+" ? val(parts[0]) + val(parts[1]) : val(parts[0]) - val(parts[1])) : val(t); assert.ok(Math.abs(v - want) < 1e-9, `${item.id}: ${r} is not equal to the question`); }
+    for (const s of h) for (const c of s.shown.matchAll(/(\d+)\/(\d+) = (\d+)\/(\d+)/g)) assert.equal(Number(c[1]) * Number(c[4]), Number(c[2]) * Number(c[3]), `${item.id}: ${c[0]}`);
+    const L = /LCM (?:of \d+ and \d+ )?is (\d+)/.exec(h.map((s) => s.shown).join(" "));
+    if (L) { const l = Number(L[1]), d1 = Number(m[3]), d2 = Number(m[7]); assert.ok(l % d1 === 0 && l % d2 === 0, item.id); for (let k = 1; k < l; k++) assert.ok(k % d1 || k % d2, `${item.id}: ${k} is a smaller common multiple`); }
+    assert.ok(!h.slice(0, -1).some((s) => new RegExp(`(^|[^\\d/])${q.answer}$`).test(s.shown) && q.answer.length > 2) || h.length === 1, `${item.id}: the answer is not said before the end`);
+    if (m[1] || m[5]) mixed++;
+    if (h.some((s) => /made simpler/.test(s.next))) simpler++;
+  }
+  console.log(n, "fraction workings,", mixed, "with mixed numbers,", simpler, "made simpler");
+  assert.ok(n > 1000 && mixed > 300 && simpler > 100, `${n} ${mixed} ${simpler}`);
+});
+
+test("decimals in columns: the points are lined up in one column and the bottom line is the answer", () => {
+  let n = 0, filled = 0, shownAdd = false;
+  for (const item of pool("agdec").items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const m = /^Work out (\d+(?:\.\d+)?) ([+−]) (\d+(?:\.\d+)?)\.$/.exec(item.prompt);
+    if (!m) continue;
+    const h = stepsHelp(item.id)!, q = question(item.id), rows = h.at(-1)!.board;
+    if (!rows) { assert.ok(Number(m[1]) < 1 || (m[2] === "−" && Number(m[1]) < Number(m[3])), `${item.id} ${item.prompt} has no columns`); continue; }
+    n++;
+    assert.deepEqual(helpMethods(item.id), ["In columns"], item.id);
+    const num = (r: string) => Number(r.replace(/[\s+−]/g, "")), dash = rows.findIndex((r) => /^-+$/.test(r));
+    assert.ok(Math.abs(num(rows[dash - 2]) - Number(m[1])) < 1e-9 && Math.abs(num(rows[dash - 1]) - Number(m[3])) < 1e-9, `${item.id}: the two numbers are written as given`);
+    assert.ok(Math.abs(num(rows[dash + 1]) - Number(q.answer)) < 1e-9, `${item.id}: bottom line ${rows[dash + 1]} is not ${q.answer}`);
+    const at = [rows[dash - 2], rows[dash - 1], rows[dash + 1]].map((r) => r.indexOf("."));
+    assert.ok(at[0] > 0 && at[0] === at[1] && at[1] === at[2], `${item.id}: the points are in one column\n${rows.join("\n")}`);
+    assert.ok(new Set(rows.slice(dash - 2).map((r) => r.length)).size === 1, `${item.id}: the columns line up`);
+    for (const s of h.slice(0, -1)) for (const b of [s.board]) if (b) { const d = b.findIndex((r) => /^-+$/.test(r)), p = b[d + 1].indexOf("."); assert.ok(p < 0 || p === at[0], `${item.id}: a point moved`); }
+    if (/Fill the gap/.test(h[0].shown)) filled++;
+    if (m[2] === "+" && !shownAdd) { shownAdd = true; console.log(item.prompt + "\n" + rows.join("\n")); }
+  }
+  console.log(n, "decimal layouts,", filled, "with zeros filled in");
+  assert.ok(n > 350 && filled > 100, `${n} ${filled}`);
+});

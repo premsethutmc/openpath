@@ -23,9 +23,9 @@ written layout where it has one, and proved on every question by `frontend/src/y
 | Equivalent fractions | Multiply (or divide) top and bottom by the same number | | partly (first steps) |
 | Lowest terms | Divide top and bottom by their HCF | Divide by common factors in turn | no |
 | Mixed ↔ improper fractions | Whole × denominator + numerator, over the denominator | Divide for the other direction | no |
-| Adding and subtracting unlike fractions | Same denominator (the LCM), then add the tops | | partly (first steps) |
+| Adding and subtracting unlike fractions | Same denominator (the LCM), then add the tops | | yes (written line by line; mixed numbers too) |
 | Fraction × whole number | Multiply the top; simplify | Repeated addition | no |
-| Decimals: add and subtract | Line up the decimal points; then as whole numbers | | no |
+| Decimals: add and subtract | Line up the decimal points; then as whole numbers | | yes (columns with the point in line) |
 | Decimals × and ÷ by 10, 100, 1000 | Move the digits past the decimal point | | no |
 | Percentages | Out of 100: fraction with denominator 100 | | no |
 | Integers: add and subtract | Number line: right to add, left to subtract | Sign rules | partly (line) |
