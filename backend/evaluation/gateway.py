@@ -68,7 +68,8 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
         # Validation is repeated here so this service cannot become an arbitrary prompt proxy.
         cleaned, _ = essay.validate_essay_request(task.split('.')[1], request)
         config = essay._config()
-        system, user = essay._prompt(cleaned['protocol']), json.dumps(cleaned, ensure_ascii=False)
+        system = essay.exam.PROMPT if cleaned["rubric"] == essay.exam.RUBRIC else essay._prompt(cleaned["protocol"])
+        user = json.dumps(cleaned, ensure_ascii=False)
     else:
         from family import word_problem
         if settings.OPENPATH_WORD_PROBLEMS != 'on':

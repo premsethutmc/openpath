@@ -31,7 +31,7 @@ from rest_framework.response import Response
 from family.developer import is_developer
 from family.views import AccountBase
 
-from . import llm, gateway
+from . import llm, gateway, exam
 from .hashing import fnv1a
 from .models import EssayEvaluationRecord
 from .scrub import scrub_identifiers
@@ -41,7 +41,7 @@ REWRITE_V2 = "essay-rewrite.v2"
 QUESTIONS_V1 = "essay-questions.v1"
 # the current profile (@2 adds Plurals and countability); @1 requests are still accepted
 CURRENT_RUBRIC = "openpath.g8-writing@2"
-RUBRICS = {"openpath.g8-writing@1", CURRENT_RUBRIC}
+RUBRICS = {"openpath.g8-writing@1", CURRENT_RUBRIC, exam.RUBRIC}
 TASKS = ("observe", "rewrite", "questions")
 ADAPTERS = ("disabled", "replay", "llm")
 MAX_ESSAY_CHARS = 12_000
@@ -87,6 +87,8 @@ def validate_essay_request(task: str, req) -> tuple[dict, str]:
     if not isinstance(req, dict):
         raise ValidationError("request must be an object")
     allowed, protocol = {"observe": (_OBSERVE_KEYS, OBSERVE_V2), "rewrite": (_REWRITE_KEYS, REWRITE_V2), "questions": (_QUESTION_KEYS, QUESTIONS_V1)}[task]
+    if req.get("rubric") == exam.RUBRIC and task == "observe":
+        allowed = allowed | {"task_context"}
     extra = set(req) - allowed
     if extra:
         raise ValidationError(f"unexpected fields: {sorted(extra)}")
@@ -99,6 +101,8 @@ def validate_essay_request(task: str, req) -> tuple[dict, str]:
     bad = _FORBIDDEN & set(_keys(req))
     if bad:
         raise ValidationError(f"requests must not carry identifying fields: {sorted(bad)}")
+    if req.get("rubric") == exam.RUBRIC:
+        req = exam.validate_request(task, req)
     if task == "observe":
         essay = req.get("essay")
         text = _text(essay, "text", MAX_ESSAY_CHARS)
@@ -111,6 +115,8 @@ def validate_essay_request(task: str, req) -> tuple[dict, str]:
         if not isinstance(n, int) or not 1 <= n <= 60:
             raise ValidationError("max_observations must be between 1 and 60")
         cleaned = {**req, "essay": {**essay, "text": scrub_identifiers(text)}}
+        if req["rubric"] == exam.RUBRIC:
+            cleaned["task_context"] = {k: scrub_identifiers(v) for k, v in req["task_context"].items()}
         return cleaned, text
     if task == "questions":
         return _questions_request(req)
@@ -219,7 +225,9 @@ class DeveloperOnly(AccountBase):
 class EssayEvaluatorStatusView(DeveloperOnly):
     def get(self, request):
         adapter, model, why = _adapter()
-        rubric = CURRENT_RUBRIC
+        rubric = request.query_params.get("rubric", CURRENT_RUBRIC)
+        if rubric not in RUBRICS:
+            raise ValidationError("unknown writing rubric")
         return Response(
             {
                 "available": why is None,
@@ -274,6 +282,8 @@ class EssayEvaluationView(DeveloperOnly):
                 completion = gateway.execute(f"essay.{task}", req, request.user.pk, transport=TRANSPORT)
                 record.input_tokens, record.output_tokens = completion.input_tokens, completion.output_tokens
                 output = llm.extract_json(completion.text)
+            if req["rubric"] == exam.RUBRIC:
+                exam.validate_output(output, req)
             if not isinstance(output, dict):
                 raise llm.LLMError("the model answer was not an object")
             if task == "questions":

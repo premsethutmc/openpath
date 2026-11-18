@@ -241,6 +241,9 @@ export class Api {
     return this.request<{ developer: boolean; commit: string }>("GET", "/developer/status/");
   }
   /** The server's essay evaluator (developer accounts; synthetic test essays only). */
+  examEvaluatorStatus() {
+    return this.request<EssayGatewayInfo & { reason: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/?rubric=openpath.exam-writing@1");
+  }
   essayEvaluatorStatus() {
     return this.request<EssayGatewayInfo & { reason: string; adapter: string; synthetic_only: boolean }>("GET", "/evaluation/essays/status/");
   }

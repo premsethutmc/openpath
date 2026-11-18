@@ -502,7 +502,7 @@ jobs:
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4190/ -o /tmp/essay-index.html
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4191/ -o /tmp/essay-pilot-index.html
       - run: npm run essay:e2e
-      - run: node --test e2e/exam-diagnostic.test.mjs
+      - run: node --test e2e/exam-diagnostic.test.mjs e2e/exam-journey.test.mjs
       - name: Essay-to-diagnostic workflow against a mocked server (deterministic; no paid call)
         run: |
           nohup node e2e/lib/essay-model-mock.mjs gateway 8790 > /tmp/essay-mock.log 2>&1 &

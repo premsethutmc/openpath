@@ -2,6 +2,7 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { EssayJourney } from "./essay/EssayJourney.tsx";
 import { EssayLive } from "./essay/EssayLive.tsx";
+import { ExamJourney } from "./ExamJourney.tsx";
 import { ExamDiagnostic } from "./ExamDiagnostic.tsx";
 import { App } from "./App.tsx";
 import { Developer } from "./Developer.tsx";
@@ -59,7 +60,7 @@ const NotInPilot = ({ feature = "developer" }: { feature?: string }) => (
 // This opt-in preview is part of the existing app, not another tutor or live assessment route.
 const entryView = () => {
   if (BUILD_CONTENT_MODE === "pilot" && (developer || essayDemo || essayLive || examDiagnostic)) return <NotInPilot feature={examDiagnostic ? "exam-diagnostic" : essayDemo ? "essay-demo" : essayLive ? "essay-live" : "developer"} />;
-  if (examDiagnostic) return <ExamDiagnostic />;
+  if (examDiagnostic) return new URLSearchParams(location.search).get("mode") === "synthetic" ? <ExamJourney /> : <ExamDiagnostic />;
   if (developer) return <Developer />;
   if (essayDemo) return <EssayJourney />;
   if (essayLive) return <EssayLive />;
