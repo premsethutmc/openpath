@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-8",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 8,
   "subject": "English",
@@ -137,23 +137,23 @@
         {
           "id": "W1",
           "text": "Develops ways of writing that suit the kind of text and the reader.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W2",
           "text": "Connects ideas, with introductions, reasoned arguments, examples and quotations.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W3",
           "text": "Links ideas that belong together and draws fitting conclusions.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W4",
@@ -176,9 +176,9 @@
         {
           "id": "W6",
           "text": "Builds writing skills across school subjects.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W7",
@@ -190,16 +190,16 @@
         {
           "id": "W8",
           "text": "Draws on personal experience and real situations.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W9",
           "text": "Takes a stand on a topic open to argument and defends it logically.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W10",
@@ -213,51 +213,51 @@
         {
           "id": "W11",
           "text": "Writes narratives with well-developed events, actions, thoughts and feelings.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W12",
           "text": "Writes creative pieces such as stories, poems, travel pieces and features.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W13",
           "text": "Prepares advertisements, posters and notices.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W14",
           "text": "Writes formal and informal letters in the set form.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W15",
           "text": "Writes four or more paragraphs, about 250 to 300 words, on a topic.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W16",
           "text": "Writes original imaginative, descriptive, narrative and argumentative pieces.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W17",
           "text": "Follows the steps of writing: plan, write, revise, edit, rewrite.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },

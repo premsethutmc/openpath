@@ -129,12 +129,30 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByText("Classes 1, 2, 3, 4, 5, 6, 7 and 8: 253 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
-  await page.getByText("21 in the app · 4 partly · 8 with a grown-up · 0 not yet (of 33)").waitFor();
+  await page.getByText("21 in the app · 0 partly · 12 with a grown-up · 0 not yet (of 33)").waitFor();
   for (const st of SYLLABUS.strands) await page.getByRole("heading", { name: st.name }).waitFor();
   assert.equal(await page.locator("[data-outcome]").count(), 33);
   assert.equal(await page.locator('[data-coverage="not"] button').count(), 0, "a line that is not in the app offers no practice");
-  await page.locator('[data-outcome="RW7"]', { hasText: "essay studio" }).waitFor();
-  await page.locator('[data-outcome="RW7"]').getByRole("button", { name: /Essay studio/ }).waitFor();
+  // a writing line: a task for this class, a length to aim for, the learner's own check, then a grown-up's ticks
+  await page.locator('[data-outcome="RW7"]', { hasText: "With a grown-up" }).waitFor();
+  await page.getByRole("button", { name: /Practise RW7:/ }).click();
+  await page.getByText("Writing, with a grown-up").waitFor();
+  const wtask = page.locator('[data-task="c5.rw7.w1"]');
+  await wtask.getByRole("button", { name: "Start writing" }).click();
+  await wtask.getByText("Aim for 120 to 180 words.", { exact: false }).waitFor();
+  await wtask.locator("textarea").fill("Trees give us shade and clean air. ".repeat(20));
+  await wtask.locator('[data-words="140"]').waitFor();
+  await wtask.getByText("The app does not keep or mark your writing.", { exact: false }).waitFor();
+  await wtask.getByLabel("Each paragraph has one main idea").first().check();
+  await fits();
+  await shot(page, "4a-writing");
+  await wtask.getByLabel("About the length asked").check();
+  await wtask.getByRole("button", { name: "Save" }).click();
+  await wtask.getByText("Last time a grown-up ticked 1 of 3", { exact: false }).waitFor();
+  await wtask.getByText("for 140 words", { exact: false }).waitFor();
+  assert.equal(await page.evaluate(() => JSON.stringify(localStorage).includes("Trees give us shade")), false, "the words written are not kept on the device");
+  await page.getByRole("button", { name: "← Back" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   // a speaking line: tasks to do with a grown-up, who ticks what they heard; the tick is kept
   await page.locator('[data-outcome="LS1"]', { hasText: "With a grown-up" }).waitFor();
   await page.getByRole("button", { name: /Practise LS1:/ }).click();
@@ -181,7 +199,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   // the other classes: each its own list, and the class chosen is kept on the way back from practice
   await page.getByRole("button", { name: "Class 4", exact: true }).click();
   await page.getByRole("heading", { name: "Class 4 English" }).waitFor();
-  await page.getByText("12 in the app · 5 partly · 8 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("12 in the app · 1 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
   // dictation of a passage already seen: read it first, then it is hidden and dictated a sentence at a time
   await page.locator('[data-outcome="LS7"]').getByRole("button", { name: /Practise LS7:/ }).click();
   await page.getByRole("heading", { name: "A short passage" }).waitFor();
@@ -195,10 +213,10 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 4 English" }).waitFor();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
-  await page.getByText("20 in the app · 13 partly · 13 with a grown-up · 0 not yet (of 46)").waitFor();
+  await page.getByText("20 in the app · 4 partly · 22 with a grown-up · 0 not yet (of 46)").waitFor();
   await page.getByRole("button", { name: "Class 3", exact: true }).click();
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
-  await page.getByText("12 in the app · 4 partly · 8 with a grown-up · 0 not yet (of 24)").waitFor();
+  await page.getByText("12 in the app · 1 partly · 11 with a grown-up · 0 not yet (of 24)").waitFor();
   await fits();
   // alphabetical order: words as tiles, with its own instruction
   await page.getByRole("button", { name: /Practise GV6:/ }).click();
@@ -209,13 +227,13 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
   await page.getByRole("button", { name: "Class 7", exact: true }).click();
   await page.getByRole("heading", { name: "Class 7 English" }).waitFor();
-  await page.getByText("11 in the app · 7 partly · 7 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("11 in the app · 2 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 2", exact: true }).click();
   await page.getByRole("heading", { name: "Class 2 English" }).waitFor();
-  await page.getByText("10 in the app · 5 partly · 10 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("10 in the app · 3 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 1", exact: true }).click();
   await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
-  await page.getByText("16 in the app · 8 partly · 14 with a grown-up · 0 not yet (of 38)").waitFor();
+  await page.getByText("16 in the app · 6 partly · 16 with a grown-up · 0 not yet (of 38)").waitFor();
   // a Class 1 line opens First words, where nothing has to be read
   await page.getByRole("button", { name: /Practise RW1:/ }).click();
   await page.locator('main.first[data-phase="ask"][data-kind="hear"]').waitFor();
@@ -239,7 +257,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await fits();
   await page.getByRole("button", { name: "← Stop" }).click();
   await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
-  await page.getByText("7 in the app · 16 partly · 14 with a grown-up · 0 not yet (of 37)").waitFor();
+  await page.getByText("7 in the app · 3 partly · 27 with a grown-up · 0 not yet (of 37)").waitFor();
   await fits();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();

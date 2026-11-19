@@ -1,6 +1,6 @@
 {
   "id": "guided-tasks",
-  "version": 5,
+  "version": 6,
   "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
@@ -1995,6 +1995,1770 @@
         "Wrote every capital",
         "Formed them correctly",
         "Matched five pairs"
+      ]
+    },
+    {
+      "id": "c1.rw8.w1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW8",
+      "title": "My family",
+      "task": "Draw your family on paper. Then write two or three sentences about your picture.",
+      "look": [
+        "Picture and writing match",
+        "Wrote at least two sentences",
+        "Used a capital letter and a full stop"
+      ],
+      "write": {
+        "min": 10,
+        "max": 40
+      },
+      "self": [
+        "I drew a picture",
+        "I wrote about my picture",
+        "I used a capital letter and a full stop"
+      ]
+    },
+    {
+      "id": "c1.rw8.w2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW8",
+      "title": "My favourite animal",
+      "task": "Draw your favourite animal. Then write what it looks like and what it eats.",
+      "look": [
+        "Picture and writing match",
+        "Wrote at least two sentences",
+        "Used a capital letter and a full stop"
+      ],
+      "write": {
+        "min": 10,
+        "max": 40
+      },
+      "self": [
+        "I drew a picture",
+        "I wrote about my picture",
+        "I used a capital letter and a full stop"
+      ]
+    },
+    {
+      "id": "c1.rw13.w1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW13",
+      "title": "My school",
+      "task": "Write eight to ten sentences about your school.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 30,
+        "max": 80
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c1.rw13.w2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW13",
+      "title": "My best friend",
+      "task": "Write eight to ten sentences about your best friend.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 30,
+        "max": 80
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c2.rw8.w1",
+      "syllabus": "icse-cisce-english-class-2",
+      "outcome": "RW8",
+      "title": "A rainy day",
+      "task": "Write eight to ten lines about a rainy day.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 40,
+        "max": 90
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c2.rw8.w2",
+      "syllabus": "icse-cisce-english-class-2",
+      "outcome": "RW8",
+      "title": "My favourite game",
+      "task": "Write eight to ten lines about a game you like to play.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 40,
+        "max": 90
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c2.rw9.w1",
+      "syllabus": "icse-cisce-english-class-2",
+      "outcome": "RW9",
+      "title": "A day I was happy",
+      "task": "Write about a day when you were very happy. Say what happened and how you felt.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 40,
+        "max": 90
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c2.rw9.w2",
+      "syllabus": "icse-cisce-english-class-2",
+      "outcome": "RW9",
+      "title": "When I helped",
+      "task": "Write about a time you helped someone at home or at school.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 40,
+        "max": 90
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c3.rw3.w1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW3",
+      "title": "My favourite festival",
+      "task": "Write one paragraph about your favourite festival. Keep to one main idea.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c3.rw3.w2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW3",
+      "title": "A pet I would like",
+      "task": "Write one paragraph about a pet you would like to have and why.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c3.rw5.w1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW5",
+      "title": "My first day in this class",
+      "task": "Write about your first day in this class. Tell it in order and say how you felt.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c3.rw5.w2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW5",
+      "title": "A visit I remember",
+      "task": "Write about a visit to a relative or a place that you remember well.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c3.rw6.w1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW6",
+      "title": "A letter to my grandmother",
+      "task": "Write a letter to your grandmother or grandfather telling them about your week.",
+      "look": [
+        "Greeting and closing are there",
+        "The purpose is clear",
+        "Friendly, polite tone"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "I began with Dear and a name",
+        "I said why I am writing",
+        "I ended with a closing and my name"
+      ]
+    },
+    {
+      "id": "c3.rw6.w2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW6",
+      "title": "A letter to a friend",
+      "task": "Write a letter inviting a friend to spend Saturday at your home.",
+      "look": [
+        "Greeting and closing are there",
+        "The purpose is clear",
+        "Friendly, polite tone"
+      ],
+      "write": {
+        "min": 80,
+        "max": 120
+      },
+      "self": [
+        "I began with Dear and a name",
+        "I said why I am writing",
+        "I ended with a closing and my name"
+      ]
+    },
+    {
+      "id": "c4.rw6.w1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW6",
+      "title": "My town",
+      "task": "Write two paragraphs about your town or village: one about what it looks like, one about what you like there.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c4.rw6.w2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW6",
+      "title": "A good habit",
+      "task": "Write two paragraphs about a good habit: what it is, and why it helps.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c4.rw7.w1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW7",
+      "title": "The lost key",
+      "task": "Write a story about a child who loses the house key on the way home from school.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c4.rw7.w2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW7",
+      "title": "The surprise",
+      "task": "Write a story in which someone gets a surprise. Show what they do, think and feel.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c4.rw10.w1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW10",
+      "title": "A time I was brave",
+      "task": "Write about a time you had to be brave.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c4.rw10.w2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW10",
+      "title": "A mistake I learnt from",
+      "task": "Write about a mistake you made and what you learnt from it.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c4.rw12.w1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW12",
+      "title": "A letter to my cousin",
+      "task": "Write a letter to a cousin about a school event that is coming.",
+      "look": [
+        "Greeting and closing are there",
+        "The purpose is clear",
+        "Friendly, polite tone"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I began with Dear and a name",
+        "I said why I am writing",
+        "I ended with a closing and my name"
+      ]
+    },
+    {
+      "id": "c4.rw12.w2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW12",
+      "title": "Thank you",
+      "task": "Write a letter to a relative thanking them for a present.",
+      "look": [
+        "Greeting and closing are there",
+        "The purpose is clear",
+        "Friendly, polite tone"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I began with Dear and a name",
+        "I said why I am writing",
+        "I ended with a closing and my name"
+      ]
+    },
+    {
+      "id": "c5.rw7.w1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW7",
+      "title": "Why trees matter",
+      "task": "Write at least two paragraphs on why trees matter.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c5.rw7.w2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW7",
+      "title": "A person I admire",
+      "task": "Write at least two paragraphs about a person you admire and why.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c5.rw8.w1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW8",
+      "title": "The night the lights went out",
+      "task": "Write a story that begins when the lights go out in the whole street.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c5.rw8.w2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW8",
+      "title": "The new pupil",
+      "task": "Write a story about the first day of a new pupil in your class. Show thoughts and feelings.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c5.rw11.w1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW11",
+      "title": "About me",
+      "task": "Write short notes about yourself: what you are good at, and what you want to get better at.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c5.rw11.w2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW11",
+      "title": "Being responsible",
+      "task": "Write short notes on one way you can behave responsibly at school, and why it matters.",
+      "look": [
+        "Stays on the topic",
+        "Sentences are complete",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I kept to one topic",
+        "Every sentence starts with a capital letter and ends with a mark",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c5.rw13.w1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW13",
+      "title": "Plan, write, improve",
+      "task": "Choose any topic. Make a plan of three points, write a first draft, then write it again better.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c5.rw13.w2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW13",
+      "title": "Edit a draft",
+      "task": "Write a paragraph quickly on your morning. Then revise it: add a detail, cut a sentence and correct the mistakes.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 120,
+        "max": 180
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c6.w1.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W1",
+      "title": "The journey",
+      "task": "Write about a real or imagined journey, with details of what you saw and heard, in order.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c6.w1.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W1",
+      "title": "A door in the wall",
+      "task": "Write about finding a door you had never noticed before. Describe what lay behind it.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c6.w2.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W2",
+      "title": "Homework: yes or no?",
+      "task": "Should pupils have homework every day? Argue your view with clear reasons and examples.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c6.w2.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W2",
+      "title": "Mobile phones in school",
+      "task": "Should mobile phones be allowed in school? Argue your view with reasons and evidence.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c6.w3.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W3",
+      "title": "For a younger child",
+      "task": "Explain how to cross a road safely, writing for a child of six.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c6.w3.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W3",
+      "title": "For the head teacher",
+      "task": "Write to the head teacher proposing a reading corner for your class. Make the purpose plain.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c6.w5.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W5",
+      "title": "A market in the morning",
+      "task": "Describe a market early in the morning, using exact words and sentences of different lengths.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c6.w5.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W5",
+      "title": "The storm",
+      "task": "Describe a storm arriving. Choose a tone, calm or tense, and keep to it.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c6.w6.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W6",
+      "title": "Three drafts",
+      "task": "Write on a topic of your choice: plan it, write it, then revise and edit it into a final copy.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c6.w6.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W6",
+      "title": "Improve my opening",
+      "task": "Write a paragraph, then rewrite its first sentence three ways and choose the best.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c6.w7.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W7",
+      "title": "My state",
+      "task": "Write at least three paragraphs about your state: its land, its people and what you value in it.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c6.w7.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W7",
+      "title": "A day without electricity",
+      "task": "Write at least three paragraphs on what a day without electricity would be like.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c6.w8.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W8",
+      "title": "The promise",
+      "task": "Write a full story about a promise that was hard to keep. Show actions, thoughts and feelings.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c6.w8.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W8",
+      "title": "Lost and found",
+      "task": "Write a full story in which something lost is found in an unexpected place.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c6.w11.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W11",
+      "title": "Something I worked hard for",
+      "task": "Write about something you worked hard to achieve.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c6.w11.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W11",
+      "title": "A change in my life",
+      "task": "Write about a change, such as a new school or a new home, and how you met it.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 170,
+        "max": 230
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c6.w13.w1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W13",
+      "title": "A notice",
+      "task": "Write a notice for the school board about a drawing competition: what, when, where and whom to contact.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 40,
+        "max": 80
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c6.w13.w2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W13",
+      "title": "A message and a letter",
+      "task": "Write a short message to a classmate about a changed timetable, then a letter to a relative about your holidays.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 40,
+        "max": 80
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c7.w1.w1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W1",
+      "title": "An application for leave",
+      "task": "Write an application to your class teacher for two days of leave, giving the reason.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 40,
+        "max": 80
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c7.w1.w2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W1",
+      "title": "An invitation",
+      "task": "Write an invitation to your school annual day for the parents of your class.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 40,
+        "max": 80
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c7.w2.w1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W2",
+      "title": "My street at night",
+      "task": "Write a descriptive piece about your street at night.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c7.w2.w2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W2",
+      "title": "The match",
+      "task": "Write a short narrative of the last minutes of a close match.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c7.w3.w1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W3",
+      "title": "A poem about rain",
+      "task": "Write a poem of eight lines or more about rain.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c7.w3.w2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W3",
+      "title": "A story with a twist",
+      "task": "Write a story whose ending the reader does not expect.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c7.w4.w1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W4",
+      "title": "Three points in order",
+      "task": "Write about why reading matters. Make three points, in the best order, and link them.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c7.w4.w2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W4",
+      "title": "Explain a process",
+      "task": "Explain how something is made or done, step by step, so that a stranger could follow.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c7.w8.w1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W8",
+      "title": "From plan to final copy",
+      "task": "Plan, write, review, edit and rewrite a piece on a topic of your choice.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c7.w8.w2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "W8",
+      "title": "Review a draft",
+      "task": "Write a draft, leave it for an hour, then mark three things to improve and rewrite it.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 150,
+        "max": 220
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c8.w1.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W1",
+      "title": "Two readers",
+      "task": "Describe your school twice: once for a visiting child, once for an official report.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c8.w1.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W1",
+      "title": "Report and diary",
+      "task": "Write about the same sports day as a news report and as a diary entry.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c8.w2.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W2",
+      "title": "Is social media good for pupils?",
+      "task": "Write an essay with an introduction, reasoned arguments, examples and a quotation or saying.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c8.w2.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W2",
+      "title": "Should school start later?",
+      "task": "Write an essay that connects its ideas with an introduction, arguments and examples.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c8.w3.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W3",
+      "title": "Three ideas, one conclusion",
+      "task": "Write on saving water. Link three related ideas and draw a conclusion from them.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c8.w3.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W3",
+      "title": "What I conclude",
+      "task": "Write about a problem in your neighbourhood, link its causes, and conclude what should be done.",
+      "look": [
+        "Suits the reader and the purpose",
+        "Ideas are linked and in order",
+        "Ends with a fitting conclusion"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I thought about who will read it",
+        "My ideas are in a sensible order with linking words",
+        "I ended with a conclusion"
+      ]
+    },
+    {
+      "id": "c8.w6.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W6",
+      "title": "In science",
+      "task": "Explain a science idea you have studied, in clear paragraphs, for someone who missed the lesson.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c8.w6.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W6",
+      "title": "In history",
+      "task": "Write an account of an event you have studied in history, in clear paragraphs.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c8.w8.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W8",
+      "title": "A lesson life taught me",
+      "task": "Write about an experience that taught you something you still remember.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c8.w8.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W8",
+      "title": "The hardest decision",
+      "task": "Write about a real decision you found hard and how you made it.",
+      "look": [
+        "Draws on a real experience",
+        "Includes feelings",
+        "Told in order"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "It really happened to me",
+        "I said how I felt",
+        "I told it in the order it happened"
+      ]
+    },
+    {
+      "id": "c8.w9.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W9",
+      "title": "Uniforms",
+      "task": "Take a stand on whether school uniforms should be compulsory, and defend it logically.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c8.w9.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W9",
+      "title": "Zoos",
+      "task": "Take a stand on whether zoos should exist, answer the other side, and defend your view.",
+      "look": [
+        "A clear position",
+        "Reasons backed by examples or evidence",
+        "A conclusion that follows"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I stated my view at the start",
+        "I gave at least two reasons, each with an example",
+        "I ended by coming back to my view"
+      ]
+    },
+    {
+      "id": "c8.w11.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W11",
+      "title": "The letter that came too late",
+      "task": "Write a narrative with well-developed events, actions, thoughts and feelings.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c8.w11.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W11",
+      "title": "The last bus",
+      "task": "Write a narrative that begins with a missed last bus.",
+      "look": [
+        "Events are in a clear order",
+        "Shows actions, thoughts and feelings",
+        "Has an ending"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "My story has a beginning, a problem and an ending",
+        "I said what the people did, thought and felt",
+        "I used time words such as then and after that"
+      ]
+    },
+    {
+      "id": "c8.w12.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W12",
+      "title": "A travel piece",
+      "task": "Write a travel piece about a place you have visited, for a magazine.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c8.w12.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W12",
+      "title": "A poem or a feature",
+      "task": "Write a poem, or a feature article, about your city at dawn.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c8.w13.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W13",
+      "title": "A poster and a notice",
+      "task": "Write the words for a poster on a cleanliness drive, and a notice announcing it.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c8.w13.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W13",
+      "title": "An advertisement",
+      "task": "Write an advertisement for a school fair, with the details a visitor needs.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c8.w14.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W14",
+      "title": "A formal letter",
+      "task": "Write a formal letter to the municipal office about a broken street light, in the set form.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c8.w14.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W14",
+      "title": "An informal letter",
+      "task": "Write an informal letter to a friend who has moved to another city, in the set form.",
+      "look": [
+        "Right form for this kind of text",
+        "Formal, polite wording",
+        "The request or the details are clear"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I gave the date and who it is for",
+        "I used polite, complete sentences",
+        "I said exactly what I want or what will happen"
+      ]
+    },
+    {
+      "id": "c8.w15.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W15",
+      "title": "The value of sport",
+      "task": "Write four or more paragraphs on the value of sport in a pupil's life.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c8.w15.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W15",
+      "title": "Technology and us",
+      "task": "Write four or more paragraphs on how technology has changed daily life.",
+      "look": [
+        "Each paragraph has one main idea",
+        "Has an opening and a closing",
+        "About the length asked"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "Each paragraph has one main idea",
+        "I began with an opening and ended with a closing",
+        "I read it aloud once and fixed what sounded wrong"
+      ]
+    },
+    {
+      "id": "c8.w16.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W16",
+      "title": "Imaginative",
+      "task": "Write an original imaginative piece that begins: \"The clock struck thirteen.\"",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c8.w16.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W16",
+      "title": "Descriptive or anecdotal",
+      "task": "Write an original descriptive piece about a crowded railway platform, or an anecdote about a funny day at school.",
+      "look": [
+        "Vivid, exact words",
+        "Fits the kind of piece asked for",
+        "Shows something of the writer's own"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I chose words for what can be seen, heard or felt",
+        "I tried a comparison such as a simile",
+        "I changed one word for a better one"
+      ]
+    },
+    {
+      "id": "c8.w17.w1",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W17",
+      "title": "The full process",
+      "task": "Plan, write, revise, edit and rewrite a piece of four paragraphs on a topic of your choice.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
+      ]
+    },
+    {
+      "id": "c8.w17.w2",
+      "syllabus": "icse-cisce-english-class-8",
+      "outcome": "W17",
+      "title": "Edit hard",
+      "task": "Write a draft, then cut it by a fifth without losing any idea, and correct every error.",
+      "look": [
+        "A plan was made before writing",
+        "The second draft differs from the first",
+        "Errors were corrected in the final copy"
+      ],
+      "write": {
+        "min": 250,
+        "max": 300
+      },
+      "self": [
+        "I made a short plan first",
+        "I changed at least two things after reading my first draft",
+        "I checked spelling and punctuation last"
       ]
     }
   ]
