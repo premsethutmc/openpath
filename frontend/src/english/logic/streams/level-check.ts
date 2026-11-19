@@ -170,7 +170,7 @@ export class ListeningPlacement {
     if (!wordsOf(typed).length) return; // nothing typed
     const m = mark(s, typed);
     // one try, marked the same way as Listen and write
-    const record: DictationRecord = { type: "answer", sitting: "level-check", id: s.id, level: s.level, tries: 1, perfectFirst: m.perfect, perfect: m.perfect, right: m.right, total: m.total, missed: m.missed, capitals: m.capitals, end: m.end === "ok", plays, typed: typed.trim().slice(0, 200) };
+    const record: DictationRecord = { type: "answer", sitting: "level-check", id: s.id, level: s.level, tries: 1, perfectFirst: m.perfect, perfect: m.perfect, right: m.right, total: m.total, missed: m.missed, misspelt: m.misspelt, capitals: m.capitals, end: m.end === "ok", plays, typed: typed.trim().slice(0, 200) };
     this.log.push(record);
     this.history.push(record);
     this.steps.push({ id: s.id, level: s.level, perfect: m.perfect });

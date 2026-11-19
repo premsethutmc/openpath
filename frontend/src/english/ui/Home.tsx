@@ -67,7 +67,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? onBee() : activities[0] && onStart(activities[0].step))}
+            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : activities[0] && onStart(activities[0].step))}
           />
           <h2 className="section-title">Practise</h2>
           <NewWordsCard learner={learner} onOpen={onNewWords} />
@@ -201,6 +201,7 @@ function MyWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
         <span aria-hidden="true">📝 </span>My Words
       </h2>
       <p>Practise words supplied by a parent.</p>
+      <p className="small">The app also saves words here from your writing and your new words.</p>
       {n > 0 && <p className="small">{n === 1 ? "1 list saved" : `${n} lists saved`}</p>}
       <button type="button" className="secondary" onClick={onOpen}>
         {n ? "Open My Words" : "Add a word list"}
@@ -248,7 +249,7 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
  * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
  * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
  */
-function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId) => void }) {
+function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: "mywords") => void }) {
   if (!learner.levels().done)
     return (
       <section className="hub-card level-cta" aria-labelledby="level-cta-title">
@@ -280,7 +281,7 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
               <p className="small stream-level">{r.level}</p>
               <p className="small">{r.doneToday ? `✓ Done today${r.id === "words" ? "" : ` · next: ${r.next}`}` : r.next}</p>
             </div>
-            <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id)}>
+            <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id, r.open)}>
               Go
             </button>
           </li>

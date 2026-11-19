@@ -99,6 +99,8 @@ export interface Mark {
   total: number;
   /** Words of the sentence misspelt or left out, lower case. */
   missed: string[];
+  /** Words of the sentence typed but misspelt, as the sentence writes them (a first word loses its capital). */
+  misspelt: string[];
   capitals: number;
 }
 
@@ -149,6 +151,7 @@ export function mark(sentence: Pick<Sentence, "text" | "alt">, typedRaw: string)
     right: count("ok") + count("capital"),
     total: n,
     missed: words.flatMap((w) => (w.kind === "wrong" || w.kind === "missing" ? [w.target.toLowerCase()] : [])),
+    misspelt: words.flatMap((w) => (w.kind === "wrong" ? [w.target === target[0] && w.target !== "I" ? w.target.toLowerCase() : w.target] : [])),
     capitals: count("capital"),
   };
 }
@@ -168,7 +171,7 @@ export function fixes(m: Mark): string[] {
 
 export type DictationRecord =
   | { type: "start"; sitting: string; level: number }
-  | { type: "answer"; sitting: string; id: string; level: number; tries: 1 | 2; perfectFirst: boolean; perfect: boolean; right: number; total: number; missed: string[]; capitals: number; end: boolean; plays: number; typed: string }
+  | { type: "answer"; sitting: string; id: string; level: number; tries: 1 | 2; perfectFirst: boolean; perfect: boolean; right: number; total: number; missed: string[]; misspelt?: string[]; capitals: number; end: boolean; plays: number; typed: string }
   | { type: "end"; sitting: string; level: number; asked: number; perfectFirst: number };
 type Answer = Extract<DictationRecord, { type: "answer" }>;
 
@@ -282,7 +285,7 @@ export class DictationSitting {
       return;
     }
     const f = this.first!;
-    const a: Answer = { type: "answer", sitting: this.sitting, id: s.id, level: s.level, tries: firstTry ? 1 : 2, perfectFirst: f.perfect, perfect: m.perfect, right: f.right, total: f.total, missed: f.missed, capitals: f.capitals, end: f.end === "ok", plays, typed: this.firstTyped.slice(0, 200) };
+    const a: Answer = { type: "answer", sitting: this.sitting, id: s.id, level: s.level, tries: firstTry ? 1 : 2, perfectFirst: f.perfect, perfect: m.perfect, right: f.right, total: f.total, missed: f.missed, misspelt: f.misspelt, capitals: f.capitals, end: f.end === "ok", plays, typed: this.firstTyped.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
     this.phase = "marked";
