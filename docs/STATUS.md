@@ -188,3 +188,7 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Grade 8 pilot (#119): 76 competencies both boards; grade-order@1; review 2 in `docs/milestones/GRADE8_REVIEW_2.md`.
 - Grade 7 (#117): 75 modules; CBSE 43/46, TN 48/50 verified (rest educator-marked). `docs/milestones/GRADE7_COVERAGE.md`.
 - Method alignment (#121): `docs/milestones/METHOD_ALIGNMENT_BATCH2.md`.
+
+## Causal reading loop candidate (2026-11-19)
+
+Draft-only stack on #262: two language-demand packs through one conservative evidence → teaching/practice → unseen immediate/three-day return loop. Anonymous local storage, no API or identity collection, no merge/deploy authorization. See `docs/product/english/causal-reading-loop.md` for content inventory, safeguards and validation limits. Maths and current main writing are preserved.

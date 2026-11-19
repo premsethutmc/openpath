@@ -31,3 +31,53 @@ certain are flagged, because a wrong note would teach a mistake.
 Free to run, predictable, works without a key or a connection, and no risk of a surprise bill. The owner's own
 figure for AI essay analysis was about ten rupees for six essays. AI feedback can be added later as an optional
 second opinion without changing this.
+
+## Wider lists (19 Nov 2026)
+
+The sure slips moved to `frontend/src/english/logic/writing/slips.ts` and grew:
+
+| Kind | Before | Now |
+|---|---|---|
+| Misspellings | 40 | 303 |
+| Two words written as one (alot, atleast) | 0 | 12 |
+| Regular ending on an irregular word (goed, childs, furnitures) | 0 | 69 |
+| Missing apostrophe (dont, didnt) | 0 | 22 |
+| Message short forms (u, plz, bcoz) | 0 | 20 |
+| Grammar patterns | 10 | 26 |
+
+New grammar patterns include: doesn't likes, can went, to went, have went, he don't, they is, I am agree,
+Myself Ravi, its a, your not, their is, one of my friend, discuss about, cope up with, return back, a word
+written twice. Doubled punctuation marks get a tip.
+
+Three false alarms in the first version were removed: "Does he have", "Did she go" (the he/she/it rule now
+fires only where a clause begins), "an A in maths", and "an MBA".
+
+Guards: test WC-9 fails if any listed slip is a word used in our own reading, listening, dictation or guided
+texts. A scan of 1,755 of our own texts raised no spelling or grammar note.
+
+Still not done: no dictionary check (a misspelling not on the list passes), no check of meaning, tense
+consistency or topic. Lists are my own, not educator-reviewed.
+
+## Grammar check, second round (19 Nov 2026)
+
+Grammar patterns: 26 -> 59, plus a tip for a question that ends in a full stop.
+
+| Group | Examples caught |
+|---|---|
+| Doer and verb | they goes, the children is, many people has, everyone are, there is many |
+| Verb form | was went, I am go, have see, am knowing, am having two brothers, can able to, look forward to meet, enjoy to play |
+| Time words | yesterday I go, tomorrow we went, since five years |
+| How many, which one | much friends, many water, every students, these book, this people, a children, ten years old boy |
+| Small words | said me, explained me, told to me, listen music, went to home, angry on, afraid from, depends of, prefer tea than coffee, taller then me |
+
+Agreement patterns are skipped when a helping or causing verb comes earlier in the same sentence
+(did, does, can, let, make, see ...), because "Does everyone have" and "I saw him go" are right. This
+loses some real slips in long sentences; it is the price of not giving a wrong note.
+
+False-alarm scans: 1,755 of our own reading, listening and dictation texts raised no grammar note. The
+275,000 words of prose in this repository's documents raised three, all from text that quotes single
+letters or words ("x - a equations", "An before a silent h"); the second kind is now excluded.
+
+Still not caught: wrong tense across sentences, missing articles ("I saw dog"), wrong word order,
+agreement when words stand between the doer and the verb ("The boys in the class is"), and anything
+that depends on meaning. These need a parser or a model, not patterns.
