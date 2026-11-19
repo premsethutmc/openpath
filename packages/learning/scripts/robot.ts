@@ -1,7 +1,8 @@
 /**
  * robot@1: a learner that takes every question the product has, start to right answer, and says where the product
  * breaks. For each question (every form of every type):
- *   answer   the stored answer, entered as a learner would, is marked correct; a wrong one is not
+ *   answer   the stored answer, entered as a learner would, is marked correct; a wrong one is not; of a choice's
+ *            options exactly one is marked correct
  *   help     "I'm stuck" opens, in every way it offers; every box accepts the number it expects and refuses another
  *   arrive   the last step of the first way reaches the answer
  *   early    no step before the last says the answer; no cue says it
@@ -16,11 +17,12 @@ import { question } from "../src/content.ts";
 import { FAMILIES, pool } from "../src/families.ts";
 import { grade } from "../src/grading/decision.ts";
 import { askOf, judge } from "../src/step-ask.ts";
+import { selectable } from "../src/question-status.ts";
 import { helpMethods, stepsHelp } from "../src/step-help.ts";
 
-type Kind = "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "does-not-arrive" | "answer-said-early" | "answer-in-cue" | "crash";
-const HARD: Kind[] = ["answer-not-accepted", "wrong-answer-accepted", "no-help", "box-refuses-right", "box-accepts-wrong", "crash"];
-interface Fam { questions: number; clean: number; steps: number; boxes: number; fails: Partial<Record<Kind, number>>; eg: Partial<Record<Kind, string>> }
+type Kind = "no-option-is-right" | "several-options-right" | "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "does-not-arrive" | "answer-said-early" | "answer-in-cue" | "crash";
+const HARD: Kind[] = ["no-option-is-right", "several-options-right", "answer-not-accepted", "wrong-answer-accepted", "no-help", "box-refuses-right", "box-accepts-wrong", "crash"];
+interface Fam { questions: number; /** quarantined: never served to a learner, so not taken */ held: number; clean: number; steps: number; boxes: number; fails: Partial<Record<Kind, number>>; eg: Partial<Record<Kind, string>> }
 interface Report { schema: "robot@1"; shard: string; families: Record<string, Fam> }
 
 const arg = (k: string) => { const i = process.argv.indexOf(k); return i < 0 ? null : process.argv[i + 1]; };
@@ -33,13 +35,22 @@ function take(id: string, f: Fam) {
   const note = (k: Kind, what: string) => { f.fails[k] = (f.fails[k] ?? 0) + 1; f.eg[k] ??= `${id}: ${what}`.slice(0, 220); return HARD.includes(k); };
   let hard = false;
   try {
+    // a quarantined question is never served (question-status.ts): it is counted, not taken
+    if (!selectable(id)) { f.held++; return; }
     const q = question(id) as { type: string; answer: string; prompt: string; options?: string[] };
     f.questions++;
     // the answer
     if (q.type !== "written") {
       if (grade(id, q.answer).decision.verdict !== "correct") hard = note("answer-not-accepted", `"${q.answer}" for ${q.prompt.slice(0, 80)}`) || hard;
-      const wrong = q.options?.find((o) => o !== q.answer) ?? (numeric(q.answer) ? bump(q.answer) : null);
-      if (wrong !== null && grade(id, wrong).decision.verdict === "correct") hard = note("wrong-answer-accepted", `"${wrong}" (the answer is "${q.answer}")`) || hard;
+      if (q.options) {
+        // a choice: the app sends the letter of the option tapped (A, B, C…); exactly one letter is marked correct
+        const right = q.options.map((_, i) => "ABCDEFGH"[i]).filter((l) => grade(id, l).decision.verdict === "correct");
+        if (right.length === 0) hard = note("no-option-is-right", `${JSON.stringify(q.options)} (stored answer "${q.answer}")`) || hard;
+        else if (right.length > 1) hard = note("several-options-right", `${JSON.stringify(right)} of ${JSON.stringify(q.options)}`) || hard;
+      } else {
+        const wrong = numeric(q.answer) ? bump(q.answer) : null;
+        if (wrong !== null && grade(id, wrong).decision.verdict === "correct") hard = note("wrong-answer-accepted", `"${wrong}" (the answer is "${q.answer}")`) || hard;
+      }
     }
     // the help
     const base = id.replace(/:(mc|w)$/, ""), ways = helpMethods(base);
@@ -73,8 +84,9 @@ if (process.argv.includes("--merge")) {
   for (const file of files) Object.assign(all, (JSON.parse(readFileSync(file, "utf8")) as Report).families);
   const fams = Object.entries(all), sum = (g: (f: Fam) => number) => fams.reduce((t, [, f]) => t + g(f), 0);
   const kinds = [...new Set(fams.flatMap(([, f]) => Object.keys(f.fails)))] as Kind[];
-  const questions = sum((f) => f.questions), clean = sum((f) => f.clean);
+  const questions = sum((f) => f.questions), clean = sum((f) => f.clean), held = sum((f) => f.held ?? 0);
   const lines = [`# Robot learner (robot@1)`, ``, `**${clean.toLocaleString("en-IN")} of ${questions.toLocaleString("en-IN")} questions** (${((100 * clean) / Math.max(1, questions)).toFixed(2)}%) go from start to right answer with nothing broken: the answer is accepted, a wrong one is refused, help opens in every way, and every box takes the right number and refuses a wrong one.`, ``,
+    `${held.toLocaleString("en-IN")} more questions in ${fams.filter(([, f]) => f.held).length} types are held back (quarantined): they are never served, so they were not taken.`, ``,
     `${fams.length} question types · ${sum((f) => f.steps).toLocaleString("en-IN")} help steps walked · ${sum((f) => f.boxes).toLocaleString("en-IN")} boxes typed into`, ``,
     `| What went wrong | Questions | Types | Breaks the product |`, `|---|---:|---:|---|`,
     ...kinds.sort((a, b) => sum((f) => f.fails[b] ?? 0) - sum((f) => f.fails[a] ?? 0)).map((k) => `| ${k} | ${sum((f) => f.fails[k] ?? 0).toLocaleString("en-IN")} | ${fams.filter(([, f]) => f.fails[k]).length} | ${HARD.includes(k) ? "yes" : "no (quality)"} |`), ``,
@@ -82,15 +94,16 @@ if (process.argv.includes("--merge")) {
     ...kinds.flatMap((k) => [`### ${k}`, ...fams.filter(([, f]) => f.fails[k]).sort((a, b) => (b[1].fails[k] ?? 0) - (a[1].fails[k] ?? 0)).slice(0, 40).map(([id, f]) => `- \`${id}\` (${f.fails[k]} of ${f.questions}): ${f.eg[k]}`), ``])];
   const out = lines.join("\n") + "\n";
   writeFileSync(arg("--report") ?? "robot-report.md", out);
-  writeFileSync(arg("--json") ?? "robot-report.json", JSON.stringify({ schema: "robot@1", questions, clean, types: fams.length, kinds: Object.fromEntries(kinds.map((k) => [k, { questions: sum((f) => f.fails[k] ?? 0), types: fams.filter(([, f]) => f.fails[k]).length }])) }, null, 1) + "\n");
+  writeFileSync(arg("--json") ?? "robot-report.json", JSON.stringify({ schema: "robot@1", questions, clean, held, types: fams.length, kinds: Object.fromEntries(kinds.map((k) => [k, { questions: sum((f) => f.fails[k] ?? 0), types: fams.filter(([, f]) => f.fails[k]).length }])) }, null, 1) + "\n");
   console.log(out.split("\n").slice(0, 16).join("\n"));
 } else {
   const [part, of] = (arg("--shard") ?? "0/1").split("/").map(Number), every = Number(arg("--every") ?? 1);
   const families: Record<string, Fam> = {};
-  const ids = [...FAMILIES.keys()].sort().filter((_, i) => i % of === part);
+  const only = arg("--only")?.split(",") ?? null;
+  const ids = [...FAMILIES.keys()].sort().filter((id, i) => (only ? only.includes(id) : i % of === part));
   const t0 = Date.now();
   for (const fam of ids) {
-    const f: Fam = { questions: 0, clean: 0, steps: 0, boxes: 0, fails: {}, eg: {} };
+    const f: Fam = { questions: 0, held: 0, clean: 0, steps: 0, boxes: 0, fails: {}, eg: {} };
     let items: { id: string }[] = [];
     try { items = pool(fam).items; } catch (e) { f.fails.crash = 1; f.eg.crash = `${fam}: ${String((e as Error).message ?? e)}`.slice(0, 220); }
     for (let i = 0; i < items.length; i += every) take(items[i].id, f);
