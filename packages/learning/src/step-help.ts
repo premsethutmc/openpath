@@ -127,7 +127,7 @@ function cueLabel(shown: string, value: unknown, answer: string, given: Set<numb
   const label = m[1].trim(), words = label.split(/\s+/);
   if (words.length > 7) return null;
   const said = (x: unknown) => String(x).replace(/,/g, "").replace(/^-/, "−");
-  const nums = label.replace(/(\d),(?=\d{3}\b)/g, "$1").match(/−?\d+(?:\.\d+)?/g) ?? [];
+  const nums: string[] = label.replace(/(\d),(?=\d{3}\b)/g, "$1").match(/−?\d+(?:\.\d+)?/g) ?? [];
   // a number in the label must already be on the screen, and must not be this step's result or the answer
   if (nums.includes(said(value)) || nums.includes(said(answer)) || !nums.every((x) => given.has(Math.abs(Number(x.replace("−", "-")))))) return null;
   const lower = /^[A-Z][a-z]/.test(label) ? label.charAt(0).toLowerCase() + label.slice(1) : label;
