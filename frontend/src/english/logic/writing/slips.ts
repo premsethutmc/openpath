@@ -72,7 +72,7 @@ speaked:spoke, swimmed:swam, telled:told, throwed:threw, drinked:drank, drived:d
 cutted:cut, hitted:hit, breaked:broke, choosed:chose, heared:heard, holded:held, losed:lost, meeted:met, readed:read,
 rided:rode, standed:stood, stealed:stole, winned:won, weared:wore, builded:built, beginned:began, blowed:blew,
 digged:dug, feeded:fed, fighted:fought, hided:hid, shaked:shook, spended:spent, sweeped:swept, understanded:understood,
-childs:children, womans:women, mouses:mice, tooths:teeth, sheeps:sheep, furnitures:furniture, informations:information,
+childs:children, womans:women, tooths:teeth, sheeps:sheep, furnitures:furniture, informations:information,
 homeworks:homework, equipments:equipment, luggages:luggage
 `);
 
