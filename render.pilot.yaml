@@ -30,6 +30,12 @@ services:
         value: claude-haiku-5-5
       - key: OPENPATH_WORD_PROBLEM_API_KEY
         sync: false
+      # writing-feedback@1 (docs/english/WRITING_FEEDBACK_AI.md): off until the switch, a model and a key are all set;
+      # the key is typed into Render by the owner. Three pieces per learner per week.
+      - key: OPENPATH_WRITING_FEEDBACK
+        value: "off"
+      - key: OPENPATH_WRITING_FEEDBACK_API_KEY
+        sync: false
       - key: DATABASE_URL
         sync: false
       # grading authority: shadow (approved) or legacy (rollback). start.sh refuses anything else.
