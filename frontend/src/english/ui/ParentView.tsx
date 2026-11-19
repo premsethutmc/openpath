@@ -62,6 +62,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           New words: {s.newWords.learnt} learnt, {s.newWords.learning} still learning{s.newWords.tricky.length ? `. Finding hard: ${s.newWords.tricky.join(", ")}` : ""}
         </p>
       )}
+      {s.grammar && (
+        <p className="small" data-line="grammar">
+          Grammar in use: {s.grammar.right} of {s.grammar.answered} sentences right{s.grammar.weak.length ? `. To look at again: ${s.grammar.weak.join(", ")}` : ""}
+        </p>
+      )}
       {s.dictation && (
         <p className="small" data-line="dictation">
           Listen and write: {s.dictation.perfectFirst} of {s.dictation.sentences} sentences right first time (level {s.dictation.level}){s.dictation.missed.length ? `. Words missed: ${s.dictation.missed.join(", ")}` : ""}

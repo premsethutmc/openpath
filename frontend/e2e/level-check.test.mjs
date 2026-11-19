@@ -150,7 +150,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-stream="reading"]', { hasText: "Challenger" }).waitFor();
   await page.locator('[data-stream="listening"]', { hasText: "Level 3 of 3" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
-  await page.locator('[data-stream="grammar"]', { hasText: "Not checked yet" }).waitFor();
+  await page.locator('[data-stream="grammar"]', { hasText: "Level 2 of 3" }).waitFor();
   await page.getByRole("heading", { name: "School work" }).waitFor();
   await fits();
   await shot(page, "5-home-after");

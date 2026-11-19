@@ -1,0 +1,62 @@
+/**
+ * A school syllabus for English (logic/syllabus): each line the board lists for the class, in OpenPath's own words,
+ * marked as practised in the app, partly practised, or not yet; with a button to the stream that practises it.
+ */
+import { useState } from "react";
+import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
+import { coverage, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
+
+const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", not: "Not yet" };
+const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", spelling: "Spelling Bee", grammar: "Grammar in use" };
+
+export function SyllabusView({ doc, onOpen, onBack }: { doc: Doc; onOpen: (where: Where, topics?: string[]) => void; onBack: () => void }) {
+  const [source, setSource] = useState(false);
+  const c = coverage(doc);
+  const topicNames = (o: Outcome) => (o.topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t).join(", ");
+  return (
+    <main className="page vocab syllabus" aria-labelledby="syllabus-title">
+      <button type="button" className="link" onClick={onBack}>
+        ← Back
+      </button>
+      <p className="eyebrow">School work · {doc.board}</p>
+      <h1 id="syllabus-title" className="hero">
+        Class {doc.class} English
+      </h1>
+      <p className="sub">What the board lists for this class, and where to practise it here.</p>
+      <p className="pill" data-coverage>
+        {c.covered} in the app · {c.partly} partly · {c.not} not yet (of {c.total})
+      </p>
+      {doc.strands.map((st) => (
+        <section key={st.id} className="syllabus-strand" aria-labelledby={`strand-${st.id}`}>
+          <h2 id={`strand-${st.id}`}>{st.name}</h2>
+          <ul>
+            {st.outcomes.map((o) => (
+              <li key={o.id} data-outcome={o.id} data-coverage={o.coverage}>
+                <p>
+                  <span className={`syllabus-tag ${o.coverage}`}>{TAG[o.coverage]}</span> {o.text}
+                </p>
+                {(o.note || o.topics) && <p className="small">{[o.topics ? `Practised as: ${topicNames(o)}.` : "", o.note ?? ""].filter(Boolean).join(" ")}</p>}
+                {o.where && (
+                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics)}>
+                    Practise: {GO[o.where]}
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+      <button type="button" className="link" aria-expanded={source} onClick={() => setSource(!source)}>
+        Where this list comes from
+      </button>
+      {source && (
+        <div className="small syllabus-source">
+          <p>{doc.source.read} (read {doc.source.accessed}).</p>
+          <p>{doc.source.note}</p>
+          <p>{doc.licence}</p>
+          <p>{doc.review}.</p>
+        </div>
+      )}
+    </main>
+  );
+}

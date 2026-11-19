@@ -2,6 +2,7 @@
  * Parent view: what a parent sees for each child of this account (or on this device), read from the child's own
  * record. Counts of what happened only: nothing here is an estimate, and nothing is written.
  */
+import { GRAMMAR, grammarSummary } from "./grammar-use/grammar-use.ts";
 import { summary as wordsSummary } from "./vocabulary/daily-words.ts";
 import { dictationSummary } from "./dictation/dictation.ts";
 import type { Learner } from "./learner.ts";
@@ -42,6 +43,8 @@ export interface ChildSummary {
   newWords: { learnt: number; learning: number; tricky: string[] } | null;
   /** Listen and write: sentences done, how many right first time, and words missed most. */
   dictation: { sentences: number; perfectFirst: number; level: number; missed: string[] } | null;
+  /** Grammar in use: sentences answered and right, and the topics to look at again. */
+  grammar: { answered: number; right: number; weak: string[] } | null;
 }
 
 const DAY = 86_400_000;
@@ -75,6 +78,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
   const w = latestResult(learner.vocabRecords());
   const nw = wordsSummary(learner.wordLearnRecords(), now, learner.dayFn());
   const dict = dictationSummary(learner.dictationRecords());
+  const gram = grammarSummary(GRAMMAR, learner.grammarRecords());
   return {
     id: learner.profileId,
     name: learner.state.profile?.name ?? "Learner",
@@ -85,6 +89,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     patterns: patternCounts([...st.sessions.values()].flatMap((s) => s.answers.filter((a) => Date.parse(now) - Date.parse(a.at) < 30 * DAY).map((a) => a.pattern))),
     words: w ? { estimate: w.estimate, low: w.low, high: w.high } : null,
     newWords: nw.learning + nw.learnt ? { learnt: nw.learnt, learning: nw.learning, tricky: nw.tricky.slice(0, 6) } : null,
+    grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5) } : null,
     dictation: dict.sentences ? { sentences: dict.sentences, perfectFirst: dict.perfectFirst, level: dict.level ?? 1, missed: dict.missed.slice(0, 6) } : null,
   };
 }
