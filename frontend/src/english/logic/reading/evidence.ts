@@ -1,7 +1,18 @@
 /** Bounded school-baseline answer + evidence checks. Reuses the reading course; no ability estimate. */
-import {type Course,type Question,questionsFor} from './course.ts';
+import {COURSE as SOURCE_COURSE,type Course,type Question,questionsFor} from './course.ts';
 import {progress,type ReadingRecord} from './session.ts';
 export const EVIDENCE_UNIT={skill:'cause',level:1} as const;
+/** Small reviewed wording variants for this flow only; canonical passage IDs keep shared exposure conservative. */
+export function evidenceCourse(source:Course):Course{
+ const course=structuredClone(source);
+ const variants=[
+  {id:'L1.C1',old:'At first it hid under the bed because it was scared.',text:'It was scared, so at first it hid under the bed.',evidence:'It was scared, so at first it hid under the bed.',extra:' Meena closed the window because the wind was cold.'},
+  {id:'L1.C2',old:'He fell down because his shoelace was open.',text:'His open shoelace made him trip and fall down.',evidence:'His open shoelace made him trip and fall down.',extra:' The teacher carried an umbrella because rain was forecast.'},
+ ];
+ for(const v of variants){const p=course.passages.get(v.id),q=course.questions.find(q=>q.id===v.id+'.cause');if(!p||!q||!p.text.includes(v.old))throw Error('Review baseline wording variants after course changes.');p.text=p.text.replace(v.old,v.text)+v.extra;q.evidence=v.evidence;q.explain=v.text+' The other because sentence explains a different event, not the event in the question.';}
+ return course;
+}
+export const EVIDENCE_COURSE=evidenceCourse(SOURCE_COURSE);
 export type EvidenceAttempt={question:string;choice:number;sentences:number[]};
 export type EvidenceFinding='matched'|'answer_only'|'evidence_only'|'neither';
 export function sentenceChoices(text:string):string[]{return text.match(/[^.!?]+[.!?]+(?:[”"']?)(?:\s+|$)|[^.!?]+$/g)?.map(s=>s.trim()).filter(Boolean)??[];}
@@ -33,8 +44,13 @@ export function nextEvidenceCheck(course:Course,records:readonly ReadingRecord[]
  const p=progress(course,records),seen=new Set([...p.seenPassages,...extraSeen]);
  return questionsFor(course,EVIDENCE_UNIT,'check').find(q=>!seen.has(q.passage))??null;
 }
+/** A diagnostic cannot begin unless its distinct confirmation can also be reserved. */
+export function evidencePair(course:Course,records:readonly ReadingRecord[]):[Question,Question]|null{
+ const first=nextEvidenceCheck(course,records);if(!first)return null;
+ const second=nextEvidenceCheck(course,records,[first.passage]);return second?[first,second]:null;
+}
 export type EvidenceState={version:1;phase:'initial'|'lesson'|'practice'|'practice_review'|'confirmation'|'done';initial:string;confirmation:string|null;draft:{choice:number|null;sentences:number[]};attempts:EvidenceAttempt[]};
-export function newEvidenceState(question:string):EvidenceState{return {version:1,phase:'initial',initial:question,confirmation:null,draft:{choice:null,sentences:[]},attempts:[]};}
+export function newEvidenceState(question:string,confirmation:string|null=null):EvidenceState{return {version:1,phase:'initial',initial:question,confirmation,draft:{choice:null,sentences:[]},attempts:[]};}
 export function restoreEvidence(raw:string,course:Course):EvidenceState{
  const s=JSON.parse(raw) as EvidenceState;
  if(s?.version!==1||!['initial','lesson','practice','practice_review','confirmation','done'].includes(s.phase)||!Array.isArray(s.attempts)||s.attempts.length>3||!s.draft||!Array.isArray(s.draft.sentences))throw Error('Unreadable evidence record.');

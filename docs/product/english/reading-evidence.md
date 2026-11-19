@@ -8,11 +8,11 @@ Route: existing Reading map → **Answer and show why**. The bounded first slice
 
 ## Evidence loop
 
-1. Reserve a never-read check passage in the existing learner reading ledger before displaying it. No lesson or hint is visible.
+1. Require and reserve two distinct never-read check passages in the existing learner ledger before displaying the diagnostic. A returning reader with only one left gets an early shortage, not a stranded confirmation. No lesson or hint is visible.
 2. Learner independently chooses an answer and the specific supporting sentence(s). Both are required. Draft choices survive leaving/reopening.
 3. Separate answer correctness from evidence match: both match, answer only, evidence only, or neither. Feedback describes these observations and does not infer guessing, rushing, speed, attention or a stable misconception.
 4. Present the corresponding brief strategy plus the existing worked example on a different teaching passage. Use existing practice content for an answer-and-evidence attempt. Label this supported practice.
-5. Reserve a different **unseen passage**, excluding all passages exposed in any reading skill, not merely new questions on an old passage. Confirmation has no hints, previous feedback or worked example before submission.
+5. Open the already-reserved different **unseen passage**, excluding all passages exposed in any reading skill, not merely new questions on an old passage. Confirmation has no hints, previous feedback or worked example before submission.
 6. Report both components for this item. Never update mastery/capability estimates, never equate supported practice with independent evidence, and never infer retention from immediate confirmation.
 
 Sentence selection uses exact overlap with the content author's evidence span. For the bounded Starter cause bank, each evidence span lies within one sentence. Selecting all sentences does not count as identifying specific support. Content still requires educator review; alternative valid evidence sets need authored support before expanding beyond this bank.
@@ -28,6 +28,8 @@ Sentence selection uses exact overlap with the content author's evidence span. F
 
 ## Verification
 
-21 reading logic and UI-render tests passed, including six new evidence-specific tests: authored sentence spans, four diagnostic patterns, invalid answers, cross-skill passage exclusion/exhaustion, draft/phase recovery and corrupt-state rejection. English-specific TypeScript and bundle build passed locally.
+23 reading logic and UI-render tests passed, including eight new evidence-specific tests: authored sentence spans, four diagnostic patterns, invalid answers, cross-skill passage exclusion/exhaustion, draft/phase recovery and corrupt-state rejection. English-specific TypeScript and bundle build passed locally.
 
-Hosted phone acceptance is included in the existing CI English phone-journey job: draft/back recovery, answer-only diagnosis, supported practice, distinct no-hint confirmation, persisted completed result, no API requests, and storage failure before display. CI results are recorded in the draft PR; local browser verification is not claimed.
+Hosted phone acceptance is included in the existing CI English phone-journey job (three cases): draft/back recovery, answer-only diagnosis, supported practice, distinct no-hint confirmation, persisted completed result, no API requests, storage failure before display, and a returning reader with only one unseen passage. CI results are recorded in the draft PR; local browser verification is not claimed.
+
+Two flow-local wording variants keep canonical source IDs for shared exposure: the initial/confirmation causes use “so” and “made”, while an unrelated “because” sentence supplies a distractor. These bounded adaptations do not edit the original course or spelling content. They are candidate content, not educator-certified.
