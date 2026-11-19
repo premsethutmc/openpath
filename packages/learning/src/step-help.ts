@@ -155,7 +155,9 @@ export function helpMethods(qid: string): string[] {
   // with one written way, the type's own steps are the second where they are a real alternative; with several, they are enough
   // the type's own steps for unlike fractions and for decimals are the same method, only shorter: not a second way
   if (ways.length === 1 && (SOLE_WAYS.includes(ways[0].name) || p.family === "agdec")) return [ways[0].name];
-  return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")] : ways.map((w) => w.name);
+  return ways.length === 1 && p.steps.length >= 2 ? [ways[0].name, ALT[p.family] ?? (ways[0].name === "In columns" ? "By place value" : "Another way")]
+    // two layouts of one written method (long division, answer on top or at the side) are followed by the type's own way
+    : ways.length === 2 && ways[1].name === "Answer at the side" && p.steps.length >= 2 && ALT[p.family] ? [...ways.map((w) => w.name), ALT[p.family]] : ways.map((w) => w.name);
 }
 const ALT: Record<string, string> = { ldiv: "In easy parts", avdiv: "Check by multiplying" };
 /** The steps of a question as help, in order (in its `method`-th way: see helpMethods); null when it is not a generated question or has no steps. */

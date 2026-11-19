@@ -133,10 +133,11 @@ test("column addition and subtraction: every question of two whole numbers is se
 
 test("methods@1: the taught method is the first tab, and the type's own steps are a second way where they are a real alternative", () => {
   const id = pool("ldiv").items.find((p) => /^348 ÷ 6/.test(p.prompt))!.id;
-  assert.deepEqual(helpMethods(id), ["Long division", "In easy parts"]);
+  assert.deepEqual(helpMethods(id), ["Long division", "Answer at the side", "In easy parts"]);
   assert.match(stepsHelp(id, 0)![0].next, /How many 6s fit in 34/);
-  assert.equal(stepsHelp(id, 1)![0].next, "First: multiply.");
-  assert.equal(stepsHelp(id, 1)!.some((s) => s.board), false);
+  assert.deepEqual(stepsHelp(id, 1)!.at(-1)!.board!.slice(0, 2), ["6 ) 348 ( 58", "    30"]);
+  assert.equal(stepsHelp(id, 2)![0].next, "First: multiply.");
+  assert.equal(stepsHelp(id, 2)!.some((s) => s.board), false);
   assert.deepEqual(helpMethods("gen:adcol3:104,737,0"), ["In columns", "By place value"]);
   // borrow@1: what each digit becomes after borrowing is written above it
   assert.deepEqual(stepsHelp("gen:adcol3:860,737,1")!.at(-1)!.board, ["      5 10", "   8  6  0", "−  7  3  7", "----------", "   1  2  3"]);
@@ -302,4 +303,29 @@ test("type-it@1: in a long division every 'how many fit' and every 'bring down' 
   }
   console.log(`type-it@1: ${fits} fit steps and ${downs} bring-down steps entered; ${typed} of ${steps} long-division steps are typed`);
   assert.ok(fits > 2000 && downs > 1000 && typed / steps > 0.8, `${fits} ${downs} ${typed}/${steps}`);
+});
+
+test("side-answer@1: a long division can be set out with the answer at the side, with the same steps and numbers", () => {
+  let n = 0;
+  for (const f of ["ldiv", "avdiv"]) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id) || helpMethods(item.id)[0] !== "Long division") continue;
+    n++;
+    const names = helpMethods(item.id), top = stepsHelp(item.id, 0)!, side = stepsHelp(item.id, 1)!;
+    assert.equal(names[1], "Answer at the side", item.id);
+    assert.equal(side.length, top.length, item.id);
+    side.forEach((s, i) => {
+      assert.deepEqual(s.ask, top[i].ask, `${item.id}: the same number is entered`);
+      assert.ok(!/\btop\b/.test(s.next + s.shown), `${item.id}: ${s.next} ${s.shown}`);
+      if (!s.board) return;
+      const t = top[i].board!, m = /^(\d+) \) (\d+)(?: \( (\d+))?$/.exec(s.board[0]);
+      assert.ok(m, `${item.id}: ${s.board[0]}`);
+      assert.equal(`${m![1]} ) ${m![2]}`, t[1], item.id);
+      assert.equal(m![3] ?? "", t[0].trim(), `${item.id}: the digits at the side are the digits on top`);
+      assert.deepEqual(s.board.slice(1), t.slice(2), `${item.id}: the working underneath is the same`);
+    });
+  }
+  const three = helpMethods(pool("ldiv").items.find((x) => helpMethods(x.id)[0] === "Long division")!.id);
+  assert.deepEqual(three, ["Long division", "Answer at the side", "In easy parts"]);
+  console.log(n, "long divisions with both layouts");
+  assert.ok(n > 1000, String(n));
 });

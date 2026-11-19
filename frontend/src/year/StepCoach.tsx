@@ -73,7 +73,8 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
 export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone, shown }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void; shown?: boolean }) {
   // methods@1: where a question can be worked more than one way, the ways are tabs (the taught method first)
   const methods = useMemo(() => helpMethods(qid), [qid]);
-  const [method, setMethod] = useState(0);
+  // remembered-way@1: the way a child last chose (a layout their book uses) opens first next time, on this device
+  const [method, setMethod] = useState(() => { try { const i = methods.indexOf(localStorage.getItem("openpath-way") ?? ""); return i > 0 ? i : 0; } catch { return 0; } });
   const steps = useMemo(() => stepsHelp(qid, method), [qid, method]);
   // chintu@1: on a question of Classes 1 to 5, Chintu the cat says what to do next
   const buddy = useMemo(() => { const g = classOfQuestion(qid); return g !== null && g <= LAST_CHINTU_CLASS; }, [qid]);
@@ -99,7 +100,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
     <div className="coach" data-coach-step={at} data-coach-method={method}>
       {methods.length > 1 && (
         <div className="coach-methods" role="tablist" aria-label="Ways to work it out">
-          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); setHow(null); setHowCard(false); } }}>{i + 1} · {name}</button>)}
+          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); setHow(null); setHowCard(false); try { localStorage.setItem("openpath-way", methods[i]); } catch { /* not kept */ } } }}>{i + 1} · {name}</button>)}
         </div>
       )}
       {at > 0 && (
@@ -123,7 +124,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
         </ol>
       )}
       {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
-      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board.find((r) => / \) \d/.test(r))?.replace(/ \( .*$/, "") ?? now.board[1]] : null); return b ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

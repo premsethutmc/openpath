@@ -484,3 +484,8 @@ two bottoms, the whole ones in an improper fraction. In long division 85% of ste
 joined to the bracket, with the answer on the line: the symbol a school book uses. One component draws every written
 layout (step help, "How?", the lesson picture, the review page). Layout chosen: answer on top; the other Indian layout
 ("6 ) 348 ( 58") is not drawn.
+
+`side-answer@1`: a long division has both school layouts as tabs: "Long division" (answer on top of the line) and
+"Answer at the side" ("6 ) 348 ( 58"), then "In easy parts". The steps, numbers and boxes are the same; only where the
+answer's digits are written, and the words for it. Proved on 1,037 questions. `remembered-way@1`: the tab a child last
+chose opens first next time, on that device (localStorage `openpath-way`).

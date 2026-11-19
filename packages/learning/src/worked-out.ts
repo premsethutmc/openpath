@@ -101,6 +101,14 @@ export function divide(n: number, d: number, want: "quotient" | "remainder", ans
   out.push({ next: "Last: read the answer off the top.", shown: want === "remainder" ? `The top line says ${q}, and what is left at the bottom is the remainder: ${r}.` : `The top line is the answer: ${q}.${r ? ` (${r} is left over.)` : ""}`, board: board() });
   return out;
 }
+/**
+ * side-answer@1: a long division's steps with the answer written to the right of the number ("6 ) 348 ( 58") in place
+ * of on top. The same steps and the same numbers; only where the answer's digits are written, and the words for it.
+ */
+function atTheSide(steps: Worked[]): Worked[] {
+  const words = (t: string) => t.replace(/on top/g, "at the side").replace(/off the top/g, "off the side").replace(/The top line (is the answer|says)/g, (_, w: string) => (w === "says" ? "The number at the side is" : "The number at the side is the answer"));
+  return steps.map((s) => ({ ...s, next: words(s.next), shown: words(s.shown), ...(s.board ? { board: [`${s.board[1]}${s.board[0].trim() ? ` ( ${s.board[0].trim()}` : ""}`, ...s.board.slice(2)] } : {}) }));
+}
 const longDivision = ({ params: [d, q, r, mode], answer }: Q): Worked[] | null => (r >= 0 && r < d ? divide(d * q + r, d, mode === 1 ? "remainder" : "quotient", answer) : null);
 const exactDivision = ({ params: [q, d], answer }: Q): Worked[] | null => divide(q * d, d, "quotient", answer);
 
@@ -442,7 +450,11 @@ const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long 
 export const SOLE_WAYS: readonly string[] = ["Same bottom (LCM)", "Divide", "Whole × bottom + top", "Out of 100"];
 export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
   try {
-    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
+    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) {
+      const usual = { name: NAMES[q.family] ?? "The usual way", steps: w };
+      // side-answer@1: the same long division with the answer written at the side ("6 ) 348 ( 58"), as many books set it out
+      return q.family === "ldiv" || q.family === "avdiv" ? [usual, { name: "Answer at the side", steps: atTheSide(w) }] : [usual];
+    } }
     const c = columns(q.prompt, q.answer);
     if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
     if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }

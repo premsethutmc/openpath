@@ -22125,7 +22125,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Long division with a remainder, and dividend = divisor × quotient + remainder",
-   "hash": "9dae2f67",
+   "hash": "f6e6a9c2",
    "source": "written",
    "from": null,
    "classes": [
@@ -22988,7 +22988,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Dividing a number exactly",
-   "hash": "a2e381a7",
+   "hash": "40684d54",
    "source": "written",
    "from": null,
    "classes": [
