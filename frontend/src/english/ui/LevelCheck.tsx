@@ -4,6 +4,7 @@
  */
 import { useRef, useState } from "react";
 import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
+import { isBeginner } from "../logic/first/first.ts";
 import { Spot, spotTask } from "./GrammarUse.tsx";
 import { DICTATION, wordsOf } from "../logic/dictation/dictation.ts";
 import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
@@ -264,6 +265,11 @@ export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Le
           <span className="status">{levels.grammar && !skipped.includes("grammar") ? `Level ${levels.grammar.level} of ${GRAMMAR.levels.length}` : "—"}</span>
         </li>
       </ul>
+      {isBeginner(levels) && (
+        <p data-beginner>
+          <b>🐱 Start with First words.</b> Hear a word and tap its picture: nothing has to be read. It is at the top of your home screen.
+        </p>
+      )}
       <p className="small">Each level is a first estimate from a few answers, on our own scales. It moves as you practise: up when things go well, down when they are too hard.</p>
       {onGrammar && (
         <section className="tile lilac level-grammar" aria-labelledby="level-grammar-title">

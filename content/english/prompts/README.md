@@ -16,3 +16,4 @@ every recorded proposal can be traced to the exact prompt that produced it.
 prompts the learner's response is also placed between fixed markers (`{{RESPONSE_TEXT}}`), so the
 model can be told plainly that it is data, not instructions. No prompt has been sent to any live
 model (decision of 12 October).
+| `writing-feedback.v1.md` | Guided writing tasks: yes / partly / no on the task's three checklist points, one strength, one next step; no mark, no rewriting | Server gateway, parent consent, three pieces per learner per week; mocked provider in tests; no paid call made |

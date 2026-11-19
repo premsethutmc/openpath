@@ -1,0 +1,328 @@
+{
+  "id": "icse-cisce-english-class-8",
+  "version": "1.5.0",
+  "board": "CISCE (ICSE)",
+  "class": 8,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class VIII",
+  "source": {
+    "read": "A third-party copy of the Class VIII pages of the CISCE curriculum (English: printed pages 23 to 30), hosted by BYJU'S",
+    "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/ICSE-Class-8-English-Syllabus.pdf",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "23-24",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens closely and answers questions on texts seen and unseen.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Listens to talks, presentations or lectures and makes notes.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS3",
+          "text": "Prepares for and takes part in discussions after reading or finding out.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Takes part well in group and teacher-led discussions on texts and issues.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS5",
+          "text": "Builds on other people's ideas and states their own views clearly.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS6",
+          "text": "Gives a planned talk to a particular audience for a stated purpose.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Brings multimedia and visual displays into presentations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "25-26",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Finds a text's central theme and follows how it develops.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The main idea and the writer's argument are taught; following a theme through a long text is not yet."
+        },
+        {
+          "id": "R2",
+          "text": "Uses evidence from the text to support views on character and plot.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Every answer is tied to the words of the text that support it; the learner does not yet write the evidence."
+        },
+        {
+          "id": "R3",
+          "text": "Explains how dialogue or incidents move the action on or show character.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "dialogue_character"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
+        },
+        {
+          "id": "R4",
+          "text": "Analyses how differing points of view create effects such as suspense or humour.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "R5",
+          "text": "Judges how faithfully a film or a stage production follows its text.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "R6",
+          "text": "Looks at how modern fiction draws on myths and traditional stories.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "R7",
+          "text": "Reads literature of the upper level for these classes independently and well.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "27-28",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Develops ways of writing that suit the kind of text and the reader.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W2",
+          "text": "Connects ideas, with introductions, reasoned arguments, examples and quotations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W3",
+          "text": "Links ideas that belong together and draws fitting conclusions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W4",
+          "text": "Uses exact words and phrases, and language of the senses.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "exact_words",
+            "sound_words"
+          ],
+          "note": "Exact words and sound words are practised in sentences; writing with the senses is not marked."
+        },
+        {
+          "id": "W5",
+          "text": "Completes short projects alone and in a group.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "W6",
+          "text": "Builds writing skills across school subjects.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W7",
+          "text": "Uses technology to support research.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "W8",
+          "text": "Draws on personal experience and real situations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W9",
+          "text": "Takes a stand on a topic open to argument and defends it logically.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W10",
+          "text": "Uses words and phrases that carry emotion and action.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "exact_words"
+          ]
+        },
+        {
+          "id": "W11",
+          "text": "Writes narratives with well-developed events, actions, thoughts and feelings.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W12",
+          "text": "Writes creative pieces such as stories, poems, travel pieces and features.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W13",
+          "text": "Prepares advertisements, posters and notices.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W14",
+          "text": "Writes formal and informal letters in the set form.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W15",
+          "text": "Writes four or more paragraphs, about 250 to 300 words, on a topic.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W16",
+          "text": "Writes original imaginative, descriptive, narrative and argumentative pieces.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        },
+        {
+          "id": "W17",
+          "text": "Follows the steps of writing: plan, write, revise, edit, rewrite.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "29",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Tells phrases from clauses and explains what each does in a sentence.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "clauses",
+            "phrase_clause"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Finds the main clause and sorts the subordinate clauses of a sentence.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "clauses",
+            "clause_kinds"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Changes simple sentences into complex or compound ones.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "compound",
+            "relative",
+            "conjunctions",
+            "joining"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Uses vocabulary suited to different registers and settings.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "field_words",
+            "register"
+          ]
+        },
+        {
+          "id": "GV5",
+          "text": "Uses technology, including the internet, to present information and to work with others.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "GV6",
+          "text": "Judges information from print and digital sources and gives credit for it.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        }
+      ]
+    }
+  ]
+}

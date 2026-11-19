@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-6",
-  "version": "1.2.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 6,
   "subject": "English",
@@ -128,9 +128,12 @@
         {
           "id": "R3",
           "text": "Uses the shape of stories and poems to predict what comes next.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "Reading covers the order of events in stories; there are no poems and no prediction questions."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prediction"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
         },
         {
           "id": "R4",
@@ -142,9 +145,13 @@
         {
           "id": "R5",
           "text": "Works out what words and phrases mean, including figurative and suggested meanings.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words teaches meanings in sentences; figurative meaning is not taught."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning",
+            "figures",
+            "idioms"
+          ]
         },
         {
           "id": "R6",
@@ -163,23 +170,23 @@
         {
           "id": "W1",
           "text": "Writes about real or imagined experiences with describing detail and order.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W2",
           "text": "Writes arguments backed by clear reasons and evidence.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W3",
           "text": "Writes clearly for the task, the purpose and the reader.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W4",
@@ -191,30 +198,30 @@
         {
           "id": "W5",
           "text": "Uses exact words, a fitting tone and voice, and varied sentences.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W6",
           "text": "Follows the steps of writing: plan, revise, edit, rewrite.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W7",
           "text": "Writes at least three paragraphs, about 200 words, on a topic.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W8",
           "text": "Writes full narratives with actions, thoughts and feelings.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W9",
@@ -237,9 +244,9 @@
         {
           "id": "W11",
           "text": "Draws on personal experience or real situations.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "W12",
@@ -253,9 +260,9 @@
         {
           "id": "W13",
           "text": "Writes simple notices, messages and letters.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },
@@ -292,20 +299,22 @@
         {
           "id": "GV4",
           "text": "Varies sentence patterns for meaning and style.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "compound",
-            "relative"
-          ],
-          "note": "Building compound sentences and who or that clauses is practised; choosing a pattern for style is not."
+            "relative",
+            "joining"
+          ]
         },
         {
           "id": "GV5",
           "text": "Uses the words around a word or phrase to work out its meaning.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning"
+          ]
         },
         {
           "id": "GV6",
@@ -326,13 +335,13 @@
         {
           "id": "GV8",
           "text": "Understands figures of speech where they are used.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "similes",
-            "idioms"
-          ],
-          "note": "Similes and idioms are practised; metaphor and personification are not yet."
+            "idioms",
+            "figures"
+          ]
         },
         {
           "id": "GV9",
@@ -346,12 +355,11 @@
         {
           "id": "GV10",
           "text": "Tells transitive verbs from intransitive ones.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "transitive"
-          ],
-          "note": "Finding the object of a transitive verb is practised; sorting verbs into transitive and intransitive is not yet."
+          ]
         },
         {
           "id": "GV11",

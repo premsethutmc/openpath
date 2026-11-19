@@ -2561,6 +2561,7 @@ h3.sub {
 
 .syllabus-classes {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin: 8px 0 4px;
 }
@@ -2652,4 +2653,177 @@ h3.sub {
 .grammar-tile {
   text-align: left;
   white-space: normal;
+}
+
+/* ------------------------------------------------------------ First words (ui/FirstWords.tsx) */
+.first {
+  text-align: center;
+}
+.first-guide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+}
+.first-cat {
+  font-size: 3rem;
+  line-height: 1;
+}
+.first-hear {
+  width: 72px;
+  min-height: 64px;
+  font-size: 1.8rem;
+}
+.first-big {
+  font-size: 5rem;
+  line-height: 1.1;
+  margin: 12px 0;
+}
+.first-word {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  min-height: 2.8rem;
+  margin: 8px 0;
+}
+.first-options,
+.first-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.first-option {
+  min-width: 96px;
+  min-height: 96px;
+  padding: 8px 12px;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  background: var(--card, #fff);
+}
+.first-tile {
+  width: 56px;
+  height: 56px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: var(--card, #fff);
+  color: inherit;
+}
+.first-option:disabled,
+.first-tile:disabled,
+.first-zone:disabled {
+  opacity: 0.3;
+}
+.first-place {
+  display: grid;
+  grid-template-columns: 96px 96px;
+  grid-template-rows: 96px 96px 96px;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+  font-size: 3rem;
+  position: relative;
+}
+.first-zone {
+  border: 2px dashed var(--line);
+  border-radius: 16px;
+  background: transparent;
+  font-size: 3rem;
+  line-height: 1;
+}
+.first-zone.on {
+  grid-column: 1;
+  grid-row: 1;
+}
+.first-anchor {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  font-size: 4rem;
+  line-height: 1;
+}
+.first-zone.next {
+  grid-column: 2;
+  grid-row: 2;
+}
+.first-zone.under {
+  grid-column: 1;
+  grid-row: 3;
+}
+.first-mover {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+}
+.first-reveal .primary {
+  font-size: 1.8rem;
+  min-width: 120px;
+}
+
+/* Grammar in use: a question with answers to choose from */
+.grammar-quote {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 12px 0 4px;
+}
+.grammar-choices {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+}
+.grammar-choice {
+  text-align: left;
+  white-space: normal;
+}
+
+.first-option.picked {
+  border-color: var(--violet, #6957de);
+  background: #eef;
+}
+
+.guided-write {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.writing-notes ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  gap: 8px;
+}
+.writing-notes li {
+  line-height: 1.4;
+}
+.writing-notes li[data-level="fix"] {
+  font-weight: 600;
+}
+
+.ai-feedback {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 10px 0;
+}
+.ai-feedback ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  gap: 8px;
+}
+.ai-feedback li {
+  line-height: 1.4;
 }

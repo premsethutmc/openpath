@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 9,
+  "version": 13,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -230,6 +230,62 @@
     {
       "id": "sound_words",
       "name": "Sound words"
+    },
+    {
+      "id": "noun_kinds",
+      "name": "Kinds of noun"
+    },
+    {
+      "id": "clauses",
+      "name": "The main clause"
+    },
+    {
+      "id": "adjective_kinds",
+      "name": "Kinds of adjective"
+    },
+    {
+      "id": "clause_kinds",
+      "name": "Kinds of clause"
+    },
+    {
+      "id": "phrase_clause",
+      "name": "Phrase or clause"
+    },
+    {
+      "id": "figures",
+      "name": "Figures of speech"
+    },
+    {
+      "id": "register",
+      "name": "Formal and informal words"
+    },
+    {
+      "id": "context_meaning",
+      "name": "Meaning from the sentence"
+    },
+    {
+      "id": "future",
+      "name": "The simple future"
+    },
+    {
+      "id": "joining",
+      "name": "Joining two sentences into one"
+    },
+    {
+      "id": "prediction",
+      "name": "What comes next"
+    },
+    {
+      "id": "mood_tone",
+      "name": "Mood and tone"
+    },
+    {
+      "id": "text_structure",
+      "name": "How a text is built"
+    },
+    {
+      "id": "dialogue_character",
+      "name": "What speech shows about a person"
     }
   ],
   "scale": 2,
@@ -264,6 +320,9 @@
     {"id": "gu.parts_of_speech.06", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "Birds fly over our house.", "rule": "A verb tells what someone or something does: fly.", "right": ["fly"]},
     {"id": "gu.parts_of_speech.07", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "Meena reads a story every night.", "rule": "A verb tells what someone or something does: reads.", "right": ["reads"]},
     {"id": "gu.parts_of_speech.08", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "We played cricket yesterday.", "rule": "A verb tells what someone or something does: played.", "right": ["played"]},
+    {"id": "gu.alphabetical.05", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "ant bat cat dog", "rule": "Words go in the order of their first letters: ant, bat, cat, dog.", "parts": ["ant", "bat", "cat", "dog"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.06", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "egg fan goat hen", "rule": "Words go in the order of their first letters: egg, fan, goat, hen.", "parts": ["egg", "fan", "goat", "hen"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.07", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "kite lamp moon nest", "rule": "Words go in the order of their first letters: kite, lamp, moon, nest.", "parts": ["kite", "lamp", "moon", "nest"], "task": "Tap the words in alphabetical order."},
     {"id": "gu.agreement.01", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "The dogs [is] barking loudly.", "rule": "A plural subject takes \"are\": the dogs are.", "right": ["are"]},
     {"id": "gu.agreement.02", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "My sister [like] mangoes.", "rule": "With he, she or one person, add -s: she likes.", "right": ["likes"]},
     {"id": "gu.agreement.03", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "We [was] late for school.", "rule": "\"We\" takes \"were\".", "right": ["were"]},
@@ -312,6 +371,17 @@
     {"id": "gu.articles.06", "level": 2, "topic": "articles", "kind": "fix", "sentence": "[A] sun rises in the east.", "rule": "Use the for a thing there is only one of: the sun.", "right": ["The"]},
     {"id": "gu.articles.07", "level": 2, "topic": "articles", "kind": "fix", "sentence": "I saw a dog in the lane. [A] dog was barking.", "rule": "Use the when the thing has already been mentioned: the dog.", "right": ["The"]},
     {"id": "gu.articles.08", "level": 2, "topic": "articles", "kind": "fix", "sentence": "She is [the] honest girl.", "rule": "Use an before a vowel sound, when you mean any one of a kind: an honest girl.", "right": ["an"]},
+    {"id": "gu.noun_kinds.01", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "How [many] water is in the jug?", "rule": "Water cannot be counted, so use much: how much water.", "right": ["much"]},
+    {"id": "gu.noun_kinds.02", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "She bought some [breads] from the shop.", "rule": "Bread cannot be counted, so it has no plural: some bread.", "right": ["bread"]},
+    {"id": "gu.noun_kinds.03", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "How [much] apples are in the basket?", "rule": "Apples can be counted, so use many: how many apples.", "right": ["many"]},
+    {"id": "gu.noun_kinds.04", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "My friend lives in [chennai].", "rule": "The name of a place is a proper noun and starts with a capital letter.", "right": ["Chennai"]},
+    {"id": "gu.noun_kinds.05", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "We met [ravi] at the park.", "rule": "The name of a person is a proper noun and starts with a capital letter.", "right": ["Ravi"]},
+    {"id": "gu.subject_predicate.05", "level": 2, "topic": "subject_predicate", "kind": "spot", "ask": "predicate", "sentence": "The old dog barked loudly.", "rule": "The predicate tells what the subject does or is: barked loudly.", "right": ["barked", "loudly"]},
+    {"id": "gu.subject_predicate.06", "level": 2, "topic": "subject_predicate", "kind": "spot", "ask": "predicate", "sentence": "My sister sings every morning.", "rule": "The predicate tells what the subject does or is: sings every morning.", "right": ["sings", "every", "morning"]},
+    {"id": "gu.subject_predicate.07", "level": 2, "topic": "subject_predicate", "kind": "spot", "ask": "predicate", "sentence": "Birds fly south in winter.", "rule": "The predicate tells what the subject does or is: fly south in winter.", "right": ["fly", "south", "in", "winter"]},
+    {"id": "gu.future.01", "level": 2, "topic": "future", "kind": "fix", "sentence": "Tomorrow we will [went] to the zoo.", "rule": "After will, use the plain verb: will go.", "right": ["go"]},
+    {"id": "gu.future.02", "level": 2, "topic": "future", "kind": "fix", "sentence": "Next week she will [visits] her aunt.", "rule": "After will, use the plain verb: will visit.", "right": ["visit"]},
+    {"id": "gu.future.03", "level": 2, "topic": "future", "kind": "fix", "sentence": "I will [helped] you after lunch.", "rule": "After will, use the plain verb: will help.", "right": ["help"]},
     {"id": "gu.conjunctions.03", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "We stayed inside because it was raining.", "rule": "\"Because\" gives the reason."},
     {"id": "gu.conjunctions.04", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "Although he was tired, he finished his homework.", "rule": "\"Although\" joins two ideas that seem to pull apart."},
     {"id": "gu.conjunctions.05", "level": 3, "topic": "conjunctions", "kind": "fix", "sentence": "I was hungry, [but] I ate a sandwich.", "rule": "\"So\" shows the result.", "right": ["so", "and"]},
@@ -358,6 +428,8 @@
     {"id": "gu.exact_words.02", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "She was [sad] when she won the first prize.", "rule": "Choose the feeling word that fits: winning makes you happy.", "right": ["happy", "delighted", "thrilled", "glad", "proud", "overjoyed", "pleased", "excited"]},
     {"id": "gu.exact_words.03", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "The hungry lion [whispered] loudly in its cage.", "rule": "Choose the sound word that fits: a lion roars.", "right": ["roared", "growled"]},
     {"id": "gu.exact_words.04", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "He [shouted] softly so that the baby would not wake.", "rule": "Choose the word that fits softly: whispered.", "right": ["whispered", "spoke", "sang", "hummed", "talked"]},
+    {"id": "gu.context_meaning.01", "level": 3, "topic": "context_meaning", "kind": "choose", "sentence": "After walking all day without food, the boys were famished.", "question": "What does \"famished\" most likely mean here?", "rule": "Walking all day without food points to hunger.", "right": ["very hungry"], "wrong": ["very clean", "very tall"]},
+    {"id": "gu.context_meaning.02", "level": 3, "topic": "context_meaning", "kind": "choose", "sentence": "The path was so narrow that only one person could walk on it at a time.", "question": "What does \"narrow\" most likely mean here?", "rule": "Only one person could walk on it, so it was not wide.", "right": ["not wide"], "wrong": ["not safe", "not long"]},
     {"id": "gu.adverbs.01", "level": 4, "topic": "adverbs", "kind": "fix", "sentence": "She sings [beautiful].", "rule": "An adverb of manner tells how: beautifully.", "right": ["beautifully"]},
     {"id": "gu.adverbs.02", "level": 4, "topic": "adverbs", "kind": "fix", "sentence": "He ran [quick] to the gate.", "rule": "An adverb of manner often ends in -ly: quickly.", "right": ["quickly"]},
     {"id": "gu.adverbs.03", "level": 4, "topic": "adverbs", "kind": "build", "sentence": "We often play chess in the evening.", "rule": "An adverb of frequency such as \"often\" goes before the main verb."},
@@ -408,6 +480,13 @@
     {"id": "gu.sound_words.01", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The bees [roared] around the hive.", "rule": "Some words sound like what they name: bees buzz.", "right": ["buzzed", "hummed"]},
     {"id": "gu.sound_words.02", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The snake [barked] in the long grass.", "rule": "Some words sound like what they name: a snake hisses.", "right": ["hissed"]},
     {"id": "gu.sound_words.03", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The old door [sang] as it opened.", "rule": "Some words sound like what they name: an old door creaks.", "right": ["creaked", "squeaked", "groaned"]},
+    {"id": "gu.adjective_kinds.01", "level": 4, "topic": "adjective_kinds", "kind": "choose", "sentence": "She has three pens.", "question": "What kind of adjective is \"three\"?", "rule": "An adjective of number tells how many: three pens.", "right": ["It tells how many"], "wrong": ["It tells what kind", "It points out which one"]},
+    {"id": "gu.adjective_kinds.02", "level": 4, "topic": "adjective_kinds", "kind": "choose", "sentence": "He lives in a small house.", "question": "What kind of adjective is \"small\"?", "rule": "An adjective of quality tells what kind: a small house.", "right": ["It tells what kind"], "wrong": ["It tells how many", "It shows who owns it"]},
+    {"id": "gu.adjective_kinds.03", "level": 4, "topic": "adjective_kinds", "kind": "choose", "sentence": "This book is mine.", "question": "What kind of adjective is \"This\"?", "rule": "A demonstrative adjective points out which one: this book.", "right": ["It points out which one"], "wrong": ["It tells what kind", "It tells how many"]},
+    {"id": "gu.adjective_kinds.04", "level": 4, "topic": "adjective_kinds", "kind": "choose", "sentence": "My bag is on the table.", "question": "What kind of adjective is \"My\"?", "rule": "A possessive adjective shows who owns a thing: my bag.", "right": ["It shows who owns it"], "wrong": ["It tells how many", "It tells what kind"]},
+    {"id": "gu.adjective_kinds.05", "level": 4, "topic": "adjective_kinds", "kind": "choose", "sentence": "There is some milk in the jug.", "question": "What kind of adjective is \"some\"?", "rule": "An adjective of quantity tells how much: some milk.", "right": ["It tells how much"], "wrong": ["It points out which one", "It shows who owns it"]},
+    {"id": "gu.context_meaning.03", "level": 4, "topic": "context_meaning", "kind": "choose", "sentence": "The timid kitten hid under the bed whenever a visitor came.", "question": "What does \"timid\" most likely mean here?", "rule": "Hiding from visitors shows that it was easily frightened.", "right": ["easily frightened"], "wrong": ["very playful", "always hungry"]},
+    {"id": "gu.context_meaning.04", "level": 4, "topic": "context_meaning", "kind": "choose", "sentence": "The old bridge was so fragile that the villagers crossed it one at a time.", "question": "What does \"fragile\" most likely mean here?", "rule": "They crossed one at a time for fear that it would break.", "right": ["easily broken"], "wrong": ["very wide", "newly built"]},
     {"id": "gu.adverbs.05", "level": 5, "topic": "adverbs", "kind": "fix", "sentence": "He drives very [careful] in the rain.", "rule": "\"Very\" can strengthen an adverb: very carefully.", "right": ["carefully"]},
     {"id": "gu.interjections.04", "level": 5, "topic": "interjections", "kind": "build", "sentence": "Alas! The old tree has fallen.", "rule": "\"Alas\" shows sorrow."},
     {"id": "gu.phrasal_verbs.04", "level": 5, "topic": "phrasal_verbs", "kind": "fix", "sentence": "She takes [up] her mother: they have the same smile.", "rule": "\"Take after\" means to be like an older family member.", "right": ["after"]},
@@ -451,6 +530,16 @@
     {"id": "gu.synonyms_antonyms.03", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "Hot is to cold as day is to [sun].", "rule": "An analogy matches pairs: hot and cold are opposites, so are day and night.", "right": ["night"]},
     {"id": "gu.synonyms_antonyms.04", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "The opposite of ancient is [old].", "rule": "An antonym is a word of opposite meaning: ancient, modern.", "right": ["modern", "new"]},
     {"id": "gu.synonyms_antonyms.05", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "Glove is to hand as sock is to [shoe].", "rule": "An analogy matches pairs: a glove goes on a hand, a sock goes on a foot.", "right": ["foot"]},
+    {"id": "gu.transitive.05", "level": 5, "topic": "transitive", "kind": "choose", "sentence": "The baby slept.", "question": "Is the verb transitive or intransitive?", "rule": "Slept has no object, so it is intransitive.", "right": ["Intransitive"], "wrong": ["Transitive"]},
+    {"id": "gu.transitive.06", "level": 5, "topic": "transitive", "kind": "choose", "sentence": "The girl opened the window.", "question": "Is the verb transitive or intransitive?", "rule": "Opened has an object, the window, so it is transitive.", "right": ["Transitive"], "wrong": ["Intransitive"]},
+    {"id": "gu.transitive.07", "level": 5, "topic": "transitive", "kind": "choose", "sentence": "The birds flew away.", "question": "Is the verb transitive or intransitive?", "rule": "Flew has no object: away tells where, so the verb is intransitive.", "right": ["Intransitive"], "wrong": ["Transitive"]},
+    {"id": "gu.transitive.08", "level": 5, "topic": "transitive", "kind": "choose", "sentence": "He wrote a long letter.", "question": "Is the verb transitive or intransitive?", "rule": "Wrote has an object, a long letter, so it is transitive.", "right": ["Transitive"], "wrong": ["Intransitive"]},
+    {"id": "gu.context_meaning.05", "level": 5, "topic": "context_meaning", "kind": "choose", "sentence": "She was reluctant to speak, and looked at the floor until the teacher asked twice.", "question": "What does \"reluctant\" most likely mean here?", "rule": "She had to be asked twice, so she was unwilling.", "right": ["unwilling"], "wrong": ["eager", "able"]},
+    {"id": "gu.context_meaning.06", "level": 5, "topic": "context_meaning", "kind": "choose", "sentence": "Rain was scarce that year, and the wells nearly ran dry.", "question": "What does \"scarce\" most likely mean here?", "rule": "The wells nearly ran dry, so there was little rain.", "right": ["in short supply"], "wrong": ["very heavy", "late in coming"]},
+    {"id": "gu.prediction.01", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "The cat sat down upon the mat, and on its head it wore a ...", "question": "Which word most likely comes next?", "rule": "In a rhyme, the end of the line matches an earlier sound: mat, hat.", "right": ["hat"], "wrong": ["shoe", "coat"]},
+    {"id": "gu.prediction.02", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "A hare laughed at a slow tortoise, so they agreed to race. The hare ran far ahead and lay down to sleep.", "question": "What most likely happens next?", "rule": "Stories of this shape turn on the proud one being caught out, so the slow one gets ahead.", "right": ["The tortoise passes the sleeping hare."], "wrong": ["The hare wins the race easily.", "The tortoise goes home at once."]},
+    {"id": "gu.prediction.03", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "Once upon a time a poor woodcutter found a golden axe in the river.", "question": "What kind of text is this likely to be?", "rule": "Once upon a time, a poor man and a magical find are the shape of a folk tale.", "right": ["A folk tale with a lesson"], "wrong": ["A news report", "A set of instructions"]},
+    {"id": "gu.prediction.04", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "Up in the sky the kite flew high, it danced and dipped and waved ...", "question": "Which word most likely comes next?", "rule": "The rhyme with sky and high points to goodbye.", "right": ["goodbye"], "wrong": ["hello", "again"]},
     {"id": "gu.speech.03", "level": 6, "topic": "speech", "kind": "build", "sentence": "Meena said that she was hungry.", "rule": "In reported speech \"I am\" becomes \"she was\".", "extra": ["is", "I"]},
     {"id": "gu.speech.04", "level": 6, "topic": "speech", "kind": "build", "sentence": "Ravi asked me where I was going.", "rule": "A reported question uses statement order and has no question mark.", "extra": ["are", "you"]},
     {"id": "gu.speech.05", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Last week she said that she [will] visit us soon.", "rule": "In reported speech \"will\" becomes \"would\".", "right": ["would"]},
@@ -475,6 +564,40 @@
     {"id": "gu.speech.08", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Yesterday he said that he [can] swim across the lake.", "rule": "In reported speech \"can\" becomes \"could\".", "right": ["could"]},
     {"id": "gu.tense_shift.04", "level": 6, "topic": "tense_shift", "kind": "fix", "sentence": "When the bell rang, the children [run] out of the class.", "rule": "\"Rang\" sets the past, so keep to it: rang, ran.", "right": ["ran"]},
     {"id": "gu.pronoun_agreement.04", "level": 6, "topic": "pronoun_agreement", "kind": "fix", "sentence": "The birds built [its] nest in our mango tree.", "rule": "A plural noun takes a plural pronoun: the birds, their.", "right": ["their"]},
+    {"id": "gu.clauses.01", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "When it rained, we stayed inside.", "rule": "The main clause can stand alone as a sentence: we stayed inside. \"When it rained\" cannot.", "ask": "main clause", "right": ["we", "stayed", "inside"]},
+    {"id": "gu.clauses.02", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "Although she was tired, Meena finished her work.", "rule": "The main clause can stand alone: Meena finished her work. \"Although she was tired\" cannot.", "ask": "main clause", "right": ["Meena", "finished", "her", "work"]},
+    {"id": "gu.clauses.03", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "The boy who won smiled proudly.", "rule": "The main clause is: the boy smiled proudly. \"Who won\" is a clause that only adds to \"boy\".", "ask": "main clause", "right": ["The", "boy", "smiled", "proudly"]},
+    {"id": "gu.clauses.04", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "We will go out if the rain stops.", "rule": "The main clause can stand alone: we will go out. \"If the rain stops\" cannot.", "ask": "main clause", "right": ["We", "will", "go", "out"]},
+    {"id": "gu.phrase_clause.01", "level": 6, "topic": "phrase_clause", "kind": "choose", "sentence": "The children played IN THE GARDEN.", "question": "Are the words in capital letters a phrase or a clause?", "rule": "A phrase has no subject with its own verb: in the garden.", "right": ["A phrase"], "wrong": ["A clause"]},
+    {"id": "gu.phrase_clause.02", "level": 6, "topic": "phrase_clause", "kind": "choose", "sentence": "The children played UNTIL THE SUN SET.", "question": "Are the words in capital letters a phrase or a clause?", "rule": "A clause has a subject and a verb: the sun set.", "right": ["A clause"], "wrong": ["A phrase"]},
+    {"id": "gu.phrase_clause.03", "level": 6, "topic": "phrase_clause", "kind": "choose", "sentence": "She spoke WITH GREAT CARE.", "question": "Are the words in capital letters a phrase or a clause?", "rule": "A phrase has no subject with its own verb: with great care.", "right": ["A phrase"], "wrong": ["A clause"]},
+    {"id": "gu.phrase_clause.04", "level": 6, "topic": "phrase_clause", "kind": "choose", "sentence": "I will wait IF YOU ARE LATE.", "question": "Are the words in capital letters a phrase or a clause?", "rule": "A clause has a subject and a verb: you are.", "right": ["A clause"], "wrong": ["A phrase"]},
+    {"id": "gu.figures.01", "level": 6, "topic": "figures", "kind": "choose", "sentence": "The wind whispered through the trees.", "question": "Which figure of speech is this?", "rule": "Personification gives a human action to a thing: the wind whispered.", "right": ["Personification"], "wrong": ["Simile", "Alliteration"]},
+    {"id": "gu.figures.02", "level": 6, "topic": "figures", "kind": "choose", "sentence": "The classroom was a zoo.", "question": "Which figure of speech is this?", "rule": "A metaphor says one thing is another, without like or as.", "right": ["Metaphor"], "wrong": ["Simile", "Personification"]},
+    {"id": "gu.figures.03", "level": 6, "topic": "figures", "kind": "choose", "sentence": "Seven silver swans swam silently.", "question": "Which figure of speech is this?", "rule": "Alliteration repeats the same first sound: seven silver swans.", "right": ["Alliteration"], "wrong": ["Metaphor", "Simile"]},
+    {"id": "gu.figures.04", "level": 6, "topic": "figures", "kind": "choose", "sentence": "Her smile was sunshine.", "question": "Which figure of speech is this?", "rule": "A metaphor says one thing is another: her smile was sunshine.", "right": ["Metaphor"], "wrong": ["Alliteration", "Simile"]},
+    {"id": "gu.figures.05", "level": 6, "topic": "figures", "kind": "choose", "sentence": "The stars danced in the sky.", "question": "Which figure of speech is this?", "rule": "Personification gives a human action to a thing: the stars danced.", "right": ["Personification"], "wrong": ["Metaphor", "Alliteration"]},
+    {"id": "gu.figures.06", "level": 6, "topic": "figures", "kind": "choose", "sentence": "The baker stopped making doughnuts, tired of the hole business.", "question": "Which figure of speech is this?", "rule": "A pun plays on two meanings or two words that sound alike: hole and whole.", "right": ["A pun"], "wrong": ["A simile", "Personification"]},
+    {"id": "gu.register.01", "level": 6, "topic": "register", "kind": "choose", "sentence": "A letter to the head teacher asking for a day off.", "question": "Which sentence fits?", "rule": "A formal letter uses polite, complete and exact language.", "right": ["I request you to grant me leave for one day."], "wrong": ["Give me a day off, okay?", "I want off tomorrow, thanks."]},
+    {"id": "gu.register.02", "level": 6, "topic": "register", "kind": "choose", "sentence": "A message to a close friend about a film.", "question": "Which sentence fits?", "rule": "With a friend, friendly everyday language is right; stiff language sounds odd.", "right": ["That film was great, you must see it!"], "wrong": ["I wish to inform you that the film was satisfactory.", "Kindly be advised of the merits of the film."]},
+    {"id": "gu.register.03", "level": 6, "topic": "register", "kind": "choose", "sentence": "A notice on the school board about a meeting.", "question": "Which sentence fits?", "rule": "A notice is formal: it gives what, where and when, plainly.", "right": ["The meeting will be held in the hall at ten o'clock."], "wrong": ["Hey guys, meeting in the hall, be there!", "You lot had better turn up at ten."]},
+    {"id": "gu.register.04", "level": 6, "topic": "register", "kind": "choose", "sentence": "A thank-you note to your grandmother.", "question": "Which sentence fits?", "rule": "A note to family is warm and polite: neither stiff nor curt.", "right": ["Thank you so much for the lovely present."], "wrong": ["Receipt of the present is hereby acknowledged.", "Got it. Thanks."]},
+    {"id": "gu.joining.01", "level": 6, "topic": "joining", "kind": "choose", "sentence": "It was raining. We went out.", "question": "Which sentence joins the two correctly?", "rule": "Although joins two ideas that pull apart; it is not used together with but.", "right": ["Although it was raining, we went out."], "wrong": ["Although it was raining, but we went out.", "It was raining although we went out."]},
+    {"id": "gu.joining.02", "level": 6, "topic": "joining", "kind": "choose", "sentence": "The boy won the prize. He is my cousin.", "question": "Which sentence joins the two correctly?", "rule": "Who joins a sentence about a person to the noun it describes.", "right": ["The boy who won the prize is my cousin."], "wrong": ["The boy is my cousin who he won the prize.", "The boy which won the prize is my cousin."]},
+    {"id": "gu.joining.03", "level": 6, "topic": "joining", "kind": "choose", "sentence": "She was tired. She finished her work.", "question": "Which sentence joins the two correctly?", "rule": "But joins two ideas that pull apart, making a compound sentence.", "right": ["She was tired, but she finished her work."], "wrong": ["She was tired, so she finished her work.", "She was tired because she finished her work."]},
+    {"id": "gu.joining.04", "level": 6, "topic": "joining", "kind": "choose", "sentence": "I missed the bus. I woke up late.", "question": "Which sentence joins the two correctly?", "rule": "Because joins a result to its reason.", "right": ["I missed the bus because I woke up late."], "wrong": ["I missed the bus, so I woke up late.", "I missed the bus although I woke up late."]},
+    {"id": "gu.mood_tone.01", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "The house stood silent, its windows dark, and a cold wind rattled the gate.", "question": "What is the mood of these lines?", "rule": "Silent, dark, cold and rattled all build an uneasy mood.", "right": ["Uneasy"], "wrong": ["Cheerful", "Playful"]},
+    {"id": "gu.mood_tone.02", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "Lanterns glowed along the street, drums rolled, and children raced past with sweets in their hands.", "question": "What is the mood of these lines?", "rule": "Lanterns, drums and children with sweets build a festive mood.", "right": ["Festive"], "wrong": ["Gloomy", "Lonely"]},
+    {"id": "gu.mood_tone.03", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "The swing hung still. Her shoes were by the door, where she had left them a year ago.", "question": "What is the mood of these lines?", "rule": "A still swing and shoes untouched for a year build a sad mood.", "right": ["Sad"], "wrong": ["Excited", "Funny"]},
+    {"id": "gu.mood_tone.04", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "Of course the bus was late. It is always late on the one day I am early.", "question": "What is the tone of the speaker?", "rule": "Of course and always show a speaker who is mildly annoyed and joking about it.", "right": ["Wry and a little annoyed"], "wrong": ["Full of wonder", "Deeply afraid"]},
+    {"id": "gu.text_structure.01", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "First, wash the rice. Next, boil the water. Finally, add the rice and cover the pot.", "question": "How is this text built?", "rule": "First, next and finally mark steps in order.", "right": ["As steps in order"], "wrong": ["As a problem and its answer", "As a comparison of two things"]},
+    {"id": "gu.text_structure.02", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "The village well ran dry every summer. So the farmers dug a pond to store the rain.", "question": "How is this text built?", "rule": "The text states a problem, then what was done about it.", "right": ["As a problem and its answer"], "wrong": ["As steps in order", "As a comparison of two things"]},
+    {"id": "gu.text_structure.03", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "A bicycle costs little and needs no fuel, whereas a scooter is faster but costs more to run.", "question": "How is this text built?", "rule": "Whereas and but set two things side by side.", "right": ["As a comparison of two things"], "wrong": ["As steps in order", "As a problem and its answer"]},
+    {"id": "gu.text_structure.04", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "Heavy rain fell for three days. As a result, the river rose and the road was closed.", "question": "How is this text built?", "rule": "As a result links what happened to its cause.", "right": ["As a cause and what followed from it"], "wrong": ["As a comparison of two things", "As steps in order"]},
+    {"id": "gu.dialogue_character.01", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Take my umbrella,\" said Asha. \"I can run home.\"", "question": "What does this show about the speaker?", "rule": "She gives up her own umbrella for someone else.", "right": ["She is generous"], "wrong": ["She is forgetful", "She is proud"]},
+    {"id": "gu.dialogue_character.02", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"I did not break it,\" said Vivek, looking at his shoes. \"It was like that already.\"", "question": "What does this show about the speaker?", "rule": "Looking at his shoes while denying it suggests he is hiding something.", "right": ["He is not telling the whole truth"], "wrong": ["He is very brave", "He is delighted"]},
+    {"id": "gu.dialogue_character.03", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Let me try once more,\" said Meena, picking up the fallen blocks for the fifth time.", "question": "What does this show about the speaker?", "rule": "Trying a fifth time shows she does not give up.", "right": ["She does not give up"], "wrong": ["She is careless", "She is bored"]},
+    {"id": "gu.dialogue_character.04", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Naturally I came first,\" said Rohan. \"I always do.\"", "question": "What does this show about the speaker?", "rule": "Naturally and I always do show someone who boasts.", "right": ["He is boastful"], "wrong": ["He is shy", "He is grateful"]},
     {"id": "gu.passive.01", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The bridge was [build] many years ago.", "rule": "The passive uses the past participle: was built.", "right": ["built"]},
     {"id": "gu.passive.02", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The letters were [wrote] by the secretary.", "rule": "The passive uses the past participle: were written.", "right": ["written"]},
     {"id": "gu.passive.03", "level": 7, "topic": "passive", "kind": "build", "sentence": "The match was cancelled because of the rain.", "rule": "In the passive, the thing acted on comes first: the match was cancelled.", "extra": ["cancel"]},
@@ -493,6 +616,11 @@
     {"id": "gu.ing_or_to.04", "level": 7, "topic": "ing_or_to", "kind": "build", "sentence": "We agreed to meet at the station.", "rule": "After agree, use to with the verb: agreed to meet.", "extra": ["meeting"]},
     {"id": "gu.parallel.01", "level": 7, "topic": "parallel", "kind": "fix", "sentence": "She likes reading, painting and [cook].", "rule": "Items in a list take the same form: reading, painting and cooking.", "right": ["cooking"]},
     {"id": "gu.parallel.02", "level": 7, "topic": "parallel", "kind": "fix", "sentence": "He spoke clearly, calmly and [confident].", "rule": "Items in a list take the same form: clearly, calmly and confidently.", "right": ["confidently"]},
-    {"id": "gu.parallel.03", "level": 7, "topic": "parallel", "kind": "build", "sentence": "The job needs patience, accuracy and good humour.", "rule": "Items in a list take the same form: three nouns."}
+    {"id": "gu.parallel.03", "level": 7, "topic": "parallel", "kind": "build", "sentence": "The job needs patience, accuracy and good humour.", "rule": "Items in a list take the same form: three nouns."},
+    {"id": "gu.clause_kinds.01", "level": 7, "topic": "clause_kinds", "kind": "choose", "sentence": "I will call you WHEN I ARRIVE.", "question": "What does the clause in capital letters do?", "rule": "A clause that tells when, where, why or how is an adverb clause.", "right": ["It tells when: an adverb clause"], "wrong": ["It describes a noun: an adjective clause", "It is the thing known or said: a noun clause"]},
+    {"id": "gu.clause_kinds.02", "level": 7, "topic": "clause_kinds", "kind": "choose", "sentence": "The boy WHO WON THE RACE is my cousin.", "question": "What does the clause in capital letters do?", "rule": "A clause that describes a noun, here the boy, is an adjective clause.", "right": ["It describes a noun: an adjective clause"], "wrong": ["It tells when: an adverb clause", "It is the thing known or said: a noun clause"]},
+    {"id": "gu.clause_kinds.03", "level": 7, "topic": "clause_kinds", "kind": "choose", "sentence": "I know THAT SHE IS HONEST.", "question": "What does the clause in capital letters do?", "rule": "A clause that is the thing known, said or thought does the work of a noun.", "right": ["It is the thing known or said: a noun clause"], "wrong": ["It describes a noun: an adjective clause", "It tells why: an adverb clause"]},
+    {"id": "gu.clause_kinds.04", "level": 7, "topic": "clause_kinds", "kind": "choose", "sentence": "We stayed inside BECAUSE IT WAS RAINING.", "question": "What does the clause in capital letters do?", "rule": "A clause that tells why is an adverb clause.", "right": ["It tells why: an adverb clause"], "wrong": ["It describes a noun: an adjective clause", "It is the thing known or said: a noun clause"]},
+    {"id": "gu.clause_kinds.05", "level": 7, "topic": "clause_kinds", "kind": "choose", "sentence": "This is the house WHERE I WAS BORN.", "question": "What does the clause in capital letters do?", "rule": "Here the clause describes the house, so it is an adjective clause.", "right": ["It describes a noun: an adjective clause"], "wrong": ["It tells why: an adverb clause", "It is the thing known or said: a noun clause"]}
   ]
 }

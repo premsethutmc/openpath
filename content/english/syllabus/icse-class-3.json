@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-3",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 3,
   "subject": "English",
@@ -69,9 +69,8 @@
         {
           "id": "LS7",
           "text": "Writes down a short story from dictation.",
-          "coverage": "partly",
-          "where": "listening",
-          "note": "Listen and write dictates sentences one at a time, not a whole story."
+          "coverage": "covered",
+          "where": "passage"
         }
       ]
     },
@@ -97,9 +96,9 @@
         {
           "id": "RW3",
           "text": "Writes a paragraph of about 100 words on one main idea.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW4",
@@ -114,16 +113,16 @@
         {
           "id": "RW5",
           "text": "Draws on personal experience or real situations in writing.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW6",
           "text": "Writes a simple letter to a parent, friend or relative.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },
@@ -135,12 +134,11 @@
         {
           "id": "GV1",
           "text": "Knows the subject and the predicate of a sentence.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "subject_predicate"
-          ],
-          "note": "Finding the subject is practised; picking out the predicate is not yet."
+          ]
         },
         {
           "id": "GV2",
@@ -174,13 +172,13 @@
         {
           "id": "GV5",
           "text": "Knows adjectives and their kinds.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "parts_of_speech",
-            "comparison"
-          ],
-          "note": "Finding adjectives and comparing with them are practised; naming the kinds of adjective is not yet."
+            "comparison",
+            "adjective_kinds"
+          ]
         },
         {
           "id": "GV6",

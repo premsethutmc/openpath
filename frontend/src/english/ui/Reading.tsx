@@ -4,6 +4,7 @@
  * the learner's capability picture.
  */
 import { useMemo, useRef, useState } from "react";
+import { ReadingEvidence } from "./ReadingEvidence.tsx";
 import { COURSE, LEVELS, unitKey, type Course, type Level, type Passage, type SkillId, type Unit } from "../logic/reading/course.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
 import { ReadingUnitSession, progress, recommend, statusOf, type Mode, type Progress, type ReadingRecord, type Snapshot, type UnitStatus } from "../logic/reading/session.ts";
@@ -328,6 +329,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
 }
 
 export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onLeave: () => void; onChanged: () => void }) {
+  const [evidence,setEvidence]=useState(false);
   const [session, setSession] = useState<ReadingUnitSession | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -362,9 +364,11 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     setSession(s);
     void step(s);
   };
+  if(evidence)return <ReadingEvidence learner={learner} onBack={()=>setEvidence(false)} onChanged={onChanged}/>;
   if (!session)
     return (
       <>
+        <div className="page"><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button></div>
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
           <NoteBox learner={learner} screen="reading" label="Anything confusing or wrong on this screen? Tell us." />

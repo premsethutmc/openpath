@@ -36,6 +36,8 @@ import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
 import { GuidedTasks } from "./Guided.tsx";
+import { serviceFor } from "../logic/writing/feedback.ts";
+import { FirstWords } from "./FirstWords.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
@@ -103,6 +105,9 @@ export function App() {
   const [deviceRepo, setDeviceRepo] = useState<Repo | null>(null);
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [learner, setLearner] = useState<Learner | null>(null);
+  // AI feedback on writing tasks: only for a signed-in parent account, for the pupil whose record is open
+  const feedbackPupil = mode === "account" && learner ? learner.profileId : null;
+  const feedbackService = useMemo(() => (feedbackPupil ? serviceFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
   const [tab, setTab] = useState<Tab>("home");
   // subjects-home@2: in a build that carries maths, a learner who is in starts on the two subject tiles. Once English is
   // chosen it stays chosen for this browser tab (a reload does not send them back), until they go back to the subjects.
@@ -117,9 +122,11 @@ export function App() {
   const [inVocab, setInVocab] = useState(false);
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
+  const [dictPassage, setDictPassage] = useState<"unseen" | "seen" | null>(null);
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
+  const [inFirst, setInFirst] = useState(false);
   const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
@@ -171,6 +178,7 @@ export function App() {
       setInLevelCheck(false);
       setGrammarUse(null);
       setGuided(null);
+      setInFirst(false);
       setListenAnswer(null);
       setInSyllabus(false);
       setInParent(false);
@@ -501,10 +509,16 @@ export function App() {
         />
       </div>
     );
+  if (inFirst)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <FirstWords learner={learner} voice={voice} onChanged={changed} onLeave={() => (setInFirst(false), scrollTo(0, 0), changed())} />
+      </div>
+    );
   if (guided)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
-        <GuidedTasks learner={learner} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
+        <GuidedTasks learner={learner} feedback={feedbackService} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
       </div>
     );
   if (inSyllabus)
@@ -518,6 +532,8 @@ export function App() {
             setSyllabusClass(cls);
             // writing is practised in the essay studio, a separate part of the app
             if (where === "writing") return void location.assign("?experience=essay-live");
+            if (where === "passage" || where === "passage_seen") return (setInSyllabus(false), setDictPassage(where === "passage" ? "unseen" : "seen"), setInListenWrite(true), scrollTo(0, 0));
+            if (where === "first") return (setInSyllabus(false), setInFirst(true), scrollTo(0, 0));
             if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
             setInSyllabus(false);
             scrollTo(0, 0);
@@ -575,9 +591,11 @@ export function App() {
         <ListenWrite
           learner={learner}
           voice={voice}
+          passage={dictPassage ?? undefined}
           onChanged={changed}
           onLeave={() => {
             setInListenWrite(false);
+            if (dictPassage) (setDictPassage(null), setInSyllabus(true));
             changed();
           }}
         />
@@ -710,6 +728,7 @@ export function App() {
           onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
+          onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />

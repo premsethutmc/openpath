@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-4",
-  "version": "1.2.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 4,
   "subject": "English",
@@ -65,9 +65,8 @@
         {
           "id": "LS7",
           "text": "Takes dictation of a passage already seen.",
-          "coverage": "partly",
-          "where": "listening",
-          "note": "Listen and write dictates sentences one at a time, and they are unseen, not from a passage read before."
+          "coverage": "covered",
+          "where": "passage_seen"
         }
       ]
     },
@@ -100,9 +99,11 @@
         {
           "id": "RW4",
           "text": "Works out unfamiliar words from the words around them.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning"
+          ]
         },
         {
           "id": "RW5",
@@ -114,16 +115,16 @@
         {
           "id": "RW6",
           "text": "Writes at least two paragraphs, about 150 words, on a topic.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW7",
           "text": "Writes a narrative with events, actions, thoughts and feelings.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW8",
@@ -146,9 +147,9 @@
         {
           "id": "RW10",
           "text": "Writes about personal experiences or real situations.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW11",
@@ -162,9 +163,9 @@
         {
           "id": "RW12",
           "text": "Writes a letter to a parent, friend or relative.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },
