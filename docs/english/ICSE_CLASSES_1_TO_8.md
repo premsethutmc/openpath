@@ -40,7 +40,7 @@ is labelled so in the app. Nothing is educator-reviewed.
 - The suggested literature is published work and is not in the app; the learner reads a book of their own and
   tells an adult about it.
 - Class 6 has 19 lines that are only partly covered: nine are writing; the rest include metaphor and personification, sorting verbs into transitive and intransitive, and reading between the lines.
-- All eight classes are loaded: 253 lines, none without a place (109 practised in the app, 20 partly, 124 with a grown-up).
+- All eight classes are loaded: 253 lines, none without a place (114 practised in the app, 15 partly, 124 with a grown-up).
 - Class 1 points to First words (see FIRST_WORDS.md) for reading with pictures, everyday words and three- and four-letter spelling; it added 28 tasks with a grown-up (166 in all) and alphabetical order by first letter.
 - Class 8 is mostly writing (13 of its 37 lines wait on the essay studio) and analysis of literature, so only two lines are fully practised in the app.
 - Class 2: the lines are placed, but the present first levels of the app are hard for a child of that age. A beginner activity (pictures and sound, single words before sentences) is still to be built.
@@ -93,3 +93,16 @@ process.
 
 Still partly covered (20 lines): reading that needs whole long texts; poems, speeches and dialogues to listen
 to; a few lines where one half is spoken; tense kept steady across a paragraph; pronouns with each and everyone.
+
+## Five more lines closed (19 Nov 2026)
+
+| Class, line | What was missing | Now |
+|---|---|---|
+| 1 RW9, 2 RW3 | Pictures in story order; how people reacted | Grammar topic "Pictures in story order, and how people feel": five picture stories to put in order, three "how did they feel?" questions |
+| 6 GV11 | Pronouns with each, every, everyone, someone, nobody | Six more sentences (his, her or their; never our or your) |
+| 6 GV12 | Tense held across a paragraph | Six three-sentence paragraphs with one verb out of step |
+| 7 LS1 | Speeches, poems and dialogues to listen to | Listen and answer: a conversation (level 4), a school speech (level 5), an original poem (level 6) |
+
+Totals: 114 in the app, 15 partly, 124 with a grown-up (253). The 15 left are mostly speaking or reading aloud
+(the app cannot hear the learner), writing answers in one's own words, sounding out new words, and wider inference
+and theme across long texts.

@@ -172,12 +172,19 @@ export function levelFor(g: GrammarUse, records: readonly GrammarRecord[], start
   return last ? clamp(rescale(last, OLD_LEVELS) + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
 }
 
-/** The sentences for a sitting: new ones first, then ones last got wrong, then the oldest; no topic more than three times, and some of each kind. */
+/**
+ * The sentences for a sitting: new ones first, then ones last got wrong, then the oldest; no topic more than three
+ * times, and some of each kind. A level sitting whose own level has run short of new and missed sentences takes
+ * new and missed ones from the level below before it asks again one already answered right (sim-english@1 found
+ * the top level's sentences re-asked within days).
+ */
 export function pick(g: GrammarUse, level: number, records: readonly GrammarRecord[], topics?: readonly string[]): GrammarItem[] {
   const latest = new Map<string, { correct: boolean; i: number }>();
   records.forEach((r, i) => r.type === "answer" && latest.set(r.id, { correct: r.correct, i }));
-  const pool = topics?.length ? g.items.filter((it) => topics.includes(it.topic)).sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level)) : g.items.filter((it) => it.level === level);
-  const rank = (it: GrammarItem) => (!latest.has(it.id) ? 0 : latest.get(it.id)!.correct ? 2 : 1);
+  const below = topics?.length ? [] : g.items.filter((it) => it.level === level - 1);
+  const pool = topics?.length ? g.items.filter((it) => topics.includes(it.topic)).sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level)) : [...g.items.filter((it) => it.level === level), ...below];
+  const own = (it: GrammarItem) => (it.level === level || topics?.length ? 0 : 2);
+  const rank = (it: GrammarItem) => (!latest.has(it.id) ? own(it) : latest.get(it.id)!.correct ? 4 + own(it) / 2 : 1 + own(it));
   const ordered = hashOrder(pool, (it) => `grammar|${it.id}`).sort((a, b) => rank(a) - rank(b) || (latest.get(a.id)?.i ?? 0) - (latest.get(b.id)?.i ?? 0));
   const out: GrammarItem[] = [];
   // in a level sitting, naming words takes at most two places, so there is room for three to fix and three to build

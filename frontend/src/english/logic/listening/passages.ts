@@ -42,7 +42,7 @@ function hash(s: string): number {
 }
 const hashOrder = <T>(xs: readonly T[], key: (x: T) => string) => xs.map((x) => ({ x, k: hash(key(x)), s: key(x) })).sort((a, b) => a.k - b.k || (a.s < b.s ? -1 : 1)).map((e) => e.x);
 
-export const PLACE_SALT = "7";
+export const PLACE_SALT = "189";
 /** A question's choices in a fixed order, and which is right. */
 export function choices(q: ListenQuestion, salt = PLACE_SALT): { options: string[]; answer: number } {
   // the salt was chosen so the right answer falls equally often in each place over the whole bank (a test holds it to that)
@@ -101,7 +101,10 @@ export function pick(l: Listening, level: number, records: readonly ListenRecord
   const lastHeard = new Map<string, number>();
   records.forEach((r, i) => lastHeard.set(r.passage, i));
   const pool = hashOrder(l.passages.filter((p) => p.level === level), (p) => `listen|${p.id}`);
-  return pool.find((p) => !lastHeard.has(p.id)) ?? [...pool].sort((a, b) => lastHeard.get(a.id)! - lastHeard.get(b.id)!)[0];
+  // once every passage of the level has been heard, one not yet heard from the level below comes before a repeat
+  // (sim-english@1: four or five passages a level, one a day, came round again within the week)
+  const below = hashOrder(l.passages.filter((p) => p.level === level - 1), (p) => `listen|${p.id}`);
+  return pool.find((p) => !lastHeard.has(p.id)) ?? below.find((p) => !lastHeard.has(p.id)) ?? [...pool].sort((a, b) => lastHeard.get(a.id)! - lastHeard.get(b.id)!)[0];
 }
 
 export interface ListenSummary {

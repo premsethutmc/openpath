@@ -364,22 +364,20 @@
         {
           "id": "GV11",
           "text": "Makes pronouns agree with the nouns they stand for, including words like each and everyone.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "pronoun_agreement"
-          ],
-          "note": "Matching a pronoun to its noun is practised; words like each and everyone are not yet."
+          ]
         },
         {
           "id": "GV12",
           "text": "Keeps verb tenses steady across paragraphs.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "tense_shift"
-          ],
-          "note": "Practised within a sentence, not across a paragraph."
+          ]
         },
         {
           "id": "GV13",

@@ -282,5 +282,11 @@ export class FirstSitting {
   }
 }
 
-/** A learner who passed no reading text and stands on the first listening level is sent to First words. */
-export const isBeginner = (levels: { reading: { passed: number } | null; listening: { level: number } | null }): boolean => !!levels.reading && levels.reading.passed === 0 && !!levels.listening && levels.listening.level <= 1;
+/**
+ * A learner who stands on the first listening level, and either passed no reading text or knew no band of the word
+ * check, is sent to First words. The word check counts too because a reading text has three choices a question: a
+ * learner with no English passes one by luck about one time in seven (sim-english@1), while the word check offers
+ * "I don't know" and marks guessing down.
+ */
+export const isBeginner = (levels: { reading: { passed: number } | null; listening: { level: number } | null; words?: { band: number } | null }): boolean =>
+  !!levels.listening && levels.listening.level <= 1 && ((!!levels.reading && levels.reading.passed === 0) || (!!levels.words && levels.words.band === 0));
