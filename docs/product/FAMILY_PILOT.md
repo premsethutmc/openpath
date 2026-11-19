@@ -468,3 +468,9 @@ way, every step, each layout, and what "How?" opens. Approve, ask for changes or
 type's help makes a new version to review. 1,118 types; 308 in Class 5. A decision is recorded; it does not yet hide
 anything from a learner. Any change to help text needs `node --import tsx ../packages/learning/scripts/teaching.ts`
 (from frontend/) so teaching.v1.json stays current.
+
+`fresh@1`: a family-site build names itself (`/year/version.json`, and the same stamp inside app.js). When the app opens,
+and each time it comes back to the front, it asks the server which build is current; if it is behind, it drops its saved
+copy and reloads at once, or shows "A newer version is ready. Update" if the learner has already touched the screen.
+One try per build, so it cannot loop. The stamp is printed at the foot of every screen ("Version 2026-11-19 02:30"), so a
+screenshot says which build a phone has. Checked in a browser against two simulated deploys.

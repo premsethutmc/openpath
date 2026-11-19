@@ -1542,6 +1542,7 @@ function TopBar({ left, title }: { left: React.ReactNode; title: string }) {
  *  browser (an account with a made-up address and a random password, both kept only in this browser). Lose the browser's
  *  storage and the record cannot be opened again, which the screen says. An email account remains available. */
 declare const OPENPATH_SHELL_CACHE: boolean;
+declare const OPENPATH_BUILD: string;
 /** instant-open@1: this build keeps its own files on the phone (a service worker), so it opens at once even while the server sleeps */
 const SHELL_CACHE = typeof OPENPATH_SHELL_CACHE !== "undefined" && OPENPATH_SHELL_CACHE === true;
 /** The opening screen: the same as the page's own first paint, and after a few seconds it says why it may be slow. */
@@ -1646,6 +1647,51 @@ if (SHELL_CACHE && "serviceWorker" in navigator) {
   let touched = false;
   for (const ev of ["pointerdown", "keydown"]) addEventListener(ev, () => { touched = true; }, { once: true, capture: true });
   navigator.serviceWorker.addEventListener("message", (e) => { if ((e.data as { type?: string } | null)?.type === "openpath-updated" && !touched && performance.now() < 15_000) location.reload(); });
+  // fresh@1: the saved copy is never trusted to be the newest. The server is asked which build is current when the app
+  // opens and each time it comes back to the front; a newer one is taken at once (the saved copy is dropped and the page
+  // reloads), or offered with one button if the learner is in the middle of something. One try per build: no reload loop.
+  const BUILD = typeof OPENPATH_BUILD !== "undefined" ? OPENPATH_BUILD : "";
+  if (BUILD) {
+    const label = document.createElement("p");
+    label.textContent = `Version ${BUILD}`;
+    label.setAttribute("data-testid", "build-label");
+    label.style.cssText = "margin:0;padding:10px 0 14px;text-align:center;font-size:11px;opacity:.55";
+    document.body.appendChild(label);
+    let asking = false;
+    const offer = () => {
+      if (document.getElementById("fresh-bar")) return;
+      const bar = document.createElement("div");
+      bar.id = "fresh-bar";
+      bar.setAttribute("role", "status");
+      bar.style.cssText = "position:fixed;left:0;right:0;top:0;z-index:1000;display:flex;gap:12px;align-items:center;justify-content:center;padding:10px 14px;background:#1d4ed8;color:#fff;font-size:15px";
+      const say = document.createElement("span");
+      say.textContent = "A newer version is ready.";
+      const go = document.createElement("button");
+      go.type = "button";
+      go.textContent = "Update";
+      go.style.cssText = "padding:6px 14px;border-radius:999px;border:0;background:#fff;color:#1d4ed8;font-weight:700";
+      go.addEventListener("click", () => location.reload());
+      bar.append(say, go);
+      document.body.appendChild(bar);
+    };
+    const newest = async () => {
+      if (asking) return;
+      asking = true;
+      try {
+        const r = await fetch("/year/version.json", { cache: "no-store", credentials: "same-origin" });
+        const v = r.ok && !r.redirected ? ((await r.json()) as { build?: string }) : null;
+        if (v?.build && v.build !== BUILD) {
+          if ("caches" in window) for (const k of await caches.keys()) if (k.startsWith("openpath-year-shell-")) await caches.delete(k);
+          let tried = "";
+          try { tried = sessionStorage.getItem("openpath-fresh") ?? ""; sessionStorage.setItem("openpath-fresh", v.build); } catch { /* private mode: offer the button */ tried = v.build; }
+          if (!touched && tried !== v.build) location.reload(); else offer();
+        }
+      } catch { /* offline: the saved copy is the app */ }
+      asking = false;
+    };
+    void newest();
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") void newest(); });
+  }
 }
 
 // try-as-child@1: /year/#try opens the owner's sandbox view of any skill (nothing saved); everything else is the app
