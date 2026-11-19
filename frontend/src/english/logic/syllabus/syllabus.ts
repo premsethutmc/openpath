@@ -3,7 +3,9 @@
  * words, and for each line whether the app covers it and where. A syllabus is an inventory, not content: it copies
  * no curriculum or textbook text, and it does not change what a learner is asked.
  */
+import icse4 from "../../../../../content/english/syllabus/icse-class-4.json";
 import icse5 from "../../../../../content/english/syllabus/icse-class-5.json";
+import icse6 from "../../../../../content/english/syllabus/icse-class-6.json";
 import { GRAMMAR } from "../grammar-use/grammar-use.ts";
 
 export type Coverage = "covered" | "partly" | "not";
@@ -57,7 +59,11 @@ export function syllabusProblems(s: Syllabus): string[] {
   return out;
 }
 
-export const SYLLABUSES: Syllabus[] = [icse5 as unknown as Syllabus];
+/** The syllabuses held, by class. */
+export const SYLLABUSES: Syllabus[] = [icse4, icse5, icse6].map((x) => x as unknown as Syllabus).sort((a, b) => a.class - b.class);
+/** The class shown first: Class 5, the first class loaded. */
+export const DEFAULT_CLASS = 5;
+export const syllabusFor = (cls: number): Syllabus => SYLLABUSES.find((x) => x.class === cls) ?? SYLLABUSES[0];
 for (const s of SYLLABUSES) {
   const problems = syllabusProblems(s);
   if (problems.length) throw new Error(`syllabus ${s.id}: ${problems.slice(0, 5).join("; ")}`);

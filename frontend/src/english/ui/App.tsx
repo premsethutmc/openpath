@@ -35,7 +35,7 @@ import { ListenWrite } from "./ListenWrite.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
-import { SYLLABUSES } from "../logic/syllabus/syllabus.ts";
+import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
 import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
@@ -118,6 +118,7 @@ export function App() {
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
+  const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
   const [inJourney, setInJourney] = useState(false);
@@ -482,9 +483,11 @@ export function App() {
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
         <SyllabusView
-          doc={SYLLABUSES[0]}
+          docs={SYLLABUSES}
+          initial={syllabusClass}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
-          onOpen={(where, topics) => {
+          onOpen={(where, topics, cls) => {
+            setSyllabusClass(cls);
             setInSyllabus(false);
             scrollTo(0, 0);
             if (where === "grammar") setGrammarUse({ topics, from: "syllabus" });
