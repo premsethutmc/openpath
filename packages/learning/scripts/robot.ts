@@ -113,7 +113,7 @@ if (process.argv.includes("--samples")) {
   // gate@1: with --gate the job fails when a question breaks the product, when a quality count rises above the
   // number it stood at, or when questions went missing from the run. A count that falls should be lowered here.
   if (process.argv.includes("--gate")) {
-    const CEILING: Partial<Record<Kind, number>> = { "answer-in-first-step": 257, "answer-in-cue": 5, "help-never-states-answer": 0 };
+    const CEILING: Partial<Record<Kind, number>> = { "answer-in-first-step": 257, "answer-in-cue": 5, "help-never-states-answer": 0, "mostly-one-word-cues": 11358, "help-is-one-step": 51368 };
     const FLOOR = 350_000;
     const count = (k: Kind) => sum((f) => f.fails[k] ?? 0);
     const broken = [...HARD.filter((k) => count(k) > 0).map((k) => `${k}: ${count(k)} questions break the product`), ...(Object.entries(CEILING) as [Kind, number][]).filter(([k, n]) => count(k) > n).map(([k, n]) => `${k}: ${count(k)}, up from ${n}`), ...(questions < FLOOR ? [`only ${questions} questions were taken (at least ${FLOOR} expected): a part of the run is missing`] : [])];
