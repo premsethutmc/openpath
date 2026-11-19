@@ -15,9 +15,9 @@ import { MemoryRepo } from "../store.ts";
 const S = (text: string, alt: Record<string, string[]> = {}) => ({ text, alt });
 const kinds = (text: string, typed: string) => mark(S(text), typed).words.map((w) => w.kind).join(" ");
 
-test("LW-1 content: three levels of twenty sentences, each one markable", () => {
+test("LW-1 content: three levels of forty sentences, each one markable", () => {
   assert.deepEqual(dictationProblems(DICTATION), []);
-  for (const l of DICTATION.levels) assert.equal(DICTATION.sentences.filter((s) => s.level === l.id).length, 20);
+  for (const l of DICTATION.levels) assert.equal(DICTATION.sentences.filter((s) => s.level === l.id).length, 40);
   const avg = (lv: number) => { const x = DICTATION.sentences.filter((s) => s.level === lv).map((s) => wordsOf(s.text).length); return x.reduce((a, b) => a + b, 0) / x.length; };
   assert.ok(avg(1) < avg(2) && avg(2) < avg(3), "sentences get longer by level");
   const bad = buildDictation({ version: 1, status: "", levels: DICTATION.levels, sentences: [["x", 9, "we have 3 cats"]] });
@@ -109,12 +109,12 @@ test("LW-6 the level moves with the last sitting; missed sentences come back; ne
   assert.equal(next.filter((id) => !mixed.asked.includes(id)).length, 3);
   let h: DictationRecord[] = [];
   const seen = new Set<string>();
-  for (let k = 0; k < 4; k++) {
+  for (let k = 0; k < 8; k++) {
     const r = sit(1, h, (t) => t);
     r.asked.forEach((id) => seen.add(id));
     h = r.records;
   }
-  assert.equal(seen.size, 20, "all twenty before any repeats");
+  assert.equal(seen.size, 40, "all forty before any repeats");
   assert.equal(pick(DICTATION, 1, h).length, SITTING_SIZE, "then the oldest again");
   assert.deepEqual(dictationSummary(mixed.records).missed.length, 2);
   assert.deepEqual([dictationSummary(mixed.records).sentences, dictationSummary(mixed.records).perfectFirst], [5, 3]);

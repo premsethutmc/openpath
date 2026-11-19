@@ -22,6 +22,7 @@ import { normaliseAnswer } from "../../../../packages/english-core/src/index.ts"
 import type { AppContent, Code, DictationItem } from "./content.ts";
 import type { AppEvent, SpellAnswerEvent, SpellEndEvent, SpellSessionEvent, SpellSource } from "./events.ts";
 import beeJson from "../../../../content/english/spelling/spelling-bee.json";
+import beeMeaningsJson from "../../../../content/english/spelling/bee-meanings.json";
 
 export const SPELLING = {
   sessionSize: 10,
@@ -51,6 +52,8 @@ export interface SpellWord {
   sentence?: string;
   /** A pronunciation hint for an adult reading the word. */
   say?: string;
+  /** A short meaning, shown only after the word is answered (candidate content: never in a pilot build). */
+  meaning?: string;
   level?: number;
   source: SpellSource;
   /** Where the word comes from and whether it is approved, in words (shown to adults only). */
@@ -76,13 +79,16 @@ export function bankWords(c: AppContent): SpellWord[] {
   const doc = beeJson as unknown as { words: BeeEntry[] };
   // a pilot build: only the words its gate allows (approved for pilot use; none without approvals)
   const entries = c.gate ? doc.words.filter((e) => c.gate!.bee.has(e.id)) : doc.words;
+  // meanings are candidate content: a pilot build shows none
+  const meanings = c.gate ? {} : (beeMeaningsJson as { meanings: Record<string, string> }).meanings;
+  const withMeaning = (w: SpellWord): SpellWord => (meanings[w.word] ? { ...w, meaning: meanings[w.word] } : w);
   return entries.map((e) => {
     if (e.item) {
       const it = c.ctx.content.items.get(e.item.id) as (Code & Partial<DictationItem>) | undefined;
       if (!it || it.version !== e.item.version || !it.answers?.length) throw new Error(`spelling bee: ${e.id} refers to a missing question ${e.item.id}@${e.item.version}`);
-      return { id: e.id, word: it.answers[0], variants: it.answers.slice(1), sentence: it.sentence, level: e.level, source: BANK, status: e.status };
+      return withMeaning({ id: e.id, word: it.answers[0], variants: it.answers.slice(1), sentence: it.sentence, level: e.level, source: BANK, status: e.status });
     }
-    return { id: e.id, word: e.word!, variants: e.variants ?? [], sentence: e.sentence, say: e.say, level: e.level, source: BANK, status: e.status };
+    return withMeaning({ id: e.id, word: e.word!, variants: e.variants ?? [], sentence: e.sentence, say: e.say, level: e.level, source: BANK, status: e.status });
   });
 }
 

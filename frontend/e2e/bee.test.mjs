@@ -114,6 +114,7 @@ test("Spelling Bee: straight from Home, the word is said by itself, repeat, sent
   // 4. right (capital letters and a space do not matter): feedback with the spelling
   await submit(page, first.word.toUpperCase() + " ");
   await page.getByRole("heading", { name: "Right!" }).waitFor();
+  await page.locator(".bee-meaning", { hasText: "It means:" }).waitFor(); // the meaning comes with the answer, never before it
   assert.match(await page.locator(".bee-feedback").innerText(), new RegExp(first.word, "i"));
   // 5. wrong: the spelling is shown, with what was typed, and it goes on the review list
   const second = await clickFor(page, "Next word");
