@@ -1,0 +1,346 @@
+{
+  "reference": {
+    "suite": "rewrite-semantics@1",
+    "mode": "mock-contract",
+    "scoringDigest": "600b75342edef39117f5963861a919ded59e8ee5b82ac07ae51f9fd7cefa28b0",
+    "declaredProvenance": null,
+    "provenanceAuthenticated": false,
+    "releaseReady": false,
+    "semanticAccuracyEstablished": false,
+    "coverage": {
+      "total": 8,
+      "recorded": 8,
+      "missing": 0
+    },
+    "cases": [
+      {
+        "id": "paraphrase-faithful",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Supplement rather than replace preserves the proposal; changed wording is not lost meaning.",
+        "reviewRequired": true
+      },
+      {
+        "id": "paraphrase-replacement",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “The proposal aims to improve access, not replace the central building.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "The revised replacement proposal reverses the explicit nonreplacement constraint.",
+        "reviewRequired": true
+      },
+      {
+        "id": "negation-kept",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Near-copy is acceptable here because clauses are recombined; the safety condition is unchanged.",
+        "reviewRequired": true
+      },
+      {
+        "id": "negation-reversed",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “The town should not make the traffic trial permanent until independent evidence shows that it improves safety.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "High lexical overlap cannot rescue the reversed decision condition.",
+        "reviewRequired": true
+      },
+      {
+        "id": "scope-kept",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Eligibility and financial limitation remain intact.",
+        "reviewRequired": true
+      },
+      {
+        "id": "scope-broadened",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “Only families without a reliable internet connection should receive the free printed packs.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Only the eligible subset becomes everyone, and the affordability claim is reversed.",
+        "reviewRequired": true
+      },
+      {
+        "id": "minor-detail-omitted",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Meeting decor/date are incidental; the service and urgent-care constraint are retained.",
+        "reviewRequired": true
+      },
+      {
+        "id": "essential-constraint-lost",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "partly",
+        "ratingAgreement": true,
+        "mappingAgreement": true,
+        "questionAgreement": true,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “These appointments should not reduce urgent daytime care.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [
+          {
+            "original": "The clinic should reserve some evening appointments for workers who cannot attend during the day",
+            "rewrite": "The clinic should offer some evening appointments to workers unable to visit during normal daytime hours"
+          }
+        ],
+        "duplicateFocalMappings": false,
+        "reference": "Retaining incidental detail does not compensate for omitting the urgent-care constraint.",
+        "reviewRequired": true
+      }
+    ],
+    "limitation": "Agreement with AI-authored synthetic references only. Exact mapping anchors can undercount valid alternative spans. Coaching entailment, intent and pedagogy require independent review; mock results measure plumbing, never model quality."
+  },
+  "adversarialFalsePreservation": {
+    "suite": "rewrite-semantics@1",
+    "mode": "mock-contract",
+    "scoringDigest": "600b75342edef39117f5963861a919ded59e8ee5b82ac07ae51f9fd7cefa28b0",
+    "declaredProvenance": null,
+    "provenanceAuthenticated": false,
+    "releaseReady": false,
+    "semanticAccuracyEstablished": false,
+    "coverage": {
+      "total": 8,
+      "recorded": 4,
+      "missing": 4
+    },
+    "cases": [
+      {
+        "id": "paraphrase-faithful",
+        "status": "missing"
+      },
+      {
+        "id": "paraphrase-replacement",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "The revised replacement proposal reverses the explicit nonreplacement constraint.",
+        "reviewRequired": true
+      },
+      {
+        "id": "negation-kept",
+        "status": "missing"
+      },
+      {
+        "id": "negation-reversed",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "High lexical overlap cannot rescue the reversed decision condition.",
+        "reviewRequired": true
+      },
+      {
+        "id": "scope-kept",
+        "status": "missing"
+      },
+      {
+        "id": "scope-broadened",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Only the eligible subset becomes everyone, and the affordability claim is reversed.",
+        "reviewRequired": true
+      },
+      {
+        "id": "minor-detail-omitted",
+        "status": "missing"
+      },
+      {
+        "id": "essential-constraint-lost",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "fully",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": null,
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Retaining incidental detail does not compensate for omitting the urgent-care constraint.",
+        "reviewRequired": true
+      }
+    ],
+    "limitation": "Agreement with AI-authored synthetic references only. Exact mapping anchors can undercount valid alternative spans. Coaching entailment, intent and pedagogy require independent review; mock results measure plumbing, never model quality."
+  },
+  "adversarialFalseOmission": {
+    "suite": "rewrite-semantics@1",
+    "mode": "mock-contract",
+    "scoringDigest": "600b75342edef39117f5963861a919ded59e8ee5b82ac07ae51f9fd7cefa28b0",
+    "declaredProvenance": null,
+    "provenanceAuthenticated": false,
+    "releaseReady": false,
+    "semanticAccuracyEstablished": false,
+    "coverage": {
+      "total": 8,
+      "recorded": 4,
+      "missing": 4
+    },
+    "cases": [
+      {
+        "id": "paraphrase-faithful",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “The proposal aims to improve access, not replace the central building.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Supplement rather than replace preserves the proposal; changed wording is not lost meaning.",
+        "reviewRequired": true
+      },
+      {
+        "id": "paraphrase-replacement",
+        "status": "missing"
+      },
+      {
+        "id": "negation-kept",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “The town should not make the traffic trial permanent until independent evidence shows that it improves safety.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Near-copy is acceptable here because clauses are recombined; the safety condition is unchanged.",
+        "reviewRequired": true
+      },
+      {
+        "id": "negation-reversed",
+        "status": "missing"
+      },
+      {
+        "id": "scope-kept",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “Only families without a reliable internet connection should receive the free printed packs.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Eligibility and financial limitation remain intact.",
+        "reviewRequired": true
+      },
+      {
+        "id": "scope-broadened",
+        "status": "missing"
+      },
+      {
+        "id": "minor-detail-omitted",
+        "status": "scored",
+        "contract": "evaluated",
+        "meaningStatus": "accepted",
+        "rating": "not_yet",
+        "ratingAgreement": false,
+        "mappingAgreement": false,
+        "questionAgreement": false,
+        "unnecessaryMinorOmission": false,
+        "question": "The evaluator did not locate this idea in your rewrite: “These appointments should not reduce urgent daytime care.”. Is it important to your meaning, and how could you express it in your own words within 50 words?",
+        "additionalMappingsForReview": [],
+        "duplicateFocalMappings": false,
+        "reference": "Meeting decor/date are incidental; the service and urgent-care constraint are retained.",
+        "reviewRequired": true
+      },
+      {
+        "id": "essential-constraint-lost",
+        "status": "missing"
+      }
+    ],
+    "limitation": "Agreement with AI-authored synthetic references only. Exact mapping anchors can undercount valid alternative spans. Coaching entailment, intent and pedagogy require independent review; mock results measure plumbing, never model quality."
+  }
+}
