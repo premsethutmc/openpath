@@ -15,7 +15,7 @@ from django.utils import timezone
 from . import llm
 from .models import AIUsageBucket
 
-TASKS = frozenset({'essay.observe', 'essay.rewrite', 'essay.questions', 'maths.word_problem'})
+TASKS = frozenset({'essay.observe', 'essay.rewrite', 'essay.questions', 'maths.word_problem', 'writing.feedback'})
 
 
 class GatewayDenied(llm.LLMError):
@@ -41,6 +41,9 @@ def reserve(task, user_id):
     caps = [('global', settings.OPENPATH_AI_DAILY_REQUESTS), (f'user:{user_id}', settings.OPENPATH_AI_USER_DAILY_REQUESTS)]
     if task.startswith('essay.'):
         caps += [('essay', settings.OPENPATH_ESSAY_DAILY_REQUESTS)]
+    elif task == 'writing.feedback':
+        # the weekly limit per learner is the view's; this is the whole site's ceiling for one day
+        caps += [('writing-feedback', settings.OPENPATH_WRITING_FEEDBACK_SITE_DAILY)]
     else:
         caps += [('maths', settings.OPENPATH_WORD_PROBLEM_SITE_DAILY), (f'user-maths:{user_id}', settings.OPENPATH_WORD_PROBLEM_DAILY)]
     if any(not isinstance(cap, int) or isinstance(cap, bool) or cap <= 0 for _, cap in caps):
@@ -74,6 +77,16 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
         if cleaned["rubric"] in essay.foundation.RUBRICS:
             system = essay.foundation.prompt(system)
         user = json.dumps(cleaned, ensure_ascii=False)
+    elif task == 'writing.feedback':
+        from family import writing_feedback
+        if settings.OPENPATH_WRITING_FEEDBACK != 'on':
+            raise GatewayDenied('Writing feedback is switched off')
+        # the task is looked up here by id, so the prompt is always the server's own and never the caller's
+        if not isinstance(request, dict) or set(request) != {'task', 'text', 'checked'}:
+            raise GatewayDenied('Invalid writing feedback request')
+        config = writing_feedback._config()
+        system = writing_feedback.prompt()
+        user = writing_feedback.user_message(request['task'], request['text'], request['checked'])
     else:
         from family import word_problem
         if settings.OPENPATH_WORD_PROBLEMS != 'on':

@@ -1,6 +1,6 @@
 /**
  * A rule-based check of a piece of writing. It looks at the FORM only: length, capital letters and end marks,
- * spacing, a short list of sure spelling and grammar slips, repeated words and sentence openings, linking words,
+ * spacing, sure spelling and grammar slips (about 400 word forms and 59 patterns, in slips.ts), repeated words and sentence openings, linking words,
  * paragraphs, and the outward shape of a letter, an argument or a story. It cannot tell whether the piece is on
  * its topic, whether the ideas are good, or whether a sentence means what the writer intended, and it says so.
  *
@@ -8,6 +8,8 @@
  * Every rule is chosen to be sure rather than clever: a note that is wrong teaches a mistake, so doubtful
  * patterns are left out.
  */
+import { A_OK, AN_OK, ASKED, HELPER, JOINED, MISSPELT, NO_APOSTROPHE, SLIPS, TEXTING, WRONG_FORM } from "./slips.ts";
+
 export type Form = "letter" | "formal" | "argument" | "narrative";
 export interface Target {
   min: number;
@@ -34,25 +36,6 @@ const quote = (xs: string[], n = 3) => xs.slice(0, n).map((x) => `“${x}”`).j
 const LINKERS = ["because", "so", "but", "although", "however", "therefore", "then", "first", "next", "finally", "after", "when", "while", "since", "also", "later", "suddenly", "meanwhile", "moreover", "besides"];
 const STOP = new Set("the a an and or but so of to in on at for with from by as is am are was were be been it its this that these those he she they we you i me my our your his her their them us him not no do does did have has had will would can could should may might there then than when what which who how very just about into over under after before again more most some any all each one two".split(" "));
 const WEAK = ["very", "nice", "good", "big", "thing", "things", "got", "lot", "really", "stuff"];
-/** Misspellings that are never right, with the spelling meant. */
-const MISSPELT: Record<string, string> = { recieve: "receive", freind: "friend", becuase: "because", wich: "which", thier: "their", untill: "until", tommorow: "tomorrow", tomorow: "tomorrow", beleive: "believe", definately: "definitely", seperate: "separate", occured: "occurred", begining: "beginning", writting: "writing", comming: "coming", goverment: "government", enviroment: "environment", diffrent: "different", beautifull: "beautiful", alot: "a lot", wierd: "weird", truely: "truly", arguement: "argument", accross: "across", basicly: "basically", buisness: "business", calender: "calendar", happend: "happened", intresting: "interesting", libary: "library", neccessary: "necessary", peice: "piece", realy: "really", suprise: "surprise", wensday: "Wednesday", wether: "whether", sincerly: "sincerely", greatful: "grateful", allways: "always", childrens: "children's" };
-/** Grammar slips that follow a pattern and are wrong whatever the meaning. */
-const SLIPS: { re: RegExp; say: (m: RegExpExecArray) => string }[] = [
-  { re: /\ba ([aeio][a-z]+)\b/gi, say: (m) => `“a ${m[1]}” should be “an ${m[1]}”` },
-  { re: /\ban ([bcdfgjklmnpqrstvwz][a-z]+)\b/gi, say: (m) => `“an ${m[1]}” should be “a ${m[1]}”` },
-  { re: /\b(he|she|it) (go|do|have|like|want|play|eat|come|make|say|see|live|know|need|love|walk|run|take|give)\b(?! not)/gi, say: (m) => `“${m[1]} ${m[2]}”: after ${m[1].toLowerCase()}, the verb takes -s (or use the past)` },
-  { re: /\b(we|they|you) was\b/gi, say: (m) => `“${m[1]} was” should be “${m[1]} were”` },
-  { re: /\bI (has|is|are)\b/g, say: (m) => `“I ${m[1]}” is not right: I have, I am` },
-  { re: /\b(could|should|would|must|might) of\b/gi, say: (m) => `“${m[1]} of” should be “${m[1]} have”` },
-  { re: /\b(did not|didn't|did n't) (went|saw|came|ate|took|gave|made|said|knew|wrote|ran|bought|told|got)\b/gi, say: (m) => `after “${m[1]}”, use the plain verb, not “${m[2]}”` },
-  { re: /\bmore (better|bigger|smaller|faster|easier|taller|worse|happier|older|younger)\b/gi, say: (m) => `“more ${m[1]}”: “${m[1]}” already means more` },
-  { re: /\b(most) (best|biggest|fastest|worst|tallest|easiest)\b/gi, say: (m) => `“most ${m[2]}”: “${m[2]}” already means most` },
-  { re: /\b(me and (?:my )?[a-z]+) (went|are|were|have|did|play|played|go)\b/gi, say: (m) => `“${m[1]}” as the doer should be “my … and I”` },
-];
-/** Words after which "a" is right although they start with a vowel letter, and the other way round. */
-const A_OK = /^(one|once|uni|use|usu|eu|ut[ei])/i;
-const AN_OK = /^(hour|honest|honou?r|heir)/i;
-
 export function checkWriting(text: string, target: Target): WritingCheck {
   const notes: Note[] = [];
   const add = (id: string, level: Note["level"], t: string) => notes.push({ id, level, text: t });
@@ -77,24 +60,40 @@ export function checkWriting(text: string, target: Target): WritingCheck {
 
   // spacing
   if (/[A-Za-z][,.;:!?][A-Za-z]{2}/.test(text.replace(/\b[a-z]\.[a-z]\./gi, ""))) add("space-after", "fix", "Leave a space after a comma or a full stop.");
-  if (/[A-Za-z] +[,.;:!?]/.test(text)) add("space-before", "fix", "Do not leave a space before a comma or a full stop.");
+  if (/[A-Za-z] +(?!\.\.)[,.;:!?]/.test(text)) add("space-before", "fix", "Do not leave a space before a comma or a full stop.");
 
   // sure spelling slips
-  const misspelt = [...new Set(lower.filter((w) => MISSPELT[w]))];
-  if (misspelt.length) add("spelling", "fix", `Check ${misspelt.length === 1 ? "this spelling" : "these spellings"}: ${misspelt.slice(0, 5).map((w) => `“${w}” is “${MISSPELT[w]}”`).join("; ")}.`);
+  const found = (map: Record<string, string>) => [...new Set(lower.filter((w) => Object.hasOwn(map, w)))];
+  const list = (ws: string[], map: Record<string, string>) => ws.slice(0, 5).map((w) => `“${w}” is “${map[w]}”`).join("; ");
+  const misspelt = found(MISSPELT);
+  if (misspelt.length) add("spelling", "fix", `Check ${misspelt.length === 1 ? "this spelling" : "these spellings"}: ${list(misspelt, MISSPELT)}.`);
+  const joined = found(JOINED);
+  if (joined.length) add("joined", "fix", `Write as two words: ${list(joined, JOINED)}.`);
+  const forms = found(WRONG_FORM);
+  if (forms.length) add("word-form", "fix", `${forms.length === 1 ? "This word does" : "These words do"} not take a regular ending: ${list(forms, WRONG_FORM)}.`);
+  const bare = found(NO_APOSTROPHE);
+  if (bare.length) add("apostrophe", "fix", `An apostrophe is missing: ${list(bare, NO_APOSTROPHE)}.`);
+  const texting = [...new Set(text.match(TEXTING) ?? [])];
+  if (texting.length) add("texting", "fix", `Write whole words, not message short forms: ${quote(texting, 5)}.`);
+  if (/[!?]{2,}|,{2,}|(?<!\.)\.\.(?!\.)/.test(text)) add("marks", "tip", "Use one punctuation mark at a time: a single full stop, comma, question mark or exclamation mark.");
 
   // grammar slips that follow a pattern
   const slips: string[] = [];
-  for (const { re, say } of SLIPS) {
+  for (const { re, say, agree } of SLIPS) {
     re.lastIndex = 0;
     for (let m = re.exec(text); m; m = re.exec(text)) {
+      if (agree && HELPER.test(text.slice(Math.max(0, text.slice(0, m.index).search(/[^.?!]*$/)), m.index))) continue;
       const isA = /^a /i.test(m[0]);
       const isAn = /^an /i.test(m[0]);
-      if ((isA && m[1] && A_OK.test(m[1])) || (isAn && m[1] && AN_OK.test(m[1]))) continue;
+      // "an MBA", "an X-ray": a word in capitals is said letter by letter, so the rule does not apply
+      if ((isA && m[1] && A_OK.test(m[1])) || (isAn && m[1] && (AN_OK.test(m[1]) || /^[A-Z]{2}|^[A-Z]$/.test(m[1])))) continue;
       slips.push(say(m));
     }
   }
   if (slips.length) add("grammar", "fix", `Look again at: ${[...new Set(slips)].slice(0, 6).join("; ")}.`);
+
+  const asked = sentences.filter((x) => ASKED.test(x));
+  if (asked.length) add("question", "tip", `${asked.length === 1 ? "This looks" : "These look"} like a question, so end with a question mark: ${quote(asked.map((x) => x.split(" ").slice(0, 4).join(" ") + " …"), 2)}.`);
 
   // very long sentences
   const long = sentences.filter((s) => wordsOf(s).length > 35);

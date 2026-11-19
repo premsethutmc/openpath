@@ -106,6 +106,7 @@ REST_FRAMEWORK = {
         "enrol": "60/hour",
         "account": os.environ.get("OPENPATH_ACCOUNT_RATE", "30/hour"),
         "word-problem": "60/hour",
+        "writing-feedback": "30/hour",
         "account-register": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "account-login": os.environ.get("OPENPATH_ACCOUNT_RATE", "60/hour"),
         "account-reset": os.environ.get("OPENPATH_ACCOUNT_RATE", "10/hour"),
@@ -160,6 +161,16 @@ OPENPATH_WORD_PROBLEM_API_KEY = os.environ.get("OPENPATH_WORD_PROBLEM_API_KEY", 
 # per account per day, and across every account per day (the second is the ceiling on a day's bill)
 OPENPATH_WORD_PROBLEM_DAILY = int(os.environ.get("OPENPATH_WORD_PROBLEM_DAILY", "20"))
 OPENPATH_WORD_PROBLEM_SITE_DAILY = int(os.environ.get("OPENPATH_WORD_PROBLEM_SITE_DAILY", "1000"))
+# writing-feedback@1: short AI feedback on a guided writing task, after the free on-device check (family/writing_feedback.py).
+# Off unless OPENPATH_WRITING_FEEDBACK=on AND a key and model are set. Its own key and model, so a small model can be
+# chosen for it. Owner decision (19 Nov 2026): three pieces per learner per week.
+OPENPATH_WRITING_FEEDBACK = os.environ.get("OPENPATH_WRITING_FEEDBACK", "off")
+OPENPATH_WRITING_FEEDBACK_PROVIDER = os.environ.get("OPENPATH_WRITING_FEEDBACK_PROVIDER", "anthropic")
+OPENPATH_WRITING_FEEDBACK_MODEL = os.environ.get("OPENPATH_WRITING_FEEDBACK_MODEL", "")
+OPENPATH_WRITING_FEEDBACK_BASE_URL = os.environ.get("OPENPATH_WRITING_FEEDBACK_BASE_URL", "https://api.anthropic.com")
+OPENPATH_WRITING_FEEDBACK_API_KEY = os.environ.get("OPENPATH_WRITING_FEEDBACK_API_KEY", "")
+OPENPATH_WRITING_FEEDBACK_WEEKLY = int(os.environ.get("OPENPATH_WRITING_FEEDBACK_WEEKLY", "3"))
+OPENPATH_WRITING_FEEDBACK_SITE_DAILY = int(os.environ.get("OPENPATH_WRITING_FEEDBACK_SITE_DAILY", "60"))
 OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
 OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000
