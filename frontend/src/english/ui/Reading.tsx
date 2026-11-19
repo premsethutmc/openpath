@@ -350,6 +350,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     if (moved || !act) scrollTo(0, 0);
   };
   const open = (u: Unit, mode: Mode) => {
+    if(savingLock.current)return;
     const s = new ReadingUnitSession(COURSE, u, mode, learner.readingRecords());
     setSession(s);
     void step(s);

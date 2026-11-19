@@ -20,7 +20,7 @@ export interface CheckCheckpoint {version:1;questions:string[];signatures:string
 const questionSignature=(course:Course,q:Question)=>JSON.stringify([q.prompt,q.options,q.answer,q.evidence,q.evidenceAlternatives,course.passages.get(q.passage)!.text]);
 const exposureCount=(course:Course,records:readonly ReadingRecord[],passage:string)=>records.filter(r=>r.type==='shown'&&course.questions.find(q=>q.id===r.question)?.passage===passage).length;
 export function pendingCheck(records:readonly ReadingRecord[],unit:Unit):CheckCheckpoint|null {
- for(let i=records.length-1;i>=0;i--){const r=records[i];if(unitKey(r.unit)!==unitKey(unit))continue;if(r.type==='check_result')return null;if(r.type==='check_session')return r.check;}
+ for(let i=records.length-1;i>=0;i--){const r=records[i];if(unitKey(r.unit)!==unitKey(unit))continue;if(r.type==='check_result')return null;if(r.type==='check_session')return r.check??({} as CheckCheckpoint);}
  return null;
 }
 export type Mode = "learn" | "check_me";
@@ -225,7 +225,7 @@ export class ReadingUnitSession {
     const saved=pendingCheck(history,unit);
     if(saved){
       try{
-        if(saved.version!==1||saved.questions.length!==CHECK_SIZE||new Set(saved.questions).size!==CHECK_SIZE||!Number.isInteger(saved.index)||saved.index<0||saved.index>=CHECK_SIZE||saved.answers.length!==saved.index||saved.exposures.length!==CHECK_SIZE||saved.familiar.length!==CHECK_SIZE||!['learn','check_me'].includes(saved.mode))throw Error('Invalid saved check');
+        if(saved.version!==1||typeof saved.helped!=='boolean'||saved.familiar.some(v=>typeof v!=='boolean')||saved.exposures.some(v=>!Number.isInteger(v)||v<0)||saved.questions.length!==CHECK_SIZE||new Set(saved.questions).size!==CHECK_SIZE||!Number.isInteger(saved.index)||saved.index<0||saved.index>=CHECK_SIZE||saved.answers.length!==saved.index||saved.exposures.length!==CHECK_SIZE||saved.familiar.length!==CHECK_SIZE||!['learn','check_me'].includes(saved.mode))throw Error('Invalid saved check');
         this.checkQs=saved.questions.map((id,i)=>{const q=course.questions.find(q=>q.id===id&&q.role==='check'&&q.skill===unit.skill&&q.level===unit.level);if(!q||saved.signatures[i]!==questionSignature(course,q))throw Error('Check content changed');return q;});
         saved.answers.forEach((a,i)=>{if(!Number.isInteger(a.choice)||a.choice<0||a.choice>=this.checkQs[i].options.length)throw Error('Invalid saved answer');if(a.sentences)validateSentenceSelection(course,this.checkQs[i],a.sentences);});
         const q=this.checkQs[saved.index],d=saved.draft;
