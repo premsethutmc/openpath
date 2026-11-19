@@ -38,3 +38,22 @@ A second read of everything written on 18 and 19 November, as a reader rather th
 - Some word levels look easy for their band (for example idle, shrink, sly and keen at level 5; dwell, loot and
   frail at level 6). They are left until real answers show where they belong.
 - This was still a check by the same writer. It is not an educator review.
+
+## The house word screen (added later on 19 November 2026)
+
+The spelling word bank has always been screened by `content/english/spelling/blocklist.txt` (about 190 words:
+violence, weapons, alcohol, religion, insults, body and illness words). The practice content written on 18 and 19
+November had not been run through it. It now is, by a test (`frontend/src/english/logic/content-screen.test.ts`)
+that fails if any listed word appears, as a whole word, in anything a child reads or hears, or if a new content
+file is added without being screened.
+
+First run: 14 flags, all fixed.
+
+- `temple` in six sentences (religion is kept out): replaced with fort, palace, park or station.
+- `weapon` was itself a taught word: replaced with `lantern`.
+- `fat`, `foolish`, `fool`, `bottom` in four meanings or sentences: reworded.
+- The Bee word `churches` had a meaning using two screened words: reworded.
+- One reading answer choice used `foolish`: now `unwise`.
+
+The screen is a word list, so it catches words, not ideas. It did not flag, and a person should still judge:
+funeral and dirge, vengeance, perish, pillage, brawl and loot among the taught words.
