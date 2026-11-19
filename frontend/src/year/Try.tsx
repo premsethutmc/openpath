@@ -27,7 +27,7 @@ export function TryAsChild() {
   const grades = [...new Set(all.filter((s) => s.board === board).map((s) => s.release.grade))].sort((a, b) => a - b);
   const list = useMemo(() => findSkills(all, board, grade, search), [all, board, grade, search]);
   // one-question@1: /year/#try=<question id> opens exactly that question in the sandbox (the screen check uses it)
-  const only = useMemo(() => (location.hash.startsWith("#try=") ? decodeURIComponent(location.hash.slice(5)) : null), []);
+  const only = useMemo(() => (location.hash.startsWith("#try=") ? decodeURIComponent(location.hash.slice(5).split("&")[0]) : null), []);
   if (only) {
     const c = problemOf(only.replace(/:(mc|w)$/, ""))?.competency;
     const s = (c && (all.find((x) => x.competency === c && x.board === "icse") ?? all.find((x) => x.competency === c))) || null;
@@ -94,7 +94,7 @@ function Sandbox({ skill, back, only }: { skill: Skill; back: () => void; only?:
         {(mode === "practice" || mode === "test") && (qid
           ? fb
             ? <Feedback fb={fb} onNext={() => { setFb(null); setN(n + 1); }} label="Another question" />
-            : <><Ask qid={qid} activity={mode === "practice" ? "practice" : "retention"} ctx={ctx} hintAllowed={mode === "practice"} onAnswered={setFb} /><p><button type="button" className="secondary" onClick={() => setN(n + 1)}>Skip to another question</button></p></>
+            : <><Ask qid={qid} activity={mode === "practice" ? "practice" : "retention"} ctx={ctx} {...(location.hash.includes("&together") ? { context: "together" } : {})} hintAllowed={mode === "practice"} onAnswered={setFb} /><p><button type="button" className="secondary" onClick={() => setN(n + 1)}>Skip to another question</button></p></>
           : <p className="muted">This skill has no {mode} question.</p>)}
       </div>
     </main>

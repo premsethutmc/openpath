@@ -12,7 +12,7 @@ import { supportStep } from "../../../packages/learning/src/support-ladder";
 import { checkWorkingLines } from "../../../packages/learning/src/line-check";
 import { MORE_KEYS, typeKey } from "./working-keys";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
-import { useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
@@ -602,6 +602,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [coach, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
   const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
   const askHelp = () => { setCoach(true); setWorkingOpen(true); setHint(true); };
+  // together@1: a walk-through question opens with the step help already asked for; each step is the child's to type
+  useEffect(() => { if (context === "together" && canCoach && !coach) askHelp(); }, [qid]); // eslint-disable-line react-hooks/exhaustive-deps
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && q.type !== "written" ? safeKid(q) : null;
   // support-ladder@1: a question that names its aids is asked with less of them as the child gets that kind right
@@ -833,7 +835,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
           <li key={f} className={k === step ? "here" : k < step ? "past" : ""} aria-current={k === step ? "step" : undefined}><span className="sr-only">{f}</span></li>
         ))}
       </ol>
-      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {KID ? kidStepWord(ms.phase, step) : FLOW_WORDS[FLOW[step]]}</p>
+      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {KID ? ms.context === "together" ? "Let's do it together" : kidStepWord(ms.phase, step) : FLOW_WORDS[FLOW[step]]}</p>
     </div>
   );
   const head = (
@@ -901,6 +903,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {head}
         {!KID && <p className="why">{shownReason}</p>}
+        {KID && ms.context === "together" && <p className="kid-saved" role="status">{ms.reason}</p>}
         {KID && held.length > 0 && <p className="kid-saved" role="status">✓ Saved. {held.length} answered — you'll see how you did at the end.</p>}
         <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={(f) => (KID && curActivity && isTest(curActivity) ? setHeld([...held, { qid: f.qid, response: f.response, right: f.right, ...serverMarks(f), ...(f.working?.length ? { working: f.working } : {}) }]) : setFb(f))} />
         {/* kid-look@1: a child who does not know yet is never left to guess: the lesson is one tap away, before answering */}

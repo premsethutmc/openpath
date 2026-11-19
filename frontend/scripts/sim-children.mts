@@ -77,13 +77,14 @@ if (process.argv.includes("--merge")) {
   const release = boardFor(board, grade);
   if (!release) throw new Error(`no release for ${board} ${grade}`);
   const ids = [...new Set(allOutcomesOf(release).flatMap(({ outcome }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id))))].sort().filter((s) => checkCompetency(s).mode !== "educator-marked");
-  const skills = limit ? ids.slice(0, limit) : ids;
+  const only = process.env.SKILLS?.split(","); // SKILLS=a,b: just these skills
+  const skills = only ? ids.filter((s) => only.includes(s)) : limit ? ids.slice(0, limit) : ids;
   const personas: Record<string, unknown> = {};
   useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true });
   const t0 = Date.now();
   try {
     for (const P of PERSONAS.filter((p) => !process.env.PERSONA || p.name === process.env.PERSONA)) {
-      const r = { about: P.about, skills: skills.length, unfinished: [] as string[], sittings: [] as number[], mastered: 0, unknowing: [] as string[], neverTaught: [] as string[], stuck: [] as string[], loops: [] as string[], errors: [] as string[], ended: {} as Record<string, number>, questions: [] as number[], taught: 0 };
+      const r = { about: P.about, skills: skills.length, unfinished: [] as string[], sittings: [] as number[], mastered: 0, unknowing: [] as string[], neverTaught: [] as string[], stuck: [] as string[], loops: [] as string[], errors: [] as string[], ended: {} as Record<string, number>, questions: [] as number[], taught: 0, pausedBy: {} as Record<string, number> };
       for (const skill of skills) {
         try {
           const rand = rng(`${P.name}:${skill}`);
@@ -100,14 +101,14 @@ if (process.argv.includes("--merge")) {
             if (rand() < know * (1 - P.slip)) return p.answer;
             wrongs++; return wrong(q, rand());
           };
-          let last = "not_started", lastPhase = "", sittings = 0;
+          let last = "not_started", lastPhase = "", lastWhy = "", sittings = 0;
           for (let session = 0; session < SITTINGS && last !== "verified"; session++) {
             sittings = session + 1;
             if (session) d.newSession([0, 1, 3, 9][session] ?? 9);
             for (let i = 0; i < 60; i++) {
               const st = d.state(), before = d.trace.length;
               const ms = d.step(skill, answerer, { hintOnGuided: P.hints });
-              lastPhase = ms.phase;
+              lastPhase = ms.phase; lastWhy = String((ms as { why?: string }).why ?? (ms as { reason?: string }).reason ?? "").slice(0, 70);
               // the product taught something: the child now knows more of it (and the misconception is corrected by a lesson)
               if (ms.phase === "chapter" || ms.phase === "strategy" || ms.phase === "guided") { taught = true; know += P.gain * (1 - know); if (ms.phase !== "guided") fooled = false; }
               if (d.trace.length === before || ms.phase === "done" || ms.phase === "pause" || ms.phase === "unavailable" || ms.phase === "waiting") break;
@@ -118,7 +119,7 @@ if (process.argv.includes("--merge")) {
           r.ended[last] = (r.ended[last] ?? 0) + 1;
           if (taught) r.taught++;
           if (last === "verified") { r.mastered++; r.questions.push(asked); r.sittings.push(sittings); if (know < 0.5) r.unknowing.push(`${skill} (truly knows ${Math.round(know * 100)}%, ${asked} questions)`); }
-          else r.unfinished.push(`${skill} (${last}, at "${lastPhase}", ${asked} questions)`);
+          else { if (lastPhase === "pause") r.pausedBy[lastWhy] = (r.pausedBy[lastWhy] ?? 0) + 1; r.unfinished.push(`${skill} (${last}, at "${lastPhase}", ${asked} questions)`); }
           if (last !== "verified" && !["waiting", "pause", "done", "retention", "verify", "reentry"].includes(lastPhase)) r.stuck.push(`${skill} (ended ${last}, at "${lastPhase}", ${asked} questions)`);
           if (wrongs >= 2 && !taught) r.neverTaught.push(`${skill} (${wrongs} wrong of ${asked})`);
           const most = Object.entries(seen).sort((a, b) => b[1] - a[1])[0];

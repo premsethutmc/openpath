@@ -35,6 +35,7 @@ import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
 import { keyboardOffered, writtenTask } from "./written";
+import { stepsHelp } from "./step-help";
 import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -110,6 +111,32 @@ function reopenedAt(competency: string, records: LearnerRecords): string | null 
   const below = new Set(walkSupports(competency, RECOVERY_DEPTH).map((x) => graph.evidenceTarget(x.id)).filter((id) => id !== own));
   return records.teaching.filter((t) => below.has(graph.evidenceTarget(t.competency))).map((t) => t.at).sort().at(-1) ?? null;
 }
+/** together@1: the last rung before a person. When every explanation has been tried and the answers alone are still wrong, the
+ *  product does not stop: it works one fresh question WITH the learner, step by step (the typed step help, opened for them, each
+ *  step theirs to type), then asks one like it alone. A walk-through is practice with help (activity "guided", context "together"):
+ *  it is never evidence. Bounded: TOGETHER.all in one opening of the skill, TOGETHER.sitting in one sitting; after that the
+ *  product stops for the day, or for a person. Null: nothing left for this rung. */
+export const TOGETHER = { all: 4, sitting: 2, context: "together" } as const;
+function workTogether(m: Module, competency: string, records: LearnerRecords, session: string): Pick<ModuleState, "phase" | "question" | "activity" | "context" | "why" | "reason"> | "tomorrow" | null {
+  if (!m.pool) return null;
+  const since = reopenedAt(competency, records) ?? "";
+  const mine = records.attempts.filter((a) => of(m)(a) && a.at > since);
+  const walked = mine.filter((a) => a.context === TOGETHER.context);
+  const last = walked.at(-1);
+  const alone = last ? mine.filter((a) => a.at > last.at && independentAttempt(a)) : [];
+  // after a walk-through: one like it alone; right, and the next is alone too (the ordinary checks take over once it shows)
+  if (last && (!alone.length || rightAnswer(alone.at(-1)!))) {
+    const q = fromPool(m, "check", records);
+    if (q) return { phase: "check", question: q, why: `together@1: alone after walk-through ${walked.length}`, reason: alone.length ? "Right on your own. One more, to be sure." : "We did that one together. Now one like it on your own." };
+  }
+  if (walked.length >= TOGETHER.all) return null;
+  if (walked.filter((a) => a.session === session).length >= TOGETHER.sitting) return "tomorrow";
+  const seen = new Set([...records.attempts, ...records.unresolved].map((a) => exposureKey(a.questionId)));
+  const q = gradeFirst(records, modulePhasePool(m, "practice")).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && keyboardOffered(id) && (stepsHelp(id)?.length ?? 0) >= 2);
+  if (!q) return null;
+  return { phase: "guided", question: q, activity: "guided", context: TOGETHER.context, why: `together@1: walk-through ${walked.length + 1} of ${TOGETHER.all}`, reason: "Let's do this one together, one step at a time. You type each step." };
+}
+const TOMORROW = "That is enough of this one for today. It comes back next time, and we will do it together again. Carry on with something else.";
 /** The learner's latest wrong, unsolved question of this skill whose recovery would now go to a skill it builds on. */
 function gapBelow(competency: string, records: LearnerRecords, evidence: ((id: string) => SkillEvidence) | undefined, now: number, session: string): { original: string; reason: string } | null {
   if (!prerequisiteAfterOwn() || !evidence) return null;
@@ -562,6 +589,8 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const resProbe = here && own!.probeDue ? discriminatingProbe(own!, records) : null;
   const hold = !!own && (own.teachingDue || !!resProbe);
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
+  // together@1: every stop "for a person" on wrong answers first tries the walk-through rung
+  const orTogether = (stop: ModuleState): ModuleState => { const w = workTogether(m, competency, records, session); return !w ? stop : w === "tomorrow" ? { ...stop, why: "together@1: stopped for today", reason: TOMORROW } : { ...stop, strategy: null, ...w }; };
   // grade8-fix-platform: a question the learner was taught (solved on a lesson they were shown) is served only as a last resort,
   // when no fresh question of the list is left
   const taught = taughtExposureKeys(records);
@@ -703,7 +732,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
       const q = unit ? unitCheck(m, unit, records, st) : (keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : null) ?? phasePool(gap.family, "check").find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && !close(id)) ?? null;
       const sameKind = (id: string) => (unit ? unit.accepts(id) : kindOf(st) === problemOf(id.replace(/:(mc|w)$/, ""))?.family);
       if (q && !records.attempts.some((a) => a.at > taught.at(-1)!.at && sameKind(a.questionId) && independentAttempt(a))) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, reason: "Now one of this kind on your own, with no hints." };
-      return { ...base, phase: "pause", diagnosis: d, reason: "This kind of question has not clicked yet, even after the explanation. Carry on, and go through it with a teacher or parent." };
+      return orTogether({ ...base, phase: "pause", diagnosis: d, reason: "This kind of question has not clicked yet, even after the explanation. Carry on, and go through it with a teacher or parent." });
     }
   }
   // same-skill@1: a skill just taught is rechecked on a fresh question of that skill before anything else counts it as shown
@@ -780,7 +809,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
     const gap = s ? null : gapBelow(competency, records, evidence, now, session);
     if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, decision, reason: gap.reason };
-    if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() };
+    if (!s) return orTogether({ ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() });
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
   }
@@ -800,7 +829,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   }
   if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_EXPLANATION() };
   if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
-  if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
+  if (decision.action === "recommend_human") return orTogether({ ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." });
   if (resProbe) return { ...base, phase: "verify", question: resProbe, diagnosis: d, decision, why: `resolution probe for ${own!.id}`, reason: "One question on your own that shows whether that misunderstanding has gone." };
   if (decision.action === "done") {
     // after-pass@1 (#112): the planner ends the visit once the block's check alone was right ("progress, not yet mastery"). When the
@@ -819,7 +848,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
         if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one more of this kind on your own, with no hints." };
       }
       // (coordinator) no second teaching cycle here: policy C, one own-skill teaching cycle, then a person
-      return { ...base, phase: "pause", diagnosis: d, decision, why: `after-pass@1: ${wrongSince} wrong alone since the check after ${st.id}`, reason: "Right once on your own after the explanation, but not since. That is not a failure: carry on with other skills, and go through this one with a teacher or parent." };
+      return orTogether({ ...base, phase: "pause", diagnosis: d, decision, why: `after-pass@1: ${wrongSince} wrong alone since the check after ${st.id}`, reason: "Right once on your own after the explanation, but not since. That is not a failure: carry on with other skills, and go through this one with a teacher or parent." });
     }
     const more = unanswered([...m.practice, ...tr]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
