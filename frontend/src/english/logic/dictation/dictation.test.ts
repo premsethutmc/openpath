@@ -15,10 +15,10 @@ import { MemoryRepo } from "../store.ts";
 const S = (text: string, alt: Record<string, string[]> = {}) => ({ text, alt });
 const kinds = (text: string, typed: string) => mark(S(text), typed).words.map((w) => w.kind).join(" ");
 
-test("LW-1 content: six levels of at least twenty-four sentences, each one markable", () => {
+test("LW-1 content: seven levels of at least twenty-four sentences, each one markable", () => {
   assert.deepEqual(dictationProblems(DICTATION), []);
   for (const l of DICTATION.levels) assert.ok(DICTATION.sentences.filter((s) => s.level === l.id).length >= 24);
-  assert.equal(DICTATION.levels.length, 6);
+  assert.equal(DICTATION.levels.length, 7);
   const avg = (lv: number) => { const x = DICTATION.sentences.filter((s) => s.level === lv).map((s) => wordsOf(s.text).length); return x.reduce((a, b) => a + b, 0) / x.length; };
   assert.ok(avg(1) < avg(2) && avg(2) < avg(3) && avg(3) < avg(5) && avg(4) < avg(5), "sentences get longer by level");
   const bad = buildDictation({ version: 1, status: "", levels: DICTATION.levels, sentences: [["x", 9, "we have 3 cats"]] });
@@ -108,7 +108,7 @@ test("LW-6 the level moves with the last sitting; missed sentences come back; ne
   assert.equal(levelFor(DICTATION, poor.records, 2), 1);
   const mixed = sit(1, [], (t, i) => (i < 2 ? spoil(t) : t));
   assert.equal(levelFor(DICTATION, mixed.records, 1), 1);
-  assert.equal(levelFor(DICTATION, sit(6, [], (t) => t).records, 6), 6, "no level above the top");
+  assert.equal(levelFor(DICTATION, sit(7, [], (t) => t).records, 7), 7, "no level above the top");
   const next = pick(DICTATION, 1, mixed.records).map((s) => s.id);
   assert.deepEqual(next.filter((id) => mixed.asked.includes(id)).sort(), mixed.asked.slice(0, 2).sort(), "the two missed sentences return");
   assert.equal(next.filter((id) => !mixed.asked.includes(id)).length, 3);

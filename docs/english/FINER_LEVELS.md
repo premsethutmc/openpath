@@ -65,6 +65,5 @@ did not change.
 ## Limits
 
 - Words (8) and spelling (5) are unchanged.
-- The range is the same as before, about Class 3 to Class 8, apart from the easier first level in listening.
-  Levels for a true beginner and for advanced English are not built.
+- See ADVANCED_LEVELS.md for the levels added above these and for what is still missing below.
 - The levels are still set by judgement, not by children's answers.

@@ -64,7 +64,7 @@ export interface Levels {
 }
 
 /** The latest level found for each part. */
-export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 5): Levels {
+export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 6): Levels {
   const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null, grammar: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
@@ -214,7 +214,7 @@ export class ListeningPlacement {
 }
 
 /** The reading level type, for callers that pass the start level to the course. */
-export const asReadingLevel = (n: number | null | undefined): Level | undefined => (n === 1 || n === 2 || n === 3 || n === 4 || n === 5 ? n : undefined);
+export const asReadingLevel = (n: number | null | undefined): Level | undefined => (n === 1 || n === 2 || n === 3 || n === 4 || n === 5 || n === 6 ? n : undefined);
 
 export const spellingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : age === "older" ? 3 : 2);
 
