@@ -461,3 +461,10 @@ its label ("find the total surface area"), only when the label is a name or an i
 single-number step names its number ("halve 44"); an amount written as text is read as a number. One question per type:
 bare cues fell from 1,596 of 2,444 steps to about 1,210; the audit's count of types that are mostly one-word cues fell
 from 468 to 325. Left: steps whose own number first appears in that step, and compare / count / solve / classify steps.
+
+`help-review@1`: the step help behind "I'm stuck" is on the owner's dashboard (/review/ → Teaching → Kind: Step help),
+one item per question type (`help:<type>`), shown for three of its questions (first, middle, last of the pool): every
+way, every step, each layout, and what "How?" opens. Approve, ask for changes or reject, per version: a change to a
+type's help makes a new version to review. 1,118 types; 308 in Class 5. A decision is recorded; it does not yet hide
+anything from a learner. Any change to help text needs `node --import tsx ../packages/learning/scripts/teaching.ts`
+(from frontend/) so teaching.v1.json stays current.

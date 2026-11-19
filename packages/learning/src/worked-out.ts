@@ -73,7 +73,7 @@ export function divide(n: number, d: number, want: "quotient" | "remainder", ans
       carry = cur;
       return;
     }
-    const first = !started ? `First: ${opening}` : "";
+    const first = !started ? `First: ${opening.charAt(0).toLowerCase()}${opening.slice(1)}` : "";
     started = true;
     if (fit === 0) {
       top[i] = "0";

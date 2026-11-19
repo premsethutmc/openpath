@@ -211,7 +211,19 @@ class TeachingReviewTests(ReviewBase):
         self.assertTrue(all(t['state'] == 'submitted' for t in ts.values()))
         self.assertEqual(self.learner_parent.get('/api/content-review/teaching/').status_code, 403)
         kinds = {e['kind'] for e in self.learner_parent.get('/api/content-review/').json()['registry']['entries']}
-        self.assertFalse(kinds & {'recipe', 'card'})
+        self.assertFalse(kinds & {'recipe', 'card', 'help'})
+
+    def test_the_step_help_of_a_question_type_is_listed_and_decided_like_a_card(self):
+        ts = self.items()
+        self.assertTrue(any(t['kind'] == 'help' and t['source'] == 'written' for t in ts.values()))
+        self.assertTrue(any(t['kind'] == 'help' and t['source'] == 'rule' and t['from'] == 'steps' for t in ts.values()))
+        item = 'help:ldiv'
+        self.assertEqual((ts[item]['competency'], ts[item]['state']), ('MATH.number.long-division', 'submitted'))
+        self.assertEqual(self.post(self.educator, item, 'reject').status_code, 400)  # needs the reason
+        self.assertEqual(self.post(self.educator, item, 'reject', 'the second tab is not taught here').status_code, 201)
+        self.assertEqual(self.items()[item]['state'], 'rejected')
+        self.assertEqual(self.post(self.educator, item, 'approve').status_code, 201)
+        self.assertEqual(self.items()[item]['state'], 'approved')
 
     def test_one_step_decisions_a_note_only_to_say_what_is_wrong_and_a_view_can_change(self):
         item = next(i for i in self.items() if i.startswith('card:'))

@@ -11,7 +11,7 @@ import { SOLE_WAYS, workedWays } from "./worked-out";
 import { deepen } from "./deepen";
 import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
-import { explainStep, problemOf } from "./families";
+import { explainStep, pool, problemOf } from "./families";
 import { graph } from "./graph";
 
 export interface Card {
@@ -198,4 +198,19 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });
+}
+
+/**
+ * help-review@1: the questions that stand for a type's step help on the owner's dashboard: the first, the middle and the
+ * last of its pool, the same every time, so what is approved is what was looked at.
+ */
+export function helpSamples(family: string): string[] {
+  let ids: string[];
+  try { ids = pool(family).items.map((x) => x.id).filter((id) => !/:(mc|w)$/.test(id)); } catch { return []; }
+  if (!ids.length) return [];
+  return [...new Set([ids[0], ids[Math.floor(ids.length / 2)], ids[ids.length - 1]])].filter((id) => !!stepsHelp(id));
+}
+/** A type's step help as the learner is shown it, for those questions: every way, every step. */
+export function helpShown(family: string): { id: string; ways: { name: string; steps: StepHelp[] }[] }[] {
+  return helpSamples(family).map((id) => ({ id, ways: helpMethods(id).map((name, k) => ({ name, steps: stepsHelp(id, k) ?? [] })) }));
 }
