@@ -36,6 +36,7 @@ import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
 import { GuidedTasks } from "./Guided.tsx";
+import { serviceFor } from "../logic/writing/feedback.ts";
 import { FirstWords } from "./FirstWords.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
@@ -104,6 +105,9 @@ export function App() {
   const [deviceRepo, setDeviceRepo] = useState<Repo | null>(null);
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [learner, setLearner] = useState<Learner | null>(null);
+  // AI feedback on writing tasks: only for a signed-in parent account, for the pupil whose record is open
+  const feedbackPupil = mode === "account" && learner ? learner.profileId : null;
+  const feedbackService = useMemo(() => (feedbackPupil ? serviceFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
   const [tab, setTab] = useState<Tab>("home");
   // subjects-home@2: in a build that carries maths, a learner who is in starts on the two subject tiles. Once English is
   // chosen it stays chosen for this browser tab (a reload does not send them back), until they go back to the subjects.
@@ -514,7 +518,7 @@ export function App() {
   if (guided)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
-        <GuidedTasks learner={learner} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
+        <GuidedTasks learner={learner} feedback={feedbackService} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
       </div>
     );
   if (inSyllabus)
