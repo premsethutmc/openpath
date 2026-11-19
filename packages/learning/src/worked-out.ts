@@ -18,7 +18,7 @@ export interface Worked {
    */
   ask?: { lead: string; value: string };
 }
-type Q = { family: string; params: number[]; answer: string; prompt?: string };
+type Q = { family: string; params: number[]; answer: string; prompt?: string; steps?: { inputs?: unknown[] }[] };
 
 const primesTo = (k: number) => { const out: number[] = []; for (let n = 2; n <= k; n++) if (out.every((p) => n % p)) out.push(n); return out; };
 
@@ -473,10 +473,36 @@ function hcfLcm(prompt: string | undefined, answer: string): { name: string; ste
   return ways.length ? ways : null;
 }
 
-const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision };
+/** rect@1: the area of a rectangle in three steps: the rule, the multiplication, the unit. */
+function rectArea(q: Q): Worked[] | null {
+  const m = q.prompt ? /rectangle is (\d+) (\w+) by (\d+) \w+/.exec(q.prompt) : null;
+  if (!m) return null;
+  const l = Number(m[1]), w = Number(m[3]), unit = m[2];
+  if (String(l * w) !== q.answer) return null;
+  return [
+    { next: "First: write the rule. Area of a rectangle = length × width (rows × columns of unit squares).", shown: `Area = ${l} × ${w}` },
+    { next: `Now multiply ${l} by ${w}.`, shown: `${l} × ${w} = ${l * w}` },
+    { next: "Last: say it with the unit. Area is counted in squares.", shown: `Area = ${l * w} square ${unit === "cm" ? "centimetres" : unit === "m" ? "metres" : unit}` },
+  ];
+}
+/** one-by-one@1: "how many of these have a line of symmetry" is worked one item at a time, then counted. */
+function oneByOne(q: Q): Worked[] | null {
+  const yes = String(q.steps?.[0]?.inputs?.[1] ?? "").split(", ").filter(Boolean);
+  const axis = String(q.steps?.[0]?.inputs?.[0] ?? "");
+  const listed = q.prompt ? /:\s*(.+?)\. How many/.exec(q.prompt) : null;
+  if (!listed || !/^(vertical|horizontal)$/.test(axis)) return null;
+  const items = listed[1].split(q.family === "aedigsym" ? /,\s*/ : /\s{2,}/).map((x) => x.trim()).filter(Boolean);
+  if (items.length < 2 || String(yes.length) !== q.answer || yes.some((y) => !items.includes(y))) return null;
+  const fold = axis === "vertical" ? "Fold it up and down the middle: do the left and right halves match?" : "Fold it straight across the middle: do the top and bottom halves match?";
+  return [
+    ...items.map((x, i) => ({ next: i === 0 ? `First: ${x}. ${fold}` : `Next: ${x}. Same fold: do the halves match?`, shown: `${x}: ${yes.includes(x) ? "yes ✓" : "no"}`, ask: { lead: `${x}: do the halves match? (yes or no)`, value: yes.includes(x) ? "yes" : "no" } })),
+    { next: "Last: count the yes ones.", shown: `${yes.length ? yes.join(", ") : "none"}: ${yes.length}`, ask: { lead: `${yes.length ? yes.join(", ") : "none"}: how many?`, value: String(yes.length) } },
+  ];
+}
+const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision, rect: rectArea, aesym: oneByOne, aedigsym: oneByOne };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** methods@1: the school method's name for a type that has one written here (the first tab of its step help). */
-const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division" };
+const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division", rect: "Length × width", aesym: "One at a time", aedigsym: "One at a time" };
 /** methods@2: every way written for a question, the taught one first, each with its name; null when none is written. */
 /** Ways whose type's own steps are the same method in a shorter form: no second tab is offered beside them. */
 export const SOLE_WAYS: readonly string[] = ["Same bottom (LCM)", "Divide", "Whole × bottom + top", "Out of 100"];
