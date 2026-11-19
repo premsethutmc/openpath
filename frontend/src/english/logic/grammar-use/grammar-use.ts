@@ -19,7 +19,7 @@ export const MOVE_DOWN = 3;
 export const MIN_OF_KIND = 3;
 export const MAX_SPOT = 2;
 
-export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject"] as const;
+export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject", "main clause"] as const;
 export type Ask = (typeof ASKS)[number];
 export interface GrammarItem {
   id: string;

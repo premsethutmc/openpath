@@ -2561,6 +2561,7 @@ h3.sub {
 
 .syllabus-classes {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin: 8px 0 4px;
 }

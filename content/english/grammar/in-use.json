@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 9,
+  "version": 10,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -230,6 +230,14 @@
     {
       "id": "sound_words",
       "name": "Sound words"
+    },
+    {
+      "id": "noun_kinds",
+      "name": "Kinds of noun"
+    },
+    {
+      "id": "clauses",
+      "name": "The main clause"
     }
   ],
   "scale": 2,
@@ -312,6 +320,11 @@
     {"id": "gu.articles.06", "level": 2, "topic": "articles", "kind": "fix", "sentence": "[A] sun rises in the east.", "rule": "Use the for a thing there is only one of: the sun.", "right": ["The"]},
     {"id": "gu.articles.07", "level": 2, "topic": "articles", "kind": "fix", "sentence": "I saw a dog in the lane. [A] dog was barking.", "rule": "Use the when the thing has already been mentioned: the dog.", "right": ["The"]},
     {"id": "gu.articles.08", "level": 2, "topic": "articles", "kind": "fix", "sentence": "She is [the] honest girl.", "rule": "Use an before a vowel sound, when you mean any one of a kind: an honest girl.", "right": ["an"]},
+    {"id": "gu.noun_kinds.01", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "How [many] water is in the jug?", "rule": "Water cannot be counted, so use much: how much water.", "right": ["much"]},
+    {"id": "gu.noun_kinds.02", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "She bought some [breads] from the shop.", "rule": "Bread cannot be counted, so it has no plural: some bread.", "right": ["bread"]},
+    {"id": "gu.noun_kinds.03", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "How [much] apples are in the basket?", "rule": "Apples can be counted, so use many: how many apples.", "right": ["many"]},
+    {"id": "gu.noun_kinds.04", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "My friend lives in [chennai].", "rule": "The name of a place is a proper noun and starts with a capital letter.", "right": ["Chennai"]},
+    {"id": "gu.noun_kinds.05", "level": 2, "topic": "noun_kinds", "kind": "fix", "sentence": "We met [ravi] at the park.", "rule": "The name of a person is a proper noun and starts with a capital letter.", "right": ["Ravi"]},
     {"id": "gu.conjunctions.03", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "We stayed inside because it was raining.", "rule": "\"Because\" gives the reason."},
     {"id": "gu.conjunctions.04", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "Although he was tired, he finished his homework.", "rule": "\"Although\" joins two ideas that seem to pull apart."},
     {"id": "gu.conjunctions.05", "level": 3, "topic": "conjunctions", "kind": "fix", "sentence": "I was hungry, [but] I ate a sandwich.", "rule": "\"So\" shows the result.", "right": ["so", "and"]},
@@ -475,6 +488,10 @@
     {"id": "gu.speech.08", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Yesterday he said that he [can] swim across the lake.", "rule": "In reported speech \"can\" becomes \"could\".", "right": ["could"]},
     {"id": "gu.tense_shift.04", "level": 6, "topic": "tense_shift", "kind": "fix", "sentence": "When the bell rang, the children [run] out of the class.", "rule": "\"Rang\" sets the past, so keep to it: rang, ran.", "right": ["ran"]},
     {"id": "gu.pronoun_agreement.04", "level": 6, "topic": "pronoun_agreement", "kind": "fix", "sentence": "The birds built [its] nest in our mango tree.", "rule": "A plural noun takes a plural pronoun: the birds, their.", "right": ["their"]},
+    {"id": "gu.clauses.01", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "When it rained, we stayed inside.", "rule": "The main clause can stand alone as a sentence: we stayed inside. \"When it rained\" cannot.", "ask": "main clause", "right": ["we", "stayed", "inside"]},
+    {"id": "gu.clauses.02", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "Although she was tired, Meena finished her work.", "rule": "The main clause can stand alone: Meena finished her work. \"Although she was tired\" cannot.", "ask": "main clause", "right": ["Meena", "finished", "her", "work"]},
+    {"id": "gu.clauses.03", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "The boy who won smiled proudly.", "rule": "The main clause is: the boy smiled proudly. \"Who won\" is a clause that only adds to \"boy\".", "ask": "main clause", "right": ["The", "boy", "smiled", "proudly"]},
+    {"id": "gu.clauses.04", "level": 6, "topic": "clauses", "kind": "spot", "sentence": "We will go out if the rain stops.", "rule": "The main clause can stand alone: we will go out. \"If the rain stops\" cannot.", "ask": "main clause", "right": ["We", "will", "go", "out"]},
     {"id": "gu.passive.01", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The bridge was [build] many years ago.", "rule": "The passive uses the past participle: was built.", "right": ["built"]},
     {"id": "gu.passive.02", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The letters were [wrote] by the secretary.", "rule": "The passive uses the past participle: were written.", "right": ["written"]},
     {"id": "gu.passive.03", "level": 7, "topic": "passive", "kind": "build", "sentence": "The match was cancelled because of the rain.", "rule": "In the passive, the thing acted on comes first: the match was cancelled.", "extra": ["cancel"]},
