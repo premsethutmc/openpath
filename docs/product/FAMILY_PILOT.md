@@ -522,3 +522,12 @@ three real faults, fixed as `fit@1`: long lines of working are set smaller, a wi
 tap button never shrinks below its words.
 `thin@1`: the robot learner's report also counts help that is one step with no working behind it, and help whose cues
 are mostly a single word (report only until the first full count is in).
+
+`plain-cue@1`: where a cue can name neither the step's numbers nor what it finds, the bare operation name is replaced by
+plain words ("lcm" → "find the smallest number they all go into", "regroup" → "trade ten of one for one of the next",
+"classify" → "decide which kind it is"). Types whose cues are mostly one word: 318 → 23 in the audit's sample.
+`facts@1`: a times-table fact has two taught ways in place of being told the answer: counting in equal jumps (the
+jumps stop one short, and the last jump is typed), and, for a fact with 6 to 9 in it, building it from the fives fact.
+298 facts, proved.
+Single-step help in Classes 1 to 5 (116 types) was read through: most are one-idea questions (count, compare, read),
+where one step is right; the table facts were the clear exception.
