@@ -2,13 +2,14 @@ name: Robot learner
 # robot@1: a synthetic learner takes every question the product has (every form of every type) from start to right
 # answer: enters the stored answer and a wrong one, opens "I'm stuck" in every way, types into every box. It runs the
 # product's own logic (the grader and the step help), not a screen. Behaviour only: never whether an explanation is the
-# taught method. Report only: a failing question does not fail the job. No language model is called; nothing is deployed.
+# taught method. gate@1: the job fails when a question breaks the product or a quality count rises. No language model
+# is called; nothing is deployed.
 on:
   workflow_dispatch:
   schedule:
     - cron: "40 20 * * *" # 02:10 IST, nightly
   pull_request:
-    paths: [".github/workflows/robot-learner.yml", "packages/learning/scripts/robot.ts"]
+    paths: [".github/workflows/robot-learner.yml", "packages/learning/scripts/robot.ts", "packages/learning/src/step-help.ts", "packages/learning/src/worked-out.ts", "packages/learning/src/step-ask.ts", "packages/learning/src/line-check.ts", "packages/learning/src/deepen.ts", "packages/learning/src/families.ts", "packages/learning/src/fam/**", "packages/learning/src/grading/**"]
 permissions:
   contents: read
 concurrency:
@@ -58,8 +59,9 @@ jobs:
           path: frontend/parts
           merge-multiple: true
       - run: |
-          node --import tsx ../packages/learning/scripts/robot.ts --merge parts/robot-*.json --report robot-report.md --json robot-report.json
+          node --import tsx ../packages/learning/scripts/robot.ts --merge parts/robot-*.json --report robot-report.md --json robot-report.json --gate || failed=1
           cat robot-report.md >> "$GITHUB_STEP_SUMMARY"
+          exit ${failed:-0}
         working-directory: frontend
       - uses: actions/upload-artifact@v7
         with:

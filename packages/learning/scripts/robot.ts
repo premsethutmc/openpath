@@ -10,7 +10,7 @@
  * whether an explanation is the method a school teaches, or whether a child follows it.
  *   node --import tsx ../packages/learning/scripts/robot.ts --shard 0/8 --out robot-0.json   (from frontend/)
  *   node --import tsx ../packages/learning/scripts/robot.ts --merge robot-*.json             prints the report
- * Report only: a failing question does not fail the job; a crash does.
+ * With --gate (the nightly job and every change to this script) a question that breaks the product fails the job.
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { question } from "../src/content.ts";
@@ -93,6 +93,16 @@ if (process.argv.includes("--merge")) {
   writeFileSync(arg("--report") ?? "robot-report.md", out);
   writeFileSync(arg("--json") ?? "robot-report.json", JSON.stringify({ schema: "robot@1", questions, clean, held, types: fams.length, kinds: Object.fromEntries(kinds.map((k) => [k, { questions: sum((f) => f.fails[k] ?? 0), types: fams.filter(([, f]) => f.fails[k]).length }])) }, null, 1) + "\n");
   console.log(out.split("\n").slice(0, 16).join("\n"));
+  // gate@1: with --gate the job fails when a question breaks the product, when a quality count rises above the
+  // number it stood at, or when questions went missing from the run. A count that falls should be lowered here.
+  if (process.argv.includes("--gate")) {
+    const CEILING: Partial<Record<Kind, number>> = { "answer-in-first-step": 257, "answer-in-cue": 5, "help-never-states-answer": 0 };
+    const FLOOR = 350_000;
+    const count = (k: Kind) => sum((f) => f.fails[k] ?? 0);
+    const broken = [...HARD.filter((k) => count(k) > 0).map((k) => `${k}: ${count(k)} questions break the product`), ...(Object.entries(CEILING) as [Kind, number][]).filter(([k, n]) => count(k) > n).map(([k, n]) => `${k}: ${count(k)}, up from ${n}`), ...(questions < FLOOR ? [`only ${questions} questions were taken (at least ${FLOOR} expected): a part of the run is missing`] : [])];
+    if (broken.length) { console.error(`robot@1 gate: FAILED\n${broken.map((b) => `  ${b}`).join("\n")}`); process.exit(1); }
+    console.log("robot@1 gate: passed");
+  }
 } else {
   const [part, of] = (arg("--shard") ?? "0/1").split("/").map(Number), every = Number(arg("--every") ?? 1);
   const families: Record<string, Fam> = {};
