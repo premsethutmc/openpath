@@ -28,6 +28,6 @@ and still not be able to say which word is the noun. Each skill is placed by ans
 
 - Six questions give a first estimate only. Tapping can be guessed (about one chance in six per sentence).
 - The longer engine grammar check (15 to 20 questions) is still separate and still offered.
-- Texts are still written for children, and no stream goes beyond about Class 8 or below the present level 1.
+- Texts are still written for children. See ADVANCED_LEVELS.md for the top levels and for what is missing below level 1.
 - In a naming-words sentence every word of the kind asked counts as right; "the" and "a" are not accepted as
   adjectives.

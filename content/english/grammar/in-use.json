@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 5,
+  "version": 6,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -28,6 +28,10 @@
     {
       "id": 6,
       "name": "Complex sentences"
+    },
+    {
+      "id": 7,
+      "name": "Advanced grammar"
     }
   ],
   "topics": [
@@ -154,6 +158,26 @@
     {
       "id": "tense_shift",
       "name": "Keeping to one tense"
+    },
+    {
+      "id": "passive",
+      "name": "Active and passive"
+    },
+    {
+      "id": "conditionals",
+      "name": "If sentences"
+    },
+    {
+      "id": "modal_perfect",
+      "name": "Should have, must have, might have"
+    },
+    {
+      "id": "ing_or_to",
+      "name": "-ing or to"
+    },
+    {
+      "id": "parallel",
+      "name": "Matching forms in a list"
     }
   ],
   "scale": 2,
@@ -337,6 +361,25 @@
     {"id": "gu.speech.07", "level": 6, "topic": "speech", "kind": "build", "sentence": "She asked whether I had finished my work.", "rule": "A yes or no question is reported with \"whether\" or \"if\", in statement order.", "extra": ["have", "you"]},
     {"id": "gu.speech.08", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Yesterday he said that he [can] swim across the lake.", "rule": "In reported speech \"can\" becomes \"could\".", "right": ["could"]},
     {"id": "gu.tense_shift.04", "level": 6, "topic": "tense_shift", "kind": "fix", "sentence": "When the bell rang, the children [run] out of the class.", "rule": "\"Rang\" sets the past, so keep to it: rang, ran.", "right": ["ran"]},
-    {"id": "gu.pronoun_agreement.04", "level": 6, "topic": "pronoun_agreement", "kind": "fix", "sentence": "The birds built [its] nest in our mango tree.", "rule": "A plural noun takes a plural pronoun: the birds, their.", "right": ["their"]}
+    {"id": "gu.pronoun_agreement.04", "level": 6, "topic": "pronoun_agreement", "kind": "fix", "sentence": "The birds built [its] nest in our mango tree.", "rule": "A plural noun takes a plural pronoun: the birds, their.", "right": ["their"]},
+    {"id": "gu.passive.01", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The bridge was [build] many years ago.", "rule": "The passive uses the past participle: was built.", "right": ["built"]},
+    {"id": "gu.passive.02", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The letters were [wrote] by the secretary.", "rule": "The passive uses the past participle: were written.", "right": ["written"]},
+    {"id": "gu.passive.03", "level": 7, "topic": "passive", "kind": "build", "sentence": "The match was cancelled because of the rain.", "rule": "In the passive, the thing acted on comes first: the match was cancelled.", "extra": ["cancel"]},
+    {"id": "gu.passive.04", "level": 7, "topic": "passive", "kind": "build", "sentence": "The results will be announced tomorrow.", "rule": "The future passive is will be with the past participle: will be announced.", "extra": ["announce"]},
+    {"id": "gu.conditionals.01", "level": 7, "topic": "conditionals", "kind": "fix", "sentence": "If I [was] you, I would apologise.", "rule": "For something unreal, use were: if I were you.", "right": ["were"]},
+    {"id": "gu.conditionals.02", "level": 7, "topic": "conditionals", "kind": "fix", "sentence": "If she had studied, she would have [pass] the test.", "rule": "After would have, use the past participle: would have passed.", "right": ["passed"]},
+    {"id": "gu.conditionals.03", "level": 7, "topic": "conditionals", "kind": "fix", "sentence": "If it rains tomorrow, we [would] cancel the picnic.", "rule": "A real possibility takes the present, then will: if it rains, we will cancel.", "right": ["will", "shall", "may", "might"]},
+    {"id": "gu.conditionals.04", "level": 7, "topic": "conditionals", "kind": "build", "sentence": "If I had known, I would have come earlier.", "rule": "For a past that did not happen: if with had, then would have.", "extra": ["know"]},
+    {"id": "gu.conditionals.05", "level": 7, "topic": "conditionals", "kind": "build", "sentence": "Unless you hurry, you will miss the bus.", "rule": "Unless means if not: unless you hurry.", "extra": ["if"]},
+    {"id": "gu.modal_perfect.01", "level": 7, "topic": "modal_perfect", "kind": "fix", "sentence": "You should have [tell] me the truth.", "rule": "After should have, use the past participle: should have told.", "right": ["told"]},
+    {"id": "gu.modal_perfect.02", "level": 7, "topic": "modal_perfect", "kind": "fix", "sentence": "He must have [forget] the meeting.", "rule": "After must have, use the past participle: must have forgotten.", "right": ["forgotten"]},
+    {"id": "gu.modal_perfect.03", "level": 7, "topic": "modal_perfect", "kind": "build", "sentence": "They might have missed the last train.", "rule": "Might have with a past participle is a guess about the past.", "extra": ["miss"]},
+    {"id": "gu.ing_or_to.01", "level": 7, "topic": "ing_or_to", "kind": "fix", "sentence": "She enjoys [swim] in the sea.", "rule": "After enjoy, use the -ing form: enjoys swimming.", "right": ["swimming"]},
+    {"id": "gu.ing_or_to.02", "level": 7, "topic": "ing_or_to", "kind": "fix", "sentence": "He avoided [answer] the question.", "rule": "After avoid, use the -ing form: avoided answering.", "right": ["answering"]},
+    {"id": "gu.ing_or_to.03", "level": 7, "topic": "ing_or_to", "kind": "fix", "sentence": "I look forward to [meet] you.", "rule": "After look forward to, use the -ing form: to meeting you.", "right": ["meeting"]},
+    {"id": "gu.ing_or_to.04", "level": 7, "topic": "ing_or_to", "kind": "build", "sentence": "We agreed to meet at the station.", "rule": "After agree, use to with the verb: agreed to meet.", "extra": ["meeting"]},
+    {"id": "gu.parallel.01", "level": 7, "topic": "parallel", "kind": "fix", "sentence": "She likes reading, painting and [cook].", "rule": "Items in a list take the same form: reading, painting and cooking.", "right": ["cooking"]},
+    {"id": "gu.parallel.02", "level": 7, "topic": "parallel", "kind": "fix", "sentence": "He spoke clearly, calmly and [confident].", "rule": "Items in a list take the same form: clearly, calmly and confidently.", "right": ["confidently"]},
+    {"id": "gu.parallel.03", "level": 7, "topic": "parallel", "kind": "build", "sentence": "The job needs patience, accuracy and good humour.", "rule": "Items in a list take the same form: three nouns."}
   ]
 }

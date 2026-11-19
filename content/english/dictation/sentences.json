@@ -1,6 +1,6 @@
 {
   "id": "sentence-dictation",
-  "version": 3,
+  "version": 4,
   "status": "candidate: sentences and levels written by OpenPath (AI-prepared) and checked by rule; British spelling; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: listening, spelling in a sentence, capital letters and end marks; it changes no capability estimate",
@@ -34,6 +34,11 @@
       "id": 6,
       "name": "Hard sentences",
       "about": "long sentences with hard spellings"
+    },
+    {
+      "id": 7,
+      "name": "Formal sentences",
+      "about": "long, formal sentences with advanced spellings"
     }
   ],
   "format": "[id, level, sentence, other accepted spellings by word]",
@@ -222,6 +227,30 @@
     ["d3.57", 6, "The guard's unusual behaviour immediately attracted the manager's attention.", {"behaviour": ["behavior"]}],
     ["d3.58", 6, "Without sufficient rainfall, the reservoir cannot supply the neighbouring districts.", {"neighbouring": ["neighboring"]}],
     ["d3.59", 6, "She was especially grateful for the encouragement her colleagues had given her."],
-    ["d3.60", 6, "The mathematician solved the extraordinarily difficult equation in under an hour."]
+    ["d3.60", 6, "The mathematician solved the extraordinarily difficult equation in under an hour."],
+    ["d4.01", 7, "The committee unanimously recommended postponing the conference until the necessary funds were guaranteed."],
+    ["d4.02", 7, "Her extraordinary perseverance eventually persuaded the sceptical examiners to reconsider their decision.", {"sceptical": ["skeptical"]}],
+    ["d4.03", 7, "Archaeological evidence suggests that the settlement was abandoned after a prolonged drought."],
+    ["d4.04", 7, "The pharmaceutical company acknowledged that the questionnaire had been unnecessarily complicated."],
+    ["d4.05", 7, "Despite considerable opposition, the municipality proceeded with the controversial redevelopment scheme."],
+    ["d4.06", 7, "A conscientious accountant would immediately have noticed the discrepancy in the quarterly figures."],
+    ["d4.07", 7, "The lieutenant's correspondence revealed an unexpectedly humorous and affectionate personality."],
+    ["d4.08", 7, "Sufficient ventilation is essential wherever chemicals are stored for a lengthy period."],
+    ["d4.09", 7, "The entrepreneur's ambitious proposal received an enthusiastic response from the international investors."],
+    ["d4.10", 7, "Unfortunately, the manuscript deteriorated because the library's temperature fluctuated throughout the year."],
+    ["d4.11", 7, "Psychologists emphasise that adequate sleep significantly improves concentration and memory.", {"emphasise": ["emphasize"]}],
+    ["d4.12", 7, "The parliamentary debate was characterised by courteous disagreement rather than rivalry.", {"characterised": ["characterized"]}],
+    ["d4.13", 7, "Meteorologists occasionally underestimate how rapidly a tropical cyclone can intensify."],
+    ["d4.14", 7, "The exhibition commemorates the bicentenary of a remarkably influential mathematician."],
+    ["d4.15", 7, "Whoever supervised the excavation deserves recognition for such meticulous record keeping."],
+    ["d4.16", 7, "Our neighbourhood association persistently campaigned for a pedestrian crossing near the kindergarten.", {"neighbourhood": ["neighborhood"]}],
+    ["d4.17", 7, "The translator scrupulously preserved the rhythm and ambiguity of the original poetry."],
+    ["d4.18", 7, "It is questionable whether the accommodation will be available before the anniversary."],
+    ["d4.19", 7, "The surgeon's reassuring explanation relieved the anxious relatives in the corridor."],
+    ["d4.20", 7, "Bureaucratic procedures frequently discourage applicants who are otherwise thoroughly qualified."],
+    ["d4.21", 7, "The orchestra's rehearsal schedule was rearranged to accommodate the visiting conductor."],
+    ["d4.22", 7, "Legitimate criticism should be welcomed, although exaggeration rarely strengthens an argument."],
+    ["d4.23", 7, "The satellite transmitted unprecedented photographs of the planet's turbulent atmosphere."],
+    ["d4.24", 7, "Maintaining independence of judgement requires both courage and intellectual humility.", {"judgement": ["judgment"]}]
   ]
 }

@@ -106,7 +106,8 @@ test("GU-5 levels move with a sitting; missed sentences return; new ones come fi
   assert.equal(sit(2, [], (_, i) => i < 5).done.nextLevel, 1);
   assert.equal(sit(2, [], (_, i) => i < 3).done.nextLevel, 2);
   assert.equal(sit(3, []).done.nextLevel, 4);
-  assert.equal(sit(6, []).done.nextLevel, 6);
+  assert.equal(sit(6, []).done.nextLevel, 7);
+  assert.equal(sit(7, []).done.nextLevel, 7);
   const first = sit(2, [], (_, i) => i < 3);
   const next = pick(GRAMMAR, 2, first.records);
   assert.ok(!next.some((it) => first.asked.includes(it)), "new sentences before any repeat");

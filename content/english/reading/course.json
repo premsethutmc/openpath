@@ -1,6 +1,6 @@
 {
   "id": "reading-course",
-  "version": 2,
+  "version": 3,
   "status": "candidate: texts, questions and teaching written by OpenPath for this course (no publisher material); checked by automatic tests only, not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: nothing in this course changes a capability estimate or a mastery claim",
@@ -91,6 +91,16 @@
       "words": [
         160,
         240
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Expert",
+      "band": 7,
+      "about": "Longer arguments, where the writer's claim, attitude and reasons have to be weighed.",
+      "words": [
+        215,
+        300
       ]
     }
   ],
