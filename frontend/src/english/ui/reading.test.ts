@@ -8,7 +8,7 @@ import { LABEL_AFTER_HELP, ReadingUnitSession, progress, type Snapshot } from ".
 (globalThis as { React?: unknown }).React = React;
 const { ReadingMap, ReadingUnitView } = await import("./Reading.tsx");
 
-const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, selectCheckAnswer() {}, lockCheckAnswer() {}, selectCheckEvidence() {}, submitCheckEvidence() {}, closeInterruptedCheck() {}, open() {}, leave() {} };
+const on = { selectPracticeClues() {}, checkPracticeClues() {}, nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, selectCheckAnswer() {}, lockCheckAnswer() {}, selectCheckEvidence() {}, submitCheckEvidence() {}, closeInterruptedCheck() {}, open() {}, leave() {} };
 const html = (snap: Snapshot) => renderToStaticMarkup(React.createElement(ReadingUnitView, { course: COURSE, snap, on })).replaceAll("&#x27;", "'").replaceAll("&quot;", '"');
 const byId = new Map(COURSE.questions.map((q) => [q.id, q]));
 const unit: Unit = { skill: "cause", level: 2 };
@@ -17,16 +17,16 @@ test("RU-1 the map offers every skill at every level, with the rule-chosen next 
   const map = (records = [] as Parameters<typeof progress>[1]) => renderToStaticMarkup(React.createElement(ReadingMap, { course: COURSE, progress: progress(COURSE, records), onOpen() {}, onBack() {} }));
   const fresh = map();
   assert.match(fresh, /Finding details · Starter/);
-  assert.equal(fresh.match(/data-unit="/g)!.length, 36);
-  assert.equal(fresh.match(/>Check me</g)!.length, 36);
-  assert.match(fresh, /0 of 36 done/);
+  assert.equal(fresh.match(/data-unit="/g)!.length, 42);
+  assert.equal(fresh.match(/>Check me</g)!.length, 42);
+  assert.match(fresh, /0 of 42 done/);
   const s = new ReadingUnitSession(COURSE, { skill: "detail", level: 1 }, "check_me");
   for (let snap = s.snapshot(); snap.phase === "check"; snap = s.snapshot()) s.answerCheck(byId.get(snap.question.id)!.answer);
   const after = map(s.take());
-  assert.match(after, /1 of 36 done/);
+  assert.match(after, /1 of 42 done/);
   assert.match(after, /shown on your own/);
   assert.match(after, /Order of events · Starter/);
-  assert.equal(after.match(/>Check me</g)!.length, 35, "a passed level is not checked again");
+  assert.equal(after.match(/>Check me</g)!.length, 41, "a passed level is not checked again");
 });
 
 test("RU-2 lesson, practice, check and result show what they should and hold back what they must", () => {

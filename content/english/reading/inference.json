@@ -1,0 +1,1229 @@
+[
+  {
+    "level": 1,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "A Note for Leela",
+        "strategy": "Find two facts that go together. Work out what they tell you that neither says alone.",
+        "tip": "Look for a clue before and a clue after. What do they tell you together?",
+        "worked": {
+          "prompt": "Which bag should Leela take?",
+          "answer": "The bag with the green ribbon.",
+          "steps": [
+            "The bags look the same. Looking at the shape will not tell them apart.",
+            "Before school, Leela put a green ribbon on her bag. That is one clue.",
+            "Only one bag at the door has the green ribbon. Put that clue with the first one: that bag is Leela’s."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF1.T",
+        "role": "teach",
+        "title": "A Note for Leela",
+        "text": "Leela and Arun have bags that look the same. Leela tied a green ribbon on hers before school. After lunch there were two bags beside the door. One had a green ribbon on the handle. The other had no ribbon. Arun was still inside, putting away a book. Leela went to the door to get her bag.",
+        "questions": []
+      },
+      {
+        "id": "INF1.P1",
+        "role": "practice",
+        "title": "Ready Outside",
+        "text": "Vani and Kavi have brown shoes that look the same. Vani tied a white lace on her left shoe. After school both children left their shoes outside. Their father saw one pair by the front door. It had a brown lace on the left shoe. Another pair was on the back step. Its left lace was white. Then their father went indoors to read.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which pair is most likely Vani’s?",
+            "right": "The pair on the back step.",
+            "wrong": [
+              "The pair by the front door.",
+              "The pair their father has indoors."
+            ],
+            "evidence": "Vani tied a white lace on her left shoe.",
+            "evidenceAlternatives": [
+              [
+                "Vani tied a white lace on her left shoe.",
+                "Another pair was on the back step.",
+                "Its left lace was white."
+              ]
+            ],
+            "explain": "Both pairs look brown. Vani put a white lace on her left shoe. The pair with that lace is on the back step.",
+            "hint": "Look at the left lace she changed and the left laces by the two doors."
+          }
+        ]
+      },
+      {
+        "id": "INF1.P2",
+        "role": "practice",
+        "title": "The Right Bell",
+        "text": "Two people knocked at Uma’s door that afternoon. Their bags were the same blue colour. Uma was waiting for a man from the bookshop. The shop had said he would carry a box tied with white string. The first person had only a bag. The second had a bag and a box tied with white string. Uma put her cup down.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Who is probably from the bookshop?",
+            "right": "The person who knocked second.",
+            "wrong": [
+              "The person who knocked first.",
+              "Neither person at the door."
+            ],
+            "evidence": "The shop had said he would carry a box tied with white string.",
+            "evidenceAlternatives": [
+              [
+                "The shop had said he would carry a box tied with white string.",
+                "The second had a bag and a box tied with white string."
+              ]
+            ],
+            "explain": "Both have blue bags, so that does not help. The shop’s clue was a box tied with white string, and the second person had one.",
+            "hint": "Compare what the shop said with what each visitor carried."
+          }
+        ]
+      },
+      {
+        "id": "INF1.C1",
+        "role": "check",
+        "title": "The Two Trays",
+        "text": "A single long table stood in the hall. Meera put all the cups for her group on a round tray before lunch. The round tray of cups was at the end facing the window. A square tray of cups stood at the end next to the door. Both trays were red. Hema left an oval tray by a jug in the middle. Now Meera needed to bring the cups for her group.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Where should Meera look for her cups?",
+            "right": "At the end opposite the window.",
+            "wrong": [
+              "At the end next to the door.",
+              "In the middle, next to the jug."
+            ],
+            "evidence": "Meera put all the cups for her group on a round tray before lunch.",
+            "evidenceAlternatives": [
+              [
+                "Meera put all the cups for her group on a round tray before lunch.",
+                "The round tray of cups was at the end facing the window."
+              ]
+            ],
+            "explain": "Meera used a round tray, and the round tray is opposite the window. Both trays are red, so the colour cannot tell the groups apart."
+          }
+        ]
+      },
+      {
+        "id": "INF1.C2",
+        "role": "check",
+        "title": "After the Walk",
+        "text": "Naren went for a walk with his uncle. Before they left, he put a blue ball in his pocket. His uncle put a red ball in a cloth bag. Near the pond, something round fell from Naren’s pocket. At home, Naren put his hand in his pocket and found only a leaf. His uncle set the cloth bag by the door.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which ball is likely still near the pond?",
+            "right": "The blue ball Naren carried.",
+            "wrong": [
+              "The red ball his uncle carried.",
+              "Both of the balls they carried."
+            ],
+            "evidence": "Before they left, he put a blue ball in his pocket.",
+            "evidenceAlternatives": [
+              [
+                "Before they left, he put a blue ball in his pocket.",
+                "Near the pond, something round fell from Naren’s pocket."
+              ]
+            ],
+            "explain": "Naren took the blue ball in his pocket. A round thing fell from that pocket, and there was no ball in it at home. The red ball was carried in a bag instead."
+          }
+        ]
+      },
+      {
+        "id": "INF1.C3",
+        "role": "check",
+        "title": "The Dry Bench",
+        "text": "Ruku set her book on the bench by the shed. A shower started during playtime. The bench by the shed was under a wide roof. The other bench, out by the tree, was wet all over after the shower. Both benches were empty of children. Ruku walked back with her friend to get her book.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What is Ruku most likely to find?",
+            "right": "Her book has stayed dry.",
+            "wrong": [
+              "Her book is soaked with rain.",
+              "Her book is on the other bench."
+            ],
+            "evidence": "Ruku set her book on the bench by the shed.",
+            "evidenceAlternatives": [
+              [
+                "Ruku set her book on the bench by the shed.",
+                "The bench by the shed was under a wide roof."
+              ]
+            ],
+            "explain": "Her book was on the bench by the shed. The roof shelters that bench from rain, so the book likely stayed dry. The other bench is wet, but that is not where she put it."
+          }
+        ]
+      },
+      {
+        "id": "INF1.C4",
+        "role": "check",
+        "title": "At the Meeting Point",
+        "text": "Asha waited for her aunt near the park gate. The aunt had said she would bring a yellow umbrella. A woman in a yellow coat walked through the gate first, with empty hands. Another woman walked behind her in a grey coat. She carried a yellow umbrella. Both women stopped to look at the park sign. Asha stood up.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which woman is probably Asha’s aunt?",
+            "right": "The woman in the grey coat.",
+            "wrong": [
+              "The woman in the yellow coat.",
+              "Neither woman at the park sign."
+            ],
+            "evidence": "The aunt had said she would bring a yellow umbrella.",
+            "evidenceAlternatives": [
+              [
+                "The aunt had said she would bring a yellow umbrella.",
+                "Another woman walked behind her in a grey coat.",
+                "She carried a yellow umbrella."
+              ]
+            ],
+            "explain": "The promise was about an umbrella, not a coat. The grey coat and yellow umbrella belong to the same woman. The woman in the yellow coat had nothing in her hands."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "The Last Shelf",
+        "strategy": "Link the part of the text that tells where or when with the part that tells what changed.",
+        "tip": "Ask what both clues support, and stop before you claim more than they tell you.",
+        "worked": {
+          "prompt": "What did Rani most likely find when she opened the bag?",
+          "answer": "The paper inside was still dry.",
+          "steps": [
+            "The tap leaked and the water reached the counter; it did not reach as high as the roof.",
+            "Rani took the bags from the high shelf, just below the roof. Read that with the water clue.",
+            "The water likely did not reach those bags, so the paper inside was probably dry. The text does not say how every bag in the stall fared."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF2.T",
+        "role": "teach",
+        "title": "The Last Shelf",
+        "text": "On Friday, Rani put a stack of paper bags on a shelf at the food stall. The stall had two shelves, and both were the same width. One was just above the counter. The other was high, just below the roof.\nOn Saturday, a tap leaked while the stall was shut. Water rose over the counter but stopped well below the roof. Rani lifted the bags from the high shelf. She set them beside the baskets and opened the first one.",
+        "questions": []
+      },
+      {
+        "id": "INF2.P1",
+        "role": "practice",
+        "title": "Lunch Tokens",
+        "text": "At noon the canteen takes lunch tokens in two colours. Children with white tokens get a meal at the counter on the right. Children with green tokens go to the counter on the left. There are the same number of tables on both sides of the room.\n\nToday Malini brought her token in an envelope. One corner stuck out. The corner was green, even though the envelope was white. Her friend sat at a table near the door and waited for her.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Where should Malini collect her meal?",
+            "right": "At the counter on the left.",
+            "wrong": [
+              "At the counter on the right.",
+              "At the table near the door."
+            ],
+            "evidence": "Children with green tokens go to the counter on the left.",
+            "evidenceAlternatives": [
+              [
+                "Children with green tokens go to the counter on the left.",
+                "The corner was green, even though the envelope was white."
+              ]
+            ],
+            "explain": "The route depends on the token, not the envelope. A green token goes to the left counter.",
+            "hint": "Which coloured object matters for the rule?"
+          }
+        ]
+      },
+      {
+        "id": "INF2.P2",
+        "role": "practice",
+        "title": "When the Hall Opens",
+        "text": "The town hall opens its side door when the main steps are blocked. On Tuesday both entrances have been freshly painted. On Wednesday the painter comes back to put away the brushes and take his ladder home.\n\nIn the morning, a worker puts two long tables across the main steps. He leaves only a small gap at either end. A group of singers arrives carrying a wide wooden box between them. They stand in front of the hall and look at the steps.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which entrance should the group try first?",
+            "right": "They should try the side door.",
+            "wrong": [
+              "They should try the main steps.",
+              "They should wait for the painter."
+            ],
+            "evidence": "The town hall opens its side door when the main steps are blocked.",
+            "evidenceAlternatives": [
+              [
+                "The town hall opens its side door when the main steps are blocked.",
+                "In the morning, a worker puts two long tables across the main steps.",
+                "He leaves only a small gap at either end.",
+                "A group of singers arrives carrying a wide wooden box between them."
+              ]
+            ],
+            "explain": "The tables block the steps for the group carrying the box. The side door is the entrance the hall opens in that situation. Paint and the painter do not decide it.",
+            "hint": "Match the hall’s rule with the way the steps look now."
+          }
+        ]
+      },
+      {
+        "id": "INF2.C1",
+        "role": "check",
+        "title": "The Picnic Route",
+        "text": "Two buses stop outside the school. The blue bus uses the market road and crosses no bridge. The white bus takes the road across the railway bridge. The children are going to a picnic and have been asked to bring a water bottle.\n\nA sign at the railway bridge says the bridge is closed all day. The teachers ask the drivers to use only their usual routes. After counting the children, the head teacher tells everyone to line up for a bus.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which bus can complete the trip on its usual route?",
+            "right": "The blue bus can finish the trip.",
+            "wrong": [
+              "The white bus can finish the trip.",
+              "Both buses can finish the trip."
+            ],
+            "evidence": "The blue bus uses the market road and crosses no bridge.",
+            "evidenceAlternatives": [
+              [
+                "The blue bus uses the market road and crosses no bridge.",
+                "The white bus takes the road across the railway bridge.",
+                "A sign at the railway bridge says the bridge is closed all day."
+              ],
+              [
+                "The blue bus uses the market road and crosses no bridge.",
+                "The white bus takes the road across the railway bridge.",
+                "A sign at the railway bridge says the bridge is closed all day.",
+                "The teachers ask the drivers to use only their usual routes."
+              ]
+            ],
+            "explain": "The bridge closure blocks the white bus’s usual route. The blue bus normally goes past the market instead, so it can take the planned road."
+          }
+        ]
+      },
+      {
+        "id": "INF2.C2",
+        "role": "check",
+        "title": "The Missing Badge",
+        "text": "A bag of badges for the school play stood by the stage. Each badge for a speaker had a silver edge. Badges for helpers had blue edges. The stage manager laid a silver badge and a blue badge on her table.\n\nNeel had worked with the helpers during practice. Just before the play, the stage manager gave him the badge with the silver edge. He put it on his shirt. His friend took the blue badge and went to wait by the curtain.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What is Neel probably doing in the play now?",
+            "right": "He is probably a speaker.",
+            "wrong": [
+              "He is probably still a helper.",
+              "He is probably watching the play."
+            ],
+            "evidence": "Each badge for a speaker had a silver edge.",
+            "evidenceAlternatives": [
+              [
+                "Each badge for a speaker had a silver edge.",
+                "Just before the play, the stage manager gave him the badge with the silver edge."
+              ]
+            ],
+            "explain": "At practice Neel helped. The badge she gives him for the play has the edge used for a speaker; that is stronger evidence of his role now."
+          }
+        ]
+      },
+      {
+        "id": "INF2.C3",
+        "role": "check",
+        "title": "The Empty Bowl",
+        "text": "Maya left a dish of sliced banana on the outside table. A short rain began just after that. Maya brought the pet cat in from the yard, and shut the kitchen door until tea time.\n\nWhen she came out, the banana dish was empty. Prints with three thin toes led up to its rim. Prints with round pads led from the gate to the bench, but stopped there. In her nature book, Maya found a drawing of a myna’s three thin front toes. The table was still damp.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What is the best guess about the missing banana?",
+            "right": "A bird most likely took some.",
+            "wrong": [
+              "A cat probably took some.",
+              "The rain probably washed it off."
+            ],
+            "evidence": "Prints with three thin toes led up to its rim.",
+            "evidenceAlternatives": [
+              [
+                "Prints with three thin toes led up to its rim.",
+                "In her nature book, Maya found a drawing of a myna’s three thin front toes."
+              ]
+            ],
+            "explain": "The three-toed prints reach the dish. The nature-book drawing connects that footprint shape to a bird. The round prints stop at the bench, and the rain alone does not explain the three-toed trail to the rim."
+          }
+        ]
+      },
+      {
+        "id": "INF2.C4",
+        "role": "check",
+        "title": "A Copy for Home",
+        "text": "At the library, children take a loan slip for each book they carry home. The slip is brown. Visitors can take sheets from the activity table home without getting a slip. Rhea had been drawing on one of those pages.\n\nWhen she left, Rhea held a picture of a bird between two sheets of paper. Her friend had a bird book under his arm and a brown slip beside it. The librarian watched Rhea pass the desk and simply waved goodbye.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What is Rhea most likely taking home?",
+            "right": "A page from the activity table.",
+            "wrong": [
+              "A book about birds on loan.",
+              "A blank library loan slip."
+            ],
+            "evidence": "Rhea had been drawing on one of those pages.",
+            "evidenceAlternatives": [
+              [
+                "Rhea had been drawing on one of those pages.",
+                "When she left, Rhea held a picture of a bird between two sheets of paper."
+              ]
+            ],
+            "explain": "Rhea drew on a page from the activity table, and she leaves with a bird picture rather than a book with a brown slip. Pages from that table can leave without a slip."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "A Different Way In",
+        "strategy": "Combine the clues that matter now. A true detail may be out of date or beside the point.",
+        "tip": "Test each answer against earlier and later clues, not just a sign or phrase that sounds right.",
+        "worked": {
+          "prompt": "Which entry is the better choice if Sita wants to keep the boxes away from the water?",
+          "answer": "She should use the small gate and follow the paving.",
+          "steps": [
+            "The sign says the field is open, but it was put up before the pipe burst. Being open is not the same as being dry.",
+            "The wide gate leads to the field. The small gate opens onto paving. The pool now covers the field path.",
+            "Together these clues support the small gate as the better route. We do not have to claim the wide gate itself is locked."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF3.T",
+        "role": "teach",
+        "title": "A Different Way In",
+        "text": "The school office is next to two gates. The small gate opens onto paving. The wide gate opens onto the playing field. The field path is the shorter way to the building, and most pupils use it on dry days.\nEarly on Monday, a gardener put a handwritten sign on the wide gate saying that the field was open. Later a pipe burst, and a pool of water spread across the field path. Nobody changed the sign.\nSita comes to deliver two large boxes of paper. She can read the sign from the road, and she can see both paths clearly. In her shoes, the water would reach above her toes.",
+        "questions": []
+      },
+      {
+        "id": "INF3.P1",
+        "role": "practice",
+        "title": "The Workshop Bag",
+        "text": "Suri and Bala use identical cloth tool bags. Suri normally keeps her folding ruler in the inner pocket. Bala keeps a tape in his pocket. On Thursday the class collects some cardboard to build models of their homes.\n\nSuri lends her folding ruler to Meena before going to the washroom. Meena measures her card and puts the ruler back into the inner pocket of the bag on the window bench. The other bag stays under Bala’s chair.\n\nAt the end, Suri packs her model, then looks for her bag. Neither bag has a name label. From where she stands, both bags look equally full.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Where is Suri’s bag most likely now?",
+            "right": "On the bench by the window.",
+            "wrong": [
+              "Under Bala’s chair near the model.",
+              "With Meena in the washroom."
+            ],
+            "evidence": "Suri normally keeps her folding ruler in the inner pocket.",
+            "evidenceAlternatives": [
+              [
+                "Suri normally keeps her folding ruler in the inner pocket.",
+                "Meena measures her card and puts the ruler back into the inner pocket of the bag on the window bench."
+              ],
+              [
+                "Suri lends her folding ruler to Meena before going to the washroom.",
+                "Meena measures her card and puts the ruler back into the inner pocket of the bag on the window bench."
+              ]
+            ],
+            "explain": "The place where the folding ruler belongs and where Meena returned it point to the bag on the window bench. The bags’ outward appearance does not help.",
+            "hint": "Read where the ruler belongs, then where Meena puts it back."
+          }
+        ]
+      },
+      {
+        "id": "INF3.P2",
+        "role": "practice",
+        "title": "Saturday Seats",
+        "text": "A hall has two rooms. The front room has short benches fixed to the floor. The back room has chairs that can be moved about. The club used the front room last month, when people only watched slides.\n\nThis Saturday, twelve people will sit in four small circles, one for each group. They must be able to see everyone in their group. A volunteer has already moved the slide screen into the front room.\n\nThere are enough seats in either room for the meeting. The front room is closer to the entrance, and both rooms have a window that can be opened.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which room is the better fit for Saturday’s meeting?",
+            "right": "The back room with movable chairs.",
+            "wrong": [
+              "The front room with fixed benches.",
+              "Either room would fit equally well."
+            ],
+            "evidence": "The back room has chairs that can be moved about.",
+            "evidenceAlternatives": [
+              [
+                "The back room has chairs that can be moved about.",
+                "This Saturday, twelve people will sit in four small circles, one for each group."
+              ],
+              [
+                "The front room has short benches fixed to the floor.",
+                "The back room has chairs that can be moved about.",
+                "This Saturday, twelve people will sit in four small circles, one for each group."
+              ]
+            ],
+            "explain": "The groups need four circles, and the movable chairs can be arranged that way. The same seat count does not make the fixed benches suitable.",
+            "hint": "Think about how people must face each other, not only the number of seats."
+          }
+        ]
+      },
+      {
+        "id": "INF3.C1",
+        "role": "check",
+        "title": "A Different Bird List",
+        "text": "The nature club records each bird species only once per visit. At the east pond last Thursday, it listed six species, including a heron. It did not include any kingfishers. The club has the same number of notebooks on every trip.\n\nOn Saturday the children returned to the east pond. One child saw a heron at the same spot and marked it on the list. A second child pointed to a kingfisher, which another child checked with binoculars.\n\nBefore leaving, three children each saw a kingfisher from a different place along the bank. They called it out again, and the group compared notes by the exit.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What does the Saturday list tell us compared with Thursday’s list?",
+            "right": "It includes at least one species not listed on Thursday.",
+            "wrong": [
+              "It lists each kingfisher sighting as a different species.",
+              "It has the same six species listed in the same order."
+            ],
+            "evidence": "At the east pond last Thursday, it listed six species, including a heron.",
+            "evidenceAlternatives": [
+              [
+                "At the east pond last Thursday, it listed six species, including a heron.",
+                "It did not include any kingfishers.",
+                "A second child pointed to a kingfisher, which another child checked with binoculars."
+              ],
+              [
+                "The nature club records each bird species only once per visit.",
+                "At the east pond last Thursday, it listed six species, including a heron.",
+                "It did not include any kingfishers.",
+                "A second child pointed to a kingfisher, which another child checked with binoculars."
+              ]
+            ],
+            "explain": "Thursday had no kingfisher on its list, but Saturday’s group checked a kingfisher. That makes at least one difference. Several sightings do not create several species."
+          }
+        ]
+      },
+      {
+        "id": "INF3.C2",
+        "role": "check",
+        "title": "The Lighter Parcel",
+        "text": "Two parcels are going to different homes. Both are wrapped in plain brown paper and tied with string. Mira puts an empty tin into the first parcel. She puts another tin of the same size into the second parcel, but fills it with marbles before sealing it.\n\nThe parcel for Aadi is left by the door. The parcel for Kavi is left on the table. Their labels have come loose, but Mira remembers she put the heavier one on the table.\n\nMira does not open the parcels again. She tells her brother to carry each parcel to the right home, and he picks them both up.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What will Kavi most likely find in the parcel?",
+            "right": "A tin with marbles inside.",
+            "wrong": [
+              "A tin with nothing inside.",
+              "Two empty tins tied together."
+            ],
+            "evidence": "She puts another tin of the same size into the second parcel, but fills it with marbles before sealing it.",
+            "evidenceAlternatives": [
+              [
+                "She puts another tin of the same size into the second parcel, but fills it with marbles before sealing it.",
+                "The parcel for Kavi is left on the table.",
+                "Their labels have come loose, but Mira remembers she put the heavier one on the table."
+              ]
+            ],
+            "explain": "The marbles make the second tin heavier than the empty one. Mira left the heavier parcel on the table, and the parcel on the table is for Kavi."
+          }
+        ]
+      },
+      {
+        "id": "INF3.C3",
+        "role": "check",
+        "title": "A Bench for the Bus",
+        "text": "The village plans to put a bench at one of two bus stops. At the first stop the bus comes once an hour. At the second it comes every ten minutes. Last month volunteers found that about the same number of people began their trips at each stop.\n\nThe new bench is meant for people with long waits. On most mornings, people at the first stop arrive at different times, even though the bus follows its usual timetable. Nobody has asked to change either route.\n\nA volunteer notes that the second stop is closer to the shop that will make the bench. There is room to put it at either stop.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Where would the bench better serve its stated purpose?",
+            "right": "At the first stop, where buses come less often.",
+            "wrong": [
+              "At the second stop, which is nearer the shop.",
+              "At either stop, since the same number use them."
+            ],
+            "evidence": "At the first stop the bus comes once an hour.",
+            "evidenceAlternatives": [
+              [
+                "At the first stop the bus comes once an hour.",
+                "At the second it comes every ten minutes.",
+                "The new bench is meant for people with long waits."
+              ],
+              [
+                "At the first stop the bus comes once an hour.",
+                "The new bench is meant for people with long waits.",
+                "On most mornings, people at the first stop arrive at different times, even though the bus follows its usual timetable."
+              ]
+            ],
+            "explain": "The purpose is to help people who wait longer, not to make moving the bench convenient. With buses farther apart and arrivals spread over time, the first stop gives more chances for long waits."
+          }
+        ]
+      },
+      {
+        "id": "INF3.C4",
+        "role": "check",
+        "title": "Same Labels",
+        "text": "At a school stall, a tray marked morning holds the seedlings that have already been watered. A tray marked afternoon holds seedlings that still need water. The two trays sit next to each other, and every pot is the same colour.\n\nDuring lunch the wind blows both labels onto the floor. Farah has a photo taken just before the labels fell. In it, the afternoon label stands beside a pot with a broken rim.\n\nThe pot with the broken rim is still on the tray nearest the wall. None of the pots has been moved. Farah’s friend has brought a jug and is waiting to help.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which tray should Farah’s friend water next?",
+            "right": "The pots closest to the wall need it.",
+            "wrong": [
+              "The pots farther from the wall need it.",
+              "Every pot in both trays needs it."
+            ],
+            "evidence": "A tray marked afternoon holds seedlings that still need water.",
+            "evidenceAlternatives": [
+              [
+                "A tray marked afternoon holds seedlings that still need water.",
+                "In it, the afternoon label stands beside a pot with a broken rim.",
+                "The pot with the broken rim is still on the tray nearest the wall."
+              ]
+            ],
+            "explain": "The tray that needs water is the one marked afternoon. The photo connects it with the pot with a broken rim, which is still on the tray nearest the wall."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 4,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "Two Rules for the Walk",
+        "strategy": "Use one clue to narrow your choices, then use the other to decide. A good answer must fit both.",
+        "tip": "Try crossing off one choice with the first clue and a different choice with the second.",
+        "worked": {
+          "prompt": "Which route should the group take to meet both needs?",
+          "answer": "They should take the lane route.",
+          "steps": [
+            "Start with the pushchair. A firm surface leaves two plans: lane or orchard.",
+            "Now check the bottles. The group needs a tap; the lane and pond both have one.",
+            "Only the lane is in both groups. A single clue leaves a second answer open."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF4.T",
+        "role": "teach",
+        "title": "Two Rules for the Walk",
+        "text": "The walking group meets this weekend, and three routes are on the table. The lane route has a firm surface and passes a tap. The orchard route also has a firm surface, but there is nowhere to refill a bottle. The pond route has a tap, but its last stretch is soft mud. All three routes take about half an hour to walk.\nOne member will bring a pushchair, whose small wheels get stuck in soft ground. Another will bring the group’s empty water bottles and must fill them on the way. The group cannot add a stop before setting out because the meeting room closes as soon as they leave.\nThe organiser likes the sound of birds on the pond route, and some members chose the orchard last month. He reads all three route notes aloud before asking for a decision.",
+        "questions": []
+      },
+      {
+        "id": "INF4.P1",
+        "role": "practice",
+        "title": "Three Repair Jobs",
+        "text": "The repair table has three jobs open. The clock job can be finished before noon, but it needs a screwdriver. The drawer job can also be finished before noon, and the only tool it needs is glue. The shelf job uses only glue too, but it must stay clamped until late afternoon. Each owner has left a note with the object’s name instead of a time.\n\nDevi can carry glue in her apron, but the shared screwdriver is already in use. Her bus leaves soon after noon, so she cannot promise to finish a job that must still be watched later. She has fixed clocks before, although not the one on this table.\n\nThe supervisor has told her that all three jobs count equally towards the class project. Devi can choose a whole job or leave it for the next helper.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which whole job can Devi take on now?",
+            "right": "She can repair the drawer.",
+            "wrong": [
+              "She can repair the clock.",
+              "She can repair the shelf."
+            ],
+            "evidence": "The drawer job can also be finished before noon, and the only tool it needs is glue.",
+            "evidenceAlternatives": [
+              [
+                "The drawer job can also be finished before noon, and the only tool it needs is glue.",
+                "Devi can carry glue in her apron, but the shared screwdriver is already in use.",
+                "Her bus leaves soon after noon, so she cannot promise to finish a job that must still be watched later."
+              ],
+              [
+                "The clock job can be finished before noon, but it needs a screwdriver.",
+                "The drawer job can also be finished before noon, and the only tool it needs is glue.",
+                "The shelf job uses only glue too, but it must stay clamped until late afternoon.",
+                "Devi can carry glue in her apron, but the shared screwdriver is already in use.",
+                "Her bus leaves soon after noon, so she cannot promise to finish a job that must still be watched later."
+              ]
+            ],
+            "explain": "The clock meets the time limit but needs a tool she cannot use. The shelf fits her tools but not her time. The drawer is the only job that fits both.",
+            "hint": "Compare each job with the tool Devi has and the time she must leave."
+          }
+        ]
+      },
+      {
+        "id": "INF4.P2",
+        "role": "practice",
+        "title": "The Three Drawings",
+        "text": "The school print room has three pictures it could make for Friday’s activity. The town map is easy to read without colour, but it has to be printed across two pages. The tree plan fits on one page and is easy to read without colour. The garden picture also fits on one page, but its paths can only be told apart by colour.\n\nOn Friday, every child will get a single sheet, printed on one side. The school printer has black ink only until its new colour cartridge arrives next week. The sheets will be folded and passed out at the morning meeting.\n\nThe teacher says the three pictures are equally suitable for the topic. The town map was the most popular on Monday, when children saw all three on a large screen, but no decision was made at the time.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which picture can the teacher print as planned?",
+            "right": "She can print the tree plan.",
+            "wrong": [
+              "She can print the town map.",
+              "She can print the garden picture."
+            ],
+            "evidence": "The tree plan fits on one page and is easy to read without colour.",
+            "evidenceAlternatives": [
+              [
+                "The tree plan fits on one page and is easy to read without colour.",
+                "On Friday, every child will get a single sheet, printed on one side.",
+                "The school printer has black ink only until its new colour cartridge arrives next week."
+              ],
+              [
+                "The town map is easy to read without colour, but it has to be printed across two pages.",
+                "The tree plan fits on one page and is easy to read without colour.",
+                "The garden picture also fits on one page, but its paths can only be told apart by colour.",
+                "On Friday, every child will get a single sheet, printed on one side.",
+                "The school printer has black ink only until its new colour cartridge arrives next week."
+              ]
+            ],
+            "explain": "One sheet rules out the town map, and lack of colour rules out the garden picture. The tree plan meets both limits.",
+            "hint": "One plan fits the space but needs colour. Another works without colour but needs more space."
+          }
+        ]
+      },
+      {
+        "id": "INF4.C1",
+        "role": "check",
+        "title": "The Reading Box",
+        "text": "The children will send one box of books to the clinic. Their boxes differ in two ways. Tara has packed books with large print and has used a wide box. Ravi has packed books with large print too, but his box is narrow. Noor has used a narrow box for books with small print. Each box holds roughly the same weight.\n\nThe clinic’s letter says the books are for people who cannot read small print comfortably. It also asks for a box that can slide through the narrow hatch near the desk, since a cupboard blocks the main counter. The books cannot be unpacked on arrival.\n\nThe transport volunteer has checked that all three boxes fit in her van. Last month she collected a wide box from the clinic, but that was before the cupboard was moved.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Whose box best meets the clinic’s request?",
+            "right": "Ravi’s box is the best fit.",
+            "wrong": [
+              "Tara’s box is the best fit.",
+              "Noor’s box is the best fit."
+            ],
+            "evidence": "Ravi has packed books with large print too, but his box is narrow.",
+            "evidenceAlternatives": [
+              [
+                "Ravi has packed books with large print too, but his box is narrow.",
+                "The clinic’s letter says the books are for people who cannot read small print comfortably.",
+                "It also asks for a box that can slide through the narrow hatch near the desk, since a cupboard blocks the main counter."
+              ],
+              [
+                "Tara has packed books with large print and has used a wide box.",
+                "Ravi has packed books with large print too, but his box is narrow.",
+                "Noor has used a narrow box for books with small print.",
+                "The clinic’s letter says the books are for people who cannot read small print comfortably.",
+                "It also asks for a box that can slide through the narrow hatch near the desk, since a cupboard blocks the main counter."
+              ]
+            ],
+            "explain": "Both Tara and Ravi have large print, and both Ravi and Noor have narrow boxes. Only Ravi supplies both large print and a narrow box."
+          }
+        ]
+      },
+      {
+        "id": "INF4.C2",
+        "role": "check",
+        "title": "The Poster Frame",
+        "text": "A street library has three frames for a poster. The green frame fits the long poster, but its clear cover lets rain in. The blue frame fits the long poster and has a seal that keeps water out. The red frame has a seal too, but only a short poster will fit inside it. All three frames have holes ready for a nail.\n\nThe long poster has already been printed, and no part of its text can be cut off. It must stay outside through the night, and the weather notice says it will rain. The librarian owns a waterproof bag, but it is too small to wrap the poster.\n\nAn older poster hung in the red frame last month, when the library used fewer lines of print. A neighbour says he can put up whichever frame the library chooses.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which frame can hold and protect the new poster?",
+            "right": "Use the frame that is blue.",
+            "wrong": [
+              "Use the frame that is green.",
+              "Use the frame that is red."
+            ],
+            "evidence": "The blue frame fits the long poster and has a seal that keeps water out.",
+            "evidenceAlternatives": [
+              [
+                "The blue frame fits the long poster and has a seal that keeps water out.",
+                "The long poster has already been printed, and no part of its text can be cut off.",
+                "It must stay outside through the night, and the weather notice says it will rain."
+              ],
+              [
+                "The green frame fits the long poster, but its clear cover lets rain in.",
+                "The blue frame fits the long poster and has a seal that keeps water out.",
+                "The red frame has a seal too, but only a short poster will fit inside it.",
+                "The long poster has already been printed, and no part of its text can be cut off.",
+                "It must stay outside through the night, and the weather notice says it will rain."
+              ]
+            ],
+            "explain": "The green and blue frames are long enough; only blue and red keep out rain. The blue frame is the one that meets both requirements."
+          }
+        ]
+      },
+      {
+        "id": "INF4.C3",
+        "role": "check",
+        "title": "The Spare Key",
+        "text": "Three caretakers can open some of the school’s rooms. Lata may open the art room or the music room. Giri may open the art room or the store. Joseph may open the store or the music room. They each keep their keys in a metal box with their name on it.\n\nA visitor left a green scarf in the art room during a show. The school office also asks the visitor to collect a bag from the store before going home. The visitor’s taxi will wait only long enough to find one caretaker, so it would help to ask someone who can open both rooms.\n\nThe show itself used the music room the previous week. That room is open this afternoon, but the visitor checked it already and found only an empty table. All three caretakers are somewhere on the grounds.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which caretaker should the visitor ask for both tasks?",
+            "right": "They should ask Giri for help.",
+            "wrong": [
+              "They should ask Lata for help.",
+              "They should ask Joseph for help."
+            ],
+            "evidence": "Giri may open the art room or the store.",
+            "evidenceAlternatives": [
+              [
+                "Giri may open the art room or the store.",
+                "A visitor left a green scarf in the art room during a show.",
+                "The school office also asks the visitor to collect a bag from the store before going home."
+              ],
+              [
+                "Lata may open the art room or the music room.",
+                "Giri may open the art room or the store.",
+                "Joseph may open the store or the music room.",
+                "A visitor left a green scarf in the art room during a show.",
+                "The school office also asks the visitor to collect a bag from the store before going home."
+              ]
+            ],
+            "explain": "Lata and Giri can open the art room. Giri and Joseph can open the store. Only Giri appears in both groups."
+          }
+        ]
+      },
+      {
+        "id": "INF4.C4",
+        "role": "check",
+        "title": "Tables for the Model",
+        "text": "The workshop has one trial run planned for Thursday. The small cart can climb the ramp but cannot carry the wide model. The flat cart carries the wide model, but its wheels slide on the ramp. The new cart can carry the wide model and its wheels grip the ramp. Each cart is strong enough for the model’s weight.\n\nThe lift is being serviced on Thursday, so whoever takes the model upstairs has to use the ramp. The model cannot be folded or split into smaller pieces. The pupils may take one cart up, and they must keep the model flat while moving it.\n\nOn Tuesday, the flat cart carried an equally heavy box along the lower corridor. It moved smoothly there, which is one reason some of the pupils suggested using it again. Thursday’s run has no stretch along that corridor.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which cart is suitable for Thursday’s run?",
+            "right": "They should use the new cart.",
+            "wrong": [
+              "They should use the flat cart.",
+              "They should use the small cart."
+            ],
+            "evidence": "The new cart can carry the wide model and its wheels grip the ramp.",
+            "evidenceAlternatives": [
+              [
+                "The new cart can carry the wide model and its wheels grip the ramp.",
+                "The lift is being serviced on Thursday, so whoever takes the model upstairs has to use the ramp.",
+                "The model cannot be folded or split into smaller pieces."
+              ],
+              [
+                "The small cart can climb the ramp but cannot carry the wide model.",
+                "The flat cart carries the wide model, but its wheels slide on the ramp.",
+                "The new cart can carry the wide model and its wheels grip the ramp.",
+                "The lift is being serviced on Thursday, so whoever takes the model upstairs has to use the ramp.",
+                "The model cannot be folded or split into smaller pieces."
+              ]
+            ],
+            "explain": "It must be wide enough for the model and able to move up the ramp. The new cart can do both. Tuesday’s easier trip does not settle Thursday’s choice."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 5,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "What the Survey Can Say",
+        "strategy": "Separate the claim, the group it concerns and what was actually recorded. Combine only clues that bear on the same claim.",
+        "tip": "Evidence that something happened is not always evidence that it happened in the right group or for the proposed reason.",
+        "worked": {
+          "prompt": "Which activity provided traceable evidence about the particular method the committee wants to study?",
+          "answer": "Reading at the bus stop.",
+          "steps": [
+            "The target method is live reading for people not already attending a club. The bus stop offered that; the courtyard handed out invitations instead.",
+            "The separate stamp lets the library connect sign-ups to the bus stop. The north lane used unmarked cards and an existing club audience.",
+            "Taken together, the matching activity and traceable sign-ups support using the bus-stop figures. They do not prove reading aloud always works."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF5.T",
+        "role": "teach",
+        "title": "What the Survey Can Say",
+        "text": "The community library asked three volunteer groups to try new ways of bringing readers in. Volunteers in the courtyard handed invitations to people passing the entrance. Volunteers on the north lane read to the children who already attended an after-school club. Volunteers near the bus stop set up a table with books and began reading aloud to whoever stopped. The offers ran at the same time, on the same four Saturdays.\nAfterwards, the library counted new sign-ups. The courtyard and bus-stop groups both handed out cards with separate stamps, so the library could tell which visitors each brought. The north-lane group used the ordinary cards, with no mark to separate its visitors from others.\nThe committee is now looking for evidence about reaching children not already in a club through a live reading. A volunteer points out that the courtyard had the biggest total crowd, while the north-lane readers had known their audience for months. The librarian asks people to separate the question being studied from the size of the crowd.",
+        "questions": []
+      },
+      {
+        "id": "INF5.P1",
+        "role": "practice",
+        "title": "The Quiet Corner",
+        "text": "The community hall wants to try a quiet corner where visitors can read for ten minutes. In the entrance room, tables are visible to everyone walking in, but the door keeps opening onto a noisy road. The inner room is quiet and still visible through the open doorway by the welcome desk. The back room is quiet too, but a person at the front desk cannot see into it. Each room has the same number of tables.\n\nAt a planning meeting, one volunteer explained that the first trial must help people who did not come expecting to read. A sign alone has not worked in the past, so people should be able to notice the activity from the desk. Another volunteer added that the trial was meant to find out whether visitors would read when the room was calm, not when they had to ignore traffic.\n\nA recent tea break in the entrance room drew a large crowd. The hall will not serve tea beside the books during the trial. Each trial session will last half an hour.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which room best answers the volunteers’ two concerns for the trial?",
+            "right": "They should use the inner room.",
+            "wrong": [
+              "They should use the entrance room.",
+              "They should use the back room."
+            ],
+            "evidence": "The inner room is quiet and still visible through the open doorway by the welcome desk.",
+            "evidenceAlternatives": [
+              [
+                "The inner room is quiet and still visible through the open doorway by the welcome desk.",
+                "A sign alone has not worked in the past, so people should be able to notice the activity from the desk.",
+                "Another volunteer added that the trial was meant to find out whether visitors would read when the room was calm, not when they had to ignore traffic."
+              ]
+            ],
+            "explain": "The inner room can be noticed from the welcome desk and is quiet. The entrance is noticeable but noisy; the back room is quiet but out of sight.",
+            "hint": "One volunteer needs visibility; the other needs quiet. Check each room against both."
+          }
+        ]
+      },
+      {
+        "id": "INF5.P2",
+        "role": "practice",
+        "title": "Looking at River Samples",
+        "text": "Students tested three river samples with two methods. A lab strip can detect a change in acidity, and a marked jar shows how much solid material settles out. The sample called A changed the strip but left no layer in the jar. Sample B changed the strip and left a thick layer when it settled. Sample C did not change the strip, but it left a layer as thick as B’s. The labels do not say where any sample came from.\n\nThe teacher tells the students to review a claim about one sample collected below a clay bank. The particular sample, recorded under a temporary number, was unusual in two ways: it differed in acidity and left solids after standing. A student remembers seeing birds by the clay bank, though nobody looked for birds where the other samples were taken.\n\nAll three jars stood undisturbed for the same length of time. The students will look up the original notebook before they label the river sites on their poster.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which labelled sample most likely matches the temporary number?",
+            "right": "Sample B fits the two observations.",
+            "wrong": [
+              "Sample A fits the two observations.",
+              "Sample C fits the two observations."
+            ],
+            "evidence": "Sample B changed the strip and left a thick layer when it settled.",
+            "evidenceAlternatives": [
+              [
+                "Sample B changed the strip and left a thick layer when it settled.",
+                "The particular sample, recorded under a temporary number, was unusual in two ways: it differed in acidity and left solids after standing."
+              ],
+              [
+                "The sample called A changed the strip but left no layer in the jar.",
+                "Sample B changed the strip and left a thick layer when it settled.",
+                "Sample C did not change the strip, but it left a layer as thick as B’s.",
+                "The particular sample, recorded under a temporary number, was unusual in two ways: it differed in acidity and left solids after standing."
+              ]
+            ],
+            "explain": "A strip change leaves A or B, and a layer leaves B or C. The temporary record mentions both, so B is the match. This identifies the sample, not what caused its acidity.",
+            "hint": "Look separately at what the strip and what the settled jar can show."
+          }
+        ]
+      },
+      {
+        "id": "INF5.C1",
+        "role": "check",
+        "title": "The File Kept Overnight",
+        "text": "The archive used three labelled folders during a recent exhibition. The red folder held photographs and could be taken off the premises overnight. The grey folder held photographs too, but had to stay inside the archive. The tan folder could also be taken off the premises, but it was reserved for letters rather than photographs. All three used the same kind of slip to record a loan.\n\nAn assistant is now trying to match a slip to one of those folders. The top line of the slip describes three photographs being taken out. The next line confirms they were returned at opening time the following morning. A corner of the slip was torn away before anyone noticed that the folder colour was written there. Another assistant remembers handling the tan folder often, although she is not sure which day that happened.\n\nThe entry book confirms the rule about which material belongs in each folder. There is no record of a folder changing colour or being used for a different purpose during the exhibition.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which folder most likely went out with the missing slip?",
+            "right": "The red folder probably went out.",
+            "wrong": [
+              "The grey folder probably went out.",
+              "The tan folder probably went out."
+            ],
+            "evidence": "The red folder held photographs and could be taken off the premises overnight.",
+            "evidenceAlternatives": [
+              [
+                "The red folder held photographs and could be taken off the premises overnight.",
+                "The top line of the slip describes three photographs being taken out.",
+                "The next line confirms they were returned at opening time the following morning."
+              ],
+              [
+                "The red folder held photographs and could be taken off the premises overnight.",
+                "The grey folder held photographs too, but had to stay inside the archive.",
+                "The tan folder could also be taken off the premises, but it was reserved for letters rather than photographs.",
+                "The top line of the slip describes three photographs being taken out.",
+                "The next line confirms they were returned at opening time the following morning."
+              ]
+            ],
+            "explain": "Photographs could be in red or grey, but grey could not leave overnight. The date of return and the kind of material together point to red."
+          }
+        ]
+      },
+      {
+        "id": "INF5.C2",
+        "role": "check",
+        "title": "A Shortcut for Whom",
+        "text": "An exhibition has three ways in from the street. The east ramp is wide enough for a double pushchair, but it takes visitors directly to the food area without passing the ticket desk. The west ramp is also wide and passes the ticket desk before any exhibit. The main staircase passes the ticket desk too, but the barrier in the middle leaves too little room for a double pushchair. Visitors are not allowed to go upstream from the food area into the entrance queue.\n\nA family arrives before the show starts. The two children use a double pushchair that cannot be folded with them inside. Their tickets are waiting at the desk, and a helper reminds them that the tickets need to be picked up before entering any part of the exhibition. A different family already wearing tickets walks towards the east ramp at the same time.\n\nThe organisers have measured the routes rather than estimating from a map. None of the entrances is closed.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which route should the arriving family take?",
+            "right": "They should use the west ramp.",
+            "wrong": [
+              "They should use the east ramp.",
+              "They should use the main staircase."
+            ],
+            "evidence": "The west ramp is also wide and passes the ticket desk before any exhibit.",
+            "evidenceAlternatives": [
+              [
+                "The west ramp is also wide and passes the ticket desk before any exhibit.",
+                "The two children use a double pushchair that cannot be folded with them inside.",
+                "Their tickets are waiting at the desk, and a helper reminds them that the tickets need to be picked up before entering any part of the exhibition."
+              ],
+              [
+                "The east ramp is wide enough for a double pushchair, but it takes visitors directly to the food area without passing the ticket desk.",
+                "The west ramp is also wide and passes the ticket desk before any exhibit.",
+                "The main staircase passes the ticket desk too, but the barrier in the middle leaves too little room for a double pushchair.",
+                "The two children use a double pushchair that cannot be folded with them inside.",
+                "Their tickets are waiting at the desk, and a helper reminds them that the tickets need to be picked up before entering any part of the exhibition."
+              ]
+            ],
+            "explain": "The double pushchair needs a wide route, and their tickets must be collected on the way in. The west ramp does both, unlike the route chosen by a family that already has tickets."
+          }
+        ]
+      },
+      {
+        "id": "INF5.C3",
+        "role": "check",
+        "title": "What Counts as a Match",
+        "text": "Three volunteers offer one shift each for the community kitchen. Boomi is free after five and has completed the kitchen’s stock-count training. Yusuf has completed the same training, but his shift ends at five. Sana is free after five but has only worked on visitor sign-in. All three have helped prepare boxes before, so their names appear side by side on last month’s sheet.\n\nThe kitchen manager must check the remaining tins after the evening delivery arrives at six. The person doing the count also needs to know how to take damaged tins off the official list. That is part of stock-count training, not visitor sign-in. The kitchen cannot change the delivery time or ask a volunteer to stay longer than their stated shift.\n\nLast month Yusuf did the count at four, while Sana greeted the delivery driver. The manager has asked for one volunteer to be assigned the whole task this month, rather than splitting the count across two people.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Who should do the whole count this month?",
+            "right": "Boomi should do the count.",
+            "wrong": [
+              "Yusuf should do the count.",
+              "Sana should do the count."
+            ],
+            "evidence": "Boomi is free after five and has completed the kitchen’s stock-count training.",
+            "evidenceAlternatives": [
+              [
+                "Boomi is free after five and has completed the kitchen’s stock-count training.",
+                "The kitchen manager must check the remaining tins after the evening delivery arrives at six.",
+                "The person doing the count also needs to know how to take damaged tins off the official list.",
+                "That is part of stock-count training, not visitor sign-in."
+              ]
+            ],
+            "explain": "The person must be present after six and trained to record damaged stock. Boomi fits both. Last month’s earlier count does not make Yusuf available now."
+          }
+        ]
+      },
+      {
+        "id": "INF5.C4",
+        "role": "check",
+        "title": "The Useful Loan Record",
+        "text": "A sports centre has kept three versions of its equipment record. The morning notebook includes how many items were taken, but it does not say who borrowed them. The afternoon notebook records borrowers’ names as well as numbers. The evening sheet records names, but each row says only that a loan happened, not how many items it contained. The forms have the same club stamp at the top.\n\nAt the end of the term, someone finds a record of Iqbal returning six training cones. The matching loan row, now separated from its book, names him and says he took six cones. The row was copied onto a plain strip for an audit, so no printed heading is left. An unrelated note says Iqbal usually trains in the evening.\n\nA coach has not yet checked whether there was a second loan on the same day. The question is only which recorded form could contain the original row, given the information shown on that strip.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which version could contain the matching row?",
+            "right": "The afternoon notebook could contain it.",
+            "wrong": [
+              "The morning notebook could contain it.",
+              "The evening sheet could contain it."
+            ],
+            "evidence": "The afternoon notebook records borrowers’ names as well as numbers.",
+            "evidenceAlternatives": [
+              [
+                "The afternoon notebook records borrowers’ names as well as numbers.",
+                "The matching loan row, now separated from its book, names him and says he took six cones."
+              ],
+              [
+                "The morning notebook includes how many items were taken, but it does not say who borrowed them.",
+                "The afternoon notebook records borrowers’ names as well as numbers.",
+                "The evening sheet records names, but each row says only that a loan happened, not how many items it contained.",
+                "The matching loan row, now separated from its book, names him and says he took six cones."
+              ]
+            ],
+            "explain": "The strip includes both a name and a count. The morning record has only the count and the evening record only the name. The note about when he trains does not change the form’s fields."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 6,
+    "lessons": [
+      {
+        "skill": "inference",
+        "title": "What Changed on Saturdays?",
+        "strategy": "Combine separate kinds of evidence and be precise about the strength of the conclusion. A count, a comparison and a stated constraint do different jobs.",
+        "tip": "Ask what each clue rules out. Then choose the narrowest inference that uses both.",
+        "worked": {
+          "prompt": "What stronger inference does the second month support?",
+          "answer": "The new day reached at least some pupils whom the weekday hours did not reach.",
+          "steps": [
+            "The intended group was pupils who could not make weekday travel work. A Saturday total does not by itself identify them.",
+            "The sign-in records establish that five pupils came for the first time on Saturdays. Their comments supply the separate weekday travel constraint.",
+            "Both pieces support access for some new pupils, not a claim that every Saturday visitor was new or that the exact same result will hold elsewhere."
+          ]
+        }
+      }
+    ],
+    "passages": [
+      {
+        "id": "INF6.T",
+        "role": "teach",
+        "title": "What Changed on Saturdays?",
+        "text": "The makers’ room used to open only on weekday afternoons. Its members said this suited people who lived nearby, but one organiser pointed out that pupils from the outer villages often left school too late for the last bus. In March the room began opening on Saturdays as well. The committee wanted to know whether the new day mattered to people who could not use the weekday hours, rather than just attracting members who came on another day already.\nFor the first month a volunteer wrote each visitor’s home village beside the visit time, but she did not record names. Those Saturday notes showed more visits from outer villages than the weekday records did. The figures might reflect the same few pupils returning repeatedly, and they might include pupils who had already used the weekday hours. Encouraged by the total, a committee member proposed that the room apply for a grant with a statement about reaching previously excluded pupils.\nIn the second month the volunteer used the sign-in number each pupil had been given at registration. For five outer-village pupils, the records showed a first ever visit on a Saturday. Their comments said weekday travel had not been workable for them. Three other Saturday visitors were regulars from the weekday sessions. The committee agreed to include both numbers in a revised account rather than reporting just one total.",
+        "questions": []
+      },
+      {
+        "id": "INF6.P1",
+        "role": "practice",
+        "title": "A Sign of Safer Crossings",
+        "text": "The road committee ran two small trials to help people cross near the health centre. One trial used a volunteer who held up a bright board when a group was waiting. The other put a clearly painted waiting area on the pavement but used no volunteer. On both mornings a recorder stood at the same corner and noted cars that stopped before the crossing. The road was open to ordinary traffic, and neither trial moved the centre’s entrance.\n\nThe recorder’s tally showed that more drivers stopped during the first trial. However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen. The committee’s original question had been whether a board left by itself would change how drivers acted. At the review meeting the driver tally and the description of the volunteer’s actions were read from different pages of the record. Several members remembered only the overall tally from the two mornings.\n\nThe committee can afford one more morning of observation. It cannot ask the centre to change the time of its appointments. The group wants a small comparison whose interpretation will not depend on assuming a volunteer and an unattended board have the same effect. One member proposes printing the earlier tally in the centre’s newsletter; another asks for a separate trial before any change is made permanent.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which next observation directly addresses the uncertainty in the stronger tally?",
+            "right": "Compare an unattended board with no board while keeping the crossing routine the same.",
+            "wrong": [
+              "Compare two board colours while the volunteer actively asks drivers to stop on both mornings.",
+              "Compare one painted waiting area with another while leaving the board out of both."
+            ],
+            "evidence": "The recorder’s tally showed that more drivers stopped during the first trial.",
+            "evidenceAlternatives": [
+              [
+                "The recorder’s tally showed that more drivers stopped during the first trial.",
+                "However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen.",
+                "The committee’s original question had been whether a board left by itself would change how drivers acted."
+              ],
+              [
+                "One trial used a volunteer who held up a bright board when a group was waiting.",
+                "The recorder’s tally showed that more drivers stopped during the first trial.",
+                "However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen.",
+                "The committee’s original question had been whether a board left by itself would change how drivers acted."
+              ]
+            ],
+            "explain": "The tally improved in a trial where a volunteer also asked drivers to wait. The intended question is about the board alone. Keep the crossing routine the same and vary whether the unattended board is present.",
+            "hint": "Look for what was mixed into the first trial and what the original question was meant to isolate."
+          }
+        ]
+      },
+      {
+        "id": "INF6.P2",
+        "role": "practice",
+        "title": "Orders from the Terrace",
+        "text": "A school kitchen tested two ways of distributing snacks during the break. One week it opened a second window upstairs. The next week it put a rope line in front of the original window and asked pupils to approach in single file. The staff recorded the number of pupils served during the ten-minute break on both weeks. Their notes say the second window week produced the larger total. The kitchen used the same menu on each day of the trial.\n\nThe kitchen manager is deciding whether to add an upstairs window permanently. In one column of the log she notices that a second server was assigned whenever that window was open. In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved. Nobody tried that arrangement during either trial.\n\nThe first floor is harder to reach for pupils who cannot climb stairs easily. The manager wants the next test to find out whether the upstairs location itself increases service, rather than whether a second worker can help. The staff will compare the same break period and have no plans to change the menu. A teacher suggests using the previous total as a quick answer so that no further trial is needed.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which next comparison would help isolate the value of the upstairs location?",
+            "right": "Try two servers at one window compared with two servers split between floors.",
+            "wrong": [
+              "Try one server upstairs compared with two servers side by side on the ground floor.",
+              "Try the upstairs window with a new menu compared with the old ground floor menu."
+            ],
+            "evidence": "In one column of the log she notices that a second server was assigned whenever that window was open.",
+            "evidenceAlternatives": [
+              [
+                "In one column of the log she notices that a second server was assigned whenever that window was open.",
+                "In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved.",
+                "The manager wants the next test to find out whether the upstairs location itself increases service, rather than whether a second worker can help."
+              ]
+            ],
+            "explain": "The larger total came with a second server as well as a second location. The original window can accommodate two. Keep two servers in both trials so the layout, not staffing, is the main difference.",
+            "hint": "Find the extra change in the log and the alternative arrangement in the later file."
+          }
+        ]
+      },
+      {
+        "id": "INF6.C1",
+        "role": "check",
+        "title": "The Unlabelled Chart",
+        "text": "The city library tried three changes in three otherwise separate branches. At the museum branch, staff introduced an evening opening and gave visitors a stamped invitation to pass to a friend. At the station branch, staff introduced an evening opening but had no invitation scheme. At the square branch, staff gave out the stamped invitations but kept the same opening hours. The printing office supplied identical chart paper to all three branches, and the labels were meant to be added at the end of the month.\n\nIn the top drawer, a researcher finds a chart with no branch label. Every row is headed by a time that falls after the old closing hour, and the columns split visitors according to whether they brought a stamped invitation. The chart is in the same hand as three other charts, so handwriting cannot distinguish the branches. The other charts count visits before closing, with no separate column for stamps.\n\nThe researcher is checking a claim that can be tested only where attendance after old closing time can be compared for visitors with and without stamps. She will verify the branch with the original record before using it in her report. A note beside the drawer says staff from all three branches used the office at different times that month, so the chart’s location is not proof of its origin.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which branch could the unlabelled chart describe?",
+            "right": "The museum branch could have produced it.",
+            "wrong": [
+              "It could describe the station branch.",
+              "It could describe the square branch."
+            ],
+            "evidence": "At the museum branch, staff introduced an evening opening and gave visitors a stamped invitation to pass to a friend.",
+            "evidenceAlternatives": [
+              [
+                "At the museum branch, staff introduced an evening opening and gave visitors a stamped invitation to pass to a friend.",
+                "Every row is headed by a time that falls after the old closing hour, and the columns split visitors according to whether they brought a stamped invitation."
+              ],
+              [
+                "At the museum branch, staff introduced an evening opening and gave visitors a stamped invitation to pass to a friend.",
+                "At the station branch, staff introduced an evening opening but had no invitation scheme.",
+                "At the square branch, staff gave out the stamped invitations but kept the same opening hours.",
+                "Every row is headed by a time that falls after the old closing hour, and the columns split visitors according to whether they brought a stamped invitation."
+              ]
+            ],
+            "explain": "The chart needs visits after old closing time and an invitation stamp measure. Station supplies the first only, square the second only, and museum both. The drawer location does not identify the origin."
+          }
+        ]
+      },
+      {
+        "id": "INF6.C2",
+        "role": "check",
+        "title": "Which Queue Was Longer?",
+        "text": "A group at the community hall tested different ways of handing out lunch on two afternoons. On the first afternoon volunteers used a single long queue. The second afternoon they asked people collecting one meal to go to a smaller table beside the exit, while people with several orders used the main counter. The same baker supplied the rolls, and the hall stayed open for the same hour. A wall clock by the door was used for all the timing notes.\n\nAfterwards the count showed fewer people waiting near the main counter on the second day. One volunteer took this as proof that each person had been served more quickly. The tally, however, left out the smaller queue by the exit. The keeper of the time sheet also says she stopped recording when people reached either counter, not when they received their meals. A delivery delay had left both teams short of some rolls for several minutes.\n\nThe organisers can repeat the split-queue arrangement next week. The volunteer who reads the clock will be asked to write down roughly the same number of times as before. The hall manager wants a fairer comparison of how long the whole visit takes, and asks whether the main-counter head count should be the headline number in the report.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "What would the report need to test whether the new layout shortened a visit?",
+            "right": "Time people in both queues from their arrival until they get lunch.",
+            "wrong": [
+              "Count the main counter line again at several points in the hour.",
+              "Time visits in both queues only until people reach the counter."
+            ],
+            "evidence": "The tally, however, left out the smaller queue by the exit.",
+            "evidenceAlternatives": [
+              [
+                "The tally, however, left out the smaller queue by the exit.",
+                "The keeper of the time sheet also says she stopped recording when people reached either counter, not when they received their meals."
+              ]
+            ],
+            "explain": "The count leaves one queue out, and the timing stops before the meal is received. Measure both queues and include the time after the customer reaches the counter."
+          }
+        ]
+      },
+      {
+        "id": "INF6.C3",
+        "role": "check",
+        "title": "What the Bakery Record Shows",
+        "text": "A training bakery tried three changes to reduce the number of loaves left unsold. During the first trial, staff announced the afternoon collection time in advance and baked the usual number of loaves. During the second trial, they announced the collection time and baked fewer loaves. During the third, they baked fewer loaves but put up no collection notice. They offered the same kind of loaf throughout, at the same price, and used the same back counter on all trial days.\n\nOne entry in the trial book is missing its number. In the margin it says that the baking team had worked from the smaller batch list. The cashier added a separate note: two customers had arrived at the announced time and pointed to the new notice when they asked where to collect their loaves. The sales figures are on a different sheet, which has not yet been checked. One baker remembers that the unlabelled entry was written on a day when it rained, but the weather log shows rain on more than one trial day.\n\nThe instructor is using the entry to find out which trial took place that day, not to settle which change has the greatest effect on waste. She asks the trainees to keep the identification of the trial separate from any later claim about the sales figures.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which trial took place on the day of the unlabelled entry?",
+            "right": "The bakery was running trial two.",
+            "wrong": [
+              "The bakery was running trial one.",
+              "The bakery was running trial three."
+            ],
+            "evidence": "During the second trial, they announced the collection time and baked fewer loaves.",
+            "evidenceAlternatives": [
+              [
+                "During the second trial, they announced the collection time and baked fewer loaves.",
+                "In the margin it says that the baking team had worked from the smaller batch list.",
+                "The cashier added a separate note: two customers had arrived at the announced time and pointed to the new notice when they asked where to collect their loaves."
+              ],
+              [
+                "During the first trial, staff announced the afternoon collection time in advance and baked the usual number of loaves.",
+                "During the second trial, they announced the collection time and baked fewer loaves.",
+                "During the third, they baked fewer loaves but put up no collection notice.",
+                "In the margin it says that the baking team had worked from the smaller batch list.",
+                "The cashier added a separate note: two customers had arrived at the announced time and pointed to the new notice when they asked where to collect their loaves."
+              ]
+            ],
+            "explain": "A smaller batch fits trials two and three. The collection notice fits trials one and two. Only trial two fits both. The entry cannot settle which change caused a fall in waste."
+          }
+        ]
+      },
+      {
+        "id": "INF6.C4",
+        "role": "check",
+        "title": "The Repair Stall Returns",
+        "text": "At the start of the year, a repair stall in the market opened on weekday mornings. A small notice hung above the stall, and most of the people who brought items lived within walking distance. In July, the organisers sent an announcement to two nearby colleges and began opening on Saturday. They hoped a later opening would reach people who worked on weekdays. The table, prices and range of repairs stayed the same.\n\nA month later, the organisers found that many more customers were using the stall. One member wanted to report that Saturday opening had brought in the college students. The registration cards had no date field, so although several people named a college, there was no way to tell which day they came. A set of small receipts does include the day of each repair, but does not name the customer or mention a college. The receipt sequence is not the same as the order of the loose registration cards.\n\nAnother member has agreed to collect both kinds of information on one sheet next month, before any announcement goes out again. She says the July records are still worth keeping, but an attractive explanation should not be presented as a checked finding. The organisers are deciding how to write up the trial without overstating what can be joined across the two records.",
+        "questions": [
+          {
+            "skill": "inference",
+            "prompt": "Which conclusion is best supported about the claim that the Saturday session attracted the college students?",
+            "right": "The claim is possible, but no record links a college student to a Saturday visit.",
+            "wrong": [
+              "The claim is established because the college names and dates appear in the same records.",
+              "The claim is disproved because the Saturday receipts do not list students by name."
+            ],
+            "evidence": "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
+            "evidenceAlternatives": [
+              [
+                "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
+                "A set of small receipts does include the day of each repair, but does not name the customer or mention a college."
+              ],
+              [
+                "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
+                "A set of small receipts does include the day of each repair, but does not name the customer or mention a college.",
+                "The receipt sequence is not the same as the order of the loose registration cards."
+              ]
+            ],
+            "explain": "The registration cards identify some college customers without the day. The receipts identify days without the customer. Neither supports a link by itself, and the records cannot be safely paired."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -15,7 +15,7 @@
  */
 import { CHECK_SIZE, LEVELS, SKILL_IDS, lessonFor, questionsFor, unitKey, type Course, type Lesson, type Level, type Passage, type Question, type SkillId, type Unit } from "./course.ts";
 
-import {assessSentences,validateSentenceSelection,type SentenceFinding} from './check-evidence.ts';
+import {assessSentences,supportingSets,validateSentenceSelection,type SentenceFinding} from './check-evidence.ts';
 export interface CheckCheckpoint {version:1;questions:string[];signatures:string[];mode:Mode;helped:boolean;index:number;answers:{choice:number;sentences?:number[]}[];draft:{choice:number|null;sentences:number[];locked:boolean};exposures:number[];familiar:boolean[];}
 const questionSignature=(course:Course,q:Question)=>JSON.stringify([q.prompt,q.options,q.answer,q.evidence,q.evidenceAlternatives,course.passages.get(q.passage)!.text]);
 const exposureCount=(course:Course,records:readonly ReadingRecord[],passage:string)=>records.filter(r=>r.type==='shown'&&course.questions.find(q=>q.id===r.question)?.passage===passage).length;
@@ -37,6 +37,7 @@ export type ReadingRecord =
   /** Written before the question is displayed. */
   | { type: "shown"; unit: Unit; question: string; use: "practice" | "check" }
   | { type: "hint"; unit: Unit; question: string; rung: number }
+  | { type: "practice_clues"; unit: Unit; question: string; sentences: number[]; finding: SentenceFinding }
   | { type: "practice_answer"; unit: Unit; question: string; choice: number; correct: boolean; hints: number }
   | { type: "check_result"; unit: Unit; answers: { question: string; choice: number; correct: boolean; sentences?: number[]; evidenceFinding?: SentenceFinding }[]; passed: boolean; label: EvidenceLabel | null };
 
@@ -155,6 +156,7 @@ export interface PracticeView {
   /** After solving or revealing: the right option and why. */
   answer: { index: number; explain: string } | null;
   canHint: boolean;
+  clues?: { selected:number[]; finding:SentenceFinding|null; sets:number[][]|null };
 }
 export interface CheckReview {
   question: ShownQuestion;
@@ -202,6 +204,8 @@ export class ReadingUnitSession {
   private pWrong: number[] = [];
   private pSolved = false;
   private pRevealed = false;
+  private pClues:number[]=[];
+  private pClueFinding:SentenceFinding|null=null;
   private checkQs: Question[] = [];
   private cIndex = 0;
   private cAnswers: number[] = [];
@@ -280,6 +284,7 @@ export class ReadingUnitSession {
           revealed: this.pRevealed,
           answer: done ? { index: q.answer, explain: q.explain } : null,
           canHint: !done && this.pHints < HINT_RUNGS,
+          ...(q.skill=== "inference" && done ? {clues:{selected:[...this.pClues],finding:this.pClueFinding,sets:this.pClueFinding?supportingSets(this.course,q):null}}:{}),
         },
       };
     }
@@ -306,7 +311,7 @@ export class ReadingUnitSession {
     this.pHints = 0;
     this.pWrong = [];
     this.pSolved = false;
-    this.pRevealed = false;
+    this.pRevealed = false;this.pClues=[];this.pClueFinding=null;
     this.log.push({ type: "shown", unit: this.unit, question: this.practiceQs[i].id, use: "practice" });
   }
   /** Practice: one more rung of help (the strategy, a nudge for this question, then the part of the text to reread). */
@@ -329,9 +334,19 @@ export class ReadingUnitSession {
       else this.hint();
     }
   }
+  selectPracticeClues(sentences:number[]):void {
+    if(this.phase!=="practice"||this.unit.skill!=="inference"||!(this.pSolved||this.pRevealed)||this.pClueFinding)return;
+    validateSentenceSelection(this.course,this.practiceQs[this.pIndex],sentences,true);this.pClues=[...sentences];
+  }
+  checkPracticeClues():void {
+    if(this.phase!=="practice"||this.unit.skill!=="inference"||!(this.pSolved||this.pRevealed)||this.pClueFinding||!this.pClues.length)return;
+    const q=this.practiceQs[this.pIndex];this.pClueFinding=assessSentences(this.course,q,this.pClues);
+    this.log.push({type:"practice_clues",unit:this.unit,question:q.id,sentences:[...this.pClues],finding:this.pClueFinding});
+  }
   /** Practice: the next practice question, or the fresh check after the last one. */
   nextPractice(): void {
     if (this.phase !== "practice" || !(this.pSolved || this.pRevealed)) return;
+    if(this.unit.skill==="inference"&&!this.pClueFinding)return;
     if (this.pIndex + 1 < this.practiceQs.length) this.openPractice(this.pIndex + 1);
     else this.startCheck();
   }

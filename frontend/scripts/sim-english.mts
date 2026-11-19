@@ -167,6 +167,7 @@ function run(p: Persona, days: number, seed: number) {
 
   const words: Dated[] = [];
   const reading: ReadingRecord[] = [];
+  let inferenceVisits=0;
   const dictation: DictationRecord[] = [];
   const passages: ListenRecord[] = [];
   const grammar: GrammarRecord[] = [];
@@ -213,7 +214,8 @@ function run(p: Persona, days: number, seed: number) {
     });
     // Reading: the unit the course recommends
     guard("reading", () => {
-      const rec = recommend(COURSE, readingProgress(COURSE, reading), (levels.reading?.start ?? 1) as Level);
+      // First sitting explicitly chooses the new map skill; later sittings use the ordinary recommendation.
+      const rec = day===0 ? {unit:{skill:"inference" as const,level:(levels.reading?.start??1) as Level}} : recommend(COURSE, readingProgress(COURSE, reading), (levels.reading?.start ?? 1) as Level);
       if (!rec) return void stats.reading.stuck++;
       let s = new ReadingUnitSession(COURSE, rec.unit, "learn", reading);
       let resumed=false;
@@ -226,7 +228,10 @@ function run(p: Persona, days: number, seed: number) {
           else s.startPractice();
         } else if (v.phase === "practice") {
           const pv = v.practice;
-          if (pv.solved || pv.revealed) s.nextPractice();
+          if (pv.solved || pv.revealed) {
+            if(pv.clues&&!pv.clues.finding){const q=COURSE.questions.find(x=>x.id===pv.question.id)!;s.selectPracticeClues(supportingSets(COURSE,q)[0]);s.checkPracticeClues();}
+            s.nextPractice();
+          }
           else {
             const q = COURSE.questions.find((x) => x.id === pv.question.id)!;
             const ok = m.right("reading", q.level, q.options.length - pv.wrong.length);
@@ -249,7 +254,7 @@ function run(p: Persona, days: number, seed: number) {
         }
       }
       if (s.snapshot().phase === "no_fresh_check") stats.reading.stuck++;
-      const result=s.snapshot();if(result.phase==='result'&&result.result.review.some(r=>!r.evidenceFinding))throw Error('reading: evidence selection was skipped');
+      const result=s.snapshot();if(rec.unit.skill==='inference'&&result.phase==='result')inferenceVisits++;if(result.phase==='result'&&result.result.review.some(r=>!r.evidenceFinding))throw Error('reading: evidence selection was skipped');
       for (const r of s.take()) reading.push(r);
       note(stats.reading, rec.unit.level, right, asked);
       m.learn("reading", rec.unit.level);
@@ -340,11 +345,12 @@ function run(p: Persona, days: number, seed: number) {
     });
   }
   for (const s of STREAMS) stats[s].abilityEnd = m.ability[s];
-  // reading moves skill by skill: its level at the end is the highest level passed, averaged over the six skills
+  // reading moves skill by skill: its level at the end is the highest level passed, averaged over the seven skills
   const rp = readingProgress(COURSE, reading);
   const best = COURSE.skills.map((k) => Math.max(0, ...COURSE.levels.map((l) => l.id).filter((lv) => ["passed_own", "passed_after_help"].includes(rp.units.get(`${k.id}@${lv}`)?.status ?? ""))));
   stats.reading.levels.push(best.reduce((a, b) => a + b, 0) / best.length);
-  return { name: p.name, about: p.about, stats, firstWords };
+  if(days>0&&!inferenceVisits)stats.reading.errors.push("new inference skill was not traversed");
+  return { name: p.name, about: p.about, stats, firstWords, inferenceVisits };
 }
 
 // ---------------------------------------------------------------- report
@@ -377,7 +383,7 @@ const results = PERSONAS.map((p) => {
       ];
     }),
   ) as Record<Stream, { ability: number; placed: number; placedNear: number; abilityEnd: number; levelEnd: number; tooHard: number; tooEasy: number; flips: number; repeats: number; stuck: number; errors: string[] }>;
-  return { name: p.name, about: p.about, per, firstWords: runs.filter((r) => r.firstWords).length / RUNS };
+  return { name: p.name, about: p.about, per, inferenceVisits: runs.map(r=>r.inferenceVisits), firstWords: runs.filter((r) => r.firstWords).length / RUNS };
 });
 const NAMES: Record<Stream, string> = { words: "Words", reading: "Reading", dictation: "Listen and write", passages: "Listen and answer", grammar: "Grammar in use" };
 const f1 = (x: number) => (x < 0.95 ? "below 1" : x.toFixed(1));
@@ -397,6 +403,7 @@ for (const s of STREAMS) {
 }
 lines.push(`## Sent to First words by Find my level`, ``, `| Learner | Share of runs |`, `|---|---:|`, ...results.map((r) => `| ${r.name} | ${pct(r.firstWords)} |`), ``);
 lines.push(`## The learners`, ``, ...PERSONAS.map((p) => `- **${p.name}**: ${p.about}.`), ``);
+lines.push("## Reading between the lines coverage", "", "First daily Reading sitting explicitly chooses this skill on the map; later visits follow recommendations. Counts are completed synthetic sessions, not learning evidence.", "", ...results.map(r=>`${r.name}: ${r.inferenceVisits.filter(n=>n>0).length}/${RUNS} runs completed the new skill.`));
 const md = lines.join("\n");
 const out = opt("--out", "");
 if (out) writeFileSync(out, JSON.stringify({ days, results }, null, 1));
