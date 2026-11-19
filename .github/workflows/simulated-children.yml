@@ -1,0 +1,77 @@
+name: Simulated children
+# sim@1: eight simulated children (strong, average, weak, one with a gap, one with a misconception, a careless one, a
+# guesser, one who leans on help) take every skill of a class through the real engine over up to eight sittings. Each
+# has a hidden amount they truly know, which rises only when the product teaches them. Reported: what the product marks
+# mastered, whether it was fooled, who was never taught, who was handed to a teacher or parent, how many questions it
+# took. Behaviour only; report only. No language model is called; nothing is deployed.
+on:
+  workflow_dispatch:
+    inputs:
+      board: { description: "icse, cbse or tn", default: "icse" }
+      grade: { description: "class (icse has 5 only)", default: "5" }
+  schedule:
+    - cron: "40 21 * * *" # 03:10 IST, nightly: ICSE Class 5
+  pull_request:
+    paths: [".github/workflows/simulated-children.yml", "frontend/scripts/sim-children.mts"]
+permissions:
+  contents: read
+concurrency:
+  group: simulated-children-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  child:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        persona: [strong, average, weak, gap, misconception, careless, guesser, leans-on-help]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: node --import tsx scripts/sim-children.mts
+        working-directory: frontend
+        env:
+          BOARD: ${{ inputs.board || 'icse' }}
+          GRADE: ${{ inputs.grade || '5' }}
+          PERSONA: ${{ matrix.persona }}
+          OUT: sim-${{ matrix.persona }}.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sim-${{ matrix.persona }}
+          path: frontend/sim-${{ matrix.persona }}.json
+          retention-days: 14
+  report:
+    needs: child
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: sim-*
+          path: frontend/parts
+          merge-multiple: true
+      - working-directory: frontend
+        run: |
+          node --import tsx scripts/sim-children.mts --merge parts/sim-*.json --report sim-report.md
+          cat sim-report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sim-report
+          path: frontend/sim-report.md
+          retention-days: 90

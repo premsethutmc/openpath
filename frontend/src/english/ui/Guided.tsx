@@ -2,12 +2,99 @@
  * Tasks to do with a grown-up: the task for the learner, what the adult looks for, and a record of what they
  * ticked. The app does not hear or mark anything here, and says so.
  */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { LIMIT, checkWriting, type WritingCheck } from "../logic/writing/check.ts";
+import { AI_LIMIT, CONSENT_TEXT, MARK, MET_WORD, notReady, type Feedback, type FeedbackService, type FeedbackStatus } from "../logic/writing/feedback.ts";
 import { GUIDED, done, guidedSummary, tasksFor, wordCount, type GuidedSummary, type GuidedTask } from "../logic/guided/guided.ts";
 
-function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
+/**
+ * AI feedback on one piece: offered only where the server has it switched on, after a parent's yes, and once the
+ * free check is clean. The feedback stays on the screen until the writing changes; it is never stored.
+ */
+export function AiFeedback({ task, text, check, service }: { task: GuidedTask; text: string; check: WritingCheck | null; service: FeedbackService }) {
+  const [status, setStatus] = useState<FeedbackStatus | null>(null);
+  const [agreed, setAgreed] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [got, setGot] = useState<{ text: string; feedback: Feedback } | null>(null);
+  useEffect(() => {
+    let live = true;
+    service.status().then((s) => live && setStatus(s)).catch(() => live && setStatus(null));
+    return () => void (live = false);
+  }, [service]);
+  if (!status?.available || !task.write) return null;
+  const feedback = got && got.text === text ? got.feedback : null;
+  const wait = notReady(check, task.write);
+  const left = feedback ? feedback.left : status.left;
+  const run = async (fn: () => Promise<void>) => {
+    setBusy(true);
+    setError("");
+    try {
+      await fn();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "That did not work. Try again.");
+      // a refused or failed request may still have used one of the week's pieces: ask the server how many are left
+      await service.status().then(setStatus).catch(() => undefined);
+    }
+    setBusy(false);
+  };
+  return (
+    <div className="ai-feedback" data-ai={feedback ? "answered" : wait ? "waiting" : !status.consent ? "consent" : left ? "ready" : "used"}>
+      <b>AI feedback</b>
+      {feedback ? (
+        <div role="status">
+          <ul>
+            {feedback.points.map((p, i) => (
+              <li key={i} data-met={p.met}>
+                <span aria-hidden="true">{MARK[p.met]}</span> <b>{feedback.look[i]}:</b> {MET_WORD[p.met]}. {p.note}
+              </li>
+            ))}
+            <li data-strength>
+              <span aria-hidden="true">★</span> {feedback.strength}
+            </li>
+            <li data-next>
+              <span aria-hidden="true">→</span> <b>Next time:</b> {feedback.next}
+            </li>
+          </ul>
+          <p className="small">
+            {AI_LIMIT} {feedback.left} of {status.limit} left this week.
+          </p>
+        </div>
+      ) : wait ? (
+        <p className="small">{wait}</p>
+      ) : !status.consent ? (
+        <>
+          <label className="guided-look">
+            <input type="checkbox" checked={agreed} onChange={() => setAgreed(!agreed)} /> {CONSENT_TEXT}
+          </label>
+          <button type="button" className="secondary" disabled={!agreed || busy} onClick={() => void run(async () => (await service.agree(true), setStatus({ ...status, consent: true })))}>
+            Agree
+          </button>
+        </>
+      ) : left ? (
+        <button type="button" className="secondary" disabled={busy} onClick={() =>
+            void run(async () => {
+              const feedback = await service.ask(task.id, text, check!.notes.map((n) => n.id));
+              setGot({ text, feedback });
+              setStatus({ ...status, left: feedback.left });
+            })
+          }>
+          {busy ? "Reading your writing …" : `Ask for AI feedback (${left} of ${status.limit} left this week)`}
+        </button>
+      ) : (
+        <p className="small">This week's {status.limit} pieces of AI feedback are used. More come on Monday.</p>
+      )}
+      {error && (
+        <p className="warning" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?: FeedbackService; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
   const [seen, setSeen] = useState<number[]>([]);
   const [text, setText] = useState("");
   const [self, setSelf] = useState<number[]>([]);
@@ -75,6 +162,7 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
                   <p className="small">{LIMIT}</p>
                 </div>
               )}
+              {feedback && <AiFeedback task={task} text={text} check={check} service={feedback} />}
               <p className="small">Check your own work first:</p>
               {task.self!.map((l, i) => (
                 <label key={`s${i}`} className="guided-look">
@@ -98,7 +186,7 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
   );
 }
 
-export function GuidedView({ tasks, summary, heading, onDone, onBack }: { tasks: GuidedTask[]; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
+export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack }: { tasks: GuidedTask[]; feedback?: FeedbackService; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
   const writing = tasks.some((t) => t.write);
   return (
     <main className="page vocab guided" aria-labelledby="guided-title">
@@ -111,14 +199,14 @@ export function GuidedView({ tasks, summary, heading, onDone, onBack }: { tasks:
       </h1>
       <p className="sub">{writing ? "Write to the task, check your own work against the list, then show it to a grown-up, who ticks what they see. The app does not keep or mark the writing." : "These are done aloud or away from the screen. The app cannot hear or mark them: a grown-up listens and ticks what they saw."}</p>
       {tasks.map((t) => (
-        <TaskTile key={t.id} task={t} was={summary.done.get(t.id)} onDone={(seen, w) => onDone(t, seen, w)} />
+        <TaskTile key={t.id} task={t} was={summary.done.get(t.id)} feedback={feedback} onDone={(seen, w) => onDone(t, seen, w)} />
       ))}
       {!tasks.length && <p>There are no tasks for this line yet.</p>}
     </main>
   );
 }
 
-export function GuidedTasks({ learner, syllabus, outcome, heading, onLeave, onChanged }: { learner: Learner; syllabus: string; outcome?: string; heading: string; onLeave: () => void; onChanged: () => void }) {
+export function GuidedTasks({ learner, syllabus, outcome, heading, feedback, onLeave, onChanged }: { learner: Learner; feedback?: FeedbackService; syllabus: string; outcome?: string; heading: string; onLeave: () => void; onChanged: () => void }) {
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<ReturnType<typeof done>[]>([]);
   const [, setTick] = useState(0);
@@ -143,7 +231,7 @@ export function GuidedTasks({ learner, syllabus, outcome, heading, onLeave, onCh
           This could not be saved. Check the connection; saving the next task will try again.
         </p>
       )}
-      <GuidedView tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
+      <GuidedView tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} feedback={feedback} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
     </>
   );
 }

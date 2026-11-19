@@ -2810,3 +2810,20 @@ h3.sub {
 .writing-notes li[data-level="fix"] {
   font-weight: 600;
 }
+
+.ai-feedback {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 10px 0;
+}
+.ai-feedback ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  gap: 8px;
+}
+.ai-feedback li {
+  line-height: 1.4;
+}

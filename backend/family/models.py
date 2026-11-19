@@ -380,6 +380,38 @@ class WordProblemUse(models.Model):
         constraints = [models.UniqueConstraint(fields=["user", "day"], name="word_problem_use_user_day")]
 
 
+class WritingFeedbackConsent(models.Model):
+    """writing-feedback@1: a parent's yes or no to sending one pupil's writing to the language model. The latest record
+    for a pupil wins, so it can be withdrawn. Nothing is sent for a pupil without a yes."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="writing_feedback_consents")
+    granted = models.BooleanField()
+    policy_version = models.CharField(max_length=40)
+    recorded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["recorded_at", "id"]
+
+
+class WritingFeedbackUse(models.Model):
+    """writing-feedback@1: one piece of writing sent for feedback. No writing and no feedback is kept: only which task,
+    a fingerprint of the text (so the same piece is not paid for twice), the week it counts in, and the tokens used.
+    The weekly limit per pupil is counted from these rows."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="writing_feedback_use")
+    week = models.DateField(help_text="The Monday of the week this piece counts in.")
+    task = models.CharField(max_length=40)
+    fingerprint = models.CharField(max_length=40)
+    answered = models.BooleanField(default=False)
+    input_tokens = models.PositiveIntegerField(default=0)
+    output_tokens = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at", "id"]
+        indexes = [models.Index(fields=["pupil", "week"], name="writing_fb_pupil_week")]
+
+
 class Feedback(models.Model):
     """feedback@1: a tester ticked what is wrong with a question or lesson (wrong answer, unhelpful lesson, cluttered,
     looks broken), with an optional short note. Where it was (a question id or lesson id) and the screen width are kept
