@@ -12,7 +12,7 @@ import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
-import { streamRows, type StreamId } from "../logic/streams/streams.ts";
+import { NAMING_TOPIC, streamRows, type StreamId, type StreamRow } from "../logic/streams/streams.ts";
 import { GRAMMAR, grammarSummary } from "../logic/grammar-use/grammar-use.ts";
 import { listenSummary } from "../logic/listening/passages.ts";
 import { SYLLABUSES, coverage as syllabusCoverage } from "../logic/syllabus/syllabus.ts";
@@ -34,7 +34,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: () => void; onSyllabus: () => void; onListenAnswer: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   // once a level is found, "Your English today" leads and the rest is folded away; before that everything is open.
   // an unfinished General English activity keeps that part open.
@@ -76,7 +76,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse())}
+            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>All activities</span>
@@ -88,7 +88,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               <ReadingCard learner={learner} onOpen={onReading} />
               <ListenWriteCard learner={learner} onOpen={onListenWrite} />
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
-              <GrammarUseCard learner={learner} onOpen={onGrammarUse} />
+              <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />
               <BeeCard learner={learner} onBee={onBee} />
               <VocabCard learner={learner} onOpen={onVocab} />
             </div>
@@ -288,7 +288,7 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
  * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
  * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
  */
-function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: "mywords" | "passage") => void }) {
+function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: StreamRow["open"]) => void }) {
   if (!learner.levels().done)
     return (
       <section className="hub-card level-cta" aria-labelledby="level-cta-title">

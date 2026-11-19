@@ -18,11 +18,18 @@
  */
 import { OLD_LEVELS, mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
 import { SCALE, rescale } from "../scale.ts";
+import { checkSpot, fixParts, spotWords, type Ask, type GrammarItem, type GrammarUse } from "../grammar-use/grammar-use.ts";
 import { checkSpelling, type SpellWord } from "../spelling.ts";
 import { OLD_LEVELS as READING_OLD, type Course, type Level, type Passage, type Question, type SkillId } from "../reading/course.ts";
 
-export type Part = "words" | "reading" | "listening" | "spelling";
-export const PARTS: Part[] = ["words", "reading", "listening", "spelling"];
+export type Part = "words" | "reading" | "listening" | "spelling" | "grammar";
+export const PARTS: Part[] = ["words", "reading", "listening", "spelling", "grammar"];
+/** Every part starts in the middle of its scale, whatever the learner's age or class: the answers move it from there. */
+export const MIDDLE = { reading: 3, listening: 3, spelling: 3, grammar: 3 } as const;
+/** The grammar part: two naming-words questions (a noun, a verb), then four on a staircase of levels. */
+export const GRAMMAR_BASICS: Ask[] = ["noun", "verb"];
+export const GRAMMAR_STEPS = 6;
+export const GRAMMAR_MOVES = [2, 1, 1, 1];
 export const WORD_ROUNDS = 4;
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
 export const READING_PASS = 3;
@@ -40,6 +47,7 @@ export type LevelCheckRecord =
   | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
+  | { type: "grammar"; level: number; scale?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
 
@@ -51,11 +59,13 @@ export interface Levels {
   reading: { passed: number; start: number } | null;
   listening: { level: number } | null;
   spelling: { level: number } | null;
+  /** basics: both naming-words questions (a noun, a verb) were right. */
+  grammar: { level: number; basics: boolean } | null;
 }
 
 /** The latest level found for each part. */
 export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 5): Levels {
-  const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null };
+  const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null, grammar: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
@@ -65,6 +75,7 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     }
     if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
     if (r.type === "spelling") out.spelling = { level: r.level };
+    if (r.type === "grammar") out.grammar = { level: r.level, basics: r.basics.right >= r.basics.asked };
   }
   return out;
 }
@@ -259,5 +270,74 @@ export class SpellingPlacement {
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
     return this.finished ? { phase: "done", index: this.steps.length, total: SPELLING_STEPS, id: null } : { phase: "write", index: this.steps.length, total: SPELLING_STEPS, id: this.current!.id };
+  }
+}
+
+export interface GrammarPlacementView {
+  phase: "ask" | "done";
+  index: number;
+  total: number;
+  id: string | null;
+  /** The sentence as words to tap: no answer key. */
+  words: string[];
+  /** What to tap: a word of a kind, or the one wrong word. */
+  task: { kind: "spot"; ask: Ask } | { kind: "fix" } | null;
+}
+
+/**
+ * The grammar part, by tapping only: first a noun and a verb to find (the basics, asked of everyone), then four
+ * sentences on a staircase of levels, each either a kind of word to find or one wrong word to tap. A wide first
+ * move, then single steps. The level is the highest one answered right.
+ */
+export class GrammarPlacement {
+  private readonly items: GrammarItem[];
+  private readonly top: number;
+  private level: number;
+  private current: GrammarItem | null = null;
+  private basics: { id: string; correct: boolean }[] = [];
+  private steps: { id: string; level: number; correct: boolean }[] = [];
+
+  constructor(content: GrammarUse, start: number) {
+    this.items = content.items.filter((it) => it.kind !== "build").map((it) => ({ it, k: hash(`level-check|${it.id}`) })).sort((a, b) => a.k - b.k || (a.it.id < b.it.id ? -1 : 1)).map((x) => x.it);
+    this.top = Math.max(1, ...content.levels.map((l) => l.id));
+    this.level = Math.min(this.top, Math.max(1, start));
+    this.load();
+  }
+
+  private load(): void {
+    const used = new Set([...this.basics, ...this.steps].map((s) => s.id));
+    const ask = GRAMMAR_BASICS[this.basics.length];
+    const lowest = (pool: GrammarItem[]) => pool.sort((a, b) => a.level - b.level)[0] ?? null;
+    if (ask) this.current = lowest(this.items.filter((it) => it.kind === "spot" && it.ask === ask && !used.has(it.id)));
+    else this.current = this.items.find((it) => it.level === this.level && !used.has(it.id)) ?? null;
+  }
+
+  get finished(): boolean {
+    return this.basics.length + this.steps.length >= GRAMMAR_STEPS || !this.current;
+  }
+
+  answer(tapped: number): void {
+    const it = this.current;
+    if (this.finished || !it) return;
+    const words = it.kind === "spot" ? spotWords(it) : fixParts(it).words;
+    if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
+    const correct = it.kind === "spot" ? checkSpot(it, tapped) : tapped === fixParts(it).wrong;
+    if (this.basics.length < GRAMMAR_BASICS.length) this.basics.push({ id: it.id, correct });
+    else {
+      this.steps.push({ id: it.id, level: it.level, correct });
+      this.level = Math.min(this.top, Math.max(1, this.level + (correct ? 1 : -1) * (GRAMMAR_MOVES[this.steps.length - 1] ?? 1)));
+    }
+    this.load();
+  }
+
+  result(): { level: number; scale: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] } {
+    return { level: Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level)), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
+  }
+
+  snapshot(): GrammarPlacementView {
+    const it = this.current;
+    const index = this.basics.length + this.steps.length;
+    if (this.finished || !it) return { phase: "done", index, total: GRAMMAR_STEPS, id: null, words: [], task: null };
+    return it.kind === "spot" ? { phase: "ask", index, total: GRAMMAR_STEPS, id: it.id, words: spotWords(it), task: { kind: "spot", ask: it.ask! } } : { phase: "ask", index, total: GRAMMAR_STEPS, id: it.id, words: fixParts(it).words, task: { kind: "fix" } };
   }
 }

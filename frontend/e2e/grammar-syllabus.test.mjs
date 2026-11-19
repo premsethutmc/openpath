@@ -57,7 +57,13 @@ async function answer(page, wrong) {
   await main.waitFor();
   const it = ITEMS.get(await main.getAttribute("data-item"));
   assert.ok(it, "a sentence of the bank");
-  if (it.kind === "fix") {
+  if (it.kind === "spot") {
+    const words = it.sentence.split(" ");
+    const isRight = (w) => it.right.includes(w.replace(/[^A-Za-z']/g, ""));
+    await page.getByText(new RegExp(`^Tap an? ${it.ask} in this sentence\\.$`)).waitFor();
+    await page.locator(".grammar-word").nth(words.findIndex((w) => isRight(w) !== wrong)).click();
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+  } else if (it.kind === "fix") {
     const words = it.sentence.split(" ");
     const at = words.findIndex((w) => w.includes("["));
     assert.equal(await page.locator(".grammar-word").count(), words.length);
@@ -84,8 +90,8 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
   await page.getByText("Level 3: Apostrophes, verbs and joining").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
-  const missed = { fix: false, build: false };
-  const shots = { fix: false, build: false };
+  const missed = { fix: false, build: false, spot: false };
+  const shots = { fix: false, build: false, spot: false };
   let right = 0;
   for (let i = 1; i <= 8; i++) {
     await page.getByText(`Sentence ${i} of 8`, { exact: false }).waitFor();
@@ -99,7 +105,7 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
     if (wrong) await fits(), await shot(page, `2-${kind}-feedback`);
     await page.getByRole("button", { name: i < 8 ? "Next sentence" : "Finish" }).click();
   }
-  assert.deepEqual(missed, { fix: true, build: true }, "both kinds were asked");
+  assert.deepEqual(missed, { fix: true, build: true, spot: true }, "all three kinds were asked: fix, build and naming words");
   await page.getByRole("heading", { name: `${right} of 8 right` }).waitFor();
   await page.getByText(/To look at again:/).waitFor();
   await fits();
