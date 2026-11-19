@@ -19,6 +19,8 @@ export interface GuidedTask {
   write?: { min: number; max: number };
   /** A writing task: what the learner checks in their own work before showing it. */
   self?: string[];
+  /** A writing task: the outward shape the piece should have, for the rule-based check. */
+  form?: "letter" | "formal" | "argument" | "narrative";
 }
 export interface Guided {
   version: number;

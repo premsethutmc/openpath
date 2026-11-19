@@ -1,6 +1,6 @@
 {
   "id": "guided-tasks",
-  "version": 6,
+  "version": 7,
   "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
@@ -2268,7 +2268,8 @@
         "I began with Dear and a name",
         "I said why I am writing",
         "I ended with a closing and my name"
-      ]
+      ],
+      "form": "letter"
     },
     {
       "id": "c3.rw6.w2",
@@ -2289,7 +2290,8 @@
         "I began with Dear and a name",
         "I said why I am writing",
         "I ended with a closing and my name"
-      ]
+      ],
+      "form": "letter"
     },
     {
       "id": "c4.rw6.w1",
@@ -2352,7 +2354,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c4.rw7.w2",
@@ -2373,7 +2376,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c4.rw10.w1",
@@ -2436,7 +2440,8 @@
         "I began with Dear and a name",
         "I said why I am writing",
         "I ended with a closing and my name"
-      ]
+      ],
+      "form": "letter"
     },
     {
       "id": "c4.rw12.w2",
@@ -2457,7 +2462,8 @@
         "I began with Dear and a name",
         "I said why I am writing",
         "I ended with a closing and my name"
-      ]
+      ],
+      "form": "letter"
     },
     {
       "id": "c5.rw7.w1",
@@ -2520,7 +2526,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c5.rw8.w2",
@@ -2541,7 +2548,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c5.rw11.w1",
@@ -2646,7 +2654,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c6.w1.w2",
@@ -2667,7 +2676,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c6.w2.w1",
@@ -2688,7 +2698,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c6.w2.w2",
@@ -2709,7 +2720,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c6.w3.w1",
@@ -2898,7 +2910,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c6.w8.w2",
@@ -2919,7 +2932,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c6.w11.w1",
@@ -2982,7 +2996,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c6.w13.w2",
@@ -3003,7 +3018,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c7.w1.w1",
@@ -3024,7 +3040,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c7.w1.w2",
@@ -3045,7 +3062,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c7.w2.w1",
@@ -3276,7 +3294,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c8.w2.w2",
@@ -3297,7 +3316,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c8.w3.w1",
@@ -3444,7 +3464,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c8.w9.w2",
@@ -3465,7 +3486,8 @@
         "I stated my view at the start",
         "I gave at least two reasons, each with an example",
         "I ended by coming back to my view"
-      ]
+      ],
+      "form": "argument"
     },
     {
       "id": "c8.w11.w1",
@@ -3486,7 +3508,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c8.w11.w2",
@@ -3507,7 +3530,8 @@
         "My story has a beginning, a problem and an ending",
         "I said what the people did, thought and felt",
         "I used time words such as then and after that"
-      ]
+      ],
+      "form": "narrative"
     },
     {
       "id": "c8.w12.w1",
@@ -3570,7 +3594,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c8.w13.w2",
@@ -3591,7 +3616,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c8.w14.w1",
@@ -3612,7 +3638,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c8.w14.w2",
@@ -3633,7 +3660,8 @@
         "I gave the date and who it is for",
         "I used polite, complete sentences",
         "I said exactly what I want or what will happen"
-      ]
+      ],
+      "form": "formal"
     },
     {
       "id": "c8.w15.w1",
