@@ -1,367 +1,405 @@
 {
- "id": "icse-cisce-english-class-6",
- "version": "1.1.0",
- "board": "CISCE (ICSE)",
- "class": 6,
- "subject": "English",
- "title": "CISCE curriculum: English, Class VI",
- "source": {
-  "read": "A third-party copy of the Class VI pages of the CISCE curriculum (English: printed pages 1 to 15), hosted by BYJU'S",
-  "url": "https://cdn1.byjus.com/wp-content/uploads/2019/05/ICSE-board-class-6-Syllabus.pdf",
-  "accessed": "2026-11-19",
-  "official": false,
-  "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
- },
- "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
- "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
- "strands": [
-  {
-   "id": "listening-speaking",
-   "name": "Listening and Speaking",
-   "pages": "7-9",
-   "outcomes": [
-    {
-     "id": "LS1",
-     "text": "Answers questions on a passage heard or read.",
-     "coverage": "covered",
-     "where": "listen",
-     "note": "Listen and answer for passages heard; the Reading course for passages read."
-    },
-    {
-     "id": "LS2",
-     "text": "Follows the issues in spoken texts and asks for things to be made clear.",
-     "coverage": "partly",
-     "where": "listen",
-     "note": "Listen and answer checks that a spoken passage is followed; asking for things to be made clear is not practised."
-    },
-    {
-     "id": "LS3",
-     "text": "Leads or guides a group discussion with searching questions.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS4",
-     "text": "Uses class-level vocabulary to put a point of view.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS5",
-     "text": "Gives presentations with comment that names sources or viewpoints.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS6",
-     "text": "Stays confident and calm when presenting or questioning opinions.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS7",
-     "text": "Answers opposing views logically, with suitable language and gestures.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS8",
-     "text": "Analyses the language of newspapers, television, hoardings and advertisements.",
-     "coverage": "not",
-     "note": "No media texts in the app."
-    },
-    {
-     "id": "LS9",
-     "text": "Changes the way of speaking to suit the setting and the task.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS10",
-     "text": "Fits language to its purpose: to persuade, inform or give an opinion.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
-    },
-    {
-     "id": "LS11",
-     "text": "Adds multimedia and pictures to presentations.",
-     "coverage": "not",
-     "note": "Outside the app."
-    },
-    {
-     "id": "LS12",
-     "text": "Makes sense of information in different media and explains why it matters.",
-     "coverage": "not",
-     "note": "No media texts in the app."
-    }
-   ]
+  "id": "icse-cisce-english-class-6",
+  "version": "1.2.0",
+  "board": "CISCE (ICSE)",
+  "class": 6,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class VI",
+  "source": {
+    "read": "A third-party copy of the Class VI pages of the CISCE curriculum (English: printed pages 1 to 15), hosted by BYJU'S",
+    "url": "https://cdn1.byjus.com/wp-content/uploads/2019/05/ICSE-board-class-6-Syllabus.pdf",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
   },
-  {
-   "id": "reading",
-   "name": "Reading",
-   "pages": "10-11",
-   "outcomes": [
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
     {
-     "id": "R1",
-     "text": "Understands texts, draws conclusions and reads between the lines.",
-     "coverage": "partly",
-     "where": "reading",
-     "note": "Reading covers cause and effect and how characters feel; wider inference is not a separate skill yet."
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "7-9",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Answers questions on a passage heard or read.",
+          "coverage": "covered",
+          "where": "listen",
+          "note": "Listen and answer for passages heard; the Reading course for passages read."
+        },
+        {
+          "id": "LS2",
+          "text": "Follows the issues in spoken texts and asks for things to be made clear.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Listen and answer checks that a spoken passage is followed; asking for things to be made clear is not practised."
+        },
+        {
+          "id": "LS3",
+          "text": "Leads or guides a group discussion with searching questions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Uses class-level vocabulary to put a point of view.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS5",
+          "text": "Gives presentations with comment that names sources or viewpoints.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS6",
+          "text": "Stays confident and calm when presenting or questioning opinions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Answers opposing views logically, with suitable language and gestures.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS8",
+          "text": "Analyses the language of newspapers, television, hoardings and advertisements.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "LS9",
+          "text": "Changes the way of speaking to suit the setting and the task.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS10",
+          "text": "Fits language to its purpose: to persuade, inform or give an opinion.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS11",
+          "text": "Adds multimedia and pictures to presentations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS12",
+          "text": "Makes sense of information in different media and explains why it matters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        }
+      ]
     },
     {
-     "id": "R2",
-     "text": "Grasps the central idea and how the details carry it.",
-     "coverage": "covered",
-     "where": "reading",
-     "note": "Reading course: the main idea and details."
+      "id": "reading",
+      "name": "Reading",
+      "pages": "10-11",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Understands texts, draws conclusions and reads between the lines.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Reading covers cause and effect and how characters feel; wider inference is not a separate skill yet."
+        },
+        {
+          "id": "R2",
+          "text": "Grasps the central idea and how the details carry it.",
+          "coverage": "covered",
+          "where": "reading",
+          "note": "Reading course: the main idea and details."
+        },
+        {
+          "id": "R3",
+          "text": "Uses the shape of stories and poems to predict what comes next.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Reading covers the order of events in stories; there are no poems and no prediction questions."
+        },
+        {
+          "id": "R4",
+          "text": "Separates the main points from personal opinions or judgements.",
+          "coverage": "covered",
+          "where": "reading",
+          "note": "Reading course: fact and opinion."
+        },
+        {
+          "id": "R5",
+          "text": "Works out what words and phrases mean, including figurative and suggested meanings.",
+          "coverage": "partly",
+          "where": "words",
+          "note": "New words teaches meanings in sentences; figurative meaning is not taught."
+        },
+        {
+          "id": "R6",
+          "text": "Reads graded literature: stories, plays, poems, travel writing, life stories, reports, speeches and articles.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading."
+        }
+      ]
     },
     {
-     "id": "R3",
-     "text": "Uses the shape of stories and poems to predict what comes next.",
-     "coverage": "partly",
-     "where": "reading",
-     "note": "Reading covers the order of events in stories; there are no poems and no prediction questions."
+      "id": "writing",
+      "name": "Writing",
+      "pages": "12-13",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes about real or imagined experiences with describing detail and order.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W2",
+          "text": "Writes arguments backed by clear reasons and evidence.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W3",
+          "text": "Writes clearly for the task, the purpose and the reader.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W4",
+          "text": "Gathers and brings together information from print and digital sources.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "W5",
+          "text": "Uses exact words, a fitting tone and voice, and varied sentences.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W6",
+          "text": "Follows the steps of writing: plan, revise, edit, rewrite.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W7",
+          "text": "Writes at least three paragraphs, about 200 words, on a topic.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W8",
+          "text": "Writes full narratives with actions, thoughts and feelings.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W9",
+          "text": "Arranges sentences in a sensible order.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "sentence_order"
+          ]
+        },
+        {
+          "id": "W10",
+          "text": "Uses linking words such as firstly, then, later and finally correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "linkers"
+          ]
+        },
+        {
+          "id": "W11",
+          "text": "Draws on personal experience or real situations.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W12",
+          "text": "Uses words suited to the class for feelings and actions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "exact_words"
+          ]
+        },
+        {
+          "id": "W13",
+          "text": "Writes simple notices, messages and letters.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        }
+      ]
     },
     {
-     "id": "R4",
-     "text": "Separates the main points from personal opinions or judgements.",
-     "coverage": "covered",
-     "where": "reading",
-     "note": "Reading course: fact and opinion."
-    },
-    {
-     "id": "R5",
-     "text": "Works out what words and phrases mean, including figurative and suggested meanings.",
-     "coverage": "partly",
-     "where": "words",
-     "note": "New words teaches meanings in sentences; figurative meaning is not taught."
-    },
-    {
-     "id": "R6",
-     "text": "Reads graded literature: stories, plays, poems, travel writing, life stories, reports, speeches and articles.",
-     "coverage": "not",
-     "note": "The app holds no literature. A school's chosen book can be added through My Books."
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "14-15",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Applies the basic rules of grammar and usage in speaking and writing.",
+          "coverage": "covered",
+          "where": "grammar",
+          "note": "Grammar in use, at the learner's level."
+        },
+        {
+          "id": "GV2",
+          "text": "Uses pronouns in the right form, and reflexive pronouns correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "pronoun_case"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Notices wrong changes in a pronoun's number or person.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "pronoun_agreement"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Varies sentence patterns for meaning and style.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "compound",
+            "relative"
+          ],
+          "note": "Building compound sentences and who or that clauses is practised; choosing a pattern for style is not."
+        },
+        {
+          "id": "GV5",
+          "text": "Uses the words around a word or phrase to work out its meaning.",
+          "coverage": "partly",
+          "where": "words",
+          "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
+        },
+        {
+          "id": "GV6",
+          "text": "Uses common prefixes, suffixes and roots as clues to meaning.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "affixes"
+          ]
+        },
+        {
+          "id": "GV7",
+          "text": "Uses print and digital references for how a word is said, what it means and its part of speech.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "GV8",
+          "text": "Understands figures of speech where they are used.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "similes",
+            "idioms"
+          ],
+          "note": "Similes and idioms are practised; metaphor and personification are not yet."
+        },
+        {
+          "id": "GV9",
+          "text": "Makes subject and verb agree when a phrase or clause comes between them.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement"
+          ]
+        },
+        {
+          "id": "GV10",
+          "text": "Tells transitive verbs from intransitive ones.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "transitive"
+          ],
+          "note": "Finding the object of a transitive verb is practised; sorting verbs into transitive and intransitive is not yet."
+        },
+        {
+          "id": "GV11",
+          "text": "Makes pronouns agree with the nouns they stand for, including words like each and everyone.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "pronoun_agreement"
+          ],
+          "note": "Matching a pronoun to its noun is practised; words like each and everyone are not yet."
+        },
+        {
+          "id": "GV12",
+          "text": "Keeps verb tenses steady across paragraphs.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "tense_shift"
+          ],
+          "note": "Practised within a sentence, not across a paragraph."
+        },
+        {
+          "id": "GV13",
+          "text": "Spells frequently used words correctly.",
+          "coverage": "covered",
+          "where": "spelling",
+          "note": "The Spelling Bee, and words misspelt in writing that return as My tricky words."
+        },
+        {
+          "id": "GV14",
+          "text": "Forms and uses the perfect tenses.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "tenses",
+            "irregular_verbs"
+          ]
+        },
+        {
+          "id": "GV15",
+          "text": "Notices wrong changes of tense.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "tense_shift"
+          ]
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "writing",
-   "name": "Writing",
-   "pages": "12-13",
-   "outcomes": [
-    {
-     "id": "W1",
-     "text": "Writes about real or imagined experiences with describing detail and order.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W2",
-     "text": "Writes arguments backed by clear reasons and evidence.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W3",
-     "text": "Writes clearly for the task, the purpose and the reader.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W4",
-     "text": "Gathers and brings together information from print and digital sources.",
-     "coverage": "not",
-     "note": "Outside the app."
-    },
-    {
-     "id": "W5",
-     "text": "Uses exact words, a fitting tone and voice, and varied sentences.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W6",
-     "text": "Follows the steps of writing: plan, revise, edit, rewrite.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W7",
-     "text": "Writes at least three paragraphs, about 200 words, on a topic.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W8",
-     "text": "Writes full narratives with actions, thoughts and feelings.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W9",
-     "text": "Arranges sentences in a sensible order.",
-     "coverage": "partly",
-     "where": "reading",
-     "note": "Reading covers the order of events; arranging whole sentences into a paragraph is not practised."
-    },
-    {
-     "id": "W10",
-     "text": "Uses linking words such as firstly, then, later and finally correctly.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "linkers"
-     ]
-    },
-    {
-     "id": "W11",
-     "text": "Draws on personal experience or real situations.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    },
-    {
-     "id": "W12",
-     "text": "Uses words suited to the class for feelings and actions.",
-     "coverage": "partly",
-     "where": "words",
-     "note": "New words teaches level-appropriate words; it is not organised by feelings and actions."
-    },
-    {
-     "id": "W13",
-     "text": "Writes simple notices, messages and letters.",
-     "coverage": "not",
-     "note": "Writing of this kind is being built separately."
-    }
-   ]
-  },
-  {
-   "id": "grammar-vocabulary",
-   "name": "Grammar and Vocabulary in Context",
-   "pages": "14-15",
-   "outcomes": [
-    {
-     "id": "GV1",
-     "text": "Applies the basic rules of grammar and usage in speaking and writing.",
-     "coverage": "covered",
-     "where": "grammar",
-     "note": "Grammar in use, at the learner's level."
-    },
-    {
-     "id": "GV2",
-     "text": "Uses pronouns in the right form, and reflexive pronouns correctly.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "pronoun_case"
-     ]
-    },
-    {
-     "id": "GV3",
-     "text": "Notices wrong changes in a pronoun's number or person.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "pronoun_agreement"
-     ]
-    },
-    {
-     "id": "GV4",
-     "text": "Varies sentence patterns for meaning and style.",
-     "coverage": "partly",
-     "where": "grammar",
-     "topics": [
-      "compound",
-      "relative"
-     ],
-     "note": "Building compound sentences and who or that clauses is practised; choosing a pattern for style is not."
-    },
-    {
-     "id": "GV5",
-     "text": "Uses the words around a word or phrase to work out its meaning.",
-     "coverage": "partly",
-     "where": "words",
-     "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
-    },
-    {
-     "id": "GV6",
-     "text": "Uses common prefixes, suffixes and roots as clues to meaning.",
-     "coverage": "not",
-     "note": "Word parts are not taught yet."
-    },
-    {
-     "id": "GV7",
-     "text": "Uses print and digital references for how a word is said, what it means and its part of speech.",
-     "coverage": "not",
-     "note": "Outside the app."
-    },
-    {
-     "id": "GV8",
-     "text": "Understands figures of speech where they are used.",
-     "coverage": "not",
-     "note": "Figures of speech are not taught yet."
-    },
-    {
-     "id": "GV9",
-     "text": "Makes subject and verb agree when a phrase or clause comes between them.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "agreement"
-     ]
-    },
-    {
-     "id": "GV10",
-     "text": "Tells transitive verbs from intransitive ones.",
-     "coverage": "not",
-     "note": "Naming kinds of verb is not practised; Grammar in use fixes and builds sentences."
-    },
-    {
-     "id": "GV11",
-     "text": "Makes pronouns agree with the nouns they stand for, including words like each and everyone.",
-     "coverage": "partly",
-     "where": "grammar",
-     "topics": [
-      "pronoun_agreement"
-     ],
-     "note": "Matching a pronoun to its noun is practised; words like each and everyone are not yet."
-    },
-    {
-     "id": "GV12",
-     "text": "Keeps verb tenses steady across paragraphs.",
-     "coverage": "partly",
-     "where": "grammar",
-     "topics": [
-      "tense_shift"
-     ],
-     "note": "Practised within a sentence, not across a paragraph."
-    },
-    {
-     "id": "GV13",
-     "text": "Spells frequently used words correctly.",
-     "coverage": "covered",
-     "where": "spelling",
-     "note": "The Spelling Bee, and words misspelt in writing that return as My tricky words."
-    },
-    {
-     "id": "GV14",
-     "text": "Forms and uses the perfect tenses.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "tenses",
-      "irregular_verbs"
-     ]
-    },
-    {
-     "id": "GV15",
-     "text": "Notices wrong changes of tense.",
-     "coverage": "covered",
-     "where": "grammar",
-     "topics": [
-      "tense_shift"
-     ]
-    }
-   ]
-  }
- ]
+  ]
 }

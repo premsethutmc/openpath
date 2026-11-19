@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { GUIDED, done, guidedProblems, guidedSummary, tasksFor } from "./guided.ts";
-import { SYLLABUSES, coverage, syllabusFor, syllabusProblems } from "../syllabus/syllabus.ts";
+import { SYLLABUSES, coverage, syllabusProblems } from "../syllabus/syllabus.ts";
 import { loadContent } from "../content.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
@@ -23,7 +23,7 @@ test("GT-2 every syllabus line marked 'with a grown-up' has at least two tasks, 
     }
   }
   for (const t of GUIDED.tasks) assert.ok(lines.has(`${t.syllabus}/${t.outcome}`), `${t.id} serves a line marked guided`);
-  assert.equal(coverage(syllabusFor(5)).not, 0, "Class 5 has no line left without a place");
+  for (const s of SYLLABUSES) assert.equal(coverage(s).not, 0, `Class ${s.class} has no line left without a place`);
 });
 
 test("GT-3 a task done is kept with the adult's ticks, counted again when repeated, and writes nothing to the engine", async () => {
