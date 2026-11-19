@@ -124,7 +124,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
         </ol>
       )}
       {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
-      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board.find((r) => / \) \d/.test(r))?.replace(/ \( .*$/, "") ?? now.board[1]] : null); return b ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board.find((r) => / \) \d/.test(r))?.replace(/ \( .*$/, "") ?? now.board[1]].filter((r): r is string => typeof r === "string") : null); return b && b.length ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

@@ -5,6 +5,7 @@
  * the server and no child's record is touched; leaving or reloading the page forgets it.
  */
 import React, { useMemo, useRef, useState } from "react";
+import { problemOf } from "../../../packages/learning/src/families";
 import { moduleFor } from "../../../packages/learning/src/content";
 import type { BoardId } from "../../../packages/learning/src/curricula";
 import { modulePhasePool } from "../../../packages/learning/src/library";
@@ -25,6 +26,13 @@ export function TryAsChild() {
   const [skill, setSkill] = useState<Skill | null>(null);
   const grades = [...new Set(all.filter((s) => s.board === board).map((s) => s.release.grade))].sort((a, b) => a - b);
   const list = useMemo(() => findSkills(all, board, grade, search), [all, board, grade, search]);
+  // one-question@1: /year/#try=<question id> opens exactly that question in the sandbox (the screen check uses it)
+  const only = useMemo(() => (location.hash.startsWith("#try=") ? decodeURIComponent(location.hash.slice(5)) : null), []);
+  if (only) {
+    const c = problemOf(only.replace(/:(mc|w)$/, ""))?.competency;
+    const s = (c && (all.find((x) => x.competency === c && x.board === "icse") ?? all.find((x) => x.competency === c))) || null;
+    return s ? <Sandbox key={only} skill={s} back={() => { location.hash = "#try"; }} only={only} /> : <main className="page try-page"><p className="error" data-testid="try-missing">No skill teaches the question {only}.</p></main>;
+  }
   if (skill) return <Sandbox key={`${skill.release.id}:${skill.competency}`} skill={skill} back={() => setSkill(null)} />;
   let chapter = "";
   return (
@@ -54,10 +62,10 @@ export function TryAsChild() {
   );
 }
 
-function Sandbox({ skill, back }: { skill: Skill; back: () => void }) {
+function Sandbox({ skill, back, only }: { skill: Skill; back: () => void; only?: string }) {
   const at = () => ({ learnerId: "sandbox", sessionId: "try:sandbox:1", at: new Date().toISOString() });
   const [events, setEvents] = useState<LearningRecord[]>(() => [make.curriculum(at(), skill.release), make.enrol(at(), skill.release.grade, academicYear(), skill.release)]);
-  const [mode, setMode] = useState<Mode>("journey");
+  const [mode, setMode] = useState<Mode>(only ? "practice" : "journey");
   const [n, setN] = useState(0);
   const [round, setRound] = useState(0);
   const [fb, setFb] = useState<Fb | null>(null);
@@ -72,7 +80,7 @@ function Sandbox({ skill, back }: { skill: Skill; back: () => void }) {
   };
   const m = moduleFor(skill.competency)!;
   const pick = (phase: "practice" | "retention", own: string[]) => { const ids = own.length ? own : modulePhasePool(m, phase); return ids.length ? ids[n % ids.length] : null; };
-  const qid = mode === "practice" ? pick("practice", m.practice) : mode === "test" ? pick("retention", m.retention) : null;
+  const qid = only && mode === "practice" ? only : mode === "practice" ? pick("practice", m.practice) : mode === "test" ? pick("retention", m.retention) : null;
   const go = (next: Mode) => { setMode(next); setN(0); setFb(null); setRound(round + 1); };
   return (
     <main className="page try-page" data-testid="try-skill">

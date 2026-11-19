@@ -512,3 +512,13 @@ never writes its numeric answer ends with one added step that writes it ("Last: 
 stood (answer in the first step 257, answer in a cue 5, help that never states its answer 0), or when fewer than
 3,50,000 questions were taken. It runs nightly and on any change to the step help, the grader or the question types.
 Full run after the fixes: 3,52,699 of 3,52,699 questions with nothing broken; 465 held back.
+
+`screen@1` (frontend/e2e/screen-robot.mjs, workflow "Screen check"): one question of every type opened at 390 px in a
+real browser through `/year/#try=<question id>` (one-question@1): the question shows, nothing spills off the side,
+there is something to answer with, "I'm stuck" opens, every step can be shown and no layout is cut off. Nightly, and on
+any change to the child app; the job fails when any type has something wrong. First run: docs/product/SCREEN_REPORT.md.
+It found a crash in a change of mine before it shipped (a one-line layout with nothing to show at the first step) and
+three real faults, fixed as `fit@1`: long lines of working are set smaller, a wide table scrolls in its own box, and a
+tap button never shrinks below its words.
+`thin@1`: the robot learner's report also counts help that is one step with no working behind it, and help whose cues
+are mostly a single word (report only until the first full count is in).

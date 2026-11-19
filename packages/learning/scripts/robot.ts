@@ -20,7 +20,7 @@ import { askOf, judge } from "../src/step-ask.ts";
 import { selectable } from "../src/question-status.ts";
 import { helpMethods, statesAnswer, stepsHelp } from "../src/step-help.ts";
 
-type Kind = "no-option-is-right" | "several-options-right" | "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "help-never-states-answer" | "answer-in-first-step" | "answer-in-cue" | "crash";
+type Kind = "no-option-is-right" | "several-options-right" | "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "help-never-states-answer" | "answer-in-first-step" | "help-is-one-step" | "mostly-one-word-cues" | "answer-in-cue" | "crash";
 const HARD: Kind[] = ["no-option-is-right", "several-options-right", "answer-not-accepted", "wrong-answer-accepted", "no-help", "box-refuses-right", "box-accepts-wrong", "crash"];
 interface Fam { questions: number; /** quarantined: never served to a learner, so not taken */ held: number; clean: number; steps: number; boxes: number; fails: Partial<Record<Kind, number>>; eg: Partial<Record<Kind, string>> }
 interface Report { schema: "robot@1"; shard: string; families: Record<string, Fam> }
@@ -29,6 +29,7 @@ const arg = (k: string) => { const i = process.argv.indexOf(k); return i < 0 ? n
 const flat = (t: string) => t.replace(/(\d),(?=\d{3}\b)/g, "$1").replace(/-(?=\d)/g, "−");
 const says = (text: string, answer: string) => { const a = flat(answer).trim(); if (a.length < 3 || !/\d/.test(a)) return false; return new RegExp(`(^|[^\\d./−])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d./]|$)`).test(flat(text)); };
 const numeric = (v: string) => /^[−-]?\d+(?:\.\d+)?$/.test(v.replace(/,/g, ""));
+const s0 = (x: { next: string; shown: string }) => `"${x.next}" — ${x.shown}`.slice(0, 160);
 const bump = (v: string) => String(Number(v.replace(/,/g, "").replace("−", "-")) + 1);
 
 function take(id: string, f: Fam) {
@@ -69,13 +70,29 @@ function take(id: string, f: Fam) {
         if (says(s.next, q.answer) && !says(q.prompt, q.answer)) note("answer-in-cue", `${name}: ${s.next}`);
         if (i === 0 && steps.length >= 3 && numeric(q.answer) && !/(\d+,\s*){3}/.test(s.shown) && says(s.shown, q.answer) && !says(q.prompt, q.answer)) note("answer-in-first-step", `${name}, step 1 of ${steps.length}: ${s.shown}`);
       });
+      // thin@1: how thin the first way is. One step with no working behind it; or cues that are mostly a single word
+      if (k === 0) {
+        if (steps.length === 1 && !steps[0].how) note("help-is-one-step", `${s0(steps[0])}`);
+        const bare = steps.filter((x) => /^(First|Next|Last|Now): [a-z-]+\.$/.test(x.next)).length;
+        if (bare / steps.length >= 0.6) note("mostly-one-word-cues", `${bare} of ${steps.length} cues, e.g. "${steps.find((x) => /^(First|Next|Last|Now): [a-z-]+\.$/.test(x.next))!.next}" for "${steps[0].shown.slice(0, 60)}"`);
+      }
       if (q.type !== "written" && !q.options && !statesAnswer(steps, q.answer)) note("help-never-states-answer", `${name}: answer ${q.answer}; last step "${steps[steps.length - 1].shown}"`);
     });
   } catch (e) { hard = note("crash", String((e as Error).message ?? e)) || hard; }
   if (!hard) f.clean++;
 }
 
-if (process.argv.includes("--merge")) {
+if (process.argv.includes("--samples")) {
+  // one question of each type (the middle one that is served), for the screen check (frontend/e2e/screen-robot.mjs)
+  const out: { family: string; id: string }[] = [];
+  for (const fam of [...FAMILIES.keys()].sort()) {
+    let ids: string[] = [];
+    try { ids = pool(fam).items.map((x) => x.id).filter((id) => !/:(mc|w)$/.test(id) && selectable(id)); } catch { /* reported by the main run */ }
+    if (ids.length) out.push({ family: fam, id: ids[Math.floor(ids.length / 2)] });
+  }
+  writeFileSync(arg("--samples")!, JSON.stringify(out) + "\n");
+  console.log(`robot@1: ${out.length} sample questions`);
+} else if (process.argv.includes("--merge")) {
   const rest = process.argv.slice(process.argv.indexOf("--merge") + 1), stop = rest.findIndex((x) => x.startsWith("--")), files = stop < 0 ? rest : rest.slice(0, stop);
   const all: Record<string, Fam> = {};
   for (const file of files) Object.assign(all, (JSON.parse(readFileSync(file, "utf8")) as Report).families);
