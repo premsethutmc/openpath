@@ -11,9 +11,9 @@
  * A list holds the most recent words only. Practice-only, like every list.
  */
 import { DICTATION, type DictationRecord } from "../dictation/dictation.ts";
-import type { AppEvent, ListWord } from "../events.ts";
+import type { AppEvent, ListWord, SpellSource } from "../events.ts";
 import type { Learner } from "../learner.ts";
-import { BANK, wordKey, type SpellSource } from "../spelling.ts";
+import { BANK, wordKey } from "../spelling.ts";
 import { WORDS, progress as wordProgress } from "../vocabulary/daily-words.ts";
 import { wordProblem } from "../wordlists.ts";
 
