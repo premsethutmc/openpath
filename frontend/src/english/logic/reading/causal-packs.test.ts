@@ -1,14 +1,14 @@
-import test from 'node:test';import assert from 'node:assert/strict';
+import test from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 import {CAUSAL_PACKS} from './causal-packs.ts';
-import {causalItems,validateCausalPack,newCausalSession,transitionCausal,causalView,type CausalPack,type CausalSession} from './causal.ts';
+import {causalItems,validateCausalPack,newCausalSession,transitionCausal,causalView,type CausalPack,type CausalSession,type CausalItem} from './causal.ts';
 import {assessAuthoredClues} from './inference.ts';
 const now='2026-11-19T12:00:00.000Z',later='2026-11-22T12:00:00.000Z';
 const all=CAUSAL_PACKS.flatMap(causalItems);
-test('two interchangeable demand contexts contain 36 role-separated candidate tasks, not grades',()=>{
- assert.equal(CAUSAL_PACKS.length,2);assert.equal(all.length,36);
- assert.equal(new Set(all.map(i=>i.id)).size,36);assert.equal(new Set(all.map(i=>i.family)).size,36);
- assert.equal(new Set(all.map(i=>i.passage.join(' '))).size,36);
- for(const p of CAUSAL_PACKS){validateCausalPack(p);assert.equal(causalItems(p).length,18);assert.ok(p.context&&p.language.vocabulary&&p.language.syntax&&p.integrationDemand);
+test('two interchangeable demand contexts contain 44 role-separated candidate tasks, not grades',()=>{
+ assert.equal(CAUSAL_PACKS.length,2);assert.equal(all.length,44);
+ assert.equal(new Set(all.map(i=>i.id)).size,44);assert.equal(new Set(all.map(i=>i.family)).size,44);
+ assert.equal(new Set(all.map(i=>i.passage.join(' '))).size,44);
+ for(const p of CAUSAL_PACKS){validateCausalPack(p);assert.equal(causalItems(p).length,22);assert.ok(p.context&&p.language.vocabulary&&p.language.syntax&&p.integrationDemand);
   assert.equal(p.battery.length,6);assert.deepEqual(p.battery.slice(0,2).map(i=>i.dimension),['integration','integration']);
   assert.ok(!('grade' in p)&&!('score' in p));
   for(const lesson of Object.values(p.lessons)){assert.ok(lesson.steps.length>=3);assert.ok(lesson.explanation.length>60);}
@@ -39,9 +39,26 @@ test('identical response patterns route identically through real packs and prese
   assert.equal(causalView(s,p,now).route,route);assert.ok(causalView(s,p,now).lesson);
   s=transitionCausal(s,p,{type:'lesson_complete'},now);s=answer(s,p);assert.equal(causalView(s,p,now).review.practice[0].independent,false);
   s=transitionCausal(s,p,{type:'start_immediate'},now);assert.equal(causalView(s,p,now).lesson,null);
-  s=answer(s,p);s=answer(s,p);assert.equal(causalView(s,p,now).phase,'waiting');assert.equal(causalView(s,p,now).due,later);
-  const saved=JSON.stringify(s);assert.ok(p.delayed.every(i=>!saved.includes(i.id)),'reserved delayed content not exposed before due');
+  const phaseItems=route==='word'||route==='literal'?3:2;for(let n=0;n<phaseItems;n++)s=answer(s,p);assert.equal(causalView(s,p,now).phase,'waiting');assert.equal(causalView(s,p,now).due,later);
+  const saved=JSON.stringify(s);assert.ok([...p.delayed,...Object.values(p.languageChecks!).map(pair=>pair.delayed)].every(i=>!saved.includes(i.id)),'reserved delayed content not exposed before due');
   assert.throws(()=>transitionCausal(s,p,{type:'reserve'},'2026-11-22T11:59:59.999Z'));
-  s=answer(s,p,false,later);s=answer(s,p,false,later);const v=causalView(s,p,later);assert.equal(v.phase,'done');assert.ok(v.review.delayed.every(r=>r.correct&&r.independent));assert.throws(()=>transitionCausal(s,p,{type:'reserve'},later));
+  for(let n=0;n<phaseItems;n++)s=answer(s,p,false,later);const v=causalView(s,p,later);assert.equal(v.phase,'done');assert.ok(v.review.delayed.every(r=>r.correct&&r.independent));assert.throws(()=>transitionCausal(s,p,{type:'reserve'},later));
+ }
+});
+
+test('new checks append without changing any legacy pack byte or property order',()=>{
+ const hashes:Record<string,string>={
+  'causal-everyday-short-clauses':'ccca2db9cf43c8ba142763365b81c69780ca5dfc4986d94ee3a8913e2ec999cd',
+  'causal-public-projects':'67cd016e435b34e175f1a5079b7d5dbad7418624f52169f43b8a5d9dc2caee82',
+ };
+ for(const p of CAUSAL_PACKS){const {languageChecks,...legacy}=p;assert.ok(languageChecks);assert.equal(Object.keys(p).at(-1),'languageChecks');assert.equal(createHash('sha256').update(JSON.stringify(legacy)).digest('hex'),hashes[p.id]);}
+});
+test('eight fresh standalone language checks use new text, answers and families without causal clue scaffolding',()=>{
+ for(const p of CAUSAL_PACKS){const {languageChecks,...legacy}=p;assert.ok(languageChecks);
+  const earlier=causalItems(legacy);const texts=new Set(earlier.map(i=>i.passage.join(' ')));const keys=new Set(earlier.map(i=>i.options[i.answer].toLowerCase().replace(/[^a-z0-9]/g,'')));
+  for(const dimension of ['word','literal'] as const){
+   const pair:{immediate:CausalItem;delayed:CausalItem}=languageChecks[dimension];assert.notEqual(pair.immediate.family,pair.delayed.family);
+   for(const i of [pair.immediate,pair.delayed]){assert.equal(i.dimension,dimension);assert.deepEqual(i.sets,[]);assert.equal(i.options.length,3);assert.ok(!texts.has(i.passage.join(' ')));assert.ok(!keys.has(i.options[i.answer].toLowerCase().replace(/[^a-z0-9]/g,'')));assert.ok(!earlier.some(old=>old.family===i.family||old.id===i.id));assert.ok(i.explanation.length>60);}
+  }
  }
 });

@@ -192,3 +192,7 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 ## Causal reading loop candidate (2026-11-19)
 
 Draft-only stack on #262: two language-demand packs through one conservative evidence → teaching/practice → unseen immediate/three-day return loop. Anonymous local storage, no API or identity collection, no merge/deploy authorization. See `docs/product/english/causal-reading-loop.md` for content inventory, safeguards and validation limits. Maths and current main writing are preserved.
+
+### Draft #263 corrective language evidence
+
+New word/literal routes add one same-skill item beside two inference items in each immediate/delayed phase, reported separately. Original saved attempts retain the original path and carry no fabricated language result. Protocol compatibility, both language routes in both packs, and independent delayed checks are regression targets; draft only, no merge/deploy.

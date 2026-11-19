@@ -2,6 +2,7 @@
 import {causalItems,type CausalPack} from './causal.ts';
 import {EVERYDAY_CAUSAL_PACK} from './causal-pack-everyday.ts';
 import {PUBLIC_CAUSAL_PACK} from './causal-pack-public.ts';
+import {AUTHORED_LANGUAGE_CHECKS} from './causal-language-checks.ts';
 function order(key:string,n:number){
  let h=2166136261;for(const c of key)h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;
  const values=Array.from({length:n},(_,i)=>i);
@@ -19,4 +20,13 @@ function layout(raw:CausalPack):CausalPack{
  }
  return pack;
 }
-export const CAUSAL_PACKS:readonly CausalPack[]=[layout(EVERYDAY_CAUSAL_PACK),layout(PUBLIC_CAUSAL_PACK)];
+/** Append only after the original layout; stripping this field preserves legacy fingerprints. */
+function withLanguageChecks(pack:CausalPack):CausalPack{
+ const languageChecks=structuredClone(AUTHORED_LANGUAGE_CHECKS[pack.id]);
+ if(!languageChecks)throw Error('Missing authored language checks.');
+ for(const pair of Object.values(languageChecks))for(const item of Object.values(pair)){
+  const choices=order(`${item.id}:choices`,item.options.length);item.options=choices.map(i=>item.options[i]);item.answer=choices.indexOf(item.answer);
+ }
+ return {...pack,languageChecks};
+}
+export const CAUSAL_PACKS:readonly CausalPack[]=[withLanguageChecks(layout(EVERYDAY_CAUSAL_PACK)),withLanguageChecks(layout(PUBLIC_CAUSAL_PACK))];
