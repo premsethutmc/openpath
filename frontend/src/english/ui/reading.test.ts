@@ -8,7 +8,7 @@ import { LABEL_AFTER_HELP, ReadingUnitSession, progress, type Snapshot } from ".
 (globalThis as { React?: unknown }).React = React;
 const { ReadingMap, ReadingUnitView } = await import("./Reading.tsx");
 
-const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, selectCheckAnswer() {}, lockCheckAnswer() {}, selectCheckEvidence() {}, submitCheckEvidence() {}, open() {}, leave() {} };
+const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, selectCheckAnswer() {}, lockCheckAnswer() {}, selectCheckEvidence() {}, submitCheckEvidence() {}, closeInterruptedCheck() {}, open() {}, leave() {} };
 const html = (snap: Snapshot) => renderToStaticMarkup(React.createElement(ReadingUnitView, { course: COURSE, snap, on })).replaceAll("&#x27;", "'").replaceAll("&quot;", '"');
 const byId = new Map(COURSE.questions.map((q) => [q.id, q]));
 const unit: Unit = { skill: "cause", level: 2 };

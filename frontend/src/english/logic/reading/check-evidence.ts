@@ -22,5 +22,5 @@ export const SENTENCE_FEEDBACK:Record<SentenceFinding,string>={
  complete:'Your selected sentences support the answer together.',
  partial:'These sentences are relevant, but another part of the support is missing.',
  mixed:'Some support is present, but the selection includes an extra detail or misses part of the link.',
- unmatched:'These sentences do not support the keyed answer to this question.'
+ unmatched:'These sentences do not support the best-supported answer to this question.'
 };

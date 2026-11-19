@@ -20,7 +20,7 @@ export interface CheckCheckpoint {version:1;questions:string[];signatures:string
 const questionSignature=(course:Course,q:Question)=>JSON.stringify([q.prompt,q.options,q.answer,q.evidence,q.evidenceAlternatives,course.passages.get(q.passage)!.text]);
 const exposureCount=(course:Course,records:readonly ReadingRecord[],passage:string)=>records.filter(r=>r.type==='shown'&&course.questions.find(q=>q.id===r.question)?.passage===passage).length;
 export function pendingCheck(records:readonly ReadingRecord[],unit:Unit):CheckCheckpoint|null {
- for(let i=records.length-1;i>=0;i--){const r=records[i];if(unitKey(r.unit)!==unitKey(unit))continue;if(r.type==='check_result')return null;if(r.type==='check_session')return r.check??({} as CheckCheckpoint);}
+ for(let i=records.length-1;i>=0;i--){const r=records[i];if(unitKey(r.unit)!==unitKey(unit))continue;if(r.type==='check_result'||r.type==='check_closed')return null;if(r.type==='check_session')return r.check??({} as CheckCheckpoint);}
  return null;
 }
 export type Mode = "learn" | "check_me";
@@ -30,6 +30,7 @@ export type EvidenceLabel = typeof LABEL_OWN | typeof LABEL_AFTER_HELP;
 export const SCOPE = "Two new questions, answered once. It shows what you could do today, not that it will last.";
 
 export type ReadingRecord =
+  | { type: "check_closed"; unit: Unit; reason: "interrupted" }
   | { type: "check_session"; unit: Unit; check: CheckCheckpoint }
   | { type: "unit_start"; unit: Unit; mode: Mode }
   | { type: "lesson_done"; unit: Unit }
@@ -238,6 +239,14 @@ export class ReadingUnitSession {
     }
     this.log.push({ type: "unit_start", unit, mode });
     if (mode === "check_me") this.startCheck();
+  }
+
+  /** Explicitly archive an unsafe attempt, without deleting drafts/exposure or awarding a score. */
+  closeInterruptedCheck() {
+    if(this.phase!=="interrupted")return;
+    this.log.push({type:"check_closed",unit:this.unit,reason:"interrupted"});
+    this.phase="lesson";
+    this.log.push({type:"unit_start",unit:this.unit,mode:"learn"});
   }
 
   /** Records made since the last call, to be stored in order. */

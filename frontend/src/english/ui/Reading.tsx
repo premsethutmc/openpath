@@ -129,6 +129,7 @@ export interface UnitHandlers {
   lockCheckAnswer: ()=>void;
   selectCheckEvidence: (sentences:number[])=>void;
   submitCheckEvidence: ()=>void;
+  closeInterruptedCheck: ()=>void;
   open: (u: Unit, mode: Mode) => void;
   leave: () => void;
 }
@@ -243,7 +244,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
       <p>Your locked answer: {q.options[d.choice!]}</p><fieldset><legend>Tap the sentence or sentences that support your answer.</legend>{sentenceChoices(q.passage.text).map((text,i)=><label key={i} style={{display:'block',padding:'8px 0'}}><input type="checkbox" checked={d.sentences.includes(i)} onChange={()=>on.selectCheckEvidence(d.sentences.includes(i)?d.sentences.filter(x=>x!==i):[...d.sentences,i])}/>{i+1}. {text}</label>)}</fieldset><p className="small">Select only the support you need. There are no hints or marks until both questions are finished.</p><button type="button" className="primary" disabled={!d.sentences.length} onClick={on.submitCheckEvidence}>{snap.position+1<snap.total?'Save evidence and go on':'Save evidence and see results'}</button></>}
     </main>;
   }
-  if(snap.phase==='interrupted')return <main className="page reading" data-phase="interrupted">{head}<h1>Saved check needs review</h1><p role="status">{snap.reason}</p><p>Choose another reading skill. This check will not silently restart or count reused questions as fresh.</p></main>;
+  if(snap.phase==='interrupted')return <main className="page reading" data-phase="interrupted">{head}<h1>Saved check needs review</h1><p role="status">{snap.reason}</p><p>Close this attempt to return to the lesson. Your saved selections and reading history stay on record, with no score. Any later check uses questions you have not answered or opened before; previously read text is labelled.</p><button type="button" className="primary" onClick={on.closeInterruptedCheck}>Close this attempt and learn</button></main>;
   if (snap.phase === "no_fresh_check")
     return (
       <main className="page reading" data-phase="no_fresh_check">
@@ -395,6 +396,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
           lockCheckAnswer:()=>void step(s,()=>s.lockCheckAnswer()),
           selectCheckEvidence:(selected)=>void step(s,()=>s.selectCheckEvidence(selected)),
           submitCheckEvidence:()=>void step(s,()=>s.submitCheckEvidence()),
+          closeInterruptedCheck:()=>void step(s,()=>s.closeInterruptedCheck()),
           open,
           leave: () => setSession(null),
         }}

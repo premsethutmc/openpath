@@ -403,6 +403,17 @@ if (out) writeFileSync(out, JSON.stringify({ days, results }, null, 1));
 const mdPath = opt("--md", "");
 if (mdPath) writeFileSync(mdPath, md + "\n");
 console.log(md);
+// Recovery preflight is a state check, not an added learner success or learning gain.
+{
+ const unit={skill:"detail",level:1} as const;
+ const first=new ReadingUnitSession(COURSE,unit,"check_me");const history=first.take();
+ const alternate=new ReadingUnitSession(COURSE,{skill:"sequence",level:1},"check_me",history);history.push(...alternate.take());
+ const interrupted=new ReadingUnitSession(COURSE,unit,"learn",history);
+ if(interrupted.snapshot().phase!=="interrupted")throw Error("reading recovery: shared exposure was not detected");
+ interrupted.closeInterruptedCheck();history.push(...interrupted.take());
+ if(new ReadingUnitSession(COURSE,unit,"learn",history).snapshot().phase!=="lesson"||history.some(r=>r.type==="check_result"))throw Error("reading recovery: archive blocked learning or invented a score");
+ console.log("Reading recovery preflight: exposed pending check archived, lesson reopened, no score.");
+}
 // --strict: fail when a stream threw or had nothing to give (for CI); the rest of the report is for reading
 if (args.includes("--strict")) {
   const bad = results.flatMap((r) => STREAMS.filter((s) => r.per[s].errors.length || r.per[s].stuck > 0 || (s === "reading" && r.per[s].repeats > 0)).map((s) => `${r.name} / ${NAMES[s]}: ${r.per[s].errors.join("; ") || `stuck ${r.per[s].stuck}, needless repeats ${r.per[s].repeats}`}`));
