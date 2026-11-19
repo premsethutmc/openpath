@@ -31,6 +31,8 @@ import { levelsFrom, type LevelCheckRecord, type Levels } from "./streams/level-
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
 import type { ReadingRecord } from "./reading/session.ts";
+import { OLD_LEVELS as READING_OLD } from "./reading/course.ts";
+import { SCALE } from "./scale.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
 
 export type Clock = () => string;
@@ -312,12 +314,13 @@ export class Learner {
 
   /** The learner's reading-course record, in order (progress is rebuilt from it: logic/reading/session.ts). */
   readingRecords(): ReadingRecord[] {
-    return this.events.flatMap((e) => (e.kind === "reading" ? [e.record] : []));
+    // a record stored before the five-level scale has no scale: its unit is read on today's scale
+    return this.events.flatMap((e) => (e.kind === "reading" ? [e.scale === SCALE ? e.record : ({ ...e.record, unit: { ...e.record.unit, level: READING_OLD[e.record.unit.level] ?? e.record.unit.level } } as ReadingRecord)] : []));
   }
 
   /** Store steps of a reading unit, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordReading(records: readonly ReadingRecord[]): Promise<void> {
-    for (const record of records) await this.add({ kind: "reading", id: this.nextId(), at: this.clock(), record });
+    for (const record of records) await this.add({ kind: "reading", id: this.nextId(), at: this.clock(), scale: SCALE, record });
   }
 
   // ------------------------------------------------------------------ My Books (logic/books.ts)

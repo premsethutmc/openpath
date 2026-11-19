@@ -695,7 +695,7 @@ export function App() {
           onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
           onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
           onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
-          onGrammarUse={() => (setGrammarUse({}), scrollTo(0, 0))}
+          onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}

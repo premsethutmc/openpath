@@ -1,20 +1,98 @@
 {
   "id": "reading-course",
-  "version": 1,
+  "version": 2,
   "status": "candidate: texts, questions and teaching written by OpenPath for this course (no publisher material); checked by automatic tests only, not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: nothing in this course changes a capability estimate or a mastery claim",
   "skills": [
-    { "id": "detail", "capability": "EN.RDG.LIT.locate_detail", "name": "Finding details", "blurb": "Find what the text tells you." },
-    { "id": "sequence", "capability": "EN.RDG.LIT.sequence", "name": "Order of events", "blurb": "Work out what happened first, next and last." },
-    { "id": "cause", "capability": "EN.RDG.INF.cause_effect", "name": "Why it happened", "blurb": "Link what happened to its reason." },
-    { "id": "feelings", "capability": "EN.RDG.INF.motives", "name": "Feelings and reasons", "blurb": "Read how people feel and why they act." },
-    { "id": "main_idea", "capability": "EN.RDG.SUM.main_idea", "name": "Main idea", "blurb": "Say what the text is mostly about." },
-    { "id": "fact_opinion", "capability": "EN.RDG.CRT.fact_opinion", "name": "Fact or opinion", "blurb": "Tell what can be checked from what someone thinks." }
+    {
+      "id": "detail",
+      "capability": "EN.RDG.LIT.locate_detail",
+      "name": "Finding details",
+      "blurb": "Find what the text tells you."
+    },
+    {
+      "id": "sequence",
+      "capability": "EN.RDG.LIT.sequence",
+      "name": "Order of events",
+      "blurb": "Work out what happened first, next and last."
+    },
+    {
+      "id": "cause",
+      "capability": "EN.RDG.INF.cause_effect",
+      "name": "Why it happened",
+      "blurb": "Link what happened to its reason."
+    },
+    {
+      "id": "feelings",
+      "capability": "EN.RDG.INF.motives",
+      "name": "Feelings and reasons",
+      "blurb": "Read how people feel and why they act."
+    },
+    {
+      "id": "main_idea",
+      "capability": "EN.RDG.SUM.main_idea",
+      "name": "Main idea",
+      "blurb": "Say what the text is mostly about."
+    },
+    {
+      "id": "fact_opinion",
+      "capability": "EN.RDG.CRT.fact_opinion",
+      "name": "Fact or opinion",
+      "blurb": "Tell what can be checked from what someone thinks."
+    }
   ],
   "levels": [
-    { "id": 1, "name": "Starter", "band": 2, "about": "Short texts with simple sentences.", "words": [50, 95] },
-    { "id": 2, "name": "Builder", "band": 4, "about": "Texts of a few paragraphs, with details that can mislead.", "words": [100, 160] },
-    { "id": 3, "name": "Challenger", "band": 6, "about": "Longer texts where the answer is in different words or has to be worked out.", "words": [160, 240] }
-  ]
+    {
+      "id": 1,
+      "name": "Starter",
+      "band": 2,
+      "about": "Short texts with simple sentences.",
+      "words": [
+        50,
+        95
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Explorer",
+      "band": 3,
+      "about": "Two short paragraphs, with clues to put together.",
+      "words": [
+        80,
+        115
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Builder",
+      "band": 4,
+      "about": "Texts of a few paragraphs, with details that can mislead.",
+      "words": [
+        100,
+        160
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Climber",
+      "band": 5,
+      "about": "Three paragraphs, where he and she, earlier events and reasons have to be followed.",
+      "words": [
+        135,
+        185
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Challenger",
+      "band": 6,
+      "about": "Longer texts where the answer is in different words or has to be worked out.",
+      "words": [
+        160,
+        240
+      ]
+    }
+  ],
+  "scale": 2
 }

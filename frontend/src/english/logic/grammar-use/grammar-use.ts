@@ -11,21 +11,27 @@
  * the level. Scoring is by code. Practice-only: nothing here is evidence for the engine.
  */
 import itemsJson from "../../../../../content/english/grammar/in-use.json";
+import { SCALE, rescale, startFor } from "../scale.ts";
 
 export const SITTING_SIZE = 8;
 export const MOVE_UP = 6;
 export const MOVE_DOWN = 3;
 export const MIN_OF_KIND = 3;
+export const MAX_SPOT = 2;
 
+export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction"] as const;
+export type Ask = (typeof ASKS)[number];
 export interface GrammarItem {
   id: string;
   level: number;
   topic: string;
-  kind: "fix" | "build";
-  /** fix: the sentence with the wrong word in [brackets]. build: the sentence to build. */
+  kind: "fix" | "build" | "spot";
+  /** spot: the kind of word to find. */
+  ask?: Ask;
+  /** fix: the sentence with the wrong word in [brackets]. build: the sentence to build. spot: the sentence to look in. */
   sentence: string;
   rule: string;
-  /** fix: the accepted corrections. */
+  /** fix: the accepted corrections. spot: every word of the sentence that is of the kind asked for. */
   right?: string[];
   /** build: tiles that do not belong. */
   extra?: string[];
@@ -46,6 +52,12 @@ function hash(s: string): number {
 const hashOrder = <T>(xs: readonly T[], key: (x: T) => string) => xs.map((x) => ({ x, k: hash(key(x)), s: key(x) })).sort((a, b) => a.k - b.k || (a.s < b.s ? -1 : 1)).map((e) => e.x);
 const tidy = (s: string) => s.replace(/[‘’ʼ`]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
 
+/** A spot item's words as shown, and a word without the punctuation around it. */
+export const spotWords = (item: GrammarItem): string[] => item.sentence.split(" ");
+const bare = (w: string) => w.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, "");
+/** Is the word tapped one of the kind asked for? */
+export const checkSpot = (item: GrammarItem, tapped: number): boolean => (item.right ?? []).includes(bare(spotWords(item)[tapped] ?? ""));
+
 /** A fix item's words as shown (the wrong one unmarked), which one is wrong, and the punctuation around it. */
 export function fixParts(item: GrammarItem): { words: string[]; wrong: number; before: string; after: string } {
   const tokens = item.sentence.split(" ");
@@ -56,6 +68,7 @@ export function fixParts(item: GrammarItem): { words: string[]; wrong: number; b
 /** The sentence put right, with the first accepted correction. */
 export function corrected(item: GrammarItem): string {
   if (item.kind === "build") return item.sentence;
+  if (item.kind === "spot") return `${item.sentence} — ${item.ask}: ${(item.right ?? []).join(", ")}`;
   const p = fixParts(item);
   return p.words.map((w, i) => (i === p.wrong ? `${p.before}${item.right![0]}${p.after}` : w)).join(" ");
 }
@@ -78,7 +91,13 @@ export function grammarProblems(g: GrammarUse): string[] {
     if (!g.levels.some((l) => l.id === it.level)) out.push(`${it.id}: unknown level`);
     if (!g.topics.some((t) => t.id === it.topic)) out.push(`${it.id}: unknown topic`);
     if (!it.rule.trim()) out.push(`${it.id}: no rule`);
-    if (it.kind === "fix") {
+    if (it.kind === "spot") {
+      const words = spotWords(it).map(bare);
+      if (!it.ask || !ASKS.includes(it.ask)) out.push(`${it.id}: no kind of word to find`);
+      if (!it.right?.length) out.push(`${it.id}: no right word`);
+      for (const r of it.right ?? []) if (words.filter((w) => w === r).length !== 1) out.push(`${it.id}: "${r}" must be in the sentence once`);
+      if (words.length < 3 || words.length > 10) out.push(`${it.id}: ${words.length} words`);
+    } else if (it.kind === "fix") {
       if ((it.sentence.match(/\[/g) ?? []).length !== 1 || !/\[[^\] ]+\]/.test(it.sentence)) out.push(`${it.id}: exactly one wrong word, in brackets`);
       else {
         const p = fixParts(it);
@@ -114,19 +133,21 @@ export function checkFix(item: GrammarItem, tapped: number, typed: string): bool
 export const checkBuild = (item: GrammarItem, chosen: readonly string[]): boolean => tidy(chosen.join(" ")) === tidy(item.sentence);
 
 export type GrammarRecord =
-  | { type: "start"; sitting: string; level: number; topics?: string[] }
-  | { type: "answer"; sitting: string; id: string; level: number; topic: string; correct: boolean; given: string }
-  | { type: "end"; sitting: string; level: number; asked: number; right: number; topics?: string[] };
+  | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
+  | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
+  | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
 
-export const startLevel = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 1 : 2);
+/** Levels recorded before the six-level scale: old 1, 2, 3 are now 1, 3, 5. */
+export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 1, 2: 3, 3: 5 };
+export const startLevel = startFor;
 
 /** The level for the next sitting: the last finished level sitting's level, moved by how it went. Topic sittings do not count. */
 export function levelFor(g: GrammarUse, records: readonly GrammarRecord[], start: number): number {
   const ids = g.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
   const last = [...records].reverse().find((r): r is Extract<GrammarRecord, { type: "end" }> => r.type === "end" && !r.topics && r.asked >= SITTING_SIZE);
-  return last ? clamp(last.level + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
+  return last ? clamp(rescale(last, OLD_LEVELS) + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
 }
 
 /** The sentences for a sitting: new ones first, then ones last got wrong, then the oldest; no topic more than three times, and some of each kind. */
@@ -137,15 +158,18 @@ export function pick(g: GrammarUse, level: number, records: readonly GrammarReco
   const rank = (it: GrammarItem) => (!latest.has(it.id) ? 0 : latest.get(it.id)!.correct ? 2 : 1);
   const ordered = hashOrder(pool, (it) => `grammar|${it.id}`).sort((a, b) => rank(a) - rank(b) || (latest.get(a.id)?.i ?? 0) - (latest.get(b.id)?.i ?? 0));
   const out: GrammarItem[] = [];
+  // in a level sitting, naming words takes at most two places, so there is room for three to fix and three to build
+  const tooManySpots = (it: GrammarItem) => !topics?.length && it.kind === "spot" && out.filter((o) => o.kind === "spot").length >= MAX_SPOT;
   const perTopic = new Map<string, number>();
   const cap = topics?.length ? SITTING_SIZE : 3;
   for (const it of ordered) {
     if (out.length >= SITTING_SIZE) break;
     if ((perTopic.get(it.topic) ?? 0) >= cap) continue;
+    if (tooManySpots(it)) continue;
     perTopic.set(it.topic, (perTopic.get(it.topic) ?? 0) + 1);
     out.push(it);
   }
-  for (const it of ordered) if (out.length < SITTING_SIZE && !out.includes(it)) out.push(it);
+  for (const it of ordered) if (out.length < SITTING_SIZE && !out.includes(it) && !tooManySpots(it)) out.push(it);
   // both kinds in every sitting where the pool allows: at least MIN_OF_KIND to fix and to build
   for (const kind of ["build", "fix"] as const) {
     const spare = ordered.filter((it) => it.kind === kind && !out.includes(it));
@@ -173,7 +197,7 @@ export function grammarSummary(g: GrammarUse, records: readonly GrammarRecord[])
   for (const a of latest.values()) if (!a.correct) misses.set(a.topic, (misses.get(a.topic) ?? 0) + 1);
   const name = (id: string) => g.topics.find((t) => t.id === id)?.name ?? id;
   const lastLevel = [...records].reverse().find((r) => r.type === "end" && !r.topics);
-  return { answered: answers.length, right: answers.filter((a) => a.correct).length, level: lastLevel ? lastLevel.level : null, weak: [...misses].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([t]) => name(t)) };
+  return { answered: answers.length, right: answers.filter((a) => a.correct).length, level: lastLevel ? rescale(lastLevel as { level: number; scale?: number }, OLD_LEVELS) : null, weak: [...misses].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([t]) => name(t)) };
 }
 
 export interface GrammarView {
@@ -186,6 +210,7 @@ export interface GrammarView {
   /** The sentence to fix (its words, the wrong one unmarked) or the tiles to build with: no answer key. */
   fix: { words: string[] } | null;
   build: { tiles: string[] } | null;
+  spot: { words: string[]; ask: Ask } | null;
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
 }
@@ -211,7 +236,7 @@ export class GrammarSitting {
     this.topics = topics?.length ? [...topics] : undefined;
     this.sitting = `g${history.filter((r) => r.type === "start").length + 1}`;
     this.items = pick(content, level, history, this.topics);
-    this.log.push({ type: "start", sitting: this.sitting, level, ...(this.topics ? { topics: this.topics } : {}) });
+    this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE, ...(this.topics ? { topics: this.topics } : {}) });
   }
 
   take(): GrammarRecord[] {
@@ -222,7 +247,7 @@ export class GrammarSitting {
 
   private record(correct: boolean, given: string): void {
     const it = this.items[this.index];
-    const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, topic: it.topic, correct, given: given.slice(0, 200) };
+    const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, scale: SCALE, topic: it.topic, correct, given: given.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
     const p = it.kind === "fix" ? fixParts(it) : null;
@@ -236,6 +261,15 @@ export class GrammarSitting {
     const words = fixParts(it).words;
     if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
     this.record(checkFix(it, tapped, typed), `${words[tapped]} -> ${tidy(typed)}`);
+  }
+
+  /** Answer a spot: the index of the word tapped. */
+  spot(tapped: number): void {
+    const it = this.items[this.index];
+    if (this.last || !it || it.kind !== "spot") return;
+    const words = spotWords(it);
+    if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
+    this.record(checkSpot(it, tapped), bare(words[tapped]));
   }
 
   /** Answer a build: the tiles chosen, in order. */
@@ -255,17 +289,18 @@ export class GrammarSitting {
   }
 
   private endRecord(): Extract<GrammarRecord, { type: "end" }> {
-    return { type: "end", sitting: this.sitting, level: this.level, asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, ...(this.topics ? { topics: this.topics } : {}) };
+    return { type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, ...(this.topics ? { topics: this.topics } : {}) };
   }
 
   snapshot(): GrammarView {
     const it = this.items[this.index];
-    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, feedback: null, done: null };
+    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, feedback: null, done: null };
     if (this.last) return { ...base, phase: "feedback", feedback: this.last };
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;
       return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level) } };
     }
+    if (it.kind === "spot") return { ...base, phase: "ask", spot: { words: spotWords(it), ask: it.ask! } };
     return it.kind === "fix" ? { ...base, phase: "ask", fix: { words: fixParts(it).words } } : { ...base, phase: "ask", build: { tiles: tiles(it) } };
   }
 }

@@ -12,7 +12,7 @@ import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
 import { syllabusFor } from "../syllabus/syllabus.ts";
 
-test("LA-1 content: four passages at each of three levels, four questions each, the right choice in no favoured place", () => {
+test("LA-1 content: four passages at each of six levels, four questions each, the right choice in no favoured place", () => {
   assert.deepEqual(listeningProblems(LISTENING), []);
   const place = [0, 0, 0];
   for (const l of LISTENING.levels) assert.equal(LISTENING.passages.filter((p) => p.level === l.id).length, 4);
@@ -26,7 +26,8 @@ test("LA-1 content: four passages at each of three levels, four questions each, 
       place[c.answer]++;
     }
   }
-  assert.deepEqual(place, [16, 16, 16]);
+  assert.equal(LISTENING.levels.length, 6);
+  assert.deepEqual(place, [32, 32, 32]);
   // a passage that states facts about the world names what it was checked against
   const factual = (LISTENING.passages as unknown as { title: string; checked?: { against: string[] } }[]).filter((p) => ["How Honeybees Share News", "The Stepwell", "Salt from the Sea"].includes(p.title));
   assert.equal(factual.length, 3);
@@ -76,8 +77,10 @@ test("LA-2 a sitting: listen, four questions, then the passage with each answer 
 });
 
 test("LA-3 the level moves after four right or one right; passages do not repeat until all are heard", () => {
-  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 2, 2]);
-  assert.deepEqual([sit(2, []).done.nextLevel, sit(2, [], 1).done.nextLevel, sit(2, [], 3).done.nextLevel, sit(3, []).done.nextLevel, sit(1, [], 4).done.nextLevel], [3, 2, 1, 3, 1]);
+  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 3, 3]);
+  // a passage stored before the six-level scale is read on today's scale: old 2 is 4
+  assert.equal(levelFor(LISTENING, [{ type: "result", passage: "lp2.1", level: 2, plays: 1, right: 2, answers: [] }], 1), 4);
+  assert.deepEqual([sit(2, []).done.nextLevel, sit(2, [], 1).done.nextLevel, sit(2, [], 3).done.nextLevel, sit(6, []).done.nextLevel, sit(1, [], 4).done.nextLevel], [3, 2, 1, 6, 1]);
   let h: ListenRecord[] = [];
   const heard: string[] = [];
   for (let k = 0; k < 4; k++) {

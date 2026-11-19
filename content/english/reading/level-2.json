@@ -1,82 +1,560 @@
 {
   "level": 2,
   "lessons": [
-    { "skill": "detail", "title": "The right detail, not just a matching word", "strategy": "A longer text can hold several numbers, names or times. Use the whole question to find the right paragraph, then the one sentence that answers it.", "tip": "Before you answer, check that your detail matches every part of the question.",
-      "worked": { "prompt": "How many books were on the shelf by Friday?", "answer": "Forty-one.", "steps": ["The text has three numbers about books: twelve, four and forty-one.", "The question says by Friday. Find Friday: 'By Friday, the shelf held forty-one books.'", "Twelve was in June and four was on Monday. They are about books, but they do not answer this question. The answer is forty-one."] } },
-    { "skill": "sequence", "title": "Follow the time words", "strategy": "Time words such as on Monday, then, by Friday, after that and finally show when each thing happened. Use them to put the events in order.", "tip": "Circle the time words in your head, then place the question's event among them.",
-      "worked": { "prompt": "What happened after only four books came on Monday?", "answer": "Farid made a chart with every child's name.", "steps": ["Find the event: 'On Monday, only four books came.'", "The next sentence begins with Then: 'Then Farid had an idea.' He made a chart.", "The forty-one books came later, by Friday. So the next thing was Farid's chart."] } },
-    { "skill": "cause", "title": "The reason may be in another sentence", "strategy": "Writers do not always say because. Ask what changed just before the thing happened. The cause is often one or two sentences earlier.", "tip": "Try joining the two sentences with because. If it makes sense, you have found the cause.",
-      "worked": { "prompt": "Why did the number of books grow so quickly by Friday?", "answer": "Each child who brought a book got a green dot on Farid's chart.", "steps": ["The effect is: 'By Friday, the shelf held forty-one books.' No because is given.", "What changed just before? Farid's chart: 'Each time someone brought a book, they got a green dot.'", "Join them: the shelf filled because children wanted a green dot beside their name. It makes sense, so that is the cause."] } },
-    { "skill": "feelings", "title": "Why did they do that?", "strategy": "To find why someone acts, look at what they saw or what happened just before, and at what they did next. The reason links the two.", "tip": "Ask: what problem was this person trying to solve?",
-      "worked": { "prompt": "Why did Farid make the chart?", "answer": "He wanted more children to bring books.", "steps": ["What happened just before? 'On Monday, only four books came.' That was the problem.", "What did Farid do? He made a chart that gave a green dot to each child who brought a book.", "The chart rewards bringing a book. So Farid wanted more children to bring books."] } },
-    { "skill": "main_idea", "title": "The big idea of a paragraph", "strategy": "Each paragraph has one big idea. The other sentences give details about it. Choose the idea that the other sentences support.", "tip": "If you could say 'for example' before it, it is a detail, not the main idea.",
-      "worked": { "prompt": "What is the main idea of the last paragraph?", "answer": "The children now look after the library themselves.", "steps": ["Read the paragraph's first sentence: 'Now the children run the library themselves.'", "The next sentence gives examples: two children stamp the cards, and there is a one-week rule.", "Stamping cards is a detail that supports the first sentence. The main idea is that the children run the library."] } },
-    { "skill": "fact_opinion", "title": "Spot the opinion words", "strategy": "Opinions often carry signal words: I think, I believe, should, best, worst, most exciting. A fact gives something that can be checked, such as a number, a date or an event.", "tip": "Look for should, best and I think. Then ask whether everyone would have to agree.",
-      "worked": { "prompt": "Which sentence is an opinion?", "answer": "I think it is the best corner of the school.", "steps": ["'By Friday, the shelf held forty-one books.' We could count them. It is a fact.", "'I think it is the best corner of the school.' It has two signal words: I think and best.", "Someone else might prefer the playground. It cannot be checked, so it is an opinion."] } }
+    {
+      "skill": "detail",
+      "title": "Use two key words",
+      "strategy": "Some questions have two key words, such as a person and a day. The answer is in the sentence that fits both, not just one.",
+      "tip": "Underline the two key words in the question before you look.",
+      "worked": {
+        "prompt": "What did Uncle Selvam do on Sunday?",
+        "answer": "He fixed a wooden seat to the swing.",
+        "steps": [
+          "The question has two key words: Uncle Selvam and Sunday.",
+          "Uncle Selvam did something on Saturday too: he tied the rope swing. That sentence fits only one key word.",
+          "Find the sentence with Sunday: 'On Sunday, he fixed a wooden seat to it.' Both key words fit, so that is the answer."
+        ]
+      }
+    },
+    {
+      "skill": "sequence",
+      "title": "Before and after",
+      "strategy": "A question may ask what happened just before or just after something. Find that event in the text first, then read the sentence in front of it or behind it.",
+      "tip": "Put your finger on the event the question names, then move one sentence.",
+      "worked": {
+        "prompt": "What happened just before Uncle Selvam tied a stronger knot?",
+        "answer": "Meena shouted and held the swing.",
+        "steps": [
+          "Find the event in the question: 'Uncle Selvam tied a stronger knot.'",
+          "The question says before, so read the sentence in front of it: Meena shouted, 'Stop!' and held the swing with both hands.",
+          "Check the order: the rope slipped, Meena held the swing, then came the knot. So the answer is that Meena shouted and held the swing."
+        ]
+      }
+    },
+    {
+      "skill": "cause",
+      "title": "So points back to the reason",
+      "strategy": "The word so joins a reason to what happened. The part before so is the reason. The part after so is the result.",
+      "tip": "Find so, then read the words in front of it.",
+      "worked": {
+        "prompt": "Why did Meena let Arul go first?",
+        "answer": "Because he was crying.",
+        "steps": [
+          "Find the sentence: 'her little brother Arul was crying, so she let him go first.'",
+          "The word so joins two parts. Before so is the reason; after so is what happened.",
+          "Before so: Arul was crying. That is why she let him go first."
+        ]
+      }
+    },
+    {
+      "skill": "feelings",
+      "title": "What they say and what they do",
+      "strategy": "To find a feeling, put two clues together: the words a person says, and what the person does at that moment.",
+      "tip": "Ask: when would I say that and do that?",
+      "worked": {
+        "prompt": "How did Meena feel when the rope began to slip?",
+        "answer": "She was frightened that Arul would fall.",
+        "steps": [
+          "Look at what Meena said: she shouted, 'Stop!' People shout like that when something is going wrong.",
+          "Look at what she did: she held the swing with both hands, to keep it still.",
+          "Put the two together: she was frightened that Arul would fall."
+        ]
+      }
+    },
+    {
+      "skill": "main_idea",
+      "title": "Pick the best title",
+      "strategy": "A good title fits the whole text. A title that fits only one sentence is a detail, not the main idea.",
+      "tip": "Try each title against the first paragraph, then against the second.",
+      "worked": {
+        "prompt": "Which is the best title: 'A New Swing', 'Lunch Time' or 'Arul Cries'?",
+        "answer": "A New Swing.",
+        "steps": [
+          "A good title fits the whole text, not just one part.",
+          "'Lunch Time' fits only two words, and 'Arul Cries' fits only one sentence.",
+          "Every part is about the swing: making it, sharing it and mending it. So 'A New Swing' is the best title."
+        ]
+      }
+    },
+    {
+      "skill": "fact_opinion",
+      "title": "How could you check it?",
+      "strategy": "For a fact, you can say how to check it: look, count, measure or ask someone who was there. If there is no way to check, it is an opinion.",
+      "tip": "Finish this sentence: I could check it by ...",
+      "worked": {
+        "prompt": "Is this a fact or an opinion: 'A swing is the best toy in the world.'?",
+        "answer": "An opinion.",
+        "steps": [
+          "Ask: how could I check it? For 'On Sunday, he fixed a wooden seat to it', you could look at the swing or ask Uncle Selvam.",
+          "For 'the best toy in the world' there is nothing to count, measure or look at. Some children would choose a ball or a kite.",
+          "If you cannot say how to check it, it is an opinion."
+        ]
+      }
+    }
   ],
   "passages": [
-    { "id": "L2.T", "role": "teach", "title": "The Class Library",
-      "text": "Last June, Class 5B had only twelve storybooks, and most of them had torn covers. Their teacher, Mrs Rao, wanted the children to read more. She asked every child to bring one old book from home.\n\nOn Monday, only four books came. Then Farid had an idea. He made a chart with every child's name and stuck it near the door. Each time someone brought a book, they got a green dot. By Friday, the shelf held forty-one books.\n\nNow the children run the library themselves. Two children stamp the cards at lunch, and nobody may keep a book for more than a week. I think it is the best corner of the school. Every class should have a library like this.",
-      "questions": [] },
-    { "id": "L2.P1", "role": "practice", "title": "The Steel Bottle Rule",
-      "text": "Every summer, the playground at Hill View School was covered in plastic bottles. The gardener, Mr Das, filled three sacks with them every week. He was tired of it.\n\nIn April, the head teacher made a new rule. Children had to bring a steel bottle from home, and the shop inside the school stopped selling water in plastic bottles. At first, many children forgot. So the school put two big water tanks near the gate, where bottles could be filled.\n\nAfter a month, Mr Das filled only half a sack a week. He started using his free time to plant a row of sunflowers along the wall. Steel bottles are the best answer to litter. I think every school should follow this rule.",
+    {
+      "id": "N2.T",
+      "role": "teach",
+      "title": "The Mango Tree Swing",
+      "text": "Uncle Selvam tied a rope swing to the mango tree on Saturday. On Sunday, he fixed a wooden seat to it. Meena wanted the first turn, but her little brother Arul was crying, so she let him go first. Arul laughed as he flew up.\n\nAfter lunch, Arul was on the swing again. The rope began to slip. Meena shouted, “Stop!” and held the swing with both hands. Uncle Selvam tied a stronger knot. Then Meena had her turn at last. She said, “I knew it would be worth the wait.” A swing is the best toy in the world.",
+      "questions": []
+    },
+    {
+      "id": "N2.P1",
+      "role": "practice",
+      "title": "The Kite Shop",
+      "text": "On Friday, Bala went to the kite shop with his father. He chose a green kite with a long tail. On Saturday, he came back with his sister Devi, and she chose a red one. The shopkeeper gave each of them a free reel of string.\n\nOn Sunday the wind was weak, so the kites would not rise. Devi stamped her foot and said, “This is not fair!” Then a strong wind came from the sea. Both kites climbed high above the houses. Flying a kite is the most exciting game of all.",
       "questions": [
-        { "skill": "detail", "prompt": "How many sacks did Mr Das fill each week before the new rule?", "right": "three", "wrong": ["half a sack", "two"], "evidence": "filled three sacks with them every week", "explain": "Before the rule he filled three sacks a week. Half a sack is from after the rule, and two is the number of water tanks.", "hint": "Two numbers in the text are about sacks. Which one comes before the rule was made?" },
-        { "skill": "sequence", "prompt": "What did the school do after many children forgot their bottles?", "right": "It put two big water tanks near the gate.", "wrong": ["It stopped selling water in plastic bottles.", "It planted sunflowers along the wall."], "evidence": "So the school put two big water tanks near the gate", "explain": "'At first, many children forgot. So the school put two big water tanks near the gate.' The shop had stopped selling plastic bottles earlier, and the sunflowers were Mr Das's work later.", "hint": "Find 'At first, many children forgot.' The next sentence begins with So." },
-        { "skill": "cause", "prompt": "Why did Mr Das have free time after a month?", "right": "There were far fewer bottles to pick up.", "wrong": ["The head teacher gave him two days off each week.", "The sunflowers needed less water."], "evidence": "After a month, Mr Das filled only half a sack a week.", "explain": "He went from three sacks to half a sack a week. Less litter to collect left him free time. The text does not say because, but the two sentences link.", "hint": "What changed about his sacks just before the sentence about free time?" },
-        { "skill": "feelings", "prompt": "Why did the head teacher make the new rule?", "right": "To cut the plastic litter on the playground.", "wrong": ["To sell more steel bottles.", "To give the gardener more work to do each week."], "evidence": "the playground at Hill View School was covered in plastic bottles", "explain": "The problem just before the rule was a playground covered in plastic bottles. The rule removes plastic bottles, so it was made to cut the litter.", "hint": "What problem does the first paragraph describe? What does the rule take away?" },
-        { "skill": "main_idea", "prompt": "What is the main idea of the last paragraph?", "right": "The rule worked: there was much less litter.", "wrong": ["Mr Das likes sunflowers.", "There are two big water tanks near the school gate."], "evidence": "After a month, Mr Das filled only half a sack a week.", "explain": "The paragraph shows the result of the rule: only half a sack of litter. The sunflowers are a detail, and the tanks are in another paragraph.", "hint": "What does the first sentence of that paragraph tell you? The rest supports it." },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "Steel bottles are the best answer to litter.", "wrong": ["In April, the head teacher made a new rule.", "After a month, Mr Das filled only half a sack a week."], "evidence": "Steel bottles are the best answer to litter.", "explain": "Best is a signal word, and others might suggest a different answer to litter. The other two sentences report things that can be checked.", "hint": "Look for a signal word such as best or should." }
-      ] },
-    { "id": "L2.P2", "role": "practice", "title": "Saturday Market",
-      "text": "Every Saturday, Latha helps her mother at their vegetable stall. They leave home at five in the morning, before the sun is up. Latha's job is to stack the tomatoes and write the prices on a small board.\n\nLast Saturday it rained heavily. Very few people came to the market. By noon, the baskets were still full, and Latha's mother kept counting the few coins in her tin.\n\nThen Latha tore a page from her notebook. She wrote 'Two kilos for the price of one' in big letters and held it up at the roadside. Soon a line of people stood at the stall. By two o'clock every basket was empty. Her mother hugged her tightly. I think Latha should get a stall of her own one day.",
+        {
+          "skill": "detail",
+          "prompt": "Who chose a kite on Saturday?",
+          "right": "Devi",
+          "wrong": [
+            "Bala",
+            "the shopkeeper"
+          ],
+          "evidence": "On Saturday, he came back with his sister Devi, and she chose a red one.",
+          "explain": "Two children chose kites. Bala chose his on Friday. The sentence with Saturday says that his sister chose a red one.",
+          "hint": "Two days are named. Find the sentence with Saturday in it."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happened just after Devi stamped her foot?",
+          "right": "A strong wind came from the sea.",
+          "wrong": [
+            "The shopkeeper gave them string.",
+            "Bala chose a green kite."
+          ],
+          "evidence": "Then a strong wind came from the sea.",
+          "explain": "Find where Devi stamped her foot. The next sentence begins with Then: a strong wind came from the sea.",
+          "hint": "Find the sentence about her foot, then read the one that follows it."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why would the kites not rise on Sunday?",
+          "right": "The wind was weak.",
+          "wrong": [
+            "The string was too short.",
+            "The kites were too heavy."
+          ],
+          "evidence": "On Sunday the wind was weak, so the kites would not rise.",
+          "explain": "The part before so is the reason: the wind was weak.",
+          "hint": "Find the word so. The reason is the part in front of it."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Devi feel when the kites would not rise?",
+          "right": "cross",
+          "wrong": [
+            "sleepy",
+            "proud"
+          ],
+          "evidence": "Devi stamped her foot and said",
+          "explain": "She stamped her foot and said, “This is not fair!” People do and say that when they are cross.",
+          "hint": "Look at what she did with her foot and at what she said."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "Two New Kites",
+          "wrong": [
+            "A Free Reel of String",
+            "The Wind from the Sea"
+          ],
+          "evidence": "Both kites climbed high above the houses.",
+          "explain": "Every part is about the two kites: buying them, waiting for wind and flying them. The string and the sea wind are each in one sentence only.",
+          "hint": "Which title fits the first paragraph and the second one too?"
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Flying a kite is the most exciting game of all.",
+          "wrong": [
+            "He chose a green kite with a long tail.",
+            "Then a strong wind came from the sea."
+          ],
+          "evidence": "Flying a kite is the most exciting game of all.",
+          "explain": "Nobody can check which game is the most exciting; other children may choose a different one. You could check the colour of the kite and the wind.",
+          "hint": "For each sentence, ask how you could check it. One of them has nothing to look at or count."
+        }
+      ]
+    },
+    {
+      "id": "N2.P2",
+      "role": "practice",
+      "title": "The Clock That Stopped",
+      "text": "The big clock in the school hall stopped on Monday. On Tuesday, the bell rang ten minutes late. On Wednesday it rang twenty minutes early. The cook did not know when to serve lunch, so the rice went cold.\n\nMr Pillai, the science teacher, opened the clock on Thursday. He found a dead battery inside. Before he put in a new one, he let Class Five look at the tiny wheels. Rani clapped her hands and said, “It is like a little machine city!” Now the bell rings on time. Old clocks are more beautiful than new ones.",
       "questions": [
-        { "skill": "detail", "prompt": "At what time were the baskets empty?", "right": "two o'clock", "wrong": ["noon", "five in the morning"], "evidence": "By two o'clock every basket was empty.", "explain": "'By two o'clock every basket was empty.' At noon the baskets were still full, and five in the morning is when they leave home.", "hint": "The text has three times. Which one is in the sentence about empty baskets?" },
-        { "skill": "sequence", "prompt": "What happened after Latha held up her sign?", "right": "A line of people stood at the stall.", "wrong": ["It began to rain heavily.", "Latha stacked the tomatoes and wrote the prices."], "evidence": "Soon a line of people stood at the stall.", "explain": "After she held up the sign, 'Soon a line of people stood at the stall.' The rain and the stacking came before the sign.", "hint": "Find the sentence where she holds up the page. The next one begins with Soon." },
-        { "skill": "cause", "prompt": "Why did very few people come to the market?", "right": "It rained heavily.", "wrong": ["The prices were too high.", "The stall opened late."], "evidence": "Last Saturday it rained heavily.", "explain": "'Last Saturday it rained heavily. Very few people came to the market.' The rain is the cause, though the text does not say because.", "hint": "Read the sentence just before 'Very few people came to the market.'" },
-        { "skill": "feelings", "prompt": "Why did Latha write the sign?", "right": "She wanted to sell the vegetables that were left.", "wrong": ["She wanted to practise writing in big, neat letters.", "Her mother told her to."], "evidence": "By noon, the baskets were still full", "explain": "The baskets were still full and her mother was counting a few coins. The sign offered a bargain to bring buyers, so Latha wanted to sell what was left.", "hint": "What was the problem at noon? What does the sign offer to people?" },
-        { "skill": "main_idea", "prompt": "What is the main idea of the last paragraph?", "right": "Latha's idea brought customers and sold everything.", "wrong": ["Latha tore a page out of her school notebook.", "It rained heavily on Saturday and few people came."], "evidence": "By two o'clock every basket was empty.", "explain": "The paragraph tells of the sign, the line of people and the empty baskets: her idea worked. Tearing the page is one small step.", "hint": "Which answer covers the sign, the line of people and the empty baskets together?" },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "I think Latha should get a stall of her own one day.", "wrong": ["By two o'clock every basket was empty.", "Last Saturday it rained heavily."], "evidence": "I think Latha should get a stall of her own one day.", "explain": "I think and should are signal words. It is what the writer believes. The other two can be checked.", "hint": "Find the sentence with I think or should." }
-      ] },
-    { "id": "L2.C1", "role": "check", "title": "The Night Train",
-      "text": "Imran and his grandfather took the night train from Chennai to Madurai. The train left at half past nine. Imran had the top bed, and his grandfather slept below.\n\nAround midnight, the train stopped at a small station. A man sold hot milk through the window. Imran bought two cups. Next, he climbed down and woke his grandfather gently. They drank the milk together and watched the lamps of the station slide away.\n\nIn the morning, Imran found that his grandfather had covered him with his own shawl. The old man sat by the window, rubbing his cold arms and smiling. Night trains are the best way to travel. I think everyone should try one.",
+        {
+          "skill": "detail",
+          "prompt": "On which day did the bell ring early?",
+          "right": "Wednesday",
+          "wrong": [
+            "Tuesday",
+            "Monday"
+          ],
+          "evidence": "On Wednesday it rang twenty minutes early",
+          "explain": "The bell rang at the wrong time on two days. Tuesday goes with late; Wednesday goes with early.",
+          "hint": "Two days are about the bell. Match the day to the word early."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What did Mr Pillai do before he put in a new battery?",
+          "right": "He let Class Five look at the wheels.",
+          "wrong": [
+            "He rang the bell on time.",
+            "He served the lunch."
+          ],
+          "evidence": "Before he put in a new one, he let Class Five look at the tiny wheels.",
+          "explain": "The sentence begins with Before: before the new battery went in, he let Class Five look at the tiny wheels.",
+          "hint": "Find the sentence that begins with Before. Its second part happened first."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did the rice go cold?",
+          "right": "The cook did not know when to serve lunch.",
+          "wrong": [
+            "The kitchen fire went out.",
+            "The children came late on purpose."
+          ],
+          "evidence": "The cook did not know when to serve lunch, so the rice went cold.",
+          "explain": "The part before so is the reason: the cook did not know when to serve lunch.",
+          "hint": "Find the word so. Read the part in front of it."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Rani feel when she saw inside the clock?",
+          "right": "delighted",
+          "wrong": [
+            "bored",
+            "afraid"
+          ],
+          "evidence": "Rani clapped her hands and said",
+          "explain": "She clapped her hands and said it was like a little machine city. People clap and talk like that when they are delighted.",
+          "hint": "What did she do with her hands? What did she say?"
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "The Clock That Stopped",
+          "wrong": [
+            "Cold Rice for Lunch",
+            "Rani Claps Her Hands"
+          ],
+          "evidence": "The big clock in the school hall stopped on Monday.",
+          "explain": "Each part is about the clock: it stops, the bell goes wrong and the teacher mends it. The rice and Rani's clapping are single details.",
+          "hint": "Which title covers both the trouble and the mending?"
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Old clocks are more beautiful than new ones.",
+          "wrong": [
+            "He found a dead battery inside.",
+            "Now the bell rings on time."
+          ],
+          "evidence": "Old clocks are more beautiful than new ones.",
+          "explain": "Nobody can measure which clocks are more beautiful. You could look at the battery and listen for the bell.",
+          "hint": "Which sentence could you not check by looking, counting or listening?"
+        }
+      ]
+    },
+    {
+      "id": "N2.C1",
+      "role": "check",
+      "title": "The New Bus Stop",
+      "text": "For years, the children of Pudur waited for the school bus under the hot sun. In March, the village built a small shelter with a tin roof. In April, the carpenter added a long bench.\n\nOne morning it rained hard. Kumar reached the stop late, so he had no seat. A small girl moved her bag and said, “Sit here, please.” Kumar smiled and shared his biscuits with her. After the rain stopped, the bus arrived, dry and shining. Our bus stop is the nicest place in the village.",
       "questions": [
-        { "skill": "detail", "prompt": "When did the train leave?", "right": "at half past nine", "wrong": ["around midnight", "in the morning"], "evidence": "The train left at half past nine.", "explain": "'The train left at half past nine.' Midnight is when it stopped at a small station." },
-        { "skill": "sequence", "prompt": "What did Imran do after he bought the two cups of milk?", "right": "He climbed down and woke his grandfather.", "wrong": ["He went back to sleep on the top bed.", "He covered his grandfather with his own shawl."], "evidence": "Next, he climbed down and woke his grandfather gently.", "explain": "The word Next shows it: he climbed down and woke his grandfather." },
-        { "skill": "cause", "prompt": "Why were the grandfather's arms cold in the morning?", "right": "He had given his shawl to Imran.", "wrong": ["The train window was broken and let the wind in.", "He had spilled the milk."], "evidence": "his grandfather had covered him with his own shawl", "explain": "He had covered Imran with his own shawl, so he had nothing warm for himself. The text gives the two facts in different sentences." },
-        { "skill": "feelings", "prompt": "Why did Imran wake his grandfather?", "right": "To share the hot milk with him.", "wrong": ["To ask him for money.", "Because the train had reached Madurai."], "evidence": "They drank the milk together", "explain": "He bought two cups, woke his grandfather, and they drank the milk together. He wanted to share it." },
-        { "skill": "main_idea", "prompt": "What is the main idea of the second paragraph?", "right": "Imran and his grandfather shared hot milk at a midnight stop.", "wrong": ["A man at a small station sold hot milk through the train window.", "The train left at half past nine."], "evidence": "They drank the milk together", "explain": "The paragraph is about the midnight stop and the two of them sharing milk. The seller is one detail, and the leaving time is in another paragraph." },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "Night trains are the best way to travel.", "wrong": ["The train left at half past nine.", "A man sold hot milk through the window."], "evidence": "Night trains are the best way to travel.", "explain": "Best is a signal word, and many people prefer other ways to travel. The other two sentences can be checked." }
-      ] },
-    { "id": "L2.C2", "role": "check", "title": "The Bird Count",
-      "text": "Each January, the children of Kovai Nature Club count the birds at the lake near their town. They meet at six in the morning, when the birds are busiest. Each child carries a notebook and a pencil.\n\nThis year, Divya spotted a painted stork first. After that, the group counted ducks for almost an hour. Finally, they added up their lists under a banyan tree. They had seen thirty-two kinds of birds, eight more than last year.\n\nThe club leader said the lake was cleaner now. Last March, people from the town had removed the weeds and rubbish from the water. More fish live in clean water, and birds come where the fish are. Bird counting is the best hobby for children. I think schools should take every class to the lake.",
+        {
+          "skill": "detail",
+          "prompt": "What was added in April?",
+          "right": "a long bench",
+          "wrong": [
+            "a tin roof",
+            "a small shelter"
+          ],
+          "evidence": "In April, the carpenter added a long bench.",
+          "explain": "Two months are named. March goes with the shelter and its tin roof; April goes with the bench."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happened after the rain stopped?",
+          "right": "The bus arrived.",
+          "wrong": [
+            "Kumar reached the stop.",
+            "The carpenter added a bench."
+          ],
+          "evidence": "After the rain stopped, the bus arrived",
+          "explain": "The sentence begins with After the rain stopped, and goes on: the bus arrived."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did Kumar have no seat?",
+          "right": "He reached the stop late.",
+          "wrong": [
+            "The bench was broken.",
+            "The bus was full."
+          ],
+          "evidence": "Kumar reached the stop late, so he had no seat.",
+          "explain": "The part before so is the reason: he reached the stop late."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Kumar feel when the girl made room for him?",
+          "right": "thankful",
+          "wrong": [
+            "angry",
+            "worried"
+          ],
+          "evidence": "Kumar smiled and shared his biscuits with her.",
+          "explain": "He smiled and shared his biscuits with her. People do that when they are thankful."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "A Shelter at the Bus Stop",
+          "wrong": [
+            "Kumar's Biscuits",
+            "A Rainy Morning"
+          ],
+          "evidence": "the village built a small shelter with a tin roof",
+          "explain": "Both paragraphs are about the shelter: how it was built and how it helped in the rain. The biscuits are one detail, and the rain is only in the second paragraph."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Our bus stop is the nicest place in the village.",
+          "wrong": [
+            "In April, the carpenter added a long bench.",
+            "One morning it rained hard."
+          ],
+          "evidence": "Our bus stop is the nicest place in the village.",
+          "explain": "You cannot check which place is the nicest; people will not agree. You could look at the bench and ask about the rain."
+        }
+      ]
+    },
+    {
+      "id": "N2.C2",
+      "role": "check",
+      "title": "The Calf's First Day",
+      "text": "Lakshmi's cow had a calf on Tuesday night. On Wednesday morning, Lakshmi carried warm water to the shed. In the evening, her brother Mani brought fresh grass. The calf was too weak to stand, so Lakshmi held the bottle for it.\n\nBefore she went to bed, Lakshmi looked into the shed one more time. The calf was standing on its thin legs. She ran to the house and called, “Come and see, come and see!” Her grandmother named the calf Chandra. A calf is the sweetest animal on a farm.",
       "questions": [
-        { "skill": "detail", "prompt": "How many kinds of birds did the club see this year?", "right": "thirty-two", "wrong": ["eight", "six"], "evidence": "They had seen thirty-two kinds of birds", "explain": "'They had seen thirty-two kinds of birds.' Eight is how many more than last year, and six is the time they meet." },
-        { "skill": "sequence", "prompt": "What did the group do last?", "right": "They added up their lists under a banyan tree.", "wrong": ["They counted ducks on the water for almost an hour.", "They spotted a painted stork."], "evidence": "Finally, they added up their lists under a banyan tree.", "explain": "First the stork, after that the ducks, and finally the lists were added up." },
-        { "skill": "cause", "prompt": "Why did more kinds of birds come to the lake this year?", "right": "The lake had been cleaned, so more fish live in it.", "wrong": ["The children brought food for the birds every morning.", "It rained more in January."], "evidence": "More fish live in clean water, and birds come where the fish are.", "explain": "The town cleaned the lake. Clean water holds more fish, and birds come where the fish are." },
-        { "skill": "feelings", "prompt": "Why does each child carry a notebook and a pencil?", "right": "To write down the birds they see.", "wrong": ["To draw the lake for an art class.", "To do homework while they wait."], "evidence": "Finally, they added up their lists under a banyan tree.", "explain": "They count birds and later add up their lists, so the notebooks are for writing down the birds they see." },
-        { "skill": "main_idea", "prompt": "What is the main idea of the second paragraph?", "right": "The group counted the birds and found more kinds than last year.", "wrong": ["Divya saw a painted stork.", "There is a banyan tree near the lake where the club meets each January."], "evidence": "They had seen thirty-two kinds of birds, eight more than last year.", "explain": "The paragraph follows the count from the first bird to the total. The stork and the tree are details." },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "Bird counting is the best hobby for children.", "wrong": ["Each child carries a notebook and a pencil.", "They meet at six in the morning, when the birds are busiest."], "evidence": "Bird counting is the best hobby for children.", "explain": "Best is a signal word and people can disagree about hobbies. The other two can be checked." }
-      ] },
-    { "id": "L2.C3", "role": "check", "title": "The Broken Window",
-      "text": "On Tuesday afternoon, Joseph and his friends were playing cricket in the lane. Joseph hit the ball hard. It flew over the wall and broke Mrs Pillai's kitchen window.\n\nThe other boys ran away at once. Joseph stood still for a minute. Then he walked to Mrs Pillai's door and rang the bell. He told her what had happened and said he would pay for the glass from his savings.\n\nMrs Pillai did not shout. First she swept up the glass. Then she gave Joseph a glass of buttermilk. The next day she told his mother that he was the most honest boy in the lane. Later that week, Joseph gave her sixty rupees. I think children should always own up. Honesty is the best gift.",
+        {
+          "skill": "detail",
+          "prompt": "Who brought fresh grass in the evening?",
+          "right": "Mani",
+          "wrong": [
+            "Lakshmi",
+            "Grandmother"
+          ],
+          "evidence": "In the evening, her brother Mani brought fresh grass.",
+          "explain": "Two children brought things. Lakshmi brought water in the morning; Mani brought grass in the evening."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What did Lakshmi do before she went to bed?",
+          "right": "She looked into the shed again.",
+          "wrong": [
+            "She named the calf Chandra.",
+            "She carried warm water to the shed."
+          ],
+          "evidence": "Before she went to bed, Lakshmi looked into the shed one more time.",
+          "explain": "The sentence begins with Before she went to bed: she looked into the shed one more time. The water was carried in the morning, and it was Grandmother who named the calf."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did Lakshmi hold the bottle for the calf?",
+          "right": "The calf was too weak to stand.",
+          "wrong": [
+            "The calf did not like grass.",
+            "Mani had asked her to."
+          ],
+          "evidence": "The calf was too weak to stand, so Lakshmi held the bottle for it.",
+          "explain": "The part before so is the reason: the calf was too weak to stand."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Lakshmi feel when she saw the calf standing?",
+          "right": "excited",
+          "wrong": [
+            "tired",
+            "cross"
+          ],
+          "evidence": "She ran to the house and called",
+          "explain": "She ran and called, “Come and see, come and see!” People run and call out like that when they are excited."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "The Calf's First Day",
+          "wrong": [
+            "Mani Brings Grass",
+            "Grandmother's Farm"
+          ],
+          "evidence": "The calf was standing on its thin legs.",
+          "explain": "The whole text follows the calf through its first day, from weak to standing. Mani's grass is one detail, and the farm itself is not described."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "A calf is the sweetest animal on a farm.",
+          "wrong": [
+            "Her grandmother named the calf Chandra.",
+            "The calf was standing on its thin legs."
+          ],
+          "evidence": "A calf is the sweetest animal on a farm.",
+          "explain": "There is no way to check which animal is the sweetest. You could ask about the name and look at the calf."
+        }
+      ]
+    },
+    {
+      "id": "N2.C3",
+      "role": "check",
+      "title": "The Painted Wall",
+      "text": "The wall behind the library was grey and dirty. In June, Class Four painted a river along the lower half. In July, Class Five painted birds and clouds at the top. The art teacher, Miss Thomas, drew the outlines with chalk first.\n\nOn the last day, a football hit the wet paint, so one cloud got a brown mark. Anil hung his head and said, “I am so sorry, Miss.” Miss Thomas turned the mark into a flying kite. After that, every child signed the corner of the wall. Painted walls are much prettier than plain ones.",
       "questions": [
-        { "skill": "detail", "prompt": "When was the window broken?", "right": "on Tuesday afternoon", "wrong": ["the next day", "later that week"], "evidence": "On Tuesday afternoon", "explain": "The first paragraph begins 'On Tuesday afternoon'. The next day and later that week are about what happened afterwards." },
-        { "skill": "sequence", "prompt": "What did Mrs Pillai do first, after Joseph told her?", "right": "She swept up the glass.", "wrong": ["She gave Joseph buttermilk.", "She spoke to his mother."], "evidence": "First she swept up the glass.", "explain": "'First she swept up the glass. Then she gave Joseph a glass of buttermilk.' She spoke to his mother the next day." },
-        { "skill": "cause", "prompt": "Why did the window break?", "right": "Joseph's ball flew over the wall and hit it.", "wrong": ["Mrs Pillai slammed it shut.", "The other boys threw stones at it from the lane."], "evidence": "It flew over the wall and broke Mrs Pillai's kitchen window.", "explain": "Joseph hit the ball hard, and it flew over the wall and broke the window." },
-        { "skill": "feelings", "prompt": "Why did Joseph ring Mrs Pillai's bell?", "right": "He wanted to tell the truth and put things right.", "wrong": ["He wanted to ask for his ball back before dark.", "His friends dared him to."], "evidence": "He told her what had happened and said he would pay for the glass from his savings.", "explain": "At the door he told her what had happened and offered to pay. He went to own up, not to get his ball." },
-        { "skill": "main_idea", "prompt": "What is the main idea of the second paragraph?", "right": "Joseph owned up when his friends ran away.", "wrong": ["Joseph has some savings.", "The boys were playing cricket in the lane on Tuesday."], "evidence": "Then he walked to Mrs Pillai's door and rang the bell.", "explain": "The paragraph sets the boys who ran against Joseph, who went to the door and told the truth. His savings are a detail." },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "Honesty is the best gift.", "wrong": ["Later that week, Joseph gave her sixty rupees.", "The other boys ran away at once."], "evidence": "Honesty is the best gift.", "explain": "Best is a signal word and it cannot be checked. The other two sentences report what happened." }
-      ] },
-    { "id": "L2.C4", "role": "check", "title": "The Science Fair",
-      "text": "Nila and Rekha wanted to build a model windmill for the science fair. They had only one week. On the first day, they collected cardboard, a pencil and a small motor from an old toy.\n\nOn Wednesday, the blades would not turn. Rekha wanted to give up and make a poster instead. Nila took the model home. She cut the blades again, thinner this time, and tested them in front of the table fan until midnight.\n\nOn Friday morning, the windmill turned and lit a tiny bulb. The judges stopped at their table for ten minutes. In the evening, the girls carried home a silver cup. Science fairs are the most exciting school events. I think every child should build something.",
+        {
+          "skill": "detail",
+          "prompt": "What did Class Five paint?",
+          "right": "birds and clouds",
+          "wrong": [
+            "a river",
+            "a flying kite"
+          ],
+          "evidence": "In July, Class Five painted birds and clouds at the top.",
+          "explain": "Two classes painted. Class Four painted the river; Class Five painted birds and clouds."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happened after Miss Thomas turned the mark into a kite?",
+          "right": "Every child signed the wall.",
+          "wrong": [
+            "A football hit the wet paint.",
+            "Class Four painted a river."
+          ],
+          "evidence": "After that, every child signed the corner of the wall.",
+          "explain": "The next sentence begins with After that: every child signed the corner of the wall."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did one cloud get a brown mark?",
+          "right": "A football hit the wet paint.",
+          "wrong": [
+            "Someone spilled brown paint.",
+            "Rain fell on the wall."
+          ],
+          "evidence": "a football hit the wet paint, so one cloud got a brown mark",
+          "explain": "The part before so is the reason: a football hit the wet paint."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Anil feel about the mark?",
+          "right": "ashamed",
+          "wrong": [
+            "pleased",
+            "brave"
+          ],
+          "evidence": "Anil hung his head and said",
+          "explain": "He hung his head and said he was so sorry. People do that when they feel ashamed of something."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "A Wall Becomes a Picture",
+          "wrong": [
+            "Anil's Football",
+            "Chalk Outlines"
+          ],
+          "evidence": "Class Four painted a river along the lower half",
+          "explain": "Every part is about the wall turning into a picture. The football and the chalk are each in one sentence only."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Painted walls are much prettier than plain ones.",
+          "wrong": [
+            "In June, Class Four painted a river along the lower half.",
+            "Miss Thomas turned the mark into a flying kite."
+          ],
+          "evidence": "Painted walls are much prettier than plain ones.",
+          "explain": "Nobody can measure which walls are prettier. You could look at the river and the kite on the wall."
+        }
+      ]
+    },
+    {
+      "id": "N2.C4",
+      "role": "check",
+      "title": "The Lost Puppy",
+      "text": "On Monday evening, Fatima found a brown puppy near the bus stand. It had no collar. She gave it milk. Her mother gave it an old towel to sleep on. On Tuesday, Fatima made a poster with a drawing of the puppy.\n\nOn Wednesday, an old man knocked at the door. The puppy jumped up and licked his hands, so everyone knew it was his. Fatima bit her lip and said quietly, “Goodbye, little one.” Before he left, the old man asked her to visit every Sunday. Puppies are better pets than kittens.",
       "questions": [
-        { "skill": "detail", "prompt": "Where did the motor come from?", "right": "an old toy", "wrong": ["a table fan", "the science fair"], "evidence": "a small motor from an old toy", "explain": "They collected 'a small motor from an old toy'. The table fan was only used for testing the blades." },
-        { "skill": "sequence", "prompt": "What happened on Wednesday?", "right": "The blades would not turn.", "wrong": ["The girls collected cardboard.", "The girls won a silver cup."], "evidence": "On Wednesday, the blades would not turn.", "explain": "'On Wednesday, the blades would not turn.' Collecting was on the first day and the cup came on Friday evening." },
-        { "skill": "cause", "prompt": "Why did the windmill turn on Friday?", "right": "Nila had cut the blades thinner.", "wrong": ["The judges repaired it before the fair opened.", "The girls bought a new motor."], "evidence": "She cut the blades again, thinner this time", "explain": "On Wednesday the blades would not turn. Nila cut them thinner and tested them, and on Friday the windmill turned." },
-        { "skill": "feelings", "prompt": "Why did Nila take the model home?", "right": "She did not want to give up, and wanted to fix it.", "wrong": ["She wanted to keep it for herself.", "Rekha told her to make a poster there instead of a model."], "evidence": "tested them in front of the table fan until midnight", "explain": "At home she cut the blades again and tested them until midnight. She took it home to keep working on it." },
-        { "skill": "main_idea", "prompt": "What is the main idea of the second paragraph?", "right": "The model failed, but Nila kept working on it.", "wrong": ["Nila has a table fan at home that runs until midnight.", "Rekha likes making posters."], "evidence": "Nila took the model home.", "explain": "The paragraph tells of the failure and of Nila's work to fix it. The fan and the poster are details." },
-        { "skill": "fact_opinion", "prompt": "Which sentence is an opinion?", "right": "Science fairs are the most exciting school events.", "wrong": ["They had only one week.", "The judges stopped at their table for ten minutes."], "evidence": "Science fairs are the most exciting school events.", "explain": "Most exciting is a signal phrase and people can disagree. The other two can be checked." }
-      ] }
+        {
+          "skill": "detail",
+          "prompt": "What did Fatima's mother give the puppy?",
+          "right": "an old towel",
+          "wrong": [
+            "some milk",
+            "a collar"
+          ],
+          "evidence": "Her mother gave it an old towel to sleep on",
+          "explain": "Two people gave the puppy something. Fatima gave milk; her mother gave an old towel."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What did the old man do before he left?",
+          "right": "He asked Fatima to visit every Sunday.",
+          "wrong": [
+            "He made a poster of the puppy.",
+            "He gave the puppy some milk."
+          ],
+          "evidence": "Before he left, the old man asked her to visit every Sunday.",
+          "explain": "The sentence begins with Before he left: he asked her to visit every Sunday."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why was everyone sure the puppy was the old man's?",
+          "right": "It jumped up and licked his hands.",
+          "wrong": [
+            "It had his name on its collar.",
+            "He showed them a photograph."
+          ],
+          "evidence": "The puppy jumped up and licked his hands, so everyone knew it was his.",
+          "explain": "The part before so is the reason: the puppy jumped up and licked his hands."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Fatima feel when the puppy left?",
+          "right": "sad",
+          "wrong": [
+            "proud",
+            "angry"
+          ],
+          "evidence": "Fatima bit her lip and said quietly",
+          "explain": "She bit her lip and said goodbye quietly. People do that when they are sad and trying not to cry."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "Which is the best title for this text?",
+          "right": "A Puppy Finds Its Owner",
+          "wrong": [
+            "Fatima's Poster",
+            "An Old Towel"
+          ],
+          "evidence": "everyone knew it was his",
+          "explain": "The text follows the puppy from being found to going home with its owner. The poster and the towel are single details."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Puppies are better pets than kittens.",
+          "wrong": [
+            "It had no collar.",
+            "On Wednesday, an old man knocked at the door."
+          ],
+          "evidence": "Puppies are better pets than kittens.",
+          "explain": "People who love kittens would not agree, and there is no way to check it. You could look for a collar and ask who came to the door."
+        }
+      ]
+    }
   ]
 }

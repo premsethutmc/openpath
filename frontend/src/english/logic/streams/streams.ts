@@ -15,6 +15,8 @@ import { waiting } from "./joined.ts";
 import { asReadingLevel } from "./level-check.ts";
 
 export type StreamId = "words" | "reading" | "listening" | "spelling" | "grammar";
+/** The Grammar in use topic that practises naming the kinds of words. */
+export const NAMING_TOPIC = "parts_of_speech";
 export interface StreamRow {
   id: StreamId;
   icon: string;
@@ -27,7 +29,7 @@ export interface StreamRow {
   /** Nothing to open right now. */
   idle?: boolean;
   /** Spelling: open My Words (words from the other streams wait there) instead of the Spelling Bee. Listening: open Listen and answer (a passage) instead of Listen and write. */
-  open?: "mywords" | "passage";
+  open?: "mywords" | "passage" | "naming";
 }
 
 const KINDS: Record<StreamId, string[]> = {
@@ -62,13 +64,15 @@ export function streamRows(learner: Learner, now: string): StreamRow[] {
   const heardToday = active.has("listen_passage");
   const wait = waiting(learner);
   const joined = wait.tricky + wait.newWords;
-  const grammar = grammarLevel(GRAMMAR, learner.grammarRecords(), grammarStart(age));
+  const grammar = grammarLevel(GRAMMAR, learner.grammarRecords(), levels.grammar?.level ?? grammarStart(age));
+  // the level check found that naming a noun or a verb is not yet sure: that comes first, until a sitting of it is done
+  const naming = !!levels.grammar && !levels.grammar.basics && !learner.grammarRecords().some((r) => r.type === "end" && r.topics?.includes(NAMING_TOPIC));
 
   return [
     { id: "words", icon: "🌱", name: "Words", level: `Level ${band} of ${BANDS}`, next: ws.dueNow ? `${ws.dueNow} ${ws.dueNow === 1 ? "word" : "words"} to see again` : wordsDone ? "Done for today" : "Five new words", doneToday: wordsDone },
     { id: "reading", icon: "📖", name: "Reading", level: `${COURSE.levels.find((l) => l.id === readingLevel)!.name} (level ${readingLevel} of ${COURSE.levels.length})`, next: rec ? COURSE.skills.find((s) => s.id === rec.unit.skill)!.name : "Every skill done", doneToday: did("reading") },
     { id: "listening", icon: "🎧", name: "Listening and writing", level: `Level ${listening} of ${DICTATION.levels.length}`, next: wroteToday && !heardToday ? "A passage to hear, with four questions" : "Five sentences to hear and write", doneToday: wroteToday && heardToday, ...(wroteToday && !heardToday ? { open: "passage" as const } : {}) },
     { id: "spelling", icon: "🐝", name: "Spelling", level: `${LEVEL_NAMES[bee]} (level ${bee} of ${Object.keys(LEVEL_NAMES).length})`, next: joined ? `${joined} ${joined === 1 ? "word" : "words"} from your writing and new words` : "A round of the Spelling Bee", doneToday: did("spelling"), ...(joined ? { open: "mywords" as const } : {}) },
-    { id: "grammar", icon: "🧩", name: "Grammar", level: `Level ${grammar} of ${GRAMMAR.levels.length}`, next: "Eight sentences to fix and build", doneToday: learner.state.events.some((e) => e.kind === "grammar_use" && e.record.type === "end" && dayOf(e.at) === today) },
+    { id: "grammar", icon: "🧩", name: "Grammar", level: `Level ${grammar} of ${GRAMMAR.levels.length}`, next: naming ? "Start with naming words: noun and verb" : "Eight sentences to fix and build", ...(naming ? { open: "naming" as const } : {}), doneToday: learner.state.events.some((e) => e.kind === "grammar_use" && e.record.type === "end" && dayOf(e.at) === today) },
   ];
 }

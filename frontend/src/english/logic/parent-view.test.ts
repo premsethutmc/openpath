@@ -74,6 +74,6 @@ test("PV-4 new words and Listen and write show on the child's summary, and only 
   ]);
   const s = childSummary(a, clock());
   assert.deepEqual(s.newWords, { learnt: 0, learning: 2, tricky: ["brave"] });
-  assert.deepEqual(s.dictation, { sentences: 2, perfectFirst: 1, level: 2, missed: ["umbrella"] });
+  assert.deepEqual(s.dictation, { sentences: 2, perfectFirst: 1, level: 3, missed: ["umbrella"] });
   assert.deepEqual([childSummary(b, clock()).newWords, childSummary(b, clock()).dictation], [null, null]);
 });

@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, checkSpot, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -69,7 +69,9 @@ function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i:
     asked.push(it);
     assert.ok(!(v.fix?.words.join(" ") ?? "").includes("["), "the wrong word is not marked on screen");
     const wrong = miss(it, i);
-    if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
+    const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+    if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => it.right!.includes(bare(w)) !== wrong));
+    else if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
     else s.build(wrong ? [...it.sentence.split(" ")].reverse() : it.sentence.split(" "));
     const f = s.snapshot().feedback!;
     assert.equal(f.correct, !wrong);
@@ -96,17 +98,21 @@ test("GU-4 a sitting: eight sentences at the level, mixed topics, the rule after
 });
 
 test("GU-5 levels move with a sitting; missed sentences return; new ones come first", () => {
-  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 2, 2]);
+  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 3, 3]);
+  // a sitting stored before the six-level scale is read on today's scale: old 2 is 3
+  assert.equal(levelFor(GRAMMAR, [{ type: "end", sitting: "old", level: 2, asked: 8, right: 4 }], 1), 3);
+  assert.equal(levelFor(GRAMMAR, [{ type: "end", sitting: "new", level: 2, scale: 2, asked: 8, right: 4 }], 1), 2);
   assert.equal(sit(2, []).done.nextLevel, 3);
   assert.equal(sit(2, [], (_, i) => i < 5).done.nextLevel, 1);
   assert.equal(sit(2, [], (_, i) => i < 3).done.nextLevel, 2);
-  assert.equal(sit(3, []).done.nextLevel, 3);
+  assert.equal(sit(3, []).done.nextLevel, 4);
+  assert.equal(sit(6, []).done.nextLevel, 6);
   const first = sit(2, [], (_, i) => i < 3);
   const next = pick(GRAMMAR, 2, first.records);
   assert.ok(!next.some((it) => first.asked.includes(it)), "new sentences before any repeat");
   const all = GRAMMAR.items.filter((it) => it.level === 2);
-  const seen: GrammarRecord[] = all.map((it, i) => ({ type: "answer", sitting: "g1", id: it.id, level: 2, topic: it.topic, correct: ![4, 20, 40].includes(i), given: "" }));
-  assert.deepEqual(pick(GRAMMAR, 2, seen).slice(0, 3).map((it) => it.id).sort(), [all[4].id, all[20].id, all[40].id].sort(), "once all are seen, the missed ones first");
+  const seen: GrammarRecord[] = all.map((it, i) => ({ type: "answer", sitting: "g1", id: it.id, level: 2, topic: it.topic, correct: ![4, 12, 20].includes(i), given: "" }));
+  assert.deepEqual(pick(GRAMMAR, 2, seen).slice(0, 3).map((it) => it.id).sort(), [all[4].id, all[12].id, all[20].id].sort(), "once all are seen, the missed ones first");
   const sum = grammarSummary(GRAMMAR, first.records);
   assert.deepEqual([sum.answered, sum.right, sum.level], [8, 5, 2]);
   assert.ok(sum.weak.length >= 1);
@@ -166,4 +172,19 @@ test("GU-9 Classes 4, 5 and 6 are held; each is sound, unofficial-source labelle
     }
   }
   assert.equal(syllabusFor(99).class, 4, "an unknown class falls back to the first held");
+});
+
+test("GU-9 naming words: a word of the kind asked is right, any other word is not, and the basics come first", () => {
+  const spots = GRAMMAR.items.filter((it) => it.kind === "spot");
+  assert.ok(spots.length >= 24);
+  for (const it of spots) {
+    const words = spotWords(it);
+    const right = words.map((_, i) => checkSpot(it, i));
+    assert.equal(right.filter(Boolean).length, it.right!.length, it.id);
+    assert.ok(right.some((r) => !r), `${it.id}: some word is not of the kind`);
+    assert.equal(checkSpot(it, 99), false);
+  }
+  assert.deepEqual([...new Set(spots.filter((it) => it.level === 1).map((it) => it.ask))].sort(), ["noun", "verb"]);
+  const v = new GrammarSitting(GRAMMAR, 1, [], ["parts_of_speech"]).snapshot();
+  assert.ok(v.spot && !JSON.stringify(v).includes('"right"'), "the screen holds the words and the kind asked for, never the answer");
 });

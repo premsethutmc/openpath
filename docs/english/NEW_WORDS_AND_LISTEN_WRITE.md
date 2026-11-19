@@ -30,7 +30,7 @@ records (`word_learn`, `dictation`) and never change a capability estimate. Both
 - **Levels.** Three: short sentences, longer ones with questions, names and short forms, and hard ones. Four or
   five of five right first time moves up; none or one moves down. Sentences not right first time return in a later
   sitting (two at most), after which new ones come first.
-- **Content.** 120 sentences, 40 per level (`content/english/dictation/sentences.json`), written for OpenPath.
+- **Content.** 184 sentences on six levels since November 2026 (see FINER_LEVELS.md); at first 120 sentences, 40 per level (`content/english/dictation/sentences.json`), written for OpenPath.
 - **Typing.** The box turns off the phone's auto-capitals, auto-correct and spell-check, so the child's own
   spelling is what gets marked.
 

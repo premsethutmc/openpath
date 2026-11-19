@@ -447,6 +447,8 @@ export interface ReadingEvent {
   kind: "reading";
   id: string;
   at: string;
+  /** The level scale the record was written on (logic/scale.ts); absent on records from before five levels. */
+  scale?: number;
   record: ReadingRecord;
 }
 

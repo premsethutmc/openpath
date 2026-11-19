@@ -18,6 +18,8 @@ Grammar is measured by the engine's own starting check (15 to 20 questions, real
 screen offers as the last step and the home screen keeps offering until it is done. It is kept separate so the
 quick parts stay practice-only and the engine's evidence rules are untouched.
 
+Listening and grammar have six levels since November 2026 (see FINER_LEVELS.md); the listening part has four sentences.
+
 The levels are first estimates from a few answers on OpenPath's own scales. There is no single English number.
 Each stream keeps moving its level as the learner practises. The check can be taken again.
 

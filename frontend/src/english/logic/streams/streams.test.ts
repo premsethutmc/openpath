@@ -15,10 +15,11 @@ import { MemoryRepo } from "../store.ts";
 import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
-import { LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
-import { streamRows } from "./streams.ts";
+import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
+import { NAMING_TOPIC, streamRows } from "./streams.ts";
+import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
 
-const keyFor = (prompt: string, level: number) => COURSE.questions.find((q) => q.prompt === prompt && q.level === level && q.role === "practice")!;
+const keyFor = (prompt: string, level: number, title: string) => COURSE.questions.find((q) => q.prompt === prompt && q.level === level && q.role === "practice" && COURSE.passages.get(q.passage)!.title === title)!;
 /** Sit the reading part as a learner who can read up to a level (answers right there, wrong above). */
 function read(start: number, canRead: number) {
   const s = new ReadingPlacement(COURSE, start);
@@ -27,7 +28,7 @@ function read(start: number, canRead: number) {
   for (let v = s.snapshot(); v.phase === "asking"; v = s.snapshot()) {
     assert.ok(!("answer" in v.question!), "the screen never holds the answer key");
     texts.add(v.passage!.title);
-    const q = keyFor(v.question!.prompt, v.level);
+    const q = keyFor(v.question!.prompt, v.level, v.passage!.title);
     assert.ok(READING_SKILLS.includes(q.skill));
     assert.equal(COURSE.passages.get(q.passage)!.role, "practice", "never a text kept for the course's fresh checks");
     asked++;
@@ -36,17 +37,20 @@ function read(start: number, canRead: number) {
   return { ...s.result(), asked, texts: texts.size };
 }
 
-test("LC-1 reading: three of four passes a level; one step up or down; the start is the level above the last passed", () => {
-  assert.deepEqual([readingStart("early"), readingStart("school"), readingStart(null)], [1, 2, 2]);
-  assert.deepEqual([read(2, 3).passed, read(2, 2).passed, read(2, 1).passed, read(2, 0).passed, read(1, 3).passed, read(1, 0).passed], [3, 2, 1, 0, 2, 0]);
-  const r = read(2, 2);
-  assert.deepEqual([r.asked, r.texts, r.steps.map((s) => s.level)], [8, 2, [2, 3]]);
+test("LC-1 reading: three of four passes a level; two levels up or down, then one; the start is the level above the last passed", () => {
+  assert.deepEqual([readingStart("early"), readingStart("school"), readingStart(null)], [1, 3, 3]);
+  assert.deepEqual([5, 4, 3, 2, 1, 0].map((can) => read(3, can).passed), [5, 4, 3, 2, 1, 0], "every level can be reached from the middle");
+  assert.deepEqual([read(1, 5).passed, read(1, 0).passed, read(3, 5).asked, read(3, 0).asked], [4, 0, 8, 8]);
+  const r = read(3, 3);
+  assert.equal(r.scale, 2);
+  assert.deepEqual([r.asked, r.texts, r.steps.map((s) => s.level)], [12, 3, [3, 5, 4]]);
   assert.equal(read(1, 0).asked, 4, "nothing below the first level to try");
-  const s = new ReadingPlacement(COURSE, 2);
+  const s = new ReadingPlacement(COURSE, 3);
   s.answer(99);
   assert.equal(s.snapshot().index, 0, "a choice that is not on screen is ignored");
   const lv = (passed: number) => levelsFrom([{ type: "reading", passed, steps: [] }]).reading!.start;
-  assert.deepEqual([lv(0), lv(1), lv(2), lv(3)], [1, 2, 3, 3]);
+  assert.deepEqual([lv(0), lv(1), lv(2), lv(3)], [1, 2, 4, 5], "a result stored on the old three-level scale is read on today's");
+  assert.deepEqual([2, 4, 5].map((passed) => levelsFrom([{ type: "reading", passed, scale: 2, steps: [] }]).reading!.start), [3, 5, 5]);
 });
 
 /** Sit the listening part writing perfectly up to a level. */
@@ -62,16 +66,18 @@ function listen(start: number, canWrite: number, history = [] as Parameters<type
   return { ...s.result(), ids, records: s.take() };
 }
 
-test("LC-2 listening: three sentences, one try each, up after one that passes; stored so they are not asked again soon", () => {
-  assert.deepEqual([listen(2, 3).level, listen(2, 2).level, listen(2, 1).level, listen(2, 0).level, listen(1, 3).level], [3, 2, 1, 1, 3]);
-  const r = listen(2, 2);
+test("LC-2 listening: four sentences, one try each, a wide first move then single steps; stored so they are not asked again soon", () => {
+  assert.deepEqual([6, 5, 4, 3, 2, 1, 0].map((can) => listen(3, can).level), [6, 5, 4, 3, 2, 1, 1], "every level can be reached from the middle");
+  assert.equal(listen(1, 6).level, 5);
+  const r = listen(3, 4);
+  assert.equal(r.scale, 2);
   assert.equal(r.ids.length, LISTENING_STEPS);
   assert.equal(new Set(r.ids).size, LISTENING_STEPS, "no sentence twice");
-  assert.deepEqual(r.steps.map((s) => [s.level, s.perfect]), [[2, true], [3, false], [2, true]]);
-  assert.equal(r.records.length, 3);
+  assert.deepEqual(r.steps.map((s) => [s.level, s.perfect]), [[3, true], [5, false], [4, true], [5, false]]);
+  assert.equal(r.records.length, 4);
   assert.ok(r.records.every((x) => x.type === "answer" && x.tries === 1 && x.sitting === "level-check"));
-  assert.ok(!listen(2, 2, r.records).ids.some((id) => r.ids.includes(id)), "a second check uses other sentences");
-  const s = new ListeningPlacement(DICTATION, 2, []);
+  assert.ok(!listen(3, 4, r.records).ids.some((id) => r.ids.includes(id)), "a second check uses other sentences");
+  const s = new ListeningPlacement(DICTATION, 3, []);
   s.check("  ", 0);
   assert.equal(s.snapshot().index, 0, "nothing typed is not an answer");
   assert.equal(levelFor(DICTATION, r.records, 3), 3, "answers without a finished sitting do not move the Listen and write level");
@@ -94,9 +100,9 @@ test("LC-3 the words part is the word check, cut to four rounds", () => {
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {
   const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
-  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 2 }, spelling: null });
-  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
-  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 2, start: 3 }, listening: { level: 3 }, spelling: { level: 4 } });
+  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null, grammar: null }, "a level stored on the old three-level scale is read on today's");
+  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
+  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 4 }, listening: { level: 3 }, spelling: { level: 4 }, grammar: null });
 });
 
 test("LC-5 the levels steer the streams: reading begins at its start level, with the levels below still open", () => {
@@ -117,14 +123,14 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.levels().done, false);
   const row = (id: string) => streamRows(l, clock()).find((r) => r.id === id)!;
   assert.deepEqual(streamRows(l, clock()).map((r) => r.id), ["words", "reading", "listening", "spelling", "grammar"]);
-  assert.equal(row("listening").level, `Level ${startLevel(l.state.preferences?.band)} of 3`);
-  assert.match(row("reading").level, /^Starter \(level 1 of 3\)$/);
+  assert.equal(row("listening").level, `Level ${startLevel(l.state.preferences?.band)} of 6`);
+  assert.match(row("reading").level, /^Starter \(level 1 of 5\)$/);
   await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, estimate: 4000, answered: 12 }, { type: "reading", passed: 1, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "done" }]);
   assert.equal(l.levels().done, true);
   assert.equal(row("words").level, "Level 5 of 8");
   assert.equal(row("words").next, "Five new words");
-  assert.match(row("reading").level, /^Builder \(level 2 of 3\)$/);
-  assert.equal(row("listening").level, "Level 3 of 3");
+  assert.match(row("reading").level, /^Explorer \(level 2 of 5\)$/);
+  assert.equal(row("listening").level, "Level 5 of 6");
   assert.match(row("spelling").level, /level 1 of 5/);
   await l.recordLevelCheck([{ type: "spelling", level: 3, steps: [] }]);
   assert.equal(levelOf(l.spelling(), BANK), 3, "the Spelling Bee starts at the level found");
@@ -132,7 +138,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.spellingSession(), null);
   await l.startSpelling();
   assert.ok(l.spellingSession()!.word, "and offers a word from there");
-  assert.equal(row("grammar").level, "Level 2 of 3");
+  assert.equal(row("grammar").level, "Level 3 of 6");
   assert.equal(row("grammar").next, "Eight sentences to fix and build");
   assert.ok(streamRows(l, clock()).every((r) => !r.doneToday));
   await l.recordDictation([{ type: "start", sitting: "d1", level: 3 }, { type: "end", sitting: "d1", level: 3, asked: 5, perfectFirst: 5 }]);
@@ -151,7 +157,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
 });
 
 test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one; the level is the highest spelt right", async () => {
-  assert.deepEqual(PARTS, ["words", "reading", "listening", "spelling"]);
+  assert.deepEqual(PARTS, ["words", "reading", "listening", "spelling", "grammar"]);
   assert.deepEqual([spellingStart("early"), spellingStart("school"), spellingStart("older")], [1, 2, 3]);
   const c = loadContent({ mode: "development" });
   const l = await Learner.create(c, new MemoryRepo(), "Speller", "guardian", testClock(), "p-spell");
@@ -181,11 +187,53 @@ test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one
 
 test("LC-8 listening placement passes a sentence on its words: no capital or end mark needed, one slip in a long sentence", () => {
   assert.deepEqual([listeningPass(6, 6), listeningPass(5, 6), listeningPass(7, 8), listeningPass(6, 8), listeningPass(11, 12)], [true, false, true, false, true]);
-  const s = new ListeningPlacement(DICTATION, 2, []);
+  const s = new ListeningPlacement(DICTATION, 3, []);
   while (!s.finished) s.check(s.spoken()!.toLowerCase().replace(/[.?!,]/g, ""), 1);
-  assert.equal(s.result().level, 3, "words right without capitals or end marks still places at the top");
+  assert.equal(s.result().level, 6, "words right without capitals or end marks still places at the top");
   assert.ok(s.take().every((r) => r.type === "answer" && !r.perfectFirst), "though the stored answers stay marked as not perfect");
-  const t = new ListeningPlacement(DICTATION, 2, []);
-  while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 3).join(" "), 1);
+  const t = new ListeningPlacement(DICTATION, 3, []);
+  while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 2).join(" "), 1);
   assert.equal(t.result().level, 1, "half a sentence does not pass");
+});
+
+/** Sit the grammar part as a learner who can name words or not, and can do sentences up to a level. */
+function grammarCheck(names: boolean, can: number) {
+  const s = new GrammarPlacement(GRAMMAR, MIDDLE.grammar);
+  const kinds: string[] = [];
+  for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot()) {
+    assert.ok(!v.words.join(" ").includes("["), "the wrong word is not marked on screen");
+    const it = GRAMMAR.items.find((x) => x.id === v.id)!;
+    kinds.push(v.task!.kind === "spot" ? v.task!.ask : "fix");
+    const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+    const rightAt = it.kind === "spot" ? v.words.findIndex((w) => it.right!.includes(bare(w))) : it.sentence.split(" ").findIndex((w) => w.includes("["));
+    const ok = v.index < 2 ? names : it.level <= can;
+    s.answer(ok ? rightAt : it.kind === "spot" ? v.words.findIndex((w) => !it.right!.includes(bare(w))) : (rightAt + 1) % v.words.length);
+  }
+  return { ...s.result(), kinds };
+}
+
+test("LC-9 grammar: a noun and a verb for everyone, then four on a staircase from the middle; every level within reach", () => {
+  const all = grammarCheck(true, 6);
+  assert.deepEqual(all.kinds.slice(0, 2), ["noun", "verb"]);
+  assert.equal(all.kinds.length, GRAMMAR_STEPS);
+  assert.deepEqual([all.basics, all.level, all.scale], [{ right: 2, asked: 2 }, 6, 2]);
+  assert.deepEqual([6, 5, 4, 3, 2, 1, 0].map((can) => grammarCheck(true, can).level), [6, 5, 4, 3, 2, 1, 1]);
+  // someone who does sentences well but cannot name a noun or a verb: the level stands, and the gap is recorded
+  const gap = grammarCheck(false, 5);
+  assert.deepEqual([gap.basics, gap.level], [{ right: 0, asked: 2 }, 5]);
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...gap }]).grammar, { level: 5, basics: false });
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...all }]).grammar, { level: 6, basics: true });
+});
+
+test("LC-10 after the check, the grammar row starts at the level found, and names naming words first when that was missed", async () => {
+  const c = loadContent({ mode: "development" });
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "Grammar", "guardian", clock, "p-grammar");
+  const row = () => streamRows(l, clock()).find((r) => r.id === "grammar")!;
+  await l.recordLevelCheck([{ type: "start" }, { type: "grammar", ...grammarCheck(false, 5) }, { type: "done" }]);
+  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 6", "Start with naming words: noun and verb", "naming"]);
+  const s = new GrammarSitting(GRAMMAR, 5, [], [NAMING_TOPIC]);
+  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) (s.spot(0), s.next());
+  await l.recordGrammar(s.take());
+  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 6", "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
 });

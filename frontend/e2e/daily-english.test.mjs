@@ -115,7 +115,7 @@ test("Listen and write: five sentences, two fixed on the second try, the misspel
   const { context, page, errors, foreign, fits } = await start("Listener");
   await page.getByRole("button", { name: "Try Listen and write" }).click();
   await page.getByRole("heading", { name: "Hear a sentence, then write it" }).waitFor();
-  await page.getByText("Level 2: Longer sentences").waitFor();
+  await page.getByText("Level 3: Longer sentences").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   let tricky = "";
   for (let i = 1; i <= 5; i++) {
@@ -123,7 +123,7 @@ test("Listen and write: five sentences, two fixed on the second try, the misspel
     const main = page.locator('main[data-phase="write"]');
     await main.waitFor();
     const s = SENTENCES.get(await main.getAttribute("data-sentence"));
-    assert.equal(s?.level, 2);
+    assert.equal(s?.level, 3);
     assert.equal(await page.getByText(s.text, { exact: true }).count(), 0, "the sentence is not on screen");
     await page.getByRole("button", { name: /Hear the sentence/ }).waitFor();
     const box = page.locator("#dict-box");
@@ -185,12 +185,12 @@ test("Listen and answer: a passage that stays off the screen, four questions, th
   const { context, page, errors, foreign, fits } = await start("Ears");
   await page.getByRole("button", { name: "Try Listen and answer" }).click();
   await page.getByRole("heading", { name: "Hear a passage, then answer" }).waitFor();
-  await page.getByText("Level 2: Longer stories").waitFor();
+  await page.getByText("Level 3: Stories").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   const main = page.locator('main[data-phase="listen"]');
   await main.waitFor();
   const p = PASSAGES.get(await main.getAttribute("data-passage"));
-  assert.equal(p?.level, 2);
+  assert.equal(p?.level, 3);
   const opening = p.text.slice(0, 40);
   assert.equal(await page.getByText(opening, { exact: false }).count(), 0, "the passage is not on screen");
   await fits();

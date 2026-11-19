@@ -1,5 +1,5 @@
 /**
- * Reading comprehension course (content/english/reading): six skills at three levels. Each skill and level has a
+ * Reading comprehension course (content/english/reading): six skills at five levels. Each skill and level has a
  * lesson with a worked example on a teaching text, guided practice with hints on two practice texts, and questions
  * on four further texts that are kept for fresh checks and never used for teaching or practice.
  *
@@ -9,10 +9,14 @@ import courseJson from "../../../../../content/english/reading/course.json";
 import level1Json from "../../../../../content/english/reading/level-1.json";
 import level2Json from "../../../../../content/english/reading/level-2.json";
 import level3Json from "../../../../../content/english/reading/level-3.json";
+import level4Json from "../../../../../content/english/reading/level-4.json";
+import level5Json from "../../../../../content/english/reading/level-5.json";
 
 export const SKILL_IDS = ["detail", "sequence", "cause", "feelings", "main_idea", "fact_opinion"] as const;
 export type SkillId = (typeof SKILL_IDS)[number];
-export const LEVELS = [1, 2, 3] as const;
+export const LEVELS = [1, 2, 3, 4, 5] as const;
+/** Levels recorded before the five-level scale (November 2026): old 1, 2, 3 are now 1, 3, 5. */
+export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 1, 2: 3, 3: 5 };
 export type Level = (typeof LEVELS)[number];
 export type Role = "teach" | "practice" | "check";
 export interface Unit {
@@ -176,7 +180,7 @@ export function courseProblems(course: Course): string[] {
   return out;
 }
 
-export const COURSE: Course = buildCourse(courseJson, [level1Json, level2Json, level3Json]);
+export const COURSE: Course = buildCourse(courseJson, [level1Json, level2Json, level3Json, level4Json, level5Json]);
 {
   const problems = courseProblems(COURSE);
   if (problems.length) throw new Error(`reading course: ${problems.slice(0, 5).join("; ")}`);
