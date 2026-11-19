@@ -18,6 +18,8 @@ import { moduleFor } from "../../../packages/learning/src/content";
 import { learnerState } from "../../../packages/learning/src/session";
 import { withDecisions } from "../../../packages/learning/src/records";
 import { SliceFlow } from "./flow";
+import { useTogether } from "../../../packages/learning/src/intervention";
+useTogether(false); // these journeys are about the stop itself; together@1 (walk-throughs before it) is tested in learning/together.test.ts
 import { wrong } from "./learners";
 
 type Mode = "learns" | "never" | "lapses";

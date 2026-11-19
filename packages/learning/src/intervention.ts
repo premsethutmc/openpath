@@ -117,8 +117,11 @@ function reopenedAt(competency: string, records: LearnerRecords): string | null 
  *  it is never evidence. Bounded: TOGETHER.all in one opening of the skill, TOGETHER.sitting in one sitting; after that the
  *  product stops for the day, or for a person. Null: nothing left for this rung. */
 export const TOGETHER = { all: 4, sitting: 2, context: "together" } as const;
+let togetherOn = true;
+/** Tests about the stop itself (hand-over, re-entry) turn the rung off, as they do prereq-after-own@1. */
+export const useTogether = (on: boolean) => { togetherOn = on; };
 function workTogether(m: Module, competency: string, records: LearnerRecords, session: string): Pick<ModuleState, "phase" | "question" | "activity" | "context" | "why" | "reason"> | "tomorrow" | null {
-  if (!m.pool) return null;
+  if (!togetherOn || !m.pool) return null;
   const since = reopenedAt(competency, records) ?? "";
   const mine = records.attempts.filter((a) => of(m)(a) && a.at > since);
   const walked = mine.filter((a) => a.context === TOGETHER.context);
@@ -141,7 +144,9 @@ const TOMORROW = "That is enough of this one for today. It comes back next time,
 function gapBelow(competency: string, records: LearnerRecords, evidence: ((id: string) => SkillEvidence) | undefined, now: number, session: string): { original: string; reason: string } | null {
   if (!prerequisiteAfterOwn() || !evidence) return null;
   const own = graph.evidenceTarget(competency);
-  const wrong = [...records.attempts].reverse().filter((a) => !rightAnswer(a) && graph.evidenceTarget(question(a.questionId).competency) === own).map((a) => a.questionId);
+  // together@1: the skills below were looked at before the first walk-through; answers from then on do not reopen them
+  const walked = records.attempts.find((a) => a.context === TOGETHER.context && graph.evidenceTarget(question(a.questionId).competency) === own)?.at;
+  const wrong = [...records.attempts].reverse().filter((a) => !rightAnswer(a) && graph.evidenceTarget(question(a.questionId).competency) === own && (!walked || a.at < walked)).map((a) => a.questionId);
   for (const id of [...new Set(wrong)].slice(0, 3)) {
     const r = recovery(id, records, evidence, now, session);
     if (r.phase === "support" || (r.phase === "teach" && r.active && graph.evidenceTarget(r.active) !== own)) return { original: id, reason: r.reason };
@@ -809,7 +814,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
     const gap = s ? null : gapBelow(competency, records, evidence, now, session);
     if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, decision, reason: gap.reason };
-    if (!s) return orTogether({ ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() });
+    if (!s) return (order.length ? orTogether : (x: ModuleState) => x)({ ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() });
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
   }
