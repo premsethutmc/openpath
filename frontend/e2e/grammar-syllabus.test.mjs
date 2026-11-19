@@ -119,10 +119,10 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   await context.close();
 });
 
-test("ICSE syllabus, Classes 2 to 8: every line shown with its place in the app, and practice starts on a line's topics", async () => {
+test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app, and practice starts on a line's topics", async () => {
   const { context, page, errors, foreign, fits } = await start("Syllabus");
   await page.getByRole("heading", { name: "CISCE (ICSE) English by class" }).waitFor();
-  await page.getByText("Classes 2, 3, 4, 5, 6, 7 and 8: 215 lines").waitFor();
+  await page.getByText("Classes 1, 2, 3, 4, 5, 6, 7 and 8: 253 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   await page.getByText("20 in the app · 5 partly · 8 with a grown-up · 0 not yet (of 33)").waitFor();
@@ -198,6 +198,15 @@ test("ICSE syllabus, Classes 2 to 8: every line shown with its place in the app,
   await page.getByRole("button", { name: "Class 2", exact: true }).click();
   await page.getByRole("heading", { name: "Class 2 English" }).waitFor();
   await page.getByText("9 in the app · 6 partly · 10 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByRole("button", { name: "Class 1", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
+  await page.getByText("14 in the app · 10 partly · 14 with a grown-up · 0 not yet (of 38)").waitFor();
+  // a Class 1 line opens First words, where nothing has to be read
+  await page.getByRole("button", { name: /Practise RW1:/ }).click();
+  await page.locator('main.first[data-phase="ask"][data-kind="hear"]').waitFor();
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
   await page.getByRole("button", { name: "Class 8", exact: true }).click();
   await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
   await page.getByText("2 in the app · 21 partly · 14 with a grown-up · 0 not yet (of 37)").waitFor();

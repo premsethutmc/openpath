@@ -159,8 +159,9 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
   assert.match(String(eventProblem({ kind: "grammar_use", id: "x", at: clock(), record: {} })), /without its type/);
 });
 
-test("GU-9 Classes 2 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
-  assert.deepEqual(SYLLABUSES.map((x) => x.class), [2, 3, 4, 5, 6, 7, 8]);
+test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
+  assert.deepEqual(SYLLABUSES.map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.deepEqual(coverage(syllabusFor(1)), { covered: 14, partly: 10, guided: 14, not: 0, total: 38 });
   assert.deepEqual(coverage(syllabusFor(2)), { covered: 9, partly: 6, guided: 10, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(8)), { covered: 2, partly: 21, guided: 14, not: 0, total: 37 });
   assert.deepEqual(coverage(syllabusFor(3)), { covered: 9, partly: 7, guided: 8, not: 0, total: 24 });
@@ -176,7 +177,7 @@ test("GU-9 Classes 2 to 8 are held; each is sound, unofficial-source labelled, a
       if (o.topics) assert.ok(pick(GRAMMAR, 2, [], o.topics).length >= 3, `${s.class} ${o.id}: a topic sitting has sentences`);
     }
   }
-  assert.equal(syllabusFor(99).class, 2, "an unknown class falls back to the first held");
+  assert.equal(syllabusFor(99).class, 1, "an unknown class falls back to the first held");
 });
 
 test("GU-9 naming words: a word of the kind asked is right, any other word is not, and the basics come first", () => {

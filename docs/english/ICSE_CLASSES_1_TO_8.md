@@ -1,4 +1,4 @@
-# ICSE English, Classes 2 to 8: every line has a place (November 2026)
+# ICSE English, Classes 1 to 8: every line has a place (November 2026)
 
 Status: candidate content, practice-only. The syllabus source is an unofficial copy of the board's document and
 is labelled so in the app. Nothing is educator-reviewed.
@@ -7,6 +7,7 @@ is labelled so in the app. Nothing is educator-reviewed.
 
 | Class | Lines | In the app | Partly | With a grown-up | Not yet |
 |---|---|---|---|---|---|
+| 1 | 38 | 14 | 10 | 14 | 0 |
 | 2 | 25 | 9 | 6 | 10 | 0 |
 | 3 | 24 | 9 | 7 | 8 | 0 |
 | 4 | 25 | 10 (was 7) | 7 | 8 | 0 (was 12) |
@@ -38,7 +39,8 @@ is labelled so in the app. Nothing is educator-reviewed.
 - The suggested literature is published work and is not in the app; the learner reads a book of their own and
   tells an adult about it.
 - Class 6 has 19 lines that are only partly covered: nine are writing; the rest include metaphor and personification, sorting verbs into transitive and intransitive, and reading between the lines.
-- Class 1 is not loaded.
+- All eight classes are loaded: 253 lines, none without a place (86 practised in the app, 85 partly, 82 with a grown-up).
+- Class 1 points to First words (see FIRST_WORDS.md) for reading with pictures, everyday words and three- and four-letter spelling; it added 28 tasks with a grown-up (166 in all) and alphabetical order by first letter.
 - Class 8 is mostly writing (13 of its 37 lines wait on the essay studio) and analysis of literature, so only two lines are fully practised in the app.
 - Class 2: the lines are placed, but the present first levels of the app are hard for a child of that age. A beginner activity (pictures and sound, single words before sentences) is still to be built.
 - Classes 2 and 8 added two practice topics (kinds of noun, the main clause) and 48 tasks with a grown-up (138 in all).
