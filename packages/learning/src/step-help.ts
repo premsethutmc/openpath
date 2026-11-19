@@ -43,6 +43,8 @@ export interface StepHelp {
    * is one, and the skill that teaches it where that skill has a card.
    */
   how?: { lines: string[]; board?: string[]; skill?: string };
+  /** type-it@1: a number the learner enters for a step that is shown as a sentence (see Worked.ask) */
+  ask?: { lead: string; value: string };
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -162,7 +164,7 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   if (!p || !p.steps.length) return null;
   // worked-out@1: a type whose own steps leap over the work has the whole working written for it
   const ways = workedWays(p), full = ways && method < ways.length ? ways[method].steps : null;
-  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}) }));
+  if (full) return full.map((w) => ({ next: w.next, shown: w.shown, needs: w.needs && w.needs !== p.competency && cardFor(w.needs) ? w.needs : null, ...(cardFor(p.competency) ? { rule: p.competency } : {}), ...(w.board ? { board: w.board } : {}), ...(w.ask ? { ask: w.ask } : {}) }));
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);

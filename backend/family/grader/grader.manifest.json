@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "0cf541eed456a48fbda6e38419aa235684b4843b29516186dc0d343ed29dfea9",
+ "sha256": "2cce57c02fd648b563913807b4324df87dd34e3d0ed112ad22bf17e5678d1ce3",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -339,7 +339,7 @@
   "packages/learning/src/typed-contract.ts": "cc155562e22ec53e9289ef0f563281bbdae6ad5309affe35e237642b8f00ec17",
   "packages/learning/src/unified-math-engine.ts": "38ef29a07b32a8f20eb9b51a83bea9d8c8fbc8e45e844e43b89c156b2504cbdf",
   "packages/learning/src/validate.ts": "81078cdf85b0c2f6705e25b998914c6847591717eb177e7534782daf37c25da3",
-  "packages/learning/src/worked-out.ts": "b11f6e4f211f72fe7f7aeb9c9bf5a035c0f19db21cbe61dbb6e045b1a58d793f",
+  "packages/learning/src/worked-out.ts": "ebd286ba9c6e8df082f17ec3dbdd58eba6e5130548ab5f0b1d81025d3700df5b",
   "packages/learning/src/written.ts": "8d3ae86e38a46812b0e678987024ebcf759ba7de419a91928a587531f69d1495",
   "packages/mathematics/src/answers.ts": "72545358753cc9f1312da09d70e3fde7164561d95bdf08bb9b8aa1d794af9060",
   "packages/mathematics/src/canonical.ts": "2c1431be232bf5a8ceaebe35d47024fcbda6326156674468851b8c294fe80b02",

@@ -474,3 +474,8 @@ and each time it comes back to the front, it asks the server which build is curr
 copy and reloads at once, or shows "A newer version is ready. Update" if the learner has already touched the screen.
 One try per build, so it cannot loop. The stamp is printed at the foot of every screen ("Version 2026-11-19 02:30"), so a
 screenshot says which build a phone has. Checked in a browser against two simulated deploys.
+
+`type-it@1`: a written-method step that is answered by a number but shown as a sentence gets a box (`Worked.ask`):
+"How many 6s fit in 34?" (the digit written on top), "Bring down the next digit" (the number to share now), the LCM of
+two bottoms, the whole ones in an improper fraction. In long division 85% of steps are now typed; the rest is the last
+"read the answer" step, which is entered in the answer box. "Help: show me this step" still reveals a step.

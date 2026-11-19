@@ -12,6 +12,11 @@ export interface Worked {
   needs?: string;
   /** board@1: the written layout as it stands once this step is done (long division's bracket), one text line per row */
   board?: string[];
+  /**
+   * type-it@1: what the learner enters for this step where its result is a number but the step as shown is a sentence
+   * ("How many 6s fit in 34?" → 5): the words before the box, and the number that is right.
+   */
+  ask?: { lead: string; value: string };
 }
 type Q = { family: string; params: number[]; answer: string; prompt?: string };
 
@@ -77,18 +82,18 @@ export function divide(n: number, d: number, want: "quotient" | "remainder", ans
     started = true;
     if (fit === 0) {
       top[i] = "0";
-      out.push({ next: `How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 on top${last ? "" : `, and keep the ${cur}`}.`, board: board() });
+      out.push({ next: `How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 on top${last ? "" : `, and keep the ${cur}`}.`, board: board(), ask: { lead: `Number of ${d}s in ${cur}:`, value: "0" } });
     } else {
       top[i] = String(fit);
       under.push(at(String(d * fit), i));
-      out.push({ next: `${first}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 999 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} on top and ${d * fit} under the ${cur}.`, needs: "MATH.number.multiplication-tables", board: board() });
+      out.push({ next: `${first}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 999 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} on top and ${d * fit} under the ${cur}.`, needs: "MATH.number.multiplication-tables", ask: { lead: `Number of ${d}s in ${cur}:`, value: String(fit) }, board: board() });
       under.push(at("-".repeat(String(cur).length), i), at(String(left), i));
       out.push({ next: `Take it away. What is left from the ${cur}?`, shown: `${cur} − ${d * fit} = ${left}`, board: board() });
     }
     carry = left;
     if (!last) {
       if (fit !== 0) under[under.length - 1] = at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1); else under.push(at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1));
-      out.push({ next: `Bring down the next digit, ${digits[i + 1]}.`, shown: left === 0 ? `Nothing was left, so there is just ${digits[i + 1]} to share.` : `${left} with ${digits[i + 1]} beside it makes ${left * 10 + digits[i + 1]}.`, board: board() });
+      out.push({ next: `Bring down the next digit, ${digits[i + 1]}.`, shown: left === 0 ? `Nothing was left, so there is just ${digits[i + 1]} to share.` : `${left} with ${digits[i + 1]} beside it makes ${left * 10 + digits[i + 1]}.`, board: board(), ask: { lead: "The number to share now:", value: String(left * 10 + digits[i + 1]) } });
     }
     void place;
   });
@@ -259,6 +264,7 @@ function unlikeFractions(prompt: string | undefined, answer: string): Worked[] |
   }
   if (d1 !== d2) {
     put(`The bottoms are ${d1} and ${d2}. What is the smallest number both go into?`, L === d1 * d2 ? `${d1} × ${d2} = ${L}, and nothing smaller works: the LCM is ${L}.` : `The LCM of ${d1} and ${d2} is ${L} (${L} = ${d1} × ${L / d1} = ${d2} × ${L / d2}).`);
+    out[out.length - 1].ask = { lead: `Smallest number ${d1} and ${d2} both go into:`, value: String(L) };
     const ren = ([t, dd, T]: number[]) => (dd === L ? null : `${L} ÷ ${dd} = ${L / dd}, so multiply top and bottom by ${L / dd}: ${t}/${dd} = ${T}/${L}`);
     const r1 = ren([a, d1, A]), r2 = ren([b, d2, B]);
     if (r1) put(`Rename ${a}/${d1} with ${L} at the bottom.`, r1, r2 ? undefined : `${A}/${L} ${m[4]} ${B}/${L}`);
@@ -327,7 +333,7 @@ function fractionForms(prompt: string | undefined, answer: string): { name: stri
     const plain = `${w} ${r}/${d}`, simple = `${w} ${r / g}/${d / g}`;
     if (want !== simple) return null;
     const steps: Worked[] = [
-      { next: `First: ${d} pieces make one whole. How many ${d}s fit in ${n}?`, shown: `${d} × ${w} = ${w * d}, and ${d} × ${w + 1} = ${(w + 1) * d} is too many: ${w} whole ones.`, board: [`${n} ÷ ${d} = ${w} remainder ?`] },
+      { next: `First: ${d} pieces make one whole. How many ${d}s fit in ${n}?`, shown: `${d} × ${w} = ${w * d}, and ${d} × ${w + 1} = ${(w + 1) * d} is too many: ${w} whole ones.`, board: [`${n} ÷ ${d} = ${w} remainder ?`], ask: { lead: `Number of ${d}s in ${n}:`, value: String(w) } },
       { next: "How many pieces are left over?", shown: `${n} − ${w * d} = ${r}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`] },
       { next: `${g > 1 ? "Write" : "Last: write"} the whole ones, then the left-over pieces over the same bottom.`, shown: `${n}/${d} = ${plain}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`, `${n}/${d} = ${plain}`] },
     ];

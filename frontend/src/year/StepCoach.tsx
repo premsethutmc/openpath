@@ -89,7 +89,8 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   // why@1: the rule behind a step can always be opened: the other skill it leans on, or the question's own skill
   const ruleOf = now?.needs ?? now?.rule ?? null;
   const rule = ruleOf ? cardFor(ruleOf) : null;
-  const entry = now ? askOf(now.shown) : null;
+  // type-it@1: a step shown as a sentence but answered by a number ("How many 6s fit in 34?") is entered too
+  const entry = now ? (now.ask ? { lead: now.ask.lead, lhs: now.ask.value, value: now.ask.value } : askOf(now.shown)) : null;
   // stay-open@1: a step that has been done stays on the page with what was done and why; the next step's "what to do"
   // is there straight away, and an opened rule stays open while the next step uses the same rule
   const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); if (at + 1 >= steps.length) onDone?.(); };

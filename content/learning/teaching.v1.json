@@ -11419,7 +11419,7 @@
    "kind": "help",
    "competency": "MATH.number.mixed-fractions",
    "title": "Writing an improper fraction as a mixed number",
-   "hash": "c55bc8e7",
+   "hash": "02fb17f1",
    "source": "written",
    "from": null,
    "classes": [
@@ -22125,7 +22125,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Long division with a remainder, and dividend = divisor × quotient + remainder",
-   "hash": "856690ce",
+   "hash": "9dae2f67",
    "source": "written",
    "from": null,
    "classes": [
@@ -22174,7 +22174,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-add",
    "title": "Adding and subtracting unlike and mixed fractions",
-   "hash": "9a4f8fc1",
+   "hash": "53129ee6",
    "source": "written",
    "from": null,
    "classes": [
@@ -22908,7 +22908,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-add",
    "title": "Adding fractions with different denominators",
-   "hash": "f1ed1b51",
+   "hash": "4d3253d4",
    "source": "written",
    "from": null,
    "classes": [
@@ -22988,7 +22988,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Dividing a number exactly",
-   "hash": "dba43416",
+   "hash": "a2e381a7",
    "source": "written",
    "from": null,
    "classes": [

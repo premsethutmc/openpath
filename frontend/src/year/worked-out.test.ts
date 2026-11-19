@@ -1,5 +1,6 @@
 /** worked-out@1: the full working written for a type, proved on every one of its questions. */
 import assert from "node:assert/strict";
+import { judge } from "../../../packages/learning/src/step-ask";
 import { test } from "node:test";
 import { question } from "../../../packages/learning/src/content";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
@@ -278,4 +279,27 @@ test("mixed numbers, improper fractions and percentages: the written working end
   }
   console.log(JSON.stringify(seen));
   assert.ok(seen.Divide > 200 && seen["Whole × bottom + top"] > 200 && seen["Out of 100"] > 300, JSON.stringify(seen));
+});
+
+test("type-it@1: in a long division every 'how many fit' and every 'bring down' is a number the learner enters", () => {
+  let fits = 0, downs = 0, typed = 0, steps = 0;
+  for (const f of ["ldiv", "avdiv"]) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id) || helpMethods(item.id)[0] !== "Long division") continue;
+    const h = stepsHelp(item.id)!;
+    h.forEach((s, i) => {
+      steps++;
+      if (s.ask || /= [\d.]+$/.test(s.shown)) typed++;
+      if (/How many \d+s fit in/.test(s.next)) {
+        fits++;
+        assert.ok(s.ask, `${item.id}: ${s.next} has no box`);
+        const top = s.board![0].trim();
+        assert.equal(top.at(-1), s.ask!.value, `${item.id}: the digit entered is the digit written on top`);
+        assert.ok(judge({ lead: s.ask!.lead, lhs: s.ask!.value, value: s.ask!.value }, s.ask!.value) && !judge({ lead: s.ask!.lead, lhs: s.ask!.value, value: s.ask!.value }, String(Number(s.ask!.value) + 1)), item.id);
+      }
+      if (/^Bring down/.test(s.next)) { downs++; assert.ok(s.ask && s.board!.at(-1)!.trim() === s.ask.value, `${item.id}: ${s.next} → ${s.ask?.value} is the number at the bottom of the layout`); }
+      assert.ok(!(s.ask && i === h.length - 1), `${item.id}: the answer itself is entered in the answer box, not here`);
+    });
+  }
+  console.log(`type-it@1: ${fits} fit steps and ${downs} bring-down steps entered; ${typed} of ${steps} long-division steps are typed`);
+  assert.ok(fits > 2000 && downs > 1000 && typed / steps > 0.8, `${fits} ${downs} ${typed}/${steps}`);
 });
