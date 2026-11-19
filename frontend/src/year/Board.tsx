@@ -9,8 +9,11 @@ import React from "react";
 export const DIVISION_ROW = /^(\s*\d+ \))( \d+)$/;
 
 export function Board({ rows, label, testid }: { rows: string[]; label?: string; testid?: string }) {
+  // fit@1 (found by the screen check): a layout with long lines is set a little smaller so it is never cut off on a phone
+  rows = rows.filter((r) => typeof r === "string");
+  const width = Math.max(0, ...rows.map((r) => r.length));
   return (
-    <pre className="coach-board" aria-label={label} data-testid={testid}>
+    <pre className={`coach-board${width > 22 ? " widest" : width > 18 ? " wide" : ""}`} aria-label={label} data-testid={testid}>
       {rows.map((r, i) => {
         const m = DIVISION_ROW.exec(r);
         return <React.Fragment key={i}>{i ? "\n" : ""}{m ? <>{m[1]}<span className="ld-bar">{m[2]}</span></> : r}</React.Fragment>;
