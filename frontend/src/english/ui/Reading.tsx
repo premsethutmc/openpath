@@ -8,7 +8,9 @@ import { ReadingEvidence } from "./ReadingEvidence.tsx";
 import { ReadingInference } from "./ReadingInference.tsx";
 import { COURSE, LEVELS, unitKey, type Course, type Level, type Passage, type SkillId, type Unit } from "../logic/reading/course.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
-import { ReadingUnitSession, progress, recommend, statusOf, type Mode, type Progress, type ReadingRecord, type Snapshot, type UnitStatus } from "../logic/reading/session.ts";
+import { ReadingUnitSession, pendingCheck, progress, recommend, statusOf, type Mode, type Progress, type ReadingRecord, type Snapshot, type UnitStatus } from "../logic/reading/session.ts";
+import {sentenceChoices} from "../logic/reading/sentences.ts";
+import {SENTENCE_FEEDBACK,supportingSets} from "../logic/reading/check-evidence.ts";
 import type { Learner } from "../logic/learner.ts";
 import { NoteBox } from "./Note.tsx";
 
@@ -123,12 +125,16 @@ export interface UnitHandlers {
   answerPractice: (i: number) => void;
   nextPractice: () => void;
   answerCheck: (i: number) => void;
+  selectCheckAnswer: (i:number)=>void;
+  lockCheckAnswer: ()=>void;
+  selectCheckEvidence: (sentences:number[])=>void;
+  submitCheckEvidence: ()=>void;
+  closeInterruptedCheck: ()=>void;
   open: (u: Unit, mode: Mode) => void;
   leave: () => void;
 }
 
 export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Snapshot; on: UnitHandlers }) {
-  const [pick, setPick] = useState<number | null>(null);
   const head = (
     <>
       <button type="button" className="link" onClick={on.leave}>
@@ -229,40 +235,16 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
     );
   }
   if (snap.phase === "check") {
-    const q = snap.question;
-    return (
-      <main className="page reading" data-phase="check">
-        {head}
-        <p className="pill">
-          On your own: question {snap.position + 1} of {snap.total} · no hints · marked at the end
-        </p>
-        <PassageView passage={q.passage} />
-        <p className="prompt" id="reading-prompt">
-          {q.prompt}
-        </p>
-        <div className="options" role="radiogroup" aria-labelledby="reading-prompt">
-          {q.options.map((o, i) => (
-            <button key={`${q.id}:${i}`} type="button" role="radio" aria-checked={pick === i} className="option" onClick={() => setPick(i)}>
-              {o}
-            </button>
-          ))}
-        </div>
-        <button
-          type="button"
-          className="primary"
-          disabled={pick === null}
-          onClick={() => {
-            if (pick === null) return;
-            const i = pick;
-            setPick(null);
-            on.answerCheck(i);
-          }}
-        >
-          {snap.position + 1 < snap.total ? "Lock in and go on" : "Lock in and see how I did"}
-        </button>
-      </main>
-    );
+    const q=snap.question,d=snap.draft;
+    return <main className="page reading" data-phase="check" data-evidence-stage={d.locked?'evidence':'answer'}>
+      {head}<p className="pill">On your own: question {snap.position+1} of {snap.total} · no hints · marked at the end</p>
+      <p className="small">{snap.familiar?'You have read this text before; this is a new question, not a new passage.':'This passage was new when this check opened.'} Answers and supporting sentences are recorded separately.</p>
+      <PassageView passage={q.passage}/><p className="prompt" id="reading-prompt">{q.prompt}</p>
+      {!d.locked?<><div className="options" role="radiogroup" aria-labelledby="reading-prompt">{q.options.map((o,i)=><button key={`${q.id}:${i}`} type="button" role="radio" aria-checked={d.choice===i} className="option" onClick={()=>on.selectCheckAnswer(i)}>{o}</button>)}</div><button type="button" className="primary" disabled={d.choice===null} onClick={on.lockCheckAnswer}>Lock in my answer</button></>:<>
+      <p>Your locked answer: {q.options[d.choice!]}</p><fieldset><legend>Tap the sentence or sentences that support your answer.</legend>{sentenceChoices(q.passage.text).map((text,i)=><label key={i} style={{display:'block',padding:'8px 0'}}><input type="checkbox" checked={d.sentences.includes(i)} onChange={()=>on.selectCheckEvidence(d.sentences.includes(i)?d.sentences.filter(x=>x!==i):[...d.sentences,i])}/>{i+1}. {text}</label>)}</fieldset><p className="small">Select only the support you need. There are no hints or marks until both questions are finished.</p><button type="button" className="primary" disabled={!d.sentences.length} onClick={on.submitCheckEvidence}>{snap.position+1<snap.total?'Save evidence and go on':'Save evidence and see results'}</button></>}
+    </main>;
   }
+  if(snap.phase==='interrupted')return <main className="page reading" data-phase="interrupted">{head}<h1>Saved check needs review</h1><p role="status">{snap.reason}</p><p>Close this attempt to return to the lesson. Your saved selections and reading history stay on record, with no score. Any later check uses questions you have not answered or opened before; previously read text is labelled.</p><button type="button" className="primary" onClick={on.closeInterruptedCheck}>Close this attempt and learn</button></main>;
   if (snap.phase === "no_fresh_check")
     return (
       <main className="page reading" data-phase="no_fresh_check">
@@ -286,7 +268,8 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
         {right} of {r.review.length} right
       </h1>
       {r.label ? <p className="pill">{r.label}</p> : <p className="sub">Not yet. Look at what the text says below, then practise once more.</p>}
-      <p className="small">{r.scope}</p>
+      <p className="small">{r.scope} This score and level decision count answers only, as before. Supporting evidence is reported separately.</p>
+      <p>{r.review.filter(x=>x.evidenceFinding==='complete').length} of {r.review.filter(x=>x.evidenceFinding).length} assessed evidence selections complete.</p>
       {r.review.map((x) => (
         <section key={x.question.id} className={`feedback ${x.correct ? "right" : "wrong"}`} aria-label={x.question.prompt}>
           <p className="small">{x.question.passage.title}</p>
@@ -303,6 +286,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
           )}
           <p>{x.explain}</p>
           <blockquote>{x.evidence}</blockquote>
+          {x.evidenceFinding?<><p><strong>Evidence: </strong>{SENTENCE_FEEDBACK[x.evidenceFinding]}</p><p>You selected sentences: {x.sentences!.map(i=>i+1).join(', ')}.</p><details><summary>Supporting sentence combinations</summary>{supportingSets(course,course.questions.find(q=>q.id===x.question.id)!).map(set=><blockquote key={set.join(',')}>{set.map(i=>`${i+1}. ${sentenceChoices(x.question.passage.text)[i]}`).join(' ')}</blockquote>)}</details></>:<p>Evidence was not assessed in this answer-only record.</p>}
         </section>
       ))}
       {r.next.kind === "level_up" && (
@@ -337,6 +321,8 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   const [failed, setFailed] = useState(false);
   const [saving, setSaving] = useState(false);
   const unsaved = useRef<ReadingRecord[]>([]);
+  const savingLock=useRef(false);
+  const failedSession=useRef<ReadingUnitSession|null>(null);
   const records = learner.readingRecords();
   const p = useMemo(() => progress(COURSE, records), [records.length]);
   /**
@@ -344,7 +330,8 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
    * Records that could not be saved wait in order and go first on the next step.
    */
   const step = async (s: ReadingUnitSession, act?: () => void) => {
-    setSaving(true);
+    if(savingLock.current)return;
+    savingLock.current=true;setSaving(true);
     const before = s.snapshot();
     act?.();
     unsaved.current.push(...s.take());
@@ -353,11 +340,11 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
         await learner.recordReading([unsaved.current[0]]);
         unsaved.current.shift();
       }
-      setFailed(false);
+      setFailed(false);failedSession.current=null;
     } catch {
-      setFailed(true);
+      setFailed(true);failedSession.current=s;
     }
-    setSaving(false);
+    savingLock.current=false;setSaving(false);
     setTick((t) => t + 1);
     onChanged();
     const after = s.snapshot();
@@ -365,6 +352,8 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     if (moved || !act) scrollTo(0, 0);
   };
   const open = (u: Unit, mode: Mode) => {
+    if(savingLock.current)return;
+    if(failedSession.current){const pending=failedSession.current;setSession(pending);void step(pending);return;}
     const s = new ReadingUnitSession(COURSE, u, mode, learner.readingRecords());
     setSession(s);
     void step(s);
@@ -374,7 +363,9 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   if (!session)
     return (
       <>
-        <div className="page"><a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" onClick={()=>setInference(true)}>Connect the clues</button></div>
+        <div className="page">{!failedSession.current&&<a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a>}<button className="secondary" disabled={!!failedSession.current} onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" disabled={!!failedSession.current} onClick={()=>setInference(true)}>Connect the clues</button></div>
+        {failedSession.current&&<p role="status">Finish saving your pending reading step before starting another activity. Reopen its check to retry; your unsaved selection is still held here.</p>}
+        {COURSE.levels.flatMap(l=>COURSE.skills.map(skill=>({level:l.id,skill:skill.id}))).filter(u=>pendingCheck(records,u)).map(u=><div className="page" key={unitKey(u)}><button className="secondary" onClick={()=>open(u,'check_me')}>Continue saved check: {skillName(COURSE,u.skill)} · {levelName(COURSE,u.level)}</button></div>)}
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
           <NoteBox learner={learner} screen="reading" label="Anything confusing or wrong on this screen? Tell us." />
@@ -401,6 +392,11 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
           answerPractice: (i) => void step(s, () => s.answerPractice(i)),
           nextPractice: () => void step(s, () => s.nextPractice()),
           answerCheck: (i) => void step(s, () => s.answerCheck(i)),
+          selectCheckAnswer:(i)=>void step(s,()=>s.selectCheckAnswer(i)),
+          lockCheckAnswer:()=>void step(s,()=>s.lockCheckAnswer()),
+          selectCheckEvidence:(selected)=>void step(s,()=>s.selectCheckEvidence(selected)),
+          submitCheckEvidence:()=>void step(s,()=>s.submitCheckEvidence()),
+          closeInterruptedCheck:()=>void step(s,()=>s.closeInterruptedCheck()),
           open,
           leave: () => setSession(null),
         }}

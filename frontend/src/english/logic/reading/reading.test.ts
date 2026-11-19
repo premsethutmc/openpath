@@ -184,7 +184,7 @@ test("RC-7 check: unseen questions on texts never used for teaching, no hints, n
     const taught = new Set([lessonFor(COURSE, unit).worked.passage, ...questionsFor(COURSE, unit, "practice").map((q) => q.passage)]);
     const first = s.snapshot();
     assert.ok(first.phase === "check" && first.position === 0 && first.total === CHECK_SIZE);
-    assert.deepEqual(before.at(-1), { type: "shown", unit, question: first.question.id, use: "check" }, "recorded as seen before any answer");
+    assert.deepEqual(before.filter(r=>r.type==='shown').at(-1), { type: "shown", unit, question: first.question.id, use: "check" }, "recorded as seen before any answer");
     const q1 = byId.get(first.question.id)!;
     assert.ok(q1.role === "check" && !taught.has(q1.passage) && COURSE.passages.get(q1.passage)!.role === "check");
     for (const leak of [q1.explain, q1.evidence === q1.options[q1.answer] ? q1.explain : q1.evidence]) assert.ok(!JSON.stringify({ ...first, question: { ...first.question, passage: null } }).includes(leak));
@@ -256,12 +256,12 @@ test("RC-9 reassessment is fresh: no question or text of an earlier check return
   assert.ok(p.seenQuestions.has(shown.question.id));
   const next = freshCheck(COURSE, unit, p.seenQuestions, p.seenPassages)!;
   assert.ok(next.every((q) => q.id !== shown.question.id && q.passage !== shown.question.passage.id));
-  // and with one more abandoned, fewer than a full check is left
+  // Reopening continues the same unmarked attempt instead of consuming a fresh pair.
   const again = new ReadingUnitSession(COURSE, unit, "check_me", left);
   again.answerCheck(0);
   const p2 = progress(COURSE, [...left, ...again.take()]);
-  assert.equal(p2.seenQuestions.size, 3);
-  assert.equal(freshCheck(COURSE, unit, p2.seenQuestions, p2.seenPassages), null);
+  assert.equal(p2.seenQuestions.size, 2);
+  assert.equal(freshCheck(COURSE, unit, p2.seenQuestions, p2.seenPassages)!.length, 2);
 });
 
 test("RC-10 a fresh check prefers texts the learner has not read for any skill", () => {

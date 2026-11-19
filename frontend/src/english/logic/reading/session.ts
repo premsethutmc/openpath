@@ -15,6 +15,14 @@
  */
 import { CHECK_SIZE, LEVELS, SKILL_IDS, lessonFor, questionsFor, unitKey, type Course, type Lesson, type Level, type Passage, type Question, type SkillId, type Unit } from "./course.ts";
 
+import {assessSentences,validateSentenceSelection,type SentenceFinding} from './check-evidence.ts';
+export interface CheckCheckpoint {version:1;questions:string[];signatures:string[];mode:Mode;helped:boolean;index:number;answers:{choice:number;sentences?:number[]}[];draft:{choice:number|null;sentences:number[];locked:boolean};exposures:number[];familiar:boolean[];}
+const questionSignature=(course:Course,q:Question)=>JSON.stringify([q.prompt,q.options,q.answer,q.evidence,q.evidenceAlternatives,course.passages.get(q.passage)!.text]);
+const exposureCount=(course:Course,records:readonly ReadingRecord[],passage:string)=>records.filter(r=>r.type==='shown'&&course.questions.find(q=>q.id===r.question)?.passage===passage).length;
+export function pendingCheck(records:readonly ReadingRecord[],unit:Unit):CheckCheckpoint|null {
+ for(let i=records.length-1;i>=0;i--){const r=records[i];if(unitKey(r.unit)!==unitKey(unit))continue;if(r.type==='check_result'||r.type==='check_closed')return null;if(r.type==='check_session')return r.check??({} as CheckCheckpoint);}
+ return null;
+}
 export type Mode = "learn" | "check_me";
 export const LABEL_OWN = "Shown on your own";
 export const LABEL_AFTER_HELP = "Solved independently after help";
@@ -22,13 +30,15 @@ export type EvidenceLabel = typeof LABEL_OWN | typeof LABEL_AFTER_HELP;
 export const SCOPE = "Two new questions, answered once. It shows what you could do today, not that it will last.";
 
 export type ReadingRecord =
+  | { type: "check_closed"; unit: Unit; reason: "interrupted" }
+  | { type: "check_session"; unit: Unit; check: CheckCheckpoint }
   | { type: "unit_start"; unit: Unit; mode: Mode }
   | { type: "lesson_done"; unit: Unit }
   /** Written before the question is displayed. */
   | { type: "shown"; unit: Unit; question: string; use: "practice" | "check" }
   | { type: "hint"; unit: Unit; question: string; rung: number }
   | { type: "practice_answer"; unit: Unit; question: string; choice: number; correct: boolean; hints: number }
-  | { type: "check_result"; unit: Unit; answers: { question: string; choice: number; correct: boolean }[]; passed: boolean; label: EvidenceLabel | null };
+  | { type: "check_result"; unit: Unit; answers: { question: string; choice: number; correct: boolean; sentences?: number[]; evidenceFinding?: SentenceFinding }[]; passed: boolean; label: EvidenceLabel | null };
 
 export type UnitStatus = "new" | "learning" | "passed_own" | "passed_after_help" | "needs_practice" | "no_fresh_check";
 export interface UnitProgress {
@@ -153,6 +163,8 @@ export interface CheckReview {
   correct: boolean;
   explain: string;
   evidence: string;
+  sentences?: number[];
+  evidenceFinding?: SentenceFinding;
 }
 export interface ResultView {
   passed: boolean;
@@ -164,9 +176,10 @@ export interface ResultView {
 export type Snapshot =
   | { phase: "lesson"; unit: Unit; lesson: Lesson; passage: Passage; steps: number }
   | { phase: "practice"; unit: Unit; lesson: Lesson; practice: PracticeView }
-  | { phase: "check"; unit: Unit; position: number; total: number; question: ShownQuestion }
+  | { phase: "check"; unit: Unit; position: number; total: number; question: ShownQuestion; draft: CheckCheckpoint["draft"]; familiar: boolean }
   | { phase: "result"; unit: Unit; result: ResultView }
-  | { phase: "no_fresh_check"; unit: Unit };
+  | { phase: "no_fresh_check"; unit: Unit }
+  | { phase: "interrupted"; unit: Unit; reason: string };
 
 /**
  * The controller of one visit to a unit. Every state change appends records; the caller stores what `take()`
@@ -192,6 +205,11 @@ export class ReadingUnitSession {
   private checkQs: Question[] = [];
   private cIndex = 0;
   private cAnswers: number[] = [];
+  private cEvidence: (number[]|undefined)[] = [];
+  private draft:CheckCheckpoint['draft']={choice:null,sentences:[],locked:false};
+  private exposures:number[]=[];
+  private familiar:boolean[]=[];
+  private interruption='';
   private helped: boolean;
   private result: ResultView | null = null;
 
@@ -204,9 +222,31 @@ export class ReadingUnitSession {
     this.lesson = lessonFor(course, unit);
     this.practiceQs = questionsFor(course, unit, "practice");
     this.helped = progress(course, history).units.get(unitKey(unit))?.helped ?? false;
-    this.log.push({ type: "unit_start", unit, mode });
     this.phase = "lesson";
+    const saved=pendingCheck(history,unit);
+    if(saved){
+      try{
+        if(saved.version!==1||typeof saved.helped!=='boolean'||saved.familiar.some(v=>typeof v!=='boolean')||saved.exposures.some(v=>!Number.isInteger(v)||v<0)||saved.questions.length!==CHECK_SIZE||new Set(saved.questions).size!==CHECK_SIZE||!Number.isInteger(saved.index)||saved.index<0||saved.index>=CHECK_SIZE||saved.answers.length!==saved.index||saved.exposures.length!==CHECK_SIZE||saved.familiar.length!==CHECK_SIZE||!['learn','check_me'].includes(saved.mode))throw Error('Invalid saved check');
+        this.checkQs=saved.questions.map((id,i)=>{const q=course.questions.find(q=>q.id===id&&q.role==='check'&&q.skill===unit.skill&&q.level===unit.level);if(!q||saved.signatures[i]!==questionSignature(course,q))throw Error('Check content changed');return q;});
+        saved.answers.forEach((a,i)=>{if(!Number.isInteger(a.choice)||a.choice<0||a.choice>=this.checkQs[i].options.length)throw Error('Invalid saved answer');if(a.sentences)validateSentenceSelection(course,this.checkQs[i],a.sentences);});
+        const q=this.checkQs[saved.index],d=saved.draft;
+        if(!d||typeof d.locked!=='boolean'||(d.locked&&d.choice===null)|| (d.choice!==null&&(!Number.isInteger(d.choice)||d.choice<0||d.choice>=q.options.length)))throw Error('Invalid saved draft');
+        validateSentenceSelection(course,q,d.sentences,true);
+        this.mode=saved.mode;this.helped=saved.helped||this.helped;this.cIndex=saved.index;this.cAnswers=saved.answers.map(a=>a.choice);this.cEvidence=saved.answers.map(a=>a.sentences);this.draft=structuredClone(d);this.exposures=[...saved.exposures];this.familiar=[...saved.familiar];
+        for(let i=saved.index;i<CHECK_SIZE;i++)if(exposureCount(course,history,this.checkQs[i].passage)!==this.exposures[i])throw Error('A pending passage was opened elsewhere');
+        this.phase='check';return;
+      }catch{this.phase='interrupted';this.interruption='This saved check cannot safely continue: its text changed, its saved data is unreadable, or a pending passage was opened elsewhere. Your previous answers are kept and no fresh score is recorded.';return;}
+    }
+    this.log.push({ type: "unit_start", unit, mode });
     if (mode === "check_me") this.startCheck();
+  }
+
+  /** Explicitly archive an unsafe attempt, without deleting drafts/exposure or awarding a score. */
+  closeInterruptedCheck() {
+    if(this.phase!=="interrupted")return;
+    this.log.push({type:"check_closed",unit:this.unit,reason:"interrupted"});
+    this.phase="lesson";
+    this.log.push({type:"unit_start",unit:this.unit,mode:"learn"});
   }
 
   /** Records made since the last call, to be stored in order. */
@@ -243,7 +283,8 @@ export class ReadingUnitSession {
         },
       };
     }
-    if (this.phase === "check") return { phase: "check", unit, position: this.cIndex, total: this.checkQs.length, question: show(this.course, this.checkQs[this.cIndex]) };
+    if (this.phase === "check") return { phase: "check", unit, position: this.cIndex, total: this.checkQs.length, question: show(this.course, this.checkQs[this.cIndex]), draft:structuredClone(this.draft),familiar:this.familiar[this.cIndex] };
+    if(this.phase==='interrupted')return {phase:'interrupted',unit,reason:this.interruption};
     if (this.phase === "result") return { phase: "result", unit, result: structuredClone(this.result!) };
     return { phase: "no_fresh_check", unit };
   }
@@ -304,22 +345,27 @@ export class ReadingUnitSession {
     }
     this.checkQs = qs;
     this.cIndex = 0;
-    this.cAnswers = [];
+    this.cAnswers = [];this.cEvidence=[];this.draft={choice:null,sentences:[],locked:false};
+    this.familiar=qs.map(q=>p.seenPassages.has(q.passage));
+    this.exposures=qs.map(q=>exposureCount(this.course,this.all(),q.passage));this.exposures[0]++;
     this.phase = "check";
     this.log.push({ type: "shown", unit: this.unit, question: qs[0].id, use: "check" });
+    this.checkpoint();
   }
   /** Check: an answer. Nothing is marked or explained until the last question is answered. */
-  answerCheck(choice: number): void {
+  /** Legacy answer-only callers remain unassessed for evidence; browser uses the staged methods below. */
+  answerCheck(choice: number,sentences?:number[]): void {
     if (this.phase !== "check") return;
     const q = this.checkQs[this.cIndex];
     if (!Number.isInteger(choice) || choice < 0 || choice >= q.options.length) return;
-    this.cAnswers.push(choice);
+    if(sentences)validateSentenceSelection(this.course,q,sentences);
+    this.cAnswers.push(choice);this.cEvidence.push(sentences?[...sentences]:undefined);
     if (this.cIndex + 1 < this.checkQs.length) {
-      this.cIndex++;
+      this.cIndex++;this.draft={choice:null,sentences:[],locked:false};this.exposures[this.cIndex]++;
       this.log.push({ type: "shown", unit: this.unit, question: this.checkQs[this.cIndex].id, use: "check" });
-      return;
+      this.checkpoint();return;
     }
-    const answers = this.checkQs.map((c, i) => ({ question: c.id, choice: this.cAnswers[i], correct: this.cAnswers[i] === c.answer }));
+    const answers = this.checkQs.map((c, i) => ({ question: c.id, choice: this.cAnswers[i], correct: this.cAnswers[i] === c.answer, ...(this.cEvidence[i]?{sentences:this.cEvidence[i],evidenceFinding:assessSentences(this.course,c,this.cEvidence[i]!)}:{}) }));
     const ok = answers.every((a) => a.correct);
     const label: EvidenceLabel | null = ok ? (this.mode === "check_me" && !this.helped ? LABEL_OWN : LABEL_AFTER_HELP) : null;
     this.log.push({ type: "check_result", unit: this.unit, answers, passed: ok, label });
@@ -334,9 +380,15 @@ export class ReadingUnitSession {
       passed: ok,
       label,
       scope: SCOPE,
-      review: this.checkQs.map((c, i) => ({ question: show(this.course, c), choice: this.cAnswers[i], right: c.answer, correct: this.cAnswers[i] === c.answer, explain: c.explain, evidence: c.evidence })),
+      review: this.checkQs.map((c, i) => ({ question: show(this.course, c), choice: this.cAnswers[i], right: c.answer, correct: this.cAnswers[i] === c.answer, explain: c.explain, evidence: c.evidence,...(this.cEvidence[i]?{sentences:this.cEvidence[i],evidenceFinding:assessSentences(this.course,c,this.cEvidence[i]!)}:{}) })),
       next,
     };
     this.phase = "result";
   }
+  private checkpoint(){this.log.push({type:'check_session',unit:this.unit,check:{version:1,questions:this.checkQs.map(q=>q.id),signatures:this.checkQs.map(q=>questionSignature(this.course,q)),mode:this.mode,helped:this.helped,index:this.cIndex,answers:this.cAnswers.map((choice,i)=>({choice,...(this.cEvidence[i]?{sentences:this.cEvidence[i]}:{})})),draft:structuredClone(this.draft),exposures:[...this.exposures],familiar:[...this.familiar]}});}
+  selectCheckAnswer(choice:number){if(this.phase!=='check'||this.draft.locked)return;const q=this.checkQs[this.cIndex];if(!Number.isInteger(choice)||choice<0||choice>=q.options.length)return;this.draft.choice=choice;this.checkpoint();}
+  lockCheckAnswer(){if(this.phase!=='check'||this.draft.choice===null||this.draft.locked)return;this.draft.locked=true;this.checkpoint();}
+  selectCheckEvidence(sentences:number[]){if(this.phase!=='check'||!this.draft.locked)return;validateSentenceSelection(this.course,this.checkQs[this.cIndex],sentences,true);this.draft.sentences=[...sentences];this.checkpoint();}
+  submitCheckEvidence(){if(this.phase!=='check'||!this.draft.locked||this.draft.choice===null||!this.draft.sentences.length)return;this.answerCheck(this.draft.choice,this.draft.sentences);}
+
 }

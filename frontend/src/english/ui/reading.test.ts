@@ -8,7 +8,7 @@ import { LABEL_AFTER_HELP, ReadingUnitSession, progress, type Snapshot } from ".
 (globalThis as { React?: unknown }).React = React;
 const { ReadingMap, ReadingUnitView } = await import("./Reading.tsx");
 
-const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, open() {}, leave() {} };
+const on = { nextStep() {}, startPractice() {}, hint() {}, answerPractice() {}, nextPractice() {}, answerCheck() {}, selectCheckAnswer() {}, lockCheckAnswer() {}, selectCheckEvidence() {}, submitCheckEvidence() {}, closeInterruptedCheck() {}, open() {}, leave() {} };
 const html = (snap: Snapshot) => renderToStaticMarkup(React.createElement(ReadingUnitView, { course: COURSE, snap, on })).replaceAll("&#x27;", "'").replaceAll("&quot;", '"');
 const byId = new Map(COURSE.questions.map((q) => [q.id, q]));
 const unit: Unit = { skill: "cause", level: 2 };
@@ -70,7 +70,7 @@ test("RU-2 lesson, practice, check and result show what they should and hold bac
   page = html(snap);
   assert.match(page, /On your own: question 1 of 2 · no hints · marked at the end/);
   assert.ok(!page.includes(c.explain) && !page.includes("<mark>") && !page.includes("hint<") && !page.includes("is-right"));
-  assert.match(page, /disabled=""[^>]*>Lock in and go on/);
+  assert.match(page, /disabled=""[^>]*>Lock in my answer/);
   s.answerCheck(c.answer);
   snap = s.snapshot();
   assert.ok(snap.phase === "check");

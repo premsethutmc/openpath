@@ -15,14 +15,8 @@ export function evidenceCourse(source:Course):Course{
 export const EVIDENCE_COURSE=evidenceCourse(SOURCE_COURSE);
 export type EvidenceAttempt={question:string;choice:number;sentences:number[]};
 export type EvidenceFinding='matched'|'answer_only'|'evidence_only'|'neither';
-export function sentenceChoices(text:string):string[]{return text.match(/[^.!?]+[.!?]+(?:[”"']?)(?:\s+|$)|[^.!?]+$/g)?.map(s=>s.trim()).filter(Boolean)??[];}
-export function evidenceKey(course:Course,q:Question):number[]{
- const text=course.passages.get(q.passage)!.text,at=text.indexOf(q.evidence);
- if(at<0)throw Error('Missing authored evidence.');
- let cursor=0;const hits:number[]=[];
- for(const [i,s] of sentenceChoices(text).entries()){const start=text.indexOf(s,cursor),end=start+s.length;if(start<at+q.evidence.length&&end>at)hits.push(i);cursor=end;}
- if(!hits.length)throw Error('No evidence sentence.');return hits;
-}
+export {sentenceChoices,evidenceKey} from "./sentences.ts";
+import {sentenceChoices,evidenceKey} from "./sentences.ts";
 export function checkEvidence(course:Course,a:EvidenceAttempt){
  const q=course.questions.find(q=>q.id===a.question&&q.skill===EVIDENCE_UNIT.skill&&q.level===1);
  if(!q)throw Error('Unsupported question.');
