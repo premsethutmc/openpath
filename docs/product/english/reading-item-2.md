@@ -26,3 +26,10 @@ The first draft had shortcuts despite passing mechanical span tests. Six items w
 - INF1.C1 uses unambiguous window/door locations while retaining the tray-to-group inference.
 - INF2.C3 no longer excludes the cat in advance; track location and the book's shape identification must be combined.
 These are editorial counterexamples, not a claim that tests prove semantic validity or real learners need every clue.
+
+## Inference progression and placement compatibility
+Only the new inference skill requires both correct choices AND complete clue sets to award its independent/after-help label or advance. The two scores remain separate; correct answers with missing support lead to guided practice and a fresh recheck, or an explicit lesson button when the finite check pool is exhausted. The six established skills keep answer-only advancement and historical records are not rewritten.
+
+Reading placement retains its original four-skill practice anchors (L1.P2, N2.P2, L2.P2, N4.P2, L3.P2, N6.P2). It now selects only a text containing all four placement skills, so appending inference-only practice cannot create an empty placement. A pinned-ID regression preserves sequence and no-valid-anchor fails closed.
+
+Each simulated persona's first inference sitting deliberately answers correctly with partial clue sets and must not advance. This discordant path supplements ordinary stochastic evidence choices and is reported as routing coverage, not a learning gain.

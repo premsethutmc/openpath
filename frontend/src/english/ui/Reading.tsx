@@ -271,7 +271,8 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
         {right} of {r.review.length} right
       </h1>
       {r.label ? <p className="pill">{r.label}</p> : <p className="sub">Not yet. Look at what the text says below, then practise once more.</p>}
-      <p className="small">{r.scope} This score and level decision count answers only, as before. Supporting evidence is reported separately.</p>
+      <p className="small">{r.scope} {snap.unit.skill==="inference"?"Answer and evidence scores stay separate. This skill advances only when both answers and both complete clue sets are correct.":"This score and level decision count answers only, as before. Supporting evidence is reported separately."}</p>
+      {snap.unit.skill==="inference"&&right===r.review.length&&!r.passed&&<p role="status">Your answers are right, but the clue sets are not complete yet. This level has not advanced. Practise connecting all the needed clues, then try new questions if available.</p>}
       <p>{r.review.filter(x=>x.evidenceFinding==='complete').length} of {r.review.filter(x=>x.evidenceFinding).length} assessed evidence selections complete.</p>
       {r.review.map((x) => (
         <section key={x.question.id} className={`feedback ${x.correct ? "right" : "wrong"}`} aria-label={x.question.prompt}>
@@ -307,7 +308,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
           Practise again, then two new questions
         </button>
       )}
-      {r.next.kind === "no_fresh_check" && <p className="sub">There are no new check questions left for this skill at this level. You can still go over the lesson and practice.</p>}
+      {r.next.kind === "no_fresh_check" && <><p className="sub">There are no new check questions left for this skill at this level. You can still go over the lesson and practice.</p><button type="button" onClick={()=>on.open(snap.unit,"learn")}>Review the lesson and practice</button></>}
       {r.next.kind === "skill_complete" && <p className="sub">That is the top level of this skill.</p>}
       <button type="button" className="secondary" onClick={on.leave}>
         All reading skills

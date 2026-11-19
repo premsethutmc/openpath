@@ -381,7 +381,8 @@ export class ReadingUnitSession {
       this.checkpoint();return;
     }
     const answers = this.checkQs.map((c, i) => ({ question: c.id, choice: this.cAnswers[i], correct: this.cAnswers[i] === c.answer, ...(this.cEvidence[i]?{sentences:this.cEvidence[i],evidenceFinding:assessSentences(this.course,c,this.cEvidence[i]!)}:{}) }));
-    const ok = answers.every((a) => a.correct);
+    const answersRight = answers.every((a) => a.correct);
+    const ok = answersRight && (this.unit.skill!=="inference" || answers.every(a=>a.evidenceFinding==="complete"));
     const label: EvidenceLabel | null = ok ? (this.mode === "check_me" && !this.helped ? LABEL_OWN : LABEL_AFTER_HELP) : null;
     this.log.push({ type: "check_result", unit: this.unit, answers, passed: ok, label });
     const after = progress(this.course, this.all());
@@ -389,6 +390,7 @@ export class ReadingUnitSession {
     const below = { skill: this.unit.skill, level: (this.unit.level - 1) as Level };
     let next: ResultView["next"];
     if (ok) next = LEVELS.includes(up.level) ? { kind: "level_up", unit: up } : { kind: "skill_complete" };
+    else if(this.unit.skill==="inference"&&answersRight) next=statusOf(after,this.unit)==="no_fresh_check"?{kind:"no_fresh_check"}:{kind:"practise_again"};
     else if (this.unit.level > 1 && !passed(after, below) && statusOf(after, below) !== "no_fresh_check") next = { kind: "step_back", unit: below };
     else next = statusOf(after, this.unit) === "no_fresh_check" ? { kind: "no_fresh_check" } : { kind: "practise_again" };
     this.result = {

@@ -29,3 +29,6 @@ test('advanced contrasts retain one-clue distractors and do not state the evalua
  for(const i of set)assert.equal(assessSentences(COURSE,records,[i]),'partial');
  assert.equal(assessSentences(COURSE,records,set.slice(0,2)),'partial');
 });
+test('inference alone requires both correct options and complete clues to advance; six legacy skills retain answer progression',()=>{
+ for(const skill of ['inference','detail','sequence','cause','feelings','main_idea','fact_opinion'] as const)for(const complete of [false,true]){const s=new ReadingUnitSession(COURSE,{skill,level:1},'check_me');for(let v=s.snapshot();v.phase==='check';v=s.snapshot()){const q=COURSE.questions.find(q=>q.id===v.question.id)!,set=supportingSets(COURSE,q)[0];s.answerCheck(q.answer,complete?set:skill==='inference'?[set[0]]:undefined);}const v=s.snapshot();assert.ok(v.phase==='result');assert.equal(v.result.passed,skill!=='inference'||complete);assert.equal(!!v.result.label,v.result.passed);assert.equal(v.result.next.kind,v.result.passed?'level_up':'practise_again');assert.ok(v.result.review.every(r=>r.correct));}
+});

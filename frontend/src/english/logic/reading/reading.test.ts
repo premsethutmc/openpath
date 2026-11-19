@@ -37,7 +37,7 @@ function learnToCheck(s: ReadingUnitSession) {
 function answerCheck(s: ReadingUnitSession, right: boolean) {
   for (let snap = s.snapshot(), i = 0; snap.phase === "check"; snap = s.snapshot(), i++) {
     const q = byId.get(snap.question.id)!;
-    s.answerCheck(right || i > 0 ? q.answer : (q.answer + 1) % q.options.length);
+    s.answerCheck(right || i > 0 ? q.answer : (q.answer + 1) % q.options.length, q.skill==="inference"?supportingSets(COURSE,q)[0]:undefined);
   }
 }
 function run(unit: Unit, mode: "learn" | "check_me", right: boolean, history: ReadingRecord[] = []) {

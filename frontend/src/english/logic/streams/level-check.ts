@@ -113,7 +113,7 @@ export class ReadingPlacement {
   }
 
   private load(): void {
-    const texts = [...this.course.passages.values()].filter((p) => p.level === this.level && p.role === "practice");
+    const texts = [...this.course.passages.values()].filter((p) => p.level === this.level && p.role === "practice" && READING_SKILLS.every(skill=>this.course.questions.some(q=>q.passage===p.id&&q.skill===skill&&q.role==="practice")));
     this.passage = texts.at(-1) ?? null;
     this.questions = this.passage ? READING_SKILLS.flatMap((s) => this.course.questions.filter((q) => q.passage === this.passage!.id && q.skill === s && q.role === "practice").slice(0, 1)) : [];
     this.index = 0;

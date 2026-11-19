@@ -237,3 +237,8 @@ test("LC-10 after the check, the grammar row starts at the level found, and name
   await l.recordGrammar(s.take());
   assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 7", "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
 });
+test('reading placement retains the legacy four-skill practice anchor after inference-only texts are added',()=>{
+ const expected=['L1.P2','N2.P2','L2.P2','N4.P2','L3.P2','N6.P2'];
+ for(let level=1;level<=6;level++){const s=new ReadingPlacement(COURSE,level);for(let i=0;i<4;i++){const v=s.snapshot();assert.equal(v.phase,'asking');const q=keyFor(v.question!.prompt,v.level,v.passage!.title);assert.equal(q.id,`${expected[level-1]}.${READING_SKILLS[i]}`);s.answer(q.answer);}}
+ const noAnchor={...COURSE,questions:COURSE.questions.filter(q=>q.skill==='inference')};assert.equal(new ReadingPlacement(noAnchor,3).snapshot().phase,'done');
+});
