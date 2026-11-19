@@ -1,6 +1,6 @@
 {
   "id": "guided-tasks",
-  "version": 2,
+  "version": 3,
   "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
@@ -723,6 +723,366 @@
         "Found two meanings",
         "Used each in a sentence",
         "Named the part of speech of each"
+      ]
+    },
+    {
+      "id": "c3.ls1.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS1",
+      "title": "My morning",
+      "task": "Tell a grown-up what you did this morning, from waking up until now.",
+      "look": [
+        "Told it in order",
+        "Kept to what happened",
+        "Spoke in sentences"
+      ]
+    },
+    {
+      "id": "c3.ls1.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS1",
+      "title": "A story I know",
+      "task": "Tell a grown-up a short story you know. Say who is in it and what happens.",
+      "look": [
+        "Said who is in it",
+        "Told what happens",
+        "Had an ending"
+      ]
+    },
+    {
+      "id": "c3.ls2.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS2",
+      "title": "Describe a thing",
+      "task": "Choose a thing in the room and describe it without saying its name. A grown-up guesses what it is.",
+      "look": [
+        "Gave its colour, size or shape",
+        "Spoke slowly enough to follow",
+        "Gave enough clues to guess"
+      ]
+    },
+    {
+      "id": "c3.ls2.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS2",
+      "title": "My favourite place",
+      "task": "Describe your favourite place to a grown-up. Say what you can see, hear and smell there.",
+      "look": [
+        "Gave details of what is seen",
+        "Gave a sound or a smell",
+        "Did not rush"
+      ]
+    },
+    {
+      "id": "c3.ls3.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS3",
+      "title": "Speak up",
+      "task": "Stand at one end of the room and tell a grown-up at the other end about your best friend. Then answer two questions.",
+      "look": [
+        "Could be heard across the room",
+        "Spoke clearly",
+        "Answered the questions"
+      ]
+    },
+    {
+      "id": "c3.ls3.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS3",
+      "title": "Show and tell",
+      "task": "Hold up a toy or a book and tell your family about it. Ask whether anyone has a question.",
+      "look": [
+        "Looked at the listeners",
+        "Spoke loudly enough",
+        "Answered a question"
+      ]
+    },
+    {
+      "id": "c3.ls4.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS4",
+      "title": "Say a poem",
+      "task": "Say a short poem or a rhyme you know by heart, with feeling.",
+      "look": [
+        "Remembered the words",
+        "Changed voice to fit the meaning",
+        "Enjoyed saying it"
+      ]
+    },
+    {
+      "id": "c3.ls4.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS4",
+      "title": "Voices in a story",
+      "task": "Tell a short story and give each person in it a different voice.",
+      "look": [
+        "Told the whole story",
+        "Used different voices",
+        "Used face or hands to help"
+      ]
+    },
+    {
+      "id": "c3.ls6.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS6",
+      "title": "At the shop",
+      "task": "Play shops with a grown-up. One is the shopkeeper and one is the customer. Then change places.",
+      "look": [
+        "Stayed in the part",
+        "Used polite words such as please and thank you",
+        "Changed places and played the other part"
+      ]
+    },
+    {
+      "id": "c3.ls6.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "LS6",
+      "title": "Act a story",
+      "task": "Choose a story you both know. Act out one part of it with a grown-up.",
+      "look": [
+        "Chose a part to play",
+        "Spoke as that person would",
+        "Worked together"
+      ]
+    },
+    {
+      "id": "c3.rw1.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW1",
+      "title": "Read a picture",
+      "task": "Look at a picture in a book or a newspaper with a grown-up. Say what is happening, then ask two questions about it.",
+      "look": [
+        "Said what is happening",
+        "Asked two questions",
+        "Asked a why or a how question"
+      ]
+    },
+    {
+      "id": "c3.rw1.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW1",
+      "title": "Before and after",
+      "task": "Look at a picture. Say what you think happened just before it and what will happen next.",
+      "look": [
+        "Described the picture",
+        "Said what came before",
+        "Said what comes next, with a reason"
+      ]
+    },
+    {
+      "id": "c3.rw2.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW2",
+      "title": "Read it aloud",
+      "task": "Read a short text from the app aloud to a grown-up. Stop a little at each full stop.",
+      "look": [
+        "Read the words correctly",
+        "Paused at the full stops",
+        "Read smoothly, not word by word"
+      ]
+    },
+    {
+      "id": "c3.rw2.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "RW2",
+      "title": "Read a poem aloud",
+      "task": "Read a short poem from a book aloud. Let your voice go up and down with the meaning.",
+      "look": [
+        "Read clearly",
+        "Kept the rhythm",
+        "Read with expression"
+      ]
+    },
+    {
+      "id": "c3.gv8.1",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "GV8",
+      "title": "Find the word",
+      "task": "Choose a word you do not know. With a grown-up, find it in a dictionary or in the word list at the back of a book.",
+      "look": [
+        "Used the first letters to find it",
+        "Read the meaning",
+        "Said the meaning in own words"
+      ]
+    },
+    {
+      "id": "c3.gv8.2",
+      "syllabus": "icse-cisce-english-class-3",
+      "outcome": "GV8",
+      "title": "Which comes first?",
+      "task": "Take three words and find each in a dictionary. Say which comes first in the dictionary and why.",
+      "look": [
+        "Found all three",
+        "Put them in order",
+        "Explained using the letters"
+      ]
+    },
+    {
+      "id": "c7.ls2.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS2",
+      "title": "Follow a debate",
+      "task": "Listen to a debate or a discussion on the radio, on television or at home. Tell a grown-up what the question was and the two main views.",
+      "look": [
+        "Stated the question",
+        "Gave both main views",
+        "Named the strongest point made"
+      ]
+    },
+    {
+      "id": "c7.ls2.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS2",
+      "title": "Notes from a talk",
+      "task": "Listen to a talk of about five minutes. Note three main points and tell them to a grown-up.",
+      "look": [
+        "Listened to the end",
+        "Noted three points",
+        "Kept main points apart from examples"
+      ]
+    },
+    {
+      "id": "c7.ls3.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS3",
+      "title": "Sound and picture",
+      "task": "Give a short talk about a place or an event, using pictures and one piece of music or sound.",
+      "look": [
+        "Chose pictures and sound that fit",
+        "Used them at the right moments",
+        "Explained what each adds"
+      ]
+    },
+    {
+      "id": "c7.ls3.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS3",
+      "title": "A chart that helps",
+      "task": "Make a chart or a diagram for a talk on a topic you are studying, and present with it.",
+      "look": [
+        "Made a clear chart",
+        "Referred to it while speaking",
+        "Did not just read it out"
+      ]
+    },
+    {
+      "id": "c7.ls4.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS4",
+      "title": "Words that sell",
+      "task": "Compare two advertisements for the same kind of thing. Tell a grown-up how the words of each try to persuade.",
+      "look": [
+        "Picked out persuading words in each",
+        "Compared the two",
+        "Said which works better and why"
+      ]
+    },
+    {
+      "id": "c7.ls4.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS4",
+      "title": "Fact and comment",
+      "task": "Read a newspaper report and an opinion piece on the same event. Say how their language differs.",
+      "look": [
+        "Told the report from the opinion piece",
+        "Gave an example of each kind of language",
+        "Explained the difference"
+      ]
+    },
+    {
+      "id": "c7.ls5.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS5",
+      "title": "Say it three ways",
+      "task": "Say the sentence \"I did not take your book\" three times, stressing a different word each time. Explain how the meaning changes.",
+      "look": [
+        "Changed the stress each time",
+        "Explained each meaning",
+        "Matched face and voice to the meaning"
+      ]
+    },
+    {
+      "id": "c7.ls5.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS5",
+      "title": "Speak to convince",
+      "task": "Give a one-minute speech on something you care about. Use your voice, your face and your hands.",
+      "look": [
+        "Varied tone and pace",
+        "Used gesture and expression",
+        "Chose words with care"
+      ]
+    },
+    {
+      "id": "c7.ls6.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS6",
+      "title": "Keep it on track",
+      "task": "In a family discussion, ask for one point to be made clearer and bring the talk back when it wanders.",
+      "look": [
+        "Asked for something to be made clear",
+        "Brought the talk back to the topic",
+        "Did so politely"
+      ]
+    },
+    {
+      "id": "c7.ls6.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS6",
+      "title": "Gather the ideas",
+      "task": "Ask three people for their idea on one question. Then tell a grown-up all three, fairly.",
+      "look": [
+        "Asked three people",
+        "Reported each idea fairly",
+        "Said where they agree or differ"
+      ]
+    },
+    {
+      "id": "c7.ls7.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS7",
+      "title": "A message that matters",
+      "task": "Prepare a short presentation with pictures or slides on an issue such as saving water. Present it to your family.",
+      "look": [
+        "Chose a clear message",
+        "Used pictures or slides to support it",
+        "Ended with what people can do"
+      ]
+    },
+    {
+      "id": "c7.ls7.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "LS7",
+      "title": "A poster with a purpose",
+      "task": "Design a poster with a social message and explain your choice of words and pictures.",
+      "look": [
+        "Had one clear message",
+        "Chose words and pictures that fit",
+        "Explained the choices"
+      ]
+    },
+    {
+      "id": "c7.r5.1",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "R5",
+      "title": "A book of my choice",
+      "task": "Read a novel or a book of short stories that is not in this app. Tell a grown-up about its people, its problem and its ending.",
+      "look": [
+        "Named the book and its writer",
+        "Described the people and the problem",
+        "Gave a view of the ending"
+      ]
+    },
+    {
+      "id": "c7.r5.2",
+      "syllabus": "icse-cisce-english-class-7",
+      "outcome": "R5",
+      "title": "A life story",
+      "task": "Read a life story or a true account. Tell a grown-up what the person did and what you think of it.",
+      "look": [
+        "Said whose story it is",
+        "Told the main events",
+        "Gave an opinion with a reason"
       ]
     }
   ]

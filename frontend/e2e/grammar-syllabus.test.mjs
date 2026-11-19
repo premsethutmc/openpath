@@ -60,7 +60,7 @@ async function answer(page, wrong) {
   if (it.kind === "spot") {
     const words = it.sentence.split(" ");
     const isRight = (w) => it.right.includes(w.replace(/[^A-Za-z']/g, ""));
-    await page.getByText(it.ask === "object" ? "Tap the object of the verb in this sentence." : new RegExp(`^Tap an? ${it.ask} in this sentence\\.$`)).waitFor();
+    await page.getByText(it.ask === "object" ? "Tap the object of the verb in this sentence." : it.ask === "subject" ? "Tap any word of the subject of this sentence." : new RegExp(`^Tap an? ${it.ask} in this sentence\\.$`)).waitFor();
     await page.locator(".grammar-word").nth(words.findIndex((w) => isRight(w) !== wrong)).click();
     await page.getByRole("button", { name: "Check", exact: true }).click();
   } else if (it.kind === "fix") {
@@ -119,10 +119,10 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   await context.close();
 });
 
-test("ICSE syllabus, Classes 4 to 6: every line shown with its place in the app, and practice starts on a line's topics", async () => {
+test("ICSE syllabus, Classes 3 to 7: every line shown with its place in the app, and practice starts on a line's topics", async () => {
   const { context, page, errors, foreign, fits } = await start("Syllabus");
   await page.getByRole("heading", { name: "CISCE (ICSE) English by class" }).waitFor();
-  await page.getByText("Classes 4, 5 and 6: 104 lines").waitFor();
+  await page.getByText("Classes 3, 4, 5, 6 and 7: 153 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   await page.getByText("20 in the app · 5 partly · 8 with a grown-up · 0 not yet (of 33)").waitFor();
@@ -181,6 +181,22 @@ test("ICSE syllabus, Classes 4 to 6: every line shown with its place in the app,
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
   await page.getByText("14 in the app · 19 partly · 13 with a grown-up · 0 not yet (of 46)").waitFor();
+  await page.getByRole("button", { name: "Class 3", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
+  await page.getByText("9 in the app · 7 partly · 8 with a grown-up · 0 not yet (of 24)").waitFor();
+  await fits();
+  // alphabetical order: words as tiles, with its own instruction
+  await page.getByRole("button", { name: /Practise GV6:/ }).click();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  await page.getByText("Tap the words in alphabetical order.", { exact: false }).waitFor();
+  assert.equal((await answer(page, false)).topic, "alphabetical");
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
+  await page.getByRole("button", { name: "Class 7", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 7 English" }).waitFor();
+  await page.getByText("8 in the app · 10 partly · 7 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByRole("button", { name: "Class 6", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
   await fits();
   await page.getByRole("button", { name: /Practise GV2:/ }).click();
   await page.getByText("Topics: Pronoun forms: I and me, myself").waitFor();

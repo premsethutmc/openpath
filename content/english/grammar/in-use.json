@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 8,
+  "version": 9,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -210,6 +210,26 @@
     {
       "id": "transitive",
       "name": "Verbs that take an object"
+    },
+    {
+      "id": "subject_predicate",
+      "name": "The subject of a sentence"
+    },
+    {
+      "id": "collective_nouns",
+      "name": "Collective and material nouns"
+    },
+    {
+      "id": "alphabetical",
+      "name": "Alphabetical order"
+    },
+    {
+      "id": "synonyms_antonyms",
+      "name": "Same, opposite and matching pairs"
+    },
+    {
+      "id": "sound_words",
+      "name": "Sound words"
     }
   ],
   "scale": 2,
@@ -276,6 +296,22 @@
     {"id": "gu.parts_of_speech.12", "level": 2, "topic": "parts_of_speech", "kind": "spot", "ask": "pronoun", "sentence": "Ravi lost the pen, but he found it later.", "rule": "A pronoun stands in place of a noun: he for Ravi, it for the pen.", "right": ["he", "it"]},
     {"id": "gu.parts_of_speech.13", "level": 2, "topic": "parts_of_speech", "kind": "spot", "ask": "pronoun", "sentence": "The girls said they were hungry.", "rule": "A pronoun stands in place of a noun: they for the girls.", "right": ["they"]},
     {"id": "gu.parts_of_speech.14", "level": 2, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "The soup is hot.", "rule": "Is, am, are, was and were are verbs too.", "right": ["is"]},
+    {"id": "gu.subject_predicate.01", "level": 2, "topic": "subject_predicate", "kind": "spot", "sentence": "The old dog barked loudly.", "rule": "The subject is who or what the sentence is about: the old dog. The rest of the sentence, which tells about the subject, is the predicate.", "ask": "subject", "right": ["The", "old", "dog"]},
+    {"id": "gu.subject_predicate.02", "level": 2, "topic": "subject_predicate", "kind": "spot", "sentence": "My sister sings every morning.", "rule": "The subject is who or what the sentence is about: my sister. The rest of the sentence, which tells about the subject, is the predicate.", "ask": "subject", "right": ["My", "sister"]},
+    {"id": "gu.subject_predicate.03", "level": 2, "topic": "subject_predicate", "kind": "spot", "sentence": "Birds fly south in winter.", "rule": "The subject is who or what the sentence is about: birds. The rest of the sentence, which tells about the subject, is the predicate.", "ask": "subject", "right": ["Birds"]},
+    {"id": "gu.subject_predicate.04", "level": 2, "topic": "subject_predicate", "kind": "spot", "sentence": "The little boy lost a shoe.", "rule": "The subject is who or what the sentence is about: the little boy. The rest of the sentence, which tells about the subject, is the predicate.", "ask": "subject", "right": ["The", "little", "boy"]},
+    {"id": "gu.collective_nouns.01", "level": 2, "topic": "collective_nouns", "kind": "fix", "sentence": "A [herd] of bees flew past the window.", "rule": "A group of bees is a swarm.", "right": ["swarm"]},
+    {"id": "gu.collective_nouns.02", "level": 2, "topic": "collective_nouns", "kind": "fix", "sentence": "We saw a [flock] of lions at the zoo.", "rule": "A group of lions is a pride.", "right": ["pride"]},
+    {"id": "gu.collective_nouns.03", "level": 2, "topic": "collective_nouns", "kind": "fix", "sentence": "A [bunch] of wolves howled at night.", "rule": "A group of wolves is a pack.", "right": ["pack"]},
+    {"id": "gu.collective_nouns.04", "level": 2, "topic": "collective_nouns", "kind": "fix", "sentence": "She bought a [pack] of bananas.", "rule": "Bananas come in a bunch.", "right": ["bunch"]},
+    {"id": "gu.collective_nouns.05", "level": 2, "topic": "collective_nouns", "kind": "fix", "sentence": "The ring is made of [wood] and shines like the sun.", "rule": "A material noun names what a thing is made of: gold.", "right": ["gold"]},
+    {"id": "gu.alphabetical.01", "level": 2, "topic": "alphabetical", "kind": "build", "sentence": "bag bell bird boat", "rule": "When the first letters are the same, look at the second letter: bag, bell, bird, boat.", "parts": ["bag", "bell", "bird", "boat"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.02", "level": 2, "topic": "alphabetical", "kind": "build", "sentence": "cap chair clock cup", "rule": "When the first letters are the same, look at the second letter: cap, chair, clock, cup.", "parts": ["cap", "chair", "clock", "cup"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.03", "level": 2, "topic": "alphabetical", "kind": "build", "sentence": "sand sea ship sun", "rule": "When the first letters are the same, look at the second letter: sand, sea, ship, sun.", "parts": ["sand", "sea", "ship", "sun"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.04", "level": 2, "topic": "alphabetical", "kind": "build", "sentence": "table tent tiger tree", "rule": "When the first letters are the same, look at the second letter: table, tent, tiger, tree.", "parts": ["table", "tent", "tiger", "tree"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.articles.06", "level": 2, "topic": "articles", "kind": "fix", "sentence": "[A] sun rises in the east.", "rule": "Use the for a thing there is only one of: the sun.", "right": ["The"]},
+    {"id": "gu.articles.07", "level": 2, "topic": "articles", "kind": "fix", "sentence": "I saw a dog in the lane. [A] dog was barking.", "rule": "Use the when the thing has already been mentioned: the dog.", "right": ["The"]},
+    {"id": "gu.articles.08", "level": 2, "topic": "articles", "kind": "fix", "sentence": "She is [the] honest girl.", "rule": "Use an before a vowel sound, when you mean any one of a kind: an honest girl.", "right": ["an"]},
     {"id": "gu.conjunctions.03", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "We stayed inside because it was raining.", "rule": "\"Because\" gives the reason."},
     {"id": "gu.conjunctions.04", "level": 3, "topic": "conjunctions", "kind": "build", "sentence": "Although he was tired, he finished his homework.", "rule": "\"Although\" joins two ideas that seem to pull apart."},
     {"id": "gu.conjunctions.05", "level": 3, "topic": "conjunctions", "kind": "fix", "sentence": "I was hungry, [but] I ate a sandwich.", "rule": "\"So\" shows the result.", "right": ["so", "and"]},
@@ -369,6 +405,9 @@
     {"id": "gu.opinion_reason.02", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "In my opinion, we should plant trees since they give shade.", "rule": "Since can give the reason for an opinion."},
     {"id": "gu.opinion_reason.03", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "I like mangoes more than apples because they are sweeter.", "rule": "Because gives the reason for what you like."},
     {"id": "gu.opinion_reason.04", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "Cycling keeps us fit, so I ride to school.", "rule": "So joins a reason to what follows from it."},
+    {"id": "gu.sound_words.01", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The bees [roared] around the hive.", "rule": "Some words sound like what they name: bees buzz.", "right": ["buzzed", "hummed"]},
+    {"id": "gu.sound_words.02", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The snake [barked] in the long grass.", "rule": "Some words sound like what they name: a snake hisses.", "right": ["hissed"]},
+    {"id": "gu.sound_words.03", "level": 4, "topic": "sound_words", "kind": "fix", "sentence": "The old door [sang] as it opened.", "rule": "Some words sound like what they name: an old door creaks.", "right": ["creaked", "squeaked", "groaned"]},
     {"id": "gu.adverbs.05", "level": 5, "topic": "adverbs", "kind": "fix", "sentence": "He drives very [careful] in the rain.", "rule": "\"Very\" can strengthen an adverb: very carefully.", "right": ["carefully"]},
     {"id": "gu.interjections.04", "level": 5, "topic": "interjections", "kind": "build", "sentence": "Alas! The old tree has fallen.", "rule": "\"Alas\" shows sorrow."},
     {"id": "gu.phrasal_verbs.04", "level": 5, "topic": "phrasal_verbs", "kind": "fix", "sentence": "She takes [up] her mother: they have the same smile.", "rule": "\"Take after\" means to be like an older family member.", "right": ["after"]},
@@ -404,6 +443,14 @@
     {"id": "gu.transitive.02", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "The girl opened the window.", "rule": "Opened is transitive here: its object is the window. In \"The shop opened\", there is no object.", "right": ["window"]},
     {"id": "gu.transitive.03", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "My mother baked a cake yesterday.", "rule": "Baked is transitive: its object is a cake. Yesterday tells when; it is not an object.", "right": ["cake"]},
     {"id": "gu.transitive.04", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "The children sang a song loudly.", "rule": "Sang is transitive here: its object is a song. In \"The children sang loudly\", there is no object.", "right": ["song"]},
+    {"id": "gu.linkers.06", "level": 5, "topic": "linkers", "kind": "build", "sentence": "It rained heavily. However, the match went on.", "rule": "However joins two ideas that pull apart."},
+    {"id": "gu.linkers.07", "level": 5, "topic": "linkers", "kind": "build", "sentence": "He practised daily. Therefore, he improved quickly.", "rule": "Therefore shows the result."},
+    {"id": "gu.linkers.08", "level": 5, "topic": "linkers", "kind": "fix", "sentence": "She was tired. [Therefore], she kept working.", "rule": "However shows that the second idea is unexpected.", "right": ["However", "Nevertheless", "Still", "Yet"]},
+    {"id": "gu.synonyms_antonyms.01", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "The opposite of generous is [kind].", "rule": "An antonym is a word of opposite meaning: generous, mean.", "right": ["mean", "selfish", "stingy", "miserly"]},
+    {"id": "gu.synonyms_antonyms.02", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "A word that means the same as brave is [timid].", "rule": "A synonym is a word of the same meaning: brave, courageous.", "right": ["courageous", "bold", "fearless", "daring"]},
+    {"id": "gu.synonyms_antonyms.03", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "Hot is to cold as day is to [sun].", "rule": "An analogy matches pairs: hot and cold are opposites, so are day and night.", "right": ["night"]},
+    {"id": "gu.synonyms_antonyms.04", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "The opposite of ancient is [old].", "rule": "An antonym is a word of opposite meaning: ancient, modern.", "right": ["modern", "new"]},
+    {"id": "gu.synonyms_antonyms.05", "level": 5, "topic": "synonyms_antonyms", "kind": "fix", "sentence": "Glove is to hand as sock is to [shoe].", "rule": "An analogy matches pairs: a glove goes on a hand, a sock goes on a foot.", "right": ["foot"]},
     {"id": "gu.speech.03", "level": 6, "topic": "speech", "kind": "build", "sentence": "Meena said that she was hungry.", "rule": "In reported speech \"I am\" becomes \"she was\".", "extra": ["is", "I"]},
     {"id": "gu.speech.04", "level": 6, "topic": "speech", "kind": "build", "sentence": "Ravi asked me where I was going.", "rule": "A reported question uses statement order and has no question mark.", "extra": ["are", "you"]},
     {"id": "gu.speech.05", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Last week she said that she [will] visit us soon.", "rule": "In reported speech \"will\" becomes \"would\".", "right": ["would"]},
