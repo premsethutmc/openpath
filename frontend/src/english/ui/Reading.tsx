@@ -335,6 +335,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   const [session, setSession] = useState<ReadingUnitSession | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [saving, setSaving] = useState(false);
   const unsaved = useRef<ReadingRecord[]>([]);
   const records = learner.readingRecords();
   const p = useMemo(() => progress(COURSE, records), [records.length]);
@@ -343,6 +344,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
    * Records that could not be saved wait in order and go first on the next step.
    */
   const step = async (s: ReadingUnitSession, act?: () => void) => {
+    setSaving(true);
     const before = s.snapshot();
     act?.();
     unsaved.current.push(...s.take());
@@ -355,6 +357,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     } catch {
       setFailed(true);
     }
+    setSaving(false);
     setTick((t) => t + 1);
     onChanged();
     const after = s.snapshot();
@@ -379,6 +382,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
       </>
     );
   const s = session;
+  if (saving || failed) return <main className="page"><p role={failed?"alert":"status"}>{failed?"This step could not be saved. Its passage is hidden until the reading record is safe.":"Saving your reading step…"}</p>{failed&&<><button onClick={()=>void step(s)}>Retry saving</button><button onClick={()=>setSession(null)}>Back to reading skills</button></>}</main>;
   return (
     <>
       {failed && (
