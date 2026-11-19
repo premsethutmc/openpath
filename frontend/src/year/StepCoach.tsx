@@ -9,6 +9,7 @@
 import { useMemo, useState } from "react";
 import { cardFor, helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
+import { Board } from "./Board";
 import { SmallAsk } from "./SmallAsk";
 import { askOf, judge, type StepAsk } from "../../../packages/learning/src/step-ask";
 import { clipFor } from "../../../packages/learning/src/clips";
@@ -111,7 +112,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
                 {s.how && <> <button type="button" className="coach-chip coach-how" aria-expanded={how === i} onClick={() => { setHow(how === i ? null : i); setHowCard(false); }}>{how === i ? "Hide the working" : "How?"}</button></>}
                 {s.how && how === i && (
                   <aside className="coach-card coach-how-card" aria-label="How it is worked out" data-testid="coach-how">
-                    <pre className="coach-board">{(s.how.board ?? s.how.lines).join("\n")}</pre>
+                    <Board rows={s.how.board ?? s.how.lines} />
                     {skill && <button type="button" className="coach-chip" aria-expanded={howCard} onClick={() => setHowCard(!howCard)}>{howCard ? "Hide the rule" : `This is ${skill.name.charAt(0).toLowerCase()}${skill.name.slice(1)}: show me the rule`}</button>}
                     {skill && howCard && <>{skill.rule.map((t, k) => <p key={k}>{t}</p>)}</>}
                   </aside>
@@ -122,7 +123,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
         </ol>
       )}
       {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
-      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <pre className="coach-board" aria-label="The working so far" data-testid="coach-board">{b.join("\n")}</pre> : null; })()}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

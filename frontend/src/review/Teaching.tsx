@@ -9,6 +9,7 @@ import { recipeFor, stepsOf } from "../../../packages/learning/src/recipe";
 import { cardFor, helpShown } from "../../../packages/learning/src/step-help";
 import { question } from "../../../packages/learning/src/content";
 import { RecipeLesson } from "../year/Recipe";
+import { Board } from "../year/Board";
 
 export interface TeachingItem {
   item: string; kind: "recipe" | "card" | "help"; competency: string; title: string; source: "written" | "rule"; from: string | null; classes: string[];
@@ -150,8 +151,8 @@ function HelpPreview({ family }: { family: string }) {
                 <ol>{w.steps.map((s, i) => (
                   <li key={i}>
                     <span>{s.next}</span> <span className="muted">→ {s.shown}</span>
-                    {s.board && <pre className="coach-board">{s.board.join("\n")}</pre>}
-                    {s.how && <details><summary>How? (opened only if asked)</summary><pre className="coach-board">{(s.how.board ?? s.how.lines).join("\n")}</pre></details>}
+                    {s.board && <Board rows={s.board} />}
+                    {s.how && <details><summary>How? (opened only if asked)</summary><Board rows={s.how.board ?? s.how.lines} /></details>}
                   </li>
                 ))}</ol>
               </div>

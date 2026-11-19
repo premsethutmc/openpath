@@ -479,3 +479,8 @@ screenshot says which build a phone has. Checked in a browser against two simula
 "How many 6s fit in 34?" (the digit written on top), "Bring down the next digit" (the number to share now), the LCM of
 two bottoms, the whole ones in an improper fraction. In long division 85% of steps are now typed; the rest is the last
 "read the answer" step, which is entered in the answer box. "Help: show me this step" still reveals a step.
+
+`bracket@1` (Board.tsx): the row "6 ) 348" of a long division is drawn with the line over the number being shared,
+joined to the bracket, with the answer on the line: the symbol a school book uses. One component draws every written
+layout (step help, "How?", the lesson picture, the review page). Layout chosen: answer on top; the other Indian layout
+("6 ) 348 ( 58") is not drawn.
