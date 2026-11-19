@@ -56,7 +56,7 @@ export function ReadingMap({ course, progress: p, start, onOpen, onBack }: { cou
       <h1 id="reading-title" className="hero">
         Read, think, answer
       </h1>
-      <p className="sub">Six reading skills at three levels. Learn each one with an example, practise with hints, then try two new questions on your own.</p>
+      <p className="sub">Six reading skills at five levels. Learn each one with an example, practise with hints, then try two new questions on your own.</p>
       {next ? (
         <section className="tile lilac reading-next" aria-labelledby="reading-next-title">
           <p className="kicker">{WHY[next.why]}</p>

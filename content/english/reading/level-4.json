@@ -1,0 +1,560 @@
+{
+  "level": 4,
+  "lessons": [
+    {
+      "skill": "detail",
+      "title": "Who is he, she or they?",
+      "strategy": "Writers do not repeat names. To answer a who question, follow he, she, it or they back to the nearest name that fits.",
+      "tip": "When you meet he or she, say the name in its place and see if the sentence still makes sense.",
+      "worked": {
+        "prompt": "Who keeps the accounts at the stall?",
+        "answer": "Geetha.",
+        "steps": [
+          "The text says, 'She keeps the accounts.' The question is: who is she?",
+          "Go back to the nearest name that fits. The sentence before is about 'His daughter Geetha'.",
+          "She is Geetha. In the next sentence, he is her father, Mr Iyer, who still makes every cup."
+        ]
+      }
+    },
+    {
+      "skill": "sequence",
+      "title": "Before, after and had",
+      "strategy": "The order of the telling is not always the order of the events. The words before, after and had (had finished, had seen) point to something that happened earlier.",
+      "tip": "When you see had, ask: what was already done by then?",
+      "worked": {
+        "prompt": "Which happened first: Geetha joined the stall, or she finished college?",
+        "answer": "She finished college first.",
+        "steps": [
+          "The sentence says, 'His daughter Geetha joined him last year, after she had finished college.'",
+          "Joining is told first, but the words after and had finished point to something earlier.",
+          "The real order: she finished college, then she joined the stall."
+        ]
+      }
+    },
+    {
+      "skill": "cause",
+      "title": "A chain of reasons",
+      "strategy": "One thing can lead to the next, like a row of falling dominoes. To find the first cause, start at the end and keep asking why.",
+      "tip": "Say the chain aloud, one link at a time, starting from the result.",
+      "worked": {
+        "prompt": "Why did the stall sell all its biscuits?",
+        "answer": "Rain stopped the trains, and the stuck passengers grew hungry.",
+        "steps": [
+          "Start at the end: the biscuits sold out because the passengers grew hungry.",
+          "Why were so many passengers there? The trains had stopped. Why? Heavy rain had flooded the tracks.",
+          "Join the chain: rain, flooded tracks, stopped trains, stuck and hungry passengers, no biscuits left."
+        ]
+      }
+    },
+    {
+      "skill": "feelings",
+      "title": "What kind of person?",
+      "strategy": "One action shows a feeling. Several actions that point the same way show what kind of person someone is: patient, honest, generous.",
+      "tip": "Collect at least two things the person did before you choose your word.",
+      "worked": {
+        "prompt": "What kind of person is Mr Iyer?",
+        "answer": "Generous.",
+        "steps": [
+          "One action is not enough, so collect several. He gave free tea to the children and the old people.",
+          "He gave a woman her money back. He laughed when the day's earnings were low.",
+          "Each time, he puts people before money. The word for that is generous."
+        ]
+      }
+    },
+    {
+      "skill": "main_idea",
+      "title": "What the story shows",
+      "strategy": "A story often shows something about how to live. Look at what the main person chose to do, what it cost and how it ended.",
+      "tip": "Finish this sentence: this story shows that ...",
+      "worked": {
+        "prompt": "What does the story show?",
+        "answer": "Helping people can matter more than making money.",
+        "steps": [
+          "Ask what the main person chose to do when things went wrong: he gave tea away.",
+          "Ask what it cost him: they earned less than on a normal day. Ask how he took it: he only laughed.",
+          "So the story shows that helping people can matter more than making money."
+        ]
+      }
+    },
+    {
+      "skill": "fact_opinion",
+      "title": "Judging words",
+      "strategy": "An opinion does not always say I think. Describing words such as wonderful, boring, tastiest and splendid judge a thing. They tell you what the writer feels, not what can be measured.",
+      "tip": "Circle the describing words and ask of each: can it be measured?",
+      "worked": {
+        "prompt": "Is this a fact or an opinion: 'His ginger tea is the most wonderful drink in the whole town.'?",
+        "answer": "An opinion.",
+        "steps": [
+          "There is no 'I think' here, so look at the describing words.",
+          "Wonderful is a judging word: it tells you what the writer feels, not something you can measure.",
+          "'Mr Iyer has run the tea stall outside the railway station for thirty years' can be checked. 'Most wonderful' cannot. It is an opinion."
+        ]
+      }
+    }
+  ],
+  "passages": [
+    {
+      "id": "N4.T",
+      "role": "teach",
+      "title": "The Tea Stall",
+      "text": "Mr Iyer has run the tea stall outside the railway station for thirty years. His daughter Geetha joined him last year, after she had finished college. She keeps the accounts. He still makes every cup himself.\n\nOne July morning, heavy rain flooded the tracks. The trains stopped, so hundreds of passengers were stuck at the station. They grew hungry. Soon the stall had sold all its biscuits. Mr Iyer sent Geetha to the bakery for bread, and he gave free tea to the children and the old people.\n\nBy evening the trains were running again. A woman pressed some money into his hand, but he gave it back and wished her a safe journey. Before the stall closed, Geetha had counted the cash: they had earned less than on a normal day. Her father only laughed. His ginger tea is the most wonderful drink in the whole town.",
+      "questions": []
+    },
+    {
+      "id": "N4.P1",
+      "role": "practice",
+      "title": "The Shared Bicycle",
+      "text": "Suresh and his cousin Vivek shared one bicycle. Vivek rode it to his cricket practice. Suresh used it for the newspaper round. He woke at five every morning and had finished the round before most people were out of bed.\n\nOne Tuesday, Vivek left the bicycle unlocked outside the ground. When practice ended, it was gone. Without the bicycle, Suresh had to walk his round, so the papers reached the houses late. Two customers complained, and the newsagent warned him that he might lose the job.\n\nSuresh did not shout at his cousin. He borrowed their neighbour's old bicycle and repaired its chain himself. He also wrote a note to each customer to explain the delay. On Friday, a shopkeeper found the missing bicycle behind the market. Vivek bought a strong lock with his own pocket money. A newspaper round is a splendid job for a boy.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who woke at five every morning?",
+          "right": "Suresh",
+          "wrong": [
+            "Vivek",
+            "the newsagent"
+          ],
+          "evidence": "He woke at five every morning",
+          "explain": "'He woke at five' follows 'Suresh used it for the newspaper round', and he finished the round. He is Suresh.",
+          "hint": "Read the sentence before 'He woke at five'. Which boy has an early job?"
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Vivek left the bicycle unlocked.",
+          "wrong": [
+            "The newsagent warned Suresh.",
+            "Vivek bought a strong lock."
+          ],
+          "evidence": "One Tuesday, Vivek left the bicycle unlocked outside the ground.",
+          "explain": "The bicycle was left unlocked on Tuesday. The warning came after the papers were late, and the lock was bought after the bicycle was found.",
+          "hint": "Put the three events on a line from Tuesday to Friday."
+        },
+        {
+          "skill": "cause",
+          "prompt": "What first led to the customers' complaints?",
+          "right": "The bicycle was left unlocked.",
+          "wrong": [
+            "Suresh woke up too late.",
+            "The newsagent raised the price."
+          ],
+          "evidence": "Without the bicycle, Suresh had to walk his round, so the papers reached the houses late.",
+          "explain": "Follow the chain back: complaints, late papers, walking the round, no bicycle, a bicycle left unlocked.",
+          "hint": "Go backwards one step at a time: why were the papers late? Why was he walking?"
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Suresh?",
+          "right": "responsible",
+          "wrong": [
+            "careless",
+            "boastful"
+          ],
+          "evidence": "He also wrote a note to each customer to explain the delay.",
+          "explain": "He did not shout, he found another bicycle, mended it and wrote to every customer. He dealt with the problem himself: he is responsible.",
+          "hint": "List three things he did after the bicycle went missing. What do they have in common?"
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "Calmly fixing a problem works better than blaming.",
+          "wrong": [
+            "Bicycles should never be shared.",
+            "Cricket practice is a waste of time."
+          ],
+          "evidence": "Suresh did not shout at his cousin.",
+          "explain": "Suresh did not blame Vivek; he solved the problem step by step, and Vivek then put things right himself.",
+          "hint": "Look at what he chose not to do, and at what he did instead."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "A newspaper round is a splendid job for a boy.",
+          "wrong": [
+            "On Friday, a shopkeeper found the missing bicycle behind the market.",
+            "Two customers complained, and the newsagent warned him that he might lose the job."
+          ],
+          "evidence": "A newspaper round is a splendid job for a boy.",
+          "explain": "Splendid is a judging word. The finding of the bicycle and the complaints are things that happened and could be checked.",
+          "hint": "There is no 'I think' here. Look for a describing word that judges."
+        }
+      ]
+    },
+    {
+      "id": "N4.P2",
+      "role": "practice",
+      "title": "The School Radio",
+      "text": "Every Friday, Class Seven broadcasts a ten-minute programme over the school loudspeakers. Priya reads the news. Her friend Asha chooses the music. She had wanted to read the news herself, but her voice shook whenever she held the microphone.\n\nLast month, Priya lost her voice after a cold. Nobody else had practised the script, so the teacher asked Asha to read it. Asha's hands trembled. Priya could not speak, but she stood beside her and pointed to each line with a pencil. The programme went well, and the head teacher praised it at assembly.\n\nAfter that, Priya asked the teacher to let them take turns. She had read the news for a whole year, and she said it was time to share. Now Asha reads on the first and third Fridays. The school radio is a marvellous invention.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Whose voice shook at the microphone?",
+          "right": "Asha's",
+          "wrong": [
+            "Priya's",
+            "the teacher's"
+          ],
+          "evidence": "her voice shook whenever she held the microphone",
+          "explain": "'She had wanted to read the news herself' follows 'Her friend Asha chooses the music'. She is Asha: Priya already reads the news.",
+          "hint": "Which girl does not read the news yet? The word herself is a clue."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Asha wanted to read the news.",
+          "wrong": [
+            "Priya lost her voice.",
+            "The head teacher praised the programme."
+          ],
+          "evidence": "She had wanted to read the news herself",
+          "explain": "'Had wanted' points back to a time before the events of the story. Priya lost her voice last month, and the praise came after that programme.",
+          "hint": "Look for the words had wanted. They point to an earlier time."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did Asha end up reading the news?",
+          "right": "Priya had a cold and lost her voice.",
+          "wrong": [
+            "The teacher was unhappy with Priya.",
+            "Asha had asked the head teacher."
+          ],
+          "evidence": "Last month, Priya lost her voice after a cold.",
+          "explain": "The chain: a cold, a lost voice, nobody else had practised, so the teacher asked Asha.",
+          "hint": "Go backwards: why did the teacher ask her? What had happened to the usual reader?"
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Priya?",
+          "right": "generous",
+          "wrong": [
+            "jealous",
+            "timid"
+          ],
+          "evidence": "Priya asked the teacher to let them take turns",
+          "explain": "She helped Asha line by line, then offered to share the job she had done for a year. She gives others a chance: she is generous.",
+          "hint": "What did she do during the programme, and what did she ask for afterwards?"
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "A good friend helps others to shine.",
+          "wrong": [
+            "Colds can spoil a school programme.",
+            "Reading the news is harder than choosing music."
+          ],
+          "evidence": "she stood beside her and pointed to each line with a pencil",
+          "explain": "Priya helped her friend through the reading and then shared the job with her. The story shows a friend helping another to do well.",
+          "hint": "Think about what one girl did when the other was frightened, and what she did later."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "The school radio is a marvellous invention.",
+          "wrong": [
+            "Now Asha reads on the first and third Fridays.",
+            "Last month, Priya lost her voice after a cold."
+          ],
+          "evidence": "The school radio is a marvellous invention.",
+          "explain": "Marvellous is a judging word. The Fridays and the lost voice could be checked.",
+          "hint": "Find the describing word that judges, not one that can be checked."
+        }
+      ]
+    },
+    {
+      "id": "N4.C1",
+      "role": "check",
+      "title": "The Well Rope",
+      "text": "Old Muthu drew water for the whole lane, because the well was deep and the bucket was heavy. His grandson Karthik helped him after school. He had strong arms for a boy of twelve, but he pulled too fast and often spilled half the water.\n\nOne evening, the rope snapped. It had frayed slowly over the summer, and nobody had noticed. The bucket fell into the well, so the lane had no water that night. The families had to walk to the next street. Some children went to bed without a bath.\n\nKarthik did not wait for the adults. He had seen a spare rope in the school store, and he asked the caretaker for it. He tied it on by lamplight. Then he pulled the first bucket up slowly, without spilling a drop. From then on, he checked the rope every Sunday. Well water tastes far nicer than tap water.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who often spilled half the water?",
+          "right": "Karthik",
+          "wrong": [
+            "Old Muthu",
+            "the caretaker"
+          ],
+          "evidence": "he pulled too fast and often spilled half the water",
+          "explain": "'He had strong arms for a boy of twelve' follows 'His grandson Karthik helped him'. A boy of twelve is Karthik, not his grandfather."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "The rope frayed.",
+          "wrong": [
+            "The bucket fell into the well.",
+            "Karthik asked the caretaker for a rope."
+          ],
+          "evidence": "It had frayed slowly over the summer",
+          "explain": "'Had frayed' points back to before the evening the rope snapped. The bucket fell after the snap, and Karthik fetched the new rope after that."
+        },
+        {
+          "skill": "cause",
+          "prompt": "What first led to the lane having no water?",
+          "right": "The rope wore thin and nobody noticed.",
+          "wrong": [
+            "The well dried up in summer.",
+            "Karthik spilled the water."
+          ],
+          "evidence": "It had frayed slowly over the summer, and nobody had noticed.",
+          "explain": "The chain: the rope frayed unnoticed, it snapped, the bucket fell, and the lane had no water."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Karthik in the last paragraph?",
+          "right": "resourceful",
+          "wrong": [
+            "lazy",
+            "nervous"
+          ],
+          "evidence": "He had seen a spare rope in the school store, and he asked the caretaker for it.",
+          "explain": "He remembered the spare rope, fetched it, fitted it by lamplight and then checked it every week. He finds ways to solve a problem: he is resourceful."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "Small checks can prevent big problems.",
+          "wrong": [
+            "Children should not draw water.",
+            "Deep wells should be closed."
+          ],
+          "evidence": "From then on, he checked the rope every Sunday.",
+          "explain": "Nobody noticed the fraying rope and the whole lane went without water; afterwards Karthik checked it every week. The story shows the value of small, regular checks."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Well water tastes far nicer than tap water.",
+          "wrong": [
+            "One evening, the rope snapped.",
+            "From then on, he checked the rope every Sunday."
+          ],
+          "evidence": "Well water tastes far nicer than tap water.",
+          "explain": "Nicer is a judging word: people do not agree about taste. The snapped rope and the Sunday checks could be checked."
+        }
+      ]
+    },
+    {
+      "id": "N4.C2",
+      "role": "check",
+      "title": "The Science Quiz",
+      "text": "Nisha and Rohan were chosen for the district science quiz. Rohan knew every answer about space. Nisha was better at plants and animals. She had never spoken on a stage before, so she practised in front of her mirror each night.\n\nOn the day of the quiz, their team reached the final round. The last question was about a comet, and Rohan pressed the buzzer at once. His answer was wrong. The other team answered correctly, so the trophy went to them. Rohan stared at the floor all the way to the bus.\n\nOn the bus, Nisha opened her notebook. She had written down every question the team had missed, and she suggested that they study those first. She also shared her sweets with him and told him that his space answers had carried them to the final. The following year, they won. Quizzes are the most thrilling events in school life.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who practised in front of a mirror?",
+          "right": "Nisha",
+          "wrong": [
+            "Rohan",
+            "the other team"
+          ],
+          "evidence": "she practised in front of her mirror each night",
+          "explain": "'She had never spoken on a stage before' follows 'Nisha was better at plants and animals'. She is Nisha."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Nisha wrote down the missed questions.",
+          "wrong": [
+            "Nisha opened her notebook on the bus.",
+            "The team won the quiz."
+          ],
+          "evidence": "She had written down every question the team had missed",
+          "explain": "'Had written' points back: the questions were already in the notebook when she opened it on the bus. The win came a year later."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did the trophy go to the other team?",
+          "right": "Rohan answered the last question wrongly.",
+          "wrong": [
+            "Nisha forgot her notebook.",
+            "The team arrived late for the final."
+          ],
+          "evidence": "His answer was wrong.",
+          "explain": "The chain: Rohan pressed the buzzer at once, his answer was wrong, the other team answered correctly, so the trophy went to them."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Nisha?",
+          "right": "encouraging",
+          "wrong": [
+            "boastful",
+            "impatient"
+          ],
+          "evidence": "told him that his space answers had carried them to the final",
+          "explain": "She shared her sweets, reminded Rohan of what he had done well and planned how to improve. She lifts others up: she is encouraging."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "Learning from a loss can lead to a win.",
+          "wrong": [
+            "Space questions are too hard for quizzes.",
+            "Pressing the buzzer first always wins."
+          ],
+          "evidence": "The following year, they won.",
+          "explain": "They lost, studied the questions they had missed, and won the next year. The story shows that a loss can teach you how to win."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Quizzes are the most thrilling events in school life.",
+          "wrong": [
+            "His answer was wrong.",
+            "The following year, they won."
+          ],
+          "evidence": "Quizzes are the most thrilling events in school life.",
+          "explain": "Thrilling is a judging word; some pupils would choose sports day or a play. The wrong answer and the win could be checked."
+        }
+      ]
+    },
+    {
+      "id": "N4.C3",
+      "role": "check",
+      "title": "The Night Market",
+      "text": "Every Saturday, Mrs Fernandes sells fried fish at the night market by the harbour. Her son Joel carries the baskets and counts the change. He is only eleven, but he has never given a customer the wrong amount.\n\nOne Saturday, a tourist paid with a large note and hurried away without her change. Joel had counted it out already. He ran after her with the coins in his fist. He searched the crowd for twenty minutes. While he was gone, the stall was busy, so his mother had to cook and take money at the same time. Some customers walked away.\n\nJoel found the tourist near the ferry and handed her the change. When he returned, his mother did not scold him for the lost sales. The next Saturday, the tourist came back with six friends, and they bought every fish on the table. Fried fish is the tastiest food at the harbour.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who has never given a customer the wrong amount?",
+          "right": "Joel",
+          "wrong": [
+            "Mrs Fernandes",
+            "the tourist"
+          ],
+          "evidence": "he has never given a customer the wrong amount",
+          "explain": "'He is only eleven' follows 'Her son Joel carries the baskets and counts the change'. He is Joel."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Joel counted out the change.",
+          "wrong": [
+            "Joel ran after the tourist.",
+            "Some customers walked away."
+          ],
+          "evidence": "Joel had counted it out already",
+          "explain": "'Had counted it out already' shows the change was ready before he ran. The customers walked away while he was gone."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did some customers walk away?",
+          "right": "Joel was away, so his mother was working alone.",
+          "wrong": [
+            "The fish had all been sold.",
+            "The prices had gone up."
+          ],
+          "evidence": "While he was gone, the stall was busy, so his mother had to cook and take money at the same time",
+          "explain": "The chain: the tourist left her change, Joel went after her, his mother had to do both jobs, and some customers did not wait."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Joel?",
+          "right": "honest",
+          "wrong": [
+            "careless",
+            "greedy"
+          ],
+          "evidence": "Joel found the tourist near the ferry and handed her the change.",
+          "explain": "He never gives wrong change, and he searched for twenty minutes to return money that was not his. He is honest."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "Honesty can cost a little and repay a lot.",
+          "wrong": [
+            "Tourists should carry small notes.",
+            "Night markets are too crowded for children."
+          ],
+          "evidence": "the tourist came back with six friends, and they bought every fish on the table",
+          "explain": "Returning the change cost some sales that night, but the tourist came back with six friends. The story shows honesty costing a little and repaying a lot."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Fried fish is the tastiest food at the harbour.",
+          "wrong": [
+            "He searched the crowd for twenty minutes.",
+            "Her son Joel carries the baskets and counts the change."
+          ],
+          "evidence": "Fried fish is the tastiest food at the harbour.",
+          "explain": "Tastiest is a judging word: people do not agree about taste. The twenty minutes and the work Joel does could be checked."
+        }
+      ]
+    },
+    {
+      "id": "N4.C4",
+      "role": "check",
+      "title": "The Plant Sale",
+      "text": "Class Six wanted to buy a new carrom board, so the pupils decided to hold a plant sale. Divya's grandfather grows curry-leaf seedlings. He gave the class forty of them. He had also promised some pots, but they did not arrive in time.\n\nOn the morning of the sale, the seedlings sat in plain paper cups. Few parents stopped at the table. Then Divya had an idea. She had brought her paint box for the art lesson, and she began to paint small flowers on each cup. Her classmates joined in. The cups looked so cheerful that the parents crowded round, and every seedling was sold before noon.\n\nDivya did not keep the praise for herself. She told the teacher which classmate had painted which cup, and she asked the class to send her grandfather a thank-you card. The carrom board arrived the next week. Carrom is a far better game than chess.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who had promised some pots?",
+          "right": "Divya's grandfather",
+          "wrong": [
+            "the teacher",
+            "Divya"
+          ],
+          "evidence": "He had also promised some pots",
+          "explain": "'He had also promised' follows the sentence about Divya's grandfather, who gave the seedlings. He is the grandfather."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Divya brought her paint box to school.",
+          "wrong": [
+            "Few parents stopped at the table.",
+            "The classmates painted the cups."
+          ],
+          "evidence": "She had brought her paint box for the art lesson",
+          "explain": "'Had brought' points back to before the sale began. The slow start and the painting came later that morning."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why did the parents crowd round the table at last?",
+          "right": "The painted cups looked cheerful.",
+          "wrong": [
+            "The price of the seedlings was cut.",
+            "The pots arrived just in time."
+          ],
+          "evidence": "The cups looked so cheerful that the parents crowded round",
+          "explain": "The chain: plain cups, few buyers, an idea, painted cups, and then the parents crowded round."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Which word best describes Divya in the last paragraph?",
+          "right": "fair-minded",
+          "wrong": [
+            "boastful",
+            "forgetful"
+          ],
+          "evidence": "She told the teacher which classmate had painted which cup",
+          "explain": "She shared the praise with each classmate and remembered to thank her grandfather. She gives others their due: she is fair-minded."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "A simple idea and teamwork can rescue a plan.",
+          "wrong": [
+            "Plants sell best in the afternoon.",
+            "Grandfathers should keep their promises."
+          ],
+          "evidence": "Her classmates joined in.",
+          "explain": "The sale was failing until one idea, carried out by the whole class, turned it round. The story shows an idea and teamwork rescuing a plan."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Carrom is a far better game than chess.",
+          "wrong": [
+            "The carrom board arrived the next week.",
+            "Few parents stopped at the table."
+          ],
+          "evidence": "Carrom is a far better game than chess.",
+          "explain": "Better is a judging word; chess players would not agree. The arrival of the board and the slow start could be checked."
+        }
+      ]
+    }
+  ]
+}

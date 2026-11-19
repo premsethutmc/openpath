@@ -50,7 +50,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
           <b>Words</b>: pick the meaning of about twelve words.
         </li>
         <li>
-          <b>Reading</b>: read a short text or two and answer four questions on each.
+          <b>Reading</b>: read up to three short texts and answer four questions on each.
         </li>
         <li>
           <b>Listening</b>: hear four sentences and write them.

@@ -3,7 +3,7 @@
  * Three parts, each adaptive and each giving its own level (there is no single English number):
  *
  *   words      a short word check (the word check's own session, four rounds): a band out of eight;
- *   reading    one text with four questions at a starting level, then one a level up or down: three of four right
+ *   reading    one text with four questions at a starting level, then up to two more, the first move two levels wide: three of four right
  *              passes a level; the learner starts reading at the level above the highest one passed;
  *   listening  four dictated sentences, one try each, a level up after a sentence whose words are right (capital
  *              letters and the end mark are not counted; a long sentence may have one slip) and down otherwise:
@@ -19,7 +19,7 @@
 import { OLD_LEVELS, mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
 import { SCALE, rescale } from "../scale.ts";
 import { checkSpelling, type SpellWord } from "../spelling.ts";
-import type { Course, Level, Passage, Question, SkillId } from "../reading/course.ts";
+import { OLD_LEVELS as READING_OLD, type Course, type Level, type Passage, type Question, type SkillId } from "../reading/course.ts";
 
 export type Part = "words" | "reading" | "listening" | "spelling";
 export const PARTS: Part[] = ["words", "reading", "listening", "spelling"];
@@ -37,7 +37,7 @@ export type LevelCheckRecord =
   | { type: "start" }
   | { type: "words"; band: number; estimate: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
-  | { type: "reading"; passed: number; steps: { level: number; right: number; asked: number }[] }
+  | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
@@ -54,19 +54,24 @@ export interface Levels {
 }
 
 /** The latest level found for each part. */
-export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 3): Levels {
+export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels = 5): Levels {
   const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
-    if (r.type === "reading") out.reading = { passed: r.passed, start: Math.min(readingLevels, r.passed + 1) };
+    if (r.type === "reading") {
+      const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
+      out.reading = { passed, start: Math.min(readingLevels, passed + 1) };
+    }
     if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
     if (r.type === "spelling") out.spelling = { level: r.level };
   }
   return out;
 }
 
-export const readingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : 2);
+export const readingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : 3);
+/** How far the reading level moves after each text: a wide first move, then one step. At most three texts. */
+export const READING_MOVES = [2, 1];
 
 export interface ReadingPlacementView {
   phase: "asking" | "done";
@@ -79,7 +84,7 @@ export interface ReadingPlacementView {
   question: { prompt: string; options: string[] } | null;
 }
 
-/** The reading part: a practice text at a level with four questions; then one level up or down. */
+/** The reading part: a practice text at a level with four questions; then two levels up or down, then one. At most three texts. */
 export class ReadingPlacement {
   private readonly course: Course;
   private level: number;
@@ -113,8 +118,9 @@ export class ReadingPlacement {
     const passedHere = this.right >= READING_PASS;
     this.steps.push({ level: this.level, right: this.right, asked: this.questions.length });
     const top = Math.max(...this.course.levels.map((l) => l.id));
-    const next = this.level + (passedHere ? 1 : -1);
-    if (this.steps.length >= 2 || next < 1 || next > top) {
+    const move = READING_MOVES[this.steps.length - 1];
+    const next = Math.min(top, Math.max(1, this.level + (passedHere ? 1 : -1) * (move ?? 1)));
+    if (move === undefined || next === this.level || this.steps.some((s) => s.level === next)) {
       this.finished = true;
       return;
     }
@@ -123,8 +129,8 @@ export class ReadingPlacement {
   }
 
   /** The highest level passed (0: none), with what was asked. */
-  result(): { passed: number; steps: { level: number; right: number; asked: number }[] } {
-    return { passed: Math.max(0, ...this.steps.filter((s) => s.right >= READING_PASS).map((s) => s.level)), steps: [...this.steps] };
+  result(): { passed: number; scale: number; steps: { level: number; right: number; asked: number }[] } {
+    return { scale: SCALE, passed: Math.max(0, ...this.steps.filter((s) => s.right >= READING_PASS).map((s) => s.level)), steps: [...this.steps] };
   }
 
   snapshot(): ReadingPlacementView {
@@ -197,7 +203,7 @@ export class ListeningPlacement {
 }
 
 /** The reading level type, for callers that pass the start level to the course. */
-export const asReadingLevel = (n: number | null | undefined): Level | undefined => (n === 1 || n === 2 || n === 3 ? n : undefined);
+export const asReadingLevel = (n: number | null | undefined): Level | undefined => (n === 1 || n === 2 || n === 3 || n === 4 || n === 5 ? n : undefined);
 
 export const spellingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : age === "older" ? 3 : 2);
 

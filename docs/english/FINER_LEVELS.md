@@ -1,4 +1,4 @@
-# Finer levels for listening and grammar (November 2026)
+# Finer levels for listening, grammar and reading (November 2026)
 
 Status: candidate content, practice-only. Levels are OpenPath's estimates and nothing here is educator-reviewed.
 
@@ -40,10 +40,30 @@ Stored records keep the level number they were written with. A record written on
 
 Sentence and passage ids did not change, so what a child has already seen is still known.
 
+## Reading: five levels
+
+Reading had three levels (texts of about 65, 125 and 185 words). Two full levels were written between them, so
+there are five: Starter, Explorer (about 95 words), Builder, Climber (about 150 words), Challenger. Each new level
+has six lessons with a worked example, seven texts and 36 questions (`content/english/reading/level-2.json` and
+`level-4.json`). The old level files were renamed to `level-3.json` and `level-5.json`; their text ids (L2.*, L3.*)
+did not change.
+
+| Skill | Explorer teaches | Climber teaches |
+|---|---|---|
+| Finding details | use two key words of the question | follow he, she or they back to the name |
+| Order of events | what came just before or after | before, after and had: the telling is not the order |
+| Why it happened | so points back to the reason | a chain of reasons |
+| Feelings and reasons | what a person says and does, together | what kind of person, from several actions |
+| Main idea | pick the best title | what the story shows |
+| Fact or opinion | how could you check it? | judging words with no "I think" |
+
+- Stored reading records and the reading result of Find my level are read on the new scale: old 1, 2, 3 are 1, 3, 5.
+  New ones carry `scale: 2`.
+- Find my level starts reading in the middle (level 3), moves two levels after the first text and one after the
+  second: two or three texts, and every level can be reached.
+
 ## Limits
 
-- Reading still has three levels. Each is a full course (lessons, seven texts, 36 questions), so finer reading
-  levels need two new courses written; that is the next piece of work.
 - Words (8) and spelling (5) are unchanged.
 - The range is the same as before, about Class 3 to Class 8, apart from the easier first level in listening.
   Levels for a true beginner and for advanced English are not built.

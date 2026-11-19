@@ -31,7 +31,7 @@ const walk = (x) => {
     Object.values(x).forEach(walk);
   }
 };
-[1, 2, 3].forEach((l) => walk(read(`reading/level-${l}.json`)));
+[1, 2, 3, 4, 5].forEach((l) => walk(read(`reading/level-${l}.json`)));
 
 let browser;
 before(async () => {
@@ -111,7 +111,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
     await page.locator(".options .option").nth(at).click();
     await page.waitForFunction(([p, q]) => document.querySelector("#level-question")?.textContent !== p || document.querySelector("main")?.getAttribute("data-question") !== q, [prompt, String(i % 4)]);
   }
-  assert.deepEqual([...levels], ["2", "3"], "a level up after the first text");
+  assert.deepEqual([...levels], ["3", "5"], "two levels up after the first text");
 
   await page.getByText("Part 3 of 4: Listening").waitFor();
   await fits();
@@ -138,7 +138,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-part="spelling"] .status', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
   await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Level 4 of 8" }).waitFor();
-  await page.locator('[data-part="reading"] .status', { hasText: "Challenger (level 3 of 3)" }).waitFor();
+  await page.locator('[data-part="reading"] .status', { hasText: "Challenger (level 5 of 5)" }).waitFor();
   await page.locator('[data-part="listening"] .status', { hasText: "Level 6 of 6" }).waitFor();
   await fits();
   await shot(page, "4-result");

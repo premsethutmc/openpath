@@ -47,9 +47,9 @@ function run(unit: Unit, mode: "learn" | "check_me", right: boolean, history: Re
 
 test("RC-1 content: every skill and level has a lesson, a worked example, hinted practice and two fresh checks", () => {
   assert.deepEqual(courseProblems(COURSE), []);
-  assert.equal(COURSE.lessons.length, 18);
-  assert.equal(COURSE.passages.size, 21);
-  assert.equal(COURSE.questions.length, 108);
+  assert.equal(COURSE.lessons.length, 30);
+  assert.equal(COURSE.passages.size, 35);
+  assert.equal(COURSE.questions.length, 180);
   for (const u of UNITS) {
     assert.equal(questionsFor(COURSE, u, "practice").length, 2);
     assert.equal(questionsFor(COURSE, u, "check").length, 4);
@@ -66,14 +66,14 @@ test("RC-1 content: every skill and level has a lesson, a worked example, hinted
   assert.match(found, /X: 16 words is outside level 1/);
 });
 
-test("RC-2 the three levels step up in length and sentence load, and stay inside their word ranges", () => {
+test("RC-2 the five levels step up in length and sentence load, and stay inside their word ranges", () => {
   const at = (level: Level) => [...COURSE.passages.values()].filter((p) => p.level === level);
   const words = LEVELS.map((l) => mean(at(l).map((p) => wordCount(p.text))));
   const load = LEVELS.map((l) => mean(at(l).map((p) => meanSentenceLength(p.text))));
-  assert.ok(words[0] < words[1] && words[1] < words[2], `words per text rise: ${words.map((w) => w.toFixed(0))}`);
-  assert.ok(load[0] < load[1] && load[1] < load[2], `words per sentence rise: ${load.map((w) => w.toFixed(1))}`);
+  assert.ok(words.every((w, i) => i === 0 || words[i - 1] < w), `words per text rise: ${words.map((w) => w.toFixed(0))}`);
+  assert.ok(load.every((w, i) => i === 0 || load[i - 1] < w), `words per sentence rise: ${load.map((w) => w.toFixed(1))}`);
   // no text of a level is longer than any text of the level above
-  for (const l of [1, 2] as Level[]) assert.ok(Math.max(...at(l).map((p) => wordCount(p.text))) < Math.min(...at((l + 1) as Level).map((p) => wordCount(p.text))));
+  for (const l of [1, 2, 3, 4] as Level[]) assert.ok(Math.max(...at(l).map((p) => wordCount(p.text))) < Math.min(...at((l + 1) as Level).map((p) => wordCount(p.text))));
   // Starter causes are stated with because; later levels leave the joining to the reader
   for (const q of COURSE.questions.filter((q) => q.skill === "cause")) assert.equal(/\bbecause\b/.test(q.evidence), q.level === 1, q.id);
 });
@@ -86,7 +86,7 @@ test("RC-3 an answer cannot be guessed from its position or its length", () => {
     const len = q.options.map((o) => o.length);
     if (len.every((n, i) => i === q.answer || n < len[q.answer])) longest++;
   }
-  for (const n of position) assert.ok(n >= 27 && n <= 45, `right answers by position: ${position}`);
+  for (const n of position) assert.ok(n >= 45 && n <= 75, `right answers by position: ${position}`);
   assert.ok(longest / COURSE.questions.length < 0.4, `the right answer is the longest option in ${longest} of ${COURSE.questions.length}`);
   // the order is fixed: the same on every visit and every device
   assert.deepEqual(buildCourse({ version: 1, status: "", skills: COURSE.skills, levels: COURSE.levels }, []).questions, []);
@@ -276,7 +276,7 @@ test("RC-11 moving between levels: up after a pass, back a level after a miss ab
   const up = run({ skill: "detail", level: 1 }, "learn", true);
   assert.ok(up.snap.phase === "result");
   assert.deepEqual(up.snap.result.next, { kind: "level_up", unit: { skill: "detail", level: 2 } });
-  const top = run({ skill: "detail", level: 3 }, "check_me", true);
+  const top = run({ skill: "detail", level: 5 }, "check_me", true);
   assert.ok(top.snap.phase === "result");
   assert.deepEqual(top.snap.result.next, { kind: "skill_complete" });
 
