@@ -70,7 +70,10 @@ function values(n: Node, env: Env): number[] {
 }
 const one = (n: Node, env: Env) => { const v = values(n, env); return v.length === 1 ? v[0] : NaN; };
 const varsOf = (n: Node, out = new Set<string>()): Set<string> => { if (n.k === "var") out.add(n.n); if ("a" in n) varsOf(n.a, out); if ("b" in n) varsOf(n.b, out); return out; };
-const close = (a: number, b: number) => Math.abs(a - b) <= 1e-6 * Math.max(1, Math.abs(a), Math.abs(b));
+// exact-whole@1 (found by the robot learner): two whole numbers are equal only when they are the same number, and the
+// allowance for rounding never grows past a thousandth however large the numbers are. (It used to scale with the size
+// of the numbers, so 6,30,72,001 was taken for 6,30,72,000.)
+const close = (a: number, b: number) => (Number.isSafeInteger(a) && Number.isSafeInteger(b) ? a === b : Math.abs(a - b) <= Math.min(1e-6 * Math.max(1, Math.abs(a), Math.abs(b)), 5e-4));
 const show = (v: number) => String(Math.round(v * 1000) / 1000);
 
 // ---------------------------------------------------------------- integrals and limits

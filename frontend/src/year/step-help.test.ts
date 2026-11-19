@@ -3,13 +3,13 @@ import { WORKED_OUT } from "../../../packages/learning/src/worked-out";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, explainStep, pool, problemOf } from "../../../packages/learning/src/families";
-import { cardFor, stepsHelp, helpMethods } from "../../../packages/learning/src/step-help";
+import { cardFor, stepsHelp, helpMethods, statesAnswer } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 
 const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items; return [items[0], items[items.length >> 1]].filter(Boolean); });
 
 test("every question's help is its own steps, in order, with nothing worked in the 'what to do' line", () => {
-  let needing = 0, folded = 0, boards = 0, named = 0;
+  let needing = 0, folded = 0, boards = 0, named = 0, closed = 0;
   for (const q of sample) {
     // worked-out@1: a type with its whole working written for it is proved in worked-out.test.ts
     if (WORKED_OUT.includes(q.family) || helpMethods(q.id)[0] !== "Step by step") continue;
@@ -31,7 +31,11 @@ test("every question's help is its own steps, in order, with nothing worked in t
       assert.ok(/calculus|integra|differen/.test(q.competency) || !(x.finer && /^\d+ [×÷+−] \d+ = \d+(, which leaves \d+)?$|^\d+ = \d+( \+ \d+)+$/.test(x.shown)), `${q.id}: ${x.shown} is still a step`);
       if (x.how) { folded++; assert.ok(x.how.lines.length >= 2 && !x.finer, q.id); if (x.how.board) { boards++; assert.ok(/ \) /.test(x.how.board[1]), q.id); } }
     }
-    const h = all && all.filter((x) => !x.finer);
+    // closing@1: a help that never writes a numeric answer ends by writing it, in one added step that is the last
+    const end = all!.filter((x) => x.closing);
+    if (end.length) { closed++; assert.ok(end.length === 1 && all!.at(-1) === end[0] && end[0].shown === `The answer: ${q.answer}` && !all!.slice(0, -1).some((x) => /^Last: /.test(x.next)), q.id); }
+    assert.ok(statesAnswer(all!, q.answer), `${q.id}: the help states the answer`);
+    const h = all && all.filter((x) => !x.finer && !x.closing);
     assert.ok(h && h.length === q.steps.length, q.id);
     h!.forEach((x, i) => {
       assert.equal(x.shown, explainStep(q, q.steps[i]), q.id);
@@ -45,6 +49,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
   }
   assert.ok(needing > 500, `steps that lean on another skill: ${needing}`);
   assert.ok(named > 100, `cues that name what the step finds: ${named}`);
+  assert.ok(closed > 20, `helps closed with their answer: ${closed}`);
   console.log(`how@1: ${folded} steps carry folded working, ${boards} with a written layout`);
   assert.ok(folded > 200 && boards > 5, `${folded} ${boards}`);
   assert.equal(stepsHelp("not-a-question"), null);

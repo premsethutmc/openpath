@@ -495,3 +495,15 @@ every form: the stored answer must be marked correct and a wrong one not; "I'm s
 must take its number and refuse another; the last step should reach the answer and no earlier step say it. Nightly and
 by hand, in eight parts, report only. First full run: docs/product/ROBOT_REPORT.md (3,53,164 questions, 99.73% with
 nothing broken; 961 questions in 11 types break something; quality findings listed separately).
+
+Robot learner, second pass: the 11 failing types examined. 465 "answer not accepted" were quarantined questions, never
+served: now counted as held back, not taken. A choice is taken as the app sends it (the letter tapped), and exactly one
+letter must be marked correct. One real fault fixed, `exact-whole@1` in line-check.ts: two whole numbers are equal only
+when identical, and the rounding allowance no longer grows with the size of the number (6,30,72,001 was taken for
+6,30,72,000 in a step box and in a line of working).
+
+Robot learner, quality pass. The two quality checks now flag only what is real: `help-never-states-answer` (no step of
+the first way writes the answer, or every part of it) and `answer-in-first-step` (a help of three steps or more says a
+numeric answer in step one; lists of numbers excepted). Two rules follow from what it found. `closing@1`: a help that
+never writes its numeric answer ends with one added step that writes it ("Last: write the answer. — The answer: 2/3").
+`no-spoiler-way@1`: the type's own steps are not offered as a second tab where their first step says the answer.
