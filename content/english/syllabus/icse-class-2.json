@@ -1,0 +1,227 @@
+{
+  "id": "icse-cisce-english-class-2",
+  "version": "1.0.0",
+  "board": "CISCE (ICSE)",
+  "class": 2,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class II",
+  "source": {
+    "read": "A third-party copy of the Class II pages of the CISCE curriculum (English: printed pages 10 to 13), hosted by BYJU'S",
+    "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/ICSE-Class-2-Syllabus.pdf",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "10-11",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Takes part in role play, short plays and conversations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS2",
+          "text": "Retells or tells a story with facts and details, loudly enough to be heard.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS3",
+          "text": "Adds something useful to a small-group or class talk.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Keeps to the topic being talked about.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS5",
+          "text": "Picks out the key ideas of a text read aloud.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS6",
+          "text": "Asks and answers questions to make things clear and to learn more.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Tells stories or says poems with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS8",
+          "text": "Answers in full sentences when asked for a detail.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS9",
+          "text": "Uses the right words to ask questions and to share information.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        }
+      ]
+    },
+    {
+      "id": "reading-writing",
+      "name": "Reading and Writing",
+      "pages": "12",
+      "outcomes": [
+        {
+          "id": "RW1",
+          "text": "Reads a picture by answering simple questions about it.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw. The app has no pictures to read."
+        },
+        {
+          "id": "RW2",
+          "text": "Understands a passage: the people, their feelings and how what they do shapes events.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "RW3",
+          "text": "Puts pictures in the order of a story.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "sentence_order"
+          ],
+          "note": "Sentences are put in order here; the app has no pictures."
+        },
+        {
+          "id": "RW4",
+          "text": "Retells stories, folk tales and myths, aloud and in writing.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "RW5",
+          "text": "Reads aloud or silently with understanding.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Silent reading with questions is practised; reading aloud is not heard by the app."
+        },
+        {
+          "id": "RW6",
+          "text": "Writes answers to questions on a passage.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Answers are chosen from three, not written."
+        },
+        {
+          "id": "RW7",
+          "text": "Writes three- and four-letter words and sentences from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "RW8",
+          "text": "Writes a paragraph of eight to ten lines on a topic.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "RW9",
+          "text": "Writes about personal experiences or real situations.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "13",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Recognises nouns, verbs, adjectives, the joining words and and but, and prepositions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses common and proper nouns, and nouns that can and cannot be counted.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "noun_kinds"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses capital letters, commas and question marks correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals",
+            "punctuation",
+            "questions"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Uses myself, ourselves, himself, herself and the like correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "pronoun_case"
+          ]
+        },
+        {
+          "id": "GV5",
+          "text": "Works out a word's meaning from the words around it.",
+          "coverage": "partly",
+          "where": "words",
+          "note": "New words teaches meanings in sentences; guessing an unknown word from its sentence is not asked directly."
+        },
+        {
+          "id": "GV6",
+          "text": "Uses words and phrases suited to the class.",
+          "coverage": "covered",
+          "where": "words"
+        },
+        {
+          "id": "GV7",
+          "text": "Knows and uses words that sound alike, opposites and words of the same meaning.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "confusables",
+            "synonyms_antonyms"
+          ]
+        }
+      ]
+    }
+  ]
+}
