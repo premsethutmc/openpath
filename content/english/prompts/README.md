@@ -17,3 +17,4 @@ prompts the learner's response is also placed between fixed markers (`{{RESPONSE
 model can be told plainly that it is data, not instructions. No prompt has been sent to any live
 model (decision of 12 October).
 | `writing-feedback.v1.md` | Guided writing tasks: yes / partly / no on the task's three checklist points, one strength, one next step; no mark, no rewriting | Server gateway, parent consent, three pieces per learner per week; mocked provider in tests; no paid call made |
+| `writing-feedback.v2.md` | As v1, but an off-topic piece is still judged on form (length, capitals, greeting), and a view stated late still counts. v1 kept for its first measurement (19 Nov 2026) | Live on the family site |
