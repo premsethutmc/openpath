@@ -97,12 +97,12 @@ export function Spot({ words, task, button = "Check", onCheck }: { words: string
 }
 export const spotTask = (ask: string) => `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`;
 
-function Build({ tiles, onCheck }: { tiles: string[]; onCheck: (chosen: string[]) => void }) {
+function Build({ tiles, whole, onCheck }: { tiles: string[]; whole: boolean; onCheck: (chosen: string[]) => void }) {
   const [chosen, setChosen] = useState<number[]>([]);
   return (
     <>
       <p className="small" id="grammar-task">
-        Tap the words in order to build the sentence. Tap a word in your sentence to take it back. Not every word may be needed.
+        {whole ? "Tap the sentences in the order in which things happen. Tap one in your answer to take it back." : "Tap the words in order to build the sentence. Tap a word in your sentence to take it back. Not every word may be needed."}
       </p>
       <p className="grammar-line" aria-label="Your sentence" data-empty={chosen.length === 0}>
         {chosen.length === 0 && <span className="small">Your sentence appears here.</span>}
@@ -164,7 +164,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onNext, 
         Sentence {view.index + 1} of {view.total} · {view.topic}
       </p>
       {view.phase === "ask" && view.fix && <Fix key={view.id} words={view.fix.words} onCheck={onFix} />}
-      {view.phase === "ask" && view.build && <Build key={view.id} tiles={view.build.tiles} onCheck={onBuild} />}
+      {view.phase === "ask" && view.build && <Build key={view.id} tiles={view.build.tiles} whole={view.build.whole} onCheck={onBuild} />}
       {view.phase === "ask" && view.spot && <Spot key={view.id} words={view.spot.words} task={spotTask(view.spot.ask)} onCheck={onSpot} />}
       {f && (
         <div className="dict-feedback" role="status" data-correct={f.correct}>

@@ -28,8 +28,8 @@ test("GU-1 content: three levels, every sentence checkable, tiles never laid out
       assert.ok(!corrected(it).includes("["));
     } else {
       const t = tiles(it);
-      assert.equal(t.length, it.sentence.split(" ").length + (it.extra?.length ?? 0));
-      assert.notEqual(t.slice(0, it.sentence.split(" ").length).join(" "), it.sentence, it.id);
+      assert.equal(t.length, (it.parts ?? it.sentence.split(" ")).length + (it.extra?.length ?? 0));
+      assert.notEqual(t.slice(0, (it.parts ?? it.sentence.split(" ")).length).join(" "), it.sentence, it.id);
       assert.ok(checkBuild(it, it.sentence.split(" ")));
     }
   }
@@ -131,7 +131,7 @@ test("GU-7 the ICSE Class 5 syllabus: every line placed, every pointer leads to 
   assert.deepEqual(syllabusProblems(s), []);
   assert.deepEqual([s.board, s.class, s.source.official], ["CISCE (ICSE)", 5, false]);
   assert.match(s.source.note, /^UNOFFICIAL SOURCE/);
-  assert.deepEqual(coverage(s), { covered: 14, partly: 7, not: 12, total: 33 });
+  assert.deepEqual(coverage(s), { covered: 20, partly: 5, guided: 8, not: 0, total: 33 });
   assert.deepEqual(s.strands.map((x) => x.outcomes.length), [9, 13, 10, 1]);
   for (const o of s.strands.flatMap((x) => x.outcomes)) {
     assert.ok(o.text.split(/\s+/).length <= 22, `${o.id}: a short line in our own words`);
@@ -161,8 +161,8 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 
 test("GU-9 Classes 4, 5 and 6 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
   assert.deepEqual(SYLLABUSES.map((x) => x.class), [4, 5, 6]);
-  assert.deepEqual(coverage(syllabusFor(4)), { covered: 7, partly: 6, not: 12, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 11, partly: 10, not: 25, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(4)), { covered: 7, partly: 6, guided: 0, not: 12, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 11, partly: 10, guided: 0, not: 25, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);
@@ -188,4 +188,16 @@ test("GU-9 naming words: a word of the kind asked is right, any other word is no
   assert.deepEqual([...new Set(spots.filter((it) => it.level === 1).map((it) => it.ask))].sort(), ["noun", "verb"]);
   const v = new GrammarSitting(GRAMMAR, 1, [], ["parts_of_speech"]).snapshot();
   assert.ok(v.spot && !JSON.stringify(v).includes('"right"'), "the screen holds the words and the kind asked for, never the answer");
+});
+
+test("GU-10 sentences in order: whole sentences are the tiles, shuffled, and only the right order passes", () => {
+  const items = GRAMMAR.items.filter((it) => it.parts);
+  assert.ok(items.length >= 4);
+  for (const it of items) {
+    assert.deepEqual([...tiles(it)].sort(), [...it.parts!].sort());
+    assert.ok(checkBuild(it, it.parts!));
+    assert.ok(!checkBuild(it, [...it.parts!].reverse()));
+  }
+  const v = new GrammarSitting(GRAMMAR, 3, [], ["sentence_order"]).snapshot();
+  assert.equal(v.build?.whole, true);
 });

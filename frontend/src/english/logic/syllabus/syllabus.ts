@@ -7,9 +7,11 @@ import icse4 from "../../../../../content/english/syllabus/icse-class-4.json";
 import icse5 from "../../../../../content/english/syllabus/icse-class-5.json";
 import icse6 from "../../../../../content/english/syllabus/icse-class-6.json";
 import { GRAMMAR } from "../grammar-use/grammar-use.ts";
+import { GUIDED, tasksFor } from "../guided/guided.ts";
 
-export type Coverage = "covered" | "partly" | "not";
-export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar";
+/** guided: done with a grown-up, who ticks what they saw; the app cannot mark it. */
+export type Coverage = "covered" | "partly" | "guided" | "not";
+export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar" | "guided" | "writing";
 export interface Outcome {
   id: string;
   text: string;
@@ -46,10 +48,12 @@ export function syllabusProblems(s: Syllabus): string[] {
     for (const o of st.outcomes) {
       if (ids.has(o.id)) out.push(`${o.id}: listed twice`);
       ids.add(o.id);
-      if (!["covered", "partly", "not"].includes(o.coverage)) out.push(`${o.id}: unknown coverage`);
+      if (!["covered", "partly", "guided", "not"].includes(o.coverage)) out.push(`${o.id}: unknown coverage`);
       if (o.coverage === "not" && o.where) out.push(`${o.id}: not covered, yet points to a stream`);
       if (o.coverage !== "not" && !o.where) out.push(`${o.id}: covered, but no stream is named`);
       if (o.coverage !== "covered" && !o.note) out.push(`${o.id}: a gap must say what is missing`);
+      if ((o.coverage === "guided") !== (o.where === "guided")) out.push(`${o.id}: a line done with a grown-up points to the guided tasks, and only such a line does`);
+      if (o.where === "guided" && tasksFor(GUIDED, s.id, o.id).length < 2) out.push(`${o.id}: needs at least two tasks to do with a grown-up`);
       if (o.topics && o.where !== "grammar") out.push(`${o.id}: topics belong to the grammar stream`);
       for (const t of o.topics ?? []) {
         if (!topics.has(t)) out.push(`${o.id}: unknown grammar topic ${t}`);
@@ -72,5 +76,5 @@ for (const s of SYLLABUSES) {
 export function coverage(s: Syllabus): Record<Coverage, number> & { total: number } {
   const all = s.strands.flatMap((st) => st.outcomes);
   const n = (c: Coverage) => all.filter((o) => o.coverage === c).length;
-  return { covered: n("covered"), partly: n("partly"), not: n("not"), total: all.length };
+  return { covered: n("covered"), partly: n("partly"), guided: n("guided"), not: n("not"), total: all.length };
 }

@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 6,
+  "version": 7,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -178,6 +178,30 @@
     {
       "id": "parallel",
       "name": "Matching forms in a list"
+    },
+    {
+      "id": "sentence_order",
+      "name": "Sentences in order"
+    },
+    {
+      "id": "similes",
+      "name": "Similes"
+    },
+    {
+      "id": "idioms",
+      "name": "Idioms"
+    },
+    {
+      "id": "field_words",
+      "name": "Words for cooking, sport and yoga"
+    },
+    {
+      "id": "opinion_reason",
+      "name": "An opinion and its reason"
+    },
+    {
+      "id": "exact_words",
+      "name": "Words for feelings and actions"
     }
   ],
   "scale": 2,
@@ -278,6 +302,18 @@
     {"id": "gu.parts_of_speech.17", "level": 3, "topic": "parts_of_speech", "kind": "spot", "ask": "adverb", "sentence": "We will leave tomorrow.", "rule": "An adverb tells how, when or where something is done: tomorrow tells when.", "right": ["tomorrow"]},
     {"id": "gu.parts_of_speech.18", "level": 3, "topic": "parts_of_speech", "kind": "spot", "ask": "preposition", "sentence": "The cat jumped over the wall.", "rule": "A preposition shows where or when one thing is in relation to another: over the wall.", "right": ["over"]},
     {"id": "gu.parts_of_speech.19", "level": 3, "topic": "parts_of_speech", "kind": "spot", "ask": "preposition", "sentence": "He kept the keys in a drawer.", "rule": "A preposition shows where or when one thing is in relation to another: in a drawer.", "right": ["in"]},
+    {"id": "gu.sentence_order.01", "level": 3, "topic": "sentence_order", "kind": "build", "sentence": "Meena filled the kettle. She waited for the water to boil. Then she poured the tea.", "rule": "Words such as then show what comes later.", "parts": ["Meena filled the kettle.", "She waited for the water to boil.", "Then she poured the tea."]},
+    {"id": "gu.sentence_order.02", "level": 3, "topic": "sentence_order", "kind": "build", "sentence": "First, wash the rice. Next, boil it in a pot of water. Finally, serve it hot.", "rule": "First, next and finally show the order of the steps.", "parts": ["First, wash the rice.", "Next, boil it in a pot of water.", "Finally, serve it hot."]},
+    {"id": "gu.sentence_order.03", "level": 3, "topic": "sentence_order", "kind": "build", "sentence": "The sky grew dark. Soon it began to rain. After the rain, a rainbow appeared.", "rule": "Soon and after show what follows.", "parts": ["The sky grew dark.", "Soon it began to rain.", "After the rain, a rainbow appeared."]},
+    {"id": "gu.sentence_order.04", "level": 3, "topic": "sentence_order", "kind": "build", "sentence": "Ravi woke up late. He ran to the bus stop. Sadly, the bus had already left. So he walked to school.", "rule": "Each sentence leads to the next: late, so he ran; the bus had left, so he walked.", "parts": ["Ravi woke up late.", "He ran to the bus stop.", "Sadly, the bus had already left.", "So he walked to school."]},
+    {"id": "gu.similes.01", "level": 3, "topic": "similes", "kind": "fix", "sentence": "He is as busy as a [cat].", "rule": "A simile compares with as or like. The usual one is: as busy as a bee.", "right": ["bee"]},
+    {"id": "gu.similes.02", "level": 3, "topic": "similes", "kind": "fix", "sentence": "The baby's blanket was as soft as [stone].", "rule": "A simile compares two things that share a quality: as soft as silk.", "right": ["silk", "cotton", "wool", "butter", "feathers"]},
+    {"id": "gu.similes.03", "level": 3, "topic": "similes", "kind": "fix", "sentence": "She ran as fast as a [snail].", "rule": "A simile must fit: a fast runner is like a fast animal, such as a deer.", "right": ["deer", "cheetah", "horse", "hare", "leopard"]},
+    {"id": "gu.similes.04", "level": 3, "topic": "similes", "kind": "fix", "sentence": "The night was as black as [milk].", "rule": "A simile must fit: as black as coal.", "right": ["coal", "ink", "soot", "tar"]},
+    {"id": "gu.exact_words.01", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "The tired boy [danced] slowly up the steep hill.", "rule": "Choose the action word that fits: a tired boy walks or climbs.", "right": ["walked", "climbed", "trudged", "plodded", "went"]},
+    {"id": "gu.exact_words.02", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "She was [sad] when she won the first prize.", "rule": "Choose the feeling word that fits: winning makes you happy.", "right": ["happy", "delighted", "thrilled", "glad", "proud", "overjoyed", "pleased", "excited"]},
+    {"id": "gu.exact_words.03", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "The hungry lion [whispered] loudly in its cage.", "rule": "Choose the sound word that fits: a lion roars.", "right": ["roared", "growled"]},
+    {"id": "gu.exact_words.04", "level": 3, "topic": "exact_words", "kind": "fix", "sentence": "He [shouted] softly so that the baby would not wake.", "rule": "Choose the word that fits softly: whispered.", "right": ["whispered", "spoke", "sang", "hummed", "talked"]},
     {"id": "gu.adverbs.01", "level": 4, "topic": "adverbs", "kind": "fix", "sentence": "She sings [beautiful].", "rule": "An adverb of manner tells how: beautifully.", "right": ["beautifully"]},
     {"id": "gu.adverbs.02", "level": 4, "topic": "adverbs", "kind": "fix", "sentence": "He ran [quick] to the gate.", "rule": "An adverb of manner often ends in -ly: quickly.", "right": ["quickly"]},
     {"id": "gu.adverbs.03", "level": 4, "topic": "adverbs", "kind": "build", "sentence": "We often play chess in the evening.", "rule": "An adverb of frequency such as \"often\" goes before the main verb."},
@@ -312,6 +348,19 @@
     {"id": "gu.parts_of_speech.22", "level": 4, "topic": "parts_of_speech", "kind": "spot", "ask": "noun", "sentence": "Honesty is a good habit.", "rule": "Some nouns name ideas you cannot touch: honesty, habit.", "right": ["Honesty", "habit"]},
     {"id": "gu.parts_of_speech.23", "level": 4, "topic": "parts_of_speech", "kind": "spot", "ask": "adjective", "sentence": "The children were happy.", "rule": "An adjective can come after is, are, was or were: the children were happy.", "right": ["happy"]},
     {"id": "gu.parts_of_speech.24", "level": 4, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "The bus has reached the station.", "rule": "A verb can be two words: has reached.", "right": ["has", "reached"]},
+    {"id": "gu.idioms.01", "level": 4, "topic": "idioms", "kind": "fix", "sentence": "It was raining cats and [mice].", "rule": "Raining cats and dogs means raining very hard.", "right": ["dogs"]},
+    {"id": "gu.idioms.02", "level": 4, "topic": "idioms", "kind": "fix", "sentence": "The test was a piece of [bread].", "rule": "A piece of cake means very easy.", "right": ["cake"]},
+    {"id": "gu.idioms.03", "level": 4, "topic": "idioms", "kind": "fix", "sentence": "Hold your [donkeys], I am coming.", "rule": "Hold your horses means wait a moment.", "right": ["horses"]},
+    {"id": "gu.idioms.04", "level": 4, "topic": "idioms", "kind": "fix", "sentence": "She let the cat out of the [box].", "rule": "To let the cat out of the bag means to tell a secret by mistake.", "right": ["bag"]},
+    {"id": "gu.field_words.01", "level": 4, "topic": "field_words", "kind": "fix", "sentence": "Mother [boiled] the cake in the oven.", "rule": "In cooking, a cake is baked in an oven.", "right": ["baked"]},
+    {"id": "gu.field_words.02", "level": 4, "topic": "field_words", "kind": "fix", "sentence": "The batsman hit the ball and scored four [goals].", "rule": "In cricket, a batsman scores runs.", "right": ["runs"]},
+    {"id": "gu.field_words.03", "level": 4, "topic": "field_words", "kind": "fix", "sentence": "The referee blew his [bell] to start the match.", "rule": "A referee uses a whistle.", "right": ["whistle"]},
+    {"id": "gu.field_words.04", "level": 4, "topic": "field_words", "kind": "fix", "sentence": "Sit on your yoga [carpet] and cross your legs.", "rule": "Yoga is done on a mat.", "right": ["mat"]},
+    {"id": "gu.field_words.05", "level": 4, "topic": "field_words", "kind": "fix", "sentence": "In yoga we breathe in deeply and then breathe [up].", "rule": "The opposite of breathe in is breathe out.", "right": ["out"]},
+    {"id": "gu.opinion_reason.01", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "I think reading is fun because stories take me to new places.", "rule": "An opinion is stronger with a reason. Because joins the two."},
+    {"id": "gu.opinion_reason.02", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "In my opinion, we should plant trees since they give shade.", "rule": "Since can give the reason for an opinion."},
+    {"id": "gu.opinion_reason.03", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "I like mangoes more than apples because they are sweeter.", "rule": "Because gives the reason for what you like."},
+    {"id": "gu.opinion_reason.04", "level": 4, "topic": "opinion_reason", "kind": "build", "sentence": "Cycling keeps us fit, so I ride to school.", "rule": "So joins a reason to what follows from it."},
     {"id": "gu.adverbs.05", "level": 5, "topic": "adverbs", "kind": "fix", "sentence": "He drives very [careful] in the rain.", "rule": "\"Very\" can strengthen an adverb: very carefully.", "right": ["carefully"]},
     {"id": "gu.interjections.04", "level": 5, "topic": "interjections", "kind": "build", "sentence": "Alas! The old tree has fallen.", "rule": "\"Alas\" shows sorrow."},
     {"id": "gu.phrasal_verbs.04", "level": 5, "topic": "phrasal_verbs", "kind": "fix", "sentence": "She takes [up] her mother: they have the same smile.", "rule": "\"Take after\" means to be like an older family member.", "right": ["after"]},

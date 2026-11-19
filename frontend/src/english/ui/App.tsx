@@ -35,6 +35,7 @@ import { ListenWrite } from "./ListenWrite.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
+import { GuidedTasks } from "./Guided.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
@@ -119,6 +120,7 @@ export function App() {
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
+  const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [inParent, setInParent] = useState(false);
@@ -168,6 +170,7 @@ export function App() {
       setInListenWrite(false);
       setInLevelCheck(false);
       setGrammarUse(null);
+      setGuided(null);
       setListenAnswer(null);
       setInSyllabus(false);
       setInParent(false);
@@ -498,6 +501,12 @@ export function App() {
         />
       </div>
     );
+  if (guided)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <GuidedTasks learner={learner} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
+      </div>
+    );
   if (inSyllabus)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -505,8 +514,11 @@ export function App() {
           docs={SYLLABUSES}
           initial={syllabusClass}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
-          onOpen={(where, topics, cls) => {
+          onOpen={(where, topics, cls, line) => {
             setSyllabusClass(cls);
+            // writing is practised in the essay studio, a separate part of the app
+            if (where === "writing") return void location.assign("?experience=essay-live");
+            if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
             setInSyllabus(false);
             scrollTo(0, 0);
             if (where === "grammar") setGrammarUse({ topics, from: "syllabus" });
