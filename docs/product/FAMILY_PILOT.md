@@ -489,3 +489,9 @@ layout (step help, "How?", the lesson picture, the review page). Layout chosen: 
 "Answer at the side" ("6 ) 348 ( 58"), then "In easy parts". The steps, numbers and boxes are the same; only where the
 answer's digits are written, and the words for it. Proved on 1,037 questions. `remembered-way@1`: the tab a child last
 chose opens first next time, on that device (localStorage `openpath-way`).
+
+`robot@1` (packages/learning/scripts/robot.ts, workflow "Robot learner"): a synthetic learner takes every question,
+every form: the stored answer must be marked correct and a wrong one not; "I'm stuck" must open in every way; every box
+must take its number and refuse another; the last step should reach the answer and no earlier step say it. Nightly and
+by hand, in eight parts, report only. First full run: docs/product/ROBOT_REPORT.md (3,53,164 questions, 99.73% with
+nothing broken; 961 questions in 11 types break something; quality findings listed separately).

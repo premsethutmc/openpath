@@ -1,0 +1,70 @@
+name: Robot learner
+# robot@1: a synthetic learner takes every question the product has (every form of every type) from start to right
+# answer: enters the stored answer and a wrong one, opens "I'm stuck" in every way, types into every box. It runs the
+# product's own logic (the grader and the step help), not a screen. Behaviour only: never whether an explanation is the
+# taught method. Report only: a failing question does not fail the job. No language model is called; nothing is deployed.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 20 * * *" # 02:10 IST, nightly
+  pull_request:
+    paths: [".github/workflows/robot-learner.yml", "packages/learning/scripts/robot.ts"]
+permissions:
+  contents: read
+concurrency:
+  group: robot-learner-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  take:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: node --import tsx ../packages/learning/scripts/robot.ts --shard ${{ matrix.shard }}/8 --out robot-${{ matrix.shard }}.json
+        working-directory: frontend
+      - uses: actions/upload-artifact@v7
+        with:
+          name: robot-${{ matrix.shard }}
+          path: frontend/robot-${{ matrix.shard }}.json
+          retention-days: 14
+  report:
+    needs: take
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: robot-*
+          path: frontend/parts
+          merge-multiple: true
+      - run: |
+          node --import tsx ../packages/learning/scripts/robot.ts --merge parts/robot-*.json --report robot-report.md --json robot-report.json
+          cat robot-report.md >> "$GITHUB_STEP_SUMMARY"
+        working-directory: frontend
+      - uses: actions/upload-artifact@v7
+        with:
+          name: robot-report
+          path: |
+            frontend/robot-report.md
+            frontend/robot-report.json
+          retention-days: 90
