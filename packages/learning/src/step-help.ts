@@ -79,7 +79,18 @@ export function cardFor(competency: string): Card | null {
   return card;
 }
 
-const NEXT: Record<string, string> = { note: "notice what the question gives you", evaluate: "work out the value", "choose the option": "pick the option that fits", read: "read it off the picture", write: "write it down in the form asked", recall: "remember the fact you need", check: "check it" };
+const NEXT: Record<string, string> = { note: "notice what the question gives you", evaluate: "work out the value", "choose the option": "pick the option that fits", read: "read it off the picture", write: "write it down in the form asked", recall: "remember the fact you need", check: "check it",
+  // plain-cue@1: a step's operation said in words a child uses, in place of the bare operation name ("lcm", "regroup",
+  // "classify"). Used only where the cue cannot name the step's own numbers or what it finds.
+  count: "count them one by one", compare: "put them side by side and compare", convert: "change it to the other unit", round: "find the nearest round number",
+  classify: "decide which kind it is", place: "use the place of each digit", order: "put them in order", choose: "pick the one that fits",
+  regroup: "trade ten of one for one of the next", identify: "find it in the question", factorise: "break the number into its factors",
+  hcf: "find the biggest number that divides them all", lcm: "find the smallest number they all go into", continue: "carry the pattern on",
+  difference: "find the size of the jump", sort: "sort them into groups", simplify: "make it simpler", reflect: "flip it over the line",
+  add: "add them together", subtract: "take one away from the other", multiply: "multiply them", divide: "divide them", half: "halve it", double: "double it",
+  measure: "read the measurement", estimate: "make a sensible guess first", pattern: "look for what repeats", share: "share them out equally", group: "make equal groups",
+  total: "find how many in all", list: "list them all", match: "match each one to its partner", name: "give it its name", tally: "count the tally marks", rewrite: "write it another way",
+  substitute: "put the number in place of the letter", solve: "find the number that makes it true", expand: "open the brackets", combine: "put the like parts together" };
 /**
  * cue-numbers@1: "multiply." tells a stuck child nothing. Where a step is one plain calculation, the cue names the numbers
  * it is done with ("multiply 50 by 6", "take 300 away from 348"), never its result. The numbers are the step's own

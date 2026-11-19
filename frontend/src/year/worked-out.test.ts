@@ -136,7 +136,7 @@ test("methods@1: the taught method is the first tab, and the type's own steps ar
   assert.deepEqual(helpMethods(id), ["Long division", "Answer at the side", "In easy parts"]);
   assert.match(stepsHelp(id, 0)![0].next, /How many 6s fit in 34/);
   assert.deepEqual(stepsHelp(id, 1)!.at(-1)!.board!.slice(0, 2), ["6 ) 348 ( 58", "    30"]);
-  assert.equal(stepsHelp(id, 2)![0].next, "First: multiply.");
+  assert.equal(stepsHelp(id, 2)![0].next, "First: multiply them.");
   assert.equal(stepsHelp(id, 2)!.some((s) => s.board), false);
   assert.deepEqual(helpMethods("gen:adcol3:104,737,0"), ["In columns", "By place value"]);
   // borrow@1: what each digit becomes after borrowing is written above it
@@ -328,4 +328,29 @@ test("side-answer@1: a long division can be set out with the answer at the side,
   assert.deepEqual(three, ["Long division", "Answer at the side", "In easy parts"]);
   console.log(n, "long divisions with both layouts");
   assert.ok(n > 1000, String(n));
+});
+
+test("facts@1: a times-table fact is reached by counting in equal jumps, and a hard one from the fives fact", () => {
+  let n = 0, built = 0;
+  for (const f of FAMILIES_ALL()) for (const item of pool(f).items) {
+    if (/:(mc|w)$/.test(item.id)) continue;
+    const m = /^(\d+) × (\d+) = \?$/.exec(item.prompt);
+    if (!m || Number(m[1]) > 12 || Number(m[2]) > 12 || Number(m[1]) < 2 || Number(m[2]) < 2) continue;
+    const a = Number(m[1]), b = Number(m[2]), names = helpMethods(item.id);
+    assert.match(names[0], /^Count in \d+s$/, item.id);
+    n++;
+    names.forEach((name, k) => {
+      const h = stepsHelp(item.id, k)!;
+      assert.ok(h.at(-1)!.shown.endsWith(`= ${a * b}`), `${item.id} ${name}: ends on the answer`);
+      assert.ok(!h.slice(0, -1).some((s) => new RegExp(`(^|[^\\d])${a * b}([^\\d]|$)`).test(s.shown)), `${item.id} ${name}: the answer is not said before the end`);
+      for (const s of h) for (const c of s.shown.matchAll(/(\d+) × (\d+) = (\d+)/g)) assert.equal(Number(c[1]) * Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+      for (const s of h) for (const c of s.shown.matchAll(/(\d+) \+ (\d+) = (\d+)/g)) assert.equal(Number(c[1]) + Number(c[2]), Number(c[3]), `${item.id}: ${c[0]}`);
+    });
+    const jump = Number(/\d+/.exec(names[0])![0]), list = stepsHelp(item.id, 0)![0].shown.split(", ").map(Number);
+    assert.ok(jump === a || jump === b, item.id);
+    assert.ok(list.every((x, i) => x === jump * (i + 1)) && list.length === (a * b) / jump - 1, `${item.id}: the jumps are equal and stop one short`);
+    if (names.includes("From a fact you know")) built++;
+  }
+  console.log(n, "table facts,", built, "also built from a fives fact");
+  assert.ok(n > 150 && built > 30, `${n} ${built}`);
 });

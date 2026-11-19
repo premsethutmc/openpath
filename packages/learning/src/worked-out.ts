@@ -373,6 +373,38 @@ function fractionForms(prompt: string | undefined, answer: string): { name: stri
 }
 
 /**
+ * facts@1: a times-table fact a child cannot recall is not helped by being told it. Two ways a child is taught to reach
+ * it: counting on in equal jumps, and (for the harder facts) building it from the fives fact they know.
+ */
+function timesFact(prompt: string | undefined, answer: string): { name: string; steps: Worked[] }[] | null {
+  const m = prompt ? /^(\d+) × (\d+) = \?$/.exec(prompt.trim()) : null;
+  if (!m) return null;
+  const a = Number(m[1]), b = Number(m[2]);
+  if (a < 2 || b < 2 || a > 12 || b > 12 || String(a * b) !== answer.replace(/,/g, "")) return null;
+  // jump in the number that is easier to count in (10s, 5s, 2s; otherwise the larger one, so there are fewer jumps)
+  const easy = (x: number) => (x === 10 ? 0 : x === 5 ? 1 : x === 2 ? 2 : 3);
+  const [jump, times] = easy(a) < easy(b) || (easy(a) === easy(b) && a >= b) ? [a, b] : [b, a];
+  const list = Array.from({ length: times - 1 }, (_, i) => jump * (i + 1));
+  const count: Worked[] = [
+    { next: `First: count in ${jump}s. ${a} × ${b} is ${times} jumps of ${jump}. Say the first ${times - 1}.`, shown: `${list.join(", ")}` },
+    { next: `Last: one more jump of ${jump}.`, shown: `${list[list.length - 1]} + ${jump} = ${a * b}` },
+  ];
+  const ways = [{ name: `Count in ${jump}s`, steps: count }];
+  // from the fives fact: for a fact with a 6, 7, 8 or 9 in it (and not already easy)
+  const [keep, split] = a >= b ? [b, a] : [a, b];
+  if (split >= 6 && split <= 9 && keep >= 3 && keep !== 5 && keep !== 10) {
+    const rest = split - 5;
+    ways.push({ name: "From a fact you know", steps: [
+      { next: `First: split ${split} into 5 and something.`, shown: `${split} = 5 + ${rest}` },
+      { next: `Now the fives fact: ${keep} fives.`, shown: `${keep} × 5 = ${keep * 5}` },
+      { next: `And ${keep} lots of ${rest}.`, shown: `${keep} × ${rest} = ${keep * rest}` },
+      { next: "Last: add the two parts.", shown: `${keep * 5} + ${keep * rest} = ${a * b}` },
+    ] });
+  }
+  return ways;
+}
+
+/**
  * HCF and LCM, each in the three ways schools teach them. The numbers are read from the question's own words; every way
  * must end on the verified answer or it is not offered.
  */
@@ -458,6 +490,8 @@ export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
     const c = columns(q.prompt, q.answer);
     if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
     if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }
+    const tf = timesFact(q.prompt, q.answer);
+    if (tf) return tf;
     const mu = multiply(q.prompt, q.answer);
     if (mu && mu.length >= 2) return [{ name: "In columns", steps: mu }];
     const ff = fractionForms(q.prompt, q.answer);
