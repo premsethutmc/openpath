@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { checkWriting, sentencesOf, type Note } from "./check.ts";
+import { checkWriting, sentencesOf, type Note, type Target } from "./check.ts";
 import { GUIDED } from "../guided/guided.ts";
 
-const T = { min: 30, max: 80 };
-const ids = (text: string, target = T) => checkWriting(text, target).notes.map((n) => n.id);
-const note = (text: string, id: string, target = T): Note | undefined => checkWriting(text, target).notes.find((n) => n.id === id);
+const T: Target = { min: 30, max: 80 };
+const ids = (text: string, target: Target = T) => checkWriting(text, target).notes.map((n) => n.id);
+const note = (text: string, id: string, target: Target = T): Note | undefined => checkWriting(text, target).notes.find((n) => n.id === id);
 const GOOD = "My school is near the river. It has a large playground, and we play there after lunch. I like the library most because it is quiet. When the bell rings, we walk home together. Our teachers are kind, but they expect hard work.";
 
 test("WC-1 a clean piece gets praise and nothing to fix; the same text always gives the same notes", () => {
@@ -68,4 +68,52 @@ test("WC-6 fixes come first, then tips, then praise; and every writing task that
   assert.deepEqual(levels, [...levels].sort((a, b) => ["fix", "tip", "good"].indexOf(a) - ["fix", "tip", "good"].indexOf(b)));
   const forms = new Set(GUIDED.tasks.filter((t) => t.write).map((t) => t.form));
   assert.deepEqual([...forms].filter(Boolean).sort(), ["argument", "formal", "letter", "narrative"]);
+});
+
+test("WC-7 the wider lists: joined words, wrong word forms, missing apostrophes, message short forms, doubled marks", () => {
+  const bad = "I goed to the libary with alot of childs. I dont know wat u mean!! Plz tell me..";
+  assert.match(note(bad, "spelling")!.text, /“libary” is “library”/);
+  assert.match(note(bad, "joined")!.text, /“alot” is “a lot”/);
+  assert.match(note(bad, "word-form")!.text, /“goed” is “went”; “childs” is “children”/);
+  assert.match(note(bad, "apostrophe")!.text, /“dont” is “don't”/);
+  assert.match(note(bad, "texting")!.text, /“u”/);
+  assert.ok(note(bad, "marks"));
+  const fine = "We took a U-turn near Ur. Wait... What a day! She's here, and I don't mind.";
+  for (const id of ["spelling", "joined", "word-form", "apostrophe", "texting", "marks"]) assert.equal(note(fine, id), undefined, id);
+});
+
+test("WC-8 wider grammar patterns, and the look-alikes they must leave alone", () => {
+  const wrong: [string, string][] = [
+    ["She doesn't likes tea.", "use the plain verb, not “likes”"], ["We can went now.", "use the plain verb, not “went”"],
+    ["I want to went home.", "after “to”"], ["I have went there.", "third form"], ["Ravi was late, and he don't care.", "should be “he doesn't”"],
+    ["If they is late, we go.", "they are"], ["I am agree with you.", "“I agree”"], ["Myself Ravi from Madurai.", "“I am Ravi”"],
+    ["Its a fine day.", "“it's a”"], ["Your not late.", "“you're not”"], ["Their is a shop.", "“there is”"],
+    ["One of my friend is ill.", "“one of my friends”"], ["We discussed about the plan.", "leave out “about”"],
+    ["Please reply back soon.", "already means back"], ["I saw the the dog.", "written twice"], ["An banana fell.", "should be “a banana”"],
+    ["So he go home.", "the verb takes -s"],
+  ];
+  for (const [text, part] of wrong) assert.ok(note(text, "grammar")?.text.includes(part), `${text} → ${note(text, "grammar")?.text}`);
+  const fine = [
+    "Does he have a pen? Did she go home? Can it run? I saw him and let it go.", "I got an A in maths. Is it a or b?", "She did an MBA and sent an SMS.",
+    "He can saw the wood and fell the tree.", "Had you gone, I would have come. Its very existence is in doubt.", "Thank you for your welcome. Your going away saddened us.",
+    "One of my friend's books is lost. One of the book fairs is here.", "He had had enough. I know that that is true.", "They came in. In the hall it was dark.",
+    "I insist that he go. A ewe and a European stood by a one-way road.",
+  ];
+  for (const text of fine) assert.equal(note(text, "grammar"), undefined, `${text} → ${note(text, "grammar")?.text}`);
+});
+
+test("WC-9 no slip the check names is a word our own reading and listening texts use", async () => {
+  const { readdirSync, readFileSync, statSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const { MISSPELT, JOINED, WRONG_FORM, NO_APOSTROPHE } = await import("./slips.ts");
+  const root = new URL("../../../../../content/english/", import.meta.url).pathname;
+  const seen = new Set<string>();
+  const walk = (dir: string) => { for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) walk(p); else if (f.endsWith(".json")) for (const w of readFileSync(p, "utf8").toLowerCase().match(/[a-z][a-z'’-]*/g) ?? []) seen.add(w.replace(/’/g, "'")); } };
+  // prose we wrote to be read or heard; spelling and grammar items are left out, as they hold wrong forms on purpose
+  for (const dir of ["reading", "listening", "dictation", "guided", "syllabus", "first"]) walk(join(root, dir));
+  assert.ok(seen.size > 3000, `content words read: ${seen.size}`);
+  const all = { ...MISSPELT, ...JOINED, ...WRONG_FORM, ...NO_APOSTROPHE };
+  assert.ok(Object.keys(all).length > 380, `slips known: ${Object.keys(all).length}`);
+  assert.deepEqual(Object.keys(all).filter((w) => seen.has(w)), []);
+  assert.deepEqual(Object.entries(all).filter(([w, right]) => !right || w === right.toLowerCase()), []);
 });
