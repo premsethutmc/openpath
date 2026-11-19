@@ -142,6 +142,13 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await wtask.getByText("Aim for 120 to 180 words.", { exact: false }).waitFor();
   await wtask.locator("textarea").fill("Trees give us shade and clean air. ".repeat(20));
   await wtask.locator('[data-words="140"]').waitFor();
+  // the rule-based check: form only, on the device, with its limits stated
+  await wtask.getByRole("button", { name: "Check my writing" }).click();
+  await wtask.locator('[data-note="openings"]', { hasText: "20 of your 20 sentences start with “Trees”" }).waitFor();
+  await wtask.locator('[data-note="paragraphs"]').waitFor();
+  await wtask.locator('[data-note="length"][data-level="good"]').waitFor();
+  await wtask.getByText("These checks look only at the form of your writing.", { exact: false }).waitFor();
+  assert.equal(await wtask.locator('.writing-notes').getAttribute("data-fixes"), "0");
   await wtask.getByText("The app does not keep or mark your writing.", { exact: false }).waitFor();
   await wtask.getByLabel("Each paragraph has one main idea").first().check();
   await fits();

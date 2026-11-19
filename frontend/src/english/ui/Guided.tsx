@@ -4,6 +4,7 @@
  */
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
+import { LIMIT, checkWriting, type WritingCheck } from "../logic/writing/check.ts";
 import { GUIDED, done, guidedSummary, tasksFor, wordCount, type GuidedSummary, type GuidedTask } from "../logic/guided/guided.ts";
 
 function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
@@ -11,6 +12,7 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
   const [text, setText] = useState("");
   const [self, setSelf] = useState<number[]>([]);
   const [copied, setCopied] = useState(false);
+  const [check, setCheck] = useState<WritingCheck | null>(null);
   const words = wordCount(text);
   const [open, setOpen] = useState(false);
   return (
@@ -39,6 +41,7 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
             setSelf([]);
             setText("");
             setCopied(false);
+            setCheck(null);
             setOpen(false);
           }}
         >
@@ -47,7 +50,7 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
               <label htmlFor={`write-${task.id}`} className="small">
                 Write here, or on paper. Aim for {task.write.min} to {task.write.max} words.
               </label>
-              <textarea id={`write-${task.id}`} className="guided-write" rows={8} value={text} onChange={(e) => (setText(e.target.value), setCopied(false))} />
+              <textarea id={`write-${task.id}`} className="guided-write" rows={8} value={text} onChange={(e) => (setText(e.target.value), setCopied(false), setCheck(null))} />
               <p className="small" data-words={words}>
                 {words} {words === 1 ? "word" : "words"}
                 {words > 0 && words < task.write.min ? ": a little more" : words > task.write.max ? ": over the length asked" : ""}. The app does not keep or mark your writing.
@@ -56,6 +59,21 @@ function TaskTile({ task, was, onDone }: { task: GuidedTask; was: { seen: number
                 <button type="button" className="link" onClick={() => void navigator.clipboard.writeText(text).then(() => setCopied(true))}>
                   {copied ? "Copied" : "Copy my writing to keep it"}
                 </button>
+              )}
+              <button type="button" className="secondary" disabled={!text.trim()} onClick={() => setCheck(checkWriting(text, { ...task.write!, ...(task.form ? { form: task.form } : {}) }))}>
+                Check my writing
+              </button>
+              {check && (
+                <div className="writing-notes" role="status" data-fixes={check.notes.filter((n) => n.level === "fix").length}>
+                  <ul>
+                    {check.notes.map((n) => (
+                      <li key={n.id} data-note={n.id} data-level={n.level}>
+                        <span aria-hidden="true">{n.level === "fix" ? "✏️" : n.level === "tip" ? "💡" : "✓"}</span> {n.text}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="small">{LIMIT}</p>
+                </div>
               )}
               <p className="small">Check your own work first:</p>
               {task.self!.map((l, i) => (

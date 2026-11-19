@@ -2796,3 +2796,17 @@ h3.sub {
   border: 1px solid var(--line);
   border-radius: 12px;
 }
+
+.writing-notes ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  gap: 8px;
+}
+.writing-notes li {
+  line-height: 1.4;
+}
+.writing-notes li[data-level="fix"] {
+  font-weight: 600;
+}
