@@ -6074,7 +6074,7 @@
    "kind": "help",
    "competency": "MATH.number.place-value-tens",
    "title": "The greatest and smallest two-digit number from digit cards",
-   "hash": "b5b8c20b",
+   "hash": "02b561f3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6707,7 +6707,7 @@
    "kind": "help",
    "competency": "MATH.number.place-value-tens",
    "title": "Writing a number name as a number",
-   "hash": "96d0385a",
+   "hash": "9831d09d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -7767,7 +7767,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-decimals",
    "title": "Adding and taking away rupees and paise",
-   "hash": "905946a0",
+   "hash": "aee69c7a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -7857,7 +7857,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-decimals",
    "title": "Changing paise into rupees",
-   "hash": "5bd2b1a9",
+   "hash": "418b1962",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8120,7 +8120,7 @@
    "kind": "help",
    "competency": "MATH.number.subtraction-regroup",
    "title": "Subtracting two-digit numbers with regrouping",
-   "hash": "9e614023",
+   "hash": "6c8e4e4b",
    "source": "written",
    "from": null,
    "classes": [
@@ -8137,7 +8137,7 @@
    "kind": "help",
    "competency": "MATH.number.subtraction-regroup",
    "title": "Subtracting three-digit numbers with regrouping",
-   "hash": "d6d06c1b",
+   "hash": "2d1ac61d",
    "source": "written",
    "from": null,
    "classes": [
@@ -8154,7 +8154,7 @@
    "kind": "help",
    "competency": "MATH.number.subtraction-regroup",
    "title": "Subtracting two-digit numbers without regrouping",
-   "hash": "2eec175a",
+   "hash": "1ca6caac",
    "source": "written",
    "from": null,
    "classes": [
@@ -8211,7 +8211,7 @@
    "kind": "help",
    "competency": "MATH.number.thousands",
    "title": "How much more makes 1000",
-   "hash": "9abe9981",
+   "hash": "e41b3652",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8314,7 +8314,7 @@
    "kind": "help",
    "competency": "MATH.number.multi-digit-add-subtract",
    "title": "Column addition and subtraction from three to five digits, with and without regrouping",
-   "hash": "33f2c946",
+   "hash": "28b100ce",
    "source": "written",
    "from": null,
    "classes": [
@@ -8350,7 +8350,7 @@
    "kind": "help",
    "competency": "MATH.number.addition-regroup",
    "title": "Adding two-digit numbers with regrouping",
-   "hash": "4aca9b57",
+   "hash": "9ec1dd39",
    "source": "written",
    "from": null,
    "classes": [
@@ -8508,7 +8508,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-comparison",
    "title": "Comparing two fractions with the same bottom or top number",
-   "hash": "f6bc19bc",
+   "hash": "257e2f80",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8654,7 +8654,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-models",
    "title": "Measuring lengths with fractional units",
-   "hash": "ce8b81c7",
+   "hash": "ff38c156",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8985,7 +8985,7 @@
    "kind": "help",
    "competency": "MATH.number.multi-digit-add-subtract",
    "title": "Adding three-digit numbers without regrouping",
-   "hash": "02e197ec",
+   "hash": "a0f7bd4c",
    "source": "written",
    "from": null,
    "classes": [
@@ -9676,7 +9676,7 @@
    "kind": "help",
    "competency": "MATH.number.euclid-algorithm",
    "title": "The HCF by repeated division, step by step",
-   "hash": "65045d64",
+   "hash": "0175fcca",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -9743,7 +9743,7 @@
    "kind": "help",
    "competency": "MATH.measurement.unit-conversions",
    "title": "Feet, inches and centimetres, and estimating with a known length",
-   "hash": "9184b04e",
+   "hash": "f6c00d41",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -9815,7 +9815,7 @@
    "kind": "help",
    "competency": "MATH.number.large-numbers",
    "title": "Writing a number in lakhs and thousands in figures",
-   "hash": "2d32187b",
+   "hash": "77433327",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -10397,7 +10397,7 @@
    "kind": "help",
    "competency": "MATH.measurement.24-hour-clock",
    "title": "Reading a 24-hour time on a 12-hour clock",
-   "hash": "fa069883",
+   "hash": "f035d14b",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -10414,7 +10414,7 @@
    "kind": "help",
    "competency": "MATH.measurement.24-hour-clock",
    "title": "Writing a 12-hour time in 24-hour form",
-   "hash": "c9412985",
+   "hash": "e90ff36f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12000,7 +12000,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.cartesian",
    "title": "Using a coordinate grid for a floor plan",
-   "hash": "59076759",
+   "hash": "87300da1",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12168,7 +12168,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.cartesian",
    "title": "Which quadrant a point is in",
-   "hash": "b3ec7f66",
+   "hash": "02ba8381",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12598,7 +12598,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-product",
    "title": "Word problems with multiplying or dividing fractions",
-   "hash": "2e080061",
+   "hash": "66fc909e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13188,7 +13188,7 @@
    "kind": "help",
    "competency": "MATH.number.compound-interest",
    "title": "Compound interest half-yearly or quarterly, and compared with simple interest",
-   "hash": "dfac27b2",
+   "hash": "915a0225",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13249,7 +13249,7 @@
    "kind": "help",
    "competency": "MATH.number.indian-international-numeration",
    "title": "Crores and lakhs in figures; millions and billions in lakhs and crores",
-   "hash": "ade4b72c",
+   "hash": "db82562f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13382,7 +13382,7 @@
    "kind": "help",
    "competency": "MATH.algebra.factorisation",
    "title": "Factorising ax² + bx + c by splitting the middle term",
-   "hash": "0e771972",
+   "hash": "03563817",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13976,7 +13976,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.conjecture-testing",
    "title": "How a Collatz sequence behaves: steps to reach 1, and its highest number",
-   "hash": "d564a3b3",
+   "hash": "3e65891a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14037,7 +14037,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.conjecture-testing",
    "title": "Testing digit conjectures: Kaprekar's 6174, repeated digit sums, reverse-and-add palindromes",
-   "hash": "8a5a664f",
+   "hash": "73820c41",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14522,7 +14522,7 @@
    "kind": "help",
    "competency": "MATH.number.scientific-notation",
    "title": "Orders of magnitude of real quantities, and judging a claim",
-   "hash": "6ed192da",
+   "hash": "5fda47a8",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15076,7 +15076,7 @@
    "kind": "help",
    "competency": "MATH.calculus.area-integrals",
    "title": "The area between a parabola and a line",
-   "hash": "e8c87fda",
+   "hash": "683e95ab",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15235,7 +15235,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.polygon-area",
    "title": "The area of a quadrilateral from its vertices",
-   "hash": "d770913d",
+   "hash": "e0f9abf5",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15250,7 +15250,7 @@
    "kind": "help",
    "competency": "MATH.algebra.rational-expressions",
    "title": "A rational expression in lowest terms",
-   "hash": "befc9137",
+   "hash": "5cd4be20",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15291,7 +15291,7 @@
    "kind": "help",
    "competency": "MATH.algebra.rational-expressions",
    "title": "Multiplying, dividing, adding and subtracting rational expressions",
-   "hash": "71bf71f7",
+   "hash": "52ec366e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16356,7 +16356,7 @@
    "kind": "help",
    "competency": "MATH.probability.classical",
    "title": "Probability with numbered cards",
-   "hash": "6e409d3d",
+   "hash": "7609f7e0",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16374,7 +16374,7 @@
    "kind": "help",
    "competency": "MATH.probability.complements",
    "title": "Complementary and exhaustive events",
-   "hash": "de861ab3",
+   "hash": "c668d5db",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16432,7 +16432,7 @@
    "kind": "help",
    "competency": "MATH.probability.classical",
    "title": "Probability with two dice",
-   "hash": "ce838fd8",
+   "hash": "92a6ce67",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16805,7 +16805,7 @@
    "kind": "help",
    "competency": "MATH.probability.tree-diagrams",
    "title": "Two counters drawn one after the other",
-   "hash": "9965a840",
+   "hash": "84d4b068",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16848,7 +16848,7 @@
    "kind": "help",
    "competency": "MATH.probability.complements",
    "title": "The addition rule P(A or B)",
-   "hash": "e1ddb110",
+   "hash": "fdf14dda",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17632,7 +17632,7 @@
    "kind": "help",
    "competency": "MATH.algebra.functions",
    "title": "The range of a quadratic function",
-   "hash": "6974522f",
+   "hash": "05890099",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18190,7 +18190,7 @@
    "kind": "help",
    "competency": "MATH.algebra.matrices",
    "title": "A matrix product as a total bill",
-   "hash": "b2c10d55",
+   "hash": "bbc6a5cd",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18258,7 +18258,7 @@
    "kind": "help",
    "competency": "MATH.algebra.matrices",
    "title": "Multiplying two 2 × 2 matrices",
-   "hash": "9a34eb24",
+   "hash": "ac1c0f0d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18351,7 +18351,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-equation-solving",
    "title": "Solving a reciprocal equation",
-   "hash": "10a77271",
+   "hash": "8e915bd5",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18939,7 +18939,7 @@
    "kind": "help",
    "competency": "MATH.statistics.ogive-quartiles",
    "title": "Cumulative frequency, median and quartiles from a less-than ogive",
-   "hash": "ce249d81",
+   "hash": "ecd1c90a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19202,7 +19202,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.conics",
    "title": "Conics in real life: arches, reflectors, cables and orbits",
-   "hash": "94fca159",
+   "hash": "1ba191d9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19307,7 +19307,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-approximation",
    "title": "Approximate absolute and percentage errors by differentials",
-   "hash": "527a3178",
+   "hash": "5cb85217",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19393,7 +19393,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-approximation",
    "title": "The total differential and the linear approximation of f(x, y)",
-   "hash": "112d826b",
+   "hash": "ffde44a4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19405,7 +19405,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-first-order-de",
    "title": "Solving dy/dx + Py = Q with an integrating factor",
-   "hash": "a34fce05",
+   "hash": "c0a077c3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19690,7 +19690,7 @@
    "kind": "help",
    "competency": "MATH.probability.events",
    "title": "The addition rule for two events",
-   "hash": "1ab3814a",
+   "hash": "5d20ed45",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19734,7 +19734,7 @@
    "kind": "help",
    "competency": "MATH.probability.bayes",
    "title": "Bayes' theorem: which source produced it",
-   "hash": "f14bb36d",
+   "hash": "d317942e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19772,7 +19772,7 @@
    "kind": "help",
    "competency": "MATH.probability.binomial-distribution",
    "title": "Binomial probabilities",
-   "hash": "b73c55d2",
+   "hash": "84a40b47",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19840,7 +19840,7 @@
    "kind": "help",
    "competency": "MATH.number.complex",
    "title": "Conjugates of complex numbers and their properties",
-   "hash": "240fff80",
+   "hash": "7fbee390",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20212,7 +20212,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.pair-of-lines",
    "title": "The angle bisectors of a pair of lines through the origin",
-   "hash": "125ae376",
+   "hash": "8ee85fbd",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20447,7 +20447,7 @@
    "kind": "help",
    "competency": "MATH.probability.bayes",
    "title": "Bayes' theorem: which bag the ball came from",
-   "hash": "5da602df",
+   "hash": "9e5c2be2",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20727,7 +20727,7 @@
    "kind": "help",
    "competency": "MATH.statistics.dispersion",
    "title": "Variance of grouped data by the step-deviation method",
-   "hash": "d26ace14",
+   "hash": "ad61ffe6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20781,7 +20781,7 @@
    "kind": "help",
    "competency": "MATH.probability.independent-events",
    "title": "Probabilities of independent events",
-   "hash": "de56eadc",
+   "hash": "e9e5bafa",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21057,7 +21057,7 @@
    "kind": "help",
    "competency": "MATH.probability.random-variables",
    "title": "Mean of a discrete random variable",
-   "hash": "3be10d6a",
+   "hash": "b42f91d7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22125,7 +22125,7 @@
    "kind": "help",
    "competency": "MATH.number.long-division",
    "title": "Long division with a remainder, and dividend = divisor × quotient + remainder",
-   "hash": "f6e6a9c2",
+   "hash": "0cf1dcf6",
    "source": "written",
    "from": null,
    "classes": [
@@ -22155,7 +22155,7 @@
    "kind": "help",
    "competency": "MATH.number.exponents",
    "title": "Writing a repeated product in exponential form",
-   "hash": "ece43bd8",
+   "hash": "16ff4e03",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22754,7 +22754,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratic-discriminant",
    "title": "How many real solutions a quadratic has",
-   "hash": "fd5848c1",
+   "hash": "85d928fc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22893,7 +22893,7 @@
    "kind": "help",
    "competency": "MATH.number.fraction-add-like",
    "title": "Adding or subtracting like fractions",
-   "hash": "ccb6ae3d",
+   "hash": "f2cbf649",
    "source": "rule",
    "from": "steps",
    "classes": [

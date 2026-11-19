@@ -43,6 +43,8 @@ export interface StepHelp {
    * is one, and the skill that teaches it where that skill has a card.
    */
   how?: { lines: string[]; board?: string[]; skill?: string };
+  /** closing@1: the step that writes the answer, added where the type's own steps never do */
+  closing?: true;
   /** type-it@1: a number the learner enters for a step that is shown as a sentence (see Worked.ask) */
   ask?: { lead: string; value: string };
 }
@@ -148,6 +150,15 @@ function cueLabel(shown: string, value: unknown, answer: string, given: Set<numb
  * learner can switch between them. One name otherwise.
  */
 export function helpMethods(qid: string): string[] {
+  const names = methodNames(qid);
+  // no-spoiler-way@1 (found by the robot learner): the type's own steps are not offered as a second way where their
+  // first step already says a numeric answer ("1461 ÷ 4: the quotient is 365")
+  if (names.length < 2 || !Object.values(ALT).concat("By place value", "Another way").includes(names[names.length - 1])) return names;
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""))!, own = stepsHelp(qid, names.length - 1), a = p.answer.replace(/,/g, "").trim();
+  const early = !!own && own.length >= 2 && /^[−-]?\d+(?:\.\d+)?$/.test(a) && a.length >= 3 && new RegExp(`(^|[^\\d./−])${a.replace(".", "\\.")}([^\\d./]|$)`).test(own[0].shown.replace(/(\d),(?=\d{3}\b)/g, "$1")) && !new RegExp(`(^|[^\\d./−])${a.replace(".", "\\.")}([^\\d./]|$)`).test(p.prompt.replace(/(\d),(?=\d{3}\b)/g, "$1"));
+  return early ? names.slice(0, -1) : names;
+}
+function methodNames(qid: string): string[] {
   const p = problemOf(qid.replace(/:(mc|w)$/, ""));
   if (!p || !p.steps.length) return [];
   const ways = workedWays(p);
@@ -171,7 +182,7 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
   const numbersIn = (t: string) => (t.replace(/(\d),(?=\d{3}\b)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
-  return p.steps.flatMap((s, i) => {
+  const steps: StepHelp[] = p.steps.flatMap((s, i) => {
     // cue-shown@1: a number already on the screen, in the question or in an earlier step as it was shown, is known to
     // the learner; only a number that first appears in this step is the step's own choice
     const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).flatMap((t) => { const v = (t as { value?: unknown }).value; return [...(typeof v === "number" ? [v] : []), ...numbersIn(explainStep(p, t))]; })]);
@@ -202,6 +213,26 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });
+  // closing@1 (found by the robot learner): a help that works towards a numeric answer but never writes it ends by
+  // writing it. The step before it is then no longer the last.
+  if (statesAnswer(steps, p.answer)) return steps;
+  const before = steps.map((x, i) => (i === steps.length - 1 && /^Last: /.test(x.next) && steps.length > 1 ? { ...x, next: x.next.replace(/^Last: /, "Next: ") } : x));
+  return [...before, { next: steps.length ? "Last: write the answer." : "First: write the answer.", shown: `The answer: ${p.answer}`, needs: null, closing: true as const }];
+}
+/**
+ * Does a help state its question's answer somewhere (each part of it, for an answer in parts such as "(7, 25)" or
+ * "7,9")? True too where the answer is not a number to be reached (a letter choice, a word).
+ */
+export function statesAnswer(steps: readonly StepHelp[], answer: string): boolean {
+  if (!/\d/.test(answer) || /^[A-H]$/.test(answer.trim())) return true;
+  const flat = (t: string) => t.replace(/-(?=\d)/g, "−");
+  const group = (t: string) => t.replace(/(\d),(?=\d{2,3}\b)/g, "$1");
+  const all = group(flat(steps.map((x) => `${x.shown} ${(x.board ?? []).join(" ")} ${(x.how?.lines ?? []).join(" ")}`).join(" | ")));
+  const has = (a: string) => new RegExp(`(^|[^\\d./])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(all);
+  const whole = flat(answer).trim();
+  if (has(whole) || has(group(whole))) return true;
+  const parts = whole.replace(/^\(|\)$/g, "").split(/,\s*/).map((x) => x.trim()).filter(Boolean);
+  return parts.length > 1 && parts.every(has);
 }
 
 /**

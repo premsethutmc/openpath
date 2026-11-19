@@ -4,8 +4,8 @@
  *   answer   the stored answer, entered as a learner would, is marked correct; a wrong one is not; of a choice's
  *            options exactly one is marked correct
  *   help     "I'm stuck" opens, in every way it offers; every box accepts the number it expects and refuses another
- *   arrive   the last step of the first way reaches the answer
- *   early    no step before the last says the answer; no cue says it
+ *   arrive   the first way states the answer somewhere in its steps (each part of it, for an answer in parts)
+ *   early    a help of three steps or more does not say a numeric answer in its first step; no cue says it
  * It runs the product's own logic (the same grader, the same step help), not a screen. It judges behaviour only: never
  * whether an explanation is the method a school teaches, or whether a child follows it.
  *   node --import tsx ../packages/learning/scripts/robot.ts --shard 0/8 --out robot-0.json   (from frontend/)
@@ -18,9 +18,9 @@ import { FAMILIES, pool } from "../src/families.ts";
 import { grade } from "../src/grading/decision.ts";
 import { askOf, judge } from "../src/step-ask.ts";
 import { selectable } from "../src/question-status.ts";
-import { helpMethods, stepsHelp } from "../src/step-help.ts";
+import { helpMethods, statesAnswer, stepsHelp } from "../src/step-help.ts";
 
-type Kind = "no-option-is-right" | "several-options-right" | "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "does-not-arrive" | "answer-said-early" | "answer-in-cue" | "crash";
+type Kind = "no-option-is-right" | "several-options-right" | "answer-not-accepted" | "wrong-answer-accepted" | "no-help" | "box-refuses-right" | "box-accepts-wrong" | "help-never-states-answer" | "answer-in-first-step" | "answer-in-cue" | "crash";
 const HARD: Kind[] = ["no-option-is-right", "several-options-right", "answer-not-accepted", "wrong-answer-accepted", "no-help", "box-refuses-right", "box-accepts-wrong", "crash"];
 interface Fam { questions: number; /** quarantined: never served to a learner, so not taken */ held: number; clean: number; steps: number; boxes: number; fails: Partial<Record<Kind, number>>; eg: Partial<Record<Kind, string>> }
 interface Report { schema: "robot@1"; shard: string; families: Record<string, Fam> }
@@ -67,12 +67,9 @@ function take(id: string, f: Fam) {
           else if (numeric(box.value) && judge(box, bump(box.value))) hard = note("box-accepts-wrong", `${name}: "${s.next}" takes ${bump(box.value)} for ${box.value}`) || hard;
         }
         if (says(s.next, q.answer) && !says(q.prompt, q.answer)) note("answer-in-cue", `${name}: ${s.next}`);
-        if (i < steps.length - 1 && !s.finer && says(s.shown, q.answer) && !says(q.prompt, q.answer)) note("answer-said-early", `${name}, step ${i + 1} of ${steps.length}: ${s.shown}`);
+        if (i === 0 && steps.length >= 3 && numeric(q.answer) && !/(\d+,\s*){3}/.test(s.shown) && says(s.shown, q.answer) && !says(q.prompt, q.answer)) note("answer-in-first-step", `${name}, step 1 of ${steps.length}: ${s.shown}`);
       });
-      if (k === 0 && q.type !== "written" && flat(q.answer).trim().length >= 1 && /\d/.test(q.answer)) {
-        const end = steps[steps.length - 1], a = flat(q.answer).trim();
-        if (!new RegExp(`(^|[^\\d./−])${a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\d/]|$)`).test(flat(`${end.shown} ${(end.board ?? []).join(" ")}`))) note("does-not-arrive", `last step "${end.shown}" for answer ${q.answer}`);
-      }
+      if (q.type !== "written" && !q.options && !statesAnswer(steps, q.answer)) note("help-never-states-answer", `${name}: answer ${q.answer}; last step "${steps[steps.length - 1].shown}"`);
     });
   } catch (e) { hard = note("crash", String((e as Error).message ?? e)) || hard; }
   if (!hard) f.clean++;
