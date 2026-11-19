@@ -105,12 +105,11 @@
         {
           "id": "RW3",
           "text": "Puts pictures in the order of a story.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "sentence_order"
-          ],
-          "note": "Sentences are put in order here; the app has no pictures."
+            "picture_order"
+          ]
         },
         {
           "id": "RW4",

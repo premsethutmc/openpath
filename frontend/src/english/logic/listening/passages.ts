@@ -42,7 +42,7 @@ function hash(s: string): number {
 }
 const hashOrder = <T>(xs: readonly T[], key: (x: T) => string) => xs.map((x) => ({ x, k: hash(key(x)), s: key(x) })).sort((a, b) => a.k - b.k || (a.s < b.s ? -1 : 1)).map((e) => e.x);
 
-export const PLACE_SALT = "7";
+export const PLACE_SALT = "189";
 /** A question's choices in a fixed order, and which is right. */
 export function choices(q: ListenQuestion, salt = PLACE_SALT): { options: string[]; answer: number } {
   // the salt was chosen so the right answer falls equally often in each place over the whole bank (a test holds it to that)
