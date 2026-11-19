@@ -354,6 +354,14 @@ jobs:
         run: |
           npm run english:e2e-grammar 2>&1 | tee english-grammar-e2e.log
           ../.github/scripts/require-tests.sh english-grammar-e2e.log "Grammar in use and syllabus end-to-end"
+      - name: First words in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/first
+        run: |
+          npm run english:e2e-first 2>&1 | tee english-first-e2e.log
+          ../.github/scripts/require-tests.sh english-first-e2e.log "First words end-to-end"
       - name: Reading course in an Android-sized browser
         working-directory: frontend
         env:

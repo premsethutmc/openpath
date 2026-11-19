@@ -1,0 +1,461 @@
+{
+  "id": "first-words",
+  "version": 1,
+  "status": "candidate: words, sentences and levels chosen by OpenPath (AI-prepared) and checked by rule; the pictures are standard emoji used as stand-ins until artwork is supplied; not reviewed by an educator",
+  "review": "candidate-unvalidated",
+  "evidence": "practice-only: hearing a word and finding its picture, building a word from letters, and doing what a short sentence says; it changes no capability estimate",
+  "art": "Each word has a picture slot. It holds an emoji for now; artwork can replace it word by word without changing the activities.",
+  "words": [
+    {
+      "id": "cat",
+      "word": "cat",
+      "picture": "🐱",
+      "group": "animals"
+    },
+    {
+      "id": "dog",
+      "word": "dog",
+      "picture": "🐶",
+      "group": "animals"
+    },
+    {
+      "id": "cow",
+      "word": "cow",
+      "picture": "🐮",
+      "group": "animals"
+    },
+    {
+      "id": "hen",
+      "word": "hen",
+      "picture": "🐔",
+      "group": "animals"
+    },
+    {
+      "id": "fish",
+      "word": "fish",
+      "picture": "🐟",
+      "group": "animals"
+    },
+    {
+      "id": "bird",
+      "word": "bird",
+      "picture": "🐦",
+      "group": "animals"
+    },
+    {
+      "id": "ant",
+      "word": "ant",
+      "picture": "🐜",
+      "group": "animals"
+    },
+    {
+      "id": "bee",
+      "word": "bee",
+      "picture": "🐝",
+      "group": "animals"
+    },
+    {
+      "id": "frog",
+      "word": "frog",
+      "picture": "🐸",
+      "group": "animals"
+    },
+    {
+      "id": "duck",
+      "word": "duck",
+      "picture": "🦆",
+      "group": "animals"
+    },
+    {
+      "id": "goat",
+      "word": "goat",
+      "picture": "🐐",
+      "group": "animals"
+    },
+    {
+      "id": "lion",
+      "word": "lion",
+      "picture": "🦁",
+      "group": "animals"
+    },
+    {
+      "id": "fox",
+      "word": "fox",
+      "picture": "🦊",
+      "group": "animals"
+    },
+    {
+      "id": "pig",
+      "word": "pig",
+      "picture": "🐷",
+      "group": "animals"
+    },
+    {
+      "id": "bat",
+      "word": "bat",
+      "picture": "🦇",
+      "group": "animals"
+    },
+    {
+      "id": "apple",
+      "word": "apple",
+      "picture": "🍎",
+      "group": "food"
+    },
+    {
+      "id": "mango",
+      "word": "mango",
+      "picture": "🥭",
+      "group": "food"
+    },
+    {
+      "id": "banana",
+      "word": "banana",
+      "picture": "🍌",
+      "group": "food"
+    },
+    {
+      "id": "egg",
+      "word": "egg",
+      "picture": "🥚",
+      "group": "food"
+    },
+    {
+      "id": "milk",
+      "word": "milk",
+      "picture": "🥛",
+      "group": "food"
+    },
+    {
+      "id": "bread",
+      "word": "bread",
+      "picture": "🍞",
+      "group": "food"
+    },
+    {
+      "id": "rice",
+      "word": "rice",
+      "picture": "🍚",
+      "group": "food"
+    },
+    {
+      "id": "cake",
+      "word": "cake",
+      "picture": "🍰",
+      "group": "food"
+    },
+    {
+      "id": "corn",
+      "word": "corn",
+      "picture": "🌽",
+      "group": "food"
+    },
+    {
+      "id": "nut",
+      "word": "nut",
+      "picture": "🥜",
+      "group": "food"
+    },
+    {
+      "id": "grapes",
+      "word": "grapes",
+      "picture": "🍇",
+      "group": "food"
+    },
+    {
+      "id": "lemon",
+      "word": "lemon",
+      "picture": "🍋",
+      "group": "food"
+    },
+    {
+      "id": "carrot",
+      "word": "carrot",
+      "picture": "🥕",
+      "group": "food"
+    },
+    {
+      "id": "tea",
+      "word": "tea",
+      "picture": "🍵",
+      "group": "food"
+    },
+    {
+      "id": "ball",
+      "word": "ball",
+      "picture": "⚽",
+      "group": "things"
+    },
+    {
+      "id": "book",
+      "word": "book",
+      "picture": "📕",
+      "group": "things"
+    },
+    {
+      "id": "bag",
+      "word": "bag",
+      "picture": "🎒",
+      "group": "things"
+    },
+    {
+      "id": "bus",
+      "word": "bus",
+      "picture": "🚌",
+      "group": "things"
+    },
+    {
+      "id": "car",
+      "word": "car",
+      "picture": "🚗",
+      "group": "things"
+    },
+    {
+      "id": "box",
+      "word": "box",
+      "picture": "📦",
+      "group": "things"
+    },
+    {
+      "id": "key",
+      "word": "key",
+      "picture": "🔑",
+      "group": "things"
+    },
+    {
+      "id": "bell",
+      "word": "bell",
+      "picture": "🔔",
+      "group": "things"
+    },
+    {
+      "id": "clock",
+      "word": "clock",
+      "picture": "⏰",
+      "group": "things"
+    },
+    {
+      "id": "kite",
+      "word": "kite",
+      "picture": "🪁",
+      "group": "things"
+    },
+    {
+      "id": "drum",
+      "word": "drum",
+      "picture": "🥁",
+      "group": "things"
+    },
+    {
+      "id": "hat",
+      "word": "hat",
+      "picture": "🎩",
+      "group": "things"
+    },
+    {
+      "id": "shoe",
+      "word": "shoe",
+      "picture": "👟",
+      "group": "things"
+    },
+    {
+      "id": "sock",
+      "word": "sock",
+      "picture": "🧦",
+      "group": "things"
+    },
+    {
+      "id": "door",
+      "word": "door",
+      "picture": "🚪",
+      "group": "things"
+    },
+    {
+      "id": "chair",
+      "word": "chair",
+      "picture": "🪑",
+      "group": "things"
+    },
+    {
+      "id": "phone",
+      "word": "phone",
+      "picture": "📱",
+      "group": "things"
+    },
+    {
+      "id": "boat",
+      "word": "boat",
+      "picture": "⛵",
+      "group": "things"
+    },
+    {
+      "id": "train",
+      "word": "train",
+      "picture": "🚆",
+      "group": "things"
+    },
+    {
+      "id": "cycle",
+      "word": "cycle",
+      "picture": "🚲",
+      "group": "things"
+    },
+    {
+      "id": "pen",
+      "word": "pen",
+      "picture": "🖊️",
+      "group": "things"
+    },
+    {
+      "id": "bed",
+      "word": "bed",
+      "picture": "🛏️",
+      "group": "things"
+    },
+    {
+      "id": "sun",
+      "word": "sun",
+      "picture": "🌞",
+      "group": "world"
+    },
+    {
+      "id": "moon",
+      "word": "moon",
+      "picture": "🌙",
+      "group": "world"
+    },
+    {
+      "id": "star",
+      "word": "star",
+      "picture": "⭐",
+      "group": "world"
+    },
+    {
+      "id": "tree",
+      "word": "tree",
+      "picture": "🌳",
+      "group": "world"
+    },
+    {
+      "id": "leaf",
+      "word": "leaf",
+      "picture": "🍁",
+      "group": "world"
+    },
+    {
+      "id": "rose",
+      "word": "rose",
+      "picture": "🌹",
+      "group": "world"
+    },
+    {
+      "id": "rain",
+      "word": "rain",
+      "picture": "🌧️",
+      "group": "world"
+    },
+    {
+      "id": "fire",
+      "word": "fire",
+      "picture": "🔥",
+      "group": "world"
+    },
+    {
+      "id": "hand",
+      "word": "hand",
+      "picture": "✋",
+      "group": "world"
+    },
+    {
+      "id": "eye",
+      "word": "eye",
+      "picture": "👁️",
+      "group": "world"
+    },
+    {
+      "id": "ear",
+      "word": "ear",
+      "picture": "👂",
+      "group": "world"
+    },
+    {
+      "id": "nose",
+      "word": "nose",
+      "picture": "👃",
+      "group": "world"
+    },
+    {
+      "id": "leg",
+      "word": "leg",
+      "picture": "🦵",
+      "group": "world"
+    },
+    {
+      "id": "foot",
+      "word": "foot",
+      "picture": "🦶",
+      "group": "world"
+    },
+    {
+      "id": "tooth",
+      "word": "tooth",
+      "picture": "🦷",
+      "group": "world"
+    }
+  ],
+  "colours": [
+    {
+      "id": "red",
+      "picture": "🔴"
+    },
+    {
+      "id": "blue",
+      "picture": "🔵"
+    },
+    {
+      "id": "green",
+      "picture": "🟢"
+    },
+    {
+      "id": "yellow",
+      "picture": "🟡"
+    }
+  ],
+  "numbers": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five"
+  ],
+  "count": [
+    "apple",
+    "ball",
+    "star",
+    "fish",
+    "egg"
+  ],
+  "place": {
+    "movers": [
+      "cat",
+      "ball",
+      "apple",
+      "hen"
+    ],
+    "anchor": "box",
+    "relations": [
+      {
+        "id": "on",
+        "say": "on"
+      },
+      {
+        "id": "next",
+        "say": "next to"
+      },
+      {
+        "id": "under",
+        "say": "under"
+      }
+    ]
+  }
+}
