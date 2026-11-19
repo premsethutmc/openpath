@@ -26,7 +26,7 @@ const skillName = (course: Course, id: SkillId) => course.skills.find((s) => s.i
 const levelName = (course: Course, id: Level) => course.levels.find((l) => l.id === id)!.name;
 
 /** The text, with the part to reread marked when a hint or an explanation points at it. */
-export function PassageView({ passage, highlight }: { passage: Passage; highlight?: string | null }) {
+export function PassageView({ passage, highlight }: { passage: Pick<Passage,"title"|"text">; highlight?: string | null }) {
   return (
     <section className="passage reading-passage" aria-label={`Text: ${passage.title}`}>
       <h2>{passage.title}</h2>
@@ -374,7 +374,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   if (!session)
     return (
       <>
-        <div className="page"><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" onClick={()=>setInference(true)}>Connect the clues</button></div>
+        <div className="page"><a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" onClick={()=>setInference(true)}>Connect the clues</button></div>
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
           <NoteBox learner={learner} screen="reading" label="Anything confusing or wrong on this screen? Tell us." />

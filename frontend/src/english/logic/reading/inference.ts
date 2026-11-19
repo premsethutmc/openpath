@@ -19,10 +19,7 @@ export type ClueResult={answerCorrect:boolean;evidence:'complete'|'partial'|'mix
 export function assessClues(a:ClueAttempt,course:Course=COURSE):ClueResult{
  const item=CLUE_ITEMS.find(i=>i.question===a.question),q=course.questions.find(q=>q.id===a.question);if(!item||!q)throw Error('Unknown multi-clue item.');const n=sentenceChoices(course.passages.get(item.passage)!.text).length;
  if(!Number.isInteger(a.choice)||a.choice<0||a.choice>=q.options.length||!a.sentences.length||new Set(a.sentences).size!==a.sentences.length||a.sentences.some(i=>!Number.isInteger(i)||i<0||i>=n))throw Error('Choose a valid answer and clue sentences.');
- const exact=item.sets.some(set=>set.length===a.sentences.length&&set.every(i=>a.sentences.includes(i)));
- const subset=item.sets.some(set=>a.sentences.every(i=>set.includes(i)));
- const overlap=a.sentences.some(i=>item.sets.some(set=>set.includes(i)));
- return {answerCorrect:a.choice===q.answer,evidence:exact?'complete':subset?'partial':overlap?'mixed':'unmatched'};
+ return assessAuthoredClues(a.choice===q.answer,a.sentences,item.sets);
 }
 export const CLUE_FEEDBACK:Record<ClueResult['evidence'],string>={complete:'Your selected sentences support the answer together.',partial:'You selected relevant clues, but the set is incomplete. Another link is needed.',mixed:'Your selection includes relevant clues but is not one of the supporting combinations for this question. Check for a missing link or unnecessary selections.',unmatched:'Your selected sentences do not include a clue from the supporting combinations for this question.'};
 export function clueLesson(r:ClueResult):string{
@@ -53,4 +50,12 @@ export function confirmationStillFresh(question:string,records:readonly ReadingR
  const target=course.questions.find(q=>q.id===question);if(!target)return false;
  const exposures=records.filter(r=>r.type==='shown'&&course.questions.find(q=>q.id===r.question)?.passage===target.passage);
  return exposures.length===1&&exposures[0].type==='shown'&&exposures[0].question===question;
+}
+
+/** Shared, grade-independent authored supporting-set assessment. */
+export function assessAuthoredClues(answerCorrect:boolean,sentences:readonly number[],sets:readonly (readonly number[])[]):ClueResult{
+ const exact=sets.some(set=>set.length===sentences.length&&set.every(i=>sentences.includes(i)));
+ const subset=sentences.length>0&&sets.some(set=>sentences.every(i=>set.includes(i)));
+ const overlap=sentences.some(i=>sets.some(set=>set.includes(i)));
+ return {answerCorrect,evidence:exact?'complete':subset?'partial':overlap?'mixed':'unmatched'};
 }
