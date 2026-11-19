@@ -1,6 +1,6 @@
 {
   "id": "listen-and-answer",
-  "version": 3,
+  "version": 4,
   "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
@@ -19,15 +19,15 @@
     },
     {
       "id": 4,
-      "name": "Longer stories"
+      "name": "Longer stories and conversations"
     },
     {
       "id": 5,
-      "name": "Stories and facts"
+      "name": "Stories, facts and speeches"
     },
     {
       "id": 6,
-      "name": "Long stories"
+      "name": "Long stories and poems"
     }
   ],
   "passages": [
@@ -1295,6 +1295,162 @@
             "By showing her a film about the ocean"
           ],
           "explain": "She did not forbid it; she simply asked a question, and Tara decided for herself."
+        }
+      ]
+    },
+    {
+      "id": "lf4.1",
+      "level": 4,
+      "title": "At the Ticket Window",
+      "text": "“One ticket to Madurai, please,” said Kavya at the station window. “The fast train or the slow one?” asked the clerk. “Which one is cheaper?” Kavya asked. “The slow train costs less, but it stops at every small station,” he said. “It reaches Madurai at seven in the evening.” Kavya looked at her watch and frowned. “My grandmother is waiting for me at five,” she said. “Then you need the fast train,” the clerk replied with a smile. “It leaves from platform two in ten minutes.” Kavya paid, thanked him and ran for the bridge.",
+      "questions": [
+        {
+          "id": "lf4.1.q1",
+          "skill": "detail",
+          "prompt": "Where does Kavya want to go?",
+          "right": "Madurai",
+          "wrong": [
+            "Chennai",
+            "Her school"
+          ],
+          "explain": "She asks for one ticket to Madurai."
+        },
+        {
+          "id": "lf4.1.q2",
+          "skill": "detail",
+          "prompt": "Why does Kavya first ask which train is cheaper?",
+          "right": "She wants to spend less",
+          "wrong": [
+            "She wants a window seat",
+            "She has lost her ticket"
+          ],
+          "explain": "She asks: Which one is cheaper?"
+        },
+        {
+          "id": "lf4.1.q3",
+          "skill": "cause",
+          "prompt": "Why does she choose the fast train in the end?",
+          "right": "The slow train would make her late",
+          "wrong": [
+            "The fast train is cheaper",
+            "The clerk tells her to"
+          ],
+          "explain": "The slow train reaches at seven, but her grandmother is waiting at five."
+        },
+        {
+          "id": "lf4.1.q4",
+          "skill": "inference",
+          "prompt": "Why does Kavya run at the end?",
+          "right": "Her train leaves soon",
+          "wrong": [
+            "She is afraid of the clerk",
+            "She has forgotten her bag"
+          ],
+          "explain": "The fast train leaves from platform two in ten minutes."
+        }
+      ]
+    },
+    {
+      "id": "lf5.1",
+      "level": 5,
+      "title": "A Speech to the School",
+      "text": "Good morning, teachers and friends. I am Arjun, your school captain, and I want to talk about our playground. Every afternoon, after the last bell, the ground is covered with wrappers, paper cups and bottle caps. Our cleaners spend an hour picking them up before they can go home. This is not fair to them, and it is not fair to us, because a dirty ground brings flies and ants. So I have a simple plan. From Monday, there will be a bin at each corner of the ground, and every class will take turns to check them. If each of us carries one piece of rubbish to a bin, the ground will stay clean. Thank you for listening.",
+      "questions": [
+        {
+          "id": "lf5.1.q1",
+          "skill": "main_idea",
+          "prompt": "What is the speech mainly about?",
+          "right": "Keeping the playground clean",
+          "wrong": [
+            "Winning the sports day",
+            "Choosing a new captain"
+          ],
+          "explain": "Arjun says he wants to talk about the playground and how to keep it clean."
+        },
+        {
+          "id": "lf5.1.q2",
+          "skill": "detail",
+          "prompt": "Who picks up the rubbish now?",
+          "right": "The cleaners",
+          "wrong": [
+            "The teachers",
+            "The school captain"
+          ],
+          "explain": "Our cleaners spend an hour picking them up."
+        },
+        {
+          "id": "lf5.1.q3",
+          "skill": "cause",
+          "prompt": "Why is a dirty ground bad for the pupils, says Arjun?",
+          "right": "It brings flies and ants",
+          "wrong": [
+            "It makes the ground too hot",
+            "It stops the buses coming"
+          ],
+          "explain": "A dirty ground brings flies and ants."
+        },
+        {
+          "id": "lf5.1.q4",
+          "skill": "sequence",
+          "prompt": "What will happen from Monday?",
+          "right": "Bins at each corner, checked by classes in turn",
+          "wrong": [
+            "The ground will be closed after school",
+            "Pupils will stay back an hour to sweep"
+          ],
+          "explain": "From Monday, there will be a bin at each corner, and classes take turns to check them."
+        }
+      ]
+    },
+    {
+      "id": "lf6.1",
+      "level": 6,
+      "title": "When the Rain Comes (a poem)",
+      "text": "All through May the fields lay brown, the dust rose up on every road, and the old well in our town held only mud and one tired toad. The farmers watched the empty sky, and the hot wind sang a dusty sigh. Then one June evening, dark and low, the clouds came rolling from the west. They rumbled like a drum, and so the birds flew home to find their nest. The first drops fell like tiny stones, then came the rain in silver sheets. It washed the roofs and cooled our bones and danced like children in the streets. Now frogs are singing in the well, the fields are green from end to end, and every farmer here can tell the sky has come back as a friend.",
+      "questions": [
+        {
+          "id": "lf6.1.q1",
+          "skill": "detail",
+          "prompt": "What was the well like before the rain?",
+          "right": "It held only mud",
+          "wrong": [
+            "It was full of fish",
+            "It had been covered over"
+          ],
+          "explain": "The old well held only mud and one tired toad."
+        },
+        {
+          "id": "lf6.1.q2",
+          "skill": "sequence",
+          "prompt": "What came just before the first drops fell?",
+          "right": "Dark clouds rumbling from the west",
+          "wrong": [
+            "Frogs singing in the well",
+            "Green fields from end to end"
+          ],
+          "explain": "The clouds came rolling from the west and rumbled like a drum; then the first drops fell."
+        },
+        {
+          "id": "lf6.1.q3",
+          "skill": "inference",
+          "prompt": "The rain is said to dance like children. What does this show?",
+          "right": "The rain feels joyful and lively",
+          "wrong": [
+            "The rain is very quiet",
+            "The children are afraid of the rain"
+          ],
+          "explain": "Comparing the rain to dancing children makes it sound happy and full of life."
+        },
+        {
+          "id": "lf6.1.q4",
+          "skill": "main_idea",
+          "prompt": "How does the mood change from the start of the poem to the end?",
+          "right": "From tired and dry to happy and fresh",
+          "wrong": [
+            "From calm to angry and loud",
+            "From busy and bright to bored"
+          ],
+          "explain": "It begins with brown fields and dust, and ends with green fields, singing frogs and the sky as a friend."
         }
       ]
     }

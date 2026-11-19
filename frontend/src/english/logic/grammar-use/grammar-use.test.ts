@@ -162,13 +162,13 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 
 test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
   assert.deepEqual(SYLLABUSES.map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
-  assert.deepEqual(coverage(syllabusFor(1)), { covered: 16, partly: 6, guided: 16, not: 0, total: 38 });
-  assert.deepEqual(coverage(syllabusFor(2)), { covered: 10, partly: 3, guided: 12, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(1)), { covered: 17, partly: 5, guided: 16, not: 0, total: 38 });
+  assert.deepEqual(coverage(syllabusFor(2)), { covered: 11, partly: 2, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(8)), { covered: 7, partly: 3, guided: 27, not: 0, total: 37 });
   assert.deepEqual(coverage(syllabusFor(3)), { covered: 12, partly: 1, guided: 11, not: 0, total: 24 });
-  assert.deepEqual(coverage(syllabusFor(7)), { covered: 11, partly: 2, guided: 12, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(7)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(4)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 20, partly: 4, guided: 22, not: 0, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 22, partly: 2, guided: 22, not: 0, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);
@@ -224,4 +224,15 @@ test("GU-11 choosing an answer: one right answer among two or three, in an order
   // a level sitting keeps room for three sentences to fix and three to build
   const level = pick(GRAMMAR, 6, []);
   assert.ok(level.filter((it) => it.kind === "choose" || it.kind === "spot").length <= 2);
+});
+
+test("GU-14 the five lines closed on 19 Nov 2026 have their sentences and passages", () => {
+  const at = (topic: string) => GRAMMAR.items.filter((i) => i.topic === topic);
+  // Class 1 RW9 and Class 2 RW3: pictures in story order, and how people felt
+  assert.equal(at("picture_order").filter((i) => i.kind === "build" && i.parts?.every((p) => /^\p{Extended_Pictographic}/u.test(p))).length, 5);
+  assert.equal(at("picture_order").filter((i) => i.kind === "choose").length, 3);
+  // Class 6 GV11: each, every, everyone, someone, nobody
+  assert.ok(at("pronoun_agreement").filter((i) => /\b(Each|Every|Everyone|Someone|Nobody)\b/.test(i.sentence)).length >= 6);
+  // Class 6 GV12: a tense held across a paragraph of three sentences
+  assert.ok(at("tense_shift").filter((i) => i.sentence.split(/(?<=\.) /).length >= 3).length >= 6);
 });

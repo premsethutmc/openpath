@@ -23,9 +23,8 @@
         {
           "id": "LS1",
           "text": "Listens to stories, poems, speeches and dialogues and understands them.",
-          "coverage": "partly",
-          "where": "listen",
-          "note": "Listen and answer has stories and factual passages; speeches, poems and dialogues are not there yet."
+          "coverage": "covered",
+          "where": "listen"
         },
         {
           "id": "LS2",

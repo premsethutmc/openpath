@@ -220,7 +220,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 4 English" }).waitFor();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
-  await page.getByText("20 in the app · 4 partly · 22 with a grown-up · 0 not yet (of 46)").waitFor();
+  await page.getByText("22 in the app · 2 partly · 22 with a grown-up · 0 not yet (of 46)").waitFor();
   await page.getByRole("button", { name: "Class 3", exact: true }).click();
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
   await page.getByText("12 in the app · 1 partly · 11 with a grown-up · 0 not yet (of 24)").waitFor();
@@ -234,18 +234,36 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
   await page.getByRole("button", { name: "Class 7", exact: true }).click();
   await page.getByRole("heading", { name: "Class 7 English" }).waitFor();
-  await page.getByText("11 in the app · 2 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("12 in the app · 1 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 2", exact: true }).click();
   await page.getByRole("heading", { name: "Class 2 English" }).waitFor();
-  await page.getByText("10 in the app · 3 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("11 in the app · 2 partly · 12 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 1", exact: true }).click();
   await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
-  await page.getByText("16 in the app · 6 partly · 16 with a grown-up · 0 not yet (of 38)").waitFor();
+  await page.getByText("17 in the app · 5 partly · 16 with a grown-up · 0 not yet (of 38)").waitFor();
   // a Class 1 line opens First words, where nothing has to be read
   await page.getByRole("button", { name: /Practise RW1:/ }).click();
   await page.locator('main.first[data-phase="ask"][data-kind="hear"]').waitFor();
   await page.getByRole("button", { name: "← Stop" }).click();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
+  // pictures in the order of a story, and how someone felt
+  await page.getByRole("button", { name: /Practise RW9:/ }).click();
+  await page.getByText("Topics: Pictures in story order, and how people feel").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  const pics = new Set();
+  for (let i = 0; i < 8 && pics.size < 2; i++) {
+    const next = ITEMS.get(await page.locator("main[data-item]").getAttribute("data-item"));
+    if (next.kind === "build") await page.getByText("Put the pictures in the order of the story.", { exact: false }).waitFor();
+    if (!pics.has(next.kind)) await shot(page, `5-pictures-${next.kind}`);
+    const it = await answer(page, false);
+    assert.equal(it.topic, "picture_order");
+    pics.add(it.kind);
+    await fits();
+    if (pics.size < 2) await page.getByRole("button", { name: /Next sentence|Finish/ }).click();
+  }
+  assert.deepEqual([...pics].sort(), ["build", "choose"]);
+  await page.getByRole("button", { name: "← Stop" }).click();
   await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
   await page.getByRole("button", { name: "Class 8", exact: true }).click();
   await page.getByRole("heading", { name: "Class 8 English" }).waitFor();

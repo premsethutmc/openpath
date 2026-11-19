@@ -12,10 +12,10 @@ import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
 import { syllabusFor } from "../syllabus/syllabus.ts";
 
-test("LA-1 content: four passages at each of six levels, four questions each, the right choice in no favoured place", () => {
+test("LA-1 content: four or five passages at each of six levels, four questions each, the right choice in no favoured place", () => {
   assert.deepEqual(listeningProblems(LISTENING), []);
   const place = [0, 0, 0];
-  for (const l of LISTENING.levels) assert.equal(LISTENING.passages.filter((p) => p.level === l.id).length, 4);
+  for (const l of LISTENING.levels) assert.ok([4, 5].includes(LISTENING.passages.filter((p) => p.level === l.id).length), `level ${l.id}`);
   for (const p of LISTENING.passages) {
     assert.equal(p.questions.length, QUESTIONS);
     assert.equal(sentences(p.text).join(" "), p.text, "read aloud sentence by sentence, nothing lost");
@@ -27,7 +27,9 @@ test("LA-1 content: four passages at each of six levels, four questions each, th
     }
   }
   assert.equal(LISTENING.levels.length, 6);
-  assert.deepEqual(place, [32, 32, 32]);
+  assert.deepEqual(place, [36, 36, 36]);
+  // ICSE Class 7 LS1: a conversation, a speech and a poem, besides stories and factual passages
+  for (const t of ["At the Ticket Window", "A Speech to the School", "When the Rain Comes (a poem)"]) assert.ok(LISTENING.passages.some((p) => p.title === t), t);
   // a passage that states facts about the world names what it was checked against
   const factual = (LISTENING.passages as unknown as { title: string; checked?: { against: string[] } }[]).filter((p) => ["How Honeybees Share News", "The Stepwell", "Salt from the Sea"].includes(p.title));
   assert.equal(factual.length, 3);
