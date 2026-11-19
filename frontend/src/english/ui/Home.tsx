@@ -322,17 +322,17 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
 
 /** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
 function SyllabusCard({ onOpen }: { onOpen: () => void }) {
-  const doc = SYLLABUSES[0];
-  const c = syllabusCoverage(doc);
+  const classes = SYLLABUSES.map((d) => d.class);
+  const lines = SYLLABUSES.reduce((n, d) => n + syllabusCoverage(d).total, 0);
   return (
     <section className="hub-card plain" aria-labelledby="syllabus-card-title">
       <h2 id="syllabus-card-title">
         <span aria-hidden="true">🏫 </span>
-        {doc.board} Class {doc.class} English
+        {SYLLABUSES[0].board} English by class
       </h2>
-      <p>What the board lists for this class, and where to practise each part here.</p>
+      <p>What the board lists for each class, and where to practise each part here.</p>
       <p className="small">
-        {c.covered} of {c.total} lines can be practised in the app, {c.partly} partly
+        Classes {classes.slice(0, -1).join(", ")} and {classes.at(-1)}: {lines} lines
       </p>
       <button type="button" className="secondary" onClick={onOpen}>
         Open the class syllabus

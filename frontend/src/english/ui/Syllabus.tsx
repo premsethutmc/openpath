@@ -9,7 +9,9 @@ import { coverage, type Coverage, type Outcome, type Syllabus as Doc, type Where
 const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", not: "Not yet" };
 const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", spelling: "Spelling Bee", grammar: "Grammar in use" };
 
-export function SyllabusView({ doc, onOpen, onBack }: { doc: Doc; onOpen: (where: Where, topics?: string[]) => void; onBack: () => void }) {
+export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; initial: number; onOpen: (where: Where, topics: string[] | undefined, cls: number) => void; onBack: () => void }) {
+  const [cls, setCls] = useState(initial);
+  const doc = docs.find((d) => d.class === cls) ?? docs[0];
   const [source, setSource] = useState(false);
   const c = coverage(doc);
   const topicNames = (o: Outcome) => (o.topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t).join(", ");
@@ -19,6 +21,15 @@ export function SyllabusView({ doc, onOpen, onBack }: { doc: Doc; onOpen: (where
         ← Back
       </button>
       <p className="eyebrow">School work · {doc.board}</p>
+      {docs.length > 1 && (
+        <div className="syllabus-classes" role="group" aria-label="Class">
+          {docs.map((d) => (
+            <button key={d.class} type="button" className={d.class === doc.class ? "chip on" : "chip"} aria-pressed={d.class === doc.class} onClick={() => setCls(d.class)}>
+              Class {d.class}
+            </button>
+          ))}
+        </div>
+      )}
       <h1 id="syllabus-title" className="hero">
         Class {doc.class} English
       </h1>
@@ -37,7 +48,7 @@ export function SyllabusView({ doc, onOpen, onBack }: { doc: Doc; onOpen: (where
                 </p>
                 {(o.note || o.topics) && <p className="small">{[o.topics ? `Practised as: ${topicNames(o)}.` : "", o.note ?? ""].filter(Boolean).join(" ")}</p>}
                 {o.where && (
-                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics)}>
+                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics, doc.class)}>
                     Practise: {GO[o.where]}
                   </button>
                 )}

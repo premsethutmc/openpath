@@ -1,0 +1,215 @@
+{
+ "id": "icse-cisce-english-class-4",
+ "version": "1.0.0",
+ "board": "CISCE (ICSE)",
+ "class": 4,
+ "subject": "English",
+ "title": "CISCE curriculum: English, Class IV",
+ "source": {
+  "read": "A third-party copy of the Class IV pages of the CISCE curriculum (English: printed pages 19 to 23), hosted by BYJU'S",
+  "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/ICSE-Class-4-Syllabus.pdf",
+  "accessed": "2026-11-19",
+  "official": false,
+  "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+ },
+ "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+ "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+ "strands": [
+  {
+   "id": "listening-speaking",
+   "name": "Listening and Speaking",
+   "pages": "19-20",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Takes part in discussions with the teacher and classmates on many topics.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS2",
+     "text": "Answers particular questions, and comments and adds to a topic.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS3",
+     "text": "Reports on a topic or text in order, with facts and describing details.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS4",
+     "text": "Tells a story or an experience in order, clearly and at a steady pace.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS5",
+     "text": "Enjoys listening to poems, songs, riddles and tongue twisters.",
+     "coverage": "not",
+     "note": "The app has no poems or songs to listen to."
+    },
+    {
+     "id": "LS6",
+     "text": "Picks out key situations, shares ideas and gives opinions.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS7",
+     "text": "Takes dictation of a passage already seen.",
+     "coverage": "partly",
+     "where": "listening",
+     "note": "Listen and write dictates sentences one at a time, and they are unseen, not from a passage read before."
+    }
+   ]
+  },
+  {
+   "id": "reading-writing",
+   "name": "Reading and Writing",
+   "pages": "21-22",
+   "outcomes": [
+    {
+     "id": "RW1",
+     "text": "Reads with understanding, finding details, the order of events and the main idea.",
+     "coverage": "covered",
+     "where": "reading",
+     "note": "Reading course: details, order of events and the main idea."
+    },
+    {
+     "id": "RW2",
+     "text": "Connects what is read to personal experience.",
+     "coverage": "not",
+     "note": "The app does not ask for a personal response."
+    },
+    {
+     "id": "RW3",
+     "text": "Reads beyond the set text and enjoys reading.",
+     "coverage": "not",
+     "note": "The app has short practice texts only; a longer book can be added through My Books."
+    },
+    {
+     "id": "RW4",
+     "text": "Works out unfamiliar words from the words around them.",
+     "coverage": "partly",
+     "where": "words",
+     "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
+    },
+    {
+     "id": "RW5",
+     "text": "Looks words up in a dictionary or thesaurus, on paper or on a computer.",
+     "coverage": "not",
+     "note": "Outside the app."
+    },
+    {
+     "id": "RW6",
+     "text": "Writes at least two paragraphs, about 150 words, on a topic.",
+     "coverage": "not",
+     "note": "Writing of this kind is being built separately."
+    },
+    {
+     "id": "RW7",
+     "text": "Writes a narrative with events, actions, thoughts and feelings.",
+     "coverage": "not",
+     "note": "Writing of this kind is being built separately."
+    },
+    {
+     "id": "RW8",
+     "text": "Arranges sentences in a sensible order.",
+     "coverage": "partly",
+     "where": "reading",
+     "note": "Reading covers the order of events; arranging whole sentences into a paragraph is not practised."
+    },
+    {
+     "id": "RW9",
+     "text": "Uses linking words such as firstly, then, later and finally.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "linkers"
+     ]
+    },
+    {
+     "id": "RW10",
+     "text": "Writes about personal experiences or real situations.",
+     "coverage": "not",
+     "note": "Writing of this kind is being built separately."
+    },
+    {
+     "id": "RW11",
+     "text": "Uses words and phrases suited to the class, including ones for feelings and actions.",
+     "coverage": "partly",
+     "where": "words",
+     "note": "New words teaches level-appropriate words; it is not organised by feelings and actions."
+    },
+    {
+     "id": "RW12",
+     "text": "Writes a letter to a parent, friend or relative.",
+     "coverage": "not",
+     "note": "Writing of this kind is being built separately."
+    }
+   ]
+  },
+  {
+   "id": "grammar-vocabulary",
+   "name": "Grammar and Vocabulary in Context",
+   "pages": "23",
+   "outcomes": [
+    {
+     "id": "GV1",
+     "text": "Recognises and explains common idioms, sayings and proverbs.",
+     "coverage": "partly",
+     "where": "grammar",
+     "topics": [
+      "proverbs"
+     ],
+     "note": "A small set of proverbs is practised, each with its meaning; idioms are not yet."
+    },
+    {
+     "id": "GV2",
+     "text": "Makes subjects and verbs agree.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "agreement"
+     ]
+    },
+    {
+     "id": "GV3",
+     "text": "Uses capital letters correctly in titles.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "titles"
+     ]
+    },
+    {
+     "id": "GV4",
+     "text": "Punctuates spoken words in dialogue.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "dialogue"
+     ]
+    },
+    {
+     "id": "GV5",
+     "text": "Uses the apostrophe for one owner, and tells plurals from possessives.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "possessives"
+     ]
+    },
+    {
+     "id": "GV6",
+     "text": "Spells words suited to the class, checking a reference when needed.",
+     "coverage": "covered",
+     "where": "spelling",
+     "note": "The Spelling Bee, and words misspelt in writing that return as My tricky words."
+    }
+   ]
+  }
+ ]
+}

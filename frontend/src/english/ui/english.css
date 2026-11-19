@@ -2558,3 +2558,22 @@ h3.sub {
 .syllabus-source p {
   margin: 6px 0;
 }
+
+.syllabus-classes {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 4px;
+}
+.syllabus-classes .chip {
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card, #fff);
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+}
+.syllabus-classes .chip.on {
+  border: 2px solid var(--violet, #6957de);
+}

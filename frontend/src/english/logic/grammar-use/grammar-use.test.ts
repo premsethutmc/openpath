@@ -11,7 +11,7 @@ import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
-import { SYLLABUSES, coverage, syllabusProblems } from "../syllabus/syllabus.ts";
+import { SYLLABUSES, coverage, syllabusFor, syllabusProblems } from "../syllabus/syllabus.ts";
 
 const byId = new Map(GRAMMAR.items.map((i) => [i.id, i]));
 const item = (sentence: string) => GRAMMAR.items.find((i) => i.sentence === sentence)!;
@@ -120,7 +120,7 @@ test("GU-6 a topic sitting asks only those topics and does not move the level", 
 });
 
 test("GU-7 the ICSE Class 5 syllabus: every line placed, every pointer leads to real practice, nothing copied in bulk", () => {
-  const s = SYLLABUSES[0];
+  const s = syllabusFor(5);
   assert.deepEqual(syllabusProblems(s), []);
   assert.deepEqual([s.board, s.class, s.source.official], ["CISCE (ICSE)", 5, false]);
   assert.match(s.source.note, /^UNOFFICIAL SOURCE/);
@@ -150,4 +150,20 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
   const again = await Learner.open(c, repo, "p-gram", clock);
   assert.equal(levelFor(GRAMMAR, again.grammarRecords(), 2), 3);
   assert.match(String(eventProblem({ kind: "grammar_use", id: "x", at: clock(), record: {} })), /without its type/);
+});
+
+test("GU-9 Classes 4, 5 and 6 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
+  assert.deepEqual(SYLLABUSES.map((x) => x.class), [4, 5, 6]);
+  assert.deepEqual(coverage(syllabusFor(4)), { covered: 7, partly: 5, not: 13, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 10, partly: 10, not: 26, total: 46 });
+  for (const s of SYLLABUSES) {
+    assert.deepEqual(syllabusProblems(s), []);
+    assert.equal(s.source.official, false);
+    assert.match(s.source.note, /^UNOFFICIAL SOURCE/);
+    for (const o of s.strands.flatMap((x) => x.outcomes)) {
+      assert.ok(o.text.split(/\s+/).length <= 22, `${s.class} ${o.id}`);
+      if (o.topics) assert.ok(pick(GRAMMAR, 2, [], o.topics).length >= 3, `${s.class} ${o.id}: a topic sitting has sentences`);
+    }
+  }
+  assert.equal(syllabusFor(99).class, 4, "an unknown class falls back to the first held");
 });
