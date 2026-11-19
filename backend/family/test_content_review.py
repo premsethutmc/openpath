@@ -46,8 +46,8 @@ class ContentReviewTests(ReviewBase):
         here = items()
         self.assertGreater(len(here), 60)
         for item, meta in here.items():
-            if item.startswith(('curriculum:', 'recipe:', 'card:')):
-                continue  # a release's hash is its own (checked by the release tests), a lesson's or card's is generated (teaching.v1.json): not in the repository registry
+            if item.startswith(('curriculum:', 'recipe:', 'card:', 'help:')):
+                continue  # a release's hash is its own (checked by the release tests), a lesson's, card's or step help's is generated (teaching.v1.json): not in the repository registry
             self.assertEqual(meta['hash'], repo.get(item), item)
 
     def test_roles_workflow_and_history(self):
