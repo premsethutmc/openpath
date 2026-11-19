@@ -556,6 +556,7 @@ jobs:
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4190/ -o /tmp/essay-index.html
           curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4191/ -o /tmp/essay-pilot-index.html
       - run: npm run essay:e2e
+      - run: E2E_URL=http://127.0.0.1:4190 node --test e2e/reading-evidence.test.mjs
       - name: Writing observation check and saved-draft retry (mocked API only)
         run: ESSAY_E2E_URL=http://127.0.0.1:4190 node --test e2e/writing-observation-check.test.mjs
       - run: node --test e2e/exam-diagnostic.test.mjs e2e/exam-journey.test.mjs e2e/english-workspace.test.mjs e2e/argument-concept-plan.test.mjs e2e/argument-writing-transfer.test.mjs
