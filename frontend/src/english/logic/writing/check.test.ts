@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { checkWriting, sentencesOf, type Note } from "./check.ts";
+import { checkWriting, sentencesOf, type Note, type Target } from "./check.ts";
 import { GUIDED } from "../guided/guided.ts";
 
 const T = { min: 30, max: 80 };
-const ids = (text: string, target = T) => checkWriting(text, target).notes.map((n) => n.id);
-const note = (text: string, id: string, target = T): Note | undefined => checkWriting(text, target).notes.find((n) => n.id === id);
+const ids = (text: string, target: Target = T) => checkWriting(text, target).notes.map((n) => n.id);
+const note = (text: string, id: string, target: Target = T): Note | undefined => checkWriting(text, target).notes.find((n) => n.id === id);
 const GOOD = "My school is near the river. It has a large playground, and we play there after lunch. I like the library most because it is quiet. When the bell rings, we walk home together. Our teachers are kind, but they expect hard work.";
 
 test("WC-1 a clean piece gets praise and nothing to fix; the same text always gives the same notes", () => {
