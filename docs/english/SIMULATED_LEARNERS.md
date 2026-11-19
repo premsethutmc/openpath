@@ -28,13 +28,23 @@ learner to First words.
 | A learner with no English could pass a reading text in Find my level by luck (three choices, three of four needed), and was then not sent to First words | The beginner rule also counts the word check, which has "I don't know" and marks guessing down | Sent to First words: beginner 30%, guesser 85% | 65%, 95% |
 | Top levels ran out: an item answered right came back within days | Grammar and Listen and write take new and missed items from the level below before repeating one answered right; Listen and answer takes an unheard passage from the level below | Repeats within 7 days, all learners: grammar 48, dictation 45, passages 47 | 36, 32, 25 |
 
+## Content added after the first run (19 Nov 2026)
+
+| Added | Repeats within 7 days, all learners (before, after) | Other effect |
+|---|---|---|
+| New words: 20 more at each of the eight levels (90 a level, 720 in all) | none either way | An average learner's Words level after a month: 6.9 to 5.9 |
+| Grammar level 7: 24 more sentences (48) | 36 to 2 | |
+| Listen and write level 7: 16 more sentences (40) | 32 to 14 | |
+| Listen and answer: a fifth passage at levels 1 to 3 (five a level) | 25 to 21 | |
+
+New words were written for OpenPath, rule-checked and screened; every gap question whose choices changed (410) was
+read, and 49 look-alike choices that could also fit a gap were kept out.
+
 ## Found, not fixed
 
-- **Words climbs about one level every two weeks whatever the learner knows.** Each level has 70 words and five
-  are taught a day, so a level's new words run out in two weeks and teaching moves up. Missed words do come back for
-  review. The fix is more words per level (content, not logic).
-- **Top levels are still thin for a learner who does every stream every day.** Grammar level 7 has 24 sentences,
-  Listen and write level 7 has 24, and Listen and answer has four or five passages a level.
+- **Words still climbs by running out**, now about one level every eighteen days (90 words a level, five a day).
+  Missed words come back for review.
+- **Listen and answer still repeats** for a learner who hears a passage every day: five passages a level.
 - **Levels go up and down often** (grammar about ten times a month for a learner between two levels). This is how a
   staircase finds the edge of what a learner can do, so it is left as it is; the screen shows the level of the day.
 - **Find my level places grammar about one level high** for the learner who cannot name a noun (half the runs within

@@ -44,9 +44,9 @@ function sit(history: Dated[], at: string, opts: { base?: number; miss?: string[
   return { met, asked, done: s.snapshot().done!, history: [...history, ...dated(s.take(), at)], level: s.level };
 }
 
-test("NW-1 content: seventy words at each of eight levels, rule-checked, none from the word check", () => {
+test("NW-1 content: ninety words at each of eight levels, rule-checked, none from the word check", () => {
   assert.deepEqual(wordsProblems(WORDS, new Set(CHECK.words.map((w) => w.word))), []);
-  for (let b = 1; b <= BANDS; b++) assert.equal(WORDS.words.filter((w) => w.band === b).length, 70);
+  for (let b = 1; b <= BANDS; b++) assert.equal(WORDS.words.filter((w) => w.band === b).length, 90);
   const bad = buildWords({ version: 1, status: "", words: [[1, "v", "jump", "a jump up", "We saw a jump and a jump."]] });
   assert.match(wordsProblems(bad).join("\n"), /exactly once[\s\S]*gives the word away[\s\S]*uses the word itself[\s\S]*starts with "to"[\s\S]*too few words/);
 });
