@@ -62,6 +62,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           New words: {s.newWords.learnt} learnt, {s.newWords.learning} still learning{s.newWords.tricky.length ? `. Finding hard: ${s.newWords.tricky.join(", ")}` : ""}
         </p>
       )}
+      {s.listening && (
+        <p className="small" data-line="listening">
+          Listen and answer: {s.listening.right} of {s.listening.asked} questions right over {s.listening.passages} {s.listening.passages === 1 ? "passage" : "passages"}{s.listening.weak.length ? `. Harder for now: ${s.listening.weak.join(", ")}` : ""}
+        </p>
+      )}
       {s.grammar && (
         <p className="small" data-line="grammar">
           Grammar in use: {s.grammar.right} of {s.grammar.answered} sentences right{s.grammar.weak.length ? `. To look at again: ${s.grammar.weak.join(", ")}` : ""}

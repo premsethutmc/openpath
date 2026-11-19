@@ -179,3 +179,48 @@ test("Listen and write: five sentences, two fixed on the second try, the misspel
   assert.deepEqual(foreign, []);
   await context.close();
 });
+
+test("Listen and answer: a passage that stays off the screen, four questions, then the words and the reasons", async () => {
+  const PASSAGES = new Map(read("listening/passages.json").passages.map((p) => [p.id, p]));
+  const { context, page, errors, foreign, fits } = await start("Ears");
+  await page.getByRole("button", { name: "Try Listen and answer" }).click();
+  await page.getByRole("heading", { name: "Hear a passage, then answer" }).waitFor();
+  await page.getByText("Level 2: Longer stories").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  const main = page.locator('main[data-phase="listen"]');
+  await main.waitFor();
+  const p = PASSAGES.get(await main.getAttribute("data-passage"));
+  assert.equal(p?.level, 2);
+  const opening = p.text.slice(0, 40);
+  assert.equal(await page.getByText(opening, { exact: false }).count(), 0, "the passage is not on screen");
+  await fits();
+  await shot(page, "9-listen");
+  await page.getByRole("button", { name: "I am ready for the questions" }).click();
+  for (let i = 0; i < 4; i++) {
+    await page.locator(`main[data-phase="ask"][data-question="${i}"]`).waitFor();
+    const q = p.questions[i];
+    await page.getByText(q.prompt, { exact: true }).waitFor();
+    assert.equal(await page.locator(".options .option").count(), 3);
+    assert.equal(await page.getByText(opening, { exact: false }).count(), 0, "still not on screen");
+    await page.getByRole("button", { name: /Hear (it again|the passage)|Reading aloud/ }).waitFor();
+    if (i === 0) await fits(), await shot(page, "10-question");
+    await page.locator(".options .option").getByText(i === 0 ? q.wrong[0] : q.right, { exact: true }).click();
+  }
+  await page.getByRole("heading", { name: "3 of 4 right" }).waitFor();
+  await page.getByText(opening, { exact: false }).waitFor();
+  await page.getByText(`You chose: ${p.questions[0].wrong[0]}`).waitFor();
+  await page.getByText(p.questions[0].explain, { exact: false }).first().waitFor();
+  await fits();
+  await shot(page, "11-listen-done");
+  await page.getByRole("button", { name: "Done", exact: true }).click();
+  await page.getByText("3 of 4 questions right, over 1 passage").waitFor();
+  await page.reload();
+  await page.getByText("3 of 4 questions right, over 1 passage").waitFor();
+  // the class syllabus points its listening lines here
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("button", { name: /Practise LS3: Listen and answer/ }).click();
+  await page.getByRole("heading", { name: "Hear a passage, then answer" }).waitFor();
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});

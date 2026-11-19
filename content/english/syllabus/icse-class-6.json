@@ -1,6 +1,6 @@
 {
  "id": "icse-cisce-english-class-6",
- "version": "1.0.0",
+ "version": "1.1.0",
  "board": "CISCE (ICSE)",
  "class": 6,
  "subject": "English",
@@ -23,15 +23,16 @@
     {
      "id": "LS1",
      "text": "Answers questions on a passage heard or read.",
-     "coverage": "partly",
-     "where": "reading",
-     "note": "Reading has written passages with questions; there are no passages to listen to."
+     "coverage": "covered",
+     "where": "listen",
+     "note": "Listen and answer for passages heard; the Reading course for passages read."
     },
     {
      "id": "LS2",
      "text": "Follows the issues in spoken texts and asks for things to be made clear.",
-     "coverage": "not",
-     "note": "No spoken texts in the app."
+     "coverage": "partly",
+     "where": "listen",
+     "note": "Listen and answer checks that a spoken passage is followed; asking for things to be made clear is not practised."
     },
     {
      "id": "LS3",

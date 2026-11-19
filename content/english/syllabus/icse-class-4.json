@@ -1,6 +1,6 @@
 {
  "id": "icse-cisce-english-class-4",
- "version": "1.0.0",
+ "version": "1.1.0",
  "board": "CISCE (ICSE)",
  "class": 4,
  "subject": "English",
@@ -53,8 +53,9 @@
     {
      "id": "LS6",
      "text": "Picks out key situations, shares ideas and gives opinions.",
-     "coverage": "not",
-     "note": "Speaking is not practised in the app."
+     "coverage": "partly",
+     "where": "listen",
+     "note": "Listen and answer asks for the key points of a passage heard; sharing ideas and opinions aloud is not practised."
     },
     {
      "id": "LS7",

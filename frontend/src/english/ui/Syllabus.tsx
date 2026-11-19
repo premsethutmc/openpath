@@ -7,7 +7,7 @@ import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
 import { coverage, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
 
 const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", not: "Not yet" };
-const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", spelling: "Spelling Bee", grammar: "Grammar in use" };
+const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use" };
 
 export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; initial: number; onOpen: (where: Where, topics: string[] | undefined, cls: number) => void; onBack: () => void }) {
   const [cls, setCls] = useState(initial);

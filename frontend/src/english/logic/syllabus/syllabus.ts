@@ -9,7 +9,7 @@ import icse6 from "../../../../../content/english/syllabus/icse-class-6.json";
 import { GRAMMAR } from "../grammar-use/grammar-use.ts";
 
 export type Coverage = "covered" | "partly" | "not";
-export type Where = "words" | "reading" | "listening" | "spelling" | "grammar";
+export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar";
 export interface Outcome {
   id: string;
   text: string;

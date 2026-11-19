@@ -2577,3 +2577,25 @@ h3.sub {
 .syllabus-classes .chip.on {
   border: 2px solid var(--violet, #6957de);
 }
+
+/* ------------------------------------------------------------ Listen and answer (ui/ListenAnswer.tsx) */
+.listen-answer .dict-play {
+  margin-top: 16px;
+}
+.listen-review {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  display: grid;
+  gap: 10px;
+}
+.listen-review li {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+.listen-review p {
+  margin: 0 0 4px;
+}
+.listen-text {
+  margin: 12px 0;
+}
