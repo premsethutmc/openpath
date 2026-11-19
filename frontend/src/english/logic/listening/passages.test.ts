@@ -27,6 +27,10 @@ test("LA-1 content: four passages at each of three levels, four questions each, 
     }
   }
   assert.deepEqual(place, [16, 16, 16]);
+  // a passage that states facts about the world names what it was checked against
+  const factual = (LISTENING.passages as unknown as { title: string; checked?: { against: string[] } }[]).filter((p) => ["How Honeybees Share News", "The Stepwell", "Salt from the Sea"].includes(p.title));
+  assert.equal(factual.length, 3);
+  for (const p of factual) assert.ok(p.checked && p.checked.against.length >= 1 && p.checked.against.every((x) => /https:\/\//.test(x)), p.title);
   const words = (lv: number) => LISTENING.passages.filter((p) => p.level === lv).reduce((n, p) => n + p.text.split(/\s+/).length, 0);
   assert.ok(words(1) < words(2) && words(2) < words(3), "passages get longer by level");
   const bad = { ...LISTENING, passages: [{ ...LISTENING.passages[0], level: 9, text: "Too short 1.", questions: [] }] };

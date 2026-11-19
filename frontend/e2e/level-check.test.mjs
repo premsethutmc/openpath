@@ -151,7 +151,15 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-stream="listening"]', { hasText: "Level 3 of 3" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
   await page.locator('[data-stream="grammar"]', { hasText: "Level 2 of 3" }).waitFor();
-  await page.getByRole("heading", { name: "School work" }).waitFor();
+  // with a level found, the home screen leads with the streams and folds the rest away
+  assert.equal(await page.getByRole("button", { name: "Learn new words" }).count(), 0);
+  assert.equal(await page.getByRole("heading", { name: "Today's plan" }).count(), 0);
+  await page.getByRole("button", { name: /^School work/ }).click();
+  await page.getByRole("button", { name: "Open the class syllabus" }).waitFor();
+  await page.getByRole("button", { name: /^All activities/ }).click();
+  await page.getByRole("button", { name: "Learn new words" }).waitFor();
+  await page.getByRole("button", { name: /^General English/ }).click();
+  await page.getByRole("heading", { name: "Today's plan" }).waitFor();
   await fits();
   await shot(page, "5-home-after");
   await page.reload();
