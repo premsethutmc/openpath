@@ -44,9 +44,9 @@ function sit(history: Dated[], at: string, opts: { base?: number; miss?: string[
   return { met, asked, done: s.snapshot().done!, history: [...history, ...dated(s.take(), at)], level: s.level };
 }
 
-test("NW-1 content: twenty words at each of eight levels, rule-checked, none from the word check", () => {
+test("NW-1 content: fifty words at each of eight levels, rule-checked, none from the word check", () => {
   assert.deepEqual(wordsProblems(WORDS, new Set(CHECK.words.map((w) => w.word))), []);
-  for (let b = 1; b <= BANDS; b++) assert.equal(WORDS.words.filter((w) => w.band === b).length, 20);
+  for (let b = 1; b <= BANDS; b++) assert.equal(WORDS.words.filter((w) => w.band === b).length, 50);
   const bad = buildWords({ version: 1, status: "", words: [[1, "v", "jump", "a jump up", "We saw a jump and a jump."]] });
   assert.match(wordsProblems(bad).join("\n"), /exactly once[\s\S]*gives the word away[\s\S]*uses the word itself[\s\S]*starts with "to"[\s\S]*too few words/);
 });
@@ -65,7 +65,7 @@ test("NW-2 every question has three different choices, one right, and a gap that
         for (const o of q.options) assert.equal(byWord.get(o)!.pos, w.pos, "choices are the same kind of word");
       }
     }
-  for (const k of position) assert.ok(k >= 80, `right answers by position: ${position}`);
+  for (const k of position) assert.ok(k >= 200, `right answers by position: ${position}`);
 });
 
 test("NW-3 a first sitting: five new words, each met, then asked for its meaning and in a gap", () => {

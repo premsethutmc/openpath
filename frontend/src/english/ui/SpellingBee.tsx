@@ -443,6 +443,13 @@ function Feedback({ result, last, onNext, voice, canSpeak, again }: { result: Re
         {result.correct ? "You spelt " : "The spelling is "}
         <strong className="written">{result.word.word}</strong>.
       </p>
+      {result.word.meaning && (
+        <p className="bee-meaning">
+          <span className="small">It means: </span>
+          {result.word.meaning}
+          {result.word.sentence && <span className="small bee-meaning-sentence"> “{result.word.sentence}”</span>}
+        </p>
+      )}
       {result.correct && result.helped && <p className="small">You had some help this time, so it comes back next session for you to spell on your own.</p>}
       {!result.correct && (
         <>

@@ -100,3 +100,20 @@ test("SH-4 a test: no help can be recorded, and a plain list behaves as before",
   assert.equal(l.wordLists().find((x) => x.id === testList)!.mode, "test");
   assert.deepEqual(l.listResults("no-such-list"), []);
 });
+
+import { loadContent as loadForMeanings } from "./content.ts";
+import { bankWords as beeBank } from "./spelling.ts";
+import beeMeanings from "../../../../content/english/spelling/bee-meanings.json";
+
+test("SM-1 every Spelling Bee word has a short meaning that does not give its spelling away; a pilot build shows none", () => {
+  const words = beeBank(loadForMeanings({ mode: "development" }));
+  assert.equal(words.length, 100);
+  for (const w of words) {
+    assert.ok(w.meaning, `${w.word} has a meaning`);
+    assert.ok(w.meaning!.split(/\s+/).length <= 14, `${w.word}: short`);
+    assert.ok(!new RegExp(`\\b${w.word}\\b`, "i").test(w.meaning!), `${w.word}: the meaning does not contain the word`);
+  }
+  assert.equal(Object.keys((beeMeanings as { meanings: Record<string, string> }).meanings).length, 100, "no meaning for a word that is not in the Bee");
+  const pilot = beeBank(loadForMeanings({ mode: "pilot" }));
+  assert.ok(pilot.every((w) => w.meaning === undefined));
+});

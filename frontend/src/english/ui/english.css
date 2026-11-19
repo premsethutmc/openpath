@@ -2466,3 +2466,16 @@ h3.sub {
   font-size: 24px;
   text-align: center;
 }
+
+/* the meaning of a Spelling Bee word, shown after it is answered */
+.bee-meaning {
+  font-weight: 700;
+  margin: 6px 0 10px;
+}
+.bee-meaning .small {
+  font-weight: 400;
+}
+.bee-meaning-sentence {
+  display: block;
+  margin-top: 4px;
+}
