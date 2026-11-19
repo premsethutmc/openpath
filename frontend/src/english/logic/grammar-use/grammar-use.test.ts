@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, checkSpot, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkChoose, checkFix, checkSpot, choices, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -70,7 +70,8 @@ function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i:
     assert.ok(!(v.fix?.words.join(" ") ?? "").includes("["), "the wrong word is not marked on screen");
     const wrong = miss(it, i);
     const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
-    if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => it.right!.includes(bare(w)) !== wrong));
+    if (it.kind === "choose") s.choose(choices(it).findIndex((o) => (o === it.right![0]) !== wrong));
+    else if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => it.right!.includes(bare(w)) !== wrong));
     else if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
     else s.build(wrong ? [...it.sentence.split(" ")].reverse() : it.sentence.split(" "));
     const f = s.snapshot().feedback!;
@@ -161,13 +162,13 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 
 test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
   assert.deepEqual(SYLLABUSES.map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
-  assert.deepEqual(coverage(syllabusFor(1)), { covered: 14, partly: 10, guided: 14, not: 0, total: 38 });
-  assert.deepEqual(coverage(syllabusFor(2)), { covered: 9, partly: 6, guided: 10, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(8)), { covered: 2, partly: 21, guided: 14, not: 0, total: 37 });
-  assert.deepEqual(coverage(syllabusFor(3)), { covered: 9, partly: 7, guided: 8, not: 0, total: 24 });
-  assert.deepEqual(coverage(syllabusFor(7)), { covered: 8, partly: 10, guided: 7, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(4)), { covered: 10, partly: 7, guided: 8, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 14, partly: 19, guided: 13, not: 0, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(1)), { covered: 15, partly: 9, guided: 14, not: 0, total: 38 });
+  assert.deepEqual(coverage(syllabusFor(2)), { covered: 10, partly: 5, guided: 10, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(8)), { covered: 6, partly: 17, guided: 14, not: 0, total: 37 });
+  assert.deepEqual(coverage(syllabusFor(3)), { covered: 11, partly: 5, guided: 8, not: 0, total: 24 });
+  assert.deepEqual(coverage(syllabusFor(7)), { covered: 9, partly: 9, guided: 7, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(4)), { covered: 11, partly: 6, guided: 8, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 19, partly: 14, guided: 13, not: 0, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);
@@ -205,4 +206,22 @@ test("GU-10 sentences in order: whole sentences are the tiles, shuffled, and onl
   }
   const v = new GrammarSitting(GRAMMAR, 3, [], ["sentence_order"]).snapshot();
   assert.equal(v.build?.whole, true);
+});
+
+test("GU-11 choosing an answer: one right answer among two or three, in an order that does not give it away", () => {
+  const items = GRAMMAR.items.filter((it) => it.kind === "choose");
+  assert.ok(items.length >= 36);
+  const place = [0, 0, 0];
+  for (const it of items) {
+    const o = choices(it);
+    assert.deepEqual([...o].sort(), [...it.right!, ...it.wrong!].sort());
+    assert.equal(o.filter((_, i) => checkChoose(it, i)).length, 1, it.id);
+    place[o.indexOf(it.right![0])]++;
+  }
+  assert.ok(place[0] > 0 && place[1] > 0, `the right answer is not always in one place: ${place}`);
+  const v = new GrammarSitting(GRAMMAR, 6, [], ["figures"]).snapshot();
+  assert.ok(v.choose && v.choose.options.length === 3 && !JSON.stringify(v).includes('"right"'));
+  // a level sitting keeps room for three sentences to fix and three to build
+  const level = pick(GRAMMAR, 6, []);
+  assert.ok(level.filter((it) => it.kind === "choose" || it.kind === "spot").length <= 2);
 });

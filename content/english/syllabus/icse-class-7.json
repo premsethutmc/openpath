@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-7",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "board": "CISCE (ICSE)",
   "class": 7,
   "subject": "English",
@@ -215,14 +215,14 @@
         {
           "id": "GV4",
           "text": "Uses figures of speech: pun, personification, alliteration, metaphor, simile and sound words.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "similes",
             "idioms",
-            "sound_words"
-          ],
-          "note": "Similes, idioms and sound words are practised; metaphor, personification, alliteration and puns are not yet."
+            "sound_words",
+            "figures"
+          ]
         },
         {
           "id": "GV5",

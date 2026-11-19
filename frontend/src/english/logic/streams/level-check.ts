@@ -298,7 +298,7 @@ export class GrammarPlacement {
   private steps: { id: string; level: number; correct: boolean }[] = [];
 
   constructor(content: GrammarUse, start: number) {
-    this.items = content.items.filter((it) => it.kind !== "build").map((it) => ({ it, k: hash(`level-check|${it.id}`) })).sort((a, b) => a.k - b.k || (a.it.id < b.it.id ? -1 : 1)).map((x) => x.it);
+    this.items = content.items.filter((it) => it.kind === "spot" || it.kind === "fix").map((it) => ({ it, k: hash(`level-check|${it.id}`) })).sort((a, b) => a.k - b.k || (a.it.id < b.it.id ? -1 : 1)).map((x) => x.it);
     this.top = Math.max(1, ...content.levels.map((l) => l.id));
     this.level = Math.min(this.top, Math.max(1, start));
     this.load();

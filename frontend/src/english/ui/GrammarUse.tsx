@@ -95,7 +95,26 @@ export function Spot({ words, task, button = "Check", onCheck }: { words: string
     </>
   );
 }
-export const spotTask = (ask: string) => (ask === "object" ? "Tap the object of the verb in this sentence." : ask === "subject" ? "Tap any word of the subject of this sentence." : ask === "main clause" ? "Tap any word of the main clause." : `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`);
+export const spotTask = (ask: string) => (ask === "object" ? "Tap the object of the verb in this sentence." : ask === "subject" ? "Tap any word of the subject of this sentence." : ask === "main clause" ? "Tap any word of the main clause." : ask === "predicate" ? "Tap any word of the predicate." : `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`);
+
+/** Pick one answer to a question about a sentence. */
+function Choose({ sentence, question, options, onCheck }: { sentence: string; question: string; options: string[]; onCheck: (chosen: number) => void }) {
+  return (
+    <>
+      <p className="grammar-quote">{sentence}</p>
+      <p className="small" id="grammar-task">
+        {question}
+      </p>
+      <div className="grammar-choices" role="group" aria-labelledby="grammar-task">
+        {options.map((o, i) => (
+          <button key={i} type="button" className="secondary grammar-choice" onClick={() => onCheck(i)}>
+            {o}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
 
 function Build({ tiles, whole, task, onCheck }: { tiles: string[]; whole: boolean; task: string | null; onCheck: (chosen: string[]) => void }) {
   const [chosen, setChosen] = useState<number[]>([]);
@@ -128,7 +147,7 @@ function Build({ tiles, whole, task, onCheck }: { tiles: string[]; whole: boolea
   );
 }
 
-export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onNext, onLeave, onAgain }: { content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain }: { content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
     return (
@@ -156,7 +175,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onNext, 
   }
   const f = view.feedback;
   return (
-    <main className="page vocab grammar" data-phase={view.phase} data-item={view.id ?? ""} data-kind={view.fix ? "fix" : view.build ? "build" : view.spot ? "spot" : ""}>
+    <main className="page vocab grammar" data-phase={view.phase} data-item={view.id ?? ""} data-kind={view.fix ? "fix" : view.build ? "build" : view.spot ? "spot" : view.choose ? "choose" : ""}>
       <button type="button" className="link" onClick={onLeave}>
         ← Stop
       </button>
@@ -165,6 +184,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onNext, 
       </p>
       {view.phase === "ask" && view.fix && <Fix key={view.id} words={view.fix.words} onCheck={onFix} />}
       {view.phase === "ask" && view.build && <Build key={view.id} tiles={view.build.tiles} whole={view.build.whole} task={view.build.task} onCheck={onBuild} />}
+      {view.phase === "ask" && view.choose && <Choose key={view.id} sentence={view.choose.sentence} question={view.choose.question} options={view.choose.options} onCheck={onChoose} />}
       {view.phase === "ask" && view.spot && <Spot key={view.id} words={view.spot.words} task={spotTask(view.spot.ask)} onCheck={onSpot} />}
       {f && (
         <div className="dict-feedback" role="status" data-correct={f.correct}>
@@ -224,7 +244,7 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onNext={() => void step(sitting, () => sitting.next())} />
+      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="grammar-use:done" label="Was any sentence marked unfairly, or any rule unclear?" />

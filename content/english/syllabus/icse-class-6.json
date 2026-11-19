@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-6",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "board": "CISCE (ICSE)",
   "class": 6,
   "subject": "English",
@@ -142,9 +142,13 @@
         {
           "id": "R5",
           "text": "Works out what words and phrases mean, including figurative and suggested meanings.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words teaches meanings in sentences; figurative meaning is not taught."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning",
+            "figures",
+            "idioms"
+          ]
         },
         {
           "id": "R6",
@@ -292,20 +296,22 @@
         {
           "id": "GV4",
           "text": "Varies sentence patterns for meaning and style.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "compound",
-            "relative"
-          ],
-          "note": "Building compound sentences and who or that clauses is practised; choosing a pattern for style is not."
+            "relative",
+            "joining"
+          ]
         },
         {
           "id": "GV5",
           "text": "Uses the words around a word or phrase to work out its meaning.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words shows each word in a sentence; working a meaning out from context alone is not practised."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning"
+          ]
         },
         {
           "id": "GV6",
@@ -326,13 +332,13 @@
         {
           "id": "GV8",
           "text": "Understands figures of speech where they are used.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "similes",
-            "idioms"
-          ],
-          "note": "Similes and idioms are practised; metaphor and personification are not yet."
+            "idioms",
+            "figures"
+          ]
         },
         {
           "id": "GV9",
@@ -346,12 +352,11 @@
         {
           "id": "GV10",
           "text": "Tells transitive verbs from intransitive ones.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "transitive"
-          ],
-          "note": "Finding the object of a transitive verb is practised; sorting verbs into transitive and intransitive is not yet."
+          ]
         },
         {
           "id": "GV11",

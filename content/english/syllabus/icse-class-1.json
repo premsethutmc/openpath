@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-1",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "board": "CISCE (ICSE)",
   "class": 1,
   "subject": "English",
@@ -259,13 +259,13 @@
         {
           "id": "GV7",
           "text": "Uses verbs for the simple past, present and future.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "past",
-            "agreement"
-          ],
-          "note": "The simple past and present are practised; the future is not yet."
+            "agreement",
+            "future"
+          ]
         },
         {
           "id": "GV8",
