@@ -5,6 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
+import {supportingSets} from "./check-evidence.ts";
 import { CHECK_SIZE, COURSE, LEVELS, SKILL_IDS, buildCourse, courseProblems, lessonFor, meanSentenceLength, questionsFor, wordCount, type Level, type Unit } from "./course.ts";
 import { LABEL_AFTER_HELP, LABEL_OWN, ReadingUnitSession, freshCheck, passed, progress, recommend, statusOf, type ReadingRecord } from "./session.ts";
 import { loadContent } from "../content.ts";
@@ -28,6 +29,7 @@ function learnToCheck(s: ReadingUnitSession) {
   }
   for (snap = s.snapshot(); snap.phase === "practice"; snap = s.snapshot()) {
     s.answerPractice(byId.get(snap.practice.question.id)!.answer);
+    if(snap.practice.question.id.endsWith(".inference")){s.selectPracticeClues(supportingSets(COURSE,byId.get(snap.practice.question.id)!)[0]);s.checkPracticeClues();}
     s.nextPractice();
   }
 }
@@ -35,7 +37,7 @@ function learnToCheck(s: ReadingUnitSession) {
 function answerCheck(s: ReadingUnitSession, right: boolean) {
   for (let snap = s.snapshot(), i = 0; snap.phase === "check"; snap = s.snapshot(), i++) {
     const q = byId.get(snap.question.id)!;
-    s.answerCheck(right || i > 0 ? q.answer : (q.answer + 1) % q.options.length);
+    s.answerCheck(right || i > 0 ? q.answer : (q.answer + 1) % q.options.length, q.skill==="inference"?supportingSets(COURSE,q)[0]:undefined);
   }
 }
 function run(unit: Unit, mode: "learn" | "check_me", right: boolean, history: ReadingRecord[] = []) {
@@ -47,9 +49,9 @@ function run(unit: Unit, mode: "learn" | "check_me", right: boolean, history: Re
 
 test("RC-1 content: every skill and level has a lesson, a worked example, hinted practice and two fresh checks", () => {
   assert.deepEqual(courseProblems(COURSE), []);
-  assert.equal(COURSE.lessons.length, 36);
-  assert.equal(COURSE.passages.size, 42);
-  assert.equal(COURSE.questions.length, 216);
+  assert.equal(COURSE.lessons.length, 42);
+  assert.equal(COURSE.passages.size, 84);
+  assert.equal(COURSE.questions.length, 252);
   for (const u of UNITS) {
     assert.equal(questionsFor(COURSE, u, "practice").length, 2);
     assert.equal(questionsFor(COURSE, u, "check").length, 4);
@@ -86,7 +88,7 @@ test("RC-3 an answer cannot be guessed from its position or its length", () => {
     const len = q.options.map((o) => o.length);
     if (len.every((n, i) => i === q.answer || n < len[q.answer])) longest++;
   }
-  for (const n of position) assert.ok(n >= 54 && n <= 90, `right answers by position: ${position}`);
+  for (const n of position) assert.ok(n >= COURSE.questions.length/4 && n <= COURSE.questions.length*5/12, `right answers by position: ${position}`);
   assert.ok(longest / COURSE.questions.length < 0.4, `the right answer is the longest option in ${longest} of ${COURSE.questions.length}`);
   // the order is fixed: the same on every visit and every device
   assert.deepEqual(buildCourse({ version: 1, status: "", skills: COURSE.skills, levels: COURSE.levels }, []).questions, []);

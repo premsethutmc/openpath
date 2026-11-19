@@ -5,7 +5,7 @@ import { assessSentences, supportingSets } from "./check-evidence.ts";
 import { COURSE, LEVELS, SKILL_IDS, questionsFor } from "./course.ts";
 import { evidenceKey, sentenceChoices } from "./sentences.ts";
 
-test("all 144 ordinary check questions have uniquely anchored accepted sets in all 36 units", () => {
+test("all 168 ordinary check questions have uniquely anchored accepted sets in all 42 units", () => {
   let total = 0;
   for (const level of LEVELS) for (const skill of SKILL_IDS) {
     const qs = questionsFor(COURSE, {level, skill}, "check");
@@ -29,7 +29,7 @@ test("all 144 ordinary check questions have uniquely anchored accepted sets in a
       }
     }
   }
-  assert.equal(total, 144);
+  assert.equal(total, 168);
 });
 
 test("fiction checks select evidence for character and for a nonliteral view of the plot", () => {

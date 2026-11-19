@@ -168,7 +168,7 @@ test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, a
   assert.deepEqual(coverage(syllabusFor(3)), { covered: 12, partly: 1, guided: 11, not: 0, total: 24 });
   assert.deepEqual(coverage(syllabusFor(7)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(4)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 22, partly: 2, guided: 22, not: 0, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 23, partly: 1, guided: 22, not: 0, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);

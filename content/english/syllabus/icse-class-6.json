@@ -114,9 +114,9 @@
         {
           "id": "R1",
           "text": "Understands texts, draws conclusions and reads between the lines.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "reading",
-          "note": "Reading covers cause and effect and how characters feel; wider inference is not a separate skill yet."
+          "note": "Reading between the lines teaches joining two or more clues, with guided sentence-evidence practice and held-out checks across six ability levels. Answers and supporting sentences are recorded separately; this is bounded multiple-choice inference practice, not open-ended literary analysis."
         },
         {
           "id": "R2",

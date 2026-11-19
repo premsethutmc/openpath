@@ -60,7 +60,7 @@ export function ReadingMap({ course, progress: p, start, onOpen, onBack }: { cou
       <h1 id="reading-title" className="hero">
         Read, think, answer
       </h1>
-      <p className="sub">Six reading skills at six levels. Learn each one with an example, practise with hints, then try two new questions on your own.</p>
+      <p className="sub">Seven reading skills at six levels. Learn each one with an example, practise with hints, then try two new questions on your own.</p>
       {next ? (
         <section className="tile lilac reading-next" aria-labelledby="reading-next-title">
           <p className="kicker">{WHY[next.why]}</p>
@@ -129,6 +129,8 @@ export interface UnitHandlers {
   lockCheckAnswer: ()=>void;
   selectCheckEvidence: (sentences:number[])=>void;
   submitCheckEvidence: ()=>void;
+  selectPracticeClues:(selected:number[])=>void;
+  checkPracticeClues:()=>void;
   closeInterruptedCheck: ()=>void;
   open: (u: Unit, mode: Mode) => void;
   leave: () => void;
@@ -226,7 +228,8 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
               <span className="verdict">{p.solved ? "Yes. " : `The answer is: ${p.question.options[p.answer.index]}. `}</span>
               {p.answer.explain}
             </p>
-            <button type="button" className="primary" onClick={on.nextPractice}>
+            {p.clues&&<section aria-label="Connect the clues practice"><h2>Connect the clues</h2><p>The answer has been explained. Now find the sentences that support it together. This is guided practice, not an independent check.</p><fieldset><legend>Choose the clues that work together.</legend>{sentenceChoices(p.question.passage.text).map((text,i)=><label key={i} style={{display:'block',padding:'8px 0'}}><input type="checkbox" disabled={!!p.clues!.finding} checked={p.clues!.selected.includes(i)} onChange={()=>on.selectPracticeClues(p.clues!.selected.includes(i)?p.clues!.selected.filter(x=>x!==i):[...p.clues!.selected,i])}/>{i+1}. {text}</label>)}</fieldset>{!p.clues.finding?<button type="button" disabled={!p.clues.selected.length} onClick={on.checkPracticeClues}>Check these clues</button>:<><p role="status">{SENTENCE_FEEDBACK[p.clues.finding]}</p><p>Supporting sentences: {p.clues.sets!.map(set=>set.map(i=>i+1).join(' + ')).join(' or ')}. Read them together, then compare the other choices.</p></>}</section>}
+            <button type="button" className="primary" disabled={!!p.clues&&!p.clues.finding} onClick={on.nextPractice}>
               {p.index + 1 < p.total ? "Next practice question" : "I'm ready for two new questions"}
             </button>
           </>
@@ -268,7 +271,8 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
         {right} of {r.review.length} right
       </h1>
       {r.label ? <p className="pill">{r.label}</p> : <p className="sub">Not yet. Look at what the text says below, then practise once more.</p>}
-      <p className="small">{r.scope} This score and level decision count answers only, as before. Supporting evidence is reported separately.</p>
+      <p className="small">{r.scope} {snap.unit.skill==="inference"?"Answer and evidence scores stay separate. This skill advances only when both answers and both complete clue sets are correct.":"This score and level decision count answers only, as before. Supporting evidence is reported separately."}</p>
+      {snap.unit.skill==="inference"&&right===r.review.length&&!r.passed&&<p role="status">Your answers are right, but the clue sets are not complete yet. This level has not advanced. Practise connecting all the needed clues, then try new questions if available.</p>}
       <p>{r.review.filter(x=>x.evidenceFinding==='complete').length} of {r.review.filter(x=>x.evidenceFinding).length} assessed evidence selections complete.</p>
       {r.review.map((x) => (
         <section key={x.question.id} className={`feedback ${x.correct ? "right" : "wrong"}`} aria-label={x.question.prompt}>
@@ -304,7 +308,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
           Practise again, then two new questions
         </button>
       )}
-      {r.next.kind === "no_fresh_check" && <p className="sub">There are no new check questions left for this skill at this level. You can still go over the lesson and practice.</p>}
+      {r.next.kind === "no_fresh_check" && <><p className="sub">There are no new check questions left for this skill at this level. You can still go over the lesson and practice.</p><button type="button" onClick={()=>on.open(snap.unit,"learn")}>Review the lesson and practice</button></>}
       {r.next.kind === "skill_complete" && <p className="sub">That is the top level of this skill.</p>}
       <button type="button" className="secondary" onClick={on.leave}>
         All reading skills
@@ -397,6 +401,8 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
           selectCheckEvidence:(selected)=>void step(s,()=>s.selectCheckEvidence(selected)),
           submitCheckEvidence:()=>void step(s,()=>s.submitCheckEvidence()),
           closeInterruptedCheck:()=>void step(s,()=>s.closeInterruptedCheck()),
+          selectPracticeClues:(selected)=>void step(s,()=>s.selectPracticeClues(selected)),
+          checkPracticeClues:()=>void step(s,()=>s.checkPracticeClues()),
           open,
           leave: () => setSession(null),
         }}

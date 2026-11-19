@@ -40,6 +40,12 @@
       "capability": "EN.RDG.CRT.fact_opinion",
       "name": "Fact or opinion",
       "blurb": "Tell what can be checked from what someone thinks."
+    },
+    {
+      "id": "inference",
+      "capability": "EN.RDG.INF.implied_meaning",
+      "name": "Reading between the lines",
+      "blurb": "Join two or more clues to work out what the text does not say directly."
     }
   ],
   "levels": [
