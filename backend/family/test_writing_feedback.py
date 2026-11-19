@@ -83,6 +83,7 @@ class WritingFeedbackTests(TestCase):
         self.assertLessEqual(sent["max_tokens"], 400)
         wire = json.dumps(sent)
         self.assertIn("Draw your family on paper", wire)
+        self.assertIn("judged as written", wire)  # the current prompt, writing-feedback.v2
         self.assertIn("This is my family", wire)
         for secret in ("Meena", "wf@example.org", self.pupil):
             self.assertNotIn(secret, wire)

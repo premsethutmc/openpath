@@ -62,7 +62,7 @@ def tasks() -> dict:
 
 @lru_cache(maxsize=1)
 def prompt() -> str:
-    return (CONTENT / "prompts" / "writing-feedback.v1.md").read_text(encoding="utf-8").strip()
+    return (CONTENT / "prompts" / "writing-feedback.v2.md").read_text(encoding="utf-8").strip()
 
 
 def user_message(task_id: str, text: str, checked: list) -> str:

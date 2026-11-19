@@ -8,6 +8,7 @@
  * Every rule is chosen to be sure rather than clever: a note that is wrong teaches a mistake, so doubtful
  * patterns are left out.
  */
+import { unknownWords, type Dictionary } from "./dictionary.ts";
 import { A_OK, AN_OK, ASKED, HELPER, JOINED, MISSPELT, NO_APOSTROPHE, SLIPS, TEXTING, WRONG_FORM } from "./slips.ts";
 
 export type Form = "letter" | "formal" | "argument" | "narrative";
@@ -36,7 +37,7 @@ const quote = (xs: string[], n = 3) => xs.slice(0, n).map((x) => `“${x}”`).j
 const LINKERS = ["because", "so", "but", "although", "however", "therefore", "then", "first", "next", "finally", "after", "when", "while", "since", "also", "later", "suddenly", "meanwhile", "moreover", "besides"];
 const STOP = new Set("the a an and or but so of to in on at for with from by as is am are was were be been it its this that these those he she they we you i me my our your his her their them us him not no do does did have has had will would can could should may might there then than when what which who how very just about into over under after before again more most some any all each one two".split(" "));
 const WEAK = ["very", "nice", "good", "big", "thing", "things", "got", "lot", "really", "stuff"];
-export function checkWriting(text: string, target: Target): WritingCheck {
+export function checkWriting(text: string, target: Target, dict?: Dictionary | null): WritingCheck {
   const notes: Note[] = [];
   const add = (id: string, level: Note["level"], t: string) => notes.push({ id, level, text: t });
   const sentences = sentencesOf(text);
@@ -75,6 +76,15 @@ export function checkWriting(text: string, target: Target): WritingCheck {
   if (bare.length) add("apostrophe", "fix", `An apostrophe is missing: ${list(bare, NO_APOSTROPHE)}.`);
   const texting = [...new Set(text.match(TEXTING) ?? [])];
   if (texting.length) add("texting", "fix", `Write whole words, not message short forms: ${quote(texting, 5)}.`);
+  if (dict) {
+    // every word not on the spelling list; words the sure lists above already named are not repeated
+    const named = new Set([...misspelt, ...joined, ...forms, ...bare, ...texting.map((w) => w.toLowerCase())]);
+    const unknown = unknownWords(text, dict, named);
+    if (unknown.length) {
+      const shown = unknown.slice(0, 6).map((w) => { const s = dict.suggest(w); return s ? `“${w}” (${s}?)` : `“${w}”`; });
+      add("unknown", "tip", `Check the spelling of ${unknown.length === 1 ? "this word" : "these words"}: ${shown.join(", ")}${unknown.length > 6 ? ` and ${unknown.length - 6} more` : ""}. If it is a name or a word from another language, it may be right.`);
+    }
+  }
   if (/[!?]{2,}|,{2,}|(?<!\.)\.\.(?!\.)/.test(text)) add("marks", "tip", "Use one punctuation mark at a time: a single full stop, comma, question mark or exclamation mark.");
 
   // grammar slips that follow a pattern
