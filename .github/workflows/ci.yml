@@ -346,6 +346,14 @@ jobs:
         run: |
           npm run english:e2e-level 2>&1 | tee english-level-e2e.log
           ../.github/scripts/require-tests.sh english-level-e2e.log "Find my level end-to-end"
+      - name: Grammar in use and the class syllabus in an Android-sized browser
+        working-directory: frontend
+        env:
+          E2E_URL: http://127.0.0.1:4174
+          E2E_SHOTS: e2e/shots/grammar
+        run: |
+          npm run english:e2e-grammar 2>&1 | tee english-grammar-e2e.log
+          ../.github/scripts/require-tests.sh english-grammar-e2e.log "Grammar in use and syllabus end-to-end"
       - name: Reading course in an Android-sized browser
         working-directory: frontend
         env:

@@ -25,6 +25,7 @@ import type { VocabRecord } from "./vocabulary/size-check.ts";
 import type { Dated, WordRecord } from "./vocabulary/daily-words.ts";
 import type { DictationRecord } from "./dictation/dictation.ts";
 import { calendarDay, dayBasis } from "./calendar.ts";
+import type { GrammarRecord } from "./grammar-use/grammar-use.ts";
 import { levelsFrom, type LevelCheckRecord, type Levels } from "./streams/level-check.ts";
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
@@ -268,6 +269,16 @@ export class Learner {
   /** Store steps of a Listen and write sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordDictation(records: readonly DictationRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "dictation", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's Grammar in use record, in order. */
+  grammarRecords(): GrammarRecord[] {
+    return this.events.flatMap((e) => (e.kind === "grammar_use" ? [e.record] : []));
+  }
+
+  /** Store steps of a Grammar in use sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordGrammar(records: readonly GrammarRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "grammar_use", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The latest level found by Find my level for each part (logic/streams/level-check.ts). */

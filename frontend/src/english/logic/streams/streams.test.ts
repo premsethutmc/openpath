@@ -131,7 +131,8 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.spellingSession(), null);
   await l.startSpelling();
   assert.ok(l.spellingSession()!.word, "and offers a word from there");
-  assert.equal(row("grammar").level, "Not checked yet");
+  assert.equal(row("grammar").level, "Level 2 of 3");
+  assert.equal(row("grammar").next, "Eight sentences to fix and build");
   assert.ok(streamRows(l, clock()).every((r) => !r.doneToday));
   await l.recordDictation([{ type: "start", sitting: "d1", level: 3 }, { type: "end", sitting: "d1", level: 3, asked: 5, perfectFirst: 5 }]);
   await l.recordWordLearn([{ type: "meet", word: "anxious", band: 4 }]);

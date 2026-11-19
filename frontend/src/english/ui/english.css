@@ -2479,3 +2479,82 @@ h3.sub {
   display: block;
   margin-top: 4px;
 }
+
+/* ------------------------------------------------------------ Grammar in use (ui/GrammarUse.tsx) and the class syllabus (ui/Syllabus.tsx) */
+.grammar-words,
+.grammar-pool,
+.grammar-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+.grammar-word,
+.grammar-tile {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card, #fff);
+  font: inherit;
+  font-size: 1.15rem;
+  color: inherit;
+}
+.grammar-word.picked {
+  border: 2px solid var(--bad, #b42318);
+  text-decoration: underline wavy;
+  text-decoration-color: var(--bad, #b42318);
+}
+.grammar-line {
+  min-height: 60px;
+  padding: 8px;
+  border: 2px dashed var(--line);
+  border-radius: 14px;
+  align-items: center;
+}
+.grammar-tile.placed {
+  border-color: var(--violet, #6957de);
+}
+.grammar input[type="text"] {
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 6px 0 4px;
+}
+.grammar-rule {
+  margin: 0 0 12px;
+}
+.syllabus-strand ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 18px;
+  display: grid;
+  gap: 12px;
+}
+.syllabus-strand li {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.syllabus-strand li p {
+  margin: 0 0 6px;
+}
+.syllabus-strand .secondary {
+  margin: 2px 0 0;
+}
+.syllabus-tag {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  margin-right: 4px;
+}
+.syllabus-tag.covered {
+  color: var(--good, #1a7f37);
+}
+.syllabus-tag.not {
+  color: var(--muted);
+}
+.syllabus-source p {
+  margin: 6px 0;
+}

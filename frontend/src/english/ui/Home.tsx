@@ -13,6 +13,8 @@ import { latestResult } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
 import { streamRows, type StreamId } from "../logic/streams/streams.ts";
+import { GRAMMAR, grammarSummary } from "../logic/grammar-use/grammar-use.ts";
+import { SYLLABUSES, coverage as syllabusCoverage } from "../logic/syllabus/syllabus.ts";
 import { COURSE } from "../logic/reading/course.ts";
 import { progress } from "../logic/reading/session.ts";
 
@@ -31,7 +33,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: () => void; onSyllabus: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -67,16 +69,18 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : activities[0] && onStart(activities[0].step))}
+            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse())}
           />
           <h2 className="section-title">Practise</h2>
           <NewWordsCard learner={learner} onOpen={onNewWords} />
           <ReadingCard learner={learner} onOpen={onReading} />
           <ListenWriteCard learner={learner} onOpen={onListenWrite} />
+          <GrammarUseCard learner={learner} onOpen={onGrammarUse} />
           <BeeCard learner={learner} onBee={onBee} />
           <VocabCard learner={learner} onOpen={onVocab} />
           <h2 className="section-title">School work</h2>
           <p className="small">Words and texts from school: a parent or the learner adds them, and the app turns them into practice.</p>
+          <SyllabusCard onOpen={onSyllabus} />
           <MyWordsCard learner={learner} onOpen={onMyWords} />
           <MyBooksCard learner={learner} onOpen={onMyBooks} />
         </>
@@ -289,6 +293,49 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
       </ul>
       <button type="button" className="link" onClick={onLevelCheck}>
         Check my level again
+      </button>
+    </section>
+  );
+}
+
+/** Grammar in use (logic/grammar-use): candidate content, so never offered in a pilot build. */
+function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = grammarSummary(GRAMMAR, learner.grammarRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="grammar-use-card-title">
+      <h2 id="grammar-use-card-title">
+        <span aria-hidden="true">🧩 </span>Grammar in use
+      </h2>
+      <p>Fix the wrong word in a sentence, or build a sentence from word tiles. Eight sentences, each with its rule.</p>
+      {s.answered > 0 && (
+        <p className="small">
+          {s.right} of {s.answered} sentences right
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.answered ? "Eight more sentences" : "Try Grammar in use"}
+      </button>
+    </section>
+  );
+}
+
+/** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
+function SyllabusCard({ onOpen }: { onOpen: () => void }) {
+  const doc = SYLLABUSES[0];
+  const c = syllabusCoverage(doc);
+  return (
+    <section className="hub-card plain" aria-labelledby="syllabus-card-title">
+      <h2 id="syllabus-card-title">
+        <span aria-hidden="true">🏫 </span>
+        {doc.board} Class {doc.class} English
+      </h2>
+      <p>What the board lists for this class, and where to practise each part here.</p>
+      <p className="small">
+        {c.covered} of {c.total} lines can be practised in the app, {c.partly} partly
+      </p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Open the class syllabus
       </button>
     </section>
   );

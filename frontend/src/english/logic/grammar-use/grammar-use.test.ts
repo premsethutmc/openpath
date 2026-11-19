@@ -1,0 +1,153 @@
+/**
+ * Grammar in use and the class syllabus: sound content, code scoring of fixes and built sentences, a sitting with
+ * rules shown, levels that move, topic sittings that do not move them, a syllabus whose every pointer leads to real
+ * practice, and no effect on the engine.
+ */
+import test from "node:test";
+import assert from "node:assert/strict";
+import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { loadContent } from "../content.ts";
+import { eventProblem } from "../events.ts";
+import { testClock } from "../journey-sim.ts";
+import { Learner } from "../learner.ts";
+import { MemoryRepo } from "../store.ts";
+import { SYLLABUSES, coverage, syllabusProblems } from "../syllabus/syllabus.ts";
+
+const byId = new Map(GRAMMAR.items.map((i) => [i.id, i]));
+const item = (sentence: string) => GRAMMAR.items.find((i) => i.sentence === sentence)!;
+
+test("GU-1 content: three levels, every sentence checkable, tiles never laid out as the answer", () => {
+  assert.deepEqual(grammarProblems(GRAMMAR), []);
+  assert.ok(GRAMMAR.items.length >= 100);
+  for (const l of GRAMMAR.levels) assert.ok(GRAMMAR.items.filter((i) => i.level === l.id).length >= 2 * SITTING_SIZE);
+  for (const it of GRAMMAR.items) {
+    if (it.kind === "fix") {
+      const p = fixParts(it);
+      assert.ok(p.wrong >= 0 && !p.words.join(" ").includes("["), it.id);
+      for (const r of it.right!) assert.ok(checkFix(it, p.wrong, r), `${it.id}: ${r}`);
+      assert.ok(!corrected(it).includes("["));
+    } else {
+      const t = tiles(it);
+      assert.equal(t.length, it.sentence.split(" ").length + (it.extra?.length ?? 0));
+      assert.notEqual(t.slice(0, it.sentence.split(" ").length).join(" "), it.sentence, it.id);
+      assert.ok(checkBuild(it, it.sentence.split(" ")));
+    }
+  }
+  const bad = { ...GRAMMAR, items: [{ id: "x", level: 9, topic: "nope", kind: "fix", sentence: "No brackets here.", rule: " ", right: [] } as GrammarItem] };
+  assert.match(grammarProblems(bad).join("\n"), /unknown level[\s\S]*unknown topic[\s\S]*no rule[\s\S]*exactly one wrong word/);
+});
+
+test("GU-2 a fix needs the right word tapped and an accepted correction; capitals count only where the answer has one", () => {
+  const it = item("She [breaked] the glass yesterday.");
+  assert.deepEqual([checkFix(it, 1, "broke"), checkFix(it, 1, " Broke "), checkFix(it, 1, "breaked"), checkFix(it, 2, "broke"), checkFix(it, 1, "broken")], [true, true, false, false, false]);
+  assert.equal(corrected(it), "She broke the glass yesterday.");
+  const july = item("My birthday is in [july].");
+  assert.deepEqual([checkFix(july, 4, "July"), checkFix(july, 4, "july")], [true, false]);
+  assert.equal(corrected(july), "My birthday is in July.");
+  const boys = item("The [boys] room is upstairs; three boys share it.");
+  assert.ok(checkFix(boys, 1, "boys’"), "a curly apostrophe is the same mark");
+  const many = item("Take an umbrella [so] it may rain.");
+  assert.ok(checkFix(many, 3, "because") && checkFix(many, 3, "as"));
+});
+
+test("GU-3 a built sentence must use the right tiles in the right order", () => {
+  const it = item("Ravi asked me where I was going.");
+  assert.deepEqual(it.extra, ["are", "you"]);
+  assert.ok(checkBuild(it, ["Ravi", "asked", "me", "where", "I", "was", "going."]));
+  assert.ok(!checkBuild(it, ["Ravi", "asked", "me", "where", "are", "you", "going."]));
+  assert.ok(!checkBuild(it, ["Ravi", "asked", "me", "where", "I", "was"]));
+  const speech = item('"Where are you going?" asked Ravi.');
+  assert.ok(checkBuild(speech, ["“Where", "are", "you", "going?”", "asked", "Ravi."]), "curly quotation marks are the same marks");
+});
+
+/** Sit a sitting, answering right unless `miss(item)` says otherwise. */
+function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i: number) => boolean = () => false, topics?: string[]) {
+  const s = new GrammarSitting(GRAMMAR, level, history, topics);
+  const asked: GrammarItem[] = [];
+  for (let v = s.snapshot(), i = 0; v.phase !== "done"; v = s.snapshot(), i++) {
+    const it = byId.get(v.id!)!;
+    asked.push(it);
+    assert.ok(!(v.fix?.words.join(" ") ?? "").includes("["), "the wrong word is not marked on screen");
+    const wrong = miss(it, i);
+    if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
+    else s.build(wrong ? [...it.sentence.split(" ")].reverse() : it.sentence.split(" "));
+    const f = s.snapshot().feedback!;
+    assert.equal(f.correct, !wrong);
+    assert.equal(f.right, corrected(it));
+    assert.equal(f.rule, it.rule);
+    s.next();
+  }
+  return { asked, done: s.snapshot().done!, records: [...history, ...s.take()] };
+}
+
+test("GU-4 a sitting: eight sentences at the level, mixed topics, the rule after each, records kept", () => {
+  const r = sit(2, [], (_, i) => i < 2);
+  assert.equal(r.asked.length, SITTING_SIZE);
+  assert.ok(r.asked.every((it) => it.level === 2));
+  assert.ok(new Set(r.asked.map((it) => it.topic)).size >= 3, "no more than three sentences on one topic");
+  for (const kind of ["fix", "build"]) assert.ok(r.asked.filter((it) => it.kind === kind).length >= 3, `at least three to ${kind}`);
+  assert.deepEqual([r.done.asked, r.done.right, r.done.weak.length > 0], [8, 6, true]);
+  assert.equal(r.records.filter((x) => x.type === "answer").length, 8);
+  assert.equal(r.records.at(-1)!.type, "end");
+  const s = new GrammarSitting(GRAMMAR, 2, []);
+  s.fix(99, "x");
+  s.build([]);
+  assert.equal(s.snapshot().phase, "ask", "an answer that cannot be given is ignored");
+});
+
+test("GU-5 levels move with a sitting; missed sentences return; new ones come first", () => {
+  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 2, 2]);
+  assert.equal(sit(2, []).done.nextLevel, 3);
+  assert.equal(sit(2, [], (_, i) => i < 5).done.nextLevel, 1);
+  assert.equal(sit(2, [], (_, i) => i < 3).done.nextLevel, 2);
+  assert.equal(sit(3, []).done.nextLevel, 3);
+  const first = sit(2, [], (_, i) => i < 3);
+  const next = pick(GRAMMAR, 2, first.records);
+  assert.ok(!next.some((it) => first.asked.includes(it)), "new sentences before any repeat");
+  const all = GRAMMAR.items.filter((it) => it.level === 2);
+  const seen: GrammarRecord[] = all.map((it, i) => ({ type: "answer", sitting: "g1", id: it.id, level: 2, topic: it.topic, correct: ![4, 20, 40].includes(i), given: "" }));
+  assert.deepEqual(pick(GRAMMAR, 2, seen).slice(0, 3).map((it) => it.id).sort(), [all[4].id, all[20].id, all[40].id].sort(), "once all are seen, the missed ones first");
+  const sum = grammarSummary(GRAMMAR, first.records);
+  assert.deepEqual([sum.answered, sum.right, sum.level], [8, 5, 2]);
+  assert.ok(sum.weak.length >= 1);
+});
+
+test("GU-6 a topic sitting asks only those topics and does not move the level", () => {
+  const r = sit(2, [], () => false, ["speech"]);
+  assert.ok(r.asked.length >= 4 && r.asked.every((it) => it.topic === "speech"));
+  assert.equal(levelFor(GRAMMAR, r.records, 2), 2);
+  assert.equal(grammarSummary(GRAMMAR, r.records).level, null);
+});
+
+test("GU-7 the ICSE Class 5 syllabus: every line placed, every pointer leads to real practice, nothing copied in bulk", () => {
+  const s = SYLLABUSES[0];
+  assert.deepEqual(syllabusProblems(s), []);
+  assert.deepEqual([s.board, s.class, s.source.official], ["CISCE (ICSE)", 5, false]);
+  assert.match(s.source.note, /^UNOFFICIAL SOURCE/);
+  assert.deepEqual(coverage(s), { covered: 12, partly: 7, not: 14, total: 33 });
+  assert.deepEqual(s.strands.map((x) => x.outcomes.length), [9, 13, 10, 1]);
+  for (const o of s.strands.flatMap((x) => x.outcomes)) {
+    assert.ok(o.text.split(/\s+/).length <= 22, `${o.id}: a short line in our own words`);
+    if (o.topics) assert.ok(pick(GRAMMAR, 2, [], o.topics).length >= 4, `${o.id}: a topic sitting has sentences`);
+  }
+  const bad = { ...s, strands: [{ ...s.strands[0], outcomes: [{ id: "Z", text: "x", coverage: "covered" as const }, { id: "Z", text: "x", coverage: "not" as const, where: "words" as const }] }] };
+  assert.match(syllabusProblems(bad).join("\n"), /no stream is named[\s\S]*listed twice[\s\S]*points to a stream/);
+});
+
+test("GU-8 stored on the learner's record without touching the engine", async () => {
+  const c = loadContent({ mode: "development" });
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const l = await Learner.create(c, repo, "Grammar", "guardian", clock, "p-gram");
+  const picture = () => JSON.stringify(l.profile().capabilities.map((x) => [x.standing, x.evidence]));
+  const before = picture();
+  const r = sit(2, []);
+  await l.recordGrammar(r.records);
+  const events = await repo.load("p-gram");
+  for (const e of events) assert.equal(eventProblem(e), null);
+  assert.ok(!events.some((e) => e.kind === "evidence" || e.kind === "session"));
+  assert.equal(picture(), before);
+  const again = await Learner.open(c, repo, "p-gram", clock);
+  assert.equal(levelFor(GRAMMAR, again.grammarRecords(), 2), 3);
+  assert.match(String(eventProblem({ kind: "grammar_use", id: "x", at: clock(), record: {} })), /without its type/);
+});

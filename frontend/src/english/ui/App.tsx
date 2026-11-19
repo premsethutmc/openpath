@@ -33,6 +33,9 @@ import { VocabularyCheck } from "./VocabularyCheck.tsx";
 import { NewWords } from "./NewWords.tsx";
 import { ListenWrite } from "./ListenWrite.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
+import { GrammarUse } from "./GrammarUse.tsx";
+import { SyllabusView } from "./Syllabus.tsx";
+import { SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
 import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
@@ -113,6 +116,8 @@ export function App() {
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
   const [inLevelCheck, setInLevelCheck] = useState(false);
+  const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
+  const [inSyllabus, setInSyllabus] = useState(false);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
   const [inJourney, setInJourney] = useState(false);
@@ -159,6 +164,8 @@ export function App() {
       setInNewWords(false);
       setInListenWrite(false);
       setInLevelCheck(false);
+      setGrammarUse(null);
+      setInSyllabus(false);
       setInParent(false);
       setInReading(false);
       setScreen({ name: "app" });
@@ -455,6 +462,40 @@ export function App() {
         />
       </div>
     );
+  if (grammarUse)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <GrammarUse
+          learner={learner}
+          topics={grammarUse.topics}
+          onChanged={changed}
+          onLeave={() => {
+            setInSyllabus(grammarUse.from === "syllabus");
+            setGrammarUse(null);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
+  if (inSyllabus)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <SyllabusView
+          doc={SYLLABUSES[0]}
+          onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
+          onOpen={(where, topics) => {
+            setInSyllabus(false);
+            scrollTo(0, 0);
+            if (where === "grammar") setGrammarUse({ topics, from: "syllabus" });
+            else if (where === "words") setInNewWords(true);
+            else if (where === "reading") setInReading(true);
+            else if (where === "listening") setInListenWrite(true);
+            else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
+          }}
+        />
+      </div>
+    );
   if (inLevelCheck)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -631,6 +672,8 @@ export function App() {
           onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
           onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
           onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
+          onGrammarUse={() => (setGrammarUse({}), scrollTo(0, 0))}
+          onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />

@@ -36,6 +36,7 @@
     "english:e2e-vocabulary": "node --test e2e/vocabulary.test.mjs",
     "english:e2e-daily": "node --test e2e/daily-english.test.mjs",
     "english:e2e-level": "node --test e2e/level-check.test.mjs",
+    "english:e2e-grammar": "node --test e2e/grammar-syllabus.test.mjs",
     "english:e2e-reading": "node --test e2e/reading.test.mjs",
     "english:e2e-parent-content": "node --test e2e/parent-content.test.mjs",
     "english:demo-server": "node scripts/demo-server.mjs",

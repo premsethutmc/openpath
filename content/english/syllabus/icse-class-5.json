@@ -1,0 +1,296 @@
+{
+ "id": "icse-cisce-english-class-5",
+ "version": "1.0.0",
+ "board": "CISCE (ICSE)",
+ "class": 5,
+ "subject": "English",
+ "title": "CISCE curriculum: English, Class V",
+ "source": {
+  "read": "A third-party copy of the Class V pages of the CISCE curriculum (English: printed pages 24 to 30), hosted by BYJU'S",
+  "url": "https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-5-Syllabus.pdf",
+  "accessed": "2026-11-19",
+  "official": false,
+  "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for Class V, so a school's own book and term plan may order or extend these topics."
+ },
+ "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+ "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+ "strands": [
+  {
+   "id": "listening-speaking",
+   "name": "Listening and Speaking",
+   "pages": "24-25",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Shares and explains ideas and points of view clearly.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS2",
+     "text": "Asks and answers questions on a topic.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS3",
+     "text": "Interprets and analyses what is heard.",
+     "coverage": "not",
+     "note": "The app has no listening passages with questions; only single sentences to write down."
+    },
+    {
+     "id": "LS4",
+     "text": "Judges and draws conclusions from the key details heard.",
+     "coverage": "not",
+     "note": "No listening passages with questions."
+    },
+    {
+     "id": "LS5",
+     "text": "Uses other resources, such as online material, to support class learning.",
+     "coverage": "not",
+     "note": "Outside the app."
+    },
+    {
+     "id": "LS6",
+     "text": "Reads a speaker's spoken and unspoken messages.",
+     "coverage": "not",
+     "note": "Speaking and watching a speaker are not in the app."
+    },
+    {
+     "id": "LS7",
+     "text": "Makes personal connections and compares ideas and information.",
+     "coverage": "not",
+     "note": "Discussion is not in the app."
+    },
+    {
+     "id": "LS8",
+     "text": "Speaks with suitable gestures, eye contact and a clear pace.",
+     "coverage": "not",
+     "note": "Speaking is not practised in the app."
+    },
+    {
+     "id": "LS9",
+     "text": "Takes dictation of an unseen passage.",
+     "coverage": "partly",
+     "where": "listening",
+     "note": "Listen and write dictates unseen sentences one at a time, not a whole passage."
+    }
+   ]
+  },
+  {
+   "id": "reading-writing",
+   "name": "Reading and Writing",
+   "pages": "26-27",
+   "outcomes": [
+    {
+     "id": "RW1",
+     "text": "Finds the main points of a text and the details that support them.",
+     "coverage": "covered",
+     "where": "reading",
+     "note": "Reading course: finding details and the main idea."
+    },
+    {
+     "id": "RW2",
+     "text": "Follows the broad outline of a story.",
+     "coverage": "covered",
+     "where": "reading",
+     "note": "Reading course: order of events."
+    },
+    {
+     "id": "RW3",
+     "text": "Explains events, steps or ideas: what happened and why.",
+     "coverage": "covered",
+     "where": "reading",
+     "note": "Reading course: cause and effect."
+    },
+    {
+     "id": "RW4",
+     "text": "Links opinions to reasons with words, phrases and clauses.",
+     "coverage": "partly",
+     "where": "grammar",
+     "topics": [
+      "conjunctions",
+      "compound"
+     ],
+     "note": "Joining ideas with because, so and although is practised; writing an opinion is not. Reading covers telling fact from opinion."
+    },
+    {
+     "id": "RW5",
+     "text": "Works out the meaning of words and phrases, including similes.",
+     "coverage": "partly",
+     "where": "words",
+     "note": "New words teaches meanings in sentences; figurative language such as similes is not taught."
+    },
+    {
+     "id": "RW6",
+     "text": "Uses technology to gather information for a project.",
+     "coverage": "not",
+     "note": "Outside the app."
+    },
+    {
+     "id": "RW7",
+     "text": "Writes at least two paragraphs, about 150 words, on a topic.",
+     "coverage": "not",
+     "note": "Paragraph and essay writing is being built separately."
+    },
+    {
+     "id": "RW8",
+     "text": "Writes a narrative with events, actions, thoughts and feelings.",
+     "coverage": "not",
+     "note": "Story writing is being built separately."
+    },
+    {
+     "id": "RW9",
+     "text": "Arranges sentences in a sensible order.",
+     "coverage": "partly",
+     "where": "reading",
+     "note": "Reading covers the order of events; arranging whole sentences into a paragraph is not practised."
+    },
+    {
+     "id": "RW10",
+     "text": "Uses linking words such as firstly, then, later and finally.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "linkers"
+     ],
+     "note": "Grammar in use: building sentences with linking words."
+    },
+    {
+     "id": "RW11",
+     "text": "Writes short notes on self, diversity and responsible behaviour.",
+     "coverage": "not",
+     "note": "Free writing is being built separately."
+    },
+    {
+     "id": "RW12",
+     "text": "Uses words and phrases suited to the class, including ones for feelings and actions.",
+     "coverage": "partly",
+     "where": "words",
+     "note": "New words teaches level-appropriate words; it is not organised by feelings and actions."
+    },
+    {
+     "id": "RW13",
+     "text": "Follows the steps of writing: plan, write, revise, edit, rewrite.",
+     "coverage": "not",
+     "note": "The writing process is being built separately."
+    }
+   ]
+  },
+  {
+   "id": "grammar-vocabulary",
+   "name": "Grammar and Vocabulary in Context",
+   "pages": "28",
+   "outcomes": [
+    {
+     "id": "GV1",
+     "text": "Uses vocabulary that fits different fields, such as cookery, yoga and sports.",
+     "coverage": "partly",
+     "where": "words",
+     "note": "New words teaches general vocabulary, not sets by field."
+    },
+    {
+     "id": "GV2",
+     "text": "Understands and uses adverbs and their kinds.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "adverbs"
+     ]
+    },
+    {
+     "id": "GV3",
+     "text": "Uses conjunctions, prepositions and interjections.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "conjunctions",
+      "prepositions",
+      "interjections"
+     ]
+    },
+    {
+     "id": "GV4",
+     "text": "Knows the meaning and use of common idioms, proverbs and phrasal verbs.",
+     "coverage": "partly",
+     "where": "grammar",
+     "topics": [
+      "proverbs",
+      "phrasal_verbs"
+     ],
+     "note": "A small set of proverbs and phrasal verbs is practised; idioms are not yet."
+    },
+    {
+     "id": "GV5",
+     "text": "Uses plural possessives, comparisons of adjectives and adverbs, apostrophes in short forms and possessive pronouns.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "possessives",
+      "comparison",
+      "contractions"
+     ]
+    },
+    {
+     "id": "GV6",
+     "text": "Uses irregular verbs in the simple and continuous tenses.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "irregular_verbs",
+      "continuous"
+     ]
+    },
+    {
+     "id": "GV7",
+     "text": "Spells commonly used words correctly.",
+     "coverage": "covered",
+     "where": "spelling",
+     "note": "The Spelling Bee, and words misspelt in writing that return as My tricky words."
+    },
+    {
+     "id": "GV8",
+     "text": "Uses direct and reported speech in dialogue.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "speech"
+     ]
+    },
+    {
+     "id": "GV9",
+     "text": "Makes subjects and verbs agree, with growing skill.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "agreement"
+     ]
+    },
+    {
+     "id": "GV10",
+     "text": "Builds simple and compound sentences and punctuates them.",
+     "coverage": "covered",
+     "where": "grammar",
+     "topics": [
+      "compound",
+      "punctuation"
+     ],
+     "note": "Named under the strand's content rather than as a numbered outcome."
+    }
+   ]
+  },
+  {
+   "id": "literature",
+   "name": "English Literature",
+   "pages": "29-30",
+   "outcomes": [
+    {
+     "id": "LIT1",
+     "text": "Reads literary and other texts from a suggested list (stories, abridged classics, biographies, diaries).",
+     "coverage": "not",
+     "note": "The app holds no literature. Its reading texts are OpenPath's own short passages. A school's chosen book can be added through My Books."
+    }
+   ]
+  }
+ ]
+}

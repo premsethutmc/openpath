@@ -1,0 +1,142 @@
+/**
+ * End-to-end: Grammar in use and the ICSE Class 5 syllabus on an Android-sized phone (Chromium emulating 412×915; not
+ * a physical phone). A learner fixes and builds eight sentences, missing one of each kind, and sees the rule each
+ * time; then opens the class syllabus, sees what is and is not in the app, and starts practice on one line's topics.
+ * Device-only, against the production build; nothing is requested elsewhere.
+ *
+ *   npm run english:build && npm run english:preview &
+ *   E2E_URL=http://127.0.0.1:4174 npm run english:e2e-grammar
+ */
+import assert from "node:assert/strict";
+import { mkdirSync, readFileSync } from "node:fs";
+import { after, before, test } from "node:test";
+import { chromium } from "playwright";
+
+const URL = process.env.E2E_URL ?? "http://127.0.0.1:4174";
+const SHOTS = process.env.E2E_SHOTS;
+if (SHOTS) mkdirSync(SHOTS, { recursive: true });
+const shot = async (page, name) => SHOTS && page.screenshot({ path: `${SHOTS}/grammar-${name}.png`, fullPage: true });
+const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.625, isMobile: true, hasTouch: true };
+const read = (p) => JSON.parse(readFileSync(new globalThis.URL(`../../content/english/${p}`, import.meta.url), "utf8"));
+const ITEMS = new Map(read("grammar/in-use.json").items.map((i) => [i.id, i]));
+const SYLLABUS = read("syllabus/icse-class-5.json");
+
+let browser;
+before(async () => {
+  browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+});
+after(() => browser?.close());
+
+async function start(name) {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  const errors = [];
+  const foreign = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("request", (r) => {
+    const u = new globalThis.URL(r.url());
+    if (!["127.0.0.1", "localhost"].includes(u.hostname) && !["data:", "blob:"].includes(u.protocol)) foreign.push(r.url());
+  });
+  await page.goto(URL);
+  await page.getByRole("button", { name: "Let's begin" }).click();
+  await page.getByLabel(/Name to show/).fill(name);
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  const fits = async () => {
+    const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
+    assert.ok(sw <= w, "no sideways scrolling");
+  };
+  return { context, page, errors, foreign, fits };
+}
+
+/** Answer the sentence on screen; `wrong` gives a wrong answer. Returns the item. */
+async function answer(page, wrong) {
+  const main = page.locator('main[data-phase="ask"]');
+  await main.waitFor();
+  const it = ITEMS.get(await main.getAttribute("data-item"));
+  assert.ok(it, "a sentence of the bank");
+  if (it.kind === "fix") {
+    const words = it.sentence.split(" ");
+    const at = words.findIndex((w) => w.includes("["));
+    assert.equal(await page.locator(".grammar-word").count(), words.length);
+    assert.ok(!(await page.locator(".grammar-words").innerText()).includes("["), "the wrong word is not marked");
+    await page.locator(".grammar-word").nth(wrong ? (at + 1) % words.length : at).click();
+    await page.locator("#grammar-box").fill(wrong ? "zzz" : it.right[0]);
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+  } else {
+    const target = it.sentence.split(" ");
+    const order = wrong ? [...target].reverse() : target;
+    for (const w of order) await page.locator(".grammar-pool .grammar-tile").getByText(w, { exact: true }).first().click();
+    assert.equal(await page.locator(".grammar-line .grammar-tile").count(), target.length);
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+  }
+  await page.locator('main[data-phase="feedback"]').waitFor();
+  await page.getByText(wrong ? "Not quite" : "✓ Right").waitFor();
+  await page.getByText(it.rule, { exact: true }).waitFor();
+  return it;
+}
+
+test("Grammar in use: fix and build eight sentences, see each rule, find the result kept", async () => {
+  const { context, page, errors, foreign, fits } = await start("Grammar");
+  await page.getByRole("button", { name: "Try Grammar in use" }).click();
+  await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
+  await page.getByText("Level 2: Class 5 grammar").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  const missed = { fix: false, build: false };
+  const shots = { fix: false, build: false };
+  let right = 0;
+  for (let i = 1; i <= 8; i++) {
+    await page.getByText(`Sentence ${i} of 8`, { exact: false }).waitFor();
+    const kind = await page.locator('main[data-phase="ask"]').getAttribute("data-kind");
+    if (!shots[kind]) (shots[kind] = true), await fits(), await shot(page, `1-${kind}`);
+    const wrong = !missed[kind];
+    missed[kind] = true;
+    const it = await answer(page, wrong);
+    assert.equal(it.level, 2);
+    if (!wrong) right++;
+    if (wrong) await fits(), await shot(page, `2-${kind}-feedback`);
+    await page.getByRole("button", { name: i < 8 ? "Next sentence" : "Finish" }).click();
+  }
+  assert.deepEqual(missed, { fix: true, build: true }, "both kinds were asked");
+  await page.getByRole("heading", { name: `${right} of 8 right` }).waitFor();
+  await page.getByText(/To look at again:/).waitFor();
+  await fits();
+  await shot(page, "3-done");
+  await page.getByRole("button", { name: "Done", exact: true }).click();
+  await page.getByText(`${right} of 8 sentences right`).waitFor();
+  await page.reload();
+  await page.getByText(`${right} of 8 sentences right`).waitFor();
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});
+
+test("ICSE Class 5 syllabus: every line shown with its place in the app, and practice starts on a line's topics", async () => {
+  const { context, page, errors, foreign, fits } = await start("Syllabus");
+  await page.getByRole("heading", { name: "CISCE (ICSE) Class 5 English" }).waitFor();
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
+  await page.getByText("12 in the app · 7 partly · 14 not yet (of 33)").waitFor();
+  for (const st of SYLLABUS.strands) await page.getByRole("heading", { name: st.name }).waitFor();
+  assert.equal(await page.locator("[data-outcome]").count(), 33);
+  assert.equal(await page.locator('[data-coverage="not"] button').count(), 0, "a line that is not in the app offers no practice");
+  await page.locator('[data-outcome="RW7"]', { hasText: "being built separately" }).waitFor();
+  await fits();
+  await shot(page, "4-syllabus");
+  await page.getByRole("button", { name: "Where this list comes from" }).click();
+  await page.getByText(/UNOFFICIAL SOURCE/).waitFor();
+  await page.getByRole("button", { name: /Practise GV8:/ }).click();
+  await page.getByText("Topics: Direct and reported speech").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  const first = await answer(page, false);
+  assert.equal(first.topic, "speech");
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
+  await page.getByRole("button", { name: /Practise RW1:/ }).click();
+  await page.getByRole("heading", { name: "Read, think, answer" }).waitFor();
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});
