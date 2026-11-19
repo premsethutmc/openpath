@@ -1,0 +1,38 @@
+name: Simulated English learners
+# sim-english@1: eight kinds of learner (from barely any English to strong, one who reads well but cannot name a
+# noun, a careless one, a guesser), twenty of each, take Find my level and a month of every English stream through
+# the real logic. Fails only if a stream throws or has nothing to give; the report (placement, levels, too hard,
+# repeats) is uploaded for reading. Behaviour only; no language model is called; nothing is deployed.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 22 * * *" # 03:40 IST, nightly
+  pull_request:
+    paths: ["frontend/src/english/logic/**", "content/english/**", "frontend/scripts/sim-english.mts", ".github/workflows/simulated-english.yml"]
+permissions:
+  contents: read
+concurrency:
+  group: simulated-english-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  learners:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: node --import tsx scripts/sim-english.mts --runs 20 --md sim-english.md --out sim-english.json --strict
+        working-directory: frontend
+      - if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sim-english
+          path: |
+            frontend/sim-english.md
+            frontend/sim-english.json

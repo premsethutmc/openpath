@@ -81,3 +81,20 @@ letters or words ("x - a equations", "An before a silent h"); the second kind is
 Still not caught: wrong tense across sentences, missing articles ("I saw dog"), wrong word order,
 agreement when words stand between the doer and the verb ("The boys in the class is"), and anything
 that depends on meaning. These need a parser or a model, not patterns.
+
+## Full spelling list (19 Nov 2026)
+
+Any word not on a list of about 91,000 words is now shown as a tip: "Check the spelling of: frend (friend?)".
+
+- Source: SCOWL size 60 and below (the list ordinary spell checkers use), British, American, Canadian and Australian
+  spellings all accepted, plus speller-extra.txt for Indian English words (amma, dosa, idli, lakh, tiffin).
+  Built by tools/english/spelling/build_speller.py into content/english/spelling/speller-words.txt (880 kB, 260 kB
+  compressed). It is fetched only when a learner first checks a piece.
+- A tip, never a fix: an unknown word may be a rare word or a word from another language, so it never holds back AI
+  feedback. Names (a capital in mid-sentence), capitalised unknown words at a sentence start, words of one or two
+  letters, web and e-mail addresses are not checked.
+- The likely word is one edit away (a letter added, dropped, changed, or two swapped), the commoner word first.
+  Words on blocklist.txt are accepted as correct but never offered as a correction.
+- Guards: SP-1 to SP-5. None of our 1,700+ reading, listening and dictation texts raises the tip.
+
+Still not caught: a real word used wrongly (there / their, form / from) beyond the patterns in slips.ts.

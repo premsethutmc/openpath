@@ -5,6 +5,7 @@
  */
 import { useMemo, useRef, useState } from "react";
 import { ReadingEvidence } from "./ReadingEvidence.tsx";
+import { ReadingInference } from "./ReadingInference.tsx";
 import { COURSE, LEVELS, unitKey, type Course, type Level, type Passage, type SkillId, type Unit } from "../logic/reading/course.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
 import { ReadingUnitSession, progress, recommend, statusOf, type Mode, type Progress, type ReadingRecord, type Snapshot, type UnitStatus } from "../logic/reading/session.ts";
@@ -330,9 +331,11 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
 
 export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onLeave: () => void; onChanged: () => void }) {
   const [evidence,setEvidence]=useState(false);
+  const [inference,setInference]=useState(false);
   const [session, setSession] = useState<ReadingUnitSession | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [saving, setSaving] = useState(false);
   const unsaved = useRef<ReadingRecord[]>([]);
   const records = learner.readingRecords();
   const p = useMemo(() => progress(COURSE, records), [records.length]);
@@ -341,6 +344,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
    * Records that could not be saved wait in order and go first on the next step.
    */
   const step = async (s: ReadingUnitSession, act?: () => void) => {
+    setSaving(true);
     const before = s.snapshot();
     act?.();
     unsaved.current.push(...s.take());
@@ -353,6 +357,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     } catch {
       setFailed(true);
     }
+    setSaving(false);
     setTick((t) => t + 1);
     onChanged();
     const after = s.snapshot();
@@ -364,11 +369,12 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     setSession(s);
     void step(s);
   };
+  if(inference)return <ReadingInference learner={learner} onBack={()=>setInference(false)} onChanged={onChanged}/>;
   if(evidence)return <ReadingEvidence learner={learner} onBack={()=>setEvidence(false)} onChanged={onChanged}/>;
   if (!session)
     return (
       <>
-        <div className="page"><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button></div>
+        <div className="page"><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" onClick={()=>setInference(true)}>Connect the clues</button></div>
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
           <NoteBox learner={learner} screen="reading" label="Anything confusing or wrong on this screen? Tell us." />
@@ -376,6 +382,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
       </>
     );
   const s = session;
+  if (saving || failed) return <main className="page"><p role={failed?"alert":"status"}>{failed?"This step could not be saved. Its passage is hidden until the reading record is safe.":"Saving your reading step…"}</p>{failed&&<><button onClick={()=>void step(s)}>Retry saving</button><button onClick={()=>setSession(null)}>Back to reading skills</button></>}</main>;
   return (
     <>
       {failed && (

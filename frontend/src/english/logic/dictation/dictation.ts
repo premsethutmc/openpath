@@ -202,7 +202,10 @@ export function levelFor(d: Dictation, records: readonly DictationRecord[], star
   return clamp(rescale(last, OLD_LEVELS) + (last.perfectFirst >= MOVE_UP ? 1 : last.perfectFirst <= MOVE_DOWN ? -1 : 0));
 }
 
-/** The sentences for a sitting: up to two to redo (not right first time last time), then new ones, then the oldest. */
+/**
+ * The sentences for a sitting: up to two to redo (not right first time last time), then new ones, then new ones from
+ * the level below, then the oldest (sim-english@1 found the top level's sentences re-asked within days).
+ */
 export function pick(d: Dictation, level: number, records: readonly DictationRecord[]): Sentence[] {
   const latest = new Map<string, { a: Answer; i: number }>();
   records.forEach((r, i) => r.type === "answer" && latest.set(r.id, { a: r, i }));
@@ -211,7 +214,8 @@ export function pick(d: Dictation, level: number, records: readonly DictationRec
   const redo = seen.filter((s) => !latest.get(s.id)!.a.perfectFirst).slice(0, REDO_PER_SITTING);
   const fresh = pool.filter((s) => !latest.has(s.id)).map((s) => ({ s, k: hash(`dictation|${s.id}`) })).sort((a, b) => a.k - b.k || (a.s.id < b.s.id ? -1 : 1)).map((x) => x.s);
   const rest = seen.filter((s) => !redo.includes(s));
-  return [...fresh.slice(0, SITTING_SIZE - redo.length), ...redo, ...fresh.slice(SITTING_SIZE - redo.length), ...rest].slice(0, SITTING_SIZE);
+  const lower = d.sentences.filter((s) => s.level === level - 1 && !latest.has(s.id)).map((s) => ({ s, k: hash(`dictation|${s.id}`) })).sort((a, b) => a.k - b.k || (a.s.id < b.s.id ? -1 : 1)).map((x) => x.s);
+  return [...fresh.slice(0, SITTING_SIZE - redo.length), ...redo, ...fresh.slice(SITTING_SIZE - redo.length), ...lower, ...rest].slice(0, SITTING_SIZE);
 }
 
 export interface DictationSummary {

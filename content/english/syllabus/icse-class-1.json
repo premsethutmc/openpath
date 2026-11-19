@@ -163,12 +163,11 @@
         {
           "id": "RW9",
           "text": "Tells events in order with the help of pictures, and says how people reacted.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "sentence_order"
-          ],
-          "note": "Sentences are put in order here; the app has no pictures to tell from."
+            "picture_order"
+          ]
         },
         {
           "id": "RW10",

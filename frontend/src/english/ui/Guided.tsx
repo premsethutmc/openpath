@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { LIMIT, checkWriting, type WritingCheck } from "../logic/writing/check.ts";
+import { loadDictionary } from "../logic/writing/dictionary.ts";
 import { AI_LIMIT, CONSENT_TEXT, MARK, MET_WORD, notReady, type Feedback, type FeedbackService, type FeedbackStatus } from "../logic/writing/feedback.ts";
 import { GUIDED, done, guidedSummary, tasksFor, wordCount, type GuidedSummary, type GuidedTask } from "../logic/guided/guided.ts";
 
@@ -85,6 +86,22 @@ export function AiFeedback({ task, text, check, service }: { task: GuidedTask; t
       ) : (
         <p className="small">This week's {status.limit} pieces of AI feedback are used. More come on Monday.</p>
       )}
+      {status.consent && !busy && (
+        <button
+          type="button"
+          className="link"
+          onClick={() =>
+            void run(async () => {
+              await service.agree(false);
+              setGot(null);
+              setAgreed(false);
+              setStatus({ ...status, consent: false });
+            })
+          }
+        >
+          Stop AI feedback for this learner
+        </button>
+      )}
       {error && (
         <p className="warning" role="alert">
           {error}
@@ -100,6 +117,7 @@ function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?
   const [self, setSelf] = useState<number[]>([]);
   const [copied, setCopied] = useState(false);
   const [check, setCheck] = useState<WritingCheck | null>(null);
+  const [checking, setChecking] = useState(false);
   const words = wordCount(text);
   const [open, setOpen] = useState(false);
   return (
@@ -147,8 +165,19 @@ function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?
                   {copied ? "Copied" : "Copy my writing to keep it"}
                 </button>
               )}
-              <button type="button" className="secondary" disabled={!text.trim()} onClick={() => setCheck(checkWriting(text, { ...task.write!, ...(task.form ? { form: task.form } : {}) }))}>
-                Check my writing
+              <button
+                type="button"
+                className="secondary"
+                disabled={!text.trim() || checking}
+                onClick={() => {
+                  setChecking(true);
+                  void loadDictionary().then((dict) => {
+                    setCheck(checkWriting(text, { ...task.write!, ...(task.form ? { form: task.form } : {}) }, dict));
+                    setChecking(false);
+                  });
+                }}
+              >
+                {checking ? "Checking …" : "Check my writing"}
               </button>
               {check && (
                 <div className="writing-notes" role="status" data-fixes={check.notes.filter((n) => n.level === "fix").length}>
