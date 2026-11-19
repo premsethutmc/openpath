@@ -531,3 +531,10 @@ jumps stop one short, and the last jump is typed), and, for a fact with 6 to 9 i
 298 facts, proved.
 Single-step help in Classes 1 to 5 (116 types) was read through: most are one-idea questions (count, compare, read),
 where one step is right; the table facts were the clear exception.
+
+`sim@1` (frontend/scripts/sim-children.mts, workflow "Simulated children"): real use, replicated. Eight simulated
+children take every skill of a class through the real engine over up to eight sittings; each truly knows a hidden
+share of each skill, which rises only when the product teaches (a lesson, a strategy, a guided question). First run,
+ICSE Class 5, 62 skills: docs/product/SIM_REPORT.md. The product was never fooled (the guesser mastered nothing; no
+child was marked mastered while knowing under half), nobody got stuck or looped; a child who is always right needs four
+sittings and about 17 questions a skill; the weak child was handed to a teacher or parent ("pause") in 30 of 62 skills.
