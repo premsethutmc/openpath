@@ -507,3 +507,8 @@ the first way writes the answer, or every part of it) and `answer-in-first-step`
 numeric answer in step one; lists of numbers excepted). Two rules follow from what it found. `closing@1`: a help that
 never writes its numeric answer ends with one added step that writes it ("Last: write the answer. — The answer: 2/3").
 `no-spoiler-way@1`: the type's own steps are not offered as a second tab where their first step says the answer.
+
+`gate@1`: the Robot learner job fails when any question breaks the product, when a quality count rises above where it
+stood (answer in the first step 257, answer in a cue 5, help that never states its answer 0), or when fewer than
+3,50,000 questions were taken. It runs nightly and on any change to the step help, the grader or the question types.
+Full run after the fixes: 3,52,699 of 3,52,699 questions with nothing broken; 465 held back.
