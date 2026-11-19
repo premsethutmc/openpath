@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 7,
+  "version": 8,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -202,6 +202,14 @@
     {
       "id": "exact_words",
       "name": "Words for feelings and actions"
+    },
+    {
+      "id": "affixes",
+      "name": "Prefixes and suffixes"
+    },
+    {
+      "id": "transitive",
+      "name": "Verbs that take an object"
     }
   ],
   "scale": 2,
@@ -387,6 +395,15 @@
     {"id": "gu.tenses.05", "level": 5, "topic": "tenses", "kind": "fix", "sentence": "They have [went] home.", "rule": "Go, went, gone: after \"have\" use gone.", "right": ["gone"]},
     {"id": "gu.linkers.05", "level": 5, "topic": "linkers", "kind": "build", "sentence": "First we mixed the flour, then we added water.", "rule": "\"First\" and \"then\" show the order of the steps."},
     {"id": "gu.compound.05", "level": 5, "topic": "compound", "kind": "build", "sentence": "I wanted to play, but it was too dark.", "rule": "\"But\" joins two sentences that pull apart; a comma comes before it."},
+    {"id": "gu.affixes.01", "level": 5, "topic": "affixes", "kind": "fix", "sentence": "She was [happy] to lose her favourite pen.", "rule": "The prefix un- means not: unhappy.", "right": ["unhappy", "sad", "upset", "sorry"]},
+    {"id": "gu.affixes.02", "level": 5, "topic": "affixes", "kind": "fix", "sentence": "The magician made the coin [appear] into thin air.", "rule": "The prefix dis- gives the opposite: disappear.", "right": ["disappear", "vanish"]},
+    {"id": "gu.affixes.03", "level": 5, "topic": "affixes", "kind": "fix", "sentence": "He is a very [care] driver and has never had an accident.", "rule": "The suffix -ful means full of: careful.", "right": ["careful"]},
+    {"id": "gu.affixes.04", "level": 5, "topic": "affixes", "kind": "fix", "sentence": "The teacher asked me to [write] the untidy page again neatly.", "rule": "The prefix re- means again: rewrite.", "right": ["rewrite"]},
+    {"id": "gu.affixes.05", "level": 5, "topic": "affixes", "kind": "fix", "sentence": "The dirty water was not [drink].", "rule": "The suffix -able means can be: drinkable.", "right": ["drinkable"]},
+    {"id": "gu.transitive.01", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "Ravi kicked the ball.", "rule": "Kicked is a transitive verb: it has an object, the ball. In \"Ravi ran\", ran has no object, so it is intransitive.", "right": ["ball"]},
+    {"id": "gu.transitive.02", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "The girl opened the window.", "rule": "Opened is transitive here: its object is the window. In \"The shop opened\", there is no object.", "right": ["window"]},
+    {"id": "gu.transitive.03", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "My mother baked a cake yesterday.", "rule": "Baked is transitive: its object is a cake. Yesterday tells when; it is not an object.", "right": ["cake"]},
+    {"id": "gu.transitive.04", "level": 5, "topic": "transitive", "kind": "spot", "ask": "object", "sentence": "The children sang a song loudly.", "rule": "Sang is transitive here: its object is a song. In \"The children sang loudly\", there is no object.", "right": ["song"]},
     {"id": "gu.speech.03", "level": 6, "topic": "speech", "kind": "build", "sentence": "Meena said that she was hungry.", "rule": "In reported speech \"I am\" becomes \"she was\".", "extra": ["is", "I"]},
     {"id": "gu.speech.04", "level": 6, "topic": "speech", "kind": "build", "sentence": "Ravi asked me where I was going.", "rule": "A reported question uses statement order and has no question mark.", "extra": ["are", "you"]},
     {"id": "gu.speech.05", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Last week she said that she [will] visit us soon.", "rule": "In reported speech \"will\" becomes \"would\".", "right": ["would"]},

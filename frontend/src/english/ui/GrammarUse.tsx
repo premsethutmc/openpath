@@ -95,7 +95,7 @@ export function Spot({ words, task, button = "Check", onCheck }: { words: string
     </>
   );
 }
-export const spotTask = (ask: string) => `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`;
+export const spotTask = (ask: string) => (ask === "object" ? "Tap the object of the verb in this sentence." : `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`);
 
 function Build({ tiles, whole, onCheck }: { tiles: string[]; whole: boolean; onCheck: (chosen: string[]) => void }) {
   const [chosen, setChosen] = useState<number[]>([]);

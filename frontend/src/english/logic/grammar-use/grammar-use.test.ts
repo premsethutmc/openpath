@@ -161,8 +161,8 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 
 test("GU-9 Classes 4, 5 and 6 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
   assert.deepEqual(SYLLABUSES.map((x) => x.class), [4, 5, 6]);
-  assert.deepEqual(coverage(syllabusFor(4)), { covered: 7, partly: 6, guided: 0, not: 12, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 11, partly: 10, guided: 0, not: 25, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(4)), { covered: 10, partly: 7, guided: 8, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 14, partly: 19, guided: 13, not: 0, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);

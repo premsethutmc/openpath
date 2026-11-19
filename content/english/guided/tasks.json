@@ -1,6 +1,6 @@
 {
   "id": "guided-tasks",
-  "version": 1,
+  "version": 2,
   "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
@@ -219,6 +219,510 @@
         "Said agree or disagree",
         "Gave two reasons",
         "Listened to the other view"
+      ]
+    },
+    {
+      "id": "c4.ls1.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS1",
+      "title": "Talk about the weather",
+      "task": "Talk with a grown-up about the weather this week. Take turns: say something, then listen, then answer what they said.",
+      "look": [
+        "Took turns to speak",
+        "Listened without interrupting",
+        "Answered what the other person said"
+      ]
+    },
+    {
+      "id": "c4.ls1.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS1",
+      "title": "Plan a picnic together",
+      "task": "Plan a picnic with a grown-up. Decide together where to go, what to carry and what to eat.",
+      "look": [
+        "Gave own ideas",
+        "Listened to the other ideas",
+        "Agreed on a plan"
+      ]
+    },
+    {
+      "id": "c4.ls2.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS2",
+      "title": "Answer and add",
+      "task": "Ask a grown-up to ask you: \"What did you do at school today?\" Answer, then add one more thing they did not ask about.",
+      "look": [
+        "Answered the question asked",
+        "Added something more",
+        "Spoke in full sentences"
+      ]
+    },
+    {
+      "id": "c4.ls2.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS2",
+      "title": "What do you think?",
+      "task": "A grown-up tells you about a film or a book they like. Say one thing you think about it and ask one question.",
+      "look": [
+        "Made a comment on the topic",
+        "Asked a question",
+        "Stayed on the topic"
+      ]
+    },
+    {
+      "id": "c4.ls3.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS3",
+      "title": "Tell me about an animal",
+      "task": "Choose an animal. Tell a grown-up about it in order: what it looks like, where it lives and what it eats.",
+      "look": [
+        "Kept to the order",
+        "Gave at least three facts",
+        "Used describing words"
+      ]
+    },
+    {
+      "id": "c4.ls3.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS3",
+      "title": "What the text said",
+      "task": "Read a text in the app. Then tell a grown-up what it said, from the beginning to the end.",
+      "look": [
+        "Began at the beginning",
+        "Kept the order",
+        "Included the main details"
+      ]
+    },
+    {
+      "id": "c4.ls4.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS4",
+      "title": "A day I remember",
+      "task": "Tell a grown-up about a day you remember well. Say what happened first, next and last.",
+      "look": [
+        "Told it in order",
+        "Spoke clearly",
+        "Kept a steady pace"
+      ]
+    },
+    {
+      "id": "c4.ls4.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS4",
+      "title": "Tell a story you know",
+      "task": "Tell a grown-up a story you know well, such as a folk tale, without reading it.",
+      "look": [
+        "Had a beginning, a middle and an end",
+        "Spoke clearly",
+        "Did not rush"
+      ]
+    },
+    {
+      "id": "c4.ls5.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS5",
+      "title": "A tongue twister",
+      "task": "Ask a grown-up to teach you a tongue twister. Say it slowly, then try it three times fast.",
+      "look": [
+        "Listened first",
+        "Said it slowly and correctly",
+        "Enjoyed trying it fast"
+      ]
+    },
+    {
+      "id": "c4.ls5.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "LS5",
+      "title": "A riddle each",
+      "task": "Ask a grown-up to tell you a riddle, and try to answer it. Then tell them a riddle or a short poem you know.",
+      "look": [
+        "Listened to the whole riddle",
+        "Had a go at the answer",
+        "Shared a riddle or a poem"
+      ]
+    },
+    {
+      "id": "c4.rw2.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW2",
+      "title": "It happened to me too",
+      "task": "After reading a story in the app, tell a grown-up about a time something like it happened to you.",
+      "look": [
+        "Named the story",
+        "Told of own experience",
+        "Said how the two are alike"
+      ]
+    },
+    {
+      "id": "c4.rw2.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW2",
+      "title": "What would I do?",
+      "task": "After reading a story in the app, tell a grown-up what you would have done in the place of the main person.",
+      "look": [
+        "Said what the person did",
+        "Said what they would do",
+        "Gave a reason"
+      ]
+    },
+    {
+      "id": "c4.rw3.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW3",
+      "title": "A book of my choice",
+      "task": "Read a story book or a part of one that is not in this app. Tell a grown-up what it is about.",
+      "look": [
+        "Named the book",
+        "Said what it is about",
+        "Said whether they liked it"
+      ]
+    },
+    {
+      "id": "c4.rw3.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW3",
+      "title": "Read for ten minutes",
+      "task": "Read anything you like for ten minutes: a comic, a magazine or a book. Tell a grown-up one thing you enjoyed.",
+      "look": [
+        "Read without being reminded",
+        "Named what was read",
+        "Told one thing enjoyed"
+      ]
+    },
+    {
+      "id": "c4.rw5.1",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW5",
+      "title": "Look it up",
+      "task": "Choose a word you do not know. With a grown-up, find it in a dictionary, on paper or on a phone, and read out what it means.",
+      "look": [
+        "Found the word",
+        "Read the meaning",
+        "Used the word in a sentence"
+      ]
+    },
+    {
+      "id": "c4.rw5.2",
+      "syllabus": "icse-cisce-english-class-4",
+      "outcome": "RW5",
+      "title": "Another word for it",
+      "task": "Choose a word such as big or happy. With a grown-up, find two other words that mean nearly the same.",
+      "look": [
+        "Found two words",
+        "Said how they differ a little",
+        "Used one in a sentence"
+      ]
+    },
+    {
+      "id": "c6.ls3.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS3",
+      "title": "Lead the talk",
+      "task": "Lead a short family discussion on a question, such as whether pets belong in flats. Ask each person a question and sum up at the end.",
+      "look": [
+        "Asked each person a question",
+        "Asked a follow-up question",
+        "Summed up what was said"
+      ]
+    },
+    {
+      "id": "c6.ls3.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS3",
+      "title": "Dig deeper",
+      "task": "A grown-up gives an opinion. Ask three questions that make them explain it further, such as \"Why do you think so?\"",
+      "look": [
+        "Asked open questions",
+        "Built on the answers",
+        "Stayed polite"
+      ]
+    },
+    {
+      "id": "c6.ls4.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS4",
+      "title": "Make your case",
+      "task": "Say whether school uniforms are a good idea. Use at least three exact words such as fair, practical or expensive.",
+      "look": [
+        "Stated a point of view",
+        "Chose exact words",
+        "Gave reasons"
+      ]
+    },
+    {
+      "id": "c6.ls4.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS4",
+      "title": "Persuade me",
+      "task": "Persuade a grown-up to try a food, a game or a book that you like.",
+      "look": [
+        "Stated what they want",
+        "Gave two reasons",
+        "Used persuading words such as because or imagine"
+      ]
+    },
+    {
+      "id": "c6.ls5.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS5",
+      "title": "Present what you found",
+      "task": "Give a two-minute talk on a topic you have read about. Say where each main fact came from.",
+      "look": [
+        "Spoke for about two minutes",
+        "Named a source",
+        "Kept facts apart from own views"
+      ]
+    },
+    {
+      "id": "c6.ls5.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS5",
+      "title": "Two views",
+      "task": "Present a topic on which people disagree, such as zoos. Give one view, then the other, and say whose view each is.",
+      "look": [
+        "Gave both views",
+        "Said whose view each is",
+        "Stayed fair to both"
+      ]
+    },
+    {
+      "id": "c6.ls6.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS6",
+      "title": "Stay calm",
+      "task": "Give your opinion on a topic while a grown-up disagrees with you. Keep your voice steady and answer politely.",
+      "look": [
+        "Kept a steady voice",
+        "Answered without getting upset",
+        "Kept to the point"
+      ]
+    },
+    {
+      "id": "c6.ls6.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS6",
+      "title": "Question an opinion",
+      "task": "A grown-up gives an opinion. Question it politely: ask for a reason and for an example.",
+      "look": [
+        "Asked for a reason",
+        "Asked for an example",
+        "Stayed polite and confident"
+      ]
+    },
+    {
+      "id": "c6.ls7.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS7",
+      "title": "Answer the other side",
+      "task": "A grown-up argues the opposite of what you think. Answer each of their points in turn, with a reason.",
+      "look": [
+        "Answered the point made",
+        "Gave a reason each time",
+        "Used phrases such as I see your point, but"
+      ]
+    },
+    {
+      "id": "c6.ls7.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS7",
+      "title": "Change one mind",
+      "task": "Take a topic you both disagree on. Find the strongest point on the other side and say why it does not change your view.",
+      "look": [
+        "Named the other side's best point",
+        "Answered it with a reason",
+        "Used hands and face to help the meaning"
+      ]
+    },
+    {
+      "id": "c6.ls8.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS8",
+      "title": "Read an advertisement",
+      "task": "Look at an advertisement in a newspaper or on a hoarding. Tell a grown-up which words are meant to make you want the thing.",
+      "look": [
+        "Picked out persuading words",
+        "Said what the advertisement wants",
+        "Said what it leaves out"
+      ]
+    },
+    {
+      "id": "c6.ls8.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS8",
+      "title": "Headline and story",
+      "task": "Read a newspaper headline and the report under it. Say whether the headline is fair to the report.",
+      "look": [
+        "Said what the headline claims",
+        "Said what the report says",
+        "Judged whether they match"
+      ]
+    },
+    {
+      "id": "c6.ls9.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS9",
+      "title": "Two ways to say it",
+      "task": "Ask to borrow a pen twice: once as you would ask a friend, once as you would ask the head teacher.",
+      "look": [
+        "Changed the words for each listener",
+        "Changed the tone",
+        "Explained the difference"
+      ]
+    },
+    {
+      "id": "c6.ls9.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS9",
+      "title": "On the telephone",
+      "task": "Pretend to telephone a shop to ask whether it has a book. A grown-up plays the shopkeeper.",
+      "look": [
+        "Greeted and said who was calling",
+        "Asked clearly",
+        "Thanked and ended politely"
+      ]
+    },
+    {
+      "id": "c6.ls10.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS10",
+      "title": "Inform, then persuade",
+      "task": "Tell a grown-up the facts about cycling to school. Then try to persuade them that everyone should do it.",
+      "look": [
+        "Kept the first part to facts",
+        "Used persuading language in the second",
+        "Explained how the two differ"
+      ]
+    },
+    {
+      "id": "c6.ls10.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS10",
+      "title": "Just my opinion",
+      "task": "Give your opinion of a film or a match. Use phrases that show it is an opinion, such as I think and in my view.",
+      "look": [
+        "Used opinion phrases",
+        "Gave reasons",
+        "Did not present opinion as fact"
+      ]
+    },
+    {
+      "id": "c6.ls11.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS11",
+      "title": "Talk with pictures",
+      "task": "Give a short talk about a place, using three pictures or drawings. Show each one as you speak about it.",
+      "look": [
+        "Chose pictures that fit",
+        "Showed each at the right moment",
+        "Spoke about the picture, not just held it up"
+      ]
+    },
+    {
+      "id": "c6.ls11.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS11",
+      "title": "A chart to explain",
+      "task": "Draw a simple chart or map and use it to explain something, such as your way to school.",
+      "look": [
+        "Made a clear chart or map",
+        "Pointed to it while speaking",
+        "Explained what it shows"
+      ]
+    },
+    {
+      "id": "c6.ls12.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS12",
+      "title": "The same news twice",
+      "task": "Find one piece of news in two places, such as a newspaper and the radio. Say what each told you and why it matters.",
+      "look": [
+        "Used two kinds of media",
+        "Said what each told",
+        "Said why it matters"
+      ]
+    },
+    {
+      "id": "c6.ls12.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "LS12",
+      "title": "Read a chart",
+      "task": "Find a chart or table in a newspaper or a book. Tell a grown-up what it shows and one thing you can conclude from it.",
+      "look": [
+        "Read the title and labels",
+        "Said what it shows",
+        "Drew one conclusion"
+      ]
+    },
+    {
+      "id": "c6.r6.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "R6",
+      "title": "A book of my choice",
+      "task": "Read a book or a long story that is not in this app. Tell a grown-up about the people in it and how it ends.",
+      "look": [
+        "Named the book and its kind",
+        "Described the main people",
+        "Explained the ending"
+      ]
+    },
+    {
+      "id": "c6.r6.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "R6",
+      "title": "A different kind of text",
+      "task": "Read something that is not a story: a life story, a travel piece or a report. Tell a grown-up how it differs from a story.",
+      "look": [
+        "Named the kind of text",
+        "Told what it was about",
+        "Said how it differs from a story"
+      ]
+    },
+    {
+      "id": "c6.w4.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W4",
+      "title": "Two sources, one note",
+      "task": "Choose a topic. Read about it in a book and on a website, and write five notes that bring both together.",
+      "look": [
+        "Used a printed and a digital source",
+        "Wrote notes in own words",
+        "Brought the two together"
+      ]
+    },
+    {
+      "id": "c6.w4.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "W4",
+      "title": "Where it came from",
+      "task": "For three facts you have gathered, write down where each one came from.",
+      "look": [
+        "Listed a source for each fact",
+        "Wrote the title or the site name",
+        "Said which source seems most reliable"
+      ]
+    },
+    {
+      "id": "c6.gv7.1",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "GV7",
+      "title": "How do you say it?",
+      "task": "Choose a hard word. With a grown-up, use a dictionary, on paper or on a phone, to find how it is said, what it means and its part of speech.",
+      "look": [
+        "Found how it is said",
+        "Found the meaning",
+        "Found the part of speech"
+      ]
+    },
+    {
+      "id": "c6.gv7.2",
+      "syllabus": "icse-cisce-english-class-6",
+      "outcome": "GV7",
+      "title": "One word, many meanings",
+      "task": "Find a word with more than one meaning in a dictionary, such as light. Read out two meanings and use each in a sentence.",
+      "look": [
+        "Found two meanings",
+        "Used each in a sentence",
+        "Named the part of speech of each"
       ]
     }
   ]
