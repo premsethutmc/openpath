@@ -2787,3 +2787,12 @@ h3.sub {
   border-color: var(--violet, #6957de);
   background: #eef;
 }
+
+.guided-write {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}

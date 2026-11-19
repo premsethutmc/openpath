@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { GUIDED, done, guidedProblems, guidedSummary, tasksFor } from "./guided.ts";
+import { GUIDED, done, guidedProblems, guidedSummary, tasksFor, wordCount } from "./guided.ts";
 import { SYLLABUSES, coverage, syllabusProblems } from "../syllabus/syllabus.ts";
 import { loadContent } from "../content.ts";
 import { Learner } from "../learner.ts";
@@ -36,4 +36,19 @@ test("GT-3 a task done is kept with the adult's ticks, counted again when repeat
   await l.recordGuided(done(t, [0, 1, 2]));
   assert.deepEqual(guidedSummary(l.guidedRecords()).done.get(t.id), { seen: 3, of: t.look.length, times: 2 });
   assert.equal(picture(), before, "no capability estimate moves");
+});
+
+test("GT-4 writing tasks: every writing line of every class has two, with a length to aim for and a self-check; the words are never kept", () => {
+  const writing = GUIDED.tasks.filter((t) => t.write);
+  assert.equal(writing.length, 84);
+  for (const t of writing) assert.ok(t.self!.length >= 2 && t.write!.max > t.write!.min, t.id);
+  assert.deepEqual([...new Set(writing.map((t) => t.syllabus.slice(-1)))].sort(), ["1", "2", "3", "4", "5", "6", "7", "8"]);
+  const t = writing[0];
+  assert.deepEqual([wordCount(""), wordCount("  one   two\nthree ")], [0, 3]);
+  const r = done(t, [0, 1], { words: 42.9, self: [1, 1, 9] });
+  assert.deepEqual([r.words, r.self, r.seen], [42, [1], [0, 1]]);
+  assert.ok(!JSON.stringify(r).includes("text"), "the record has no place for the words written");
+  assert.equal(done(GUIDED.tasks.find((x) => !x.write)!, [0], { words: 5, self: [0] }).words, undefined, "a speaking task records no words");
+  assert.deepEqual(guidedSummary([r]).done.get(t.id), { seen: 2, of: t.look.length, times: 1, words: 42 });
+  for (const s of SYLLABUSES) assert.equal(s.strands.flatMap((st) => st.outcomes).filter((o) => o.where === "writing").length, 0, "no line is left pointing only at the essay studio");
 });

@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-5",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 5,
   "subject": "English",
@@ -141,16 +141,16 @@
         {
           "id": "RW7",
           "text": "Writes at least two paragraphs, about 150 words, on a topic.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW8",
           "text": "Writes a narrative with events, actions, thoughts and feelings.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW9",
@@ -174,9 +174,9 @@
         {
           "id": "RW11",
           "text": "Writes short notes on self, diversity and responsible behaviour.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW12",
@@ -190,9 +190,9 @@
         {
           "id": "RW13",
           "text": "Follows the steps of writing: plan, write, revise, edit, rewrite.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },

@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-1",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "board": "CISCE (ICSE)",
   "class": 1,
   "subject": "English",
@@ -156,9 +156,9 @@
         {
           "id": "RW8",
           "text": "Draws and writes about familiar topics.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         },
         {
           "id": "RW9",
@@ -193,9 +193,9 @@
         {
           "id": "RW13",
           "text": "Writes eight to ten sentences on a topic.",
-          "coverage": "partly",
-          "where": "writing",
-          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected."
         }
       ]
     },
