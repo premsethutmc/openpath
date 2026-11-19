@@ -1,6 +1,6 @@
 {
  "id": "listen-and-answer",
- "version": 1,
+ "version": 2,
  "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
  "review": "candidate-unvalidated",
  "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
@@ -485,7 +485,13 @@
      ],
      "explain": "Every part explains the dance and what it tells the other bees."
     }
-   ]
+   ],
+   "checked": {
+    "on": "2026-11-19",
+    "against": [
+     "NC State Extension, Honey Bee Dance Language: https://content.ces.ncsu.edu/honey-bee-dance-language"
+    ]
+   }
   },
   {
    "id": "lp3.2",
@@ -537,7 +543,14 @@
      ],
      "explain": "They are being cleaned and repaired to store rainwater once again."
     }
-   ]
+   ],
+   "checked": {
+    "on": "2026-11-19",
+    "against": [
+     "Britannica, Stepwell: https://www.britannica.com/technology/stepwell/Introduction",
+     "Living Waters Museum, Indian stepwells: https://www.watermuseums.net/heritage/valuing-ancient-water-cultures/indian-stepwells/"
+    ]
+   }
   },
   {
    "id": "lp3.3",
@@ -641,7 +654,13 @@
      ],
      "explain": "It follows the salt from sea water to dry heaps."
     }
-   ]
+   ],
+   "checked": {
+    "on": "2026-11-19",
+    "against": [
+     "Mani et al. 2012, Community solar salt production in Goa, India: https://pmc.ncbi.nlm.nih.gov/articles/PMC3543363"
+    ]
+   }
   }
  ]
 }

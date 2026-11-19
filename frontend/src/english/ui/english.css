@@ -2599,3 +2599,31 @@ h3.sub {
 .listen-text {
   margin: 12px 0;
 }
+
+/* a folded section of the home screen (ui/Home.tsx) */
+.fold {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  margin: 18px 0 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card, #fff);
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: inherit;
+  text-align: left;
+}
+.fold .small {
+  font-weight: 400;
+  text-align: right;
+}
+.fold-heading {
+  margin: 0;
+  font-size: inherit;
+}

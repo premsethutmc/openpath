@@ -36,6 +36,12 @@ const Arrow = () => (
 
 export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: () => void; onSyllabus: () => void; onListenAnswer: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
+  // once a level is found, "Your English today" leads and the rest is folded away; before that everything is open.
+  // an unfinished General English activity keeps that part open.
+  const guided = !learner.content.gate && learner.levels().done;
+  const [showAll, setShowAll] = useState(!guided);
+  const [showSchool, setShowSchool] = useState(!guided);
+  const [showGeneral, setShowGeneral] = useState(!guided || !!learner.state.open);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
   const activities = profile.activities;
@@ -72,22 +78,47 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             onLevelCheck={onLevelCheck}
             onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse())}
           />
-          <h2 className="section-title">Practise</h2>
-          <NewWordsCard learner={learner} onOpen={onNewWords} />
-          <ReadingCard learner={learner} onOpen={onReading} />
-          <ListenWriteCard learner={learner} onOpen={onListenWrite} />
-          <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
-          <GrammarUseCard learner={learner} onOpen={onGrammarUse} />
-          <BeeCard learner={learner} onBee={onBee} />
-          <VocabCard learner={learner} onOpen={onVocab} />
-          <h2 className="section-title">School work</h2>
-          <p className="small">Words and texts from school: a parent or the learner adds them, and the app turns them into practice.</p>
-          <SyllabusCard onOpen={onSyllabus} />
-          <MyWordsCard learner={learner} onOpen={onMyWords} />
-          <MyBooksCard learner={learner} onOpen={onMyBooks} />
+          <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
+            <span>All activities</span>
+            <span className="small">{showAll ? "Hide" : "Words, reading, listening, grammar, spelling"}</span>
+          </button>
+          {showAll && (
+            <div id="all-activities">
+              <NewWordsCard learner={learner} onOpen={onNewWords} />
+              <ReadingCard learner={learner} onOpen={onReading} />
+              <ListenWriteCard learner={learner} onOpen={onListenWrite} />
+              <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
+              <GrammarUseCard learner={learner} onOpen={onGrammarUse} />
+              <BeeCard learner={learner} onBee={onBee} />
+              <VocabCard learner={learner} onOpen={onVocab} />
+            </div>
+          )}
+          <button type="button" className="fold" aria-expanded={showSchool} aria-controls="school-work" onClick={() => setShowSchool(!showSchool)}>
+            <span>School work</span>
+            <span className="small">{showSchool ? "Hide" : "Class syllabus, word lists, books"}</span>
+          </button>
+          {showSchool && (
+            <div id="school-work">
+              <p className="small">The class syllabus, and words and texts from school that a parent or the learner adds.</p>
+              <SyllabusCard onOpen={onSyllabus} />
+              <MyWordsCard learner={learner} onOpen={onMyWords} />
+              <MyBooksCard learner={learner} onOpen={onMyBooks} />
+            </div>
+          )}
         </>
       )}
-      <h2 className="section-title general-title">General English</h2>
+      {learner.content.gate ? (
+        <h2 className="section-title general-title">General English</h2>
+      ) : (
+        <h2 className="section-title general-title fold-heading">
+          <button type="button" className="fold" aria-expanded={showGeneral} aria-controls="general-english" onClick={() => setShowGeneral(!showGeneral)}>
+            <span>General English</span>
+            <span className="small">{showGeneral ? "Hide" : "The starting check and the longer journey"}</span>
+          </button>
+        </h2>
+      )}
+      {(showGeneral || learner.content.gate) && (
+        <div id="general-english">
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
         <section className="resume" aria-label="Unfinished activity">
@@ -166,6 +197,8 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             For parents: word lists and results
           </button>
         </p>
+      )}
+        </div>
       )}
     </main>
   );
