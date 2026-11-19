@@ -57,3 +57,27 @@ texts. A scan of 1,755 of our own texts raised no spelling or grammar note.
 
 Still not done: no dictionary check (a misspelling not on the list passes), no check of meaning, tense
 consistency or topic. Lists are my own, not educator-reviewed.
+
+## Grammar check, second round (19 Nov 2026)
+
+Grammar patterns: 26 -> 59, plus a tip for a question that ends in a full stop.
+
+| Group | Examples caught |
+|---|---|
+| Doer and verb | they goes, the children is, many people has, everyone are, there is many |
+| Verb form | was went, I am go, have see, am knowing, am having two brothers, can able to, look forward to meet, enjoy to play |
+| Time words | yesterday I go, tomorrow we went, since five years |
+| How many, which one | much friends, many water, every students, these book, this people, a children, ten years old boy |
+| Small words | said me, explained me, told to me, listen music, went to home, angry on, afraid from, depends of, prefer tea than coffee, taller then me |
+
+Agreement patterns are skipped when a helping or causing verb comes earlier in the same sentence
+(did, does, can, let, make, see ...), because "Does everyone have" and "I saw him go" are right. This
+loses some real slips in long sentences; it is the price of not giving a wrong note.
+
+False-alarm scans: 1,755 of our own reading, listening and dictation texts raised no grammar note. The
+275,000 words of prose in this repository's documents raised three, all from text that quotes single
+letters or words ("x - a equations", "An before a silent h"); the second kind is now excluded.
+
+Still not caught: wrong tense across sentences, missing articles ("I saw dog"), wrong word order,
+agreement when words stand between the doer and the verb ("The boys in the class is"), and anything
+that depends on meaning. These need a parser or a model, not patterns.

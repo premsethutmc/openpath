@@ -92,13 +92,14 @@ const CLAUSE = `(?<=^|[.?!,;:]\\s+["“‘']?|\\b(?:and|but|because|so|then|when
 const PAST = "went|ate|took|gave|wrote|did|came|ran|knew|broke|spoke|drank|sang|began|flew|drove|chose";
 
 /** Grammar slips that follow a pattern and are wrong whatever the meaning. */
-export const SLIPS: { re: RegExp; say: (m: RegExpExecArray) => string }[] = [
+/** agree: a pattern about the doer and its verb, which is skipped when a helping or causing verb comes earlier in the sentence ("Did they … goes" is still wrong, but "Does everyone have" is right, and the two cannot be told apart safely). */
+export const SLIPS: { agree?: boolean; re: RegExp; say: (m: RegExpExecArray) => string }[] = [
   { re: /(?:(?<=^|[.?!]\s+["“‘']?)A|\ba) (?!(?:or|and|in|is|on|of|at|as|if|it|are|also)\b)([aeio][a-z]+)\b/g, say: (m) => `“a ${m[1]}” should be “an ${m[1]}”` },
-  { re: /\b[Aa]n ([bcdfgjklmnpqrstvwz][a-z]+)\b/g, say: (m) => `“an ${m[1]}” should be “a ${m[1]}”` },
-  { re: new RegExp(`${CLAUSE}(he|she|it) (go|do|have|like|want|play|eat|come|make|say|see|live|know|need|love|walk|run|take|give)\\b(?! not)`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: after ${m[1].toLowerCase()}, the verb takes -s (or use the past)` },
-  { re: new RegExp(`${CLAUSE}(he|she|it) (don't|don’t|do not)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}” should be “${m[1]} doesn't”` },
+  { re: /\b[Aa]n (?!(?:before|with|but|for|from|not|by|to|the|there|that|then|than|when|while|was|will|would|can|could|should|must|may|might|does|did|do|because|so|goes|comes|means)\b)([bcdfgjklmnpqrstvwz][a-z]+)\b/g, say: (m) => `“an ${m[1]}” should be “a ${m[1]}”` },
+  { agree: true, re: new RegExp(`${CLAUSE}(he|she|it) (go|do|have|like|want|play|eat|come|make|say|see|live|know|need|love|walk|run|take|give)\\b(?! not)`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: after ${m[1].toLowerCase()}, the verb takes -s (or use the past)` },
+  { agree: true, re: new RegExp(`${CLAUSE}(he|she|it) (don't|don’t|do not)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}” should be “${m[1]} doesn't”` },
   { re: /\b(we|they|you) was\b/gi, say: (m) => `“${m[1]} was” should be “${m[1]} were”` },
-  { re: new RegExp(`${CLAUSE}(we|they|you) (is|has|doesn't|doesn’t|does not)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}” is not right: ${m[1].toLowerCase()} ${/^is$/i.test(m[2]) ? "are" : /^has$/i.test(m[2]) ? "have" : "do not"}` },
+  { agree: true, re: new RegExp(`${CLAUSE}(we|they|you) (is|has|doesn't|doesn’t|does not)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}” is not right: ${m[1].toLowerCase()} ${/^is$/i.test(m[2]) ? "are" : /^has$/i.test(m[2]) ? "have" : "do not"}` },
   { re: /\bI (has|is|are)\b/g, say: (m) => `“I ${m[1]}” is not right: I have, I am` },
   { re: /\bI am agree\b/gi, say: () => "“I am agree” should be “I agree”" },
   { re: /\b(could|should|would|must|might) of\b/gi, say: (m) => `“${m[1]} of” should be “${m[1]} have”` },
@@ -119,7 +120,49 @@ export const SLIPS: { re: RegExp; say: (m: RegExpExecArray) => string }[] = [
   { re: /\b(cope|coped|coping) up with\b/gi, say: (m) => `“${m[1]} up with” should be “${m[1]} with”` },
   { re: /\b(return|returned|reply|replied|revert|reverted) back\b/gi, say: (m) => `“${m[1]} back”: “${m[1]}” already means back` },
   { re: /\b(the|an|is|are|was|were|and|of|at|for|with|my|we|they|she|this)\s+\1\b/gi, say: (m) => `“${m[1]} ${m[1]}”: the word is written twice` },
+  // the doer and the verb do not agree
+  { agree: true, re: new RegExp(`${CLAUSE}(I|we|they|you) (goes|likes|wants|plays|eats|comes|makes|says|sees|lives|knows|needs|loves|walks|runs|takes|gives|does)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: after ${m[1] === "I" ? "I" : m[1].toLowerCase()}, the verb has no -s` },
+  { agree: true, re: new RegExp(`${CLAUSE}((?:(?:the|my|our|these|those|some|many|all|his|her|their) )?(?:people|children|men|women|boys|girls|friends|parents|teachers|students|animals|birds|trees|books)) (is|was|has|does|doesn't|doesn’t)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: more than one, so ${({ is: "are", was: "were", has: "have", does: "do" } as Record<string, string>)[m[2].toLowerCase()] ?? "do not"}` },
+  { agree: true, re: new RegExp(`${CLAUSE}(everyone|everybody|someone|somebody|nobody|no one|each of (?:us|them|you)) (are|were|have|don't|don’t)\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: ${m[1].toLowerCase()} takes ${({ are: "is", were: "was", have: "has" } as Record<string, string>)[m[2].toLowerCase()] ?? "doesn't"}` },
+  { re: /\bthere is (many|two|three|four|five|six|seven|eight|nine|ten|several)\b/gi, say: (m) => `“there is ${m[1]}” should be “there are ${m[1]}”` },
+  // the wrong form of the verb
+  { re: new RegExp(`\\b(am|is|are|was|were|be|been) (${PAST})\\b`, "gi"), say: (m) => `“${m[1]} ${m[2]}”: use one or the other, not both` },
+  { re: /\b(I am|he is|she is|it is|we are|they are|you are|I was|he was|she was|we were|they were) (go|come|eat|live|study|write|bring|take|give|know|want)\b(?![-'’])/gi, say: (m) => `“${m[1]} ${m[2]}”: use “${m[2]}ing”, or leave out “${m[1].split(" ")[1]}”` },
+  { agree: true, re: /\b(have|has|had) (go|eat|see|take|give|do|know|speak|choose|sing|begin)\b(?![-'’])/gi, say: (m) => `“${m[1]} ${m[2]}”: after ${m[1].toLowerCase()}, use the third form of the verb (gone, eaten, seen …)` },
+  { re: /\b(am|is|are|was|were) knowing\b/gi, say: (m) => `“${m[1]} knowing” should be “know” or “knew”` },
+  { re: /\b(am|is|are) having (a|an|one|two|three|many) (car|bike|cycle|phone|pen|book|books|house|dog|cat|brother|brothers|sister|sisters|friend|friends)\b/gi, say: (m) => `“${m[1]} having ${m[2]} ${m[3]}” should be “have” or “has”` },
+  { re: /\b(can|could) able to\b/gi, say: (m) => `“${m[1]} able to”: use “${m[1]}” or “able to”, not both` },
+  { re: /\b(look|looks|looking|looked) forward to (meet|see|hear|receive|join)\b/gi, say: (m) => `“forward to ${m[2]}” should be “forward to ${m[2]}ing”` },
+  { re: /\b(enjoy|enjoys|enjoyed|avoid|avoids|avoided) to ([a-z]+)\b/gi, say: (m) => `“${m[1]} to ${m[2]}”: after ${m[1].toLowerCase()}, use the -ing form` },
+  // time words against the verb
+  { re: /\b(yesterday|last (?:night|week|month|year)),? (I|we|he|she|they) (go|goes|come|comes|eat|eats|see|sees|play|plays|is|am|are|have|has|buy|buys|meet|meets|visit|visits)\b/gi, say: (m) => `“${m[1]} … ${m[3]}”: ${m[1].toLowerCase()} is past, so the verb is past too` },
+  { re: /\btomorrow,? (I|we|he|she|they) (went|came|ate|saw|played|was|were|had|bought|met|visited)\b/gi, say: (m) => `“tomorrow … ${m[2]}”: tomorrow is still to come, so use “will”` },
+  { re: /\bsince (two|three|four|five|six|seven|eight|nine|ten|\d+|many|several|a few) (years|months|weeks|days|hours)\b(?! ago)/gi, say: (m) => `“since ${m[1]} ${m[2]}” should be “for ${m[1]} ${m[2]}”` },
+  // how many, which one
+  { re: /\bmuch (people|friends|books|things|students|children|problems|questions|marks|games|trees|animals)\b/gi, say: (m) => `“much ${m[1]}” should be “many ${m[1]}”` },
+  { re: /\bmany (water|money|homework|information|furniture|rice|milk|advice|traffic|rain)(?=[.,;!?]|\s+(?:is|was|and|in|to|for|at|on|from|with)\b)/gi, say: (m) => `“many ${m[1]}” should be “much ${m[1]}” or “a lot of ${m[1]}”` },
+  { re: /\b(every|each) (students|children|people|boys|girls|days|years|things|books|teachers|friends|persons)\b(?!['’])/gi, say: (m) => `“${m[1]} ${m[2]}”: after ${m[1].toLowerCase()}, name just one` },
+  { re: /\b(these|those) (book|boy|girl|thing|day|student|friend|flower|tree|house|animal|word|question|problem)(?=[.,;!?]|\s+(?:is|are|was|were|and|in|to|for|at|on|from|with)\b)/gi, say: (m) => `“${m[1]} ${m[2]}”: ${m[1].toLowerCase()} is for more than one, so “${m[2]}s”` },
+  { re: /\bthis (books|boys|girls|things|days|students|friends|flowers|trees|houses|animals|words|questions|problems|people|children)\b(?!['’])/gi, say: (m) => `“this ${m[1]}” should be “these ${m[1]}”` },
+  { re: /\ba (children|men|women|mice|teeth)\b(?!['’-])/gi, say: (m) => `“a ${m[1]}”: “${m[1]}” is more than one` },
+  { re: /\b([a-z]+) years old (boy|girl|man|woman|child|son|daughter|brother|sister)\b/gi, say: (m) => `“${m[1]} years old ${m[2]}” should be “${m[1]}-year-old ${m[2]}”` },
+  // small words that do not belong, or the wrong one
+  { re: /\b(said|says) me\b/gi, say: (m) => `“${m[1]} me” should be “${m[1]} to me” or “told me”` },
+  { re: /\b(explain|explains|explained) me\b/gi, say: (m) => `“${m[1]} me” should be “${m[1]} to me”` },
+  { re: /\btold to (me|him|her|us|them)\b/gi, say: (m) => `“told to ${m[1]}” should be “told ${m[1]}”` },
+  { re: /\b(listen|listens|listened|listening) (music|songs|me|him|her|them)\b/gi, say: (m) => `“${m[1]} ${m[2]}” should be “${m[1]} to ${m[2]}”` },
+  { re: /\b(go|goes|going|went|come|comes|coming|came) to home(?=[.,;!?]|\s+(?:and|after|at|by|with|in|late|early|from)\b)/gi, say: (m) => `“${m[1]} to home” should be “${m[1]} home”` },
+  { re: /\bangry on\b/gi, say: () => "“angry on” should be “angry with”" },
+  { re: /\bafraid from\b/gi, say: () => "“afraid from” should be “afraid of”" },
+  { re: /\binterested on\b/gi, say: () => "“interested on” should be “interested in”" },
+  { re: /\b(depend|depends|depended) (of|from)\b/gi, say: (m) => `“${m[1]} ${m[2]}” should be “${m[1]} on”` },
+  { re: /\b(prefer|prefers|preferred) (?!to\b)(?:(?!rather\b)[a-z]+ ){1,2}than\b/gi, say: () => "after “prefer”, use “to”, not “than”: I prefer tea to coffee" },
+  { re: /\b(better|bigger|smaller|faster|taller|older|younger|more|less|worse|higher|longer|stronger|easier|cheaper) then (me|him|her|us|them|mine|yours|his|hers|ours|theirs|before|ever|usual)\b/gi, say: (m) => `“${m[1]} then” should be “${m[1]} than”` },
 ];
 /** Words after which "a" is right although they start with a vowel letter, and the other way round. */
 export const A_OK = /^(one|once|uni|use|usu|eu|ew|ut[ei])/i;
 export const AN_OK = /^(hour|honest|honou?r|heir)/i;
+/** A helping or causing verb earlier in the sentence: after one, a plain verb can be right. */
+export const HELPER = /\b(did|does|do|can|could|will|would|shall|should|may|might|must|let|lets|make|makes|made|help|helps|helped|see|sees|saw|watch|watched|hear|heard|have|has|had|that)\b/i;
+/** A question written as a statement: a helping verb, then the doer, and a full stop at the end. */
+export const ASKED = /^["“‘']?(?:(?:Does|Did|Is|Are|Was|Can|Could|Will|Would|Should) (?:you|he|she|it|we|they|I|there)|Do (?:you|we|they|I)) [^,]*\.$/;
