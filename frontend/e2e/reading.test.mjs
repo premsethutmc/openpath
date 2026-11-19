@@ -21,7 +21,7 @@ const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.62
 
 /** The course's own answer key, read from the content: text title + question → right answer, explanation. */
 const KEY = new Map();
-for (const n of [1, 2, 3, 4, 5]) {
+for (const n of [1, 2, 3, 4, 5, 6]) {
   const level = JSON.parse(readFileSync(new globalThis.URL(`../../content/english/reading/level-${n}.json`, import.meta.url), "utf8"));
   for (const p of level.passages) for (const q of p.questions) KEY.set(`${p.title}|${q.prompt}`, { ...q, role: p.role });
 }
@@ -77,7 +77,7 @@ test("Reading: lesson, hinted practice, a fresh check marked at the end, progres
   await page.getByRole("button", { name: "Start reading" }).click();
   await page.getByRole("heading", { name: "Read, think, answer" }).waitFor();
   await page.getByRole("heading", { name: "Finding details · Starter" }).waitFor();
-  assert.equal(await page.locator("[data-unit]").count(), 30);
+  assert.equal(await page.locator("[data-unit]").count(), 36);
   await fits(page);
   await shot(page, "1-map");
   await page.getByRole("button", { name: "Start", exact: true }).click();
@@ -140,7 +140,7 @@ test("Reading: lesson, hinted practice, a fresh check marked at the end, progres
   // 5. kept after a reload; the next step moves on to the next skill
   await page.reload();
   await page.getByRole("button", { name: "Carry on reading" }).click();
-  await page.getByText("1 of 30 done").waitFor();
+  await page.getByText("1 of 36 done").waitFor();
   await page.locator('[data-unit="detail@1"]', { hasText: "solved after help" }).waitFor();
   await page.getByRole("heading", { name: "Order of events · Starter" }).waitFor();
 

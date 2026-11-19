@@ -1,0 +1,560 @@
+{
+  "level": 6,
+  "lessons": [
+    {
+      "skill": "detail",
+      "title": "Read the small words",
+      "strategy": "In formal writing the detail often hangs on small words: only, most, at least, fewer than, provided that. They limit a number or add a condition, and an answer that drops them is wrong.",
+      "tip": "When you find the number, read the three words before it and the clause after it.",
+      "worked": {
+        "prompt": "How many of the surveyed visitors said they would stop coming if the library closed at six?",
+        "answer": "Only one in ten, and only if the internet stayed available at weekends.",
+        "steps": [
+          "Find the survey: 'the council surveyed four hundred visitors.' Four hundred is how many were asked, not the answer.",
+          "The next sentence gives the answer: 'Only one in ten said they would stop coming'.",
+          "Do not stop there. The words 'provided that' add a condition: the internet must remain available at weekends. A full answer keeps the condition."
+        ]
+      }
+    },
+    {
+      "skill": "sequence",
+      "title": "Prior to, subsequently, by the time",
+      "strategy": "Formal texts mark time with phrases such as prior to, subsequently, within three months and by the time. Prior to points backwards; subsequently points forwards. Use them to rebuild the order across paragraphs.",
+      "tip": "Mark each time phrase with an arrow: back or forward.",
+      "worked": {
+        "prompt": "Which came first: the survey, the doubling of evening visits, or the empty reading room?",
+        "answer": "The empty reading room.",
+        "steps": [
+          "'Prior to the change' means before it: the reading room was almost empty then.",
+          "'Within three months' of the change, evening visits had doubled.",
+          "'Subsequently' means afterwards: the survey came last. The order is: empty room, doubled visits, survey."
+        ]
+      }
+    },
+    {
+      "skill": "cause",
+      "title": "The cause the writer accepts",
+      "strategy": "A careful writer may mention an obvious cause only to set it aside. Phrases such as it would be easy to assume, not for this but for that, and the records suggest otherwise show which cause the writer rejects and which one the writer accepts.",
+      "tip": "Ask: which explanation does the writer end up with?",
+      "worked": {
+        "prompt": "According to the writer, why did evening visits double?",
+        "answer": "Students came for quiet tables and free internet, which the longer hours made possible.",
+        "steps": [
+          "The writer names an easy explanation and sets it aside: 'It would be easy to assume that people came simply for the longer hours.'",
+          "'The librarian's records suggest otherwise' signals the cause the writer accepts: the quiet tables and the free internet connection.",
+          "The last sentence of the paragraph joins the two: the hours made the visits possible, the connection made them worthwhile."
+        ]
+      }
+    },
+    {
+      "skill": "feelings",
+      "title": "The writer's attitude",
+      "strategy": "A writer of a report rarely says I like or I dislike. The attitude shows in single words: merely, admittedly, to its credit, remarkably, unconvincing. Collect them to decide whether the writer approves, doubts or criticises.",
+      "tip": "Circle each word that judges, and note whom it judges.",
+      "worked": {
+        "prompt": "What does the writer think of the councillors who opposed the longer hours?",
+        "answer": "That they were wrong.",
+        "steps": [
+          "Look for words that judge. The councillors said longer hours would 'merely waste electricity'.",
+          "The writer answers in three words: 'They were mistaken.'",
+          "Other attitude words show more: 'admittedly as an afterthought' is a mild criticism of the council, and 'remarkably honest' is approval of the visitors."
+        ]
+      }
+    },
+    {
+      "skill": "main_idea",
+      "title": "The writer's argument",
+      "strategy": "An argument is more than a topic. It is the claim the writer wants you to accept. Writers often state what the lesson is not before stating what it is, and they may mention the opposite view on the way.",
+      "tip": "Finish this sentence: the writer wants me to believe that ...",
+      "worked": {
+        "prompt": "What is the writer arguing?",
+        "answer": "A service succeeds when it offers what people actually lack.",
+        "steps": [
+          "The topic is the library's longer hours, but a topic is not an argument.",
+          "The writer says what the lesson is not: 'not that every public building should stay open late.'",
+          "Then comes the claim the whole text supports: 'a service succeeds when it offers what people actually lack.'"
+        ]
+      }
+    },
+    {
+      "skill": "fact_opinion",
+      "title": "Checked, or only claimed?",
+      "strategy": "A fact has already happened and can be checked in a record. A prediction (will, surely, probably) and a recommendation (should) cannot be checked yet. They are opinions, however sensible they sound.",
+      "tip": "Ask: could I look this up today?",
+      "worked": {
+        "prompt": "Is this a fact or an opinion: 'Other towns will surely copy the longer hours and be disappointed.'?",
+        "answer": "An opinion: it is a prediction.",
+        "steps": [
+          "A fact has already happened and can be checked: 'Within three months, evening visits had doubled' can be checked in the records.",
+          "This sentence is about the future. Nobody can check it yet, and 'surely' shows the writer's confidence, not proof.",
+          "Predictions (will) and recommendations (should) are opinions, however sensible they sound."
+        ]
+      }
+    }
+  ],
+  "passages": [
+    {
+      "id": "N6.T",
+      "role": "teach",
+      "title": "Longer Hours at the Town Library",
+      "text": "Last year the town council extended the opening hours of the public library from six in the evening until nine. Prior to the change, the reading room was almost empty after four o'clock, and several councillors argued that longer hours would merely waste electricity. They were mistaken. Within three months, evening visits had doubled, and by the end of the year the library had issued more books than in any year since it opened.\n\nIt would be easy to assume that people came simply for the longer hours. The librarian's records suggest otherwise. Most of the new evening visitors were students from two nearby colleges, and they came not for the books but for the quiet tables and the free internet connection, which the council had installed, admittedly as an afterthought, during the same month. The longer hours made the visits possible; the connection made them worthwhile.\n\nSubsequently, the council surveyed four hundred visitors. Only one in ten said they would stop coming if the library closed at six again, provided that the internet remained available at weekends. This remarkably honest answer should make planners cautious.\n\nThe lesson is not that every public building should stay open late. It is that a service succeeds when it offers what people actually lack. Other towns will surely copy the longer hours and be disappointed. They should first ask their own residents what is missing.",
+      "questions": []
+    },
+    {
+      "id": "N6.P1",
+      "role": "practice",
+      "title": "The Cycle Lane on Market Road",
+      "text": "Two years ago, the council painted a cycle lane along Market Road. Prior to that, cyclists shared the road with buses and lorries, and only the boldest riders used it. The shopkeepers objected loudly: they feared that fewer parking spaces would mean fewer customers. Their fear was understandable, though it proved unfounded.\n\nA count made by college students tells the story. Before the lane, roughly ninety cyclists used the road each day. A year later the figure had reached three hundred and forty, most of them women and schoolchildren who had previously travelled by bus. Sales in the shops did not fall; in two streets they rose slightly. The lane itself deserves only part of the credit. During the same year the council had also lowered the speed limit and, crucially, repaired the street lights, so that riding home after dark no longer felt risky.\n\nSubsequently, three neighbouring towns painted lanes of their own. At least two of them saw almost no change, which their engineers blamed on the hot weather. That explanation is unconvincing, since Market Road is no cooler. Paint alone does not make a road feel safe.\n\nA cycle lane is a sensible beginning, not a complete answer. Towns that want more cyclists should repair their lights and slow their traffic before they buy a single tin of paint. Those that do will certainly find the money well spent.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who made up most of the new cyclists?",
+          "right": "Women and schoolchildren who used to take the bus",
+          "wrong": [
+            "College students who rode there to make the daily count",
+            "Shopkeepers from Market Road"
+          ],
+          "evidence": "most of them women and schoolchildren who had previously travelled by bus",
+          "explain": "The small word 'most' matters: the new riders were mostly women and schoolchildren who had previously travelled by bus. The students only did the counting.",
+          "hint": "Find the sentence with three hundred and forty, and read the words after 'most of them'."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Cyclists shared the road with buses and lorries.",
+          "wrong": [
+            "Three neighbouring towns painted lanes.",
+            "The daily count reached three hundred and forty."
+          ],
+          "evidence": "Prior to that, cyclists shared the road with buses and lorries",
+          "explain": "'Prior to that' means before the lane was painted. The higher count came a year later, and the other towns followed 'subsequently'.",
+          "hint": "Look for 'Prior to' and 'Subsequently'. One points backwards, the other forwards."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the writer, why did cycling on Market Road increase so much?",
+          "right": "The lane came with slower traffic and repaired lights.",
+          "wrong": [
+            "The weather on Market Road was cooler than in other towns.",
+            "The shops gave discounts to cyclists."
+          ],
+          "evidence": "the council had also lowered the speed limit and, crucially, repaired the street lights",
+          "explain": "The writer gives the lane 'only part of the credit' and adds the lower speed limit and, 'crucially', the repaired lights.",
+          "hint": "Which sentence says the lane deserves only part of the credit? Read what follows it."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the engineers' explanation about hot weather?",
+          "right": "The writer does not believe it.",
+          "wrong": [
+            "The writer finds it convincing.",
+            "The writer thinks it is partly right."
+          ],
+          "evidence": "That explanation is unconvincing, since Market Road is no cooler.",
+          "explain": "'Unconvincing' is the judging word, and the writer gives a reason: Market Road is no cooler.",
+          "hint": "Find the sentence that begins 'That explanation'. Which word judges it?"
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "A lane works only when the road is also made safe.",
+          "wrong": [
+            "Cycle lanes harm the shops beside them.",
+            "Every town should paint cycle lanes on all its main roads."
+          ],
+          "evidence": "A cycle lane is a sensible beginning, not a complete answer.",
+          "explain": "The writer shows the lane succeeding together with lights and a lower speed limit, and failing as paint alone. The claim: a lane is a beginning, not a complete answer.",
+          "hint": "Read the first sentence of the last paragraph. What does the writer say a lane is, and is not?"
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Those that do will certainly find the money well spent.",
+          "wrong": [
+            "Two years ago, the council painted a cycle lane along Market Road.",
+            "Subsequently, three neighbouring towns painted lanes of their own."
+          ],
+          "evidence": "Those that do will certainly find the money well spent.",
+          "explain": "It is a prediction: nobody can check it yet, and 'certainly' shows confidence, not proof. The other two sentences report things that happened.",
+          "hint": "Which sentence is about the future?"
+        }
+      ]
+    },
+    {
+      "id": "N6.P2",
+      "role": "practice",
+      "title": "The Homework Club",
+      "text": "When Northfield School opened an after-school homework club three years ago, the teachers expected the weakest pupils to benefit most. The club offered a quiet room, two volunteer tutors and a cup of tea, and it ran until half past five. By the end of the first year, test results had improved, and the head teacher proudly reported the news to parents.\n\nA closer look at the register is less flattering. The pupils who attended most often were those who were already doing well; fewer than one in six of the struggling pupils came more than twice. Their absence was not a matter of laziness. Many of them looked after younger brothers and sisters in the afternoon, and the last bus to the outlying villages left at half past four, an hour before the club closed.\n\nSubsequently, the school made two modest changes. It moved the club to the lunch hour on three days a week, and it allowed younger children to sit in the same room. Attendance among the struggling pupils tripled within a term, although, admittedly, the tutors found the room noisier.\n\nThe first report was not dishonest, merely incomplete. An average can rise while the pupils who most need help are left exactly where they were. Schools should therefore examine who attends a programme before they celebrate its results. Any school that does so will probably discover an obstacle as ordinary as a bus timetable.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many of the struggling pupils came to the first club more than twice?",
+          "right": "fewer than one in six",
+          "wrong": [
+            "more than half",
+            "about one in three"
+          ],
+          "evidence": "fewer than one in six of the struggling pupils came more than twice",
+          "explain": "The small words matter: 'fewer than one in six' came 'more than twice'.",
+          "hint": "Find the sentence about the pupils who attended most often and read its second half."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "The head teacher reported improved results.",
+          "wrong": [
+            "The club moved to the lunch hour.",
+            "Attendance among struggling pupils tripled."
+          ],
+          "evidence": "By the end of the first year, test results had improved, and the head teacher proudly reported the news to parents.",
+          "explain": "The report came at the end of the first year. The move to the lunch hour came 'subsequently', and attendance tripled a term after that.",
+          "hint": "Which of the three belongs to the first year? Look for 'Subsequently'."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the writer, why did the struggling pupils stay away from the first club?",
+          "right": "They had younger children to mind and an early last bus.",
+          "wrong": [
+            "They were too lazy to attend.",
+            "The volunteer tutors had asked the weaker pupils not to come."
+          ],
+          "evidence": "Many of them looked after younger brothers and sisters in the afternoon",
+          "explain": "The writer rejects one cause ('not a matter of laziness') and gives two others: caring for younger children, and a last bus that left before the club closed.",
+          "hint": "The writer says what the reason was not. Read the sentence after that."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the head teacher's first report?",
+          "right": "It was honest but left something out.",
+          "wrong": [
+            "It was a deliberate lie.",
+            "It was complete and accurate in every way."
+          ],
+          "evidence": "The first report was not dishonest, merely incomplete.",
+          "explain": "'Not dishonest, merely incomplete': the writer does not accuse the head teacher of lying, but says the report missed who was actually helped.",
+          "hint": "Find the sentence in the last paragraph that describes the first report. It uses two judging words."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "Check who a programme reaches before praising its results.",
+          "wrong": [
+            "Homework clubs do nothing to improve the test results of a school.",
+            "Struggling pupils do not want extra help."
+          ],
+          "evidence": "Schools should therefore examine who attends a programme before they celebrate its results.",
+          "explain": "The text shows results rising while the pupils who needed help stayed away, and ends with the claim that schools should examine who attends before they celebrate.",
+          "hint": "Which sentence in the last paragraph tells schools what to do?"
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Any school that does so will probably discover an obstacle as ordinary as a bus timetable.",
+          "wrong": [
+            "It moved the club to the lunch hour on three days a week, and it allowed younger children to sit in the same room.",
+            "Their absence was not a matter of laziness."
+          ],
+          "evidence": "Any school that does so will probably discover an obstacle as ordinary as a bus timetable.",
+          "explain": "It is a prediction, marked by 'will probably'. The move to the lunch hour happened and can be checked.",
+          "hint": "Which sentence says what is likely to happen, not what did happen?"
+        }
+      ]
+    },
+    {
+      "id": "N6.C1",
+      "role": "check",
+      "title": "The Village Solar Pump",
+      "text": "For decades the farmers of Karai drew water for their fields with diesel pumps. Fuel was expensive, and prior to each sowing season most families borrowed money to buy it. Four years ago a charity installed a solar pump beside the main well and promised that it would end the borrowing altogether. The promise was generous, if somewhat optimistic.\n\nIn the first year, the pump did everything its makers claimed. Diesel use fell by two thirds, and at least thirty families cleared their debts. Then, during the second monsoon, a part failed. Nobody in the village had been trained to repair it, the nearest technician was a day's journey away, and the pump stood idle for eleven weeks. By the time it was working again, most farmers had returned to diesel, and several had borrowed more than before.\n\nIt would be wrong to blame the machine. An identical pump in the neighbouring village of Sirumalai has run almost without interruption, and the difference is not the equipment. Subsequently, a visiting engineer found the explanation: Sirumalai had sent two young people on a short repair course and kept a small fund for spare parts.\n\nClever equipment is the easy part of such a project. What keeps it running is dull, patient preparation: training, spare parts and someone responsible. Charities should budget for these before they order the machinery. Those that neglect them will surely see their gifts rusting within five years.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How long did the pump in Karai stand idle?",
+          "right": "eleven weeks",
+          "wrong": [
+            "two thirds of a year",
+            "five years"
+          ],
+          "evidence": "the pump stood idle for eleven weeks",
+          "explain": "The pump 'stood idle for eleven weeks'. Two thirds is how far diesel use fell, and five years belongs to the writer's prediction."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Families borrowed money to buy diesel.",
+          "wrong": [
+            "A part of the pump failed.",
+            "A visiting engineer found the explanation."
+          ],
+          "evidence": "prior to each sowing season most families borrowed money to buy it",
+          "explain": "The borrowing belongs to the decades before the solar pump. The failure came in the second monsoon, and the engineer's visit came 'subsequently'."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the writer, why has the pump in Sirumalai kept running?",
+          "right": "The village trained repairers and kept money for parts.",
+          "wrong": [
+            "Its pump is a better model.",
+            "Sirumalai gets far less rain in the monsoon than Karai does."
+          ],
+          "evidence": "Sirumalai had sent two young people on a short repair course and kept a small fund for spare parts",
+          "explain": "The writer rules out the equipment ('the difference is not the equipment') and gives the engineer's finding: a repair course and a fund for spare parts."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the charity's promise?",
+          "right": "Kindly meant, but too hopeful.",
+          "wrong": [
+            "Dishonest from the start.",
+            "Fully justified by later events."
+          ],
+          "evidence": "The promise was generous, if somewhat optimistic.",
+          "explain": "'Generous' approves of the intention; 'somewhat optimistic' says it expected too much."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "Preparation matters more than the equipment itself.",
+          "wrong": [
+            "Solar pumps are always less reliable than diesel pumps.",
+            "Villages should refuse gifts from charities."
+          ],
+          "evidence": "What keeps it running is dull, patient preparation: training, spare parts and someone responsible.",
+          "explain": "Two identical pumps had different fates, and the difference was training and spare parts. The claim: preparation, not equipment, keeps a project running."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Those that neglect them will surely see their gifts rusting within five years.",
+          "wrong": [
+            "Then, during the second monsoon, a part failed.",
+            "In the first year, the pump did everything its makers claimed."
+          ],
+          "evidence": "Those that neglect them will surely see their gifts rusting within five years.",
+          "explain": "It is a prediction, marked by 'will surely'. The failed part and the first year's results happened and can be checked."
+        }
+      ]
+    },
+    {
+      "id": "N6.C2",
+      "role": "check",
+      "title": "A Later Start to the School Day",
+      "text": "Last June, Riverside School moved the start of its day from half past seven to half past eight. Prior to the change, the head teacher had received a steady stream of complaints about pupils who slept through the first lesson, and a visiting doctor had suggested, rather tentatively, that teenagers need more sleep in the morning than adults suppose.\n\nThe results after one year were encouraging. Late arrivals fell by more than half, and marks in the first lesson of the day rose in every class except one. Some parents concluded that the extra hour of sleep explained everything. The school's own figures are more complicated. When pupils were asked what time they went to bed, nearly a third admitted that they now stayed up later, so that they slept no longer than before. Their marks improved all the same. What had changed for them was breakfast: with an extra hour, most of them were no longer arriving hungry.\n\nSubsequently, the school began serving a simple breakfast at eight o'clock, and attendance at the first lesson became almost perfect. The cooks, admittedly, were less delighted than the teachers.\n\nThe later start deserves its reputation, but not for the reason usually given. A change can succeed for causes its planners never intended. Schools that copy Riverside should measure sleep and breakfast separately. Those that do will doubtless find that a bowl of porridge is cheaper than rearranging a timetable.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many pupils said they now went to bed later?",
+          "right": "nearly a third",
+          "wrong": [
+            "more than half",
+            "every class except one"
+          ],
+          "evidence": "nearly a third admitted that they now stayed up later",
+          "explain": "'Nearly a third' stayed up later. 'More than half' is how far late arrivals fell, and 'every class except one' describes the marks."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "A doctor suggested that teenagers need more morning sleep.",
+          "wrong": [
+            "The school began serving breakfast.",
+            "Late arrivals at the first lesson fell by more than half that year."
+          ],
+          "evidence": "a visiting doctor had suggested, rather tentatively, that teenagers need more sleep in the morning than adults suppose",
+          "explain": "'Prior to the change' and 'had suggested' place the doctor's remark first. Late arrivals fell during the year that followed, and breakfast was served 'subsequently'."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the writer, why did marks improve for pupils who slept no longer than before?",
+          "right": "They were no longer arriving hungry.",
+          "wrong": [
+            "They had an extra hour of sleep.",
+            "Their first lesson had been made easier."
+          ],
+          "evidence": "most of them were no longer arriving hungry",
+          "explain": "These pupils slept no longer than before, so sleep cannot be the cause. 'What had changed for them was breakfast.'"
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the later start?",
+          "right": "It works, though not for the reason people give.",
+          "wrong": [
+            "It is a mistake that should be reversed.",
+            "It works exactly as the parents and the doctor believe."
+          ],
+          "evidence": "The later start deserves its reputation, but not for the reason usually given.",
+          "explain": "'Deserves its reputation' is approval; 'but not for the reason usually given' corrects the popular explanation."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "A change can work for reasons nobody planned.",
+          "wrong": [
+            "Teenagers should go to bed earlier.",
+            "Breakfast is more important than any lesson in school."
+          ],
+          "evidence": "A change can succeed for causes its planners never intended.",
+          "explain": "The later start was meant to give more sleep, yet much of its success came from breakfast. The claim: a change can succeed for causes its planners never intended."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Those that do will doubtless find that a bowl of porridge is cheaper than rearranging a timetable.",
+          "wrong": [
+            "Last June, Riverside School moved the start of its day from half past seven to half past eight.",
+            "Their marks improved all the same."
+          ],
+          "evidence": "Those that do will doubtless find that a bowl of porridge is cheaper than rearranging a timetable.",
+          "explain": "It is a prediction, marked by 'will doubtless'. The change of time and the improved marks happened and can be checked."
+        }
+      ]
+    },
+    {
+      "id": "N6.C3",
+      "role": "check",
+      "title": "Moving the Weekly Market",
+      "text": "For as long as anyone could remember, the Thursday market at Vellur had been held in the narrow lanes around the old clock tower. Three years ago the town council moved it to an open field beside the bus station. Prior to the move, traders had complained for years about the crowding, yet when the plan was announced nearly all of them opposed it. Their objection was not unreasonable: customers, they said, come where they have always come.\n\nAt first the traders appeared to be right. In the opening month, takings fell by about a quarter, and a few stalls closed. The council, to its credit, did not retreat. It noticed that the field had no shade and that shoppers left before noon, so it planted trees, put up canvas roofs and persuaded the bus company to add a stop at the gate. Within a year, takings were higher than they had ever been in the lanes, and at least forty new stalls had opened.\n\nSubsequently, the old lanes found a new life of their own. Freed from the weekly crush, two cafes and a bookshop opened beneath the clock tower.\n\nIt would be a mistake to conclude that moving a market is always wise. The move itself nearly failed; what rescued it was the council's willingness to watch, listen and adjust. Any town planning a similar change should expect an awkward first year. Those with the patience to correct their errors will undoubtedly be rewarded.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "By how much did takings fall in the opening month?",
+          "right": "about a quarter",
+          "wrong": [
+            "about a half",
+            "nearly all"
+          ],
+          "evidence": "takings fell by about a quarter",
+          "explain": "In the opening month takings 'fell by about a quarter'. 'Nearly all' describes the traders who opposed the plan."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "Traders complained about the crowding in the lanes.",
+          "wrong": [
+            "The council planted trees and put up roofs in the field.",
+            "Two cafes and a bookshop opened."
+          ],
+          "evidence": "Prior to the move, traders had complained for years about the crowding",
+          "explain": "'Prior to the move' and 'had complained' place the complaints first. The trees came after the poor opening month, and the cafes came 'subsequently'."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the writer, what rescued the market after its poor start?",
+          "right": "The council saw what was wrong and put it right.",
+          "wrong": [
+            "The traders lowered all their prices.",
+            "The market returned to the old lanes after a month."
+          ],
+          "evidence": "what rescued it was the council's willingness to watch, listen and adjust",
+          "explain": "The writer says the move itself nearly failed; 'what rescued it was the council's willingness to watch, listen and adjust': shade, roofs and a bus stop."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the council?",
+          "right": "Approving: it did not give up, and it corrected its mistakes.",
+          "wrong": [
+            "Critical: it ignored the traders completely.",
+            "Indifferent: the council hardly matters to the story."
+          ],
+          "evidence": "The council, to its credit, did not retreat.",
+          "explain": "'To its credit' is a phrase of approval, and the writer goes on to praise the council's willingness to watch, listen and adjust."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "A change succeeds when planners keep adjusting it.",
+          "wrong": [
+            "Markets should always be moved to open fields.",
+            "Traders are usually wrong about what their customers want."
+          ],
+          "evidence": "It would be a mistake to conclude that moving a market is always wise.",
+          "explain": "The writer denies that moving a market is always wise and credits the success to continual adjustment."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Those with the patience to correct their errors will undoubtedly be rewarded.",
+          "wrong": [
+            "Three years ago the town council moved it to an open field beside the bus station.",
+            "In the opening month, takings fell by about a quarter, and a few stalls closed."
+          ],
+          "evidence": "Those with the patience to correct their errors will undoubtedly be rewarded.",
+          "explain": "It is a prediction, marked by 'will undoubtedly'. The move and the fall in takings happened and can be checked."
+        }
+      ]
+    },
+    {
+      "id": "N6.C4",
+      "role": "check",
+      "title": "The Silent Reading Hour",
+      "text": "Four years ago, Hillcrest School set aside the first twenty minutes after lunch for silent reading. Every pupil and every teacher was to read a book of their own choice, and nothing else was permitted. Prior to this, a survey had shown that fewer than a quarter of the pupils read for pleasure at all. Some teachers privately regarded the scheme as a pleasant waste of time.\n\nThey have had to revise that opinion. After two years, the number of books borrowed from the school library had almost trebled, and most pupils reported reading at home as well. The obvious explanation is that practice creates habit, and no doubt it does. Yet the pupils themselves offered a different reason when they were interviewed. What impressed them was not the twenty minutes but the sight of their teachers reading: the science teacher with a detective story, the games teacher with a volume of poetry. Reading had ceased to look like schoolwork.\n\nSubsequently, a neighbouring school introduced the same twenty minutes but allowed its teachers to mark exercise books meanwhile. Its library figures scarcely moved. The comparison is small, admittedly, and one should not build too much upon it.\n\nEven so, the suggestion is a powerful one. Children imitate what adults do far more readily than what adults recommend. A school that wants readers should therefore begin with its staff room. Those that try it will very likely find the result cheaper and more lasting than any prize.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Before the scheme, how many pupils read for pleasure?",
+          "right": "fewer than a quarter",
+          "wrong": [
+            "almost three times as many",
+            "most pupils"
+          ],
+          "evidence": "fewer than a quarter of the pupils read for pleasure at all",
+          "explain": "The earlier survey found 'fewer than a quarter'. 'Almost trebled' describes library borrowing two years later, and 'most pupils' is from the later reports."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which of these happened first?",
+          "right": "A survey found that few pupils read for pleasure.",
+          "wrong": [
+            "Library borrowing almost trebled.",
+            "A neighbouring school tried the same twenty minutes of reading."
+          ],
+          "evidence": "Prior to this, a survey had shown that fewer than a quarter of the pupils read for pleasure at all.",
+          "explain": "'Prior to this' and 'had shown' place the survey before the scheme. Borrowing trebled after two years, and the neighbouring school followed 'subsequently'."
+        },
+        {
+          "skill": "cause",
+          "prompt": "According to the pupils, why did they begin to read more?",
+          "right": "They saw their teachers reading for pleasure.",
+          "wrong": [
+            "They were given twenty minutes of practice every day.",
+            "They were offered prizes for each book."
+          ],
+          "evidence": "What impressed them was not the twenty minutes but the sight of their teachers reading",
+          "explain": "The writer mentions the obvious explanation, practice, and then gives the pupils' own: 'not the twenty minutes but the sight of their teachers reading'."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What is the writer's attitude to the comparison with the neighbouring school?",
+          "right": "Interested, but careful not to claim too much.",
+          "wrong": [
+            "Certain that it proves the point beyond doubt.",
+            "Convinced that it is worthless."
+          ],
+          "evidence": "The comparison is small, admittedly, and one should not build too much upon it.",
+          "explain": "'Small, admittedly' and 'one should not build too much upon it' show caution; 'Even so, the suggestion is a powerful one' shows interest."
+        },
+        {
+          "skill": "main_idea",
+          "prompt": "What is the writer arguing?",
+          "right": "Children copy what adults do, not what adults say.",
+          "wrong": [
+            "Silent reading should last longer than twenty minutes.",
+            "Teachers should stop marking books at school."
+          ],
+          "evidence": "Children imitate what adults do far more readily than what adults recommend.",
+          "explain": "The pupils' own reason, and the school where teachers marked books instead, both support the claim that children imitate what adults do."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is an opinion?",
+          "right": "Those that try it will very likely find the result cheaper and more lasting than any prize.",
+          "wrong": [
+            "Its library figures scarcely moved.",
+            "Four years ago, Hillcrest School set aside the first twenty minutes after lunch for silent reading."
+          ],
+          "evidence": "Those that try it will very likely find the result cheaper and more lasting than any prize.",
+          "explain": "It is a prediction, marked by 'will very likely'. The library figures and the start of the scheme can be checked."
+        }
+      ]
+    }
+  ]
+}
