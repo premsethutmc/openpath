@@ -9,7 +9,7 @@ import { smallerOf } from "../../../packages/learning/src/working";
 const sample = [...FAMILIES.keys()].flatMap((f) => { const items = pool(f).items; return [items[0], items[items.length >> 1]].filter(Boolean); });
 
 test("every question's help is its own steps, in order, with nothing worked in the 'what to do' line", () => {
-  let needing = 0, folded = 0, boards = 0;
+  let needing = 0, folded = 0, boards = 0, named = 0;
   for (const q of sample) {
     // worked-out@1: a type with its whole working written for it is proved in worked-out.test.ts
     if (WORKED_OUT.includes(q.family) || helpMethods(q.id)[0] !== "Step by step") continue;
@@ -21,6 +21,11 @@ test("every question's help is its own steps, in order, with nothing worked in t
     // lead-in@1: a run of arithmetic working opens by naming the calculation it works out, and the help opens with "First"
     all!.forEach((x, i) => { if (x.finer && !all![i - 1]?.finer && /^\d+ = \d+ \+ \d+$|which leaves/.test(x.shown)) assert.ok(/^(First: t|T)o work out \d+ [×÷+−] \d+: /.test(x.next), `${q.id}: ${x.next}`); });
     assert.ok(/^First: /.test(all![0].next), `${q.id}: ${all![0].next}`);
+    // cue-label@1: a cue taken from the step's own label is a name or an instruction, never a sentence, and gives no result
+    for (const x of all!) if (/^(First|Next|Last|Now): find /.test(x.next)) {
+      named++;
+      assert.ok(!/=|\b(is|are|says?|gives?|means?|decides?|adds?)\b/.test(x.next) && x.next.length <= 70, `${q.id}: ${x.next}`);
+    }
     // how@1: arithmetic inside a step is folded onto the step, never walked through as steps of its own
     for (const x of all!) {
       assert.ok(/calculus|integra|differen/.test(q.competency) || !(x.finer && /^\d+ [×÷+−] \d+ = \d+(, which leaves \d+)?$|^\d+ = \d+( \+ \d+)+$/.test(x.shown)), `${q.id}: ${x.shown} is still a step`);
@@ -39,6 +44,7 @@ test("every question's help is its own steps, in order, with nothing worked in t
     assert.deepEqual(stepsHelp(`${q.id}`), all);
   }
   assert.ok(needing > 500, `steps that lean on another skill: ${needing}`);
+  assert.ok(named > 100, `cues that name what the step finds: ${named}`);
   console.log(`how@1: ${folded} steps carry folded working, ${boards} with a written layout`);
   assert.ok(folded > 200 && boards > 5, `${folded} ${boards}`);
   assert.equal(stepsHelp("not-a-question"), null);

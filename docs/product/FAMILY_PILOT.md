@@ -454,3 +454,10 @@ jump lands on it, a triangle labelled with it, a finished written working) is no
 under "See it in a picture" once the last step is done. Pictures the child counts or reads (ten-frames, coins, grids,
 tables of data) stay. guess-picture.test.ts walks every lesson: 1,089 worked by the child, 265 with a teaching picture,
 19 held back.
+
+`cue-shown@1`, `cue-label@1`, `cue-one@1`, `cue-money@1`: fewer one-word cues. A number already on the screen in an
+earlier step counts as known, so more arithmetic cues name their numbers; a step shown as "Label: working" is cued by
+its label ("find the total surface area"), only when the label is a name or an instruction and holds no result; a
+single-number step names its number ("halve 44"); an amount written as text is read as a number. One question per type:
+bare cues fell from 1,596 of 2,444 steps to about 1,210; the audit's count of types that are mostly one-word cues fell
+from 468 to 325. Left: steps whose own number first appears in that step, and compare / count / solve / classify steps.

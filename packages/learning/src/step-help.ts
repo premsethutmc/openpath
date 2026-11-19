@@ -84,8 +84,11 @@ const NEXT: Record<string, string> = { note: "notice what the question gives you
  * is not one of them (5 × 1 would say its own answer).
  */
 function cueWith(op: string, inputs: unknown, value: unknown, shown: string, given: Set<number>): string | null {
+  // cue-money@1: an amount written as text ("35.75", "₹143.00") is the number it says
+  const num = (v: unknown): unknown => (typeof v === "string" && /^₹?\s*\d[\d,]*(\.\d+)?$/.test(v.trim()) ? Number(v.replace(/[₹,\s]/g, "")) : v);
+  value = num(value);
   if (!Array.isArray(inputs) || typeof value !== "number" || !Number.isFinite(value)) return null;
-  const xs = inputs as number[];
+  const xs = inputs.map(num) as number[];
   // a number that is neither in the question nor the result of an earlier step is this step's own choice (the 50 in
   // "50 × 6" of a long division): naming it would do the thinking for the learner
   if (!xs.every((x) => given.has(x))) return null;
@@ -101,6 +104,40 @@ function cueWith(op: string, inputs: unknown, value: unknown, shown: string, giv
   if (op === "multiply") return near(a * b, value) ? `multiply ${n(a)} by ${n(b)}` : null;
   if (op === "divide") return b !== 0 && near(a / b, value) ? `divide ${n(a)} by ${n(b)}` : a !== 0 && near(b / a, value) ? `divide ${n(b)} by ${n(a)}` : null;
   return null;
+}
+/** cue-one@1: a step that does one thing to one number already on the screen names that number ("halve 44"). */
+function cueOne(op: string, inputs: unknown, value: unknown, given: Set<number>): string | null {
+  if (!Array.isArray(inputs) || inputs.length !== 1 || typeof inputs[0] !== "number" || typeof value !== "number") return null;
+  const a = inputs[0];
+  if (!given.has(a) || a < 0 || a === value || !Number.isFinite(a)) return null;
+  const n = String(Math.round(a * 1000) / 1000);
+  if (op === "half" && Math.abs(a / 2 - value) < 1e-9) return `halve ${n}`;
+  if (op === "double" && Math.abs(a * 2 - value) < 1e-9) return `double ${n}`;
+  if (op === "square" && Math.abs(a * a - value) < 1e-9) return `square ${n}`;
+  return null;
+}
+/**
+ * cue-label@1: where a step as it is shown opens with what it finds ("Semi-perimeter s: half of 44 = 22"), the cue says
+ * that ("find the semi-perimeter s"). The label is the step's own words, and is used only when it is a name: a few
+ * words starting with a letter, with no result in it (no "=", not the step's value, not the answer).
+ */
+function cueLabel(shown: string, value: unknown, answer: string, given: Set<number>): string | null {
+  const m = /^([A-Za-zΔ∠√][^:=]{2,44}): \S/.exec(shown);
+  if (!m) return null;
+  const label = m[1].trim(), words = label.split(/\s+/);
+  if (words.length > 7) return null;
+  const said = (x: unknown) => String(x).replace(/,/g, "").replace(/^-/, "−");
+  const nums = label.replace(/(\d),(?=\d{3}\b)/g, "$1").match(/−?\d+(?:\.\d+)?/g) ?? [];
+  // a number in the label must already be on the screen, and must not be this step's result or the answer
+  if (nums.includes(said(value)) || nums.includes(said(answer)) || !nums.every((x) => given.has(Math.abs(Number(x.replace("−", "-")))))) return null;
+  const lower = /^[A-Z][a-z]/.test(label) ? label.charAt(0).toLowerCase() + label.slice(1) : label;
+  // the label is already an instruction ("Take one prime from each pair")
+  if (/^(row-reduce|take|test|compare|add|subtract|multiply|divide|count|use|write|find|read|look|split|put|check|list|work|round|replace|solve|try|pick|choose|match|sort|group|share|move|cancel|simplify|expand|factorise|substitute|convert|change|join|draw|measure|estimate|rearrange|collect|apply|start|keep|make|halve|double|square|turn|line|bring|drop|remove|rewrite|plot|mark|shade|swap|flip|order|arrange|complete|fill|set|let|equate|differentiate|integrate|evaluate|express|note|recall|think|see|notice|name|say|show|identify|spot|locate|extend|continue|step|scale|raise|lower|carry|borrow|exchange|regroup|combine|separate|break|build|form|cut|fold|tile|cover|pack|fit|stack|pair|tally|total|sum|average|rank|rate)\b/.test(lower)) return lower;
+  // not a name: a phrase that opens with a preposition, or a sentence with a verb in it
+  if (/^(the|from|by|in|on|at|with|for|to|as|after|before|so|then|now|since|because|if|when|there|here|this|that|these|those|it|we|you|across|up|down|along|left|right|each|every|both|all|one|two|three|no|not|yes|same|next|first|last)\b/.test(lower)) return null;
+  if (words.length > 5) return null;
+  if (/\b(is|are|was|were|has|have|says?|gives?|means?|shows?|decides?|adds?|makes?|leaves?|goes|fits?|equals?|becomes?|stays?|needs?|takes?|comes?|tells?|must|can|will|does|do|did)\b/.test(lower)) return null;
+  return `find ${/^(the|a|an|each|every|both|all|its|their|how|what|which)\b/.test(lower) ? "" : "the "}${lower}`;
 }
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
 /**
@@ -129,10 +166,14 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
   // deeper-calculus@1: the working a calculus question's own steps leave out goes between its first step and its last
   const worked: StepHelp[] = /calculus|integra|differen/.test(p.competency) ? deeperCalculus(p).map((f) => ({ next: f.next, shown: f.shown, needs: null, finer: true as const })) : [];
   const inQuestion = (p.prompt.replace(/(\d),(?=\d)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
+  const numbersIn = (t: string) => (t.replace(/(\d),(?=\d{3}\b)/g, "$1").match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
   return p.steps.flatMap((s, i) => {
-    const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).map((t) => (t as { value?: unknown }).value).filter((v): v is number => typeof v === "number")]);
+    // cue-shown@1: a number already on the screen, in the question or in an earlier step as it was shown, is known to
+    // the learner; only a number that first appears in this step is the step's own choice
+    const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).flatMap((t) => { const v = (t as { value?: unknown }).value; return [...(typeof v === "number" ? [v] : []), ...numbersIn(explainStep(p, t))]; })]);
+    const shownHere = explainStep(p, s), inputs = (s as { inputs?: unknown }).inputs, value = (s as { value?: unknown }).value;
     const own: StepHelp = {
-      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cueWith(s.op, (s as { inputs?: unknown }).inputs, (s as { value?: unknown }).value, explainStep(p, s), given) ?? NEXT[s.op] ?? s.op}.`,
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op}.`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
       ...(cardFor(s.competency) ? { rule: s.competency } : {}),
