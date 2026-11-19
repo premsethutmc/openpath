@@ -117,3 +117,29 @@ test("WC-9 no slip the check names is a word our own reading and listening texts
   assert.deepEqual(Object.keys(all).filter((w) => seen.has(w)), []);
   assert.deepEqual(Object.entries(all).filter(([w, right]) => !right || w === right.toLowerCase()), []);
 });
+
+test("WC-10 grammar check, second round: agreement, verb forms, time words, how many, small words", () => {
+  const wrong: [string, string][] = [
+    ["They goes to school.", "the verb has no -s"], ["The children is happy.", "more than one, so are"], ["Many people has gone.", "so have"],
+    ["Everyone are here.", "takes is"], ["There is many shops.", "“there are many”"], ["He was went home.", "one or the other"],
+    ["I am go to school.", "“going”"], ["I have see the film.", "third form"], ["I am knowing the answer.", "“know”"],
+    ["I am having two brothers.", "“have”"], ["I can able to swim.", "not both"], ["I look forward to meet you.", "“forward to meeting”"],
+    ["We enjoy to play.", "-ing form"], ["Yesterday I go to the fair.", "past too"], ["Tomorrow we went there.", "use “will”"],
+    ["I live here since five years.", "“for five years”"], ["He has much friends.", "“many friends”"], ["We do not have many water.", "“much water”"],
+    ["Every students came.", "name just one"], ["I like these book.", "“books”"], ["This people are kind.", "“these people”"],
+    ["I saw a children.", "more than one"], ["He is a ten years old boy.", "“ten-year-old boy”"], ["She said me the truth.", "“said to me”"],
+    ["He explained me the sum.", "“explained to me”"], ["She told to me a story.", "“told me”"], ["I listen music daily.", "“listen to music”"],
+    ["We went to home.", "“went home”"], ["She is angry on me.", "“angry with”"], ["I am afraid from dogs.", "“afraid of”"],
+    ["It depends of the rain.", "“depends on”"], ["I prefer tea than coffee.", "use “to”"], ["She is taller then me.", "“taller than”"],
+  ];
+  for (const [text, part] of wrong) assert.ok(note(text, "grammar")?.text.includes(part), `${text} → ${note(text, "grammar")?.text}`);
+  const fine = [
+    "Does everyone have a book? Did they and everyone have fun? Let them all have one.", "The mother of the boys is here. One of the children was ill.",
+    "I have come home. She is understanding and kind. I am having a bath.", "I prefer walking rather than running. I would rather go than stay.",
+    "It got better then, and we left. There is some milk. Many water bottles were sold.", "Those day trips were fun. These book fairs travel. A children's park is near.",
+    "He went to home plate. I have known him since five years ago. We have take-away food.", "They said to me that it was late. He was told to come. I know that they like tea.",
+    "Do it now. When the bell rings, we go. Should you need help, call me.", "I saw him go. I heard everyone have a good laugh. She makes them go early.", "An before a silent h is right. We write an with a vowel sound.",
+  ];
+  for (const text of fine) { assert.equal(note(text, "grammar"), undefined, `${text} → ${note(text, "grammar")?.text}`); assert.equal(note(text, "question"), undefined, text); }
+  assert.match(note("Did you see the match. Is it true.", "question")!.text, /These look like a question/);
+});

@@ -1,6 +1,6 @@
 /**
  * A rule-based check of a piece of writing. It looks at the FORM only: length, capital letters and end marks,
- * spacing, sure spelling and grammar slips (about 400 word forms and 26 patterns, in slips.ts), repeated words and sentence openings, linking words,
+ * spacing, sure spelling and grammar slips (about 400 word forms and 59 patterns, in slips.ts), repeated words and sentence openings, linking words,
  * paragraphs, and the outward shape of a letter, an argument or a story. It cannot tell whether the piece is on
  * its topic, whether the ideas are good, or whether a sentence means what the writer intended, and it says so.
  *
@@ -8,7 +8,7 @@
  * Every rule is chosen to be sure rather than clever: a note that is wrong teaches a mistake, so doubtful
  * patterns are left out.
  */
-import { A_OK, AN_OK, JOINED, MISSPELT, NO_APOSTROPHE, SLIPS, TEXTING, WRONG_FORM } from "./slips.ts";
+import { A_OK, AN_OK, ASKED, HELPER, JOINED, MISSPELT, NO_APOSTROPHE, SLIPS, TEXTING, WRONG_FORM } from "./slips.ts";
 
 export type Form = "letter" | "formal" | "argument" | "narrative";
 export interface Target {
@@ -79,9 +79,10 @@ export function checkWriting(text: string, target: Target): WritingCheck {
 
   // grammar slips that follow a pattern
   const slips: string[] = [];
-  for (const { re, say } of SLIPS) {
+  for (const { re, say, agree } of SLIPS) {
     re.lastIndex = 0;
     for (let m = re.exec(text); m; m = re.exec(text)) {
+      if (agree && HELPER.test(text.slice(Math.max(0, text.slice(0, m.index).search(/[^.?!]*$/)), m.index))) continue;
       const isA = /^a /i.test(m[0]);
       const isAn = /^an /i.test(m[0]);
       // "an MBA", "an X-ray": a word in capitals is said letter by letter, so the rule does not apply
@@ -90,6 +91,9 @@ export function checkWriting(text: string, target: Target): WritingCheck {
     }
   }
   if (slips.length) add("grammar", "fix", `Look again at: ${[...new Set(slips)].slice(0, 6).join("; ")}.`);
+
+  const asked = sentences.filter((x) => ASKED.test(x));
+  if (asked.length) add("question", "tip", `${asked.length === 1 ? "This looks" : "These look"} like a question, so end with a question mark: ${quote(asked.map((x) => x.split(" ").slice(0, 4).join(" ") + " …"), 2)}.`);
 
   // very long sentences
   const long = sentences.filter((s) => wordsOf(s).length > 35);
