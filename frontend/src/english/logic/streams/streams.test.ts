@@ -14,6 +14,7 @@ import { progress, recommend } from "../reading/session.ts";
 import { MemoryRepo } from "../store.ts";
 import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
+import { listeningPass } from "./level-check.ts";
 import { LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { streamRows } from "./streams.ts";
 
@@ -56,12 +57,12 @@ function listen(start: number, canWrite: number, history = [] as Parameters<type
     const text = s.spoken()!;
     const sentence = DICTATION.sentences.find((x) => x.text === text)!;
     ids.push(sentence.id);
-    s.check(sentence.level <= canWrite ? text : text.toLowerCase().replace(/[.?!]$/, ""), 1);
+    s.check(sentence.level <= canWrite ? text : text.split(" ").slice(0, 2).join(" "), 1);
   }
   return { ...s.result(), ids, records: s.take() };
 }
 
-test("LC-2 listening: three sentences, one try each, up after a perfect one; stored so they are not asked again soon", () => {
+test("LC-2 listening: three sentences, one try each, up after one that passes; stored so they are not asked again soon", () => {
   assert.deepEqual([listen(2, 3).level, listen(2, 2).level, listen(2, 1).level, listen(2, 0).level, listen(1, 3).level], [3, 2, 1, 1, 3]);
   const r = listen(2, 2);
   assert.equal(r.ids.length, LISTENING_STEPS);
@@ -176,4 +177,15 @@ test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one
   const s = new SpellingPlacement(bank, 2);
   s.answer("   ");
   assert.equal(s.snapshot().index, 0, "nothing typed is not an answer");
+});
+
+test("LC-8 listening placement passes a sentence on its words: no capital or end mark needed, one slip in a long sentence", () => {
+  assert.deepEqual([listeningPass(6, 6), listeningPass(5, 6), listeningPass(7, 8), listeningPass(6, 8), listeningPass(11, 12)], [true, false, true, false, true]);
+  const s = new ListeningPlacement(DICTATION, 2, []);
+  while (!s.finished) s.check(s.spoken()!.toLowerCase().replace(/[.?!,]/g, ""), 1);
+  assert.equal(s.result().level, 3, "words right without capitals or end marks still places at the top");
+  assert.ok(s.take().every((r) => r.type === "answer" && !r.perfectFirst), "though the stored answers stay marked as not perfect");
+  const t = new ListeningPlacement(DICTATION, 2, []);
+  while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 3).join(" "), 1);
+  assert.equal(t.result().level, 1, "half a sentence does not pass");
 });
