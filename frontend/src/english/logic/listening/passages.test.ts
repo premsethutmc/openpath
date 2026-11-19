@@ -100,7 +100,7 @@ test("LA-4 the syllabus lines on listening to a passage now lead here", () => {
   const where = (cls: number, id: string) => syllabusFor(cls).strands[0].outcomes.find((o) => o.id === id)!;
   assert.deepEqual([where(5, "LS3").where, where(5, "LS3").coverage, where(5, "LS4").coverage], ["listen", "covered", "covered"]);
   assert.deepEqual([where(6, "LS1").coverage, where(6, "LS2").coverage, where(4, "LS6").coverage], ["covered", "partly", "partly"]);
-  assert.equal(where(5, "LS9").where, "listening", "dictation stays with Listen and write");
+  assert.equal(where(5, "LS9").where, "passage", "dictation of a passage opens Listen and write with a passage");
 });
 
 test("LA-5 stored on the learner's record without touching the engine", async () => {

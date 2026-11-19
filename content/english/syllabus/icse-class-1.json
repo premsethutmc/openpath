@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-1",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 1,
   "subject": "English",
@@ -94,7 +94,7 @@
           "text": "Gives and follows simple two-step directions.",
           "coverage": "partly",
           "where": "first",
-          "note": "First words gives one-step directions to follow, such as putting a thing on, beside or under a box; two-step directions, and giving them, are not yet."
+          "note": "Following a two-step direction (tap this, then that) is practised in First words; giving directions aloud is not heard by the app."
         }
       ]
     },
@@ -207,9 +207,9 @@
         {
           "id": "GV1",
           "text": "Uses naming, action, describing and position words, and opposites.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "first",
-          "note": "Naming words and position words (on, next to, under) are practised in First words; action words, describing words and opposites are not there yet."
+          "note": "Naming, action, describing and position words are practised in First words. Opposites are met there as pairs (hot and cold, happy and sad) and by name in Grammar in use."
         },
         {
           "id": "GV2",

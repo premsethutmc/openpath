@@ -6,6 +6,22 @@ import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
 
+const W = new Map(FIRST.words.map((w) => [w.id, w]));
+const byWord = (word: string) => FIRST.words.find((w) => w.word === word)!;
+/** The right taps for the step on screen, worked out from the content the way a learner who knows the words would. */
+function rightTaps(v: ReturnType<FirstSitting["snapshot"]>): number[] {
+  const pictures = v.options.map((o) => o.picture);
+  if (v.kind === "hear") return [pictures.indexOf(W.get(v.key!)!.picture)];
+  if (v.kind === "count") {
+    const [number, noun] = v.key!.split(" ");
+    const w = FIRST.words.find((x) => [x.word, `${x.word}s`, `${x.word}es`].includes(noun))!;
+    return [pictures.indexOf(w.picture.repeat(FIRST.numbers.indexOf(number) + 1))];
+  }
+  if (v.kind === "colour") return [pictures.indexOf(FIRST.colours.find((c) => v.key === `the ${c.id} one`)!.picture)];
+  if (v.kind === "place") return [v.place!.zones.findIndex((z) => v.key!.includes(` ${FIRST.place.relations.find((r) => r.id === z.id)!.say} the `))];
+  const [a, b] = v.key!.split(" then ");
+  return [pictures.indexOf(byWord(a).picture), pictures.indexOf(byWord(b).picture)];
+}
 /** Sit one sitting. `miss(kind, i)` says whether to tap wrongly once before the right answer. */
 function sit(history: FirstRecord[], miss: (kind: string, i: number) => boolean = () => false) {
   const s = new FirstSitting(FIRST, history);
@@ -17,31 +33,25 @@ function sit(history: FirstRecord[], miss: (kind: string, i: number) => boolean 
     seen.push({ kind: v.kind!, key: v.key!, say: s.spoken()! });
     const wrongFirst = miss(v.kind!, i);
     if (v.kind === "build") {
-      const word = FIRST.words.find((w) => w.id === v.key)!.word;
+      const word = W.get(v.key!)!.word;
       assert.equal(v.build!.tiles.length, word.length + 2);
       assert.notEqual(v.build!.tiles.slice(0, word.length).map((t) => t.letter).join(""), word, "the tiles are not laid out as the word");
       if (wrongFirst) assert.equal(s.letter(v.build!.tiles.findIndex((t) => t.letter !== word[0])), false);
-      for (const ch of word) {
-        const now = s.snapshot().build!;
-        assert.equal(s.letter(now.tiles.findIndex((t) => t.letter === ch && !t.used)), true);
-      }
+      for (const ch of word) assert.equal(s.letter(s.snapshot().build!.tiles.findIndex((t) => t.letter === ch && !t.used)), true);
     } else {
-      const n = v.kind === "place" ? v.place!.zones.length : v.options.length;
-      assert.equal(n, OPTIONS);
-      const tried: boolean[] = [];
-      // find the right choice by trying: on a copy when the first tap must be right
-      const probe = new FirstSitting(FIRST, history);
-      for (let k = 0; k < i; k++) (solve(probe), probe.next());
-      const right = [0, 1, 2].find((c) => probe.tap(c))!;
+      assert.equal(v.kind === "place" ? v.place!.zones.length : v.options.length, OPTIONS);
+      const right = rightTaps(v);
+      assert.ok(right.every((r) => r >= 0), `${v.kind} ${v.key}: the right choice is on screen`);
       if (wrongFirst) {
-        const wrong = [0, 1, 2].find((c) => c !== right)!;
+        const wrong = [0, 1, 2].find((c) => c !== right[0])!;
         assert.equal(s.tap(wrong), false);
-        const after = s.snapshot();
-        assert.ok(v.kind === "place" ? after.place!.zones[wrong].off : after.options[wrong].off, "a wrong choice is switched off");
-        assert.equal(s.tap(wrong), false, "and cannot be tapped again");
+        if (v.kind !== "two") {
+          const after = s.snapshot();
+          assert.ok(v.kind === "place" ? after.place!.zones[wrong].off : after.options[wrong].off, "a wrong choice is switched off");
+          assert.equal(s.tap(wrong), false, "and cannot be tapped again");
+        }
       }
-      tried.push(s.tap(right));
-      assert.deepEqual(tried, [true]);
+      for (const r of right) assert.equal(s.tap(r), true);
     }
     const done = s.snapshot();
     assert.equal(done.phase, "right");
@@ -50,37 +60,32 @@ function sit(history: FirstRecord[], miss: (kind: string, i: number) => boolean 
   }
   return { seen, done: s.snapshot().done!, records: [...history, ...s.take()] };
 }
-function solve(s: FirstSitting) {
-  const v = s.snapshot();
-  if (v.kind === "build") {
-    const word = FIRST.words.find((w) => w.id === v.key)!.word;
-    for (const ch of word) s.letter(s.snapshot().build!.tiles.findIndex((t) => t.letter === ch && !t.used));
-  } else for (const c of [0, 1, 2]) if (s.tap(c)) break;
-}
 
 test("FW-1 content: short words, one picture each, enough of each group to choose between", () => {
   assert.deepEqual(firstProblems(FIRST), []);
-  assert.ok(FIRST.words.length >= 60);
+  assert.ok(FIRST.words.length >= 80);
+  assert.deepEqual([...new Set(FIRST.words.map((w) => w.group))], ["animals", "actions", "food", "describing", "things", "world"]);
   const bad = { ...FIRST, words: [...FIRST.words, { id: "cat", word: "Cat!", picture: FIRST.words[1].picture, group: "solo" }] };
   assert.match(firstProblems(bad).join("\n"), /listed twice[\s\S]*small letters[\s\S]*used by another word[\s\S]*group needs/);
 });
 
-test("FW-2 a sitting: four new words heard, three of them built, and three things done by ear; ten steps", () => {
+test("FW-2 a sitting: four new words heard, three of them built, and three things done by ear; eleven steps", () => {
   const r = sit([]);
-  assert.deepEqual(r.seen.map((x) => x.kind), ["hear", "hear", "hear", "hear", "count", "build", "build", "colour", "build", "place"]);
+  assert.deepEqual(r.seen.map((x) => x.kind), ["hear", "hear", "hear", "hear", "count", "build", "build", "colour", "build", "place", "two"]);
   assert.deepEqual(r.seen.slice(0, NEW_WORDS).map((x) => x.key), FIRST.words.slice(0, NEW_WORDS).map((w) => w.id));
   assert.equal(r.seen.filter((x) => x.kind === "build").length, BUILDS);
   assert.match(r.seen[0].say, /^Tap the \w+\.$/);
   assert.match(r.seen.find((x) => x.kind === "count")!.say, /^Tap (one|two|three|four|five) \w+\.$/);
   assert.match(r.seen.find((x) => x.kind === "place")!.say, /^Put the \w+ (on|next to|under) the box\.$/);
-  assert.deepEqual(r.done, { asked: 10, right: 10 });
-  assert.equal(r.records.filter((x) => x.type === "step").length, 10);
+  assert.match(r.seen.at(-1)!.say, /^Tap the \w+, then the \w+\.$/);
+  assert.deepEqual(r.done, { asked: 11, right: 11 });
+  assert.equal(r.records.filter((x) => x.type === "step").length, 11);
   assert.equal(r.records.at(-1)!.type, "end");
 });
 
 test("FW-3 a wrong tap is switched off and tried again; only the first tap decides what is recorded", () => {
   const r = sit([], (kind, i) => kind === "build" || i === 0);
-  assert.deepEqual(r.done, { asked: 10, right: 6 });
+  assert.deepEqual(r.done, { asked: 11, right: 7 });
   const steps = r.records.filter((x): x is Extract<FirstRecord, { type: "step" }> => x.type === "step");
   assert.deepEqual(steps.filter((x) => !x.correct).map((x) => x.kind), ["hear", "build", "build", "build"]);
   assert.ok(steps.filter((x) => !x.correct).every((x) => x.misses === 1));
@@ -115,7 +120,33 @@ test("FW-6 stored on the learner's record without touching the engine", async ()
   const picture = () => JSON.stringify(l.profile().capabilities.map((x) => [x.standing, x.evidence]));
   const before = picture();
   await l.recordFirst(sit([]).records);
-  assert.equal(l.firstRecords().length, 11);
+  assert.equal(l.firstRecords().length, 12);
   assert.equal(firstSummary(FIRST, l.firstRecords()).met, 4);
   assert.equal(picture(), before, "no capability estimate moves");
+});
+
+test("FW-7 action and describing words are said bare; a two-step direction needs both taps in the order said", () => {
+  let h: FirstRecord[] = [];
+  const says: string[] = [];
+  for (let k = 0; k < 5; k++) {
+    const r = sit(h);
+    says.push(...r.seen.map((x) => x.say));
+    h = r.records;
+  }
+  assert.ok(says.includes("Tap run."), "an action word has no \"the\"");
+  assert.ok(says.some((x) => /^The word is \w+\. Build the word \w+\.$/.test(x)));
+  const s = new FirstSitting(FIRST, []);
+  for (let v = s.snapshot(); v.kind !== "two"; v = s.snapshot()) {
+    if (v.kind === "build") for (const ch of W.get(v.key!)!.word) s.letter(s.snapshot().build!.tiles.findIndex((t) => t.letter === ch && !t.used));
+    else for (const r of rightTaps(v)) s.tap(r);
+    s.next();
+  }
+  const [first, second] = rightTaps(s.snapshot());
+  assert.equal(s.tap(second), false, "the second thing first is a miss");
+  assert.equal(s.snapshot().options.every((o) => !o.off), true, "nothing is switched off");
+  assert.equal(s.tap(first), true);
+  assert.equal(s.snapshot().options[first].picked, true);
+  assert.equal(s.snapshot().phase, "ask");
+  assert.equal(s.tap(second), true);
+  assert.equal(s.snapshot().phase, "right");
 });

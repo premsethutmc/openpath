@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-4",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 4,
   "subject": "English",
@@ -65,9 +65,8 @@
         {
           "id": "LS7",
           "text": "Takes dictation of a passage already seen.",
-          "coverage": "partly",
-          "where": "listening",
-          "note": "Listen and write dictates sentences one at a time, and they are unseen, not from a passage read before."
+          "coverage": "covered",
+          "where": "passage_seen"
         }
       ]
     },

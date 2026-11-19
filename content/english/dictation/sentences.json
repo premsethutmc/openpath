@@ -1,6 +1,6 @@
 {
   "id": "sentence-dictation",
-  "version": 4,
+  "version": 5,
   "status": "candidate: sentences and levels written by OpenPath (AI-prepared) and checked by rule; British spelling; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: listening, spelling in a sentence, capital letters and end marks; it changes no capability estimate",
@@ -43,6 +43,74 @@
   ],
   "format": "[id, level, sentence, other accepted spellings by word]",
   "scale": 2,
+  "passages": [
+    {
+      "id": "dp1",
+      "title": "The Lost Ball",
+      "level": 2,
+      "sentences": [
+        "dp1.1",
+        "dp1.2",
+        "dp1.3",
+        "dp1.4"
+      ]
+    },
+    {
+      "id": "dp2",
+      "title": "A Rainy Day",
+      "level": 2,
+      "sentences": [
+        "dp2.1",
+        "dp2.2",
+        "dp2.3",
+        "dp2.4"
+      ]
+    },
+    {
+      "id": "dp3",
+      "title": "The School Trip",
+      "level": 3,
+      "sentences": [
+        "dp3.1",
+        "dp3.2",
+        "dp3.3",
+        "dp3.4"
+      ]
+    },
+    {
+      "id": "dp4",
+      "title": "The New Puppy",
+      "level": 3,
+      "sentences": [
+        "dp4.1",
+        "dp4.2",
+        "dp4.3",
+        "dp4.4"
+      ]
+    },
+    {
+      "id": "dp5",
+      "title": "Grandmother's Visit",
+      "level": 4,
+      "sentences": [
+        "dp5.1",
+        "dp5.2",
+        "dp5.3",
+        "dp5.4"
+      ]
+    },
+    {
+      "id": "dp6",
+      "title": "The Power Cut",
+      "level": 4,
+      "sentences": [
+        "dp6.1",
+        "dp6.2",
+        "dp6.3",
+        "dp6.4"
+      ]
+    }
+  ],
   "sentences": [
     ["d0.01", 1, "The cat sat down."],
     ["d0.02", 1, "I can run fast."],
@@ -251,6 +319,30 @@
     ["d4.21", 7, "The orchestra's rehearsal schedule was rearranged to accommodate the visiting conductor."],
     ["d4.22", 7, "Legitimate criticism should be welcomed, although exaggeration rarely strengthens an argument."],
     ["d4.23", 7, "The satellite transmitted unprecedented photographs of the planet's turbulent atmosphere."],
-    ["d4.24", 7, "Maintaining independence of judgement requires both courage and intellectual humility.", {"judgement": ["judgment"]}]
+    ["d4.24", 7, "Maintaining independence of judgement requires both courage and intellectual humility.", {"judgement": ["judgment"]}],
+    ["dp1.1", 2, "Ravi lost his red ball."],
+    ["dp1.2", 2, "He looked under the bed."],
+    ["dp1.3", 2, "His dog found it in the garden."],
+    ["dp1.4", 2, "Ravi gave the dog a hug."],
+    ["dp2.1", 2, "It rained all morning."],
+    ["dp2.2", 2, "We could not play outside."],
+    ["dp2.3", 2, "Mother made hot soup for us."],
+    ["dp2.4", 2, "After lunch the sun came out."],
+    ["dp3.1", 3, "Our class went to the zoo on Friday."],
+    ["dp3.2", 3, "We saw two elephants near the gate."],
+    ["dp3.3", 3, "A monkey took a banana from Kavya."],
+    ["dp3.4", 3, "Everyone laughed on the bus home."],
+    ["dp4.1", 3, "My uncle brought a puppy from the farm."],
+    ["dp4.2", 3, "It was small and very hungry."],
+    ["dp4.3", 3, "We gave it warm milk in a bowl."],
+    ["dp4.4", 3, "Now it sleeps beside my bed."],
+    ["dp5.1", 4, "Grandmother's train arrived an hour late."],
+    ["dp5.2", 4, "We waited on the platform, and my sister fell asleep."],
+    ["dp5.3", 4, "When she saw us, Grandmother waved her umbrella."],
+    ["dp5.4", 4, "She hadn't forgotten the sweets."],
+    ["dp6.1", 4, "The lights went out, so we couldn't finish our homework."],
+    ["dp6.2", 4, "Father lit two candles and told us a story."],
+    ["dp6.3", 4, "It wasn't a sad story, but my brother cried anyway."],
+    ["dp6.4", 4, "When the lights came back, nobody wanted to move."]
   ]
 }

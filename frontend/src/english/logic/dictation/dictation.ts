@@ -36,6 +36,14 @@ export interface Dictation {
   status: string;
   levels: Level[];
   sentences: Sentence[];
+  /** Short passages: a few sentences that belong together, dictated in order. */
+  passages: Passage[];
+}
+export interface Passage {
+  id: string;
+  title: string;
+  level: number;
+  sentences: string[];
 }
 
 function hash(s: string): number {
@@ -51,8 +59,8 @@ export const wordsOf = (text: string) => tidy(text).split(" ").map(core).filter(
 const endMark = (text: string) => /[.?!]$/.exec(tidy(text))?.[0] ?? "";
 
 export function buildDictation(raw: unknown): Dictation {
-  const r = raw as { version: number; status: string; levels: Level[]; sentences: [string, number, string, Record<string, string[]>?][] };
-  return { version: r.version, status: r.status, levels: r.levels, sentences: r.sentences.map(([id, level, text, alt]) => ({ id, level, text, alt: alt ?? {} })) };
+  const r = raw as { version: number; status: string; levels: Level[]; sentences: [string, number, string, Record<string, string[]>?][]; passages?: Passage[] };
+  return { version: r.version, status: r.status, levels: r.levels, passages: r.passages ?? [], sentences: r.sentences.map(([id, level, text, alt]) => ({ id, level, text, alt: alt ?? {} })) };
 }
 
 export function dictationProblems(d: Dictation): string[] {
@@ -72,6 +80,10 @@ export function dictationProblems(d: Dictation): string[] {
     const n = wordsOf(s.text).length;
     if (n < 3 || n > 14) out.push(`${s.id}: ${n} words`);
     for (const k of Object.keys(s.alt)) if (!wordsOf(s.text).some((w) => w.toLowerCase() === k)) out.push(`${s.id}: another spelling is given for a word that is not in the sentence`);
+  }
+  for (const p of d.passages) {
+    if (p.sentences.length < 3 || p.sentences.length > 5) out.push(`${p.id}: a passage has three to five sentences`);
+    for (const id of p.sentences) if (d.sentences.find((s) => s.id === id)?.level !== p.level) out.push(`${p.id}: ${id} is not a sentence of its level`);
   }
   for (const l of d.levels) if (d.sentences.filter((s) => s.level === l.id).length < SITTING_SIZE * 2) out.push(`level ${l.id}: needs at least ${SITTING_SIZE * 2} sentences`);
   return out;
@@ -171,9 +183,9 @@ export function fixes(m: Mark): string[] {
 }
 
 export type DictationRecord =
-  | { type: "start"; sitting: string; level: number; scale?: number }
+  | { type: "start"; sitting: string; level: number; scale?: number; passage?: string }
   | { type: "answer"; sitting: string; id: string; level: number; scale?: number; tries: 1 | 2; perfectFirst: boolean; perfect: boolean; right: number; total: number; missed: string[]; misspelt?: string[]; capitals: number; end: boolean; plays: number; typed: string }
-  | { type: "end"; sitting: string; level: number; scale?: number; asked: number; perfectFirst: number };
+  | { type: "end"; sitting: string; level: number; scale?: number; asked: number; perfectFirst: number; passage?: string };
 type Answer = Extract<DictationRecord, { type: "answer" }>;
 
 /** Levels recorded before the six-level scale: old 1, 2, 3 are now 2, 3, 5. */
@@ -182,7 +194,8 @@ export const startLevel = startFor;
 
 /** The level for the next sitting: the last finished sitting's level, moved by how it went. */
 export function levelFor(d: Dictation, records: readonly DictationRecord[], start: number): number {
-  const last = [...records].reverse().find((r): r is Extract<DictationRecord, { type: "end" }> => r.type === "end");
+  // a passage sitting is practice at its own level: it does not move the learner's level
+  const last = [...records].reverse().find((r): r is Extract<DictationRecord, { type: "end" }> => r.type === "end" && !r.passage);
   const ids = d.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
   if (!last || last.asked < SITTING_SIZE) return clamp(last ? rescale(last, OLD_LEVELS) : start);
@@ -239,6 +252,7 @@ export class DictationSitting {
   private readonly content: Dictation;
   private readonly sitting: string;
   private readonly sentences: Sentence[];
+  private readonly passage: string | undefined;
   private readonly history: readonly DictationRecord[];
   private log: DictationRecord[] = [];
   private answers: Answer[] = [];
@@ -250,13 +264,14 @@ export class DictationSitting {
   private firstTyped = "";
   readonly level: number;
 
-  constructor(content: Dictation, level: number, history: readonly DictationRecord[]) {
+  constructor(content: Dictation, level: number, history: readonly DictationRecord[], passage?: Passage) {
     this.content = content;
-    this.level = level;
+    this.passage = passage?.id;
+    this.level = passage?.level ?? level;
     this.history = history;
     this.sitting = `d${history.filter((r) => r.type === "start").length + 1}`;
-    this.sentences = pick(content, level, history);
-    this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE });
+    this.sentences = passage ? passage.sentences.map((id) => content.sentences.find((s) => s.id === id)!) : pick(content, level, history);
+    this.log.push({ type: "start", sitting: this.sitting, level: this.level, scale: SCALE, ...(passage ? { passage: passage.id } : {}) });
   }
 
   take(): DictationRecord[] {
@@ -303,17 +318,28 @@ export class DictationSitting {
       return;
     }
     this.phase = "done";
-    this.log.push({ type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, perfectFirst: this.answers.filter((a) => a.perfectFirst).length });
+    this.log.push({ type: "end", sitting: this.sitting, level: this.level, scale: SCALE, ...(this.passage ? { passage: this.passage } : {}), asked: this.answers.length, perfectFirst: this.answers.filter((a) => a.perfectFirst).length });
   }
 
   snapshot(): DictationView {
     const base = { index: Math.min(this.index, this.sentences.length - 1), total: this.sentences.length, level: this.level };
     if (this.phase === "done") {
       const perfectFirst = this.answers.filter((a) => a.perfectFirst).length;
-      const end: DictationRecord = { type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, perfectFirst };
+      const end: DictationRecord = { type: "end", sitting: this.sitting, level: this.level, scale: SCALE, ...(this.passage ? { passage: this.passage } : {}), asked: this.answers.length, perfectFirst };
       return { ...base, phase: "done", id: null, mark: null, typed: "", reveal: null, done: { asked: this.answers.length, perfectFirst, fixed: this.answers.filter((a) => !a.perfectFirst && a.perfect).length, missed: [...new Set(this.answers.flatMap((a) => a.missed))], nextLevel: levelFor(this.content, [...this.history, end], this.level) } };
     }
     const s = this.sentences[this.index];
     return { ...base, phase: this.phase, id: s.id, mark: this.last, typed: this.typed, reveal: this.phase === "marked" ? s.text : null, done: null };
   }
 }
+
+/** The next passage: one not yet written, nearest the level; else the one written longest ago. */
+export function pickPassage(d: Dictation, level: number, records: readonly DictationRecord[]): Passage | null {
+  const done = new Map<string, number>();
+  records.forEach((r, i) => r.type === "end" && r.passage && done.set(r.passage, i));
+  const near = (a: Passage, b: Passage) => Math.abs(a.level - level) - Math.abs(b.level - level) || (a.id < b.id ? -1 : 1);
+  const fresh = d.passages.filter((p) => !done.has(p.id)).sort(near);
+  return fresh[0] ?? [...d.passages].sort((a, b) => done.get(a.id)! - done.get(b.id)!)[0] ?? null;
+}
+/** A passage's words, for reading before it is dictated. */
+export const passageText = (d: Dictation, p: Passage): string => p.sentences.map((id) => d.sentences.find((s) => s.id === id)!.text).join(" ");

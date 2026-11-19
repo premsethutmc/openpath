@@ -7,6 +7,7 @@
  *   count   hear "three apples", tap the group of three
  *   colour  hear "the red one", tap the red one
  *   place   hear "put the cat on the box", tap the place on, next to or under the box
+ *   two     hear "tap the cat, then the apple", tap the two pictures in that order
  *
  * It is practice, not a test: a wrong tap is switched off and the learner tries again; whether the first tap was
  * right is what is recorded. One engine runs every kind from the word list, so a new word needs only its entry.
@@ -31,7 +32,7 @@ export interface FirstContent {
   count: string[];
   place: { movers: string[]; anchor: string; relations: { id: string; say: string }[] };
 }
-export type Kind = "hear" | "build" | "count" | "colour" | "place";
+export type Kind = "hear" | "build" | "count" | "colour" | "place" | "two";
 export type FirstRecord =
   /** One step finished: whether the first tap was right, and how many wrong taps came before the right one. */
   | { type: "step"; sitting: string; kind: Kind; key: string; correct: boolean; misses: number }
@@ -87,6 +88,8 @@ interface Step {
   /** build: the word and its letter tiles. */
   word?: FirstWord;
   tiles?: string[];
+  /** two: the second thing to tap, after `answer`. */
+  then?: number;
   /** place: what is moved and the thing it is placed by. */
   mover?: string;
   anchor?: string;
@@ -122,7 +125,7 @@ export interface FirstView {
   kind: Kind | null;
   key: string | null;
   /** hear, count, colour: the pictures to choose from; `off` once tapped wrongly. No answer key. */
-  options: { picture: string; off: boolean }[];
+  options: { picture: string; off: boolean; picked?: boolean }[];
   /** build: the picture, the letters placed so far and the tiles left. */
   build: { picture: string; placed: string; tiles: { letter: string; used: boolean }[] } | null;
   /** place: the thing to move, the thing it goes by, and the three places. */
@@ -153,16 +156,18 @@ export class FirstSitting {
     const byId = new Map(content.words.map((w) => [w.id, w]));
     const words = pick(content, history);
     const salt = `${this.sitting}|`;
+    // naming words take "the"; action and describing words are said bare
+    const named = (w: FirstWord) => w.group !== "actions" && w.group !== "describing";
     const hear = (w: FirstWord): Step => {
       const others = hashOrder(content.words.filter((x) => x.group === w.group && x.id !== w.id), (x) => `${salt}${w.id}|${x.id}`).slice(0, OPTIONS - 1);
       const options = hashOrder([w, ...others], (x) => `${salt}o|${w.id}|${x.id}`);
-      return { kind: "hear", key: w.id, say: `Tap the ${w.word}.`, options: options.map((x) => x.picture), answer: options.indexOf(w), word: w };
+      return { kind: "hear", key: w.id, say: named(w) ? `Tap the ${w.word}.` : `Tap ${w.word}.`, options: options.map((x) => x.picture), answer: options.indexOf(w), word: w };
     };
     const build = (w: FirstWord): Step => {
       const spare = hashOrder("abcdefghijklmnoprstuw".split("").filter((l) => !w.word.includes(l)), (l) => `${salt}x|${w.id}|${l}`).slice(0, EXTRA_LETTERS);
       let tiles = hashOrder([...w.word.split("").map((l, i) => ({ l, i })), ...spare.map((l, i) => ({ l, i: 100 + i }))], (t) => `${salt}t|${w.id}|${t.i}`).map((t) => t.l);
       if (tiles.slice(0, w.word.length).join("") === w.word) tiles = [...tiles].reverse();
-      return { kind: "build", key: w.id, say: `This is ${/^[aeiou]/.test(w.word) ? "an" : "a"} ${w.word}. Build the word ${w.word}.`, options: [], answer: -1, word: w, tiles };
+      return { kind: "build", key: w.id, say: named(w) ? `This is ${/^[aeiou]/.test(w.word) ? "an" : "a"} ${w.word}. Build the word ${w.word}.` : `The word is ${w.word}. Build the word ${w.word}.`, options: [], answer: -1, word: w, tiles };
     };
     const k = hash(`${salt}extra`);
     const noun = byId.get(content.count[k % content.count.length])!;
@@ -178,7 +183,10 @@ export class FirstSitting {
     const rel = (k >>> 16) % content.place.relations.length;
     const place: Step = { kind: "place", key: `${mover.word} ${content.place.relations[rel].say} the ${anchor.word}`, say: `Put the ${mover.word} ${content.place.relations[rel].say} the ${anchor.word}.`, options: content.place.relations.map((r) => r.id), answer: rel, mover: mover.picture, anchor: anchor.picture };
     // hear each new word, then build some of them, with the three "do what you hear" steps spread between
-    this.steps = [...words.map(hear), count, ...words.slice(0, BUILDS).map(build).slice(0, 2), colour, ...words.slice(0, BUILDS).map(build).slice(2), place];
+    // two things to tap in the order said: both are naming words already in the list
+    const things = hashOrder(content.words.filter((w) => w.group === "animals" || w.group === "food"), (w) => `${salt}two|${w.id}`).slice(0, OPTIONS);
+    const two: Step = { kind: "two", key: `${things[1].word} then ${things[2].word}`, say: `Tap the ${things[1].word}, then the ${things[2].word}.`, options: things.map((w) => w.picture), answer: 1, then: 2 };
+    this.steps = [...words.map(hear), count, ...words.slice(0, BUILDS).map(build).slice(0, 2), colour, ...words.slice(0, BUILDS).map(build).slice(2), place, two];
   }
 
   private get step(): Step | undefined {
@@ -204,6 +212,17 @@ export class FirstSitting {
   tap(i: number): boolean {
     const s = this.step;
     if (!s || this.solved || s.kind === "build" || !Number.isInteger(i) || i < 0 || i >= s.options.length || this.off.has(i)) return false;
+    if (s.kind === "two") {
+      // two taps in the order said; a tap out of order is a miss, and nothing is switched off
+      const want = this.placed.length === 0 ? s.answer : s.then!;
+      if (i !== want) {
+        this.misses++;
+        return false;
+      }
+      this.placed.push(i);
+      if (this.placed.length === 2) this.finish();
+      return true;
+    }
     if (i !== s.answer) {
       this.off.add(i);
       this.misses++;
@@ -251,8 +270,8 @@ export class FirstSitting {
     const view: FirstView = { ...base, phase: this.solved ? "right" : "ask" };
     if (s.kind === "build") view.build = { picture: s.word!.picture, placed: this.placed.map((i) => s.tiles![i]).join(""), tiles: s.tiles!.map((letter, i) => ({ letter, used: this.placed.includes(i) })) };
     else if (s.kind === "place") view.place = { mover: s.mover!, anchor: s.anchor!, zones: s.options.map((id, i) => ({ id, off: this.off.has(i) })) };
-    else view.options = s.options.map((picture, i) => ({ picture, off: this.off.has(i) }));
-    if (this.solved) view.reveal = { text: s.kind === "hear" || s.kind === "build" ? s.word!.word : s.key, picture: s.kind === "place" ? `${s.mover}` : s.kind === "build" || s.kind === "hear" ? s.word!.picture : s.options[s.answer] };
+    else view.options = s.options.map((picture, i) => ({ picture, off: this.off.has(i), ...(s.kind === "two" && this.placed.includes(i) ? { picked: true } : {}) }));
+    if (this.solved) view.reveal = { text: s.kind === "hear" || s.kind === "build" ? s.word!.word : s.key, picture: s.kind === "two" ? `${s.options[s.answer]} ${s.options[s.then!]}` : s.kind === "place" ? `${s.mover}` : s.kind === "build" || s.kind === "hear" ? s.word!.picture : s.options[s.answer] };
     return view;
   }
 

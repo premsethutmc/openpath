@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-5",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 5,
   "subject": "English",
@@ -79,9 +79,8 @@
         {
           "id": "LS9",
           "text": "Takes dictation of an unseen passage.",
-          "coverage": "partly",
-          "where": "listening",
-          "note": "Listen and write dictates unseen sentences one at a time, not a whole passage."
+          "coverage": "covered",
+          "where": "passage"
         }
       ]
     },

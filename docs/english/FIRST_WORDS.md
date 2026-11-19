@@ -5,7 +5,7 @@ Status: candidate content, practice-only. Nothing is educator-reviewed. The pict
 ## What it is
 
 An activity below the present first levels. Nothing on the screen has to be read: a guide speaks, and the learner
-taps. A sitting has ten steps:
+taps. A sitting has eleven steps:
 
 | Step | What is said | What the learner does |
 |---|---|---|
@@ -40,5 +40,5 @@ it word by word without touching the activities.
 - Chintu is a stand-in face and has no voice of his own: the device's voice speaks. Hiding him is not remembered
   between visits.
 - Nothing here checks what is actually heard on a phone; the automated browser has no voice.
-- Only nouns are taught as words; colours, numbers and places come in the "do what you hear" steps. No verbs yet.
+- Naming, action and describing words are taught (82 in all); colours, numbers and places come in the "do what you hear" steps. The last step is a two-step direction: "Tap the cat, then the apple."
 - ICSE Class 1 is not loaded yet; this activity is what its first lines will point to.

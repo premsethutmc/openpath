@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-7",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 7,
   "subject": "English",
@@ -92,16 +92,24 @@
         {
           "id": "R3",
           "text": "Analyses vocabulary, figurative language, tone and mood.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "The writer's attitude is taught at the top reading level; figurative language and mood are not yet."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "mood_tone",
+            "figures",
+            "context_meaning"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
         },
         {
           "id": "R4",
           "text": "Looks at how authors build their texts.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "The order of telling and the writer's argument are taught; text structure as such is not yet."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "text_structure"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
         },
         {
           "id": "R5",

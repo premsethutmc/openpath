@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 12,
+  "version": 13,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -270,6 +270,22 @@
     {
       "id": "joining",
       "name": "Joining two sentences into one"
+    },
+    {
+      "id": "prediction",
+      "name": "What comes next"
+    },
+    {
+      "id": "mood_tone",
+      "name": "Mood and tone"
+    },
+    {
+      "id": "text_structure",
+      "name": "How a text is built"
+    },
+    {
+      "id": "dialogue_character",
+      "name": "What speech shows about a person"
     }
   ],
   "scale": 2,
@@ -520,6 +536,10 @@
     {"id": "gu.transitive.08", "level": 5, "topic": "transitive", "kind": "choose", "sentence": "He wrote a long letter.", "question": "Is the verb transitive or intransitive?", "rule": "Wrote has an object, a long letter, so it is transitive.", "right": ["Transitive"], "wrong": ["Intransitive"]},
     {"id": "gu.context_meaning.05", "level": 5, "topic": "context_meaning", "kind": "choose", "sentence": "She was reluctant to speak, and looked at the floor until the teacher asked twice.", "question": "What does \"reluctant\" most likely mean here?", "rule": "She had to be asked twice, so she was unwilling.", "right": ["unwilling"], "wrong": ["eager", "able"]},
     {"id": "gu.context_meaning.06", "level": 5, "topic": "context_meaning", "kind": "choose", "sentence": "Rain was scarce that year, and the wells nearly ran dry.", "question": "What does \"scarce\" most likely mean here?", "rule": "The wells nearly ran dry, so there was little rain.", "right": ["in short supply"], "wrong": ["very heavy", "late in coming"]},
+    {"id": "gu.prediction.01", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "The cat sat down upon the mat, and on its head it wore a ...", "question": "Which word most likely comes next?", "rule": "In a rhyme, the end of the line matches an earlier sound: mat, hat.", "right": ["hat"], "wrong": ["shoe", "coat"]},
+    {"id": "gu.prediction.02", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "A hare laughed at a slow tortoise, so they agreed to race. The hare ran far ahead and lay down to sleep.", "question": "What most likely happens next?", "rule": "Stories of this shape turn on the proud one being caught out, so the slow one gets ahead.", "right": ["The tortoise passes the sleeping hare."], "wrong": ["The hare wins the race easily.", "The tortoise goes home at once."]},
+    {"id": "gu.prediction.03", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "Once upon a time a poor woodcutter found a golden axe in the river.", "question": "What kind of text is this likely to be?", "rule": "Once upon a time, a poor man and a magical find are the shape of a folk tale.", "right": ["A folk tale with a lesson"], "wrong": ["A news report", "A set of instructions"]},
+    {"id": "gu.prediction.04", "level": 5, "topic": "prediction", "kind": "choose", "sentence": "Up in the sky the kite flew high, it danced and dipped and waved ...", "question": "Which word most likely comes next?", "rule": "The rhyme with sky and high points to goodbye.", "right": ["goodbye"], "wrong": ["hello", "again"]},
     {"id": "gu.speech.03", "level": 6, "topic": "speech", "kind": "build", "sentence": "Meena said that she was hungry.", "rule": "In reported speech \"I am\" becomes \"she was\".", "extra": ["is", "I"]},
     {"id": "gu.speech.04", "level": 6, "topic": "speech", "kind": "build", "sentence": "Ravi asked me where I was going.", "rule": "A reported question uses statement order and has no question mark.", "extra": ["are", "you"]},
     {"id": "gu.speech.05", "level": 6, "topic": "speech", "kind": "fix", "sentence": "Last week she said that she [will] visit us soon.", "rule": "In reported speech \"will\" becomes \"would\".", "right": ["would"]},
@@ -566,6 +586,18 @@
     {"id": "gu.joining.02", "level": 6, "topic": "joining", "kind": "choose", "sentence": "The boy won the prize. He is my cousin.", "question": "Which sentence joins the two correctly?", "rule": "Who joins a sentence about a person to the noun it describes.", "right": ["The boy who won the prize is my cousin."], "wrong": ["The boy is my cousin who he won the prize.", "The boy which won the prize is my cousin."]},
     {"id": "gu.joining.03", "level": 6, "topic": "joining", "kind": "choose", "sentence": "She was tired. She finished her work.", "question": "Which sentence joins the two correctly?", "rule": "But joins two ideas that pull apart, making a compound sentence.", "right": ["She was tired, but she finished her work."], "wrong": ["She was tired, so she finished her work.", "She was tired because she finished her work."]},
     {"id": "gu.joining.04", "level": 6, "topic": "joining", "kind": "choose", "sentence": "I missed the bus. I woke up late.", "question": "Which sentence joins the two correctly?", "rule": "Because joins a result to its reason.", "right": ["I missed the bus because I woke up late."], "wrong": ["I missed the bus, so I woke up late.", "I missed the bus although I woke up late."]},
+    {"id": "gu.mood_tone.01", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "The house stood silent, its windows dark, and a cold wind rattled the gate.", "question": "What is the mood of these lines?", "rule": "Silent, dark, cold and rattled all build an uneasy mood.", "right": ["Uneasy"], "wrong": ["Cheerful", "Playful"]},
+    {"id": "gu.mood_tone.02", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "Lanterns glowed along the street, drums rolled, and children raced past with sweets in their hands.", "question": "What is the mood of these lines?", "rule": "Lanterns, drums and children with sweets build a festive mood.", "right": ["Festive"], "wrong": ["Gloomy", "Lonely"]},
+    {"id": "gu.mood_tone.03", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "The swing hung still. Her shoes were by the door, where she had left them a year ago.", "question": "What is the mood of these lines?", "rule": "A still swing and shoes untouched for a year build a sad mood.", "right": ["Sad"], "wrong": ["Excited", "Funny"]},
+    {"id": "gu.mood_tone.04", "level": 6, "topic": "mood_tone", "kind": "choose", "sentence": "Of course the bus was late. It is always late on the one day I am early.", "question": "What is the tone of the speaker?", "rule": "Of course and always show a speaker who is mildly annoyed and joking about it.", "right": ["Wry and a little annoyed"], "wrong": ["Full of wonder", "Deeply afraid"]},
+    {"id": "gu.text_structure.01", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "First, wash the rice. Next, boil the water. Finally, add the rice and cover the pot.", "question": "How is this text built?", "rule": "First, next and finally mark steps in order.", "right": ["As steps in order"], "wrong": ["As a problem and its answer", "As a comparison of two things"]},
+    {"id": "gu.text_structure.02", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "The village well ran dry every summer. So the farmers dug a pond to store the rain.", "question": "How is this text built?", "rule": "The text states a problem, then what was done about it.", "right": ["As a problem and its answer"], "wrong": ["As steps in order", "As a comparison of two things"]},
+    {"id": "gu.text_structure.03", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "A bicycle costs little and needs no fuel, whereas a scooter is faster but costs more to run.", "question": "How is this text built?", "rule": "Whereas and but set two things side by side.", "right": ["As a comparison of two things"], "wrong": ["As steps in order", "As a problem and its answer"]},
+    {"id": "gu.text_structure.04", "level": 6, "topic": "text_structure", "kind": "choose", "sentence": "Heavy rain fell for three days. As a result, the river rose and the road was closed.", "question": "How is this text built?", "rule": "As a result links what happened to its cause.", "right": ["As a cause and what followed from it"], "wrong": ["As a comparison of two things", "As steps in order"]},
+    {"id": "gu.dialogue_character.01", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Take my umbrella,\" said Asha. \"I can run home.\"", "question": "What does this show about the speaker?", "rule": "She gives up her own umbrella for someone else.", "right": ["She is generous"], "wrong": ["She is forgetful", "She is proud"]},
+    {"id": "gu.dialogue_character.02", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"I did not break it,\" said Vivek, looking at his shoes. \"It was like that already.\"", "question": "What does this show about the speaker?", "rule": "Looking at his shoes while denying it suggests he is hiding something.", "right": ["He is not telling the whole truth"], "wrong": ["He is very brave", "He is delighted"]},
+    {"id": "gu.dialogue_character.03", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Let me try once more,\" said Meena, picking up the fallen blocks for the fifth time.", "question": "What does this show about the speaker?", "rule": "Trying a fifth time shows she does not give up.", "right": ["She does not give up"], "wrong": ["She is careless", "She is bored"]},
+    {"id": "gu.dialogue_character.04", "level": 6, "topic": "dialogue_character", "kind": "choose", "sentence": "\"Naturally I came first,\" said Rohan. \"I always do.\"", "question": "What does this show about the speaker?", "rule": "Naturally and I always do show someone who boasts.", "right": ["He is boastful"], "wrong": ["He is shy", "He is grateful"]},
     {"id": "gu.passive.01", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The bridge was [build] many years ago.", "rule": "The passive uses the past participle: was built.", "right": ["built"]},
     {"id": "gu.passive.02", "level": 7, "topic": "passive", "kind": "fix", "sentence": "The letters were [wrote] by the secretary.", "rule": "The passive uses the past participle: were written.", "right": ["written"]},
     {"id": "gu.passive.03", "level": 7, "topic": "passive", "kind": "build", "sentence": "The match was cancelled because of the rain.", "rule": "In the passive, the thing acted on comes first: the match was cancelled.", "extra": ["cancel"]},
