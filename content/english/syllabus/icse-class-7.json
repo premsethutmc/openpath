@@ -1,0 +1,239 @@
+{
+  "id": "icse-cisce-english-class-7",
+  "version": "1.0.0",
+  "board": "CISCE (ICSE)",
+  "class": 7,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class VII",
+  "source": {
+    "read": "A third-party web page that sets out the Class VII English syllabus of the CISCE curriculum, published by BYJU'S (page numbers are not given)",
+    "url": "https://byjus.com/icse/icse-class-7-english-syllabus",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The page gives the year as 2023-24 and names no publisher for the syllabus itself; it was read through a text summary of the page. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "not given",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens to stories, poems, speeches and dialogues and understands them.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Listen and answer has stories and factual passages; speeches, poems and dialogues are not there yet."
+        },
+        {
+          "id": "LS2",
+          "text": "Follows the issues in lectures, debates and group discussions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS3",
+          "text": "Uses graphics, pictures, music and sound in presentations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Analyses the language of newspapers, television, hoardings and advertising.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "LS5",
+          "text": "Speaks well, with fitting tone, stress, gesture, expression and choice of words.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS6",
+          "text": "Gathers ideas and asks for things to be made clear, to keep a discussion on track.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Uses multimedia to present issues and social messages.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "not given",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads literary and other texts on a wide range of themes, from home and community to science, media and the environment.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The Reading course has OpenPath's own stories and reports; it does not cover every theme listed."
+        },
+        {
+          "id": "R2",
+          "text": "Reads widely and closely, for understanding and for what is implied.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R3",
+          "text": "Analyses vocabulary, figurative language, tone and mood.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The writer's attitude is taught at the top reading level; figurative language and mood are not yet."
+        },
+        {
+          "id": "R4",
+          "text": "Looks at how authors build their texts.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The order of telling and the writer's argument are taught; text structure as such is not yet."
+        },
+        {
+          "id": "R5",
+          "text": "Reads from a suggested list of novels, short stories, life stories and graphic novels.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "not given",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes messages, invitations, short paragraphs, formal and informal letters, and applications.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W2",
+          "text": "Writes simple narrative and descriptive pieces.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W3",
+          "text": "Writes stories, poems and other creative pieces.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W4",
+          "text": "Organises thoughts clearly in writing.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "W5",
+          "text": "Arranges sentences in a logical order.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "sentence_order"
+          ]
+        },
+        {
+          "id": "W6",
+          "text": "Uses linkers such as however and therefore, and to show time passing.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "linkers"
+          ]
+        },
+        {
+          "id": "W7",
+          "text": "Uses words and phrases suited to the class.",
+          "coverage": "covered",
+          "where": "words"
+        },
+        {
+          "id": "W8",
+          "text": "Follows the steps of writing: plan, revise, review, edit, rewrite.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "not given",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses phrases and clauses in simple, compound and complex sentences.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "compound",
+            "relative",
+            "conjunctions"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses the active and the passive voice.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "passive"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses synonyms, antonyms and analogies in context.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Uses figures of speech: pun, personification, alliteration, metaphor, simile and sound words.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "similes",
+            "idioms",
+            "sound_words"
+          ],
+          "note": "Similes, idioms and sound words are practised; metaphor, personification, alliteration and puns are not yet."
+        },
+        {
+          "id": "GV5",
+          "text": "Uses vocabulary suited to the class and to particular fields.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "field_words"
+          ]
+        }
+      ]
+    }
+  ]
+}

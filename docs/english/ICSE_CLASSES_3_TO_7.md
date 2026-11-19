@@ -1,4 +1,4 @@
-# ICSE English, Classes 4 to 6: every line has a place (November 2026)
+# ICSE English, Classes 3 to 7: every line has a place (November 2026)
 
 Status: candidate content, practice-only. The syllabus source is an unofficial copy of the board's document and
 is labelled so in the app. Nothing is educator-reviewed.
@@ -7,9 +7,11 @@ is labelled so in the app. Nothing is educator-reviewed.
 
 | Class | Lines | In the app | Partly | With a grown-up | Not yet |
 |---|---|---|---|---|---|
+| 3 | 24 | 9 | 7 | 8 | 0 |
 | 4 | 25 | 10 (was 7) | 7 | 8 | 0 (was 12) |
 | 5 | 33 | 20 (was 14) | 5 | 8 | 0 (was 12) |
 | 6 | 46 | 14 (was 11) | 19 | 13 | 0 (was 25) |
+| 7 | 25 | 8 | 10 | 7 | 0 |
 
 ## What was built
 
@@ -34,4 +36,6 @@ is labelled so in the app. Nothing is educator-reviewed.
 - The suggested literature is published work and is not in the app; the learner reads a book of their own and
   tells an adult about it.
 - Class 6 has 19 lines that are only partly covered: nine are writing; the rest include metaphor and personification, sorting verbs into transitive and intransitive, and reading between the lines.
-- Classes 1 to 3, 7 and 8 are not loaded.
+- Classes 1, 2 and 8 are not loaded.
+- Class 7 was read from a web page that sets out the syllabus, not from the pages of the document, so it has no page numbers and may be less complete than the others.
+- Classes 3 and 7 added five practice topics (the subject of a sentence, collective and material nouns, alphabetical order, synonyms, antonyms and analogies, sound words) and 30 tasks with a grown-up (90 in all).

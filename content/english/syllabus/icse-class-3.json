@@ -1,0 +1,237 @@
+{
+  "id": "icse-cisce-english-class-3",
+  "version": "1.0.0",
+  "board": "CISCE (ICSE)",
+  "class": 3,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class III",
+  "source": {
+    "read": "A third-party copy of the Class III pages of the CISCE curriculum (English: printed pages 14 to 17), hosted by BYJU'S",
+    "url": "https://cdn1.byjus.com/wp-content/uploads/2022/08/ICSE-Class-3-Syllabus.pdf",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "14-15",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Tells a story or an experience, with the facts that matter.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS2",
+          "text": "Describes with detail, at a pace that is easy to follow.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS3",
+          "text": "Speaks to a group clearly and loudly enough, and answers questions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Tells stories and says poems aloud with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS5",
+          "text": "Uses correct grammar and exact words to give ideas and details.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "agreement",
+            "exact_words"
+          ],
+          "note": "The grammar and the choice of words are practised in sentences on screen; using them while speaking is not marked."
+        },
+        {
+          "id": "LS6",
+          "text": "Takes part in plays and role play.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Writes down a short story from dictation.",
+          "coverage": "partly",
+          "where": "listening",
+          "note": "Listen and write dictates sentences one at a time, not a whole story."
+        }
+      ]
+    },
+    {
+      "id": "reading-writing",
+      "name": "Reading and Writing",
+      "pages": "16",
+      "outcomes": [
+        {
+          "id": "RW1",
+          "text": "Reads a picture and asks thoughtful questions about it.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw. The app has no pictures to read."
+        },
+        {
+          "id": "RW2",
+          "text": "Reads prose and poems aloud, smoothly and with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "RW3",
+          "text": "Writes a paragraph of about 100 words on one main idea.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "RW4",
+          "text": "Uses linking words to show order and endings.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "linkers",
+            "sentence_order"
+          ]
+        },
+        {
+          "id": "RW5",
+          "text": "Draws on personal experience or real situations in writing.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "RW6",
+          "text": "Writes a simple letter to a parent, friend or relative.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "17",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Knows the subject and the predicate of a sentence.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "subject_predicate"
+          ],
+          "note": "Finding the subject is practised; picking out the predicate is not yet."
+        },
+        {
+          "id": "GV2",
+          "text": "Uses collective nouns and material nouns.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "collective_nouns"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Knows what nouns, pronouns, verbs, adjectives and adverbs do.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Forms regular and irregular plurals, and uses the simple tenses.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "plurals",
+            "past",
+            "irregular_verbs"
+          ]
+        },
+        {
+          "id": "GV5",
+          "text": "Knows adjectives and their kinds.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "comparison"
+          ],
+          "note": "Finding adjectives and comparing with them are practised; naming the kinds of adjective is not yet."
+        },
+        {
+          "id": "GV6",
+          "text": "Puts words in alphabetical order by their first two letters.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "alphabetical"
+          ]
+        },
+        {
+          "id": "GV7",
+          "text": "Tells the from a and an, and uses each rightly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles"
+          ]
+        },
+        {
+          "id": "GV8",
+          "text": "Uses a glossary or a first dictionary, on paper or on screen, to find meanings.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "GV9",
+          "text": "Uses words suited to the class in context.",
+          "coverage": "covered",
+          "where": "words"
+        },
+        {
+          "id": "GV10",
+          "text": "Uses the apostrophe for one owner, and tells plurals from possessives.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "possessives"
+          ]
+        },
+        {
+          "id": "GV11",
+          "text": "Uses prefixes and suffixes.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "affixes"
+          ]
+        }
+      ]
+    }
+  ]
+}

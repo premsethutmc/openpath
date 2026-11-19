@@ -19,7 +19,7 @@ export const MOVE_DOWN = 3;
 export const MIN_OF_KIND = 3;
 export const MAX_SPOT = 2;
 
-export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object"] as const;
+export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject"] as const;
 export type Ask = (typeof ASKS)[number];
 export interface GrammarItem {
   id: string;
@@ -33,8 +33,10 @@ export interface GrammarItem {
   rule: string;
   /** fix: the accepted corrections. spot: every word of the sentence that is of the kind asked for. */
   right?: string[];
-  /** build: whole sentences to put in order, in place of words. */
+  /** build: whole sentences to put in order, in place of words; or, with a task, a list of words to order. */
   parts?: string[];
+  /** build with parts: the instruction shown, when it is not about sentences. */
+  task?: string;
   /** build: tiles that do not belong. */
   extra?: string[];
 }
@@ -112,7 +114,8 @@ export function grammarProblems(g: GrammarUse): string[] {
       const n = (it.parts ?? it.sentence.split(" ")).length;
       if (it.parts && it.parts.join(" ") !== it.sentence) out.push(`${it.id}: the parts do not make the sentence`);
       if (n < 3 || n > 12) out.push(`${it.id}: ${n} tiles`);
-      if (!/[.?!]"?$/.test(it.sentence)) out.push(`${it.id}: the sentence has no end mark`);
+      if (!it.task && !/[.?!]"?$/.test(it.sentence)) out.push(`${it.id}: the sentence has no end mark`);
+      if (it.task && !it.parts) out.push(`${it.id}: a task of its own needs parts`);
       if ((it.extra ?? []).some((e) => it.sentence.split(" ").includes(e))) out.push(`${it.id}: an extra tile is a word of the sentence`);
     }
   }
@@ -213,7 +216,7 @@ export interface GrammarView {
   topic: string | null;
   /** The sentence to fix (its words, the wrong one unmarked) or the tiles to build with: no answer key. */
   fix: { words: string[] } | null;
-  build: { tiles: string[]; whole: boolean } | null;
+  build: { tiles: string[]; whole: boolean; task: string | null } | null;
   spot: { words: string[]; ask: Ask } | null;
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
@@ -305,6 +308,6 @@ export class GrammarSitting {
       return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level) } };
     }
     if (it.kind === "spot") return { ...base, phase: "ask", spot: { words: spotWords(it), ask: it.ask! } };
-    return it.kind === "fix" ? { ...base, phase: "ask", fix: { words: fixParts(it).words } } : { ...base, phase: "ask", build: { tiles: tiles(it), whole: !!it.parts } };
+    return it.kind === "fix" ? { ...base, phase: "ask", fix: { words: fixParts(it).words } } : { ...base, phase: "ask", build: { tiles: tiles(it), whole: !!it.parts && !it.task, task: it.task ?? null } };
   }
 }
