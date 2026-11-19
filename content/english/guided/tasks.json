@@ -1,6 +1,6 @@
 {
   "id": "guided-tasks",
-  "version": 4,
+  "version": 5,
   "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
@@ -1659,6 +1659,342 @@
         "Listed every source",
         "Gave title and writer or site",
         "Marked words copied exactly"
+      ]
+    },
+    {
+      "id": "c1.ls1.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS1",
+      "title": "My turn, your turn",
+      "task": "Play a simple game with a grown-up, such as naming animals in turn. Wait for your turn each time.",
+      "look": [
+        "Waited for the turn",
+        "Listened to the other person",
+        "Did not interrupt"
+      ]
+    },
+    {
+      "id": "c1.ls1.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS1",
+      "title": "Listen first",
+      "task": "A grown-up tells you three things about their day. Listen to all three before you speak.",
+      "look": [
+        "Listened to the end",
+        "Looked at the speaker",
+        "Remembered one of the things"
+      ]
+    },
+    {
+      "id": "c1.ls2.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS2",
+      "title": "And then?",
+      "task": "A grown-up says: \"I went to the market.\" Ask or say something about it, and keep the talk going for three turns.",
+      "look": [
+        "Answered what was said",
+        "Added something or asked",
+        "Kept going for three turns"
+      ]
+    },
+    {
+      "id": "c1.ls2.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS2",
+      "title": "Me too",
+      "task": "A grown-up tells you what they like to eat. Say whether you like it too, and name something you like.",
+      "look": [
+        "Answered what was said",
+        "Said what they like",
+        "Spoke in a sentence"
+      ]
+    },
+    {
+      "id": "c1.ls3.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS3",
+      "title": "A rhyme with actions",
+      "task": "Say a rhyme you know and do the actions.",
+      "look": [
+        "Said the words",
+        "Did the actions",
+        "Enjoyed it"
+      ]
+    },
+    {
+      "id": "c1.ls3.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS3",
+      "title": "Teach me a rhyme",
+      "task": "Teach a grown-up a short rhyme, line by line, with the actions.",
+      "look": [
+        "Said each line clearly",
+        "Showed the actions",
+        "Waited for the grown-up to repeat"
+      ]
+    },
+    {
+      "id": "c1.ls6.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS6",
+      "title": "I do not know that word",
+      "task": "A grown-up uses a word you may not know. Ask what it means.",
+      "look": [
+        "Noticed the new word",
+        "Asked what it means",
+        "Listened to the answer"
+      ]
+    },
+    {
+      "id": "c1.ls6.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS6",
+      "title": "Which one?",
+      "task": "A grown-up says \"Bring me that one\" without pointing. Ask which one they mean.",
+      "look": [
+        "Asked a question",
+        "Asked clearly",
+        "Brought the right thing after the answer"
+      ]
+    },
+    {
+      "id": "c1.ls7.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS7",
+      "title": "Who is it?",
+      "task": "Describe someone in your family without saying the name. A grown-up guesses who it is.",
+      "look": [
+        "Said what the person looks like",
+        "Said what the person does",
+        "Gave enough to guess"
+      ]
+    },
+    {
+      "id": "c1.ls7.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS7",
+      "title": "My room",
+      "task": "Tell a grown-up about a room in your home: what is in it and where things are.",
+      "look": [
+        "Named things in the room",
+        "Said where they are",
+        "Spoke in sentences"
+      ]
+    },
+    {
+      "id": "c1.ls8.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS8",
+      "title": "How I feel",
+      "task": "Tell a grown-up how you feel today and why.",
+      "look": [
+        "Named a feeling",
+        "Gave a reason",
+        "Spoke clearly"
+      ]
+    },
+    {
+      "id": "c1.ls8.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS8",
+      "title": "What I want to do",
+      "task": "Tell a grown-up one thing you want to do on Sunday and why.",
+      "look": [
+        "Said what they want",
+        "Gave a reason",
+        "Could be understood easily"
+      ]
+    },
+    {
+      "id": "c1.ls10.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS10",
+      "title": "A whole sentence",
+      "task": "A grown-up points to five things. Say a whole sentence about each, such as \"This is a red cup.\"",
+      "look": [
+        "Said five sentences",
+        "Each was a whole sentence",
+        "Named each thing rightly"
+      ]
+    },
+    {
+      "id": "c1.ls10.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "LS10",
+      "title": "Ask nicely",
+      "task": "Ask a grown-up for three things in whole sentences, such as \"May I have some water, please?\"",
+      "look": [
+        "Asked in whole sentences",
+        "Used please",
+        "Said thank you"
+      ]
+    },
+    {
+      "id": "c1.rw3.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW3",
+      "title": "Draw how you feel",
+      "task": "Draw a picture of a time you were happy. Tell a grown-up about it.",
+      "look": [
+        "Drew a picture",
+        "The picture fits what was told",
+        "Named the feeling"
+      ]
+    },
+    {
+      "id": "c1.rw3.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW3",
+      "title": "Draw and label",
+      "task": "Draw your home and write or say the names of three things in the picture.",
+      "look": [
+        "Drew the home",
+        "Named three things",
+        "Wrote or said the names clearly"
+      ]
+    },
+    {
+      "id": "c1.rw4.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW4",
+      "title": "Who is talking?",
+      "task": "A grown-up reads a short story with two people in it. Say who is talking each time they stop.",
+      "look": [
+        "Listened to the story",
+        "Named who was talking",
+        "Was right most times"
+      ]
+    },
+    {
+      "id": "c1.rw4.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW4",
+      "title": "Two voices",
+      "task": "Read or listen to a story with a grown-up. Say the words of one person in one voice and the other in another.",
+      "look": [
+        "Told the two people apart",
+        "Changed voice for each",
+        "Kept to the story"
+      ]
+    },
+    {
+      "id": "c1.rw5.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW5",
+      "title": "Read to me",
+      "task": "Read four short sentences aloud to a grown-up. Stop a little at each full stop.",
+      "look": [
+        "Read the words",
+        "Paused at the full stops",
+        "Did not read word by word"
+      ]
+    },
+    {
+      "id": "c1.rw5.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW5",
+      "title": "Read it twice",
+      "task": "Read a short text aloud, then read it again more smoothly.",
+      "look": [
+        "Read it once",
+        "The second time was smoother",
+        "Paused in the right places"
+      ]
+    },
+    {
+      "id": "c1.rw6.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW6",
+      "title": "Write my name",
+      "task": "Write your name and three words you know on paper, in clear letters.",
+      "look": [
+        "Formed the letters clearly",
+        "Kept the letters on the line",
+        "Left spaces between words"
+      ]
+    },
+    {
+      "id": "c1.rw6.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW6",
+      "title": "Copy a sentence",
+      "task": "Copy one sentence from a book onto paper. Start with a capital letter and end with a full stop.",
+      "look": [
+        "Copied every word",
+        "Began with a capital letter",
+        "Ended with a full stop"
+      ]
+    },
+    {
+      "id": "c1.rw10.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW10",
+      "title": "Tell me more",
+      "task": "Write or say two sentences about your pet or your toy. A grown-up asks a question, and you add one more sentence.",
+      "look": [
+        "Gave two sentences",
+        "Answered the question",
+        "Added a new detail"
+      ]
+    },
+    {
+      "id": "c1.rw10.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW10",
+      "title": "Make it better",
+      "task": "Read your sentence to a grown-up. Add one describing word to make it better.",
+      "look": [
+        "Read the sentence",
+        "Added a describing word",
+        "The sentence still made sense"
+      ]
+    },
+    {
+      "id": "c1.rw11.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW11",
+      "title": "What do I remember?",
+      "task": "A grown-up asks three questions about something you did last week. Answer from what you remember.",
+      "look": [
+        "Answered all three",
+        "Gave details",
+        "Said so when not sure"
+      ]
+    },
+    {
+      "id": "c1.rw11.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "RW11",
+      "title": "Find out",
+      "task": "A grown-up asks a question you cannot answer, such as what a camel eats. Find out together from a book or a person.",
+      "look": [
+        "Said they did not know",
+        "Helped to find out",
+        "Told the answer afterwards"
+      ]
+    },
+    {
+      "id": "c1.gv4.1",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "GV4",
+      "title": "Small letters",
+      "task": "Write all the small letters from a to z on paper.",
+      "look": [
+        "Wrote every letter",
+        "Formed them correctly",
+        "Kept them the right size"
+      ]
+    },
+    {
+      "id": "c1.gv4.2",
+      "syllabus": "icse-cisce-english-class-1",
+      "outcome": "GV4",
+      "title": "Capital letters",
+      "task": "Write all the capital letters from A to Z, and match five of them to their small letters.",
+      "look": [
+        "Wrote every capital",
+        "Formed them correctly",
+        "Matched five pairs"
       ]
     }
   ]

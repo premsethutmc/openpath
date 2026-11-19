@@ -3,6 +3,7 @@
  * words, and for each line whether the app covers it and where. A syllabus is an inventory, not content: it copies
  * no curriculum or textbook text, and it does not change what a learner is asked.
  */
+import icse1 from "../../../../../content/english/syllabus/icse-class-1.json";
 import icse2 from "../../../../../content/english/syllabus/icse-class-2.json";
 import icse8 from "../../../../../content/english/syllabus/icse-class-8.json";
 import icse3 from "../../../../../content/english/syllabus/icse-class-3.json";
@@ -15,7 +16,7 @@ import { GUIDED, tasksFor } from "../guided/guided.ts";
 
 /** guided: done with a grown-up, who ticks what they saw; the app cannot mark it. */
 export type Coverage = "covered" | "partly" | "guided" | "not";
-export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar" | "guided" | "writing";
+export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar" | "guided" | "writing" | "first";
 export interface Outcome {
   id: string;
   text: string;
@@ -68,7 +69,7 @@ export function syllabusProblems(s: Syllabus): string[] {
 }
 
 /** The syllabuses held, by class. */
-export const SYLLABUSES: Syllabus[] = [icse2, icse3, icse4, icse5, icse6, icse7, icse8].map((x) => x as unknown as Syllabus).sort((a, b) => a.class - b.class);
+export const SYLLABUSES: Syllabus[] = [icse1, icse2, icse3, icse4, icse5, icse6, icse7, icse8].map((x) => x as unknown as Syllabus).sort((a, b) => a.class - b.class);
 /** The class shown first: Class 5, the first class loaded. */
 export const DEFAULT_CLASS = 5;
 export const syllabusFor = (cls: number): Syllabus => SYLLABUSES.find((x) => x.class === cls) ?? SYLLABUSES[0];

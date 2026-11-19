@@ -1,0 +1,333 @@
+{
+  "id": "icse-cisce-english-class-1",
+  "version": "1.0.0",
+  "board": "CISCE (ICSE)",
+  "class": 1,
+  "subject": "English",
+  "title": "CISCE curriculum: English, Class I",
+  "source": {
+    "read": "A third-party copy of the Class I pages of the CISCE curriculum (English: printed pages 6 to 9), hosted by BYJU'S",
+    "url": "https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-1-Syllabus.pdf",
+    "accessed": "2026-11-19",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The pages do not name their publisher or year, and were read through a text summary of the PDF, not the PDF itself. The official document on cisce.org could not be reached from the build environment. CISCE is understood not to prescribe a textbook for this class, so a school's own book and term plan may order or extend these topics."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words with a pointer to its strand and line; no curriculum text is reproduced.",
+  "review": "OpenPath curriculum inventory (research from a secondary source; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "6-7",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Follows the ways of the class: listens to others and takes turns.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS2",
+          "text": "Keeps a conversation going by answering what others say.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS3",
+          "text": "Says simple poems with fitting actions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS4",
+          "text": "Understands a text read aloud by answering and asking about its key details.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Answering questions on a passage heard is practised; asking them is not."
+        },
+        {
+          "id": "LS5",
+          "text": "Answers simple questions about stories.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS6",
+          "text": "Asks questions to clear up doubts.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS7",
+          "text": "Describes people, places and things.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS8",
+          "text": "Says ideas and feelings clearly.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS9",
+          "text": "Uses words and phrases picked up from talk and from texts.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "First words teaches everyday words by ear; using them in speech is not heard by the app."
+        },
+        {
+          "id": "LS10",
+          "text": "Gives full sentences that suit the task.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "LS11",
+          "text": "Gives and follows simple two-step directions.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "First words gives one-step directions to follow, such as putting a thing on, beside or under a box; two-step directions, and giving them, are not yet."
+        }
+      ]
+    },
+    {
+      "id": "reading-writing",
+      "name": "Reading and Writing",
+      "pages": "8",
+      "outcomes": [
+        {
+          "id": "RW1",
+          "text": "Reads with the help of pictures.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "RW2",
+          "text": "Reads alone and in a group, with understanding.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The first reading level has short texts with questions; reading in a group is not in the app."
+        },
+        {
+          "id": "RW3",
+          "text": "Adds drawings to make ideas and feelings clear.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "RW4",
+          "text": "Says who is telling the story at different points.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "RW5",
+          "text": "Reads a text of the class level smoothly, pausing in the right places.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "RW6",
+          "text": "Writes words and sentences in clear print letters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "RW7",
+          "text": "Starts a sentence with a capital letter and ends it with a full stop.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals"
+          ]
+        },
+        {
+          "id": "RW8",
+          "text": "Draws and writes about familiar topics.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        },
+        {
+          "id": "RW9",
+          "text": "Tells events in order with the help of pictures, and says how people reacted.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "sentence_order"
+          ],
+          "note": "Sentences are put in order here; the app has no pictures to tell from."
+        },
+        {
+          "id": "RW10",
+          "text": "Answers classmates' questions and adds details to improve a piece of writing.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking."
+        },
+        {
+          "id": "RW11",
+          "text": "Recalls or gathers information to answer a question.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "RW12",
+          "text": "Takes dictation of three- and four-letter words and short sentences.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "RW13",
+          "text": "Writes eight to ten sentences on a topic.",
+          "coverage": "partly",
+          "where": "writing",
+          "note": "Written in the essay studio, a separate part of the app that is still being built. Its tasks are not yet matched to this class."
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary in Context",
+      "pages": "9",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses naming, action, describing and position words, and opposites.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "Naming words and position words (on, next to, under) are practised in First words; action words, describing words and opposites are not there yet."
+        },
+        {
+          "id": "GV2",
+          "text": "Knows one and many, and he and she.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "plurals",
+            "pronouns"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses a, an and the correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Writes every capital and small letter.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+        },
+        {
+          "id": "GV5",
+          "text": "Uses common, proper and possessive nouns.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "noun_kinds",
+            "possessives"
+          ]
+        },
+        {
+          "id": "GV6",
+          "text": "Matches nouns for one and for many with the right verbs.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement"
+          ]
+        },
+        {
+          "id": "GV7",
+          "text": "Uses verbs for the simple past, present and future.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "past",
+            "agreement"
+          ],
+          "note": "The simple past and present are practised; the future is not yet."
+        },
+        {
+          "id": "GV8",
+          "text": "Uses common adjectives, joining words, determiners and prepositions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "prepositions",
+            "conjunctions"
+          ]
+        },
+        {
+          "id": "GV9",
+          "text": "Gives proper nouns a capital letter.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "noun_kinds",
+            "capitals"
+          ]
+        },
+        {
+          "id": "GV10",
+          "text": "Uses commas, full stops, question marks and exclamation marks.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals",
+            "punctuation",
+            "questions"
+          ]
+        },
+        {
+          "id": "GV11",
+          "text": "Spells words not yet taught by their sounds.",
+          "coverage": "partly",
+          "where": "spelling",
+          "note": "The Spelling Bee dictates words and teaches the rule after a mistake; sounding out a new word is not taught as such."
+        },
+        {
+          "id": "GV12",
+          "text": "Puts words in alphabetical order by their first letter.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "alphabetical"
+          ]
+        },
+        {
+          "id": "GV13",
+          "text": "Uses words suited to the age.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "GV14",
+          "text": "Spells three- and four-letter words.",
+          "coverage": "covered",
+          "where": "first"
+        }
+      ]
+    }
+  ]
+}

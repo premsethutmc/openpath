@@ -527,6 +527,7 @@ export function App() {
             setSyllabusClass(cls);
             // writing is practised in the essay studio, a separate part of the app
             if (where === "writing") return void location.assign("?experience=essay-live");
+            if (where === "first") return (setInSyllabus(false), setInFirst(true), scrollTo(0, 0));
             if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
             setInSyllabus(false);
             scrollTo(0, 0);

@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 10,
+  "version": 11,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -272,6 +272,9 @@
     {"id": "gu.parts_of_speech.06", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "Birds fly over our house.", "rule": "A verb tells what someone or something does: fly.", "right": ["fly"]},
     {"id": "gu.parts_of_speech.07", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "Meena reads a story every night.", "rule": "A verb tells what someone or something does: reads.", "right": ["reads"]},
     {"id": "gu.parts_of_speech.08", "level": 1, "topic": "parts_of_speech", "kind": "spot", "ask": "verb", "sentence": "We played cricket yesterday.", "rule": "A verb tells what someone or something does: played.", "right": ["played"]},
+    {"id": "gu.alphabetical.05", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "ant bat cat dog", "rule": "Words go in the order of their first letters: ant, bat, cat, dog.", "parts": ["ant", "bat", "cat", "dog"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.06", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "egg fan goat hen", "rule": "Words go in the order of their first letters: egg, fan, goat, hen.", "parts": ["egg", "fan", "goat", "hen"], "task": "Tap the words in alphabetical order."},
+    {"id": "gu.alphabetical.07", "level": 1, "topic": "alphabetical", "kind": "build", "sentence": "kite lamp moon nest", "rule": "Words go in the order of their first letters: kite, lamp, moon, nest.", "parts": ["kite", "lamp", "moon", "nest"], "task": "Tap the words in alphabetical order."},
     {"id": "gu.agreement.01", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "The dogs [is] barking loudly.", "rule": "A plural subject takes \"are\": the dogs are.", "right": ["are"]},
     {"id": "gu.agreement.02", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "My sister [like] mangoes.", "rule": "With he, she or one person, add -s: she likes.", "right": ["likes"]},
     {"id": "gu.agreement.03", "level": 2, "topic": "agreement", "kind": "fix", "sentence": "We [was] late for school.", "rule": "\"We\" takes \"were\".", "right": ["were"]},
