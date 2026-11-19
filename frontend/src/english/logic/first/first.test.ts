@@ -113,6 +113,10 @@ test("FW-5 a beginner is someone who passed no reading text and stands on the fi
   assert.equal(isBeginner({ reading: { passed: 1 }, listening: { level: 1 } }), false);
   assert.equal(isBeginner({ reading: { passed: 0 }, listening: { level: 2 } }), false);
   assert.equal(isBeginner({ reading: null, listening: null }), false, "a skipped part proves nothing");
+  // a reading text passed by luck does not hide a learner who knew no band of the word check
+  assert.equal(isBeginner({ reading: { passed: 2 }, listening: { level: 1 }, words: { band: 0 } }), true);
+  assert.equal(isBeginner({ reading: { passed: 2 }, listening: { level: 1 }, words: { band: 2 } }), false);
+  assert.equal(isBeginner({ reading: { passed: 0 }, listening: { level: 3 }, words: { band: 0 } }), false, "hears and writes sentences: not a beginner");
 });
 
 test("FW-6 stored on the learner's record without touching the engine", async () => {
