@@ -1,7 +1,7 @@
 /**
  * End-to-end: New words and Listen and write on an Android-sized phone (Chromium emulating 412×915; not a physical
  * phone, and the automated browser has no voice, so nothing here checks what is heard). A learner meets five new
- * words, misses one question and sees it return; then writes five sentences, fixing one on the second try. Both
+ * words, misses one question and sees it return; then writes five sentences, fixing two on the second try; the word misspelt is saved as a spelling list. Both
  * are kept after a reload. Device-only, against the production build; nothing is requested elsewhere.
  *
  *   npm run english:build && npm run english:preview &
@@ -111,12 +111,13 @@ test("New words: meet five, miss one question and see it return, find them kept"
   await context.close();
 });
 
-test("Listen and write: five sentences, one fixed on the second try, a harder level next", async () => {
+test("Listen and write: five sentences, two fixed on the second try, the misspelt word saved for spelling", async () => {
   const { context, page, errors, foreign, fits } = await start("Listener");
   await page.getByRole("button", { name: "Try Listen and write" }).click();
   await page.getByRole("heading", { name: "Hear a sentence, then write it" }).waitFor();
   await page.getByText("Level 2: Longer sentences").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
+  let tricky = "";
   for (let i = 1; i <= 5; i++) {
     await page.getByText(`Sentence ${i} of 5`, { exact: true }).waitFor();
     const main = page.locator('main[data-phase="write"]');
@@ -141,6 +142,16 @@ test("Listen and write: five sentences, one fixed on the second try, a harder le
       await shot(page, "6-retry");
       await box.fill(s.text);
       await page.getByRole("button", { name: "Check again" }).click();
+    } else if (i === 2) {
+      // one misspelt word: it is marked, fixed on the second try, and saved for spelling practice
+      tricky = s.text.match(/\b[a-z]{5,}\b/)[0];
+      await box.fill(s.text.replace(tricky, `${tricky}x`));
+      await page.getByRole("button", { name: "Check", exact: true }).click();
+      await page.locator('main[data-phase="retry"]').waitFor();
+      await page.getByText("One word is not spelt right.").waitFor();
+      await page.locator(".dict-wrong", { hasText: `${tricky}x` }).waitFor();
+      await box.fill(s.text);
+      await page.getByRole("button", { name: "Check again" }).click();
     } else {
       await box.fill(s.text);
       await page.getByRole("button", { name: "Check", exact: true }).click();
@@ -149,17 +160,21 @@ test("Listen and write: five sentences, one fixed on the second try, a harder le
     await page.locator(".dict-reveal", { hasText: s.text }).waitFor();
     await page.getByRole("button", { name: i < 5 ? "Next sentence" : "Finish" }).click();
   }
-  await page.getByRole("heading", { name: "4 of 5 right first time" }).waitFor();
-  await page.getByText("You fixed 1 more on your second try.").waitFor();
-  await page.getByText(/Next time: level 3, hard sentences\./).waitFor();
+  await page.getByRole("heading", { name: "3 of 5 right first time" }).waitFor();
+  await page.getByText("You fixed 2 more on your second try.").waitFor();
+  await page.getByText(`Words to practise: ${tricky}`).waitFor();
+  await page.getByText(/now in “My tricky words”/).waitFor();
   await fits();
   await shot(page, "7-done");
   await page.getByRole("button", { name: "Done", exact: true }).click();
-  await page.getByText("4 of 5 sentences right first time").waitFor();
+  await page.getByText("3 of 5 sentences right first time").waitFor();
   await page.reload();
-  await page.getByText("4 of 5 sentences right first time").waitFor();
-  await page.getByRole("button", { name: "Write five more" }).click();
-  await page.getByText("Level 3: Hard sentences").waitFor();
+  await page.getByText("3 of 5 sentences right first time").waitFor();
+  // the misspelt word waits in My Words as a spelling practice list
+  await page.getByRole("button", { name: "Open My Words" }).click();
+  await page.getByRole("heading", { name: "My tricky words" }).waitFor();
+  await fits();
+  await shot(page, "8-tricky");
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

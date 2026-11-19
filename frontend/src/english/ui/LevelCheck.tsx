@@ -11,6 +11,7 @@ import { LISTENING_STEPS, ListeningPlacement, PARTS, ReadingPlacement, SPELLING_
 import { BANDS } from "../logic/vocabulary/daily-words.ts";
 import { CHECK, SizeCheckSession, startBand } from "../logic/vocabulary/size-check.ts";
 import { slowText } from "./ListenWrite.tsx";
+import { syncAutoLists } from "../logic/streams/joined.ts";
 import { NoteBox } from "./Note.tsx";
 import { speechPossible } from "./speech.ts";
 import { playWord, stopWord, type PlayOutcome } from "./wordPlayer.ts";
@@ -321,7 +322,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
     }
     setPart(next);
     const takeWords = next === "words" ? [() => learner.recordVocab(words.current!.take())] : [];
-    void save(...extra, ...takeWords, ...(next === "result" ? [level({ type: "done" })] : []));
+    void save(...extra, ...takeWords, ...(next === "result" ? [level({ type: "done" }), async () => void (await syncAutoLists(learner))] : []));
   };
   const skip = (p: Part) => {
     stopWord();

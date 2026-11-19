@@ -6,6 +6,7 @@
 import { useRef, useState } from "react";
 import { DICTATION, DictationSitting, fixes, levelFor, startLevel, dictationSummary, wordsOf, type Dictation, type DictationRecord, type DictationView, type Mark } from "../logic/dictation/dictation.ts";
 import type { Learner } from "../logic/learner.ts";
+import { syncAutoLists } from "../logic/streams/joined.ts";
 import { NoteBox } from "./Note.tsx";
 import { speechPossible } from "./speech.ts";
 import { playWord, stopWord, type PlayOutcome } from "./wordPlayer.ts";
@@ -84,6 +85,7 @@ export function ListenWriteView({ content, view, heard, onPlay, onCheck, onNext,
             Words to practise: <strong>{d.missed.join(", ")}</strong>
           </p>
         )}
+        {d.missed.length > 0 && <p className="small dict-joined">The ones you misspelt are now in “My tricky words” in My Words, to practise spelling.</p>}
         <p className="small">
           {d.nextLevel > view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}.` : d.nextLevel < view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}, to build up again.` : "Sentences you missed will come back another day."}
         </p>
@@ -190,6 +192,8 @@ export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: L
         unsaved.current.shift();
       }
       setFailed(false);
+      // misspelt words join the spelling list "My tricky words" once the sitting is finished
+      if (s.snapshot().phase === "done") await syncAutoLists(learner);
     } catch {
       setFailed(true);
     }

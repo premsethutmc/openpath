@@ -103,4 +103,4 @@ export function wordLists(events: readonly AppEvent[]): WordList[] {
 }
 
 /** A list's words for the spelling engine. */
-export const listWords = (l: WordList): SpellWord[] => l.words.map((w) => ({ id: w.id, word: w.word, variants: w.variants, source: { type: "list", id: l.id }, status: `from the list "${l.name}", supplied by a parent` }));
+export const listWords = (l: WordList): SpellWord[] => l.words.map((w) => ({ id: w.id, word: w.word, variants: w.variants, ...(w.sentence ? { sentence: w.sentence } : {}), source: { type: "list", id: l.id }, status: `from the list "${l.name}", supplied by a parent` }));

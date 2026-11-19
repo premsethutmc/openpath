@@ -330,6 +330,8 @@ export interface ListWord {
   id: string;
   word: string;
   variants: string[];
+  /** A sentence with the word, said after it (lists the app builds itself; a parent's typed list has none). */
+  sentence?: string;
 }
 export interface WordListEvent {
   kind: "word_list";

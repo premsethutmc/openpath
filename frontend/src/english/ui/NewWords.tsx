@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { NEW_PER_DAY, WORDS, WordSitting, baseBand, summary, type Card, type SittingView, type Summary, type WordRecord } from "../logic/vocabulary/daily-words.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
+import { syncAutoLists } from "../logic/streams/joined.ts";
 import { NoteBox } from "./Note.tsx";
 import { playWord } from "./wordPlayer.ts";
 
@@ -173,6 +174,8 @@ export function NewWords({ learner, voice, onLeave, onChanged }: { learner: Lear
         unsaved.current.shift();
       }
       setFailed(false);
+      // words remembered after their first day join the spelling list "Spell my new words"
+      if (s.snapshot().phase === "done") await syncAutoLists(learner);
     } catch {
       setFailed(true);
     }
