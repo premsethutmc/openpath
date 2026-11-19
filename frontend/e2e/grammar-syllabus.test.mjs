@@ -57,7 +57,11 @@ async function answer(page, wrong) {
   await main.waitFor();
   const it = ITEMS.get(await main.getAttribute("data-item"));
   assert.ok(it, "a sentence of the bank");
-  if (it.kind === "spot") {
+  if (it.kind === "choose") {
+    await page.getByText(it.question, { exact: true }).waitFor();
+    assert.equal(await page.locator(".grammar-choice").count(), 1 + it.wrong.length);
+    await page.locator(".grammar-choice").getByText(wrong ? it.wrong[0] : it.right[0], { exact: true }).click();
+  } else if (it.kind === "spot") {
     const words = it.sentence.split(" ");
     const isRight = (w) => it.right.includes(w.replace(/[^A-Za-z']/g, ""));
     await page.getByText(it.ask === "object" ? "Tap the object of the verb in this sentence." : it.ask === "subject" ? "Tap any word of the subject of this sentence." : it.ask === "main clause" ? "Tap any word of the main clause." : new RegExp(`^Tap an? ${it.ask} in this sentence\\.$`)).waitFor();
@@ -90,8 +94,8 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
   await page.getByText("Level 3: Apostrophes, verbs and joining").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
-  const missed = { fix: false, build: false, spot: false };
-  const shots = { fix: false, build: false, spot: false };
+  const missed = { fix: false, build: false, spot: false, choose: false };
+  const shots = { fix: false, build: false, spot: false, choose: false };
   let right = 0;
   for (let i = 1; i <= 8; i++) {
     await page.getByText(`Sentence ${i} of 8`, { exact: false }).waitFor();
@@ -105,7 +109,7 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
     if (wrong) await fits(), await shot(page, `2-${kind}-feedback`);
     await page.getByRole("button", { name: i < 8 ? "Next sentence" : "Finish" }).click();
   }
-  assert.deepEqual(missed, { fix: true, build: true, spot: true }, "all three kinds were asked: fix, build and naming words");
+  assert.ok(missed.fix && missed.build && (missed.spot || missed.choose), "fix, build and a tap-or-choose sentence were all asked");
   await page.getByRole("heading", { name: `${right} of 8 right` }).waitFor();
   await page.getByText(/To look at again:/).waitFor();
   await fits();
@@ -177,13 +181,13 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   // the other classes: each its own list, and the class chosen is kept on the way back from practice
   await page.getByRole("button", { name: "Class 4", exact: true }).click();
   await page.getByRole("heading", { name: "Class 4 English" }).waitFor();
-  await page.getByText("10 in the app · 7 partly · 8 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("11 in the app · 6 partly · 8 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
-  await page.getByText("14 in the app · 19 partly · 13 with a grown-up · 0 not yet (of 46)").waitFor();
+  await page.getByText("19 in the app · 14 partly · 13 with a grown-up · 0 not yet (of 46)").waitFor();
   await page.getByRole("button", { name: "Class 3", exact: true }).click();
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
-  await page.getByText("9 in the app · 7 partly · 8 with a grown-up · 0 not yet (of 24)").waitFor();
+  await page.getByText("11 in the app · 5 partly · 8 with a grown-up · 0 not yet (of 24)").waitFor();
   await fits();
   // alphabetical order: words as tiles, with its own instruction
   await page.getByRole("button", { name: /Practise GV6:/ }).click();
@@ -194,13 +198,13 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 3 English" }).waitFor();
   await page.getByRole("button", { name: "Class 7", exact: true }).click();
   await page.getByRole("heading", { name: "Class 7 English" }).waitFor();
-  await page.getByText("8 in the app · 10 partly · 7 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("9 in the app · 9 partly · 7 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 2", exact: true }).click();
   await page.getByRole("heading", { name: "Class 2 English" }).waitFor();
-  await page.getByText("9 in the app · 6 partly · 10 with a grown-up · 0 not yet (of 25)").waitFor();
+  await page.getByText("10 in the app · 5 partly · 10 with a grown-up · 0 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 1", exact: true }).click();
   await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
-  await page.getByText("14 in the app · 10 partly · 14 with a grown-up · 0 not yet (of 38)").waitFor();
+  await page.getByText("15 in the app · 9 partly · 14 with a grown-up · 0 not yet (of 38)").waitFor();
   // a Class 1 line opens First words, where nothing has to be read
   await page.getByRole("button", { name: /Practise RW1:/ }).click();
   await page.locator('main.first[data-phase="ask"][data-kind="hear"]').waitFor();
@@ -209,7 +213,22 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 1 English" }).waitFor();
   await page.getByRole("button", { name: "Class 8", exact: true }).click();
   await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
-  await page.getByText("2 in the app · 21 partly · 14 with a grown-up · 0 not yet (of 37)").waitFor();
+  // a line that was only half practised: figures of speech are now chosen by name
+  await page.getByRole("button", { name: /Practise GV4:/ }).click();
+  await page.getByText("Topics: Words for cooking, sport and yoga, Formal and informal words").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  const seen = new Set();
+  for (let i = 0; i < 8 && !seen.has("choose"); i++) {
+    const it = await answer(page, false);
+    assert.ok(["field_words", "register"].includes(it.topic));
+    seen.add(it.kind);
+    if (!seen.has("choose")) await page.getByRole("button", { name: /Next sentence|Finish/ }).click();
+  }
+  assert.ok(seen.has("choose"), "a choose-the-answer sentence was asked and answered");
+  await fits();
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
+  await page.getByText("6 in the app · 17 partly · 14 with a grown-up · 0 not yet (of 37)").waitFor();
   await fits();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();

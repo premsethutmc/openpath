@@ -19,13 +19,17 @@ export const MOVE_DOWN = 3;
 export const MIN_OF_KIND = 3;
 export const MAX_SPOT = 2;
 
-export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject", "main clause"] as const;
+export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject", "main clause", "predicate"] as const;
 export type Ask = (typeof ASKS)[number];
 export interface GrammarItem {
   id: string;
   level: number;
   topic: string;
-  kind: "fix" | "build" | "spot";
+  kind: "fix" | "build" | "spot" | "choose";
+  /** choose: the question asked about the sentence. */
+  question?: string;
+  /** choose: the answers that are not right (one or two). The right one is `right[0]`. */
+  wrong?: string[];
   /** spot: the kind of word to find. */
   ask?: Ask;
   /** fix: the sentence with the wrong word in [brackets]. build: the sentence to build. spot: the sentence to look in. */
@@ -62,6 +66,11 @@ const bare = (w: string) => w.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, "");
 /** Is the word tapped one of the kind asked for? */
 export const checkSpot = (item: GrammarItem, tapped: number): boolean => (item.right ?? []).includes(bare(spotWords(item)[tapped] ?? ""));
 
+/** A choose item's answers in a fixed order that owes nothing to which is right. */
+export const choices = (item: GrammarItem): string[] => hashOrder([...(item.right ?? []), ...(item.wrong ?? [])], (o) => `${item.id}|${o}`);
+/** Is the answer chosen the right one? */
+export const checkChoose = (item: GrammarItem, chosen: number): boolean => choices(item)[chosen] === item.right?.[0];
+
 /** A fix item's words as shown (the wrong one unmarked), which one is wrong, and the punctuation around it. */
 export function fixParts(item: GrammarItem): { words: string[]; wrong: number; before: string; after: string } {
   const tokens = item.sentence.split(" ");
@@ -73,6 +82,7 @@ export function fixParts(item: GrammarItem): { words: string[]; wrong: number; b
 export function corrected(item: GrammarItem): string {
   if (item.kind === "build") return item.sentence;
   if (item.kind === "spot") return `${item.sentence} — ${item.ask}: ${(item.right ?? []).join(", ")}`;
+  if (item.kind === "choose") return `${item.sentence} — ${item.right![0]}`;
   const p = fixParts(item);
   return p.words.map((w, i) => (i === p.wrong ? `${p.before}${item.right![0]}${p.after}` : w)).join(" ");
 }
@@ -96,7 +106,12 @@ export function grammarProblems(g: GrammarUse): string[] {
     if (!g.levels.some((l) => l.id === it.level)) out.push(`${it.id}: unknown level`);
     if (!g.topics.some((t) => t.id === it.topic)) out.push(`${it.id}: unknown topic`);
     if (!it.rule.trim()) out.push(`${it.id}: no rule`);
-    if (it.kind === "spot") {
+    if (it.kind === "choose") {
+      if (!it.question?.trim()) out.push(`${it.id}: no question`);
+      if (it.right?.length !== 1) out.push(`${it.id}: exactly one right answer`);
+      const all = [...(it.right ?? []), ...(it.wrong ?? [])];
+      if (!it.wrong?.length || it.wrong.length > 2 || new Set(all).size !== all.length) out.push(`${it.id}: one or two wrong answers, all different`);
+    } else if (it.kind === "spot") {
       const words = spotWords(it).map(bare);
       if (!it.ask || !ASKS.includes(it.ask)) out.push(`${it.id}: no kind of word to find`);
       if (!it.right?.length) out.push(`${it.id}: no right word`);
@@ -166,7 +181,8 @@ export function pick(g: GrammarUse, level: number, records: readonly GrammarReco
   const ordered = hashOrder(pool, (it) => `grammar|${it.id}`).sort((a, b) => rank(a) - rank(b) || (latest.get(a.id)?.i ?? 0) - (latest.get(b.id)?.i ?? 0));
   const out: GrammarItem[] = [];
   // in a level sitting, naming words takes at most two places, so there is room for three to fix and three to build
-  const tooManySpots = (it: GrammarItem) => !topics?.length && it.kind === "spot" && out.filter((o) => o.kind === "spot").length >= MAX_SPOT;
+  const light = (it: GrammarItem) => it.kind === "spot" || it.kind === "choose";
+  const tooManySpots = (it: GrammarItem) => !topics?.length && light(it) && out.filter(light).length >= MAX_SPOT;
   const perTopic = new Map<string, number>();
   const cap = topics?.length ? SITTING_SIZE : 3;
   for (const it of ordered) {
@@ -218,6 +234,7 @@ export interface GrammarView {
   fix: { words: string[] } | null;
   build: { tiles: string[]; whole: boolean; task: string | null } | null;
   spot: { words: string[]; ask: Ask } | null;
+  choose: { sentence: string; question: string; options: string[] } | null;
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
 }
@@ -279,6 +296,15 @@ export class GrammarSitting {
     this.record(checkSpot(it, tapped), bare(words[tapped]));
   }
 
+  /** Answer a choose: the index of the answer picked. */
+  choose(chosen: number): void {
+    const it = this.items[this.index];
+    if (this.last || !it || it.kind !== "choose") return;
+    const options = choices(it);
+    if (!Number.isInteger(chosen) || chosen < 0 || chosen >= options.length) return;
+    this.record(checkChoose(it, chosen), options[chosen]);
+  }
+
   /** Answer a build: the tiles chosen, in order. */
   build(chosen: readonly string[]): void {
     const it = this.items[this.index];
@@ -301,12 +327,13 @@ export class GrammarSitting {
 
   snapshot(): GrammarView {
     const it = this.items[this.index];
-    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, feedback: null, done: null };
+    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, choose: null, feedback: null, done: null };
     if (this.last) return { ...base, phase: "feedback", feedback: this.last };
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;
       return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level) } };
     }
+    if (it.kind === "choose") return { ...base, phase: "ask", choose: { sentence: it.sentence, question: it.question!, options: choices(it) } };
     if (it.kind === "spot") return { ...base, phase: "ask", spot: { words: spotWords(it), ask: it.ask! } };
     return it.kind === "fix" ? { ...base, phase: "ask", fix: { words: fixParts(it).words } } : { ...base, phase: "ask", build: { tiles: tiles(it), whole: !!it.parts && !it.task, task: it.task ?? null } };
   }

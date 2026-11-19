@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-8",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "board": "CISCE (ICSE)",
   "class": 8,
   "subject": "English",
@@ -266,44 +266,44 @@
         {
           "id": "GV1",
           "text": "Tells phrases from clauses and explains what each does in a sentence.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "clauses"
-          ],
-          "note": "Finding the main clause is practised; naming phrases and what they do is not yet."
+            "clauses",
+            "phrase_clause"
+          ]
         },
         {
           "id": "GV2",
           "text": "Finds the main clause and sorts the subordinate clauses of a sentence.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "clauses"
-          ],
-          "note": "Finding the main clause is practised; sorting subordinate clauses into kinds is not yet."
+            "clauses",
+            "clause_kinds"
+          ]
         },
         {
           "id": "GV3",
           "text": "Changes simple sentences into complex or compound ones.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "compound",
             "relative",
-            "conjunctions"
-          ],
-          "note": "Building compound and complex sentences is practised; rewriting a given simple sentence is not yet."
+            "conjunctions",
+            "joining"
+          ]
         },
         {
           "id": "GV4",
           "text": "Uses vocabulary suited to different registers and settings.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "field_words"
-          ],
-          "note": "Words for particular fields are practised; formal and informal register is not yet."
+            "field_words",
+            "register"
+          ]
         },
         {
           "id": "GV5",

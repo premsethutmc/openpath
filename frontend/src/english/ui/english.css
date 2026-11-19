@@ -2765,3 +2765,20 @@ h3.sub {
   font-size: 1.8rem;
   min-width: 120px;
 }
+
+/* Grammar in use: a question with answers to choose from */
+.grammar-quote {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 12px 0 4px;
+}
+.grammar-choices {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+}
+.grammar-choice {
+  text-align: left;
+  white-space: normal;
+}
