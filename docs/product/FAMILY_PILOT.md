@@ -538,3 +538,23 @@ share of each skill, which rises only when the product teaches (a lesson, a stra
 ICSE Class 5, 62 skills: docs/product/SIM_REPORT.md. The product was never fooled (the guesser mastered nothing; no
 child was marked mastered while knowing under half), nobody got stuck or looped; a child who is always right needs four
 sittings and about 17 questions a skill; the weak child was handed to a teacher or parent ("pause") in 30 of 62 skills.
+
+## together@1: the product works a question with the child before it asks for a person
+
+Before: when every explanation of a skill had been tried and the child's answers alone were still wrong, the product stopped
+("go through it with a teacher or parent"). The simulated weak child reached that stop in 30 of 62 Class 5 skills.
+
+Now, at each of those stops, the engine first tries one more rung:
+
+1. **A walk-through.** One fresh practice question of the skill, opened with the step help already showing: the child types
+   each step (or taps "Help: show me this step"). Recorded as practice with help (activity `guided`, context `together`); it
+   is never evidence.
+2. **One like it alone.** A fresh check question with no help. Right: one more alone, and the ordinary checks take over.
+   Wrong: the next walk-through.
+3. **Bounds.** At most 2 walk-throughs in a sitting ("That is enough of this one for today. It comes back next time"), at
+   most 4 in all. Only after that does the product ask for a teacher or parent.
+
+Going back to an earlier skill the child is missing (prereq-after-own@1) was already tried before this rung and still is.
+The rule is in `workTogether` (`packages/learning/src/intervention.ts`); the limits are the data `TOGETHER`. A skill whose
+questions have no typed steps yet has no walk-through and stops as before. Tests: `frontend/src/learning/together.test.ts`.
+Screen: `/year/#try=<question id>&together` opens a question the way a walk-through does.

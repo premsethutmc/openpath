@@ -61,6 +61,9 @@ export function slip(qid: string): string {
   // a list of numbers (e.g. the roots "2,3"): the last one off by one, still a readable answer of the same shape
   const parts = q.answer.split(",").map((x) => x.trim().replace(/−/g, "-"));
   if (parts.length > 1 && parts.every((x) => Number.isFinite(Number(x)))) return [...parts.slice(0, -1), show(Number(parts.at(-1)) + 1)].join(",");
+  // a fraction ("100/3"): the top off by one, still a readable fraction
+  const fr = /^\s*([−-]?\d+)\s*\/\s*(\d+)\s*$/.exec(q.answer);
+  if (fr) return `${Number(fr[1].replace("−", "-")) + 1}/${fr[2]}`;
   const v = Number(q.answer.trim().replace(/−/g, "-"));
   if (!Number.isFinite(v)) throw new Error(`no numeric slip for ${qid}`);
   const p = problemOf(qid);

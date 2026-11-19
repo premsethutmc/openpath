@@ -5,6 +5,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PERSONAS, runLearner, T0 } from "./adaptive-loop";
+import { useTogether } from "../../../packages/learning/src/intervention";
+useTogether(false); // these journeys are about the stop itself; together@1 (walk-throughs before it) is tested in learning/together.test.ts
 import { useMachineValidation } from "../../../packages/learning/src/machine-validation";
 
 // These personas audit the loop on provisional content (stage A1/A2), so the automated route (machine-validation@1, tested in

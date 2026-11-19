@@ -7,6 +7,8 @@ import { hypotheses } from "../../../packages/learning/src/hypotheses";
 import { probeReading } from "../../../packages/learning/src/reasoning";
 import { teacherEvidence } from "../../../packages/learning/src/teacher-evidence";
 import { bugValue, Journey, respond, SCENARIOS, TARGET } from "./adaptive-journey";
+import { useTogether } from "../../../packages/learning/src/intervention";
+useTogether(false); // these scenarios are about evidence up to the stop; together@1 is tested in learning/together.test.ts
 import { problemOf } from "../../../packages/learning/src/families";
 
 test("probe@1 reading is family-independent and refuses non-discriminating questions", () => {
