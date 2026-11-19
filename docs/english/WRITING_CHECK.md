@@ -31,3 +31,29 @@ certain are flagged, because a wrong note would teach a mistake.
 Free to run, predictable, works without a key or a connection, and no risk of a surprise bill. The owner's own
 figure for AI essay analysis was about ten rupees for six essays. AI feedback can be added later as an optional
 second opinion without changing this.
+
+## Wider lists (19 Nov 2026)
+
+The sure slips moved to `frontend/src/english/logic/writing/slips.ts` and grew:
+
+| Kind | Before | Now |
+|---|---|---|
+| Misspellings | 40 | 303 |
+| Two words written as one (alot, atleast) | 0 | 12 |
+| Regular ending on an irregular word (goed, childs, furnitures) | 0 | 69 |
+| Missing apostrophe (dont, didnt) | 0 | 22 |
+| Message short forms (u, plz, bcoz) | 0 | 20 |
+| Grammar patterns | 10 | 26 |
+
+New grammar patterns include: doesn't likes, can went, to went, have went, he don't, they is, I am agree,
+Myself Ravi, its a, your not, their is, one of my friend, discuss about, cope up with, return back, a word
+written twice. Doubled punctuation marks get a tip.
+
+Three false alarms in the first version were removed: "Does he have", "Did she go" (the he/she/it rule now
+fires only where a clause begins), "an A in maths", and "an MBA".
+
+Guards: test WC-9 fails if any listed slip is a word used in our own reading, listening, dictation or guided
+texts. A scan of 1,755 of our own texts raised no spelling or grammar note.
+
+Still not done: no dictionary check (a misspelling not on the list passes), no check of meaning, tense
+consistency or topic. Lists are my own, not educator-reviewed.
