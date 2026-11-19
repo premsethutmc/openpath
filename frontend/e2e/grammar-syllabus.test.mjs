@@ -82,7 +82,7 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   const { context, page, errors, foreign, fits } = await start("Grammar");
   await page.getByRole("button", { name: "Try Grammar in use" }).click();
   await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
-  await page.getByText("Level 2: Class 5 grammar").waitFor();
+  await page.getByText("Level 3: Apostrophes, verbs and joining").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   const missed = { fix: false, build: false };
   const shots = { fix: false, build: false };
@@ -94,7 +94,7 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
     const wrong = !missed[kind];
     missed[kind] = true;
     const it = await answer(page, wrong);
-    assert.equal(it.level, 2);
+    assert.equal(it.level, 3);
     if (!wrong) right++;
     if (wrong) await fits(), await shot(page, `2-${kind}-feedback`);
     await page.getByRole("button", { name: i < 8 ? "Next sentence" : "Finish" }).click();

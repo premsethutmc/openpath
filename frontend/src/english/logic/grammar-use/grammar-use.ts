@@ -11,6 +11,7 @@
  * the level. Scoring is by code. Practice-only: nothing here is evidence for the engine.
  */
 import itemsJson from "../../../../../content/english/grammar/in-use.json";
+import { SCALE, rescale, startFor } from "../scale.ts";
 
 export const SITTING_SIZE = 8;
 export const MOVE_UP = 6;
@@ -114,19 +115,21 @@ export function checkFix(item: GrammarItem, tapped: number, typed: string): bool
 export const checkBuild = (item: GrammarItem, chosen: readonly string[]): boolean => tidy(chosen.join(" ")) === tidy(item.sentence);
 
 export type GrammarRecord =
-  | { type: "start"; sitting: string; level: number; topics?: string[] }
-  | { type: "answer"; sitting: string; id: string; level: number; topic: string; correct: boolean; given: string }
-  | { type: "end"; sitting: string; level: number; asked: number; right: number; topics?: string[] };
+  | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
+  | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
+  | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
 
-export const startLevel = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 1 : 2);
+/** Levels recorded before the six-level scale: old 1, 2, 3 are now 1, 3, 5. */
+export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 1, 2: 3, 3: 5 };
+export const startLevel = startFor;
 
 /** The level for the next sitting: the last finished level sitting's level, moved by how it went. Topic sittings do not count. */
 export function levelFor(g: GrammarUse, records: readonly GrammarRecord[], start: number): number {
   const ids = g.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
   const last = [...records].reverse().find((r): r is Extract<GrammarRecord, { type: "end" }> => r.type === "end" && !r.topics && r.asked >= SITTING_SIZE);
-  return last ? clamp(last.level + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
+  return last ? clamp(rescale(last, OLD_LEVELS) + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
 }
 
 /** The sentences for a sitting: new ones first, then ones last got wrong, then the oldest; no topic more than three times, and some of each kind. */
@@ -173,7 +176,7 @@ export function grammarSummary(g: GrammarUse, records: readonly GrammarRecord[])
   for (const a of latest.values()) if (!a.correct) misses.set(a.topic, (misses.get(a.topic) ?? 0) + 1);
   const name = (id: string) => g.topics.find((t) => t.id === id)?.name ?? id;
   const lastLevel = [...records].reverse().find((r) => r.type === "end" && !r.topics);
-  return { answered: answers.length, right: answers.filter((a) => a.correct).length, level: lastLevel ? lastLevel.level : null, weak: [...misses].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([t]) => name(t)) };
+  return { answered: answers.length, right: answers.filter((a) => a.correct).length, level: lastLevel ? rescale(lastLevel as { level: number; scale?: number }, OLD_LEVELS) : null, weak: [...misses].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([t]) => name(t)) };
 }
 
 export interface GrammarView {
@@ -211,7 +214,7 @@ export class GrammarSitting {
     this.topics = topics?.length ? [...topics] : undefined;
     this.sitting = `g${history.filter((r) => r.type === "start").length + 1}`;
     this.items = pick(content, level, history, this.topics);
-    this.log.push({ type: "start", sitting: this.sitting, level, ...(this.topics ? { topics: this.topics } : {}) });
+    this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE, ...(this.topics ? { topics: this.topics } : {}) });
   }
 
   take(): GrammarRecord[] {
@@ -222,7 +225,7 @@ export class GrammarSitting {
 
   private record(correct: boolean, given: string): void {
     const it = this.items[this.index];
-    const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, topic: it.topic, correct, given: given.slice(0, 200) };
+    const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, scale: SCALE, topic: it.topic, correct, given: given.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
     const p = it.kind === "fix" ? fixParts(it) : null;
@@ -255,7 +258,7 @@ export class GrammarSitting {
   }
 
   private endRecord(): Extract<GrammarRecord, { type: "end" }> {
-    return { type: "end", sitting: this.sitting, level: this.level, asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, ...(this.topics ? { topics: this.topics } : {}) };
+    return { type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, ...(this.topics ? { topics: this.topics } : {}) };
   }
 
   snapshot(): GrammarView {

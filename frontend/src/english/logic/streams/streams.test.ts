@@ -62,16 +62,18 @@ function listen(start: number, canWrite: number, history = [] as Parameters<type
   return { ...s.result(), ids, records: s.take() };
 }
 
-test("LC-2 listening: three sentences, one try each, up after one that passes; stored so they are not asked again soon", () => {
-  assert.deepEqual([listen(2, 3).level, listen(2, 2).level, listen(2, 1).level, listen(2, 0).level, listen(1, 3).level], [3, 2, 1, 1, 3]);
-  const r = listen(2, 2);
+test("LC-2 listening: four sentences, one try each, a wide first move then single steps; stored so they are not asked again soon", () => {
+  assert.deepEqual([6, 5, 4, 3, 2, 1, 0].map((can) => listen(3, can).level), [6, 5, 4, 3, 2, 1, 1], "every level can be reached from the middle");
+  assert.equal(listen(1, 6).level, 5);
+  const r = listen(3, 4);
+  assert.equal(r.scale, 2);
   assert.equal(r.ids.length, LISTENING_STEPS);
   assert.equal(new Set(r.ids).size, LISTENING_STEPS, "no sentence twice");
-  assert.deepEqual(r.steps.map((s) => [s.level, s.perfect]), [[2, true], [3, false], [2, true]]);
-  assert.equal(r.records.length, 3);
+  assert.deepEqual(r.steps.map((s) => [s.level, s.perfect]), [[3, true], [5, false], [4, true], [5, false]]);
+  assert.equal(r.records.length, 4);
   assert.ok(r.records.every((x) => x.type === "answer" && x.tries === 1 && x.sitting === "level-check"));
-  assert.ok(!listen(2, 2, r.records).ids.some((id) => r.ids.includes(id)), "a second check uses other sentences");
-  const s = new ListeningPlacement(DICTATION, 2, []);
+  assert.ok(!listen(3, 4, r.records).ids.some((id) => r.ids.includes(id)), "a second check uses other sentences");
+  const s = new ListeningPlacement(DICTATION, 3, []);
   s.check("  ", 0);
   assert.equal(s.snapshot().index, 0, "nothing typed is not an answer");
   assert.equal(levelFor(DICTATION, r.records, 3), 3, "answers without a finished sitting do not move the Listen and write level");
@@ -94,8 +96,8 @@ test("LC-3 the words part is the word check, cut to four rounds", () => {
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {
   const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
-  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 2 }, spelling: null });
-  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
+  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null }, "a level stored on the old three-level scale is read on today's");
+  const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
   assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 2, start: 3 }, listening: { level: 3 }, spelling: { level: 4 } });
 });
 
@@ -117,14 +119,14 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.levels().done, false);
   const row = (id: string) => streamRows(l, clock()).find((r) => r.id === id)!;
   assert.deepEqual(streamRows(l, clock()).map((r) => r.id), ["words", "reading", "listening", "spelling", "grammar"]);
-  assert.equal(row("listening").level, `Level ${startLevel(l.state.preferences?.band)} of 3`);
+  assert.equal(row("listening").level, `Level ${startLevel(l.state.preferences?.band)} of 6`);
   assert.match(row("reading").level, /^Starter \(level 1 of 3\)$/);
   await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, estimate: 4000, answered: 12 }, { type: "reading", passed: 1, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "done" }]);
   assert.equal(l.levels().done, true);
   assert.equal(row("words").level, "Level 5 of 8");
   assert.equal(row("words").next, "Five new words");
   assert.match(row("reading").level, /^Builder \(level 2 of 3\)$/);
-  assert.equal(row("listening").level, "Level 3 of 3");
+  assert.equal(row("listening").level, "Level 5 of 6");
   assert.match(row("spelling").level, /level 1 of 5/);
   await l.recordLevelCheck([{ type: "spelling", level: 3, steps: [] }]);
   assert.equal(levelOf(l.spelling(), BANK), 3, "the Spelling Bee starts at the level found");
@@ -132,7 +134,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.spellingSession(), null);
   await l.startSpelling();
   assert.ok(l.spellingSession()!.word, "and offers a word from there");
-  assert.equal(row("grammar").level, "Level 2 of 3");
+  assert.equal(row("grammar").level, "Level 3 of 6");
   assert.equal(row("grammar").next, "Eight sentences to fix and build");
   assert.ok(streamRows(l, clock()).every((r) => !r.doneToday));
   await l.recordDictation([{ type: "start", sitting: "d1", level: 3 }, { type: "end", sitting: "d1", level: 3, asked: 5, perfectFirst: 5 }]);
@@ -181,11 +183,11 @@ test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one
 
 test("LC-8 listening placement passes a sentence on its words: no capital or end mark needed, one slip in a long sentence", () => {
   assert.deepEqual([listeningPass(6, 6), listeningPass(5, 6), listeningPass(7, 8), listeningPass(6, 8), listeningPass(11, 12)], [true, false, true, false, true]);
-  const s = new ListeningPlacement(DICTATION, 2, []);
+  const s = new ListeningPlacement(DICTATION, 3, []);
   while (!s.finished) s.check(s.spoken()!.toLowerCase().replace(/[.?!,]/g, ""), 1);
-  assert.equal(s.result().level, 3, "words right without capitals or end marks still places at the top");
+  assert.equal(s.result().level, 6, "words right without capitals or end marks still places at the top");
   assert.ok(s.take().every((r) => r.type === "answer" && !r.perfectFirst), "though the stored answers stay marked as not perfect");
-  const t = new ListeningPlacement(DICTATION, 2, []);
-  while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 3).join(" "), 1);
+  const t = new ListeningPlacement(DICTATION, 3, []);
+  while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 2).join(" "), 1);
   assert.equal(t.result().level, 1, "half a sentence does not pass");
 });

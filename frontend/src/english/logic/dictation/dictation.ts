@@ -12,6 +12,7 @@
  * the engine.
  */
 import sentencesJson from "../../../../../content/english/dictation/sentences.json";
+import { SCALE, rescale, startFor } from "../scale.ts";
 
 export const SITTING_SIZE = 5;
 export const MOVE_UP = 4;
@@ -69,7 +70,7 @@ export function dictationProblems(d: Dictation): string[] {
     if (/\d/.test(s.text)) out.push(`${s.id}: numbers are written as words`);
     if (/[^A-Za-z' ,.?!-]/.test(s.text)) out.push(`${s.id}: a character that cannot be typed or marked`);
     const n = wordsOf(s.text).length;
-    if (n < 4 || n > 14) out.push(`${s.id}: ${n} words`);
+    if (n < 3 || n > 14) out.push(`${s.id}: ${n} words`);
     for (const k of Object.keys(s.alt)) if (!wordsOf(s.text).some((w) => w.toLowerCase() === k)) out.push(`${s.id}: another spelling is given for a word that is not in the sentence`);
   }
   for (const l of d.levels) if (d.sentences.filter((s) => s.level === l.id).length < SITTING_SIZE * 2) out.push(`level ${l.id}: needs at least ${SITTING_SIZE * 2} sentences`);
@@ -170,20 +171,22 @@ export function fixes(m: Mark): string[] {
 }
 
 export type DictationRecord =
-  | { type: "start"; sitting: string; level: number }
-  | { type: "answer"; sitting: string; id: string; level: number; tries: 1 | 2; perfectFirst: boolean; perfect: boolean; right: number; total: number; missed: string[]; misspelt?: string[]; capitals: number; end: boolean; plays: number; typed: string }
-  | { type: "end"; sitting: string; level: number; asked: number; perfectFirst: number };
+  | { type: "start"; sitting: string; level: number; scale?: number }
+  | { type: "answer"; sitting: string; id: string; level: number; scale?: number; tries: 1 | 2; perfectFirst: boolean; perfect: boolean; right: number; total: number; missed: string[]; misspelt?: string[]; capitals: number; end: boolean; plays: number; typed: string }
+  | { type: "end"; sitting: string; level: number; scale?: number; asked: number; perfectFirst: number };
 type Answer = Extract<DictationRecord, { type: "answer" }>;
 
-export const startLevel = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 1 : 2);
+/** Levels recorded before the six-level scale: old 1, 2, 3 are now 2, 3, 5. */
+export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 2, 2: 3, 3: 5 };
+export const startLevel = startFor;
 
 /** The level for the next sitting: the last finished sitting's level, moved by how it went. */
 export function levelFor(d: Dictation, records: readonly DictationRecord[], start: number): number {
   const last = [...records].reverse().find((r): r is Extract<DictationRecord, { type: "end" }> => r.type === "end");
   const ids = d.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
-  if (!last || last.asked < SITTING_SIZE) return clamp(last?.level ?? start);
-  return clamp(last.level + (last.perfectFirst >= MOVE_UP ? 1 : last.perfectFirst <= MOVE_DOWN ? -1 : 0));
+  if (!last || last.asked < SITTING_SIZE) return clamp(last ? rescale(last, OLD_LEVELS) : start);
+  return clamp(rescale(last, OLD_LEVELS) + (last.perfectFirst >= MOVE_UP ? 1 : last.perfectFirst <= MOVE_DOWN ? -1 : 0));
 }
 
 /** The sentences for a sitting: up to two to redo (not right first time last time), then new ones, then the oldest. */
@@ -212,7 +215,7 @@ export function dictationSummary(records: readonly DictationRecord[]): Dictation
   return {
     sentences: answers.length,
     perfectFirst: answers.filter((a) => a.perfectFirst).length,
-    level: answers.at(-1)?.level ?? null,
+    level: answers.length ? rescale(answers.at(-1)!, OLD_LEVELS) : null,
     missed: [...counts].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([w]) => w),
   };
 }
@@ -253,7 +256,7 @@ export class DictationSitting {
     this.history = history;
     this.sitting = `d${history.filter((r) => r.type === "start").length + 1}`;
     this.sentences = pick(content, level, history);
-    this.log.push({ type: "start", sitting: this.sitting, level });
+    this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE });
   }
 
   take(): DictationRecord[] {
@@ -285,7 +288,7 @@ export class DictationSitting {
       return;
     }
     const f = this.first!;
-    const a: Answer = { type: "answer", sitting: this.sitting, id: s.id, level: s.level, tries: firstTry ? 1 : 2, perfectFirst: f.perfect, perfect: m.perfect, right: f.right, total: f.total, missed: f.missed, misspelt: f.misspelt, capitals: f.capitals, end: f.end === "ok", plays, typed: this.firstTyped.slice(0, 200) };
+    const a: Answer = { type: "answer", sitting: this.sitting, id: s.id, level: s.level, scale: SCALE, tries: firstTry ? 1 : 2, perfectFirst: f.perfect, perfect: m.perfect, right: f.right, total: f.total, missed: f.missed, misspelt: f.misspelt, capitals: f.capitals, end: f.end === "ok", plays, typed: this.firstTyped.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
     this.phase = "marked";
@@ -300,14 +303,14 @@ export class DictationSitting {
       return;
     }
     this.phase = "done";
-    this.log.push({ type: "end", sitting: this.sitting, level: this.level, asked: this.answers.length, perfectFirst: this.answers.filter((a) => a.perfectFirst).length });
+    this.log.push({ type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, perfectFirst: this.answers.filter((a) => a.perfectFirst).length });
   }
 
   snapshot(): DictationView {
     const base = { index: Math.min(this.index, this.sentences.length - 1), total: this.sentences.length, level: this.level };
     if (this.phase === "done") {
       const perfectFirst = this.answers.filter((a) => a.perfectFirst).length;
-      const end: DictationRecord = { type: "end", sitting: this.sitting, level: this.level, asked: this.answers.length, perfectFirst };
+      const end: DictationRecord = { type: "end", sitting: this.sitting, level: this.level, scale: SCALE, asked: this.answers.length, perfectFirst };
       return { ...base, phase: "done", id: null, mark: null, typed: "", reveal: null, done: { asked: this.answers.length, perfectFirst, fixed: this.answers.filter((a) => !a.perfectFirst && a.perfect).length, missed: [...new Set(this.answers.flatMap((a) => a.missed))], nextLevel: levelFor(this.content, [...this.history, end], this.level) } };
     }
     const s = this.sentences[this.index];

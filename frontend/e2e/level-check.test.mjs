@@ -116,8 +116,8 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByText("Part 3 of 4: Listening").waitFor();
   await fits();
   await shot(page, "3-listening");
-  for (let i = 1; i <= 3; i++) {
-    await page.getByText(`Sentence ${i} of 3.`, { exact: false }).waitFor();
+  for (let i = 1; i <= 4; i++) {
+    await page.getByText(`Sentence ${i} of 4.`, { exact: false }).waitFor();
     const s = SENTENCES.get(await page.locator("main").getAttribute("data-sentence"));
     assert.equal(await page.getByText(s.text, { exact: true }).count(), 0, "the sentence is not on screen");
     await page.locator("#dict-box").fill(s.text);
@@ -139,7 +139,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Level 4 of 8" }).waitFor();
   await page.locator('[data-part="reading"] .status', { hasText: "Challenger (level 3 of 3)" }).waitFor();
-  await page.locator('[data-part="listening"] .status', { hasText: "Level 3 of 3" }).waitFor();
+  await page.locator('[data-part="listening"] .status', { hasText: "Level 6 of 6" }).waitFor();
   await fits();
   await shot(page, "4-result");
   await page.getByRole("button", { name: "See what to do today" }).click();
@@ -148,9 +148,9 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   assert.equal(await page.locator(".stream-rows li").count(), 5);
   await page.locator('[data-stream="words"]', { hasText: "Level 4 of 8" }).waitFor();
   await page.locator('[data-stream="reading"]', { hasText: "Challenger" }).waitFor();
-  await page.locator('[data-stream="listening"]', { hasText: "Level 3 of 3" }).waitFor();
+  await page.locator('[data-stream="listening"]', { hasText: "Level 6 of 6" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
-  await page.locator('[data-stream="grammar"]', { hasText: "Level 2 of 3" }).waitFor();
+  await page.locator('[data-stream="grammar"]', { hasText: "Level 3 of 6" }).waitFor();
   // with a level found, the home screen leads with the streams and folds the rest away
   assert.equal(await page.getByRole("button", { name: "Learn new words" }).count(), 0);
   assert.equal(await page.getByRole("heading", { name: "Today's plan" }).count(), 0);
@@ -166,7 +166,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-stream="reading"]', { hasText: "Challenger" }).waitFor();
 
   await page.getByRole("button", { name: "Today: Listening and writing" }).click();
-  await page.getByText("Level 3: Hard sentences").waitFor();
+  await page.getByText("Level 6: Hard sentences").waitFor();
   await page.getByRole("button", { name: "← Back" }).click();
   await page.getByRole("button", { name: "Today: Reading" }).click();
   await page.getByRole("heading", { name: "Read, think, answer" }).waitFor();
@@ -200,7 +200,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();
   await page.locator('[data-stream="reading"]', { hasText: "Starter" }).waitFor();
-  await page.locator('[data-stream="listening"]', { hasText: "Level 2 of 3" }).waitFor();
+  await page.locator('[data-stream="listening"]', { hasText: "Level 3 of 6" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "level 1 of 5" }).waitFor();
   await page.getByRole("button", { name: "Check my level again" }).click();
   await page.getByRole("button", { name: "Check again" }).waitFor();

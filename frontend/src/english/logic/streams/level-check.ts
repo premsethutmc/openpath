@@ -5,7 +5,7 @@
  *   words      a short word check (the word check's own session, four rounds): a band out of eight;
  *   reading    one text with four questions at a starting level, then one a level up or down: three of four right
  *              passes a level; the learner starts reading at the level above the highest one passed;
- *   listening  three dictated sentences, one try each, a level up after a sentence whose words are right (capital
+ *   listening  four dictated sentences, one try each, a level up after a sentence whose words are right (capital
  *              letters and the end mark are not counted; a long sentence may have one slip) and down otherwise:
  *              the level is the highest one passed.
  *
@@ -16,7 +16,8 @@
  * as the last step. Any part can be skipped. Practice-only: nothing here is evidence for the engine. The reading part uses a
  * practice text of the course, never one kept for the course's fresh checks.
  */
-import { mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
+import { OLD_LEVELS, mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
+import { SCALE, rescale } from "../scale.ts";
 import { checkSpelling, type SpellWord } from "../spelling.ts";
 import type { Course, Level, Passage, Question, SkillId } from "../reading/course.ts";
 
@@ -25,7 +26,9 @@ export const PARTS: Part[] = ["words", "reading", "listening", "spelling"];
 export const WORD_ROUNDS = 4;
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
 export const READING_PASS = 3;
-export const LISTENING_STEPS = 3;
+export const LISTENING_STEPS = 4;
+/** How far the level moves after each dictated sentence: a wide first move, then single steps. */
+export const LISTENING_MOVES = [2, 1, 1, 1];
 /** Does a dictated sentence pass for placement? Every word spelt right; one slip allowed from eight words up. */
 export const listeningPass = (right: number, total: number): boolean => right >= total - (total >= 8 ? 1 : 0);
 export const SPELLING_STEPS = 6;
@@ -35,7 +38,7 @@ export type LevelCheckRecord =
   | { type: "words"; band: number; estimate: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; steps: { level: number; right: number; asked: number }[] }
-  | { type: "listening"; level: number; steps: { id: string; level: number; perfect: boolean }[] }
+  | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
@@ -57,7 +60,7 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     if (r.type === "done") out.done = true;
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
     if (r.type === "reading") out.reading = { passed: r.passed, start: Math.min(readingLevels, r.passed + 1) };
-    if (r.type === "listening") out.listening = { level: r.level };
+    if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
     if (r.type === "spelling") out.spelling = { level: r.level };
   }
   return out;
@@ -131,7 +134,7 @@ export class ReadingPlacement {
   }
 }
 
-/** The listening part: three sentences, one try each. Each is stored as a Listen and write answer, so it is not asked again soon. */
+/** The listening part: four sentences, one try each, with a wide first move so six levels are within reach. Each is stored as a Listen and write answer, so it is not asked again soon. */
 export class ListeningPlacement {
   private readonly content: Dictation;
   private readonly history: DictationRecord[];
@@ -175,17 +178,17 @@ export class ListeningPlacement {
     // one try, marked the same way as Listen and write. For placement a sentence passes when its words are right:
     // capital letters and the end mark do not count, and a sentence of eight words or more may have one word wrong.
     const passed = listeningPass(m.right, m.total);
-    const record: DictationRecord = { type: "answer", sitting: "level-check", id: s.id, level: s.level, tries: 1, perfectFirst: m.perfect, perfect: m.perfect, right: m.right, total: m.total, missed: m.missed, misspelt: m.misspelt, capitals: m.capitals, end: m.end === "ok", plays, typed: typed.trim().slice(0, 200) };
+    const record: DictationRecord = { type: "answer", sitting: "level-check", id: s.id, level: s.level, scale: SCALE, tries: 1, perfectFirst: m.perfect, perfect: m.perfect, right: m.right, total: m.total, missed: m.missed, misspelt: m.misspelt, capitals: m.capitals, end: m.end === "ok", plays, typed: typed.trim().slice(0, 200) };
     this.log.push(record);
     this.history.push(record);
     this.steps.push({ id: s.id, level: s.level, perfect: passed });
     const ids = this.content.levels.map((l) => l.id);
-    this.level = Math.min(Math.max(...ids), Math.max(Math.min(...ids), this.level + (passed ? 1 : -1)));
+    this.level = Math.min(Math.max(...ids), Math.max(Math.min(...ids), this.level + (passed ? 1 : -1) * (LISTENING_MOVES[this.steps.length - 1] ?? 1)));
     this.load();
   }
 
-  result(): { level: number; steps: { id: string; level: number; perfect: boolean }[] } {
-    return { level: Math.max(Math.min(...this.content.levels.map((l) => l.id)), ...this.steps.filter((s) => s.perfect).map((s) => s.level)), steps: [...this.steps] };
+  result(): { level: number; scale: number; steps: { id: string; level: number; perfect: boolean }[] } {
+    return { scale: SCALE, level: Math.max(Math.min(...this.content.levels.map((l) => l.id)), ...this.steps.filter((s) => s.perfect).map((s) => s.level)), steps: [...this.steps] };
   }
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {

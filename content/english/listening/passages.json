@@ -1,666 +1,1303 @@
 {
- "id": "listen-and-answer",
- "version": 2,
- "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
- "review": "candidate-unvalidated",
- "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
- "levels": [
-  {
-   "id": 1,
-   "name": "Short stories"
-  },
-  {
-   "id": 2,
-   "name": "Longer stories"
-  },
-  {
-   "id": 3,
-   "name": "Stories and facts"
-  }
- ],
- "passages": [
-  {
-   "id": "lp1.1",
-   "level": 1,
-   "title": "The Lost Kite",
-   "text": "Arun had a red kite. On Sunday he flew it in the park. The wind was strong, and the string broke. The kite flew away and landed in a tall mango tree. Arun felt sad. A gardener saw him and brought a long ladder. He climbed up and gave the kite back. Arun thanked him and went home smiling.",
-   "questions": [
+  "id": "listen-and-answer",
+  "version": 3,
+  "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
+  "review": "candidate-unvalidated",
+  "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
+  "levels": [
     {
-     "id": "lp1.1.q1",
-     "skill": "detail",
-     "prompt": "What colour was Arun's kite?",
-     "right": "Red",
-     "wrong": [
-      "Blue",
-      "Yellow"
-     ],
-     "explain": "The story begins: Arun had a red kite."
+      "id": 1,
+      "name": "Very short stories"
     },
     {
-     "id": "lp1.1.q2",
-     "skill": "cause",
-     "prompt": "Why did the kite fly away?",
-     "right": "The string broke",
-     "wrong": [
-      "Arun let go of it",
-      "A bird pulled it"
-     ],
-     "explain": "The wind was strong, and the string broke."
+      "id": 2,
+      "name": "Short stories"
     },
     {
-     "id": "lp1.1.q3",
-     "skill": "sequence",
-     "prompt": "What did the gardener do first?",
-     "right": "He brought a long ladder",
-     "wrong": [
-      "He called Arun's mother",
-      "He bought a new kite"
-     ],
-     "explain": "He brought the ladder, then climbed up."
+      "id": 3,
+      "name": "Stories"
     },
     {
-     "id": "lp1.1.q4",
-     "skill": "inference",
-     "prompt": "How did Arun feel at the end?",
-     "right": "Happy",
-     "wrong": [
-      "Angry",
-      "Afraid"
-     ],
-     "explain": "He went home smiling."
+      "id": 4,
+      "name": "Longer stories"
+    },
+    {
+      "id": 5,
+      "name": "Stories and facts"
+    },
+    {
+      "id": 6,
+      "name": "Long stories"
     }
-   ]
-  },
-  {
-   "id": "lp1.2",
-   "level": 1,
-   "title": "Meena's Plant",
-   "text": "Meena planted a bean seed in a small pot. She kept the pot near the window. Every morning she gave it a little water. After five days a tiny green shoot came up. Meena was excited and showed it to her grandmother. Her grandmother said that plants need sunlight, water and care. Meena promised to look after it every day.",
-   "questions": [
+  ],
+  "passages": [
     {
-     "id": "lp1.2.q1",
-     "skill": "detail",
-     "prompt": "Where did Meena keep the pot?",
-     "right": "Near the window",
-     "wrong": [
-      "Under her bed",
-      "In a kitchen cupboard"
-     ],
-     "explain": "She kept the pot near the window."
+      "id": "lq1.1",
+      "level": 1,
+      "title": "The Red Ball",
+      "text": "Anu has a red ball. She plays with it in the garden. One day the ball rolls under a big bush. Anu cannot see it. Her dog Moti runs to the bush. He comes back with the ball in his mouth. Anu pats him and laughs.",
+      "questions": [
+        {
+          "id": "lq1.1.q1",
+          "skill": "detail",
+          "prompt": "What colour is Anu's ball?",
+          "right": "Red",
+          "wrong": [
+            "Green",
+            "White"
+          ],
+          "explain": "The story begins: Anu has a red ball."
+        },
+        {
+          "id": "lq1.1.q2",
+          "skill": "detail",
+          "prompt": "Where does the ball roll?",
+          "right": "Under a big bush",
+          "wrong": [
+            "Into the pond",
+            "Over the wall"
+          ],
+          "explain": "The ball rolls under a big bush."
+        },
+        {
+          "id": "lq1.1.q3",
+          "skill": "detail",
+          "prompt": "Who finds the ball?",
+          "right": "Her dog Moti",
+          "wrong": [
+            "Her brother",
+            "A gardener"
+          ],
+          "explain": "Moti comes back with the ball in his mouth."
+        },
+        {
+          "id": "lq1.1.q4",
+          "skill": "inference",
+          "prompt": "How does Anu feel at the end?",
+          "right": "Happy",
+          "wrong": [
+            "Sleepy",
+            "Cross"
+          ],
+          "explain": "She pats Moti and laughs."
+        }
+      ]
     },
     {
-     "id": "lp1.2.q2",
-     "skill": "detail",
-     "prompt": "When did the shoot come up?",
-     "right": "After five days",
-     "wrong": [
-      "The next morning",
-      "After a month"
-     ],
-     "explain": "After five days a tiny green shoot came up."
+      "id": "lq1.2",
+      "level": 1,
+      "title": "Ravi's New Shoes",
+      "text": "Ravi has new black shoes. He wears them to school on Monday. On the way, it starts to rain. Ravi does not want wet shoes. He takes them off and puts them in his bag. He walks to school with bare feet. His teacher smiles.",
+      "questions": [
+        {
+          "id": "lq1.2.q1",
+          "skill": "detail",
+          "prompt": "What colour are Ravi's shoes?",
+          "right": "Black",
+          "wrong": [
+            "Brown",
+            "Blue"
+          ],
+          "explain": "His new shoes are black."
+        },
+        {
+          "id": "lq1.2.q2",
+          "skill": "detail",
+          "prompt": "On which day does he wear them to school?",
+          "right": "Monday",
+          "wrong": [
+            "Friday",
+            "Sunday"
+          ],
+          "explain": "He wears them to school on Monday."
+        },
+        {
+          "id": "lq1.2.q3",
+          "skill": "cause",
+          "prompt": "Why does Ravi take off his shoes?",
+          "right": "He does not want them wet",
+          "wrong": [
+            "They are far too small",
+            "He wants to run fast"
+          ],
+          "explain": "It starts to rain, and Ravi does not want wet shoes."
+        },
+        {
+          "id": "lq1.2.q4",
+          "skill": "detail",
+          "prompt": "Where does he put the shoes?",
+          "right": "In his bag",
+          "wrong": [
+            "Under a tree",
+            "On a bench"
+          ],
+          "explain": "He takes them off and puts them in his bag."
+        }
+      ]
     },
     {
-     "id": "lp1.2.q3",
-     "skill": "detail",
-     "prompt": "What did her grandmother say plants need?",
-     "right": "Sunlight, water and care",
-     "wrong": [
-      "Only water and nothing else",
-      "Milk, sugar and warm air"
-     ],
-     "explain": "Plants need sunlight, water and care."
+      "id": "lq1.3",
+      "level": 1,
+      "title": "The Little Bird",
+      "text": "A little bird sits on our window every morning. My sister puts rice on a plate for it. The bird eats the rice and sings. Today the bird did not come. We looked at the sky and waited. Then it came with two baby birds.",
+      "questions": [
+        {
+          "id": "lq1.3.q1",
+          "skill": "detail",
+          "prompt": "Where does the bird sit?",
+          "right": "On the window",
+          "wrong": [
+            "On the roof",
+            "On the gate"
+          ],
+          "explain": "The bird sits on the window every morning."
+        },
+        {
+          "id": "lq1.3.q2",
+          "skill": "detail",
+          "prompt": "What does the sister give the bird?",
+          "right": "Rice",
+          "wrong": [
+            "Bread",
+            "Milk"
+          ],
+          "explain": "She puts rice on a plate for it."
+        },
+        {
+          "id": "lq1.3.q3",
+          "skill": "sequence",
+          "prompt": "What does the bird do after it eats?",
+          "right": "It sings",
+          "wrong": [
+            "It sleeps",
+            "It hides"
+          ],
+          "explain": "The bird eats the rice and sings."
+        },
+        {
+          "id": "lq1.3.q4",
+          "skill": "detail",
+          "prompt": "Who came with the bird at the end?",
+          "right": "Two baby birds",
+          "wrong": [
+            "A big black crow",
+            "Three parrots"
+          ],
+          "explain": "Then it came with two baby birds."
+        }
+      ]
     },
     {
-     "id": "lp1.2.q4",
-     "skill": "main_idea",
-     "prompt": "What is the story mainly about?",
-     "right": "A girl growing a plant",
-     "wrong": [
-      "A grandmother cooking beans",
-      "A window that would not open"
-     ],
-     "explain": "Every part is about Meena and her bean plant."
+      "id": "lq1.4",
+      "level": 1,
+      "title": "A Hot Day",
+      "text": "It was a very hot day. Mala and her brother sat under a tree. Their mother gave them cold lemon juice. Then a man came by with a cart of ice. He gave each child a small piece. They held the ice and felt cool.",
+      "questions": [
+        {
+          "id": "lq1.4.q1",
+          "skill": "detail",
+          "prompt": "Where did the children sit?",
+          "right": "Under a tree",
+          "wrong": [
+            "Near the well",
+            "On the steps"
+          ],
+          "explain": "Mala and her brother sat under a tree."
+        },
+        {
+          "id": "lq1.4.q2",
+          "skill": "detail",
+          "prompt": "What did their mother give them?",
+          "right": "Cold lemon juice",
+          "wrong": [
+            "Warm sweet milk",
+            "Hot ginger tea"
+          ],
+          "explain": "Their mother gave them cold lemon juice."
+        },
+        {
+          "id": "lq1.4.q3",
+          "skill": "detail",
+          "prompt": "What was on the man's cart?",
+          "right": "Ice",
+          "wrong": [
+            "Fruit",
+            "Toys"
+          ],
+          "explain": "A man came by with a cart of ice."
+        },
+        {
+          "id": "lq1.4.q4",
+          "skill": "cause",
+          "prompt": "Why did the children feel cool at the end?",
+          "right": "They held the ice",
+          "wrong": [
+            "They went for a swim",
+            "It began to rain"
+          ],
+          "explain": "They held the ice and felt cool."
+        }
+      ]
+    },
+    {
+      "id": "lp1.1",
+      "level": 2,
+      "title": "The Lost Kite",
+      "text": "Arun had a red kite. On Sunday he flew it in the park. The wind was strong, and the string broke. The kite flew away and landed in a tall mango tree. Arun felt sad. A gardener saw him and brought a long ladder. He climbed up and gave the kite back. Arun thanked him and went home smiling.",
+      "questions": [
+        {
+          "id": "lp1.1.q1",
+          "skill": "detail",
+          "prompt": "What colour was Arun's kite?",
+          "right": "Red",
+          "wrong": [
+            "Blue",
+            "Yellow"
+          ],
+          "explain": "The story begins: Arun had a red kite."
+        },
+        {
+          "id": "lp1.1.q2",
+          "skill": "cause",
+          "prompt": "Why did the kite fly away?",
+          "right": "The string broke",
+          "wrong": [
+            "Arun let go of it",
+            "A bird pulled it"
+          ],
+          "explain": "The wind was strong, and the string broke."
+        },
+        {
+          "id": "lp1.1.q3",
+          "skill": "sequence",
+          "prompt": "What did the gardener do first?",
+          "right": "He brought a long ladder",
+          "wrong": [
+            "He called Arun's mother",
+            "He bought a new kite"
+          ],
+          "explain": "He brought the ladder, then climbed up."
+        },
+        {
+          "id": "lp1.1.q4",
+          "skill": "inference",
+          "prompt": "How did Arun feel at the end?",
+          "right": "Happy",
+          "wrong": [
+            "Angry",
+            "Afraid"
+          ],
+          "explain": "He went home smiling."
+        }
+      ]
+    },
+    {
+      "id": "lp1.2",
+      "level": 2,
+      "title": "Meena's Plant",
+      "text": "Meena planted a bean seed in a small pot. She kept the pot near the window. Every morning she gave it a little water. After five days a tiny green shoot came up. Meena was excited and showed it to her grandmother. Her grandmother said that plants need sunlight, water and care. Meena promised to look after it every day.",
+      "questions": [
+        {
+          "id": "lp1.2.q1",
+          "skill": "detail",
+          "prompt": "Where did Meena keep the pot?",
+          "right": "Near the window",
+          "wrong": [
+            "Under her bed",
+            "In a kitchen cupboard"
+          ],
+          "explain": "She kept the pot near the window."
+        },
+        {
+          "id": "lp1.2.q2",
+          "skill": "detail",
+          "prompt": "When did the shoot come up?",
+          "right": "After five days",
+          "wrong": [
+            "The next morning",
+            "After a month"
+          ],
+          "explain": "After five days a tiny green shoot came up."
+        },
+        {
+          "id": "lp1.2.q3",
+          "skill": "detail",
+          "prompt": "What did her grandmother say plants need?",
+          "right": "Sunlight, water and care",
+          "wrong": [
+            "Only water and nothing else",
+            "Milk, sugar and warm air"
+          ],
+          "explain": "Plants need sunlight, water and care."
+        },
+        {
+          "id": "lp1.2.q4",
+          "skill": "main_idea",
+          "prompt": "What is the story mainly about?",
+          "right": "A girl growing a plant",
+          "wrong": [
+            "A grandmother cooking beans",
+            "A window that would not open"
+          ],
+          "explain": "Every part is about Meena and her bean plant."
+        }
+      ]
+    },
+    {
+      "id": "lp1.3",
+      "level": 2,
+      "title": "The School Bus",
+      "text": "Every day Ravi goes to school by bus. The bus comes to his street at seven thirty. One Monday, Ravi woke up late. He ate his breakfast quickly and ran to the bus stop, but the bus had already left. His father took him to school on his scooter. Now Ravi sets an alarm so that he wakes up on time.",
+      "questions": [
+        {
+          "id": "lp1.3.q1",
+          "skill": "detail",
+          "prompt": "What time does the bus come?",
+          "right": "Seven thirty",
+          "wrong": [
+            "Eight o'clock",
+            "Six thirty"
+          ],
+          "explain": "The bus comes at seven thirty."
+        },
+        {
+          "id": "lp1.3.q2",
+          "skill": "cause",
+          "prompt": "Why did Ravi miss the bus?",
+          "right": "He woke up late",
+          "wrong": [
+            "The bus did not come",
+            "He forgot his bag"
+          ],
+          "explain": "One Monday, Ravi woke up late."
+        },
+        {
+          "id": "lp1.3.q3",
+          "skill": "detail",
+          "prompt": "How did Ravi reach school that day?",
+          "right": "On his father's scooter",
+          "wrong": [
+            "On foot, all the way",
+            "In his uncle's taxi"
+          ],
+          "explain": "His father took him on his scooter."
+        },
+        {
+          "id": "lp1.3.q4",
+          "skill": "sequence",
+          "prompt": "What does Ravi do now?",
+          "right": "He sets an alarm",
+          "wrong": [
+            "He sleeps at school",
+            "He goes by train"
+          ],
+          "explain": "Now Ravi sets an alarm so that he wakes up on time."
+        }
+      ]
+    },
+    {
+      "id": "lp1.4",
+      "level": 2,
+      "title": "The Thirsty Sparrow",
+      "text": "It was a very hot afternoon. A little sparrow was looking for water. The pond was dry. Then she saw a boy watering plants in a garden. Some water had collected in the plate under a flower pot. The sparrow flew down, drank the water and took a quick bath. The boy saw her and smiled. From that day he kept a bowl of water outside for the birds.",
+      "questions": [
+        {
+          "id": "lp1.4.q1",
+          "skill": "detail",
+          "prompt": "What was the sparrow looking for?",
+          "right": "Water",
+          "wrong": [
+            "Food",
+            "Her nest"
+          ],
+          "explain": "A little sparrow was looking for water."
+        },
+        {
+          "id": "lp1.4.q2",
+          "skill": "cause",
+          "prompt": "Why could she not drink at the pond?",
+          "right": "The pond was dry",
+          "wrong": [
+            "A cat was there",
+            "It was too far away"
+          ],
+          "explain": "The pond was dry."
+        },
+        {
+          "id": "lp1.4.q3",
+          "skill": "detail",
+          "prompt": "Where did she find water?",
+          "right": "In the plate under a flower pot",
+          "wrong": [
+            "In a bucket beside the well",
+            "In a river behind the garden"
+          ],
+          "explain": "Water had collected in the plate under a flower pot."
+        },
+        {
+          "id": "lp1.4.q4",
+          "skill": "inference",
+          "prompt": "What kind of boy was he?",
+          "right": "Kind to animals",
+          "wrong": [
+            "Afraid of birds",
+            "Always in a hurry"
+          ],
+          "explain": "He kept a bowl of water outside for the birds."
+        }
+      ]
+    },
+    {
+      "id": "lq3.1",
+      "level": 3,
+      "title": "The Missing Lunch Box",
+      "text": "Kiran could not find his lunch box at break time. He looked in his bag, under his desk and on the shelf. His friend Divya shared her lemon rice with him. After school, Kiran walked to the bus and saw his lunch box on the seat. He had left it there in the morning. The driver had kept it safe all day. Kiran thanked him, and the next day he brought two sweets, one for the driver and one for Divya.",
+      "questions": [
+        {
+          "id": "lq3.1.q1",
+          "skill": "detail",
+          "prompt": "What did Divya share with Kiran?",
+          "right": "Her lemon rice",
+          "wrong": [
+            "Her curd rice",
+            "Her bread and jam"
+          ],
+          "explain": "Divya shared her lemon rice with him."
+        },
+        {
+          "id": "lq3.1.q2",
+          "skill": "detail",
+          "prompt": "Where was the lunch box found?",
+          "right": "On a seat in the bus",
+          "wrong": [
+            "Under a desk in class",
+            "On a shelf at home"
+          ],
+          "explain": "He saw his lunch box on the seat of the bus."
+        },
+        {
+          "id": "lq3.1.q3",
+          "skill": "cause",
+          "prompt": "Why was the lunch box on the bus?",
+          "right": "Kiran had left it there in the morning",
+          "wrong": [
+            "The driver had taken it from his bag",
+            "Divya had hidden it there as a joke"
+          ],
+          "explain": "He had left it there in the morning."
+        },
+        {
+          "id": "lq3.1.q4",
+          "skill": "inference",
+          "prompt": "Why did Kiran bring two sweets?",
+          "right": "To thank the people who helped him",
+          "wrong": [
+            "To eat them both at break time",
+            "To give them to his teacher"
+          ],
+          "explain": "One was for the driver, who kept the box safe, and one for Divya, who shared her lunch."
+        }
+      ]
+    },
+    {
+      "id": "lq3.2",
+      "level": 3,
+      "title": "Grandmother's Glasses",
+      "text": "Grandmother could not find her glasses. She needed them to read the newspaper. Latha looked on the table and beside the bed. Her little brother looked in the kitchen. Nobody could find them. Then Latha began to laugh. The glasses were on top of Grandmother's head! Grandmother touched her hair and laughed too. She put the glasses on and read the news aloud to the children. After that, Latha tied a bright ribbon to the glasses so that Grandmother could wear them around her neck.",
+      "questions": [
+        {
+          "id": "lq3.2.q1",
+          "skill": "cause",
+          "prompt": "Why did Grandmother need her glasses?",
+          "right": "To read the newspaper",
+          "wrong": [
+            "To thread a needle",
+            "To watch the cricket"
+          ],
+          "explain": "She needed them to read the newspaper."
+        },
+        {
+          "id": "lq3.2.q2",
+          "skill": "detail",
+          "prompt": "Where did Latha's brother look?",
+          "right": "In the kitchen",
+          "wrong": [
+            "In the garden",
+            "In the bathroom"
+          ],
+          "explain": "Her little brother looked in the kitchen."
+        },
+        {
+          "id": "lq3.2.q3",
+          "skill": "detail",
+          "prompt": "Where were the glasses all the time?",
+          "right": "On Grandmother's head",
+          "wrong": [
+            "In Grandmother's bag",
+            "Under Grandmother's chair"
+          ],
+          "explain": "The glasses were on top of Grandmother's head."
+        },
+        {
+          "id": "lq3.2.q4",
+          "skill": "inference",
+          "prompt": "Why did Latha tie a ribbon to the glasses?",
+          "right": "So they would not be lost again",
+          "wrong": [
+            "So they would look much prettier",
+            "So her brother could not take them"
+          ],
+          "explain": "With the ribbon the glasses stay around her neck, so she always knows where they are."
+        }
+      ]
+    },
+    {
+      "id": "lq3.3",
+      "level": 3,
+      "title": "The Long Race",
+      "text": "On sports day, Farid ran in the long race around the field. At the start he was in front of everyone. Then his shoelace came loose, and he had to stop and tie it. Four runners passed him. Farid did not give up. He ran as hard as he could and passed two of them before the finish line. He came third and won a bronze medal. His father said that finishing well mattered more than coming first.",
+      "questions": [
+        {
+          "id": "lq3.3.q1",
+          "skill": "cause",
+          "prompt": "Why did Farid stop running?",
+          "right": "His shoelace came loose",
+          "wrong": [
+            "He felt very thirsty",
+            "His friend called him"
+          ],
+          "explain": "His shoelace came loose, and he had to stop and tie it."
+        },
+        {
+          "id": "lq3.3.q2",
+          "skill": "detail",
+          "prompt": "How many runners passed him while he stopped?",
+          "right": "Four",
+          "wrong": [
+            "Two",
+            "Three"
+          ],
+          "explain": "Four runners passed him."
+        },
+        {
+          "id": "lq3.3.q3",
+          "skill": "detail",
+          "prompt": "What did Farid win?",
+          "right": "A bronze medal",
+          "wrong": [
+            "A silver cup",
+            "A gold medal"
+          ],
+          "explain": "He came third and won a bronze medal."
+        },
+        {
+          "id": "lq3.3.q4",
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "It is good to keep trying",
+          "wrong": [
+            "It is best to run slowly",
+            "Races are not much fun"
+          ],
+          "explain": "Farid did not give up, and his father praised him for finishing well."
+        }
+      ]
+    },
+    {
+      "id": "lq3.4",
+      "level": 3,
+      "title": "The Class Garden",
+      "text": "Class Four made a small garden behind the school. The children planted tomatoes, beans and spinach. Every morning two children watered the plants before the bell. One Monday they found many leaves eaten. Their teacher showed them tiny green caterpillars under the leaves. The children picked them off gently and put them on a bush far from the garden. Three weeks later the class picked a basket of red tomatoes and gave them to the school cook.",
+      "questions": [
+        {
+          "id": "lq3.4.q1",
+          "skill": "detail",
+          "prompt": "Where was the garden?",
+          "right": "Behind the school",
+          "wrong": [
+            "Beside the road",
+            "Near the bus stop"
+          ],
+          "explain": "The garden was made behind the school."
+        },
+        {
+          "id": "lq3.4.q2",
+          "skill": "detail",
+          "prompt": "What had eaten the leaves?",
+          "right": "Caterpillars",
+          "wrong": [
+            "Goats",
+            "Sparrows"
+          ],
+          "explain": "The teacher showed them tiny green caterpillars under the leaves."
+        },
+        {
+          "id": "lq3.4.q3",
+          "skill": "detail",
+          "prompt": "What did the children do with the caterpillars?",
+          "right": "Put them on a bush far away",
+          "wrong": [
+            "Kept them in a glass jar",
+            "Threw them into the pond"
+          ],
+          "explain": "They picked them off gently and put them on a bush far from the garden."
+        },
+        {
+          "id": "lq3.4.q4",
+          "skill": "sequence",
+          "prompt": "What happened three weeks later?",
+          "right": "The class picked red tomatoes",
+          "wrong": [
+            "The class planted more beans",
+            "The teacher bought a basket"
+          ],
+          "explain": "Three weeks later the class picked a basket of red tomatoes."
+        }
+      ]
+    },
+    {
+      "id": "lp2.1",
+      "level": 4,
+      "title": "The Weekly Market",
+      "text": "Every Thursday a market comes to the open ground near Kavya's house. Farmers arrive before sunrise and spread their vegetables on mats. Kavya's mother likes this market because the vegetables are fresh and cost less than in the shops. Last Thursday, Kavya went with her. She carried the cloth bags, because the market has stopped using plastic. They bought spinach, tomatoes and a large pumpkin. On the way out, an old farmer gave Kavya a handful of peanuts for helping her mother. Kavya decided that Thursday was now her favourite day.",
+      "questions": [
+        {
+          "id": "lp2.1.q1",
+          "skill": "detail",
+          "prompt": "On which day does the market come?",
+          "right": "Thursday",
+          "wrong": [
+            "Tuesday",
+            "Sunday"
+          ],
+          "explain": "Every Thursday a market comes to the open ground."
+        },
+        {
+          "id": "lp2.1.q2",
+          "skill": "cause",
+          "prompt": "Why does Kavya's mother like this market?",
+          "right": "The vegetables are fresh and cost less",
+          "wrong": [
+            "It stays open through the whole night",
+            "It also sells toys and clothes"
+          ],
+          "explain": "The vegetables are fresh and cost less than in the shops."
+        },
+        {
+          "id": "lp2.1.q3",
+          "skill": "inference",
+          "prompt": "Why did they carry cloth bags?",
+          "right": "The market no longer uses plastic bags",
+          "wrong": [
+            "Cloth bags were on sale that day",
+            "The farmer asked for them"
+          ],
+          "explain": "The market has stopped using plastic."
+        },
+        {
+          "id": "lp2.1.q4",
+          "skill": "main_idea",
+          "prompt": "What is the passage mainly about?",
+          "right": "A girl's visit to the weekly market",
+          "wrong": [
+            "How farmers grow large pumpkins",
+            "Why the shops close on Thursdays"
+          ],
+          "explain": "It follows Kavya and her mother through the market."
+        }
+      ]
+    },
+    {
+      "id": "lp2.2",
+      "level": 4,
+      "title": "The Postman's Bicycle",
+      "text": "Mr Das has been the postman of Nilgiri village for twenty years. He rides an old green bicycle with a bell that everyone knows. When people hear it, they come out hoping for a letter. These days there are fewer letters, because most people use phones. But Mr Das still brings parcels, bank papers and, sometimes, a postcard from a soldier far away. Last month the village children painted his bicycle and tied flowers to it to mark his twenty years. Mr Das said it was the best gift he had ever received.",
+      "questions": [
+        {
+          "id": "lp2.2.q1",
+          "skill": "detail",
+          "prompt": "How long has Mr Das been the postman?",
+          "right": "Twenty years",
+          "wrong": [
+            "Two years",
+            "Ten years"
+          ],
+          "explain": "He has been the postman for twenty years."
+        },
+        {
+          "id": "lp2.2.q2",
+          "skill": "cause",
+          "prompt": "Why are there fewer letters now?",
+          "right": "Most people use phones",
+          "wrong": [
+            "The post office has closed",
+            "Mr Das works fewer days"
+          ],
+          "explain": "There are fewer letters because most people use phones."
+        },
+        {
+          "id": "lp2.2.q3",
+          "skill": "detail",
+          "prompt": "What did the children do last month?",
+          "right": "They painted his bicycle and tied flowers to it",
+          "wrong": [
+            "They bought him a new scooter with their savings",
+            "They wrote him a long letter of thanks"
+          ],
+          "explain": "The children painted his bicycle and tied flowers to it."
+        },
+        {
+          "id": "lp2.2.q4",
+          "skill": "inference",
+          "prompt": "How do the villagers feel about Mr Das?",
+          "right": "They are fond of him",
+          "wrong": [
+            "They are afraid of him",
+            "They hardly know him"
+          ],
+          "explain": "Everyone knows his bell, and the children marked his twenty years."
+        }
+      ]
+    },
+    {
+      "id": "lp2.3",
+      "level": 4,
+      "title": "A Rainy Sports Day",
+      "text": "The school's sports day was planned for Saturday. Everyone had practised for weeks. On Saturday morning, dark clouds covered the sky, and by nine it was raining hard. The principal moved the events into the big hall. There was no space for the long races, so the teachers quickly invented new games: a spoon race in a circle, a paper-plane contest and a tug of war. Parents sat along the walls and cheered. At the end, many children said it was more fun than any sports day before. The principal joked that she would order rain again next year.",
+      "questions": [
+        {
+          "id": "lp2.3.q1",
+          "skill": "cause",
+          "prompt": "Why were the events moved into the hall?",
+          "right": "It was raining hard",
+          "wrong": [
+            "The ground was being repaired",
+            "It was too hot outside"
+          ],
+          "explain": "By nine it was raining hard."
+        },
+        {
+          "id": "lp2.3.q2",
+          "skill": "detail",
+          "prompt": "What could not be held in the hall?",
+          "right": "The long races",
+          "wrong": [
+            "The tug of war",
+            "The paper-plane contest"
+          ],
+          "explain": "There was no space for the long races."
+        },
+        {
+          "id": "lp2.3.q3",
+          "skill": "detail",
+          "prompt": "Who invented the new games?",
+          "right": "The teachers",
+          "wrong": [
+            "The parents",
+            "The children"
+          ],
+          "explain": "The teachers quickly invented new games."
+        },
+        {
+          "id": "lp2.3.q4",
+          "skill": "inference",
+          "prompt": "What does the principal's joke show?",
+          "right": "The day turned out well after all",
+          "wrong": [
+            "She was angry about the rain",
+            "She does not like sports"
+          ],
+          "explain": "Children said it was more fun than before, so she joked about ordering rain."
+        }
+      ]
+    },
+    {
+      "id": "lp2.4",
+      "level": 4,
+      "title": "The Banyan Tree Library",
+      "text": "In the village of Sirumalai there is no library building. Instead, every evening a retired teacher named Mrs Rao brings a trunk of books to the old banyan tree. Children sit on mats and choose a book. They may take one home if they write their name in her notebook. At first only five children came. Mrs Rao then began reading one story aloud each evening, stopping at the most exciting part. To learn the ending, children had to read the book themselves. Within a month, more than forty children were coming.",
+      "questions": [
+        {
+          "id": "lp2.4.q1",
+          "skill": "detail",
+          "prompt": "Where does the library meet?",
+          "right": "Under the old banyan tree",
+          "wrong": [
+            "In the school hall",
+            "At Mrs Rao's house"
+          ],
+          "explain": "Mrs Rao brings the books to the old banyan tree."
+        },
+        {
+          "id": "lp2.4.q2",
+          "skill": "detail",
+          "prompt": "What must a child do to take a book home?",
+          "right": "Write their name in the notebook",
+          "wrong": [
+            "Pay one rupee",
+            "Bring another book in return"
+          ],
+          "explain": "They may take one home if they write their name in her notebook."
+        },
+        {
+          "id": "lp2.4.q3",
+          "skill": "cause",
+          "prompt": "Why did many more children start coming?",
+          "right": "She read stories aloud and stopped at the exciting part",
+          "wrong": [
+            "She gave sweets to every child who came",
+            "The school told all its pupils to go there"
+          ],
+          "explain": "To learn the ending, children had to read the book themselves."
+        },
+        {
+          "id": "lp2.4.q4",
+          "skill": "main_idea",
+          "prompt": "What is the passage mainly about?",
+          "right": "A teacher who got village children reading",
+          "wrong": [
+            "How banyan trees grow",
+            "A village that has no school"
+          ],
+          "explain": "It tells how Mrs Rao's library grew from five children to more than forty."
+        }
+      ]
+    },
+    {
+      "id": "lp3.1",
+      "level": 5,
+      "title": "How Honeybees Share News",
+      "text": "When a honeybee finds flowers rich in nectar, she does not keep the secret. She flies back to the hive and performs a dance on the honeycomb. Scientists call it the waggle dance. The bee runs in a straight line while shaking her body, then circles back and repeats it. The direction of the straight run tells the other bees which way to fly in relation to the sun. The length of the run tells them how far the flowers are: a longer run means a longer journey. The other bees crowd around her and follow the movements in the dark hive. Soon they fly out and find the same flowers without being led there.",
+      "questions": [
+        {
+          "id": "lp3.1.q1",
+          "skill": "detail",
+          "prompt": "What do scientists call the dance?",
+          "right": "The waggle dance",
+          "wrong": [
+            "The circle march",
+            "The honey step"
+          ],
+          "explain": "Scientists call it the waggle dance."
+        },
+        {
+          "id": "lp3.1.q2",
+          "skill": "detail",
+          "prompt": "What does the length of the straight run tell the other bees?",
+          "right": "How far away the flowers are",
+          "wrong": [
+            "What colour the flowers are",
+            "How many bees should go"
+          ],
+          "explain": "A longer run means a longer journey."
+        },
+        {
+          "id": "lp3.1.q3",
+          "skill": "inference",
+          "prompt": "Why is the dance useful to the hive?",
+          "right": "Many bees can find good flowers quickly",
+          "wrong": [
+            "It keeps the hive warm",
+            "It frightens enemies away"
+          ],
+          "explain": "The others fly out and find the same flowers without being led."
+        },
+        {
+          "id": "lp3.1.q4",
+          "skill": "main_idea",
+          "prompt": "What is the passage mainly about?",
+          "right": "How a honeybee tells others where food is",
+          "wrong": [
+            "How people collect honey from hives",
+            "Why bees sting when they are disturbed"
+          ],
+          "explain": "Every part explains the dance and what it tells the other bees."
+        }
+      ],
+      "checked": {
+        "on": "2026-11-19",
+        "against": [
+          "NC State Extension, Honey Bee Dance Language: https://content.ces.ncsu.edu/honey-bee-dance-language"
+        ]
+      }
+    },
+    {
+      "id": "lp3.2",
+      "level": 5,
+      "title": "The Stepwell",
+      "text": "Long before pipes and pumps, people in the dry parts of western India built stepwells. A stepwell is a deep well with flights of steps leading down to the water. In the rainy season the water level rose and people needed to walk down only a few steps. In summer the level fell, and they went down many more. Because the water lay deep below the ground and in shade, it stayed cool and did not dry up quickly. Stepwells were also meeting places, where travellers rested out of the heat. Many were decorated with fine stone carvings. Today some stepwells are being cleaned and repaired so that they can store rainwater once again.",
+      "questions": [
+        {
+          "id": "lp3.2.q1",
+          "skill": "detail",
+          "prompt": "Where were stepwells built?",
+          "right": "In the dry parts of western India",
+          "wrong": [
+            "In the hills of the north-east",
+            "Along the sea coast"
+          ],
+          "explain": "People in the dry parts of western India built stepwells."
+        },
+        {
+          "id": "lp3.2.q2",
+          "skill": "cause",
+          "prompt": "Why did the water in a stepwell stay cool?",
+          "right": "It lay deep below the ground and in shade",
+          "wrong": [
+            "Ice was added to it every morning",
+            "It flowed very fast over the steps"
+          ],
+          "explain": "The water lay deep below the ground and in shade."
+        },
+        {
+          "id": "lp3.2.q3",
+          "skill": "detail",
+          "prompt": "Besides giving water, what were stepwells used for?",
+          "right": "As places to meet and rest",
+          "wrong": [
+            "For storing grain",
+            "For growing rice"
+          ],
+          "explain": "Stepwells were also meeting places, where travellers rested."
+        },
+        {
+          "id": "lp3.2.q4",
+          "skill": "inference",
+          "prompt": "Why are some stepwells being repaired today?",
+          "right": "So that they can store rainwater again",
+          "wrong": [
+            "So that hotels can be built in them",
+            "So that they can be filled with earth"
+          ],
+          "explain": "They are being cleaned and repaired to store rainwater once again."
+        }
+      ],
+      "checked": {
+        "on": "2026-11-19",
+        "against": [
+          "Britannica, Stepwell: https://www.britannica.com/technology/stepwell/Introduction",
+          "Living Waters Museum, Indian stepwells: https://www.watermuseums.net/heritage/valuing-ancient-water-cultures/indian-stepwells/"
+        ]
+      }
+    },
+    {
+      "id": "lp3.3",
+      "level": 5,
+      "title": "The Night Train",
+      "text": "Anil was travelling alone by night train for the first time, to visit his uncle in Mysuru. His mother had told him three times to keep his ticket safe. He put it in his shirt pocket and checked it at every station. An elderly woman in the opposite seat noticed and smiled. When the ticket inspector arrived, Anil reached for his pocket with confidence, and found it empty. His face went pale. The woman pointed quietly at the floor, where the ticket lay beside his shoe; it had slipped out when he bent to tie his lace. The inspector punched it and moved on. Anil thanked the woman and, for the rest of the journey, kept the ticket inside his book.",
+      "questions": [
+        {
+          "id": "lp3.3.q1",
+          "skill": "detail",
+          "prompt": "Where was Anil going?",
+          "right": "To visit his uncle in Mysuru",
+          "wrong": [
+            "To a school in Chennai",
+            "To his mother's office"
+          ],
+          "explain": "He was going to visit his uncle in Mysuru."
+        },
+        {
+          "id": "lp3.3.q2",
+          "skill": "cause",
+          "prompt": "How did the ticket come to be on the floor?",
+          "right": "It slipped out when he bent to tie his lace",
+          "wrong": [
+            "The woman opposite took it from him",
+            "The wind from the window blew it away"
+          ],
+          "explain": "It had slipped out when he bent to tie his lace."
+        },
+        {
+          "id": "lp3.3.q3",
+          "skill": "inference",
+          "prompt": "Why did Anil's face go pale?",
+          "right": "He was frightened that he had lost his ticket",
+          "wrong": [
+            "He felt cold in the night train",
+            "He had not eaten since the morning"
+          ],
+          "explain": "He reached for his pocket and found it empty."
+        },
+        {
+          "id": "lp3.3.q4",
+          "skill": "sequence",
+          "prompt": "What did Anil do after he got the ticket back?",
+          "right": "He kept it inside his book",
+          "wrong": [
+            "He put it back in his shirt pocket",
+            "He gave it to the woman"
+          ],
+          "explain": "For the rest of the journey he kept the ticket inside his book."
+        }
+      ]
+    },
+    {
+      "id": "lp3.4",
+      "level": 5,
+      "title": "Salt from the Sea",
+      "text": "Much of the salt we eat comes from sea water. Along flat, sunny coasts, workers build shallow square ponds called salt pans. Sea water is let into the pans and left under the hot sun. Day by day the water evaporates, which means it turns into vapour and rises into the air. The salt cannot rise with it, so it is left behind as white crystals. Workers rake the crystals into heaps to dry. The work is done in the hottest months, because rain would dissolve the salt and wash it away. That is why salt making stops when the monsoon arrives.",
+      "questions": [
+        {
+          "id": "lp3.4.q1",
+          "skill": "detail",
+          "prompt": "What are the shallow ponds called?",
+          "right": "Salt pans",
+          "wrong": [
+            "Sea wells",
+            "Crystal beds"
+          ],
+          "explain": "Workers build shallow square ponds called salt pans."
+        },
+        {
+          "id": "lp3.4.q2",
+          "skill": "detail",
+          "prompt": "What happens to the water in the pans?",
+          "right": "It evaporates under the hot sun",
+          "wrong": [
+            "It freezes at night",
+            "It is pumped back into the sea"
+          ],
+          "explain": "Day by day the water evaporates."
+        },
+        {
+          "id": "lp3.4.q3",
+          "skill": "cause",
+          "prompt": "Why does salt making stop in the monsoon?",
+          "right": "Rain would dissolve the salt and wash it away",
+          "wrong": [
+            "The workers go on holiday",
+            "The sea has no salt in those months"
+          ],
+          "explain": "Rain would dissolve the salt and wash it away."
+        },
+        {
+          "id": "lp3.4.q4",
+          "skill": "main_idea",
+          "prompt": "What is the passage mainly about?",
+          "right": "How salt is made from sea water",
+          "wrong": [
+            "Why the sea is blue",
+            "How to cook with salt"
+          ],
+          "explain": "It follows the salt from sea water to dry heaps."
+        }
+      ],
+      "checked": {
+        "on": "2026-11-19",
+        "against": [
+          "Mani et al. 2012, Community solar salt production in Goa, India: https://pmc.ncbi.nlm.nih.gov/articles/PMC3543363"
+        ]
+      }
+    },
+    {
+      "id": "lq6.1",
+      "level": 6,
+      "title": "Two Letters",
+      "text": "For three monsoons the villagers of Thenur had crossed the river on a raft, because the old footbridge had been washed away. Sharmila, whose father repaired roads for the district, decided to write to the collector herself. Her first letter received no reply. She did not complain. Instead, she counted the people who used the raft each morning and photographed the children wading across with their schoolbags held above their heads. Her second letter contained the numbers and the photographs. Within a month, two engineers arrived to measure the banks. The new bridge opened the following summer. At the ceremony the collector admitted that it was the evidence, not the request, that had persuaded him. Sharmila kept her notebook of numbers long after the raft had gone.",
+      "questions": [
+        {
+          "id": "lq6.1.q1",
+          "skill": "cause",
+          "prompt": "Why were the villagers using a raft?",
+          "right": "The old footbridge had been washed away",
+          "wrong": [
+            "The river had become far too wide",
+            "The new road ended at the river bank"
+          ],
+          "explain": "The old footbridge had been washed away."
+        },
+        {
+          "id": "lq6.1.q2",
+          "skill": "detail",
+          "prompt": "What did Sharmila put in her second letter?",
+          "right": "Numbers and photographs",
+          "wrong": [
+            "Drawings of a new bridge",
+            "Names of all the villagers"
+          ],
+          "explain": "Her second letter contained the numbers and the photographs."
+        },
+        {
+          "id": "lq6.1.q3",
+          "skill": "inference",
+          "prompt": "What persuaded the collector to act?",
+          "right": "Proof of how many people needed a bridge",
+          "wrong": [
+            "A polite request from a young student",
+            "A visit from two district engineers"
+          ],
+          "explain": "He said it was the evidence, not the request, that persuaded him."
+        },
+        {
+          "id": "lq6.1.q4",
+          "skill": "sequence",
+          "prompt": "What happened within a month of the second letter?",
+          "right": "Two engineers came to measure the banks",
+          "wrong": [
+            "The raft was replaced with a bigger one",
+            "The collector visited Sharmila's school"
+          ],
+          "explain": "Within a month, two engineers arrived to measure the banks."
+        }
+      ]
+    },
+    {
+      "id": "lq6.2",
+      "level": 6,
+      "title": "The Play in the Dark",
+      "text": "The power failed just as the school play was about to begin. Two hundred parents sat in a dark hall, and behind the curtain the actors whispered nervously. Mr Bose, the drama teacher, wondered whether to send everyone home. Then Nandini, who played the queen, suggested that the audience could light the stage themselves. Mr Bose asked the parents to switch on the torches in their phones and hold them up. Slowly the hall filled with small white lights, like a sky turned upside down. The actors spoke louder than they had ever spoken in rehearsal, because there were no microphones. Nobody forgot a line. When the electricity returned during the final scene, the audience groaned with disappointment, and Mr Bose quietly switched the lights off again.",
+      "questions": [
+        {
+          "id": "lq6.2.q1",
+          "skill": "detail",
+          "prompt": "Who suggested using the audience's lights?",
+          "right": "Nandini, who played the queen",
+          "wrong": [
+            "Mr Bose, the drama teacher",
+            "A parent in the front row"
+          ],
+          "explain": "Nandini suggested that the audience could light the stage themselves."
+        },
+        {
+          "id": "lq6.2.q2",
+          "skill": "cause",
+          "prompt": "Why did the actors speak louder than usual?",
+          "right": "There were no microphones",
+          "wrong": [
+            "The hall was full of noise",
+            "Mr Bose told them to shout"
+          ],
+          "explain": "They spoke louder because there were no microphones."
+        },
+        {
+          "id": "lq6.2.q3",
+          "skill": "inference",
+          "prompt": "Why did the audience groan when the power returned?",
+          "right": "They had enjoyed the play by torchlight",
+          "wrong": [
+            "They wanted the play to finish sooner",
+            "They could no longer hear the actors"
+          ],
+          "explain": "They were disappointed to lose the torchlight they had made together."
+        },
+        {
+          "id": "lq6.2.q4",
+          "skill": "inference",
+          "prompt": "Why did Mr Bose switch the lights off again?",
+          "right": "To keep the mood the audience liked",
+          "wrong": [
+            "To save electricity for the school",
+            "To show that the play had ended"
+          ],
+          "explain": "The audience groaned at the lights, so he gave them back the dark hall."
+        }
+      ]
+    },
+    {
+      "id": "lq6.3",
+      "level": 6,
+      "title": "The Faulty Timer",
+      "text": "Imran had spent six weeks building a model windmill for the science fair. On the morning of the fair he tested it one last time and noticed that his results were wrong: he had measured the speed of the blades with a faulty timer. There was no time to repeat the experiment. His cousin advised him to display the old figures, since nobody would ever know. Imran thought about it during the whole bus journey. At his table he pinned up a new card that explained the mistake and what he would do differently. The judges spent longer at his table than at any other. He did not win first prize, but one judge, an engineer, invited him to visit her workshop and test the windmill properly.",
+      "questions": [
+        {
+          "id": "lq6.3.q1",
+          "skill": "detail",
+          "prompt": "What was wrong with Imran's results?",
+          "right": "He had used a faulty timer",
+          "wrong": [
+            "He had lost his notebook",
+            "He had built it too small"
+          ],
+          "explain": "He had measured the speed of the blades with a faulty timer."
+        },
+        {
+          "id": "lq6.3.q2",
+          "skill": "detail",
+          "prompt": "What did his cousin advise him to do?",
+          "right": "To show the old figures anyway",
+          "wrong": [
+            "To stay at home that morning",
+            "To borrow another windmill"
+          ],
+          "explain": "His cousin advised him to display the old figures."
+        },
+        {
+          "id": "lq6.3.q3",
+          "skill": "inference",
+          "prompt": "Why did the judges spend so long at his table?",
+          "right": "They were interested in his honest account",
+          "wrong": [
+            "They could not understand his windmill",
+            "They were waiting for the other judges"
+          ],
+          "explain": "His card explained the mistake openly, which is unusual and worth discussing."
+        },
+        {
+          "id": "lq6.3.q4",
+          "skill": "main_idea",
+          "prompt": "What is the story mainly about?",
+          "right": "Choosing honesty over an easy prize",
+          "wrong": [
+            "Building a windmill in six weeks",
+            "Travelling to a fair by bus"
+          ],
+          "explain": "The story turns on his choice to explain the mistake instead of hiding it."
+        }
+      ]
+    },
+    {
+      "id": "lq6.4",
+      "level": 6,
+      "title": "The Rock Pool",
+      "text": "During the holidays Tara stayed with her aunt, who studied sea creatures on the coast. Every evening they walked to the rock pools that the falling tide left behind. Her aunt explained that each pool was a small world: the crabs, the anemones and the tiny fish had to survive there until the sea returned. Tara wanted to carry a starfish home in a bucket. Her aunt did not forbid it. She simply asked how long the water in the bucket would stay cool and salty. Tara considered the question, then lowered the starfish back into its pool. On her last evening she drew every creature she had seen. Her aunt pinned the drawing above her desk, beside the charts and the microscope.",
+      "questions": [
+        {
+          "id": "lq6.4.q1",
+          "skill": "detail",
+          "prompt": "What work did Tara's aunt do?",
+          "right": "She studied sea creatures",
+          "wrong": [
+            "She painted the coastline",
+            "She repaired fishing boats"
+          ],
+          "explain": "Her aunt studied sea creatures on the coast."
+        },
+        {
+          "id": "lq6.4.q2",
+          "skill": "detail",
+          "prompt": "What did Tara want to take home?",
+          "right": "A starfish",
+          "wrong": [
+            "A crab",
+            "A shell"
+          ],
+          "explain": "Tara wanted to carry a starfish home in a bucket."
+        },
+        {
+          "id": "lq6.4.q3",
+          "skill": "inference",
+          "prompt": "Why did Tara put the starfish back?",
+          "right": "She saw it could not live in a bucket",
+          "wrong": [
+            "She was afraid that it might bite her",
+            "Her aunt ordered her to leave it there"
+          ],
+          "explain": "The question made her see that the water in a bucket would not stay cool and salty."
+        },
+        {
+          "id": "lq6.4.q4",
+          "skill": "inference",
+          "prompt": "How did the aunt teach Tara?",
+          "right": "By asking a question that made her think",
+          "wrong": [
+            "By giving her a long list of strict rules",
+            "By showing her a film about the ocean"
+          ],
+          "explain": "She did not forbid it; she simply asked a question, and Tara decided for herself."
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "lp1.3",
-   "level": 1,
-   "title": "The School Bus",
-   "text": "Every day Ravi goes to school by bus. The bus comes to his street at seven thirty. One Monday, Ravi woke up late. He ate his breakfast quickly and ran to the bus stop, but the bus had already left. His father took him to school on his scooter. Now Ravi sets an alarm so that he wakes up on time.",
-   "questions": [
-    {
-     "id": "lp1.3.q1",
-     "skill": "detail",
-     "prompt": "What time does the bus come?",
-     "right": "Seven thirty",
-     "wrong": [
-      "Eight o'clock",
-      "Six thirty"
-     ],
-     "explain": "The bus comes at seven thirty."
-    },
-    {
-     "id": "lp1.3.q2",
-     "skill": "cause",
-     "prompt": "Why did Ravi miss the bus?",
-     "right": "He woke up late",
-     "wrong": [
-      "The bus did not come",
-      "He forgot his bag"
-     ],
-     "explain": "One Monday, Ravi woke up late."
-    },
-    {
-     "id": "lp1.3.q3",
-     "skill": "detail",
-     "prompt": "How did Ravi reach school that day?",
-     "right": "On his father's scooter",
-     "wrong": [
-      "On foot, all the way",
-      "In his uncle's taxi"
-     ],
-     "explain": "His father took him on his scooter."
-    },
-    {
-     "id": "lp1.3.q4",
-     "skill": "sequence",
-     "prompt": "What does Ravi do now?",
-     "right": "He sets an alarm",
-     "wrong": [
-      "He sleeps at school",
-      "He goes by train"
-     ],
-     "explain": "Now Ravi sets an alarm so that he wakes up on time."
-    }
-   ]
-  },
-  {
-   "id": "lp1.4",
-   "level": 1,
-   "title": "The Thirsty Sparrow",
-   "text": "It was a very hot afternoon. A little sparrow was looking for water. The pond was dry. Then she saw a boy watering plants in a garden. Some water had collected in the plate under a flower pot. The sparrow flew down, drank the water and took a quick bath. The boy saw her and smiled. From that day he kept a bowl of water outside for the birds.",
-   "questions": [
-    {
-     "id": "lp1.4.q1",
-     "skill": "detail",
-     "prompt": "What was the sparrow looking for?",
-     "right": "Water",
-     "wrong": [
-      "Food",
-      "Her nest"
-     ],
-     "explain": "A little sparrow was looking for water."
-    },
-    {
-     "id": "lp1.4.q2",
-     "skill": "cause",
-     "prompt": "Why could she not drink at the pond?",
-     "right": "The pond was dry",
-     "wrong": [
-      "A cat was there",
-      "It was too far away"
-     ],
-     "explain": "The pond was dry."
-    },
-    {
-     "id": "lp1.4.q3",
-     "skill": "detail",
-     "prompt": "Where did she find water?",
-     "right": "In the plate under a flower pot",
-     "wrong": [
-      "In a bucket beside the well",
-      "In a river behind the garden"
-     ],
-     "explain": "Water had collected in the plate under a flower pot."
-    },
-    {
-     "id": "lp1.4.q4",
-     "skill": "inference",
-     "prompt": "What kind of boy was he?",
-     "right": "Kind to animals",
-     "wrong": [
-      "Afraid of birds",
-      "Always in a hurry"
-     ],
-     "explain": "He kept a bowl of water outside for the birds."
-    }
-   ]
-  },
-  {
-   "id": "lp2.1",
-   "level": 2,
-   "title": "The Weekly Market",
-   "text": "Every Thursday a market comes to the open ground near Kavya's house. Farmers arrive before sunrise and spread their vegetables on mats. Kavya's mother likes this market because the vegetables are fresh and cost less than in the shops. Last Thursday, Kavya went with her. She carried the cloth bags, because the market has stopped using plastic. They bought spinach, tomatoes and a large pumpkin. On the way out, an old farmer gave Kavya a handful of peanuts for helping her mother. Kavya decided that Thursday was now her favourite day.",
-   "questions": [
-    {
-     "id": "lp2.1.q1",
-     "skill": "detail",
-     "prompt": "On which day does the market come?",
-     "right": "Thursday",
-     "wrong": [
-      "Tuesday",
-      "Sunday"
-     ],
-     "explain": "Every Thursday a market comes to the open ground."
-    },
-    {
-     "id": "lp2.1.q2",
-     "skill": "cause",
-     "prompt": "Why does Kavya's mother like this market?",
-     "right": "The vegetables are fresh and cost less",
-     "wrong": [
-      "It stays open through the whole night",
-      "It also sells toys and clothes"
-     ],
-     "explain": "The vegetables are fresh and cost less than in the shops."
-    },
-    {
-     "id": "lp2.1.q3",
-     "skill": "inference",
-     "prompt": "Why did they carry cloth bags?",
-     "right": "The market no longer uses plastic bags",
-     "wrong": [
-      "Cloth bags were on sale that day",
-      "The farmer asked for them"
-     ],
-     "explain": "The market has stopped using plastic."
-    },
-    {
-     "id": "lp2.1.q4",
-     "skill": "main_idea",
-     "prompt": "What is the passage mainly about?",
-     "right": "A girl's visit to the weekly market",
-     "wrong": [
-      "How farmers grow large pumpkins",
-      "Why the shops close on Thursdays"
-     ],
-     "explain": "It follows Kavya and her mother through the market."
-    }
-   ]
-  },
-  {
-   "id": "lp2.2",
-   "level": 2,
-   "title": "The Postman's Bicycle",
-   "text": "Mr Das has been the postman of Nilgiri village for twenty years. He rides an old green bicycle with a bell that everyone knows. When people hear it, they come out hoping for a letter. These days there are fewer letters, because most people use phones. But Mr Das still brings parcels, bank papers and, sometimes, a postcard from a soldier far away. Last month the village children painted his bicycle and tied flowers to it to mark his twenty years. Mr Das said it was the best gift he had ever received.",
-   "questions": [
-    {
-     "id": "lp2.2.q1",
-     "skill": "detail",
-     "prompt": "How long has Mr Das been the postman?",
-     "right": "Twenty years",
-     "wrong": [
-      "Two years",
-      "Ten years"
-     ],
-     "explain": "He has been the postman for twenty years."
-    },
-    {
-     "id": "lp2.2.q2",
-     "skill": "cause",
-     "prompt": "Why are there fewer letters now?",
-     "right": "Most people use phones",
-     "wrong": [
-      "The post office has closed",
-      "Mr Das works fewer days"
-     ],
-     "explain": "There are fewer letters because most people use phones."
-    },
-    {
-     "id": "lp2.2.q3",
-     "skill": "detail",
-     "prompt": "What did the children do last month?",
-     "right": "They painted his bicycle and tied flowers to it",
-     "wrong": [
-      "They bought him a new scooter with their savings",
-      "They wrote him a long letter of thanks"
-     ],
-     "explain": "The children painted his bicycle and tied flowers to it."
-    },
-    {
-     "id": "lp2.2.q4",
-     "skill": "inference",
-     "prompt": "How do the villagers feel about Mr Das?",
-     "right": "They are fond of him",
-     "wrong": [
-      "They are afraid of him",
-      "They hardly know him"
-     ],
-     "explain": "Everyone knows his bell, and the children marked his twenty years."
-    }
-   ]
-  },
-  {
-   "id": "lp2.3",
-   "level": 2,
-   "title": "A Rainy Sports Day",
-   "text": "The school's sports day was planned for Saturday. Everyone had practised for weeks. On Saturday morning, dark clouds covered the sky, and by nine it was raining hard. The principal moved the events into the big hall. There was no space for the long races, so the teachers quickly invented new games: a spoon race in a circle, a paper-plane contest and a tug of war. Parents sat along the walls and cheered. At the end, many children said it was more fun than any sports day before. The principal joked that she would order rain again next year.",
-   "questions": [
-    {
-     "id": "lp2.3.q1",
-     "skill": "cause",
-     "prompt": "Why were the events moved into the hall?",
-     "right": "It was raining hard",
-     "wrong": [
-      "The ground was being repaired",
-      "It was too hot outside"
-     ],
-     "explain": "By nine it was raining hard."
-    },
-    {
-     "id": "lp2.3.q2",
-     "skill": "detail",
-     "prompt": "What could not be held in the hall?",
-     "right": "The long races",
-     "wrong": [
-      "The tug of war",
-      "The paper-plane contest"
-     ],
-     "explain": "There was no space for the long races."
-    },
-    {
-     "id": "lp2.3.q3",
-     "skill": "detail",
-     "prompt": "Who invented the new games?",
-     "right": "The teachers",
-     "wrong": [
-      "The parents",
-      "The children"
-     ],
-     "explain": "The teachers quickly invented new games."
-    },
-    {
-     "id": "lp2.3.q4",
-     "skill": "inference",
-     "prompt": "What does the principal's joke show?",
-     "right": "The day turned out well after all",
-     "wrong": [
-      "She was angry about the rain",
-      "She does not like sports"
-     ],
-     "explain": "Children said it was more fun than before, so she joked about ordering rain."
-    }
-   ]
-  },
-  {
-   "id": "lp2.4",
-   "level": 2,
-   "title": "The Banyan Tree Library",
-   "text": "In the village of Sirumalai there is no library building. Instead, every evening a retired teacher named Mrs Rao brings a trunk of books to the old banyan tree. Children sit on mats and choose a book. They may take one home if they write their name in her notebook. At first only five children came. Mrs Rao then began reading one story aloud each evening, stopping at the most exciting part. To learn the ending, children had to read the book themselves. Within a month, more than forty children were coming.",
-   "questions": [
-    {
-     "id": "lp2.4.q1",
-     "skill": "detail",
-     "prompt": "Where does the library meet?",
-     "right": "Under the old banyan tree",
-     "wrong": [
-      "In the school hall",
-      "At Mrs Rao's house"
-     ],
-     "explain": "Mrs Rao brings the books to the old banyan tree."
-    },
-    {
-     "id": "lp2.4.q2",
-     "skill": "detail",
-     "prompt": "What must a child do to take a book home?",
-     "right": "Write their name in the notebook",
-     "wrong": [
-      "Pay one rupee",
-      "Bring another book in return"
-     ],
-     "explain": "They may take one home if they write their name in her notebook."
-    },
-    {
-     "id": "lp2.4.q3",
-     "skill": "cause",
-     "prompt": "Why did many more children start coming?",
-     "right": "She read stories aloud and stopped at the exciting part",
-     "wrong": [
-      "She gave sweets to every child who came",
-      "The school told all its pupils to go there"
-     ],
-     "explain": "To learn the ending, children had to read the book themselves."
-    },
-    {
-     "id": "lp2.4.q4",
-     "skill": "main_idea",
-     "prompt": "What is the passage mainly about?",
-     "right": "A teacher who got village children reading",
-     "wrong": [
-      "How banyan trees grow",
-      "A village that has no school"
-     ],
-     "explain": "It tells how Mrs Rao's library grew from five children to more than forty."
-    }
-   ]
-  },
-  {
-   "id": "lp3.1",
-   "level": 3,
-   "title": "How Honeybees Share News",
-   "text": "When a honeybee finds flowers rich in nectar, she does not keep the secret. She flies back to the hive and performs a dance on the honeycomb. Scientists call it the waggle dance. The bee runs in a straight line while shaking her body, then circles back and repeats it. The direction of the straight run tells the other bees which way to fly in relation to the sun. The length of the run tells them how far the flowers are: a longer run means a longer journey. The other bees crowd around her and follow the movements in the dark hive. Soon they fly out and find the same flowers without being led there.",
-   "questions": [
-    {
-     "id": "lp3.1.q1",
-     "skill": "detail",
-     "prompt": "What do scientists call the dance?",
-     "right": "The waggle dance",
-     "wrong": [
-      "The circle march",
-      "The honey step"
-     ],
-     "explain": "Scientists call it the waggle dance."
-    },
-    {
-     "id": "lp3.1.q2",
-     "skill": "detail",
-     "prompt": "What does the length of the straight run tell the other bees?",
-     "right": "How far away the flowers are",
-     "wrong": [
-      "What colour the flowers are",
-      "How many bees should go"
-     ],
-     "explain": "A longer run means a longer journey."
-    },
-    {
-     "id": "lp3.1.q3",
-     "skill": "inference",
-     "prompt": "Why is the dance useful to the hive?",
-     "right": "Many bees can find good flowers quickly",
-     "wrong": [
-      "It keeps the hive warm",
-      "It frightens enemies away"
-     ],
-     "explain": "The others fly out and find the same flowers without being led."
-    },
-    {
-     "id": "lp3.1.q4",
-     "skill": "main_idea",
-     "prompt": "What is the passage mainly about?",
-     "right": "How a honeybee tells others where food is",
-     "wrong": [
-      "How people collect honey from hives",
-      "Why bees sting when they are disturbed"
-     ],
-     "explain": "Every part explains the dance and what it tells the other bees."
-    }
-   ],
-   "checked": {
-    "on": "2026-11-19",
-    "against": [
-     "NC State Extension, Honey Bee Dance Language: https://content.ces.ncsu.edu/honey-bee-dance-language"
-    ]
-   }
-  },
-  {
-   "id": "lp3.2",
-   "level": 3,
-   "title": "The Stepwell",
-   "text": "Long before pipes and pumps, people in the dry parts of western India built stepwells. A stepwell is a deep well with flights of steps leading down to the water. In the rainy season the water level rose and people needed to walk down only a few steps. In summer the level fell, and they went down many more. Because the water lay deep below the ground and in shade, it stayed cool and did not dry up quickly. Stepwells were also meeting places, where travellers rested out of the heat. Many were decorated with fine stone carvings. Today some stepwells are being cleaned and repaired so that they can store rainwater once again.",
-   "questions": [
-    {
-     "id": "lp3.2.q1",
-     "skill": "detail",
-     "prompt": "Where were stepwells built?",
-     "right": "In the dry parts of western India",
-     "wrong": [
-      "In the hills of the north-east",
-      "Along the sea coast"
-     ],
-     "explain": "People in the dry parts of western India built stepwells."
-    },
-    {
-     "id": "lp3.2.q2",
-     "skill": "cause",
-     "prompt": "Why did the water in a stepwell stay cool?",
-     "right": "It lay deep below the ground and in shade",
-     "wrong": [
-      "Ice was added to it every morning",
-      "It flowed very fast over the steps"
-     ],
-     "explain": "The water lay deep below the ground and in shade."
-    },
-    {
-     "id": "lp3.2.q3",
-     "skill": "detail",
-     "prompt": "Besides giving water, what were stepwells used for?",
-     "right": "As places to meet and rest",
-     "wrong": [
-      "For storing grain",
-      "For growing rice"
-     ],
-     "explain": "Stepwells were also meeting places, where travellers rested."
-    },
-    {
-     "id": "lp3.2.q4",
-     "skill": "inference",
-     "prompt": "Why are some stepwells being repaired today?",
-     "right": "So that they can store rainwater again",
-     "wrong": [
-      "So that hotels can be built in them",
-      "So that they can be filled with earth"
-     ],
-     "explain": "They are being cleaned and repaired to store rainwater once again."
-    }
-   ],
-   "checked": {
-    "on": "2026-11-19",
-    "against": [
-     "Britannica, Stepwell: https://www.britannica.com/technology/stepwell/Introduction",
-     "Living Waters Museum, Indian stepwells: https://www.watermuseums.net/heritage/valuing-ancient-water-cultures/indian-stepwells/"
-    ]
-   }
-  },
-  {
-   "id": "lp3.3",
-   "level": 3,
-   "title": "The Night Train",
-   "text": "Anil was travelling alone by night train for the first time, to visit his uncle in Mysuru. His mother had told him three times to keep his ticket safe. He put it in his shirt pocket and checked it at every station. An elderly woman in the opposite seat noticed and smiled. When the ticket inspector arrived, Anil reached for his pocket with confidence, and found it empty. His face went pale. The woman pointed quietly at the floor, where the ticket lay beside his shoe; it had slipped out when he bent to tie his lace. The inspector punched it and moved on. Anil thanked the woman and, for the rest of the journey, kept the ticket inside his book.",
-   "questions": [
-    {
-     "id": "lp3.3.q1",
-     "skill": "detail",
-     "prompt": "Where was Anil going?",
-     "right": "To visit his uncle in Mysuru",
-     "wrong": [
-      "To a school in Chennai",
-      "To his mother's office"
-     ],
-     "explain": "He was going to visit his uncle in Mysuru."
-    },
-    {
-     "id": "lp3.3.q2",
-     "skill": "cause",
-     "prompt": "How did the ticket come to be on the floor?",
-     "right": "It slipped out when he bent to tie his lace",
-     "wrong": [
-      "The woman opposite took it from him",
-      "The wind from the window blew it away"
-     ],
-     "explain": "It had slipped out when he bent to tie his lace."
-    },
-    {
-     "id": "lp3.3.q3",
-     "skill": "inference",
-     "prompt": "Why did Anil's face go pale?",
-     "right": "He was frightened that he had lost his ticket",
-     "wrong": [
-      "He felt cold in the night train",
-      "He had not eaten since the morning"
-     ],
-     "explain": "He reached for his pocket and found it empty."
-    },
-    {
-     "id": "lp3.3.q4",
-     "skill": "sequence",
-     "prompt": "What did Anil do after he got the ticket back?",
-     "right": "He kept it inside his book",
-     "wrong": [
-      "He put it back in his shirt pocket",
-      "He gave it to the woman"
-     ],
-     "explain": "For the rest of the journey he kept the ticket inside his book."
-    }
-   ]
-  },
-  {
-   "id": "lp3.4",
-   "level": 3,
-   "title": "Salt from the Sea",
-   "text": "Much of the salt we eat comes from sea water. Along flat, sunny coasts, workers build shallow square ponds called salt pans. Sea water is let into the pans and left under the hot sun. Day by day the water evaporates, which means it turns into vapour and rises into the air. The salt cannot rise with it, so it is left behind as white crystals. Workers rake the crystals into heaps to dry. The work is done in the hottest months, because rain would dissolve the salt and wash it away. That is why salt making stops when the monsoon arrives.",
-   "questions": [
-    {
-     "id": "lp3.4.q1",
-     "skill": "detail",
-     "prompt": "What are the shallow ponds called?",
-     "right": "Salt pans",
-     "wrong": [
-      "Sea wells",
-      "Crystal beds"
-     ],
-     "explain": "Workers build shallow square ponds called salt pans."
-    },
-    {
-     "id": "lp3.4.q2",
-     "skill": "detail",
-     "prompt": "What happens to the water in the pans?",
-     "right": "It evaporates under the hot sun",
-     "wrong": [
-      "It freezes at night",
-      "It is pumped back into the sea"
-     ],
-     "explain": "Day by day the water evaporates."
-    },
-    {
-     "id": "lp3.4.q3",
-     "skill": "cause",
-     "prompt": "Why does salt making stop in the monsoon?",
-     "right": "Rain would dissolve the salt and wash it away",
-     "wrong": [
-      "The workers go on holiday",
-      "The sea has no salt in those months"
-     ],
-     "explain": "Rain would dissolve the salt and wash it away."
-    },
-    {
-     "id": "lp3.4.q4",
-     "skill": "main_idea",
-     "prompt": "What is the passage mainly about?",
-     "right": "How salt is made from sea water",
-     "wrong": [
-      "Why the sea is blue",
-      "How to cook with salt"
-     ],
-     "explain": "It follows the salt from sea water to dry heaps."
-    }
-   ],
-   "checked": {
-    "on": "2026-11-19",
-    "against": [
-     "Mani et al. 2012, Community solar salt production in Goa, India: https://pmc.ncbi.nlm.nih.gov/articles/PMC3543363"
-    ]
-   }
-  }
- ]
+  ],
+  "scale": 2
 }

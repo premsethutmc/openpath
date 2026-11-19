@@ -19,7 +19,7 @@ Added 19 November 2026. Practice-only; hidden in pilot builds.
 
 ## Limits
 
-- Twelve passages is three or four sittings per level before repeats.
+- Twelve passages was three or four sittings per level before repeats. Since November 2026 there are 24 passages on six levels (see FINER_LEVELS.md).
 - The voice is the phone's own; its clarity on a physical phone is unchecked. The automated tests have no voice.
 - The three factual pieces (the bee dance, stepwells, salt pans) were written from general knowledge and not checked
   against a cited source.
