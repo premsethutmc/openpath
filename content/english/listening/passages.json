@@ -1,6 +1,6 @@
 {
   "id": "listen-and-answer",
-  "version": 4,
+  "version": 5,
   "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
@@ -1451,6 +1451,162 @@
             "From busy and bright to bored"
           ],
           "explain": "It begins with brown fields and dust, and ends with green fields, singing frogs and the sky as a friend."
+        }
+      ]
+    },
+    {
+      "id": "lq1.5",
+      "level": 1,
+      "title": "The Kite",
+      "text": "Ravi has a new kite. It is yellow with a long blue tail. He runs on the beach, and the kite goes up. The wind is strong. Up and up it goes, over the waves. Ravi holds the string tight and smiles.",
+      "questions": [
+        {
+          "id": "lq1.5.q1",
+          "skill": "detail",
+          "prompt": "What colour is the kite?",
+          "right": "Yellow",
+          "wrong": [
+            "Red",
+            "Green"
+          ],
+          "explain": "Ravi's kite is yellow with a long blue tail."
+        },
+        {
+          "id": "lq1.5.q2",
+          "skill": "detail",
+          "prompt": "Where does Ravi fly the kite?",
+          "right": "On the beach",
+          "wrong": [
+            "In the classroom",
+            "On the roof"
+          ],
+          "explain": "He runs on the beach, and the kite goes up."
+        },
+        {
+          "id": "lq1.5.q3",
+          "skill": "cause",
+          "prompt": "Why does the kite go up and up?",
+          "right": "The wind is strong",
+          "wrong": [
+            "Ravi throws it",
+            "It is very light"
+          ],
+          "explain": "The story says the wind is strong; then up and up it goes."
+        },
+        {
+          "id": "lq1.5.q4",
+          "skill": "inference",
+          "prompt": "How does Ravi feel?",
+          "right": "Happy",
+          "wrong": [
+            "Scared",
+            "Bored"
+          ],
+          "explain": "He holds the string tight and smiles."
+        }
+      ]
+    },
+    {
+      "id": "lp1.5",
+      "level": 2,
+      "title": "Lunch for the Birds",
+      "text": "Every morning, Grandmother puts a bowl of water and some rice on the wall. Soon the sparrows come, then two crows. The sparrows eat quickly and fly away. The crows are bold and stay longer. One hot day the bowl was empty, and the birds waited. Meena filled it at once, and the birds drank and drank.",
+      "questions": [
+        {
+          "id": "lp1.5.q1",
+          "skill": "detail",
+          "prompt": "What does Grandmother put on the wall?",
+          "right": "Water and some rice",
+          "wrong": [
+            "Bread and milk",
+            "Seeds and fruit"
+          ],
+          "explain": "She puts a bowl of water and some rice on the wall."
+        },
+        {
+          "id": "lp1.5.q2",
+          "skill": "sequence",
+          "prompt": "Which birds come first?",
+          "right": "The sparrows",
+          "wrong": [
+            "The crows",
+            "The parrots"
+          ],
+          "explain": "Soon the sparrows come, then two crows."
+        },
+        {
+          "id": "lp1.5.q3",
+          "skill": "detail",
+          "prompt": "What are the crows like?",
+          "right": "Bold, and they stay longer",
+          "wrong": [
+            "Shy, and they fly off fast",
+            "Small, and they eat little"
+          ],
+          "explain": "The crows are bold and stay longer."
+        },
+        {
+          "id": "lp1.5.q4",
+          "skill": "inference",
+          "prompt": "Why did the birds drink and drink?",
+          "right": "It was hot and they were thirsty",
+          "wrong": [
+            "The water was cold and sweet",
+            "Meena told them to drink it"
+          ],
+          "explain": "It was a hot day and the bowl had been empty, so they were thirsty."
+        }
+      ]
+    },
+    {
+      "id": "lq3.5",
+      "level": 3,
+      "title": "The Lost Library Book",
+      "text": "Kavin could not find his library book anywhere. He looked under his bed, in his school bag and behind the sofa. The book was due back on Friday, and it was already Thursday evening. He felt worried, because the librarian had warned the class about late books. Then his little sister walked in, holding the book. She had taken it to look at the pictures of dinosaurs. Kavin laughed with relief and showed her the best page.",
+      "questions": [
+        {
+          "id": "lq3.5.q1",
+          "skill": "detail",
+          "prompt": "When was the book due back?",
+          "right": "On Friday",
+          "wrong": [
+            "On Monday",
+            "On Thursday"
+          ],
+          "explain": "The book was due back on Friday."
+        },
+        {
+          "id": "lq3.5.q2",
+          "skill": "cause",
+          "prompt": "Why did Kavin feel worried?",
+          "right": "The librarian had warned about late books",
+          "wrong": [
+            "His little sister was crying loudly",
+            "He had torn a page of the book"
+          ],
+          "explain": "He felt worried, because the librarian had warned the class about late books."
+        },
+        {
+          "id": "lq3.5.q3",
+          "skill": "detail",
+          "prompt": "Who had the book?",
+          "right": "His little sister",
+          "wrong": [
+            "His teacher",
+            "His best friend"
+          ],
+          "explain": "His little sister walked in, holding the book."
+        },
+        {
+          "id": "lq3.5.q4",
+          "skill": "inference",
+          "prompt": "How did Kavin feel at the end?",
+          "right": "Relieved and friendly",
+          "wrong": [
+            "Angry and upset",
+            "Tired and sleepy"
+          ],
+          "explain": "He laughed with relief and showed her the best page."
         }
       ]
     }
