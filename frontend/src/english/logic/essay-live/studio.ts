@@ -72,7 +72,7 @@ import {
   diagnosticOutcome,
   essayProfile,
   essayRecords,
-  evaluateRewrite,
+  evaluateRewrite, savedRewrites, retryRewrite, canRetryRewrite, rewriteQuestion,
   fingerprint,
   gapHypotheses,
   gatewayEssayEvaluator,
@@ -202,6 +202,9 @@ export interface StudioView {
   journey: LearningJourney | null;
   next: NextStep | null;
   rewrite: RewriteEvaluation | null;
+  savedRewrite: ReturnType<typeof savedRewrites>[number] | null;
+  rewriteQuestion: string | null;
+  rewriteRetryAvailable: boolean;
   profile: EssayLearnerProfile;
   /**
    * Each journey competency's separate claims (journey completed, shown without help, verified, retention), kept
@@ -242,6 +245,7 @@ export class EssayStudio {
   private readonly options: EssayStudioOptions;
   private readonly configuredEvaluator: boolean;
   private writingPending=false;
+  private rewritePending=false;
   private observationCheckPending=false;
 
   constructor(learner: Learner, evaluator: EssayEvaluator | null = null, fallback = studioEvaluator(), verification: VerificationPolicy = PILOT_VERIFICATION, options: EssayStudioOptions = {}) {
@@ -309,8 +313,8 @@ export class EssayStudio {
     const nextDiagnostic = this.nextDiagnostic(diagnostics);
     const journeyRec = essay ? essayRecords(events, "journey").filter((r) => r.record.journey.essay === essay.id).at(-1) : undefined;
     const journey = journeyRec ? journeyStatus(this.ectx, events, journeyRec.record.journey.id, now) : null;
-    const rewriteRec = essay ? essayRecords(events, "rewrite").filter((r) => r.record.rewrite.essay === essay.id).at(-1) : undefined;
-    const rewrite = rewriteRec?.record.evaluation ?? null;
+    const rewriteRec = essay ? savedRewrites(events).filter(r=>r.rewrite.essay===essay.id).at(-1) : undefined;
+    const rewrite = rewriteRec?.evaluation ?? null;
     const next = journey ? this.nextStep(journey) : null;
     // policy @3 (A2): every journey's target skills keep their later and delayed checks, from the latest journey holding each
     const outcomes = journey ? journeyOutcomes(this.ectx, events, now) : [];
@@ -332,6 +336,9 @@ export class EssayStudio {
       journey,
       next,
       rewrite,
+      savedRewrite:rewriteRec??null,
+      rewriteQuestion:rewrite?rewriteQuestion(rewrite):null,
+      rewriteRetryAvailable:!!rewrite&&canRetryRewrite(rewrite)&&this.connected,
       profile: essayProfile(this.ectx, this.learner.profileId, events, now),
       outcomes,
       canGenerate: this.canGenerate,
@@ -395,7 +402,7 @@ export class EssayStudio {
 
   /** Submit a synthetic essay, analyse it, and plan diagnostic questions for any suspected gap. */
   async submit(text: string, source: { kind: "typed" | "synthetic"; prompt?: string } = { kind: "synthetic" }): Promise<StudioView> {
-    if(this.writingPending)throw new EssayRefusal('Writing analysis is already in progress');
+    if(this.writingPending||this.rewritePending)throw new EssayRefusal('Writing analysis is already in progress');
     this.writingPending=true;
     try{return await this.submitWriting(text,source);}finally{this.writingPending=false;}
   }
@@ -423,7 +430,7 @@ export class EssayStudio {
 
   /** Retry only a failed/unassessed current saved draft. Never manufacture a second writing sample. */
   async retryAnalysis():Promise<StudioView> {
-    if(this.writingPending)throw new EssayRefusal('Writing analysis is already in progress');
+    if(this.writingPending||this.rewritePending)throw new EssayRefusal('Writing analysis is already in progress');
     const essay=this.latestEssay();
     if(!essay)throw new EssayRefusal('No saved writing to analyse');
     if(!this.connected)throw new EssayRefusal('Reconnect the configured evaluator and reopen this workspace; your writing remains saved');
@@ -444,7 +451,7 @@ export class EssayStudio {
 
   /** A voluntary bank check, not a diagnosis from one model observation. */
   async checkObservation(competency:string):Promise<StudioView> {
-    if(this.observationCheckPending||this.writingPending)throw new EssayRefusal('Finish the current writing action first');
+    if(this.observationCheckPending||this.writingPending||this.rewritePending)throw new EssayRefusal('Finish the current writing action first');
     const essay=this.latestEssay();if(!essay)throw new EssayRefusal('No saved writing');
     this.observationCheckPending=true;
     try {
@@ -586,16 +593,42 @@ export class EssayStudio {
   }
 
   /** Submit the 50-word rewrite. A rewrite of the built-in sample is judged from a recorded judgement; any other is kept and held. */
-  async rewrite(text: string): Promise<StudioView> {
+  async rewrite(text: string, revisionOf?:string): Promise<StudioView> {
+    if(this.rewritePending||this.writingPending||this.observationCheckPending)throw new Error("A rewrite operation is already in progress.");
+    this.rewritePending=true;try{
     const essay = this.latestEssay();
     if (!essay) throw new Error("no essay yet");
+    const saved=savedRewrites(this.events).filter(r=>r.rewrite.essay===essay.id);
+    if(saved.some(r=>fingerprint(r.rewrite.text)===fingerprint(text)))throw new Error("This rewrite is already saved. Retry its unavailable analysis rather than saving it again.");
+    if(revisionOf&&saved.at(-1)?.rewrite.id!==revisionOf)throw new Error("Revise the latest saved rewrite for this essay.");
     const [m] = await this.learner.essayMeta(1);
     // the server's evaluator judges any rewrite; locally, only the built-in sample rewrite has a recorded judgement
     const known = SAMPLES.rewrites.some((r) => r.fingerprint === fingerprint(text));
     const judge = this.connected ? this.evaluator : known && !this.options.failClosed && this.options.useFallback !== false ? this.fallback : null;
-    const r = await evaluateRewrite(this.ectx, this.events, judge, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
+    // Commit the learner's text before waiting for the provider. A failed call or reload cannot lose it.
+    const r = await evaluateRewrite(this.ectx, this.events, null, m, { rewriteId: `rewrite:${essay.id}:${this.events.length}`, essayId: essay.id, text });
+    if(revisionOf)r.rewrite.revisionOf=revisionOf;
     await this.learner.recordEssay(r.event);
+    if(judge&&canRetryRewrite(r.evaluation)){
+      const [attempt]=await this.learner.essayMeta(1);
+      const event=await retryRewrite(this.ectx,this.events,judge,attempt,r.rewrite.id);
+      const [fresh]=await this.learner.essayMeta(1);
+      await this.learner.recordEssay({...event,...fresh});
+    }
     return this.view();
+    }finally{this.rewritePending=false;}
+  }
+  async retrySavedRewrite(id:string):Promise<StudioView>{
+    if(this.rewritePending||this.writingPending||this.observationCheckPending)throw new Error("A rewrite operation is already in progress.");
+    if(!this.connected)throw new Error("Reconnect the evaluator and reopen this workspace. The rewrite remains saved.");
+    const saved=this.view().savedRewrite;
+    if(!saved||saved.rewrite.id!==id)throw new Error("Retry the latest saved rewrite for this essay.");
+    this.rewritePending=true;try{
+      const [meta]=await this.learner.essayMeta(1);
+      const event=await retryRewrite(this.ectx,this.events,this.evaluator,meta,id);
+      const [fresh]=await this.learner.essayMeta(1);
+      await this.learner.recordEssay({...event,...fresh});return this.view();
+    }finally{this.rewritePending=false;}
   }
 
   /** What changed in the profile between two points (for showing what the engine did, and for tests). */

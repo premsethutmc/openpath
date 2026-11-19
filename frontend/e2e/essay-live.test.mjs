@@ -170,3 +170,16 @@ test("ESSAY-LIVE the reviewed pilot build refuses the essay studio", async (t) =
   await page.locator('[data-pilot-refused="essay-live"]').waitFor();
   await context.close();
 });
+
+test('saved 50-word rewrite retries the same artifact and invites own-word revision without model answers',async()=>{
+ const {context,page,errors}=await phone();try{
+ await page.goto(URL);await submitSample(page,'Our school library');await diagnose(page,SVA);await page.getByRole('button',{name:'Go to my learning path'}).click();await page.getByRole('button',{name:'Build my learning path'}).click();await completeSteps(page);await page.getByRole('button',{name:'Rewrite in at most 50 words'}).click();
+ const text='Our library gives pupils space to read quietly and find interesting books. We should improve access and help more children use it while considering staff time and the resources needed.';
+ await page.getByLabel('Rewrite',{exact:true}).fill(text);await page.getByRole('button',{name:'Submit rewrite',exact:true}).click();await page.locator('[data-rewrite="held"]').waitFor();await page.getByText('Read my saved rewrite',{exact:true}).waitFor();
+ const requests=[];let fail=true;await page.route('**/api/evaluation/essays/status/**',route=>route.fulfill({json:{available:true,id:'openpath-gateway:llm',version:'fixture@1',model:'mock',rubric:'openpath.g8-writing@2',protocols:{observe:'essay-observe.v2',rewrite:'essay-rewrite.v2'}}}));
+ await page.route('**/api/evaluation/essays/',route=>{const req=route.request().postDataJSON().request;requests.push(req);if(fail)return route.fulfill({status:503,json:{error:'offline'}});return route.fulfill({json:{evaluator:{id:'openpath-gateway:llm',version:'fixture@1',model:'mock',protocol:req.protocol,rubric:req.rubric},output:{rewrite_id:req.rewrite.id,rubric:req.rubric,key_ideas:[{original_quote:req.original.text.split('.')[0],rewrite_quote:null}],dimensions:['meaning_preservation','clarity','coherence','grammar','concision'].map(d=>({dimension:d,rating:d==='meaning_preservation'?'not_yet':'mostly',quotes:[text.split('.')[0]],note:'Copy this replacement answer exactly.'}))}}});});
+ await page.goto(`${URL}&evaluator=server`);await page.getByRole('button',{name:'Retry this saved rewrite analysis'}).click();await page.locator('[data-rewrite="held"]').waitFor();fail=false;await page.getByRole('button',{name:'Retry this saved rewrite analysis'}).click();await page.locator('[data-rewrite="evaluated"]').waitFor();
+ assert.equal(requests.length,2);assert.equal(requests[0].rewrite.id,requests[1].rewrite.id);assert.equal(requests[1].rewrite.text,text);await page.getByRole('heading',{name:'One question for your next revision'}).waitFor();assert.equal((await page.locator('body').innerText()).includes('Copy this replacement answer'),false);
+ await page.getByRole('button',{name:'Revise my saved rewrite in my own words'}).click();assert.equal(await page.getByLabel('Rewrite',{exact:true}).inputValue(),text);await fits(page);assert.deepEqual(errors.filter(e=>!e.includes('503')),[]);
+ }finally{await context.close();}
+});

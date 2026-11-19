@@ -6,7 +6,7 @@
  * essays, on a dedicated on-device synthetic profile; it never uses a child's profile or the parent account.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { DEVELOPER_VERIFICATION, type Item, PILOT_VERIFICATION, type Response, argumentRecords, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
+import { DEVELOPER_VERIFICATION, canRetryRewrite, type Item, PILOT_VERIFICATION, type Response, argumentRecords, argumentTask, wordCount } from "../../../../../packages/english-core/src/index.ts";
 import type {WorkspaceSelection} from './EnglishWorkspace.tsx';
 import {withWorkspaceBank} from '../../logic/essay-live/workspace-bank.ts';
 import {withWorkspaceLessons} from '../../logic/essay-live/workspace-lessons.ts';
@@ -707,7 +707,7 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                void act(() => studio!.rewrite(rewrite), () => setScreen("profile"));
+                void act(() => studio!.rewrite(rewrite,v.savedRewrite?.rewrite.id), () => setScreen("profile"));
               }}
             >
               <label htmlFor="essay-live-rewrite">Rewrite</label>
@@ -731,12 +731,21 @@ export function EssayLive({workspace}:{workspace?:WorkspaceSelection}={}) {
                   v.rewrite.dimensions.map((d) => (
                     <article className="essay-card" key={d.dimension} data-dimension={d.dimension} data-dimension-status={d.status}>
                       <h3>{d.dimension.replace("_", " ")}</h3>
-                      <p>{d.status === "accepted" ? `${d.rating?.replace("_", " ")}: ${d.note}` : `Not judged: ${d.reason}`}</p>
+                      <p>{d.status === "accepted" ? `Tentative feedback: ${d.rating?.replace("_", " ")}` : `Not judged: ${d.reason}`}</p>{d.status==="accepted"&&d.quotes.map((quote,i)=><blockquote key={i}>{quote}</blockquote>)}
                     </article>
                   ))
                 ) : (
                   <p className="essay-note">{v.rewrite.reasons[0]}</p>
                 )}
+                {v.savedRewrite&&<details open><summary>Read my saved rewrite</summary><p style={{whiteSpace:'pre-wrap'}}>{v.savedRewrite.rewrite.text}</p></details>}
+                {v.rewriteRetryAvailable&&v.savedRewrite&&<button disabled={busy} onClick={()=>void act(()=>studio!.retrySavedRewrite(v.savedRewrite!.rewrite.id))}>Retry this saved rewrite analysis</button>}
+                {canRetryRewrite(v.rewrite)&&!studio?.connected&&<p>Reconnect the evaluator and reopen this workspace to retry unavailable analysis. Your saved rewrite is kept.</p>}
+                {v.rewrite.status==='evaluated'&&<>
+                  <h3>Ideas compared with your original</h3><p>These are the evaluator's suggested matches, not a complete or verified account of your meaning. A missing match does not prove an idea was lost.</p>
+                  {v.rewrite.keyIdeas.length===0?<p>No usable idea comparison was returned.</p>:v.rewrite.keyIdeas.map((idea,i)=><article key={i}><blockquote>{idea.original}</blockquote>{idea.rewrite?<><p>Possible match in your rewrite:</p><blockquote>{idea.rewrite}</blockquote></>:<p>The evaluator did not locate a matching passage. Decide whether this idea matters to your intended meaning.</p>}</article>)}
+                  {v.rewriteQuestion&&<section><h3>One question for your next revision</h3><p>{v.rewriteQuestion}</p></section>}
+                </>}
+                {v.savedRewrite&&<button disabled={busy} onClick={()=>{setRewrite(v.savedRewrite!.rewrite.text);setScreen('rewrite');}}>Revise my saved rewrite in my own words</button>}
                 <p className="small">A rewrite never changes an estimate and never verifies a skill.</p>
               </section>
             )}
