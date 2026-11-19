@@ -127,7 +127,7 @@ export function LevelListening({ id, index, heard, onPlay, onDone, onSkip, onSto
     <main className="page vocab level dict" data-phase="listening" data-sentence={id}>
       <PartHead part="listening" onSkip={onSkip} onStop={onStop} />
       <p className="small">
-        Sentence {index + 1} of {LISTENING_STEPS}. Write it just as you hear it, with capital letters and the mark at the end.
+        Sentence {index + 1} of {LISTENING_STEPS}. Write it just as you hear it.
       </p>
       <div className="dict-play">
         <button type="button" className="primary" onClick={() => onPlay(false)}>

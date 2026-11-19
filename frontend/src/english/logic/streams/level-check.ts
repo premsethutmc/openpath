@@ -5,8 +5,9 @@
  *   words      a short word check (the word check's own session, four rounds): a band out of eight;
  *   reading    one text with four questions at a starting level, then one a level up or down: three of four right
  *              passes a level; the learner starts reading at the level above the highest one passed;
- *   listening  three dictated sentences, one try each, a level up after a perfect sentence and down otherwise:
- *              the level is the highest one written perfectly.
+ *   listening  three dictated sentences, one try each, a level up after a sentence whose words are right (capital
+ *              letters and the end mark are not counted; a long sentence may have one slip) and down otherwise:
+ *              the level is the highest one passed.
  *
  *   spelling   six dictated Spelling Bee words, a level up after a right one and down otherwise: the level is the
  *              highest one spelt right, and the Spelling Bee starts there.
@@ -25,6 +26,8 @@ export const WORD_ROUNDS = 4;
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
 export const READING_PASS = 3;
 export const LISTENING_STEPS = 3;
+/** Does a dictated sentence pass for placement? Every word spelt right; one slip allowed from eight words up. */
+export const listeningPass = (right: number, total: number): boolean => right >= total - (total >= 8 ? 1 : 0);
 export const SPELLING_STEPS = 6;
 
 export type LevelCheckRecord =
@@ -169,13 +172,15 @@ export class ListeningPlacement {
     const s = this.current!;
     if (!wordsOf(typed).length) return; // nothing typed
     const m = mark(s, typed);
-    // one try, marked the same way as Listen and write
+    // one try, marked the same way as Listen and write. For placement a sentence passes when its words are right:
+    // capital letters and the end mark do not count, and a sentence of eight words or more may have one word wrong.
+    const passed = listeningPass(m.right, m.total);
     const record: DictationRecord = { type: "answer", sitting: "level-check", id: s.id, level: s.level, tries: 1, perfectFirst: m.perfect, perfect: m.perfect, right: m.right, total: m.total, missed: m.missed, misspelt: m.misspelt, capitals: m.capitals, end: m.end === "ok", plays, typed: typed.trim().slice(0, 200) };
     this.log.push(record);
     this.history.push(record);
-    this.steps.push({ id: s.id, level: s.level, perfect: m.perfect });
+    this.steps.push({ id: s.id, level: s.level, perfect: passed });
     const ids = this.content.levels.map((l) => l.id);
-    this.level = Math.min(Math.max(...ids), Math.max(Math.min(...ids), this.level + (m.perfect ? 1 : -1)));
+    this.level = Math.min(Math.max(...ids), Math.max(Math.min(...ids), this.level + (passed ? 1 : -1)));
     this.load();
   }
 
