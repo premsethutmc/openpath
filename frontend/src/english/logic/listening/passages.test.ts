@@ -91,7 +91,17 @@ test("LA-3 the level moves after four right or one right; passages do not repeat
     h = r.records;
   }
   assert.equal(new Set(heard).size, 4, "all four before any repeat");
-  assert.equal(pick(LISTENING, 2, h).id, heard[0], "then the one heard longest ago");
+  // then one not yet heard from the level below, and only when those are heard too, the one heard longest ago
+  const lower: string[] = [];
+  let h2 = h;
+  for (let k = 0; k < 4; k++) {
+    const p = pick(LISTENING, 2, h2);
+    assert.equal(p.level, 1);
+    lower.push(p.id);
+    h2 = [...h2, { type: "result", passage: p.id, level: 2, scale: 2, plays: 1, right: 3, answers: [] }];
+  }
+  assert.equal(new Set(lower).size, 4);
+  assert.equal(pick(LISTENING, 2, h2).id, heard[0], "then the one heard longest ago");
   assert.equal(levelFor(LISTENING, h, 1), 2);
   const sum = listenSummary([...h, ...sit(2, [], 4).records.slice(-1)]);
   assert.deepEqual([sum.passages, sum.asked, sum.right], [5, 20, 12]);
