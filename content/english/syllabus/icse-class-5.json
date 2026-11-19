@@ -1,6 +1,6 @@
 {
  "id": "icse-cisce-english-class-5",
- "version": "1.0.0",
+ "version": "1.1.0",
  "board": "CISCE (ICSE)",
  "class": 5,
  "subject": "English",
@@ -35,14 +35,16 @@
     {
      "id": "LS3",
      "text": "Interprets and analyses what is heard.",
-     "coverage": "not",
-     "note": "The app has no listening passages with questions; only single sentences to write down."
+     "coverage": "covered",
+     "where": "listen",
+     "note": "Listen and answer: questions on a passage heard."
     },
     {
      "id": "LS4",
      "text": "Judges and draws conclusions from the key details heard.",
-     "coverage": "not",
-     "note": "No listening passages with questions."
+     "coverage": "covered",
+     "where": "listen",
+     "note": "Listen and answer: questions on details, causes and what can be worked out."
     },
     {
      "id": "LS5",

@@ -119,7 +119,7 @@ test("ICSE syllabus, Classes 4 to 6: every line shown with its place in the app,
   await page.getByText("Classes 4, 5 and 6: 104 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
-  await page.getByText("12 in the app · 7 partly · 14 not yet (of 33)").waitFor();
+  await page.getByText("14 in the app · 7 partly · 12 not yet (of 33)").waitFor();
   for (const st of SYLLABUS.strands) await page.getByRole("heading", { name: st.name }).waitFor();
   assert.equal(await page.locator("[data-outcome]").count(), 33);
   assert.equal(await page.locator('[data-coverage="not"] button').count(), 0, "a line that is not in the app offers no practice");
@@ -138,10 +138,10 @@ test("ICSE syllabus, Classes 4 to 6: every line shown with its place in the app,
   // the other classes: each its own list, and the class chosen is kept on the way back from practice
   await page.getByRole("button", { name: "Class 4", exact: true }).click();
   await page.getByRole("heading", { name: "Class 4 English" }).waitFor();
-  await page.getByText("7 in the app · 5 partly · 13 not yet (of 25)").waitFor();
+  await page.getByText("7 in the app · 6 partly · 12 not yet (of 25)").waitFor();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
-  await page.getByText("10 in the app · 10 partly · 26 not yet (of 46)").waitFor();
+  await page.getByText("11 in the app · 10 partly · 25 not yet (of 46)").waitFor();
   await fits();
   await page.getByRole("button", { name: /Practise GV2:/ }).click();
   await page.getByText("Topics: Pronoun forms: I and me, myself").waitFor();

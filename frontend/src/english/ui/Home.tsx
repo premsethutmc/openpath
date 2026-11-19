@@ -14,6 +14,7 @@ import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-
 import { dictationSummary } from "../logic/dictation/dictation.ts";
 import { streamRows, type StreamId } from "../logic/streams/streams.ts";
 import { GRAMMAR, grammarSummary } from "../logic/grammar-use/grammar-use.ts";
+import { listenSummary } from "../logic/listening/passages.ts";
 import { SYLLABUSES, coverage as syllabusCoverage } from "../logic/syllabus/syllabus.ts";
 import { COURSE } from "../logic/reading/course.ts";
 import { progress } from "../logic/reading/session.ts";
@@ -33,7 +34,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: () => void; onSyllabus: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: () => void; onSyllabus: () => void; onListenAnswer: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -69,12 +70,13 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? onListenWrite() : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse())}
+            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse())}
           />
           <h2 className="section-title">Practise</h2>
           <NewWordsCard learner={learner} onOpen={onNewWords} />
           <ReadingCard learner={learner} onOpen={onReading} />
           <ListenWriteCard learner={learner} onOpen={onListenWrite} />
+          <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
           <GrammarUseCard learner={learner} onOpen={onGrammarUse} />
           <BeeCard learner={learner} onBee={onBee} />
           <VocabCard learner={learner} onOpen={onVocab} />
@@ -253,7 +255,7 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
  * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
  * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
  */
-function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: "mywords") => void }) {
+function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: "mywords" | "passage") => void }) {
   if (!learner.levels().done)
     return (
       <section className="hub-card level-cta" aria-labelledby="level-cta-title">
@@ -293,6 +295,28 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
       </ul>
       <button type="button" className="link" onClick={onLevelCheck}>
         Check my level again
+      </button>
+    </section>
+  );
+}
+
+/** Listen and answer (logic/listening): candidate content, so never offered in a pilot build. */
+function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = listenSummary(learner.listenRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="listen-answer-card-title">
+      <h2 id="listen-answer-card-title">
+        <span aria-hidden="true">👂 </span>Listen and answer
+      </h2>
+      <p>Hear a short passage read aloud, then answer four questions on it. The words are shown only at the end.</p>
+      {s.passages > 0 && (
+        <p className="small">
+          {s.right} of {s.asked} questions right, over {s.passages} {s.passages === 1 ? "passage" : "passages"}
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.passages ? "Hear another passage" : "Try Listen and answer"}
       </button>
     </section>
   );

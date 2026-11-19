@@ -34,6 +34,7 @@ import { NewWords } from "./NewWords.tsx";
 import { ListenWrite } from "./ListenWrite.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
+import { ListenAnswer } from "./ListenAnswer.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
@@ -118,6 +119,7 @@ export function App() {
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
+  const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
@@ -166,6 +168,7 @@ export function App() {
       setInListenWrite(false);
       setInLevelCheck(false);
       setGrammarUse(null);
+      setListenAnswer(null);
       setInSyllabus(false);
       setInParent(false);
       setInReading(false);
@@ -479,6 +482,22 @@ export function App() {
         />
       </div>
     );
+  if (listenAnswer)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <ListenAnswer
+          learner={learner}
+          voice={voice}
+          onChanged={changed}
+          onLeave={() => {
+            setInSyllabus(listenAnswer.from === "syllabus");
+            setListenAnswer(null);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (inSyllabus)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -494,6 +513,7 @@ export function App() {
             else if (where === "words") setInNewWords(true);
             else if (where === "reading") setInReading(true);
             else if (where === "listening") setInListenWrite(true);
+            else if (where === "listen") setListenAnswer({ from: "syllabus" });
             else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
           }}
         />
@@ -677,6 +697,7 @@ export function App() {
           onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
           onGrammarUse={() => (setGrammarUse({}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
+          onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />

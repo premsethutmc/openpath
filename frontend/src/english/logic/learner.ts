@@ -26,6 +26,7 @@ import type { Dated, WordRecord } from "./vocabulary/daily-words.ts";
 import type { DictationRecord } from "./dictation/dictation.ts";
 import { calendarDay, dayBasis } from "./calendar.ts";
 import type { GrammarRecord } from "./grammar-use/grammar-use.ts";
+import type { ListenRecord } from "./listening/passages.ts";
 import { levelsFrom, type LevelCheckRecord, type Levels } from "./streams/level-check.ts";
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
@@ -269,6 +270,16 @@ export class Learner {
   /** Store steps of a Listen and write sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordDictation(records: readonly DictationRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "dictation", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's Listen and answer results, in order. */
+  listenRecords(): ListenRecord[] {
+    return this.events.flatMap((e) => (e.kind === "listen_passage" ? [e.record] : []));
+  }
+
+  /** Store Listen and answer results, in order. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordListen(records: readonly ListenRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "listen_passage", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's Grammar in use record, in order. */

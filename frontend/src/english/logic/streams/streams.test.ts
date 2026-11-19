@@ -136,6 +136,9 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.ok(streamRows(l, clock()).every((r) => !r.doneToday));
   await l.recordDictation([{ type: "start", sitting: "d1", level: 3 }, { type: "end", sitting: "d1", level: 3, asked: 5, perfectFirst: 5 }]);
   await l.recordWordLearn([{ type: "meet", word: "anxious", band: 4 }]);
+  assert.equal(row("listening").doneToday, false, "written, but nothing heard yet");
+  assert.deepEqual([row("listening").next, row("listening").open], ["A passage to hear, with four questions", "passage"]);
+  await l.recordListen([{ type: "result", passage: "lp2.1", level: 2, plays: 1, right: 4, answers: [] }]);
   assert.equal(row("listening").doneToday, true);
   assert.equal(row("words").doneToday, false, "one word met is not the day's five");
   assert.equal(row("words").next, "1 word to see again");
