@@ -518,6 +518,13 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 /* board@1: long division's written layout */
 .coach-board { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--card, #fff); border: 2px solid var(--line, #c9d3e0); color: var(--ink, #1d2433); font: 700 1.25rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-x: auto; }
 
+/* fit@1: long lines of working are set smaller, and anything longer still scrolls inside its own box */
+.coach-board.wide { font-size: 1.05rem; }
+.coach-board.widest { font-size: 0.88rem; }
+/* fit@1: a table of data wider than the phone scrolls inside its own box; it never widens the page */
+.figure.table-fig { margin-inline: 0; max-width: 100%; overflow-x: auto; }
+.coach-board { max-width: 100%; overflow-x: auto; }
+
 /* bracket@1: the line over the number being divided, joined to the bracket */
 .coach-board .ld-bar { border-top: 0.11em solid currentColor; padding-top: 0.04em; }
 

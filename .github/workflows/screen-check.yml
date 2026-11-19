@@ -1,0 +1,76 @@
+name: Screen check
+# screen@1: one question of every type opened on a phone-sized screen (390 px) in a real browser: the question shows,
+# nothing spills off the side, there is something to answer with, "I'm stuck" opens and every step and written layout
+# fits. It sees what the Robot learner cannot (the screen), and judges no teaching. The job fails when any type has
+# something wrong. No language model is called; nothing is deployed.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 21 * * *" # 02:40 IST, nightly
+  pull_request:
+    paths: [".github/workflows/screen-check.yml", "frontend/e2e/screen-robot.mjs", "frontend/src/year/**", "packages/learning/src/step-help.ts", "packages/learning/src/worked-out.ts"]
+permissions:
+  contents: read
+concurrency:
+  group: screen-check-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  open:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Build the child app and list one question of each type
+        working-directory: frontend
+        run: |
+          DIST=dist-screen node scripts/build-year.mjs --device
+          node --import tsx ../packages/learning/scripts/robot.ts --samples samples.json
+      - name: Open each on a phone-sized screen
+        working-directory: frontend
+        run: |
+          python3 -m http.server 4310 --directory dist-screen >/dev/null 2>&1 &
+          sleep 2
+          node e2e/screen-robot.mjs --base http://127.0.0.1:4310 --samples samples.json --shard ${{ matrix.shard }}/4 --out screen-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: screen-${{ matrix.shard }}
+          path: frontend/screen-${{ matrix.shard }}.json
+          retention-days: 14
+  report:
+    needs: open
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: screen-*
+          path: frontend/parts
+          merge-multiple: true
+      - working-directory: frontend
+        run: |
+          node e2e/screen-robot.mjs --merge parts/screen-*.json --report screen-report.md --gate --floor 1100 || failed=1
+          cat screen-report.md >> "$GITHUB_STEP_SUMMARY"
+          exit ${failed:-0}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: screen-report
+          path: frontend/screen-report.md
+          retention-days: 90
