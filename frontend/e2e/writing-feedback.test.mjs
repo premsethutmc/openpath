@@ -88,8 +88,14 @@ test("a parent agrees once, the free check comes first, feedback is shown, and t
   await task.getByRole("button", { name: "Check my writing" }).click();
   await ai.getByText(/Fix the 2 points marked/).waitFor();
   assert.equal(sent.length, 0);
-  // a clean piece: the parent is asked first, once
   const piece = "This is my family. My mother is tall and my father is kind. I have one brother. We play in the park.";
+  // the full spelling list is fetched on the first check: an unknown word is a tip with the likely word, and a tip
+  // does not hold AI feedback back
+  await task.locator("textarea").fill(`${piece} My frend Kavi plays too.`);
+  await task.getByRole("button", { name: "Check my writing" }).click();
+  await task.getByText("Check the spelling of this word: “frend” (friend?)", { exact: false }).waitFor();
+  await ai.getByText("For a parent: I agree", { exact: false }).waitFor();
+  // a clean piece: the parent is asked first, once
   await task.locator("textarea").fill(piece);
   await task.getByRole("button", { name: "Check my writing" }).click();
   await ai.getByText("For a parent: I agree that this learner's writing may be sent to an AI model", { exact: false }).waitFor();
@@ -140,6 +146,11 @@ test("a parent agrees once, the free check comes first, feedback is shown, and t
   await ai.getByText("This week's 3 pieces of AI feedback are used. More come on Monday.").waitFor();
   assert.equal(sent.length, 3);
   await shot("3-used");
+  // a parent can withdraw the yes: the box comes back, and nothing more is sent
+  await ai.getByRole("button", { name: "Stop AI feedback for this learner" }).click();
+  await ai.getByText("For a parent: I agree", { exact: false }).waitFor();
+  assert.equal(await ai.getByRole("button", { name: "Agree" }).isDisabled(), true);
+  assert.equal(sent.length, 3);
   assert.deepEqual(errors, []);
   await context.close();
 });

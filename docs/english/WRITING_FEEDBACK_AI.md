@@ -36,8 +36,8 @@ Worst case in a week: 3 x the number of learners. The price per piece is not mea
 Sent to the provider: the task's wording (looked up on the server by id), the piece with e-mail addresses and
 phone numbers removed, and the ids of the free check's notes. Never the learner's name, the account or any record.
 Kept: which task, a fingerprint of the text, the week, token counts, and the parent's yes or no. Never the writing
-or the feedback. Deleting a learner deletes these rows. A parent's "no" is not yet offered in the app (the server
-accepts it).
+or the feedback. Deleting a learner deletes these rows. A parent can withdraw the yes at any time ("Stop AI feedback for this
+learner" under the panel); nothing more is sent until they agree again.
 
 ## Switching it on (server settings only, never in Git)
 
@@ -64,3 +64,9 @@ request that reuses the same shared gateway (daily reservations), provider clien
 - Not tried with a real model: the quality of the feedback and the price per piece are unknown until a key is set.
 - The prompt is mine, not educator-reviewed.
 - The browser test is not in CI (it needs the API and a stand-in provider started together).
+
+## Live (19 Nov 2026)
+
+On the family site with an OpenAI key, model gpt-4.1-mini. Six made-up pieces (selftest command, run once from the
+start script): 6 of 6 replies usable; 3,519 tokens in and 634 out in all, about 3.5 paise a piece at list price.
+The prompt is now writing-feedback.v2: an off-topic piece is still judged on form, and a view stated late counts.

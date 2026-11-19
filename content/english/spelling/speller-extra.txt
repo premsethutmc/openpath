@@ -1,0 +1,10 @@
+# Words common in Indian English writing that the SCOWL list lacks. Kept correct by the writing check's spelling list.
+# Also I'm, I'll, I've, I'd (SCOWL has them only with a capital I). Lower case only; names of people and places are never checked (they start with a capital).
+amma appa akka anna thatha paati nani nana dadi dada mausi chacha chachi mama mami bua didi bhaiya
+dosa dosai idli idly sambar rasam vada vadai upma pongal payasam biryani chapati chapatti roti paratha parotta puri poori
+dal dhal paneer ghee lassi jalebi laddu ladoo halwa kheer samosa pakora bajji chaat dhokla poha khichdi kulfi
+kolam rangoli mehendi mehndi saree sari dupatta kurta lungi veshti dhoti salwar churidar bindi
+lakh lakhs crore crores paise paisa rupee rupees
+auto autorickshaw rickshaw tiffin prepone godown
+i'm i'll i've i'd
+idlis dosas carrom stepwell stepwells kanna cafe cafes

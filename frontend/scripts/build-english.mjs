@@ -104,6 +104,10 @@ await writeFile(
   template.replace("<!--styles-->", `<link rel="stylesheet" href="assets/app.css?v=${version}" />`).replace("<!--script-->", `<script type="module" src="assets/app.js?v=${version}"></script>`),
 );
 
+// the writing check's spelling list (logic/writing/dictionary.ts): fetched only when a learner first checks a piece,
+// so it is not in the offline list below; its name carries the build version so a new list is never served stale
+await copyFile(`${root}/../content/english/spelling/speller-words.txt`, `${out}/assets/speller-words.txt`);
+
 await mkdir(`${out}/licences`, { recursive: true });
 const notices = await readdir(licences);
 for (const f of notices) await copyFile(`${licences}/${f}`, `${out}/licences/${f}`);
