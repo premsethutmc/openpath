@@ -15,11 +15,12 @@ import { MemoryRepo } from "../store.ts";
 const S = (text: string, alt: Record<string, string[]> = {}) => ({ text, alt });
 const kinds = (text: string, typed: string) => mark(S(text), typed).words.map((w) => w.kind).join(" ");
 
-test("LW-1 content: three levels of forty sentences, each one markable", () => {
+test("LW-1 content: six levels of at least twenty-four sentences, each one markable", () => {
   assert.deepEqual(dictationProblems(DICTATION), []);
-  for (const l of DICTATION.levels) assert.equal(DICTATION.sentences.filter((s) => s.level === l.id).length, 40);
+  for (const l of DICTATION.levels) assert.ok(DICTATION.sentences.filter((s) => s.level === l.id).length >= 24);
+  assert.equal(DICTATION.levels.length, 6);
   const avg = (lv: number) => { const x = DICTATION.sentences.filter((s) => s.level === lv).map((s) => wordsOf(s.text).length); return x.reduce((a, b) => a + b, 0) / x.length; };
-  assert.ok(avg(1) < avg(2) && avg(2) < avg(3), "sentences get longer by level");
+  assert.ok(avg(1) < avg(2) && avg(2) < avg(3) && avg(3) < avg(5) && avg(4) < avg(5), "sentences get longer by level");
   const bad = buildDictation({ version: 1, status: "", levels: DICTATION.levels, sentences: [["x", 9, "we have 3 cats"]] });
   assert.match(dictationProblems(bad).join("\n"), /unknown level[\s\S]*capital letter[\s\S]*must end[\s\S]*numbers/);
 });
@@ -95,7 +96,11 @@ test("LW-5 a sitting: five sentences, one retry, the sentence shown only afterwa
 });
 
 test("LW-6 the level moves with the last sitting; missed sentences come back; new ones come first", () => {
-  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 2, 2]);
+  assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null), startLevel("older")], [1, 3, 3, 4]);
+  // a sitting stored before the six-level scale is read on today's scale: old 2 is 3, old 3 is 5
+  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "old", level: 2, asked: 5, perfectFirst: 3 }], 1), 3);
+  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "old", level: 3, asked: 5, perfectFirst: 5 }], 1), 6);
+  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "new", level: 3, scale: 2, asked: 5, perfectFirst: 3 }], 1), 3);
   const good = sit(1, [], (t) => t);
   assert.equal(good.done.nextLevel, 2);
   assert.equal(levelFor(DICTATION, good.records, 1), 2);
@@ -103,14 +108,14 @@ test("LW-6 the level moves with the last sitting; missed sentences come back; ne
   assert.equal(levelFor(DICTATION, poor.records, 2), 1);
   const mixed = sit(1, [], (t, i) => (i < 2 ? spoil(t) : t));
   assert.equal(levelFor(DICTATION, mixed.records, 1), 1);
-  assert.equal(levelFor(DICTATION, sit(3, [], (t) => t).records, 3), 3, "no level above the top");
+  assert.equal(levelFor(DICTATION, sit(6, [], (t) => t).records, 6), 6, "no level above the top");
   const next = pick(DICTATION, 1, mixed.records).map((s) => s.id);
   assert.deepEqual(next.filter((id) => mixed.asked.includes(id)).sort(), mixed.asked.slice(0, 2).sort(), "the two missed sentences return");
   assert.equal(next.filter((id) => !mixed.asked.includes(id)).length, 3);
   let h: DictationRecord[] = [];
   const seen = new Set<string>();
   for (let k = 0; k < 8; k++) {
-    const r = sit(1, h, (t) => t);
+    const r = sit(2, h, (t) => t);
     r.asked.forEach((id) => seen.add(id));
     h = r.records;
   }

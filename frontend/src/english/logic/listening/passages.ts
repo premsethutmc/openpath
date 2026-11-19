@@ -8,6 +8,7 @@
  * as wanted, before or between questions. Practice-only: nothing here is evidence for the engine.
  */
 import passagesJson from "../../../../../content/english/listening/passages.json";
+import { SCALE, rescale, startFor } from "../scale.ts";
 
 export const QUESTIONS = 4;
 export const OPTIONS = 3;
@@ -41,10 +42,11 @@ function hash(s: string): number {
 }
 const hashOrder = <T>(xs: readonly T[], key: (x: T) => string) => xs.map((x) => ({ x, k: hash(key(x)), s: key(x) })).sort((a, b) => a.k - b.k || (a.s < b.s ? -1 : 1)).map((e) => e.x);
 
+export const PLACE_SALT = "7";
 /** A question's choices in a fixed order, and which is right. */
-export function choices(q: ListenQuestion): { options: string[]; answer: number } {
+export function choices(q: ListenQuestion, salt = PLACE_SALT): { options: string[]; answer: number } {
   // the salt was chosen so the right answer falls equally often in each place over the whole bank (a test holds it to that)
-  const options = hashOrder([q.right, ...q.wrong], (o) => `38|${q.id}|${o}`);
+  const options = hashOrder([q.right, ...q.wrong], (o) => `${salt}|${q.id}|${o}`);
   return { options, answer: options.indexOf(q.right) };
 }
 /** The passage in sentences, for reading aloud one at a time (long speech is cut off on some phones). */
@@ -80,16 +82,18 @@ export const LISTENING: Listening = passagesJson as unknown as Listening;
   if (problems.length) throw new Error(`listen and answer: ${problems.slice(0, 5).join("; ")}`);
 }
 
-export type ListenRecord = { type: "result"; passage: string; level: number; plays: number; right: number; answers: { question: string; skill: string; choice: number; correct: boolean }[] };
+export type ListenRecord = { type: "result"; passage: string; level: number; scale?: number; plays: number; right: number; answers: { question: string; skill: string; choice: number; correct: boolean }[] };
 
-export const startLevel = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 1 : 2);
+/** Levels recorded before the six-level scale: old 1, 2, 3 are now 2, 4, 5. */
+export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 2, 2: 4, 3: 5 };
+export const startLevel = startFor;
 
 /** The level for the next passage: the last passage's level, moved up after four right and down after none or one. */
 export function levelFor(l: Listening, records: readonly ListenRecord[], start: number): number {
   const ids = l.levels.map((x) => x.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
   const last = records.at(-1);
-  return last ? clamp(last.level + (last.right >= QUESTIONS ? 1 : last.right <= 1 ? -1 : 0)) : clamp(start);
+  return last ? clamp(rescale(last, OLD_LEVELS) + (last.right >= QUESTIONS ? 1 : last.right <= 1 ? -1 : 0)) : clamp(start);
 }
 
 /** The next passage: one not heard yet at the level, else the one heard longest ago. */
@@ -117,7 +121,7 @@ export function listenSummary(records: readonly ListenRecord[]): ListenSummary {
     a.correct ? s.right++ : s.wrong++;
     by.set(a.skill, s);
   }
-  return { passages: records.length, right: all.filter((a) => a.correct).length, asked: all.length, level: records.at(-1)?.level ?? null, weak: [...by].filter(([, s]) => s.wrong > s.right).map(([k]) => SKILL[k] ?? k) };
+  return { passages: records.length, right: all.filter((a) => a.correct).length, asked: all.length, level: records.length ? rescale(records.at(-1)!, OLD_LEVELS) : null, weak: [...by].filter(([, s]) => s.wrong > s.right).map(([k]) => SKILL[k] ?? k) };
 }
 
 export interface ListenView {
@@ -177,7 +181,7 @@ export class ListenSitting {
 
   private result(): ListenRecord {
     const answers = this.item.questions.map((q, i) => ({ question: q.id, skill: q.skill, choice: this.picks[i], correct: this.picks[i] === choices(q).answer }));
-    return { type: "result", passage: this.item.id, level: this.item.level, plays: this.plays, right: answers.filter((a) => a.correct).length, answers };
+    return { type: "result", passage: this.item.id, level: this.item.level, scale: SCALE, plays: this.plays, right: answers.filter((a) => a.correct).length, answers };
   }
 
   take(): ListenRecord[] {

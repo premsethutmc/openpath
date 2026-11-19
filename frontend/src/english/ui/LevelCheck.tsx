@@ -53,7 +53,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
           <b>Reading</b>: read a short text or two and answer four questions on each.
         </li>
         <li>
-          <b>Listening</b>: hear three sentences and write them.
+          <b>Listening</b>: hear four sentences and write them.
         </li>
         <li>
           <b>Spelling</b>: hear six words and spell them.
