@@ -15,6 +15,8 @@
  * usage: node --import tsx scripts/sim-english.mts [--days 30] [--runs 20] [--out sim-english.json] [--md ../docs/english/SIM_REPORT.md] [--strict]
  */
 import { writeFileSync } from "node:fs";
+import {supportingSets} from "../src/english/logic/reading/check-evidence.ts";
+import {sentenceChoices} from "../src/english/logic/reading/sentences.ts";
 import { COURSE, type Level } from "../src/english/logic/reading/course.ts";
 import { ReadingUnitSession, progress as readingProgress, recommend, type ReadingRecord } from "../src/english/logic/reading/session.ts";
 import { DICTATION, DictationSitting, levelFor as dictationLevel, type DictationRecord } from "../src/english/logic/dictation/dictation.ts";
@@ -213,7 +215,8 @@ function run(p: Persona, days: number, seed: number) {
     guard("reading", () => {
       const rec = recommend(COURSE, readingProgress(COURSE, reading), (levels.reading?.start ?? 1) as Level);
       if (!rec) return void stats.reading.stuck++;
-      const s = new ReadingUnitSession(COURSE, rec.unit, "learn", reading);
+      let s = new ReadingUnitSession(COURSE, rec.unit, "learn", reading);
+      let resumed=false;
       let right = 0;
       let asked = 0;
       for (let v = s.snapshot(), g = 0; v.phase !== "result" && v.phase !== "no_fresh_check"; v = s.snapshot(), g++) {
@@ -232,14 +235,21 @@ function run(p: Persona, days: number, seed: number) {
           }
         } else if (v.phase === "check") {
           const q = COURSE.questions.find((x) => x.id === v.question.id)!;
-          const ok = m.right("reading", q.level, q.options.length);
-          saw("reading", q.id, day, ok);
-          asked++;
-          if (ok) right++;
-          s.answerCheck(ok ? q.answer : other(q.options.length, q.answer, m.r));
+          if(!v.draft.locked){
+            const ok = m.right("reading", q.level, q.options.length);
+            saw("reading", q.id, day, ok);asked++;if(ok)right++;
+            s.selectCheckAnswer(ok?q.answer:other(q.options.length,q.answer,m.r));s.lockCheckAnswer();
+          }else{
+            const keys=supportingSets(COURSE,q),ok=m.right("reading",q.level,3);
+            const irrelevant=sentenceChoices(COURSE.passages.get(q.passage)!.text).map((_,i)=>i).find(i=>!keys.some(set=>set.includes(i)));
+            s.selectCheckEvidence(ok?keys[0]:[irrelevant??keys[0][0]]);
+            if(!resumed){reading.push(...s.take());s=new ReadingUnitSession(COURSE,rec.unit,"check_me",reading);resumed=true;const restored=s.snapshot();if(restored.phase!=="check"||!restored.draft.locked||!restored.draft.sentences.length)throw Error("reading: interrupted evidence draft lost");}
+            s.submitCheckEvidence();
+          }
         }
       }
       if (s.snapshot().phase === "no_fresh_check") stats.reading.stuck++;
+      const result=s.snapshot();if(result.phase==='result'&&result.result.review.some(r=>!r.evidenceFinding))throw Error('reading: evidence selection was skipped');
       for (const r of s.take()) reading.push(r);
       note(stats.reading, rec.unit.level, right, asked);
       m.learn("reading", rec.unit.level);
@@ -395,7 +405,7 @@ if (mdPath) writeFileSync(mdPath, md + "\n");
 console.log(md);
 // --strict: fail when a stream threw or had nothing to give (for CI); the rest of the report is for reading
 if (args.includes("--strict")) {
-  const bad = results.flatMap((r) => STREAMS.filter((s) => r.per[s].errors.length || r.per[s].stuck > 0).map((s) => `${r.name} / ${NAMES[s]}: ${r.per[s].errors.join("; ") || `stuck ${r.per[s].stuck}`}`));
+  const bad = results.flatMap((r) => STREAMS.filter((s) => r.per[s].errors.length || r.per[s].stuck > 0 || (s === "reading" && r.per[s].repeats > 0)).map((s) => `${r.name} / ${NAMES[s]}: ${r.per[s].errors.join("; ") || `stuck ${r.per[s].stuck}, needless repeats ${r.per[s].repeats}`}`));
   if (bad.length) {
     console.error(`sim-english: ${bad.length} problems\n${bad.join("\n")}`);
     process.exit(1);

@@ -59,6 +59,8 @@ export interface Question {
   answer: number;
   /** Words copied exactly from the passage that the answer rests on. */
   evidence: string;
+  /** If supplied, the complete curated alternative sets of exact supporting spans. */
+  evidenceAlternatives?: string[][];
   explain: string;
   /** Practice questions only: a nudge towards the place or the thinking, never the answer. */
   hint?: string;
@@ -85,6 +87,8 @@ interface RawQuestion {
   right: string;
   wrong: string[];
   evidence: string;
+  /** If supplied, the complete curated alternative sets of exact supporting spans. */
+  evidenceAlternatives?: string[][];
   explain: string;
   hint?: string;
 }
@@ -118,7 +122,7 @@ export function buildCourse(meta: unknown, levels: unknown[]): Course {
       for (const q of p.questions) {
         if (p.role === "teach") throw new Error(`reading course: teaching text ${p.id} must not carry questions`);
         const id = `${p.id}.${q.skill}`;
-        course.questions.push({ id, passage: p.id, skill: q.skill, level: raw.level, role: p.role, prompt: q.prompt, ...shuffled(id, q.right, q.wrong), evidence: q.evidence, explain: q.explain, ...(q.hint ? { hint: q.hint } : {}) });
+        course.questions.push({ id, passage: p.id, skill: q.skill, level: raw.level, role: p.role, prompt: q.prompt, ...shuffled(id, q.right, q.wrong), evidence: q.evidence, ...(q.evidenceAlternatives ? { evidenceAlternatives: q.evidenceAlternatives } : {}), explain: q.explain, ...(q.hint ? { hint: q.hint } : {}) });
       }
     }
   }

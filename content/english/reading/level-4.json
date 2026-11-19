@@ -312,14 +312,17 @@
         },
         {
           "skill": "main_idea",
-          "prompt": "What does the story show?",
+          "prompt": "Which view of the plot is best supported by how the water problem begins and ends?",
           "right": "Small checks can prevent big problems.",
           "wrong": [
             "Children should not draw water.",
             "Deep wells should be closed."
           ],
           "evidence": "From then on, he checked the rope every Sunday.",
-          "explain": "Nobody noticed the fraying rope and the whole lane went without water; afterwards Karthik checked it every week. The story shows the value of small, regular checks."
+          "explain": "Nobody noticed the fraying rope and the whole lane went without water; afterwards Karthik checked it every week. The story shows the value of small, regular checks.",
+          "evidenceAlternatives": [
+            ["It had frayed slowly over the summer, and nobody had noticed.", "The bucket fell into the well, so the lane had no water that night.", "From then on, he checked the rope every Sunday."]
+          ]
         },
         {
           "skill": "fact_opinion",
@@ -386,14 +389,17 @@
         },
         {
           "skill": "main_idea",
-          "prompt": "What does the story show?",
+          "prompt": "Which view of the plot best connects the team's setback and their later success?",
           "right": "Learning from a loss can lead to a win.",
           "wrong": [
             "Space questions are too hard for quizzes.",
             "Pressing the buzzer first always wins."
           ],
           "evidence": "The following year, they won.",
-          "explain": "They lost, studied the questions they had missed, and won the next year. The story shows that a loss can teach you how to win."
+          "explain": "They lost, studied the questions they had missed, and won the next year. The story shows that a loss can teach you how to win.",
+          "evidenceAlternatives": [
+            ["The other team answered correctly, so the trophy went to them.", "She had written down every question the team had missed, and she suggested that they study those first.", "The following year, they won."]
+          ]
         },
         {
           "skill": "fact_opinion",
@@ -449,7 +455,7 @@
         },
         {
           "skill": "feelings",
-          "prompt": "Which word best describes Joel?",
+          "prompt": "Which view of Joel's character is best supported by what he does with the tourist's money?",
           "right": "honest",
           "wrong": [
             "careless",
@@ -460,14 +466,17 @@
         },
         {
           "skill": "main_idea",
-          "prompt": "What does the story show?",
+          "prompt": "Which view of the plot best explains the short-term cost and later reward of Joel's choice?",
           "right": "Honesty can cost a little and repay a lot.",
           "wrong": [
             "Tourists should carry small notes.",
             "Night markets are too crowded for children."
           ],
           "evidence": "the tourist came back with six friends, and they bought every fish on the table",
-          "explain": "Returning the change cost some sales that night, but the tourist came back with six friends. The story shows honesty costing a little and repaying a lot."
+          "explain": "Returning the change cost some sales that night, but the tourist came back with six friends. The story shows honesty costing a little and repaying a lot.",
+          "evidenceAlternatives": [
+            ["Some customers walked away.", "Joel found the tourist near the ferry and handed her the change.", "The next Saturday, the tourist came back with six friends, and they bought every fish on the table."]
+          ]
         },
         {
           "skill": "fact_opinion",
@@ -530,18 +539,25 @@
             "forgetful"
           ],
           "evidence": "She told the teacher which classmate had painted which cup",
-          "explain": "She shared the praise with each classmate and remembered to thank her grandfather. She gives others their due: she is fair-minded."
+          "explain": "She shared the praise with each classmate and remembered to thank her grandfather. She gives others their due: she is fair-minded.",
+          "evidenceAlternatives": [
+            ["She told the teacher which classmate had painted which cup"],
+            ["Divya did not keep the praise for herself."]
+          ]
         },
         {
           "skill": "main_idea",
-          "prompt": "What does the story show?",
+          "prompt": "Which view of the plot best explains why the plant sale turned around?",
           "right": "A simple idea and teamwork can rescue a plan.",
           "wrong": [
             "Plants sell best in the afternoon.",
             "Grandfathers should keep their promises."
           ],
           "evidence": "Her classmates joined in.",
-          "explain": "The sale was failing until one idea, carried out by the whole class, turned it round. The story shows an idea and teamwork rescuing a plan."
+          "explain": "The sale was failing until one idea, carried out by the whole class, turned it round. The story shows an idea and teamwork rescuing a plan.",
+          "evidenceAlternatives": [
+            ["She had brought her paint box for the art lesson, and she began to paint small flowers on each cup.", "Her classmates joined in.", "The cups looked so cheerful that the parents crowded round, and every seedling was sold before noon."]
+          ]
         },
         {
           "skill": "fact_opinion",

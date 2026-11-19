@@ -85,9 +85,9 @@
         {
           "id": "R2",
           "text": "Uses evidence from the text to support views on character and plot.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "reading",
-          "note": "Every answer is tied to the words of the text that support it; the learner does not yet write the evidence."
+          "note": "Ordinary reading checks require a separately scored sentence selection. Level 4 character and plot views use curated supporting combinations, including Joel’s honesty and how returning the money changes the Night Market story. This covers selecting textual support, not writing a literary essay."
         },
         {
           "id": "R3",

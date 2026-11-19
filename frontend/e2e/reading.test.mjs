@@ -1,3 +1,4 @@
+import {submitAnyReadingEvidence} from './reading-check-helpers.mjs';
 /**
  * End-to-end: the Reading course on an Android-sized phone (Chromium emulating 412×915; not a physical phone).
  * A learner opens Reading, follows a lesson's worked example step by step, practises with a wrong answer and the
@@ -52,6 +53,7 @@ async function lockIn(page, n, right) {
   assert.equal(q.role, "check", "a check question comes from a text kept for checks");
   await option(page, right ? q.right : q.wrong[0]).click();
   await page.getByRole("button", { name: /^Lock in/ }).click();
+  await submitAnyReadingEvidence(page);
   return q;
 }
 
