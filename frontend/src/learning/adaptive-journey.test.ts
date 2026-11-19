@@ -8,6 +8,8 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { quarantined } from "../../../packages/learning/src/question-status";
+import { useTogether } from "../../../packages/learning/src/intervention";
+useTogether(false); // these journeys are about the stop itself; together@1 (walk-throughs before it) is tested in learning/together.test.ts
 import { SCENARIOS, TARGET, type TraceStep } from "./adaptive-journey";
 
 const SUPPORT = "MATH.number.integer-add";

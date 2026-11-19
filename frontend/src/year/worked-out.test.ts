@@ -23,7 +23,7 @@ test("every question of a worked-out type gets the whole working, every calculat
       assert.ok(new RegExp(`(^|\\D)${q.answer}(\\D|$)`).test(h[h.length - 1].shown), `${id}: ${h[h.length - 1].shown}`);
       for (const s of h) {
         lines++;
-        if (askOf(s.shown)) boxes++;
+        if (askOf(s.shown) || s.ask) boxes++; // a step entered as a word or a count (type-it@1) is a box too
         // every "a × b = c", "a ÷ b = c", "a − b = c" and digit sum written in the working is true
         for (const m of s.shown.matchAll(/(\d+(?: [×÷+−] \d+)+) = (\d+)/g)) assert.equal(checkWorkingLines([`${m[1]} = ${m[2]}`])[0].state, "right", `${id}: ${m[0]}`);
         assert.ok(!/undefined|NaN/.test(s.next + s.shown), id);

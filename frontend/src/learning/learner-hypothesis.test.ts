@@ -11,6 +11,8 @@ import { moduleFor, question } from "../../../packages/learning/src/content";
 import { nextActivity } from "../../../packages/learning/src/plan";
 import { topicCheck } from "../year/topic-session";
 import { Journey, SCENARIOS, TARGET, slip } from "./adaptive-journey";
+import { useTogether } from "../../../packages/learning/src/intervention";
+useTogether(false); // these journeys are about the stop itself; together@1 (walk-throughs before it) is tested in learning/together.test.ts
 import { problemOf, show } from "../../../packages/learning/src/families";
 
 const SUPPORT = "MATH.number.integer-add";

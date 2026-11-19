@@ -28,7 +28,7 @@ const skillName = (course: Course, id: SkillId) => course.skills.find((s) => s.i
 const levelName = (course: Course, id: Level) => course.levels.find((l) => l.id === id)!.name;
 
 /** The text, with the part to reread marked when a hint or an explanation points at it. */
-export function PassageView({ passage, highlight }: { passage: Passage; highlight?: string | null }) {
+export function PassageView({ passage, highlight }: { passage: Pick<Passage,"title"|"text">; highlight?: string | null }) {
   return (
     <section className="passage reading-passage" aria-label={`Text: ${passage.title}`}>
       <h2>{passage.title}</h2>
@@ -321,6 +321,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   const [saving, setSaving] = useState(false);
   const unsaved = useRef<ReadingRecord[]>([]);
   const savingLock=useRef(false);
+  const failedSession=useRef<ReadingUnitSession|null>(null);
   const records = learner.readingRecords();
   const p = useMemo(() => progress(COURSE, records), [records.length]);
   /**
@@ -338,9 +339,9 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
         await learner.recordReading([unsaved.current[0]]);
         unsaved.current.shift();
       }
-      setFailed(false);
+      setFailed(false);failedSession.current=null;
     } catch {
-      setFailed(true);
+      setFailed(true);failedSession.current=s;
     }
     savingLock.current=false;setSaving(false);
     setTick((t) => t + 1);
@@ -351,6 +352,7 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   };
   const open = (u: Unit, mode: Mode) => {
     if(savingLock.current)return;
+    if(failedSession.current){const pending=failedSession.current;setSession(pending);void step(pending);return;}
     const s = new ReadingUnitSession(COURSE, u, mode, learner.readingRecords());
     setSession(s);
     void step(s);
@@ -360,7 +362,8 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
   if (!session)
     return (
       <>
-        <div className="page"><button className="secondary" onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" onClick={()=>setInference(true)}>Connect the clues</button></div>
+        <div className="page">{!failedSession.current&&<a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a>}<button className="secondary" disabled={!!failedSession.current} onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" disabled={!!failedSession.current} onClick={()=>setInference(true)}>Connect the clues</button></div>
+        {failedSession.current&&<p role="status">Finish saving your pending reading step before starting another activity. Reopen its check to retry; your unsaved selection is still held here.</p>}
         {COURSE.levels.flatMap(l=>COURSE.skills.map(skill=>({level:l.id,skill:skill.id}))).filter(u=>pendingCheck(records,u)).map(u=><div className="page" key={unitKey(u)}><button className="secondary" onClick={()=>open(u,'check_me')}>Continue saved check: {skillName(COURSE,u.skill)} · {levelName(COURSE,u.level)}</button></div>)}
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />
         <div className="page reading-note">
