@@ -7,7 +7,7 @@
  * Kept to words that are terms. Everyday words that are also terms ("mean", "mode", "power", "limit", "area of") are
  * left out: a link on "what does this mean" would be noise.
  */
-const T: [string, string][] = [
+export const TERMS: readonly [string, string][] = [
   ["sin|cos|tan|sine|cosine|tangent", "MATH.trigonometry.ratios"],
   ["radians?", "MATH.trigonometry.radians"],
   ["prime numbers?|primes?|composite numbers?", "MATH.number.primes"],
@@ -44,8 +44,8 @@ const T: [string, string][] = [
   ["geometric (?:sequence|progression)s?", "MATH.algebra.geometric-sequences"],
   ["complex numbers?", "MATH.number.complex"],
 ];
-export const TERM_SKILLS: readonly string[] = [...new Set(T.map(([, c]) => c))];
-const FIND = new RegExp(`(?<![A-Za-z])(?:${T.map(([w]) => `(${w})`).join("|")})(?![A-Za-z])`, "gi");
+export const TERM_SKILLS: readonly string[] = [...new Set(TERMS.map(([, c]) => c))];
+const FIND = new RegExp(`(?<![A-Za-z])(?:${TERMS.map(([w]) => `(${w})`).join("|")})(?![A-Za-z])`, "gi");
 
 export interface Piece { text: string; /** the earlier skill this word belongs to */ skill?: string }
 /**
@@ -56,7 +56,7 @@ export function linkTerms(text: string, allow: (skill: string) => boolean): Piec
   const out: Piece[] = [], used = new Set<string>();
   let at = 0;
   for (const m of text.matchAll(FIND)) {
-    const skill = T[m.slice(1).findIndex((g) => g !== undefined)][1];
+    const skill = TERMS[m.slice(1).findIndex((g) => g !== undefined)][1];
     if (used.has(skill) || !allow(skill)) continue;
     used.add(skill);
     if (m.index! > at) out.push({ text: text.slice(at, m.index) });

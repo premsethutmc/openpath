@@ -522,3 +522,10 @@ three real faults, fixed as `fit@1`: long lines of working are set smaller, a wi
 tap button never shrinks below its words.
 `thin@1`: the robot learner's report also counts help that is one step with no working behind it, and help whose cues
 are mostly a single word (report only until the first full count is in).
+
+`age@1` (packages/learning/src/age.ts): whether a help is written for its class, as rules the robot learner checks on
+every question of Classes 1 to 5: sentence length, long words that are not school maths words of that class, a maths
+term before the class that teaches it, negative numbers / decimals / letters before the class that meets them, numbers
+beyond the class's range, and too many steps. What the question itself uses is never held against the help. The limits
+are a stated judgement in one place (limitsFor). First count: docs/product/AGE_REPORT.md. Each count is a ceiling in the
+robot's gate.
