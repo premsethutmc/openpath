@@ -26,7 +26,7 @@ before(async () => {
 });
 after(() => browser?.close());
 
-test("First words: ten steps by tapping only, a wrong tap switched off, the word shown only after it is found", async () => {
+test("First words: eleven steps by tapping only, a wrong tap switched off, the word shown only after it is found", async () => {
   const context = await browser.newContext(ANDROID);
   const page = await context.newPage();
   const errors = [];
@@ -50,10 +50,10 @@ test("First words: ten steps by tapping only, a wrong tap switched off, the word
   await page.getByRole("button", { name: "Try First words" }).click();
   const kinds = [];
   const shots = new Set();
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 11; i++) {
     const main = page.locator('main.first[data-phase="ask"]');
     await main.waitFor();
-    await page.getByLabel(`Step ${i} of 10`).waitFor();
+    await page.getByLabel(`Step ${i} of 11`).waitFor();
     const kind = await main.getAttribute("data-kind");
     const key = await main.getAttribute("data-key");
     kinds.push(kind);
@@ -90,6 +90,13 @@ test("First words: ten steps by tapping only, a wrong tap switched off, the word
       const colour = FIRST.colours.find((c) => key === `the ${c.id} one`);
       await page.locator(".first-option", { hasText: colour.picture }).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
+    } else if (kind === "two") {
+      // two taps in the order said; the second one first is a miss and switches nothing off
+      const [a, b] = key.split(" then ").map((word) => FIRST.words.find((x) => x.word === word).picture);
+      await page.locator(".first-option", { hasText: a }).click();
+      await page.locator(".first-option.picked").waitFor();
+      await page.locator(".first-option", { hasText: b }).click();
+      await page.locator('main.first[data-phase="right"]').waitFor();
     } else {
       const rel = FIRST.place.relations.find((r) => key.includes(` ${r.say} the `));
       assert.equal(await page.locator(".first-zone").count(), 3);
@@ -100,14 +107,14 @@ test("First words: ten steps by tapping only, a wrong tap switched off, the word
     await fits();
     await page.getByRole("button", { name: "Next", exact: true }).click();
   }
-  assert.deepEqual(kinds, ["hear", "hear", "hear", "hear", "count", "build", "build", "colour", "build", "place"]);
-  await page.getByRole("heading", { name: "9 of 10 on the first tap" }).waitFor();
+  assert.deepEqual(kinds, ["hear", "hear", "hear", "hear", "count", "build", "build", "colour", "build", "place", "two"]);
+  await page.getByRole("heading", { name: "10 of 11 on the first tap" }).waitFor();
   await fits();
   await shot(page, "9-done");
   await page.getByRole("button", { name: "Done", exact: true }).click();
-  await page.getByText("4 of 66 words met, 3 found on the first tap").waitFor();
+  await page.getByText("4 of 82 words met, 3 found on the first tap").waitFor();
   await page.reload();
-  await page.getByText("4 of 66 words met, 3 found on the first tap").waitFor();
+  await page.getByText("4 of 82 words met, 3 found on the first tap").waitFor();
   await page.getByRole("button", { name: "More first words" }).waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);

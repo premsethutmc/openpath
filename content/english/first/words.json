@@ -1,6 +1,6 @@
 {
   "id": "first-words",
-  "version": 1,
+  "version": 2,
   "status": "candidate: words, sentences and levels chosen by OpenPath (AI-prepared) and checked by rule; the pictures are standard emoji used as stand-ins until artwork is supplied; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: hearing a word and finding its picture, building a word from letters, and doing what a short sentence says; it changes no capability estimate",
@@ -97,6 +97,66 @@
       "group": "animals"
     },
     {
+      "id": "run",
+      "word": "run",
+      "picture": "🏃",
+      "group": "actions"
+    },
+    {
+      "id": "swim",
+      "word": "swim",
+      "picture": "🏊",
+      "group": "actions"
+    },
+    {
+      "id": "sleep",
+      "word": "sleep",
+      "picture": "😴",
+      "group": "actions"
+    },
+    {
+      "id": "read",
+      "word": "read",
+      "picture": "📖",
+      "group": "actions"
+    },
+    {
+      "id": "sing",
+      "word": "sing",
+      "picture": "🎤",
+      "group": "actions"
+    },
+    {
+      "id": "dance",
+      "word": "dance",
+      "picture": "💃",
+      "group": "actions"
+    },
+    {
+      "id": "write",
+      "word": "write",
+      "picture": "✍️",
+      "group": "actions"
+    },
+    {
+      "id": "walk",
+      "word": "walk",
+      "picture": "🚶",
+      "group": "actions"
+    },
+    {
+      "id": "cry",
+      "word": "cry",
+      "picture": "😢",
+      "group": "actions"
+    },
+    {
+      "id": "laugh",
+      "word": "laugh",
+      "picture": "😂",
+      "group": "actions"
+    },
+    {
       "id": "apple",
       "word": "apple",
       "picture": "🍎",
@@ -179,6 +239,42 @@
       "word": "tea",
       "picture": "🍵",
       "group": "food"
+    },
+    {
+      "id": "hot",
+      "word": "hot",
+      "picture": "🥵",
+      "group": "describing"
+    },
+    {
+      "id": "cold",
+      "word": "cold",
+      "picture": "🥶",
+      "group": "describing"
+    },
+    {
+      "id": "happy",
+      "word": "happy",
+      "picture": "😀",
+      "group": "describing"
+    },
+    {
+      "id": "sad",
+      "word": "sad",
+      "picture": "🙁",
+      "group": "describing"
+    },
+    {
+      "id": "big",
+      "word": "big",
+      "picture": "🐘",
+      "group": "describing"
+    },
+    {
+      "id": "small",
+      "word": "small",
+      "picture": "🐭",
+      "group": "describing"
     },
     {
       "id": "ball",

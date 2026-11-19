@@ -4,7 +4,7 @@
  * by the device's own voice and is never on screen while the learner is writing. Practice-only.
  */
 import { useRef, useState } from "react";
-import { DICTATION, DictationSitting, fixes, levelFor, startLevel, dictationSummary, wordsOf, type Dictation, type DictationRecord, type DictationView, type Mark } from "../logic/dictation/dictation.ts";
+import { DICTATION, DictationSitting, fixes, levelFor, passageText, pickPassage, startLevel, dictationSummary, wordsOf, type Dictation, type DictationRecord, type DictationView, type Mark } from "../logic/dictation/dictation.ts";
 import type { Learner } from "../logic/learner.ts";
 import { syncAutoLists } from "../logic/streams/joined.ts";
 import { NoteBox } from "./Note.tsx";
@@ -176,7 +176,7 @@ export function ListenWriteView({ content, view, heard, onPlay, onCheck, onNext,
 /** For the slow reading: a pause after every word. */
 export const slowText = (sentence: string) => `${wordsOf(sentence).join(", ")}.`;
 
-export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: Learner; voice: SpeechSynthesisVoice | null; onLeave: () => void; onChanged: () => void }) {
+export function ListenWrite({ learner, voice, passage, onLeave, onChanged }: { learner: Learner; voice: SpeechSynthesisVoice | null; passage?: "unseen" | "seen"; onLeave: () => void; onChanged: () => void }) {
   const [sitting, setSitting] = useState<DictationSitting | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -206,7 +206,8 @@ export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: L
     void playWord(slow ? slowText(text) : text, voice).then(setHeard);
   };
   const begin = () => {
-    const s = new DictationSitting(DICTATION, levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band))), learner.dictationRecords());
+    const at = levelFor(DICTATION, learner.dictationRecords(), learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band));
+    const s = new DictationSitting(DICTATION, at, learner.dictationRecords(), passage ? (pickPassage(DICTATION, at, learner.dictationRecords()) ?? undefined) : undefined);
     plays.current = 0;
     setSitting(s);
     play(s, false); // started by the tap on Start, so the browser allows it
@@ -219,6 +220,30 @@ export function ListenWrite({ learner, voice, onLeave, onChanged }: { learner: L
   if (!sitting) {
     const level = levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band)));
     const l = DICTATION.levels.find((x) => x.id === level)!;
+    const next = passage ? pickPassage(DICTATION, level, learner.dictationRecords()) : null;
+    if (next)
+      return (
+        <main className="page vocab dict" data-phase="passage-intro" data-passage={next.id} aria-labelledby="dict-passage-title">
+          <button type="button" className="link" onClick={leave}>
+            ← Back
+          </button>
+          <p className="eyebrow">Listen and write</p>
+          <h1 id="dict-passage-title" className="hero">
+            A short passage
+          </h1>
+          <p className="sub">{next.sentences.length} sentences that belong together, read to you one at a time, in order. Write each as you hear it.</p>
+          {passage === "seen" && (
+            <section className="tile" aria-label="Read it first">
+              <b>Read it first: {next.title}</b>
+              <p data-passage-text>{passageText(DICTATION, next)}</p>
+              <p className="small">It will be hidden when you start.</p>
+            </section>
+          )}
+          <button type="button" className="primary" onClick={begin}>
+            Start
+          </button>
+        </main>
+      );
     return <ListenWriteIntro level={level} levelLabel={l.name} about={l.about} done={dictationSummary(learner.dictationRecords())} canSpeak={speechPossible()} onStart={begin} onBack={leave} />;
   }
   return (

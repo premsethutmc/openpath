@@ -118,6 +118,7 @@ export function App() {
   const [inVocab, setInVocab] = useState(false);
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
+  const [dictPassage, setDictPassage] = useState<"unseen" | "seen" | null>(null);
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
@@ -527,6 +528,7 @@ export function App() {
             setSyllabusClass(cls);
             // writing is practised in the essay studio, a separate part of the app
             if (where === "writing") return void location.assign("?experience=essay-live");
+            if (where === "passage" || where === "passage_seen") return (setInSyllabus(false), setDictPassage(where === "passage" ? "unseen" : "seen"), setInListenWrite(true), scrollTo(0, 0));
             if (where === "first") return (setInSyllabus(false), setInFirst(true), scrollTo(0, 0));
             if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
             setInSyllabus(false);
@@ -585,9 +587,11 @@ export function App() {
         <ListenWrite
           learner={learner}
           voice={voice}
+          passage={dictPassage ?? undefined}
           onChanged={changed}
           onLeave={() => {
             setInListenWrite(false);
+            if (dictPassage) (setDictPassage(null), setInSyllabus(true));
             changed();
           }}
         />

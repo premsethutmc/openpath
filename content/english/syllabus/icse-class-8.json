@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-8",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 8,
   "subject": "English",
@@ -92,9 +92,12 @@
         {
           "id": "R3",
           "text": "Explains how dialogue or incidents move the action on or show character.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "Reading a person from what they say and do is taught; how an incident drives a plot is not yet."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "dialogue_character"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
         },
         {
           "id": "R4",

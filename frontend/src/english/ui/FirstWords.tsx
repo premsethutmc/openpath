@@ -98,7 +98,7 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
       {view.options.length > 0 && !right && (
         <p className="first-options" role="group" aria-label="Pictures">
           {view.options.map((o, i) => (
-            <button key={i} type="button" className="first-option" disabled={o.off} aria-label={`Picture ${i + 1}`} onClick={() => onTap(i)}>
+            <button key={i} type="button" className={o.picked ? "first-option picked" : "first-option"} disabled={o.off} aria-pressed={!!o.picked} aria-label={`Picture ${i + 1}`} onClick={() => onTap(i)}>
               {o.picture}
             </button>
           ))}

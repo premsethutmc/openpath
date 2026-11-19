@@ -132,7 +132,7 @@ test("GU-7 the ICSE Class 5 syllabus: every line placed, every pointer leads to 
   assert.deepEqual(syllabusProblems(s), []);
   assert.deepEqual([s.board, s.class, s.source.official], ["CISCE (ICSE)", 5, false]);
   assert.match(s.source.note, /^UNOFFICIAL SOURCE/);
-  assert.deepEqual(coverage(s), { covered: 20, partly: 5, guided: 8, not: 0, total: 33 });
+  assert.deepEqual(coverage(s), { covered: 21, partly: 4, guided: 8, not: 0, total: 33 });
   assert.deepEqual(s.strands.map((x) => x.outcomes.length), [9, 13, 10, 1]);
   for (const o of s.strands.flatMap((x) => x.outcomes)) {
     assert.ok(o.text.split(/\s+/).length <= 22, `${o.id}: a short line in our own words`);
@@ -162,13 +162,13 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 
 test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
   assert.deepEqual(SYLLABUSES.map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
-  assert.deepEqual(coverage(syllabusFor(1)), { covered: 15, partly: 9, guided: 14, not: 0, total: 38 });
+  assert.deepEqual(coverage(syllabusFor(1)), { covered: 16, partly: 8, guided: 14, not: 0, total: 38 });
   assert.deepEqual(coverage(syllabusFor(2)), { covered: 10, partly: 5, guided: 10, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(8)), { covered: 6, partly: 17, guided: 14, not: 0, total: 37 });
-  assert.deepEqual(coverage(syllabusFor(3)), { covered: 11, partly: 5, guided: 8, not: 0, total: 24 });
-  assert.deepEqual(coverage(syllabusFor(7)), { covered: 9, partly: 9, guided: 7, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(4)), { covered: 11, partly: 6, guided: 8, not: 0, total: 25 });
-  assert.deepEqual(coverage(syllabusFor(6)), { covered: 19, partly: 14, guided: 13, not: 0, total: 46 });
+  assert.deepEqual(coverage(syllabusFor(8)), { covered: 7, partly: 16, guided: 14, not: 0, total: 37 });
+  assert.deepEqual(coverage(syllabusFor(3)), { covered: 12, partly: 4, guided: 8, not: 0, total: 24 });
+  assert.deepEqual(coverage(syllabusFor(7)), { covered: 11, partly: 7, guided: 7, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(4)), { covered: 12, partly: 5, guided: 8, not: 0, total: 25 });
+  assert.deepEqual(coverage(syllabusFor(6)), { covered: 20, partly: 13, guided: 13, not: 0, total: 46 });
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);

@@ -1,6 +1,6 @@
 {
   "id": "icse-cisce-english-class-6",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "board": "CISCE (ICSE)",
   "class": 6,
   "subject": "English",
@@ -128,9 +128,12 @@
         {
           "id": "R3",
           "text": "Uses the shape of stories and poems to predict what comes next.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "Reading covers the order of events in stories; there are no poems and no prediction questions."
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prediction"
+          ],
+          "note": "Practised on short extracts of two or three sentences, not on whole texts."
         },
         {
           "id": "R4",
