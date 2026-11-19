@@ -15,8 +15,9 @@ import { MemoryRepo } from "../store.ts";
 import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
-import { LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
-import { streamRows } from "./streams.ts";
+import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
+import { NAMING_TOPIC, streamRows } from "./streams.ts";
+import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
 
 const keyFor = (prompt: string, level: number, title: string) => COURSE.questions.find((q) => q.prompt === prompt && q.level === level && q.role === "practice" && COURSE.passages.get(q.passage)!.title === title)!;
 /** Sit the reading part as a learner who can read up to a level (answers right there, wrong above). */
@@ -99,9 +100,9 @@ test("LC-3 the words part is the word check, cut to four rounds", () => {
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {
   const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
-  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null }, "a level stored on the old three-level scale is read on today's");
+  assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null, grammar: null }, "a level stored on the old three-level scale is read on today's");
   const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
-  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 4 }, listening: { level: 3 }, spelling: { level: 4 } });
+  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 4 }, listening: { level: 3 }, spelling: { level: 4 }, grammar: null });
 });
 
 test("LC-5 the levels steer the streams: reading begins at its start level, with the levels below still open", () => {
@@ -156,7 +157,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
 });
 
 test("LC-7 spelling: six Bee words, up after a right one, down after a wrong one; the level is the highest spelt right", async () => {
-  assert.deepEqual(PARTS, ["words", "reading", "listening", "spelling"]);
+  assert.deepEqual(PARTS, ["words", "reading", "listening", "spelling", "grammar"]);
   assert.deepEqual([spellingStart("early"), spellingStart("school"), spellingStart("older")], [1, 2, 3]);
   const c = loadContent({ mode: "development" });
   const l = await Learner.create(c, new MemoryRepo(), "Speller", "guardian", testClock(), "p-spell");
@@ -193,4 +194,46 @@ test("LC-8 listening placement passes a sentence on its words: no capital or end
   const t = new ListeningPlacement(DICTATION, 3, []);
   while (!t.finished) t.check(t.spoken()!.split(" ").slice(0, 2).join(" "), 1);
   assert.equal(t.result().level, 1, "half a sentence does not pass");
+});
+
+/** Sit the grammar part as a learner who can name words or not, and can do sentences up to a level. */
+function grammarCheck(names: boolean, can: number) {
+  const s = new GrammarPlacement(GRAMMAR, MIDDLE.grammar);
+  const kinds: string[] = [];
+  for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot()) {
+    assert.ok(!v.words.join(" ").includes("["), "the wrong word is not marked on screen");
+    const it = GRAMMAR.items.find((x) => x.id === v.id)!;
+    kinds.push(v.task!.kind === "spot" ? v.task!.ask : "fix");
+    const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+    const rightAt = it.kind === "spot" ? v.words.findIndex((w) => it.right!.includes(bare(w))) : it.sentence.split(" ").findIndex((w) => w.includes("["));
+    const ok = v.index < 2 ? names : it.level <= can;
+    s.answer(ok ? rightAt : it.kind === "spot" ? v.words.findIndex((w) => !it.right!.includes(bare(w))) : (rightAt + 1) % v.words.length);
+  }
+  return { ...s.result(), kinds };
+}
+
+test("LC-9 grammar: a noun and a verb for everyone, then four on a staircase from the middle; every level within reach", () => {
+  const all = grammarCheck(true, 6);
+  assert.deepEqual(all.kinds.slice(0, 2), ["noun", "verb"]);
+  assert.equal(all.kinds.length, GRAMMAR_STEPS);
+  assert.deepEqual([all.basics, all.level, all.scale], [{ right: 2, asked: 2 }, 6, 2]);
+  assert.deepEqual([6, 5, 4, 3, 2, 1, 0].map((can) => grammarCheck(true, can).level), [6, 5, 4, 3, 2, 1, 1]);
+  // someone who does sentences well but cannot name a noun or a verb: the level stands, and the gap is recorded
+  const gap = grammarCheck(false, 5);
+  assert.deepEqual([gap.basics, gap.level], [{ right: 0, asked: 2 }, 5]);
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...gap }]).grammar, { level: 5, basics: false });
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...all }]).grammar, { level: 6, basics: true });
+});
+
+test("LC-10 after the check, the grammar row starts at the level found, and names naming words first when that was missed", async () => {
+  const c = loadContent({ mode: "development" });
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "Grammar", "guardian", clock, "p-grammar");
+  const row = () => streamRows(l, clock()).find((r) => r.id === "grammar")!;
+  await l.recordLevelCheck([{ type: "start" }, { type: "grammar", ...grammarCheck(false, 5) }, { type: "done" }]);
+  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 6", "Start with naming words: noun and verb", "naming"]);
+  const s = new GrammarSitting(GRAMMAR, 5, [], [NAMING_TOPIC]);
+  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) (s.spot(0), s.next());
+  await l.recordGrammar(s.take());
+  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 6", "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
 });

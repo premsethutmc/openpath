@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkFix, checkSpot, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -69,7 +69,9 @@ function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i:
     asked.push(it);
     assert.ok(!(v.fix?.words.join(" ") ?? "").includes("["), "the wrong word is not marked on screen");
     const wrong = miss(it, i);
-    if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
+    const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+    if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => it.right!.includes(bare(w)) !== wrong));
+    else if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
     else s.build(wrong ? [...it.sentence.split(" ")].reverse() : it.sentence.split(" "));
     const f = s.snapshot().feedback!;
     assert.equal(f.correct, !wrong);
@@ -170,4 +172,19 @@ test("GU-9 Classes 4, 5 and 6 are held; each is sound, unofficial-source labelle
     }
   }
   assert.equal(syllabusFor(99).class, 4, "an unknown class falls back to the first held");
+});
+
+test("GU-9 naming words: a word of the kind asked is right, any other word is not, and the basics come first", () => {
+  const spots = GRAMMAR.items.filter((it) => it.kind === "spot");
+  assert.ok(spots.length >= 24);
+  for (const it of spots) {
+    const words = spotWords(it);
+    const right = words.map((_, i) => checkSpot(it, i));
+    assert.equal(right.filter(Boolean).length, it.right!.length, it.id);
+    assert.ok(right.some((r) => !r), `${it.id}: some word is not of the kind`);
+    assert.equal(checkSpot(it, 99), false);
+  }
+  assert.deepEqual([...new Set(spots.filter((it) => it.level === 1).map((it) => it.ask))].sort(), ["noun", "verb"]);
+  const v = new GrammarSitting(GRAMMAR, 1, [], ["parts_of_speech"]).snapshot();
+  assert.ok(v.spot && !JSON.stringify(v).includes('"right"'), "the screen holds the words and the kind asked for, never the answer");
 });
