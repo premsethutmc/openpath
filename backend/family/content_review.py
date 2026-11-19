@@ -35,7 +35,7 @@ from .views import AccountBase
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
 NEXT = {'draft': {'submit'}, 'changes_requested': {'submit'}, 'submitted': {'approve', 'request_changes', 'reject'}, 'approved': {'release'}, 'rejected': set(), 'released': set()}
 STATE_AFTER = {'submit': 'submitted', 'approve': 'approved', 'request_changes': 'changes_requested', 'reject': 'rejected', 'release': 'released'}
-TEACHING = ('recipe', 'card')
+TEACHING = ('recipe', 'card', 'help')
 ROLE_FOR = {'submit': {'educator', 'release_manager'}, 'approve': {'educator'}, 'request_changes': {'educator'}, 'reject': {'educator'}, 'release': {'release_manager'}}
 
 
@@ -127,7 +127,7 @@ def registry(show_reviewers=True):
 def teaching():
     """Every story lesson and help card with its state on its current version, and its history (all versions)."""
     by_item = {}
-    for d in ContentDecision.objects.filter(item__regex=r'^(recipe|card):'):
+    for d in ContentDecision.objects.filter(item__regex=r'^(recipe|card|help):'):
         by_item.setdefault(d.item, []).append(d)
     out = []
     for item, meta in items().items():

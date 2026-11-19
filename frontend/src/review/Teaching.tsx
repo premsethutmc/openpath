@@ -6,17 +6,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Api } from "../english/logic/account";
 import { recipeFor, stepsOf } from "../../../packages/learning/src/recipe";
-import { cardFor } from "../../../packages/learning/src/step-help";
+import { cardFor, helpShown } from "../../../packages/learning/src/step-help";
+import { question } from "../../../packages/learning/src/content";
 import { RecipeLesson } from "../year/Recipe";
+import { Board } from "../year/Board";
 
 export interface TeachingItem {
-  item: string; kind: "recipe" | "card"; competency: string; title: string; source: "written" | "rule"; from: string | null; classes: string[];
+  item: string; kind: "recipe" | "card" | "help"; competency: string; title: string; source: "written" | "rule"; from: string | null; classes: string[];
   contentHash: string; state: "submitted" | "approved" | "changes_requested" | "rejected"; changed: boolean;
   history: { state: string; by: string; at: string; note: string; current: boolean }[];
 }
 const WORD: Record<string, string> = { submitted: "To review", approved: "Approved", changes_requested: "Changes asked", rejected: "Rejected" };
-const FROM: Record<string, string> = { method: "its “How to do it” section", lesson: "the first teaching words of its lesson", chapter: "the opening words of its chapter" };
-export const sourceOf = (t: Pick<TeachingItem, "kind" | "source" | "from">) => (t.source === "written" ? "Written by hand for this skill" : `Made by rule from the skill’s own lesson (${FROM[t.from ?? ""] ?? "its lesson"})`);
+const KIND: Record<string, string> = { recipe: "story lesson", card: "help card", help: "step help" };
+const FROM: Record<string, string> = { steps: "the question type’s own solving steps",  method: "its “How to do it” section", lesson: "the first teaching words of its lesson", chapter: "the opening words of its chapter" };
+export const sourceOf = (t: Pick<TeachingItem, "kind" | "source" | "from">) => (t.kind === "help" ? (t.source === "written" ? "The school method, written out for this type and checked on every question" : "Made by rule from the question type’s own solving steps") : t.source === "written" ? "Written by hand for this skill" : `Made by rule from the skill’s own lesson (${FROM[t.from ?? ""] ?? "its lesson"})`);
 /** The classes on offer, youngest first by number, with Class 5 chosen first. */
 export const classesOf = (items: TeachingItem[]) => [...new Set(items.flatMap((t) => t.classes.map((c) => c.split(" ")[1])))].sort((a, b) => Number(a) - Number(b));
 export const inClass = (t: TeachingItem, cls: string) => cls === "all" || t.classes.some((c) => c.split(" ")[1] === cls);
@@ -24,7 +27,7 @@ export const inClass = (t: TeachingItem, cls: string) => cls === "all" || t.clas
 export function Teaching({ api, onError }: { api: Api; onError: (e: string) => void }) {
   const [items, setItems] = useState<TeachingItem[] | null>(null);
   const [cls, setCls] = useState("5");
-  const [kind, setKind] = useState<"all" | "recipe" | "card">("all");
+  const [kind, setKind] = useState<"all" | "recipe" | "card" | "help">("all");
   const [state, setState] = useState("submitted");
   const [open, setOpen] = useState<string | null>(null);
   const [canDecide, setCanDecide] = useState(false);
@@ -54,10 +57,10 @@ export function Teaching({ api, onError }: { api: Api; onError: (e: string) => v
   return (
     <div className="stack" data-testid="teaching">
       <h1>Teaching to approve</h1>
-      <p className="small muted">Story lessons and help cards, as a child sees them. Nothing here is hidden from learners by a decision yet: this records your view of each one, for the version shown.</p>
+      <p className="small muted">Story lessons, help cards and the step help behind “I’m stuck”, as a child sees them. Nothing here is hidden from learners by a decision yet: this records your view of each one, for the version shown.</p>
       <div className="actions">
         <label className="field">Class<select aria-label="Class" value={cls} onChange={(x) => setCls(x.target.value)}>{classesOf(items).map((c) => <option key={c} value={c}>Class {c}</option>)}<option value="all">All classes</option></select></label>
-        <label className="field">Kind<select aria-label="Kind" value={kind} onChange={(x) => setKind(x.target.value as typeof kind)}><option value="all">Lessons and cards</option><option value="recipe">Story lessons</option><option value="card">Help cards</option></select></label>
+        <label className="field">Kind<select aria-label="Kind" value={kind} onChange={(x) => setKind(x.target.value as typeof kind)}><option value="all">Everything</option><option value="recipe">Story lessons</option><option value="card">Help cards</option><option value="help">Step help (“I’m stuck”)</option></select></label>
       </div>
       <nav className="review-nav" aria-label="State">
         {(["submitted", "approved", "changes_requested", "rejected"] as const).map((s) => <button key={s} className={state === s ? "primary" : "secondary"} onClick={() => setState(s)}>{WORD[s]} ({count(s)})</button>)}
@@ -65,7 +68,7 @@ export function Teaching({ api, onError }: { api: Api; onError: (e: string) => v
       </nav>
       {shown.length ? (
         <ul className="plain teaching-list">{shown.map((t) => (
-          <li key={t.item}><button className="link" onClick={() => setOpen(t.item)}>{t.title}</button> <span className="small muted">· {t.kind === "recipe" ? "story lesson" : "help card"} · {t.source === "written" ? "written" : "by rule"}{state === "all" ? ` · ${WORD[t.state]}` : ""}{t.changed ? " · changed since you last decided" : ""}</span></li>
+          <li key={t.item}><button className="link" onClick={() => setOpen(t.item)}>{t.title}</button> <span className="small muted">· {KIND[t.kind]} · {t.source === "written" ? "written" : "by rule"}{state === "all" ? ` · ${WORD[t.state]}` : ""}{t.changed ? " · changed since you last decided" : ""}</span></li>
         ))}</ul>
       ) : <p className="muted">Nothing here.</p>}
     </div>
@@ -81,8 +84,8 @@ function Detail({ t, canDecide, back, decide }: { t: TeachingItem; canDecide: bo
     <div className="stack" data-testid="teaching-item">
       <p><button className="link" onClick={back}>← Back to the list</button></p>
       <h1>{t.title}</h1>
-      <p className="small muted">{t.kind === "recipe" ? "Story lesson" : "Help card"} · {t.classes.join(", ")} · {sourceOf(t)} · <b data-testid="state">{WORD[t.state]}</b>{t.changed ? " (changed since you last decided)" : ""}</p>
-      <section className="panel" aria-label="Preview">{t.kind === "recipe" ? <RecipePreview competency={t.competency} play={play} setPlay={setPlay} /> : <CardPreview competency={t.competency} />}</section>
+      <p className="small muted">{KIND[t.kind].charAt(0).toUpperCase() + KIND[t.kind].slice(1)} · {t.classes.join(", ")} · {sourceOf(t)} · <b data-testid="state">{WORD[t.state]}</b>{t.changed ? " (changed since you last decided)" : ""}</p>
+      <section className="panel" aria-label="Preview">{t.kind === "recipe" ? <RecipePreview competency={t.competency} play={play} setPlay={setPlay} /> : t.kind === "help" ? <HelpPreview family={t.item.slice(5)} /> : <CardPreview competency={t.competency} />}</section>
       {canDecide ? (
         <section className="panel decision" aria-label="Decision">
           <label className="field">What is wrong (needed to reject or ask for changes)<textarea aria-label="Review note" value={note} onChange={(x) => setNote(x.target.value)} /></label>
@@ -125,6 +128,38 @@ function CardPreview({ competency }: { competency: string }) {
       <h3>{c.name}</h3>
       <Paras text={c.rule} />
       {c.example ? <><h3>Example</h3><p>{c.example.prompt}</p><ol>{c.example.steps.map((s, i) => <li key={i}>{s}</li>)}</ol><p>Answer: <b>{c.example.answer}</b></p></> : <p className="small muted">No worked example on this card.</p>}
+    </div>
+  );
+}
+
+/** help-review@1: the step help of a question type, for the three questions its version stands on: every way, every step. */
+function HelpPreview({ family }: { family: string }) {
+  const shown = useMemo(() => helpShown(family), [family]);
+  if (!shown.length) return <p className="error">This step help is not in this build of the app.</p>;
+  return (
+    <div data-testid="help-preview">
+      <p className="small muted">What a child sees after “I’m stuck”, one step at a time, for three questions of this type. Approving covers the type, in this version.</p>
+      {shown.map((q) => {
+        const asked = question(q.id);
+        return (
+          <section key={q.id} className="help-sample">
+            <h3>{asked.prompt}</h3>
+            <p className="small muted">Answer: <b>{asked.answer}</b></p>
+            {q.ways.map((w, k) => (
+              <div key={w.name}>
+                {q.ways.length > 1 && <p><b>{k + 1} · {w.name}</b></p>}
+                <ol>{w.steps.map((s, i) => (
+                  <li key={i}>
+                    <span>{s.next}</span> <span className="muted">→ {s.shown}</span>
+                    {s.board && <Board rows={s.board} />}
+                    {s.how && <details><summary>How? (opened only if asked)</summary><Board rows={s.how.board ?? s.how.lines} /></details>}
+                  </li>
+                ))}</ol>
+              </div>
+            ))}
+          </section>
+        );
+      })}
     </div>
   );
 }

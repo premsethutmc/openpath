@@ -33,7 +33,10 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts",
       // scenes.ts: added in a reviewed change (practice-tool@1). lineFits reads pool() for one purpose: to see whether the number-line
       // rule fits every drawn question of a type before the line is offered as a tool. It selects and serves no question.
-      "packages/learning/src/scenes.ts", "packages/learning/src/spec.ts"];
+      // step-help.ts: added in a reviewed change (help-review@1). helpSamples reads pool() for one purpose: to name the
+      // three questions (first, middle, last) that stand for a type's step help on the owner's dashboard. It selects
+      // nothing for a learner.
+      "packages/learning/src/scenes.ts", "packages/learning/src/spec.ts", "packages/learning/src/step-help.ts"];
 
 export const SOURCE_ROOTS = ["packages/learning/src", "packages/mathematics/src", "frontend/src"];
 const SELECTORS = new Set(["pool", "phasePool", "variantsOf", "modulePhasePool", "fromPool"]);

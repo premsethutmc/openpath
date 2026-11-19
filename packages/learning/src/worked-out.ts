@@ -12,6 +12,11 @@ export interface Worked {
   needs?: string;
   /** board@1: the written layout as it stands once this step is done (long division's bracket), one text line per row */
   board?: string[];
+  /**
+   * type-it@1: what the learner enters for this step where its result is a number but the step as shown is a sentence
+   * ("How many 6s fit in 34?" → 5): the words before the box, and the number that is right.
+   */
+  ask?: { lead: string; value: string };
 }
 type Q = { family: string; params: number[]; answer: string; prompt?: string };
 
@@ -73,28 +78,36 @@ export function divide(n: number, d: number, want: "quotient" | "remainder", ans
       carry = cur;
       return;
     }
-    const first = !started ? `First: ${opening}` : "";
+    const first = !started ? `First: ${opening.charAt(0).toLowerCase()}${opening.slice(1)}` : "";
     started = true;
     if (fit === 0) {
       top[i] = "0";
-      out.push({ next: `How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 on top${last ? "" : `, and keep the ${cur}`}.`, board: board() });
+      out.push({ next: `How many ${d}s fit in ${cur}?`, shown: `None: ${d} is more than ${cur}. Write 0 on top${last ? "" : `, and keep the ${cur}`}.`, board: board(), ask: { lead: `Number of ${d}s in ${cur}:`, value: "0" } });
     } else {
       top[i] = String(fit);
       under.push(at(String(d * fit), i));
-      out.push({ next: `${first}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 999 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} on top and ${d * fit} under the ${cur}.`, needs: "MATH.number.multiplication-tables", board: board() });
+      out.push({ next: `${first}How many ${d}s fit in ${cur}, without going over?`, shown: `${fit}, because ${d} × ${fit} = ${d * fit}${(fit + 1) * d <= 999 ? ` and ${d} × ${fit + 1} = ${d * (fit + 1)} is too many` : ""}. Write ${fit} on top and ${d * fit} under the ${cur}.`, needs: "MATH.number.multiplication-tables", ask: { lead: `Number of ${d}s in ${cur}:`, value: String(fit) }, board: board() });
       under.push(at("-".repeat(String(cur).length), i), at(String(left), i));
       out.push({ next: `Take it away. What is left from the ${cur}?`, shown: `${cur} − ${d * fit} = ${left}`, board: board() });
     }
     carry = left;
     if (!last) {
       if (fit !== 0) under[under.length - 1] = at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1); else under.push(at(`${left === 0 ? "" : left}${digits[i + 1]}`, i + 1));
-      out.push({ next: `Bring down the next digit, ${digits[i + 1]}.`, shown: left === 0 ? `Nothing was left, so there is just ${digits[i + 1]} to share.` : `${left} with ${digits[i + 1]} beside it makes ${left * 10 + digits[i + 1]}.`, board: board() });
+      out.push({ next: `Bring down the next digit, ${digits[i + 1]}.`, shown: left === 0 ? `Nothing was left, so there is just ${digits[i + 1]} to share.` : `${left} with ${digits[i + 1]} beside it makes ${left * 10 + digits[i + 1]}.`, board: board(), ask: { lead: "The number to share now:", value: String(left * 10 + digits[i + 1]) } });
     }
     void place;
   });
   if (!started || carry !== r) return null;
   out.push({ next: "Last: read the answer off the top.", shown: want === "remainder" ? `The top line says ${q}, and what is left at the bottom is the remainder: ${r}.` : `The top line is the answer: ${q}.${r ? ` (${r} is left over.)` : ""}`, board: board() });
   return out;
+}
+/**
+ * side-answer@1: a long division's steps with the answer written to the right of the number ("6 ) 348 ( 58") in place
+ * of on top. The same steps and the same numbers; only where the answer's digits are written, and the words for it.
+ */
+function atTheSide(steps: Worked[]): Worked[] {
+  const words = (t: string) => t.replace(/on top/g, "at the side").replace(/off the top/g, "off the side").replace(/The top line (is the answer|says)/g, (_, w: string) => (w === "says" ? "The number at the side is" : "The number at the side is the answer"));
+  return steps.map((s) => ({ ...s, next: words(s.next), shown: words(s.shown), ...(s.board ? { board: [`${s.board[1]}${s.board[0].trim() ? ` ( ${s.board[0].trim()}` : ""}`, ...s.board.slice(2)] } : {}) }));
 }
 const longDivision = ({ params: [d, q, r, mode], answer }: Q): Worked[] | null => (r >= 0 && r < d ? divide(d * q + r, d, mode === 1 ? "remainder" : "quotient", answer) : null);
 const exactDivision = ({ params: [q, d], answer }: Q): Worked[] | null => divide(q * d, d, "quotient", answer);
@@ -259,6 +272,7 @@ function unlikeFractions(prompt: string | undefined, answer: string): Worked[] |
   }
   if (d1 !== d2) {
     put(`The bottoms are ${d1} and ${d2}. What is the smallest number both go into?`, L === d1 * d2 ? `${d1} × ${d2} = ${L}, and nothing smaller works: the LCM is ${L}.` : `The LCM of ${d1} and ${d2} is ${L} (${L} = ${d1} × ${L / d1} = ${d2} × ${L / d2}).`);
+    out[out.length - 1].ask = { lead: `Smallest number ${d1} and ${d2} both go into:`, value: String(L) };
     const ren = ([t, dd, T]: number[]) => (dd === L ? null : `${L} ÷ ${dd} = ${L / dd}, so multiply top and bottom by ${L / dd}: ${t}/${dd} = ${T}/${L}`);
     const r1 = ren([a, d1, A]), r2 = ren([b, d2, B]);
     if (r1) put(`Rename ${a}/${d1} with ${L} at the bottom.`, r1, r2 ? undefined : `${A}/${L} ${m[4]} ${B}/${L}`);
@@ -327,7 +341,7 @@ function fractionForms(prompt: string | undefined, answer: string): { name: stri
     const plain = `${w} ${r}/${d}`, simple = `${w} ${r / g}/${d / g}`;
     if (want !== simple) return null;
     const steps: Worked[] = [
-      { next: `First: ${d} pieces make one whole. How many ${d}s fit in ${n}?`, shown: `${d} × ${w} = ${w * d}, and ${d} × ${w + 1} = ${(w + 1) * d} is too many: ${w} whole ones.`, board: [`${n} ÷ ${d} = ${w} remainder ?`] },
+      { next: `First: ${d} pieces make one whole. How many ${d}s fit in ${n}?`, shown: `${d} × ${w} = ${w * d}, and ${d} × ${w + 1} = ${(w + 1) * d} is too many: ${w} whole ones.`, board: [`${n} ÷ ${d} = ${w} remainder ?`], ask: { lead: `Number of ${d}s in ${n}:`, value: String(w) } },
       { next: "How many pieces are left over?", shown: `${n} − ${w * d} = ${r}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`] },
       { next: `${g > 1 ? "Write" : "Last: write"} the whole ones, then the left-over pieces over the same bottom.`, shown: `${n}/${d} = ${plain}`, board: [`${n} ÷ ${d} = ${w} remainder ${r}`, `${n}/${d} = ${plain}`] },
     ];
@@ -436,7 +450,11 @@ const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long 
 export const SOLE_WAYS: readonly string[] = ["Same bottom (LCM)", "Divide", "Whole × bottom + top", "Out of 100"];
 export function workedWays(q: Q): { name: string; steps: Worked[] }[] | null {
   try {
-    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) return [{ name: NAMES[q.family] ?? "The usual way", steps: w }]; }
+    if (Object.prototype.hasOwnProperty.call(HANDLERS, q.family)) { const w = HANDLERS[q.family](q); if (w && w.length >= 2) {
+      const usual = { name: NAMES[q.family] ?? "The usual way", steps: w };
+      // side-answer@1: the same long division with the answer written at the side ("6 ) 348 ( 58"), as many books set it out
+      return q.family === "ldiv" || q.family === "avdiv" ? [usual, { name: "Answer at the side", steps: atTheSide(w) }] : [usual];
+    } }
     const c = columns(q.prompt, q.answer);
     if (c && c.length >= 2) return [{ name: "In columns", steps: c }];
     if (q.family === "avpp") { const lm = longMultiply(q); return lm && lm.length >= 2 ? [{ name: "In columns", steps: lm }] : null; }

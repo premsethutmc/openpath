@@ -454,3 +454,38 @@ jump lands on it, a triangle labelled with it, a finished written working) is no
 under "See it in a picture" once the last step is done. Pictures the child counts or reads (ten-frames, coins, grids,
 tables of data) stay. guess-picture.test.ts walks every lesson: 1,089 worked by the child, 265 with a teaching picture,
 19 held back.
+
+`cue-shown@1`, `cue-label@1`, `cue-one@1`, `cue-money@1`: fewer one-word cues. A number already on the screen in an
+earlier step counts as known, so more arithmetic cues name their numbers; a step shown as "Label: working" is cued by
+its label ("find the total surface area"), only when the label is a name or an instruction and holds no result; a
+single-number step names its number ("halve 44"); an amount written as text is read as a number. One question per type:
+bare cues fell from 1,596 of 2,444 steps to about 1,210; the audit's count of types that are mostly one-word cues fell
+from 468 to 325. Left: steps whose own number first appears in that step, and compare / count / solve / classify steps.
+
+`help-review@1`: the step help behind "I'm stuck" is on the owner's dashboard (/review/ → Teaching → Kind: Step help),
+one item per question type (`help:<type>`), shown for three of its questions (first, middle, last of the pool): every
+way, every step, each layout, and what "How?" opens. Approve, ask for changes or reject, per version: a change to a
+type's help makes a new version to review. 1,118 types; 308 in Class 5. A decision is recorded; it does not yet hide
+anything from a learner. Any change to help text needs `node --import tsx ../packages/learning/scripts/teaching.ts`
+(from frontend/) so teaching.v1.json stays current.
+
+`fresh@1`: a family-site build names itself (`/year/version.json`, and the same stamp inside app.js). When the app opens,
+and each time it comes back to the front, it asks the server which build is current; if it is behind, it drops its saved
+copy and reloads at once, or shows "A newer version is ready. Update" if the learner has already touched the screen.
+One try per build, so it cannot loop. The stamp is printed at the foot of every screen ("Version 2026-11-19 02:30"), so a
+screenshot says which build a phone has. Checked in a browser against two simulated deploys.
+
+`type-it@1`: a written-method step that is answered by a number but shown as a sentence gets a box (`Worked.ask`):
+"How many 6s fit in 34?" (the digit written on top), "Bring down the next digit" (the number to share now), the LCM of
+two bottoms, the whole ones in an improper fraction. In long division 85% of steps are now typed; the rest is the last
+"read the answer" step, which is entered in the answer box. "Help: show me this step" still reveals a step.
+
+`bracket@1` (Board.tsx): the row "6 ) 348" of a long division is drawn with the line over the number being shared,
+joined to the bracket, with the answer on the line: the symbol a school book uses. One component draws every written
+layout (step help, "How?", the lesson picture, the review page). Layout chosen: answer on top; the other Indian layout
+("6 ) 348 ( 58") is not drawn.
+
+`side-answer@1`: a long division has both school layouts as tabs: "Long division" (answer on top of the line) and
+"Answer at the side" ("6 ) 348 ( 58"), then "In easy parts". The steps, numbers and boxes are the same; only where the
+answer's digits are written, and the words for it. Proved on 1,037 questions. `remembered-way@1`: the tab a child last
+chose opens first next time, on that device (localStorage `openpath-way`).

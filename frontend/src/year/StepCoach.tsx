@@ -9,6 +9,7 @@
 import { useMemo, useState } from "react";
 import { cardFor, helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
+import { Board } from "./Board";
 import { SmallAsk } from "./SmallAsk";
 import { askOf, judge, type StepAsk } from "../../../packages/learning/src/step-ask";
 import { clipFor } from "../../../packages/learning/src/clips";
@@ -72,7 +73,8 @@ function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
 export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false, onDone, shown }: { qid: string; onUsed?: () => void; opener?: string; startOpen?: boolean; onDone?: () => void; shown?: boolean }) {
   // methods@1: where a question can be worked more than one way, the ways are tabs (the taught method first)
   const methods = useMemo(() => helpMethods(qid), [qid]);
-  const [method, setMethod] = useState(0);
+  // remembered-way@1: the way a child last chose (a layout their book uses) opens first next time, on this device
+  const [method, setMethod] = useState(() => { try { const i = methods.indexOf(localStorage.getItem("openpath-way") ?? ""); return i > 0 ? i : 0; } catch { return 0; } });
   const steps = useMemo(() => stepsHelp(qid, method), [qid, method]);
   // chintu@1: on a question of Classes 1 to 5, Chintu the cat says what to do next
   const buddy = useMemo(() => { const g = classOfQuestion(qid); return g !== null && g <= LAST_CHINTU_CLASS; }, [qid]);
@@ -89,7 +91,8 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   // why@1: the rule behind a step can always be opened: the other skill it leans on, or the question's own skill
   const ruleOf = now?.needs ?? now?.rule ?? null;
   const rule = ruleOf ? cardFor(ruleOf) : null;
-  const entry = now ? askOf(now.shown) : null;
+  // type-it@1: a step shown as a sentence but answered by a number ("How many 6s fit in 34?") is entered too
+  const entry = now ? (now.ask ? { lead: now.ask.lead, lhs: now.ask.value, value: now.ask.value } : askOf(now.shown)) : null;
   // stay-open@1: a step that has been done stays on the page with what was done and why; the next step's "what to do"
   // is there straight away, and an opened rule stays open while the next step uses the same rule
   const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); if (at + 1 >= steps.length) onDone?.(); };
@@ -97,7 +100,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
     <div className="coach" data-coach-step={at} data-coach-method={method}>
       {methods.length > 1 && (
         <div className="coach-methods" role="tablist" aria-label="Ways to work it out">
-          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); setHow(null); setHowCard(false); } }}>{i + 1} · {name}</button>)}
+          {methods.map((name, i) => <button key={name} type="button" role="tab" aria-selected={method === i} className={`coach-method${method === i ? " on" : ""}`} onClick={() => { if (method !== i) { setMethod(i); setAt(0); setCard(false); setHow(null); setHowCard(false); try { localStorage.setItem("openpath-way", methods[i]); } catch { /* not kept */ } } }}>{i + 1} · {name}</button>)}
         </div>
       )}
       {at > 0 && (
@@ -110,7 +113,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
                 {s.how && <> <button type="button" className="coach-chip coach-how" aria-expanded={how === i} onClick={() => { setHow(how === i ? null : i); setHowCard(false); }}>{how === i ? "Hide the working" : "How?"}</button></>}
                 {s.how && how === i && (
                   <aside className="coach-card coach-how-card" aria-label="How it is worked out" data-testid="coach-how">
-                    <pre className="coach-board">{(s.how.board ?? s.how.lines).join("\n")}</pre>
+                    <Board rows={s.how.board ?? s.how.lines} />
                     {skill && <button type="button" className="coach-chip" aria-expanded={howCard} onClick={() => setHowCard(!howCard)}>{howCard ? "Hide the rule" : `This is ${skill.name.charAt(0).toLowerCase()}${skill.name.slice(1)}: show me the rule`}</button>}
                     {skill && howCard && <>{skill.rule.map((t, k) => <p key={k}>{t}</p>)}</>}
                   </aside>
@@ -121,7 +124,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
         </ol>
       )}
       {/* board@1: the written layout as it stands so far (after the last step done; whole at the end) */}
-      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board[1]] : null); return b ? <pre className="coach-board" aria-label="The working so far" data-testid="coach-board">{b.join("\n")}</pre> : null; })()}
+      {(() => { const b = (now ? steps[at - 1] : steps[steps.length - 1])?.board ?? (now?.board ? [now.board.find((r) => / \) \d/.test(r))?.replace(/ \( .*$/, "") ?? now.board[1]] : null); return b ? <Board rows={b} label="The working so far" testid="coach-board" /> : null; })()}
       {now && (
         <>
           {buddy ? <Chintu key={at} say={now.next} /> : <p className="coach-next" role="status">{now.next}</p>}

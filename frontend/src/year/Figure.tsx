@@ -3,6 +3,7 @@
  * always exactly the mathematics of its question. Every picture has a text description (aria-label) that says the
  * same thing in words, so a learner using a screen reader gets the same question.
  */
+import { Board } from "./Board";
 import { MoneyPiles } from "./MoneyPiles";
 import type { MoneyPicture } from "../../../packages/learning/src/money-piles";
 import type { JSX } from "react";
@@ -490,7 +491,7 @@ export function Figure({ v }: { v: V }) {
       const head = arr<string>(v.head);
       const rows = arr<(string | number)[]>(v.rows);
       // written@1: working as it is written on paper (a long division), kept in fixed-width rows so the columns line up
-      if (v.as === "written") return <figure className="figure written" aria-label={label}><pre className="coach-board">{rows.map((r) => String(r[0] ?? "")).join("\n")}</pre></figure>;
+      if (v.as === "written") return <figure className="figure written" aria-label={label}><Board rows={rows.map((r) => String(r[0] ?? ""))} /></figure>;
       // picture-words@1: a row of things the words call a picture is drawn as cards, not as a table of data
       if (v.as === "tiles") {
         // a heading that only counts the places (1, 2, 3 or Card 1) says nothing: only words such as "left" are kept

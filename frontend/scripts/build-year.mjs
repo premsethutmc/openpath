@@ -33,6 +33,9 @@ const BOOT_HTML = `<div class="boot" role="status" aria-live="polite"><div class
 // answers from that copy at once, even while the server is asleep, then fetches the newer files for next time. It never
 // touches /api/ or anything outside /year/. Not in test or research builds: several builds share one address there.
 const shellCache = process.argv.includes("--shell-cache") && !test && !deep;
+// fresh@1: every build names itself (the commit where the builder knows it, and the minute it was built). The app asks
+// the server for /year/version.json when it opens and when it comes back to the front, and takes a newer build at once.
+const stamp = `${(process.env.OPENPATH_COMMIT || process.env.RENDER_GIT_COMMIT || "").slice(0, 7)} ${new Date().toISOString().slice(0, 16).replace("T", " ")}`.trim();
 
 // fast-load@1: a large JSON file is carried as one string and read with JSON.parse when the app starts. The engine reads
 // a JSON string several times faster than the same data written out as script, and most of this bundle is data.
@@ -57,12 +60,13 @@ await esbuild.build({
   sourcemap: test ? "inline" : false,
   outdir: out,
   entryNames: "app",
-  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEVICE: device ? "true" : "false", OPENPATH_NAME_START: process.argv.includes("--name-start") && !test ? "true" : "false", OPENPATH_SHELL_CACHE: shellCache ? "true" : "false", OPENPATH_KID: (process.argv.includes("--name-start") || device) && !test && !deep ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
+  define: { "process.env.NODE_ENV": '"production"', OPENPATH_BUILD: JSON.stringify(shellCache ? stamp : ""), OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEVICE: device ? "true" : "false", OPENPATH_NAME_START: process.argv.includes("--name-start") && !test ? "true" : "false", OPENPATH_SHELL_CACHE: shellCache ? "true" : "false", OPENPATH_KID: (process.argv.includes("--name-start") || device) && !test && !deep ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
 });
 await writeFile(
   `${out}/index.html`,
   `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff7ea"><title>My Learning Year · OpenPath</title><link rel="stylesheet" href="app.css"><style>${BOOT_CSS}</style></head><body><div id="root">${BOOT_HTML}</div><script type="module" src="app.js"></script></body></html>`,
 );
+if (shellCache) await writeFile(`${out}/version.json`, JSON.stringify({ build: stamp }) + "\n");
 if (shellCache)
   await writeFile(
     `${out}/sw.js`,
@@ -98,7 +102,7 @@ self.addEventListener("fetch", (e) => {
 // the educator-review app at /review/ (never a test build: decisions are always real server decisions)
 const rout = `${root}/${process.env.DIST ?? "dist-english"}/review`;
 await mkdir(rout, { recursive: true });
-await esbuild.build({ entryPoints: [`${root}/src/review/Main.tsx`], bundle: true, format: "esm", target: "es2022", minify: !test, sourcemap: test ? "inline" : false, outdir: rout, entryNames: "app", define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: "false" } });
+await esbuild.build({ entryPoints: [`${root}/src/review/Main.tsx`], bundle: true, format: "esm", target: "es2022", minify: !test, sourcemap: test ? "inline" : false, outdir: rout, entryNames: "app", define: { "process.env.NODE_ENV": '"production"', OPENPATH_BUILD: JSON.stringify(shellCache ? stamp : ""), OPENPATH_REVIEW_FIXTURE: "false" } });
 await writeFile(`${rout}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fff7ea"><title>Content review · OpenPath</title><link rel="stylesheet" href="app.css"></head><body><div id="root"></div><script type="module" src="app.js"></script></body></html>`);
 console.log(`Built My Learning Year at /year/${device ? " (DEVICE BUILD: records stay in this browser)" : ""}${test ? " (TEST BUILD: review fixture on)" : ""}${deep ? ` (deep-recovery research switch available with ?deep=1${sitting ? `, ${sitting} per sitting` : ""})` : ""} and content review at /review/.`);
 
