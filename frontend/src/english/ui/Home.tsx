@@ -12,6 +12,7 @@ import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
 import { latestResult } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
+import { FIRST, firstSummary, isBeginner } from "../logic/first/first.ts";
 import { NAMING_TOPIC, streamRows, type StreamId, type StreamRow } from "../logic/streams/streams.ts";
 import { GRAMMAR, grammarSummary } from "../logic/grammar-use/grammar-use.ts";
 import { listenSummary } from "../logic/listening/passages.ts";
@@ -34,7 +35,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onFirstWords, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onFirstWords: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   // once a level is found, "Your English today" leads and the rest is folded away; before that everything is open.
   // an unfinished General English activity keeps that part open.
@@ -73,6 +74,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         </>
       ) : (
         <>
+          {isBeginner(learner.levels()) && <FirstWordsCard learner={learner} onOpen={onFirstWords} start />}
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
@@ -87,6 +89,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               <NewWordsCard learner={learner} onOpen={onNewWords} />
               <ReadingCard learner={learner} onOpen={onReading} />
               <ListenWriteCard learner={learner} onOpen={onListenWrite} />
+              <FirstWordsCard learner={learner} onOpen={onFirstWords} />
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />
               <BeeCard learner={learner} onBee={onBee} />
@@ -350,6 +353,29 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.passages ? "Hear another passage" : "Try Listen and answer"}
+      </button>
+    </section>
+  );
+}
+
+/** First words (logic/first): for a learner who cannot yet read a sentence. Candidate content, so never offered in a pilot build. */
+function FirstWordsCard({ learner, onOpen, start }: { learner: Learner; onOpen: () => void; start?: boolean }) {
+  if (learner.content.gate) return null;
+  const s = firstSummary(FIRST, learner.firstRecords());
+  return (
+    <section className={start ? "hub-card" : "hub-card plain"} aria-labelledby={start ? "first-start-title" : "first-card-title"} data-first={start ? "start" : "card"}>
+      <h2 id={start ? "first-start-title" : "first-card-title"}>
+        <span aria-hidden="true">🐱 </span>
+        {start ? "Start here: First words" : "First words"}
+      </h2>
+      <p>Hear a word and tap its picture, build the word from letters, and do what a short sentence says. Nothing has to be read.</p>
+      {s.met > 0 && (
+        <p className="small">
+          {s.met} of {s.total} words met, {s.sure} found on the first tap
+        </p>
+      )}
+      <button type="button" className={start ? "primary" : "secondary"} onClick={onOpen}>
+        {s.met ? "More first words" : "Try First words"}
       </button>
     </section>
   );

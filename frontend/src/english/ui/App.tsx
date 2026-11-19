@@ -36,6 +36,7 @@ import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
 import { GuidedTasks } from "./Guided.tsx";
+import { FirstWords } from "./FirstWords.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
@@ -120,6 +121,7 @@ export function App() {
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
+  const [inFirst, setInFirst] = useState(false);
   const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
@@ -171,6 +173,7 @@ export function App() {
       setInLevelCheck(false);
       setGrammarUse(null);
       setGuided(null);
+      setInFirst(false);
       setListenAnswer(null);
       setInSyllabus(false);
       setInParent(false);
@@ -501,6 +504,12 @@ export function App() {
         />
       </div>
     );
+  if (inFirst)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <FirstWords learner={learner} voice={voice} onChanged={changed} onLeave={() => (setInFirst(false), scrollTo(0, 0), changed())} />
+      </div>
+    );
   if (guided)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -710,6 +719,7 @@ export function App() {
           onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
+          onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />
