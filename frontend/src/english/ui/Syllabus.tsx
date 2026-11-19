@@ -6,10 +6,10 @@ import { useState } from "react";
 import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
 import { coverage, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
 
-const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", not: "Not yet" };
-const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use" };
+const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", guided: "With a grown-up", not: "Not yet" };
+const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use", guided: "Tasks with a grown-up", writing: "Essay studio" };
 
-export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; initial: number; onOpen: (where: Where, topics: string[] | undefined, cls: number) => void; onBack: () => void }) {
+export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; initial: number; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }) => void; onBack: () => void }) {
   const [cls, setCls] = useState(initial);
   const doc = docs.find((d) => d.class === cls) ?? docs[0];
   const [source, setSource] = useState(false);
@@ -35,7 +35,7 @@ export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; i
       </h1>
       <p className="sub">What the board lists for this class, and where to practise it here.</p>
       <p className="pill" data-coverage>
-        {c.covered} in the app · {c.partly} partly · {c.not} not yet (of {c.total})
+        {c.covered} in the app · {c.partly} partly{c.guided ? ` · ${c.guided} with a grown-up` : ""} · {c.not} not yet (of {c.total})
       </p>
       {doc.strands.map((st) => (
         <section key={st.id} className="syllabus-strand" aria-labelledby={`strand-${st.id}`}>
@@ -48,8 +48,8 @@ export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; i
                 </p>
                 {(o.note || o.topics) && <p className="small">{[o.topics ? `Practised as: ${topicNames(o)}.` : "", o.note ?? ""].filter(Boolean).join(" ")}</p>}
                 {o.where && (
-                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics, doc.class)}>
-                    Practise: {GO[o.where]}
+                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics, doc.class, { syllabus: doc.id, outcome: o.id, text: o.text })}>
+                    {o.where === "guided" || o.where === "writing" ? "Open" : "Practise"}: {GO[o.where]}
                   </button>
                 )}
               </li>

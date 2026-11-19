@@ -72,7 +72,7 @@ async function answer(page, wrong) {
     await page.locator("#grammar-box").fill(wrong ? "zzz" : it.right[0]);
     await page.getByRole("button", { name: "Check", exact: true }).click();
   } else {
-    const target = it.sentence.split(" ");
+    const target = it.parts ?? it.sentence.split(" ");
     const order = wrong ? [...target].reverse() : target;
     for (const w of order) await page.locator(".grammar-pool .grammar-tile").getByText(w, { exact: true }).first().click();
     assert.equal(await page.locator(".grammar-line .grammar-tile").count(), target.length);
@@ -125,11 +125,44 @@ test("ICSE syllabus, Classes 4 to 6: every line shown with its place in the app,
   await page.getByText("Classes 4, 5 and 6: 104 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
-  await page.getByText("14 in the app · 7 partly · 12 not yet (of 33)").waitFor();
+  await page.getByText("20 in the app · 5 partly · 8 with a grown-up · 0 not yet (of 33)").waitFor();
   for (const st of SYLLABUS.strands) await page.getByRole("heading", { name: st.name }).waitFor();
   assert.equal(await page.locator("[data-outcome]").count(), 33);
   assert.equal(await page.locator('[data-coverage="not"] button').count(), 0, "a line that is not in the app offers no practice");
-  await page.locator('[data-outcome="RW7"]', { hasText: "being built separately" }).waitFor();
+  await page.locator('[data-outcome="RW7"]', { hasText: "essay studio" }).waitFor();
+  await page.locator('[data-outcome="RW7"]').getByRole("button", { name: /Essay studio/ }).waitFor();
+  // a speaking line: tasks to do with a grown-up, who ticks what they heard; the tick is kept
+  await page.locator('[data-outcome="LS1"]', { hasText: "With a grown-up" }).waitFor();
+  await page.getByRole("button", { name: /Practise LS1:/ }).click();
+  await page.getByRole("heading", { name: "Shares and explains ideas and points of view clearly." }).waitFor();
+  await page.getByText("The app cannot hear or mark them", { exact: false }).waitFor();
+  assert.equal(await page.locator("[data-task]").count(), 3);
+  await fits();
+  const task = page.locator('[data-task="ls1.1"]');
+  await task.getByRole("button", { name: "I did this with a grown-up" }).click();
+  await task.getByLabel("Said what the game is").check();
+  await task.getByLabel("Gave a reason for liking it").check();
+  await fits();
+  await shot(page, "4b-guided");
+  await task.getByRole("button", { name: "Save" }).click();
+  await task.getByText("Done once. Last time a grown-up ticked 2 of 3.").waitFor();
+  await page.reload();
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("button", { name: /Practise LS1:/ }).click();
+  await page.locator('[data-task="ls1.1"][data-done="true"]').waitFor();
+  await page.getByRole("button", { name: "← Back" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
+  // sentences in order: whole sentences are the tiles
+  await page.getByRole("button", { name: /Practise RW9:/ }).click();
+  await page.getByText("Topics: Sentences in order").waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  await page.getByText("Tap the sentences in the order in which things happen.", { exact: false }).waitFor();
+  await fits();
+  await shot(page, "4c-order");
+  const ordered = await answer(page, false);
+  assert.equal(ordered.topic, "sentence_order");
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   await fits();
   await shot(page, "4-syllabus");
   await page.getByRole("button", { name: "Where this list comes from" }).click();

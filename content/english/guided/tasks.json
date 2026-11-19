@@ -1,0 +1,225 @@
+{
+  "id": "guided-tasks",
+  "version": 1,
+  "status": "candidate: tasks written by OpenPath (AI-prepared); done with a grown-up, who ticks what they saw; not reviewed by an educator",
+  "review": "candidate-unvalidated",
+  "evidence": "practice-only: the app does not hear or mark these; an adult's ticks are kept as a record and change no capability estimate",
+  "tasks": [
+    {
+      "id": "ls1.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS1",
+      "title": "My favourite game",
+      "task": "Tell a grown-up about your favourite game for one minute. Say what it is, how it is played and why you like it.",
+      "look": [
+        "Said what the game is",
+        "Explained how it is played",
+        "Gave a reason for liking it"
+      ]
+    },
+    {
+      "id": "ls1.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS1",
+      "title": "A rule I would change",
+      "task": "Choose one rule at home or at school that you would change. Explain your idea and why it would be better.",
+      "look": [
+        "Stated the idea clearly",
+        "Gave at least one reason",
+        "Stayed on the topic"
+      ]
+    },
+    {
+      "id": "ls2.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS2",
+      "title": "Ask three questions",
+      "task": "Ask a grown-up three questions about their school days. Listen to each answer before you ask the next question.",
+      "look": [
+        "Asked three clear questions",
+        "Listened to the answers",
+        "Asked one question that followed from an answer"
+      ]
+    },
+    {
+      "id": "ls2.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS2",
+      "title": "Answer in full sentences",
+      "task": "Ask a grown-up to ask you three questions about your day. Answer each one in a full sentence.",
+      "look": [
+        "Answered what was asked",
+        "Used full sentences",
+        "Added a detail without being asked"
+      ]
+    },
+    {
+      "id": "ls5.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS5",
+      "title": "Find out and tell",
+      "task": "With a grown-up, look up one animal in a book or on the internet. Then tell them three things you learnt, in your own words.",
+      "look": [
+        "Found the information with help",
+        "Told three facts",
+        "Used own words, not read aloud"
+      ]
+    },
+    {
+      "id": "ls5.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS5",
+      "title": "Two places to look",
+      "task": "Pick a question, such as why the sky is blue. Find the answer in two places and say whether they agree.",
+      "look": [
+        "Looked in two places",
+        "Said what each place told",
+        "Said whether they agree"
+      ]
+    },
+    {
+      "id": "ls6.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS6",
+      "title": "Guess the feeling",
+      "task": "Ask a grown-up to say \"Come here\" in three ways: happy, cross and worried. Say which is which, and how you could tell.",
+      "look": [
+        "Named each feeling",
+        "Pointed to the voice or the face as the clue",
+        "Explained one clue in words"
+      ]
+    },
+    {
+      "id": "ls6.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS6",
+      "title": "Words and face",
+      "task": "Ask a grown-up to say \"I am fine\" while looking tired. Say what the words tell you and what the face tells you.",
+      "look": [
+        "Noticed the words and the face differ",
+        "Said which to believe and why",
+        "Spoke kindly about it"
+      ]
+    },
+    {
+      "id": "ls7.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS7",
+      "title": "The same and different",
+      "task": "Listen while a grown-up tells you about a festival or a holiday from their childhood. Tell them one thing that is the same for you and one that is different.",
+      "look": [
+        "Listened to the end",
+        "Gave one thing that is the same",
+        "Gave one thing that is different"
+      ]
+    },
+    {
+      "id": "ls7.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS7",
+      "title": "It reminds me of",
+      "task": "After reading a story in the app, tell a grown-up what it reminds you of in your own life.",
+      "look": [
+        "Named the story",
+        "Made a link to own life",
+        "Explained the link"
+      ]
+    },
+    {
+      "id": "ls8.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS8",
+      "title": "Stand and speak",
+      "task": "Stand up and tell a grown-up how to make a cup of tea, step by step. Look at them while you speak.",
+      "look": [
+        "Looked at the listener",
+        "Spoke at a steady pace, not too fast",
+        "Used hands to help show a step"
+      ]
+    },
+    {
+      "id": "ls8.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS8",
+      "title": "Read it aloud",
+      "task": "Read a short text from the app aloud to a grown-up. Stop at each full stop and look up once in every sentence.",
+      "look": [
+        "Could be heard clearly",
+        "Paused at the full stops",
+        "Looked up at the listener"
+      ]
+    },
+    {
+      "id": "rw6.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW6",
+      "title": "A small project",
+      "task": "With a grown-up, choose a topic such as rivers. Use a computer, a phone or a library to find five facts and write them in a list.",
+      "look": [
+        "Chose where to look",
+        "Found five facts",
+        "Wrote the facts in own words"
+      ]
+    },
+    {
+      "id": "rw6.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "RW6",
+      "title": "Where did it come from?",
+      "task": "For a fact you found, say where you found it and why you trust that place.",
+      "look": [
+        "Named the place it came from",
+        "Gave a reason to trust it",
+        "Said what to do if two places disagree"
+      ]
+    },
+    {
+      "id": "lit1.1",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LIT1",
+      "title": "A book of my choice",
+      "task": "Read a story book or a part of one that is not in this app. Tell a grown-up who is in it and what happens.",
+      "look": [
+        "Named the book",
+        "Told who is in it",
+        "Told what happens in order"
+      ]
+    },
+    {
+      "id": "lit1.2",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LIT1",
+      "title": "What I thought of it",
+      "task": "After reading a book or a poem, tell a grown-up one thing you liked and one thing you would change.",
+      "look": [
+        "Gave one thing liked",
+        "Gave one thing to change",
+        "Gave a reason for each"
+      ]
+    },
+    {
+      "id": "lit1.3",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LIT1",
+      "title": "A poem aloud",
+      "task": "Choose a short poem from a book at home or at school. Read it aloud to a grown-up and say what picture it puts in your mind.",
+      "look": [
+        "Read the poem clearly",
+        "Described a picture from it",
+        "Named a word or line that made the picture"
+      ]
+    },
+    {
+      "id": "ls1.3",
+      "syllabus": "icse-cisce-english-class-5",
+      "outcome": "LS1",
+      "title": "Yes or no?",
+      "task": "A grown-up says: \"Children should have homework every day.\" Say whether you agree, and give two reasons.",
+      "look": [
+        "Said agree or disagree",
+        "Gave two reasons",
+        "Listened to the other view"
+      ]
+    }
+  ]
+}

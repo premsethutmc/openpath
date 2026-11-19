@@ -31,6 +31,7 @@ import { levelsFrom, type LevelCheckRecord, type Levels } from "./streams/level-
 import type { WordResult } from "./spelling-help.ts";
 import { type PatternId, diagnose } from "./spelling-patterns.ts";
 import type { ReadingRecord } from "./reading/session.ts";
+import type { GuidedRecord } from "./guided/guided.ts";
 import { OLD_LEVELS as READING_OLD } from "./reading/course.ts";
 import { SCALE } from "./scale.ts";
 import { type Book, type BookQuestion, type Extraction, BOOK_LIMITS, approvedActivities, bookWords, books, extract, questionPlan, tidyText } from "./books.ts";
@@ -272,6 +273,16 @@ export class Learner {
   /** Store steps of a Listen and write sitting, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordDictation(records: readonly DictationRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "dictation", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** Tasks done with a grown-up, in order. */
+  guidedRecords(): GuidedRecord[] {
+    return this.events.flatMap((e) => (e.kind === "guided_task" ? [e.record] : []));
+  }
+
+  /** Store a task done with a grown-up. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordGuided(record: GuidedRecord): Promise<void> {
+    await this.add({ kind: "guided_task", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's Listen and answer results, in order. */
