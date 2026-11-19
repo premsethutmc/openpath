@@ -16,3 +16,13 @@ No existing passage or question IDs change. Existing records and #262/#263 journ
 - Exact `cd frontend && node --import tsx scripts/sim-english.mts --runs 20 --strict`. Each persona explicitly chooses the new skill on its first daily Reading visit; later visits follow normal recommendations. Completion counts are reported for all eight profiles. This is synthetic routing/state coverage, not evidence of learning gains.
 - ICSE Class 6 R1 only becomes covered; GU-9 and phone counts updated.
 - Exact-head full integrated CI and family-site live confirmation still pending. Root owns merge/deploy. Item 3 must wait for live confirmation.
+
+## One-clue counterexamples from independent editorial review
+The first draft had shortcuts despite passing mechanical span tests. Six items were revised before release:
+- INF6.C2: queue-coverage clue alone leaves the full-duration and counter-only options; endpoint clue alone leaves both-queue and main-only options. Both dimensions are required.
+- INF6.C4: neutral card fields alone cannot rule out the receipt answer; neutral receipt fields alone cannot rule out the card answer. The no-shared-number/independent-sorting clue prevents an unsupported cross-bundle reconstruction. The passage no longer states the evaluative conclusion.
+- INF6.P1: the board-only aim leaves same-corner/different-corner alternatives; the same-corner rule leaves board-effect/direct-request-effect alternatives.
+- INF6.P2: window capacity alone leaves one-worker/two-worker comparisons; equal staffing alone leaves downstairs/upstairs capacity alternatives.
+- INF1.C1 uses unambiguous window/door locations while retaining the tray-to-group inference.
+- INF2.C3 no longer excludes the cat in advance; track location and the book's shape identification must be combined.
+These are editorial counterexamples, not a claim that tests prove semantic validity or real learners need every clue.

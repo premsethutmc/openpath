@@ -17,3 +17,15 @@ test('all six inference units teach, require guided clue practice, then preserve
 test('exhausted inference pool never recycles a check or blocks ordinary lesson fallback; legacy records remain intact',()=>{
  for(const level of LEVELS){const history:ReadingRecord[]=[];for(let attempt=0;attempt<2;attempt++){const s=new ReadingUnitSession(COURSE,unit(level),'check_me',history);check(s);history.push(...s.take());}const before=structuredClone(history);assert.equal(new ReadingUnitSession(COURSE,unit(level),'check_me',history).snapshot().phase,'no_fresh_check');assert.equal(new ReadingUnitSession(COURSE,unit(level),'learn',history).snapshot().phase,'lesson');assert.equal(progress(COURSE,history).seenQuestions.size,4);assert.deepEqual(history,before);}
 });
+test('advanced contrasts retain one-clue distractors and do not state the evaluative conclusion',()=>{
+ const lunch=COURSE.questions.find(q=>q.id==='INF6.C2.inference')!;
+ assert.equal(lunch.options.filter(o=>o.includes('both queues')).length,2);
+ assert.equal(lunch.options.filter(o=>o.includes('until the meals arrive')).length,2);
+ assert.ok(lunch.options[lunch.answer].includes('both queues')&&lunch.options[lunch.answer].includes('until the meals arrive'));
+ const records=COURSE.questions.find(q=>q.id==='INF6.C4.inference')!,text=COURSE.passages.get(records.passage)!.text;
+ assert.ok(!text.includes('no way to tell')&&!text.includes('overstating'));
+ assert.ok(records.options.some(o=>o.startsWith('The cards can'))&&records.options.some(o=>o.startsWith('The receipts can')));
+ const set=supportingSets(COURSE,records)[0];assert.equal(set.length,3);
+ for(const i of set)assert.equal(assessSentences(COURSE,records,[i]),'partial');
+ assert.equal(assessSentences(COURSE,records,set.slice(0,2)),'partial');
+});

@@ -83,24 +83,24 @@
         "id": "INF1.C1",
         "role": "check",
         "title": "The Two Trays",
-        "text": "A single long table stood in the hall. Meera put all the cups for her group on a round tray before lunch. The round tray of cups was at the end facing the window. A square tray of cups stood at the end next to the door. Both trays were red. Hema left an oval tray by a jug in the middle. Now Meera needed to bring the cups for her group.",
+        "text": "A single long table stood in the hall. Meera put all the cups for her group on a round tray before lunch. The round tray of cups stood beside the window. A square tray of cups stood beside the door. Both trays were red. Hema left an oval tray by a jug in the middle. Now Meera needed to bring the cups for her group.",
         "questions": [
           {
             "skill": "inference",
             "prompt": "Where should Meera look for her cups?",
-            "right": "At the end opposite the window.",
+            "right": "At the window end of the table.",
             "wrong": [
-              "At the end next to the door.",
-              "In the middle, next to the jug."
+              "At the door end of the table.",
+              "In the middle of the room."
             ],
             "evidence": "Meera put all the cups for her group on a round tray before lunch.",
             "evidenceAlternatives": [
               [
                 "Meera put all the cups for her group on a round tray before lunch.",
-                "The round tray of cups was at the end facing the window."
+                "The round tray of cups stood beside the window."
               ]
             ],
-            "explain": "Meera used a round tray, and the round tray is opposite the window. Both trays are red, so the colour cannot tell the groups apart."
+            "explain": "Meera used a round tray, and that tray stands on the window side. The matching colour cannot tell the groups’ cups apart."
           }
         ]
       },
@@ -324,7 +324,7 @@
         "id": "INF2.C3",
         "role": "check",
         "title": "The Empty Bowl",
-        "text": "Maya left a dish of sliced banana on the outside table. A short rain began just after that. Maya brought the pet cat in from the yard, and shut the kitchen door until tea time.\n\nWhen she came out, the banana dish was empty. Prints with three thin toes led up to its rim. Prints with round pads led from the gate to the bench, but stopped there. In her nature book, Maya found a drawing of a myna’s three thin front toes. The table was still damp.",
+        "text": "Maya left a dish of sliced banana on the outside table. A short rain began just after that. The pet cat and the garden squirrel often came to the yard when Maya went inside.\n\nWhen she came out, the banana dish was empty. Prints with three thin toes led up to its rim. Prints with round pads led from the gate to the bench, but stopped there. In her nature book, Maya found a drawing showing that a myna leaves three thin toe marks like those. The table was still damp.",
         "questions": [
           {
             "skill": "inference",
@@ -332,16 +332,16 @@
             "right": "A bird most likely took some.",
             "wrong": [
               "A cat probably took some.",
-              "The rain probably washed it off."
+              "A squirrel probably took some."
             ],
             "evidence": "Prints with three thin toes led up to its rim.",
             "evidenceAlternatives": [
               [
                 "Prints with three thin toes led up to its rim.",
-                "In her nature book, Maya found a drawing of a myna’s three thin front toes."
+                "In her nature book, Maya found a drawing showing that a myna leaves three thin toe marks like those."
               ]
             ],
-            "explain": "The three-toed prints reach the dish. The nature-book drawing connects that footprint shape to a bird. The round prints stop at the bench, and the rain alone does not explain the three-toed trail to the rim."
+            "explain": "The thin toe prints reach the dish. The drawing identifies that shape as a bird’s. Just knowing which animals visit the yard does not show which reached the dish."
           }
         ]
       },
@@ -1049,32 +1049,30 @@
         "id": "INF6.P1",
         "role": "practice",
         "title": "A Sign of Safer Crossings",
-        "text": "The road committee ran two small trials to help people cross near the health centre. One trial used a volunteer who held up a bright board when a group was waiting. The other put a clearly painted waiting area on the pavement but used no volunteer. On both mornings a recorder stood at the same corner and noted cars that stopped before the crossing. The road was open to ordinary traffic, and neither trial moved the centre’s entrance.\n\nThe recorder’s tally showed that more drivers stopped during the first trial. However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen. The committee’s original question had been whether a board left by itself would change how drivers acted. At the review meeting the driver tally and the description of the volunteer’s actions were read from different pages of the record. Several members remembered only the overall tally from the two mornings.\n\nThe committee can afford one more morning of observation. It cannot ask the centre to change the time of its appointments. The group wants a small comparison whose interpretation will not depend on assuming a volunteer and an unattended board have the same effect. One member proposes printing the earlier tally in the centre’s newsletter; another asks for a separate trial before any change is made permanent.",
+        "text": "The road committee ran two small trials to help people cross near the health centre. One trial used a volunteer who held up a bright board when a group was waiting. The other put a clearly painted waiting area on the pavement but used no volunteer. On both mornings a recorder stood at the same corner and noted cars that stopped before the crossing. The road was open to ordinary traffic, and neither trial moved the centre’s entrance.\n\nThe recorder’s tally showed that more drivers stopped during the first trial. However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen. The committee’s original question had been whether a board left by itself would change how drivers acted. At the review meeting the driver tally and the description of the volunteer’s actions were read from different pages of the record. Several members remembered only the overall tally from the two mornings.\n\nThe committee can afford one more morning of observation. It cannot ask the centre to change the time of its appointments. The busiest corner and the quiet corner have different traffic, so the committee wants to compare observations at the same corner. One member proposes printing the earlier tally in the centre’s newsletter; another asks for a separate trial before any change is made permanent.",
         "questions": [
           {
             "skill": "inference",
-            "prompt": "Which next observation directly addresses the uncertainty in the stronger tally?",
-            "right": "Compare an unattended board with no board while keeping the crossing routine the same.",
+            "prompt": "Which plan gives the most useful next comparison for the committee?",
+            "right": "Compare board and no board at the same corner without direct requests to drivers.",
             "wrong": [
-              "Compare two board colours while the volunteer actively asks drivers to stop on both mornings.",
-              "Compare one painted waiting area with another while leaving the board out of both."
+              "Compare direct requests and quiet observation at the same corner with a board in place.",
+              "Compare board and no board without requests, using a different corner for each."
             ],
-            "evidence": "The recorder’s tally showed that more drivers stopped during the first trial.",
+            "evidence": "The committee’s original question had been whether a board left by itself would change how drivers acted.",
             "evidenceAlternatives": [
               [
-                "The recorder’s tally showed that more drivers stopped during the first trial.",
-                "However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen.",
-                "The committee’s original question had been whether a board left by itself would change how drivers acted."
+                "The committee’s original question had been whether a board left by itself would change how drivers acted.",
+                "The busiest corner and the quiet corner have different traffic, so the committee wants to compare observations at the same corner."
               ],
               [
-                "One trial used a volunteer who held up a bright board when a group was waiting.",
-                "The recorder’s tally showed that more drivers stopped during the first trial.",
                 "However, the volunteer also asked some drivers directly to wait, after stepping forward so the board could be seen.",
-                "The committee’s original question had been whether a board left by itself would change how drivers acted."
+                "The committee’s original question had been whether a board left by itself would change how drivers acted.",
+                "The busiest corner and the quiet corner have different traffic, so the committee wants to compare observations at the same corner."
               ]
             ],
-            "explain": "The tally improved in a trial where a volunteer also asked drivers to wait. The intended question is about the board alone. Keep the crossing routine the same and vary whether the unattended board is present.",
-            "hint": "Look for what was mixed into the first trial and what the original question was meant to isolate."
+            "explain": "The original question concerns the board left by itself, not the effect of speaking to drivers. The corners have different traffic, so both observations need the same corner.",
+            "hint": "Check what the committee wanted to vary and what it wanted to keep the same."
           }
         ]
       },
@@ -1082,26 +1080,32 @@
         "id": "INF6.P2",
         "role": "practice",
         "title": "Orders from the Terrace",
-        "text": "A school kitchen tested two ways of distributing snacks during the break. One week it opened a second window upstairs. The next week it put a rope line in front of the original window and asked pupils to approach in single file. The staff recorded the number of pupils served during the ten-minute break on both weeks. Their notes say the second window week produced the larger total. The kitchen used the same menu on each day of the trial.\n\nThe kitchen manager is deciding whether to add an upstairs window permanently. In one column of the log she notices that a second server was assigned whenever that window was open. In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved. Nobody tried that arrangement during either trial.\n\nThe first floor is harder to reach for pupils who cannot climb stairs easily. The manager wants the next test to find out whether the upstairs location itself increases service, rather than whether a second worker can help. The staff will compare the same break period and have no plans to change the menu. A teacher suggests using the previous total as a quick answer so that no further trial is needed.",
+        "text": "A school kitchen tested two ways of distributing snacks during the break. One week it opened a second window upstairs. The next week it put a rope line in front of the original window and asked pupils to approach in single file. The staff recorded the number of pupils served during the ten-minute break on both weeks. Their notes say the second window week produced the larger total. The kitchen used the same menu on each day of the trial.\n\nThe kitchen manager is deciding whether to add an upstairs window permanently. In one column of the log she notices that a second server was assigned whenever that window was open. In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved. Nobody tried that arrangement during either trial.\n\nThe upstairs window is beside a narrow landing with room for one server. The manager wants the next test to study the layout without changing the number of staff on duty. The staff will compare the same break period and have no plans to change the menu. A teacher suggests using the previous total as a quick answer so that no further trial is needed.",
         "questions": [
           {
             "skill": "inference",
-            "prompt": "Which next comparison would help isolate the value of the upstairs location?",
-            "right": "Try two servers at one window compared with two servers split between floors.",
+            "prompt": "Which practical next comparison would help the kitchen study the upstairs location?",
+            "right": "Compare two servers downstairs with one at each window.",
             "wrong": [
-              "Try one server upstairs compared with two servers side by side on the ground floor.",
-              "Try the upstairs window with a new menu compared with the old ground floor menu."
+              "Compare two servers upstairs with one at each window.",
+              "Compare one server downstairs with one at each window."
             ],
-            "evidence": "In one column of the log she notices that a second server was assigned whenever that window was open.",
+            "evidence": "In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved.",
             "evidenceAlternatives": [
+              [
+                "In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved.",
+                "The upstairs window is beside a narrow landing with room for one server.",
+                "The manager wants the next test to study the layout without changing the number of staff on duty."
+              ],
               [
                 "In one column of the log she notices that a second server was assigned whenever that window was open.",
                 "In another file, caught among sheets about staffing, she finds a note from the site manager: there is room for two servers working side by side at the original window if the drinks crate is moved.",
-                "The manager wants the next test to find out whether the upstairs location itself increases service, rather than whether a second worker can help."
+                "The upstairs window is beside a narrow landing with room for one server.",
+                "The manager wants the next test to study the layout without changing the number of staff on duty."
               ]
             ],
-            "explain": "The larger total came with a second server as well as a second location. The original window can accommodate two. Keep two servers in both trials so the layout, not staffing, is the main difference.",
-            "hint": "Find the extra change in the log and the alternative arrangement in the later file."
+            "explain": "The downstairs window has room for two, while the upstairs landing has room for one. The comparison can keep two workers on duty by placing both downstairs in one trial and splitting them in the other.",
+            "hint": "Compare the capacity of the two windows and the staffing rule for the next test."
           }
         ]
       },
@@ -1144,11 +1148,11 @@
         "questions": [
           {
             "skill": "inference",
-            "prompt": "What would the report need to test whether the new layout shortened a visit?",
-            "right": "Time people in both queues from their arrival until they get lunch.",
+            "prompt": "Which plan fixes both problems with the hall’s figures?",
+            "right": "Measure both queues from joining until the meals arrive.",
             "wrong": [
-              "Count the main counter line again at several points in the hour.",
-              "Time visits in both queues only until people reach the counter."
+              "Measure both queues from joining until the customers reach a counter.",
+              "Measure the main queue from joining until the meals arrive."
             ],
             "evidence": "The tally, however, left out the smaller queue by the exit.",
             "evidenceAlternatives": [
@@ -1198,29 +1202,25 @@
         "id": "INF6.C4",
         "role": "check",
         "title": "The Repair Stall Returns",
-        "text": "At the start of the year, a repair stall in the market opened on weekday mornings. A small notice hung above the stall, and most of the people who brought items lived within walking distance. In July, the organisers sent an announcement to two nearby colleges and began opening on Saturday. They hoped a later opening would reach people who worked on weekdays. The table, prices and range of repairs stayed the same.\n\nA month later, the organisers found that many more customers were using the stall. One member wanted to report that Saturday opening had brought in the college students. The registration cards had no date field, so although several people named a college, there was no way to tell which day they came. A set of small receipts does include the day of each repair, but does not name the customer or mention a college. The receipt sequence is not the same as the order of the loose registration cards.\n\nAnother member has agreed to collect both kinds of information on one sheet next month, before any announcement goes out again. She says the July records are still worth keeping, but an attractive explanation should not be presented as a checked finding. The organisers are deciding how to write up the trial without overstating what can be joined across the two records.",
+        "text": "At the start of the year, a repair stall in the market opened on weekday mornings. A small notice hung above the stall, and most of the people who brought items lived within walking distance. In July, the organisers sent an announcement to two nearby colleges and began opening on Saturday. They hoped a later opening would reach people who worked on weekdays. The table, prices and range of repairs stayed the same.\n\nA month later, the organisers found that many more customers were using the stall. One member wanted to report that Saturday opening had brought in the college students. Registration cards contain the visitor’s name, contact number and college, if they chose to name one. Repair receipts show the repair date, the item repaired and the price paid. The cards and receipts have no shared number, and both bundles were sorted separately at the end of the month.\n\nThe organisers brought the two bundles and a tally of all July repairs to a meeting in August. Someone from the market office plans to look at the total before approving next month’s opening hours. The stall will keep its supply cupboard in the same place and post next month’s opening times beside the market gate, where customers look for other local notices and events.",
         "questions": [
           {
             "skill": "inference",
-            "prompt": "Which conclusion is best supported about the claim that the Saturday session attracted the college students?",
-            "right": "The claim is possible, but no record links a college student to a Saturday visit.",
+            "prompt": "Can the July records show whether any college customers used the Saturday session?",
+            "right": "Neither bundle can link college customers to a Saturday visit.",
             "wrong": [
-              "The claim is established because the college names and dates appear in the same records.",
-              "The claim is disproved because the Saturday receipts do not list students by name."
+              "The cards can link college customers to a Saturday visit.",
+              "The receipts can link college customers to a Saturday visit."
             ],
-            "evidence": "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
+            "evidence": "Registration cards contain the visitor’s name, contact number and college, if they chose to name one.",
             "evidenceAlternatives": [
               [
-                "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
-                "A set of small receipts does include the day of each repair, but does not name the customer or mention a college."
-              ],
-              [
-                "The registration cards had no date field, so although several people named a college, there was no way to tell which day they came.",
-                "A set of small receipts does include the day of each repair, but does not name the customer or mention a college.",
-                "The receipt sequence is not the same as the order of the loose registration cards."
+                "Registration cards contain the visitor’s name, contact number and college, if they chose to name one.",
+                "Repair receipts show the repair date, the item repaired and the price paid.",
+                "The cards and receipts have no shared number, and both bundles were sorted separately at the end of the month."
               ]
             ],
-            "explain": "The registration cards identify some college customers without the day. The receipts identify days without the customer. Neither supports a link by itself, and the records cannot be safely paired."
+            "explain": "The cards have information about customers but no date; the receipts have dates but no customer fields. There is no shared number or preserved order to match the bundles. This does not prove there were no college visitors on Saturdays."
           }
         ]
       }
