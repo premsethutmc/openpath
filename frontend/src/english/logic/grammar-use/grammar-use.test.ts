@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkChoose, checkFix, checkSpot, choices, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { LEARN, learnProblems, GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkChoose, checkFix, checkSpot, choices, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -60,9 +60,12 @@ test("GU-3 a built sentence must use the right tiles in the right order", () => 
   assert.ok(checkBuild(speech, ["“Where", "are", "you", "going?”", "asked", "Ravi."]), "curly quotation marks are the same marks");
 });
 
+/** A learner who has had every topic's card already, so a sitting goes straight to its sentences. */
+const LEARNT: GrammarRecord[] = LEARN.map((c) => ({ type: "learn", sitting: "g0", topic: c.topic, tried: true }));
+
 /** Sit a sitting, answering right unless `miss(item)` says otherwise. */
 function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i: number) => boolean = () => false, topics?: string[]) {
-  const s = new GrammarSitting(GRAMMAR, level, history, topics);
+  const s = new GrammarSitting(GRAMMAR, level, [...LEARNT, ...history], topics);
   const asked: GrammarItem[] = [];
   for (let v = s.snapshot(), i = 0; v.phase !== "done"; v = s.snapshot(), i++) {
     const it = byId.get(v.id!)!;
@@ -92,7 +95,7 @@ test("GU-4 a sitting: eight sentences at the level, mixed topics, the rule after
   assert.deepEqual([r.done.asked, r.done.right, r.done.weak.length > 0], [8, 6, true]);
   assert.equal(r.records.filter((x) => x.type === "answer").length, 8);
   assert.equal(r.records.at(-1)!.type, "end");
-  const s = new GrammarSitting(GRAMMAR, 2, []);
+  const s = new GrammarSitting(GRAMMAR, 2, LEARNT);
   s.fix(99, "x");
   s.build([]);
   assert.equal(s.snapshot().phase, "ask", "an answer that cannot be given is ignored");
@@ -192,7 +195,7 @@ test("GU-9 naming words: a word of the kind asked is right, any other word is no
     assert.equal(checkSpot(it, 99), false);
   }
   assert.deepEqual([...new Set(spots.filter((it) => it.level === 1).map((it) => it.ask))].sort(), ["noun", "verb"]);
-  const v = new GrammarSitting(GRAMMAR, 1, [], ["parts_of_speech"]).snapshot();
+  const v = new GrammarSitting(GRAMMAR, 1, LEARNT, ["parts_of_speech"]).snapshot();
   assert.ok(v.spot && !JSON.stringify(v).includes('"right"'), "the screen holds the words and the kind asked for, never the answer");
 });
 
@@ -204,7 +207,7 @@ test("GU-10 sentences in order: whole sentences are the tiles, shuffled, and onl
     assert.ok(checkBuild(it, it.parts!));
     assert.ok(!checkBuild(it, [...it.parts!].reverse()));
   }
-  const v = new GrammarSitting(GRAMMAR, 3, [], ["sentence_order"]).snapshot();
+  const v = new GrammarSitting(GRAMMAR, 3, LEARNT, ["sentence_order"]).snapshot();
   assert.equal(v.build?.whole, true);
 });
 
@@ -219,7 +222,7 @@ test("GU-11 choosing an answer: one right answer among two or three, in an order
     place[o.indexOf(it.right![0])]++;
   }
   assert.ok(place[0] > 0 && place[1] > 0, `the right answer is not always in one place: ${place}`);
-  const v = new GrammarSitting(GRAMMAR, 6, [], ["figures"]).snapshot();
+  const v = new GrammarSitting(GRAMMAR, 6, LEARNT, ["figures"]).snapshot();
   assert.ok(v.choose && v.choose.options.length === 3 && !JSON.stringify(v).includes('"right"'));
   // a level sitting keeps room for three sentences to fix and three to build
   const level = pick(GRAMMAR, 6, []);
@@ -235,4 +238,42 @@ test("GU-14 the five lines closed on 19 Nov 2026 have their sentences and passag
   assert.ok(at("pronoun_agreement").filter((i) => /\b(Each|Every|Everyone|Someone|Nobody)\b/.test(i.sentence)).length >= 6);
   // Class 6 GV12: a tense held across a paragraph of three sentences
   assert.ok(at("tense_shift").filter((i) => i.sentence.split(/(?<=\.) /).length >= 3).length >= 6);
+});
+
+test("GU-15 a card teaches a topic before its first sentence, once, and is never scored", () => {
+  assert.deepEqual(learnProblems(LEARN, GRAMMAR), []);
+  assert.equal(LEARN.length, GRAMMAR.topics.length, "every topic has a card");
+  const s = new GrammarSitting(GRAMMAR, 1, []);
+  let v = s.snapshot();
+  assert.equal(v.phase, "learn");
+  const card = LEARN.find((c) => c.topic === byId.get(v.id!)!.topic)!;
+  assert.equal(v.learn!.rule, card.rule);
+  assert.deepEqual(v.learn!.examples, card.examples);
+  assert.equal(new Set(v.learn!.options).size, 3);
+  // the sentence cannot be answered while its card is showing
+  const it = byId.get(v.id!)!;
+  if (it.kind === "fix") s.fix(fixParts(it).wrong, it.right![0]);
+  else if (it.kind === "build") s.build(it.sentence.split(" "));
+  else if (it.kind === "choose") s.choose(0);
+  else s.spot(0);
+  assert.equal(s.snapshot().phase, "learn");
+  // trying shows the answer; a wrong try is not held against the learner
+  const wrong = v.learn!.options.findIndex((o) => o !== card.try.right);
+  s.tryCard(wrong);
+  v = s.snapshot();
+  assert.deepEqual(v.learn!.tried, { chosen: wrong, right: false, answer: v.learn!.options.indexOf(card.try.right) });
+  s.learned();
+  assert.equal(s.snapshot().phase, "ask");
+  const recs = s.take();
+  assert.deepEqual(recs.find((r) => r.type === "learn"), { type: "learn", sitting: "g1", topic: card.topic, tried: false });
+  assert.ok(!recs.some((r) => r.type === "answer"), "no answer is recorded for a card");
+  // a topic has its card only once, across sittings
+  const r = sit(1, [...recs], () => false);
+  const later = new GrammarSitting(GRAMMAR, 1, [...LEARN.filter((c) => c.topic !== card.topic).map((c) => ({ type: "learn" as const, sitting: "g0", topic: c.topic, tried: true })), ...recs, ...r.records]);
+  assert.notEqual(later.snapshot().phase, "learn");
+});
+
+test("GU-16 the basics have enough sentences: am, is, are; this and these; word order; have and has", () => {
+  for (const t of ["be_verbs", "this_these", "word_order", "have_has", "pronouns", "questions", "capitals", "plurals"]) assert.ok(GRAMMAR.items.filter((i) => i.topic === t).length >= 8, t);
+  assert.ok(GRAMMAR.items.filter((i) => i.level === 1).length >= 90, "level 1");
 });

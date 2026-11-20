@@ -28,7 +28,8 @@ function strings(x: unknown, out: string[] = []): string[] {
   return out;
 }
 
-const SCREENED = ["vocabulary/daily-words.json", "vocabulary/size-check.json", "dictation/sentences.json", "grammar/in-use.json", "listening/passages.json", "spelling/bee-meanings.json", "first/words.json", "guided/tasks.json", "reading/course.json", "reading/inference.json", "reading/level-1.json", "reading/level-2.json", "reading/level-3.json", "reading/level-4.json", "reading/level-5.json", "reading/level-6.json", "syllabus/icse-class-1.json", "syllabus/icse-class-2.json", "syllabus/icse-class-8.json", "syllabus/icse-class-3.json", "syllabus/icse-class-4.json", "syllabus/icse-class-7.json", "syllabus/icse-class-5.json", "syllabus/icse-class-6.json"];
+const SCREENED = ["vocabulary/daily-words.json", "vocabulary/size-check.json", "dictation/sentences.json", "grammar/in-use.json",
+  "grammar/learn.json", "listening/passages.json", "spelling/bee-meanings.json", "first/words.json", "guided/tasks.json", "reading/course.json", "reading/inference.json", "reading/level-1.json", "reading/level-2.json", "reading/level-3.json", "reading/level-4.json", "reading/level-5.json", "reading/level-6.json", "syllabus/icse-class-1.json", "syllabus/icse-class-2.json", "syllabus/icse-class-8.json", "syllabus/icse-class-3.json", "syllabus/icse-class-4.json", "syllabus/icse-class-7.json", "syllabus/icse-class-5.json", "syllabus/icse-class-6.json"];
 
 test("CS-1 the screen holds the words it is there for, and matches whole words only", () => {
   assert.ok(BLOCKED.size > 150);

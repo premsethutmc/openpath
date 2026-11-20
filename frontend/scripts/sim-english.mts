@@ -315,6 +315,12 @@ function run(p: Persona, days: number, seed: number) {
           s.next();
           continue;
         }
+        if (v.phase === "learn") {
+          // a card before a topic's first sentence: try its question, then on to the sentence
+          s.tryCard(0);
+          s.learned();
+          continue;
+        }
         const it = GRAMMAR.items.find((x) => x.id === v.id)!;
         asked++;
         const before = right;

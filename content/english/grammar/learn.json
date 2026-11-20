@@ -1,0 +1,1097 @@
+{
+  "id": "grammar-learn",
+  "version": 1,
+  "status": "practice_only",
+  "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
+  "format": "One card per Grammar in use topic, shown the first time a learner meets the topic: the rule, two examples, and one question to try (not scored).",
+  "cards": [
+    {
+      "topic": "parts_of_speech",
+      "rule": "A noun names a person, place or thing. A verb is an action. An adjective describes a noun.",
+      "examples": [
+        "The tall boy runs. (adjective: tall, noun: boy, verb: runs)",
+        "Birds sing. (noun: birds, verb: sing)"
+      ],
+      "try": {
+        "question": "In \"The cat sleeps\", which word is the verb?",
+        "right": "sleeps",
+        "wrong": [
+          "cat",
+          "The"
+        ]
+      }
+    },
+    {
+      "topic": "capitals",
+      "rule": "Start every sentence with a capital letter and end it with a full stop. Names of people and places start with capitals too.",
+      "examples": [
+        "My friend Anu lives in Chennai.",
+        "We play cricket after school."
+      ],
+      "try": {
+        "question": "Which sentence is written correctly?",
+        "right": "Ravi has a red bicycle.",
+        "wrong": [
+          "ravi has a red bicycle.",
+          "Ravi has a red bicycle"
+        ]
+      }
+    },
+    {
+      "topic": "articles",
+      "rule": "Use \"a\" before a consonant sound and \"an\" before a vowel sound (a, e, i, o, u).",
+      "examples": [
+        "a cat, a mango",
+        "an apple, an hour"
+      ],
+      "try": {
+        "question": "Which is right?",
+        "right": "an umbrella",
+        "wrong": [
+          "a umbrella",
+          "an chair"
+        ]
+      }
+    },
+    {
+      "topic": "plurals",
+      "rule": "Most words add -s for more than one. Words ending in s, x, ch or sh add -es. Some change: child, children.",
+      "examples": [
+        "one book, two books",
+        "one box, two boxes"
+      ],
+      "try": {
+        "question": "Which is the plural of \"bus\"?",
+        "right": "buses",
+        "wrong": [
+          "buss",
+          "busies"
+        ]
+      }
+    },
+    {
+      "topic": "agreement",
+      "rule": "One person or thing takes \"is\" and a verb with -s. More than one takes \"are\" and no -s.",
+      "examples": [
+        "The dog runs. The dogs run.",
+        "The bird is small. The birds are small."
+      ],
+      "try": {
+        "question": "Which is right?",
+        "right": "My sisters are at home.",
+        "wrong": [
+          "My sisters is at home.",
+          "My sisters am at home."
+        ]
+      }
+    },
+    {
+      "topic": "pronouns",
+      "rule": "A pronoun takes the place of a noun: he for a boy or man, she for a girl or woman, it for a thing, they for more than one.",
+      "examples": [
+        "Ravi is late. He missed the bus.",
+        "The books are new. They are on the table."
+      ],
+      "try": {
+        "question": "\"Meena likes music. ___ sings well.\" Which word fits?",
+        "right": "She",
+        "wrong": [
+          "He",
+          "It"
+        ]
+      }
+    },
+    {
+      "topic": "past",
+      "rule": "For something already finished, use the past. Most verbs add -ed: play, played.",
+      "examples": [
+        "Yesterday we played in the park.",
+        "Last week she visited her aunt."
+      ],
+      "try": {
+        "question": "\"Yesterday I ___ my room.\" Which word fits?",
+        "right": "cleaned",
+        "wrong": [
+          "clean",
+          "cleaning"
+        ]
+      }
+    },
+    {
+      "topic": "prepositions",
+      "rule": "Prepositions show where or when: in, on, under, at, between.",
+      "examples": [
+        "The cat is under the table.",
+        "We meet at five o'clock."
+      ],
+      "try": {
+        "question": "\"The book is ___ the shelf.\" Which word fits?",
+        "right": "on",
+        "wrong": [
+          "at",
+          "of"
+        ]
+      }
+    },
+    {
+      "topic": "conjunctions",
+      "rule": "Conjunctions join words or ideas: and adds, but shows a difference, because gives a reason.",
+      "examples": [
+        "I like tea and biscuits.",
+        "I was tired, but I finished my work."
+      ],
+      "try": {
+        "question": "\"I stayed home ___ it was raining.\" Which word fits?",
+        "right": "because",
+        "wrong": [
+          "but",
+          "and"
+        ]
+      }
+    },
+    {
+      "topic": "questions",
+      "rule": "A question often starts with a question word (who, what, where, when, why, how) or a helping verb, and ends with a question mark.",
+      "examples": [
+        "Where do you live?",
+        "Is she your sister?"
+      ],
+      "try": {
+        "question": "Which is a correct question?",
+        "right": "What is your name?",
+        "wrong": [
+          "What your name is?",
+          "What is your name."
+        ]
+      }
+    },
+    {
+      "topic": "adverbs",
+      "rule": "An adverb tells how, when or where something happens. Many end in -ly: slowly, quietly.",
+      "examples": [
+        "She sings beautifully.",
+        "We will leave soon."
+      ],
+      "try": {
+        "question": "\"He walked ___ so the baby would not wake.\" Which word fits?",
+        "right": "quietly",
+        "wrong": [
+          "quiet",
+          "quieter"
+        ]
+      }
+    },
+    {
+      "topic": "interjections",
+      "rule": "An interjection shows a sudden feeling and is often followed by an exclamation mark.",
+      "examples": [
+        "Wow! What a goal!",
+        "Ouch! That hurt."
+      ],
+      "try": {
+        "question": "Which is an interjection?",
+        "right": "Hurray!",
+        "wrong": [
+          "Quickly",
+          "Because"
+        ]
+      }
+    },
+    {
+      "topic": "phrasal_verbs",
+      "rule": "A phrasal verb is a verb with a small word (up, off, out) that together have their own meaning.",
+      "examples": [
+        "Please turn off the light. (stop it)",
+        "I will look after my brother. (take care of)"
+      ],
+      "try": {
+        "question": "\"Give up\" means:",
+        "right": "stop trying",
+        "wrong": [
+          "give a present",
+          "lift something"
+        ]
+      }
+    },
+    {
+      "topic": "proverbs",
+      "rule": "A proverb is a short, well-known saying that gives advice. Its meaning is not word for word.",
+      "examples": [
+        "Practice makes perfect. (doing something often makes you good at it)",
+        "A stitch in time saves nine. (fix a small problem early)"
+      ],
+      "try": {
+        "question": "\"Look before you leap\" means:",
+        "right": "think before you act",
+        "wrong": [
+          "jump very high",
+          "always look down"
+        ]
+      }
+    },
+    {
+      "topic": "possessives",
+      "rule": "To show that something belongs to someone, add 's: Ravi's bag. For a plural ending in s, add only ': the girls' room.",
+      "examples": [
+        "my mother's phone",
+        "the teachers' room"
+      ],
+      "try": {
+        "question": "Which shows the bag belongs to Anu?",
+        "right": "Anu's bag",
+        "wrong": [
+          "Anus bag",
+          "Anu bag's"
+        ]
+      }
+    },
+    {
+      "topic": "comparison",
+      "rule": "To compare two, add -er or use more: taller, more careful. For three or more, add -est or use most.",
+      "examples": [
+        "Ravi is taller than Meena.",
+        "This is the most beautiful garden in town."
+      ],
+      "try": {
+        "question": "\"An elephant is ___ than a horse.\" Which fits?",
+        "right": "bigger",
+        "wrong": [
+          "biggest",
+          "more big"
+        ]
+      }
+    },
+    {
+      "topic": "contractions",
+      "rule": "A short form joins two words, and the apostrophe stands where letters are missing.",
+      "examples": [
+        "do not = don't",
+        "it is = it's"
+      ],
+      "try": {
+        "question": "What is the short form of \"they are\"?",
+        "right": "they're",
+        "wrong": [
+          "there",
+          "their"
+        ]
+      }
+    },
+    {
+      "topic": "irregular_verbs",
+      "rule": "Some verbs do not add -ed in the past. They change: go, went; eat, ate; write, wrote.",
+      "examples": [
+        "I went to the market.",
+        "She wrote a letter."
+      ],
+      "try": {
+        "question": "What is the past of \"take\"?",
+        "right": "took",
+        "wrong": [
+          "taked",
+          "taken"
+        ]
+      }
+    },
+    {
+      "topic": "continuous",
+      "rule": "Use am, is or are with the -ing form for something happening now.",
+      "examples": [
+        "I am reading a book.",
+        "They are playing outside."
+      ],
+      "try": {
+        "question": "\"Look! The baby ___.\" Which fits?",
+        "right": "is sleeping",
+        "wrong": [
+          "sleeping",
+          "are sleep"
+        ]
+      }
+    },
+    {
+      "topic": "speech",
+      "rule": "Direct speech gives the exact words inside quotation marks. Reported speech tells what was said, without them.",
+      "examples": [
+        "Ravi said, \"I am hungry.\"",
+        "Ravi said that he was hungry."
+      ],
+      "try": {
+        "question": "Which is reported speech?",
+        "right": "Meena said that she was tired.",
+        "wrong": [
+          "Meena said, \"I am tired.\"",
+          "\"I am tired,\" said Meena."
+        ]
+      }
+    },
+    {
+      "topic": "compound",
+      "rule": "A compound sentence joins two complete sentences with and, but or so.",
+      "examples": [
+        "It rained, so we stayed in.",
+        "I like maths, but my brother likes art."
+      ],
+      "try": {
+        "question": "Which is a compound sentence?",
+        "right": "The bell rang, and we went home.",
+        "wrong": [
+          "The bell rang loudly.",
+          "After the bell rang."
+        ]
+      }
+    },
+    {
+      "topic": "linkers",
+      "rule": "Linking words connect ideas and show order or contrast: first, then, finally, however.",
+      "examples": [
+        "First, wash the rice. Then, cook it.",
+        "It was late. However, we kept walking."
+      ],
+      "try": {
+        "question": "Which word shows the last step?",
+        "right": "Finally",
+        "wrong": [
+          "First",
+          "However"
+        ]
+      }
+    },
+    {
+      "topic": "punctuation",
+      "rule": "Punctuation marks help the reader: a full stop ends a statement, a question mark ends a question, commas separate items.",
+      "examples": [
+        "We bought rice, dal and oil.",
+        "Are you coming with us?"
+      ],
+      "try": {
+        "question": "Which is written correctly?",
+        "right": "I bought pens, pencils and paper.",
+        "wrong": [
+          "I bought pens pencils and paper.",
+          "I bought, pens pencils, and paper."
+        ]
+      }
+    },
+    {
+      "topic": "tenses",
+      "rule": "Have or has with the third form of a verb shows something done up to now: have finished, has eaten.",
+      "examples": [
+        "I have finished my homework.",
+        "She has lived here for years."
+      ],
+      "try": {
+        "question": "\"We ___ this film before.\" Which fits?",
+        "right": "have seen",
+        "wrong": [
+          "have saw",
+          "has see"
+        ]
+      }
+    },
+    {
+      "topic": "confusables",
+      "rule": "Some words sound alike but mean different things: there (a place), their (belonging), they're (they are).",
+      "examples": [
+        "Their house is over there.",
+        "They're coming tomorrow."
+      ],
+      "try": {
+        "question": "\"___ dog is very friendly.\" Which fits?",
+        "right": "Their",
+        "wrong": [
+          "There",
+          "They're"
+        ]
+      }
+    },
+    {
+      "topic": "relative",
+      "rule": "Who, which and that add information about a noun: who for people, which for things, that for both.",
+      "examples": [
+        "The girl who won is my cousin.",
+        "The book that I read was funny."
+      ],
+      "try": {
+        "question": "\"The man ___ fixed our tap was kind.\" Which fits?",
+        "right": "who",
+        "wrong": [
+          "which",
+          "what"
+        ]
+      }
+    },
+    {
+      "topic": "titles",
+      "rule": "In a title, the first word and the main words start with capital letters. Small words like a, of and the do not, unless they come first.",
+      "examples": [
+        "The Lion and the Mouse",
+        "A Day at the Beach"
+      ],
+      "try": {
+        "question": "Which title is written correctly?",
+        "right": "The Secret of the Old Well",
+        "wrong": [
+          "The secret of the old well",
+          "The Secret Of The Old Well"
+        ]
+      }
+    },
+    {
+      "topic": "dialogue",
+      "rule": "Spoken words go inside quotation marks. A comma, question mark or exclamation mark comes before the closing mark.",
+      "examples": [
+        "\"Come here,\" said Mother.",
+        "\"Are you ready?\" asked the coach."
+      ],
+      "try": {
+        "question": "Which is punctuated correctly?",
+        "right": "\"I am hungry,\" said Ravi.",
+        "wrong": [
+          "\"I am hungry\" said Ravi.",
+          "\"I am hungry\", said Ravi."
+        ]
+      }
+    },
+    {
+      "topic": "pronoun_case",
+      "rule": "Use I, he, she, we, they for the doer, and me, him, her, us, them after a verb or a word like with.",
+      "examples": [
+        "My friend and I went home.",
+        "The teacher praised her and me."
+      ],
+      "try": {
+        "question": "\"Rahul and ___ are in the same class.\" Which fits?",
+        "right": "I",
+        "wrong": [
+          "me",
+          "myself"
+        ]
+      }
+    },
+    {
+      "topic": "pronoun_agreement",
+      "rule": "A pronoun must match its noun: one person or thing takes he, she, it; more than one takes they and their.",
+      "examples": [
+        "The students opened their books.",
+        "Each girl packed her bag."
+      ],
+      "try": {
+        "question": "\"The children washed ___ hands.\" Which fits?",
+        "right": "their",
+        "wrong": [
+          "his",
+          "its"
+        ]
+      }
+    },
+    {
+      "topic": "tense_shift",
+      "rule": "Keep to one tense in a passage unless the time changes. A story in the past stays in the past.",
+      "examples": [
+        "We went to the beach and swam in the sea.",
+        "She opens the door and walks in."
+      ],
+      "try": {
+        "question": "\"Yesterday we went to the zoo and ___ the lions.\" Which fits?",
+        "right": "saw",
+        "wrong": [
+          "see",
+          "sees"
+        ]
+      }
+    },
+    {
+      "topic": "passive",
+      "rule": "In the passive, the thing acted on comes first, with was or is and the third form of the verb.",
+      "examples": [
+        "The window was broken by the ball.",
+        "Rice is grown in Tamil Nadu."
+      ],
+      "try": {
+        "question": "Which is passive?",
+        "right": "The cake was eaten by the children.",
+        "wrong": [
+          "The children ate the cake.",
+          "The children are eating the cake."
+        ]
+      }
+    },
+    {
+      "topic": "conditionals",
+      "rule": "If sentences show what happens when something else happens: if it rains, we will stay in. For something unreal: if I were you.",
+      "examples": [
+        "If you heat water, it boils.",
+        "If I had wings, I would fly."
+      ],
+      "try": {
+        "question": "\"If it rains tomorrow, we ___ indoors.\" Which fits?",
+        "right": "will play",
+        "wrong": [
+          "played",
+          "would played"
+        ]
+      }
+    },
+    {
+      "topic": "modal_perfect",
+      "rule": "Should have, must have and might have go with the third form of a verb to talk about the past.",
+      "examples": [
+        "You should have told me.",
+        "He must have forgotten."
+      ],
+      "try": {
+        "question": "\"She must have ___ the bus.\" Which fits?",
+        "right": "missed",
+        "wrong": [
+          "miss",
+          "missing"
+        ]
+      }
+    },
+    {
+      "topic": "ing_or_to",
+      "rule": "Some verbs are followed by -ing (enjoy, avoid, finish); others by to (want, decide, hope).",
+      "examples": [
+        "I enjoy reading.",
+        "We decided to leave early."
+      ],
+      "try": {
+        "question": "\"He wants ___ a doctor.\" Which fits?",
+        "right": "to become",
+        "wrong": [
+          "becoming",
+          "become"
+        ]
+      }
+    },
+    {
+      "topic": "parallel",
+      "rule": "Items in a list should have the same form: all -ing words, all adjectives, or all to-verbs.",
+      "examples": [
+        "She likes singing, dancing and painting.",
+        "The room was clean, bright and quiet."
+      ],
+      "try": {
+        "question": "Which list matches?",
+        "right": "running, jumping and swimming",
+        "wrong": [
+          "running, jump and swimming",
+          "to run, jumping and swim"
+        ]
+      }
+    },
+    {
+      "topic": "sentence_order",
+      "rule": "Sentences in a story follow the order things happen. Words like first, then and at last show the order.",
+      "examples": [
+        "First he woke up. Then he brushed his teeth.",
+        "At last the rain stopped."
+      ],
+      "try": {
+        "question": "Which comes first?",
+        "right": "Anu planted a seed.",
+        "wrong": [
+          "The plant grew tall.",
+          "Flowers opened on the plant."
+        ]
+      }
+    },
+    {
+      "topic": "similes",
+      "rule": "A simile compares two things using as or like.",
+      "examples": [
+        "as brave as a lion",
+        "She swims like a fish."
+      ],
+      "try": {
+        "question": "Which is a simile?",
+        "right": "as quiet as a mouse",
+        "wrong": [
+          "the quiet mouse",
+          "a mouse is quiet"
+        ]
+      }
+    },
+    {
+      "topic": "idioms",
+      "rule": "An idiom is a group of words with a meaning different from the words themselves.",
+      "examples": [
+        "Raining cats and dogs means raining very hard.",
+        "A piece of cake means very easy."
+      ],
+      "try": {
+        "question": "\"Under the weather\" means:",
+        "right": "feeling a little ill",
+        "wrong": [
+          "standing in the rain",
+          "watching the sky"
+        ]
+      }
+    },
+    {
+      "topic": "field_words",
+      "rule": "Each activity has its own words: in cooking we bake and boil; in cricket we bowl and bat.",
+      "examples": [
+        "The chef chopped the onions.",
+        "The batsman hit a six."
+      ],
+      "try": {
+        "question": "Which word belongs to cooking?",
+        "right": "simmer",
+        "wrong": [
+          "dribble",
+          "serve"
+        ]
+      }
+    },
+    {
+      "topic": "opinion_reason",
+      "rule": "An opinion says what you think. A reason, often after because, says why.",
+      "examples": [
+        "I like mangoes because they are sweet.",
+        "Parks are important because children need space to play."
+      ],
+      "try": {
+        "question": "Which gives an opinion with a reason?",
+        "right": "Cycling is fun because I feel free.",
+        "wrong": [
+          "Cycling is fun.",
+          "I cycle every day."
+        ]
+      }
+    },
+    {
+      "topic": "exact_words",
+      "rule": "Choose the exact word for a feeling or action: a tired man trudges, a happy child skips.",
+      "examples": [
+        "The frightened kitten trembled.",
+        "The excited fans cheered."
+      ],
+      "try": {
+        "question": "Which word best shows a happy child moving?",
+        "right": "skipped",
+        "wrong": [
+          "trudged",
+          "crawled"
+        ]
+      }
+    },
+    {
+      "topic": "affixes",
+      "rule": "A prefix comes before a word and changes its meaning (un-, re-). A suffix comes after it (-ful, -less).",
+      "examples": [
+        "un + happy = unhappy",
+        "care + less = careless"
+      ],
+      "try": {
+        "question": "What does \"rewrite\" mean?",
+        "right": "write again",
+        "wrong": [
+          "not write",
+          "write badly"
+        ]
+      }
+    },
+    {
+      "topic": "transitive",
+      "rule": "Some verbs need an object (kick the ball). Others do not (the baby slept).",
+      "examples": [
+        "Ravi kicked the ball. (object: the ball)",
+        "The baby slept. (no object)"
+      ],
+      "try": {
+        "question": "Which sentence has an object?",
+        "right": "Meena ate an apple.",
+        "wrong": [
+          "Meena laughed.",
+          "Meena slept."
+        ]
+      }
+    },
+    {
+      "topic": "subject_predicate",
+      "rule": "The subject is who or what the sentence is about. The predicate tells what the subject does or is.",
+      "examples": [
+        "The old dog | barked loudly.",
+        "My sister | is a doctor."
+      ],
+      "try": {
+        "question": "In \"The small bird sang\", what is the subject?",
+        "right": "The small bird",
+        "wrong": [
+          "sang",
+          "small"
+        ]
+      }
+    },
+    {
+      "topic": "collective_nouns",
+      "rule": "A collective noun names a group: a herd of cows, a flock of birds, a team of players.",
+      "examples": [
+        "a bunch of grapes",
+        "a swarm of bees"
+      ],
+      "try": {
+        "question": "A group of fish is a:",
+        "right": "school",
+        "wrong": [
+          "herd",
+          "pack"
+        ]
+      }
+    },
+    {
+      "topic": "alphabetical",
+      "rule": "Words go in order of their first letter. If the first letters match, look at the second.",
+      "examples": [
+        "apple, banana, cherry",
+        "cap, cat, cow"
+      ],
+      "try": {
+        "question": "Which comes first in a dictionary?",
+        "right": "beach",
+        "wrong": [
+          "bread",
+          "bus"
+        ]
+      }
+    },
+    {
+      "topic": "synonyms_antonyms",
+      "rule": "A synonym means the same (big, large). An antonym means the opposite (big, small).",
+      "examples": [
+        "happy and glad are synonyms",
+        "hot and cold are antonyms"
+      ],
+      "try": {
+        "question": "What is the antonym of \"early\"?",
+        "right": "late",
+        "wrong": [
+          "soon",
+          "quick"
+        ]
+      }
+    },
+    {
+      "topic": "sound_words",
+      "rule": "Some words sound like the noise they name: buzz, sizzle, splash.",
+      "examples": [
+        "The bees buzz.",
+        "The oil sizzles in the pan."
+      ],
+      "try": {
+        "question": "Which word sounds like its noise?",
+        "right": "crash",
+        "wrong": [
+          "loud",
+          "noise"
+        ]
+      }
+    },
+    {
+      "topic": "noun_kinds",
+      "rule": "Common nouns name any one of a kind (city). Proper nouns name a particular one (Madurai). Some nouns cannot be counted (water, rice).",
+      "examples": [
+        "Madurai is a city.",
+        "We need some rice."
+      ],
+      "try": {
+        "question": "Which is a proper noun?",
+        "right": "Kerala",
+        "wrong": [
+          "state",
+          "river"
+        ]
+      }
+    },
+    {
+      "topic": "clauses",
+      "rule": "A clause has a subject and a verb. The main clause can stand alone as a sentence.",
+      "examples": [
+        "We stayed inside | when it rained.",
+        "Although he was tired, | he finished."
+      ],
+      "try": {
+        "question": "In \"I smiled when I saw her\", which is the main clause?",
+        "right": "I smiled",
+        "wrong": [
+          "when I saw her",
+          "saw her"
+        ]
+      }
+    },
+    {
+      "topic": "adjective_kinds",
+      "rule": "Adjectives can describe quality (tall), number (three) or quantity (some, much).",
+      "examples": [
+        "a tall tree (quality)",
+        "three pens (number)"
+      ],
+      "try": {
+        "question": "In \"some milk\", what kind of adjective is \"some\"?",
+        "right": "quantity",
+        "wrong": [
+          "quality",
+          "colour"
+        ]
+      }
+    },
+    {
+      "topic": "clause_kinds",
+      "rule": "A noun clause does the work of a noun, an adjective clause describes a noun, and an adverb clause tells when, where, why or how.",
+      "examples": [
+        "I know that she is honest. (noun clause)",
+        "We left because it was late. (adverb clause)"
+      ],
+      "try": {
+        "question": "In \"The boy who won is my cousin\", the clause \"who won\" is:",
+        "right": "an adjective clause",
+        "wrong": [
+          "a noun clause",
+          "an adverb clause"
+        ]
+      }
+    },
+    {
+      "topic": "phrase_clause",
+      "rule": "A phrase is a group of words without its own subject and verb. A clause has both.",
+      "examples": [
+        "in the garden (phrase)",
+        "when the bell rang (clause)"
+      ],
+      "try": {
+        "question": "Which is a clause?",
+        "right": "because she was late",
+        "wrong": [
+          "under the bridge",
+          "in the morning"
+        ]
+      }
+    },
+    {
+      "topic": "figures",
+      "rule": "Figures of speech make writing vivid: a simile compares with like or as, a metaphor says one thing is another, personification gives human actions to things.",
+      "examples": [
+        "The classroom was a zoo. (metaphor)",
+        "The wind whispered. (personification)"
+      ],
+      "try": {
+        "question": "\"The sun smiled down on us\" is an example of:",
+        "right": "personification",
+        "wrong": [
+          "a simile",
+          "alliteration"
+        ]
+      }
+    },
+    {
+      "topic": "register",
+      "rule": "Formal language is polite and complete, for letters and speeches. Informal language is for friends.",
+      "examples": [
+        "Formal: I would like to request a meeting.",
+        "Informal: Can we meet?"
+      ],
+      "try": {
+        "question": "Which is more formal?",
+        "right": "I am writing to apologise for my absence.",
+        "wrong": [
+          "Sorry I missed it!",
+          "Oops, couldn't come."
+        ]
+      }
+    },
+    {
+      "topic": "context_meaning",
+      "rule": "When a word is new, look at the words around it for clues to its meaning.",
+      "examples": [
+        "The parched land needed rain. (parched: very dry)",
+        "He was famished after skipping lunch. (famished: very hungry)"
+      ],
+      "try": {
+        "question": "\"The room was so dim that we could hardly see.\" Dim means:",
+        "right": "not bright",
+        "wrong": [
+          "very large",
+          "very noisy"
+        ]
+      }
+    },
+    {
+      "topic": "future",
+      "rule": "For the future, use will with the plain verb: will go, will play.",
+      "examples": [
+        "Tomorrow we will visit Grandmother.",
+        "She will call you later."
+      ],
+      "try": {
+        "question": "\"Next year I ___ ten.\" Which fits?",
+        "right": "will be",
+        "wrong": [
+          "will am",
+          "was"
+        ]
+      }
+    },
+    {
+      "topic": "joining",
+      "rule": "Two sentences can become one with a joining word: and, but, because, although, when.",
+      "examples": [
+        "He was tired. He kept walking. -> Although he was tired, he kept walking.",
+        "It rained. We stayed in. -> We stayed in because it rained."
+      ],
+      "try": {
+        "question": "Join: \"She was ill. She went to school.\"",
+        "right": "Although she was ill, she went to school.",
+        "wrong": [
+          "Because she was ill, she went to school.",
+          "She was ill and because went to school."
+        ]
+      }
+    },
+    {
+      "topic": "prediction",
+      "rule": "Clues in a text help you guess what comes next: the pattern, the rhyme, or what the characters want.",
+      "examples": [
+        "Dark clouds gathered. Soon, it began to rain.",
+        "The cat sat on the mat and wore a big hat."
+      ],
+      "try": {
+        "question": "\"The sky turned dark and thunder rumbled.\" What is likely to happen next?",
+        "right": "It will rain.",
+        "wrong": [
+          "The sun will shine.",
+          "It will snow on the beach."
+        ]
+      }
+    },
+    {
+      "topic": "mood_tone",
+      "rule": "Mood is the feeling a text gives; tone is the writer's attitude. Word choice builds both.",
+      "examples": [
+        "Silent, dark and cold: a scary mood.",
+        "Bright, warm and laughing: a cheerful mood."
+      ],
+      "try": {
+        "question": "\"Sunlight danced on the water and children laughed.\" The mood is:",
+        "right": "cheerful",
+        "wrong": [
+          "frightening",
+          "sad"
+        ]
+      }
+    },
+    {
+      "topic": "text_structure",
+      "rule": "Texts are built in patterns: steps in order, cause and effect, problem and solution, or comparing.",
+      "examples": [
+        "First, next, finally: steps in order.",
+        "Because of this, as a result: cause and effect."
+      ],
+      "try": {
+        "question": "Which words signal a cause and effect?",
+        "right": "as a result",
+        "wrong": [
+          "first of all",
+          "on the other hand"
+        ]
+      }
+    },
+    {
+      "topic": "dialogue_character",
+      "rule": "What a character says and how they say it shows what they are like.",
+      "examples": [
+        "\"Take my umbrella,\" she said. (kind)",
+        "\"I always win,\" he boasted. (proud)"
+      ],
+      "try": {
+        "question": "\"Let me help you carry that,\" said Ravi. Ravi is:",
+        "right": "helpful",
+        "wrong": [
+          "rude",
+          "lazy"
+        ]
+      }
+    },
+    {
+      "topic": "picture_order",
+      "rule": "Pictures in a story go in the order things happen: what comes first, then next, then last.",
+      "examples": [
+        "Egg, crack, chick.",
+        "Seed, water, flower."
+      ],
+      "try": {
+        "question": "What comes after a seed is planted and watered?",
+        "right": "The plant grows.",
+        "wrong": [
+          "The seed is bought.",
+          "The pot is empty."
+        ]
+      }
+    },
+    {
+      "topic": "be_verbs",
+      "rule": "Use am with I, is with one person or thing (he, she, it), and are with you, we and they.",
+      "examples": [
+        "I am happy. She is happy.",
+        "We are happy. They are happy."
+      ],
+      "try": {
+        "question": "\"They ___ my friends.\" Which fits?",
+        "right": "are",
+        "wrong": [
+          "is",
+          "am"
+        ]
+      }
+    },
+    {
+      "topic": "this_these",
+      "rule": "This and that point to one thing; these and those point to more than one. This and these are near; that and those are far.",
+      "examples": [
+        "This book is mine. These books are new.",
+        "That tree is tall. Those trees are old."
+      ],
+      "try": {
+        "question": "\"___ shoes are too small.\" Which fits?",
+        "right": "These",
+        "wrong": [
+          "This",
+          "That"
+        ]
+      }
+    },
+    {
+      "topic": "word_order",
+      "rule": "An English sentence usually goes: who, then the action, then the rest. The cat drinks milk.",
+      "examples": [
+        "Ravi eats rice.",
+        "We play in the park."
+      ],
+      "try": {
+        "question": "Which is in the right order?",
+        "right": "The boy kicks the ball.",
+        "wrong": [
+          "Kicks the boy the ball.",
+          "The ball the boy kicks."
+        ]
+      }
+    },
+    {
+      "topic": "have_has",
+      "rule": "Use has with he, she, it and one person or thing. Use have with I, you, we and they.",
+      "examples": [
+        "She has a cat.",
+        "We have two dogs."
+      ],
+      "try": {
+        "question": "\"My brother ___ a new bicycle.\" Which fits?",
+        "right": "has",
+        "wrong": [
+          "have",
+          "haves"
+        ]
+      }
+    }
+  ]
+}
