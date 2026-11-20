@@ -56,10 +56,47 @@ export function loadPot(storage) {
   } catch { return { pot: emptyPot, status: 'unavailable' }; }
 }
 
-export function savePot(storage, pot) {
+export function savePot(storage, pot, lesson = undefined) {
   if (!validPot(pot)) throw new TypeError('Invalid pot');
   try {
-    storage.setItem(storageKey, JSON.stringify({ version: 1, pot }));
+    storage.setItem(storageKey, JSON.stringify({ version: 1, pot, lesson }));
     return true;
   } catch { return false; }
+}
+
+export const blankLesson = Object.freeze({ prediction: null, rootSeen: false });
+const guesses = ['root', 'shoot'];
+
+export function lessonView(pot, lesson, windowOpen = false) {
+  const stage = stageOf(pot);
+  const mustPredict = stage !== 'empty' && !guesses.includes(lesson.prediction);
+  const mustLook = !mustPredict && !lesson.rootSeen && (stage === 'root' || stage === 'sprout');
+  const cutaway = !mustPredict && windowOpen && (mustLook || lesson.rootSeen);
+  return {
+    mustPredict, mustLook, cutaway,
+    stage: mustPredict && stage !== 'empty' ? 'seed' : cutaway || stage === 'sprout' ? stage : stage === 'empty' ? 'empty' : 'seed',
+    canCare: stage !== 'empty' && !mustPredict && !mustLook,
+    canApply: stage === 'sprout' && lesson.rootSeen && !mustPredict,
+  };
+}
+
+export function checkTransfer(answers) {
+  const choices = checkTwoPots(answers.crumbly, answers.damp);
+  if (!choices || !['soil', 'calendar', 'size'].includes(answers.careReason)
+    || !['cutaway', 'surface', 'taller'].includes(answers.observe)
+    || !['hiddenGrowth', 'age', 'surfaceOnly'].includes(answers.observeReason)) return null;
+  return {
+    care: choices.crumbly && choices.damp && answers.careReason === 'soil',
+    evidence: answers.observe === 'cutaway' && answers.observeReason === 'hiddenGrowth',
+  };
+}
+
+export function loadLesson(storage, pot) {
+  try {
+    const { lesson } = JSON.parse(storage.getItem(storageKey));
+    if (pot.day > 0 && guesses.includes(lesson?.prediction)) {
+      return { prediction: lesson.prediction, rootSeen: lesson.rootSeen === true && pot.growth > 0 };
+    }
+  } catch { /* Legacy/inaccessible state can still start with a fresh prediction. */ }
+  return blankLesson;
 }

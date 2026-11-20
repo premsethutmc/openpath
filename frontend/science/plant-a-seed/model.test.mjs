@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkTwoPots, emptyPot, firstDay, loadPot, nextDay, savePot, stageOf, storageKey } from './model.mjs';
+import { blankLesson, checkTransfer, checkTwoPots, emptyPot, firstDay, lessonView, loadLesson, loadPot, nextDay, savePot, stageOf, storageKey } from './model.mjs';
 
 test('first root comes before the shoot, after suitable days', () => {
   assert.equal(stageOf(emptyPot), 'empty');
@@ -47,4 +47,35 @@ test('one anonymous pot saves and reloads; invalid or unavailable storage is not
   const blocked = { getItem() { throw Error('blocked'); }, setItem() { throw Error('blocked'); } };
   assert.equal(loadPot(blocked).status, 'unavailable');
   assert.equal(savePot(blocked, pot), false);
+});
+
+test('never reveals the first root until a prediction is locked and the soil window is opened', () => {
+  const root = nextDay(firstDay, 'wait').pot;
+  const unavailable = lessonView(root, blankLesson, true);
+  assert.deepEqual(unavailable, {
+    mustPredict: true, mustLook: false, cutaway: false, stage: 'seed', canCare: false, canApply: false,
+  });
+  const predicted = { prediction: 'shoot', rootSeen: false };
+  assert.equal(lessonView(root, predicted).stage, 'seed');
+  assert.equal(lessonView(root, predicted).mustLook, true);
+  assert.equal(lessonView(root, predicted, true).stage, 'root');
+  assert.equal(lessonView(root, { ...predicted, rootSeen: true }).canCare, true);
+});
+
+test('practice scores care and hidden-growth evidence separately and requires reasons', () => {
+  const answers = { crumbly: 'water', damp: 'wait', careReason: 'soil', observe: 'cutaway', observeReason: 'hiddenGrowth' };
+  assert.equal(checkTransfer({ ...answers, careReason: undefined }), null);
+  assert.deepEqual(checkTransfer(answers), { care: true, evidence: true });
+  assert.deepEqual(checkTransfer({ ...answers, observe: 'surface' }), { care: true, evidence: false });
+});
+
+test('the device-only pot can retain prediction and observation without revealing on restore', () => {
+  const pot = nextDay(firstDay, 'wait').pot;
+  let stored = JSON.stringify({ version: 1, pot });
+  const storage = { getItem: () => stored, setItem: (_, value) => { stored = value; } };
+  assert.equal(loadLesson(storage, pot), blankLesson);
+  const lesson = { prediction: 'shoot', rootSeen: true };
+  assert.equal(savePot(storage, pot, lesson), true);
+  assert.deepEqual(loadLesson(storage, pot), lesson);
+  assert.equal(lessonView(pot, loadLesson(storage, pot)).cutaway, false);
 });
