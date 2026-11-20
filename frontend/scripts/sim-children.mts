@@ -80,7 +80,7 @@ if (process.argv.includes("--merge")) {
   const grade = Number(process.env.GRADE), board = process.env.BOARD as "cbse" | "tn" | "icse", limit = Number(process.env.LIMIT ?? 0);
   const release = boardFor(board, grade);
   if (!release) throw new Error(`no release for ${board} ${grade}`);
-  const ids = [...new Set(allOutcomesOf(release).flatMap(({ outcome }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id))))].sort().filter((s) => checkCompetency(s).mode !== "educator-marked");
+  const ids = [...new Set(allOutcomesOf(release).flatMap(({ outcome }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id))))].sort().filter((s) => !process.env.SKILLS || process.env.SKILLS.split(",").includes(s)).filter((s) => checkCompetency(s).mode !== "educator-marked"); // SKILLS first: checking every skill takes minutes
   const only = process.env.SKILLS?.split(","); // SKILLS=a,b: just these skills
   const skills = only ? ids.filter((s) => only.includes(s)) : limit ? ids.slice(0, limit) : ids;
   const personas: Record<string, unknown> = {};

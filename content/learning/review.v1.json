@@ -11718,6 +11718,27 @@
    ]
   },
   {
+   "item": "family:aind",
+   "kind": "family",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "family": "aind",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "1c0266f2",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-20T14:39:43.111Z",
+     "contentHash": "1c0266f2",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:aipack",
    "kind": "family",
    "competency": "MATH.measurement.cube-volume",
@@ -49231,7 +49252,7 @@
    "competency": "MATH.reasoning.mathematical-induction",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "60edfd1a",
+   "contentHash": "8b2e6812",
    "state": "draft",
    "history": [
     {
@@ -49241,6 +49262,14 @@
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "60edfd1a",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-20T14:39:43.111Z",
+     "contentHash": "8b2e6812",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },

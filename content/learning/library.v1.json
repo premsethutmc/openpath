@@ -74363,6 +74363,10 @@
     }
    ]
   },
+  "MATH.reasoning.mathematical-induction": {
+   "family": "aind",
+   "version": "1.0.0"
+  },
   "MATH.statistics.evaluate-data-displays": {
    "family": "akbarpct",
    "version": "1.0.0"

@@ -77,13 +77,13 @@ Competencies the curricula require: **345**; complete (criteria 1–11): **335**
 
 ## Question families
 
-1118 families, 353164 problems in release pools. Answer types: integer 432, fraction 158, set 27, choice 177, exact 128, interval 16, expression 31, tuple 112, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 316; with an everyday (transfer) form: 775; with alternative explanations: 1080. Written (educator-marked) tasks: 379.
+1119 families, 353271 problems in release pools. Answer types: integer 433, fraction 158, set 27, choice 177, exact 128, interval 16, expression 31, tuple 112, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 316; with an everyday (transfer) form: 775; with alternative explanations: 1081. Written (educator-marked) tasks: 379.
 
 ## Assessment diversity and pool sufficiency (distinct@1, depth@1)
 
 A parameter choice that shows exactly the question another one shows is the same question: it is not released again and counts as the same exposure. 0 families had such repeats; 0 repeated questions are not released; 0 were ambiguous (the same question with two answers: a defect, refused by the specification check).
 
-Of 336 modules with a pool, 336 can fill every phase with questions the learner has not seen (diagnosis ≥ 3, checks ≥ 6, practice ≥ 15, delayed check ≥ 6); 0 cannot, and say so instead of repeating questions:
+Of 337 modules with a pool, 337 can fill every phase with questions the learner has not seen (diagnosis ≥ 3, checks ≥ 6, practice ≥ 15, delayed check ≥ 6); 0 cannot, and say so instead of repeating questions:
 
 (none)
 

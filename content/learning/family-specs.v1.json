@@ -89507,6 +89507,82 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "aind",
+   "version": "1.0.0",
+   "title": "The inductive step, in numbers",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     40
+    ]
+   ],
+   "poolSize": 107,
+   "excluded": [],
+   "difficulty": {
+    "1": 50,
+    "2": 40,
+    "3": 17
+   },
+   "examples": [
+    "gen:aind:0,17",
+    "gen:aind:1,14:mc",
+    "gen:aind:0,34",
+    "gen:aind:1,27:mc",
+    "gen:aind:2,16",
+    "gen:aind:3,2:mc"
+   ],
+   "explanations": [
+    "no-next-term (conceptual): The sum for n = k was given again; the step to k + 1 adds the next term.",
+    "term-for-k (procedural): The term for n = k was added again; the next term is the one for n = k + 1.",
+    "formula-at-k (procedural): k + 1 was put only into part of the formula; put n = k + 1 into every n.",
+    "forgot-plus-three (procedural): The + 3 was left out: 4(4ᵏ − 1) is only part of 4ᵏ⁺¹ − 1, which is 4(4ᵏ − 1) + 3.",
+    "did-not-divide (procedural): The whole of 4ᵏ⁺¹ − 1 was given; the question asks what it is 3 times.",
+    "kept-m (conceptual): The m for n = k was given again; the step to k + 1 needs the new number, 4m + 1."
+   ],
+   "teach": {
+    "idea": "Induction is like a row of dominoes: show the first one falls (n = 1), and show that whenever one falls, the next one falls too (from k to k + 1). Then every one falls.",
+    "method": "The step from k to k + 1: start from what is true at k, and build the next case from it. For a sum, the sum up to k + 1 is the sum up to k plus the next term. Then check it equals the formula at n = k + 1.",
+    "alternatives": [
+     {
+      "id": "build_next",
+      "title": "Build the next one from this one",
+      "kind": "procedural",
+      "text": [
+       "Write what you know for n = k.",
+       "Add the one new piece that n = k + 1 brings (the next term), and simplify.",
+       "Check: it must equal the formula with n = k + 1."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "1c0266f2",
+   "validation": {
+    "family": "aind",
+    "deterministic": {
+     "checked": 107,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }
