@@ -155,7 +155,22 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   const wtask = page.locator('[data-task="c5.rw7.w1"]');
   await wtask.getByRole("button", { name: "Start writing" }).click();
   await wtask.getByText("Aim for 120 to 180 words.", { exact: false }).waitFor();
-  await wtask.locator("textarea").fill("Trees give us shade and clean air. ".repeat(20));
+  // a slip the check finds points to the grammar that practises it; the piece is still there on coming back
+  const slip = "Trees gives us shade. They was planted long ago. ";
+  await wtask.locator("textarea").fill(slip);
+  await wtask.getByRole("button", { name: "Check my writing" }).click();
+  const practise = wtask.locator('[data-note="grammar"]').getByRole("button", { name: /^Practise: / });
+  assert.match(await practise.innerText(), /Subject and verb agreement|Am, is and are/);
+  await practise.click();
+  await page.getByText(/^Topics: /).waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  await pastCard(page);
+  const fromSlip = ITEMS.get(await page.locator('main[data-phase="ask"]').getAttribute("data-item"));
+  assert.ok(["agreement", "be_verbs"].includes(fromSlip.topic), fromSlip.topic);
+  await page.getByRole("button", { name: "← Stop" }).click();
+  await wtask.locator("textarea").waitFor();
+  assert.equal(await wtask.locator("textarea").inputValue(), slip, "the writing waited");
+    await wtask.locator("textarea").fill("Trees give us shade and clean air. ".repeat(20));
   await wtask.locator('[data-words="140"]').waitFor();
   // the rule-based check: form only, on the device, with its limits stated
   await wtask.getByRole("button", { name: "Check my writing" }).click();

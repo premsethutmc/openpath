@@ -143,3 +143,16 @@ test("WC-10 grammar check, second round: agreement, verb forms, time words, how 
   for (const text of fine) { assert.equal(note(text, "grammar"), undefined, `${text} → ${note(text, "grammar")?.text}`); assert.equal(note(text, "question"), undefined, text); }
   assert.match(note("Did you see the match. Is it true.", "question")!.text, /These look like a question/);
 });
+
+test("WC-11 a slip points to the Grammar in use topic that practises it", async () => {
+  const { GRAMMAR } = await import("../grammar-use/grammar-use.ts");
+  const { SLIPS } = await import("./slips.ts");
+  for (const s of SLIPS) if (s.topic) assert.ok(GRAMMAR.topics.some((x) => x.id === s.topic), s.topic);
+  const t = (text: string, id: string) => checkWriting(text, T).notes.find((n) => n.id === id)?.topics;
+  assert.deepEqual(t("She have went home and they goes to school.", "grammar")?.sort(), ["agreement", "tenses"]);
+  assert.deepEqual(t("I saw a elephant at the zoo today.", "grammar"), ["articles"]);
+  assert.deepEqual(t("He goed home with two childs.", "word-form")?.sort(), ["irregular_verbs", "plurals"]);
+  assert.deepEqual(t("I dont know.", "apostrophe"), ["contractions"]);
+  assert.deepEqual(t("we went home", "capital"), ["capitals"]);
+  for (const note of [t("She have went home.", "grammar"), t("I listen music.", "grammar")]) for (const topic of note ?? []) assert.ok(GRAMMAR.topics.some((x) => x.id === topic), topic);
+});
