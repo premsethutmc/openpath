@@ -67,3 +67,8 @@ Every word, colour and number picture is drawn by OpenPath (simple outlined draw
 so a child sees the same cat on an iPhone, an Android phone or an old phone. The content still keeps the emoji as
 each picture's key; the screen swaps it for the drawing. To add a word: add its drawing to tools/english/first/art.py
 and run that file. A word without a drawing falls back to its emoji.
+
+## Beginners start Words here
+A child whom Find my level found to have no English yet sees Words on the home screen as "First words: find words
+in pictures", and it opens First words, until First sentences open (twenty words sure). Then the row is the usual
+Words level. The story-order grammar sentences use drawings too (tools/english/first/art.py, the X set).

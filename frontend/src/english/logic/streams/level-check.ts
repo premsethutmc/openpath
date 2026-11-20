@@ -71,7 +71,9 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
     if (r.type === "reading") {
       const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
-      out.reading = { passed, start: Math.min(readingLevels, passed + 1) };
+      // start at the highest level passed: its units still teach skills not yet checked there (sim-english@2: one above
+      // placed most learners a level high and made the first week harder, with no gain by the end of the month)
+      out.reading = { passed, start: Math.min(readingLevels, Math.max(1, passed)) };
     }
     if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
     if (r.type === "spelling") out.spelling = { level: r.level };
@@ -331,7 +333,12 @@ export class GrammarPlacement {
   }
 
   result(): { level: number; scale: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] } {
-    return { level: Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level)), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
+    // where the staircase ended, never above the highest level answered right: a lucky tap high up followed by a miss
+    // does not set the level (sim-english@1: "highest answered right" placed most learners half a level high). A
+    // learner who cannot name a noun or a verb keeps the level found and is sent to naming words first (streams.ts).
+    const right = Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level));
+    const level = Math.min(right, this.level);
+    return { level: Math.max(1, level), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
   }
 
   snapshot(): GrammarPlacementView {

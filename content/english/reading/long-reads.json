@@ -1,0 +1,699 @@
+{
+  "id": "long-reads",
+  "version": 1,
+  "status": "candidate: stories written by OpenPath (AI-prepared) and checked by rule; British spelling; not reviewed by an educator",
+  "review": "candidate-unvalidated",
+  "evidence": "practice-only: following a text and its theme through parts; it changes no capability estimate",
+  "texts": [
+    {
+      "id": "lr4.home",
+      "level": 4,
+      "theme": "home and family",
+      "title": "The Room on the Roof",
+      "parts": [
+        {
+          "text": "When Grandmother came to live with them, Arjun had to give up his room. It was the small room at the top of the stairs, with a window that looked over the mango tree. He had painted one wall blue himself, and he kept his cricket bat, his comics and a jar of marbles there. Now his father carried the bat and the comics down to the hall, and Grandmother's iron trunk went up in their place.\n\nArjun was given a mattress in the corner of his little sister's room. Meena was six. She talked in her sleep and woke up at five to sing. \"It's only for a while,\" his mother said, but Arjun knew that Grandmother had come to stay. He was polite to her at dinner, and he answered her questions with one word. At night he lay on the mattress and listened to the mango leaves outside a window that was no longer his.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Why did Arjun have to give up his room?",
+              "right": "Grandmother came to live with them",
+              "wrong": [
+                "The roof was being mended",
+                "His sister wanted it"
+              ],
+              "explain": "When Grandmother came to live with them, Arjun had to give up his room."
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Arjun feel at first?",
+              "right": "Upset at losing his room",
+              "wrong": [
+                "Glad to share with Meena",
+                "Excited about the trunk"
+              ],
+              "explain": "He answered her in one word and listened to leaves outside a window that was no longer his."
+            }
+          ]
+        },
+        {
+          "text": "One afternoon, the power went off and the house became hot and still. Arjun climbed the stairs to fetch a book he had left behind, and found Grandmother sitting by his window with the jar of marbles in her lap. \"I found these under the bed,\" she said. \"When I was a girl in Thanjavur, I was the best marble player in our street. The boys were afraid of me.\"\n\nArjun did not believe her. She drew a circle on the floor with a piece of chalk from her trunk, and set the marbles inside it. Then she knelt, closed one eye and flicked. Three marbles shot out of the circle at once. Arjun stared. \"Your turn,\" she said. They played until the power came back and the fan began to turn. He lost every game. When his mother called them for tea, Grandmother whispered, \"Tomorrow I will teach you how to hold your thumb.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What had Grandmother found under the bed?",
+              "right": "Arjun's jar of marbles",
+              "wrong": [
+                "An old cricket bat",
+                "A box of chalk"
+              ],
+              "explain": "She was sitting with the jar of marbles in her lap: \"I found these under the bed.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Arjun stare?",
+              "right": "She played much better than he expected",
+              "wrong": [
+                "She had broken the window",
+                "The power came back suddenly"
+              ],
+              "explain": "He did not believe her, then she knocked three marbles out at once."
+            }
+          ]
+        },
+        {
+          "text": "After that, Arjun went up to the room every afternoon. Grandmother taught him to hold his thumb, and in return he taught her to play cricket on the terrace with a tennis ball. She could not run, so she bowled, slowly and very straight. She told him stories about her village, and he told her about his school and about the boy who sat behind him and kicked his chair.\n\nAt the end of the term, Arjun's father asked whether he wanted his room back. \"We could put Grandmother downstairs, in the hall,\" he said. Arjun thought about the narrow hall, with people walking through it all day. Then he thought about the window and the mango tree.\n\n\"No,\" he said. \"She likes the window. And anyway, it is our room now.\" That evening he carried his cricket bat back up the stairs and leaned it against her trunk, where it belonged.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did Arjun teach Grandmother?",
+              "right": "To play cricket on the terrace",
+              "wrong": [
+                "To hold her thumb for marbles",
+                "To paint a wall blue"
+              ],
+              "explain": "Grandmother taught him to hold his thumb, and in return he taught her to play cricket."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Arjun say no to having his room back?",
+              "right": "He wanted to share it with Grandmother",
+              "wrong": [
+                "He was afraid of the dark hall",
+                "His father told him to say no"
+              ],
+              "explain": "\"She likes the window. And anyway, it is our room now.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "Learning to share a space and a friendship",
+          "wrong": [
+            "How to win at marbles",
+            "A family moving to a new house"
+          ],
+          "explain": "It starts with Arjun losing his room and ends with him calling it \"our room\"."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Arjun change?",
+          "right": "From cold towards Grandmother to close to her",
+          "wrong": [
+            "From close to Grandmother to rude to her",
+            "From liking marbles to hating them"
+          ],
+          "explain": "At first he answers in one word; at the end he chooses to share the room with her."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The Room on the Roof?",
+          "right": "The room at the top is where everything happens",
+          "wrong": [
+            "It is about a room built for a cricket ball",
+            "Grandmother lives on the roof itself"
+          ],
+          "explain": "The small room at the top of the stairs is lost, shared and finally shared gladly."
+        }
+      ]
+    },
+    {
+      "id": "lr4.community",
+      "level": 4,
+      "theme": "community",
+      "title": "The Well on Gandhi Street",
+      "parts": [
+        {
+          "text": "The old well at the end of Gandhi Street had been dry for years. People threw rubbish into it, and in the rains it filled with green water and mosquitoes. Children were told to keep away. Fatima walked past it every morning on her way to school and held her breath.\n\nOne day her teacher asked the class to find a problem in their own street and to think of a way to solve it. Most children wrote about broken street lights or noisy dogs. Fatima wrote about the well. \"It could be useful again,\" she wrote, \"if somebody cleaned it.\" Her teacher read the page and said, \"Who is somebody?\" Fatima did not have an answer. That evening she stood by the well with her friend Ravi and looked down into the smell.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was wrong with the old well?",
+              "right": "It was dry and full of rubbish",
+              "wrong": [
+                "It had no wall around it",
+                "Its water was too salty"
+              ],
+              "explain": "It had been dry for years, and people threw rubbish into it."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did the teacher mean by \"Who is somebody?\"",
+              "right": "Fatima herself could start the work",
+              "wrong": [
+                "She wanted a name of a worker",
+                "She thought the well was useless"
+              ],
+              "explain": "The question pushes Fatima to see that she could be the one to act."
+            }
+          ]
+        },
+        {
+          "text": "Fatima and Ravi made a list of every house on the street. On Saturday they knocked on all forty-two doors. Some people laughed. Mr Pillai said the well had been dry since his father's time and nothing could be done. But Mrs D'Souza promised two buckets and a rope, and the tailor said he would come after he closed his shop.\n\nOn Sunday morning, eleven people arrived with gloves, buckets and sacks. They pulled out plastic bags, bottles, a broken chair and a bicycle wheel. By noon the smell was gone. A man from the water office, who had heard about it from his niece, came to look. He shone a torch down and said that the rains had not been reaching the well because the drain beside it was blocked. If the drain was cleared, he said, water might come back.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How many houses did Fatima and Ravi visit?",
+              "right": "Forty-two",
+              "wrong": [
+                "Eleven",
+                "Twenty"
+              ],
+              "explain": "They knocked on all forty-two doors."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why had rain not reached the well, said the man from the water office?",
+              "right": "The drain beside it was blocked",
+              "wrong": [
+                "The well was too deep",
+                "Mr Pillai had covered it"
+              ],
+              "explain": "The rains had not been reaching the well because the drain beside it was blocked."
+            }
+          ]
+        },
+        {
+          "text": "The street cleared the drain the next weekend. This time Mr Pillai came too, carrying a spade, and he worked harder than anyone. Nobody mentioned what he had said before.\n\nThe rains came in October. Every morning Fatima looked down into the well, and every morning there was a little more water, dark and clear. By November it was deep enough to use for watering the plants along the street. Mrs D'Souza planted jasmine by the wall. The tailor painted the well's edge white.\n\nAt school, Fatima's teacher asked her to tell the class what had happened. Fatima stood up and began, \"Somebody cleaned the well.\" Then she stopped, smiled and started again. \"Forty-two houses cleaned the well,\" she said. \"Well, most of them.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was the water used for?",
+              "right": "Watering the plants along the street",
+              "wrong": [
+                "Drinking at school",
+                "Washing the tailor's cloth"
+              ],
+              "explain": "By November it was deep enough to use for watering the plants along the street."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Fatima change \"Somebody cleaned the well\"?",
+              "right": "She saw it was the whole street's work",
+              "wrong": [
+                "She forgot the rest of what she wanted to say",
+                "Her teacher had told her to say it that way"
+              ],
+              "explain": "She had once asked who \"somebody\" was; now she knew it was the street together."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the main idea of the story?",
+          "right": "People working together can fix a shared problem",
+          "wrong": [
+            "Old wells are dangerous places for children",
+            "Teachers sometimes give very hard homework"
+          ],
+          "explain": "One girl starts it, but the street together brings the well back."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Mr Pillai change?",
+          "right": "From doubting it could work to helping hardest",
+          "wrong": [
+            "From helping everyone to giving up on the well",
+            "From being kind to the children to being angry"
+          ],
+          "explain": "He first said nothing could be done, then came with a spade and worked harder than anyone."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The Well on Gandhi Street?",
+          "right": "It is about the well and the street that saved it",
+          "wrong": [
+            "It is about a famous leader's well",
+            "Gandhi Street is where Fatima's school is"
+          ],
+          "explain": "The well and the people of the street are at the centre of the story."
+        }
+      ]
+    },
+    {
+      "id": "lr5.science",
+      "level": 5,
+      "theme": "science",
+      "title": "The Seed Experiment",
+      "parts": [
+        {
+          "text": "For the school science fair, Kavya wanted to answer a question that had bothered her for weeks: do plants grow better with music? Her uncle said that his tomatoes grew faster when the radio was on. Her brother said that was nonsense. Kavya decided to find out properly.\n\nShe took six small pots, filled each with the same soil, and planted three bean seeds in each. Three pots went in her bedroom, where she played music for two hours every evening. The other three went in the kitchen, where it was quiet. She gave every pot the same cup of water each morning and wrote everything in a notebook: the date, the time, and the height of every shoot, measured with a ruler. \"A fair test,\" her teacher had said, \"changes only one thing.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What question did Kavya want to answer?",
+              "right": "Do plants grow better with music?",
+              "wrong": [
+                "Do beans need more water?",
+                "Which soil is best for tomatoes?"
+              ],
+              "explain": "Do plants grow better with music?"
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Kavya give every pot the same water and soil?",
+              "right": "So that music was the only difference",
+              "wrong": [
+                "Because she had only one cup",
+                "Her uncle told her to"
+              ],
+              "explain": "\"A fair test changes only one thing.\""
+            }
+          ]
+        },
+        {
+          "text": "After two weeks, the bedroom beans were clearly taller. Kavya was delighted. She began to write a poster called Music Makes Plants Grow, and she told her uncle he had been right.\n\nBut when her teacher came to look, she asked a question Kavya had not thought of. \"Is music the only difference between the bedroom and the kitchen?\" Kavya thought. The bedroom window faced east and got the morning sun. The kitchen was darker, and it was warmer near the stove. \"So the light was different too,\" her teacher said, \"and the warmth. Your beans might be taller because of the sun, not the songs.\" Kavya looked at her poster and felt her face grow hot. Two weeks of work, and she could not say what it meant.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Which pots grew taller?",
+              "right": "The ones in the bedroom",
+              "wrong": [
+                "The ones in the kitchen",
+                "They all grew the same"
+              ],
+              "explain": "After two weeks, the bedroom beans were clearly taller."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why could Kavya not be sure music had helped?",
+              "right": "Light and warmth were also different",
+              "wrong": [
+                "She had forgotten to measure",
+                "Her brother moved the pots"
+              ],
+              "explain": "The bedroom got the morning sun; the kitchen was darker and warmer."
+            }
+          ]
+        },
+        {
+          "text": "Kavya started again. This time she put all six pots on the same windowsill in the bedroom, side by side, so they had the same light and warmth. She placed a cardboard screen between them and played music only to the three on the left, using small earphones taped to the pots so the others would hear as little as possible.\n\nAfter two more weeks, she measured again. The two groups were almost exactly the same height: on average, the music beans were half a centimetre taller, which was smaller than the difference between two beans in the same pot. She changed the title of her poster to Music Made No Clear Difference, and she added a box called What I Learned About Fair Tests.\n\nAt the fair, a judge spent a long time at her table. Kavya did not win first prize. But the judge wrote on her card: \"Best change of mind in the hall.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Kavya put all six pots the second time?",
+              "right": "On the same windowsill",
+              "wrong": [
+                "Three in the kitchen, three outside",
+                "In a dark cupboard"
+              ],
+              "explain": "This time she put all six pots on the same windowsill in the bedroom."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did the result of the second test show?",
+              "right": "Music made no clear difference",
+              "wrong": [
+                "Music made beans much taller",
+                "Earphones hurt the plants"
+              ],
+              "explain": "The groups were almost the same; half a centimetre was smaller than the difference within a pot."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central idea of the story?",
+          "right": "A fair test can show that a first answer was wrong",
+          "wrong": [
+            "Beans grow better in kitchens than in bedrooms",
+            "Music helps every kind of plant to grow"
+          ],
+          "explain": "Kavya's first result was not fair; the fair test changed her answer."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Kavya change?",
+          "right": "From jumping to a conclusion to testing carefully",
+          "wrong": [
+            "From testing carefully to rushing her work",
+            "From being shy to boasting about her prize"
+          ],
+          "explain": "She first wrote a poster too soon, then designed a fairer test and changed her poster."
+        },
+        {
+          "skill": "title",
+          "prompt": "What does the judge's note, \"Best change of mind\", praise?",
+          "right": "Being willing to change her answer when the evidence did",
+          "wrong": [
+            "Having the tallest bean plants at the whole fair",
+            "Choosing the best music to play to the plants"
+          ],
+          "explain": "She changed her poster to fit what the fair test showed."
+        }
+      ]
+    },
+    {
+      "id": "lr5.environment",
+      "level": 5,
+      "theme": "environment",
+      "title": "Turtle Night",
+      "parts": [
+        {
+          "text": "Every year, between January and March, olive ridley turtles come ashore on the beach near Sanjay's village to lay their eggs. They come at night, in hundreds, and dig holes in the sand with their back flippers. Each turtle lays about a hundred eggs, covers them, and returns to the sea. She never sees her young.\n\nWhen Sanjay was small, people took the eggs to eat or to sell, and dogs dug up the rest. Fewer turtles came each year. Then a group of fishermen, including Sanjay's father, started a hatchery: a fenced square of sand where eggs could be moved and kept safe. This year, for the first time, Sanjay was allowed to join the night patrol. He was twelve, and he had been waiting for this since he was eight.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How does a turtle dig its nest?",
+              "right": "With its back flippers",
+              "wrong": [
+                "With its front flippers",
+                "With its mouth"
+              ],
+              "explain": "They dig holes in the sand with their back flippers."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did the fishermen start a hatchery?",
+              "right": "To keep the eggs safe from people and dogs",
+              "wrong": [
+                "To sell the eggs at the market",
+                "To catch more fish in the sea"
+              ],
+              "explain": "Eggs were taken and dug up, and fewer turtles came each year."
+            }
+          ]
+        },
+        {
+          "text": "The patrol walked the beach in the dark with red torches, because white light confuses the turtles. Sanjay's job was to watch for tracks: two lines of flipper marks with a groove between them, leading up from the water. Near midnight he found one. At the end of it, a turtle was digging, sand flying behind her.\n\nThey waited until she had finished laying and gone back to the sea. Then, very gently, Sanjay's father dug down and lifted the eggs out one by one. They were soft and white, like ping-pong balls. Sanjay counted them into a bucket of damp sand: one hundred and seven. In the hatchery they dug a new hole of the same depth and laid the eggs in it in the same order. Sanjay wrote the date and the number on a small wooden stick and pushed it into the sand.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Why did the patrol use red torches?",
+              "right": "White light confuses the turtles",
+              "wrong": [
+                "Red light is brighter",
+                "To frighten the dogs away"
+              ],
+              "explain": "They used red torches, because white light confuses the turtles."
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What did they do just after the turtle went back to the sea?",
+              "right": "Lifted the eggs out gently",
+              "wrong": [
+                "Wrote the date on a stick",
+                "Counted the turtles on the beach"
+              ],
+              "explain": "They waited until she had gone, then dug down and lifted the eggs out."
+            }
+          ]
+        },
+        {
+          "text": "Fifty days later, Sanjay was at the hatchery at dawn when the sand above his nest began to move. A tiny flipper appeared, then a head, then dozens of baby turtles, each no bigger than his palm, scrambling over each other. He counted ninety-one.\n\nThe hatchlings must reach the sea by themselves; the walk across the sand helps them remember the beach, so that the females can return to it one day to lay their own eggs. Sanjay walked beside them, chasing away a crow, until the last one was lifted by a wave and gone.\n\nOnly about one hatchling in a thousand lives to grow up. Sanjay knew that. But as he walked home, he thought about the female among his ninety-one who might, in fifteen years, crawl up this same beach on a dark night. He decided he would be there with a red torch to meet her.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why must the hatchlings walk to the sea by themselves?",
+              "right": "It helps them remember the beach",
+              "wrong": [
+                "People are not allowed to touch them",
+                "It makes them stronger swimmers"
+              ],
+              "explain": "The walk across the sand helps them remember the beach, so that females can return."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does Sanjay decide at the end?",
+              "right": "To keep protecting turtles for years",
+              "wrong": [
+                "To stop going on patrols",
+                "To keep a turtle as a pet"
+              ],
+              "explain": "He decides he will be there with a red torch to meet a returning turtle in fifteen years."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the main theme of the story?",
+          "right": "Caring for nature over a long time",
+          "wrong": [
+            "Fishing is a hard job",
+            "Turtles are dangerous at night"
+          ],
+          "explain": "The story follows years of care, from the hatchery to a turtle returning in fifteen years."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Sanjay's feeling about the turtles grow through the story?",
+          "right": "From eager helper to someone who plans to protect them for years",
+          "wrong": [
+            "From loving turtles to being afraid of them at night",
+            "From caring about turtles to finding the patrol boring"
+          ],
+          "explain": "He waited years to join, worked one night, and ends planning for fifteen years ahead."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called Turtle Night?",
+          "right": "The turtles and the patrol are both out at night",
+          "wrong": [
+            "It is named after a village festival",
+            "Turtles only ever hatch at midnight"
+          ],
+          "explain": "The turtles lay at night and the patrol walks the beach in the dark."
+        }
+      ]
+    },
+    {
+      "id": "lr6.media",
+      "level": 6,
+      "theme": "media",
+      "title": "The Photograph",
+      "parts": [
+        {
+          "text": "The photograph appeared on Nikhil's phone during lunch: a crowd of people pushing at the gate of the town's water tank, and a caption in large red letters: WATER POISONED, DO NOT DRINK. SHARE NOW! It had come from his cousin, who had got it from a family group. By the time Nikhil looked up, three other people at his table had it too. Someone said the hospital was full. Someone else said his mother had already poured away all their water.\n\nNikhil's first thought was to send it to everyone he knew. His thumb was already on the button. Then he remembered something his grandfather, who had worked for a newspaper for forty years, always said: \"A story that asks you to hurry is a story that does not want you to think.\" Nikhil put the phone down and looked at the picture again, more slowly.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the caption on the photograph say?",
+              "right": "That the water was poisoned",
+              "wrong": [
+                "That the water tank was closed",
+                "That the hospital was full"
+              ],
+              "explain": "The caption said WATER POISONED, DO NOT DRINK."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Nikhil stop before sharing the photograph?",
+              "right": "He remembered his grandfather's warning about hurried stories",
+              "wrong": [
+                "His phone battery was almost empty",
+                "His teacher took his phone away at lunch"
+              ],
+              "explain": "\"A story that asks you to hurry is a story that does not want you to think.\""
+            }
+          ]
+        },
+        {
+          "text": "Looked at slowly, the picture had problems. The people in it wore coats and woollen hats, although it was April and over thirty degrees in town. The sign above the gate was in a language Nikhil could not read. And the water tank in his town was blue, while this one was grey.\n\nAfter school he showed it to his grandfather. The old man did not answer at once. He typed a few words into a search, then turned the screen towards Nikhil. The same photograph appeared in a news report from another country, four years earlier. The crowd had been waiting for a football match to open its gates. Nobody had poisoned anything.\n\n\"Then where did the caption come from?\" Nikhil asked. \"Someone added it,\" his grandfather said. \"Maybe as a joke, maybe to frighten people. The picture is real. The story attached to it is not.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What made Nikhil doubt the photograph?",
+              "right": "The people wore winter clothes in hot April",
+              "wrong": [
+                "The photo was in black and white",
+                "His cousin often lied"
+              ],
+              "explain": "The people wore coats and woollen hats, although it was April and over thirty degrees."
+            },
+            {
+              "skill": "detail",
+              "prompt": "What was the crowd in the real photograph waiting for?",
+              "right": "A football match",
+              "wrong": [
+                "Clean drinking water",
+                "A doctor at the hospital"
+              ],
+              "explain": "The crowd had been waiting for a football match to open its gates."
+            }
+          ]
+        },
+        {
+          "text": "That evening Nikhil wrote a short message to his class group. He did not call anyone a liar. He put the photograph next to the old news report and wrote: \"This picture is from another country, four years ago, at a football ground. Our tank is blue. The town council says the water is safe. Please check before you share.\" He added the link to the council's notice.\n\nSome people thanked him. One boy said he was spoiling the fun. His cousin was quiet for a day and then posted the same message to the family group, where it was shared more times than the photograph had been.\n\nThe next week, Nikhil's teacher asked the class to bring in one news story and to answer three questions about it: Who made this? How do they know? What do they want me to do? Nikhil noticed that his own question had become the class's homework.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Nikhil include in his message?",
+              "right": "The old report and the council's notice",
+              "wrong": [
+                "A photo of the hospital",
+                "The name of the person who made it"
+              ],
+              "explain": "He put the photograph next to the old news report and added the link to the council's notice."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Nikhil not call anyone a liar?",
+              "right": "He wanted people to check, not to feel attacked",
+              "wrong": [
+                "He did not know who started it",
+                "His grandfather forbade it"
+              ],
+              "explain": "He simply showed the facts and asked people to check before sharing."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Checking a story before believing or sharing it",
+          "wrong": [
+            "Good shoes are what make runners fast",
+            "Clerks should never take time off to race"
+          ],
+          "explain": "Nikhil stops, checks the photograph and asks others to check before sharing."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Nikhil develop through the story?",
+          "right": "From almost sharing at once to helping others think",
+          "wrong": [
+            "From careful to careless",
+            "From confident to frightened of phones"
+          ],
+          "explain": "His thumb was on the button; by the end his question becomes the class's homework."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The Photograph when the picture itself was real?",
+          "right": "Because the danger came from what was attached to a real photo",
+          "wrong": [
+            "Because the photo was faked by a computer",
+            "Because Nikhil took the photo himself"
+          ],
+          "explain": "\"The picture is real. The story attached to it is not.\""
+        }
+      ]
+    },
+    {
+      "id": "lr6.history",
+      "level": 6,
+      "theme": "history",
+      "title": "The Runner from Madras",
+      "parts": [
+        {
+          "text": "In 1924, a young clerk named Rangan saw a notice pinned to the wall of the post office in Madras. A race would be held on the beach road: ten miles, open to all. The winner would be sent to run in a national meeting in Bombay. Rangan had never raced, but he had walked eight miles to work and back every day for three years, and his legs were hard as wood.\n\nHe had no running shoes. On the morning of the race he ran barefoot, in a white vest his mother had sewn the night before. Most of the other runners were students from the colleges, in proper kit, with friends cheering. Nobody cheered for Rangan. At the halfway point he was twentieth. By the eighth mile he was fourth, and the students had stopped laughing.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How far was the race?",
+              "right": "Ten miles",
+              "wrong": [
+                "Eight miles",
+                "Twenty miles"
+              ],
+              "explain": "A race would be held on the beach road: ten miles, open to all."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why had Rangan's legs become strong?",
+              "right": "He walked eight miles to work and back every day",
+              "wrong": [
+                "He trained every day at a college",
+                "He played football for many years"
+              ],
+              "explain": "He had walked eight miles to work and back every day for three years."
+            }
+          ]
+        },
+        {
+          "text": "Rangan finished second, eleven seconds behind a tall student called Edward. The prize to go to Bombay was Edward's. But the judge, an old Scottish teacher, came to find Rangan at the finish line. \"You ran half the race too slowly,\" he said, \"because you did not know you could win. Next year you will know.\"\n\nFor a year, Rangan trained before dawn on the beach, when the sand was cool. The teacher lent him a watch and showed him how to run each mile at the same speed instead of starting fast and slowing down. He found a pair of second-hand canvas shoes, and he learned that he preferred to run without them.\n\nIn 1925 he stood at the start of the beach-road race again. This time some of the clerks from the post office had come to watch. They had made a paper sign with his name on it.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the judge say Rangan's mistake had been?",
+              "right": "He ran half the race too slowly",
+              "wrong": [
+                "He started too fast",
+                "He wore the wrong shoes"
+              ],
+              "explain": "\"You ran half the race too slowly, because you did not know you could win.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did the teacher teach Rangan to do?",
+              "right": "Run each mile at the same speed",
+              "wrong": [
+                "Run faster at the start",
+                "Wear shoes in every race"
+              ],
+              "explain": "He showed him how to run each mile at the same speed."
+            }
+          ]
+        },
+        {
+          "text": "Rangan won by a full minute. Two months later he ran in Bombay, against the best runners from every province, and came third. A newspaper printed his photograph under the words \"Barefoot Clerk Surprises Bombay.\" The post office gave him a day's holiday.\n\nHe never ran in another country, and his name is not in the record books. He went back to his desk and worked at the post office for forty years. But every year until he was old, he walked to the beach road on race day and stood at the eighth mile, the place where he had once been fourth and had first understood that he might win. There, he cheered loudest for the runners nobody else was cheering for.\n\nThis story is told in Madras families, as stories are, and some of its details may have grown in the telling. The race, though, was real.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Rangan finish in Bombay?",
+              "right": "Third",
+              "wrong": [
+                "First",
+                "Second"
+              ],
+              "explain": "He ran in Bombay against the best runners from every province, and came third."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Rangan stand at the eighth mile every year?",
+              "right": "It was where he first knew he could win",
+              "wrong": [
+                "It was closest to his home",
+                "The judge asked him to"
+              ],
+              "explain": "The eighth mile was where he had been fourth and first understood that he might win."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Belief and steady effort can carry an ordinary person far",
+          "wrong": [
+            "Good shoes are what make runners fast",
+            "Clerks should never take time off to race"
+          ],
+          "explain": "Rangan learns to believe he can win and trains for a year to do it."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Rangan change between the two races?",
+          "right": "From unsure of himself to knowing he can win",
+          "wrong": [
+            "From proud of himself to lazy about training",
+            "From a fast runner to a slow one"
+          ],
+          "explain": "The judge said he did not know he could win; in 1925 he won by a minute."
+        },
+        {
+          "skill": "title",
+          "prompt": "How does the ending connect to his own first race?",
+          "right": "He cheers for the unknown runners, as nobody cheered for him",
+          "wrong": [
+            "He becomes a judge of the race himself",
+            "He finally beats Edward in Bombay"
+          ],
+          "explain": "In his first race nobody cheered for him; later he cheers loudest for those nobody cheers."
+        }
+      ]
+    }
+  ]
+}

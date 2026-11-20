@@ -199,26 +199,35 @@ type Answer = Extract<GrammarRecord, { type: "answer" }>;
 export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 1, 2: 3, 3: 5 };
 export const startLevel = startFor;
 
-/** The level for the next sitting: the last finished level sitting's level, moved by how it went. Topic sittings do not count. */
+/** The level for the next sitting: down after one weak level sitting, up after two strong ones in a row at the same level. Topic sittings do not count. */
 export function levelFor(g: GrammarUse, records: readonly GrammarRecord[], start: number): number {
   const ids = g.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
-  const last = [...records].reverse().find((r): r is Extract<GrammarRecord, { type: "end" }> => r.type === "end" && !r.topics && r.asked >= SITTING_SIZE);
-  return last ? clamp(rescale(last, OLD_LEVELS) + (last.right >= MOVE_UP ? 1 : last.right <= MOVE_DOWN ? -1 : 0)) : clamp(start);
+  const ends = records.filter((r): r is Extract<GrammarRecord, { type: "end" }> => r.type === "end" && !r.topics && r.asked >= SITTING_SIZE);
+  const last = ends.at(-1);
+  if (!last) return clamp(start);
+  const level = rescale(last, OLD_LEVELS);
+  if (last.right <= MOVE_DOWN) return clamp(level - 1);
+  // up takes two strong sittings in a row at this level, so one good day does not lift a learner to where most is
+  // wrong (sim-english@1: up after one, about thirteen level changes a month for a learner between two levels)
+  const strong = (e: typeof last | undefined) => !!e && e.right >= MOVE_UP && rescale(e, OLD_LEVELS) === level;
+  return clamp(strong(last) && strong(ends.at(-2)) ? level + 1 : level);
 }
 
 /**
  * The sentences for a sitting: new ones first, then ones last got wrong, then the oldest; no topic more than three
  * times, and some of each kind. A level sitting whose own level has run short of new and missed sentences takes
- * new and missed ones from the level below before it asks again one already answered right (sim-english@1 found
+ * new and missed ones from the two levels below (nearer first) before it asks again one already answered right (sim-english@1 found
  * the top level's sentences re-asked within days).
  */
 export function pick(g: GrammarUse, level: number, records: readonly GrammarRecord[], topics?: readonly string[]): GrammarItem[] {
   const latest = new Map<string, { correct: boolean; i: number }>();
   records.forEach((r, i) => r.type === "answer" && latest.set(r.id, { correct: r.correct, i }));
-  const below = topics?.length ? [] : g.items.filter((it) => it.level === level - 1);
+  // the two levels below, nearer first (sim-english@2: a strong learner who stays at the top level ran through it and
+  // the level below within the month)
+  const below = topics?.length ? [] : g.items.filter((it) => it.level === level - 1 || it.level === level - 2);
   const pool = topics?.length ? g.items.filter((it) => topics.includes(it.topic)).sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level)) : [...g.items.filter((it) => it.level === level), ...below];
-  const own = (it: GrammarItem) => (it.level === level || topics?.length ? 0 : 2);
+  const own = (it: GrammarItem) => (it.level === level || topics?.length ? 0 : 2 + (level - 1 - it.level) * 0.01);
   const rank = (it: GrammarItem) => (!latest.has(it.id) ? own(it) : latest.get(it.id)!.correct ? 4 + own(it) / 2 : 1 + own(it));
   const ordered = hashOrder(pool, (it) => `grammar|${it.id}`).sort((a, b) => rank(a) - rank(b) || (latest.get(a.id)?.i ?? 0) - (latest.get(b.id)?.i ?? 0));
   const out: GrammarItem[] = [];

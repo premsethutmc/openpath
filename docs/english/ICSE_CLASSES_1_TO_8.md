@@ -106,3 +106,9 @@ to; a few lines where one half is spoken; tense kept steady across a paragraph; 
 Totals: 114 in the app, 15 partly, 124 with a grown-up (253). The 15 left are mostly speaking or reading aloud
 (the app cannot hear the learner), writing answers in one's own words, sounding out new words, and wider inference
 and theme across long texts.
+
+## Update, 20 November 2026: Long reads
+
+Class 7 R1 (texts on a wide range of themes) and Class 8 R1 (a text's central theme and how it develops) are now
+practised in the app by Long reads (docs/english/LONG_READS.md). Totals now: 120 in the app, 11 partly, 122 with a
+grown-up (253).

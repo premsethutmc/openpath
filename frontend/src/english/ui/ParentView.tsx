@@ -54,8 +54,37 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
     <section className="hub-card plain parent-child" aria-label={s.name} data-child={s.id}>
       <h2>{s.name}</h2>
       <p className="small">
-        Last active: {day(s.lastActive)} · practised spelling on {s.daysPractisedThisWeek} of the last 7 days
+        Last active: {day(s.lastActive)} · practised English on {s.englishDays} of the last 7 days (spelling on {s.daysPractisedThisWeek})
       </p>
+      {s.levels.length > 0 && (
+        <ul className="parent-levels small" data-line="levels">
+          {s.levels.map((l) => (
+            <li key={l.name}>
+              <b>{l.name}:</b> {l.level}
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.first && (
+        <p className="small" data-line="first">
+          First words: {s.first.met} of {s.first.total} words found, {s.first.sure} sure
+        </p>
+      )}
+      {s.reading && (
+        <p className="small" data-line="reading">
+          Reading: {s.reading.passed} {s.reading.passed === 1 ? "skill" : "skills"} checked and passed{s.reading.needsPractice.length ? `. Needs more practice: ${s.reading.needsPractice.join("; ")}` : ""}
+        </p>
+      )}
+      {s.long && (
+        <p className="small" data-line="long">
+          Long reads: {s.long.parts} {s.long.parts === 1 ? "part" : "parts"} read, {s.long.finished} {s.long.finished === 1 ? "story" : "stories"} finished, {s.long.right} of {s.long.asked} questions right
+        </p>
+      )}
+      {s.writing && (
+        <p className="small" data-line="writing">
+          Syllabus tasks: {s.writing.tasks} done{s.writing.pieces ? `, ${s.writing.pieces} written ${s.writing.pieces === 1 ? "piece" : "pieces"} (${s.writing.words} words in all)` : ""}
+        </p>
+      )}
       {s.words && <p className="small">Word check: about {s.words.estimate.toLocaleString("en-IN")} word families</p>}
       {s.newWords && (
         <p className="small" data-line="new-words">
