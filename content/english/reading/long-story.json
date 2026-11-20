@@ -1,0 +1,171 @@
+{
+  "id": "space-on-the-board",
+  "title": "The Space on the Board",
+  "version": 1,
+  "parts": [
+    {
+      "id": "p1",
+      "title": "The strip of wood",
+      "text": "On the last Saturday of the holidays, Nila found Mr Ravi at the bus shelter with a hammer in one hand and a sheet of wood across his knees. The glass case that held the timetable had clouded over, and the school bus had started stopping one lane farther away. Mr Ravi had asked the driver for a new printed sheet. Until it came, he wanted somewhere to put a copy that could be read without opening the case.\n\nNila helped him fasten the wood to the shelter wall. She drew three boxes, one for each bus route, and wrote the times from the driver's card. The bench beneath the board was still damp from a shower that morning. Nila moved the card away from the dripping roof and checked the numbers against the driver’s copy.\n\nAt the foot of the board she drew two short pencil marks, then stopped. Her grandmother would be coming that evening with a card showing where to wait for the school bus. Nila measured the distance between the marks with the width of her hand, the way she had measured the card at home. Mr Ravi held out another drawing pin, but she shook her head and slipped it into her pocket.",
+      "question": {
+        "id": "p1q",
+        "prompt": "Which problem could the wooden board solve right away?",
+        "options": [
+          "The timetable was hard to read through its case.",
+          "The school bus was stopping in the wrong lane.",
+          "The bench was still wet after the morning shower."
+        ],
+        "answer": 0,
+        "evidenceSets": [
+          [
+            {
+              "part": "p1",
+              "sentence": 1
+            },
+            {
+              "part": "p1",
+              "sentence": 3
+            }
+          ]
+        ],
+        "explain": "The glass was clouded over. A copy on the wood could be read without opening the case."
+      }
+    },
+    {
+      "id": "p2",
+      "title": "A note without a pin",
+      "text": "By lunchtime, somebody had tucked a square of paper into the crack between the timetable and the wood. It said that the road by the post office was closed for repairs. Nila had just walked along it on the way to the shelter. She checked the note again and found there was no date at the top or the foot of the paper.\n\nA boy called Imran came up with another scrap, this one about a bicycle pump someone had found. He did not try to squeeze it into the crack. Instead he stood on the end of the bench and held it up for Nila to read. On the back of the paper he had written the day he found it and the name of the shop where he had left it.\n\nNila looked down at the little marks at the foot of the board. She took the pin from her pocket and rolled it between her fingers. The scrap about the pump was much smaller than her grandmother's card. She handed Imran the pin and pointed to a dry spot beside the first route box. Then she fetched a pencil from her bag and wrote the date on a piece of tape next to his notice.",
+      "question": {
+        "id": "p2q",
+        "prompt": "What lets a reader check whether Imran’s note still applies?",
+        "options": [
+          "Its small size and the place where it is pinned.",
+          "The day it was found and the shop that has it.",
+          "The first route box and the dry spot beside it."
+        ],
+        "answer": 1,
+        "evidenceSets": [
+          [
+            {
+              "part": "p2",
+              "sentence": 7
+            }
+          ]
+        ],
+        "explain": "The day tells the reader how recent the note is. The shop gives them somewhere to ask."
+      }
+    },
+    {
+      "id": "p3",
+      "title": "A wet corner",
+      "text": "Nila's grandmother arrived just as the rain returned. Her card was folded in a cloth bag. She stood in front of the board, opened the card, and noticed a woman running her finger along the edge of the shelter wall. The woman had come for her first shift at the bakery and could not tell whether the last bus took cash. Neither the card nor the route boxes told her.\n\nA drop slid out of the roof and loosened a corner of Imran’s paper. His pin was holding, but the lower half of the notice folded against the wood. Nila moved it under the overhang, and the woman helped her press down the curled edge. As they leaned back, the woman pulled an old bus ticket out of her apron and showed Nila the number on it. She had bought it with coins that morning.\n\nNila's grandmother gave the woman a pencil. The woman began to write on the back of a dry scrap, then paused to look for room. Nila glanced at the rectangle where the new card was to go. Her grandmother held the card against the wood for a moment, moved it higher beside the route boxes, and asked Nila to check whether they could still read it there.",
+      "question": {
+        "id": "p3q",
+        "prompt": "What shows that at least one bus took cash that day?",
+        "options": [
+          "The route boxes showed where the buses stopped.",
+          "The worker helped press down the wet notice.",
+          "The worker had bought her ticket with coins."
+        ],
+        "answer": 2,
+        "evidenceSets": [
+          [
+            {
+              "part": "p3",
+              "sentence": 8
+            },
+            {
+              "part": "p3",
+              "sentence": 9
+            }
+          ]
+        ],
+        "explain": "The ticket and the coins show what worked on her morning trip. They do not show what every bus accepts."
+      }
+    },
+    {
+      "id": "p4",
+      "title": "Before the first bus",
+      "text": "Three days later Nila came back early, with a small wooden clip and the last two drawing pins in her coat. A newer notice had appeared where the old road note had been. Beneath it someone had written the date the repairs would end. The bakery worker's scrap had been moved higher, beside the timetable, so that its edge did not catch the rain. Her grandmother’s card was still beside the route boxes.\n\nMr Ravi was sweeping the paving when Nila drew a new line across the foot of the board. He set down his broom and picked up the paper scraps she had brought. Nila handed him one of the pins, then changed her mind and gave him both. Together they fixed the clip on the side of the board, leaving the new space empty. A short pencil hung on a bit of string from the clip. Nila put blank scraps into it, within reach of someone standing on the paving.\n\nThe first bus had not yet turned the corner. An older man stopped by the shelter, took a scrap from the clip, and asked Mr Ravi for the day's date. He pencilled a few words and the date onto the scrap before pinning it in the new space. By the time Nila boarded, she had not heard what it said.",
+      "question": {
+        "id": "p4q",
+        "prompt": "What extra detail appears just below the newer road notice?",
+        "options": [
+          "The date when the road repairs would finish.",
+          "The place where the workers left their tools.",
+          "The time when the first bus reached the shelter."
+        ],
+        "answer": 0,
+        "evidenceSets": [
+          [
+            {
+              "part": "p4",
+              "sentence": 2
+            }
+          ]
+        ],
+        "explain": "The line beneath the newer notice gives the date the repairs would end."
+      }
+    }
+  ],
+  "finalQuestions": [
+    {
+      "id": "whole-theme",
+      "prompt": "How does the title gain a different meaning by the end?",
+      "options": [
+        "The space begins as room left while the board is unfinished, then becomes a place for the next rider.",
+        "The space begins as room for one expected card, then becomes a place for the next rider.",
+        "The space begins as room for one expected card, then becomes a permanent place for family notices."
+      ],
+      "answer": 1,
+      "evidenceSets": [
+        [
+          {
+            "part": "p1",
+            "sentence": 9
+          },
+          {
+            "part": "p1",
+            "sentence": 10
+          },
+          {
+            "part": "p4",
+            "sentence": 4
+          },
+          {
+            "part": "p4",
+            "sentence": 13
+          }
+        ]
+      ],
+      "explain": "At first the empty rectangle is sized for a particular card. At the end that card has another home and the new space is used by someone Nila did not expect. The title comes to mean room for another person to contribute."
+    },
+    {
+      "id": "whole-character",
+      "prompt": "Which change in Nila is best supported across the story?",
+      "options": [
+        "She moves from organising the board herself to asking Mr Ravi to approve what riders post.",
+        "She moves from leaving the decisions to Mr Ravi to helping riders share news without her.",
+        "She moves from organising the board herself to helping riders share news without her."
+      ],
+      "answer": 2,
+      "evidenceSets": [
+        [
+          {
+            "part": "p1",
+            "sentence": 5
+          },
+          {
+            "part": "p4",
+            "sentence": 10
+          },
+          {
+            "part": "p4",
+            "sentence": 13
+          }
+        ]
+      ],
+      "explain": "At first Nila lays out the boxes and writes the entries. Later she makes it easier for someone else to write and add a notice without her doing it for them."
+    }
+  ]
+}

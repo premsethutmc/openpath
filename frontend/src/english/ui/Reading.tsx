@@ -5,6 +5,7 @@
  */
 import { useMemo, useRef, useState } from "react";
 import { ReadingEvidence } from "./ReadingEvidence.tsx";
+import {ReadingLongStory} from "./ReadingLongStory.tsx";
 import { ReadingInference } from "./ReadingInference.tsx";
 import { COURSE, LEVELS, unitKey, type Course, type Level, type Passage, type SkillId, type Unit } from "../logic/reading/course.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
@@ -318,6 +319,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
 }
 
 export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onLeave: () => void; onChanged: () => void }) {
+  const [longStory,setLongStory]=useState(false);
   const [evidence,setEvidence]=useState(false);
   const [inference,setInference]=useState(false);
   const [session, setSession] = useState<ReadingUnitSession | null>(null);
@@ -362,12 +364,13 @@ export function Reading({ learner, onLeave, onChanged }: { learner: Learner; onL
     setSession(s);
     void step(s);
   };
+  if(longStory)return <ReadingLongStory learner={learner} onBack={()=>setLongStory(false)}/>;
   if(inference)return <ReadingInference learner={learner} onBack={()=>setInference(false)} onChanged={onChanged}/>;
   if(evidence)return <ReadingEvidence learner={learner} onBack={()=>setEvidence(false)} onChanged={onChanged}/>;
   if (!session)
     return (
       <>
-        <div className="page">{!failedSession.current&&<a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a>}<button className="secondary" disabled={!!failedSession.current} onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" disabled={!!failedSession.current} onClick={()=>setInference(true)}>Connect the clues</button></div>
+        <div className="page"><button className="secondary" disabled={!!failedSession.current} onClick={()=>setLongStory(true)}>Read a story in parts</button>{!failedSession.current&&<a className="secondary" href="?experience=causal-reading">Find my next causal-reading step</a>}<button className="secondary" disabled={!!failedSession.current} onClick={()=>setEvidence(true)}>Answer and show why</button><button className="secondary" disabled={!!failedSession.current} onClick={()=>setInference(true)}>Connect the clues</button></div>
         {failedSession.current&&<p role="status">Finish saving your pending reading step before starting another activity. Reopen its check to retry; your unsaved selection is still held here.</p>}
         {COURSE.levels.flatMap(l=>COURSE.skills.map(skill=>({level:l.id,skill:skill.id}))).filter(u=>pendingCheck(records,u)).map(u=><div className="page" key={unitKey(u)}><button className="secondary" onClick={()=>open(u,'check_me')}>Continue saved check: {skillName(COURSE,u.skill)} · {levelName(COURSE,u.level)}</button></div>)}
         <ReadingMap course={COURSE} progress={p} start={asReadingLevel(learner.levels().reading?.start)} onOpen={open} onBack={onLeave} />

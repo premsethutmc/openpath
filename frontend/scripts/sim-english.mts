@@ -16,6 +16,7 @@
  */
 import { writeFileSync } from "node:fs";
 import {supportingSets} from "../src/english/logic/reading/check-evidence.ts";
+import { STORY, newStoryState, restoreStoryState, storyQuestions, storyResult, storyStep, type StoryAction } from "../src/english/logic/reading/long-story.ts";
 import {sentenceChoices} from "../src/english/logic/reading/sentences.ts";
 import { COURSE, type Level } from "../src/english/logic/reading/course.ts";
 import { ReadingUnitSession, progress as readingProgress, recommend, type ReadingRecord } from "../src/english/logic/reading/session.ts";
@@ -362,6 +363,73 @@ function run(p: Persona, days: number, seed: number) {
   return { name: p.name, about: p.about, stats, firstWords, inferenceVisits };
 }
 
+// A separate voluntary reading visit. Keep this RNG and its outcomes out of placement/course gains.
+function traverseLongStory(p: Persona, seed: number) {
+  const mind = new Mind(p, rng(`long-story|${p.name}|${seed}`));
+  const questions = storyQuestions();
+  const count = { completed: 0, answers: 0, rereads: 0, restores: 0, correct: 0, completeEvidence: 0 };
+  const expected: { answerCorrect: boolean; evidence: "complete" | "partial" | "unmatched" }[] = [];
+  let state = newStoryState();
+  function step(action: StoryAction) { state = storyStep(state, action); }
+  const require = (ok: boolean, context: string) => { if (!ok) throw Error(`long story: ${context}`); };
+  const recover = () => {
+    const raw = JSON.stringify(state);
+    state = restoreStoryState(raw);
+    require(JSON.stringify(state) === raw, "draft or history changed on restore");
+    count.restores++;
+  };
+  for (const [i, q] of questions.entries()) {
+    require(state.index === i && state.answers.length === i, `question skipped or repeated at ${i}`);
+    const final = i >= STORY.parts.length;
+    require(final ? state.screen === "question" : state.screen === "read" && state.viewPart === i, `unexpected screen before ${q.id}`);
+    const level = final ? 5 : 4; // simulation difficulty only; not a learner-visible placement
+    step({ type: "question" });
+    const right = mind.right("reading", level, q.options.length);
+    const choice = right ? q.answer : other(q.options.length, q.answer, mind.r);
+    step({ type: "choice", choice });
+    recover();
+    require(state.draft.choice === choice && !state.draft.locked, "unlocked choice not restored");
+    step({ type: "lock" });
+    require(state.draft.locked, "choice did not lock");
+    const set = q.evidenceSets[0];
+    const support = mind.right("reading", level, 0);
+    const used = new Set(q.evidenceSets.flat().map(r => `${r.part}:${r.sentence}`));
+    const distractors = STORY.parts.slice(0, Math.min(i + 1, STORY.parts.length)).flatMap(part =>
+      sentenceChoices(part.text).map((_, sentence) => ({ part: part.id, sentence })).filter(r => !used.has(`${r.part}:${r.sentence}`)));
+    require(distractors.length > 0, `no available distractor at ${q.id}`);
+    const partial = !support && !p.guess && set.length > 1 && mind.r() < 0.5;
+    const refs = support ? set : partial ? [set[0]] : [distractors[Math.floor(mind.r() * distractors.length)]];
+    step({ type: "refs", refs });
+    if (final) {
+      for (const part of [0, STORY.parts.length - 1]) {
+        step({ type: "read", part });
+        require(state.screen === "read" && state.viewPart === part, "whole-story reread unavailable");
+        count.rereads++;
+      }
+      step({ type: "question" });
+    }
+    recover();
+    require(state.screen === "question" && state.draft.locked && state.draft.choice === choice &&
+      JSON.stringify(state.draft.refs) === JSON.stringify(refs), "locked choice or evidence lost on return");
+    step({ type: "submit" });
+    require(state.index === i + 1 && state.answers.at(-1)?.question === q.id, "answer did not advance exactly once");
+    count.answers++;
+    expected.push({ answerCorrect: right, evidence: support ? "complete" : partial ? "partial" : "unmatched" });
+  }
+  require(state.screen === "done", "visit did not complete");
+  const result = storyResult(state);
+  require(result.length === questions.length && result.every((r, i) =>
+    r.question.id === questions[i].id && r.answerCorrect === expected[i].answerCorrect && r.evidence === expected[i].evidence),
+  "answer and evidence findings diverged");
+  const finished = JSON.stringify(state);
+  step({ type: "submit" });
+  require(JSON.stringify(state) === finished, "completed visit accepted a duplicate answer");
+  count.completed = 1;
+  count.correct = result.filter(r => r.answerCorrect).length;
+  count.completeEvidence = result.filter(r => r.evidence === "complete").length;
+  return count;
+}
+
 // ---------------------------------------------------------------- report
 const args = process.argv.slice(2);
 const opt = (k: string, d: string) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
@@ -392,7 +460,20 @@ const results = PERSONAS.map((p) => {
       ];
     }),
   ) as Record<Stream, { ability: number; placed: number; placedNear: number; abilityEnd: number; levelEnd: number; tooHard: number; tooEasy: number; flips: number; repeats: number; stuck: number; errors: string[] }>;
-  return { name: p.name, about: p.about, per, inferenceVisits: runs.map(r=>r.inferenceVisits), firstWords: runs.filter((r) => r.firstWords).length / RUNS };
+  const storyRuns = Array.from({ length: RUNS }, (_, seed) => {
+    try { return { counts: traverseLongStory(p, seed), error: "" }; }
+    catch (e) { return { counts: null, error: String((e as Error).message) }; }
+  });
+  const story = {
+    completed: storyRuns.reduce((n, r) => n + (r.counts?.completed ?? 0), 0),
+    answers: storyRuns.reduce((n, r) => n + (r.counts?.answers ?? 0), 0),
+    rereads: storyRuns.reduce((n, r) => n + (r.counts?.rereads ?? 0), 0),
+    restores: storyRuns.reduce((n, r) => n + (r.counts?.restores ?? 0), 0),
+    correct: storyRuns.reduce((n, r) => n + (r.counts?.correct ?? 0), 0),
+    completeEvidence: storyRuns.reduce((n, r) => n + (r.counts?.completeEvidence ?? 0), 0),
+    errors: [...new Set(storyRuns.map(r => r.error).filter(Boolean))],
+  };
+  return { name: p.name, about: p.about, per, story, inferenceVisits: runs.map(r=>r.inferenceVisits), firstWords: runs.filter((r) => r.firstWords).length / RUNS };
 });
 const NAMES: Record<Stream, string> = { words: "Words", reading: "Reading", dictation: "Listen and write", passages: "Listen and answer", grammar: "Grammar in use" };
 const f1 = (x: number) => (x < 0.95 ? "below 1" : x.toFixed(1));
@@ -413,6 +494,11 @@ for (const s of STREAMS) {
 lines.push(`## Sent to First words by Find my level`, ``, `| Learner | Share of runs |`, `|---|---:|`, ...results.map((r) => `| ${r.name} | ${pct(r.firstWords)} |`), ``);
 lines.push(`## The learners`, ``, ...PERSONAS.map((p) => `- **${p.name}**: ${p.about}.`), ``);
 lines.push("## Reading between the lines coverage", "", "First daily Reading sitting explicitly chooses this skill on the map; later visits follow recommendations. Counts are completed synthetic sessions, not learning evidence.", "", ...results.map(r=>`${r.name}: ${r.inferenceVisits.filter(n=>n>0).length}/${RUNS} runs completed the new skill.`));
+lines.push("", "## Long-story navigation and scoring coverage", "",
+  "One separate story visit per profile/run. Simulated choices and evidence vary by profile; these are traversal checks, not learning gains.", "",
+  "| Learner | Completed | Answers submitted | Final rereads | Draft restores | Answers matched | Evidence matched | Errors |",
+  "|---|---:|---:|---:|---:|---:|---:|---|",
+  ...results.map(r => `| ${r.name} | ${r.story.completed}/${RUNS} | ${r.story.answers} | ${r.story.rereads} | ${r.story.restores} | ${r.story.correct} | ${r.story.completeEvidence} | ${r.story.errors.join("; ") || 0} |`), "");
 const md = lines.join("\n");
 const out = opt("--out", "");
 if (out) writeFileSync(out, JSON.stringify({ days, results }, null, 1));
@@ -433,6 +519,13 @@ console.log(md);
 // --strict: fail when a stream threw or had nothing to give (for CI); the rest of the report is for reading
 if (args.includes("--strict")) {
   const bad = results.flatMap((r) => STREAMS.filter((s) => r.per[s].errors.length || r.per[s].stuck > 0 || (s === "reading" && r.per[s].repeats > 0)).map((s) => `${r.name} / ${NAMES[s]}: ${r.per[s].errors.join("; ") || `stuck ${r.per[s].stuck}, needless repeats ${r.per[s].repeats}`}`));
+  for (const r of results) {
+    const q = storyQuestions().length;
+    if (r.story.errors.length || r.story.completed !== RUNS || r.story.answers !== RUNS * q ||
+        r.story.rereads !== RUNS * STORY.finalQuestions.length * 2 || r.story.restores !== RUNS * q * 2) {
+      bad.push(`${r.name} / Long story: ${r.story.errors.join("; ") || "incomplete traversal"}`);
+    }
+  }
   if (bad.length) {
     console.error(`sim-english: ${bad.length} problems\n${bad.join("\n")}`);
     process.exit(1);
