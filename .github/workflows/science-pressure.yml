@@ -31,9 +31,13 @@ jobs:
       - name: Check Lift the Rock on narrow and wide phones
         timeout-minutes: 2
         run: node --test --test-timeout=35000 e2e/science-lever.test.mjs
+      - name: Check Sound Studio touch and audio
+        if: ${{ !cancelled() }}
+        timeout-minutes: 2
+        run: node --test --test-timeout=35000 e2e/science-sound.test.mjs
       - name: Check the rest of the science labs
         if: ${{ !cancelled() }}
-        run: node --test $(find e2e -maxdepth 1 -name 'science-*.test.mjs' ! -name 'science-lever.test.mjs' | sort)
+        run: node --test $(find e2e -maxdepth 1 -name 'science-*.test.mjs' ! -name 'science-lever.test.mjs' ! -name 'science-sound.test.mjs' | sort)
         env:
           E2E_SHOTS: test-results/science
       - uses: actions/upload-artifact@v7

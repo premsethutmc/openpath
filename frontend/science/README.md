@@ -33,3 +33,13 @@ range and Push button. The previous lift leaves a small hand-height marker.
 This is a simplified lossless, massless beam model, not a measurement of finger
 pressure. At 40/60 cm the required push is 16 N over 6 cm; at 20/80 cm it is 6 N
 over 16 cm for the same ideal work of 0.96 J. No backend or external assets.
+
+### Sound Studio
+
+A single stylized veena string. Pull it and release, then turn or slide the
+tuning peg. A stronger pull increases amplitude and gain without changing
+pitch; tighter tension increases frequency at a fixed string length. The
+scope uses the same time scale for both notes, with the previous one dotted.
+Low-level additive Web Audio starts only on pluck; there are no audio files,
+remote calls, microphone inputs, or accounts. The waveform and text remain
+usable when muted; reduced-motion prefers a still string.

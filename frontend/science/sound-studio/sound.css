@@ -1,0 +1,21 @@
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#20182e;color:#fff0e4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#52304a,transparent 72%);min-height:100svh}
+header,main{width:min(100% - 24px,590px);margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:13px 0;color:#e6c9d8;font-size:.8rem}
+header a{color:inherit;text-underline-offset:3px}header span{font-size:.67rem;letter-spacing:.12em;font-weight:750}
+h1{font:600 clamp(2.55rem,9vw,3.65rem)/1 Georgia,serif;letter-spacing:-.04em;margin:3px 0 5px}
+.intro{margin:0 0 12px;color:#ead0d9}.lab{overflow:hidden;background:#32223e;border:1px solid #815b72;border-radius:18px;box-shadow:0 15px 32px #160c22a0}
+#instrument{display:block;width:100%;height:auto;touch-action:none}#play-zone{cursor:ns-resize}
+.controls{padding:10px 14px 12px}.title{text-align:center;display:block;font-weight:750;font-size:.86rem}
+input[type=range]{display:block;width:100%;height:36px;margin:0;accent-color:#ffd291;cursor:ew-resize}.endpoints{display:flex;justify-content:space-between;margin:-4px 0 10px;color:#e6c4d6;font-size:.74rem}
+.play{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{touch-action:manipulation;min-height:44px;border:1px solid #d69a76;border-radius:9px;color:#fff0e4;background:#684053;font:700 .89rem system-ui;cursor:pointer}
+button:last-child{background:#82494c}button:active{background:#4d2a44}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #ffd598;outline-offset:2px}
+.options{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:6px}.options label{display:inline-flex;align-items:center;min-height:38px;font-size:.78rem;cursor:pointer}.options input{accent-color:#ffd291;margin:0 6px 0 0}
+#notice{font-size:.86rem;color:#ffe2b5;min-height:1.25em;margin:3px 0 9px}
+.scope{background:#281b32;border:1px solid #68445e;border-radius:10px;padding:7px 8px;color:#edccdc}
+.scope div{display:flex;justify-content:space-between;gap:4px;font-size:.75rem}.scope div span:first-child{font-weight:750}.scope svg{display:block;margin:2px 0;width:100%;height:clamp(55px,17vw,80px)}.scope small{display:block;font-size:.68rem}
+details{padding:12px 3px 18px;font-size:.83rem;color:#edd3dd}summary{cursor:pointer;width:max-content;font-weight:700}details p{margin:6px 0;max-width:54ch;line-height:1.45}
+
+#peg{cursor:ew-resize}

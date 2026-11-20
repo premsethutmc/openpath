@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Sound Studio · OpenPath Science</title>
+<link rel="stylesheet" href="./sound.css"><script type="module" src="./studio.mjs"></script>
+</head><body>
+<header><a href="../">← Science labs</a><span>VIBRATIONS · SOUND</span></header>
+<main>
+<h1>Sound Studio</h1><p class="intro">Pull the veena string and let go.</p>
+<section class="lab" aria-label="One-string studio">
+<div class="stage">
+<svg id="instrument" viewBox="0 0 480 200" role="img" aria-label="A wooden veena inspired by South Indian instruments, with one playable string.">
+<defs>
+ <linearGradient id="wood" x2="12%" y2="100%"><stop stop-color="#e2955a"/><stop offset="1" stop-color="#873a33"/></linearGradient>
+ <linearGradient id="neck" x2="0%" y2="100%"><stop stop-color="#b36345"/><stop offset="1" stop-color="#4d2028"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#c77755" stop-opacity=".6"/><stop offset="1" stop-color="#713b57" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="480" height="200" fill="#261b36"/><ellipse cx="151" cy="113" rx="188" ry="104" fill="url(#glow)"/>
+<path d="M0 174Q92 155 180 177T480 172V200H0Z" fill="#38213a"/>
+<ellipse cx="236" cy="161" rx="202" ry="16" fill="#170f21" opacity=".65"/>
+<path d="M128 81L408 82l32-8q20 2 15 18l-1 24-50-5H128Z" fill="url(#neck)" stroke="#2d1822" stroke-width="3"/>
+<path d="M33 94q2-46 56-53q39-5 65 24q18 21 13 54q-5 40-48 48q-53 9-79-25q-13-18-7-48Z" fill="url(#wood)" stroke="#541f29" stroke-width="4"/>
+<path d="M41 92q8-36 46-44q44-9 68 28m-109 64q34 35 79 15" fill="none" stroke="#f5b86d" stroke-width="3" opacity=".8"/>
+<path d="M53 80q50-24 93 3m-96 50q43 26 96 0" fill="none" stroke="#f7ad75" opacity=".43"/>
+<circle cx="95" cy="105" r="34" fill="none" stroke="#662d43" stroke-width="5" opacity=".6"/><circle cx="95" cy="105" r="25" fill="none" stroke="#ffcb87" stroke-width="1.5" stroke-dasharray="2 4"/>
+<path d="M71 91v27h9V91Zm330-3v32h8V88Z" fill="#e3a76a" stroke="#6a3d37" stroke-width="2"/>
+<path d="M173 87v22m19-22v22m20-22v22m23-22v22m26-22v22m29-22v22m33-22v22m37-22v22" stroke="#e2a770" stroke-width="2" opacity=".45"/>
+<path d="M76 101H405" stroke="#f0bd81" stroke-dasharray="3 5" opacity=".5"/>
+<path id="string" d="M76 101H405" stroke="#fff0b1" stroke-width="3" fill="none" stroke-linecap="round"/>
+<g id="peg" transform="rotate(0 424 101)"><circle cx="424" cy="101" r="27" fill="transparent"/><circle cx="424" cy="101" r="12" fill="#d9956b" stroke="#4c2231" stroke-width="3"/><path d="M419 101h10" stroke="#5a2e36" stroke-width="3" stroke-linecap="round"/></g>
+<rect id="play-zone" x="80" y="62" width="322" height="88" fill="transparent"/>
+<path d="M241 50v18m-5-6 5 6 5-6" stroke="#ffce91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
+</div>
+<div class="controls">
+<label for="tension" class="title">Turn the tuning peg</label>
+<input id="tension" type="range" aria-label="Tuning peg" min="50" max="200" step="10" value="100">
+<div class="endpoints"><span>Looser</span><span>Tighter</span></div>
+<div class="play"><button id="soft">Soft pluck</button><button id="strong">Strong pluck</button></div>
+<div class="options"><label><input type="checkbox" id="audio" checked> Sound</label><label><input type="checkbox" id="slow"> Slow-motion string</label></div>
+<p id="notice" role="status">Pull the string, or try a soft pluck.</p>
+<div class="scope">
+  <div><span>See the vibration</span><span id="legend">Same time window</span></div>
+  <svg viewBox="0 0 360 80" aria-hidden="true"><path d="M0 40H360M90 0V80M180 0V80M270 0V80" stroke="#80546f" opacity=".45"/><path id="previous" fill="none" stroke="#cba7bd" stroke-width="1.5" stroke-dasharray="3 4"/><path id="wave" d="M0 40H360" fill="none" stroke="#ffd898" stroke-width="2.2"/></svg>
+  <small id="wave-key">More space up and down = louder. More wiggles = higher pitch.</small>
+</div>
+</div>
+</section>
+<details><summary>What did I change?</summary><p>A stronger pluck makes the string swing farther. Tightening a string of the same length makes it vibrate faster. This model holds the string length fixed and keeps the sound’s pitch separate from the size of the pluck.</p></details>
+</main></body></html>

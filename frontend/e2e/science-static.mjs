@@ -46,6 +46,10 @@ const files = new Map([
   ['/lift-the-rock/lever.css', ['lift-the-rock/lever.css', 'text/css']],
   ['/lift-the-rock/lever.mjs', ['lift-the-rock/lever.mjs', 'text/javascript']],
   ['/lift-the-rock/model.mjs', ['lift-the-rock/model.mjs', 'text/javascript']],
+  ['/sound-studio/', ['sound-studio/index.html', 'text/html']],
+  ['/sound-studio/sound.css', ['sound-studio/sound.css', 'text/css']],
+  ['/sound-studio/studio.mjs', ['sound-studio/studio.mjs', 'text/javascript']],
+  ['/sound-studio/model.mjs', ['sound-studio/model.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {
