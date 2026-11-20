@@ -169,6 +169,8 @@ test('phone: the story can pause, finish, replay, and return immediately to the 
  assert.equal(await line(),'Dawn at the hive');
  await b(p,'Take over the bee →').tap();
  assert.equal(await dialog.count(),0);
- assert.equal(await p.evaluate(()=>document.activeElement?.getAttribute('aria-label')),'Move the bee');
+ // The browser dispatches dialog's close event on a subsequent frame.
+ await p.clock.runFor(65);
+ await p.waitForFunction(()=>document.activeElement?.getAttribute('aria-label')==='Move the bee');
  await b(p,'Left flower').tap();assert.match(await status(p),/sticks to the bee/);
 }));
