@@ -9,8 +9,11 @@ const coach = readFileSync(new URL("./StepCoach.tsx", import.meta.url), "utf8");
 test("being stuck opens the working with the step help inside it, and asking is recorded as help", () => {
   assert.match(learn, /const askHelp = \(\) => \{ setCoach\(true\); setWorkingOpen\(true\); setHint\(true\); \};/);
   assert.match(learn, /canCoach = hintAllowed && KID && workable && !!stepsHelp\(qid\)/, "never without help allowed (a test)");
-  assert.match(learn, /<StepCoach key=\{qid\} qid=\{qid\} shown onUsed=\{\(\) => setHint\(true\)\} \/>/);
-  assert.match(learn, /onClick=\{askHelp\}>I'm stuck<\/button>/);
+  assert.match(learn, /<StepCoach key=\{qid\} qid=\{qid\} shown onUsed=\{usedStep\} \/>/);
+  assert.match(learn, /onClick=\{askHelp\}><span aria-hidden="true">✋ <\/span>Help me with the next step<\/button>/);
+  // help-count@1: each step shown counts, up to the 5 the record allows
+  assert.match(learn, /const usedStep = \(\) => \{ setHint\(true\); setHelped\(\(n\) => Math\.min\(5, n \+ 1\)\); \};/);
+  assert.match(learn, /hints: Math\.max\(helped, hint \|\| showHint \|\| lower > 0 \? 1 : 0\)/);
   assert.match(coach, /Help: show me this step/);
   assert.match(coach, /onClick=\{\(\) => \{ onUsed\?\.\(\); advance\(\); \}\}/, "a step asked to be shown is help");
 });
@@ -35,13 +38,14 @@ test("scribble@1: the pad is scratch paper: nothing is read, saved or sent, and 
   const pad = readFileSync(new URL("./ScribblePad.tsx", import.meta.url), "utf8");
   assert.ok(!/fetch\(|localStorage|setValue|setWorking|onUsed|setHint/.test(pad), "the pad talks to nothing");
   assert.match(pad, /touch-action|onPointerDown=\{down\}/);
-  assert.match(learn, /\{KID && workable && <ScribblePad key=\{qid\} \/>\}/);
   assert.match(pad, /<textarea ref=\{notesBox\} className="scribble-notes"/, "scribble@2: the pad can be typed on");
   // scribble-grows@1: the paper is never full: a stroke near the bottom adds room, "More room" adds it by hand, typed notes grow
   assert.match(pad, /if \(s\.some\(\(\[, y\]\) => y > h - MORE \* 0\.6\)\) grow\(\);/);
   assert.match(pad, /height=\{h\} style=\{\{ aspectRatio: `\$\{W\} \/ \$\{h\}` \}\}/);
   assert.match(pad, />More room<\/button>/);
   assert.match(pad, /t\.style\.height = `\$\{t\.scrollHeight \+ 24\}px`/);
+  // one-place@1: the pad sits inside "Work it out step by step", which is only there for a question with working
+  assert.match(learn, /\{KID && <ScribblePad key=\{qid\} \/>\}\s*<\/details>/);
 });
 
 test("rows-of-people@1 and tried@1: children are drawn, the left over stand underneath, and each try is kept", async () => {
