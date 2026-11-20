@@ -124,7 +124,7 @@ export function App() {
   const [inListenWrite, setInListenWrite] = useState(false);
   const [dictPassage, setDictPassage] = useState<"unseen" | "seen" | null>(null);
   const [inLevelCheck, setInLevelCheck] = useState(false);
-  const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" } | null>(null);
+  const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" | "writing" } | null>(null);
   const [inSyllabus, setInSyllabus] = useState(false);
   const [inFirst, setInFirst] = useState(false);
   const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
@@ -518,7 +518,7 @@ export function App() {
   if (guided)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
-        <GuidedTasks learner={learner} feedback={feedbackService} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
+        <GuidedTasks learner={learner} feedback={feedbackService} onPractise={(topics) => (setGrammarUse({ topics, from: "writing" }), scrollTo(0, 0))} syllabus={guided.syllabus} outcome={guided.outcome} heading={guided.text} onChanged={changed} onLeave={() => (setGuided(null), setInSyllabus(true), scrollTo(0, 0))} />
       </div>
     );
   if (inSyllabus)

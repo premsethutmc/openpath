@@ -190,7 +190,7 @@ export const tryChoices = (c: LearnCard): string[] => hashOrder([c.try.right, ..
 
 export type GrammarRecord =
   | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
-  | { type: "learn"; sitting: string; topic: string; tried: boolean }
+  | { type: "learn"; sitting: string; topic: string; tried: boolean; again?: boolean }
   | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
   | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
@@ -298,6 +298,8 @@ export class GrammarSitting {
   /** Topics the learner has had a card for, before and during this sitting. */
   private readonly learnt: Set<string>;
   private tried: { chosen: number; right: boolean } | null = null;
+  /** Every answer and card of this sitting, kept (take() empties the log). */
+  private readonly mine: GrammarRecord[] = [];
   readonly level: number;
 
   constructor(content: GrammarUse, level: number, history: readonly GrammarRecord[], topics?: readonly string[]) {
@@ -322,15 +324,30 @@ export class GrammarSitting {
     const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, scale: SCALE, topic: it.topic, correct, given: given.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
+    this.mine.push(a);
     const p = it.kind === "fix" ? fixParts(it) : null;
     this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null };
   }
 
-  /** The card due before the current sentence: its topic has never had one. */
+  /**
+   * The card due before the current sentence: its topic has never had one, or the learner's last two answers on the
+   * topic were both wrong since the card was last seen (so the rule is shown again before a third try).
+   */
   private card(): LearnCard | null {
     const it = this.items[this.index];
-    if (!it || this.last || this.learnt.has(it.topic)) return null;
+    if (!it || this.last) return null;
+    if (this.learnt.has(it.topic) && !this.struggling(it.topic)) return null;
     return LEARN.find((c) => c.topic === it.topic) ?? null;
+  }
+
+  private struggling(topic: string): boolean {
+    const all = [...this.history, ...this.mine];
+    let since: boolean[] = [];
+    for (const r of all) {
+      if (r.type === "learn" && r.topic === topic) since = [];
+      if (r.type === "answer" && r.topic === topic) since.push(r.correct);
+    }
+    return since.length >= 2 && !since[since.length - 1] && !since[since.length - 2];
   }
 
   /** Try the card's question: shows the right answer; it is not scored and does not move the level. */
@@ -346,7 +363,9 @@ export class GrammarSitting {
   learned(): void {
     const c = this.card();
     if (!c) return;
-    this.log.push({ type: "learn", sitting: this.sitting, topic: c.topic, tried: !!this.tried?.right });
+    const r: GrammarRecord = { type: "learn", sitting: this.sitting, topic: c.topic, tried: !!this.tried?.right, ...(this.learnt.has(c.topic) ? { again: true } : {}) };
+    this.log.push(r);
+    this.mine.push(r);
     this.learnt.add(c.topic);
     this.tried = null;
   }

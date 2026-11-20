@@ -68,6 +68,12 @@ function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i:
   const s = new GrammarSitting(GRAMMAR, level, [...LEARNT, ...history], topics);
   const asked: GrammarItem[] = [];
   for (let v = s.snapshot(), i = 0; v.phase !== "done"; v = s.snapshot(), i++) {
+    if (v.phase === "learn") {
+      // a card back after two misses on a topic (GU-17): read it and go on
+      s.learned();
+      i--;
+      continue;
+    }
     const it = byId.get(v.id!)!;
     asked.push(it);
     assert.ok(!(v.fix?.words.join(" ") ?? "").includes("["), "the wrong word is not marked on screen");
@@ -276,4 +282,39 @@ test("GU-15 a card teaches a topic before its first sentence, once, and is never
 test("GU-16 the basics have enough sentences: am, is, are; this and these; word order; have and has", () => {
   for (const t of ["be_verbs", "this_these", "word_order", "have_has", "pronouns", "questions", "capitals", "plurals"]) assert.ok(GRAMMAR.items.filter((i) => i.topic === t).length >= 8, t);
   assert.ok(GRAMMAR.items.filter((i) => i.level === 1).length >= 90, "level 1");
+});
+
+test("GU-17 the card comes back after two wrong answers in a row on its topic, and not before", () => {
+  // a learner who has seen every card, then misses two sentences of one topic in a row
+  const s = new GrammarSitting(GRAMMAR, 2, LEARNT);
+  const missed = new Map<string, number>();
+  let again: string | null = null;
+  for (let v = s.snapshot(), g = 0; v.phase !== "done" && g < 40; v = s.snapshot(), g++) {
+    if (v.phase === "learn") {
+      again = byId.get(v.id!)!.topic;
+      assert.ok((missed.get(again) ?? 0) >= 2, "only after two misses");
+      s.learned();
+      continue;
+    }
+    if (v.phase === "feedback") {
+      s.next();
+      continue;
+    }
+    const it = byId.get(v.id!)!;
+    // always wrong
+    if (it.kind === "choose") s.choose(choices(it).findIndex((o) => o !== it.right![0]));
+    else if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => !it.right!.includes(w.replace(/[^A-Za-z']/g, ""))));
+    else if (it.kind === "fix") s.fix(fixParts(it).wrong, "zzz");
+    else s.build([...it.sentence.split(" ")].reverse());
+    missed.set(it.topic, (missed.get(it.topic) ?? 0) + 1);
+  }
+  const recs = s.take();
+  if ([...missed.values()].some((n) => n >= 3)) assert.ok(again, "a topic missed twice brought its card back");
+  for (const r of recs.filter((r) => r.type === "learn")) assert.equal((r as { again?: boolean }).again, true);
+  // a right answer in between resets the count
+  const h: GrammarRecord[] = [...LEARNT, { type: "answer", sitting: "g1", id: "x", level: 2, topic: "past", correct: false, given: "" }, { type: "answer", sitting: "g1", id: "y", level: 2, topic: "past", correct: true, given: "" }, { type: "answer", sitting: "g1", id: "z", level: 2, topic: "past", correct: false, given: "" }];
+  const t = new GrammarSitting(GRAMMAR, 2, h, ["past"]);
+  assert.notEqual(t.snapshot().phase, "learn");
+  const h2: GrammarRecord[] = [...h, { type: "answer", sitting: "g1", id: "w", level: 2, topic: "past", correct: false, given: "" }];
+  assert.equal(new GrammarSitting(GRAMMAR, 2, h2, ["past"]).snapshot().phase, "learn");
 });

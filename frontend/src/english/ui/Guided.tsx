@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { LIMIT, checkWriting, type WritingCheck } from "../logic/writing/check.ts";
 import { loadDictionary } from "../logic/writing/dictionary.ts";
+import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
 import { AI_LIMIT, CONSENT_TEXT, MARK, MET_WORD, notReady, type Feedback, type FeedbackService, type FeedbackStatus } from "../logic/writing/feedback.ts";
 import { GUIDED, done, guidedSummary, tasksFor, wordCount, type GuidedSummary, type GuidedTask } from "../logic/guided/guided.ts";
 
@@ -111,15 +112,23 @@ export function AiFeedback({ task, text, check, service }: { task: GuidedTask; t
   );
 }
 
-function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?: FeedbackService; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
+/**
+ * Writing in progress, kept in memory only while the app is open, so that a learner who goes to practise a rule
+ * the check pointed to finds the piece still there on coming back. Never stored, never sent.
+ */
+const drafts = new Map<string, string>();
+const topicName = (id: string) => GRAMMAR.topics.find((t) => t.id === id)?.name ?? id;
+
+function TaskTile({ task, was, feedback, onDone, onPractise }: { task: GuidedTask; onPractise?: (topics: string[]) => void; feedback?: FeedbackService; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
   const [seen, setSeen] = useState<number[]>([]);
-  const [text, setText] = useState("");
+  const [text, setTextState] = useState(() => drafts.get(task.id) ?? "");
+  const setText = (t: string) => (t ? drafts.set(task.id, t) : drafts.delete(task.id), setTextState(t));
   const [self, setSelf] = useState<number[]>([]);
   const [copied, setCopied] = useState(false);
   const [check, setCheck] = useState<WritingCheck | null>(null);
   const [checking, setChecking] = useState(false);
   const words = wordCount(text);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(() => drafts.has(task.id));
   return (
     <section className="tile guided-task" data-task={task.id} data-done={!!was} aria-labelledby={`guided-${task.id}`}>
       <b id={`guided-${task.id}`}>
@@ -185,6 +194,14 @@ function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?
                     {check.notes.map((n) => (
                       <li key={n.id} data-note={n.id} data-level={n.level}>
                         <span aria-hidden="true">{n.level === "fix" ? "✏️" : n.level === "tip" ? "💡" : "✓"}</span> {n.text}
+                        {n.topics && onPractise && n.level === "fix" && (
+                          <>
+                            {" "}
+                            <button type="button" className="link" onClick={() => onPractise(n.topics!)}>
+                              Practise: {n.topics.slice(0, 2).map(topicName).join(", ")}
+                            </button>
+                          </>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -215,7 +232,7 @@ function TaskTile({ task, was, feedback, onDone }: { task: GuidedTask; feedback?
   );
 }
 
-export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack }: { tasks: GuidedTask[]; feedback?: FeedbackService; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
+export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack, onPractise }: { tasks: GuidedTask[]; feedback?: FeedbackService; onPractise?: (topics: string[]) => void; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
   const writing = tasks.some((t) => t.write);
   return (
     <main className="page vocab guided" aria-labelledby="guided-title">
@@ -228,14 +245,14 @@ export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack }
       </h1>
       <p className="sub">{writing ? "Write to the task, check your own work against the list, then show it to a grown-up, who ticks what they see. The app does not keep or mark the writing." : "These are done aloud or away from the screen. The app cannot hear or mark them: a grown-up listens and ticks what they saw."}</p>
       {tasks.map((t) => (
-        <TaskTile key={t.id} task={t} was={summary.done.get(t.id)} feedback={feedback} onDone={(seen, w) => onDone(t, seen, w)} />
+        <TaskTile key={t.id} task={t} was={summary.done.get(t.id)} feedback={feedback} onPractise={onPractise} onDone={(seen, w) => onDone(t, seen, w)} />
       ))}
       {!tasks.length && <p>There are no tasks for this line yet.</p>}
     </main>
   );
 }
 
-export function GuidedTasks({ learner, syllabus, outcome, heading, feedback, onLeave, onChanged }: { learner: Learner; feedback?: FeedbackService; syllabus: string; outcome?: string; heading: string; onLeave: () => void; onChanged: () => void }) {
+export function GuidedTasks({ learner, syllabus, outcome, heading, feedback, onLeave, onChanged, onPractise }: { learner: Learner; feedback?: FeedbackService; onPractise?: (topics: string[]) => void; syllabus: string; outcome?: string; heading: string; onLeave: () => void; onChanged: () => void }) {
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<ReturnType<typeof done>[]>([]);
   const [, setTick] = useState(0);
@@ -260,7 +277,7 @@ export function GuidedTasks({ learner, syllabus, outcome, heading, feedback, onL
           This could not be saved. Check the connection; saving the next task will try again.
         </p>
       )}
-      <GuidedView tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} feedback={feedback} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
+      <GuidedView tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} feedback={feedback} onPractise={onPractise} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
     </>
   );
 }
