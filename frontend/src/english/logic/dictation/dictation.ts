@@ -7,9 +7,9 @@
  * the end mark (. ? !) is checked; commas are not marked.
  *
  * A sitting is five sentences. The first check shows what to fix without showing the sentence; the learner gets
- * one more try, then sees the sentence. Sentences not right first time come back in a later sitting. Four or five
- * right first time moves the level up, none or one moves it down. Practice-only: nothing here is evidence for
- * the engine.
+ * one more try, then sees the sentence. Sentences not right first time come back in a later sitting. Two sittings
+ * in a row with four or five right first time move the level up; none or one moves it down. Practice-only: nothing
+ * here is evidence for the engine.
  */
 import sentencesJson from "../../../../../content/english/dictation/sentences.json";
 import { SCALE, rescale, startFor } from "../scale.ts";
@@ -192,14 +192,24 @@ type Answer = Extract<DictationRecord, { type: "answer" }>;
 export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 2, 2: 3, 3: 5 };
 export const startLevel = startFor;
 
-/** The level for the next sitting: the last finished sitting's level, moved by how it went. */
+/**
+ * The level for the next sitting. One weak sitting (none or one right first time) moves it down; moving up takes two
+ * strong sittings in a row (four or five right first time) at the same level, so one lucky day does not lift a
+ * learner to a level where most is wrong (sim-english@1: up after one strong sitting, the level went up and straight
+ * back down about ten times a month, and nearly half the sittings had under half right).
+ */
 export function levelFor(d: Dictation, records: readonly DictationRecord[], start: number): number {
   // a passage sitting is practice at its own level: it does not move the learner's level
-  const last = [...records].reverse().find((r): r is Extract<DictationRecord, { type: "end" }> => r.type === "end" && !r.passage);
+  const ends = records.filter((r): r is Extract<DictationRecord, { type: "end" }> => r.type === "end" && !r.passage);
+  const last = ends.at(-1);
   const ids = d.levels.map((l) => l.id);
   const clamp = (x: number) => Math.min(Math.max(...ids), Math.max(Math.min(...ids), x));
   if (!last || last.asked < SITTING_SIZE) return clamp(last ? rescale(last, OLD_LEVELS) : start);
-  return clamp(rescale(last, OLD_LEVELS) + (last.perfectFirst >= MOVE_UP ? 1 : last.perfectFirst <= MOVE_DOWN ? -1 : 0));
+  const level = rescale(last, OLD_LEVELS);
+  if (last.perfectFirst <= MOVE_DOWN) return clamp(level - 1);
+  const before = ends.at(-2);
+  const strong = (e: typeof last | undefined) => !!e && e.asked >= SITTING_SIZE && e.perfectFirst >= MOVE_UP && rescale(e, OLD_LEVELS) === level;
+  return clamp(strong(last) && strong(before) ? level + 1 : level);
 }
 
 /**

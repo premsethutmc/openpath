@@ -55,9 +55,18 @@ learner who listens every day hears a new passage for ten days at a level before
 Needless repeats a month: 0 for every kind of learner (were up to 5.2 for a strong learner). The right answer still
 falls equally often in each place (80, 80, 80).
 
+## Fixed: Listen and write moves up after two strong sittings (dictation v7)
+
+Listen and write used to move up after one sitting with four or five right first time, so a learner went up on a
+good day and straight back down: about ten flips a month, and nearly half the sittings had under half right. Now it
+takes two strong sittings in a row at the same level (one weak sitting still moves it down). Flips a month: average
+9.8 → 1.7, early 10.2 → 1.6. Sittings with under half right: average 47% → 32%, early 47% → 34%. Thirty-six new
+first-level sentences (sixty in all) keep a learner who stays at level one from hearing repeats (beginner: 42 a
+month → 0).
+
 ## Found, not fixed
 
-- **Levels go up and down often** (grammar about ten times a month for a learner between two levels). This is how a
+- **Grammar levels go up and down often** (about ten times a month for a learner between two levels). This is how a
   staircase finds the edge of what a learner can do, so it is left as it is; the screen shows the level of the day.
 - **Find my level places grammar about one level high** for the learner who cannot name a noun (half the runs within
   one level). Practice brings it down within a week, and the noun-and-verb questions already send this learner to

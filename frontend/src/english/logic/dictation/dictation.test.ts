@@ -18,6 +18,7 @@ const kinds = (text: string, typed: string) => mark(S(text), typed).words.map((w
 test("LW-1 content: seven levels of at least twenty-four sentences, each one markable", () => {
   assert.deepEqual(dictationProblems(DICTATION), []);
   for (const l of DICTATION.levels) assert.ok(DICTATION.sentences.filter((s) => s.level === l.id).length >= 24);
+  assert.ok(DICTATION.sentences.filter((s) => s.level === 1).length >= 60, "enough first-level sentences for two months without a repeat");
   assert.equal(DICTATION.levels.length, 7);
   const avg = (lv: number) => { const x = DICTATION.sentences.filter((s) => s.level === lv).map((s) => wordsOf(s.text).length); return x.reduce((a, b) => a + b, 0) / x.length; };
   assert.ok(avg(1) < avg(2) && avg(2) < avg(3) && avg(3) < avg(5) && avg(4) < avg(5), "sentences get longer by level");
@@ -95,15 +96,20 @@ test("LW-5 a sitting: five sentences, one retry, the sentence shown only afterwa
   assert.equal(s.snapshot().phase, "write", "nothing typed is not an answer");
 });
 
-test("LW-6 the level moves with the last sitting; missed sentences come back; new ones come first", () => {
+test("LW-6 the level moves down after one weak sitting and up after two strong ones; missed sentences come back; new ones come first", () => {
   assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null), startLevel("older")], [1, 3, 3, 4]);
   // a sitting stored before the six-level scale is read on today's scale: old 2 is 3, old 3 is 5
   assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "old", level: 2, asked: 5, perfectFirst: 3 }], 1), 3);
-  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "old", level: 3, asked: 5, perfectFirst: 5 }], 1), 6);
+  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "old", level: 3, asked: 5, perfectFirst: 5 }], 1), 5, "one strong sitting: stays");
+  assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "o1", level: 3, asked: 5, perfectFirst: 4 }, { type: "end", sitting: "old", level: 3, asked: 5, perfectFirst: 5 }], 1), 6, "two in a row: up");
   assert.equal(levelFor(DICTATION, [{ type: "end", sitting: "new", level: 3, scale: 2, asked: 5, perfectFirst: 3 }], 1), 3);
-  const good = sit(1, [], (t) => t);
+  const once = sit(1, [], (t) => t);
+  assert.equal(once.done.nextLevel, 1, "one strong sitting is not enough");
+  const good = sit(1, once.records, (t) => t);
   assert.equal(good.done.nextLevel, 2);
   assert.equal(levelFor(DICTATION, good.records, 1), 2);
+  // a strong sitting at another level does not count towards moving up from this one
+  assert.equal(levelFor(DICTATION, sit(2, good.records, (t) => t).records, 2), 2);
   const poor = sit(2, good.records, (t) => spoil(t));
   assert.equal(levelFor(DICTATION, poor.records, 2), 1);
   const mixed = sit(1, [], (t, i) => (i < 2 ? spoil(t) : t));
@@ -140,6 +146,6 @@ test("LW-7 stored on the learner's record without touching the engine", async ()
   assert.equal(picture(), before);
   const again = await Learner.open(c, repo, "p-dict", clock);
   assert.equal(again.dictationRecords().length, r.records.length);
-  assert.equal(levelFor(DICTATION, again.dictationRecords(), 2), 3);
+  assert.equal(levelFor(DICTATION, again.dictationRecords(), 2), 2);
   assert.match(String(eventProblem({ kind: "dictation", id: "x", at: clock(), record: {} })), /without its type/);
 });
