@@ -189,11 +189,12 @@ test("FW-sentences 2 read a sentence and tap its picture; it is said aloud only 
   const kinds: string[] = [];
   while (v.phase !== "done" && v.kind !== "read") (kinds.push(v.kind!), solve(s), s.next(), (v = s.snapshot()));
   assert.equal(v.kind, "read");
-  assert.match(v.text!, /^(This is an? [a-z]+|I see (two|three|four) [a-z]+|I can [a-z]+|I am [a-z]+)\.$/);
-  assert.equal(s.spoken(), "Read the sentence, then tap its picture.", "the sentence is not read out before the learner tries");
-  const wrong = v.options.findIndex((_, i) => !s.tap(i) || false);
+  assert.match(v.text!, /^(This is an? [a-z]+|I see (two|three|four) [a-z]+|I see an? [a-z]+ and an? [a-z]+|The [a-z]+ is (on|under|next to) the box|I can [a-z]+|I am [a-z]+)\.$/);
+  assert.match(s.spoken()!, /^Read the sentence, then tap (its picture|where it is)\.$/, "the sentence is not read out before the learner tries");
+  const n = v.place ? v.place.zones.length : v.options.length;
+  const wrong = [...Array(n).keys()].findIndex((i) => !s.tap(i));
   assert.ok(wrong >= 0);
-  assert.match(s.spoken()!, new RegExp(`^${v.text!.replace(".", "\\.")} Tap its picture\\.$`));
+  assert.ok(s.spoken()!.startsWith(v.text!), "after a wrong tap the sentence is said");
 });
 
 test("FW-sentences 3 build a heard sentence from its words, with one word that does not belong", () => {
@@ -221,7 +222,33 @@ test("FW-sentences 4 a sitting with sentences: eleven steps, two to read or thre
   assert.equal(steps.filter((x) => x.kind === "sentence").length, 2);
   const words = new Set(known.map((w) => w.word));
   for (const r of s.take().filter((r) => r.type === "step" && (r.kind === "read" || r.kind === "sentence")) as Extract<FirstRecord, { type: "step" }>[]) {
-    const content = r.key.replace(/\.$/, "").split(" ").slice(2).map((w) => w.replace(/s$/, "")).filter((w) => !["a", "an", "two", "three", "four"].includes(w));
+    const content = r.key.replace(/\.$/, "").split(" ").map((w) => w.toLowerCase()).filter((w) => !["i", "see", "this", "is", "can", "am", "the", "a", "an", "and", "two", "three", "four", "on", "under", "next", "to"].includes(w)).map((w) => w.replace(/s$/, ""));
     for (const w of content) assert.ok(words.has(w) || words.has(`${w}s`), `${r.key}: ${w} was found before`);
   }
+});
+
+test("FW-sentences 5 never the same sentence to read and to build in a sitting, whatever the learner knows; places and pairs to read", () => {
+  const kinds = new Set<string>();
+  let places = 0;
+  for (let n = SENTENCES_AFTER; n <= FIRST.words.length; n += 3) {
+    for (const start of [0, 7, 19, 40]) {
+      const ids = [...FIRST.words.slice(start), ...FIRST.words.slice(0, start)].slice(0, n).map((w) => w.id);
+      const h: FirstRecord[] = ids.map((id) => ({ type: "step", sitting: "f1", kind: "hear", key: id, correct: true, misses: 0 }));
+      const s = new FirstSitting(FIRST, h);
+      const read: string[] = [];
+      const built: string[] = [];
+      for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) {
+        if (v.kind === "read") (read.push(v.key!), v.place && places++, kinds.add(v.key!.split(" ").slice(0, 2).join(" ")));
+        if (v.kind === "sentence") built.push(v.key!);
+        solve(s);
+        s.next();
+      }
+      if (!read.length) continue;
+      assert.deepEqual(built.filter((b) => read.includes(b)), [], `${n} words from ${start}: ${read} / ${built}`);
+      assert.equal(new Set(built).size, built.length);
+      assert.equal(new Set(read).size, read.length);
+    }
+  }
+  assert.ok(places > 0, "sentences with a place to read");
+  assert.ok([...kinds].some((k) => k === "I see") , "pairs and counts");
 });

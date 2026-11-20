@@ -121,7 +121,7 @@ test("First words: eleven steps by tapping only, a wrong tap switched off, the w
   await context.close();
 });
 
-test("First sentences: after twenty words found, a sentence to read and one to build, each with its picture", async () => {
+test("First sentences: after twenty words found, sentences to read (a picture, or where a thing is) and to build, never the same one twice in a sitting", async () => {
   const context = await browser.newContext(ANDROID);
   const page = await context.newPage();
   const errors = [];
@@ -161,31 +161,39 @@ test("First sentences: after twenty words found, a sentence to read and one to b
     await page.locator('main.first[data-phase="right"]').waitFor();
   };
   const seen = new Set();
-  for (let sitting = 0; sitting < 8 && !(seen.has("read") && seen.has("sentence")); sitting++) {
+  const all = () => seen.has("read") && seen.has("sentence") && seen.has("where");
+  for (let sitting = 0; sitting < 24 && !all(); sitting++) {
+    const sentencesThisSitting = [];
     while (!(await page.locator('main.first[data-phase="done"]').count())) {
       const main = page.locator('main.first[data-phase="ask"]');
       await main.waitFor();
       const kind = await main.getAttribute("data-kind");
-      if ((kind === "read" || kind === "sentence") && !seen.has(kind)) {
-        seen.add(kind);
-        const key = await main.getAttribute("data-key");
+      const key = await main.getAttribute("data-key");
+      if (kind === "read" || kind === "sentence") {
+        assert.ok(!sentencesThisSitting.includes(key), `"${key}" came twice in one sitting`);
+        sentencesThisSitting.push(key);
+      }
+      const sub = kind === "read" && /^The /.test(key) ? "where" : kind;
+      if ((kind === "read" || kind === "sentence") && !seen.has(sub)) {
+        seen.add(sub);
         if (kind === "read") {
           await page.locator("[data-sentence]").getByText(key, { exact: true }).waitFor();
-          assert.equal(await page.locator(".first-option").count(), 3, "three pictures to choose from");
+          if (sub === "where") assert.equal(await page.locator(".first-zone").count(), 3, "three places to choose from");
+          else assert.equal(await page.locator(".first-option").count(), 3, "three pictures to choose from");
         } else {
           assert.equal(await page.getByRole("group", { name: "Words" }).getByRole("button").count(), key.split(" ").length + 1, "its words and one more");
         }
         await fits();
-        await shot(page, `s-${kind}`);
+        await shot(page, `s-${sub}`);
       }
       await solve();
-      if (seen.has("read") && seen.has("sentence")) break;
+      if (all()) break;
       await page.getByRole("button", { name: "Next", exact: true }).click();
     }
-    if (seen.has("read") && seen.has("sentence")) break;
+    if (all()) break;
     await page.getByRole("button", { name: "More words" }).click();
   }
-  assert.deepEqual([...seen].sort(), ["read", "sentence"]);
+  assert.deepEqual([...seen].sort(), ["read", "sentence", "where"]);
   assert.deepEqual(errors, []);
   await context.close();
 });
