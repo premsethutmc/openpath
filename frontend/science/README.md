@@ -23,3 +23,13 @@ node --test science/*/model.test.mjs
 npx playwright install chromium
 node --test e2e/science-*.test.mjs
 ```
+
+### Lift the Rock
+
+A Class 5 introduction to the first-class lever. On the same beam, move the
+support and lift the same rock to the same height. The push meter decreases as
+the hand-travel meter increases. Drag the drawn support and handle, or use the
+range and Push button. The previous lift leaves a small hand-height marker.
+This is a simplified lossless, massless beam model, not a measurement of finger
+pressure. At 40/60 cm the required push is 16 N over 6 cm; at 20/80 cm it is 6 N
+over 16 cm for the same ideal work of 0.96 J. No backend or external assets.

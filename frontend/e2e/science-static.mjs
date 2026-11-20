@@ -42,6 +42,10 @@ const files = new Map([
   ["/shadow-lab/model.mjs", ["shadow-lab/model.mjs", "text/javascript"]],
   ["/shadow-lab/shadow.css", ["shadow-lab/shadow.css", "text/css"]],
   ["/shadow-lab/shadow.mjs", ["shadow-lab/shadow.mjs", "text/javascript"]],
+  ['/lift-the-rock/', ['lift-the-rock/index.html', 'text/html']],
+  ['/lift-the-rock/lever.css', ['lift-the-rock/lever.css', 'text/css']],
+  ['/lift-the-rock/lever.mjs', ['lift-the-rock/lever.mjs', 'text/javascript']],
+  ['/lift-the-rock/model.mjs', ['lift-the-rock/model.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {
