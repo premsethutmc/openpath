@@ -20,6 +20,33 @@ test('a measured pour adds in small units and common salt survives solvent evapo
   assert.ok(Math.abs(s.gas.water-8)<1e-9);
   assert.throws(()=>use(s,'add','water',NaN));
 });
+test('a full beaker can be refilled after evaporation and the same salt dissolves again',()=>{
+  let s=use(start(),'add','salt');
+  for(let i=0;i<29;i++)s=use(s,'add','water');
+  const full=use(s,'add','water',.2);
+  assert.match(full.change,/room|full/i);
+  assert.deepEqual(full.amounts,s.amounts);
+  s=use(s,'heat');
+  for(let i=0;i<25;i++)s=tick(s,1);
+  s=use(s,'heat');
+  assert.equal(view(s).water,0);
+  assert.equal(view(s).solidSalt,2);
+  s=use(s,'add','water');
+  assert.equal(view(s).water,20);
+  assert.equal(view(s).solidSalt,0);
+  assert.equal(view(s).dissolved,2);
+  assert.equal(s.doses,31);
+});
+test('a full metals crucible stays full after blending',()=>{
+  let s=start('crucible');
+  for(let i=0;i<15;i++)for(const id of ['copper','zinc'])s=use(s,'add',id);
+  s=step(use(s,'heat'),20);
+  assert.equal(s.mixed,true);
+  const over=use(s,'add','copper',.2);
+  assert.match(over.change,/room|full/i);
+  assert.deepEqual(over.amounts,s.amounts);
+});
+
 test('changing order works and limiting reactant controls the fizz',()=>{
   for(const [first,second] of [['baking','vinegar'],['vinegar','baking']]){
     let s=use(use(start(),'add',first,.4),'add',second,.2);

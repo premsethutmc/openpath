@@ -2,6 +2,11 @@ import {materials,stations,reactions,alloys} from './catalog.mjs';
 const valid=(map,id)=>Object.hasOwn(map,id);
 const get=(bag,id)=>bag[id]??0;
 const add=(bag,id,n)=>{bag[id]=get(bag,id)+n;};
+// Virtual space, not physical volume. One full dose of any shelf material
+// occupies one space unit before changes; gas that escapes occupies none.
+const spacePerPart={water:1/20,salt:1/2,acid:1/2,baking:1,acetate:1,copper:1,zinc:1};
+const space=bag=>Object.entries(bag).reduce((sum,[id,count])=>sum+spacePerPart[id]*count,0);
+const capacity=30;
 function copy(s){return {...s,amounts:{...s.amounts},gas:{...s.gas},fed:{...s.fed}};}
 export function start(station='beaker'){
   if(!valid(stations,station))throw new RangeError('Unknown station');
@@ -12,11 +17,13 @@ export function use(s,action,id,fraction=1){
   if(action==='add'){
     if(!stations[s.station].tools.includes(id)){n.change='That material is not supported in this vessel.';return n;}
     if(!Number.isFinite(fraction)||fraction<=0||fraction>1)throw new RangeError('Invalid measured dose');
-    if(s.doses+fraction>30.000001){n.change='The vessel is full. Start with a clean one.';return n;}
     if(s.station==='beaker'&&s.heat&&['vinegar','baking'].includes(id)){
       n.change='Turn off the heater first. Heating this mixture is not modelled.';return n;
     }
     const dose=materials[id].dose;
+    if(space(s.amounts)+space(dose)*fraction>capacity+1e-6){
+      n.change='Not enough room for this pour.';return n;
+    }
     for(const [key,count] of Object.entries(dose)){add(n.amounts,key,count*fraction);add(n.fed,key,count*fraction);}
     n.doses+=fraction;n.change=materials[id].name+' added.';
     if(s.station==='crucible')n.mixed=false;
