@@ -2885,3 +2885,15 @@ h3.sub {
   display: grid;
   gap: 2px;
 }
+/* pictures inside grammar sentences and tiles (pictures in story order): big enough to read the picture */
+.grammar-tile .pic,
+.grammar-quote .pic,
+.grammar-choice .pic,
+.dict-reveal .pic {
+  font-size: 1.9em;
+  margin-right: 0.15em;
+}
+.grammar-tile {
+  display: inline-flex;
+  align-items: center;
+}

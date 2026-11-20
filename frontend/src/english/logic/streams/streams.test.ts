@@ -15,6 +15,7 @@ import { MemoryRepo } from "../store.ts";
 import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
+import { FIRST } from "../first/first.ts";
 import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { NAMING_TOPIC, streamRows } from "./streams.ts";
 import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
@@ -262,4 +263,18 @@ test("LC-11 grammar placement: a right answer high up followed by misses does no
   assert.equal(lucky.level, 4);
   // 3 right → 5 wrong → 4 right → 5 right: ends where it was answered right
   assert.equal(run([true, false, true, true]).level, 5);
+});
+
+test("LC-12 a beginner's Words row opens First words until First sentences open", async () => {
+  const c = loadContent({ mode: "development" });
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "New", "guardian", clock, "p-new");
+  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 0, estimate: 0, answered: 12 }, { type: "reading", passed: 0, scale: 2, steps: [] }, { type: "listening", level: 1, scale: 2, steps: [] }, { type: "done" }]);
+  const words = () => streamRows(l, clock()).find((r) => r.id === "words")!;
+  assert.deepEqual([words().level, words().next, words().open], ["First words", "Find words in pictures", "first"]);
+  // once twenty words are sure, First sentences open and the row goes back to Words
+  const sure = FIRST.words.slice(0, 20).map((w) => ({ type: "step" as const, sitting: "f1", kind: "hear" as const, key: w.id, correct: true, misses: 0 }));
+  await l.recordFirst([...sure, { type: "end", sitting: "f1", asked: 20, right: 20 }]);
+  assert.match(words().level, /^Level \d of 8$/);
+  assert.equal(words().open, undefined);
 });

@@ -108,6 +108,28 @@ A["foot"]=P("M20 24 q12 -6 22 0 q8 10 4 24 q-4 12 -14 12 q-12 0 -14 -14 q-2 -12 
 A["leg"]=R(20,2,22,18,"#4a7fd9",3)+P("M23 20 h16 l-1 24 q0 4 4 6 l14 4 q4 4 0 8 h-26 q-6 0 -7 -6z",SK)+P("M22 32 q8 2 16 0")
 A["milk"]=P("M18 10 h28 l-4 48 h-20z","#dff0fb")+P("M19.4 22 h25.2 l-3 36 h-19.2z","#fff")+L(18,10,46,10)
 
+# Pictures used in other activities (grammar: pictures in story order), keyed by emoji
+SKY="#bfe3fa"
+X={}
+X["☔"]=P("M8 32 q24 -30 48 0 q-6 -4 -12 0 q-6 -4 -12 0 q-6 -4 -12 0 q-6 -4 -12 0z","#e2547e")+L(32,32,32,54,3)+P("M32 54 q0 6 -6 6 q-4 0 -4 -4")+''.join(P(f"M{x} {y} q-2 4 0 6 q2 -2 0 -6z","#4aa3df") for x,y in [(12,8),(30,4),(50,10),(56,40),(8,44)])
+X["⚡"]=G("36,4 14,36 30,36 24,60 50,24 34,24 42,4","#f7c948")
+X["🌈"]=''.join(f'<path d="M{6+i*5} 52 a{26-i*5} {26-i*5} 0 0 1 {52-i*10} 0" stroke="{c}" stroke-width="5" fill="none"/>' for i,c in enumerate(["#e53935","#f5a623","#f7d23e","#4caf50","#2f7fe0"]))+E(10,54,8,5,"#fff")+E(54,54,8,5,"#fff")
+X["🌧️"]=A["rain"]
+X["🌱"]=P("M32 60 v-26")+P("M32 36 q-20 2 -22 -16 q18 -2 22 16z","#5cb85c")+P("M32 30 q16 -2 20 -18 q-16 -2 -20 18z","#5cb85c")+R(14,56,36,6,"#8b5a2b",2)
+X["🌻"]=P("M32 62 v-28")+P("M32 50 q12 -10 20 -4 q-8 10 -20 4z","#5cb85c")+''.join(E(32+14*__import__('math').cos(a*0.785),24+14*__import__('math').sin(a*0.785),6,4,"#f7c948",f' transform="rotate({a*45} {32+14*__import__("math").cos(a*0.785):.1f} {24+14*__import__("math").sin(a*0.785):.1f})"') for a in range(8))+C(32,24,9,"#8b5a2b")
+X["🍌"]=A["banana"]
+X["🎂"]=R(10,34,44,22,"#f9bccb",4)+P("M10 42 q6 6 11 0 t11 0 t11 0 t11 0","#fff")+''.join(R(x,22,4,12,"#7fa8ee",1)+P(f"M{x+2} 12 q-3 5 0 8 q3 -3 0 -8z","#f8b133") for x in (18,30,42))
+X["🎈"]=E(32,24,16,20,"#e53935")+G("29,44 35,44 32,48","#e53935")+P("M32 48 q-6 6 0 10 q6 4 0 6")
+X["🎒"]=A["bag"]
+X["🐣"]=P("M12 34 l6 -6 l6 6 l8 -8 l8 8 l6 -6 l6 6 v10 q0 16 -20 16 q-20 0 -20 -16z","#fff8e7")+C(32,24,10,"#f7d23e")+G("39,24 46,26 39,28","#f58c23")+dot(35,22,1.8)
+X["🐥"]=C(30,40,16,"#f7d23e")+C(36,20,10,"#f7d23e")+G("45,20 53,22 45,25","#f58c23")+dot(39,18,1.8)+P("M18 40 q8 -6 14 2","#e8bb1f")+L(26,56,24,62)+L(34,56,36,62)
+X["🥚"]=A["egg"]
+X["💧"]=P("M32 6 q18 26 18 36 q0 16 -18 16 q-18 0 -18 -16 q0 -10 18 -36z","#4aa3df")+P("M24 42 q0 8 8 10","none")
+X["🗑️"]=R(12,14,40,6,"#9e9e9e",2)+R(26,8,12,6,"#9e9e9e",2)+P("M16 20 h32 l-3 38 h-26z","#bdbdbd")+L(26,26,27,52)+L(32,26,32,52)+L(38,26,37,52)
+X["😋"]=C(32,32,24,"#ffd966")+eyes(27,8)+P("M20 38 q12 12 24 0")+P("M34 42 q4 8 8 2 q-2 -4 -8 -2z","#e57373")
+X["🛏️"]=A["bed"]
+X["🪥"]=('<g transform="rotate(-30 32 32)">'+R(8,30,40,6,"#4a7fd9",3)+R(46,24,12,8,"#fff",2)+''.join(L(48+i*3,24,48+i*3,18,1.5,"#4aa3df") for i in range(4))+'</g>')
+
 if __name__ == "__main__":
     # python3 tools/english/first/art.py  → frontend/src/english/ui/first-art.ts
     import json, pathlib
@@ -120,5 +142,6 @@ if __name__ == "__main__":
            " * 64 by 64 units, drawn with one outline colour. Generated from tools/english/first/art.py.", " */",
            "export const ART: Readonly<Record<string, string>> = {"]
     out += [f"  {json.dumps(e)}: {json.dumps(A[k])}, // {k}" for e, k in emo.items()]
+    out += [f"  {json.dumps(e)}: {json.dumps(v)}," for e, v in X.items() if e not in emo]
     out.append("};")
     (root / "frontend/src/english/ui/first-art.ts").write_text("\n".join(out) + "\n")

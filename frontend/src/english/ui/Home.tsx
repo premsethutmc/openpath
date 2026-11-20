@@ -78,7 +78,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id, open) => (id === "words" ? onNewWords() : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
+            onGo={(id, open) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>All activities</span>
