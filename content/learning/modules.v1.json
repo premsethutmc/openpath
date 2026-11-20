@@ -970,11 +970,12 @@
        "title": "Width × height",
        "text": [
         "Under y = c from x = a to x = b: width b − a, height c."
-       ]
+       ],
+       "instance": "gen:cint:2,6,3"
       }
      ],
-     "guided": "di-g1",
-     "check": "di-c1"
+     "guided": "gen:cint:2,6,3",
+     "check": "gen:cint:1,3,2"
     }
    ],
    "practice": [
@@ -1079,13 +1080,14 @@
         "For x² + bx + c, find two numbers that multiply to c and add to b. They give the factors."
        ],
        "math": [
-        "x² − 7x + 12: −3 × −4 = 12, −3 + −4 = −7",
-        "(x − 3)(x − 4) = 0"
-       ]
+        "x² − 7x + 10: −2 × −5 = 10, −2 + −5 = −7",
+        "(x − 2)(x − 5) = 0"
+       ],
+       "instance": "gen:quad:-7,10"
       }
      ],
-     "guided": "qd-g1",
-     "check": "qd-c1"
+     "guided": "gen:quad:-7,10",
+     "check": "gen:quad:-8,12"
     },
     {
      "id": "square_meaning",
@@ -1097,11 +1099,12 @@
        "title": "Squares are never negative",
        "text": [
         "x² is x × x. It is 0 or positive for every real x, so x² = −1 has no real solution and x² = 49 has two: 7 and −7."
-       ]
+       ],
+       "instance": "gen:quad:0,-49"
       }
      ],
-     "guided": "qd-s2g",
-     "check": "qd-s2c"
+     "guided": "gen:quad:0,-49",
+     "check": "gen:quad:-6,0"
     }
    ],
    "practice": [
