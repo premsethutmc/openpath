@@ -61,3 +61,9 @@ when sentences start. Four or five words still join every sitting.
 Tests: FW-sentences 1 to 4, and a phone-sized browser test that plays sittings until both kinds appear.
 Tests: FW-sentences 5 sits learners who know from 20 to all 82 words, from four different starting points, and finds no
 sentence both read and built in a sitting.
+
+## Pictures
+Every word, colour and number picture is drawn by OpenPath (simple outlined drawings, 64 by 64), not shown as an emoji,
+so a child sees the same cat on an iPhone, an Android phone or an old phone. The content still keeps the emoji as
+each picture's key; the screen swaps it for the drawing. To add a word: add its drawing to tools/english/first/art.py
+and run that file. A word without a drawing falls back to its emoji.

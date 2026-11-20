@@ -4,7 +4,7 @@
   "status": "candidate: words, sentences and levels chosen by OpenPath (AI-prepared) and checked by rule; the pictures are standard emoji used as stand-ins until artwork is supplied; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: hearing a word and finding its picture, building a word from letters, and doing what a short sentence says; it changes no capability estimate",
-  "art": "Each word has a picture slot. It holds an emoji for now; artwork can replace it word by word without changing the activities.",
+  "art": "Each word has a picture slot holding an emoji as its key. On screen it is drawn with OpenPath's own picture for that word (frontend/src/english/ui/first-art.ts, from tools/english/first/art.py), so every phone shows the same picture; a word with no drawing yet shows its emoji.",
   "words": [
     {
       "id": "cat",

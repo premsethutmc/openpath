@@ -3,6 +3,7 @@
  * pictures, places and letters. The word appears only after a right answer. Where the device cannot speak, the
  * guide's words are shown in small print so a helper can read them out.
  */
+import { Pic } from "./Pic.tsx";
 import { useEffect, useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { FIRST, FirstSitting, firstSummary, type FirstRecord, type FirstView } from "../logic/first/first.ts";
@@ -67,7 +68,7 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
       {view.build && (
         <>
           <p className="first-big" aria-hidden="true">
-            {view.build.picture}
+            <Pic p={view.build.picture} />
           </p>
           <p className={view.build.words ? "first-word first-built" : "first-word"} aria-label={view.build.words ? "The sentence so far" : "The word so far"} data-placed={view.build.placed}>
             {view.build.placed || " "}
@@ -87,15 +88,15 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
         <div className="first-place" role="group" aria-label="Places">
           {view.place.zones.map((z) => (
             <button key={z.id} type="button" className={`first-zone ${z.id}`} disabled={z.off || right} aria-label={PLACE_LABEL[z.id] ?? z.id} data-zone={z.id} onClick={() => onTap(view.place!.zones.indexOf(z))}>
-              {placedAt === z.id ? view.place!.mover : ""}
+              {placedAt === z.id ? <Pic p={view.place!.mover} /> : ""}
             </button>
           ))}
           <span className="first-anchor" aria-hidden="true">
-            {view.place.anchor}
+            <Pic p={view.place.anchor} />
           </span>
           {!right && (
             <span className="first-mover" aria-hidden="true">
-              {view.place.mover}
+              <Pic p={view.place.mover} />
             </span>
           )}
         </div>
@@ -103,8 +104,8 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
       {view.options.length > 0 && !right && (
         <p className="first-options" role="group" aria-label="Pictures">
           {view.options.map((o, i) => (
-            <button key={i} type="button" className={o.picked ? "first-option picked" : "first-option"} disabled={o.off} aria-pressed={!!o.picked} aria-label={`Picture ${i + 1}`} onClick={() => onTap(i)}>
-              {o.picture}
+            <button key={i} type="button" className={o.picked ? "first-option picked" : "first-option"} disabled={o.off} aria-pressed={!!o.picked} aria-label={`Picture ${i + 1}`} data-picture={o.picture} onClick={() => onTap(i)}>
+              <Pic p={o.picture} />
             </button>
           ))}
         </p>
@@ -113,7 +114,7 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
         <div className="first-reveal" role="status">
           {!view.build && !view.place && (
             <p className="first-big" aria-hidden="true">
-              {view.reveal.picture}
+              <Pic p={view.reveal.picture} />
             </p>
           )}
           <p className="first-word">{view.reveal.text}</p>
