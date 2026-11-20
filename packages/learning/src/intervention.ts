@@ -111,6 +111,32 @@ function reopenedAt(competency: string, records: LearnerRecords): string | null 
   const below = new Set(walkSupports(competency, RECOVERY_DEPTH).map((x) => graph.evidenceTarget(x.id)).filter((id) => id !== own));
   return records.teaching.filter((t) => below.has(graph.evidenceTarget(t.competency))).map((t) => t.at).sort().at(-1) ?? null;
 }
+/**
+ * easier-first@1: for a child who is struggling (the walk-through rung), the same skill with less to hold in the head: the fresh
+ * question with the fewest working steps, then the smallest numbers. Only the walk-through and the first check alone after it use
+ * it; after a right answer alone the ordinary order (and its harder questions) comes back.
+ */
+const easeCache = new Map<string, number>();
+export function ease(id: string): number {
+  const hit = easeCache.get(id);
+  if (hit !== undefined) return hit;
+  const steps = stepsHelp(id)?.length ?? 9;
+  const prompt = (() => { try { return question(id).prompt; } catch { return ""; } })();
+  const digits = (prompt.match(/\d/g) ?? []).length;
+  const v = steps * 100 + digits;
+  easeCache.set(id, v);
+  return v;
+}
+let easierOn = true;
+/** easier-first@1 can be switched off to compare (simulations, tests); on by default */
+export const useEasierFirst = (on: boolean) => { easierOn = on; };
+function easiest(m: Module, phase: Phase, records: LearnerRecords, ok: (id: string) => boolean = () => true): string | null {
+  if (!m.pool) return null;
+  if (!easierOn) { const seen0 = new Set([...records.attempts, ...records.unresolved].map((a) => exposureKey(a.questionId))); return gradeFirst(records, modulePhasePool(m, phase)).find((id) => !seen0.has(exposureKey(id)) && withinGrade(records, id) && ok(id)) ?? null; }
+  const seen = new Set([...records.attempts, ...records.unresolved].map((a) => exposureKey(a.questionId)));
+  const open = gradeFirst(records, modulePhasePool(m, phase)).filter((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && ok(id)).slice(0, 200);
+  return open.reduce<string | null>((best, id) => (best === null || ease(id) < ease(best) ? id : best), null);
+}
 /** together@1: the last rung before a person. When every explanation has been tried and the answers alone are still wrong, the
  *  product does not stop: it works one fresh question WITH the learner, step by step (the typed step help, opened for them, each
  *  step theirs to type), then asks one like it alone. A walk-through is practice with help (activity "guided", context "together"):
@@ -129,13 +155,13 @@ function workTogether(m: Module, competency: string, records: LearnerRecords, se
   const alone = last ? mine.filter((a) => a.at > last.at && independentAttempt(a)) : [];
   // after a walk-through: one like it alone; right, and the next is alone too (the ordinary checks take over once it shows)
   if (last && (!alone.length || rightAnswer(alone.at(-1)!))) {
-    const q = fromPool(m, "check", records);
+    // easier-first@1: the first one alone after a walk-through is the easiest fresh check; after a right one, the ordinary order
+    const q = (!alone.length ? easiest(m, "check", records) : null) ?? fromPool(m, "check", records);
     if (q) return { phase: "check", question: q, why: `together@1: alone after walk-through ${walked.length}`, reason: alone.length ? "Right on your own. One more, to be sure." : "We did that one together. Now one like it on your own." };
   }
   if (walked.length >= TOGETHER.all) return null;
   if (walked.filter((a) => a.session === session).length >= TOGETHER.sitting) return "tomorrow";
-  const seen = new Set([...records.attempts, ...records.unresolved].map((a) => exposureKey(a.questionId)));
-  const q = gradeFirst(records, modulePhasePool(m, "practice")).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && keyboardOffered(id) && (stepsHelp(id)?.length ?? 0) >= 2);
+  const q = easiest(m, "practice", records, (id) => keyboardOffered(id) && (stepsHelp(id)?.length ?? 0) >= 2);
   if (!q) return null;
   return { phase: "guided", question: q, activity: "guided", context: TOGETHER.context, why: `together@1: walk-through ${walked.length + 1} of ${TOGETHER.all}`, reason: "Let's do this one together, one step at a time. You type each step." };
 }
