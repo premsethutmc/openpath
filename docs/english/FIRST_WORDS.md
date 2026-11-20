@@ -42,3 +42,22 @@ it word by word without touching the activities.
 - Nothing here checks what is actually heard on a phone; the automated browser has no voice.
 - Naming, action and describing words are taught (82 in all); colours, numbers and places come in the "do what you hear" steps. The last step is a two-step direction: "Tap the cat, then the apple."
 - ICSE Class 1 is not loaded yet; this activity is what its first lines will point to.
+
+## First sentences: the bridge to level 1 (20 Nov 2026)
+
+Once a learner has found twenty words on the first tap, each First words sitting (eleven steps) also has:
+
+- **Read** (two or three a sitting): a short sentence on screen, such as "I see two fish." or "This is a cat.", and
+  three pictures to choose from. The sentence is not read out first; after a wrong tap it is said aloud, as help.
+- **Build** (two a sitting): a picture and its sentence, heard; the learner taps its words in order, from the words
+  and one that does not belong.
+
+Sentences are made by the engine from seven patterns and only from words this learner has already found, so nothing
+new has to be read at once: This is a cat. I see three apples. I see a cat and a dog. The ball is under the box (read,
+then tap where the ball is). I can swim. I am happy. Each sitting reads three of different patterns, longer ones
+first, and builds two others: a sentence is never read and built in the same sitting. The home card changes its text
+when sentences start. Four or five words still join every sitting.
+
+Tests: FW-sentences 1 to 4, and a phone-sized browser test that plays sittings until both kinds appear.
+Tests: FW-sentences 5 sits learners who know from 20 to all 82 words, from four different starting points, and finds no
+sentence both read and built in a sitting.

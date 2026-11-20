@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { BUILDS, FIRST, FirstSitting, NEW_WORDS, OPTIONS, firstProblems, firstSummary, isBeginner, pick, type FirstRecord } from "./first.ts";
+import { BUILDS, FIRST, FirstSitting, NEW_WORDS, OPTIONS, SENTENCES_AFTER, firstProblems, firstSummary, isBeginner, pick, type FirstRecord } from "./first.ts";
 import { loadContent } from "../content.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
@@ -32,6 +32,12 @@ function sit(history: FirstRecord[], miss: (kind: string, i: number) => boolean 
     assert.equal(v.reveal, null, "the word is not shown before a right answer");
     seen.push({ kind: v.kind!, key: v.key!, say: s.spoken()! });
     const wrongFirst = miss(v.kind!, i);
+    if (v.kind === "read" || v.kind === "sentence") {
+      // First sentences (FW-sentences tests): answered here by trying, as their answers come from the sentence
+      solve(s);
+      s.next();
+      continue;
+    }
     if (v.kind === "build") {
       const word = W.get(v.key!)!.word;
       assert.equal(v.build!.tiles.length, word.length + 2);
@@ -105,7 +111,7 @@ test("FW-4 new words come first, a missed word returns, and every word is reache
   assert.equal(met.size, FIRST.words.length, "every word is met");
   const heardAgain = h.filter((r) => r.type === "step" && r.kind === "hear" && r.key === missed).length;
   assert.equal(heardAgain, 2, "the missed word came back as soon as the new words ran out");
-  assert.deepEqual(firstSummary(FIRST, h), { sittings: Math.ceil(FIRST.words.length / NEW_WORDS), met: FIRST.words.length, sure: FIRST.words.length, total: FIRST.words.length });
+  assert.deepEqual(firstSummary(FIRST, h), { sittings: Math.ceil(FIRST.words.length / NEW_WORDS), met: FIRST.words.length, sure: FIRST.words.length, total: FIRST.words.length, sentences: true });
 });
 
 test("FW-5 a beginner is someone who passed no reading text and stands on the first listening level", () => {
@@ -153,4 +159,96 @@ test("FW-7 action and describing words are said bare; a two-step direction needs
   assert.equal(s.snapshot().phase, "ask");
   assert.equal(s.tap(second), true);
   assert.equal(s.snapshot().phase, "right");
+});
+
+/** Finish the step on screen by trying taps until one is right (misses are recorded, which these tests do not mind). */
+function solve(s: FirstSitting): void {
+  for (let guard = 0; s.snapshot().phase === "ask" && guard < 200; guard++) {
+    const v = s.snapshot();
+    const n = v.build ? v.build.tiles.length : v.place ? v.place.zones.length : v.options.length;
+    for (let i = 0; i < n && s.snapshot().phase === "ask"; i++) (v.build ? s.letter(i) : s.tap(i));
+  }
+}
+
+/** A learner who has found every word on the first tap, so First sentences have joined the sittings. */
+const fluent = (): FirstRecord[] => [...FIRST.words.map((w) => ({ type: "step" as const, sitting: "f1", kind: "hear" as const, key: w.id, correct: true, misses: 0 })), { type: "end", sitting: "f1", asked: 82, right: 82 }];
+
+test("FW-sentences 1 sentences join only after twenty words found on the first tap", () => {
+  const few = fluent().slice(0, SENTENCES_AFTER - 1);
+  assert.equal(firstSummary(FIRST, few).sentences, false);
+  const s = new FirstSitting(FIRST, few);
+  const kinds = new Set<string>();
+  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) (kinds.add(v.kind!), solve(s), s.next());
+  assert.ok(!kinds.has("read") && !kinds.has("sentence"));
+  assert.equal(firstSummary(FIRST, fluent()).sentences, true);
+});
+
+test("FW-sentences 2 read a sentence and tap its picture; it is said aloud only after a wrong tap", () => {
+  const s = new FirstSitting(FIRST, fluent());
+  let v = s.snapshot();
+  const kinds: string[] = [];
+  while (v.phase !== "done" && v.kind !== "read") (kinds.push(v.kind!), solve(s), s.next(), (v = s.snapshot()));
+  assert.equal(v.kind, "read");
+  assert.match(v.text!, /^(This is an? [a-z]+|I see (two|three|four) [a-z]+|I see an? [a-z]+ and an? [a-z]+|The [a-z]+ is (on|under|next to) the box|I can [a-z]+|I am [a-z]+)\.$/);
+  assert.match(s.spoken()!, /^Read the sentence, then tap (its picture|where it is)\.$/, "the sentence is not read out before the learner tries");
+  const n = v.place ? v.place.zones.length : v.options.length;
+  const wrong = [...Array(n).keys()].findIndex((i) => !s.tap(i));
+  assert.ok(wrong >= 0);
+  assert.ok(s.spoken()!.startsWith(v.text!), "after a wrong tap the sentence is said");
+});
+
+test("FW-sentences 3 build a heard sentence from its words, with one word that does not belong", () => {
+  const s = new FirstSitting(FIRST, fluent());
+  let v = s.snapshot();
+  while (v.phase !== "done" && v.kind !== "sentence") (solve(s), s.next(), (v = s.snapshot()));
+  assert.equal(v.kind, "sentence");
+  assert.ok(v.build!.words);
+  const target = s.spoken()!.replace(/ Build the sentence\.$/, "").replace(/\.$/, "").split(" ");
+  assert.equal(v.build!.tiles.length, target.length + 1);
+  assert.notDeepEqual(v.build!.tiles.slice(0, target.length).map((t) => t.letter), target, "not already in order");
+  for (const w of target) assert.ok(s.letter(v.build!.tiles.findIndex((t, i) => t.letter === w && !s.snapshot().build!.tiles[i].used)));
+  v = s.snapshot();
+  assert.equal(v.phase, "right");
+  assert.equal(v.reveal!.text, `${target.join(" ")}.`);
+});
+
+test("FW-sentences 4 a sitting with sentences: eleven steps, two to read or three, two to build, all from words found before", () => {
+  const known = FIRST.words.filter((w) => ["cat", "dog", "cow", "apple", "mango", "egg", "ball", "book", "bag", "run", "swim", "sleep", "happy", "sad", "hot", "star", "fish", "sun", "moon", "tree"].includes(w.id));
+  const h: FirstRecord[] = known.map((w) => ({ type: "step", sitting: "f1", kind: "hear", key: w.id, correct: true, misses: 0 }));
+  const s = new FirstSitting(FIRST, h);
+  const steps: { kind: string; text?: string }[] = [];
+  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) (steps.push({ kind: v.kind!, text: v.text ?? undefined }), solve(s), s.next());
+  assert.ok(steps.filter((x) => x.kind === "read").length >= 2);
+  assert.equal(steps.filter((x) => x.kind === "sentence").length, 2);
+  const words = new Set(known.map((w) => w.word));
+  for (const r of s.take().filter((r) => r.type === "step" && (r.kind === "read" || r.kind === "sentence")) as Extract<FirstRecord, { type: "step" }>[]) {
+    const content = r.key.replace(/\.$/, "").split(" ").map((w) => w.toLowerCase()).filter((w) => !["i", "see", "this", "is", "can", "am", "the", "a", "an", "and", "two", "three", "four", "on", "under", "next", "to"].includes(w)).map((w) => w.replace(/s$/, ""));
+    for (const w of content) assert.ok(words.has(w) || words.has(`${w}s`), `${r.key}: ${w} was found before`);
+  }
+});
+
+test("FW-sentences 5 never the same sentence to read and to build in a sitting, whatever the learner knows; places and pairs to read", () => {
+  const kinds = new Set<string>();
+  let places = 0;
+  for (let n = SENTENCES_AFTER; n <= FIRST.words.length; n += 3) {
+    for (const start of [0, 7, 19, 40]) {
+      const ids = [...FIRST.words.slice(start), ...FIRST.words.slice(0, start)].slice(0, n).map((w) => w.id);
+      const h: FirstRecord[] = ids.map((id) => ({ type: "step", sitting: "f1", kind: "hear", key: id, correct: true, misses: 0 }));
+      const s = new FirstSitting(FIRST, h);
+      const read: string[] = [];
+      const built: string[] = [];
+      for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) {
+        if (v.kind === "read") (read.push(v.key!), v.place && places++, kinds.add(v.key!.split(" ").slice(0, 2).join(" ")));
+        if (v.kind === "sentence") built.push(v.key!);
+        solve(s);
+        s.next();
+      }
+      if (!read.length) continue;
+      assert.deepEqual(built.filter((b) => read.includes(b)), [], `${n} words from ${start}: ${read} / ${built}`);
+      assert.equal(new Set(built).size, built.length);
+      assert.equal(new Set(read).size, read.length);
+    }
+  }
+  assert.ok(places > 0, "sentences with a place to read");
+  assert.ok([...kinds].some((k) => k === "I see") , "pairs and counts");
 });
