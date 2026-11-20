@@ -74,7 +74,31 @@ position.addEventListener('input', () => {
   moveSupport(position.valueAsNumber);
   say('Now push the beam again.');
 });
-get('push').addEventListener('click', push);
+const pushButton = get('push');
+// Touch release can arrive without a compatibility click just after a drag.
+let touchPress = null, lastTouchPush = null;
+pushButton.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'touch' && event.isPrimary) {
+    touchPress = { id:event.pointerId, x:event.clientX, y:event.clientY };
+  }
+});
+pushButton.addEventListener('pointercancel', () => { touchPress = null; });
+pushButton.addEventListener('pointerup', event => {
+  if (touchPress?.id !== event.pointerId) return;
+  const press = touchPress;
+  touchPress = null;
+  if (Math.hypot(event.clientX-press.x, event.clientY-press.y) > 12 ||
+      !pushButton.contains(document.elementFromPoint(event.clientX, event.clientY))) return;
+  lastTouchPush = { id:event.pointerId, at:performance.now() };
+  push();
+});
+pushButton.addEventListener('click', event => {
+  const followsHandledTouch = lastTouchPush && performance.now()-lastTouchPush.at < 800 &&
+    ((event.pointerType === 'touch' && event.pointerId === lastTouchPush.id) ||
+     event.sourceCapabilities?.firesTouchEvents);
+  if (!followsHandledTouch) push();
+  lastTouchPush = null;
+});
 
 function svgPoint(event) {
   return new DOMPoint(event.clientX,event.clientY).matrixTransform(scene.getScreenCTM().inverse());

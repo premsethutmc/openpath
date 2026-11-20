@@ -35,6 +35,7 @@ for (const width of [320, 390]) test(`Lift the Rock at ${width}px: first tap aft
       await send('touchEnd',[]);
     }
     await drag(214,186,-75,0);
+    assert.equal(await measure('effort'), 6, 'drag should move support to the nearest position');
     const area = await push.boundingBox();
     const center = {x:area.x+area.width/2,y:area.y+area.height/2};
     await send('touchStart',[center]);

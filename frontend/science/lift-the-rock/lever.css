@@ -22,7 +22,7 @@ input{display:block;margin:0;width:100%;height:36px;accent-color:#98612d;cursor:
 meter{display:block;width:100%;height:10px;accent-color:#4c7154}
 meter::-webkit-meter-bar{background:#e0e4ce;border:0}
 meter::-webkit-meter-optimum-value{background:#66835a}
-button{width:100%;min-height:44px;border:1px solid #284f3a;border-radius:10px;color:#fff8df;background:#356349;font:750 .94rem system-ui;cursor:pointer}
+button{touch-action:manipulation;width:100%;min-height:44px;border:1px solid #284f3a;border-radius:10px;color:#fff8df;background:#356349;font:750 .94rem system-ui;cursor:pointer}
 button:active{background:#274e38}
 a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #a26123;outline-offset:2px}
 #status{margin:8px 0 0;min-height:1.2em;color:#395144;font-size:.79rem}
