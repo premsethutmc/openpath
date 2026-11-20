@@ -368,7 +368,7 @@ function FirstWordsCard({ learner, onOpen, start }: { learner: Learner; onOpen: 
         <span aria-hidden="true">🐱 </span>
         {start ? "Start here: First words" : "First words"}
       </h2>
-      <p>Hear a word and tap its picture, build the word from letters, and do what a short sentence says. Nothing has to be read.</p>
+      <p>{s.sentences ? "Words you know, now in short sentences: read one and tap its picture, or build it from its words." : "Hear a word and tap its picture, build the word from letters, and do what a short sentence says. Nothing has to be read."}</p>
       {s.met > 0 && (
         <p className="small">
           {s.met} of {s.total} words met, {s.sure} found on the first tap

@@ -120,3 +120,72 @@ test("First words: eleven steps by tapping only, a wrong tap switched off, the w
   assert.deepEqual(foreign, []);
   await context.close();
 });
+
+test("First sentences: after twenty words found, a sentence to read and one to build, each with its picture", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(URL);
+  await page.getByRole("button", { name: "Let's begin" }).click();
+  await page.getByLabel(/Name to show/).fill("Reader");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  const fits = async () => {
+    const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
+    assert.ok(sw <= w, "no sideways scrolling");
+  };
+  await page.getByRole("button", { name: "Try First words" }).click();
+  // finish each step by trying taps until one is right (the first tap is right for "hear", so words count as found)
+  const solve = async () => {
+    for (let guard = 0; guard < 60 && (await page.locator('main.first[data-phase="ask"]').count()); guard++) {
+      const main = page.locator('main.first[data-phase="ask"]');
+      const kind = await main.getAttribute("data-kind");
+      const key = await main.getAttribute("data-key");
+      if (kind === "hear") {
+        const w = WORD.get(key);
+        const pics = await page.locator(".first-option").allInnerTexts();
+        await page.locator(".first-option").nth(pics.indexOf(w.picture)).click();
+      } else if (kind === "build") {
+        for (const ch of WORD.get(key).word) await page.locator(".first-tile:not([disabled])", { hasText: new RegExp(`^${ch}$`) }).first().click();
+      } else if (kind === "sentence") {
+        for (const w of key.replace(/\.$/, "").split(" ")) await page.locator(".first-tile:not([disabled])", { hasText: new RegExp(`^${w}$`) }).first().click();
+      } else {
+        const tiles = page.locator(".first-option:not([disabled]), .first-zone:not([disabled])");
+        const n = await tiles.count();
+        for (let i = 0; i < n && (await page.locator('main.first[data-phase="ask"]').count()); i++) await tiles.nth(i).click({ trial: false }).catch(() => {});
+      }
+    }
+    await page.locator('main.first[data-phase="right"]').waitFor();
+  };
+  const seen = new Set();
+  for (let sitting = 0; sitting < 8 && !(seen.has("read") && seen.has("sentence")); sitting++) {
+    while (!(await page.locator('main.first[data-phase="done"]').count())) {
+      const main = page.locator('main.first[data-phase="ask"]');
+      await main.waitFor();
+      const kind = await main.getAttribute("data-kind");
+      if ((kind === "read" || kind === "sentence") && !seen.has(kind)) {
+        seen.add(kind);
+        const key = await main.getAttribute("data-key");
+        if (kind === "read") {
+          await page.locator("[data-sentence]").getByText(key, { exact: true }).waitFor();
+          assert.equal(await page.locator(".first-option").count(), 3, "three pictures to choose from");
+        } else {
+          assert.equal(await page.getByRole("group", { name: "Words" }).getByRole("button").count(), key.split(" ").length + 1, "its words and one more");
+        }
+        await fits();
+        await shot(page, `s-${kind}`);
+      }
+      await solve();
+      if (seen.has("read") && seen.has("sentence")) break;
+      await page.getByRole("button", { name: "Next", exact: true }).click();
+    }
+    if (seen.has("read") && seen.has("sentence")) break;
+    await page.getByRole("button", { name: "More words" }).click();
+  }
+  assert.deepEqual([...seen].sort(), ["read", "sentence"]);
+  assert.deepEqual(errors, []);
+  await context.close();
+});

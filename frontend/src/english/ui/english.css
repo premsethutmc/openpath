@@ -2843,3 +2843,19 @@ h3.sub {
   padding-left: 1.2em;
   line-height: 1.5;
 }
+
+.first-sentence {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0 14px;
+}
+.first-built {
+  font-size: 1.4rem;
+  min-height: 2em;
+}
+.first-tile.first-word-tile {
+  width: auto;
+  padding: 0 14px;
+  font-size: 1.2rem;
+}
