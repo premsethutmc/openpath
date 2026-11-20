@@ -36,7 +36,10 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       // step-help.ts: added in a reviewed change (help-review@1). helpSamples reads pool() for one purpose: to name the
       // three questions (first, middle, last) that stand for a type's step help on the owner's dashboard. It selects
       // nothing for a learner.
-      "packages/learning/src/scenes.ts", "packages/learning/src/spec.ts", "packages/learning/src/step-help.ts"];
+      // taught.ts: added in a reviewed change (taught@1). hasSteps reads modulePhasePool (selectable() applied) for one purpose:
+      // to see whether a skill has questions with typed steps, so "worked through together" can apply on the parent page. It
+      // selects and serves no question.
+      "packages/learning/src/scenes.ts", "packages/learning/src/spec.ts", "packages/learning/src/step-help.ts", "packages/learning/src/taught.ts"];
 
 export const SOURCE_ROOTS = ["packages/learning/src", "packages/mathematics/src", "frontend/src"];
 const SELECTORS = new Set(["pool", "phasePool", "variantsOf", "modulePhasePool", "fromPool"]);

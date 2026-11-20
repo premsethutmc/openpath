@@ -25,6 +25,8 @@ import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, rightAnswer, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { parentReport } from "../../../packages/learning/src/parent-report";
+import { MIN_ANSWERS } from "../../../packages/learning/src/taught";
+import { TaughtAndSure } from "./TaughtAndSure";
 import { competencyProfile, topicName, type Period, type TopicMeasure } from "../../../packages/learning/src/competency-profile";
 import { expectedSeconds } from "../../../packages/learning/src/expected-time";
 import { fluencyNeeds, slipPatterns } from "../../../packages/learning/src/practice-focus";
@@ -1190,6 +1192,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
       <h1>{name}'s Maths</h1>
       {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}{report.streak >= 2 ? ` · ${report.streak} days in a row` : ""}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
       <FourQuestions name={name} st={st} report={report} findings={f} slowButRight={slowButRight} now={now} />
+      <TaughtAndSure name={name} st={st} />
       <h2 className="parent-detail">In detail</h2>
       <div className="period-tabs" role="tablist" aria-label="Period">
         {(["week", "month", "year"] as Period[]).map((p) => <button key={p} type="button" role="tab" aria-selected={period === p} className={period === p ? "on" : ""} onClick={() => setPeriod(p)}>{p === "week" ? "Week" : p === "month" ? "Month" : "Year"}</button>)}
@@ -1243,6 +1246,8 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
         <summary>How to read this page</summary>
         <ul>
           <li>Everything here is counted from {name}'s own answers in OpenPath. Nothing is estimated or predicted.</li>
+          <li>"Fully taught" means every step on OpenPath's own teaching checklist that fits the skill was done: shown how to do it, different explanations tried, the skills it builds on checked, worked through together step by step, practised on more than one day. It is OpenPath's checklist, not a teacher's review.</li>
+          <li>"How sure": Sure = right on their own and still right a week later; Getting there = right on their own, the later check still to come; Not yet = mostly wrong on their own, right only with help, or wrong when checked later; Too early to say = fewer than about {MIN_ANSWERS} answers.</li>
           <li>First whether the answer is right, then how quick. Speed is looked at only for answers that were right at the first try without help.</li>
           <li>Each question has an expected time, worked out from the question itself: time to read it, time for each step of the working (a long division is given more than a times-table fact), and time to write the answer. For example about 15 seconds for 7 × 8 and about 40 seconds for 873 ÷ 4 in Class 5.</li>
           <li>"Lightning quick" means half the expected time or less; "within the expected time" means no longer than it. The expected times are OpenPath's own first estimates, not measured from other children, and will be corrected as real timings come in.</li>

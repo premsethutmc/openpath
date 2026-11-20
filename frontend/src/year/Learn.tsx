@@ -27,6 +27,7 @@ import { TermText } from "./Terms";
 import { ScribblePad } from "./ScribblePad";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
+import { ownIt } from "../../../packages/learning/src/taught";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { practiceScene, sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
@@ -915,8 +916,8 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
     <div className="stack">
       {head}
       <div className={`feedback ${ms.phase === "pause" ? "bad" : ms.phase === "waiting" ? "" : "good"}`} role="status">
-        <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : statusWord}</strong>
-        <p>{shownReason}</p>
+        <strong>{ms.phase === "pause" ? (KID ? "Let's leave this one for now" : "Let's pause this one") : ms.phase === "waiting" ? "With an educator" : statusWord}</strong>
+        <p>{KID && ms.phase === "pause" ? ownIt(shownReason) : shownReason}</p>
         {(() => { const n = scheduleNote(ms, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={ms.handover?.route ?? "retention"}>{n}</p> : null; })()}
         {/* recovery-handoff@0 hook (worker D, research): a module paused by deep recovery hands the stopped episode over */}
         {DEEP_MODULE && ms.phase === "pause" && ms.why?.startsWith("deep-recovery-module@0: ") && <DeepModuleHandoff competency={competency} ctx={ctx} />}
@@ -966,7 +967,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
     <div className={`feedback ${r.reasoning.status === "established" ? "good" : "bad"}`} role="note" aria-label="What we think happened">
       <strong>{r.reasoning.status === "established" ? "What we think happened" : r.reasoning.status === "uncertain" ? "Not sure yet" : "Looking into it"}</strong>
       <p>{r.plan?.why ?? r.reason}</p>
-      {r.reasoning.status === "uncertain" && <p className="small">A teacher or parent can look at your working with you.</p>}
+      {r.reasoning.status === "uncertain" && !KID && <p className="small">A teacher or parent can look at your working with you.</p>}
     </div>
   );
   if (fb) return <div className="stack"><p className="eyebrow">{fb.qid === original ? "The problem" : graph.get(question(fb.qid).competency).name}</p><Feedback fb={fb} onNext={() => setFb(null)} /></div>;
@@ -1004,8 +1005,8 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
       <h1>{graph.get(q.competency).name}</h1>
       {finding}
       <div className={`feedback ${r.phase === "escalate" ? "bad" : "good"}`} role="status">
-        <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_on_retry" ? "Solved on a second try" : r.phase === "solved_after_help" ? "Solved after help" : "Ask for help with this one"}</strong>
-        <p>{r.reason}</p>
+        <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_on_retry" ? "Solved on a second try" : r.phase === "solved_after_help" ? "Solved after help" : KID ? "Let's leave this one for now" : "Ask for help with this one"}</strong>
+        <p>{KID && r.phase === "escalate" ? ownIt(r.reason) : r.reason}</p>
         {r.handover && (() => { const n = scheduleNote(r, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={r.handover.route}>{n}</p> : null; })()}
       </div>
       {trace}
