@@ -6253,7 +6253,7 @@
    "kind": "help",
    "competency": "MATH.number.compare-numbers",
    "title": "The number just before, just after or between",
-   "hash": "c66bda04",
+   "hash": "73896631",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -7488,7 +7488,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-decimals",
    "title": "Preparing and checking a bill",
-   "hash": "02e485ba",
+   "hash": "8a4bc452",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8414,7 +8414,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.estimate-check",
    "title": "Checking an answer by estimating",
-   "hash": "12b39f49",
+   "hash": "03a58594",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -9835,7 +9835,7 @@
    "kind": "help",
    "competency": "MATH.algebra.inequalities",
    "title": "Solving a system of two linear inequalities",
-   "hash": "0f48d454",
+   "hash": "f7dbda5c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -10162,9 +10162,9 @@
    "kind": "help",
    "competency": "MATH.number.radicals",
    "title": "Rationalising the denominator",
-   "hash": "71327396",
-   "source": "rule",
-   "from": "steps",
+   "hash": "587af92d",
+   "source": "written",
+   "from": null,
    "classes": [
     "ICSE 9",
     "TN 9",
@@ -10348,9 +10348,9 @@
    "kind": "help",
    "competency": "MATH.number.radicals",
    "title": "Adding, subtracting, multiplying and dividing surds",
-   "hash": "b2298597",
-   "source": "rule",
-   "from": "steps",
+   "hash": "b1df0ac0",
+   "source": "written",
+   "from": null,
    "classes": [
     "ICSE 9",
     "TN 9",
@@ -10944,7 +10944,7 @@
    "kind": "help",
    "competency": "MATH.geometry.quadrilateral-classification",
    "title": "Unknown sides of a parallelogram or rhombus",
-   "hash": "813ccd36",
+   "hash": "c9eb7afc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -11004,7 +11004,7 @@
    "kind": "help",
    "competency": "MATH.geometry.nets",
    "title": "Faces, edges and vertices of prisms and pyramids",
-   "hash": "49e042ce",
+   "hash": "b773d94f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -11217,7 +11217,7 @@
    "kind": "help",
    "competency": "MATH.number.factors-multiples",
    "title": "Listing all the factors of a number",
-   "hash": "96bf4adf",
+   "hash": "6e7fafa1",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -11879,7 +11879,7 @@
    "kind": "help",
    "competency": "MATH.algebra.identities",
    "title": "Expanding with (a + b)², (a − b)² and (a + b)(a − b)",
-   "hash": "3f546398",
+   "hash": "70b7f092",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12104,7 +12104,7 @@
    "kind": "help",
    "competency": "MATH.geometry.parallel-angles",
    "title": "Finding x from angles at parallel lines",
-   "hash": "c91a5a23",
+   "hash": "144e4eac",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12121,7 +12121,7 @@
    "kind": "help",
    "competency": "MATH.number.square-roots",
    "title": "Is it a perfect square? Last digits of squares",
-   "hash": "e6ac1dc6",
+   "hash": "5b54d612",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12198,7 +12198,7 @@
    "kind": "help",
    "competency": "MATH.sequences.explicit-recursive-rules",
    "title": "Terms from a recursive rule",
-   "hash": "e34be3fe",
+   "hash": "6817f510",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12332,7 +12332,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-zeros",
    "title": "Finding an unknown coefficient from a condition on the zeros",
-   "hash": "4926d0ab",
+   "hash": "10404060",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12645,7 +12645,7 @@
    "kind": "help",
    "competency": "MATH.number.integer-multiply",
    "title": "Expressions and stories with several integer operations",
-   "hash": "9e63bb6c",
+   "hash": "6975bfe0",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13101,7 +13101,7 @@
    "kind": "help",
    "competency": "MATH.measurement.sectors",
    "title": "Areas of wipers, tile designs and lighthouse beams",
-   "hash": "86c3911c",
+   "hash": "af8d7794",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13219,7 +13219,7 @@
    "kind": "help",
    "competency": "MATH.number.cubes",
    "title": "The smallest multiplier that makes a perfect cube",
-   "hash": "173a760e",
+   "hash": "9ebec3f9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13826,7 +13826,7 @@
    "kind": "help",
    "competency": "MATH.number.prime-factorisation",
    "title": "The smallest multiplier that makes a perfect square",
-   "hash": "32966971",
+   "hash": "839e1c30",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13910,7 +13910,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-zeros",
    "title": "The zeros of a quadratic polynomial by factorising",
-   "hash": "f2e97377",
+   "hash": "2d3083de",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13923,7 +13923,7 @@
    "kind": "help",
    "competency": "MATH.statistics.evaluate-data-displays",
    "title": "Reading a percentage from a bar chart",
-   "hash": "5cead330",
+   "hash": "d7a48b9a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14377,7 +14377,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.proportional-check",
    "title": "Scaling in proportion, not by adding",
-   "hash": "8b64b25e",
+   "hash": "c7901ad2",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14551,7 +14551,7 @@
    "kind": "help",
    "competency": "MATH.number.square-roots",
    "title": "Between which two whole numbers a square root lies",
-   "hash": "703ce95d",
+   "hash": "39562689",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14565,7 +14565,7 @@
    "kind": "help",
    "competency": "MATH.number.square-roots",
    "title": "Square root of a larger perfect square or decimal",
-   "hash": "01876fb8",
+   "hash": "597f5f45",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14753,7 +14753,7 @@
    "kind": "help",
    "competency": "MATH.algebra.linear-systems",
    "title": "How many solutions a pair of equations has",
-   "hash": "2cf7d6a2",
+   "hash": "d04205f4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14769,7 +14769,7 @@
    "kind": "help",
    "competency": "MATH.algebra.factor-theorem",
    "title": "All the zeros of a cubic, by the factor theorem",
-   "hash": "8aec6bba",
+   "hash": "b5658445",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14800,7 +14800,7 @@
    "kind": "help",
    "competency": "MATH.geometry.circle-theorems",
    "title": "Deciding whether four points lie on a circle",
-   "hash": "420f1663",
+   "hash": "88debf50",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14844,7 +14844,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomials",
    "title": "The value of a polynomial and the zero of a linear polynomial",
-   "hash": "d59817c0",
+   "hash": "27883956",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14878,7 +14878,7 @@
    "kind": "help",
    "competency": "MATH.algebra.function-operations",
    "title": "Sum, difference, product and quotient of functions",
-   "hash": "2203f9b3",
+   "hash": "74eec57f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14907,7 +14907,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-gcd-lcm",
    "title": "GCD of two quadratics",
-   "hash": "17cae700",
+   "hash": "1d22a9f6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14933,7 +14933,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-gcd-lcm",
    "title": "Using GCD × LCM = the product of two polynomials",
-   "hash": "2b502338",
+   "hash": "fd290baf",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -14978,7 +14978,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-gcd-lcm",
    "title": "LCM of two quadratics",
-   "hash": "427828d1",
+   "hash": "9da23f4f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15076,7 +15076,7 @@
    "kind": "help",
    "competency": "MATH.calculus.area-integrals",
    "title": "The area between a parabola and a line",
-   "hash": "786da2ae",
+   "hash": "e6e9f144",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15124,7 +15124,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomials",
    "title": "The quotient when a cubic is divided by x − r",
-   "hash": "adeac963",
+   "hash": "9d5333d1",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15197,7 +15197,7 @@
    "kind": "help",
    "competency": "MATH.algebra.polynomial-square-root",
    "title": "The square root of a perfect-square polynomial",
-   "hash": "d6278120",
+   "hash": "1ccb7331",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15209,7 +15209,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratic-graphs",
    "title": "Which line to draw with y = ax² to solve a quadratic",
-   "hash": "0a30dba7",
+   "hash": "6ed64b98",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15222,7 +15222,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratic-graphs",
    "title": "Solving a quadratic equation from a table of values",
-   "hash": "6c56a868",
+   "hash": "b59ff77d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15250,7 +15250,7 @@
    "kind": "help",
    "competency": "MATH.algebra.rational-expressions",
    "title": "A rational expression in lowest terms",
-   "hash": "02b0bd3a",
+   "hash": "60dcd34c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15291,7 +15291,7 @@
    "kind": "help",
    "competency": "MATH.algebra.rational-expressions",
    "title": "Multiplying, dividing, adding and subtracting rational expressions",
-   "hash": "dc39de28",
+   "hash": "5386bbd6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15336,7 +15336,7 @@
    "kind": "help",
    "competency": "MATH.algebra.factorisation",
    "title": "Splitting the middle term of ax² + bx + c",
-   "hash": "1d67a1f0",
+   "hash": "d5ff62c3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15368,7 +15368,7 @@
    "kind": "help",
    "competency": "MATH.sequences.power-sums",
    "title": "Sums of series whose general term is a polynomial in k",
-   "hash": "0cf159f1",
+   "hash": "4e1af08f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15409,7 +15409,7 @@
    "kind": "help",
    "competency": "MATH.algebra.linear-systems",
    "title": "Solving a pair of linear equations",
-   "hash": "4a3f0dae",
+   "hash": "7e845252",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15673,7 +15673,7 @@
    "kind": "help",
    "competency": "MATH.measurement.cones-spheres",
    "title": "Volume of a cone",
-   "hash": "53994953",
+   "hash": "47a20868",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15703,7 +15703,7 @@
    "kind": "help",
    "competency": "MATH.measurement.trapezium-area",
    "title": "Area and perimeter of composite shapes with semicircles, quadrants, triangles and trapeziums",
-   "hash": "b4c96779",
+   "hash": "c3fbb1c5",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15721,7 +15721,7 @@
    "kind": "help",
    "competency": "MATH.geometry.circle-tangents",
    "title": "Common tangents to two circles: how many, and how long",
-   "hash": "e70905a7",
+   "hash": "37b50c58",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15735,7 +15735,7 @@
    "kind": "help",
    "competency": "MATH.measurement.combined-solids",
    "title": "Surface area and volume of a cube combined with a hemisphere or cylinder",
-   "hash": "2517764c",
+   "hash": "d267a49a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15953,7 +15953,7 @@
    "kind": "help",
    "competency": "MATH.measurement.combined-solids",
    "title": "Modelling real objects (tents, bowls, tanks, cones) as combinations of solids",
-   "hash": "99c97f29",
+   "hash": "3110bbe5",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15967,7 +15967,7 @@
    "kind": "help",
    "competency": "MATH.number.real-numbers",
    "title": "Absolute values and distances of rational numbers on the number line",
-   "hash": "c60563f5",
+   "hash": "2a4cd6b9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -15996,7 +15996,7 @@
    "kind": "help",
    "competency": "MATH.number.real-numbers",
    "title": "How many decimal places before a fraction terminates",
-   "hash": "45ae2799",
+   "hash": "e8e97b33",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16060,7 +16060,7 @@
    "kind": "help",
    "competency": "MATH.number.real-numbers",
    "title": "Writing a recurring decimal as a fraction",
-   "hash": "1113c99a",
+   "hash": "749b814e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16090,7 +16090,7 @@
    "kind": "help",
    "competency": "MATH.number.real-numbers",
    "title": "Operations on real numbers: adding and multiplying surds",
-   "hash": "a96d0962",
+   "hash": "670a8fa4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16208,7 +16208,7 @@
    "kind": "help",
    "competency": "MATH.measurement.cones-spheres",
    "title": "Surface area and volume of a sphere or hemisphere",
-   "hash": "98c02079",
+   "hash": "6f00d9d3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16588,7 +16588,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.identities",
    "title": "Simplifying with the trigonometric identities",
-   "hash": "7cf241df",
+   "hash": "8ce12519",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16664,7 +16664,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.mathematical-argument",
    "title": "Can aⁿ end in 0? Reasoning with prime factors",
-   "hash": "c3142227",
+   "hash": "b51ada0c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16698,7 +16698,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.model-selection",
    "title": "Modelling with a quadratic and rejecting the impossible root",
-   "hash": "6cce9120",
+   "hash": "9d0f9dc3",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16730,7 +16730,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.identities",
    "title": "Using sec²θ − tan²θ = 1 when sec θ + tan θ is known",
-   "hash": "10c6fe9b",
+   "hash": "bb83ebe9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16941,7 +16941,7 @@
    "kind": "help",
    "competency": "MATH.algebra.permutations",
    "title": "Arrangements with repetition, restrictions, around a circle, and the rank of a word",
-   "hash": "d0fff9bc",
+   "hash": "0fbfa3dd",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -16956,7 +16956,7 @@
    "kind": "help",
    "competency": "MATH.algebra.binomial",
    "title": "Exact values and approximations by the binomial theorem",
-   "hash": "341f7819",
+   "hash": "30969368",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17026,7 +17026,7 @@
    "kind": "help",
    "competency": "MATH.algebra.relations",
    "title": "Counting elements of A × B and relations from A to B",
-   "hash": "285f8371",
+   "hash": "747638ec",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17112,7 +17112,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratic-discriminant",
    "title": "Finding a parameter for which a quadratic has equal roots",
-   "hash": "f2551daf",
+   "hash": "02536848",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17144,7 +17144,7 @@
    "kind": "help",
    "competency": "MATH.algebra.functions",
    "title": "The domain of a real function",
-   "hash": "6d8a2155",
+   "hash": "e446c489",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17220,7 +17220,7 @@
    "kind": "help",
    "competency": "MATH.algebra.permutations",
    "title": "The multiplication and addition principles of counting",
-   "hash": "e83b8d15",
+   "hash": "0713baca",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17401,7 +17401,7 @@
    "kind": "help",
    "competency": "MATH.algebra.sets",
    "title": "Counting with n(A ∪ B) = n(A) + n(B) − n(A ∩ B)",
-   "hash": "77d8a391",
+   "hash": "ee34d2ca",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17462,7 +17462,7 @@
    "kind": "help",
    "competency": "MATH.algebra.logarithms",
    "title": "Using the laws of logarithms: log N in terms of log 2 and log 3",
-   "hash": "1494576c",
+   "hash": "e0b0cd51",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17475,7 +17475,7 @@
    "kind": "help",
    "competency": "MATH.algebra.permutations",
    "title": "Deciding whether order matters, and combining selection with arrangement",
-   "hash": "8d49cdc9",
+   "hash": "aaeab574",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17520,7 +17520,7 @@
    "kind": "help",
    "competency": "MATH.algebra.permutations",
    "title": "Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule",
-   "hash": "8af9fda6",
+   "hash": "63cd8e3a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17554,7 +17554,7 @@
    "kind": "help",
    "competency": "MATH.algebra.permutations",
    "title": "Permutations of r out of n distinct objects",
-   "hash": "7d280058",
+   "hash": "0fbdba58",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17569,7 +17569,7 @@
    "kind": "help",
    "competency": "MATH.algebra.binomial",
    "title": "Building Pascal's triangle and reading binomial coefficients from it",
-   "hash": "2f802e8a",
+   "hash": "6bce6f81",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17595,7 +17595,7 @@
    "kind": "help",
    "competency": "MATH.algebra.partial-fractions",
    "title": "Integrating by partial fractions or by decomposition",
-   "hash": "7d8560ce",
+   "hash": "3f78e274",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17619,7 +17619,7 @@
    "kind": "help",
    "competency": "MATH.algebra.nonlinear-inequalities",
    "title": "Solving a quadratic inequality",
-   "hash": "1cc05128",
+   "hash": "65d9face",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17648,7 +17648,7 @@
    "kind": "help",
    "competency": "MATH.algebra.nonlinear-inequalities",
    "title": "Solving a rational inequality (x − a)/(x − b) compared with 0",
-   "hash": "713ea1e2",
+   "hash": "ba00845e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17734,7 +17734,7 @@
    "kind": "help",
    "competency": "MATH.algebra.sets",
    "title": "Verifying the associative property of union and intersection",
-   "hash": "4210d251",
+   "hash": "7cae3ce4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17772,7 +17772,7 @@
    "kind": "help",
    "competency": "MATH.algebra.standard-function-graphs",
    "title": "Evaluating the greatest integer function",
-   "hash": "f9dd5d72",
+   "hash": "f15d9602",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17816,7 +17816,7 @@
    "kind": "help",
    "competency": "MATH.algebra.sets",
    "title": "Counting with three overlapping sets in a survey",
-   "hash": "3b01bda5",
+   "hash": "bbb85172",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17902,7 +17902,7 @@
    "kind": "help",
    "competency": "MATH.sets-relations.cartesian-product",
    "title": "Counting the elements of Cartesian products",
-   "hash": "026dfdde",
+   "hash": "2cc99a87",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -17995,7 +17995,7 @@
    "kind": "help",
    "competency": "MATH.matrices.rank-row-reduction",
    "title": "The inverse of a 3 × 3 matrix by the Gauss–Jordan method",
-   "hash": "398f4796",
+   "hash": "9dc8e04a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18173,7 +18173,7 @@
    "kind": "help",
    "competency": "MATH.algebra.matrices",
    "title": "Constructing a matrix from a rule aᵢⱼ (and its transpose)",
-   "hash": "6ee2409e",
+   "hash": "55fd12c6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18339,7 +18339,7 @@
    "kind": "help",
    "competency": "MATH.matrices.rank-row-reduction",
    "title": "The rank of a 3 × 4 matrix",
-   "hash": "959b7ec7",
+   "hash": "a01d2adb",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18375,7 +18375,7 @@
    "kind": "help",
    "competency": "MATH.algebra.matrices",
    "title": "Rotating and reflecting points with a 2 × 2 matrix",
-   "hash": "e792882f",
+   "hash": "cf9174f7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18546,7 +18546,7 @@
    "kind": "help",
    "competency": "MATH.algebra.vieta-relations",
    "title": "Symmetric functions of the roots of a cubic",
-   "hash": "201e4ab3",
+   "hash": "9e13d670",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18586,7 +18586,7 @@
    "kind": "help",
    "competency": "MATH.calculus.area-integrals",
    "title": "Areas bounded by a parabola, a cubic or a quadratic and the axis",
-   "hash": "5e19be0f",
+   "hash": "edf446d9",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18636,7 +18636,7 @@
    "kind": "help",
    "competency": "MATH.calculus.area-integrals",
    "title": "Areas of regions bounded by a circle and a straight line",
-   "hash": "8ffe4737",
+   "hash": "3d97144d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18650,7 +18650,7 @@
    "kind": "help",
    "competency": "MATH.calculus.curve-sketching",
    "title": "Intervals of concavity of a cubic or quartic",
-   "hash": "39c1a3e8",
+   "hash": "a6106624",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18703,7 +18703,7 @@
    "kind": "help",
    "competency": "MATH.calculus.higher-derivatives",
    "title": "Second-order derivatives",
-   "hash": "0ad53d28",
+   "hash": "42eee570",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18717,7 +18717,7 @@
    "kind": "help",
    "competency": "MATH.calculus.higher-derivatives",
    "title": "The differential equation satisfied by a family of functions",
-   "hash": "95885ac4",
+   "hash": "3d03af50",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18731,7 +18731,7 @@
    "kind": "help",
    "competency": "MATH.calculus.applications",
    "title": "Classifying a critical point by the second-derivative test",
-   "hash": "58baa409",
+   "hash": "e3ef7913",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18760,7 +18760,7 @@
    "kind": "help",
    "competency": "MATH.calculus.differentiability",
    "title": "Choosing a and b to make a piecewise function differentiable",
-   "hash": "89574ebe",
+   "hash": "59d82c94",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18827,7 +18827,7 @@
    "kind": "help",
    "competency": "MATH.calculus.homogeneous-de",
    "title": "A homogeneous differential equation with y = vx",
-   "hash": "43fbbe0f",
+   "hash": "9f81b78d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18883,7 +18883,7 @@
    "kind": "help",
    "competency": "MATH.calculus.area-integrals",
    "title": "Areas bounded by straight lines and the coordinate axes",
-   "hash": "3273da0a",
+   "hash": "98720f04",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18912,7 +18912,7 @@
    "kind": "help",
    "competency": "MATH.calculus.applications",
    "title": "Intervals where a cubic is increasing or decreasing",
-   "hash": "8d963a8f",
+   "hash": "5718939f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18926,7 +18926,7 @@
    "kind": "help",
    "competency": "MATH.calculus.definite-integral-properties",
    "title": "Definite integrals over [−a, a] using odd and even functions",
-   "hash": "c8d7e042",
+   "hash": "1b995b24",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -18939,7 +18939,7 @@
    "kind": "help",
    "competency": "MATH.statistics.ogive-quartiles",
    "title": "Cumulative frequency, median and quartiles from a less-than ogive",
-   "hash": "a439bfce",
+   "hash": "f2a1754d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19018,7 +19018,7 @@
    "kind": "help",
    "competency": "MATH.calculus.applications",
    "title": "Rates of change of related quantities",
-   "hash": "c48f7a7b",
+   "hash": "efb7f445",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19047,7 +19047,7 @@
    "kind": "help",
    "competency": "MATH.number.shares-dividends",
    "title": "Dividend, investment and return on shares",
-   "hash": "150eb2a8",
+   "hash": "a10a7f38",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19102,7 +19102,7 @@
    "kind": "help",
    "competency": "MATH.calculus.applications",
    "title": "Tangents and normals to a curve, and the angle between two curves",
-   "hash": "89bfb1e7",
+   "hash": "c04c6b3f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19131,7 +19131,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivatives",
    "title": "Instantaneous velocity from a distance–time formula",
-   "hash": "4267d2fc",
+   "hash": "6ccd4270",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19145,7 +19145,7 @@
    "kind": "help",
    "competency": "MATH.calculus.partial-derivatives",
    "title": "The chain rule for w = f(x, y) with x and y depending on t",
-   "hash": "a8985dca",
+   "hash": "7a26a58a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19157,7 +19157,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.conics",
    "title": "The equation of a circle from given conditions",
-   "hash": "352fc0c1",
+   "hash": "7cedc335",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19307,7 +19307,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-approximation",
    "title": "Approximate absolute and percentage errors by differentials",
-   "hash": "178cef17",
+   "hash": "d540cfb1",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19331,7 +19331,7 @@
    "kind": "help",
    "competency": "MATH.calculus.improper-gamma-integrals",
    "title": "Improper integrals and the gamma integral",
-   "hash": "beb0fa11",
+   "hash": "9099bccb",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19343,7 +19343,7 @@
    "kind": "help",
    "competency": "MATH.calculus.implicit-parametric-differentiation",
    "title": "Implicit differentiation of a second-degree curve",
-   "hash": "1fac15e2",
+   "hash": "1dd9b792",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19369,7 +19369,7 @@
    "kind": "help",
    "competency": "MATH.calculus.lhopital",
    "title": "Indeterminate limits by l'Hôpital's rule",
-   "hash": "80fef631",
+   "hash": "b1b3a4f7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19381,7 +19381,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-approximation",
    "title": "Estimating a root by linear approximation",
-   "hash": "51868cac",
+   "hash": "baf412e2",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19393,7 +19393,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-approximation",
    "title": "The total differential and the linear approximation of f(x, y)",
-   "hash": "c5436a4e",
+   "hash": "4749156a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19405,7 +19405,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-first-order-de",
    "title": "Solving dy/dx + Py = Q with an integrating factor",
-   "hash": "c0a077c3",
+   "hash": "d3d42639",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19418,7 +19418,7 @@
    "kind": "help",
    "competency": "MATH.calculus.linear-first-order-de",
    "title": "Linear equations of the form dx/dy + P₁x = Q₁",
-   "hash": "9f1a0176",
+   "hash": "2646c237",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19431,7 +19431,7 @@
    "kind": "help",
    "competency": "MATH.calculus.implicit-parametric-differentiation",
    "title": "Logarithmic differentiation of (ax + b) to the power kx",
-   "hash": "e6a36e87",
+   "hash": "bf175959",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19469,7 +19469,7 @@
    "kind": "help",
    "competency": "MATH.calculus.monotonicity",
    "title": "Where a cubic is increasing or decreasing",
-   "hash": "faefe98e",
+   "hash": "9ea2aabc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19506,7 +19506,7 @@
    "kind": "help",
    "competency": "MATH.calculus.multivariable-limits",
    "title": "Does a two-variable limit at the origin exist?",
-   "hash": "912e27d8",
+   "hash": "2eb6420a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19557,7 +19557,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.conics",
    "title": "The equation of a parabola from its focus, directrix, a point or its latus rectum",
-   "hash": "44e0f7cf",
+   "hash": "7388970d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19572,7 +19572,7 @@
    "kind": "help",
    "competency": "MATH.calculus.implicit-parametric-differentiation",
    "title": "dy/dx for a curve given in parametric form",
-   "hash": "c5dcd938",
+   "hash": "32dd6970",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19611,7 +19611,7 @@
    "kind": "help",
    "competency": "MATH.calculus.mean-value-theorems",
    "title": "The point c in Rolle's theorem",
-   "hash": "e7c2c995",
+   "hash": "e3605a0b",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19623,7 +19623,7 @@
    "kind": "help",
    "competency": "MATH.calculus.taylor-series",
    "title": "A coefficient in the Taylor series about a point a",
-   "hash": "f00117ec",
+   "hash": "688fa3a0",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19635,7 +19635,7 @@
    "kind": "help",
    "competency": "MATH.calculus.volumes-of-revolution",
    "title": "Volume of a solid of revolution",
-   "hash": "4a56587e",
+   "hash": "71256cd4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19690,7 +19690,7 @@
    "kind": "help",
    "competency": "MATH.probability.events",
    "title": "The addition rule for two events",
-   "hash": "50fe2ba9",
+   "hash": "440047ed",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19798,7 +19798,7 @@
    "kind": "help",
    "competency": "MATH.number.complex-locus",
    "title": "The circle described by a condition on |z|",
-   "hash": "233a41f1",
+   "hash": "33fe996e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19840,7 +19840,7 @@
    "kind": "help",
    "competency": "MATH.number.complex",
    "title": "Conjugates of complex numbers and their properties",
-   "hash": "1261c20e",
+   "hash": "5944ed40",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -19982,7 +19982,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.straight-lines",
    "title": "From the general form Ax + By + C = 0: slope, intercepts, normal form, parallel and perpendicular lines",
-   "hash": "bf9a48e0",
+   "hash": "c77f7571",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20011,7 +20011,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.space-lines",
    "title": "The point of intersection of two lines in space",
-   "hash": "49e88876",
+   "hash": "e48dd9fc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20071,7 +20071,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.straight-lines",
    "title": "Equations of lines in point–slope, intercept and normal form, and lines parallel to the axes",
-   "hash": "e4ffdd40",
+   "hash": "cd00fa09",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20103,7 +20103,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.locus",
    "title": "The locus of a point equidistant from a point and a line",
-   "hash": "6f7d2f94",
+   "hash": "bb30b4a7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20117,7 +20117,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.locus",
    "title": "The locus of a point whose distances from two points are in a fixed ratio",
-   "hash": "13b05281",
+   "hash": "1ef44730",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20131,7 +20131,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.space-lines",
    "title": "Parallel, intersecting or skew lines",
-   "hash": "a95bc74e",
+   "hash": "33ca3de7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20145,7 +20145,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.space-planes",
    "title": "The point where a line meets a plane",
-   "hash": "17b1ce70",
+   "hash": "924cf191",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20158,7 +20158,7 @@
    "kind": "help",
    "competency": "MATH.probability.events",
    "title": "Mutually exclusive and exhaustive events",
-   "hash": "a5c93217",
+   "hash": "f48ae0dc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20212,7 +20212,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.pair-of-lines",
    "title": "The angle bisectors of a pair of lines through the origin",
-   "hash": "8ee85fbd",
+   "hash": "551557ae",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20240,7 +20240,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.skew-line-distance",
    "title": "The distance between parallel lines in space",
-   "hash": "90a389e1",
+   "hash": "fbf509e6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20381,7 +20381,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.skew-line-distance",
    "title": "The shortest distance between skew lines",
-   "hash": "0bec2d9f",
+   "hash": "f28a1f74",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20395,7 +20395,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.straight-lines",
    "title": "Slope from the inclination, and the inclination from the slope",
-   "hash": "757ab0d5",
+   "hash": "0b6b42ff",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20411,7 +20411,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.conic-tangents-normals",
    "title": "The tangent or normal to a circle or parabola at a point",
-   "hash": "5542ce67",
+   "hash": "81d5e2c7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20435,7 +20435,7 @@
    "kind": "help",
    "competency": "MATH.coordinate.conic-tangents-normals",
    "title": "Tangents and normals to an ellipse or a hyperbola, with points in parametric form",
-   "hash": "69deb69b",
+   "hash": "b923bf45",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20488,7 +20488,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.radians",
    "title": "Arc length and sector area",
-   "hash": "160c08dc",
+   "hash": "06efaa24",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20502,7 +20502,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.triangle-laws",
    "title": "Area of a triangle from two sides and the included angle",
-   "hash": "a6891e53",
+   "hash": "3a02d7df",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20514,7 +20514,7 @@
    "kind": "help",
    "competency": "MATH.probability.continuous-random-variables",
    "title": "From a density to the distribution function, and back",
-   "hash": "be9d799a",
+   "hash": "7ca05833",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20526,7 +20526,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.logic",
    "title": "A counterexample to a 'prime for every n' claim",
-   "hash": "bd586967",
+   "hash": "eb23700c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20539,7 +20539,7 @@
    "kind": "help",
    "competency": "MATH.probability.continuous-random-variables",
    "title": "Mean and variance of a continuous random variable; properties of expectation",
-   "hash": "6c3046a3",
+   "hash": "1f58ac6e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20577,7 +20577,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.logic",
    "title": "A statement and its converse",
-   "hash": "89a18e7a",
+   "hash": "28e47a61",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20685,7 +20685,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.radians",
    "title": "Radians to degrees",
-   "hash": "a0778a00",
+   "hash": "3ab466cd",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20781,7 +20781,7 @@
    "kind": "help",
    "competency": "MATH.probability.independent-events",
    "title": "Probabilities of independent events",
-   "hash": "e9e5bafa",
+   "hash": "58c38d38",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -20951,7 +20951,7 @@
    "kind": "help",
    "competency": "MATH.probability.continuous-random-variables",
    "title": "The constant that makes a density function",
-   "hash": "ba31ae1b",
+   "hash": "7d8a93ed",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21031,7 +21031,7 @@
    "kind": "help",
    "competency": "MATH.trigonometry.radians",
    "title": "Degrees to radians",
-   "hash": "20268fa7",
+   "hash": "135f9022",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21057,7 +21057,7 @@
    "kind": "help",
    "competency": "MATH.probability.random-variables",
    "title": "Mean of a discrete random variable",
-   "hash": "c168a177",
+   "hash": "cf43aaf4",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21401,9 +21401,9 @@
    "kind": "help",
    "competency": "MATH.algebra.arithmetic-sequences",
    "title": "Terms of a sequence from a general or a recursive rule",
-   "hash": "7489f111",
-   "source": "rule",
-   "from": "steps",
+   "hash": "58b1a970",
+   "source": "written",
+   "from": null,
    "classes": [
     "CBSE 9",
     "CBSE 10",
@@ -21484,7 +21484,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "The chain rule for composite functions",
-   "hash": "adedcf26",
+   "hash": "a03858a6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21500,7 +21500,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "Derivatives of exponential and logarithmic functions",
-   "hash": "fdf1fde4",
+   "hash": "ade5470e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21516,7 +21516,7 @@
    "kind": "help",
    "competency": "MATH.calculus.definite-integrals",
    "title": "Definite integrals of polynomials by the fundamental theorem",
-   "hash": "a875f04e",
+   "hash": "7c509138",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21530,7 +21530,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "Derivatives of inverse trigonometric functions, and one function with respect to another",
-   "hash": "93409a54",
+   "hash": "d0d7460e",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21561,7 +21561,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "The quotient rule",
-   "hash": "5381c8b8",
+   "hash": "fc1eb27a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21623,7 +21623,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integrals of the standard forms 1/(x² − a²), 1/(a² − x²), 1/√(x² ± a²), √(x² ± a²) and (px + q)/(x² + bx + c)",
-   "hash": "0ca84f65",
+   "hash": "a1f17d03",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21638,7 +21638,7 @@
    "kind": "help",
    "competency": "MATH.calculus.indefinite-integrals",
    "title": "Finding a function from its derivative and one value",
-   "hash": "78d8944e",
+   "hash": "87884a00",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21667,7 +21667,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integrals with inverse trigonometric answers: 1/(x² + a²), 1/√(a² − x²), √(a² − x²) and forms reducible to them",
-   "hash": "23b943ca",
+   "hash": "4e361d00",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21682,7 +21682,7 @@
    "kind": "help",
    "competency": "MATH.calculus.indefinite-integrals",
    "title": "Antiderivatives of f(ax + b)",
-   "hash": "1fe58fe8",
+   "hash": "375a44a6",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21727,7 +21727,7 @@
    "kind": "help",
    "competency": "MATH.calculus.limits",
    "title": "Limits of rational functions: (xⁿ − aⁿ)/(xᵐ − aᵐ) and factorising",
-   "hash": "ad2a46e4",
+   "hash": "856d0431",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21788,7 +21788,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integration by parts, Bernoulli's formula and ∫ eˣ[f(x) + f′(x)] dx",
-   "hash": "8725d46b",
+   "hash": "4fdb9e2d",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21803,7 +21803,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integrating by partial fractions: repeated factors and improper fractions",
-   "hash": "675c2729",
+   "hash": "e2399617",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21833,7 +21833,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integrating by partial fractions with an irreducible quadratic factor",
-   "hash": "85c830b4",
+   "hash": "25364cba",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21912,7 +21912,7 @@
    "kind": "help",
    "competency": "MATH.algebra.quadratics",
    "title": "Quadratic word problems: numbers, ages and speeds",
-   "hash": "03f7339f",
+   "hash": "4cef10dc",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -21961,7 +21961,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "A definite integral by substitution: ∫ c t/√(t² + d²) dt",
-   "hash": "4ca84128",
+   "hash": "83f36e36",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22024,7 +22024,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "Integration using trigonometric identities and substitution",
-   "hash": "a239f992",
+   "hash": "68b76a18",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22070,7 +22070,7 @@
    "kind": "help",
    "competency": "MATH.probability.conditional",
    "title": "Conditional probability from P(A ∩ B) and P(B)",
-   "hash": "21c993eb",
+   "hash": "0521ced7",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22141,7 +22141,7 @@
    "kind": "help",
    "competency": "MATH.probability.conditional",
    "title": "The multiplication theorem: drawing two without replacement",
-   "hash": "8b51ddff",
+   "hash": "b91f431f",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -22821,7 +22821,7 @@
    "kind": "help",
    "competency": "MATH.calculus.derivative-rules",
    "title": "Differentiating k xⁿ times sin(ax) or cos(ax)",
-   "hash": "8d5f5df0",
+   "hash": "a7cdf676",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -23286,7 +23286,7 @@
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
    "title": "An integral by substitution",
-   "hash": "dd35a536",
+   "hash": "a2cb176c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -23301,7 +23301,7 @@
    "kind": "help",
    "competency": "MATH.number.radicals",
    "title": "Simplifying a square root",
-   "hash": "043cdf2c",
+   "hash": "08e5e765",
    "source": "rule",
    "from": "steps",
    "classes": [

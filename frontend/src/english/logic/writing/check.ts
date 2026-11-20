@@ -19,6 +19,8 @@ export interface Target {
 }
 export interface Note {
   id: string;
+  /** Grammar in use topics that practise what this note is about, if any. */
+  topics?: string[];
   /** fix: a slip to correct. tip: something to consider. good: something done well. */
   level: "fix" | "tip" | "good";
   text: string;
@@ -39,7 +41,7 @@ const STOP = new Set("the a an and or but so of to in on at for with from by as 
 const WEAK = ["very", "nice", "good", "big", "thing", "things", "got", "lot", "really", "stuff"];
 export function checkWriting(text: string, target: Target, dict?: Dictionary | null): WritingCheck {
   const notes: Note[] = [];
-  const add = (id: string, level: Note["level"], t: string) => notes.push({ id, level, text: t });
+  const add = (id: string, level: Note["level"], t: string, topics?: string[]) => notes.push({ id, level, text: t, ...(topics?.length ? { topics: [...new Set(topics)] } : {}) });
   const sentences = sentencesOf(text);
   const words = wordsOf(text);
   const paragraphs = text.split(/\n\s*\n/).filter((p) => /[A-Za-z]/.test(p)).length;
@@ -54,10 +56,10 @@ export function checkWriting(text: string, target: Target, dict?: Dictionary | n
 
   // capital letters and end marks
   const noCapital = sentences.filter((s) => /^["“‘']?[a-z]/.test(s));
-  if (noCapital.length) add("capital", "fix", `${noCapital.length === 1 ? "A sentence starts" : `${noCapital.length} sentences start`} without a capital letter: ${quote(noCapital.map((s) => s.split(" ").slice(0, 3).join(" ")))}.`);
+  if (noCapital.length) add("capital", "fix", `${noCapital.length === 1 ? "A sentence starts" : `${noCapital.length} sentences start`} without a capital letter: ${quote(noCapital.map((s) => s.split(" ").slice(0, 3).join(" ")))}.`, ["capitals"]);
   else if (sentences.length >= 3) add("capital-ok", "good", "Every sentence starts with a capital letter.");
-  if (!/[.?!]["”’']?\s*$/.test(text)) add("end", "fix", "The last sentence has no full stop, question mark or exclamation mark.");
-  if (/(^|[^A-Za-z'’])i(?=[ ,.'’!?]|$)/.test(text)) add("i", "fix", "The word “I” is always a capital letter.");
+  if (!/[.?!]["”’']?\s*$/.test(text)) add("end", "fix", "The last sentence has no full stop, question mark or exclamation mark.", ["capitals"]);
+  if (/(^|[^A-Za-z'’])i(?=[ ,.'’!?]|$)/.test(text)) add("i", "fix", "The word “I” is always a capital letter.", ["capitals"]);
 
   // spacing
   if (/[A-Za-z][,.;:!?][A-Za-z]{2}/.test(text.replace(/\b[a-z]\.[a-z]\./gi, ""))) add("space-after", "fix", "Leave a space after a comma or a full stop.");
@@ -71,9 +73,9 @@ export function checkWriting(text: string, target: Target, dict?: Dictionary | n
   const joined = found(JOINED);
   if (joined.length) add("joined", "fix", `Write as two words: ${list(joined, JOINED)}.`);
   const forms = found(WRONG_FORM);
-  if (forms.length) add("word-form", "fix", `${forms.length === 1 ? "This word does" : "These words do"} not take a regular ending: ${list(forms, WRONG_FORM)}.`);
+  if (forms.length) add("word-form", "fix", `${forms.length === 1 ? "This word does" : "These words do"} not take a regular ending: ${list(forms, WRONG_FORM)}.`, forms.map((w) => (/ed$/.test(w) ? "irregular_verbs" : "plurals")));
   const bare = found(NO_APOSTROPHE);
-  if (bare.length) add("apostrophe", "fix", `An apostrophe is missing: ${list(bare, NO_APOSTROPHE)}.`);
+  if (bare.length) add("apostrophe", "fix", `An apostrophe is missing: ${list(bare, NO_APOSTROPHE)}.`, ["contractions"]);
   const texting = [...new Set(text.match(TEXTING) ?? [])];
   if (texting.length) add("texting", "fix", `Write whole words, not message short forms: ${quote(texting, 5)}.`);
   if (dict) {
@@ -89,7 +91,8 @@ export function checkWriting(text: string, target: Target, dict?: Dictionary | n
 
   // grammar slips that follow a pattern
   const slips: string[] = [];
-  for (const { re, say, agree } of SLIPS) {
+  const slipTopics: string[] = [];
+  for (const { re, say, agree, topic } of SLIPS) {
     re.lastIndex = 0;
     for (let m = re.exec(text); m; m = re.exec(text)) {
       if (agree && HELPER.test(text.slice(Math.max(0, text.slice(0, m.index).search(/[^.?!]*$/)), m.index))) continue;
@@ -98,9 +101,10 @@ export function checkWriting(text: string, target: Target, dict?: Dictionary | n
       // "an MBA", "an X-ray": a word in capitals is said letter by letter, so the rule does not apply
       if ((isA && m[1] && A_OK.test(m[1])) || (isAn && m[1] && (AN_OK.test(m[1]) || /^[A-Z]{2}|^[A-Z]$/.test(m[1])))) continue;
       slips.push(say(m));
+      if (topic) slipTopics.push(topic);
     }
   }
-  if (slips.length) add("grammar", "fix", `Look again at: ${[...new Set(slips)].slice(0, 6).join("; ")}.`);
+  if (slips.length) add("grammar", "fix", `Look again at: ${[...new Set(slips)].slice(0, 6).join("; ")}.`, slipTopics);
 
   const asked = sentences.filter((x) => ASKED.test(x));
   if (asked.length) add("question", "tip", `${asked.length === 1 ? "This looks" : "These look"} like a question, so end with a question mark: ${quote(asked.map((x) => x.split(" ").slice(0, 4).join(" ") + " …"), 2)}.`);

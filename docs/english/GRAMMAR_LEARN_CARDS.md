@@ -39,3 +39,7 @@ Level 1 now has 94 sentences (was 41).
 GU-15 (the card comes first, cannot be skipped past by answering, is not scored, comes once per topic) and GU-16
 (each basic topic has at least eight sentences). The simulated learners go through the cards. The phone-sized browser
 test shows the card and passes it before every grammar sitting.
+
+## Coming back to a card
+- A topic's card is shown again when the learner's last two answers on that topic were both wrong since the card was last seen. The record is marked `again: true`.
+- Writing check: grammar, word-form, apostrophe and capital notes carry grammar topics. A "Practise: …" button opens a Grammar in use sitting on those topics, and the draft stays in memory, so the learner can come back to it.

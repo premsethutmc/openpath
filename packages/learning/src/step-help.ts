@@ -84,13 +84,22 @@ const NEXT: Record<string, string> = { note: "notice what the question gives you
   // "classify"). Used only where the cue cannot name the step's own numbers or what it finds.
   count: "count them one by one", compare: "put them side by side and compare", convert: "change it to the other unit", round: "find the nearest round number",
   classify: "decide which kind it is", place: "use the place of each digit", order: "put them in order", choose: "pick the one that fits",
-  regroup: "trade ten of one for one of the next", identify: "find it in the question", factorise: "break the number into its factors",
+  regroup: "trade ten of one for one of the next", identify: "find it in the question", factorise: "break it into its factors",
   hcf: "find the biggest number that divides them all", lcm: "find the smallest number they all go into", continue: "carry the pattern on",
   difference: "find the size of the jump", sort: "sort them into groups", simplify: "make it simpler", reflect: "flip it over the line",
   add: "add them together", subtract: "take one away from the other", multiply: "multiply them", divide: "divide them", half: "halve it", double: "double it",
   measure: "read the measurement", estimate: "make a sensible guess first", pattern: "look for what repeats", share: "share them out equally", group: "make equal groups",
   total: "find how many in all", list: "list them all", match: "match each one to its partner", name: "give it its name", tally: "count the tally marks", rewrite: "write it another way",
-  substitute: "put the number in place of the letter", solve: "find the number that makes it true", expand: "open the brackets", combine: "put the like parts together" };
+  substitute: "put the number in place of the letter", solve: "find the number that makes it true", expand: "open the brackets", combine: "put the like parts together",
+  // plain-cue@2 (Classes 11 and 12): the operations of the later classes, said as what to do
+  union: "join the sets, listing each member once", intersect: "keep only what is in both", rearrange: "move the terms into the form asked",
+  "multiply-add": "multiply by the number at the side, then add the next one", cross: "work out the cross product",
+  "partial-fractions": "split it into simpler fractions", find: "find what the question asks for", floor: "take the whole number at or just below it",
+  differentiate: "differentiate (find how fast it changes)", equate: "set the two expressions equal", converse: "swap the 'if' part and the 'then' part",
+  square: "square both sides", "row-reduce": "clear the entries below the first one, row by row", integrate: "integrate (add up the small pieces)",
+  "inclusion-exclusion": "add the sets, take away each overlap, add back the middle", arrange: "count the ways to arrange them" };
+/** plain-cue@2: a cue that came out as one bare word is said in words where we have them */
+const plainCue = (c: string) => (/^[a-z-]+$/.test(c) && NEXT[c] ? NEXT[c] : c);
 /**
  * cue-numbers@1: "multiply." tells a stuck child nothing. Where a step is one plain calculation, the cue names the numbers
  * it is done with ("multiply 50 by 6", "take 300 away from 348"), never its result. The numbers are the step's own
@@ -199,7 +208,7 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).flatMap((t) => { const v = (t as { value?: unknown }).value; return [...(typeof v === "number" ? [v] : []), ...numbersIn(explainStep(p, t))]; })]);
     const shownHere = explainStep(p, s), inputs = (s as { inputs?: unknown }).inputs, value = (s as { value?: unknown }).value;
     const own: StepHelp = {
-      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op}.`,
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${plainCue(cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op)}.`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
       ...(cardFor(s.competency) ? { rule: s.competency } : {}),
@@ -224,11 +233,33 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     // an integral or a derivative is set up by the step and then worked; a calculation is worked and then stated
     return /∫|d\s*\/\s*d[a-z]/.test(own.shown) ? [own, ...lines] : [...lines, own];
   });
+  // chain@1 (Class 9 up, found by the robot learner in Classes 11 and 12): a help of one step written as one chain, "rule = numbers put in =
+  // result", is shown link by link, so the learner can do each link
+  if (steps.length === 1 && !steps[0].how && !worked.length && (graph.byId.get(graph.evidenceTarget(p.competency))?.gradeRange[0] ?? 0) >= 9) { const c = chain(steps[0], p.answer); if (c) steps.splice(0, 1, ...c); }
   // closing@1 (found by the robot learner): a help that works towards a numeric answer but never writes it ends by
   // writing it. The step before it is then no longer the last.
   if (statesAnswer(steps, p.answer)) return steps;
   const before = steps.map((x, i) => (i === steps.length - 1 && /^Last: /.test(x.next) && steps.length > 1 ? { ...x, next: x.next.replace(/^Last: /, "Next: ") } : x));
   return [...before, { next: steps.length ? "Last: write the answer." : "First: write the answer.", shown: `The answer: ${p.answer}`, needs: null, closing: true as const }];
+}
+/** chain@1: "Area = ½ab sin C = ½ × 2 × 3 × 1/2 = 3/2" as three steps: the rule, the numbers put in, the result. */
+function chain(one: StepHelp, answer: string): StepHelp[] | null {
+  if (/[;\n]/.test(one.shown)) return null;
+  const segs = one.shown.split(/\s+=\s+/);
+  if (segs.length < 2 || segs.length > 6 || segs.some((x) => !x.trim() || x.length > 80)) return null;
+  const lhs = segs[0].includes(": ") ? segs[0].split(": ").pop()! : segs[0];
+  // "set up = result": the setting up is one step (its own cue kept), the working out the next
+  // the links are lines of working (finer); the step itself, the whole chain, closes them
+  if (segs.length === 2) return /[×÷+−]|\s-\s/.test(lhs) && lhs.length > 2 ? [{ ...one, shown: segs[0], finer: true }, { ...one, next: "Last: work it out." }] : null;
+  const flat = (t: string) => t.replace(/\s+/g, "").replace(/-/g, "−");
+  // the answer is reached only at the end: no earlier link may be it
+  if (segs.slice(1, -1).some((x) => flat(x) === flat(answer))) return null;
+  const letters = (t: string) => /[a-zA-Zθπ]/.test(t.replace(/\b(sin|cos|tan|log|ln|sec|cosec|cot)\b/g, ""));
+  const links = segs.slice(1, -1).map((x, k, all) => {
+    const cue = k === 0 ? (letters(x) ? "write down the rule" : "set it up") : letters(all[k - 1]) && !letters(x) ? "put the numbers in" : "work it out a step further";
+    return { ...one, next: `${k === 0 ? "First" : "Next"}: ${cue}.`, shown: k === 0 ? `${segs[0]} = ${x}` : `${lhs} = ${x}`, finer: true as const };
+  });
+  return [...links, { ...one, next: "Last: work it out." }];
 }
 /**
  * Does a help state its question's answer somewhere (each part of it, for an answer in parts such as "(7, 25)" or
