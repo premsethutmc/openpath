@@ -147,7 +147,41 @@ function Build({ tiles, whole, task, onCheck }: { tiles: string[]; whole: boolea
   );
 }
 
-export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain }: { content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+/** The card before a topic's first sentence: the rule, two examples, one question to try (not scored). */
+function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNullable<GrammarView["learn"]>; onTry: (chosen: number) => void; onLearned: () => void }) {
+  const t = card.tried;
+  return (
+    <section className="grammar-learn" aria-labelledby="grammar-learn-title">
+      <h2 id="grammar-learn-title">New: {topic}</h2>
+      <p className="grammar-rule">{card.rule}</p>
+      <ul className="grammar-examples">
+        {card.examples.map((e) => (
+          <li key={e}>{e}</li>
+        ))}
+      </ul>
+      <p id="grammar-try">
+        <strong>Try one:</strong> {card.question}
+      </p>
+      <p className="choose-options" role="group" aria-labelledby="grammar-try">
+        {card.options.map((o, i) => (
+          <button key={o} type="button" className="choice" disabled={!!t} data-state={t ? (i === t.answer ? "right" : i === t.chosen ? "wrong" : "") : ""} onClick={() => onTry(i)}>
+            {o}
+          </button>
+        ))}
+      </p>
+      {t && (
+        <p className={t.right ? "words-verdict right" : "words-verdict"} role="status">
+          {t.right ? "✓ Right" : `The answer is “${card.options[t.answer]}”.`}
+        </p>
+      )}
+      <button type="button" className={t ? "primary" : "link"} onClick={onLearned}>
+        {t ? "Now practise" : "Skip to practice"}
+      </button>
+    </section>
+  );
+}
+
+export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned }: { onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
     return (
@@ -182,6 +216,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose
       <p className="pill">
         Sentence {view.index + 1} of {view.total} · {view.topic}
       </p>
+      {view.phase === "learn" && view.learn && <Learn topic={view.topic ?? ""} card={view.learn} onTry={onTry} onLearned={onLearned} />}
       {view.phase === "ask" && view.fix && <Fix key={view.id} words={view.fix.words} onCheck={onFix} />}
       {view.phase === "ask" && view.build && <Build key={view.id} tiles={view.build.tiles} whole={view.build.whole} task={view.build.task} onCheck={onBuild} />}
       {view.phase === "ask" && view.choose && <Choose key={view.id} sentence={view.choose.sentence} question={view.choose.question} options={view.choose.options} onCheck={onChoose} />}
@@ -244,7 +279,7 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} />
+      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="grammar-use:done" label="Was any sentence marked unfairly, or any rule unclear?" />

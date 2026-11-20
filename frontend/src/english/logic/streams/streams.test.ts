@@ -233,7 +233,7 @@ test("LC-10 after the check, the grammar row starts at the level found, and name
   await l.recordLevelCheck([{ type: "start" }, { type: "grammar", ...grammarCheck(false, 5) }, { type: "done" }]);
   assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 7", "Start with naming words: noun and verb", "naming"]);
   const s = new GrammarSitting(GRAMMAR, 5, [], [NAMING_TOPIC]);
-  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) (s.spot(0), s.next());
+  for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) if (v.phase === "learn") s.learned(); else (s.spot(0), s.next());
   await l.recordGrammar(s.take());
   assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 7", "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
 });
