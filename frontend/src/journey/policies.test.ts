@@ -57,6 +57,11 @@ test("B a failed delayed check withdraws current verification, requires recovery
   r.f.later(8);
   assert.equal(r.f.currentPhase, "retention");
   r.f.on({ type: "answer_submitted", value: wrong(r.f.currentQuestion!), timestamp: 0 });
+  // slip@1: one wrong answer is a slip; the check asks one more, and a second wrong answer is forgetting
+  assert.equal(r.f.session.state().evidence(r.f.session.competency).retention, "due", "one wrong is not yet a failed check");
+  if (r.f.stage !== "question") r.f.on({ type: "skip_requested", timestamp: 0 });
+  assert.equal(r.f.currentPhase, "retention");
+  r.f.on({ type: "answer_submitted", value: wrong(r.f.currentQuestion!), timestamp: 0 });
   const st = r.f.session.state(), ev = st.evidence(r.f.session.competency);
   assert.equal(ev.status, "review");
   assert.equal(ev.verified, false);

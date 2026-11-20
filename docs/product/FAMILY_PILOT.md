@@ -617,3 +617,14 @@ numbers expose) is still found. The transfer question and the delayed check a we
 child, ICSE Class 5: median questions per skill 17 → 14, 62 of 62 mastered, nothing fooled.
 slip@1 (part): a skill unit with a right answer alone is held as "not shown" only once two of its answers alone are wrong, as
 question types already were (never on one slip).
+
+## slip@1: one wrong answer in the delayed check is a slip, not forgetting
+
+Before: any wrong answer in the delayed check (a week later) failed it: the skill went back to "Review needed", recovery was
+required and the child was taught again. A careless child (right four times in five) lost skills they knew.
+Now one wrong answer in the delayed check is a slip: the check asks one more question, and passes only with one more right
+answer than usual (never on fewer right answers). A second wrong answer in the same check is forgetting, as before: the check
+fails, the history keeps it, recovery is required. Within a skill, a part with a right answer is held as "not shown" only once two
+of its answers are wrong (move-on@1). The foundation pathways' own sub-skill checks are unchanged.
+Tests that produced a failed delayed check with one wrong answer now give two (evid-retention, policies B); gated-mastery 10 and
+retention-readiness record that production now agrees with the gated-slip variant.

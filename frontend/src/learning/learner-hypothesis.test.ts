@@ -108,7 +108,9 @@ test("teaching history: questions seen as practice are not instruction delivered
   const h = a3.final.teachingHistory[TARGET]!;
   // move-on@1: a shown skill no longer has every strategy check served as practice; where one was, it is still not instruction
   // delivered, and the module still teaches after it
-  if (h.some((s) => s.checkSeen && !s.checkSeen.inBlock)) assert.ok(a3.steps.some((s) => s.phase === "chapter"), "the module still teaches after its checks were used as practice");
+  // slip@1: A3's two isolated slips (one in practice, one in the delayed check) no longer lead to teaching; where teaching is needed
+  // (B, C) the module still teaches
+  assert.ok(runs.slice(1).some((r) => r.steps.some((s) => s.phase === "chapter")), "the module still teaches where teaching is needed");
   for (const s of h) if (s.checkSeen && !s.checkSeen.inBlock) assert.ok(!s.delivered.includes(s.checkSeen as never), "a check seen as practice is not a lesson");
   for (const r of runs) {
     const hist = r.final.teachingHistory;

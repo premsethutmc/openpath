@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "e9d41efd751d3f022426c74fbd91d6c5931b60433a29a09d9513e7c48713ff43",
+ "sha256": "694b537cc9da44981a085686c95c28ef62e87e8b8edf61462f942c0046f93772",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -213,7 +213,7 @@
   "packages/learning/src/e6-series.ts": "a2eaf70479c2624dbd25223dfcac25ab63fd6abd908011ebd2f6feea1ef3a225",
   "packages/learning/src/evidence-binding.ts": "c806bab83e4b17e0b16c0c9cdcdd79a7622bc54dbbce006e5ecb1735e20f0a7e",
   "packages/learning/src/evidence-provenance.ts": "3faaaa062bdb81e70d1c7241b08563d6cc54d31963eecd7ab76cf457cb8a706c",
-  "packages/learning/src/evidence.ts": "66cc1873136a7c68712b2b07c7947c23a641b6fb438e214fb2fac63d3d478bff",
+  "packages/learning/src/evidence.ts": "452b06d343db6d954736b9817a0ff16610ecd02b13f88fc0383b913009510969",
   "packages/learning/src/exact-e5.ts": "cb6811fdacee8f3fdcd0fa008648d0e71db4612f59e9b180b15472721bdf500e",
   "packages/learning/src/exact/rational.ts": "d77f86970d46ccf137d86a40ae12c4a484503a4905bfb5e66f6fd722b6cf19ea",
   "packages/learning/src/explanation-review.ts": "d2b8cf63744f56ad4b59fe2093bd39d824dd0727cd0ac975add1b62507ac30e4",

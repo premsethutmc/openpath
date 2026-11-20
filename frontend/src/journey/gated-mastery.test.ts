@@ -60,7 +60,8 @@ test("10: a failed delayed check affects only that sub-skill; history kept; the 
   assert.deepEqual(plan.map((p) => p.subSkill.split(".")[1].replace("@1", "")).sort(), ["both-sides", "brackets", "modelling", "two-step"]);
   for (const p of plan) { assert.ok(!p.unchecked); assert.ok(p.questions.every((q) => !isChoice(q)), p.subSkill); }
   assert.ok(plan.find((p) => p.subSkill.includes("modelling"))!.questions.every((q) => q.startsWith("gen:aulwp:")));
-  assert.ok(t.comparison.existing.recoveryRequired);
+  // slip@1: production now treats a delayed check with one wrong answer as a slip (as the gated-slip variant does): no recovery there
+  assert.ok(!t.comparison.existing.recoveryRequired);
 });
 test("11: recovery needs new independent success on brackets", () => {
   const t = j(11), b = t.extra!.beforeRecovery as { gated: string; recoveryRequired: string[] };

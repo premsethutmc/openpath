@@ -87,7 +87,9 @@ test('persisted half-row pathway resumes scoped recovery instead of unrelated in
  assert.equal(s.submit(delayed.question,wrong,'retention').credit,false);
  const events=saved(s),st=learnerState(s.learnerId,events,s.now);
  const ordinary=moduleState(c.competency,st.selectionRecords,st.evidence(c.competency),s.now,'',null,st.evidence);
- assert.equal(ordinary.phase,'explore','the broad module still requests initial diagnostics');
+ // slip@1: for the broad module one wrong delayed answer is a slip, so it asks one more delayed question; the pathway's scoped
+ // recovery for the half-symbol skill takes over all the same
+ assert.equal(ordinary.phase,'retention','the broad module asks one more delayed question');
  const next=st.module(c.competency);assert.equal(next.phase,'check');assert.ok(next.question);assert.ok(isHalf(next.question));
  assert.equal(next.context,`foundation:${halfSkill}`);assert.notEqual(exposureKey(next.question),exposureKey(delayed.question));
  assert.ok(!st.records.attempts.some(a=>exposureKey(a.questionId)===exposureKey(next.question!)));

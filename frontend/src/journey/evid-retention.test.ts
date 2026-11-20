@@ -29,7 +29,13 @@ test("a failed delayed check is kept when the shared engine demonstrates the ski
   const n = s.next(c);
   assert.equal(n.phase, "retention", n.reason);
   s.submit(n.question!, wrongAnswer(n.question!), "retention");
+  // slip@1: one wrong answer in the delayed check is not yet forgetting: the check asks one more
   let e = s.state().evidence(c);
+  assert.equal(e.retention, "due", "one wrong in the delayed check is a slip");
+  const n2 = s.next(c);
+  assert.equal(n2.phase, "retention", n2.reason);
+  s.submit(n2.question!, wrongAnswer(n2.question!), "retention");
+  e = s.state().evidence(c);
   assert.equal(e.status, "review");
   assert.deepEqual(e.retentionHistory.map((h) => h.result), ["failed"]);
   reloads(s, c);
@@ -64,8 +70,9 @@ test("a failed delayed check is kept when the shared engine demonstrates the ski
 for (const c of ["MATH.algebra.missing-number", "MATH.algebra.linear-intro"]) {
   test(`${c}: after a failed delayed check and recovery alone, the new check is scheduled and the status is not "review"`, () => {
     const s = start(`evid-recovered-${c}`, c);
-    let failed = false;
-    const learner = { right: (_q: string, x: { phase: string }) => (x.phase === "retention" && !failed ? ((failed = true), false) : true) };
+    // slip@1: forgetting is two wrong answers in the delayed check (one is a slip)
+    let failed = 0;
+    const learner = { right: (_q: string, x: { phase: string }) => (x.phase === "retention" && failed < 2 ? (failed++, false) : true) };
     const trail: Step[] = [];
     drive(s, c, learner, trail, 60);
     assert.ok(SHOWN.includes(s.state().evidence(c).status));
