@@ -6,3 +6,5 @@ Based on pollination and plant reproduction in the [CISCE primary science curric
 - Give different fruits/seed structures a ride using wind, water or an animal; the models depict their characteristic dispersal methods, not every possible transfer in nature.
 - Compare a mustard seed with a potato eye. Plant, add rain and advance time. The visible mustard root precedes the shoot. A potato eye is a bud on a stem tuber; its shoot doesn't require a seed. The watering and growing steps are illustrative, not a full model of germination or a gardening protocol. The separate Plant a Seed exercise remains linked for further play.
 - Original vectors, no sign-in, no new API, storage or tracking. Tap, drag, or use the keyboard; animation responds to reduced-motion settings. No scoring or grading.
+
+- Optional Sound runs an original Web Audio score and synthesized garden ambience, with short action sounds for the bee, pod and rain. Starts muted on every load; no external tracks, recording, permission prompt or network audio. Hidden tabs suspend audio.

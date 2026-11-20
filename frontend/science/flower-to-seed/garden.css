@@ -23,3 +23,5 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:9px;margin:
 
 .pollen-tube{stroke-dasharray:1;animation:tube .95s ease-out both}@keyframes tube{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 .bee{transition:none}.target.bee-touch,.target.flower-touch{background:transparent;border:0;box-shadow:none}.target.bee-touch{cursor:grab;z-index:4;width:15%;height:16%;min-width:48px;min-height:48px}.target.bee-touch:active{cursor:grabbing}.target.flower-touch{width:24%;height:33%;cursor:pointer}.target.flower-touch:hover,.target.bee-touch:hover{background:#fff7ca15}.target.flower-touch:focus-visible,.target.bee-touch:focus-visible{outline:3px solid #fff6cc;outline-offset:2px}
+
+main{position:relative}.sound-button{position:absolute;top:13px;right:0;border:1px solid #bccbb9;border-radius:22px;background:#f8f8ee;color:#2c543c;font-weight:760;padding:6px 10px;min-height:36px;font-size:.76rem}.sound-button[aria-pressed="true"]{background:#315c42;color:#fff}.sound-button span:first-child{font-size:1em}@media(max-width:760px){.hero{padding-top:44px}.sound-button{top:8px;min-height:34px}}

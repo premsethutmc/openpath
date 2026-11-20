@@ -86,7 +86,7 @@ test('the bee demonstrates both visits without a tap, then the cutaway opens',as
 test('Tab focus survives autoplay and both Enter-activated landings',async t=>run(t,false,390,async(p,origin)=>{
  await p.emulateMedia({reducedMotion:'no-preference'});
  await p.goto(origin+'/flower-to-seed/');
- for(let i=0;i<6;i++)await p.keyboard.press('Tab');
+ for(let i=0;i<7;i++)await p.keyboard.press('Tab');
  const focused=()=>p.evaluate(()=>document.activeElement?.getAttribute('aria-label'));
  assert.equal(await focused(),'Left flower');
  await p.locator('#observation').filter({hasText:'Pollen reaches the other flower'}).waitFor();
@@ -99,4 +99,39 @@ test('Tab focus survives autoplay and both Enter-activated landings',async t=>ru
  await p.keyboard.press('Enter');
  await p.locator('#observation').filter({hasText:'Pollen reaches the other flower'}).waitFor();
  assert.equal(await focused(),'Right flower');
+}));
+test('garden sound is silent by default and plays, mutes and resumes on mobile taps',async t=>run(t,true,390,async(p,origin)=>{
+ await p.addInitScript(()=>{
+  const Original=window.AudioContext;
+  window.AudioContext=class extends Original{
+   constructor(){
+    super();
+    const probe=this.createAnalyser();
+    this.createGain=()=>{
+     const node=Original.prototype.createGain.call(this);
+     if(!window.gardenTestAudio){node.connect(probe);window.gardenTestAudio={ctx:this,probe};}
+     return node;
+    };
+   }
+  };
+ });
+ await p.goto(origin+'/flower-to-seed/');
+ const sound=b(p,'Garden sound');
+ assert.equal(await sound.getAttribute('aria-pressed'),'false');
+ assert.equal(await p.evaluate(()=>typeof window.gardenTestAudio),'undefined');
+ await sound.tap();
+ await p.waitForFunction(()=>{
+  const a=window.gardenTestAudio;
+  if(a?.ctx.state!=='running')return false;
+  const data=new Float32Array(a.probe.fftSize);
+  a.probe.getFloatTimeDomainData(data);
+  return data.some(x=>Math.abs(x)>.0008);
+ });
+ assert.equal(await sound.getAttribute('aria-pressed'),'true');
+ await sound.tap();
+ await p.waitForFunction(()=>window.gardenTestAudio?.ctx.state==='suspended');
+ assert.equal(await sound.getAttribute('aria-pressed'),'false');
+ await sound.tap();
+ await p.waitForFunction(()=>window.gardenTestAudio?.ctx.state==='running');
+ assert.equal(await sound.getAttribute('aria-pressed'),'true');
 }));

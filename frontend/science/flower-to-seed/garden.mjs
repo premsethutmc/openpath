@@ -1,6 +1,20 @@
 import {seeds,stages,pollenPath,cycle,disperse,crops,startBed,tend} from './model.mjs';
 import {garden,microscope,travel,bedArt} from './art.mjs';
+import {gardenSound} from './sound.mjs';
 const $=id=>document.getElementById(id);
+const soundtrack=gardenSound();
+let requestedSound=false,soundRevision=0;
+const soundButton=$('garden-sound');
+if(!soundtrack.supported)soundButton.hidden=true;
+soundButton.addEventListener('click',async()=>{
+ const request=++soundRevision;
+ requestedSound=!requestedSound;
+ const actual=await soundtrack.set(requestedSound);
+ if(request!==soundRevision)return;
+ requestedSound=actual;
+ soundButton.setAttribute('aria-pressed',String(actual));
+ $('sound-state').textContent=actual?'Sound on':'Sound off';
+});
 const points=[[166,174],[470,205]];
 const order=['garden','cutaway','travel','check'];
 const labels={
@@ -84,6 +98,7 @@ function move(next){
  next==='travel'?travelNote():bed.day===2?crops[bed.crop].shoot:bed.day===1?crops[bed.crop].root:bed.moist?'The soil is damp.':bed.planted?'It’s in the soil.':'';
 }
 function landOn(i){
+ soundtrack.effect('pollen');
  if(source===null){
    source=i;target=null;obs='Pollen sticks to the bee.';return;
  }
@@ -106,6 +121,7 @@ function cancelFlight(){
  clearTimeout(timer);cancelAnimationFrame(frame);demoSerial++;
 }
 function flyTo(i,ms,after){
+ soundtrack.effect('fly');
  const [x,y]=points[i],fx=x+24,fy=y-56;
  if(reduced.matches){putBee(fx,fy);landOn(i);draw();after?.();return;}
  const start=performance.now(),ox=bx,oy=by;
@@ -136,13 +152,14 @@ document.addEventListener('click',e=>{
  if(f){flyTo(Number(f[1]),390);return;}
  if(id==='bee'||id==='watch'){showFlight();return;}
  if(id==='advance'){move('cutaway');}
- else if(id==='crack'&&stage===3){opened=true;obs='The pod splits and scatters its seeds.';}
+ else if(id==='crack'&&stage===3){soundtrack.effect('pod');opened=true;obs='The pod splits and scatters its seeds.';}
  else if(id.startsWith('go-'))move(id.slice(3));
  else if(id.startsWith('seed-')){seed=id.slice(5);tool=null;success=null;obs='';}
  else if(id.startsWith('tool-')){tool=id.slice(5);success=disperse(seed,tool);obs=travelNote();}
  else if(id.startsWith('crop-')){const crop=id.slice(5);if(crop!==bed.crop){bed=startBed(crop);obs='';}}
  else if(id==='reset-bed'){bed=startBed(bed.crop);obs='';}
  else if(id==='plant'||id==='water'||id==='elapse'){
+   if(id==='water')soundtrack.effect('rain');
    bed=tend(bed,id==='elapse'?'time':id);
    obs=bed.day===2?crops[bed.crop].shoot:bed.day===1?crops[bed.crop].root:bed.moist?'Rain dampens the soil.':'It’s in the soil.';
  }
@@ -163,6 +180,7 @@ $('scene').addEventListener('pointerdown',e=>{
  cancelFlight();
  if(node.dataset.action!=='bee')return;
  drag={id:e.pointerId,x:e.clientX,y:e.clientY};
+ soundtrack.effect('fly');
  node.setPointerCapture(e.pointerId);
 });
 const realDrag=e=>Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>=5;
@@ -186,6 +204,6 @@ document.addEventListener('pointerup',e=>{
  draw();
 });
 document.addEventListener('pointercancel',e=>{if(drag?.id===e.pointerId){drag=null;draw();}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelFlight();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelFlight();void soundtrack.visibility();});
 draw();
 if(!reduced.matches)timer=setTimeout(showFlight,1400);
