@@ -25,6 +25,11 @@ const files = new Map([
   ['/separation-bench/model.mjs', ['separation-bench/model.mjs', 'text/javascript']],
   ['/separation-bench/bench.css', ['separation-bench/bench.css', 'text/css']],
   ['/separation-bench/bench.mjs', ['separation-bench/bench.mjs', 'text/javascript']],
+  ['/chemistry-lab/', ['chemistry-lab/index.html', 'text/html']],
+  ['/chemistry-lab/catalog.mjs', ['chemistry-lab/catalog.mjs', 'text/javascript']],
+  ['/chemistry-lab/lab-model.mjs', ['chemistry-lab/lab-model.mjs', 'text/javascript']],
+  ['/chemistry-lab/lab.mjs', ['chemistry-lab/lab.mjs', 'text/javascript']],
+  ['/chemistry-lab/lab.css', ['chemistry-lab/lab.css', 'text/css']],
 ]);
 
 export async function serveScience() {

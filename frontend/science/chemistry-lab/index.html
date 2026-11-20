@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Chemistry Lab · OpenPath</title><link rel="stylesheet" href="lab.css"><script type="module" src="lab.mjs"></script></head>
+<body><header><a href="../">← Science Labs</a><strong>OPENPATH</strong></header>
+<main><h1>Chemistry Lab</h1><div class="modes" aria-label="Lab stations"><button id="beaker" aria-pressed="true">Beaker</button><button id="crucible" aria-pressed="false">Metals</button></div>
+<section class="lab" aria-label="Experiment">
+  <p id="question"></p>
+  <div class="scene" aria-hidden="true"><div id="stream"></div><div id="vessel"><div id="liquid"></div><div id="solid"></div><div id="bubbles"><i></i><i></i><i></i><i></i></div></div><div id="flame">♨</div></div>
+  <p id="observation" role="status"></p>
+  <div class="measure"><label for="meter">Amount poured this turn</label><progress id="meter" max="5" value="0"></progress><output id="dose-value" for="meter">0.0 units</output></div>
+  <p id="pour-tip">Hold a jar to pour. Let go to stop. A tap or the keyboard adds a small amount.</p>
+  <div id="shelf" aria-label="Materials shelf"></div>
+  <div class="actions"><button id="heat" aria-pressed="false">Turn on heater</button><button id="reset">Clean vessel</button></div>
+  <p id="status" role="status"></p>
+</section>
+<details><summary>What is in the vessel?</summary><p id="evidence"></p></details>
+<footer>Virtual lab. Amounts are shown in simplified model units, not grams or a real experiment recipe.</footer>
+</main></body></html>
