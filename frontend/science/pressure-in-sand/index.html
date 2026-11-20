@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Pressure in the Sand · OpenPath</title>
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./lab.mjs"></script>
+</head>
+<body>
+  <header class="top"><span class="brand">OpenPath</span><span class="label">Science lab <span aria-hidden="true">/</span> 01</span></header>
+  <main>
+    <div class="intro">
+      <p class="eyebrow">Force &amp; pressure</p>
+      <h1>Pressure in the Sand</h1>
+      <p class="subtitle">What happens when the same brick stands on a smaller face?</p>
+    </div>
+    <ol class="steps" aria-label="Lab steps">
+      <li aria-current="step">1 <span>Explore</span></li><li>2 <span>Compare</span></li><li>3 <span>Apply</span></li>
+    </ol>
+
+    <section id="explore" aria-labelledby="explore-title">
+      <h2 id="explore-title" tabindex="-1">What mark will it leave?</h2>
+      <p>Drop an object, then lift it to see the sand.</p>
+      <figure class="tray">
+        <div class="scene" data-shape="brick" data-pose="hover" aria-hidden="true">
+          <div class="sand"><span class="mark"></span></div>
+          <div class="object"></div>
+        </div>
+        <figcaption id="explore-note" aria-live="polite">The brick is above the sand.</figcaption>
+      </figure>
+      <fieldset class="choice-row" id="objects">
+        <legend>Choose an object</legend>
+        <label><input type="radio" name="object" value="brick" checked><span>Brick</span></label>
+        <label><input type="radio" name="object" value="feather"><span>Feather</span></label>
+      </fieldset>
+      <div class="actions"><button type="button" id="drop">Drop brick</button><button type="button" id="lift" class="secondary" disabled>Lift it</button></div>
+      <p class="small">A drop adds a bump. This is for exploring, not measuring pressure.</p>
+      <button type="button" id="start" class="thin">Go to the fair test <span aria-hidden="true">→</span></button>
+    </section>
+
+    <section id="compare" aria-labelledby="compare-title" hidden>
+      <h2 id="compare-title" tabindex="-1">Same brick. Two faces.</h2>
+      <p>Lower it gently each time. Only the area touching the sand changes.</p>
+      <form id="prediction-form">
+        <fieldset class="choice-row">
+          <legend>Predict: which face puts more pressure on the sand?</legend>
+          <label><input type="radio" name="prediction" value="wide" required><span>Wide face</span></label>
+          <label><input type="radio" name="prediction" value="narrow"><span>Narrow face</span></label>
+          <label><input type="radio" name="prediction" value="same"><span>Same</span></label>
+        </fieldset>
+        <button type="submit">Lock in my prediction</button>
+      </form>
+      <div id="trials" hidden>
+        <p id="trial-prompt" tabindex="-1">Place the brick on each face. The sand resets between trials.</p>
+        <div class="comparison">
+          <figure class="tray trial" data-face="wide">
+            <div class="scene" data-shape="wide" data-pose="hover" aria-hidden="true"><div class="sand"><span class="mark"></span></div><div class="object"></div></div>
+            <figcaption>Wide face</figcaption>
+            <button type="button" class="place" data-face="wide" aria-label="Place on wide face">Place</button>
+            <p class="measurement" aria-live="polite"></p>
+          </figure>
+          <figure class="tray trial" data-face="narrow">
+            <div class="scene" data-shape="narrow" data-pose="hover" aria-hidden="true"><div class="sand"><span class="mark"></span></div><div class="object"></div></div>
+            <figcaption>Narrow face</figcaption>
+            <button type="button" class="place" data-face="narrow" aria-label="Place on narrow face">Place</button>
+            <p class="measurement" aria-live="polite"></p>
+          </figure>
+        </div>
+        <div class="insight" id="comparison-result" hidden>
+          <h3>Half the area, twice the pressure.</h3>
+          <p id="prediction-result" aria-live="polite"></p>
+          <p><strong>Pressure = force ÷ contact area.</strong> Both faces carry the same 12 N. The imprint illustrates the idea; its depth isn't a measurement.</p>
+          <button type="button" id="apply-action">Try a new problem <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply" aria-labelledby="apply-title" hidden>
+      <h2 id="apply-title" tabindex="-1">A stand on sand</h2>
+      <p>You need to put a heavy drinks stand on a sandy fairground. Both designs hold the same load.</p>
+      <div class="stand-pair" aria-hidden="true">
+        <div><span class="stand wide"></span><span>Wide feet</span></div>
+        <div><span class="stand narrow"></span><span>Narrow feet</span></div>
+      </div>
+      <form id="stand-form">
+        <fieldset class="choice-row">
+          <legend>Which feet would you choose to put less pressure on the sand?</legend>
+          <label><input type="radio" name="foot" value="wide" required><span>Wide feet</span></label>
+          <label><input type="radio" name="foot" value="narrow"><span>Narrow feet</span></label>
+        </fieldset>
+        <fieldset class="choice-row reasons">
+          <legend>Why?</legend>
+          <label><input type="radio" name="reason" value="weight" required><span>The stand pushes down with less force.</span></label>
+          <label><input type="radio" name="reason" value="spread"><span>The same force is spread over a larger area.</span></label>
+          <label><input type="radio" name="reason" value="depth"><span>The feet are taller, so the sand feels less of the load.</span></label>
+        </fieldset>
+        <button type="submit">Check my choice</button>
+      </form>
+      <div id="transfer-feedback" class="insight" tabindex="-1" hidden>
+        <h3 id="feedback-heading"></h3><p id="feedback-detail"></p>
+        <div class="actions">
+          <button type="button" id="retry" hidden>Try the problem again</button>
+          <button type="button" class="secondary" id="restart">Restart the lab</button>
+        </div>
+      </div>
+    </section>
+    <noscript><p>Turn on JavaScript to use this offline-ready simulation.</p></noscript>
+  </main>
+  <footer>Practice lab · Nothing is saved or sent.</footer>
+</body>
+</html>

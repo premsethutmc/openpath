@@ -1,0 +1,39 @@
+name: Science pressure lab
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/science/pressure-in-sand/**'
+      - 'frontend/e2e/science-pressure.test.mjs'
+      - '.github/workflows/science-pressure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  phone:
+    name: Pressure Lab unit and 390px browser checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: node --test science/pressure-in-sand/model.test.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node --test e2e/science-pressure.test.mjs
+        env:
+          E2E_SHOTS: test-results/science
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: pressure-lab-phone
+          path: frontend/test-results/science
+          if-no-files-found: ignore
