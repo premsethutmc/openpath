@@ -59,18 +59,23 @@ export function FirstWordsView({ view, said, guide, placedAt, onHear, onTap, onL
           {said}
         </p>
       )}
+      {view.text && view.phase === "ask" && (
+        <p className="first-sentence" data-sentence>
+          {view.text}
+        </p>
+      )}
       {view.build && (
         <>
           <p className="first-big" aria-hidden="true">
             {view.build.picture}
           </p>
-          <p className="first-word" aria-label="The word so far" data-placed={view.build.placed}>
+          <p className={view.build.words ? "first-word first-built" : "first-word"} aria-label={view.build.words ? "The sentence so far" : "The word so far"} data-placed={view.build.placed}>
             {view.build.placed || " "}
           </p>
           {!right && (
-            <p className="first-tiles" role="group" aria-label="Letters">
+            <p className="first-tiles" role="group" aria-label={view.build.words ? "Words" : "Letters"}>
               {view.build.tiles.map((t, i) => (
-                <button key={i} type="button" className="first-tile" disabled={t.used} aria-label={`Letter ${t.letter}`} onClick={() => onLetter(i)}>
+                <button key={i} type="button" className={view.build!.words ? "first-tile first-word-tile" : "first-tile"} disabled={t.used} aria-label={view.build!.words ? `Word ${t.letter}` : `Letter ${t.letter}`} onClick={() => onLetter(i)}>
                   {t.letter}
                 </button>
               ))}
