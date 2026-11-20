@@ -156,3 +156,34 @@ test("WC-11 a slip points to the Grammar in use topic that practises it", async 
   assert.deepEqual(t("we went home", "capital"), ["capitals"]);
   for (const note of [t("She have went home.", "grammar"), t("I listen music.", "grammar")]) for (const topic of note ?? []) assert.ok(GRAMMAR.topics.some((x) => x.id === topic), topic);
 });
+
+test("WC-12 words that sound alike, only where the wrong one cannot fit; and none fires on our own reading and listening texts", async () => {
+  const wrong: [string, string][] = [
+    ["They lost there books.", "“their books”"], ["They're house is big.", "“their house”"], ["Their going to win.", "“they're going to win”"],
+    ["Your welcome.", "“you're welcome”"], ["Your the best.", "“you're the best”"], ["The dog wagged it's tail.", "“its tail”"], ["Who's turn is it?", "“whose turn”"],
+    ["Whose coming with me?", "“who's coming”"], ["It was to late.", "“too late”"], ["Were is my bag?", "“Where is”"], ["We where late.", "were”"],
+    ["Please switch of the fan.", "“switch off”"], ["Do not loose your pen.", "“not lose”"], ["We are loosing the game.", "“losing”"],
+    ["I don't no the answer.", "know”"], ["We ate and than we slept.", "“and then”"], ["Please be quite.", "“be quiet”"],
+    ["Take a deep breathe.", "breath” (the noun)"], ["I could not breath.", "breathe” (the verb)"], ["I don't know weather to go.", "whether” (if)"],
+  ];
+  for (const [text, part] of wrong) assert.ok(note(text, "grammar")?.text.includes(part), `${text} → ${note(text, "grammar")?.text}`);
+  const fine = [
+    "Are there books in the library? Is there school tomorrow? There are children there.", "Their very own house. Their late father was kind. Your right hand. Their going to the fair was fun. Thank you for your welcome.",
+    "It's young people who help. It's a cat. Its tail is long.", "Who did you give them to? I went to school. She came to. Mum asked me to.",
+    "The fall of the city. A turn of phrase. Take off the lid. The roof fell off.", "The knot is loose. It is quite good. Be quite sure.",
+    "I have no money. We had no idea. There is no answer.", "The weather was hot. Whether or not you come, we go.", "Breathe in. Hold your breath.",
+  ];
+  for (const text of fine) assert.equal(note(text, "grammar"), undefined, `${text} → ${note(text, "grammar")?.text}`);
+  // the prose we wrote to be read or heard never sets one off
+  const { SLIPS } = await import("./slips.ts");
+  const { readdirSync, readFileSync, statSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const root = new URL("../../../../../content/english/", import.meta.url).pathname;
+  const texts: string[] = [];
+  const grab = (v: unknown): void => { if (typeof v === "string") { if (v.includes(" ")) texts.push(v.replace(/’/g, "'")); } else if (Array.isArray(v)) v.forEach(grab); else if (v && typeof v === "object") Object.values(v).forEach(grab); };
+  const walk = (dir: string) => { for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) walk(p); else if (f.endsWith(".json")) grab(JSON.parse(readFileSync(p, "utf8"))); } };
+  for (const dir of ["reading", "listening", "dictation", "guided", "first"]) walk(join(root, dir));
+  assert.ok(texts.length > 1000, `texts: ${texts.length}`);
+  const hits = SLIPS.filter((x) => x.topic === "confusables").flatMap((x) => texts.flatMap((t) => [...t.matchAll(new RegExp(x.re.source, x.re.flags))].map((m) => `${m[0]} ← ${t.slice(0, 80)}`)));
+  assert.deepEqual(hits, []);
+});

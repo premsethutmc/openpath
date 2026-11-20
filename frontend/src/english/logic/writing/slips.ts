@@ -159,6 +159,27 @@ export const SLIPS: { topic?: string; agree?: boolean; re: RegExp; say: (m: RegE
   { topic: "prepositions", re: /\b(depend|depends|depended) (of|from)\b/gi, say: (m) => `“${m[1]} ${m[2]}” should be “${m[1]} on”` },
   { topic: "comparison", re: /\b(prefer|prefers|preferred) (?!to\b)(?:(?!rather\b)[a-z]+ ){1,2}than\b/gi, say: () => "after “prefer”, use “to”, not “than”: I prefer tea to coffee" },
   { topic: "confusables", re: /\b(better|bigger|smaller|faster|taller|older|younger|more|less|worse|higher|longer|stronger|easier|cheaper) then (me|him|her|us|them|mine|yours|his|hers|ours|theirs|before|ever|usual)\b/gi, say: (m) => `“${m[1]} then” should be “${m[1]} than”` },
+  // words that sound alike: only where the next or last word makes the wrong one impossible
+  { topic: "confusables", re: /(?<!\b(?:is|are|was|were|isn't|aren't|wasn't|weren't) )\bthere (mother|father|parents|friends?|teachers?|house|houses|home|homes|names?|own|children|class|books?|bags?|dog|cat|car|school|village|shop|garden|family|grandmother|grandfather|team)\b(?!['’-])/gi, say: (m) => `“there ${m[1]}” should be “their ${m[1]}” (belonging to them)` },
+  { topic: "confusables", re: /\b(?:they're|they’re) (mother|father|parents|friends?|teachers?|house|home|names?|own|children|class|books?|bags?|dog|car|school|family|team)\b/gi, say: (m) => `“they're ${m[1]}” should be “their ${m[1]}”` },
+  { topic: "confusables", re: /\btheir (not|(?:going|coming) to (?:be|win|get|have|see|make|fail|pass|like|love|enjoy|play|eat|come|go))\b/gi, say: (m) => `“their ${m[1]}” should be “they're ${m[1]}” (they are)` },
+  { topic: "confusables", re: /(?<!\b(?:for|of|to|with|warm|kind) )\byour ((?:going|coming) to (?:be|win|get|have|see|make|fail|pass|like|love|enjoy|play|eat|come|go)|welcome(?=[.!,])|the best\b)/gi, say: (m) => `“your ${m[1]}” should be “you're ${m[1]}” (you are)` },
+  { topic: "confusables", re: /\b(?:it's|it’s) (tail|legs|wings|own|name|colou?r|eyes|leaves|body|head|fur|nest|mouth|shape|roof|walls|door)\b/gi, say: (m) => `“it's ${m[1]}” should be “its ${m[1]}” (belonging to it)` },
+  { topic: "confusables", re: /\b(?:who's|who’s) (book|bag|pen|pencil|turn|house|idea|fault|car|dog|phone|name|shoes)\b/gi, say: (m) => `“who's ${m[1]}” should be “whose ${m[1]}”` },
+  { topic: "confusables", re: /\bwhose (going|coming|there|that|your|calling)\b/gi, say: (m) => `“whose ${m[1]}” should be “who's ${m[1]}” (who is)` },
+  { topic: "confusables", re: /\b(is|was|are|were|am|got|getting|felt|feel|feels|seems?|looks?|too) to (much|many|late|early|big|small|hot|cold|hard|difficult|easy|long|short|far|fast|slow|tired|young|old|heavy|loud)\b/gi, say: (m) => `“to ${m[2]}” should be “too ${m[2]}” (more than enough)` },
+  { topic: "confusables", re: /(?<=^|[.?!]\s+["“‘']?)Were (is|are|do|does|did|can|will|should|could|have|has)\b/g, say: (m) => `“Were ${m[1]}” should be “Where ${m[1]}” (which place)` },
+  { topic: "confusables", re: new RegExp(`${CLAUSE}(I|we|they|you) where\\b`, "gi"), say: (m) => `“${m[1]} where” should be “${m[1]} were”` },
+  { topic: "confusables", re: /(?<!\b(?:the|a|this|every|that) )\b(switch|switched|turn|turned|take|took|jump|jumped|fall|fell|log|logged|get|got) of (the|his|her|my|their|our|your|it|its)\b/gi, say: (m) => `“${m[1]} of” should be “${m[1]} off”` },
+  { topic: "confusables", re: /\b(to|will|might|may|can|could|would|not|don't|don’t|didn't|didn’t|never) loose\b/gi, say: (m) => `“${m[1]} loose” should be “${m[1]} lose” (loose means not tight)` },
+  { topic: "confusables", re: /\bloosing\b/gi, say: () => "“loosing” should be “losing”" },
+  { topic: "confusables", re: /\b(I|we|don't|don’t|didn't|didn’t|doesn't|doesn’t|do not|did not) no (that|how|what|where|why|who|when|if|about|him|her|it|them|anything|everything|the answer)\b/gi, say: (m) => `“${m[1]} no” should be “${m[1]} know”` },
+  { topic: "confusables", re: /\band than\b/gi, say: () => "“and than” should be “and then” (next)" },
+  { topic: "confusables", re: /\b(be|keep|kept|stay|stayed|very|so) quite(?=[.,!;]| and\b| please\b)/gi, say: (m) => `“${m[1]} quite” should be “${m[1]} quiet” (no noise)` },
+  { topic: "confusables", re: /\b(a deep|my|his|her|our|their|a) breathe\b/gi, say: (m) => `“${m[1]} breathe” should be “${m[1]} breath” (the noun)` },
+  { topic: "confusables", re: /\b(to|can|could|cannot|not|can't|can’t|couldn't|couldn’t) breath\b/gi, say: (m) => `“${m[1]} breath” should be “${m[1]} breathe” (the verb)` },
+  { topic: "confusables", re: /\bweather or not\b/gi, say: () => "“weather or not” should be “whether or not”" },
+  { topic: "confusables", re: /\b(know|knew|asked|ask|wonder|wondered|decide|decided|sure|not sure) weather (I|we|he|she|they|it|to|or)\b/gi, say: (m) => `“${m[1]} weather” should be “${m[1]} whether” (if)` },
 ];
 /** Words after which "a" is right although they start with a vowel letter, and the other way round. */
 export const A_OK = /^(one|once|uni|use|usu|eu|ew|ut[ei])/i;
