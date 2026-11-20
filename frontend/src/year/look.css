@@ -286,3 +286,7 @@ details.working summary, .hint { color: var(--ink); }
   .figure .fold-h { animation: none; transform: scaleY(-1); }
   .figure .fold-mark { animation: none; opacity: 1; }
 }
+
+/* taught@1: the checklist under "What OpenPath did" is a plain list, not cards */
+.topic-rows .taught-checks { margin: 6px 0 0; padding-left: 18px; }
+.topic-rows .taught-checks li { border: 0; padding: 2px 0; background: none; box-shadow: none; border-radius: 0; list-style: disc; }

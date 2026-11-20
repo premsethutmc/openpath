@@ -558,3 +558,26 @@ Going back to an earlier skill the child is missing (prereq-after-own@1) was alr
 The rule is in `workTogether` (`packages/learning/src/intervention.ts`); the limits are the data `TOGETHER`. A skill whose
 questions have no typed steps yet has no walk-through and stops as before. Tests: `frontend/src/learning/together.test.ts`.
 Screen: `/year/#try=<question id>&together` opens a question the way a walk-through does.
+
+## taught@1 and own-it@1: the parent page says how well we taught each skill and how sure we are; the child is never sent off
+
+Prem's rule: the product marks its own teaching and shows confidence on the parent page, so the parent takes ownership; it does
+not hand the child to "a teacher or parent".
+
+**Two marks per skill** (`packages/learning/src/taught.ts`, shown by `frontend/src/year/TaughtAndSure.tsx` on the parent page):
+
+1. *How well OpenPath taught it*, against its own checklist: shown how to do it; different explanations tried (two, or all the
+   skill has); the skills it builds on checked; worked through together step by step (only where the skill has typed steps);
+   practised on more than one day. **Fully taught** = every step that applies was done; **Partly taught**; **Not started**.
+   Once the child is sure or getting there, steps not reached are "not needed". It is OpenPath's checklist, not a teacher's review,
+   and the page says so.
+2. *How sure we are*, from the engine's own evidence: **Sure** (right alone and still right a week later), **Getting there** (right
+   alone, later check to come), **Not yet** (mostly wrong alone, right only with help, or wrong when checked later), **Too early to
+   say** (fewer than 5 answers). A level with its reason in counts, never a percentage.
+
+**Fully taught and Not yet** is listed first as "Your turn: sit down with … on this one", with what to do (one question out loud,
+each step said; where they stop is the step to work on).
+
+**The child** (family site, KID build): when a skill stops for now, the sentences sending them to "a teacher or parent" are dropped
+and the child reads "We'll come back to this one. Carry on with the next." (`ownIt`). The engine's stops are unchanged.
+Tests: `frontend/src/learning/taught.test.ts`.
