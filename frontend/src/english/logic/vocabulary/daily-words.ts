@@ -7,8 +7,11 @@
  * the gap?". A wrong answer shows the right one and the question comes back once before the sitting ends.
  *
  * A word answered right first time moves on a box and comes back after 1, 3 and then 7 days; after that it counts
- * as learnt. A word missed goes back to the first box. "I know this word" on a new word's card skips it for good,
- * and a learner who already knows most of a level is moved up.
+ * as learnt. A word missed goes back to the first box. "I know this word" on a new word's card skips it for good.
+ * A learner moves up a level once it runs out, once they have said they know most of it, or once ten of its words
+ * are done (known or answered) with no more than one missed: a learner who gets it all right need not go through
+ * all ninety. A learner who has missed half of ten or more words at a level goes back one, until that level is
+ * going well. Words left behind on a lower level are taught later, once the levels above run out.
  *
  * The level is one of the word check's eight bands: the band above the last one the word check found known, or a
  * start by age. Practice-only: nothing here is evidence for the engine.
@@ -22,6 +25,8 @@ export const OPTIONS = 3;
 export const GAPS = [0, 1, 3, 7];
 export const LEARNT = 4;
 export const BANDS = 8;
+/** Words of a level done (known, or answered in a finished sitting) before a learner can move up by getting them right. */
+export const MOVE_UP_AFTER = 10;
 
 export type Pos = "n" | "v" | "adj";
 export interface DailyWord {
@@ -156,14 +161,30 @@ export function dueWords(p: Progress, now: string, dayOf: DayOf = utcDay): WordS
     .sort((a, b) => waited(b) - waited(a) || (a.word < b.word ? -1 : 1));
 }
 
-/** The level to teach at: the base level, moved up past any level the learner has said they mostly know. */
+/** How a level is going: words done there (known, or answered in a finished sitting) and how many of them were missed. */
+function going(c: DailyWords, p: Progress, band: number) {
+  const known = [...p.known.values()].filter((b) => b === band).length;
+  const met = [...p.words.values()].filter((w) => w.band === band);
+  const done = met.filter((w) => w.resultAt !== null);
+  const missed = done.filter((w) => w.misses > 0).length;
+  const left = c.words.filter((w) => w.band === band && !p.known.has(w.word) && !p.words.has(w.word)).length;
+  const n = known + done.length;
+  return { known, met: met.length, left, breezing: n >= MOVE_UP_AFTER && missed * MOVE_UP_AFTER <= n, struggling: done.length >= MOVE_UP_AFTER && missed * 2 >= done.length };
+}
+
+/**
+ * The level to teach at: the base level, moved up past any level the learner has said they mostly know or has got
+ * right, then down one if half the words at that level were missed and the level below is not yet done well.
+ */
 export function teachBand(c: DailyWords, p: Progress, base: number): number {
   let band = Math.min(BANDS, Math.max(1, base));
   for (; band < BANDS; band++) {
-    const known = [...p.known.values()].filter((b) => b === band).length;
-    const met = [...p.words.values()].filter((w) => w.band === band).length;
-    const left = c.words.filter((w) => w.band === band && !p.known.has(w.word) && !p.words.has(w.word)).length;
-    if (left > 0 && !(known >= NEW_PER_DAY && known > met)) break;
+    const g = going(c, p, band);
+    if (g.left > 0 && !(g.known >= NEW_PER_DAY && g.known > g.met) && !g.breezing) break;
+  }
+  if (band > 1 && going(c, p, band).struggling) {
+    const below = going(c, p, band - 1);
+    if (below.left > 0 && !below.breezing) band--;
   }
   return band;
 }

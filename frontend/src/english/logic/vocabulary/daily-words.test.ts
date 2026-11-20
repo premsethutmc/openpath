@@ -148,6 +148,27 @@ test("NW-7 'I know this word' skips it for good, brings another, and moves a lea
   assert.deepEqual([baseBand(null, "early"), baseBand(null, "school"), baseBand(null, "older"), baseBand(4, "early"), baseBand(8, null), baseBand(0, null)], [1, 2, 3, 5, 8, 1]);
 });
 
+test("NW-11 a learner who gets a level's words right moves up after ten, without going through all ninety", () => {
+  let h: Dated[] = [];
+  for (let d = 0; d < 2; d++) h = sit(h, day(d)).history;
+  assert.equal(teachBand(WORDS, progress(h), 3), 4, "ten right: up a level");
+  const r = sit(h, day(2));
+  assert.ok(r.met.every((w) => byWord.get(w)!.band === 4), "new words now come from the level above");
+  // two of ten missed: stays
+  let m: Dated[] = [];
+  for (let d = 0; d < 2; d++) m = sit(m, day(d), { miss: freshWords(WORDS, progress(m), 3).slice(0, 1).map((w) => w.word) }).history;
+  assert.equal(teachBand(WORDS, progress(m), 3), 3, "two missed: more practice at this level");
+  // one missed in ten: up
+  let o: Dated[] = sit([], day(0), { miss: freshWords(WORDS, progress([]), 3).slice(0, 1).map((w) => w.word) }).history;
+  o = sit(o, day(1)).history;
+  assert.equal(teachBand(WORDS, progress(o), 3), 4);
+  // half of ten missed: back one level until it goes well
+  let b: Dated[] = [];
+  for (let d = 0; d < 2; d++) b = sit(b, day(d), { miss: freshWords(WORDS, progress(b), 3).slice(0, 3).map((w) => w.word) }).history;
+  assert.equal(teachBand(WORDS, progress(b), 3), 2, "struggling: the level below");
+  assert.equal(teachBand(WORDS, progress(b), 1), 1, "never below level 1");
+});
+
 test("NW-8 stored on the learner's record without touching the engine", async () => {
   const c = loadContent({ mode: "development" });
   const repo = new MemoryRepo();

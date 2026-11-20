@@ -40,10 +40,16 @@ learner to First words.
 New words were written for OpenPath, rule-checked and screened; every gap question whose choices changed (410) was
 read, and 49 look-alike choices that could also fit a gap were kept out.
 
+## Fixed: Words level follows the learner (words-level@2)
+
+Words used to move up only when a level ran out, so an average learner was taught words where under half was right
+in 55% of sittings, and a learner placed low had to go through all ninety words first. Now a level is passed once
+ten of its words are done with at most one missed, and a learner who misses half of ten goes back one level until it
+goes well. Sittings with under half right: average 55% → 12%, careless 54% → 32%, early 54% → 24%; strong learners
+end the month at the level of their ability (7.0) rather than the top (8.0). Level flips: 0.1 a month at most.
+
 ## Found, not fixed
 
-- **Words still climbs by running out**, now about one level every eighteen days (90 words a level, five a day).
-  Missed words come back for review.
 - **Listen and answer still repeats** for a learner who hears a passage every day: five passages a level.
 - **Levels go up and down often** (grammar about ten times a month for a learner between two levels). This is how a
   staircase finds the edge of what a learner can do, so it is left as it is; the screen shows the level of the day.
