@@ -9,11 +9,12 @@
 [data-moisture="dry"] .soil { fill: #cc9969; }
 [data-moisture="moist"] .soil { fill: #7a4c35; }
 [data-moisture="waterlogged"] .soil { fill: #51322a; }
-.bean, .root, .shoot, .cracks, .puddle { opacity: 0; }
-[data-stage="seed"] .bean, [data-stage="root"] .bean, [data-stage="sprout"] .bean,
-[data-stage="root"] .root, [data-stage="sprout"] .root, [data-stage="sprout"] .shoot,
+.bean, .root, .shoot, .bean-on-soil, .cracks, .puddle { opacity: 0; }
+[data-stage="uncovered"] .bean-on-soil, [data-window="open"] .bean { opacity: 1; }
+[data-window="open"] .soil-window, [data-window="open"] .pot-ring { opacity: 0; }
+[data-window="open"][data-stage="root"] .root-short, [data-window="open"][data-stage="sprout"] .root-long, [data-stage="sprout"] .shoot,
 [data-moisture="dry"] .cracks, [data-moisture="waterlogged"] .puddle { opacity: 1; }
-@media (prefers-reduced-motion: no-preference) { .bean, .root, .shoot, .cracks, .puddle { transition: opacity 240ms ease; } .soil { transition: fill 210ms ease; } }
+@media (prefers-reduced-motion: no-preference) { .bean, .root, .shoot, .bean-on-soil, .soil-window, .pot-ring, .cracks, .puddle { transition: opacity 240ms ease; } .soil { transition: fill 210ms ease; } }
 .soil-note { margin-top: 9px; font-weight: 700; color: var(--green); }
 .next { margin-top: 14px; }
 .model-note { margin-bottom: 0; }
@@ -24,3 +25,7 @@ details p { margin: 2px 0 6px; }
 .pot-observation { flex: 0 0 100%; margin: 0 0 3px; border-radius: 8px; padding: 8px 10px; border: 1px solid #ccac8b; }
 .crumbly { color: #3f2b1b; background: #f3e0ca; }
 .damp { color: #352117; background: #e6cdb8; }
+
+.challenge { margin-top: 18px; }
+#care [aria-pressed="true"] { color: #fff; background: var(--green); }
+#save-status { margin-bottom: 0; }

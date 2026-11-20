@@ -89,7 +89,11 @@ test('keyboard-only controls can skip exploration and complete comparison', asyn
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   try {
     await page.goto(origin + '/pressure-in-sand/');
-    for (let i = 0; i < 4; i++) await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    assert.match(await page.evaluate(() => document.activeElement.textContent), /All science labs/);
+    for (let i = 0; i < 6 && await page.evaluate(() => document.activeElement.id) !== 'start'; i++) {
+      await page.keyboard.press('Tab');
+    }
     assert.equal(await page.evaluate(() => document.activeElement.id), 'start');
     await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(() => document.activeElement.id), 'compare-title');
