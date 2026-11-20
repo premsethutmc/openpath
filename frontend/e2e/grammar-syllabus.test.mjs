@@ -51,8 +51,21 @@ async function start(name) {
   return { context, page, errors, foreign, fits };
 }
 
+/** A card that teaches a topic the first time it comes: try its question, then go on. Returns whether there was one. */
+async function pastCard(page) {
+  await page.locator('main[data-phase="ask"], main[data-phase="learn"]').first().waitFor();
+  if (!(await page.locator('main[data-phase="learn"]').count())) return false;
+  const card = page.locator(".grammar-learn");
+  await card.getByRole("heading", { name: /^New: / }).waitFor();
+  await card.locator(".choice").first().click();
+  await card.getByRole("status").waitFor();
+  await card.getByRole("button", { name: "Now practise" }).click();
+  return true;
+}
+
 /** Answer the sentence on screen; `wrong` gives a wrong answer. Returns the item. */
 async function answer(page, wrong) {
+  await pastCard(page);
   const main = page.locator('main[data-phase="ask"]');
   await main.waitFor();
   const it = ITEMS.get(await main.getAttribute("data-item"));
@@ -94,11 +107,13 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
   await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
   await page.getByText("Level 3: Apostrophes, verbs and joining").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
+  await pastCard(page);
   const missed = { fix: false, build: false, spot: false, choose: false };
   const shots = { fix: false, build: false, spot: false, choose: false };
   let right = 0;
   for (let i = 1; i <= 8; i++) {
     await page.getByText(`Sentence ${i} of 8`, { exact: false }).waitFor();
+    await pastCard(page);
     const kind = await page.locator('main[data-phase="ask"]').getAttribute("data-kind");
     if (!shots[kind]) (shots[kind] = true), await fits(), await shot(page, `1-${kind}`);
     const wrong = !missed[kind];
@@ -185,6 +200,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("button", { name: /Practise RW9:/ }).click();
   await page.getByText("Topics: Sentences in order").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
+  await pastCard(page);
   await page.getByText("Tap the sentences in the order in which things happen.", { exact: false }).waitFor();
   await fits();
   await shot(page, "4c-order");
@@ -228,6 +244,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   // alphabetical order: words as tiles, with its own instruction
   await page.getByRole("button", { name: /Practise GV6:/ }).click();
   await page.getByRole("button", { name: "Start", exact: true }).click();
+  await pastCard(page);
   await page.getByText("Tap the words in alphabetical order.", { exact: false }).waitFor();
   assert.equal((await answer(page, false)).topic, "alphabetical");
   await page.getByRole("button", { name: "← Stop" }).click();
@@ -252,7 +269,12 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByText("Topics: Pictures in story order, and how people feel").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   const pics = new Set();
+  // the first time, a card teaches the topic before its first sentence
+  await page.locator('main[data-phase="learn"]').waitFor();
+  await shot(page, "5-pictures-card");
+  await fits();
   for (let i = 0; i < 8 && pics.size < 2; i++) {
+    await pastCard(page);
     const next = ITEMS.get(await page.locator("main[data-item]").getAttribute("data-item"));
     if (next.kind === "build") await page.getByText("Put the pictures in the order of the story.", { exact: false }).waitFor();
     if (!pics.has(next.kind)) await shot(page, `5-pictures-${next.kind}`);

@@ -5,12 +5,14 @@
  *   fix    a sentence has one wrong word: tap it, then type the right word;
  *   build  the words of a sentence are given as tiles (sometimes with one or two that do not belong): put them in order.
  *
- * Every answer gets the right sentence and a one-line rule. A sitting is eight sentences at the learner's level;
+ * The first time a learner meets a topic, a short card comes first (content/english/grammar/learn.json): the rule,
+ * two examples and one question to try, not scored. Every answer gets the right sentence and a one-line rule. A sitting is eight sentences at the learner's level;
  * six or more right moves the level up, three or fewer moves it down. Sentences got wrong return in a later sitting.
  * A sitting can also be asked for particular topics (the syllabus screen does this); such a sitting does not move
  * the level. Scoring is by code. Practice-only: nothing here is evidence for the engine.
  */
 import itemsJson from "../../../../../content/english/grammar/in-use.json";
+import learnJson from "../../../../../content/english/grammar/learn.json";
 import { SCALE, rescale, startFor } from "../scale.ts";
 
 export const SITTING_SIZE = 8;
@@ -154,8 +156,41 @@ export function checkFix(item: GrammarItem, tapped: number, typed: string): bool
 /** Is a built sentence right? The tiles chosen, in order, must make the sentence. */
 export const checkBuild = (item: GrammarItem, chosen: readonly string[]): boolean => tidy(chosen.join(" ")) === tidy(item.sentence);
 
+/** A short card that teaches a topic before its first sentence. */
+export interface LearnCard {
+  topic: string;
+  rule: string;
+  examples: string[];
+  try: { question: string; right: string; wrong: string[] };
+}
+export const LEARN: LearnCard[] = (learnJson as { cards: LearnCard[] }).cards;
+
+
+export function learnProblems(cards: readonly LearnCard[], g: GrammarUse): string[] {
+  const out: string[] = [];
+  const topics = new Set(g.topics.map((t) => t.id));
+  for (const t of topics) if (!cards.some((c) => c.topic === t)) out.push(`${t}: no learning card`);
+  for (const c of cards) {
+    if (!topics.has(c.topic)) out.push(`${c.topic}: a card for a topic that does not exist`);
+    if (cards.filter((x) => x.topic === c.topic).length > 1) out.push(`${c.topic}: two cards`);
+    if (!c.rule.trim() || c.rule.split(" ").length > 35) out.push(`${c.topic}: the rule is one short line (up to 35 words)`);
+    if (c.examples.length !== 2 || c.examples.some((e) => !e.trim())) out.push(`${c.topic}: two examples`);
+    if (!c.try.question.trim() || !c.try.right.trim() || c.try.wrong.length !== 2 || new Set([c.try.right, ...c.try.wrong]).size !== 3) out.push(`${c.topic}: a question with one right answer and two different wrong ones`);
+  }
+  return out;
+}
+
+{
+  const problems = learnProblems(LEARN, GRAMMAR);
+  if (problems.length) throw new Error(`grammar cards: ${problems.slice(0, 5).join("; ")}`);
+}
+
+/** The choices of a card's question, in a fixed order that does not put the right one first every time. */
+export const tryChoices = (c: LearnCard): string[] => hashOrder([c.try.right, ...c.try.wrong], (x) => `learn|${c.topic}|${x}`);
+
 export type GrammarRecord =
   | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
+  | { type: "learn"; sitting: string; topic: string; tried: boolean }
   | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
   | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
@@ -231,7 +266,7 @@ export function grammarSummary(g: GrammarUse, records: readonly GrammarRecord[])
 }
 
 export interface GrammarView {
-  phase: "ask" | "feedback" | "done";
+  phase: "learn" | "ask" | "feedback" | "done";
   index: number;
   total: number;
   level: number;
@@ -244,6 +279,8 @@ export interface GrammarView {
   choose: { sentence: string; question: string; options: string[] } | null;
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
+  /** learn: the card for a topic met for the first time; `tried` once its question is answered. */
+  learn?: { rule: string; examples: string[]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null } | null;
 }
 
 /** One sitting. Every step appends records; the caller stores what `take()` returns. */
@@ -258,6 +295,9 @@ export class GrammarSitting {
   private index = 0;
   private last: GrammarView["feedback"] = null;
   private ended = false;
+  /** Topics the learner has had a card for, before and during this sitting. */
+  private readonly learnt: Set<string>;
+  private tried: { chosen: number; right: boolean } | null = null;
   readonly level: number;
 
   constructor(content: GrammarUse, level: number, history: readonly GrammarRecord[], topics?: readonly string[]) {
@@ -267,6 +307,7 @@ export class GrammarSitting {
     this.topics = topics?.length ? [...topics] : undefined;
     this.sitting = `g${history.filter((r) => r.type === "start").length + 1}`;
     this.items = pick(content, level, history, this.topics);
+    this.learnt = new Set(history.flatMap((r) => (r.type === "learn" ? [r.topic] : [])));
     this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE, ...(this.topics ? { topics: this.topics } : {}) });
   }
 
@@ -285,10 +326,35 @@ export class GrammarSitting {
     this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null };
   }
 
+  /** The card due before the current sentence: its topic has never had one. */
+  private card(): LearnCard | null {
+    const it = this.items[this.index];
+    if (!it || this.last || this.learnt.has(it.topic)) return null;
+    return LEARN.find((c) => c.topic === it.topic) ?? null;
+  }
+
+  /** Try the card's question: shows the right answer; it is not scored and does not move the level. */
+  tryCard(chosen: number): void {
+    const c = this.card();
+    if (!c || this.tried) return;
+    const options = tryChoices(c);
+    if (!Number.isInteger(chosen) || chosen < 0 || chosen >= options.length) return;
+    this.tried = { chosen, right: options[chosen] === c.try.right };
+  }
+
+  /** Done with the card: on to the topic's first sentence. */
+  learned(): void {
+    const c = this.card();
+    if (!c) return;
+    this.log.push({ type: "learn", sitting: this.sitting, topic: c.topic, tried: !!this.tried?.right });
+    this.learnt.add(c.topic);
+    this.tried = null;
+  }
+
   /** Answer a fix: the index of the word tapped and the word typed in its place. */
   fix(tapped: number, typed: string): void {
     const it = this.items[this.index];
-    if (this.last || !it || it.kind !== "fix" || !typed.trim()) return;
+    if (this.last || !it || it.kind !== "fix" || !typed.trim() || this.card()) return;
     const words = fixParts(it).words;
     if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
     this.record(checkFix(it, tapped, typed), `${words[tapped]} -> ${tidy(typed)}`);
@@ -297,7 +363,7 @@ export class GrammarSitting {
   /** Answer a spot: the index of the word tapped. */
   spot(tapped: number): void {
     const it = this.items[this.index];
-    if (this.last || !it || it.kind !== "spot") return;
+    if (this.last || !it || it.kind !== "spot" || this.card()) return;
     const words = spotWords(it);
     if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
     this.record(checkSpot(it, tapped), bare(words[tapped]));
@@ -306,7 +372,7 @@ export class GrammarSitting {
   /** Answer a choose: the index of the answer picked. */
   choose(chosen: number): void {
     const it = this.items[this.index];
-    if (this.last || !it || it.kind !== "choose") return;
+    if (this.last || !it || it.kind !== "choose" || this.card()) return;
     const options = choices(it);
     if (!Number.isInteger(chosen) || chosen < 0 || chosen >= options.length) return;
     this.record(checkChoose(it, chosen), options[chosen]);
@@ -315,7 +381,7 @@ export class GrammarSitting {
   /** Answer a build: the tiles chosen, in order. */
   build(chosen: readonly string[]): void {
     const it = this.items[this.index];
-    if (this.last || !it || it.kind !== "build" || !chosen.length) return;
+    if (this.last || !it || it.kind !== "build" || !chosen.length || this.card()) return;
     this.record(checkBuild(it, chosen), chosen.join(" "));
   }
 
@@ -336,6 +402,11 @@ export class GrammarSitting {
     const it = this.items[this.index];
     const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, choose: null, feedback: null, done: null };
     if (this.last) return { ...base, phase: "feedback", feedback: this.last };
+    const c = this.card();
+    if (c) {
+      const options = tryChoices(c);
+      return { ...base, phase: "learn", learn: { rule: c.rule, examples: c.examples, question: c.try.question, options, tried: this.tried ? { ...this.tried, answer: options.indexOf(c.try.right) } : null } };
+    }
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;
       return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level) } };
