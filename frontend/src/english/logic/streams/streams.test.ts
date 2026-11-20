@@ -37,7 +37,7 @@ function read(start: number, canRead: number) {
   return { ...s.result(), asked, texts: texts.size };
 }
 
-test("LC-1 reading: three of four passes a level; two levels up or down, then one; the start is the level above the last passed", () => {
+test("LC-1 reading: three of four passes a level; two levels up or down, then one; the start is the highest level passed", () => {
   assert.deepEqual([readingStart("early"), readingStart("school"), readingStart(null)], [1, 3, 3]);
   assert.deepEqual([6, 5, 4, 3, 2, 1, 0].map((can) => read(3, can).passed), [6, 5, 4, 3, 2, 1, 0], "every level can be reached from the middle");
   assert.deepEqual([read(1, 5).passed, read(1, 0).passed, read(3, 6).asked, read(3, 0).asked], [4, 0, 12, 8]);
@@ -49,8 +49,8 @@ test("LC-1 reading: three of four passes a level; two levels up or down, then on
   s.answer(99);
   assert.equal(s.snapshot().index, 0, "a choice that is not on screen is ignored");
   const lv = (passed: number) => levelsFrom([{ type: "reading", passed, steps: [] }]).reading!.start;
-  assert.deepEqual([lv(0), lv(1), lv(2), lv(3)], [1, 2, 4, 6], "a result stored on the old three-level scale is read on today's");
-  assert.deepEqual([2, 4, 5].map((passed) => levelsFrom([{ type: "reading", passed, scale: 2, steps: [] }]).reading!.start), [3, 5, 6]);
+  assert.deepEqual([lv(0), lv(1), lv(2), lv(3)], [1, 1, 3, 5], "a result stored on the old three-level scale is read on today's");
+  assert.deepEqual([2, 4, 5].map((passed) => levelsFrom([{ type: "reading", passed, scale: 2, steps: [] }]).reading!.start), [2, 4, 5]);
 });
 
 /** Sit the listening part writing perfectly up to a level. */
@@ -102,7 +102,7 @@ test("LC-4 the latest level of each part counts; a skipped part leaves none", ()
   const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
   assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null, grammar: null }, "a level stored on the old three-level scale is read on today's");
   const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
-  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 4 }, listening: { level: 3 }, spelling: { level: 4 }, grammar: null });
+  assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 3 }, listening: { level: 3 }, spelling: { level: 4 }, grammar: null });
 });
 
 test("LC-5 the levels steer the streams: reading begins at its start level, with the levels below still open", () => {
@@ -129,7 +129,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.equal(l.levels().done, true);
   assert.equal(row("words").level, "Level 5 of 8");
   assert.equal(row("words").next, "Five new words");
-  assert.match(row("reading").level, /^Explorer \(level 2 of 6\)$/);
+  assert.match(row("reading").level, /^Starter \(level 1 of 6\)$/);
   assert.equal(row("listening").level, "Level 5 of 7");
   assert.match(row("spelling").level, /level 1 of 5/);
   await l.recordLevelCheck([{ type: "spelling", level: 3, steps: [] }]);

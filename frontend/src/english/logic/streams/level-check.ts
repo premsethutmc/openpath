@@ -71,7 +71,9 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
     if (r.type === "reading") {
       const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
-      out.reading = { passed, start: Math.min(readingLevels, passed + 1) };
+      // start at the highest level passed: its units still teach skills not yet checked there (sim-english@2: one above
+      // placed most learners a level high and made the first week harder, with no gain by the end of the month)
+      out.reading = { passed, start: Math.min(readingLevels, Math.max(1, passed)) };
     }
     if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
     if (r.type === "spelling") out.spelling = { level: r.level };
