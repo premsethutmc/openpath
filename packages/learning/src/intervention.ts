@@ -759,9 +759,19 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
     // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
     // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
-    // move-on@1: once the shared record has demonstrated the skill, the module's own practice is optional: a learner who has
-    // shown it is not asked the rest of the practice list. Only the transfer question (a new setting) is still asked.
-    const listed = needsEvidence ? unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]) : unanswered(tr);
+    // move-on@1: once the skill is shown here, the module's own practice list is optional: a learner who has shown it is not asked
+    // the rest of it. The transfer question (a new setting) is still asked, and fresh checks while the shared record still needs them.
+    // Every kind of question in the skill (each skill unit, each question type) is still met at least once: a kind not yet answered
+    // right alone keeps its practice questions, so a weakness in one part is still found.
+    const kindOf = (id: string) => { const u = units.find((x) => x.unit.accepts(id)); return u ? `unit:${u.unit.strategies.map((x) => x.id).join("+")}` : `family:${problemOf(id.replace(/:(mc|w)$/, ""))?.family ?? id}`; };
+    // (twice, on different questions: once could be luck, and one easy instance can hide a gap)
+    const rightBy = new Map<string, Set<string>>();
+    const wrongIn = new Set<string>();
+    for (const a of records.attempts) if (independentAttempt(a) && graph.evidenceTarget(question(a.questionId).competency) === competency) { const k = kindOf(a.questionId); if (rightAnswer(a)) rightBy.set(k, (rightBy.get(k) ?? new Set()).add(a.questionId)); else wrongIn.add(k); }
+    // a kind with any wrong answer alone keeps its practice: the list is there to find out whether it is a slip or a gap
+    const metRight = new Set([...rightBy].filter(([k, qs]) => qs.size >= 2 && !wrongIn.has(k)).map(([k]) => k));
+    const unmet = (id: string) => !metRight.has(kindOf(id));
+    const listed = unanswered([...m.practice.filter(unmet), ...tr, ...m.strategies.map((s) => s.check).filter(unmet)]);
     // grade-order@1: the skill's extra written tasks (a module answered automatically) are offered only up to the learner's grade: a
     // later grade's proof (the BPT by areas, for a Grade 8 learner) is reached in that grade. A module of written tasks alone is unchanged.
     const g = gradeOf(records);

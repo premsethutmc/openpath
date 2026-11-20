@@ -234,7 +234,7 @@ export class Journey {
 /**
  * A: strong prior independent evidence, then exactly one careless arithmetic slip (off by one, or a wrong choice; no
  * known misconception predicts it). Three variants of where the slip falls:
- *   A1  on a fresh question alone in the module (the fifth answer, or the first slippable one after it); delayed check right
+ *   A1  on a fresh question alone in the module (the first slippable answer: after the topic check, move-on@1 asks few module questions); delayed check right
  *   A2  no slip in the module; the one slip is on the delayed check eight days later
  *   A3  (defect reproduction, two slips) A1's slip AND A2's slip
  */
@@ -244,7 +244,7 @@ async function careless(variant: "A1" | "A2" | "A3") {
   j.plan(TARGET);
   let n = 0, slipped: string | null = null;
   const slipInModule = variant !== "A2";
-  await j.module(TARGET, (q) => (slipInModule && ++n >= 5 && !slipped && slippable(q) ? ((slipped = q), { response: slip(q) }) : { response: respond(q, "right") }));
+  await j.module(TARGET, (q) => (slipInModule && ++n >= 1 && !slipped && slippable(q) ? ((slipped = q), { response: slip(q) }) : { response: respond(q, "right") }));
   // supplementary (A1 only): the app opens recovery only for a "stuck" original problem (Main.tsx STUCK), never for a
   // module answer; it is run here to show what diagnostic@2 concludes about a slip when it is asked
   if (slipped && variant === "A1") await j.investigate(slipped, (q) => respond(q, "right"), "not reached by the app for a module answer: recovery opens only for 'original' (stuck) problems");

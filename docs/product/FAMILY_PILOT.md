@@ -608,10 +608,10 @@ question type to tie a checked example to. Test: `frontend/src/learning/teachabl
 
 ## move-on@1: a child who has shown a skill is not made to finish the practice list
 
-Before: after a child had shown a skill on their own and the shared record had counted it, the module still served every
-question left on its practice list (a strong child: 21 questions in a row, all right, on converting metres and centimetres).
-Now, once the record has counted the skill, only the transfer question (a new setting) is still asked; the rest of the practice
-is optional. The delayed check a week later is unchanged, so "Sure" still needs it.
-
-Simulated children, ICSE Class 5 (62 skills): strong child 62 of 62 mastered, median questions per skill 17 → 9; average child
-61 of 62 (was 60). No child marked mastered without knowing it.
+Before: after a child had shown a skill on their own, the module served every question left on its practice list (a strong
+child: 21 questions in a row, all right, on converting metres and centimetres). Now, once the skill is shown, practice continues
+only for the kinds of question in it (each skill unit, each question type) not yet answered right alone twice, on different
+questions, with no wrong answer: a kind with a wrong answer keeps its practice, so a hidden gap (a sign rule that only negative
+numbers expose) is still found. The transfer question and the delayed check a week later are unchanged.
+slip@1 (part): a skill unit with a right answer alone is held as "not shown" only once two of its answers alone are wrong, as
+question types already were (never on one slip).

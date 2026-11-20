@@ -106,8 +106,10 @@ test("teaching history: questions seen as practice are not instruction delivered
   const runs = [await SCENARIOS.A3(), await SCENARIOS.C(), await SCENARIOS.B()];
   const a3 = runs[0];
   const h = a3.final.teachingHistory[TARGET]!;
-  assert.ok(h.some((s) => s.checkSeen && !s.checkSeen.inBlock), "a strategy check was answered as practice");
-  assert.ok(a3.steps.some((s) => s.phase === "chapter"), "the module still teaches after its checks were used as practice");
+  // move-on@1: a shown skill no longer has every strategy check served as practice; where one was, it is still not instruction
+  // delivered, and the module still teaches after it
+  if (h.some((s) => s.checkSeen && !s.checkSeen.inBlock)) assert.ok(a3.steps.some((s) => s.phase === "chapter"), "the module still teaches after its checks were used as practice");
+  for (const s of h) if (s.checkSeen && !s.checkSeen.inBlock) assert.ok(!s.delivered.includes(s.checkSeen as never), "a check seen as practice is not a lesson");
   for (const r of runs) {
     const hist = r.final.teachingHistory;
     for (const s of r.steps.filter((x) => x.phase === "pause")) {

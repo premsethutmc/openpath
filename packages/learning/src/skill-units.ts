@@ -47,7 +47,7 @@ export interface UnitState {
   rechecked: boolean;
   /** the learner's latest answer alone on the unit is wrong */
   latestWrong: boolean;
-  /** status@2 on the unit's own answers alone: wrong now and never shown (fewer than two distinct right), or two of its last three wrong */
+  /** status@2 on the unit's own answers alone: wrong now and never shown (no right answer, or one right and two or more wrong), or two of its last three wrong */
   notShown: boolean;
 }
 export function unitStates(m: Module, records: LearnerRecords, judge: Judge): UnitState[] {
@@ -59,7 +59,10 @@ export function unitStates(m: Module, records: LearnerRecords, judge: Judge): Un
     const last = mine.at(-1);
     const latestWrong = !!last && !judge.right(last);
     const rights = new Set(mine.filter(judge.right).map((a) => a.questionId)).size;
-    const notShown = latestWrong && (rights < 2 || mine.slice(-3).filter((a) => !judge.right(a)).length >= 2);
+    // slip@1: as for a question type (evidence.ts, familyNotShown), never on one slip: a skill with a right answer alone is held as
+    // not shown only once at least two of its answers alone are wrong
+    const wrongs = mine.filter((a) => !judge.right(a)).length;
+    const notShown = latestWrong && ((rights < 2 && (rights === 0 || wrongs >= 2)) || mine.slice(-3).filter((a) => !judge.right(a)).length >= 2);
     return { unit, taughtAt, rechecked, latestWrong, notShown };
   });
 }
