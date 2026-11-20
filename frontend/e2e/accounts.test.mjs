@@ -27,6 +27,15 @@ const run = Date.now().toString(36);
 const PARENT = `asha.${run}@example.org`;
 const OTHER = `ravi.${run}@example.org`;
 
+
+/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+async function today(page) {
+  const fold = page.getByRole("button", { name: /^General English/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -146,7 +155,7 @@ async function addLearner(page, name, goal = /Understand grammar/) {
   await page.getByRole("button", { name: goal }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.locator(".plan li").first().waitFor();
+  await today(page);
 }
 
 const progressText = async (page) => {
@@ -190,13 +199,14 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.locator("#consent").check();
   await shot(page, "goal");
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.locator(".plan li").first().waitFor();
+  await today(page);
   await shot(page, "check-intro");
   // My Words and My Books are offered to a pupil in a parent account too (e2e/parent-content.test.mjs follows them through)
   await page.getByRole("button", { name: "Add a word list" }).waitFor();
   await page.getByRole("button", { name: "Add a book" }).waitFor();
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
   // … Arun completes the first assessment
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".item").waitFor();
   await shot(page, "assessment-question");
@@ -218,16 +228,18 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   assert.ok(ledger.events.some((e) => e.kind === "preferences" && e.goal === "grammar"));
   // … the Learner Vector moved: Progress shows estimates for the skills he answered
   await page.getByRole("button", { name: "Back to today" }).click();
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   // … Today recommends an activity from the planner
   assert.ok((await page.locator(".plan li").count()) >= 1);
   await shot(page, "home");
   await fits(page);
   await tappable(page);
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click(); // the spelling check
   await finishSession(page, () => false);
   await page.getByRole("button", { name: "Back to today" }).click();
   // … Arun completes a lesson (the plan now teaches a spelling pattern)
+  await today(page);
   await page.locator(".plan li", { hasText: "Spelling:" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".lesson").waitFor();
   await shot(page, "lesson");
@@ -264,7 +276,7 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
   await shot(page, "pupils");
   await page.getByRole("button", { name: /Arun/ }).click();
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   assert.equal(await progressText(page), arunProgress, "the same progress, rebuilt from the same events");
   assert.deepEqual(errors, []);
   await context.close();
@@ -275,7 +287,7 @@ test("persistence across devices: another phone signed in to the same account se
   const { context, page, errors } = await device();
   await signIn(page, PARENT);
   await page.getByRole("button", { name: /Arun/ }).click();
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   assert.equal(await progressText(page), arunProgress);
   assert.deepEqual(errors, []);
   await context.close();
@@ -332,7 +344,7 @@ test("historical replay: a device record made by the PR #24 app, imported into a
   await page.evaluate((d) => localStorage.setItem("openpath-english-clock-offset-days", String(d)), Math.max(0, Math.ceil((Date.parse(history.now) - Date.now()) / 86_400_000)));
   await page.reload();
   await page.getByRole("button", { name: /History/ }).click();
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   const text = await progressText(page);
   // every skill shows exactly the evidence the PR #24 app derived from the same events
   for (const [id, p] of Object.entries(history.profile)) {

@@ -178,8 +178,10 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   assert.equal(await page.getByRole("heading", { name: "Today's plan" }).count(), 0);
   await page.getByRole("button", { name: /^School work/ }).click();
   await page.getByRole("button", { name: "Open the class syllabus" }).waitFor();
-  await page.getByRole("button", { name: /^All activities/ }).click();
-  await page.getByRole("button", { name: "Learn new words" }).waitFor();
+  // the rows already open the daily activities: More to practise lists only the others
+  await page.getByRole("button", { name: /^More to practise/ }).click();
+  await page.getByRole("button", { name: "Try Listen and answer" }).waitFor();
+  assert.equal(await page.getByRole("button", { name: "Learn new words" }).count(), 0);
   await page.getByRole("button", { name: /^General English/ }).click();
   await page.getByRole("heading", { name: "Today's plan" }).waitFor();
   await fits();
