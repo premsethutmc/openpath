@@ -110,7 +110,7 @@ async function answer(page, wrong) {
 
 test("Grammar in use: fix and build eight sentences, see each rule, find the result kept", async () => {
   const { context, page, errors, foreign, fits } = await start("Grammar");
-  await page.getByRole("button", { name: "Try Grammar in use" }).click();
+  await page.getByRole("button", { name: "Try Grammar" }).click();
   await page.getByRole("heading", { name: "Fix it or build it" }).waitFor();
   await page.getByText("Level 3: Apostrophes, verbs and joining").waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();

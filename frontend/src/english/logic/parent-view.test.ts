@@ -84,7 +84,7 @@ test("PV-9 every daily activity: levels, days of any English, reading skills, wr
   const a = await Learner.create(c, repo, "Chitra", "guardian", clock, "p-chitra");
   const empty = childSummary(a, clock());
   assert.deepEqual([empty.englishDays, empty.reading, empty.writing, empty.first], [0, null, null, null]);
-  assert.deepEqual(empty.levels.map((l) => l.name), ["Words", "Reading", "Listening and writing", "Spelling", "Grammar"]);
+  assert.deepEqual(empty.levels.map((l) => l.name), ["Words", "Reading", "Listening", "Spelling", "Grammar"]);
   await a.recordGuided({ type: "done", task: "t1", syllabus: "s", outcome: "o", seen: [0], of: 2, words: 42, self: [] });
   await a.recordGuided({ type: "done", task: "t2", syllabus: "s", outcome: "o", seen: [], of: 1 });
   const unit = { skill: "main_idea" as const, level: 3 as const };

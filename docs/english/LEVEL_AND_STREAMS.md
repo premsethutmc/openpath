@@ -26,7 +26,7 @@ Each stream keeps moving its level as the learner practises. The check can be ta
 ## Home screen
 
 - Before a check: one card, "Start here: find your level".
-- After it: "Your English today", one row per stream (Words, Reading, Listening and writing, Spelling, Grammar and
+- After it: "Your English today", one row per stream (Words, Reading, Listening, Spelling, Grammar and
   rules) with its level, the next thing to do, a tick once something was done today, and a Go button.
 - Then the practice cards, then **School work** (My Words and My Books: material a parent or the learner brings),
   then the existing General English plan.

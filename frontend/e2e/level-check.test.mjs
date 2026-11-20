@@ -189,7 +189,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.reload();
   await page.locator('[data-stream="reading"]', { hasText: "Expert" }).waitFor();
 
-  await page.getByRole("button", { name: "Today: Listening and writing" }).click();
+  await page.getByRole("button", { name: "Today: Listening" }).click();
   await page.getByText("Level 7: Formal sentences").waitFor();
   await page.getByRole("button", { name: "← Back" }).click();
   await page.getByRole("button", { name: "Today: Reading" }).click();

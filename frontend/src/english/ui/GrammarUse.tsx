@@ -16,7 +16,7 @@ export function GrammarIntro({ level, levelLabel, topics, done, onStart, onBack 
       <button type="button" className="link" onClick={onBack}>
         ← Back
       </button>
-      <p className="eyebrow">Grammar in use</p>
+      <p className="eyebrow">Grammar</p>
       <h1 id="grammar-title" className="hero">
         Fix it or build it
       </h1>
@@ -189,7 +189,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose
     const d = view.done!;
     return (
       <main className="page vocab grammar" data-phase="done">
-        <p className="eyebrow">Grammar in use</p>
+        <p className="eyebrow">Grammar</p>
         <h1 className="hero">
           {d.right} of {d.asked} right
         </h1>

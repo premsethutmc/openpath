@@ -244,7 +244,7 @@ export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Le
         </li>
         <li data-part="listening">
           <span>
-            <b>🎧 Listening and writing</b>
+            <b>🎧 Listening</b>
             {line("listening")}
           </span>
           <span className="status">{levels.listening && !skipped.includes("listening") ? `Level ${levels.listening.level} of ${DICTATION.levels.length}` : "—"}</span>

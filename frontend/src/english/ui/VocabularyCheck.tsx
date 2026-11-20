@@ -15,7 +15,7 @@ export function VocabularyIntro({ last, onStart, onBack }: { last: { estimate: n
       <button type="button" className="link" onClick={onBack}>
         ← Back
       </button>
-      <p className="eyebrow">Word check</p>
+      <p className="eyebrow">Words · Word check</p>
       <h1 id="vocab-title" className="hero">
         How many words do you know?
       </h1>
@@ -63,7 +63,7 @@ export function VocabularyView({ check, view, onAnswer, onLeave }: { check: Size
   const total = check.bands.reduce((s, b) => s + b.families, 0);
   return (
     <main className="page vocab" data-phase="done">
-      <p className="eyebrow">Word check</p>
+      <p className="eyebrow">Words · Word check</p>
       <h1 className="hero">About {n(r.estimate)} word families</h1>
       {r.low !== r.high && (
         <p className="sub">

@@ -414,7 +414,7 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
   return (
     <section className="hub-card plain" aria-labelledby="grammar-use-card-title">
       <h2 id="grammar-use-card-title">
-        <span aria-hidden="true">🧩 </span>Grammar in use
+        <span aria-hidden="true">🧩 </span>Grammar
       </h2>
       <p>Fix the wrong word in a sentence, or build a sentence from word tiles. Eight sentences, each with its rule.</p>
       {s.answered > 0 && (
@@ -423,7 +423,7 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
         </p>
       )}
       <button type="button" className="secondary" onClick={onOpen}>
-        {s.answered ? "Eight more sentences" : "Try Grammar in use"}
+        {s.answered ? "Eight more sentences" : "Try Grammar"}
       </button>
     </section>
   );
@@ -458,7 +458,7 @@ function NewWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => voi
   return (
     <section className="hub-card plain" aria-labelledby="new-words-card-title">
       <h2 id="new-words-card-title">
-        <span aria-hidden="true">🌱 </span>New words
+        <span aria-hidden="true">🌱 </span>Words
       </h2>
       <p>Five new words a day, with meanings and sentences. They come back until you know them.</p>
       {s.learning + s.learnt > 0 && (
