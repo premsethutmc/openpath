@@ -5,7 +5,11 @@
 Open **For parents: word lists and results** at the bottom of the English home screen and answer the grown-ups
 sum. The view lists every child in this account, or on this phone when there is no account.
 
-For each child: when they were last active, on how many of the last seven days they practised spelling, their word
+For each child: when they were last active, on how many of the last seven days they practised any English (and
+spelling), the level of each daily activity as the child's home screen shows it, First words found, Reading skills
+checked and passed and those needing more practice, syllabus tasks done and how many words they wrote (never the
+writing itself), and for Words, Listen and write, Listen and answer and Grammar what was right and what to look at
+again. Then, for spelling: their word
 check result, their Spelling Bee level, each word list with its kind and standing (right on their own, with help,
 wrong, not tried, and the last test score), and up to six words to work on.
 

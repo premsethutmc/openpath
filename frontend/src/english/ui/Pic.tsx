@@ -32,3 +32,18 @@ export function Pic({ p }: { p: string }) {
     </span>
   );
 }
+
+/** Text with pictures in it ("🥚 An egg sits in a nest."): each known picture drawn, the words left as they are. */
+export function TextPics({ text }: { text: string }) {
+  const runs: string[] = [];
+  for (const part of pictureParts(text)) {
+    if (!ART[part] && runs.length && !ART[runs[runs.length - 1]]) runs[runs.length - 1] += part;
+    else runs.push(part);
+  }
+  if (runs.every((r) => !ART[r])) return <>{text}</>;
+  return (
+    <>
+      {runs.map((r, i) => (ART[r] ? <Pic key={i} p={r} /> : <span key={i}>{r}</span>))}
+    </>
+  );
+}

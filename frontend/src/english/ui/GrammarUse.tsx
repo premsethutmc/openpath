@@ -2,6 +2,7 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
+import { TextPics } from "./Pic.tsx";
 import { useRef, useState } from "react";
 import { GRAMMAR, GrammarSitting, grammarSummary, levelFor, startLevel, type GrammarRecord, type GrammarUse as Content, type GrammarView } from "../logic/grammar-use/grammar-use.ts";
 import type { Learner } from "../logic/learner.ts";
@@ -101,14 +102,14 @@ export const spotTask = (ask: string) => (ask === "object" ? "Tap the object of 
 function Choose({ sentence, question, options, onCheck }: { sentence: string; question: string; options: string[]; onCheck: (chosen: number) => void }) {
   return (
     <>
-      <p className="grammar-quote">{sentence}</p>
+      <p className="grammar-quote"><TextPics text={sentence} /></p>
       <p className="small" id="grammar-task">
         {question}
       </p>
       <div className="grammar-choices" role="group" aria-labelledby="grammar-task">
         {options.map((o, i) => (
-          <button key={i} type="button" className="secondary grammar-choice" onClick={() => onCheck(i)}>
-            {o}
+          <button key={i} type="button" className="secondary grammar-choice" data-choice={o} onClick={() => onCheck(i)}>
+            <TextPics text={o} />
           </button>
         ))}
       </div>
@@ -126,16 +127,16 @@ function Build({ tiles, whole, task, onCheck }: { tiles: string[]; whole: boolea
       <p className="grammar-line" aria-label="Your sentence" data-empty={chosen.length === 0}>
         {chosen.length === 0 && <span className="small">Your sentence appears here.</span>}
         {chosen.map((t) => (
-          <button key={t} type="button" className="grammar-tile placed" onClick={() => setChosen(chosen.filter((x) => x !== t))}>
-            {tiles[t]}
+          <button key={t} type="button" className="grammar-tile placed" data-tile={tiles[t]} onClick={() => setChosen(chosen.filter((x) => x !== t))}>
+            <TextPics text={tiles[t]} />
           </button>
         ))}
       </p>
       <p className="grammar-pool" role="group" aria-labelledby="grammar-task">
         {tiles.map((w, i) =>
           chosen.includes(i) ? null : (
-            <button key={i} type="button" className="grammar-tile" onClick={() => setChosen([...chosen, i])}>
-              {w}
+            <button key={i} type="button" className="grammar-tile" data-tile={w} onClick={() => setChosen([...chosen, i])}>
+              <TextPics text={w} />
             </button>
           ),
         )}
@@ -156,7 +157,9 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
       <p className="grammar-rule">{card.rule}</p>
       <ul className="grammar-examples">
         {card.examples.map((e) => (
-          <li key={e}>{e}</li>
+          <li key={e}>
+            <TextPics text={e} />
+          </li>
         ))}
       </ul>
       <p id="grammar-try">
@@ -165,7 +168,7 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
       <p className="choose-options" role="group" aria-labelledby="grammar-try">
         {card.options.map((o, i) => (
           <button key={o} type="button" className="choice" disabled={!!t} data-state={t ? (i === t.answer ? "right" : i === t.chosen ? "wrong" : "") : ""} onClick={() => onTry(i)}>
-            {o}
+            <TextPics text={o} />
           </button>
         ))}
       </p>
@@ -229,7 +232,9 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose
               {f.wrongWord ? `The wrong word was “${f.wrongWord.replace(/^[^A-Za-z']+|[^A-Za-z']+$/g, "")}”. ` : ""}You gave: {f.given}
             </p>
           )}
-          <p className="dict-reveal">{f.right}</p>
+          <p className="dict-reveal">
+            <TextPics text={f.right} />
+          </p>
           <p className="grammar-rule">{f.rule}</p>
           <button type="button" className="primary" autoFocus onClick={onNext}>
             {view.index + 1 < view.total ? "Next sentence" : "Finish"}

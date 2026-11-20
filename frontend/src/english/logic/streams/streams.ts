@@ -13,6 +13,7 @@ import { latestResult } from "../vocabulary/size-check.ts";
 import { GRAMMAR, levelFor as grammarLevel, startLevel as grammarStart } from "../grammar-use/grammar-use.ts";
 import { waiting } from "./joined.ts";
 import { asReadingLevel } from "./level-check.ts";
+import { FIRST, firstSummary, isBeginner } from "../first/first.ts";
 
 export type StreamId = "words" | "reading" | "listening" | "spelling" | "grammar";
 /** The Grammar in use topic that practises naming the kinds of words. */
@@ -29,11 +30,11 @@ export interface StreamRow {
   /** Nothing to open right now. */
   idle?: boolean;
   /** Spelling: open My Words (words from the other streams wait there) instead of the Spelling Bee. Listening: open Listen and answer (a passage) instead of Listen and write. */
-  open?: "mywords" | "passage" | "naming";
+  open?: "mywords" | "passage" | "naming" | "first";
 }
 
 const KINDS: Record<StreamId, string[]> = {
-  words: ["word_learn"],
+  words: ["word_learn", "first_words"],
   reading: ["reading"],
   listening: ["dictation"],
   spelling: ["spell_answer"],
@@ -68,8 +69,15 @@ export function streamRows(learner: Learner, now: string): StreamRow[] {
   // the level check found that naming a noun or a verb is not yet sure: that comes first, until a sitting of it is done
   const naming = !!levels.grammar && !levels.grammar.basics && !learner.grammarRecords().some((r) => r.type === "end" && r.topics?.includes(NAMING_TOPIC));
 
+  // a beginner (Find my level found no English yet) starts Words with First words, picture by picture, until First
+  // sentences open (sim-english@2: at the first Words level a beginner had a third of the sittings mostly wrong)
+  const first = isBeginner(levels) && !firstSummary(FIRST, learner.firstRecords()).sentences;
+  const firstToday = active.has("first_words");
+
   return [
-    { id: "words", icon: "🌱", name: "Words", level: `Level ${band} of ${BANDS}`, next: ws.dueNow ? `${ws.dueNow} ${ws.dueNow === 1 ? "word" : "words"} to see again` : wordsDone ? "Done for today" : "Five new words", doneToday: wordsDone },
+    first
+      ? { id: "words", icon: "🌱", name: "Words", level: "First words", next: firstToday ? "Done for today" : "Find words in pictures", doneToday: firstToday, open: "first" as const }
+      : { id: "words", icon: "🌱", name: "Words", level: `Level ${band} of ${BANDS}`, next: ws.dueNow ? `${ws.dueNow} ${ws.dueNow === 1 ? "word" : "words"} to see again` : wordsDone ? "Done for today" : "Five new words", doneToday: wordsDone },
     { id: "reading", icon: "📖", name: "Reading", level: `${COURSE.levels.find((l) => l.id === readingLevel)!.name} (level ${readingLevel} of ${COURSE.levels.length})`, next: rec ? COURSE.skills.find((s) => s.id === rec.unit.skill)!.name : "Every skill done", doneToday: did("reading") },
     { id: "listening", icon: "🎧", name: "Listening and writing", level: `Level ${listening} of ${DICTATION.levels.length}`, next: wroteToday && !heardToday ? "A passage to hear, with four questions" : "Five sentences to hear and write", doneToday: wroteToday && heardToday, ...(wroteToday && !heardToday ? { open: "passage" as const } : {}) },
     { id: "spelling", icon: "🐝", name: "Spelling", level: `${LEVEL_NAMES[bee]} (level ${bee} of ${Object.keys(LEVEL_NAMES).length})`, next: joined ? `${joined} ${joined === 1 ? "word" : "words"} from your writing and new words` : "A round of the Spelling Bee", doneToday: did("spelling"), ...(joined ? { open: "mywords" as const } : {}) },

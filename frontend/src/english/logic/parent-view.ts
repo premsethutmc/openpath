@@ -10,6 +10,11 @@ import type { Learner } from "./learner.ts";
 import { BANK, LEVEL_NAMES, levelOf, sourceProgress } from "./spelling.ts";
 import { patternCounts } from "./spelling-patterns.ts";
 import { latestResult } from "./vocabulary/size-check.ts";
+import { COURSE } from "./reading/course.ts";
+import { progress as readingProgress } from "./reading/session.ts";
+import { guidedSummary } from "./guided/guided.ts";
+import { FIRST, firstSummary } from "./first/first.ts";
+import { streamRows } from "./streams/streams.ts";
 
 export interface ListSummary {
   id: string;
@@ -48,6 +53,16 @@ export interface ChildSummary {
   listening: { passages: number; right: number; asked: number; weak: string[] } | null;
   /** Grammar in use: sentences answered and right, and the topics to look at again. */
   grammar: { answered: number; right: number; weak: string[] } | null;
+  /** Calendar days (the child's own day) with any English practice in the last seven. */
+  englishDays: number;
+  /** Where each daily activity stands, as the child's home screen shows it. */
+  levels: { name: string; level: string }[];
+  /** Reading: skills checked and passed, and the ones that need more practice ("Main idea, level 3"). */
+  reading: { passed: number; needsPractice: string[] } | null;
+  /** Writing and other syllabus tasks: how many done, and how many words written in all (the writing itself is never kept). */
+  writing: { tasks: number; pieces: number; words: number } | null;
+  /** First words: words found, found on the first tap last time, and the total. */
+  first: { met: number; sure: number; total: number } | null;
 }
 
 const DAY = 86_400_000;
@@ -83,6 +98,18 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
   const dict = dictationSummary(learner.dictationRecords());
   const gram = grammarSummary(GRAMMAR, learner.grammarRecords());
   const heard = listenSummary(learner.listenRecords());
+  const dayOf = learner.dayFn();
+  const english = new Set<string>();
+  for (const e of events.slice(1)) if (Date.parse(now) - Date.parse(e.at) < 7 * DAY && Date.parse(e.at) <= Date.parse(now)) english.add(dayOf(e.at));
+  const rp = readingProgress(COURSE, learner.readingRecords());
+  const unitName = (key: string) => {
+    const [skill, level] = key.split("@");
+    return `${COURSE.skills.find((x) => x.id === skill)?.name ?? skill}, level ${level}`;
+  };
+  const units = [...rp.units.entries()];
+  const guided = learner.guidedRecords();
+  const pieces = guided.filter((r) => r.words !== undefined);
+  const first = firstSummary(FIRST, learner.firstRecords());
   return {
     id: learner.profileId,
     name: learner.state.profile?.name ?? "Learner",
@@ -95,6 +122,11 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     newWords: nw.learning + nw.learnt ? { learnt: nw.learnt, learning: nw.learning, tricky: nw.tricky.slice(0, 6) } : null,
     listening: heard.passages ? { passages: heard.passages, right: heard.right, asked: heard.asked, weak: heard.weak } : null,
     grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5) } : null,
+    englishDays: english.size,
+    levels: streamRows(learner, now).map((r) => ({ name: r.name, level: r.level })),
+    reading: units.some(([, u]) => u.checks) ? { passed: units.filter(([, u]) => u.status === "passed_own" || u.status === "passed_after_help").length, needsPractice: units.filter(([, u]) => u.status === "needs_practice" || u.status === "no_fresh_check").map(([k]) => unitName(k)).slice(0, 4) } : null,
+    writing: guided.length ? { tasks: guidedSummary(guided).done.size, pieces: pieces.length, words: pieces.reduce((a, r) => a + (r.words ?? 0), 0) } : null,
+    first: first.sittings ? { met: first.met, sure: first.sure, total: first.total } : null,
     dictation: dict.sentences ? { sentences: dict.sentences, perfectFirst: dict.perfectFirst, level: dict.level ?? 1, missed: dict.missed.slice(0, 6) } : null,
   };
 }

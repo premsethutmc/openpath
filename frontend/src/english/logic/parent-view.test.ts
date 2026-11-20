@@ -77,3 +77,21 @@ test("PV-4 new words and Listen and write show on the child's summary, and only 
   assert.deepEqual(s.dictation, { sentences: 2, perfectFirst: 1, level: 3, missed: ["umbrella"] });
   assert.deepEqual([childSummary(b, clock()).newWords, childSummary(b, clock()).dictation], [null, null]);
 });
+
+test("PV-9 every daily activity: levels, days of any English, reading skills, writing counts and First words", async () => {
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const a = await Learner.create(c, repo, "Chitra", "guardian", clock, "p-chitra");
+  const empty = childSummary(a, clock());
+  assert.deepEqual([empty.englishDays, empty.reading, empty.writing, empty.first], [0, null, null, null]);
+  assert.deepEqual(empty.levels.map((l) => l.name), ["Words", "Reading", "Listening and writing", "Spelling", "Grammar"]);
+  await a.recordGuided({ type: "done", task: "t1", syllabus: "s", outcome: "o", seen: [0], of: 2, words: 42, self: [] });
+  await a.recordGuided({ type: "done", task: "t2", syllabus: "s", outcome: "o", seen: [], of: 1 });
+  const unit = { skill: "main_idea" as const, level: 3 as const };
+  await a.recordReading([{ type: "check_result", unit, answers: [], passed: false, label: null }, { type: "check_result", unit: { skill: "detail" as const, level: 3 as const }, answers: [], passed: true, label: null }]);
+  const s = childSummary(a, clock());
+  assert.equal(s.englishDays, 1);
+  assert.deepEqual(s.writing, { tasks: 2, pieces: 1, words: 42 });
+  assert.equal(s.reading!.passed, 1);
+  assert.match(s.reading!.needsPractice[0], /level 3$/);
+});

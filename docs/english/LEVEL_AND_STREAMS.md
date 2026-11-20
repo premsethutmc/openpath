@@ -10,7 +10,7 @@ About ten minutes, four parts, each adaptive. Any part can be skipped (the app t
 | Part | What is asked | Level it gives |
 |---|---|---|
 | Words | The word check cut to four rounds (up to 12 words) | A band out of 8; New words starts one band above |
-| Reading | One practice text of the course with four questions, then one text a level up or down | Three of four passes a level; reading starts at the level above the highest passed |
+| Reading | One practice text of the course with four questions, then one text a level up or down | Three of four passes a level; reading starts at the highest level passed (level 1 if none) |
 | Listening | Three dictated sentences, one try each, up after one whose words are right (capitals and the end mark are not counted here; one slip allowed in a long sentence) | The highest level passed |
 | Spelling | Six dictated Spelling Bee words, up after a right one, down after a wrong one | The highest level spelt right (of 5); the Spelling Bee starts there |
 
