@@ -1,4 +1,7 @@
 import { checkStand, compareBrickFace } from './model.mjs';
+import { mountTrayArt } from './tray-art.mjs';
+
+mountTrayArt();
 
 const byId = (id) => document.getElementById(id);
 const panels = ['explore', 'compare', 'apply'];
