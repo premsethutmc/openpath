@@ -44,3 +44,9 @@ A lesson can link **what I see → what particles are doing → what I write or 
 - Goal: separate two solids using their different solubility, then recover each in the simulation. Make the result visible: sand stays behind; a clear salt solution comes through; water leaves and crystals remain.
 - Teaching response: give meaningful results for a premature filter or evaporation choice, then let the learner recover. A particle view explains why a filter does not take out dissolved salt. The scene is idealised, not a real lab procedure or a drinking-water claim.
 - Done for prototype: all controls work on touch and keyboard, recover from wrong order, a new question tests the underlying reason, no clipped scene at 320/390 px, and the other three labs keep working. Prototype success is not independent learner mastery.
+
+## Free-play separation workbench
+
+The guided sample stays available. The workbench has no required action order, and it does not replay one of several prewritten outcomes. Three starting mixtures share one material balance. Water dose, the time allowed for dissolution, stirring, filtration, heater placement and power, and when the catcher is connected affect the quantities in each vessel. Students can stop the clock to inspect, retry a different plan, and use the ledger to verify where materials went.
+
+The model assumes ideal filtration and condensation, a fixed approximate solubility and a sped-up clock. It does not model real apparatus, contamination, carryover losses, heat of vaporisation or boiling-point changes; the displayed temperatures are model values. The practical problem is to collect salt crystals and water separately, not to reproduce this activity physically. A possible later comparison is to measure water lost with the catcher off versus water recovered with it on from otherwise equal samples.

@@ -21,6 +21,10 @@ const files = new Map([
   ['/salt-from-sand/model.mjs', ['salt-from-sand/model.mjs', 'text/javascript']],
   ['/salt-from-sand/salt.css', ['salt-from-sand/salt.css', 'text/css']],
   ['/salt-from-sand/salt.mjs', ['salt-from-sand/salt.mjs', 'text/javascript']],
+  ['/separation-bench/', ['separation-bench/index.html', 'text/html']],
+  ['/separation-bench/model.mjs', ['separation-bench/model.mjs', 'text/javascript']],
+  ['/separation-bench/bench.css', ['separation-bench/bench.css', 'text/css']],
+  ['/separation-bench/bench.mjs', ['separation-bench/bench.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {
