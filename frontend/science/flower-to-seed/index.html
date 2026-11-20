@@ -9,7 +9,7 @@
 <header class="mast"><a href="../">OpenPath <span>/ Science Labs</span></a><span>ICSE · CLASS 5</span></header>
 <main>
   <header class="hero"><p class="eyebrow">FIELD LAB 07 &nbsp; / &nbsp; LIVING THINGS</p><h1>Flower to Seed</h1></header>
-  <button type="button" id="garden-sound" class="sound-button" aria-label="Garden sound" aria-pressed="false"><span aria-hidden="true">♪</span> <span id="sound-state">Sound off</span></button>
+  <button type="button" id="garden-sound" class="sound-button" aria-label="Garden sound" aria-pressed="false"><span aria-hidden="true">♪</span> <span class="sound-state">Sound off</span></button>
   <nav class="stops" aria-label="Garden stations">
     <button data-stop="garden" aria-current="step"><span>01</span> Pollinate</button>
     <button data-stop="cutaway"><span>02</span> Grow a pod</button>
@@ -35,7 +35,7 @@
   <div class="film-screen"><div class="film-image"></div><div class="film-bubble" hidden><strong></strong><span></span></div></div>
   <div class="film-line"><p class="film-shot"></p><p class="film-caption" aria-live="polite"></p></div>
   <progress value="0" max="20" aria-label="Story playback"></progress>
-  <div class="film-controls"><button type="button" data-film-action="pause">Ⅱ Pause</button><button type="button" data-film-action="exit" autofocus>Take over the bee →</button></div>
+  <div class="film-controls"><button type="button" data-film-action="pause">Ⅱ Pause</button><button type="button" id="film-sound" aria-pressed="false" aria-label="Story sound"><span aria-hidden="true">♪</span> <span class="sound-state">Sound off</span></button><button type="button" data-film-action="exit" autofocus>Take over the bee →</button></div>
 </dialog>
 <script type="module" src="./garden.mjs"></script>
 </body>

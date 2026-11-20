@@ -143,5 +143,5 @@ export function wireBeeStory(dialog,effect,onClose,isSoundOn=()=>false){
  document.addEventListener('visibilitychange',()=>{
   if(document.hidden&&dialog.open&&!paused){paused=true;cancelAnimationFrame(token);stopVoice();action.textContent='▶ Resume';}
  });
- return ()=>{if(!dialog.open)dialog.showModal();start();};
+ return {open(){if(!dialog.open)dialog.showModal();start();},stopVoice};
 }

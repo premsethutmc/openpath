@@ -4,22 +4,28 @@ import {gardenSound} from './sound.mjs';
 import {wireBeeStory} from './story.mjs';
 const $=id=>document.getElementById(id);
 const soundtrack=gardenSound();
-const openStory=wireBeeStory($('bee-story'),name=>soundtrack.effect(name),()=>{
+const storyPlayer=wireBeeStory($('bee-story'),name=>soundtrack.effect(name),()=>{
  cancelFlight();move('garden');draw();
  $('scene').querySelector('.bee-touch')?.focus({preventScroll:true});
 },()=>requestedSound);
 let requestedSound=false,soundRevision=0;
-const soundButton=$('garden-sound');
-if(!soundtrack.supported)soundButton.hidden=true;
-soundButton.addEventListener('click',async()=>{
+const soundButtons=[$('garden-sound'),$('film-sound')];
+for(const btn of soundButtons){
+ if(!soundtrack.supported)btn.hidden=true;
+ btn.addEventListener('click',toggleSound);
+}
+async function toggleSound(){
  const request=++soundRevision;
  requestedSound=!requestedSound;
+ if(!requestedSound)storyPlayer.stopVoice();
  const actual=await soundtrack.set(requestedSound);
  if(request!==soundRevision)return;
  requestedSound=actual;
- soundButton.setAttribute('aria-pressed',String(actual));
- $('sound-state').textContent=actual?'Sound on':'Sound off';
-});
+ for(const btn of soundButtons){
+  btn.setAttribute('aria-pressed',String(actual));
+  btn.querySelector('.sound-state').textContent=actual?'Sound on':'Sound off';
+ }
+}
 const points=[[166,174],[470,205]];
 const order=['garden','cutaway','travel','check'];
 const labels={
@@ -156,7 +162,7 @@ document.addEventListener('click',e=>{
  cancelFlight();
  if(f){flyTo(Number(f[1]),390);return;}
  if(id==='bee'){showFlight();return;}
- if(id==='story'){openStory();return;}
+ if(id==='story'){storyPlayer.open();return;}
  if(id==='advance'){move('cutaway');}
  else if(id==='crack'&&stage===3){soundtrack.effect('pod');opened=true;obs='The pod splits and scatters its seeds.';}
  else if(id.startsWith('go-'))move(id.slice(3));
