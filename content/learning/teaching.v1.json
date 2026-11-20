@@ -1225,7 +1225,7 @@
    "kind": "card",
    "competency": "MATH.algebra.quadratics",
    "title": "Solve quadratic equations",
-   "hash": "641e3e01",
+   "hash": "3f9c6f92",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1418,7 +1418,7 @@
    "kind": "card",
    "competency": "MATH.calculus.definite-integrals",
    "title": "Evaluate definite integrals",
-   "hash": "b79bcc21",
+   "hash": "638a9589",
    "source": "rule",
    "from": "lesson",
    "classes": [

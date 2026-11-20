@@ -597,3 +597,11 @@ help was a single step, 22 questions where a first step shows a number equal to 
 - **surds@1, one-term-at-a-time@1**: written working for surds (simplify each, then add or take away the like surds; multiply or
   divide under one root; rationalise a denominator, with the conjugate when it has two terms) and for the first four terms of a
   sequence (each term by putting n in, or from the one before). Each checks its result against the question's own answer.
+
+## teachable@1: every Class 11 and 12 skill can be explained
+
+Three skills had explanations that were never shown, because each was tied to a hand-written example the machine check cannot
+verify: quadratic equations (two explanations), definite integrals (one). They are now tied to generated questions the check
+works through (x² − 7x + 12 = 0, x² − 49 = 0, ∫ from 1 to 4 of 3 dx), pass the teaching check, and are registered for review.
+A simulated weak child is now taught both skills and masters them. Proof by induction is the one exception: it has no generated
+question type to tie a checked example to. Test: `frontend/src/learning/teachable.test.ts`.

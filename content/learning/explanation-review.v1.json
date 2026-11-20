@@ -8807,6 +8807,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:20a087bad85ba477c1a97d8813aa0752321a1babd05f1dbcebd480a3a686431a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-20T04:43:04.794Z",
+      "note": "content changed: the decision on sha256:77aea4808c43 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:77aea4808c432b765a75d25dc72a18489402f2d1debf1a1b0e0787d963c05cb7"
     }
    ]
   },
@@ -8833,6 +8849,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:e14d3b2f48a822d0975603b5031f1a938d93fdd3437559c37038c4993146a52a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-20T04:43:04.794Z",
+      "note": "content changed: the decision on sha256:f0b0ee87bd1a (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:f0b0ee87bd1a38d8509a401ad48c8c553187e31706c65510e04caf32781d3e31"
     }
    ]
   },
@@ -10712,6 +10744,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:70e83dea90acb4b77ae969478be018bb2d168b3b9b2f6bba4d43cf080cfdce07",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-20T04:43:04.786Z",
+      "note": "content changed: the decision on sha256:389f37b9f259 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:389f37b9f259c9973f2b0bfa5daef031b10bea63f9d40f3ef1052cbd22249e94"
     }
    ]
   },

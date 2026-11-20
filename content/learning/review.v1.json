@@ -35725,7 +35725,7 @@
    "competency": "MATH.algebra.quadratics",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "ae5b3568",
+   "contentHash": "b35a9c4e",
    "state": "draft",
    "history": [
     {
@@ -35774,6 +35774,14 @@
      "role": "engineer",
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "ae5b3568",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-20T04:53:20.927Z",
+     "contentHash": "b35a9c4e",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -36443,7 +36451,7 @@
    "competency": "MATH.calculus.definite-integrals",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "a543b804",
+   "contentHash": "e0d15565",
    "state": "draft",
    "history": [
     {
@@ -36500,6 +36508,14 @@
      "role": "engineer",
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "a543b804",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-20T04:53:20.927Z",
+     "contentHash": "e0d15565",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
