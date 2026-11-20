@@ -9,9 +9,20 @@ const coach = readFileSync(new URL("./StepCoach.tsx", import.meta.url), "utf8");
 test("being stuck opens the working with the step help inside it, and asking is recorded as help", () => {
   assert.match(learn, /const askHelp = \(\) => \{ setCoach\(true\); setWorkingOpen\(true\); setHint\(true\); \};/);
   assert.match(learn, /canCoach = hintAllowed && KID && workable && !!stepsHelp\(qid\)/, "never without help allowed (a test)");
-  assert.match(learn, /<StepCoach key=\{qid\} qid=\{qid\} shown \/>/);
+  assert.match(learn, /<StepCoach key=\{qid\} qid=\{qid\} shown onUsed=\{\(\) => setHint\(true\)\} \/>/);
   assert.match(learn, /onClick=\{askHelp\}>I'm stuck<\/button>/);
   assert.match(coach, /Help: show me this step/);
+  assert.match(coach, /onClick=\{\(\) => \{ onUsed\?\.\(\); advance\(\); \}\}/, "a step asked to be shown is help");
+});
+
+test("ldiv-shown@1: a long-division question in practice opens with the written layout, not counted as help until a step is shown", async () => {
+  assert.match(learn, /const longDiv = hintAllowed && KID && [^\n]*helpMethods\(qid\)\[0\] === "Long division";/);
+  assert.match(learn, /const coach = coachAsked \|\| longDiv;/);
+  assert.match(learn, /!!working \|\| longDiv\)/, "the working opens by itself");
+  const { helpMethods } = await import("../../../packages/learning/src/step-help");
+  const { pool } = await import("../../../packages/learning/src/families");
+  const id = pool("ldiv").items.find((p) => /^348 ÷ 6/.test(p.prompt))!.id;
+  assert.deepEqual(helpMethods(id).slice(0, 2), ["Long division", "Answer at the side"]);
 });
 
 test("one-page-story@1: a lesson's opening story is shown above its guess, not on a page of its own", () => {
