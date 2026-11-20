@@ -68,7 +68,7 @@ export function ProgressView({ learner }: { learner: Learner }) {
                 <th scope="col">Pattern</th>
                 <th scope="col">Status</th>
                 <th scope="col">Practice</th>
-                <th scope="col">New words</th>
+                <th scope="col">Words</th>
               </tr>
             </thead>
             <tbody>

@@ -71,7 +71,7 @@ export function ListenAnswerView({ view, sound, heardOnce, onPlay, onStopSound, 
   const d = view.done!;
   return (
     <main className="page vocab listen-answer" data-phase="done" data-passage={view.passage}>
-      <p className="eyebrow">Listen and answer</p>
+      <p className="eyebrow">Listening · Listen and answer</p>
       <h1 className="hero">
         {d.right} of {view.total} right
       </h1>
@@ -166,7 +166,7 @@ export function ListenAnswer({ learner, voice, onLeave, onChanged }: { learner: 
         <button type="button" className="link" onClick={leave}>
           ← Back
         </button>
-        <p className="eyebrow">Listen and answer</p>
+        <p className="eyebrow">Listening · Listen and answer</p>
         <h1 id="listen-title" className="hero">
           Hear a passage, then answer
         </h1>

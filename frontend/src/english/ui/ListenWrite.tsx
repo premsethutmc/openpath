@@ -38,7 +38,7 @@ export function ListenWriteIntro({ level, levelLabel, about, done, canSpeak, onS
       <button type="button" className="link" onClick={onBack}>
         ← Back
       </button>
-      <p className="eyebrow">Listen and write</p>
+      <p className="eyebrow">Listening · Listen and write</p>
       <h1 id="dict-title" className="hero">
         Hear a sentence, then write it
       </h1>
@@ -75,7 +75,7 @@ export function ListenWriteView({ content, view, heard, onPlay, onCheck, onNext,
     const d = view.done!;
     return (
       <main className="page vocab dict" data-phase="done">
-        <p className="eyebrow">Listen and write</p>
+        <p className="eyebrow">Listening · Listen and write</p>
         <h1 className="hero">
           {d.perfectFirst} of {d.asked} right first time
         </h1>
@@ -227,7 +227,7 @@ export function ListenWrite({ learner, voice, passage, onLeave, onChanged }: { l
           <button type="button" className="link" onClick={leave}>
             ← Back
           </button>
-          <p className="eyebrow">Listen and write</p>
+          <p className="eyebrow">Listening · Listen and write</p>
           <h1 id="dict-passage-title" className="hero">
             A short passage
           </h1>
