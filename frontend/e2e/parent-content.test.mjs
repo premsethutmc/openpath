@@ -25,6 +25,16 @@ const run = Date.now().toString(36);
 const PARENT = `lists.${run}@example.org`;
 const OTHER = `stranger.${run}@example.org`;
 
+
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
+async function today(page) {
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -84,7 +94,7 @@ async function addLearner(page, name) {
   await page.getByRole("button", { name: /Understand grammar/ }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.locator(".plan li").first().waitFor();
+  await today(page);
 }
 const spoken = (page) => page.evaluate(() => window.__spoken.slice());
 async function advance(page, name) {

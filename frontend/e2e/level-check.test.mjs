@@ -178,16 +178,25 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   assert.equal(await page.getByRole("heading", { name: "Today's plan" }).count(), 0);
   await page.getByRole("button", { name: /^School work/ }).click();
   await page.getByRole("button", { name: "Open the class syllabus" }).waitFor();
-  await page.getByRole("button", { name: /^All activities/ }).click();
-  await page.getByRole("button", { name: "Learn new words" }).waitFor();
-  await page.getByRole("button", { name: /^General English/ }).click();
-  await page.getByRole("heading", { name: "Today's plan" }).waitFor();
+  // the rows already open the daily activities: More to practise lists only the others
+  await page.getByRole("button", { name: /^More to practise/ }).click();
+  await page.getByRole("button", { name: "Try Listen and answer" }).waitFor();
+  assert.equal(await page.getByRole("button", { name: "Learn new words" }).count(), 0);
   await fits();
   await shot(page, "5-home-after");
+  // the older journey, skill by skill, is in Journey, under the ladders of the daily activities
+  await page.getByRole("button", { name: "Skill-by-skill practice and checks: in Journey" }).click();
+  await page.locator('.daily-path li[data-stream="grammar"]').waitFor();
+  await shot(page, "6-journey");
+  await page.getByRole("button", { name: /^Skill by skill/ }).click();
+  await page.getByRole("heading", { name: "Today's plan" }).waitFor();
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Progress" }).click();
+  await page.getByRole("heading", { name: "Your English" }).waitFor();
+  await shot(page, "7-progress");
   await page.reload();
   await page.locator('[data-stream="reading"]', { hasText: "Expert" }).waitFor();
 
-  await page.getByRole("button", { name: "Today: Listening and writing" }).click();
+  await page.getByRole("button", { name: "Today: Listening" }).click();
   await page.getByText("Level 7: Formal sentences").waitFor();
   await page.getByRole("button", { name: "← Back" }).click();
   await page.getByRole("button", { name: "Today: Reading" }).click();

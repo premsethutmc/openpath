@@ -15,6 +15,8 @@
  * usage: GRADE=5 BOARD=icse OUT=sim-icse-5.json node --import tsx scripts/sim-children.mts   (LIMIT=n: first n skills;
  *        PERSONA=name: one persona);  node --import tsx scripts/sim-children.mts --merge sim-*.json
  */
+import { stepsHelp } from "../../packages/learning/src/step-help";
+import { useEasierFirst } from "../../packages/learning/src/intervention";
 import { readFileSync, writeFileSync } from "node:fs";
 import { Driver } from "../src/learning/driver";
 import { boardFor } from "../../packages/learning/src/curricula";
@@ -22,6 +24,8 @@ import { allOutcomesOf } from "../../packages/learning/src/curriculum";
 import { graph } from "../../packages/learning/src/graph";
 import { question, questions } from "../../packages/learning/src/content";
 import { useReviewFixture } from "../../packages/learning/src/evidence";
+const LOAD = Number(process.env.LOAD ?? 0);
+if (process.env.EASIER === "0") useEasierFirst(false);
 import { checkCompetency } from "../../packages/learning/src/compiler";
 
 interface Persona { name: string; about: string; know: (skill: string) => number; gain: number; slip: number; guess?: boolean; hints?: boolean; misconception?: boolean }
@@ -98,7 +102,9 @@ if (process.argv.includes("--merge")) {
             if (P.guess) { const ok = p.type === "choice" && rand() < 1 / Math.max(2, (p.options ?? []).length); if (!ok) wrongs++; return ok ? p.answer : wrong(q, rand()); }
             const slipAnswer = fooled ? topsAndBottoms(q) : null;
             if (slipAnswer && slipAnswer !== p.answer) { wrongs++; return slipAnswer; }
-            if (rand() < know * (1 - P.slip)) return p.answer;
+            // LOAD=x (assumption, off by default): each working step past two makes a right answer x less likely
+            const load = LOAD ? Math.max(0, 1 - LOAD * Math.max(0, (stepsHelp(q)?.length ?? 2) - 2)) : 1;
+            if (rand() < know * (1 - P.slip) * load) return p.answer;
             wrongs++; return wrong(q, rand());
           };
           let last = "not_started", lastPhase = "", lastWhy = "", sittings = 0;

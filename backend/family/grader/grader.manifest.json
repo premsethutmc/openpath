@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "6cbe80c697948c416eac47cbcadecefccadabfb6295637f2e6df1ffed1ec49b5",
+ "sha256": "dce35f5298f541fcf425756b2f401407a20844b8f106523ac08ab3af7a987bd2",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -282,7 +282,7 @@
   "packages/learning/src/graph.ts": "aff0e620e2114b5154f5ee1d55018b2169bb4d9ec8306ee4ff9e1618bb3de302",
   "packages/learning/src/hypotheses.ts": "0e63819ca74bd4d7f1734ba0fd58d64ea0f39bbb28ab4ec665a36aa149e18e21",
   "packages/learning/src/independent-checker.ts": "493b7e4c8670357021d4ccb929bf7b3b1ae9f20941651ca3d809cdfdb73266d3",
-  "packages/learning/src/intervention.ts": "e3ee958da10804f9590658fe5a51228eeaeee46066af4b21d454379772dec152",
+  "packages/learning/src/intervention.ts": "27867be94dc8324eecb5cc3b4c493cbafc44d0ce159170a18f1f2197ad141432",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/learner-vector.ts": "dc40a1983f1ec75a4c8ce72827e5ab53d43da967bb51a67289fbe7c74bfc9523",
   "packages/learning/src/library.ts": "f8c6d6aab6572b88bec158eee03db35b6bb6beb48fc2c6a4173f0a79a00b0a70",

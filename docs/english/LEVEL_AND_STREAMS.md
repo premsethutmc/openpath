@@ -26,7 +26,7 @@ Each stream keeps moving its level as the learner practises. The check can be ta
 ## Home screen
 
 - Before a check: one card, "Start here: find your level".
-- After it: "Your English today", one row per stream (Words, Reading, Listening and writing, Spelling, Grammar and
+- After it: "Your English today", one row per stream (Words, Reading, Listening, Spelling, Grammar and
   rules) with its level, the next thing to do, a tick once something was done today, and a Go button.
 - Then the practice cards, then **School work** (My Words and My Books: material a parent or the learner brings),
   then the existing General English plan.
@@ -42,3 +42,25 @@ Each stream keeps moving its level as the learner practises. The check can be ta
 - The six spelling words are not marked as practised, so the learner meets them again in the Spelling Bee.
 - The reading part uses four practice questions per text; a learner later meets those questions again in practice.
 - School work by class is not built: English lessons follow each textbook's own texts, which OpenPath does not copy.
+
+## Home screen (20 November 2026)
+
+One way in: before Find my level, the home screen shows "Start here: find your level" and, below it, "Or choose an
+activity" as a short list (one row per activity, its button beside its name). After it, "Your English today" leads
+with the five daily rows, and "More to practise" lists only what the rows do not already open (Long reads, Listen and
+answer, Spelling Bee, Word check). School work is a short list too. General English (the older journey of skills and
+checks, with its own starting check) is folded away unless the learner is already on it or has an activity open in
+it, so a new learner no longer sees two different "starting points". The parents' link is always shown.
+
+## The older journey folded into the daily activities (20 November 2026)
+
+- Spelling rules: the Spelling row offers the next spelling rule (a short lesson, then practice, then a check with new
+  words) every other day, straight away, without the older journey's starting checks (`spellingRuleStep` in
+  plan.ts). Words from the learner's own writing still come first; on other days it is a round of the Spelling Bee.
+- Journey tab: each daily activity as a ladder (its levels, the learner's step marked, the next thing to do, and the
+  rule that moves a learner up, `UP` in streams.ts). The older skill-by-skill journey (its starting check, plan,
+  reviews, More practice and the path of skills) is below, under "Skill by skill", folded.
+- Progress tab: days with English this week and what has been done in each activity; the skill-by-skill estimates
+  and the parent and teacher overview are below, folded ("For a grown-up: why these?" opens them unfolded).
+- Home: no General English section any more (except in a pilot build, where it is the whole app). An unfinished
+  activity from it still shows "Carry on" on Home, and a link leads to Journey. Nothing in the record is removed.

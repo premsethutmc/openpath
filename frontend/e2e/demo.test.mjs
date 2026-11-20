@@ -31,6 +31,16 @@ const ANDROID = {
   userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Mobile Safari/537.36",
 };
 
+
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
+async function today(page) {
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 let server;
 let URL_;
@@ -130,6 +140,7 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
   // 4. placement: questions, feedback after each, Next moves on, and the session ends by itself
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".item").waitFor();
   // a reload in the middle of the session carries on (deep state survives a refresh)
@@ -142,13 +153,15 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await shot(page, "2-placement-done");
   await page.getByRole("button", { name: "Back to today" }).click();
   // 5. automatic progression: the plan moves on to the spelling check (dictation), here with an adult reading
+  await today(page);
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   const check = await finish(page, (n) => n % 2 === 0);
   assert.ok(check.length >= 8 && check.every((i) => i.format === "typed:dictation"), "the spelling check is dictation");
   await page.getByRole("button", { name: "Back to today" }).click();
   // 6. the plan, Progress and Journey reflect the answers; the version is labelled as development (not approved)
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   await fits(page);
   await shot(page, "3-home");
   const nav = page.getByRole("navigation", { name: "Sections" });
@@ -164,11 +177,11 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await fits(page);
   // 7. reload and a deep link keep the session and the learner
   await page.reload();
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   await page.goto(URL_ + "/developer");
   assert.ok(!/\/login$/.test(page.url()), "the developer page is behind the same login");
   await page.goto(URL_ + "/");
-  await page.getByRole("heading", { name: "Today" }).waitFor();
+  await today(page);
   // 8. logout: back to the login page, and the app is closed again
   await page.goto(URL_ + "/logout");
   await fits(page);
@@ -218,10 +231,13 @@ test("spoken words behind the demo login: the app asks the browser's voice to sa
   await page.getByRole("button", { name: "Build my path" }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finish(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
+  await today(page);
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await page.locator(".spelling-intro").waitFor();
   await page.getByRole("button", { name: "Test the sound" }).click();

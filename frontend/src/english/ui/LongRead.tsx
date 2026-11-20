@@ -44,7 +44,7 @@ export function LongRead({ learner, onLeave, onChanged }: { learner: Learner; on
         <button type="button" className="link" onClick={onLeave}>
           ← Back
         </button>
-        <p className="eyebrow">Reading</p>
+        <p className="eyebrow">Reading · Long reads</p>
         <h1 id="long-title" className="hero">
           Long reads
         </h1>

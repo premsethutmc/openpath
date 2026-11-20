@@ -36,24 +36,13 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onFirstWords, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onFirstWords: () => void; onParent?: () => void }) {
-  const [more, setMore] = useState(false);
-  // once a level is found, "Your English today" leads and the rest is folded away; before that everything is open.
-  // an unfinished General English activity keeps that part open.
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
+  // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
+  // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
   const [showAll, setShowAll] = useState(!guided);
   const [showSchool, setShowSchool] = useState(!guided);
-  const [showGeneral, setShowGeneral] = useState(!guided || !!learner.state.open);
-  const profile = learner.profile();
-  // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
-  const activities = profile.activities;
   const open = learner.state.open;
-  if (more && !learner.content.gate) return <MorePractice learner={learner} onStart={onStart} onJourney={onJourney} onBack={() => setMore(false)} />;
-  const now = learner.clock();
-  const dueChecks = profile.capabilities.filter((x) => x.standing === "check_due");
-  const words = dueWords(learner.state, now).length;
-  const independent = profile.capabilities.reduce((t, x) => t + x.evidence.independent, 0);
-  const checked = profile.capabilities.filter((x) => x.standing !== "not_checked").length;
   const name = learner.state.profile?.name ?? "explorer";
   return (
     <main className="page" aria-labelledby="today-title">
@@ -75,25 +64,25 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         </>
       ) : (
         <>
-          {isBeginner(learner.levels()) && <FirstWordsCard learner={learner} onOpen={onFirstWords} start />}
           <LevelPanel
             learner={learner}
             onLevelCheck={onLevelCheck}
-            onGo={(id, open) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
+            onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
+          {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
-            <span>All activities</span>
-            <span className="small">{showAll ? "Hide" : "Words, reading, listening, grammar, spelling"}</span>
+            <span>{guided ? "More to practise" : "Or choose an activity"}</span>
+            <span className="small">{showAll ? "Hide" : guided ? "Long reads, listen and answer, Spelling Bee, word check" : "Words, reading, listening, grammar, spelling"}</span>
           </button>
           {showAll && (
-            <div id="all-activities">
-              <NewWordsCard learner={learner} onOpen={onNewWords} />
-              <ReadingCard learner={learner} onOpen={onReading} />
+            <div id="all-activities" className="compact-list">
+              {!guided && <NewWordsCard learner={learner} onOpen={onNewWords} />}
+              {!guided && <ReadingCard learner={learner} onOpen={onReading} />}
               {onLongRead && <LongReadCard learner={learner} onOpen={onLongRead} />}
-              <ListenWriteCard learner={learner} onOpen={onListenWrite} />
-              <FirstWordsCard learner={learner} onOpen={onFirstWords} />
+              {!guided && <ListenWriteCard learner={learner} onOpen={onListenWrite} />}
+              {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
-              <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />
+              {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
               <BeeCard learner={learner} onBee={onBee} />
               <VocabCard learner={learner} onOpen={onVocab} />
             </div>
@@ -103,7 +92,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             <span className="small">{showSchool ? "Hide" : "Class syllabus, word lists, books"}</span>
           </button>
           {showSchool && (
-            <div id="school-work">
+            <div id="school-work" className="compact-list">
               <p className="small">The class syllabus, and words and texts from school that a parent or the learner adds.</p>
               <SyllabusCard onOpen={onSyllabus} />
               <MyWordsCard learner={learner} onOpen={onMyWords} />
@@ -113,17 +102,57 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         </>
       )}
       {learner.content.gate ? (
-        <h2 className="section-title general-title">General English</h2>
+        <>
+          <h2 className="section-title general-title">General English</h2>
+          <GeneralEnglish learner={learner} onStart={onStart} onResume={onResume} onWhy={onWhy} onJourney={onJourney} />
+        </>
       ) : (
-        <h2 className="section-title general-title fold-heading">
-          <button type="button" className="fold" aria-expanded={showGeneral} aria-controls="general-english" onClick={() => setShowGeneral(!showGeneral)}>
-            <span>General English</span>
-            <span className="small">{showGeneral ? "Hide" : "The starting check and the longer journey"}</span>
-          </button>
-        </h2>
+        <>
+          {open && learner.allows(open.event.type) && (
+            <section className="resume" aria-label="Unfinished activity">
+              <p>
+                You stopped in the middle of <strong>{Learner.sessionTitle(open.event.type).toLowerCase()}</strong> ({open.answered.length} answered).
+              </p>
+              <button type="button" className="primary" onClick={onResume}>
+                Carry on
+              </button>
+            </section>
+          )}
+          <p className="small" style={{ textAlign: "center" }}>
+            <button type="button" className="link" onClick={onPath ?? onJourney}>
+              Skill-by-skill practice and checks: in Journey
+            </button>
+          </p>
+        </>
       )}
-      {(showGeneral || learner.content.gate) && (
-        <div id="general-english">
+      {onParent && !learner.content.gate && (
+        <p className="small parent-entry">
+          <button type="button" className="link" onClick={onParent}>
+            For parents: word lists and results
+          </button>
+        </p>
+      )}
+    </main>
+  );
+}
+
+/**
+ * The older journey (General English): its starting check, a plan of skill lessons and checks, reviews and More
+ * practice. Shown on Home only in a pilot build; elsewhere it lives in Journey, under "Skill by skill".
+ */
+export function GeneralEnglish({ learner, onStart, onResume, onWhy, onJourney }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onWhy: () => void; onJourney: () => void }) {
+  const [more, setMore] = useState(false);
+  const profile = learner.profile();
+  const activities = profile.activities;
+  const open = learner.state.open;
+  if (more && !learner.content.gate) return <MorePractice learner={learner} onStart={onStart} onJourney={onJourney} onBack={() => setMore(false)} />;
+  const now = learner.clock();
+  const dueChecks = profile.capabilities.filter((x) => x.standing === "check_due");
+  const words = dueWords(learner.state, now).length;
+  const independent = profile.capabilities.reduce((t, x) => t + x.evidence.independent, 0);
+  const checked = profile.capabilities.filter((x) => x.standing !== "not_checked").length;
+  return (
+    <div id="general-english">
       <p className="small">The starting check and the broader learning journey: grammar, vocabulary and spelling rules. Optional, and separate from the Spelling Bee.</p>
       {open && learner.allows(open.event.type) && (
         <section className="resume" aria-label="Unfinished activity">
@@ -196,16 +225,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           For a grown-up: why these?
         </button>
       </p>
-      {onParent && !learner.content.gate && (
-        <p className="small parent-entry">
-          <button type="button" className="link" onClick={onParent}>
-            For parents: word lists and results
-          </button>
-        </p>
-      )}
-        </div>
-      )}
-    </main>
+    </div>
   );
 }
 
@@ -293,7 +313,7 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
  * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
  * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
  */
-function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: StreamRow["open"]) => void }) {
+function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: StreamRow["open"], step?: StreamRow["step"]) => void }) {
   if (!learner.levels().done)
     return (
       <section className="hub-card level-cta" aria-labelledby="level-cta-title">
@@ -325,7 +345,7 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
               <p className="small stream-level">{r.level}</p>
               <p className="small">{r.doneToday ? `✓ Done today${r.id === "words" ? "" : ` · next: ${r.next}`}` : r.next}</p>
             </div>
-            <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id, r.open)}>
+            <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id, r.open, r.step)}>
               Go
             </button>
           </li>
@@ -411,7 +431,7 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
   return (
     <section className="hub-card plain" aria-labelledby="grammar-use-card-title">
       <h2 id="grammar-use-card-title">
-        <span aria-hidden="true">🧩 </span>Grammar in use
+        <span aria-hidden="true">🧩 </span>Grammar
       </h2>
       <p>Fix the wrong word in a sentence, or build a sentence from word tiles. Eight sentences, each with its rule.</p>
       {s.answered > 0 && (
@@ -420,7 +440,7 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
         </p>
       )}
       <button type="button" className="secondary" onClick={onOpen}>
-        {s.answered ? "Eight more sentences" : "Try Grammar in use"}
+        {s.answered ? "Eight more sentences" : "Try Grammar"}
       </button>
     </section>
   );
@@ -455,7 +475,7 @@ function NewWordsCard({ learner, onOpen }: { learner: Learner; onOpen: () => voi
   return (
     <section className="hub-card plain" aria-labelledby="new-words-card-title">
       <h2 id="new-words-card-title">
-        <span aria-hidden="true">🌱 </span>New words
+        <span aria-hidden="true">🌱 </span>Words
       </h2>
       <p>Five new words a day, with meanings and sentences. They come back until you know them.</p>
       {s.learning + s.learnt > 0 && (

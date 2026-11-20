@@ -49,7 +49,7 @@ export function NewWordsIntro({ s, onStart, onBack }: { s: Summary; onStart: (ex
       <button type="button" className="link" onClick={onBack}>
         ← Back
       </button>
-      <p className="eyebrow">New words</p>
+      <p className="eyebrow">Words</p>
       <h1 id="words-title" className="hero">
         {todayDone ? "Today's words are done" : "Five new words a day"}
       </h1>
@@ -137,7 +137,7 @@ export function NewWordsView({ view, onMet, onKnow, onAnswer, onNext, onLeave, o
   const nothing = !d.newWords.length && !d.reviewed;
   return (
     <main className="page vocab words" data-phase="done">
-      <p className="eyebrow">New words</p>
+      <p className="eyebrow">Words</p>
       <h1 className="hero">{nothing ? "Nothing to do right now" : "Well done"}</h1>
       {d.newWords.length > 0 && (
         <p className="sub">

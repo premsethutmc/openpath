@@ -28,7 +28,7 @@ import { ScribblePad } from "./ScribblePad";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { ownIt } from "../../../packages/learning/src/taught";
-import { stepsHelp } from "../../../packages/learning/src/step-help";
+import { helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { recipeFor } from "../../../packages/learning/src/recipe";
 import { practiceScene, sceneForQuestion, sceneIsPicture } from "../../../packages/learning/src/scenes";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -479,11 +479,14 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
       </div>
     );
   const unit = ask.kind === "box" ? ask : { before: undefined, after: undefined };
+  const slash = ask.kind === "box" && (/\//.test(answer) || type === "mixed");
   return (
     <label className="kid-unit">
       {unit.before && <span>{unit.before}</span>}
-      <input aria-label="Your answer" inputMode={ask.kind === "product" ? "text" : "decimal"} autoComplete="off" placeholder={ask.kind === "product" ? "e.g. 2 × 3 × 3" : "Your answer"} value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
+      <input aria-label="Your answer" inputMode={ask.kind === "product" || slash ? "text" : "decimal"} autoComplete="off" placeholder={ask.kind === "product" ? "e.g. 2 × 3 × 3" : slash ? "e.g. 3/5" : "Your answer"} value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
       {unit.after && <span>{unit.after}</span>}
+      {/* answer-keys@1: a phone's keyboards hide "/" behind a symbols page, so an answer that is a fraction gets its own key */}
+      {slash && <button type="button" className="secondary kid-key" aria-label="Type a fraction bar" disabled={disabled} onClick={() => { const v = `${parts[0] ?? ""}/`; put([v], !!v.trim()); }}>/</button>}
     </label>
   );
 }
@@ -591,7 +594,10 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [value, setValue] = useResume(resumeKey && `${resumeKey}:answer`, previous?.response ?? "");
   const [hint, setHint] = useResume(resumeKey && `${resumeKey}:hint`, showHint);
   const [working, setWorking] = useResume(resumeKey && `${resumeKey}:working`, previous?.working?.join("\n") ?? "");
-  const [workingOpen,setWorkingOpen] = useResume(resumeKey && `${resumeKey}:working-open`, !!working);
+  // ldiv-shown@1: a long-division question in practice shows the written layout ("6 ) 348") straight away, each step for
+  // the child to enter; it counts as help only when a step is asked to be shown
+  const longDiv = hintAllowed && KID && q.type !== "written" && !q.picks?.length && !!stepsHelp(qid) && helpMethods(qid)[0] === "Long division";
+  const [workingOpen,setWorkingOpen] = useResume(resumeKey && `${resumeKey}:working-open`, !!working || longDiv);
   const [asked, setAsked] = useState(0);
   const [clarify, setClarify] = useState<string | null>(null);
   const submitting = useRef(false);
@@ -600,7 +606,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   // one-help@1: "I'm stuck" and "Work it out step by step" are one place. Being stuck opens the working with the next
   // step asked there (a box to fill); a step the child cannot do is shown by its "Help" button, and the next one loads.
   // Typing one's own working is not help; asking for a step is, and is recorded as before.
-  const [coach, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
+  const [coachAsked, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
+  const coach = coachAsked || longDiv;
   const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
   const askHelp = () => { setCoach(true); setWorkingOpen(true); setHint(true); };
   // together@1: a walk-through question opens with the step help already asked for; each step is the child's to type
@@ -652,7 +659,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           {KID && coach && canCoach ? null : KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
           {canCoach && (coach
-            ? <StepCoach key={qid} qid={qid} shown />
+            ? <StepCoach key={qid} qid={qid} shown onUsed={() => setHint(true)} />
             : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
         </details>
       )}

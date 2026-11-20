@@ -16,6 +16,7 @@ import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
 import { FIRST } from "../first/first.ts";
+import { rightAnswer } from "../test-helpers.ts";
 import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { NAMING_TOPIC, streamRows } from "./streams.ts";
 import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
@@ -277,4 +278,25 @@ test("LC-12 a beginner's Words row opens First words until First sentences open"
   await l.recordFirst([...sure, { type: "end", sitting: "f1", asked: 20, right: 20 }]);
   assert.match(words().level, /^Level \d of 8$/);
   assert.equal(words().open, undefined);
+});
+
+test("LC-13 the Spelling row offers the next spelling rule (lesson then practice) every other day, with no older starting check", async () => {
+  const c = loadContent({ mode: "development" });
+  const clock = testClock();
+  const l = await Learner.create(c, new MemoryRepo(), "Rules", "guardian", clock, "p-rules");
+  l.speechAvailable = true;
+  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, estimate: 3000, answered: 12 }, { type: "reading", passed: 3, scale: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "done" }]);
+  const spelling = () => streamRows(l, clock()).find((r) => r.id === "spelling")!;
+  const row = spelling();
+  assert.equal(row.open, "rule");
+  assert.match(row.next, /^Spelling rule: /);
+  assert.equal(row.step!.type, "spelling_practice");
+  // it starts straight away, with its lesson first, although the older journey's starting check was never done
+  const cur = await l.start(row.step!);
+  assert.ok(cur.lesson, "a short lesson first");
+  await l.finishLesson(cur.lesson!.id, true);
+  for (let v = await l.current(), g = 0; v.next && g < 60; v = await l.current(), g++) await l.answer(v.next.item, rightAnswer(v.next.item), { use: v.next.use });
+  // done today, and tomorrow it is the Spelling Bee's turn
+  assert.equal(spelling().doneToday, true);
+  assert.notEqual(spelling().open, "rule");
 });

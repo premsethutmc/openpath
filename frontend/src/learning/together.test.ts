@@ -5,7 +5,11 @@ import { Driver } from "./driver";
 import { boardFor } from "../../../packages/learning/src/curricula";
 import { question, questions } from "../../../packages/learning/src/content";
 import { useReviewFixture } from "../../../packages/learning/src/evidence";
-import { TOGETHER } from "../../../packages/learning/src/intervention";
+import { TOGETHER, ease } from "../../../packages/learning/src/intervention";
+import { moduleFor } from "../../../packages/learning/src/content";
+import { modulePhasePool } from "../../../packages/learning/src/library";
+import { exposureKey } from "../../../packages/learning/src/families";
+import { keyboardOffered } from "../../../packages/learning/src/written";
 import { stepsHelp } from "../../../packages/learning/src/step-help";
 
 const wrong = (q: string) => { const p = question(q) as { type: string; answer: string }; return p.type === "choice" ? (p.answer === "A" ? "B" : "A") : p.answer === "7" ? "8" : "7"; };
@@ -35,6 +39,11 @@ test("together@1: a child who stays wrong is walked through a question, then ask
     assert.ok((stepsHelp(seen[i].q!)?.length ?? 0) >= 2, "the walked question has steps to type");
     assert.equal(seen[i + 1].phase, "check", "then one alone");
     assert.notEqual(seen[i + 1].q, seen[i].q, "on a fresh question");
+    // easier-first@1: the walk-through is the easiest question of the skill the child has not met (fewest steps, then smallest numbers)
+    const met = new Set(d.state().records.attempts.filter((a) => a.at < d.state().records.attempts.find((x) => x.context === TOGETHER.context)!.at).map((a) => exposureKey(a.questionId)));
+    const others = modulePhasePool(moduleFor(skill)!, "practice").slice(0, 150).filter((id) => !met.has(exposureKey(id)) && keyboardOffered(id) && (stepsHelp(id)?.length ?? 0) >= 2);
+    const sorted = others.map(ease).sort((a, b) => a - b);
+    assert.ok(ease(seen[i].q!) <= sorted[Math.floor(sorted.length / 10)], `the walk-through is among the easiest tenth of fresh questions: ${seen[i].q} (${ease(seen[i].q!)})`);
     const walk = d.state().records.attempts.find((a) => a.context === TOGETHER.context)!;
     assert.equal(walk.activity, "guided", "recorded as helped");
   } finally { useReviewFixture(null); }

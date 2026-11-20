@@ -141,7 +141,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
           {entry && <StepEntry key={`${qid}:${at}`} ask={entry} onRight={advance} />}
           {/* a calculation the child can be helped to do, before it is shown: the same smaller question a slip would get */}
           {(() => { const ask = smallerOf(now.shown); return ask ? <SmallAsk key={now.shown} ask={ask} after="Now finish this step yourself, or ask to see it." /> : null; })()}
-          <button type="button" className="secondary coach-help" onClick={advance}><span aria-hidden="true">✋ </span>{at === steps.length - 1 ? "Help: show me the last step" : "Help: show me this step"}</button>
+          <button type="button" className="secondary coach-help" onClick={() => { onUsed?.(); advance(); }}><span aria-hidden="true">✋ </span>{at === steps.length - 1 ? "Help: show me the last step" : "Help: show me this step"}</button>
         </>
       )}
       {!now && <p className="small muted">{startOpen ? "That is every step." : "That is every step. Now try it yourself."}</p>}

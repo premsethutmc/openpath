@@ -28,6 +28,16 @@ const items = new Map(
 const PASSWORD = "a-long-family-passphrase";
 const run = Date.now().toString(36);
 
+
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
+async function today(page) {
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -104,6 +114,7 @@ async function register(page, email, name) {
   await page.getByRole("button", { name: /Get better at spelling/ }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
 }
 
@@ -142,6 +153,7 @@ test("with a voice: hear the word, repeat it, hear it in a sentence, type it; a 
   await placement(page);
   // Today offers the dictation check
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
+  await today(page);
   await page.locator(".plan li", { hasText: "Spelling check: hear and spell" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".spelling-intro").waitFor();
   await fits(page);
@@ -236,6 +248,7 @@ test("without a voice: the check explains why, an adult can read the words (reco
   const { context, page, errors } = await device({ voice: false });
   await register(page, `novoice.${run}@example.org`, "Tara");
   await placement(page);
+  await today(page);
   await page.locator(".plan li", { hasText: "Spelling check: hear and spell" }).getByRole("button", { name: "Start" }).click();
   await page.getByText("This device can't say the words aloud.").waitFor();
   assert.equal(await page.getByRole("button", { name: "Start the spelling check" }).count(), 0, "no way to start a silent check");
@@ -280,6 +293,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
     await page.getByRole("button", { name: "Back to today" }).click();
   };
   await answerAll(); // placement
+  await today(page);
   await page.locator(".plan li", { hasText: "Spelling check: hear and spell" }).getByRole("button", { name: "Start" }).click();
   await page.getByRole("button", { name: "Start the spelling check" }).click();
   await answerAll();
@@ -305,6 +319,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   if (await onPath.count()) assert.match(await onPath.innerText(), /more answers on your own at that level are needed/);
   // start it: by dictation where the skill has words at that level, otherwise a short check
   await page.getByRole("button", { name: "Home", exact: true }).click();
+  await today(page);
   await page.locator(`.plan li[data-action="evidence_check"][data-capability="${cap}"]`).getByRole("button", { name: "Start" }).click();
   if (await page.locator(".spelling-intro").count()) await page.getByRole("button", { name: "Start the spelling check" }).click();
   await answerAll();
