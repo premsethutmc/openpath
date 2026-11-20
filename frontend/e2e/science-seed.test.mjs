@@ -57,8 +57,11 @@ test('390px: lock a prediction, reveal the below-soil root on purpose, recover, 
     await page.getByRole('link', { name: /Pressure in the Sand/ }).tap();
     await page.getByRole('heading', { name: 'Pressure in the Sand' }).waitFor();
     await page.getByRole('link', { name: /All science labs/ }).tap();
+    await page.waitForURL(server.origin + '/');
     await shot(page, 'science-hub');
     await page.getByRole('link', { name: /Plant a Seed/ }).tap();
+    await page.waitForURL(server.origin + '/plant-a-seed/');
+    await page.getByRole('heading', { name: 'Plant a Seed', exact: true }).waitFor();
     await fits(page, 390);
     assert.equal(await stage(), 'empty');
     await button('Place the bean').tap();
