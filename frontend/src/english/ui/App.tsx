@@ -35,6 +35,7 @@ import { ListenWrite } from "./ListenWrite.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
+import { LongRead } from "./LongRead.tsx";
 import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
 import { FirstWords } from "./FirstWords.tsx";
@@ -129,6 +130,7 @@ export function App() {
   const [inFirst, setInFirst] = useState(false);
   const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
+  const [longRead, setLongRead] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
@@ -180,6 +182,7 @@ export function App() {
       setGuided(null);
       setInFirst(false);
       setListenAnswer(null);
+      setLongRead(null);
       setInSyllabus(false);
       setInParent(false);
       setInReading(false);
@@ -493,6 +496,21 @@ export function App() {
         />
       </div>
     );
+  if (longRead)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <LongRead
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setInSyllabus(longRead.from === "syllabus");
+            setLongRead(null);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (listenAnswer)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -542,6 +560,7 @@ export function App() {
             else if (where === "reading") setInReading(true);
             else if (where === "listening") setInListenWrite(true);
             else if (where === "listen") setListenAnswer({ from: "syllabus" });
+            else if (where === "long") setLongRead({ from: "syllabus" });
             else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
           }}
         />
@@ -728,6 +747,7 @@ export function App() {
           onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
+          onLongRead={() => (setLongRead({}), scrollTo(0, 0))}
           onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}

@@ -19,6 +19,7 @@ ACTIVITIES = [
     ("First words", "first_words"),
     ("Words", "word_learn"),
     ("Reading", "reading"),
+    ("Long reads", "long_read"),
     ("Listen and write", "dictation"),
     ("Listen and answer", "listen_passage"),
     ("Spelling", "spell"),
@@ -91,6 +92,11 @@ def usage(days: int = 30, now=None) -> dict:
             if kind == "spell_answer":
                 r["answers"] += 1
                 r["right"] += bool(body.get("correct"))
+        elif kind == "long_read" and t == "part":
+            r["finished"] += 1
+            for a in rec.get("answers") or []:
+                r["answers"] += 1
+                r["right"] += bool(isinstance(a, dict) and a.get("correct"))
         elif kind == "guided_task" and t == "done":
             r["finished"] += 1
         elif kind == "level_check":

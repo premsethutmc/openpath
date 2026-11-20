@@ -3,6 +3,7 @@
  * retention schedule and word memory, and two counts read from the record. Nothing on this screen is estimated
  * for display: every number is a count of what happened.
  */
+import { longSummary } from "../logic/reading/long-read.ts";
 import { useState } from "react";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
@@ -35,7 +36,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onFirstWords, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onFirstWords: () => void; onParent?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onFirstWords, onParent }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onFirstWords: () => void; onParent?: () => void }) {
   const [more, setMore] = useState(false);
   // once a level is found, "Your English today" leads and the rest is folded away; before that everything is open.
   // an unfinished General English activity keeps that part open.
@@ -88,6 +89,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             <div id="all-activities">
               <NewWordsCard learner={learner} onOpen={onNewWords} />
               <ReadingCard learner={learner} onOpen={onReading} />
+              {onLongRead && <LongReadCard learner={learner} onOpen={onLongRead} />}
               <ListenWriteCard learner={learner} onOpen={onListenWrite} />
               <FirstWordsCard learner={learner} onOpen={onFirstWords} />
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
@@ -353,6 +355,27 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.passages ? "Hear another passage" : "Try Listen and answer"}
+      </button>
+    </section>
+  );
+}
+
+function LongReadCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = longSummary(learner.longRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="long-card-title">
+      <h2 id="long-card-title">
+        <span aria-hidden="true">📚 </span>Long reads
+      </h2>
+      <p>A longer story in three parts, one part at a time, then questions on the whole story: its theme, a character and the title.</p>
+      {s.parts > 0 && (
+        <p className="small">
+          {s.finished} {s.finished === 1 ? "story" : "stories"} finished · {s.right} of {s.asked} questions right
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.parts ? "Go on reading" : "Try a long read"}
       </button>
     </section>
   );

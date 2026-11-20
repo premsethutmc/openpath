@@ -3,6 +3,7 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
+import type { LongRecord } from "./reading/long-read.ts";
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
@@ -304,6 +305,16 @@ export class Learner {
   /** Store Listen and answer results, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordListen(records: readonly ListenRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "listen_passage", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's long reads, in order. */
+  longRecords(): LongRecord[] {
+    return this.events.flatMap((e) => (e.kind === "long_read" ? [e.record] : []));
+  }
+
+  /** Store a finished part of a long read. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordLong(records: readonly LongRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "long_read", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's Grammar in use record, in order. */

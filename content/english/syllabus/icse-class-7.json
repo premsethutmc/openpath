@@ -78,9 +78,9 @@
         {
           "id": "R1",
           "text": "Reads literary and other texts on a wide range of themes, from home and community to science, media and the environment.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "The Reading course has OpenPath's own stories and reports; it does not cover every theme listed."
+          "coverage": "covered",
+          "where": "long",
+          "note": "Long reads: six stories in three parts each, on home, community, science, the environment, media and history, with questions on each part and on the whole. The Reading course adds its own stories and reports."
         },
         {
           "id": "R2",
