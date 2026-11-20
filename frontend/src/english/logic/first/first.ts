@@ -12,7 +12,8 @@
  * First sentences, the bridge to level 1: once a learner has found twenty words on the first tap, each sitting
  * also has sentences made of the words they know, always with a picture:
  *
- *   read      read a short sentence ("I see three apples."), tap its picture; after a wrong tap it is said aloud
+ *   read      read a short sentence ("I see a cat and a dog.", "The ball is under the box."), tap its picture or
+ *             where it is; after a wrong tap it is said aloud
  *   sentence  see a picture and hear its sentence, tap the words in order to build it
  *
  * It is practice, not a test: a wrong tap is switched off and the learner tries again; whether the first tap was
@@ -214,36 +215,57 @@ export class FirstSitting {
     for (const r of history) if (r.type === "step" && r.kind === "hear" && r.correct) known.add(r.key);
     const knownIn = (group: string) => content.words.filter((w) => w.group === group && known.has(w.id));
     const article = (w: FirstWord) => (/^[aeiou]/.test(w.word) ? "an" : "a");
-    const made: { text: string; picture: string; options: string[]; answer: number; tag: string }[] = [];
+    type Made = { text: string; picture: string; options: string[]; answer: number; tag: string; mover?: string; anchor?: string };
+    const made: Made[] = [];
     const choose = <T,>(xs: T[], tag: string) => hashOrder(xs, (x) => `${salt}${tag}|${JSON.stringify(x)}`);
-    // "This is a cat." among two others of its group
+    // "This is a cat." among two others of its group (two per group, so there are enough different sentences)
     for (const g of ["animals", "food", "things", "world"]) {
-      const ws = knownIn(g);
+      const ws = choose(knownIn(g), `this|${g}`);
       if (ws.length < OPTIONS) continue;
-      const [w, ...rest] = choose(ws, `this|${g}`);
-      const options = choose([w, ...rest.slice(0, OPTIONS - 1)], `this-o|${w.id}`);
-      made.push({ text: `This is ${article(w)} ${w.word}.`, picture: w.picture, options: options.map((x) => x.picture), answer: options.indexOf(w), tag: "this" });
+      for (const w of ws.slice(0, 2)) {
+        const options = choose([w, ...ws.filter((x) => x !== w).slice(0, OPTIONS - 1)], `this-o|${w.id}`);
+        made.push({ text: `This is ${article(w)} ${w.word}.`, picture: w.picture, options: options.map((x) => x.picture), answer: options.indexOf(w), tag: "this" });
+      }
     }
     // "I see three apples." among groups of other sizes
-    const countable = content.count.map((id) => byId.get(id)!).filter((w) => known.has(w.id));
-    if (countable.length) {
-      const w = choose(countable, "see")[0];
-      const n = 2 + (hash(`${salt}see-n`) % 3);
-      const sizes = choose([n, ...[1, 2, 3, 4, 5].filter((x) => x !== n)].slice(0, OPTIONS), `see-o|${n}`);
+    for (const w of choose(content.count.map((id) => byId.get(id)!).filter((w) => known.has(w.id)), "see").slice(0, 2)) {
+      const n = 2 + (hash(`${salt}see-n|${w.id}`) % 3);
+      const sizes = choose([n, ...[1, 2, 3, 4, 5].filter((x) => x !== n)].slice(0, OPTIONS), `see-o|${w.id}|${n}`);
       made.push({ text: `I see ${content.numbers[n - 1]} ${plural(w, true)}.`, picture: w.picture.repeat(n), options: sizes.map((x) => w.picture.repeat(x)), answer: sizes.indexOf(n), tag: "see" });
+    }
+    // "I see a cat and a dog." among pairs where one of the two is different
+    const naming = choose(content.words.filter((w) => ["animals", "food", "things"].includes(w.group) && known.has(w.id)), "pair");
+    for (let k = 0; k + 3 < naming.length && k < 6; k += 3) {
+      const [x, y, z] = naming.slice(k, k + 3);
+      const right = `${x.picture} ${y.picture}`;
+      const options = choose([right, `${x.picture} ${z.picture}`, `${z.picture} ${y.picture}`], `pair-o|${x.id}|${y.id}`);
+      made.push({ text: `I see ${article(x)} ${x.word} and ${article(y)} ${y.word}.`, picture: right, options, answer: options.indexOf(right), tag: "pair" });
+    }
+    // "The cat is under the box." read, then tap where the cat is
+    const box = byId.get(content.place.anchor)!;
+    for (const w of choose(content.place.movers.map((id) => byId.get(id)!).filter((w) => known.has(w.id) && known.has(box.id)), "where").slice(0, 2)) {
+      const rel = hash(`${salt}where-r|${w.id}`) % content.place.relations.length;
+      made.push({ text: `The ${w.word} is ${content.place.relations[rel].say} the ${box.word}.`, picture: w.picture, options: content.place.relations.map((r) => r.id), answer: rel, tag: "where", mover: w.picture, anchor: box.picture });
     }
     // "I can swim." and "I am happy." among other actions and feelings
     for (const [g, lead, tag] of [["actions", "I can", "can"], ["describing", "I am", "am"]] as const) {
-      const ws = knownIn(g).filter((w) => g !== "describing" || ["happy", "sad", "hot", "cold"].includes(w.word));
+      const ws = choose(knownIn(g).filter((w) => g !== "describing" || ["happy", "sad", "hot", "cold"].includes(w.word)), tag);
       if (ws.length < OPTIONS) continue;
-      const [w, ...rest] = choose(ws, tag);
-      const options = choose([w, ...rest.slice(0, OPTIONS - 1)], `${tag}-o|${w.id}`);
-      made.push({ text: `${lead} ${w.word}.`, picture: w.picture, options: options.map((x) => x.picture), answer: options.indexOf(w), tag });
+      for (const w of ws.slice(0, 2)) {
+        const options = choose([w, ...ws.filter((x) => x !== w).slice(0, OPTIONS - 1)], `${tag}-o|${w.id}`);
+        made.push({ text: `${lead} ${w.word}.`, picture: w.picture, options: options.map((x) => x.picture), answer: options.indexOf(w), tag });
+      }
     }
-    const pool = choose(made, "pool");
-    const reads: Step[] = pool.slice(0, 3).map((m) => ({ kind: "read", key: m.text, say: "Read the sentence, then tap its picture.", options: m.options, answer: m.answer, text: m.text, picture: m.picture }));
-    const spare = ["the", "is", "a", "can", "see", "am"];
-    const sentences: Step[] = [...pool.slice(3), ...pool.slice(0, 3)].slice(0, 2).map((m) => {
+    // three to read, each of a different kind, the longer ones first; two different ones to build, never one just read
+    const longFirst = ["where", "pair", "see", "this", "can", "am"];
+    const pool = choose(made, "pool").sort((x, y) => longFirst.indexOf(x.tag) - longFirst.indexOf(y.tag));
+    const readMade: Made[] = [];
+    for (const m of pool) if (readMade.length < 3 && !readMade.some((r) => r.tag === m.tag)) readMade.push(m);
+    const reads: Step[] = readMade.map((m) => ({ kind: "read", key: m.text, say: m.mover ? "Read the sentence, then tap where it is." : "Read the sentence, then tap its picture.", options: m.options, answer: m.answer, text: m.text, picture: m.picture, ...(m.mover ? { mover: m.mover, anchor: m.anchor } : {}) }));
+    const buildMade = choose(pool.filter((m) => !m.mover && !readMade.includes(m)), "build-pick").sort((x, y) => Number(y.tag === "pair") - Number(x.tag === "pair"));
+    const twoBuilds = buildMade.filter((m, i) => buildMade.findIndex((x) => x.tag === m.tag) === i).slice(0, 2);
+    const spare = ["the", "is", "a", "can", "see", "am", "and"];
+    const sentences: Step[] = twoBuilds.map((m) => {
       const words = m.text.replace(/[.]$/, "").split(" ");
       const extra = choose(spare.filter((x) => !words.map((y) => y.toLowerCase()).includes(x)), `sx|${m.text}`)[0];
       let tiles = choose([...words.map((w, i) => ({ w, i })), { w: extra, i: 99 }], `st|${m.text}`).map((t) => t.w);
@@ -268,7 +290,7 @@ export class FirstSitting {
     const s = this.step;
     if (!s) return null;
     // a sentence to read is said aloud only after a wrong tap, as help
-    if (!this.solved) return s.kind === "read" && this.misses > 0 ? `${s.text} Tap its picture.` : s.say;
+    if (!this.solved) return s.kind === "read" && this.misses > 0 ? `${s.text} ${s.mover ? "Tap where it is." : "Tap its picture."}` : s.say;
     if (s.kind === "read" || s.kind === "sentence") return `${s.text} Well done.`;
     return s.kind === "build" ? `${s.word!.word.split("").join(", ")}. ${s.word!.word}. Well done.` : s.kind === "hear" ? `${s.word!.word}. Well done.` : "Well done.";
   }
@@ -351,7 +373,7 @@ export class FirstSitting {
     const view: FirstView = { ...base, phase: this.solved ? "right" : "ask" };
     if (s.kind === "build") view.build = { picture: s.word!.picture, placed: this.placed.map((i) => s.tiles![i]).join(""), tiles: s.tiles!.map((letter, i) => ({ letter, used: this.placed.includes(i) })) };
     else if (s.kind === "sentence") view.build = { picture: s.picture!, placed: this.placed.map((i) => s.tiles![i]).join(" "), tiles: s.tiles!.map((letter, i) => ({ letter, used: this.placed.includes(i) })), words: true };
-    else if (s.kind === "place") view.place = { mover: s.mover!, anchor: s.anchor!, zones: s.options.map((id, i) => ({ id, off: this.off.has(i) })) };
+    else if (s.kind === "place" || (s.kind === "read" && s.mover)) view.place = { mover: s.mover!, anchor: s.anchor!, zones: s.options.map((id, i) => ({ id, off: this.off.has(i) })) };
     else view.options = s.options.map((picture, i) => ({ picture, off: this.off.has(i), ...(s.kind === "two" && this.placed.includes(i) ? { picked: true } : {}) }));
     if (s.kind === "read") view.text = s.text!;
     if (this.solved && (s.kind === "read" || s.kind === "sentence")) view.reveal = { text: s.text!, picture: s.picture! };
@@ -362,7 +384,7 @@ export class FirstSitting {
   /** For tests and the place screen after a right answer: where the mover went. */
   solvedPlace(): string | null {
     const s = this.step;
-    return s && this.solved && s.kind === "place" ? s.options[s.answer] : null;
+    return s && this.solved && (s.kind === "place" || (s.kind === "read" && !!s.mover)) ? s.options[s.answer] : null;
   }
 }
 
