@@ -1,0 +1,26 @@
+.panel-line { display: flex; gap: 8px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+.day-pill {
+  margin: 0; padding: 4px 8px; border-radius: 50px; background: var(--green-soft); color: var(--green);
+  font-size: .82rem; font-weight: 750;
+}
+.bean-pot { background: #e6efe4; }
+.bean-pot svg { display: block; width: 100%; max-height: 236px; }
+.soil { fill: #77472d; }
+[data-moisture="dry"] .soil { fill: #cc9969; }
+[data-moisture="moist"] .soil { fill: #7a4c35; }
+[data-moisture="waterlogged"] .soil { fill: #51322a; }
+.bean, .root, .shoot, .cracks, .puddle { opacity: 0; }
+[data-stage="seed"] .bean, [data-stage="root"] .bean, [data-stage="sprout"] .bean,
+[data-stage="root"] .root, [data-stage="sprout"] .root, [data-stage="sprout"] .shoot,
+[data-moisture="dry"] .cracks, [data-moisture="waterlogged"] .puddle { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) { .bean, .root, .shoot, .cracks, .puddle { transition: opacity 240ms ease; } .soil { transition: fill 210ms ease; } }
+.soil-note { margin-top: 9px; font-weight: 700; color: var(--green); }
+.next { margin-top: 14px; }
+.model-note { margin-bottom: 0; }
+details { margin-top: 12px; }
+summary { display: list-item; width: fit-content; padding: 11px 0; cursor: pointer; font-size: .84rem; font-weight: 700; color: var(--subtle); }
+details p { margin: 2px 0 6px; }
+.pot-choice { margin-block: 14px; }
+.pot-observation { flex: 0 0 100%; margin: 0 0 3px; border-radius: 8px; padding: 8px 10px; border: 1px solid #ccac8b; }
+.crumbly { color: #3f2b1b; background: #f3e0ca; }
+.damp { color: #352117; background: #e6cdb8; }
