@@ -83,3 +83,20 @@ test('the bee demonstrates both visits without a tap, then the cutaway opens',as
  await b(p,'Look inside →').tap();
  assert.match(await status(p),/pollen lands/i);
 }));
+test('Tab focus survives autoplay and both Enter-activated landings',async t=>run(t,false,390,async(p,origin)=>{
+ await p.emulateMedia({reducedMotion:'no-preference'});
+ await p.goto(origin+'/flower-to-seed/');
+ for(let i=0;i<6;i++)await p.keyboard.press('Tab');
+ const focused=()=>p.evaluate(()=>document.activeElement?.getAttribute('aria-label'));
+ assert.equal(await focused(),'Left flower');
+ await p.locator('#observation').filter({hasText:'Pollen reaches the other flower'}).waitFor();
+ assert.equal(await focused(),'Left flower');
+ await p.keyboard.press('Enter');
+ await p.locator('#observation').filter({hasText:'Pollen sticks to the bee.'}).waitFor();
+ assert.equal(await focused(),'Left flower');
+ await p.keyboard.press('Tab');
+ assert.equal(await focused(),'Right flower');
+ await p.keyboard.press('Enter');
+ await p.locator('#observation').filter({hasText:'Pollen reaches the other flower'}).waitFor();
+ assert.equal(await focused(),'Right flower');
+}));

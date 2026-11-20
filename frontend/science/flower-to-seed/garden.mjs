@@ -67,11 +67,16 @@ function cutawayActions(){
  stage===3?primary('crack','Split pod'):'';
 }
 function draw(focusAction=null){
+ // Repainting the scene replaces its buttons. Keep the current keyboard
+ // action across automatic and manual landings without moving outside focus.
+ const active=document.activeElement;
+ const current=active?.closest('#scene,#controls')?active.dataset.action:null;
+ const keepFocus=focusAction??current;
  document.querySelectorAll('.stops [data-stop]').forEach(e=>e.dataset.stop===stop?e.setAttribute('aria-current','step'):e.removeAttribute('aria-current'));
  $('chapter').textContent=labels[stop][0];
  $('description').textContent=labels[stop][2];
  showScene();showControls();status();
- if(focusAction)Array.from(document.querySelectorAll('[data-action]')).find(e=>e.dataset.action===focusAction)?.focus({preventScroll:true});
+ if(keepFocus)Array.from(document.querySelectorAll('[data-action]')).find(e=>e.dataset.action===keepFocus)?.focus({preventScroll:true});
 }
 function move(next){
  stop=next;
