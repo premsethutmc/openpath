@@ -37,3 +37,18 @@ test('seeds and buds require a planted, moist bed; effects are bounded and input
   assert.equal(empty.planted,false);
  }
 });
+
+test('a 20-second story timeline advances through five ordered shots with no gaps',async()=>{
+ const {storyLength,storyFrame,shots}=await import('./story-model.mjs');
+ assert.equal(storyLength,20);
+ assert.deepEqual(shots.map(s=>s.id),['dawn','out','gather','transfer','home']);
+ for(let i=0;i<shots.length;i++){
+  const shot=shots[i];
+  assert.equal(storyFrame(shot.start).shot.id,shot.id);
+  assert.equal(storyFrame(shot.start).t,0);
+  assert.equal(shot.end,shots[i+1]?.start??storyLength);
+ }
+ assert.equal(storyFrame(19.999).finished,false);
+ assert.equal(storyFrame(20).finished,true);
+ assert.equal(storyFrame(22).t,1);
+});

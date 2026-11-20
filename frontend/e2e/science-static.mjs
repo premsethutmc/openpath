@@ -33,6 +33,8 @@ const files = new Map([
   ['/flower-to-seed/', ['flower-to-seed/index.html', 'text/html']],
   ['/flower-to-seed/garden.css', ['flower-to-seed/garden.css', 'text/css']],
   ['/flower-to-seed/garden.mjs', ['flower-to-seed/garden.mjs', 'text/javascript']],
+  ['/flower-to-seed/story.mjs', ['flower-to-seed/story.mjs', 'text/javascript']],
+  ['/flower-to-seed/story-model.mjs', ['flower-to-seed/story-model.mjs', 'text/javascript']],
   ['/flower-to-seed/sound.mjs', ['flower-to-seed/sound.mjs', 'text/javascript']],
   ['/flower-to-seed/art.mjs', ['flower-to-seed/art.mjs', 'text/javascript']],
   ['/flower-to-seed/model.mjs', ['flower-to-seed/model.mjs', 'text/javascript']],

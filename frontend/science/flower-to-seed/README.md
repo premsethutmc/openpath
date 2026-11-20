@@ -8,3 +8,5 @@ Based on pollination and plant reproduction in the [CISCE primary science curric
 - Original vectors, no sign-in, no new API, storage or tracking. Tap, drag, or use the keyboard; animation responds to reduced-motion settings. No scoring or grading.
 
 - Optional Sound runs an original Web Audio score and synthesized garden ambience, with short action sounds for the bee, pod and rain. Starts muted on every load; no external tracks, recording, permission prompt or network audio. Hidden tabs suspend audio.
+
+- The optional 20-second A Bee’s Morning story uses five timed SVG shots, with pause, replay, and a take-over action that returns immediately to the interactive garden. The dialogue is fictional. The foraging story distinguishes nectar collection, incidental pollen transfer, and honey-making at the hive; real processes take longer.

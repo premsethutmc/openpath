@@ -1,8 +1,13 @@
 import {seeds,stages,pollenPath,cycle,disperse,crops,startBed,tend} from './model.mjs';
 import {garden,microscope,travel,bedArt} from './art.mjs';
 import {gardenSound} from './sound.mjs';
+import {wireBeeStory} from './story.mjs';
 const $=id=>document.getElementById(id);
 const soundtrack=gardenSound();
+const openStory=wireBeeStory($('bee-story'),name=>soundtrack.effect(name),()=>{
+ cancelFlight();move('garden');draw();
+ $('scene').querySelector('.bee-touch')?.focus({preventScroll:true});
+});
 let requestedSound=false,soundRevision=0;
 const soundButton=$('garden-sound');
 if(!soundtrack.supported)soundButton.hidden=true;
@@ -60,7 +65,7 @@ function showScene(){
 function showControls(){
  let controls='';
  if(stop==='garden'){
-   controls=(landed===null?'':primary('advance','Look inside →')+' ')+button('watch','▶ Watch the bee');
+   controls=(landed===null?'':primary('advance','Look inside →')+' ')+button('story','▶ Watch the 20-second story');
  }else if(stop==='cutaway'){
    controls=landed===null?primary('go-garden','Take the bee to a flower →'):
    `<input class="range" type="range" id="time" min="0" max="3" step="1" value="${stage}" aria-label="Flower growth" aria-valuetext="${stages[stage].title}">
@@ -150,7 +155,8 @@ document.addEventListener('click',e=>{
  const f=flowerAction.exec(id);
  cancelFlight();
  if(f){flyTo(Number(f[1]),390);return;}
- if(id==='bee'||id==='watch'){showFlight();return;}
+ if(id==='bee'){showFlight();return;}
+ if(id==='story'){openStory();return;}
  if(id==='advance'){move('cutaway');}
  else if(id==='crack'&&stage===3){soundtrack.effect('pod');opened=true;obs='The pod splits and scatters its seeds.';}
  else if(id.startsWith('go-'))move(id.slice(3));
