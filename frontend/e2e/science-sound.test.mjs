@@ -39,6 +39,8 @@ for (const width of [320,390]) test(`Sound Studio ${width}px: one string, real a
     });
     await p.goto(server.origin);
     await p.getByRole('link',{name:/Sound Studio/}).tap();
+    await p.waitForURL(server.origin+'/sound-studio/');
+    await p.locator('#tension[aria-valuetext]').waitFor();
     assert.equal(await p.evaluate(()=>!!window.soundTest.ctx),false,'never autoplay');
     await p.getByRole('button',{name:'Soft pluck'}).tap();
     const read=()=>p.locator('#notice').textContent();
