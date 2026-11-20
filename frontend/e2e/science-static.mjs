@@ -30,6 +30,11 @@ const files = new Map([
   ['/chemistry-lab/lab-model.mjs', ['chemistry-lab/lab-model.mjs', 'text/javascript']],
   ['/chemistry-lab/lab.mjs', ['chemistry-lab/lab.mjs', 'text/javascript']],
   ['/chemistry-lab/lab.css', ['chemistry-lab/lab.css', 'text/css']],
+  ['/flower-to-seed/', ['flower-to-seed/index.html', 'text/html']],
+  ['/flower-to-seed/garden.css', ['flower-to-seed/garden.css', 'text/css']],
+  ['/flower-to-seed/garden.mjs', ['flower-to-seed/garden.mjs', 'text/javascript']],
+  ['/flower-to-seed/art.mjs', ['flower-to-seed/art.mjs', 'text/javascript']],
+  ['/flower-to-seed/model.mjs', ['flower-to-seed/model.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {

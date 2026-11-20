@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f2f1e7"><title>Flower to Seed · OpenPath</title>
+<link rel="stylesheet" href="./garden.css">
+</head>
+<body>
+<header class="mast"><a href="../">OpenPath <span>/ Science Labs</span></a><span>ICSE · CLASS 5</span></header>
+<main>
+  <header class="hero"><p class="eyebrow">FIELD LAB 07 &nbsp; / &nbsp; LIVING THINGS</p><h1>Flower to Seed</h1><p>Follow a grain of pollen. Look inside a flower. Then see how far a seed can go.</p></header>
+  <nav class="stops" aria-label="Garden stations">
+    <button data-stop="garden" aria-current="step"><span>01</span> Pollinate</button>
+    <button data-stop="cutaway"><span>02</span> Look inside</button>
+    <button data-stop="travel"><span>03</span> Seed travels</button>
+    <button data-stop="check"><span>04</span> Try a new case</button>
+  </nav>
+  <section class="lab" aria-label="Interactive garden">
+    <div class="stage" id="stage">
+      <div class="scene-meta"><span id="scene-index"></span><span id="scene-name"></span></div>
+      <div id="scene"></div>
+    </div>
+    <aside class="guide">
+      <p class="eyebrow" id="chapter"></p><h2 id="heading"></h2><p id="description"></p>
+      <div id="controls"></div>
+      <output id="observation" role="status" aria-live="polite"></output>
+    </aside>
+  </section>
+  <footer><a href="../plant-a-seed/">Next: grow a bean from its first root →</a><span>Illustrated model · Time is compressed</span></footer>
+</main>
+<script type="module" src="./garden.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Flower to Seed · ICSE Class 5
+This entry addresses themes 4 and 5 of [CISCE's primary science curriculum](https://cisce.org/wp-content/uploads/2025/03/PrimaryCurriculum.pdf): pollination, plant reproduction and dispersal. It is not all of Class 5. The original germination lab is preserved and linked at the end.
+
+- Try a petal, the same flower's stigma, and another plant's stigma. The first is not pollination; the second demonstrates self-pollination but does not set seed in the illustrated compatible-cross model. Some other species do self-fertilise. The art uses a stylised Brassica flower (four petals, six stamens) inspired by [Wisconsin Fast Plants](https://fastplants.org/resources/digital_library/r44/flowering_and_pollination), not garden peas.
+- The cutaway separates pollen landing from fertilisation, then ovules becoming seeds and the ovary becoming a pod. Stages are illustrative, not calendar times and not a complete plant development or pollination simulator.
+- Specimens let learners compare an airborne dandelion fruit, a floating coconut fruit and a burdock burr's attachment to fur. A different hooked fruit checks transfer; a potato eye shows stem-based vegetative propagation. A separate module could later add propagation from roots and leaves and open drawing/labels; do not claim those outcomes here.
+- Anonymous, deterministic and static. Inline original vector artwork, no provider, backend, tracking or persistence. Works with tap, mouse drag, and keyboard; illustrations respect reduced-motion settings.
+- Verification: model suite, phone-sized browser tests, and static preview allowlist. Success on the transfer examples is evidence for those examples only.
