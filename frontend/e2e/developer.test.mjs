@@ -28,6 +28,15 @@ const RAVI = `ravi.${run}@example.org`;
 const NOSY = `nosy.${run}@example.org`;
 const code = () => execSync(CLAIM, { encoding: "utf8" }).trim().split("\n").at(-1).trim();
 
+
+/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+async function today(page) {
+  const fold = page.getByRole("button", { name: /^General English/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 before(async () => {
   assert.ok(CLAIM, "set E2E_CLAIM_CMD to a command that prints a developer code");
@@ -133,7 +142,7 @@ async function addLearner(page, name) {
   await page.getByRole("button", { name: /Understand grammar/ }).click();
   await page.locator("#consent").check();
   await page.getByRole("button", { name: "Build my path" }).click();
-  await page.locator(".plan li").first().waitFor();
+  await today(page);
 }
 
 async function homeAfterSession(page) {
@@ -165,6 +174,7 @@ test("the founder: Arun's assessment, a developer code, then everything the engi
   const { context, page, errors } = await device();
   await register(page, FOUNDER);
   await addLearner(page, "Arun");
+  await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finishSession(page, (n) => n % 3 !== 2);
   await page.getByText(/Your starting point is set/).waitFor();

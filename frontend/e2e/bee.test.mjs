@@ -32,6 +32,15 @@ const ANDROID = {
 };
 const launch = (args = []) => chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args });
 
+
+/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+async function today(page) {
+  const fold = page.getByRole("button", { name: /^General English/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  await page.getByRole("heading", { name: "Today" }).waitFor();
+}
+
 let browser;
 before(async () => {
   browser = await launch();
@@ -347,6 +356,7 @@ test("a browser with no speech at all: a small grown-up link straight away; the 
 test("General English is unchanged: the starting check is still there, separate from the Spelling Bee", async () => {
   const { context, page, errors } = await phone();
   await newLearner(page, "General Learner");
+  await today(page);
   await page.locator(".plan li", { hasText: "Find your starting point" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".item").waitFor();
   assert.equal(await page.locator(".bee-progress").count(), 0);

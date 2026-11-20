@@ -42,3 +42,12 @@ Each stream keeps moving its level as the learner practises. The check can be ta
 - The six spelling words are not marked as practised, so the learner meets them again in the Spelling Bee.
 - The reading part uses four practice questions per text; a learner later meets those questions again in practice.
 - School work by class is not built: English lessons follow each textbook's own texts, which OpenPath does not copy.
+
+## Home screen (20 November 2026)
+
+One way in: before Find my level, the home screen shows "Start here: find your level" and, below it, "Or choose an
+activity" as a short list (one row per activity, its button beside its name). After it, "Your English today" leads
+with the five daily rows, and "More to practise" lists only what the rows do not already open (Long reads, Listen and
+answer, Spelling Bee, Word check). School work is a short list too. General English (the older journey of skills and
+checks, with its own starting check) is folded away unless the learner is already on it or has an activity open in
+it, so a new learner no longer sees two different "starting points". The parents' link is always shown.
