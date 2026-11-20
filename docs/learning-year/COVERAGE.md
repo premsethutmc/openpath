@@ -306,7 +306,7 @@ Every competency that has some content:
 | Write complex numbers in modulus-argument (polar) form (`MATH.number.complex-polar-form`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asarg draft, aspolm draft). |
 | Apply event algebra (`MATH.probability.events`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asaddp draft, asmex draft, asevset draft, asadd3 draft). |
 | Use logical implications and counterexamples (`MATH.reasoning.logic`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atconv draft, atcex draft). |
-| Prove statements by mathematical induction (`MATH.reasoning.mathematical-induction`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aind missing). |
+| Prove statements by mathematical induction (`MATH.reasoning.mathematical-induction`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aind draft). |
 | Work with arithmetico-geometric and harmonic progressions (`MATH.sequences.agp-hp`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aoagp draft, aohm draft). |
 | Use arithmetic and geometric means and the AM-GM inequality (`MATH.sequences.am-gm-relation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apins draft, apgms draft, apamgm draft). |
 | Use binomial, exponential and logarithmic series (`MATH.sequences.infinite-series-expansions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apbin draft, apexlog draft, apsapp draft). |
@@ -1515,7 +1515,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 345 (hand-written 24, synthesised from blueprints 321)
 - Problem families (generated questions with independent checks): 1119
-- Review registry (repository copy): draft 1450, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1451, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
