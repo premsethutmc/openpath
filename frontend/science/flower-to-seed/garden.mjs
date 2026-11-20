@@ -7,7 +7,7 @@ const soundtrack=gardenSound();
 const openStory=wireBeeStory($('bee-story'),name=>soundtrack.effect(name),()=>{
  cancelFlight();move('garden');draw();
  $('scene').querySelector('.bee-touch')?.focus({preventScroll:true});
-});
+},()=>requestedSound);
 let requestedSound=false,soundRevision=0;
 const soundButton=$('garden-sound');
 if(!soundtrack.supported)soundButton.hidden=true;

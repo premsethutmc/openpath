@@ -10,3 +10,5 @@ Based on pollination and plant reproduction in the [CISCE primary science curric
 - Optional Sound runs an original Web Audio score and synthesized garden ambience, with short action sounds for the bee, pod and rain. Starts muted on every load; no external tracks, recording, permission prompt or network audio. Hidden tabs suspend audio.
 
 - The optional 20-second A Bee’s Morning story uses five timed SVG shots, with pause, replay, and a take-over action that returns immediately to the interactive garden. The dialogue is fictional. The foraging story distinguishes nectar collection, incidental pollen transfer, and honey-making at the hive; real processes take longer.
+
+- At the hive Pip, Mina and Dot speak in turn, then fly in separate directions. The camera stays with Pip. Speech bubbles always show their lines; the Sound toggle also enables speech on browsers that report local English voices. No remote voice or voice download is requested.

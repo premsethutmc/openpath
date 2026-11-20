@@ -52,3 +52,15 @@ test('a 20-second story timeline advances through five ordered shots with no gap
  assert.equal(storyFrame(20).finished,true);
  assert.equal(storyFrame(22).t,1);
 });
+test('each of three bees gets a line and branches into an independent flight',async()=>{
+ const {storyFrame,flightPaths}=await import('./story-model.mjs');
+ assert.equal(storyFrame(1).dialogue.name,'Pip');
+ assert.equal(storyFrame(3).dialogue.name,'Mina');
+ assert.equal(storyFrame(5).dialogue.name,'Dot');
+ assert.equal(storyFrame(6).dialogue,null);
+ const start=flightPaths(0),end=flightPaths(1);
+ assert.ok(end.dot[0]<start.dot[0]&&end.dot[0]<0);
+ assert.ok(end.mina[0]>start.mina[0]&&end.mina[0]>640);
+ assert.ok(end.pip[0]>0&&end.pip[0]<640);
+ assert.ok(end.camera[2]>start.camera[2]);
+});

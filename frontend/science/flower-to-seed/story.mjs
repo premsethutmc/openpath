@@ -1,4 +1,4 @@
-import {storyLength,storyFrame} from './story-model.mjs';
+import {storyLength,storyFrame,flightPaths} from './story-model.mjs';
 const colors=`<defs>
 <linearGradient id="film-dawn" x2="0" y2="1"><stop stop-color="#183e46"/><stop offset=".58" stop-color="#6f9393"/><stop offset="1" stop-color="#f7c98b"/></linearGradient>
 <linearGradient id="film-comb" x2="1" y2="1"><stop stop-color="#edbb65"/><stop offset=".48" stop-color="#9d592f"/><stop offset="1" stop-color="#442b26"/></linearGradient>
@@ -34,18 +34,33 @@ const macroFlower=`<g id="film-bloom" transform="translate(435 272)">
  <g fill="#ffe18e">${Array.from({length:6},(_,i)=>`<ellipse cx="${31*Math.cos(i*Math.PI/3)}" cy="${31*Math.sin(i*Math.PI/3)}" rx="8" ry="5" transform="rotate(${i*60})"/>`).join('')}</g>
  <ellipse cy="-1" rx="11" ry="16" fill="#8aa467"/><path d="M-6-4q5-7 11-3" fill="none" stroke="#d7e7a1" stroke-width="3" stroke-linecap="round"/></g>`;
 function drawing(id){
- if(id==='dawn')return frame(hive+insect('film-companion',400,145,1.25,false,-1)+insect('film-neighbour',470,305,.95)+insect('film-bee',188,252,1.52),'Three illustrated bees inside a golden honeycomb.');
+ if(id==='dawn')return frame(hive+insect('film-companion',431,220,1.28,false,-1)+insect('film-neighbour',410,345,1.10,false,-1)+insect('film-bee',189,264,1.45),'Pip, Mina and Dot talk inside their honeycomb before foraging.');
  if(id==='home')return frame(hive+`<path d="M338 184l29-49h58l29 49-29 49h-58Z" fill="#71402b" stroke="#efba69" stroke-width="5"/><ellipse id="film-store" cx="397" cy="188" rx="43" ry="38" fill="url(#film-honey)"/><path id="film-nectar" d="M0-11Q-13 4 0 8Q13 4 0-11Z" fill="#fff1ac" stroke="#e9b757" stroke-width="1.5"/><path d="M376 179q12-14 28-15" stroke="#ffe8af" stroke-width="4" stroke-linecap="round" fill="none" opacity=".78"/>`+insect('film-bee',240,251,1.35)+insect('film-companion',528,274,1.2,false,-1),'Worker bees return to their honeycomb; honey is shown in a cell.');
- if(id==='out')return frame(meadow+insect('film-companion',109,303,.65)+insect('film-neighbour',53,261,.6)+insect('film-bee',112,280,1),'Bees fly from their hive into a sunlit meadow.');
+ if(id==='out')return frame(`<g id="film-camera">${meadow}${insect('film-companion',440,231,.74)}${insect('film-neighbour',186,291,.7,false,-1)}${insect('film-bee',306,255,1)}</g>`,'The three bees fly apart. The camera follows Pip into the meadow.');
  return frame(`<rect width="640" height="460" fill="url(#film-macro)"/><circle cx="402" cy="196" r="225" fill="url(#film-halo)" opacity=".48"/>${staticDots}${macroFlower}${insect('film-bee',228,172,1.65,true)}${Array.from({length:11},(_,i)=>`<circle class="film-grain" r="${2+i%3}" fill="#fbed85" opacity="0"/>`).join('')}`,id==='gather'?'Close view of a bee brushing pollen from a flower onto its body.':'Close view of pollen brushing from a bee onto the next flower’s stigma.');
 }
 const clamp=(v)=>Math.max(0,Math.min(v,1));
 const eased=v=>{const a=clamp(v);return a*a*(3-2*a);};
-function motion(panel,id,t){
+function motion(panel,id,t,speaker){
  const bee=panel.querySelector('#film-bee'),wing=bee.querySelector('.film-wings');
  let x,y,scale,angle=0,flutter=true;
- if(id==='dawn'){x=188+23*t;y=252-5*Math.sin(t*7);scale=1.52;angle=-8*t;flutter=t>.55;}
- else if(id==='out'){x=103+433*eased(t);y=286-106*eased(t)-35*Math.sin(t*Math.PI);scale=1.08-.19*t;angle=-11+8*t;const other=panel.querySelector('#film-companion');other.setAttribute('transform',`translate(${x-89} ${y+58}) scale(.62)`);panel.querySelector('#film-neighbour').setAttribute('transform',`translate(${x-142} ${y+7}) scale(.55)`);}
+ if(id==='dawn'){
+  x=189;y=264;scale=1.45;flutter=false;
+  const names={'film-bee':[189,264,1.45,1],'film-companion':[431,220,1.28,-1],'film-neighbour':[410,345,1.10,-1]};
+  for(const [n,[cx,cy,k,m]] of Object.entries(names)){
+   const node=panel.querySelector('#'+n),talk=n===speaker,bob=talk?Math.sin(t*54)*5:0;
+   node.classList.toggle('film-speaking',talk);
+   node.setAttribute('transform',`translate(${cx} ${cy+bob}) rotate(${talk?Math.sin(t*54)*4:0}) scale(${k*m} ${k})`);
+  }
+  return;
+ }
+ else if(id==='out'){
+  const {pip,mina,dot,camera}=flightPaths(t);
+  [x,y]=pip;scale=1;angle=-9;
+  panel.querySelector('#film-companion').setAttribute('transform',`translate(${mina.join(' ')}) rotate(-22) scale(.74)`);
+  panel.querySelector('#film-neighbour').setAttribute('transform',`translate(${dot.join(' ')}) rotate(17) scale(-.7 .7)`);
+  panel.querySelector('#film-camera').setAttribute('transform',`translate(${camera[0]} ${camera[1]}) scale(${camera[2]})`);
+ }
  else if(id==='home'){x=195+123*eased(t*2);y=223+26*t;scale=1.3;flutter=t<.31;panel.querySelector('#film-store').style.opacity=String(.18+.82*eased((t-.46)*1.8));
  const drop=panel.querySelector('#film-nectar'),u=eased((t-.17)*2.7);
  drop.setAttribute('transform',`translate(${x+23+(375-x-23)*u} ${y+(186-y)*u})`);
@@ -68,15 +83,42 @@ function motion(panel,id,t){
  bee.setAttribute('transform',`translate(${x} ${y}) rotate(${angle}) scale(${scale})`);
  wing.setAttribute('transform',`scale(1 ${flutter?.70+.30*Math.sin(t*108):.75})`);
 }
-export function wireBeeStory(dialog,effect,onClose){
+export function wireBeeStory(dialog,effect,onClose,isSoundOn=()=>false){
  const panel=dialog.querySelector('.film-image'),caption=dialog.querySelector('.film-caption'),title=dialog.querySelector('.film-shot'),progress=dialog.querySelector('progress');
  const action=dialog.querySelector('[data-film-action="pause"]');
+ const bubble=dialog.querySelector('.film-bubble');
+ const voicePlayer=window.speechSynthesis;
+ voicePlayer?.getVoices();
+ let voiceLine=null,spoken=null;
+ function stopVoice(){if(voiceLine)voicePlayer?.cancel();voiceLine=null;}
+ function voice(dialogue){
+  if(!dialogue||dialogue===spoken)return;
+  spoken=dialogue;
+  if(!isSoundOn()||!voicePlayer||!window.SpeechSynthesisUtterance)return;
+  const voices=voicePlayer.getVoices().filter(v=>v.localService&&/^en(?:-|$)/i.test(v.lang));
+  if(!voices.length)return;
+  stopVoice();
+  const msg=new SpeechSynthesisUtterance(dialogue.line);
+  const i=['Pip','Mina','Dot'].indexOf(dialogue.name);
+  msg.voice=voices[i%voices.length];msg.pitch=[1.16,1.36,.99][i];msg.rate=1.19;msg.volume=.72;
+  voiceLine=msg;msg.onend=()=>{if(voiceLine===msg)voiceLine=null;};
+  voicePlayer.speak(msg);
+ }
  let id='',position=0,stamp=0,token=0,paused=false,complete=false;
  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
  function draw(){
   const f=storyFrame(position);
   if(id!==f.shot.id){id=f.shot.id;panel.innerHTML=drawing(id);title.textContent=f.shot.title;caption.textContent=f.shot.line;if(f.shot.sound)effect(f.shot.sound);}
-  motion(panel,id,reduce.matches?.78:f.t);
+  const line=f.dialogue;
+  if(bubble.hidden===Boolean(line)){bubble.hidden=!line;dialog.dataset.dialogue=String(Boolean(line));}
+  if(line){
+   if(bubble.dataset.speaker!==line.speaker){
+    bubble.dataset.speaker=line.speaker;bubble.querySelector('strong').textContent=line.name;bubble.querySelector('span').textContent=line.line;
+    caption.textContent=line.name+': '+line.line;
+   }
+   voice(line);
+  }
+  motion(panel,id,reduce.matches?.78:f.t,line?.speaker);
   progress.value=position;
   if(f.finished){complete=true;paused=true;action.textContent='↻ Replay';}
  }
@@ -87,19 +129,19 @@ export function wireBeeStory(dialog,effect,onClose){
   if(!complete)token=requestAnimationFrame(tick);
  }
  function play(){paused=false;action.textContent='Ⅱ Pause';stamp=performance.now();token=requestAnimationFrame(tick);}
- function start(){cancelAnimationFrame(token);id='';position=0;complete=false;draw();play();}
+ function start(){cancelAnimationFrame(token);stopVoice();spoken=null;delete bubble.dataset.speaker;id='';position=0;complete=false;draw();play();}
  dialog.addEventListener('click',event=>{
   const which=event.target.closest('[data-film-action]')?.dataset.filmAction;
   if(which==='exit')dialog.close();
   if(which==='pause'){
    if(complete)start();
    else if(paused)play();
-   else{paused=true;cancelAnimationFrame(token);action.textContent='▶ Resume';}
+   else{paused=true;cancelAnimationFrame(token);stopVoice();action.textContent='▶ Resume';}
   }
  });
- dialog.addEventListener('close',()=>{cancelAnimationFrame(token);onClose();});
+ dialog.addEventListener('close',()=>{cancelAnimationFrame(token);stopVoice();onClose();});
  document.addEventListener('visibilitychange',()=>{
-  if(document.hidden&&dialog.open&&!paused){paused=true;cancelAnimationFrame(token);action.textContent='▶ Resume';}
+  if(document.hidden&&dialog.open&&!paused){paused=true;cancelAnimationFrame(token);stopVoice();action.textContent='▶ Resume';}
  });
  return ()=>{if(!dialog.open)dialog.showModal();start();};
 }
