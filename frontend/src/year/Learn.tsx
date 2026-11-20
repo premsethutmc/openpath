@@ -25,6 +25,7 @@ import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
 import { ScribblePad } from "./ScribblePad";
+import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
 import { ownIt } from "../../../packages/learning/src/taught";
@@ -608,6 +609,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   // Typing one's own working is not help; asking for a step is, and is recorded as before.
   const [coachAsked, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
   const coach = coachAsked || longDiv;
+  const ldivPaper = useMemo(() => (KID && q.type !== "written" && !q.picks?.length && !!stepsHelp(qid) && helpMethods(qid)[0] === "Long division" ? divisionOf(q.prompt) : null), [qid]); // eslint-disable-line react-hooks/exhaustive-deps
   const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
   // help-count@1: how many steps were shown is kept with the answer (the record allows 0 to 5), so "needed one step"
   // and "needed every step" are not the same evidence
@@ -667,6 +669,9 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
           {/* one-place@1: everything for working a question out sits here: the steps, help, and the rough-work pad */}
           {!canCoach && hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={usedStep} />}
+          {/* ldiv-paper@1: a division gets its long-division layout as blank paper wherever the step help is not filling it
+              in (in a test above all); like the pad it is never read */}
+          {KID && !(coach && canCoach) && ldivPaper && <LongDivisionPaper key={`ldp:${qid}`} {...ldivPaper} />}
           {/* scribble@1: scratch paper, never read; like paper on the desk it is there in tests too */}
           {KID && <ScribblePad key={qid} />}
         </details>

@@ -102,3 +102,13 @@ test("fold@2: lesson text is folded only for Classes 1 to 5, and only when there
   assert.ok(classOfSkill("MATH.trigonometry.compound-angle-identities")! >= 11);
   assert.ok(classOfSkill("MATH.number.rounding")! <= 5);
 });
+
+test("ldiv-paper@1: a division gets blank long-division paper wherever the step help is not filling it in, in tests too", async () => {
+  assert.match(learn, /\{KID && !\(coach && canCoach\) && ldivPaper && <LongDivisionPaper key=\{`ldp:\$\{qid\}`\} \{\.\.\.ldivPaper\} \/>\}/);
+  const paper = readFileSync(new URL("./LongDivisionPaper.tsx", import.meta.url), "utf8");
+  assert.ok(!/fetch\(|localStorage|setValue|setWorking|onUsed|setHint/.test(paper), "the paper talks to nothing");
+  const { divisionOf } = await import("./LongDivisionPaper");
+  assert.deepEqual(divisionOf("80 ÷ 2 = ?"), { dividend: "80", divisor: "2" });
+  assert.deepEqual(divisionOf("Share 1,248 ÷ 12 = ?"), { dividend: "1248", divisor: "12" });
+  assert.equal(divisionOf("What is 3 × 4?"), null);
+});
