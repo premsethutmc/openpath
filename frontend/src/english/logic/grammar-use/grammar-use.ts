@@ -162,6 +162,10 @@ export interface LearnCard {
   rule: string;
   examples: string[];
   try: { question: string; right: string; wrong: string[] };
+  /** A common mistake beside the right version, and why. */
+  mistake: { wrong: string; right: string; why: string };
+  /** A second question to try once the first is answered. */
+  try2: { question: string; right: string; wrong: string[] };
 }
 export const LEARN: LearnCard[] = (learnJson as { cards: LearnCard[] }).cards;
 
@@ -176,6 +180,8 @@ export function learnProblems(cards: readonly LearnCard[], g: GrammarUse): strin
     if (!c.rule.trim() || c.rule.split(" ").length > 35) out.push(`${c.topic}: the rule is one short line (up to 35 words)`);
     if (c.examples.length !== 2 || c.examples.some((e) => !e.trim())) out.push(`${c.topic}: two examples`);
     if (!c.try.question.trim() || !c.try.right.trim() || c.try.wrong.length !== 2 || new Set([c.try.right, ...c.try.wrong]).size !== 3) out.push(`${c.topic}: a question with one right answer and two different wrong ones`);
+    if (!c.mistake?.wrong.trim() || !c.mistake.right.trim() || !c.mistake.why.trim() || c.mistake.wrong === c.mistake.right) out.push(`${c.topic}: a common mistake, the right version and why`);
+    if (!c.try2?.question.trim() || c.try2.wrong.length !== 2 || new Set([c.try2.right, ...c.try2.wrong]).size !== 3 || c.try2.question === c.try.question) out.push(`${c.topic}: a second, different question with one right answer and two different wrong ones`);
   }
   return out;
 }
@@ -187,6 +193,8 @@ export function learnProblems(cards: readonly LearnCard[], g: GrammarUse): strin
 
 /** The choices of a card's question, in a fixed order that does not put the right one first every time. */
 export const tryChoices = (c: LearnCard): string[] => hashOrder([c.try.right, ...c.try.wrong], (x) => `learn|${c.topic}|${x}`);
+/** The second question's choices, in a fixed order of their own. */
+export const try2Choices = (c: LearnCard): string[] => hashOrder([c.try2.right, ...c.try2.wrong], (x) => `learn2|${c.topic}|${x}`);
 
 export type GrammarRecord =
   | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
@@ -289,7 +297,7 @@ export interface GrammarView {
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
   /** learn: the card for a topic met for the first time; `tried` once its question is answered. */
-  learn?: { rule: string; examples: string[]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null } | null;
+  learn?: { rule: string; examples: string[]; mistake: LearnCard["mistake"]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null; second: { question: string; options: string[]; answer: number } } | null;
 }
 
 /** One sitting. Every step appends records; the caller stores what `take()` returns. */
@@ -433,7 +441,7 @@ export class GrammarSitting {
     const c = this.card();
     if (c) {
       const options = tryChoices(c);
-      return { ...base, phase: "learn", learn: { rule: c.rule, examples: c.examples, question: c.try.question, options, tried: this.tried ? { ...this.tried, answer: options.indexOf(c.try.right) } : null } };
+      return { ...base, phase: "learn", learn: { rule: c.rule, examples: c.examples, mistake: c.mistake, question: c.try.question, options, tried: this.tried ? { ...this.tried, answer: options.indexOf(c.try.right) } : null, second: { question: c.try2.question, options: try2Choices(c), answer: try2Choices(c).indexOf(c.try2.right) } } };
     }
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;

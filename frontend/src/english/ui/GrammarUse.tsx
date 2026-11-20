@@ -151,6 +151,9 @@ function Build({ tiles, whole, task, onCheck }: { tiles: string[]; whole: boolea
 /** The card before a topic's first sentence: the rule, two examples, one question to try (not scored). */
 function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNullable<GrammarView["learn"]>; onTry: (chosen: number) => void; onLearned: () => void }) {
   const t = card.tried;
+  // the second question is for the learner alone: answered here, not recorded
+  const [second, setSecond] = useState<number | null>(null);
+  const s2 = card.second;
   return (
     <section className="grammar-learn" aria-labelledby="grammar-learn-title">
       <h2 id="grammar-learn-title">New: {topic}</h2>
@@ -162,6 +165,21 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
           </li>
         ))}
       </ul>
+      <div className="grammar-mistake" aria-label="A common mistake">
+        <p>
+          <span className="mistake-wrong" aria-label="Not this">
+            ✗
+          </span>{" "}
+          <TextPics text={card.mistake.wrong} />
+        </p>
+        <p>
+          <span className="mistake-right" aria-label="This">
+            ✓
+          </span>{" "}
+          <TextPics text={card.mistake.right} />
+        </p>
+        <p className="small">{card.mistake.why}</p>
+      </div>
       <p id="grammar-try">
         <strong>Try one:</strong> {card.question}
       </p>
@@ -177,8 +195,27 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
           {t.right ? "✓ Right" : `The answer is “${card.options[t.answer]}”.`}
         </p>
       )}
-      <button type="button" className={t ? "primary" : "link"} onClick={onLearned}>
-        {t ? "Now practise" : "Skip to practice"}
+      {t && (
+        <>
+          <p id="grammar-try2">
+            <strong>One more:</strong> {s2.question}
+          </p>
+          <p className="choose-options" role="group" aria-labelledby="grammar-try2">
+            {s2.options.map((o, i) => (
+              <button key={o} type="button" className="choice" data-try="2" disabled={second !== null} data-state={second !== null ? (i === s2.answer ? "right" : i === second ? "wrong" : "") : ""} onClick={() => setSecond(i)}>
+                <TextPics text={o} />
+              </button>
+            ))}
+          </p>
+          {second !== null && (
+            <p className={second === s2.answer ? "words-verdict right" : "words-verdict"} role="status">
+              {second === s2.answer ? "✓ Right" : `The answer is “${s2.options[s2.answer]}”.`}
+            </p>
+          )}
+        </>
+      )}
+      <button type="button" className={t && second !== null ? "primary" : "link"} onClick={onLearned}>
+        {t && second !== null ? "Now practise" : "Skip to practice"}
       </button>
     </section>
   );

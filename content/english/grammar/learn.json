@@ -1,9 +1,9 @@
 {
   "id": "grammar-learn",
-  "version": 1,
+  "version": 2,
   "status": "practice_only",
   "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
-  "format": "One card per Grammar in use topic, shown the first time a learner meets the topic: the rule, two examples, and one question to try (not scored).",
+  "format": "One card per Grammar in use topic, shown the first time a learner meets the topic (and again after two misses in a row): the rule, two examples, a common mistake beside the right version with a one-line reason, and two questions to try (not scored).",
   "cards": [
     {
       "topic": "parts_of_speech",
@@ -18,6 +18,19 @@
         "wrong": [
           "cat",
           "The"
+        ]
+      },
+      "mistake": {
+        "wrong": "The dog is run.",
+        "right": "The dog runs.",
+        "why": "Run is the action word, the verb; it needs the right form after the noun."
+      },
+      "try2": {
+        "question": "In \"a red ball\", which word is the adjective?",
+        "right": "red",
+        "wrong": [
+          "ball",
+          "a"
         ]
       }
     },
@@ -35,6 +48,19 @@
           "ravi has a red bicycle.",
           "Ravi has a red bicycle"
         ]
+      },
+      "mistake": {
+        "wrong": "my name is ravi.",
+        "right": "My name is Ravi.",
+        "why": "A sentence and a name both start with a capital letter."
+      },
+      "try2": {
+        "question": "Which needs a capital letter?",
+        "right": "chennai",
+        "wrong": [
+          "city",
+          "river"
+        ]
       }
     },
     {
@@ -50,6 +76,19 @@
         "wrong": [
           "a umbrella",
           "an chair"
+        ]
+      },
+      "mistake": {
+        "wrong": "I ate a apple.",
+        "right": "I ate an apple.",
+        "why": "Apple starts with a vowel sound, so it takes an."
+      },
+      "try2": {
+        "question": "Which needs \"an\", not \"a\"?",
+        "right": "an hour",
+        "wrong": [
+          "a hour",
+          "an horse"
         ]
       }
     },
@@ -67,6 +106,19 @@
           "buss",
           "busies"
         ]
+      },
+      "mistake": {
+        "wrong": "Two boxs",
+        "right": "Two boxes",
+        "why": "Words ending in x add -es."
+      },
+      "try2": {
+        "question": "What is the plural of \"child\"?",
+        "right": "children",
+        "wrong": [
+          "childs",
+          "childes"
+        ]
       }
     },
     {
@@ -82,6 +134,19 @@
         "wrong": [
           "My sisters is at home.",
           "My sisters am at home."
+        ]
+      },
+      "mistake": {
+        "wrong": "She play cricket.",
+        "right": "She plays cricket.",
+        "why": "One person (she) takes a verb with -s."
+      },
+      "try2": {
+        "question": "Which sentence has the verb that matches?",
+        "right": "The dogs are barking.",
+        "wrong": [
+          "The dogs is barking.",
+          "The dog are barking."
         ]
       }
     },
@@ -99,6 +164,19 @@
           "He",
           "It"
         ]
+      },
+      "mistake": {
+        "wrong": "Ravi said Ravi was tired.",
+        "right": "Ravi said he was tired.",
+        "why": "Use a pronoun instead of saying the name again."
+      },
+      "try2": {
+        "question": "\"The books are new. ___ are on the table.\" Which fits?",
+        "right": "They",
+        "wrong": [
+          "It",
+          "She"
+        ]
       }
     },
     {
@@ -114,6 +192,19 @@
         "wrong": [
           "clean",
           "cleaning"
+        ]
+      },
+      "mistake": {
+        "wrong": "Yesterday I play football.",
+        "right": "Yesterday I played football.",
+        "why": "Yesterday is finished time, so the verb takes the past form."
+      },
+      "try2": {
+        "question": "\"Last week we ___ our grandparents.\" Which fits?",
+        "right": "visited",
+        "wrong": [
+          "visit",
+          "visits"
         ]
       }
     },
@@ -131,6 +222,19 @@
           "at",
           "of"
         ]
+      },
+      "mistake": {
+        "wrong": "The cat is in the table.",
+        "right": "The cat is under the table.",
+        "why": "Under shows the place below something."
+      },
+      "try2": {
+        "question": "\"We have school ___ Monday.\" Which fits?",
+        "right": "on",
+        "wrong": [
+          "in",
+          "at"
+        ]
       }
     },
     {
@@ -146,6 +250,19 @@
         "wrong": [
           "but",
           "and"
+        ]
+      },
+      "mistake": {
+        "wrong": "I was hungry but I ate.",
+        "right": "I was hungry, so I ate.",
+        "why": "So shows a result; but would show a difference."
+      },
+      "try2": {
+        "question": "\"I like tea ___ I do not like coffee.\" Which fits?",
+        "right": "but",
+        "wrong": [
+          "because",
+          "so"
         ]
       }
     },
@@ -163,6 +280,19 @@
           "What your name is?",
           "What is your name."
         ]
+      },
+      "mistake": {
+        "wrong": "Where you are going?",
+        "right": "Where are you going?",
+        "why": "In a question, the helping verb comes before the subject."
+      },
+      "try2": {
+        "question": "Which question is in the right order?",
+        "right": "Did you finish your work?",
+        "wrong": [
+          "You did finish your work?",
+          "Did you finished your work?"
+        ]
       }
     },
     {
@@ -178,6 +308,19 @@
         "wrong": [
           "quiet",
           "quieter"
+        ]
+      },
+      "mistake": {
+        "wrong": "She sings beautiful.",
+        "right": "She sings beautifully.",
+        "why": "An adverb tells how she sings; it usually ends in -ly."
+      },
+      "try2": {
+        "question": "\"The tortoise moved ___.\" Which fits?",
+        "right": "slowly",
+        "wrong": [
+          "slow",
+          "slowness"
         ]
       }
     },
@@ -195,6 +338,19 @@
           "Quickly",
           "Because"
         ]
+      },
+      "mistake": {
+        "wrong": "Hurray, we won.",
+        "right": "Hurray! We won.",
+        "why": "An interjection shows sudden feeling and takes an exclamation mark."
+      },
+      "try2": {
+        "question": "Which shows pain?",
+        "right": "Ouch!",
+        "wrong": [
+          "Hurray!",
+          "Wow!"
+        ]
       }
     },
     {
@@ -210,6 +366,19 @@
         "wrong": [
           "give a present",
           "lift something"
+        ]
+      },
+      "mistake": {
+        "wrong": "Please switch of the fan.",
+        "right": "Please switch off the fan.",
+        "why": "Switch off is the phrasal verb; of is a different word."
+      },
+      "try2": {
+        "question": "\"Look after\" means:",
+        "right": "take care of",
+        "wrong": [
+          "search for",
+          "look behind"
         ]
       }
     },
@@ -227,6 +396,19 @@
           "jump very high",
           "always look down"
         ]
+      },
+      "mistake": {
+        "wrong": "Slow and steady loses the race.",
+        "right": "Slow and steady wins the race.",
+        "why": "A proverb has a fixed wording; changing it changes its meaning."
+      },
+      "try2": {
+        "question": "\"Practice makes perfect\" means:",
+        "right": "doing something often makes you good at it",
+        "wrong": [
+          "practise only once",
+          "perfect people never practise"
+        ]
       }
     },
     {
@@ -242,6 +424,19 @@
         "wrong": [
           "Anus bag",
           "Anu bag's"
+        ]
+      },
+      "mistake": {
+        "wrong": "the boys's bags",
+        "right": "the boys' bags",
+        "why": "A plural ending in s takes only an apostrophe."
+      },
+      "try2": {
+        "question": "Which shows a cap that belongs to one boy?",
+        "right": "the boy's cap",
+        "wrong": [
+          "the boys cap",
+          "the boys's cap"
         ]
       }
     },
@@ -259,6 +454,19 @@
           "biggest",
           "more big"
         ]
+      },
+      "mistake": {
+        "wrong": "She is more taller than me.",
+        "right": "She is taller than me.",
+        "why": "Use -er or more, never both."
+      },
+      "try2": {
+        "question": "\"This is the ___ day of the year.\" Which fits?",
+        "right": "hottest",
+        "wrong": [
+          "hotter",
+          "most hot"
+        ]
       }
     },
     {
@@ -274,6 +482,19 @@
         "wrong": [
           "there",
           "their"
+        ]
+      },
+      "mistake": {
+        "wrong": "I didnt see it.",
+        "right": "I didn't see it.",
+        "why": "The apostrophe stands for the missing letter o in did not."
+      },
+      "try2": {
+        "question": "What is the short form of \"I will\"?",
+        "right": "I'll",
+        "wrong": [
+          "Il'l",
+          "Ill"
         ]
       }
     },
@@ -291,6 +512,19 @@
           "taked",
           "taken"
         ]
+      },
+      "mistake": {
+        "wrong": "He buyed a pen.",
+        "right": "He bought a pen.",
+        "why": "Buy does not add -ed; its past is bought."
+      },
+      "try2": {
+        "question": "What is the past of \"write\"?",
+        "right": "wrote",
+        "wrong": [
+          "writed",
+          "written"
+        ]
       }
     },
     {
@@ -306,6 +540,19 @@
         "wrong": [
           "sleeping",
           "are sleep"
+        ]
+      },
+      "mistake": {
+        "wrong": "I am read a book.",
+        "right": "I am reading a book.",
+        "why": "With am, is or are, the verb takes -ing."
+      },
+      "try2": {
+        "question": "\"They ___ football now.\" Which fits?",
+        "right": "are playing",
+        "wrong": [
+          "are play",
+          "is playing"
         ]
       }
     },
@@ -323,6 +570,19 @@
           "Meena said, \"I am tired.\"",
           "\"I am tired,\" said Meena."
         ]
+      },
+      "mistake": {
+        "wrong": "He said that \"he was tired.\"",
+        "right": "He said that he was tired.",
+        "why": "Reported speech has no quotation marks."
+      },
+      "try2": {
+        "question": "Which is direct speech?",
+        "right": "\"I am ready,\" said Anu.",
+        "wrong": [
+          "Anu said that she was ready.",
+          "Anu told us she was ready."
+        ]
       }
     },
     {
@@ -338,6 +598,19 @@
         "wrong": [
           "The bell rang loudly.",
           "After the bell rang."
+        ]
+      },
+      "mistake": {
+        "wrong": "I was tired, I slept.",
+        "right": "I was tired, so I slept.",
+        "why": "Two sentences need a joining word such as so, and or but."
+      },
+      "try2": {
+        "question": "Which joins two sentences with but?",
+        "right": "It rained, but we played.",
+        "wrong": [
+          "It rained hard.",
+          "Playing in the rain."
         ]
       }
     },
@@ -355,6 +628,19 @@
           "First",
           "However"
         ]
+      },
+      "mistake": {
+        "wrong": "Finally, wash your hands. First, eat.",
+        "right": "First, wash your hands. Finally, eat.",
+        "why": "First comes at the start; finally comes at the end."
+      },
+      "try2": {
+        "question": "Which word shows a difference?",
+        "right": "however",
+        "wrong": [
+          "then",
+          "first"
+        ]
       }
     },
     {
@@ -370,6 +656,19 @@
         "wrong": [
           "I bought pens pencils and paper.",
           "I bought, pens pencils, and paper."
+        ]
+      },
+      "mistake": {
+        "wrong": "What time is it.",
+        "right": "What time is it?",
+        "why": "A question ends with a question mark."
+      },
+      "try2": {
+        "question": "Which list has its commas in the right places?",
+        "right": "I bought pens, books and bags.",
+        "wrong": [
+          "I bought pens books, and, bags.",
+          "I bought, pens books and bags."
         ]
       }
     },
@@ -387,6 +686,19 @@
           "have saw",
           "has see"
         ]
+      },
+      "mistake": {
+        "wrong": "I have saw that film.",
+        "right": "I have seen that film.",
+        "why": "Have goes with the third form: seen, not saw."
+      },
+      "try2": {
+        "question": "\"She ___ her lunch already.\" Which fits?",
+        "right": "has eaten",
+        "wrong": [
+          "has ate",
+          "have eaten"
+        ]
       }
     },
     {
@@ -402,6 +714,19 @@
         "wrong": [
           "There",
           "They're"
+        ]
+      },
+      "mistake": {
+        "wrong": "Their going to the park.",
+        "right": "They're going to the park.",
+        "why": "They're means they are."
+      },
+      "try2": {
+        "question": "\"Put the bag over ___.\" Which fits?",
+        "right": "there",
+        "wrong": [
+          "their",
+          "they're"
         ]
       }
     },
@@ -419,6 +744,19 @@
           "which",
           "what"
         ]
+      },
+      "mistake": {
+        "wrong": "The book who I read was good.",
+        "right": "The book which I read was good.",
+        "why": "Who is for people; which is for things."
+      },
+      "try2": {
+        "question": "\"The girl ___ sings is my sister.\" Which fits?",
+        "right": "who",
+        "wrong": [
+          "which",
+          "whose"
+        ]
       }
     },
     {
@@ -434,6 +772,19 @@
         "wrong": [
           "The secret of the old well",
           "The Secret Of The Old Well"
+        ]
+      },
+      "mistake": {
+        "wrong": "the jungle book",
+        "right": "The Jungle Book",
+        "why": "The first word and the main words of a title take capitals."
+      },
+      "try2": {
+        "question": "Which book title has the right capital letters?",
+        "right": "The Cat in the Hat",
+        "wrong": [
+          "The cat in the hat",
+          "the Cat In The Hat"
         ]
       }
     },
@@ -451,6 +802,19 @@
           "\"I am hungry\" said Ravi.",
           "\"I am hungry\", said Ravi."
         ]
+      },
+      "mistake": {
+        "wrong": "\"Come here\" said Mother.",
+        "right": "\"Come here,\" said Mother.",
+        "why": "A comma comes before the closing quotation mark."
+      },
+      "try2": {
+        "question": "Which question in speech marks is punctuated correctly?",
+        "right": "\"Are you ready?\" asked Ravi.",
+        "wrong": [
+          "\"Are you ready\"? asked Ravi.",
+          "\"Are you ready,\" asked Ravi?"
+        ]
       }
     },
     {
@@ -466,6 +830,19 @@
         "wrong": [
           "me",
           "myself"
+        ]
+      },
+      "mistake": {
+        "wrong": "Me and Ravi went home.",
+        "right": "Ravi and I went home.",
+        "why": "For the doer, use I, and put the other person first."
+      },
+      "try2": {
+        "question": "\"Mother gave the cake to ___.\" Which fits?",
+        "right": "us",
+        "wrong": [
+          "we",
+          "our"
         ]
       }
     },
@@ -483,6 +860,19 @@
           "his",
           "its"
         ]
+      },
+      "mistake": {
+        "wrong": "Every girl brought their own book.",
+        "right": "Every girl brought her own book.",
+        "why": "Every girl is one person, so the pronoun is singular. (Many people also say their.)"
+      },
+      "try2": {
+        "question": "\"The dog wagged ___ tail.\" Which fits?",
+        "right": "its",
+        "wrong": [
+          "their",
+          "it's"
+        ]
       }
     },
     {
@@ -499,6 +889,19 @@
           "see",
           "sees"
         ]
+      },
+      "mistake": {
+        "wrong": "She walked in and sits down.",
+        "right": "She walked in and sat down.",
+        "why": "The story is in the past, so both verbs are past."
+      },
+      "try2": {
+        "question": "\"Every day he wakes up and ___ his teeth.\" Which fits?",
+        "right": "brushes",
+        "wrong": [
+          "brushed",
+          "brushing"
+        ]
       }
     },
     {
@@ -510,6 +913,19 @@
       ],
       "try": {
         "question": "Which is passive?",
+        "right": "The cake was eaten by the children.",
+        "wrong": [
+          "The children ate the cake.",
+          "The children are eating the cake."
+        ]
+      },
+      "mistake": {
+        "wrong": "The window broken by the ball.",
+        "right": "The window was broken by the ball.",
+        "why": "The passive needs was or is before the third form."
+      },
+      "try2": {
+        "question": "Which sentence puts the thing acted on first?",
         "right": "The cake was eaten by the children.",
         "wrong": [
           "The children ate the cake.",
@@ -531,6 +947,19 @@
           "played",
           "would played"
         ]
+      },
+      "mistake": {
+        "wrong": "If it will rain, we will stay in.",
+        "right": "If it rains, we will stay in.",
+        "why": "After if, use the present for something in the future."
+      },
+      "try2": {
+        "question": "\"If I were a bird, I ___ fly.\" Which fits?",
+        "right": "would",
+        "wrong": [
+          "will",
+          "am"
+        ]
       }
     },
     {
@@ -546,6 +975,19 @@
         "wrong": [
           "miss",
           "missing"
+        ]
+      },
+      "mistake": {
+        "wrong": "He should have went home.",
+        "right": "He should have gone home.",
+        "why": "Should have goes with the third form: gone."
+      },
+      "try2": {
+        "question": "\"You might have ___ it at school.\" Which fits?",
+        "right": "left",
+        "wrong": [
+          "leave",
+          "leaved"
         ]
       }
     },
@@ -563,6 +1005,19 @@
           "becoming",
           "become"
         ]
+      },
+      "mistake": {
+        "wrong": "I enjoy to read.",
+        "right": "I enjoy reading.",
+        "why": "Enjoy is followed by the -ing form."
+      },
+      "try2": {
+        "question": "\"She decided ___ early.\" Which fits?",
+        "right": "to leave",
+        "wrong": [
+          "leaving",
+          "leave"
+        ]
       }
     },
     {
@@ -578,6 +1033,19 @@
         "wrong": [
           "running, jump and swimming",
           "to run, jumping and swim"
+        ]
+      },
+      "mistake": {
+        "wrong": "She likes singing, to dance and swim.",
+        "right": "She likes singing, dancing and swimming.",
+        "why": "All the items in a list take the same form."
+      },
+      "try2": {
+        "question": "Which describing words match in form?",
+        "right": "quick, quiet and careful",
+        "wrong": [
+          "quick, quietly and care",
+          "quickly, quiet and caring"
         ]
       }
     },
@@ -595,6 +1063,19 @@
           "The plant grew tall.",
           "Flowers opened on the plant."
         ]
+      },
+      "mistake": {
+        "wrong": "Then he woke up. First he ate.",
+        "right": "First he woke up. Then he ate.",
+        "why": "First comes before then."
+      },
+      "try2": {
+        "question": "Which comes last?",
+        "right": "At last, they reached home.",
+        "wrong": [
+          "First, they packed their bags.",
+          "Then they took the train."
+        ]
       }
     },
     {
@@ -610,6 +1091,19 @@
         "wrong": [
           "the quiet mouse",
           "a mouse is quiet"
+        ]
+      },
+      "mistake": {
+        "wrong": "as brave as a mouse",
+        "right": "as brave as a lion",
+        "why": "A simile uses a fitting comparison; a lion stands for bravery."
+      },
+      "try2": {
+        "question": "Which sentence compares using like?",
+        "right": "He ran like the wind.",
+        "wrong": [
+          "He ran fast.",
+          "The wind is strong."
         ]
       }
     },
@@ -627,6 +1121,19 @@
           "standing in the rain",
           "watching the sky"
         ]
+      },
+      "mistake": {
+        "wrong": "It is raining cats and mice.",
+        "right": "It is raining cats and dogs.",
+        "why": "An idiom has fixed words; changing them breaks it."
+      },
+      "try2": {
+        "question": "\"A piece of cake\" means:",
+        "right": "very easy",
+        "wrong": [
+          "a sweet food",
+          "a small part"
+        ]
       }
     },
     {
@@ -642,6 +1149,19 @@
         "wrong": [
           "dribble",
           "serve"
+        ]
+      },
+      "mistake": {
+        "wrong": "The batsman kicked the ball.",
+        "right": "The batsman hit the ball.",
+        "why": "In cricket, a batsman hits the ball with a bat."
+      },
+      "try2": {
+        "question": "Which word belongs to cricket?",
+        "right": "wicket",
+        "wrong": [
+          "goal",
+          "net"
         ]
       }
     },
@@ -659,6 +1179,19 @@
           "Cycling is fun.",
           "I cycle every day."
         ]
+      },
+      "mistake": {
+        "wrong": "I like summer.",
+        "right": "I like summer because the days are long.",
+        "why": "An opinion is stronger with a reason."
+      },
+      "try2": {
+        "question": "Which gives a reason?",
+        "right": "I love books because they teach me things.",
+        "wrong": [
+          "I love books.",
+          "Books are on the shelf."
+        ]
       }
     },
     {
@@ -674,6 +1207,19 @@
         "wrong": [
           "trudged",
           "crawled"
+        ]
+      },
+      "mistake": {
+        "wrong": "The lion talked loudly.",
+        "right": "The lion roared loudly.",
+        "why": "Roared is the exact word for a lion's loud sound."
+      },
+      "try2": {
+        "question": "Which word best shows a tired person walking?",
+        "right": "trudged",
+        "wrong": [
+          "skipped",
+          "raced"
         ]
       }
     },
@@ -691,6 +1237,19 @@
           "not write",
           "write badly"
         ]
+      },
+      "mistake": {
+        "wrong": "He is very care.",
+        "right": "He is very careful.",
+        "why": "The suffix -ful makes care into a describing word."
+      },
+      "try2": {
+        "question": "What does \"unhappy\" mean?",
+        "right": "not happy",
+        "wrong": [
+          "very happy",
+          "happy again"
+        ]
       }
     },
     {
@@ -706,6 +1265,19 @@
         "wrong": [
           "Meena laughed.",
           "Meena slept."
+        ]
+      },
+      "mistake": {
+        "wrong": "He kicked.",
+        "right": "He kicked the ball.",
+        "why": "Kick needs an object: what was kicked?"
+      },
+      "try2": {
+        "question": "Which verb needs an object?",
+        "right": "carry",
+        "wrong": [
+          "sleep",
+          "arrive"
         ]
       }
     },
@@ -723,6 +1295,19 @@
           "sang",
           "small"
         ]
+      },
+      "mistake": {
+        "wrong": "Sings sweetly the bird.",
+        "right": "The bird sings sweetly.",
+        "why": "The subject (the bird) usually comes before the predicate."
+      },
+      "try2": {
+        "question": "In \"My aunt makes cakes\", what is the predicate?",
+        "right": "makes cakes",
+        "wrong": [
+          "My aunt",
+          "My"
+        ]
       }
     },
     {
@@ -738,6 +1323,19 @@
         "wrong": [
           "herd",
           "pack"
+        ]
+      },
+      "mistake": {
+        "wrong": "a herd of bees",
+        "right": "a swarm of bees",
+        "why": "A group of bees is a swarm."
+      },
+      "try2": {
+        "question": "A group of players is a:",
+        "right": "team",
+        "wrong": [
+          "flock",
+          "bunch"
         ]
       }
     },
@@ -755,6 +1353,19 @@
           "bread",
           "bus"
         ]
+      },
+      "mistake": {
+        "wrong": "cat, apple, ball",
+        "right": "apple, ball, cat",
+        "why": "Words go in the order of their first letters: a, b, c."
+      },
+      "try2": {
+        "question": "Which comes first?",
+        "right": "pin",
+        "wrong": [
+          "pot",
+          "pun"
+        ]
       }
     },
     {
@@ -770,6 +1381,19 @@
         "wrong": [
           "soon",
           "quick"
+        ]
+      },
+      "mistake": {
+        "wrong": "The antonym of hot is warm.",
+        "right": "The antonym of hot is cold.",
+        "why": "An antonym is the opposite: hot, cold."
+      },
+      "try2": {
+        "question": "What is a synonym of \"happy\"?",
+        "right": "glad",
+        "wrong": [
+          "sad",
+          "angry"
         ]
       }
     },
@@ -787,6 +1411,19 @@
           "loud",
           "noise"
         ]
+      },
+      "mistake": {
+        "wrong": "The bee barked.",
+        "right": "The bee buzzed.",
+        "why": "Buzz is the sound a bee makes."
+      },
+      "try2": {
+        "question": "Which word sounds like water?",
+        "right": "splash",
+        "wrong": [
+          "crunch",
+          "tick"
+        ]
       }
     },
     {
@@ -802,6 +1439,19 @@
         "wrong": [
           "state",
           "river"
+        ]
+      },
+      "mistake": {
+        "wrong": "I live in madurai.",
+        "right": "I live in Madurai.",
+        "why": "A proper noun, the name of a particular place, takes a capital."
+      },
+      "try2": {
+        "question": "Which can we not count?",
+        "right": "water",
+        "wrong": [
+          "apple",
+          "chair"
         ]
       }
     },
@@ -819,6 +1469,19 @@
           "when I saw her",
           "saw her"
         ]
+      },
+      "mistake": {
+        "wrong": "When it rained.",
+        "right": "When it rained, we stayed in.",
+        "why": "\"When it rained\" cannot stand alone; it needs a main clause."
+      },
+      "try2": {
+        "question": "Which is a main clause?",
+        "right": "we went home",
+        "wrong": [
+          "because it was late",
+          "after the rain"
+        ]
       }
     },
     {
@@ -834,6 +1497,19 @@
         "wrong": [
           "quality",
           "colour"
+        ]
+      },
+      "mistake": {
+        "wrong": "much books",
+        "right": "many books",
+        "why": "Many is for things we count; much is for things we do not count."
+      },
+      "try2": {
+        "question": "In \"five pencils\", what kind of adjective is \"five\"?",
+        "right": "number",
+        "wrong": [
+          "quality",
+          "quantity"
         ]
       }
     },
@@ -851,6 +1527,19 @@
           "a noun clause",
           "an adverb clause"
         ]
+      },
+      "mistake": {
+        "wrong": "I know where she.",
+        "right": "I know where she lives.",
+        "why": "A noun clause needs its own subject and verb: where she lives."
+      },
+      "try2": {
+        "question": "In \"We left when the bell rang\", the clause \"when the bell rang\" is:",
+        "right": "an adverb clause",
+        "wrong": [
+          "a noun clause",
+          "an adjective clause"
+        ]
       }
     },
     {
@@ -866,6 +1555,19 @@
         "wrong": [
           "under the bridge",
           "in the morning"
+        ]
+      },
+      "mistake": {
+        "wrong": "\"in the morning\" is a clause",
+        "right": "\"in the morning\" is a phrase",
+        "why": "It has no subject with a verb of its own."
+      },
+      "try2": {
+        "question": "Which is a phrase?",
+        "right": "near the river",
+        "wrong": [
+          "when the sun rose",
+          "because she was ill"
         ]
       }
     },
@@ -883,6 +1585,19 @@
           "a simile",
           "alliteration"
         ]
+      },
+      "mistake": {
+        "wrong": "\"The night is like dark.\" is a metaphor.",
+        "right": "\"The night is a black blanket.\" is a metaphor.",
+        "why": "A metaphor says one thing is another, without like or as."
+      },
+      "try2": {
+        "question": "\"Busy bees buzz\" is an example of:",
+        "right": "alliteration",
+        "wrong": [
+          "simile",
+          "metaphor"
+        ]
       }
     },
     {
@@ -898,6 +1613,19 @@
         "wrong": [
           "Sorry I missed it!",
           "Oops, couldn't come."
+        ]
+      },
+      "mistake": {
+        "wrong": "Dear Sir, hey, what's up?",
+        "right": "Dear Sir, I am writing to ask about...",
+        "why": "A letter to a stranger uses formal, polite language."
+      },
+      "try2": {
+        "question": "Which is more informal?",
+        "right": "Thanks a lot, see you!",
+        "wrong": [
+          "I thank you sincerely.",
+          "Kindly accept my thanks."
         ]
       }
     },
@@ -915,6 +1643,19 @@
           "very large",
           "very noisy"
         ]
+      },
+      "mistake": {
+        "wrong": "Guessing from the word alone",
+        "right": "Using the words around it",
+        "why": "Clues near a new word show its meaning."
+      },
+      "try2": {
+        "question": "\"The soup was so scalding that he burnt his tongue.\" Scalding means:",
+        "right": "very hot",
+        "wrong": [
+          "very cold",
+          "very salty"
+        ]
       }
     },
     {
@@ -930,6 +1671,19 @@
         "wrong": [
           "will am",
           "was"
+        ]
+      },
+      "mistake": {
+        "wrong": "Tomorrow I will went home.",
+        "right": "Tomorrow I will go home.",
+        "why": "After will, use the plain verb."
+      },
+      "try2": {
+        "question": "\"Next week, she ___ her aunt.\" Which fits?",
+        "right": "will visit",
+        "wrong": [
+          "will visits",
+          "visited"
         ]
       }
     },
@@ -947,6 +1701,19 @@
           "Because she was ill, she went to school.",
           "She was ill and because went to school."
         ]
+      },
+      "mistake": {
+        "wrong": "Although it was late, but we played.",
+        "right": "Although it was late, we played.",
+        "why": "Although and but are not used together."
+      },
+      "try2": {
+        "question": "Join: \"I was tired. I went to bed.\"",
+        "right": "I was tired, so I went to bed.",
+        "wrong": [
+          "I was tired, but I went to bed.",
+          "Although I was tired, so I went to bed."
+        ]
       }
     },
     {
@@ -963,6 +1730,19 @@
           "The sun will shine.",
           "It will snow on the beach."
         ]
+      },
+      "mistake": {
+        "wrong": "Guessing without clues",
+        "right": "Using clues in the text",
+        "why": "A good guess uses what the text has already said."
+      },
+      "try2": {
+        "question": "\"Ravi saved his money for months to buy a bicycle.\" What will most likely happen?",
+        "right": "He will buy the bicycle",
+        "wrong": [
+          "He will lose interest at once",
+          "He will buy a car"
+        ]
       }
     },
     {
@@ -977,6 +1757,19 @@
         "right": "cheerful",
         "wrong": [
           "frightening",
+          "sad"
+        ]
+      },
+      "mistake": {
+        "wrong": "\"Dark, cold and silent\" is a cheerful mood.",
+        "right": "\"Dark, cold and silent\" is a gloomy mood.",
+        "why": "The words chosen build the mood."
+      },
+      "try2": {
+        "question": "\"Laughter, music and sunshine filled the room.\" The mood is:",
+        "right": "joyful",
+        "wrong": [
+          "fearful",
           "sad"
         ]
       }
@@ -995,6 +1788,19 @@
           "first of all",
           "on the other hand"
         ]
+      },
+      "mistake": {
+        "wrong": "\"First, then, finally\" shows a comparison.",
+        "right": "\"First, then, finally\" shows steps in order.",
+        "why": "Each pattern has its own signal words."
+      },
+      "try2": {
+        "question": "Which words signal a comparison?",
+        "right": "on the other hand",
+        "wrong": [
+          "as a result",
+          "first of all"
+        ]
       }
     },
     {
@@ -1010,6 +1816,19 @@
         "wrong": [
           "rude",
           "lazy"
+        ]
+      },
+      "mistake": {
+        "wrong": "Judging a character by one word only",
+        "right": "Looking at what they say and how they say it",
+        "why": "Words and manner together show what a character is like."
+      },
+      "try2": {
+        "question": "\"Hurry up, you slowcoach!\" snapped Mina. Mina is:",
+        "right": "impatient",
+        "wrong": [
+          "patient",
+          "shy"
         ]
       }
     },
@@ -1027,6 +1846,19 @@
           "The seed is bought.",
           "The pot is empty."
         ]
+      },
+      "mistake": {
+        "wrong": "Fruit, flower, seed",
+        "right": "Seed, flower, fruit",
+        "why": "A plant grows from a seed, then flowers, then fruits."
+      },
+      "try2": {
+        "question": "What comes after a caterpillar?",
+        "right": "a cocoon",
+        "wrong": [
+          "an egg",
+          "nothing"
+        ]
       }
     },
     {
@@ -1041,6 +1873,19 @@
         "right": "are",
         "wrong": [
           "is",
+          "am"
+        ]
+      },
+      "mistake": {
+        "wrong": "I is happy.",
+        "right": "I am happy.",
+        "why": "Am goes with I."
+      },
+      "try2": {
+        "question": "\"She ___ my teacher.\" Which fits?",
+        "right": "is",
+        "wrong": [
+          "are",
           "am"
         ]
       }
@@ -1059,6 +1904,19 @@
           "This",
           "That"
         ]
+      },
+      "mistake": {
+        "wrong": "These book is mine.",
+        "right": "This book is mine.",
+        "why": "One book takes this; more than one takes these."
+      },
+      "try2": {
+        "question": "\"___ birds over there are parrots.\" Which fits?",
+        "right": "Those",
+        "wrong": [
+          "That",
+          "This"
+        ]
       }
     },
     {
@@ -1075,6 +1933,19 @@
           "Kicks the boy the ball.",
           "The ball the boy kicks."
         ]
+      },
+      "mistake": {
+        "wrong": "Milk the cat drinks.",
+        "right": "The cat drinks milk.",
+        "why": "Who comes first, then the action, then the rest."
+      },
+      "try2": {
+        "question": "Which sentence puts who first, then the action?",
+        "right": "Ravi reads a book.",
+        "wrong": [
+          "Reads Ravi a book.",
+          "A book Ravi reads."
+        ]
       }
     },
     {
@@ -1089,6 +1960,19 @@
         "right": "has",
         "wrong": [
           "have",
+          "haves"
+        ]
+      },
+      "mistake": {
+        "wrong": "He have a dog.",
+        "right": "He has a dog.",
+        "why": "Has goes with he, she and it."
+      },
+      "try2": {
+        "question": "\"We ___ two cats.\" Which fits?",
+        "right": "have",
+        "wrong": [
+          "has",
           "haves"
         ]
       }
