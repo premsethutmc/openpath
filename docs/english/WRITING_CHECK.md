@@ -98,3 +98,9 @@ Any word not on a list of about 91,000 words is now shown as a tip: "Check the s
 - Guards: SP-1 to SP-5. None of our 1,700+ reading, listening and dictation texts raises the tip.
 
 Still not caught: a real word used wrongly (there / their, form / from) beyond the patterns in slips.ts.
+
+## Words that sound alike (confusables@2)
+- there/their/they're, your/you're, it's/its, who's/whose, to/too, were/where, of/off, loose/lose, no/know, than/then, quite/quiet, breath/breathe, weather/whether.
+- Each is flagged only where the next or previous word makes the wrong one impossible ("there books" after "are" is left alone; "their late father" is right).
+- A test runs every pattern over all our reading, listening, dictation, guided and first-words text; none may fire. This caught "told her to." (right), so "… to." at the end of a sentence is not flagged.
+- Notes point to the Grammar in use topic "confusables".
