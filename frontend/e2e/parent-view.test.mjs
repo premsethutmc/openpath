@@ -93,7 +93,8 @@ test("Parent view: gate, add a test list for the child, the child takes it, the 
   await child.getByText("last test 1 of 2 · 1 of 2 on their own · 1 wrong").waitFor();
   const other = first === "garden" ? "bridge" : "garden";
   await child.getByText(`Words to work on: ${other}`).waitFor();
-  await child.getByText("practised spelling on 1 of the last 7 days").waitFor();
+  await child.getByText(/practised English on 1 of the last 7 days \(spelling on 1\)/).waitFor();
+  await child.locator("[data-line=\"levels\"]").getByText("Grammar:").waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });

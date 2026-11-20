@@ -2878,3 +2878,10 @@ h3.sub {
 .first-option .pic {
   font-size: 1.3em;
 }
+.parent-levels {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: grid;
+  gap: 2px;
+}
