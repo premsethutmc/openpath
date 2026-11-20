@@ -15,7 +15,11 @@ for (const width of [320,390]) test(width+'px: aim, compare white and red, and r
     page.on('response',response=>{if(response.status()>=400) unexpected.push(response.url());});
     page.on('request', r=>{if(new URL(r.url()).origin!==server.origin) unexpected.push(r.url());});
     await page.goto(server.origin);
-    await page.getByRole('link',{name:/Prism Lab/}).tap();
+    await Promise.all([
+      page.waitForURL(server.origin+'/prism/',{waitUntil:'load'}),
+      page.getByRole('link',{name:/Prism Lab/}).tap(),
+    ]);
+    await page.locator('#observation').filter({hasText:/One white spot/}).waitFor();
     const toggle = page.locator('#glass-toggle');
     const ray = page.locator('#rays polyline');
     assert.match(await page.locator('#observation').innerText(),/One white spot/);

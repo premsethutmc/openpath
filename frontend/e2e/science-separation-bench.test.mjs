@@ -13,7 +13,11 @@ for(const width of [320,390]) test(width+'px: workbench state reacts to independ
     page.on('pageerror',e=>problems.push(e.message));
     page.on('response',r=>{if(r.status()>=400)problems.push(r.status()+':'+r.url());});
     await page.goto(server.origin);
-    await page.getByRole('link',{name:/Separation Workbench/}).tap();
+    await Promise.all([
+      page.waitForURL(server.origin+'/separation-bench/',{waitUntil:'load'}),
+      page.getByRole('link',{name:/Separation Workbench/}).tap(),
+    ]);
+    await page.locator('#pot .reading').filter({hasText:/g water/}).waitFor();
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const button=(name)=>page.getByRole('button',{name,exact:true});
     await button('Pause time').tap();
