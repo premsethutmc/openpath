@@ -17,3 +17,5 @@
 .pressure-icon span { width: 45%; height: 22%; background: #ad4a34; border: 1px solid #783829; border-radius: 3px; }
 .seed-icon span { width: 38%; height: 28%; background: #257e56; border-radius: 70% 10% 70% 12%; transform: rotate(-19deg); }
 .seed-icon::after { content: ''; position: absolute; left: 42%; top: 49%; width: 3%; height: 24%; transform: rotate(21deg); background: #257e56; }
+.prism-icon { background: #182645; }
+.prism-icon span { width: 60%; height: 47%; background: linear-gradient(115deg,#e7f8ff 25%,#ff777b 47%,#ffd983 56%,#91ddeb 72%,#d190fc 85%); clip-path: polygon(28% 0, 100% 100%, 0 100%); }

@@ -13,6 +13,10 @@ const files = new Map([
   ['/plant-a-seed/model.mjs', ['plant-a-seed/model.mjs', 'text/javascript']],
   ['/plant-a-seed/seed.css', ['plant-a-seed/seed.css', 'text/css']],
   ['/plant-a-seed/seed.mjs', ['plant-a-seed/seed.mjs', 'text/javascript']],
+  ['/prism/', ['prism/index.html', 'text/html']],
+  ['/prism/prism.css', ['prism/prism.css', 'text/css']],
+  ['/prism/prism.mjs', ['prism/prism.mjs', 'text/javascript']],
+  ['/prism/model.mjs', ['prism/model.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {
