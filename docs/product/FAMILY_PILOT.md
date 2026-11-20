@@ -594,3 +594,6 @@ help was a single step, 22 questions where a first step shows a number equal to 
   the rule, put the numbers in, work it out); "set up = result" as set up, then work it out. One-step help in Classes 11–12:
   56 types (9,641 questions) → 35 types (5,759). Most of those left are "which kind is it" choices, one step by nature.
 - The 22 first-step flags are a number in the working that happens to equal the answer (2⁷ = 128 when x = 128): left as is.
+- **surds@1, one-term-at-a-time@1**: written working for surds (simplify each, then add or take away the like surds; multiply or
+  divide under one root; rationalise a denominator, with the conjugate when it has two terms) and for the first four terms of a
+  sequence (each term by putting n in, or from the one before). Each checks its result against the question's own answer.

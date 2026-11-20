@@ -18,7 +18,7 @@ export interface Worked {
    */
   ask?: { lead: string; value: string };
 }
-type Q = { family: string; params: number[]; answer: string; prompt?: string; steps?: { inputs?: unknown[] }[] };
+type Q = { family: string; params: number[]; answer: string; prompt?: string; options?: string[]; steps?: { inputs?: unknown[] }[] };
 
 const primesTo = (k: number) => { const out: number[] = []; for (let n = 2; n <= k; n++) if (out.every((p) => n % p)) out.push(n); return out; };
 
@@ -499,10 +499,111 @@ function oneByOne(q: Q): Worked[] | null {
     { next: "Last: count the yes ones.", shown: `${yes.length ? yes.join(", ") : "none"}: ${yes.length}`, ask: { lead: `${yes.length ? yes.join(", ") : "none"}: how many?`, value: String(yes.length) } },
   ];
 }
-const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision, rect: rectArea, aesym: oneByOne, aedigsym: oneByOne };
+/** surds@1 (Class 9 up): simplify, add, take away and multiply surds, and rationalise a denominator, step by step. Each
+ *  handler checks its result against the question's own right option and gives up (null) on anything it does not match. */
+const M = (x: number) => (x < 0 ? `−${-x}` : String(x));
+function simpRoot(n: number): [number, number] { let k = 1, m = n; for (let f = 2; f * f <= m; f++) while (m % (f * f) === 0) { m /= f * f; k *= f; } return [k, m]; }
+const surd = (k: number, m: number) => (m === 1 ? M(k) : k === 1 ? `√${m}` : k === -1 ? `−√${m}` : `${M(k)}√${m}`);
+const rightOption = (q: Q & { options?: string[] }) => { const i = "ABCDEFGH".indexOf(q.answer); return q.options && i >= 0 ? q.options[i] : null; };
+/** a choice question's working ends by finding its result among the options */
+const toOption = (q: Q, w: Worked[] | null): Worked[] | null => (w ? [...w.map((x, i) => (i === w.length - 1 && /^Last: /.test(x.next) ? { ...x, next: x.next.replace(/^Last: /, "Next: ") } : x)), { next: "Last: find it among the options.", shown: `${rightOption(q)} is option ${q.answer}` }] : null);
+function surdOps(q: Q & { options?: string[] }): Worked[] | null {
+  const m = q.prompt ? /^Simplify √(\d+) ([+−×÷]) √(\d+)/.exec(q.prompt) : null, want = rightOption(q);
+  if (!m || !want) return null;
+  const a = Number(m[1]), b = Number(m[3]);
+  if (m[2] === "÷") {
+    if (a % b) return null;
+    const [k, r] = simpRoot(a / b), res = surd(k, r);
+    if (res !== want) return null;
+    return [
+      { next: "First: put both numbers under one root: √a ÷ √b = √(a ÷ b).", shown: `√${a} ÷ √${b} = √(${a} ÷ ${b}) = √${a / b}` },
+      { next: `Last: ${r === 1 ? `${a / b} is a square number, so its root is a whole number` : `take the biggest square number out of ${a / b}`}.`, shown: `√${a / b} = ${res}` },
+    ];
+  }
+  if (m[2] === "×") {
+    const [k, r] = simpRoot(a * b), res = surd(k, r);
+    if (res !== want) return null;
+    return [
+      { next: "First: put both numbers under one root: √a × √b = √(a × b).", shown: `√${a} × √${b} = √(${a} × ${b}) = √${a * b}` },
+      { next: `Last: take the biggest square number out of ${a * b}.`, shown: `√${a * b} = √(${k * k} × ${r}) = ${res}` },
+    ];
+  }
+  const [k1, r1] = simpRoot(a), [k2, r2] = simpRoot(b);
+  if (r1 !== r2 || r1 === 1) return null;
+  const k = m[2] === "+" ? k1 + k2 : k1 - k2, res = k === 0 ? "0" : surd(k, r1);
+  if (res !== want) return null;
+  const step = (n: number, kk: number) => (kk === 1 ? { next: `√${n} is already as simple as it goes.`, shown: `√${n} = √${n}` } : { next: `Take the biggest square number out of ${n}.`, shown: `√${n} = √(${kk * kk} × ${r1}) = ${surd(kk, r1)}` });
+  const s1 = step(a, k1), s2 = step(b, k2);
+  return [
+    { ...s1, next: `First: ${s1.next.charAt(0).toLowerCase()}${s1.next.slice(1)}` },
+    { ...s2, next: `Next: now √${b}. ${s2.next}` },
+    { next: `Last: they are like surds (both ×√${r1}), so ${m[2] === "+" ? "add" : "take away"} the numbers in front.`, shown: `${surd(k1, r1)} ${m[2]} ${surd(k2, r1)} = ${res}` },
+  ];
+}
+function rationalise(q: Q & { options?: string[] }): Worked[] | null {
+  const want = rightOption(q);
+  if (!q.prompt || !want) return null;
+  const g = (x: number, y: number): number => (y ? g(y, x % y) : Math.abs(x));
+  const one = /denominator of (\d+)\/√(\d+) /.exec(q.prompt);
+  if (one) {
+    const a = Number(one[1]), b = Number(one[2]), d = g(a, b), k = a / d, den = b / d;
+    const top = k === 1 ? `√${b}` : `${k}√${b}`, res = den === 1 ? top : `${top}/${den}`;
+    if (res !== want) return null;
+    return [
+      { next: `First: multiply the top and the bottom by √${b}, so the bottom has no root.`, shown: `${a}/√${b} × √${b}/√${b} = ${a}√${b}/${b}` },
+      { next: "Last: cancel what the top and the bottom share.", shown: `${a}√${b}/${b} = ${res}` },
+    ];
+  }
+  const two = /denominator of (\d+)\/\(√(\d+) ([+−]) (\d+)\)/.exec(q.prompt);
+  if (!two) return null;
+  const a = Number(two[1]), b = Number(two[2]), c = Number(two[4]), flip = two[3] === "+" ? "−" : "+", d = b - c * c;
+  if (d === 0) return null;
+  // a(√b ∓ c)/d, with the sign of d moved to the top
+  const sgn = d < 0 ? -1 : 1, k0 = a * sgn, kc0 = a * c * sgn * (flip === "+" ? 1 : -1), h = g(g(k0, kc0), Math.abs(d));
+  const D = Math.abs(d) / h, k = k0 / h, kc = kc0 / h;
+  const top = `${k === 1 ? "" : k === -1 ? "−" : M(k)}√${b} ${kc < 0 ? "−" : "+"} ${Math.abs(kc)}`;
+  const res = D === 1 ? top : `(${top})/${D}`;
+  if (res !== want) return null;
+  return [
+    { next: `First: multiply the top and the bottom by √${b} ${flip} ${c}: the bottom with its sign changed.`, shown: `${a}/(√${b} ${two[3]} ${c}) × (√${b} ${flip} ${c})/(√${b} ${flip} ${c})` },
+    { next: `Next: the bottom is now (√${b})² − ${c}², which has no root.`, shown: `(√${b})² − ${c}² = ${b} − ${c * c} = ${M(d)}` },
+    { next: `Next: multiply out the top.`, shown: `${a}(√${b} ${flip} ${c}) = ${a}√${b} ${flip} ${a * c}` },
+    { next: h > 1 ? `Last: put the top over the bottom, cancel the ${h} they share and tidy the signs.` : "Last: put the top over the bottom and tidy the signs.", shown: `(${a}√${b} ${flip} ${a * c})/${M(d)} = ${res}` },
+  ];
+}
+/** one-term-at-a-time@1: the first four terms of aₙ = (a quadratic in n), each worked by putting n in. */
+function termsByRule(q: Q): Worked[] | null {
+  const rec = q.prompt ? /a₁ = ([−-]?\d+) and aₙ = ([−-]?)(\d*)aₙ₋₁ ([+−]) (\d+) for n ≥ 2/.exec(q.prompt) : null;
+  if (rec) {
+    // a₁ given; each next term from the one before
+    const N = (t: string) => Number(t.replace("−", "-"));
+    const p = (rec[2] ? -1 : 1) * (rec[3] ? Number(rec[3]) : 1), c = (rec[4] === "+" ? 1 : -1) * Number(rec[5]);
+    const vals = [N(rec[1])]; for (let i = 1; i < 4; i++) vals.push(p * vals[i - 1] + c);
+    if (`(${vals.map(M).join(", ")})` !== q.answer.replace(/-/g, "−")) return null;
+    const pre = p === 1 ? "" : p === -1 ? "−" : `${M(p)} × `;
+    return [
+      { next: "First: a₁ is given.", shown: `a₁ = ${M(vals[0])}` },
+      ...[1, 2, 3].map((i) => ({ next: `Next: a${"₁₂₃₄"[i]}: use the one before, a${"₁₂₃₄"[i - 1]} = ${M(vals[i - 1])}.`, shown: `a${"₁₂₃₄"[i]} = ${pre}(${M(vals[i - 1])}) ${rec[4]} ${rec[5]} = ${M(vals[i])}` })),
+      { next: "Last: write the four terms in order.", shown: `(${vals.map(M).join(", ")})` },
+    ];
+  }
+  const m = q.prompt ? /aₙ = ([^.]+?)\. Write its first four terms/.exec(q.prompt) : null;
+  if (!m || /aₙ₋₁/.test(m[1])) return null;
+  const rule = m[1].trim(), js = rule.replace(/−/g, "-").replace(/n²/g, "(n*n)").replace(/(\d)\s*\(/g, "$1*(").replace(/(\d)n/g, "$1*n");
+  if (!/^[-+*\s()n\d]+$/.test(js)) return null;
+  const f = new Function("n", `return ${js};`) as (n: number) => number;
+  const vals = [1, 2, 3, 4].map((n) => f(n));
+  if (`(${vals.map(M).join(", ")})` !== q.answer.replace(/-/g, "−")) return null;
+  const put = (n: number) => rule.replace(/n²/g, `(${n})²`).replace(/(\d)n\b/g, `$1(${n})`).replace(/(^|[^\d(])n\b/g, `$1(${n})`);
+  return [
+    ...vals.map((v, i) => ({ next: `${i === 0 ? "First" : "Next"}: a${"₁₂₃₄"[i]}: put n = ${i + 1} into the rule.`, shown: `a${"₁₂₃₄"[i]} = ${put(i + 1)} = ${M(v)}` })),
+    { next: "Last: write the four terms in order.", shown: `(${vals.map(M).join(", ")})` },
+  ];
+}
+const HANDLERS: Record<string, (q: Q) => Worked[] | null> = { agptest: primeTest, avdiv: longDivision, ldiv: exactDivision, rect: rectArea, aesym: oneByOne, aedigsym: oneByOne, aesurop: (q) => toOption(q, surdOps(q)), aerat: (q) => toOption(q, rationalise(q)), auaprec: termsByRule };
 export const WORKED_OUT: readonly string[] = Object.keys(HANDLERS);
 /** methods@1: the school method's name for a type that has one written here (the first tab of its step help). */
-const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division", rect: "Length × width", aesym: "One at a time", aedigsym: "One at a time" };
+const NAMES: Record<string, string> = { agptest: "Try each prime", avdiv: "Long division", ldiv: "Long division", rect: "Length × width", aesym: "One at a time", aedigsym: "One at a time", aesurop: "Simplest surds first", aerat: "Clear the root below", auaprec: "One term at a time" };
 /** methods@2: every way written for a question, the taught one first, each with its name; null when none is written. */
 /** Ways whose type's own steps are the same method in a shorter form: no second tab is offered beside them. */
 export const SOLE_WAYS: readonly string[] = ["Same bottom (LCM)", "Divide", "Whole × bottom + top", "Out of 100"];
