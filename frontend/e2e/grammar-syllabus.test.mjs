@@ -170,6 +170,12 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("button", { name: "← Stop" }).click();
   await wtask.locator("textarea").waitFor();
   assert.equal(await wtask.locator("textarea").inputValue(), slip, "the writing waited");
+  // and after the page is reloaded, on this device only
+  await page.reload();
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("button", { name: /Practise RW7:/ }).click();
+  await wtask.locator("textarea").waitFor();
+  assert.equal(await wtask.locator("textarea").inputValue(), slip, "the writing survived a reload");
     await wtask.locator("textarea").fill("Trees give us shade and clean air. ".repeat(20));
   await wtask.locator('[data-words="140"]').waitFor();
   // the rule-based check: form only, on the device, with its limits stated
