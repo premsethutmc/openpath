@@ -347,6 +347,11 @@ export function nudge(s: Scene, state: SceneState): string | null {
     const steps = Math.abs(r6(state.x - s.start));
     return `That is ${fmt(steps)} step${steps === 1 ? "" : "s"} from ${fmt(s.start)}. Now count the steps to ${fmt(state.x === s.from ? s.to : s.from)}.`;
   }
+  // fraction-nudge@1: a bar shaded against one to compare with is told which way to go (never how many pieces)
+  if (s.kind === "fraction" && s.show && s.goal.measure === "miss") {
+    const m = measures(s, state);
+    return m.ahead > 0 ? "Too much: your shading goes past the dashed line. Shade less." : m.ahead < 0 ? "Not enough yet: shade up to the dashed line." : null;
+  }
   if (s.kind !== "commas") return null;
   const want = commaPlaces(s), have = want.map((_, i) => state["abc"[i]]).sort((a, b) => a - b);
   for (let i = 0; i < want.length; i++) {
@@ -446,7 +451,18 @@ export function draw(s: Scene, state: SceneState): Shape[] {
       for (let i = 0; i < pieces; i++) out.push({ t: "rect", x: px(x0 + (i * W) / pieces), y, w: px(W / pieces), h, role: i < shaded ? role : "blank" });
       out.push({ t: "path", d: `M${x0} ${y}h${W}v${h}h${-W}Z`, role: "outline" });
     };
-    if (s.show) bar(14, 30, td, tn, "wedge1");
+    // fraction-labels@1: a bar to compare with says what it is, the learner's bar says what it shows now, and a dashed line
+    // carries the end of the green part down, so "the same amount" can be seen rather than worked out
+    if (s.show) {
+      // the labels sit on the side away from the dashed line, so the two never cross
+      const gx = px(x0 + (tn * W) / td), lx = gx > 170 ? 60 : 280;
+      bar(22, 30, td, tn, "wedge1");
+      out.push({ t: "text", x: lx, y: 16, s: `${tn}/${td}`, role: "fraclabel" });
+      if (n !== 100) {
+        out.push({ t: "text", x: lx, y: 76, s: `${k}/${n}`, role: "fraclabel" });
+        out.push({ t: "line", x1: gx, y1: 22, x2: gx, y2: 156, role: "guide" });
+      }
+    }
     if (n === 100) {
       // a hundred-square, filled a row at a time
       const U = 15, gx = 95, gy = s.show ? 58 : 34;

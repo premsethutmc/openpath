@@ -52,6 +52,8 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   ));
   return (
     <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"}>
+      {/* what to do is read before the picture, not found under it */}
+      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>}
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`}
         aria-hidden="true"
@@ -75,7 +77,6 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
       {gate ? null : cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>}
-      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}</p>}
       {tried.length > 0 && (
         <div className="scene-tried" data-testid="scene-tried">
           <p className="small muted">What you have tried</p>

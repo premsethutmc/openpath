@@ -348,7 +348,9 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scene .sc-value { fill: #1f2a37; font-size: 13px; font-weight: 700; }
 .scene .sc-pivot { fill: #2f5fd0; stroke: #fff; stroke-width: 2; }
 .scene .sc-grid { stroke: #e3e8f0; stroke-width: 1; }
-.scene .sc-cell { fill: #d6e4ff; stroke: #a9c4f7; stroke-width: 1; }
+.scene .sc-cell { fill: #7fa6f5; stroke: #2f5fd0; stroke-width: 1; }
+.scene .sc-fraclabel { fill: #1f2a37; font-size: 15px; font-weight: 700; }
+.scene .sc-guide { stroke: #0f7a5d; stroke-width: 2; stroke-dasharray: 5 4; }
 .scene .sc-outline { fill: none; stroke: #2f5fd0; stroke-width: 3; stroke-linejoin: round; }
 .scene .sc-curve2 { fill: none; stroke: #2f5fd0; stroke-width: 2.6; }
 .scene .sc-card { fill: #fff; stroke: #2f5fd0; stroke-width: 2.5; }

@@ -150,8 +150,9 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
     <div className="stack enter" data-recipe={recipe.competency} data-recipe-layout="flow" data-recipe-step={steps[open].kind}>
       <div className="panel lesson recipe recipe-flow">
         <p className="eyebrow">{recipe.title}</p>
-        {/* play-first@1: the first thing to do is at the top of the screen, with the story it belongs to under it */}
-        {(open >= 1 && steps[0].kind === "question" && steps[1].kind === "mission" ? [steps[1], steps[0], ...steps.slice(2, open + 1)] : steps.slice(0, open + 1)).map((s) => (s.kind === "mission" && done(s)
+        {/* play-first@1: the story opens the page and the thing to play with sits straight under it (a picture with no story
+            above it means nothing to a child: owner's report, 20 Nov 2026) */}
+        {steps.slice(0, open + 1).map((s) => (s.kind === "mission" && done(s)
           ? <p key={keyOf(s)} className="recipe-done" data-recipe-part={keyOf(s)}><span aria-hidden="true">✓ </span>{recipe.missions[s.index].success}</p>
           : (
             <section key={keyOf(s)} className="recipe-part" data-recipe-part={keyOf(s)} ref={s === steps[open] ? (el) => { newest.current = el; } : undefined}>
