@@ -2952,3 +2952,55 @@ h3.sub {
   white-space: nowrap;
   margin: 0;
 }
+/* Journey: each daily activity as a ladder */
+.daily-path {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 20px;
+}
+.daily-path > li {
+  background: var(--card, #fff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+.daily-path p {
+  margin: 4px 0;
+}
+.ladder {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.ladder li {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 2px solid var(--line);
+  color: var(--muted, #667);
+}
+.ladder li[data-state="done"] {
+  background: #d9f2e3;
+  border-color: #6cc293;
+  color: #1d6b40;
+}
+.ladder li[data-state="now"] {
+  background: #6a4fd8;
+  border-color: #6a4fd8;
+  color: #fff;
+}
+.daily-progress-list {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 18px;
+}

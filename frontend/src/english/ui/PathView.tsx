@@ -1,12 +1,14 @@
 /** The Learning Journey: the pilot skills as a path, each through its four stages, read from the learner profile. */
 import type { Learner } from "../logic/learner.ts";
+import { DailyPath, Folded } from "./DailyProgress.tsx";
+import { GeneralEnglish } from "./Home.tsx";
 import { learningPath } from "../logic/path.ts";
 import type { PlanStep } from "../logic/plan.ts";
 import { placementDone } from "../logic/state.ts";
 
 const STATE_WORDS: Record<string, string> = { done: "done", now: "next", later: "later", not_needed: "not needed", due: "due now", not_kept: "not kept" };
 
-export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: PlanStep) => void }) {
+export function PathView({ learner, onStart, onLevelCheck, onResume, onWhy, onJourney }: { learner: Learner; onStart: (s: PlanStep) => void; onLevelCheck?: () => void; onResume?: () => void; onWhy?: () => void; onJourney?: () => void }) {
   const profile = learner.profile();
   const s = learner.state;
   const started = placementDone(s);
@@ -17,6 +19,10 @@ export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: 
       <h1 id="journey-title" className="hero">
         Your learning path <span aria-hidden="true">🗺️</span>
       </h1>
+      <p className="sub">Each English activity is a ladder. Your step is marked, with what moves you up.</p>
+      <DailyPath learner={learner} onLevelCheck={onLevelCheck} />
+      <Folded title="Skill by skill" hint="The older journey: a check, a lesson, a fresh check, a later check">
+      <GeneralEnglish learner={learner} onStart={onStart} onResume={onResume ?? (() => {})} onWhy={onWhy ?? (() => {})} onJourney={onJourney ?? (() => {})} />
       <p className="sub">Each skill goes the same way: a first check, a lesson with practice, a fresh check on your own, and a later check to see what has stuck.</p>
       {!started && (
         <div className="tile peach">
@@ -58,6 +64,7 @@ export function PathView({ learner, onStart }: { learner: Learner; onStart: (s: 
       ) : (
         <p className="small">These are the five skills of the current pilot. Other skills appear on Progress once they have answers. Every lesson and question here is draft content awaiting teacher review.</p>
       )}
+      </Folded>
     </main>
   );
 }

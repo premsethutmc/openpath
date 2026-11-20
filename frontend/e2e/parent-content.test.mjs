@@ -26,9 +26,10 @@ const PARENT = `lists.${run}@example.org`;
 const OTHER = `stranger.${run}@example.org`;
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();

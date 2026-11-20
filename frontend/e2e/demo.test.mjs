@@ -32,9 +32,10 @@ const ANDROID = {
 };
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -152,6 +153,7 @@ test("the private demo on an Android-sized phone: login wall, the English app, r
   await shot(page, "2-placement-done");
   await page.getByRole("button", { name: "Back to today" }).click();
   // 5. automatic progression: the plan moves on to the spelling check (dictation), here with an adult reading
+  await today(page);
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
@@ -233,6 +235,7 @@ test("spoken words behind the demo login: the app asks the browser's voice to sa
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
   await finish(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
+  await today(page);
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();

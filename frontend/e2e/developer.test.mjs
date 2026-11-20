@@ -29,9 +29,10 @@ const NOSY = `nosy.${run}@example.org`;
 const code = () => execSync(CLAIM, { encoding: "utf8" }).trim().split("\n").at(-1).trim();
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -107,6 +108,8 @@ async function startSpellingIfAsked(page) {
   return true;
 }
 async function finishSession(page, right = () => true) {
+  // a session opened from Journey: wait until Journey (whose path marks stages "done") has gone
+  await page.locator('[aria-labelledby="journey-title"]').waitFor({ state: "detached", timeout: 8000 }).catch(() => {});
   for (let n = 0; n < 40; n++) {
     await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 10000 });
     if (await startSpellingIfAsked(page)) continue;

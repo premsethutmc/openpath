@@ -110,6 +110,8 @@ export function App() {
   const feedbackPupil = mode === "account" && learner ? learner.profileId : null;
   const feedbackService = useMemo(() => (feedbackPupil ? serviceFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
   const [tab, setTab] = useState<Tab>("home");
+  // "For a grown-up: why these?" opens Progress with the skill-by-skill overview unfolded
+  const [why, setWhy] = useState(false);
   // subjects-home@2: in a build that carries maths, a learner who is in starts on the two subject tiles. Once English is
   // chosen it stays chosen for this browser tab (a reload does not send them back), until they go back to the subjects.
   const [subjects, setSubjects] = useState(() => { try { return MATHS_BUILT && sessionStorage.getItem("openpath.subject") !== "english"; } catch { return MATHS_BUILT; } });
@@ -708,6 +710,17 @@ export function App() {
         </main>
       </div>
     );
+  const resume = () => {
+    const type = learner.state.open?.event.type;
+    // an essay sitting continues in the essay studio, not in the question session screen
+    if (type === "essay") return void location.assign("?experience=essay-live");
+    if (type === "doubling_journey") setInJourney(true);
+    else setInSession(true);
+  };
+  const startDoubling = async () => {
+    await learner.startJourney();
+    setInJourney(true);
+  };
   return (
     <div className="shell" data-tick={tick} data-mode={mode}>
       <header className="top">
@@ -725,18 +738,10 @@ export function App() {
           onSubjects={MATHS_BUILT ? () => chooseSubject(false) : undefined}
           learner={learner}
           onStart={start}
-          onResume={() => {
-            const type = learner.state.open?.event.type;
-            // an essay sitting continues in the essay studio, not in the question session screen
-            if (type === "essay") return void location.assign("?experience=essay-live");
-            if (type === "doubling_journey") setInJourney(true);
-            else setInSession(true);
-          }}
-          onJourney={async () => {
-            await learner.startJourney();
-            setInJourney(true);
-          }}
-          onWhy={() => setTab("progress")}
+          onResume={resume}
+          onJourney={startDoubling}
+          onPath={() => (setTab("journey"), scrollTo(0, 0))}
+          onWhy={() => (setWhy(true), setTab("progress"), scrollTo(0, 0))}
           onBee={() => setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" })}
           onMyWords={() => setInMyWords(true)}
           onMyBooks={() => setInMyBooks(true)}
@@ -753,8 +758,8 @@ export function App() {
           onReading={() => (setInReading(true), scrollTo(0, 0))}
         />
       )}
-      {tab === "journey" && <PathView learner={learner} onStart={start} />}
-      {tab === "progress" && <ProgressView learner={learner} />}
+      {tab === "journey" && <PathView learner={learner} onStart={start} onResume={resume} onWhy={() => (setWhy(true), setTab("progress"), scrollTo(0, 0))} onJourney={startDoubling} onLevelCheck={() => (setTab("home"), setInLevelCheck(true), scrollTo(0, 0))} />}
+      {tab === "progress" && <ProgressView learner={learner} why={why} />}
       {tab === "me" && (
         <Me
           learner={learner}
@@ -783,7 +788,7 @@ export function App() {
       )}
       <nav className="nav" aria-label="Sections">
         {TABS.map((t) => (
-          <button key={t.id} type="button" aria-current={tab === t.id ? "page" : undefined} onClick={() => (setTab(t.id), scrollTo(0, 0))}>
+          <button key={t.id} type="button" aria-current={tab === t.id ? "page" : undefined} onClick={() => (setWhy(false), setTab(t.id), scrollTo(0, 0))}>
             <span className="ico" aria-hidden="true">
               {t.ico}
             </span>

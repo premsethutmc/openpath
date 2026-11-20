@@ -75,6 +75,17 @@ function planSteps(s: AppState, c: AppContent, now: string, speech: boolean): Pl
   return steps;
 }
 
+/**
+ * The next spelling rule to learn or check (a pattern such as doubling letters, with a short lesson first), for the
+ * daily Spelling row: the same step the older journey's plan offers, without its starting checks.
+ */
+export function spellingRuleStep(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep | null {
+  const next = spellingPlan(s, c, now, speech)[0];
+  if (!next) return null;
+  const step = patternStep(c, next, s);
+  return activityAllowed(c, step.type) ? step : null;
+}
+
 /** Word review: misspelt words due again, and words spelt right a few days ago that are due a check (PR #14). */
 export function reviewStep(s: AppState, c: AppContent, now: string, speech: boolean): PlanStep | null {
   const review = reviewWords(s, c, now, speech);
