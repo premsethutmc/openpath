@@ -23,6 +23,7 @@ let uncovered = false;
 let inspected = false;
 let windowOpen = false;
 let careAction = null;
+let replayingFirstRoot = false;
 
 function storageNotice(ok) {
   get('save-status').textContent = ok
@@ -35,13 +36,14 @@ function render() {
   const view = lessonView(pot, lesson, windowOpen);
   const planted = pot.day > 0;
   get('day').textContent = planted ? 'Simulated day ' + pot.day : 'Ready to plant';
-  get('pot').dataset.stage = uncovered ? 'uncovered' : view.stage;
+  const stage = replayingFirstRoot ? 'root' : view.stage;
+  get('pot').dataset.stage = uncovered ? 'uncovered' : stage;
   get('pot').dataset.window = view.cutaway ? 'open' : 'closed';
   get('pot').dataset.moisture = inspected ? pot.moisture : 'unseen';
   const caption = uncovered ? 'One bean rests on top of the soil.'
     : !planted ? 'The pot is ready for one bean.'
-      : view.stage === 'root' ? 'A tiny root reaches down. The surface is still bare.'
-        : view.stage === 'sprout' ? 'A shoot has pushed above the soil.'
+      : stage === 'root' ? 'A tiny root reaches down. The surface is still bare.'
+        : stage === 'sprout' ? 'A shoot has pushed above the soil.'
           : 'There is nothing above the soil yet.';
   get('pot-title').textContent = 'View of the pot. ' + caption + (inspected ? ' ' + soilText[pot.moisture] : '');
   get('stage').textContent = caption;
@@ -49,16 +51,18 @@ function render() {
   get('cover').hidden = !uncovered;
   get('prediction-form').hidden = !view.mustPredict || uncovered;
   get('look').hidden = uncovered || view.cutaway || !(view.mustLook || lesson.rootSeen);
-  get('inspect').hidden = !view.canCare || inspected || uncovered;
-  get('care').hidden = !view.canCare || !inspected || uncovered;
-  get('transfer').hidden = !view.canApply || uncovered;
-  get('fresh').hidden = !planted || uncovered;
+  get('continue-saved').hidden = !replayingFirstRoot;
+  get('inspect').hidden = !view.canCare || inspected || uncovered || replayingFirstRoot;
+  get('care').hidden = !view.canCare || !inspected || uncovered || replayingFirstRoot;
+  get('transfer').hidden = !view.canApply || uncovered || replayingFirstRoot;
+  get('fresh').hidden = !planted || uncovered || replayingFirstRoot;
   if (inspected) get('moisture').textContent = soilText[pot.moisture];
   for (const action of ['water', 'wait']) get(action).setAttribute('aria-pressed', String(careAction === action));
   get('next').disabled = careAction === null;
 }
 function place() {
   uncovered = true;
+  replayingFirstRoot = false;
   inspected = false;
   windowOpen = false;
   careAction = null;
@@ -98,15 +102,24 @@ get('look').addEventListener('click', () => {
   if (uncovered || view.cutaway || !(view.mustLook || lesson.rootSeen)) return;
   windowOpen = true;
   if (view.mustLook) {
+    replayingFirstRoot = stageOf(pot) === 'sprout';
     lesson = { ...lesson, rootSeen: true };
     save();
-    story('The first root has appeared. This is germination: the seed has started to grow.');
+    story(replayingFirstRoot
+      ? 'This replays the first root from your saved pot. A seed starting to grow is called germination.'
+      : 'The first root has appeared. This is germination: the seed has started to grow.');
   }
   render();
   get('stage').focus();
 });
+get('continue-saved').addEventListener('click', () => {
+  replayingFirstRoot = false;
+  render();
+  story('Here is your saved pot. The shoot appeared after its root.');
+  get('stage').focus();
+});
 get('inspect').addEventListener('click', () => {
-  if (!lessonView(pot, lesson, windowOpen).canCare) return;
+  if (replayingFirstRoot || !lessonView(pot, lesson, windowOpen).canCare) return;
   inspected = true;
   render();
   get('moisture').focus();

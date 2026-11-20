@@ -196,3 +196,30 @@ test('320px keyboard with blocked storage: plant, predict, inspect and reveal', 
     assert.equal(await page.locator('#pot').getAttribute('data-stage'), 'empty');
   } finally { await page.close(); }
 });
+
+test('legacy sprout preserves the saved day but replays the first root before showing the shoot', async () => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const button = (name) => page.getByRole('button', { name, exact: true });
+  const stage = () => page.locator('#pot').getAttribute('data-stage');
+  try {
+    await page.addInitScript((key) => {
+      if (!sessionStorage.getItem('seeded')) {
+        localStorage.setItem(key, JSON.stringify({ version: 1, pot: { day: 7, moisture: 'moist', growth: 3 } }));
+        sessionStorage.setItem('seeded', 'yes');
+      }
+    }, storageKey);
+    await page.goto(server.origin + '/plant-a-seed/');
+    assert.equal(await stage(), 'seed');
+    await page.getByRole('radio', { name: 'A shoot', exact: true }).check();
+    await button('Lock my prediction').click();
+    assert.equal(await stage(), 'seed');
+    assert.doesNotMatch(await page.locator('#pot-title').textContent(), /shoot|root/i);
+    await button('Open the soil window').click();
+    assert.equal(await stage(), 'root');
+    assert.match(await page.locator('#pot-title').textContent(), /tiny root/);
+    assert.equal(await button('Check the soil').isVisible(), false);
+    await button('Return to my saved pot').click();
+    assert.equal(await stage(), 'sprout');
+    assert.equal(await page.locator('#day').innerText(), 'Simulated day 7');
+  } finally { await page.close(); }
+});

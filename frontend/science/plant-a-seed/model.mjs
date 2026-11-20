@@ -72,9 +72,12 @@ export function lessonView(pot, lesson, windowOpen = false) {
   const mustPredict = stage !== 'empty' && !guesses.includes(lesson.prediction);
   const mustLook = !mustPredict && !lesson.rootSeen && (stage === 'root' || stage === 'sprout');
   const cutaway = !mustPredict && windowOpen && (mustLook || lesson.rootSeen);
+  let visibleStage = stage;
+  if (stage !== 'empty' && (mustPredict || (mustLook && !cutaway))) visibleStage = 'seed';
+  else if (mustLook && cutaway) visibleStage = 'root';
+  else if (stage === 'root' && !cutaway) visibleStage = 'seed';
   return {
-    mustPredict, mustLook, cutaway,
-    stage: mustPredict && stage !== 'empty' ? 'seed' : cutaway || stage === 'sprout' ? stage : stage === 'empty' ? 'empty' : 'seed',
+    mustPredict, mustLook, cutaway, stage: visibleStage,
     canCare: stage !== 'empty' && !mustPredict && !mustLook,
     canApply: stage === 'sprout' && lesson.rootSeen && !mustPredict,
   };

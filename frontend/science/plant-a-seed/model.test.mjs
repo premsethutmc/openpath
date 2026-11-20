@@ -79,3 +79,16 @@ test('the device-only pot can retain prediction and observation without revealin
   assert.deepEqual(loadLesson(storage, pot), lesson);
   assert.equal(lessonView(pot, loadLesson(storage, pot)).cutaway, false);
 });
+
+
+test('an older already-sprouted pot can replay its first root without spoilers', () => {
+  const saved = { day: 4, moisture: 'moist', growth: 3 };
+  const predicted = { prediction: 'shoot', rootSeen: false };
+  assert.equal(lessonView(saved, blankLesson).stage, 'seed');
+  const beforeLook = lessonView(saved, predicted);
+  assert.equal(beforeLook.stage, 'seed');
+  assert.equal(beforeLook.mustLook, true);
+  assert.equal(beforeLook.canApply, false);
+  assert.equal(lessonView(saved, predicted, true).stage, 'root');
+  assert.equal(lessonView(saved, { ...predicted, rootSeen: true }).stage, 'sprout');
+});
