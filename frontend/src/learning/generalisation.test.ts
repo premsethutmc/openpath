@@ -117,7 +117,10 @@ test("G: an unseen mistake on a problem the learner types in is investigated and
     if (p && p.family === "cint") return String(p.params[2] * p.params[1]);
     return question(id).answer;
   };
-  const phases = d.recover(qid, (id, ph) => (id === qid && ph === "return" ? "42" : ignoreLower(id)));
+  // … until it is taught: the explanation's own check now has a non-zero lower limit (teachable@1), so a learner who still
+  // ignored it would rightly not be counted as helped. This learner learns from the teaching.
+  let taught = false;
+  const phases = d.recover(qid, (id, ph) => { if (ph === "guided") taught = true; return id === qid && ph === "return" ? "42" : taught ? question(id).answer : ignoreLower(id); });
   assert.equal(phases[0], "attempt");
   assert.ok(phases.includes("investigate"), "the wrong answer is investigated first");
   const follow = d.state().records.attempts.filter((a) => a.context === investigateContext(qid));
