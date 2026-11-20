@@ -113,22 +113,39 @@ export function AiFeedback({ task, text, check, service }: { task: GuidedTask; t
 }
 
 /**
- * Writing in progress, kept in memory only while the app is open, so that a learner who goes to practise a rule
- * the check pointed to finds the piece still there on coming back. Never stored, never sent.
+ * Writing in progress, saved on this device only (never sent), per learner and task, so a learner who goes to
+ * practise a rule, closes the app or reloads finds the piece still there. Cleared when the task is marked done.
  */
-const drafts = new Map<string, string>();
+const draftKey = (who: string, task: string) => `openpath-english-draft:${who}:${task}`;
+const drafts = {
+  get(who: string, task: string) {
+    try {
+      return localStorage.getItem(draftKey(who, task)) ?? "";
+    } catch {
+      return "";
+    }
+  },
+  set(who: string, task: string, text: string) {
+    try {
+      if (text) localStorage.setItem(draftKey(who, task), text);
+      else localStorage.removeItem(draftKey(who, task));
+    } catch {
+      /* a private window may refuse; the text stays on screen */
+    }
+  },
+};
 const topicName = (id: string) => GRAMMAR.topics.find((t) => t.id === id)?.name ?? id;
 
-function TaskTile({ task, was, feedback, onDone, onPractise }: { task: GuidedTask; onPractise?: (topics: string[]) => void; feedback?: FeedbackService; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
+function TaskTile({ who, task, was, feedback, onDone, onPractise }: { who: string; task: GuidedTask; onPractise?: (topics: string[]) => void; feedback?: FeedbackService; was: { seen: number; of: number; times: number; words?: number } | undefined; onDone: (seen: number[], writing?: { words: number; self: number[] }) => void }) {
   const [seen, setSeen] = useState<number[]>([]);
-  const [text, setTextState] = useState(() => drafts.get(task.id) ?? "");
-  const setText = (t: string) => (t ? drafts.set(task.id, t) : drafts.delete(task.id), setTextState(t));
+  const [text, setTextState] = useState(() => drafts.get(who, task.id));
+  const setText = (t: string) => (drafts.set(who, task.id, t), setTextState(t));
   const [self, setSelf] = useState<number[]>([]);
   const [copied, setCopied] = useState(false);
   const [check, setCheck] = useState<WritingCheck | null>(null);
   const [checking, setChecking] = useState(false);
   const words = wordCount(text);
-  const [open, setOpen] = useState(() => drafts.has(task.id));
+  const [open, setOpen] = useState(() => !!drafts.get(who, task.id));
   return (
     <section className="tile guided-task" data-task={task.id} data-done={!!was} aria-labelledby={`guided-${task.id}`}>
       <b id={`guided-${task.id}`}>
@@ -232,7 +249,7 @@ function TaskTile({ task, was, feedback, onDone, onPractise }: { task: GuidedTas
   );
 }
 
-export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack, onPractise }: { tasks: GuidedTask[]; feedback?: FeedbackService; onPractise?: (topics: string[]) => void; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
+export function GuidedView({ who = "", tasks, summary, heading, feedback, onDone, onBack, onPractise }: { who?: string; tasks: GuidedTask[]; feedback?: FeedbackService; onPractise?: (topics: string[]) => void; summary: GuidedSummary; heading: string; onDone: (task: GuidedTask, seen: number[], writing?: { words: number; self: number[] }) => void; onBack: () => void }) {
   const writing = tasks.some((t) => t.write);
   return (
     <main className="page vocab guided" aria-labelledby="guided-title">
@@ -245,7 +262,7 @@ export function GuidedView({ tasks, summary, heading, feedback, onDone, onBack, 
       </h1>
       <p className="sub">{writing ? "Write to the task, check your own work against the list, then show it to a grown-up, who ticks what they see. The app does not keep or mark the writing." : "These are done aloud or away from the screen. The app cannot hear or mark them: a grown-up listens and ticks what they saw."}</p>
       {tasks.map((t) => (
-        <TaskTile key={t.id} task={t} was={summary.done.get(t.id)} feedback={feedback} onPractise={onPractise} onDone={(seen, w) => onDone(t, seen, w)} />
+        <TaskTile key={t.id} who={who} task={t} was={summary.done.get(t.id)} feedback={feedback} onPractise={onPractise} onDone={(seen, w) => onDone(t, seen, w)} />
       ))}
       {!tasks.length && <p>There are no tasks for this line yet.</p>}
     </main>
@@ -277,7 +294,7 @@ export function GuidedTasks({ learner, syllabus, outcome, heading, feedback, onL
           This could not be saved. Check the connection; saving the next task will try again.
         </p>
       )}
-      <GuidedView tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} feedback={feedback} onPractise={onPractise} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
+      <GuidedView who={learner.profileId} tasks={tasksFor(GUIDED, syllabus, outcome)} summary={guidedSummary(learner.guidedRecords())} heading={heading} feedback={feedback} onPractise={onPractise} onDone={(t, seen, w) => void save(t, seen, w)} onBack={onLeave} />
     </>
   );
 }
