@@ -35725,7 +35725,7 @@
    "competency": "MATH.algebra.quadratics",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "b35a9c4e",
+   "contentHash": "24bf69bd",
    "state": "draft",
    "history": [
     {
@@ -35780,8 +35780,8 @@
      "state": "draft",
      "by": "content pipeline",
      "role": "engineer",
-     "at": "2026-11-20T04:53:20.927Z",
-     "contentHash": "b35a9c4e",
+     "at": "2026-11-20T07:39:29.534Z",
+     "contentHash": "24bf69bd",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -36451,7 +36451,7 @@
    "competency": "MATH.calculus.definite-integrals",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "e0d15565",
+   "contentHash": "b1136d8d",
    "state": "draft",
    "history": [
     {
@@ -36514,8 +36514,8 @@
      "state": "draft",
      "by": "content pipeline",
      "role": "engineer",
-     "at": "2026-11-20T04:53:20.927Z",
-     "contentHash": "e0d15565",
+     "at": "2026-11-20T07:39:29.534Z",
+     "contentHash": "b1136d8d",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

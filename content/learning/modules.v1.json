@@ -971,11 +971,11 @@
        "text": [
         "Under y = c from x = a to x = b: width b − a, height c."
        ],
-       "instance": "gen:cint:1,4,3"
+       "instance": "gen:cint:2,6,3"
       }
      ],
-     "guided": "gen:cint:1,4,3",
-     "check": "gen:cint:2,7,5"
+     "guided": "gen:cint:2,6,3",
+     "check": "gen:cint:1,3,2"
     }
    ],
    "practice": [
@@ -1080,14 +1080,14 @@
         "For x² + bx + c, find two numbers that multiply to c and add to b. They give the factors."
        ],
        "math": [
-        "x² − 7x + 12: −3 × −4 = 12, −3 + −4 = −7",
-        "(x − 3)(x − 4) = 0"
+        "x² − 7x + 10: −2 × −5 = 10, −2 + −5 = −7",
+        "(x − 2)(x − 5) = 0"
        ],
-       "instance": "gen:quad:-7,12"
+       "instance": "gen:quad:-7,10"
       }
      ],
-     "guided": "gen:quad:-7,12",
-     "check": "gen:quad:-5,6"
+     "guided": "gen:quad:-7,10",
+     "check": "gen:quad:-8,12"
     },
     {
      "id": "square_meaning",
@@ -1104,7 +1104,7 @@
       }
      ],
      "guided": "gen:quad:0,-49",
-     "check": "gen:quad:0,-25"
+     "check": "gen:quad:-6,0"
     }
    ],
    "practice": [

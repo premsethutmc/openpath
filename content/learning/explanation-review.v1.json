@@ -8809,12 +8809,12 @@
      ]
     },
     {
-     "contentHash": "sha256:20a087bad85ba477c1a97d8813aa0752321a1babd05f1dbcebd480a3a686431a",
+     "contentHash": "sha256:dd1e8437a3f8400b03c5868e79e713e2d56b4a4411883aa5bb5fb2faf83b724d",
      "status": "pending_review",
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-20T04:43:04.794Z",
+      "at": "2026-11-20T07:14:43.970Z",
       "note": "content changed: the decision on sha256:77aea4808c43 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8851,12 +8851,12 @@
      ]
     },
     {
-     "contentHash": "sha256:e14d3b2f48a822d0975603b5031f1a938d93fdd3437559c37038c4993146a52a",
+     "contentHash": "sha256:330ef879f2c9bd4cab581bd9fc876667466f0a5004c86f48321fd12613c4a377",
      "status": "pending_review",
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-20T04:43:04.794Z",
+      "at": "2026-11-20T07:14:43.970Z",
       "note": "content changed: the decision on sha256:f0b0ee87bd1a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10746,12 +10746,12 @@
      ]
     },
     {
-     "contentHash": "sha256:70e83dea90acb4b77ae969478be018bb2d168b3b9b2f6bba4d43cf080cfdce07",
+     "contentHash": "sha256:30f2e1070c377b0864688909ff78e25360c18c5faa86a6d519a3533f7e2b1e66",
      "status": "pending_review",
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-20T04:43:04.786Z",
+      "at": "2026-11-20T07:14:43.968Z",
       "note": "content changed: the decision on sha256:389f37b9f259 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",

@@ -14,7 +14,7 @@ const KNOWN = new Set(["MATH.reasoning.mathematical-induction"]);
 
 test("teachable@1: every Class 11 and 12 skill has an explanation that can be shown", () => {
   const without: string[] = [];
-  for (const b of ["cbse", "tn"]) for (const g of [11, 12]) {
+  for (const b of ["cbse", "tn"] as const) for (const g of [11, 12]) {
     for (const { outcome } of allOutcomesOf(boardFor(b, g)!)) for (const c of outcome.mapping.competencies.filter((m) => m.status === "accepted")) {
       const id = graph.byId.has(c.id) ? graph.evidenceTarget(c.id) : c.id, m = moduleFor(id);
       if (!m || KNOWN.has(id)) continue;

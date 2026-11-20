@@ -602,6 +602,6 @@ help was a single step, 22 questions where a first step shows a number equal to 
 
 Three skills had explanations that were never shown, because each was tied to a hand-written example the machine check cannot
 verify: quadratic equations (two explanations), definite integrals (one). They are now tied to generated questions the check
-works through (x² − 7x + 12 = 0, x² − 49 = 0, ∫ from 1 to 4 of 3 dx), pass the teaching check, and are registered for review.
+works through (x² − 7x + 10 = 0, x² − 49 = 0, ∫ from 2 to 6 of 3 dx), pass the teaching check, and are registered for review.
 A simulated weak child is now taught both skills and masters them. Proof by induction is the one exception: it has no generated
 question type to tie a checked example to. Test: `frontend/src/learning/teachable.test.ts`.
