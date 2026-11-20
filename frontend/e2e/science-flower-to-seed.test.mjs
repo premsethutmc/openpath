@@ -18,11 +18,11 @@ test('320px touch: go from pollen to pod, send seeds and grow a plant without a 
  await p.getByRole('link',{name:/Flower to Seed/}).tap();
  await p.waitForURL(origin+'/flower-to-seed/');
  assert.equal(await b(p,'Look inside →').count(),0);
- await b(p,'Anthers A').tap(); await b(p,'Petal B').tap();
- assert.match(await status(p),/petal can’t start a seed/);
- await b(p,'Stigma A').tap();assert.match(await status(p),/Same-flower/);
+ await b(p,'Left flower').tap();
+ assert.match(await status(p),/sticks to the bee/);
+ await b(p,'Left flower').tap();assert.match(await status(p),/same plant/);
  assert.equal(await b(p,'Look inside →').count(),0);
- await b(p,'Anthers A').tap();await b(p,'Stigma B').tap();
+ await b(p,'Right flower').tap();
  await b(p,'Look inside →').tap();
  assert.match(await status(p),/pollen lands/i);
  const time=p.getByRole('slider',{name:'Flower growth'});
@@ -54,10 +54,10 @@ test('390px drag the bee itself twice, then replay using a keyboard',async t=>ru
   await p.mouse.move(z.x+z.width/2,z.y+z.height/2,{steps:7});
   await p.mouse.up();
  }
- await drag('Move the bee','Anthers B');assert.match(await status(p),/stuck to the bee/);
- await drag('Move the bee','Stigma A');assert.match(await status(p),/cross-pollination/i);
- await b(p,'Anthers B').press('Enter');await b(p,'Stigma A').press('Enter');
- assert.match(await status(p),/cross-pollination/i);
+ await drag('Move the bee','Right flower');assert.match(await status(p),/sticks to the bee/);
+ await drag('Move the bee','Left flower');assert.match(await status(p),/reaches the other flower/i);
+ await b(p,'Right flower').press('Enter');await b(p,'Left flower').press('Enter');
+ assert.match(await status(p),/reaches the other flower/i);
 }));
 test('390px emulated touch drag picks up and deposits pollen',async t=>run(t,true,390,async(p,origin)=>{
  await p.goto(origin+'/flower-to-seed/');
@@ -70,6 +70,16 @@ test('390px emulated touch drag picks up and deposits pollen',async t=>run(t,tru
   for(const step of [.25,.5,.75,1])await send('touchMove',[{x:x+step*dx,y:y+step*dy}]);
   await send('touchEnd',[]);
  }
- await drag('Anthers A');assert.match(await status(p),/stuck to the bee/);
- await drag('Stigma B');assert.match(await status(p),/cross-pollination/i);
+ await drag('Left flower');assert.match(await status(p),/sticks to the bee/);
+ await drag('Right flower');assert.match(await status(p),/reaches the other flower/i);
+}));
+
+test('the bee demonstrates both visits without a tap, then the cutaway opens',async t=>run(t,true,390,async(p,origin)=>{
+ await p.emulateMedia({reducedMotion:'no-preference'});
+ await p.goto(origin+'/flower-to-seed/');
+ await p.locator('#observation').filter({hasText:'Pollen sticks to the bee.'}).waitFor();
+ await b(p,'Look inside →').waitFor();
+ assert.match(await status(p),/reaches the other flower/);
+ await b(p,'Look inside →').tap();
+ assert.match(await status(p),/pollen lands/i);
 }));

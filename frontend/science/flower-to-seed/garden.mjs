@@ -4,14 +4,15 @@ const $=id=>document.getElementById(id);
 const points=[[166,174],[470,205]];
 const order=['garden','cutaway','travel','check'];
 const labels={
- garden:['THE GARDEN','Move the bee','Drag the bee or tap a flower part.'],
+ garden:['THE GARDEN','Move the bee','Drag the bee or tap a flower.'],
  cutaway:['FLOWER CUTAWAY','Grow a pod','Slide time forward.'],
  travel:['SEED TRAVELS','Give seeds a ride','Try wind, water or a passing animal.'],
  check:['GROWING BED','Start a new plant','Plant, rain, then let time pass.'],
 };
 let stop='garden',source=null,landed=null,target=null,stage=0,opened=false;
 let bx=320,by=98,seed='dandelion',tool=null,success=null,bed=startBed();
-let obs='',drag=null,suppressUntil=0;
+let obs='',drag=null,suppressUntil=0,timer=0,frame=0,demoSerial=0;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const button=(id,label,attr='')=>`<button type="button" data-action="${id}" ${attr}>${label}</button>`;
 const marker=(id,label,x,y,style='',attr='')=>button(id,label,`class="target ${style}" style="left:${x/6.4}%;top:${y/4.6}%" ${attr}`);
 const primary=(id,label)=>button(id,label,'class="primary"');
@@ -28,12 +29,9 @@ function showScene(){
  if(stop==='garden'){
    scene=garden(bx,by,source!==null,target);
    for(const [i,[x,y]] of points.entries()){
-     const letter=i===0?'A':'B';
-     scene+=marker('source-'+i,'Anthers '+letter,x-55,y+40,'marker',`aria-pressed="${source===i}"`);
-     scene+=marker('stigma-'+i,'Stigma '+letter,x+43,y+4,'marker');
-     if(source!==null)scene+=marker('petal-'+i,'Petal '+letter,x+31,y+92,'marker');
+     scene+=marker('flower-'+i,'',x,y,'flower-touch',`aria-label="${i===0?'Left':'Right'} flower"`);
    }
-   scene+=marker('bee','',bx,by,'bee-touch','aria-label="Move the bee" title="Drag the bee"');
+   scene+=marker('bee','',bx,by,'bee-touch','aria-label="Move the bee" title="Drag the bee or tap to watch"');
  }else if(stop==='cutaway'){
    scene=microscope(landed===null?-1:stage,opened);
    if(stage===3&&!opened)scene+=marker('crack','⚡ Split the pod',320,345,'pod-touch');
@@ -48,7 +46,7 @@ function showScene(){
 function showControls(){
  let controls='';
  if(stop==='garden'){
-   controls=landed===null?'<p class="hint">Anthers make pollen. The stigma catches it.</p>':primary('advance','Look inside →');
+   controls=(landed===null?'':primary('advance','Look inside →')+' ')+button('watch','▶ Watch the bee');
  }else if(stop==='cutaway'){
    controls=landed===null?primary('go-garden','Take the bee to a flower →'):
    `<input class="range" type="range" id="time" min="0" max="3" step="1" value="${stage}" aria-label="Flower growth" aria-valuetext="${stages[stage].title}">
@@ -69,7 +67,7 @@ function cutawayActions(){
  stage===3?primary('crack','Split pod'):'';
 }
 function draw(focusAction=null){
- document.querySelectorAll('[data-stop]').forEach(e=>e.dataset.stop===stop?e.setAttribute('aria-current','step'):e.removeAttribute('aria-current'));
+ document.querySelectorAll('.stops [data-stop]').forEach(e=>e.dataset.stop===stop?e.setAttribute('aria-current','step'):e.removeAttribute('aria-current'));
  $('chapter').textContent=labels[stop][0];
  $('description').textContent=labels[stop][2];
  showScene();showControls();status();
@@ -80,33 +78,59 @@ function move(next){
  obs=next==='garden'?'':next==='cutaway'?(landed===null?'Visit both mustard plants first.':opened?'The pod splits and scatters its seeds.':timeNote()):
  next==='travel'?travelNote():bed.day===2?crops[bed.crop].shoot:bed.day===1?crops[bed.crop].root:bed.moist?'The soil is damp.':bed.planted?'It’s in the soil.':'';
 }
-function actFlower(kind,i){
- const [x,y]=points[i];
- bx=kind==='source'?x-21:x+13;by=y-47;
- if(kind==='source'){source=i;target=null;obs='Pollen stuck to the bee.';return;}
- const outcome=pollenPath(source,i,kind);
- if(outcome==='empty'){obs='Pick up pollen from the anthers first.';return;}
- if(outcome==='miss'){obs='Pollen on a petal can’t start a seed.';return;}
+function landOn(i){
+ if(source===null){
+   source=i;target=null;obs='Pollen sticks to the bee.';return;
+ }
  target=i;
- if(outcome==='self'){source=null;obs='Same-flower pollination. This mustard needs pollen from another plant.';return;}
- landed=i;source=null;stage=0;opened=false;obs='Pollen reached a new flower. That’s cross-pollination.';
+ if(pollenPath(source,i,'stigma')==='self'){
+   obs='Still on the same plant. Try the other flower.';return;
+ }
+ landed=i;source=null;stage=0;opened=false;
+ obs='Pollen reaches the other flower. That’s pollination.';
 }
-const flowerAction=/^(source|stigma|petal)-([01])$/;
-function beeAnimation(fromX,fromY){
- if(matchMedia('(prefers-reduced-motion: reduce)').matches||fromX===bx&&fromY===by)return;
- $('scene').querySelector('.bee')?.animate([{transform:`translate(${fromX}px,${fromY}px)`},{transform:`translate(${bx}px,${by}px)`}],{duration:330,easing:'ease-out'});
+const flowerAction=/^flower-([01])$/;
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+function putBee(x,y){
+ bx=clamp(x,30,610);by=clamp(y,28,424);
+ const insect=$('scene').querySelector('.bee'), hit=$('scene').querySelector('.bee-touch');
+ if(insect)insect.style.transform=`translate(${bx}px,${by}px)`;
+ if(hit){hit.style.left=`${bx/6.4}%`;hit.style.top=`${by/4.6}%`;}
+}
+function cancelFlight(){
+ clearTimeout(timer);cancelAnimationFrame(frame);demoSerial++;
+}
+function flyTo(i,ms,after){
+ const [x,y]=points[i],fx=x+24,fy=y-56;
+ if(reduced.matches){putBee(fx,fy);landOn(i);draw();after?.();return;}
+ const start=performance.now(),ox=bx,oy=by;
+ const moveFrame=now=>{
+   const t=Math.min(1,(now-start)/ms), k=t*t*(3-2*t);
+   putBee(ox+(fx-ox)*k,oy+(fy-oy)*k-Math.sin(Math.PI*t)*28);
+   if(t<1)frame=requestAnimationFrame(moveFrame);
+   else{landOn(i);draw();after?.();}
+ };
+ frame=requestAnimationFrame(moveFrame);
+}
+function showFlight(){
+ cancelFlight();
+ const go=demoSerial;
+ source=null;target=null;obs='';draw();
+ flyTo(0,850,()=>{
+   timer=setTimeout(()=>{if(go===demoSerial&&stop==='garden')flyTo(1,1100);},850);
+ });
 }
 document.addEventListener('click',e=>{
  if(performance.now()<suppressUntil&&e.detail!==0)return;
  const raw=e.target.closest('[data-action],[data-stop]');
  if(!raw)return;
- if(raw.dataset.stop&&raw.tagName==='BUTTON'){move(raw.dataset.stop);draw();return;}
+ if(raw.dataset.stop&&raw.tagName==='BUTTON'){cancelFlight();move(raw.dataset.stop);draw();return;}
  const id=raw.dataset.action;if(!id)return;
  const f=flowerAction.exec(id);
- const oldX=bx,oldY=by;
- if(f)actFlower(f[1],Number(f[2]));
- else if(id==='bee'){obs=source===null?'Drag me to an anther.':'Drag me to a stigma.';}
- else if(id==='advance'){move('cutaway');}
+ cancelFlight();
+ if(f){flyTo(Number(f[1]),390);return;}
+ if(id==='bee'||id==='watch'){showFlight();return;}
+ if(id==='advance'){move('cutaway');}
  else if(id==='crack'&&stage===3){opened=true;obs='The pod splits and scatters its seeds.';}
  else if(id.startsWith('go-'))move(id.slice(3));
  else if(id.startsWith('seed-')){seed=id.slice(5);tool=null;success=null;obs='';}
@@ -118,7 +142,6 @@ document.addEventListener('click',e=>{
    obs=bed.day===2?crops[bed.crop].shoot:bed.day===1?crops[bed.crop].root:bed.moist?'Rain dampens the soil.':'It’s in the soil.';
  }
  draw(e.detail===0?id:null);
- if(f)beeAnimation(oldX,oldY);
 });
 $('controls').addEventListener('input',e=>{
  if(e.target.id!=='time')return;
@@ -132,30 +155,32 @@ $('controls').addEventListener('input',e=>{
 $('scene').addEventListener('pointerdown',e=>{
  const node=e.target.closest('[data-action]');
  if(!node||!e.isPrimary||e.button!==0||stop!=='garden')return;
- const id=node.dataset.action,m=flowerAction.exec(id);
- if(id!=='bee'&&m?.[1]!=='source')return;
- drag={id:e.pointerId,x:e.clientX,y:e.clientY,source:id==='bee'?null:Number(m[2])};
+ cancelFlight();
+ if(node.dataset.action!=='bee')return;
+ drag={id:e.pointerId,x:e.clientX,y:e.clientY};
  node.setPointerCapture(e.pointerId);
 });
-const realDrag=e=>Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>=10;
+const realDrag=e=>Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>=5;
+function gardenPoint(e){
+ const r=$('scene').getBoundingClientRect();
+ return [(e.clientX-r.left)*640/r.width,(e.clientY-r.top)*460/r.height];
+}
 document.addEventListener('pointermove',e=>{
  if(!drag||drag.id!==e.pointerId||!realDrag(e))return;
- const svg=$('scene').querySelector('svg'),b=svg.querySelector('.bee'),r=svg.getBoundingClientRect();
- b.style.transition='none';
- b.style.transform=`translate(${(e.clientX-r.left)*640/r.width}px,${(e.clientY-r.top)*460/r.height}px)`;
+ putBee(...gardenPoint(e));
 });
 document.addEventListener('pointerup',e=>{
  if(!drag||drag.id!==e.pointerId)return;
- const before=drag,moved=realDrag(e);drag=null;
+ const moved=realDrag(e);drag=null;
  if(!moved)return;
- // Suppress the click retargeted to the drag origin after releasing capture.
- suppressUntil=performance.now()+90;
- if(before.source!==null)actFlower('source',before.source);
- const el=document.elementFromPoint(e.clientX,e.clientY)?.closest('[data-action]');
- const f=flowerAction.exec(el?.dataset.action??'');
- if(f)actFlower(f[1],Number(f[2]));
- else if(before.source===null){obs=source===null?'Land on an anther.':'Land on a stigma.';}
+ suppressUntil=performance.now()+140;
+ const [x,y]=gardenPoint(e);
+ const i=points.findIndex(([fx,fy])=>Math.hypot(x-fx,y-fy)<85);
+ if(i!==-1){putBee(points[i][0]+24,points[i][1]-56);landOn(i);}
+ else{putBee(x,y);}
  draw();
 });
 document.addEventListener('pointercancel',e=>{if(drag?.id===e.pointerId){drag=null;draw();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelFlight();});
 draw();
+if(!reduced.matches)timer=setTimeout(showFlight,1400);

@@ -36,7 +36,7 @@ const bee=(x,y,loaded)=>`<g class="bee" style="transform:translate(${x}px,${y}px
 ${loaded?'<g fill="#ffe483"><circle class="pollen-dot" cx="-24" cy="19" r="4"/><circle class="pollen-dot" cx="-9" cy="23" r="5"/><circle class="pollen-dot" cx="5" cy="22" r="3"/></g>':''}</g>`;
 export function garden(x,y,loaded,landed=null) {
  return wrap(`${landscape}<path d="M160 458Q221 343 166 178M478 458Q435 333 470 202" stroke="#285640" stroke-width="11" fill="none"/>${leaves(180,335,.91)}${leaves(465,364,1.06)}${leaves(179,264,.58)}${leaves(457,290,.65)}${petals(166,174,'rose')}${petals(470,205,'lilac')}${landed===null?'':`<g fill="#ffed92" transform="translate(${landed===0?166:470} ${landed===0?174:205})"><circle class="pollen-dot" cy="-9" r="4"/><circle class="pollen-dot" cx="8" cy="3" r="3"/><circle class="pollen-dot" cx="-5" cy="5" r="2.5"/></g>`}${bee(x,y,loaded)}
- <text class="scene-label" x="104" y="118">MUSTARD A</text><text class="scene-label" x="496" y="149">MUSTARD B</text>`, 'Two illustrated mustard flowers in a garden, with a bee that can carry pollen between them.');
+ `, 'Two illustrated mustard flowers in a garden, with a bee that can carry pollen between them.');
 }
 export function microscope(stage,opened=false) {
  const ovules=Array.from({length:4},(_,i)=>`<ellipse cx="${293+i*20}" cy="${287+5*Math.sin(i)}" rx="${stage>=2?8:5}" ry="${stage>=2?10:7}" fill="${stage>=2?'#e1d885':'#adcb8a'}"/>`).join('');
