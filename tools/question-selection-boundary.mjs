@@ -30,7 +30,12 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       // lesson-checks.ts: added in a reviewed change (lesson-checks@1, report only). pageCandidates reads modulePhasePool (phasePool applies
       // selectable()) to rebuild the lesson page's practice candidates exactly as TeachingContent.tsx does; nothing it returns is served
       "packages/learning/src/lesson-checks.ts",
-      "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts",
+      "packages/learning/src/library.ts",
+      // play.ts: added in a reviewed change (play@1). playPool reads modulePhasePool (selectable() applied) for the practice phase only,
+      // skips every question already asked (exposureKey) and keeps the grade ceiling (withinGrade); checks and delayed checks stay fresh.
+      // See frontend/src/year/play.test.ts
+      "packages/learning/src/play.ts",
+      "packages/learning/src/reasoning.ts",
       // scenes.ts: added in a reviewed change (practice-tool@1). lineFits reads pool() for one purpose: to see whether the number-line
       // rule fits every drawn question of a type before the line is offered as a tool. It selects and serves no question.
       // step-help.ts: added in a reviewed change (help-review@1). helpSamples reads pool() for one purpose: to name the

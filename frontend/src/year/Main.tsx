@@ -32,6 +32,8 @@ import { expectedSeconds } from "../../../packages/learning/src/expected-time";
 import { fluencyNeeds, slipPatterns } from "../../../packages/learning/src/practice-focus";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
+import { playedSince } from "../../../packages/learning/src/play";
+import { Play, PlayPicker } from "./Play";
 import { years } from "../../../packages/learning/src/plan";
 import { withDecisions, type HandoverAcknowledgement, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { delayedCheckFact } from "../../../packages/learning/src/due-display";
@@ -117,7 +119,8 @@ type View =
   | { name: "worked"; text: string; read?: WordReading }
   | { name: "parent" }
   | { name: "single"; qid: string; heading: string; note?: string }
-  | { name: "years" };
+  | { name: "years" }
+  | { name: "play"; competency?: string };
 
 const academicYear = (d = new Date(), ahead = 0) => {
   const y = (d.getMonth() >= 5 ? d.getFullYear() : d.getFullYear() - 1) + ahead;
@@ -422,6 +425,7 @@ function App() {
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} onLearn={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })} />
         </KeyboardPractice>
         <KeyboardNote competency={view.competency} ctx={ctx} />
+        {KID && <p><button type="button" className="link" data-testid="more-like-this" onClick={() => setView({ name: "play", competency: view.competency })}><span aria-hidden="true">🎲 </span>More questions like this, just for fun</button></p>}
       </Shell>
     );
   if (view.name === "parent")
@@ -443,6 +447,15 @@ function App() {
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
         <Single qid={view.qid} ctx={ctx} heading={view.heading} note={view.note} onExit={() => setView({ name: "year" })} />
+      </Shell>
+    );
+  // play@1: more questions just for fun, on topics already met
+  if (view.name === "play")
+    return (
+      <Shell banner={banner} error={error} top={top(view.competency ? <button className="link" onClick={() => setView({ name: "play" })}>← Topics</button> : home, name)}>
+        {view.competency
+          ? <Play key={view.competency} competency={view.competency} ctx={ctx} onExit={() => setView({ name: "play" })} />
+          : <PlayPicker ctx={ctx} onPick={(c) => setView({ name: "play", competency: c })} />}
       </Shell>
     );
   if (view.name === "years")
@@ -532,7 +545,7 @@ function App() {
       <Shell banner={banner} error={error} top={<TopBar left={pupils.length > 1 || DEVICE_BUILD ? switcher : <a className="link kid-back" href="/" aria-label="All subjects">←</a>} title="" />}>
         <KidHome
           name={name} st={st} now={now} next={next} nextReason={nextReason} goNext={goNext} sections={tiles}
-          onOpen={(t, path) => open(t, path)} grade={grade}
+          onOpen={(t, path) => open(t, path)} grade={grade} onPlay={() => setView({ name: "play" })}
           stuck={<StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text, read) => setView({ name: "worked", text, read })} />}
           onParents={DEVICE_BUILD ? undefined : () => setView({ name: "parent" })}
           onSettings={() => setView({ name: "setup", sameYear: true })}
@@ -1000,11 +1013,12 @@ function practiceFocus(st: NonNullable<ReturnType<typeof learnerState>>, grade: 
   return null;
 }
 
-function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, grade, stuck, onParents, onSettings, onFocus }: {
+function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, grade, stuck, onParents, onSettings, onFocus, onPlay }: {
   name: string; st: NonNullable<ReturnType<typeof learnerState>>; now: number;
   next: NonNullable<NonNullable<ReturnType<typeof learnerState>>["next"]>; nextReason: string; goNext: () => void;
   sections: Tile[]; onOpen: (t: Tile, path: string[]) => void; grade: number | null; stuck: React.ReactNode; onParents?: () => void; onSettings: () => void;
   onFocus?: (competency: string) => void;
+  onPlay?: () => void;
 }) {
   const focus = useMemo(() => practiceFocus(st, grade), [st, grade]);
   const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
@@ -1088,6 +1102,13 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
           })}
         </ul>
       </section>
+      {onPlay && (
+        <section className="kid-focus" aria-label="Play" data-play>
+          <p className="kid-focus-title"><span aria-hidden="true">🎲 </span>Play</p>
+          <p className="kid-focus-why">More questions on topics you've tried, just for fun.</p>
+          <button className="secondary" onClick={onPlay}>Play →</button>
+        </section>
+      )}
       <section aria-label="Stuck on a problem" className="kid-stuck">
         <h2 className="kid-h2">Stuck on homework?</h2>
         {stuck}
@@ -1193,6 +1214,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
       {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}{report.streak >= 2 ? ` · ${report.streak} days in a row` : ""}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
       <FourQuestions name={name} st={st} report={report} findings={f} slowButRight={slowButRight} now={now} />
       <TaughtAndSure name={name} st={st} />
+      {(() => { const p = playedSince(st.records, now - 7 * 86_400_000); return p.played > 0 ? <p className="muted" data-played-for-fun={p.played}>Practised for fun this week: {p.played} question{p.played === 1 ? "" : "s"}, {p.right} right.</p> : null; })()}
       <h2 className="parent-detail">In detail</h2>
       <div className="period-tabs" role="tablist" aria-label="Period">
         {(["week", "month", "year"] as Period[]).map((p) => <button key={p} type="button" role="tab" aria-selected={period === p} className={period === p ? "on" : ""} onClick={() => setPeriod(p)}>{p === "week" ? "Week" : p === "month" ? "Month" : "Year"}</button>)}
