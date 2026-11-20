@@ -581,3 +581,19 @@ each step said; where they stop is the step to work on).
 **The child** (family site, KID build): when a skill stops for now, the sentences sending them to "a teacher or parent" are dropped
 and the child reads "We'll come back to this one. Carry on with the next." (`ownIt`). The engine's stops are unchanged.
 Tests: `frontend/src/learning/taught.test.ts`.
+
+## plain-cue@2 and chain@1: Classes 11 and 12 cleaned (first pass)
+
+The robot learner over every question type of CBSE and Tamil Nadu Classes 11 and 12 (444 types, 1,41,864 questions): nothing
+broken. Quality: 23 types whose "what to do" cues were one bare word ("First: integrate.", "Next: row-reduce."), 56 types whose
+help was a single step, 22 questions where a first step shows a number equal to the answer, 51 questions held back.
+
+- **plain-cue@2**: the later classes' operations are said as what to do ("join the sets, listing each member once", "clear the
+  entries below the first one, row by row"). One-word cues in Classes 11–12: 23 types → 0.
+- **chain@1** (Class 9 up): a one-step help written as one chain "rule = numbers put in = result" is shown link by link (write
+  the rule, put the numbers in, work it out); "set up = result" as set up, then work it out. One-step help in Classes 11–12:
+  56 types (9,641 questions) → 35 types (5,759). Most of those left are "which kind is it" choices, one step by nature.
+- The 22 first-step flags are a number in the working that happens to equal the answer (2⁷ = 128 when x = 128): left as is.
+- **surds@1, one-term-at-a-time@1**: written working for surds (simplify each, then add or take away the like surds; multiply or
+  divide under one root; rationalise a denominator, with the conjugate when it has two terms) and for the first four terms of a
+  sequence (each term by putting n in, or from the one before). Each checks its result against the question's own answer.
