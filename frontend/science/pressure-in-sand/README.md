@@ -23,4 +23,4 @@ npx playwright install chromium
 node --test e2e/science-pressure.test.mjs
 ```
 
-The browser test serves only the four static lab files and exercises the learner journey at 390 CSS px. No deploy is configured.
+The browser test serves only the static science fixture and exercises the learner journey at 390 CSS px. No deploy is configured.

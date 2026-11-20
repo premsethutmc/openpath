@@ -1,10 +1,10 @@
-name: Science pressure lab
+name: OpenPath Science Labs
 
 on:
   pull_request:
     paths:
-      - 'frontend/science/pressure-in-sand/**'
-      - 'frontend/e2e/science-pressure.test.mjs'
+      - 'frontend/science/**'
+      - 'frontend/e2e/science-*.mjs'
       - '.github/workflows/science-pressure.yml'
 
 permissions:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   phone:
-    name: Pressure Lab unit and 390px browser checks
+    name: Science Labs unit tests and mobile browser checks
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
@@ -26,14 +26,14 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - run: node --test science/pressure-in-sand/model.test.mjs
+      - run: node --test science/*/model.test.mjs
       - run: npx playwright install --with-deps chromium
-      - run: node --test e2e/science-pressure.test.mjs
+      - run: node --test e2e/science-*.test.mjs
         env:
           E2E_SHOTS: test-results/science
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: pressure-lab-phone
+          name: science-labs-phone
           path: frontend/test-results/science
           if-no-files-found: ignore

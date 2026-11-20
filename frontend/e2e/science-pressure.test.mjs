@@ -1,35 +1,21 @@
 import assert from 'node:assert/strict';
-import { createServer } from 'node:http';
-import { mkdir, readFile } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
 import { after, before, test } from 'node:test';
 import { chromium } from 'playwright';
 
-const lab = new URL('../science/pressure-in-sand/', import.meta.url);
-const files = new Map([
-  ['/', ['index.html', 'text/html']],
-  ['/lab.css', ['lab.css', 'text/css']],
-  ['/lab.mjs', ['lab.mjs', 'text/javascript']],
-  ['/model.mjs', ['model.mjs', 'text/javascript']],
-]);
-const server = createServer(async (request, response) => {
-  if (!files.has(request.url)) return response.writeHead(404).end();
-  const [file, type] = files.get(request.url);
-  try { response.writeHead(200, { 'content-type': type + '; charset=utf-8' }).end(await readFile(new URL(file, lab))); }
-  catch { response.writeHead(500).end(); }
-});
+import { serveScience } from './science-static.mjs';
+
 let browser;
+let server;
 let origin;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
-  await new Promise((resolve, reject) => {
-    server.once('error', reject);
-    server.listen(0, '127.0.0.1', resolve);
-  });
-  origin = 'http://127.0.0.1:' + server.address().port;
+  server = await serveScience();
+  origin = server.origin;
 });
 after(async () => {
   await browser?.close();
-  if (server.listening) await new Promise((resolve) => server.close(resolve));
+  await server?.close();
 });
 
 async function fitsPhone(page) {
@@ -47,7 +33,7 @@ test('390px tour: explore, predict, compare and transfer; wrong reason gets a re
   const button = (name) => page.getByRole('button', { name });
   const choose = (name) => page.getByRole('radio', { name, exact: true }).check();
   try {
-    await page.goto(origin);
+    await page.goto(origin + '/pressure-in-sand/');
     await fitsPhone(page);
     if (process.env.E2E_SHOTS) {
       await mkdir(process.env.E2E_SHOTS, { recursive: true });
@@ -102,8 +88,8 @@ test('390px tour: explore, predict, compare and transfer; wrong reason gets a re
 test('keyboard-only controls can skip exploration and complete comparison', async () => {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   try {
-    await page.goto(origin);
-    for (let i = 0; i < 3; i++) await page.keyboard.press('Tab');
+    await page.goto(origin + '/pressure-in-sand/');
+    for (let i = 0; i < 4; i++) await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(() => document.activeElement.id), 'start');
     await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(() => document.activeElement.id), 'compare-title');
