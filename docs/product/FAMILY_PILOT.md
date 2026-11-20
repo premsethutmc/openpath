@@ -605,3 +605,19 @@ verify: quadratic equations (two explanations), definite integrals (one). They a
 works through (x² − 7x + 10 = 0, x² − 49 = 0, ∫ from 2 to 6 of 3 dx), pass the teaching check, and are registered for review.
 A simulated weak child is now taught both skills and masters them. Proof by induction is the one exception: it has no generated
 question type to tie a checked example to. Test: `frontend/src/learning/teachable.test.ts`.
+
+## slip@1: one wrong answer is a slip, not forgetting
+
+Before: any wrong answer in the delayed check (a week later) failed it: the skill went back to "Review needed", recovery was
+required and the child was taught again. A careless child (right four times in five) lost skills they knew.
+Now:
+- **The delayed check**: one wrong answer is a slip: the check asks one more question and passes only with one more right answer
+  than usual (never on fewer right answers). A second wrong answer in the same check is forgetting, as before: the check fails,
+  the history keeps it, recovery is required.
+- **A part of a skill** (a skill unit) with a right answer alone is held as "not shown" only once two of its answers alone are
+  wrong, as question types already were.
+The foundation pathways' own sub-skill checks are unchanged. Tests that made a failed delayed check with one wrong answer now give
+two (evid-retention, policies B, linear-equations J10); gated-mastery 10 and retention-readiness record that production now agrees
+with the gated-slip variant.
+(move-on@1, fewer practice questions for a child who has shown a skill, was tried and withdrawn: kept safe against hidden gaps it
+saved only 17 → 14 questions per skill and changed recovery paths. Not shipped.)

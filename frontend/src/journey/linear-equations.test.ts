@@ -243,6 +243,11 @@ test("J10 failed delayed retention: recovery required, earlier achievement kept,
   r.f.later(8);
   assert.equal(r.f.currentPhase, "retention");
   r.f.on({ type: "answer_submitted", value: wrong(r.f.currentQuestion!), timestamp: 0 });
+  // slip@1: one wrong is a slip (the check asks one more); a second wrong answer fails the delayed check
+  assert.equal(ev(r).retention, "due");
+  if (r.f.stage !== "question") r.f.on({ type: "skip_requested", timestamp: 0 });
+  assert.equal(r.f.currentPhase, "retention");
+  r.f.on({ type: "answer_submitted", value: wrong(r.f.currentQuestion!), timestamp: 0 });
   const e = ev(r);
   assert.equal(e.recoveryRequired, true);
   assert.equal(e.verified, false);

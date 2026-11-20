@@ -208,7 +208,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     if (!engineShownAt || engineShownAt <= start || ind.some((a) => a.activity === "retention" && a.at >= own && !right(a))) return own;
     return new Date(Date.parse(engineShownAt) + RETENTION_DAYS * DAY).toISOString();
   };
-  // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): any wrong fails it
+  // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): a second wrong fails it (slip@1)
   const mod = moduleFor(id);
   const need = Math.min(RETENTION_CHECK, mod?.retention.length ?? 1);
   // skill-units@1: a skill taught in this competency with a scoped explanation is part of every later delayed check: a delayed
@@ -234,9 +234,13 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   while (cycleDue) {
     const dueAt = cycleDue;
     const answers = ind.filter((a) => a.activity === "retention" && a.at >= dueAt);
-    const firstWrong = answers.find((a) => !right(a));
+    // slip@1: one wrong answer in a delayed check is a slip, not forgetting, when it stands alone: the check then needs one more
+    // right answer than usual (it never passes on fewer right answers). A second wrong answer in the same check fails it.
+    const wrongs = answers.filter((a) => !right(a));
+    const firstWrong = wrongs.length >= 2 ? wrongs[1] : null;
     if (!firstWrong) {
-      retention = new Set(answers.map((a) => a.questionId)).size >= need && covers(answers) ? "passed" : now >= Date.parse(dueAt) ? "due" : "scheduled";
+      const rightOnes = new Set(answers.filter(right).map((a) => a.questionId)).size;
+      retention = rightOnes >= need + wrongs.length && covers(answers.filter(right)) ? "passed" : now >= Date.parse(dueAt) ? "due" : "scheduled";
       history.push({ due: dueAt, result: retention === "passed" ? "passed" : "pending", failedAt: null, recoveredAt: null });
       break;
     }
