@@ -57,8 +57,14 @@ async function pastCard(page) {
   if (!(await page.locator('main[data-phase="learn"]').count())) return false;
   const card = page.locator(".grammar-learn");
   await card.getByRole("heading", { name: /^New: / }).waitFor();
+  // a common mistake beside the right version, and why
+  await card.locator(".grammar-mistake .mistake-wrong").waitFor();
+  await shot(page, "0-card");
   await card.locator(".choice").first().click();
   await card.getByRole("status").waitFor();
+  // then one more question, before practice
+  await card.locator('.choice[data-try="2"]').first().click();
+  assert.equal(await card.getByRole("status").count(), 2);
   await card.getByRole("button", { name: "Now practise" }).click();
   return true;
 }

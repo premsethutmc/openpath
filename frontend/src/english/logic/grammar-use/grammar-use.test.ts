@@ -321,3 +321,12 @@ test("GU-17 the card comes back after two wrong answers in a row on its topic, a
   const h2: GrammarRecord[] = [...h, { type: "answer", sitting: "g1", id: "w", level: 2, topic: "past", correct: false, given: "" }];
   assert.equal(new GrammarSitting(GRAMMAR, 2, h2, ["past"]).snapshot().phase, "learn");
 });
+
+test("GU-18 every topic has at least eight sentences, and every card a common mistake and two questions", () => {
+  const thin = GRAMMAR.topics.filter((t) => GRAMMAR.items.filter((i) => i.topic === t.id).length < 8).map((t) => t.id);
+  assert.deepEqual(thin, []);
+  for (const c of LEARN) {
+    assert.notEqual(c.mistake.wrong, c.mistake.right, c.topic);
+    assert.notEqual(c.try2.question, c.try.question, c.topic);
+  }
+});
