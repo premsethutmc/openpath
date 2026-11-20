@@ -2859,3 +2859,22 @@ h3.sub {
   padding: 0 14px;
   font-size: 1.2rem;
 }
+
+/* First words drawings: one em square each, so the existing font sizes size them */
+.pic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.08em;
+  flex-wrap: wrap;
+  vertical-align: middle;
+}
+.pic svg {
+  display: block;
+}
+.pic-gap {
+  width: 0.25em;
+}
+.first-option .pic {
+  font-size: 1.3em;
+}

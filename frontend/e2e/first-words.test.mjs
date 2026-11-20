@@ -65,12 +65,12 @@ test("First words: eleven steps by tapping only, a wrong tap switched off, the w
       assert.equal(await page.locator(".first-option").count(), 3);
       if (i === 1) {
         // one wrong tap: that picture is switched off, and the step goes on
-        const wrong = page.locator(".first-option").filter({ hasNotText: w.picture }).first();
+        const wrong = page.locator(`.first-option:not([data-picture="${w.picture}"])`).first();
         await wrong.click();
         assert.equal(await page.locator(".first-option:disabled").count(), 1);
         await main.waitFor();
       }
-      await page.locator(".first-option", { hasText: w.picture }).click();
+      await page.locator(`.first-option[data-picture="${w.picture}"]`).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
       await page.locator(".first-reveal .first-word", { hasText: w.word }).waitFor();
     } else if (kind === "build") {
@@ -83,26 +83,26 @@ test("First words: eleven steps by tapping only, a wrong tap switched off, the w
       const [number, noun] = key.split(" ");
       const n = FIRST.numbers.indexOf(number) + 1;
       const w = FIRST.words.find((x) => noun === x.word || noun === `${x.word}s` || noun === `${x.word}es`);
-      const options = await page.locator(".first-option").allInnerTexts();
+      const options = await page.locator(".first-option").evaluateAll((els) => els.map((e) => e.dataset.picture));
       await page.locator(".first-option").nth(options.indexOf(w.picture.repeat(n))).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
     } else if (kind === "colour") {
       const colour = FIRST.colours.find((c) => key === `the ${c.id} one`);
-      await page.locator(".first-option", { hasText: colour.picture }).click();
+      await page.locator(`.first-option[data-picture="${colour.picture}"]`).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
     } else if (kind === "two") {
       // two taps in the order said; the second one first is a miss and switches nothing off
       const [a, b] = key.split(" then ").map((word) => FIRST.words.find((x) => x.word === word).picture);
-      await page.locator(".first-option", { hasText: a }).click();
+      await page.locator(`.first-option[data-picture="${a}"]`).click();
       await page.locator(".first-option.picked").waitFor();
-      await page.locator(".first-option", { hasText: b }).click();
+      await page.locator(`.first-option[data-picture="${b}"]`).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
     } else {
       const rel = FIRST.place.relations.find((r) => key.includes(` ${r.say} the `));
       assert.equal(await page.locator(".first-zone").count(), 3);
       await page.locator(`.first-zone[data-zone="${rel.id}"]`).click();
       await page.locator('main.first[data-phase="right"]').waitFor();
-      assert.notEqual(await page.locator(`.first-zone[data-zone="${rel.id}"]`).innerText(), "", "the thing is now in its place");
+      assert.equal(await page.locator(`.first-zone[data-zone="${rel.id}"] svg`).count(), 1, "the thing is now in its place");
     }
     await fits();
     await page.getByRole("button", { name: "Next", exact: true }).click();
@@ -146,7 +146,7 @@ test("First sentences: after twenty words found, sentences to read (a picture, o
       const key = await main.getAttribute("data-key");
       if (kind === "hear") {
         const w = WORD.get(key);
-        const pics = await page.locator(".first-option").allInnerTexts();
+        const pics = await page.locator(".first-option").evaluateAll((els) => els.map((e) => e.dataset.picture));
         await page.locator(".first-option").nth(pics.indexOf(w.picture)).click();
       } else if (kind === "build") {
         for (const ch of WORD.get(key).word) await page.locator(".first-tile:not([disabled])", { hasText: new RegExp(`^${ch}$`) }).first().click();
