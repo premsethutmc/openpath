@@ -36,7 +36,12 @@ test("scribble@1: the pad is scratch paper: nothing is read, saved or sent, and 
   assert.ok(!/fetch\(|localStorage|setValue|setWorking|onUsed|setHint/.test(pad), "the pad talks to nothing");
   assert.match(pad, /touch-action|onPointerDown=\{down\}/);
   assert.match(learn, /\{KID && workable && <ScribblePad key=\{qid\} \/>\}/);
-  assert.match(pad, /<textarea className="scribble-notes"/, "scribble@2: the pad can be typed on");
+  assert.match(pad, /<textarea ref=\{notesBox\} className="scribble-notes"/, "scribble@2: the pad can be typed on");
+  // scribble-grows@1: the paper is never full: a stroke near the bottom adds room, "More room" adds it by hand, typed notes grow
+  assert.match(pad, /if \(s\.some\(\(\[, y\]\) => y > h - MORE \* 0\.6\)\) grow\(\);/);
+  assert.match(pad, /height=\{h\} style=\{\{ aspectRatio: `\$\{W\} \/ \$\{h\}` \}\}/);
+  assert.match(pad, />More room<\/button>/);
+  assert.match(pad, /t\.style\.height = `\$\{t\.scrollHeight \+ 24\}px`/);
 });
 
 test("rows-of-people@1 and tried@1: children are drawn, the left over stand underneath, and each try is kept", async () => {

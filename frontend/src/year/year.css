@@ -484,7 +484,7 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scribble-bar .small { flex: 1 1 auto; margin: 0; }
 .scribble-modes { display: flex; gap: 8px; }
 .scribble-modes .kid-tap { flex: 1 1 0; min-height: 44px; }
-.scribble-notes { width: 100%; min-height: 9rem; padding: 12px 14px; font: inherit; font-size: 1.15rem; border-radius: 16px; border: 2px dashed var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1d2433); resize: vertical; }
+.scribble-notes { width: 100%; min-height: 9rem; padding: 12px 14px; font: inherit; font-size: 1.15rem; border-radius: 16px; border: 2px dashed var(--line, #c9d3e0); background: var(--card, #fff); color: var(--ink, #1d2433); resize: vertical; overflow: hidden; }
 .scribble-modes .kid-tap[aria-checked="true"] { border-color: var(--brand, #2563eb); background: var(--brand-soft, #eaf1ff); }
 
 /* tried@1 */
