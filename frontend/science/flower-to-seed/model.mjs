@@ -1,30 +1,36 @@
 export const seeds = {
-  dandelion: { name: 'Dandelion', carrier: 'wind', reason: 'plume', feature: 'Its light, feathery tuft catches moving air.' },
-  coconut: { name: 'Coconut', carrier: 'water', reason: 'float', feature: 'Its fibrous husk helps the fruit float and protects the seed inside.' },
-  burdock: { name: 'Burdock', carrier: 'animal', reason: 'hook', feature: 'Tiny hooks on the burr catch on fur and travel with the animal.' },
+  dandelion: { name:'Dandelion', carrier:'wind', feature:'Feathery tuft catches the wind.' },
+  coconut: { name:'Coconut', carrier:'water', feature:'Fibrous husk helps the coconut float.' },
+  burdock: { name:'Burdock', carrier:'animal', feature:'Tiny hooks hold onto fur.' },
 };
-
-export const days = [
-  { step: 0, title: 'Pollen lands', detail: 'Pollination means pollen reached the stigma. No seed has formed yet.' },
-  { step: 1, title: 'The ovule is fertilised', detail: 'A tube grows from a pollen grain towards an ovule. A male cell joins the egg cell in the ovule. This is fertilisation.' },
-  { step: 2, title: 'Seeds develop', detail: 'Fertilised ovules develop into seeds. In this mustard flower the ovary becomes a pod.' },
-  { step: 3, title: 'The pod ripens', detail: 'The mature pod can split and scatter its seeds. A seed can grow into a new plant if conditions are right.' },
+export const stages = [
+  {title:'Pollen lands', detail:'Pollen lands on the stigma. That’s pollination.'},
+  {title:'Fertilisation', detail:'A pollen tube grows. A male cell joins an egg inside an ovule.'},
+  {title:'Seeds grow', detail:'Ovules become seeds. The ovary becomes the pod.'},
+  {title:'Pod ripens', detail:'The dry pod is ready to split.'},
 ];
-export function pollenPath(from, to, part) {
-  if (![0,1].includes(from) || ![0,1].includes(to)) return 'empty';
-  if (part !== 'stigma') return 'miss';
-  return from === to ? 'self' : 'cross';
+export function pollenPath(from,to,part) {
+  if (![0,1].includes(from)||![0,1].includes(to)) return 'empty';
+  return part!=='stigma'?'miss':from===to?'self':'cross';
 }
-export function cycle(path, stage) {
-  return path !== 'cross' || !Number.isInteger(stage) || stage < 0 ? null : days[stage] ?? null;
+export function cycle(path,stage) {
+  return path==='cross'&&Number.isInteger(stage)&&stage>=0?stages[stage]??null:null;
 }
-export function disperse(seed, carrier) {
-  const data = seeds[seed];
-  if (!data || !['wind','water','animal'].includes(carrier)) return null;
-  return data.carrier === carrier;
+export function disperse(seed,carrier) {
+  if (!Object.hasOwn(seeds,seed)||!['wind','water','animal'].includes(carrier)) return null;
+  return seeds[seed].carrier===carrier;
 }
-const solutions = { carrier:'animal', reason:'hook', propagation:'potato-eye' };
-export function checkTransfer(answers) {
-  return Object.fromEntries(Object.entries(solutions).map(([key, value]) => [key,
-    !answers[key] ? 'unanswered' : answers[key] === value ? 'correct' : 'try-again']));
+export const crops={
+  mustard:{name:'Mustard seed', root:'A root comes out of the seed.', shoot:'A shoot grows up and opens its first leaves.'},
+  potato:{name:'Potato with an eye', root:'The eye is a bud. Its shoot starts growing, without a seed.', shoot:'Roots and leaves grow from the sprouting potato.'},
+};
+export function startBed(crop='mustard') {
+  if (!Object.hasOwn(crops,crop)) throw new RangeError('Unknown crop');
+  return {crop,planted:false,moist:false,day:0};
+}
+export function tend(bed,action) {
+  if (action==='plant') return {...bed,planted:true};
+  if (action==='water'&&bed.planted) return {...bed,moist:true};
+  if (action==='time'&&bed.planted&&bed.moist) return {...bed,day:Math.min(2,bed.day+1)};
+  return bed;
 }

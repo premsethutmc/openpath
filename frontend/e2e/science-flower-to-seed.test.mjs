@@ -11,52 +11,65 @@ async function run(t,touch,width,fn){
  assert.deepEqual(errors,[]);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
 }
-const box=(page,name)=>page.getByRole('button',{name,exact:true});
-test('320px touch: pollination feedback, temporal changes, carrier and fresh transfer',async t=>run(t,true,320,async(page,origin)=>{
- await page.goto(origin);
- await page.getByRole('link',{name:/Flower to Seed/}).tap();
- await page.waitForURL(origin+'/flower-to-seed/');
- const seen=()=>page.locator('#observation').textContent();
- assert.ok(await box(page,'Open flower cutaway →').isDisabled());
- await box(page,'Anthers A').tap();
- await box(page,'Petal B').tap();
- assert.match(await seen(),/does not pollinate/);
- await box(page,'Stigma A').tap();
- assert.match(await seen(),/self-pollination/);
- assert.ok(await box(page,'Open flower cutaway →').isDisabled());
- await box(page,'Stigma B').tap();
- await box(page,'Open flower cutaway →').tap();
- assert.match(await seen(),/No seed/);
- assert.match(await page.locator('#scene-name').textContent(),/MUSTARD B/);
- await box(page,'Fertilisation').tap();
- assert.match(await seen(),/tube grows/);
- await box(page,'Ripe pod').tap();
- await box(page,'Follow the seeds →').tap();
- await box(page,'Coconut').tap();
- await box(page,'Wind').tap();
- assert.match(await seen(),/did not move/);
- await box(page,'Water').tap();
- assert.match(await seen(),/husk helps/);
- await box(page,'Try a new case →').tap();
- await page.selectOption('#carrier','animal');
- await page.selectOption('#reason','plume');
- await page.selectOption('#propagation','potato-eye');
- await box(page,'Check my explanation').tap();
- assert.doesNotMatch(await seen(),/^Yes/);
- await page.selectOption('#reason','hook');
- await box(page,'Check my explanation').tap();
- assert.match(await seen(),/bud can sprout/);
+const b=(p,name)=>p.getByRole('button',{name,exact:true});
+const status=p=>p.locator('#observation').textContent();
+test('320px touch: go from pollen to pod, send seeds and grow a plant without a quiz',async t=>run(t,true,320,async(p,origin)=>{
+ await p.goto(origin);
+ await p.getByRole('link',{name:/Flower to Seed/}).tap();
+ await p.waitForURL(origin+'/flower-to-seed/');
+ assert.equal(await b(p,'Look inside →').count(),0);
+ await b(p,'Anthers A').tap(); await b(p,'Petal B').tap();
+ assert.match(await status(p),/petal can’t start a seed/);
+ await b(p,'Stigma A').tap();assert.match(await status(p),/Same-flower/);
+ assert.equal(await b(p,'Look inside →').count(),0);
+ await b(p,'Anthers A').tap();await b(p,'Stigma B').tap();
+ await b(p,'Look inside →').tap();
+ assert.match(await status(p),/pollen lands/i);
+ const time=p.getByRole('slider',{name:'Flower growth'});
+ await time.press('ArrowRight');
+ assert.match(await status(p),/tube grows/);
+ await time.press('End');
+ assert.equal(await p.locator('.pod-burst').count(),0);
+ await b(p,'⚡ Split the pod').tap();
+ assert.equal(await p.locator('.pod-burst').count(),1);
+ await b(p,'Send seeds travelling →').tap();
+ await b(p,'Coconut').tap();await b(p,'≋ Wind').tap();
+ assert.match(await status(p),/didn’t travel/);
+ await b(p,'◈ Water').tap();assert.match(await status(p),/husk helps/);
+ await b(p,'Grow again →').tap();
+ await b(p,'↓ Plant here').tap();await b(p,'☂ Make it rain').tap();
+ await b(p,'☀ Let time pass').tap();assert.match(await status(p),/root comes out/);
+ await b(p,'☀ Let time pass').tap();assert.match(await status(p),/first leaves/);
+ await b(p,'Potato with an eye').tap();
+ await b(p,'↓ Plant').tap();await b(p,'☂ Make it rain').tap();
+ await b(p,'☀ Let time pass').tap();assert.match(await status(p),/without a seed/);
+ assert.equal(await p.locator('select').count(),0);
 }));
-test('390px mouse drag does not lose pointer; keyboard can then replay',async t=>run(t,false,390,async(page,origin)=>{
- await page.goto(origin+'/flower-to-seed/');
- const source=box(page,'Anthers B'),dest=box(page,'Stigma A');
- const from=await source.boundingBox(),to=await dest.boundingBox();
- await page.mouse.move(from.x+from.width/2,from.y+from.height/2);
- await page.mouse.down();
- await page.mouse.move(to.x+to.width/2,to.y+to.height/2,{steps:6});
- await page.mouse.up();
- assert.match(await page.locator('#observation').textContent(),/^Cross-pollination/);
- await source.press('Enter');
- await dest.press('Enter');
- assert.match(await page.locator('#observation').textContent(),/^Cross-pollination/);
+test('390px drag the bee itself twice, then replay using a keyboard',async t=>run(t,false,390,async(p,origin)=>{
+ await p.goto(origin+'/flower-to-seed/');
+ async function drag(from,to){
+  const a=await b(p,from).boundingBox(),z=await b(p,to).boundingBox();
+  await p.mouse.move(a.x+a.width/2,a.y+a.height/2);
+  await p.mouse.down();
+  await p.mouse.move(z.x+z.width/2,z.y+z.height/2,{steps:7});
+  await p.mouse.up();
+ }
+ await drag('Move the bee','Anthers B');assert.match(await status(p),/stuck to the bee/);
+ await drag('Move the bee','Stigma A');assert.match(await status(p),/cross-pollination/i);
+ await b(p,'Anthers B').press('Enter');await b(p,'Stigma A').press('Enter');
+ assert.match(await status(p),/cross-pollination/i);
+}));
+test('390px emulated touch drag picks up and deposits pollen',async t=>run(t,true,390,async(p,origin)=>{
+ await p.goto(origin+'/flower-to-seed/');
+ const cdp=await p.context().newCDPSession(p);
+ const send=(type,touchPoints)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints});
+ async function drag(to){
+  const first=await b(p,'Move the bee').boundingBox(),last=await b(p,to).boundingBox();
+  const x=first.x+first.width/2,y=first.y+first.height/2,dx=last.x+last.width/2-x,dy=last.y+last.height/2-y;
+  await send('touchStart',[{x,y}]);
+  for(const step of [.25,.5,.75,1])await send('touchMove',[{x:x+step*dx,y:y+step*dy}]);
+  await send('touchEnd',[]);
+ }
+ await drag('Anthers A');assert.match(await status(p),/stuck to the bee/);
+ await drag('Stigma B');assert.match(await status(p),/cross-pollination/i);
 }));
