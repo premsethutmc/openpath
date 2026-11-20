@@ -108,8 +108,13 @@ export class LongSitting {
   private last: LongView["answered"] = null;
   private readonly log: LongRecord[] = [];
   readonly questions: LongQuestion[];
+  readonly text: LongText;
+  readonly part: number;
 
-  constructor(readonly text: LongText, readonly part: number) {
+  // plain fields, not constructor parameter properties: the project builds with erasableSyntaxOnly
+  constructor(text: LongText, part: number) {
+    this.text = text;
+    this.part = part;
     this.questions = part < PARTS ? text.parts[part].questions : text.whole;
   }
 
