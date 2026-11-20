@@ -242,3 +242,24 @@ test('reading placement retains the legacy four-skill practice anchor after infe
  for(let level=1;level<=6;level++){const s=new ReadingPlacement(COURSE,level);for(let i=0;i<4;i++){const v=s.snapshot();assert.equal(v.phase,'asking');const q=keyFor(v.question!.prompt,v.level,v.passage!.title);assert.equal(q.id,`${expected[level-1]}.${READING_SKILLS[i]}`);s.answer(q.answer);}}
  const noAnchor={...COURSE,questions:COURSE.questions.filter(q=>q.skill==='inference')};assert.equal(new ReadingPlacement(noAnchor,3).snapshot().phase,'done');
 });
+
+test("LC-11 grammar placement: a right answer high up followed by misses does not set the level", () => {
+  const run = (pattern: boolean[]) => {
+    const s = new GrammarPlacement(GRAMMAR, MIDDLE.grammar);
+    let k = 0;
+    for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot(), k++) {
+      const it = GRAMMAR.items.find((x) => x.id === v.id)!;
+      const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+      const rightAt = it.kind === "spot" ? v.words.findIndex((w) => it.right!.includes(bare(w))) : it.sentence.split(" ").findIndex((w) => w.includes("["));
+      const ok = k < 2 || pattern[k - 2];
+      s.answer(ok ? rightAt : it.kind === "spot" ? v.words.findIndex((w) => !it.right!.includes(bare(w))) : (rightAt + 1) % v.words.length);
+    }
+    return s.result();
+  };
+  // 3 right → 5 right → 6 wrong → 5 wrong: the highest right was 5, but the learner then missed at 5
+  const lucky = run([true, true, false, false]);
+  assert.deepEqual(lucky.steps.map((x) => [x.level, x.correct]), [[3, true], [5, true], [6, false], [5, false]]);
+  assert.equal(lucky.level, 4);
+  // 3 right → 5 wrong → 4 right → 5 right: ends where it was answered right
+  assert.equal(run([true, false, true, true]).level, 5);
+});

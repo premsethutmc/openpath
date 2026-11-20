@@ -107,17 +107,20 @@ test("GU-4 a sitting: eight sentences at the level, mixed topics, the rule after
   assert.equal(s.snapshot().phase, "ask", "an answer that cannot be given is ignored");
 });
 
-test("GU-5 levels move with a sitting; missed sentences return; new ones come first", () => {
+test("GU-5 levels go down after one weak sitting and up after two strong ones; missed sentences return; new ones come first", () => {
   assert.deepEqual([startLevel("early"), startLevel("school"), startLevel(null)], [1, 3, 3]);
   // a sitting stored before the six-level scale is read on today's scale: old 2 is 3
   assert.equal(levelFor(GRAMMAR, [{ type: "end", sitting: "old", level: 2, asked: 8, right: 4 }], 1), 3);
   assert.equal(levelFor(GRAMMAR, [{ type: "end", sitting: "new", level: 2, scale: 2, asked: 8, right: 4 }], 1), 2);
-  assert.equal(sit(2, []).done.nextLevel, 3);
+  const twice = (level: number) => sit(level, sit(level, []).records).done.nextLevel;
+  assert.equal(sit(2, []).done.nextLevel, 2, "one strong sitting: stays");
+  assert.equal(twice(2), 3, "two in a row: up");
+  assert.equal(sit(3, sit(2, []).records).done.nextLevel, 3, "a strong sitting at another level does not count");
   assert.equal(sit(2, [], (_, i) => i < 5).done.nextLevel, 1);
   assert.equal(sit(2, [], (_, i) => i < 3).done.nextLevel, 2);
-  assert.equal(sit(3, []).done.nextLevel, 4);
-  assert.equal(sit(6, []).done.nextLevel, 7);
-  assert.equal(sit(7, []).done.nextLevel, 7);
+  assert.equal(twice(3), 4);
+  assert.equal(twice(6), 7);
+  assert.equal(twice(7), 7);
   const first = sit(2, [], (_, i) => i < 3);
   const next = pick(GRAMMAR, 2, first.records);
   assert.ok(!next.some((it) => first.asked.includes(it)), "new sentences before any repeat");
@@ -165,7 +168,7 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
   assert.ok(!events.some((e) => e.kind === "evidence" || e.kind === "session"));
   assert.equal(picture(), before);
   const again = await Learner.open(c, repo, "p-gram", clock);
-  assert.equal(levelFor(GRAMMAR, again.grammarRecords(), 2), 3);
+  assert.equal(levelFor(GRAMMAR, again.grammarRecords(), 2), 2);
   assert.match(String(eventProblem({ kind: "grammar_use", id: "x", at: clock(), record: {} })), /without its type/);
 });
 

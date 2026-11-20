@@ -331,7 +331,12 @@ export class GrammarPlacement {
   }
 
   result(): { level: number; scale: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] } {
-    return { level: Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level)), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
+    // where the staircase ended, never above the highest level answered right: a lucky tap high up followed by a miss
+    // does not set the level (sim-english@1: "highest answered right" placed most learners half a level high). A
+    // learner who cannot name a noun or a verb keeps the level found and is sent to naming words first (streams.ts).
+    const right = Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level));
+    const level = Math.min(right, this.level);
+    return { level: Math.max(1, level), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
   }
 
   snapshot(): GrammarPlacementView {

@@ -64,13 +64,20 @@ takes two strong sittings in a row at the same level (one weak sitting still mov
 first-level sentences (sixty in all) keep a learner who stays at level one from hearing repeats (beginner: 42 a
 month → 0).
 
+## Fixed: steadier grammar levels and a fairer grammar placement (grammar levels@2)
+
+Grammar in use now moves up only after two strong sittings in a row at the same level (one weak sitting still moves
+it down), and the level check places a learner where its staircase ended, never above the highest level answered
+right, instead of at the highest level answered right (one lucky tap high up used to set the level). Level changes
+a month: average 13.4 → 3.1, early 14.3 → 3.8, uneven 14.8 → 4.0. Sittings with under half right: average 35% → 20%,
+early 35% → 22%. The learner who reads well but cannot name a noun is placed within one level of their grammar in 70%
+of runs (was 55%), and still goes to naming words first. A learner at the top level now takes new sentences from the
+two levels below before any repeat.
+
 ## Found, not fixed
 
-- **Grammar levels go up and down often** (about ten times a month for a learner between two levels). This is how a
-  staircase finds the edge of what a learner can do, so it is left as it is; the screen shows the level of the day.
-- **Find my level places grammar about one level high** for the learner who cannot name a noun (half the runs within
-  one level). Practice brings it down within a week, and the noun-and-verb questions already send this learner to
-  naming practice first.
+- **About one sitting in five still has under half right** in grammar, and one in three in Listen and write: that is
+  practice at the edge of what a learner can do, with slips and good and bad days.
 
 ## Limits
 
