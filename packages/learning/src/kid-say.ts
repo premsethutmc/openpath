@@ -414,6 +414,12 @@ function general(q: Q): KidQ {
       t = t.replace(new RegExp(`,? in ${unit.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?=\\?)`), "").replace(/\s+Give the answer in [^.]*\./, "");
     }
   }
+  // 4b. "How many fifths…?" is answered with a number of fifths: the box says so ("3 fifths"), so the child does not try
+  //     to type 3/5 on a number keyboard
+  if (ask.kind === "box" && !ask.before && !ask.after && q.type === "integer") {
+    const part = all.match(/\bhow many (halves|thirds|quarters|fourths|fifths|sixths|sevenths|eighths|ninths|tenths|elevenths|twelfths|hundredths|thousandths)\b/i);
+    if (part) ask = { kind: "box", after: part[1].toLowerCase() };
+  }
   // 5. words a ten-year-old trips on
   t = t.replace(/ascending order \(smallest first\)/g, "order, smallest first").replace(/\bascending order\b/g, "order, smallest first").replace(/\bdescending order\b/g, "order, biggest first");
   // the marking wants the simplest form: say so once, under the question

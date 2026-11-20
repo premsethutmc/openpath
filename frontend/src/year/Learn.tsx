@@ -479,11 +479,14 @@ export function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidA
       </div>
     );
   const unit = ask.kind === "box" ? ask : { before: undefined, after: undefined };
+  const slash = ask.kind === "box" && (/\//.test(answer) || type === "mixed");
   return (
     <label className="kid-unit">
       {unit.before && <span>{unit.before}</span>}
-      <input aria-label="Your answer" inputMode={ask.kind === "product" ? "text" : "decimal"} autoComplete="off" placeholder={ask.kind === "product" ? "e.g. 2 × 3 × 3" : "Your answer"} value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
+      <input aria-label="Your answer" inputMode={ask.kind === "product" || slash ? "text" : "decimal"} autoComplete="off" placeholder={ask.kind === "product" ? "e.g. 2 × 3 × 3" : slash ? "e.g. 3/5" : "Your answer"} value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
       {unit.after && <span>{unit.after}</span>}
+      {/* answer-keys@1: a phone's keyboards hide "/" behind a symbols page, so an answer that is a fraction gets its own key */}
+      {slash && <button type="button" className="secondary kid-key" aria-label="Type a fraction bar" disabled={disabled} onClick={() => { const v = `${parts[0] ?? ""}/`; put([v], !!v.trim()); }}>/</button>}
     </label>
   );
 }
