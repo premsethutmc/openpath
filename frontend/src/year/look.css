@@ -291,3 +291,5 @@ details.working summary, .hint { color: var(--ink); }
 /* taught@1: the checklist under "What OpenPath did" is a plain list, not cards */
 .topic-rows .taught-checks { margin: 6px 0 0; padding-left: 18px; }
 .topic-rows .taught-checks li { border: 0; padding: 2px 0; background: none; box-shadow: none; border-radius: 0; list-style: disc; }
+
+.working summary .working-inside { font-weight: 500; opacity: 0.75; font-size: 0.9em; }

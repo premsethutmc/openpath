@@ -53,7 +53,10 @@ if (process.argv.includes("--merge")) {
         const off = await spills(page); if (off) note("spills-off-screen", off);
         const control = await page.locator('main input:not([type=search]), main textarea, main [role=radio], main [role=radiogroup] button, main .options button, main .scene, main select').count();
         if (!control) note("nothing-to-answer-with", "no box, option or picture to answer with");
-        const stuck = page.getByRole("button", { name: "I'm stuck" });
+        // one-place@1: help lives inside "Work it out step by step"; open it first
+        const working = page.locator(".working > summary").first();
+        if (await working.count()) await working.click();
+        const stuck = page.getByRole("button", { name: /I'm stuck|Help me with the next step/ });
         if (await stuck.count()) {
           help = true;
           await stuck.first().click();

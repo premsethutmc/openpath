@@ -609,6 +609,10 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [coachAsked, setCoach] = useResume(resumeKey && `${resumeKey}:coach`, false);
   const coach = coachAsked || longDiv;
   const canCoach = hintAllowed && KID && workable && !!stepsHelp(qid);
+  // help-count@1: how many steps were shown is kept with the answer (the record allows 0 to 5), so "needed one step"
+  // and "needed every step" are not the same evidence
+  const [helped, setHelped] = useState(0);
+  const usedStep = () => { setHint(true); setHelped((n) => Math.min(5, n + 1)); };
   const askHelp = () => { setCoach(true); setWorkingOpen(true); setHint(true); };
   // together@1: a walk-through question opens with the step help already asked for; each step is the child's to type
   useEffect(() => { if (context === "together" && canCoach && !coach) askHelp(); }, [qid]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -654,24 +658,25 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         <details className="working" open={workingOpen}>
           {/* Save activation before a queued native toggle can race editing/reload.
               Summary still supplies native focus and Enter/Space activation. */}
-          <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Work it out step by step" : "Show your working (optional)"}</summary>
+          <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? <>Work it out step by step{!workingOpen && <span className="working-inside"> · rough work and help inside</span>}</> : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
           {KID && coach && canCoach ? null : KID ? <WorkingSteps value={working} setValue={setWorking} check={activity === "guided" || activity === "practice"} more={beyondArithmetic(q.competency)} /> : <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />}
           {!KID && <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>}
           {canCoach && (coach
-            ? <StepCoach key={qid} qid={qid} shown onUsed={() => setHint(true)} />
+            ? <StepCoach key={qid} qid={qid} shown onUsed={usedStep} />
             : <button type="button" className="secondary coach-help" data-testid="working-help" onClick={askHelp}><span aria-hidden="true">✋ </span>Help me with the next step</button>)}
+          {/* one-place@1: everything for working a question out sits here: the steps, help, and the rough-work pad */}
+          {!canCoach && hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={usedStep} />}
+          {/* scribble@1: scratch paper, never read; like paper on the desk it is there in tests too */}
+          {KID && <ScribblePad key={qid} />}
         </details>
       )}
-      {/* scribble@1: scratch paper, never read; like paper on the desk it is there in tests too */}
-      {KID && workable && <ScribblePad key={qid} />}
       {(hint || showHint) && !(coach && canCoach && !q.hint && !showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         {/* step-help@1: in practice with help, a stuck child asks for one rung at a time; using it is recorded as help (a hint) */}
-        {canCoach
-          ? !coach && <button type="button" className="secondary coach-open" onClick={askHelp}>I'm stuck</button>
-          : hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={() => setHint(true)} />}
+        {/* help for a question with working lives inside "Work it out step by step"; a tapped answer keeps it here */}
+        {!workable && hintAllowed && KID && <StepCoach key={qid} qid={qid} onUsed={usedStep} />}
         <button
           className="primary"
           disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
@@ -691,7 +696,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             if (KID && preview?.clarification && preview.credit === null && preview.feedback.kind === "clarify") { setClarify(`${preview.clarification.prompt} Nothing has been sent yet: change your answer and tap Check again.`); return; }
             submitting.current = true;
             let ok: boolean;
-            try { ok = await ctx.answer(qid, sent, activity, { hints: hint || showHint || lower > 0 ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
+            try { ok = await ctx.answer(qid, sent, activity, { hints: Math.max(helped, hint || showHint || lower > 0 ? 1 : 0), ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
             if (!ok) return;
             // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
             const a = authoritativeView(preview, ctx.recorded?.() ?? null);
