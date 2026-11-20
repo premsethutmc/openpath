@@ -605,3 +605,13 @@ verify: quadratic equations (two explanations), definite integrals (one). They a
 works through (x² − 7x + 10 = 0, x² − 49 = 0, ∫ from 2 to 6 of 3 dx), pass the teaching check, and are registered for review.
 A simulated weak child is now taught both skills and masters them. Proof by induction is the one exception: it has no generated
 question type to tie a checked example to. Test: `frontend/src/learning/teachable.test.ts`.
+
+## easier-first@1: a struggling child is walked through the easiest question of the skill
+
+When a child is walked through a skill step by step (together@1), the question is now the easiest fresh one of the skill: the
+fewest working steps, then the smallest numbers (½ + 2/6 before 4⅚ + 7/10). The first question alone after it is the easiest fresh
+check; after a right answer alone the ordinary order, with harder questions, comes back. Nothing else changes.
+Measured honestly: the simulated weak child (ICSE Class 5, with an assumed 8% drop in success for each working step past two,
+`LOAD=0.08`) mastered 56 of 62 with it and 57 without: within noise. The simulation cannot show what easier numbers do for a real
+child; this is standard practice for a struggling learner, kept because it is low risk (the walk-through rung only).
+Switch: `useEasierFirst(false)`; simulation `EASIER=0`.
