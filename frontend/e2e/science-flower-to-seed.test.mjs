@@ -175,6 +175,7 @@ test('phone: the story can pause, finish, replay, and return immediately to the 
  await b(p,'Left flower').tap();assert.match(await status(p),/sticks to the bee/);
 }));
 test('story sound toggles without leaving the film and mute cancels current speech',async t=>run(t,true,320,async(p,origin)=>{
+ p.setDefaultTimeout(8000);
  await p.addInitScript(()=>{
   window.testVoices={lines:[],cancels:0};
   Object.defineProperty(window,'speechSynthesis',{value:{
@@ -191,19 +192,19 @@ test('story sound toggles without leaving the film and mute cancels current spee
  const sound=b(p,'Story sound');
  assert.equal(await sound.getAttribute('aria-pressed'),'false');
  await sound.tap();
- await sound.locator('text=Sound on').waitFor();
+ await p.locator('#film-sound[aria-pressed="true"]').waitFor();
  await p.clock.fastForward(2280);
  assert.match(await dialog.locator('.film-bubble').innerText(),/Mina/);
  assert.ok((await p.evaluate(()=>window.testVoices.lines)).some(s=>s.includes('orchard')));
  await sound.tap();
- await sound.locator('text=Sound off').waitFor();
+ await p.locator('#film-sound[aria-pressed="false"]').waitFor();
  assert.ok(await dialog.isVisible());
  assert.ok(await p.evaluate(()=>window.testVoices.cancels>0));
  assert.match(await dialog.locator('.film-bubble').innerText(),/Mina/);
  await sound.tap();
- await sound.locator('text=Sound on').waitFor();
+ await p.locator('#film-sound[aria-pressed="true"]').waitFor();
  await b(p,'Take over the bee →').tap();
  assert.equal(await b(p,'Garden sound').getAttribute('aria-pressed'),'true');
  await b(p,'Garden sound').tap();
- await b(p,'Garden sound').locator('text=Sound off').waitFor();
+ await p.locator('#garden-sound[aria-pressed="false"]').waitFor();
 }));

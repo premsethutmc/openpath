@@ -38,6 +38,10 @@ const files = new Map([
   ['/flower-to-seed/sound.mjs', ['flower-to-seed/sound.mjs', 'text/javascript']],
   ['/flower-to-seed/art.mjs', ['flower-to-seed/art.mjs', 'text/javascript']],
   ['/flower-to-seed/model.mjs', ['flower-to-seed/model.mjs', 'text/javascript']],
+  ["/shadow-lab/", ["shadow-lab/index.html", "text/html"]],
+  ["/shadow-lab/model.mjs", ["shadow-lab/model.mjs", "text/javascript"]],
+  ["/shadow-lab/shadow.css", ["shadow-lab/shadow.css", "text/css"]],
+  ["/shadow-lab/shadow.mjs", ["shadow-lab/shadow.mjs", "text/javascript"]],
 ]);
 
 export async function serveScience() {
