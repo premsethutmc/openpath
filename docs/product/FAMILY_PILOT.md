@@ -597,3 +597,13 @@ help was a single step, 22 questions where a first step shows a number equal to 
 - **surds@1, one-term-at-a-time@1**: written working for surds (simplify each, then add or take away the like surds; multiply or
   divide under one root; rationalise a denominator, with the conjugate when it has two terms) and for the first four terms of a
   sequence (each term by putting n in, or from the one before). Each checks its result against the question's own answer.
+
+## move-on@1: a child who has shown a skill is not made to finish the practice list
+
+Before: after a child had shown a skill on their own and the shared record had counted it, the module still served every
+question left on its practice list (a strong child: 21 questions in a row, all right, on converting metres and centimetres).
+Now, once the record has counted the skill, only the transfer question (a new setting) is still asked; the rest of the practice
+is optional. The delayed check a week later is unchanged, so "Sure" still needs it.
+
+Simulated children, ICSE Class 5 (62 skills): strong child 62 of 62 mastered, median questions per skill 17 → 9; average child
+61 of 62 (was 60). No child marked mastered without knowing it.

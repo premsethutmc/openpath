@@ -759,7 +759,9 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
     // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
     // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
-    const listed = unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]);
+    // move-on@1: once the shared record has demonstrated the skill, the module's own practice is optional: a learner who has
+    // shown it is not asked the rest of the practice list. Only the transfer question (a new setting) is still asked.
+    const listed = needsEvidence ? unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]) : unanswered(tr);
     // grade-order@1: the skill's extra written tasks (a module answered automatically) are offered only up to the learner's grade: a
     // later grade's proof (the BPT by areas, for a Grade 8 learner) is reached in that grade. A module of written tasks alone is unchanged.
     const g = gradeOf(records);
