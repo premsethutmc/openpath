@@ -1,6 +1,6 @@
 {
   "id": "listen-and-answer",
-  "version": 5,
+  "version": 6,
   "status": "candidate: passages, questions and levels written by OpenPath (AI-prepared) and checked by rule; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: listening to a passage and answering questions; it changes no capability estimate",
@@ -1607,6 +1607,1566 @@
             "Tired and sleepy"
           ],
           "explain": "He laughed with relief and showed her the best page."
+        }
+      ]
+    },
+    {
+      "id": "ln1.1",
+      "level": 1,
+      "title": "The Rain Puddle",
+      "text": "It rains in the morning. Sita puts on her yellow boots. She goes out to play. She sees a big puddle near the gate. She jumps in it. Splash! Water goes on her dress. Her mother calls her in. Sita laughs and runs home.",
+      "questions": [
+        {
+          "id": "ln1.1.q1",
+          "skill": "detail",
+          "prompt": "What colour are Sita's boots?",
+          "right": "Yellow",
+          "wrong": [
+            "Blue",
+            "Black"
+          ],
+          "explain": "Sita puts on her yellow boots."
+        },
+        {
+          "id": "ln1.1.q2",
+          "skill": "detail",
+          "prompt": "Where is the puddle?",
+          "right": "Near the gate",
+          "wrong": [
+            "Under a tree",
+            "In the school"
+          ],
+          "explain": "She sees a big puddle near the gate."
+        },
+        {
+          "id": "ln1.1.q3",
+          "skill": "cause",
+          "prompt": "Why does water go on her dress?",
+          "right": "She jumps in the puddle",
+          "wrong": [
+            "A car goes past",
+            "Her friend throws it"
+          ],
+          "explain": "She jumps in the puddle and the water splashes."
+        },
+        {
+          "id": "ln1.1.q4",
+          "skill": "inference",
+          "prompt": "How does Sita feel?",
+          "right": "Happy",
+          "wrong": [
+            "Scared",
+            "Angry"
+          ],
+          "explain": "She laughs and runs home."
+        }
+      ]
+    },
+    {
+      "id": "ln1.2",
+      "level": 1,
+      "title": "The Lost Cap",
+      "text": "Arun has a blue cap. He wears it to the park. He plays on the slide. Then he cannot find his cap. He looks under the bench. He looks by the swing. A girl holds up a blue cap. It is his cap! Arun says thank you.",
+      "questions": [
+        {
+          "id": "ln1.2.q1",
+          "skill": "detail",
+          "prompt": "What colour is Arun's cap?",
+          "right": "Blue",
+          "wrong": [
+            "Red",
+            "Green"
+          ],
+          "explain": "Arun has a blue cap."
+        },
+        {
+          "id": "ln1.2.q2",
+          "skill": "detail",
+          "prompt": "Where does Arun go?",
+          "right": "To the park",
+          "wrong": [
+            "To the shop",
+            "To the beach"
+          ],
+          "explain": "He wears it to the park."
+        },
+        {
+          "id": "ln1.2.q3",
+          "skill": "sequence",
+          "prompt": "Where does he look first?",
+          "right": "Under the bench",
+          "wrong": [
+            "By the swing",
+            "On the slide"
+          ],
+          "explain": "He looks under the bench, then by the swing."
+        },
+        {
+          "id": "ln1.2.q4",
+          "skill": "detail",
+          "prompt": "Who finds the cap?",
+          "right": "A girl",
+          "wrong": [
+            "His father",
+            "A dog"
+          ],
+          "explain": "A girl holds up a blue cap."
+        }
+      ]
+    },
+    {
+      "id": "ln1.3",
+      "level": 1,
+      "title": "Milk for the Cat",
+      "text": "A small cat sits at the door. It is thin and hungry. Priya sees the cat. She gets some milk in a bowl. She puts the bowl down slowly. The cat drinks all the milk. Then it sits on the mat and goes to sleep.",
+      "questions": [
+        {
+          "id": "ln1.3.q1",
+          "skill": "detail",
+          "prompt": "Where does the cat sit?",
+          "right": "At the door",
+          "wrong": [
+            "On the roof",
+            "In a box"
+          ],
+          "explain": "A small cat sits at the door."
+        },
+        {
+          "id": "ln1.3.q2",
+          "skill": "cause",
+          "prompt": "Why does Priya give it milk?",
+          "right": "It is hungry",
+          "wrong": [
+            "It is wet",
+            "It is lost"
+          ],
+          "explain": "It is thin and hungry."
+        },
+        {
+          "id": "ln1.3.q3",
+          "skill": "detail",
+          "prompt": "What does Priya put the milk in?",
+          "right": "A bowl",
+          "wrong": [
+            "A cup",
+            "A bottle"
+          ],
+          "explain": "She gets some milk in a bowl."
+        },
+        {
+          "id": "ln1.3.q4",
+          "skill": "sequence",
+          "prompt": "What does the cat do after drinking?",
+          "right": "It goes to sleep",
+          "wrong": [
+            "It runs away",
+            "It plays"
+          ],
+          "explain": "Then it sits on the mat and goes to sleep."
+        }
+      ]
+    },
+    {
+      "id": "ln1.4",
+      "level": 1,
+      "title": "The Big Mango",
+      "text": "Grandfather has a mango tree. One mango is very big. It is yellow and ripe. Grandfather picks it. He cuts it into four pieces. He gives one piece to each child. The mango is sweet. The children say it is the best mango.",
+      "questions": [
+        {
+          "id": "ln1.4.q1",
+          "skill": "detail",
+          "prompt": "Who has the mango tree?",
+          "right": "Grandfather",
+          "wrong": [
+            "Mother",
+            "A farmer"
+          ],
+          "explain": "Grandfather has a mango tree."
+        },
+        {
+          "id": "ln1.4.q2",
+          "skill": "detail",
+          "prompt": "What colour is the big mango?",
+          "right": "Yellow",
+          "wrong": [
+            "Green",
+            "Red"
+          ],
+          "explain": "It is yellow and ripe."
+        },
+        {
+          "id": "ln1.4.q3",
+          "skill": "detail",
+          "prompt": "How many pieces does he cut?",
+          "right": "Four",
+          "wrong": [
+            "Two",
+            "Six"
+          ],
+          "explain": "He cuts it into four pieces."
+        },
+        {
+          "id": "ln1.4.q4",
+          "skill": "inference",
+          "prompt": "Do the children like the mango?",
+          "right": "Yes, very much",
+          "wrong": [
+            "No, not at all",
+            "They do not eat it"
+          ],
+          "explain": "They say it is the best mango."
+        }
+      ]
+    },
+    {
+      "id": "ln1.5",
+      "level": 1,
+      "title": "The New Bicycle",
+      "text": "Kiran gets a new bicycle. It is red with a small bell. At first he falls down. His sister holds the seat. He tries again and again. At last he rides to the end of the road. He rings the bell. Ring, ring!",
+      "questions": [
+        {
+          "id": "ln1.5.q1",
+          "skill": "detail",
+          "prompt": "What colour is the bicycle?",
+          "right": "Red",
+          "wrong": [
+            "Blue",
+            "Silver"
+          ],
+          "explain": "It is red with a small bell."
+        },
+        {
+          "id": "ln1.5.q2",
+          "skill": "detail",
+          "prompt": "Who holds the seat?",
+          "right": "His sister",
+          "wrong": [
+            "His friend",
+            "His uncle"
+          ],
+          "explain": "His sister holds the seat."
+        },
+        {
+          "id": "ln1.5.q3",
+          "skill": "sequence",
+          "prompt": "What happens at first?",
+          "right": "He falls down",
+          "wrong": [
+            "He rings the bell",
+            "He rides fast"
+          ],
+          "explain": "At first he falls down."
+        },
+        {
+          "id": "ln1.5.q4",
+          "skill": "inference",
+          "prompt": "What does this story show?",
+          "right": "Trying again helps",
+          "wrong": [
+            "Bicycles are loud",
+            "Bells are small"
+          ],
+          "explain": "He tries again and again, and at last he rides."
+        }
+      ]
+    },
+    {
+      "id": "ln2.1",
+      "level": 2,
+      "title": "The Puppy at School",
+      "text": "One morning a brown puppy walked into our classroom. Everyone shouted and the puppy hid under the teacher's table. Our teacher asked us to sit quietly. She put a little water near the table. Slowly the puppy came out and drank it. At lunch time a man came to the gate. He was looking for his puppy. He smiled and took it home.",
+      "questions": [
+        {
+          "id": "ln2.1.q1",
+          "skill": "detail",
+          "prompt": "Where did the puppy hide?",
+          "right": "Under the teacher's table",
+          "wrong": [
+            "Behind the classroom door",
+            "Inside a school bag"
+          ],
+          "explain": "The puppy hid under the teacher's table."
+        },
+        {
+          "id": "ln2.1.q2",
+          "skill": "cause",
+          "prompt": "Why did the puppy hide?",
+          "right": "Everyone shouted",
+          "wrong": [
+            "It was raining",
+            "It was sleepy"
+          ],
+          "explain": "Everyone shouted and the puppy hid."
+        },
+        {
+          "id": "ln2.1.q3",
+          "skill": "sequence",
+          "prompt": "What did the teacher do first?",
+          "right": "Asked everyone to sit quietly",
+          "wrong": [
+            "Called the puppy's owner",
+            "Gave it some biscuits"
+          ],
+          "explain": "She asked us to sit quietly, then put water down."
+        },
+        {
+          "id": "ln2.1.q4",
+          "skill": "detail",
+          "prompt": "Who came at lunch time?",
+          "right": "The puppy's owner",
+          "wrong": [
+            "The head teacher",
+            "A doctor"
+          ],
+          "explain": "A man came looking for his puppy."
+        }
+      ]
+    },
+    {
+      "id": "ln2.2",
+      "level": 2,
+      "title": "Paper Boats",
+      "text": "After the rain, the lane outside Lata's house was full of water. Lata and her brother made paper boats from old notebooks. They put the boats in the water. Lata's boat was fast, but it hit a stone and turned over. Her brother's boat went slowly to the end of the lane. Lata did not mind. She made another boat with a stronger fold.",
+      "questions": [
+        {
+          "id": "ln2.2.q1",
+          "skill": "detail",
+          "prompt": "What did they make the boats from?",
+          "right": "Old notebooks",
+          "wrong": [
+            "Leaves",
+            "Newspaper"
+          ],
+          "explain": "They made paper boats from old notebooks."
+        },
+        {
+          "id": "ln2.2.q2",
+          "skill": "cause",
+          "prompt": "Why did Lata's boat turn over?",
+          "right": "It hit a stone",
+          "wrong": [
+            "It was too heavy",
+            "A dog stepped on it"
+          ],
+          "explain": "It hit a stone and turned over."
+        },
+        {
+          "id": "ln2.2.q3",
+          "skill": "detail",
+          "prompt": "Whose boat reached the end of the lane?",
+          "right": "Her brother's",
+          "wrong": [
+            "Lata's",
+            "A neighbour's"
+          ],
+          "explain": "Her brother's boat went slowly to the end."
+        },
+        {
+          "id": "ln2.2.q4",
+          "skill": "inference",
+          "prompt": "What kind of girl is Lata?",
+          "right": "She does not give up",
+          "wrong": [
+            "She is unkind",
+            "She is lazy"
+          ],
+          "explain": "She did not mind and made another boat."
+        }
+      ]
+    },
+    {
+      "id": "ln2.3",
+      "level": 2,
+      "title": "The Vegetable Seller",
+      "text": "Every evening a vegetable seller comes down our street with his cart. He calls out the names of his vegetables in a loud voice. Today he had tomatoes, beans and fresh spinach. My mother bought beans and some spinach. The seller gave me a small carrot for free. I washed it and ate it at once. It was crunchy and sweet.",
+      "questions": [
+        {
+          "id": "ln2.3.q1",
+          "skill": "detail",
+          "prompt": "When does the seller come?",
+          "right": "Every evening",
+          "wrong": [
+            "Every morning",
+            "On Sundays only"
+          ],
+          "explain": "Every evening a vegetable seller comes down our street."
+        },
+        {
+          "id": "ln2.3.q2",
+          "skill": "detail",
+          "prompt": "What did Mother buy?",
+          "right": "Beans and spinach",
+          "wrong": [
+            "Tomatoes and onions",
+            "Only carrots"
+          ],
+          "explain": "My mother bought beans and some spinach."
+        },
+        {
+          "id": "ln2.3.q3",
+          "skill": "detail",
+          "prompt": "What did the seller give the child?",
+          "right": "A small carrot",
+          "wrong": [
+            "A tomato",
+            "Some beans"
+          ],
+          "explain": "The seller gave me a small carrot for free."
+        },
+        {
+          "id": "ln2.3.q4",
+          "skill": "sequence",
+          "prompt": "What did the child do before eating the carrot?",
+          "right": "Washed it",
+          "wrong": [
+            "Cooked it",
+            "Cut it up"
+          ],
+          "explain": "I washed it and ate it at once."
+        }
+      ]
+    },
+    {
+      "id": "ln2.4",
+      "level": 2,
+      "title": "The Kite Festival",
+      "text": "On kite day, the sky over the town was full of colours. Raju had a green kite with a long tail. He ran across the field and the wind lifted it high. Then the string got stuck in a tree. Raju pulled gently, not hard. The string came free and the kite flew again. His friends clapped for him.",
+      "questions": [
+        {
+          "id": "ln2.4.q1",
+          "skill": "detail",
+          "prompt": "What colour was Raju's kite?",
+          "right": "Green",
+          "wrong": [
+            "Orange",
+            "Purple"
+          ],
+          "explain": "Raju had a green kite with a long tail."
+        },
+        {
+          "id": "ln2.4.q2",
+          "skill": "detail",
+          "prompt": "Where did the string get stuck?",
+          "right": "In a tree",
+          "wrong": [
+            "On a roof",
+            "On a pole"
+          ],
+          "explain": "The string got stuck in a tree."
+        },
+        {
+          "id": "ln2.4.q3",
+          "skill": "cause",
+          "prompt": "Why did the kite fly again?",
+          "right": "Raju pulled gently",
+          "wrong": [
+            "The tree fell down",
+            "His friend climbed up"
+          ],
+          "explain": "Raju pulled gently and the string came free."
+        },
+        {
+          "id": "ln2.4.q4",
+          "skill": "inference",
+          "prompt": "How did his friends feel?",
+          "right": "Pleased for him",
+          "wrong": [
+            "Cross with him",
+            "Bored"
+          ],
+          "explain": "His friends clapped for him."
+        }
+      ]
+    },
+    {
+      "id": "ln2.5",
+      "level": 2,
+      "title": "Helping Grandmother",
+      "text": "Grandmother wanted to make a big pot of rice for a family lunch. Nila helped her. First she washed the rice three times. Then she carried water to the stove. Grandmother cooked the rice and added a little salt. When the guests came, everyone ate well. Grandmother told them that Nila was the best helper in the house.",
+      "questions": [
+        {
+          "id": "ln2.5.q1",
+          "skill": "detail",
+          "prompt": "What did Grandmother want to make?",
+          "right": "A pot of rice",
+          "wrong": [
+            "A chocolate cake",
+            "Some sweet tea"
+          ],
+          "explain": "Grandmother wanted to make a big pot of rice."
+        },
+        {
+          "id": "ln2.5.q2",
+          "skill": "detail",
+          "prompt": "How many times did Nila wash the rice?",
+          "right": "Three",
+          "wrong": [
+            "Once",
+            "Five"
+          ],
+          "explain": "She washed the rice three times."
+        },
+        {
+          "id": "ln2.5.q3",
+          "skill": "sequence",
+          "prompt": "What did Nila do after washing the rice?",
+          "right": "Carried water to the stove",
+          "wrong": [
+            "Added salt",
+            "Served the guests"
+          ],
+          "explain": "Then she carried water to the stove."
+        },
+        {
+          "id": "ln2.5.q4",
+          "skill": "main_idea",
+          "prompt": "What is this story about?",
+          "right": "A girl helping her grandmother",
+          "wrong": [
+            "A girl cooking alone",
+            "A trip to a shop"
+          ],
+          "explain": "Nila helps Grandmother get lunch ready."
+        }
+      ]
+    },
+    {
+      "id": "ln3.1",
+      "level": 3,
+      "title": "The Broken Pot",
+      "text": "Mohan was carrying a clay pot of water from the well when he slipped on a wet stone. The pot fell and broke into pieces. Mohan was afraid to tell his mother, because the pot was new. He stood by the well for a long time. At last he went home and told her the truth. His mother looked at his scraped knee first. Then she said that a pot can be bought again, but a boy who tells the truth is worth much more.",
+      "questions": [
+        {
+          "id": "ln3.1.q1",
+          "skill": "cause",
+          "prompt": "Why did the pot fall?",
+          "right": "Mohan slipped on a wet stone",
+          "wrong": [
+            "A goat pushed him",
+            "The pot had a crack"
+          ],
+          "explain": "He slipped on a wet stone."
+        },
+        {
+          "id": "ln3.1.q2",
+          "skill": "cause",
+          "prompt": "Why was Mohan afraid?",
+          "right": "The pot was new",
+          "wrong": [
+            "He was late for school",
+            "His mother was ill"
+          ],
+          "explain": "He was afraid because the pot was new."
+        },
+        {
+          "id": "ln3.1.q3",
+          "skill": "detail",
+          "prompt": "What did his mother look at first?",
+          "right": "His scraped knee",
+          "wrong": [
+            "The broken pieces",
+            "The well"
+          ],
+          "explain": "His mother looked at his scraped knee first."
+        },
+        {
+          "id": "ln3.1.q4",
+          "skill": "inference",
+          "prompt": "What does his mother think matters most?",
+          "right": "Telling the truth",
+          "wrong": [
+            "Having a new pot",
+            "Fetching water fast"
+          ],
+          "explain": "She said a boy who tells the truth is worth much more."
+        }
+      ]
+    },
+    {
+      "id": "ln3.2",
+      "level": 3,
+      "title": "The Class Trip to the Farm",
+      "text": "Our class went on a trip to a dairy farm. The farmer showed us twelve cows in a long shed. Each cow had a name written on a board. We watched the farmer milk a cow called Ganga. He let us feed hay to a young calf. The calf licked my hand with its rough tongue and everyone laughed. Before we left, the farmer gave us cups of fresh milk. On the bus back, we all agreed it was our best trip this year.",
+      "questions": [
+        {
+          "id": "ln3.2.q1",
+          "skill": "detail",
+          "prompt": "How many cows were in the shed?",
+          "right": "Twelve",
+          "wrong": [
+            "Twenty",
+            "Six"
+          ],
+          "explain": "The farmer showed us twelve cows."
+        },
+        {
+          "id": "ln3.2.q2",
+          "skill": "detail",
+          "prompt": "What was the cow called that was milked?",
+          "right": "Ganga",
+          "wrong": [
+            "Lakshmi",
+            "Moti"
+          ],
+          "explain": "He milked a cow called Ganga."
+        },
+        {
+          "id": "ln3.2.q3",
+          "skill": "cause",
+          "prompt": "Why did everyone laugh?",
+          "right": "The calf licked a hand",
+          "wrong": [
+            "A cow mooed loudly",
+            "The farmer fell over"
+          ],
+          "explain": "The calf licked my hand and everyone laughed."
+        },
+        {
+          "id": "ln3.2.q4",
+          "skill": "main_idea",
+          "prompt": "What is the passage mostly about?",
+          "right": "A happy class trip",
+          "wrong": [
+            "How to make cheese",
+            "A lost calf"
+          ],
+          "explain": "It tells about a class trip that everyone enjoyed."
+        }
+      ]
+    },
+    {
+      "id": "ln3.3",
+      "level": 3,
+      "title": "The Noisy Neighbour",
+      "text": "Every night the neighbour's radio played loudly until late. Asha could not sleep and was tired at school. Her father wanted to complain, but Asha had a better idea. She wrote a polite note and pushed it under the neighbour's door. The note said that she had exams and needed to sleep early. The next evening the neighbour knocked on their door. He said sorry and gave Asha a box of sweets. After that, the radio was always quiet by nine.",
+      "questions": [
+        {
+          "id": "ln3.3.q1",
+          "skill": "cause",
+          "prompt": "Why was Asha tired at school?",
+          "right": "She could not sleep at night",
+          "wrong": [
+            "She walked a long way",
+            "She was ill"
+          ],
+          "explain": "The radio was loud and Asha could not sleep."
+        },
+        {
+          "id": "ln3.3.q2",
+          "skill": "detail",
+          "prompt": "What did Asha do?",
+          "right": "Wrote a polite note",
+          "wrong": [
+            "Shouted at the neighbour",
+            "Called the police"
+          ],
+          "explain": "She wrote a polite note and pushed it under the door."
+        },
+        {
+          "id": "ln3.3.q3",
+          "skill": "detail",
+          "prompt": "What did the neighbour give her?",
+          "right": "A box of sweets",
+          "wrong": [
+            "A new radio",
+            "Some books"
+          ],
+          "explain": "He said sorry and gave Asha a box of sweets."
+        },
+        {
+          "id": "ln3.3.q4",
+          "skill": "inference",
+          "prompt": "What does the story show?",
+          "right": "Being polite can solve a problem",
+          "wrong": [
+            "Radios should not be sold",
+            "Exams make people tired"
+          ],
+          "explain": "Her polite note made the neighbour change."
+        }
+      ]
+    },
+    {
+      "id": "ln3.4",
+      "level": 3,
+      "title": "Saving Water",
+      "text": "In summer, the tank on top of our building ran dry twice. Our building had a meeting about it. My mother suggested some simple rules. Nobody would leave a tap running while brushing their teeth. Families would wash cars with a bucket, not a pipe. Water from washing rice would go to the plants. Soon the tank lasted the whole week. The children made posters to remind everyone, and ours won a small prize.",
+      "questions": [
+        {
+          "id": "ln3.4.q1",
+          "skill": "detail",
+          "prompt": "How many times did the tank run dry?",
+          "right": "Twice",
+          "wrong": [
+            "Once",
+            "Every day"
+          ],
+          "explain": "The tank ran dry twice."
+        },
+        {
+          "id": "ln3.4.q2",
+          "skill": "detail",
+          "prompt": "Who suggested the rules?",
+          "right": "The child's mother",
+          "wrong": [
+            "The watchman",
+            "A teacher"
+          ],
+          "explain": "My mother suggested some simple rules."
+        },
+        {
+          "id": "ln3.4.q3",
+          "skill": "detail",
+          "prompt": "What were cars to be washed with?",
+          "right": "A bucket",
+          "wrong": [
+            "A pipe",
+            "Rain water only"
+          ],
+          "explain": "Families would wash cars with a bucket, not a pipe."
+        },
+        {
+          "id": "ln3.4.q4",
+          "skill": "cause",
+          "prompt": "Why did the tank last the whole week?",
+          "right": "People used less water",
+          "wrong": [
+            "It rained a lot",
+            "They built a bigger tank"
+          ],
+          "explain": "The rules saved water, so the tank lasted."
+        }
+      ]
+    },
+    {
+      "id": "ln3.5",
+      "level": 3,
+      "title": "The Spelling Contest",
+      "text": "Deepa practised for the school spelling contest every evening with her brother. He read out words and she spelled them. On the day, Deepa spelled every word right until the last round. Her word was necessary. She spelled it with two letter c's and one letter s. The bell rang. She had got it wrong. Deepa came second. She was sad for a moment, but then she smiled and wrote the word ten times in her notebook.",
+      "questions": [
+        {
+          "id": "ln3.5.q1",
+          "skill": "detail",
+          "prompt": "Who helped Deepa practise?",
+          "right": "Her brother",
+          "wrong": [
+            "Her teacher",
+            "Her mother"
+          ],
+          "explain": "He read out words and she spelled them."
+        },
+        {
+          "id": "ln3.5.q2",
+          "skill": "detail",
+          "prompt": "What was her last word?",
+          "right": "Necessary",
+          "wrong": [
+            "Beautiful",
+            "Library"
+          ],
+          "explain": "Her word was necessary."
+        },
+        {
+          "id": "ln3.5.q3",
+          "skill": "detail",
+          "prompt": "Where did Deepa come?",
+          "right": "Second",
+          "wrong": [
+            "First",
+            "Last"
+          ],
+          "explain": "Deepa came second."
+        },
+        {
+          "id": "ln3.5.q4",
+          "skill": "inference",
+          "prompt": "Why did she write the word ten times?",
+          "right": "To learn it properly",
+          "wrong": [
+            "As a punishment",
+            "To show her friends"
+          ],
+          "explain": "She wanted to get the word right next time."
+        }
+      ]
+    },
+    {
+      "id": "ln4.1",
+      "level": 4,
+      "title": "Calling the Doctor",
+      "text": "Rahul's grandfather felt dizzy one afternoon while everyone else was out. Rahul helped him sit down and gave him water. Then he rang the doctor, whose number was stuck on the fridge. The receptionist asked a few questions. How old was Grandfather? Was he awake and talking? Rahul answered clearly. She told him to keep Grandfather sitting and to call back if things got worse. The doctor came within half an hour. Later she told the family that Rahul had done exactly the right things, and that staying calm had helped most of all.",
+      "questions": [
+        {
+          "id": "ln4.1.q1",
+          "skill": "detail",
+          "prompt": "Where was the doctor's number?",
+          "right": "Stuck on the fridge",
+          "wrong": [
+            "In a phone book",
+            "On the door"
+          ],
+          "explain": "The doctor's number was stuck on the fridge."
+        },
+        {
+          "id": "ln4.1.q2",
+          "skill": "sequence",
+          "prompt": "What did Rahul do first?",
+          "right": "Helped Grandfather sit down",
+          "wrong": [
+            "Rang the doctor",
+            "Called his parents"
+          ],
+          "explain": "He helped him sit down and gave him water, then rang the doctor."
+        },
+        {
+          "id": "ln4.1.q3",
+          "skill": "detail",
+          "prompt": "How soon did the doctor come?",
+          "right": "Within half an hour",
+          "wrong": [
+            "The next morning",
+            "After two hours"
+          ],
+          "explain": "The doctor came within half an hour."
+        },
+        {
+          "id": "ln4.1.q4",
+          "skill": "main_idea",
+          "prompt": "What did the doctor say helped most?",
+          "right": "Staying calm",
+          "wrong": [
+            "Running fast",
+            "Shouting for help"
+          ],
+          "explain": "Staying calm had helped most of all."
+        }
+      ]
+    },
+    {
+      "id": "ln4.2",
+      "level": 4,
+      "title": "A Conversation at the Library",
+      "text": "Meera went to the library desk. Excuse me, she said, I need a book about volcanoes for my project. The librarian smiled. Do you want a story or facts? Facts, please, said Meera. With pictures, if possible. The librarian took her to the science shelf and found two books. You may borrow one for two weeks, she said. Meera chose the one with the most pictures. Please bring it back on time, said the librarian, so that other children can use it too. Meera wrote the date in her diary.",
+      "questions": [
+        {
+          "id": "ln4.2.q1",
+          "skill": "detail",
+          "prompt": "What was Meera's project about?",
+          "right": "Volcanoes",
+          "wrong": [
+            "Rivers",
+            "Dinosaurs"
+          ],
+          "explain": "She needed a book about volcanoes."
+        },
+        {
+          "id": "ln4.2.q2",
+          "skill": "detail",
+          "prompt": "What kind of book did she want?",
+          "right": "Facts with pictures",
+          "wrong": [
+            "A story with pictures",
+            "A book of poems"
+          ],
+          "explain": "Facts, please, with pictures if possible."
+        },
+        {
+          "id": "ln4.2.q3",
+          "skill": "detail",
+          "prompt": "How long could she keep the book?",
+          "right": "Two weeks",
+          "wrong": [
+            "One week",
+            "A month"
+          ],
+          "explain": "You may borrow one for two weeks."
+        },
+        {
+          "id": "ln4.2.q4",
+          "skill": "cause",
+          "prompt": "Why should she return it on time?",
+          "right": "Other children can use it",
+          "wrong": [
+            "The book is old",
+            "The library will close"
+          ],
+          "explain": "So that other children can use it too."
+        }
+      ]
+    },
+    {
+      "id": "ln4.3",
+      "level": 4,
+      "title": "The Football Match",
+      "text": "Our team was losing by one goal with five minutes left. The ground was muddy after the rain and the ball kept stopping. Our captain, Joseph, told us to pass short instead of kicking long. We passed quickly from player to player until Fatima was near the goal. She shot low and the ball slid under the keeper. One goal each! Nobody scored again. At the end, both teams shook hands. Our coach said that changing the plan in the mud had saved the match.",
+      "questions": [
+        {
+          "id": "ln4.3.q1",
+          "skill": "detail",
+          "prompt": "How long was left when they were losing?",
+          "right": "Five minutes",
+          "wrong": [
+            "Ten minutes",
+            "Half an hour"
+          ],
+          "explain": "Our team was losing with five minutes left."
+        },
+        {
+          "id": "ln4.3.q2",
+          "skill": "cause",
+          "prompt": "Why did the ball keep stopping?",
+          "right": "The ground was muddy",
+          "wrong": [
+            "The ball was flat",
+            "It was windy"
+          ],
+          "explain": "The ground was muddy after the rain."
+        },
+        {
+          "id": "ln4.3.q3",
+          "skill": "detail",
+          "prompt": "Who scored the goal?",
+          "right": "Fatima",
+          "wrong": [
+            "Joseph",
+            "The coach"
+          ],
+          "explain": "Fatima shot low and the ball slid under the keeper."
+        },
+        {
+          "id": "ln4.3.q4",
+          "skill": "inference",
+          "prompt": "What did the coach praise?",
+          "right": "Changing the plan",
+          "wrong": [
+            "Kicking the ball long",
+            "Playing in the rain"
+          ],
+          "explain": "Changing the plan in the mud had saved the match."
+        }
+      ]
+    },
+    {
+      "id": "ln4.4",
+      "level": 4,
+      "title": "The Old Clock",
+      "text": "In the hall of our school there is a tall clock that is over a hundred years old. Last year it stopped, and nobody knew how to mend it. A retired watchmaker who lived nearby offered to help. Every Saturday for a month, he opened the clock and cleaned its tiny wheels. He showed some of us how the parts fitted together. On the first day of the new term, the clock struck nine just as the bell rang. The whole school cheered, and we invited the watchmaker to our assembly to thank him.",
+      "questions": [
+        {
+          "id": "ln4.4.q1",
+          "skill": "detail",
+          "prompt": "How old is the clock?",
+          "right": "Over a hundred years",
+          "wrong": [
+            "About ten years",
+            "Fifty years"
+          ],
+          "explain": "It is over a hundred years old."
+        },
+        {
+          "id": "ln4.4.q2",
+          "skill": "detail",
+          "prompt": "Who mended the clock?",
+          "right": "A retired watchmaker",
+          "wrong": [
+            "The head teacher",
+            "A student"
+          ],
+          "explain": "A retired watchmaker who lived nearby offered to help."
+        },
+        {
+          "id": "ln4.4.q3",
+          "skill": "detail",
+          "prompt": "When did he work on it?",
+          "right": "Every Saturday for a month",
+          "wrong": [
+            "Every evening after school",
+            "Only on one holiday"
+          ],
+          "explain": "Every Saturday for a month, he cleaned its wheels."
+        },
+        {
+          "id": "ln4.4.q4",
+          "skill": "cause",
+          "prompt": "Why did the school cheer?",
+          "right": "The clock worked again",
+          "wrong": [
+            "It was a holiday",
+            "They won a prize"
+          ],
+          "explain": "The clock struck nine just as the bell rang."
+        }
+      ]
+    },
+    {
+      "id": "ln4.5",
+      "level": 4,
+      "title": "Lost at the Fair",
+      "text": "At the town fair, Sunil let go of his mother's hand to look at a magic show. When it ended, she was gone. Sunil felt his heart beating fast. He remembered what his mother had told him. If you are lost, stay where you are and find someone in a uniform. He saw a guard near the gate and told him his name and his mother's phone number. The guard spoke into a loudspeaker. A few minutes later his mother came running. She hugged him and said he had been very sensible.",
+      "questions": [
+        {
+          "id": "ln4.5.q1",
+          "skill": "cause",
+          "prompt": "Why did Sunil let go of his mother's hand?",
+          "right": "To watch a magic show",
+          "wrong": [
+            "To buy a balloon",
+            "To find a friend"
+          ],
+          "explain": "He let go to look at a magic show."
+        },
+        {
+          "id": "ln4.5.q2",
+          "skill": "detail",
+          "prompt": "What had his mother told him to do?",
+          "right": "Stay and find someone in uniform",
+          "wrong": [
+            "Run home quickly",
+            "Shout as loud as he could"
+          ],
+          "explain": "Stay where you are and find someone in a uniform."
+        },
+        {
+          "id": "ln4.5.q3",
+          "skill": "detail",
+          "prompt": "What did Sunil tell the guard?",
+          "right": "His name and his mother's number",
+          "wrong": [
+            "Where he lived",
+            "What he wanted to buy"
+          ],
+          "explain": "He told him his name and his mother's phone number."
+        },
+        {
+          "id": "ln4.5.q4",
+          "skill": "inference",
+          "prompt": "How did his mother feel about what he did?",
+          "right": "Proud",
+          "wrong": [
+            "Angry",
+            "Puzzled"
+          ],
+          "explain": "She hugged him and said he had been very sensible."
+        }
+      ]
+    },
+    {
+      "id": "ln5.1",
+      "level": 5,
+      "title": "A Talk on Road Safety",
+      "text": "Good morning, everyone. Today I want to talk about crossing the road safely, because many of you walk to school. First, always cross at a zebra crossing or with a traffic warden. Second, stop at the edge of the pavement and look right, then left, then right again. Third, keep looking and listening while you cross, and never run. Many accidents happen because people are looking at a phone instead of the road. Finally, wear something bright on dark, rainy mornings so drivers can see you. These rules take only a few seconds, but they can save a life. Please share them with your younger brothers and sisters. Thank you for listening.",
+      "questions": [
+        {
+          "id": "ln5.1.q1",
+          "skill": "main_idea",
+          "prompt": "What is the talk mainly about?",
+          "right": "Crossing the road safely",
+          "wrong": [
+            "Riding a bicycle",
+            "Learning to drive"
+          ],
+          "explain": "Today I want to talk about crossing the road safely."
+        },
+        {
+          "id": "ln5.1.q2",
+          "skill": "sequence",
+          "prompt": "Which way should you look first?",
+          "right": "Right",
+          "wrong": [
+            "Left",
+            "Straight ahead"
+          ],
+          "explain": "Look right, then left, then right again."
+        },
+        {
+          "id": "ln5.1.q3",
+          "skill": "cause",
+          "prompt": "Why do many accidents happen, says the speaker?",
+          "right": "People look at phones",
+          "wrong": [
+            "Roads are too narrow",
+            "Cars are too fast"
+          ],
+          "explain": "People are looking at a phone instead of the road."
+        },
+        {
+          "id": "ln5.1.q4",
+          "skill": "detail",
+          "prompt": "What should you wear on dark mornings?",
+          "right": "Something bright",
+          "wrong": [
+            "A raincoat only",
+            "Dark clothes"
+          ],
+          "explain": "Wear something bright on dark, rainy mornings."
+        }
+      ]
+    },
+    {
+      "id": "ln5.2",
+      "level": 5,
+      "title": "The Shy New Girl",
+      "text": "When Zoya joined our class in the middle of the year, she hardly spoke. At lunch she sat alone and read a book. Some of us thought she was proud, but Kavya noticed that the book was about birds. Kavya loved birds too, so she asked Zoya which bird was her favourite. Zoya's face lit up. She talked for ten minutes about kingfishers and how they dive. The next week, the two girls started a bird club. By the end of term, half the class had joined, and Zoya was leading walks around the school pond every Friday afternoon.",
+      "questions": [
+        {
+          "id": "ln5.2.q1",
+          "skill": "detail",
+          "prompt": "What did Zoya do at lunch at first?",
+          "right": "Read a book alone",
+          "wrong": [
+            "Played football",
+            "Ate with Kavya"
+          ],
+          "explain": "At lunch she sat alone and read a book."
+        },
+        {
+          "id": "ln5.2.q2",
+          "skill": "inference",
+          "prompt": "Why did Zoya hardly speak?",
+          "right": "She was shy and new",
+          "wrong": [
+            "She was proud",
+            "She was angry"
+          ],
+          "explain": "She was new and shy, though some thought she was proud."
+        },
+        {
+          "id": "ln5.2.q3",
+          "skill": "detail",
+          "prompt": "What was Zoya's favourite bird?",
+          "right": "The kingfisher",
+          "wrong": [
+            "The peacock",
+            "The parrot"
+          ],
+          "explain": "She talked about kingfishers and how they dive."
+        },
+        {
+          "id": "ln5.2.q4",
+          "skill": "main_idea",
+          "prompt": "What does the story show?",
+          "right": "Finding a shared interest helps",
+          "wrong": [
+            "Clubs are hard work",
+            "Books are better than friends"
+          ],
+          "explain": "A shared love of birds made them friends."
+        }
+      ]
+    },
+    {
+      "id": "ln5.3",
+      "level": 5,
+      "title": "The Science Fair Mistake",
+      "text": "For the science fair, Vikram built a model of a windmill that was meant to light a small bulb. At home it had worked perfectly. But on the day, under the bright hall lights, the bulb stayed dark. Vikram checked the wires twice and found nothing wrong. His teacher asked him to explain how the model was supposed to work. As he spoke, Vikram realised the hall had no wind. He borrowed a small fan from the office and switched it on. The blades turned and the bulb glowed. The judges said he had shown the most important skill in science: finding out what went wrong.",
+      "questions": [
+        {
+          "id": "ln5.3.q1",
+          "skill": "detail",
+          "prompt": "What was Vikram's model?",
+          "right": "A windmill",
+          "wrong": [
+            "A volcano",
+            "A water pump"
+          ],
+          "explain": "He built a model of a windmill."
+        },
+        {
+          "id": "ln5.3.q2",
+          "skill": "cause",
+          "prompt": "Why did the bulb stay dark?",
+          "right": "There was no wind",
+          "wrong": [
+            "A wire was broken",
+            "The bulb was broken"
+          ],
+          "explain": "He realised the hall had no wind."
+        },
+        {
+          "id": "ln5.3.q3",
+          "skill": "sequence",
+          "prompt": "What did Vikram do after explaining the model?",
+          "right": "Borrowed a fan",
+          "wrong": [
+            "Went home",
+            "Changed the bulb"
+          ],
+          "explain": "He borrowed a small fan from the office and switched it on."
+        },
+        {
+          "id": "ln5.3.q4",
+          "skill": "inference",
+          "prompt": "What did the judges value most?",
+          "right": "Working out the problem",
+          "wrong": [
+            "A shiny, neat model",
+            "The brightest bulb"
+          ],
+          "explain": "The most important skill is finding out what went wrong."
+        }
+      ]
+    },
+    {
+      "id": "ln5.4",
+      "level": 5,
+      "title": "A Phone Call to Aunt Rekha",
+      "text": "Hello, Aunt Rekha, it's Tara. Mother asked me to call about Sunday. Yes, we are all coming for lunch, but we will be a little late, because my brother has a cricket match in the morning. We should reach your house by one o'clock instead of twelve. Mother wants to know if she should bring anything. Oh, a sweet dish? Yes, she makes very good kheer. I will tell her. And Aunt Rekha, please could you keep a piece of your lemon pickle for me? Thank you! See you on Sunday. Bye.",
+      "questions": [
+        {
+          "id": "ln5.4.q1",
+          "skill": "detail",
+          "prompt": "What day is the lunch?",
+          "right": "Sunday",
+          "wrong": [
+            "Saturday",
+            "Friday"
+          ],
+          "explain": "Mother asked me to call about Sunday."
+        },
+        {
+          "id": "ln5.4.q2",
+          "skill": "cause",
+          "prompt": "Why will they be late?",
+          "right": "Her brother has a match",
+          "wrong": [
+            "The car is broken",
+            "Tara has an exam"
+          ],
+          "explain": "My brother has a cricket match in the morning."
+        },
+        {
+          "id": "ln5.4.q3",
+          "skill": "detail",
+          "prompt": "What time will they reach?",
+          "right": "One o'clock",
+          "wrong": [
+            "Twelve o'clock",
+            "Two o'clock"
+          ],
+          "explain": "We should reach by one o'clock instead of twelve."
+        },
+        {
+          "id": "ln5.4.q4",
+          "skill": "inference",
+          "prompt": "What did Aunt Rekha ask them to bring?",
+          "right": "A sweet dish",
+          "wrong": [
+            "Lemon pickle",
+            "Some rice"
+          ],
+          "explain": "Tara says: Oh, a sweet dish? Yes, she makes very good kheer."
+        }
+      ]
+    },
+    {
+      "id": "ln5.5",
+      "level": 5,
+      "title": "The Village Well",
+      "text": "For many years, the women of a small village walked two kilometres each morning to fetch water from a river. The girls often went with them and missed the start of school. One year the village council decided to dig a well in the middle of the village. Everyone helped, carrying soil and stones in baskets. After six weeks of digging, they reached water. Now the walk takes two minutes, not an hour. The girls arrive at school on time, and the river path is used only for evening walks.",
+      "questions": [
+        {
+          "id": "ln5.5.q1",
+          "skill": "detail",
+          "prompt": "How far was the river?",
+          "right": "Two kilometres",
+          "wrong": [
+            "Two hundred metres",
+            "Ten kilometres"
+          ],
+          "explain": "They walked two kilometres each morning."
+        },
+        {
+          "id": "ln5.5.q2",
+          "skill": "cause",
+          "prompt": "Why did the girls miss the start of school?",
+          "right": "They went to fetch water",
+          "wrong": [
+            "The school was far",
+            "They overslept"
+          ],
+          "explain": "The girls often went with them and missed the start of school."
+        },
+        {
+          "id": "ln5.5.q3",
+          "skill": "detail",
+          "prompt": "How long did the digging take?",
+          "right": "Six weeks",
+          "wrong": [
+            "Six days",
+            "Six months"
+          ],
+          "explain": "After six weeks of digging, they reached water."
+        },
+        {
+          "id": "ln5.5.q4",
+          "skill": "main_idea",
+          "prompt": "What changed because of the well?",
+          "right": "The girls get to school on time",
+          "wrong": [
+            "The river dried up",
+            "The village got bigger"
+          ],
+          "explain": "Now the girls arrive at school on time."
+        }
+      ]
+    },
+    {
+      "id": "ln6.1",
+      "level": 6,
+      "title": "The Debate",
+      "text": "The topic of the school debate was whether homework should be stopped in primary classes. Aditya spoke first and said that children need time to play, rest and be with their families, and that tired children learn less. Neha argued the other side. She agreed that too much homework is harmful, but said a little practice at home helps children remember what they learned and teaches them to work on their own. She gave the example of learning tables, which needs practice every day. The judges found both speeches strong. In the end they gave the prize to Neha, because she had answered Aditya's points instead of only making her own. Aditya shook her hand and said he would remember that next time.",
+      "questions": [
+        {
+          "id": "ln6.1.q1",
+          "skill": "detail",
+          "prompt": "What was the debate about?",
+          "right": "Homework in primary classes",
+          "wrong": [
+            "Wearing school uniforms",
+            "Having longer holidays"
+          ],
+          "explain": "Whether homework should be stopped in primary classes."
+        },
+        {
+          "id": "ln6.1.q2",
+          "skill": "detail",
+          "prompt": "What example did Neha give?",
+          "right": "Learning tables",
+          "wrong": [
+            "Reading stories",
+            "Drawing maps"
+          ],
+          "explain": "She gave the example of learning tables."
+        },
+        {
+          "id": "ln6.1.q3",
+          "skill": "cause",
+          "prompt": "Why did Neha win?",
+          "right": "She answered Aditya's points",
+          "wrong": [
+            "She spoke for longer",
+            "She spoke first"
+          ],
+          "explain": "She had answered Aditya's points instead of only making her own."
+        },
+        {
+          "id": "ln6.1.q4",
+          "skill": "inference",
+          "prompt": "How did Aditya take losing?",
+          "right": "Well, and he learned from it",
+          "wrong": [
+            "Badly, and he left",
+            "He did not care"
+          ],
+          "explain": "He shook her hand and said he would remember that."
+        }
+      ]
+    },
+    {
+      "id": "ln6.2",
+      "level": 6,
+      "title": "The Night the Lights Went Out",
+      "text": "During the storm, the electricity failed just as the family sat down to dinner. At first there were complaints. The fan stopped, the television went silent and the phones were almost out of charge. Father found two candles and placed them on the table. Without the television, Grandmother began to tell stories about her own childhood in a village without electricity at all. She described studying by a kerosene lamp and walking to school in the rain. The children asked question after question. When the lights came back two hours later, nobody moved to switch the television on. Months afterwards, the children still talked about that evening as one of the best they could remember.",
+      "questions": [
+        {
+          "id": "ln6.2.q1",
+          "skill": "cause",
+          "prompt": "Why did the electricity fail?",
+          "right": "There was a storm",
+          "wrong": [
+            "A bill was not paid",
+            "A wire was cut"
+          ],
+          "explain": "During the storm, the electricity failed."
+        },
+        {
+          "id": "ln6.2.q2",
+          "skill": "detail",
+          "prompt": "What did Father do?",
+          "right": "Found two candles",
+          "wrong": [
+            "Called an electrician",
+            "Went to bed"
+          ],
+          "explain": "Father found two candles and placed them on the table."
+        },
+        {
+          "id": "ln6.2.q3",
+          "skill": "detail",
+          "prompt": "What did Grandmother study by as a child?",
+          "right": "A kerosene lamp",
+          "wrong": [
+            "Candlelight",
+            "Moonlight"
+          ],
+          "explain": "She described studying by a kerosene lamp."
+        },
+        {
+          "id": "ln6.2.q4",
+          "skill": "inference",
+          "prompt": "Why did nobody switch the television on?",
+          "right": "They were enjoying the stories",
+          "wrong": [
+            "The television was broken",
+            "It was much too late"
+          ],
+          "explain": "The children were still asking question after question."
+        }
+      ]
+    },
+    {
+      "id": "ln6.3",
+      "level": 6,
+      "title": "An Announcement at the Station",
+      "text": "Attention, please. This is an announcement for passengers waiting for the express train to Chennai. Because of heavy rain further up the line, the train is running about forty minutes late. It will now arrive on platform three, not platform one. Passengers are requested to cross using the footbridge and not to walk across the tracks under any circumstances. Tea and snacks are available at the stall near the waiting room. Passengers travelling with small children or heavy luggage may ask the staff at the enquiry counter for help. We are sorry for the delay and thank you for your patience.",
+      "questions": [
+        {
+          "id": "ln6.3.q1",
+          "skill": "detail",
+          "prompt": "Where is the train going?",
+          "right": "Chennai",
+          "wrong": [
+            "Mumbai",
+            "Delhi"
+          ],
+          "explain": "The express train to Chennai."
+        },
+        {
+          "id": "ln6.3.q2",
+          "skill": "cause",
+          "prompt": "Why is the train late?",
+          "right": "Heavy rain up the line",
+          "wrong": [
+            "An engine fault",
+            "A strike"
+          ],
+          "explain": "Because of heavy rain further up the line."
+        },
+        {
+          "id": "ln6.3.q3",
+          "skill": "detail",
+          "prompt": "Which platform will the train now arrive at?",
+          "right": "Platform three",
+          "wrong": [
+            "Platform one",
+            "Platform two"
+          ],
+          "explain": "It will now arrive on platform three, not platform one."
+        },
+        {
+          "id": "ln6.3.q4",
+          "skill": "inference",
+          "prompt": "Why must passengers use the footbridge?",
+          "right": "Walking on the tracks is dangerous",
+          "wrong": [
+            "The lift is not working",
+            "It is the quicker way"
+          ],
+          "explain": "They must never walk across the tracks."
+        }
+      ]
+    },
+    {
+      "id": "ln6.4",
+      "level": 6,
+      "title": "The Gardener's Lesson",
+      "text": "When Ishaan's family moved to a house with a garden, he wanted flowers at once. He planted seeds one evening and dug them up three days later to see if they were growing. Of course, nothing had happened, and some seeds were damaged. The old gardener next door watched him and laughed kindly. He explained that seeds need water, sunlight and time, and that digging them up only disturbs the roots. He gave Ishaan fresh seeds and a small notebook. Write down what you see each morning, he said, without touching anything. Three weeks later, the first green shoots appeared, and Ishaan's notebook showed exactly when each one had come up.",
+      "questions": [
+        {
+          "id": "ln6.4.q1",
+          "skill": "sequence",
+          "prompt": "What did Ishaan do three days after planting?",
+          "right": "Dug up the seeds",
+          "wrong": [
+            "Watered the seeds",
+            "Bought more seeds"
+          ],
+          "explain": "He dug them up three days later to see if they were growing."
+        },
+        {
+          "id": "ln6.4.q2",
+          "skill": "detail",
+          "prompt": "What did the gardener say seeds need?",
+          "right": "Water, sunlight and time",
+          "wrong": [
+            "Digging and fertiliser",
+            "Shade and cold"
+          ],
+          "explain": "Seeds need water, sunlight and time."
+        },
+        {
+          "id": "ln6.4.q3",
+          "skill": "detail",
+          "prompt": "What did the gardener give him?",
+          "right": "Fresh seeds and a notebook",
+          "wrong": [
+            "A spade and gloves",
+            "A watering can"
+          ],
+          "explain": "He gave Ishaan fresh seeds and a small notebook."
+        },
+        {
+          "id": "ln6.4.q4",
+          "skill": "main_idea",
+          "prompt": "What lesson does Ishaan learn?",
+          "right": "Some things need patience",
+          "wrong": [
+            "Gardens are boring",
+            "Old seeds grow faster"
+          ],
+          "explain": "Waiting and watching, not digging, brought the shoots."
+        }
+      ]
+    },
+    {
+      "id": "ln6.5",
+      "level": 6,
+      "title": "The Missing Medal",
+      "text": "On the morning of sports day, the gold medal for the relay race went missing from the prize table. The teachers searched the hall but found nothing. Lalitha, who was in charge of the table, remembered that a strong wind had blown through the open windows earlier, scattering the ribbons. She looked carefully along the wall and then outside, beneath the window. There, caught in a bush, was the medal on its blue ribbon. Some people had suspected one of the younger children who had been playing near the table. Lalitha said they should never blame anyone without proof. The medal was presented that afternoon, and the head teacher thanked Lalitha for thinking clearly when others were rushing to conclusions.",
+      "questions": [
+        {
+          "id": "ln6.5.q1",
+          "skill": "detail",
+          "prompt": "Which medal went missing?",
+          "right": "The gold medal for the relay",
+          "wrong": [
+            "The silver medal",
+            "The long jump medal"
+          ],
+          "explain": "The gold medal for the relay race went missing."
+        },
+        {
+          "id": "ln6.5.q2",
+          "skill": "cause",
+          "prompt": "How had the medal left the table?",
+          "right": "The wind blew it",
+          "wrong": [
+            "A child took it",
+            "A teacher moved it"
+          ],
+          "explain": "A strong wind had blown through the open windows, scattering the ribbons."
+        },
+        {
+          "id": "ln6.5.q3",
+          "skill": "detail",
+          "prompt": "Where was the medal found?",
+          "right": "In a bush under the window",
+          "wrong": [
+            "Under the prize table",
+            "In a classroom"
+          ],
+          "explain": "It was caught in a bush beneath the window."
+        },
+        {
+          "id": "ln6.5.q4",
+          "skill": "inference",
+          "prompt": "What did the head teacher praise?",
+          "right": "Thinking clearly before blaming",
+          "wrong": [
+            "Running the fastest race",
+            "Tidying the hall quickly"
+          ],
+          "explain": "Lalitha thought clearly when others were rushing to conclusions."
         }
       ]
     }
