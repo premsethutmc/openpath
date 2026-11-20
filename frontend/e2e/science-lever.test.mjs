@@ -7,8 +7,9 @@ for (const width of [320, 390]) test(`Lift the Rock at ${width}px: first tap aft
   const server = await serveScience();
   let browser;
   try {
-    browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+    browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, timeout: 10000 });
     const page = await browser.newPage({ viewport:{width,height:790}, hasTouch:true, isMobile:true, reducedMotion:'reduce' });
+    page.setDefaultTimeout(6500);
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     page.on('response', response => { if (response.status() >= 400) errors.push(response.url()); });
