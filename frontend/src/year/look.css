@@ -215,6 +215,7 @@ details.working summary, .hint { color: var(--ink); }
 .kid-slot { min-height: 54px; border-radius: 16px; border: 2px dashed var(--line); }
 .kid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .qcard label.kid-unit { display: flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--ink); min-width: 0; }
+.qcard .kid-unit .kid-key { flex: 0 0 auto; min-width: 56px; min-height: 56px; font-size: 1.6rem; font-weight: 800; padding: 0 14px; border-radius: 16px; }
 .qcard .kid-unit input { flex: 1 1 auto; width: 100%; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
 
 /* feedback@1: a quiet link under each question and lesson; ticks for testers */
