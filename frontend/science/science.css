@@ -19,3 +19,7 @@
 .seed-icon::after { content: ''; position: absolute; left: 42%; top: 49%; width: 3%; height: 24%; transform: rotate(21deg); background: #257e56; }
 .prism-icon { background: #182645; }
 .prism-icon span { width: 60%; height: 47%; background: linear-gradient(115deg,#e7f8ff 25%,#ff777b 47%,#ffd983 56%,#91ddeb 72%,#d190fc 85%); clip-path: polygon(28% 0, 100% 100%, 0 100%); }
+
+.salt-icon { background:linear-gradient(145deg,#b9dfe4 45%,#d6b180 46% 73%,#b47e56 74%); }
+.salt-icon span,.salt-icon::after { content:''; width:15%; aspect-ratio:1; background:#fff8e3; border:1px solid #8d8170; transform:rotate(45deg); }
+.salt-icon::after { position:absolute; top:62%; left:57%; width:11%; }

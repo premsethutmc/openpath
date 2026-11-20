@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Where did the salt go? · OpenPath</title>
+  <link rel="stylesheet" href="../pressure-in-sand/lab.css">
+  <link rel="stylesheet" href="../science.css">
+  <link rel="stylesheet" href="./salt.css">
+  <script type="module" src="./salt.mjs"></script>
+</head>
+<body>
+  <header class="top"><span class="brand">OpenPath</span><span class="label">Science lab / 04</span></header>
+  <main>
+    <nav class="lab-back" aria-label="Science labs"><a href="../">← All science labs</a></nav>
+    <div class="intro">
+      <p class="eyebrow">Chemistry · Separating mixtures</p>
+      <h1>Where did the salt go?</h1>
+      <p class="subtitle">Take a salt-and-sand mix and get both solids back, separately.</p>
+    </div>
+    <section id="bench" aria-labelledby="bench-title">
+      <div class="bench-top">
+        <h2 id="bench-title" tabindex="-1">Mix station</h2>
+        <button type="button" class="secondary" id="particles" aria-pressed="false">Particle view</button>
+      </div>
+      <figure class="bench-scene">
+        <svg id="scene" viewBox="0 0 348 180" role="img" aria-labelledby="scene-label" data-phase="dry" data-view="bench">
+          <title id="scene-label">White salt crystals and dark sand grains together in a beaker.</title>
+          <defs>
+            <pattern id="grit" width="19" height="14" patternUnits="userSpaceOnUse"><circle cx="4" cy="5" r="1.6" fill="#493426"/><circle cx="12" cy="9" r="1.9" fill="#8a5535"/><circle cx="17" cy="3" r="1.5" fill="#563521"/></pattern>
+            <pattern id="crystals" width="20" height="14" patternUnits="userSpaceOnUse"><path d="m3 2 3 3-3 3-3-3Zm10 5 4 3-4 3-4-3Z" fill="#fff8e3" stroke="#817f7b" stroke-width=".6"/></pattern>
+            <g id="ions"><g fill="#70478e"><circle cx="64" cy="59" r="8"/><circle cx="125" cy="88" r="8"/><circle cx="188" cy="54" r="8"/><circle cx="259" cy="98" r="8"/><circle cx="285" cy="50" r="8"/></g><g fill="#08644f"><circle cx="107" cy="50" r="8"/><circle cx="80" cy="105" r="8"/><circle cx="163" cy="102" r="8"/><circle cx="222" cy="85" r="8"/><circle cx="264" cy="64" r="8"/></g></g>
+          </defs>
+          <rect width="348" height="180" fill="#e4eee9"/>
+          <path d="M0 143H348V180H0" fill="#cde0d4"/>
+          <g class="normal">
+            <g class="beaker">
+              <ellipse cx="140" cy="147" rx="83" ry="12" fill="#9dbda9"/>
+              <path d="M68 37H205L194 128Q191 142 180 143H87Q75 141 73 129Z" fill="#f8fffa" stroke="#52776e" stroke-width="3"/>
+              <path class="liquid" d="M75 81Q117 79 151 83T197 80L190 125Q187 139 177 139H88Q80 137 78 127Z" fill="#a4d9e5"/>
+              <path class="sand" d="M79 128Q107 112 137 122T189 126L187 134Q179 140 172 140H92Q84 139 79 128Z" fill="#c2905d"/>
+              <path class="sand" d="M79 128Q107 112 137 122T189 126L187 134Q179 140 172 140H92Q84 139 79 128Z" fill="url(#grit)"/>
+              <path class="salt" d="M82 124Q122 112 154 124T186 126L181 138H89Z" fill="url(#crystals)"/>
+              <path d="M64 36H208m-26 35h13m-14 19h12m-15 18h14" fill="none" stroke="#52776e" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <g class="strainer">
+              <path d="M220 48H313L274 103V123H258V103Z" fill="#fbf9e9" stroke="#52776e" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M227 53H305L266 88Z" fill="#be8b5d"/><path d="M227 53H305L266 88Z" fill="url(#grit)"/>
+              <path d="M246 139H288" stroke="#52776e" stroke-width="3" stroke-linecap="round"/>
+              <text x="267" y="158" text-anchor="middle">Sand saved</text>
+            </g>
+            <g class="steam" fill="none" stroke="#5a8c98" stroke-width="2" stroke-linecap="round">
+              <path d="m102 103 12-9q7-7-3-11t4-14M143 99q15-8 7-15t9-13m18 26q10-6 6-12t8-11"/>
+            </g>
+            <text class="salt-saved" x="137" y="164" text-anchor="middle">Salt saved</text>
+          </g>
+          <g class="molecular">
+            <rect class="water-field" x="29" y="29" width="290" height="103" rx="14" fill="#a4d9e5" stroke="#4a7381" stroke-width="2"/>
+            <g class="free-ions"><use href="#ions"/></g>
+            <g class="cluster">
+              <path d="M144 90H204V126H144Z" fill="url(#crystals)" stroke="#8e8171" stroke-width="2"/>
+              <circle cx="160" cy="105" r="7" fill="#70478e"/><circle cx="177" cy="105" r="7" fill="#08644f"/><circle cx="193" cy="105" r="7" fill="#70478e"/>
+              <circle cx="160" cy="119" r="7" fill="#08644f"/><circle cx="177" cy="119" r="7" fill="#70478e"/><circle cx="193" cy="119" r="7" fill="#08644f"/>
+            </g>
+            <g class="solid-grains" fill="#805636"><path d="m39 117 8-11 12 1 6 13-11 10-13-4Z"/><path d="m90 114 11-6 13 10-4 12-15 1-7-7Z"/><path d="m227 116 14-9 12 10-4 13-16 1Z"/><path d="m277 114 7-9 15 6 6 11-12 9-13-3Z"/></g>
+            <g class="particle-filter">
+              <path d="M40 63H137L97 111V126H82V111Z" fill="#fff9e6" stroke="#52776e" stroke-width="2"/>
+              <path d="M48 69H129L90 108Z" fill="#c2905d"/><path d="M48 69H129L90 108Z" fill="url(#grit)"/>
+              <path d="M113 121q26-2 61-2m-8-7 8 7-8 6" fill="none" stroke="#52776e" stroke-width="2"/>
+              <rect x="181" y="53" width="133" height="77" rx="9" fill="#a4d9e5" stroke="#4a7381" stroke-width="2"/>
+              <use href="#ions" transform="translate(176 41) scale(.45 .75)"/>
+              <text x="89" y="155" text-anchor="middle">Sand held back</text>
+              <text x="245" y="155" text-anchor="middle">Collected salty water</text>
+            </g>
+            <g class="molecule-vapour" fill="#789ac0"><circle cx="101" cy="50" r="5"/><circle cx="147" cy="40" r="5"/><circle cx="192" cy="48" r="5"/><circle cx="237" cy="37" r="5"/><text x="174" y="75" text-anchor="middle">Water vapour</text></g>
+          </g>
+        </svg>
+        <figcaption id="observation" aria-live="polite">The salt and sand are mixed together.</figcaption>
+      </figure>
+      <p id="ion-key" class="ion-key" hidden><span class="ion sodium"></span> Sodium ion <span class="ion chloride"></span> Chloride ion</p>
+      <div id="tools" class="tools" aria-label="Lab tools">
+        <button type="button" class="secondary" data-action="water">Add water</button>
+        <button type="button" class="secondary" data-action="stir">Stir</button>
+        <button type="button" class="secondary" data-action="filter">Filter</button>
+        <button type="button" class="secondary" data-action="evaporate">Evaporate</button>
+      </div>
+      <p id="status" role="status">Choose a tool and see what changes.</p>
+      <button type="button" id="challenge" hidden>Try a new situation →</button>
+      <p class="small">Simulation only. The liquid is not drinking water.</p>
+    </section>
+    <section id="apply" aria-labelledby="apply-title" hidden>
+      <h2 id="apply-title" tabindex="-1">A new situation</h2>
+      <p>You have a bowl of clear water with sugar dissolved in it. You want the sugar back.</p>
+      <form id="check">
+        <fieldset class="choice-row">
+          <legend>What would you try?</legend>
+          <label><input name="method" type="radio" value="filter" required>Filter it</label>
+          <label><input name="method" type="radio" value="evaporate">Let the water evaporate</label>
+          <label><input name="method" type="radio" value="stir">Stir it</label>
+        </fieldset>
+        <fieldset class="choice-row reasons">
+          <legend>Why?</legend>
+          <label><input name="reason" type="radio" value="holes" required>A filter catches any dissolved solid.</label>
+          <label><input name="reason" type="radio" value="mixing">Stirring pulls the sugar out.</label>
+          <label><input name="reason" type="radio" value="vapour">Water goes into the air, leaving the sugar behind.</label>
+        </fieldset>
+        <button type="submit">Check my idea</button>
+      </form>
+      <div class="insight" id="feedback" tabindex="-1" hidden>
+        <h3 id="result"></h3><p id="explanation"></p>
+        <div class="actions"><button type="button" id="retry">Try again</button><button type="button" class="secondary" id="replay">Replay the lab</button></div>
+      </div>
+    </section>
+    <noscript><p>Turn on JavaScript to use the lab.</p></noscript>
+  </main>
+  <footer>Practice lab · Nothing is saved or sent.</footer>
+</body>
+</html>

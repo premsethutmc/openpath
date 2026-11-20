@@ -17,6 +17,10 @@ const files = new Map([
   ['/prism/prism.css', ['prism/prism.css', 'text/css']],
   ['/prism/prism.mjs', ['prism/prism.mjs', 'text/javascript']],
   ['/prism/model.mjs', ['prism/model.mjs', 'text/javascript']],
+  ['/salt-from-sand/', ['salt-from-sand/index.html', 'text/html']],
+  ['/salt-from-sand/model.mjs', ['salt-from-sand/model.mjs', 'text/javascript']],
+  ['/salt-from-sand/salt.css', ['salt-from-sand/salt.css', 'text/css']],
+  ['/salt-from-sand/salt.mjs', ['salt-from-sand/salt.mjs', 'text/javascript']],
 ]);
 
 export async function serveScience() {
