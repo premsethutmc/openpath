@@ -12,10 +12,10 @@ import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
 import { syllabusFor } from "../syllabus/syllabus.ts";
 
-test("LA-1 content: five passages at each of six levels, four questions each, the right choice in no favoured place", () => {
+test("LA-1 content: ten passages at each of six levels, four questions each, the right choice in no favoured place", () => {
   assert.deepEqual(listeningProblems(LISTENING), []);
   const place = [0, 0, 0];
-  for (const l of LISTENING.levels) assert.equal(LISTENING.passages.filter((p) => p.level === l.id).length, 5, `level ${l.id}`);
+  for (const l of LISTENING.levels) assert.equal(LISTENING.passages.filter((p) => p.level === l.id).length, 10, `level ${l.id}`);
   for (const p of LISTENING.passages) {
     assert.equal(p.questions.length, QUESTIONS);
     assert.equal(sentences(p.text).join(" "), p.text, "read aloud sentence by sentence, nothing lost");
@@ -27,7 +27,7 @@ test("LA-1 content: five passages at each of six levels, four questions each, th
     }
   }
   assert.equal(LISTENING.levels.length, 6);
-  assert.deepEqual(place, [40, 40, 40]);
+  assert.deepEqual(place, [80, 80, 80]);
   // ICSE Class 7 LS1: a conversation, a speech and a poem, besides stories and factual passages
   for (const t of ["At the Ticket Window", "A Speech to the School", "When the Rain Comes (a poem)"]) assert.ok(LISTENING.passages.some((p) => p.title === t), t);
   // a passage that states facts about the world names what it was checked against
@@ -85,26 +85,26 @@ test("LA-3 the level moves after four right or one right; passages do not repeat
   assert.deepEqual([sit(2, []).done.nextLevel, sit(2, [], 1).done.nextLevel, sit(2, [], 3).done.nextLevel, sit(6, []).done.nextLevel, sit(1, [], 4).done.nextLevel], [3, 2, 1, 6, 1]);
   let h: ListenRecord[] = [];
   const heard: string[] = [];
-  for (let k = 0; k < 5; k++) {
+  for (let k = 0; k < 10; k++) {
     const r = sit(2, h, 1);
     heard.push(r.passage);
     h = r.records;
   }
-  assert.equal(new Set(heard).size, 5, "all five before any repeat");
+  assert.equal(new Set(heard).size, 10, "all ten before any repeat");
   // then one not yet heard from the level below, and only when those are heard too, the one heard longest ago
   const lower: string[] = [];
   let h2 = h;
-  for (let k = 0; k < 5; k++) {
+  for (let k = 0; k < 10; k++) {
     const p = pick(LISTENING, 2, h2);
     assert.equal(p.level, 1);
     lower.push(p.id);
     h2 = [...h2, { type: "result", passage: p.id, level: 2, scale: 2, plays: 1, right: 3, answers: [] }];
   }
-  assert.equal(new Set(lower).size, 5);
+  assert.equal(new Set(lower).size, 10);
   assert.equal(pick(LISTENING, 2, h2).id, heard[0], "then the one heard longest ago");
   assert.equal(levelFor(LISTENING, h, 1), 2);
   const sum = listenSummary([...h, ...sit(2, [], 4).records.slice(-1)]);
-  assert.deepEqual([sum.passages, sum.asked, sum.right], [6, 24, 15]);
+  assert.deepEqual([sum.passages, sum.asked, sum.right], [11, 44, 30]);
   assert.ok(sum.weak.length >= 1);
 });
 

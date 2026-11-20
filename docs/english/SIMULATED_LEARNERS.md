@@ -48,9 +48,15 @@ ten of its words are done with at most one missed, and a learner who misses half
 goes well. Sittings with under half right: average 55% → 12%, careless 54% → 32%, early 54% → 24%; strong learners
 end the month at the level of their ability (7.0) rather than the top (8.0). Level flips: 0.1 a month at most.
 
+## Fixed: Listen and answer has ten passages a level (listen-and-answer v6)
+
+Thirty new passages (stories, a talk, a phone call, a station announcement, a debate), five at each level, so a
+learner who listens every day hears a new passage for ten days at a level before anything comes round again.
+Needless repeats a month: 0 for every kind of learner (were up to 5.2 for a strong learner). The right answer still
+falls equally often in each place (80, 80, 80).
+
 ## Found, not fixed
 
-- **Listen and answer still repeats** for a learner who hears a passage every day: five passages a level.
 - **Levels go up and down often** (grammar about ten times a month for a learner between two levels). This is how a
   staircase finds the edge of what a learner can do, so it is left as it is; the screen shows the level of the day.
 - **Find my level places grammar about one level high** for the learner who cannot name a noun (half the runs within
