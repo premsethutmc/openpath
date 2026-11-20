@@ -28,9 +28,10 @@ const PARENT = `asha.${run}@example.org`;
 const OTHER = `ravi.${run}@example.org`;
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -107,6 +108,8 @@ async function startSpellingIfAsked(page) {
   return true;
 }
 async function finishSession(page, right = () => true, onFirst) {
+  // a session opened from Journey: wait until Journey (whose path marks stages "done") has gone
+  await page.locator('[aria-labelledby="journey-title"]').waitFor({ state: "detached", timeout: 8000 }).catch(() => {});
   const asked = [];
   for (let n = 0; n < 40; n++) {
     await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 10000 });

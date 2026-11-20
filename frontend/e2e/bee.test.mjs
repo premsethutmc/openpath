@@ -33,9 +33,10 @@ const ANDROID = {
 const launch = (args = []) => chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined, args });
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -96,10 +97,10 @@ const noDeviceMessage = async (page) => assert.ok(!/can't say words|cannot say w
 test("Spelling Bee: straight from Home, the word is said by itself, repeat, sentence, feedback, resume, review", async () => {
   const { context, page, errors, foreign } = await phone();
   await newLearner(page, "Bee Tester");
-  // 1. Home: the Spelling Bee first, with no starting check needed; General English still there, below
+  // 1. Home: the Spelling Bee first, with no starting check needed; the older journey is in Journey, linked below
   await page.getByRole("heading", { name: "Spelling Bee" }).waitFor();
   await page.getByText("100 words ready to practise").waitFor();
-  await page.getByRole("heading", { name: "General English" }).waitFor();
+  await page.getByRole("button", { name: "Skill-by-skill practice and checks: in Journey" }).waitFor();
   await fits(page);
   await tappable(page);
   await shot(page, "1-home");

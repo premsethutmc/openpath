@@ -4,6 +4,7 @@
  * shown on one's own; nothing is summed into one score.
  */
 import type { Learner } from "../logic/learner.ts";
+import { DailyProgress, Folded } from "./DailyProgress.tsx";
 import { patternTitle } from "../logic/plan.ts";
 import { patternStatus } from "../logic/state.ts";
 import { STATUS_WORDS } from "./Home.tsx";
@@ -12,7 +13,7 @@ import { CapabilityCard, ParentOverviewView } from "./Profile.tsx";
 import { Words } from "./Words.tsx";
 import { SpellingProgress } from "./SpellingBee.tsx";
 
-export function ProgressView({ learner }: { learner: Learner }) {
+export function ProgressView({ learner, why = false }: { learner: Learner; why?: boolean }) {
   const { profile, overview } = learner.overview();
   const s = learner.state;
   const patterns = [...s.patterns.values()];
@@ -26,7 +27,9 @@ export function ProgressView({ learner }: { learner: Learner }) {
       <h1 id="progress-title" className="hero">
         Your progress <span aria-hidden="true">🌱</span>
       </h1>
+      <DailyProgress learner={learner} />
       <SpellingProgress learner={learner} />
+      <Folded title="Skill by skill" hint="The older journey: every skill with answers, and how sure we are" start={why}>
       <p className="sub">We separate what you've tried from what you've shown on your own. Levels are estimates on OpenPath's scale of 1 to 8, with how sure we are.</p>
       <div className="stats" aria-label="Summary">
         <div className="stat">
@@ -108,6 +111,7 @@ export function ProgressView({ learner }: { learner: Learner }) {
           </ul>
         </details>
       </section>
+      </Folded>
     </main>
   );
 }

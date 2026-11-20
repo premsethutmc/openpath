@@ -51,3 +51,16 @@ with the five daily rows, and "More to practise" lists only what the rows do not
 answer, Spelling Bee, Word check). School work is a short list too. General English (the older journey of skills and
 checks, with its own starting check) is folded away unless the learner is already on it or has an activity open in
 it, so a new learner no longer sees two different "starting points". The parents' link is always shown.
+
+## The older journey folded into the daily activities (20 November 2026)
+
+- Spelling rules: the Spelling row offers the next spelling rule (a short lesson, then practice, then a check with new
+  words) every other day, straight away, without the older journey's starting checks (`spellingRuleStep` in
+  plan.ts). Words from the learner's own writing still come first; on other days it is a round of the Spelling Bee.
+- Journey tab: each daily activity as a ladder (its levels, the learner's step marked, the next thing to do, and the
+  rule that moves a learner up, `UP` in streams.ts). The older skill-by-skill journey (its starting check, plan,
+  reviews, More practice and the path of skills) is below, under "Skill by skill", folded.
+- Progress tab: days with English this week and what has been done in each activity; the skill-by-skill estimates
+  and the parent and teacher overview are below, folded ("For a grown-up: why these?" opens them unfolded).
+- Home: no General English section any more (except in a pilot build, where it is the whole app). An unfinished
+  activity from it still shows "Carry on" on Home, and a link leads to Journey. Nothing in the record is removed.

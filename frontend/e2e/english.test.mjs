@@ -25,9 +25,19 @@ const items = new Map(
 for (const i of JSON.parse(readFileSync(new globalThis.URL("web/doubling-journey.json", CONTENT), "utf8")).items) items.set(i.id, i);
 
 
-/** The older practice journey is folded away on the home screen: open it, then wait for its plan. */
+/** The older practice journey (skill by skill) lives in Journey: open it there, then wait for its plan. */
+
+/** Progress keeps the older journey's skill-by-skill view folded: open it. */
+async function skills(page) {
+  await page.locator('[aria-labelledby="progress-title"]').waitFor();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+}
+
 async function today(page) {
-  const fold = page.getByRole("button", { name: /^General English/ });
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
   await fold.waitFor();
   if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
   await page.getByRole("heading", { name: "Today" }).waitFor();
@@ -125,6 +135,8 @@ async function startSpellingIfAsked(page) {
 
 /** Work through the open session to its end. */
 async function finishSession(page, right = () => true) {
+  // a session opened from Journey: wait until Journey (whose path marks stages "done") has gone
+  await page.locator('[aria-labelledby="journey-title"]').waitFor({ state: "detached", timeout: 8000 }).catch(() => {});
   const asked = [];
   for (let n = 0; n < 40; n++) {
     await page.locator(".item, .lesson, .done, .spelling-intro").first().waitFor({ timeout: 8000 }).catch(async (e) => { console.log("STALL:", (await page.locator("body").innerText()).slice(0, 600)); throw e; });
@@ -161,6 +173,7 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   await page.getByText(/Your starting point is set/).waitFor();
   await page.getByRole("button", { name: "Back to today" }).click();
   // the spelling check: dictation (hear the word, type it), each word chosen after the last answer
+  await today(page);
   await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();
@@ -169,9 +182,11 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   for (const i of check) assert.equal(i.format, "typed:dictation", "the spelling check is dictation, never a substitute");
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan now offers spelling practice with a lesson
+  await today(page);
   await page.getByRole("heading", { name: /^Spelling: / }).waitFor();
   // one plan on Today; the spelling patterns list lives behind "More practice"
   assert.equal(await page.getByText("Spelling patterns").count(), 0);
+  await today(page);
   await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("heading", { name: "Spelling patterns" }).waitFor();
   await page.getByRole("button", { name: /Back to today/ }).click();
@@ -199,6 +214,7 @@ test("the whole journey on a phone: profile, placement, plan, lesson, practice w
   // progress: early estimates, kinds of evidence, practice words shown apart
   await page.getByRole("button", { name: "Progress" }).click();
   await page.getByRole("heading", { name: "Progress" }).waitFor();
+  await skills(page);
   await shot(page, "6-progress");
   await fits(page);
   assert.ok((await page.getByText("Early estimate").count()) > 0);
@@ -330,13 +346,16 @@ test("words come back for review the next day", async () => {
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click(); // spelling check (dictation)
   await finishSession(page, () => false); // misspelt words with practice items come back for review
   await page.getByRole("button", { name: "Back to today" }).click();
+  await today(page);
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "nothing due today");
   await page.evaluate(() => localStorage.setItem("openpath-english-clock-offset-days", "1"));
   await page.reload();
+  await today(page);
   await page.getByRole("heading", { name: /^Review \d+ words?$/ }).waitFor();
   await page.locator(".plan li", { hasText: /Review \d+ word/ }).getByRole("button", { name: "Start" }).click();
   await finishSession(page);
   await page.getByRole("button", { name: "Back to today" }).click();
+  await today(page);
   assert.equal(await page.getByRole("heading", { name: /^Review / }).count(), 0, "reviewed; next due in 3 days");
   await context.close();
 });
@@ -457,6 +476,7 @@ async function journeyAnswer(page, right) {
 test("the doubling journey on a phone: check, diagnosis, a lesson, help that is marked as help, a new approach, independent words, summary", async () => {
   const { context, page, errors, foreign } = await phone();
   await createProfile(page, "Ravi");
+  await today(page);
   await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("button", { name: "Try doubling letters" }).click();
   // two independent questions, both wrong (never doubles)
@@ -544,10 +564,12 @@ test("the doubling journey on a phone: check, diagnosis, a lesson, help that is 
   assert.doesNotMatch(text, /%|probability|mastered/i);
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("button", { name: "Progress" }).click();
+  await skills(page);
   await page.locator(".parent").waitFor();
   // after a reload, the same summary (rebuilt from the stored events)
   await page.reload();
   await page.getByRole("button", { name: "Progress" }).click();
+  await skills(page);
   assert.equal(await page.locator(".parent").innerText(), text);
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
@@ -569,6 +591,7 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   await finishSession(page, () => true);
   await page.getByRole("button", { name: "Back to today" }).click();
   // the plan: at most three activities, each with a child-facing label, no numbers about the child
+  await today(page);
   const plan = page.locator(".plan li");
   const n = await plan.count();
   assert.ok(n >= 1 && n <= 3, `${n} activities`);
@@ -578,6 +601,7 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   // one plan: the older sections are behind a single "More practice" entry, and work from there
   const home = await page.locator("main").innerText();
   assert.doesNotMatch(home, /Spelling patterns|Your spelling plan|Doubling letters \(new/);
+  await today(page);
   await page.getByRole("button", { name: "More practice", exact: true }).click();
   await page.getByRole("heading", { name: "More practice", level: 1 }).waitFor();
   await page.getByRole("button", { name: "Try doubling letters" }).waitFor();
@@ -595,11 +619,13 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   const capability = await first.getAttribute("data-capability");
   await first.getByRole("button", { name: "Start" }).click();
   const asked = await finishSession(page, () => false);
-  assert.ok(asked.length >= 1 && asked.length <= 4);
+  assert.ok(asked.length >= 1 && asked.length <= 4, `${asked.length} asked`);
   for (const i of asked) assert.equal(i.target, capability, "the check stays on its skill");
   await page.getByRole("button", { name: "Back to today" }).click();
   // the grown-up link leads to the overview: what is shown, unsure, hard, helped, next, and why the plan changed
+  await today(page);
   await page.getByRole("button", { name: "For a grown-up: why these?" }).click();
+  await skills(page);
   await page.locator(".overview").waitFor();
   for (const part of ["shown", "improving", "uncertain", "hard", "helped", "due", "not-kept", "improved", "next", "changes", "not-checked"]) assert.equal(await page.locator(`.overview [data-part="${part}"]`).count(), 1, part);
   const overview = await page.locator(".overview").innerText();
@@ -612,6 +638,7 @@ test("one learner, many skills on a phone: a plan from the evidence, child label
   const text = await page.locator(".overview").innerText();
   await page.reload();
   await page.getByRole("button", { name: "Progress" }).click();
+  await skills(page);
   assert.equal(await page.locator(".overview").innerText(), text);
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
