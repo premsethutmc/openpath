@@ -763,7 +763,13 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // the rest of it. The transfer question (a new setting) is still asked, and fresh checks while the shared record still needs them.
     // Every kind of question in the skill (each skill unit, each question type) is still met at least once: a kind not yet answered
     // right alone keeps its practice questions, so a weakness in one part is still found.
-    const kindOf = (id: string) => { const u = units.find((x) => x.unit.accepts(id)); return u ? `unit:${u.unit.strategies.map((x) => x.id).join("+")}` : `family:${problemOf(id.replace(/:(mc|w)$/, ""))?.family ?? id}`; };
+    // a kind is the skill unit (or question type) together with the typical mistakes the question can show: x − (y − 3) and
+    // x + (y + 3) are both brackets, but only the first can show the bracket-sign mistake
+    const kindOf = (id: string) => {
+      const p = problemOf(id.replace(/:(mc|w)$/, "")), u = units.find((x) => x.unit.accepts(id));
+      const shows = [...new Set((p?.bugs ?? []).map((b) => b.id))].sort().join(",");
+      return `${u ? `unit:${u.unit.strategies.map((x) => x.id).join("+")}` : `family:${p?.family ?? id}`}|${shows}`;
+    };
     // (twice, on different questions: once could be luck, and one easy instance can hide a gap)
     const rightBy = new Map<string, Set<string>>();
     const wrongIn = new Set<string>();

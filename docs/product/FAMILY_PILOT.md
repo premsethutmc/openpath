@@ -610,8 +610,10 @@ question type to tie a checked example to. Test: `frontend/src/learning/teachabl
 
 Before: after a child had shown a skill on their own, the module served every question left on its practice list (a strong
 child: 21 questions in a row, all right, on converting metres and centimetres). Now, once the skill is shown, practice continues
-only for the kinds of question in it (each skill unit, each question type) not yet answered right alone twice, on different
-questions, with no wrong answer: a kind with a wrong answer keeps its practice, so a hidden gap (a sign rule that only negative
-numbers expose) is still found. The transfer question and the delayed check a week later are unchanged.
+only for the kinds of question in it not yet answered right alone twice, on different questions, with no wrong answer. A kind is
+the skill unit or question type together with the typical mistakes the question can show (x − (y − 3) and x + (y + 3) are both
+brackets, but only the first shows the bracket-sign mistake): a kind with a wrong answer keeps its practice, so a hidden gap (a sign rule that only negative
+numbers expose) is still found. The transfer question and the delayed check a week later are unchanged. Simulated strong
+child, ICSE Class 5: median questions per skill 17 → 14, 62 of 62 mastered, nothing fooled.
 slip@1 (part): a skill unit with a right answer alone is held as "not shown" only once two of its answers alone are wrong, as
 question types already were (never on one slip).
