@@ -605,3 +605,13 @@ verify: quadratic equations (two explanations), definite integrals (one). They a
 works through (x² − 7x + 10 = 0, x² − 49 = 0, ∫ from 2 to 6 of 3 dx), pass the teaching check, and are registered for review.
 A simulated weak child is now taught both skills and masters them. Proof by induction is the one exception: it has no generated
 question type to tie a checked example to. Test: `frontend/src/learning/teachable.test.ts`.
+
+## induction@1: proof by induction gets questions its teaching can be checked on
+
+Proof by induction was the last Class 11–12 skill with no explanation that could be shown: all its questions were hand-written,
+so no explanation could be tied to a question the machine check works through. New question type `aind` (packages/learning/src/
+fam/b32.ts, 107 questions): the step from n = k to n = k + 1 in numbers, for four statements (1 + 2 + … + n, the odd numbers,
+the squares, 4ⁿ − 1 divisible by 3), each with typed steps and the usual mistakes (the sum at k given again, the term for k
+added again, the + 3 left out). Both explanations ("why both parts matter", "the four-line template") are now tied to these
+questions and pass the check; the written proofs stay, marked by an educator. Robot learner: 107 of 107 clean. Test:
+teachable.test.ts now has no exception.

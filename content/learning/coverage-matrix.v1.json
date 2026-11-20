@@ -43,10 +43,10 @@
    "disputed": 6
   },
   "families": {
-   "count": 1118,
-   "problems": 353164,
+   "count": 1119,
+   "problems": 353271,
    "answerTypes": {
-    "integer": 432,
+    "integer": 433,
     "fraction": 158,
     "set": 27,
     "choice": 177,
@@ -62,7 +62,7 @@
    },
    "withPictures": 316,
    "withEverydayForm": 775,
-   "withAlternatives": 1080
+   "withAlternatives": 1081
   },
   "modules": 345,
   "writtenTasks": 379,
@@ -80,8 +80,8 @@
    "ambiguous": 0
   },
   "poolSufficiency": {
-   "modulesWithPools": 336,
-   "sufficient": 336,
+   "modulesWithPools": 337,
+   "sufficient": 337,
    "insufficient": 0
   },
   "educatorPart": {
@@ -10188,7 +10188,7 @@
     11,
     11
    ],
-   "mode": "educator-marked",
+   "mode": "automatic",
    "met": {
     "graph": true,
     "relations": true,
@@ -10206,7 +10206,9 @@
    "missing": [
     "review"
    ],
-   "families": [],
+   "families": [
+    "aind"
+   ],
    "writtenTasks": 4,
    "complete": true
   },

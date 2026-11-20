@@ -4602,11 +4602,12 @@
        ],
        "math": [
         "P(1) ✓, P(k) ⇒ P(k + 1)  ⇒  P(2) ✓ ⇒ P(3) ✓ ⇒ …"
-       ]
+       ],
+       "instance": "gen:aind:0,8"
       }
      ],
-     "guided": "wm-ind-g1",
-     "check": "wm-ind-c1"
+     "guided": "gen:aind:0,8",
+     "check": "gen:aind:0,21"
     },
     {
      "id": "template",
@@ -4617,19 +4618,20 @@
       {
        "title": "Base, hypothesis, step, conclusion",
        "text": [
-        "1. Base: check P(1) (or the first value claimed).",
-        "2. Hypothesis: assume P(k) for some k.",
-        "3. Step: write P(k + 1) as the target; start from its left side, bring in the hypothesis, and simplify to the right side.",
-        "4. Conclusion: by the principle of induction, P(n) is true for all n."
+        "Base: check the statement for the first value claimed.",
+        "Hypothesis: assume it is true for some n = k.",
+        "Step: write the statement for n = k + 1 as the target; start from its left side, bring in the hypothesis, and simplify to the right side.",
+        "Conclusion: by the principle of induction, it is true for every n."
        ],
        "math": [
         "Sum: LHS(k + 1) = LHS(k) + next term",
         "Divisibility: a·bᵏ⁺¹ − c rewritten using bᵏ − c"
-       ]
+       ],
+       "instance": "gen:aind:0,5"
       }
      ],
-     "guided": "wm-ind-g2",
-     "check": "wr:ind:odd"
+     "guided": "gen:aind:0,5",
+     "check": "gen:aind:0,14"
     }
    ],
    "practice": [

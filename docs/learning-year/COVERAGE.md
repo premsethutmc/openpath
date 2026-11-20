@@ -11,8 +11,8 @@ One status per competency of the 200-competency graph (which is itself only a st
 | Status | Competencies |
 |---|---|
 | Complete and educator-approved | 0/347 (0%) |
-| Complete, awaiting review | 336/347 (97%) |
-| Partially supported | 9/347 (3%) |
+| Complete, awaiting review | 337/347 (97%) |
+| Partially supported | 8/347 (2%) |
 | Unsupported question type | 1/347 (0%) |
 | No content | 1/347 (0%) |
 
@@ -30,7 +30,7 @@ By grade:
 | 8 | 0 | 43 | 1 | 0 | 0 |
 | 9 | 0 | 27 | 3 | 0 | 0 |
 | 10 | 0 | 42 | 2 | 0 | 0 |
-| 11 | 0 | 52 | 1 | 0 | 0 |
+| 11 | 0 | 53 | 0 | 0 | 0 |
 | 12 | 0 | 70 | 0 | 1 | 0 |
 
 Every competency that has some content:
@@ -306,7 +306,7 @@ Every competency that has some content:
 | Write complex numbers in modulus-argument (polar) form (`MATH.number.complex-polar-form`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asarg draft, aspolm draft). |
 | Apply event algebra (`MATH.probability.events`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families asaddp draft, asmex draft, asevset draft, asadd3 draft). |
 | Use logical implications and counterexamples (`MATH.reasoning.logic`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families atconv draft, atcex draft). |
-| Prove statements by mathematical induction (`MATH.reasoning.mathematical-induction`) | 11–11 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
+| Prove statements by mathematical induction (`MATH.reasoning.mathematical-induction`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aind missing). |
 | Work with arithmetico-geometric and harmonic progressions (`MATH.sequences.agp-hp`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aoagp draft, aohm draft). |
 | Use arithmetic and geometric means and the AM-GM inequality (`MATH.sequences.am-gm-relation`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apins draft, apgms draft, apamgm draft). |
 | Use binomial, exponential and logarithmic series (`MATH.sequences.infinite-series-expansions`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families apbin draft, apexlog draft, apsapp draft). |
@@ -1507,13 +1507,14 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aefpct: Fractions and decimals as percentages | `MATH.number.percent-intro` | 208 | 0 | 116/92/0 | `b8906acd` |
 | afmkang: Making an angle on a protractor | `MATH.geometry.angle-measure` | 192 | 0 | 48/48/96 | `c53b0326` |
 | adbarmk: Drawing a bar graph from a table | `MATH.statistics.bar-charts` | 798 | 0 | 198/400/200 | `6793044d` |
+| aind: The inductive step, in numbers | `MATH.reasoning.mathematical-induction` | 107 | 0 | 50/40/17 | `1c0266f2` |
 
 ## Whole competency graph
 
 - Competencies (not counting micro-skills): **347**
 - With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 345 (hand-written 24, synthesised from blueprints 321)
-- Problem families (generated questions with independent checks): 1118
+- Problem families (generated questions with independent checks): 1119
 - Review registry (repository copy): draft 1450, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |

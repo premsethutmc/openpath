@@ -4857,7 +4857,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.mathematical-induction",
    "title": "Prove statements by mathematical induction",
-   "hash": "66023d50",
+   "hash": "0314cfdf",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -12701,6 +12701,18 @@
     "ICSE 6",
     "CBSE 7",
     "TN 7"
+   ]
+  },
+  {
+   "item": "help:aind",
+   "kind": "help",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "title": "The inductive step, in numbers",
+   "hash": "ee29e905",
+   "source": "rule",
+   "from": "steps",
+   "classes": [
+    "TN 11"
    ]
   },
   {
