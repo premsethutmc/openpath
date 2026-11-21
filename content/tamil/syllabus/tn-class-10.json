@@ -1,0 +1,134 @@
+{
+ "id": "tn-samacheer-tamil-class-10",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 10,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Grammar outcomes follow the chapter titles of the Samacheer Kalvi Tamil textbook (TNSCERT) as listed by public study-guide sites; chapter numbers in brackets. Outcomes are written by OpenPath; no textbook text is reproduced."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "g",
+   "name": "Grammar (இலக்கணம்)",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "தொகைநிலைத் தொடர்கள் (2.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.thogai"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "தொகாநிலைத் தொடர்கள் (3.5).",
+     "coverage": "partly",
+     "where": [],
+     "note": "Not yet practised; compounds (thogai) are."
+    },
+    {
+     "id": "G3",
+     "text": "இலக்கணம் பொது, சொற்றொடர் (4.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.sentence-parts",
+      "tn.ta.c10.voice"
+     ]
+    },
+    {
+     "id": "G4",
+     "text": "அகப்பொருள், புறப்பொருள் இலக்கணம் (6.6, 7.6).",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c10.tinai"
+     ],
+     "note": "The five landscapes are practised; purapporul is not yet."
+    },
+    {
+     "id": "G5",
+     "text": "பாவகை, அலகிடுதல் (8.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.paa"
+     ]
+    },
+    {
+     "id": "G6",
+     "text": "அணி (9.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.figures"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "திருக்குறள்.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.kural"
+     ]
+    },
+    {
+     "id": "L2",
+     "text": "The textbook's prose and poems.",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c10.story"
+     ],
+     "note": "The TNSCERT textbook is not reproduced. OpenPath's own stories, public-domain classics and questions practise the same skills."
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads an unseen passage of exam length and answers.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c10.reading",
+      "tn.ta.c10.story"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes a composition and a letter.",
+     "coverage": "covered",
+     "where": [
+      "writing:c10"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Speaks about a lesson.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  }
+ ]
+}

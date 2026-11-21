@@ -1,0 +1,91 @@
+{
+ "id": "tn-samacheer-tamil-class-1",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 1,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Samacheer Kalvi Tamil (TNSCERT), Classes 1-4: outcomes written by OpenPath on the textbook's letter, word and sentence progression; the class chapter lists were not read."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads and writes the vowels and consonants.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c1.vowels",
+      "tn.ta.c1.consonants"
+     ]
+    },
+    {
+     "id": "R2",
+     "text": "Tells short and long vowels.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c1.length"
+     ]
+    },
+    {
+     "id": "R3",
+     "text": "Reads picture words.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c1.pictures",
+      "tn.ta.c1.first-letter"
+     ]
+    },
+    {
+     "id": "R4",
+     "text": "Reads a short passage.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c1.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens and picks the word heard.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c1.listen"
+     ]
+    },
+    {
+     "id": "LS2",
+     "text": "Recites rhymes and Aathichoodi.",
+     "coverage": "guided",
+     "where": [
+      "tn.ta.c1.aathichoodi"
+     ],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes simple words.",
+     "coverage": "covered",
+     "where": [
+      "writing:c1"
+     ]
+    }
+   ]
+  }
+ ]
+}

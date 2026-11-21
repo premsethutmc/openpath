@@ -1,0 +1,150 @@
+{
+ "id": "tn-samacheer-tamil-class-8",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 8,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Grammar outcomes follow the chapter titles of the Samacheer Kalvi Tamil textbook (TNSCERT) as listed by public study-guide sites; chapter numbers in brackets. Outcomes are written by OpenPath; no textbook text is reproduced."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "g",
+   "name": "Grammar (இலக்கணம்)",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "வினைமுற்று (2.5), எச்சம் (3.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.verb-forms"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "வேற்றுமை (4.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.case",
+      "tn.ta.c8.case-marker"
+     ]
+    },
+    {
+     "id": "G3",
+     "text": "தொகைநிலை, தொகாநிலைத் தொடர்கள் (5.5).",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c8.thogai"
+     ],
+     "note": "Thogainilai is practised; the nine thogaanilai kinds are not yet."
+    },
+    {
+     "id": "G4",
+     "text": "புணர்ச்சி (6.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.sandhi"
+     ]
+    },
+    {
+     "id": "G5",
+     "text": "வல்லினம் மிகும் இடங்களும் மிகா இடங்களும் (7.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.vallinam"
+     ]
+    },
+    {
+     "id": "G6",
+     "text": "யாப்பு இலக்கணம் (8.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.asai"
+     ]
+    },
+    {
+     "id": "G7",
+     "text": "அணி இலக்கணம் (9.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.simile"
+     ]
+    },
+    {
+     "id": "G8",
+     "text": "எழுத்துகளின் பிறப்பு (1.5).",
+     "coverage": "partly",
+     "where": [],
+     "note": "Letter kinds are practised in Class 6; where each letter is formed in the mouth is not yet."
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "திருக்குறள்.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.kural"
+     ]
+    },
+    {
+     "id": "L2",
+     "text": "The textbook's prose and poems.",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c8.story"
+     ],
+     "note": "The TNSCERT textbook is not reproduced. OpenPath's own stories, public-domain classics and questions practise the same skills."
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads a passage and answers.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c8.reading",
+      "tn.ta.c8.story"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes an essay and a complaint letter.",
+     "coverage": "covered",
+     "where": [
+      "writing:c8"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Speaks about a lesson.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  }
+ ]
+}

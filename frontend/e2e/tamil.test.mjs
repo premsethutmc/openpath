@@ -271,3 +271,17 @@ test("ICSE course: syllabus coverage and a writing task with a Tamil word count"
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("Tamil Nadu State Board: choose the board, a Class 8 grammar topic, practice", async () => {
+  const { context, page, errors } = await phone();
+  await page.goto(`${URL}/`);
+  await page.getByRole("radio", { name: /Tamil Nadu State Board/ }).tap();
+  await page.locator(".class-tile", { hasText: "வகுப்பு 8" }).tap();
+  await page.getByRole("button", { name: /^வல்லினம் மிகும்/ }).tap();
+  await page.getByRole("button", { name: "பயிற்சி தொடங்கு — Start practice" }).tap();
+  await page.getByText("Which is written correctly?").waitFor();
+  await page.screenshot({ path: "e2e/shots/tamil/tn-practice.png", fullPage: true });
+  assert.equal((await page.evaluate(() => JSON.parse(localStorage.getItem("openpath.tamil.icse.v1")))).board, "tn");
+  assert.deepEqual(errors, []);
+  await context.close();
+});

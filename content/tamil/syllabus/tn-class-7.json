@@ -1,0 +1,148 @@
+{
+ "id": "tn-samacheer-tamil-class-7",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 7,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Grammar outcomes follow the chapter titles of the Samacheer Kalvi Tamil textbook (TNSCERT) as listed by public study-guide sites; chapter numbers in brackets. Outcomes are written by OpenPath; no textbook text is reproduced."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "g",
+   "name": "Grammar (இலக்கணம்)",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "குற்றியலுகரம் (1.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.kutriyal"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "ஓரெழுத்து ஒருமொழி, பகுபதம், பகாப்பதம் (5.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.one-letter"
+     ]
+    },
+    {
+     "id": "G3",
+     "text": "தொழிற்பெயர் (6.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.noun-kinds"
+     ]
+    },
+    {
+     "id": "G4",
+     "text": "அணி இலக்கணம் (7.5, 8.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.figures"
+     ]
+    },
+    {
+     "id": "G5",
+     "text": "ஆகுபெயர் (9.5).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.aagupeyar"
+     ]
+    },
+    {
+     "id": "G6",
+     "text": "குற்றியலிகரம், குறுக்கங்கள், வழக்கு, இலக்கியவகைச் சொற்கள் (1.5, 2.5, 3.5, 4.5).",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c7.kutriyal"
+     ],
+     "note": "Kutriyalugaram is practised; the other short-sound forms, usage kinds and literary word kinds are not yet."
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "சொலவடைகள் (1.4).",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.proverbs"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "திருக்குறள்.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.kural"
+     ]
+    },
+    {
+     "id": "L2",
+     "text": "The textbook's prose and poems.",
+     "coverage": "partly",
+     "where": [
+      "tn.ta.c7.story"
+     ],
+     "note": "The TNSCERT textbook is not reproduced. OpenPath's own stories, public-domain classics and questions practise the same skills."
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads a passage and answers.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c7.reading",
+      "tn.ta.c7.story"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes an essay and a leave letter.",
+     "coverage": "covered",
+     "where": [
+      "writing:c7"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Speaks about a lesson.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  }
+ ]
+}

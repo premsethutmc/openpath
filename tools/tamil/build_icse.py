@@ -11,6 +11,7 @@ import unicodedata
 from pathlib import Path as _P
 
 sys.path.insert(0, str(_P(__file__).resolve().parent))
+from tn_board import build_tn, tn_syllabus  # noqa: E402
 from stories import EDHUGAI, FIGURES, POEM, POEM_QS, STORIES  # noqa: E402
 from pathlib import Path
 
@@ -722,7 +723,19 @@ def syllabus(topics, tasks):
 
 
 def check(topics):
+    """Structure, and ambiguity: where several questions share a prompt, no question may offer another's right answer
+    as a wrong option (e.g. two one-letter words among the options of «ஓரெழுத்து ஒருமொழி எது?»)."""
     errors, ids = [], set()
+    by_prompt = {}
+    for t in topics:
+        for q in t["questions"]:
+            by_prompt.setdefault((t.get("passage") or "") + q["prompt"] + q.get("say", ""), []).append(q)
+    for group in by_prompt.values():
+        answers = {q["answer"] for q in group}
+        for q in group:
+            clash = [o for o in q["options"] if o != q["answer"] and o in answers]
+            if clash:
+                errors.append(f"{q['id']}: also right elsewhere for the same prompt: {clash}")
     for t in topics:
         if len(t["questions"]) < 4:
             errors.append(f"{t['id']}: too few questions")
@@ -748,7 +761,21 @@ def main():
               "write": {"min": lo, "max": hi}, "look": [nfc(x) for x in look]} for c, k, t, te, task, tasken, form, lo, hi, look in WRITING]
     wtext = json.dumps({"schema": "openpath.tamil-writing.v1", "tasks": tasks}, ensure_ascii=False, indent=1) + "\n"
     syl = syllabus([*topics], tasks)
-    outputs = {OUT: text, OUT.with_name("writing.v1.json"): wtext, **{OUT.parent / "syllabus" / f"icse-class-{c}.json": json.dumps(d, ensure_ascii=False, indent=1) + "\n" for c, d in syl.items()}}
+    # Tamil Nadu State Board: reuses ICSE topics where the skill is the same, adds its own; writing tasks cloned per class
+    tn_topics = sorted(build_tn(topics, Topic, nfc, first_letter), key=lambda t: t["class"])
+    errors = check(tn_topics)
+    if errors:
+        sys.exit("\n".join(errors))
+    tn_tasks = [{**t, "id": t["id"].replace("ta.c", "ta.tn.c", 1), "board": "tn"} for t in tasks]
+    tasks = [{**t, "board": "icse"} for t in tasks] + tn_tasks
+    wtext = json.dumps({"schema": "openpath.tamil-writing.v1", "tasks": tasks}, ensure_ascii=False, indent=1) + "\n"
+    tn_doc = {"schema": "openpath.tamil-course.v1", "board": "Tamil Nadu State Board (Samacheer Kalvi)", "language": "ta",
+              "source": "OpenPath-authored questions and stories on the Samacheer Kalvi Tamil grammar and skills; classic texts quoted are public domain (Thirukkural, Avvaiyar, Bharathiyar); no textbook text",
+              "review": "provisional", "topics": tn_topics}
+    tn_syl = tn_syllabus(tn_topics, tn_tasks)
+    outputs = {OUT: text, OUT.with_name("tn.v1.json"): json.dumps(tn_doc, ensure_ascii=False, indent=1) + "\n",
+               **{OUT.parent / "syllabus" / f"tn-class-{c}.json": json.dumps(d, ensure_ascii=False, indent=1) + "\n" for c, d in tn_syl.items()},
+               OUT.with_name("writing.v1.json"): wtext, **{OUT.parent / "syllabus" / f"icse-class-{c}.json": json.dumps(d, ensure_ascii=False, indent=1) + "\n" for c, d in syl.items()}}
     if "--check" in sys.argv:
         stale = [str(p) for p, t in outputs.items() if not p.exists() or p.read_text() != t]
         sys.exit("out of date: " + ", ".join(stale) if stale else 0)
@@ -761,6 +788,7 @@ def main():
         by[t["class"]][0] += 1
         by[t["class"]][1] += len(t["questions"])
     print("wrote", OUT, {k: tuple(v) for k, v in sorted(by.items())})
+    print("wrote tn", {c: (sum(1 for t in tn_topics if t["class"] == c), sum(len(t["questions"]) for t in tn_topics if t["class"] == c)) for c in range(1, 11)})
 
 
 if __name__ == "__main__":
