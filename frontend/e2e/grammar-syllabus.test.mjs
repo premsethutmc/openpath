@@ -402,9 +402,9 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
 
   // notes: right title, every main point and no detail, right summary, then the learner's own summary checked
   await page.getByRole("button", { name: "Start: Notes and summary" }).click();
-  const title = (await page.locator(".pill").innerText()).split(" · ")[1];
-  const n = STUDY.notes.find((x) => x.title === title);
-  await page.locator(`[data-passage="${n.id}"]`).waitFor();
+  // the passage may be one of the app's own reading texts, so it is found by its id, not its title
+  const passageId = await page.locator("[data-passage]").getAttribute("data-passage");
+  const n = STUDY.notes.find((x) => x.id === passageId);
   await fits();
   await page.getByRole("button", { name: "I have read it: make notes" }).click();
   await page.getByRole("button", { name: n.titles.right, exact: true }).click();
