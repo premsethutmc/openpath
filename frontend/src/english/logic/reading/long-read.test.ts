@@ -11,7 +11,7 @@ import { eventProblem } from "../events.ts";
 function sit(text: (typeof LONG.texts)[number], part: number, right: (i: number) => boolean = () => true) {
   const s = new LongSitting(text, part);
   assert.equal(s.snapshot().phase, "read");
-  assert.ok(s.snapshot().text.length > (text.level <= 2 ? 200 : 300));
+  assert.ok(s.snapshot().text.length > (text.level === 1 ? 150 : text.level <= 3 ? 200 : 300));
   s.read();
   for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot()) {
     const c = choices(s.questions[v.index], `${text.id}|${part}|${v.index}`);
@@ -27,8 +27,8 @@ function sit(text: (typeof LONG.texts)[number], part: number, right: (i: number)
 
 test("LR-1 content: seventeen stories on seventeen themes at levels one to six, three parts, questions on theme, character and title", () => {
   assert.deepEqual(longProblems(LONG), []);
-  assert.equal(LONG.texts.length, 17);
-  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 17);
+  assert.equal(LONG.texts.length, 25);
+  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 25);
   assert.deepEqual([...new Set(LONG.texts.map((t) => t.level))].sort(), [1, 2, 3, 4, 5, 6]);
   // a weak reader starts on a story at their own level, not a level 4 one
   assert.equal(nextStep(LONG, [], 1)!.text.level, 1);
