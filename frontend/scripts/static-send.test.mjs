@@ -57,3 +57,24 @@ test("F-3 the page is never kept; fonts and tiny files are sent as they are; HEA
   const head = await get("/app.js", { "accept-encoding": "br" }, "HEAD");
   assert.deepEqual([head.status, head.body.length, head.headers["content-encoding"]], [200, 0, "br"]);
 });
+
+test("slow-phone@1: a best-quality copy beside the file is sent when it is not older; an older one is ignored", async () => {
+  const { mkdtempSync, writeFileSync, utimesSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const zlib = await import("node:zlib");
+  const http = await import("node:http");
+  const { sendStatic } = await import("./static-send.mjs");
+  const dir = mkdtempSync(`${tmpdir()}/ss-`);
+  const file = `${dir}/a.js`;
+  writeFileSync(file, "x".repeat(5000));
+  writeFileSync(`${file}.br`, zlib.brotliCompressSync(Buffer.from("y".repeat(5000))));
+  const server = http.createServer((req, res) => void sendStatic(req, res, file, { type: "text/javascript" }));
+  await new Promise((r) => server.listen(0, r));
+  const get = () => fetch(`http://127.0.0.1:${server.address().port}/`, { headers: { "accept-encoding": "br" } }).then((r) => r.text());
+  assert.equal(await get(), "y".repeat(5000), "the prebuilt copy");
+  const past = new Date(Date.now() - 60_000);
+  utimesSync(`${file}.br`, past, past);
+  writeFileSync(file, "z".repeat(5000));
+  assert.equal(await get(), "z".repeat(5000), "the file itself once the copy is older");
+  server.close();
+});
