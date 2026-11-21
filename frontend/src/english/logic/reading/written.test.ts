@@ -63,3 +63,35 @@ test("WA-3 a sitting: a miss, a second try, the model answer; records say right 
   for (const e of await repo.load("p-written")) assert.equal(eventProblem(e), null);
   assert.equal(l.writtenRecords().length, 4);
 });
+
+test("WA-4 answers that hold the key words without meaning them are not marked right; the model answer still is", () => {
+  const tricks = (it: (typeof WRITTEN.items)[number]) => {
+    // "not" before every word of the first key group that the model uses
+    const negatedModel = it.keys[0].reduce((m, k) => m.replace(new RegExp(`\\b(${k.replace(/[-]/g, "\\$&")}\\w*)`, "gi"), "not $1"), it.model);
+    return [
+      negatedModel,
+      // two choices
+      `${it.model.replace(/\.$/, "")} or something else.`,
+      // the whole passage pasted in
+      passageOf(it).text,
+    ];
+  };
+  const fooled: string[] = [];
+  for (const it of WRITTEN.items) {
+    assert.ok(markWritten(it, it.model).correct, `${it.id}: model`);
+    for (const t of tricks(it)) if (markWritten(it, t).correct) fooled.push(`${it.id}: ${t.slice(0, 60)}`);
+    for (const w of it.avoid ?? []) {
+      assert.equal(markWritten(it, `${it.model.replace(/\.$/, "")}, ${w}.`).correct, false, `${it.id}: names a wrong answer (${w})`);
+      assert.equal(markWritten(it, `${it.model.replace(/\.$/, "")}, not ${w}.`).correct, true, `${it.id}: rules out a wrong answer (not ${w})`);
+    }
+  }
+  assert.deepEqual(fooled, []);
+  const tomato = WRITTEN.items.find((i) => i.id === "wa.L1.T.1")!;
+  assert.equal(markWritten(tomato, "It was not red.").correct, false);
+  assert.equal(markWritten(tomato, "It wasn't red.").correct, false);
+  assert.equal(markWritten(tomato, "Red or green.").correct, false);
+  assert.equal(markWritten(tomato, "Red or maybe pink.").guard, "choice");
+  assert.equal(markWritten(tomato, "It was green.").correct, false);
+  assert.equal(markWritten(tomato, "It was red, not green.").correct, true);
+  assert.equal(markWritten(tomato, "Red.").correct, true);
+});

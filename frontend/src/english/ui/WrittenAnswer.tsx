@@ -104,7 +104,15 @@ export function WrittenAnswer({ learner, onLeave, onChanged }: { learner: Learne
           {m.correct && !m.short && !m.sentence && <p className="small">Start with a capital letter and end with a full stop.</p>}
           {!m.correct && !v.reveal && (
             <>
-              <p className="small">Your answer is missing something. Hint: {it.hint}</p>
+              <p className="small">
+                {m.guard === "wrong"
+                  ? "Part of your answer does not match the passage. Check it again."
+                  : m.guard === "choice"
+                    ? "Give one answer, not a choice of answers."
+                    : m.guard === "long"
+                      ? "Answer in one short sentence of your own, not the whole passage."
+                      : `Your answer is missing something. Hint: ${it.hint}`}
+              </p>
               <button type="button" className="primary" onClick={() => (sitting.again(), tick())}>
                 Try again
               </button>
