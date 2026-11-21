@@ -3,7 +3,7 @@ Offline check of Read aloud's recognition settings on synthetic recordings (synt
 uses and the same grammar as logic/read-aloud grammarFor (the sentence as a phrase, then each word once).
 
   pip install vosk espeakng-loader
-  python evaluate.py <model-folder> <out.json>     then: node --import tsx score.mts <out.json>
+  python evaluate.py <model-folder> <out.json>     then, in frontend/: node --import tsx scripts/read-aloud-score.mts <out.json>
 
 Twenty sentences from levels 1-5 of content/english/dictation/sentences.json, each read four ways by espeak-ng
 voices: correctly, with a word skipped, with a word swapped for another, and with a false start ("mo. mother").

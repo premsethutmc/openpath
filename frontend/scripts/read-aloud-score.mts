@@ -1,6 +1,6 @@
-/** Scores evaluate.py's output with Read aloud's own alignment (frontend/src/english/logic/read-aloud). */
+/** Scores tools/english/read-aloud/evaluate.py's output with Read aloud's own alignment (frontend/src/english/logic/read-aloud). */
 import { readFileSync } from "node:fs";
-import { align } from "../../../frontend/src/english/logic/read-aloud/readAloud.ts";
+import { align } from "../src/english/logic/read-aloud/readAloud.ts";
 
 const jobs = JSON.parse(readFileSync(process.argv[2], "utf8"));
 const kinds: Record<string, { right: number; of: number }> = {};
