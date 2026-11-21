@@ -1,0 +1,34 @@
+name: OpenPath Dandi March
+on:
+  pull_request:
+    paths:
+      - 'frontend/history/**'
+      - 'frontend/e2e/history-dandi*.test.mjs'
+      - '.github/workflows/history-dandi.yml'
+  push:
+    branches: ['feat/history-dandi-march']
+permissions:
+  contents: read
+jobs:
+  mobile:
+    name: Walk and talk on mobile Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: node --test history/dandi-march/story.test.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node --test --test-timeout=40000 e2e/history-dandi.test.mjs
+
+      - run: node --test history/dandi-march/first-person/journey.test.mjs
+      - name: Cinematic first-person cut
+        run: node --test --test-timeout=65000 e2e/history-dandi-first-person.test.mjs
