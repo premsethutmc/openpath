@@ -85,6 +85,12 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Long reads: {s.long.parts} {s.long.parts === 1 ? "part" : "parts"} read, {s.long.finished} {s.long.finished === 1 ? "story" : "stories"} finished, {s.long.right} of {s.long.asked} questions right
         </p>
       )}
+      {s.syllabus && (
+        <p className="small" data-line="syllabus">
+          {s.syllabus.name} syllabus: {s.syllabus.practised} of {s.syllabus.total} lines practised
+          {s.syllabus.notYet.length ? `; not yet: ${s.syllabus.notYet.join("; ")}` : ""}
+        </p>
+      )}
       {s.study && (
         <p className="small" data-line="study">
           Notes, charts and maps: {s.study.tasks} {s.study.tasks === 1 ? "task" : "tasks"}, {s.study.right} of {s.study.asked} steps right

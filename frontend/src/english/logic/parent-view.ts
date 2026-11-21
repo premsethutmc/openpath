@@ -20,6 +20,7 @@ import { kindsSummary, SKILL_NAMES } from "./reading/kinds.ts";
 import { longSummary } from "./reading/long-read.ts";
 import { writtenSummary } from "./reading/written.ts";
 import { STUDY_SKILL_NAMES, studySummary } from "./study/study.ts";
+import { syllabusPractice } from "./syllabus/practice.ts";
 
 export interface ListSummary {
   id: string;
@@ -73,6 +74,8 @@ export interface ChildSummary {
   kinds: { texts: number; right: number; asked: number; weak: string[] } | null;
   /** Written answers to questions on a passage: answered, right, right on the first try. */
   written: { answered: number; right: number; firstTry: number } | null;
+  /** The child's own class syllabus: lines practised in the app, and the first few not yet practised. */
+  syllabus: { name: string; practised: number; total: number; notYet: string[] } | null;
   /** Notes, charts and maps: tasks done, steps right, what goes well and what to work on, and the learner's own pieces marked by rule. */
   study: { tasks: number; right: number; asked: number; strong: string[]; weak: string[]; own: { pieces: number; passed: number; of: number } } | null;
   /** First words: words found, found on the first tap last time, and the total. */
@@ -150,6 +153,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     written: learner.writtenRecords().length ? writtenSummary(learner.writtenRecords()) : null,
     long: learner.longRecords().length ? longSummary(learner.longRecords()) : null,
     kinds: learner.kindRecords().length ? (({ texts, right, asked, weak }) => ({ texts, right, asked, weak: weak.map((k) => SKILL_NAMES[k]) }))(kindsSummary(learner.kindRecords())) : null,
+    syllabus: (({ sp }) => (sp ? { name: sp.name, practised: sp.practised, total: sp.total, notYet: sp.notYet.slice(0, 3).map((x) => x.text) } : null))({ sp: syllabusPractice(learner) }),
     study: learner.studyRecords().length ? (({ tasks, right, asked, strong, weak, own }) => ({ tasks, right, asked, strong: strong.map((k) => STUDY_SKILL_NAMES[k]), weak: weak.map((k) => STUDY_SKILL_NAMES[k]), own }))(studySummary(learner.studyRecords())) : null,
     first: first.sittings ? { met: first.met, sure: first.sure, total: first.total } : null,
     dictation: dict.sentences ? { sentences: dict.sentences, perfectFirst: dict.perfectFirst, level: dict.level ?? 1, missed: dict.missed.slice(0, 6) } : null,

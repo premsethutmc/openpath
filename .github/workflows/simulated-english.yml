@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: "10 22 * * *" # 03:40 IST, nightly
   pull_request:
-    paths: ["frontend/src/english/logic/**", "content/english/**", "frontend/scripts/sim-english.mts", ".github/workflows/simulated-english.yml"]
+    paths: ["frontend/src/english/logic/**", "content/english/**", "frontend/scripts/sim-english.mts", "frontend/scripts/sim-english-wide.mts", ".github/workflows/simulated-english.yml"]
 permissions:
   contents: read
 concurrency:
@@ -29,6 +29,11 @@ jobs:
         working-directory: frontend
       - run: node --import tsx scripts/sim-english.mts --runs 20 --md sim-english.md --out sim-english.json --strict
         working-directory: frontend
+      # sim-english-wide@1: texts, long reads, notes, charts and maps (with the learner's own writing marked) and a
+      # walk of every syllabus line; fails on a throw, a dead end, a repeat, a mis-marked piece or no steering
+      - run: node --import tsx scripts/sim-english-wide.mts --runs 10 --md sim-english-wide.md --strict
+        if: always()
+        working-directory: frontend
       - if: always()
         uses: actions/upload-artifact@v7
         with:
@@ -36,3 +41,4 @@ jobs:
           path: |
             frontend/sim-english.md
             frontend/sim-english.json
+            frontend/sim-english-wide.md

@@ -6,11 +6,11 @@
   "subject": "English",
   "title": "CBSE English, Class III",
   "source": {
-    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class III list",
-    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "read": "Directorate of Education, Delhi: Class III English annual syllabus 2026-27, built on the NCERT textbook Santoor (NCF-SE 2023) that CBSE schools use",
+    "url": "https://edustud.nic.in/edu/Syllabus_2026_27/3/3_english_english_2026_27.pdf",
     "accessed": "2026-11-21",
     "official": false,
-    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+    "note": "UNOFFICIAL SOURCE. CBSE does not publish a line-by-line English syllabus below Class 9; this list follows a state education department's year plan for the NCERT book Santoor, read through a text summary of the PDF. Chapters are named by kind, not reproduced."
   },
   "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
   "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
@@ -18,11 +18,26 @@
     {
       "id": "listening-speaking",
       "name": "Listening and Speaking",
-      "pages": "Class III",
+      "pages": "Santoor",
       "outcomes": [
         {
           "id": "LS1",
-          "text": "Says poems with clear sounds and the right rise and fall.",
+          "text": "Listens to poems, stories and conversations and recalls what happened.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Puts the pictures of a story heard in order.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "picture_order"
+          ]
+        },
+        {
+          "id": "LS3",
+          "text": "Recites poems with rhythm and pauses.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -32,8 +47,8 @@
           }
         },
         {
-          "id": "LS2",
-          "text": "Acts out role plays and short skits with expression.",
+          "id": "LS4",
+          "text": "Talks in pairs, shows and tells, and takes part in role play.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -41,39 +56,17 @@
             "syllabus": "icse-cisce-english-class-3",
             "outcome": "LS6"
           }
-        },
-        {
-          "id": "LS3",
-          "text": "Gives a view about stories and characters.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-3",
-            "outcome": "LS1"
-          }
-        },
-        {
-          "id": "LS4",
-          "text": "Answers spoken and telephone messages suitably.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-2",
-            "outcome": "LS9"
-          }
         }
       ]
     },
     {
       "id": "reading",
       "name": "Reading",
-      "pages": "Class III",
+      "pages": "Santoor",
       "outcomes": [
         {
           "id": "R1",
-          "text": "Reads aloud with clear sounds and pauses.",
+          "text": "Reads aloud fluently, with pauses and intonation.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -84,33 +77,30 @@
         },
         {
           "id": "R2",
-          "text": "Reads short texts for the main idea, details and order, and draws conclusions.",
+          "text": "Reads stories and poems for the characters, setting and events.",
           "coverage": "covered",
           "where": "reading"
         },
         {
           "id": "R3",
-          "text": "Reads poems, posters and charts on classroom walls.",
-          "coverage": "partly",
-          "where": "kinds",
-          "note": "Poems, notices and timetables are read with questions; the classroom's own walls are not."
+          "text": "Blends and splits sounds and syllables, and builds words from roots.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "syllables",
+            "affixes"
+          ]
         }
       ]
     },
     {
       "id": "writing",
       "name": "Writing",
-      "pages": "Class III",
+      "pages": "Santoor",
       "outcomes": [
         {
           "id": "W1",
-          "text": "Writes words, phrases and sentences from dictation.",
-          "coverage": "covered",
-          "where": "listening"
-        },
-        {
-          "id": "W2",
-          "text": "Writes five or six sentences about own experiences from word or picture clues.",
+          "text": "Writes sentences from clues or pictures, and a short paragraph about own experiences.",
           "coverage": "guided",
           "where": "guided",
           "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
@@ -120,13 +110,23 @@
           }
         },
         {
+          "id": "W2",
+          "text": "Writes a thank-you note, an invitation and a poster.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW6"
+          }
+        },
+        {
           "id": "W3",
-          "text": "Uses question marks, full stops and capital letters correctly.",
+          "text": "Uses full stops and question marks.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
             "capitals",
-            "punctuation",
             "questions"
           ]
         }
@@ -135,44 +135,55 @@
     {
       "id": "grammar-vocabulary",
       "name": "Grammar and Vocabulary",
-      "pages": "Class III",
+      "pages": "Santoor",
       "outcomes": [
         {
           "id": "GV1",
-          "text": "Makes short sentences with nouns, pronouns, adjectives and prepositions.",
+          "text": "Uses naming words, one and many, action words and describing words.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
             "parts_of_speech",
+            "plurals"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses pronouns, in, on and under, and here and there.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
             "pronouns",
             "prepositions"
           ]
         },
         {
-          "id": "GV2",
-          "text": "Tells the simple past from the simple present.",
+          "id": "GV3",
+          "text": "Uses a, an and the, and is or are to match one or many.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "past",
-            "agreement"
+            "articles",
+            "be_verbs"
           ]
         },
         {
-          "id": "GV3",
-          "text": "Knows opposites such as day and night, open and close.",
+          "id": "GV4",
+          "text": "Joins ideas with and and but.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "conjunctions"
+          ]
+        },
+        {
+          "id": "GV5",
+          "text": "Uses opposites such as thick and thin, long and short.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
             "synonyms_antonyms"
           ]
-        },
-        {
-          "id": "GV4",
-          "text": "Uses words met in Maths and Environmental Studies.",
-          "coverage": "partly",
-          "where": "words",
-          "note": "New words teaches everyday and school words by level; it is not sorted by school subject."
         }
       ]
     }

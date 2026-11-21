@@ -347,7 +347,7 @@ function OtherResult({ given, right, correct }: { given: string; right: string; 
   );
 }
 
-export function GrammarUseView({ more, child, content, view, onRewrite, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { child?: boolean; onRewrite: (typed: string) => void; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+export function GrammarUseView({ more, child, content, view, onRewrite, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { more?: boolean; child?: boolean; onRewrite: (typed: string) => void; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
     const own = onOwn ? ownFor(d.topics) : null;

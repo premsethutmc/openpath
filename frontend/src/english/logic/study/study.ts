@@ -567,14 +567,16 @@ export function kindStrength(records: readonly StudyRecord[], k: StudyKind): num
 }
 
 /**
- * The next task: one not yet done. The kind that is going worst comes first (a kind not yet tried counts as
- * middling, so every kind is met), then the kind met least; within a kind, the lowest level first. Charts and maps
- * never run out: when the written ones are done, the next generated one comes ("chart.g1", "chart.g2", …).
+ * The next task: one not yet done. A kind not yet tried comes first, so every kind is met; then the kind going worst;
+ * but never the same kind three times running, so a learner is not kept on one kind. Within a kind, the lowest level
+ * first. Charts and maps never run out: when the written ones are done, the next generated one comes ("chart.g1", …).
  */
 export function nextStudy(records: readonly StudyRecord[], kind?: StudyKind): StudyTask | null {
   const done = new Set(records.map((r) => r.task));
   const met = (k: StudyKind) => records.filter((r) => r.kind === k).length;
-  const need = (k: StudyKind) => kindStrength(records, k) ?? 0.6;
+  const need = (k: StudyKind) => (met(k) ? (kindStrength(records, k) ?? 1) : -1);
+  const last = records.slice(-2).map((r) => r.kind);
+  const tired = (k: StudyKind) => !kind && last.length === 2 && last.every((x) => x === k);
   const fresh = (k: "chart" | "map") => {
     let n = 1;
     while (done.has(`${k}.g${n}`)) n++;
@@ -586,7 +588,8 @@ export function nextStudy(records: readonly StudyRecord[], kind?: StudyKind): St
       const left = STUDY_TASKS.filter((t) => t.kind === k && !done.has(t.id)).sort((a, b) => a.level - b.level || (a.id < b.id ? -1 : 1));
       return left.length ? [left[0]] : k === "notes" ? [] : [fresh(k)];
     });
-  return candidates.sort((a, b) => need(a.kind) - need(b.kind) || met(a.kind) - met(b.kind) || a.level - b.level || (a.id < b.id ? -1 : 1))[0] ?? null;
+  const order = (a: StudyTask, b: StudyTask) => Number(tired(a.kind)) - Number(tired(b.kind)) || need(a.kind) - need(b.kind) || met(a.kind) - met(b.kind) || a.level - b.level || (a.id < b.id ? -1 : 1);
+  return candidates.sort(order)[0] ?? null;
 }
 
 export interface StudySummary {
