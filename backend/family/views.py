@@ -136,7 +136,8 @@ class AccountView(FamilyView):
         user = request.user
         if user is not None and user.is_authenticated:
             return Response(_account(user))
-        return Response({"authenticated": False, "accounts": True})
+        # sign-in-required@1: on a site for real families every record is kept on the server, so the app offers no device-only use
+        return Response({"authenticated": False, "accounts": True, "sign_in_required": settings.OPENPATH_SIGN_IN_REQUIRED == "on"})
 
 
 class RegisterView(ThrottledPublic):

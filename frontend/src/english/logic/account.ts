@@ -172,11 +172,11 @@ export class Api {
    * Whether this app has a server with accounts, and who is signed in. A static build has none: device-only use.
    * `unreachable` means the server could not be reached at all (offline?), which is not the same as having none.
    */
-  async status(): Promise<{ available: boolean; unreachable: boolean; account: AccountInfo; error?: ApiError }> {
+  async status(): Promise<{ available: boolean; unreachable: boolean; account: AccountInfo; error?: ApiError; signInRequired?: boolean }> {
     try {
-      const a = await this.request<AccountInfo & { accounts?: boolean }>("GET", "/account/");
+      const a = await this.request<AccountInfo & { accounts?: boolean; sign_in_required?: boolean }>("GET", "/account/");
       if (!a || typeof a.authenticated !== "boolean" || a.accounts === false) return { available: false, unreachable: false, account: { authenticated: false } };
-      return { available: true, unreachable: false, account: a };
+      return { available: true, unreachable: false, account: a, signInRequired: a.sign_in_required === true };
     } catch (e) {
       const unreachable = e instanceof ApiError && (e.status === 0 || e.status >= 500);
       return { available: false, unreachable, account: { authenticated: false }, ...(unreachable ? { error: e as ApiError } : {}) };
