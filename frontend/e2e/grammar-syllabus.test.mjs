@@ -398,7 +398,7 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
   await page.getByRole("button", { name: /Practise W4: Notes, charts and maps/ }).click();
   await page.getByRole("heading", { name: "Notes, charts and maps" }).waitFor();
   await fits();
-  const next = () => page.getByRole("button", { name: /^(Next|Finish|Write my own summary)$/ }).click();
+  const next = () => page.getByRole("button", { name: /^(Next|Finish|Now write your own)$/ }).click();
 
   // notes: right title, every main point and no detail, right summary, then the learner's own summary checked
   await page.getByRole("button", { name: "Start: Notes and summary" }).click();
@@ -417,12 +417,13 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
   await page.getByRole("button", { name: n.summaries.right, exact: true }).click();
   await page.locator('[data-correct="true"]').waitFor();
   await next();
-  await page.getByLabel("Your summary").fill("Too short.");
-  await page.getByRole("button", { name: "Check my summary" }).click();
-  await page.locator("[data-own-check]", { hasText: "too short" }).waitFor();
-  await page.getByLabel("Your summary").fill(n.summaries.right);
-  await page.getByRole("button", { name: "Check my summary" }).click();
-  await page.locator("[data-own-check]", { hasText: "It names the main ideas." }).waitFor();
+  await page.getByLabel("What you write").fill("Too short.");
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-check="length"][data-ok="false"]', { hasText: "too short" }).waitFor();
+  await page.locator('[data-check="points"][data-ok="false"]', { hasText: "It leaves out" }).waitFor();
+  await page.getByLabel("What you write").fill(n.summaries.right);
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-own-check][data-passed="4"][data-of="4"]').waitFor();
   await page.getByRole("button", { name: "Finish", exact: true }).click();
   await page.getByRole("heading", { name: "3 of 3 right" }).waitFor();
   await page.getByRole("button", { name: "Done" }).click();
@@ -449,6 +450,15 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
   await page.locator('[data-correct="true"]').waitFor();
   await fits();
   await next();
+  // then the learner's own paragraph, checked against the chart's figures
+  await page.getByLabel("What you write").fill(c.paragraph.join(" ").replace(String(Math.max(...c.values)), String(Math.max(...c.values) + 7)));
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-check="figures"][data-ok="false"]', { hasText: `Check ${Math.max(...c.values) + 7}` }).waitFor();
+  await page.getByLabel("What you write").fill(c.paragraph.join(" "));
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-own-check][data-passed="7"][data-of="7"]').waitFor();
+  await fits();
+  await page.getByRole("button", { name: "Finish", exact: true }).click();
   await page.getByRole("heading", { name: "5 of 5 right" }).waitFor();
   await page.getByRole("button", { name: "Done" }).click();
 
@@ -470,6 +480,15 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
   }
   await fits();
   await next();
+  // then the learner's own directions, followed on the map
+  await page.getByLabel("What you write").fill("Turn left and walk two blocks.");
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-check="start"][data-ok="false"]').waitFor();
+  await page.getByLabel("What you write").fill("Walk north for one block.");
+  await page.getByRole("button", { name: "Check what I wrote" }).click();
+  await page.locator('[data-check="reaches"]', { hasText: "Followed on the map, your directions" }).waitFor();
+  await fits();
+  await page.getByRole("button", { name: "Finish", exact: true }).click();
   await page.getByRole("heading", { name: new RegExp(`of ${m.routes.length + 1} right`) }).waitFor();
   await page.getByRole("button", { name: "Done" }).click();
   await page.getByText(/3 tasks done · \d+ of 12 right/).waitFor();
