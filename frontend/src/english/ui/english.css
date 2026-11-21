@@ -3088,3 +3088,52 @@ h3.sub {
   width: auto;
   padding: 8px 12px;
 }
+
+/* Poems and everyday texts: line breaks kept as written; timetables and charts in a fixed-width face so columns line up */
+.kind-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  background: var(--card, #fff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  color: #1f2433;
+  font-weight: 400;
+}
+.kind-text p {
+  margin: 0 0 0.9em;
+  white-space: pre-wrap;
+}
+.kind-poem p {
+  font-style: italic;
+}
+.kind-table {
+  overflow-x: auto;
+}
+.kind-table table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  margin: 0 0 0.9em;
+}
+.kind-table th,
+.kind-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--line);
+}
+.kind-table th {
+  font-weight: 700;
+}
+.kind-back summary {
+  cursor: pointer;
+  color: var(--accent, #5b4bd5);
+  font-weight: 600;
+  margin: 8px 0;
+}
+.vocab .kind-text p {
+  font-weight: 400;
+  color: #1f2433;
+}

@@ -90833,6 +90833,9 @@ momo
 momos
 scorebook
 scorebooks
+areca
+langur
+langurs
 #no-suggest
 abortion
 alcohol
