@@ -25,15 +25,15 @@ function sit(text: (typeof LONG.texts)[number], part: number, right: (i: number)
   return s.take();
 }
 
-test("LR-1 content: six stories on six themes at levels four to six, three parts, questions on theme, character and title", () => {
+test("LR-1 content: twelve stories on twelve themes at levels four to six, three parts, questions on theme, character and title", () => {
   assert.deepEqual(longProblems(LONG), []);
-  assert.equal(LONG.texts.length, 6);
-  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 6);
+  assert.equal(LONG.texts.length, 12);
+  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 12);
   assert.deepEqual([...new Set(LONG.texts.map((t) => t.level))].sort(), [4, 5, 6]);
   // the right answer is not always in the same place
   const place = [0, 0, 0];
   for (const t of LONG.texts) [...t.parts.flatMap((p, k) => p.questions.map((q, i) => choices(q, `${t.id}|${k}|${i}`))), ...t.whole.map((q, i) => choices(q, `${t.id}|${PARTS}|${i}`))].forEach((c) => place[c.answer]++);
-  assert.ok(Math.min(...place) >= 12, `places: ${place}`);
+  assert.ok(Math.min(...place) >= 24, `places: ${place}`);
   const bad = { ...LONG, texts: [{ ...LONG.texts[0], whole: LONG.texts[0].whole.slice(0, 2) }] };
   assert.match(longProblems(bad).join(" "), /no question on the title/);
 });

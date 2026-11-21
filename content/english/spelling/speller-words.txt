@@ -90827,6 +90827,12 @@ zygotic
 zymurgy
 ridley
 ridleys
+kolam
+kolams
+momo
+momos
+scorebook
+scorebooks
 #no-suggest
 abortion
 alcohol

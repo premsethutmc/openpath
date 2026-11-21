@@ -1,6 +1,6 @@
 {
   "id": "long-reads",
-  "version": 1,
+  "version": 2,
   "status": "candidate: stories written by OpenPath (AI-prepared) and checked by rule; British spelling; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: following a text and its theme through parts; it changes no capability estimate",
@@ -692,6 +692,696 @@
             "He finally beats Edward in Bombay"
           ],
           "explain": "In his first race nobody cheered for him; later he cheers loudest for those nobody cheers."
+        }
+      ]
+    },
+    {
+      "id": "lr4.friendship",
+      "level": 4,
+      "theme": "friendship",
+      "title": "The New Boy's Lunch",
+      "parts": [
+        {
+          "text": "On the first day of term, a new boy called Tenzin sat alone at the end of the lunch bench. He had come from the hills, and his tiffin box smelled of something nobody in the class had eaten before. Two boys held their noses and laughed. Tenzin closed the box and ate nothing.\n\nPriya saw it happen. She wanted to say something, but the boys were her friends, and she did not want them to laugh at her too. So she looked at her own lunch and said nothing. All afternoon she felt as if she had swallowed a stone. When the bell rang, Tenzin was the first out of the gate, walking fast with his head down.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Why did Tenzin close his tiffin box?",
+              "right": "Two boys laughed at his food",
+              "wrong": [
+                "He was not hungry that day",
+                "The lunch bell had already rung"
+              ],
+              "explain": "Two boys held their noses and laughed, and Tenzin closed the box."
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Priya feel that afternoon?",
+              "right": "Guilty about saying nothing",
+              "wrong": [
+                "Proud of her friends",
+                "Glad the boys laughed"
+              ],
+              "explain": "She felt as if she had swallowed a stone after staying quiet."
+            }
+          ]
+        },
+        {
+          "text": "The next day Priya did something brave, though it did not feel brave at the time. She carried her tiffin to the end of the bench and sat down next to Tenzin. \"What is in your box?\" she asked. He looked at her as if she might be joking. Then he opened it. Inside were small round dumplings. \"Momos,\" he said. \"My grandmother makes them.\"\n\nPriya tried one. It was soft and warm, with vegetables inside and a spicy sauce. \"These are better than my lunch,\" she said, and it was true. She gave him half of her lemon rice. The two boys watched from the other end of the bench, but this time they did not laugh.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was in Tenzin's tiffin?",
+              "right": "Momos made by his grandmother",
+              "wrong": [
+                "Lemon rice from Priya's house",
+                "Bread and jam from the canteen"
+              ],
+              "explain": "\"Momos,\" he said. \"My grandmother makes them.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did the boys not laugh this time?",
+              "right": "Priya sat with Tenzin and ate his food",
+              "wrong": [
+                "They had already left the bench",
+                "Tenzin had shouted at them angrily"
+              ],
+              "explain": "Priya chose to sit with Tenzin and enjoy his lunch openly."
+            }
+          ]
+        },
+        {
+          "text": "By Friday, four children were sitting at the end of the bench, and Tenzin's grandmother was sending a bigger box. Even one of the boys who had laughed asked, a little shyly, if he could try a momo. Tenzin gave him two.\n\nAt the end of the month, the class held a food day, and everyone brought something from home. Tenzin's momos were finished first. Priya brought lemon rice, and she told the class about the first day, and how she had stayed quiet. \"Next time,\" she said, \"I will not wait until the next day.\" Tenzin smiled at her across the room. He no longer ate at the end of the bench. Now the bench had no end that anyone sat alone at.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Whose food was finished first on food day?",
+              "right": "Tenzin's momos",
+              "wrong": [
+                "Priya's lemon rice",
+                "The boys' sandwiches"
+              ],
+              "explain": "Tenzin's momos were finished first."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Priya learn?",
+              "right": "To speak up at once when someone is treated unkindly",
+              "wrong": [
+                "To bring a better lunch to school every day",
+                "To stop eating lunch with her old friends"
+              ],
+              "explain": "\"Next time I will not wait until the next day.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "Standing up for someone who is left out",
+          "wrong": [
+            "Learning to cook momos",
+            "Winning a food competition"
+          ],
+          "explain": "Priya moves from staying quiet to including Tenzin, and the class follows."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Priya change?",
+          "right": "From staying silent to acting kindly and speaking up",
+          "wrong": [
+            "From kind to unkind",
+            "From shy at home to bold at school"
+          ],
+          "explain": "She first said nothing; later she sat with him and told the class she would not wait again."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The New Boy's Lunch?",
+          "right": "His lunch is what starts the unkindness and the friendship",
+          "wrong": [
+            "It gives a recipe for making momos at home",
+            "The new boy forgot to bring his lunch to school"
+          ],
+          "explain": "The laughing at his food, and later sharing it, drive the story."
+        }
+      ]
+    },
+    {
+      "id": "lr4.sport",
+      "level": 4,
+      "theme": "sport",
+      "title": "The Last Over",
+      "parts": [
+        {
+          "text": "Our school team needed eight runs from the last over to win the inter-school cricket final. Karthik, our best batsman, was out. The only batsmen left were Anil, who had scored nothing all season, and me. I was the team's scorer, and I had been sent in only because two players were ill.\n\nMy hands were shaking as I walked to the crease. The bowler from the other school was tall and fast, and his team was already clapping. Anil came up to me and said, \"Just touch the ball and run. Don't try anything big.\" That was the best advice anyone gave me that day.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How many runs did the team need from the last over?",
+              "right": "Eight",
+              "wrong": [
+                "Six",
+                "Twelve"
+              ],
+              "explain": "Our school team needed eight runs from the last over to win."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why was the narrator nervous?",
+              "right": "He was the scorer and not a real batsman",
+              "wrong": [
+                "He had been ill the week before",
+                "The match was being played at night"
+              ],
+              "explain": "He was the team's scorer, sent in only because two players were ill."
+            }
+          ]
+        },
+        {
+          "text": "The first ball was so fast I did not see it. It thudded into the keeper's gloves. The second I pushed towards the edge of the field, and we ran two. The third I missed again. Then Anil said, \"Watch his hand, not his face.\" On the fourth ball I did, and I saw the ball come out low and straight. I put my bat in front of it, and it ran away past the bowler. We ran three.\n\nThree runs needed from two balls. On the fifth ball, Anil swung hard, and the ball flew high into the air. A fielder ran under it. Everyone went quiet. Then the ball slipped through his fingers and bounced away. We ran two.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Anil tell the narrator to watch?",
+              "right": "The bowler's hand",
+              "wrong": [
+                "The bowler's face",
+                "The fielders"
+              ],
+              "explain": "\"Watch his hand, not his face.\""
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What happened on the fifth ball?",
+              "right": "The ball was dropped and they ran two",
+              "wrong": [
+                "The narrator was bowled out",
+                "Anil hit the ball for four runs"
+              ],
+              "explain": "A fielder ran under it; the ball slipped through his fingers and they ran two."
+            }
+          ]
+        },
+        {
+          "text": "One run to win, one ball to go. I was facing. The bowler ran in faster than ever. I watched his hand, as Anil had told me, and I did not swing. I just touched the ball and ran. Anil ran too, harder than I had ever seen anyone run, and he dived over the line as the ball hit the stumps behind him.\n\nThe umpire raised his finger slowly, and for a moment I thought Anil was out. Then I understood: he was signalling the run. We had won. The team ran onto the field and lifted Anil onto their shoulders. That evening, in the scorebook, I wrote my own name for the first time: Sameer, 6 not out. Next to Anil's name I wrote 2, and next to it, in small letters, \"the best two runs of the season.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How many runs did the narrator score?",
+              "right": "Six",
+              "wrong": [
+                "Two",
+                "Eight"
+              ],
+              "explain": "He wrote: Arjun, 6 not out."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Sameer call Anil's runs the best of the season?",
+              "right": "Anil's advice and running won the match",
+              "wrong": [
+                "Anil hit the most sixes",
+                "Anil scored the first runs"
+              ],
+              "explain": "Anil's advice and his dive over the line won the final."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the main idea of the story?",
+          "right": "Calm teamwork can win when stars are missing",
+          "wrong": [
+            "Fast bowlers always win in the end",
+            "Scorers should never be asked to bat"
+          ],
+          "explain": "Two unlikely batsmen win by keeping calm and helping each other."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Sameer change during the over?",
+          "right": "From shaking with fear to calm and focused",
+          "wrong": [
+            "From calm and sure to frightened",
+            "From proud of himself to angry"
+          ],
+          "explain": "His hands shook at first; by the last ball he watched the hand and did not swing."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The Last Over?",
+          "right": "The whole story takes place in the final six balls",
+          "wrong": [
+            "It is about the last match of the season",
+            "The bowler is called Over"
+          ],
+          "explain": "The story follows each ball of the final over."
+        }
+      ]
+    },
+    {
+      "id": "lr5.technology",
+      "level": 5,
+      "theme": "technology",
+      "title": "Grandmother's Video Call",
+      "parts": [
+        {
+          "text": "When Kavin's family moved to the city, his grandmother stayed behind in the village. She had a phone, but she used it only to answer calls, holding it far from her ear and shouting. Every Sunday Kavin's mother called her, and every Sunday the call ended with Grandmother saying, \"I cannot see you. What use is a voice without a face?\"\n\nFor his birthday, Kavin's uncle gave him some money. Kavin did not buy the cricket bat he had been wanting. Instead, he bought a second-hand smartphone and posted it to the village, with a note: \"Grandmother, wait for Sunday.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Grandmother complain about every Sunday?",
+              "right": "She could not see her family",
+              "wrong": [
+                "The calls were too long",
+                "Her phone was broken"
+              ],
+              "explain": "\"I cannot see you. What use is a voice without a face?\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does Kavin's choice show about him?",
+              "right": "He cared more for his grandmother than a new bat",
+              "wrong": [
+                "He did not really like playing cricket",
+                "He wanted a new phone for himself"
+              ],
+              "explain": "He spent his birthday money on a phone for her instead of the bat he wanted."
+            }
+          ]
+        },
+        {
+          "text": "Sunday did not go well. Grandmother answered the video call holding the phone to her ear, so the family saw only a grey plait of hair. When she finally looked at the screen, she pressed something, and the call ended. It took six attempts before her face appeared, upside down and very close.\n\nKavin realised that a phone alone was not enough. Every evening that week, he called her and taught her one small thing: how to hold the phone in front of her, which green button to press, how to turn the camera round. He drew pictures of the buttons on paper and asked the neighbour's daughter to stick them next to Grandmother's phone. Some evenings she was impatient. \"In my day we wrote letters,\" she grumbled. But she always picked up.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the family see first on the video call?",
+              "right": "A grey plait of hair",
+              "wrong": [
+                "Grandmother's smiling face",
+                "A blank screen"
+              ],
+              "explain": "She held the phone to her ear, so they saw only a grey plait of hair."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Kavin draw pictures of the buttons?",
+              "right": "To help her remember which to press",
+              "wrong": [
+                "To decorate the walls of her house",
+                "For a project he had at school"
+              ],
+              "explain": "He drew the buttons so she could follow them next to her phone."
+            }
+          ]
+        },
+        {
+          "text": "On the next Sunday, the phone rang in the city. It was Grandmother, calling them. Her face filled the screen, the right way up, and behind her they could see her garden, where the beans were climbing the fence. She showed them a new calf, which tried to lick the phone, and the whole family laughed.\n\nNow she calls on Wednesdays as well. She has learned to send photographs of her vegetables and to ask Kavin what he ate for lunch. Last month she showed her friend from the next street how to make a video call too. \"It is not so difficult,\" she told her. \"You only need a patient teacher.\" Kavin still has no new cricket bat. He says the calls are worth more.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Grandmother show the family on the call?",
+              "right": "A new calf",
+              "wrong": [
+                "A new house",
+                "Her new glasses"
+              ],
+              "explain": "She showed them a new calf, which tried to lick the phone."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does \"You only need a patient teacher\" tell us?",
+              "right": "Kavin's patient teaching made the difference",
+              "wrong": [
+                "Phones are able to teach themselves",
+                "Her friend works as a teacher"
+              ],
+              "explain": "She credits patient teaching for her learning."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Patience and care can bring a family closer",
+          "wrong": [
+            "Old people should not use phones",
+            "Cricket bats cost too much money"
+          ],
+          "explain": "Kavin's patient teaching lets Grandmother see her family again."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Grandmother change?",
+          "right": "From giving up on phones to teaching a friend",
+          "wrong": [
+            "From cheerful and calm to grumpy",
+            "From busy all day to bored at home"
+          ],
+          "explain": "She could not answer a call at first, and later shows her friend how."
+        },
+        {
+          "skill": "title",
+          "prompt": "What is shown by calling the story Grandmother's Video Call?",
+          "right": "The call is the goal everyone works towards",
+          "wrong": [
+            "It is an advertisement for a phone",
+            "Grandmother invented video calls"
+          ],
+          "explain": "The whole story builds to Grandmother making the call herself."
+        }
+      ]
+    },
+    {
+      "id": "lr5.festival",
+      "level": 5,
+      "theme": "celebration",
+      "title": "The Kolam Competition",
+      "parts": [
+        {
+          "text": "Every year before the harvest festival, our street held a kolam competition. Each family drew a pattern in rice flour on the ground outside their gate, and the oldest woman on the street walked along at sunrise to choose the best. For three years, the prize had gone to Mrs Lakshmi at number twelve, whose kolams were so large and perfect that people from other streets came to photograph them.\n\nThis year my sister Anitha, who was eleven, announced that she would win. Our mother laughed and said it was enough to take part. Anitha did not laugh. For two weeks she practised in a notebook every evening, drawing dots and curves until her pencil was a stub.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What were the kolams drawn with?",
+              "right": "Rice flour",
+              "wrong": [
+                "Coloured chalk",
+                "Paint"
+              ],
+              "explain": "Each family drew a pattern in rice flour on the ground."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does practising every evening show about Anitha?",
+              "right": "She was determined",
+              "wrong": [
+                "She was bored",
+                "She disliked drawing"
+              ],
+              "explain": "She practised for two weeks until her pencil was a stub."
+            }
+          ]
+        },
+        {
+          "text": "On the night before the festival, Anitha got up at four. She swept the ground, sprinkled water to settle the dust, and began. Her design was not large. It was a peacock, made of a single unbroken line that looped around a grid of dots, so that you could follow it with your finger from beak to tail and back again without lifting it.\n\nAt five, it started to drizzle. Anitha covered half the kolam with our umbrella and stood in the rain over the other half, holding a plastic sheet. By the time the rain stopped, she was soaked, but only one feather had smudged. She redrew it carefully as the sky turned pink.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was special about Anitha's peacock?",
+              "right": "It was one unbroken line",
+              "wrong": [
+                "It was the largest on the street",
+                "It used many colours"
+              ],
+              "explain": "It was made of a single unbroken line that looped around a grid of dots."
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why was Anitha soaked?",
+              "right": "She protected her kolam from the rain",
+              "wrong": [
+                "She fell into a puddle on the way",
+                "She had washed the whole street"
+              ],
+              "explain": "She stood in the rain holding a plastic sheet over the kolam."
+            }
+          ]
+        },
+        {
+          "text": "At sunrise, old Mrs Rangan walked slowly along the street with her stick. She stopped for a long time at number twelve, where Mrs Lakshmi's kolam covered the whole road like a carpet. Then she came to our gate. She bent down, put her finger on the peacock's beak, and traced the line all the way round. It took her a full minute.\n\nShe gave the prize to Mrs Lakshmi. Anitha's face fell. But then Mrs Rangan turned to her and said, \"Yours is the one I will remember. A line that never breaks is the hardest thing to draw.\" That afternoon, Mrs Lakshmi came to our house with a plate of sweets and asked Anitha to teach her the peacock. Next year, she said, they would draw one together.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Who won the prize?",
+              "right": "Mrs Lakshmi",
+              "wrong": [
+                "Anitha",
+                "Mrs Rangan"
+              ],
+              "explain": "She gave the prize to Mrs Lakshmi."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Mrs Lakshmi visit with sweets?",
+              "right": "She admired Anitha's skill and wanted to learn",
+              "wrong": [
+                "She wanted to show off her prize",
+                "She was a relative visiting"
+              ],
+              "explain": "She asked Anitha to teach her the peacock."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Skill and care can earn respect even without winning",
+          "wrong": [
+            "Big kolams always win the prize in the end",
+            "Rain always spoils a festival morning"
+          ],
+          "explain": "Anitha does not win, but her skill earns the judge's and the winner's respect."
+        },
+        {
+          "skill": "character",
+          "prompt": "How do Anitha's feelings change at the end?",
+          "right": "From disappointed to proud and welcomed",
+          "wrong": [
+            "From happy at first to angry",
+            "From bored and tired to sleepy"
+          ],
+          "explain": "Her face fell at losing, then the judge and Mrs Lakshmi honoured her work."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called The Kolam Competition rather than Anitha's Win?",
+          "right": "Because she does not win, yet gains something better",
+          "wrong": [
+            "Because Anitha won the prize",
+            "Because kolams are not drawn at festivals"
+          ],
+          "explain": "The competition is the setting; the real reward is respect and friendship."
+        }
+      ]
+    },
+    {
+      "id": "lr6.adventure",
+      "level": 6,
+      "theme": "adventure",
+      "title": "Fog on the Western Ghats",
+      "parts": [
+        {
+          "text": "The trek to the waterfall had been planned for months, and by eight in the morning our group of six was already high on the forest path, with the guide, Mr Joseph, walking in front. The air smelled of wet leaves and cardamom. Below us, the valley lay like a green bowl, and the river shone in the sun.\n\nBy ten, everything had changed. A white fog rolled up the hillside so quickly that within minutes we could not see the person walking in front of us. Mr Joseph stopped and made us hold hands in a line. \"Nobody leaves the path,\" he said quietly. \"In fog, the forest looks the same in every direction.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Why did Mr Joseph make the group hold hands?",
+              "right": "Fog made it impossible to see each other",
+              "wrong": [
+                "The path was slippery with mud",
+                "A wild animal was near"
+              ],
+              "explain": "In the fog they could not see the person walking in front of them."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does \"the forest looks the same in every direction\" warn about?",
+              "right": "It is easy to get lost",
+              "wrong": [
+                "The forest is boring",
+                "The trees are all the same kind"
+              ],
+              "explain": "In fog, without landmarks, walkers easily lose their way."
+            }
+          ]
+        },
+        {
+          "text": "We walked slowly for an hour, listening to Mr Joseph's voice. Then my cousin Rohan, at the back of the line, let go to tie his lace. When he stood up, the line had moved on, and the fog had closed behind it. He called out, but the wet trees swallowed the sound.\n\nRohan remembered what Mr Joseph had told us at the start, though most of us had not been listening: if you are lost, stay where you are, make yourself warm, and make a noise that carries. He sat under a large rock, put on his rain jacket, and blew the whistle every member of the group had been given, three short blasts, again and again.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why was Rohan separated from the group?",
+              "right": "He let go to tie his lace",
+              "wrong": [
+                "He chased a bird",
+                "He fell into the river"
+              ],
+              "explain": "He let go to tie his lace, and the line moved on."
+            },
+            {
+              "skill": "detail",
+              "prompt": "What signal did Rohan make with his whistle?",
+              "right": "Three short blasts, again and again",
+              "wrong": [
+                "One long blast every hour",
+                "A song he had learnt at school"
+              ],
+              "explain": "He blew three short blasts, again and again."
+            }
+          ]
+        },
+        {
+          "text": "It was Mr Joseph who noticed first that the line was one person short. He did not let anyone go back alone. Instead, he tied a rope from the last person to a tree and walked back along the path, counting his steps and stopping every fifty to listen. On the third stop, he heard it: three short blasts, faint but clear, to the left of the path.\n\nRohan was found shivering but smiling. The fog lifted an hour later, and we saw that he had sat only forty metres from the path, beside a drop of twenty metres that he had never seen. Nobody felt like reaching the waterfall that day. On the walk down, Mr Joseph said that the forest had taught us more than any waterfall could: that the rules we half-listen to at the start are the ones that bring us home.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How did Mr Joseph keep himself from getting lost while searching?",
+              "right": "A rope tied to a tree and counting his steps",
+              "wrong": [
+                "He used a map and compass",
+                "He followed Rohan's footprints"
+              ],
+              "explain": "He tied a rope to a tree and counted his steps, stopping to listen."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why was it lucky that Rohan stayed where he was?",
+              "right": "A dangerous drop was right beside him",
+              "wrong": [
+                "He was close to the waterfall",
+                "Staying kept him dry"
+              ],
+              "explain": "He had sat beside a twenty-metre drop he had never seen."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Safety rules matter most when things go wrong",
+          "wrong": [
+            "Waterfalls are not worth the walk",
+            "Fog in the hills is beautiful"
+          ],
+          "explain": "Following the rules he half-heard brought Rohan home safely."
+        },
+        {
+          "skill": "character",
+          "prompt": "What does Mr Joseph's search show about him?",
+          "right": "He is calm and careful in a crisis",
+          "wrong": [
+            "He is careless and in a hurry",
+            "He is frightened and gives up"
+          ],
+          "explain": "He searched methodically with a rope and counting, not in a panic."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called Fog on the Western Ghats?",
+          "right": "The fog causes the danger at the heart of the story",
+          "wrong": [
+            "It is a weather report for the hills",
+            "The group went there to study the fog"
+          ],
+          "explain": "The sudden fog separates Rohan and creates the danger."
+        }
+      ]
+    },
+    {
+      "id": "lr6.mystery",
+      "level": 6,
+      "theme": "mystery and investigation",
+      "title": "The Mystery of the Missing Sugar",
+      "parts": [
+        {
+          "text": "Somebody was stealing sugar from the kitchen. Every morning, Divya's mother found the lid of the sugar tin slightly open and a thin white trail across the counter. Divya's younger brother Varun was the first to be suspected, because he had once been caught eating sugar with a spoon. He swore he had not touched it, and for once Divya believed him.\n\nDivya decided to investigate as a scientist would. \"First we observe,\" she said, \"then we guess, then we test the guess.\" She did not accuse anyone. That night, she sprinkled a little flour on the counter around the tin, so that anything that walked there would leave tracks.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What clue did Divya's mother find each morning?",
+              "right": "A thin white trail and an open lid",
+              "wrong": [
+                "Footprints on the floor",
+                "An empty tin"
+              ],
+              "explain": "She found the lid slightly open and a thin white trail across the counter."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Divya sprinkle flour around the tin?",
+              "right": "To catch the tracks of whatever came",
+              "wrong": [
+                "To bake a cake for her brother",
+                "To hide the sugar from the thief"
+              ],
+              "explain": "Anything walking there would leave tracks in the flour."
+            }
+          ]
+        },
+        {
+          "text": "In the morning, there were no footprints, not even small ones. Instead, the flour was crossed by hundreds of tiny dotted lines, all leading from a crack beside the window to the sugar tin and back. Divya looked closely with her father's magnifying glass and saw them: a moving line of very small ants, each carrying a grain of sugar almost as big as its own head.\n\nVarun was delighted to be innocent. But Divya was not finished. \"Our guess is ants,\" she said. \"Now we test it. If ants are the thieves, then sugar in a tin with a tight lid should stay safe, and a little sugar left outside should disappear.\" She placed a teaspoon of sugar on a saucer and closed the tin firmly.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did the ant trails lead from?",
+              "right": "A crack beside the window",
+              "wrong": [
+                "The kitchen door",
+                "Under the fridge"
+              ],
+              "explain": "The lines led from a crack beside the window to the sugar tin."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What was the purpose of the saucer of sugar?",
+              "right": "To test whether ants were the thieves",
+              "wrong": [
+                "To give Varun a sweet treat",
+                "To catch the mice in the kitchen"
+              ],
+              "explain": "If ants were the thieves, sugar left outside should disappear."
+            }
+          ]
+        },
+        {
+          "text": "By evening, the saucer was empty and the tin was untouched. The guess had passed its test. Divya's father wanted to spray the crack with poison, but Divya asked him to wait. She had read that ants follow a scent trail left by the ants before them. She wiped the counter with vinegar to remove the trail, sealed the crack with a little putty, and kept the sugar in a jar with a screw lid.\n\nThe ants did not come back. At dinner, her mother announced that the case was closed, and Varun asked for an apology, which he received, along with a small spoon of sugar. Divya wrote up the case in her science notebook under the heading \"Observe, guess, test\" and added a fourth word underneath: \"Explain.\"",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did Divya wipe the counter with vinegar?",
+              "right": "To remove the ants' scent trail",
+              "wrong": [
+                "To clean up spilt sugar",
+                "To make the kitchen smell nice"
+              ],
+              "explain": "Ants follow a scent trail, so she removed it with vinegar."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Divya add the word \"Explain\"?",
+              "right": "A scientist also says why the answer is right",
+              "wrong": [
+                "She forgot to explain to Varun",
+                "Her teacher told her to"
+              ],
+              "explain": "Testing gives an answer; explaining shows why it works."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the central theme of the story?",
+          "right": "Careful observing and testing finds the truth",
+          "wrong": [
+            "Younger brothers always steal sugar",
+            "Ants are dangerous pests at home"
+          ],
+          "explain": "Divya solves the mystery by observing, guessing and testing, not by blaming."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Divya behave differently from the rest of her family?",
+          "right": "She tests ideas instead of accusing or spraying",
+          "wrong": [
+            "She blames her brother Varun first",
+            "She ignores the problem completely"
+          ],
+          "explain": "Others suspected Varun or wanted poison; she observed and tested."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called a mystery?",
+          "right": "The thief is unknown until it is investigated",
+          "wrong": [
+            "Because nobody ever finds the thief",
+            "Because the sugar was magic"
+          ],
+          "explain": "The family does not know who is taking the sugar until Divya's test."
         }
       ]
     }
