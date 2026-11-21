@@ -1,6 +1,6 @@
 {
   "id": "grammar-learn",
-  "version": 2,
+  "version": 3,
   "status": "practice_only",
   "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
   "format": "One card per Grammar in use topic, shown the first time a learner meets the topic (and again after two misses in a row): the rule, two examples, a common mistake beside the right version with a one-line reason, and two questions to try (not scored).",
@@ -1974,6 +1974,35 @@
         "wrong": [
           "has",
           "haves"
+        ]
+      }
+    },
+    {
+      "topic": "senses",
+      "rule": "Good writing helps the reader see, hear, smell, taste and feel. Use exact sense words instead of plain ones.",
+      "examples": [
+        "The bells clanged and the smell of incense drifted out.",
+        "The sand was hot and gritty between my toes."
+      ],
+      "try": {
+        "question": "Which sentence uses the sense of smell?",
+        "right": "The kitchen smelled of cardamom and hot milk.",
+        "wrong": [
+          "The kitchen was clean and bright.",
+          "We ate in the kitchen."
+        ]
+      },
+      "mistake": {
+        "wrong": "The food was nice.",
+        "right": "The rice was hot and fluffy, and the curry was spicy.",
+        "why": "Nice tells the reader nothing; sense words show how it tasted and felt."
+      },
+      "try2": {
+        "question": "Which sentence helps you hear the rain?",
+        "right": "Rain drummed on the tin roof all night.",
+        "wrong": [
+          "It rained all night long.",
+          "There was a lot of rain."
         ]
       }
     }

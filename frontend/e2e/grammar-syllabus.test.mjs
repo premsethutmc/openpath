@@ -338,7 +338,7 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await fits();
   await page.getByRole("button", { name: "← Stop" }).click();
   await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
-  await page.getByText("9 in the app · 1 partly · 27 with a grown-up · 0 not yet (of 37)").waitFor();
+  await page.getByText("10 in the app · 0 partly · 27 with a grown-up · 0 not yet (of 37)").waitFor();
   await fits();
   await page.getByRole("button", { name: "Class 6", exact: true }).click();
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();

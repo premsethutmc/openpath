@@ -71,3 +71,9 @@ capital, end with a mark and be long enough; the usual writing slips are pointed
 is shown. Only right or not and the number of tries are kept (record type `own`); the sentence itself is never
 stored or sent anywhere. Editing clears the last check. Tests: GS-1, WO-1..3, CS-2 (screened), e2e
 `english-gaps` "Look up grammar…".
+
+## Language of the senses (21 November 2026)
+
+New topic `senses` at level 5 (the smallest level, now 96 sentences): 14 sentences (which sense a word or
+sentence uses; replace a word that does not fit the sense), a learn card and a write-your-own prompt that needs a
+sense word. Closes Class 8 W4 (exact words and the language of the senses); Class 8 is now 10 lines in the app.

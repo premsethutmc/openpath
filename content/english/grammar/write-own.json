@@ -240,6 +240,15 @@
         "\\bas\\s+\\w+\\s+as\\b|\\blike\\s+(a|an|the)\\b"
       ],
       "hint": "Compare with as … as or like: as busy as a bee."
+    },
+    {
+      "topic": "senses",
+      "prompt": "Write a sentence about your favourite food that tells how it smells, tastes or feels.",
+      "example": "The hot dosa was crisp at the edges and smelled of ghee.",
+      "need": [
+        "\\b(smell|smells|smelled|smelt|taste|tastes|tasted|sweet|sour|salty|spicy|bitter|crisp|crispy|crunchy|soft|hot|warm|cold|juicy|creamy|chewy|smooth|fluffy|sticky|tangy|buttery|fresh)\\b"
+      ],
+      "hint": "Use a word like crunchy, spicy, sweet, soft or smelled."
     }
   ]
 }
