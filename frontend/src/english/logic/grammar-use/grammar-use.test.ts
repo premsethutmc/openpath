@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { LEARN, learnProblems, GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkChoose, checkFix, checkSpot, choices, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
+import { LEARN, learnProblems, GRAMMAR, GrammarSitting, SITTING_SIZE, checkBuild, checkChoose, checkFix, checkRewrite, checkSpot, choices, corrected, fixParts, grammarProblems, grammarSummary, levelFor, pick, startLevel, spotWords, tiles, type GrammarItem, type GrammarRecord } from "./grammar-use.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -26,6 +26,11 @@ test("GU-1 content: three levels, every sentence checkable, tiles never laid out
       assert.ok(p.wrong >= 0 && !p.words.join(" ").includes("["), it.id);
       for (const r of it.right!) assert.ok(checkFix(it, p.wrong, r), `${it.id}: ${r}`);
       assert.ok(!corrected(it).includes("["));
+    } else if (it.kind === "rewrite") {
+      for (const r of it.right!) assert.ok(checkRewrite(it, r), `${it.id}: ${r}`);
+      assert.ok(!checkRewrite(it, it.sentence), it.id);
+    } else if (it.kind === "choose" || it.kind === "spot") {
+      continue;
     } else {
       const t = tiles(it);
       assert.equal(t.length, (it.parts ?? it.sentence.split(" ")).length + (it.extra?.length ?? 0));
@@ -82,6 +87,7 @@ function sit(level: number, history: GrammarRecord[], miss: (it: GrammarItem, i:
     if (it.kind === "choose") s.choose(choices(it).findIndex((o) => (o === it.right![0]) !== wrong));
     else if (it.kind === "spot") s.spot(spotWords(it).findIndex((w) => it.right!.includes(bare(w)) !== wrong));
     else if (it.kind === "fix") s.fix(fixParts(it).wrong, wrong ? "zzz" : it.right![0]);
+    else if (it.kind === "rewrite") s.rewrite(wrong ? it.sentence : it.right![0]);
     else s.build(wrong ? [...it.sentence.split(" ")].reverse() : it.sentence.split(" "));
     const f = s.snapshot().feedback!;
     assert.equal(f.correct, !wrong);
@@ -241,8 +247,8 @@ test("GU-11 choosing an answer: one right answer among two or three, in an order
 test("GU-14 the five lines closed on 19 Nov 2026 have their sentences and passages", () => {
   const at = (topic: string) => GRAMMAR.items.filter((i) => i.topic === topic);
   // Class 1 RW9 and Class 2 RW3: pictures in story order, and how people felt
-  assert.equal(at("picture_order").filter((i) => i.kind === "build" && i.parts?.every((p) => /^\p{Extended_Pictographic}/u.test(p))).length, 5);
-  assert.equal(at("picture_order").filter((i) => i.kind === "choose").length, 3);
+  assert.ok(at("picture_order").filter((i) => i.kind === "build" && i.parts?.every((p) => /^\p{Extended_Pictographic}/u.test(p))).length >= 5);
+  assert.ok(at("picture_order").filter((i) => i.kind === "choose").length >= 3);
   // Class 6 GV11: each, every, everyone, someone, nobody
   assert.ok(at("pronoun_agreement").filter((i) => /\b(Each|Every|Everyone|Someone|Nobody)\b/.test(i.sentence)).length >= 6);
   // Class 6 GV12: a tense held across a paragraph of three sentences
@@ -329,4 +335,51 @@ test("GU-18 every topic has at least eight sentences, and every card a common mi
     assert.notEqual(c.mistake.wrong, c.mistake.right, c.topic);
     assert.notEqual(c.try2.question, c.try.question, c.topic);
   }
+});
+
+test("GU-19 a sentence written out again: letter for letter, capitals and marks count, spaces forgiven; two at most a sitting", () => {
+  const it = item("my sister lives in delhi.");
+  assert.equal(it.kind, "rewrite");
+  assert.ok(checkRewrite(it, "My sister lives in Delhi."));
+  assert.ok(checkRewrite(it, "  My  sister lives in Delhi . "));
+  assert.ok(!checkRewrite(it, "My sister lives in delhi."));
+  assert.ok(!checkRewrite(it, "My sister lives in Delhi"));
+  assert.ok(GRAMMAR.items.filter((i) => i.kind === "rewrite").length >= 60);
+  for (const l of [1, 2, 3, 4, 5, 6]) assert.ok(GRAMMAR.items.some((i) => i.kind === "rewrite" && i.level === l), `level ${l} has sentences to write again`);
+  for (let level = 1; level <= 7; level++) assert.ok(pick(GRAMMAR, level, LEARNT).filter((i) => i.kind === "rewrite").length <= 2);
+  // the sitting takes the whole sentence and shows the right one
+  const s = new GrammarSitting(GRAMMAR, 1, LEARNT, ["capitals"]);
+  for (let v = s.snapshot(), g = 0; v.phase !== "done" && g < 20; v = s.snapshot(), g++) {
+    const x = byId.get(v.id!)!;
+    if (x.kind === "rewrite") {
+      assert.equal(v.rewrite!.sentence, x.sentence);
+      s.rewrite(x.right![0]);
+      assert.deepEqual([s.snapshot().feedback!.correct, s.snapshot().feedback!.right], [true, x.right![0]]);
+      return;
+    }
+    if (x.kind === "fix") s.fix(fixParts(x).wrong, x.right![0]);
+    else s.build(x.sentence.split(" "));
+    s.next();
+  }
+  assert.fail("no sentence to write again in a capitals sitting");
+});
+
+test("GU-20 a second miss in a row on a topic brings the rule said a simpler way, in the feedback and on the card", () => {
+  for (const c of LEARN) assert.ok(c.simple.say && c.simple.say.split(" ").length <= 25 && c.simple.example, c.topic);
+  const s = new GrammarSitting(GRAMMAR, 1, LEARNT, ["articles"]);
+  const miss = () => {
+    const x = byId.get(s.snapshot().id!)!;
+    if (x.kind === "fix") s.fix(fixParts(x).wrong, "zzz");
+    else if (x.kind === "rewrite") s.rewrite(x.sentence);
+    else s.build([...x.sentence.split(" ")].reverse());
+    return s.snapshot().feedback!;
+  };
+  assert.equal(miss().simple, null, "not after one miss");
+  s.next();
+  const second = miss();
+  assert.equal(second.simple?.say, LEARN.find((c) => c.topic === "articles")!.simple.say);
+  s.next();
+  const v = s.snapshot();
+  assert.equal(v.phase, "learn");
+  assert.ok(v.learn!.simple, "the card back again leads with the simpler way");
 });

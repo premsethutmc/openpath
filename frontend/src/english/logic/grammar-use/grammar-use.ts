@@ -20,6 +20,8 @@ export const MOVE_UP = 6;
 export const MOVE_DOWN = 3;
 export const MIN_OF_KIND = 3;
 export const MAX_SPOT = 2;
+/** Writing a whole sentence out again takes longer on a phone: at most two in a level sitting. */
+export const MAX_REWRITE = 2;
 
 export const ASKS = ["noun", "verb", "adjective", "pronoun", "adverb", "preposition", "conjunction", "object", "subject", "main clause", "predicate"] as const;
 export type Ask = (typeof ASKS)[number];
@@ -27,7 +29,7 @@ export interface GrammarItem {
   id: string;
   level: number;
   topic: string;
-  kind: "fix" | "build" | "spot" | "choose";
+  kind: "fix" | "build" | "spot" | "choose" | "rewrite";
   /** choose: the question asked about the sentence. */
   question?: string;
   /** choose: the answers that are not right (one or two). The right one is `right[0]`. */
@@ -37,6 +39,7 @@ export interface GrammarItem {
   /** fix: the sentence with the wrong word in [brackets]. build: the sentence to build. spot: the sentence to look in. */
   sentence: string;
   rule: string;
+  /** rewrite: the sentence as given, with its mistakes; `right` holds every accepted whole sentence. */
   /** fix: the accepted corrections. spot: every word of the sentence that is of the kind asked for. */
   right?: string[];
   /** build: whole sentences to put in order, in place of words; or, with a task, a list of words to order. */
@@ -85,6 +88,7 @@ export function corrected(item: GrammarItem): string {
   if (item.kind === "build") return item.sentence;
   if (item.kind === "spot") return `${item.sentence} — ${item.ask}: ${(item.right ?? []).join(", ")}`;
   if (item.kind === "choose") return `${item.sentence} — ${item.right![0]}`;
+  if (item.kind === "rewrite") return item.right![0];
   const p = fixParts(item);
   return p.words.map((w, i) => (i === p.wrong ? `${p.before}${item.right![0]}${p.after}` : w)).join(" ");
 }
@@ -119,6 +123,13 @@ export function grammarProblems(g: GrammarUse): string[] {
       if (!it.right?.length) out.push(`${it.id}: no right word`);
       for (const r of it.right ?? []) if (words.filter((w) => w === r).length !== 1) out.push(`${it.id}: "${r}" must be in the sentence once`);
       if (words.length < 3 || words.length > 10) out.push(`${it.id}: ${words.length} words`);
+    } else if (it.kind === "rewrite") {
+      const n = it.sentence.split(" ").length;
+      if (!it.right?.length) out.push(`${it.id}: no right sentence`);
+      if ((it.right ?? []).some((r) => tidy(r) === tidy(it.sentence))) out.push(`${it.id}: a right sentence is the sentence as given`);
+      if ((it.right ?? []).some((r) => !/[.?!]"?$/.test(r))) out.push(`${it.id}: a right sentence has no end mark`);
+      if (/[[\]]/.test(it.sentence)) out.push(`${it.id}: no brackets in a sentence to write again`);
+      if (n < 3 || n > 20) out.push(`${it.id}: ${n} words`);
     } else if (it.kind === "fix") {
       if ((it.sentence.match(/\[/g) ?? []).length !== 1 || !/\[[^\] ]+\]/.test(it.sentence)) out.push(`${it.id}: exactly one wrong word, in brackets`);
       else {
@@ -153,6 +164,14 @@ export function checkFix(item: GrammarItem, tapped: number, typed: string): bool
   const same = (r: string) => (/[A-Z]/.test(r) ? t === r : t.toLowerCase() === r.toLowerCase());
   return tapped === fixParts(item).wrong && (item.right ?? []).some(same);
 }
+/**
+ * Is a sentence written out again right? It must be one of the accepted sentences, letter for letter (capitals and
+ * marks count: they are often the point), with spaces and curly quotes tidied.
+ */
+export function checkRewrite(item: GrammarItem, typed: string): boolean {
+  const t = tidy(typed).replace(/\s+([,.?!;:])/g, "$1");
+  return (item.right ?? []).some((r) => tidy(r) === t);
+}
 /** Is a built sentence right? The tiles chosen, in order, must make the sentence. */
 export const checkBuild = (item: GrammarItem, chosen: readonly string[]): boolean => tidy(chosen.join(" ")) === tidy(item.sentence);
 
@@ -166,6 +185,8 @@ export interface LearnCard {
   mistake: { wrong: string; right: string; why: string };
   /** A second question to try once the first is answered. */
   try2: { question: string; right: string; wrong: string[] };
+  /** grammar-simple@1: the rule said a second, plainer way, for a learner who keeps missing it; one example. */
+  simple: { say: string; example: string };
 }
 export const LEARN: LearnCard[] = (learnJson as { cards: LearnCard[] }).cards;
 
@@ -181,6 +202,7 @@ export function learnProblems(cards: readonly LearnCard[], g: GrammarUse): strin
     if (c.examples.length !== 2 || c.examples.some((e) => !e.trim())) out.push(`${c.topic}: two examples`);
     if (!c.try.question.trim() || !c.try.right.trim() || c.try.wrong.length !== 2 || new Set([c.try.right, ...c.try.wrong]).size !== 3) out.push(`${c.topic}: a question with one right answer and two different wrong ones`);
     if (!c.mistake?.wrong.trim() || !c.mistake.right.trim() || !c.mistake.why.trim() || c.mistake.wrong === c.mistake.right) out.push(`${c.topic}: a common mistake, the right version and why`);
+    if (!c.simple?.say.trim() || c.simple.say.split(" ").length > 25 || !c.simple.example.trim() || c.simple.say === c.rule) out.push(`${c.topic}: a second, simpler way to say the rule (up to 25 words) and an example`);
     if (!c.try2?.question.trim() || c.try2.wrong.length !== 2 || new Set([c.try2.right, ...c.try2.wrong]).size !== 3 || c.try2.question === c.try.question) out.push(`${c.topic}: a second, different question with one right answer and two different wrong ones`);
   }
   return out;
@@ -259,7 +281,7 @@ function pickNew(g: GrammarUse, level: number, records: readonly GrammarRecord[]
   const out: GrammarItem[] = [];
   // in a level sitting, naming words takes at most two places, so there is room for three to fix and three to build
   const light = (it: GrammarItem) => it.kind === "spot" || it.kind === "choose";
-  const tooManySpots = (it: GrammarItem) => !topics?.length && light(it) && out.filter(light).length >= MAX_SPOT;
+  const tooManySpots = (it: GrammarItem) => !topics?.length && ((light(it) && out.filter(light).length >= MAX_SPOT) || (it.kind === "rewrite" && out.filter((x) => x.kind === "rewrite").length >= MAX_REWRITE));
   const perTopic = new Map<string, number>();
   const cap = topics?.length ? SITTING_SIZE : 3;
   for (const it of ordered) {
@@ -274,7 +296,9 @@ function pickNew(g: GrammarUse, level: number, records: readonly GrammarRecord[]
   for (const kind of ["build", "fix"] as const) {
     const spare = ordered.filter((it) => it.kind === kind && !out.includes(it));
     while (out.filter((it) => it.kind === kind).length < MIN_OF_KIND && spare.length) {
-      const drop = out.map((it) => it.kind).lastIndexOf(kind === "build" ? "fix" : "build");
+      // the latest of the other kind, or of the sentences to write again (they keep a sitting from fixing and building)
+      const other = kind === "build" ? "fix" : "build";
+      const drop = out.map((it) => it.kind === other || it.kind === "rewrite").lastIndexOf(true);
       if (drop < 0) break;
       out[drop] = spare.shift()!;
     }
@@ -312,10 +336,13 @@ export interface GrammarView {
   build: { tiles: string[]; whole: boolean; task: string | null } | null;
   spot: { words: string[]; ask: Ask } | null;
   choose: { sentence: string; question: string; options: string[] } | null;
-  feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
+  /** rewrite: the sentence to write out again, put right. */
+  rewrite: { sentence: string } | null;
+  /** `simple`: the rule said another way, after a second miss in a row on the topic. */
+  feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null; simple: LearnCard["simple"] | null } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number; topics: string[]; sitting: string } | null;
   /** learn: the card for a topic met for the first time; `tried` once its question is answered. */
-  learn?: { rule: string; examples: string[]; mistake: LearnCard["mistake"]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null; second: { question: string; options: string[]; answer: number } } | null;
+  learn?: { rule: string; examples: string[]; mistake: LearnCard["mistake"]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null; second: { question: string; options: string[]; answer: number }; simple: LearnCard["simple"] | null } | null;
 }
 
 /** One sitting. Every step appends records; the caller stores what `take()` returns. */
@@ -361,7 +388,8 @@ export class GrammarSitting {
     this.log.push(a);
     this.mine.push(a);
     const p = it.kind === "fix" ? fixParts(it) : null;
-    this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null };
+    const simple = !correct && this.struggling(it.topic) ? (LEARN.find((c) => c.topic === it.topic)?.simple ?? null) : null;
+    this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null, simple };
   }
 
   /**
@@ -432,6 +460,13 @@ export class GrammarSitting {
     this.record(checkChoose(it, chosen), options[chosen]);
   }
 
+  /** Answer a rewrite: the whole sentence as the learner wrote it. */
+  rewrite(typed: string): void {
+    const it = this.items[this.index];
+    if (this.last || !it || it.kind !== "rewrite" || !typed.trim() || this.card()) return;
+    this.record(checkRewrite(it, typed), tidy(typed));
+  }
+
   /** Answer a build: the tiles chosen, in order. */
   build(chosen: readonly string[]): void {
     const it = this.items[this.index];
@@ -454,12 +489,12 @@ export class GrammarSitting {
 
   snapshot(): GrammarView {
     const it = this.items[this.index];
-    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, choose: null, feedback: null, done: null };
+    const base = { index: Math.min(this.index, this.items.length - 1), total: this.items.length, level: this.level, id: it?.id ?? null, topic: it ? (this.content.topics.find((t) => t.id === it.topic)?.name ?? it.topic) : null, fix: null, build: null, spot: null, choose: null, rewrite: null, feedback: null, done: null };
     if (this.last) return { ...base, phase: "feedback", feedback: this.last };
     const c = this.card();
     if (c) {
       const options = tryChoices(c);
-      return { ...base, phase: "learn", learn: { rule: c.rule, examples: c.examples, mistake: c.mistake, question: c.try.question, options, tried: this.tried ? { ...this.tried, answer: options.indexOf(c.try.right) } : null, second: { question: c.try2.question, options: try2Choices(c), answer: try2Choices(c).indexOf(c.try2.right) } } };
+      return { ...base, phase: "learn", learn: { rule: c.rule, examples: c.examples, mistake: c.mistake, question: c.try.question, options, tried: this.tried ? { ...this.tried, answer: options.indexOf(c.try.right) } : null, second: { question: c.try2.question, options: try2Choices(c), answer: try2Choices(c).indexOf(c.try2.right) }, simple: this.learnt.has(c.topic) ? c.simple : null } };
     }
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;
@@ -467,6 +502,7 @@ export class GrammarSitting {
       return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level), topics: practised, sitting: this.sitting } };
     }
     if (it.kind === "choose") return { ...base, phase: "ask", choose: { sentence: it.sentence, question: it.question!, options: choices(it) } };
+    if (it.kind === "rewrite") return { ...base, phase: "ask", rewrite: { sentence: it.sentence } };
     if (it.kind === "spot") return { ...base, phase: "ask", spot: { words: spotWords(it), ask: it.ask! } };
     return it.kind === "fix" ? { ...base, phase: "ask", fix: { words: fixParts(it).words } } : { ...base, phase: "ask", build: { tiles: tiles(it), whole: !!it.parts && !it.task, task: it.task ?? null } };
   }
