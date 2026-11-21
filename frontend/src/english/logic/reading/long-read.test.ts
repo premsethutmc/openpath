@@ -1,7 +1,7 @@
 /** Long reads: three parts and the whole, one part a sitting, going on from where the learner stopped. */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { LONG, LongSitting, PARTS, choices, longProblems, longSummary, nextStep, type LongRecord } from "./long-read.ts";
+import { LONG, LongSitting, PARTS, choices, longProblems, longLevel, longSummary, nextStep, type LongRecord } from "./long-read.ts";
 import { loadContent } from "../content.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
@@ -66,7 +66,25 @@ test("LR-2 one part a sitting, then the next part, then the whole; a new story n
   // every story read: nothing left
   let all: LongRecord[] = [];
   for (const t of LONG.texts) for (let k = 0; k <= PARTS; k++) all = [...all, ...sit(t, k)];
-  assert.equal(nextStep(LONG, all, 4), null);
+  // every story read: one at the reader's level is read again from the start, never nothing
+  const again = nextStep(LONG, all, 4)!;
+  assert.deepEqual([again.text.level, again.part], [4, 0]);
+  const twice = nextStep(LONG, [...all, ...[0, 1, 2, 3].flatMap((k) => sit(again.text, k))], 4)!;
+  assert.notEqual(twice.text.id, again.text.id, "the story read fewest times comes first");
+});
+
+test("LR-4 a weak reader is never given a story more than a level up, and moves up as stories go well", () => {
+  const easy = LONG.texts.filter((t) => t.level <= 2);
+  let recs: LongRecord[] = [];
+  for (const t of easy) for (let k = 0; k <= PARTS; k++) recs = [...recs, ...sit(t, k)];
+  // all the easy stories read, but badly: stays at level 1 and reads again rather than a level 4 story
+  const bad = recs.map((r) => ({ ...r, answers: r.answers.map((a) => ({ ...a, correct: false })) }));
+  assert.equal(longLevel(LONG, bad, 1), 1);
+  assert.ok(nextStep(LONG, bad, 1)!.text.level <= 2);
+  // read well: two stories at the level or above move the reader up one level
+  const good = recs.map((r) => ({ ...r, answers: r.answers.map((a) => ({ ...a, correct: true })) }));
+  assert.ok(longLevel(LONG, good, 1) >= 2);
+  assert.equal(longLevel(LONG, [], 1), 1);
 });
 
 test("LR-3 stored on the learner's record without touching the engine", async () => {

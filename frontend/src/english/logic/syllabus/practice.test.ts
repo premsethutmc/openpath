@@ -10,6 +10,7 @@ import { MemoryRepo } from "../store.ts";
 import { testClock } from "../journey-sim.ts";
 import { syllabusPractice, waitDays } from "./practice.ts";
 import { syllabusFor } from "./syllabus.ts";
+import { LABEL_OWN, type ReadingRecord } from "../reading/session.ts";
 import { childSummary } from "../parent-view.ts";
 
 test("SP-1 a CBSE Class 10 child: nothing practised, then a grammar topic and a chart count; adults see none", async () => {
@@ -74,4 +75,23 @@ test("SP-3 the wait before a check doubles each time a check holds, and starts a
   let x = [s(0), s(1)];
   for (let d = 1, w = 21; w < 168; w *= 2) x = [...x, s((d += w))];
   assert.equal(waitDays(x, 1), 168); // never more than six months
+});
+
+test("SP-4 a Reading line falls due too: secure after a check passed on one's own, due three weeks later", async () => {
+  const c = loadContent({ mode: "development" });
+  let now = Date.parse("2026-11-02T09:00:00Z");
+  const l = await Learner.create(c, new MemoryRepo(), "Mala", "guardian", () => new Date(now).toISOString(), "p-sp4");
+  await l.setPreferences("school", "grammar", { class: 10, board: "cbse" });
+  const line = syllabusFor(10, "cbse").strands.flatMap((x) => x.outcomes).find((o) => o.where === "reading")!;
+  const stage = () => syllabusPractice(l)!.stages.find((x) => x.id === line.id)!.stage;
+  const check = (passed: boolean) => ({ type: "check_result" as const, unit: { skill: "main_idea", level: 2 }, answers: [], passed, label: passed ? LABEL_OWN : null }) as ReadingRecord;
+  await l.recordReading([check(true)]);
+  assert.equal(stage(), "secure");
+  now += 21 * 86_400_000;
+  assert.equal(stage(), "due");
+  await l.recordReading([check(false)]);
+  assert.equal(stage(), "practising", "the check after the wait failed");
+  now += 86_400_000;
+  await l.recordReading([check(true)]);
+  assert.equal(stage(), "secure");
 });

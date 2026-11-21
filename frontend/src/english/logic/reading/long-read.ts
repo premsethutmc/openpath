@@ -76,15 +76,46 @@ export type LongRecord =
   /** One part read and its questions answered (part 0 to 2), or the questions on the whole (part 3). */
   { type: "part"; text: string; part: number; answers: { skill: LongSkill; correct: boolean }[] };
 
+/**
+ * The level to choose stories at: where the reader started, one level up after two stories at that level or above
+ * were read to the end with at least three in four answers right (at most the highest level there is).
+ */
+export function longLevel(l: LongReads, records: readonly LongRecord[], start: number): number {
+  const top = Math.max(...l.texts.map((t) => t.level));
+  let level = Math.min(start, top);
+  let well = 0;
+  const run = new Map<string, boolean[]>();
+  for (const r of records) {
+    const got = [...(r.part === 0 ? [] : (run.get(r.text) ?? [])), ...r.answers.map((a) => a.correct)];
+    run.set(r.text, got);
+    if (r.part !== PARTS) continue;
+    const t = l.texts.find((x) => x.id === r.text);
+    if (t && t.level >= level && got.filter(Boolean).length >= 0.75 * got.length && ++well >= 2) (level = Math.min(level + 1, top), (well = 0));
+  }
+  return level;
+}
+
 /** Where the learner is: the text in progress and its next part (3 = the questions on the whole), or what to start next. */
 export function nextStep(l: LongReads, records: readonly LongRecord[], level: number): { text: LongText; part: number } | null {
-  const done = new Map<string, number>();
-  for (const r of records) done.set(r.text, Math.max(done.get(r.text) ?? -1, r.part));
-  const open = [...records].reverse().find((r) => (done.get(r.text) ?? -1) < PARTS);
-  if (open) return { text: l.texts.find((t) => t.id === open.text)!, part: done.get(open.text)! + 1 };
-  // a new text: nearest the learner's reading level, lower before higher
-  const fresh = l.texts.filter((t) => !done.has(t.id)).sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level) || a.level - b.level || (a.id < b.id ? -1 : 1));
-  return fresh[0] ? { text: fresh[0], part: 0 } : null;
+  // where each story stands in its latest reading (a story read to the end can be read again from the start)
+  const at = new Map<string, number>();
+  const times = new Map<string, number>();
+  const lastSeen = new Map<string, number>();
+  records.forEach((r, i) => {
+    at.set(r.text, r.part);
+    lastSeen.set(r.text, i);
+    if (r.part === PARTS) times.set(r.text, (times.get(r.text) ?? 0) + 1);
+  });
+  const open = [...records].reverse().find((r) => at.get(r.text)! < PARTS);
+  if (open) return { text: l.texts.find((t) => t.id === open.text)!, part: at.get(open.text)! + 1 };
+  // a new story no more than a level above the reader, nearest their level, lower before higher
+  const near = (t: LongText) => t.level <= level + 1;
+  const fresh = l.texts.filter((t) => !at.has(t.id) && near(t)).sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level) || a.level - b.level || (a.id < b.id ? -1 : 1));
+  if (fresh[0]) return { text: fresh[0], part: 0 };
+  // none left within reach: read again the story at the reader's level read fewest times, longest ago
+  const pool = l.texts.filter(near).length ? l.texts.filter(near) : l.texts.filter((t) => t.level === Math.min(...l.texts.map((x) => x.level)));
+  const again = pool.sort((a, b) => Math.abs(a.level - level) - Math.abs(b.level - level) || (times.get(a.id) ?? 0) - (times.get(b.id) ?? 0) || (lastSeen.get(a.id) ?? -1) - (lastSeen.get(b.id) ?? -1))[0];
+  return again ? { text: again, part: 0 } : null;
 }
 
 export interface LongView {
