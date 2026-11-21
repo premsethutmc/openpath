@@ -11,6 +11,8 @@ import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
 import { useState } from "react";
+import { schoolLabel } from "./Onboarding.tsx";
+import type { SchoolPlace } from "../logic/events.ts";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
@@ -50,10 +52,12 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
-  const [showAll, setShowAll] = useState(!guided);
+  // a school child sees the warm-up and their class; every other activity stays folded until opened
+  const [showAll, setShowAll] = useState(!guided && !learner.state.preferences?.school);
   const [showSchool, setShowSchool] = useState(!guided);
   const open = learner.state.open;
   const name = learner.state.profile?.name ?? "explorer";
+  const school = learner.state.preferences?.school ?? null;
   return (
     <main className="page" aria-labelledby="today-title">
       <TamilToggle />
@@ -67,6 +71,11 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
+      {school && (
+        <p className="pill home-class" data-school>
+          {schoolLabel(school)}
+        </p>
+      )}
       {learner.content.gate ? (
         <>
           <BeeCard learner={learner} onBee={onBee} />
@@ -77,6 +86,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
         <>
           <LevelPanel
             learner={learner}
+            child={!!school}
             onLevelCheck={onLevelCheck}
             onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
@@ -133,7 +143,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           {showSchool && (
             <div id="school-work" className="compact-list">
               <p className="small">The class syllabus, and words and texts from school that a parent or the learner adds.</p>
-              <SyllabusCard onOpen={onSyllabus} />
+              <SyllabusCard onOpen={onSyllabus} school={school} />
               <MyWordsCard learner={learner} onOpen={onMyWords} />
               <MyBooksCard learner={learner} onOpen={onMyBooks} />
             </div>
@@ -352,16 +362,17 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
  * Where to start, and today: before a level check, the invitation to take one; after it, each stream with its level,
  * the next thing to do and a tick once something was done in it today. Never offered in a pilot build.
  */
-function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevelCheck: () => void; onGo: (id: StreamId, open?: StreamRow["open"], step?: StreamRow["step"]) => void }) {
+function LevelPanel({ learner, child, onLevelCheck, onGo }: { learner: Learner; child?: boolean; onLevelCheck: () => void; onGo: (id: StreamId, open?: StreamRow["open"], step?: StreamRow["step"]) => void }) {
   if (!learner.levels().done)
     return (
       <section className="hub-card level-cta" aria-labelledby="level-cta-title">
         <h2 id="level-cta-title">
-          <span aria-hidden="true">🧭 </span>Start here: find your level
+          <span aria-hidden="true">🧭 </span>
+          {child ? "Start here: a quick warm-up" : "Start here: find your level"}
         </h2>
-        <p>Four short parts, about ten minutes: words, reading, listening and spelling. Then the app shows where to begin in each.</p>
+        <p>{child ? "Four short parts, about ten minutes: words, reading, listening and spelling. It helps pick the right work in each." : "Four short parts, about ten minutes: words, reading, listening and spelling. Then the app shows where to begin in each."}</p>
         <button type="button" className="primary" onClick={onLevelCheck}>
-          Find my level
+          {child ? "Start the warm-up" : "Find my level"}
         </button>
       </section>
     );
@@ -372,7 +383,7 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
       <h2 id="levels-title">
         <span aria-hidden="true">🧭 </span>Your English today
       </h2>
-      <p className="small">{left ? "Your level in each stream, and the next thing to do. Pick any; a little of each is best." : "You have done something in every stream today. Well done!"}</p>
+      <p className="small">{left ? (child ? "Pick any; a little of each is best." : "Your level in each stream, and the next thing to do. Pick any; a little of each is best.") : "You have done something in every stream today. Well done!"}</p>
       <ul className="stream-rows">
         {rows.map((r) => (
           <li key={r.id} data-stream={r.id} data-done={r.doneToday}>
@@ -381,7 +392,7 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
             </span>
             <div>
               <b>{r.name}</b>
-              <p className="small stream-level">{r.level}</p>
+              {!child && <p className="small stream-level">{r.level}</p>}
               <p className="small">{r.doneToday ? `✓ Done today${r.id === "words" ? "" : ` · next: ${r.next}`}` : r.next}</p>
             </div>
             <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id, r.open, r.step)}>
@@ -390,9 +401,11 @@ function LevelPanel({ learner, onLevelCheck, onGo }: { learner: Learner; onLevel
           </li>
         ))}
       </ul>
-      <button type="button" className="link" onClick={onLevelCheck}>
-        Check my level again
-      </button>
+      {!child && (
+        <button type="button" className="link" onClick={onLevelCheck}>
+          Check my level again
+        </button>
+      )}
     </section>
   );
 }
@@ -598,7 +611,20 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
 }
 
 /** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
-function SyllabusCard({ onOpen }: { onOpen: () => void }) {
+function SyllabusCard({ onOpen, school }: { onOpen: () => void; school?: SchoolPlace | null }) {
+  if (school)
+    return (
+      <section className="hub-card plain" aria-labelledby="syllabus-card-title">
+        <h2 id="syllabus-card-title">
+          <span aria-hidden="true">🏫 </span>
+          {schoolLabel(school)} English
+        </h2>
+        <p>What the board lists for this class, and where to practise each part here.</p>
+        <button type="button" className="secondary" onClick={onOpen}>
+          Open my class
+        </button>
+      </section>
+    );
   const lines = SYLLABUSES.reduce((n, d) => n + syllabusCoverage(d).total, 0);
   const span = (b: Board) => {
     const cs = syllabusesOf(b).map((d) => d.class);

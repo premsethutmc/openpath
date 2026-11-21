@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { parseBackup } from "../logic/backup.ts";
 import type { Learner } from "../logic/learner.ts";
 import type { Repo } from "../logic/store.ts";
-import { BANDS, GOALS } from "./Onboarding.tsx";
+import { BANDS, GOALS, WhoPicker, bandOf, placeOf, schoolLabel, whoOf, type Who } from "./Onboarding.tsx";
+import type { LearnerBand, SchoolPlace } from "../logic/events.ts";
 import { NoteBox, saveJson } from "./Note.tsx";
 import { speak } from "./speech.ts";
 
@@ -69,7 +70,7 @@ export function Me({
           <b>
             <span aria-hidden="true">👤</span> Who is learning
           </b>
-          <p>{band ? `${band.label} (${band.mini.toLowerCase()})` : "Not chosen yet"}</p>
+          <p>{schoolLabel(prefs?.school) ?? (prefs ? (prefs.band === "older" ? "An adult, or not in school (every class open)" : band ? `${band.label} (${band.mini.toLowerCase()})` : "Not chosen yet") : "Not chosen yet")}</p>
         </div>
         <div className="tile mint">
           <b>
@@ -82,10 +83,10 @@ export function Me({
             </button>
           ) : (
             <Choose
-              band={prefs?.band ?? "school"}
+              who={whoOf(prefs?.school, prefs?.band)}
               goal={prefs?.goal ?? "confidence"}
-              onSave={async (b, g) => {
-                await learner.setPreferences(b, g);
+              onSave={async (b, g, school) => {
+                await learner.setPreferences(b, g, school);
                 setEditing(false);
                 onChanged();
               }}
@@ -184,32 +185,26 @@ export function Me({
   );
 }
 
-function Choose({ band, goal, onSave, onCancel }: { band: (typeof BANDS)[number]["id"]; goal: (typeof GOALS)[number]["id"]; onSave: (b: (typeof BANDS)[number]["id"], g: (typeof GOALS)[number]["id"]) => void; onCancel: () => void }) {
-  const [b, setB] = useState(band);
+function Choose({ who: initial, goal, onSave, onCancel }: { who: Who; goal: (typeof GOALS)[number]["id"]; onSave: (b: LearnerBand, g: (typeof GOALS)[number]["id"], school: SchoolPlace | null) => void; onCancel: () => void }) {
+  const [who, setWho] = useState<Who>(initial);
   const [g, setG] = useState(goal);
+  const place = placeOf(who);
   return (
     <div className="stack" style={{ marginTop: 12 }}>
-      <div className="stack" role="group" aria-label="Who is learning">
-        {BANDS.map((x) => (
-          <button key={x.id} type="button" className="choice" aria-pressed={b === x.id} onClick={() => setB(x.id)}>
-            <span className="em" aria-hidden="true">
-              {x.em}
-            </span>
-            {x.label}
-          </button>
-        ))}
-      </div>
-      <div className="stack" role="group" aria-label="Goal">
-        {GOALS.map((x) => (
-          <button key={x.id} type="button" className="choice" aria-pressed={g === x.id} onClick={() => setG(x.id)}>
-            <span className="em" aria-hidden="true">
-              {x.em}
-            </span>
-            {x.label}
-          </button>
-        ))}
-      </div>
-      <button type="button" className="primary" onClick={() => onSave(b, g)}>
+      <WhoPicker who={who} onChange={setWho} />
+      {who.kind === "adult" && (
+        <div className="stack" role="group" aria-label="Goal">
+          {GOALS.map((x) => (
+            <button key={x.id} type="button" className="choice" aria-pressed={g === x.id} onClick={() => setG(x.id)}>
+              <span className="em" aria-hidden="true">
+                {x.em}
+              </span>
+              {x.label}
+            </button>
+          ))}
+        </div>
+      )}
+      <button type="button" className="primary" disabled={place === undefined} onClick={() => place !== undefined && onSave(bandOf(place), g, place)}>
         Save
       </button>
       <button type="button" className="secondary" onClick={onCancel}>

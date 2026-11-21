@@ -33,7 +33,7 @@ export function readAloudLevel(l: Learner): number {
   const n = Number(load(l, "level"));
   if (DICTATION.levels.some((x) => x.id === n)) return n;
   // first time: Listen and write's level for this learner
-  return levelFor(DICTATION, l.dictationRecords(), l.levels().listening?.level ?? startLevel(l.state.preferences?.band));
+  return levelFor(DICTATION, l.dictationRecords(), l.levels().listening?.level ?? startLevel(l.state.preferences));
 }
 
 const MIC_TEXT: Record<MicProblem, string> = {

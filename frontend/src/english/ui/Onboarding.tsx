@@ -8,7 +8,7 @@ import { TamilToggle } from "./tamilHelp.tsx";
 import { SubjectTiles } from "./SubjectTiles.tsx";
 import { type FormEvent, type ReactNode, useState } from "react";
 import { ApiError } from "../logic/account.ts";
-import type { LearnerBand, LearnerGoal } from "../logic/events.ts";
+import type { LearnerBand, LearnerGoal, SchoolPlace } from "../logic/events.ts";
 import type { ProfileSummary } from "../logic/store.ts";
 
 export const BANDS: { id: LearnerBand; em: string; label: string; mini: string }[] = [
@@ -314,15 +314,84 @@ export function PupilPicker({ profiles, account, onOpen, onAdd, onSignOut, extra
 
 // ------------------------------------------------------------------ adding a learner
 
-export function AddLearner({ mode, onCreate, onCancel }: { mode: "device" | "account"; onCreate: (name: string, by: "learner" | "guardian", band: LearnerBand, goal: LearnerGoal) => Promise<void>; onCancel: () => void }) {
+export const SCHOOL_BOARDS: { id: SchoolPlace["board"]; name: string }[] = [
+  { id: "icse", name: "ICSE" },
+  { id: "cbse", name: "CBSE" },
+  { id: "tn", name: "Tamil Nadu" },
+];
+const CLASSES = Array.from({ length: 12 }, (_, i) => i + 1);
+/** The age band that goes with a choice: a school child's class decides it; an adult is "older". */
+export const bandOf = (school: SchoolPlace | null): LearnerBand => (!school ? "older" : school.class <= 2 ? "early" : school.class <= 8 ? "school" : "older");
+/** "Class 5 · ICSE", or null for an adult. */
+export const schoolLabel = (school: SchoolPlace | null | undefined): string | null => (school ? `Class ${school.class} · ${SCHOOL_BOARDS.find((b) => b.id === school.board)?.name ?? school.board.toUpperCase()}` : null);
+
+export type Who = { kind: "child"; cls: number | null; board: SchoolPlace["board"] | null } | { kind: "adult" };
+export const whoOf = (school: SchoolPlace | null | undefined, band?: LearnerBand): Who => (school ? { kind: "child", cls: school.class, board: school.board } : band && band !== "older" ? { kind: "child", cls: null, board: null } : { kind: "adult" });
+/** The school place a finished choice gives (null for an adult); undefined while a child's class or board is still missing. */
+export const placeOf = (w: Who): SchoolPlace | null | undefined => (w.kind === "adult" ? null : w.cls && w.board ? { class: w.cls, board: w.board } : undefined);
+
+/** A school child (class and board) or an adult. Class and board are fixed for the child; the levels underneath move with the answers. */
+export function WhoPicker({ who, onChange }: { who: Who; onChange: (w: Who) => void }) {
+  return (
+    <>
+      <div className="who-kinds" role="group" aria-label="Who is learning">
+        <button type="button" className="choice" aria-pressed={who.kind === "child"} onClick={() => who.kind !== "child" && onChange({ kind: "child", cls: null, board: null })}>
+          <span className="em" aria-hidden="true">
+            🎒
+          </span>
+          <span>
+            A school child
+            <span className="mini">Follows their class</span>
+          </span>
+        </button>
+        <button type="button" className="choice" aria-pressed={who.kind === "adult"} onClick={() => onChange({ kind: "adult" })}>
+          <span className="em" aria-hidden="true">
+            🚀
+          </span>
+          <span>
+            An adult, or not in school
+            <span className="mini">Every class open</span>
+          </span>
+        </button>
+      </div>
+      {who.kind === "child" && (
+        <div className="who-school">
+          <p className="who-q" id="who-class">
+            Which class?
+          </p>
+          <div className="who-grid" role="group" aria-labelledby="who-class">
+            {CLASSES.map((c) => (
+              <button key={c} type="button" className="chip" aria-pressed={who.cls === c} data-on={who.cls === c} onClick={() => onChange({ ...who, cls: c })}>
+                {c}
+              </button>
+            ))}
+          </div>
+          <p className="who-q" id="who-board">
+            Which board?
+          </p>
+          <div className="who-boards" role="group" aria-labelledby="who-board">
+            {SCHOOL_BOARDS.map((b) => (
+              <button key={b.id} type="button" className="chip" aria-pressed={who.board === b.id} data-on={who.board === b.id} onClick={() => onChange({ ...who, board: b.id })}>
+                {b.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export function AddLearner({ mode, onCreate, onCancel }: { mode: "device" | "account"; onCreate: (name: string, by: "learner" | "guardian", band: LearnerBand, goal: LearnerGoal, school: SchoolPlace | null) => Promise<void>; onCancel: () => void }) {
   const [step, setStep] = useState<1 | 2>(1);
   const [name, setName] = useState("");
-  const [band, setBand] = useState<LearnerBand>("school");
+  const [who, setWho] = useState<Who>({ kind: "adult" });
   const [goal, setGoal] = useState<LearnerGoal>("confidence");
   const [by, setBy] = useState<"learner" | "guardian">("guardian");
   const [agree, setAgree] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const place = placeOf(who);
   if (step === 1)
     return (
       <Frame label="Who is learning?">
@@ -333,64 +402,61 @@ export function AddLearner({ mode, onCreate, onCancel }: { mode: "device" | "acc
         </p>
         <p className="eyebrow">Step 1 of 2</p>
         <h1 className="hero">Who is learning?</h1>
-        <p className="sub">This is kept with the learner's record. Your answers, not your age, decide the difficulty.</p>
         <label>
           Name to show {mode === "device" ? "(only on this device)" : "(a first name or nickname is enough)"}
           <input value={name} onChange={(e) => setName(e.target.value)} maxLength={40} autoComplete="off" placeholder="For example, Arun" />
         </label>
-        <div className="stack" role="group" aria-label="Who is learning">
-          {BANDS.map((b) => (
-            <button key={b.id} type="button" className="choice" aria-pressed={band === b.id} onClick={() => setBand(b.id)}>
-              <span className="em" aria-hidden="true">
-                {b.em}
-              </span>
-              <span>
-                {b.label}
-                <span className="mini">{b.mini}</span>
-              </span>
-            </button>
-          ))}
-        </div>
+        <WhoPicker who={who} onChange={setWho} />
         <div style={{ height: 22 }} />
-        <button type="button" className="primary" onClick={() => setStep(2)}>
-          Continue
-          <Arrow />
+        <button type="button" className="primary" disabled={place === undefined} onClick={() => setStep(2)}>
+          {place === undefined ? (who.kind === "child" && !who.cls ? "Choose the class" : "Choose the board") : "Continue"}
+          {place !== undefined && <Arrow />}
         </button>
       </Frame>
     );
   const create = async (e: FormEvent) => {
     e.preventDefault();
     if (!agree) return setProblem("Tick the box to agree to how progress is kept.");
+    if (place === undefined) return setStep(1);
     setBusy(true);
     try {
-      await onCreate(name, mode === "account" ? "guardian" : by, band, goal);
+      await onCreate(name, mode === "account" ? "guardian" : who.kind === "child" ? "guardian" : by, bandOf(place), goal, place);
     } catch (err) {
       setProblem((err as Error).message);
       setBusy(false);
     }
   };
+  const label = schoolLabel(place);
   return (
-    <Frame label="What brings you here?">
+    <Frame label={label ? "Almost ready" : "What brings you here?"}>
       <p>
         <button type="button" className="link" onClick={() => setStep(1)}>
           ← Back
         </button>
       </p>
       <p className="eyebrow">Step 2 of 2</p>
-      <h1 className="hero">What brings you here?</h1>
-      <p className="sub">Choose a goal. You can always change it later. It decides which part of the journey you see first; your answers decide what to learn.</p>
+      <h1 className="hero">{label ? "Almost ready" : "What brings you here?"}</h1>
+      {label ? (
+        <p className="sub">
+          {name.trim() || "Your child"} will see <strong>{label}</strong> work. Inside each part, the questions get easier or harder with the answers.
+        </p>
+      ) : (
+        <p className="sub">Choose a goal. You can change it later. Your answers decide what to learn.</p>
+      )}
       <form onSubmit={create} noValidate>
-        <div className="stack" role="group" aria-label="Goal">
-          {GOALS.map((g) => (
-            <button key={g.id} type="button" className="choice" aria-pressed={goal === g.id} onClick={() => setGoal(g.id)}>
-              <span className="em" aria-hidden="true">
-                {g.em}
-              </span>
-              {g.label}
-            </button>
-          ))}
-        </div>
-        {mode === "device" && (
+        {!label && (
+          <div className="stack" role="group" aria-label="Goal">
+            {GOALS.map((g) => (
+              <button key={g.id} type="button" className="choice" aria-pressed={goal === g.id} onClick={() => setGoal(g.id)}>
+                <span className="em" aria-hidden="true">
+                  {g.em}
+                </span>
+                {g.label}
+              </button>
+            ))}
+          </div>
+        )}
+        {mode === "device" && !label && (
           <fieldset>
             <legend>Who is setting this up?</legend>
             <label className="inline">
