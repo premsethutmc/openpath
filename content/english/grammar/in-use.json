@@ -3156,7 +3156,7 @@
       ],
       "wrong": [
         "hello",
-        "again"
+        "blue"
       ]
     },
     {
@@ -6571,7 +6571,7 @@
         "As a problem and its answer"
       ],
       "wrong": [
-        "As steps in order",
+        "As a description of a place",
         "As a comparison of two things"
       ]
     },

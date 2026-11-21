@@ -1333,7 +1333,7 @@
           "right": "The slow train would make her late",
           "wrong": [
             "The fast train is cheaper",
-            "The clerk tells her to"
+            "The fast train has better seats"
           ],
           "explain": "The slow train reaches at seven, but her grandmother is waiting at five."
         },
