@@ -20,3 +20,19 @@ so it would tell children they said a word wrongly when they had not. Hearing th
 first; scoring speech waits for a recogniser that passes this check.
 
 Tests: SO-1..3, TH-1, CS-2 (screened), e2e `tamil-slips-sounds`.
+
+## Only for families who chose Tamil help (owner decision, 21 November 2026)
+The two activities above, and the "Slips" topic in grammar search, are shown only on a device where Tamil help is
+switched on (`useTamilHelp`, ui/tamilHelp.tsx). e2e `tamil-slips-sounds` checks both ways.
+
+## tamil-help@2: grammar explanations in Tamil
+`content/english/help/tamil-explain.json`: 476 grammar explanations of levels 1-4 (each sentence's one-line rule, and
+the learn cards' rule and reason), machine-translated once on the server (`manage.py translate_help`,
+gpt-4.1-mini, about 21,000 tokens) with grammar words kept in English as Tamil Nadu classrooms say them. Spot-checked;
+two fixes (the word for adverb; a misspelt verb); one line without Tamil dropped. Shown, like the rest of Tamil help,
+only when it is switched on. Test TH-2 (every line answers an explanation in the content and is Tamil script).
+
+## Letters, notices and emails (for every learner)
+Three grammar topics with learn cards: `letter_format` (8), `notice_format` (8), `email_format` (8), levels 5-7:
+greetings, closings, subject lines, what goes where, tone. Home card "Letters, notices and emails"; grammar search
+finds them ("yours faithfully", "notice", "email").

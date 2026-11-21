@@ -7,11 +7,13 @@
  */
 import { useEffect, useState } from "react";
 import data from "../../../../content/english/help/tamil-ui.json";
+import explain from "../../../../content/english/help/tamil-explain.json";
 
 const KEY = "openpath-english-tamil-help";
 const SELECTOR = "button, h1, h2, h3, p, label, summary, legend, .pill, .eyebrow, li, .prompt";
 const norm = (s: string) => s.replace(/\s+/g, " ").replace(/^[^\p{L}\p{N}“"]+/u, "").replace(/[^\p{L}\p{N}.?!:”"')]+$/u, "").trim();
-const MAP = new Map(Object.entries((data as { strings: Record<string, string> }).strings).map(([en, ta]) => [norm(en), ta]));
+// the app's own lines, then the grammar explanations (tamil-help@2, machine-translated and spot-checked)
+const MAP = new Map([...Object.entries((explain as { strings: Record<string, string> }).strings), ...Object.entries((data as { strings: Record<string, string> }).strings)].map(([en, ta]) => [norm(en), ta]));
 
 /** The Tamil for an English line of the app, if there is one. */
 export const tamilFor = (en: string): string | undefined => MAP.get(norm(en));

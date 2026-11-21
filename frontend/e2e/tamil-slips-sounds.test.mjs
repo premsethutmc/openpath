@@ -61,6 +61,8 @@ test("Slips Tamil speakers often make: opens grammar practice on that topic", as
   await page.getByText(/^Topics: Slips Tamil speakers often make/).waitFor();
   await page.getByRole("button", { name: "Start" }).click();
   await page.getByText("Some English slips come from Tamil word order", { exact: false }).first().waitFor();
+  // tamil-help@2: the card's explanation carries its Tamil line
+  await page.locator('[data-ta^="சில English தவறுகள்"]').first().waitFor();
   if (SHOTS) await page.screenshot({ path: `${SHOTS}/slips-1.png` });
   await context.close();
 });

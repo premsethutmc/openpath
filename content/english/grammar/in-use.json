@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 21,
+  "version": 22,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -334,6 +334,18 @@
     {
       "id": "tamil_slips",
       "name": "Slips Tamil speakers often make"
+    },
+    {
+      "id": "letter_format",
+      "name": "Formal letter layout"
+    },
+    {
+      "id": "notice_format",
+      "name": "Notice layout"
+    },
+    {
+      "id": "email_format",
+      "name": "Email layout"
     }
   ],
   "scale": 2,
@@ -8736,6 +8748,390 @@
       "wrong": [
         "Your answer is right, no?",
         "Your answer is right, isn't?"
+      ]
+    },
+    {
+      "id": "gu.letter_format.01",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write to the principal for leave.",
+      "question": "Which is the right greeting?",
+      "rule": "A formal letter to someone in charge starts: Respected Sir or Madam, or Dear Sir or Madam.",
+      "right": [
+        "Respected Sir,"
+      ],
+      "wrong": [
+        "Hi Sir,",
+        "Dear friend Principal,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.02",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You end a letter to the principal.",
+      "question": "Which closing is right for a formal letter?",
+      "rule": "Formal letters end with Yours faithfully (to an unnamed reader) or Yours sincerely (to a named one).",
+      "right": [
+        "Yours faithfully,"
+      ],
+      "wrong": [
+        "Your loving student,",
+        "Bye for now,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.03",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write to your grandmother.",
+      "question": "Which closing suits an informal letter?",
+      "rule": "Informal letters to family and friends end warmly: Yours lovingly, With love.",
+      "right": [
+        "With love,"
+      ],
+      "wrong": [
+        "Yours faithfully,",
+        "Thanking you, Sir,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.04",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "A formal letter has a subject line.",
+      "question": "Where does the subject line go?",
+      "rule": "In a formal letter, the subject comes after the receiver's address and before the greeting.",
+      "right": [
+        "After the receiver's address, before the greeting"
+      ],
+      "wrong": [
+        "At the very end, after your name",
+        "Before your own address at the top"
+      ]
+    },
+    {
+      "id": "gu.letter_format.05",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write a formal letter.",
+      "question": "What comes first at the top?",
+      "rule": "A formal letter begins with the sender's address and the date.",
+      "right": [
+        "Your own address and the date"
+      ],
+      "wrong": [
+        "The greeting, Dear Sir",
+        "The subject line"
+      ]
+    },
+    {
+      "id": "gu.letter_format.06",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write a subject line for leave.",
+      "question": "Which subject line is best?",
+      "rule": "A subject line is short and says exactly what the letter is about.",
+      "right": [
+        "Subject: Leave for two days (12 and 13 March)"
+      ],
+      "wrong": [
+        "Subject: Please read this letter carefully, Sir",
+        "Subject: Letter"
+      ]
+    },
+    {
+      "id": "gu.letter_format.07",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write the body of a complaint letter.",
+      "question": "Which opening sentence is best?",
+      "rule": "The first line of a formal letter states its purpose politely and directly.",
+      "right": [
+        "I am writing to complain about the broken street light outside our school."
+      ],
+      "wrong": [
+        "Hi, how are you? Hope you are fine.",
+        "Street light broken. Fix it."
+      ]
+    },
+    {
+      "id": "gu.letter_format.08",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You finish a formal letter.",
+      "question": "Which line comes just before Yours faithfully?",
+      "rule": "A polite closing line, such as Thanking you, often comes before the sign-off.",
+      "right": [
+        "Thanking you,"
+      ],
+      "wrong": [
+        "Love you lots,",
+        "See you soon, bye!"
+      ]
+    },
+    {
+      "id": "gu.notice_format.01",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your school club writes a notice.",
+      "question": "What goes at the very top of a notice?",
+      "rule": "A notice starts with the name of the school or organisation, then the word NOTICE.",
+      "right": [
+        "The school's name, then NOTICE"
+      ],
+      "wrong": [
+        "The writer's signature",
+        "The date of the event only"
+      ]
+    },
+    {
+      "id": "gu.notice_format.02",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You write a notice for a quiz.",
+      "question": "Which heading is best?",
+      "rule": "A notice heading is short and in capital letters: what it is about.",
+      "right": [
+        "INTER-HOUSE QUIZ"
+      ],
+      "wrong": [
+        "Please everybody read this notice about something",
+        "quiz"
+      ]
+    },
+    {
+      "id": "gu.notice_format.03",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "A notice gives details of an event.",
+      "question": "Which details must it include?",
+      "rule": "A notice answers what, when, where and who to contact.",
+      "right": [
+        "What, when, where, and who to contact"
+      ],
+      "wrong": [
+        "Only the writer's feelings about the event",
+        "A long story about last year's event"
+      ]
+    },
+    {
+      "id": "gu.notice_format.04",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You sign a notice for the Eco Club.",
+      "question": "How does a notice end?",
+      "rule": "A notice ends with the writer's name and position, such as Secretary, Eco Club.",
+      "right": [
+        "Name and position, such as Secretary, Eco Club"
+      ],
+      "wrong": [
+        "Yours faithfully, with love",
+        "Thank you and goodbye"
+      ]
+    },
+    {
+      "id": "gu.notice_format.05",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your notice has a word limit of fifty words.",
+      "question": "Which sentence suits a notice?",
+      "rule": "Notices use short, clear sentences in the third person.",
+      "right": [
+        "All students of Class 6 are invited to the art fair."
+      ],
+      "wrong": [
+        "I am very, very excited to tell you all about our fair!",
+        "Hi guys, come to the fair, it will be fun lol."
+      ]
+    },
+    {
+      "id": "gu.notice_format.06",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "A notice is placed on the school board.",
+      "question": "Why is it put inside a box?",
+      "rule": "In exams, a notice is written inside a box, as it would appear on a notice board.",
+      "right": [
+        "To show it as it would appear on a notice board"
+      ],
+      "wrong": [
+        "To make it look like a letter",
+        "Because the box is the heading"
+      ]
+    },
+    {
+      "id": "gu.email_format.01",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email your teacher about homework.",
+      "question": "Which subject line is best?",
+      "rule": "An email subject line says what the email is about in a few words.",
+      "right": [
+        "Science homework: question about page 42"
+      ],
+      "wrong": [
+        "Hello",
+        "Please read"
+      ]
+    },
+    {
+      "id": "gu.email_format.02",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email your class teacher.",
+      "question": "Which greeting is right?",
+      "rule": "A formal email starts with Dear and the person's name or title.",
+      "right": [
+        "Dear Mrs Rao,"
+      ],
+      "wrong": [
+        "Hey teacher!!",
+        "Yo Mrs Rao,"
+      ]
+    },
+    {
+      "id": "gu.email_format.03",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You end a formal email.",
+      "question": "Which closing is right?",
+      "rule": "A formal email ends with Regards, Kind regards or Yours sincerely, then your name.",
+      "right": [
+        "Kind regards, Arun"
+      ],
+      "wrong": [
+        "Bye bye!!",
+        "XOXO Arun"
+      ]
+    },
+    {
+      "id": "gu.email_format.04",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "An email is sent to two teachers at once.",
+      "question": "Where do both addresses go?",
+      "rule": "Every person the email is for goes in the To line; others who only need a copy go in Cc.",
+      "right": [
+        "In the To line"
+      ],
+      "wrong": [
+        "In the subject line",
+        "In the last line of the email"
+      ]
+    },
+    {
+      "id": "gu.email_format.05",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You write an email to apply for a club.",
+      "question": "Which first line is best?",
+      "rule": "Begin the body by saying why you are writing.",
+      "right": [
+        "I would like to join the school photography club."
+      ],
+      "wrong": [
+        "What's up? So, like, clubs.",
+        "Me want club."
+      ]
+    },
+    {
+      "id": "gu.email_format.06",
+      "level": 7,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "Your email has three points to make.",
+      "question": "How should the body be set out?",
+      "rule": "Keep one point in each short paragraph, so the reader can follow it.",
+      "right": [
+        "One short paragraph for each point"
+      ],
+      "wrong": [
+        "All points in one long sentence",
+        "Each word on a new line"
+      ]
+    },
+    {
+      "id": "gu.notice_format.07",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You write a notice about a lost bag.",
+      "question": "Which line gives the details best?",
+      "rule": "Give the details a reader needs to act: what was lost, where, and whom to tell.",
+      "right": [
+        "A blue school bag was lost near the library on Monday. Please return it to the office."
+      ],
+      "wrong": [
+        "Someone lost something somewhere. Please help.",
+        "I am very sad because my bag is lost and I miss it."
+      ]
+    },
+    {
+      "id": "gu.notice_format.08",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your notice gives the date it was written.",
+      "question": "Where does the date go?",
+      "rule": "The date goes near the top, under the word NOTICE, so readers know when it was put up.",
+      "right": [
+        "Near the top, under NOTICE"
+      ],
+      "wrong": [
+        "Inside the heading",
+        "After the writer's name at the very end"
+      ]
+    },
+    {
+      "id": "gu.email_format.07",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You forgot to attach your project.",
+      "question": "What should you do?",
+      "rule": "If you forget an attachment, send it again with a short, polite note.",
+      "right": [
+        "Send it again with a note: Sorry, I forgot to attach my project."
+      ],
+      "wrong": [
+        "Send an empty email with no subject",
+        "Send ten emails in a row saying sorry"
+      ]
+    },
+    {
+      "id": "gu.email_format.08",
+      "level": 7,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email a children's magazine about a story.",
+      "question": "Which closing line is best before your name?",
+      "rule": "A polite closing line thanks the reader before the sign-off.",
+      "right": [
+        "Thank you for reading my email."
+      ],
+      "wrong": [
+        "Reply fast!!!",
+        "OK bye, whatever."
       ]
     }
   ]

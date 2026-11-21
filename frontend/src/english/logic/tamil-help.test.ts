@@ -13,3 +13,15 @@ test("TH-1 every Tamil line is Tamil script and answers an English line the app 
     assert.ok(source.includes(en.replace(/\s+/g, " ")), `not shown in the app: ${en}`);
   }
 });
+
+test("TH-2 grammar explanations in Tamil: each answers a rule, card rule or card reason in the grammar content", async () => {
+  const explain = (await import("../../../../content/english/help/tamil-explain.json")).default as { strings: Record<string, string> };
+  const g = (await import("../../../../content/english/grammar/in-use.json")).default as { items: { rule: string }[] };
+  const l = (await import("../../../../content/english/grammar/learn.json")).default as { cards: { rule: string; mistake: { why: string } }[] };
+  const known = new Set([...g.items.map((i) => i.rule), ...l.cards.flatMap((c) => [c.rule, c.mistake.why])]);
+  assert.ok(Object.keys(explain.strings).length >= 400);
+  for (const [en, ta] of Object.entries(explain.strings)) {
+    assert.ok(known.has(en), `not a grammar explanation: ${en}`);
+    assert.match(ta, /[\u0B80-\u0BFF]/, en);
+  }
+});

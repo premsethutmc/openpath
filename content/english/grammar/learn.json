@@ -1,6 +1,6 @@
 {
   "id": "grammar-learn",
-  "version": 4,
+  "version": 5,
   "status": "practice_only",
   "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
   "format": "One card per Grammar in use topic, shown the first time a learner meets the topic (and again after two misses in a row): the rule, two examples, a common mistake beside the right version with a one-line reason, and two questions to try (not scored).",
@@ -2177,6 +2177,93 @@
         "wrong": [
           "Please return back the book.",
           "Please back return the book."
+        ]
+      }
+    },
+    {
+      "topic": "letter_format",
+      "rule": "A formal letter has a set order: your address and date, the receiver's address, subject, greeting, body, closing and name.",
+      "examples": [
+        "Subject: Leave for two days",
+        "Yours faithfully, Arun Kumar"
+      ],
+      "try": {
+        "question": "Which closing suits a formal letter?",
+        "right": "Yours faithfully,",
+        "wrong": [
+          "With lots of love,",
+          "Bye for now,"
+        ]
+      },
+      "mistake": {
+        "wrong": "Hi Sir, I want leave. Bye.",
+        "right": "Respected Sir, I request leave for two days. Thanking you, Yours faithfully, Arun",
+        "why": "A formal letter is polite and follows the set order."
+      },
+      "try2": {
+        "question": "What comes first at the top of a formal letter?",
+        "right": "Your own address and the date",
+        "wrong": [
+          "The greeting",
+          "The subject line"
+        ]
+      }
+    },
+    {
+      "topic": "notice_format",
+      "rule": "A notice has the school's name, NOTICE, the date, a heading, short details of what, when and where, and the writer's name and post.",
+      "examples": [
+        "GREEN VALLEY SCHOOL  NOTICE",
+        "INTER-HOUSE QUIZ"
+      ],
+      "try": {
+        "question": "Which heading suits a notice?",
+        "right": "ANNUAL SPORTS DAY",
+        "wrong": [
+          "please come to sports day everyone",
+          "Sports"
+        ]
+      },
+      "mistake": {
+        "wrong": "Hi everyone, I am so happy to tell you about the quiz!",
+        "right": "All students of Classes 6 to 8 are invited to the quiz.",
+        "why": "A notice is short, clear and written about others, not chatty."
+      },
+      "try2": {
+        "question": "How does a notice end?",
+        "right": "Name and position, such as Secretary, Eco Club",
+        "wrong": [
+          "Yours faithfully, with love",
+          "Thank you and goodbye"
+        ]
+      }
+    },
+    {
+      "topic": "email_format",
+      "rule": "An email has To, Subject, a greeting, a short body in paragraphs, and a closing such as Kind regards with your name.",
+      "examples": [
+        "Subject: Science homework question",
+        "Kind regards, Arun"
+      ],
+      "try": {
+        "question": "Which subject line is best?",
+        "right": "Science homework: question about page 42",
+        "wrong": [
+          "Hello",
+          "Please read"
+        ]
+      },
+      "mistake": {
+        "wrong": "Hey teacher!! homework??",
+        "right": "Dear Mrs Rao, I have a question about the science homework.",
+        "why": "An email to a teacher is polite and says clearly what it is about."
+      },
+      "try2": {
+        "question": "Which closing suits a formal email?",
+        "right": "Kind regards, Arun",
+        "wrong": [
+          "Bye bye!!",
+          "XOXO Arun"
         ]
       }
     }

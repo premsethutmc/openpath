@@ -98,6 +98,17 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
+              {!guided && (
+                <section className="hub-card plain" aria-labelledby="formats-card-title">
+                  <h2 id="formats-card-title">
+                    <span aria-hidden="true">✉️ </span>Letters, notices and emails
+                  </h2>
+                  <p>The layouts school exams mark: greetings, subject lines, closings and what goes where.</p>
+                  <button type="button" className="secondary" onClick={() => onGrammarUse(["letter_format", "notice_format", "email_format"])}>
+                    Practise the formats
+                  </button>
+                </section>
+              )}
               {!guided && tamil && <SlipsCard onOpen={() => onGrammarUse(["tamil_slips"])} />}
               {!guided && tamil && onSounds && (
                 <section className="hub-card plain" aria-labelledby="sounds-card-title">
