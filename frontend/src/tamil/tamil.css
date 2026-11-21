@@ -196,3 +196,4 @@ form {
 .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
 .board { display: grid; gap: 2px; text-align: left; border-radius: 16px; background: #fff; }
 .board.on { border-color: #e56b1f; background: #fff4ea; }
+.next-card { border: 2px solid #e56b1f; background: #fff4ea; margin-bottom: 6px; }

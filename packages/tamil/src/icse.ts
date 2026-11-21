@@ -56,30 +56,38 @@ export const topicsFor = (cls: number, board: Board = "icse") => courseFor(board
 const norm = (s: string) => s.normalize("NFC").trim();
 export const isRight = (q: CourseQuestion, response: string) => norm(response) === norm(q.answer);
 
-/** Per question: how often it was answered right and wrong. Kept on the device only. */
-export type Progress = Record<string, { right: number; wrong: number }>;
+/**
+ * Per question: how often it was answered right and wrong, and how many times right in a row (streak). Kept per learner.
+ * sim-tamil@1 found that counting one right answer as "known" showed a child who only guesses as 85% done (3 options:
+ * a lucky tap is 1 in 3), so a question counts as known only after two right answers in a row, with more right than wrong.
+ */
+export type Mark = { right: number; wrong: number; streak?: number };
+export type Progress = Record<string, Mark>;
+export const KNOWN_STREAK = 2;
+/** Two right in a row, and more right than wrong overall: a child who only taps at random almost never gets there. */
+export const known = (m: Mark | undefined) => !!m && (m.streak ?? 0) >= KNOWN_STREAK && m.right > m.wrong;
 
 export function record(progress: Progress, q: CourseQuestion, right: boolean): Progress {
-  const was = progress[q.id] ?? { right: 0, wrong: 0 };
-  return { ...progress, [q.id]: right ? { ...was, right: was.right + 1 } : { ...was, wrong: was.wrong + 1 } };
+  const was = progress[q.id] ?? { right: 0, wrong: 0, streak: 0 };
+  return { ...progress, [q.id]: right ? { ...was, right: was.right + 1, streak: (was.streak ?? 0) + 1 } : { ...was, wrong: was.wrong + 1, streak: 0 } };
 }
 
-/** Share of a topic's questions the learner has answered right at least once (0..1). */
-export const topicDone = (t: CourseTopic, p: Progress) => t.questions.filter((q) => (p[q.id]?.right ?? 0) > 0).length / t.questions.length;
+/** Share of a topic's questions the learner knows (two right in a row), 0..1. */
+export const topicDone = (t: CourseTopic, p: Progress) => t.questions.filter((q) => known(p[q.id])).length / t.questions.length;
 export const classDone = (cls: number, p: Progress, board: Board = "icse") => {
   const qs = topicsFor(cls, board).flatMap((t) => t.questions);
-  return qs.filter((q) => (p[q.id]?.right ?? 0) > 0).length / qs.length;
+  return qs.filter((q) => known(p[q.id])).length / qs.length;
 };
 
 /**
- * One round: up to `size` questions, not-yet-right ones first (missed ones before unseen ones), then the rest for review.
- * Deterministic for a given progress, so a round can be rebuilt after a reload.
+ * One round: up to `size` questions: missed ones first, then unseen, then seen-but-not-yet-known, then known ones for
+ * review (least practised first). Deterministic for a given progress, so a round can be rebuilt after a reload.
  */
 export function round(t: CourseTopic, p: Progress, size = 8): CourseQuestion[] {
   const rank = (q: CourseQuestion) => {
     const r = p[q.id];
     if (!r) return 1;
-    if (r.right === 0) return 0;
+    if (!known(r)) return r.streak ? 1.5 : 0;
     return 2 + r.right - r.wrong / 10;
   };
   return t.questions
@@ -134,4 +142,42 @@ export function validateSyllabus(): string[] {
           }
   }
   return errors;
+}
+
+// ---------------------------------------------------------------- next for you (tamil-next@1)
+export type Strand = "script" | "vocab" | "grammar" | "reading" | "listening";
+const SCRIPT = /vowels|consonants|length|uyirmei|aytham|first-letter|missing|letter-kinds|inam|mudhal|word-edges|suttu|kutriyal|asai/;
+const VOCAB = /pictures|numbers|colours|days|months|antonyms|synonyms|gender|plural|sounds|young|pairs|idioms|proverbs|pure-tamil|mayangoli|redup|connect|one-letter/;
+const READ = /reading|story|poem|moodurai|kural|aathichoodi|kondrai|bharathi|edhugai|tinai|paa/;
+export const strandOf = (t: CourseTopic): Strand =>
+  t.listen ? "listening" : SCRIPT.test(t.id) ? "script" : VOCAB.test(t.id) ? "vocab" : READ.test(t.id) ? "reading" : "grammar";
+
+export type Sitting = { topic: string; right: number; total: number; stepBack?: boolean };
+export const DONE = 0.8;
+const byId = (id: string, board: Board) => courseFor(board).topics.find((t) => t.id === id);
+
+/**
+ * What to practise next in a class. sim-tamil@1 found children placed or working above their level had over half their
+ * rounds too hard, round after round. So: two rounds in a row under half right on a topic → step back to a topic of the
+ * same strand one class lower that is not done, and stay on it until it is; otherwise the first topic of the class not done.
+ * Returns null when every topic of the class is done (move up a class).
+ */
+export function nextTopic(cls: number, board: Board, p: Progress, history: Sitting[], canListen = true): { topic: CourseTopic; stepBack: boolean } | null {
+  const usable = (t: CourseTopic) => canListen || !t.listen;
+  const open = [...history].reverse().find((h) => h.stepBack);
+  if (open) {
+    const t = byId(open.topic, board);
+    if (t && topicDone(t, p) < DONE && t.class < cls) return { topic: t, stepBack: true };
+  }
+  const [a, b] = history.slice(-2);
+  if (a && b && a.topic === b.topic && a.right / a.total < 0.5 && b.right / b.total < 0.5) {
+    const hard = byId(b.topic, board);
+    if (hard)
+      for (let c = hard.class - 1; c >= 1; c--) {
+        const easier = topicsFor(c, board).find((t) => usable(t) && strandOf(t) === strandOf(hard) && topicDone(t, p) < DONE);
+        if (easier) return { topic: easier, stepBack: true };
+      }
+  }
+  const t = topicsFor(cls, board).find((x) => usable(x) && topicDone(x, p) < DONE);
+  return t ? { topic: t, stepBack: false } : null;
 }

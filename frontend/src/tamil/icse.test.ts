@@ -17,7 +17,7 @@ test("answers are checked after Unicode normalisation", () => {
 
 test("a round puts missed questions first, then unseen, then ones already right", () => {
   const t = topicsFor(5)[0];
-  let p = record({}, t.questions[0], true);
+  let p = record(record({}, t.questions[0], true), t.questions[0], true);
   p = record(p, t.questions[3], false);
   const r = round(t, p, 5);
   assert.equal(r[0].id, t.questions[3].id);
@@ -65,4 +65,24 @@ test("Tamil Nadu State Board course: Classes 1-10, its own grammar topics, sylla
   }
   for (const id of ["c6.word-edges", "c6.inam-pairs", "c7.kutriyal", "c8.thogai", "c8.vallinam", "c8.asai", "c10.tinai", "c10.paa"]) assert.ok(tnCourse.topics.some((t) => t.id === `tn.ta.${id}`), id);
   assert.ok(tnCourse.topics.every((t) => t.id.startsWith("tn.ta.")));
+});
+
+test("sim-tamil@1 fixes: a lucky tap is not 'known'; placement and next-for-you behave", async () => {
+  const { known, record: rec, nextTopic, topicsFor: tf } = await import("../../../packages/tamil/src/icse");
+  const { startPlacement, answerPlacement } = await import("../../../packages/tamil/src/placement");
+  const q = tf(5, "tn")[0].questions[0];
+  assert.equal(known(rec({}, q, true)[q.id]), false, "one right is not known");
+  assert.equal(known(rec(rec({}, q, true), q, true)[q.id]), true, "two in a row is");
+  assert.equal(known(rec(rec(rec(rec({}, q, false), q, false), q, true), q, true)[q.id]), false, "but not with more wrong than right");
+  // placement from Class 5: all right climbs to 10; all wrong comes down to 1
+  let s = startPlacement(5);
+  while (!s.done) s = answerPlacement(s, true);
+  assert.equal(s.start, 10);
+  s = startPlacement(5);
+  while (!s.done) s = answerPlacement(s, false);
+  assert.equal(s.start, 1);
+  // two rounds under half right on one topic: step back to the same strand, a class lower
+  const hard = tf(8, "tn").find((t) => t.id.endsWith(".vallinam"))!;
+  const n = nextTopic(8, "tn", {}, [{ topic: hard.id, right: 1, total: 8 }, { topic: hard.id, right: 2, total: 8 }]);
+  assert.ok(n && n.stepBack && n.topic.class < 8, JSON.stringify(n?.topic.id));
 });

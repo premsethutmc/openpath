@@ -285,3 +285,18 @@ test("Tamil Nadu State Board: choose the board, a Class 8 grammar topic, practic
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("Where should I start: answering 'I don't know' brings the start down to Class 1", async () => {
+  const { context, page, errors } = await phone();
+  await page.goto(`${URL}/`);
+  await page.locator(".class-tile", { hasText: "வகுப்பு 3" }).tap();
+  await page.getByRole("button", { name: /Check where to start/ }).tap();
+  for (let i = 0; i < 12 && !(await page.getByRole("heading", { name: /இலிருந்து தொடங்கு/ }).count()); i++)
+    await page.getByRole("button", { name: /I don't know/ }).tap();
+  await page.getByRole("heading", { name: "வகுப்பு 1 இலிருந்து தொடங்கு" }).waitFor();
+  await page.getByRole("button", { name: "தொடங்கு — Start Class 1" }).tap();
+  await page.getByRole("heading", { name: "வகுப்பு 1 — பாடங்கள்" }).waitFor();
+  await page.getByText("அடுத்து — Next for you").waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
