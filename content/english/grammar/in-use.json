@@ -310,6 +310,26 @@
     {
       "id": "senses",
       "name": "Language of the senses"
+    },
+    {
+      "id": "modals",
+      "name": "Can, may, must and should"
+    },
+    {
+      "id": "question_tags",
+      "name": "Question tags"
+    },
+    {
+      "id": "word_formation",
+      "name": "Compound, blended and short words"
+    },
+    {
+      "id": "syllables",
+      "name": "Syllables"
+    },
+    {
+      "id": "nominalisation",
+      "name": "Verbs into nouns"
     }
   ],
   "scale": 2,
@@ -8164,6 +8184,46 @@
         "awful",
         "bad"
       ]
-    }
+    },
+    {"id": "gu.modals.01", "level": 4, "topic": "modals", "kind": "fix", "sentence": "You [can] wear a helmet; it is the rule.", "rule": "\"Must\" says something has to be done.", "right": ["must"]},
+    {"id": "gu.modals.02", "level": 4, "topic": "modals", "kind": "fix", "sentence": "[Must] I borrow your pencil, please?", "rule": "\"May\" asks politely for permission.", "right": ["May", "Can", "Could"]},
+    {"id": "gu.modals.03", "level": 4, "topic": "modals", "kind": "fix", "sentence": "She can [swims] very fast.", "rule": "After a modal the verb takes its plain form.", "right": ["swim"]},
+    {"id": "gu.modals.04", "level": 4, "topic": "modals", "kind": "fix", "sentence": "You [should] not touch the wire; it will hurt you.", "rule": "For a strong warning, \"must not\" fits better than a suggestion.", "right": ["must"]},
+    {"id": "gu.modals.05", "level": 4, "topic": "modals", "kind": "choose", "sentence": "It looks cloudy. It ___ rain this evening.", "question": "Which word fits?", "rule": "\"Might\" or \"may\" says something is possible.", "right": ["might"], "wrong": ["must", "can"]},
+    {"id": "gu.modals.06", "level": 4, "topic": "modals", "kind": "choose", "sentence": "You have a fever. You ___ see a doctor.", "question": "Which word gives advice?", "rule": "\"Should\" gives advice.", "right": ["should"], "wrong": ["can", "may"]},
+    {"id": "gu.modals.07", "level": 4, "topic": "modals", "kind": "build", "sentence": "Could you open the window, please?", "rule": "\"Could you\" makes a polite request.", "extra": ["can"]},
+    {"id": "gu.modals.08", "level": 4, "topic": "modals", "kind": "build", "sentence": "We must finish the work today.", "rule": "\"Must\" plus the plain verb says it has to be done.", "extra": ["finishes"]},
+    {"id": "gu.question_tags.01", "level": 5, "topic": "question_tags", "kind": "fix", "sentence": "It is hot today, [is] it?", "rule": "A positive sentence takes a negative tag: isn't it?", "right": ["isn't"]},
+    {"id": "gu.question_tags.02", "level": 5, "topic": "question_tags", "kind": "fix", "sentence": "You don't like tea, [don't] you?", "rule": "A negative sentence takes a positive tag: do you?", "right": ["do"]},
+    {"id": "gu.question_tags.03", "level": 5, "topic": "question_tags", "kind": "fix", "sentence": "She can sing, [can] she?", "rule": "The tag repeats the helping verb, made negative: can't she?", "right": ["can't"]},
+    {"id": "gu.question_tags.04", "level": 5, "topic": "question_tags", "kind": "fix", "sentence": "They went home, [weren't] they?", "rule": "A simple past verb takes \"did\" in the tag: didn't they?", "right": ["didn't"]},
+    {"id": "gu.question_tags.05", "level": 5, "topic": "question_tags", "kind": "choose", "sentence": "Ravi plays chess, ___?", "question": "Which tag fits?", "rule": "\"Plays\" is simple present, so the tag uses \"doesn't\".", "right": ["doesn't he"], "wrong": ["isn't he", "does he"]},
+    {"id": "gu.question_tags.06", "level": 5, "topic": "question_tags", "kind": "choose", "sentence": "I am late, ___?", "question": "Which tag fits?", "rule": "After \"I am\" the tag is \"aren't I\".", "right": ["aren't I"], "wrong": ["am I", "isn't I"]},
+    {"id": "gu.question_tags.07", "level": 5, "topic": "question_tags", "kind": "choose", "sentence": "Let's go to the park, ___?", "question": "Which tag fits?", "rule": "\"Let's\" takes the tag \"shall we\".", "right": ["shall we"], "wrong": ["will you", "don't we"]},
+    {"id": "gu.question_tags.08", "level": 5, "topic": "question_tags", "kind": "choose", "sentence": "Nobody called, ___?", "question": "Which tag fits?", "rule": "\"Nobody\" makes the sentence negative, so the tag is positive and uses \"they\".", "right": ["did they"], "wrong": ["didn't they", "did he"]},
+    {"id": "gu.word_formation.01", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "sun + flower", "question": "Which compound word do they make?", "rule": "Two whole words joined make a compound word.", "right": ["sunflower"], "wrong": ["flowersun", "sunflour"]},
+    {"id": "gu.word_formation.02", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "breakfast + lunch", "question": "Which blended word do they make?", "rule": "A blend joins parts of two words: br(eakfast) + (l)unch.", "right": ["brunch"], "wrong": ["breaklunch", "lunfast"]},
+    {"id": "gu.word_formation.03", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "smoke + fog", "question": "Which blended word do they make?", "rule": "sm(oke) + (f)og gives smog.", "right": ["smog"], "wrong": ["fogsmoke", "smoog"]},
+    {"id": "gu.word_formation.04", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "The word is \"examination\".", "question": "What is its short, clipped form?", "rule": "A clipped word keeps part of the longer word.", "right": ["exam"], "wrong": ["nation", "examin"]},
+    {"id": "gu.word_formation.05", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "The word is \"telephone\".", "question": "What is its short, clipped form?", "rule": "Telephone is clipped to phone.", "right": ["phone"], "wrong": ["tele", "tone"]},
+    {"id": "gu.word_formation.06", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "Please reply ASAP.", "question": "What does ASAP stand for?", "rule": "An abbreviation is made from the first letters of words.", "right": ["as soon as possible"], "wrong": ["as simple as possible", "always say a please"]},
+    {"id": "gu.word_formation.07", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "The doctor works at the WHO.", "question": "What does WHO stand for?", "rule": "WHO is the World Health Organization.", "right": ["World Health Organization"], "wrong": ["World Help Office", "Women's Health Organization"]},
+    {"id": "gu.word_formation.08", "level": 5, "topic": "word_formation", "kind": "choose", "sentence": "rain + coat", "question": "Which compound word do they make?", "rule": "rain + coat makes raincoat, a coat for the rain.", "right": ["raincoat"], "wrong": ["coatrain", "raining"]},
+    {"id": "gu.syllables.01", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"basket\".", "question": "How is it split into syllables?", "rule": "Each syllable has one vowel sound: bas-ket.", "right": ["bas-ket"], "wrong": ["ba-sket", "bask-et"]},
+    {"id": "gu.syllables.02", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"elephant\".", "question": "How many syllables does it have?", "rule": "el-e-phant has three vowel sounds, so three syllables.", "right": ["3"], "wrong": ["2", "4"]},
+    {"id": "gu.syllables.03", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"butterfly\".", "question": "How is it split into syllables?", "rule": "Between double letters the word splits: but-ter-fly.", "right": ["but-ter-fly"], "wrong": ["bu-tterf-ly", "bu-tter-fly"]},
+    {"id": "gu.syllables.04", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"school\".", "question": "How many syllables does it have?", "rule": "School has one vowel sound, so one syllable.", "right": ["1"], "wrong": ["2", "3"]},
+    {"id": "gu.syllables.05", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"computer\".", "question": "How is it split into syllables?", "rule": "com-pu-ter: three vowel sounds.", "right": ["com-pu-ter"], "wrong": ["comp-u-ter", "co-mpu-ter"]},
+    {"id": "gu.syllables.06", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"happiness\".", "question": "How many syllables does it have?", "rule": "hap-pi-ness has three syllables.", "right": ["3"], "wrong": ["2", "4"]},
+    {"id": "gu.syllables.07", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"window\".", "question": "How is it split into syllables?", "rule": "Two consonants between vowels split apart: win-dow.", "right": ["win-dow"], "wrong": ["wi-ndow", "wind-ow"]},
+    {"id": "gu.syllables.08", "level": 4, "topic": "syllables", "kind": "choose", "sentence": "The word is \"education\".", "question": "How many syllables does it have?", "rule": "ed-u-ca-tion has four syllables.", "right": ["4"], "wrong": ["3", "5"]},
+    {"id": "gu.nominalisation.01", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "His [arrive] made us happy.", "rule": "After \"his\", a noun is needed: arrival.", "right": ["arrival"]},
+    {"id": "gu.nominalisation.02", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "The [decide] was taken by the class.", "rule": "After \"the\", the noun form is needed: decision.", "right": ["decision"]},
+    {"id": "gu.nominalisation.03", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "We admired her [brave].", "rule": "After \"her\", the noun form of brave is bravery.", "right": ["bravery"]},
+    {"id": "gu.nominalisation.04", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "The [discover] of fire changed human life.", "rule": "The noun form of discover is discovery.", "right": ["discovery"]},
+    {"id": "gu.nominalisation.05", "level": 7, "topic": "nominalisation", "kind": "choose", "sentence": "They celebrated because the team won.", "question": "Which says the same with a noun?", "rule": "\"Won\" becomes the noun \"victory\".", "right": ["They celebrated the team's victory."], "wrong": ["They celebrated the team's winning it.", "They celebrated because victory."]},
+    {"id": "gu.nominalisation.06", "level": 7, "topic": "nominalisation", "kind": "choose", "sentence": "The bridge was built quickly.", "question": "Which says the same with a noun?", "rule": "\"Built\" becomes the noun \"construction\".", "right": ["The construction of the bridge was quick."], "wrong": ["The bridge construction quickly.", "The building quickly of the bridge."]},
+    {"id": "gu.nominalisation.07", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "The [fail] of the plan surprised us.", "rule": "The noun form of fail is failure.", "right": ["failure"]},
+    {"id": "gu.nominalisation.08", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "Her [explain] was clear.", "rule": "The noun form of explain is explanation.", "right": ["explanation"]}
   ]
 }

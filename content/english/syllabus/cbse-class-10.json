@@ -1,0 +1,182 @@
+{
+  "id": "cbse-english-class-10",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 10,
+  "subject": "English",
+  "title": "CBSE English, Class X",
+  "source": {
+    "read": "Directorate of Education, Delhi: Class X English Language and Literature (184) annual syllabus 2025-26, which follows the CBSE curriculum (First Flight, Footprints without Feet)",
+    "url": "https://edustud.nic.in/edu/SYLLABUS_2025_26/10/10_English_EM.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A state education department's copy of the CBSE syllabus, read through a text summary of the PDF. The board's prescribed chapters are named, not reproduced; the course is examined mainly through the textbooks, which are not in the app."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Section A",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads a discursive passage of about 400 words and answers questions on it.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Reads a factual passage with a chart or data and answers questions.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Section B",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes a formal letter on a given situation.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W14"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes an analytical paragraph on a map, chart, graph or cues.",
+          "coverage": "not",
+          "note": "Describing data from a chart is not yet in the app."
+        }
+      ]
+    },
+    {
+      "id": "grammar",
+      "name": "Grammar",
+      "pages": "Section B",
+      "outcomes": [
+        {
+          "id": "G1",
+          "text": "Uses determiners.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles",
+            "this_these"
+          ]
+        },
+        {
+          "id": "G2",
+          "text": "Uses tenses.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "tenses",
+            "tense_shift",
+            "continuous"
+          ]
+        },
+        {
+          "id": "G3",
+          "text": "Uses modals.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "modals",
+            "modal_perfect"
+          ]
+        },
+        {
+          "id": "G4",
+          "text": "Makes the verb agree with its subject.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement"
+          ]
+        },
+        {
+          "id": "G5",
+          "text": "Reports commands, requests, statements and questions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "speech"
+          ]
+        },
+        {
+          "id": "G6",
+          "text": "Fills gaps, edits and transforms sentences with correct grammar and punctuation.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "joining",
+            "punctuation",
+            "confusables"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literature",
+      "name": "Literature",
+      "pages": "Section C",
+      "outcomes": [
+        {
+          "id": "L1",
+          "text": "Reads the prose and play of First Flight and answers questions on extracts and the whole.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        },
+        {
+          "id": "L2",
+          "text": "Reads the poems of First Flight and explains their devices.",
+          "coverage": "partly",
+          "where": "kinds",
+          "note": "Poems and everyday texts asks about purpose, point of view and figurative language on OpenPath's own poems; the textbook's poems are not in the app."
+        },
+        {
+          "id": "L3",
+          "text": "Reads the stories of Footprints without Feet and writes about character and theme.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        }
+      ]
+    },
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Internal",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Speaks fluently and interacts well in role play, skits and talks.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS4"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Listens and answers questions on what is heard.",
+          "coverage": "covered",
+          "where": "listen"
+        }
+      ]
+    }
+  ]
+}

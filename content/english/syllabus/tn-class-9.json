@@ -1,0 +1,173 @@
+{
+  "id": "tn-samacheer-english-class-9",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 9,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class IX",
+  "source": {
+    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
+    "url": "https://www.tntextbooks.in/",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "accessed": "2026-11-21"
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens to a passage or talk and answers questions.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Takes part in discussions and gives short talks.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads prose, poems and supplementary stories and answers questions.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Writes about the theme and characters of a story.",
+          "coverage": "covered",
+          "where": "long"
+        },
+        {
+          "id": "R3",
+          "text": "Follows a route on a road map and gives directions.",
+          "coverage": "not",
+          "note": "Map reading and giving directions are not yet in the app."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes formal and informal letters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W14"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes a notice and a poster.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W13"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes a dialogue and a short biography.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W12"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Makes notes and writes a summary of a passage.",
+          "coverage": "not",
+          "note": "Note-making and summary writing are not yet in the app."
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-grammar",
+      "name": "Vocabulary and Grammar",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "VG1",
+          "text": "Uses tenses, modals and question tags.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "tenses",
+            "modals",
+            "question_tags"
+          ]
+        },
+        {
+          "id": "VG2",
+          "text": "Uses the passive voice and reported speech.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "passive",
+            "speech"
+          ]
+        },
+        {
+          "id": "VG3",
+          "text": "Uses conditionals, relative clauses and degrees of comparison.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "conditionals",
+            "relative",
+            "comparison"
+          ]
+        },
+        {
+          "id": "VG4",
+          "text": "Uses prepositional phrases and phrasal verbs.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prepositions",
+            "phrasal_verbs"
+          ]
+        },
+        {
+          "id": "VG5",
+          "text": "Uses abbreviations, compound words and words of the same and opposite meaning.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "word_formation",
+            "synonyms_antonyms"
+          ]
+        }
+      ]
+    }
+  ]
+}

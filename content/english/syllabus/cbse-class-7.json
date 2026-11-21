@@ -1,0 +1,239 @@
+{
+  "id": "cbse-english-class-7",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 7,
+  "subject": "English",
+  "title": "CBSE English, Class VII",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class VII list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class VII",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Reads stories aloud and says poems with suitable pauses and expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW2"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Takes part in skits, debates, speeches and quizzes.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "LS5"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Talks in English with family, friends and people such as shopkeepers.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Discusses dialogues, short films, news and debates.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "LS2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class VII",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads for details, characters, the main idea and the order of events.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Compares characters, events, ideas and themes, and links them to life.",
+          "coverage": "covered",
+          "where": "long"
+        },
+        {
+          "id": "R3",
+          "text": "Takes notes from lessons, books and online material.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "R4",
+          "text": "Works out the meaning of new words from context.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning"
+          ]
+        },
+        {
+          "id": "R5",
+          "text": "Uses a dictionary, thesaurus and encyclopaedia.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-6",
+            "outcome": "GV7"
+          }
+        },
+        {
+          "id": "R6",
+          "text": "Reads for pleasure: adventure, science fiction, fairy tales, life stories and travel writing.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "R5"
+          }
+        },
+        {
+          "id": "R7",
+          "text": "Writes a book review.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "R5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class VII",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes dictated paragraphs with varied sentences.",
+          "coverage": "covered",
+          "where": "passage"
+        },
+        {
+          "id": "W2",
+          "text": "Plans, revises and writes with a clear beginning, middle and end.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W8"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes formal letters, diaries, lists, emails and text messages.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W1"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Tries stories, poems, dialogues and skits.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W3"
+          }
+        },
+        {
+          "id": "W5",
+          "text": "Writes dialogues from a story and a story from dialogues.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class VII",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses nouns, pronouns, verbs, determiners, adjectives and adverbs correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "pronouns",
+            "adjective_kinds",
+            "adverbs"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses tenses correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "past",
+            "continuous",
+            "tenses",
+            "tense_shift"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses the passive voice.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "passive"
+          ]
+        }
+      ]
+    }
+  ]
+}

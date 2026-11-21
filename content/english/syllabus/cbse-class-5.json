@@ -1,0 +1,224 @@
+{
+  "id": "cbse-english-class-5",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 5,
+  "subject": "English",
+  "title": "CBSE English, Class V",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class V list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class V",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Answers questions on daily life and on unfamiliar stories and poems.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Shares songs, poems, riddles, stories and tongue twisters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "LS5"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Interviews people such as grandparents, teachers or the librarian.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Speaks about peace and equality, giving own views.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "LS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class V",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads storybooks, news and advertisements alone, then talks or writes about them.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW3"
+          }
+        },
+        {
+          "id": "R2",
+          "text": "Reads for details and the order of events.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R3",
+          "text": "Links ideas worked out from a text to own experience.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW2"
+          }
+        },
+        {
+          "id": "R4",
+          "text": "Uses a dictionary for reference.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW5"
+          }
+        },
+        {
+          "id": "R5",
+          "text": "Reads signs and public notices and answers questions on them.",
+          "coverage": "covered",
+          "where": "kinds"
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class V",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes lists, paragraphs and dialogues from dictation.",
+          "coverage": "covered",
+          "where": "passage"
+        },
+        {
+          "id": "W2",
+          "text": "Writes paragraphs from word or picture clues, with punctuation and linking words.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "RW7"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes a short life story of someone, and of self.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW10"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Writes informal letters, messages and emails.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW12"
+          }
+        },
+        {
+          "id": "W5",
+          "text": "Tries creative writing: stories, poems and posters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "RW8"
+          }
+        },
+        {
+          "id": "W6",
+          "text": "Writes a few sentences about a cartoon, picture or comic strip.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw. The app has no pictures to read.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class V",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses correct sentences to describe, tell and ask.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement",
+            "questions",
+            "word_order"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses words of the same and opposite meaning found in a text.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms",
+            "context_meaning"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Finds nouns and adverbs, and tells the simple past from the present.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "adverbs",
+            "past"
+          ]
+        }
+      ]
+    }
+  ]
+}

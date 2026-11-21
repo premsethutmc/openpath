@@ -20,7 +20,7 @@ import { FIRST, firstSummary, isBeginner } from "../logic/first/first.ts";
 import { NAMING_TOPIC, streamRows, type StreamId, type StreamRow } from "../logic/streams/streams.ts";
 import { GRAMMAR, grammarSummary } from "../logic/grammar-use/grammar-use.ts";
 import { listenSummary } from "../logic/listening/passages.ts";
-import { SYLLABUSES, coverage as syllabusCoverage } from "../logic/syllabus/syllabus.ts";
+import { BOARDS, SYLLABUSES, syllabusesOf, coverage as syllabusCoverage, type Board } from "../logic/syllabus/syllabus.ts";
 import { COURSE } from "../logic/reading/course.ts";
 import { progress } from "../logic/reading/session.ts";
 
@@ -527,17 +527,20 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
 
 /** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
 function SyllabusCard({ onOpen }: { onOpen: () => void }) {
-  const classes = SYLLABUSES.map((d) => d.class);
   const lines = SYLLABUSES.reduce((n, d) => n + syllabusCoverage(d).total, 0);
+  const span = (b: Board) => {
+    const cs = syllabusesOf(b).map((d) => d.class);
+    return `${BOARDS.find((x) => x.id === b)!.name} ${cs[0]} to ${cs.at(-1)}`;
+  };
   return (
     <section className="hub-card plain" aria-labelledby="syllabus-card-title">
       <h2 id="syllabus-card-title">
         <span aria-hidden="true">🏫 </span>
-        {SYLLABUSES[0].board} English by class
+        School English by board and class
       </h2>
       <p>What the board lists for each class, and where to practise each part here.</p>
       <p className="small">
-        Classes {classes.slice(0, -1).join(", ")} and {classes.at(-1)}: {lines} lines
+        Classes {BOARDS.map((b) => span(b.id)).join(", ")}: {lines} lines
       </p>
       <button type="button" className="secondary" onClick={onOpen}>
         Open the class syllabus

@@ -11,7 +11,7 @@ import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
-import { SYLLABUSES, coverage, syllabusFor, syllabusProblems } from "../syllabus/syllabus.ts";
+import { SYLLABUSES, coverage, syllabusFor, syllabusProblems, syllabusesOf } from "../syllabus/syllabus.ts";
 
 const byId = new Map(GRAMMAR.items.map((i) => [i.id, i]));
 const item = (sentence: string) => GRAMMAR.items.find((i) => i.sentence === sentence)!;
@@ -173,7 +173,7 @@ test("GU-8 stored on the learner's record without touching the engine", async ()
 });
 
 test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, and its grammar lines have sentences", () => {
-  assert.deepEqual(SYLLABUSES.map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.deepEqual(syllabusesOf("icse").map((x) => x.class), [1, 2, 3, 4, 5, 6, 7, 8]);
   assert.deepEqual(coverage(syllabusFor(1)), { covered: 17, partly: 5, guided: 16, not: 0, total: 38 });
   assert.deepEqual(coverage(syllabusFor(2)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(8)), { covered: 10, partly: 0, guided: 27, not: 0, total: 37 });
@@ -181,7 +181,7 @@ test("GU-9 Classes 1 to 8 are held; each is sound, unofficial-source labelled, a
   assert.deepEqual(coverage(syllabusFor(7)), { covered: 13, partly: 0, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(4)), { covered: 12, partly: 1, guided: 12, not: 0, total: 25 });
   assert.deepEqual(coverage(syllabusFor(6)), { covered: 23, partly: 1, guided: 22, not: 0, total: 46 });
-  for (const s of SYLLABUSES) {
+  for (const s of syllabusesOf("icse")) {
     assert.deepEqual(syllabusProblems(s), []);
     assert.equal(s.source.official, false);
     assert.match(s.source.note, /^UNOFFICIAL SOURCE/);

@@ -1,0 +1,141 @@
+{
+  "id": "tn-samacheer-english-class-1",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 1,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class I",
+  "source": {
+    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
+    "url": "https://www.tntextbooks.in/",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "accessed": "2026-11-21"
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Says rhymes and action songs.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS3"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Listens to a short story and answers simple questions.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS3",
+          "text": "Greets, introduces self and uses polite words.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Talks about a picture in a few words.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Knows the letters, their sounds and simple words with pictures.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "R2",
+          "text": "Reads simple words and short sentences.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The first reading level starts with short texts; reading single new words aloud is not heard."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes capital and small letters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "GV4"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes simple words from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-grammar",
+      "name": "Vocabulary and Grammar",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "VG1",
+          "text": "Names everyday things: family, body, animals, food and colours.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "VG2",
+          "text": "Uses a and an, and this and that.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles",
+            "this_these"
+          ]
+        },
+        {
+          "id": "VG3",
+          "text": "Uses one and many.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "plurals"
+          ]
+        }
+      ]
+    }
+  ]
+}

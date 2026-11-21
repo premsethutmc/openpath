@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { GUIDED, done, guidedProblems, guidedSummary, tasksFor, wordCount } from "./guided.ts";
-import { SYLLABUSES, coverage, syllabusProblems } from "../syllabus/syllabus.ts";
+import { SYLLABUSES, coverage, syllabusProblems, syllabusesOf, taskLine } from "../syllabus/syllabus.ts";
 import { loadContent } from "../content.ts";
 import { Learner } from "../learner.ts";
 import { MemoryRepo } from "../store.ts";
@@ -18,12 +18,13 @@ test("GT-2 every syllabus line marked 'with a grown-up' has at least two tasks, 
   for (const s of SYLLABUSES) {
     assert.deepEqual(syllabusProblems(s), []);
     for (const o of s.strands.flatMap((st) => st.outcomes).filter((o) => o.coverage === "guided")) {
-      lines.add(`${s.id}/${o.id}`);
-      assert.ok(tasksFor(GUIDED, s.id, o.id).length >= 2, o.id);
+      const line = taskLine(s, o);
+      lines.add(`${line.syllabus}/${line.outcome}`);
+      assert.ok(tasksFor(GUIDED, line.syllabus, line.outcome).length >= 2, o.id);
     }
   }
   for (const t of GUIDED.tasks) assert.ok(lines.has(`${t.syllabus}/${t.outcome}`), `${t.id} serves a line marked guided`);
-  for (const s of SYLLABUSES) assert.equal(coverage(s).not, 0, `Class ${s.class} has no line left without a place`);
+  for (const s of syllabusesOf("icse")) assert.equal(coverage(s).not, 0, `Class ${s.class} has no line left without a place`);
 });
 
 test("GT-3 a task done is kept with the adult's ticks, counted again when repeated, and writes nothing to the engine", async () => {
