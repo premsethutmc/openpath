@@ -4,6 +4,7 @@
  */
 import { listenSummary } from "./listening/passages.ts";
 import { GRAMMAR, grammarSummary } from "./grammar-use/grammar-use.ts";
+import { masterySummary } from "./grammar-use/mastery.ts";
 import { summary as wordsSummary } from "./vocabulary/daily-words.ts";
 import { dictationSummary } from "./dictation/dictation.ts";
 import type { Learner } from "./learner.ts";
@@ -55,7 +56,7 @@ export interface ChildSummary {
   /** Listen and answer: passages heard, questions right, and the kinds of question missed. */
   listening: { passages: number; right: number; asked: number; weak: string[] } | null;
   /** Grammar in use: sentences answered and right, and the topics to look at again. */
-  grammar: { answered: number; right: number; weak: string[] } | null;
+  grammar: { answered: number; right: number; weak: string[]; mastered?: number } | null;
   /** Calendar days (the child's own day) with any English practice in the last seven. */
   englishDays: number;
   /** weekly-note@1: each activity used in the last seven days and on how many of them, most days first. */
@@ -137,7 +138,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     words: w ? { estimate: w.estimate, low: w.low, high: w.high } : null,
     newWords: nw.learning + nw.learnt ? { learnt: nw.learnt, learning: nw.learning, tricky: nw.tricky.slice(0, 6) } : null,
     listening: heard.passages ? { passages: heard.passages, right: heard.right, asked: heard.asked, weak: heard.weak } : null,
-    grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5) } : null,
+    grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5), mastered: masterySummary(learner.grammarTimed(), now).mastered } : null,
     englishDays: english.size,
     week: [...byActivity].map(([activity, d]) => ({ activity, days: d.size })).sort((a, b) => b.days - a.days || (a.activity < b.activity ? -1 : 1)),
     levels: streamRows(learner, now).map((r) => ({ name: r.name, level: r.level })),
@@ -180,6 +181,7 @@ export function weeklyNote(s: ChildSummary, link?: string): string {
   if (s.newWords?.learnt) good.push(`${s.newWords.learnt} new words learnt`);
   if (s.dictation?.perfectFirst) good.push(`${s.dictation.perfectFirst} sentences written right first time`);
   if (s.grammar?.right) good.push(`${s.grammar.right} grammar sentences right`);
+  if (s.grammar?.mastered) good.push(`${s.grammar.mastered} grammar ${s.grammar.mastered === 1 ? "topic" : "topics"} mastered`);
   if (s.reading?.passed) good.push(`${s.reading.passed} reading ${s.reading.passed === 1 ? "skill" : "skills"} passed`);
   if (good.length) lines.push(`So far: ${good.join("; ")}.`);
   const work: string[] = [];

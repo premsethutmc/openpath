@@ -362,6 +362,11 @@ export class Learner {
   }
 
   /** The learner's Grammar in use record, in order. */
+  /** Grammar records with when each was stored (for spaced review, logic/grammar-use/mastery.ts). */
+  grammarTimed(): { at: string; record: GrammarRecord }[] {
+    return this.events.flatMap((e) => (e.kind === "grammar_use" ? [{ at: e.at, record: e.record }] : []));
+  }
+
   grammarRecords(): GrammarRecord[] {
     return this.events.flatMap((e) => (e.kind === "grammar_use" ? [e.record] : []));
   }

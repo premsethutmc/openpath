@@ -230,7 +230,23 @@ export function levelFor(g: GrammarUse, records: readonly GrammarRecord[], start
  * new and missed ones from the two levels below (nearer first) before it asks again one already answered right (sim-english@1 found
  * the top level's sentences re-asked within days).
  */
-export function pick(g: GrammarUse, level: number, records: readonly GrammarRecord[], topics?: readonly string[]): GrammarItem[] {
+export function pick(g: GrammarUse, level: number, records: readonly GrammarRecord[], topics?: readonly string[], review: readonly string[] = []): GrammarItem[] {
+  // grammar-mastery@1: a level sitting gives its first places to one sentence from each topic due for review, a new
+  // one where the topic has one, else the one answered longest ago
+  const reviewed: GrammarItem[] = [];
+  if (!topics?.length && review.length) {
+    const seenAt = new Map<string, number>();
+    records.forEach((r, i) => r.type === "answer" && seenAt.set(r.id, i));
+    for (const t of review) {
+      const it = hashOrder(g.items.filter((x) => x.topic === t), (x) => `review|${x.id}`).sort((a, b) => (seenAt.get(a.id) ?? -1) - (seenAt.get(b.id) ?? -1))[0];
+      if (it) reviewed.push(it);
+    }
+  }
+  const rest = pickNew(g, level, records, topics).filter((it) => !reviewed.includes(it));
+  return [...reviewed, ...rest].slice(0, SITTING_SIZE);
+}
+
+function pickNew(g: GrammarUse, level: number, records: readonly GrammarRecord[], topics?: readonly string[]): GrammarItem[] {
   const latest = new Map<string, { correct: boolean; i: number }>();
   records.forEach((r, i) => r.type === "answer" && latest.set(r.id, { correct: r.correct, i }));
   // the two levels below, nearer first (sim-english@2: a strong learner who stays at the top level ran through it and
@@ -321,13 +337,13 @@ export class GrammarSitting {
   private readonly mine: GrammarRecord[] = [];
   readonly level: number;
 
-  constructor(content: GrammarUse, level: number, history: readonly GrammarRecord[], topics?: readonly string[]) {
+  constructor(content: GrammarUse, level: number, history: readonly GrammarRecord[], topics?: readonly string[], review: readonly string[] = []) {
     this.content = content;
     this.level = level;
     this.history = history;
     this.topics = topics?.length ? [...topics] : undefined;
     this.sitting = `g${history.filter((r) => r.type === "start").length + 1}`;
-    this.items = pick(content, level, history, this.topics);
+    this.items = pick(content, level, history, this.topics, review);
     this.learnt = new Set(history.flatMap((r) => (r.type === "learn" ? [r.topic] : [])));
     this.log.push({ type: "start", sitting: this.sitting, level, scale: SCALE, ...(this.topics ? { topics: this.topics } : {}) });
   }
