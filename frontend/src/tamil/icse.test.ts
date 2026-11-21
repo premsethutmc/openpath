@@ -46,3 +46,11 @@ test("every syllabus outcome points at a topic or writing that exists; most are 
 test("listening questions name what is spoken, and the spoken word is an option", () => {
   for (const t of course.topics.filter((x) => x.listen)) for (const q of t.questions) assert.ok(q.say && q.options.includes(q.say) && q.answer === q.say, q.id);
 });
+
+test("literature practice: own stories for Classes 6-10, exam-length (about 250 words) in Classes 9 and 10; textbooks are never 'not here'", async () => {
+  const { syllabusFor, tamilWords } = await import("../../../packages/tamil/src/icse");
+  for (const c of [6, 7, 8, 9, 10]) assert.ok(course.topics.some((t) => t.id === `icse.ta.c${c}.story` && t.passage), `class ${c} story`);
+  for (const c of [9, 10]) assert.ok(tamilWords(course.topics.find((t) => t.id === `icse.ta.c${c}.story`)!.passage!) >= 240, `class ${c} story length`);
+  const all = CLASSES.flatMap((c) => syllabusFor(c).strands.flatMap((s) => s.outcomes));
+  assert.equal(all.filter((o) => o.coverage === "not-yet").length, 0);
+});

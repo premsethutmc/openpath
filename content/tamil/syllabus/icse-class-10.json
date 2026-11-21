@@ -33,11 +33,11 @@
     {
      "id": "A3",
      "text": "Comprehension (10 marks): answers questions on an unseen passage of about 250 words.",
-     "coverage": "partly",
+     "coverage": "covered",
      "where": [
-      "icse.ta.c10.reading"
-     ],
-     "note": "Our passage is shorter than the exam's 250 words."
+      "icse.ta.c10.reading",
+      "icse.ta.c10.story"
+     ]
     },
     {
      "id": "A4",
@@ -59,9 +59,11 @@
     {
      "id": "B1",
      "text": "Prescribed texts (40 marks): answers on two of the prescribed textbooks.",
-     "coverage": "not-yet",
-     "where": [],
-     "note": "The school's prescribed Tamil textbook is copyrighted; OpenPath does not reproduce it. Our own passages and classics cover the skills."
+     "coverage": "partly",
+     "where": [
+      "icse.ta.c10.story"
+     ],
+     "note": "The school's own textbook is not reproduced (it is copyrighted). OpenPath's own stories and poems practise the same questions on character, theme, meaning and poetic devices."
     },
     {
      "id": "B2",
@@ -69,6 +71,15 @@
      "coverage": "covered",
      "where": [
       "icse.ta.c10.kural"
+     ]
+    },
+    {
+     "id": "B3",
+     "text": "Tells simile from metaphor.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c10.figures",
+      "icse.ta.c10.simile"
      ]
     }
    ]
