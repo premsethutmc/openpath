@@ -1,0 +1,34 @@
+{
+  "version": "english-teacher-sampling@1",
+  "status": "Original candidate prompts; educator comparability review pending; no learner responses",
+  "instructions": "Aim for 60–100 words, but do not penalize shorter accessible responses automatically. Invent details; do not disclose personal information. Prompt families suggest opportunities, not guaranteed skill elicitation. Assign baseline and transfer tasks before viewing outcomes; use the remaining task for delayed transfer.",
+  "families": [
+    {
+      "id": "routines",
+      "candidate_focus": "Subject–verb agreement and clear sequence",
+      "prompts": [
+        {"id": "routine-a", "text": "Describe how an imaginary school library works each morning. Explain what one librarian does and what a group of pupils does."},
+        {"id": "routine-b", "text": "Describe how an imaginary community garden is cared for each day. Explain what one caretaker does and what a group of volunteers does."},
+        {"id": "routine-c", "text": "Describe how an imaginary sports club prepares for practice. Explain what one coach does and what the players do."}
+      ]
+    },
+    {
+      "id": "time",
+      "candidate_focus": "Past narration with legitimate changes of time frame",
+      "prompts": [
+        {"id": "time-a", "text": "Imagine a class trip was delayed yesterday. Explain what happened, how the group responded, and one thing they will do differently next time."},
+        {"id": "time-b", "text": "Imagine a team could not use its usual playground last week. Explain what happened, how they solved the problem, and their plan for next week."},
+        {"id": "time-c", "text": "Imagine rain interrupted an outdoor book fair last month. Explain what happened, what the organisers did, and what they plan for the next fair."}
+      ]
+    },
+    {
+      "id": "reasoning",
+      "candidate_focus": "Position, relevant reason and explanation without invented authority",
+      "prompts": [
+        {"id": "reason-a", "text": "A school can open a quiet reading room or an indoor games room during lunch. Recommend one choice and explain why it would help pupils. No statistics or research are required."},
+        {"id": "reason-b", "text": "A community centre can run a weekend art club or a weekend sports club. Recommend one choice and explain why it would help children. No statistics or research are required."},
+        {"id": "reason-c", "text": "A class can spend its activity hour making a garden or producing a small magazine. Recommend one choice and explain why it would help classmates. No statistics or research are required."}
+      ]
+    }
+  ]
+}
