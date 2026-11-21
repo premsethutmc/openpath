@@ -24,14 +24,16 @@ ASK = (
     "You get a question, its options and sometimes a passage. Answer it yourself. Then say whether any other option could also "
     "reasonably be judged right by a Tamil teacher, and list any mistake in the Tamil of the question or options "
     "(spelling, sandhi, grammar, a wrong grammatical term). "
-    'Reply with JSON only: {"answer": "A", "also": [], "tamil": "", "note": "at most 20 words, in English"}. '
-    '"also": other option letters that could also be right; "tamil": the mistakes, or "" if none.'
+    "The topic's own teaching note is given as 'rule': judge by standard Tamil school grammar. "
+    'Reply with JSON only: {"answer": "A", "also": [], "tamil": "", "sure": true, "note": "at most 20 words, in English"}. '
+    '"also": other option letters that could also be right; "tamil": the mistakes, or "" if none; '
+    '"sure": false unless you are certain your answer, "also" and "tamil" are right by standard Tamil grammar.'
 )
 READ = (
     "You are a careful teacher of Tamil checking a children's Tamil course (school Classes 1-10). Read the text. "
     "List any wrong Tamil (spelling, sandhi, grammar) and any statement about Tamil grammar, literature or facts that is wrong. "
     'Reply with JSON only: {"ok": true, "problems": "", "fix": ""}. When something is wrong: ok false, problems in English '
-    "(at most 40 words) and the corrected Tamil in fix."
+    "(at most 40 words) and the corrected Tamil in fix. Flag only what you are certain is wrong by standard Tamil; style is not a mistake."
 )
 
 
@@ -57,7 +59,7 @@ def items():
                 if key in seen:
                     continue
                 seen.add(key)
-                qs.append((q["id"], t.get("passage") or "", q["prompt"], q["options"], q["answer"]))
+                qs.append((q["id"], t.get("passage") or "", q["prompt"], q["options"], q["answer"], t["teach"]["ta"]))
     for w in _load("writing.v1.json")["tasks"]:
         text = f"{w['title']}\n{w['task']}\nLooks for: " + "; ".join(w["look"])
         if text not in seen:
@@ -76,7 +78,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **opts):
         from dataclasses import replace
+        from django.conf import settings
         config = replace(wf._config(), max_output_tokens=200, timeout_s=45.0, retries=1)
+        # a small model's Tamil grammar is unreliable (the first run with gpt-4.1-mini flagged half, mostly wrongly): a stronger one can be named
+        if settings.OPENPATH_TAMIL_AI_REVIEW_MODEL:
+            config = replace(config, model=settings.OPENPATH_TAMIL_AI_REVIEW_MODEL)
         problems = config.problems()
         if problems:
             self.stdout.write(f"tamil-ai-review: not run ({'; '.join(problems)})")
@@ -86,16 +92,20 @@ class Command(BaseCommand):
         self.stdout.flush()
 
         def ask(q):
-            qid, passage, prompt, options, answer = q
+            qid, passage, prompt, options, answer, rule = q
             opts, key = lettered(qid, options, answer)
-            user = json.dumps({"passage": passage, "question": prompt, "options": {"ABCDEF"[i]: o for i, o in enumerate(opts)}}, ensure_ascii=False)
+            user = json.dumps({"rule": rule, "passage": passage, "question": prompt, "options": {"ABCDEF"[i]: o for i, o in enumerate(opts)}}, ensure_ascii=False)
             try:
                 done = llm.complete(config, ASK, user)
                 d = llm.extract_json(done.text)
                 ans = str(d.get("answer", "")).strip().upper()[:1]
                 also = [str(a).strip().upper()[:1] for a in (d.get("also") or []) if str(a).strip().upper()[:1] not in ("", ans)]
                 pick = lambda l: opts["ABCDEF".index(l)] if l and l in "ABCDEF"[: len(opts)] else l  # noqa: E731
-                return ("q", qid, prompt, pick(key), pick(ans), [pick(a) for a in also], str(d.get("tamil", ""))[:200], str(d.get("note", ""))[:160], done.input_tokens, done.output_tokens, None)
+                if d.get("sure") is not True:
+                    ans, also, tamil = key, [], ""  # an unsure reader is not a finding
+                else:
+                    tamil = str(d.get("tamil", ""))[:200]
+                return ("q", qid, prompt, pick(key), pick(ans), [pick(a) for a in also], tamil, str(d.get("note", ""))[:160], done.input_tokens, done.output_tokens, None)
             except Exception as e:  # noqa: BLE001 - reported, never fatal
                 return ("q", qid, prompt, "", "", [], "", "", 0, 0, type(e).__name__)
 
