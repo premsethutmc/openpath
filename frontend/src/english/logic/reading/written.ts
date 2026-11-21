@@ -4,6 +4,10 @@
  * hold a word from every key group (who, what, why...), allowing simple endings and a one-letter slip in longer words.
  * A second try follows a miss; then the model answer. A one- or two-word right answer is accepted with a nudge to
  * answer in a full sentence. What the learner types is never stored: only whether it was right, and on which try.
+ * Guards against answers that hold the key words without meaning them: a key word straight after "not", "no",
+ * "never" or a "n't" word does not count ("it was not red"); a word the item lists as a wrong answer, said without
+ * "not", makes the answer wrong ("red or green", "green"); "or" between choices is a guess, not an answer; and an
+ * answer far longer than the model (a copied paragraph, a list of words) is sent back to be said in one sentence.
  */
 import writtenJson from "../../../../../content/english/reading/written-answers.json";
 import l1 from "../../../../../content/english/reading/level-1.json";
@@ -21,6 +25,8 @@ export interface WrittenItem {
   keys: string[][];
   model: string;
   hint: string;
+  /** Words that, said without "not", show a wrong answer (a wrong colour, the wrong cause…). */
+  avoid?: string[];
 }
 export const WRITTEN: { id: string; version: number; items: WrittenItem[] } = writtenJson as never;
 type Passage = { id: string; title: string; text: string };
@@ -38,13 +44,20 @@ function near(a: string, b: string): boolean {
   return a.slice(i + 1) === b.slice(i + 1) || a.slice(i + 1) === b.slice(i) || a.slice(i) === b.slice(i + 1);
 }
 const ENDINGS = ["", "s", "es", "ed", "d", "ing"];
+const NEG = new Set(["not", "no", "never", "nor", "without", "neither", "hardly"]);
+const negated = (words: string[], at: number) => words.slice(Math.max(0, at - 3), at).some((w) => NEG.has(w) || w.endsWith("n't"));
+/** Where the key is said in the answer and not denied: a negated key ("not red") does not count. */
 function has(text: string, key: string): boolean {
   const k = key.toLowerCase();
-  if (k.includes(" ") || k.includes("-")) return text.includes(` ${k} `) || text.includes(` ${k.replace(/-/g, " ")} `);
-  return text
-    .trim()
-    .split(" ")
-    .some((w) => ENDINGS.some((e) => w === k + e || (e === "" && near(w, k))));
+  const words = text.trim().split(" ");
+  const denies = NEG.has(k.split(" ")[0]);
+  if (k.includes(" ") || k.includes("-")) {
+    const parts = k.replace(/-/g, " ").split(" ");
+    for (let i = 0; i + parts.length <= words.length; i++)
+      if ((parts.every((p, j) => words[i + j] === p) || words[i] === k) && (denies || !negated(words, i))) return true;
+    return false;
+  }
+  return words.some((w, i) => ENDINGS.some((e) => w === k + e || (e === "" && near(w, k))) && (denies || !negated(words, i)));
 }
 
 export interface WrittenMark {
@@ -55,12 +68,22 @@ export interface WrittenMark {
   short: boolean;
   /** Starts with a capital letter and ends with a full stop (shown, not marked). */
   sentence: boolean;
+  /** Why a answer holding the key words was still not accepted: a wrong answer named too, two choices, or far too long. */
+  guard?: "wrong" | "choice" | "long";
 }
 export function markWritten(it: WrittenItem, answer: string): WrittenMark {
   const t = norm(answer);
   const missing = it.keys.filter((g) => !g.some((k) => has(t, k))).length;
   const words = answer.trim().split(/\s+/).filter(Boolean).length;
-  return { correct: missing === 0 && words > 0, missing, short: words <= 2, sentence: /^[A-Z]/.test(answer.trim()) && /[.!?]$/.test(answer.trim()) };
+  const modelWords = it.model.split(/\s+/).length;
+  const guard: WrittenMark["guard"] = (it.avoid ?? []).some((w) => has(t, w))
+    ? "wrong"
+    : / or /.test(t) && !/ or /.test(norm(it.model))
+      ? "choice"
+      : words > 2 * modelWords + 6
+        ? "long"
+        : undefined;
+  return { correct: missing === 0 && words > 0 && !guard, missing, short: words <= 2, sentence: /^[A-Z]/.test(answer.trim()) && /[.!?]$/.test(answer.trim()), ...(guard ? { guard } : {}) };
 }
 
 export function writtenProblems(w: typeof WRITTEN): string[] {

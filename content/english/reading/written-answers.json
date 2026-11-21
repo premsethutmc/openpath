@@ -1,6 +1,6 @@
 {
   "id": "written-answers",
-  "version": 1,
+  "version": 2,
   "status": "candidate: questions and key words written by OpenPath (AI-prepared) on the Reading course's own passages; checked by rule; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: writing a short answer to a question on a passage; it changes no capability estimate",
@@ -17,7 +17,12 @@
         ]
       ],
       "model": "The tomato was red on Friday.",
-      "hint": "Look at what happened by Friday."
+      "hint": "Look at what happened by Friday.",
+      "avoid": [
+        "green",
+        "yellow",
+        "orange"
+      ]
     },
     {
       "id": "wa.L1.T.2",
@@ -51,7 +56,12 @@
         ]
       ],
       "model": "The bus was late because one tyre was flat.",
-      "hint": "Look for \"because\"."
+      "hint": "Look for \"because\".",
+      "avoid": [
+        "rain",
+        "raining",
+        "traffic"
+      ]
     },
     {
       "id": "wa.L1.P1.2",
@@ -121,7 +131,10 @@
         ]
       ],
       "model": "The kites would not rise because the wind was weak.",
-      "hint": "What was the wind like on Sunday?"
+      "hint": "What was the wind like on Sunday?",
+      "avoid": [
+        "strong"
+      ]
     },
     {
       "id": "wa.N2.P1.2",
@@ -186,7 +199,10 @@
         ]
       ],
       "model": "Children had to bring a steel bottle from home.",
-      "hint": "Read what the head teacher did in April."
+      "hint": "Read what the head teacher did in April.",
+      "avoid": [
+        "plastic"
+      ]
     },
     {
       "id": "wa.L2.P1.2",
@@ -223,7 +239,11 @@
         ]
       ],
       "model": "Heavy rain flooded the tracks, so the trains stopped.",
-      "hint": "What happened one July morning?"
+      "hint": "What happened one July morning?",
+      "avoid": [
+        "strike",
+        "accident"
+      ]
     },
     {
       "id": "wa.N4.T.2",
@@ -355,7 +375,11 @@
         ]
       ],
       "model": "They came for the quiet tables and the free internet connection.",
-      "hint": "Read what the librarian's records suggest."
+      "hint": "Read what the librarian's records suggest.",
+      "avoid": [
+        "books",
+        "book"
+      ]
     },
     {
       "id": "wa.N6.T.2",
@@ -373,7 +397,11 @@
         ]
       ],
       "model": "They feared it would waste electricity.",
-      "hint": "Look at the first paragraph."
+      "hint": "Look at the first paragraph.",
+      "avoid": [
+        "noise",
+        "noisy"
+      ]
     },
     {
       "id": "wa.N6.P1.1",

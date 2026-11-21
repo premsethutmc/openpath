@@ -15,3 +15,13 @@ Under the answer in Grammar, Words, Reading, Long reads, Listen and write, Liste
 tap reports the question with one of three reasons (marked wrong when right, confusing, something else). No typing.
 The report is a `flag` event (`<activity>:<question id>`) and the owner's usage summary at each server start lists the
 questions reported, with counts and reasons, so wrong content can be found and fixed.
+
+## Guards against trick answers (21 November 2026)
+
+Key-word marking alone accepted "It was not red", "red or green" and a pasted paragraph. Now: a key word within three
+words after "not", "no", "never" or a "n't" word does not count; an item may list wrong-answer words (`avoid`: a wrong
+colour, the wrong cause) that make an answer wrong unless denied ("red, not green" is right); "or" between choices is
+a guess; an answer longer than twice the model plus six words is sent back to be said in one sentence. Each gives its
+own feedback. Test WA-4 builds trick answers for every item (the model with its key words denied, the model "or
+something else", the whole passage, each wrong-answer word): the old marking accepted 86 of 86, the new accepts none,
+and every model answer is still right.
