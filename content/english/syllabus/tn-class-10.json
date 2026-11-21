@@ -195,14 +195,15 @@
         {
           "id": "W3",
           "text": "Gives directions on a road map.",
-          "coverage": "not",
-          "note": "Map reading and giving directions are not yet in the app."
+          "coverage": "partly",
+          "where": "study",
+          "note": "Directions are chosen and followed on the map; writing them out is not marked."
         },
         {
           "id": "W4",
           "text": "Makes notes and writes a summary of a passage.",
-          "coverage": "not",
-          "note": "Note-making and summary writing are not yet in the app."
+          "coverage": "covered",
+          "where": "study"
         },
         {
           "id": "W5",

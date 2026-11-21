@@ -363,7 +363,7 @@ test("CBSE and Tamil Nadu syllabuses, Classes 1 to 12: pick the board and class,
   await page.getByRole("button", { name: "Class 10", exact: true }).click();
   await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
   await page.getByText("School work · Tamil Nadu State Board (Samacheer Kalvi)").waitFor();
-  await page.getByText("13 in the app · 4 partly · 4 with a grown-up · 2 not yet (of 23)").waitFor();
+  await page.getByText("14 in the app · 5 partly · 4 with a grown-up · 0 not yet (of 23)").waitFor();
   assert.equal(await page.locator('[data-coverage="not"] button').count(), 0);
   await fits();
   // a line on turning verbs into nouns opens its own grammar topic
@@ -372,7 +372,7 @@ test("CBSE and Tamil Nadu syllabuses, Classes 1 to 12: pick the board and class,
   await page.getByRole("button", { name: "← Back" }).click();
   // the board and class are kept on coming back
   await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
-  await page.getByText("13 in the app · 4 partly · 4 with a grown-up · 2 not yet (of 23)").waitFor();
+  await page.getByText("14 in the app · 5 partly · 4 with a grown-up · 0 not yet (of 23)").waitFor();
   await page.getByRole("button", { name: "CBSE", exact: true }).click();
   await page.getByRole("button", { name: "Class 9", exact: true }).click();
   await page.getByText("7 in the app · 4 partly · 6 with a grown-up · 0 not yet (of 17)").waitFor();
@@ -383,6 +383,99 @@ test("CBSE and Tamil Nadu syllabuses, Classes 1 to 12: pick the board and class,
   await page.getByRole("heading", { name: "Writes a letter to the editor and a formal email giving views." }).waitFor();
   assert.ok((await page.locator("[data-task]").count()) >= 2);
   await fits();
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});
+
+test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes and a summary, read a chart, follow a map", async () => {
+  const STUDY = read("study/tasks.json");
+  const { context, page, errors, foreign, fits } = await start("Study");
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("button", { name: "Tamil Nadu", exact: true }).click();
+  await page.getByRole("button", { name: "Class 10", exact: true }).click();
+  await page.getByText("14 in the app · 5 partly · 4 with a grown-up · 0 not yet (of 23)").waitFor();
+  await page.getByRole("button", { name: /Practise W4: Notes, charts and maps/ }).click();
+  await page.getByRole("heading", { name: "Notes, charts and maps" }).waitFor();
+  await fits();
+  const next = () => page.getByRole("button", { name: /^(Next|Finish|Write my own summary)$/ }).click();
+
+  // notes: right title, every main point and no detail, right summary, then the learner's own summary checked
+  await page.getByRole("button", { name: "Start: Notes and summary" }).click();
+  const title = (await page.locator(".pill").innerText()).split(" · ")[1];
+  const n = STUDY.notes.find((x) => x.title === title);
+  await page.locator(`[data-passage="${n.id}"]`).waitFor();
+  await fits();
+  await page.getByRole("button", { name: "I have read it: make notes" }).click();
+  await page.getByRole("button", { name: n.titles.right, exact: true }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  await next();
+  for (const p of n.points.filter((x) => x.main)) await page.getByRole("button", { name: p.text }).click();
+  await page.getByRole("button", { name: "Check my notes" }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  await next();
+  await page.getByRole("button", { name: n.summaries.right, exact: true }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  await next();
+  await page.getByLabel("Your summary").fill("Too short.");
+  await page.getByRole("button", { name: "Check my summary" }).click();
+  await page.locator("[data-own-check]", { hasText: "too short" }).waitFor();
+  await page.getByLabel("Your summary").fill(n.summaries.right);
+  await page.getByRole("button", { name: "Check my summary" }).click();
+  await page.locator("[data-own-check]", { hasText: "It names the main ideas." }).waitFor();
+  await page.getByRole("button", { name: "Finish", exact: true }).click();
+  await page.getByRole("heading", { name: "3 of 3 right" }).waitFor();
+  await page.getByRole("button", { name: "Done" }).click();
+
+  // a chart: answers from its data, then the paragraph put in order
+  await page.getByRole("button", { name: "Start: Reading a chart" }).click();
+  const ctitle = (await page.locator(".pill").innerText()).split(" · ")[1];
+  const c = STUDY.charts.find((x) => x.title === ctitle);
+  await page.locator(`[data-chart="${c.id}"]`).first().waitFor();
+  await fits();
+  await page.getByRole("button", { name: "I have looked: questions" }).click();
+  const top = c.labels[c.values.indexOf(Math.max(...c.values))];
+  const bottom = c.labels[c.values.indexOf(Math.min(...c.values))];
+  for (const answer of [top, bottom, String(Math.max(...c.values) - Math.min(...c.values))]) {
+    await page.locator(".choose-options").getByRole("button", { name: answer, exact: true }).click();
+    await page.locator('[data-correct="true"]').waitFor();
+    await next();
+  }
+  await page.getByRole("button", { name: new RegExp(`^The figure for ${top} is higher`) }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  await next();
+  for (const sentence of c.paragraph) await page.getByRole("button", { name: sentence, exact: true }).click();
+  await page.getByRole("button", { name: "Check the order" }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  await fits();
+  await next();
+  await page.getByRole("heading", { name: "5 of 5 right" }).waitFor();
+  await page.getByRole("button", { name: "Done" }).click();
+
+  // a map: the corner question from the map's data; the rest answered and marked either way
+  await page.getByRole("button", { name: "Start: Road map" }).click();
+  const mtitle = (await page.locator(".pill").innerText()).split(" · ")[1];
+  const m = STUDY.maps.find((x) => x.title === mtitle);
+  await page.locator(`[data-map="${m.id}"]`).first().waitFor();
+  await fits();
+  await page.getByRole("button", { name: "I have looked: questions" }).click();
+  const prompt = await page.locator("#study-question").innerText();
+  const corner = m.places.find((p) => prompt.includes(`${m.cols[p.x]} and ${m.rows[p.y]}`));
+  await page.locator(".choose-options").getByRole("button", { name: `the ${corner.name}`, exact: true }).click();
+  await page.locator('[data-correct="true"]').waitFor();
+  for (let i = 1; i <= m.routes.length; i++) {
+    await next();
+    await page.locator(".choose-options button").first().click();
+    await page.locator("[data-correct]").waitFor();
+  }
+  await fits();
+  await next();
+  await page.getByRole("heading", { name: new RegExp(`of ${m.routes.length + 1} right`) }).waitFor();
+  await page.getByRole("button", { name: "Done" }).click();
+  await page.getByText(/3 tasks done · \d+ of 12 right/).waitFor();
+  // back to the syllabus it came from
+  await page.getByRole("button", { name: "← Back" }).click();
+  await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

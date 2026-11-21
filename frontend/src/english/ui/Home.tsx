@@ -5,6 +5,7 @@
  */
 import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
+import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
 import { useState } from "react";
@@ -39,7 +40,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onWritten, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onStudy, onWritten, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -83,6 +84,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {!guided && <NewWordsCard learner={learner} onOpen={onNewWords} />}
               {!guided && <ReadingCard learner={learner} onOpen={onReading} />}
               {onKinds && <KindsCard learner={learner} onOpen={onKinds} />}
+              {onStudy && <StudyCard learner={learner} onOpen={onStudy} />}
               {onLongRead && <LongReadCard learner={learner} onOpen={onLongRead} />}
               {onWritten && <WrittenCard learner={learner} onOpen={onWritten} />}
               {!guided && <ListenWriteCard learner={learner} onOpen={onListenWrite} />}
@@ -433,6 +435,27 @@ function WrittenCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         Try Write an answer
+      </button>
+    </section>
+  );
+}
+
+function StudyCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = studySummary(learner.studyRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="study-card-title">
+      <h2 id="study-card-title">
+        <span aria-hidden="true">🗺️ </span>Notes, charts and maps
+      </h2>
+      <p>Make notes and a summary from a passage, read a bar chart and write about it, and follow a road map.</p>
+      {s.tasks > 0 && (
+        <p className="small">
+          {s.tasks} {s.tasks === 1 ? "task" : "tasks"} done · {s.right} of {s.asked} right
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        {s.tasks ? "Another task" : "Try one"}
       </button>
     </section>
   );

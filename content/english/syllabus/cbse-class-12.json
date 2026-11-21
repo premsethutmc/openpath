@@ -25,7 +25,7 @@
           "text": "Reads a literary or factual passage and a case-based passage with data.",
           "coverage": "partly",
           "where": "reading",
-          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+          "note": "Reading passages have questions, and charts are read in Notes, charts and maps; long passages built on data are not yet in the app."
         }
       ]
     },

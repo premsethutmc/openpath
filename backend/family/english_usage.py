@@ -22,6 +22,7 @@ ACTIVITIES = [
     ("Long reads", "long_read"),
     ("Kinds of text", "text_read"),
     ("Written answers", "written_answer"),
+    ("Notes, charts and maps", "study"),
     ("Listen and write", "dictation"),
     ("Listen and answer", "listen_passage"),
     ("Spelling", "spell"),
@@ -106,7 +107,7 @@ def usage(days: int = 30, now=None) -> dict:
             if kind == "spell_answer":
                 r["answers"] += 1
                 r["right"] += bool(body.get("correct"))
-        elif (kind == "long_read" and t == "part") or (kind == "text_read" and t == "text"):
+        elif (kind == "long_read" and t == "part") or (kind == "text_read" and t == "text") or (kind == "study" and t == "study"):
             r["finished"] += 1
             for a in rec.get("answers") or []:
                 r["answers"] += 1

@@ -31,7 +31,7 @@
           "text": "Reads a factual passage with a chart or data and answers questions.",
           "coverage": "partly",
           "where": "reading",
-          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+          "note": "Reading passages have questions, and charts are read in Notes, charts and maps; long passages built on data are not yet in the app."
         }
       ]
     },
@@ -54,8 +54,9 @@
         {
           "id": "W2",
           "text": "Writes an analytical paragraph on a map, chart, graph or cues.",
-          "coverage": "not",
-          "note": "Describing data from a chart is not yet in the app."
+          "coverage": "partly",
+          "where": "study",
+          "note": "A chart is read and an analytical paragraph about it put in order; a paragraph written freely is not marked."
         }
       ]
     },

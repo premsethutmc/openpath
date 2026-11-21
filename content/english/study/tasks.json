@@ -1,0 +1,611 @@
+{
+  "id": "english-study",
+  "version": 1,
+  "status": "practice_only",
+  "review": "Written for OpenPath, 21 Nov 2026 (AI-prepared, checked by rule); not educator-reviewed.",
+  "notes": [
+    {
+      "id": "notes.neem",
+      "level": 5,
+      "title": "Notes: the neem tree",
+      "text": "The neem tree grows in almost every village in India. It can live in dry places where many other trees die, because its roots go deep to find water. For hundreds of years, people have used its twigs to clean their teeth. Its bitter leaves are dried and kept with grain and clothes, because insects stay away from them. Farmers also make a spray from neem seeds to protect their crops without strong chemicals. On hot afternoons, the wide shade of a neem tree is a favourite place for people to rest and talk.",
+      "titles": {
+        "right": "The neem tree and its uses",
+        "wrong": [
+          "How to plant a tree",
+          "Insects in Indian villages"
+        ]
+      },
+      "points": [
+        {
+          "text": "Grows in dry places: deep roots find water",
+          "main": true
+        },
+        {
+          "text": "Twigs used to clean teeth",
+          "main": true
+        },
+        {
+          "text": "Dried leaves keep insects from grain and clothes",
+          "main": true
+        },
+        {
+          "text": "Seed spray protects crops without strong chemicals",
+          "main": true
+        },
+        {
+          "text": "Leaves taste bitter",
+          "main": false
+        },
+        {
+          "text": "People rest and talk in the afternoon",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "The neem tree survives dry places because its roots reach deep water. People use its twigs to clean teeth, its dried leaves to keep insects from grain and clothes, and a spray from its seeds to protect crops. It also gives wide shade.",
+        "wrong": [
+          "The neem tree grows in villages. People like to sit under it on hot afternoons and talk with their friends, and its leaves taste very bitter.",
+          "Farmers spray chemicals on their crops every week, so neem trees die in dry places where their roots cannot find water."
+        ]
+      },
+      "keys": [
+        "roots",
+        "teeth",
+        "insects",
+        "crops"
+      ]
+    },
+    {
+      "id": "notes.rain",
+      "level": 6,
+      "title": "Notes: saving rainwater",
+      "text": "In many Indian towns, wells run dry before the summer is over, even though the monsoon brings heavy rain. Most of that rain runs off roofs and roads into drains and is lost. Rainwater harvesting is a simple way to keep it. Pipes carry water from the roof into a tank, or into a pit filled with stones and sand that lets it soak into the ground. The stored water can be used for washing and gardens, and the water that soaks in raises the level of wells nearby. In Chennai, a rule made such systems compulsory on new buildings, and within a few years the level of water under the ground rose in many areas.",
+      "titles": {
+        "right": "Saving rainwater in towns",
+        "wrong": [
+          "The history of the monsoon",
+          "Building new houses in Chennai"
+        ]
+      },
+      "points": [
+        {
+          "text": "Wells dry up though the monsoon is heavy",
+          "main": true
+        },
+        {
+          "text": "Most rain runs off into drains and is lost",
+          "main": true
+        },
+        {
+          "text": "Harvesting: roof pipes lead to a tank or a soak pit",
+          "main": true
+        },
+        {
+          "text": "Stored water for washing and gardens; wells refill",
+          "main": true
+        },
+        {
+          "text": "The pit is filled with stones and sand",
+          "main": false
+        },
+        {
+          "text": "Chennai's rule raised underground water",
+          "main": true
+        }
+      ],
+      "summaries": {
+        "right": "Towns lose most monsoon rain to drains, so wells run dry. Rainwater harvesting leads roof water into tanks or soak pits; the water is used at home and refills wells. After Chennai made it compulsory, the underground water level rose.",
+        "wrong": [
+          "The monsoon brings heavy rain to India every year. Roads and roofs become wet, and drains carry the water away to the sea.",
+          "Chennai built a large tank to store water for gardens, because its wells were full and the monsoon did not come that year."
+        ]
+      },
+      "keys": [
+        "drains",
+        "tank",
+        "wells",
+        "Chennai"
+      ]
+    },
+    {
+      "id": "notes.sleep",
+      "level": 7,
+      "title": "Notes: why sleep matters",
+      "text": "Sleep is not simply time when the body switches off. While we sleep, the brain sorts the day's experiences and stores what is important as long-term memory, which is why a night's sleep after studying helps us remember. The body also repairs muscles and grows, especially in children and teenagers, who need nine to eleven hours each night. Without enough sleep, people find it harder to concentrate, become irritable and make more mistakes. Scientists have found that the light from phone and computer screens late at night delays the feeling of sleepiness. Keeping screens away for an hour before bed, and going to sleep at the same time every night, are two of the easiest ways to sleep better.",
+      "titles": {
+        "right": "Why sleep matters and how to get enough",
+        "wrong": [
+          "How phones are made",
+          "The best time to study for tests"
+        ]
+      },
+      "points": [
+        {
+          "text": "Brain stores important experiences as memory",
+          "main": true
+        },
+        {
+          "text": "Body repairs and grows; young people need nine to eleven hours",
+          "main": true
+        },
+        {
+          "text": "Too little sleep: poor focus, bad temper, mistakes",
+          "main": true
+        },
+        {
+          "text": "Screen light at night delays sleepiness",
+          "main": true
+        },
+        {
+          "text": "Tips: no screens an hour before bed; a fixed bedtime",
+          "main": true
+        },
+        {
+          "text": "Sleep is not the body switching off",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "During sleep the brain stores memories and the body repairs and grows; the young need nine to eleven hours. Lack of sleep harms focus, mood and accuracy. Screen light delays sleep, so avoid screens before bed and keep a fixed bedtime.",
+        "wrong": [
+          "Scientists study phones and computers to find out why people become irritable and make mistakes when they study at night.",
+          "Children and teenagers should study for nine to eleven hours every night, because the brain stores memories while they are awake."
+        ]
+      },
+      "keys": [
+        "brain",
+        "repairs",
+        "screens",
+        "bed"
+      ]
+    },
+    {
+      "id": "notes.plastic",
+      "level": 6,
+      "title": "Notes: plastic in the sea",
+      "text": "Every year, millions of tonnes of plastic reach the oceans, carried by rivers, wind and drains. Unlike paper or food, plastic does not rot away; it breaks into smaller and smaller pieces that can last for hundreds of years. Sea turtles mistake plastic bags for jellyfish, and seabirds feed bits of plastic to their chicks. The tiny pieces are also eaten by fish, so plastic can end up in the food people eat. Some countries have banned thin plastic bags, and beach clean-ups are held in many cities. The surest answer, however, is to use less plastic in the first place: carrying cloth bags and steel bottles makes a real difference.",
+      "titles": {
+        "right": "Plastic in the sea and what we can do",
+        "wrong": [
+          "How jellyfish find food",
+          "The history of steel bottles"
+        ]
+      },
+      "points": [
+        {
+          "text": "Rivers, wind and drains carry plastic to the sea",
+          "main": true
+        },
+        {
+          "text": "Plastic does not rot; it breaks into tiny pieces",
+          "main": true
+        },
+        {
+          "text": "Turtles, seabirds and fish eat it; it reaches our food",
+          "main": true
+        },
+        {
+          "text": "Some countries ban thin bags; beach clean-ups",
+          "main": true
+        },
+        {
+          "text": "Best answer: use less plastic",
+          "main": true
+        },
+        {
+          "text": "Turtles eat jellyfish",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Plastic reaches the sea through rivers, wind and drains and breaks into tiny lasting pieces. Sea animals eat it, and it enters our food. Bans and clean-ups help, but using less plastic, with cloth bags and steel bottles, helps most.",
+        "wrong": [
+          "Sea turtles and seabirds live near beaches in many cities, where people hold clean-ups and carry cloth bags.",
+          "Paper and food rot away in the sea within a few days, so plastic bags are safer for turtles and fish."
+        ]
+      },
+      "keys": [
+        "rivers",
+        "pieces",
+        "food",
+        "less"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "chart.trees",
+      "level": 5,
+      "title": "Trees planted by each class",
+      "unit": "trees",
+      "labels": [
+        "Class 6",
+        "Class 7",
+        "Class 8",
+        "Class 9"
+      ],
+      "values": [
+        45,
+        30,
+        60,
+        25
+      ],
+      "paragraph": [
+        "The bar chart shows how many trees four classes planted during the school's green week.",
+        "Class 8 planted the most, with 60 trees, while Class 9 planted the fewest, only 25.",
+        "Class 6 came second with 45 trees, fifteen more than Class 7.",
+        "Overall, the four classes planted 160 trees, so the green week was a success."
+      ]
+    },
+    {
+      "id": "chart.travel",
+      "level": 6,
+      "title": "How pupils travel to school",
+      "unit": "pupils",
+      "labels": [
+        "Walk",
+        "Bicycle",
+        "Bus",
+        "Car"
+      ],
+      "values": [
+        120,
+        80,
+        150,
+        50
+      ],
+      "paragraph": [
+        "The chart shows how the 400 pupils of a school travel there each day.",
+        "The bus is the most common way, used by 150 pupils, and walking comes next with 120.",
+        "Only 50 pupils come by car, the smallest group.",
+        "In short, most pupils use the bus or their own feet, and very few are driven."
+      ]
+    },
+    {
+      "id": "chart.rain",
+      "level": 6,
+      "title": "Rainfall in a town, by month",
+      "unit": "millimetres",
+      "labels": [
+        "June",
+        "July",
+        "August",
+        "September"
+      ],
+      "values": [
+        90,
+        210,
+        180,
+        120
+      ],
+      "paragraph": [
+        "The chart gives the rainfall in a town for the four monsoon months.",
+        "Rain rose sharply from 90 millimetres in June to a peak of 210 in July.",
+        "After July it fell, to 180 in August and 120 in September.",
+        "So the monsoon was strongest in the middle of the season and weakest at its start."
+      ]
+    },
+    {
+      "id": "chart.library",
+      "level": 7,
+      "title": "Library books borrowed, by type",
+      "unit": "books",
+      "labels": [
+        "Stories",
+        "Science",
+        "History",
+        "Comics",
+        "Poetry"
+      ],
+      "values": [
+        340,
+        150,
+        90,
+        260,
+        40
+      ],
+      "paragraph": [
+        "The chart compares the number of library books borrowed in one term, by type of book.",
+        "Stories were by far the most popular, with 340 borrowed, ahead of comics at 260.",
+        "Science books reached 150, while history and poetry trailed at 90 and 40.",
+        "The library might therefore buy more stories and try to make poetry more attractive."
+      ]
+    }
+  ],
+  "maps": [
+    {
+      "id": "map.town",
+      "level": 5,
+      "title": "A walk in town",
+      "cols": [
+        "Gandhi Road",
+        "Market Road",
+        "Museum Road",
+        "Lake Road"
+      ],
+      "rows": [
+        "North Street",
+        "School Street",
+        "Bazaar Street",
+        "Station Street"
+      ],
+      "places": [
+        {
+          "name": "bus stand",
+          "x": 0,
+          "y": 3
+        },
+        {
+          "name": "school",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "name": "hospital",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "name": "post office",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "name": "park",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "name": "library",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "name": "museum",
+          "x": 2,
+          "y": 2
+        }
+      ],
+      "routes": [
+        {
+          "from": "bus stand",
+          "to": "school",
+          "moves": [
+            {
+              "dir": "N",
+              "blocks": 2
+            },
+            {
+              "dir": "E",
+              "blocks": 2
+            }
+          ]
+        },
+        {
+          "from": "library",
+          "to": "park",
+          "moves": [
+            {
+              "dir": "E",
+              "blocks": 3
+            },
+            {
+              "dir": "S",
+              "blocks": 3
+            }
+          ]
+        },
+        {
+          "from": "post office",
+          "to": "hospital",
+          "moves": [
+            {
+              "dir": "N",
+              "blocks": 2
+            },
+            {
+              "dir": "E",
+              "blocks": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "map.village",
+      "level": 6,
+      "title": "Finding the way in a village",
+      "cols": [
+        "Well Lane",
+        "Pond Road",
+        "Mill Road",
+        "Farm Road"
+      ],
+      "rows": [
+        "Hill Street",
+        "Garden Street",
+        "Market Street",
+        "River Street"
+      ],
+      "places": [
+        {
+          "name": "clinic",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "name": "market",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "name": "bank",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "name": "railway station",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "name": "pond",
+          "x": 1,
+          "y": 3
+        },
+        {
+          "name": "mill",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "name": "school",
+          "x": 0,
+          "y": 3
+        }
+      ],
+      "routes": [
+        {
+          "from": "railway station",
+          "to": "clinic",
+          "moves": [
+            {
+              "dir": "W",
+              "blocks": 2
+            },
+            {
+              "dir": "N",
+              "blocks": 3
+            }
+          ]
+        },
+        {
+          "from": "bank",
+          "to": "market",
+          "moves": [
+            {
+              "dir": "E",
+              "blocks": 2
+            },
+            {
+              "dir": "S",
+              "blocks": 1
+            }
+          ]
+        },
+        {
+          "from": "school",
+          "to": "mill",
+          "moves": [
+            {
+              "dir": "N",
+              "blocks": 2
+            },
+            {
+              "dir": "E",
+              "blocks": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "map.campus",
+      "level": 7,
+      "title": "Directions on a college campus",
+      "cols": [
+        "West Walk",
+        "Banyan Avenue",
+        "Central Avenue",
+        "East Walk"
+      ],
+      "rows": [
+        "Hostel Road",
+        "Library Road",
+        "Lab Road",
+        "Gate Road"
+      ],
+      "places": [
+        {
+          "name": "main gate",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "name": "library",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "name": "canteen",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "name": "hostel",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "name": "sports ground",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "name": "auditorium",
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "routes": [
+        {
+          "from": "main gate",
+          "to": "library",
+          "moves": [
+            {
+              "dir": "N",
+              "blocks": 2
+            },
+            {
+              "dir": "W",
+              "blocks": 1
+            }
+          ]
+        },
+        {
+          "from": "auditorium",
+          "to": "sports ground",
+          "moves": [
+            {
+              "dir": "N",
+              "blocks": 1
+            },
+            {
+              "dir": "E",
+              "blocks": 3
+            },
+            {
+              "dir": "N",
+              "blocks": 1
+            }
+          ]
+        },
+        {
+          "from": "hostel",
+          "to": "canteen",
+          "moves": [
+            {
+              "dir": "S",
+              "blocks": 2
+            },
+            {
+              "dir": "E",
+              "blocks": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

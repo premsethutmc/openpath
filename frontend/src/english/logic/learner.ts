@@ -5,6 +5,7 @@
  */
 import type { LongRecord } from "./reading/long-read.ts";
 import type { KindRecord } from "./reading/kinds.ts";
+import type { StudyRecord } from "./study/study.ts";
 import type { WrittenRecord } from "./reading/written.ts";
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
@@ -317,6 +318,16 @@ export class Learner {
   /** Store written-answer records. Practice-only. */
   async recordWritten(records: readonly WrittenRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "written_answer", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's notes, charts and maps tasks, in order. */
+  studyRecords(): StudyRecord[] {
+    return this.events.flatMap((e) => (e.kind === "study" ? [e.record] : []));
+  }
+
+  /** Store a finished notes, chart or map task. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordStudy(records: readonly StudyRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "study", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's kinds of text (poems, notices, letters…), in order. */

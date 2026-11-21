@@ -7,7 +7,7 @@ import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
 import { BOARDS, boardOf, coverage, taskLine, type Board, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
 
 const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", guided: "With a grown-up", not: "Not yet" };
-const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use", guided: "Tasks with a grown-up", writing: "Essay studio", first: "First words", passage: "Listen and write a passage", passage_seen: "Read a passage, then write it from dictation", long: "Long reads", written: "Write an answer", kinds: "Poems and everyday texts" };
+const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use", guided: "Tasks with a grown-up", writing: "Essay studio", first: "First words", passage: "Listen and write a passage", passage_seen: "Read a passage, then write it from dictation", long: "Long reads", written: "Write an answer", kinds: "Poems and everyday texts", study: "Notes, charts and maps" };
 
 export function SyllabusView({ docs, initial, initialBoard = "icse", onOpen, onBack }: { docs: Doc[]; initial: number; initialBoard?: Board; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }, board: Board) => void; onBack: () => void }) {
   const [cls, setCls] = useState(initial);
