@@ -95,6 +95,11 @@ test("Parent view: gate, add a test list for the child, the child takes it, the 
   await child.getByText(`Words to work on: ${other}`).waitFor();
   await child.getByText(/practised English on 1 of the last 7 days \(spelling on 1\)/).waitFor();
   await child.locator("[data-line=\"levels\"]").getByText("Grammar:").waitFor();
+  // weekly-note@1: a note on the week to send on
+  await child.getByRole("button", { name: "This week's note to share" }).click();
+  const note = await child.locator(".weekly-text").innerText();
+  assert.match(note, /English this week \(OpenPath\)\nPractised on 1 of the last 7 days\./);
+  assert.match(await child.getByRole("link", { name: "Share on WhatsApp" }).getAttribute("href"), /^https:\/\/wa\.me\/\?text=/);
   assert.deepEqual(errors, []);
   await context.close();
 });

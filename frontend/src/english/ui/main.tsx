@@ -1,3 +1,4 @@
+import { startTamilHelp } from "./tamilHelp.tsx";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { EssayJourney } from "./essay/EssayJourney.tsx";
@@ -47,6 +48,7 @@ const causalReading = experience === "causal-reading";
 const workspace = experience === "english-workspace";
 const essayLive = experience === "essay-live" || workspace;
 if (!essayDemo && !essayLive && !examDiagnostic && !causalReading) installBrowserHooks();
+startTamilHelp();
 const root = document.getElementById("root")!;
 root.dataset.started = "1";
 // the developer diagnostics live at /developer (the server decides who may use them)

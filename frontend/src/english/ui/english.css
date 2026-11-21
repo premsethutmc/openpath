@@ -3182,3 +3182,41 @@ h3.sub {
   background: #f08a24;
   transition: width 0.1s linear;
 }
+
+/* tamil-help@1: a Tamil line under English instructions, buttons and headings (ui/tamilHelp.tsx) */
+.ta-help [data-ta]::after {
+  content: attr(data-ta);
+  display: block;
+  flex-basis: 100%;
+  font-family: "Noto Sans Tamil", "Latha", "Vijaya", system-ui, sans-serif;
+  font-size: 0.8em;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+.ta-help button[data-ta],
+.ta-help .pill[data-ta] {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ta-toggle {
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+/* weekly-note@1 */
+.weekly-note { margin-top: 10px; }
+.weekly-text {
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  background: #f6f4ff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}

@@ -5,6 +5,7 @@
  */
 import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
+import { TamilToggle } from "./tamilHelp.tsx";
 import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
@@ -53,6 +54,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
   const name = learner.state.profile?.name ?? "explorer";
   return (
     <main className="page" aria-labelledby="today-title">
+      <TamilToggle />
       {onSubjects && (
         <button type="button" className="link back-subjects" onClick={onSubjects}>
           ← All subjects
