@@ -28,3 +28,8 @@ test("a round puts missed questions first, then unseen, then ones already right"
 test("no question offers two options that are both right by its own bank", () => {
   for (const t of course.topics) for (const q of t.questions) assert.equal(q.options.filter((o) => o === q.answer).length, 1, q.id);
 });
+
+test("every class has a reading passage, and classic texts beyond Thirukkural", () => {
+  for (const c of CLASSES) assert.ok(topicsFor(c).some((t) => t.passage && t.questions.length >= 4), `class ${c} reading`);
+  for (const id of ["c1.aathichoodi", "c3.aathichoodi-meaning", "c4.kondrai", "c5.bharathi", "c7.bharathi"]) assert.ok(course.topics.some((t) => t.id === `icse.ta.${id}`), id);
+});
