@@ -233,7 +233,14 @@ test("ICSE course: class picker, a topic's teaching card, practice with feedback
   await page.goto(`${URL}/`);
   await page.getByRole("heading", { name: "தமிழ் — வகுப்பைத் தேர்ந்தெடு" }).waitFor();
   for (const c of [1, 10]) await page.getByRole("button", { name: new RegExp(`^${c}\\s*வகுப்பு ${c}`) }).waitFor();
-  await page.getByRole("button", { name: /^5\s*வகுப்பு 5/ }).tap();
+  await page.locator(".class-tile", { hasText: "வகுப்பு 5" }).tap();
+  try {
+    await page.locator(".topic-list").waitFor({ timeout: 10000 });
+  } catch (e) {
+    await page.screenshot({ path: "e2e/shots/tamil/icse-after-class.png", fullPage: true });
+    console.log("errors", errors, (await page.content()).slice(0, 3000));
+    throw e;
+  }
   await page.getByRole("heading", { name: "வகுப்பு 5 — பாடங்கள்" }).waitFor();
   await page.getByRole("button", { name: /^திணை/ }).tap();
   await page.getByRole("button", { name: "பயிற்சி தொடங்கு — Start practice" }).tap();

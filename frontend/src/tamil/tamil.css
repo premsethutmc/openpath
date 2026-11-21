@@ -144,7 +144,7 @@ form {
 
 /* icse-tamil@1: class picker, topics, teaching card, practice */
 .course header { margin-bottom: 8px; }
-.link { background: none; border: 0; padding: 4px 0; color: #215b3d; text-decoration: underline; font: inherit; cursor: pointer; min-height: 0; }
+.link { background: none; border: 0; padding: 4px 0; color: #215b3d; text-decoration: underline; font: inherit; cursor: pointer; min-height: 44px; }
 .course-nav { max-width: 760px; margin: auto; padding: 12px 20px 0; }
 .wide { display: block; width: 100%; margin-top: 12px; }
 .secondary { background: #fff; border: 2px solid #215b3d; color: #215b3d; }
