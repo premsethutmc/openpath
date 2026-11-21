@@ -42,6 +42,10 @@ python manage.py english_usage || true
 if [ "${OPENPATH_WRITING_FEEDBACK_SELFTEST:-0}" = 1 ]; then
     python manage.py writing_feedback_selftest || echo "writing-feedback selftest failed"
 fi
+# reading-ai@1: a one-off measurement with five made-up reading answers, only while this setting is 1 (turned off after)
+if [ "${OPENPATH_READING_AI_TRIAL:-0}" = 1 ]; then
+    python manage.py reading_ai_trial || echo "reading-ai trial failed"
+fi
 # The grader bundle decides credit: refuse to start unless it is exactly the one its manifest records and Node can run it.
 python -c 'import django,os;django.setup()
 from family import kernel_grader as k
