@@ -15,7 +15,7 @@ from django.utils import timezone
 from . import llm
 from .models import AIUsageBucket
 
-TASKS = frozenset({'essay.observe', 'essay.rewrite', 'essay.questions', 'maths.word_problem', 'writing.feedback'})
+TASKS = frozenset({'essay.observe', 'essay.rewrite', 'essay.questions', 'maths.word_problem', 'writing.feedback', 'reading.answer'})
 
 
 class GatewayDenied(llm.LLMError):
@@ -44,6 +44,9 @@ def reserve(task, user_id):
     elif task == 'writing.feedback':
         # the weekly limit per learner is the view's; this is the whole site's ceiling for one day
         caps += [('writing-feedback', settings.OPENPATH_WRITING_FEEDBACK_SITE_DAILY)]
+    elif task == 'reading.answer':
+        # its own bucket: a second check on a typed reading answer never uses the week's writing feedback
+        caps += [('reading-ai', settings.OPENPATH_READING_AI_SITE_DAILY), (f'user-reading:{user_id}', settings.OPENPATH_READING_AI_DAILY)]
     else:
         caps += [('maths', settings.OPENPATH_WORD_PROBLEM_SITE_DAILY), (f'user-maths:{user_id}', settings.OPENPATH_WORD_PROBLEM_DAILY)]
     if any(not isinstance(cap, int) or isinstance(cap, bool) or cap <= 0 for _, cap in caps):
@@ -87,6 +90,15 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
         config = writing_feedback._config()
         system = writing_feedback.prompt()
         user = writing_feedback.user_message(request['task'], request['text'], request['checked'])
+    elif task == 'reading.answer':
+        from family import reading_ai
+        if settings.OPENPATH_READING_AI != 'on':
+            raise GatewayDenied('Reading answer checks are switched off')
+        if not isinstance(request, dict) or set(request) != {'item', 'answer'}:
+            raise GatewayDenied('Invalid reading answer request')
+        config = reading_ai._config()
+        system = reading_ai.PROMPT
+        user = reading_ai.user_message(request['item'], request['answer'])
     else:
         from family import word_problem
         if settings.OPENPATH_WORD_PROBLEMS != 'on':

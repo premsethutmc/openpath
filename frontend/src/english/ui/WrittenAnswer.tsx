@@ -2,14 +2,49 @@
  * Write an answer (logic/reading/written): read a passage, type a short answer to a question on it, as in a school
  * exam. Checked by rule; a second try after a miss, then the model answer. The typed words are never stored.
  */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { READING_AI_CONSENT, type ReadingAiService, type ReadingAiStatus } from "../logic/reading/ai-check.ts";
 import type { Learner } from "../logic/learner.ts";
 import { WrittenSitting, pickWritten, writtenSummary, type WrittenRecord } from "../logic/reading/written.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
 import { Flag } from "./Flag.tsx";
 
-export function WrittenAnswer({ learner, onLeave, onChanged }: { learner: Learner; onLeave: () => void; onChanged: () => void }) {
+export function WrittenAnswer({ learner, onLeave, onChanged, aiCheck }: { learner: Learner; onLeave: () => void; onChanged: () => void; aiCheck?: ReadingAiService }) {
   const [sitting, setSitting] = useState<WrittenSitting | null>(null);
+  const [ai, setAi] = useState<ReadingAiStatus | null>(null);
+  const [checking, setChecking] = useState(false);
+  useEffect(() => {
+    let live = true;
+    aiCheck?.status().then((st) => live && setAi(st), () => live && setAi(null));
+    return () => {
+      live = false;
+    };
+  }, [aiCheck]);
+  const agree = async (granted: boolean) => {
+    if (!aiCheck) return;
+    try {
+      await aiCheck.agree(granted);
+      setAi(await aiCheck.status());
+    } catch {
+      /* stays as it was */
+    }
+  };
+  /** Rules first; when they say wrong, the AI checks again (where a parent agreed). Its "no" or a failure keeps the rules' mark. */
+  const check = async (s: WrittenSitting) => {
+    const it = s.snapshot().item;
+    if (it && aiCheck && ai?.available && ai.consent && s.wantsSecondCheck(text)) {
+      setChecking(true);
+      let second: boolean | undefined;
+      try {
+        second = await aiCheck.check(it.id, text);
+      } catch {
+        second = undefined;
+      }
+      setChecking(false);
+      s.check(text, second);
+    } else s.check(text);
+    tick();
+  };
   const [text, setText] = useState("");
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -45,6 +80,22 @@ export function WrittenAnswer({ learner, onLeave, onChanged }: { learner: Learne
         {sum.answered > 0 && (
           <p className="small">
             {sum.right} of {sum.answered} answers right · {sum.firstTry} on the first try
+          </p>
+        )}
+        {ai?.available && !ai.consent && (
+          <div className="tile" data-reading-ai="consent">
+            <p className="small">{READING_AI_CONSENT}</p>
+            <button type="button" className="secondary" onClick={() => void agree(true)}>
+              A parent agrees
+            </button>
+          </div>
+        )}
+        {ai?.available && ai.consent && (
+          <p className="small" data-reading-ai="on">
+            When an answer is marked wrong, an AI checks it again. It can be wrong too.{" "}
+            <button type="button" className="link" onClick={() => void agree(false)}>
+              Turn this off
+            </button>
           </p>
         )}
         <button type="button" className="primary" onClick={() => (setSitting(new WrittenSitting(pickWritten(learner.writtenRecords(), level), `wa-${Date.now()}`)), setText(""), scrollTo(0, 0))}>
@@ -93,13 +144,14 @@ export function WrittenAnswer({ learner, onLeave, onChanged }: { learner: Learne
       </label>
       <textarea id="written-answer" rows={3} value={text} disabled={v.reveal} onChange={(e) => setText(e.target.value)} placeholder="Write your answer in a sentence." />
       {!m && (
-        <button type="button" className="primary" disabled={!text.trim()} onClick={() => (sitting.check(text), tick())}>
-          Check
+        <button type="button" className="primary" disabled={!text.trim() || checking} onClick={() => void check(sitting)}>
+          {checking ? "Checking again…" : "Check"}
         </button>
       )}
       {m && (
         <div className="dict-feedback" role="status" data-correct={m.correct}>
           <p className={m.correct ? "words-verdict right" : "words-verdict"}>{m.correct ? "✓ Right" : v.reveal ? "Not quite" : "Not yet"}</p>
+          {m.ai === "right" && <p className="small" data-ai-second="right">Checked again by the AI: your answer means the same as a good answer.</p>}
           {m.correct && m.short && <p className="small">Right. In a test, answer in a full sentence, like the one below.</p>}
           {m.correct && !m.short && !m.sentence && <p className="small">Start with a capital letter and end with a full stop.</p>}
           {!m.correct && !v.reveal && (

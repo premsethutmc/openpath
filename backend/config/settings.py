@@ -107,6 +107,7 @@ REST_FRAMEWORK = {
         "account": os.environ.get("OPENPATH_ACCOUNT_RATE", "30/hour"),
         "word-problem": "60/hour",
         "writing-feedback": "30/hour",
+        "reading-ai": "60/hour",
         "account-register": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "account-login": os.environ.get("OPENPATH_ACCOUNT_RATE", "60/hour"),
         "account-reset": os.environ.get("OPENPATH_ACCOUNT_RATE", "10/hour"),
@@ -171,6 +172,11 @@ OPENPATH_WRITING_FEEDBACK_BASE_URL = os.environ.get("OPENPATH_WRITING_FEEDBACK_B
 OPENPATH_WRITING_FEEDBACK_API_KEY = os.environ.get("OPENPATH_WRITING_FEEDBACK_API_KEY", "")
 OPENPATH_WRITING_FEEDBACK_WEEKLY = int(os.environ.get("OPENPATH_WRITING_FEEDBACK_WEEKLY", "3"))
 OPENPATH_WRITING_FEEDBACK_SITE_DAILY = int(os.environ.get("OPENPATH_WRITING_FEEDBACK_SITE_DAILY", "60"))
+# reading-ai@1: a second check by the AI when the on-device rules mark a typed reading answer wrong (family/reading_ai.py).
+# Uses the writing-feedback model and key; its own switch, its own parent yes, and its own limits (a separate bucket).
+OPENPATH_READING_AI = os.environ.get("OPENPATH_READING_AI", "off")
+OPENPATH_READING_AI_DAILY = int(os.environ.get("OPENPATH_READING_AI_DAILY", "15"))
+OPENPATH_READING_AI_SITE_DAILY = int(os.environ.get("OPENPATH_READING_AI_SITE_DAILY", "500"))
 OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
 OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000

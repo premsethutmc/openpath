@@ -44,6 +44,9 @@ def usage(days: int = 30, now=None) -> dict:
     by_kind = {kind: name for name, kind in ACTIVITIES}
     active7, active = set(), set()
     flags = defaultdict(lambda: defaultdict(int))
+    # reading-ai@1: typed reading answers the rules marked wrong and the AI checked again, and how many it turned right
+    second = {"checked": 0, "turned_right": 0, "then_reported": 0}
+    turned = set()
     pupil_days = defaultdict(set)
     events = PupilEvent.objects.filter(subject="english", occurred_at__gte=since, occurred_at__lte=now).order_by("pupil", "seq").values_list("pupil_id", "kind", "occurred_at", "body")
     for pupil, kind, at, body in events.iterator():
@@ -52,6 +55,8 @@ def usage(days: int = 30, now=None) -> dict:
             item = (body.get("item") or {}).get("id") if isinstance(body.get("item"), dict) else None
             if item and ":" in str(item):
                 flags[str(item)][str(body.get("note") or "other")[:20]] += 1
+                if (pupil, str(item).split(":", 1)[1]) in turned:
+                    second["then_reported"] += 1
             continue
         name = by_kind.get("spell" if kind in SPELL else kind)
         if not name:
@@ -108,6 +113,11 @@ def usage(days: int = 30, now=None) -> dict:
                 r["right"] += bool(isinstance(a, dict) and a.get("correct"))
         elif kind == "written_answer":
             r["finished"] += t == "end"
+            if t == "answer" and rec.get("ai") in ("right", "wrong"):
+                second["checked"] += 1
+                if rec["ai"] == "right":
+                    second["turned_right"] += 1
+                    turned.add((pupil, str(rec.get("id"))))
             if t == "answer":
                 r["answers"] += 1
                 r["right"] += bool(rec.get("correct"))
@@ -141,6 +151,7 @@ def usage(days: int = 30, now=None) -> dict:
         "children_active_last_7_days": len(active7),
         "median_days_active": median(len(d) for d in pupil_days.values()) if pupil_days else 0,
         "activities": out,
+        "reading_ai": second,
         "flags": sorted(({"question": q, "reports": sum(r.values()), "reasons": dict(r)} for q, r in flags.items()), key=lambda x: -x["reports"])[:20],
     }
 
@@ -153,6 +164,9 @@ def as_text(u: dict) -> str:
     for a in u["activities"]:
         cell = lambda v: "-" if v is None else str(v)
         lines.append(" | ".join([a["activity"], *(cell(a[k]) for k in ("children", "child_days", "started", "finished", "answers", "right_pct", "median_minutes"))]))
+    ra = u.get("reading_ai") or {}
+    if ra.get("checked"):
+        lines.append(f"reading answers checked again by the AI: {ra['checked']}; turned right {ra['turned_right']}; of those, then reported as looking wrong {ra['then_reported']}")
     if u.get("flags"):
         lines.append("questions reported as looking wrong (question | reports | reasons):")
         lines += [f"{f['question']} | {f['reports']} | " + ", ".join(f"{k} {v}" for k, v in f["reasons"].items()) for f in u["flags"]]
