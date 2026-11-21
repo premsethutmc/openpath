@@ -3043,3 +3043,46 @@ h3.sub {
   font-weight: 700;
   font-size: 1.1rem;
 }
+.grammar-search {
+  margin: 10px 0 14px;
+  display: grid;
+  gap: 6px;
+}
+.grammar-search-label {
+  font-weight: 700;
+}
+.grammar-search input {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  width: 100%;
+  box-sizing: border-box;
+}
+.grammar-hits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.grammar-hits li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+  background: var(--card, #fff);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+.grammar-hits li > b,
+.grammar-hits li > .small {
+  grid-column: 1;
+}
+.grammar-hits li > button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: auto;
+  padding: 8px 12px;
+}

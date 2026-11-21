@@ -1,0 +1,245 @@
+{
+  "id": "grammar-write-own",
+  "version": 1,
+  "status": "candidate: prompts and checks written by OpenPath; not reviewed by an educator",
+  "format": "For each topic: a prompt to write one sentence of one's own using the rule, an example, the patterns the sentence must show (all, case ignored), and a hint. The sentence is also run through the writing check; what the learner writes is never stored.",
+  "prompts": [
+    {
+      "topic": "be_verbs",
+      "prompt": "Write a sentence about yourself with \"am\".",
+      "example": "I am nine years old.",
+      "need": [
+        "\\bI am\\b|\\bI'm\\b"
+      ],
+      "hint": "Start with \"I am\"."
+    },
+    {
+      "topic": "have_has",
+      "prompt": "Write a sentence about a friend or a pet with \"has\".",
+      "example": "My friend has a red bicycle.",
+      "need": [
+        "\\bhas\\b"
+      ],
+      "hint": "Use \"has\" with one person or thing: \"My cat has…\""
+    },
+    {
+      "topic": "articles",
+      "prompt": "Write a sentence with \"an\" before a word that starts with a vowel sound.",
+      "example": "I ate an orange after lunch.",
+      "need": [
+        "\\ban (a|e|i|o|u|hour|honest)"
+      ],
+      "hint": "Use \"an\" before a, e, i, o, u: an apple, an egg."
+    },
+    {
+      "topic": "plurals",
+      "prompt": "Write a sentence with a plural that ends in -es, such as boxes or buses.",
+      "example": "There are three buses at the stop.",
+      "need": [
+        "\\b\\w+(ss|x|ch|sh|s|z)es\\b|\\b\\w+ies\\b"
+      ],
+      "hint": "Words ending in s, x, ch or sh add -es: boxes, dishes."
+    },
+    {
+      "topic": "past",
+      "prompt": "Write a sentence about yesterday, with a verb ending in -ed.",
+      "example": "Yesterday I played football with my cousins.",
+      "need": [
+        "\\byesterday\\b|\\blast\\b|\\bago\\b",
+        "\\b\\w+ed\\b"
+      ],
+      "hint": "Say when (yesterday) and use a verb with -ed: played, walked."
+    },
+    {
+      "topic": "irregular_verbs",
+      "prompt": "Write a sentence about last week using \"went\", \"ate\" or \"saw\".",
+      "example": "Last week we went to the beach.",
+      "need": [
+        "\\b(went|ate|saw|came|took|gave|wrote|bought|ran|made)\\b"
+      ],
+      "hint": "These verbs change in the past: go went, eat ate, see saw."
+    },
+    {
+      "topic": "continuous",
+      "prompt": "Write a sentence about what someone is doing right now.",
+      "example": "My mother is cooking dinner now.",
+      "need": [
+        "\\b(am|is|are)\\s+\\w+ing\\b"
+      ],
+      "hint": "Use am, is or are with a verb ending in -ing."
+    },
+    {
+      "topic": "future",
+      "prompt": "Write a sentence about tomorrow with \"will\".",
+      "example": "Tomorrow I will visit my grandmother.",
+      "need": [
+        "\\bwill\\s+\\w+"
+      ],
+      "hint": "Use \"will\" with the plain verb: will go, will play."
+    },
+    {
+      "topic": "comparison",
+      "prompt": "Compare two things with a word ending in -er and \"than\".",
+      "example": "An elephant is bigger than a horse.",
+      "need": [
+        "\\b\\w+er\\s+than\\b|\\bmore\\s+\\w+\\s+than\\b"
+      ],
+      "hint": "Use -er and than: taller than, faster than."
+    },
+    {
+      "topic": "prepositions",
+      "prompt": "Write a sentence that says where something is, with in, on, under or between.",
+      "example": "The cat is sleeping under the table.",
+      "need": [
+        "\\b(in|on|under|between|behind|beside|above|near)\\s+(the|a|an|my|our|his|her|their)\\b"
+      ],
+      "hint": "Say where: under the table, on the shelf."
+    },
+    {
+      "topic": "conjunctions",
+      "prompt": "Write one sentence that joins two ideas with \"because\".",
+      "example": "I wore a coat because it was cold.",
+      "need": [
+        "\\w+\\W+because\\s+\\w+"
+      ],
+      "hint": "Put \"because\" between what happened and why."
+    },
+    {
+      "topic": "questions",
+      "prompt": "Write a question that starts with who, what, where, when, why or how.",
+      "example": "Where did you keep my book?",
+      "need": [
+        "^\\s*(who|what|where|when|why|how)\\b",
+        "\\?\\s*$"
+      ],
+      "hint": "Start with a question word and end with a question mark."
+    },
+    {
+      "topic": "contractions",
+      "prompt": "Write a sentence with a short form such as don't, can't or it's.",
+      "example": "I can't find my shoes.",
+      "need": [
+        "\\b\\w+'(t|s|re|ll|ve|m|d)\\b"
+      ],
+      "hint": "Use an apostrophe where letters are missing: do not, don't."
+    },
+    {
+      "topic": "possessives",
+      "prompt": "Write a sentence about something that belongs to someone, using 's.",
+      "example": "My sister's bag is blue.",
+      "need": [
+        "\\b\\w+'s\\b(?!\\s+(a|an|the|not|very|going|been|is))"
+      ],
+      "hint": "Add 's to the owner: Ravi's pen."
+    },
+    {
+      "topic": "adverbs",
+      "prompt": "Write a sentence that says how someone did something, with a word ending in -ly.",
+      "example": "The tortoise walked slowly to the pond.",
+      "need": [
+        "\\b\\w{3,}ly\\b"
+      ],
+      "hint": "Add -ly to say how: quickly, quietly."
+    },
+    {
+      "topic": "pronouns",
+      "prompt": "Write two sentences about a person: name them first, then use he or she.",
+      "example": "Meena likes music. She sings every day.",
+      "need": [
+        "\\b(he|she|they)\\b"
+      ],
+      "hint": "Say the name once, then use he, she or they."
+    },
+    {
+      "topic": "agreement",
+      "prompt": "Write a sentence about one animal doing something, with the verb ending in -s.",
+      "example": "The dog barks at strangers.",
+      "need": [
+        "\\b(the|a|my|our|this)\\s+\\w+\\s+\\w+s\\b"
+      ],
+      "hint": "One animal takes a verb with -s: the dog barks."
+    },
+    {
+      "topic": "compound",
+      "prompt": "Join two complete sentences with \", but\" or \", so\".",
+      "example": "It was raining, but we played outside.",
+      "need": [
+        ",\\s*(but|so|and)\\s+\\w+\\s+\\w+"
+      ],
+      "hint": "Two complete sentences, joined with a comma and but or so."
+    },
+    {
+      "topic": "relative",
+      "prompt": "Write a sentence about a person with \"who\" in the middle.",
+      "example": "The girl who sits next to me is kind.",
+      "need": [
+        "\\w+\\s+who\\s+\\w+"
+      ],
+      "hint": "Who tells more about a person: the boy who won."
+    },
+    {
+      "topic": "this_these",
+      "prompt": "Write a sentence with \"these\" or \"those\" about more than one thing.",
+      "example": "These mangoes are very sweet.",
+      "need": [
+        "\\b(these|those)\\s+\\w+s\\b"
+      ],
+      "hint": "These or those go with more than one: these books."
+    },
+    {
+      "topic": "passive",
+      "prompt": "Write a passive sentence: the thing comes first, then was or were with the third form.",
+      "example": "The window was broken by the ball.",
+      "need": [
+        "\\b(was|were|is|are)\\s+\\w+(ed|en|n|t)\\b"
+      ],
+      "hint": "The thing acted on first: The cake was eaten…"
+    },
+    {
+      "topic": "conditionals",
+      "prompt": "Write a sentence that starts with \"If\".",
+      "example": "If it rains, we will stay inside.",
+      "need": [
+        "^\\s*if\\b",
+        ",\\s*\\w+"
+      ],
+      "hint": "If…, then what happens, after a comma."
+    },
+    {
+      "topic": "modal_perfect",
+      "prompt": "Write a sentence with \"should have\" about something in the past.",
+      "example": "I should have brought my umbrella.",
+      "need": [
+        "\\bshould have\\s+\\w+"
+      ],
+      "hint": "Should have with the third form: should have gone."
+    },
+    {
+      "topic": "tenses",
+      "prompt": "Write a sentence with \"have\" or \"has\" and the third form of a verb.",
+      "example": "I have finished my homework.",
+      "need": [
+        "\\b(have|has)\\s+(\\w+ed|been|done|gone|seen|eaten|written|taken|given|made|had|read|won|lost|found|bought)\\b"
+      ],
+      "hint": "Have or has with the third form: have finished, has eaten."
+    },
+    {
+      "topic": "dialogue",
+      "prompt": "Write a sentence where someone speaks, with speech marks and \"said\".",
+      "example": "\"Come here,\" said Mother.",
+      "need": [
+        "[\\\"“].+[,!?][\\\"”]\\s*(said|asked|shouted|replied)|(said|asked|shouted|replied),?\\s*[\\\"“].+[.!?][\\\"”]"
+      ],
+      "hint": "Put the spoken words inside speech marks, with a comma before the closing mark."
+    },
+    {
+      "topic": "similes",
+      "prompt": "Write a sentence with a simile, using \"as … as\" or \"like\".",
+      "example": "The baby slept like a log.",
+      "need": [
+        "\\bas\\s+\\w+\\s+as\\b|\\blike\\s+(a|an|the)\\b"
+      ],
+      "hint": "Compare with as … as or like: as busy as a bee."
+    }
+  ]
+}

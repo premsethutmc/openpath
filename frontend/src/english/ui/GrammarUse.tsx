@@ -2,6 +2,8 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
+import { WriteOwn } from "./WriteOwn.tsx";
+import { ownFor } from "../logic/grammar-use/write-own.ts";
 import { Flag } from "./Flag.tsx";
 import { TextPics } from "./Pic.tsx";
 import { useRef, useState } from "react";
@@ -222,9 +224,10 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
   );
 }
 
-export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned }: { onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
+    const own = onOwn ? ownFor(d.topics) : null;
     return (
       <main className="page vocab grammar" data-phase="done">
         <p className="eyebrow">Grammar</p>
@@ -239,6 +242,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose
         <p className="small">
           {d.nextLevel > view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}.` : d.nextLevel < view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}, to build up again.` : "Sentences you missed will come back another day."}
         </p>
+        {own && <WriteOwn key={`${d.sitting}|${own.topic}`} prompt={own} onDone={(correct, tries) => onOwn?.({ type: "own", sitting: d.sitting, topic: own.topic, correct, tries })} />}
         <button type="button" className="primary" onClick={onLeave}>
           Done
         </button>
@@ -323,7 +327,7 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} />
+      <GrammarUseView content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} onOwn={(r) => void learner.recordGrammar([r]).then(onChanged).catch(() => undefined)} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="grammar-use:done" label="Was any sentence marked unfairly, or any rule unclear?" />
