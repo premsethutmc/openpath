@@ -58,6 +58,8 @@ export interface ChildSummary {
   grammar: { answered: number; right: number; weak: string[] } | null;
   /** Calendar days (the child's own day) with any English practice in the last seven. */
   englishDays: number;
+  /** weekly-note@1: each activity used in the last seven days and on how many of them, most days first. */
+  week: { activity: string; days: number }[];
   /** Where each daily activity stands, as the child's home screen shows it. */
   levels: { name: string; level: string }[];
   /** Reading: skills checked and passed, and the ones that need more practice ("Main idea, level 3"). */
@@ -108,7 +110,13 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
   const heard = listenSummary(learner.listenRecords());
   const dayOf = learner.dayFn();
   const english = new Set<string>();
-  for (const e of events.slice(1)) if (Date.parse(now) - Date.parse(e.at) < 7 * DAY && Date.parse(e.at) <= Date.parse(now)) english.add(dayOf(e.at));
+  const byActivity = new Map<string, Set<string>>();
+  for (const e of events.slice(1))
+    if (Date.parse(now) - Date.parse(e.at) < 7 * DAY && Date.parse(e.at) <= Date.parse(now)) {
+      english.add(dayOf(e.at));
+      const a = WEEK_ACTIVITY[e.kind];
+      if (a) byActivity.set(a, (byActivity.get(a) ?? new Set()).add(dayOf(e.at)));
+    }
   const rp = readingProgress(COURSE, learner.readingRecords());
   const unitName = (key: string) => {
     const [skill, level] = key.split("@");
@@ -131,6 +139,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     listening: heard.passages ? { passages: heard.passages, right: heard.right, asked: heard.asked, weak: heard.weak } : null,
     grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5) } : null,
     englishDays: english.size,
+    week: [...byActivity].map(([activity, d]) => ({ activity, days: d.size })).sort((a, b) => b.days - a.days || (a.activity < b.activity ? -1 : 1)),
     levels: streamRows(learner, now).map((r) => ({ name: r.name, level: r.level })),
     reading: units.some(([, u]) => u.checks) ? { passed: units.filter(([, u]) => u.status === "passed_own" || u.status === "passed_after_help").length, needsPractice: units.filter(([, u]) => u.status === "needs_practice" || u.status === "no_fresh_check").map(([k]) => unitName(k)).slice(0, 4) } : null,
     writing: guided.length ? { tasks: guidedSummary(guided).done.size, pieces: pieces.length, words: pieces.reduce((a, r) => a + (r.words ?? 0), 0) } : null,
@@ -147,4 +156,37 @@ export function gateQuestion(seed: number): { a: number; b: number; answer: numb
   const a = 6 + (seed % 4);
   const b = 7 + (Math.floor(seed / 4) % 3);
   return { a, b, answer: a * b };
+}
+
+/** weekly-note@1: the activity each kind of record belongs to, as the child sees it named. */
+const WEEK_ACTIVITY: Record<string, string> = {
+  first_words: "First words", word_learn: "New words", vocab: "Word check", dictation: "Listen and write", listen_passage: "Listen and answer",
+  grammar_use: "Grammar", reading: "Reading", text_read: "Poems and everyday texts", long_read: "Long reads", written_answer: "Write an answer",
+  spell_answer: "Spelling Bee", guided_task: "Tasks with a grown-up", book_answer: "My Books", level_check: "Find my level",
+};
+
+/**
+ * weekly-note@1: a short note on the child's week that a parent can send on (WhatsApp or anywhere), in plain words
+ * and counts only. No marks, no comparisons with other children, nothing the child typed.
+ */
+export function weeklyNote(s: ChildSummary, link?: string): string {
+  const lines = [`${s.name}'s English this week (OpenPath)`];
+  if (!s.englishDays) lines.push("No English practice in the last 7 days. Ten minutes a day is enough to keep going.");
+  else {
+    lines.push(`Practised on ${s.englishDays} of the last 7 days.`);
+    if (s.week.length) lines.push(`Did: ${s.week.slice(0, 5).map((w) => `${w.activity} (${w.days} ${w.days === 1 ? "day" : "days"})`).join(", ")}.`);
+  }
+  const good: string[] = [];
+  if (s.newWords?.learnt) good.push(`${s.newWords.learnt} new words learnt`);
+  if (s.dictation?.perfectFirst) good.push(`${s.dictation.perfectFirst} sentences written right first time`);
+  if (s.grammar?.right) good.push(`${s.grammar.right} grammar sentences right`);
+  if (s.reading?.passed) good.push(`${s.reading.passed} reading ${s.reading.passed === 1 ? "skill" : "skills"} passed`);
+  if (good.length) lines.push(`So far: ${good.join("; ")}.`);
+  const work: string[] = [];
+  if (s.newWords?.tricky.length) work.push(`words: ${s.newWords.tricky.slice(0, 3).join(", ")}`);
+  if (s.grammar?.weak.length) work.push(`grammar: ${s.grammar.weak.slice(0, 2).join(", ")}`);
+  if (s.reading?.needsPractice.length) work.push(`reading: ${s.reading.needsPractice.slice(0, 2).join(", ")}`);
+  if (work.length) lines.push(`To practise next: ${work.join("; ")}.`);
+  if (link) lines.push(link);
+  return lines.join("\n");
 }

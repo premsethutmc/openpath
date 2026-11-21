@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { AppContent } from "../logic/content.ts";
 import { Learner } from "../logic/learner.ts";
-import { type ChildSummary, childSummary, gateQuestion } from "../logic/parent-view.ts";
+import { type ChildSummary, childSummary, gateQuestion, weeklyNote } from "../logic/parent-view.ts";
 import type { Repo } from "../logic/store.ts";
 import { MyWords } from "./MyWords.tsx";
 
@@ -154,7 +154,44 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
       <button type="button" className="secondary" onClick={onOpen}>
         {s.lists.length ? "Word lists and results" : "Add a word list"}
       </button>
+      <WeeklyNote s={s} />
     </section>
+  );
+}
+
+/** weekly-note@1: this week in a few lines, to send on WhatsApp (or copy) to the other parent, a grandparent, a tutor. */
+function WeeklyNote({ s }: { s: ChildSummary }) {
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const text = weeklyNote(s, typeof location === "undefined" ? undefined : location.origin);
+  return (
+    <div className="weekly-note" data-weekly-note>
+      <button type="button" className="link" aria-expanded={open} onClick={() => setOpen(!open)}>
+        {open ? "Hide this week's note" : "This week's note to share"}
+      </button>
+      {open && (
+        <>
+          <pre className="weekly-text">{text}</pre>
+          <p className="choose-options">
+            <a className="secondary" href={`https://wa.me/?text=${encodeURIComponent(text)}`} target="_blank" rel="noopener noreferrer">
+              Share on WhatsApp
+            </a>
+            <button
+              type="button"
+              className="secondary"
+              onClick={() =>
+                void navigator.clipboard?.writeText(text).then(
+                  () => setCopied(true),
+                  () => setCopied(false),
+                )
+              }
+            >
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </p>
+        </>
+      )}
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@
  * the approved prototype; what they record is real (the account on the server, the learner's preferences as
  * events) and nothing here decides a level.
  */
+import { TamilToggle } from "./tamilHelp.tsx";
 import { SubjectTiles } from "./SubjectTiles.tsx";
 import { type FormEvent, type ReactNode, useState } from "react";
 import { ApiError } from "../logic/account.ts";
@@ -37,6 +38,7 @@ function Frame({ children, label }: { children: ReactNode; label: string }) {
     <main className="welcome" aria-label={label}>
       <header className="top">
         <Brand />
+        <TamilToggle />
       </header>
       <div className="page">{children}</div>
     </main>

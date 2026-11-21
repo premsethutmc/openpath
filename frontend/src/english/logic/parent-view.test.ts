@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { loadContent } from "./content.ts";
 import { testClock } from "./journey-sim.ts";
 import { Learner } from "./learner.ts";
-import { childSummary, gateQuestion } from "./parent-view.ts";
+import { childSummary, gateQuestion, weeklyNote } from "./parent-view.ts";
 import { MemoryRepo } from "./store.ts";
 import { parseWords } from "./wordlists.ts";
 
@@ -94,4 +94,22 @@ test("PV-9 every daily activity: levels, days of any English, reading skills, wr
   assert.deepEqual(s.writing, { tasks: 2, pieces: 1, words: 42 });
   assert.equal(s.reading!.passed, 1);
   assert.match(s.reading!.needsPractice[0], /level 3$/);
+});
+
+test("PV-10 weekly note: days and activities this week, what went well, what to practise; nothing typed; a quiet week says so", async () => {
+  const repo = new MemoryRepo();
+  const clock = testClock();
+  const a = await Learner.create(c, repo, "Kavi", "guardian", clock, "p-kavi");
+  const quiet = weeklyNote(childSummary(a, clock()));
+  assert.match(quiet, /^Kavi's English this week \(OpenPath\)\nNo English practice in the last 7 days/);
+  await a.recordGuided({ type: "done", task: "t1", syllabus: "s", outcome: "o", seen: [0], of: 2, words: 42, self: [] });
+  await a.recordReading([{ type: "check_result", unit: { skill: "main_idea" as const, level: 3 as const }, answers: [], passed: false, label: null }, { type: "check_result", unit: { skill: "detail" as const, level: 3 as const }, answers: [], passed: true, label: null }]);
+  const s = childSummary(a, clock());
+  assert.deepEqual(s.week, [{ activity: "Reading", days: 1 }, { activity: "Tasks with a grown-up", days: 1 }]);
+  const note = weeklyNote(s, "https://example.org");
+  assert.match(note, /Practised on 1 of the last 7 days\./);
+  assert.match(note, /Did: Reading \(1 day\), Tasks with a grown-up \(1 day\)\./);
+  assert.match(note, /So far: 1 reading skill passed\./);
+  assert.match(note, /To practise next: reading: Main idea/i);
+  assert.ok(note.endsWith("https://example.org"));
 });
