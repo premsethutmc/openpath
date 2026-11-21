@@ -19,3 +19,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{o
 details{padding:12px 3px 18px;font-size:.83rem;color:#edd3dd}summary{cursor:pointer;width:max-content;font-weight:700}details p{margin:6px 0;max-width:54ch;line-height:1.45}
 
 #peg{cursor:ew-resize}
+.guide{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;background:#3b2846;border:1px solid #815b72;border-radius:14px;padding:8px 10px;margin:0 0 10px}
+.guide svg{width:44px;height:44px}.guide p{margin:0;font-size:.86rem;line-height:1.35;color:#ffe9cf}.guide b{display:block;font-size:.7rem;letter-spacing:.06em;color:#e6c9d8;text-transform:uppercase}
+.mute{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;min-height:40px;cursor:pointer}.mute input{accent-color:#ffd291;margin:0}
+.stations{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:0 0 10px}
+.stations button,.stations button:last-child{min-height:50px;padding:4px 2px;font-size:.74rem;line-height:1.1;background:#3b2846;border-color:#815b72;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.stations button[aria-selected=true]{background:#82494c;border-color:#ffd291}
+.stations i{font-style:normal;font-size:.66rem;color:#ffd898;font-weight:650}
+.eureka,.eureka:last-child{position:fixed;z-index:5;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(100% - 24px,560px);text-align:left;font:600 .88rem/1.4 system-ui;box-shadow:0 10px 26px #0009;padding:10px 14px;border-radius:12px;background:#2f4a3a;border:1px solid #7fc59a;color:#e6ffe9;font-size:.86rem;line-height:1.4}
+.lab[hidden],.eureka[hidden]{display:none}
+#drum,#jar{display:block;width:100%;height:auto;touch-action:manipulation}#hit-zone{cursor:pointer}
+#skin{transform-box:fill-box;transform-origin:center}
+.play.three{grid-template-columns:repeat(3,1fr)}.play.three button{font-size:.8rem}
+.play button[aria-pressed=true]{background:#a8604a;border-color:#ffd291}
+.shelf{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:14px 10px 4px;background:linear-gradient(#261b36 82%,#5a3a2c 82% 88%,#261b36 88%)}
+.bottle-col{display:grid;gap:4px;justify-items:center}
+.bottle,.bottle:last-child{background:none;border:0;padding:0;min-height:0;width:100%}.bottle svg{display:block;width:100%;max-width:64px;margin:auto;height:auto}
+.bottle:active{background:none}.bottle .breath{opacity:0}.bottle.sing .breath{animation:breath .7s ease-out}
+@keyframes breath{0%{opacity:0;transform:translateY(4px)}30%{opacity:1}100%{opacity:0;transform:translateY(-4px)}}
+.bottle-col input[type=range]{height:30px}
+.meter{display:flex;justify-content:space-between;align-items:center;margin:10px 0 0;padding:8px 10px;border-radius:9px;background:#281b32;border:1px solid #68445e;font-size:.82rem}
+.meter b{font-size:1.1rem;color:#cfeefa}
+#j-notice,#b-notice,#d-notice,#h-notice{font-size:.86rem;color:#ffe2b5;min-height:2.5em;margin:8px 0}
+.readout{margin:4px 0 6px;font-size:.86rem}.readout b{font-size:1.3rem;color:#fff0b1;margin-right:6px}
+#ranges{display:block;width:100%;height:auto;background:#281b32;border:1px solid #68445e;border-radius:10px}
+#ranges text{fill:#e6c4d6;font-size:13px;font-weight:600}#ranges rect:not([opacity]){fill:#6d4a5e}#ranges rect.on{fill:#ffd898}
+.listeners{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:0;margin:8px 0;font-size:.8rem;color:#bfa3b4}.listeners li.on{color:#fff0b1;font-weight:700}
+.notebook{margin:14px 0 0;padding:10px 14px;border-radius:14px;background:#2c2038;border:1px dashed #815b72}
+.notebook h2{margin:0;font:600 1.15rem Georgia,serif;display:flex;justify-content:space-between;align-items:baseline}.notebook h2 span{font:700 .76rem system-ui;color:#ffd898}
+.notebook ol{margin:8px 0 4px;padding-left:20px;font-size:.84rem;line-height:1.4}.notebook li{margin:4px 0}
+#concert{width:100%;margin:6px 0 4px;background:#a8604a}
+@media (prefers-reduced-motion:reduce){.bottle.sing .breath{animation:none;opacity:1}}
+.guide span{display:block;min-height:calc(4 * 1.35em)}@media (min-width:380px){.guide span{min-height:calc(3 * 1.35em)}}
+.eureka b{display:block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#a9f0c0}

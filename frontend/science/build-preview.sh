@@ -19,6 +19,6 @@ copy_lab chemistry-lab index.html catalog.mjs lab-model.mjs lab.css lab.mjs
 copy_lab flower-to-seed index.html garden.css garden.mjs art.mjs model.mjs sound.mjs story.mjs story-model.mjs
 copy_lab shadow-lab index.html shadow.css shadow.mjs model.mjs
 copy_lab lift-the-rock index.html lever.css lever.mjs model.mjs
-copy_lab sound-studio index.html sound.css studio.mjs model.mjs
+copy_lab sound-studio index.html sound.css studio.mjs model.mjs audio.mjs journey.mjs stations.mjs
 copy_lab food-chain-garden index.html garden.css garden.mjs model.mjs
 printf 'User-agent: *\nDisallow: /\n' > "$out/robots.txt"

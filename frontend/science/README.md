@@ -36,13 +36,15 @@ over 16 cm for the same ideal work of 0.96 J. No backend or external assets.
 
 ### Sound Studio
 
-A single stylized veena string. Pull it and release, then turn or slide the
-tuning peg. A stronger pull increases amplitude and gain without changing
-pitch; tighter tension increases frequency at a fixed string length. The
-scope uses the same time scale for both notes, with the previous one dotted.
-Low-level additive Web Audio starts only on pluck; there are no audio files,
-remote calls, microphone inputs, or accounts. The waveform and text remain
-usable when muted; reduced-motion prefers a still string.
+Class 8 Sound, told as getting the temple-festival instruments ready with Meena akka. Five open stations, no lesson pages:
+veena (peg tension, pluck strength and six fret stops; half length = octave), bottle band (blown bottles: more water,
+shorter air column, higher note), drum (strap tension and hit strength; rice grains jump with amplitude), bell in a jar
+(each pump removes 40% of the air, never below 2%; the bell keeps moving while the sound fades) and "Who hears?"
+(log pitch slider 10 Hz–100 kHz over typical ranges for elephant, human, dog and bat; infrasound and ultrasound).
+Nine discoveries are found by doing, not by reading; each appears as a toast and in the festival notebook
+(kept in localStorage), and finding all nine unlocks a short concert. Scopes show shakes per second in Hz.
+Low-level additive Web Audio starts only on a learner action; no audio files, remote calls, microphone or accounts.
+Ultrasound and infrasound are never played. Reduced motion skips the swings and jumps.
 
 ### Food Chain Garden
 

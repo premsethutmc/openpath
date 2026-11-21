@@ -1,63 +1,29 @@
-import { stringNote, compareNotes } from './model.mjs';
+import { stringNote, compareNotes, wavePath, FRETS, FRET_NAMES, perSecond } from './model.mjs';
+import { playString } from './audio.mjs';
+import { report } from './journey.mjs';
 const get = id => document.getElementById(id);
 const tuning = get('tension'), svg = get('instrument'), line = get('string');
-const sound = get('audio'), slow = get('slow');
+const slow = get('slow');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
-let audio, master, voice, last, gesture, raf;
-function play(note) {
-  if (!sound.checked) return;
-  const Audio = globalThis.AudioContext || globalThis.webkitAudioContext;
-  if (!Audio) { sound.checked = false; return; }
-  try {
-    if (!audio) {
-      audio = new Audio();
-      master = audio.createGain();
-      master.gain.value = .8;
-      master.connect(audio.destination);
-    }
-    const now = audio.currentTime;
-    audio.resume().catch(() => { sound.checked = false; });
-    if (voice) voice.gain.setTargetAtTime(0, now, .012);
-    voice = audio.createGain();
-    voice.gain.value = note.gain;
-    voice.connect(master);
-    const v = voice;
-    let left = 4;
-    // A short bright attack, then the higher partials decay faster.
-    [.84,.28,.12,.07].forEach((level,i)=>{
-      const wave = audio.createOscillator(), env = audio.createGain();
-      wave.frequency.value = note.hz*(i+1);
-      env.gain.setValueAtTime(0, now);
-      env.gain.linearRampToValueAtTime(level, now+.008);
-      env.gain.exponentialRampToValueAtTime(.0001, now+.9-i*.13);
-      wave.connect(env); env.connect(v);
-      wave.onended = () => { wave.disconnect();env.disconnect(); if (!--left) { v.disconnect(); if (voice===v) voice=null; } };
-      wave.start(now); wave.stop(now+.92);
-    });
-  } catch { sound.checked = false; }
-}
-sound.addEventListener('change', () => {
-  if (master) master.gain.setTargetAtTime(sound.checked ? .8 : 0, audio.currentTime, .008);
-  if (!sound.checked && voice) voice.gain.setTargetAtTime(0, audio.currentTime, .008);
-});
+let last, lastTension, gesture, raf;
+const fret = get('fret'), finger = get('finger'), rest = get('string-rest');
+const end = () => 76 + 329 * FRETS[fret.valueAsNumber];
 function drawString(y = 0, x = 240) {
-  line.setAttribute('d', `M76 101 Q${x} ${101+2*y} 405 101`);
+  const e = end();
+  line.setAttribute('d', `M76 101 Q${Math.min(x, e - 20)} ${101+2*y} ${e.toFixed(1)} 101`);
 }
-function drawWave(note) {
-  return Array.from({ length:145 },(_,i)=>{
-    const t=i/144;
-    const y=40-note.amplitude*34*Math.sin(2*Math.PI*note.hz*.019*t);
-    return (i?'L':'M')+(360*t).toFixed(2)+' '+y.toFixed(2);
-  }).join(' ');
-}
+const drawWave = note => wavePath(note.hz, note.amplitude);
 function pluck(pull) {
   cancelAnimationFrame(raf);
-  const note = stringNote(tuning.valueAsNumber, pull);
-  if (last) { get('previous').setAttribute('d', drawWave(last)); get('legend').textContent = 'Dotted = last pluck'; }
+  const length = FRETS[fret.valueAsNumber], tension = tuning.valueAsNumber;
+  const note = stringNote(tension, pull, length);
+  if (last) get('previous').setAttribute('d', drawWave(last));
   get('wave').setAttribute('d', drawWave(note));
   get('notice').textContent = compareNotes(last, note);
-  last = note;
-  play(note);
+  get('legend').textContent = (last ? 'Dotted = last pluck · ' : '') + perSecond(note.hz) + ' shakes a second';
+  report({ station: 'veena', type: 'pluck', note, prev: last, tension, prevTension: lastTension, length });
+  last = note; lastTension = tension;
+  playString(note);
   drawString();
   if (motion.matches) return;
   const start = performance.now();
@@ -77,6 +43,16 @@ function turn() {
 }
 tuning.addEventListener('input', turn);
 turn();
+function press() {
+  const i = fret.valueAsNumber, e = end();
+  fret.setAttribute('aria-valuetext', FRET_NAMES[i]);
+  finger.hidden = !i;
+  finger.setAttribute('transform', `translate(${e.toFixed(1)} 0)`);
+  rest.setAttribute('d', i ? `M${e.toFixed(1)} 101H405` : '');
+  drawString();
+}
+fret.addEventListener('input', press);
+press();
 const point = e => new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
 for (const id of ['play-zone','peg']) {
   const target = get(id);
