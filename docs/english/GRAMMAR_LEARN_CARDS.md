@@ -51,3 +51,8 @@ test shows the card and passes it before every grammar sitting.
 - 145 new sentences: every one of the 68 topics now has at least eight (37 had fewer than six, some only three), so a
   topic can be practised for several sittings before anything repeats. Same kinds and levels as each topic's own.
 - Checked by rule (learnProblems, grammarProblems, GU-18) and the content screen; not reviewed by an educator.
+
+## Levels evened out (21 November 2026)
+56 more sentences: level 3 (apostrophes, verbs and joining) 72 → 95 and level 7 (advanced grammar) 52 → 85. Levels
+now hold 82 to 106 sentences each (1: 94, 2: 89, 3: 95, 4: 94, 5: 82, 6: 106, 7: 85), so a learner who stays at
+level 7 has about eleven sittings of new sentences before anything repeats.
