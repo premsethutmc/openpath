@@ -55,6 +55,12 @@ test("Long reads: from the Class 8 syllabus, three parts one at a time, then the
       await page.locator(".choice").nth(options.indexOf(want)).click();
       await page.getByText(qs[i].explain, { exact: true }).waitFor();
       if (missFirst && i === 0) await page.getByText(`Not quite: ${qs[i].right}`).waitFor();
+      if (missFirst && i === 0) {
+        // "This looks wrong?": one tap, a reason from three, then thanks
+        await page.getByRole("button", { name: "This looks wrong?" }).click();
+        await page.getByRole("button", { name: "My answer was right but marked wrong" }).click();
+        await page.getByText("Thank you. We will check this question.").waitFor();
+      }
       if (part === 0 && i === 0) await shot(page, "2-answered");
       await fits();
       await page.getByRole("button", { name: i + 1 < qs.length ? "Next question" : "Finish" }).click();

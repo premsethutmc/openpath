@@ -4,6 +4,7 @@
  * for display: every number is a count of what happened.
  */
 import { longSummary } from "../logic/reading/long-read.ts";
+import { writtenSummary } from "../logic/reading/written.ts";
 import { useState } from "react";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
@@ -36,7 +37,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onWritten, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -72,13 +73,14 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>{guided ? "More to practise" : "Or choose an activity"}</span>
-            <span className="small">{showAll ? "Hide" : guided ? "Long reads, listen and answer, Spelling Bee, word check" : "Words, reading, listening, grammar, spelling"}</span>
+            <span className="small">{showAll ? "Hide" : guided ? "Long reads, written answers, listen and answer, Spelling Bee, word check" : "Words, reading, listening, grammar, spelling"}</span>
           </button>
           {showAll && (
             <div id="all-activities" className="compact-list">
               {!guided && <NewWordsCard learner={learner} onOpen={onNewWords} />}
               {!guided && <ReadingCard learner={learner} onOpen={onReading} />}
               {onLongRead && <LongReadCard learner={learner} onOpen={onLongRead} />}
+              {onWritten && <WrittenCard learner={learner} onOpen={onWritten} />}
               {!guided && <ListenWriteCard learner={learner} onOpen={onListenWrite} />}
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
@@ -375,6 +377,27 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.passages ? "Hear another passage" : "Try Listen and answer"}
+      </button>
+    </section>
+  );
+}
+
+function WrittenCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = writtenSummary(learner.writtenRecords());
+  return (
+    <section className="hub-card plain" aria-labelledby="written-card-title">
+      <h2 id="written-card-title">
+        <span aria-hidden="true">✏️ </span>Write an answer
+      </h2>
+      <p>Read a short passage and write your answer to a question on it, as in a test.</p>
+      {s.answered > 0 && (
+        <p className="small">
+          {s.right} of {s.answered} answers right
+        </p>
+      )}
+      <button type="button" className="secondary" onClick={onOpen}>
+        Try Write an answer
       </button>
     </section>
   );

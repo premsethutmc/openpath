@@ -2,6 +2,7 @@
  * New words (logic/vocabulary/daily-words.ts): up to five new words a day, each with its meaning and a sentence, then
  * questions; words learnt on earlier days come back first. Practice-only: it changes no capability estimate.
  */
+import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { NEW_PER_DAY, WORDS, WordSitting, baseBand, summary, type Card, type SittingView, type Summary, type WordRecord } from "../logic/vocabulary/daily-words.ts";
@@ -127,6 +128,7 @@ export function NewWordsView({ view, onMet, onKnow, onAnswer, onNext, onLeave, o
           </p>
         )}
         <WordCard card={f.card} onSay={onSay} />
+        <Flag stream="words" id={f.card.word} />
         <button type="button" className="primary" autoFocus onClick={onNext}>
           Next
         </button>

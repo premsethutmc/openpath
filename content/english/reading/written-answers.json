@@ -1,0 +1,414 @@
+{
+  "id": "written-answers",
+  "version": 1,
+  "status": "candidate: questions and key words written by OpenPath (AI-prepared) on the Reading course's own passages; checked by rule; not reviewed by an educator",
+  "review": "candidate-unvalidated",
+  "evidence": "practice-only: writing a short answer to a question on a passage; it changes no capability estimate",
+  "format": "Each question names a Reading course passage; the answer is right when it holds a word from every key group (simple endings and one-letter slips allowed). The model answer is shown afterwards. What the learner types is never stored.",
+  "items": [
+    {
+      "id": "wa.L1.T.1",
+      "passage": "L1.T",
+      "level": 1,
+      "question": "What colour was the tomato on Friday?",
+      "keys": [
+        [
+          "red"
+        ]
+      ],
+      "model": "The tomato was red on Friday.",
+      "hint": "Look at what happened by Friday."
+    },
+    {
+      "id": "wa.L1.T.2",
+      "passage": "L1.T",
+      "level": 1,
+      "question": "Why did Ravi pick the tomato?",
+      "keys": [
+        [
+          "ripe"
+        ]
+      ],
+      "model": "He picked it because it was ripe.",
+      "hint": "Find the word after \"because\"."
+    },
+    {
+      "id": "wa.L1.P1.1",
+      "passage": "L1.P1",
+      "level": 1,
+      "question": "Why was the bus late?",
+      "keys": [
+        [
+          "tyre",
+          "tire",
+          "wheel"
+        ],
+        [
+          "flat",
+          "burst",
+          "puncture",
+          "punctured"
+        ]
+      ],
+      "model": "The bus was late because one tyre was flat.",
+      "hint": "Look for \"because\"."
+    },
+    {
+      "id": "wa.L1.P1.2",
+      "passage": "L1.P1",
+      "level": 1,
+      "question": "Who did Anu sit next to?",
+      "keys": [
+        [
+          "leela"
+        ]
+      ],
+      "model": "She sat next to her friend Leela.",
+      "hint": "Look at the end of the story."
+    },
+    {
+      "id": "wa.N2.T.1",
+      "passage": "N2.T",
+      "level": 2,
+      "question": "Why did Meena let Arul go first?",
+      "keys": [
+        [
+          "cry",
+          "crying",
+          "cried",
+          "upset",
+          "sad"
+        ]
+      ],
+      "model": "She let him go first because he was crying.",
+      "hint": "What was Arul doing at the start?"
+    },
+    {
+      "id": "wa.N2.T.2",
+      "passage": "N2.T",
+      "level": 2,
+      "question": "What did Uncle Selvam do when the rope slipped?",
+      "keys": [
+        [
+          "tied",
+          "tie",
+          "ties"
+        ],
+        [
+          "knot",
+          "stronger",
+          "tighter"
+        ]
+      ],
+      "model": "He tied a stronger knot.",
+      "hint": "Look at what happened after Meena shouted."
+    },
+    {
+      "id": "wa.N2.P1.1",
+      "passage": "N2.P1",
+      "level": 2,
+      "question": "Why would the kites not rise on Sunday?",
+      "keys": [
+        [
+          "wind"
+        ],
+        [
+          "weak",
+          "not strong",
+          "no",
+          "little",
+          "slow"
+        ]
+      ],
+      "model": "The kites would not rise because the wind was weak.",
+      "hint": "What was the wind like on Sunday?"
+    },
+    {
+      "id": "wa.N2.P1.2",
+      "passage": "N2.P1",
+      "level": 2,
+      "question": "What did the shopkeeper give the children?",
+      "keys": [
+        [
+          "string",
+          "reel"
+        ]
+      ],
+      "model": "He gave each of them a free reel of string.",
+      "hint": "Look at the end of the first part."
+    },
+    {
+      "id": "wa.L2.T.1",
+      "passage": "L2.T",
+      "level": 3,
+      "question": "How did Farid get children to bring books?",
+      "keys": [
+        [
+          "chart"
+        ],
+        [
+          "dot",
+          "dots",
+          "name",
+          "names"
+        ]
+      ],
+      "model": "He made a chart of names and gave a green dot for each book.",
+      "hint": "What did Farid stick near the door?"
+    },
+    {
+      "id": "wa.L2.T.2",
+      "passage": "L2.T",
+      "level": 3,
+      "question": "How many books were on the shelf by Friday?",
+      "keys": [
+        [
+          "forty-one",
+          "forty one",
+          "41"
+        ]
+      ],
+      "model": "By Friday the shelf held forty-one books.",
+      "hint": "Look for a number near the end of the second part."
+    },
+    {
+      "id": "wa.L2.P1.1",
+      "passage": "L2.P1",
+      "level": 3,
+      "question": "What was the new rule at Hill View School?",
+      "keys": [
+        [
+          "steel"
+        ],
+        [
+          "bottle",
+          "bottles"
+        ]
+      ],
+      "model": "Children had to bring a steel bottle from home.",
+      "hint": "Read what the head teacher did in April."
+    },
+    {
+      "id": "wa.L2.P1.2",
+      "passage": "L2.P1",
+      "level": 3,
+      "question": "Why did Mr Das have free time after a month?",
+      "keys": [
+        [
+          "half",
+          "less",
+          "fewer",
+          "fewer bottles",
+          "less litter"
+        ]
+      ],
+      "model": "He had less litter to collect: only half a sack a week.",
+      "hint": "How many sacks did he fill after a month?"
+    },
+    {
+      "id": "wa.N4.T.1",
+      "passage": "N4.T",
+      "level": 4,
+      "question": "Why were hundreds of passengers stuck at the station?",
+      "keys": [
+        [
+          "rain",
+          "flood",
+          "flooded"
+        ],
+        [
+          "train",
+          "trains",
+          "tracks"
+        ]
+      ],
+      "model": "Heavy rain flooded the tracks, so the trains stopped.",
+      "hint": "What happened one July morning?"
+    },
+    {
+      "id": "wa.N4.T.2",
+      "passage": "N4.T",
+      "level": 4,
+      "question": "Why did the stall earn less than on a normal day?",
+      "keys": [
+        [
+          "free",
+          "gave",
+          "without charging",
+          "no money"
+        ]
+      ],
+      "model": "Mr Iyer gave free tea to children and old people, and gave money back.",
+      "hint": "What did Mr Iyer give away?"
+    },
+    {
+      "id": "wa.N4.P1.1",
+      "passage": "N4.P1",
+      "level": 4,
+      "question": "Why did Suresh's papers reach the houses late?",
+      "keys": [
+        [
+          "walk",
+          "walked",
+          "walking",
+          "on foot"
+        ]
+      ],
+      "model": "He had to walk his round because the bicycle was stolen.",
+      "hint": "What happened to the bicycle?"
+    },
+    {
+      "id": "wa.N4.P1.2",
+      "passage": "N4.P1",
+      "level": 4,
+      "question": "How did Suresh keep his customers' trust?",
+      "keys": [
+        [
+          "note",
+          "notes",
+          "wrote",
+          "letter",
+          "explain",
+          "explained"
+        ]
+      ],
+      "model": "He wrote a note to each customer to explain the delay.",
+      "hint": "What did he write?"
+    },
+    {
+      "id": "wa.L3.T.1",
+      "passage": "L3.T",
+      "level": 5,
+      "question": "What did Selvi do to get help for the village?",
+      "keys": [
+        [
+          "letter",
+          "wrote",
+          "write",
+          "writing"
+        ]
+      ],
+      "model": "She wrote a letter with the measured walk to the district office.",
+      "hint": "What did she send to the district office?"
+    },
+    {
+      "id": "wa.L3.T.2",
+      "passage": "L3.T",
+      "level": 5,
+      "question": "How did Selvi's uncle show he was proud of her?",
+      "keys": [
+        [
+          "pen"
+        ]
+      ],
+      "model": "He carried the first pot and left a new pen on her schoolbag.",
+      "hint": "Look at the end of the third part."
+    },
+    {
+      "id": "wa.L3.P1.1",
+      "passage": "L3.P1",
+      "level": 5,
+      "question": "What did Mr Subbiah turn the old bus into?",
+      "keys": [
+        [
+          "library",
+          "books",
+          "reading"
+        ]
+      ],
+      "model": "He turned it into a library of books for the school.",
+      "hint": "What did he build inside it?"
+    },
+    {
+      "id": "wa.L3.P1.2",
+      "passage": "L3.P1",
+      "level": 5,
+      "question": "How did Mr Subbiah's wife's feelings change?",
+      "keys": [
+        [
+          "register",
+          "help",
+          "helps",
+          "keeps",
+          "now"
+        ]
+      ],
+      "model": "At first she objected, but now she keeps the borrowing register.",
+      "hint": "What does she do now?"
+    },
+    {
+      "id": "wa.N6.T.1",
+      "passage": "N6.T",
+      "level": 6,
+      "question": "According to the records, why did students come to the library in the evening?",
+      "keys": [
+        [
+          "internet",
+          "connection",
+          "wifi",
+          "wi-fi"
+        ],
+        [
+          "quiet",
+          "tables",
+          "table"
+        ]
+      ],
+      "model": "They came for the quiet tables and the free internet connection.",
+      "hint": "Read what the librarian's records suggest."
+    },
+    {
+      "id": "wa.N6.T.2",
+      "passage": "N6.T",
+      "level": 6,
+      "question": "What did the councillors fear about longer hours?",
+      "keys": [
+        [
+          "waste",
+          "wasting"
+        ],
+        [
+          "electricity",
+          "power"
+        ]
+      ],
+      "model": "They feared it would waste electricity.",
+      "hint": "Look at the first paragraph."
+    },
+    {
+      "id": "wa.N6.P1.1",
+      "passage": "N6.P1",
+      "level": 6,
+      "question": "Why were the shopkeepers against the cycle lane?",
+      "keys": [
+        [
+          "parking"
+        ],
+        [
+          "customer",
+          "customers",
+          "sales",
+          "business"
+        ]
+      ],
+      "model": "They feared fewer parking spaces would mean fewer customers.",
+      "hint": "Look at the first paragraph."
+    },
+    {
+      "id": "wa.N6.P1.2",
+      "passage": "N6.P1",
+      "level": 6,
+      "question": "Besides the lane, what made cycling feel safe after dark?",
+      "keys": [
+        [
+          "light",
+          "lights",
+          "lamps",
+          "street lights"
+        ]
+      ],
+      "model": "The council repaired the street lights.",
+      "hint": "Read what else the council did that year."
+    }
+  ]
+}

@@ -4,6 +4,7 @@
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
 import type { LongRecord } from "./reading/long-read.ts";
+import type { WrittenRecord } from "./reading/written.ts";
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
@@ -305,6 +306,16 @@ export class Learner {
   /** Store Listen and answer results, in order. Practice-only: the engine's ledger and estimates are untouched. */
   async recordListen(records: readonly ListenRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "listen_passage", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's written answers (right or not, and on which try; never the words), in order. */
+  writtenRecords(): WrittenRecord[] {
+    return this.events.flatMap((e) => (e.kind === "written_answer" ? [e.record] : []));
+  }
+
+  /** Store written-answer records. Practice-only. */
+  async recordWritten(records: readonly WrittenRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "written_answer", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's long reads, in order. */
@@ -972,6 +983,15 @@ export class Learner {
 
   async setSpeech(on: boolean): Promise<void> {
     await this.add({ kind: "settings", id: this.nextId(), at: this.clock(), speech: on });
+  }
+
+  /**
+   * A report that a daily-activity question looks wrong (Flag.tsx): which activity and question, and a reason chosen
+   * from a fixed list. Nothing typed by the child is stored.
+   */
+  async flagContent(stream: string, id: string, reason: "marked_wrong" | "confusing" | "other"): Promise<void> {
+    this.guard("reporting a question");
+    await this.add({ kind: "flag", id: this.nextId(), at: this.clock(), item: { id: `${stream}:${id}`, version: 0 }, note: reason });
   }
 
   async flag(item: Item, note: string): Promise<void> {
