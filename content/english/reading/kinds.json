@@ -1,6 +1,6 @@
 {
   "id": "english.reading.kinds",
-  "version": 3,
+  "version": 4,
   "status": "candidate",
   "review": "Written for OpenPath; checked by the house rules (format, answer lengths, word screen, speller) and by simulated learners.",
   "evidence": "practice-only",
@@ -3246,6 +3246,186 @@
       ]
     },
     {
+      "id": "kc6.alice",
+      "level": 6,
+      "kind": "classic",
+      "title": "A Mad Tea-Party",
+      "text": "Adapted from Alice's Adventures in Wonderland, by Lewis Carroll (1865).\n\nThere was a table set out under a tree in front of the house, and the March Hare and the Hatter were having tea at it. A Dormouse was sitting between them, fast asleep. The table was a large one, but the three were all crowded together at one corner of it.\n\n\"No room! No room!\" they cried out when they saw Alice coming.\n\n\"There's plenty of room!\" said Alice indignantly, and she sat down in a large arm-chair at one end of the table.\n\n\"Have some cake,\" the March Hare said in an encouraging tone.\n\nAlice looked all round the table, but there was nothing on it but tea. \"I don't see any cake,\" she remarked.\n\n\"There isn't any,\" said the March Hare.\n\n\"Then it wasn't very civil of you to offer it,\" said Alice angrily.\n\n\"It wasn't very civil of you to sit down without being invited,\" said the March Hare.\n\nThe Hatter opened his eyes very wide on hearing this; but all he said was, \"Why is a raven like a writing-desk?\"\n\n\"Come, we shall have some fun now!\" thought Alice. \"I'm glad they've begun asking riddles. I believe I can guess that,\" she added aloud.\n\n\"Do you mean that you think you can find out the answer to it?\" said the March Hare.\n\n\"Exactly so,\" said Alice.\n\n\"Then you should say what you mean,\" the March Hare went on.\n\n\"I do,\" Alice hastily replied; \"at least — at least I mean what I say — that's the same thing, you know.\"\n\n\"Not the same thing a bit!\" said the Hatter. \"You might just as well say that 'I see what I eat' is the same thing as 'I eat what I see'!\"",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "Why is \"No room! No room!\" funny?",
+          "right": "The table is large and nearly empty",
+          "wrong": [
+            "The table is truly full of guests",
+            "Alice is very large"
+          ],
+          "explain": "They are crowded at one corner of a big table."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Alice react to the March Hare's rudeness?",
+          "right": "She answers back angrily",
+          "wrong": [
+            "She leaves the party at once",
+            "She laughs and agrees"
+          ],
+          "explain": "\"It wasn't very civil of you to offer it,\" said Alice angrily."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"civil\" mean here?",
+          "right": "polite",
+          "wrong": [
+            "dangerous",
+            "noisy"
+          ],
+          "explain": "Alice says offering cake that isn't there is not polite."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What makes the Hatter's last speech clever?",
+          "right": "Swapping the words changes the meaning",
+          "wrong": [
+            "It rhymes just like a song",
+            "It uses very long, hard words"
+          ],
+          "explain": "\"I see what I eat\" and \"I eat what I see\" mean different things."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the writer mainly want readers to enjoy here?",
+          "right": "Playful nonsense and word games",
+          "wrong": [
+            "Facts about hares",
+            "Advice on table manners"
+          ],
+          "explain": "The scene is built on silly logic and wordplay."
+        }
+      ]
+    },
+    {
+      "id": "kc6.daffodils",
+      "level": 6,
+      "kind": "classic",
+      "title": "Daffodils",
+      "text": "by William Wordsworth (1807)\n\nI wandered lonely as a cloud\nThat floats on high o'er vales and hills,\nWhen all at once I saw a crowd,\nA host, of golden daffodils;\nBeside the lake, beneath the trees,\nFluttering and dancing in the breeze.\n\nContinuous as the stars that shine\nAnd twinkle on the milky way,\nThey stretched in never-ending line\nAlong the margin of a bay:\nTen thousand saw I at a glance,\nTossing their heads in sprightly dance.\n\nThe waves beside them danced; but they\nOut-did the sparkling waves in glee:\nA poet could not but be gay,\nIn such a jocund company:\nI gazed — and gazed — but little thought\nWhat wealth the show to me had brought:\n\nFor oft, when on my couch I lie\nIn vacant or in pensive mood,\nThey flash upon that inward eye\nWhich is the bliss of solitude;\nAnd then my heart with pleasure fills,\nAnd dances with the daffodils.",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "\"I wandered lonely as a cloud.\" What does this simile suggest?",
+          "right": "The poet was drifting alone, without purpose",
+          "wrong": [
+            "The poet was flying in an aeroplane",
+            "The poet was sad because it rained"
+          ],
+          "explain": "A single cloud floats slowly and alone."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The daffodils are \"tossing their heads in sprightly dance\". What is this called?",
+          "right": "Personification: flowers given human actions",
+          "wrong": [
+            "A pattern of rhyming lines",
+            "A list of facts about flowers"
+          ],
+          "explain": "Flowers cannot really dance; they are described like people."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "In this poem, \"gay\" and \"jocund\" both mean …",
+          "right": "happy and cheerful",
+          "wrong": [
+            "tired and slow",
+            "bright yellow"
+          ],
+          "explain": "These are older words for joyful."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What is \"that inward eye\"?",
+          "right": "The poet's memory or imagination",
+          "wrong": [
+            "A real third eye",
+            "A window in his house"
+          ],
+          "explain": "Later, lying alone, he sees the daffodils again in his mind."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the last stanza say about the daffodils?",
+          "right": "Their memory brings him joy long afterwards",
+          "wrong": [
+            "He wants to pick them all",
+            "He forgot them very quickly"
+          ],
+          "explain": "\"What wealth the show to me had brought\": joy whenever he remembers."
+        }
+      ]
+    },
+    {
+      "id": "kc6.gulliver",
+      "level": 6,
+      "kind": "classic",
+      "title": "Gulliver Wakes in Lilliput",
+      "text": "Adapted from Gulliver's Travels, by Jonathan Swift (1726). Gulliver, a ship's doctor, has swum ashore after a shipwreck and fallen asleep on the grass.\n\nWhen I woke, it was just daylight. I tried to rise, but was not able to stir. As I happened to lie on my back, I found my arms and legs were strongly fastened on each side to the ground, and my hair, which was long and thick, tied down in the same manner. I likewise felt several slender ropes across my body, from my armpits to my thighs. I could only look upwards; the sun began to grow hot, and the light hurt my eyes.\n\nI heard a confused noise about me, but in the posture I lay, could see nothing except the sky. In a little time I felt something alive moving on my left leg, which, advancing gently forward over my chest, came almost up to my chin. Bending my eyes downward as much as I could, I saw it to be a human creature not six inches high, with a bow and arrow in his hands and a quiver at his back. In the meantime I felt at least forty more of the same kind following the first.\n\nI was in the utmost astonishment, and roared so loud that they all ran back in a fright; and some of them, as I was afterwards told, were hurt by the falls they got by leaping from my sides upon the ground. However, they soon returned, and one of them, who ventured so far as to get a full sight of my face, lifting up his hands and eyes by way of admiration, cried out in a shrill but distinct voice words I could not understand.",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Why could Gulliver not get up?",
+          "right": "He was tied to the ground",
+          "wrong": [
+            "He was too tired",
+            "He had hurt his legs"
+          ],
+          "explain": "His arms, legs and hair were fastened to the ground."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How tall was the creature on his chest?",
+          "right": "not six inches",
+          "wrong": [
+            "about six feet",
+            "as tall as Gulliver"
+          ],
+          "explain": "\"A human creature not six inches high.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the little people run away?",
+          "right": "Gulliver's loud roar frightened them",
+          "wrong": [
+            "They heard a ship coming",
+            "The sun was too hot"
+          ],
+          "explain": "\"I roared so loud that they all ran back in a fright.\""
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why is it effective that Gulliver tells the story himself?",
+          "right": "We discover the little people as he does",
+          "wrong": [
+            "We learn what the tiny people think",
+            "It makes him seem very small"
+          ],
+          "explain": "He can only see the sky, so the surprise unfolds slowly."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"astonishment\" mean?",
+          "right": "great surprise",
+          "wrong": [
+            "great pain",
+            "great anger"
+          ],
+          "explain": "He was amazed to see tiny people."
+        }
+      ]
+    },
+    {
       "id": "kc6.jungle",
       "level": 6,
       "kind": "classic",
@@ -3364,6 +3544,66 @@
         }
       ],
       "source": "public domain"
+    },
+    {
+      "id": "kc6.oliver",
+      "level": 6,
+      "kind": "classic",
+      "title": "Oliver Asks for More",
+      "text": "Adapted from Oliver Twist, by Charles Dickens (1838). Oliver is a nine-year-old orphan in a workhouse, where poor children are given very little to eat.\n\nThe room in which the boys were fed was a large stone hall, with a copper at one end, out of which the master, dressed in an apron for the purpose, ladled the gruel at meal-times. Of this thin porridge each boy had one small bowl, and no more — except on festive occasions, when he had two ounces and a quarter of bread besides.\n\nThe bowls never wanted washing. The boys polished them with their spoons till they shone again; and when they had done this, they would sit staring at the copper with such eager eyes, as if they could have devoured the very bricks of which it was composed.\n\nOliver Twist and his companions suffered the tortures of slow hunger for three months. At last they held a council. Lots were cast who should walk up to the master after supper that evening and ask for more; and it fell to Oliver Twist.\n\nThe evening arrived; the boys took their places. The gruel was served out, and disappeared. The boys whispered to each other and winked at Oliver, while his next neighbours nudged him. Child as he was, he was desperate with hunger. He rose from the table, and advancing to the master, basin and spoon in hand, said, somewhat alarmed at his own boldness:\n\n\"Please, sir, I want some more.\"\n\nThe master was a stout, healthy man, but he turned very pale. He gazed in stupefied astonishment on the small rebel for some seconds. The assistants were paralysed with wonder; the boys with fear.\n\n\"What!\" said the master at length, in a faint voice.\n\n\"Please, sir,\" replied Oliver, \"I want some more.\"",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "Why did \"the bowls never want washing\"?",
+          "right": "The boys licked them completely clean",
+          "wrong": [
+            "The bowls were made of glass",
+            "The master washed them"
+          ],
+          "explain": "They polished them with their spoons because they were so hungry."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"as if they could have devoured the very bricks\" show?",
+          "right": "How terribly hungry the boys were",
+          "wrong": [
+            "That the copper was made of food",
+            "That the boys liked building"
+          ],
+          "explain": "The exaggeration shows extreme hunger."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How was Oliver chosen to ask?",
+          "right": "By drawing lots",
+          "wrong": [
+            "The master chose him",
+            "He was the oldest boy"
+          ],
+          "explain": "\"Lots were cast… and it fell to Oliver Twist.\""
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the writer call a hungry boy a \"small rebel\"?",
+          "right": "To mock how the master sees a simple request",
+          "wrong": [
+            "Because Oliver started a fight",
+            "Because Oliver ran away"
+          ],
+          "explain": "Asking for food is treated as a crime, which shows the master's cruelty."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why is \"Please, sir, I want some more\" repeated at the end?",
+          "right": "To show Oliver's quiet courage",
+          "wrong": [
+            "Because the master did not hear",
+            "To end with a joke"
+          ],
+          "explain": "He repeats his request even when everyone is shocked."
+        }
+      ]
     },
     {
       "id": "kc6.palanquin",
@@ -4204,6 +4444,146 @@
       ]
     },
     {
+      "id": "kc7.carol",
+      "level": 7,
+      "kind": "classic",
+      "title": "Scrooge",
+      "text": "Adapted from A Christmas Carol, by Charles Dickens (1843).\n\nOh! But he was a tight-fisted hand at the grindstone, Scrooge! A squeezing, wrenching, grasping, scraping, clutching, covetous old sinner! Hard and sharp as flint, from which no steel had ever struck out generous fire; secret, and self-contained, and solitary as an oyster. The cold within him froze his old features, nipped his pointed nose, made his eyes red and his thin lips blue. He carried his own low temperature always about with him; he iced his office in the summer, and did not thaw it one degree at Christmas.\n\nNobody ever stopped him in the street to say, with gladsome looks, \"My dear Scrooge, how are you? When will you come to see me?\" No children asked him what it was o'clock. Even the blind men's dogs appeared to know him, and when they saw him coming on, would tug their owners into doorways.\n\nOnce upon a time — of all the good days in the year, on Christmas Eve — old Scrooge sat busy in his counting-house. It was cold, bleak, biting weather, and the fog came pouring in at every chink and keyhole. The door of Scrooge's office was open, so that he might keep his eye upon his clerk, Bob Cratchit, who in a dismal little cell beyond was copying letters. Scrooge had a very small fire, but the clerk's fire was so very much smaller that it looked like one coal. He could not replenish it, for Scrooge kept the coal-box in his own room.\n\n\"A merry Christmas, uncle!\" cried a cheerful voice. It was Scrooge's nephew, who came in glowing with the cold and the rapid walk.\n\n\"Bah!\" said Scrooge. \"Humbug!\"\n\n\"Christmas a humbug, uncle! You don't mean that, I am sure?\"\n\n\"I do,\" said Scrooge. \"Merry Christmas! What right have you to be merry? You're poor enough.\"",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "structure",
+          "prompt": "Why does Dickens use a long list of words like \"squeezing, wrenching, grasping\"?",
+          "right": "To pile up how greedy and mean Scrooge is",
+          "wrong": [
+            "To show Scrooge exercises his hands",
+            "To describe the weather"
+          ],
+          "explain": "The heaped-up words make his meanness overwhelming."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"solitary as an oyster\" suggest?",
+          "right": "He keeps himself shut away from others",
+          "wrong": [
+            "He lives in a house by the sea",
+            "He loves to eat seafood"
+          ],
+          "explain": "An oyster is closed tight in its shell."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"He carried his own low temperature always about with him.\" What does this mean?",
+          "right": "His coldness of heart chills those near him",
+          "wrong": [
+            "He was often ill with a high fever",
+            "He kept ice cubes in his pocket"
+          ],
+          "explain": "His unkindness is described as a coldness he spreads."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does the clerk's one-coal fire show about Scrooge?",
+          "right": "He is mean even to the man who works for him",
+          "wrong": [
+            "Coal was not sold in the winter",
+            "The clerk did not feel the cold"
+          ],
+          "explain": "Scrooge keeps the coal-box and lets the clerk freeze."
+        },
+        {
+          "skill": "compare",
+          "prompt": "How is the nephew different from Scrooge?",
+          "right": "He is warm and cheerful",
+          "wrong": [
+            "He is even meaner",
+            "He is silent and shy"
+          ],
+          "explain": "He arrives \"glowing\" and wishes his uncle a merry Christmas."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "When Scrooge says \"Humbug!\", he means Christmas is …",
+          "right": "nonsense",
+          "wrong": [
+            "delicious",
+            "important"
+          ],
+          "explain": "Humbug means something false or silly."
+        }
+      ]
+    },
+    {
+      "id": "kc7.crusoe",
+      "level": 7,
+      "kind": "classic",
+      "title": "The Footprint",
+      "text": "Adapted from Robinson Crusoe, by Daniel Defoe (1719). Crusoe has lived alone on an island for many years, believing nobody else ever comes there.\n\nIt happened one day, about noon, going towards my boat, I was exceedingly surprised with the print of a man's bare foot on the shore, which was very plain to be seen in the sand. I stood like one thunderstruck, or as if I had seen a ghost. I listened, I looked round me, but I could hear nothing, nor see anything. I went up to a rising ground to look farther. I went up the shore and down the shore, but it was all one; I could see no other impression but that one. I went to it again to see if there were any more, and to observe if it might not be my fancy; but there was no room for that, for there was exactly the very print of a foot — toes, heel, and every part of a foot. How it came thither I knew not, nor could in the least imagine.\n\nAfter innumerable fluttering thoughts, like a man perfectly confused and out of myself, I came home to my fortification, not feeling, as we say, the ground I went on, but terrified to the last degree, looking behind me at every two or three steps, mistaking every bush and tree, and fancying every stump at a distance to be a man.\n\nNor is it possible to describe how many various shapes my frightened imagination represented things to me in; how many wild ideas were found every moment in my fancy, and what strange thoughts came into my head by the way.\n\nWhen I came to my castle, for so I think I called it ever after this, I fled into it like one pursued. I slept none that night. The farther I was from the occasion of my fright, the greater my fears were — which is something contrary to the nature of such things.",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "Why is one footprint so frightening to Crusoe?",
+          "right": "He thought he was alone on the island",
+          "wrong": [
+            "He is very afraid of the sea",
+            "The print was enormous in size"
+          ],
+          "explain": "After years alone, it means someone else has come."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"I stood like one thunderstruck\" mean?",
+          "right": "He was frozen with shock",
+          "wrong": [
+            "He was hit by lightning",
+            "He was soaked by rain"
+          ],
+          "explain": "Thunderstruck means too shocked to move."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did he check when he went back to the print?",
+          "right": "Whether there were more prints or he had imagined it",
+          "wrong": [
+            "Whether the tide had washed it away",
+            "Whether it matched his own boots"
+          ],
+          "explain": "He looked for more and checked it was not \"my fancy\"."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "How does telling the story in the first person help here?",
+          "right": "We share his panic from inside his mind",
+          "wrong": [
+            "We learn who made the footprint",
+            "We see the island from the sky"
+          ],
+          "explain": "His racing thoughts and fears are told directly."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"fancying every stump at a distance to be a man\" show?",
+          "right": "Fear was making him imagine danger everywhere",
+          "wrong": [
+            "There were many men hiding nearby",
+            "His eyesight had become very poor"
+          ],
+          "explain": "His frightened imagination turns ordinary things into threats."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What is unusual about his fear, as he says at the end?",
+          "right": "It grew stronger the farther he was from the print",
+          "wrong": [
+            "It vanished as soon as he was home",
+            "He laughed about it the next day"
+          ],
+          "explain": "\"The farther I was… the greater my fears were.\""
+        }
+      ]
+    },
+    {
       "id": "kc7.dance",
       "level": 7,
       "kind": "classic",
@@ -4272,6 +4652,136 @@
         }
       ],
       "source": "public domain"
+    },
+    {
+      "id": "kc7.holmes",
+      "level": 7,
+      "kind": "classic",
+      "title": "You Have Been in Afghanistan",
+      "text": "Adapted from A Study in Scarlet, by Arthur Conan Doyle (1887). Dr Watson has just met Sherlock Holmes, who greeted him with: \"You have been in Afghanistan, I perceive.\" Later Watson asks how Holmes knew.\n\n\"You appeared to be surprised when I told you, on our first meeting, that you had come from Afghanistan.\"\n\n\"You were told, no doubt.\"\n\n\"Nothing of the sort. I knew you came from Afghanistan. From long habit the train of thoughts ran so swiftly through my mind that I arrived at the conclusion without being conscious of the steps between. There were such steps, however. The train of reasoning ran: 'Here is a gentleman of a medical type, but with the air of a military man. Clearly an army doctor, then. He has just come from the tropics, for his face is dark, and that is not the natural colour of his skin, for his wrists are fair. He has undergone hardship and sickness, as his tired face says clearly. His left arm has been injured: he holds it in a stiff and unnatural manner. Where in the tropics could an English army doctor have seen much hardship and got his arm hurt? Clearly in Afghanistan.' The whole train of thought did not occupy a second. I then remarked that you came from Afghanistan, and you were astonished.\"\n\n\"It is simple enough as you explain it,\" I said, smiling.\n\nHolmes looked a little put out. \"That is the way with all explanations,\" he said. \"Once you see how a thing is done, it seems obvious. But observing is not the same as seeing. You see, Watson, but you do not observe. The difference is clear. For example, you have often seen the steps which lead up from the hall to this room.\"\n\n\"Frequently.\"\n\n\"How often?\"\n\n\"Well, some hundreds of times.\"\n\n\"Then how many are there?\"\n\n\"How many? I don't know.\"\n\n\"Quite so! You have not observed. And yet you have seen. That is just my point. Now, I know that there are seventeen steps, because I have both seen and observed.\"",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "How did Holmes know Watson had been in the tropics?",
+          "right": "His face was tanned but his wrists were pale",
+          "wrong": [
+            "Watson had told him so before",
+            "Watson was carrying a map"
+          ],
+          "explain": "Dark face, fair wrists: the tan came from a hot country."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which clue told Holmes that Watson was an army doctor?",
+          "right": "He looked medical but had a military air",
+          "wrong": [
+            "His left arm was held stiffly",
+            "His face looked very tired"
+          ],
+          "explain": "A medical type with a military air must be an army doctor."
+        },
+        {
+          "skill": "compare",
+          "prompt": "What is the difference between seeing and observing, according to Holmes?",
+          "right": "Observing means noticing and remembering details",
+          "wrong": [
+            "Seeing is something done with glasses",
+            "There is no real difference at all"
+          ],
+          "explain": "Watson has seen the steps hundreds of times but cannot say how many."
+        },
+        {
+          "skill": "character",
+          "prompt": "Why does Holmes look \"a little put out\"?",
+          "right": "He dislikes being called simple",
+          "wrong": [
+            "He has hurt his arm again",
+            "He has lost count of the steps"
+          ],
+          "explain": "Watson says it is \"simple enough\", which annoys him."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does Holmes use the example of the steps?",
+          "right": "To prove his point with something Watson knows",
+          "wrong": [
+            "To ask Watson to count them now",
+            "To show the house is old"
+          ],
+          "explain": "It shows plainly that Watson has seen without observing."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"perceive\" mean in \"I perceive\"?",
+          "right": "notice or understand",
+          "wrong": [
+            "forget about",
+            "imagine wildly"
+          ],
+          "explain": "Holmes means he can tell from what he notices."
+        }
+      ]
+    },
+    {
+      "id": "kc7.mind",
+      "level": 7,
+      "kind": "classic",
+      "title": "Where the Mind Is Without Fear",
+      "text": "by Rabindranath Tagore, from Gitanjali (1912)\n\nWhere the mind is without fear and the head is held high;\nWhere knowledge is free;\nWhere the world has not been broken up into fragments by narrow domestic walls;\nWhere words come out from the depth of truth;\nWhere tireless striving stretches its arms towards perfection;\nWhere the clear stream of reason has not lost its way into the dreary desert sand of dead habit;\nWhere the mind is led forward by thee into ever-widening thought and action —\nInto that heaven of freedom, my Father, let my country awake.",
+      "source": "public domain",
+      "questions": [
+        {
+          "skill": "structure",
+          "prompt": "How is the poem built?",
+          "right": "A list of \"Where…\" lines leading to one wish",
+          "wrong": [
+            "Four stanzas that all rhyme",
+            "A story with several characters"
+          ],
+          "explain": "Each line begins \"Where\", and the last line gives the wish."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What are \"narrow domestic walls\"?",
+          "right": "Divisions between groups of people",
+          "wrong": [
+            "The walls of a very small house",
+            "The walls around a garden"
+          ],
+          "explain": "They break the world \"into fragments\": they divide people."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"the dreary desert sand of dead habit\" stand for?",
+          "right": "Thinking that has dried up through old habits",
+          "wrong": [
+            "A real desert somewhere in India",
+            "The sand on a sunny beach"
+          ],
+          "explain": "Reason, like a stream, can be lost in habit, like water in sand."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the poet wish for his country?",
+          "right": "A free, truthful and thoughtful nation",
+          "wrong": [
+            "A larger and richer army",
+            "A return to the old ways"
+          ],
+          "explain": "\"Into that heaven of freedom… let my country awake.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"striving\" mean?",
+          "right": "trying very hard",
+          "wrong": [
+            "sleeping deeply",
+            "travelling far"
+          ],
+          "explain": "Tireless striving: working hard without stopping."
+        }
+      ]
     },
     {
       "id": "kc7.oak",
