@@ -5869,6 +5869,790 @@
           "explain": "It follows the trip from dusk, through night, to morning."
         }
       ]
+    },
+    {
+      "id": "kt1.notice3",
+      "level": 1,
+      "kind": "notice",
+      "title": "Bring a Bottle",
+      "text": "Sports Day is on Friday.\n\nPlease bring:\n- a water bottle\n- a cap\n- your white shoes\n\nWe start at 8 o'clock.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When is Sports Day?",
+          "right": "Friday",
+          "wrong": [
+            "Monday",
+            "Sunday"
+          ],
+          "explain": "\"Sports Day is on Friday.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you wear on your head?",
+          "right": "a cap",
+          "wrong": [
+            "a scarf",
+            "a helmet"
+          ],
+          "explain": "The list says a cap."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What time does it start?",
+          "right": "8 o'clock",
+          "wrong": [
+            "10 o'clock",
+            "2 o'clock"
+          ],
+          "explain": "\"We start at 8 o'clock.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why was this notice written?",
+          "right": "to tell children what to bring",
+          "wrong": [
+            "to sell new shoes to children",
+            "to tell a story about a race"
+          ],
+          "explain": "It lists things to bring on Sports Day."
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem4",
+      "level": 1,
+      "kind": "poem",
+      "title": "My Kite",
+      "text": "My kite is red,\nmy kite is high,\nit dances with\nthe birds and sky.\n\nThe wind is strong,\nI hold on tight,\nI smile and wave\nat my red kite.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is the kite?",
+          "right": "red",
+          "wrong": [
+            "blue",
+            "yellow"
+          ],
+          "explain": "\"My kite is red.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What does the kite dance with?",
+          "right": "the birds and sky",
+          "wrong": [
+            "the trees and grass",
+            "the cars and road"
+          ],
+          "explain": "\"It dances with the birds and sky.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the child feel?",
+          "right": "happy",
+          "wrong": [
+            "angry",
+            "sleepy"
+          ],
+          "explain": "The child smiles and waves."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"It dances\" means the kite...",
+          "right": "moves about in the wind",
+          "wrong": [
+            "is very old",
+            "has fallen down"
+          ],
+          "explain": "A kite cannot really dance; it moves about like a dancer."
+        }
+      ]
+    },
+    {
+      "id": "kt1.letter3",
+      "level": 1,
+      "kind": "letter",
+      "title": "Thank You, Aunty",
+      "text": "Dear Aunty Meena,\n\nThank you for the storybook.\nI read it every night.\nMy favourite part is the funny frog.\n\nLove,\nKavi",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did Aunty give Kavi?",
+          "right": "a storybook",
+          "wrong": [
+            "a frog",
+            "a toy car"
+          ],
+          "explain": "\"Thank you for the storybook.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When does Kavi read it?",
+          "right": "every night",
+          "wrong": [
+            "every morning",
+            "on Sundays"
+          ],
+          "explain": "\"I read it every night.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What is Kavi's favourite part?",
+          "right": "the funny frog",
+          "wrong": [
+            "the big tree",
+            "the sad king"
+          ],
+          "explain": "\"My favourite part is the funny frog.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Kavi write?",
+          "right": "to say thank you",
+          "wrong": [
+            "to ask for money",
+            "to invite Aunty"
+          ],
+          "explain": "The letter starts \"Thank you for the storybook.\""
+        }
+      ]
+    },
+    {
+      "id": "kt1.instructions3",
+      "level": 1,
+      "kind": "instructions",
+      "title": "Plant a Seed",
+      "text": "1. Fill a cup with soil.\n2. Push a seed into the soil.\n3. Pour a little water.\n4. Keep the cup in the sun.\n5. Wait and watch it grow!",
+      "questions": [
+        {
+          "skill": "sequence",
+          "prompt": "What do you do first?",
+          "right": "fill a cup with soil",
+          "wrong": [
+            "pour water",
+            "wait and watch"
+          ],
+          "explain": "Step 1 is to fill a cup with soil."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where should the cup be kept?",
+          "right": "in the sun",
+          "wrong": [
+            "in a box",
+            "under the bed"
+          ],
+          "explain": "Step 4 says keep it in the sun."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How much water do you pour?",
+          "right": "a little",
+          "wrong": [
+            "a full bucket",
+            "none at all"
+          ],
+          "explain": "\"Pour a little water.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why are the steps numbered?",
+          "right": "to show their order",
+          "wrong": [
+            "to count the seeds",
+            "to make it look big"
+          ],
+          "explain": "Numbers tell you which step comes first."
+        }
+      ]
+    },
+    {
+      "id": "kt1.chart3",
+      "level": 1,
+      "kind": "chart",
+      "title": "Our Favourite Fruits",
+      "text": "Fruit      Children\nMango      9\nBanana     5\nApple      3\n\nMost children like mangoes.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many children like bananas?",
+          "right": "5",
+          "wrong": [
+            "9",
+            "3"
+          ],
+          "explain": "Banana: 5."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which fruit do most children like?",
+          "right": "mango",
+          "wrong": [
+            "apple",
+            "banana"
+          ],
+          "explain": "Mango has the most: 9."
+        },
+        {
+          "skill": "compare",
+          "prompt": "Which fruit has the fewest children?",
+          "right": "apple",
+          "wrong": [
+            "banana",
+            "mango"
+          ],
+          "explain": "Apple has 3, the smallest number."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Where do you look to find a number?",
+          "right": "next to the fruit's name",
+          "wrong": [
+            "at the title",
+            "at the last word"
+          ],
+          "explain": "Each fruit's number is on the same line."
+        }
+      ]
+    },
+    {
+      "id": "kt1.notice4",
+      "level": 1,
+      "kind": "notice",
+      "title": "Library Is Closed",
+      "text": "The library is closed on Monday.\n\nThe floor is being painted.\n\nIt opens again on Tuesday.\nPlease return books then.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When is the library closed?",
+          "right": "Monday",
+          "wrong": [
+            "Tuesday",
+            "Friday"
+          ],
+          "explain": "\"The library is closed on Monday.\""
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why is it closed?",
+          "right": "the floor is being painted",
+          "wrong": [
+            "the books are lost",
+            "it is a holiday"
+          ],
+          "explain": "\"The floor is being painted.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When can you return books?",
+          "right": "Tuesday",
+          "wrong": [
+            "Monday",
+            "Sunday"
+          ],
+          "explain": "\"Please return books then\" — on Tuesday."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Who is this notice for?",
+          "right": "people who use the library",
+          "wrong": [
+            "people who paint houses",
+            "people who sell fruit"
+          ],
+          "explain": "It tells library users when it is open."
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem5",
+      "level": 1,
+      "kind": "poem",
+      "title": "The Little Frog",
+      "text": "A little frog\nsat on a log,\nhe gave a hop\nand then a plop!\n\nInto the pond\nhe swam away,\nhe'll be back\nto hop all day.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where did the frog sit?",
+          "right": "on a log",
+          "wrong": [
+            "on a rock",
+            "on a leaf"
+          ],
+          "explain": "\"sat on a log\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What did the frog do after the hop?",
+          "right": "went plop into the pond",
+          "wrong": [
+            "sat on a log",
+            "slept on the grass"
+          ],
+          "explain": "\"he gave a hop and then a plop!\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "\"Plop\" is the sound of...",
+          "right": "something falling into water",
+          "wrong": [
+            "a bird singing in a tree",
+            "a door closing in the wind"
+          ],
+          "explain": "The frog falls into the pond: plop!"
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Which words sound the same at the end?",
+          "right": "frog and log",
+          "wrong": [
+            "frog and pond",
+            "hop and away"
+          ],
+          "explain": "Frog and log rhyme."
+        }
+      ]
+    },
+    {
+      "id": "kt1.advert",
+      "level": 1,
+      "kind": "advert",
+      "title": "Fresh Bread",
+      "text": "FRESH BREAD!\n\nHot from the oven every morning.\nSoft buns, small loaves, sweet rolls.\n\nRavi's Bakery, near the bus stop.\nOpen 7 am.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What does the bakery sell?",
+          "right": "bread and buns",
+          "wrong": [
+            "shoes and bags",
+            "books and pens"
+          ],
+          "explain": "Soft buns, small loaves, sweet rolls."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where is the bakery?",
+          "right": "near the bus stop",
+          "wrong": [
+            "near the school",
+            "near the river"
+          ],
+          "explain": "\"near the bus stop\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When does it open?",
+          "right": "7 am",
+          "wrong": [
+            "7 pm",
+            "12 noon"
+          ],
+          "explain": "\"Open 7 am.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why was this written?",
+          "right": "to get people to buy bread",
+          "wrong": [
+            "to teach people how to bake",
+            "to tell a story about Ravi"
+          ],
+          "explain": "An advert tries to make people buy."
+        }
+      ]
+    },
+    {
+      "id": "kt2.notice3",
+      "level": 2,
+      "kind": "notice",
+      "title": "Lost Water Bottle",
+      "text": "LOST\n\nA blue water bottle with a yellow cap.\nIt has the name RIYA on it.\nI lost it near the slide on Thursday.\n\nIf you find it, please give it to Class 2B.\nThank you!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is the cap?",
+          "right": "yellow",
+          "wrong": [
+            "blue",
+            "red"
+          ],
+          "explain": "\"a yellow cap\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where was it lost?",
+          "right": "near the slide",
+          "wrong": [
+            "in the classroom",
+            "at the gate"
+          ],
+          "explain": "\"near the slide\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Whose bottle is it?",
+          "right": "Riya's",
+          "wrong": [
+            "Class 2B's teacher's",
+            "the slide's"
+          ],
+          "explain": "It has the name RIYA on it."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the writer want?",
+          "right": "to get the bottle back",
+          "wrong": [
+            "to sell a bottle",
+            "to buy a cap"
+          ],
+          "explain": "\"If you find it, please give it to Class 2B.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem4",
+      "level": 2,
+      "kind": "poem",
+      "title": "Morning Market",
+      "text": "Baskets of tomatoes,\nred as a ball,\npiles of green spinach\nby the old wall.\n\nThe flower seller calls,\nthe milkman's bell rings,\nthe market wakes up\nand everyone sings.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What is red as a ball?",
+          "right": "tomatoes",
+          "wrong": [
+            "spinach",
+            "flowers"
+          ],
+          "explain": "\"Baskets of tomatoes, red as a ball\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where is the spinach?",
+          "right": "by the old wall",
+          "wrong": [
+            "in a basket",
+            "on a bicycle"
+          ],
+          "explain": "\"piles of green spinach by the old wall\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"Red as a ball\" compares the tomatoes to a ball because both are...",
+          "right": "round and red",
+          "wrong": [
+            "soft and wet",
+            "big and heavy"
+          ],
+          "explain": "It is a simile: the tomatoes are red and round like a ball."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem about?",
+          "right": "a busy morning market",
+          "wrong": [
+            "a quiet night at home",
+            "a long school day"
+          ],
+          "explain": "It describes sellers and sounds in the morning market."
+        }
+      ]
+    },
+    {
+      "id": "kt2.letter3",
+      "level": 2,
+      "kind": "letter",
+      "title": "A Letter from Camp",
+      "text": "Dear Amma and Appa,\n\nCamp is fun! Yesterday we walked up a small hill and saw a waterfall. At night we sat around a fire and sang songs.\n\nThe food is good, but I miss your dosas. I sleep in a tent with three friends.\n\nSee you on Sunday!\nLove,\nNila",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did Nila see on the hill?",
+          "right": "a waterfall",
+          "wrong": [
+            "a tiger",
+            "a train"
+          ],
+          "explain": "\"saw a waterfall\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where does Nila sleep?",
+          "right": "in a tent",
+          "wrong": [
+            "in a hotel",
+            "at home"
+          ],
+          "explain": "\"I sleep in a tent\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What does Nila miss?",
+          "right": "Amma's dosas",
+          "wrong": [
+            "her school books",
+            "the waterfall"
+          ],
+          "explain": "\"I miss your dosas.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "When will Nila come home?",
+          "right": "on Sunday",
+          "wrong": [
+            "tomorrow",
+            "next month"
+          ],
+          "explain": "\"See you on Sunday!\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.timetable2",
+      "level": 2,
+      "kind": "timetable",
+      "title": "Swimming Week",
+      "text": "Day        Time       Group\nMonday     4 pm       Beginners\nWednesday  5 pm       Floaters\nFriday     4 pm       Divers\n\nBring a towel and a cap.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When do Beginners swim?",
+          "right": "Monday at 4 pm",
+          "wrong": [
+            "Friday at 4 pm",
+            "Wednesday at 5 pm"
+          ],
+          "explain": "Monday, 4 pm, Beginners."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which group swims on Wednesday?",
+          "right": "Floaters",
+          "wrong": [
+            "Divers",
+            "Beginners"
+          ],
+          "explain": "Wednesday: Floaters."
+        },
+        {
+          "skill": "compare",
+          "prompt": "Which two groups swim at the same time?",
+          "right": "Beginners and Divers",
+          "wrong": [
+            "Floaters and Divers",
+            "Beginners and Floaters"
+          ],
+          "explain": "Both are at 4 pm."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you bring?",
+          "right": "a towel and a cap",
+          "wrong": [
+            "a book and a pen",
+            "a ball and a bat"
+          ],
+          "explain": "\"Bring a towel and a cap.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.instructions2",
+      "level": 2,
+      "kind": "instructions",
+      "title": "Make Lemon Water",
+      "text": "You need: one lemon, a glass of water, two spoons of sugar.\n\n1. Cut the lemon in half.\n2. Squeeze the juice into the glass.\n3. Add the sugar.\n4. Stir until the sugar is gone.\n5. Drink it cold!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How much sugar do you need?",
+          "right": "two spoons",
+          "wrong": [
+            "one cup",
+            "five spoons"
+          ],
+          "explain": "\"two spoons of sugar\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do after squeezing the juice?",
+          "right": "add the sugar",
+          "wrong": [
+            "cut the lemon",
+            "drink it"
+          ],
+          "explain": "Step 3 comes after step 2."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "\"Stir\" means to...",
+          "right": "mix it round with a spoon",
+          "wrong": [
+            "pour it out",
+            "put it in the sun"
+          ],
+          "explain": "You stir until the sugar is gone, mixing it in."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why are these written?",
+          "right": "to show how to make a drink",
+          "wrong": [
+            "to sell lemons at a shop",
+            "to tell a story about lemons"
+          ],
+          "explain": "They are steps for making lemon water."
+        }
+      ]
+    },
+    {
+      "id": "kt2.article2b",
+      "level": 2,
+      "kind": "article",
+      "title": "Why Do Leaves Fall?",
+      "text": "In some places, trees lose their leaves before the cold months. The days get shorter and there is less sunlight. Trees cannot make much food from sunlight then, so they drop their leaves to save water and energy.\n\nIn spring, the days grow longer, and new green leaves grow again.",
+      "questions": [
+        {
+          "skill": "cause",
+          "prompt": "Why do some trees drop their leaves?",
+          "right": "to save water and energy",
+          "wrong": [
+            "because birds eat them",
+            "because they are too heavy"
+          ],
+          "explain": "\"They drop their leaves to save water and energy.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What happens to the days before the cold months?",
+          "right": "they get shorter",
+          "wrong": [
+            "they get longer",
+            "they stay the same"
+          ],
+          "explain": "\"The days get shorter.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "When do new leaves grow?",
+          "right": "in spring",
+          "wrong": [
+            "in winter",
+            "at night"
+          ],
+          "explain": "\"In spring ... new green leaves grow again.\""
+        },
+        {
+          "skill": "summary",
+          "prompt": "What is the article mostly about?",
+          "right": "why some trees lose and regrow leaves",
+          "wrong": [
+            "how to plant a tree in a pot",
+            "the bright colours of flowers"
+          ],
+          "explain": "It explains why leaves fall and grow back."
+        }
+      ]
+    },
+    {
+      "id": "kt2.diary2",
+      "level": 2,
+      "kind": "diary",
+      "title": "Rainy Saturday",
+      "text": "Saturday\n\nIt rained all day today. I could not go to the park. First I was bored. Then Appa and I made paper boats. We sailed them in the puddle near our gate. Mine went the farthest! Rainy days can be fun after all.",
+      "questions": [
+        {
+          "skill": "cause",
+          "prompt": "Why could the writer not go to the park?",
+          "right": "it rained all day",
+          "wrong": [
+            "the park was closed",
+            "Appa was ill"
+          ],
+          "explain": "\"It rained all day today.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did they make?",
+          "right": "paper boats",
+          "wrong": [
+            "paper kites",
+            "small cakes"
+          ],
+          "explain": "\"Appa and I made paper boats.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did the writer feel at first?",
+          "right": "bored",
+          "wrong": [
+            "excited",
+            "scared"
+          ],
+          "explain": "\"First I was bored.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What did the writer learn?",
+          "right": "rainy days can be fun",
+          "wrong": [
+            "boats are expensive",
+            "parks are boring"
+          ],
+          "explain": "\"Rainy days can be fun after all.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.advert2",
+      "level": 2,
+      "kind": "advert",
+      "title": "Summer Art Camp",
+      "text": "SUMMER ART CAMP\n\nPaint, draw and make clay animals!\nFor children aged 6 to 9.\nEvery morning in May, 9 to 11.\nOnly 50 rupees a day.\n\nCall Mrs Das: 98765 43210",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who is the camp for?",
+          "right": "children aged 6 to 9",
+          "wrong": [
+            "grown-ups who paint",
+            "babies under two"
+          ],
+          "explain": "\"For children aged 6 to 9.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What can you make with clay?",
+          "right": "animals",
+          "wrong": [
+            "cakes",
+            "houses"
+          ],
+          "explain": "\"make clay animals\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "How much does it cost each day?",
+          "right": "50 rupees",
+          "wrong": [
+            "5 rupees",
+            "500 rupees"
+          ],
+          "explain": "\"Only 50 rupees a day.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Mrs Das write this?",
+          "right": "to get children to join the camp",
+          "wrong": [
+            "to sell paint and clay",
+            "to find a lost dog nearby"
+          ],
+          "explain": "An advert asks people to join or buy."
+        }
+      ]
     }
   ]
 }

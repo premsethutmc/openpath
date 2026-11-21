@@ -642,8 +642,8 @@ function SyllabusCard({ onOpen, school, learner }: { onOpen: () => void; school?
         </h2>
         <p>What the board lists for this class, and where to practise each part here.</p>
         {mine && (
-          <p className="small" data-syllabus-practice={`${mine.practised}/${mine.total}`}>
-            {mine.practised} of {mine.total} lines practised{mine.notYet.length ? ` · next: ${mine.notYet[0].text}` : " · every line practised"}
+          <p className="small" data-syllabus-practice={`${mine.secure}/${mine.practised}/${mine.total}`}>
+            {mine.secure} secure · {mine.practised - mine.secure} practising · {mine.total - mine.practised} not started{mine.notYet.length ? ` · next: ${mine.notYet[0].text}` : ""}
           </p>
         )}
         <button type="button" className="secondary" onClick={onOpen}>
