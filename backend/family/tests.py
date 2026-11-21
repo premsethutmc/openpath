@@ -310,3 +310,18 @@ class LedgerTests(FamilyTestCase):
         self.append(client, meera, 0, event(0))
         client.delete(f"/api/pupils/{arun}/")
         self.assertEqual(list(PupilEvent.objects.values_list("pupil_id", flat=True)), [Pupil.objects.get().pk])
+
+
+class TamilAIReviewItemsTests(TestCase):
+    """tamil-ai-review@1: what would be sent (no provider is called): each question once across both boards, with its key."""
+
+    def test_items_are_unique_and_keyed(self):
+        from family.management.commands import tamil_ai_review as tar
+
+        qs, texts = tar.items()
+        self.assertGreater(len(qs), 1000)
+        self.assertGreater(len(texts), 100)
+        self.assertEqual(len({(p, pr, tuple(sorted(o)), a) for _, p, pr, o, a in qs}), len(qs))
+        qid, _, _, options, answer = qs[0]
+        opts, key = tar.lettered(qid, options, answer)
+        self.assertEqual(opts["ABCDEF".index(key)], answer)

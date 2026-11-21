@@ -51,6 +51,11 @@ fi
 if [ "${OPENPATH_CONTENT_AI_REVIEW:-0}" = 1 ]; then
     (python manage.py content_ai_review || echo "content-ai-review failed") &
 fi
+
+# tamil-ai-review@1: the Tamil course checked once by the AI reader, in the background (see the command)
+if [ "${OPENPATH_TAMIL_AI_REVIEW:-0}" = 1 ]; then
+    (python manage.py tamil_ai_review || echo "tamil-ai-review failed") &
+fi
 # The grader bundle decides credit: refuse to start unless it is exactly the one its manifest records and Node can run it.
 python -c 'import django,os;django.setup()
 from family import kernel_grader as k
