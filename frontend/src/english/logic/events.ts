@@ -8,6 +8,7 @@
  */
 import type { LongRecord } from "./reading/long-read.ts";
 import type { KindRecord } from "./reading/kinds.ts";
+import type { SoundRecord } from "./sounds/sounds.ts";
 import type { StudyRecord } from "./study/study.ts";
 import type { WrittenRecord } from "./reading/written.ts";
 import type { VocabRecord } from "./vocabulary/size-check.ts";
@@ -473,6 +474,13 @@ export interface LongReadEvent {
   record: LongRecord;
 }
 /** A kind of text (logic/reading/kinds): one poem, notice, letter, pair of texts and so on, read and its questions answered. Practice-only. */
+/** Sounds that are easy to mix up (logic/sounds): one sitting on one pair of sounds. Practice-only. */
+export interface SoundsEvent {
+  kind: "sounds";
+  id: string;
+  at: string;
+  record: SoundRecord;
+}
 export interface TextReadEvent {
   kind: "text_read";
   id: string;
@@ -493,7 +501,7 @@ export interface ListenPassageEvent {
   record: ListenRecord;
 }
 
-export type AppEvent = StudyEvent | TextReadEvent | WrittenAnswerEvent | LongReadEvent | FirstWordsEvent | GuidedTaskEvent | ListenPassageEvent | GrammarUseEvent | LevelCheckEvent | ReadingEvent | WordLearnEvent | DictationEvent | VocabEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
+export type AppEvent = SoundsEvent | StudyEvent | TextReadEvent | WrittenAnswerEvent | LongReadEvent | FirstWordsEvent | GuidedTaskEvent | ListenPassageEvent | GrammarUseEvent | LevelCheckEvent | ReadingEvent | WordLearnEvent | DictationEvent | VocabEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 /**
  * Reading comprehension course (logic/reading): one step of a unit — a lesson finished, a question shown, a hint, a
  * practice answer, a marked fresh check. Practice-only, like spelling: never evidence for the engine.
@@ -513,7 +521,7 @@ const LEDGER_KINDS = new Set(["evidence", "proposal", "qualification", "revoke",
 export const isLedgerEvent = (e: AppEvent): e is LedgerEvent => LEDGER_KINDS.has(e.kind);
 export const isEvidence = (e: AppEvent): e is EvidenceEvent => e.kind === "evidence";
 
-const KINDS = new Set(["study", "text_read", "first_words", "guided_task", "profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay", "vocab", "word_learn", "dictation", "reading", "level_check", "grammar_use", "listen_passage", "long_read", "written_answer"]);
+const KINDS = new Set(["sounds", "study", "text_read", "first_words", "guided_task", "profile", "session", "session_end", "lesson", "attempt", "settings", "preferences", "flag", "rating", "note", "trace", "evidence", "presented", "hint", "assisted_response", "intervention", "spell_session", "spell_answer", "spell_end", "word_list", "word_list_delete", "book", "book_review", "book_answer", "book_delete", "essay", "vocab", "word_learn", "dictation", "reading", "level_check", "grammar_use", "listen_passage", "long_read", "written_answer"]);
 const ITEM_KINDS = new Set(["evidence", "attempt", "presented", "hint", "assisted_response"]);
 const SESSION_KINDS = new Set(["evidence", "attempt", "session", "session_end", "presented", "hint", "assisted_response", "intervention", "rating", "spell_session", "spell_answer", "spell_end", "essay"]);
 const ESSAY_RECORDS = new Set(["submission", "analysis", "diagnostic", "journey", "rewrite"]);
@@ -537,7 +545,7 @@ export function eventProblem(e: unknown): string | null {
   }
   if (x.kind === "book_review" && (typeof x.book !== "string" || typeof x.fingerprint !== "string" || !Array.isArray(x.approved) || !(x.approved as unknown[]).every((a) => typeof a === "string"))) return `event ${x.id} is a book review without its approvals`;
   if (x.kind === "book_answer" && (typeof x.book !== "string" || typeof x.question !== "string" || typeof x.correct !== "boolean")) return `event ${x.id} is a book answer without its question`;
-  if ((x.kind === "word_learn" || x.kind === "dictation" || x.kind === "level_check" || x.kind === "grammar_use" || x.kind === "listen_passage" || x.kind === "long_read" || x.kind === "text_read" || x.kind === "study" || x.kind === "written_answer" || x.kind === "guided_task" || x.kind === "first_words") && typeof (x.record as { type?: unknown } | undefined)?.type !== "string") return `event ${x.id} is a ${x.kind === "dictation" ? "dictation" : x.kind === "level_check" ? "level-check" : x.kind === "grammar_use" ? "grammar" : x.kind === "listen_passage" ? "listening" : "new-words"} record without its type`;
+  if ((x.kind === "word_learn" || x.kind === "dictation" || x.kind === "level_check" || x.kind === "grammar_use" || x.kind === "listen_passage" || x.kind === "long_read" || x.kind === "text_read" || x.kind === "sounds" || x.kind === "study" || x.kind === "written_answer" || x.kind === "guided_task" || x.kind === "first_words") && typeof (x.record as { type?: unknown } | undefined)?.type !== "string") return `event ${x.id} is a ${x.kind === "dictation" ? "dictation" : x.kind === "level_check" ? "level-check" : x.kind === "grammar_use" ? "grammar" : x.kind === "listen_passage" ? "listening" : "new-words"} record without its type`;
   if (x.kind === "vocab" && typeof (x.record as { type?: unknown } | undefined)?.type !== "string") return `event ${x.id} is a vocabulary record without its type`;
   if (x.kind === "reading") {
     const r = x.record as { type?: unknown; unit?: { skill?: unknown; level?: unknown } } | undefined;

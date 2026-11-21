@@ -56,6 +56,10 @@ fi
 if [ "${OPENPATH_TAMIL_AI_REVIEW:-0}" = 1 ]; then
     (python manage.py tamil_ai_review || echo "tamil-ai-review failed") &
 fi
+# tamil-help@2: a one-off translation of the first grammar explanations into Tamil, in the background (only while 1)
+if [ "${OPENPATH_TRANSLATE_HELP:-0}" = 1 ]; then
+    (python manage.py translate_help || echo "translate-help failed") &
+fi
 # The grader bundle decides credit: refuse to start unless it is exactly the one its manifest records and Node can run it.
 python -c 'import django,os;django.setup()
 from family import kernel_grader as k

@@ -336,6 +336,8 @@ function run(p: Persona, days: number, seed: number) {
           if (it.kind === "fix") {
             const p = fixParts(it);
             s.fix(ok ? p.wrong : (p.wrong + 1) % p.words.length, ok ? it.right![0] : "zzq");
+          } else if (it.kind === "rewrite") {
+            s.rewrite(ok ? it.right![0] : it.sentence);
           } else if (it.kind === "spot") {
             const words = spotWords(it);
             const key = words.findIndex((w) => it.right!.includes(w.replace(/[^A-Za-z'’-]/g, "")));

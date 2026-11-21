@@ -3252,3 +3252,31 @@ h3.sub {
 .who-grid .chip, .who-boards .chip { min-height: 48px; font-size: 1.05rem; border-radius: 14px; border: 2px solid var(--border); background: var(--card); color: var(--ink); font-weight: 700; padding: 0 14px; }
 .who-grid .chip[data-on="true"], .who-boards .chip[data-on="true"] { border-color: var(--violet); background: var(--lilac); color: var(--violet-text); }
 .home-class { margin-top: -4px; }
+
+/* sounds@1 */
+.sound-groups { list-style: none; padding: 0; display: grid; gap: 10px; }
+.sound-groups li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sound-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice.big { font-size: 1.4rem; padding: 18px 10px; }
+.sound-choices .choice[data-state="right"] { background: #e3f6ea; border-color: #2f9e5b; color: #1d6b3c; opacity: 1; }
+.sound-choices .choice[data-state="wrong"] { background: #fdecea; border-color: #d2453b; color: #9b2c24; opacity: 1; }
+.grammar-simple {
+  border-left: 4px solid #4b9be8;
+  background: #eef6ff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+.grammar-simple p {
+  margin: 4px 0;
+}
+.grammar-rewrite {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #c9d3e0;
+  margin: 8px 0;
+}

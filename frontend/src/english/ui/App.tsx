@@ -38,6 +38,7 @@ import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
 import { LongRead } from "./LongRead.tsx";
 import { KindsRead } from "./KindsRead.tsx";
+import { Sounds } from "./Sounds.tsx";
 import { WrittenAnswer } from "./WrittenAnswer.tsx";
 import { setFlagLearner } from "./Flag.tsx";
 import { GuidedTasks } from "./Guided.tsx";
@@ -146,6 +147,7 @@ export function App() {
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [longRead, setLongRead] = useState<{ from?: "syllabus" } | null>(null);
   const [kindsRead, setKindsRead] = useState<{ from?: "syllabus" } | null>(null);
+  const [sounds, setSounds] = useState(false);
   const [study, setStudy] = useState<{ from?: "syllabus" } | null>(null);
   const [written, setWritten] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
@@ -203,6 +205,7 @@ export function App() {
       setListenAnswer(null);
       setLongRead(null);
       setKindsRead(null);
+      setSounds(false);
       setStudy(null);
       setWritten(null);
       setInSyllabus(false);
@@ -550,6 +553,20 @@ export function App() {
         />
       </div>
     );
+  if (sounds)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <Sounds
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setSounds(false);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (kindsRead)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -834,6 +851,7 @@ export function App() {
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onLongRead={() => (setLongRead({}), scrollTo(0, 0))}
           onKinds={() => (setKindsRead({}), scrollTo(0, 0))}
+          onSounds={() => (setSounds(true), scrollTo(0, 0))}
           onStudy={() => (setStudy({}), scrollTo(0, 0))}
           onWritten={() => (setWritten({}), scrollTo(0, 0))}
           onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}

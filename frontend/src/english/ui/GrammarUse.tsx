@@ -2,6 +2,7 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
+import { dueTopics, masterySummary } from "../logic/grammar-use/mastery.ts";
 import { WriteOwn } from "./WriteOwn.tsx";
 import { ownFor } from "../logic/grammar-use/write-own.ts";
 import { Flag } from "./Flag.tsx";
@@ -13,7 +14,7 @@ import { NoteBox } from "./Note.tsx";
 
 const levelName = (c: Content, id: number) => c.levels.find((l) => l.id === id)?.name ?? "";
 
-export function GrammarIntro({ level, levelLabel, topics, done, onStart, onBack, child }: { child?: boolean; level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; onStart: () => void; onBack: () => void }) {
+export function GrammarIntro({ level, levelLabel, topics, done, mastery, onStart, onBack, child }: { child?: boolean; level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; mastery?: { mastered: number; learnt: number; learning: number; due: number }; onStart: () => void; onBack: () => void }) {
   return (
     <main className="page vocab grammar" data-phase="intro" aria-labelledby="grammar-title">
       <button type="button" className="link" onClick={onBack}>
@@ -34,6 +35,13 @@ export function GrammarIntro({ level, levelLabel, topics, done, onStart, onBack,
       {done.answered > 0 && (
         <p className="small">
           So far: {done.right} of {done.answered} sentences right.
+          {mastery && mastery.mastered + mastery.learnt + mastery.learning > 0 && (
+            <span data-mastery>
+              {" "}
+              Topics: {mastery.mastered} mastered, {mastery.learnt} learnt and coming back for review, {mastery.learning} being learnt.
+              {mastery.due > 0 && !topics.length ? ` ${mastery.due} due for review today: they come first.` : ""}
+            </span>
+          )}
         </p>
       )}
       <button type="button" className="primary" onClick={onStart}>
@@ -101,6 +109,40 @@ export function Spot({ words, task, button = "Check", onCheck }: { words: string
 }
 export const spotTask = (ask: string) => (ask === "object" ? "Tap the object of the verb in this sentence." : ask === "subject" ? "Tap any word of the subject of this sentence." : ask === "main clause" ? "Tap any word of the main clause." : ask === "predicate" ? "Tap any word of the predicate." : `Tap ${/^[aeiou]/.test(ask) ? "an" : "a"} ${ask} in this sentence.`);
 
+/** Write a sentence out again with its mistakes put right; the box starts with the sentence, to edit. */
+function Rewrite({ sentence, onCheck }: { sentence: string; onCheck: (typed: string) => void }) {
+  const [text, setText] = useState(sentence);
+  return (
+    <>
+      <p className="small" id="grammar-task">
+        Write this sentence again, with its mistakes put right.
+      </p>
+      <p className="grammar-quote">
+        <TextPics text={sentence} />
+      </p>
+      <textarea className="grammar-rewrite" aria-labelledby="grammar-task" rows={3} value={text} spellCheck={false} autoCapitalize="off" autoCorrect="off" onChange={(e) => setText(e.target.value)} />
+      <button type="button" className="primary" disabled={!text.trim()} onClick={() => onCheck(text)}>
+        Check
+      </button>
+    </>
+  );
+}
+
+/** The rule said another, plainer way, for a learner who keeps missing it. */
+function Simple({ simple }: { simple: { say: string; example: string } }) {
+  return (
+    <div className="grammar-simple" aria-label="Another way to see it">
+      <p>
+        <strong>Another way to see it</strong>
+      </p>
+      <p>{simple.say}</p>
+      <p className="small">
+        <TextPics text={simple.example} />
+      </p>
+    </div>
+  );
+}
+
 /** Pick one answer to a question about a sentence. */
 function Choose({ sentence, question, options, onCheck }: { sentence: string; question: string; options: string[]; onCheck: (chosen: number) => void }) {
   return (
@@ -159,7 +201,8 @@ function Learn({ topic, card, onTry, onLearned }: { topic: string; card: NonNull
   const s2 = card.second;
   return (
     <section className="grammar-learn" aria-labelledby="grammar-learn-title">
-      <h2 id="grammar-learn-title">New: {topic}</h2>
+      <h2 id="grammar-learn-title">{card.simple ? "Again" : "New"}: {topic}</h2>
+      {card.simple && <Simple simple={card.simple} />}
       <p className="grammar-rule">{card.rule}</p>
       <ul className="grammar-examples">
         {card.examples.map((e) => (
@@ -304,7 +347,7 @@ function OtherResult({ given, right, correct }: { given: string; right: string; 
   );
 }
 
-export function GrammarUseView({ child, content, view, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { child?: boolean; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+export function GrammarUseView({ child, content, view, onRewrite, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { child?: boolean; onRewrite: (typed: string) => void; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
     const own = onOwn ? ownFor(d.topics) : null;
@@ -334,7 +377,7 @@ export function GrammarUseView({ child, content, view, onFix, onBuild, onSpot, o
   }
   const f = view.feedback;
   return (
-    <main className="page vocab grammar" data-phase={view.phase} data-item={view.id ?? ""} data-kind={view.fix ? "fix" : view.build ? "build" : view.spot ? "spot" : view.choose ? "choose" : ""}>
+    <main className="page vocab grammar" data-phase={view.phase} data-item={view.id ?? ""} data-kind={view.fix ? "fix" : view.build ? "build" : view.spot ? "spot" : view.choose ? "choose" : view.rewrite ? "rewrite" : ""}>
       <button type="button" className="link" onClick={onLeave}>
         ← Stop
       </button>
@@ -345,6 +388,7 @@ export function GrammarUseView({ child, content, view, onFix, onBuild, onSpot, o
       {view.phase === "ask" && view.fix && <Fix key={view.id} words={view.fix.words} onCheck={onFix} />}
       {view.phase === "ask" && view.build && <Build key={view.id} tiles={view.build.tiles} whole={view.build.whole} task={view.build.task} onCheck={onBuild} />}
       {view.phase === "ask" && view.choose && <Choose key={view.id} sentence={view.choose.sentence} question={view.choose.question} options={view.choose.options} onCheck={onChoose} />}
+      {view.phase === "ask" && view.rewrite && <Rewrite key={view.id} sentence={view.rewrite.sentence} onCheck={onRewrite} />}
       {view.phase === "ask" && view.spot && <Spot key={view.id} words={view.spot.words} task={spotTask(view.spot.ask)} onCheck={onSpot} />}
       {f && (
         <section className="gfb" role="status" data-correct={f.correct} aria-label={f.correct ? "Right" : "Not quite"}>
@@ -359,6 +403,7 @@ export function GrammarUseView({ child, content, view, onFix, onBuild, onSpot, o
             <p className="gfb-label">Why</p>
             <p>{f.rule}</p>
           </div>
+          {f.simple && <Simple simple={f.simple} />}
           <button type="button" className="primary" autoFocus onClick={onNext}>
             {view.index + 1 < view.total ? "Next sentence" : "Finish"}
           </button>
@@ -393,14 +438,15 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
     onChanged();
   };
   const begin = () => {
-    const s = new GrammarSitting(GRAMMAR, level(), learner.grammarRecords(), topics);
+    // grammar-mastery@1: a level sitting starts with the topics due for review
+    const s = new GrammarSitting(GRAMMAR, level(), learner.grammarRecords(), topics, topics?.length ? [] : dueTopics(learner.grammarTimed(), learner.clock()));
     setSitting(s);
     scrollTo(0, 0);
     void step(s);
   };
   if (!sitting) {
     const done = grammarSummary(GRAMMAR, learner.grammarRecords());
-    return <GrammarIntro level={level()} levelLabel={levelName(GRAMMAR, level())} topics={(topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t)} done={done} onStart={begin} onBack={onLeave} child={!!learner.state.preferences?.school} />;
+    return <GrammarIntro level={level()} levelLabel={levelName(GRAMMAR, level())} topics={(topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t)} done={done} mastery={masterySummary(learner.grammarTimed(), learner.clock())} onStart={begin} onBack={onLeave} child={!!learner.state.preferences?.school} />;
   }
   const view = sitting.snapshot();
   return (
@@ -410,7 +456,7 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <GrammarUseView child={!!learner.state.preferences?.school} content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} onOwn={(r) => void learner.recordGrammar([r]).then(onChanged).catch(() => undefined)} />
+      <GrammarUseView child={!!learner.state.preferences?.school} content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onRewrite={(t) => void step(sitting, () => sitting.rewrite(t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} onOwn={(r) => void learner.recordGrammar([r]).then(onChanged).catch(() => undefined)} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="grammar-use:done" label="Was any sentence marked unfairly, or any rule unclear?" />

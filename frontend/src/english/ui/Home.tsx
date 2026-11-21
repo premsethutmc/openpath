@@ -5,7 +5,8 @@
  */
 import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
-import { TamilToggle } from "./tamilHelp.tsx";
+import { TamilToggle, useTamilHelp } from "./tamilHelp.tsx";
+import { masterySummary } from "../logic/grammar-use/mastery.ts";
 import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
@@ -46,7 +47,8 @@ const Arrow = () => (
 declare const __OPENPATH_READ_ALOUD__: boolean | undefined;
 const READ_ALOUD_BUILT = typeof __OPENPATH_READ_ALOUD__ !== "undefined" && __OPENPATH_READ_ALOUD__ === true;
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onSounds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onSounds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
+  const tamil = useTamilHelp();
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -88,7 +90,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             onLevelCheck={onLevelCheck}
             onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
-          <GrammarSearch onPractise={(topic) => onGrammarUse([topic])} />
+          <GrammarSearch tamil={tamil} onPractise={(topic) => onGrammarUse([topic])} />
           {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>{guided ? "More to practise" : "Or choose an activity"}</span>
@@ -107,6 +109,29 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
+              {!guided && (
+                <section className="hub-card plain" aria-labelledby="formats-card-title">
+                  <h2 id="formats-card-title">
+                    <span aria-hidden="true">✉️ </span>Letters, notices and emails
+                  </h2>
+                  <p>The layouts school exams mark: greetings, subject lines, closings and what goes where.</p>
+                  <button type="button" className="secondary" onClick={() => onGrammarUse(["letter_format", "notice_format", "email_format"])}>
+                    Practise the formats
+                  </button>
+                </section>
+              )}
+              {!guided && tamil && <SlipsCard onOpen={() => onGrammarUse(["tamil_slips"])} />}
+              {!guided && tamil && onSounds && (
+                <section className="hub-card plain" aria-labelledby="sounds-card-title">
+                  <h2 id="sounds-card-title">
+                    <span aria-hidden="true">👂 </span>Sounds that are easy to mix up
+                  </h2>
+                  <p>v and w, f and p, s and sh, th and t: hear the difference, then say it.</p>
+                  <button type="button" className="secondary" onClick={onSounds}>
+                    Listen and say
+                  </button>
+                </section>
+              )}
               <BeeCard learner={learner} onBee={onBee} />
               <VocabCard learner={learner} onOpen={onVocab} />
             </div>
@@ -408,9 +433,25 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
 }
 
 /** Look up a grammar topic by a word or two, and practise it straight away. */
-function GrammarSearch({ onPractise }: { onPractise: (topic: string) => void }) {
+/** tamil-slips@1: practice on the English slips that come from Tamil (questions, have/know with -ing, myself, cousin brother…). */
+function SlipsCard({ onOpen }: { onOpen: () => void }) {
+  return (
+    <section className="hub-card plain" aria-labelledby="slips-card-title">
+      <h2 id="slips-card-title">
+        <span aria-hidden="true">🎯 </span>Slips Tamil speakers often make
+      </h2>
+      <p>Where are you going, not where you are going; he has, not he is having; I am Kavya, not myself Kavya.</p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Fix these slips
+      </button>
+    </section>
+  );
+}
+
+function GrammarSearch({ onPractise, tamil }: { onPractise: (topic: string) => void; tamil: boolean }) {
   const [q, setQ] = useState("");
-  const hits = searchGrammar(q);
+  // the topic made for Tamil speakers is found only where Tamil help was chosen
+  const hits = searchGrammar(q).filter((h) => tamil || h.id !== "tamil_slips");
   return (
     <section className="grammar-search" aria-labelledby="grammar-search-title">
       <label id="grammar-search-title" htmlFor="grammar-search" className="grammar-search-label">
@@ -549,6 +590,7 @@ function FirstWordsCard({ learner, onOpen, start }: { learner: Learner; onOpen: 
 function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
   if (learner.content.gate) return null;
   const s = grammarSummary(GRAMMAR, learner.grammarRecords());
+  const m = masterySummary(learner.grammarTimed(), learner.clock());
   return (
     <section className="hub-card plain" aria-labelledby="grammar-use-card-title">
       <h2 id="grammar-use-card-title">
@@ -557,7 +599,8 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
       <p>Fix the wrong word in a sentence, or build a sentence from word tiles. Eight sentences, each with its rule.</p>
       {s.answered > 0 && (
         <p className="small">
-          {s.right} of {s.answered} sentences right
+          {s.right} of {s.answered} sentences right{m.mastered ? ` · ${m.mastered} ${m.mastered === 1 ? "topic" : "topics"} mastered` : ""}
+          {m.due ? ` · ${m.due} due for review` : ""}
         </p>
       )}
       <button type="button" className="secondary" onClick={onOpen}>

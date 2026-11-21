@@ -5,6 +5,7 @@
  */
 import type { LongRecord } from "./reading/long-read.ts";
 import type { KindRecord } from "./reading/kinds.ts";
+import type { SoundRecord } from "./sounds/sounds.ts";
 import type { StudyRecord } from "./study/study.ts";
 import type { WrittenRecord } from "./reading/written.ts";
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
@@ -330,6 +331,16 @@ export class Learner {
     for (const record of records) await this.add({ kind: "study", id: this.nextId(), at: this.clock(), record });
   }
 
+  /** The learner's sittings on sounds that are easy to mix up, in order. */
+  soundRecords(): SoundRecord[] {
+    return this.events.flatMap((e) => (e.kind === "sounds" ? [e.record] : []));
+  }
+
+  /** Store a finished sounds sitting. Practice-only. */
+  async recordSounds(record: SoundRecord): Promise<void> {
+    await this.add({ kind: "sounds", id: this.nextId(), at: this.clock(), record });
+  }
+
   /** The learner's kinds of text (poems, notices, letters…), in order. */
   kindRecords(): KindRecord[] {
     return this.events.flatMap((e) => (e.kind === "text_read" ? [e.record] : []));
@@ -351,6 +362,11 @@ export class Learner {
   }
 
   /** The learner's Grammar in use record, in order. */
+  /** Grammar records with when each was stored (for spaced review, logic/grammar-use/mastery.ts). */
+  grammarTimed(): { at: string; record: GrammarRecord }[] {
+    return this.events.flatMap((e) => (e.kind === "grammar_use" ? [{ at: e.at, record: e.record }] : []));
+  }
+
   grammarRecords(): GrammarRecord[] {
     return this.events.flatMap((e) => (e.kind === "grammar_use" ? [e.record] : []));
   }

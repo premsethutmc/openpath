@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 20,
+  "version": 24,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -330,6 +330,22 @@
     {
       "id": "nominalisation",
       "name": "Verbs into nouns"
+    },
+    {
+      "id": "tamil_slips",
+      "name": "Slips Tamil speakers often make"
+    },
+    {
+      "id": "letter_format",
+      "name": "Formal letter layout"
+    },
+    {
+      "id": "notice_format",
+      "name": "Notice layout"
+    },
+    {
+      "id": "email_format",
+      "name": "Email layout"
     }
   ],
   "scale": 2,
@@ -8375,6 +8391,5053 @@
       "rule": "Keep the list in the same form: quick, cheap and successful.",
       "right": [
         "successful"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.01",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She [don't] like coffee.",
+      "rule": "With he, she or it, use doesn't: she doesn't like.",
+      "right": [
+        "doesn't"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.02",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "He [don't] know the answer.",
+      "rule": "With he, she or it, use doesn't: he doesn't know.",
+      "right": [
+        "doesn't"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.03",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She is [a] honest girl.",
+      "rule": "\"Honest\" starts with a vowel sound (the h is silent), so it takes an: an honest girl.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.04",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I saw [a] elephant in the forest.",
+      "rule": "Before a vowel sound, use an: an elephant.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.05",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "[Today] morning I went to the market.",
+      "rule": "In English, say this morning, not today morning.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.06",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Can you [borrow] me your pen?",
+      "rule": "You lend something to someone; you borrow it from them. Can you lend me your pen?",
+      "right": [
+        "lend"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.07",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I have [less] friends than my brother.",
+      "rule": "Use fewer with things you can count: fewer friends.",
+      "right": [
+        "fewer"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.08",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She is good [in] maths.",
+      "rule": "In English, we are good at a subject: good at maths.",
+      "right": [
+        "at"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.09",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "My aunt is married [with] a doctor.",
+      "rule": "In English, we are married to someone.",
+      "right": [
+        "to"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.10",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "The news [are] good today.",
+      "rule": "\"News\" is one thing in English: the news is good.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.11",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Each of the boys [have] a bag.",
+      "rule": "\"Each\" means one at a time, so it takes has: each of the boys has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.12",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "One of my [friend] is coming today.",
+      "rule": "\"One of\" is followed by many: one of my friends.",
+      "right": [
+        "friends"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.13",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I didn't [went] to school yesterday.",
+      "rule": "After did or didn't, use the plain verb: didn't go.",
+      "right": [
+        "go"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.14",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Did you [ate] your lunch?",
+      "rule": "After did, use the plain verb: did you eat.",
+      "right": [
+        "eat"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.15",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She [told] that she was tired.",
+      "rule": "Use said when no listener is named: she said that. Use told with a person: she told me that.",
+      "right": [
+        "said"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.16",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You meet a friend on the road.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "Where are you going?"
+      ],
+      "wrong": [
+        "Where you are going?",
+        "Where going you are?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.17",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You want to know a new girl's name.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "What is your name?"
+      ],
+      "wrong": [
+        "What your name is?",
+        "Your name is what?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.18",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Your friend comes in after the bell.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "Why are you late?"
+      ],
+      "wrong": [
+        "Why you are late?",
+        "Why late you are?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.19",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Ravi talks about his family.",
+      "question": "Which sentence is right?",
+      "rule": "\"Have\" for owning is not used with -ing: he has, not he is having.",
+      "right": [
+        "He has two brothers."
+      ],
+      "wrong": [
+        "He is having two brothers.",
+        "He having two brothers."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.20",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Meena is sure of the answer.",
+      "question": "Which sentence is right?",
+      "rule": "Know, like, want and understand are not used with -ing: I know.",
+      "right": [
+        "I know the answer."
+      ],
+      "wrong": [
+        "I am knowing the answer.",
+        "I knowing the answer."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.21",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You start a speech at assembly.",
+      "question": "Which is the right way to say your name?",
+      "rule": "In English, say I am Kavya or My name is Kavya, not myself Kavya.",
+      "right": [
+        "I am Kavya."
+      ],
+      "wrong": [
+        "Myself Kavya.",
+        "Me Kavya."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.22",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You show a friend a photo.",
+      "question": "Which sentence is right?",
+      "rule": "English has one word, cousin, for a boy or a girl: no brother or sister after it.",
+      "right": [
+        "This is my cousin, Ravi."
+      ],
+      "wrong": [
+        "This is my cousin brother, Ravi.",
+        "This is my brother cousin, Ravi."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.23",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "The class talked about the trip.",
+      "question": "Which sentence is right?",
+      "rule": "Discuss already means talk about: we discussed the plan, with no about.",
+      "right": [
+        "We discussed the plan."
+      ],
+      "wrong": [
+        "We discussed about the plan.",
+        "We discussed on the plan."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.24",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You ask a friend to give back a book.",
+      "question": "Which sentence is right?",
+      "rule": "Return already means give back: no back after it.",
+      "right": [
+        "Please return the book."
+      ],
+      "wrong": [
+        "Please return back the book.",
+        "Please back return the book."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.25",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "It is bedtime.",
+      "question": "Which sentence is right?",
+      "rule": "In English, a light is switched off or turned off.",
+      "right": [
+        "Please switch off the light."
+      ],
+      "wrong": [
+        "Please off the light.",
+        "Please close the light."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.26",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "The bus was slow.",
+      "question": "Which sentence is right?",
+      "rule": "Reach takes no to: we reached school.",
+      "right": [
+        "We reached school late."
+      ],
+      "wrong": [
+        "We reached to school late.",
+        "We reached at school late."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.27",
+      "level": 4,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You check that your friend agrees.",
+      "question": "Which ending is right?",
+      "rule": "English question tags repeat the helping word: it is right, isn't it?",
+      "right": [
+        "Your answer is right, isn't it?"
+      ],
+      "wrong": [
+        "Your answer is right, no?",
+        "Your answer is right, isn't?"
+      ]
+    },
+    {
+      "id": "gu.letter_format.01",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write to the principal for leave.",
+      "question": "Which is the right greeting?",
+      "rule": "A formal letter to someone in charge starts: Respected Sir or Madam, or Dear Sir or Madam.",
+      "right": [
+        "Respected Sir,"
+      ],
+      "wrong": [
+        "Hi Sir,",
+        "Dear friend Principal,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.02",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You end a letter to the principal.",
+      "question": "Which closing is right for a formal letter?",
+      "rule": "Formal letters end with Yours faithfully (to an unnamed reader) or Yours sincerely (to a named one).",
+      "right": [
+        "Yours faithfully,"
+      ],
+      "wrong": [
+        "Your loving student,",
+        "Bye for now,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.03",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write to your grandmother.",
+      "question": "Which closing suits an informal letter?",
+      "rule": "Informal letters to family and friends end warmly: Yours lovingly, With love.",
+      "right": [
+        "With love,"
+      ],
+      "wrong": [
+        "Yours faithfully,",
+        "Thanking you, Sir,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.04",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "A formal letter has a subject line.",
+      "question": "Where does the subject line go?",
+      "rule": "In a formal letter, the subject comes after the receiver's address and before the greeting.",
+      "right": [
+        "After the receiver's address, before the greeting"
+      ],
+      "wrong": [
+        "At the very end, after your name",
+        "Before your own address at the top"
+      ]
+    },
+    {
+      "id": "gu.letter_format.05",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write a formal letter.",
+      "question": "What comes first at the top?",
+      "rule": "A formal letter begins with the sender's address and the date.",
+      "right": [
+        "Your own address and the date"
+      ],
+      "wrong": [
+        "The greeting, Dear Sir",
+        "The subject line"
+      ]
+    },
+    {
+      "id": "gu.letter_format.06",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write a subject line for leave.",
+      "question": "Which subject line is best?",
+      "rule": "A subject line is short and says exactly what the letter is about.",
+      "right": [
+        "Subject: Leave for two days (12 and 13 March)"
+      ],
+      "wrong": [
+        "Subject: Please read this letter carefully, Sir",
+        "Subject: Letter"
+      ]
+    },
+    {
+      "id": "gu.letter_format.07",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You write the body of a complaint letter.",
+      "question": "Which opening sentence is best?",
+      "rule": "The first line of a formal letter states its purpose politely and directly.",
+      "right": [
+        "I am writing to complain about the broken street light outside our school."
+      ],
+      "wrong": [
+        "Hi, how are you? Hope you are fine.",
+        "Street light broken. Fix it."
+      ]
+    },
+    {
+      "id": "gu.letter_format.08",
+      "level": 6,
+      "topic": "letter_format",
+      "kind": "choose",
+      "sentence": "You finish a formal letter.",
+      "question": "Which line comes just before Yours faithfully?",
+      "rule": "A polite closing line, such as Thanking you, often comes before the sign-off.",
+      "right": [
+        "Thanking you,"
+      ],
+      "wrong": [
+        "Love you lots,",
+        "See you soon, bye!"
+      ]
+    },
+    {
+      "id": "gu.notice_format.01",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your school club writes a notice.",
+      "question": "What goes at the very top of a notice?",
+      "rule": "A notice starts with the name of the school or organisation, then the word NOTICE.",
+      "right": [
+        "The school's name, then NOTICE"
+      ],
+      "wrong": [
+        "The writer's signature",
+        "The date of the event only"
+      ]
+    },
+    {
+      "id": "gu.notice_format.02",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You write a notice for a quiz.",
+      "question": "Which heading is best?",
+      "rule": "A notice heading is short and in capital letters: what it is about.",
+      "right": [
+        "INTER-HOUSE QUIZ"
+      ],
+      "wrong": [
+        "Please everybody read this notice about something",
+        "quiz"
+      ]
+    },
+    {
+      "id": "gu.notice_format.03",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "A notice gives details of an event.",
+      "question": "Which details must it include?",
+      "rule": "A notice answers what, when, where and who to contact.",
+      "right": [
+        "What, when, where, and who to contact"
+      ],
+      "wrong": [
+        "Only the writer's feelings about the event",
+        "A long story about last year's event"
+      ]
+    },
+    {
+      "id": "gu.notice_format.04",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You sign a notice for the Eco Club.",
+      "question": "How does a notice end?",
+      "rule": "A notice ends with the writer's name and position, such as Secretary, Eco Club.",
+      "right": [
+        "Name and position, such as Secretary, Eco Club"
+      ],
+      "wrong": [
+        "Yours faithfully, with love",
+        "Thank you and goodbye"
+      ]
+    },
+    {
+      "id": "gu.notice_format.05",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your notice has a word limit of fifty words.",
+      "question": "Which sentence suits a notice?",
+      "rule": "Notices use short, clear sentences in the third person.",
+      "right": [
+        "All students of Class 6 are invited to the art fair."
+      ],
+      "wrong": [
+        "I am very, very excited to tell you all about our fair!",
+        "Hi guys, come to the fair, it will be fun lol."
+      ]
+    },
+    {
+      "id": "gu.notice_format.06",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "A notice is placed on the school board.",
+      "question": "Why is it put inside a box?",
+      "rule": "In exams, a notice is written inside a box, as it would appear on a notice board.",
+      "right": [
+        "To show it as it would appear on a notice board"
+      ],
+      "wrong": [
+        "To make it look like a letter",
+        "Because the box is the heading"
+      ]
+    },
+    {
+      "id": "gu.email_format.01",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email your teacher about homework.",
+      "question": "Which subject line is best?",
+      "rule": "An email subject line says what the email is about in a few words.",
+      "right": [
+        "Science homework: question about page 42"
+      ],
+      "wrong": [
+        "Hello",
+        "Please read"
+      ]
+    },
+    {
+      "id": "gu.email_format.02",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email your class teacher.",
+      "question": "Which greeting is right?",
+      "rule": "A formal email starts with Dear and the person's name or title.",
+      "right": [
+        "Dear Mrs Rao,"
+      ],
+      "wrong": [
+        "Hey teacher!!",
+        "Yo Mrs Rao,"
+      ]
+    },
+    {
+      "id": "gu.email_format.03",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You end a formal email.",
+      "question": "Which closing is right?",
+      "rule": "A formal email ends with Regards, Kind regards or Yours sincerely, then your name.",
+      "right": [
+        "Kind regards, Arun"
+      ],
+      "wrong": [
+        "Bye bye!!",
+        "XOXO Arun"
+      ]
+    },
+    {
+      "id": "gu.email_format.04",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "An email is sent to two teachers at once.",
+      "question": "Where do both addresses go?",
+      "rule": "Every person the email is for goes in the To line; others who only need a copy go in Cc.",
+      "right": [
+        "In the To line"
+      ],
+      "wrong": [
+        "In the subject line",
+        "In the last line of the email"
+      ]
+    },
+    {
+      "id": "gu.email_format.05",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You write an email to apply for a club.",
+      "question": "Which first line is best?",
+      "rule": "Begin the body by saying why you are writing.",
+      "right": [
+        "I would like to join the school photography club."
+      ],
+      "wrong": [
+        "What's up? So, like, clubs.",
+        "Me want club."
+      ]
+    },
+    {
+      "id": "gu.email_format.06",
+      "level": 7,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "Your email has three points to make.",
+      "question": "How should the body be set out?",
+      "rule": "Keep one point in each short paragraph, so the reader can follow it.",
+      "right": [
+        "One short paragraph for each point"
+      ],
+      "wrong": [
+        "All points in one long sentence",
+        "Each word on a new line"
+      ]
+    },
+    {
+      "id": "gu.notice_format.07",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "You write a notice about a lost bag.",
+      "question": "Which line gives the details best?",
+      "rule": "Give the details a reader needs to act: what was lost, where, and whom to tell.",
+      "right": [
+        "A blue school bag was lost near the library on Monday. Please return it to the office."
+      ],
+      "wrong": [
+        "Someone lost something somewhere. Please help.",
+        "I am very sad because my bag is lost and I miss it."
+      ]
+    },
+    {
+      "id": "gu.notice_format.08",
+      "level": 6,
+      "topic": "notice_format",
+      "kind": "choose",
+      "sentence": "Your notice gives the date it was written.",
+      "question": "Where does the date go?",
+      "rule": "The date goes near the top, under the word NOTICE, so readers know when it was put up.",
+      "right": [
+        "Near the top, under NOTICE"
+      ],
+      "wrong": [
+        "Inside the heading",
+        "After the writer's name at the very end"
+      ]
+    },
+    {
+      "id": "gu.email_format.07",
+      "level": 6,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You forgot to attach your project.",
+      "question": "What should you do?",
+      "rule": "If you forget an attachment, send it again with a short, polite note.",
+      "right": [
+        "Send it again with a note: Sorry, I forgot to attach my project."
+      ],
+      "wrong": [
+        "Send an empty email with no subject",
+        "Send ten emails in a row saying sorry"
+      ]
+    },
+    {
+      "id": "gu.email_format.08",
+      "level": 7,
+      "topic": "email_format",
+      "kind": "choose",
+      "sentence": "You email a children's magazine about a story.",
+      "question": "Which closing line is best before your name?",
+      "rule": "A polite closing line thanks the reader before the sign-off.",
+      "right": [
+        "Thank you for reading my email."
+      ],
+      "wrong": [
+        "Reply fast!!!",
+        "OK bye, whatever."
+      ]
+    },
+    {
+      "id": "gu.plurals.11",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Four [bus] stopped at the school gate.",
+      "rule": "Words ending in s take -es: buses.",
+      "right": [
+        "buses"
+      ]
+    },
+    {
+      "id": "gu.plurals.12",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "She washed all the [dish] after lunch.",
+      "rule": "Words ending in sh take -es: dishes.",
+      "right": [
+        "dishes"
+      ]
+    },
+    {
+      "id": "gu.plurals.13",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "We bought two new [watch] at the shop.",
+      "rule": "Words ending in ch take -es: watches.",
+      "right": [
+        "watches"
+      ]
+    },
+    {
+      "id": "gu.plurals.14",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Many [city] in India are very busy.",
+      "rule": "After a consonant, change y to ies: city, cities.",
+      "right": [
+        "cities"
+      ]
+    },
+    {
+      "id": "gu.plurals.15",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "The [lady] waited for the bus.",
+      "rule": "After a consonant, change y to ies: lady, ladies.",
+      "right": [
+        "ladies"
+      ]
+    },
+    {
+      "id": "gu.plurals.16",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "The [leaf] fell from the trees.",
+      "rule": "Some words ending in f change to ves: leaf, leaves.",
+      "right": [
+        "leaves"
+      ]
+    },
+    {
+      "id": "gu.plurals.17",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Put the [knife] in the drawer.",
+      "rule": "Some words ending in fe change to ves: knife, knives.",
+      "right": [
+        "knives"
+      ]
+    },
+    {
+      "id": "gu.plurals.18",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Three [child] played in the park.",
+      "rule": "Child is irregular: one child, many children.",
+      "right": [
+        "children"
+      ]
+    },
+    {
+      "id": "gu.plurals.19",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Two [mouse] ran under the bed.",
+      "rule": "Mouse is irregular: one mouse, two mice.",
+      "right": [
+        "mice"
+      ]
+    },
+    {
+      "id": "gu.plurals.20",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "My [foot] are cold.",
+      "rule": "Foot is irregular: one foot, two feet.",
+      "right": [
+        "feet"
+      ]
+    },
+    {
+      "id": "gu.plurals.21",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "He has many [toy] in his room.",
+      "rule": "After a vowel, y just takes s: toy, toys.",
+      "right": [
+        "toys"
+      ]
+    },
+    {
+      "id": "gu.plurals.22",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Amma bought a kilo of [tomato].",
+      "rule": "Tomato takes -es: tomatoes.",
+      "right": [
+        "tomatoes"
+      ]
+    },
+    {
+      "id": "gu.articles.11",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "I ate [a] orange for breakfast.",
+      "rule": "Use an before a vowel sound: an orange.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.12",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "She is reading [an] book.",
+      "rule": "Use a before a consonant sound: a book.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.13",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "We waited for [a] hour.",
+      "rule": "Hour starts with a vowel sound (the h is silent): an hour.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.14",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "He wants to be [an] doctor.",
+      "rule": "Use a before a consonant sound: a doctor.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.15",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "There is [a] umbrella by the door.",
+      "rule": "Use an before a vowel sound: an umbrella.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.16",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "My uncle drives [an] bus.",
+      "rule": "Use a before a consonant sound: a bus.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.17",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "Please give me [a] egg.",
+      "rule": "Use an before a vowel sound: an egg.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.18",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "She has [an] uniform for school.",
+      "rule": "Uniform starts with a y sound, so it takes a: a uniform.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.19",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "We saw [a] owl at night.",
+      "rule": "Use an before a vowel sound: an owl.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.20",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "Ravi found [an] coin on the road.",
+      "rule": "Use a before a consonant sound: a coin.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.21",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "It was [a] easy test.",
+      "rule": "Use an before a vowel sound: an easy test.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.22",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "I need [an] pencil.",
+      "rule": "Use a before a consonant sound: a pencil.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.11",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "I [is] ready for school.",
+      "rule": "With I, use am: I am.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.12",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "They [is] in the garden.",
+      "rule": "With they, use are: they are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.13",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "She [are] my best friend.",
+      "rule": "With she, use is: she is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.14",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "We [is] in Class 3.",
+      "rule": "With we, use are: we are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.15",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "The cat [are] on the wall.",
+      "rule": "One cat: is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.16",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "You [is] very kind.",
+      "rule": "With you, use are: you are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.17",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "My shoes [is] wet.",
+      "rule": "More than one shoe: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.18",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "He [am] tall.",
+      "rule": "With he, use is: he is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.19",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "The children [is] happy today.",
+      "rule": "Children is more than one: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.20",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "It [are] a sunny day.",
+      "rule": "With it, use is: it is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.21",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "Ravi and Meena [is] cousins.",
+      "rule": "Two people: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.22",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "I [are] eight years old.",
+      "rule": "With I, use am: I am.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.have_has.11",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "She [have] a red bag.",
+      "rule": "With he, she or it, use has: she has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.12",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "They [has] two dogs.",
+      "rule": "With they, use have: they have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.13",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "I [has] a new pencil box.",
+      "rule": "With I, use have: I have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.14",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "My father [have] a scooter.",
+      "rule": "One person: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.15",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "We [has] a test today.",
+      "rule": "With we, use have: we have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.16",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "The cat [have] soft fur.",
+      "rule": "One cat: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.17",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "You [has] a lovely smile.",
+      "rule": "With you, use have: you have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.18",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "He [have] a cold.",
+      "rule": "With he, use has: he has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.19",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "The boys [has] cricket bats.",
+      "rule": "More than one: have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.20",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "It [have] four legs.",
+      "rule": "With it, use has: it has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.21",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "Our school [have] a big ground.",
+      "rule": "One school: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.22",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "Ravi and I [has] the same book.",
+      "rule": "Two people: have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.agreement.17",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "She [like] mangoes.",
+      "rule": "With he, she or it, add -s: she likes.",
+      "right": [
+        "likes"
+      ]
+    },
+    {
+      "id": "gu.agreement.18",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "He [play] cricket every evening.",
+      "rule": "With he, add -s: he plays.",
+      "right": [
+        "plays"
+      ]
+    },
+    {
+      "id": "gu.agreement.19",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The dog [bark] at night.",
+      "rule": "One dog: add -s: barks.",
+      "right": [
+        "barks"
+      ]
+    },
+    {
+      "id": "gu.agreement.20",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "My mother [cook] tasty food.",
+      "rule": "One person: add -s: cooks.",
+      "right": [
+        "cooks"
+      ]
+    },
+    {
+      "id": "gu.agreement.21",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "They [plays] in the park.",
+      "rule": "With they, no -s: they play.",
+      "right": [
+        "play"
+      ]
+    },
+    {
+      "id": "gu.agreement.22",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "We [walks] to school.",
+      "rule": "With we, no -s: we walk.",
+      "right": [
+        "walk"
+      ]
+    },
+    {
+      "id": "gu.agreement.23",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The sun [rise] in the east.",
+      "rule": "One sun: add -s: rises.",
+      "right": [
+        "rises"
+      ]
+    },
+    {
+      "id": "gu.agreement.24",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "Birds [flies] in the sky.",
+      "rule": "Birds is more than one: no -s: fly.",
+      "right": [
+        "fly"
+      ]
+    },
+    {
+      "id": "gu.agreement.25",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "He [watch] cartoons on Sunday.",
+      "rule": "After ch, add -es: watches.",
+      "right": [
+        "watches"
+      ]
+    },
+    {
+      "id": "gu.agreement.26",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "She [go] to music class.",
+      "rule": "Go takes -es: she goes.",
+      "right": [
+        "goes"
+      ]
+    },
+    {
+      "id": "gu.agreement.27",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The baby [cry] at night.",
+      "rule": "After a consonant, y becomes ies: cries.",
+      "right": [
+        "cries"
+      ]
+    },
+    {
+      "id": "gu.agreement.28",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "I [writes] in my diary.",
+      "rule": "With I, no -s: I write.",
+      "right": [
+        "write"
+      ]
+    },
+    {
+      "id": "gu.past.10",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Yesterday we [play] in the rain.",
+      "rule": "For the past, add -ed: played.",
+      "right": [
+        "played"
+      ]
+    },
+    {
+      "id": "gu.past.11",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Last week she [visit] her grandmother.",
+      "rule": "For the past, add -ed: visited.",
+      "right": [
+        "visited"
+      ]
+    },
+    {
+      "id": "gu.past.12",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "He [jump] over the puddle this morning.",
+      "rule": "For the past, add -ed: jumped.",
+      "right": [
+        "jumped"
+      ]
+    },
+    {
+      "id": "gu.past.13",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "We [walk] to the park on Sunday.",
+      "rule": "For the past, add -ed: walked.",
+      "right": [
+        "walked"
+      ]
+    },
+    {
+      "id": "gu.past.14",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "I [like] the film we saw yesterday.",
+      "rule": "Words ending in e just add -d: liked.",
+      "right": [
+        "liked"
+      ]
+    },
+    {
+      "id": "gu.past.15",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "The baby [cry] all night.",
+      "rule": "After a consonant, y becomes ied: cried.",
+      "right": [
+        "cried"
+      ]
+    },
+    {
+      "id": "gu.past.16",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "She [stop] at the shop on her way home.",
+      "rule": "Double the last letter, then add -ed: stopped.",
+      "right": [
+        "stopped"
+      ]
+    },
+    {
+      "id": "gu.past.17",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "They [clean] the classroom after school.",
+      "rule": "For the past, add -ed: cleaned.",
+      "right": [
+        "cleaned"
+      ]
+    },
+    {
+      "id": "gu.past.18",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Last year we [move] to Madurai.",
+      "rule": "Words ending in e just add -d: moved.",
+      "right": [
+        "moved"
+      ]
+    },
+    {
+      "id": "gu.past.19",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "He [carry] the heavy box yesterday.",
+      "rule": "After a consonant, y becomes ied: carried.",
+      "right": [
+        "carried"
+      ]
+    },
+    {
+      "id": "gu.past.20",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "I [help] my father in the garden last evening.",
+      "rule": "For the past, add -ed: helped.",
+      "right": [
+        "helped"
+      ]
+    },
+    {
+      "id": "gu.past.21",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "The bus [arrive] late this morning.",
+      "rule": "Words ending in e just add -d: arrived.",
+      "right": [
+        "arrived"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.12",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [eated] two idlis this morning.",
+      "rule": "Eat is irregular: the past is ate.",
+      "right": [
+        "ate"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.13",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "He [writed] a letter last week.",
+      "rule": "Write is irregular: the past is wrote.",
+      "right": [
+        "wrote"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.14",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "We [seed] a rainbow after the rain.",
+      "rule": "See is irregular: the past is saw.",
+      "right": [
+        "saw"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.15",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "They [buyed] a new fan.",
+      "rule": "Buy is irregular: the past is bought.",
+      "right": [
+        "bought"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.16",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "I [catched] the ball.",
+      "rule": "Catch is irregular: the past is caught.",
+      "right": [
+        "caught"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.17",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "The glass [breaked] when it fell.",
+      "rule": "Break is irregular: the past is broke.",
+      "right": [
+        "broke"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.18",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [teached] us a song.",
+      "rule": "Teach is irregular: the past is taught.",
+      "right": [
+        "taught"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.19",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "He [runned] fast in the race.",
+      "rule": "Run is irregular: the past is ran.",
+      "right": [
+        "ran"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.20",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "We [maked] a kite last Sunday.",
+      "rule": "Make is irregular: the past is made.",
+      "right": [
+        "made"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.21",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "I [thinked] about the question.",
+      "rule": "Think is irregular: the past is thought.",
+      "right": [
+        "thought"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.22",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [bringed] sweets for everyone.",
+      "rule": "Bring is irregular: the past is brought.",
+      "right": [
+        "brought"
+      ]
+    },
+    {
+      "id": "gu.comparison.09",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This is the [tall] tree in the park.",
+      "rule": "For the most of all, add -est: tallest.",
+      "right": [
+        "tallest"
+      ]
+    },
+    {
+      "id": "gu.comparison.10",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "My bag is [heavy] than yours.",
+      "rule": "After a consonant, y becomes ier: heavier.",
+      "right": [
+        "heavier"
+      ]
+    },
+    {
+      "id": "gu.comparison.11",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "Today is [hot] than yesterday.",
+      "rule": "Double the last letter, then -er: hotter.",
+      "right": [
+        "hotter"
+      ]
+    },
+    {
+      "id": "gu.comparison.12",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "She is the [happy] girl in the class.",
+      "rule": "After a consonant, y becomes iest: happiest.",
+      "right": [
+        "happiest"
+      ]
+    },
+    {
+      "id": "gu.comparison.13",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This book is [good] than that one.",
+      "rule": "Good is irregular: good, better, best.",
+      "right": [
+        "better"
+      ]
+    },
+    {
+      "id": "gu.comparison.14",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "That was the [bad] day of my holiday.",
+      "rule": "Bad is irregular: bad, worse, worst.",
+      "right": [
+        "worst"
+      ]
+    },
+    {
+      "id": "gu.comparison.15",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "Ravi runs [fast] than his brother.",
+      "rule": "To compare two, add -er: faster.",
+      "right": [
+        "faster"
+      ]
+    },
+    {
+      "id": "gu.comparison.16",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "The cheetah is the [fast] animal on land.",
+      "rule": "For the most of all, add -est: fastest.",
+      "right": [
+        "fastest"
+      ]
+    },
+    {
+      "id": "gu.comparison.17",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "My room is [small] than my sister's.",
+      "rule": "To compare two, add -er: smaller.",
+      "right": [
+        "smaller"
+      ]
+    },
+    {
+      "id": "gu.comparison.18",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This is the [easy] question on the paper.",
+      "rule": "After a consonant, y becomes iest: easiest.",
+      "right": [
+        "easiest"
+      ]
+    },
+    {
+      "id": "gu.comparison.19",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This road is [wide] than that one.",
+      "rule": "Words ending in e just add -r: wider.",
+      "right": [
+        "wider"
+      ]
+    },
+    {
+      "id": "gu.this_these.11",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[These] book is mine.",
+      "rule": "One thing near you: this.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.this_these.12",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[This] shoes are new.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "These"
+      ]
+    },
+    {
+      "id": "gu.this_these.13",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[Those] house over there is old.",
+      "rule": "One thing far away: that.",
+      "right": [
+        "That"
+      ]
+    },
+    {
+      "id": "gu.this_these.14",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[That] birds on the wire are crows.",
+      "rule": "More than one far away: those.",
+      "right": [
+        "Those"
+      ]
+    },
+    {
+      "id": "gu.this_these.15",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Look at [these] star in the sky!",
+      "rule": "One thing far away: that.",
+      "right": [
+        "that"
+      ]
+    },
+    {
+      "id": "gu.this_these.16",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "I like [this] mangoes.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "these"
+      ]
+    },
+    {
+      "id": "gu.this_these.17",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[These] is my pencil.",
+      "rule": "One thing near you: this.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.this_these.18",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Who are [that] children?",
+      "rule": "More than one far away: those.",
+      "right": [
+        "those"
+      ]
+    },
+    {
+      "id": "gu.this_these.19",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Can you pass me [these] cup?",
+      "rule": "One thing near you: this.",
+      "right": [
+        "this"
+      ]
+    },
+    {
+      "id": "gu.this_these.20",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[Those] tree is very tall.",
+      "rule": "One thing far away: that.",
+      "right": [
+        "That"
+      ]
+    },
+    {
+      "id": "gu.this_these.21",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[This] flowers smell sweet.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "These"
+      ]
+    },
+    {
+      "id": "gu.this_these.22",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Is [those] your bicycle at the gate?",
+      "rule": "One thing far away: that.",
+      "right": [
+        "that"
+      ]
+    },
+    {
+      "id": "gu.future.09",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Tomorrow I [visit] my aunt.",
+      "rule": "For the future, use will: I will visit.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.10",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Next week we [goes] to Ooty.",
+      "rule": "For the future, use will: we will go.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.11",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "She will [comes] to the party.",
+      "rule": "After will, use the plain verb: will come.",
+      "right": [
+        "come"
+      ]
+    },
+    {
+      "id": "gu.future.12",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "It will [rained] tomorrow.",
+      "rule": "After will, use the plain verb: will rain.",
+      "right": [
+        "rain"
+      ]
+    },
+    {
+      "id": "gu.future.13",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "They will [played] after school.",
+      "rule": "After will, use the plain verb: will play.",
+      "right": [
+        "play"
+      ]
+    },
+    {
+      "id": "gu.future.14",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "I will [helping] you with your homework.",
+      "rule": "After will, use the plain verb: will help.",
+      "right": [
+        "help"
+      ]
+    },
+    {
+      "id": "gu.future.15",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "He will [wrote] the test on Monday.",
+      "rule": "After will, use the plain verb: will write.",
+      "right": [
+        "write"
+      ]
+    },
+    {
+      "id": "gu.future.16",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "We will [reached] home by six.",
+      "rule": "After will, use the plain verb: will reach.",
+      "right": [
+        "reach"
+      ]
+    },
+    {
+      "id": "gu.future.17",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Next year she [is] in Class 5.",
+      "rule": "For the future, use will: she will be.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.18",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "The shop will [opens] at nine.",
+      "rule": "After will, use the plain verb: will open.",
+      "right": [
+        "open"
+      ]
+    },
+    {
+      "id": "gu.future.19",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "You will [likes] this story.",
+      "rule": "After will, use the plain verb: will like.",
+      "right": [
+        "like"
+      ]
+    },
+    {
+      "id": "gu.future.20",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Tomorrow the sun will [rose] at six.",
+      "rule": "After will, use the plain verb: will rise.",
+      "right": [
+        "rise"
+      ]
+    },
+    {
+      "id": "gu.continuous.09",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "They are [play] football now.",
+      "rule": "Are with -ing shows now: are playing.",
+      "right": [
+        "playing"
+      ]
+    },
+    {
+      "id": "gu.continuous.10",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "I am [write] a letter.",
+      "rule": "Drop the e before -ing: writing.",
+      "right": [
+        "writing"
+      ]
+    },
+    {
+      "id": "gu.continuous.11",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "She is [run] to catch the bus.",
+      "rule": "Double the last letter before -ing: running.",
+      "right": [
+        "running"
+      ]
+    },
+    {
+      "id": "gu.continuous.12",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "We are [sit] in the shade.",
+      "rule": "Double the last letter before -ing: sitting.",
+      "right": [
+        "sitting"
+      ]
+    },
+    {
+      "id": "gu.continuous.13",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "He [are] reading a comic now.",
+      "rule": "With he, use is: he is reading.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.continuous.14",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "The children [is] singing a song.",
+      "rule": "More than one: are singing.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.continuous.15",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "I [is] waiting for my friend.",
+      "rule": "With I, use am: I am waiting.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.continuous.16",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "It is [rain] heavily.",
+      "rule": "Is with -ing shows now: is raining.",
+      "right": [
+        "raining"
+      ]
+    },
+    {
+      "id": "gu.continuous.17",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "Amma is [make] dosa for dinner.",
+      "rule": "Drop the e before -ing: making.",
+      "right": [
+        "making"
+      ]
+    },
+    {
+      "id": "gu.continuous.18",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "Listen! Someone is [knock] at the door.",
+      "rule": "Is with -ing shows now: is knocking.",
+      "right": [
+        "knocking"
+      ]
+    },
+    {
+      "id": "gu.continuous.19",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "The dog is [swim] in the lake.",
+      "rule": "Double the last letter before -ing: swimming.",
+      "right": [
+        "swimming"
+      ]
+    },
+    {
+      "id": "gu.capitals.09",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "rewrite",
+      "sentence": "my sister lives in delhi.",
+      "rule": "A sentence starts with a capital letter, and so does the name of a place.",
+      "right": [
+        "My sister lives in Delhi."
+      ]
+    },
+    {
+      "id": "gu.capitals.10",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "rewrite",
+      "sentence": "ravi and i went to the market.",
+      "rule": "Names start with capital letters, and I is always a capital.",
+      "right": [
+        "Ravi and I went to the market."
+      ]
+    },
+    {
+      "id": "gu.capitals.11",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "rewrite",
+      "sentence": "we visited madurai in may",
+      "rule": "Capital letters for the first word, a place and a month; a full stop at the end.",
+      "right": [
+        "We visited Madurai in May."
+      ]
+    },
+    {
+      "id": "gu.capitals.12",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "fix",
+      "sentence": "On [monday] we have a music class.",
+      "rule": "Days of the week start with a capital letter.",
+      "right": [
+        "Monday"
+      ]
+    },
+    {
+      "id": "gu.capitals.13",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "build",
+      "sentence": "Priya lives in Kochi.",
+      "rule": "A name and a place both start with capital letters."
+    },
+    {
+      "id": "gu.articles.23",
+      "level": 1,
+      "topic": "articles",
+      "kind": "rewrite",
+      "sentence": "I saw a elephant at the zoo.",
+      "rule": "Elephant starts with a vowel sound: an elephant.",
+      "right": [
+        "I saw an elephant at the zoo."
+      ]
+    },
+    {
+      "id": "gu.articles.24",
+      "level": 1,
+      "topic": "articles",
+      "kind": "rewrite",
+      "sentence": "She wants an glass of water.",
+      "rule": "Glass starts with a consonant sound: a glass.",
+      "right": [
+        "She wants a glass of water."
+      ]
+    },
+    {
+      "id": "gu.plurals.23",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "rewrite",
+      "sentence": "The two babys are sleeping.",
+      "rule": "After a consonant, y becomes ies: babies.",
+      "right": [
+        "The two babies are sleeping."
+      ]
+    },
+    {
+      "id": "gu.plurals.24",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "rewrite",
+      "sentence": "I have three boxs of crayons.",
+      "rule": "Words ending in x take -es: boxes.",
+      "right": [
+        "I have three boxes of crayons."
+      ]
+    },
+    {
+      "id": "gu.be_verbs.23",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "rewrite",
+      "sentence": "They is my friends.",
+      "rule": "With they, use are.",
+      "right": [
+        "They are my friends."
+      ]
+    },
+    {
+      "id": "gu.be_verbs.24",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "rewrite",
+      "sentence": "I is in the garden.",
+      "rule": "With I, use am.",
+      "right": [
+        "I am in the garden."
+      ]
+    },
+    {
+      "id": "gu.have_has.23",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "rewrite",
+      "sentence": "Meena have a blue pen.",
+      "rule": "One person: has.",
+      "right": [
+        "Meena has a blue pen."
+      ]
+    },
+    {
+      "id": "gu.have_has.24",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "rewrite",
+      "sentence": "We has a big garden.",
+      "rule": "With we, use have.",
+      "right": [
+        "We have a big garden."
+      ]
+    },
+    {
+      "id": "gu.agreement.29",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "rewrite",
+      "sentence": "My brother play cricket every day.",
+      "rule": "One person: the verb takes -s: plays.",
+      "right": [
+        "My brother plays cricket every day."
+      ]
+    },
+    {
+      "id": "gu.agreement.30",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "rewrite",
+      "sentence": "The birds sings in the morning.",
+      "rule": "More than one: no -s: sing.",
+      "right": [
+        "The birds sing in the morning."
+      ]
+    },
+    {
+      "id": "gu.past.22",
+      "level": 2,
+      "topic": "past",
+      "kind": "rewrite",
+      "sentence": "Yesterday we walk to the park.",
+      "rule": "Yesterday means the past: walked.",
+      "right": [
+        "Yesterday we walked to the park."
+      ]
+    },
+    {
+      "id": "gu.past.23",
+      "level": 2,
+      "topic": "past",
+      "kind": "rewrite",
+      "sentence": "Last night she cook rice.",
+      "rule": "Last night means the past: cooked.",
+      "right": [
+        "Last night she cooked rice."
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.23",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "rewrite",
+      "sentence": "Yesterday I goed to school by bus.",
+      "rule": "Go is irregular: went.",
+      "right": [
+        "Yesterday I went to school by bus."
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.24",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "rewrite",
+      "sentence": "She eated all the grapes.",
+      "rule": "Eat is irregular: ate.",
+      "right": [
+        "She ate all the grapes."
+      ]
+    },
+    {
+      "id": "gu.this_these.23",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "rewrite",
+      "sentence": "These pencil is mine.",
+      "rule": "One thing near you: this.",
+      "right": [
+        "This pencil is mine."
+      ]
+    },
+    {
+      "id": "gu.future.21",
+      "level": 2,
+      "topic": "future",
+      "kind": "rewrite",
+      "sentence": "Tomorrow I will goes to Chennai.",
+      "rule": "After will, use the plain verb: will go.",
+      "right": [
+        "Tomorrow I will go to Chennai."
+      ]
+    },
+    {
+      "id": "gu.continuous.20",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "rewrite",
+      "sentence": "Look, the baby is sleep.",
+      "rule": "Is with -ing shows what is happening now: is sleeping.",
+      "right": [
+        "Look, the baby is sleeping."
+      ]
+    },
+    {
+      "id": "gu.comparison.20",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "rewrite",
+      "sentence": "A lion is more strong than a cat.",
+      "rule": "A short word takes -er: stronger.",
+      "right": [
+        "A lion is stronger than a cat."
+      ]
+    },
+    {
+      "id": "gu.pronouns.11",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "choose",
+      "question": "Which word fits?",
+      "wrong": [
+        "He",
+        "They"
+      ],
+      "sentence": "Meena likes music. ___ sings well.",
+      "rule": "Meena is a girl: she.",
+      "right": [
+        "She"
+      ]
+    },
+    {
+      "id": "gu.pronouns.12",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "choose",
+      "question": "Which word fits?",
+      "wrong": [
+        "it",
+        "they"
+      ],
+      "sentence": "The books are on the shelf. Please bring ___ here.",
+      "rule": "More than one thing, after a verb: them.",
+      "right": [
+        "them"
+      ]
+    },
+    {
+      "id": "gu.pronouns.13",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "rewrite",
+      "sentence": "Ravi is tall. Ravi plays basketball.",
+      "rule": "Use he in place of the boy's name the second time.",
+      "right": [
+        "Ravi is tall. He plays basketball."
+      ]
+    },
+    {
+      "id": "gu.questions.11",
+      "level": 1,
+      "topic": "questions",
+      "kind": "rewrite",
+      "sentence": "Where you are going?",
+      "rule": "In a question, the helping word comes before you: are you.",
+      "right": [
+        "Where are you going?"
+      ]
+    },
+    {
+      "id": "gu.questions.12",
+      "level": 1,
+      "topic": "questions",
+      "kind": "rewrite",
+      "sentence": "What is your name.",
+      "rule": "A question ends with a question mark.",
+      "right": [
+        "What is your name?"
+      ]
+    },
+    {
+      "id": "gu.alphabetical.09",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "cow fish goat hen",
+      "rule": "Words go in the order of their first letters: c, f, g, h.",
+      "parts": [
+        "cow",
+        "fish",
+        "goat",
+        "hen"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.10",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "ball bell bird boat",
+      "rule": "The first letters match, so look at the second: a, e, i, o.",
+      "parts": [
+        "ball",
+        "bell",
+        "bird",
+        "boat"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.11",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "mango orange papaya plum",
+      "rule": "m, o, then p; papaya and plum share p, so look at the next letter: a before l.",
+      "parts": [
+        "mango",
+        "orange",
+        "papaya",
+        "plum"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.12",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "egg ink owl umbrella",
+      "rule": "e, i, o, u: the vowels in order.",
+      "parts": [
+        "egg",
+        "ink",
+        "owl",
+        "umbrella"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.prepositions.09",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "The cat is hiding [on] the bed.",
+      "rule": "Below something: under.",
+      "right": [
+        "under"
+      ]
+    },
+    {
+      "id": "gu.prepositions.10",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "We go to school [in] eight o'clock.",
+      "rule": "For a clock time, use at.",
+      "right": [
+        "at"
+      ]
+    },
+    {
+      "id": "gu.prepositions.11",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "My birthday is [at] June.",
+      "rule": "For a month, use in.",
+      "right": [
+        "in"
+      ]
+    },
+    {
+      "id": "gu.prepositions.12",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "The ball is [between] the box.",
+      "rule": "Inside something: in.",
+      "right": [
+        "in"
+      ]
+    },
+    {
+      "id": "gu.conjunctions.13",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "rewrite",
+      "sentence": "I was hungry and I had no food.",
+      "rule": "But shows a difference: hungry, but no food.",
+      "right": [
+        "I was hungry but I had no food."
+      ]
+    },
+    {
+      "id": "gu.titles.09",
+      "level": 2,
+      "topic": "titles",
+      "kind": "rewrite",
+      "sentence": "I read the little prince last summer.",
+      "rule": "The first word and the main words of a title take capitals.",
+      "right": [
+        "I read The Little Prince last summer."
+      ]
+    },
+    {
+      "id": "gu.titles.10",
+      "level": 2,
+      "topic": "titles",
+      "kind": "rewrite",
+      "sentence": "Have you read The Wind In The Willows?",
+      "rule": "Small words like in and the stay small inside a title.",
+      "right": [
+        "Have you read The Wind in the Willows?"
+      ]
+    },
+    {
+      "id": "gu.possessives.13",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "rewrite",
+      "sentence": "This is Meenas umbrella.",
+      "rule": "To show it belongs to Meena, add 's.",
+      "right": [
+        "This is Meena's umbrella."
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.09",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "My little sister sings well.",
+      "rule": "The subject is who the sentence is about: my little sister.",
+      "right": [
+        "My",
+        "little",
+        "sister"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.10",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "predicate",
+      "sentence": "The red kite flew high.",
+      "rule": "The predicate tells what the subject did: flew high.",
+      "right": [
+        "flew",
+        "high"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.11",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "Our teacher smiled at us.",
+      "rule": "The subject is who the sentence is about: our teacher.",
+      "right": [
+        "Our",
+        "teacher"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.12",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "Ten green parrots sat on the wall.",
+      "rule": "The subject is what the sentence is about: ten green parrots.",
+      "right": [
+        "Ten",
+        "green",
+        "parrots"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.09",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "A [team] of sheep was eating grass.",
+      "rule": "A group of sheep is a flock.",
+      "right": [
+        "flock"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.10",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "We saw a [crowd] of cows on the road.",
+      "rule": "A group of cows is a herd.",
+      "right": [
+        "herd"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.11",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "The [herd] of players ran onto the field.",
+      "rule": "A group of players is a team.",
+      "right": [
+        "team"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.12",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "A [flock] of bees lives in that tree.",
+      "rule": "A group of bees is a swarm.",
+      "right": [
+        "swarm"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.09",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "We visited [chennai] last week.",
+      "rule": "A proper noun, the name of one place, starts with a capital letter.",
+      "right": [
+        "Chennai"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.10",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "There is too [many] milk in the cup.",
+      "rule": "Milk cannot be counted: much.",
+      "right": [
+        "much"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.11",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "How [much] apples did you buy?",
+      "rule": "Apples can be counted: many.",
+      "right": [
+        "many"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.12",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "My friend [ravi] lives next door.",
+      "rule": "A person's name is a proper noun: a capital letter.",
+      "right": [
+        "Ravi"
+      ]
+    },
+    {
+      "id": "gu.interjections.09",
+      "level": 3,
+      "topic": "interjections",
+      "kind": "build",
+      "sentence": "Oh no! I forgot my bag.",
+      "rule": "Oh no shows a sudden feeling and takes an exclamation mark."
+    },
+    {
+      "id": "gu.interjections.10",
+      "level": 3,
+      "topic": "interjections",
+      "kind": "build",
+      "sentence": "Wow! That is a tall tower.",
+      "rule": "Wow shows surprise and takes an exclamation mark."
+    },
+    {
+      "id": "gu.interjections.11",
+      "level": 3,
+      "topic": "interjections",
+      "kind": "build",
+      "sentence": "Ouch! The pan is hot.",
+      "rule": "Ouch shows pain and takes an exclamation mark."
+    },
+    {
+      "id": "gu.interjections.12",
+      "level": 3,
+      "topic": "interjections",
+      "kind": "rewrite",
+      "sentence": "hurray we won the game",
+      "rule": "An interjection takes an exclamation mark; the next sentence starts with a capital.",
+      "right": [
+        "Hurray! We won the game."
+      ]
+    },
+    {
+      "id": "gu.contractions.09",
+      "level": 3,
+      "topic": "contractions",
+      "kind": "fix",
+      "sentence": "[Its] raining outside.",
+      "rule": "It is becomes it's.",
+      "right": [
+        "It's"
+      ]
+    },
+    {
+      "id": "gu.contractions.10",
+      "level": 3,
+      "topic": "contractions",
+      "kind": "rewrite",
+      "sentence": "I cant come and she isnt here.",
+      "rule": "Can't and isn't each need an apostrophe where letters are missing.",
+      "right": [
+        "I can't come and she isn't here."
+      ]
+    },
+    {
+      "id": "gu.contractions.11",
+      "level": 3,
+      "topic": "contractions",
+      "kind": "rewrite",
+      "sentence": "They're not coming, are'nt they?",
+      "rule": "The tag after a negative is positive: are they.",
+      "right": [
+        "They're not coming, are they?"
+      ]
+    },
+    {
+      "id": "gu.compound.10",
+      "level": 3,
+      "topic": "compound",
+      "kind": "build",
+      "sentence": "It was late, so we went home.",
+      "rule": "So joins two sentences: the second follows from the first."
+    },
+    {
+      "id": "gu.compound.11",
+      "level": 3,
+      "topic": "compound",
+      "kind": "rewrite",
+      "sentence": "I like tea, she likes coffee.",
+      "rule": "Two full sentences need a joining word: but.",
+      "right": [
+        "I like tea, but she likes coffee."
+      ]
+    },
+    {
+      "id": "gu.compound.12",
+      "level": 3,
+      "topic": "compound",
+      "kind": "rewrite",
+      "sentence": "The rain stopped we went out.",
+      "rule": "Join two full sentences with a comma and so.",
+      "right": [
+        "The rain stopped, so we went out."
+      ]
+    },
+    {
+      "id": "gu.punctuation.10",
+      "level": 3,
+      "topic": "punctuation",
+      "kind": "rewrite",
+      "sentence": "Did you see the rainbow.",
+      "rule": "A question ends with a question mark.",
+      "right": [
+        "Did you see the rainbow?"
+      ]
+    },
+    {
+      "id": "gu.punctuation.11",
+      "level": 3,
+      "topic": "punctuation",
+      "kind": "rewrite",
+      "sentence": "I bought pens pencils and erasers.",
+      "rule": "Commas separate the things in a list.",
+      "right": [
+        "I bought pens, pencils and erasers."
+      ]
+    },
+    {
+      "id": "gu.punctuation.12",
+      "level": 3,
+      "topic": "punctuation",
+      "kind": "rewrite",
+      "sentence": "what a beautiful garden!",
+      "rule": "A sentence starts with a capital letter.",
+      "right": [
+        "What a beautiful garden!"
+      ]
+    },
+    {
+      "id": "gu.sentence_order.09",
+      "level": 3,
+      "topic": "sentence_order",
+      "kind": "build",
+      "sentence": "Ravi planted a seed. He watered it every day. At last a small plant came up.",
+      "rule": "At last tells what came at the end.",
+      "parts": [
+        "Ravi planted a seed.",
+        "He watered it every day.",
+        "At last a small plant came up."
+      ]
+    },
+    {
+      "id": "gu.sentence_order.10",
+      "level": 3,
+      "topic": "sentence_order",
+      "kind": "build",
+      "sentence": "First, Amma washed the rice. Then she put it on the stove. Finally, we ate lunch.",
+      "rule": "First, then and finally show the order.",
+      "parts": [
+        "First, Amma washed the rice.",
+        "Then she put it on the stove.",
+        "Finally, we ate lunch."
+      ]
+    },
+    {
+      "id": "gu.sentence_order.11",
+      "level": 3,
+      "topic": "sentence_order",
+      "kind": "build",
+      "sentence": "The bell rang. The children went to their classes. The teacher began the lesson.",
+      "rule": "The bell rings before class begins.",
+      "parts": [
+        "The bell rang.",
+        "The children went to their classes.",
+        "The teacher began the lesson."
+      ]
+    },
+    {
+      "id": "gu.sentence_order.12",
+      "level": 3,
+      "topic": "sentence_order",
+      "kind": "build",
+      "sentence": "Meena packed her bag. She caught the bus. She reached school on time.",
+      "rule": "She packs before she leaves, and leaves before she reaches school.",
+      "parts": [
+        "Meena packed her bag.",
+        "She caught the bus.",
+        "She reached school on time."
+      ]
+    },
+    {
+      "id": "gu.similes.09",
+      "level": 3,
+      "topic": "similes",
+      "kind": "fix",
+      "sentence": "The baby's cheeks were as red as a [cloud].",
+      "rule": "Things that are red: a rose.",
+      "right": [
+        "rose"
+      ]
+    },
+    {
+      "id": "gu.similes.10",
+      "level": 3,
+      "topic": "similes",
+      "kind": "fix",
+      "sentence": "The old man is as wise as an [ant].",
+      "rule": "An owl is said to be wise.",
+      "right": [
+        "owl"
+      ]
+    },
+    {
+      "id": "gu.similes.11",
+      "level": 3,
+      "topic": "similes",
+      "kind": "fix",
+      "sentence": "The water was as cold as [fire].",
+      "rule": "Ice is cold.",
+      "right": [
+        "ice"
+      ]
+    },
+    {
+      "id": "gu.similes.12",
+      "level": 3,
+      "topic": "similes",
+      "kind": "fix",
+      "sentence": "She ran as fast as the [snail].",
+      "rule": "The wind is fast; a snail is slow.",
+      "right": [
+        "wind"
+      ]
+    },
+    {
+      "id": "gu.exact_words.09",
+      "level": 3,
+      "topic": "exact_words",
+      "kind": "fix",
+      "sentence": "The happy child [walked] across the field.",
+      "rule": "A happy child skips or runs.",
+      "right": [
+        "skipped",
+        "ran",
+        "danced",
+        "hopped"
+      ]
+    },
+    {
+      "id": "gu.exact_words.10",
+      "level": 3,
+      "topic": "exact_words",
+      "kind": "fix",
+      "sentence": "The angry man [said] at the dog.",
+      "rule": "An angry man shouts.",
+      "right": [
+        "shouted",
+        "yelled",
+        "roared"
+      ]
+    },
+    {
+      "id": "gu.exact_words.11",
+      "level": 3,
+      "topic": "exact_words",
+      "kind": "fix",
+      "sentence": "The thirsty boy [ate] the water quickly.",
+      "rule": "A thirsty boy gulps or drinks water.",
+      "right": [
+        "gulped",
+        "drank"
+      ]
+    },
+    {
+      "id": "gu.exact_words.12",
+      "level": 3,
+      "topic": "exact_words",
+      "kind": "fix",
+      "sentence": "The mouse [walked] quickly into its hole.",
+      "rule": "A mouse scurries.",
+      "right": [
+        "scurried",
+        "ran",
+        "darted",
+        "scampered"
+      ]
+    },
+    {
+      "id": "gu.context_meaning.11",
+      "level": 3,
+      "topic": "context_meaning",
+      "kind": "choose",
+      "question": "What does \"dim\" most likely mean here?",
+      "wrong": [
+        "very warm",
+        "very big"
+      ],
+      "sentence": "The room was so dim that we could hardly see our hands.",
+      "rule": "Hardly seeing your hands shows the room was not bright.",
+      "right": [
+        "not bright"
+      ]
+    },
+    {
+      "id": "gu.context_meaning.12",
+      "level": 3,
+      "topic": "context_meaning",
+      "kind": "choose",
+      "question": "What does \"elated\" most likely mean here?",
+      "wrong": [
+        "very tired",
+        "very angry"
+      ],
+      "sentence": "She was elated when she won the prize and jumped with joy.",
+      "rule": "Jumping with joy shows she was very happy.",
+      "right": [
+        "very happy"
+      ]
+    },
+    {
+      "id": "gu.adverbs.09",
+      "level": 4,
+      "topic": "adverbs",
+      "kind": "fix",
+      "sentence": "The tortoise walks [slow].",
+      "rule": "An adverb tells how: slowly.",
+      "right": [
+        "slowly"
+      ]
+    },
+    {
+      "id": "gu.adverbs.10",
+      "level": 4,
+      "topic": "adverbs",
+      "kind": "fix",
+      "sentence": "Please speak [quiet] in the library.",
+      "rule": "An adverb tells how: quietly.",
+      "right": [
+        "quietly"
+      ]
+    },
+    {
+      "id": "gu.adverbs.11",
+      "level": 4,
+      "topic": "adverbs",
+      "kind": "rewrite",
+      "sentence": "She sang the song sweet.",
+      "rule": "How did she sing? Sweetly: an adverb.",
+      "right": [
+        "She sang the song sweetly."
+      ]
+    },
+    {
+      "id": "gu.adverbs.12",
+      "level": 4,
+      "topic": "adverbs",
+      "kind": "rewrite",
+      "sentence": "He finished his work quick.",
+      "rule": "How did he finish? Quickly: an adverb.",
+      "right": [
+        "He finished his work quickly."
+      ]
+    },
+    {
+      "id": "gu.phrasal_verbs.09",
+      "level": 4,
+      "topic": "phrasal_verbs",
+      "kind": "fix",
+      "sentence": "Please turn [of] the fan when you leave.",
+      "rule": "Turn off means stop it working.",
+      "right": [
+        "off"
+      ]
+    },
+    {
+      "id": "gu.phrasal_verbs.10",
+      "level": 4,
+      "topic": "phrasal_verbs",
+      "kind": "fix",
+      "sentence": "I wake [down] at six every day.",
+      "rule": "Wake up means stop sleeping.",
+      "right": [
+        "up"
+      ]
+    },
+    {
+      "id": "gu.phrasal_verbs.11",
+      "level": 4,
+      "topic": "phrasal_verbs",
+      "kind": "fix",
+      "sentence": "Put [in] your shoes before you go out.",
+      "rule": "Put on means wear.",
+      "right": [
+        "on"
+      ]
+    },
+    {
+      "id": "gu.phrasal_verbs.12",
+      "level": 4,
+      "topic": "phrasal_verbs",
+      "kind": "fix",
+      "sentence": "The plane took [up] on time.",
+      "rule": "Take off means leave the ground.",
+      "right": [
+        "off"
+      ]
+    },
+    {
+      "id": "gu.proverbs.09",
+      "level": 4,
+      "topic": "proverbs",
+      "kind": "build",
+      "sentence": "Where there is a will, there is a way.",
+      "rule": "If you want something enough, you will find a way."
+    },
+    {
+      "id": "gu.proverbs.10",
+      "level": 4,
+      "topic": "proverbs",
+      "kind": "build",
+      "sentence": "Little drops of water make the mighty ocean.",
+      "rule": "Small things added together make something big."
+    },
+    {
+      "id": "gu.speech.09",
+      "level": 4,
+      "topic": "speech",
+      "kind": "build",
+      "sentence": "\"I am hungry,\" said the boy.",
+      "rule": "The exact words go inside quotation marks, with a comma before the closing mark."
+    },
+    {
+      "id": "gu.speech.10",
+      "level": 4,
+      "topic": "speech",
+      "kind": "rewrite",
+      "sentence": "Meena said, i like mangoes.",
+      "rule": "The exact words go in quotation marks, starting with a capital.",
+      "right": [
+        "Meena said, \"I like mangoes.\""
+      ]
+    },
+    {
+      "id": "gu.speech.11",
+      "level": 4,
+      "topic": "speech",
+      "kind": "rewrite",
+      "sentence": "\"Where is my pen,\" asked Ravi.",
+      "rule": "A question in speech ends with a question mark inside the closing mark.",
+      "right": [
+        "\"Where is my pen?\" asked Ravi."
+      ]
+    },
+    {
+      "id": "gu.speech.12",
+      "level": 4,
+      "topic": "speech",
+      "kind": "build",
+      "sentence": "Amma said that dinner was ready.",
+      "rule": "Reported speech tells what was said, with no quotation marks."
+    },
+    {
+      "id": "gu.linkers.09",
+      "level": 4,
+      "topic": "linkers",
+      "kind": "build",
+      "sentence": "First we packed, then we left.",
+      "rule": "First and then show the order."
+    },
+    {
+      "id": "gu.linkers.10",
+      "level": 4,
+      "topic": "linkers",
+      "kind": "build",
+      "sentence": "It rained; however, the match went on.",
+      "rule": "However shows a contrast."
+    },
+    {
+      "id": "gu.linkers.11",
+      "level": 4,
+      "topic": "linkers",
+      "kind": "rewrite",
+      "sentence": "Then I ate breakfast. First I woke up.",
+      "rule": "First comes before then.",
+      "right": [
+        "First I woke up. Then I ate breakfast."
+      ]
+    },
+    {
+      "id": "gu.linkers.12",
+      "level": 4,
+      "topic": "linkers",
+      "kind": "build",
+      "sentence": "Finally, we reached home.",
+      "rule": "Finally shows the last step."
+    },
+    {
+      "id": "gu.dialogue.09",
+      "level": 4,
+      "topic": "dialogue",
+      "kind": "build",
+      "sentence": "\"Hurry up!\" shouted Appa.",
+      "rule": "The exclamation mark goes inside the closing quotation mark."
+    },
+    {
+      "id": "gu.dialogue.10",
+      "level": 4,
+      "topic": "dialogue",
+      "kind": "build",
+      "sentence": "\"Can I come too?\" asked Meena.",
+      "rule": "The question mark goes inside the closing quotation mark."
+    },
+    {
+      "id": "gu.dialogue.11",
+      "level": 4,
+      "topic": "dialogue",
+      "kind": "rewrite",
+      "sentence": "\"Good morning\" said the teacher.",
+      "rule": "A comma comes before the closing quotation mark.",
+      "right": [
+        "\"Good morning,\" said the teacher."
+      ]
+    },
+    {
+      "id": "gu.dialogue.12",
+      "level": 4,
+      "topic": "dialogue",
+      "kind": "rewrite",
+      "sentence": "\"Sit down,\" Said Amma.",
+      "rule": "Said goes on with a small letter after the spoken words.",
+      "right": [
+        "\"Sit down,\" said Amma."
+      ]
+    },
+    {
+      "id": "gu.idioms.09",
+      "level": 4,
+      "topic": "idioms",
+      "kind": "fix",
+      "sentence": "This test was a piece of [bread].",
+      "rule": "A piece of cake means very easy.",
+      "right": [
+        "cake"
+      ]
+    },
+    {
+      "id": "gu.idioms.10",
+      "level": 4,
+      "topic": "idioms",
+      "kind": "fix",
+      "sentence": "He let the cat out of the [box].",
+      "rule": "Let the cat out of the bag means tell a secret.",
+      "right": [
+        "bag"
+      ]
+    },
+    {
+      "id": "gu.idioms.11",
+      "level": 4,
+      "topic": "idioms",
+      "kind": "fix",
+      "sentence": "Break a [hand] in your dance today!",
+      "rule": "Break a leg means good luck.",
+      "right": [
+        "leg"
+      ]
+    },
+    {
+      "id": "gu.idioms.12",
+      "level": 4,
+      "topic": "idioms",
+      "kind": "fix",
+      "sentence": "She is feeling under the [rain].",
+      "rule": "Under the weather means a little ill.",
+      "right": [
+        "weather"
+      ]
+    },
+    {
+      "id": "gu.field_words.09",
+      "level": 4,
+      "topic": "field_words",
+      "kind": "fix",
+      "sentence": "The batsman [kicked] the ball for four runs.",
+      "rule": "In cricket, a batsman hits the ball.",
+      "right": [
+        "hit"
+      ]
+    },
+    {
+      "id": "gu.field_words.10",
+      "level": 4,
+      "topic": "field_words",
+      "kind": "fix",
+      "sentence": "The doctor [cooked] the boy's arm in a bandage.",
+      "rule": "A doctor wraps a bandage.",
+      "right": [
+        "wrapped"
+      ]
+    },
+    {
+      "id": "gu.field_words.11",
+      "level": 4,
+      "topic": "field_words",
+      "kind": "fix",
+      "sentence": "The farmer [baked] the seeds in the field.",
+      "rule": "A farmer sows seeds.",
+      "right": [
+        "sowed",
+        "planted"
+      ]
+    },
+    {
+      "id": "gu.field_words.12",
+      "level": 4,
+      "topic": "field_words",
+      "kind": "fix",
+      "sentence": "The teacher [served] the lesson on the board.",
+      "rule": "A teacher writes on the board.",
+      "right": [
+        "wrote",
+        "explained"
+      ]
+    },
+    {
+      "id": "gu.opinion_reason.09",
+      "level": 4,
+      "topic": "opinion_reason",
+      "kind": "build",
+      "sentence": "I like winter because the air is cool.",
+      "rule": "Because gives the reason."
+    },
+    {
+      "id": "gu.opinion_reason.10",
+      "level": 4,
+      "topic": "opinion_reason",
+      "kind": "build",
+      "sentence": "I think we should plant trees because they give shade.",
+      "rule": "Because gives the reason."
+    },
+    {
+      "id": "gu.opinion_reason.11",
+      "level": 4,
+      "topic": "opinion_reason",
+      "kind": "build",
+      "sentence": "I enjoy maths because I like puzzles.",
+      "rule": "Because gives the reason."
+    },
+    {
+      "id": "gu.sound_words.09",
+      "level": 4,
+      "topic": "sound_words",
+      "kind": "fix",
+      "sentence": "The snake [barked] at the frog.",
+      "rule": "A snake hisses.",
+      "right": [
+        "hissed"
+      ]
+    },
+    {
+      "id": "gu.sound_words.10",
+      "level": 4,
+      "topic": "sound_words",
+      "kind": "fix",
+      "sentence": "The rain [roared] softly on the window.",
+      "rule": "Soft rain patters.",
+      "right": [
+        "pattered",
+        "tapped"
+      ]
+    },
+    {
+      "id": "gu.sound_words.11",
+      "level": 4,
+      "topic": "sound_words",
+      "kind": "fix",
+      "sentence": "The dosa [buzzed] on the hot pan.",
+      "rule": "Food sizzles on a hot pan.",
+      "right": [
+        "sizzled"
+      ]
+    },
+    {
+      "id": "gu.sound_words.12",
+      "level": 4,
+      "topic": "sound_words",
+      "kind": "fix",
+      "sentence": "The door [mooed] as it opened.",
+      "rule": "An old door creaks.",
+      "right": [
+        "creaked"
+      ]
+    },
+    {
+      "id": "gu.adjective_kinds.09",
+      "level": 4,
+      "topic": "adjective_kinds",
+      "kind": "choose",
+      "question": "What kind of adjective is \"some\"?",
+      "wrong": [
+        "It tells what kind",
+        "It points out which one"
+      ],
+      "sentence": "She bought some rice.",
+      "rule": "Some tells how much.",
+      "right": [
+        "It tells how much"
+      ]
+    },
+    {
+      "id": "gu.adjective_kinds.10",
+      "level": 4,
+      "topic": "adjective_kinds",
+      "kind": "choose",
+      "question": "What kind of adjective is \"tall\"?",
+      "wrong": [
+        "It tells how many",
+        "It tells how much"
+      ],
+      "sentence": "The tall tree fell.",
+      "rule": "Tall tells what kind of tree.",
+      "right": [
+        "It tells what kind"
+      ]
+    },
+    {
+      "id": "gu.adjective_kinds.11",
+      "level": 4,
+      "topic": "adjective_kinds",
+      "kind": "choose",
+      "question": "What kind of adjective is \"five\"?",
+      "wrong": [
+        "It tells what kind",
+        "It tells how much"
+      ],
+      "sentence": "Five birds sat on the wire.",
+      "rule": "Five tells how many.",
+      "right": [
+        "It tells how many"
+      ]
+    },
+    {
+      "id": "gu.adjective_kinds.12",
+      "level": 4,
+      "topic": "adjective_kinds",
+      "kind": "choose",
+      "question": "What kind of adjective is \"that\"?",
+      "wrong": [
+        "It tells how many",
+        "It tells what kind"
+      ],
+      "sentence": "That bag is mine.",
+      "rule": "That points out which bag.",
+      "right": [
+        "It points out which one"
+      ]
+    },
+    {
+      "id": "gu.tenses.09",
+      "level": 5,
+      "topic": "tenses",
+      "kind": "fix",
+      "sentence": "She has [eat] her lunch.",
+      "rule": "Has with the third form: has eaten.",
+      "right": [
+        "eaten"
+      ]
+    },
+    {
+      "id": "gu.tenses.10",
+      "level": 5,
+      "topic": "tenses",
+      "kind": "rewrite",
+      "sentence": "I have saw that film twice.",
+      "rule": "Have with the third form: have seen.",
+      "right": [
+        "I have seen that film twice."
+      ]
+    },
+    {
+      "id": "gu.tenses.11",
+      "level": 5,
+      "topic": "tenses",
+      "kind": "rewrite",
+      "sentence": "He has wrote three letters.",
+      "rule": "Has with the third form: has written.",
+      "right": [
+        "He has written three letters."
+      ]
+    },
+    {
+      "id": "gu.confusables.09",
+      "level": 5,
+      "topic": "confusables",
+      "kind": "fix",
+      "sentence": "[Your] welcome to join us.",
+      "rule": "You're means you are.",
+      "right": [
+        "You're"
+      ]
+    },
+    {
+      "id": "gu.confusables.10",
+      "level": 5,
+      "topic": "confusables",
+      "kind": "fix",
+      "sentence": "I want to go [to], please.",
+      "rule": "Too means also.",
+      "right": [
+        "too"
+      ]
+    },
+    {
+      "id": "gu.confusables.11",
+      "level": 5,
+      "topic": "confusables",
+      "kind": "rewrite",
+      "sentence": "Their going to the fair.",
+      "rule": "They're means they are.",
+      "right": [
+        "They're going to the fair."
+      ]
+    },
+    {
+      "id": "gu.affixes.09",
+      "level": 5,
+      "topic": "affixes",
+      "kind": "fix",
+      "sentence": "Please [write] your answer neatly; it is hard to read.",
+      "rule": "Re- means again: rewrite.",
+      "right": [
+        "rewrite"
+      ]
+    },
+    {
+      "id": "gu.affixes.10",
+      "level": 5,
+      "topic": "affixes",
+      "kind": "fix",
+      "sentence": "The boy was very [help] to his grandmother.",
+      "rule": "-ful means full of: helpful.",
+      "right": [
+        "helpful"
+      ]
+    },
+    {
+      "id": "gu.affixes.11",
+      "level": 5,
+      "topic": "affixes",
+      "kind": "fix",
+      "sentence": "The water is [harm]; you can drink it.",
+      "rule": "-less means without: harmless.",
+      "right": [
+        "harmless"
+      ]
+    },
+    {
+      "id": "gu.affixes.12",
+      "level": 5,
+      "topic": "affixes",
+      "kind": "fix",
+      "sentence": "The door was [locked], so we went in.",
+      "rule": "Un- means not: unlocked.",
+      "right": [
+        "unlocked"
+      ]
+    },
+    {
+      "id": "gu.transitive.09",
+      "level": 5,
+      "topic": "transitive",
+      "kind": "spot",
+      "ask": "object",
+      "sentence": "Meena painted a picture.",
+      "rule": "Painted is transitive: its object is a picture.",
+      "right": [
+        "picture"
+      ]
+    },
+    {
+      "id": "gu.transitive.10",
+      "level": 5,
+      "topic": "transitive",
+      "kind": "spot",
+      "ask": "object",
+      "sentence": "The dog chased the cat.",
+      "rule": "Chased is transitive: its object is the cat.",
+      "right": [
+        "cat"
+      ]
+    },
+    {
+      "id": "gu.transitive.11",
+      "level": 5,
+      "topic": "transitive",
+      "kind": "choose",
+      "question": "Is the verb transitive or intransitive?",
+      "wrong": [
+        "Transitive"
+      ],
+      "sentence": "The children laughed.",
+      "rule": "Laughed has no object.",
+      "right": [
+        "Intransitive"
+      ]
+    },
+    {
+      "id": "gu.transitive.12",
+      "level": 5,
+      "topic": "transitive",
+      "kind": "choose",
+      "question": "Is the verb transitive or intransitive?",
+      "wrong": [
+        "Intransitive"
+      ],
+      "sentence": "Ravi wrote a letter.",
+      "rule": "Wrote has an object: a letter.",
+      "right": [
+        "Transitive"
+      ]
+    },
+    {
+      "id": "gu.synonyms_antonyms.09",
+      "level": 5,
+      "topic": "synonyms_antonyms",
+      "kind": "fix",
+      "sentence": "The opposite of brave is [strong].",
+      "rule": "The antonym of brave is cowardly.",
+      "right": [
+        "cowardly",
+        "afraid",
+        "scared",
+        "fearful",
+        "timid"
+      ]
+    },
+    {
+      "id": "gu.synonyms_antonyms.10",
+      "level": 5,
+      "topic": "synonyms_antonyms",
+      "kind": "fix",
+      "sentence": "A word that means the same as quick is [slow].",
+      "rule": "A synonym of quick is fast.",
+      "right": [
+        "fast",
+        "rapid",
+        "swift"
+      ]
+    },
+    {
+      "id": "gu.synonyms_antonyms.11",
+      "level": 5,
+      "topic": "synonyms_antonyms",
+      "kind": "fix",
+      "sentence": "A word that means the same as begin is [end].",
+      "rule": "A synonym of begin is start.",
+      "right": [
+        "start",
+        "commence"
+      ]
+    },
+    {
+      "id": "gu.prediction.09",
+      "level": 5,
+      "topic": "prediction",
+      "kind": "choose",
+      "question": "Which word most likely comes next?",
+      "wrong": [
+        "is",
+        "were"
+      ],
+      "sentence": "Twinkle, twinkle, little star, how I wonder what you ...",
+      "rule": "It rhymes with star: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.prediction.10",
+      "level": 5,
+      "topic": "prediction",
+      "kind": "choose",
+      "question": "Which word most likely comes next?",
+      "wrong": [
+        "kite",
+        "ball"
+      ],
+      "sentence": "Ravi saw dark clouds and heard thunder, so he picked up his ...",
+      "rule": "Dark clouds mean rain is coming.",
+      "right": [
+        "umbrella"
+      ]
+    },
+    {
+      "id": "gu.prediction.11",
+      "level": 5,
+      "topic": "prediction",
+      "kind": "choose",
+      "question": "Which word most likely comes next?",
+      "wrong": [
+        "Friday",
+        "Sunday"
+      ],
+      "sentence": "Monday, Tuesday, Wednesday, ...",
+      "rule": "The days follow in order.",
+      "right": [
+        "Thursday"
+      ]
+    },
+    {
+      "id": "gu.prediction.12",
+      "level": 5,
+      "topic": "prediction",
+      "kind": "choose",
+      "question": "Which word most likely comes next?",
+      "wrong": [
+        "shoes",
+        "books"
+      ],
+      "sentence": "The hungry boy opened the fridge and took out some ...",
+      "rule": "A hungry boy wants food.",
+      "right": [
+        "food"
+      ]
+    },
+    {
+      "id": "gu.relative.09",
+      "level": 6,
+      "topic": "relative",
+      "kind": "build",
+      "sentence": "The girl who sings is my sister.",
+      "rule": "Who adds information about a person."
+    },
+    {
+      "id": "gu.relative.10",
+      "level": 6,
+      "topic": "relative",
+      "kind": "build",
+      "sentence": "The book which I lost was new.",
+      "rule": "Which adds information about a thing."
+    },
+    {
+      "id": "gu.relative.11",
+      "level": 6,
+      "topic": "relative",
+      "kind": "rewrite",
+      "sentence": "The man which lives here is a doctor.",
+      "rule": "Use who for a person.",
+      "right": [
+        "The man who lives here is a doctor."
+      ]
+    },
+    {
+      "id": "gu.relative.12",
+      "level": 6,
+      "topic": "relative",
+      "kind": "rewrite",
+      "sentence": "This is the pen who I bought.",
+      "rule": "Use which or that for a thing.",
+      "right": [
+        "This is the pen which I bought.",
+        "This is the pen that I bought."
+      ]
+    },
+    {
+      "id": "gu.pronoun_case.09",
+      "level": 6,
+      "topic": "pronoun_case",
+      "kind": "fix",
+      "sentence": "Amma gave [I] a sweet.",
+      "rule": "After a verb, use me.",
+      "right": [
+        "me"
+      ]
+    },
+    {
+      "id": "gu.pronoun_case.10",
+      "level": 6,
+      "topic": "pronoun_case",
+      "kind": "fix",
+      "sentence": "[Him] and I are friends.",
+      "rule": "For the doer, use he.",
+      "right": [
+        "He"
+      ]
+    },
+    {
+      "id": "gu.pronoun_case.11",
+      "level": 6,
+      "topic": "pronoun_case",
+      "kind": "fix",
+      "sentence": "Come with [we] to the park.",
+      "rule": "After with, use us.",
+      "right": [
+        "us"
+      ]
+    },
+    {
+      "id": "gu.pronoun_case.12",
+      "level": 6,
+      "topic": "pronoun_case",
+      "kind": "rewrite",
+      "sentence": "Me and Ravi played chess.",
+      "rule": "For the doer, use I, and put the other person first.",
+      "right": [
+        "Ravi and I played chess."
+      ]
+    },
+    {
+      "id": "gu.pronoun_agreement.11",
+      "level": 6,
+      "topic": "pronoun_agreement",
+      "kind": "rewrite",
+      "sentence": "Every girl brought his own lunch.",
+      "rule": "A girl takes her.",
+      "right": [
+        "Every girl brought her own lunch."
+      ]
+    },
+    {
+      "id": "gu.pronoun_agreement.12",
+      "level": 6,
+      "topic": "pronoun_agreement",
+      "kind": "rewrite",
+      "sentence": "The dogs wagged its tails.",
+      "rule": "More than one takes their.",
+      "right": [
+        "The dogs wagged their tails."
+      ]
+    },
+    {
+      "id": "gu.tense_shift.11",
+      "level": 6,
+      "topic": "tense_shift",
+      "kind": "rewrite",
+      "sentence": "She closed the book and goes to sleep.",
+      "rule": "A story in the past stays in the past: went.",
+      "right": [
+        "She closed the book and went to sleep."
+      ]
+    },
+    {
+      "id": "gu.tense_shift.12",
+      "level": 6,
+      "topic": "tense_shift",
+      "kind": "rewrite",
+      "sentence": "We reach the station and missed the train.",
+      "rule": "Keep to one tense: reached.",
+      "right": [
+        "We reached the station and missed the train."
+      ]
+    },
+    {
+      "id": "gu.clauses.09",
+      "level": 6,
+      "topic": "clauses",
+      "kind": "spot",
+      "ask": "main clause",
+      "sentence": "Because she was tired, Meena slept early.",
+      "rule": "The main clause can stand alone: Meena slept early.",
+      "right": [
+        "Meena",
+        "slept",
+        "early"
+      ]
+    },
+    {
+      "id": "gu.clauses.10",
+      "level": 6,
+      "topic": "clauses",
+      "kind": "spot",
+      "ask": "main clause",
+      "sentence": "We played cricket after the rain stopped.",
+      "rule": "The main clause can stand alone: we played cricket.",
+      "right": [
+        "We",
+        "played",
+        "cricket"
+      ]
+    },
+    {
+      "id": "gu.clauses.11",
+      "level": 6,
+      "topic": "clauses",
+      "kind": "spot",
+      "ask": "main clause",
+      "sentence": "If you hurry, you will catch the bus.",
+      "rule": "The main clause can stand alone: you will catch the bus.",
+      "right": [
+        "will",
+        "catch",
+        "bus"
+      ]
+    },
+    {
+      "id": "gu.clauses.12",
+      "level": 6,
+      "topic": "clauses",
+      "kind": "spot",
+      "ask": "main clause",
+      "sentence": "The boy smiled when he saw his gift.",
+      "rule": "The main clause can stand alone: the boy smiled.",
+      "right": [
+        "boy",
+        "smiled"
+      ]
+    },
+    {
+      "id": "gu.phrase_clause.09",
+      "level": 6,
+      "topic": "phrase_clause",
+      "kind": "choose",
+      "question": "Are the words in capital letters a phrase or a clause?",
+      "wrong": [
+        "A phrase"
+      ],
+      "sentence": "I smiled BECAUSE SHE WAVED.",
+      "rule": "She waved has a subject and a verb.",
+      "right": [
+        "A clause"
+      ]
+    },
+    {
+      "id": "gu.phrase_clause.10",
+      "level": 6,
+      "topic": "phrase_clause",
+      "kind": "choose",
+      "question": "Are the words in capital letters a phrase or a clause?",
+      "wrong": [
+        "A clause"
+      ],
+      "sentence": "AFTER LUNCH, we read.",
+      "rule": "After lunch has no verb.",
+      "right": [
+        "A phrase"
+      ]
+    },
+    {
+      "id": "gu.phrase_clause.11",
+      "level": 6,
+      "topic": "phrase_clause",
+      "kind": "choose",
+      "question": "Are the words in capital letters a phrase or a clause?",
+      "wrong": [
+        "A phrase"
+      ],
+      "sentence": "WHEN THE BELL RANG, we ran out.",
+      "rule": "The bell rang has a subject and a verb.",
+      "right": [
+        "A clause"
+      ]
+    },
+    {
+      "id": "gu.figures.09",
+      "level": 6,
+      "topic": "figures",
+      "kind": "choose",
+      "question": "Which figure of speech is this?",
+      "wrong": [
+        "Metaphor",
+        "Personification"
+      ],
+      "sentence": "Her smile was as bright as the sun.",
+      "rule": "It compares using as.",
+      "right": [
+        "Simile"
+      ]
+    },
+    {
+      "id": "gu.figures.10",
+      "level": 6,
+      "topic": "figures",
+      "kind": "choose",
+      "question": "Which figure of speech is this?",
+      "wrong": [
+        "Simile",
+        "Metaphor"
+      ],
+      "sentence": "The sun smiled down on us.",
+      "rule": "The sun is given a human action.",
+      "right": [
+        "Personification"
+      ]
+    },
+    {
+      "id": "gu.figures.11",
+      "level": 6,
+      "topic": "figures",
+      "kind": "choose",
+      "question": "Which figure of speech is this?",
+      "wrong": [
+        "Simile",
+        "Metaphor"
+      ],
+      "sentence": "Peter Piper picked a peck of pickled peppers.",
+      "rule": "Many words start with the same sound.",
+      "right": [
+        "Alliteration"
+      ]
+    },
+    {
+      "id": "gu.register.09",
+      "level": 6,
+      "topic": "register",
+      "kind": "choose",
+      "question": "Which sentence fits?",
+      "wrong": [
+        "I request the pleasure of your company at play.",
+        "Kindly confirm your attendance at play."
+      ],
+      "sentence": "A note to your best friend.",
+      "rule": "To a friend, informal words fit.",
+      "right": [
+        "Hey, want to play after school?"
+      ]
+    },
+    {
+      "id": "gu.register.10",
+      "level": 6,
+      "topic": "register",
+      "kind": "choose",
+      "question": "Which sentence fits?",
+      "wrong": [
+        "Hi guys, what's up?",
+        "Yo, everyone!"
+      ],
+      "sentence": "A speech at the school assembly.",
+      "rule": "A speech is formal.",
+      "right": [
+        "Good morning, respected teachers and dear friends."
+      ]
+    },
+    {
+      "id": "gu.register.11",
+      "level": 6,
+      "topic": "register",
+      "kind": "choose",
+      "question": "Which sentence fits?",
+      "wrong": [
+        "Help me out, okay?",
+        "Pls help."
+      ],
+      "sentence": "An email to the principal.",
+      "rule": "To the principal, polite and complete words fit.",
+      "right": [
+        "I would be grateful for your help."
+      ]
+    },
+    {
+      "id": "gu.register.12",
+      "level": 6,
+      "topic": "register",
+      "kind": "choose",
+      "question": "Which sentence fits?",
+      "wrong": [
+        "I look forward to our meeting on Sunday, Sir.",
+        "Kindly be present on Sunday."
+      ],
+      "sentence": "A message to your cousin.",
+      "rule": "To a cousin, informal words fit.",
+      "right": [
+        "See you on Sunday!"
+      ]
+    },
+    {
+      "id": "gu.joining.09",
+      "level": 6,
+      "topic": "joining",
+      "kind": "choose",
+      "question": "Which sentence joins the two correctly?",
+      "wrong": [
+        "Although I was tired, but I finished my work.",
+        "I was tired although I finished my work."
+      ],
+      "sentence": "I was tired. I finished my work.",
+      "rule": "Although joins; do not add but as well.",
+      "right": [
+        "Although I was tired, I finished my work."
+      ]
+    },
+    {
+      "id": "gu.joining.10",
+      "level": 6,
+      "topic": "joining",
+      "kind": "choose",
+      "question": "Which sentence joins the two correctly?",
+      "wrong": [
+        "When the bell rang, so we went home.",
+        "The bell rang when we went home."
+      ],
+      "sentence": "The bell rang. We went home.",
+      "rule": "When joins the two in order.",
+      "right": [
+        "When the bell rang, we went home."
+      ]
+    },
+    {
+      "id": "gu.joining.11",
+      "level": 6,
+      "topic": "joining",
+      "kind": "choose",
+      "question": "Which sentence joins the two correctly?",
+      "wrong": [
+        "She was ill because she stayed at home.",
+        "Because she was ill, so she stayed at home."
+      ],
+      "sentence": "She was ill. She stayed at home.",
+      "rule": "Because gives the reason.",
+      "right": [
+        "She stayed at home because she was ill."
+      ]
+    },
+    {
+      "id": "gu.joining.12",
+      "level": 6,
+      "topic": "joining",
+      "kind": "choose",
+      "question": "Which sentence joins the two correctly?",
+      "wrong": [
+        "He ran fast, so he missed the bus.",
+        "He ran fast because he missed the bus."
+      ],
+      "sentence": "He ran fast. He missed the bus.",
+      "rule": "But shows the surprise.",
+      "right": [
+        "He ran fast, but he missed the bus."
+      ]
+    },
+    {
+      "id": "gu.mood_tone.09",
+      "level": 6,
+      "topic": "mood_tone",
+      "kind": "choose",
+      "question": "What is the mood of these lines?",
+      "wrong": [
+        "Gloomy",
+        "Tense"
+      ],
+      "sentence": "Balloons danced in the breeze as children laughed and sang.",
+      "rule": "Laughing, singing and dancing balloons feel joyful.",
+      "right": [
+        "Joyful"
+      ]
+    },
+    {
+      "id": "gu.mood_tone.10",
+      "level": 6,
+      "topic": "mood_tone",
+      "kind": "choose",
+      "question": "What is the mood of these lines?",
+      "wrong": [
+        "Cheerful",
+        "Excited"
+      ],
+      "sentence": "Rain fell all day on the empty, grey street.",
+      "rule": "Grey, empty and rainy feel gloomy.",
+      "right": [
+        "Gloomy"
+      ]
+    },
+    {
+      "id": "gu.mood_tone.11",
+      "level": 6,
+      "topic": "mood_tone",
+      "kind": "choose",
+      "question": "What is the mood of these lines?",
+      "wrong": [
+        "Calm",
+        "Playful"
+      ],
+      "sentence": "Footsteps came closer. Someone was at the door.",
+      "rule": "Someone coming closer feels tense.",
+      "right": [
+        "Tense"
+      ]
+    },
+    {
+      "id": "gu.mood_tone.12",
+      "level": 6,
+      "topic": "mood_tone",
+      "kind": "choose",
+      "question": "What is the mood of these lines?",
+      "wrong": [
+        "Angry",
+        "Tense"
+      ],
+      "sentence": "The lake lay still, and birds sang softly.",
+      "rule": "Still water and soft songs feel calm.",
+      "right": [
+        "Calm"
+      ]
+    },
+    {
+      "id": "gu.text_structure.09",
+      "level": 6,
+      "topic": "text_structure",
+      "kind": "choose",
+      "question": "How is this text built?",
+      "wrong": [
+        "As steps in order",
+        "As a comparison of two things"
+      ],
+      "sentence": "Plastic fills our rivers. We can use cloth bags instead.",
+      "rule": "A problem, then an answer.",
+      "right": [
+        "As a problem and its answer"
+      ]
+    },
+    {
+      "id": "gu.text_structure.10",
+      "level": 6,
+      "topic": "text_structure",
+      "kind": "choose",
+      "question": "How is this text built?",
+      "wrong": [
+        "As steps in order",
+        "As a problem and its answer"
+      ],
+      "sentence": "Cats like to sleep alone, but dogs like company.",
+      "rule": "It compares cats and dogs.",
+      "right": [
+        "As a comparison of two things"
+      ]
+    },
+    {
+      "id": "gu.text_structure.11",
+      "level": 6,
+      "topic": "text_structure",
+      "kind": "choose",
+      "question": "How is this text built?",
+      "wrong": [
+        "As steps in order",
+        "As a comparison of two things"
+      ],
+      "sentence": "It rained heavily, so the river flooded.",
+      "rule": "Rain caused the flood.",
+      "right": [
+        "As a cause and its effect"
+      ]
+    },
+    {
+      "id": "gu.text_structure.12",
+      "level": 6,
+      "topic": "text_structure",
+      "kind": "choose",
+      "question": "How is this text built?",
+      "wrong": [
+        "As a problem and its answer",
+        "As a cause and its effect"
+      ],
+      "sentence": "First fold the paper. Then cut the edge. Last, open it.",
+      "rule": "First, then and last show steps.",
+      "right": [
+        "As steps in order"
+      ]
+    },
+    {
+      "id": "gu.dialogue_character.09",
+      "level": 6,
+      "topic": "dialogue_character",
+      "kind": "choose",
+      "question": "What does this show about the speaker?",
+      "wrong": [
+        "He is lazy",
+        "He is scared"
+      ],
+      "sentence": "\"I will finish this even if it takes all night,\" said Ravi.",
+      "rule": "He will not stop till it is done.",
+      "right": [
+        "He is determined"
+      ]
+    },
+    {
+      "id": "gu.dialogue_character.10",
+      "level": 6,
+      "topic": "dialogue_character",
+      "kind": "choose",
+      "question": "What does this show about the speaker?",
+      "wrong": [
+        "She is proud",
+        "She is rude"
+      ],
+      "sentence": "\"Sorry, it was my fault,\" said Meena.",
+      "rule": "She owns up to her mistake.",
+      "right": [
+        "She is honest"
+      ]
+    },
+    {
+      "id": "gu.dialogue_character.11",
+      "level": 6,
+      "topic": "dialogue_character",
+      "kind": "choose",
+      "question": "What does this show about the speaker?",
+      "wrong": [
+        "He is brave",
+        "He is bored"
+      ],
+      "sentence": "\"Is there a ghost? I won't go in!\" cried Arun.",
+      "rule": "He will not go in.",
+      "right": [
+        "He is afraid"
+      ]
+    },
+    {
+      "id": "gu.dialogue_character.12",
+      "level": 6,
+      "topic": "dialogue_character",
+      "kind": "choose",
+      "question": "What does this show about the speaker?",
+      "wrong": [
+        "He is shy",
+        "He is kind"
+      ],
+      "sentence": "\"I am the best player here,\" said Kiran.",
+      "rule": "He praises himself.",
+      "right": [
+        "He is boastful"
+      ]
+    },
+    {
+      "id": "gu.picture_order.09",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🌱 A seed is planted. 🌿 A small plant grows. 🌻 A flower opens.",
+      "rule": "First the seed, then the plant, then the flower.",
+      "parts": [
+        "🌱 A seed is planted.",
+        "🌿 A small plant grows.",
+        "🌻 A flower opens."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.picture_order.10",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "choose",
+      "question": "What might the children see next?",
+      "wrong": [
+        "Snow",
+        "The moon"
+      ],
+      "sentence": "🌧️ Rain fell all morning. ☀️ Then the sun came out.",
+      "rule": "After rain and sun, a rainbow often comes.",
+      "right": [
+        "A rainbow"
+      ]
+    },
+    {
+      "id": "gu.word_order.11",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "rewrite",
+      "sentence": "Milk the cat drinks.",
+      "rule": "Who comes first, then the action, then the rest.",
+      "right": [
+        "The cat drinks milk."
+      ]
+    },
+    {
+      "id": "gu.word_order.12",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "rewrite",
+      "sentence": "To school Ravi walks.",
+      "rule": "Who comes first, then the action, then the rest.",
+      "right": [
+        "Ravi walks to school."
+      ]
+    },
+    {
+      "id": "gu.modals.09",
+      "level": 4,
+      "topic": "modals",
+      "kind": "fix",
+      "sentence": "You [can] wear a helmet on a bike; it is the rule.",
+      "rule": "A rule: must.",
+      "right": [
+        "must"
+      ]
+    },
+    {
+      "id": "gu.modals.10",
+      "level": 4,
+      "topic": "modals",
+      "kind": "fix",
+      "sentence": "She can [swims] very well.",
+      "rule": "After can, use the plain verb: swim.",
+      "right": [
+        "swim"
+      ]
+    },
+    {
+      "id": "gu.modals.11",
+      "level": 4,
+      "topic": "modals",
+      "kind": "choose",
+      "question": "Which word fits?",
+      "wrong": [
+        "can",
+        "might"
+      ],
+      "sentence": "You have a cough. You ___ see a doctor.",
+      "rule": "Advice: should.",
+      "right": [
+        "should"
+      ]
+    },
+    {
+      "id": "gu.modals.12",
+      "level": 4,
+      "topic": "modals",
+      "kind": "rewrite",
+      "sentence": "You must to finish your homework.",
+      "rule": "After must, use the plain verb with no to.",
+      "right": [
+        "You must finish your homework."
+      ]
+    },
+    {
+      "id": "gu.question_tags.09",
+      "level": 5,
+      "topic": "question_tags",
+      "kind": "choose",
+      "question": "Which tag fits?",
+      "wrong": [
+        "can she",
+        "doesn't she"
+      ],
+      "sentence": "She can swim, ___?",
+      "rule": "A positive sentence takes a negative tag with the same helping word.",
+      "right": [
+        "can't she"
+      ]
+    },
+    {
+      "id": "gu.question_tags.10",
+      "level": 5,
+      "topic": "question_tags",
+      "kind": "choose",
+      "question": "Which tag fits?",
+      "wrong": [
+        "aren't they",
+        "do they"
+      ],
+      "sentence": "They aren't late, ___?",
+      "rule": "A negative sentence takes a positive tag.",
+      "right": [
+        "are they"
+      ]
+    },
+    {
+      "id": "gu.question_tags.11",
+      "level": 5,
+      "topic": "question_tags",
+      "kind": "choose",
+      "question": "Which tag fits?",
+      "wrong": [
+        "have you",
+        "didn't you"
+      ],
+      "sentence": "You have finished, ___?",
+      "rule": "A positive sentence with have takes the tag haven't you.",
+      "right": [
+        "haven't you"
+      ]
+    },
+    {
+      "id": "gu.question_tags.12",
+      "level": 5,
+      "topic": "question_tags",
+      "kind": "rewrite",
+      "sentence": "It is cold today, is it?",
+      "rule": "A positive sentence takes a negative tag.",
+      "right": [
+        "It is cold today, isn't it?"
+      ]
+    },
+    {
+      "id": "gu.word_formation.09",
+      "level": 5,
+      "topic": "word_formation",
+      "kind": "choose",
+      "question": "What is the clipped (short) form?",
+      "wrong": [
+        "nation",
+        "examin"
+      ],
+      "sentence": "examination",
+      "rule": "Examination is shortened to exam.",
+      "right": [
+        "exam"
+      ]
+    },
+    {
+      "id": "gu.word_formation.10",
+      "level": 5,
+      "topic": "word_formation",
+      "kind": "choose",
+      "question": "Which blend do they make?",
+      "wrong": [
+        "hotor",
+        "mohot"
+      ],
+      "sentence": "motor + hotel",
+      "rule": "Motel blends motor and hotel.",
+      "right": [
+        "motel"
+      ]
+    },
+    {
+      "id": "gu.syllables.09",
+      "level": 4,
+      "topic": "syllables",
+      "kind": "choose",
+      "question": "How is it split into syllables?",
+      "wrong": [
+        "pe-ncil",
+        "penc-il"
+      ],
+      "sentence": "The word is \"pencil\".",
+      "rule": "Clap it: pen-cil, two beats.",
+      "right": [
+        "pen-cil"
+      ]
+    },
+    {
+      "id": "gu.syllables.10",
+      "level": 4,
+      "topic": "syllables",
+      "kind": "choose",
+      "question": "How many syllables does it have?",
+      "wrong": [
+        "2",
+        "4"
+      ],
+      "sentence": "The word is \"banana\".",
+      "rule": "Ba-na-na: three beats.",
+      "right": [
+        "3"
+      ]
+    },
+    {
+      "id": "gu.syllables.11",
+      "level": 4,
+      "topic": "syllables",
+      "kind": "choose",
+      "question": "How many syllables does it have?",
+      "wrong": [
+        "2",
+        "3"
+      ],
+      "sentence": "The word is \"cat\".",
+      "rule": "Cat has one beat.",
+      "right": [
+        "1"
+      ]
+    },
+    {
+      "id": "gu.nominalisation.13",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "fix",
+      "sentence": "We were happy with his [decide].",
+      "rule": "After his, use the noun: decision.",
+      "right": [
+        "decision"
+      ]
+    },
+    {
+      "id": "gu.nominalisation.14",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "fix",
+      "sentence": "Her [kind] made everyone smile.",
+      "rule": "After her, use the noun: kindness.",
+      "right": [
+        "kindness"
+      ]
+    },
+    {
+      "id": "gu.letter_format.09",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "question": "Which greeting fits?",
+      "wrong": [
+        "Respected Madam,",
+        "To whom it may concern,"
+      ],
+      "sentence": "You write a letter to your grandmother.",
+      "rule": "An informal letter to family starts with Dear.",
+      "right": [
+        "Dear Paati,"
+      ]
+    },
+    {
+      "id": "gu.letter_format.10",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "question": "What comes right after the greeting?",
+      "wrong": [
+        "Your signature",
+        "The date"
+      ],
+      "sentence": "A formal letter to the principal.",
+      "rule": "After the greeting comes the body.",
+      "right": [
+        "The body: the reason for writing"
+      ]
+    },
+    {
+      "id": "gu.letter_format.11",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "question": "Which subject line is best?",
+      "wrong": [
+        "Subject: Hello",
+        "Subject: Me"
+      ],
+      "sentence": "You ask the principal for leave.",
+      "rule": "The subject says what the letter is about in a few words.",
+      "right": [
+        "Subject: Leave for two days"
+      ]
+    },
+    {
+      "id": "gu.notice_format.09",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "question": "Which heading fits the notice?",
+      "wrong": [
+        "Hello everyone",
+        "Please read this"
+      ],
+      "sentence": "Your class plans a book sale.",
+      "rule": "A notice has a short heading that says what it is about.",
+      "right": [
+        "BOOK SALE"
+      ]
+    },
+    {
+      "id": "gu.notice_format.10",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "question": "What must the notice say?",
+      "wrong": [
+        "The writer's favourite colour",
+        "A long story"
+      ],
+      "sentence": "A notice about a lost water bottle.",
+      "rule": "A notice gives short, useful details.",
+      "right": [
+        "What it looks like and whom to return it to"
+      ]
+    },
+    {
+      "id": "gu.notice_format.11",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "question": "What goes at the end?",
+      "wrong": [
+        "Yours lovingly",
+        "Bye!"
+      ],
+      "sentence": "You end a notice for the Art Club.",
+      "rule": "A notice ends with the writer's name and post.",
+      "right": [
+        "Your name and post, such as Secretary, Art Club"
+      ]
+    },
+    {
+      "id": "gu.notice_format.12",
+      "level": 5,
+      "topic": "notice_format",
+      "kind": "choose",
+      "question": "Which line gives the details best?",
+      "wrong": [
+        "The quiz will be fun and nice.",
+        "Come if you can."
+      ],
+      "sentence": "Your notice is about a quiz.",
+      "rule": "A notice gives what, when and where.",
+      "right": [
+        "Date: 5 December; Time: 10 a.m.; Place: Hall"
+      ]
+    },
+    {
+      "id": "gu.email_format.09",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "question": "Which closing is best?",
+      "wrong": [
+        "Bye bye!!",
+        "See ya"
+      ],
+      "sentence": "You end an email to your teacher.",
+      "rule": "A polite email ends with Kind regards and your name.",
+      "right": [
+        "Kind regards, Meena"
+      ]
+    },
+    {
+      "id": "gu.email_format.10",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "question": "Which greeting is best?",
+      "wrong": [
+        "Hey teacher,",
+        "Yo!"
+      ],
+      "sentence": "You write to your teacher.",
+      "rule": "A polite email starts with Dear and the name.",
+      "right": [
+        "Dear Mrs Rao,"
+      ]
+    },
+    {
+      "id": "gu.email_format.11",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "question": "Which subject line is best?",
+      "wrong": [
+        "Hi",
+        "Important!!!"
+      ],
+      "sentence": "You email the class about a trip.",
+      "rule": "The subject says what the email is about.",
+      "right": [
+        "Class trip on Friday: what to bring"
+      ]
+    },
+    {
+      "id": "gu.email_format.12",
+      "level": 5,
+      "topic": "email_format",
+      "kind": "choose",
+      "question": "Which is best?",
+      "wrong": [
+        "One long line with no stops",
+        "Only emojis"
+      ],
+      "sentence": "An email body to a teacher.",
+      "rule": "Short paragraphs are easy to read.",
+      "right": [
+        "Short paragraphs with the main point first"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.28",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "rewrite",
+      "sentence": "You are coming tomorrow?",
+      "rule": "In a question, the helping word comes first: are you.",
+      "right": [
+        "Are you coming tomorrow?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.29",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "rewrite",
+      "sentence": "I am knowing the answer.",
+      "rule": "Know takes no -ing: I know.",
+      "right": [
+        "I know the answer."
+      ]
+    },
+    {
+      "id": "gu.titles.11",
+      "level": 2,
+      "topic": "titles",
+      "kind": "fix",
+      "sentence": "Have you read Charlotte's [web]?",
+      "rule": "Main words in a title start with capital letters.",
+      "right": [
+        "Web"
+      ]
+    },
+    {
+      "id": "gu.titles.12",
+      "level": 2,
+      "topic": "titles",
+      "kind": "rewrite",
+      "sentence": "my class watched the jungle book.",
+      "rule": "A sentence and a title both take capitals.",
+      "right": [
+        "My class watched The Jungle Book."
+      ]
+    },
+    {
+      "id": "gu.contractions.12",
+      "level": 3,
+      "topic": "contractions",
+      "kind": "fix",
+      "sentence": "[Theyre] late again.",
+      "rule": "They are becomes they're.",
+      "right": [
+        "They're"
+      ]
+    },
+    {
+      "id": "gu.proverbs.11",
+      "level": 4,
+      "topic": "proverbs",
+      "kind": "build",
+      "sentence": "All that glitters is not gold.",
+      "rule": "Something that looks good may not be good."
+    },
+    {
+      "id": "gu.opinion_reason.12",
+      "level": 4,
+      "topic": "opinion_reason",
+      "kind": "build",
+      "sentence": "I think cycling is good because it keeps us fit.",
+      "rule": "Because gives the reason."
+    },
+    {
+      "id": "gu.tenses.12",
+      "level": 5,
+      "topic": "tenses",
+      "kind": "fix",
+      "sentence": "We have [finish] our project.",
+      "rule": "Have with the third form: have finished.",
+      "right": [
+        "finished"
+      ]
+    },
+    {
+      "id": "gu.confusables.12",
+      "level": 5,
+      "topic": "confusables",
+      "kind": "fix",
+      "sentence": "I can [here] the birds.",
+      "rule": "Hear is what your ears do; here is a place.",
+      "right": [
+        "hear"
+      ]
+    },
+    {
+      "id": "gu.synonyms_antonyms.12",
+      "level": 5,
+      "topic": "synonyms_antonyms",
+      "kind": "fix",
+      "sentence": "A word that means the same as small is [huge].",
+      "rule": "A synonym of small is little.",
+      "right": [
+        "little",
+        "tiny"
+      ]
+    },
+    {
+      "id": "gu.phrase_clause.12",
+      "level": 6,
+      "topic": "phrase_clause",
+      "kind": "choose",
+      "question": "Are the words in capital letters a phrase or a clause?",
+      "wrong": [
+        "A clause"
+      ],
+      "sentence": "We sang SONGS OF JOY.",
+      "rule": "Songs of joy has no verb.",
+      "right": [
+        "A phrase"
+      ]
+    },
+    {
+      "id": "gu.figures.12",
+      "level": 6,
+      "topic": "figures",
+      "kind": "choose",
+      "question": "Which figure of speech is this?",
+      "wrong": [
+        "Simile",
+        "Personification"
+      ],
+      "sentence": "Time is a thief.",
+      "rule": "It says time is a thief.",
+      "right": [
+        "Metaphor"
+      ]
+    },
+    {
+      "id": "gu.picture_order.11",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🥛 Meena pours the milk. 🥣 She adds the cereal. 😋 She eats her breakfast.",
+      "rule": "Pour, add, then eat.",
+      "parts": [
+        "🥛 Meena pours the milk.",
+        "🥣 She adds the cereal.",
+        "😋 She eats her breakfast."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.picture_order.12",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "choose",
+      "question": "What most likely happened next?",
+      "wrong": [
+        "The balloon got bigger",
+        "Ravi fell asleep"
+      ],
+      "sentence": "🎈 Ravi held a balloon. 🌬️ A strong wind blew.",
+      "rule": "A strong wind can take a balloon away.",
+      "right": [
+        "The balloon flew away"
+      ]
+    },
+    {
+      "id": "gu.word_formation.11",
+      "level": 5,
+      "topic": "word_formation",
+      "kind": "choose",
+      "question": "Which compound word do they make?",
+      "wrong": [
+        "ballfoot",
+        "footbal"
+      ],
+      "sentence": "foot + ball",
+      "rule": "Foot and ball join to make football.",
+      "right": [
+        "football"
+      ]
+    },
+    {
+      "id": "gu.letter_format.12",
+      "level": 5,
+      "topic": "letter_format",
+      "kind": "choose",
+      "question": "Where do you write the date?",
+      "wrong": [
+        "After your name",
+        "At the very end"
+      ],
+      "sentence": "A formal letter.",
+      "rule": "The date comes under your address.",
+      "right": [
+        "Under your own address"
+      ]
+    },
+    {
+      "id": "gu.passive.16",
+      "level": 7,
+      "topic": "passive",
+      "kind": "rewrite",
+      "sentence": "The window was broke by the ball.",
+      "rule": "The passive uses was with the third form: broken.",
+      "right": [
+        "The window was broken by the ball."
+      ]
+    },
+    {
+      "id": "gu.conditionals.19",
+      "level": 7,
+      "topic": "conditionals",
+      "kind": "rewrite",
+      "sentence": "If it will rain, we will stay in.",
+      "rule": "After if, use the present: if it rains.",
+      "right": [
+        "If it rains, we will stay in."
+      ]
+    },
+    {
+      "id": "gu.parallel.16",
+      "level": 7,
+      "topic": "parallel",
+      "kind": "rewrite",
+      "sentence": "I like reading, swimming and to dance.",
+      "rule": "All items in the list take -ing.",
+      "right": [
+        "I like reading, swimming and dancing."
       ]
     }
   ]

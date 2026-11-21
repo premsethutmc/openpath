@@ -7,11 +7,13 @@
  */
 import { useEffect, useState } from "react";
 import data from "../../../../content/english/help/tamil-ui.json";
+import explain from "../../../../content/english/help/tamil-explain.json";
 
 const KEY = "openpath-english-tamil-help";
 const SELECTOR = "button, h1, h2, h3, p, label, summary, legend, .pill, .eyebrow, li, .prompt";
 const norm = (s: string) => s.replace(/\s+/g, " ").replace(/^[^\p{L}\p{N}“"]+/u, "").replace(/[^\p{L}\p{N}.?!:”"')]+$/u, "").trim();
-const MAP = new Map(Object.entries((data as { strings: Record<string, string> }).strings).map(([en, ta]) => [norm(en), ta]));
+// the app's own lines, then the grammar explanations (tamil-help@2, machine-translated and spot-checked)
+const MAP = new Map([...Object.entries((explain as { strings: Record<string, string> }).strings), ...Object.entries((data as { strings: Record<string, string> }).strings)].map(([en, ta]) => [norm(en), ta]));
 
 /** The Tamil for an English line of the app, if there is one. */
 export const tamilFor = (en: string): string | undefined => MAP.get(norm(en));
@@ -63,10 +65,29 @@ export function startTamilHelp() {
   if (stored()) apply(true);
 }
 
+const CHANGED = "openpath-tamil-help";
+
+/**
+ * Whether this device chose Tamil help. The activities made for Tamil speakers (slips from Tamil, sounds that are
+ * easy to mix up) are shown only then: a child from an English-medium home without the choice does not see them.
+ */
+export function useTamilHelp(): boolean {
+  const [on, setOn] = useState(stored);
+  useEffect(() => {
+    const h = () => setOn(stored());
+    window.addEventListener(CHANGED, h);
+    return () => window.removeEventListener(CHANGED, h);
+  }, []);
+  return on;
+}
+
 /** The switch: "தமிழ் உதவி / Tamil help". */
 export function TamilToggle() {
   const [on, setOn] = useState(stored);
-  useEffect(() => apply(on), [on]);
+  useEffect(() => {
+    apply(on);
+    window.dispatchEvent(new Event(CHANGED));
+  }, [on]);
   return (
     <button
       type="button"
