@@ -1,5 +1,6 @@
 /**
- * Long reads (content/english/reading/long-reads.json): a story of about four to five hundred words, read in three
+ * Long reads (content/english/reading/long-reads.json): a story of about four to five hundred words (shorter
+ * at levels 1 to 3), read in three
  * parts, with two questions after each part and three at the end on the whole: its theme, how a character changes,
  * and what the title means. One part a sitting; the next sitting goes on from where the learner stopped.
  * Each answer shows its explanation. Practice-only: nothing here is evidence for the engine.
@@ -51,7 +52,9 @@ export function longProblems(l: LongReads): string[] {
     if (t.parts.length !== PARTS) out.push(`${t.id}: ${t.parts.length} parts, not ${PARTS}`);
     if (!t.theme || !t.title) out.push(`${t.id}: no theme or title`);
     const words = t.parts.reduce((a, p) => a + p.text.split(/\s+/).length, 0);
-    if (words < 350 || words > 1200) out.push(`${t.id}: ${words} words`);
+    // shorter stories for the first levels: about two hundred words at levels 1 and 2
+    const least = t.level === 1 ? 120 : t.level === 2 ? 150 : t.level === 3 ? 250 : 350;
+    if (words < least || words > 1200) out.push(`${t.id}: ${words} words`);
     const skills = new Set(t.whole.map((q) => q.skill));
     for (const s of ["theme", "character", "title"]) if (!skills.has(s as LongSkill)) out.push(`${t.id}: no question on the ${s}`);
     for (const q of [...t.parts.flatMap((p) => p.questions), ...t.whole]) {

@@ -1384,6 +1384,581 @@
           "explain": "The family does not know who is taking the sugar until Divya's test."
         }
       ]
+    },
+    {
+      "id": "lr1.puppy",
+      "level": 1,
+      "theme": "pets and care",
+      "title": "Tiny Finds a Home",
+      "parts": [
+        {
+          "text": "It was raining. A small brown puppy sat under a cart. He was wet and cold. Mani saw him on the way home from school. \"Poor puppy,\" she said. She took off her red scarf and put it on him. The puppy licked her hand.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where was the puppy sitting?",
+              "right": "under a cart",
+              "wrong": [
+                "on a wall",
+                "in a box"
+              ],
+              "explain": "\"A small brown puppy sat under a cart.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How was the puppy at first?",
+              "right": "wet and cold",
+              "wrong": [
+                "happy and warm",
+                "big and strong"
+              ],
+              "explain": "\"He was wet and cold.\""
+            }
+          ]
+        },
+        {
+          "text": "Mani took the puppy home. Amma said, \"We cannot keep a dog. Our house is too small.\" Mani was sad. She gave the puppy some milk and a dry towel. The puppy drank all the milk. Then he slept by the door. Mani named him Tiny.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did Amma say they could not keep a dog?",
+              "right": "the house was too small",
+              "wrong": [
+                "dogs are too noisy",
+                "Tiny was not clean"
+              ],
+              "explain": "\"Our house is too small.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did Mani give the puppy to drink?",
+              "right": "milk",
+              "wrong": [
+                "juice",
+                "tea"
+              ],
+              "explain": "\"She gave the puppy some milk.\""
+            }
+          ]
+        },
+        {
+          "text": "In the night, a noise woke everyone. Tiny was barking at the back door. A big goat had come in and was eating Amma's plants! Appa chased the goat away. Amma smiled at Tiny. \"Good dog,\" she said. \"Maybe a small house has room for a small dog.\" Mani hugged Tiny.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did Tiny bark in the night?",
+              "right": "a goat was eating the plants",
+              "wrong": [
+                "he was hungry for milk",
+                "he wanted to play a game"
+              ],
+              "explain": "A big goat had come in and was eating Amma's plants."
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What happened after Appa chased the goat?",
+              "right": "Amma said Tiny could stay",
+              "wrong": [
+                "Tiny ran away",
+                "Mani went to school"
+              ],
+              "explain": "Amma smiled and said a small house has room for a small dog."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "a puppy finding a home",
+          "wrong": [
+            "a goat eating plants",
+            "a rainy day at school"
+          ],
+          "explain": "It starts with a lost puppy and ends with Tiny staying."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Amma change?",
+          "right": "from saying no to letting Tiny stay",
+          "wrong": [
+            "from happy to very angry",
+            "from kind to unkind to Mani"
+          ],
+          "explain": "First she says they cannot keep a dog; at the end she lets him stay."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Tiny Finds a Home\"?",
+          "right": "Tiny is lost but ends up with a family",
+          "wrong": [
+            "Tiny builds a little house",
+            "the goat finds a new home"
+          ],
+          "explain": "The puppy, named Tiny, gets a home with Mani."
+        }
+      ]
+    },
+    {
+      "id": "lr2.kite",
+      "level": 2,
+      "theme": "quarrels and making up",
+      "title": "The Torn Kite",
+      "parts": [
+        {
+          "text": "Rafi and Gopal were best friends. Every evening they flew kites on the open ground near the river. Rafi had a new green kite. His uncle had bought it from the city. It was the best kite in the street. One windy day, Gopal asked, \"Can I fly your kite, just once?\" Rafi did not want to say yes, but he gave him the string.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did the boys fly kites?",
+              "right": "near the river",
+              "wrong": [
+                "on the school roof",
+                "in the market"
+              ],
+              "explain": "\"on the open ground near the river\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Rafi feel about lending his kite?",
+              "right": "he did not want to",
+              "wrong": [
+                "he was very happy",
+                "he did not care"
+              ],
+              "explain": "\"Rafi did not want to say yes.\""
+            }
+          ]
+        },
+        {
+          "text": "The wind was strong. Gopal ran and the kite flew high. Then it dived and caught in a tall tree. When Gopal pulled the string, the paper tore. Rafi shouted, \"You broke it! I knew I should not lend it to you.\" Gopal's face went red. He did not say anything. He walked home alone, and Rafi walked home alone too.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "How did the kite tear?",
+              "right": "it caught in a tree",
+              "wrong": [
+                "Rafi stepped on it",
+                "a dog bit it"
+              ],
+              "explain": "It caught in a tall tree and tore when Gopal pulled."
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Gopal's face go red?",
+              "right": "he felt ashamed",
+              "wrong": [
+                "he was too hot",
+                "he was laughing"
+              ],
+              "explain": "He was shouted at for breaking the kite and said nothing."
+            }
+          ]
+        },
+        {
+          "text": "The next evening, Gopal came to Rafi's door. He held the green kite. He had mended the tear with paper and rice paste. \"It is not as good as new,\" he said. Rafi looked at the neat patch. He felt sorry for shouting. \"It is better than new,\" he said. \"Now it is our kite.\" They ran to the river together.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Gopal use to mend the kite?",
+              "right": "paper and rice paste",
+              "wrong": [
+                "tape and glue",
+                "string and cloth"
+              ],
+              "explain": "\"with paper and rice paste\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Rafi feel when he saw the patch?",
+              "right": "sorry for shouting",
+              "wrong": [
+                "angry all over again",
+                "bored and sleepy"
+              ],
+              "explain": "\"He felt sorry for shouting.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "a friendship mended after a quarrel",
+          "wrong": [
+            "how to make a kite",
+            "a windy day in the city"
+          ],
+          "explain": "The friends quarrel over the kite and make up."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Rafi change?",
+          "right": "from angry to sorry and kind",
+          "wrong": [
+            "from kind to angry",
+            "from sad to bored"
+          ],
+          "explain": "He shouts at first, then says the mended kite is better than new."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is it called \"The Torn Kite\"?",
+          "right": "the torn kite causes the quarrel and the making up",
+          "wrong": [
+            "the kite is sold in the city market",
+            "the kite is lost in the river for ever"
+          ],
+          "explain": "The tear starts the quarrel; mending it ends it."
+        }
+      ]
+    },
+    {
+      "id": "lr2.garden",
+      "level": 2,
+      "theme": "school and community",
+      "title": "The Corner Garden",
+      "parts": [
+        {
+          "text": "Behind Class 3 there was a corner full of stones and old paper. Nobody went there. One day Miss Latha said, \"Let us make a garden here.\" The children groaned. \"It is too dirty,\" said Priya. But Miss Latha brought gloves and bags. They picked up the paper and moved the stones. It took a whole week.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was in the corner at first?",
+              "right": "stones and old paper",
+              "wrong": [
+                "flowers and trees",
+                "bicycles and balls"
+              ],
+              "explain": "\"a corner full of stones and old paper\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "How long did the cleaning take?",
+              "right": "a whole week",
+              "wrong": [
+                "one hour",
+                "a whole year"
+              ],
+              "explain": "\"It took a whole week.\""
+            }
+          ]
+        },
+        {
+          "text": "Then they dug the soil and planted seeds: beans, marigolds and sunflowers. Each child had a job. Priya watered the plants every morning. For many days nothing happened. \"The seeds are dead,\" said Arun. \"Wait,\" said Miss Latha. \"Seeds need time.\" Priya kept watering, even on the days she was tired.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did they do after cleaning?",
+              "right": "dug the soil and planted seeds",
+              "wrong": [
+                "painted the wall blue",
+                "built a tall fence"
+              ],
+              "explain": "\"Then they dug the soil and planted seeds.\""
+            },
+            {
+              "skill": "character",
+              "prompt": "What does Priya do even when tired?",
+              "right": "keeps watering",
+              "wrong": [
+                "stops coming",
+                "pulls out the seeds"
+              ],
+              "explain": "\"Priya kept watering, even on the days she was tired.\""
+            }
+          ]
+        },
+        {
+          "text": "One Monday, tiny green shoots came up. Soon there were beans to pick and yellow marigolds by the wall. The sunflowers grew taller than the children. Other classes came to look. The head teacher took a photo for the school notice board. Priya smiled. \"I said it was too dirty,\" she said. \"Now it is my favourite place.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What grew taller than the children?",
+              "right": "the sunflowers",
+              "wrong": [
+                "the beans",
+                "the marigolds"
+              ],
+              "explain": "\"The sunflowers grew taller than the children.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did other classes come to look?",
+              "right": "the garden had become beautiful",
+              "wrong": [
+                "they wanted to pick stones",
+                "it was raining"
+              ],
+              "explain": "Beans, marigolds and tall sunflowers made it worth seeing."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "making a garden by working together",
+          "wrong": [
+            "a school photo on the notice board",
+            "a rainy Monday morning at school"
+          ],
+          "explain": "The class cleans, plants and waits until the garden grows."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Priya change?",
+          "right": "from not wanting to help to loving the garden",
+          "wrong": [
+            "from happy at school to angry",
+            "from busy all day to lazy"
+          ],
+          "explain": "She says it is too dirty, then calls it her favourite place."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is it called \"The Corner Garden\"?",
+          "right": "the garden is made in an unused corner",
+          "wrong": [
+            "the garden is shaped like a corner",
+            "the garden is at the corner shop"
+          ],
+          "explain": "The story happens in the corner behind Class 3."
+        }
+      ]
+    },
+    {
+      "id": "lr3.radio",
+      "level": 3,
+      "theme": "courage",
+      "title": "The Voice on the Radio",
+      "parts": [
+        {
+          "text": "Every Saturday, the town's small radio station asked a child to read the news for children. Thenmozhi listened to it every week, sitting close to the old radio in the kitchen. She dreamed of being that voice. But when her teacher said, \"Thenmozhi, you read beautifully. Why don't you try?\", her stomach turned over. Reading in class was one thing. Reading to the whole town was another. She said she would think about it, and then she tried very hard not to think about it at all. That evening she read the newspaper aloud to her cat, very quietly, with the door shut.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Thenmozhi listen to the radio?",
+              "right": "in the kitchen",
+              "wrong": [
+                "in the classroom",
+                "in the garden"
+              ],
+              "explain": "\"sitting close to the old radio in the kitchen\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did she feel when her teacher suggested it?",
+              "right": "nervous",
+              "wrong": [
+                "bored",
+                "angry"
+              ],
+              "explain": "\"her stomach turned over.\""
+            }
+          ]
+        },
+        {
+          "text": "On Monday her grandfather found the radio form in her school bag. He did not ask her about it. He only said, \"When I was young, I was afraid of the sea. My father said a fear is a wave. If you wait for it to go away, you will wait on the beach for ever. You have to walk in.\" Thenmozhi thought about the wave all week. On Friday she gave the form to her teacher. Her hands were shaking, but she did it before she could change her mind.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did grandfather find?",
+              "right": "the radio form",
+              "wrong": [
+                "a letter",
+                "a newspaper"
+              ],
+              "explain": "He \"found the radio form in her school bag.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did grandfather mean by \"walk in\"?",
+              "right": "face the fear instead of waiting",
+              "wrong": [
+                "go swimming every day",
+                "walk to the radio station"
+              ],
+              "explain": "He compares a fear to a wave you have to walk into."
+            }
+          ]
+        },
+        {
+          "text": "The studio was smaller than she had imagined, with a red light above the door. When the light came on, her voice came out thin and wobbly for the first line. Then she imagined she was reading to her cat, and her voice steadied. She read about a new library bus and a girl who had won a chess prize. When it was over, the radio man gave her a thumbs up. At home, her grandfather had recorded it on his phone. He played it three times at dinner, and each time Thenmozhi heard a little less wobble.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "What helped her voice steady?",
+              "right": "imagining she was reading to her cat",
+              "wrong": [
+                "drinking water",
+                "shouting the first line"
+              ],
+              "explain": "\"she imagined she was reading to her cat, and her voice steadied.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "How many times did grandfather play the recording?",
+              "right": "three",
+              "wrong": [
+                "once",
+                "ten"
+              ],
+              "explain": "\"He played it three times at dinner.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "facing a fear and finding courage",
+          "wrong": [
+            "how radios work",
+            "winning a chess prize"
+          ],
+          "explain": "Thenmozhi is afraid to read on the radio but does it."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Thenmozhi change?",
+          "right": "from afraid to brave and proud",
+          "wrong": [
+            "from brave to afraid",
+            "from proud to lazy"
+          ],
+          "explain": "She hides from the idea, then reads to the whole town."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is it called \"The Voice on the Radio\"?",
+          "right": "Thenmozhi becomes the voice she used to listen to",
+          "wrong": [
+            "the radio talks by itself",
+            "her grandfather sings on the radio"
+          ],
+          "explain": "She dreamed of being that voice, and by the end she is."
+        }
+      ]
+    },
+    {
+      "id": "lr3.bridge",
+      "level": 3,
+      "theme": "helping others",
+      "title": "The Bamboo Bridge",
+      "parts": [
+        {
+          "text": "Every monsoon, the stream behind the village of Kalur rose and swallowed the stepping stones. The children who lived on the far side could not get to school for weeks. Selvi was one of them. She sat on her porch in the rain and watched the brown water rush past, and she counted the days she had missed. Twelve. Fifteen. Twenty. Her friend Karthik, on the school side, sent notes across with a boatman: what they had learned, what the teacher had said, which songs they had practised for the festival.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why could Selvi not get to school?",
+              "right": "the stream covered the stepping stones",
+              "wrong": [
+                "her school was closed all year",
+                "she was ill for a month"
+              ],
+              "explain": "Every monsoon the stream \"swallowed the stepping stones\"."
+            },
+            {
+              "skill": "detail",
+              "prompt": "How did Karthik send notes?",
+              "right": "with a boatman",
+              "wrong": [
+                "by post",
+                "on a kite"
+              ],
+              "explain": "\"sent notes across with a boatman\""
+            }
+          ]
+        },
+        {
+          "text": "When the rain stopped, Karthik had an idea. His grandfather knew how to build with bamboo. Together they drew a plan: a narrow bridge tied with rope, high enough to stay above the water. The village elders laughed at first. \"Children's play,\" one said. But Karthik's grandfather spoke for them, and the families on both sides agreed to help. For two weeks after school, everyone cut bamboo, soaked rope and carried poles. Selvi's mother cooked for the workers. Even the elder who had laughed brought his own knife.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Who knew how to build with bamboo?",
+              "right": "Karthik's grandfather",
+              "wrong": [
+                "Selvi's mother",
+                "the boatman"
+              ],
+              "explain": "\"His grandfather knew how to build with bamboo.\""
+            },
+            {
+              "skill": "character",
+              "prompt": "What does the elder who laughed do later?",
+              "right": "helps with his own knife",
+              "wrong": [
+                "stops the work at once",
+                "laughs at them again"
+              ],
+              "explain": "\"Even the elder who had laughed brought his own knife.\""
+            }
+          ]
+        },
+        {
+          "text": "The next monsoon, the stream rose as it always did. The stepping stones disappeared under the brown water. But this time Selvi walked out of her door, across the swaying bamboo bridge, and into school on the very first rainy day. Karthik was waiting at the gate. \"No more notes,\" he said. \"Now you can hear the songs yourself.\" That year, Selvi sang at the festival, and the elder who had called the bridge children's play stood in the front row and clapped the loudest.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What happened on the first rainy day of the next monsoon?",
+              "right": "Selvi crossed the bridge to school",
+              "wrong": [
+                "the bridge fell into the water",
+                "Selvi stayed at home again"
+              ],
+              "explain": "She walked \"across the swaying bamboo bridge, and into school.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did the elder clap the loudest?",
+              "right": "he was proud of what the children did",
+              "wrong": [
+                "he wanted to sing the song too",
+                "he was angry with Selvi still"
+              ],
+              "explain": "He had doubted the idea and saw it work."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "a village working together to solve a problem",
+          "wrong": [
+            "a festival song contest in the village",
+            "how to cook food for many workers"
+          ],
+          "explain": "Children, elders and families build the bridge together."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does the elder change?",
+          "right": "from laughing at the idea to helping and cheering",
+          "wrong": [
+            "from kind to unkind to the children",
+            "from busy all day to sleepy"
+          ],
+          "explain": "He calls it children's play, then helps build and claps loudest."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is it called \"The Bamboo Bridge\"?",
+          "right": "the bamboo bridge lets Selvi reach school",
+          "wrong": [
+            "the story is about cutting bamboo to sell",
+            "the bridge is made of stones"
+          ],
+          "explain": "The bridge they build is what changes Selvi's year."
+        }
+      ]
     }
   ]
 }

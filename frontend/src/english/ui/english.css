@@ -3292,3 +3292,6 @@ h3.sub {
 .syllabus-stage.practising {
   color: #9a6400;
 }
+.syllabus-stage.due {
+  color: #2f6fd6;
+}
