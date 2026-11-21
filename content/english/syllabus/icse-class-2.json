@@ -128,9 +128,9 @@
         {
           "id": "RW6",
           "text": "Writes answers to questions on a passage.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "Answers are chosen from three, not written."
+          "coverage": "covered",
+          "where": "written",
+          "note": "Write an answer: read a short passage and type the answer to a question on it; checked by rule for the key words, with a second try and a model answer. The Reading course adds tapped questions."
         },
         {
           "id": "RW7",

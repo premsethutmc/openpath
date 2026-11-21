@@ -16,6 +16,7 @@ import { guidedSummary } from "./guided/guided.ts";
 import { FIRST, firstSummary } from "./first/first.ts";
 import { streamRows } from "./streams/streams.ts";
 import { longSummary } from "./reading/long-read.ts";
+import { writtenSummary } from "./reading/written.ts";
 
 export interface ListSummary {
   id: string;
@@ -64,6 +65,8 @@ export interface ChildSummary {
   writing: { tasks: number; pieces: number; words: number } | null;
   /** Long reads: stories finished, parts read, and questions right. */
   long: { finished: number; parts: number; right: number; asked: number } | null;
+  /** Written answers to questions on a passage: answered, right, right on the first try. */
+  written: { answered: number; right: number; firstTry: number } | null;
   /** First words: words found, found on the first tap last time, and the total. */
   first: { met: number; sure: number; total: number } | null;
 }
@@ -129,6 +132,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     levels: streamRows(learner, now).map((r) => ({ name: r.name, level: r.level })),
     reading: units.some(([, u]) => u.checks) ? { passed: units.filter(([, u]) => u.status === "passed_own" || u.status === "passed_after_help").length, needsPractice: units.filter(([, u]) => u.status === "needs_practice" || u.status === "no_fresh_check").map(([k]) => unitName(k)).slice(0, 4) } : null,
     writing: guided.length ? { tasks: guidedSummary(guided).done.size, pieces: pieces.length, words: pieces.reduce((a, r) => a + (r.words ?? 0), 0) } : null,
+    written: learner.writtenRecords().length ? writtenSummary(learner.writtenRecords()) : null,
     long: learner.longRecords().length ? longSummary(learner.longRecords()) : null,
     first: first.sittings ? { met: first.met, sure: first.sure, total: first.total } : null,
     dictation: dict.sentences ? { sentences: dict.sentences, perfectFirst: dict.perfectFirst, level: dict.level ?? 1, missed: dict.missed.slice(0, 6) } : null,

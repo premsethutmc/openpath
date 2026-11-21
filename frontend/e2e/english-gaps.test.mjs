@@ -13,6 +13,7 @@ const SHOTS = process.env.E2E_SHOTS;
 if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const shot = async (page, name) => SHOTS && page.screenshot({ path: `${SHOTS}/gaps-${name}.png`, fullPage: true });
 const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.625, isMobile: true, hasTouch: true };
+const WRITTEN = new Map(JSON.parse(readFileSync(new globalThis.URL("../../content/english/reading/written-answers.json", import.meta.url), "utf8")).items.map((i) => [i.id, i]));
 const PASSAGES = new Map(JSON.parse(readFileSync(new globalThis.URL("../../content/english/listening/passages.json", import.meta.url), "utf8")).passages.map((p) => [p.id, p]));
 
 let browser;
@@ -106,6 +107,37 @@ test("Word check: a few rounds of words, then roughly how many English words the
   await fits();
   await page.getByRole("button", { name: "Done" }).click();
   await page.getByText(/Last time: about [\d,]+ word families/).waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Write an answer: read a passage, a wrong answer, a hint, a second try, the model answer; three questions", async () => {
+  const { context, page, errors, fits } = await start("Writer", false);
+  await page.getByRole("button", { name: "Try Write an answer" }).click();
+  await page.locator('main.written[data-phase="intro"]').waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  for (let q = 0; q < 3; q++) {
+    await page.locator('main.written[data-phase="ask"]').waitFor();
+    const it = WRITTEN.get(await page.locator("main.written").getAttribute("data-item"));
+    assert.ok((await page.locator("[data-written-passage]").innerText()).length > 100, "the passage is there to read");
+    if (q === 0) {
+      // a wrong answer: a hint and a second try
+      await page.locator("#written-answer").fill("I am not sure about this.");
+      await page.getByRole("button", { name: "Check" }).click();
+      await page.getByText(`Hint: ${it.hint}`).waitFor();
+      await shot(page, "4-written-hint");
+      await page.getByRole("button", { name: "Try again" }).click();
+    }
+    await page.locator("#written-answer").fill(it.model);
+    await page.getByRole("button", { name: "Check" }).click();
+    await page.locator('.dict-feedback[data-correct="true"]').waitFor();
+    assert.equal(await page.locator(".dict-reveal").innerText(), it.model);
+    await fits();
+    await page.getByRole("button", { name: q < 2 ? "Next question" : "Finish" }).click();
+  }
+  await page.getByRole("heading", { name: "3 of 3 right" }).waitFor();
+  await page.getByRole("button", { name: "Done" }).click();
+  await page.getByText("3 of 3 answers right").waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });

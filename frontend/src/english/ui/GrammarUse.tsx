@@ -2,6 +2,7 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
+import { Flag } from "./Flag.tsx";
 import { TextPics } from "./Pic.tsx";
 import { useRef, useState } from "react";
 import { GRAMMAR, GrammarSitting, grammarSummary, levelFor, startLevel, type GrammarRecord, type GrammarUse as Content, type GrammarView } from "../logic/grammar-use/grammar-use.ts";
@@ -273,6 +274,7 @@ export function GrammarUseView({ content, view, onFix, onBuild, onSpot, onChoose
             <TextPics text={f.right} />
           </p>
           <p className="grammar-rule">{f.rule}</p>
+          <Flag stream="grammar" id={view.id ?? ""} />
           <button type="button" className="primary" autoFocus onClick={onNext}>
             {view.index + 1 < view.total ? "Next sentence" : "Finish"}
           </button>

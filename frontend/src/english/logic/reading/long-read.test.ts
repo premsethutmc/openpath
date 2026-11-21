@@ -76,6 +76,11 @@ test("LR-3 stored on the learner's record without touching the engine", async ()
   await l.recordLong(sit(t, 0));
   for (const e of await repo.load("p-long")) assert.equal(eventProblem(e), null);
   assert.equal(JSON.stringify(l.profile().capabilities.map((x) => [x.standing, x.evidence])), before);
+  // a report that a question looks wrong: which question and a reason, nothing typed
+  await l.flagContent("long", `${t.id}|0|0`, "marked_wrong");
+  const flags = (await repo.load("p-long")).filter((e) => e.kind === "flag");
+  assert.deepEqual(flags.map((e) => [(e as { item: { id: string } }).item.id, (e as { note: string }).note]), [[`long:${t.id}|0|0`, "marked_wrong"]]);
+  for (const e of await repo.load("p-long")) assert.equal(eventProblem(e), null);
   const again = await Learner.open(c, repo, "p-long", clock);
   assert.equal(nextStep(LONG, again.longRecords(), 4)!.part, 1);
 });

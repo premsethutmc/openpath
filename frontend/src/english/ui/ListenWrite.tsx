@@ -3,6 +3,7 @@
  * shows what to fix without showing the sentence; after one more try the sentence is shown. The sentence is spoken
  * by the device's own voice and is never on screen while the learner is writing. Practice-only.
  */
+import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import { DICTATION, DictationSitting, fixes, levelFor, passageText, pickPassage, startLevel, dictationSummary, wordsOf, type Dictation, type DictationRecord, type DictationView, type Mark } from "../logic/dictation/dictation.ts";
 import type { Learner } from "../logic/learner.ts";
@@ -153,6 +154,7 @@ export function ListenWriteView({ content, view, heard, onPlay, onCheck, onNext,
         <div className="dict-feedback" role="status" data-perfect={view.mark.perfect}>
           <p className={view.mark.perfect ? "words-verdict right" : "words-verdict"}>{view.mark.perfect ? "✓ Every word right" : "Here is the sentence"}</p>
           <p className="dict-reveal">{view.reveal}</p>
+          <Flag stream="dictation" id={view.id ?? ""} />
           {!view.mark.perfect && (
             <>
               <p className="small">You wrote:</p>

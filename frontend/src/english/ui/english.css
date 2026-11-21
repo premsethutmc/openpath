@@ -3022,3 +3022,24 @@ h3.sub {
   color: #1d7a45;
   font-weight: 700;
 }
+.flag {
+  margin: 6px 0;
+}
+.flag-open {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+}
+.vocab .long-text p,
+.vocab .long-text h2 {
+  font-weight: 400;
+  color: #1f2433;
+  font-size: 1.02rem;
+}
+.vocab .long-text h2 {
+  font-weight: 700;
+  font-size: 1.1rem;
+}

@@ -29,6 +29,9 @@ class EnglishUsageTests(TestCase):
         add("spell_answer", t + timedelta(minutes=1), session="sp:1", correct=True, response="garden")
         add("spell_end", t + timedelta(minutes=2), session="sp:1", reason="finished")
         add("dictation", now - timedelta(days=40), record={"type": "start", "sitting": "old", "level": 1})
+        add("flag", t, item={"id": "grammar:gu.articles.01", "version": 0}, note="marked_wrong")
+        add("flag", t, item={"id": "grammar:gu.articles.01", "version": 0}, note="confusing")
+        add("flag", t, item={"id": "q-engine-item", "version": 3}, note="My own words about it")
         u = usage(30, now=now)
         rows = {a["activity"]: a for a in u["activities"]}
         d = rows["Listen and write"]
@@ -44,3 +47,6 @@ class EnglishUsageTests(TestCase):
         for private in ("Secretname", "garden", "The cat sat", "p@example.com"):
             self.assertNotIn(private, text)
         self.assertIn("Listen and write | 1 | 1 | 1 | 1 | 2 | 50 | 4.0", text)
+        self.assertEqual(u["flags"], [{"question": "grammar:gu.articles.01", "reports": 2, "reasons": {"marked_wrong": 1, "confusing": 1}}])
+        self.assertIn("grammar:gu.articles.01 | 2 | marked_wrong 1, confusing 1", text)
+        self.assertNotIn("My own words", text)
