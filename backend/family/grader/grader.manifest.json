@@ -325,7 +325,7 @@
   "packages/learning/src/skill-units.ts": "d760b26ae1da783c0ee3d7a488032d6741d5cc4354c249e763a57ae0389d2358",
   "packages/learning/src/solution-sets.ts": "7d42a20cd953be3ba6fbe1a2e2caae10060aa5511046b8c9be75613cf4ee15f6",
   "packages/learning/src/spec.ts": "6836b7d17759de539bd2236dce0d3b90e2c77adec58f89c9b9639522e5f0fc37",
-  "packages/learning/src/step-help.ts": "e56b96b91e54a622c86e80393d90d242faeaea275555d4954057a83bb1bf003b",
+  "packages/learning/src/step-help.ts": "7c859f4f15152b92370a1f1eb3b7d6898548caa48aa872a76ba6832bcba6baa7",
   "packages/learning/src/subskill-config-addition-regroup.ts": "ac87873b8ecbf3a8c771de36938d8edad51312d6ecdd74b964270d6ae48433a2",
   "packages/learning/src/subskill-config-addition.ts": "5a9b0be2ad63cbaf77cc4aad4828fd1529011756a4e1a7362a38a8a7e0c8eb1c",
   "packages/learning/src/subskill-config-conversion.ts": "673faabee7093593062e81e16366ebe590e0cb191c96c10e9a8e6693b34629f9",
