@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Separation Workbench · OpenPath</title>
+<link rel="stylesheet" href="./bench.css"><script type="module" src="./bench.mjs"></script>
+</head>
+<body>
+<header><a href="../">← Science Labs</a><strong>OPENPATH / CHEMISTRY</strong></header>
+<main>
+<p class="eyebrow">FREE PLAY</p><h1>Catch the salt. Catch the water.</h1>
+<p class="intro">Try any tool in any order. Can you collect crystals and trap the water too?</p>
+<section aria-label="Workbench">
+  <div class="shelf">
+    <div class="vessel" id="pot"><h2>Mixing beaker</h2><div class="glass" aria-hidden="true"><i class="liquid"></i><i class="grain"></i><i class="crystals"></i><i class="vapour"></i></div><p class="reading"></p></div>
+    <div class="vessel" id="cup"><h2>Filter cup</h2><div class="glass" aria-hidden="true"><i class="liquid"></i><i class="grain"></i><i class="crystals"></i><i class="vapour"></i></div><p class="reading"></p></div>
+    <div class="vessel" id="receiver"><h2>Water catcher</h2><div class="glass" aria-hidden="true"><i class="liquid"></i></div><p class="reading"></p></div>
+  </div>
+  <div id="flow" aria-hidden="true"><span></span></div>
+  <div class="toolbar">
+    <div class="group"><label for="dose">Water dose</label><select id="dose"><option value="5">5 g</option><option value="15">15 g</option><option value="40" selected>40 g</option></select><button id="water">Add water</button></div>
+    <div class="group"><button id="stir" aria-pressed="false">Stir</button><button id="filter">Pour through filter</button><button id="return">Pour cup back</button></div>
+    <fieldset class="group"><legend>Heater</legend><label for="target">Under</label><select id="target"><option value="cup">Filter cup</option><option value="pot">Mixing beaker</option></select><label for="heat">Power</label><select id="heat"><option value="0">Off</option><option value="1">Low</option><option value="2">Medium</option><option value="3">High</option></select></fieldset>
+    <div class="group"><button id="trap" aria-pressed="false">Catch vapour</button><button id="pause" aria-pressed="false">Pause time</button></div>
+  </div>
+  <p id="goal" aria-live="polite"></p>
+  <p id="status" role="status">Pick a tool. Nothing locks you into a sequence.</p>
+</section>
+<details><summary>Where did everything go?</summary><p id="ledger"></p><p>Filter pores hold grains and crystals back, but let water and dissolved salt through. Heating can move water into the air or, with the catcher connected, into the receiver.</p></details>
+<div class="group restart"><label for="sample">Starting sample</label><select id="sample"><option value="mix">Dry salt and sand</option><option value="brine">Clear saltwater</option><option value="salty">Concentrated muddy mix</option></select><button id="reset">Start fresh</button></div>
+<footer>Idealised simulation. The clock is sped up and the readouts are model values, not a guide for a real experiment. Nothing is saved or sent.</footer>
+</main>
+</body>
+</html>

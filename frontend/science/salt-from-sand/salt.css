@@ -1,0 +1,25 @@
+.bench-top { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:9px; }
+.bench-top h2 { min-width:0; }
+.bench-top button[aria-pressed=true] { color:white; background:var(--green); }
+.bench-scene { margin:0; background:#e4eee9; border:1px solid #bfd2c9; border-radius:12px; overflow:hidden; }
+.bench-scene svg { width:100%; max-height:274px; display:block; }
+.bench-scene figcaption { min-height:3.3em; border-top:1px solid #bfd2c9; background:#f1f6ee; padding:7px 10px; font-size:.86rem; line-height:1.4; }
+.bench-scene text { fill:#244941; font:750 11px system-ui,sans-serif; }
+.tools { margin-top:11px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+.ion-key { display:flex; align-items:center; flex-wrap:wrap; gap:5px 7px; font-size:.81rem; }
+.ion { display:inline-block; width:9px; height:9px; border-radius:50%; }
+.sodium { background:#70478e; }.chloride { background:#08644f; margin-left:6px; }
+#status { min-height:2.7em; margin-bottom:8px; }
+.normal .liquid,.normal .strainer,.normal .steam,.normal .salt-saved,.molecular,.water-field,.free-ions,.particle-filter,.molecule-vapour { display:none; }
+[data-phase=wet] .liquid,[data-phase=solution] .liquid,[data-phase=filtered] .liquid,[data-phase=filtered] .strainer,[data-phase=recovered] .strainer,[data-phase=recovered] .steam,[data-phase=recovered] .salt-saved { display:initial; }
+[data-phase=solution] .salt,[data-phase=filtered] .salt,[data-phase=filtered] .sand,[data-phase=recovered] .sand { display:none; }
+[data-view=particles] .normal { display:none; }
+[data-view=particles] .molecular { display:initial; }
+[data-phase=wet] .water-field,[data-phase=solution] .water-field,[data-phase=solution] .free-ions,[data-phase=filtered] .particle-filter,[data-phase=recovered] .molecule-vapour { display:initial; }
+[data-phase=solution] .cluster,[data-phase=filtered] .cluster,[data-phase=filtered] .solid-grains,[data-phase=recovered] .solid-grains { display:none; }
+@media (prefers-reduced-motion:no-preference) {
+  [data-phase=solution] .free-ions { animation:appear .45s ease-out; }
+  .steam,.molecule-vapour { animation:rise .8s ease-out; }
+  @keyframes appear { from { opacity:.25; } to { opacity:1; } }
+  @keyframes rise { from { opacity:.25; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+}

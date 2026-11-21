@@ -1,0 +1,66 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {pollenPath,cycle,stages,disperse,seeds,startBed,tend} from './model.mjs';
+test('pollen on a petal does not pollinate; self and cross are distinct',()=>{
+ assert.equal(pollenPath(null,1,'stigma'),'empty');
+ assert.equal(pollenPath(0,1,'petal'),'miss');
+ assert.equal(pollenPath(0,0,'stigma'),'self');
+ assert.equal(pollenPath(1,0,'stigma'),'cross');
+});
+test('only compatible cross leads to the ordered pod stages in this mustard model',()=>{
+ for(const rejected of [null,'empty','miss','self'])assert.equal(cycle(rejected,1),null);
+ assert.equal(cycle('cross',-1),null);
+ assert.equal(cycle('cross',4),null);
+ assert.deepEqual(stages.map((_,i)=>cycle('cross',i).title),['Pollen lands','Fertilisation','Seeds grow','Pod ripens']);
+});
+test('different specimens match their characteristic carriers',()=>{
+ for(const [id,s] of Object.entries(seeds))for(const carrier of ['wind','water','animal']){
+  assert.equal(disperse(id,carrier),carrier===s.carrier);
+ }
+ assert.equal(disperse('stone','wind'),null);
+ assert.equal(disperse('toString','wind'),null);
+});
+test('seeds and buds require a planted, moist bed; effects are bounded and inputs untouched',()=>{
+ for(const crop of ['mustard','potato']){
+  const empty=startBed(crop);
+  assert.equal(tend(empty,'water'),empty);
+  assert.equal(tend(empty,'time'),empty);
+  const planted=tend(empty,'plant');
+  assert.equal(tend(planted,'time'),planted);
+  const wet=tend(planted,'water');
+  const emerging=tend(wet,'time');
+  const grown=tend(emerging,'time');
+  assert.equal(grown.crop,crop);
+  assert.equal(emerging.day,1);
+  assert.equal(grown.day,2);
+  assert.equal(tend(grown,'time').day,2);
+  assert.equal(empty.planted,false);
+ }
+});
+
+test('a 20-second story timeline advances through five ordered shots with no gaps',async()=>{
+ const {storyLength,storyFrame,shots}=await import('./story-model.mjs');
+ assert.equal(storyLength,20);
+ assert.deepEqual(shots.map(s=>s.id),['dawn','out','gather','transfer','home']);
+ for(let i=0;i<shots.length;i++){
+  const shot=shots[i];
+  assert.equal(storyFrame(shot.start).shot.id,shot.id);
+  assert.equal(storyFrame(shot.start).t,0);
+  assert.equal(shot.end,shots[i+1]?.start??storyLength);
+ }
+ assert.equal(storyFrame(19.999).finished,false);
+ assert.equal(storyFrame(20).finished,true);
+ assert.equal(storyFrame(22).t,1);
+});
+test('each of three bees gets a line and branches into an independent flight',async()=>{
+ const {storyFrame,flightPaths}=await import('./story-model.mjs');
+ assert.equal(storyFrame(1).dialogue.name,'Pip');
+ assert.equal(storyFrame(3).dialogue.name,'Mina');
+ assert.equal(storyFrame(5).dialogue.name,'Dot');
+ assert.equal(storyFrame(6).dialogue,null);
+ const start=flightPaths(0),end=flightPaths(1);
+ assert.ok(end.dot[0]<start.dot[0]&&end.dot[0]<0);
+ assert.ok(end.mina[0]>start.mina[0]&&end.mina[0]>640);
+ assert.ok(end.pip[0]>0&&end.pip[0]<640);
+ assert.ok(end.camera[2]>start.camera[2]);
+});

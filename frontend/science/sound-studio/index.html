@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Sound Studio · OpenPath Science</title>
+<link rel="stylesheet" href="./sound.css"><script type="module" src="./studio.mjs"></script><script type="module" src="./stations.mjs"></script>
+</head><body>
+<header><a href="../">← Science labs</a><label class="mute"><input type="checkbox" id="audio" checked> Sound</label></header>
+<main>
+<h1>Sound Studio</h1><p class="intro">The temple festival concert is tonight. Help Meena akka get every instrument ready.</p>
+<div class="guide">
+<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#5a3550"/><path d="M9 45q2-15 15-15t15 15" fill="#c2455b"/><circle cx="24" cy="20" r="9" fill="#a8674a"/><path d="M14 20q-1-13 10-13t10 13q-3-7-10-7t-10 7" fill="#20141c"/><circle cx="24" cy="12" r="1.8" fill="#e04a4a"/><path d="M33 15q4 2 2 7" stroke="#f4c15d" stroke-width="2" fill="none"/></svg>
+<p><b>Meena akka</b><span id="guide-line" aria-live="polite">Pull the veena string and let go.</span></p>
+</div>
+<div class="stations" role="tablist" aria-label="Instruments">
+<button role="tab" id="tab-veena" data-station="veena" aria-controls="st-veena" aria-selected="true">Veena<i></i></button>
+<button role="tab" id="tab-bottles" data-station="bottles" aria-controls="st-bottles" aria-selected="false" tabindex="-1">Bottles<i></i></button>
+<button role="tab" id="tab-drum" data-station="drum" aria-controls="st-drum" aria-selected="false" tabindex="-1">Drum<i></i></button>
+<button role="tab" id="tab-bell" data-station="bell" aria-controls="st-bell" aria-selected="false" tabindex="-1">Bell jar<i></i></button>
+<button role="tab" id="tab-hear" data-station="hear" aria-controls="st-hear" aria-selected="false" tabindex="-1">Who hears?<i></i></button>
+</div>
+
+<section class="lab" id="st-veena" role="tabpanel" aria-labelledby="tab-veena">
+<div class="stage">
+<svg id="instrument" viewBox="0 0 480 200" role="img" aria-label="A wooden veena inspired by South Indian instruments, with one playable string.">
+<defs>
+ <linearGradient id="wood" x2="12%" y2="100%"><stop stop-color="#e2955a"/><stop offset="1" stop-color="#873a33"/></linearGradient>
+ <linearGradient id="neck" x2="0%" y2="100%"><stop stop-color="#b36345"/><stop offset="1" stop-color="#4d2028"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#c77755" stop-opacity=".6"/><stop offset="1" stop-color="#713b57" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="480" height="200" fill="#261b36"/><ellipse cx="151" cy="113" rx="188" ry="104" fill="url(#glow)"/>
+<path d="M0 174Q92 155 180 177T480 172V200H0Z" fill="#38213a"/>
+<ellipse cx="236" cy="161" rx="202" ry="16" fill="#170f21" opacity=".65"/>
+<path d="M128 81L408 82l32-8q20 2 15 18l-1 24-50-5H128Z" fill="url(#neck)" stroke="#2d1822" stroke-width="3"/>
+<path d="M33 94q2-46 56-53q39-5 65 24q18 21 13 54q-5 40-48 48q-53 9-79-25q-13-18-7-48Z" fill="url(#wood)" stroke="#541f29" stroke-width="4"/>
+<path d="M41 92q8-36 46-44q44-9 68 28m-109 64q34 35 79 15" fill="none" stroke="#f5b86d" stroke-width="3" opacity=".8"/>
+<path d="M53 80q50-24 93 3m-96 50q43 26 96 0" fill="none" stroke="#f7ad75" opacity=".43"/>
+<circle cx="95" cy="105" r="34" fill="none" stroke="#662d43" stroke-width="5" opacity=".6"/><circle cx="95" cy="105" r="25" fill="none" stroke="#ffcb87" stroke-width="1.5" stroke-dasharray="2 4"/>
+<path d="M71 91v27h9V91Zm330-3v32h8V88Z" fill="#e3a76a" stroke="#6a3d37" stroke-width="2"/>
+<path d="M173 87v22m19-22v22m20-22v22m23-22v22m26-22v22m29-22v22m33-22v22m37-22v22" stroke="#e2a770" stroke-width="2" opacity=".45"/>
+<path d="M76 101H405" stroke="#f0bd81" stroke-dasharray="3 5" opacity=".5"/>
+<path id="string-rest" d="" stroke="#c9a676" stroke-width="2" fill="none"/>
+<path id="string" d="M76 101H405" stroke="#fff0b1" stroke-width="3" fill="none" stroke-linecap="round"/>
+<g id="peg" transform="rotate(0 424 101)"><circle cx="424" cy="101" r="27" fill="transparent"/><circle cx="424" cy="101" r="12" fill="#d9956b" stroke="#4c2231" stroke-width="3"/><path d="M419 101h10" stroke="#5a2e36" stroke-width="3" stroke-linecap="round"/></g>
+<g id="finger" hidden><ellipse cx="0" cy="96" rx="9" ry="12" fill="#c98a68" stroke="#5a2e36" stroke-width="2"/><path d="M-4 88q4-4 8 0" stroke="#f2c7a4" fill="none"/></g>
+<rect id="play-zone" x="80" y="62" width="322" height="88" fill="transparent"/>
+<path d="M241 50v18m-5-6 5 6 5-6" stroke="#ffce91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>
+</div>
+<div class="controls">
+<label for="tension" class="title">Turn the tuning peg</label>
+<input id="tension" type="range" aria-label="Tuning peg" min="50" max="200" step="10" value="100">
+<div class="endpoints"><span>Looser</span><span>Tighter</span></div>
+<label for="fret" class="title">Press a fret</label>
+<input id="fret" type="range" aria-label="Fret" min="0" max="5" step="1" value="0">
+<div class="endpoints"><span>Long string</span><span>Short string</span></div>
+<div class="play"><button id="soft">Soft pluck</button><button id="strong">Strong pluck</button></div>
+<div class="options"><label><input type="checkbox" id="slow"> Slow-motion string</label></div>
+<p id="notice" role="status">Pull the string, or try a soft pluck.</p>
+<div class="scope">
+  <div><span>See the vibration</span><span id="legend">Same time window</span></div>
+  <svg viewBox="0 0 360 80" aria-hidden="true"><path d="M0 40H360M90 0V80M180 0V80M270 0V80" stroke="#80546f" opacity=".45"/><path id="previous" fill="none" stroke="#cba7bd" stroke-width="1.5" stroke-dasharray="3 4"/><path id="wave" d="M0 40H360" fill="none" stroke="#ffd898" stroke-width="2.2"/></svg>
+  <small id="wave-key">More space up and down = louder. More wiggles = higher pitch.</small>
+</div>
+</div>
+</section>
+
+<section class="lab" id="st-bottles" role="tabpanel" aria-labelledby="tab-bottles" hidden>
+<div class="shelf" id="shelf"></div>
+<div class="controls">
+<div class="play"><button id="blow-all">Blow them in a row</button><button id="empty-all">Pour all out</button></div>
+<p id="b-notice" role="status">Tap a bottle to blow across it. Slide to pour water.</p>
+<div class="scope"><div><span>See the vibration</span><span id="b-hz"></span></div>
+<svg viewBox="0 0 360 80" aria-hidden="true"><path d="M0 40H360M90 0V80M180 0V80M270 0V80" stroke="#80546f" opacity=".45"/><path id="b-wave" d="M0 40H360" fill="none" stroke="#9fdcff" stroke-width="2"/></svg>
+<small>Less air in the bottle = more wiggles = higher note.</small></div>
+</div>
+</section>
+
+<section class="lab" id="st-drum" role="tabpanel" aria-labelledby="tab-drum" hidden>
+<svg id="drum" viewBox="0 0 480 230" role="img" aria-label="A festival drum with grains of rice resting on its skin">
+<rect width="480" height="230" fill="#261b36"/><ellipse cx="240" cy="210" rx="170" ry="14" fill="#170f21" opacity=".7"/>
+<path d="M110 92v78q0 34 130 34t130-34V92" fill="#8a3b2f" stroke="#3e1a1f" stroke-width="4"/>
+<g id="straps" stroke="#e9c48a" stroke-width="3" opacity=".85"></g>
+<path d="M110 170q0 34 130 34t130-34" fill="none" stroke="#f0b36a" stroke-width="6"/>
+<ellipse id="skin" cx="240" cy="92" rx="130" ry="34" fill="#efd9ae" stroke="#5b2b22" stroke-width="5"/>
+<ellipse cx="240" cy="92" rx="40" ry="10.5" fill="#3a2a2a" opacity=".85"/>
+<g id="rice" fill="#fffbef" stroke="#6b4a3a" stroke-width="1"></g>
+<rect id="hit-zone" x="105" y="52" width="270" height="82" fill="transparent"/>
+</svg>
+<div class="controls">
+<label for="tight" class="title">Tighten the straps</label>
+<input id="tight" type="range" aria-label="Straps" min="50" max="200" step="10" value="100">
+<div class="endpoints"><span>Loose</span><span>Tight</span></div>
+<div class="play"><button id="tap-soft">Soft tap</button><button id="tap-strong">Strong tap</button></div>
+<p id="d-notice" role="status">Tap the drum skin. Watch the rice.</p>
+<div class="scope"><div><span>See the vibration</span><span id="d-hz"></span></div>
+<svg viewBox="0 0 360 80" aria-hidden="true"><path d="M0 40H360M90 0V80M180 0V80M270 0V80" stroke="#80546f" opacity=".45"/><path id="d-prev" fill="none" stroke="#cba7bd" stroke-width="1.5" stroke-dasharray="3 4"/><path id="d-wave" d="M0 40H360" fill="none" stroke="#ffb98a" stroke-width="2.2"/></svg></div>
+</div>
+</section>
+
+<section class="lab" id="st-bell" role="tabpanel" aria-labelledby="tab-bell" hidden>
+<svg id="jar" viewBox="0 0 480 230" role="img" aria-label="A bell inside a glass jar, with a hand pump joined to the jar by a pipe">
+<rect width="480" height="230" fill="#261b36"/>
+<g id="waves" fill="none" stroke="#ffd898" stroke-width="3" stroke-linecap="round" opacity="0"><path d="M300 70q24 40 0 80M60 70q-24 40 0 80"/><path d="M322 55q36 55 0 110M38 55q-36 55 0 110"/></g>
+<rect x="50" y="188" width="260" height="16" rx="4" fill="#6d4a5e" stroke="#2c1a2a" stroke-width="2"/>
+<path d="M75 188V88q0-62 105-62t105 62v100" fill="#9fd4e6" fill-opacity=".13" stroke="#cfeefa" stroke-width="3"/>
+<g id="air" fill="#cfeefa"></g>
+<path d="M180 40v18" stroke="#c9c2b0" stroke-width="3"/>
+<g id="bell"><path d="M152 118q0-50 28-60 28 10 28 60l8 10h-72Z" fill="#e3b04f" stroke="#7a5420" stroke-width="3"/><circle cx="180" cy="134" r="7" fill="#7a5420"/></g>
+<path d="M310 196h40v-90" fill="none" stroke="#8a7f90" stroke-width="7"/>
+<rect x="335" y="96" width="30" height="100" rx="5" fill="#3f6f8f" stroke="#1a2c3a" stroke-width="3"/>
+<g id="pump-handle"><path d="M350 96V52" stroke="#c9c2b0" stroke-width="5"/><rect x="326" y="44" width="48" height="10" rx="4" fill="#d9956b" stroke="#4c2231" stroke-width="2"/></g>
+</svg>
+<div class="controls">
+<div class="play three"><button id="ring" aria-pressed="false">Ring the bell</button><button id="pump">Pump air out</button><button id="let-in">Let air in</button></div>
+<div class="meter"><span>Air in the jar</span><b id="air-left">100%</b></div>
+<p id="j-notice" role="status">Ring the bell. Then pump the air out while it rings.</p>
+</div>
+</section>
+
+<section class="lab" id="st-hear" role="tabpanel" aria-labelledby="tab-hear" hidden>
+<div class="controls">
+<label for="pitch" class="title">Change the pitch</label>
+<input id="pitch" type="range" aria-label="Pitch" min="0" max="1000" step="1" value="500">
+<div class="endpoints"><span>Very low</span><span>Very high</span></div>
+<p class="readout"><b id="hz-read">1,000 Hz</b> <span id="hz-kind">You can hear this</span></p>
+<svg id="ranges" viewBox="0 0 360 166" role="img" aria-label="Hearing ranges"></svg>
+<ul class="listeners" id="listeners"></ul>
+<div class="play"><button id="play-tone">Play it</button><button id="to-human">Back to my range</button></div>
+<p id="h-notice" role="status">Hz means shakes each second. 1,000 Hz shakes a thousand times every second.</p>
+</div>
+</section>
+
+<button type="button" class="eureka" id="eureka" hidden aria-live="polite"></button>
+<section class="notebook" aria-labelledby="nb-title">
+<h2 id="nb-title">Festival notebook <span id="nb-count">0 of 9</span></h2>
+<ol id="nb-list"></ol>
+<button id="concert" hidden>Start the concert</button>
+</section>
+<details><summary>Is this how real sound works?</summary><p>Everything that makes a sound is shaking (vibrating). A wider shake is louder; a faster shake is a higher note. The number of shakes each second is the frequency, measured in hertz (Hz). Sound travels as a push through air, water or solids, and cannot cross empty space.</p><p>The numbers here come from simple models: a string, a column of air, a drum skin and a jar that a hand pump can never fully empty. Hearing ranges differ between people and animals; these are typical values.</p></details>
+</main></body></html>

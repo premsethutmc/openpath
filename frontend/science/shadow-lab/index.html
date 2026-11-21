@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Shadow Lab · OpenPath</title>
+<link rel="stylesheet" href="./shadow.css">
+<script type="module" src="./shadow.mjs"></script>
+</head>
+<body>
+<header><a href="../">← Science Labs</a><span>OPENPATH</span></header>
+<main>
+  <div class="intro"><p class="eyebrow">LIGHT LAB · CLASS 5</p><h1>Shadow Lab</h1><p>The power’s out. Let’s make a giant rabbit on the wall.</p></div>
+  <section aria-label="Shadow experiment" class="lab">
+    <div class="wall">
+      <span class="tag">ON THE WALL</span>
+      <svg viewBox="0 0 480 245" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <radialGradient id="spot"><stop stop-color="#ffdd99"/><stop offset=".72" stop-color="#d0a56b"/><stop offset="1" stop-color="#ae8050" stop-opacity="0"/></radialGradient>
+          <linearGradient id="plaster" x2="0" y2="1"><stop stop-color="#32263a"/><stop offset="1" stop-color="#554045"/></linearGradient>
+          <filter id="soft" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur id="softness" stdDeviation=".35"/></filter>
+          <pattern id="grain" width="7" height="7" patternUnits="userSpaceOnUse"><path d="M2 2h1m2 3h1" stroke="#ffddad" stroke-opacity=".12" stroke-width=".45"/></pattern>
+          <path id="rabbit" d="M-40 26Q-45 13-32 8C-28-7-16-12 0-9Q3-20 15-21C5-40 8-57 14-59C21-59 24-44 24-25C28-42 36-57 42-53C49-49 41-34 35-22Q48-14 46-5Q44 4 30 5Q31 16 22 22L33 26Q38 33 29 36H-26Q-40 35-40 26Z"/>
+        </defs>
+        <path fill="url(#plaster)" d="M0 0h480v245H0z"/>
+        <path d="M8 59V12h62v47z" fill="#45405d" stroke="#6b5170" stroke-width="5"/>
+        <path d="M39 11v49M7 35h64" stroke="#6b5170" stroke-width="3"/>
+        <path d="M19 25q12-2 12-11q7 14-6 17z" fill="#dccbab"/>
+        <ellipse id="glow" cx="241" cy="122" rx="214" ry="133" fill="url(#spot)"/>
+        <path fill="url(#grain)" d="M0 0h480v245H0z"/>
+        <g id="silhouette" transform="translate(241 127)"><use id="projected" href="#rabbit" fill="#201929" filter="url(#soft)"/></g>
+      </svg>
+      <button type="button" id="power" class="power" aria-pressed="true">Torch on</button>
+    </div>
+    <div class="bench">
+      <span class="tag">LIGHT PATH · SIDE VIEW</span>
+      <svg id="track" viewBox="0 0 480 141" aria-hidden="true">
+        <defs><linearGradient id="beam"><stop stop-color="#ffdf8e" stop-opacity=".62"/><stop offset="1" stop-color="#ffc26f" stop-opacity=".21"/></linearGradient></defs>
+        <path d="M32 95H456v10H32z" fill="#564050"/><path d="M32 95H456" stroke="#876272" stroke-width="2"/>
+        <path d="M455 10v95" stroke="#cf9ca4" stroke-width="5" stroke-linecap="round"/>
+        <g id="light"><path id="cone" fill="url(#beam)"/><path id="blocked" fill="#171322"/><path id="rays" fill="none" stroke="#ffda91" stroke-dasharray="4 4" stroke-opacity=".74"/></g>
+        <path d="M276 93h24v4h-24z" fill="#b47b60"/>
+        <path id="panel" d="M288 44.5v24m0 4v20.5" stroke="#dc985d" stroke-width="7" stroke-linecap="round"/>
+        <g id="torch">
+          <rect x="-47" y="39" width="54" height="58" fill="transparent"/>
+          <rect x="-42" y="49" width="29" height="15" rx="4" fill="#6cbab4" stroke="#202231" stroke-width="2"/>
+          <path d="M-15 49l12-5h4v25h-4l-12-5z" fill="#94d1cc" stroke="#202231" stroke-width="2"/>
+          <path id="bulb" d="M0 48v17" stroke="#ffe2a2" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <path d="M64 119h162" stroke="#826980" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1 6"/>
+        <circle id="handle" cy="119" r="7" fill="#ffe1ac"/>
+      </svg>
+      <label for="distance">Drag the torch left or right</label>
+      <input id="distance" type="range" min="64" max="226" value="132" aria-label="Move torch closer to the rabbit">
+    </div>
+    <div class="shelf">
+      <p>Swap the rabbit’s material</p>
+      <div role="group" aria-label="Rabbit material">
+        <button type="button" data-material="cardboard" aria-pressed="true"><i></i>Cardboard</button>
+        <button type="button" data-material="tracing" aria-pressed="false"><i></i>Tracing paper</button>
+        <button type="button" data-material="clear" aria-pressed="false"><i></i>Clear plastic</button>
+      </div>
+    </div>
+  </section>
+  <p class="discovery" aria-live="polite"><strong id="kind">Opaque</strong> <span id="note">Cardboard blocks the beam. Its shadow is dark and sharp.</span></p>
+  <details><summary>Why does it grow?</summary><p>As the torch moves closer to the rabbit, the rabbit blocks a wider part of the spreading beam. That makes its shadow on the wall bigger. Move the torch back to shrink it.</p></details>
+</main>
+</body>
+</html>

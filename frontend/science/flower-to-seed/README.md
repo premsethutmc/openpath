@@ -1,0 +1,14 @@
+# Flower to Seed · ICSE Class 5
+Based on pollination and plant reproduction in the [CISCE primary science curriculum](https://cisce.org/wp-content/uploads/2025/03/PrimaryCurriculum.pdf). This is an exploration, not a quiz or all of Class 5.
+
+- The bee shows one short flight automatically, or the learner can take over by dragging the bee directly or tapping a whole flower. No labels cover the flowers. Picking up pollen and visiting the other mustard plant unlocks the pod in this simplified Brassica model, inspired by [Wisconsin Fast Plants](https://fastplants.org/resources/digital_library/r44/flowering_and_pollination). Plant parts are introduced in the cutaway. A same-plant visit does not unlock the pod in this model; other plants can set seed after self-pollination. Autoplay is off when reduced motion is requested, but tapping flowers or choosing Watch the bee still works.
+- Scrub through the cutaway, seeing the pollen tube before the pod. Split the ripe pod on the scene to scatter the seeds. These are developmental stages, not calendar days.
+- Give different fruits/seed structures a ride using wind, water or an animal; the models depict their characteristic dispersal methods, not every possible transfer in nature.
+- Compare a mustard seed with a potato eye. Plant, add rain and advance time. The visible mustard root precedes the shoot. A potato eye is a bud on a stem tuber; its shoot doesn't require a seed. The watering and growing steps are illustrative, not a full model of germination or a gardening protocol. The separate Plant a Seed exercise remains linked for further play.
+- Original vectors, no sign-in, no new API, storage or tracking. Tap, drag, or use the keyboard; animation responds to reduced-motion settings. No scoring or grading.
+
+- Optional Sound runs an original Web Audio score and synthesized garden ambience, with short action sounds for the bee, pod and rain. Starts muted on every load; no external tracks, recording, permission prompt or network audio. Hidden tabs suspend audio.
+
+- The optional 20-second A Bee’s Morning story uses five timed SVG shots, with pause, replay, and a take-over action that returns immediately to the interactive garden. The dialogue is fictional. The foraging story distinguishes nectar collection, incidental pollen transfer, and honey-making at the hive; real processes take longer.
+
+- At the hive Pip, Mina and Dot speak in turn, then fly in separate directions. The camera stays with Pip. Speech bubbles always show their lines; the Sound toggle also enables speech on browsers that report local English voices. No remote voice or voice download is requested.
