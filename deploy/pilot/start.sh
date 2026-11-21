@@ -46,6 +46,11 @@ fi
 if [ "${OPENPATH_READING_AI_TRIAL:-0}" = 1 ]; then
     python manage.py reading_ai_trial || echo "reading-ai trial failed"
 fi
+# content-ai-review@1: a one-off AI reader over the English questions, in the background so start is not held up
+# (only while this setting is 1; turned off after)
+if [ "${OPENPATH_CONTENT_AI_REVIEW:-0}" = 1 ]; then
+    (python manage.py content_ai_review || echo "content-ai-review failed") &
+fi
 # The grader bundle decides credit: refuse to start unless it is exactly the one its manifest records and Node can run it.
 python -c 'import django,os;django.setup()
 from family import kernel_grader as k
