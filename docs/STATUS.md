@@ -4,6 +4,10 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
+## Quit India history preview (2026-11-21, draft #288)
+- Standalone `frontend/history/quit-india/`: Cripps evidence, 8 August gathering, 9 August arrests, Congress Radio dial, four regional lenses, and 1942–47 aftermath. Existing Dandi runtime unchanged.
+- Model and offline checks, isolated mobile Chromium workflow, no merge/deploy. No voices, recording, sign-in or paid runtime calls. See `docs/product/history/gandhi-mass-movement.md`.
+
 ## Dandi history preview (2026-11-21, draft #288)
 - On `feat/history-dandi-march`: unchanged archive opening, a controllable Aslali walk and optional captioned salt conversation, route via Mahi, distinct April 5–6 shore beats, Vedaranyam comparison and optional political context. Scratch dialogue removed. Original illustrated draft remains separate.
 - No merge or deploy authorized. Three deterministic journey tests and companion media/offline checks; dedicated mobile Chromium workflow covers the full journey. Physical Android review and a production human voice remain outstanding.
