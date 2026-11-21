@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Walk to Dandi | OpenPath</title>
+<link rel="stylesheet" href="./march.css">
+</head>
+<body>
+<main>
+<header><span class="brand">OPENPATH <span> / LIVING HISTORY</span></span><button id="sound" type="button" aria-pressed="false">Sound off</button></header>
+<section class="stage" aria-label="First-person illustration of the Salt March">
+  <canvas id="world" aria-hidden="true"></canvas>
+  <div class="shade"></div>
+  <div class="location"><span id="date">12 March 1930</span><strong id="place">Sabarmati Ashram</strong></div>
+  <div id="intro"><p>A walk that challenged a law</p><h1>Walk to<br>Dandi</h1></div>
+  <div class="target" id="target" hidden><span></span> Gandhi, ahead</div>
+  <div id="caption" class="caption" role="status" aria-atomic="true" hidden><b id="speaker"></b><p id="reply"></p></div>
+</section>
+<section class="controls" aria-label="Take part in the march">
+  <div class="trail" aria-hidden="true"><span class="fill" id="fill"></span></div>
+  <p id="hint" role="status">Fall into step. Gandhi is up ahead.</p>
+  <div id="actions">
+    <button class="primary" id="walk" type="button">Join the march <span aria-hidden="true">→</span></button>
+    <button id="ask" type="button" aria-expanded="false" aria-controls="questions" hidden>Talk to a marcher</button>
+  </div>
+  <div id="questions" hidden>
+    <p>What do you want to ask?</p>
+    <div class="choices"></div>
+  </div>
+  <button id="reset" type="button" class="quiet" hidden>Start again</button>
+</section>
+<details>
+  <summary>What’s history? What’s imagined?</summary>
+  <p>Gandhi and his fellow marchers left Sabarmati Ashram on 12 March 1930. Gandhi arrived at Dandi on 5 April and broke the British salt law by picking up natural salt the next morning. The march was part of a wider campaign of nonviolent civil disobedience.</p>
+  <p>Raman and Dev, their dialogue, and your place on the road are imagined. The walk compresses several weeks. Gandhi is shown but given no invented dialogue.</p>
+  <p><a href="https://www.gandhiheritageportal.org/background-to-the-salt-satyagraha">Gandhi Heritage Portal chronology</a> · <a href="https://www.gandhiashramsabarmati.org/en/the-mahatma/speeches/dandi-march.html/">Gandhi’s speech on the eve of the march</a> · <a href="https://sansad.in/ls/library/statue/22">Digital Sansad account</a></p>
+</details>
+<footer>OpenPath · Founded and created by Premkumar Sethuraman</footer>
+</main>
+<script type="module" src="./march.mjs"></script>
+</body>
+</html>
