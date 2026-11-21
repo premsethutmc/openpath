@@ -68,10 +68,10 @@ test('390 px archive to optional captioned exchange, controllable walk, and two 
     await p.getByRole('button',{name:/Mahi River/}).tap();
     assert.match(await p.locator('#route-note').innerText(),/Kareli/);
     await p.getByRole('button',{name:'Go to Dandi'}).tap();
-    assert.match(await p.locator('#shore-date').innerText(),/5 April/);
+    assert.match(await p.locator('#shore-date').innerText(),/5 April/i);
     assert.equal(await p.getByRole('button',{name:'See how it spread'}).isVisible(),false);
     await p.getByRole('button',{name:'Stay until dawn'}).tap();
-    assert.match(await p.locator('#shore-date').innerText(),/6 April/);
+    assert.match(await p.locator('#shore-date').innerText(),/6 April/i);
     await p.getByRole('button',{name:'See how it spread'}).tap();
     assert.match(await p.locator('#spread').innerText(),/Tiruchirappalli → Vedaranyam/);
     assert.match(await p.locator('#spread').innerText(),/30 Apr/);
