@@ -1959,6 +1959,926 @@
           "explain": "The bridge they build is what changes Selvi's year."
         }
       ]
+    },
+    {
+      "id": "lr1.mango",
+      "level": 1,
+      "theme": "sharing",
+      "title": "The Big Mango",
+      "parts": [
+        {
+          "text": "Ravi had a big yellow mango. It was sweet and soft. He sat on the step to eat it. His little sister Priya came out. She looked at the mango. \"Can I have some?\" she asked. Ravi held the mango close. \"It is mine,\" he said.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What colour was the mango?",
+              "right": "yellow",
+              "wrong": [
+                "green",
+                "red"
+              ],
+              "explain": "\"Ravi had a big yellow mango.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Ravi feel about sharing at first?",
+              "right": "he did not want to share",
+              "wrong": [
+                "he was glad to share",
+                "he did not like mangoes"
+              ],
+              "explain": "He held the mango close and said, \"It is mine.\""
+            }
+          ]
+        },
+        {
+          "text": "Priya went back inside. She did not cry. She came back with two small bananas. She sat next to Ravi. \"One for me and one for you,\" she said. She gave Ravi a banana. Ravi looked at the banana. Then he looked at his mango.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Priya bring?",
+              "right": "two small bananas",
+              "wrong": [
+                "a red apple",
+                "a cup of milk"
+              ],
+              "explain": "\"She came back with two small bananas.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Ravi look at his mango?",
+              "right": "he was thinking of sharing it",
+              "wrong": [
+                "he wanted to throw it away",
+                "he saw a fly sitting on it"
+              ],
+              "explain": "Priya shared with him, so he thinks about sharing too."
+            }
+          ]
+        },
+        {
+          "text": "Ravi went in to Amma. Amma cut the mango into two. Ravi gave half to Priya. They ate the mango and the bananas together. Their hands were sticky and yellow. \"Sharing is nice,\" said Ravi. Priya laughed.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What happened after Amma cut the mango?",
+              "right": "Ravi gave half to Priya",
+              "wrong": [
+                "Priya ran away",
+                "Ravi ate it all"
+              ],
+              "explain": "\"Ravi gave half to Priya.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why were their hands sticky?",
+              "right": "they ate the mango",
+              "wrong": [
+                "they played in mud",
+                "they made some glue"
+              ],
+              "explain": "They ate the mango, and their hands were sticky and yellow."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "learning to share",
+          "wrong": [
+            "buying fruit at a shop",
+            "a fight over a toy"
+          ],
+          "explain": "Ravi keeps the mango at first and shares it at the end."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Ravi change?",
+          "right": "from keeping the mango to sharing it",
+          "wrong": [
+            "from kind to unkind to Priya",
+            "from hungry to very sleepy"
+          ],
+          "explain": "First he says \"It is mine\"; at the end he gives Priya half."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Big Mango\"?",
+          "right": "the mango is what Ravi learns to share",
+          "wrong": [
+            "the mango grows on a big tree",
+            "Priya wants a big banana"
+          ],
+          "explain": "The whole story is about the mango and sharing it."
+        }
+      ]
+    },
+    {
+      "id": "lr1.lake",
+      "level": 1,
+      "theme": "trying new things",
+      "title": "Anu and the Water",
+      "parts": [
+        {
+          "text": "Anu went to the lake with Appa. Many children were in the water. They splashed and played. Anu sat on the bank. She was afraid of the water. \"Come in,\" said Appa. \"I will hold you.\" Anu shook her head.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Anu go with Appa?",
+              "right": "to the lake",
+              "wrong": [
+                "to the market",
+                "to the park"
+              ],
+              "explain": "\"Anu went to the lake with Appa.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Anu feel about the water?",
+              "right": "afraid",
+              "wrong": [
+                "happy",
+                "angry"
+              ],
+              "explain": "\"She was afraid of the water.\""
+            }
+          ]
+        },
+        {
+          "text": "Appa went into the water. It came up to his knees only. \"Look, it is not deep here,\" he said. Anu put one foot in. The water was cool. She put in the other foot. A little fish swam near her toes. Anu laughed.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How deep was the water where Appa stood?",
+              "right": "up to his knees",
+              "wrong": [
+                "over his head",
+                "up to his neck"
+              ],
+              "explain": "\"It came up to his knees only.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Anu laugh?",
+              "right": "a fish swam near her toes",
+              "wrong": [
+                "Appa fell in the water",
+                "a duck quacked at her"
+              ],
+              "explain": "\"A little fish swam near her toes. Anu laughed.\""
+            }
+          ]
+        },
+        {
+          "text": "Appa held Anu's hands. She kicked her legs. Splash, splash! Water went everywhere. \"I am swimming!\" Anu shouted. She was not afraid now. Every Sunday after that, Anu asked, \"Can we go to the lake?\"",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did Anu do after Appa held her hands?",
+              "right": "she kicked her legs",
+              "wrong": [
+                "she ran home",
+                "she sat on the bank"
+              ],
+              "explain": "\"Appa held Anu's hands. She kicked her legs.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Anu want every Sunday?",
+              "right": "to go back to the lake",
+              "wrong": [
+                "to stay at home",
+                "to buy a fish"
+              ],
+              "explain": "She asked, \"Can we go to the lake?\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "trying something new",
+          "wrong": [
+            "catching a big fish",
+            "a rainy day at home"
+          ],
+          "explain": "Anu is afraid of the water, then tries it and likes it."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Anu change?",
+          "right": "from afraid to happy in the water",
+          "wrong": [
+            "from happy to very sad",
+            "from kind to unkind to Appa"
+          ],
+          "explain": "At first she is afraid; at the end she shouts \"I am swimming!\""
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Anu and the Water\"?",
+          "right": "it is about Anu and her fear of water",
+          "wrong": [
+            "it is about a fish in the lake",
+            "Anu has to carry some water"
+          ],
+          "explain": "The story is about Anu getting over her fear of the water."
+        }
+      ]
+    },
+    {
+      "id": "lr1.coin",
+      "level": 1,
+      "theme": "honesty",
+      "title": "The Lost Coin",
+      "parts": [
+        {
+          "text": "Kumar found a shiny coin on the road. It was ten rupees. \"I can buy sweets!\" he said. He ran to the shop. But then he saw an old man. The man was looking at the ground. He looked sad.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Kumar find?",
+              "right": "a ten rupee coin",
+              "wrong": [
+                "a red ball",
+                "a new pencil"
+              ],
+              "explain": "\"It was ten rupees.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What was the old man doing?",
+              "right": "looking for something he lost",
+              "wrong": [
+                "sleeping under a tree",
+                "buying some sweets"
+              ],
+              "explain": "He was looking at the ground and he looked sad."
+            }
+          ]
+        },
+        {
+          "text": "\"Did you lose something?\" Kumar asked. \"Yes,\" said the man. \"I lost a coin. It was for my bus ticket. Now I cannot go home.\" Kumar looked at the coin in his hand. He thought about the sweets.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did the man need the coin?",
+              "right": "for his bus ticket",
+              "wrong": [
+                "to buy some sweets",
+                "to give to a friend"
+              ],
+              "explain": "\"It was for my bus ticket.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "What was hard for Kumar?",
+              "right": "giving up the sweets",
+              "wrong": [
+                "finding the shop",
+                "talking to his friend"
+              ],
+              "explain": "He looked at the coin and thought about the sweets."
+            }
+          ]
+        },
+        {
+          "text": "Kumar gave the coin to the man. \"Here it is,\" he said. The man smiled. \"Thank you. You are an honest boy.\" He got on the bus and waved. Kumar did not get sweets. But he felt happy all the way home.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did the man do after he got the coin?",
+              "right": "got on the bus and waved",
+              "wrong": [
+                "went into the shop",
+                "sat down on the road"
+              ],
+              "explain": "\"He got on the bus and waved.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Kumar feel at the end?",
+              "right": "happy",
+              "wrong": [
+                "angry",
+                "hungry"
+              ],
+              "explain": "\"He felt happy all the way home.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "being honest",
+          "wrong": [
+            "buying sweets at a shop",
+            "a long bus ride"
+          ],
+          "explain": "Kumar gives back the coin he found."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Kumar change?",
+          "right": "from wanting sweets to helping the man",
+          "wrong": [
+            "from happy to angry with the man",
+            "from honest to not honest"
+          ],
+          "explain": "He first wants sweets, then gives the coin back."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Lost Coin\"?",
+          "right": "the man's lost coin is found by Kumar",
+          "wrong": [
+            "Kumar loses his own coin at the shop",
+            "the shop has lost all its sweets"
+          ],
+          "explain": "The old man lost the coin and Kumar found it."
+        }
+      ]
+    },
+    {
+      "id": "lr2.seed",
+      "level": 2,
+      "theme": "patience",
+      "title": "The Seed That Would Not Grow",
+      "parts": [
+        {
+          "text": "Meena planted a bean seed in a small pot. She put it by the window and gave it water. The next morning she ran to look. Nothing! Only brown soil. \"Why is it not growing?\" she asked Paati. Paati smiled. \"Seeds need time, kanna. Wait and see.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Meena put the pot?",
+              "right": "by the window",
+              "wrong": [
+                "under her bed",
+                "in the kitchen"
+              ],
+              "explain": "\"She put it by the window.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Meena feel the next morning?",
+              "right": "disappointed that nothing grew",
+              "wrong": [
+                "happy to see a flower",
+                "afraid of the soil"
+              ],
+              "explain": "\"Nothing! Only brown soil.\""
+            }
+          ]
+        },
+        {
+          "text": "Meena waited one day, then two days, then three. Every morning she looked at the pot. Every morning there was only soil. On the fourth day she was cross. \"I will dig it up and see what is wrong,\" she said. Paati held her hand. \"If you dig it up, it will never grow. Give it a little longer.\"",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did Meena want to do on the fourth day?",
+              "right": "dig up the seed",
+              "wrong": [
+                "plant a new pot",
+                "give it more water"
+              ],
+              "explain": "\"I will dig it up and see what is wrong.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Paati stop her?",
+              "right": "digging would stop it growing",
+              "wrong": [
+                "the pot was too heavy to lift",
+                "Meena's hands were dirty"
+              ],
+              "explain": "\"If you dig it up, it will never grow.\""
+            }
+          ]
+        },
+        {
+          "text": "On the sixth morning, Meena shouted, \"Paati, come quickly!\" A tiny green shoot was pushing up through the soil. It had two small leaves, curled like hands. Meena watered it gently. Every day it grew a little taller. Soon it climbed a stick by the window. \"You were right,\" Meena told Paati. \"Good things take time.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "When did the shoot come up?",
+              "right": "on the sixth morning",
+              "wrong": [
+                "on the first morning",
+                "after one month"
+              ],
+              "explain": "\"On the sixth morning ... A tiny green shoot was pushing up.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Meena learn?",
+              "right": "good things take time",
+              "wrong": [
+                "seeds never grow in pots",
+                "water is bad for plants"
+              ],
+              "explain": "\"Good things take time.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "learning to be patient",
+          "wrong": [
+            "cooking beans for dinner",
+            "a visit to a big farm"
+          ],
+          "explain": "Meena wants the seed to grow at once and learns to wait."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Meena change?",
+          "right": "from cross and hasty to patient",
+          "wrong": [
+            "from kind to rude to Paati",
+            "from happy to very sad"
+          ],
+          "explain": "She wants to dig it up, then she says good things take time."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Seed That Would Not Grow\"?",
+          "right": "Meena thinks the seed will never grow",
+          "wrong": [
+            "the seed is too old to grow at all",
+            "Paati throws the seed away"
+          ],
+          "explain": "For days it seems not to grow, but it does in the end."
+        }
+      ]
+    },
+    {
+      "id": "lr2.fair",
+      "level": 2,
+      "theme": "lost and found",
+      "title": "Lost at the Fair",
+      "parts": [
+        {
+          "text": "Arun and his mother went to the village fair. There were balloons, a giant wheel and stalls selling sweets and toys. Arun held Amma's hand tightly. Then he saw a man making animals out of balloons. He let go of Amma's hand to watch. The man made a blue elephant and a green parrot.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was the man making?",
+              "right": "animals out of balloons",
+              "wrong": [
+                "sweets out of sugar",
+                "toys out of wood"
+              ],
+              "explain": "\"He saw a man making animals out of balloons.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Arun let go of Amma's hand?",
+              "right": "to watch the balloon man",
+              "wrong": [
+                "to buy a big sweet",
+                "to ride the giant wheel"
+              ],
+              "explain": "\"He let go of Amma's hand to watch.\""
+            }
+          ]
+        },
+        {
+          "text": "When Arun turned round, Amma was gone. People were everywhere, but he could not see her yellow sari. His heart beat fast. He wanted to cry. Then he remembered what Amma had told him: \"If you are lost, stay in one place and ask a police officer for help.\" He saw a woman in a uniform near the gate.",
+          "questions": [
+            {
+              "skill": "feelings",
+              "prompt": "How did Arun feel when he could not find Amma?",
+              "right": "frightened",
+              "wrong": [
+                "excited",
+                "sleepy"
+              ],
+              "explain": "\"His heart beat fast. He wanted to cry.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What had Amma told him to do if he was lost?",
+              "right": "stay in one place and ask a police officer",
+              "wrong": [
+                "run home as fast as he could",
+                "walk around until he finds her"
+              ],
+              "explain": "\"Stay in one place and ask a police officer for help.\""
+            }
+          ]
+        },
+        {
+          "text": "The officer knelt down. \"What is your name? What is your mother wearing?\" Arun told her. The officer spoke into a loudspeaker. A few minutes later, Amma came running. She hugged him hard. \"You did the right thing,\" she said. Arun held her hand all the way home, even when they passed the balloon man again.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What happened after the officer used the loudspeaker?",
+              "right": "Amma came running",
+              "wrong": [
+                "Arun went home alone",
+                "the fair closed"
+              ],
+              "explain": "\"A few minutes later, Amma came running.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Arun hold Amma's hand all the way home?",
+              "right": "he did not want to get lost again",
+              "wrong": [
+                "his hand was very cold",
+                "Amma was feeling tired"
+              ],
+              "explain": "He had let go once and got lost."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "what to do when you are lost",
+          "wrong": [
+            "how to make balloon animals",
+            "riding on a giant wheel"
+          ],
+          "explain": "Arun gets lost and does what Amma told him."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Arun change?",
+          "right": "from careless to careful",
+          "wrong": [
+            "from brave to lazy",
+            "from kind to rude"
+          ],
+          "explain": "He lets go of Amma's hand at first; at the end he holds it all the way."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Lost at the Fair\"?",
+          "right": "Arun gets lost at a village fair",
+          "wrong": [
+            "Amma loses her yellow sari",
+            "the balloon man loses his way"
+          ],
+          "explain": "Arun is lost at the fair until Amma finds him."
+        }
+      ]
+    },
+    {
+      "id": "lr3.promise",
+      "level": 3,
+      "theme": "keeping a promise",
+      "title": "The Match and the Promise",
+      "parts": [
+        {
+          "text": "Vijay loved cricket more than anything. On Saturday his team was playing the big match against the boys from the next street. He had practised every evening for two weeks. But on Friday night, his grandfather called him. \"Vijay, will you come with me to the doctor tomorrow morning? My eyes are weak now, and I cannot read the numbers on the buses.\" Last month Vijay had promised Thatha that he would always help him. \"Yes, Thatha,\" he said, though his heart sank.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did Thatha need Vijay?",
+              "right": "he could not read the bus numbers",
+              "wrong": [
+                "he wanted to watch the match",
+                "he had lost his walking stick"
+              ],
+              "explain": "\"I cannot read the numbers on the buses.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Vijay's heart sink?",
+              "right": "the trip was at the same time as his match",
+              "wrong": [
+                "he did not like going out with Thatha",
+                "he was afraid of the doctor's clinic"
+              ],
+              "explain": "The match and the trip to the doctor were both on Saturday morning."
+            }
+          ]
+        },
+        {
+          "text": "On Saturday morning, Vijay's friend Sanjay knocked at the door. \"Hurry! The match starts at nine. We need you to bat first.\" Vijay looked at the clock. It was half past eight. Thatha was putting on his shoes slowly. \"Go if you want,\" said Thatha quietly. \"I will manage.\" Vijay thought about Thatha standing at the busy bus stop, unable to see which bus was his. \"No,\" Vijay told Sanjay. \"I made a promise. Ask Karthik to bat first.\" Sanjay ran off, shaking his head.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What time did the match start?",
+              "right": "nine o'clock",
+              "wrong": [
+                "half past eight",
+                "ten o'clock"
+              ],
+              "explain": "\"The match starts at nine.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did Vijay stay with Thatha?",
+              "right": "he had made a promise to help him",
+              "wrong": [
+                "he was not good at batting",
+                "Sanjay told him to stay at home"
+              ],
+              "explain": "\"I made a promise.\""
+            }
+          ]
+        },
+        {
+          "text": "The clinic was crowded, and they waited a long time. On the bus home, Thatha told Vijay about the matches he had played as a boy in the village, with a bat made from a coconut branch and a ball of old cloth. Vijay laughed so much that he forgot about the match. When they got home, Sanjay was waiting. \"We lost by two runs,\" he said. \"But next week is the return match. Will you come?\" Vijay looked at Thatha. \"Next week,\" said Thatha, smiling, \"I will come and watch.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was Thatha's bat made from when he was a boy?",
+              "right": "a coconut branch",
+              "wrong": [
+                "a broken chair",
+                "an old door"
+              ],
+              "explain": "\"A bat made from a coconut branch.\""
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What happened when they got home?",
+              "right": "Sanjay told Vijay the result",
+              "wrong": [
+                "Vijay went to the match",
+                "Thatha went back to the doctor"
+              ],
+              "explain": "\"When they got home, Sanjay was waiting. 'We lost by two runs.'\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "keeping a promise even when it is hard",
+          "wrong": [
+            "winning a big cricket match",
+            "a visit to a doctor in town"
+          ],
+          "explain": "Vijay gives up his match to keep his word to Thatha."
+        },
+        {
+          "skill": "character",
+          "prompt": "What does Vijay's choice show about him?",
+          "right": "he is loyal and keeps his word",
+          "wrong": [
+            "he does not really like cricket",
+            "he is afraid of his friends"
+          ],
+          "explain": "He loves cricket but still keeps his promise."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Match and the Promise\"?",
+          "right": "Vijay must choose between the match and his promise",
+          "wrong": [
+            "Vijay promises his team that they will win",
+            "Thatha plays in the match with the boys"
+          ],
+          "explain": "The story turns on Vijay choosing his promise over the match."
+        }
+      ]
+    },
+    {
+      "id": "lr3.puppets",
+      "level": 3,
+      "theme": "teamwork",
+      "title": "The Class Puppet Show",
+      "parts": [
+        {
+          "text": "Miss Rani told Class 5 that they would put on a puppet show for Children's Day. Everyone wanted to be the voice of the king. \"I should do it. I have the loudest voice,\" said Deepak. \"No, me!\" said Fatima. Soon the whole class was arguing, and nobody was making any puppets. Miss Rani clapped her hands. \"A show needs many jobs,\" she said. \"Let us write them all on the board.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was the show for?",
+              "right": "Children's Day",
+              "wrong": [
+                "Independence Day",
+                "Teachers' Day"
+              ],
+              "explain": "\"A puppet show for Children's Day.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why was nobody making puppets?",
+              "right": "everyone was arguing about the king",
+              "wrong": [
+                "there was no paper or paint",
+                "Miss Rani was not in the class"
+              ],
+              "explain": "\"Soon the whole class was arguing.\""
+            }
+          ]
+        },
+        {
+          "text": "On the board she wrote: voices, puppet makers, painters, the curtain, music and lights. Fatima, who was good at drawing, chose painting. Joseph, who played the drum at home, chose music. Deepak still wanted to be the king. Shy little Latha said nothing, but Miss Rani noticed that she had already folded a perfect paper crown while the others argued. \"Latha, will you lead the puppet makers?\" Latha nodded, her face turning pink.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Joseph choose?",
+              "right": "music",
+              "wrong": [
+                "painting",
+                "the curtain"
+              ],
+              "explain": "\"Joseph, who played the drum at home, chose music.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Miss Rani choose Latha to lead the puppet makers?",
+              "right": "she had already made a fine paper crown",
+              "wrong": [
+                "she had the loudest voice in class",
+                "she asked to be the king"
+              ],
+              "explain": "She had folded a perfect paper crown while the others argued."
+            }
+          ]
+        },
+        {
+          "text": "For two weeks, everyone worked. Latha showed the others how to fold and glue. Fatima painted the castle. Joseph practised a drum roll for the king. On the day of the show, the king puppet lost its head just before the curtain went up! Latha calmly fixed it with tape and a pin. The show was a great success, and the head teacher clapped the longest. Afterwards Deepak said, \"The king was only good because everyone made him good.\"",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What happened just before the curtain went up?",
+              "right": "the king puppet lost its head",
+              "wrong": [
+                "Joseph dropped his drum",
+                "the lights went out"
+              ],
+              "explain": "\"The king puppet lost its head just before the curtain went up!\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Deepak learn?",
+              "right": "the show worked because everyone helped",
+              "wrong": [
+                "the king is the only part that matters",
+                "puppets are too hard to make"
+              ],
+              "explain": "\"The king was only good because everyone made him good.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "working together as a team",
+          "wrong": [
+            "becoming a king one day",
+            "learning to play the drum"
+          ],
+          "explain": "Everyone takes a job and the show works."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Latha change?",
+          "right": "from shy and silent to leading others",
+          "wrong": [
+            "from kind to bossy and rude",
+            "from busy to lazy and bored"
+          ],
+          "explain": "She says nothing at first, then leads the puppet makers."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Class Puppet Show\"?",
+          "right": "the whole class makes and puts on a show",
+          "wrong": [
+            "Miss Rani makes a puppet of the class",
+            "a puppet comes to the class one day"
+          ],
+          "explain": "The story is about the show the class makes together."
+        }
+      ]
+    },
+    {
+      "id": "lr3.pot",
+      "level": 3,
+      "theme": "wisdom of elders",
+      "title": "Paati's Clay Pot",
+      "parts": [
+        {
+          "text": "Every summer, Paati filled her old clay pot with water and kept it in a corner of the kitchen. Divya thought it was silly. \"We have a fridge, Paati. Why do you still use that heavy pot?\" Paati just smiled and wiped the pot with a wet cloth. \"Wait and see,\" she said. Divya rolled her eyes. She thought clay pots belonged in old villages, not in a home with a shiny new fridge. Besides, power cuts never lasted long in their town.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Paati keep the pot?",
+              "right": "in a corner of the kitchen",
+              "wrong": [
+                "up on the roof of the house",
+                "in the garden"
+              ],
+              "explain": "\"Kept it in a corner of the kitchen.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "What did Divya think of the pot?",
+              "right": "she thought it was silly",
+              "wrong": [
+                "she thought it was beautiful",
+                "she was afraid of it"
+              ],
+              "explain": "\"Divya thought it was silly.\""
+            }
+          ]
+        },
+        {
+          "text": "That May, a storm knocked down the power lines. For four days there was no electricity. The fridge became a warm box, and the milk went sour. The bottles of water grew warm too. Appa went to buy ice, but every shop had sold out. Everyone was hot and thirsty. Then Paati poured a glass of water from the clay pot and gave it to Divya. It was cool and fresh, as if it had come straight from a well.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why was there no electricity?",
+              "right": "a storm knocked down the power lines",
+              "wrong": [
+                "Appa forgot to pay the bill",
+                "the fridge broke the wires"
+              ],
+              "explain": "\"A storm knocked down the power lines.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What happened to the milk?",
+              "right": "it went sour",
+              "wrong": [
+                "it froze",
+                "it was spilled"
+              ],
+              "explain": "\"The milk went sour.\""
+            }
+          ]
+        },
+        {
+          "text": "\"How does it stay so cool?\" asked Divya. Paati explained that tiny holes in the clay let a little water seep out. When that water dries on the outside of the pot, it takes heat away with it and cools the water inside. \"My mother taught me that,\" she said. \"Old ways are not always slow ways.\" When the power came back, Divya did not laugh at the pot any more. She even helped Paati wipe it every morning.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Who taught Paati about the pot?",
+              "right": "her mother",
+              "wrong": [
+                "her teacher",
+                "Divya's father"
+              ],
+              "explain": "\"My mother taught me that.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Divya help wipe the pot at the end?",
+              "right": "she now valued Paati's old way",
+              "wrong": [
+                "she wanted to break the pot",
+                "Paati told her she must"
+              ],
+              "explain": "She saw the pot keep water cool when the fridge could not."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "learning from the wisdom of elders",
+          "wrong": [
+            "how fridges are made in factories",
+            "a big storm that breaks a house"
+          ],
+          "explain": "Paati's old way works when the new one fails."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Divya change?",
+          "right": "from laughing at the pot to respecting it",
+          "wrong": [
+            "from kind to rude to Paati",
+            "from brave to frightened of storms"
+          ],
+          "explain": "She thinks it silly at first, then helps look after it."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Paati's Clay Pot\"?",
+          "right": "the pot shows that Paati's old way works",
+          "wrong": [
+            "Paati buys a new pot at the market",
+            "Divya makes a clay pot at school"
+          ],
+          "explain": "The clay pot is at the centre of the story and its lesson."
+        }
+      ]
     }
   ]
 }
