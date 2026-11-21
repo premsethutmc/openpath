@@ -7,7 +7,7 @@
  * Practice and feedback only: never in a test.
  */
 import { useMemo, useState } from "react";
-import { cardFor, helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
+import { briefOf, cardFor, helpMethods, stepsHelp } from "../../../packages/learning/src/step-help";
 import { smallerOf } from "../../../packages/learning/src/working";
 import { Board } from "./Board";
 import { SmallAsk } from "./SmallAsk";
@@ -131,8 +131,8 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
           {rule && <button type="button" className="coach-chip" aria-expanded={card} onClick={() => setCard(!card)}>{now.needs ? `This needs: ${rule.name}` : card ? "Hide the rule" : "Why? Show me the rule"}</button>}
           {rule && card && (
             <aside className="coach-card" aria-label={rule.name}>
-              {rule.rule.map((t, i) => <p key={i}>{t}</p>)}
-              {rule.example && <><p className="small muted">For example: {rule.example.prompt}</p><ol className="recipe-steps">{rule.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
+              <p>{briefOf(rule).rule}</p>
+              {briefOf(rule).example && <p className="small muted">For example: {briefOf(rule).example}</p>}
               {/* clips@1: second-level help, after the written rule; nothing is fetched until it is asked for */}
               <ClipButton key={ruleOf} competency={ruleOf} />
             </aside>

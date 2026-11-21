@@ -51,6 +51,20 @@ export interface StepHelp {
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
 const cards = new Map<string, Card | null>();
+/**
+ * brief@1: what a child sees when a rule is opened inside a question: one line of rule, asides in brackets dropped,
+ * whole sentences kept only while they fit about 160 characters, and the example as one line ("7,274 → 7300") rather
+ * than its worked steps (the coach is already walking the child through steps). The full card stays for review.
+ */
+export function briefOf(card: Card): { rule: string; example: string | null } {
+  const text = (card.rule[0] ?? "").replace(/\s*\([^)]*\)/g, "").replace(/\s+/g, " ").trim();
+  const sentences = text.match(/.+?[.!?](?=\s|$)/g) ?? [text];
+  let rule = sentences[0].trim();
+  for (const x of sentences.slice(1)) { if ((rule + " " + x.trim()).length > 160) break; rule += " " + x.trim(); }
+  // a long word problem as an example is more reading, not less: shown only when the question is short
+  const prompt = card.example?.prompt.replace(/\s+/g, " ").trim() ?? "";
+  return { rule, example: card.example && prompt.length <= 90 ? `${prompt} → ${card.example.answer}` : null };
+}
 /** The help card of a skill, assembled from its own lesson; null when the skill has no lesson or no usable words. */
 export function cardFor(competency: string): Card | null {
   if (cards.has(competency)) return cards.get(competency)!;
