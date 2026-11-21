@@ -49,12 +49,14 @@ test("SB-3 a line done with a grown-up opens at least two real tasks, borrowed f
       }
 });
 
-test("SB-4 what is covered, and the gaps left: note-making, summaries, charts and maps", () => {
+test("SB-4 what is covered: every line has a place in the app, notes, charts and maps included", () => {
   const sum = (b: "cbse" | "tn") => syllabusesOf(b).map(coverage).reduce((a, c) => ({ covered: a.covered + c.covered, partly: a.partly + c.partly, guided: a.guided + c.guided, not: a.not + c.not, total: a.total + c.total }));
-  assert.deepEqual(sum("cbse"), { covered: 69, partly: 34, guided: 88, not: 3, total: 194 });
-  assert.deepEqual(sum("tn"), { covered: 111, partly: 13, guided: 56, not: 6, total: 186 });
-  const gaps = SYLLABUSES.flatMap((s) => s.strands.flatMap((x) => x.outcomes).filter((o) => o.coverage === "not").map((o) => o.text));
-  for (const g of gaps) assert.match(g, /notes|summary|chart|road map/i);
+  assert.deepEqual(sum("cbse"), { covered: 70, partly: 36, guided: 88, not: 0, total: 194 });
+  assert.deepEqual(sum("tn"), { covered: 116, partly: 14, guided: 56, not: 0, total: 186 });
+  for (const s of SYLLABUSES) assert.equal(coverage(s).not, 0, `${s.id}: every line has a place`);
+  const study = SYLLABUSES.flatMap((s) => s.strands.flatMap((x) => x.outcomes).filter((o) => o.where === "study").map((o) => o.text));
+  assert.ok(study.length >= 9);
+  for (const t of study) assert.match(t, /notes|summary|chart|map/i);
 });
 
 test("SB-5 the five grammar topics added for these boards: eight sentences each, a card each", () => {

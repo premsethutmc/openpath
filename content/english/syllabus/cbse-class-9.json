@@ -31,7 +31,7 @@
           "text": "Reads a short case-based passage with data or a chart and answers questions.",
           "coverage": "partly",
           "where": "reading",
-          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+          "note": "Reading passages have questions, and charts are read in Notes, charts and maps; long passages built on data are not yet in the app."
         }
       ]
     },

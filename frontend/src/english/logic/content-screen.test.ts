@@ -28,7 +28,7 @@ function strings(x: unknown, out: string[] = []): string[] {
   return out;
 }
 
-const SCREENED = ["reading/kinds.json", "grammar/write-own.json", "reading/written-answers.json", "reading/long-reads.json", "vocabulary/daily-words.json", "vocabulary/size-check.json", "dictation/sentences.json", "grammar/in-use.json",
+const SCREENED = ["study/tasks.json", "reading/kinds.json", "grammar/write-own.json", "reading/written-answers.json", "reading/long-reads.json", "vocabulary/daily-words.json", "vocabulary/size-check.json", "dictation/sentences.json", "grammar/in-use.json",
   "grammar/learn.json", "listening/passages.json", "spelling/bee-meanings.json", "first/words.json", "guided/tasks.json", "reading/course.json", "reading/inference.json", "reading/level-1.json", "reading/level-2.json", "reading/level-3.json", "reading/level-4.json", "reading/level-5.json", "reading/level-6.json", "syllabus/icse-class-1.json", "syllabus/icse-class-2.json", "syllabus/icse-class-8.json", "syllabus/icse-class-3.json", "syllabus/icse-class-4.json", "syllabus/icse-class-7.json", "syllabus/icse-class-5.json", "syllabus/icse-class-6.json",
   ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].flatMap((c) => [`syllabus/cbse-class-${c}.json`, `syllabus/tn-class-${c}.json`])];
 
@@ -46,6 +46,6 @@ for (const file of SCREENED)
 
 test("CS-3 every content file written for these activities is screened", () => {
   const found: string[] = [];
-  for (const dir of ["vocabulary", "dictation", "grammar", "listening", "reading", "syllabus"]) for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith(".json") && statSync(join(ROOT, dir, f)).isFile()) found.push(`${dir}/${f}`);
+  for (const dir of ["vocabulary", "dictation", "grammar", "listening", "reading", "syllabus", "study"]) for (const f of readdirSync(join(ROOT, dir))) if (f.endsWith(".json") && statSync(join(ROOT, dir, f)).isFile()) found.push(`${dir}/${f}`);
   assert.deepEqual(found.filter((f) => !SCREENED.includes(f)), [], "add the new file to SCREENED");
 });

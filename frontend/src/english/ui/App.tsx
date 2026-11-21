@@ -42,6 +42,7 @@ import { setFlagLearner } from "./Flag.tsx";
 import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
 import { FirstWords } from "./FirstWords.tsx";
+import { StudySkills } from "./StudySkills.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
@@ -139,6 +140,7 @@ export function App() {
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [longRead, setLongRead] = useState<{ from?: "syllabus" } | null>(null);
   const [kindsRead, setKindsRead] = useState<{ from?: "syllabus" } | null>(null);
+  const [study, setStudy] = useState<{ from?: "syllabus" } | null>(null);
   const [written, setWritten] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [syllabusBoard, setSyllabusBoard] = useState<Board>(DEFAULT_BOARD);
@@ -194,6 +196,7 @@ export function App() {
       setListenAnswer(null);
       setLongRead(null);
       setKindsRead(null);
+      setStudy(null);
       setWritten(null);
       setInSyllabus(false);
       setInParent(false);
@@ -523,6 +526,21 @@ export function App() {
         />
       </div>
     );
+  if (study)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <StudySkills
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setInSyllabus(study.from === "syllabus");
+            setStudy(null);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (kindsRead)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -606,6 +624,7 @@ export function App() {
             else if (where === "listen") setListenAnswer({ from: "syllabus" });
             else if (where === "long") setLongRead({ from: "syllabus" });
             else if (where === "kinds") setKindsRead({ from: "syllabus" });
+            else if (where === "study") setStudy({ from: "syllabus" });
             else if (where === "written") setWritten({ from: "syllabus" });
             else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
           }}
@@ -798,6 +817,7 @@ export function App() {
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onLongRead={() => (setLongRead({}), scrollTo(0, 0))}
           onKinds={() => (setKindsRead({}), scrollTo(0, 0))}
+          onStudy={() => (setStudy({}), scrollTo(0, 0))}
           onWritten={() => (setWritten({}), scrollTo(0, 0))}
           onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}

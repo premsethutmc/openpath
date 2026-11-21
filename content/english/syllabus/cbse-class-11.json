@@ -25,19 +25,20 @@
           "text": "Reads a factual, descriptive or literary passage and a case-based passage with data.",
           "coverage": "partly",
           "where": "reading",
-          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+          "note": "Reading passages have questions, and charts are read in Notes, charts and maps; long passages built on data are not yet in the app."
         },
         {
           "id": "R2",
           "text": "Makes notes with a title, numbering and a key, from a passage.",
-          "coverage": "not",
-          "note": "Note-making is not yet in the app."
+          "coverage": "partly",
+          "where": "study",
+          "note": "A title and the main points are chosen from a passage; numbering and a key are not asked for."
         },
         {
           "id": "R3",
           "text": "Writes a summary of a passage in about fifty words.",
-          "coverage": "not",
-          "note": "Summary writing is not yet in the app."
+          "coverage": "covered",
+          "where": "study"
         }
       ]
     },
