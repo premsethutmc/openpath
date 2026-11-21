@@ -28,3 +28,14 @@ reader's ability, and strong readers reach level 7. Version 2 (85 texts) gives e
 readers new texts for the whole ten weeks (31 to 35 texts). Strong readers run out in about half the runs, and very
 strong Class 8 readers after about 25 texts, because levels 6 and 7 are where they stay: more level 7 texts are the
 next need. (Version 1, 63 texts: every reader ran out after 18 to 29 texts.)
+
+## Classics (version 3, 21 November 2026)
+
+Eleven extracts from public-domain classics (published before 1929), marked "From a classic", at levels 5 to 7:
+Stevenson's "From a Railway Carriage" and Sarojini Naidu's "Palanquin Bearers" (whole poems); and prose adapted
+(shortened, a few words changed for the house word screen) from Black Beauty, The Wind in the Willows, The Jungle Book,
+Treasure Island, Little Women, War and Peace (the old oak; Natasha's dance), Tagore's "The Postmaster" and Pride and
+Prejudice. Each says where it comes from and that it is adapted; each has five or six questions, including character
+and how the writer creates humour, suspense or a symbol. 96 texts in all: 12 at levels 1–4, 15 at level 5, 16 at
+level 6, 17 at level 7. Simulated readers: no reader runs out within ten weeks except the very strong Class 8 reader,
+after about 33 texts.

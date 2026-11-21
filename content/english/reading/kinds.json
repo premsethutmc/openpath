@@ -1,6 +1,6 @@
 {
   "id": "english.reading.kinds",
-  "version": 2,
+  "version": 3,
   "status": "candidate",
   "review": "Written for OpenPath; checked by the house rules (format, answer lengths, word screen, speller) and by simulated learners.",
   "evidence": "practice-only",
@@ -2358,6 +2358,186 @@
       ]
     },
     {
+      "id": "kc5.blackbeauty",
+      "level": 5,
+      "kind": "classic",
+      "title": "My Mother's Advice",
+      "text": "Adapted from Black Beauty, by Anna Sewell (1877). The story is told by the horse himself.\n\nThe first place I can remember was a large, pleasant meadow with a pond of clear water in it. Shady trees leaned over the pond, and rushes and water-lilies grew at the deep end. While I was young I lived on my mother's milk, as I could not eat grass. In the daytime I ran by her side, and at night I lay down close by her.\n\nThere were six young colts in the meadow besides me. I used to run with them and have great fun; we would gallop round and round the field as hard as we could go. Sometimes we had rather rough play, for they would often bite and kick as well as gallop.\n\nOne day, when there was a good deal of kicking, my mother whinnied to me to come to her, and then she said:\n\n\"I wish you to pay attention to what I am going to say to you. The colts who live here are very good colts, but they are cart-horse colts, and of course they have not learned manners. You have been well bred and well born. I hope you will grow up gentle and good, and never learn bad ways. Do your work with a good will, lift your feet up well when you trot, and never bite or kick, even in play.\"\n\nI have never forgotten my mother's advice. I knew she was a wise old horse, and our master thought a great deal of her.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Who is telling this story?",
+          "right": "the horse, Black Beauty",
+          "wrong": [
+            "the horse's master",
+            "one of the six colts"
+          ],
+          "explain": "The note says the story is told by the horse himself."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did the colts do in rough play?",
+          "right": "bite and kick",
+          "wrong": [
+            "swim in the pond",
+            "eat the water-lilies"
+          ],
+          "explain": "\"They would often bite and kick as well as gallop.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the mother call Black Beauty over?",
+          "right": "She did not want him to learn rough ways",
+          "wrong": [
+            "She wanted him to eat grass",
+            "She was frightened of the pond"
+          ],
+          "explain": "She called him during the kicking to give her advice."
+        },
+        {
+          "skill": "character",
+          "prompt": "What kind of horse is the mother?",
+          "right": "wise and caring",
+          "wrong": [
+            "rough and careless",
+            "lazy and proud"
+          ],
+          "explain": "She gives careful advice, and \"she was a wise old horse\"."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the extract say it is \"Adapted\"?",
+          "right": "The words have been shortened or changed slightly",
+          "wrong": [
+            "It is a poem, not a story",
+            "It was written in another language"
+          ],
+          "explain": "An adapted extract keeps the story but changes some wording."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc5.railway",
+      "level": 5,
+      "kind": "classic",
+      "title": "From a Railway Carriage",
+      "text": "by Robert Louis Stevenson (1885)\n\nFaster than fairies, faster than witches,\nBridges and houses, hedges and ditches;\nAnd charging along like troops in a battle,\nAll through the meadows the horses and cattle:\nAll of the sights of the hill and the plain\nFly as thick as driving rain;\nAnd ever again, in the wink of an eye,\nPainted stations whistle by.\n\nHere is a child who clambers and scrambles,\nAll by himself and gathering brambles;\nHere is a tramp who stands and gazes;\nAnd there is the green for stringing the daisies!\nHere is a cart run away in the road\nLumping along with man and load;\nAnd here is a mill and there is a river:\nEach a glimpse and gone for ever!",
+      "questions": [
+        {
+          "skill": "structure",
+          "prompt": "How does the poem's rhythm match its subject?",
+          "right": "Its quick, regular beat sounds like a train",
+          "wrong": [
+            "It is slow, like a quiet walk",
+            "It has no rhythm at all"
+          ],
+          "explain": "Short, fast lines with a steady beat copy the rattle of the wheels."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why do the sights \"fly as thick as driving rain\"?",
+          "right": "They rush past the window very fast",
+          "wrong": [
+            "It is raining on the train",
+            "Birds are flying beside the train"
+          ],
+          "explain": "From a fast train, things outside seem to stream past like rain."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Where is the speaker of the poem?",
+          "right": "Inside a moving train",
+          "wrong": [
+            "Standing beside the line",
+            "Riding a horse in a meadow"
+          ],
+          "explain": "Everything rushes past the speaker, who is travelling in the carriage."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What is the tramp doing?",
+          "right": "standing and gazing",
+          "wrong": [
+            "gathering brambles",
+            "stringing daisies"
+          ],
+          "explain": "\"Here is a tramp who stands and gazes.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the last line, \"Each a glimpse and gone for ever!\", suggest?",
+          "right": "Each sight is seen for a moment and then lost",
+          "wrong": [
+            "The train will never stop again",
+            "The speaker wants to get off the train"
+          ],
+          "explain": "From a fast train you catch only a brief glimpse of each thing."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc5.willows",
+      "level": 5,
+      "kind": "classic",
+      "title": "Mole Meets the River",
+      "text": "Adapted from The Wind in the Willows, by Kenneth Grahame (1908).\n\nThe Mole had been working very hard all the morning, spring-cleaning his little home. First with brooms, then with dusters, then on ladders and steps and chairs, with a brush and a pail of whitewash, till he had dust in his throat and eyes, and splashes of whitewash all over his black fur, and an aching back and weary arms. Spring was moving in the air above and in the earth below and around him. It is small wonder, then, that he suddenly flung down his brush on the floor, said \"Bother!\" and \"O blow!\" and also \"Bother spring-cleaning!\" once more and bolted out of the house without even waiting to put on his coat.\n\nHe wandered through the meadows, happy and careless, until he stood by the edge of a full-fed river. Never in his life had he seen a river before — this sleek, sinuous, full-bodied animal, chasing and chuckling, gripping things with a gurgle and leaving them with a laugh. All was a-shake and a-shiver: glints and gleams and sparkles, rustle and swirl, chatter and bubble. The Mole was bewitched, entranced, fascinated. He trotted along the side of the river as one trots, when very small, by the side of a man who holds one spellbound by exciting stories; and when tired at last, he sat on the bank, while the river still chattered on to him, a babbling procession of the best stories in the world.",
+      "questions": [
+        {
+          "skill": "cause",
+          "prompt": "Why did the Mole run out of his house?",
+          "right": "Spring made him tired of cleaning",
+          "wrong": [
+            "His house was on fire",
+            "A friend called him outside"
+          ],
+          "explain": "Spring was in the air, so he flung down his brush and bolted out."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The river is described as an \"animal, chasing and chuckling\". Why?",
+          "right": "To make the river seem alive and playful",
+          "wrong": [
+            "Because there are animals in it",
+            "Because the river is dangerous"
+          ],
+          "explain": "The river is given the actions of a lively creature."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"bewitched\" mean here?",
+          "right": "completely delighted and held",
+          "wrong": [
+            "turned into a frog",
+            "frightened and confused"
+          ],
+          "explain": "He was entranced and fascinated by the river."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why is the river compared to a person telling stories?",
+          "right": "Its constant sounds hold the Mole's attention",
+          "wrong": [
+            "The river can really talk to him",
+            "The Mole is reading a storybook"
+          ],
+          "explain": "Its chatter is like \"the best stories in the world\"."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the Mole feel by the end?",
+          "right": "happy and enchanted",
+          "wrong": [
+            "bored and sleepy",
+            "angry about cleaning"
+          ],
+          "explain": "He is spellbound and sits listening to the river."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
       "id": "kt5.article",
       "level": 5,
       "kind": "article",
@@ -2459,7 +2639,7 @@
           "right": "A ban is a small, easy start that makes people think",
           "wrong": [
             "Straws cause all of the ocean's plastic",
-            "Every cafe� should be closed down"
+            "Every cafe should close down"
           ],
           "explain": "\"A useful first step\" that makes people think."
         },
@@ -3064,6 +3244,256 @@
           "explain": "It describes a journey and its sights for readers."
         }
       ]
+    },
+    {
+      "id": "kc6.jungle",
+      "level": 6,
+      "kind": "classic",
+      "title": "The Man's Cub",
+      "text": "Adapted from \"Mowgli's Brothers\" in The Jungle Book, by Rudyard Kipling (1894).\n\nIt was seven o'clock of a very warm evening in the Seeonee hills when Father Wolf woke up from his day's rest, scratched himself, yawned, and spread out his paws one after the other to get rid of the sleepy feeling in their tips. Mother Wolf lay with her big grey nose dropped across her four tumbling, squealing cubs, and the moon shone into the mouth of the cave where they all lived.\n\nSuddenly Father Wolf heard something coming uphill through the bushes. He crouched, ready to spring. Then he stopped himself in mid-air.\n\n\"Man!\" he snapped. \"A man's cub. Look!\"\n\nDirectly in front of him, holding on by a low branch, stood a little brown baby who could just walk — as soft and as dimpled a little thing as ever came to a wolf's cave at night. He looked up into Father Wolf's face and laughed.\n\n\"Is that a man's cub?\" said Mother Wolf. \"I have never seen one. Bring it here.\"\n\nFather Wolf carried the baby gently in his mouth and set it down among the cubs, without a single tooth even scratching the skin. The little one pushed his way between the cubs to get close to the warm fur.\n\n\"How little! How bold!\" said Mother Wolf softly. \"He is eating his food with the others. And so this is a man's cub. Was there ever a wolf that could boast of a man's cub among her children?\"\n\nOutside, the great tiger Shere Khan was roaring at the mouth of the cave, angry that the child had escaped him. But Mother Wolf looked at the baby and said, \"Lie still, little frog. O thou Mowgli — for Mowgli the Frog I will call thee — the time will come when thou wilt hunt Shere Khan as he has hunted thee.\"",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did the baby do when he saw Father Wolf?",
+          "right": "He laughed",
+          "wrong": [
+            "He cried",
+            "He ran away"
+          ],
+          "explain": "\"He looked up into Father Wolf's face and laughed.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does carrying the baby \"without a single tooth even scratching the skin\" show?",
+          "right": "Father Wolf was very gentle",
+          "wrong": [
+            "Father Wolf had no teeth",
+            "The baby was very heavy"
+          ],
+          "explain": "He carried a small child in his mouth with great care."
+        },
+        {
+          "skill": "character",
+          "prompt": "Which words best describe Mother Wolf here?",
+          "right": "protective and loving",
+          "wrong": [
+            "cruel and cold",
+            "nervous and timid"
+          ],
+          "explain": "She welcomes the baby and stands up to the tiger."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"thou wilt hunt\" mean in modern English?",
+          "right": "you will hunt",
+          "wrong": [
+            "they have hunted",
+            "we must hunt"
+          ],
+          "explain": "Thou and wilt are old forms of you and will."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the writer end with Mother Wolf's promise about Shere Khan?",
+          "right": "To hint at a conflict later in the story",
+          "wrong": [
+            "To show the story is over",
+            "To describe the tiger's appearance"
+          ],
+          "explain": "It looks forward to what will happen between Mowgli and the tiger."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc6.littlewomen",
+      "level": 6,
+      "kind": "classic",
+      "title": "Christmas Won't Be Christmas",
+      "text": "Adapted from Little Women, by Louisa May Alcott (1868). The four March sisters are poor, and their father is away.\n\n\"Christmas won't be Christmas without any presents,\" grumbled Jo, lying on the rug.\n\n\"It's so dreadful to be poor!\" sighed Meg, looking down at her old dress.\n\n\"I don't think it's fair for some girls to have plenty of pretty things, and other girls nothing at all,\" added little Amy, with an injured sniff.\n\n\"We've got Father and Mother, and each other,\" said Beth contentedly from her corner.\n\nThe four young faces on which the firelight shone brightened at the cheerful words, but darkened again as Jo said sadly, \"We haven't got Father, and shall not have him for a long time.\" She didn't say \"perhaps never\", but each silently added it, thinking of Father far away.\n\nNobody spoke for a minute; then Meg said in an altered tone, \"You know the reason Mother proposed not having any presents this Christmas was because it is going to be a hard winter for everyone, and she thinks we ought not to spend money for pleasure. We can't do much, but we can make our little sacrifices, and ought to do it gladly.\"\n\nEach girl had a dollar of her own, and each had been planning to spend it on herself: a book for Jo, music for Beth, drawing pencils for Amy. Then Beth looked at Mother's old slippers warming by the fire. \"Mother's shoes are quite worn out,\" she said softly. \"I'll tell you what we'll do,\" said Jo, sitting up. \"Let's each get her something for Christmas, and not get anything for ourselves.\"",
+      "questions": [
+        {
+          "skill": "character",
+          "prompt": "Which sister is most contented with what they have?",
+          "right": "Beth",
+          "wrong": [
+            "Amy",
+            "Meg"
+          ],
+          "explain": "Beth says, \"We've got Father and Mother, and each other.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why do the girls fall silent after Jo speaks of Father?",
+          "right": "They fear he may never come back",
+          "wrong": [
+            "They are angry with Jo",
+            "They are listening to music"
+          ],
+          "explain": "Each silently adds \"perhaps never\"."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why did Mother suggest no presents this year?",
+          "right": "It will be a hard winter for everyone",
+          "wrong": [
+            "The shops were closed",
+            "The girls had been naughty"
+          ],
+          "explain": "Meg explains the reason."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What are \"sacrifices\" here?",
+          "right": "things you give up for others",
+          "wrong": [
+            "presents you are given",
+            "holidays you take"
+          ],
+          "explain": "The girls give up spending on themselves."
+        },
+        {
+          "skill": "theme",
+          "prompt": "How does the mood change by the end?",
+          "right": "From grumbling to generous",
+          "wrong": [
+            "From happy to angry",
+            "From calm to frightened"
+          ],
+          "explain": "They start by complaining and end by planning gifts for Mother."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc6.palanquin",
+      "level": 6,
+      "kind": "classic",
+      "title": "Palanquin Bearers",
+      "text": "by Sarojini Naidu (1905)\n\nLightly, O lightly we bear her along,\nShe sways like a flower in the wind of our song;\nShe skims like a bird on the foam of a stream,\nShe floats like a laugh from the lips of a dream.\nGaily, O gaily we glide and we sing,\nWe bear her along like a pearl on a string.\n\nSoftly, O softly we bear her along,\nShe glows like a star in the dew of our song;\nShe springs like a beam on the brow of the tide,\nShe falls like a tear from the eyes of a bride.\nLightly, O lightly we glide and we sing,\nWe bear her along like a pearl on a string.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Who is speaking in the poem?",
+          "right": "the men carrying the palanquin",
+          "wrong": [
+            "the bride inside it",
+            "a person watching from the road"
+          ],
+          "explain": "\"We bear her along\": the bearers speak."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why is the bride compared to a flower, a bird and a laugh?",
+          "right": "To show how light and precious she seems",
+          "wrong": [
+            "Because she is singing to them",
+            "Because she is sitting outdoors"
+          ],
+          "explain": "Each comparison suggests lightness and beauty."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which line is repeated at the end of both stanzas?",
+          "right": "We bear her along like a pearl on a string",
+          "wrong": [
+            "She sways like a flower in the wind of our song",
+            "She falls like a tear from the eyes of a bride"
+          ],
+          "explain": "The refrain ends each stanza."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the rhythm help the poem?",
+          "right": "It sways like the steady steps of the bearers",
+          "wrong": [
+            "It stops and starts like a car",
+            "It is slow like a sleepy song"
+          ],
+          "explain": "The swinging beat matches carrying a palanquin."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What feeling does \"a tear from the eyes of a bride\" add?",
+          "right": "A touch of sadness at leaving home",
+          "wrong": [
+            "Anger at the palanquin bearers",
+            "Fear of falling off the palanquin"
+          ],
+          "explain": "A bride may weep as she leaves her family."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc6.treasure",
+      "level": 6,
+      "kind": "classic",
+      "title": "The Old Sea-Dog at the Admiral Benbow",
+      "text": "Adapted from Treasure Island, by Robert Louis Stevenson (1883). Jim Hawkins, a boy whose parents keep an inn by the sea, tells the story.\n\nI remember him as if it were yesterday, as he came plodding to the inn door, his sea-chest following behind him in a hand-barrow — a tall, strong, heavy, nut-brown man, his tarry pigtail falling over the shoulder of his soiled blue coat, his hands ragged and scarred, with black, broken nails, and the sabre cut across one cheek, a dirty, livid white. I remember him looking round the cove and whistling to himself as he did so, and then breaking out in that old sea-song that he sang so often afterwards: \"Fifteen men on the dead man's chest — Yo-ho-ho!\"\n\nHe was a very silent man by custom. All day he hung round the cove or upon the cliffs with a brass telescope; all evening he sat in a corner of the parlour next the fire. Every day when he came back from his stroll he would ask if any seafaring men had gone by along the road. At first we thought it was the want of company of his own kind that made him ask; but at last we began to see he was desirous to avoid them.\n\nHe had taken me aside one day and promised me a silver coin on the first of every month if I would only keep my \"weather-eye open for a seafaring man with one leg\" and let him know the moment he appeared. How that personage haunted my dreams, I need scarcely tell you. On stormy nights, when the wind shook the four corners of the house, I would see him in a thousand forms, and with a thousand fiendish expressions.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Who is telling the story?",
+          "right": "Jim Hawkins, a boy at the inn",
+          "wrong": [
+            "the old sea-dog himself",
+            "a sailor with one leg"
+          ],
+          "explain": "The note and \"I remember him\" show Jim is the narrator."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did the old man watch the sea with?",
+          "right": "a brass telescope",
+          "wrong": [
+            "a pair of glasses",
+            "a lantern"
+          ],
+          "explain": "\"Upon the cliffs with a brass telescope.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did he really ask about seafaring men?",
+          "right": "He wanted to avoid someone",
+          "wrong": [
+            "He missed his old friends",
+            "He wanted to hire a crew"
+          ],
+          "explain": "\"We began to see he was desirous to avoid them.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"keep my weather-eye open\" mean?",
+          "right": "watch out carefully",
+          "wrong": [
+            "look at the clouds",
+            "close one eye"
+          ],
+          "explain": "Jim is paid to look out for the one-legged man."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the last paragraph build suspense?",
+          "right": "It makes an unseen man seem frightening",
+          "wrong": [
+            "It explains the treasure map",
+            "It describes a sunny day"
+          ],
+          "explain": "Jim never sees the man, yet dreams of him in a thousand forms."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why does the writer list so many details of the man's looks?",
+          "right": "To give a vivid, rough picture of him",
+          "wrong": [
+            "To help readers draw a map",
+            "To show he was very rich"
+          ],
+          "explain": "The scar, pigtail and broken nails make him memorable and fearsome."
+        }
+      ],
+      "source": "public domain"
     },
     {
       "id": "kt6.article",
@@ -3772,6 +4202,286 @@
           "explain": "\"Markets selling horses, pearls and silk.\""
         }
       ]
+    },
+    {
+      "id": "kc7.dance",
+      "level": 7,
+      "kind": "classic",
+      "title": "Natasha's Dance",
+      "text": "Adapted from War and Peace, by Leo Tolstoy (1869), translated from Russian. Natasha, a young countess brought up in a grand house in Moscow by a French governess, visits her old uncle in his simple country home after a day's hunting.\n\nThe uncle took down his guitar, blew the dust off it, and, tapping the lid with his fingers, tuned it and settled himself in his chair. He took the guitar a little above the neck, winked at Natasha, and began to play a lively Russian dance tune.\n\nNatasha listened, her face glowing. \"Uncle, darling! More, more!\" she cried, as soon as he had finished. She jumped up and threw her arms round him and kissed him.\n\n\"Now, little niece!\" he said, waving his hand. \"Your turn!\" And he struck up the tune again.\n\nNatasha threw off the shawl from her shoulders, ran forward to face her uncle, set her arms on her hips, made a motion with her shoulders, and stood still.\n\nWhere, how and when had this young countess, educated by a French governess, picked up from the Russian air she breathed the spirit of that dance? Where had she learnt those movements, which should have been driven out long ago by the dancing lessons of the city? Yet the spirit and the movements were exactly those that her uncle had expected. As soon as she had struck her pose and smiled a triumphant, proud and cunning smile, the fear that had seized everyone in the room — that she might not do it right — was gone, and they were already admiring her.\n\nShe did the right thing with such precision, such complete precision, that Anisya, the housekeeper, who had handed her the shawl, had tears in her eyes, though she laughed as she watched this slim, graceful countess, reared in silks and velvet, so different from herself, who yet understood all that was in Anisya, and in Anisya's father, and mother, and aunt, and in every Russian man and woman.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who had taught Natasha as a child?",
+          "right": "a French governess",
+          "wrong": [
+            "her uncle",
+            "Anisya the housekeeper"
+          ],
+          "explain": "She was \"educated by a French governess\"."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why were people afraid before she danced?",
+          "right": "A city countess might not know the dance",
+          "wrong": [
+            "The wooden floor was slippery",
+            "Her uncle played the guitar badly"
+          ],
+          "explain": "She was raised with city dancing lessons, not country dances."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the narrator ask \"Where, how and when\" she learnt the dance?",
+          "right": "To wonder at how she knew it without being taught",
+          "wrong": [
+            "Because the narrator does not care",
+            "To blame the governess"
+          ],
+          "explain": "The questions show surprise at her natural understanding."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the dance show about Natasha?",
+          "right": "She shares a deep bond with ordinary Russian people",
+          "wrong": [
+            "She wants to leave Russia for France",
+            "She dislikes her uncle's country home"
+          ],
+          "explain": "She understands what is in Anisya and \"every Russian man and woman\"."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "Why did Anisya laugh and cry at the same time?",
+          "right": "She was moved and delighted",
+          "wrong": [
+            "She was hurt by the shawl",
+            "She was jealous of Natasha"
+          ],
+          "explain": "She was touched that a countess so different from her understood her world."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"precision\" mean here?",
+          "right": "exactness",
+          "wrong": [
+            "speed",
+            "loudness"
+          ],
+          "explain": "She did each movement exactly right."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc7.oak",
+      "level": 7,
+      "kind": "classic",
+      "title": "The Old Oak",
+      "text": "Adapted from War and Peace, by Leo Tolstoy (1869), translated from Russian. Prince Andrei, tired and unhappy after years of war and loss, is travelling through the countryside in spring.\n\nAt the edge of the road stood an oak. It was probably ten times the age of the birches that formed the wood, ten times as thick and twice as tall as any of them. It was an enormous tree, with branches broken long ago and bark scarred with old wounds. With its huge, crooked, gnarled arms and fingers stretched out, it stood like an old, angry, scornful monster among the smiling birches. It alone would not yield to the spring. It did not want to see the sun or feel the warm wind.\n\n\"Spring, and love, and happiness!\" this oak seemed to say. \"Aren't you tired of that same tired, senseless trick? It is always the same, and always a lie. There is no spring, no sun, no happiness.\"\n\n\"Yes, the oak is right, a thousand times right,\" thought Prince Andrei. \"Let others, the young, give in to that trick again, but we know life. Our life is finished.\"\n\nSix weeks later, in June, he drove home along the same road. He looked for the old oak, and did not recognise it at first. The old oak, quite changed, spread out a tent of dark, juicy green, and seemed to sway gently in the evening sun. There were no crooked fingers now, no scars, no old distrust and grief. Through the rough bark, young leaves had pushed out, so fresh that it was hard to believe the old tree had grown them.\n\n\"Yes, it is the same oak,\" thought Prince Andrei, and a sudden, unreasoning feeling of joy and renewal came over him. All the best moments of his life came back to him at once. \"No, life is not over,\" he decided suddenly and for good. \"It is not enough for me to know what is in me. Everyone must know it.\"",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "In spring, the oak is described like \"an old, angry, scornful monster\". Why?",
+          "right": "It seems to refuse the spring like a bitter person",
+          "wrong": [
+            "It is about to fall across the road",
+            "Wild animals are living inside it"
+          ],
+          "explain": "Its bare, twisted branches seem to reject the spring around it."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does Prince Andrei agree with the oak at first?",
+          "right": "He feels his own life is finished",
+          "wrong": [
+            "He likes old trees",
+            "He wants to cut it down"
+          ],
+          "explain": "\"Our life is finished.\" He sees himself in the tree."
+        },
+        {
+          "skill": "compare",
+          "prompt": "How has the oak changed by June?",
+          "right": "It is covered in fresh green leaves",
+          "wrong": [
+            "It has been cut down",
+            "It has lost all its branches"
+          ],
+          "explain": "\"Spread out a tent of dark, juicy green.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the oak stand for in this extract?",
+          "right": "Prince Andrei's own feelings about life",
+          "wrong": [
+            "The dangers of the forest",
+            "The history of Russia"
+          ],
+          "explain": "Its gloom matches his in spring; its new leaves match his new hope."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the writer show the oak twice, weeks apart?",
+          "right": "To mirror the change in Prince Andrei",
+          "wrong": [
+            "To show how slowly trees grow",
+            "To describe two different roads"
+          ],
+          "explain": "The tree's change and his change happen together."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does Prince Andrei feel at the end?",
+          "right": "full of sudden joy and hope",
+          "wrong": [
+            "tired and hopeless",
+            "angry and jealous"
+          ],
+          "explain": "\"A sudden, unreasoning feeling of joy and renewal.\""
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc7.postmaster",
+      "level": 7,
+      "kind": "classic",
+      "title": "The Postmaster",
+      "text": "Adapted from \"The Postmaster\", a story by Rabindranath Tagore (1891), translated from Bengali.\n\nThe postmaster first took up his duties in the village of Ulapur. Though the village was a small one, there was an indigo factory near by, and its owner had managed to get a post office opened. Our postmaster was a young man from Calcutta. He felt like a fish out of water in this remote village. His office and living room were in a dark thatched shed, not far from a green, slimy pond surrounded by thick jungle.\n\nHis salary was small. He had to cook his own meals, which were served to him by Ratan, an orphan girl of the village, who did odd jobs for him for a small payment. She was about twelve years old.\n\nIn the evenings, when the smoke began to curl up from the village cowsheds and the crickets chirped in every bush, the postmaster would sit outside, and sometimes he would call Ratan and talk. He told her about his mother and his elder sister at home, about the family he missed so much. Ratan listened, and soon she spoke of \"his mother\" and \"his sister\" as if she had always known them. In return, the postmaster began to teach her the alphabet, and she learnt quickly.\n\nThen one day, after weeks of rain, the postmaster fell ill with fever. Ratan stayed by his side day and night. She brought him medicine, cooled his forehead with her hand and would not leave him for a moment. When at last he recovered, he decided he had had enough of this village and asked to be transferred. His request was refused, and he resigned.\n\n\"Ratan, I am going away tomorrow,\" he said that evening.\n\n\"Will you take me home with you?\" she asked.\n\nThe postmaster laughed. \"What an idea!\" he said, and he did not explain.\n\nThe next morning, as the boat carried him down the swollen river, a pain gripped his heart. He thought of the little village girl and wished he could go back for her. But the wind filled the sail, and the village slipped away behind the bend. Ratan, meanwhile, wandered about the post office, hoping, in the stubborn way of the human heart, that he might still return.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What does \"like a fish out of water\" tell us about the postmaster?",
+          "right": "He felt uncomfortable and out of place",
+          "wrong": [
+            "He liked swimming in the pond",
+            "He was hungry for fish"
+          ],
+          "explain": "A city man in a remote village does not feel at home."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did Ratan speak of \"his mother\" and \"his sister\" as if she knew them?",
+          "right": "She had grown close to him and his stories",
+          "wrong": [
+            "She had met them in Calcutta",
+            "They had written to her"
+          ],
+          "explain": "Listening every evening, his family became real to her."
+        },
+        {
+          "skill": "character",
+          "prompt": "What does Ratan's care during his illness show?",
+          "right": "Her deep loyalty and affection",
+          "wrong": [
+            "Her wish to be paid more",
+            "Her fear of the postmaster"
+          ],
+          "explain": "She stayed day and night and would not leave him."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the postmaster laugh at Ratan's question?",
+          "right": "He has not thought of her as family",
+          "wrong": [
+            "He is teasing her kindly",
+            "He plans to come back for her"
+          ],
+          "explain": "To him it seems an odd idea, though she is serious."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the main feeling at the end of the story?",
+          "right": "Sadness at a bond that only one fully valued",
+          "wrong": [
+            "Joy at going home to Calcutta",
+            "Anger at the people of the village"
+          ],
+          "explain": "He feels a passing pain; she keeps hoping he will return."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the story end with Ratan, not the postmaster?",
+          "right": "To leave the reader with her quiet hope and loss",
+          "wrong": [
+            "To introduce a new postmaster to readers",
+            "To explain how the indigo factory works"
+          ],
+          "explain": "The last image is of her waiting, which stays with the reader."
+        }
+      ],
+      "source": "public domain"
+    },
+    {
+      "id": "kc7.pride",
+      "level": 7,
+      "kind": "classic",
+      "title": "A Truth Universally Acknowledged",
+      "text": "Adapted from Pride and Prejudice, by Jane Austen (1813).\n\nIt is a truth universally acknowledged that a single man in possession of a good fortune must be in want of a wife.\n\nHowever little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families that he is considered the rightful property of some one or other of their daughters.\n\n\"My dear Mr Bennet,\" said his lady to him one day, \"have you heard that Netherfield Park is let at last?\"\n\nMr Bennet replied that he had not.\n\n\"But it is,\" returned she; \"for Mrs Long has just been here, and she told me all about it.\"\n\nMr Bennet made no answer.\n\n\"Do you not want to know who has taken it?\" cried his wife impatiently.\n\n\"You want to tell me, and I have no objection to hearing it.\"\n\nThis was invitation enough.\n\n\"Why, my dear, you must know, Mrs Long says that Netherfield is taken by a young man of large fortune from the north of England. His name is Bingley, and he is single, my dear! What a fine thing for our girls!\"\n\n\"How so? How can it affect them?\"\n\n\"My dear Mr Bennet,\" replied his wife, \"how can you be so tiresome! You must know that I am thinking of his marrying one of them.\"\n\n\"Is that his plan in settling here?\"\n\n\"Plan! Nonsense, how can you talk so! But it is very likely that he may fall in love with one of them, and therefore you must visit him as soon as he comes.\"",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "The first sentence says something is \"universally acknowledged\". Is the writer serious?",
+          "right": "No, she is gently mocking what families believe",
+          "wrong": [
+            "Yes, it is a scientific fact",
+            "Yes, every rich man wants a wife"
+          ],
+          "explain": "The next sentence shows it is really the neighbours' wish, not the man's."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does Mr Bennet's \"I have no objection to hearing it\" show?",
+          "right": "He is teasing his wife with dry humour",
+          "wrong": [
+            "He is very excited about the news",
+            "He has not heard what she said"
+          ],
+          "explain": "He knows she longs to tell him, and replies coolly."
+        },
+        {
+          "skill": "character",
+          "prompt": "How is Mrs Bennet shown?",
+          "right": "eager and impatient to marry off her daughters",
+          "wrong": [
+            "calm and uninterested in news",
+            "shy and quiet with her husband"
+          ],
+          "explain": "She rushes to tell the news and plans a marriage at once."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "In this extract, what does \"a good fortune\" mean?",
+          "right": "a lot of money",
+          "wrong": [
+            "good luck in a game",
+            "a happy future"
+          ],
+          "explain": "A man of \"large fortune\" is rich."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the writer create humour in the conversation?",
+          "right": "By contrasting Mrs Bennet's excitement with Mr Bennet's calm replies",
+          "wrong": [
+            "By having the characters tell jokes in a list",
+            "By describing their funny clothes in detail"
+          ],
+          "explain": "Her eager speeches meet his short, dry answers."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Whose view does the opening sentence really give?",
+          "right": "The neighbouring families' view",
+          "wrong": [
+            "Mr Bingley's own view",
+            "Mr Bennet's view"
+          ],
+          "explain": "It is \"well fixed in the minds of the surrounding families\"."
+        }
+      ],
+      "source": "public domain"
     },
     {
       "id": "kt7.biography",

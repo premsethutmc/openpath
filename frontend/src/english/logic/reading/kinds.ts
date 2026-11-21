@@ -8,16 +8,16 @@
 import kindsJson from "../../../../../content/english/reading/kinds.json";
 
 export type KindSkill =
-  | "detail" | "inference" | "cause" | "sequence" | "feelings" | "theme" | "fact_opinion"
+  | "detail" | "inference" | "cause" | "character" | "sequence" | "feelings" | "theme" | "fact_opinion"
   | "word_meaning" | "purpose" | "point_of_view" | "figurative" | "structure" | "compare" | "summary";
-export const KIND_SKILLS: readonly KindSkill[] = ["detail", "inference", "cause", "sequence", "feelings", "theme", "fact_opinion", "word_meaning", "purpose", "point_of_view", "figurative", "structure", "compare", "summary"];
-export type TextKind = "poem" | "notice" | "timetable" | "chart" | "letter" | "diary" | "instructions" | "advert" | "article" | "speech" | "pair" | "story";
+export const KIND_SKILLS: readonly KindSkill[] = ["detail", "inference", "cause", "character", "sequence", "feelings", "theme", "fact_opinion", "word_meaning", "purpose", "point_of_view", "figurative", "structure", "compare", "summary"];
+export type TextKind = "poem" | "notice" | "timetable" | "chart" | "letter" | "diary" | "instructions" | "advert" | "article" | "speech" | "pair" | "story" | "classic";
 export const KIND_NAMES: Record<TextKind, string> = {
   poem: "Poem", notice: "Notice", timetable: "Timetable", chart: "Chart", letter: "Letter", diary: "Diary",
-  instructions: "Instructions", advert: "Advert", article: "Article", speech: "Speech", pair: "Two texts", story: "Story",
+  instructions: "Instructions", advert: "Advert", article: "Article", speech: "Speech", pair: "Two texts", story: "Story", classic: "From a classic",
 };
 export const SKILL_NAMES: Record<KindSkill, string> = {
-  detail: "finding details", inference: "reading between the lines", cause: "cause and effect", sequence: "order", feelings: "feelings", theme: "theme",
+  detail: "finding details", inference: "reading between the lines", cause: "cause and effect", character: "character", sequence: "order", feelings: "feelings", theme: "theme",
   fact_opinion: "fact or opinion", word_meaning: "word meaning", purpose: "the writer's purpose", point_of_view: "point of view",
   figurative: "figurative language", structure: "how it is set out", compare: "comparing texts", summary: "summing up",
 };
