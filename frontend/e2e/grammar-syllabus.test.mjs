@@ -109,8 +109,8 @@ async function answer(page, wrong) {
     await page.getByRole("button", { name: "Check", exact: true }).click();
   }
   await page.locator('main[data-phase="feedback"]').waitFor();
-  await page.getByText(wrong ? "Not quite" : "✓ Right").waitFor();
-  await page.getByText(it.rule, { exact: true }).waitFor();
+  await page.locator(`.gfb[data-correct="${!wrong}"] .gfb-verdict`).getByText(wrong ? "Not quite" : "Right!").waitFor();
+  await page.locator(".gfb-why").getByText(it.rule, { exact: true }).waitFor();
   return it;
 }
 

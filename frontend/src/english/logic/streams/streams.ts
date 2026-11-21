@@ -77,13 +77,13 @@ export function streamRows(learner: Learner, now: string): StreamRow[] {
   const rec = recommend(COURSE, readingProgress(COURSE, learner.readingRecords()), start);
   const readingLevel = rec?.unit.level ?? COURSE.levels.at(-1)!.id;
 
-  const listening = levelFor(DICTATION, learner.dictationRecords(), levels.listening?.level ?? startLevel(age));
+  const listening = levelFor(DICTATION, learner.dictationRecords(), levels.listening?.level ?? startLevel(learner.state.preferences));
   const bee = levelOf(learner.spelling(), BANK);
   const wroteToday = learner.state.events.some((e) => e.kind === "dictation" && e.record.type === "end" && dayOf(e.at) === today);
   const heardToday = active.has("listen_passage");
   const wait = waiting(learner);
   const joined = wait.tricky + wait.newWords;
-  const grammar = grammarLevel(GRAMMAR, learner.grammarRecords(), levels.grammar?.level ?? grammarStart(age));
+  const grammar = grammarLevel(GRAMMAR, learner.grammarRecords(), levels.grammar?.level ?? grammarStart(learner.state.preferences));
   // the level check found that naming a noun or a verb is not yet sure: that comes first, until a sitting of it is done
   const naming = !!levels.grammar && !levels.grammar.basics && !learner.grammarRecords().some((r) => r.type === "end" && r.topics?.includes(NAMING_TOPIC));
 

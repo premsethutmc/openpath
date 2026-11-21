@@ -4779,7 +4779,7 @@
       "topic": "be_verbs",
       "kind": "fix",
       "sentence": "The mangoes [is] ripe.",
-      "rule": "More than one takes are: the mangoes are.",
+      "rule": "\"Mangoes\" means more than one mango, so use are: the mangoes are.",
       "right": [
         "are"
       ]
@@ -4790,7 +4790,7 @@
       "topic": "be_verbs",
       "kind": "fix",
       "sentence": "My mother [are] a nurse.",
-      "rule": "One person takes is: my mother is.",
+      "rule": "\"My mother\" is one person, so use is: my mother is.",
       "right": [
         "is"
       ]
@@ -4823,7 +4823,7 @@
       "topic": "be_verbs",
       "kind": "build",
       "sentence": "The sky is blue today.",
-      "rule": "One thing takes is: the sky is.",
+      "rule": "\"The sky\" is one thing, so use is: the sky is.",
       "extra": [
         "are"
       ]
@@ -4856,7 +4856,7 @@
       "topic": "be_verbs",
       "kind": "choose",
       "sentence": "The puppy ___ asleep in its basket.",
-      "rule": "One puppy takes is.",
+      "rule": "\"The puppy\" is one puppy, so use is: the puppy is.",
       "question": "Which word fits?",
       "right": [
         "is"
@@ -4872,7 +4872,7 @@
       "topic": "be_verbs",
       "kind": "choose",
       "sentence": "Ravi and Anu ___ cousins.",
-      "rule": "Two people take are: Ravi and Anu are.",
+      "rule": "Ravi and Anu are two people, so use are: Ravi and Anu are.",
       "question": "Which word fits?",
       "right": [
         "are"
@@ -5144,7 +5144,7 @@
       "topic": "have_has",
       "kind": "fix",
       "sentence": "The elephant [have] a long trunk.",
-      "rule": "One animal takes has: the elephant has.",
+      "rule": "\"The elephant\" is one animal, so use has: the elephant has.",
       "right": [
         "has"
       ]
@@ -5166,7 +5166,7 @@
       "topic": "have_has",
       "kind": "fix",
       "sentence": "My grandparents [has] a farm.",
-      "rule": "More than one takes have: my grandparents have.",
+      "rule": "\"Grandparents\" means more than one person, so use have: my grandparents have.",
       "right": [
         "have"
       ]
@@ -5199,7 +5199,7 @@
       "topic": "have_has",
       "kind": "choose",
       "sentence": "Our school ___ a large playground.",
-      "rule": "One school takes has.",
+      "rule": "\"Our school\" is one school, so use has: our school has.",
       "question": "Which word fits?",
       "right": [
         "has"
@@ -5231,7 +5231,7 @@
       "topic": "have_has",
       "kind": "choose",
       "sentence": "The twins ___ the same birthday.",
-      "rule": "Two people take have.",
+      "rule": "\"The twins\" are two people, so use have: the twins have.",
       "question": "Which word fits?",
       "right": [
         "have"
@@ -5291,7 +5291,7 @@
       "topic": "pronouns",
       "kind": "fix",
       "sentence": "My sister is ill, so [he] is at home.",
-      "rule": "A girl takes she: she is at home.",
+      "rule": "A sister is a girl, so use she: she is at home.",
       "right": [
         "she"
       ]
@@ -5302,7 +5302,7 @@
       "topic": "pronouns",
       "kind": "fix",
       "sentence": "The book is old, but [she] is still good.",
-      "rule": "A thing takes it: it is still good.",
+      "rule": "A book is a thing, so use it: it is still good.",
       "right": [
         "it"
       ]
@@ -5324,7 +5324,7 @@
       "topic": "pronouns",
       "kind": "choose",
       "sentence": "The children are hungry. ___ want lunch.",
-      "rule": "More than one person takes they.",
+      "rule": "\"The children\" means more than one person, so use they.",
       "question": "Which word fits?",
       "right": [
         "They"
@@ -5340,7 +5340,7 @@
       "topic": "pronouns",
       "kind": "choose",
       "sentence": "My father works hard. ___ leaves early.",
-      "rule": "A man takes he.",
+      "rule": "A father is a man, so use he.",
       "question": "Which word fits?",
       "right": [
         "He"
@@ -5356,7 +5356,7 @@
       "topic": "pronouns",
       "kind": "choose",
       "sentence": "The kite is stuck. ___ is in the tree.",
-      "rule": "A thing takes it.",
+      "rule": "A kite is a thing, so use it.",
       "question": "Which word fits?",
       "right": [
         "It"

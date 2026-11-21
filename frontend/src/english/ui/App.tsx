@@ -391,12 +391,12 @@ export function App() {
       <AddLearner
         mode={mode}
         onCancel={() => (profiles.length || mode === "account" ? setScreen({ name: "pupils" }) : setScreen({ name: "welcome" }))}
-        onCreate={async (name, by, band: LearnerBand, goal: LearnerGoal) => {
+        onCreate={async (name, by, band: LearnerBand, goal: LearnerGoal, school) => {
           const id = mode === "account" ? (await api.createPupil(name.trim() || "Learner")).id : undefined;
           let l: Learner;
           try {
             l = await Learner.create(content, repo, name, by, clock, id, mode === "account" ? "parent_account" : "this_device_only");
-            await l.setPreferences(band, goal);
+            await l.setPreferences(band, goal, school);
           } catch (e) {
             // never leave an empty pupil behind in the account
             if (id) await api.deletePupil(id).catch(() => undefined);
@@ -613,8 +613,9 @@ export function App() {
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
         <SyllabusView
           docs={SYLLABUSES}
-          initial={syllabusClass}
-          initialBoard={syllabusBoard}
+          initial={learner.state.preferences?.school?.class ?? syllabusClass}
+          initialBoard={learner.state.preferences?.school?.board ?? syllabusBoard}
+          fixed={!!learner.state.preferences?.school}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
           onOpen={(where, topics, cls, line, board) => {
             setSyllabusClass(cls);

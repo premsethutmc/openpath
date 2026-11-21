@@ -204,6 +204,14 @@ export type GrammarRecord =
   | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
   | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
+/** A fix answer laid out for the feedback screen: the sentence's words, the wrong one, the one tapped, what was typed and the right word (with its punctuation). */
+export interface FixFeedback {
+  words: string[];
+  wrong: number;
+  tapped: number;
+  typed: string;
+  fixed: string;
+}
 
 /** Levels recorded before the six-level scale: old 1, 2, 3 are now 1, 3, 5. */
 export const OLD_LEVELS: Readonly<Record<number, number>> = { 1: 1, 2: 3, 3: 5 };
@@ -296,7 +304,7 @@ export interface GrammarView {
   build: { tiles: string[]; whole: boolean; task: string | null } | null;
   spot: { words: string[]; ask: Ask } | null;
   choose: { sentence: string; question: string; options: string[] } | null;
-  feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
+  feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null; fix?: FixFeedback } | null;
   done: { asked: number; right: number; weak: string[]; nextLevel: number; topics: string[]; sitting: string } | null;
   /** learn: the card for a topic met for the first time; `tried` once its question is answered. */
   learn?: { rule: string; examples: string[]; mistake: LearnCard["mistake"]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null; second: { question: string; options: string[]; answer: number } } | null;
@@ -338,14 +346,14 @@ export class GrammarSitting {
     return out;
   }
 
-  private record(correct: boolean, given: string): void {
+  private record(correct: boolean, given: string, fix?: { tapped: number; typed: string }): void {
     const it = this.items[this.index];
     const a: Answer = { type: "answer", sitting: this.sitting, id: it.id, level: it.level, scale: SCALE, topic: it.topic, correct, given: given.slice(0, 200) };
     this.answers.push(a);
     this.log.push(a);
     this.mine.push(a);
     const p = it.kind === "fix" ? fixParts(it) : null;
-    this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null };
+    this.last = { correct, given, right: corrected(it), rule: it.rule, wrongWord: p ? p.words[p.wrong] : null, ...(p && fix ? { fix: { words: p.words, wrong: p.wrong, tapped: fix.tapped, typed: fix.typed.trim(), fixed: `${p.before}${it.right![0]}${p.after}` } } : {}) };
   }
 
   /**
@@ -395,7 +403,7 @@ export class GrammarSitting {
     if (this.last || !it || it.kind !== "fix" || !typed.trim() || this.card()) return;
     const words = fixParts(it).words;
     if (!Number.isInteger(tapped) || tapped < 0 || tapped >= words.length) return;
-    this.record(checkFix(it, tapped, typed), `${words[tapped]} -> ${tidy(typed)}`);
+    this.record(checkFix(it, tapped, typed), `${words[tapped]} -> ${tidy(typed)}`, { tapped, typed });
   }
 
   /** Answer a spot: the index of the word tapped. */

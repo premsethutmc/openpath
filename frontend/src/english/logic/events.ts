@@ -140,6 +140,11 @@ export interface SettingsEvent {
 /** Who is learning and what they want from it, as chosen at the start (and changed in "Me"). */
 export type LearnerBand = "early" | "school" | "older";
 export type LearnerGoal = "confidence" | "grammar" | "spelling" | "reading";
+/** A school child's class and board, chosen at the start. Fixed for the learner; the levels underneath still move with the answers. */
+export interface SchoolPlace {
+  class: number;
+  board: "icse" | "cbse" | "tn";
+}
 
 /**
  * The learner's own choices, kept with the record. The goal orders the Journey; neither choice changes a question's
@@ -151,6 +156,8 @@ export interface PreferencesEvent {
   at: string;
   band: LearnerBand;
   goal: LearnerGoal;
+  /** A school child's class and board; absent or null for an adult or anyone not in school (who sees every class). */
+  school?: SchoolPlace | null;
   /**
    * Optional IANA time zone of the pupil or school, for calendar-day rules (calendar.ts). Not written by the app yet;
    * records without it use UTC days. Timestamps themselves stay UTC.

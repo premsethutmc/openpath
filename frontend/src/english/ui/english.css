@@ -3220,3 +3220,35 @@ h3.sub {
   padding: 10px 12px;
   margin: 8px 0;
 }
+
+/* Grammar in use: the answer screen. The verdict, what the learner wrote and the right sentence, then why. */
+.gfb { display: grid; gap: 14px; margin-top: 8px; }
+.gfb-verdict { display: flex; align-items: center; gap: 12px; margin: 0; font-size: 1.7rem; font-weight: 800; color: var(--wrong-ink); }
+.gfb[data-correct="true"] .gfb-verdict { color: var(--right-ink); }
+.gfb-mark { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: 1.4rem; background: var(--wrong-wash); color: var(--wrong); flex: none; }
+.gfb[data-correct="true"] .gfb-mark { background: var(--right-wash); color: var(--right); }
+.gfb-row { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; }
+.gfb-row[data-row="right"] { border-color: var(--right); background: var(--right-wash); }
+.gfb-label { margin: 0 0 4px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.gfb-row[data-row="right"] .gfb-label { color: var(--right-ink); }
+.gfb-sentence { margin: 0; font-size: 1.35rem; line-height: 1.5; font-weight: 600; color: var(--ink); }
+.gfb > .gfb-sentence { padding: 12px 16px; border-radius: var(--radius); background: var(--right-wash); border: 1px solid var(--right); }
+.gfb-dim { color: var(--muted); }
+.gfb-old { color: var(--muted); text-decoration-thickness: 2px; font-weight: 400; }
+.gfb-mine { background: var(--wrong-wash); color: var(--wrong-ink); border-radius: 6px; padding: 0 4px; }
+.gfb-right { background: transparent; color: var(--right); border-bottom: 3px solid var(--right); padding: 0 2px; font-weight: 800; }
+.gfb-hint { margin: -4px 4px 0; color: var(--wrong-ink); font-size: 1rem; }
+.gfb-why { border-left: 4px solid var(--violet); padding: 4px 0 4px 14px; }
+.gfb-why p:last-child { margin: 0; font-size: 1.1rem; line-height: 1.45; color: var(--ink); }
+.gfb-flag { text-align: center; }
+.gfb-flag .flag { margin: 0; }
+
+/* Adding a learner: school child (class and board) or adult. */
+.who-kinds { display: grid; gap: 10px; margin-top: 14px; }
+.who-school { margin-top: 14px; }
+.who-q { margin: 14px 0 8px; font-weight: 700; }
+.who-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.who-boards { display: flex; flex-wrap: wrap; gap: 8px; }
+.who-grid .chip, .who-boards .chip { min-height: 48px; font-size: 1.05rem; border-radius: 14px; border: 2px solid var(--border); background: var(--card); color: var(--ink); font-weight: 700; padding: 0 14px; }
+.who-grid .chip[data-on="true"], .who-boards .chip[data-on="true"] { border-color: var(--violet); background: var(--lilac); color: var(--violet-text); }
+.home-class { margin-top: -4px; }
