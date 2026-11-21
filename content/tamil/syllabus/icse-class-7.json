@@ -112,9 +112,19 @@
     {
      "id": "L2",
      "text": "Studies the lessons and poems of the school's textbook.",
-     "coverage": "not-yet",
-     "where": [],
-     "note": "The school's prescribed Tamil textbook is copyrighted; OpenPath does not reproduce it. Our own passages and classics cover the skills."
+     "coverage": "partly",
+     "where": [
+      "icse.ta.c7.story"
+     ],
+     "note": "The school's own textbook is not reproduced (it is copyrighted). OpenPath's own stories and poems practise the same questions on character, theme, meaning and poetic devices."
+    },
+    {
+     "id": "L3",
+     "text": "Reads a story and judges the characters' actions.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c7.story"
+     ]
     }
    ]
   }

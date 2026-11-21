@@ -8,6 +8,10 @@ import json
 import random
 import sys
 import unicodedata
+from pathlib import Path as _P
+
+sys.path.insert(0, str(_P(__file__).resolve().parent))
+from stories import EDHUGAI, FIGURES, POEM, POEM_QS, STORIES  # noqa: E402
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parents[2] / "content" / "tamil" / "icse.v1.json"
@@ -594,6 +598,25 @@ def build():
         for i, w in enumerate(words):
             near = [x for x in words if x != w and first_letter(x) == first_letter(w)][:1]
             t.q("கேட்ட சொல்லைத் தொடு.", w, near + [words[(i + 3) % len(words)], words[(i + 7) % len(words)]], "Tap the word you heard.", say=w)
+    # ----- literature practice on OpenPath's own stories and poem (the school's textbook is not reproduced)
+    for cls, tid, title, passage, qs in STORIES:
+        t = T(cls, tid, f"கதை: {title}", "Story: character, theme and meaning", "கதையைப் படி. பாத்திரங்கள் எப்படிப்பட்டவர்கள், நிகழ்வுகள் எந்த வரிசையில், கதை சொல்லும் கருத்து என்ன என்று சிந்தி.", "Read the story; think about the characters, the order of events and the message.", title)
+        t.data["passage"] = nfc(passage)
+        for q, a, *wrong in qs:
+            t.q(q, a, wrong, "Answer from the story.")
+    t = T(8, "poem", "கவிதை நயம்", "Enjoying a poem", "கவிதையின் அழகு: மோனை (சொற்களின் முதல் எழுத்து ஒன்றுபோல), எதுகை (அடிகளின் முதற்சொல்லில் இரண்டாம் எழுத்து ஒன்றுபோல), இயைபு (அடிகளின் இறுதி ஒன்றுபோல).", "A poem's beauty: monai, edhugai, iyaibu, and its meaning.", "காலை — சோலை: எதுகை")
+    t.data["passage"] = nfc(POEM)
+    for q, a, *wrong in POEM_QS:
+        t.q(q, a, wrong, "Answer about the poem.")
+    t = T(9, "edhugai", "குறளில் எதுகை", "Edhugai in Thirukkural", "குறளின் இரண்டு அடிகளின் முதற்சொற்களில் இரண்டாம் எழுத்து ஒன்றாக வருவது எதுகை: கற்க — நிற்க.", "In a kural, the two lines' first words often share their second letter (edhugai).", "கற்க — நிற்க (ற்)")
+    for n, a, b in EDHUGAI:
+        t.q(f"குறள் {n}: «{a}» — «{b}». இவற்றில் உள்ள நயம் எது?", "எதுகை", ["மோனை", "இயைபு"], "Which poetic feature is this?")
+    for n, a, b in EDHUGAI:
+        wrongs = [x[2] for x in EDHUGAI if x[2] != b]
+        t.q(f"குறள் {n}: முதல் அடியின் முதற்சொல் «{a}». இரண்டாம் அடியின் எதுகைச் சொல் எது?", b, wrongs, "Which word rhymes (edhugai) with it?")
+    t = T(10, "figures", "உவமையும் உருவகமும்", "Simile and metaphor", "உவமை: «போல», «போன்ற» உருபுடன் ஒப்பிடுவது (மலர் போன்ற முகம்). உருவகம்: இரண்டையும் ஒன்றாக்கிச் சொல்வது (முகமலர்).", "Simile compares with போல/போன்ற; metaphor makes the two one.", "மலர் போன்ற முகம் — உவமை; முகமலர் — உருவகம்")
+    for phrase, kind in FIGURES:
+        t.q(f"«{phrase}» — உவமையா, உருவகமா?", kind, ["உவமை", "உருவகம்"], "Simile or metaphor?", n=2)
     return [t.data for t in topics]
 
 
@@ -610,7 +633,7 @@ def graphemes(word):
 
 # ---------------------------------------------------------------- syllabus inventory (as content/english/syllabus)
 G = "guided:Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
-BOOK = "not-yet:The school's prescribed Tamil textbook is copyrighted; OpenPath does not reproduce it. Our own passages and classics cover the skills."
+BOOK = "partly:The school's own textbook is not reproduced (it is copyrighted). OpenPath's own stories and poems practise the same questions on character, theme, meaning and poetic devices."
 BAND = {  # class -> [(strand, id, outcome in OpenPath's words, where)]
     1: [("ls", "LS1", "Listens to simple Tamil words and picks the one heard.", ["listen"]), ("ls", "LS2", "Says a few sentences about self and family.", [G]),
         ("r", "R1", "Recognises the 12 vowels.", ["vowels"]), ("r", "R2", "Recognises the 18 consonants by their dot.", ["consonants"]),
@@ -641,27 +664,30 @@ BAND = {  # class -> [(strand, id, outcome in OpenPath's words, where)]
     6: [("ls", "LS1", "Takes part in a discussion and asks questions.", [G]), ("g", "G1", "Identifies case endings and the eight cases.", ["case-marker", "case"]),
         ("g", "G2", "Joins words correctly.", ["join"]), ("v", "V1", "Explains common idioms.", ["idioms"]), ("v", "V2", "Completes proverbs.", ["proverbs"]),
         ("r", "R1", "Reads a history passage and answers questions.", ["reading"]), ("w", "W1", "Writes a short essay and a letter to a relative.", ["writing"]),
-        ("l", "L1", "Knows and completes Thirukkural couplets.", ["kural"]), ("l", "L2", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+        ("l", "L1", "Knows and completes Thirukkural couplets.", ["kural"]), ("l", "L2", "Studies the lessons and poems of the school's textbook.", ["story", BOOK]),
+        ("l", "L3", "Reads a story and talks about its characters, events and message.", ["story"])],
     7: [("ls", "LS1", "Gives a short speech on a familiar topic.", [G]), ("g", "G1", "Classifies the six kinds of nouns.", ["noun-kinds"]),
         ("g", "G2", "Tells finite verbs from participles.", ["verb-forms"]), ("v", "V1", "Knows names for the young of animals and word pairs.", ["young", "pairs"]),
         ("v", "V2", "Explains more idioms.", ["idioms"]), ("r", "R1", "Reads a life story and answers questions.", ["reading"]),
         ("w", "W1", "Writes an essay and a formal leave letter.", ["writing"]), ("l", "L1", "Knows Thirukkural and Bharathiyar's songs on Tamil.", ["kural", "bharathi"]),
-        ("l", "L2", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+        ("l", "L2", "Studies the lessons and poems of the school's textbook.", ["story", BOOK]),
+        ("l", "L3", "Reads a story and judges the characters' actions.", ["story"])],
     8: [("ls", "LS1", "Takes part in a debate or role-play.", [G]), ("g", "G1", "Knows the kinds of letters and the three consonant groups.", ["letter-kinds", "inam"]),
         ("g", "G2", "Classifies kinds of sentences.", ["sentence-kinds"]), ("g", "G3", "Tells self-action and causative verbs.", ["causative"]),
         ("v", "V1", "Uses Tamil words in place of borrowed ones.", ["pure-tamil"]), ("v", "V2", "Completes more proverbs.", ["proverbs"]),
         ("r", "R1", "Reads a biography passage and answers questions.", ["reading"]), ("w", "W1", "Writes an essay and a letter of complaint.", ["writing"]),
-        ("l", "L1", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+        ("l", "L1", "Studies the lessons and poems of the school's textbook.", ["story", "poem", BOOK]),
+        ("l", "L2", "Enjoys a poem: monai, edhugai and meaning.", ["poem"])],
 }
 EXAM = [("a", "A1", "Composition (15 marks): writes a composition of the kind set, a narrative, description or explanation.", ["writing"]),
         ("a", "A2", "Letter (7 marks): writes a letter on one of two subjects, with the right layout.", ["writing"]),
-        ("a", "A3", "Comprehension (10 marks): answers questions on an unseen passage of about 250 words.", ["reading", "partly:Our passage is shorter than the exam's 250 words."]),
+        ("a", "A3", "Comprehension (10 marks): answers questions on an unseen passage of about 250 words.", ["reading", "story"]),
         ("a", "A4", "Grammar (8 marks): uses vocabulary, syntax and idiom correctly; joins sentences; forms sentences with given words.", None),
-        ("b", "B1", "Prescribed texts (40 marks): answers on two of the prescribed textbooks.", [BOOK]),
+        ("b", "B1", "Prescribed texts (40 marks): answers on two of the prescribed textbooks.", ["story", BOOK]),
         ("ia", "IA1", "Internal assessment, writing: a 300-400 word creative piece.", ["writing", "partly:Our longest task asks for up to 400 words; the school sets the assignment."]),
         ("ia", "IA2", "Internal assessment, oral: a prepared speech, debate or role-play.", [G])]
-BAND[9] = [(a, b, c, d if d else ["sandhi", "voice", "case", "antonyms"]) for a, b, c, d in EXAM]
-BAND[10] = [(a, b, c, d if d else ["sentence-parts", "simile", "sandhi", "voice-change"]) for a, b, c, d in EXAM] + [("b", "B2", "Knows Thirukkural couplets.", ["kural"])]
+BAND[9] = [(a, b, c, d if d else ["sandhi", "voice", "case", "antonyms"]) for a, b, c, d in EXAM] + [("b", "B2", "Explains poetic features such as edhugai.", ["edhugai"])]
+BAND[10] = [(a, b, c, d if d else ["sentence-parts", "simile", "sandhi", "voice-change"]) for a, b, c, d in EXAM] + [("b", "B2", "Knows Thirukkural couplets.", ["kural"]), ("b", "B3", "Tells simile from metaphor.", ["figures", "simile"])]
 STRANDS = {"ls": "Listening and speaking", "r": "Reading", "w": "Writing", "v": "Vocabulary", "g": "Grammar", "l": "Literature",
            "a": "Section A: Language (40 marks)", "b": "Section B: Prescribed texts (40 marks)", "ia": "Internal assessment (20 marks)"}
 
