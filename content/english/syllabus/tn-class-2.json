@@ -6,51 +6,51 @@
   "subject": "English",
   "title": "Tamil Nadu State Board English, Class II",
   "source": {
-    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
-    "url": "https://www.tntextbooks.in/",
+    "read": "SCERT Tamil Nadu, TNCF 2017 syllabus, English language, Standards 1 to 10 (published in the Tamil Nadu Government Gazette), read through a copy hosted by an exam-coaching site",
+    "url": "https://professoracademy.com/wp-content/uploads/2024/02/SGT-English-Syllabus.pdf",
     "official": false,
-    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "note": "UNOFFICIAL COPY OF AN OFFICIAL SOURCE. The state's own syllabus (TNCF 2017, marked draft), read through a text summary of a third-party copy of the gazette pages; the Standard 9 page was only partly readable. The Samacheer Kalvi textbooks follow it term by term.",
     "accessed": "2026-11-21"
   },
   "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
   "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
   "strands": [
     {
-      "id": "listening-speaking",
-      "name": "Listening and Speaking",
-      "pages": "Units",
+      "id": "listening",
+      "name": "Listening",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "LS1",
-          "text": "Says rhymes and poems with actions.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-2",
-            "outcome": "LS7"
-          }
+          "id": "L1",
+          "text": "Follows two-step instructions.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "Two-step tap instructions are practised by ear; spoken classroom instructions are not."
         },
         {
-          "id": "LS2",
-          "text": "Answers questions on a story heard.",
-          "coverage": "covered",
-          "where": "listen"
+          "id": "L2",
+          "text": "Listens to stories, retells them and names the characters.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Questions on a story heard are practised; retelling aloud is not heard."
         },
         {
-          "id": "LS3",
-          "text": "Asks and answers simple questions about self and others.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-2",
-            "outcome": "LS6"
-          }
-        },
+          "id": "L3",
+          "text": "Hears blends, digraphs, long vowels and syllables.",
+          "coverage": "partly",
+          "where": "spelling",
+          "note": "The Spelling Bee teaches sound-spelling patterns; listening for them on their own is not taught."
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "name": "Speaking",
+      "pages": "TNCF 2017",
+      "outcomes": [
         {
-          "id": "LS4",
-          "text": "Tells a short story with pictures.",
+          "id": "S1",
+          "text": "Talks in two or three sentences about what was done or is being done.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -58,45 +58,74 @@
             "syllabus": "icse-cisce-english-class-2",
             "outcome": "LS2"
           }
+        },
+        {
+          "id": "S2",
+          "text": "Sings and recites, and uses polite expressions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS7"
+          }
         }
       ]
     },
     {
       "id": "reading",
       "name": "Reading",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "R1",
-          "text": "Reads short texts and answers questions.",
-          "coverage": "covered",
-          "where": "reading"
+          "text": "Reads one- and two-syllable words and sight words.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "The first reading level starts with short texts; decoding single words aloud is not heard."
         },
         {
           "id": "R2",
-          "text": "Puts pictures of a story in order.",
+          "text": "Puts events in order.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "picture_order"
+            "picture_order",
+            "sentence_order"
           ]
+        },
+        {
+          "id": "R3",
+          "text": "Reads aloud with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW2"
+          }
         }
       ]
     },
     {
       "id": "writing",
       "name": "Writing",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "W1",
-          "text": "Writes words and short sentences from dictation.",
-          "coverage": "covered",
-          "where": "listening"
+          "text": "Writes own name, parents' names and school address.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW6"
+          }
         },
         {
           "id": "W2",
-          "text": "Writes a few sentences about a picture.",
+          "text": "Writes captions and patterned sentences.",
           "coverage": "guided",
           "where": "guided",
           "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
@@ -104,60 +133,63 @@
             "syllabus": "icse-cisce-english-class-1",
             "outcome": "RW8"
           }
+        },
+        {
+          "id": "W3",
+          "text": "Uses capital letters, full stops and question marks.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals",
+            "questions"
+          ]
         }
       ]
     },
     {
-      "id": "vocabulary-grammar",
-      "name": "Vocabulary and Grammar",
-      "pages": "Units",
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "VG1",
-          "text": "Uses naming words and action words.",
+          "id": "GV1",
+          "text": "Uses the simple past (some irregular), past continuous and simple future.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "parts_of_speech"
+            "past",
+            "irregular_verbs",
+            "future",
+            "continuous"
           ]
         },
         {
-          "id": "VG2",
-          "text": "Uses he, she, it, they, and am, is and are.",
+          "id": "GV2",
+          "text": "Uses articles, pronouns and joining words.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
+            "articles",
             "pronouns",
-            "be_verbs"
+            "conjunctions"
           ]
         },
         {
-          "id": "VG3",
-          "text": "Uses in, on and under.",
+          "id": "GV3",
+          "text": "Asks yes or no and wh- questions in the right word order.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "prepositions"
+            "questions",
+            "word_order"
           ]
         },
         {
-          "id": "VG4",
-          "text": "Uses opposites and rhyming words.",
+          "id": "GV4",
+          "text": "Sorts words into groups and solves word puzzles.",
           "coverage": "partly",
-          "where": "grammar",
-          "topics": [
-            "synonyms_antonyms"
-          ],
-          "note": "Opposites are practised; rhyming words are not."
-        },
-        {
-          "id": "VG5",
-          "text": "Starts a sentence with a capital letter and ends it with a full stop.",
-          "coverage": "covered",
-          "where": "grammar",
-          "topics": [
-            "capitals"
-          ]
+          "where": "words",
+          "note": "New words sorts words by meaning; jumbles and word searches are not in the app."
         }
       ]
     }

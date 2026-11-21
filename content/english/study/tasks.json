@@ -1448,6 +1448,675 @@
           "Teachers at Hillcrest marked exercise books while pupils read detective stories and poetry."
         ]
       }
+    },
+    {
+      "id": "notes.bees",
+      "level": 5,
+      "title": "Notes: Why bees matter",
+      "text": "Bees do far more than make honey. When a bee visits a flower to drink its nectar, grains of pollen stick to its hairy body. At the next flower, some of that pollen rubs off, and this lets the plant make fruit and seeds. About a third of the food people eat, including many fruits and vegetables, depends on insects like bees. Yet bee numbers are falling in many countries. Farm sprays can poison them, and when hedges and wild flowers are cleared, bees lose their food. People can help by growing flowering plants, even in pots on a balcony, and by using fewer chemical sprays in gardens.",
+      "titles": {
+        "right": "Bees, food and how to help them",
+        "wrong": [
+          "How honey is made",
+          "Gardens on balconies"
+        ]
+      },
+      "points": [
+        {
+          "text": "Bees carry pollen so plants make fruit and seeds",
+          "main": true,
+          "k": [
+            "pollen"
+          ]
+        },
+        {
+          "text": "A third of our food depends on such insects",
+          "main": true,
+          "k": [
+            "third",
+            "food"
+          ]
+        },
+        {
+          "text": "Bee numbers are falling",
+          "main": true,
+          "k": [
+            "falling",
+            "fewer bees",
+            "declin"
+          ]
+        },
+        {
+          "text": "Sprays poison them; cleared land takes their food",
+          "main": true,
+          "k": [
+            "spray",
+            "chemical",
+            "poison"
+          ]
+        },
+        {
+          "text": "Help: grow flowers, use fewer sprays",
+          "main": true,
+          "k": [
+            "flower",
+            "plant"
+          ]
+        },
+        {
+          "text": "Bees have hairy bodies",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Bees carry pollen between flowers so plants can make fruit and seeds, and about a third of our food depends on them. Their numbers are falling because sprays poison them and their food is cleared, but growing flowers and using fewer sprays helps.",
+        "wrong": [
+          "Bees make honey from nectar and live in hives on balconies, where people grow vegetables in pots.",
+          "Farmers spray flowers so that bees grow hairy bodies and carry more honey to the fields."
+        ]
+      }
+    },
+    {
+      "id": "notes.handwash",
+      "level": 5,
+      "title": "Notes: Washing hands",
+      "text": "Washing hands with soap is one of the simplest ways to stay healthy. Germs that cause colds and stomach illness are too small to see, and they spread when we touch our faces after touching door handles, money or other people. Water alone rinses away dirt but not many germs; soap breaks up the oily layer that helps germs stick to the skin. Doctors advise washing for about twenty seconds, scrubbing the backs of the hands, between the fingers and under the nails. The most important times are before eating, after using the toilet and after coughing or sneezing. Schools that teach regular handwashing often see fewer pupils absent through illness.",
+      "titles": {
+        "right": "Why and how to wash hands",
+        "wrong": [
+          "Germs in money",
+          "How soap is made"
+        ]
+      },
+      "points": [
+        {
+          "text": "Unseen germs spread from hands to faces",
+          "main": true,
+          "k": [
+            "germ"
+          ]
+        },
+        {
+          "text": "Soap, not water alone, removes germs",
+          "main": true,
+          "k": [
+            "soap"
+          ]
+        },
+        {
+          "text": "Wash about twenty seconds, every part of the hand",
+          "main": true,
+          "k": [
+            "twenty",
+            "seconds"
+          ]
+        },
+        {
+          "text": "Key times: before eating, after the toilet, after sneezing",
+          "main": true,
+          "k": [
+            "eating",
+            "toilet",
+            "sneez"
+          ]
+        },
+        {
+          "text": "Schools that teach it see fewer absences",
+          "main": true,
+          "k": [
+            "absen",
+            "school"
+          ]
+        },
+        {
+          "text": "Germs cause colds",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Germs too small to see spread when we touch our faces. Soap, unlike water alone, removes them. Wash for about twenty seconds, especially before eating, after the toilet and after sneezing; schools that teach this have fewer pupils absent.",
+        "wrong": [
+          "Door handles and money are covered in dirt, so people should never touch them before eating.",
+          "Water washes away all germs in twenty seconds, so soap is only needed for oily skin."
+        ]
+      }
+    },
+    {
+      "id": "notes.solar",
+      "level": 6,
+      "title": "Notes: Power from the sun",
+      "text": "India receives strong sunshine for most of the year, and more and more of it is being turned into electricity. Solar panels contain cells, usually made of silicon, that produce a small electric current when light falls on them. Many panels joined together can power a house, a school or even a whole village. The cost of panels has fallen sharply over the last fifteen years, so solar power is now one of the cheapest ways to make electricity. Unlike coal, it gives off no smoke while it works. Its main weakness is that it stops at night and slows on cloudy days, so batteries or other sources are needed to keep the lights on after sunset.",
+      "titles": {
+        "right": "Solar power: how it works, its strengths and its limit",
+        "wrong": [
+          "The history of coal",
+          "Cloudy days in India"
+        ]
+      },
+      "points": [
+        {
+          "text": "Silicon cells turn light into electric current",
+          "main": true,
+          "k": [
+            "cell",
+            "silicon",
+            "light"
+          ]
+        },
+        {
+          "text": "Joined panels can power homes and villages",
+          "main": true,
+          "k": [
+            "village",
+            "house",
+            "home"
+          ]
+        },
+        {
+          "text": "Panels are now cheap",
+          "main": true,
+          "k": [
+            "cheap",
+            "cost"
+          ]
+        },
+        {
+          "text": "No smoke, unlike coal",
+          "main": true,
+          "k": [
+            "smoke",
+            "coal",
+            "clean"
+          ]
+        },
+        {
+          "text": "Stops at night, so storage is needed",
+          "main": true,
+          "k": [
+            "night",
+            "batter"
+          ]
+        },
+        {
+          "text": "Cells are usually silicon",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Solar panels contain cells that turn sunlight into electric current, and joined panels can power homes and villages. They are now cheap and give off no smoke, unlike coal, but they stop at night, so batteries or other sources are needed.",
+        "wrong": [
+          "Coal and solar panels both give off smoke, so India uses batteries to make its electricity at night.",
+          "Solar panels became more expensive over fifteen years because silicon is hard to find in India."
+        ]
+      }
+    },
+    {
+      "id": "notes.libraries",
+      "level": 6,
+      "title": "Notes: Libraries today",
+      "text": "Some people think libraries will disappear now that so much can be read on a phone. In fact, many libraries are busier than ever, because they have changed what they offer. Besides books, they lend e-books and audiobooks, and they provide free internet and computers for people who have none at home. They hold storytelling sessions for young children, homework clubs for pupils and classes for adults learning new skills. For many people, a library is also one of the few warm, quiet, safe places where they can spend time without paying. Librarians, too, have new work: they teach people how to search well and how to tell a reliable website from an unreliable one.",
+      "titles": {
+        "right": "How libraries have changed",
+        "wrong": [
+          "Reading on a phone",
+          "Audiobooks for children"
+        ]
+      },
+      "points": [
+        {
+          "text": "Libraries are busy because they have changed",
+          "main": true,
+          "k": [
+            "busy",
+            "busier",
+            "changed"
+          ]
+        },
+        {
+          "text": "They lend e-books and offer free internet and computers",
+          "main": true,
+          "k": [
+            "internet",
+            "computer",
+            "e-book"
+          ]
+        },
+        {
+          "text": "They run sessions for children, pupils and adults",
+          "main": true,
+          "k": [
+            "session",
+            "club",
+            "class"
+          ]
+        },
+        {
+          "text": "A free, safe, quiet place",
+          "main": true,
+          "k": [
+            "free",
+            "safe",
+            "quiet"
+          ]
+        },
+        {
+          "text": "Librarians teach searching and judging websites",
+          "main": true,
+          "k": [
+            "search",
+            "website",
+            "reliable"
+          ]
+        },
+        {
+          "text": "Many people read on phones",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Libraries are busy because they have changed: as well as books they lend e-books, give free internet and computers, and run sessions for all ages. They are free, quiet places, and librarians teach people to search and judge websites.",
+        "wrong": [
+          "Libraries are disappearing because everyone reads on a phone and nobody needs books any more.",
+          "Librarians sell audiobooks and computers to adults who want to learn new skills at home."
+        ]
+      }
+    },
+    {
+      "id": "notes.mangroves",
+      "level": 6,
+      "title": "Notes: Mangrove forests",
+      "text": "Along parts of India's coast, such as the Sundarbans in the east and Pichavaram in Tamil Nadu, there are forests that grow in salty water. These are mangroves. Their tangled roots stand above the mud like stilts, and some roots even poke upward to take in air. Mangroves protect the coast: during storms and high waves, they slow the water and reduce damage to villages behind them. They are also nurseries for fish, crabs and prawns, which shelter among the roots when young, so fishing families depend on them. Yet large areas have been cut down for farms, ponds and buildings. Replanting mangroves is now part of many coastal protection plans.",
+      "titles": {
+        "right": "Mangroves: what they are and why they matter",
+        "wrong": [
+          "The Sundarbans tiger",
+          "Building ponds on the coast"
+        ]
+      },
+      "points": [
+        {
+          "text": "Forests that grow in salty coastal water",
+          "main": true,
+          "k": [
+            "salt"
+          ]
+        },
+        {
+          "text": "Stilt-like roots, some taking in air",
+          "main": true,
+          "k": [
+            "root"
+          ]
+        },
+        {
+          "text": "They slow storm waves and protect villages",
+          "main": true,
+          "k": [
+            "storm",
+            "wave",
+            "protect"
+          ]
+        },
+        {
+          "text": "Nurseries for young fish, crabs and prawns",
+          "main": true,
+          "k": [
+            "fish",
+            "nurser",
+            "prawn"
+          ]
+        },
+        {
+          "text": "Cut down for farms and buildings; now replanted",
+          "main": true,
+          "k": [
+            "cut",
+            "replant"
+          ]
+        },
+        {
+          "text": "Pichavaram is in Tamil Nadu",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Mangroves are coastal forests that grow in salty water on stilt-like roots. They slow storm waves to protect villages and shelter young fish, crabs and prawns. Many have been cut down for farms and buildings, so replanting them is now part of coastal plans.",
+        "wrong": [
+          "Mangroves grow in fresh water in the mountains, and fishing families cut them down to make ponds.",
+          "The Sundarbans and Pichavaram are villages where people build houses on stilts above the mud."
+        ]
+      }
+    },
+    {
+      "id": "notes.vaccines",
+      "level": 7,
+      "title": "Notes: How vaccines work",
+      "text": "When a germ enters the body for the first time, the immune system needs days to learn how to fight it, and in that time a person can become very ill. A vaccine gives the immune system a safe preview. It contains a weakened or harmless part of a germ, or instructions for making one, which cannot cause the illness but shows the body what the germ looks like. The immune system makes antibodies and memory cells, so if the real germ arrives later, it is recognised and defeated quickly. When most people in a community are vaccinated, an illness struggles to spread, which also protects babies and others who cannot be vaccinated. Vaccines have made smallpox disappear and polio rare.",
+      "titles": {
+        "right": "Vaccines and the immune system",
+        "wrong": [
+          "The history of smallpox",
+          "How babies grow"
+        ]
+      },
+      "points": [
+        {
+          "text": "A first infection takes days to fight",
+          "main": true,
+          "k": [
+            "days",
+            "first"
+          ]
+        },
+        {
+          "text": "A vaccine shows a harmless part of a germ",
+          "main": true,
+          "k": [
+            "harmless",
+            "weaken",
+            "safe"
+          ]
+        },
+        {
+          "text": "The body makes antibodies and memory",
+          "main": true,
+          "k": [
+            "antibod",
+            "memory"
+          ]
+        },
+        {
+          "text": "Wide vaccination stops spread and protects others",
+          "main": true,
+          "k": [
+            "community",
+            "spread",
+            "protect"
+          ]
+        },
+        {
+          "text": "Smallpox gone, polio rare",
+          "main": true,
+          "k": [
+            "smallpox",
+            "polio"
+          ]
+        },
+        {
+          "text": "Germs enter the body",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "A first infection takes days to fight. A vaccine safely shows the immune system a harmless part of a germ, so it makes antibodies and memory and defeats the real germ quickly. Wide vaccination stops spread, protecting others, and has ended smallpox and made polio rare.",
+        "wrong": [
+          "Vaccines contain strong germs that make people ill for a few days so that they rest more.",
+          "Babies cannot be vaccinated, so smallpox and polio still spread quickly in most communities."
+        ]
+      }
+    },
+    {
+      "id": "notes.mobilephones",
+      "level": 7,
+      "title": "Notes: Phones in the classroom",
+      "text": "Several countries have banned mobile phones in school classrooms, and the debate about whether this is wise continues. Supporters of a ban point to studies suggesting that pupils concentrate better and score slightly higher when phones are out of sight, and that bans reduce online bullying during the school day. Opponents argue that phones are useful learning tools, for looking things up, recording experiments or using dictionary apps, and that schools should teach sensible use rather than forbid it. Many schools now take a middle path: phones are kept in bags or lockers during lessons but may be taken out when a teacher asks for them for a particular task.",
+      "titles": {
+        "right": "Should phones be banned in classrooms?",
+        "wrong": [
+          "How to record an experiment",
+          "Online dictionaries"
+        ]
+      },
+      "points": [
+        {
+          "text": "Some countries ban phones in classrooms",
+          "main": true,
+          "k": [
+            "ban"
+          ]
+        },
+        {
+          "text": "For: better focus and marks, less bullying",
+          "main": true,
+          "k": [
+            "focus",
+            "concentrat",
+            "bully"
+          ]
+        },
+        {
+          "text": "Against: useful tools; teach sensible use",
+          "main": true,
+          "k": [
+            "tool",
+            "useful",
+            "sensible"
+          ]
+        },
+        {
+          "text": "Middle path: put away, used when a teacher asks",
+          "main": true,
+          "k": [
+            "middle",
+            "locker",
+            "bag",
+            "teacher asks"
+          ]
+        },
+        {
+          "text": "Dictionary apps exist",
+          "main": false
+        },
+        {
+          "text": "Debate continues",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Some countries ban phones in classrooms. Supporters say pupils focus better, score higher and face less bullying; opponents call phones useful tools and want sensible use taught. Many schools take a middle path, keeping phones away unless a teacher asks for them.",
+        "wrong": [
+          "Every country has banned phones in schools because pupils used dictionary apps to cheat.",
+          "Teachers want pupils to keep phones on their desks so that they can record every lesson."
+        ]
+      }
+    },
+    {
+      "id": "notes.recycling",
+      "level": 5,
+      "title": "Notes: Sorting waste",
+      "text": "In many Indian cities, households are now asked to sort their waste into two bins before it is collected. Wet waste, such as vegetable peels and leftover food, goes in one; dry waste, such as paper, plastic, metal and glass, goes in the other. Sorting matters because mixed waste is hard to use and usually ends up in huge dumps that smell, attract animals and sometimes catch fire. Wet waste kept separate can be turned into compost for gardens and farms. Clean dry waste can be sold and recycled into new things. Some housing colonies that sort carefully have cut the rubbish they send to dumps by more than half.",
+      "titles": {
+        "right": "Why sorting waste into two bins helps",
+        "wrong": [
+          "How compost smells",
+          "Housing colonies in cities"
+        ]
+      },
+      "points": [
+        {
+          "text": "Households sort waste into wet and dry",
+          "main": true,
+          "k": [
+            "wet",
+            "dry"
+          ]
+        },
+        {
+          "text": "Mixed waste goes to dumps that smell and burn",
+          "main": true,
+          "k": [
+            "dump",
+            "mixed"
+          ]
+        },
+        {
+          "text": "Wet waste becomes compost",
+          "main": true,
+          "k": [
+            "compost"
+          ]
+        },
+        {
+          "text": "Dry waste is sold and recycled",
+          "main": true,
+          "k": [
+            "recycl"
+          ]
+        },
+        {
+          "text": "Careful colonies halved their rubbish",
+          "main": true,
+          "k": [
+            "half",
+            "halved"
+          ]
+        },
+        {
+          "text": "Peels are wet waste",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Households are asked to sort waste into wet and dry. Mixed waste ends up in smelly dumps that can burn, but sorted wet waste becomes compost and dry waste is recycled. Colonies that sort carefully have halved the rubbish sent to dumps.",
+        "wrong": [
+          "Wet waste and dry waste should be mixed so that dumps catch fire and the rubbish burns away.",
+          "Paper, plastic and glass are turned into compost for farms, which halves the price of food."
+        ]
+      }
+    },
+    {
+      "id": "notes.sleepanimals",
+      "level": 5,
+      "title": "Notes: How animals sleep",
+      "text": "All animals seem to need some rest, but they sleep in surprising ways. Dolphins must keep breathing at the surface, so they let one half of the brain sleep while the other half stays awake, and then they swap. Many birds can do the same, keeping one eye open to watch for danger. Giraffes, which are easy prey when lying down, sleep for only a few minutes at a time, adding up to about two hours a day. Bats, on the other hand, may sleep for twenty hours, resting upside down in dark caves. Scientists study these differences to understand what sleep actually does for the brain.",
+      "titles": {
+        "right": "Different ways animals sleep",
+        "wrong": [
+          "Why bats live in caves",
+          "Dolphins and their food"
+        ]
+      },
+      "points": [
+        {
+          "text": "Dolphins and birds rest half the brain at a time",
+          "main": true,
+          "k": [
+            "half"
+          ]
+        },
+        {
+          "text": "Giraffes sleep in short bursts, about two hours a day",
+          "main": true,
+          "k": [
+            "giraffe"
+          ]
+        },
+        {
+          "text": "Bats sleep up to twenty hours",
+          "main": true,
+          "k": [
+            "bat"
+          ]
+        },
+        {
+          "text": "Scientists study this to learn what sleep does",
+          "main": true,
+          "k": [
+            "scientist",
+            "brain"
+          ]
+        },
+        {
+          "text": "Bats rest upside down",
+          "main": false
+        },
+        {
+          "text": "Birds keep one eye open",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Animals sleep in surprising ways: dolphins and many birds rest one half of the brain at a time, giraffes sleep in short bursts adding up to about two hours, and bats sleep up to twenty hours. Scientists study this to learn what sleep does.",
+        "wrong": [
+          "Dolphins sleep for twenty hours a day in dark caves while giraffes keep one eye open.",
+          "All animals sleep the same way, so scientists no longer need to study sleep in the brain."
+        ]
+      }
+    },
+    {
+      "id": "notes.monsoonfarm",
+      "level": 6,
+      "title": "Notes: Saving water on farms",
+      "text": "Farming uses most of the fresh water in India, and much of it is wasted. When fields are flooded, a large part of the water evaporates or soaks away before plant roots can use it. Drip irrigation offers another way: thin pipes with small holes lay water right at the base of each plant, drop by drop. Farmers who switch often use between a third and a half less water and still get a good harvest, because the plants receive water steadily. The pipes cost money to install, so some state governments share the cost. Another simple step is mulching: covering the soil with dry leaves or straw keeps it from drying out in the sun.",
+      "titles": {
+        "right": "Using less water on farms",
+        "wrong": [
+          "Why fields flood",
+          "Harvest festivals"
+        ]
+      },
+      "points": [
+        {
+          "text": "Farming uses most fresh water, much wasted",
+          "main": true,
+          "k": [
+            "most",
+            "waste"
+          ]
+        },
+        {
+          "text": "Flooding loses water to the air and soil",
+          "main": true,
+          "k": [
+            "flood",
+            "evaporat"
+          ]
+        },
+        {
+          "text": "Drip pipes water each plant at its base",
+          "main": true,
+          "k": [
+            "drip",
+            "pipe"
+          ]
+        },
+        {
+          "text": "Saves a third to a half of the water",
+          "main": true,
+          "k": [
+            "third",
+            "half"
+          ]
+        },
+        {
+          "text": "Governments share the pipe cost",
+          "main": true,
+          "k": [
+            "government",
+            "cost"
+          ]
+        },
+        {
+          "text": "Mulch keeps soil moist",
+          "main": true,
+          "k": [
+            "mulch",
+            "straw",
+            "leaves"
+          ]
+        },
+        {
+          "text": "Plants need water steadily",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Farming uses most of India's fresh water, and flooding fields wastes much of it. Drip pipes water each plant at its base and save a third to a half, with governments sharing their cost. Mulch of leaves or straw also keeps soil moist.",
+        "wrong": [
+          "Farmers flood their fields because plant roots need the soil to be covered in water all day.",
+          "Drip pipes are cheap, so farmers use them to flood fields faster than before."
+        ]
+      }
     }
   ],
   "charts": [

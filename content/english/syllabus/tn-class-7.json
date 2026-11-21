@@ -6,29 +6,36 @@
   "subject": "English",
   "title": "Tamil Nadu State Board English, Class VII",
   "source": {
-    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
-    "url": "https://www.tntextbooks.in/",
+    "read": "SCERT Tamil Nadu, TNCF 2017 syllabus, English language, Standards 1 to 10 (published in the Tamil Nadu Government Gazette), read through a copy hosted by an exam-coaching site",
+    "url": "https://professoracademy.com/wp-content/uploads/2024/02/SGT-English-Syllabus.pdf",
     "official": false,
-    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "note": "UNOFFICIAL COPY OF AN OFFICIAL SOURCE. The state's own syllabus (TNCF 2017, marked draft), read through a text summary of a third-party copy of the gazette pages; the Standard 9 page was only partly readable. The Samacheer Kalvi textbooks follow it term by term.",
     "accessed": "2026-11-21"
   },
   "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
   "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
   "strands": [
     {
-      "id": "listening-speaking",
-      "name": "Listening and Speaking",
-      "pages": "Units",
+      "id": "listening",
+      "name": "Listening",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "LS1",
-          "text": "Listens to a passage and answers questions.",
+          "id": "L1",
+          "text": "Takes the gist, main points and details from conversations, broadcasts and messages.",
           "coverage": "covered",
           "where": "listen"
-        },
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "name": "Speaking",
+      "pages": "TNCF 2017",
+      "outcomes": [
         {
-          "id": "LS2",
-          "text": "Takes part in conversations and role play.",
+          "id": "S1",
+          "text": "Gives and asks for views in informal discussions.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -36,110 +43,103 @@
             "syllabus": "icse-cisce-english-class-7",
             "outcome": "LS6"
           }
-        },
-        {
-          "id": "LS3",
-          "text": "Speaks on a topic before the class.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-7",
-            "outcome": "LS5"
-          }
         }
       ]
     },
     {
       "id": "reading",
       "name": "Reading",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "R1",
-          "text": "Reads prose, poems and supplementary stories and answers questions.",
+          "text": "Predicts, infers, sums up and tells fact from opinion.",
           "coverage": "covered",
-          "where": "reading"
+          "where": "kinds"
         },
         {
           "id": "R2",
-          "text": "Explains figures of speech in poems.",
+          "text": "Notices imagery, rhyme and rhythm in poems.",
           "coverage": "partly",
           "where": "kinds",
-          "note": "Poems and everyday texts asks about purpose, point of view and figurative language on OpenPath's own poems; the textbook's poems are not in the app."
+          "note": "Poems are read with questions on figurative language; rhyme and rhythm are not asked about on their own."
+        },
+        {
+          "id": "R3",
+          "text": "Uses mind maps and notes while reading.",
+          "coverage": "covered",
+          "where": "study"
         }
       ]
     },
     {
       "id": "writing",
       "name": "Writing",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "W1",
-          "text": "Writes formal and informal letters.",
+          "text": "Writes diary entries, messages and notices.",
           "coverage": "guided",
           "where": "guided",
           "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
           "tasks": {
-            "syllabus": "icse-cisce-english-class-7",
-            "outcome": "W1"
-          }
-        },
-        {
-          "id": "W2",
-          "text": "Writes a notice and a dialogue.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-6",
+            "syllabus": "icse-cisce-english-class-8",
             "outcome": "W13"
           }
         },
         {
-          "id": "W3",
-          "text": "Writes a story from hints.",
+          "id": "W2",
+          "text": "Writes three or four paragraphs that narrate, describe, discuss or explain.",
           "coverage": "guided",
           "where": "guided",
           "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
           "tasks": {
             "syllabus": "icse-cisce-english-class-7",
-            "outcome": "W2"
+            "outcome": "W4"
           }
+        },
+        {
+          "id": "W3",
+          "text": "Uses linking words.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "linkers"
+          ]
         }
       ]
     },
     {
-      "id": "vocabulary-grammar",
-      "name": "Vocabulary and Grammar",
-      "pages": "Units",
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "VG1",
-          "text": "Uses present, past and future tenses, including the perfect.",
+          "id": "GV1",
+          "text": "Uses determiners, linking words, tenses and adverbs of place.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
+            "this_these",
+            "linkers",
             "tenses",
-            "continuous"
+            "adverbs"
           ]
         },
         {
-          "id": "VG2",
-          "text": "Uses adverbs, prepositions, articles and conjunctions.",
+          "id": "GV2",
+          "text": "Uses the passive voice and reported speech.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "adverbs",
-            "prepositions",
-            "articles",
-            "conjunctions"
+            "passive",
+            "speech"
           ]
         },
         {
-          "id": "VG3",
-          "text": "Compares with adjectives.",
+          "id": "GV3",
+          "text": "Uses comparatives and superlatives.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
@@ -147,22 +147,14 @@
           ]
         },
         {
-          "id": "VG4",
-          "text": "Uses prefixes, suffixes, and words of the same and opposite meaning.",
+          "id": "GV4",
+          "text": "Uses word families, prefixes, suffixes, idioms and figures of speech.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
             "affixes",
-            "synonyms_antonyms"
-          ]
-        },
-        {
-          "id": "VG5",
-          "text": "Changes sentences between active and passive.",
-          "coverage": "covered",
-          "where": "grammar",
-          "topics": [
-            "passive"
+            "idioms",
+            "figures"
           ]
         }
       ]

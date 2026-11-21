@@ -6,23 +6,60 @@
   "subject": "English",
   "title": "Tamil Nadu State Board English, Class I",
   "source": {
-    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
-    "url": "https://www.tntextbooks.in/",
+    "read": "SCERT Tamil Nadu, TNCF 2017 syllabus, English language, Standards 1 to 10 (published in the Tamil Nadu Government Gazette), read through a copy hosted by an exam-coaching site",
+    "url": "https://professoracademy.com/wp-content/uploads/2024/02/SGT-English-Syllabus.pdf",
     "official": false,
-    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "note": "UNOFFICIAL COPY OF AN OFFICIAL SOURCE. The state's own syllabus (TNCF 2017, marked draft), read through a text summary of a third-party copy of the gazette pages; the Standard 9 page was only partly readable. The Samacheer Kalvi textbooks follow it term by term.",
     "accessed": "2026-11-21"
   },
   "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
   "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
   "strands": [
     {
-      "id": "listening-speaking",
-      "name": "Listening and Speaking",
-      "pages": "Units",
+      "id": "listening",
+      "name": "Listening",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "LS1",
-          "text": "Says rhymes and action songs.",
+          "id": "L1",
+          "text": "Recognises the names of everyday objects and people when heard.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "L2",
+          "text": "Follows simple spoken instructions.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "Tap-this-then-that instructions are practised by ear; classroom instructions are not."
+        },
+        {
+          "id": "L3",
+          "text": "Listens to rhymes and stories.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Short passages are heard with questions; rhymes are not sung in the app."
+        },
+        {
+          "id": "L4",
+          "text": "Hears beginning sounds, rhyming words and syllables.",
+          "coverage": "partly",
+          "where": "grammar",
+          "note": "Syllables are practised; rhyme and beginning sounds are not taught on their own.",
+          "topics": [
+            "syllables"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "name": "Speaking",
+      "pages": "TNCF 2017",
+      "outcomes": [
+        {
+          "id": "S1",
+          "text": "Says rhymes, greets, and uses please, thank you and sorry.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -32,31 +69,14 @@
           }
         },
         {
-          "id": "LS2",
-          "text": "Listens to a short story and answers simple questions.",
-          "coverage": "covered",
-          "where": "listen"
-        },
-        {
-          "id": "LS3",
-          "text": "Greets, introduces self and uses polite words.",
+          "id": "S2",
+          "text": "Speaks in short sentences of three or four words.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
           "tasks": {
             "syllabus": "icse-cisce-english-class-1",
-            "outcome": "LS2"
-          }
-        },
-        {
-          "id": "LS4",
-          "text": "Talks about a picture in a few words.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-1",
-            "outcome": "LS7"
+            "outcome": "LS10"
           }
         }
       ]
@@ -64,31 +84,31 @@
     {
       "id": "reading",
       "name": "Reading",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "R1",
-          "text": "Knows the letters, their sounds and simple words with pictures.",
-          "coverage": "covered",
-          "where": "first"
+          "text": "Links letters with sounds and reads simple three-letter words and sight words.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "Words are heard and matched with pictures; sounding out letters is not taught on its own."
         },
         {
           "id": "R2",
-          "text": "Reads simple words and short sentences.",
-          "coverage": "partly",
-          "where": "reading",
-          "note": "The first reading level starts with short texts; reading single new words aloud is not heard."
+          "text": "Understands short texts with the help of pictures.",
+          "coverage": "covered",
+          "where": "first"
         }
       ]
     },
     {
       "id": "writing",
       "name": "Writing",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "W1",
-          "text": "Writes capital and small letters.",
+          "text": "Writes capital and small letters, copies words and writes own name.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done with a grown-up, away from the app, who ticks what they saw.",
@@ -99,41 +119,62 @@
         },
         {
           "id": "W2",
-          "text": "Writes simple words from dictation.",
+          "text": "Writes short words, spelling them as they sound.",
           "coverage": "covered",
           "where": "listening"
         }
       ]
     },
     {
-      "id": "vocabulary-grammar",
-      "name": "Vocabulary and Grammar",
-      "pages": "Units",
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "VG1",
-          "text": "Names everyday things: family, body, animals, food and colours.",
+          "id": "GV1",
+          "text": "Uses naming words, action words and describing words.",
           "coverage": "covered",
-          "where": "first"
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech"
+          ]
         },
         {
-          "id": "VG2",
-          "text": "Uses a and an, and this and that.",
+          "id": "GV2",
+          "text": "Uses in, on, at and below, and and or.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prepositions",
+            "conjunctions"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses a, an, this and that, and I, you, he and she.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
             "articles",
-            "this_these"
+            "this_these",
+            "pronouns"
           ]
         },
         {
-          "id": "VG3",
-          "text": "Uses one and many.",
+          "id": "GV4",
+          "text": "Uses was and were, and the present continuous.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "plurals"
+            "be_verbs",
+            "continuous"
           ]
+        },
+        {
+          "id": "GV5",
+          "text": "Knows words for things, people, animals, colours, shapes, numbers, days and months.",
+          "coverage": "covered",
+          "where": "first"
         }
       ]
     }

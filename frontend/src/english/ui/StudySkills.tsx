@@ -165,6 +165,7 @@ export function StudySkills({ learner, onLeave, onChanged }: { learner: Learner;
         {sum.tasks > 0 && (
           <p className="small" data-summary>
             {sum.tasks} {sum.tasks === 1 ? "task" : "tasks"} done · {sum.right} of {sum.asked} right
+            {sum.weak.length > 0 && <> · to work on: {sum.weak.slice(0, 2).map((k) => STUDY_SKILL_NAMES[k]).join(", ")}</>}
           </p>
         )}
         {kinds.map(({ k, next }) => (

@@ -85,6 +85,14 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Long reads: {s.long.parts} {s.long.parts === 1 ? "part" : "parts"} read, {s.long.finished} {s.long.finished === 1 ? "story" : "stories"} finished, {s.long.right} of {s.long.asked} questions right
         </p>
       )}
+      {s.study && (
+        <p className="small" data-line="study">
+          Notes, charts and maps: {s.study.tasks} {s.study.tasks === 1 ? "task" : "tasks"}, {s.study.right} of {s.study.asked} steps right
+          {s.study.strong.length ? `; goes well: ${s.study.strong.slice(0, 2).join(", ")}` : ""}
+          {s.study.weak.length ? `; to work on: ${s.study.weak.slice(0, 2).join(", ")}` : ""}
+          {s.study.own.pieces ? `; own writing: ${s.study.own.pieces} ${s.study.own.pieces === 1 ? "piece" : "pieces"}, ${s.study.own.passed} of ${s.study.own.of} checks met` : ""}
+        </p>
+      )}
       {s.kinds && (
         <p className="small" data-line="kinds">
           Poems and everyday texts: {s.kinds.texts} read, {s.kinds.right} of {s.kinds.asked} questions right{s.kinds.weak.length ? `; to work on: ${s.kinds.weak.slice(0, 2).join(", ")}` : ""}

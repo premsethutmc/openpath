@@ -52,7 +52,7 @@ test("SB-3 a line done with a grown-up opens at least two real tasks, borrowed f
 test("SB-4 what is covered: every line has a place in the app, notes, charts and maps included", () => {
   const sum = (b: "cbse" | "tn") => syllabusesOf(b).map(coverage).reduce((a, c) => ({ covered: a.covered + c.covered, partly: a.partly + c.partly, guided: a.guided + c.guided, not: a.not + c.not, total: a.total + c.total }));
   assert.deepEqual(sum("cbse"), { covered: 70, partly: 36, guided: 88, not: 0, total: 194 });
-  assert.deepEqual(sum("tn"), { covered: 116, partly: 14, guided: 56, not: 0, total: 186 });
+  assert.deepEqual(sum("tn"), { covered: 109, partly: 24, guided: 50, not: 0, total: 183 });
   for (const s of SYLLABUSES) assert.equal(coverage(s).not, 0, `${s.id}: every line has a place`);
   const study = SYLLABUSES.flatMap((s) => s.strands.flatMap((x) => x.outcomes).filter((o) => o.where === "study").map((o) => o.text));
   assert.ok(study.length >= 9);
