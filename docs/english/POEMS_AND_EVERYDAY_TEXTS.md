@@ -39,3 +39,8 @@ Prejudice. Each says where it comes from and that it is adapted; each has five o
 and how the writer creates humour, suspense or a symbol. 96 texts in all: 12 at levels 1–4, 15 at level 5, 16 at
 level 6, 17 at level 7. Simulated readers: no reader runs out within ten weeks except the very strong Class 8 reader,
 after about 33 texts.
+
+Version 4: eight more classics — Wordsworth's "Daffodils" and Tagore's "Where the Mind Is Without Fear" (whole poems),
+and prose adapted from Alice's Adventures in Wonderland, Gulliver's Travels, Oliver Twist, A Study in Scarlet, A
+Christmas Carol and Robinson Crusoe. 104 texts: 12 at levels 1–4, 15 at level 5, 20 at level 6, 21 at level 7.
+Simulated readers: no reader, the very strong Class 8 reader included, runs out within ten weeks.
