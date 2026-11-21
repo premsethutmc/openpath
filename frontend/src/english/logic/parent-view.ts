@@ -162,7 +162,7 @@ export function gateQuestion(seed: number): { a: number; b: number; answer: numb
 const WEEK_ACTIVITY: Record<string, string> = {
   first_words: "First words", word_learn: "New words", vocab: "Word check", dictation: "Listen and write", listen_passage: "Listen and answer",
   grammar_use: "Grammar", reading: "Reading", text_read: "Poems and everyday texts", long_read: "Long reads", written_answer: "Write an answer",
-  spell_answer: "Spelling Bee", guided_task: "Tasks with a grown-up", book_answer: "My Books", level_check: "Find my level",
+  spell_answer: "Spelling Bee", sounds: "Sounds", guided_task: "Tasks with a grown-up", book_answer: "My Books", level_check: "Find my level",
 };
 
 /**

@@ -1,6 +1,6 @@
 {
   "id": "grammar-learn",
-  "version": 3,
+  "version": 4,
   "status": "practice_only",
   "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
   "format": "One card per Grammar in use topic, shown the first time a learner meets the topic (and again after two misses in a row): the rule, two examples, a common mistake beside the right version with a one-line reason, and two questions to try (not scored).",
@@ -2148,6 +2148,35 @@
         "wrong": [
           "freely",
           "freed"
+        ]
+      }
+    },
+    {
+      "topic": "tamil_slips",
+      "rule": "Some English slips come from Tamil word order. In English, a question puts the helping word first, and have and know take no -ing.",
+      "examples": [
+        "Where are you going?",
+        "He has two brothers."
+      ],
+      "try": {
+        "question": "Which question is right?",
+        "right": "Why are you late?",
+        "wrong": [
+          "Why you are late?",
+          "Why late you are?"
+        ]
+      },
+      "mistake": {
+        "wrong": "Myself Kavya, I am in Class 5.",
+        "right": "I am Kavya, and I am in Class 5.",
+        "why": "In English, \"myself\" is not used to say your name."
+      },
+      "try2": {
+        "question": "Which sentence is right?",
+        "right": "Please return the book.",
+        "wrong": [
+          "Please return back the book.",
+          "Please back return the book."
         ]
       }
     }
