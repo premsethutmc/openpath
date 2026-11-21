@@ -54,3 +54,15 @@ test("literature practice: own stories for Classes 6-10, exam-length (about 250 
   const all = CLASSES.flatMap((c) => syllabusFor(c).strands.flatMap((s) => s.outcomes));
   assert.equal(all.filter((o) => o.coverage === "not-yet").length, 0);
 });
+
+test("Tamil Nadu State Board course: Classes 1-10, its own grammar topics, syllabus links resolve, writing per class", async () => {
+  const { tnCourse, topicsFor, syllabusFor, writingFor } = await import("../../../packages/tamil/src/icse");
+  assert.deepEqual([...new Set(tnCourse.topics.map((t) => t.class))].sort((a, b) => a - b), CLASSES);
+  for (const c of CLASSES) {
+    assert.ok(topicsFor(c, "tn").length >= 8, `tn class ${c}`);
+    assert.ok(writingFor(c, "tn").length >= 1, `tn class ${c} writing`);
+    assert.ok(syllabusFor(c, "tn").strands.length >= 3);
+  }
+  for (const id of ["c6.word-edges", "c6.inam-pairs", "c7.kutriyal", "c8.thogai", "c8.vallinam", "c8.asai", "c10.tinai", "c10.paa"]) assert.ok(tnCourse.topics.some((t) => t.id === `tn.ta.${id}`), id);
+  assert.ok(tnCourse.topics.every((t) => t.id.startsWith("tn.ta.")));
+});

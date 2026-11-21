@@ -4,7 +4,18 @@
  * claims, only practice progress kept on the device.
  */
 import courseData from "../../../content/tamil/icse.v1.json";
+import tnData from "../../../content/tamil/tn.v1.json";
 import writingData from "../../../content/tamil/writing.v1.json";
+import t1 from "../../../content/tamil/syllabus/tn-class-1.json";
+import t2 from "../../../content/tamil/syllabus/tn-class-2.json";
+import t3 from "../../../content/tamil/syllabus/tn-class-3.json";
+import t4 from "../../../content/tamil/syllabus/tn-class-4.json";
+import t5 from "../../../content/tamil/syllabus/tn-class-5.json";
+import t6 from "../../../content/tamil/syllabus/tn-class-6.json";
+import t7 from "../../../content/tamil/syllabus/tn-class-7.json";
+import t8 from "../../../content/tamil/syllabus/tn-class-8.json";
+import t9 from "../../../content/tamil/syllabus/tn-class-9.json";
+import t10 from "../../../content/tamil/syllabus/tn-class-10.json";
 import s1 from "../../../content/tamil/syllabus/icse-class-1.json";
 import s2 from "../../../content/tamil/syllabus/icse-class-2.json";
 import s3 from "../../../content/tamil/syllabus/icse-class-3.json";
@@ -30,9 +41,17 @@ export type CourseTopic = {
   listen?: boolean;
   questions: CourseQuestion[];
 };
-export const course = courseData as { schema: string; board: string; review: string; topics: CourseTopic[] };
+export type Board = "icse" | "tn";
+export const BOARDS: { id: Board; name: string; note: string }[] = [
+  { id: "icse", name: "ICSE (CISCE)", note: "Tamil as a second language" },
+  { id: "tn", name: "Tamil Nadu State Board (Samacheer Kalvi)", note: "Tamil as a first language" },
+];
+type Course = { schema: string; board: string; review: string; topics: CourseTopic[] };
+export const course = courseData as Course;
+export const tnCourse = tnData as Course;
+export const courseFor = (board: Board = "icse") => (board === "tn" ? tnCourse : course);
 export const CLASSES = [...new Set(course.topics.map((t) => t.class))].sort((a, b) => a - b);
-export const topicsFor = (cls: number) => course.topics.filter((t) => t.class === cls);
+export const topicsFor = (cls: number, board: Board = "icse") => courseFor(board).topics.filter((t) => t.class === cls);
 
 const norm = (s: string) => s.normalize("NFC").trim();
 export const isRight = (q: CourseQuestion, response: string) => norm(response) === norm(q.answer);
@@ -47,8 +66,8 @@ export function record(progress: Progress, q: CourseQuestion, right: boolean): P
 
 /** Share of a topic's questions the learner has answered right at least once (0..1). */
 export const topicDone = (t: CourseTopic, p: Progress) => t.questions.filter((q) => (p[q.id]?.right ?? 0) > 0).length / t.questions.length;
-export const classDone = (cls: number, p: Progress) => {
-  const qs = topicsFor(cls).flatMap((t) => t.questions);
+export const classDone = (cls: number, p: Progress, board: Board = "icse") => {
+  const qs = topicsFor(cls, board).flatMap((t) => t.questions);
   return qs.filter((q) => (p[q.id]?.right ?? 0) > 0).length / qs.length;
 };
 
@@ -70,7 +89,7 @@ export function round(t: CourseTopic, p: Progress, size = 8): CourseQuestion[] {
     .map((x) => x.q);
 }
 
-export function validateCourse(topics: CourseTopic[] = course.topics): string[] {
+export function validateCourse(topics: CourseTopic[] = [...course.topics, ...tnCourse.topics]): string[] {
   const errors: string[] = [];
   const ids = new Set<string>();
   for (const t of topics) {
@@ -88,28 +107,31 @@ export function validateCourse(topics: CourseTopic[] = course.topics): string[] 
   return errors;
 }
 
-export type WritingTask = { id: string; class: number; title: string; titleEn: string; task: string; taskEn: string; form: string; write: { min: number; max: number }; look: string[] };
+export type WritingTask = { id: string; board?: Board; class: number; title: string; titleEn: string; task: string; taskEn: string; form: string; write: { min: number; max: number }; look: string[] };
 export const writingTasks = (writingData as { tasks: WritingTask[] }).tasks;
-export const writingFor = (cls: number) => writingTasks.filter((t) => t.class === cls);
+export const writingFor = (cls: number, board: Board = "icse") => writingTasks.filter((t) => t.class === cls && (t.board ?? "icse") === board);
 /** Tamil words: runs of Tamil script (as the server counts them). */
 export const tamilWords = (text: string) => (text.match(/[\u0B80-\u0BFF]+/g) ?? []).length;
 
 export type Outcome = { id: string; text: string; coverage: "covered" | "partly" | "guided" | "not-yet"; where: string[]; note?: string };
 export type Syllabus = { id: string; class: number; source: { read: string; url: string; note: string }; strands: { id: string; name: string; outcomes: Outcome[] }[] };
 const SYLLABI = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10] as unknown as Syllabus[];
-export const syllabusFor = (cls: number) => SYLLABI.find((s) => s.class === cls)!;
+const TN_SYLLABI = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10] as unknown as Syllabus[];
+export const syllabusFor = (cls: number, board: Board = "icse") => (board === "tn" ? TN_SYLLABI : SYLLABI).find((s) => s.class === cls)!;
 
 /** Every outcome's "where" points at a topic or writing tasks that exist. */
 export function validateSyllabus(): string[] {
-  const ids = new Set(course.topics.map((t) => t.id));
   const errors: string[] = [];
-  for (const s of SYLLABI)
-    for (const st of s.strands)
-      for (const o of st.outcomes)
-        for (const w of o.where) {
-          if (w.startsWith("writing:")) {
-            if (!writingFor(Number(w.slice(9))).length) errors.push(`${s.id} ${o.id}: no writing for ${w}`);
-          } else if (!ids.has(w)) errors.push(`${s.id} ${o.id}: no topic ${w}`);
-        }
+  for (const [board, list] of [["icse", SYLLABI], ["tn", TN_SYLLABI]] as const) {
+    const ids = new Set(courseFor(board).topics.map((t) => t.id));
+    for (const s of list)
+      for (const st of s.strands)
+        for (const o of st.outcomes)
+          for (const w of o.where) {
+            if (w.startsWith("writing:")) {
+              if (!writingFor(Number(w.slice(9)), board).length) errors.push(`${s.id} ${o.id}: no writing for ${w}`);
+            } else if (!ids.has(w)) errors.push(`${s.id} ${o.id}: no topic ${w}`);
+          }
+  }
   return errors;
 }

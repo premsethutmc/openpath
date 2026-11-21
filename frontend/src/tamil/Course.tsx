@@ -6,6 +6,8 @@
  */
 import { useEffect, useRef, useState } from "react";
 import {
+  BOARDS,
+  type Board,
   CLASSES,
   type CourseQuestion,
   type CourseTopic,
@@ -28,7 +30,7 @@ import { say, tamilVoice } from "./speech";
 
 const KEY = "openpath.tamil.icse.v1";
 const LEARNER = "openpath.tamil.learner";
-type Saved = { cls: number | null; progress: Progress };
+type Saved = { cls: number | null; board?: Board; progress: Progress };
 const load = (): Saved => {
   try {
     const raw = localStorage.getItem(KEY);
@@ -146,6 +148,7 @@ export function TamilHome() {
       </>
     );
 
+  const board: Board = saved.board ?? "icse";
   if (screen.name === "classes")
     return (
       <main className="course">
@@ -153,14 +156,22 @@ export function TamilHome() {
           <a className="link" href="/">
             ← OpenPath
           </a>
-          <span className="badge">ICSE</span>
+          <span className="badge">{board === "tn" ? "TN" : "ICSE"}</span>
         </header>
         <h1>தமிழ் — வகுப்பைத் தேர்ந்தெடு</h1>
-        <p className="small">Choose your class. Tamil as a second language, Classes 1 to 10.</p>
+        <div className="boards" role="radiogroup" aria-label="Board">
+          {BOARDS.map((b) => (
+            <button key={b.id} type="button" role="radio" aria-checked={board === b.id} className={board === b.id ? "board on" : "board"} onClick={() => setSaved({ ...saved, board: b.id })}>
+              <strong>{b.name}</strong>
+              <span className="small">{b.note}</span>
+            </button>
+          ))}
+        </div>
+        <p className="small">Choose your class, 1 to 10.</p>
         {who}
         <div className="class-grid">
           {CLASSES.map((c) => {
-            const done = classDone(c, saved.progress);
+            const done = classDone(c, saved.progress, board);
             return (
               <button key={c} type="button" className="class-tile" onClick={() => (setSaved({ ...saved, cls: c }), setScreen({ name: "topics" }))}>
                 <span className="class-num">{c}</span>
@@ -181,14 +192,14 @@ export function TamilHome() {
 
   const cls = saved.cls ?? 1;
   if (screen.name === "topics") {
-    const topics = topicsFor(cls).filter((t) => !t.listen || voice);
+    const topics = topicsFor(cls, board).filter((t) => !t.listen || voice);
     return (
       <main className="course">
         <header>
           <button type="button" className="link" onClick={() => setScreen({ name: "classes" })}>
             ← வகுப்புகள்
           </button>
-          <span className="badge">வகுப்பு {cls}</span>
+          <span className="badge">{board === "tn" ? "TN" : "ICSE"} · வகுப்பு {cls}</span>
         </header>
         <h1>வகுப்பு {cls} — பாடங்கள்</h1>
         {who}
@@ -212,7 +223,7 @@ export function TamilHome() {
               </li>
             );
           })}
-          {writingFor(cls).map((w) => (
+          {writingFor(cls, board).map((w) => (
             <li key={w.id}>
               <button type="button" className="topic writing-topic" onClick={() => setScreen({ name: "writing", task: w })}>
                 <span className="topic-title">✍️ {w.title}</span>
@@ -224,7 +235,7 @@ export function TamilHome() {
           ))}
         </ol>
         <button type="button" className="secondary wide" onClick={() => setScreen({ name: "syllabus" })}>
-          பாடத்திட்டம் — What the CISCE syllabus asks, and what we cover
+          பாடத்திட்டம் — What the {board === "tn" ? "Samacheer Kalvi" : "CISCE"} syllabus asks, and what we cover
         </button>
         <FeedbackBox where={`tamil/class-${cls}`} />
       </main>
@@ -232,7 +243,7 @@ export function TamilHome() {
   }
 
   if (screen.name === "syllabus") {
-    const s = syllabusFor(cls);
+    const s = syllabusFor(cls, board);
     const BADGE = { covered: "✓ Covered", partly: "◐ Partly", guided: "👥 With a grown-up", "not-yet": "○ Not here" } as const;
     return (
       <main className="course">
@@ -240,7 +251,7 @@ export function TamilHome() {
           <button type="button" className="link" onClick={() => setScreen({ name: "topics" })}>
             ← வகுப்பு {cls}
           </button>
-          <span className="badge">CISCE</span>
+          <span className="badge">{board === "tn" ? "Samacheer" : "CISCE"}</span>
         </header>
         <h1>வகுப்பு {cls} — பாடத்திட்டம்</h1>
         <p className="small">{s.source.note}</p>
@@ -253,7 +264,7 @@ export function TamilHome() {
                   <span className="cov">{BADGE[o.coverage]}</span> {o.text}
                   {o.note && <span className="small"> {o.note}</span>}
                   {o.where.map((w) => {
-                    const t = topicsFor(cls).find((x) => x.id === w);
+                    const t = topicsFor(cls, board).find((x) => x.id === w);
                     const label = t ? t.title : w.startsWith("writing:") ? "எழுது — Write" : null;
                     if (!label || (t?.listen && !voice)) return null;
                     return (

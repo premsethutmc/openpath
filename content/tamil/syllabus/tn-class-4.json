@@ -1,0 +1,116 @@
+{
+ "id": "tn-samacheer-tamil-class-4",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 4,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Samacheer Kalvi Tamil (TNSCERT), Classes 1-4: outcomes written by OpenPath on the textbook's letter, word and sentence progression; the class chapter lists were not read."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "g",
+   "name": "Grammar (இலக்கணம்)",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "Naming and doing words.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.noun-verb"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "Tense.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.tense"
+     ]
+    },
+    {
+     "id": "G3",
+     "text": "Question words.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.question-words"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "Opposites, same-meaning words, animal sounds.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.antonyms",
+      "tn.ta.c4.synonyms",
+      "tn.ta.c4.sounds"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens and picks the word heard.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.listen"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Kondrai Vendhan.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.kondrai"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads an information passage.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c4.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes a paragraph.",
+     "coverage": "covered",
+     "where": [
+      "writing:c4"
+     ]
+    }
+   ]
+  }
+ ]
+}

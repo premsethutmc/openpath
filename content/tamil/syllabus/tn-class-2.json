@@ -1,0 +1,116 @@
+{
+ "id": "tn-samacheer-tamil-class-2",
+ "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "class": 2,
+ "subject": "Tamil (first language)",
+ "source": {
+  "read": "Samacheer Kalvi Tamil textbook chapter lists (TNSCERT)",
+  "url": "https://www.tnschools.gov.in/",
+  "note": "Samacheer Kalvi Tamil (TNSCERT), Classes 1-4: outcomes written by OpenPath on the textbook's letter, word and sentence progression; the class chapter lists were not read."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads and forms uyirmei letters.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.uyirmei"
+     ]
+    },
+    {
+     "id": "R2",
+     "text": "Knows ஆய்தம்.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.aytham"
+     ]
+    },
+    {
+     "id": "R3",
+     "text": "Reads a short passage.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "Numbers, colours, days.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.numbers",
+      "tn.ta.c2.colours",
+      "tn.ta.c2.days"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g",
+   "name": "Grammar (இலக்கணம்)",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "One and many.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.plural"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens and picks the word heard.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.listen"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Aathichoodi.",
+     "coverage": "covered",
+     "where": [
+      "tn.ta.c2.aathichoodi"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes two or three sentences.",
+     "coverage": "covered",
+     "where": [
+      "writing:c2"
+     ]
+    }
+   ]
+  }
+ ]
+}
