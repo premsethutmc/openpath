@@ -8,7 +8,7 @@ import { Learner } from "../learner.ts";
 import { loadContent } from "../content.ts";
 import { MemoryRepo } from "../store.ts";
 import { testClock } from "../journey-sim.ts";
-import { syllabusPractice } from "./practice.ts";
+import { syllabusPractice, waitDays } from "./practice.ts";
 import { syllabusFor } from "./syllabus.ts";
 import { childSummary } from "../parent-view.ts";
 
@@ -61,4 +61,17 @@ test("SP-2 secure needs two days and four in five right on the latest; a grown-u
   now += 86_400_000;
   await l.recordGrammar([ans(true), ans(true), ans(true), ans(true)]);
   assert.equal(stage("G3"), "secure");
+});
+
+test("SP-3 the wait before a check doubles each time a check holds, and starts again when one fails", () => {
+  const at = (d: number) => new Date(Date.UTC(2026, 0, 1) + d * 86_400_000).toISOString();
+  const s = (d: number, held = true) => ({ first: at(d), last: at(d), held });
+  assert.equal(waitDays([s(0), s(1)], 1), 21);
+  assert.equal(waitDays([s(0), s(1), s(22)], 1), 42); // held after three weeks
+  assert.equal(waitDays([s(0), s(1), s(22), s(64)], 1), 84); // held after six
+  assert.equal(waitDays([s(0), s(1), s(10)], 1), 21); // practised again early: not a check
+  assert.equal(waitDays([s(0), s(1), s(22), s(64), s(150, false), s(151)], 1), 21); // a failed check starts again
+  let x = [s(0), s(1)];
+  for (let d = 1, w = 21; w < 168; w *= 2) x = [...x, s((d += w))];
+  assert.equal(waitDays(x, 1), 168); // never more than six months
 });
