@@ -1,6 +1,6 @@
 /** term-links@1: a paragraph whose terms can be tapped to open the earlier skill's own rule and example, in place. */
 import { useState } from "react";
-import { cardFor } from "../../../packages/learning/src/step-help";
+import { briefOf, cardFor } from "../../../packages/learning/src/step-help";
 import { linkTerms } from "../../../packages/learning/src/terms";
 import { classOfSkill } from "./StepCoach";
 
@@ -22,8 +22,8 @@ export function TermText({ text, competency }: { text: string; competency?: stri
       {card && (
         <aside className="coach-card term-card" aria-label={card.name}>
           <p className="eyebrow">From an earlier lesson: {card.name}</p>
-          {card.rule.map((t, i) => <p key={i}>{t}</p>)}
-          {card.example && <><p className="small muted">For example: {card.example.prompt}</p><ol className="recipe-steps">{card.example.steps.map((t, i) => <li key={i}>{t}</li>)}</ol></>}
+          <p>{briefOf(card).rule}</p>
+          {briefOf(card).example && <p className="small muted">For example: {briefOf(card).example}</p>}
           <button type="button" className="link" onClick={() => setOpen(null)}>Close</button>
         </aside>
       )}
