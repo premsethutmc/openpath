@@ -8,3 +8,11 @@
 - Core topics (plurals, articles, be verbs, have/has, agreement, past, irregular verbs, comparison, this/these, future, continuous) grew from 8–11 to about 20 sentences each (+129).
 
 Code: `logic/grammar-use/mastery.ts` (tests GM-1, GM-2).
+
+## Write it again, the simpler way, and fuller topics (21 Nov 2026)
+
+- **Write it again** (`kind: "rewrite"`): the learner sees a sentence with mistakes and writes the whole sentence correctly (the box starts with the sentence, to edit). Checked letter for letter against the accepted sentences; capitals and marks count, spaces are forgiven. At most 2 a level sitting. 76 sentences, levels 1–7.
+- **Another way to see it** (`simple` on every learn card): after a second miss in a row on a topic, the feedback adds the rule said a plainer way with one example, and the card that comes back leads with it. Tamil help users see it in Tamil (translated by the server's translate_help job).
+- Every topic now has at least 11 sentences (was 8); 1,123 sentences in all.
+
+Tests: GU-19, GU-20; e2e grammar-syllabus "Write a sentence again…".

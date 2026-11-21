@@ -38,7 +38,7 @@ test("WO-3 after a sitting, the topic to write about is one just practised (miss
   const s = new GrammarSitting(GRAMMAR, 2, learnt, ["have_has"]);
   for (let v = s.snapshot(), g = 0; v.phase !== "done" && g < 80; v = s.snapshot(), g++) {
     if (v.phase === "learn") s.learned();
-    else if (v.phase === "ask") v.choose ? s.choose(0) : v.spot ? s.spot(0) : v.fix ? s.fix(0, "x") : s.build(v.build!.tiles);
+    else if (v.phase === "ask") v.choose ? s.choose(0) : v.spot ? s.spot(0) : v.fix ? s.fix(0, "x") : v.rewrite ? s.rewrite("x") : s.build(v.build!.tiles);
     else s.next();
   }
   const d = s.snapshot().done!;
