@@ -161,8 +161,16 @@ async function addLearner(page, name, goal = /Understand grammar/) {
   await today(page);
 }
 
+/** Open a folded section (Progress keeps "Skill by skill" folded; Home keeps "School work" folded). */
+async function unfold(page, name) {
+  const fold = page.getByRole("button", { name });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+}
+
 const progressText = async (page) => {
   await page.getByRole("button", { name: "Progress", exact: true }).click();
+  await unfold(page, /^Skill by skill/);
   await page.locator(".overview").waitFor();
   return (await page.locator("main").innerText()).replace(/\d{4}-\d\d-\d\d/g, "DATE");
 };
@@ -205,6 +213,8 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await today(page);
   await shot(page, "check-intro");
   // My Words and My Books are offered to a pupil in a parent account too (e2e/parent-content.test.mjs follows them through)
+  await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Home" }).click();
+  await unfold(page, /^School work/);
   await page.getByRole("button", { name: "Add a word list" }).waitFor();
   await page.getByRole("button", { name: "Add a book" }).waitFor();
   arunId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Arun").id;
@@ -256,6 +266,7 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.getByRole("button", { name: "Back to today" }).click();
   // … progress is displayed
   await page.getByRole("button", { name: "Journey", exact: true }).click();
+  await unfold(page, /^Skill by skill/);
   await page.locator(".path li").first().waitFor();
   await shot(page, "journey");
   await fits(page);
@@ -301,6 +312,7 @@ test("two pupils of one parent keep separate records, and switching between them
   await signIn(page, PARENT);
   await addLearner(page, "Meera", /Get better at spelling/);
   await page.getByRole("button", { name: "Progress", exact: true }).click();
+  await unfold(page, /^Skill by skill/);
   await page.getByText("No answers yet", { exact: true }).waitFor();
   const pupils = (await api(page, "GET", "/pupils/")).json.pupils;
   assert.deepEqual(pupils.map((p) => p.display_name), ["Arun", "Meera"]);

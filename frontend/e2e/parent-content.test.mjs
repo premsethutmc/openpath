@@ -35,6 +35,15 @@ async function today(page) {
   await page.getByRole("heading", { name: "Today" }).waitFor();
 }
 
+/** My Words and My Books sit in Home's folded "School work" section: go Home and open it. */
+async function school(page) {
+  const nav = page.getByRole("navigation", { name: "Sections" });
+  if (await nav.count()) await nav.getByRole("button", { name: "Home" }).click();
+  const fold = page.getByRole("button", { name: /^School work/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+}
+
 let browser;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -111,6 +120,7 @@ test("My Words and My Books in a parent account: told where they are kept, saved
   await register(page, PARENT);
   await addLearner(page, "Zoe");
   zoeId = (await api(page, "GET", "/pupils/")).json.pupils.find((p) => p.display_name === "Zoe").id;
+  await school(page);
   await page.getByRole("button", { name: "Add a word list" }).click();
   // said plainly before anything is typed
   assert.match(await page.locator(".where-kept").innerText(), /saved in Zoe's record in your parent account, so they are on any device you sign in on\. Only your account can open them/);
@@ -146,6 +156,7 @@ test("My Words and My Books in a parent account: told where they are kept, saved
   assert.ok(answers.every((e) => e.source.type === "list" && e.source.id === list.list.id));
   // My Books: told where the text is kept; two spelling words and the vocabulary questions approved
   await page.getByRole("button", { name: "← Home" }).click();
+  await school(page);
   await page.getByRole("button", { name: "Add a book" }).click();
   assert.match(await page.locator(".where-kept").innerText(), /Books are saved in Zoe's record in your parent account/);
   await page.getByRole("button", { name: "Add a book" }).click();
@@ -181,10 +192,12 @@ test("another phone signed in to the same account sees the list, the book and th
   const second = await phone();
   await signIn(second.page, PARENT);
   await second.page.getByRole("button", { name: /Zoe/ }).click();
+  await school(second.page);
   await second.page.getByRole("button", { name: "Open My Words" }).click();
   assert.match(await second.page.locator(".word-lists li", { hasText: "Week 5" }).innerText(), /practised 3 of 3 · 3 of 4 right · 3 to review/);
   await shot(second.page, "2-second-phone");
   await second.page.getByRole("button", { name: "← Home" }).click();
+  await school(second.page);
   await second.page.getByRole("button", { name: "Open My Books" }).click();
   assert.match(await second.page.locator(".books li", { hasText: "The Lantern on the Hill" }).innerText(), /Approved: 2 spelling words · \d+ questions · spelling practised 2 of 2/);
   assert.deepEqual(second.errors, []);
@@ -203,6 +216,7 @@ test("deleting a list and a book in a parent account: gone from the server recor
   const stale = await phone();
   await signIn(stale.page, PARENT);
   await stale.page.getByRole("button", { name: /Zoe/ }).click();
+  await school(stale.page);
   await stale.page.getByRole("button", { name: "Open My Words" }).click();
   const staleCard = stale.page.locator(".word-lists li", { hasText: "Week 5" });
   await staleCard.waitFor();
@@ -210,6 +224,7 @@ test("deleting a list and a book in a parent account: gone from the server recor
   const first = await phone();
   await signIn(first.page, PARENT);
   await first.page.getByRole("button", { name: /Zoe/ }).click();
+  await school(first.page);
   await first.page.getByRole("button", { name: "Open My Words" }).click();
   await first.page.locator(".word-lists li", { hasText: "Week 5" }).getByRole("button", { name: "Delete" }).click();
   await first.page.getByText("No lists yet.").waitFor();
@@ -226,10 +241,12 @@ test("deleting a list and a book in a parent account: gone from the server recor
   assert.ok(!JSON.stringify((await api(first.page, "GET", `/pupils/${zoeId}/events/?subject=english`)).json.events).includes("because"));
   // opening Zoe again on that phone: the list is gone there too
   await stale.page.goto(URL); // the app reopens the learner it last showed, loading the record afresh
+  await school(stale.page);
   await stale.page.getByRole("button", { name: "Add a word list" }).click();
   await stale.page.getByText("No lists yet.").waitFor();
   // the book too: deleted on the first phone, and nothing of its text or approvals is left on the server
   await first.page.getByRole("button", { name: "← Home" }).click();
+  await school(first.page);
   await first.page.getByRole("button", { name: "Open My Books" }).click();
   await first.page.locator(".books li", { hasText: "The Lantern on the Hill" }).getByRole("button", { name: "Delete" }).click();
   await first.page.getByText("No books yet.").waitFor();

@@ -17,9 +17,9 @@ import { testClock } from "../journey-sim.ts";
 
 const back = (m: MapTask) => m.routes[0].moves.slice().reverse().map((x) => ({ dir: ({ N: "S", S: "N", E: "W", W: "E" } as const)[x.dir], blocks: x.blocks }));
 
-test("ST-1 content is sound: 22 notes passages (18 from the app's own reading texts), 4 charts, 3 maps", () => {
+test("ST-1 content is sound: 32 notes passages (18 from the app's own reading texts), 4 charts, 3 maps", () => {
   assert.deepEqual(studyProblems(STUDY), []);
-  assert.deepEqual([STUDY.notes.length, STUDY.notes.filter((n) => n.source).length, STUDY.charts.length, STUDY.maps.length], [22, 18, 4, 3]);
+  assert.deepEqual([STUDY.notes.length, STUDY.notes.filter((n) => n.source).length, STUDY.charts.length, STUDY.maps.length], [32, 18, 4, 3]);
   for (const n of STUDY.notes) assert.ok(n.text.length > 200 && words(n.summaries.right) <= 50, n.id);
   const bad = { ...STUDY, charts: [{ ...STUDY.charts[0], values: [1, 1, 2, 3] }], maps: [{ ...STUDY.maps[0], routes: [{ ...STUDY.maps[0].routes[0], to: "park" }] }] };
   assert.match(studyProblems(bad).join("\n"), /same height[\s\S]*does not reach/);
@@ -164,5 +164,15 @@ test("ST-9 the next task rotates the kinds; after the written charts and maps co
   for (const e of await repo.load("p-study")) assert.equal(eventProblem(e), null);
   assert.equal(picture(), before);
   const again = await Learner.open(c, repo, "p-study", clock);
-  assert.deepEqual(studySummary(again.studyRecords()), { tasks: 1, right: 1, asked: 1 });
+  assert.deepEqual(studySummary(again.studyRecords()), { tasks: 1, right: 1, asked: 1, strong: [], weak: [], own: { pieces: 1, passed: 3, of: 3 } });
+});
+
+test("ST-10 the kind going worst comes next; strengths and weaknesses are named for the parent", () => {
+  const rec = (task: string, kind: "notes" | "chart" | "map", right: boolean[], own?: { words: number; passed: number; of: number }): StudyRecord => ({ type: "study", task, kind, answers: right.map((correct) => ({ skill: kind === "notes" ? "main_points" : kind === "chart" ? "chart_read" : "map_follow", correct })), ...(own ? { own } : {}) });
+  const records = [rec("notes.neem", "notes", [true, true, true], { words: 30, passed: 4, of: 4 }), rec("chart.trees", "chart", [true, true, true, true]), rec("map.town", "map", [false, false, true])];
+  assert.equal(nextStudy(records)?.kind, "map", "maps are going worst");
+  assert.equal(nextStudy([records[1], rec("map.village", "map", [true, true, true])])?.kind, "notes", "a kind not yet tried comes before kinds going well");
+  const s = studySummary(records);
+  assert.deepEqual([s.strong.sort(), s.weak], [["chart_read", "main_points"], ["map_follow"]]);
+  assert.deepEqual(s.own, { pieces: 1, passed: 4, of: 4 });
 });

@@ -159,7 +159,7 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
 test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app, and practice starts on a line's topics", async () => {
   const { context, page, errors, foreign, fits } = await start("Syllabus");
   await page.getByRole("heading", { name: "School English by board and class" }).waitFor();
-  await page.getByText("Classes ICSE 1 to 8, CBSE 1 to 12, Tamil Nadu 1 to 12: 633 lines").waitFor();
+  await page.getByText("Classes ICSE 1 to 8, CBSE 1 to 12, Tamil Nadu 1 to 12: 630 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   await page.getByText("21 in the app · 0 partly · 12 with a grown-up · 0 not yet (of 33)").waitFor();

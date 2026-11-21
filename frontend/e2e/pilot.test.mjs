@@ -75,6 +75,10 @@ test("pilot build with nothing approved: no question, lesson, practice or journe
 
   await page.getByRole("navigation", { name: "Sections" }).getByRole("button", { name: "Journey" }).click();
   await page.getByRole("heading", { name: /Your learning path/ }).waitFor();
+  {
+    const fold = page.getByRole("button", { name: /^Skill by skill/ });
+    if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+  }
   assert.equal(await page.locator(".path button").count(), 0, "no lesson, practice or check can be started from the journey");
   await page.getByText(/only the starting check and the spelling check are open/).waitFor();
   await shot(page, "2-journey");

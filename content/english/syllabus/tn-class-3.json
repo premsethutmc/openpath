@@ -6,40 +6,42 @@
   "subject": "English",
   "title": "Tamil Nadu State Board English, Class III",
   "source": {
-    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
-    "url": "https://www.tntextbooks.in/",
+    "read": "SCERT Tamil Nadu, TNCF 2017 syllabus, English language, Standards 1 to 10 (published in the Tamil Nadu Government Gazette), read through a copy hosted by an exam-coaching site",
+    "url": "https://professoracademy.com/wp-content/uploads/2024/02/SGT-English-Syllabus.pdf",
     "official": false,
-    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "note": "UNOFFICIAL COPY OF AN OFFICIAL SOURCE. The state's own syllabus (TNCF 2017, marked draft), read through a text summary of a third-party copy of the gazette pages; the Standard 9 page was only partly readable. The Samacheer Kalvi textbooks follow it term by term.",
     "accessed": "2026-11-21"
   },
   "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
   "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
   "strands": [
     {
-      "id": "listening-speaking",
-      "name": "Listening and Speaking",
-      "pages": "Units",
+      "id": "listening",
+      "name": "Listening",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "LS1",
-          "text": "Listens to a story or passage and answers questions.",
+          "id": "L1",
+          "text": "Listens to songs, stories, folk tales and poems and follows what happens.",
           "coverage": "covered",
           "where": "listen"
         },
         {
-          "id": "LS2",
-          "text": "Says poems with expression.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-3",
-            "outcome": "LS4"
-          }
-        },
+          "id": "L2",
+          "text": "Follows the order of events and cause and effect in a story heard.",
+          "coverage": "covered",
+          "where": "listen"
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "name": "Speaking",
+      "pages": "TNCF 2017",
+      "outcomes": [
         {
-          "id": "LS3",
-          "text": "Describes a person, place or picture.",
+          "id": "S1",
+          "text": "Describes people, places, animals and things with three or four details.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
@@ -49,13 +51,13 @@
           }
         },
         {
-          "id": "LS4",
-          "text": "Takes part in role play.",
+          "id": "S2",
+          "text": "Holds a conversation of two or three turns, using polite forms.",
           "coverage": "guided",
           "where": "guided",
           "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
           "tasks": {
-            "syllabus": "icse-cisce-english-class-3",
+            "syllabus": "icse-cisce-english-class-2",
             "outcome": "LS6"
           }
         }
@@ -64,41 +66,39 @@
     {
       "id": "reading",
       "name": "Reading",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "R1",
-          "text": "Reads a lesson and answers questions on it.",
+          "text": "Reads short illustrated texts, including information texts.",
           "coverage": "covered",
           "where": "reading"
         },
         {
           "id": "R2",
-          "text": "Reads aloud with clear sounds and pauses.",
-          "coverage": "guided",
-          "where": "guided",
-          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
-          "tasks": {
-            "syllabus": "icse-cisce-english-class-3",
-            "outcome": "RW2"
-          }
+          "text": "Puts words in alphabetical order and uses a picture dictionary.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "alphabetical"
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Reads silently with understanding.",
+          "coverage": "covered",
+          "where": "reading"
         }
       ]
     },
     {
       "id": "writing",
       "name": "Writing",
-      "pages": "Units",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
           "id": "W1",
-          "text": "Writes sentences from dictation.",
-          "coverage": "covered",
-          "where": "listening"
-        },
-        {
-          "id": "W2",
-          "text": "Writes a short paragraph from picture or word clues.",
+          "text": "Writes two or three connected sentences from a picture.",
           "coverage": "guided",
           "where": "guided",
           "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
@@ -108,68 +108,45 @@
           }
         },
         {
+          "id": "W2",
+          "text": "Writes simple sentences from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
           "id": "W3",
-          "text": "Uses capital letters, full stops and question marks.",
+          "text": "Frames simple questions.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "capitals",
             "questions"
           ]
         }
       ]
     },
     {
-      "id": "vocabulary-grammar",
-      "name": "Vocabulary and Grammar",
-      "pages": "Units",
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "TNCF 2017",
       "outcomes": [
         {
-          "id": "VG1",
-          "text": "Uses nouns, pronouns, verbs and describing words.",
+          "id": "GV1",
+          "text": "Uses past and present verbs in basic sentences.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "parts_of_speech",
-            "pronouns"
+            "past",
+            "agreement"
           ]
         },
         {
-          "id": "VG2",
-          "text": "Uses the simple present and the simple past.",
+          "id": "GV2",
+          "text": "Uses adjectives of colour, shape and size.",
           "coverage": "covered",
           "where": "grammar",
           "topics": [
-            "agreement",
-            "past"
-          ]
-        },
-        {
-          "id": "VG3",
-          "text": "Uses a, an and the, and one and many.",
-          "coverage": "covered",
-          "where": "grammar",
-          "topics": [
-            "articles",
-            "plurals"
-          ]
-        },
-        {
-          "id": "VG4",
-          "text": "Uses opposites and words of the same meaning.",
-          "coverage": "covered",
-          "where": "grammar",
-          "topics": [
-            "synonyms_antonyms"
-          ]
-        },
-        {
-          "id": "VG5",
-          "text": "Puts words in alphabetical order.",
-          "coverage": "covered",
-          "where": "grammar",
-          "topics": [
-            "alphabetical"
+            "adjective_kinds",
+            "parts_of_speech"
           ]
         }
       ]

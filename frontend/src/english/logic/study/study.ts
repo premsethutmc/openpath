@@ -556,13 +556,25 @@ export function studyProblems(s: Study): string[] {
 /** One task done: right or wrong for each step, and, if one was written, how the learner's own piece was marked. */
 export type StudyRecord = { type: "study"; task: string; kind: StudyKind; answers: { skill: StudySkill; correct: boolean }[]; own?: { words: number; passed: number; of: number } };
 
+/** How well each kind of task goes: share of steps right and of own-writing checks met (null before any). */
+export function kindStrength(records: readonly StudyRecord[], k: StudyKind): number | null {
+  const rs = records.filter((r) => r.kind === k);
+  const steps = rs.flatMap((r) => r.answers);
+  const own = rs.flatMap((r) => (r.own ? [r.own] : []));
+  const asked = steps.length + own.reduce((a, o) => a + o.of, 0);
+  if (!asked) return null;
+  return (steps.filter((a) => a.correct).length + own.reduce((a, o) => a + o.passed, 0)) / asked;
+}
+
 /**
- * The next task: one not yet done, the kind met least first, the lowest level first. Charts and maps never run out:
- * when the written ones are done, the next generated one comes ("chart.g1", "chart.g2", …).
+ * The next task: one not yet done. The kind that is going worst comes first (a kind not yet tried counts as
+ * middling, so every kind is met), then the kind met least; within a kind, the lowest level first. Charts and maps
+ * never run out: when the written ones are done, the next generated one comes ("chart.g1", "chart.g2", …).
  */
 export function nextStudy(records: readonly StudyRecord[], kind?: StudyKind): StudyTask | null {
   const done = new Set(records.map((r) => r.task));
   const met = (k: StudyKind) => records.filter((r) => r.kind === k).length;
+  const need = (k: StudyKind) => kindStrength(records, k) ?? 0.6;
   const fresh = (k: "chart" | "map") => {
     let n = 1;
     while (done.has(`${k}.g${n}`)) n++;
@@ -574,11 +586,37 @@ export function nextStudy(records: readonly StudyRecord[], kind?: StudyKind): St
       const left = STUDY_TASKS.filter((t) => t.kind === k && !done.has(t.id)).sort((a, b) => a.level - b.level || (a.id < b.id ? -1 : 1));
       return left.length ? [left[0]] : k === "notes" ? [] : [fresh(k)];
     });
-  return candidates.sort((a, b) => met(a.kind) - met(b.kind) || a.level - b.level || (a.id < b.id ? -1 : 1))[0] ?? null;
+  return candidates.sort((a, b) => need(a.kind) - need(b.kind) || met(a.kind) - met(b.kind) || a.level - b.level || (a.id < b.id ? -1 : 1))[0] ?? null;
 }
-export function studySummary(records: readonly StudyRecord[]): { tasks: number; right: number; asked: number } {
+
+export interface StudySummary {
+  tasks: number;
+  right: number;
+  asked: number;
+  /** Skills with three or more answers, four in five right or better. */
+  strong: StudySkill[];
+  /** Skills with two or more answers, under half right, worst first. */
+  weak: StudySkill[];
+  /** The learner's own pieces: how many, and the rule checks met in all. */
+  own: { pieces: number; passed: number; of: number };
+}
+export function studySummary(records: readonly StudyRecord[]): StudySummary {
   const all = records.flatMap((r) => r.answers);
-  return { tasks: records.length, right: all.filter((a) => a.correct).length, asked: all.length };
+  const by = new Map<StudySkill, { right: number; n: number }>();
+  for (const a of all) {
+    const x = by.get(a.skill) ?? { right: 0, n: 0 };
+    by.set(a.skill, { right: x.right + (a.correct ? 1 : 0), n: x.n + 1 });
+  }
+  const share = (k: StudySkill) => by.get(k)!.right / by.get(k)!.n;
+  const own = records.flatMap((r) => (r.own ? [r.own] : []));
+  return {
+    tasks: records.length,
+    right: all.filter((a) => a.correct).length,
+    asked: all.length,
+    strong: [...by.keys()].filter((k) => by.get(k)!.n >= 3 && share(k) >= 0.8),
+    weak: [...by.keys()].filter((k) => by.get(k)!.n >= 2 && share(k) < 0.5).sort((a, b) => share(a) - share(b)),
+    own: { pieces: own.length, passed: own.reduce((a, o) => a + o.passed, 0), of: own.reduce((a, o) => a + o.of, 0) },
+  };
 }
 
 export interface StudyView {
