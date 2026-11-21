@@ -2373,7 +2373,7 @@
    "questions": [
     {
      "id": "tn.ta.c2.days.1",
-     "prompt": "«ஞாயிறு» — அடுத்த கிழமை எது?",
+     "prompt": "«ஞாயிறு» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "புதன்",
@@ -2384,7 +2384,7 @@
     },
     {
      "id": "tn.ta.c2.days.2",
-     "prompt": "«திங்கள்» — அடுத்த கிழமை எது?",
+     "prompt": "«திங்கள்» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "செவ்வாய்",
@@ -2395,7 +2395,7 @@
     },
     {
      "id": "tn.ta.c2.days.3",
-     "prompt": "«செவ்வாய்» — அடுத்த கிழமை எது?",
+     "prompt": "«செவ்வாய்» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "திங்கள்",
@@ -2406,7 +2406,7 @@
     },
     {
      "id": "tn.ta.c2.days.4",
-     "prompt": "«புதன்» — அடுத்த கிழமை எது?",
+     "prompt": "«புதன்» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "சனி",
@@ -2417,7 +2417,7 @@
     },
     {
      "id": "tn.ta.c2.days.5",
-     "prompt": "«வியாழன்» — அடுத்த கிழமை எது?",
+     "prompt": "«வியாழன்» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "ஞாயிறு",
@@ -2428,7 +2428,7 @@
     },
     {
      "id": "tn.ta.c2.days.6",
-     "prompt": "«வெள்ளி» — அடுத்த கிழமை எது?",
+     "prompt": "«வெள்ளி» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "சனி",
@@ -2439,7 +2439,7 @@
     },
     {
      "id": "tn.ta.c2.days.7",
-     "prompt": "«சனி» — அடுத்த கிழமை எது?",
+     "prompt": "«சனி» — அதற்கு அடுத்த நாள் எது?",
      "promptEn": "Which day comes next?",
      "options": [
       "ஞாயிறு",
@@ -7158,7 +7158,7 @@
     },
     {
      "id": "tn.ta.c5.reading.3",
-     "prompt": "மரங்கள் எது பெய்ய உதவுகின்றன?",
+     "prompt": "மரங்கள் பெய்ய உதவுவது எது?",
      "promptEn": "Answer from the passage.",
      "options": [
       "வெயில்",
