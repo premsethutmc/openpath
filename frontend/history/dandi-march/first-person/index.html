@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Walk to Dandi | OpenPath</title>
+<link rel="stylesheet" href="./walk.css">
+</head>
+<body>
+<main>
+  <header><span>OPENPATH <small> / LIVING HISTORY</small></span><button id="sound" aria-pressed="true">Sound on</button></header>
+  <section id="stage" class="stage" aria-label="Walk to Dandi">
+    <video id="film" playsinline preload="metadata" aria-label="Archival footage of Gandhi and the Salt March">
+      <source src="./assets/opening.mp4" type='video/mp4; codecs="avc1.64001e, mp4a.40.2"'>
+      <source src="./assets/opening.webm" type='video/webm; codecs="vp9, opus"'>
+    </video>
+    <div id="launch" class="launch">
+      <p>INDIA · 1930</p><h1>Walk to Dandi</h1>
+      <button id="start" class="light">Play opening</button>
+      <button id="skip" class="text">Skip to the march</button>
+    </div>
+    <div id="scene" class="scene" hidden>
+      <div id="view" class="view" role="img" aria-label="At a child’s eye level, a line of marchers on a dusty road outside Aslali. A man walks on your right.">
+        <div class="plate"></div>
+      </div>
+      <div class="location"><strong>Approaching Aslali</strong><span>12 March 1930 · Reconstruction</span></div>
+    </div>
+  </section>
+  <section id="toolbar" aria-label="Take part in the march">
+    <div id="film-controls" hidden>
+      <button id="pause">Pause film</button>
+      <button id="enter">Skip to the march</button>
+    </div>
+    <div id="road-controls" hidden>
+    <div id="caption" class="caption" role="status" aria-atomic="true" hidden><strong>Marcher</strong><p id="line"></p></div>
+      <p id="hint" role="status">Walk or turn to look at the marcher beside you.</p>
+      <div class="row">
+        <button id="turn" aria-pressed="false">Look right →</button>
+        <button id="walk" class="light" aria-pressed="false">Walk</button>
+        <button id="ask" hidden>Why salt?</button>
+      </div>
+      <button id="replay" class="text">Replay opening</button>
+    </div>
+  </section>
+  <details>
+    <summary>Archive and reconstruction</summary>
+    <p>The opening uses genuine <a href="https://commons.wikimedia.org/wiki/File:Salt_March.ogv">1930 Salt March footage</a> from the GandhiServe/Wikimedia Commons compilation, listed there as public domain in India and the US. The score and footsteps are modern. The edit does not identify a precise filming location.</p>
+    <p>After the cut, you are an imagined local child. The companion, the photographic-style reconstruction (generated illustration), and the synthesized voice are not archival. Gandhi does not speak. Aslali was the march’s first night halt. Gandhi’s opposition to the salt tax included its burden on poor families.</p>
+    <p><a href="https://www.gandhiheritageportal.org/dandi-march-details">March chronology</a> · <a href="https://www.mkgandhi.org/ebks/Mahatma-Gandhi-Sushila-Nayar-volume6.pdf">Account quoting Gandhi’s 2 March letter</a></p>
+  </details>
+  <footer>OpenPath · Founded and created by Premkumar Sethuraman</footer>
+</main>
+<audio id="invitation" preload="auto" src="./assets/walk.mp3"></audio>
+<audio id="answer" preload="auto" src="./assets/salt.mp3"></audio>
+<script type="module" src="./walk.mjs"></script>
+</body>
+</html>

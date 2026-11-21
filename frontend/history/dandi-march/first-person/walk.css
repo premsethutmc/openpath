@@ -1,0 +1,48 @@
+:root{color-scheme:dark;font-family:system-ui,sans-serif;color:#f1ecdf;background:#100f0e}
+*{box-sizing:border-box}
+body{margin:0}
+main{max-width:72rem;margin:auto}
+[hidden]{display:none!important}
+header,footer,details,#toolbar{padding-inline:clamp(.85rem,3vw,1.8rem)}
+header{height:3.7rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.72rem;letter-spacing:.16em;font-weight:700}
+header small{color:#c7bbab;font-size:inherit}
+button{min-height:44px;padding:.6rem .85rem;color:inherit;border:1px solid #897d6d;background:#24201b;border-radius:5px;font:inherit;font-weight:650;cursor:pointer}
+button:hover{background:#332d25}
+button:focus-visible,summary:focus-visible,a:focus-visible,.stage:focus-visible{outline:2px solid #f3d490;outline-offset:3px}
+button.light{background:#e9dfc9;color:#221d16;border-color:#e9dfc9}
+button.text{border-color:transparent;background:none;color:#ded3c0;text-decoration:underline;text-underline-offset:.2em}
+.stage{position:relative;isolation:isolate;overflow:hidden;background:#080807;height:clamp(20rem,56vw,39rem)}
+video,.scene,.view,.plate,.launch{position:absolute;inset:0;width:100%;height:100%}
+video{object-fit:contain}
+.launch{display:grid;place-content:center;justify-items:center;gap:.8rem;text-align:center;background:radial-gradient(ellipse at center,#24211a,#090909 70%)}
+.launch h1{font:clamp(2.7rem,9vw,6.6rem)/1 Georgia,serif;margin:0 0 .65rem;font-weight:400}
+.launch p,.location span{font-size:.71rem;letter-spacing:.14em;text-transform:uppercase}
+.view{overflow:hidden;touch-action:pan-y;cursor:ew-resize;background:#322f29}
+.plate{background-image:url('./assets/aslali.webp');background-size:cover;background-position:center;transition:transform .85s cubic-bezier(.18,.6,.23,1),background-position .85s cubic-bezier(.18,.6,.23,1);transform:scale(calc(1.10 + var(--approach,0))) translateX(8%);pointer-events:none}
+.view[data-look="right"] .plate{transform:scale(1.13) translateX(-3%);background-position:75% center}
+.view[data-walking="true"]{animation:sway 1.25s ease-in-out infinite alternate}
+.plate::after{content:"";position:absolute;inset:0;background:url("./assets/salt.webp") center / cover;opacity:0;transition:opacity .2s linear}
+.view[data-answer="true"] .plate::after{opacity:1;background-position:inherit}
+.view[data-answer="true"] .plate{transform:scale(1.18) translate(-3%,-1%);background-position:84% center}
+.scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,#0c090988,transparent 26%,transparent 65%,#08080844)}
+.location{z-index:1;position:absolute;top:1.12rem;left:clamp(.85rem,3vw,1.8rem);text-shadow:0 1px 4px #000;pointer-events:none}
+.location strong,.location span{display:table;background:#151310dd;padding:.18rem .4rem}
+.location strong{font:500 1.35rem Georgia,serif}
+.caption{max-width:42rem;margin:0 0 .6rem;background:#151310f0;border-left:3px solid #d6b981;padding:.65rem .9rem;pointer-events:none}
+.caption strong{font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:#e5c898}
+.caption p{margin:.22rem 0 0;line-height:1.38}
+#toolbar{padding-top:.8rem}
+#film-controls,.row{display:flex;flex-wrap:wrap;gap:.48rem}
+#hint{font-size:.88rem;color:#e1d6c5;margin:.1rem 0 .65rem}
+details{margin-top:1rem;color:#cabfab;line-height:1.55;font-size:.86rem}
+summary{width:fit-content;cursor:pointer;padding-block:.5rem}
+a{color:#e8c797}
+footer{font-size:.76rem;color:#c5bcae;padding-block:1.2rem}
+@keyframes sway{from{transform:translateY(-.8px) scale(1.014)}to{transform:translateY(1.2px) scale(1.019)}}
+@media(max-width:680px){
+ .stage{height:clamp(19rem,85vw,28rem)}
+ .plate{background-position:10% center;transform:scale(calc(1.04 + var(--approach,0))) translateX(2%)}
+ .view[data-look="right"] .plate{background-position:96% center;transform:scale(1.03)}
+ .view[data-answer="true"] .plate{background-position:97% center;transform:scale(1.075)}
+}
+@media(prefers-reduced-motion:reduce){.view,.plate,.plate::after{transition:none!important;animation:none!important}}

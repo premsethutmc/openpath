@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'frontend/history/**'
-      - 'frontend/e2e/history-dandi.test.mjs'
+      - 'frontend/e2e/history-dandi*.test.mjs'
       - '.github/workflows/history-dandi.yml'
   push:
     branches: ['feat/history-dandi-march']
@@ -28,3 +28,6 @@ jobs:
       - run: node --test history/dandi-march/story.test.mjs
       - run: npx playwright install --with-deps chromium
       - run: node --test --test-timeout=40000 e2e/history-dandi.test.mjs
+
+      - name: Cinematic first-person cut
+        run: node --test --test-timeout=40000 e2e/history-dandi-first-person.test.mjs
