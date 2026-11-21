@@ -85,7 +85,7 @@ def execute(task, request, user_id, *, transport=llm.urllib_transport):
         if not isinstance(request, dict) or set(request) != {'task', 'text', 'checked'}:
             raise GatewayDenied('Invalid writing feedback request')
         config = writing_feedback._config()
-        system = writing_feedback.prompt()
+        system = writing_feedback.prompt(request['task'])
         user = writing_feedback.user_message(request['task'], request['text'], request['checked'])
     else:
         from family import word_problem

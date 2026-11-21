@@ -94,4 +94,5 @@ The Tamil home (`/tamil/` on the family site, the **Tamil** tile on the subject 
 - `tools/tamil/build_icse.py` generates `content/tamil/icse.v1.json` from small OpenPath-authored banks (letters, words, grammar rules), quoted classics that are public domain (Thirukkural, Avvaiyar’s Aathichoodi and Kondrai Vendhan, Bharathiyar) and one OpenPath-written reading passage per class. No publisher text. CI runs it with `--check`.
 - `packages/tamil/src/icse.ts`: types, answer check (NFC), rounds (missed first, a missed question returns once in the same round), progress and `validateCourse()`.
 - `frontend/src/tamil/Course.tsx`: class → topics → teaching card → practice; the feedback box on every screen. Progress stays on the device (`openpath.tamil.icse.v1`).
-- Not covered yet: letter and essay writing (need marking), audio.
+- icse-tamil@2: per-class CISCE syllabus inventory (`content/tamil/syllabus/`, as English), listening with the device Tamil voice (Classes 1–4), writing tasks per class with AI feedback through the English writing-feedback endpoint (same consent and 3 a week), and progress kept in the learner account (event subject `tamil`) when signed in.
+- Not here: the school's prescribed textbook (copyrighted), speaking (done with a grown-up).

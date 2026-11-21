@@ -163,3 +163,24 @@ class WritingFeedbackTests(TestCase):
         self.assertEqual(other.post(self.url, {"task": TASK, "text": PIECE, "checked": []}, format="json").status_code, 404)
         self.assertEqual(other.post(f"{self.url}consent/", {"granted": True}, format="json").status_code, 404)
         self.assertIn(APIClient().get(self.url).status_code, (401, 403))
+
+
+
+@override_settings(**ON)
+def _tamil_task_counts_tamil_words_and_uses_the_tamil_prompt(self):
+    """icse-tamil@2: the Tamil course's tasks use the same endpoint, limits and consent, with Tamil word counts and the Tamil prompt."""
+    t = self.use(reply(GOOD))
+    self.agree()
+    self.assertEqual(self.ask(text="என் பள்ளி பெரியது.", task="ta.c2.w1", checked=()).status_code, 400)  # 3 words, at least 8 asked
+    piece = "என் பள்ளி மதுரையில் உள்ளது. அங்கே பெரிய மைதானம் உள்ளது. என் ஆசிரியர் மிகவும் அன்பானவர்."
+    r = self.ask(text=piece, task="ta.c2.w1", checked=())
+    self.assertEqual(r.status_code, 200, r.content)
+    sent = json.dumps(t.seen[0][2], ensure_ascii=False)
+    self.assertIn("second language", sent)
+    self.assertIn("பள்ளி", sent)
+    self.assertEqual(wf.word_count("ta.c2.w1", piece), 12)
+    self.assertEqual(wf.word_count(TASK, PIECE), 20)
+    self.assertEqual(self.c.get(self.url).json()["left"], 2)  # one of the same three a week
+
+
+WritingFeedbackTests.test_tamil_task_counts_tamil_words_and_uses_the_tamil_prompt = _tamil_task_counts_tamil_words_and_uses_the_tamil_prompt

@@ -270,6 +270,43 @@ PASSAGES = [
       ("ஒவ்வொரு அதிகாரத்திலும் எத்தனை குறள்கள்?", "பத்து", "ஏழு", "நூறு")]),
 ]
 
+
+# writing tasks: the free on-device check counts words; AI feedback (3 pieces a learner a week) judges the three "look" points
+WRITING = [
+    (1, "w1", "படங்களின் பெயர்கள்", "Name the pictures", "🐘 🐟 🌸 🏠 — இந்தப் படங்களின் பெயர்களைத் தமிழில் எழுது.", "Write the Tamil names of these pictures.", "words", 3, 10,
+     ["நான்கு படங்களுக்கும் பெயர் எழுதியது", "எழுத்துகள் சரியாக உள்ளன", "ஒவ்வொரு சொல்லும் தனித்தனியாக உள்ளது"]),
+    (2, "w1", "என் பள்ளி", "My school", "உன் பள்ளியைப் பற்றி இரண்டு மூன்று வாக்கியங்கள் எழுது.", "Write two or three sentences about your school.", "sentences", 8, 30,
+     ["பள்ளியைப் பற்றியே எழுதியது", "இரண்டு வாக்கியங்களாவது உள்ளன", "ஒவ்வொரு வாக்கியமும் முற்றுப்புள்ளியுடன் முடிகிறது"]),
+    (3, "w1", "என் நண்பன் / நண்பி", "My friend", "உன் நண்பனைப் (நண்பியைப்) பற்றி நான்கு வாக்கியங்கள் எழுது: பெயர், எப்படி இருப்பார், சேர்ந்து என்ன செய்வீர்கள்.", "Write four sentences about your friend.", "sentences", 15, 50,
+     ["நண்பரின் பெயரும் ஒரு குணமும் உள்ளன", "சேர்ந்து செய்வதைச் சொல்கிறது", "வாக்கியங்கள் முழுமையாக உள்ளன"]),
+    (4, "w1", "எனக்குப் பிடித்த பண்டிகை", "My favourite festival", "உனக்குப் பிடித்த பண்டிகையைப் பற்றி ஒரு பத்தி எழுது: எப்போது, எப்படிக் கொண்டாடுவீர்கள், ஏன் பிடிக்கும்.", "Write a paragraph about your favourite festival.", "paragraph", 25, 80,
+     ["பண்டிகை எப்போது என்று சொல்கிறது", "எப்படிக் கொண்டாடுவார்கள் என்று விளக்குகிறது", "ஏன் பிடிக்கும் என்று ஒரு காரணம் தருகிறது"]),
+    (5, "w1", "எனக்குப் பிடித்த விளையாட்டு", "My favourite game", "உனக்குப் பிடித்த விளையாட்டைப் பற்றி ஒரு பத்தி எழுது.", "Write a paragraph about your favourite game.", "paragraph", 40, 120,
+     ["விளையாட்டின் பெயரும் எப்படி விளையாடுவது என்பதும் உள்ளன", "ஏன் பிடிக்கும் என்று சொல்கிறது", "கருத்துகள் வரிசையாக உள்ளன"]),
+    (5, "w2", "பிறந்தநாள் அழைப்புக் கடிதம்", "Letter: a birthday invitation", "உன் பிறந்தநாள் விழாவுக்கு நண்பனை அழைத்து ஒரு கடிதம் எழுது.", "Write a letter inviting a friend to your birthday.", "letter", 40, 120,
+     ["கடிதத்தின் அமைப்பு: இடம், நாள், விளி, முடிப்பு", "எப்போது, எங்கே என்று தெளிவாகச் சொல்கிறது", "அன்புடன் அழைக்கும் தொனி உள்ளது"]),
+    (6, "w1", "மரம் நடுவோம்", "Let us plant trees", "«மரம் நடுவோம்» என்ற தலைப்பில் ஒரு சிறு கட்டுரை எழுது.", "Write a short essay: Let us plant trees.", "essay", 60, 160,
+     ["மரங்களின் பயன்களைச் சொல்கிறது", "நாம் என்ன செய்யலாம் என்று சொல்கிறது", "தொடக்கம், உடல், முடிவு உள்ளன"]),
+    (6, "w2", "தாத்தாவுக்குக் கடிதம்", "Letter to grandfather", "விடுமுறையில் நீ செய்ததைப் பற்றித் தாத்தாவுக்குக் கடிதம் எழுது.", "Write to your grandfather about your holidays.", "letter", 50, 150,
+     ["உறவுமுறைக் கடித அமைப்பு உள்ளது", "விடுமுறையில் செய்தவை விளக்கப்பட்டுள்ளன", "நலம் விசாரித்து முடிக்கிறது"]),
+    (7, "w1", "நான் விரும்பும் தலைவர்", "A leader I admire", "நீ விரும்பும் ஒரு தலைவரைப் பற்றிக் கட்டுரை எழுது.", "Write an essay on a leader you admire.", "essay", 80, 200,
+     ["தலைவரின் வாழ்க்கையிலிருந்து உண்மைகள் தருகிறது", "ஏன் விரும்புகிறாய் என்று விளக்குகிறது", "பத்திகளாகப் பிரித்து எழுதியுள்ளது"]),
+    (7, "w2", "விடுப்புக் கடிதம்", "Leave letter", "இரண்டு நாள் விடுப்பு கேட்டு வகுப்பாசிரியருக்குக் கடிதம் எழுது.", "Write to your class teacher asking for two days' leave.", "letter", 50, 140,
+     ["முறைசார் கடித அமைப்பு: அனுப்புநர், பெறுநர், பொருள்", "காரணமும் நாட்களும் தெளிவாக உள்ளன", "பணிவான சொற்களைப் பயன்படுத்துகிறது"]),
+    (8, "w1", "சுற்றுச்சூழல் பாதுகாப்பு", "Protecting the environment", "«சுற்றுச்சூழல் பாதுகாப்பு» என்ற தலைப்பில் கட்டுரை எழுது.", "Write an essay on protecting the environment.", "essay", 100, 250,
+     ["சிக்கல்களைச் சான்றுடன் சொல்கிறது", "தீர்வுகளைத் தருகிறது", "முன்னுரை, பொருள், முடிவுரை உள்ளன"]),
+    (8, "w2", "புகார்க் கடிதம்", "Letter of complaint", "உன் தெருவில் குப்பை அகற்றப்படாததைப் பற்றி நகராட்சி ஆணையருக்குக் கடிதம் எழுது.", "Write to the municipal commissioner about uncleared garbage.", "letter", 80, 200,
+     ["முறைசார் கடித அமைப்பு உள்ளது", "சிக்கலைத் தெளிவாக விளக்குகிறது", "என்ன செய்ய வேண்டும் என்று பணிவாகக் கேட்கிறது"]),
+    (9, "w1", "மறக்க முடியாத நாள்", "A day I cannot forget", "உன் வாழ்வில் மறக்க முடியாத ஒரு நாளைப் பற்றி எழுது (கதை வடிவில்).", "Write about a day you cannot forget, as a narrative.", "composition", 150, 350,
+     ["நிகழ்வுகள் காலவரிசையில் உள்ளன", "உணர்வுகளையும் விவரங்களையும் காட்டுகிறது", "பொருத்தமான முடிவு உள்ளது"]),
+    (9, "w2", "நூலகம் வேண்டிக் கடிதம்", "Letter asking for a library", "உன் ஊரில் ஒரு நூலகம் அமைக்க வேண்டி மாவட்ட ஆட்சியருக்குக் கடிதம் எழுது.", "Write to the District Collector asking for a library.", "letter", 100, 250,
+     ["முறைசார் கடித அமைப்பு முழுமையாக உள்ளது", "தேவைக்கான காரணங்களைத் தருகிறது", "கோரிக்கை தெளிவாகவும் பணிவாகவும் உள்ளது"]),
+    (10, "w1", "இணையத்தின் நன்மை தீமைகள்", "The internet: good and bad", "«இணையத்தின் நன்மை தீமைகள்» என்ற தலைப்பில் கட்டுரை எழுது.", "Write an essay: the good and bad of the internet.", "composition", 200, 400,
+     ["நன்மைகளையும் தீமைகளையும் சான்றுடன் சொல்கிறது", "சொந்தக் கருத்தை முடிவில் தருகிறது", "பத்திகள் ஒழுங்காக இணைந்துள்ளன"]),
+    (10, "w2", "பாராட்டுக் கடிதம்", "Letter of appreciation", "போட்டியில் வென்ற நண்பனைப் பாராட்டிக் கடிதம் எழுது.", "Write a letter congratulating a friend who won a competition.", "letter", 80, 200,
+     ["உறவுமுறைக் கடித அமைப்பு உள்ளது", "எதற்காகப் பாராட்டுகிறாய் என்று தெளிவாக உள்ளது", "உணர்வும் வாழ்த்தும் உள்ளன"]),
+]
+
 # ---------------------------------------------------------------- question helpers
 class Topic:
     def __init__(self, cls, tid, title, title_en, teach_ta, teach_en, examples):
@@ -278,7 +315,7 @@ class Topic:
         self.data = {"id": self.id, "class": cls, "title": title, "titleEn": title_en,
                      "teach": {"ta": teach_ta, "en": teach_en, "examples": examples}, "questions": []}
 
-    def q(self, prompt, answer, distractors, prompt_en, why="", n=3):
+    def q(self, prompt, answer, distractors, prompt_en, why="", n=3, say=None):
         pool = [d for d in dict.fromkeys(distractors) if d != answer]
         self.rng.shuffle(pool)
         options = [answer] + pool[: n - 1]
@@ -287,6 +324,8 @@ class Topic:
         item = {"id": qid, "prompt": nfc(prompt), "promptEn": prompt_en, "options": [nfc(o) for o in options], "answer": nfc(answer)}
         if why:
             item["why"] = nfc(why)
+        if say:
+            item["say"] = nfc(say)
         self.data["questions"].append(item)
 
 
@@ -543,6 +582,18 @@ def build():
         t.data["passage"] = nfc(passage)
         for q, a, *wrong in qs:
             t.q(q, a, wrong, "Answer from the passage.")
+    # ----- listening (spoken by the device's own Tamil voice; hidden where the device has none)
+    LISTEN_TEACH = ("ஒலியைக் கவனமாகக் கேள். பிறகு கேட்ட சொல்லைத் தொடு. மீண்டும் கேட்க ▶ ஐத் தொடு.", "Listen, then tap the word you heard. Tap ▶ to hear it again.")
+    listen_sets = [
+        (1, [w for _, w in PICTURES[:18]]), (2, NUMBERS + [w for _, w in COLOURS] + DAYS),
+        (3, [p for _, p, _ in PLURALS] + [m for m, _ in GENDER[:8]]), (4, [f for _, f, *_ in TENSES] + [w for w, *_ in ANTONYMS[:10]]),
+    ]
+    for cls, words in listen_sets:
+        t = T(cls, "listen", "கேட்டுத் தொடு", "Listen and choose", *LISTEN_TEACH, "▶ யானை → யானை")
+        t.data["listen"] = True
+        for i, w in enumerate(words):
+            near = [x for x in words if x != w and first_letter(x) == first_letter(w)][:1]
+            t.q("கேட்ட சொல்லைத் தொடு.", w, near + [words[(i + 3) % len(words)], words[(i + 7) % len(words)]], "Tap the word you heard.", say=w)
     return [t.data for t in topics]
 
 
@@ -553,6 +604,94 @@ def graphemes(word):
             out[-1] += ch
         else:
             out.append(ch)
+    return out
+
+
+
+# ---------------------------------------------------------------- syllabus inventory (as content/english/syllabus)
+G = "guided:Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+BOOK = "not-yet:The school's prescribed Tamil textbook is copyrighted; OpenPath does not reproduce it. Our own passages and classics cover the skills."
+BAND = {  # class -> [(strand, id, outcome in OpenPath's words, where)]
+    1: [("ls", "LS1", "Listens to simple Tamil words and picks the one heard.", ["listen"]), ("ls", "LS2", "Says a few sentences about self and family.", [G]),
+        ("r", "R1", "Recognises the 12 vowels.", ["vowels"]), ("r", "R2", "Recognises the 18 consonants by their dot.", ["consonants"]),
+        ("r", "R3", "Tells short vowels from long ones.", ["length"]), ("r", "R4", "Reads simple picture words and their first letter.", ["pictures", "first-letter"]),
+        ("r", "R5", "Reads a very short passage and answers simple questions.", ["reading"]), ("w", "W1", "Writes the names of familiar things.", ["writing"]),
+        ("l", "L1", "Knows and completes lines of Aathichoodi.", ["aathichoodi"])],
+    2: [("ls", "LS1", "Listens to words (numbers, colours, days) and picks the one heard.", ["listen"]), ("ls", "LS2", "Recites short rhymes and lines.", [G]),
+        ("r", "R1", "Reads and forms consonant-vowel letters.", ["uyirmei"]), ("r", "R2", "Recognises the letter ஃ.", ["aytham"]),
+        ("v", "V1", "Knows number words one to ten.", ["numbers"]), ("v", "V2", "Knows colours and the days of the week.", ["colours", "days"]),
+        ("g", "G1", "Forms plurals with கள்.", ["plural"]), ("r", "R3", "Reads a short passage and answers questions.", ["reading"]),
+        ("w", "W1", "Writes two or three sentences on a familiar topic.", ["writing"]), ("l", "L1", "Completes more lines of Aathichoodi.", ["aathichoodi"])],
+    3: [("ls", "LS1", "Listens to words and picks the one heard.", ["listen"]), ("ls", "LS2", "Retells a short story in own words.", [G]),
+        ("v", "V1", "Gives opposites of common words.", ["antonyms"]), ("v", "V2", "Gives words with the same meaning.", ["synonyms"]),
+        ("g", "G1", "Changes masculine words to feminine.", ["gender"]), ("g", "G2", "Forms plurals, including ம்→ங் and ல்→ற் changes.", ["plural"]),
+        ("v", "V3", "Knows the Tamil months in order.", ["months"]), ("w", "W1", "Spells words, finding a missing letter.", ["missing"]),
+        ("r", "R1", "Reads a story passage and answers questions, including its lesson.", ["reading"]), ("w", "W2", "Writes four sentences about a person.", ["writing"]),
+        ("l", "L1", "Explains the meaning of Aathichoodi lines.", ["aathichoodi-meaning"])],
+    4: [("ls", "LS1", "Listens to words and sentences and picks the one heard.", ["listen"]), ("ls", "LS2", "Talks about a festival or event.", [G]),
+        ("g", "G1", "Tells naming words from doing words.", ["noun-verb"]), ("g", "G2", "Uses past, present and future tense.", ["tense"]),
+        ("g", "G3", "Uses question words (யார், எங்கே, எப்பொழுது ...).", ["question-words"]), ("v", "V1", "Uses more opposites and same-meaning words.", ["antonyms", "synonyms"]),
+        ("r", "R1", "Reads an information passage and answers questions.", ["reading"]), ("w", "W1", "Writes a paragraph on a familiar topic.", ["writing"]),
+        ("l", "L1", "Knows lines of Kondrai Vendhan.", ["kondrai"])],
+    5: [("ls", "LS1", "Listens to a story or passage read aloud and answers.", [G]), ("g", "G1", "Classifies words by thinai.", ["thinai"]),
+        ("g", "G2", "Classifies words by the five paal.", ["paal"]), ("g", "G3", "Tells first, second and third person.", ["idam"]),
+        ("g", "G4", "Finds the tense from a verb ending.", ["tense-3"]), ("g", "G5", "Splits joined words.", ["split"]),
+        ("v", "V1", "Knows the sound words for animals and birds.", ["sounds"]), ("r", "R1", "Reads a passage and finds its main message.", ["reading"]),
+        ("w", "W1", "Writes a paragraph and a friendly letter.", ["writing"]), ("l", "L1", "Knows lines of Bharathiyar's children's songs.", ["bharathi"])],
+    6: [("ls", "LS1", "Takes part in a discussion and asks questions.", [G]), ("g", "G1", "Identifies case endings and the eight cases.", ["case-marker", "case"]),
+        ("g", "G2", "Joins words correctly.", ["join"]), ("v", "V1", "Explains common idioms.", ["idioms"]), ("v", "V2", "Completes proverbs.", ["proverbs"]),
+        ("r", "R1", "Reads a history passage and answers questions.", ["reading"]), ("w", "W1", "Writes a short essay and a letter to a relative.", ["writing"]),
+        ("l", "L1", "Knows and completes Thirukkural couplets.", ["kural"]), ("l", "L2", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+    7: [("ls", "LS1", "Gives a short speech on a familiar topic.", [G]), ("g", "G1", "Classifies the six kinds of nouns.", ["noun-kinds"]),
+        ("g", "G2", "Tells finite verbs from participles.", ["verb-forms"]), ("v", "V1", "Knows names for the young of animals and word pairs.", ["young", "pairs"]),
+        ("v", "V2", "Explains more idioms.", ["idioms"]), ("r", "R1", "Reads a life story and answers questions.", ["reading"]),
+        ("w", "W1", "Writes an essay and a formal leave letter.", ["writing"]), ("l", "L1", "Knows Thirukkural and Bharathiyar's songs on Tamil.", ["kural", "bharathi"]),
+        ("l", "L2", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+    8: [("ls", "LS1", "Takes part in a debate or role-play.", [G]), ("g", "G1", "Knows the kinds of letters and the three consonant groups.", ["letter-kinds", "inam"]),
+        ("g", "G2", "Classifies kinds of sentences.", ["sentence-kinds"]), ("g", "G3", "Tells self-action and causative verbs.", ["causative"]),
+        ("v", "V1", "Uses Tamil words in place of borrowed ones.", ["pure-tamil"]), ("v", "V2", "Completes more proverbs.", ["proverbs"]),
+        ("r", "R1", "Reads a biography passage and answers questions.", ["reading"]), ("w", "W1", "Writes an essay and a letter of complaint.", ["writing"]),
+        ("l", "L1", "Studies the lessons and poems of the school's textbook.", [BOOK])],
+}
+EXAM = [("a", "A1", "Composition (15 marks): writes a composition of the kind set, a narrative, description or explanation.", ["writing"]),
+        ("a", "A2", "Letter (7 marks): writes a letter on one of two subjects, with the right layout.", ["writing"]),
+        ("a", "A3", "Comprehension (10 marks): answers questions on an unseen passage of about 250 words.", ["reading", "partly:Our passage is shorter than the exam's 250 words."]),
+        ("a", "A4", "Grammar (8 marks): uses vocabulary, syntax and idiom correctly; joins sentences; forms sentences with given words.", None),
+        ("b", "B1", "Prescribed texts (40 marks): answers on two of the prescribed textbooks.", [BOOK]),
+        ("ia", "IA1", "Internal assessment, writing: a 300-400 word creative piece.", ["writing", "partly:Our longest task asks for up to 400 words; the school sets the assignment."]),
+        ("ia", "IA2", "Internal assessment, oral: a prepared speech, debate or role-play.", [G])]
+BAND[9] = [(a, b, c, d if d else ["sandhi", "voice", "case", "antonyms"]) for a, b, c, d in EXAM]
+BAND[10] = [(a, b, c, d if d else ["sentence-parts", "simile", "sandhi", "voice-change"]) for a, b, c, d in EXAM] + [("b", "B2", "Knows Thirukkural couplets.", ["kural"])]
+STRANDS = {"ls": "Listening and speaking", "r": "Reading", "w": "Writing", "v": "Vocabulary", "g": "Grammar", "l": "Literature",
+           "a": "Section A: Language (40 marks)", "b": "Section B: Prescribed texts (40 marks)", "ia": "Internal assessment (20 marks)"}
+
+
+def syllabus(topics, tasks):
+    out = {}
+    for cls, rows in BAND.items():
+        have = {t["id"].split(".")[-1] for t in topics if t["class"] == cls}
+        if any(t["class"] == cls for t in tasks):
+            have.add("writing")
+        strands = {}
+        for st, oid, text, where in rows:
+            refs = [w for w in where if ":" not in w]
+            notes = [w.split(":", 1) for w in where if ":" in w]
+            missing = [r for r in refs if r not in have]
+            if missing:
+                raise SystemExit(f"class {cls} {oid}: no topic {missing}")
+            kind = notes[0][0] if notes else "covered"
+            o = {"id": oid, "text": text, "coverage": kind, "where": [f"icse.ta.c{cls}.{r}" if r != "writing" else f"writing:c{cls}" for r in refs]}
+            if notes:
+                o["note"] = notes[0][1]
+            strands.setdefault(st, []).append(o)
+        source = ({"read": "CISCE Regulations and Syllabus, ICSE, Second Language: Indian Languages (Classes IX and X)", "url": "https://cisce.org/regulations-and-syllabus-icse-2027/",
+                   "note": "Paper structure and marks are CISCE's; Tamil's prescribed textbooks (Appendix I) are the school's and are not reproduced."}
+                  if cls >= 9 else
+                  {"read": "CISCE curriculum for Classes I-VIII (primary and upper primary)", "url": "https://cisce.org/",
+                   "note": "CISCE lists Tamil as a permitted second language but publishes class-wise outcomes only for Hindi. These outcomes follow the same skill themes (listening and speaking, reading, writing, vocabulary, grammar, literature), written by OpenPath for Tamil."})
+        out[cls] = {"id": f"icse-cisce-tamil-class-{cls}", "board": "CISCE (ICSE)", "class": cls, "subject": "Tamil (second language)", "source": source,
+                    "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+                    "strands": [{"id": k, "name": STRANDS[k], "outcomes": v} for k, v in strands.items()]}
     return out
 
 
@@ -579,9 +718,17 @@ def main():
            "source": "OpenPath-authored passages and questions, aligned to the CISCE second-language Tamil syllabus; classic texts quoted are public domain (Thirukkural, Avvaiyar, Bharathiyar); no publisher text",
            "review": "provisional", "topics": topics}
     text = json.dumps(doc, ensure_ascii=False, indent=1) + "\n"
+    tasks = [{"id": f"ta.c{c}.{k}", "class": c, "language": "ta", "title": nfc(t), "titleEn": te, "task": nfc(task), "taskEn": tasken, "form": form,
+              "write": {"min": lo, "max": hi}, "look": [nfc(x) for x in look]} for c, k, t, te, task, tasken, form, lo, hi, look in WRITING]
+    wtext = json.dumps({"schema": "openpath.tamil-writing.v1", "tasks": tasks}, ensure_ascii=False, indent=1) + "\n"
+    syl = syllabus([*topics], tasks)
+    outputs = {OUT: text, OUT.with_name("writing.v1.json"): wtext, **{OUT.parent / "syllabus" / f"icse-class-{c}.json": json.dumps(d, ensure_ascii=False, indent=1) + "\n" for c, d in syl.items()}}
     if "--check" in sys.argv:
-        sys.exit(0 if OUT.exists() and OUT.read_text() == text else "content/tamil/icse.v1.json is out of date")
-    OUT.write_text(text)
+        stale = [str(p) for p, t in outputs.items() if not p.exists() or p.read_text() != t]
+        sys.exit("out of date: " + ", ".join(stale) if stale else 0)
+    (OUT.parent / "syllabus").mkdir(exist_ok=True)
+    for p, t in outputs.items():
+        p.write_text(t)
     by = {}
     for t in topics:
         by.setdefault(t["class"], [0, 0])

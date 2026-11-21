@@ -1,0 +1,110 @@
+{
+ "id": "icse-cisce-tamil-class-1",
+ "board": "CISCE (ICSE)",
+ "class": 1,
+ "subject": "Tamil (second language)",
+ "source": {
+  "read": "CISCE curriculum for Classes I-VIII (primary and upper primary)",
+  "url": "https://cisce.org/",
+  "note": "CISCE lists Tamil as a permitted second language but publishes class-wise outcomes only for Hindi. These outcomes follow the same skill themes (listening and speaking, reading, writing, vocabulary, grammar, literature), written by OpenPath for Tamil."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens to simple Tamil words and picks the one heard.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.listen"
+     ]
+    },
+    {
+     "id": "LS2",
+     "text": "Says a few sentences about self and family.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Recognises the 12 vowels.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.vowels"
+     ]
+    },
+    {
+     "id": "R2",
+     "text": "Recognises the 18 consonants by their dot.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.consonants"
+     ]
+    },
+    {
+     "id": "R3",
+     "text": "Tells short vowels from long ones.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.length"
+     ]
+    },
+    {
+     "id": "R4",
+     "text": "Reads simple picture words and their first letter.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.pictures",
+      "icse.ta.c1.first-letter"
+     ]
+    },
+    {
+     "id": "R5",
+     "text": "Reads a very short passage and answers simple questions.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes the names of familiar things.",
+     "coverage": "covered",
+     "where": [
+      "writing:c1"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Knows and completes lines of Aathichoodi.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c1.aathichoodi"
+     ]
+    }
+   ]
+  }
+ ]
+}

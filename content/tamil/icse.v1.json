@@ -1474,6 +1474,236 @@
    "passage": "இது ஒரு பூனை. பூனையின் பெயர் சிண்டு. சிண்டு பால் குடிக்கும். சிண்டு மரத்தின் கீழே தூங்கும்."
   },
   {
+   "id": "icse.ta.c1.listen",
+   "class": 1,
+   "title": "கேட்டுத் தொடு",
+   "titleEn": "Listen and choose",
+   "teach": {
+    "ta": "ஒலியைக் கவனமாகக் கேள். பிறகு கேட்ட சொல்லைத் தொடு. மீண்டும் கேட்க ▶ ஐத் தொடு.",
+    "en": "Listen, then tap the word you heard. Tap ▶ to hear it again.",
+    "examples": "▶ யானை → யானை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c1.listen.1",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நாய்",
+      "யானை",
+      "பூ"
+     ],
+     "answer": "யானை",
+     "say": "யானை"
+    },
+    {
+     "id": "icse.ta.c1.listen.2",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மரம்",
+      "மாம்பழம்",
+      "பசு"
+     ],
+     "answer": "பசு",
+     "say": "பசு"
+    },
+    {
+     "id": "icse.ta.c1.listen.3",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நிலா",
+      "மீன்",
+      "வீடு"
+     ],
+     "answer": "மீன்",
+     "say": "மீன்"
+    },
+    {
+     "id": "icse.ta.c1.listen.4",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பூனை",
+      "பூ",
+      "மயில்"
+     ],
+     "answer": "பூ",
+     "say": "பூ"
+    },
+    {
+     "id": "icse.ta.c1.listen.5",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "குரங்கு",
+      "மரம்",
+      "நாய்"
+     ],
+     "answer": "மரம்",
+     "say": "மரம்"
+    },
+    {
+     "id": "icse.ta.c1.listen.6",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மாம்பழம்",
+      "வீடு",
+      "சிங்கம்"
+     ],
+     "answer": "வீடு",
+     "say": "வீடு"
+    },
+    {
+     "id": "icse.ta.c1.listen.7",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பூ",
+      "பூனை",
+      "நிலா"
+     ],
+     "answer": "பூனை",
+     "say": "பூனை"
+    },
+    {
+     "id": "icse.ta.c1.listen.8",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பாம்பு",
+      "நாய்",
+      "மயில்"
+     ],
+     "answer": "நாய்",
+     "say": "நாய்"
+    },
+    {
+     "id": "icse.ta.c1.listen.9",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வாழைப்பழம்",
+      "குரங்கு",
+      "மாம்பழம்"
+     ],
+     "answer": "மாம்பழம்",
+     "say": "மாம்பழம்"
+    },
+    {
+     "id": "icse.ta.c1.listen.10",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நிலா",
+      "தேங்காய்",
+      "சிங்கம்"
+     ],
+     "answer": "நிலா",
+     "say": "நிலா"
+    },
+    {
+     "id": "icse.ta.c1.listen.11",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "புலி",
+      "மயில்",
+      "மரம்"
+     ],
+     "answer": "மயில்",
+     "say": "மயில்"
+    },
+    {
+     "id": "icse.ta.c1.listen.12",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பாம்பு",
+      "யானை",
+      "குரங்கு"
+     ],
+     "answer": "குரங்கு",
+     "say": "குரங்கு"
+    },
+    {
+     "id": "icse.ta.c1.listen.13",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "சிங்கம்",
+      "பசு",
+      "வாழைப்பழம்"
+     ],
+     "answer": "சிங்கம்",
+     "say": "சிங்கம்"
+    },
+    {
+     "id": "icse.ta.c1.listen.14",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "புலி",
+      "தேங்காய்",
+      "மீன்"
+     ],
+     "answer": "புலி",
+     "say": "புலி"
+    },
+    {
+     "id": "icse.ta.c1.listen.15",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கண்",
+      "பூ",
+      "பாம்பு"
+     ],
+     "answer": "பாம்பு",
+     "say": "பாம்பு"
+    },
+    {
+     "id": "icse.ta.c1.listen.16",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வாழைப்பழம்",
+      "யானை",
+      "மரம்"
+     ],
+     "answer": "வாழைப்பழம்",
+     "say": "வாழைப்பழம்"
+    },
+    {
+     "id": "icse.ta.c1.listen.17",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பசு",
+      "தேங்காய்",
+      "வீடு"
+     ],
+     "answer": "தேங்காய்",
+     "say": "தேங்காய்"
+    },
+    {
+     "id": "icse.ta.c1.listen.18",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கண்",
+      "மீன்",
+      "பூனை"
+     ],
+     "answer": "கண்",
+     "say": "கண்"
+    }
+   ],
+   "listen": true
+  },
+  {
    "id": "icse.ta.c2.uyirmei",
    "class": 2,
    "title": "உயிர்மெய் எழுத்துகள்",
@@ -2507,6 +2737,320 @@
     }
    ],
    "passage": "மீனாவின் வீட்டில் ஒரு தோட்டம் உள்ளது. அங்கே ரோஜாச் செடியும் மாமரமும் உள்ளன. மீனா காலையில் செடிகளுக்குத் தண்ணீர் ஊற்றுவாள். மாலையில் தம்பியுடன் தோட்டத்தில் விளையாடுவாள்."
+  },
+  {
+   "id": "icse.ta.c2.listen",
+   "class": 2,
+   "title": "கேட்டுத் தொடு",
+   "titleEn": "Listen and choose",
+   "teach": {
+    "ta": "ஒலியைக் கவனமாகக் கேள். பிறகு கேட்ட சொல்லைத் தொடு. மீண்டும் கேட்க ▶ ஐத் தொடு.",
+    "en": "Listen, then tap the word you heard. Tap ▶ to hear it again.",
+    "examples": "▶ யானை → யானை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c2.listen.1",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஒன்பது",
+      "ஒன்று",
+      "எட்டு"
+     ],
+     "answer": "ஒன்று",
+     "say": "ஒன்று"
+    },
+    {
+     "id": "icse.ta.c2.listen.2",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஐந்து",
+      "இரண்டு",
+      "ஒன்பது"
+     ],
+     "answer": "இரண்டு",
+     "say": "இரண்டு"
+    },
+    {
+     "id": "icse.ta.c2.listen.3",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மூன்று",
+      "பத்து",
+      "ஆறு"
+     ],
+     "answer": "மூன்று",
+     "say": "மூன்று"
+    },
+    {
+     "id": "icse.ta.c2.listen.4",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "சிவப்பு",
+      "ஏழு",
+      "நான்கு"
+     ],
+     "answer": "நான்கு",
+     "say": "நான்கு"
+    },
+    {
+     "id": "icse.ta.c2.listen.5",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பச்சை",
+      "ஐந்து",
+      "எட்டு"
+     ],
+     "answer": "ஐந்து",
+     "say": "ஐந்து"
+    },
+    {
+     "id": "icse.ta.c2.listen.6",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மஞ்சள்",
+      "ஆறு",
+      "ஒன்பது"
+     ],
+     "answer": "ஆறு",
+     "say": "ஆறு"
+    },
+    {
+     "id": "icse.ta.c2.listen.7",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஏழு",
+      "நீலம்",
+      "பத்து"
+     ],
+     "answer": "ஏழு",
+     "say": "ஏழு"
+    },
+    {
+     "id": "icse.ta.c2.listen.8",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "சிவப்பு",
+      "எட்டு",
+      "கருப்பு"
+     ],
+     "answer": "எட்டு",
+     "say": "எட்டு"
+    },
+    {
+     "id": "icse.ta.c2.listen.9",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஒன்பது",
+      "வெள்ளை",
+      "ஒன்று"
+     ],
+     "answer": "ஒன்பது",
+     "say": "ஒன்பது"
+    },
+    {
+     "id": "icse.ta.c2.listen.10",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பச்சை",
+      "பத்து",
+      "ஊதா"
+     ],
+     "answer": "பத்து",
+     "say": "பத்து"
+    },
+    {
+     "id": "icse.ta.c2.listen.11",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பழுப்பு",
+      "சிவப்பு",
+      "நீலம்"
+     ],
+     "answer": "சிவப்பு",
+     "say": "சிவப்பு"
+    },
+    {
+     "id": "icse.ta.c2.listen.12",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கருப்பு",
+      "பத்து",
+      "பச்சை"
+     ],
+     "answer": "பச்சை",
+     "say": "பச்சை"
+    },
+    {
+     "id": "icse.ta.c2.listen.13",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "திங்கள்",
+      "வெள்ளை",
+      "மஞ்சள்"
+     ],
+     "answer": "மஞ்சள்",
+     "say": "மஞ்சள்"
+    },
+    {
+     "id": "icse.ta.c2.listen.14",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "செவ்வாய்",
+      "ஊதா",
+      "நீலம்"
+     ],
+     "answer": "நீலம்",
+     "say": "நீலம்"
+    },
+    {
+     "id": "icse.ta.c2.listen.15",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பழுப்பு",
+      "கருப்பு",
+      "புதன்"
+     ],
+     "answer": "கருப்பு",
+     "say": "கருப்பு"
+    },
+    {
+     "id": "icse.ta.c2.listen.16",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வெள்ளை",
+      "வியாழன்",
+      "வெள்ளி"
+     ],
+     "answer": "வெள்ளை",
+     "say": "வெள்ளை"
+    },
+    {
+     "id": "icse.ta.c2.listen.17",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஊதா",
+      "திங்கள்",
+      "வெள்ளி"
+     ],
+     "answer": "ஊதா",
+     "say": "ஊதா"
+    },
+    {
+     "id": "icse.ta.c2.listen.18",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பத்து",
+      "சனி",
+      "பழுப்பு"
+     ],
+     "answer": "பழுப்பு",
+     "say": "பழுப்பு"
+    },
+    {
+     "id": "icse.ta.c2.listen.19",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஞாயிறு",
+      "ஒன்று",
+      "புதன்"
+     ],
+     "answer": "ஞாயிறு",
+     "say": "ஞாயிறு"
+    },
+    {
+     "id": "icse.ta.c2.listen.20",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "இரண்டு",
+      "திங்கள்",
+      "வியாழன்"
+     ],
+     "answer": "திங்கள்",
+     "say": "திங்கள்"
+    },
+    {
+     "id": "icse.ta.c2.listen.21",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "செவ்வாய்",
+      "மூன்று",
+      "வெள்ளி"
+     ],
+     "answer": "செவ்வாய்",
+     "say": "செவ்வாய்"
+    },
+    {
+     "id": "icse.ta.c2.listen.22",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நான்கு",
+      "சனி",
+      "புதன்"
+     ],
+     "answer": "புதன்",
+     "say": "புதன்"
+    },
+    {
+     "id": "icse.ta.c2.listen.23",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஒன்று",
+      "வியாழன்",
+      "ஐந்து"
+     ],
+     "answer": "வியாழன்",
+     "say": "வியாழன்"
+    },
+    {
+     "id": "icse.ta.c2.listen.24",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வெள்ளி",
+      "ஆறு",
+      "வெள்ளை"
+     ],
+     "answer": "வெள்ளி",
+     "say": "வெள்ளி"
+    },
+    {
+     "id": "icse.ta.c2.listen.25",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மூன்று",
+      "ஏழு",
+      "சனி"
+     ],
+     "answer": "சனி",
+     "say": "சனி"
+    }
+   ],
+   "listen": true
   },
   {
    "id": "icse.ta.c3.antonyms",
@@ -3622,6 +4166,356 @@
     }
    ],
    "passage": "ஒரு காகத்துக்குத் தாகம் எடுத்தது. ஒரு பானையில் கொஞ்சம் தண்ணீர் இருந்தது. காகத்தின் அலகு தண்ணீரை எட்டவில்லை. காகம் சிறு கற்களைப் பொறுக்கிப் பானையில் போட்டது. தண்ணீர் மேலே வந்தது. காகம் தண்ணீர் குடித்துப் பறந்தது."
+  },
+  {
+   "id": "icse.ta.c3.listen",
+   "class": 3,
+   "title": "கேட்டுத் தொடு",
+   "titleEn": "Listen and choose",
+   "teach": {
+    "ta": "ஒலியைக் கவனமாகக் கேள். பிறகு கேட்ட சொல்லைத் தொடு. மீண்டும் கேட்க ▶ ஐத் தொடு.",
+    "en": "Listen, then tap the word you heard. Tap ▶ to hear it again.",
+    "examples": "▶ யானை → யானை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c3.listen.1",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பழங்கள்",
+      "கண்கள்",
+      "பூக்கள்"
+     ],
+     "answer": "பூக்கள்",
+     "say": "பூக்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.2",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வீடுகள்",
+      "மலைகள்",
+      "மரங்கள்"
+     ],
+     "answer": "மரங்கள்",
+     "say": "மரங்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.3",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பழங்கள்",
+      "நாய்கள்",
+      "பசுக்கள்"
+     ],
+     "answer": "பசுக்கள்",
+     "say": "பசுக்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.4",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பசுக்கள்",
+      "பழங்கள்",
+      "பறவைகள்"
+     ],
+     "answer": "பழங்கள்",
+     "say": "பழங்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.5",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கண்கள்",
+      "கைகள்",
+      "வீடுகள்"
+     ],
+     "answer": "வீடுகள்",
+     "say": "வீடுகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.6",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நாய்கள்",
+      "புத்தகங்கள்",
+      "மலைகள்"
+     ],
+     "answer": "நாய்கள்",
+     "say": "நாய்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.7",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பாடங்கள்",
+      "மீன்கள்",
+      "பறவைகள்"
+     ],
+     "answer": "பறவைகள்",
+     "say": "பறவைகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.8",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஆடுகள்",
+      "கற்கள்",
+      "கண்கள்"
+     ],
+     "answer": "கண்கள்",
+     "say": "கண்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.9",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பற்கள்",
+      "கைகள்",
+      "புத்தகங்கள்"
+     ],
+     "answer": "புத்தகங்கள்",
+     "say": "புத்தகங்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.10",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பைகள்",
+      "மீன்கள்",
+      "மலைகள்"
+     ],
+     "answer": "மீன்கள்",
+     "say": "மீன்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.11",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "ஆடுகள்",
+      "படங்கள்",
+      "பாடங்கள்"
+     ],
+     "answer": "ஆடுகள்",
+     "say": "ஆடுகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.12",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கற்கள்",
+      "கைகள்",
+      "ஈக்கள்"
+     ],
+     "answer": "கைகள்",
+     "say": "கைகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.13",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மலைகள்",
+      "கடல்கள்",
+      "பற்கள்"
+     ],
+     "answer": "மலைகள்",
+     "say": "மலைகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.14",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பைகள்",
+      "பாடங்கள்",
+      "மாணவன்"
+     ],
+     "answer": "பாடங்கள்",
+     "say": "பாடங்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.15",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "அரசன்",
+      "படங்கள்",
+      "கற்கள்"
+     ],
+     "answer": "கற்கள்",
+     "say": "கற்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.16",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பசுக்கள்",
+      "பற்கள்",
+      "ஈக்கள்"
+     ],
+     "answer": "பற்கள்",
+     "say": "பற்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.17",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பைகள்",
+      "அண்ணன்",
+      "கடல்கள்"
+     ],
+     "answer": "பைகள்",
+     "say": "பைகள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.18",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மாணவன்",
+      "பசுக்கள்",
+      "படங்கள்"
+     ],
+     "answer": "படங்கள்",
+     "say": "படங்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.19",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மகன்",
+      "ஈக்கள்",
+      "அரசன்"
+     ],
+     "answer": "ஈக்கள்",
+     "say": "ஈக்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.20",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "தோழன்",
+      "தம்பி",
+      "கடல்கள்"
+     ],
+     "answer": "கடல்கள்",
+     "say": "கடல்கள்"
+    },
+    {
+     "id": "icse.ta.c3.listen.21",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "அண்ணன்",
+      "மாணவன்",
+      "தலைவன்"
+     ],
+     "answer": "மாணவன்",
+     "say": "மாணவன்"
+    },
+    {
+     "id": "icse.ta.c3.listen.22",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பூக்கள்",
+      "தந்தை",
+      "அரசன்"
+     ],
+     "answer": "அரசன்",
+     "say": "அரசன்"
+    },
+    {
+     "id": "icse.ta.c3.listen.23",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "தம்பி",
+      "மகன்",
+      "மரங்கள்"
+     ],
+     "answer": "தம்பி",
+     "say": "தம்பி"
+    },
+    {
+     "id": "icse.ta.c3.listen.24",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பசுக்கள்",
+      "அண்ணன்",
+      "அரசன்"
+     ],
+     "answer": "அண்ணன்",
+     "say": "அண்ணன்"
+    },
+    {
+     "id": "icse.ta.c3.listen.25",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "தம்பி",
+      "தந்தை",
+      "பழங்கள்"
+     ],
+     "answer": "தந்தை",
+     "say": "தந்தை"
+    },
+    {
+     "id": "icse.ta.c3.listen.26",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பூக்கள்",
+      "மகன்",
+      "வீடுகள்"
+     ],
+     "answer": "மகன்",
+     "say": "மகன்"
+    },
+    {
+     "id": "icse.ta.c3.listen.27",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மரங்கள்",
+      "தோழன்",
+      "நாய்கள்"
+     ],
+     "answer": "தோழன்",
+     "say": "தோழன்"
+    },
+    {
+     "id": "icse.ta.c3.listen.28",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "தலைவன்",
+      "பசுக்கள்",
+      "பறவைகள்"
+     ],
+     "answer": "தலைவன்",
+     "say": "தலைவன்"
+    }
+   ],
+   "listen": true
   },
   {
    "id": "icse.ta.c4.noun-verb",
@@ -4923,6 +5817,308 @@
     }
    ],
    "passage": "பொங்கல் தமிழர்களின் அறுவடைத் திருநாள். தை மாதம் முதல் நாள் இது கொண்டாடப்படுகிறது. புதுப் பானையில் பொங்கல் வைப்பார்கள். மறுநாள் மாட்டுப் பொங்கல். அன்று உழவுக்கு உதவும் மாடுகளுக்கு நன்றி சொல்வார்கள்."
+  },
+  {
+   "id": "icse.ta.c4.listen",
+   "class": 4,
+   "title": "கேட்டுத் தொடு",
+   "titleEn": "Listen and choose",
+   "teach": {
+    "ta": "ஒலியைக் கவனமாகக் கேள். பிறகு கேட்ட சொல்லைத் தொடு. மீண்டும் கேட்க ▶ ஐத் தொடு.",
+    "en": "Listen, then tap the word you heard. Tap ▶ to hear it again.",
+    "examples": "▶ யானை → யானை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c4.listen.1",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பார்த்தேன்",
+      "படித்தேன்",
+      "செய்தேன்"
+     ],
+     "answer": "படித்தேன்",
+     "say": "படித்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.2",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கேட்டேன்",
+      "எழுதினேன்",
+      "விளையாடினேன்"
+     ],
+     "answer": "எழுதினேன்",
+     "say": "எழுதினேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.3",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நீந்தினேன்",
+      "குடித்தேன்",
+      "சாப்பிட்டேன்"
+     ],
+     "answer": "சாப்பிட்டேன்",
+     "say": "சாப்பிட்டேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.4",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வந்தேன்",
+      "பார்த்தேன்",
+      "பாடினேன்"
+     ],
+     "answer": "பார்த்தேன்",
+     "say": "பார்த்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.5",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "போனேன்",
+      "கேட்டேன்",
+      "செய்தேன்"
+     ],
+     "answer": "கேட்டேன்",
+     "say": "கேட்டேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.6",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நடந்தேன்",
+      "விளையாடினேன்",
+      "குடித்தேன்"
+     ],
+     "answer": "குடித்தேன்",
+     "say": "குடித்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.7",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "பார்த்தேன்",
+      "தூங்கினேன்",
+      "பாடினேன்"
+     ],
+     "answer": "பாடினேன்",
+     "say": "பாடினேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.8",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "வந்தேன்",
+      "செய்தேன்",
+      "பெரிய"
+     ],
+     "answer": "செய்தேன்",
+     "say": "செய்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.9",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "மேலே",
+      "விளையாடினேன்",
+      "போனேன்"
+     ],
+     "answer": "விளையாடினேன்",
+     "say": "விளையாடினேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.10",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "உள்ளே",
+      "நடந்தேன்",
+      "நீந்தினேன்"
+     ],
+     "answer": "நீந்தினேன்",
+     "say": "நீந்தினேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.11",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "இரவு",
+      "வந்தேன்",
+      "தூங்கினேன்"
+     ],
+     "answer": "வந்தேன்",
+     "say": "வந்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.12",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நல்ல",
+      "பெரிய",
+      "போனேன்"
+     ],
+     "answer": "போனேன்",
+     "say": "போனேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.13",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "நடந்தேன்",
+      "மேலே",
+      "இனிப்பு"
+     ],
+     "answer": "நடந்தேன்",
+     "say": "நடந்தேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.14",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "உள்ளே",
+      "தூங்கினேன்",
+      "வெற்றி"
+     ],
+     "answer": "தூங்கினேன்",
+     "say": "தூங்கினேன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.15",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "இன்பம்",
+      "பெரிய",
+      "இரவு"
+     ],
+     "answer": "பெரிய",
+     "say": "பெரிய"
+    },
+    {
+     "id": "icse.ta.c4.listen.16",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "முன்",
+      "மேலே",
+      "நல்ல"
+     ],
+     "answer": "மேலே",
+     "say": "மேலே"
+    },
+    {
+     "id": "icse.ta.c4.listen.17",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "உள்ளே",
+      "இனிப்பு",
+      "புதிய"
+     ],
+     "answer": "உள்ளே",
+     "say": "உள்ளே"
+    },
+    {
+     "id": "icse.ta.c4.listen.18",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "இரவு",
+      "இனிப்பு",
+      "வெற்றி"
+     ],
+     "answer": "இரவு",
+     "say": "இரவு"
+    },
+    {
+     "id": "icse.ta.c4.listen.19",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "இன்பம்",
+      "நடந்தேன்",
+      "நல்ல"
+     ],
+     "answer": "நல்ல",
+     "say": "நல்ல"
+    },
+    {
+     "id": "icse.ta.c4.listen.20",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "சாப்பிட்டேன்",
+      "இனிப்பு",
+      "இரவு"
+     ],
+     "answer": "இனிப்பு",
+     "say": "இனிப்பு"
+    },
+    {
+     "id": "icse.ta.c4.listen.21",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "புதிய",
+      "பார்த்தேன்",
+      "வெற்றி"
+     ],
+     "answer": "வெற்றி",
+     "say": "வெற்றி"
+    },
+    {
+     "id": "icse.ta.c4.listen.22",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "கேட்டேன்",
+      "இன்பம்",
+      "படித்தேன்"
+     ],
+     "answer": "இன்பம்",
+     "say": "இன்பம்"
+    },
+    {
+     "id": "icse.ta.c4.listen.23",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "எழுதினேன்",
+      "குடித்தேன்",
+      "முன்"
+     ],
+     "answer": "முன்",
+     "say": "முன்"
+    },
+    {
+     "id": "icse.ta.c4.listen.24",
+     "prompt": "கேட்ட சொல்லைத் தொடு.",
+     "promptEn": "Tap the word you heard.",
+     "options": [
+      "புதிய",
+      "பாடினேன்",
+      "சாப்பிட்டேன்"
+     ],
+     "answer": "புதிய",
+     "say": "புதிய"
+    }
+   ],
+   "listen": true
   },
   {
    "id": "icse.ta.c5.thinai",

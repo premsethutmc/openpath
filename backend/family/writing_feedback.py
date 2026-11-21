@@ -1,4 +1,5 @@
-"""writing-feedback@1: short feedback from a language model on one guided writing task of the English app.
+"""writing-feedback@1: short feedback from a language model on one guided writing task of the English app, or of the Tamil course
+(icse-tamil@2: task ids "ta.", its own Tamil prompt; the same three pieces a learner a week across both).
 
 Owner decisions (19 Nov 2026): a paid model may be used for this; three pieces per learner per week; a parent says yes
 once per pupil before anything is sent; the API key lives only in the server environment.
@@ -54,15 +55,41 @@ class Unusable(Exception):
 
 
 @lru_cache(maxsize=1)
+TAMIL = CONTENT.parent / "tamil"
+
+
 def tasks() -> dict:
-    """The guided writing tasks, by id: only these can be given feedback."""
+    """The guided writing tasks, by id: only these can be given feedback. English tasks, and the Tamil course's tasks (ids "ta.")."""
     data = json.loads((CONTENT / "guided" / "tasks.json").read_text(encoding="utf-8"))
-    return {t["id"]: t for t in data["tasks"] if t.get("write")}
+    out = {t["id"]: t for t in data["tasks"] if t.get("write")}
+    tamil = json.loads((TAMIL / "writing.v1.json").read_text(encoding="utf-8"))
+    out.update({t["id"]: t for t in tamil["tasks"] if t["id"].startswith("ta.")})
+    return out
 
 
-@lru_cache(maxsize=1)
-def prompt() -> str:
+def is_tamil(task_id) -> bool:
+    return isinstance(task_id, str) and task_id.startswith("ta.")
+
+
+def prompt(task_id: str = "") -> str:
+    """The server's own instructions for the model: the Tamil course's for its tasks, else the English app's."""
+    return _prompt("ta" if is_tamil(task_id) else "en")
+
+
+@lru_cache(maxsize=2)
+def _prompt(language: str) -> str:
+    if language == "ta":
+        return (TAMIL / "prompts-writing-feedback.ta.v1.md").read_text(encoding="utf-8").strip()
     return (CONTENT / "prompts" / "writing-feedback.v2.md").read_text(encoding="utf-8").strip()
+
+
+_TA_WORD = re.compile(r"[\u0B80-\u0BFF]+")
+
+
+def word_count(task_id: str, text: str) -> int:
+    if is_tamil(task_id):
+        return len(_TA_WORD.findall(text))
+    return len(re.findall(r"[A-Za-z][A-Za-z'’-]*", text))
 
 
 def user_message(task_id: str, text: str, checked: list) -> str:
@@ -184,9 +211,9 @@ class WritingFeedbackView(AccountBase):
             return Response({"detail": "Write the piece first."}, status=status.HTTP_400_BAD_REQUEST)
         if len(text) > MAX_CHARS:
             return Response({"detail": "That is too long for this task."}, status=status.HTTP_400_BAD_REQUEST)
-        words = len(re.findall(r"[A-Za-z][A-Za-z'’-]*", text))
+        words = word_count(task_id, text)
         if words < task["write"]["min"]:
-            return Response({"detail": f"Write at least {task['write']['min']} words before asking for feedback."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": f"Write at least {task['write']['min']} words before asking for feedback.", "min": task["write"]["min"]}, status=status.HTTP_400_BAD_REQUEST)
         try:
             user_message(task_id, text, checked)
         except gateway.GatewayDenied:

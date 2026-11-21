@@ -176,3 +176,19 @@ form {
 .feedback-tick input { width: 20px; height: 20px; flex: none; min-height: 0; }
 .feedback-actions { display: flex; gap: 10px; justify-content: flex-end; }
 .passage { background: #fffaf0; border-left: 4px solid #f28c28; border-radius: 12px; padding: 12px 14px; font-size: 1.05rem; }
+/* icse-tamil@2 */
+.who { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.writing-topic { border-style: dashed; }
+.strand h2 { font-size: 1.1rem; margin: 18px 0 6px; }
+.outcomes { list-style: none; padding: 0; display: grid; gap: 8px; }
+.outcome { background: #fff; border-radius: 12px; padding: 10px 12px; border-left: 4px solid #cfe0d3; }
+.outcome.covered { border-left-color: #2f9e62; }
+.outcome.partly { border-left-color: #f2b33a; }
+.outcome.guided { border-left-color: #5b8def; }
+.outcome.not-yet { border-left-color: #b9b9b9; }
+.cov { font-weight: 700; font-size: 0.85rem; margin-right: 4px; }
+.link.go { display: inline-block; margin-left: 6px; }
+.play { display: block; margin: 8px 0; }
+.write-box { width: 100%; min-height: 180px; font: inherit; padding: 12px; border-radius: 14px; border: 2px solid #50725b; margin-top: 12px; }
+.looks { margin: 4px 0 0; padding-left: 20px; }
+.ok-text { color: #2f9e62; font-weight: 700; }

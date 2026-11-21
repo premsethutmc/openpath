@@ -20,8 +20,8 @@ from django.db import models
 # Subjects that share the pupil identity and the event architecture. English is the
 # existing implementation; mathematics uses the same engine and pupil identity,
 # with its own ordered subject events.
-SUBJECTS = [("english", "English"), ("mathematics", "Mathematics")]
-ACTIVE_SUBJECTS = {"english", "mathematics"}
+SUBJECTS = [("english", "English"), ("mathematics", "Mathematics"), ("tamil", "Tamil")]
+ACTIVE_SUBJECTS = {"english", "mathematics", "tamil"}
 
 
 class Pupil(models.Model):

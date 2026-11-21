@@ -1,0 +1,129 @@
+{
+ "id": "icse-cisce-tamil-class-5",
+ "board": "CISCE (ICSE)",
+ "class": 5,
+ "subject": "Tamil (second language)",
+ "source": {
+  "read": "CISCE curriculum for Classes I-VIII (primary and upper primary)",
+  "url": "https://cisce.org/",
+  "note": "CISCE lists Tamil as a permitted second language but publishes class-wise outcomes only for Hindi. These outcomes follow the same skill themes (listening and speaking, reading, writing, vocabulary, grammar, literature), written by OpenPath for Tamil."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens to a story or passage read aloud and answers.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  },
+  {
+   "id": "g",
+   "name": "Grammar",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "Classifies words by thinai.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.thinai"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "Classifies words by the five paal.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.paal"
+     ]
+    },
+    {
+     "id": "G3",
+     "text": "Tells first, second and third person.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.idam"
+     ]
+    },
+    {
+     "id": "G4",
+     "text": "Finds the tense from a verb ending.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.tense-3"
+     ]
+    },
+    {
+     "id": "G5",
+     "text": "Splits joined words.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.split"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "Knows the sound words for animals and birds.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.sounds"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads a passage and finds its main message.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes a paragraph and a friendly letter.",
+     "coverage": "covered",
+     "where": [
+      "writing:c5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Knows lines of Bharathiyar's children's songs.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c5.bharathi"
+     ]
+    }
+   ]
+  }
+ ]
+}

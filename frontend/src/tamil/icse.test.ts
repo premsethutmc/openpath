@@ -33,3 +33,16 @@ test("every class has a reading passage, and classic texts beyond Thirukkural", 
   for (const c of CLASSES) assert.ok(topicsFor(c).some((t) => t.passage && t.questions.length >= 4), `class ${c} reading`);
   for (const id of ["c1.aathichoodi", "c3.aathichoodi-meaning", "c4.kondrai", "c5.bharathi", "c7.bharathi"]) assert.ok(course.topics.some((t) => t.id === `icse.ta.${id}`), id);
 });
+
+test("every syllabus outcome points at a topic or writing that exists; most are covered", async () => {
+  const { validateSyllabus, syllabusFor, writingTasks, tamilWords } = await import("../../../packages/tamil/src/icse");
+  assert.deepEqual(validateSyllabus(), []);
+  const all = CLASSES.flatMap((c) => syllabusFor(c).strands.flatMap((s) => s.outcomes));
+  assert.ok(all.filter((o) => o.coverage === "covered").length / all.length > 0.7);
+  for (const c of CLASSES) assert.ok(writingTasks.some((t) => t.class === c), `class ${c} writing`);
+  assert.equal(tamilWords("என் பள்ளி மதுரையில் உள்ளது. Hello"), 4);
+});
+
+test("listening questions name what is spoken, and the spoken word is an option", () => {
+  for (const t of course.topics.filter((x) => x.listen)) for (const q of t.questions) assert.ok(q.say && q.options.includes(q.say) && q.answer === q.say, q.id);
+});

@@ -1,0 +1,130 @@
+{
+ "id": "icse-cisce-tamil-class-2",
+ "board": "CISCE (ICSE)",
+ "class": 2,
+ "subject": "Tamil (second language)",
+ "source": {
+  "read": "CISCE curriculum for Classes I-VIII (primary and upper primary)",
+  "url": "https://cisce.org/",
+  "note": "CISCE lists Tamil as a permitted second language but publishes class-wise outcomes only for Hindi. These outcomes follow the same skill themes (listening and speaking, reading, writing, vocabulary, grammar, literature), written by OpenPath for Tamil."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens to words (numbers, colours, days) and picks the one heard.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.listen"
+     ]
+    },
+    {
+     "id": "LS2",
+     "text": "Recites short rhymes and lines.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads and forms consonant-vowel letters.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.uyirmei"
+     ]
+    },
+    {
+     "id": "R2",
+     "text": "Recognises the letter ஃ.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.aytham"
+     ]
+    },
+    {
+     "id": "R3",
+     "text": "Reads a short passage and answers questions.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "Knows number words one to ten.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.numbers"
+     ]
+    },
+    {
+     "id": "V2",
+     "text": "Knows colours and the days of the week.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.colours",
+      "icse.ta.c2.days"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g",
+   "name": "Grammar",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "Forms plurals with கள்.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.plural"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes two or three sentences on a familiar topic.",
+     "coverage": "covered",
+     "where": [
+      "writing:c2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Completes more lines of Aathichoodi.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c2.aathichoodi"
+     ]
+    }
+   ]
+  }
+ ]
+}
