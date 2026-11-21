@@ -38,7 +38,10 @@ export function TamilHome() {
       /* storage refused: progress lasts this visit only */
     }
   }, [saved]);
-  useEffect(() => scrollTo(0, 0), [screen]);
+  // block body: newer browsers return a Promise from scrollTo, which React would call as a cleanup
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, [screen]);
 
   if (screen.name === "foundation")
     return (
