@@ -318,7 +318,7 @@ export function createDemoServer(
     "X-Frame-Options": "DENY",
     "X-Robots-Tag": "noindex, nofollow",
     "Permissions-Policy":
-      "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+      "camera=(), microphone=(self), geolocation=(), payment=(), usb=()",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Cross-Origin-Resource-Policy": "same-origin",
     ...(config.allowHttp

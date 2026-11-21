@@ -2,7 +2,8 @@
 # the difference is deploy/pilot/start.sh: its own PostgreSQL database is required, and nothing synthetic is assumed.
 FROM node:22-bookworm-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS web
 WORKDIR /app
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 OPENPATH_MATHS_TILE=1 OPENPATH_TAMIL_TILE=1
+# OPENPATH_READ_ALOUD: English Read aloud, with its on-phone speech model (about 40 MB, fetched from the npm registry and checked)
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 OPENPATH_MATHS_TILE=1 OPENPATH_TAMIL_TILE=1 OPENPATH_READ_ALOUD=1
 COPY frontend/package.json frontend/package-lock.json frontend/
 # Optional CA for development networks with TLS inspection; absent on ordinary Render builds.
 RUN --mount=type=secret,id=build_ca \

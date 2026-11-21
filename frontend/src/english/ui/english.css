@@ -3137,3 +3137,48 @@ h3.sub {
   font-weight: 400;
   color: #1f2433;
 }
+
+/* Read aloud (ReadAloud.tsx): the sentence, then the words the phone heard */
+.ra-sentence {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin: 16px 0 20px;
+}
+.ra-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin: 16px 0 12px;
+}
+.ra-words .ra-read {
+  color: #1d7a3a;
+}
+.ra-words .ra-missed,
+.ra-words .ra-unclear {
+  color: #b45309;
+  background: #fff4e0;
+  border-radius: 6px;
+  padding: 0 4px;
+  text-decoration: underline wavy;
+  text-decoration-color: #e8890c;
+  text-underline-offset: 5px;
+}
+.ra-mic {
+  font-size: 1.15rem;
+  min-height: 56px;
+}
+.ra-meter {
+  height: 10px;
+  background: #e6ebf2;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 4px 0 16px;
+}
+.ra-meter span {
+  display: block;
+  height: 100%;
+  background: #f08a24;
+  transition: width 0.1s linear;
+}

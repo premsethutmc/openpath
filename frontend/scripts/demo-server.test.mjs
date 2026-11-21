@@ -208,7 +208,7 @@ test("DS-7 headers: HTTPS only, HSTS, no framing, no indexing, no permissions; l
     ["x-robots-tag", /noindex/],
     ["x-content-type-options", /nosniff/],
     ["referrer-policy", /^same-origin$/],
-    ["permissions-policy", /microphone=\(\)/],
+    ["permissions-policy", /microphone=\(self\)/],
     ["content-security-policy", /frame-ancestors 'none'/],
   ])
     assert.match(res.headers.get(h) ?? "", v, h);

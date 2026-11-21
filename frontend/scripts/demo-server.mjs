@@ -162,7 +162,7 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
     "Referrer-Policy": "same-origin",
     "X-Frame-Options": "DENY",
     "X-Robots-Tag": "noindex, nofollow",
-    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+    "Permissions-Policy": "camera=(), microphone=(self), geolocation=(), payment=(), usb=()",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Cross-Origin-Resource-Policy": "same-origin",
     ...(config.allowHttp ? {} : { "Strict-Transport-Security": "max-age=31536000" }),

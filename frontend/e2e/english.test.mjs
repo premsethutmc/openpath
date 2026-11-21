@@ -239,7 +239,7 @@ test("trial: a note and a summary to share, made on the device, without the lear
   const head = (await page.request.get(URL)).headers();
   assert.equal(head["x-frame-options"], "DENY");
   assert.equal(head["x-robots-tag"], "noindex, nofollow");
-  assert.match(head["permissions-policy"], /microphone=\(\)/);
+  assert.match(head["permissions-policy"], /microphone=\(self\)/);
   await createProfile(page, "Priya");
   await today(page);
   await page.locator(".plan li").getByRole("button", { name: "Start" }).first().click();

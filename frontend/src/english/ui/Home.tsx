@@ -40,7 +40,10 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onStudy, onWritten, onFirstWords, onParent, onPath }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void }) {
+declare const __OPENPATH_READ_ALOUD__: boolean | undefined;
+const READ_ALOUD_BUILT = typeof __OPENPATH_READ_ALOUD__ !== "undefined" && __OPENPATH_READ_ALOUD__ === true;
+
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -88,6 +91,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {onLongRead && <LongReadCard learner={learner} onOpen={onLongRead} />}
               {onWritten && <WrittenCard learner={learner} onOpen={onWritten} />}
               {!guided && <ListenWriteCard learner={learner} onOpen={onListenWrite} />}
+              {!guided && onReadAloud && <ReadAloudCard learner={learner} onOpen={onReadAloud} />}
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
@@ -612,6 +616,22 @@ function ListenWriteCard({ learner, onOpen }: { learner: Learner; onOpen: () => 
       )}
       <button type="button" className="secondary" onClick={onOpen}>
         {s.sentences ? "Write five more" : "Try Listen and write"}
+      </button>
+    </section>
+  );
+}
+
+/** Read aloud (logic/read-aloud): shown only where the site was built with the on-phone speech model; never in a pilot build. */
+function ReadAloudCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate || !READ_ALOUD_BUILT) return null;
+  return (
+    <section className="hub-card plain" aria-labelledby="read-aloud-card-title">
+      <h2 id="read-aloud-card-title">
+        <span aria-hidden="true">🎤 </span>Read aloud
+      </h2>
+      <p>Read sentences out loud to the phone and see which words came through clearly. The listening stays on the phone.</p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Read aloud
       </button>
     </section>
   );
