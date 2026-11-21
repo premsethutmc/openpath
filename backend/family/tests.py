@@ -321,7 +321,8 @@ class TamilAIReviewItemsTests(TestCase):
         qs, texts = tar.items()
         self.assertGreater(len(qs), 1000)
         self.assertGreater(len(texts), 100)
-        self.assertEqual(len({(p, pr, tuple(sorted(o)), a) for _, p, pr, o, a in qs}), len(qs))
-        qid, _, _, options, answer = qs[0]
+        self.assertEqual(len({(p, pr, tuple(sorted(o)), a) for _, p, pr, o, a, _ in qs}), len(qs))
+        qid, _, _, options, answer, rule = qs[0]
+        self.assertTrue(rule)
         opts, key = tar.lettered(qid, options, answer)
         self.assertEqual(opts["ABCDEF".index(key)], answer)
