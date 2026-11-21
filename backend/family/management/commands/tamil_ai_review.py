@@ -98,7 +98,9 @@ class Command(BaseCommand):
             try:
                 done = llm.complete(config, ASK, user)
                 d = llm.extract_json(done.text)
-                ans = str(d.get("answer", "")).strip().upper()[:1]
+                raw = str(d.get("answer", "")).strip()
+                # an answer given as the option's text, not its letter, is matched to the letter
+                ans = "ABCDEF"[opts.index(raw)] if raw in opts else raw.upper()[:1]
                 also = [str(a).strip().upper()[:1] for a in (d.get("also") or []) if str(a).strip().upper()[:1] not in ("", ans)]
                 pick = lambda l: opts["ABCDEF".index(l)] if l and l in "ABCDEF"[: len(opts)] else l  # noqa: E731
                 if d.get("sure") is not True:
