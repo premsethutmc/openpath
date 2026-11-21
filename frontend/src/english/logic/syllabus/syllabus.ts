@@ -16,7 +16,7 @@ import { GUIDED, tasksFor } from "../guided/guided.ts";
 
 /** guided: done with a grown-up, who ticks what they saw; the app cannot mark it. */
 export type Coverage = "covered" | "partly" | "guided" | "not";
-export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar" | "guided" | "writing" | "first" | "passage" | "passage_seen" | "long" | "written";
+export type Where = "words" | "reading" | "listening" | "listen" | "spelling" | "grammar" | "guided" | "writing" | "first" | "passage" | "passage_seen" | "long" | "written" | "kinds";
 export interface Outcome {
   id: string;
   text: string;

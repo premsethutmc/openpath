@@ -1,0 +1,3436 @@
+{
+  "id": "english.reading.kinds",
+  "version": 1,
+  "status": "candidate",
+  "review": "Written for OpenPath; checked by the house rules (format, answer lengths, word screen, speller) and by simulated learners.",
+  "evidence": "practice-only",
+  "texts": [
+    {
+      "id": "kt1.chart",
+      "level": 1,
+      "kind": "chart",
+      "title": "Our Class Pets",
+      "text": "Our class pets\n\nPet       Name     Food\nFish      Goldie   fish flakes\nRabbit    Hoppy    carrots\nParrot    Mithu    seeds\n\nEach week, two children feed the pets.\nThis week: Anu and Sam.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What does Hoppy eat?",
+          "right": "carrots",
+          "wrong": [
+            "seeds",
+            "fish flakes"
+          ],
+          "explain": "The table shows Hoppy the rabbit eats carrots."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What kind of pet is Mithu?",
+          "right": "a parrot",
+          "wrong": [
+            "a fish",
+            "a rabbit"
+          ],
+          "explain": "Find Mithu in the Name column; the Pet column says Parrot."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Who feeds the pets this week?",
+          "right": "Anu and Sam",
+          "wrong": [
+            "Goldie and Hoppy",
+            "Mithu and Anu"
+          ],
+          "explain": "This week: Anu and Sam."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How do you find what a pet eats?",
+          "right": "Look along its row to the Food column",
+          "wrong": [
+            "Read the very last line of the page",
+            "Count how many pets there are"
+          ],
+          "explain": "Each row is one pet; the Food column gives its food."
+        }
+      ]
+    },
+    {
+      "id": "kt1.instructions",
+      "level": 1,
+      "kind": "instructions",
+      "title": "Make a Paper Fan",
+      "text": "How to make a paper fan\n\nYou need: one sheet of paper and a clip.\n\n1. Fold the paper over, about as wide as your finger.\n2. Turn the paper and fold it back the other way.\n3. Keep folding back and forth to the end.\n4. Hold the folds together at the base.\n5. Put the clip on the base.\n6. Open the top. Now you can fan your face!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What do you need?",
+          "right": "Paper and a clip",
+          "wrong": [
+            "Paper and glue",
+            "A stick and string"
+          ],
+          "explain": "You need one sheet of paper and a clip."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do just after folding to the end?",
+          "right": "Hold the folds together at the base",
+          "wrong": [
+            "Open the top and fan your face",
+            "Turn the paper the other way"
+          ],
+          "explain": "Step 3 is folding to the end; step 4 is holding the folds together."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why are the steps numbered?",
+          "right": "So you do them in the right order",
+          "wrong": [
+            "So they look pretty",
+            "So you can count the paper"
+          ],
+          "explain": "Numbers show which step comes first, second and so on."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "In step 6, what does \"fan your face\" mean?",
+          "right": "Wave air onto your face",
+          "wrong": [
+            "Paint your face",
+            "Hide your face"
+          ],
+          "explain": "A fan moves air to cool you."
+        }
+      ]
+    },
+    {
+      "id": "kt1.invite",
+      "level": 1,
+      "kind": "notice",
+      "title": "Party Invitation",
+      "text": "Come to my party!\n\nIt is my birthday. I will be seven!\nDay: Saturday\nTime: 4 o'clock\nPlace: 12 Lake Road\nThere will be cake and games.\n\nPlease come!\nFrom Ravi",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How old will Ravi be?",
+          "right": "seven",
+          "wrong": [
+            "six",
+            "twelve"
+          ],
+          "explain": "\"I will be seven!\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What time is the party?",
+          "right": "4 o'clock",
+          "wrong": [
+            "12 o'clock",
+            "7 o'clock"
+          ],
+          "explain": "Time: 4 o'clock."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Ravi write this card?",
+          "right": "To ask friends to his party",
+          "wrong": [
+            "To say thank you for a gift",
+            "To tell a story about cake"
+          ],
+          "explain": "\"Come to my party!\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What is the \"Place\"?",
+          "right": "where the party is",
+          "wrong": [
+            "what you will eat",
+            "when the party starts"
+          ],
+          "explain": "Place tells you where: 12 Lake Road."
+        }
+      ]
+    },
+    {
+      "id": "kt1.letter",
+      "level": 1,
+      "kind": "letter",
+      "title": "A Note to Grandpa",
+      "text": "Dear Grandpa,\n\nThank you for the red kite. I flew it in the field on Sunday. It went up very high, over the tall trees. My friend Ravi held the string too. The wind was strong, so we ran a lot.\n\nPlease come and fly it with me soon.\n\nLove,\nMira",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who gave Mira the kite?",
+          "right": "Grandpa",
+          "wrong": [
+            "Ravi",
+            "Her teacher"
+          ],
+          "explain": "She writes, \"Thank you for the red kite\" to Grandpa."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Mira write this note?",
+          "right": "To thank Grandpa and ask him to come",
+          "wrong": [
+            "To ask Grandpa for a new kite",
+            "To tell Ravi about the field"
+          ],
+          "explain": "She thanks him and asks him to come and fly it."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did Mira and Ravi run a lot?",
+          "right": "The wind was strong",
+          "wrong": [
+            "They were late",
+            "A dog chased them"
+          ],
+          "explain": "\"The wind was strong, so we ran a lot.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does Mira end her note?",
+          "right": "Love, Mira",
+          "wrong": [
+            "Dear Grandpa",
+            "Thank you"
+          ],
+          "explain": "A letter ends with a kind word and the writer's name."
+        }
+      ]
+    },
+    {
+      "id": "kt1.menu",
+      "level": 1,
+      "kind": "chart",
+      "title": "School Lunch Menu",
+      "text": "Lunch this week\n\nMonday       rice and dal\nTuesday      idli and sambar\nWednesday    chapati and potato\nThursday     rice and curd\nFriday       dosa and chutney\n\nFruit every day: banana",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What is for lunch on Tuesday?",
+          "right": "idli and sambar",
+          "wrong": [
+            "rice and dal",
+            "dosa and chutney"
+          ],
+          "explain": "Find Tuesday, then read across."
+        },
+        {
+          "skill": "detail",
+          "prompt": "On which day is there dosa?",
+          "right": "Friday",
+          "wrong": [
+            "Monday",
+            "Thursday"
+          ],
+          "explain": "Friday: dosa and chutney."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What fruit is there every day?",
+          "right": "banana",
+          "wrong": [
+            "apple",
+            "mango"
+          ],
+          "explain": "Fruit every day: banana."
+        },
+        {
+          "skill": "inference",
+          "prompt": "On which two days is there rice?",
+          "right": "Monday and Thursday",
+          "wrong": [
+            "Tuesday and Friday",
+            "Monday and Friday"
+          ],
+          "explain": "Rice is on Monday (with dal) and Thursday (with curd)."
+        }
+      ]
+    },
+    {
+      "id": "kt1.notice",
+      "level": 1,
+      "kind": "notice",
+      "title": "Lost Cat",
+      "text": "LOST CAT\n\nName: Snowy\nColour: white, with one black ear\nLost on: Monday, near the park\nIf you see Snowy, please call Asha.\nPhone: 98765 43210\nThank you!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is Snowy's ear?",
+          "right": "black",
+          "wrong": [
+            "white",
+            "brown"
+          ],
+          "explain": "Snowy is white, with one black ear."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where was Snowy lost?",
+          "right": "Near the park",
+          "wrong": [
+            "At school",
+            "In the shop"
+          ],
+          "explain": "Lost on Monday, near the park."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Asha make this notice?",
+          "right": "To find her cat",
+          "wrong": [
+            "To sell her cat",
+            "To invite friends"
+          ],
+          "explain": "She asks people who see Snowy to call her."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What is the first line of the notice for?",
+          "right": "To say what the notice is about",
+          "wrong": [
+            "To give a phone number",
+            "To say thank you"
+          ],
+          "explain": "LOST CAT in big letters tells you at once what it is about."
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem",
+      "level": 1,
+      "kind": "poem",
+      "title": "Rain on the Roof",
+      "text": "Tap, tap, tap,\nthe rain is on the roof.\nDrip, drip, drip,\nit drips on Puppy's hoof.\n\nSplash, splash, splash,\nI jump in every pool.\nThen Mother calls me in,\nand I am wet and cool.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where does the child jump?",
+          "right": "In every pool",
+          "wrong": [
+            "On the roof",
+            "Into bed"
+          ],
+          "explain": "\"I jump in every pool.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why does the poem say \"tap, tap, tap\"?",
+          "right": "It is the sound the rain makes",
+          "wrong": [
+            "It is the sound of a door",
+            "It is the sound of a dog"
+          ],
+          "explain": "Words like tap and drip copy the sound of rain."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which word rhymes with \"pool\"?",
+          "right": "cool",
+          "wrong": [
+            "wet",
+            "roof"
+          ],
+          "explain": "Pool and cool end with the same sound."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the child feel about the rain?",
+          "right": "Happy and playful",
+          "wrong": [
+            "Scared and sad",
+            "Cross and bored"
+          ],
+          "explain": "The child jumps and splashes in the pools for fun."
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem2",
+      "level": 1,
+      "kind": "poem",
+      "title": "My Red Ball",
+      "text": "My red ball goes up, up, up,\nas high as the tall, tall tree.\nMy red ball comes down, down, down,\nand bounces back to me.\n\nI throw it to my sister,\nshe throws it back to Dad.\nIt is the best red ball\nthat I have ever had.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where does the ball go up to?",
+          "right": "As high as the tree",
+          "wrong": [
+            "Up to the roof",
+            "Over the wall"
+          ],
+          "explain": "\"As high as the tall, tall tree.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Who does the child throw the ball to?",
+          "right": "the sister",
+          "wrong": [
+            "Dad",
+            "the dog"
+          ],
+          "explain": "\"I throw it to my sister.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which word rhymes with \"tree\"?",
+          "right": "me",
+          "wrong": [
+            "up",
+            "ball"
+          ],
+          "explain": "Tree and me end with the same sound."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the child feel about the ball?",
+          "right": "They love it",
+          "wrong": [
+            "They are tired of it",
+            "They are scared of it"
+          ],
+          "explain": "\"It is the best red ball that I have ever had.\""
+        }
+      ]
+    },
+    {
+      "id": "kt1.sign",
+      "level": 1,
+      "kind": "notice",
+      "title": "Signs in the Park",
+      "text": "Signs in the park\n\nKEEP OFF THE GRASS\nPlease walk on the path.\n\nNO DOGS IN THE PLAY AREA\n\nPLEASE PUT YOUR RUBBISH IN THE BIN\n\nTHE PARK SHUTS AT 7 PM",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where should you walk?",
+          "right": "on the path",
+          "wrong": [
+            "on the grass",
+            "in the play area"
+          ],
+          "explain": "Keep off the grass. Please walk on the path."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where are dogs not allowed?",
+          "right": "in the play area",
+          "wrong": [
+            "on the path",
+            "at the gate"
+          ],
+          "explain": "No dogs in the play area."
+        },
+        {
+          "skill": "detail",
+          "prompt": "When does the park shut?",
+          "right": "at 7 pm",
+          "wrong": [
+            "at 7 am",
+            "at 12 noon"
+          ],
+          "explain": "The park shuts at 7 pm."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does a park have signs?",
+          "right": "To tell people the rules",
+          "wrong": [
+            "To tell a story",
+            "To sell toys"
+          ],
+          "explain": "Each sign tells you what to do or not to do."
+        }
+      ]
+    },
+    {
+      "id": "kt2.advert",
+      "level": 2,
+      "kind": "advert",
+      "title": "Sunny Cycles Sale",
+      "text": "SUNNY CYCLES — BIG SALE!\n\nShiny new bicycles for children!\n* Bright colours: red, blue and green\n* Strong brakes and a free bell\n* Save 500 rupees this week only!\n\nCome to Sunny Cycles, Station Road.\nOpen every day, 10 am to 7 pm.\nHurry — the sale ends on Sunday!",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What does this advert want you to do?",
+          "right": "Buy a bicycle from Sunny Cycles",
+          "wrong": [
+            "Learn to ride a bicycle",
+            "Fix your old bicycle"
+          ],
+          "explain": "Adverts try to make you buy something."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do you get free with a bicycle?",
+          "right": "a bell",
+          "wrong": [
+            "a helmet",
+            "a basket"
+          ],
+          "explain": "Strong brakes and a free bell."
+        },
+        {
+          "skill": "detail",
+          "prompt": "When does the sale end?",
+          "right": "on Sunday",
+          "wrong": [
+            "at 7 pm",
+            "next month"
+          ],
+          "explain": "The sale ends on Sunday."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the advert say \"Hurry\"?",
+          "right": "To make people come quickly",
+          "wrong": [
+            "Because the shop is closing for ever",
+            "Because bicycles are fast"
+          ],
+          "explain": "Adverts use words like hurry so you act before the offer ends."
+        }
+      ]
+    },
+    {
+      "id": "kt2.chart",
+      "level": 2,
+      "kind": "chart",
+      "title": "Rain in Our Town",
+      "text": "How many rainy days did our town have?\n\nJune       ****           4 days\nJuly       ********       8 days\nAugust     ******         6 days\nSeptember  ***            3 days\n\nEach * stands for one rainy day.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Which month had the most rainy days?",
+          "right": "July",
+          "wrong": [
+            "June",
+            "August"
+          ],
+          "explain": "July has eight stars, the most."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many rainy days were there in August?",
+          "right": "six",
+          "wrong": [
+            "three",
+            "eight"
+          ],
+          "explain": "August: 6 days."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What does each * stand for?",
+          "right": "one rainy day",
+          "wrong": [
+            "one sunny day",
+            "one month"
+          ],
+          "explain": "The key says each * stands for one rainy day."
+        },
+        {
+          "skill": "inference",
+          "prompt": "How many more rainy days did July have than June?",
+          "right": "four",
+          "wrong": [
+            "two",
+            "eight"
+          ],
+          "explain": "8 minus 4 is 4."
+        }
+      ]
+    },
+    {
+      "id": "kt2.diary",
+      "level": 2,
+      "kind": "diary",
+      "title": "My First Day at the New School",
+      "text": "Monday, 10 June\n\nToday was my first day at Sunrise School. I was nervous in the morning and my tummy felt funny. Amma held my hand to the gate.\n\nMy teacher is Miss Rose. She has a kind smile. She gave me a seat next to a boy called Arif. He showed me the water tap and the playground.\n\nAt lunch, Arif shared his grapes with me. I shared my biscuits. Now I think I have a new friend. I am not nervous any more.",
+      "questions": [
+        {
+          "skill": "feelings",
+          "prompt": "How did the writer feel in the morning?",
+          "right": "nervous",
+          "wrong": [
+            "angry",
+            "sleepy"
+          ],
+          "explain": "\"I was nervous in the morning.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Who sat next to the writer?",
+          "right": "Arif",
+          "wrong": [
+            "Miss Rose",
+            "Amma"
+          ],
+          "explain": "She gave me a seat next to a boy called Arif."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happened at lunch?",
+          "right": "They shared grapes and biscuits",
+          "wrong": [
+            "Arif showed the playground",
+            "Amma came to the gate"
+          ],
+          "explain": "At lunch, Arif shared his grapes and the writer shared biscuits."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How have the writer's feelings changed by the end?",
+          "right": "From nervous to happy",
+          "wrong": [
+            "From happy to sad",
+            "From angry to calm"
+          ],
+          "explain": "\"I am not nervous any more.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem",
+      "level": 2,
+      "kind": "poem",
+      "title": "The Busy Ant",
+      "text": "A little ant went up the wall,\nshe carried crumbs, and that was all.\nShe did not stop, she did not rest,\nshe worked as if it was a test.\n\nThe wind blew hard, the crumb fell down,\nshe did not cry, she did not frown.\nShe went right back and tried once more,\nand took her crumb home through the door.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did the ant carry?",
+          "right": "crumbs",
+          "wrong": [
+            "leaves",
+            "seeds"
+          ],
+          "explain": "\"She carried crumbs.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What made the crumb fall?",
+          "right": "The wind blew hard",
+          "wrong": [
+            "A child stepped on it",
+            "It was too heavy"
+          ],
+          "explain": "\"The wind blew hard, the crumb fell down.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What does \"she did not cry, she did not frown\" tell us?",
+          "right": "She did not give up",
+          "wrong": [
+            "She was very sad",
+            "She was angry with the wind"
+          ],
+          "explain": "Instead of being upset, she went back and tried again."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What lesson does the poem teach?",
+          "right": "Keep trying when things go wrong",
+          "wrong": [
+            "Ants do not like the wind",
+            "Always eat your crumbs"
+          ],
+          "explain": "The ant tries once more and gets her crumb home."
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem2",
+      "level": 2,
+      "kind": "poem",
+      "title": "The Moon",
+      "text": "The moon is a lamp in the sky at night,\nit gives the sleeping town its light.\nSometimes it's round, sometimes it's thin,\nlike a smile, or a silver pin.\n\nIt follows me when I walk home,\nit never leaves me all alone.\nAnd when I wake, it's gone away,\nto make some room for the bright new day.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "The poem says the moon is \"a lamp\". Why?",
+          "right": "It gives light at night",
+          "wrong": [
+            "It is made of glass",
+            "It is very hot"
+          ],
+          "explain": "A lamp gives light, and so does the moon."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What two things does a thin moon look like?",
+          "right": "a smile or a silver pin",
+          "wrong": [
+            "a ball or a plate",
+            "a lamp or a star"
+          ],
+          "explain": "\"Like a smile, or a silver pin.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does the moon seem to follow the child?",
+          "right": "It stays in the sky as the child walks",
+          "wrong": [
+            "It is tied to the child",
+            "The child is walking very slowly"
+          ],
+          "explain": "The moon is so far away that it seems to move with you."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which word rhymes with \"night\"?",
+          "right": "light",
+          "wrong": [
+            "thin",
+            "town"
+          ],
+          "explain": "Night and light end with the same sound."
+        }
+      ]
+    },
+    {
+      "id": "kt2.postcard",
+      "level": 2,
+      "kind": "letter",
+      "title": "A Postcard from the Sea",
+      "text": "Dear Leela,\n\nWe are at the seaside in Puri! Every morning I build sandcastles with my brother. Yesterday a big wave knocked one down, and we laughed so much. The fishermen pull their boats onto the sand in the evening. The sea is noisy at night, like a huge animal breathing.\n\nI collected twelve shells. I will give you the pink one.\n\nSee you next week,\nKavya",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many shells did Kavya collect?",
+          "right": "twelve",
+          "wrong": [
+            "two",
+            "pink"
+          ],
+          "explain": "\"I collected twelve shells.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The sea is \"like a huge animal breathing\". What does this tell us?",
+          "right": "The sea makes a loud, steady sound",
+          "wrong": [
+            "There are animals in the sea",
+            "The sea is dangerous"
+          ],
+          "explain": "The comparison helps us hear the sound of the waves."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did Kavya feel when the wave knocked the castle down?",
+          "right": "She found it funny",
+          "wrong": [
+            "She was very upset",
+            "She was frightened"
+          ],
+          "explain": "\"We laughed so much.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Kavya write the postcard?",
+          "right": "To share her holiday with a friend",
+          "wrong": [
+            "To ask Leela for shells",
+            "To complain about the sea"
+          ],
+          "explain": "She tells Leela what she is doing at the seaside."
+        }
+      ]
+    },
+    {
+      "id": "kt2.recipe",
+      "level": 2,
+      "kind": "instructions",
+      "title": "Banana Milkshake",
+      "text": "Banana Milkshake (for two)\n\nYou need:\n- 2 ripe bananas\n- 2 cups of cold milk\n- 1 spoon of honey\n\nSteps:\n1. Ask a grown-up to help you with the mixer.\n2. Peel the bananas and break them into pieces.\n3. Put the bananas, milk and honey into the mixer.\n4. Close the lid tightly. Mix for one minute.\n5. Pour into two glasses and drink at once.\n\nTip: frozen banana makes it thick and cold.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many cups of milk do you need?",
+          "right": "two",
+          "wrong": [
+            "one",
+            "three"
+          ],
+          "explain": "2 cups of cold milk."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do before putting the bananas in the mixer?",
+          "right": "Peel them and break them",
+          "wrong": [
+            "Pour the shake into glasses",
+            "Close the lid of the mixer"
+          ],
+          "explain": "Step 2 comes before step 3."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does step 1 say to ask a grown-up?",
+          "right": "A mixer can be dangerous for children",
+          "wrong": [
+            "Grown-ups like milkshakes",
+            "To buy more bananas"
+          ],
+          "explain": "Mixers have sharp blades, so a grown-up should help."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"ripe\" mean here?",
+          "right": "ready to eat",
+          "wrong": [
+            "green and hard",
+            "cut in half"
+          ],
+          "explain": "A ripe banana is soft and ready to eat."
+        }
+      ]
+    },
+    {
+      "id": "kt2.rules",
+      "level": 2,
+      "kind": "notice",
+      "title": "Library Rules",
+      "text": "Our Class Library — Rules\n\n1. Take one book at a time.\n2. Write your name and the date in the book list.\n3. Keep the book for one week only.\n4. Turn the pages gently. Do not fold the corners.\n5. If a book is torn, tell the teacher. Do not hide it.\n6. Put the book back on the right shelf.\n\nHappy reading!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How long can you keep a book?",
+          "right": "one week",
+          "wrong": [
+            "one day",
+            "one month"
+          ],
+          "explain": "Rule 3: keep the book for one week only."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What must you write in the book list?",
+          "right": "your name and the date",
+          "wrong": [
+            "the page number",
+            "your phone number"
+          ],
+          "explain": "Rule 2."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why should you not fold the corners?",
+          "right": "It spoils the book",
+          "wrong": [
+            "It makes the book heavy",
+            "It is hard to read"
+          ],
+          "explain": "Rule 4 is about keeping the book in good condition."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the list end with \"Happy reading!\"?",
+          "right": "To be friendly after the rules",
+          "wrong": [
+            "To add one more rule",
+            "To say the library is shut"
+          ],
+          "explain": "It is a kind ending, not a rule."
+        }
+      ]
+    },
+    {
+      "id": "kt2.timetable",
+      "level": 2,
+      "kind": "timetable",
+      "title": "Swimming Classes",
+      "text": "Summer Swimming Classes at the Town Pool\n\nDay          Time         Group\nMonday       7 to 8 am    Beginners (age 6 to 8)\nWednesday    7 to 8 am    Beginners (age 6 to 8)\nTuesday      4 to 5 pm    Swimmers who can swim one length\nSaturday     9 to 10 am   Family swim, everyone welcome\n\nBring: a towel, a cap and water.\nNo food near the pool, please.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "On which days are the beginner classes?",
+          "right": "Monday and Wednesday",
+          "wrong": [
+            "Tuesday and Saturday",
+            "Monday and Saturday"
+          ],
+          "explain": "The Beginners rows are Monday and Wednesday."
+        },
+        {
+          "skill": "detail",
+          "prompt": "When can a whole family swim together?",
+          "right": "Saturday, 9 to 10 am",
+          "wrong": [
+            "Tuesday, 4 to 5 pm",
+            "Monday, 7 to 8 am"
+          ],
+          "explain": "Saturday is the family swim, everyone welcome."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Ravi can swim one length. Which class fits him?",
+          "right": "Tuesday at 4 pm",
+          "wrong": [
+            "Monday at 7 am",
+            "Wednesday at 7 am"
+          ],
+          "explain": "The Tuesday class is for swimmers who can swim one length."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What must you NOT bring near the pool?",
+          "right": "food",
+          "wrong": [
+            "a towel",
+            "water"
+          ],
+          "explain": "\"No food near the pool, please.\""
+        }
+      ]
+    },
+    {
+      "id": "kt3.advert",
+      "level": 3,
+      "kind": "advert",
+      "title": "Summer Art Camp",
+      "text": "SPLASH INTO COLOUR!\nSummer Art Camp for children aged 7 to 12\n\nPaint, print, make puppets and build models!\n10 days of fun with real artists.\n\nDates: 1 to 10 May, 9 am to 12 noon\nPlace: Town Hall, upstairs room\nFee: 1,500 rupees (all materials included)\n\n\"My son made a puppet theatre and still plays with it!\" — a happy parent\n\nOnly 20 places. Book now at the Town Hall office.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who is the camp for?",
+          "right": "Children aged 7 to 12",
+          "wrong": [
+            "Children aged 3 to 6",
+            "Grown-ups who paint"
+          ],
+          "explain": "Summer Art Camp for children aged 7 to 12."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"all materials included\" mean?",
+          "right": "Paint and paper are part of the fee",
+          "wrong": [
+            "You must bring your own paint",
+            "There are no materials"
+          ],
+          "explain": "Included means you do not pay extra for them."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the advert quote a parent?",
+          "right": "To make other parents trust the camp",
+          "wrong": [
+            "To tell a story about puppets",
+            "To give the camp's address"
+          ],
+          "explain": "Adverts use happy customers to persuade."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does it say \"Only 20 places\"?",
+          "right": "To make people book quickly",
+          "wrong": [
+            "Because the room is very big",
+            "To tell you how many artists come"
+          ],
+          "explain": "Saying places are few makes readers hurry."
+        }
+      ]
+    },
+    {
+      "id": "kt3.article",
+      "level": 3,
+      "kind": "article",
+      "title": "Why Do Cats Purr?",
+      "text": "Most people think a cat purrs only when it is happy. Often that is true. A cat curled on a warm lap will purr softly while it is stroked.\n\nBut cats also purr at other times. A mother cat purrs to her kittens, which cannot see or hear when they are born. They feel the purr and crawl towards her. Cats sometimes purr when they are hurt or frightened, too. Scientists think the purr may calm the cat down, a little like a child humming to feel brave.\n\nSo the next time a cat purrs, look at the rest of it. Is it relaxed and sleepy, or is it hiding under a bed? The purr alone does not tell you everything.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Why does a mother cat purr to her kittens?",
+          "right": "So they can feel her and come to her",
+          "wrong": [
+            "So they fall asleep at once",
+            "Because she is very hungry"
+          ],
+          "explain": "Newborn kittens cannot see or hear, but they feel the purr."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why compare purring to \"a child humming to feel brave\"?",
+          "right": "Both may be ways to calm yourself",
+          "wrong": [
+            "Cats like to sing songs",
+            "Children purr like cats"
+          ],
+          "explain": "The purr may calm a hurt or frightened cat."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of this article?",
+          "right": "To explain that cats purr for different reasons",
+          "wrong": [
+            "To tell readers to buy a cat",
+            "To describe how kittens are born"
+          ],
+          "explain": "It shows purring is not only about happiness."
+        },
+        {
+          "skill": "summary",
+          "prompt": "What does the last paragraph advise?",
+          "right": "Look at the whole cat, not just the purr",
+          "wrong": [
+            "Never stroke a purring cat",
+            "Keep cats under the bed"
+          ],
+          "explain": "\"The purr alone does not tell you everything.\""
+        }
+      ]
+    },
+    {
+      "id": "kt3.diary",
+      "level": 3,
+      "kind": "diary",
+      "title": "Rohan's Diary",
+      "text": "Saturday, 3 August\n\nToday was the worst and best day. In the morning, Dad and I were going to the hills, but the car would not start. I was so cross that I kicked my shoe across the room.\n\nThen Dad said, \"If we can't go to the hills, let's bring the hills here.\" We built a mountain out of pillows in the living room. We put a torch inside as a campfire and ate peanuts in a blanket tent. Dad told ghost stories until Amma laughed at us.\n\nI think I will remember this day longer than any trip.",
+      "questions": [
+        {
+          "skill": "feelings",
+          "prompt": "How did Rohan feel when the car would not start?",
+          "right": "cross",
+          "wrong": [
+            "pleased",
+            "sleepy"
+          ],
+          "explain": "\"I was so cross that I kicked my shoe.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What did Dad mean by \"let's bring the hills here\"?",
+          "right": "Let's pretend we are in the hills at home",
+          "wrong": [
+            "Let's carry stones home",
+            "Let's go to the hills by bus"
+          ],
+          "explain": "They made a pillow mountain and a pretend campfire at home."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How can you tell this is a diary?",
+          "right": "It has a date and tells the writer's own day",
+          "wrong": [
+            "It has numbered steps to follow",
+            "It starts with Dear and ends with Love"
+          ],
+          "explain": "A diary is dated and written by someone about their own day."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why was it also the \"best\" day?",
+          "right": "Dad turned the problem into fun",
+          "wrong": [
+            "The car was mended",
+            "They reached the hills"
+          ],
+          "explain": "The pretend trip at home became a special memory."
+        }
+      ]
+    },
+    {
+      "id": "kt3.email",
+      "level": 3,
+      "kind": "letter",
+      "title": "An Email from Camp",
+      "text": "To: Mum\nSubject: Hello from the hills!\n\nHi Mum,\n\nThe nature camp is great. Yesterday we walked to a waterfall. The water was freezing, but I put my feet in anyway! We saw a giant squirrel with a long tail as big as its body.\n\nTonight we are sleeping in tents. Our leader says we might hear owls.\n\nPlease tell Pinky not to touch my stamp album.\n\nLove,\nNeel",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where did they walk yesterday?",
+          "right": "to a waterfall",
+          "wrong": [
+            "to a village",
+            "to the river bank"
+          ],
+          "explain": "\"Yesterday we walked to a waterfall.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"freezing\" mean here?",
+          "right": "very cold",
+          "wrong": [
+            "very fast",
+            "very dirty"
+          ],
+          "explain": "The water was freezing, but he put his feet in anyway."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Who is Pinky probably?",
+          "right": "Neel's younger sister at home",
+          "wrong": [
+            "The leader of Neel's camp",
+            "A giant squirrel at camp"
+          ],
+          "explain": "He asks Mum to stop Pinky touching his things at home."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What is the \"Subject\" line for?",
+          "right": "To say what the email is about",
+          "wrong": [
+            "To give Neel's address",
+            "To end the email"
+          ],
+          "explain": "The subject tells the reader the topic before opening."
+        }
+      ]
+    },
+    {
+      "id": "kt3.instructions",
+      "level": 3,
+      "kind": "instructions",
+      "title": "Plant a Seed in a Cup",
+      "text": "Growing a bean plant\n\nWhat you need: a paper cup, soil, two bean seeds, water, a pencil.\n\n1. Make a small hole in the base of the cup with the pencil. This lets extra water drain out.\n2. Fill the cup with soil, almost to the top.\n3. Push the two seeds into the soil, about as deep as the tip of your finger.\n4. Water the soil gently until it is damp, not soaking.\n5. Put the cup on a sunny window sill.\n6. Water a little every two days.\n\nIn about a week, a small shoot will push up. If both seeds grow, pull out the weaker one so that the strong one has room.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "Why do you make a hole in the cup?",
+          "right": "So extra water can drain out",
+          "wrong": [
+            "So the seed can breathe",
+            "So the cup is lighter"
+          ],
+          "explain": "Step 1 says the hole lets extra water drain out."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"damp\" mean here?",
+          "right": "a little wet",
+          "wrong": [
+            "very dry",
+            "full of water"
+          ],
+          "explain": "Damp is a little wet, \"not soaking\"."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How deep should the seeds go?",
+          "right": "As deep as the tip of your finger",
+          "wrong": [
+            "As deep as the pencil",
+            "To the base of the cup"
+          ],
+          "explain": "Step 3 tells you the depth."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why pull out the weaker shoot?",
+          "right": "Two plants would crowd one small cup",
+          "wrong": [
+            "Weak shoots are poisonous",
+            "Beans need to be eaten early"
+          ],
+          "explain": "So the strong one has room to grow."
+        }
+      ]
+    },
+    {
+      "id": "kt3.notice",
+      "level": 3,
+      "kind": "notice",
+      "title": "School Book Fair",
+      "text": "GREENFIELD SCHOOL BOOK FAIR\n\nWhen: Thursday 14 and Friday 15 November, 9 am to 3 pm\nWhere: The school hall\n\nOver 2,000 books in English, Tamil and Hindi!\nStories, comics, science and atlases.\n\nRules for pupils:\n• Visit only at the time given for your class.\n• Classes 1 to 3: Thursday morning. Classes 4 to 6: Friday morning.\n• Bring money in an envelope with your name on it.\n• Books cannot be returned once bought.\n\nEvery book sold gives one free book to the village library.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where is the book fair?",
+          "right": "In the school hall",
+          "wrong": [
+            "In the village library",
+            "In each classroom"
+          ],
+          "explain": "Where: The school hall."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Anil is in Class 5. When should he visit?",
+          "right": "Friday morning",
+          "wrong": [
+            "Thursday morning",
+            "Thursday afternoon"
+          ],
+          "explain": "Classes 4 to 6 visit on Friday morning."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"returned\" mean in the rules?",
+          "right": "given back for your money",
+          "wrong": [
+            "read again at home",
+            "carried home in a bag"
+          ],
+          "explain": "Once you buy a book, you cannot give it back and get your money."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the notice mention the village library?",
+          "right": "To show that buying a book also helps others",
+          "wrong": [
+            "To tell pupils where the fair is",
+            "To say the library is closed"
+          ],
+          "explain": "Each book sold gives a free book to the library."
+        }
+      ]
+    },
+    {
+      "id": "kt3.pair",
+      "level": 3,
+      "kind": "pair",
+      "title": "Two Views of the Rain",
+      "text": "Text A — from a weather report\nHeavy rain is expected in Chennai on Tuesday. About 80 millimetres of rain may fall in the afternoon. Low roads may flood. People should carry umbrellas and avoid travelling after 4 pm.\n\nText B — from a poem by a child\nThe rain came down on Tuesday,\nit danced upon the street,\nit filled the road with rivers\nthat tickled all our feet.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "Which text gives exact numbers?",
+          "right": "Text A, the weather report",
+          "wrong": [
+            "Text B, the poem",
+            "Both texts equally"
+          ],
+          "explain": "The report says 80 millimetres and 4 pm; the poem has no numbers."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of Text A?",
+          "right": "To warn people and keep them safe",
+          "wrong": [
+            "To make people enjoy the rain",
+            "To tell a story about a child"
+          ],
+          "explain": "It tells people to carry umbrellas and avoid travel."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "In Text B, the rain \"danced upon the street\". What does this show?",
+          "right": "The rain seems lively and fun",
+          "wrong": [
+            "The rain was very light",
+            "People danced in the rain"
+          ],
+          "explain": "The poem makes the rain sound playful."
+        },
+        {
+          "skill": "compare",
+          "prompt": "How do the two texts see flooded roads?",
+          "right": "A sees a danger; B sees fun",
+          "wrong": [
+            "Both see a danger",
+            "Both see fun"
+          ],
+          "explain": "A warns that roads may flood; B says the water tickled their feet."
+        }
+      ]
+    },
+    {
+      "id": "kt3.poem",
+      "level": 3,
+      "kind": "poem",
+      "title": "The Old Banyan Tree",
+      "text": "At the edge of our village the old banyan stands,\nwith a hundred brown arms and a thousand green hands.\nIts roots dangle like ropes that swing down to the ground,\nand the children climb up without making a sound.\n\nThe parrots all chatter, the squirrels all race,\nthe goats find a corner, the cows find a place.\nWhen the sun is too hot and the road is too long,\nthe old banyan waits like a friend, and is strong.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What are the banyan's \"hundred brown arms\"?",
+          "right": "Its branches",
+          "wrong": [
+            "Its roots",
+            "The children"
+          ],
+          "explain": "The poet describes the branches as if they were arms."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"The old banyan waits like a friend.\" What does this show?",
+          "right": "The tree is welcoming and helpful",
+          "wrong": [
+            "The tree is lonely",
+            "The tree is waiting to fall"
+          ],
+          "explain": "Like a friend, it gives shade to everyone who comes."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do the roots look like?",
+          "right": "ropes",
+          "wrong": [
+            "arms",
+            "hands"
+          ],
+          "explain": "\"Its roots dangle like ropes.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem mostly about?",
+          "right": "A tree that gives shelter to many living things",
+          "wrong": [
+            "How children climb a banyan tree",
+            "A long journey on a hot road"
+          ],
+          "explain": "Children, birds, squirrels, goats and cows all find a place under it."
+        }
+      ]
+    },
+    {
+      "id": "kt3.poem2",
+      "level": 3,
+      "kind": "poem",
+      "title": "The Potter",
+      "text": "The potter sits beside his wheel\nwith clay as soft as dough,\nhe spins it round with patient hands\nand shapes it, slow, slow, slow.\n\nA lump becomes a gentle curve,\nthe curve becomes a pot,\nand in the sun it bakes and dries\nuntil it's hard and hot.\n\nTomorrow in a kitchen far,\nsomeone will cook their rice\nin something made of mud and fire,\nand never think of it twice.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "The clay is \"as soft as dough\". What does this tell us?",
+          "right": "It is soft and easy to shape",
+          "wrong": [
+            "It is good enough to eat",
+            "It is very hot to touch"
+          ],
+          "explain": "Dough is soft and can be pressed into shapes."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happens after the curve becomes a pot?",
+          "right": "It bakes and dries in the sun",
+          "wrong": [
+            "It is sold at a shop",
+            "It becomes a lump"
+          ],
+          "explain": "\"In the sun it bakes and dries.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"patient\" mean here?",
+          "right": "calm and willing to take time",
+          "wrong": [
+            "in a very great hurry",
+            "feeling unwell and tired"
+          ],
+          "explain": "He shapes it slowly and carefully."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the last stanza suggest?",
+          "right": "People use things without thinking of the maker",
+          "wrong": [
+            "Rice is very hard to cook well",
+            "Kitchens are always far away"
+          ],
+          "explain": "Someone will use the pot and \"never think of it twice\"."
+        }
+      ]
+    },
+    {
+      "id": "kt4.advert",
+      "level": 4,
+      "kind": "advert",
+      "title": "Fizzo: The Drink of Champions",
+      "text": "FIZZO — THE DRINK OF CHAMPIONS!\n\nFeel the power! One bottle of FIZZO and you'll run faster, jump higher and think quicker.*\n\n✔ Bursting with fruity flavour\n✔ Loved by top cricket stars\n✔ New bigger bottle — same low price!\n\nJoin the FIZZO team today!\n\n*Results may vary. FIZZO contains sugar. Enjoy as part of a balanced diet.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the advert mention cricket stars?",
+          "right": "To make readers want to be like them",
+          "wrong": [
+            "To sell cricket bats",
+            "To list the drink's ingredients"
+          ],
+          "explain": "Linking famous people to a product makes it seem special."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What is the small star (*) for?",
+          "right": "It points to a note in small print",
+          "wrong": [
+            "It shows the drink is the best",
+            "It decorates the advert"
+          ],
+          "explain": "The star leads to \"Results may vary\" at the base."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"Results may vary\" quietly admit?",
+          "right": "The drink may not make you faster at all",
+          "wrong": [
+            "Some bottles are bigger",
+            "The drink comes in flavours"
+          ],
+          "explain": "The big claim at the top is not promised after all."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which claim can be checked as a fact?",
+          "right": "FIZZO contains sugar",
+          "wrong": [
+            "You'll think quicker",
+            "It is the drink of champions"
+          ],
+          "explain": "Sugar content can be checked; the others are claims to persuade."
+        }
+      ]
+    },
+    {
+      "id": "kt4.article",
+      "level": 4,
+      "kind": "article",
+      "title": "The Bridge Made of Roots",
+      "text": "In the hills of Meghalaya, in north-east India, some bridges were not built — they were grown.\n\nThe Khasi people noticed that the rubber fig tree sends out strong roots above the ground. Over many years, villagers guided these roots across streams, using hollow betel-nut trunks as guides. When the roots reached the other bank, they were allowed to grow into the soil. Slowly, the roots thickened and twisted together into a bridge.\n\nA root bridge can take fifteen years or more to become strong enough to walk on. But once it is grown, it becomes stronger every year, unlike a bridge of wood or steel, which weakens with age. Some root bridges are thought to be hundreds of years old and can carry fifty people at once.\n\nToday, scientists study these bridges as an example of building with nature instead of against it.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Which tree's roots are used?",
+          "right": "the rubber fig",
+          "wrong": [
+            "the coconut palm",
+            "the banyan"
+          ],
+          "explain": "The rubber fig tree sends out strong roots above the ground."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happens after the roots reach the other bank?",
+          "right": "They grow into the soil",
+          "wrong": [
+            "They are cut and dried",
+            "They are tied with steel"
+          ],
+          "explain": "\"They were allowed to grow into the soil.\""
+        },
+        {
+          "skill": "compare",
+          "prompt": "How is a root bridge different from a steel one?",
+          "right": "It gets stronger with age, not weaker",
+          "wrong": [
+            "It is built in a week",
+            "It can carry fewer people"
+          ],
+          "explain": "A steel or wood bridge weakens with age; a root bridge strengthens."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the last paragraph suggest?",
+          "right": "People can learn from building with nature",
+          "wrong": [
+            "Root bridges should be replaced",
+            "Scientists built the bridges"
+          ],
+          "explain": "Scientists study them as building with nature."
+        }
+      ]
+    },
+    {
+      "id": "kt4.chart",
+      "level": 4,
+      "kind": "chart",
+      "title": "Pocket Money Survey",
+      "text": "How do children in Class 5 spend their pocket money?\n(A survey of 40 children)\n\nSnacks and sweets      14 children\nSaving it              10 children\nBooks and comics        8 children\nToys and games          6 children\nGiving to others        2 children\n\nOur class thinks saving is a good habit. Next term, we will see if more children choose to save after our talk on money.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many children were asked?",
+          "right": "40",
+          "wrong": [
+            "14",
+            "10"
+          ],
+          "explain": "A survey of 40 children."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do most children spend their money on?",
+          "right": "Snacks and sweets",
+          "wrong": [
+            "Saving it",
+            "Books and comics"
+          ],
+          "explain": "14 is the largest number."
+        },
+        {
+          "skill": "inference",
+          "prompt": "How many more children buy snacks than books?",
+          "right": "six",
+          "wrong": [
+            "four",
+            "eight"
+          ],
+          "explain": "14 minus 8 is 6."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which of these is an opinion?",
+          "right": "Saving is a good habit",
+          "wrong": [
+            "Ten children save",
+            "Two children give to others"
+          ],
+          "explain": "\"Our class thinks\" shows it is an opinion, not a count."
+        }
+      ]
+    },
+    {
+      "id": "kt4.diary",
+      "level": 4,
+      "kind": "diary",
+      "title": "A Day Without Electricity",
+      "text": "Wednesday, 2 October\n\nThe power went off at nine this morning and did not come back until the evening. At first it felt like a disaster. No fan, no television, and my phone game died at level eleven.\n\nBy lunchtime I had given up being cross. Thatha took out the old carrom board from under his bed. I had never seen him play before, and he beat me three games in a row. He said he used to play by lamplight with his brothers, playing for tamarind seeds.\n\nIn the evening we sat on the terrace because the house was hot. We counted fourteen bats and one shooting star. When the lights came back on, everyone cheered, but I was almost sorry.",
+      "questions": [
+        {
+          "skill": "feelings",
+          "prompt": "How did the writer feel when the power first went off?",
+          "right": "annoyed",
+          "wrong": [
+            "delighted",
+            "sleepy"
+          ],
+          "explain": "\"At first it felt like a disaster\" and \"I had given up being cross\"."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did Thatha play for when he was young?",
+          "right": "tamarind seeds",
+          "wrong": [
+            "glass marbles",
+            "silver coins"
+          ],
+          "explain": "He used to play playing for tamarind seeds."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"disaster\" mean in the first paragraph?",
+          "right": "something very bad",
+          "wrong": [
+            "something very funny",
+            "something very old"
+          ],
+          "explain": "The writer thought losing power was terrible at first."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why was the writer \"almost sorry\" when the lights came back?",
+          "right": "The day without power had become special",
+          "wrong": [
+            "The fan had broken in the heat",
+            "Thatha had already gone to sleep"
+          ],
+          "explain": "Carrom, stories and stars made it a good day."
+        }
+      ]
+    },
+    {
+      "id": "kt4.email",
+      "level": 4,
+      "kind": "letter",
+      "title": "An Email to the Council",
+      "text": "To: ward office\nFrom: Class 6B, Lake View School\nSubject: Broken street light on Lake Road\n\nDear Sir or Madam,\n\nWe are writing about the street light outside our school gate on Lake Road. It has not worked for three weeks. In winter it is dark by six, and many of us walk home after evening games. Two children have tripped on the broken pavement beside the light.\n\nWe checked, and the light is number LR-17. We would be grateful if it could be repaired soon, and if the pavement could be looked at too.\n\nThank you for your time.\n\nYours faithfully,\nClass 6B",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of the email?",
+          "right": "To ask for the street light to be repaired",
+          "wrong": [
+            "To thank the council for a new light",
+            "To invite the council to evening games"
+          ],
+          "explain": "The class asks for the light (and pavement) to be repaired."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How long has the light been broken?",
+          "right": "three weeks",
+          "wrong": [
+            "six days",
+            "three months"
+          ],
+          "explain": "\"It has not worked for three weeks.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the class give the light's number?",
+          "right": "So the council can find the right light quickly",
+          "wrong": [
+            "Because numbers look important",
+            "Because the light is new"
+          ],
+          "explain": "A number makes it easy to identify which light to fix."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Which word best describes the tone of the email?",
+          "right": "polite",
+          "wrong": [
+            "angry",
+            "joking"
+          ],
+          "explain": "It uses \"We would be grateful\" and \"Thank you for your time\"."
+        }
+      ]
+    },
+    {
+      "id": "kt4.instructions",
+      "level": 4,
+      "kind": "instructions",
+      "title": "What to Do in an Earthquake",
+      "text": "Earthquake safety at school\n\nAn earthquake gives no warning, so it helps to know what to do before it happens.\n\nIf you are inside:\nDROP to the floor, so the shaking cannot knock you over.\nCOVER your head and neck under a strong desk or table.\nHOLD ON to the desk until the shaking stops.\n\nKeep away from windows, shelves and anything that could fall. Do not run outside while the ground is still shaking, and never use a lift.\n\nIf you are outside:\nMove to an open space, away from buildings, trees and electric wires.\n\nWhen the shaking stops, follow your teacher calmly to the meeting point on the playground.",
+      "questions": [
+        {
+          "skill": "sequence",
+          "prompt": "What is the first thing to do inside?",
+          "right": "Drop to the floor",
+          "wrong": [
+            "Run outside",
+            "Hold on to a shelf"
+          ],
+          "explain": "The order is drop, cover, hold on."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why keep away from windows?",
+          "right": "Glass may break and cut you",
+          "wrong": [
+            "Windows let in cold air",
+            "You cannot see your teacher"
+          ],
+          "explain": "Things that could fall or break are dangerous."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why are DROP, COVER and HOLD ON in capital letters?",
+          "right": "They are the key actions to remember",
+          "wrong": [
+            "They are the names of places",
+            "The writer was angry"
+          ],
+          "explain": "Capitals make the most important steps stand out."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where should you go if you are outside?",
+          "right": "An open space away from buildings",
+          "wrong": [
+            "Under a big tree",
+            "Into the nearest building"
+          ],
+          "explain": "Move to an open space, away from buildings, trees and wires."
+        }
+      ]
+    },
+    {
+      "id": "kt4.pair",
+      "level": 4,
+      "kind": "pair",
+      "title": "Should Schools Have Longer Breaks?",
+      "text": "Text A — Meena, Class 7\nOur morning break is only ten minutes. By the time we reach the water tap, the bell rings. If breaks were twenty minutes, we could eat properly and play a little. We would come back to class fresh and ready to listen.\n\nText B — Mr Pillai, a teacher\nA longer break sounds pleasant, but the school day would have to end later. Many children travel by the same bus, which cannot leave later. A better answer is to let children drink water during lessons, so the short break is used for eating and resting.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "What do both writers agree about?",
+          "right": "Children need time to drink and eat",
+          "wrong": [
+            "The school day should end later",
+            "Breaks should be twenty minutes"
+          ],
+          "explain": "Meena wants time to eat and drink; Mr Pillai suggests water during lessons so the break is for eating."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What is Mr Pillai's main reason against a longer break?",
+          "right": "The school bus cannot leave later",
+          "wrong": [
+            "Children play too much",
+            "Teachers need more time"
+          ],
+          "explain": "The day would end later, but the bus cannot leave later."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How long is the break now?",
+          "right": "ten minutes",
+          "wrong": [
+            "twenty minutes",
+            "half an hour"
+          ],
+          "explain": "\"Our morning break is only ten minutes.\""
+        },
+        {
+          "skill": "summary",
+          "prompt": "Which sentence best sums up Text A?",
+          "right": "A longer break would help children eat, play and listen better",
+          "wrong": [
+            "Children should leave school earlier",
+            "Water taps should be nearer the classroom"
+          ],
+          "explain": "Meena's whole argument is that twenty minutes would help children."
+        }
+      ]
+    },
+    {
+      "id": "kt4.poem",
+      "level": 4,
+      "kind": "poem",
+      "title": "Night Train",
+      "text": "Through the sleeping fields the night train runs,\npast silver ponds and silent towns;\nits windows glow like a string of suns\nthat wander over the darkened downs.\n\nInside, a baby softly cries,\na grandfather snores, a student reads;\nthe tea-man calls with sleepy eyes,\n\"Chai, chai!\" to anyone who needs.\n\nAt dawn the train will reach the sea,\nand all these strangers, side by side,\nwill step out into the day, set free,\nand scatter like seeds far and wide.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "The windows \"glow like a string of suns\". What picture does this create?",
+          "right": "A line of bright lights moving in the dark",
+          "wrong": [
+            "The train is very hot",
+            "It is the middle of the day"
+          ],
+          "explain": "Lit windows look like small suns in a row at night."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What does the tea-man call out?",
+          "right": "Chai, chai!",
+          "wrong": [
+            "Wake up!",
+            "All aboard!"
+          ],
+          "explain": "\"Chai, chai!\" to anyone who needs."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The passengers \"scatter like seeds\". What does this mean?",
+          "right": "They go off in many different directions",
+          "wrong": [
+            "They plant gardens by the sea",
+            "They fall asleep on the platform"
+          ],
+          "explain": "Seeds blow everywhere; so do the passengers at the end."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How is the poem arranged?",
+          "right": "Night outside, people inside, then arrival at dawn",
+          "wrong": [
+            "Arrival first, then the journey",
+            "Only the people inside the train"
+          ],
+          "explain": "Stanza 1 is the view outside, 2 the passengers, 3 the morning arrival."
+        }
+      ]
+    },
+    {
+      "id": "kt4.poem2",
+      "level": 4,
+      "kind": "poem",
+      "title": "Monsoon Morning",
+      "text": "The sky was a lid of iron grey,\nthe air hung heavy, hot and still;\nthe dogs lay panting in the shade,\nthe crows were silent on the hill.\n\nThen far away, a drumbeat rolled,\na sudden wind ran through the trees,\nand the first plump drops came tumbling down\nlike coins thrown out by a merchant's sleeve.\n\nThe children ran out, faces up,\nthe farmers laughed beside the plough,\nthe dry earth breathed a smell so sweet —\nand the whole town was singing now.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "\"The sky was a lid of iron grey.\" What does this suggest?",
+          "right": "The sky was dark, heavy and closed in",
+          "wrong": [
+            "The sky was made of metal",
+            "The sky was bright and clear"
+          ],
+          "explain": "A lid shuts things in; iron grey is dark and heavy."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What is the \"drumbeat\" far away?",
+          "right": "thunder",
+          "wrong": [
+            "a wedding band",
+            "a school bell"
+          ],
+          "explain": "Before the rain comes, thunder rolls like a drum."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the mood change from stanza one to stanza three?",
+          "right": "From heavy and still to joyful",
+          "wrong": [
+            "From joyful to frightening",
+            "From noisy to silent"
+          ],
+          "explain": "The waiting heat gives way to laughing and singing."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why do the farmers laugh?",
+          "right": "The rain will help their crops",
+          "wrong": [
+            "They have finished work",
+            "They are tired of the sun"
+          ],
+          "explain": "Farmers need the monsoon rain for their fields."
+        }
+      ]
+    },
+    {
+      "id": "kt5.article",
+      "level": 5,
+      "kind": "article",
+      "title": "Why Do Fireflies Glow?",
+      "text": "On warm summer evenings, the fields near rivers sometimes fill with tiny green lights. These are fireflies, small beetles that make their own light.\n\nHow do they do it? Inside a firefly's tail, two chemicals mix with oxygen from the air. The reaction gives off light but almost no heat, which is why scientists call it \"cold light\". A bulb wastes most of its energy as heat; a firefly turns nearly all of its energy into light.\n\nFireflies glow mainly to find a partner. Each kind of firefly flashes in its own pattern, like a secret code. A male may flash twice and wait; a female of the same kind answers with her own flash.\n\nSadly, fireflies are becoming rare. Bright street lights confuse their signals, and they lose the damp, dark places where they lay eggs. Turning off outdoor lights at night and keeping some wild grass near ponds can help them return.",
+      "questions": [
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"cold light\" mean?",
+          "right": "Light that gives off almost no heat",
+          "wrong": [
+            "Light that only shines in winter",
+            "Light that is blue in colour"
+          ],
+          "explain": "The reaction gives off light but almost no heat."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why do fireflies mainly glow?",
+          "right": "To find a partner",
+          "wrong": [
+            "To scare away birds",
+            "To find food in the dark"
+          ],
+          "explain": "Fireflies glow mainly to find a partner."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why are the flash patterns compared to \"a secret code\"?",
+          "right": "Only fireflies of the same kind understand them",
+          "wrong": [
+            "They are written down in numbers",
+            "Scientists are not able to see them"
+          ],
+          "explain": "Each kind has its own pattern that its partner answers."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What is the writer's purpose in the last paragraph?",
+          "right": "To explain a problem and how people can help",
+          "wrong": [
+            "To describe what fireflies eat",
+            "To tell a story about one firefly"
+          ],
+          "explain": "It says why fireflies are rare and what we can do."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How is the article organised?",
+          "right": "What fireflies are, how they glow, why, then a threat",
+          "wrong": [
+            "A list of steps to catch fireflies",
+            "A diary of one summer night"
+          ],
+          "explain": "Each paragraph answers a new question."
+        }
+      ]
+    },
+    {
+      "id": "kt5.letter",
+      "level": 5,
+      "kind": "letter",
+      "title": "A Letter of Complaint",
+      "text": "14 Gandhi Nagar\nMadurai 625020\n9 October\n\nThe Manager\nFresh Fruit Market\nMadurai\n\nDear Sir,\n\nOn 6 October I bought a box of six mangoes from your shop for 300 rupees. The label said \"Ripe and ready to eat\". However, when I opened the box at home, four of the mangoes were rotten inside and had to be thrown away.\n\nI have always been happy with your shop, so I was surprised and disappointed. I have kept the receipt and the box.\n\nI would like you to replace the mangoes or return the money. I can bring the receipt to the shop on Saturday morning.\n\nYours faithfully,\nS. Kumar",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many mangoes were rotten?",
+          "right": "four",
+          "wrong": [
+            "six",
+            "two"
+          ],
+          "explain": "Four of the mangoes were rotten inside."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does Mr Kumar want?",
+          "right": "New mangoes or his money back",
+          "wrong": [
+            "The shop to close",
+            "A bigger box next time"
+          ],
+          "explain": "\"I would like you to replace the mangoes or return the money.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does he mention keeping the receipt?",
+          "right": "To prove that he bought the mangoes there",
+          "wrong": [
+            "Because receipts are colourful",
+            "To show how much he likes mangoes"
+          ],
+          "explain": "The receipt is proof of the purchase."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does he say he has \"always been happy\" with the shop?",
+          "right": "To stay polite and fair while complaining",
+          "wrong": [
+            "To ask for a job",
+            "To praise a different shop"
+          ],
+          "explain": "It keeps the letter fair and friendly, not rude."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the letter end with \"Yours faithfully\"?",
+          "right": "It is a formal letter to someone he does not know by name",
+          "wrong": [
+            "He is writing to a close friend of his",
+            "It is a page from his own diary"
+          ],
+          "explain": "Formal letters starting \"Dear Sir\" end with \"Yours faithfully\"."
+        }
+      ]
+    },
+    {
+      "id": "kt5.notice",
+      "level": 5,
+      "kind": "notice",
+      "title": "Lost Property Notice",
+      "text": "LOST PROPERTY — CLAIM BY FRIDAY\n\nThe following items were left behind after the Annual Day:\n• a blue water bottle with a sticker of a whale\n• a grey school sweater, size 28, with no name\n• a pair of black shoes, size 4\n• a silver bangle (please describe it at the office)\n• a library book: \"The Jungle Book\"\n\nItems may be collected from the school office between 8 and 9 am. Please bring a note from home.\n\nItems not claimed by Friday will be given to charity, except the library book, which will go back to the library. Please write your name on all your belongings!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What will happen to unclaimed items?",
+          "right": "They will be given to charity",
+          "wrong": [
+            "They will be thrown away",
+            "They will be sold to pupils"
+          ],
+          "explain": "Items not claimed by Friday will be given to charity."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why must you describe the bangle at the office?",
+          "right": "To prove it is really yours",
+          "wrong": [
+            "Because it is very heavy",
+            "Because the office cannot see it"
+          ],
+          "explain": "Something valuable is only returned to someone who can describe it."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why is the sweater hard to return?",
+          "right": "It has no name on it",
+          "wrong": [
+            "It is the wrong size",
+            "It is grey"
+          ],
+          "explain": "With no name, the school cannot tell whose it is."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the notice end with an exclamation?",
+          "right": "To remind everyone to label their things",
+          "wrong": [
+            "To say the office is closing",
+            "To show the writer is angry"
+          ],
+          "explain": "Naming belongings would stop this problem happening."
+        },
+        {
+          "skill": "detail",
+          "prompt": "When can items be collected?",
+          "right": "8 to 9 am at the office",
+          "wrong": [
+            "after school on Friday",
+            "at the Annual Day"
+          ],
+          "explain": "Between 8 and 9 am from the school office."
+        }
+      ]
+    },
+    {
+      "id": "kt5.pair",
+      "level": 5,
+      "kind": "pair",
+      "title": "Two Reviews of the Same Film",
+      "text": "Review 1 — by Arjun, age 12\n\"Space Cadets\" is the best film of the year! The rocket chase in the middle had me on the edge of my seat, and the robot Bolt is hilarious. The ending made the whole cinema cheer. Go and see it twice!\n\nReview 2 — by Sara, age 13\n\"Space Cadets\" looks wonderful, and Bolt the robot is funny. But the story is too long. After the rocket chase, nothing much happens for half an hour, and I started looking at my watch. The ending is exciting, but I wish the film were shorter. Three stars out of five.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "What do both reviewers like?",
+          "right": "Bolt the robot",
+          "wrong": [
+            "The length of the film",
+            "The quiet middle part"
+          ],
+          "explain": "Arjun calls Bolt hilarious; Sara says he is funny."
+        },
+        {
+          "skill": "compare",
+          "prompt": "Where do the reviewers disagree?",
+          "right": "Whether the film is too long",
+          "wrong": [
+            "Whether the film looks good",
+            "Whether Bolt is funny"
+          ],
+          "explain": "Sara says it is too long; Arjun loved all of it."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "\"On the edge of my seat\" means Arjun was …",
+          "right": "very excited",
+          "wrong": [
+            "uncomfortable",
+            "falling asleep"
+          ],
+          "explain": "The phrase means so excited that you lean forward."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did Sara start looking at her watch?",
+          "right": "She was bored",
+          "wrong": [
+            "The film was about time",
+            "She had to leave early"
+          ],
+          "explain": "Nothing much happened for half an hour."
+        },
+        {
+          "skill": "summary",
+          "prompt": "Which sums up Sara's view?",
+          "right": "Fun and good-looking, but too long",
+          "wrong": [
+            "The best film of the year",
+            "Boring from start to end"
+          ],
+          "explain": "She likes parts but wishes it were shorter: three stars."
+        }
+      ]
+    },
+    {
+      "id": "kt5.poem",
+      "level": 5,
+      "kind": "poem",
+      "title": "The Kite Seller",
+      "text": "He comes each January, thin and brown,\nwith a hundred kites tied above his head,\na rainbow walking through the town,\nyellow, purple, green and red.\n\nThe children follow, three and four,\nlike ducklings in a crooked line;\nthey count their coins, then count once more,\nand point and whisper, \"That one's mine.\"\n\nHe never flies a kite himself;\nhis hands are busy, his eyes are old.\nHe sells the sky, then counts his wealth:\na few warm coins against the cold.\n\nAnd when the last kite leaves his hand\nand climbs into the windy blue,\nhe smiles as if he understands\na kind of flying, too.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "Why is the seller called \"a rainbow walking through the town\"?",
+          "right": "His many coloured kites make him look like a rainbow",
+          "wrong": [
+            "He wears a coat of rainbow colours",
+            "He always walks after the rain stops"
+          ],
+          "explain": "Kites of every colour above his head look like a rainbow."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The children are \"like ducklings in a crooked line\". What does this show?",
+          "right": "They follow him eagerly in an untidy line",
+          "wrong": [
+            "They are very small and yellow",
+            "They are swimming in a pond"
+          ],
+          "explain": "Ducklings follow their mother in a wobbly line."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"He sells the sky\" mean?",
+          "right": "His kites let children reach the sky",
+          "wrong": [
+            "He sells paintings of the sky",
+            "He flies aeroplanes for money"
+          ],
+          "explain": "Each kite gives a child a share of the sky."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the main idea of the last stanza?",
+          "right": "He finds joy in the children's happiness",
+          "wrong": [
+            "He is sad that he cannot fly",
+            "He wants to keep the last kite"
+          ],
+          "explain": "He smiles as if he too feels a kind of flying."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What is the rhyme pattern in each stanza?",
+          "right": "Lines 1 and 3 rhyme, and lines 2 and 4 rhyme",
+          "wrong": [
+            "All four lines end with the same sound",
+            "None of the lines rhyme at all"
+          ],
+          "explain": "brown/town, head/red; four/more, line/mine."
+        }
+      ]
+    },
+    {
+      "id": "kt5.poem2",
+      "level": 5,
+      "kind": "poem",
+      "title": "The Lighthouse Keeper's Daughter",
+      "text": "Each night she climbs the ninety stairs,\na lantern swinging from her hand,\nto where the great glass eye looks out\nacross the dark and sleeping land.\n\nShe trims the wick, she cleans the glass,\nshe listens to the ocean roar;\nshe counts the ships by their small lights\nlike candles on a moving floor.\n\nThe sailors never know her name,\nthey only know the steady beam\nthat keeps them safe from hidden rocks\nand guides them homeward, like a dream.\n\nAnd in the morning, tired and pale,\nshe walks the ninety stairs once more,\nand sleeps, while all the fishing boats\ncome laughing in to reach the shore.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What is the \"great glass eye\"?",
+          "right": "The lighthouse lamp",
+          "wrong": [
+            "The daughter's eye",
+            "A window in her house"
+          ],
+          "explain": "The lamp looks out across the sea like an eye."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Ships' lights are \"like candles on a moving floor\". What is the moving floor?",
+          "right": "the sea",
+          "wrong": [
+            "the stairs",
+            "the sky"
+          ],
+          "explain": "The ships float on the restless water."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"The sailors never know her name\" suggest?",
+          "right": "Her important work goes unthanked",
+          "wrong": [
+            "She is a stranger to the town",
+            "She does not want to help"
+          ],
+          "explain": "They see the beam but not the person behind it."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the poem mention \"ninety stairs\" twice?",
+          "right": "To show the same tiring climb every night and morning",
+          "wrong": [
+            "Because the stairs were broken and old",
+            "To count how many ships came in"
+          ],
+          "explain": "The repeat shows her daily routine and effort."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the main idea of the poem?",
+          "right": "Quiet, unseen work that keeps others safe",
+          "wrong": [
+            "The danger of fishing boats",
+            "How to build a lighthouse"
+          ],
+          "explain": "She works through the night so the boats return safely."
+        }
+      ]
+    },
+    {
+      "id": "kt5.speech",
+      "level": 5,
+      "kind": "speech",
+      "title": "Welcome Speech for Sports Day",
+      "text": "Good morning to our chief guest, our principal, teachers, parents and, most of all, the athletes of Hillside School!\n\nToday the field belongs to you. For six weeks you have trained in the heat, before classes and after them. Some of you have fallen, some have been left out of teams, and some have kept going when your legs said stop. That, more than any medal, is what sports day celebrates.\n\nOf course, there will be winners. Cheer for them loudly. But cheer just as loudly for the runner who finishes last but finishes. The scoreboard shows who was fastest today; it cannot show who has improved the most.\n\nBefore we begin, a few reminders. Drink water between events. Stay in your house tents unless your race is called. And parents, please stay behind the white rope.\n\nAthletes, take your places. Let the games begin!",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of this speech?",
+          "right": "To welcome everyone and open the sports day",
+          "wrong": [
+            "To announce the winners of each race",
+            "To ask parents to join the races"
+          ],
+          "explain": "It greets the audience and ends with \"Let the games begin!\""
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What does the speaker value most?",
+          "right": "Effort and improvement",
+          "wrong": [
+            "Only winning medals",
+            "Fast times on the scoreboard"
+          ],
+          "explain": "\"That, more than any medal, is what sports day celebrates.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"when your legs said stop\" mean?",
+          "right": "When they felt too tired to go on",
+          "wrong": [
+            "When a teacher blew a whistle",
+            "When they hurt their legs badly"
+          ],
+          "explain": "Legs cannot speak; it means they felt exhausted."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where must parents stay?",
+          "right": "behind the white rope",
+          "wrong": [
+            "in the house tents",
+            "on the running track"
+          ],
+          "explain": "\"Parents, please stay behind the white rope.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the speech begin with a list of people?",
+          "right": "To greet the audience politely",
+          "wrong": [
+            "To show who will run races",
+            "To name the prize winners"
+          ],
+          "explain": "Formal speeches open by greeting the guests."
+        }
+      ]
+    },
+    {
+      "id": "kt5.timetable",
+      "level": 5,
+      "kind": "timetable",
+      "title": "Railway Timetable",
+      "text": "Chennai Egmore to Madurai — weekday trains\n\nTrain            Leaves Chennai   Arrives Madurai   Notes\nVaigai Express   1:40 pm          9:20 pm           Daily\nPandian Express  9:40 pm          5:15 am           Daily, sleeper coaches\nTejas Express    6:00 am          12:15 pm          Not on Thursdays\nPothigai Express  8:40 pm          4:05 am           Stops at Madurai, then goes on\n\nAll times are on the 24-hour clock in the station display.\nBook at least a day ahead in the festival season.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Which train has sleeper coaches?",
+          "right": "Pandian Express",
+          "wrong": [
+            "Vaigai Express",
+            "Tejas Express"
+          ],
+          "explain": "The Notes column says sleeper coaches for Pandian."
+        },
+        {
+          "skill": "inference",
+          "prompt": "You must travel on a Thursday morning. Which train is NOT possible?",
+          "right": "Tejas Express",
+          "wrong": [
+            "Vaigai Express",
+            "Pandian Express"
+          ],
+          "explain": "Tejas does not run on Thursdays."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Which train is fastest?",
+          "right": "Tejas Express",
+          "wrong": [
+            "Pandian Express",
+            "Pothigai Express"
+          ],
+          "explain": "6:00 to 12:15 is about six and a quarter hours, the shortest time."
+        },
+        {
+          "skill": "detail",
+          "prompt": "On the 24-hour clock, how is 9:20 pm shown?",
+          "right": "21:20",
+          "wrong": [
+            "9:20",
+            "19:20"
+          ],
+          "explain": "9 pm is 21:00 on the 24-hour clock."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the timetable give advice about booking?",
+          "right": "Trains fill up quickly at festival time",
+          "wrong": [
+            "Trains are cheaper at festivals",
+            "Booking is closed on weekdays"
+          ],
+          "explain": "Many people travel at festival time, so seats run out."
+        }
+      ]
+    },
+    {
+      "id": "kt5.travel",
+      "level": 5,
+      "kind": "article",
+      "title": "A Train to the Clouds",
+      "text": "The little blue train to Ooty does not rush. It climbs. For five hours it pushes and puffs up the Nilgiri hills, so slowly that in places you could step off, pick a flower and step back on.\n\nWe left Mettupalayam in warm sunshine, past banana fields and areca palms. Within an hour the air grew cool, and the plants changed: ferns hung over the line, and the first tea gardens appeared, neat green rows combed across the slopes.\n\nThe train crossed more than two hundred bridges and passed through sixteen tunnels. Each time we entered one, the children in our carriage screamed with delight, and each time we came out, the view was different — a waterfall, a valley full of mist, a village with roofs like scattered playing cards.\n\nBy the time we reached Ooty, I was wearing my sweater and holding a cup of hot tea. It felt as though we had travelled not just up a mountain, but into a different season.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "Why does the writer say you \"could step off, pick a flower and step back on\"?",
+          "right": "To show how slowly the train moves",
+          "wrong": [
+            "To suggest the train had stopped",
+            "Because passengers picked flowers"
+          ],
+          "explain": "It exaggerates to show the slow climb."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many tunnels did the train pass through?",
+          "right": "sixteen",
+          "wrong": [
+            "two hundred",
+            "five"
+          ],
+          "explain": "\"Passed through sixteen tunnels.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Tea gardens are \"combed across the slopes\". What picture does this make?",
+          "right": "Neat, even rows like combed hair",
+          "wrong": [
+            "Messy, tangled bushes",
+            "Bare brown hillsides"
+          ],
+          "explain": "Combing makes straight, tidy lines."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"into a different season\" mean?",
+          "right": "It had become much cooler, like winter",
+          "wrong": [
+            "The trip took many months",
+            "They arrived in the rainy season"
+          ],
+          "explain": "From warm sunshine to sweater and hot tea."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What kind of writing is this?",
+          "right": "Travel writing about a journey",
+          "wrong": [
+            "A timetable for the train",
+            "A letter of complaint"
+          ],
+          "explain": "It describes a journey and its sights for readers."
+        }
+      ]
+    },
+    {
+      "id": "kt6.article",
+      "level": 6,
+      "kind": "article",
+      "title": "The Myth of the Five-Second Rule",
+      "text": "Many children believe in the \"five-second rule\": if food falls on the floor, it is safe to eat as long as you pick it up within five seconds. It is a comforting idea, but is it true?\n\nIn 2016, scientists in the United States tested it. They dropped watermelon, bread, buttered bread and sweets onto steel, tiles, wood and carpet that had been covered with harmless bacteria. They then measured how many bacteria moved onto the food after less than one second, five seconds, thirty seconds and five minutes.\n\nThe results were clear. Bacteria jumped onto food in less than one second. Longer times did mean more bacteria, but there was no safe moment. Wet food, such as watermelon, picked up the most, because bacteria travel easily in moisture. Surprisingly, carpet passed fewer bacteria than tiles or steel, perhaps because food touches less of its surface.\n\nThe researchers' conclusion was simple: the five-second rule is \"a significant oversimplification\". In other words, it may make us feel better, but it does not keep us safe.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer begin with a question?",
+          "right": "To make readers curious before giving the answer",
+          "wrong": [
+            "To show the writer does not know",
+            "To ask readers to do the test"
+          ],
+          "explain": "\"Is it true?\" draws readers into the article."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which food picked up the most bacteria?",
+          "right": "watermelon",
+          "wrong": [
+            "plain bread",
+            "hard sweets"
+          ],
+          "explain": "Wet food, such as watermelon, picked up the most."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why might carpet pass fewer bacteria?",
+          "right": "Food touches less of the carpet's surface",
+          "wrong": [
+            "Carpet is cleaned more often",
+            "Bacteria cannot live on carpet"
+          ],
+          "explain": "The article suggests less contact with the surface."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "\"A significant oversimplification\" means the rule is …",
+          "right": "far too simple to be true",
+          "wrong": [
+            "completely correct",
+            "hard to understand"
+          ],
+          "explain": "The next sentence explains: it does not keep us safe."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which is an opinion rather than a finding?",
+          "right": "It is a comforting idea",
+          "wrong": [
+            "Bacteria moved in under one second",
+            "Wet food picked up more bacteria"
+          ],
+          "explain": "\"Comforting\" is a feeling; the others were measured."
+        }
+      ]
+    },
+    {
+      "id": "kt6.chart",
+      "level": 6,
+      "kind": "chart",
+      "title": "How Pupils Travel to School",
+      "text": "How do pupils at Riverside School travel to school?\n(Surveys in 2015 and 2025, 500 pupils each time)\n\n                 2015     2025\nWalk              180      110\nBicycle           120       40\nSchool bus         90      150\nCar or scooter     60      170\nPublic bus         50       30\n\nThe school notes that the road outside the gate is now crowded every morning, and asks families who live within two kilometres to walk or cycle where it is safe.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many pupils came by car or scooter in 2025?",
+          "right": "170",
+          "wrong": [
+            "60",
+            "150"
+          ],
+          "explain": "Read the Car or scooter row under 2025."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Which way of travelling grew the most?",
+          "right": "Car or scooter",
+          "wrong": [
+            "School bus",
+            "Walking"
+          ],
+          "explain": "Car or scooter rose from 60 to 170, a rise of 110."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why might the road outside the gate be crowded now?",
+          "right": "Many more pupils arrive by car or scooter",
+          "wrong": [
+            "Fewer pupils come to school",
+            "The public bus stopped running"
+          ],
+          "explain": "Car and scooter trips nearly tripled."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many fewer pupils cycled in 2025 than in 2015?",
+          "right": "eighty",
+          "wrong": [
+            "forty",
+            "one hundred and twenty"
+          ],
+          "explain": "120 minus 40 is 80."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the school want families to do?",
+          "right": "Walk or cycle if they live near",
+          "wrong": [
+            "Buy a school bus pass",
+            "Drive more carefully"
+          ],
+          "explain": "It asks families within two kilometres to walk or cycle."
+        }
+      ]
+    },
+    {
+      "id": "kt6.letter",
+      "level": 6,
+      "kind": "letter",
+      "title": "A Letter to the Editor",
+      "text": "The Editor\nThe Morning Chronicle\nCoimbatore\n\nSir,\n\nI am a Class 8 student who cycles six kilometres to school every day. I am writing about the dangerous junction at Gandhi Road and Mill Street.\n\nEvery morning, about two hundred children cross this junction. There is no zebra crossing, no traffic signal and no policeman. Buses turn without slowing down. Last month a classmate of mine was knocked off his bicycle; luckily he escaped with a broken wrist.\n\nI have spoken to my teachers and to other parents, and we all agree that a simple traffic signal and a painted crossing would make the junction much safer. A crossing guard during school hours would help even more.\n\nI hope that, by printing this letter, your newspaper will bring this problem to the attention of the authorities before a more serious accident happens.\n\nYours faithfully,\nKarthik R.\nClass 8, Valley Public School",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "Why did Karthik write to a newspaper?",
+          "right": "To make the authorities notice the problem",
+          "wrong": [
+            "To ask the newspaper for a bicycle",
+            "To thank the police for their help"
+          ],
+          "explain": "He hopes the letter will reach the authorities."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many children cross the junction each morning?",
+          "right": "about two hundred",
+          "wrong": [
+            "about six",
+            "about eight"
+          ],
+          "explain": "About two hundred children cross this junction."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does he describe his classmate's accident?",
+          "right": "As a real example that the danger is serious",
+          "wrong": [
+            "To blame his classmate for falling",
+            "To make the letter seem longer"
+          ],
+          "explain": "A real accident is strong evidence."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"a more serious accident\" suggest?",
+          "right": "Someone could be badly hurt next time",
+          "wrong": [
+            "The broken wrist was serious enough",
+            "Buses will stop coming"
+          ],
+          "explain": "He fears worse harm if nothing changes."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does he say teachers and parents agree?",
+          "right": "To show many people share his view",
+          "wrong": [
+            "To ask them to write instead",
+            "To complain about his teachers"
+          ],
+          "explain": "Support from others makes his request stronger."
+        }
+      ]
+    },
+    {
+      "id": "kt6.notice",
+      "level": 6,
+      "kind": "notice",
+      "title": "Water Supply Notice",
+      "text": "CITY WATER BOARD — PUBLIC NOTICE\n\nPlanned interruption to water supply\n\nOwing to essential repairs to the main pipeline at Anna Salai, the water supply to Wards 12, 13 and 15 will be interrupted from 6 am on Saturday 23 November until 6 pm on Sunday 24 November.\n\nResidents are advised to:\n• store enough drinking water for two days before Friday night;\n• keep taps closed during the interruption, to prevent flooding when the supply returns;\n• boil water for the first day after the supply is restored, as it may be cloudy.\n\nWater tankers will be stationed at the Ward 13 community hall from 8 am to 8 pm on both days.\n\nThe Board regrets the inconvenience caused.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Which wards are affected?",
+          "right": "12, 13 and 15",
+          "wrong": [
+            "12, 14 and 15",
+            "13 only"
+          ],
+          "explain": "Wards 12, 13 and 15."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"interrupted\" mean here?",
+          "right": "stopped for a time",
+          "wrong": [
+            "made cleaner",
+            "made stronger"
+          ],
+          "explain": "The supply stops from Saturday morning to Sunday evening."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why should taps be kept closed?",
+          "right": "Open taps could flood homes when water returns",
+          "wrong": [
+            "Closed taps make the repairs quicker",
+            "Taps may be stolen"
+          ],
+          "explain": "The notice gives this reason directly."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the notice mention water tankers?",
+          "right": "So people can still get water during the repairs",
+          "wrong": [
+            "To advertise a company that sells tankers",
+            "To warn people about heavy traffic"
+          ],
+          "explain": "Tankers supply water while pipes are mended."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What tone does the notice use?",
+          "right": "formal and official",
+          "wrong": [
+            "chatty and funny",
+            "angry and rude"
+          ],
+          "explain": "Words like \"owing to\" and \"residents are advised\" are formal."
+        }
+      ]
+    },
+    {
+      "id": "kt6.pair",
+      "level": 6,
+      "kind": "pair",
+      "title": "Zoo or Wildlife Park?",
+      "text": "Text A — from a zoo's leaflet\nCity Zoo cares for over 300 animals. Our tigers were born here and could not survive in the wild. Every year, 200,000 schoolchildren meet animals they would never see otherwise, and many go on to care about nature for life. Money from tickets helps protect forests in three states.\n\nText B — from a letter to a newspaper\nI visited City Zoo last month. The tiger walked up and down beside the same wall for the whole hour I watched. Animals that roam for miles should not live in small enclosures. Children can learn about wildlife from documentaries and from visits to national parks, where animals live as they should.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "Which text is written to make the zoo look good?",
+          "right": "Text A",
+          "wrong": [
+            "Text B",
+            "Neither text"
+          ],
+          "explain": "A leaflet from the zoo itself presents its best side."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does the tiger walking beside the same wall suggest to the writer of Text B?",
+          "right": "The tiger is unhappy in a small space",
+          "wrong": [
+            "The tiger is guarding its food",
+            "The tiger is tired after eating"
+          ],
+          "explain": "Pacing is used as evidence that the enclosure is too small."
+        },
+        {
+          "skill": "compare",
+          "prompt": "Which point in Text A does Text B answer directly?",
+          "right": "That children learn about animals at the zoo",
+          "wrong": [
+            "That money protects forests",
+            "That tigers were born in the zoo"
+          ],
+          "explain": "B says children can learn from documentaries and national parks instead."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which sentence is a fact, not an opinion?",
+          "right": "City Zoo cares for over 300 animals",
+          "wrong": [
+            "Animals should not live in small enclosures",
+            "Animals live as they should in parks"
+          ],
+          "explain": "The number can be checked; the others are views."
+        },
+        {
+          "skill": "summary",
+          "prompt": "Which best sums up the two texts?",
+          "right": "A sees the zoo as helpful; B sees it as harmful",
+          "wrong": [
+            "Both writers want the zoo closed",
+            "Both writers praise documentaries"
+          ],
+          "explain": "They take opposite views of the same zoo."
+        }
+      ]
+    },
+    {
+      "id": "kt6.poem",
+      "level": 6,
+      "kind": "poem",
+      "title": "The River Speaks",
+      "text": "I was born in the high snow, a thread of cold light,\nI learnt to run downhill before I learnt to sing;\nI carried the mountains' secrets day and night\nand gave them to the plains in the green of spring.\n\nI fed your fields; I turned your mills;\nI carried your boats with patient strength;\nI listened to your songs and your quarrels,\nand kept my promises along my length.\n\nBut now you pour your waste into my veins,\nyou dig my sand, you choke my mouth with stone;\nmy fish grow few; the heron leaves the plains;\nI reach the sea exhausted and alone.\n\nRemember me. I am older than your oldest name.\nGive back my breath, and I will give you back the same.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Who is the speaker of this poem?",
+          "right": "The river itself",
+          "wrong": [
+            "A fisherman",
+            "A mountain"
+          ],
+          "explain": "The title and \"I was born in the high snow\" show the river is speaking."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"pour your waste into my veins\" mean?",
+          "right": "People throw dirt and chemicals into the river's water",
+          "wrong": [
+            "People give the river medicine to drink",
+            "People build new roads along its banks"
+          ],
+          "explain": "The river is described as a body, and its water as veins."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the mood change in stanza three?",
+          "right": "From proud and giving to hurt and tired",
+          "wrong": [
+            "From sad to cheerful",
+            "It does not change at all"
+          ],
+          "explain": "Stanzas 1 and 2 describe gifts; stanza 3 describes harm."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the last line ask people to do?",
+          "right": "Stop polluting the river so it can help them again",
+          "wrong": [
+            "Build more boats to sail on the river",
+            "Move away from the river for ever"
+          ],
+          "explain": "Give back my breath, and I will give you back the same."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"exhausted\" mean in stanza three?",
+          "right": "very tired and weak",
+          "wrong": [
+            "very fast and wild",
+            "very deep and wide"
+          ],
+          "explain": "The river reaches the sea worn out and alone."
+        }
+      ]
+    },
+    {
+      "id": "kt6.poem2",
+      "level": 6,
+      "kind": "poem",
+      "title": "The Last Tiger Speaks",
+      "text": "Once I was the forest's quiet fire:\nmy stripes were sunlight falling through the reeds,\nmy footsteps were the silence before rain.\nThe deer knew me as they know the wind —\nnot seen, but felt along the skin.\n\nNow the forest is a narrow room.\nRoads run like scars across my sleeping ground,\nand every year the walls grow closer in.\nI smell your smoke at night; I hear your trucks;\nI drink from rivers that taste of iron.\n\nDo not paint me on your walls and coins\nand leave my cubs no place to learn the hunt.\nA tiger on a flag is only cloth.\nGive me the forest back, and I will be\nyour living flag, burning in the green.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "\"My stripes were sunlight falling through the reeds.\" What does this suggest?",
+          "right": "The tiger blended into the forest",
+          "wrong": [
+            "The tiger was very hot",
+            "The tiger lived in the desert"
+          ],
+          "explain": "Striped light through reeds looks like a tiger's coat, so it was hidden."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"the forest is a narrow room\" mean?",
+          "right": "The forest has become small and crowded",
+          "wrong": [
+            "The tiger lives in a house now",
+            "The forest has many rooms"
+          ],
+          "explain": "Roads and towns have shrunk its home."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why is the poem told by the tiger?",
+          "right": "So readers feel the loss from the animal's side",
+          "wrong": [
+            "Because tigers can write poems",
+            "To make the poem funny"
+          ],
+          "explain": "Speaking as the tiger makes the harm feel personal."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What is the point of \"A tiger on a flag is only cloth\"?",
+          "right": "Honouring tigers in pictures is useless without forests",
+          "wrong": [
+            "Flags should never show any animals",
+            "Real tigers are made of soft cloth"
+          ],
+          "explain": "Symbols mean nothing if real tigers have nowhere to live."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem's main message?",
+          "right": "Protect the tiger's forest home",
+          "wrong": [
+            "Tigers are dangerous to people",
+            "Rivers should be cleaner for fishing"
+          ],
+          "explain": "\"Give me the forest back.\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.speech",
+      "level": 6,
+      "kind": "speech",
+      "title": "A Speech for Assembly",
+      "text": "Good morning, teachers and friends.\n\nLast week, I counted the lights and fans left on in empty classrooms during lunch. In one break alone, I found twenty-three fans and forty lights running with nobody in the room. That is like leaving a tap open while you go on holiday.\n\nSome of you will say, \"One fan does not matter.\" Perhaps not. But our school has thirty-two classrooms. If each wastes just one hour of electricity a day, that adds up to thousands of rupees in a year — money that could buy books for our library, or new nets for the football field.\n\nSo I have one small request. Let us choose a \"Switch Monitor\" in every class. Before the room is empty, the monitor checks that every switch is off. It takes ten seconds. It costs nothing.\n\nOur planet is not something we inherit from our parents; it is something we borrow from our children. Let's start paying it back, one switch at a time.\n\nThank you.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What does the speaker want the school to do?",
+          "right": "Choose a Switch Monitor in every class",
+          "wrong": [
+            "Buy more fans for classrooms",
+            "Close the classrooms at lunch"
+          ],
+          "explain": "\"Let us choose a Switch Monitor in every class.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why compare the waste to \"leaving a tap open while you go on holiday\"?",
+          "right": "To show how careless and wasteful it is",
+          "wrong": [
+            "To talk about saving water at home",
+            "To describe a family holiday"
+          ],
+          "explain": "It makes the waste easy to imagine."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the speaker answer \"One fan does not matter\"?",
+          "right": "To deal with an argument listeners might have",
+          "wrong": [
+            "Because the speaker agrees with it",
+            "To end the speech quickly"
+          ],
+          "explain": "Answering an objection makes a persuasive speech stronger."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many classrooms does the school have?",
+          "right": "thirty-two",
+          "wrong": [
+            "twenty-three",
+            "forty"
+          ],
+          "explain": "\"Our school has thirty-two classrooms.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the speaker give exact numbers?",
+          "right": "To make the problem seem real and serious",
+          "wrong": [
+            "To test the listeners' maths",
+            "Because speeches must have numbers"
+          ],
+          "explain": "Facts like 23 fans and 40 lights make the case convincing."
+        }
+      ]
+    },
+    {
+      "id": "kt6.travel",
+      "level": 6,
+      "kind": "article",
+      "title": "Hampi at Sunrise",
+      "text": "We climbed Matanga Hill in the dark, our torches making small yellow circles on the rock. The path was steep and uneven, and twice I had to use my hands. By the time we reached the top, my legs were shaking and the sky in the east had turned from black to a deep, bruised purple.\n\nThen the sun came up, and Hampi appeared below us as if someone were slowly lifting a cloth from a table. First the tops of the boulders caught the light, enormous rounded stones piled on one another like a giant's abandoned game of marbles. Then the ruins appeared between them: the long market street, broken pillars, a stepped tank, the great gateway tower standing above the palm trees.\n\nFive hundred years ago, this was one of the largest cities in the world, the capital of the Vijayanagara empire, with markets selling horses, pearls and silk. Now a langur sat on the wall beside me, eating a biscuit it had certainly not been given.\n\nOn the way down, our guide said that Hampi was destroyed in a single season of war, but took two centuries to build. I thought about that all the way back to the bus.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "The boulders are \"like a giant's abandoned game of marbles\". What does this show?",
+          "right": "They are huge, round and scattered",
+          "wrong": [
+            "They are small and shiny",
+            "They were placed in neat rows"
+          ],
+          "explain": "Marbles are round and lie about; a giant's would be enormous."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"as if someone were slowly lifting a cloth from a table\" describe?",
+          "right": "The city being revealed little by little",
+          "wrong": [
+            "Thick fog covering the whole city",
+            "A tablecloth spread on the hill"
+          ],
+          "explain": "The light uncovers the view step by step."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"it had certainly not been given\" tell us about the langur?",
+          "right": "It had snatched the biscuit",
+          "wrong": [
+            "It was very polite",
+            "It had bought the biscuit"
+          ],
+          "explain": "The writer is joking that the monkey stole it."
+        },
+        {
+          "skill": "theme",
+          "prompt": "Why did the guide's remark stay with the writer?",
+          "right": "Destroying is fast but building takes very long",
+          "wrong": [
+            "The bus back was very late",
+            "The guide had told a good joke"
+          ],
+          "explain": "One season to destroy, two centuries to build."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did the markets once sell?",
+          "right": "Horses, pearls and silk",
+          "wrong": [
+            "Biscuits, torches and buses",
+            "Tea, coffee and spices"
+          ],
+          "explain": "\"Markets selling horses, pearls and silk.\""
+        }
+      ]
+    },
+    {
+      "id": "kt7.biography",
+      "level": 7,
+      "kind": "article",
+      "title": "The Girl Who Mapped the Stars",
+      "text": "In 1890s Madras, few people expected a girl to become a scientist. Kamala, the daughter of a clerk at the observatory, was expected to learn music and marry young. Instead, she spent her evenings on the observatory roof with her father, learning the names of the stars in Tamil, English and Latin. (Kamala is a character invented for this text, though many real women of the time faced the same barriers.)\n\nHer father noticed her talent before anyone else. When she was twelve, he gave her an old notebook from the observatory and asked her to copy the nightly positions of Jupiter's moons. She did more than copy. Within a year she had spotted two mistakes in the printed tables the observatory relied on, and she had worked out why: the astronomer who wrote them had used the wrong date for a change in the calendar.\n\nThe director of the observatory refused at first to believe that a child had found the errors. He checked her working himself — and then, to his credit, published a correction with a note thanking \"a young assistant\". He did not print her name.\n\nKamala went on to calculate tables for the observatory for thirty years, always as an \"assistant\", always paid less than the men she trained. Late in life she wrote: \"I did not need my name on the tables. I needed the tables to be right. But I should have liked the girls after me to see that a name like mine could be there.\"\n\nToday, historians are finding many such hidden workers in the records of science. Their names were left out, but their numbers are still in the books.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did Kamala find in the printed tables?",
+          "right": "Two mistakes caused by a wrong date",
+          "wrong": [
+            "A new moon going round Jupiter",
+            "A star with its name missing"
+          ],
+          "explain": "She spotted two mistakes; the writer had used the wrong date for a calendar change."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"to his credit\" tell us about the director?",
+          "right": "He did the fair thing in the end, though not fully",
+          "wrong": [
+            "He took all the credit himself",
+            "He refused to publish the correction"
+          ],
+          "explain": "He checked and published a correction, but left out her name."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"barriers\" mean in paragraph one?",
+          "right": "things that stood in the way",
+          "wrong": [
+            "kinds of telescopes",
+            "old notebooks"
+          ],
+          "explain": "Many women faced the same obstacles to becoming scientists."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why did Kamala wish her name had been printed?",
+          "right": "To show later girls that women could do science",
+          "wrong": [
+            "To earn more money from the observatory",
+            "To become famous across all of Madras"
+          ],
+          "explain": "\"I should have liked the girls after me to see that a name like mine could be there.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer say Kamala is invented?",
+          "right": "To be honest that she is not a real person",
+          "wrong": [
+            "To make the story more exciting",
+            "Because her real name is secret"
+          ],
+          "explain": "It tells readers that her story represents real women but is not history."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the main idea of the last paragraph?",
+          "right": "Many people's work in science went unrecognised",
+          "wrong": [
+            "Old science books are full of mistakes",
+            "Historians should not read old records"
+          ],
+          "explain": "Their names were left out, but their numbers remain."
+        }
+      ]
+    },
+    {
+      "id": "kt7.editorial",
+      "level": 7,
+      "kind": "article",
+      "title": "Editorial: Homework Should Have Limits",
+      "text": "Every evening, in thousands of homes, the same scene plays out. A child sits at the dining table long after dinner, surrounded by notebooks, while a parent wonders whether to help, scold or simply send the child to bed. Homework, once a short reminder of the day's lessons, has grown into a second school day.\n\nSupporters of homework make fair points. Practice fixes skills in the memory. Regular work builds the habit of study, and homework lets parents see what their children are learning. Few would argue that children should never work at home.\n\nThe problem is quantity. Studies across several countries suggest that for children under twelve, more than about an hour of homework a night brings little extra benefit, while it eats into sleep, play and family time — all of which matter to learning too. A tired child who has copied answers at ten o'clock has practised nothing except copying.\n\nSchools could fix this without abolishing homework. Teachers in the same class could share one calendar, so that four big tasks do not land on the same night. Homework could be limited by time, not by pages: \"work for thirty minutes, then stop\" respects children who work slowly. And some homework could simply be reading for pleasure, which research consistently links with success in every subject.\n\nChildren are not machines that produce more as we load them more. If we want them to love learning, we must leave them time to live.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What is the main aim of this editorial?",
+          "right": "To argue that homework should be limited, not abolished",
+          "wrong": [
+            "To argue that homework should be banned",
+            "To praise schools for giving more homework"
+          ],
+          "explain": "It accepts homework's value but argues against too much."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the writer include the supporters' points in paragraph two?",
+          "right": "To be fair before making the counter-argument",
+          "wrong": [
+            "Because the writer agrees fully with them",
+            "To fill space in the newspaper"
+          ],
+          "explain": "Admitting fair points makes the argument more convincing."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"has practised nothing except copying\" suggest?",
+          "right": "Too much homework can be useless",
+          "wrong": [
+            "Copying is a useful skill",
+            "Children should work later"
+          ],
+          "explain": "A tired child just copies, so no real learning happens."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which is one of the writer's suggestions?",
+          "right": "A shared homework calendar for each class",
+          "wrong": [
+            "Longer school days for everyone",
+            "No reading at home on weeknights"
+          ],
+          "explain": "Teachers could share one calendar so tasks do not pile up."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"Children are not machines\" makes the point that …",
+          "right": "children cannot simply do more as more is given",
+          "wrong": [
+            "children dislike technology",
+            "machines are better at homework"
+          ],
+          "explain": "Loading a child with work does not keep raising what they produce."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which statement is an opinion?",
+          "right": "We must leave children time to live",
+          "wrong": [
+            "Studies suggest an hour brings most benefit",
+            "Reading is linked with success in research"
+          ],
+          "explain": "It is the writer's belief; the others report findings."
+        }
+      ]
+    },
+    {
+      "id": "kt7.poem",
+      "level": 7,
+      "kind": "poem",
+      "title": "Mother's Hands",
+      "text": "I remember them first as weather:\nthe cool of them on a fevered night,\nthe quick warm rain of them through my hair\non school mornings, braiding me tight.\n\nThey smelled of mustard seed and soap,\nof jasmine strung for the evening door;\nthey could tear a stubborn coconut open\nand lift a sleeping child from the floor.\n\nThey knew the sums of the household book,\nthe price of rice, the cost of shoes;\nthey mended the torn edge of a kurta\nso finely the tear became news\n\nthat nobody ever heard. They were\nnever still. Even in the bus\nthey counted something, folded something,\nplanned something — mostly us.\n\nNow they are smaller, spotted, slow,\nand when I hold them they feel like paper,\nlike a letter read too many times;\nand I read them, and I am grateful.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "Why does the poet say she remembers the hands \"as weather\"?",
+          "right": "They felt like cool air and warm rain around her",
+          "wrong": [
+            "Her mother worked outdoors in the fields",
+            "She remembers only the rainy days"
+          ],
+          "explain": "Cool on a fever, warm like rain in her hair: the hands were like weather."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which smells does the poet link with the hands?",
+          "right": "Mustard seed, soap and jasmine",
+          "wrong": [
+            "Rice, shoes and paper",
+            "Coconut, milk and rain"
+          ],
+          "explain": "\"They smelled of mustard seed and soap, of jasmine.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does \"planned something — mostly us\" suggest?",
+          "right": "The mother spent most of her thoughts on her children",
+          "wrong": [
+            "The mother planned the family's holidays",
+            "The mother did not like making plans"
+          ],
+          "explain": "Her constant work was for the family."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The hands now feel \"like a letter read too many times\". What does this show?",
+          "right": "They are thin and worn, but deeply loved",
+          "wrong": [
+            "They are covered in writing",
+            "The poet cannot read"
+          ],
+          "explain": "A much-read letter is fragile because it is treasured."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the poem move through time?",
+          "right": "From the poet's childhood to her mother's old age",
+          "wrong": [
+            "From old age back to the poet's birth",
+            "It stays on one single day"
+          ],
+          "explain": "It begins with early memories and ends with the hands now."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the central feeling of the poem?",
+          "right": "Love and gratitude for a mother's care",
+          "wrong": [
+            "Anger at a mother's strictness",
+            "Fear of growing old"
+          ],
+          "explain": "The last line: \"and I am grateful\"."
+        }
+      ]
+    },
+    {
+      "id": "kt7.poems",
+      "level": 7,
+      "kind": "pair",
+      "title": "Two Poems About the City",
+      "text": "Poem A — City Morning\nThe city wakes like a tired giant,\ncoughing smoke from a thousand throats;\nhorns argue at every crossing,\nand the river carries plastic boats.\nEach face in the bus is a closed door;\nnobody looks, nobody speaks.\nI count the floors of grey towers\nand long for the hills of other weeks.\n\nPoem B — My Street at Six\nBefore the sun, the milkman's bell,\nthe flower-seller's basket of white;\nMrs Rao waters her doorstep kolam,\nthe tea-stall kettle sings with light.\nThe newspaper boy knows every name,\nhe throws the paper and shouts it too;\nour street is a city small enough\nto say good morning, and mean it, to you.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "How do the two poets feel about city life?",
+          "right": "A feels lonely; B feels at home",
+          "wrong": [
+            "Both feel lonely and tired",
+            "Both want to leave the city"
+          ],
+          "explain": "A longs for the hills; B celebrates a friendly street."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "In Poem A, \"each face in the bus is a closed door\". What does this mean?",
+          "right": "People are unfriendly and shut off",
+          "wrong": [
+            "The bus doors are locked",
+            "Everyone is asleep"
+          ],
+          "explain": "Nobody looks or speaks: their faces are closed to others."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "In Poem B, why does the kettle \"sing with light\"?",
+          "right": "It whistles cheerfully in the early morning",
+          "wrong": [
+            "The kettle is made of glass",
+            "Someone is singing near it"
+          ],
+          "explain": "The singing kettle adds to the happy sounds of the street."
+        },
+        {
+          "skill": "compare",
+          "prompt": "Which detail in B answers \"nobody speaks\" in A?",
+          "right": "The newspaper boy knows every name",
+          "wrong": [
+            "The milkman's bell rings",
+            "The sun has not risen"
+          ],
+          "explain": "In B people know and greet one another."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why might the two poets see the city so differently?",
+          "right": "One sees a crowded centre; the other, a small neighbourhood",
+          "wrong": [
+            "One poet has never been to any city",
+            "One of the poems was written at night"
+          ],
+          "explain": "A describes traffic and towers; B describes one street where people know each other."
+        }
+      ]
+    },
+    {
+      "id": "kt7.review",
+      "level": 7,
+      "kind": "article",
+      "title": "Review: The Boy Who Harnessed the Wind (a book)",
+      "text": "Some books tell you a story; this one tells you how a story can change a life.\n\nWilliam Kamkwamba was fourteen when famine struck his village in Malawi. His family could no longer pay his school fees, so he left school. Instead of giving up, he went to the small village library and found a science book with a picture of a windmill on its cover. Using scrap metal, bicycle parts and the frame of a broken bicycle, he built a windmill that brought electricity to his home. Later, he built another to pump water for the fields.\n\nWhat makes this memoir special is its honesty. William does not pretend that he was a genius from the start. He describes being laughed at by neighbours who thought he had gone mad, the hunger that made it hard to think, and the many failed attempts before the first bulb flickered on. These details make his success feel earned rather than magical.\n\nThe book is not perfect. The early chapters about village beliefs move slowly, and some readers may wish for more diagrams of how the windmill actually worked. But these are small complaints.\n\nRead it if you have ever been told that something is impossible. Then, perhaps, go and find a library.\n\nRating: four and a half stars out of five.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of this text?",
+          "right": "To judge a book and recommend it",
+          "wrong": [
+            "To explain how windmills work",
+            "To tell the history of Malawi"
+          ],
+          "explain": "A review gives an opinion on a book and a rating."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did William use to build his windmill?",
+          "right": "Scrap metal and bicycle parts",
+          "wrong": [
+            "New parts from a factory",
+            "Wood from the library"
+          ],
+          "explain": "\"Using scrap metal, bicycle parts and the frame of a broken bicycle.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does the reviewer praise the book's honesty?",
+          "right": "Showing failures makes the success believable",
+          "wrong": [
+            "William was a genius from birth",
+            "The neighbours were always kind"
+          ],
+          "explain": "Details of being laughed at and failing make it feel earned."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What does the reviewer criticise?",
+          "right": "Slow early chapters and few diagrams",
+          "wrong": [
+            "The ending and the title",
+            "William's choice to leave school"
+          ],
+          "explain": "\"The early chapters move slowly... more diagrams.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the reviewer mention weaknesses at all?",
+          "right": "To be fair and make the praise more trustworthy",
+          "wrong": [
+            "To warn people not to read it",
+            "Because reviews must be negative"
+          ],
+          "explain": "A balanced review is more convincing than pure praise."
+        },
+        {
+          "skill": "summary",
+          "prompt": "Which sums up the reviewer's view?",
+          "right": "An honest, inspiring memoir with small flaws",
+          "wrong": [
+            "A boring book about windmills",
+            "A perfect book with no weak parts"
+          ],
+          "explain": "Four and a half stars: high praise with minor complaints."
+        }
+      ]
+    },
+    {
+      "id": "kt7.script",
+      "level": 7,
+      "kind": "pair",
+      "title": "From Story to Stage",
+      "text": "The story (the opening)\nThe ferry was late again. Ravi stood on the jetty with his school bag, watching the grey water and counting the minutes. He thought about the test he would miss, and the teacher's raised eyebrow, and his father's quiet disappointment, which was worse than any shout. Behind him, an old woman in a green sari sat on a basket of fish and hummed a song he half remembered from his grandmother's house.\n\nThe play (the same scene)\n[A jetty. Morning. RAVI, with a school bag, looks at his watch. An OLD WOMAN in a green sari sits on a fish basket.]\nRAVI: (to himself) Twenty minutes late. Twenty-one.\nOLD WOMAN: (humming, then speaking) Watching the water won't bring the boat, child.\nRAVI: I have a test at nine.\nOLD WOMAN: And I have fish that won't stay fresh. We each have our worries. (She hums again. RAVI turns, surprised.)\nRAVI: That song... my grandmother used to sing it.\nOLD WOMAN: Then your grandmother had good taste.\n\nThe playwright's note\nIn the story, readers learn Ravi's fears from his thoughts. On stage, an audience cannot hear thoughts, so I gave the old woman lines that bring his worries out in speech.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "What does the story tell us that the play does not say directly?",
+          "right": "Ravi's fear of his father's disappointment",
+          "wrong": [
+            "That the ferry is late that morning",
+            "That the old woman is humming"
+          ],
+          "explain": "The story gives his private thoughts about his father; the play does not."
+        },
+        {
+          "skill": "compare",
+          "prompt": "What did the playwright add that is not in the story?",
+          "right": "A conversation between Ravi and the old woman",
+          "wrong": [
+            "The old woman's green sari",
+            "The basket of fish she sits on"
+          ],
+          "explain": "In the story they never speak; in the play they talk."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why are some words in the play in square brackets?",
+          "right": "They are stage directions, not spoken lines",
+          "wrong": [
+            "They are the most important lines",
+            "They are Ravi's thoughts"
+          ],
+          "explain": "Directions tell actors where they are and what to do."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the playwright make these changes?",
+          "right": "An audience cannot hear a character's thoughts",
+          "wrong": [
+            "The story was too short for a play",
+            "The actors forgot their lines"
+          ],
+          "explain": "The note explains that speech replaces thoughts on stage."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Is the play faithful to the story?",
+          "right": "Yes in its events, but it shows feelings differently",
+          "wrong": [
+            "No, the events are completely changed",
+            "Yes, it copies every word"
+          ],
+          "explain": "Same jetty, ferry and woman; thoughts become dialogue."
+        }
+      ]
+    },
+    {
+      "id": "kt7.speech",
+      "level": 7,
+      "kind": "speech",
+      "title": "Why We Should Learn More Than One Language",
+      "text": "Friends, I want to begin with a word: \"amma\". In Tamil it means mother. In Kannada, Telugu and Malayalam it means mother too. Our languages are cousins who share a grandmother, and every time we learn one, we find relatives we did not know we had.\n\nSome say that in a world where English opens so many doors, other languages are a waste of time. I disagree, for three reasons.\n\nFirst, the brain. Researchers have found that children who learn two or more languages are often better at switching between tasks and at noticing what is important. Learning a language is exercise for the mind, like football is for the legs.\n\nSecond, people. A shopkeeper who hears you try a few words of her language will smile at you differently. Language is not just a code for information; it is a way of saying, \"You matter to me.\"\n\nThird, ideas. Some things are said beautifully in one language and clumsily in another. A person with two languages has two windows on the world, and sees more of the view.\n\nNobody is asking you to become a scholar of ten languages. Learn the language of your neighbour, your grandparents or the state next door. Learn enough to say hello, thank you and sorry. You will be surprised how many doors those three words open.\n\nThank you.",
+      "questions": [
+        {
+          "skill": "structure",
+          "prompt": "How does the speaker organise the argument?",
+          "right": "An opening example, three reasons, then a call to act",
+          "wrong": [
+            "A story told from beginning to end",
+            "A list of words in many languages"
+          ],
+          "explain": "It begins with \"amma\", gives three reasons, and ends with advice."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"Our languages are cousins who share a grandmother\" mean?",
+          "right": "Many Indian languages come from shared roots",
+          "wrong": [
+            "Grandmothers teach languages",
+            "Cousins speak different languages"
+          ],
+          "explain": "Related languages share words like amma."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the speaker mention the view that languages are \"a waste of time\"?",
+          "right": "To answer an opposing argument",
+          "wrong": [
+            "Because the speaker agrees with it",
+            "To praise English above others"
+          ],
+          "explain": "Raising and answering an objection strengthens the case."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"two windows on the world\" suggest?",
+          "right": "Two languages let you understand more",
+          "wrong": [
+            "You need glasses to read",
+            "Rooms should have two windows"
+          ],
+          "explain": "Each language gives a different view of ideas."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the speaker finally ask the audience to do?",
+          "right": "Learn a little of a neighbouring language",
+          "wrong": [
+            "Become scholars of ten languages",
+            "Stop learning English"
+          ],
+          "explain": "\"Learn enough to say hello, thank you and sorry.\""
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which statement is presented as a research finding?",
+          "right": "Bilingual children often switch tasks better",
+          "wrong": [
+            "Other languages are a waste of time",
+            "A shopkeeper will smile at you"
+          ],
+          "explain": "\"Researchers have found\" signals a finding."
+        }
+      ]
+    },
+    {
+      "id": "kt7.suspense",
+      "level": 7,
+      "kind": "story",
+      "title": "The Locked Room (two versions)",
+      "text": "Telling 1 — told by Nila\n\nI knew something was wrong the moment I reached the top of the stairs. The storeroom door, which Grandfather always kept locked, stood half open, and a thin line of yellow light lay across the dusty floor. Somewhere inside, something scraped slowly against wood. I stopped breathing. The house was empty: Amma had gone to the market, and Grandfather was asleep downstairs. I picked up the umbrella from the stand, though I had no idea what I would do with it, and pushed the door with one finger. It creaked open, inch by inch. In the corner, half hidden behind a trunk, a shape was moving. Then it turned round, and two green eyes caught the light.\n\nTelling 2 — told by the cat\n\nThe storeroom smells of old newspapers and mice, and the mice are why I go there. This afternoon the old man forgot to turn the key, so I nosed the door open and slipped in. There is a plump mouse that lives behind the trunk. I had been working at the gap with my paw for some time, scraping and waiting, when the girl came up the stairs. She was breathing like a kettle and holding an umbrella above her head like a stick. I do not know why humans make such a fuss. I turned round to look at her, and she screamed loud enough to warn every mouse in the street. That was the end of my hunt.\n\nWhat happened next\n\nNila laughed until she had to sit down on the trunk. The cat, offended, walked out with its tail in the air. Later, when Grandfather heard the story, he said that the scariest things in the world usually turn out to be cats, and the funniest things usually start with someone being afraid.",
+      "questions": [
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does Telling 1 feel frightening?",
+          "right": "Nila does not know what is in the room",
+          "wrong": [
+            "The cat is dangerous",
+            "Grandfather is in danger"
+          ],
+          "explain": "We only know what Nila knows, so the unknown shape creates suspense."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does Telling 2 make the same events funny?",
+          "right": "The cat explains everything and finds Nila's fear silly",
+          "wrong": [
+            "The cat tells a lot of jokes",
+            "Nothing at all happens in Telling 2"
+          ],
+          "explain": "Seeing her fear from the cat's calm view turns suspense into humour."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The cat says Nila was \"breathing like a kettle\". What does this mean?",
+          "right": "She was breathing loudly and fast",
+          "wrong": [
+            "She was feeling very hot",
+            "She was making tea"
+          ],
+          "explain": "A kettle hisses and puffs, like heavy nervous breathing."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why was the storeroom door open?",
+          "right": "Grandfather forgot to turn the key",
+          "wrong": [
+            "Nila left it open",
+            "Amma opened it before going out"
+          ],
+          "explain": "The cat says the old man forgot to turn the key."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does Grandfather's last remark suggest?",
+          "right": "Fear and laughter are often close together",
+          "wrong": [
+            "Cats should not be kept in houses",
+            "Storerooms should always be locked"
+          ],
+          "explain": "The scary moment became the funny story."
+        },
+        {
+          "skill": "compare",
+          "prompt": "What does reading both versions teach about stories?",
+          "right": "The same events change with who tells them",
+          "wrong": [
+            "The first telling is always true",
+            "Animals cannot tell stories"
+          ],
+          "explain": "One point of view creates suspense, the other humour."
+        }
+      ]
+    },
+    {
+      "id": "kt7.travel",
+      "level": 7,
+      "kind": "article",
+      "title": "Night on the Backwaters",
+      "text": "At dusk the houseboat slid away from the jetty at Alappuzha, and the noise of the town fell behind us like a door closing. The water was so still that every coconut palm along the bank stood twice: once in the air and once, upside down, in the glassy canal.\n\nOur boatman, Joseph, had worked these waters for thirty years. He steered with a long pole, not an engine, and he knew the canals the way a postman knows his streets. \"This is a road,\" he said, pointing at the water. \"Children go to school on it. Ducks go to market on it.\" As if to prove him right, a man paddled past in a narrow canoe, guiding a flock of three hundred ducks with nothing but a stick and a strange, rising whistle.\n\nNight came quickly. Lamps were lit in the houses along the banks, and their reflections wobbled on the black water. Somewhere a radio played an old film song. Frogs began a chorus so loud that we had to raise our voices to talk.\n\nJoseph told us that the backwaters were changing. More boats meant more noise and more fuel in the water; some fish were harder to find, and some fields were sinking under salt water. \"The water gives us everything,\" he said, \"so we must give it something back.\" \n\nWe slept to the knocking of the boat against its rope, and woke to mist and a kingfisher, blue as a struck match, diving where the palms had stood upside down the night before.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What does it mean that every palm \"stood twice\"?",
+          "right": "Each palm was reflected in the still water",
+          "wrong": [
+            "There were two rows of palms",
+            "The palms had fallen over"
+          ],
+          "explain": "Once in the air and once upside down in the water."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does Joseph mean by \"This is a road\"?",
+          "right": "People travel and carry goods on the canals",
+          "wrong": [
+            "A road is being built over the water",
+            "The canal is dry in summer"
+          ],
+          "explain": "Children go to school and ducks to market on it."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How did the man guide the ducks?",
+          "right": "With a stick and a whistle",
+          "wrong": [
+            "With a net and a torch",
+            "With a motorboat"
+          ],
+          "explain": "\"With nothing but a stick and a strange, rising whistle.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer include Joseph's warning about change?",
+          "right": "To show the beauty is under threat",
+          "wrong": [
+            "To advertise houseboat trips",
+            "To explain how to catch fish"
+          ],
+          "explain": "More boats, fuel and salt water are harming the backwaters."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The kingfisher is \"blue as a struck match\". What does this suggest?",
+          "right": "A sudden, bright flash of colour",
+          "wrong": [
+            "The bird was burnt",
+            "The bird was very slow"
+          ],
+          "explain": "A struck match flares suddenly and brightly."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How is this piece organised?",
+          "right": "In time order, from dusk to the next morning",
+          "wrong": [
+            "By listing facts about ducks",
+            "As a set of instructions"
+          ],
+          "explain": "It follows the trip from dusk, through night, to morning."
+        }
+      ]
+    }
+  ]
+}

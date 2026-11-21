@@ -85,6 +85,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Long reads: {s.long.parts} {s.long.parts === 1 ? "part" : "parts"} read, {s.long.finished} {s.long.finished === 1 ? "story" : "stories"} finished, {s.long.right} of {s.long.asked} questions right
         </p>
       )}
+      {s.kinds && (
+        <p className="small" data-line="kinds">
+          Poems and everyday texts: {s.kinds.texts} read, {s.kinds.right} of {s.kinds.asked} questions right{s.kinds.weak.length ? `; to work on: ${s.kinds.weak.slice(0, 2).join(", ")}` : ""}
+        </p>
+      )}
       {s.writing && (
         <p className="small" data-line="writing">
           Syllabus tasks: {s.writing.tasks} done{s.writing.pieces ? `, ${s.writing.pieces} written ${s.writing.pieces === 1 ? "piece" : "pieces"} (${s.writing.words} words in all)` : ""}

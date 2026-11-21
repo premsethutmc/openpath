@@ -4,6 +4,7 @@
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
 import type { LongRecord } from "./reading/long-read.ts";
+import type { KindRecord } from "./reading/kinds.ts";
 import type { WrittenRecord } from "./reading/written.ts";
 import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTED_POLICY, PASSAGE_POLICY, leafView, type PresentedPurpose, type Response } from "../../../../packages/english-core/src/index.ts";
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
@@ -316,6 +317,16 @@ export class Learner {
   /** Store written-answer records. Practice-only. */
   async recordWritten(records: readonly WrittenRecord[]): Promise<void> {
     for (const record of records) await this.add({ kind: "written_answer", id: this.nextId(), at: this.clock(), record });
+  }
+
+  /** The learner's kinds of text (poems, notices, letters…), in order. */
+  kindRecords(): KindRecord[] {
+    return this.events.flatMap((e) => (e.kind === "text_read" ? [e.record] : []));
+  }
+
+  /** Store a finished kind-of-text sitting. Practice-only: the engine's ledger and estimates are untouched. */
+  async recordKind(records: readonly KindRecord[]): Promise<void> {
+    for (const record of records) await this.add({ kind: "text_read", id: this.nextId(), at: this.clock(), record });
   }
 
   /** The learner's long reads, in order. */
