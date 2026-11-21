@@ -9,30 +9,42 @@ h1{font-family:Georgia,serif;line-height:1.03;font-weight:600;font-size:clamp(2.
 .field{overflow:hidden;border:1px solid #b6c1a5;border-radius:18px;background:#fffdf4;box-shadow:0 13px 30px #34443516}
 .scene{position:relative;background:#91ac77}
 .scene svg{display:block;width:100%;height:auto}
-.week,.plot{position:absolute}
+.week{position:absolute}
 .week{top:8px;left:8px;background:#fff9e3;color:#263c2e;border:1px solid #adba99;border-radius:20px;padding:3px 10px;font-size:.74rem;font-weight:750}
 button{min-height:44px;font:inherit;font-weight:800;cursor:pointer;border:1px solid transparent;border-radius:10px}
 button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #123b70;outline-offset:3px}
-.plot{bottom:4%;left:8%;padding:0 10px;color:#223928;background:#fff6cc;border-color:#705838;box-shadow:0 3px 0 #4a3e2a;font-size:.85rem}
-.plot:active{transform:translateY(2px);box-shadow:0 1px 0 #4a3e2a}
-.plants{transition:opacity .3s,translate .3s}
-.scene[data-leaves="false"] .plants{opacity:0;translate:0 12px}
-#caterpillars use,#birds use{transition:opacity .35s,translate .35s;opacity:1}
-#caterpillars .away,#birds .away{opacity:0;translate:19px -10px}
-#birds .away{translate:37px -25px}
-.counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0;margin:0;list-style:none;border-bottom:1px solid #dadfc9}
-.counts li{display:grid;grid-template-columns:12px auto;gap:1px 5px;align-items:center;justify-content:center;padding:8px 1px;line-height:1.13;text-align:center}
+#plants use,#caterpillars use,#frogs use,#birds use{transition:opacity .35s,translate .35s;opacity:1}
+#plants .away{opacity:0;translate:0 12px}
+#caterpillars .away,#frogs .away{opacity:0;translate:19px -10px}
+#birds .away{opacity:0;translate:37px -25px}
+.counts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;margin:0;list-style:none;border-bottom:1px solid #dadfc9}
+.counts li{display:grid;grid-template-columns:auto auto;gap:2px 5px;align-items:center;justify-content:center;padding:8px 2px;line-height:1.13;text-align:center}
 .counts li+li{border-left:1px solid #dadfc9}
-.counts li span:last-child{grid-column:1/-1;font-size:clamp(.72rem,2.6vw,.85rem);color:#3b5144}
-.counts b{font-size:1.25rem}
-.cue{width:10px;height:8px;background:#517e46;border-radius:8px 1px}
-.cue.insect{background:#8a7725;border-radius:9px;height:5px}
-.cue.bird{background:#a45137;border-radius:9px}
+.counts .name{font-size:.8rem;color:#3b5144}
+.counts b{grid-column:1/-1;font-size:1.3rem}
+.step{grid-column:1/-1;display:flex;gap:6px;justify-content:center}
+.step button{width:44px;background:#eef1e0;border-color:#a9b694;color:#1f3d2a;font-size:1.2rem;padding:0}
+.step button:disabled{opacity:.35;cursor:default}
+.cue{width:10px;height:8px;border-radius:9px}
+.cue.plants,.key.plants::before{background:#3f7d3c}
+.cue.caterpillars,.key.caterpillars::before{background:#a08a1e}
+.cue.frogs,.key.frogs::before{background:#2f6f8f}
+.cue.birds,.key.birds::before{background:#a8452c}
+@media(max-width:520px){.counts{grid-template-columns:repeat(2,minmax(0,1fr))}.counts li:nth-child(3){border-left:0}.counts li:nth-child(n+3){border-top:1px solid #dadfc9}}
+.guess{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:10px 12px 0;font-size:.9rem}
+.guess select{min-height:44px;font:inherit;border-radius:10px;border:1px solid #a9b694;background:#fffdf4;padding:0 6px}
+.choices{display:flex;gap:6px}
+.choices button{padding:0 12px;background:#fffdf4;border-color:#a9b694;color:#1f3d2a}
+.choices button[aria-pressed="true"]{background:#21583c;color:#fff}
 #notice{font-weight:620;margin:0;padding:10px 12px 5px;min-height:3.35em}
 .controls{display:flex;gap:10px;flex-wrap:wrap;padding:5px 12px 13px}
 #next{background:#21583c;color:white;padding:0 15px}
 #reset{background:transparent;color:#315340;padding:0 10px;text-decoration:underline;text-underline-offset:.2em}
+.chart{margin:0;padding:4px 12px 12px;border-top:1px solid #dadfc9}
+.chart svg{display:block;width:100%;height:auto;font-size:8px;fill:#5a6d5f}
+.chart figcaption{font-size:.78rem;color:#3b5144;display:flex;flex-wrap:wrap;gap:4px 10px}
+.key::before{content:"";display:inline-block;width:14px;height:4px;margin-right:4px;vertical-align:middle;border-radius:2px}
 details{margin:16px 2px;color:#394f42;font-size:.9rem}
 details p{max-width:53ch;margin:5px 2px 12px}
 summary{min-height:44px;align-content:center;font-weight:750;cursor:pointer}
-@media(prefers-reduced-motion:reduce){.plants,#caterpillars use,#birds use{transition:none}}
+@media(prefers-reduced-motion:reduce){#plants use,#caterpillars use,#frogs use,#birds use{transition:none}}
