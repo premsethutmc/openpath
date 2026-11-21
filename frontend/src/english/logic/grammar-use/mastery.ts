@@ -91,3 +91,15 @@ export function masterySummary(timed: readonly Timed[], now: string) {
     due: m.filter((x) => x.due && x.stage !== "learning" && Date.parse(x.due) <= Date.parse(now)).length,
   };
 }
+
+/**
+ * grammar-more@1 (sim-grammar@1: practice volume is what moves a child on most): after a good sitting (six or more
+ * right of eight), and only the first of the day, the done screen offers eight more as the main button. Never after a
+ * weak sitting, and never a third time in a day.
+ */
+export const MORE_AFTER_RIGHT = 6;
+export function offerMore(timed: readonly Timed[], now: string, right: number): boolean {
+  if (right < MORE_AFTER_RIGHT) return false;
+  const day = new Date(now).toDateString();
+  return timed.filter((t) => t.record.type === "end" && new Date(t.at).toDateString() === day).length <= 1;
+}

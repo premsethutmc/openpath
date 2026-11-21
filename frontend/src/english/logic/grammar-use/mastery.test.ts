@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { dueTopics, mastery, masterySummary, REVIEW_DAYS } from "./mastery.ts";
+import { dueTopics, mastery, masterySummary, offerMore, REVIEW_DAYS, type Timed } from "./mastery.ts";
 import { GRAMMAR, GrammarSitting, pick } from "./grammar-use.ts";
 import type { GrammarRecord } from "./grammar-use.ts";
 
@@ -42,4 +42,13 @@ test("GM-2 due topics come first in a level sitting, one sentence each, a new on
   // a topic sitting is never given review places
   assert.ok(pick(GRAMMAR, 5, records, ["past"], ["articles"]).every((i) => i.topic === "past"));
   assert.deepEqual(masterySummary(t, at(3)), { mastered: 0, learnt: 1, learning: 0, due: 1 });
+});
+
+test("GM-3 eight more is offered after a good first sitting of the day, not after a weak one or a second", () => {
+  const end = (at: string, right: number): Timed => ({ at, record: { type: "end", sitting: at, level: 1, asked: 8, right } });
+  const now = "2026-11-21T10:00:00.000Z";
+  assert.ok(offerMore([end(now, 7)], now, 7));
+  assert.ok(!offerMore([end(now, 4)], now, 4), "not after a weak sitting");
+  assert.ok(!offerMore([end("2026-11-21T09:00:00.000Z", 7), end(now, 7)], now, 7), "not a third time");
+  assert.ok(offerMore([end("2026-11-20T09:00:00.000Z", 7), end(now, 6)], now, 6), "yesterday's does not count");
 });

@@ -11,7 +11,7 @@
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { GRAMMAR, GrammarSitting, LEARN, choices, fixParts, levelFor, spotWords, type GrammarItem, type GrammarRecord } from "../src/english/logic/grammar-use/grammar-use.ts";
-import { dueTopics, mastery, type Timed } from "../src/english/logic/grammar-use/mastery.ts";
+import { dueTopics, mastery, offerMore, type Timed } from "../src/english/logic/grammar-use/mastery.ts";
 
 const arg = (k: string, d: string) => {
   const i = process.argv.indexOf(`--${k}`);
@@ -21,6 +21,8 @@ const RUNS = Number(arg("runs", "20"));
 const WEEKS = Number(arg("weeks", "36"));
 const MD = arg("md", "");
 const STRICT = process.argv.includes("--strict");
+/** The share of good first sittings after which the child takes the offered eight more. */
+const ACCEPT = Number(arg("accept", "0.5"));
 
 function rng(seed: number) {
   let s = seed >>> 0 || 1;
@@ -113,7 +115,8 @@ function run(p: Persona, seed: number): Result {
       if (day % 7 === 6) weekly.push({ week: day / 7 + 1 / 7, mastered: mastery(timed).filter((m) => m.stage === "mastered").length, level });
       continue;
     }
-    const now = new Date(T0 + day * DAY).toISOString();
+    for (let round = 0; round < 2; round++) {
+    const now = new Date(T0 + day * DAY + round * 600_000).toISOString();
     const records = timed.map((x) => x.record);
     const due = dueTopics(timed, now);
     const s = new GrammarSitting(GRAMMAR, level, records, undefined, due);
@@ -168,6 +171,9 @@ function run(p: Persona, seed: number): Result {
     }
     push();
     level = levelFor(GRAMMAR, timed.map((x) => x.record), p.start);
+    const done = s.snapshot().done;
+    if (!done || !offerMore(timed, now, done.right) || r() >= ACCEPT) break;
+    }
   }
   const m = mastery(timed);
   const byTopic = new Map<string, boolean[]>();
@@ -195,7 +201,7 @@ const pct = (x: number) => `${Math.round(x * 100)}%`;
 const lines: string[] = [
   `# Grammar learning simulation (sim-grammar@1)`,
   ``,
-  `${RUNS} simulated children per profile, one sitting of 8 sentences a day, 5 days a week, ${WEEKS} weeks. ${GRAMMAR.items.length} sentences, ${topicLevel.size} topics, ${CORE.length} core topics (levels 1–2).`,
+  `${RUNS} simulated children per profile, one sitting of 8 sentences a day, 5 days a week, ${WEEKS} weeks; after a good first sitting the app offers eight more, taken ${Math.round(ACCEPT * 100)}% of the time. ${GRAMMAR.items.length} sentences, ${topicLevel.size} topics, ${CORE.length} core topics (levels 1–2).`,
   ``,
   `| Profile | Level at end | Topics met | Learnt | Mastered | Core mastered (of ${CORE.length}) | Right, last 2 weeks | Review answers | Sentences repeated | Simpler way shown | Stuck topics |`,
   `|---|---|---|---|---|---|---|---|---|---|---|`,

@@ -2,7 +2,7 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
-import { dueTopics, masterySummary } from "../logic/grammar-use/mastery.ts";
+import { dueTopics, masterySummary, offerMore } from "../logic/grammar-use/mastery.ts";
 import { WriteOwn } from "./WriteOwn.tsx";
 import { ownFor } from "../logic/grammar-use/write-own.ts";
 import { Flag } from "./Flag.tsx";
@@ -14,7 +14,7 @@ import { NoteBox } from "./Note.tsx";
 
 const levelName = (c: Content, id: number) => c.levels.find((l) => l.id === id)?.name ?? "";
 
-export function GrammarIntro({ level, levelLabel, topics, done, mastery, onStart, onBack, child }: { child?: boolean; level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; mastery?: { mastered: number; learnt: number; learning: number; due: number }; onStart: () => void; onBack: () => void }) {
+export function GrammarIntro({ level, levelLabel, topics, done, mastery, onStart, onBack, child }: { more?: boolean; child?: boolean; level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; mastery?: { mastered: number; learnt: number; learning: number; due: number }; onStart: () => void; onBack: () => void }) {
   return (
     <main className="page vocab grammar" data-phase="intro" aria-labelledby="grammar-title">
       <button type="button" className="link" onClick={onBack}>
@@ -347,7 +347,7 @@ function OtherResult({ given, right, correct }: { given: string; right: string; 
   );
 }
 
-export function GrammarUseView({ child, content, view, onRewrite, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { child?: boolean; onRewrite: (typed: string) => void; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
+export function GrammarUseView({ more, child, content, view, onRewrite, onFix, onBuild, onSpot, onChoose, onNext, onLeave, onAgain, onTry, onLearned, onOwn }: { child?: boolean; onRewrite: (typed: string) => void; onOwn?: (r: GrammarRecord) => void; onTry: (chosen: number) => void; onLearned: () => void; content: Content; view: GrammarView; onFix: (tapped: number, typed: string) => void; onBuild: (chosen: string[]) => void; onSpot: (tapped: number) => void; onChoose: (chosen: number) => void; onNext: () => void; onLeave: () => void; onAgain: () => void }) {
   if (view.phase === "done") {
     const d = view.done!;
     const own = onOwn ? ownFor(d.topics) : null;
@@ -366,10 +366,11 @@ export function GrammarUseView({ child, content, view, onRewrite, onFix, onBuild
           {child ? (d.nextLevel > view.level ? "Next time: a little harder." : d.nextLevel < view.level ? "Next time: a little easier, to build up again." : "Sentences you missed will come back another day.") : d.nextLevel > view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}.` : d.nextLevel < view.level ? `Next time: level ${d.nextLevel}, ${levelName(content, d.nextLevel).toLowerCase()}, to build up again.` : "Sentences you missed will come back another day."}
         </p>
         {own && <WriteOwn key={`${d.sitting}|${own.topic}`} prompt={own} onDone={(correct, tries) => onOwn?.({ type: "own", sitting: d.sitting, topic: own.topic, correct, tries })} />}
-        <button type="button" className="primary" onClick={onLeave}>
+        {more && <p className="grammar-more">Good going! Eight more while it is fresh?</p>}
+        <button type="button" className={more ? "secondary" : "primary"} onClick={onLeave}>
           Done
         </button>
-        <button type="button" className="secondary" onClick={onAgain}>
+        <button type="button" className={more ? "primary" : "secondary"} onClick={onAgain}>
           Eight more
         </button>
       </main>
@@ -456,7 +457,7 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <GrammarUseView child={!!learner.state.preferences?.school} content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onRewrite={(t) => void step(sitting, () => sitting.rewrite(t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} onOwn={(r) => void learner.recordGrammar([r]).then(onChanged).catch(() => undefined)} />
+      <GrammarUseView more={view.phase === "done" && offerMore(learner.grammarTimed(), learner.clock(), view.done!.right)} child={!!learner.state.preferences?.school} content={GRAMMAR} view={view} onLeave={onLeave} onAgain={begin} onFix={(i, t) => void step(sitting, () => sitting.fix(i, t))} onRewrite={(t) => void step(sitting, () => sitting.rewrite(t))} onBuild={(c) => void step(sitting, () => sitting.build(c))} onSpot={(i) => void step(sitting, () => sitting.spot(i))} onTry={(i) => void step(sitting, () => sitting.tryCard(i))} onLearned={() => void step(sitting, () => sitting.learned())} onChoose={(i) => void step(sitting, () => sitting.choose(i))} onNext={() => void step(sitting, () => sitting.next())} onOwn={(r) => void learner.recordGrammar([r]).then(onChanged).catch(() => undefined)} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="grammar-use:done" label="Was any sentence marked unfairly, or any rule unclear?" />

@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 24,
+  "version": 25,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -13438,6 +13438,816 @@
       "rule": "All items in the list take -ing.",
       "right": [
         "I like reading, swimming and dancing."
+      ]
+    },
+    {
+      "id": "gu.questions.13",
+      "level": 1,
+      "topic": "questions",
+      "kind": "build",
+      "sentence": "Why is the baby crying?",
+      "rule": "Why asks for a reason."
+    },
+    {
+      "id": "gu.questions.14",
+      "level": 1,
+      "topic": "questions",
+      "kind": "rewrite",
+      "sentence": "When the bus will come?",
+      "rule": "In a question, will comes before the bus.",
+      "right": [
+        "When will the bus come?"
+      ]
+    },
+    {
+      "id": "gu.questions.15",
+      "level": 1,
+      "topic": "questions",
+      "kind": "rewrite",
+      "sentence": "Do you like mangoes.",
+      "rule": "A question ends with a question mark.",
+      "right": [
+        "Do you like mangoes?"
+      ]
+    },
+    {
+      "id": "gu.alphabetical.13",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "apple banana cherry date",
+      "rule": "a, b, c, d: the order of the alphabet.",
+      "parts": [
+        "apple",
+        "banana",
+        "cherry",
+        "date"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.14",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "kite lamp nest pot",
+      "rule": "k, l, n, p: the order of the alphabet.",
+      "parts": [
+        "kite",
+        "lamp",
+        "nest",
+        "pot"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.15",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "red rice road rug",
+      "rule": "The first letters match, so look at the second: e, i, o, u.",
+      "parts": [
+        "red",
+        "rice",
+        "road",
+        "rug"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.16",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "sun table van yak",
+      "rule": "s, t, v, y: the order of the alphabet.",
+      "parts": [
+        "sun",
+        "table",
+        "van",
+        "yak"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.17",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "cap car cat cup",
+      "rule": "c and a match in three words, so look at the third letter: p, r, t; then cup.",
+      "parts": [
+        "cap",
+        "car",
+        "cat",
+        "cup"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.alphabetical.18",
+      "level": 1,
+      "topic": "alphabetical",
+      "kind": "build",
+      "sentence": "drum flag jam milk",
+      "rule": "d, f, j, m: the order of the alphabet.",
+      "parts": [
+        "drum",
+        "flag",
+        "jam",
+        "milk"
+      ],
+      "task": "Tap the words in alphabetical order."
+    },
+    {
+      "id": "gu.prepositions.13",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "The bird is sitting [in] the branch.",
+      "rule": "On top of something: on.",
+      "right": [
+        "on"
+      ]
+    },
+    {
+      "id": "gu.prepositions.14",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "I was born [on] 2018.",
+      "rule": "For a year, use in.",
+      "right": [
+        "in"
+      ]
+    },
+    {
+      "id": "gu.prepositions.15",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "The shop is closed [in] Sunday.",
+      "rule": "For a day, use on.",
+      "right": [
+        "on"
+      ]
+    },
+    {
+      "id": "gu.prepositions.16",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "The cat jumped [on] the box and hid inside.",
+      "rule": "Going inside something: into.",
+      "right": [
+        "into"
+      ]
+    },
+    {
+      "id": "gu.prepositions.17",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "Meena sits [among] Ravi and Arun.",
+      "rule": "In the middle of two: between.",
+      "right": [
+        "between"
+      ]
+    },
+    {
+      "id": "gu.prepositions.18",
+      "level": 2,
+      "topic": "prepositions",
+      "kind": "fix",
+      "sentence": "We waited [on] the bus stop.",
+      "rule": "At a place: at.",
+      "right": [
+        "at"
+      ]
+    },
+    {
+      "id": "gu.titles.13",
+      "level": 2,
+      "topic": "titles",
+      "kind": "fix",
+      "sentence": "We sang Jana Gana [mana] at the assembly.",
+      "rule": "Each main word of the title starts with a capital letter.",
+      "right": [
+        "Mana"
+      ]
+    },
+    {
+      "id": "gu.titles.14",
+      "level": 2,
+      "topic": "titles",
+      "kind": "fix",
+      "sentence": "Have you read The Very Hungry [caterpillar]?",
+      "rule": "Main words in a title start with capital letters.",
+      "right": [
+        "Caterpillar"
+      ]
+    },
+    {
+      "id": "gu.titles.15",
+      "level": 2,
+      "topic": "titles",
+      "kind": "fix",
+      "sentence": "My brother likes the film [toy] Story.",
+      "rule": "Main words in a title start with capital letters.",
+      "right": [
+        "Toy"
+      ]
+    },
+    {
+      "id": "gu.titles.16",
+      "level": 2,
+      "topic": "titles",
+      "kind": "fix",
+      "sentence": "The poem is called The [owl] and the Pussy-cat.",
+      "rule": "Main words in a title start with capital letters.",
+      "right": [
+        "Owl"
+      ]
+    },
+    {
+      "id": "gu.titles.17",
+      "level": 2,
+      "topic": "titles",
+      "kind": "rewrite",
+      "sentence": "we read the secret garden in class.",
+      "rule": "The sentence and the main words of the title start with capitals.",
+      "right": [
+        "We read The Secret Garden in class."
+      ]
+    },
+    {
+      "id": "gu.titles.18",
+      "level": 2,
+      "topic": "titles",
+      "kind": "rewrite",
+      "sentence": "Treasure island is a good book.",
+      "rule": "Both main words of a title take capitals.",
+      "right": [
+        "Treasure Island is a good book."
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.13",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "The baby laughed.",
+      "rule": "The subject is who the sentence is about: the baby.",
+      "right": [
+        "The",
+        "baby"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.14",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "predicate",
+      "sentence": "My father reads the paper.",
+      "rule": "The predicate tells what the subject does: reads the paper.",
+      "right": [
+        "reads",
+        "the",
+        "paper"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.15",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "The old car stopped suddenly.",
+      "rule": "The subject is what the sentence is about: the old car.",
+      "right": [
+        "The",
+        "old",
+        "car"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.16",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "predicate",
+      "sentence": "Rain fell all night.",
+      "rule": "The predicate tells what the subject did: fell all night.",
+      "right": [
+        "fell",
+        "all",
+        "night"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.17",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "subject",
+      "sentence": "Our school bus is yellow.",
+      "rule": "The subject is what the sentence is about: our school bus.",
+      "right": [
+        "Our",
+        "school",
+        "bus"
+      ]
+    },
+    {
+      "id": "gu.subject_predicate.18",
+      "level": 2,
+      "topic": "subject_predicate",
+      "kind": "spot",
+      "ask": "predicate",
+      "sentence": "The children sang loudly.",
+      "rule": "The predicate tells what the subject did: sang loudly.",
+      "right": [
+        "sang",
+        "loudly"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.13",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "A [team] of grapes hung from the vine.",
+      "rule": "A group of grapes is a bunch.",
+      "right": [
+        "bunch"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.14",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "We saw a [swarm] of birds in the sky.",
+      "rule": "A group of birds is a flock.",
+      "right": [
+        "flock"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.15",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "The [bunch] of soldiers marched past.",
+      "rule": "A group of soldiers is an army or a troop.",
+      "right": [
+        "army",
+        "troop",
+        "band"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.16",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "A [herd] of keys hung on the hook.",
+      "rule": "A group of keys is a bunch.",
+      "right": [
+        "bunch"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.17",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "The [flock] of elephants walked to the river.",
+      "rule": "A group of elephants is a herd.",
+      "right": [
+        "herd"
+      ]
+    },
+    {
+      "id": "gu.collective_nouns.18",
+      "level": 2,
+      "topic": "collective_nouns",
+      "kind": "fix",
+      "sentence": "A [crowd] of stars shone in the sky.",
+      "rule": "A group of stars is a cluster.",
+      "right": [
+        "cluster",
+        "galaxy"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.13",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "My uncle lives in [mumbai].",
+      "rule": "The name of a city is a proper noun: a capital letter.",
+      "right": [
+        "Mumbai"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.14",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "We need some [rices] for lunch.",
+      "rule": "Rice cannot be counted: no -s.",
+      "right": [
+        "rice"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.15",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "How [much] eggs are in the basket?",
+      "rule": "Eggs can be counted: many.",
+      "right": [
+        "many"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.16",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "There is not [many] sugar in the tea.",
+      "rule": "Sugar cannot be counted: much.",
+      "right": [
+        "much"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.17",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "Our dog is called [tommy].",
+      "rule": "A pet's name is a proper noun: a capital letter.",
+      "right": [
+        "Tommy"
+      ]
+    },
+    {
+      "id": "gu.noun_kinds.18",
+      "level": 2,
+      "topic": "noun_kinds",
+      "kind": "fix",
+      "sentence": "Please give me two [breads].",
+      "rule": "Bread cannot be counted; count slices or loaves.",
+      "right": [
+        "slices",
+        "loaves",
+        "pieces"
+      ]
+    },
+    {
+      "id": "gu.picture_order.13",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🌧️ Dark clouds came. ☔ It began to rain. 🌈 A rainbow came out.",
+      "rule": "Clouds, then rain, then a rainbow.",
+      "parts": [
+        "🌧️ Dark clouds came.",
+        "☔ It began to rain.",
+        "🌈 A rainbow came out."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.picture_order.14",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🛏️ Ravi woke up. 🪥 He brushed his teeth. 🎒 He went to school.",
+      "rule": "Wake, brush, then go to school.",
+      "parts": [
+        "🛏️ Ravi woke up.",
+        "🪥 He brushed his teeth.",
+        "🎒 He went to school."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.picture_order.15",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🥚 Amma broke an egg. 🍳 She fried it. 🍽️ We ate it.",
+      "rule": "Break, fry, then eat.",
+      "parts": [
+        "🥚 Amma broke an egg.",
+        "🍳 She fried it.",
+        "🍽️ We ate it."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.picture_order.16",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "choose",
+      "question": "How did Meena feel at the end?",
+      "wrong": [
+        "Sad",
+        "Angry"
+      ],
+      "sentence": "😢 Meena dropped her ice cream. 🍦 Her friend gave her one.",
+      "rule": "Her friend shared, so she felt happy again.",
+      "right": [
+        "Happy"
+      ]
+    },
+    {
+      "id": "gu.picture_order.17",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "choose",
+      "question": "What most likely happened?",
+      "wrong": [
+        "The ball went to sleep",
+        "Ravi flew away"
+      ],
+      "sentence": "⚽ Ravi kicked the ball hard. 🪟 Crash!",
+      "rule": "Crash after a hard kick: the ball broke a window.",
+      "right": [
+        "The ball broke a window"
+      ]
+    },
+    {
+      "id": "gu.picture_order.18",
+      "level": 1,
+      "topic": "picture_order",
+      "kind": "build",
+      "sentence": "🌱 Meena planted a seed. 💧 She watered it. 🍅 A tomato grew.",
+      "rule": "Plant, water, then the tomato grows.",
+      "parts": [
+        "🌱 Meena planted a seed.",
+        "💧 She watered it.",
+        "🍅 A tomato grew."
+      ],
+      "task": "Put the pictures in the order of the story."
+    },
+    {
+      "id": "gu.word_order.13",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "build",
+      "sentence": "The girl reads a book.",
+      "rule": "Who, then the action, then the rest."
+    },
+    {
+      "id": "gu.word_order.14",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "build",
+      "sentence": "My father drives a car.",
+      "rule": "Who, then the action, then the rest."
+    },
+    {
+      "id": "gu.word_order.15",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "rewrite",
+      "sentence": "Rice eats Ravi.",
+      "rule": "Who does it comes first: Ravi.",
+      "right": [
+        "Ravi eats rice."
+      ]
+    },
+    {
+      "id": "gu.word_order.16",
+      "level": 1,
+      "topic": "word_order",
+      "kind": "rewrite",
+      "sentence": "Sings my sister well.",
+      "rule": "Who comes first, then the action.",
+      "right": [
+        "My sister sings well."
+      ]
+    },
+    {
+      "id": "gu.capitals.14",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "fix",
+      "sentence": "We went to [kerala] for a holiday.",
+      "rule": "Names of places start with a capital letter.",
+      "right": [
+        "Kerala"
+      ]
+    },
+    {
+      "id": "gu.capitals.15",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "fix",
+      "sentence": "My friend [arjun] is tall.",
+      "rule": "Names of people start with a capital letter.",
+      "right": [
+        "Arjun"
+      ]
+    },
+    {
+      "id": "gu.capitals.16",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "fix",
+      "sentence": "[the] sun is hot.",
+      "rule": "A sentence starts with a capital letter.",
+      "right": [
+        "The"
+      ]
+    },
+    {
+      "id": "gu.capitals.17",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "build",
+      "sentence": "Amma and I went to Ooty.",
+      "rule": "Names, places and I start with capital letters."
+    },
+    {
+      "id": "gu.capitals.18",
+      "level": 1,
+      "topic": "capitals",
+      "kind": "rewrite",
+      "sentence": "my birthday is in june.",
+      "rule": "The first word and the name of a month take capitals.",
+      "right": [
+        "My birthday is in June."
+      ]
+    },
+    {
+      "id": "gu.pronouns.14",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "fix",
+      "sentence": "Ravi and Meena are here. [He] are my friends.",
+      "rule": "More than one person: they.",
+      "right": [
+        "They"
+      ]
+    },
+    {
+      "id": "gu.pronouns.15",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "fix",
+      "sentence": "The dog is hungry. Give [he] some food.",
+      "rule": "An animal or thing: it.",
+      "right": [
+        "it"
+      ]
+    },
+    {
+      "id": "gu.pronouns.16",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "fix",
+      "sentence": "Amma made dosa. [He] is a good cook.",
+      "rule": "Amma is a woman: she.",
+      "right": [
+        "She"
+      ]
+    },
+    {
+      "id": "gu.pronouns.17",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "choose",
+      "question": "Which word fits?",
+      "wrong": [
+        "She",
+        "It"
+      ],
+      "sentence": "My brother has a new bat. ___ plays cricket every day.",
+      "rule": "A boy or man: he.",
+      "right": [
+        "He"
+      ]
+    },
+    {
+      "id": "gu.pronouns.18",
+      "level": 1,
+      "topic": "pronouns",
+      "kind": "rewrite",
+      "sentence": "Meena lost Meena's pen.",
+      "rule": "Use her in place of the girl's name.",
+      "right": [
+        "Meena lost her pen."
+      ]
+    },
+    {
+      "id": "gu.conjunctions.14",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "build",
+      "sentence": "I like milk and bread.",
+      "rule": "And adds one thing to another."
+    },
+    {
+      "id": "gu.conjunctions.15",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "build",
+      "sentence": "She was tired but happy.",
+      "rule": "But shows a difference."
+    },
+    {
+      "id": "gu.conjunctions.16",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "build",
+      "sentence": "We stayed in because it rained.",
+      "rule": "Because gives the reason."
+    },
+    {
+      "id": "gu.conjunctions.17",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "fix",
+      "sentence": "I want to play [because] I have homework.",
+      "rule": "But shows a difference.",
+      "right": [
+        "but"
+      ]
+    },
+    {
+      "id": "gu.conjunctions.18",
+      "level": 2,
+      "topic": "conjunctions",
+      "kind": "rewrite",
+      "sentence": "He ran fast but he won.",
+      "rule": "And adds; nothing here is different.",
+      "right": [
+        "He ran fast and he won."
+      ]
+    },
+    {
+      "id": "gu.possessives.14",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "fix",
+      "sentence": "This is my [fathers] car.",
+      "rule": "To show it belongs to one person, add 's.",
+      "right": [
+        "father's"
+      ]
+    },
+    {
+      "id": "gu.possessives.15",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "fix",
+      "sentence": "The [girls's] room is upstairs.",
+      "rule": "For a plural ending in s, add only '.",
+      "right": [
+        "girls'"
+      ]
+    },
+    {
+      "id": "gu.possessives.16",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "fix",
+      "sentence": "I found the [cats] ball under the bed.",
+      "rule": "To show it belongs to the cat, add 's.",
+      "right": [
+        "cat's"
+      ]
+    },
+    {
+      "id": "gu.possessives.17",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "fix",
+      "sentence": "The [childrens] toys are on the floor.",
+      "rule": "Children does not end in s, so add 's.",
+      "right": [
+        "children's"
+      ]
+    },
+    {
+      "id": "gu.possessives.18",
+      "level": 2,
+      "topic": "possessives",
+      "kind": "rewrite",
+      "sentence": "That is Ravis bicycle.",
+      "rule": "To show it belongs to Ravi, add 's.",
+      "right": [
+        "That is Ravi's bicycle."
       ]
     }
   ]
