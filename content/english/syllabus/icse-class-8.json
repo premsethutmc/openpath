@@ -104,14 +104,20 @@
           "text": "Analyses how differing points of view create effects such as suspense or humour.",
           "coverage": "guided",
           "where": "guided",
-          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "also": [
+            "kinds"
+          ]
         },
         {
           "id": "R5",
           "text": "Judges how faithfully a film or a stage production follows its text.",
           "coverage": "guided",
           "where": "guided",
-          "note": "Done with a grown-up, away from the app, who ticks what they saw."
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "also": [
+            "kinds"
+          ]
         },
         {
           "id": "R6",

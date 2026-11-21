@@ -87,3 +87,24 @@ test("Poems and everyday texts: from Home, read a text, answer with the text to 
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("A Class 8 line done with a grown-up also opens Poems and everyday texts", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await context.newPage();
+  await page.goto(URL);
+  await page.getByRole("button", { name: "Let's begin" }).click();
+  await page.getByLabel(/Name to show/).fill("Also");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("button", { name: "Class 8", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
+  await page.getByRole("button", { name: /^Practise R4: Tasks with a grown-up/ }).waitFor();
+  await page.getByRole("button", { name: "Also practise R4: Poems and everyday texts" }).click();
+  await page.locator('main.kinds-read[data-phase="intro"]').waitFor();
+  await page.getByRole("button", { name: "← Back" }).click();
+  await page.getByRole("heading", { name: "Class 8 English" }).waitFor();
+  await context.close();
+});

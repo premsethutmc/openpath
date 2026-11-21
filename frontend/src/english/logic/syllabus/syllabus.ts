@@ -48,6 +48,8 @@ export interface Outcome {
   coverage: Coverage;
   /** The stream that practises it, when one does. */
   where?: Where;
+  /** Other streams that also practise part of it (a line done with a grown-up can still be read in the app). */
+  also?: Where[];
   /** Grammar in use topics that practise it. */
   topics?: string[];
   note?: string;
@@ -92,6 +94,7 @@ export function syllabusProblems(s: Syllabus): string[] {
       if (o.where === "guided" && tasksFor(GUIDED, line.syllabus, line.outcome).length < 2) out.push(`${o.id}: needs at least two tasks to do with a grown-up`);
       if (o.tasks && o.where !== "guided") out.push(`${o.id}: only a line done with a grown-up borrows tasks`);
       if (o.topics && o.where !== "grammar") out.push(`${o.id}: topics belong to the grammar stream`);
+      if (o.also && (!o.where || o.also.includes(o.where) || o.also.some((w) => w === "guided"))) out.push(`${o.id}: also names another stream than its own, never the guided tasks`);
       for (const t of o.topics ?? []) {
         if (!topics.has(t)) out.push(`${o.id}: unknown grammar topic ${t}`);
         else if (GRAMMAR.items.filter((i) => i.topic === t).length < 3) out.push(`${o.id}: too few sentences for ${t}`);

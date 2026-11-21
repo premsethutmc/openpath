@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 19,
+  "version": 20,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -8224,6 +8224,158 @@
     {"id": "gu.nominalisation.05", "level": 7, "topic": "nominalisation", "kind": "choose", "sentence": "They celebrated because the team won.", "question": "Which says the same with a noun?", "rule": "\"Won\" becomes the noun \"victory\".", "right": ["They celebrated the team's victory."], "wrong": ["They celebrated the team's winning it.", "They celebrated because victory."]},
     {"id": "gu.nominalisation.06", "level": 7, "topic": "nominalisation", "kind": "choose", "sentence": "The bridge was built quickly.", "question": "Which says the same with a noun?", "rule": "\"Built\" becomes the noun \"construction\".", "right": ["The construction of the bridge was quick."], "wrong": ["The bridge construction quickly.", "The building quickly of the bridge."]},
     {"id": "gu.nominalisation.07", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "The [fail] of the plan surprised us.", "rule": "The noun form of fail is failure.", "right": ["failure"]},
-    {"id": "gu.nominalisation.08", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "Her [explain] was clear.", "rule": "The noun form of explain is explanation.", "right": ["explanation"]}
+    {"id": "gu.nominalisation.08", "level": 7, "topic": "nominalisation", "kind": "fix", "sentence": "Her [explain] was clear.", "rule": "The noun form of explain is explanation.", "right": ["explanation"]},
+    {
+      "id": "gu.nominalisation.09",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "choose",
+      "sentence": "The road was closed, and everyone was annoyed.",
+      "question": "Which says the same with a noun?",
+      "rule": "\"Closed\" becomes the noun \"closure\".",
+      "right": [
+        "The closure of the road annoyed everyone."
+      ],
+      "wrong": [
+        "The closing road annoyed everyone of it.",
+        "The road closure was everyone annoyed."
+      ]
+    },
+    {
+      "id": "gu.nominalisation.10",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "choose",
+      "sentence": "Prices rose quickly, which worried the shopkeepers.",
+      "question": "Which says the same with a noun?",
+      "rule": "\"Rose\" becomes the noun \"rise\".",
+      "right": [
+        "The quick rise in prices worried the shopkeepers."
+      ],
+      "wrong": [
+        "The prices rising quick worried shopkeepers it.",
+        "Rise quickly prices worried the shopkeepers."
+      ]
+    },
+    {
+      "id": "gu.nominalisation.11",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "choose",
+      "sentence": "She explained the rules clearly, so we understood.",
+      "question": "Which says the same with a noun?",
+      "rule": "\"Explained\" becomes the noun \"explanation\".",
+      "right": [
+        "Her clear explanation of the rules helped us understand."
+      ],
+      "wrong": [
+        "Her clear explaining the rules us understood.",
+        "The rules explanation clearly she understood."
+      ]
+    },
+    {
+      "id": "gu.nominalisation.12",
+      "level": 7,
+      "topic": "nominalisation",
+      "kind": "choose",
+      "sentence": "The team prepared carefully, and so they won.",
+      "question": "Which says the same with a noun?",
+      "rule": "\"Prepared\" becomes the noun \"preparation\".",
+      "right": [
+        "Careful preparation helped the team win."
+      ],
+      "wrong": [
+        "Carefully preparing the team was win.",
+        "The team preparation carefully won them."
+      ]
+    },
+    {
+      "id": "gu.conditionals.17",
+      "level": 7,
+      "topic": "conditionals",
+      "kind": "fix",
+      "sentence": "If I [know] the answer, I would tell you.",
+      "rule": "An unreal \"if\" about now takes the past: if I knew.",
+      "right": [
+        "knew"
+      ]
+    },
+    {
+      "id": "gu.conditionals.18",
+      "level": 7,
+      "topic": "conditionals",
+      "kind": "fix",
+      "sentence": "If it rains tomorrow, we [would] stay indoors.",
+      "rule": "A real \"if\" about the future takes will: we will stay.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.ing_or_to.15",
+      "level": 7,
+      "topic": "ing_or_to",
+      "kind": "fix",
+      "sentence": "She enjoys [read] mystery stories.",
+      "rule": "\"Enjoy\" is followed by -ing: enjoys reading.",
+      "right": [
+        "reading"
+      ]
+    },
+    {
+      "id": "gu.ing_or_to.16",
+      "level": 7,
+      "topic": "ing_or_to",
+      "kind": "fix",
+      "sentence": "She finished [write] her essay before dinner.",
+      "rule": "\"Finish\" is followed by -ing: finished writing.",
+      "right": [
+        "writing"
+      ]
+    },
+    {
+      "id": "gu.modal_perfect.15",
+      "level": 7,
+      "topic": "modal_perfect",
+      "kind": "fix",
+      "sentence": "You should have [tell] me yesterday.",
+      "rule": "Should have takes the third form: should have told.",
+      "right": [
+        "told"
+      ]
+    },
+    {
+      "id": "gu.modal_perfect.16",
+      "level": 7,
+      "topic": "modal_perfect",
+      "kind": "fix",
+      "sentence": "He must have [forget] his keys.",
+      "rule": "Must have takes the third form: must have forgotten.",
+      "right": [
+        "forgotten"
+      ]
+    },
+    {
+      "id": "gu.parallel.14",
+      "level": 7,
+      "topic": "parallel",
+      "kind": "fix",
+      "sentence": "She likes swimming, reading and [cook].",
+      "rule": "Keep the list in the same form: swimming, reading and cooking.",
+      "right": [
+        "cooking"
+      ]
+    },
+    {
+      "id": "gu.parallel.15",
+      "level": 7,
+      "topic": "parallel",
+      "kind": "fix",
+      "sentence": "The plan was quick, cheap and [success].",
+      "rule": "Keep the list in the same form: quick, cheap and successful.",
+      "right": [
+        "successful"
+      ]
+    }
   ]
 }

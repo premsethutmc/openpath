@@ -64,6 +64,11 @@ export function SyllabusView({ docs, initial, initialBoard = "icse", onOpen, onB
                     {o.where === "guided" || o.where === "writing" ? "Open" : "Practise"}: {GO[o.where]}
                   </button>
                 )}
+                {o.also?.map((w) => (
+                  <button key={w} type="button" className="secondary" aria-label={`Also practise ${o.id}: ${GO[w]}`} onClick={() => onOpen(w, undefined, doc.class, { ...taskLine(doc, o), text: o.text }, board)}>
+                    Also: {GO[w]}
+                  </button>
+                ))}
               </li>
             ))}
           </ul>
