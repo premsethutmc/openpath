@@ -120,8 +120,9 @@ export function TamilHome() {
         <section className="teach-card">
           <p className="teach-ta">{topic.teach.ta}</p>
           <p className="teach-en">{topic.teach.en}</p>
-          <p className="example">{topic.teach.examples}</p>
+          {!topic.passage && <p className="example">{topic.teach.examples}</p>}
         </section>
+        {topic.passage && <p className="passage">{topic.passage}</p>}
         <button type="button" className="primary wide" onClick={() => setScreen({ name: "practice", topic })}>
           பயிற்சி தொடங்கு — Start practice
         </button>
@@ -186,6 +187,7 @@ function Practice({ topic, progress, onAnswer, onBack, onTeach }: { topic: Cours
         <button type="button" className="link" onClick={onBack}>← {topic.title}</button>
         <span className="small">{queue.length} left</span>
       </header>
+      {topic.passage && <p className="passage">{topic.passage}</p>}
       <h1 className="prompt">{q.prompt}</h1>
       <p className="small prompt-en">{q.promptEn}</p>
       <div className="choices">

@@ -175,3 +175,4 @@ form {
 .feedback-tick { display: flex; gap: 10px; align-items: center; font-size: 0.95rem; }
 .feedback-tick input { width: 20px; height: 20px; flex: none; min-height: 0; }
 .feedback-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.passage { background: #fffaf0; border-left: 4px solid #f28c28; border-radius: 12px; padding: 12px 14px; font-size: 1.05rem; }

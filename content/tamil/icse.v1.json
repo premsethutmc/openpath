@@ -2,7 +2,7 @@
  "schema": "openpath.tamil-course.v1",
  "board": "ICSE",
  "language": "ta",
- "source": "OpenPath-authored, aligned to the CISCE second-language Tamil syllabus; no publisher text",
+ "source": "OpenPath-authored passages and questions, aligned to the CISCE second-language Tamil syllabus; classic texts quoted are public domain (Thirukkural, Avvaiyar, Bharathiyar); no publisher text",
  "review": "provisional",
  "topics": [
   {
@@ -1331,6 +1331,149 @@
    ]
   },
   {
+   "id": "icse.ta.c1.aathichoodi",
+   "class": 1,
+   "title": "ஆத்திசூடி",
+   "titleEn": "Aathichoodi (Avvaiyar)",
+   "teach": {
+    "ta": "ஔவையார் எழுதிய ஆத்திசூடி — சிறு சிறு அறிவுரைகள். «அறம் செய விரும்பு» = நல்லது செய்ய ஆசைப்படு.",
+    "en": "Short wise sayings by the poet Avvaiyar, in alphabet order.",
+    "examples": "அறம் செய விரும்பு, ஆறுவது சினம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c1.aathichoodi.1",
+     "prompt": "அறம் செய ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "விரும்பு",
+      "கைவிடேல்",
+      "விளம்பேல்"
+     ],
+     "answer": "விரும்பு",
+     "why": "அறம் செய விரும்பு — நல்லது செய்ய ஆசைப்படு"
+    },
+    {
+     "id": "icse.ta.c1.aathichoodi.2",
+     "prompt": "ஆறுவது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "சினம்",
+      "கரவேல்",
+      "கைவிடேல்"
+     ],
+     "answer": "சினம்",
+     "why": "ஆறுவது சினம் — கோபம் தணிய வேண்டும்"
+    },
+    {
+     "id": "icse.ta.c1.aathichoodi.3",
+     "prompt": "இயல்வது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "ஒழியேல்",
+      "கரவேல்",
+      "ஒழுகு"
+     ],
+     "answer": "கரவேல்",
+     "why": "இயல்வது கரவேல் — உன்னால் முடிந்த உதவியை மறைக்காதே"
+    },
+    {
+     "id": "icse.ta.c1.aathichoodi.4",
+     "prompt": "ஈவது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "கைவிடேல்",
+      "பேசேல்",
+      "விலக்கேல்"
+     ],
+     "answer": "விலக்கேல்",
+     "why": "ஈவது விலக்கேல் — பிறர் கொடுப்பதைத் தடுக்காதே"
+    },
+    {
+     "id": "icse.ta.c1.aathichoodi.5",
+     "prompt": "உடையது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "விரும்பு",
+      "ஒழியேல்",
+      "விளம்பேல்"
+     ],
+     "answer": "விளம்பேல்",
+     "why": "உடையது விளம்பேல் — உன்னிடம் உள்ளதைப் பெருமையாகப் பேசாதே"
+    },
+    {
+     "id": "icse.ta.c1.aathichoodi.6",
+     "prompt": "ஊக்கமது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "விலக்கேல்",
+      "கைவிடேல்",
+      "இகழேல்"
+     ],
+     "answer": "கைவிடேல்",
+     "why": "ஊக்கமது கைவிடேல் — முயற்சியைக் கைவிடாதே"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c1.reading",
+   "class": 1,
+   "title": "படித்துப் புரிந்துகொள்: சிண்டு பூனை",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "சிண்டு பூனை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c1.reading.1",
+     "prompt": "சிண்டு என்பது எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "மயில்",
+      "நாய்",
+      "பூனை"
+     ],
+     "answer": "பூனை"
+    },
+    {
+     "id": "icse.ta.c1.reading.2",
+     "prompt": "பூனையின் பெயர் என்ன?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பசு",
+      "மீனா",
+      "சிண்டு"
+     ],
+     "answer": "சிண்டு"
+    },
+    {
+     "id": "icse.ta.c1.reading.3",
+     "prompt": "சிண்டு என்ன குடிக்கும்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "சோறு",
+      "தேன்",
+      "பால்"
+     ],
+     "answer": "பால்"
+    },
+    {
+     "id": "icse.ta.c1.reading.4",
+     "prompt": "சிண்டு எங்கே தூங்கும்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "ஆற்றில்",
+      "வீட்டின் மேலே",
+      "மரத்தின் கீழே"
+     ],
+     "answer": "மரத்தின் கீழே"
+    }
+   ],
+   "passage": "இது ஒரு பூனை. பூனையின் பெயர் சிண்டு. சிண்டு பால் குடிக்கும். சிண்டு மரத்தின் கீழே தூங்கும்."
+  },
+  {
    "id": "icse.ta.c2.uyirmei",
    "class": 2,
    "title": "உயிர்மெய் எழுத்துகள்",
@@ -2233,6 +2376,137 @@
      "why": "கை → கைகள்"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c2.aathichoodi",
+   "class": 2,
+   "title": "ஆத்திசூடி (தொடர்ச்சி)",
+   "titleEn": "Aathichoodi (continued)",
+   "teach": {
+    "ta": "ஆத்திசூடியின் அடுத்த வரிகள்: எண் எழுத்து இகழேல், ஓதுவது ஒழியேல்.",
+    "en": "More lines of Aathichoodi.",
+    "examples": "ஓதுவது ஒழியேல்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c2.aathichoodi.1",
+     "prompt": "எண் எழுத்து ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "இகழேல்",
+      "விரும்பு",
+      "ஒழுகு"
+     ],
+     "answer": "இகழேல்",
+     "why": "எண் எழுத்து இகழேல் — கணக்கையும் எழுத்தையும் இகழாதே"
+    },
+    {
+     "id": "icse.ta.c2.aathichoodi.2",
+     "prompt": "ஐயம் இட்டு ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "இகழேல்",
+      "உண்",
+      "பேசேல்"
+     ],
+     "answer": "உண்",
+     "why": "ஐயம் இட்டு உண் — பிறருக்குக் கொடுத்துப் பின் உண்"
+    },
+    {
+     "id": "icse.ta.c2.aathichoodi.3",
+     "prompt": "ஒப்புரவு ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "சினம்",
+      "ஒழுகு",
+      "விலக்கேல்"
+     ],
+     "answer": "ஒழுகு",
+     "why": "ஒப்புரவு ஒழுகு — உலகத்தோடு ஒத்து வாழ்"
+    },
+    {
+     "id": "icse.ta.c2.aathichoodi.4",
+     "prompt": "ஓதுவது ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "விளம்பேல்",
+      "ஒழியேல்",
+      "இகழேல்"
+     ],
+     "answer": "ஒழியேல்",
+     "why": "ஓதுவது ஒழியேல் — படிப்பதை நிறுத்தாதே"
+    },
+    {
+     "id": "icse.ta.c2.aathichoodi.5",
+     "prompt": "ஔவியம் ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "பேசேல்",
+      "சினம்",
+      "ஒழுகு"
+     ],
+     "answer": "பேசேல்",
+     "why": "ஔவியம் பேசேல் — பொறாமைச் சொல் பேசாதே"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c2.reading",
+   "class": 2,
+   "title": "படித்துப் புரிந்துகொள்: மீனாவின் தோட்டம்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "மீனாவின் தோட்டம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c2.reading.1",
+     "prompt": "தோட்டம் யாருடைய வீட்டில் உள்ளது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "ஆசிரியர்",
+      "தம்பி",
+      "மீனா"
+     ],
+     "answer": "மீனா"
+    },
+    {
+     "id": "icse.ta.c2.reading.2",
+     "prompt": "தோட்டத்தில் உள்ள மரம் எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "வேப்பமரம்",
+      "தென்னைமரம்",
+      "மாமரம்"
+     ],
+     "answer": "மாமரம்"
+    },
+    {
+     "id": "icse.ta.c2.reading.3",
+     "prompt": "காலையில் மீனா என்ன செய்வாள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பாட்டுப் பாடுவாள்",
+      "பள்ளிக்கு ஓடுவாள்",
+      "செடிகளுக்குத் தண்ணீர் ஊற்றுவாள்"
+     ],
+     "answer": "செடிகளுக்குத் தண்ணீர் ஊற்றுவாள்"
+    },
+    {
+     "id": "icse.ta.c2.reading.4",
+     "prompt": "மாலையில் மீனா யாருடன் விளையாடுவாள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "அம்மா",
+      "தம்பி",
+      "பூனை"
+     ],
+     "answer": "தம்பி"
+    }
+   ],
+   "passage": "மீனாவின் வீட்டில் ஒரு தோட்டம் உள்ளது. அங்கே ரோஜாச் செடியும் மாமரமும் உள்ளன. மீனா காலையில் செடிகளுக்குத் தண்ணீர் ஊற்றுவாள். மாலையில் தம்பியுடன் தோட்டத்தில் விளையாடுவாள்."
   },
   {
    "id": "icse.ta.c3.antonyms",
@@ -3156,6 +3430,198 @@
      "why": "கடல் → கடல்கள்"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c3.aathichoodi-meaning",
+   "class": 3,
+   "title": "ஆத்திசூடி — பொருள்",
+   "titleEn": "Aathichoodi: meanings",
+   "teach": {
+    "ta": "ஒவ்வொரு ஆத்திசூடி வரிக்கும் ஒரு பொருள் உண்டு. «ஊக்கமது கைவிடேல்» = முயற்சியைக் கைவிடாதே.",
+    "en": "What each Aathichoodi line means.",
+    "examples": "ஓதுவது ஒழியேல் = படிப்பதை நிறுத்தாதே"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.1",
+     "prompt": "«அறம் செய விரும்பு» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "முயற்சியைக் கைவிடாதே",
+      "பொறாமைச் சொல் பேசாதே",
+      "நல்லது செய்ய ஆசைப்படு"
+     ],
+     "answer": "நல்லது செய்ய ஆசைப்படு"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.2",
+     "prompt": "«ஆறுவது சினம்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "முயற்சியைக் கைவிடாதே",
+      "பொறாமைச் சொல் பேசாதே",
+      "கோபம் தணிய வேண்டும்"
+     ],
+     "answer": "கோபம் தணிய வேண்டும்"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.3",
+     "prompt": "«இயல்வது கரவேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "முயற்சியைக் கைவிடாதே",
+      "உன்னால் முடிந்த உதவியை மறைக்காதே",
+      "பிறர் கொடுப்பதைத் தடுக்காதே"
+     ],
+     "answer": "உன்னால் முடிந்த உதவியை மறைக்காதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.4",
+     "prompt": "«ஈவது விலக்கேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "உலகத்தோடு ஒத்து வாழ்",
+      "கணக்கையும் எழுத்தையும் இகழாதே",
+      "பிறர் கொடுப்பதைத் தடுக்காதே"
+     ],
+     "answer": "பிறர் கொடுப்பதைத் தடுக்காதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.5",
+     "prompt": "«உடையது விளம்பேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "உன்னால் முடிந்த உதவியை மறைக்காதே",
+      "உன்னிடம் உள்ளதைப் பெருமையாகப் பேசாதே",
+      "உலகத்தோடு ஒத்து வாழ்"
+     ],
+     "answer": "உன்னிடம் உள்ளதைப் பெருமையாகப் பேசாதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.6",
+     "prompt": "«ஊக்கமது கைவிடேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "உன்னிடம் உள்ளதைப் பெருமையாகப் பேசாதே",
+      "நல்லது செய்ய ஆசைப்படு",
+      "முயற்சியைக் கைவிடாதே"
+     ],
+     "answer": "முயற்சியைக் கைவிடாதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.7",
+     "prompt": "«எண் எழுத்து இகழேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "உலகத்தோடு ஒத்து வாழ்",
+      "கோபம் தணிய வேண்டும்",
+      "கணக்கையும் எழுத்தையும் இகழாதே"
+     ],
+     "answer": "கணக்கையும் எழுத்தையும் இகழாதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.8",
+     "prompt": "«ஐயம் இட்டு உண்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "உன்னால் முடிந்த உதவியை மறைக்காதே",
+      "பொறாமைச் சொல் பேசாதே",
+      "பிறருக்குக் கொடுத்துப் பின் உண்"
+     ],
+     "answer": "பிறருக்குக் கொடுத்துப் பின் உண்"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.9",
+     "prompt": "«ஒப்புரவு ஒழுகு» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "படிப்பதை நிறுத்தாதே",
+      "நல்லது செய்ய ஆசைப்படு",
+      "உலகத்தோடு ஒத்து வாழ்"
+     ],
+     "answer": "உலகத்தோடு ஒத்து வாழ்"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.10",
+     "prompt": "«ஓதுவது ஒழியேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "கோபம் தணிய வேண்டும்",
+      "பிறருக்குக் கொடுத்துப் பின் உண்",
+      "படிப்பதை நிறுத்தாதே"
+     ],
+     "answer": "படிப்பதை நிறுத்தாதே"
+    },
+    {
+     "id": "icse.ta.c3.aathichoodi-meaning.11",
+     "prompt": "«ஔவியம் பேசேல்» — பொருள்?",
+     "promptEn": "What does the line mean?",
+     "options": [
+      "கணக்கையும் எழுத்தையும் இகழாதே",
+      "பொறாமைச் சொல் பேசாதே",
+      "உன்னால் முடிந்த உதவியை மறைக்காதே"
+     ],
+     "answer": "பொறாமைச் சொல் பேசாதே"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c3.reading",
+   "class": 3,
+   "title": "படித்துப் புரிந்துகொள்: தாகம் கொண்ட காகம்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "தாகம் கொண்ட காகம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c3.reading.1",
+     "prompt": "காகத்துக்கு என்ன ஆனது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "தூக்கம் வந்தது",
+      "தாகம் எடுத்தது",
+      "பசி எடுத்தது"
+     ],
+     "answer": "தாகம் எடுத்தது"
+    },
+    {
+     "id": "icse.ta.c3.reading.2",
+     "prompt": "காகம் பானையில் எதைப் போட்டது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "சிறு கற்கள்",
+      "இலைகள்",
+      "மணல்"
+     ],
+     "answer": "சிறு கற்கள்"
+    },
+    {
+     "id": "icse.ta.c3.reading.3",
+     "prompt": "தண்ணீர் ஏன் மேலே வந்தது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "மழை பெய்ததால்",
+      "பானை உடைந்ததால்",
+      "கற்களைப் போட்டதால்"
+     ],
+     "answer": "கற்களைப் போட்டதால்"
+    },
+    {
+     "id": "icse.ta.c3.reading.4",
+     "prompt": "இந்தக் கதை சொல்லும் பாடம் எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "முயன்றால் வழி கிடைக்கும்",
+      "பேராசை கூடாது",
+      "பொய் சொல்லக் கூடாது"
+     ],
+     "answer": "முயன்றால் வழி கிடைக்கும்"
+    }
+   ],
+   "passage": "ஒரு காகத்துக்குத் தாகம் எடுத்தது. ஒரு பானையில் கொஞ்சம் தண்ணீர் இருந்தது. காகத்தின் அலகு தண்ணீரை எட்டவில்லை. காகம் சிறு கற்களைப் பொறுக்கிப் பானையில் போட்டது. தண்ணீர் மேலே வந்தது. காகம் தண்ணீர் குடித்துப் பறந்தது."
   },
   {
    "id": "icse.ta.c4.noun-verb",
@@ -4316,6 +4782,149 @@
    ]
   },
   {
+   "id": "icse.ta.c4.kondrai",
+   "class": 4,
+   "title": "கொன்றை வேந்தன்",
+   "titleEn": "Kondrai Vendhan (Avvaiyar)",
+   "teach": {
+    "ta": "ஔவையாரின் கொன்றை வேந்தன் — ஆத்திசூடியை விடச் சற்று நீண்ட அறிவுரைகள்.",
+    "en": "More sayings by Avvaiyar.",
+    "examples": "தாயின் சிறந்த கோயிலும் இல்லை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c4.kondrai.1",
+     "prompt": "அன்னையும் பிதாவும் முன்னறி ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "கோயிலும்",
+      "சாலவும்",
+      "தெய்வம்"
+     ],
+     "answer": "தெய்வம்",
+     "why": "அன்னையும் பிதாவும் முன்னறி தெய்வம்"
+    },
+    {
+     "id": "icse.ta.c4.kondrai.2",
+     "prompt": "ஆலயம் தொழுவது ____ நன்று",
+     "promptEn": "Complete the line.",
+     "options": [
+      "கோயிலும்",
+      "நல்லறம்",
+      "சாலவும்"
+     ],
+     "answer": "சாலவும்",
+     "why": "ஆலயம் தொழுவது சாலவும் நன்று"
+    },
+    {
+     "id": "icse.ta.c4.kondrai.3",
+     "prompt": "இல்லறம் அல்லது ____ அன்று",
+     "promptEn": "Complete the line.",
+     "options": [
+      "நல்லறம்",
+      "கோயிலும்",
+      "தெய்வம்"
+     ],
+     "answer": "நல்லறம்",
+     "why": "இல்லறம் அல்லது நல்லறம் அன்று"
+    },
+    {
+     "id": "icse.ta.c4.kondrai.4",
+     "prompt": "எண்ணும் எழுத்தும் ____ தகும்",
+     "promptEn": "Complete the line.",
+     "options": [
+      "நல்லறம்",
+      "கோயிலும்",
+      "கண்ணெனத்"
+     ],
+     "answer": "கண்ணெனத்",
+     "why": "எண்ணும் எழுத்தும் கண்ணெனத் தகும்"
+    },
+    {
+     "id": "icse.ta.c4.kondrai.5",
+     "prompt": "தந்தை சொல் மிக்க ____ இல்லை",
+     "promptEn": "Complete the line.",
+     "options": [
+      "கண்ணெனத்",
+      "மந்திரம்",
+      "தெய்வம்"
+     ],
+     "answer": "மந்திரம்",
+     "why": "தந்தை சொல் மிக்க மந்திரம் இல்லை"
+    },
+    {
+     "id": "icse.ta.c4.kondrai.6",
+     "prompt": "தாயின் சிறந்த ____ இல்லை",
+     "promptEn": "Complete the line.",
+     "options": [
+      "சாலவும்",
+      "மந்திரம்",
+      "கோயிலும்"
+     ],
+     "answer": "கோயிலும்",
+     "why": "தாயின் சிறந்த கோயிலும் இல்லை"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c4.reading",
+   "class": 4,
+   "title": "படித்துப் புரிந்துகொள்: பொங்கல் திருநாள்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "பொங்கல் திருநாள்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c4.reading.1",
+     "prompt": "பொங்கல் எந்த மாதம் கொண்டாடப்படுகிறது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "தை",
+      "சித்திரை",
+      "ஆடி"
+     ],
+     "answer": "தை"
+    },
+    {
+     "id": "icse.ta.c4.reading.2",
+     "prompt": "பொங்கல் எதற்கான திருநாள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பிறந்தநாள்",
+      "அறுவடை",
+      "மழை"
+     ],
+     "answer": "அறுவடை"
+    },
+    {
+     "id": "icse.ta.c4.reading.3",
+     "prompt": "மாட்டுப் பொங்கல் எப்போது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பொங்கலுக்கு முதல் நாள்",
+      "ஆடி மாதம்",
+      "பொங்கலுக்கு மறுநாள்"
+     ],
+     "answer": "பொங்கலுக்கு மறுநாள்"
+    },
+    {
+     "id": "icse.ta.c4.reading.4",
+     "prompt": "மாட்டுப் பொங்கல் அன்று யாருக்கு நன்றி சொல்வார்கள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பறவைகள்",
+      "மாடுகள்",
+      "ஆசிரியர்கள்"
+     ],
+     "answer": "மாடுகள்"
+    }
+   ],
+   "passage": "பொங்கல் தமிழர்களின் அறுவடைத் திருநாள். தை மாதம் முதல் நாள் இது கொண்டாடப்படுகிறது. புதுப் பானையில் பொங்கல் வைப்பார்கள். மறுநாள் மாட்டுப் பொங்கல். அன்று உழவுக்கு உதவும் மாடுகளுக்கு நன்றி சொல்வார்கள்."
+  },
+  {
    "id": "icse.ta.c5.thinai",
    "class": 5,
    "title": "திணை",
@@ -5423,6 +6032,125 @@
    ]
   },
   {
+   "id": "icse.ta.c5.bharathi",
+   "class": 5,
+   "title": "பாரதியார் பாடல்கள்",
+   "titleEn": "Bharathiyar's songs",
+   "teach": {
+    "ta": "மகாகவி பாரதியார் குழந்தைகளுக்காகவும் நாட்டுக்காகவும் தமிழுக்காகவும் பாடினார்.",
+    "en": "Lines from the poet Subramania Bharathi.",
+    "examples": "காலை எழுந்தவுடன் படிப்பு"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c5.bharathi.1",
+     "prompt": "ஓடி ____ பாப்பா",
+     "promptEn": "Complete the line.",
+     "options": [
+      "விளையாட்டு",
+      "படிப்பு",
+      "விளையாடு"
+     ],
+     "answer": "விளையாடு",
+     "why": "ஓடி விளையாடு பாப்பா"
+    },
+    {
+     "id": "icse.ta.c5.bharathi.2",
+     "prompt": "காலை எழுந்தவுடன் ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "அச்சம்",
+      "தேன்",
+      "படிப்பு"
+     ],
+     "answer": "படிப்பு",
+     "why": "காலை எழுந்தவுடன் படிப்பு"
+    },
+    {
+     "id": "icse.ta.c5.bharathi.3",
+     "prompt": "மாலை முழுதும் ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "ஜாதி",
+      "தமிழ்மொழி",
+      "விளையாட்டு"
+     ],
+     "answer": "விளையாட்டு",
+     "why": "மாலை முழுதும் விளையாட்டு"
+    },
+    {
+     "id": "icse.ta.c5.bharathi.4",
+     "prompt": "காக்கை குருவி எங்கள் ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "ஜாதி",
+      "விளையாடு",
+      "தமிழ்மொழி"
+     ],
+     "answer": "ஜாதி",
+     "why": "காக்கை குருவி எங்கள் ஜாதி"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c5.reading",
+   "class": 5,
+   "title": "படித்துப் புரிந்துகொள்: மரம் நடுவோம்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "மரம் நடுவோம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c5.reading.1",
+     "prompt": "மரங்கள் எதைத் தூய்மை ஆக்குகின்றன?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "கடல்",
+      "காற்று",
+      "சாலை"
+     ],
+     "answer": "காற்று"
+    },
+    {
+     "id": "icse.ta.c5.reading.2",
+     "prompt": "பறவைகள் மரங்களில் என்ன செய்கின்றன?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "நீந்துகின்றன",
+      "பாடம் படிக்கின்றன",
+      "கூடு கட்டுகின்றன"
+     ],
+     "answer": "கூடு கட்டுகின்றன"
+    },
+    {
+     "id": "icse.ta.c5.reading.3",
+     "prompt": "மரங்கள் எது பெய்ய உதவுகின்றன?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "வெயில்",
+      "பனி",
+      "மழை"
+     ],
+     "answer": "மழை"
+    },
+    {
+     "id": "icse.ta.c5.reading.4",
+     "prompt": "இந்தப் பகுதி நம்மிடம் என்ன கேட்கிறது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பறவைகளைப் பிடிக்க வேண்டும்",
+      "ஒவ்வொருவரும் ஒரு மரமாவது நட வேண்டும்",
+      "மரங்களை வெட்ட வேண்டும்"
+     ],
+     "answer": "ஒவ்வொருவரும் ஒரு மரமாவது நட வேண்டும்"
+    }
+   ],
+   "passage": "மரங்கள் நமக்கு நிழல் தருகின்றன. அவை காற்றைத் தூய்மை ஆக்குகின்றன. மரங்கள் மழை பெய்ய உதவுகின்றன. பறவைகள் மரங்களில் கூடு கட்டுகின்றன. எனவே ஒவ்வொருவரும் ஒரு மரமாவது நட வேண்டும்."
+  },
+  {
    "id": "icse.ta.c6.case-marker",
    "class": 6,
    "title": "வேற்றுமை உருபு",
@@ -6139,6 +6867,64 @@
      "answer": "தலை"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c6.reading",
+   "class": 6,
+   "title": "படித்துப் புரிந்துகொள்: கல்லணை",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "கல்லணை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c6.reading.1",
+     "prompt": "கல்லணையைக் கட்டியவர் யார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பாண்டியன்",
+      "இராசராச சோழன்",
+      "கரிகால் சோழன்"
+     ],
+     "answer": "கரிகால் சோழன்"
+    },
+    {
+     "id": "icse.ta.c6.reading.2",
+     "prompt": "கல்லணை எந்த ஆற்றின் குறுக்கே உள்ளது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "தாமிரபரணி",
+      "வைகை",
+      "காவிரி"
+     ],
+     "answer": "காவிரி"
+    },
+    {
+     "id": "icse.ta.c6.reading.3",
+     "prompt": "கல்லணை ஏறத்தாழ எத்தனை ஆண்டுகளுக்கு முன் கட்டப்பட்டது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "இருநூறு",
+      "இருபது",
+      "இரண்டாயிரம்"
+     ],
+     "answer": "இரண்டாயிரம்"
+    },
+    {
+     "id": "icse.ta.c6.reading.4",
+     "prompt": "கல்லணையால் கிடைக்கும் பயன் எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "வயல்களுக்குத் தண்ணீர்",
+      "மீன் பிடிக்க மட்டும்",
+      "மின்சாரம் மட்டும்"
+     ],
+     "answer": "வயல்களுக்குத் தண்ணீர்"
+    }
+   ],
+   "passage": "கரிகால் சோழன் காவிரி ஆற்றின் குறுக்கே கல்லணையைக் கட்டினான். இது ஏறத்தாழ இரண்டாயிரம் ஆண்டுகளுக்கு முன் கட்டப்பட்டது. இன்றும் இந்த அணை பயன்பாட்டில் உள்ளது. இதனால் தஞ்சாவூர்ப் பகுதி வயல்களுக்குத் தண்ணீர் கிடைக்கிறது."
   },
   {
    "id": "icse.ta.c7.noun-kinds",
@@ -6877,6 +7663,125 @@
      "answer": "காய்"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c7.bharathi",
+   "class": 7,
+   "title": "பாரதியார் பாடல்கள் (மேலும்)",
+   "titleEn": "Bharathiyar's songs (more)",
+   "teach": {
+    "ta": "மகாகவி பாரதியார் குழந்தைகளுக்காகவும் நாட்டுக்காகவும் தமிழுக்காகவும் பாடினார்.",
+    "en": "Lines from the poet Subramania Bharathi.",
+    "examples": "காலை எழுந்தவுடன் படிப்பு"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c7.bharathi.1",
+     "prompt": "யாமறிந்த மொழிகளிலே ____ போல் இனிதாவது எங்கும் காணோம்",
+     "promptEn": "Complete the line.",
+     "options": [
+      "தேன்",
+      "தமிழ்மொழி",
+      "நிலவினிலே"
+     ],
+     "answer": "தமிழ்மொழி",
+     "why": "யாமறிந்த மொழிகளிலே தமிழ்மொழி போல் இனிதாவது எங்கும் காணோம்"
+    },
+    {
+     "id": "icse.ta.c7.bharathi.2",
+     "prompt": "செந்தமிழ் நாடென்னும் போதினிலே — இன்பத் ____ வந்து பாயுது காதினிலே",
+     "promptEn": "Complete the line.",
+     "options": [
+      "படிப்பு",
+      "தேன்",
+      "தமிழ்மொழி"
+     ],
+     "answer": "தேன்",
+     "why": "செந்தமிழ் நாடென்னும் போதினிலே — இன்பத் தேன் வந்து பாயுது காதினிலே"
+    },
+    {
+     "id": "icse.ta.c7.bharathi.3",
+     "prompt": "சிந்து நதியின் மிசை ____",
+     "promptEn": "Complete the line.",
+     "options": [
+      "நிலவினிலே",
+      "தேன்",
+      "விளையாட்டு"
+     ],
+     "answer": "நிலவினிலே",
+     "why": "சிந்து நதியின் மிசை நிலவினிலே"
+    },
+    {
+     "id": "icse.ta.c7.bharathi.4",
+     "prompt": "அச்சமில்லை அச்சமில்லை ____ என்பதில்லையே",
+     "promptEn": "Complete the line.",
+     "options": [
+      "தேன்",
+      "அச்சம்",
+      "விளையாட்டு"
+     ],
+     "answer": "அச்சம்",
+     "why": "அச்சமில்லை அச்சமில்லை அச்சம் என்பதில்லையே"
+    }
+   ]
+  },
+  {
+   "id": "icse.ta.c7.reading",
+   "class": 7,
+   "title": "படித்துப் புரிந்துகொள்: அப்துல் கலாம்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "அப்துல் கலாம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c7.reading.1",
+     "prompt": "அப்துல் கலாம் எங்கே பிறந்தார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "மதுரை",
+      "இராமேசுவரம்",
+      "சென்னை"
+     ],
+     "answer": "இராமேசுவரம்"
+    },
+    {
+     "id": "icse.ta.c7.reading.2",
+     "prompt": "சிறுவயதில் அவர் எதை விற்றார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பழங்கள்",
+      "செய்தித்தாள்",
+      "பூக்கள்"
+     ],
+     "answer": "செய்தித்தாள்"
+    },
+    {
+     "id": "icse.ta.c7.reading.3",
+     "prompt": "அவர் வகித்த உயர்ந்த பதவி எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "ஆசிரியர்",
+      "குடியரசுத் தலைவர்",
+      "முதலமைச்சர்"
+     ],
+     "answer": "குடியரசுத் தலைவர்"
+    },
+    {
+     "id": "icse.ta.c7.reading.4",
+     "prompt": "மாணவர்களுக்கு அவர் சொன்னது என்ன?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "விளையாடாதீர்கள்",
+      "படிப்பை நிறுத்துங்கள்",
+      "பெரிய கனவு காணுங்கள்"
+     ],
+     "answer": "பெரிய கனவு காணுங்கள்"
+    }
+   ],
+   "passage": "டாக்டர் அப்துல் கலாம் இராமேசுவரத்தில் பிறந்தார். சிறுவயதில் செய்தித்தாள் விற்றுப் படிப்புக்கு உதவினார். பின்னர் இந்தியாவின் ஏவுகணைத் திட்டங்களில் முதன்மையாகப் பணியாற்றினார். அவர் இந்தியாவின் குடியரசுத் தலைவராகவும் இருந்தார். மாணவர்களைப் பெரிய கனவு காணச் சொன்னார்."
   },
   {
    "id": "icse.ta.c8.letter-kinds",
@@ -7759,6 +8664,64 @@
      "why": "நிறைகுடம் தளும்பாது"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c8.reading",
+   "class": 8,
+   "title": "படித்துப் புரிந்துகொள்: மகாகவி பாரதியார்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "மகாகவி பாரதியார்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c8.reading.1",
+     "prompt": "பாரதியார் எங்கே பிறந்தார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "திருநெல்வேலி",
+      "புதுச்சேரி",
+      "எட்டயபுரம்"
+     ],
+     "answer": "எட்டயபுரம்"
+    },
+    {
+     "id": "icse.ta.c8.reading.2",
+     "prompt": "பாரதியார் எதை ஆதரித்தார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "சாதி வேறுபாடு",
+      "பெண்கல்வி",
+      "அடிமை வாழ்வு"
+     ],
+     "answer": "பெண்கல்வி"
+    },
+    {
+     "id": "icse.ta.c8.reading.3",
+     "prompt": "பாரதியார் எப்போது மறைந்தார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "1882",
+      "1921",
+      "1947"
+     ],
+     "answer": "1921"
+    },
+    {
+     "id": "icse.ta.c8.reading.4",
+     "prompt": "பாரதியார் கவிஞர் மட்டுமல்லர்; அவர் வேறு யார்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "அரசர்",
+      "விடுதலைப் போராட்ட வீரர்",
+      "வணிகர்"
+     ],
+     "answer": "விடுதலைப் போராட்ட வீரர்"
+    }
+   ],
+   "passage": "சுப்பிரமணிய பாரதியார் எட்டயபுரத்தில் 1882இல் பிறந்தார். அவர் சிறந்த கவிஞர்; விடுதலைப் போராட்ட வீரர். பெண்கல்வியை ஆதரித்தார். சாதி வேறுபாட்டை எதிர்த்தார். அவர் 1921இல் மறைந்தார்."
   },
   {
    "id": "icse.ta.c9.sandhi",
@@ -8675,6 +9638,64 @@
    ]
   },
   {
+   "id": "icse.ta.c9.reading",
+   "class": 9,
+   "title": "படித்துப் புரிந்துகொள்: நீரைச் சேமிப்போம்",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "நீரைச் சேமிப்போம்"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c9.reading.1",
+     "prompt": "ஆண்டுதோறும் குறைந்து வருவது எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "மழை",
+      "கடல் நீர்",
+      "நிலத்தடி நீர்"
+     ],
+     "answer": "நிலத்தடி நீர்"
+    },
+    {
+     "id": "icse.ta.c9.reading.2",
+     "prompt": "இந்தக் குறையைப் போக்கும் வழி எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "கிணற்றை மூடுதல்",
+      "மழைநீரைச் சேமித்தல்",
+      "புதிய குழாய் வாங்குதல்"
+     ],
+     "answer": "மழைநீரைச் சேமித்தல்"
+    },
+    {
+     "id": "icse.ta.c9.reading.3",
+     "prompt": "விட வேண்டிய பழக்கம் எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "குழாயைத் திறந்துவிட்டபடி பல் துலக்குதல்",
+      "தொட்டியைச் சுத்தம் செய்தல்",
+      "மழைநீரைச் சேமித்தல்"
+     ],
+     "answer": "குழாயைத் திறந்துவிட்டபடி பல் துலக்குதல்"
+    },
+    {
+     "id": "icse.ta.c9.reading.4",
+     "prompt": "இப்பகுதியின் மையக் கருத்து எது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "கிணறுகள் தேவையில்லை",
+      "மழை வேண்டாம்",
+      "நீரைச் சேமிக்க வேண்டும்"
+     ],
+     "answer": "நீரைச் சேமிக்க வேண்டும்"
+    }
+   ],
+   "passage": "தண்ணீர் நம் உயிர் வாழ்வுக்கு அடிப்படை. நிலத்தடி நீர் ஆண்டுதோறும் குறைந்து வருகிறது. மழைநீரைச் சேமித்தால் இந்தக் குறையைப் போக்கலாம். வீட்டுக் கூரையில் விழும் மழைநீரைக் குழாய் வழியே தொட்டியிலோ கிணற்றிலோ சேர்க்கலாம். குழாயைத் திறந்துவிட்டபடி பல் துலக்கும் பழக்கத்தையும் விட வேண்டும்."
+  },
+  {
    "id": "icse.ta.c10.sentence-parts",
    "class": 10,
    "title": "எழுவாய், செயப்படுபொருள், பயனிலை",
@@ -9420,6 +10441,64 @@
      "answer": "காய்"
     }
    ]
+  },
+  {
+   "id": "icse.ta.c10.reading",
+   "class": 10,
+   "title": "படித்துப் புரிந்துகொள்: உலகப் பொதுமறை",
+   "titleEn": "Reading and understanding",
+   "teach": {
+    "ta": "பகுதியை மெதுவாகப் படி. பிறகு வினாக்களுக்கு விடை தேடு; விடை பகுதியிலேயே இருக்கும்.",
+    "en": "Read the passage slowly; the answers are in it.",
+    "examples": "உலகப் பொதுமறை"
+   },
+   "questions": [
+    {
+     "id": "icse.ta.c10.reading.1",
+     "prompt": "திருக்குறளின் மூன்று பால்கள் எவை?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "இயல், இசை, நாடகம்",
+      "எழுத்து, சொல், பொருள்",
+      "அறம், பொருள், இன்பம்"
+     ],
+     "answer": "அறம், பொருள், இன்பம்"
+    },
+    {
+     "id": "icse.ta.c10.reading.2",
+     "prompt": "திருக்குறளில் எத்தனை அதிகாரங்கள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "133",
+      "10",
+      "1330"
+     ],
+     "answer": "133"
+    },
+    {
+     "id": "icse.ta.c10.reading.3",
+     "prompt": "திருக்குறள் ஏன் உலகப் பொதுமறை எனப்படுகிறது?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "எல்லோருக்கும் பொதுவான கருத்துகளைச் சொல்வதால்",
+      "மிகப் பழைய நூல் என்பதால் மட்டும்",
+      "உலகம் முழுதும் விற்பதால்"
+     ],
+     "answer": "எல்லோருக்கும் பொதுவான கருத்துகளைச் சொல்வதால்"
+    },
+    {
+     "id": "icse.ta.c10.reading.4",
+     "prompt": "ஒவ்வொரு அதிகாரத்திலும் எத்தனை குறள்கள்?",
+     "promptEn": "Answer from the passage.",
+     "options": [
+      "பத்து",
+      "ஏழு",
+      "நூறு"
+     ],
+     "answer": "பத்து"
+    }
+   ],
+   "passage": "திருக்குறள் உலகப் பொதுமறை என்று அழைக்கப்படுகிறது. அது அறம், பொருள், இன்பம் என்ற மூன்று பால்களைக் கொண்டது. அதில் 133 அதிகாரங்கள் உள்ளன; ஒவ்வொன்றிலும் பத்துக் குறள்கள். எந்த ஒரு மதத்தையோ நாட்டையோ குறிப்பிடாமல் எல்லோருக்கும் பொதுவான கருத்துகளைச் சொல்வதால் இப்பெயர் பெற்றது. அது பல மொழிகளில் மொழிபெயர்க்கப்பட்டுள்ளது."
   }
  ]
 }

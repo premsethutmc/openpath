@@ -12,6 +12,8 @@ export type CourseTopic = {
   title: string;
   titleEn: string;
   teach: { ta: string; en: string; examples: string };
+  /** a reading passage (OpenPath-written), shown above each of the topic's questions */
+  passage?: string;
   questions: CourseQuestion[];
 };
 export const course = courseData as { schema: string; board: string; review: string; topics: CourseTopic[] };
@@ -60,6 +62,7 @@ export function validateCourse(topics: CourseTopic[] = course.topics): string[] 
   for (const t of topics) {
     if (!t.title || !t.teach.ta || !t.teach.en) errors.push(`${t.id}: missing teaching`);
     if (t.questions.length < 4) errors.push(`${t.id}: too few questions`);
+    if (t.id.endsWith(".reading") && !t.passage) errors.push(`${t.id}: reading without a passage`);
     for (const q of t.questions) {
       if (ids.has(q.id)) errors.push(`duplicate ${q.id}`);
       ids.add(q.id);

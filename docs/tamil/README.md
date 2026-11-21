@@ -89,9 +89,9 @@ See [validation.md](validation.md) for commands and observed results.
 
 ## ICSE course, Classes 1–10 (icse-tamil@1)
 
-The Tamil home (`/tamil/` on the family site, the **Tamil** tile on the subject screen) now opens a class picker for ICSE (CISCE second-language) Tamil, Classes 1–10: 55 topics, about 790 practice questions, each topic with a short Tamil teaching card and an English line for English-medium learners. Letter basics (the foundation above) is a button on that screen, or `/tamil/?basics`.
+The Tamil home (`/tamil/` on the family site, the **Tamil** tile on the subject screen) now opens a class picker for ICSE (CISCE second-language) Tamil, Classes 1–10: 71 topics, about 860 questions, each topic with a short Tamil teaching card and an English line for English-medium learners. Letter basics (the foundation above) is a button on that screen, or `/tamil/?basics`.
 
-- `tools/tamil/build_icse.py` generates `content/tamil/icse.v1.json` from small OpenPath-authored banks (letters, words, grammar rules, Thirukkural lines, which are public domain). No publisher text. CI runs it with `--check`.
+- `tools/tamil/build_icse.py` generates `content/tamil/icse.v1.json` from small OpenPath-authored banks (letters, words, grammar rules), quoted classics that are public domain (Thirukkural, Avvaiyar’s Aathichoodi and Kondrai Vendhan, Bharathiyar) and one OpenPath-written reading passage per class. No publisher text. CI runs it with `--check`.
 - `packages/tamil/src/icse.ts`: types, answer check (NFC), rounds (missed first, a missed question returns once in the same round), progress and `validateCourse()`.
 - `frontend/src/tamil/Course.tsx`: class → topics → teaching card → practice; the feedback box on every screen. Progress stays on the device (`openpath.tamil.icse.v1`).
-- Not covered yet: comprehension passages, letter and essay writing (need marking), audio.
+- Not covered yet: letter and essay writing (need marking), audio.
