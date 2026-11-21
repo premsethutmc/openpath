@@ -3,6 +3,7 @@
  * answer two questions you have never seen, on texts you were not taught with. Practice-only: nothing here changes
  * the learner's capability picture.
  */
+import { Flag } from "./Flag.tsx";
 import { useMemo, useRef, useState } from "react";
 import { ReadingEvidence } from "./ReadingEvidence.tsx";
 import { ReadingInference } from "./ReadingInference.tsx";
@@ -290,6 +291,7 @@ export function ReadingUnitView({ course, snap, on }: { course: Course; snap: Sn
           )}
           <p>{x.explain}</p>
           <blockquote>{x.evidence}</blockquote>
+          <Flag stream="reading" id={x.question.id} />
           {x.evidenceFinding?<><p><strong>Evidence: </strong>{SENTENCE_FEEDBACK[x.evidenceFinding]}</p><p>You selected sentences: {x.sentences!.map(i=>i+1).join(', ')}.</p><details><summary>Supporting sentence combinations</summary>{supportingSets(course,course.questions.find(q=>q.id===x.question.id)!).map(set=><blockquote key={set.join(',')}>{set.map(i=>`${i+1}. ${sentenceChoices(x.question.passage.text)[i]}`).join(' ')}</blockquote>)}</details></>:<p>Evidence was not assessed in this answer-only record.</p>}
         </section>
       ))}

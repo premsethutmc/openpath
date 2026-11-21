@@ -36,6 +36,8 @@ import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
 import { LongRead } from "./LongRead.tsx";
+import { WrittenAnswer } from "./WrittenAnswer.tsx";
+import { setFlagLearner } from "./Flag.tsx";
 import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
 import { FirstWords } from "./FirstWords.tsx";
@@ -106,6 +108,8 @@ export function App() {
   const [deviceRepo, setDeviceRepo] = useState<Repo | null>(null);
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [learner, setLearner] = useState<Learner | null>(null);
+  // reports of a wrong-looking question go on the open learner's record (Flag.tsx)
+  setFlagLearner(learner);
   // AI feedback on writing tasks: only for a signed-in parent account, for the pupil whose record is open
   const feedbackPupil = mode === "account" && learner ? learner.profileId : null;
   const feedbackService = useMemo(() => (feedbackPupil ? serviceFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
@@ -133,6 +137,7 @@ export function App() {
   const [guided, setGuided] = useState<{ syllabus: string; outcome: string; text: string } | null>(null);
   const [listenAnswer, setListenAnswer] = useState<{ from?: "syllabus" } | null>(null);
   const [longRead, setLongRead] = useState<{ from?: "syllabus" } | null>(null);
+  const [written, setWritten] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
@@ -185,6 +190,7 @@ export function App() {
       setInFirst(false);
       setListenAnswer(null);
       setLongRead(null);
+      setWritten(null);
       setInSyllabus(false);
       setInParent(false);
       setInReading(false);
@@ -498,6 +504,21 @@ export function App() {
         />
       </div>
     );
+  if (written)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <WrittenAnswer
+          learner={learner}
+          onChanged={changed}
+          onLeave={() => {
+            setInSyllabus(written.from === "syllabus");
+            setWritten(null);
+            scrollTo(0, 0);
+            changed();
+          }}
+        />
+      </div>
+    );
   if (longRead)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -563,6 +584,7 @@ export function App() {
             else if (where === "listening") setInListenWrite(true);
             else if (where === "listen") setListenAnswer({ from: "syllabus" });
             else if (where === "long") setLongRead({ from: "syllabus" });
+            else if (where === "written") setWritten({ from: "syllabus" });
             else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
           }}
         />
@@ -753,6 +775,7 @@ export function App() {
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onLongRead={() => (setLongRead({}), scrollTo(0, 0))}
+          onWritten={() => (setWritten({}), scrollTo(0, 0))}
           onFirstWords={() => (setInFirst(true), scrollTo(0, 0))}
           onParent={() => (setInParent(true), scrollTo(0, 0))}
           onReading={() => (setInReading(true), scrollTo(0, 0))}

@@ -20,6 +20,7 @@ ACTIVITIES = [
     ("Words", "word_learn"),
     ("Reading", "reading"),
     ("Long reads", "long_read"),
+    ("Written answers", "written_answer"),
     ("Listen and write", "dictation"),
     ("Listen and answer", "listen_passage"),
     ("Spelling", "spell"),
@@ -41,9 +42,16 @@ def usage(days: int = 30, now=None) -> dict:
     rows = {name: _row() for name, _ in ACTIVITIES}
     by_kind = {kind: name for name, kind in ACTIVITIES}
     active7, active = set(), set()
+    flags = defaultdict(lambda: defaultdict(int))
     pupil_days = defaultdict(set)
     events = PupilEvent.objects.filter(subject="english", occurred_at__gte=since, occurred_at__lte=now).order_by("pupil", "seq").values_list("pupil_id", "kind", "occurred_at", "body")
     for pupil, kind, at, body in events.iterator():
+        if kind == "flag" and isinstance(body, dict):
+            # a report that a question looks wrong: which question (a content id) and a reason from a fixed list
+            item = (body.get("item") or {}).get("id") if isinstance(body.get("item"), dict) else None
+            if item and ":" in str(item):
+                flags[str(item)][str(body.get("note") or "other")[:20]] += 1
+            continue
         name = by_kind.get("spell" if kind in SPELL else kind)
         if not name:
             continue
@@ -97,6 +105,11 @@ def usage(days: int = 30, now=None) -> dict:
             for a in rec.get("answers") or []:
                 r["answers"] += 1
                 r["right"] += bool(isinstance(a, dict) and a.get("correct"))
+        elif kind == "written_answer":
+            r["finished"] += t == "end"
+            if t == "answer":
+                r["answers"] += 1
+                r["right"] += bool(rec.get("correct"))
         elif kind == "guided_task" and t == "done":
             r["finished"] += 1
         elif kind == "level_check":
@@ -127,6 +140,7 @@ def usage(days: int = 30, now=None) -> dict:
         "children_active_last_7_days": len(active7),
         "median_days_active": median(len(d) for d in pupil_days.values()) if pupil_days else 0,
         "activities": out,
+        "flags": sorted(({"question": q, "reports": sum(r.values()), "reasons": dict(r)} for q, r in flags.items()), key=lambda x: -x["reports"])[:20],
     }
 
 
@@ -138,4 +152,9 @@ def as_text(u: dict) -> str:
     for a in u["activities"]:
         cell = lambda v: "-" if v is None else str(v)
         lines.append(" | ".join([a["activity"], *(cell(a[k]) for k in ("children", "child_days", "started", "finished", "answers", "right_pct", "median_minutes"))]))
+    if u.get("flags"):
+        lines.append("questions reported as looking wrong (question | reports | reasons):")
+        lines += [f"{f['question']} | {f['reports']} | " + ", ".join(f"{k} {v}" for k, v in f["reasons"].items()) for f in u["flags"]]
+    else:
+        lines.append("questions reported as looking wrong: none")
     return "\n".join(lines)

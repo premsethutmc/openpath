@@ -2,6 +2,7 @@
  * Long reads (logic/reading/long-read): a story in three parts, one part a sitting, two questions after each part
  * and three on the whole story at the end. Each answer shows why. Practice-only.
  */
+import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { LONG, LongSitting, PARTS, longSummary, nextStep, type LongRecord } from "../logic/reading/long-read.ts";
@@ -135,6 +136,7 @@ export function LongRead({ learner, onLeave, onChanged }: { learner: Learner; on
         <div className="dict-feedback" role="status" data-correct={v.answered.correct}>
           <p className={v.answered.correct ? "words-verdict right" : "words-verdict"}>{v.answered.correct ? "✓ Right" : `Not quite: ${v.answered.right}`}</p>
           <p className="small">{v.answered.explain}</p>
+          <Flag stream="long" id={`${sitting.text.id}|${v.part}|${v.index}`} />
           <button
             type="button"
             className="primary"

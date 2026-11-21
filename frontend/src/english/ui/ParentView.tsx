@@ -75,6 +75,11 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Reading: {s.reading.passed} {s.reading.passed === 1 ? "skill" : "skills"} checked and passed{s.reading.needsPractice.length ? `. Needs more practice: ${s.reading.needsPractice.join("; ")}` : ""}
         </p>
       )}
+      {s.written && (
+        <p className="small" data-line="written">
+          Written answers: {s.written.right} of {s.written.answered} right, {s.written.firstTry} on the first try
+        </p>
+      )}
       {s.long && (
         <p className="small" data-line="long">
           Long reads: {s.long.parts} {s.long.parts === 1 ? "part" : "parts"} read, {s.long.finished} {s.long.finished === 1 ? "story" : "stories"} finished, {s.long.right} of {s.long.asked} questions right

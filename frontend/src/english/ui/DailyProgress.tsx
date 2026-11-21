@@ -73,6 +73,7 @@ export function DailyProgress({ learner }: { learner: Learner }) {
   if (w.learnt + w.learning) lines.push(["🌱 Words", `${w.learnt} learnt, ${w.learning} still learning${s.words ? `; you know about ${s.words.estimate.toLocaleString("en-IN")} word families` : ""}`]);
   else if (s.words) lines.push(["🌱 Words", `You know about ${s.words.estimate.toLocaleString("en-IN")} word families`]);
   if (s.reading) lines.push(["📖 Reading", `${s.reading.passed} ${s.reading.passed === 1 ? "skill" : "skills"} passed${s.reading.needsPractice.length ? `; more practice: ${s.reading.needsPractice.join("; ")}` : ""}`]);
+  if (s.written) lines.push(["✏️ Written answers", `${s.written.right} of ${s.written.answered} right`]);
   if (s.long) lines.push(["📚 Long reads", `${s.long.parts} ${s.long.parts === 1 ? "part" : "parts"} read, ${s.long.finished} ${s.long.finished === 1 ? "story" : "stories"} finished`]);
   if (s.dictation) lines.push(["🎧 Listen and write", `${s.dictation.perfectFirst} of ${s.dictation.sentences} sentences right first time`]);
   if (s.listening) lines.push(["👂 Listen and answer", `${s.listening.right} of ${s.listening.asked} questions right`]);

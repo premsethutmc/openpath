@@ -2,6 +2,7 @@
  * Listen and answer (logic/listening): the device reads a short passage aloud, sentence by sentence, and the learner
  * answers four questions. The passage is shown only after the last answer. Practice-only.
  */
+import { Flag } from "./Flag.tsx";
 import { useEffect, useRef, useState } from "react";
 import { LISTENING, ListenSitting, levelFor, listenSummary, startLevel, type ListenRecord, type ListenView } from "../logic/listening/passages.ts";
 import type { Learner } from "../logic/learner.ts";
@@ -85,6 +86,7 @@ export function ListenAnswerView({ view, sound, heardOnce, onPlay, onStopSound, 
               <b>{r.correct ? "✓" : "✗"}</b> {r.prompt}
             </p>
             {!r.correct && <p className="small">You chose: {r.chosen}</p>}
+            <Flag stream="listen" id={`${view.passage}#${i}`} />
             <p className="small">
               <b>{r.right}.</b> {r.explain}
             </p>
