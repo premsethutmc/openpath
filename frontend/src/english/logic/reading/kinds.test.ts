@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { KINDS, KIND_LEVELS, KindSitting, kindStart, kindChoices, kindsProblems, kindsSummary, nextKind, type KindRecord } from "./kinds.ts";
+import { KINDS, KIND_LEVELS, KindSitting, kindStart, kindChoices, kindsProblems, kindsSummary, kindToRead, nextKind, type KindRecord } from "./kinds.ts";
 import { loadContent } from "../content.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
@@ -45,6 +45,12 @@ test("KT-2 next text: at the learner's level, a new kind first; up a level after
     seen.push(t.id);
   }
   assert.equal(seen.length, KINDS.texts.filter((t) => t.level <= 2).length);
+  // all read: one is read again rather than nothing, at the level, and not the one just read
+  const recs = seen.map((id) => rec(id, 2));
+  const again = kindToRead(KINDS, recs, 1)!;
+  assert.ok(again.again && again.text.level <= 2 && again.text.id !== seen[seen.length - 1]);
+  const after = kindToRead(KINDS, [...recs, rec(again.text.id, 2)], 1)!;
+  assert.notEqual(after.text.id, again.text.id, "the one read fewest times comes next");
 });
 
 test("KT-3 a sitting: read, answer each question, see why; stored as a text_read event without touching the engine", async () => {

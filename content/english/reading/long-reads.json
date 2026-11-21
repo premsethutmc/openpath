@@ -2879,6 +2879,926 @@
           "explain": "The clay pot is at the centre of the story and its lesson."
         }
       ]
+    },
+    {
+      "id": "lr1.sorry",
+      "level": 1,
+      "theme": "saying sorry",
+      "title": "The Broken Pot",
+      "parts": [
+        {
+          "text": "Sita was playing with a ball in the house. Amma said, \"Play outside, Sita.\" But Sita did not listen. She threw the ball up high. It hit Amma's blue pot. The pot fell down and broke into three pieces.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the ball hit?",
+              "right": "Amma's blue pot",
+              "wrong": [
+                "the window",
+                "a big lamp"
+              ],
+              "explain": "\"It hit Amma's blue pot.\""
+            },
+            {
+              "skill": "cause",
+              "prompt": "Why did the pot break?",
+              "right": "Sita played ball in the house",
+              "wrong": [
+                "the cat pushed it off",
+                "Amma dropped it"
+              ],
+              "explain": "She threw the ball up high and it hit the pot."
+            }
+          ]
+        },
+        {
+          "text": "Sita was scared. She put the pieces under the bed. Then she went out to play. But she did not have fun. She kept thinking about the pot. Her tummy felt funny. She did not want to play any more.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Where did Sita put the pieces?",
+              "right": "under the bed",
+              "wrong": [
+                "in the bin",
+                "on the table"
+              ],
+              "explain": "\"She put the pieces under the bed.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "Why did Sita not have fun outside?",
+              "right": "she kept thinking of the pot",
+              "wrong": [
+                "it was raining outside",
+                "her friends were not there"
+              ],
+              "explain": "\"She kept thinking about the pot.\""
+            }
+          ]
+        },
+        {
+          "text": "Sita went to Amma. \"I am sorry, Amma,\" she said. \"I broke your pot. I did not listen.\" Amma hugged her. \"Thank you for telling me,\" she said. Together they glued the pieces. The pot had lines on it now. But Sita felt light and happy.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did Sita and Amma do after she said sorry?",
+              "right": "glued the pieces together",
+              "wrong": [
+                "bought a new pot",
+                "went out to play"
+              ],
+              "explain": "\"Together they glued the pieces.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Sita feel at the end?",
+              "right": "light and happy",
+              "wrong": [
+                "sad and scared",
+                "cross and tired"
+              ],
+              "explain": "\"Sita felt light and happy.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "saying sorry for a mistake",
+          "wrong": [
+            "how to make a blue pot",
+            "a game of ball with friends"
+          ],
+          "explain": "Sita breaks the pot, hides it, then says sorry."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Sita change?",
+          "right": "from hiding the pot to telling Amma",
+          "wrong": [
+            "from happy to angry with Amma",
+            "from good at ball to bad at it"
+          ],
+          "explain": "First she hides the pieces; then she tells Amma."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Broken Pot\"?",
+          "right": "the broken pot is what Sita must own up to",
+          "wrong": [
+            "Sita breaks a pot at school",
+            "Amma makes a pot from clay"
+          ],
+          "explain": "The whole story is about the pot Sita broke."
+        }
+      ]
+    },
+    {
+      "id": "lr1.rain",
+      "level": 1,
+      "theme": "weather and seasons",
+      "title": "The First Rain",
+      "parts": [
+        {
+          "text": "It was very hot. The ground was dry and brown. The cows were thirsty. The trees had no new leaves. Every day, Gopi looked up at the sky. \"When will it rain?\" he asked Thatha. \"Soon,\" said Thatha. \"Look at the ants. They are busy.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was the ground like?",
+              "right": "dry and brown",
+              "wrong": [
+                "wet and green",
+                "cold and white"
+              ],
+              "explain": "\"The ground was dry and brown.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did Thatha tell Gopi to look at?",
+              "right": "the ants",
+              "wrong": [
+                "the cows",
+                "the moon"
+              ],
+              "explain": "\"Look at the ants. They are busy.\""
+            }
+          ]
+        },
+        {
+          "text": "That evening, the sky went dark. The wind blew hard. Then, plop, plop, plop! Big drops fell on the roof. The air smelled of wet earth. Gopi ran out and held up his hands. The rain was cool on his face.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What happened before the rain fell?",
+              "right": "the sky went dark and the wind blew",
+              "wrong": [
+                "the sun came out and shone",
+                "the cows ran home to the shed"
+              ],
+              "explain": "\"The sky went dark. The wind blew hard. Then ... big drops fell.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did the air smell of?",
+              "right": "wet earth",
+              "wrong": [
+                "sweet flowers",
+                "hot food"
+              ],
+              "explain": "\"The air smelled of wet earth.\""
+            }
+          ]
+        },
+        {
+          "text": "Gopi danced in the rain. Thatha laughed on the step. The cows drank from the puddles. In a few days, the ground turned green. Little frogs sang at night. \"Thatha, the ants were right!\" said Gopi.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the cows do?",
+              "right": "drank from the puddles",
+              "wrong": [
+                "ran into the shed",
+                "slept under a tree"
+              ],
+              "explain": "\"The cows drank from the puddles.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Gopi mean when he said \"the ants were right\"?",
+              "right": "the busy ants showed rain was coming",
+              "wrong": [
+                "the ants could make it rain",
+                "the ants ate all the food"
+              ],
+              "explain": "Thatha said the ants were busy because rain was soon."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "waiting for the first rain",
+          "wrong": [
+            "a cow that gets lost",
+            "a day at the beach"
+          ],
+          "explain": "Everyone waits for rain, and at last it comes."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Gopi change?",
+          "right": "from waiting and asking to dancing in the rain",
+          "wrong": [
+            "from happy to cross with Thatha",
+            "from sleepy to very hungry"
+          ],
+          "explain": "He keeps asking when it will rain, then dances in it."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The First Rain\"?",
+          "right": "it is about the first rain after the hot days",
+          "wrong": [
+            "it rains for the first time in a city",
+            "Gopi sees rain for the first time ever"
+          ],
+          "explain": "The rain comes after a long hot, dry time."
+        }
+      ]
+    },
+    {
+      "id": "lr1.newfriend",
+      "level": 1,
+      "theme": "new friends",
+      "title": "The New Girl",
+      "parts": [
+        {
+          "text": "A new girl came to Ravi's class. Her name was Asha. She sat alone at lunch. She did not talk to anyone. She looked at her lunch box. Ravi saw her. \"She looks sad,\" he said to his friend Babu.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was the new girl's name?",
+              "right": "Asha",
+              "wrong": [
+                "Babu",
+                "Sita"
+              ],
+              "explain": "\"Her name was Asha.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Asha sit alone?",
+              "right": "she was new and knew no one",
+              "wrong": [
+                "she did not like lunch",
+                "she was cross with Ravi"
+              ],
+              "explain": "She was new to the class and did not talk to anyone."
+            }
+          ]
+        },
+        {
+          "text": "Ravi went to Asha. \"Hello. Can I sit here?\" he asked. Asha nodded. Ravi had lemon rice. Asha had idli. \"Do you want some rice?\" asked Ravi. Asha smiled. \"Do you want an idli?\" she asked. They swapped.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Asha have for lunch?",
+              "right": "idli",
+              "wrong": [
+                "lemon rice",
+                "a banana"
+              ],
+              "explain": "\"Asha had idli.\""
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What did they do after they talked about food?",
+              "right": "they swapped food",
+              "wrong": [
+                "they went home",
+                "they played a game"
+              ],
+              "explain": "\"They swapped.\""
+            }
+          ]
+        },
+        {
+          "text": "After lunch, Ravi showed Asha the swings. Babu came too. They played until the bell rang. The next day, Asha sat with Ravi and Babu at lunch. She talked and laughed. \"I like this school,\" she said.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Ravi show Asha after lunch?",
+              "right": "the swings",
+              "wrong": [
+                "the library",
+                "the garden"
+              ],
+              "explain": "\"Ravi showed Asha the swings.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Asha feel the next day?",
+              "right": "happy at the new school",
+              "wrong": [
+                "sad and alone",
+                "angry with Babu"
+              ],
+              "explain": "She talked and laughed and said she liked the school."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "making a new friend",
+          "wrong": [
+            "what to eat for lunch",
+            "a game on the swings"
+          ],
+          "explain": "Ravi helps a lonely new girl feel at home."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Asha change?",
+          "right": "from alone and quiet to happy with friends",
+          "wrong": [
+            "from kind to rude to Ravi and Babu",
+            "from hungry at lunch to very full"
+          ],
+          "explain": "At first she sits alone; then she talks and laughs."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The New Girl\"?",
+          "right": "it is about Asha, who is new to the class",
+          "wrong": [
+            "a new girl comes to teach the class",
+            "Ravi gets a new baby sister"
+          ],
+          "explain": "Asha is the new girl the story is about."
+        }
+      ]
+    },
+    {
+      "id": "lr1.thanks",
+      "level": 1,
+      "theme": "being thankful",
+      "title": "Thank You, Postman",
+      "parts": [
+        {
+          "text": "Every day, a postman came on a red bicycle. He rang his bell, ring, ring! He brought letters to every house. One day it was very hot. The postman looked tired. His face was wet. Meena saw him from the gate.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the postman ride?",
+              "right": "a red bicycle",
+              "wrong": [
+                "a blue bus",
+                "a black car"
+              ],
+              "explain": "\"A postman came on a red bicycle.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did the postman look tired?",
+              "right": "it was very hot",
+              "wrong": [
+                "he was late for lunch",
+                "his bell was broken"
+              ],
+              "explain": "\"It was very hot. The postman looked tired.\""
+            }
+          ]
+        },
+        {
+          "text": "Meena ran inside. \"Amma, the postman is hot. Can I give him water?\" \"Yes,\" said Amma. \"Give him some buttermilk too.\" Meena carried a big cup of cold buttermilk to the gate. \"This is for you,\" she said.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Meena take to the postman?",
+              "right": "cold buttermilk",
+              "wrong": [
+                "hot sweet tea",
+                "a ripe mango"
+              ],
+              "explain": "\"Meena carried a big cup of cold buttermilk.\""
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What did Meena do before taking the cup out?",
+              "right": "asked Amma",
+              "wrong": [
+                "rang the bell",
+                "went to school"
+              ],
+              "explain": "She asked Amma first."
+            }
+          ]
+        },
+        {
+          "text": "The postman drank it all. \"Thank you, child,\" he said. \"Nobody does this for me.\" Meena smiled. \"Thank you for bringing our letters every day,\" she said. Now every hot day, a cup waits for him at the gate.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did the postman say?",
+              "right": "\"Thank you, child\"",
+              "wrong": [
+                "\"Go away, child\"",
+                "\"I want more\""
+              ],
+              "explain": "\"Thank you, child,\" he said."
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does Meena do on hot days now?",
+              "right": "leaves a cup at the gate for him",
+              "wrong": [
+                "goes to the post office",
+                "rides a red bicycle"
+              ],
+              "explain": "\"Now every hot day, a cup waits for him at the gate.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "thanking people who help us",
+          "wrong": [
+            "learning to ride a bicycle",
+            "writing a letter to a friend"
+          ],
+          "explain": "Meena thanks the postman for his work."
+        },
+        {
+          "skill": "character",
+          "prompt": "What does Meena's act show about her?",
+          "right": "she notices others and is kind",
+          "wrong": [
+            "she wants to be a postman",
+            "she is afraid of strangers"
+          ],
+          "explain": "She sees he is tired and brings him a drink."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Thank You, Postman\"?",
+          "right": "Meena thanks the postman for his work",
+          "wrong": [
+            "the postman thanks the shopkeeper",
+            "a letter says thank you to Meena"
+          ],
+          "explain": "Meena gives him a drink and thanks him."
+        }
+      ]
+    },
+    {
+      "id": "lr2.wall",
+      "level": 2,
+      "theme": "hard work",
+      "title": "The Sand Wall",
+      "parts": [
+        {
+          "text": "Karthik and his sister Priya went to the beach. They wanted to build the biggest sand castle on the beach. Priya dug a deep ditch round it. Karthik piled up the sand into tall towers. By lunch time it was taller than Karthik's knees. People stopped to look. \"What a castle!\" said a fisherman.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "Who dug the ditch round the castle?",
+              "right": "Priya",
+              "wrong": [
+                "Karthik",
+                "the fisherman"
+              ],
+              "explain": "\"Priya dug a deep ditch round it.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "How tall was the castle by lunch time?",
+              "right": "taller than Karthik's knees",
+              "wrong": [
+                "as tall as a house",
+                "as small as a cup"
+              ],
+              "explain": "\"It was taller than Karthik's knees.\""
+            }
+          ]
+        },
+        {
+          "text": "After lunch the sea came closer. A big wave rushed up the sand and filled the ditch. Another wave knocked down a tower. \"Our castle!\" cried Karthik. He wanted to give up and go home. But Priya said, \"Let us build a wall of sand in front. It might keep the waves out.\"",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did a tower fall down?",
+              "right": "a wave knocked it down",
+              "wrong": [
+                "a dog ran over it",
+                "Karthik kicked it"
+              ],
+              "explain": "\"Another wave knocked down a tower.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Karthik feel when the tower fell?",
+              "right": "upset, and ready to give up",
+              "wrong": [
+                "happy and excited",
+                "sleepy and bored"
+              ],
+              "explain": "He cried out and wanted to give up and go home."
+            }
+          ]
+        },
+        {
+          "text": "They worked fast. They patted the sand hard with their hands. They built the wall thick and high. The next wave hit the wall and stopped. So did the next one. The castle stood until the sun went down. At last the sea won, as it always does. But Karthik said, \"We kept it standing all afternoon. Tomorrow we will build a bigger wall.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How did they make the wall strong?",
+              "right": "patted the sand hard",
+              "wrong": [
+                "used big rocks",
+                "poured water on it"
+              ],
+              "explain": "\"They patted the sand hard with their hands.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does Karthik plan for tomorrow?",
+              "right": "to build an even bigger wall",
+              "wrong": [
+                "to stay away from the beach",
+                "to catch fish with the fisherman"
+              ],
+              "explain": "\"Tomorrow we will build a bigger wall.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "working hard and not giving up",
+          "wrong": [
+            "catching fish in the sea",
+            "a lost toy on the beach"
+          ],
+          "explain": "They keep working to save the castle instead of giving up."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Karthik change?",
+          "right": "from wanting to give up to wanting to try again",
+          "wrong": [
+            "from kind to unkind to Priya",
+            "from brave to scared of the sea"
+          ],
+          "explain": "He wants to go home, but at the end he plans a bigger wall."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Sand Wall\"?",
+          "right": "the wall they build saves the castle for a time",
+          "wrong": [
+            "a wall of sand falls on Karthik",
+            "they find a wall buried in the sand"
+          ],
+          "explain": "The sand wall keeps the waves away all afternoon."
+        }
+      ]
+    },
+    {
+      "id": "lr2.fair2",
+      "level": 2,
+      "theme": "being fair",
+      "title": "The Last Laddu",
+      "parts": [
+        {
+          "text": "Paati made sweets for Deepavali. She put them on a plate. There were seven laddu, round and yellow. The three cousins, Anand, Bala and Chitra, sat round the plate. Each took two. Then there was only one left. All three looked at it. \"I want it!\" they all said together.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "How many laddu were on the plate?",
+              "right": "seven",
+              "wrong": [
+                "five",
+                "ten"
+              ],
+              "explain": "\"There were seven laddu.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "How many did each cousin take first?",
+              "right": "two",
+              "wrong": [
+                "one",
+                "three"
+              ],
+              "explain": "\"Each took two.\""
+            }
+          ]
+        },
+        {
+          "text": "\"I am the oldest, so it is mine,\" said Anand. \"I am the youngest, so it is mine,\" said Chitra. \"I helped Paati roll them, so it is mine,\" said Bala. They began to argue loudly. Paati heard them from the kitchen. She came out with a knife in her hand and a smile on her face.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Why did Bala say the laddu was his?",
+              "right": "he helped Paati roll them",
+              "wrong": [
+                "he was the oldest",
+                "he was the youngest"
+              ],
+              "explain": "\"I helped Paati roll them.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Paati plan to do?",
+              "right": "cut the laddu to share it",
+              "wrong": [
+                "take the laddu away",
+                "make more sweets"
+              ],
+              "explain": "She came out with a knife and a smile."
+            }
+          ]
+        },
+        {
+          "text": "Paati cut the last laddu into three pieces. Then she said, \"Anand, you cut it, so the others choose first next time. That is fair.\" The cousins each ate a piece. Bala said, \"A third of a laddu tastes better than a fight.\" Everyone laughed, and Paati laughed loudest of all.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did Paati do with the last laddu?",
+              "right": "cut it into three pieces",
+              "wrong": [
+                "gave it to Anand",
+                "ate it herself"
+              ],
+              "explain": "\"Paati cut the last laddu into three pieces.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What did Bala mean?",
+              "right": "sharing is better than fighting",
+              "wrong": [
+                "the sweets taste bad",
+                "he wanted the whole laddu"
+              ],
+              "explain": "\"A third of a laddu tastes better than a fight.\""
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "sharing fairly",
+          "wrong": [
+            "how to make sweets",
+            "a trip to the market"
+          ],
+          "explain": "Three cousins learn to share the last laddu fairly."
+        },
+        {
+          "skill": "character",
+          "prompt": "How do the cousins change?",
+          "right": "from arguing to sharing and laughing",
+          "wrong": [
+            "from happy to sad and hungry",
+            "from kind to rude to Paati"
+          ],
+          "explain": "They argue at first, then share and laugh."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"The Last Laddu\"?",
+          "right": "the cousins argue over the last laddu",
+          "wrong": [
+            "Paati makes only one laddu",
+            "it is the last day of Deepavali"
+          ],
+          "explain": "The fight is about the one laddu left on the plate."
+        }
+      ]
+    },
+    {
+      "id": "lr2.jealous",
+      "level": 2,
+      "theme": "jealousy",
+      "title": "Two Painters",
+      "parts": [
+        {
+          "text": "Nila and Kavi both loved to paint. In their class, they always sat side by side. One day the teacher put up Kavi's painting of a peacock on the wall. \"Look at the colours,\" said the teacher. Everyone clapped. Nila clapped too, but slowly. Her own painting stayed in her bag.",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Kavi paint?",
+              "right": "a peacock",
+              "wrong": [
+                "a tiger",
+                "a boat"
+              ],
+              "explain": "\"Kavi's painting of a peacock.\""
+            },
+            {
+              "skill": "feelings",
+              "prompt": "How did Nila feel when everyone clapped for Kavi?",
+              "right": "jealous",
+              "wrong": [
+                "proud of herself",
+                "sleepy"
+              ],
+              "explain": "She clapped slowly and her painting stayed in her bag."
+            }
+          ]
+        },
+        {
+          "text": "At home, Nila was quiet. \"What is wrong?\" asked Appa. \"Kavi's painting is always better,\" said Nila. \"I will never paint again.\" Appa looked at Nila's painting of a river. \"Your water looks like it is moving,\" he said. \"Why not ask Kavi how she mixes her colours? And show her how you paint water.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What did Nila paint?",
+              "right": "a river",
+              "wrong": [
+                "a peacock",
+                "a house"
+              ],
+              "explain": "\"Appa looked at Nila's painting of a river.\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did Appa say was good in Nila's painting?",
+              "right": "the water looks like it is moving",
+              "wrong": [
+                "the sky is very blue",
+                "the trees are very tall"
+              ],
+              "explain": "\"Your water looks like it is moving.\""
+            }
+          ]
+        },
+        {
+          "text": "The next day, Nila took a deep breath. \"Kavi, how do you make such bright colours?\" Kavi smiled. \"I mix only two at a time. How do you paint water like that?\" They showed each other. Then they painted a big picture together: a peacock by a moving river. The teacher put it in the middle of the wall.",
+          "questions": [
+            {
+              "skill": "sequence",
+              "prompt": "What did the girls do after they showed each other?",
+              "right": "painted a big picture together",
+              "wrong": [
+                "went home early",
+                "threw away their paints"
+              ],
+              "explain": "\"Then they painted a big picture together.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "Why did Nila take a deep breath?",
+              "right": "asking Kavi was hard for her",
+              "wrong": [
+                "she was tired from running",
+                "the room smelled of paint"
+              ],
+              "explain": "It was hard to ask the friend she felt jealous of."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "getting past jealousy by learning",
+          "wrong": [
+            "how to paint a big peacock",
+            "a day out at the river"
+          ],
+          "explain": "Nila stops feeling jealous and learns with Kavi."
+        },
+        {
+          "skill": "character",
+          "prompt": "How does Nila change?",
+          "right": "from jealous of Kavi to painting with her",
+          "wrong": [
+            "from kind to rude to Appa",
+            "from good at painting to bad at it"
+          ],
+          "explain": "She feels Kavi is better; then they paint together."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Two Painters\"?",
+          "right": "it is about Nila and Kavi, who both paint",
+          "wrong": [
+            "two painters paint a house",
+            "Appa and Nila paint a wall"
+          ],
+          "explain": "The story is about the two girls who love to paint."
+        }
+      ]
+    },
+    {
+      "id": "lr2.why",
+      "level": 2,
+      "theme": "curiosity",
+      "title": "Why Is the Sea Salty?",
+      "parts": [
+        {
+          "text": "Ammu visited the sea for the first time. She ran into the waves and splashed. Some water went into her mouth. \"Ugh! It is salty!\" she cried. She ran back to Mama. \"Why is the sea salty, Mama? The river near our house is not salty.\" Mama said, \"Good question. Let us find out.\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What happened when water went into Ammu's mouth?",
+              "right": "she found it was salty",
+              "wrong": [
+                "she found it was sweet",
+                "she found it was hot"
+              ],
+              "explain": "\"Ugh! It is salty!\""
+            },
+            {
+              "skill": "detail",
+              "prompt": "What did Ammu compare the sea with?",
+              "right": "the river near her house",
+              "wrong": [
+                "the well at school",
+                "the rain on the roof"
+              ],
+              "explain": "\"The river near our house is not salty.\""
+            }
+          ]
+        },
+        {
+          "text": "That evening they read a book about the sea. Ammu learned that rain falls on rocks. The rain takes tiny bits of salt from the rocks. Rivers carry the salt to the sea. The sun dries up some sea water, but the salt stays behind. So over many, many years, the sea became salty.",
+          "questions": [
+            {
+              "skill": "cause",
+              "prompt": "Where does the salt in the sea first come from?",
+              "right": "rocks that rain falls on",
+              "wrong": [
+                "people who throw it in",
+                "fish that make it"
+              ],
+              "explain": "\"The rain takes tiny bits of salt from the rocks.\""
+            },
+            {
+              "skill": "sequence",
+              "prompt": "What happens after rivers carry the salt to the sea?",
+              "right": "the sun dries some water but the salt stays",
+              "wrong": [
+                "the salt turns into soft sand on the beach",
+                "the fish in the sea eat all of the salt"
+              ],
+              "explain": "\"The sun dries up some sea water, but the salt stays behind.\""
+            }
+          ]
+        },
+        {
+          "text": "The next morning, Ammu went back to the beach with a cup. She filled it with sea water and left it in the sun. By evening the water was gone, and white salt was left in the cup. \"It is true!\" she shouted. Mama smiled. \"What is your next question?\" Ammu looked at the sky. \"Why is the sky blue?\"",
+          "questions": [
+            {
+              "skill": "detail",
+              "prompt": "What was left in the cup by evening?",
+              "right": "white salt",
+              "wrong": [
+                "brown sand",
+                "a small fish"
+              ],
+              "explain": "\"White salt was left in the cup.\""
+            },
+            {
+              "skill": "inference",
+              "prompt": "What does Ammu's last question show?",
+              "right": "she wants to keep finding things out",
+              "wrong": [
+                "she is tired of asking things",
+                "she wants to go home now"
+              ],
+              "explain": "She asks another question straight away."
+            }
+          ]
+        }
+      ],
+      "whole": [
+        {
+          "skill": "theme",
+          "prompt": "What is the story mostly about?",
+          "right": "being curious and finding out",
+          "wrong": [
+            "swimming in big waves",
+            "cooking with salt at home"
+          ],
+          "explain": "Ammu asks a question and finds the answer."
+        },
+        {
+          "skill": "character",
+          "prompt": "What kind of girl is Ammu?",
+          "right": "curious and keen to test things",
+          "wrong": [
+            "shy and afraid of water",
+            "lazy and bored"
+          ],
+          "explain": "She asks why, reads, and tests it with a cup."
+        },
+        {
+          "skill": "title",
+          "prompt": "Why is the story called \"Why Is the Sea Salty?\"",
+          "right": "it is Ammu's question, which the story answers",
+          "wrong": [
+            "the sea is not salty at all",
+            "Mama asks Ammu a hard question"
+          ],
+          "explain": "The story follows Ammu as she answers her own question."
+        }
+      ]
     }
   ]
 }
