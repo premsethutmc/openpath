@@ -15,8 +15,7 @@
  */
 import type { Learner } from "../learner.ts";
 import type { AppEvent } from "../events.ts";
-import { COURSE } from "../reading/course.ts";
-import { progress as readingProgress } from "../reading/session.ts";
+import { LABEL_OWN } from "../reading/session.ts";
 import { BOARDS, syllabusFor, taskLine, type Outcome, type Syllabus } from "./syllabus.ts";
 
 export type Stage = "not_started" | "practising" | "secure" | "due";
@@ -85,9 +84,21 @@ export function lineStage(learner: Learner, s: Syllabus, o: Outcome): Stage {
     return stale(learner, done[done.length - 1].at, waitDays(sessions, 1)) ? "due" : "secure";
   }
   if (o.where === "reading") {
-    const units = [...readingProgress(COURSE, learner.readingRecords()).units.values()];
-    if (units.some((u) => u.status === "passed_own")) return "secure";
-    return learner.readingRecords().length ? "practising" : "not_started";
+    // a day with a reading check holds when a check that day was passed on one's own
+    const dayOf = learner.dayFn();
+    const byDay = new Map<string, Session>();
+    for (const e of learner.state.events) {
+      if (e.kind !== "reading" || e.record.type !== "check_result") continue;
+      const d = dayOf(e.at);
+      const was = byDay.get(d);
+      const held = e.record.passed && e.record.label === LABEL_OWN;
+      byDay.set(d, { first: was?.first ?? e.at, last: e.at, held: !!was?.held || held });
+    }
+    const sessions = [...byDay.keys()].sort().map((d) => byDay.get(d)!);
+    if (!sessions.some((x) => x.held)) return learner.readingRecords().length ? "practising" : "not_started";
+    const last = sessions[sessions.length - 1];
+    if (!last.held) return "practising";
+    return stale(learner, last.last, waitDays(sessions, 1)) ? "due" : "secure";
   }
   const dayOf = learner.dayFn();
   const k = studyKindOf(o);

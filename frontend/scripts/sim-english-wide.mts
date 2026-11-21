@@ -16,7 +16,7 @@
  */
 import { writeFileSync } from "node:fs";
 import { KINDS, KindSitting, nextKind, type KindRecord } from "../src/english/logic/reading/kinds.ts";
-import { LONG, LongSitting, nextStep, type LongRecord } from "../src/english/logic/reading/long-read.ts";
+import { LONG, LongSitting, longLevel, nextStep, type LongRecord } from "../src/english/logic/reading/long-read.ts";
 import { StudySitting, chartFor, mapFor, nextStudy, notesFor, ownTrip, directions, kindStrength, type StudyKind, type StudyRecord } from "../src/english/logic/study/study.ts";
 import { SYLLABUSES, taskLine, type Syllabus } from "../src/english/logic/syllabus/syllabus.ts";
 import { GUIDED, tasksFor } from "../src/english/logic/guided/guided.ts";
@@ -117,7 +117,9 @@ function runLearner(p: Persona, run: number): Stats {
     }
     // a part of a long read
     try {
-      const step = nextStep(LONG, longRecs, p.level);
+      const lvl = longLevel(LONG, longRecs, p.level);
+      const step = nextStep(LONG, longRecs, lvl);
+      if (step && step.part === 0 && step.text.level > lvl + 1) fail(`${p.name} ${run}: a level ${step.text.level} long read given at level ${lvl}`);
       if (!step) st.long.ranOut++;
       else {
         const s = new LongSitting(step.text, step.part);
@@ -172,6 +174,7 @@ function runLearner(p: Persona, run: number): Stats {
   // a learner weak at maps should be given more maps than either other kind
   if (p.name === "weak at maps" && !(st.study.tasks.map > st.study.tasks.notes && st.study.tasks.map > st.study.tasks.chart))
     fail(`${p.name} ${run}: never steered to maps, its weakest kind (${JSON.stringify(st.study.tasks)}; map strength ${kindStrength(studyRecs, "map")?.toFixed(2)})`);
+  if (st.long.ranOut) fail(`${p.name} ${run}: Long reads ran out on ${st.long.ranOut} of ${DAYS} days`);
   if (st.kinds.ranOut) fail(`${p.name} ${run}: Poems and everyday texts ran out on ${st.kinds.ranOut} of ${DAYS} days`);
   if (st.study.repeats) fail(`${p.name} ${run}: ${st.study.repeats} study tasks repeated`);
   return st;

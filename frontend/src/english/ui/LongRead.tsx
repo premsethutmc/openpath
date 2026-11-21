@@ -5,7 +5,7 @@
 import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
-import { LONG, LongSitting, PARTS, longSummary, nextStep, type LongRecord } from "../logic/reading/long-read.ts";
+import { LONG, LongSitting, PARTS, longLevel, longSummary, nextStep, type LongRecord } from "../logic/reading/long-read.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
 
 const partName = (part: number) => (part < PARTS ? `Part ${part + 1} of ${PARTS}` : "The whole story");
@@ -15,7 +15,8 @@ export function LongRead({ learner, onLeave, onChanged }: { learner: Learner; on
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<LongRecord[]>([]);
-  const level = () => Math.max(4, asReadingLevel(learner.levels().reading?.start) ?? 4);
+  // the reading level found at the start (Reading level check), raised as stories go well
+  const level = () => longLevel(LONG, learner.longRecords(), asReadingLevel(learner.levels().reading?.start) ?? 3);
   const step = nextStep(LONG, learner.longRecords(), level());
   const tick = () => setTick((t) => t + 1);
   const save = async (s: LongSitting) => {
@@ -62,7 +63,7 @@ export function LongRead({ learner, onLeave, onChanged }: { learner: Learner; on
             </p>
             <h2>{step.text.title}</h2>
             <button type="button" className="primary" onClick={begin}>
-              {step.part === 0 ? "Start the story" : step.part < PARTS ? `Read part ${step.part + 1}` : "Questions on the whole story"}
+              {step.part === 0 ? (learner.longRecords().some((r) => r.text === step.text.id && r.part === PARTS) ? "Read it again" : "Start the story") : step.part < PARTS ? `Read part ${step.part + 1}` : "Questions on the whole story"}
             </button>
           </div>
         ) : (
