@@ -1,6 +1,6 @@
 {
   "id": "english.reading.kinds",
-  "version": 1,
+  "version": 2,
   "status": "candidate",
   "review": "Written for OpenPath; checked by the house rules (format, answer lengths, word screen, speller) and by simulated learners.",
   "evidence": "practice-only",
@@ -153,6 +153,55 @@
       ]
     },
     {
+      "id": "kt1.label",
+      "level": 1,
+      "kind": "instructions",
+      "title": "How to Wash Your Hands",
+      "text": "Wash your hands\n\n1. Wet your hands with water.\n2. Put on some soap.\n3. Rub your hands for as long as it takes to sing \"Happy Birthday\" twice.\n4. Rub between your fingers too.\n5. Rinse off the soap.\n6. Dry your hands on a clean towel.\n\nWash your hands before you eat and after the toilet.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What do you put on after water?",
+          "right": "soap",
+          "wrong": [
+            "a towel",
+            "oil"
+          ],
+          "explain": "Step 2: put on some soap."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How long should you rub your hands?",
+          "right": "As long as singing a song twice",
+          "wrong": [
+            "For one second",
+            "Until the soap falls"
+          ],
+          "explain": "Sing \"Happy Birthday\" twice."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What is the last step?",
+          "right": "Dry your hands",
+          "wrong": [
+            "Put on soap",
+            "Wet your hands"
+          ],
+          "explain": "Step 6: dry your hands on a clean towel."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why is this sign put up?",
+          "right": "To help people wash hands well",
+          "wrong": [
+            "To sell a new kind of soap",
+            "To teach children a song"
+          ],
+          "explain": "It tells you the steps to wash your hands properly."
+        }
+      ]
+    },
+    {
       "id": "kt1.letter",
       "level": 1,
       "kind": "letter",
@@ -198,6 +247,55 @@
             "Thank you"
           ],
           "explain": "A letter ends with a kind word and the writer's name."
+        }
+      ]
+    },
+    {
+      "id": "kt1.letter2",
+      "level": 1,
+      "kind": "letter",
+      "title": "Sorry, Ammu",
+      "text": "Dear Ammu,\n\nI am sorry I broke your blue crayon. I did not mean to. I pressed too hard when I was colouring the sky.\n\nI have saved my coins. Here is a new blue crayon for you. It is the same blue.\n\nCan we colour together after school?\n\nYour friend,\nBala",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did Bala break?",
+          "right": "a blue crayon",
+          "wrong": [
+            "a red pencil",
+            "a toy car"
+          ],
+          "explain": "\"I broke your blue crayon.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why did it break?",
+          "right": "He pressed too hard",
+          "wrong": [
+            "He dropped it",
+            "Ammu stepped on it"
+          ],
+          "explain": "\"I pressed too hard when I was colouring.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Bala write this note?",
+          "right": "To say sorry",
+          "wrong": [
+            "To ask for a crayon",
+            "To invite Ammu to a party"
+          ],
+          "explain": "He says sorry and gives a new crayon."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does Bala feel?",
+          "right": "sorry",
+          "wrong": [
+            "proud",
+            "angry"
+          ],
+          "explain": "\"I am sorry I broke your blue crayon.\""
         }
       ]
     },
@@ -398,6 +496,55 @@
       ]
     },
     {
+      "id": "kt1.poem3",
+      "level": 1,
+      "kind": "poem",
+      "title": "Little Seed",
+      "text": "A little seed went in the ground,\nit did not make a single sound.\nThe sun came out, the rain came too,\nand up, up, up the green shoot grew.\n\nNow it is a plant so tall,\nit is taller than the wall.\nOn top there is a yellow flower,\nit grew and grew, hour by hour.",
+      "questions": [
+        {
+          "skill": "sequence",
+          "prompt": "What came after the sun and the rain?",
+          "right": "The green shoot grew",
+          "wrong": [
+            "The seed went in",
+            "The wall fell down"
+          ],
+          "explain": "The sun and rain came, and then the shoot grew."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What colour is the flower?",
+          "right": "yellow",
+          "wrong": [
+            "red",
+            "green"
+          ],
+          "explain": "\"A yellow flower.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which word rhymes with \"tall\"?",
+          "right": "wall",
+          "wrong": [
+            "seed",
+            "sun"
+          ],
+          "explain": "Tall and wall end with the same sound."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem about?",
+          "right": "How a plant grows",
+          "wrong": [
+            "How to build a wall",
+            "A rainy day at school"
+          ],
+          "explain": "A seed becomes a tall plant with a flower."
+        }
+      ]
+    },
+    {
       "id": "kt1.sign",
       "level": 1,
       "kind": "notice",
@@ -492,6 +639,55 @@
             "Because bicycles are fast"
           ],
           "explain": "Adverts use words like hurry so you act before the offer ends."
+        }
+      ]
+    },
+    {
+      "id": "kt2.article2",
+      "level": 2,
+      "kind": "article",
+      "title": "Elephants",
+      "text": "Elephants are the biggest animals that live on land. An elephant can weigh as much as five cars!\n\nAn elephant uses its long trunk like a hand. It can pick up a peanut or pull down a branch. It also sucks up water with its trunk and squirts it into its mouth. On hot days, it sprays water on its back to cool down.\n\nElephants live in families. The oldest female leads the group. She remembers where to find water, even in dry years.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Who leads an elephant family?",
+          "right": "the oldest female",
+          "wrong": [
+            "the biggest male",
+            "the youngest baby"
+          ],
+          "explain": "The oldest female leads the group."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The trunk is used \"like a hand\". What does that mean?",
+          "right": "It can pick up and hold things",
+          "wrong": [
+            "It has five fingers",
+            "It can wave hello"
+          ],
+          "explain": "It picks up peanuts and pulls branches, like a hand."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why does an elephant spray water on its back?",
+          "right": "to cool down",
+          "wrong": [
+            "to wash its trunk",
+            "to drink"
+          ],
+          "explain": "On hot days, it sprays water to cool down."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did the writer say \"as much as five cars\"?",
+          "right": "To help us imagine how heavy it is",
+          "wrong": [
+            "To say elephants pull cars",
+            "To count cars on the road"
+          ],
+          "explain": "Comparing to cars helps us picture the weight."
         }
       ]
     },
@@ -594,6 +790,55 @@
       ]
     },
     {
+      "id": "kt2.notice2",
+      "level": 2,
+      "kind": "notice",
+      "title": "Clean-Up Day",
+      "text": "CLEAN-UP DAY!\n\nHelp make our street clean and green.\n\nWhen: Sunday, 7 to 9 in the morning\nMeet: at the big neem tree\n\nBring: gloves and a bag\nWe will give: water and bananas\n\nChildren must come with a grown-up.\nLet's work together!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where should people meet?",
+          "right": "at the big neem tree",
+          "wrong": [
+            "at the school gate",
+            "at the market"
+          ],
+          "explain": "Meet: at the big neem tree."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you bring?",
+          "right": "gloves and a bag",
+          "wrong": [
+            "water and bananas",
+            "a broom and a bucket"
+          ],
+          "explain": "Bring: gloves and a bag."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Can a child come alone?",
+          "right": "No, with a grown-up only",
+          "wrong": [
+            "Yes, any child can",
+            "Only after 9"
+          ],
+          "explain": "Children must come with a grown-up."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What is the notice for?",
+          "right": "To ask people to help clean the street",
+          "wrong": [
+            "To sell bananas on Sunday",
+            "To plant a new neem tree"
+          ],
+          "explain": "\"Help make our street clean and green.\""
+        }
+      ]
+    },
+    {
       "id": "kt2.poem",
       "level": 2,
       "kind": "poem",
@@ -688,6 +933,55 @@
             "town"
           ],
           "explain": "Night and light end with the same sound."
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem3",
+      "level": 2,
+      "kind": "poem",
+      "title": "Grandma's Kitchen",
+      "text": "In Grandma's kitchen, pots go clang,\nthe pressure cooker whistles, bang!\nThe mustard seeds go pop, pop, pop,\nand Grandma says, \"Now that's the top!\"\n\nShe stirs the sambar, round and round,\nthe best smell anywhere is found.\nI wait beside her with my plate,\nand every day, it's worth the wait.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "Why does the poet use words like \"clang\" and \"pop\"?",
+          "right": "To help us hear the kitchen",
+          "wrong": [
+            "To show Grandma is angry",
+            "To count the pots"
+          ],
+          "explain": "These words copy the sounds."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What does Grandma stir?",
+          "right": "sambar",
+          "wrong": [
+            "rice",
+            "milk"
+          ],
+          "explain": "\"She stirs the sambar.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the child feel about Grandma's food?",
+          "right": "They love it",
+          "wrong": [
+            "They do not like it",
+            "They are scared of it"
+          ],
+          "explain": "\"The best smell\" and \"it's worth the wait\"."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Which word rhymes with \"plate\"?",
+          "right": "wait",
+          "wrong": [
+            "pop",
+            "round"
+          ],
+          "explain": "Plate and wait end with the same sound."
         }
       ]
     },
@@ -1133,6 +1427,55 @@
       ]
     },
     {
+      "id": "kt3.letter3",
+      "level": 3,
+      "kind": "letter",
+      "title": "A Thank-You Letter to a Bus Driver",
+      "text": "Dear Mr Selvam,\n\nThank you for driving our school bus every day for five years. You always wait when someone is running late, and you never shout, even when we are noisy.\n\nLast week, when Deepa felt sick, you stopped the bus and gave her water and a seat by the window. That was very kind.\n\nWe heard that you are moving to drive the city bus. We will miss you and your old songs on the radio.\n\nWith best wishes,\nThe children of Bus 7",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How long did Mr Selvam drive the school bus?",
+          "right": "five years",
+          "wrong": [
+            "seven years",
+            "one week"
+          ],
+          "explain": "\"For five years.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What kind of person is Mr Selvam?",
+          "right": "patient and kind",
+          "wrong": [
+            "strict and loud",
+            "lazy and late"
+          ],
+          "explain": "He waits, never shouts, and helped Deepa."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did the children write this letter?",
+          "right": "To thank him and say goodbye",
+          "wrong": [
+            "To complain about the songs",
+            "To ask him to drive faster"
+          ],
+          "explain": "He is leaving, and they thank him."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did he do when Deepa was sick?",
+          "right": "Stopped and gave her water",
+          "wrong": [
+            "Took her to hospital",
+            "Called her parents"
+          ],
+          "explain": "He stopped the bus and gave her water and a window seat."
+        }
+      ]
+    },
+    {
       "id": "kt3.notice",
       "level": 3,
       "kind": "notice",
@@ -1325,6 +1668,104 @@
             "Kitchens are always far away"
           ],
           "explain": "Someone will use the pot and \"never think of it twice\"."
+        }
+      ]
+    },
+    {
+      "id": "kt3.poem3",
+      "level": 3,
+      "kind": "poem",
+      "title": "The Fisherman's Morning",
+      "text": "Before the stars have gone to bed,\nMurugan pushes out his boat;\nthe sea is black, the sky is grey,\nand only the moon's half-light afloat.\n\nHe throws his net in a silver ring,\nhe waits, he hums, he watches the tide;\nthe gulls come screaming overhead\nto see what the morning holds inside.\n\nAt noon he rows back, tired and slow,\nhis basket full of flashing fish;\nhis children run along the sand,\neach one is shouting out a wish.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What does \"Before the stars have gone to bed\" mean?",
+          "right": "Very early, before sunrise",
+          "wrong": [
+            "Late at night after dinner",
+            "In the afternoon"
+          ],
+          "explain": "The stars are still out, so it is before dawn."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "Why is the net thrown \"in a silver ring\"?",
+          "right": "It spreads out in a shining circle",
+          "wrong": [
+            "The net is made of real silver",
+            "It is used to catch a ring"
+          ],
+          "explain": "The net opens into a circle that shines in the light."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why do the gulls come?",
+          "right": "They hope to catch fish too",
+          "wrong": [
+            "They are lost",
+            "They want to sleep"
+          ],
+          "explain": "Gulls follow fishing boats for fish."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "When does Murugan row back?",
+          "right": "at noon",
+          "wrong": [
+            "before the stars go",
+            "at night"
+          ],
+          "explain": "\"At noon he rows back.\""
+        }
+      ]
+    },
+    {
+      "id": "kt3.timetable2",
+      "level": 3,
+      "kind": "timetable",
+      "title": "Library Week Plan",
+      "text": "Library Week at Green Valley School\n\nDay          Event                       Who can come\nMonday       Story telling               Classes 1 to 3\nTuesday      Make a bookmark             Everyone\nWednesday    Author visit                Classes 4 to 6\nThursday     Book swap                   Everyone\nFriday       Reading quiz                Classes 3 to 6\n\nBring an old book on Thursday to swap for a new one.\nPrizes for the quiz winners!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What happens on Wednesday?",
+          "right": "An author visits",
+          "wrong": [
+            "A book swap",
+            "Story telling"
+          ],
+          "explain": "Wednesday: Author visit."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Priya is in Class 2. Which day is NOT for her?",
+          "right": "Wednesday",
+          "wrong": [
+            "Monday",
+            "Tuesday"
+          ],
+          "explain": "The author visit is for Classes 4 to 6."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you bring on Thursday?",
+          "right": "an old book",
+          "wrong": [
+            "a bookmark",
+            "a prize"
+          ],
+          "explain": "Bring an old book on Thursday to swap."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"swap\" mean?",
+          "right": "give one thing and get another",
+          "wrong": [
+            "throw something away",
+            "buy something with money"
+          ],
+          "explain": "You give an old book and take a new one."
         }
       ]
     },
@@ -1623,6 +2064,55 @@
       ]
     },
     {
+      "id": "kt4.instructions2",
+      "level": 4,
+      "kind": "instructions",
+      "title": "Make a Rain Gauge",
+      "text": "Measure the rain with a rain gauge\n\nYou need: a clear plastic bottle, scissors (ask a grown-up), a ruler, tape, and a few pebbles.\n\n1. Ask a grown-up to cut off the top third of the bottle.\n2. Put the pebbles in the base, so the bottle does not blow over.\n3. Pour in water until it just covers the pebbles. Mark this level as zero.\n4. Turn the cut-off top upside down and fit it into the bottle like a funnel. Tape it in place.\n5. Tape the ruler to the side, with its zero on your zero mark.\n6. Put the gauge in an open place, away from trees and roofs.\n7. Check it at the same time each day and write down the level. Then empty it back to zero.\n\nKeep your record for a month and see which week was wettest.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "Why do you put pebbles in the bottle?",
+          "right": "To stop it blowing over",
+          "wrong": [
+            "To make the rain clean",
+            "To measure the rain"
+          ],
+          "explain": "Step 2 explains the pebbles keep it steady."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why must the gauge be away from trees and roofs?",
+          "right": "They could block rain or add extra drips",
+          "wrong": [
+            "Trees need all the rain water",
+            "Roofs get too hot in the sun"
+          ],
+          "explain": "Only rain falling straight from the sky should be measured."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"funnel\" mean in step 4?",
+          "right": "a cone that guides water into a hole",
+          "wrong": [
+            "a type of ruler",
+            "a lid that keeps rain out"
+          ],
+          "explain": "The upside-down top guides rain into the bottle."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do after writing down the level each day?",
+          "right": "Empty it back to zero",
+          "wrong": [
+            "Cut the bottle again",
+            "Move it under a tree"
+          ],
+          "explain": "Step 7: write down the level, then empty it."
+        }
+      ]
+    },
+    {
       "id": "kt4.pair",
       "level": 4,
       "kind": "pair",
@@ -1770,6 +2260,104 @@
       ]
     },
     {
+      "id": "kt4.poem3",
+      "level": 4,
+      "kind": "poem",
+      "title": "The Old Bicycle",
+      "text": "It leans against the courtyard wall,\nits paint worn off, its bell gone mute;\nAppa rode it to the mill\neach morning when the shifts begun.\n\nIt carried rice, it carried me,\nperched on the bar, my knees held tight;\nit carried news from town to town\nand Amma's medicine at night.\n\nNow Appa drives a scooter fast,\nthe bicycle just rusts and waits;\nbut sometimes, when the house is still,\nI hear it creak beside the gates.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "What does \"its bell gone mute\" mean?",
+          "right": "The bell no longer rings",
+          "wrong": [
+            "The bell is broken in half",
+            "The bell is very loud"
+          ],
+          "explain": "Mute here means silent."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where did Appa ride the bicycle each morning?",
+          "right": "to the mill",
+          "wrong": [
+            "to the market",
+            "to school"
+          ],
+          "explain": "\"Appa rode it to the mill.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "What does the repeated word \"carried\" in stanza two show?",
+          "right": "How many ways the bicycle helped the family",
+          "wrong": [
+            "That the bicycle was very heavy",
+            "That Appa was always tired"
+          ],
+          "explain": "Rice, the child, news, medicine: it carried everything."
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the speaker feel about the old bicycle?",
+          "right": "fond and a little sad",
+          "wrong": [
+            "angry and bored",
+            "frightened and cold"
+          ],
+          "explain": "They remember it warmly, and now it just rusts and waits."
+        }
+      ]
+    },
+    {
+      "id": "kt4.speech2",
+      "level": 4,
+      "kind": "speech",
+      "title": "Why Our School Needs a Garden",
+      "text": "Good morning, everyone.\n\nOur school has a big empty space behind the science lab. Right now it is full of broken desks and weeds. I want to turn it into a garden.\n\nA garden would teach us things no book can. We could watch seeds grow in science, measure our beds in maths, and write poems about the flowers in English. Our canteen could even cook the spinach we grow.\n\nSome people say a garden is too much work. But each class could look after one small bed, just for twenty minutes a week. If thirty classes share the work, nobody is overloaded.\n\nPlease sign the paper outside the office if you agree. With your help, by next summer, the space behind the lab can be green.\n\nThank you.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where is the empty space?",
+          "right": "behind the science lab",
+          "wrong": [
+            "next to the canteen",
+            "in front of the office"
+          ],
+          "explain": "\"A big empty space behind the science lab.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does the speaker want listeners to do?",
+          "right": "Sign the paper to support the garden",
+          "wrong": [
+            "Clean out the science lab",
+            "Cook spinach for the canteen"
+          ],
+          "explain": "\"Please sign the paper outside the office.\""
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "How does the speaker answer \"a garden is too much work\"?",
+          "right": "Each class would do a small share",
+          "wrong": [
+            "By agreeing to give up",
+            "By asking teachers to do it"
+          ],
+          "explain": "Thirty classes, twenty minutes a week each."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"overloaded\" mean?",
+          "right": "given too much to do",
+          "wrong": [
+            "very heavy to lift",
+            "too far away"
+          ],
+          "explain": "If the work is shared, no one has too much."
+        }
+      ]
+    },
+    {
       "id": "kt5.article",
       "level": 5,
       "kind": "article",
@@ -1825,6 +2413,124 @@
             "A diary of one summer night"
           ],
           "explain": "Each paragraph answers a new question."
+        }
+      ]
+    },
+    {
+      "id": "kt5.article2",
+      "level": 5,
+      "kind": "article",
+      "title": "The Problem with Plastic Straws",
+      "text": "Every day, people around the world use hundreds of millions of plastic straws. Most are used for a few minutes and thrown away. Because they are light and small, many slip through recycling machines and end up in rivers and seas.\n\nIn the sea, plastic does not rot. Sunlight and waves break it into smaller and smaller pieces called microplastics. Fish and seabirds swallow these pieces, mistaking them for food. Scientists have found microplastics in the stomachs of turtles, in sea salt and even in drinking water.\n\nSome cities have banned plastic straws. Cafes now offer paper, steel or bamboo straws instead, or simply no straw at all. Critics point out that straws are only a tiny part of all ocean plastic, and that some people with disabilities need bendy plastic straws to drink safely.\n\nStill, supporters say the ban is a useful first step. Refusing a straw is easy, and it makes people think about all the other plastic they use only once.",
+      "questions": [
+        {
+          "skill": "word_meaning",
+          "prompt": "What are \"microplastics\"?",
+          "right": "very small pieces of plastic",
+          "wrong": [
+            "plastic made in a microscope",
+            "straws for small children"
+          ],
+          "explain": "Sunlight and waves break plastic into smaller and smaller pieces."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why do many straws end up in the sea?",
+          "right": "They slip through recycling machines",
+          "wrong": [
+            "People throw them from boats",
+            "Fish carry them there"
+          ],
+          "explain": "They are light and small, so they slip through."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What is one argument against banning straws?",
+          "right": "Some disabled people need bendy straws",
+          "wrong": [
+            "Paper straws are too strong",
+            "Turtles like straws"
+          ],
+          "explain": "Critics say some people need them to drink safely."
+        },
+        {
+          "skill": "summary",
+          "prompt": "What is the supporters' main point in the last paragraph?",
+          "right": "A ban is a small, easy start that makes people think",
+          "wrong": [
+            "Straws cause all of the ocean's plastic",
+            "Every cafe� should be closed down"
+          ],
+          "explain": "\"A useful first step\" that makes people think."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How is the article organised?",
+          "right": "Problem, effects, a response, then both sides",
+          "wrong": [
+            "As a story told in time order",
+            "As a list of numbered steps"
+          ],
+          "explain": "It moves from the problem to its effects to the bans and the arguments."
+        }
+      ]
+    },
+    {
+      "id": "kt5.diary2",
+      "level": 5,
+      "kind": "diary",
+      "title": "The Night of the Cyclone",
+      "text": "Thursday, 12 December, 11 pm\n\nThe wind has been roaring since dinner. The radio says the cyclone will cross the coast near us tonight. Appa has nailed boards over the big windows, and we have filled every bucket with water in case the taps stop.\n\nThe lights went out at nine. Now we are sitting in the middle room with two candles, the radio and a packet of biscuits. Every few minutes something bangs against the roof — a branch, maybe, or a neighbour's tin sheet. Paati is whispering softly to herself. My little brother fell asleep on my lap, which is amazing, because I could not sleep if you paid me.\n\nFriday, 7 am\n\nIt is over. The street looks like a giant has walked through it: trees lying across the road, wires down, the tea stall's roof in our garden. But everyone on our lane is safe. Appa and the neighbours are already clearing the road with saws. I am making tea for everybody on the gas stove.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Why did the family fill buckets with water?",
+          "right": "In case the taps stopped",
+          "wrong": [
+            "To put out a fire",
+            "To wash the windows"
+          ],
+          "explain": "\"In case the taps stop.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did the writer feel during the night?",
+          "right": "worried and unable to sleep",
+          "wrong": [
+            "bored and sleepy",
+            "excited and cheerful"
+          ],
+          "explain": "\"I could not sleep if you paid me.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "\"The street looks like a giant has walked through it.\" What does this show?",
+          "right": "Huge damage was done everywhere",
+          "wrong": [
+            "A tall man came to visit",
+            "The street was cleaned"
+          ],
+          "explain": "Fallen trees and wires look like a giant's footsteps."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the diary have two entries?",
+          "right": "To show during and after the cyclone",
+          "wrong": [
+            "Because the writer forgot the date",
+            "To show two different families"
+          ],
+          "explain": "One is written during the storm, one the next morning."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does the last paragraph show about the neighbours?",
+          "right": "They work together to recover",
+          "wrong": [
+            "They argue about the damage",
+            "They leave the town"
+          ],
+          "explain": "Neighbours clear the road; the writer makes tea for all."
         }
       ]
     },
@@ -2120,6 +2826,65 @@
             "How to build a lighthouse"
           ],
           "explain": "She works through the night so the boats return safely."
+        }
+      ]
+    },
+    {
+      "id": "kt5.poem3",
+      "level": 5,
+      "kind": "poem",
+      "title": "The Exam",
+      "text": "The clock on the wall is a slow, loud heart,\nthe fan turns round like a tired thought;\nthe question paper lies face down,\nholding everything I've been taught.\n\nMy pencil is sharp, my hands are wet,\nthe girl beside me bites her nail;\noutside, a crow on the window ledge\nlooks in and laughs at whoever will fail.\n\n\"Begin,\" says the teacher. I turn it over —\nand there's the question I learnt last night!\nThe clock goes quiet, the fan goes cool,\nand the crow flies off into the light.",
+      "questions": [
+        {
+          "skill": "figurative",
+          "prompt": "Why is the clock called \"a slow, loud heart\"?",
+          "right": "Its ticking sounds like a nervous heartbeat",
+          "wrong": [
+            "The clock on the wall is broken",
+            "The clock is painted bright red"
+          ],
+          "explain": "In a quiet, tense room, the tick sounds like a heartbeat."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What do \"my hands are wet\" and \"bites her nail\" show?",
+          "right": "The children are nervous",
+          "wrong": [
+            "The room is too hot",
+            "They have been swimming"
+          ],
+          "explain": "Sweaty hands and nail-biting are signs of worry."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the crow seem to \"laugh\"?",
+          "right": "The nervous child imagines it is mocking them",
+          "wrong": [
+            "Crows always laugh at schools",
+            "The teacher told a joke"
+          ],
+          "explain": "The speaker's worry makes everything seem threatening."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the mood change in the last stanza?",
+          "right": "From tension to relief",
+          "wrong": [
+            "From joy to fear",
+            "From calm to anger"
+          ],
+          "explain": "When the known question appears, the clock goes quiet and the crow leaves."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"the clock goes quiet\" suggest?",
+          "right": "The child is no longer anxious",
+          "wrong": [
+            "The clock stopped working",
+            "The teacher took the clock"
+          ],
+          "explain": "The ticking only seemed loud because of nerves."
         }
       ]
     },
@@ -2596,6 +3361,65 @@
       ]
     },
     {
+      "id": "kt6.pair2",
+      "level": 6,
+      "kind": "pair",
+      "title": "Phones in School: Two Views",
+      "text": "Text A — from a parent's letter\nMy daughter takes a bus and a shared auto to school. A phone lets her tell me she has arrived safely, and lets me reach her if plans change. I am not asking for phones in classrooms. I am asking that children be allowed to carry them, switched off, in their bags.\n\nText B — from a head teacher's newsletter\nSince we asked pupils to hand in phones at the gate, break times have changed. Children talk and play instead of staring at screens, and there has been less unkind messaging. Parents who need to reach a child urgently can call the office, which is open all day.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "What does the parent ask for that the head teacher's rule does not allow?",
+          "right": "Carrying a switched-off phone in the bag",
+          "wrong": [
+            "Using phones during lessons",
+            "Calling the office"
+          ],
+          "explain": "The parent wants phones kept in bags; the school takes them at the gate."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What is the parent's main reason?",
+          "right": "Her daughter's safety on the journey",
+          "wrong": [
+            "Her daughter wants to play games",
+            "Phones help with homework"
+          ],
+          "explain": "A phone lets the daughter say she arrived safely."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What change at break times does the head teacher describe?",
+          "right": "Children talk and play more",
+          "wrong": [
+            "Children eat more food",
+            "Breaks are shorter"
+          ],
+          "explain": "\"Children talk and play instead of staring at screens.\""
+        },
+        {
+          "skill": "compare",
+          "prompt": "How does Text B answer the parent's worry about reaching a child?",
+          "right": "Parents can call the school office",
+          "wrong": [
+            "Children can borrow a teacher's phone",
+            "Buses have phones"
+          ],
+          "explain": "The office is open all day for urgent calls."
+        },
+        {
+          "skill": "summary",
+          "prompt": "What do the two writers disagree about?",
+          "right": "Whether pupils may keep phones during the day",
+          "wrong": [
+            "Whether phones are useful at all",
+            "Whether break time matters"
+          ],
+          "explain": "One wants phones kept in bags; the other collects them."
+        }
+      ]
+    },
+    {
       "id": "kt6.poem",
       "level": 6,
       "kind": "poem",
@@ -2710,6 +3534,124 @@
             "Rivers should be cleaner for fishing"
           ],
           "explain": "\"Give me the forest back.\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.poem3",
+      "level": 6,
+      "kind": "poem",
+      "title": "Two Doors",
+      "text": "My grandmother's house had two doors.\nThe front one was for guests and priests,\npainted green, with a brass lion\nwho held a ring between his teeth.\n\nThe back one opened on the well,\non hens and ash and drying chillies,\non the washerwoman's songs\nand the neighbour's goat, and the lilies.\n\nGuests saw the lion and the green;\nthey sat on cushions, drank from glass.\nBut all of us who were family\ncame round the back, across the grass.\n\nAnd now, whenever I visit someone,\nI wonder, as I ring their bell,\nwhether I am a front-door person\nor one who knows the well.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What was on the front door?",
+          "right": "A brass lion holding a ring",
+          "wrong": [
+            "Drying chillies and hens",
+            "A painting of a well"
+          ],
+          "explain": "\"Painted green, with a brass lion.\""
+        },
+        {
+          "skill": "compare",
+          "prompt": "How is the back door different from the front?",
+          "right": "It leads to everyday family life",
+          "wrong": [
+            "It is newer and brighter",
+            "Only guests may use it"
+          ],
+          "explain": "The back opens on the well, hens, chillies and songs."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does it mean to be \"one who knows the well\"?",
+          "right": "A close friend treated like family",
+          "wrong": [
+            "A person who digs wells",
+            "A guest who is thirsty"
+          ],
+          "explain": "Family came in by the back, past the well."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem really about?",
+          "right": "How we welcome guests versus family",
+          "wrong": [
+            "How to paint a front door",
+            "Why goats eat lilies"
+          ],
+          "explain": "Two doors stand for two kinds of welcome."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does the last stanza change the poem?",
+          "right": "It turns from memory to a question about the present",
+          "wrong": [
+            "It describes a third door in the house",
+            "It repeats the first stanza word for word"
+          ],
+          "explain": "\"And now, whenever I visit someone, I wonder…\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.report",
+      "level": 6,
+      "kind": "article",
+      "title": "School Report: The Water Audit",
+      "text": "WATER AUDIT REPORT — CLASS 7B\nPrepared for the Principal, October\n\nAim\nTo find out how much water our school wastes and suggest ways to save it.\n\nMethod\nFor one week, groups of four pupils checked every tap, toilet and the garden hose twice a day. We timed leaks with a stopwatch and measured how fast a bucket filled.\n\nFindings\n• 9 of our 42 taps leak. Together they waste about 380 litres a day.\n• Two toilet cisterns run all the time, wasting about 600 litres a day.\n• The garden hose is left on for about 40 minutes after watering, wasting about 500 litres a day.\n• In total, roughly 1,500 litres a day are wasted — enough to fill 75 large buckets.\n\nRecommendations\n1. Repair the leaking taps and cisterns (estimated cost: 6,000 rupees).\n2. Fit a timer on the garden hose.\n3. Put \"Close the tap\" reminders above sinks.\n\nConclusion\nMost of the waste comes from a few faults that are cheap to repair. Fixing them would pay for itself within a few months in lower water bills.",
+      "questions": [
+        {
+          "skill": "structure",
+          "prompt": "Why is the report divided into headings like Aim and Method?",
+          "right": "So readers can find each part quickly",
+          "wrong": [
+            "Because reports must be long",
+            "To make it look like a poem"
+          ],
+          "explain": "Headings organise a formal report into clear sections."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What wastes the most water each day?",
+          "right": "the running toilet cisterns",
+          "wrong": [
+            "the nine leaking taps",
+            "the long garden hose"
+          ],
+          "explain": "600 litres a day, more than the others."
+        },
+        {
+          "skill": "inference",
+          "prompt": "How did pupils measure leaks?",
+          "right": "By timing how fast a bucket filled",
+          "wrong": [
+            "By asking the gardener",
+            "By reading the water bill"
+          ],
+          "explain": "They used a stopwatch and a bucket."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"recommendations\" mean here?",
+          "right": "suggestions for what to do",
+          "wrong": [
+            "thanks to the helpers",
+            "a list of costs"
+          ],
+          "explain": "The section lists steps the school should take."
+        },
+        {
+          "skill": "summary",
+          "prompt": "What is the report's main conclusion?",
+          "right": "A few cheap repairs would save most of the water",
+          "wrong": [
+            "The school should buy more taps",
+            "Pupils waste water on purpose"
+          ],
+          "explain": "\"Most of the waste comes from a few faults that are cheap to repair.\""
         }
       ]
     },
@@ -2901,6 +3843,75 @@
       ]
     },
     {
+      "id": "kt7.debate",
+      "level": 7,
+      "kind": "pair",
+      "title": "Debate: Should Marks Be Replaced by Comments?",
+      "text": "For the motion — Aditi\nFriends, imagine two students. One gets 62 out of 100. The other is told: \"Your ideas are original, but your paragraphs need clearer links, and you lost marks by not checking your working.\" Which student knows what to do next? Marks tell you where you stand; they do not tell you how to move. Worse, they turn learning into a race. Students who score low begin to believe they are \"a 40-percent person\" and stop trying, while students who score high learn to avoid risks that might cost them a mark. Several schools that have replaced marks with written comments in the middle years report that pupils read their feedback more carefully and redo their work more often. We do not need to abolish standards. We need to describe them in words that help.\n\nAgainst the motion — Farhan\nMy opponent describes a lovely comment. But who will write it? A teacher with five classes of forty pupils marks two hundred scripts a week. If every script needs a careful paragraph, either the comments become short and vague — \"Good effort, keep it up\" — or the teacher stops sleeping. Marks are quick, clear and fair across a whole school. They let a parent see at a glance whether a child is improving, and they let a student compare this term with last. Nothing stops a teacher from giving a mark and two lines of advice. Comments are valuable; they should be added to marks, not replace them. Remove the number, and you remove the one piece of information everyone understands.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "On what point do both speakers agree?",
+          "right": "Helpful comments are valuable",
+          "wrong": [
+            "Marks should be abolished",
+            "Teachers have too little work"
+          ],
+          "explain": "Aditi wants comments; Farhan says comments are valuable but should be added to marks."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What is Farhan's main practical objection?",
+          "right": "Teachers lack time to write good comments for everyone",
+          "wrong": [
+            "Students do not read comments",
+            "Comments are unfair to clever students"
+          ],
+          "explain": "Two hundred scripts a week would make comments short and vague."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does Aditi open with two imaginary students?",
+          "right": "To show that a comment tells you what to do next",
+          "wrong": [
+            "To prove that 62 is a good mark",
+            "To describe her own classmates"
+          ],
+          "explain": "The example makes her argument concrete."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What does \"abolish\" mean in Aditi's speech?",
+          "right": "get rid of completely",
+          "wrong": [
+            "write down carefully",
+            "make more difficult"
+          ],
+          "explain": "\"We do not need to abolish standards\": not remove them altogether."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How does Farhan begin his reply?",
+          "right": "By questioning how her idea would work in practice",
+          "wrong": [
+            "By agreeing with everything she said",
+            "By telling a joke about exams"
+          ],
+          "explain": "\"But who will write it?\""
+        },
+        {
+          "skill": "summary",
+          "prompt": "What is Farhan's final position?",
+          "right": "Keep marks and add comments",
+          "wrong": [
+            "Replace marks with comments",
+            "Remove both marks and comments"
+          ],
+          "explain": "\"They should be added to marks, not replace them.\""
+        }
+      ]
+    },
+    {
       "id": "kt7.editorial",
       "level": 7,
       "kind": "article",
@@ -2966,6 +3977,144 @@
             "Reading is linked with success in research"
           ],
           "explain": "It is the writer's belief; the others report findings."
+        }
+      ]
+    },
+    {
+      "id": "kt7.feature",
+      "level": 7,
+      "kind": "article",
+      "title": "How the Monsoon Works",
+      "text": "Every year, usually in the first days of June, the south-west monsoon reaches the coast of Kerala. Over the next six weeks it spreads across almost the whole of India, bringing most of the country's yearly rain in just four months. For farmers, for cities that depend on reservoirs, and for anyone who has stood on a hot roof and smelled the first rain on dry earth, it is the most important weather event of the year. But what actually makes it happen?\n\nThe answer begins with the simple fact that land and water heat up differently. In April and May, the sun beats down on the Indian subcontinent and the land becomes very hot. Hot air is lighter, so it rises, leaving an area of low pressure near the ground. Meanwhile, the Indian Ocean warms much more slowly; the air above it stays cooler and heavier, at higher pressure. Air always moves from high pressure towards low pressure, so a great wind begins to blow from the ocean towards the land.\n\nThis wind has crossed thousands of kilometres of warm sea, and it is heavy with water vapour. When it reaches the coast and is forced upward — over the Western Ghats, for instance — it cools. Cooler air cannot hold as much water vapour, so the vapour condenses into clouds and falls as rain. This is why the western slopes of the Ghats are among the wettest places in India, while the land just behind them, in the \"rain shadow\", stays much drier.\n\nThe monsoon is not perfectly regular. Sometimes it arrives late, or pauses for weeks in what forecasters call a \"break\". Its strength is affected by conditions far away, including the temperature of the Pacific Ocean. In years of El Niño, when the eastern Pacific becomes unusually warm, the Indian monsoon is often weaker, though not always.\n\nScientists are also studying how a warming climate is changing the monsoon. Many records suggest that the total rain in a season may not change much, but that it is falling in fewer, heavier bursts, with longer dry spells between them. That matters: a field can use steady rain, but a flood washes soil away, and a long dry spell can ruin young crops.\n\nSo the next time the sky darkens in June and the first heavy drops hit the dust, remember that you are watching the end of a journey that began over a distant ocean, driven by nothing more mysterious than the sun, the sea and the land.",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "Why does a wind blow from the ocean to the land in summer?",
+          "right": "The land heats faster, making lower pressure over it",
+          "wrong": [
+            "The ocean is hotter than the land",
+            "The Western Ghats push the wind"
+          ],
+          "explain": "Air moves from the ocean's higher pressure to the land's low pressure."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why does rain fall when the wind rises over the Western Ghats?",
+          "right": "Rising air cools and its vapour condenses",
+          "wrong": [
+            "The mountains are very cold",
+            "Trees on the hills make rain"
+          ],
+          "explain": "Cooler air cannot hold as much water vapour."
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "What is the \"rain shadow\"?",
+          "right": "A drier area behind mountains",
+          "wrong": [
+            "The dark shape of a cloud",
+            "Shade under a tree in the rain"
+          ],
+          "explain": "The land just behind the Ghats stays much drier."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do many records suggest about a warming climate?",
+          "right": "Rain falls in fewer, heavier bursts",
+          "wrong": [
+            "The monsoon has stopped completely",
+            "The rain now comes in January"
+          ],
+          "explain": "Total rain may be similar, but in heavier bursts with longer dry spells."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer begin and end with the smell and sight of rain?",
+          "right": "To connect the science to an experience readers know",
+          "wrong": [
+            "To prove that rain always smells good",
+            "To fill the article with lovely poetry"
+          ],
+          "explain": "Familiar moments frame the explanation."
+        },
+        {
+          "skill": "structure",
+          "prompt": "How is the middle of the article organised?",
+          "right": "Cause and effect, step by step",
+          "wrong": [
+            "As a list of instructions",
+            "As a diary of one summer"
+          ],
+          "explain": "Heating leads to pressure, wind, rising air, cooling and rain."
+        }
+      ]
+    },
+    {
+      "id": "kt7.myth",
+      "level": 7,
+      "kind": "story",
+      "title": "The Girl Who Carried the River",
+      "text": "Everyone in Thirumalai village knew the old story. Long ago, the river had refused to come down from the mountain, and the land below was dying. A sage, it was said, caught the whole river in his small water pot and carried it down, step by careful step, so that not one drop was spilled until he reached the fields. Where he finally poured it out, the river had flowed ever since.\n\nMeena had heard this story at every festival of her twelve years. She had also heard, more recently, the district engineer explain that the river was failing again. Sand had been dug from its bed for building, the forest on the mountain had been cut, and in the dry months the river was now a line of stones.\n\nAt the village meeting, the men argued about digging a deeper well, about writing to the minister, about whose fault it was. Meena sat at the back and thought about the water pot.\n\nThe next morning she walked up the mountain path with her grandmother's brass pot and a bag of seeds. Where the forest had been cleared, the soil was cracking. She dug a small hollow on the slope, pressed in three seeds of the fig trees that used to grow there, and filled the hollow from her pot. Then she walked down, filled the pot at the last pool in the river, and climbed back up to plant three more.\n\nThe villagers laughed. \"She thinks she is the sage,\" said the tea-seller. \"One pot at a time, she will fix the river in about a thousand years.\"\n\nBut by the end of the week, Meena's two friends were walking up with her. By the end of the month, the schoolteacher had brought her whole class, and the boys who dug sand from the river had been shamed, or paid, into planting instead. Someone built a low wall of stones across a gully so that the rain would soak into the slope rather than racing away. Someone else remembered that their grandfather used to dig small pits along the hillside for the same reason.\n\nThe first year, half the seedlings died. The second year, fewer. In the fourth year, the monsoon came, and for the first time anyone could remember, the river was still running when the dry season arrived.\n\nAt the next festival, the priest told the old story again: the sage, the pot, the river. When he had finished, a small boy at the front asked, \"Was the sage a girl?\"\n\nEveryone laughed, and looked at Meena, and Meena looked at her grandmother's pot, which was dented now from four years of mountain paths. \"I think,\" she said, \"the pot was the important part. Anyone can carry it.\"",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "How is Meena's story like the old myth?",
+          "right": "Both bring water back by carrying it patiently",
+          "wrong": [
+            "Both have a sage with magic powers",
+            "Both end with a flood"
+          ],
+          "explain": "The sage carried the river in a pot; Meena carries water up in a pot to plant trees."
+        },
+        {
+          "skill": "compare",
+          "prompt": "How is Meena's story different from the myth?",
+          "right": "Her success needs many people and many years",
+          "wrong": [
+            "She uses magic to move the river",
+            "She works completely alone"
+          ],
+          "explain": "Friends, a class and villagers join; it takes four years."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the river start to fail?",
+          "right": "Sand was dug and the mountain forest was cut",
+          "wrong": [
+            "The sage took the water back",
+            "The monsoon stopped for ever"
+          ],
+          "explain": "The engineer explains both causes."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Why does the tea-seller laugh at first?",
+          "right": "He thinks one person with a pot is hopeless",
+          "wrong": [
+            "He thinks Meena is the sage",
+            "He wants to buy her pot"
+          ],
+          "explain": "\"One pot at a time… about a thousand years.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does Meena mean by \"Anyone can carry it\"?",
+          "right": "Ordinary people can do the work in the old stories",
+          "wrong": [
+            "The brass pot is very light to lift",
+            "Only girls are able to save rivers"
+          ],
+          "explain": "The heroic act is something any patient person can do."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the story begin and end with the old myth?",
+          "right": "To show how an old tale gains a new meaning",
+          "wrong": [
+            "To repeat the story for younger readers",
+            "Because the middle is about a festival"
+          ],
+          "explain": "The myth is retold at the end with Meena's story in mind."
         }
       ]
     },
@@ -3291,6 +4440,75 @@
             "A shopkeeper will smile at you"
           ],
           "explain": "\"Researchers have found\" signals a finding."
+        }
+      ]
+    },
+    {
+      "id": "kt7.story",
+      "level": 7,
+      "kind": "story",
+      "title": "The Signal Box",
+      "text": "For thirty-one years, Govindan had worked the signal box at Kallur, a small station where only four trains stopped each day and the rest rushed through without slowing. The box stood on stilts at the end of the platform, with a row of tall iron levers, a brass bell and a window that looked down the line in both directions. Govindan knew every sound the rails made. He could tell a goods train from a passenger train by the hum in the track long before either came round the bend.\n\nThe railway had written to him in March. The signals at Kallur would be controlled by computer from the city, two hundred kilometres away. The box would be closed, and Govindan, who was fifty-eight, would retire early. \"Nothing personal,\" the letter said. \"Progress.\"\n\nOn his last night, the rain came in sideways. At a quarter past eleven, the bell rang for the Chennai Mail, which would pass at full speed in eighteen minutes. Govindan pulled the levers that set the signals to green, as he had done more than ten thousand times. Then he sat down with his flask of tea and listened.\n\nThe rails were wrong.\n\nIt was not a sound exactly, more the absence of one. Between the station and the river bridge, where the line ran along an embankment, there should have been a faint ringing as the rain hit the iron. Instead there was a dull, dead patch. Govindan put down his tea. He thought of the landslip twenty years ago, and of how the earth beside the river grew soft in heavy rain.\n\nEvery rule told him to trust the instruments, and the instruments showed nothing wrong. If he stopped the Mail without reason, there would be an inquiry, delays across three states and, very likely, a smaller pension. He had eleven minutes.\n\nHe threw the signals back to red, rang the station master and ran down the steps with a lantern. The embankment was a quarter of a kilometre away. When he reached it, soaked and gasping, he found that the earth beneath one rail had washed away. The track hung across a gap the size of a lorry, its sleepers swinging gently in the dark like the rungs of a broken ladder.\n\nThe Mail stopped at the red signal with a long scream of brakes. Nine hundred passengers slept on, never knowing why they were late.\n\nThere was an inquiry after all. It found that the new computer system would not have detected the washout, because the rail itself was unbroken; only the ground beneath it was gone. The report recommended that the Kallur signal box stay open \"until further review\".\n\nGovindan worked there for two more years. On his real last day, the drivers of every train that passed Kallur gave two long blasts on their horns. He stood at the window and raised his flask to each of them, and when the last one had gone, he sat for a long time and listened to the rails.",
+      "questions": [
+        {
+          "skill": "inference",
+          "prompt": "Why could Govindan sense the danger when the instruments could not?",
+          "right": "He knew the normal sounds of the rails",
+          "wrong": [
+            "He had a newer computer",
+            "A passenger had warned him"
+          ],
+          "explain": "Years of listening let him notice an unusual \"dead patch\"."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What does the railway's word \"Progress\" suggest about its view of Govindan?",
+          "right": "His experience was not valued",
+          "wrong": [
+            "He was being promoted",
+            "He had asked to retire"
+          ],
+          "explain": "The letter treats replacing him as simply modern and impersonal."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What had happened on the embankment?",
+          "right": "Earth under one rail had washed away",
+          "wrong": [
+            "A tree had fallen on the line",
+            "A rail had snapped in two"
+          ],
+          "explain": "The track hung across a gap where the ground was gone."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "The sleepers swing \"like the rungs of a broken ladder\". What picture does this create?",
+          "right": "The track dangling over empty space",
+          "wrong": [
+            "A ladder lying beside the line",
+            "Workers climbing up the bank"
+          ],
+          "explain": "Unsupported sleepers dangle like rungs with nothing below."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does the writer tell us about the inquiry and the pension before Govindan acts?",
+          "right": "To show what he risked by stopping the train",
+          "wrong": [
+            "To explain how railways are paid",
+            "To slow the story down for no reason"
+          ],
+          "explain": "The cost of being wrong makes his choice braver."
+        },
+        {
+          "skill": "theme",
+          "prompt": "Which idea does the story most suggest?",
+          "right": "Human experience can notice what machines miss",
+          "wrong": [
+            "Computers should run every railway",
+            "Old signal boxes are dangerous"
+          ],
+          "explain": "The computer could not detect the washout; Govindan could."
         }
       ]
     },
