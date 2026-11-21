@@ -563,6 +563,8 @@ export type RewriteDimension = "meaning_preservation" | "clarity" | "coherence" 
 export type RewriteRating = "not_yet" | "partly" | "mostly" | "fully";
 
 export interface RewriteSubmission {
+  /** Optional learner-owned revision of a saved rewrite, not independent evidence. */
+  revisionOf?: string;
   contract: EssayContractVersion;
   id: string;
   /** The original essay's id. */
@@ -585,6 +587,8 @@ export interface RewriteDimensionResult {
 
 /** Each dimension is judged separately. A rewrite never verifies a competency or changes an estimate. */
 export interface RewriteEvaluation {
+  /** Only unavailable/provider-failed evaluations may retry the same artifact. */
+  retryable?: boolean;
   contract: EssayContractVersion;
   rewrite: string;
   essay: string;
@@ -708,6 +712,7 @@ export type EssayRecord =
   | { type: "diagnostic"; request: DiagnosticRequest }
   | { type: "journey"; journey: LearningJourney }
   | { type: "rewrite"; rewrite: RewriteSubmission; evaluation: RewriteEvaluation }
+  | { type: "rewrite_evaluation"; evaluation: RewriteEvaluation }
   | { type: "check"; check: PlannedCheck }
   | { type: "questions"; set: QuestionSet };
 

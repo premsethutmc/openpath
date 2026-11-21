@@ -69,7 +69,7 @@ export function validateRewrite(ectx: EssayContext, original: EssaySubmission, r
   const o = normaliseText(original.text);
   const r = normaliseText(rewrite.text);
   if (r.length > 40 && o.includes(r)) return whole("held", ["the rewrite is copied word for word from the original: there is nothing to judge"]);
-  if (!evaluator) return whole("held", ["no evaluator is available: the rewrite is kept and can be judged later"]);
+  if (!evaluator) return {...whole("held", ["no evaluator is available: the rewrite is kept and can be judged later"]), retryable:true};
   const v2 = evaluator.protocol === ESSAY_REWRITE_PROTOCOL_V2;
   if (!v2 && evaluator.protocol !== ESSAY_REWRITE_PROTOCOL) return whole("rejected", [`the evaluator answered protocol ${evaluator.protocol}, not ${ESSAY_REWRITE_PROTOCOL} or ${ESSAY_REWRITE_PROTOCOL_V2}`]);
   if (!isObj(raw)) return whole("rejected", ["the output is not a JSON object"]);
@@ -159,7 +159,13 @@ export async function evaluateRewrite(
   input: { rewriteId: string; essayId: string; text: string },
 ): Promise<{ event: EssayEvent; evaluation: RewriteEvaluation; rewrite: RewriteSubmission }> {
   const rewrite = submitRewrite(ectx, events, meta, input);
-  const original = submissions(events).find((s) => s.id === input.essayId)!;
+  const evaluation = await judgeSavedRewrite(ectx, events, evaluator, rewrite);
+  return { event: { kind: "essay", id: meta.id, at: meta.at, session: meta.session, record: { type: "rewrite", rewrite, evaluation } }, evaluation, rewrite };
+}
+
+async function judgeSavedRewrite(ectx:EssayContext, events:readonly LedgerEvent[], evaluator:EssayEvaluator|null, rewrite:RewriteSubmission):Promise<RewriteEvaluation>{
+  const original = submissions(events).find(s=>s.id===rewrite.essay);
+  if(!original)throw new EssayRefusal("Original essay is unavailable.");
   const protocol = evaluator?.protocols?.rewrite ?? ESSAY_REWRITE_PROTOCOL;
   const ref: EvaluatorRef | null = evaluator
     ? { id: evaluator.id, version: evaluator.version, protocol, ...(evaluator.model ? { model: evaluator.model } : {}), ...(protocol === ESSAY_REWRITE_PROTOCOL_V2 ? { rubric: ectx.profile.key } : {}) }
@@ -176,5 +182,34 @@ export async function evaluateRewrite(
   const evaluation = failure
     ? { ...validateRewrite(ectx, original, rewrite, undefined, null), status: "held" as const, reasons: [`the evaluator failed: ${failure}; the rewrite is kept and can be judged later`] }
     : validateRewrite(ectx, original, rewrite, raw, ref);
-  return { event: { kind: "essay", id: meta.id, at: meta.at, session: meta.session, record: { type: "rewrite", rewrite, evaluation } }, evaluation, rewrite };
+  return evaluation;
+}
+
+
+/** Resolve evaluation attempts without duplicating saved writing or profile history. */
+export function savedRewrites(events:readonly LedgerEvent[]){
+ return essayRecords(events,"rewrite").map(r=>{
+  const rewrite=r.record.rewrite;
+  const after=events.slice(events.findIndex(e=>e.id===r.event.id)+1);
+  const latest=essayRecords(after,"rewrite_evaluation").filter(e=>e.record.evaluation.rewrite===rewrite.id&&e.record.evaluation.essay===rewrite.essay&&e.record.evaluation.artifacts?.original===rewrite.essay&&e.record.evaluation.artifacts?.revised===rewrite.id).at(-1);
+  return {rewrite,evaluation:latest?.record.evaluation??r.record.evaluation};
+ });
+}
+export function canRetryRewrite(e:RewriteEvaluation){
+ return e.status==='held'&&(e.retryable===true||(e.retryable===undefined&&e.reasons.some(r=>r.startsWith('no evaluator is available:')||r.startsWith('the evaluator failed:'))));
+}
+export async function retryRewrite(ectx:EssayContext,events:readonly LedgerEvent[],evaluator:EssayEvaluator,meta:EventMeta,id:string):Promise<EssayEvent>{
+ const saved=savedRewrites(events).find(r=>r.rewrite.id===id);
+ if(!saved||!canRetryRewrite(saved.evaluation))throw new EssayRefusal('Only an unavailable saved rewrite evaluation can be retried.');
+ const evaluation=await judgeSavedRewrite(ectx,events,evaluator,saved.rewrite);
+ return {kind:'essay',...meta,record:{type:'rewrite_evaluation',evaluation}};
+}
+/** A question, never a replacement answer. Quote matching does not validate semantics. */
+export function rewriteQuestion(e:RewriteEvaluation):string|null{
+ if(e.status!=='evaluated')return null;
+ const missing=e.keyIdeas.find(k=>k.rewrite===null);
+ if(missing)return `The evaluator did not locate this idea in your rewrite: “${missing.original}”. Is it important to your meaning, and how could you express it in your own words within 50 words?`;
+ const questions:Record<RewriteDimension,string>={meaning_preservation:'Does your rewrite keep the meaning you intended in the original?',clarity:'Which phrase could you make clearer without changing what you mean?',coherence:'How could you make the link between your ideas easier to follow?',grammar:'Which part of your sentence would you change after checking the grammar, and why?',concision:'Which words could you remove without losing an important idea?'};
+ const d=e.dimensions.find(d=>d.status==='accepted'&&d.rating!==null&&d.rating!=='fully');
+ return d?questions[d.dimension]:null;
 }
