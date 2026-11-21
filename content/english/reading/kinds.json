@@ -1585,7 +1585,7 @@
           "prompt": "What are the banyan's \"hundred brown arms\"?",
           "right": "Its branches",
           "wrong": [
-            "Its roots",
+            "The parrots",
             "The children"
           ],
           "explain": "The poet describes the branches as if they were arms."
