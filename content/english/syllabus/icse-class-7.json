@@ -115,7 +115,11 @@
           "text": "Reads from a suggested list of novels, short stories, life stories and graphic novels.",
           "coverage": "guided",
           "where": "guided",
-          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading."
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "also": [
+            "kinds",
+            "long"
+          ]
         }
       ]
     },

@@ -310,7 +310,11 @@
           "text": "Reads literary and other texts from a suggested list (stories, abridged classics, biographies, diaries).",
           "coverage": "guided",
           "where": "guided",
-          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading."
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "also": [
+            "kinds",
+            "long"
+          ]
         }
       ]
     }
