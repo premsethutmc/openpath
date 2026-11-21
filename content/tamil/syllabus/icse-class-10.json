@@ -1,0 +1,99 @@
+{
+ "id": "icse-cisce-tamil-class-10",
+ "board": "CISCE (ICSE)",
+ "class": 10,
+ "subject": "Tamil (second language)",
+ "source": {
+  "read": "CISCE Regulations and Syllabus, ICSE, Second Language: Indian Languages (Classes IX and X)",
+  "url": "https://cisce.org/regulations-and-syllabus-icse-2027/",
+  "note": "Paper structure and marks are CISCE's; Tamil's prescribed textbooks (Appendix I) are the school's and are not reproduced."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "a",
+   "name": "Section A: Language (40 marks)",
+   "outcomes": [
+    {
+     "id": "A1",
+     "text": "Composition (15 marks): writes a composition of the kind set, a narrative, description or explanation.",
+     "coverage": "covered",
+     "where": [
+      "writing:c10"
+     ]
+    },
+    {
+     "id": "A2",
+     "text": "Letter (7 marks): writes a letter on one of two subjects, with the right layout.",
+     "coverage": "covered",
+     "where": [
+      "writing:c10"
+     ]
+    },
+    {
+     "id": "A3",
+     "text": "Comprehension (10 marks): answers questions on an unseen passage of about 250 words.",
+     "coverage": "partly",
+     "where": [
+      "icse.ta.c10.reading"
+     ],
+     "note": "Our passage is shorter than the exam's 250 words."
+    },
+    {
+     "id": "A4",
+     "text": "Grammar (8 marks): uses vocabulary, syntax and idiom correctly; joins sentences; forms sentences with given words.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c10.sentence-parts",
+      "icse.ta.c10.simile",
+      "icse.ta.c10.sandhi",
+      "icse.ta.c10.voice-change"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "name": "Section B: Prescribed texts (40 marks)",
+   "outcomes": [
+    {
+     "id": "B1",
+     "text": "Prescribed texts (40 marks): answers on two of the prescribed textbooks.",
+     "coverage": "not-yet",
+     "where": [],
+     "note": "The school's prescribed Tamil textbook is copyrighted; OpenPath does not reproduce it. Our own passages and classics cover the skills."
+    },
+    {
+     "id": "B2",
+     "text": "Knows Thirukkural couplets.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c10.kural"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ia",
+   "name": "Internal assessment (20 marks)",
+   "outcomes": [
+    {
+     "id": "IA1",
+     "text": "Internal assessment, writing: a 300-400 word creative piece.",
+     "coverage": "partly",
+     "where": [
+      "writing:c10"
+     ],
+     "note": "Our longest task asks for up to 400 words; the school sets the assignment."
+    },
+    {
+     "id": "IA2",
+     "text": "Internal assessment, oral: a prepared speech, debate or role-play.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  }
+ ]
+}

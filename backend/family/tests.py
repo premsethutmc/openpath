@@ -283,6 +283,16 @@ class LedgerTests(FamilyTestCase):
         self.assertEqual(self.append(client, arun, 0, event(0), subject="science").status_code, 400, "unregistered subjects remain inactive")
         self.assertEqual(PupilEvent.objects.count(), 0)
 
+    def test_tamil_record_is_kept_apart_and_exported(self):
+        """icse-tamil@2: Tamil answers are kept per learner, as English and maths are."""
+        client = self.parent()
+        arun = self.pupil(client)
+        answer = {"kind": "tamil.answer", "id": "t-1", "at": "2026-11-21T09:00:00Z", "q": "icse.ta.c5.thinai.1", "right": True}
+        self.assertEqual(self.append(client, arun, 0, answer, subject="tamil").status_code, 201)
+        self.assertEqual(client.get(f"/api/pupils/{arun}/events/?subject=tamil").json()["events"], [answer])
+        self.assertEqual(client.get(f"/api/pupils/{arun}/events/").json()["events"], [])
+        self.assertEqual(client.get(f"/api/pupils/{arun}/export/").json()["subjects"]["tamil"], [answer])
+
     def test_export_holds_the_whole_record(self):
         client = self.parent()
         arun = self.pupil(client)

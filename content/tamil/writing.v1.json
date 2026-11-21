@@ -1,0 +1,309 @@
+{
+ "schema": "openpath.tamil-writing.v1",
+ "tasks": [
+  {
+   "id": "ta.c1.w1",
+   "class": 1,
+   "language": "ta",
+   "title": "படங்களின் பெயர்கள்",
+   "titleEn": "Name the pictures",
+   "task": "🐘 🐟 🌸 🏠 — இந்தப் படங்களின் பெயர்களைத் தமிழில் எழுது.",
+   "taskEn": "Write the Tamil names of these pictures.",
+   "form": "words",
+   "write": {
+    "min": 3,
+    "max": 10
+   },
+   "look": [
+    "நான்கு படங்களுக்கும் பெயர் எழுதியது",
+    "எழுத்துகள் சரியாக உள்ளன",
+    "ஒவ்வொரு சொல்லும் தனித்தனியாக உள்ளது"
+   ]
+  },
+  {
+   "id": "ta.c2.w1",
+   "class": 2,
+   "language": "ta",
+   "title": "என் பள்ளி",
+   "titleEn": "My school",
+   "task": "உன் பள்ளியைப் பற்றி இரண்டு மூன்று வாக்கியங்கள் எழுது.",
+   "taskEn": "Write two or three sentences about your school.",
+   "form": "sentences",
+   "write": {
+    "min": 8,
+    "max": 30
+   },
+   "look": [
+    "பள்ளியைப் பற்றியே எழுதியது",
+    "இரண்டு வாக்கியங்களாவது உள்ளன",
+    "ஒவ்வொரு வாக்கியமும் முற்றுப்புள்ளியுடன் முடிகிறது"
+   ]
+  },
+  {
+   "id": "ta.c3.w1",
+   "class": 3,
+   "language": "ta",
+   "title": "என் நண்பன் / நண்பி",
+   "titleEn": "My friend",
+   "task": "உன் நண்பனைப் (நண்பியைப்) பற்றி நான்கு வாக்கியங்கள் எழுது: பெயர், எப்படி இருப்பார், சேர்ந்து என்ன செய்வீர்கள்.",
+   "taskEn": "Write four sentences about your friend.",
+   "form": "sentences",
+   "write": {
+    "min": 15,
+    "max": 50
+   },
+   "look": [
+    "நண்பரின் பெயரும் ஒரு குணமும் உள்ளன",
+    "சேர்ந்து செய்வதைச் சொல்கிறது",
+    "வாக்கியங்கள் முழுமையாக உள்ளன"
+   ]
+  },
+  {
+   "id": "ta.c4.w1",
+   "class": 4,
+   "language": "ta",
+   "title": "எனக்குப் பிடித்த பண்டிகை",
+   "titleEn": "My favourite festival",
+   "task": "உனக்குப் பிடித்த பண்டிகையைப் பற்றி ஒரு பத்தி எழுது: எப்போது, எப்படிக் கொண்டாடுவீர்கள், ஏன் பிடிக்கும்.",
+   "taskEn": "Write a paragraph about your favourite festival.",
+   "form": "paragraph",
+   "write": {
+    "min": 25,
+    "max": 80
+   },
+   "look": [
+    "பண்டிகை எப்போது என்று சொல்கிறது",
+    "எப்படிக் கொண்டாடுவார்கள் என்று விளக்குகிறது",
+    "ஏன் பிடிக்கும் என்று ஒரு காரணம் தருகிறது"
+   ]
+  },
+  {
+   "id": "ta.c5.w1",
+   "class": 5,
+   "language": "ta",
+   "title": "எனக்குப் பிடித்த விளையாட்டு",
+   "titleEn": "My favourite game",
+   "task": "உனக்குப் பிடித்த விளையாட்டைப் பற்றி ஒரு பத்தி எழுது.",
+   "taskEn": "Write a paragraph about your favourite game.",
+   "form": "paragraph",
+   "write": {
+    "min": 40,
+    "max": 120
+   },
+   "look": [
+    "விளையாட்டின் பெயரும் எப்படி விளையாடுவது என்பதும் உள்ளன",
+    "ஏன் பிடிக்கும் என்று சொல்கிறது",
+    "கருத்துகள் வரிசையாக உள்ளன"
+   ]
+  },
+  {
+   "id": "ta.c5.w2",
+   "class": 5,
+   "language": "ta",
+   "title": "பிறந்தநாள் அழைப்புக் கடிதம்",
+   "titleEn": "Letter: a birthday invitation",
+   "task": "உன் பிறந்தநாள் விழாவுக்கு நண்பனை அழைத்து ஒரு கடிதம் எழுது.",
+   "taskEn": "Write a letter inviting a friend to your birthday.",
+   "form": "letter",
+   "write": {
+    "min": 40,
+    "max": 120
+   },
+   "look": [
+    "கடிதத்தின் அமைப்பு: இடம், நாள், விளி, முடிப்பு",
+    "எப்போது, எங்கே என்று தெளிவாகச் சொல்கிறது",
+    "அன்புடன் அழைக்கும் தொனி உள்ளது"
+   ]
+  },
+  {
+   "id": "ta.c6.w1",
+   "class": 6,
+   "language": "ta",
+   "title": "மரம் நடுவோம்",
+   "titleEn": "Let us plant trees",
+   "task": "«மரம் நடுவோம்» என்ற தலைப்பில் ஒரு சிறு கட்டுரை எழுது.",
+   "taskEn": "Write a short essay: Let us plant trees.",
+   "form": "essay",
+   "write": {
+    "min": 60,
+    "max": 160
+   },
+   "look": [
+    "மரங்களின் பயன்களைச் சொல்கிறது",
+    "நாம் என்ன செய்யலாம் என்று சொல்கிறது",
+    "தொடக்கம், உடல், முடிவு உள்ளன"
+   ]
+  },
+  {
+   "id": "ta.c6.w2",
+   "class": 6,
+   "language": "ta",
+   "title": "தாத்தாவுக்குக் கடிதம்",
+   "titleEn": "Letter to grandfather",
+   "task": "விடுமுறையில் நீ செய்ததைப் பற்றித் தாத்தாவுக்குக் கடிதம் எழுது.",
+   "taskEn": "Write to your grandfather about your holidays.",
+   "form": "letter",
+   "write": {
+    "min": 50,
+    "max": 150
+   },
+   "look": [
+    "உறவுமுறைக் கடித அமைப்பு உள்ளது",
+    "விடுமுறையில் செய்தவை விளக்கப்பட்டுள்ளன",
+    "நலம் விசாரித்து முடிக்கிறது"
+   ]
+  },
+  {
+   "id": "ta.c7.w1",
+   "class": 7,
+   "language": "ta",
+   "title": "நான் விரும்பும் தலைவர்",
+   "titleEn": "A leader I admire",
+   "task": "நீ விரும்பும் ஒரு தலைவரைப் பற்றிக் கட்டுரை எழுது.",
+   "taskEn": "Write an essay on a leader you admire.",
+   "form": "essay",
+   "write": {
+    "min": 80,
+    "max": 200
+   },
+   "look": [
+    "தலைவரின் வாழ்க்கையிலிருந்து உண்மைகள் தருகிறது",
+    "ஏன் விரும்புகிறாய் என்று விளக்குகிறது",
+    "பத்திகளாகப் பிரித்து எழுதியுள்ளது"
+   ]
+  },
+  {
+   "id": "ta.c7.w2",
+   "class": 7,
+   "language": "ta",
+   "title": "விடுப்புக் கடிதம்",
+   "titleEn": "Leave letter",
+   "task": "இரண்டு நாள் விடுப்பு கேட்டு வகுப்பாசிரியருக்குக் கடிதம் எழுது.",
+   "taskEn": "Write to your class teacher asking for two days' leave.",
+   "form": "letter",
+   "write": {
+    "min": 50,
+    "max": 140
+   },
+   "look": [
+    "முறைசார் கடித அமைப்பு: அனுப்புநர், பெறுநர், பொருள்",
+    "காரணமும் நாட்களும் தெளிவாக உள்ளன",
+    "பணிவான சொற்களைப் பயன்படுத்துகிறது"
+   ]
+  },
+  {
+   "id": "ta.c8.w1",
+   "class": 8,
+   "language": "ta",
+   "title": "சுற்றுச்சூழல் பாதுகாப்பு",
+   "titleEn": "Protecting the environment",
+   "task": "«சுற்றுச்சூழல் பாதுகாப்பு» என்ற தலைப்பில் கட்டுரை எழுது.",
+   "taskEn": "Write an essay on protecting the environment.",
+   "form": "essay",
+   "write": {
+    "min": 100,
+    "max": 250
+   },
+   "look": [
+    "சிக்கல்களைச் சான்றுடன் சொல்கிறது",
+    "தீர்வுகளைத் தருகிறது",
+    "முன்னுரை, பொருள், முடிவுரை உள்ளன"
+   ]
+  },
+  {
+   "id": "ta.c8.w2",
+   "class": 8,
+   "language": "ta",
+   "title": "புகார்க் கடிதம்",
+   "titleEn": "Letter of complaint",
+   "task": "உன் தெருவில் குப்பை அகற்றப்படாததைப் பற்றி நகராட்சி ஆணையருக்குக் கடிதம் எழுது.",
+   "taskEn": "Write to the municipal commissioner about uncleared garbage.",
+   "form": "letter",
+   "write": {
+    "min": 80,
+    "max": 200
+   },
+   "look": [
+    "முறைசார் கடித அமைப்பு உள்ளது",
+    "சிக்கலைத் தெளிவாக விளக்குகிறது",
+    "என்ன செய்ய வேண்டும் என்று பணிவாகக் கேட்கிறது"
+   ]
+  },
+  {
+   "id": "ta.c9.w1",
+   "class": 9,
+   "language": "ta",
+   "title": "மறக்க முடியாத நாள்",
+   "titleEn": "A day I cannot forget",
+   "task": "உன் வாழ்வில் மறக்க முடியாத ஒரு நாளைப் பற்றி எழுது (கதை வடிவில்).",
+   "taskEn": "Write about a day you cannot forget, as a narrative.",
+   "form": "composition",
+   "write": {
+    "min": 150,
+    "max": 350
+   },
+   "look": [
+    "நிகழ்வுகள் காலவரிசையில் உள்ளன",
+    "உணர்வுகளையும் விவரங்களையும் காட்டுகிறது",
+    "பொருத்தமான முடிவு உள்ளது"
+   ]
+  },
+  {
+   "id": "ta.c9.w2",
+   "class": 9,
+   "language": "ta",
+   "title": "நூலகம் வேண்டிக் கடிதம்",
+   "titleEn": "Letter asking for a library",
+   "task": "உன் ஊரில் ஒரு நூலகம் அமைக்க வேண்டி மாவட்ட ஆட்சியருக்குக் கடிதம் எழுது.",
+   "taskEn": "Write to the District Collector asking for a library.",
+   "form": "letter",
+   "write": {
+    "min": 100,
+    "max": 250
+   },
+   "look": [
+    "முறைசார் கடித அமைப்பு முழுமையாக உள்ளது",
+    "தேவைக்கான காரணங்களைத் தருகிறது",
+    "கோரிக்கை தெளிவாகவும் பணிவாகவும் உள்ளது"
+   ]
+  },
+  {
+   "id": "ta.c10.w1",
+   "class": 10,
+   "language": "ta",
+   "title": "இணையத்தின் நன்மை தீமைகள்",
+   "titleEn": "The internet: good and bad",
+   "task": "«இணையத்தின் நன்மை தீமைகள்» என்ற தலைப்பில் கட்டுரை எழுது.",
+   "taskEn": "Write an essay: the good and bad of the internet.",
+   "form": "composition",
+   "write": {
+    "min": 200,
+    "max": 400
+   },
+   "look": [
+    "நன்மைகளையும் தீமைகளையும் சான்றுடன் சொல்கிறது",
+    "சொந்தக் கருத்தை முடிவில் தருகிறது",
+    "பத்திகள் ஒழுங்காக இணைந்துள்ளன"
+   ]
+  },
+  {
+   "id": "ta.c10.w2",
+   "class": 10,
+   "language": "ta",
+   "title": "பாராட்டுக் கடிதம்",
+   "titleEn": "Letter of appreciation",
+   "task": "போட்டியில் வென்ற நண்பனைப் பாராட்டிக் கடிதம் எழுது.",
+   "taskEn": "Write a letter congratulating a friend who won a competition.",
+   "form": "letter",
+   "write": {
+    "min": 80,
+    "max": 200
+   },
+   "look": [
+    "உறவுமுறைக் கடித அமைப்பு உள்ளது",
+    "எதற்காகப் பாராட்டுகிறாய் என்று தெளிவாக உள்ளது",
+    "உணர்வும் வாழ்த்தும் உள்ளன"
+   ]
+  }
+ ]
+}

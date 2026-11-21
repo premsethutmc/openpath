@@ -4,8 +4,20 @@
  * claims, only practice progress kept on the device.
  */
 import courseData from "../../../content/tamil/icse.v1.json";
+import writingData from "../../../content/tamil/writing.v1.json";
+import s1 from "../../../content/tamil/syllabus/icse-class-1.json";
+import s2 from "../../../content/tamil/syllabus/icse-class-2.json";
+import s3 from "../../../content/tamil/syllabus/icse-class-3.json";
+import s4 from "../../../content/tamil/syllabus/icse-class-4.json";
+import s5 from "../../../content/tamil/syllabus/icse-class-5.json";
+import s6 from "../../../content/tamil/syllabus/icse-class-6.json";
+import s7 from "../../../content/tamil/syllabus/icse-class-7.json";
+import s8 from "../../../content/tamil/syllabus/icse-class-8.json";
+import s9 from "../../../content/tamil/syllabus/icse-class-9.json";
+import s10 from "../../../content/tamil/syllabus/icse-class-10.json";
 
-export type CourseQuestion = { id: string; prompt: string; promptEn: string; options: string[]; answer: string; why?: string };
+/** `say`: a listening question; the device speaks it and the prompt does not show it. */
+export type CourseQuestion = { id: string; prompt: string; promptEn: string; options: string[]; answer: string; why?: string; say?: string };
 export type CourseTopic = {
   id: string;
   class: number;
@@ -14,6 +26,8 @@ export type CourseTopic = {
   teach: { ta: string; en: string; examples: string };
   /** a reading passage (OpenPath-written), shown above each of the topic's questions */
   passage?: string;
+  /** listening topic: needs a Tamil voice on the device */
+  listen?: boolean;
   questions: CourseQuestion[];
 };
 export const course = courseData as { schema: string; board: string; review: string; topics: CourseTopic[] };
@@ -71,5 +85,31 @@ export function validateCourse(topics: CourseTopic[] = course.topics): string[] 
       if (q.options.some((o) => o !== o.normalize("NFC"))) errors.push(`${q.id}: not NFC`);
     }
   }
+  return errors;
+}
+
+export type WritingTask = { id: string; class: number; title: string; titleEn: string; task: string; taskEn: string; form: string; write: { min: number; max: number }; look: string[] };
+export const writingTasks = (writingData as { tasks: WritingTask[] }).tasks;
+export const writingFor = (cls: number) => writingTasks.filter((t) => t.class === cls);
+/** Tamil words: runs of Tamil script (as the server counts them). */
+export const tamilWords = (text: string) => (text.match(/[\u0B80-\u0BFF]+/g) ?? []).length;
+
+export type Outcome = { id: string; text: string; coverage: "covered" | "partly" | "guided" | "not-yet"; where: string[]; note?: string };
+export type Syllabus = { id: string; class: number; source: { read: string; url: string; note: string }; strands: { id: string; name: string; outcomes: Outcome[] }[] };
+const SYLLABI = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10] as unknown as Syllabus[];
+export const syllabusFor = (cls: number) => SYLLABI.find((s) => s.class === cls)!;
+
+/** Every outcome's "where" points at a topic or writing tasks that exist. */
+export function validateSyllabus(): string[] {
+  const ids = new Set(course.topics.map((t) => t.id));
+  const errors: string[] = [];
+  for (const s of SYLLABI)
+    for (const st of s.strands)
+      for (const o of st.outcomes)
+        for (const w of o.where) {
+          if (w.startsWith("writing:")) {
+            if (!writingFor(Number(w.slice(9))).length) errors.push(`${s.id} ${o.id}: no writing for ${w}`);
+          } else if (!ids.has(w)) errors.push(`${s.id} ${o.id}: no topic ${w}`);
+        }
   return errors;
 }

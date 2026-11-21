@@ -254,3 +254,20 @@ test("ICSE course: class picker, a topic's teaching card, practice with feedback
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("ICSE course: syllabus coverage and a writing task with a Tamil word count", async () => {
+  const { context, page, errors } = await phone();
+  await page.goto(`${URL}/`);
+  await page.locator(".class-tile", { hasText: "வகுப்பு 9" }).tap();
+  await page.getByRole("button", { name: /பாடத்திட்டம்/ }).tap();
+  await page.getByRole("heading", { name: "Section A: Language (40 marks)" }).waitFor();
+  assert.equal(await page.locator(".outcome.covered").count(), 3);
+  assert.equal(await page.locator(".outcome.not-yet").count(), 1);
+  await page.screenshot({ path: "e2e/shots/tamil/icse-syllabus.png", fullPage: true });
+  await page.getByRole("button", { name: "← வகுப்பு 9" }).tap();
+  await page.locator(".writing-topic").first().tap();
+  await page.getByRole("textbox", { name: "Your writing" }).fill("என் வாழ்வில் மறக்க முடியாத நாள்");
+  await page.getByText("5 சொற்கள்").waitFor();
+  assert.deepEqual(errors, []);
+  await context.close();
+});

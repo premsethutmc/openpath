@@ -1,0 +1,122 @@
+{
+ "id": "icse-cisce-tamil-class-4",
+ "board": "CISCE (ICSE)",
+ "class": 4,
+ "subject": "Tamil (second language)",
+ "source": {
+  "read": "CISCE curriculum for Classes I-VIII (primary and upper primary)",
+  "url": "https://cisce.org/",
+  "note": "CISCE lists Tamil as a permitted second language but publishes class-wise outcomes only for Hindi. These outcomes follow the same skill themes (listening and speaking, reading, writing, vocabulary, grammar, literature), written by OpenPath for Tamil."
+ },
+ "licence": "Outcomes written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+ "strands": [
+  {
+   "id": "ls",
+   "name": "Listening and speaking",
+   "outcomes": [
+    {
+     "id": "LS1",
+     "text": "Listens to words and sentences and picks the one heard.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.listen"
+     ]
+    },
+    {
+     "id": "LS2",
+     "text": "Talks about a festival or event.",
+     "coverage": "guided",
+     "where": [],
+     "note": "Done aloud with a grown-up, who listens. The app does not hear or mark speaking."
+    }
+   ]
+  },
+  {
+   "id": "g",
+   "name": "Grammar",
+   "outcomes": [
+    {
+     "id": "G1",
+     "text": "Tells naming words from doing words.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.noun-verb"
+     ]
+    },
+    {
+     "id": "G2",
+     "text": "Uses past, present and future tense.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.tense"
+     ]
+    },
+    {
+     "id": "G3",
+     "text": "Uses question words (யார், எங்கே, எப்பொழுது ...).",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.question-words"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "name": "Vocabulary",
+   "outcomes": [
+    {
+     "id": "V1",
+     "text": "Uses more opposites and same-meaning words.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.antonyms",
+      "icse.ta.c4.synonyms"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "r",
+   "name": "Reading",
+   "outcomes": [
+    {
+     "id": "R1",
+     "text": "Reads an information passage and answers questions.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.reading"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "w",
+   "name": "Writing",
+   "outcomes": [
+    {
+     "id": "W1",
+     "text": "Writes a paragraph on a familiar topic.",
+     "coverage": "covered",
+     "where": [
+      "writing:c4"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "l",
+   "name": "Literature",
+   "outcomes": [
+    {
+     "id": "L1",
+     "text": "Knows lines of Kondrai Vendhan.",
+     "coverage": "covered",
+     "where": [
+      "icse.ta.c4.kondrai"
+     ]
+    }
+   ]
+  }
+ ]
+}
