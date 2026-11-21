@@ -1,0 +1,25 @@
+.lab-back { margin: 0 0 14px; font-size: .9rem; font-weight: 750; }
+.lab-back a { color: var(--green); text-underline-offset: .19em; display: inline-flex; align-items: center; min-height: 44px; }
+.lab-list { display: grid; gap: 12px; }
+.lab-card {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(10px, 3vw, 23px);
+  text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+  border-radius: 15px; box-shadow: 0 7px 22px #2435220c; padding: clamp(13px, 3vw, 25px);
+}
+.lab-card:hover, .lab-card:focus-visible { border-color: var(--green); }
+.lab-card small, .lab-card strong, .lab-card strong + span { display: block; }
+.lab-card small { color: var(--green); font-size: .7rem; text-transform: uppercase; font-weight: 780; letter-spacing: .07em; }
+.lab-card strong { margin: 1px 0 2px; font-size: 1.22rem; }
+.lab-card strong + span { color: var(--subtle); font-size: .89rem; line-height: 1.35; }
+.lab-card > span:last-child { color: var(--green); font-weight: 850; }
+.card-mark { display: grid; position: relative; place-items: center; width: clamp(47px, 10vw, 75px); aspect-ratio: 1; border-radius: 11px; background: #dceee4; }
+.pressure-icon { background: linear-gradient(#e5eee3 70%, #c99562 71%); }
+.pressure-icon span { width: 45%; height: 22%; background: #ad4a34; border: 1px solid #783829; border-radius: 3px; }
+.seed-icon span { width: 38%; height: 28%; background: #257e56; border-radius: 70% 10% 70% 12%; transform: rotate(-19deg); }
+.seed-icon::after { content: ''; position: absolute; left: 42%; top: 49%; width: 3%; height: 24%; transform: rotate(21deg); background: #257e56; }
+.prism-icon { background: #182645; }
+.prism-icon span { width: 60%; height: 47%; background: linear-gradient(115deg,#e7f8ff 25%,#ff777b 47%,#ffd983 56%,#91ddeb 72%,#d190fc 85%); clip-path: polygon(28% 0, 100% 100%, 0 100%); }
+
+.salt-icon { background:linear-gradient(145deg,#b9dfe4 45%,#d6b180 46% 73%,#b47e56 74%); }
+.salt-icon span,.salt-icon::after { content:''; width:15%; aspect-ratio:1; background:#fff8e3; border:1px solid #8d8170; transform:rotate(45deg); }
+.salt-icon::after { position:absolute; top:62%; left:57%; width:11%; }

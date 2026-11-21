@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Plant a Seed · OpenPath</title>
+  <link rel="stylesheet" href="../pressure-in-sand/lab.css">
+  <link rel="stylesheet" href="../science.css">
+  <link rel="stylesheet" href="./seed.css">
+  <script type="module" src="./seed.mjs"></script>
+</head>
+<body>
+  <header class="top"><span class="brand">OpenPath</span><span class="label">Science lab <span aria-hidden="true">/</span> 02</span></header>
+  <main>
+    <nav class="lab-back" aria-label="Science labs"><a href="../">← All science labs</a></nav>
+    <div class="intro">
+      <p class="eyebrow">Living things · Germination</p>
+      <h1>Plant a Seed</h1>
+      <p class="subtitle">How can you tell whether a bean needs water?</p>
+    </div>
+    <section id="grow" aria-labelledby="grow-title">
+      <div class="panel-line"><h2 id="grow-title" tabindex="-1">Your bean pot</h2><p id="day" class="day-pill">Ready to plant</p></div>
+      <figure class="bean-pot tray">
+        <svg id="pot" viewBox="0 0 340 205" role="img" aria-labelledby="pot-title" data-stage="empty" data-moisture="unseen" data-window="closed">
+          <title id="pot-title">Side view of an empty pot of soil.</title>
+          <defs>
+            <pattern id="soil-dots" width="19" height="15" patternUnits="userSpaceOnUse"><circle cx="4" cy="5" r="1.3" fill="#f2c591"/><circle cx="13" cy="12" r="1.5" fill="#3f2a1c"/></pattern>
+            <pattern id="soil-cracks" width="40" height="22" patternUnits="userSpaceOnUse"><path d="M-4 3 5 13 20 9 29 18 41 10 M20 9 25 0" stroke="#a46a47" stroke-width="1.5" fill="none"/></pattern>
+          </defs>
+          <circle cx="274" cy="44" r="15" fill="#f4d68b"/>
+          <path d="M24 170 Q169 161 316 172" stroke="#b0c7ac" stroke-width="2" fill="none"/>
+          <path d="M69 91 L271 91 248 180 Q171 190 92 180 Z" stroke="#954a35" fill="#b76145" stroke-width="2"/>
+          <path class="soil" d="M80 98 H260 L241 174 Q170 183 99 174 Z"/>
+          <path d="M80 99 H260 L241 174 Q170 183 99 174 Z" fill="url(#soil-dots)" opacity=".47"/>
+          <path d="M68 92 H272" stroke="#954a35" stroke-width="5" stroke-linecap="round"/>
+          <path class="root root-short" d="M171 128 Q176 134 169 145" stroke="#fff0cf" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+          <path class="root root-long" d="M171 128 Q175 144 166 153 T165 172 M167 153 Q176 151 183 156" stroke="#fff0cf" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+          <path class="shoot" d="M170 125 Q162 107 165 88 Q169 76 170 64 M167 81 Q155 63 136 69 Q142 85 166 86 M169 73 Q180 51 201 54 Q197 68 169 76" stroke="#076849" stroke-width="3.2" fill="#398f61" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="bean" d="M161 117 Q178 112 181 121 Q179 132 168 131 Q156 129 161 117Z" fill="#edc68c" stroke="#3b2b21" stroke-width="2"/>
+          <path class="soil-window" d="M79 96H261L242 174Q170 184 98 174Z" fill="#a55439" stroke="#843d2b" stroke-width="1.2"/>
+          <path class="pot-ring" d="M86 107H254m-165 8h162" stroke="#ce8365" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path class="cracks" d="M80 98 H260 L256 113 H84 Z" fill="url(#soil-cracks)"/>
+          <path class="puddle" d="M88 101 Q106 95 126 101 T165 101 T204 101 T252 101" stroke="#76b8c0" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path class="bean-on-soil" d="M161 85Q178 79 181 87Q179 94 168 94Q156 93 161 85Z" fill="#edc68c" stroke="#3b2b21" stroke-width="2"/>
+        </svg>
+        <figcaption id="stage" aria-live="polite" tabindex="-1">The pot is ready for one bean.</figcaption>
+      </figure>
+      <p id="seed-story" role="status">Place one bean in the pot.</p>
+      <div class="actions">
+        <button type="button" id="plant">Place the bean</button>
+        <button type="button" id="cover" hidden>Cover it with soil</button>
+        <button type="button" id="inspect" hidden>Check the soil</button>
+        <button type="button" id="look" hidden>Open the soil window</button>
+        <button type="button" id="continue-saved" hidden>Return to my saved pot</button>
+      </div>
+      <form id="prediction-form" hidden>
+        <fieldset class="choice-row">
+          <legend id="prediction-title" tabindex="-1">What comes out of the bean first?</legend>
+          <label><input type="radio" name="prediction" value="root" required><span>A root</span></label>
+          <label><input type="radio" name="prediction" value="shoot"><span>A shoot</span></label>
+        </fieldset>
+        <button type="submit">Lock my prediction</button>
+      </form>
+      <div id="care" hidden>
+        <p id="moisture" class="soil-note" tabindex="-1"></p>
+        <div class="actions">
+          <button type="button" class="secondary" id="water" aria-pressed="false">Water</button>
+          <button type="button" class="secondary" id="wait" aria-pressed="false">Wait</button>
+          <button type="button" id="next" disabled>Next day</button>
+        </div>
+      </div>
+      <button type="button" id="transfer" class="thin next" hidden>Try two new problems <span aria-hidden="true">→</span></button>
+      <details id="fresh" hidden><summary>Start a fresh pot</summary><p class="small">This replaces the bean saved in this browser.</p><button type="button" class="secondary" id="reset">Replace the bean</button></details>
+      <p class="small model-note">Days move only when you choose. This is a model, not a growing calendar.</p>
+      <p class="small" id="save-status" role="status">The pot can stay in this browser. Nothing is sent.</p>
+    </section>
+    <section id="apply" aria-labelledby="apply-title" hidden>
+      <h2 id="apply-title" tabindex="-1">Try two new problems</h2>
+      <h3 class="challenge">1. Two pots, same day</h3>
+      <p>These beans are the same age and get the same light. What would you do now?</p>
+      <form id="transfer-form">
+        <fieldset class="choice-row pot-choice">
+          <legend>Pot A</legend>
+          <p class="pot-observation crumbly">The soil looks pale and crumbles when touched.</p>
+          <label><input type="radio" name="crumbly" value="water" required><span>Water</span></label>
+          <label><input type="radio" name="crumbly" value="wait"><span>Wait</span></label>
+        </fieldset>
+        <fieldset class="choice-row pot-choice">
+          <legend>Pot B</legend>
+          <p class="pot-observation damp">The soil feels damp. There is no puddle.</p>
+          <label><input type="radio" name="damp" value="water" required><span>Water</span></label>
+          <label><input type="radio" name="damp" value="wait"><span>Wait</span></label>
+        </fieldset>
+        <fieldset class="choice-row reasons">
+          <legend>Why did you choose those actions?</legend>
+          <label><input type="radio" name="careReason" value="calendar" required><span>Plants of the same age need the same care.</span></label>
+          <label><input type="radio" name="careReason" value="soil"><span>The two pots hold different amounts of water.</span></label>
+          <label><input type="radio" name="careReason" value="size"><span>The pot with the bigger bean needs less water.</span></label>
+        </fieldset>
+        <h3 class="challenge">2. Nothing above the soil</h3>
+        <p>In another pot, a bean was planted a few days ago. Nothing is visible above the soil.</p>
+        <fieldset class="choice-row reasons">
+          <legend>How would you check whether growth has begun?</legend>
+          <label><input type="radio" name="observe" value="surface" required><span>Look for a leaf above the soil.</span></label>
+          <label><input type="radio" name="observe" value="taller"><span>Count how many days have passed.</span></label>
+          <label><input type="radio" name="observe" value="cutaway"><span>Look through the pot’s soil window.</span></label>
+        </fieldset>
+        <fieldset class="choice-row reasons">
+          <legend>Why would that check help?</legend>
+          <label><input type="radio" name="observeReason" value="hiddenGrowth" required><span>Some growth can happen out of sight.</span></label>
+          <label><input type="radio" name="observeReason" value="age"><span>All beans start to grow on the same day.</span></label>
+          <label><input type="radio" name="observeReason" value="surfaceOnly"><span>Growth always shows first above the soil.</span></label>
+        </fieldset>
+        <div class="actions"><button type="submit">Check my answers</button><button type="button" id="back" class="secondary">Back to my bean</button></div>
+      </form>
+      <div class="insight" id="feedback" tabindex="-1" hidden>
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-care"></p><p id="feedback-evidence"></p>
+        <div class="actions"><button type="button" id="retry" hidden>Try those pots again</button><button type="button" class="secondary" id="return">Back to my bean</button></div>
+      </div>
+    </section>
+    <noscript><p>Turn on JavaScript to use this interactive lab.</p></noscript>
+  </main>
+  <footer>Practice lab · No sign-in required.</footer>
+</body>
+</html>

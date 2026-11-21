@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lift the Rock · OpenPath Science</title>
+<link rel="stylesheet" href="./lever.css">
+<script type="module" src="./lever.mjs"></script>
+</head>
+<body>
+<header><a href="../">← Science labs</a><span>ICSE CLASS 5 · SIMPLE MACHINES</span></header>
+<main>
+  <h1>Lift the Rock</h1>
+  <p class="intro">A rock is blocking the path. Try the beam.</p>
+  <section aria-label="Lever playground" class="lab">
+  <svg id="scene" viewBox="0 0 480 252" role="img" aria-label="A rock on a beam. A golden support sits beneath it; the green handle moves down as the rock rises.">
+    <defs>
+      <linearGradient id="sky" x2="10%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#f8db91"/><stop offset="1" stop-color="#fff2c2"/></linearGradient>
+      <linearGradient id="stone" x2="20%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#9daba3"/><stop offset="1" stop-color="#535e59"/></linearGradient>
+      <linearGradient id="soil" x2="10%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#c18758"/><stop offset="1" stop-color="#815035"/></linearGradient>
+      <pattern id="pebbles" width="49" height="25" patternUnits="userSpaceOnUse"><path d="M4 4l6 1m23 14l7 -2m-23 2l2 1" stroke="#ffda9e" opacity=".45" stroke-width="2" stroke-linecap="round"/></pattern>
+    </defs>
+    <path d="M0 0h480v252H0z" fill="url(#sky)"/>
+    <circle cx="390" cy="61" r="29" fill="#f5ad56" opacity=".75"/>
+    <path d="M0 117Q48 65 124 86T255 110Q345 49 480 98V197H0Z" fill="#b2b581"/>
+    <path d="M0 133Q101 94 165 124T322 120Q405 86 480 137V198H0Z" fill="#879767"/>
+    <path d="M0 161Q64 137 115 154T241 158Q377 127 480 157V252H0Z" fill="#adad71"/>
+    <path d="M0 207Q74 197 150 201Q287 198 365 225Q439 239 480 233V252H0Z" fill="url(#soil)"/>
+    <path d="M0 207Q74 197 150 201Q287 198 365 225Q439 239 480 233V252H0Z" fill="url(#pebbles)"/>
+    <g stroke="#5c754b" fill="none" stroke-width="3" stroke-linecap="round"><path d="M20 193l-5 -13m5 13 6 -10m415 11 -5 -12m5 12 8 -15m-117 14 -4 -10m4 10 5 -7"/></g>
+    <path d="M28 206q25 -5 52 -2m246 28 57 7" stroke="#6f503d" stroke-width="3" opacity=".28" fill="none" stroke-linecap="round"/>
+    <ellipse id="rock-shadow" cx="76" cy="202" rx="43" ry="5" fill="#634a3a" opacity=".45"/>
+    <path id="goal" d="M24 148h87" stroke="#223d36" stroke-width="1.5" stroke-dasharray="3 4" opacity=".55"/>
+    <g id="pivot" transform="translate(214 0)">
+      <path d="M-27 202L-5 166Q0 157 5 166L27 202Z" fill="#eab661" stroke="#744d36" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M-12 197L0 170l11 27" fill="none" stroke="#fff1bb" stroke-width="3" opacity=".62"/>
+      <rect class="hotspot" x="-29" y="151" width="58" height="72" rx="8"/>
+    </g>
+    <path id="travel" fill="none" stroke="#427350" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 5"/>
+    <path id="ghost" fill="none" stroke="#503626" stroke-width="2" stroke-dasharray="2 3" visibility="hidden"/>
+    <path id="beam" fill="none" stroke="#8c583c" stroke-width="12" stroke-linecap="round"/>
+    <path id="beam-grain" fill="none" stroke="#d49563" stroke-width="3" stroke-linecap="round"/>
+    <g id="rock">
+      <path d="M40 163L26 151L28 125L42 99L74 88L100 103L118 123L119 149L104 163Z" fill="url(#stone)" stroke="#424d48" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M28 125l29 -12 17 -25 26 15 18 20-27 6-34-16m34 16-9 34" stroke="#62716c" stroke-width="2.5" fill="none"/>
+      <path d="M33 133l12-4m22-27 6-8m22 14 14 14" stroke="#cbd3bd" opacity=".62" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="grip" transform="translate(424 164)">
+      <circle r="16" fill="#356349" stroke="#fff0bf" stroke-width="2"/>
+      <path d="M0 -6V6m-5 -5 5 5 5 -5" stroke="#fff0bf" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle class="hotspot" r="27"/>
+    </g>
+  </svg>
+  <div class="controls">
+    <label for="position">Move the support</label>
+    <input id="position" type="range" min="20" max="60" step="1" value="40">
+    <div class="ends"><span>Near the rock</span><span>Farther away</span></div>
+    <div class="readings" aria-label="Lever comparison">
+      <div class="reading"><span>Push needed</span><span id="effort-label">Medium</span><meter id="effort" min="0" max="36" value="16" aria-label="Push needed"></meter></div>
+      <div class="reading"><span>Hand travel</span><span id="distance-label">Medium</span><meter id="distance" min="0" max="16" value="6" aria-label="Hand travel"></meter></div>
+    </div>
+    <button id="push" type="button">Push the beam ↓</button>
+    <p id="status" aria-live="polite">Push the beam, then try moving the support.</p>
+  </div>
+  </section>
+  <details><summary>Why does it feel easier?</summary><p>The support is the <strong>pivot</strong>. Move it closer to the rock and your side of the beam gets longer. You need less force, but you push farther to lift the same rock the same height.</p><p>This is a first-class lever: the pivot is between the rock and your hand.</p></details>
+</main>
+</body>
+</html>
