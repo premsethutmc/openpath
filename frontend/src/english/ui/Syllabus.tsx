@@ -4,14 +4,17 @@
  */
 import { useState } from "react";
 import { GRAMMAR } from "../logic/grammar-use/grammar-use.ts";
-import { coverage, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
+import { BOARDS, boardOf, coverage, taskLine, type Board, type Coverage, type Outcome, type Syllabus as Doc, type Where } from "../logic/syllabus/syllabus.ts";
 
 const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", guided: "With a grown-up", not: "Not yet" };
 const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use", guided: "Tasks with a grown-up", writing: "Essay studio", first: "First words", passage: "Listen and write a passage", passage_seen: "Read a passage, then write it from dictation", long: "Long reads", written: "Write an answer", kinds: "Poems and everyday texts" };
 
-export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; initial: number; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }) => void; onBack: () => void }) {
+export function SyllabusView({ docs, initial, initialBoard = "icse", onOpen, onBack }: { docs: Doc[]; initial: number; initialBoard?: Board; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }, board: Board) => void; onBack: () => void }) {
   const [cls, setCls] = useState(initial);
-  const doc = docs.find((d) => d.class === cls) ?? docs[0];
+  const boards = BOARDS.filter((b) => docs.some((d) => boardOf(d) === b.id));
+  const [board, setBoard] = useState<Board>(boards.some((b) => b.id === initialBoard) ? initialBoard : (boards[0]?.id ?? "icse"));
+  const ofBoard = docs.filter((d) => boardOf(d) === board);
+  const doc = ofBoard.find((d) => d.class === cls) ?? ofBoard.find((d) => d.class === 5) ?? ofBoard[0];
   const [source, setSource] = useState(false);
   const c = coverage(doc);
   const topicNames = (o: Outcome) => (o.topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t).join(", ");
@@ -21,9 +24,18 @@ export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; i
         ← Back
       </button>
       <p className="eyebrow">School work · {doc.board}</p>
-      {docs.length > 1 && (
+      {boards.length > 1 && (
+        <div className="syllabus-classes" role="group" aria-label="Board">
+          {boards.map((b) => (
+            <button key={b.id} type="button" className={b.id === board ? "chip on" : "chip"} aria-pressed={b.id === board} onClick={() => setBoard(b.id)}>
+              {b.name}
+            </button>
+          ))}
+        </div>
+      )}
+      {ofBoard.length > 1 && (
         <div className="syllabus-classes" role="group" aria-label="Class">
-          {docs.map((d) => (
+          {ofBoard.map((d) => (
             <button key={d.class} type="button" className={d.class === doc.class ? "chip on" : "chip"} aria-pressed={d.class === doc.class} onClick={() => setCls(d.class)}>
               Class {d.class}
             </button>
@@ -48,7 +60,7 @@ export function SyllabusView({ docs, initial, onOpen, onBack }: { docs: Doc[]; i
                 </p>
                 {(o.note || o.topics) && <p className="small">{[o.topics ? `Practised as: ${topicNames(o)}.` : "", o.note ?? ""].filter(Boolean).join(" ")}</p>}
                 {o.where && (
-                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics, doc.class, { syllabus: doc.id, outcome: o.id, text: o.text })}>
+                  <button type="button" className="secondary" aria-label={`Practise ${o.id}: ${GO[o.where]}`} onClick={() => onOpen(o.where!, o.topics, doc.class, { ...taskLine(doc, o), text: o.text }, board)}>
                     {o.where === "guided" || o.where === "writing" ? "Open" : "Practise"}: {GO[o.where]}
                   </button>
                 )}

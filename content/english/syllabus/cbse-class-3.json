@@ -1,0 +1,180 @@
+{
+  "id": "cbse-english-class-3",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 3,
+  "subject": "English",
+  "title": "CBSE English, Class III",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class III list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class III",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Says poems with clear sounds and the right rise and fall.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS4"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Acts out role plays and short skits with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS6"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Gives a view about stories and characters.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS1"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Answers spoken and telephone messages suitably.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class III",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads aloud with clear sounds and pauses.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW2"
+          }
+        },
+        {
+          "id": "R2",
+          "text": "Reads short texts for the main idea, details and order, and draws conclusions.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R3",
+          "text": "Reads poems, posters and charts on classroom walls.",
+          "coverage": "partly",
+          "where": "kinds",
+          "note": "Poems, notices and timetables are read with questions; the classroom's own walls are not."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class III",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes words, phrases and sentences from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "W2",
+          "text": "Writes five or six sentences about own experiences from word or picture clues.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW5"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Uses question marks, full stops and capital letters correctly.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals",
+            "punctuation",
+            "questions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class III",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Makes short sentences with nouns, pronouns, adjectives and prepositions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "pronouns",
+            "prepositions"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Tells the simple past from the simple present.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "past",
+            "agreement"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Knows opposites such as day and night, open and close.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Uses words met in Maths and Environmental Studies.",
+          "coverage": "partly",
+          "where": "words",
+          "note": "New words teaches everyday and school words by level; it is not sorted by school subject."
+        }
+      ]
+    }
+  ]
+}

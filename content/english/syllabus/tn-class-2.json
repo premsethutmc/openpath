@@ -1,0 +1,165 @@
+{
+  "id": "tn-samacheer-english-class-2",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 2,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class II",
+  "source": {
+    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
+    "url": "https://www.tntextbooks.in/",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "accessed": "2026-11-21"
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Says rhymes and poems with actions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS7"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Answers questions on a story heard.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS3",
+          "text": "Asks and answers simple questions about self and others.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS6"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Tells a short story with pictures.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads short texts and answers questions.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Puts pictures of a story in order.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "picture_order"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes words and short sentences from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "W2",
+          "text": "Writes a few sentences about a picture.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-grammar",
+      "name": "Vocabulary and Grammar",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "VG1",
+          "text": "Uses naming words and action words.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech"
+          ]
+        },
+        {
+          "id": "VG2",
+          "text": "Uses he, she, it, they, and am, is and are.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "pronouns",
+            "be_verbs"
+          ]
+        },
+        {
+          "id": "VG3",
+          "text": "Uses in, on and under.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prepositions"
+          ]
+        },
+        {
+          "id": "VG4",
+          "text": "Uses opposites and rhyming words.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms"
+          ],
+          "note": "Opposites are practised; rhyming words are not."
+        },
+        {
+          "id": "VG5",
+          "text": "Starts a sentence with a capital letter and ends it with a full stop.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals"
+          ]
+        }
+      ]
+    }
+  ]
+}

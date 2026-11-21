@@ -1,0 +1,188 @@
+{
+  "id": "cbse-english-class-1",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 1,
+  "subject": "English",
+  "title": "CBSE English, Class I",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class I list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class I",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Says rhymes and poems with actions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS3"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Answers simple questions about a story heard, in any language.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Answers are chosen on screen in English; answering aloud or in a home language is not heard."
+        },
+        {
+          "id": "LS3",
+          "text": "Names the characters of a story, says what happened in order, and asks about it.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW4"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Follows simple spoken instructions.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "First words gives tap-this-then-that instructions by ear; classroom instructions are not in the app."
+        },
+        {
+          "id": "LS5",
+          "text": "Answers greetings and polite words in English.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS6",
+          "text": "Talks about self, a situation or a picture.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class I",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Matches words with pictures and names objects in pictures.",
+          "coverage": "covered",
+          "where": "first"
+        },
+        {
+          "id": "R2",
+          "text": "Knows the letters A to Z and the sounds they make.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "First words says each word aloud with its picture; letter-by-letter sound work is not in the app."
+        },
+        {
+          "id": "R3",
+          "text": "Tells small letters from capital letters.",
+          "coverage": "partly",
+          "where": "grammar",
+          "note": "Capital letters are practised at the start of sentences; matching each small letter to its capital is not."
+        },
+        {
+          "id": "R4",
+          "text": "Sounds out common blends such as br and fr.",
+          "coverage": "partly",
+          "where": "spelling",
+          "note": "The Spelling Bee teaches spelling by sound; blends are not taught on their own."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class I",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Draws or scribbles in answer to poems and stories.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW3"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes simple words such as fan, hen and rat.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "W3",
+          "text": "Writes letters and words clearly by hand.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class I",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses naming words for people and things.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "noun_kinds"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses in, on and under.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prepositions"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses a and an.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles"
+          ]
+        }
+      ]
+    }
+  ]
+}

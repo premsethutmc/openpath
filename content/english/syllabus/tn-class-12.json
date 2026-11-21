@@ -1,0 +1,258 @@
+{
+  "id": "tn-samacheer-english-class-12",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 12,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class XII",
+  "source": {
+    "read": "HSE second-year (Class XII) English: prose, poem, supplementary, vocabulary, grammar and writing, as set out in the question pattern and summarised by exam-guide sites",
+    "url": "https://dge.tn.gov.in/",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. The official syllabus and question pattern could not be read from the build environment; this list comes from secondary summaries of the board's English paper and the class textbook. The textbook's own chapters are named by kind, not reproduced."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "vocabulary",
+      "name": "Vocabulary",
+      "pages": "Part I",
+      "outcomes": [
+        {
+          "id": "V1",
+          "text": "Gives words of the same and opposite meaning.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms",
+            "context_meaning"
+          ]
+        },
+        {
+          "id": "V2",
+          "text": "Uses clipped and blended words, and derived words.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "word_formation",
+            "affixes"
+          ]
+        },
+        {
+          "id": "V3",
+          "text": "Uses words that sound alike, words with two meanings and polite alternatives.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "confusables",
+            "register"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grammar",
+      "name": "Grammar",
+      "pages": "Part II",
+      "outcomes": [
+        {
+          "id": "G1",
+          "text": "Uses modals and semi-modals.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "modals",
+            "modal_perfect"
+          ]
+        },
+        {
+          "id": "G2",
+          "text": "Uses conditional clauses.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "conditionals"
+          ]
+        },
+        {
+          "id": "G3",
+          "text": "Makes the verb agree with its subject.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement"
+          ]
+        },
+        {
+          "id": "G4",
+          "text": "Uses articles, determiners and prepositions.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles",
+            "this_these",
+            "prepositions"
+          ]
+        },
+        {
+          "id": "G5",
+          "text": "Uses tenses and linking words.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "tenses",
+            "linkers"
+          ]
+        },
+        {
+          "id": "G6",
+          "text": "Uses reported speech and the passive voice.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "speech",
+            "passive"
+          ]
+        },
+        {
+          "id": "G7",
+          "text": "Transforms simple, compound and complex sentences.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "compound",
+            "joining",
+            "clause_kinds"
+          ]
+        },
+        {
+          "id": "G8",
+          "text": "Knows sentence patterns: subject, verb, object and the rest.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "transitive",
+            "subject_predicate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literature",
+      "name": "Prose, Poem and Supplementary",
+      "pages": "Part I",
+      "outcomes": [
+        {
+          "id": "L1",
+          "text": "Reads the prose lessons and answers questions on them.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        },
+        {
+          "id": "L2",
+          "text": "Explains figures of speech in the poems.",
+          "coverage": "partly",
+          "where": "kinds",
+          "note": "Poems and everyday texts asks about purpose, point of view and figurative language on OpenPath's own poems; the textbook's poems are not in the app."
+        },
+        {
+          "id": "L3",
+          "text": "Reads the supplementary stories and writes about them.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Part III",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes a notice and an email.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W13"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes a report and an article.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W12"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes formal letters and a resume.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W14"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Makes notes and writes a summary of a passage.",
+          "coverage": "not",
+          "note": "Note-making and summary writing are not yet in the app."
+        },
+        {
+          "id": "W5",
+          "text": "Writes a dialogue and describes a process.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "listening-speaking",
+      "name": "Listening, Speaking and Reading",
+      "pages": "Internal",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens to a passage and answers questions.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Speaks on a topic and takes part in a discussion.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS4"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Reads an unseen passage and answers questions.",
+          "coverage": "covered",
+          "where": "reading"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "id": "cbse-english-class-8",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 8,
+  "subject": "English",
+  "title": "CBSE English, Class VIII",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class VIII list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class VIII",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Follows instructions and announcements in school and public places.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Questions on passages heard are practised; real announcements are not."
+        },
+        {
+          "id": "LS2",
+          "text": "Introduces guests and interviews people about their work.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Uses polite phrases to make requests and to disagree.",
+          "coverage": "partly",
+          "where": "grammar",
+          "topics": [
+            "register"
+          ],
+          "note": "Formal and polite wording is practised in sentences; saying it aloud is not heard."
+        },
+        {
+          "id": "LS4",
+          "text": "Gives a short prepared speech, for example in the school assembly.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS6"
+          }
+        },
+        {
+          "id": "LS5",
+          "text": "Narrates real and imagined stories and experiences.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "LS4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class VIII",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads for details, characters, the main idea and order, and relates ideas to life.",
+          "coverage": "covered",
+          "where": "long"
+        },
+        {
+          "id": "R2",
+          "text": "Explains quotations, sayings and proverbs.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "proverbs",
+            "idioms"
+          ]
+        },
+        {
+          "id": "R3",
+          "text": "Reads photographs, sketches, tables, charts and maps, and uses them in writing.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-6",
+            "outcome": "LS12"
+          }
+        },
+        {
+          "id": "R4",
+          "text": "Works out the meaning of new words from context.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "context_meaning"
+          ]
+        },
+        {
+          "id": "R5",
+          "text": "Uses a dictionary, thesaurus and encyclopaedia for meaning in context.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-6",
+            "outcome": "GV7"
+          }
+        },
+        {
+          "id": "R6",
+          "text": "Reads for pleasure and writes a book review.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "The suggested books are published works and are not in the app. The learner reads one and tells a grown-up about it; the app's own stories are in Reading.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "R7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class VIII",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes from dictation with correct spelling and punctuation.",
+          "coverage": "covered",
+          "where": "passage"
+        },
+        {
+          "id": "W2",
+          "text": "Drafts, revises, edits and finishes coherent paragraphs.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W17"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes emails, notices, formal letters, diary entries and reports.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W14"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Writes descriptions, narratives and life stories.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W11"
+          }
+        },
+        {
+          "id": "W5",
+          "text": "Writes a piece after gathering information from print and online sources.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W7"
+          }
+        },
+        {
+          "id": "W6",
+          "text": "Turns a story into a skit, and a dialogue into a story.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class VIII",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses active and passive voice, reported speech and tenses in context.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "passive",
+            "speech",
+            "tense_shift"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses clauses and comparing adjectives accurately.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "clauses",
+            "relative",
+            "comparison"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Notices punctuation in texts and uses it when editing own writing.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "punctuation",
+            "dialogue"
+          ]
+        }
+      ]
+    }
+  ]
+}

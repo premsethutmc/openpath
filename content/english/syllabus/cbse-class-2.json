@@ -1,0 +1,179 @@
+{
+  "id": "cbse-english-class-2",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 2,
+  "subject": "English",
+  "title": "CBSE English, Class II",
+  "source": {
+    "read": "NCERT, Learning Outcomes at the Elementary Stage (2017), English section, read through a copy hosted by the Indian Education Repository (CPR India); CBSE circular 05/2019 asks schools to use it; Class II list",
+    "url": "https://cprindia.org/wp-content/uploads/2023/04/Learning-Outcomes-at-the-Elementary-Stage-2017.pdf",
+    "accessed": "2026-11-21",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. A copy of the NCERT document, read through a text summary of the PDF, not the PDF itself. The class books have since changed (Mridang for Classes 1-2, Santoor for 3-5, Poorvi for 6-8, under NCF-SE 2023); their chapters are not listed here and a school may order or extend these outcomes."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Class II",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Sings songs and rhymes with actions.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS7"
+          }
+        },
+        {
+          "id": "LS2",
+          "text": "Answers questions on stories and poems heard.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS3",
+          "text": "Gives a view and asks questions about characters and the story.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-2",
+            "outcome": "LS6"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Answers greetings and polite words in English.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS5",
+          "text": "Listens to short texts read aloud, such as a children's news column.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS6",
+          "text": "Follows instructions, for example to draw a picture.",
+          "coverage": "partly",
+          "where": "first",
+          "note": "Tap-this-then-that instructions are practised in First words; drawing from spoken instructions is not."
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Class II",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Names the characters and the order of events in a story.",
+          "coverage": "partly",
+          "where": "grammar",
+          "note": "Putting pictures in story order is practised; naming the characters of a whole story is not.",
+          "topics": [
+            "picture_order"
+          ]
+        },
+        {
+          "id": "R2",
+          "text": "Reads short texts and answers questions on them.",
+          "coverage": "covered",
+          "where": "reading"
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Class II",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Draws or writes a few words or sentences in answer to poems and stories.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-1",
+            "outcome": "RW8"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes short sentences with spaces between the words.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "W3",
+          "text": "Starts sentences with a capital letter and ends them with a full stop.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grammar-vocabulary",
+      "name": "Grammar and Vocabulary",
+      "pages": "Class II",
+      "outcomes": [
+        {
+          "id": "GV1",
+          "text": "Uses describing words for size, shape, colour, weight and feel.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "adjective_kinds"
+          ]
+        },
+        {
+          "id": "GV2",
+          "text": "Uses he, she and it, and this, that, these and those.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "pronouns",
+            "this_these"
+          ]
+        },
+        {
+          "id": "GV3",
+          "text": "Uses position words such as before and between.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "prepositions"
+          ]
+        },
+        {
+          "id": "GV4",
+          "text": "Uses one and many.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "plurals"
+          ]
+        }
+      ]
+    }
+  ]
+}

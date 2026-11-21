@@ -153,8 +153,8 @@ test("Grammar in use: fix and build eight sentences, see each rule, find the res
 
 test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app, and practice starts on a line's topics", async () => {
   const { context, page, errors, foreign, fits } = await start("Syllabus");
-  await page.getByRole("heading", { name: "CISCE (ICSE) English by class" }).waitFor();
-  await page.getByText("Classes 1, 2, 3, 4, 5, 6, 7 and 8: 253 lines").waitFor();
+  await page.getByRole("heading", { name: "School English by board and class" }).waitFor();
+  await page.getByText("Classes ICSE 1 to 8, CBSE 1 to 12, Tamil Nadu 1 to 12: 633 lines").waitFor();
   await page.getByRole("button", { name: "Open the class syllabus" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   await page.getByText("21 in the app · 0 partly · 12 with a grown-up · 0 not yet (of 33)").waitFor();
@@ -349,6 +349,40 @@ test("ICSE syllabus, Classes 1 to 8: every line shown with its place in the app,
   await page.getByRole("heading", { name: "Class 6 English" }).waitFor();
   await page.getByRole("button", { name: /Practise R2:/ }).click();
   await page.getByRole("heading", { name: "Read, think, answer" }).waitFor();
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
+  await context.close();
+});
+
+test("CBSE and Tamil Nadu syllabuses, Classes 1 to 12: pick the board and class, practise a line, borrow tasks with a grown-up", async () => {
+  const { context, page, errors, foreign, fits } = await start("Boards");
+  await page.getByRole("button", { name: "Open the class syllabus" }).click();
+  await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
+  await page.getByRole("button", { name: "Tamil Nadu", exact: true }).click();
+  await page.getByRole("button", { name: "Class 12", exact: true }).waitFor();
+  await page.getByRole("button", { name: "Class 10", exact: true }).click();
+  await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
+  await page.getByText("School work · Tamil Nadu State Board (Samacheer Kalvi)").waitFor();
+  await page.getByText("13 in the app · 4 partly · 4 with a grown-up · 2 not yet (of 23)").waitFor();
+  assert.equal(await page.locator('[data-coverage="not"] button').count(), 0);
+  await fits();
+  // a line on turning verbs into nouns opens its own grammar topic
+  await page.getByRole("button", { name: /Practise G7:/ }).click();
+  await page.getByText("Topics: Verbs into nouns").waitFor();
+  await page.getByRole("button", { name: "← Back" }).click();
+  // the board and class are kept on coming back
+  await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
+  await page.getByText("13 in the app · 4 partly · 4 with a grown-up · 2 not yet (of 23)").waitFor();
+  await page.getByRole("button", { name: "CBSE", exact: true }).click();
+  await page.getByRole("button", { name: "Class 9", exact: true }).click();
+  await page.getByText("7 in the app · 4 partly · 6 with a grown-up · 0 not yet (of 17)").waitFor();
+  await fits();
+  // a writing line borrows the tasks written for the ICSE line that asks the same
+  await page.getByRole("button", { name: /Practise W2:/ }).click();
+  await page.getByText("Writing, with a grown-up").waitFor();
+  await page.getByRole("heading", { name: "Writes a letter to the editor and a formal email giving views." }).waitFor();
+  assert.ok((await page.locator("[data-task]").count()) >= 2);
+  await fits();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

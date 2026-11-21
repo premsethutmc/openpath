@@ -1,0 +1,178 @@
+{
+  "id": "tn-samacheer-english-class-3",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 3,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class III",
+  "source": {
+    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
+    "url": "https://www.tntextbooks.in/",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "accessed": "2026-11-21"
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens to a story or passage and answers questions.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Says poems with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS4"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Describes a person, place or picture.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS4",
+          "text": "Takes part in role play.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads a lesson and answers questions on it.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Reads aloud with clear sounds and pauses.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes sentences from dictation.",
+          "coverage": "covered",
+          "where": "listening"
+        },
+        {
+          "id": "W2",
+          "text": "Writes a short paragraph from picture or word clues.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "RW3"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Uses capital letters, full stops and question marks.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "capitals",
+            "questions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-grammar",
+      "name": "Vocabulary and Grammar",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "VG1",
+          "text": "Uses nouns, pronouns, verbs and describing words.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "parts_of_speech",
+            "pronouns"
+          ]
+        },
+        {
+          "id": "VG2",
+          "text": "Uses the simple present and the simple past.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement",
+            "past"
+          ]
+        },
+        {
+          "id": "VG3",
+          "text": "Uses a, an and the, and one and many.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "articles",
+            "plurals"
+          ]
+        },
+        {
+          "id": "VG4",
+          "text": "Uses opposites and words of the same meaning.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "synonyms_antonyms"
+          ]
+        },
+        {
+          "id": "VG5",
+          "text": "Puts words in alphabetical order.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "alphabetical"
+          ]
+        }
+      ]
+    }
+  ]
+}

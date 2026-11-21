@@ -2005,6 +2005,151 @@
           "There was a lot of rain."
         ]
       }
+    },
+    {
+      "topic": "modals",
+      "rule": "Can, may, must, should and might go before a verb in its plain form. Can is ability, may is permission, must is a rule, should is advice, might is a chance.",
+      "examples": [
+        "You must wear a seat belt.",
+        "She can speak three languages."
+      ],
+      "try": {
+        "question": "Which word gives advice?",
+        "right": "should",
+        "wrong": [
+          "can",
+          "might"
+        ]
+      },
+      "mistake": {
+        "wrong": "He can swims.",
+        "right": "He can swim.",
+        "why": "After a modal the verb has no -s or -ed."
+      },
+      "try2": {
+        "question": "Which asks politely for permission?",
+        "right": "May I come in?",
+        "wrong": [
+          "Must I come in?",
+          "Should I come in?"
+        ]
+      }
+    },
+    {
+      "topic": "question_tags",
+      "rule": "A question tag is a short question at the end. A positive sentence takes a negative tag; a negative sentence takes a positive tag.",
+      "examples": [
+        "It is hot, isn't it?",
+        "You can't swim, can you?"
+      ],
+      "try": {
+        "question": "She is your sister, ___?",
+        "right": "isn't she",
+        "wrong": [
+          "is she",
+          "doesn't she"
+        ]
+      },
+      "mistake": {
+        "wrong": "They play well, isn't it?",
+        "right": "They play well, don't they?",
+        "why": "The tag uses the sentence's own helping verb and pronoun."
+      },
+      "try2": {
+        "question": "You didn't eat, ___?",
+        "right": "did you",
+        "wrong": [
+          "didn't you",
+          "do you"
+        ]
+      }
+    },
+    {
+      "topic": "word_formation",
+      "rule": "New words are made by joining two words (compound), joining parts of two words (blend), shortening a word (clipped), or using first letters (abbreviation).",
+      "examples": [
+        "foot + ball = football",
+        "motor + hotel = motel"
+      ],
+      "try": {
+        "question": "What is the clipped form of 'advertisement'?",
+        "right": "ad",
+        "wrong": [
+          "vert",
+          "advert-ise"
+        ]
+      },
+      "mistake": {
+        "wrong": "sun + glasses = glassesun",
+        "right": "sun + glasses = sunglasses",
+        "why": "A compound keeps both words whole, in order."
+      },
+      "try2": {
+        "question": "What does 'UN' stand for?",
+        "right": "United Nations",
+        "wrong": [
+          "Union of Nations",
+          "United Neighbours"
+        ]
+      }
+    },
+    {
+      "topic": "syllables",
+      "rule": "A syllable is a beat in a word, with one vowel sound. Clap the word: each clap is a syllable.",
+      "examples": [
+        "tiger: ti-ger (2)",
+        "banana: ba-na-na (3)"
+      ],
+      "try": {
+        "question": "How many syllables in 'pencil'?",
+        "right": "2",
+        "wrong": [
+          "1",
+          "3"
+        ]
+      },
+      "mistake": {
+        "wrong": "rabbit: ra-bbit",
+        "right": "rabbit: rab-bit",
+        "why": "Between double letters the word splits."
+      },
+      "try2": {
+        "question": "How is 'garden' split?",
+        "right": "gar-den",
+        "wrong": [
+          "ga-rden",
+          "gard-en"
+        ]
+      }
+    },
+    {
+      "topic": "nominalisation",
+      "rule": "A verb or adjective can be turned into a noun: decide becomes decision, kind becomes kindness. After the, his or her, use the noun.",
+      "examples": [
+        "He arrived late. → His late arrival …",
+        "She is brave. → Her bravery …"
+      ],
+      "try": {
+        "question": "What is the noun form of 'invent'?",
+        "right": "invention",
+        "wrong": [
+          "inventive",
+          "invented"
+        ]
+      },
+      "mistake": {
+        "wrong": "The discover of gold was exciting.",
+        "right": "The discovery of gold was exciting.",
+        "why": "After 'the' a noun is needed, not a verb."
+      },
+      "try2": {
+        "question": "What is the noun form of 'free'?",
+        "right": "freedom",
+        "wrong": [
+          "freely",
+          "freed"
+        ]
+      }
     }
   ]
 }

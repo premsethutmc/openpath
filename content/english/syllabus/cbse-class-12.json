@@ -1,0 +1,148 @@
+{
+  "id": "cbse-english-class-12",
+  "version": "1.0.0",
+  "board": "CBSE (NCERT)",
+  "class": 12,
+  "subject": "English",
+  "title": "CBSE English, Class XII",
+  "source": {
+    "read": "CBSE curriculum 2025-26, English Core (301), Classes XI and XII: the Class XII course",
+    "url": "https://www.cbseacademic.nic.in/web_material/CurriculumMain26/SrSec/English_core_SrSec_2025-26.pdf",
+    "accessed": "2026-11-21",
+    "official": true,
+    "note": "Read through a text summary of the PDF, not the PDF itself. The board's prescribed chapters are named, not reproduced; the course is examined mainly through the textbooks, which are not in the app."
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Section A",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads a literary or factual passage and a case-based passage with data.",
+          "coverage": "partly",
+          "where": "reading",
+          "note": "Reading passages have questions; passages built on tables and charts are not yet in the app."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Creative Writing",
+      "pages": "Section B",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes a notice of about fifty words.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W13"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes a formal or informal invitation and a reply.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-7",
+            "outcome": "W1"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Writes letters: job applications with a resume, and letters to the editor.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W14"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Writes an article or a report.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "literature",
+      "name": "Literature",
+      "pages": "Section C",
+      "outcomes": [
+        {
+          "id": "L1",
+          "text": "Reads the prose of Flamingo and answers questions on extracts and the whole.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        },
+        {
+          "id": "L2",
+          "text": "Reads the poems of Flamingo and explains their devices.",
+          "coverage": "partly",
+          "where": "kinds",
+          "note": "Poems and everyday texts asks about purpose, point of view and figurative language on OpenPath's own poems; the textbook's poems are not in the app."
+        },
+        {
+          "id": "L3",
+          "text": "Reads the stories of Vistas and writes about character and theme.",
+          "coverage": "partly",
+          "where": "long",
+          "note": "Long reads practise questions on theme, character and plot on OpenPath's own stories; the board's own textbook chapters are not in the app."
+        }
+      ]
+    },
+    {
+      "id": "listening-speaking",
+      "name": "Listening, Speaking and Project",
+      "pages": "Internal",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Follows talks, news and business information and answers questions.",
+          "coverage": "partly",
+          "where": "listen",
+          "note": "Questions on passages heard are practised; notes from a long talk are not."
+        },
+        {
+          "id": "LS2",
+          "text": "Speaks in discussions, interviews and presentations.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "LS4"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Completes a research project of about 900 words and talks about it.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-8",
+            "outcome": "W5"
+          }
+        }
+      ]
+    }
+  ]
+}

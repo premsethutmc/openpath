@@ -43,7 +43,7 @@ import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
 import { FirstWords } from "./FirstWords.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
-import { DEFAULT_CLASS, SYLLABUSES } from "../logic/syllabus/syllabus.ts";
+import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
 import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
@@ -141,6 +141,7 @@ export function App() {
   const [kindsRead, setKindsRead] = useState<{ from?: "syllabus" } | null>(null);
   const [written, setWritten] = useState<{ from?: "syllabus" } | null>(null);
   const [syllabusClass, setSyllabusClass] = useState(DEFAULT_CLASS);
+  const [syllabusBoard, setSyllabusBoard] = useState<Board>(DEFAULT_BOARD);
   const [inParent, setInParent] = useState(false);
   const [inReading, setInReading] = useState(false);
   const [inJourney, setInJourney] = useState(false);
@@ -586,9 +587,11 @@ export function App() {
         <SyllabusView
           docs={SYLLABUSES}
           initial={syllabusClass}
+          initialBoard={syllabusBoard}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
-          onOpen={(where, topics, cls, line) => {
+          onOpen={(where, topics, cls, line, board) => {
             setSyllabusClass(cls);
+            setSyllabusBoard(board);
             // writing is practised in the essay studio, a separate part of the app
             if (where === "writing") return void location.assign("?experience=essay-live");
             if (where === "passage" || where === "passage_seen") return (setInSyllabus(false), setDictPassage(where === "passage" ? "unseen" : "seen"), setInListenWrite(true), scrollTo(0, 0));

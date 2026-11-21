@@ -1,0 +1,182 @@
+{
+  "id": "tn-samacheer-english-class-5",
+  "version": "1.0.0",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "class": 5,
+  "subject": "English",
+  "title": "Tamil Nadu State Board English, Class V",
+  "source": {
+    "read": "Tamil Nadu State Board (Samacheer Kalvi) English textbooks for the class, term by term, read through third-party copies and summaries of their unit pages",
+    "url": "https://www.tntextbooks.in/",
+    "official": false,
+    "note": "UNOFFICIAL SOURCE. Tamil Nadu publishes English as textbooks rather than as a line-by-line syllabus; this list is OpenPath's reading of what the units teach, gathered from summaries of the books. It is not checked against every term book.",
+    "accessed": "2026-11-21"
+  },
+  "licence": "Strand names as printed (facts). Every outcome is written by OpenPath in its own words; no curriculum or textbook text is reproduced.",
+  "review": "OpenPath curriculum inventory (AI-assisted research from secondary sources; not an educator review)",
+  "strands": [
+    {
+      "id": "listening-speaking",
+      "name": "Listening and Speaking",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "LS1",
+          "text": "Listens to rhymes, songs and stories and answers questions.",
+          "coverage": "covered",
+          "where": "listen"
+        },
+        {
+          "id": "LS2",
+          "text": "Talks freely about everyday things with classmates.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "LS2"
+          }
+        },
+        {
+          "id": "LS3",
+          "text": "Says poems with expression.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done aloud with a grown-up, who ticks what they heard. The app cannot hear or mark speaking.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-3",
+            "outcome": "LS4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "R1",
+          "text": "Reads stories and lessons and answers questions.",
+          "coverage": "covered",
+          "where": "reading"
+        },
+        {
+          "id": "R2",
+          "text": "Reads longer stories for character and plot.",
+          "coverage": "covered",
+          "where": "long"
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "W1",
+          "text": "Writes short poems, projects and stories.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "RW8"
+          }
+        },
+        {
+          "id": "W2",
+          "text": "Writes an informal letter.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-4",
+            "outcome": "RW12"
+          }
+        },
+        {
+          "id": "W3",
+          "text": "Fills in a form with own details.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Written here or on paper to a task set for this class. The learner checks it against a short list and a grown-up ticks what they see. The app does not keep or mark the writing; the essay studio gives a closer analysis where an evaluator is connected.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-6",
+            "outcome": "W13"
+          }
+        },
+        {
+          "id": "W4",
+          "text": "Makes a group chart, for example on pollution.",
+          "coverage": "guided",
+          "where": "guided",
+          "note": "Done with a grown-up, away from the app, who ticks what they saw.",
+          "tasks": {
+            "syllabus": "icse-cisce-english-class-5",
+            "outcome": "RW6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-grammar",
+      "name": "Vocabulary and Grammar",
+      "pages": "Units",
+      "outcomes": [
+        {
+          "id": "VG1",
+          "text": "Uses collective nouns, plurals, gender and possessives.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "collective_nouns",
+            "plurals",
+            "possessives"
+          ]
+        },
+        {
+          "id": "VG2",
+          "text": "Makes the verb agree with its subject.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "agreement"
+          ]
+        },
+        {
+          "id": "VG3",
+          "text": "Uses the simple present, past and future, and the present continuous.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "past",
+            "future",
+            "continuous"
+          ]
+        },
+        {
+          "id": "VG4",
+          "text": "Uses compound words, words that sound alike, and similes.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "word_formation",
+            "confusables",
+            "similes"
+          ]
+        },
+        {
+          "id": "VG5",
+          "text": "Uses present and past forms of verbs.",
+          "coverage": "covered",
+          "where": "grammar",
+          "topics": [
+            "irregular_verbs"
+          ]
+        }
+      ]
+    }
+  ]
+}
