@@ -5,6 +5,7 @@
  */
 import { longSummary } from "../logic/reading/long-read.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
+import { searchGrammar } from "../logic/grammar-use/search.ts";
 import { useState } from "react";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
@@ -70,6 +71,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             onLevelCheck={onLevelCheck}
             onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
+          <GrammarSearch onPractise={(topic) => onGrammarUse([topic])} />
           {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>{guided ? "More to practise" : "Or choose an activity"}</span>
@@ -378,6 +380,37 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
       <button type="button" className="secondary" onClick={onOpen}>
         {s.passages ? "Hear another passage" : "Try Listen and answer"}
       </button>
+    </section>
+  );
+}
+
+/** Look up a grammar topic by a word or two, and practise it straight away. */
+function GrammarSearch({ onPractise }: { onPractise: (topic: string) => void }) {
+  const [q, setQ] = useState("");
+  const hits = searchGrammar(q);
+  return (
+    <section className="grammar-search" aria-labelledby="grammar-search-title">
+      <label id="grammar-search-title" htmlFor="grammar-search" className="grammar-search-label">
+        <span aria-hidden="true">🔎 </span>Look up grammar
+      </label>
+      <input id="grammar-search" type="search" value={q} autoComplete="off" placeholder="has, apostrophe, their or there…" onChange={(e) => setQ(e.target.value)} />
+      {q.trim().length >= 2 && (
+        <ul className="grammar-hits" aria-label="Grammar topics found">
+          {hits.length ? (
+            hits.map((h) => (
+              <li key={h.id} data-topic={h.id}>
+                <b>{h.name}</b>
+                <span className="small">{h.rule}</span>
+                <button type="button" className="secondary" onClick={() => onPractise(h.id)}>
+                  Practise
+                </button>
+              </li>
+            ))
+          ) : (
+            <li className="small">No grammar topic found. Try another word, such as "past" or "comma".</li>
+          )}
+        </ul>
+      )}
     </section>
   );
 }

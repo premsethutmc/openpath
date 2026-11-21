@@ -56,3 +56,18 @@ test shows the card and passes it before every grammar sitting.
 56 more sentences: level 3 (apostrophes, verbs and joining) 72 → 95 and level 7 (advanced grammar) 52 → 85. Levels
 now hold 82 to 106 sentences each (1: 94, 2: 89, 3: 95, 4: 94, 5: 82, 6: 106, 7: 85), so a learner who stays at
 level 7 has about eleven sittings of new sentences before anything repeats.
+
+## Look up grammar, and write your own (21 November 2026)
+
+**Look up grammar (Home).** A search box under the level panel finds a grammar topic by its name, an everyday
+name ("has", "full stop", "speech marks") or a word in its rule or examples (`logic/grammar-use/search.ts`). Every
+word typed must match; names rank above rules. Each hit shows the rule in one line and a Practise button, which
+opens a sitting on that topic.
+
+**Write your own (end of a sitting).** For the topic just practised (missed topics first), the child writes one
+sentence of their own (`content/english/grammar/write-own.json`, 26 prompts; `logic/grammar-use/write-own.ts`).
+The check is fixed and on the device: the sentence must show the rule (a pattern per prompt), start with a
+capital, end with a mark and be long enough; the usual writing slips are pointed out. Two tries, then the example
+is shown. Only right or not and the number of tries are kept (record type `own`); the sentence itself is never
+stored or sent anywhere. Editing clears the last check. Tests: GS-1, WO-1..3, CS-2 (screened), e2e
+`english-gaps` "Look up grammar…".

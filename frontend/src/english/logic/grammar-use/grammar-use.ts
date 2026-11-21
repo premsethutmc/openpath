@@ -199,6 +199,8 @@ export const try2Choices = (c: LearnCard): string[] => hashOrder([c.try2.right, 
 export type GrammarRecord =
   | { type: "start"; sitting: string; level: number; scale?: number; topics?: string[] }
   | { type: "learn"; sitting: string; topic: string; tried: boolean; again?: boolean }
+  /** Write your own (write-own.ts): a sentence of the learner's own using the topic's rule. Never the sentence. */
+  | { type: "own"; sitting: string; topic: string; correct: boolean; tries: number }
   | { type: "answer"; sitting: string; id: string; level: number; scale?: number; topic: string; correct: boolean; given: string }
   | { type: "end"; sitting: string; level: number; scale?: number; asked: number; right: number; topics?: string[] };
 type Answer = Extract<GrammarRecord, { type: "answer" }>;
@@ -295,7 +297,7 @@ export interface GrammarView {
   spot: { words: string[]; ask: Ask } | null;
   choose: { sentence: string; question: string; options: string[] } | null;
   feedback: { correct: boolean; given: string; right: string; rule: string; wrongWord: string | null } | null;
-  done: { asked: number; right: number; weak: string[]; nextLevel: number } | null;
+  done: { asked: number; right: number; weak: string[]; nextLevel: number; topics: string[]; sitting: string } | null;
   /** learn: the card for a topic met for the first time; `tried` once its question is answered. */
   learn?: { rule: string; examples: string[]; mistake: LearnCard["mistake"]; question: string; options: string[]; tried: { chosen: number; right: boolean; answer: number } | null; second: { question: string; options: string[]; answer: number } } | null;
 }
@@ -445,7 +447,8 @@ export class GrammarSitting {
     }
     if (!it) {
       const name = (id: string) => this.content.topics.find((t) => t.id === id)?.name ?? id;
-      return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level) } };
+      const practised = [...new Set([...this.answers.filter((a) => !a.correct), ...this.answers.filter((a) => a.correct)].map((a) => a.topic))];
+      return { ...base, phase: "done", done: { asked: this.answers.length, right: this.answers.filter((a) => a.correct).length, weak: [...new Set(this.answers.filter((a) => !a.correct).map((a) => name(a.topic)))], nextLevel: levelFor(this.content, [...this.history, this.endRecord()], this.level), topics: practised, sitting: this.sitting } };
     }
     if (it.kind === "choose") return { ...base, phase: "ask", choose: { sentence: it.sentence, question: it.question!, options: choices(it) } };
     if (it.kind === "spot") return { ...base, phase: "ask", spot: { words: spotWords(it), ask: it.ask! } };

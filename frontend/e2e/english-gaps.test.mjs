@@ -141,3 +141,55 @@ test("Write an answer: read a passage, a wrong answer, a hint, a second try, the
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("Look up grammar from Home, practise the topic found, then write a sentence of your own with the rule", async () => {
+  const { context, page, errors, fits } = await start("Searcher", false);
+  // search from the home screen
+  await page.locator("#grammar-search").fill("has");
+  const hit = page.locator('.grammar-hits li[data-topic="have_has"]');
+  await hit.waitFor();
+  await page.locator("#grammar-search").fill("xyzzy");
+  await page.getByText("No grammar topic found.").waitFor();
+  await page.locator("#grammar-search").fill("has");
+  await shot(page, "5-search");
+  await fits();
+  await hit.getByRole("button", { name: "Practise" }).click();
+  await page.getByText(/^Topics: /).waitFor();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  await page.locator('main.grammar[data-phase="learn"]').waitFor();
+  assert.match(await page.locator(".grammar-learn h2").innerText(), /have|has/i);
+  // answer the sitting any way (here, quickly and not always right), until it ends
+  for (let g = 0; g < 60 && !(await page.locator('main.grammar[data-phase="done"]').count()); g++) {
+    const phase = await page.locator("main.grammar").getAttribute("data-phase");
+    if (phase === "learn") await page.getByRole("button", { name: /^(Skip to practice|Now practise)$/ }).click();
+    else if (phase === "feedback") await page.getByRole("button", { name: /^(Next sentence|Finish)$/ }).click();
+    else if (phase === "ask") {
+      const kind = await page.locator("main.grammar").getAttribute("data-kind");
+      if (kind === "choose") await page.locator(".grammar-choice").first().click();
+      else if (kind === "build") {
+        for (let n = await page.locator(".grammar-pool .grammar-tile").count(); n > 0; n--) await page.locator(".grammar-pool .grammar-tile").first().click();
+        await page.getByRole("button", { name: "Check" }).click();
+      } else {
+        await page.locator(".grammar-word").first().click();
+        if (kind === "fix") await page.locator("#grammar-box").fill("has");
+        await page.getByRole("button", { name: "Check" }).click();
+      }
+    }
+    await page.waitForTimeout(60);
+  }
+  await page.locator('main.grammar[data-phase="done"]').waitFor();
+  // write your own: first without the rule, then with it
+  const own = page.locator('.write-own[data-topic="have_has"]');
+  await own.waitFor();
+  await page.locator("#write-own-text").fill("my dog is big");
+  await page.getByRole("button", { name: "Check my sentence" }).click();
+  await own.getByText("Start with a capital letter.").waitFor();
+  await page.locator("#write-own-text").fill("My dog has a long tail.");
+  // editing clears the last check: check again with the same button
+  await page.getByRole("button", { name: "Check my sentence" }).click();
+  await own.getByText("✓ Well done: your sentence uses the rule").waitFor();
+  await shot(page, "6-write-own");
+  await fits();
+  assert.deepEqual(errors, []);
+  await context.close();
+});
