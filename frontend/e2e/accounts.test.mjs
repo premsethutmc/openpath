@@ -266,6 +266,7 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   await page.getByRole("button", { name: "Back to today" }).click();
   // … progress is displayed
   await page.getByRole("button", { name: "Journey", exact: true }).click();
+  await unfold(page, /^Skill by skill/);
   await page.locator(".path li").first().waitFor();
   await shot(page, "journey");
   await fits(page);
