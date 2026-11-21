@@ -3220,3 +3220,11 @@ h3.sub {
   padding: 10px 12px;
   margin: 8px 0;
 }
+
+/* sounds@1 */
+.sound-groups { list-style: none; padding: 0; display: grid; gap: 10px; }
+.sound-groups li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sound-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice.big { font-size: 1.4rem; padding: 18px 10px; }
+.sound-choices .choice[data-state="right"] { background: #e3f6ea; border-color: #2f9e5b; color: #1d6b3c; opacity: 1; }
+.sound-choices .choice[data-state="wrong"] { background: #fdecea; border-color: #d2453b; color: #9b2c24; opacity: 1; }

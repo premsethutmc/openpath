@@ -1,0 +1,190 @@
+{
+ "id": "english.sounds.pairs",
+ "version": 1,
+ "status": "candidate",
+ "review": "Written for OpenPath: English sounds that Tamil speakers often mix up. Not yet reviewed by a teacher.",
+ "groups": [
+  {
+   "id": "v_w",
+   "name": "v and w",
+   "tip": "For v, rest your top teeth on your bottom lip and buzz. For w, round your lips like a kiss; no teeth touch.",
+   "pairs": [
+    [
+     "vest",
+     "west"
+    ],
+    [
+     "vet",
+     "wet"
+    ],
+    [
+     "vine",
+     "wine"
+    ],
+    [
+     "veil",
+     "whale"
+    ],
+    [
+     "vent",
+     "went"
+    ],
+    [
+     "verse",
+     "worse"
+    ]
+   ]
+  },
+  {
+   "id": "f_p",
+   "name": "f and p",
+   "tip": "For f, rest your top teeth on your bottom lip and blow. For p, close both lips, then pop them open.",
+   "pairs": [
+    [
+     "fan",
+     "pan"
+    ],
+    [
+     "fill",
+     "pill"
+    ],
+    [
+     "fine",
+     "pine"
+    ],
+    [
+     "feel",
+     "peel"
+    ],
+    [
+     "fair",
+     "pair"
+    ],
+    [
+     "fork",
+     "pork"
+    ]
+   ]
+  },
+  {
+   "id": "z_j",
+   "name": "z and j",
+   "tip": "For z, keep your teeth close and buzz like a bee: zzz. For j, start with your tongue up, as in jam.",
+   "pairs": [
+    [
+     "zest",
+     "jest"
+    ],
+    [
+     "zinc",
+     "jinx"
+    ],
+    [
+     "Zane",
+     "Jane"
+    ],
+    [
+     "zone",
+     "Joan"
+    ],
+    [
+     "Zack",
+     "Jack"
+    ]
+   ]
+  },
+  {
+   "id": "s_sh",
+   "name": "s and sh",
+   "tip": "For s, smile a little and hiss: sss. For sh, push your lips forward, as when you ask someone to be quiet.",
+   "pairs": [
+    [
+     "sip",
+     "ship"
+    ],
+    [
+     "sell",
+     "shell"
+    ],
+    [
+     "sea",
+     "she"
+    ],
+    [
+     "sort",
+     "short"
+    ],
+    [
+     "save",
+     "shave"
+    ],
+    [
+     "sock",
+     "shock"
+    ]
+   ]
+  },
+  {
+   "id": "th_t",
+   "name": "th and t",
+   "tip": "For th, put the tip of your tongue between your teeth and blow gently. For t, your tongue taps behind your top teeth.",
+   "pairs": [
+    [
+     "thin",
+     "tin"
+    ],
+    [
+     "three",
+     "tree"
+    ],
+    [
+     "thank",
+     "tank"
+    ],
+    [
+     "thick",
+     "tick"
+    ],
+    [
+     "path",
+     "pat"
+    ],
+    [
+     "both",
+     "boat"
+    ]
+   ]
+  },
+  {
+   "id": "i_ee",
+   "name": "short i and long ee",
+   "tip": "Short i is quick and relaxed: ship. Long ee is longer, with a wide smile: sheep.",
+   "pairs": [
+    [
+     "ship",
+     "sheep"
+    ],
+    [
+     "live",
+     "leave"
+    ],
+    [
+     "sit",
+     "seat"
+    ],
+    [
+     "fill",
+     "feel"
+    ],
+    [
+     "bit",
+     "beat"
+    ],
+    [
+     "hill",
+     "heel"
+    ]
+   ]
+  }
+ ]
+}

@@ -14,6 +14,7 @@ export interface TopicHit {
 
 /** Everyday names for topics, so a child's own words find them. */
 const ALSO: Record<string, string> = {
+  tamil_slips: "tamil mistakes slips indian english myself cousin brother having knowing discuss about return back question order",
   contractions: "apostrophe short form don't can't it's",
   possessives: "apostrophe belonging owner 's",
   confusables: "their there they're your you're its it's to too two then than were where homophones",

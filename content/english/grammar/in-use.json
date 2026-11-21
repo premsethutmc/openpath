@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 20,
+  "version": 21,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -330,6 +330,10 @@
     {
       "id": "nominalisation",
       "name": "Verbs into nouns"
+    },
+    {
+      "id": "tamil_slips",
+      "name": "Slips Tamil speakers often make"
     }
   ],
   "scale": 2,
@@ -8375,6 +8379,363 @@
       "rule": "Keep the list in the same form: quick, cheap and successful.",
       "right": [
         "successful"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.01",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She [don't] like coffee.",
+      "rule": "With he, she or it, use doesn't: she doesn't like.",
+      "right": [
+        "doesn't"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.02",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "He [don't] know the answer.",
+      "rule": "With he, she or it, use doesn't: he doesn't know.",
+      "right": [
+        "doesn't"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.03",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She is [a] honest girl.",
+      "rule": "\"Honest\" starts with a vowel sound (the h is silent), so it takes an: an honest girl.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.04",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I saw [a] elephant in the forest.",
+      "rule": "Before a vowel sound, use an: an elephant.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.05",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "[Today] morning I went to the market.",
+      "rule": "In English, say this morning, not today morning.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.06",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Can you [borrow] me your pen?",
+      "rule": "You lend something to someone; you borrow it from them. Can you lend me your pen?",
+      "right": [
+        "lend"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.07",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I have [less] friends than my brother.",
+      "rule": "Use fewer with things you can count: fewer friends.",
+      "right": [
+        "fewer"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.08",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She is good [in] maths.",
+      "rule": "In English, we are good at a subject: good at maths.",
+      "right": [
+        "at"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.09",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "My aunt is married [with] a doctor.",
+      "rule": "In English, we are married to someone.",
+      "right": [
+        "to"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.10",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "The news [are] good today.",
+      "rule": "\"News\" is one thing in English: the news is good.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.11",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Each of the boys [have] a bag.",
+      "rule": "\"Each\" means one at a time, so it takes has: each of the boys has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.12",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "One of my [friend] is coming today.",
+      "rule": "\"One of\" is followed by many: one of my friends.",
+      "right": [
+        "friends"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.13",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "I didn't [went] to school yesterday.",
+      "rule": "After did or didn't, use the plain verb: didn't go.",
+      "right": [
+        "go"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.14",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "Did you [ate] your lunch?",
+      "rule": "After did, use the plain verb: did you eat.",
+      "right": [
+        "eat"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.15",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "fix",
+      "sentence": "She [told] that she was tired.",
+      "rule": "Use said when no listener is named: she said that. Use told with a person: she told me that.",
+      "right": [
+        "said"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.16",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You meet a friend on the road.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "Where are you going?"
+      ],
+      "wrong": [
+        "Where you are going?",
+        "Where going you are?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.17",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You want to know a new girl's name.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "What is your name?"
+      ],
+      "wrong": [
+        "What your name is?",
+        "Your name is what?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.18",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Your friend comes in after the bell.",
+      "question": "Which question is right?",
+      "rule": "In Tamil a question keeps the order of a statement. In English, the helping word (are, is, do) comes before the person: Where are you going?",
+      "right": [
+        "Why are you late?"
+      ],
+      "wrong": [
+        "Why you are late?",
+        "Why late you are?"
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.19",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Ravi talks about his family.",
+      "question": "Which sentence is right?",
+      "rule": "\"Have\" for owning is not used with -ing: he has, not he is having.",
+      "right": [
+        "He has two brothers."
+      ],
+      "wrong": [
+        "He is having two brothers.",
+        "He having two brothers."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.20",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "Meena is sure of the answer.",
+      "question": "Which sentence is right?",
+      "rule": "Know, like, want and understand are not used with -ing: I know.",
+      "right": [
+        "I know the answer."
+      ],
+      "wrong": [
+        "I am knowing the answer.",
+        "I knowing the answer."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.21",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You start a speech at assembly.",
+      "question": "Which is the right way to say your name?",
+      "rule": "In English, say I am Kavya or My name is Kavya, not myself Kavya.",
+      "right": [
+        "I am Kavya."
+      ],
+      "wrong": [
+        "Myself Kavya.",
+        "Me Kavya."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.22",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You show a friend a photo.",
+      "question": "Which sentence is right?",
+      "rule": "English has one word, cousin, for a boy or a girl: no brother or sister after it.",
+      "right": [
+        "This is my cousin, Ravi."
+      ],
+      "wrong": [
+        "This is my cousin brother, Ravi.",
+        "This is my brother cousin, Ravi."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.23",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "The class talked about the trip.",
+      "question": "Which sentence is right?",
+      "rule": "Discuss already means talk about: we discussed the plan, with no about.",
+      "right": [
+        "We discussed the plan."
+      ],
+      "wrong": [
+        "We discussed about the plan.",
+        "We discussed on the plan."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.24",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You ask a friend to give back a book.",
+      "question": "Which sentence is right?",
+      "rule": "Return already means give back: no back after it.",
+      "right": [
+        "Please return the book."
+      ],
+      "wrong": [
+        "Please return back the book.",
+        "Please back return the book."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.25",
+      "level": 2,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "It is bedtime.",
+      "question": "Which sentence is right?",
+      "rule": "In English, a light is switched off or turned off.",
+      "right": [
+        "Please switch off the light."
+      ],
+      "wrong": [
+        "Please off the light.",
+        "Please close the light."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.26",
+      "level": 3,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "The bus was slow.",
+      "question": "Which sentence is right?",
+      "rule": "Reach takes no to: we reached school.",
+      "right": [
+        "We reached school late."
+      ],
+      "wrong": [
+        "We reached to school late.",
+        "We reached at school late."
+      ]
+    },
+    {
+      "id": "gu.tamil_slips.27",
+      "level": 4,
+      "topic": "tamil_slips",
+      "kind": "choose",
+      "sentence": "You check that your friend agrees.",
+      "question": "Which ending is right?",
+      "rule": "English question tags repeat the helping word: it is right, isn't it?",
+      "right": [
+        "Your answer is right, isn't it?"
+      ],
+      "wrong": [
+        "Your answer is right, no?",
+        "Your answer is right, isn't?"
       ]
     }
   ]

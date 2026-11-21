@@ -44,7 +44,7 @@ const Arrow = () => (
 declare const __OPENPATH_READ_ALOUD__: boolean | undefined;
 const READ_ALOUD_BUILT = typeof __OPENPATH_READ_ALOUD__ !== "undefined" && __OPENPATH_READ_ALOUD__ === true;
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onSounds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onSounds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -97,6 +97,18 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
+              {!guided && <SlipsCard onOpen={() => onGrammarUse(["tamil_slips"])} />}
+              {!guided && onSounds && (
+                <section className="hub-card plain" aria-labelledby="sounds-card-title">
+                  <h2 id="sounds-card-title">
+                    <span aria-hidden="true">👂 </span>Sounds that are easy to mix up
+                  </h2>
+                  <p>v and w, f and p, s and sh, th and t: hear the difference, then say it.</p>
+                  <button type="button" className="secondary" onClick={onSounds}>
+                    Listen and say
+                  </button>
+                </section>
+              )}
               <BeeCard learner={learner} onBee={onBee} />
               <VocabCard learner={learner} onOpen={onVocab} />
             </div>
@@ -395,6 +407,21 @@ function ListenAnswerCard({ learner, onOpen }: { learner: Learner; onOpen: () =>
 }
 
 /** Look up a grammar topic by a word or two, and practise it straight away. */
+/** tamil-slips@1: practice on the English slips that come from Tamil (questions, have/know with -ing, myself, cousin brother…). */
+function SlipsCard({ onOpen }: { onOpen: () => void }) {
+  return (
+    <section className="hub-card plain" aria-labelledby="slips-card-title">
+      <h2 id="slips-card-title">
+        <span aria-hidden="true">🎯 </span>Slips Tamil speakers often make
+      </h2>
+      <p>Where are you going, not where you are going; he has, not he is having; I am Kavya, not myself Kavya.</p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Fix these slips
+      </button>
+    </section>
+  );
+}
+
 function GrammarSearch({ onPractise }: { onPractise: (topic: string) => void }) {
   const [q, setQ] = useState("");
   const hits = searchGrammar(q);
