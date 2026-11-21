@@ -351,6 +351,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   assert.ok(asked.every((it) => !before.has(it.id)), "never a question asked before");
   // the developer dashboard shows the same standing, and the gate behind it
   await page.getByRole("button", { name: "Progress", exact: true }).click();
+  await skillBySkill(page);
   const standing = await page.locator(`.caps li[data-capability="${cap}"]`).first().getAttribute("data-standing");
   await shot(page, "progress-after-evidence-check");
   if (CLAIM) {
