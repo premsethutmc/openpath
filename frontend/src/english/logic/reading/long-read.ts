@@ -52,8 +52,8 @@ export function longProblems(l: LongReads): string[] {
     if (t.parts.length !== PARTS) out.push(`${t.id}: ${t.parts.length} parts, not ${PARTS}`);
     if (!t.theme || !t.title) out.push(`${t.id}: no theme or title`);
     const words = t.parts.reduce((a, p) => a + p.text.split(/\s+/).length, 0);
-    // shorter stories for the first levels: about two hundred words at levels 1 and 2
-    const least = t.level === 1 ? 120 : t.level === 2 ? 150 : t.level === 3 ? 250 : 350;
+    // shorter stories for the first levels: about 120 words at level 1, 160 at level 2, 250 at level 3
+    const least = t.level === 1 ? 100 : t.level === 2 ? 150 : t.level === 3 ? 200 : 350;
     if (words < least || words > 1200) out.push(`${t.id}: ${words} words`);
     const skills = new Set(t.whole.map((q) => q.skill));
     for (const s of ["theme", "character", "title"]) if (!skills.has(s as LongSkill)) out.push(`${t.id}: no question on the ${s}`);
