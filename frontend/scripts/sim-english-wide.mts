@@ -9,7 +9,7 @@
  *             new learner (grammar topics have sentences, tasks with a grown-up exist, activities have a next item).
  *
  * Fails (with --strict) when an activity throws, has nothing to give before the month is out (charts and maps must
- * never run out), repeats a task, marks a strong learner's own writing poorly or a weak one's well, never steers a
+ * never run out; poems and everyday texts must last a month at any level), repeats a task, marks a strong learner's own writing poorly or a weak one's well, never steers a
  * learner to their weakest kind of study task, or a syllabus line leads nowhere. Behaviour only; no language model.
  *
  *   node --import tsx scripts/sim-english-wide.mts --runs 10 --md sim-wide.md --strict
@@ -172,6 +172,7 @@ function runLearner(p: Persona, run: number): Stats {
   // a learner weak at maps should be given more maps than either other kind
   if (p.name === "weak at maps" && !(st.study.tasks.map > st.study.tasks.notes && st.study.tasks.map > st.study.tasks.chart))
     fail(`${p.name} ${run}: never steered to maps, its weakest kind (${JSON.stringify(st.study.tasks)}; map strength ${kindStrength(studyRecs, "map")?.toFixed(2)})`);
+  if (st.kinds.ranOut) fail(`${p.name} ${run}: Poems and everyday texts ran out on ${st.kinds.ranOut} of ${DAYS} days`);
   if (st.study.repeats) fail(`${p.name} ${run}: ${st.study.repeats} study tasks repeated`);
   return st;
 }

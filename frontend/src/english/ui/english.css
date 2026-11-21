@@ -3280,3 +3280,15 @@ h3.sub {
   border: 2px solid #c9d3e0;
   margin: 8px 0;
 }
+
+/* where a line of the child's own syllabus stands (logic/syllabus/practice.ts) */
+.syllabus-stage {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.syllabus-stage.secure {
+  color: #1f7a3a;
+}
+.syllabus-stage.practising {
+  color: #9a6400;
+}
