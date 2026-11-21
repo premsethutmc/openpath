@@ -28,7 +28,7 @@ async function phone() {
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(URL);
+  await page.goto(`${URL}/?basics`);
   return { context, page, errors };
 }
 const state = (page) =>
@@ -224,6 +224,26 @@ test("focused aytham route teaches Tamil without claiming a new transfer symbol"
   const s = await state(page);
   assert.equal(s.events.length, 2);
   assert.ok(s.events.every((e) => !e.transfer));
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("ICSE course: class picker, a topic's teaching card, practice with feedback", async () => {
+  const { context, page, errors } = await phone();
+  await page.goto(`${URL}/`);
+  await page.getByRole("heading", { name: "தமிழ் — வகுப்பைத் தேர்ந்தெடு" }).waitFor();
+  for (const c of [1, 10]) await page.getByRole("button", { name: new RegExp(`^${c}\\s*வகுப்பு ${c}`) }).waitFor();
+  await page.getByRole("button", { name: /^5\s*வகுப்பு 5/ }).tap();
+  await page.getByRole("heading", { name: "வகுப்பு 5 — பாடங்கள்" }).waitFor();
+  await page.getByRole("button", { name: /^திணை/ }).tap();
+  await page.getByRole("button", { name: "பயிற்சி தொடங்கு — Start practice" }).tap();
+  await page.getByText("Which thinai?").waitFor();
+  await page.locator(".choices button").first().tap();
+  await page.getByRole("button", { name: "அடுத்தது — Next →" }).waitFor();
+  await page.screenshot({ path: "e2e/shots/tamil/icse-practice.png", fullPage: true });
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("openpath.tamil.icse.v1")));
+  assert.equal(saved.cls, 5);
+  assert.equal(Object.keys(saved.progress).length, 1);
   assert.deepEqual(errors, []);
   await context.close();
 });
