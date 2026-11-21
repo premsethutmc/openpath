@@ -117,7 +117,12 @@ export class WrittenSitting {
   private done = false;
   private right = 0;
   private readonly log: WrittenRecord[] = [];
-  constructor(readonly items: WrittenItem[], readonly sitting: string) {}
+  readonly items: WrittenItem[];
+  readonly sitting: string;
+  constructor(items: WrittenItem[], sitting: string) {
+    this.items = items;
+    this.sitting = sitting;
+  }
 
   check(answer: string): void {
     const it = this.items[this.index];
