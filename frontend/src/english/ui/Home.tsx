@@ -6,6 +6,7 @@
 import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
 import { TamilToggle, useTamilHelp } from "./tamilHelp.tsx";
+import { masterySummary } from "../logic/grammar-use/mastery.ts";
 import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
@@ -576,6 +577,7 @@ function FirstWordsCard({ learner, onOpen, start }: { learner: Learner; onOpen: 
 function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
   if (learner.content.gate) return null;
   const s = grammarSummary(GRAMMAR, learner.grammarRecords());
+  const m = masterySummary(learner.grammarTimed(), learner.clock());
   return (
     <section className="hub-card plain" aria-labelledby="grammar-use-card-title">
       <h2 id="grammar-use-card-title">
@@ -584,7 +586,8 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
       <p>Fix the wrong word in a sentence, or build a sentence from word tiles. Eight sentences, each with its rule.</p>
       {s.answered > 0 && (
         <p className="small">
-          {s.right} of {s.answered} sentences right
+          {s.right} of {s.answered} sentences right{m.mastered ? ` · ${m.mastered} ${m.mastered === 1 ? "topic" : "topics"} mastered` : ""}
+          {m.due ? ` · ${m.due} due for review` : ""}
         </p>
       )}
       <button type="button" className="secondary" onClick={onOpen}>

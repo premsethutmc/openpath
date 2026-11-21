@@ -1,6 +1,6 @@
 {
   "id": "grammar-in-use",
-  "version": 22,
+  "version": 23,
   "status": "candidate: sentences, corrections, rules and levels written by OpenPath (AI-prepared) and checked by rule; British usage; not reviewed by an educator",
   "review": "candidate-unvalidated",
   "evidence": "practice-only: fixing and building sentences; it changes no capability estimate",
@@ -9132,6 +9132,1425 @@
       "wrong": [
         "Reply fast!!!",
         "OK bye, whatever."
+      ]
+    },
+    {
+      "id": "gu.plurals.11",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Four [bus] stopped at the school gate.",
+      "rule": "Words ending in s take -es: buses.",
+      "right": [
+        "buses"
+      ]
+    },
+    {
+      "id": "gu.plurals.12",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "She washed all the [dish] after lunch.",
+      "rule": "Words ending in sh take -es: dishes.",
+      "right": [
+        "dishes"
+      ]
+    },
+    {
+      "id": "gu.plurals.13",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "We bought two new [watch] at the shop.",
+      "rule": "Words ending in ch take -es: watches.",
+      "right": [
+        "watches"
+      ]
+    },
+    {
+      "id": "gu.plurals.14",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Many [city] in India are very busy.",
+      "rule": "After a consonant, change y to ies: city, cities.",
+      "right": [
+        "cities"
+      ]
+    },
+    {
+      "id": "gu.plurals.15",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "The [lady] waited for the bus.",
+      "rule": "After a consonant, change y to ies: lady, ladies.",
+      "right": [
+        "ladies"
+      ]
+    },
+    {
+      "id": "gu.plurals.16",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "The [leaf] fell from the trees.",
+      "rule": "Some words ending in f change to ves: leaf, leaves.",
+      "right": [
+        "leaves"
+      ]
+    },
+    {
+      "id": "gu.plurals.17",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Put the [knife] in the drawer.",
+      "rule": "Some words ending in fe change to ves: knife, knives.",
+      "right": [
+        "knives"
+      ]
+    },
+    {
+      "id": "gu.plurals.18",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Three [child] played in the park.",
+      "rule": "Child is irregular: one child, many children.",
+      "right": [
+        "children"
+      ]
+    },
+    {
+      "id": "gu.plurals.19",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Two [mouse] ran under the bed.",
+      "rule": "Mouse is irregular: one mouse, two mice.",
+      "right": [
+        "mice"
+      ]
+    },
+    {
+      "id": "gu.plurals.20",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "My [foot] are cold.",
+      "rule": "Foot is irregular: one foot, two feet.",
+      "right": [
+        "feet"
+      ]
+    },
+    {
+      "id": "gu.plurals.21",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "He has many [toy] in his room.",
+      "rule": "After a vowel, y just takes s: toy, toys.",
+      "right": [
+        "toys"
+      ]
+    },
+    {
+      "id": "gu.plurals.22",
+      "level": 1,
+      "topic": "plurals",
+      "kind": "fix",
+      "sentence": "Amma bought a kilo of [tomato].",
+      "rule": "Tomato takes -es: tomatoes.",
+      "right": [
+        "tomatoes"
+      ]
+    },
+    {
+      "id": "gu.articles.11",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "I ate [a] orange for breakfast.",
+      "rule": "Use an before a vowel sound: an orange.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.12",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "She is reading [an] book.",
+      "rule": "Use a before a consonant sound: a book.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.13",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "We waited for [a] hour.",
+      "rule": "Hour starts with a vowel sound (the h is silent): an hour.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.14",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "He wants to be [an] doctor.",
+      "rule": "Use a before a consonant sound: a doctor.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.15",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "There is [a] umbrella by the door.",
+      "rule": "Use an before a vowel sound: an umbrella.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.16",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "My uncle drives [an] bus.",
+      "rule": "Use a before a consonant sound: a bus.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.17",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "Please give me [a] egg.",
+      "rule": "Use an before a vowel sound: an egg.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.18",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "She has [an] uniform for school.",
+      "rule": "Uniform starts with a y sound, so it takes a: a uniform.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.19",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "We saw [a] owl at night.",
+      "rule": "Use an before a vowel sound: an owl.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.20",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "Ravi found [an] coin on the road.",
+      "rule": "Use a before a consonant sound: a coin.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.articles.21",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "It was [a] easy test.",
+      "rule": "Use an before a vowel sound: an easy test.",
+      "right": [
+        "an"
+      ]
+    },
+    {
+      "id": "gu.articles.22",
+      "level": 1,
+      "topic": "articles",
+      "kind": "fix",
+      "sentence": "I need [an] pencil.",
+      "rule": "Use a before a consonant sound: a pencil.",
+      "right": [
+        "a"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.11",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "I [is] ready for school.",
+      "rule": "With I, use am: I am.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.12",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "They [is] in the garden.",
+      "rule": "With they, use are: they are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.13",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "She [are] my best friend.",
+      "rule": "With she, use is: she is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.14",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "We [is] in Class 3.",
+      "rule": "With we, use are: we are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.15",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "The cat [are] on the wall.",
+      "rule": "One cat: is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.16",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "You [is] very kind.",
+      "rule": "With you, use are: you are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.17",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "My shoes [is] wet.",
+      "rule": "More than one shoe: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.18",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "He [am] tall.",
+      "rule": "With he, use is: he is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.19",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "The children [is] happy today.",
+      "rule": "Children is more than one: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.20",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "It [are] a sunny day.",
+      "rule": "With it, use is: it is.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.21",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "Ravi and Meena [is] cousins.",
+      "rule": "Two people: are.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.be_verbs.22",
+      "level": 1,
+      "topic": "be_verbs",
+      "kind": "fix",
+      "sentence": "I [are] eight years old.",
+      "rule": "With I, use am: I am.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.have_has.11",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "She [have] a red bag.",
+      "rule": "With he, she or it, use has: she has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.12",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "They [has] two dogs.",
+      "rule": "With they, use have: they have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.13",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "I [has] a new pencil box.",
+      "rule": "With I, use have: I have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.14",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "My father [have] a scooter.",
+      "rule": "One person: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.15",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "We [has] a test today.",
+      "rule": "With we, use have: we have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.16",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "The cat [have] soft fur.",
+      "rule": "One cat: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.17",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "You [has] a lovely smile.",
+      "rule": "With you, use have: you have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.18",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "He [have] a cold.",
+      "rule": "With he, use has: he has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.19",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "The boys [has] cricket bats.",
+      "rule": "More than one: have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.have_has.20",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "It [have] four legs.",
+      "rule": "With it, use has: it has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.21",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "Our school [have] a big ground.",
+      "rule": "One school: has.",
+      "right": [
+        "has"
+      ]
+    },
+    {
+      "id": "gu.have_has.22",
+      "level": 2,
+      "topic": "have_has",
+      "kind": "fix",
+      "sentence": "Ravi and I [has] the same book.",
+      "rule": "Two people: have.",
+      "right": [
+        "have"
+      ]
+    },
+    {
+      "id": "gu.agreement.17",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "She [like] mangoes.",
+      "rule": "With he, she or it, add -s: she likes.",
+      "right": [
+        "likes"
+      ]
+    },
+    {
+      "id": "gu.agreement.18",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "He [play] cricket every evening.",
+      "rule": "With he, add -s: he plays.",
+      "right": [
+        "plays"
+      ]
+    },
+    {
+      "id": "gu.agreement.19",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The dog [bark] at night.",
+      "rule": "One dog: add -s: barks.",
+      "right": [
+        "barks"
+      ]
+    },
+    {
+      "id": "gu.agreement.20",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "My mother [cook] tasty food.",
+      "rule": "One person: add -s: cooks.",
+      "right": [
+        "cooks"
+      ]
+    },
+    {
+      "id": "gu.agreement.21",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "They [plays] in the park.",
+      "rule": "With they, no -s: they play.",
+      "right": [
+        "play"
+      ]
+    },
+    {
+      "id": "gu.agreement.22",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "We [walks] to school.",
+      "rule": "With we, no -s: we walk.",
+      "right": [
+        "walk"
+      ]
+    },
+    {
+      "id": "gu.agreement.23",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The sun [rise] in the east.",
+      "rule": "One sun: add -s: rises.",
+      "right": [
+        "rises"
+      ]
+    },
+    {
+      "id": "gu.agreement.24",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "Birds [flies] in the sky.",
+      "rule": "Birds is more than one: no -s: fly.",
+      "right": [
+        "fly"
+      ]
+    },
+    {
+      "id": "gu.agreement.25",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "He [watch] cartoons on Sunday.",
+      "rule": "After ch, add -es: watches.",
+      "right": [
+        "watches"
+      ]
+    },
+    {
+      "id": "gu.agreement.26",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "She [go] to music class.",
+      "rule": "Go takes -es: she goes.",
+      "right": [
+        "goes"
+      ]
+    },
+    {
+      "id": "gu.agreement.27",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "The baby [cry] at night.",
+      "rule": "After a consonant, y becomes ies: cries.",
+      "right": [
+        "cries"
+      ]
+    },
+    {
+      "id": "gu.agreement.28",
+      "level": 2,
+      "topic": "agreement",
+      "kind": "fix",
+      "sentence": "I [writes] in my diary.",
+      "rule": "With I, no -s: I write.",
+      "right": [
+        "write"
+      ]
+    },
+    {
+      "id": "gu.past.10",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Yesterday we [play] in the rain.",
+      "rule": "For the past, add -ed: played.",
+      "right": [
+        "played"
+      ]
+    },
+    {
+      "id": "gu.past.11",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Last week she [visit] her grandmother.",
+      "rule": "For the past, add -ed: visited.",
+      "right": [
+        "visited"
+      ]
+    },
+    {
+      "id": "gu.past.12",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "He [jump] over the puddle this morning.",
+      "rule": "For the past, add -ed: jumped.",
+      "right": [
+        "jumped"
+      ]
+    },
+    {
+      "id": "gu.past.13",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "We [walk] to the park on Sunday.",
+      "rule": "For the past, add -ed: walked.",
+      "right": [
+        "walked"
+      ]
+    },
+    {
+      "id": "gu.past.14",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "I [like] the film we saw yesterday.",
+      "rule": "Words ending in e just add -d: liked.",
+      "right": [
+        "liked"
+      ]
+    },
+    {
+      "id": "gu.past.15",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "The baby [cry] all night.",
+      "rule": "After a consonant, y becomes ied: cried.",
+      "right": [
+        "cried"
+      ]
+    },
+    {
+      "id": "gu.past.16",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "She [stop] at the shop on her way home.",
+      "rule": "Double the last letter, then add -ed: stopped.",
+      "right": [
+        "stopped"
+      ]
+    },
+    {
+      "id": "gu.past.17",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "They [clean] the classroom after school.",
+      "rule": "For the past, add -ed: cleaned.",
+      "right": [
+        "cleaned"
+      ]
+    },
+    {
+      "id": "gu.past.18",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "Last year we [move] to Madurai.",
+      "rule": "Words ending in e just add -d: moved.",
+      "right": [
+        "moved"
+      ]
+    },
+    {
+      "id": "gu.past.19",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "He [carry] the heavy box yesterday.",
+      "rule": "After a consonant, y becomes ied: carried.",
+      "right": [
+        "carried"
+      ]
+    },
+    {
+      "id": "gu.past.20",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "I [help] my father in the garden last evening.",
+      "rule": "For the past, add -ed: helped.",
+      "right": [
+        "helped"
+      ]
+    },
+    {
+      "id": "gu.past.21",
+      "level": 2,
+      "topic": "past",
+      "kind": "fix",
+      "sentence": "The bus [arrive] late this morning.",
+      "rule": "Words ending in e just add -d: arrived.",
+      "right": [
+        "arrived"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.12",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [eated] two idlis this morning.",
+      "rule": "Eat is irregular: the past is ate.",
+      "right": [
+        "ate"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.13",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "He [writed] a letter last week.",
+      "rule": "Write is irregular: the past is wrote.",
+      "right": [
+        "wrote"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.14",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "We [seed] a rainbow after the rain.",
+      "rule": "See is irregular: the past is saw.",
+      "right": [
+        "saw"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.15",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "They [buyed] a new fan.",
+      "rule": "Buy is irregular: the past is bought.",
+      "right": [
+        "bought"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.16",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "I [catched] the ball.",
+      "rule": "Catch is irregular: the past is caught.",
+      "right": [
+        "caught"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.17",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "The glass [breaked] when it fell.",
+      "rule": "Break is irregular: the past is broke.",
+      "right": [
+        "broke"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.18",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [teached] us a song.",
+      "rule": "Teach is irregular: the past is taught.",
+      "right": [
+        "taught"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.19",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "He [runned] fast in the race.",
+      "rule": "Run is irregular: the past is ran.",
+      "right": [
+        "ran"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.20",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "We [maked] a kite last Sunday.",
+      "rule": "Make is irregular: the past is made.",
+      "right": [
+        "made"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.21",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "I [thinked] about the question.",
+      "rule": "Think is irregular: the past is thought.",
+      "right": [
+        "thought"
+      ]
+    },
+    {
+      "id": "gu.irregular_verbs.22",
+      "level": 3,
+      "topic": "irregular_verbs",
+      "kind": "fix",
+      "sentence": "She [bringed] sweets for everyone.",
+      "rule": "Bring is irregular: the past is brought.",
+      "right": [
+        "brought"
+      ]
+    },
+    {
+      "id": "gu.comparison.09",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This is the [tall] tree in the park.",
+      "rule": "For the most of all, add -est: tallest.",
+      "right": [
+        "tallest"
+      ]
+    },
+    {
+      "id": "gu.comparison.10",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "My bag is [heavy] than yours.",
+      "rule": "After a consonant, y becomes ier: heavier.",
+      "right": [
+        "heavier"
+      ]
+    },
+    {
+      "id": "gu.comparison.11",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "Today is [hot] than yesterday.",
+      "rule": "Double the last letter, then -er: hotter.",
+      "right": [
+        "hotter"
+      ]
+    },
+    {
+      "id": "gu.comparison.12",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "She is the [happy] girl in the class.",
+      "rule": "After a consonant, y becomes iest: happiest.",
+      "right": [
+        "happiest"
+      ]
+    },
+    {
+      "id": "gu.comparison.13",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This book is [good] than that one.",
+      "rule": "Good is irregular: good, better, best.",
+      "right": [
+        "better"
+      ]
+    },
+    {
+      "id": "gu.comparison.14",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "That was the [bad] day of my holiday.",
+      "rule": "Bad is irregular: bad, worse, worst.",
+      "right": [
+        "worst"
+      ]
+    },
+    {
+      "id": "gu.comparison.15",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "Ravi runs [fast] than his brother.",
+      "rule": "To compare two, add -er: faster.",
+      "right": [
+        "faster"
+      ]
+    },
+    {
+      "id": "gu.comparison.16",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "The cheetah is the [fast] animal on land.",
+      "rule": "For the most of all, add -est: fastest.",
+      "right": [
+        "fastest"
+      ]
+    },
+    {
+      "id": "gu.comparison.17",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "My room is [small] than my sister's.",
+      "rule": "To compare two, add -er: smaller.",
+      "right": [
+        "smaller"
+      ]
+    },
+    {
+      "id": "gu.comparison.18",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This is the [easy] question on the paper.",
+      "rule": "After a consonant, y becomes iest: easiest.",
+      "right": [
+        "easiest"
+      ]
+    },
+    {
+      "id": "gu.comparison.19",
+      "level": 4,
+      "topic": "comparison",
+      "kind": "fix",
+      "sentence": "This road is [wide] than that one.",
+      "rule": "Words ending in e just add -r: wider.",
+      "right": [
+        "wider"
+      ]
+    },
+    {
+      "id": "gu.this_these.11",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[These] book is mine.",
+      "rule": "One thing near you: this.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.this_these.12",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[This] shoes are new.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "These"
+      ]
+    },
+    {
+      "id": "gu.this_these.13",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[Those] house over there is old.",
+      "rule": "One thing far away: that.",
+      "right": [
+        "That"
+      ]
+    },
+    {
+      "id": "gu.this_these.14",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[That] birds on the wire are crows.",
+      "rule": "More than one far away: those.",
+      "right": [
+        "Those"
+      ]
+    },
+    {
+      "id": "gu.this_these.15",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Look at [these] star in the sky!",
+      "rule": "One thing far away: that.",
+      "right": [
+        "that"
+      ]
+    },
+    {
+      "id": "gu.this_these.16",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "I like [this] mangoes.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "these"
+      ]
+    },
+    {
+      "id": "gu.this_these.17",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[These] is my pencil.",
+      "rule": "One thing near you: this.",
+      "right": [
+        "This"
+      ]
+    },
+    {
+      "id": "gu.this_these.18",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Who are [that] children?",
+      "rule": "More than one far away: those.",
+      "right": [
+        "those"
+      ]
+    },
+    {
+      "id": "gu.this_these.19",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Can you pass me [these] cup?",
+      "rule": "One thing near you: this.",
+      "right": [
+        "this"
+      ]
+    },
+    {
+      "id": "gu.this_these.20",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[Those] tree is very tall.",
+      "rule": "One thing far away: that.",
+      "right": [
+        "That"
+      ]
+    },
+    {
+      "id": "gu.this_these.21",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "[This] flowers smell sweet.",
+      "rule": "More than one near you: these.",
+      "right": [
+        "These"
+      ]
+    },
+    {
+      "id": "gu.this_these.22",
+      "level": 1,
+      "topic": "this_these",
+      "kind": "fix",
+      "sentence": "Is [those] your bicycle at the gate?",
+      "rule": "One thing far away: that.",
+      "right": [
+        "that"
+      ]
+    },
+    {
+      "id": "gu.future.09",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Tomorrow I [visit] my aunt.",
+      "rule": "For the future, use will: I will visit.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.10",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Next week we [goes] to Ooty.",
+      "rule": "For the future, use will: we will go.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.11",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "She will [comes] to the party.",
+      "rule": "After will, use the plain verb: will come.",
+      "right": [
+        "come"
+      ]
+    },
+    {
+      "id": "gu.future.12",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "It will [rained] tomorrow.",
+      "rule": "After will, use the plain verb: will rain.",
+      "right": [
+        "rain"
+      ]
+    },
+    {
+      "id": "gu.future.13",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "They will [played] after school.",
+      "rule": "After will, use the plain verb: will play.",
+      "right": [
+        "play"
+      ]
+    },
+    {
+      "id": "gu.future.14",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "I will [helping] you with your homework.",
+      "rule": "After will, use the plain verb: will help.",
+      "right": [
+        "help"
+      ]
+    },
+    {
+      "id": "gu.future.15",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "He will [wrote] the test on Monday.",
+      "rule": "After will, use the plain verb: will write.",
+      "right": [
+        "write"
+      ]
+    },
+    {
+      "id": "gu.future.16",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "We will [reached] home by six.",
+      "rule": "After will, use the plain verb: will reach.",
+      "right": [
+        "reach"
+      ]
+    },
+    {
+      "id": "gu.future.17",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Next year she [is] in Class 5.",
+      "rule": "For the future, use will: she will be.",
+      "right": [
+        "will"
+      ]
+    },
+    {
+      "id": "gu.future.18",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "The shop will [opens] at nine.",
+      "rule": "After will, use the plain verb: will open.",
+      "right": [
+        "open"
+      ]
+    },
+    {
+      "id": "gu.future.19",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "You will [likes] this story.",
+      "rule": "After will, use the plain verb: will like.",
+      "right": [
+        "like"
+      ]
+    },
+    {
+      "id": "gu.future.20",
+      "level": 2,
+      "topic": "future",
+      "kind": "fix",
+      "sentence": "Tomorrow the sun will [rose] at six.",
+      "rule": "After will, use the plain verb: will rise.",
+      "right": [
+        "rise"
+      ]
+    },
+    {
+      "id": "gu.continuous.09",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "They are [play] football now.",
+      "rule": "Are with -ing shows now: are playing.",
+      "right": [
+        "playing"
+      ]
+    },
+    {
+      "id": "gu.continuous.10",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "I am [write] a letter.",
+      "rule": "Drop the e before -ing: writing.",
+      "right": [
+        "writing"
+      ]
+    },
+    {
+      "id": "gu.continuous.11",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "She is [run] to catch the bus.",
+      "rule": "Double the last letter before -ing: running.",
+      "right": [
+        "running"
+      ]
+    },
+    {
+      "id": "gu.continuous.12",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "We are [sit] in the shade.",
+      "rule": "Double the last letter before -ing: sitting.",
+      "right": [
+        "sitting"
+      ]
+    },
+    {
+      "id": "gu.continuous.13",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "He [are] reading a comic now.",
+      "rule": "With he, use is: he is reading.",
+      "right": [
+        "is"
+      ]
+    },
+    {
+      "id": "gu.continuous.14",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "The children [is] singing a song.",
+      "rule": "More than one: are singing.",
+      "right": [
+        "are"
+      ]
+    },
+    {
+      "id": "gu.continuous.15",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "I [is] waiting for my friend.",
+      "rule": "With I, use am: I am waiting.",
+      "right": [
+        "am"
+      ]
+    },
+    {
+      "id": "gu.continuous.16",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "It is [rain] heavily.",
+      "rule": "Is with -ing shows now: is raining.",
+      "right": [
+        "raining"
+      ]
+    },
+    {
+      "id": "gu.continuous.17",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "Amma is [make] dosa for dinner.",
+      "rule": "Drop the e before -ing: making.",
+      "right": [
+        "making"
+      ]
+    },
+    {
+      "id": "gu.continuous.18",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "Listen! Someone is [knock] at the door.",
+      "rule": "Is with -ing shows now: is knocking.",
+      "right": [
+        "knocking"
+      ]
+    },
+    {
+      "id": "gu.continuous.19",
+      "level": 4,
+      "topic": "continuous",
+      "kind": "fix",
+      "sentence": "The dog is [swim] in the lake.",
+      "rule": "Double the last letter before -ing: swimming.",
+      "right": [
+        "swimming"
       ]
     }
   ]

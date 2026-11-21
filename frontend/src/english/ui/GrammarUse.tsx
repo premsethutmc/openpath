@@ -2,6 +2,7 @@
  * Grammar in use (logic/grammar-use): fix the wrong word in a sentence, or build a sentence from word tiles. The
  * right sentence and a one-line rule follow every answer. Practice-only.
  */
+import { dueTopics, masterySummary } from "../logic/grammar-use/mastery.ts";
 import { WriteOwn } from "./WriteOwn.tsx";
 import { ownFor } from "../logic/grammar-use/write-own.ts";
 import { Flag } from "./Flag.tsx";
@@ -13,7 +14,7 @@ import { NoteBox } from "./Note.tsx";
 
 const levelName = (c: Content, id: number) => c.levels.find((l) => l.id === id)?.name ?? "";
 
-export function GrammarIntro({ level, levelLabel, topics, done, onStart, onBack }: { level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; onStart: () => void; onBack: () => void }) {
+export function GrammarIntro({ level, levelLabel, topics, done, mastery, onStart, onBack }: { level: number; levelLabel: string; topics: string[]; done: { answered: number; right: number }; mastery?: { mastered: number; learnt: number; learning: number; due: number }; onStart: () => void; onBack: () => void }) {
   return (
     <main className="page vocab grammar" data-phase="intro" aria-labelledby="grammar-title">
       <button type="button" className="link" onClick={onBack}>
@@ -34,6 +35,13 @@ export function GrammarIntro({ level, levelLabel, topics, done, onStart, onBack 
       {done.answered > 0 && (
         <p className="small">
           So far: {done.right} of {done.answered} sentences right.
+          {mastery && mastery.mastered + mastery.learnt + mastery.learning > 0 && (
+            <span data-mastery>
+              {" "}
+              Topics: {mastery.mastered} mastered, {mastery.learnt} learnt and coming back for review, {mastery.learning} being learnt.
+              {mastery.due > 0 && !topics.length ? ` ${mastery.due} due for review today: they come first.` : ""}
+            </span>
+          )}
         </p>
       )}
       <button type="button" className="primary" onClick={onStart}>
@@ -310,14 +318,15 @@ export function GrammarUse({ learner, topics, onLeave, onChanged }: { learner: L
     onChanged();
   };
   const begin = () => {
-    const s = new GrammarSitting(GRAMMAR, level(), learner.grammarRecords(), topics);
+    // grammar-mastery@1: a level sitting starts with the topics due for review
+    const s = new GrammarSitting(GRAMMAR, level(), learner.grammarRecords(), topics, topics?.length ? [] : dueTopics(learner.grammarTimed(), learner.clock()));
     setSitting(s);
     scrollTo(0, 0);
     void step(s);
   };
   if (!sitting) {
     const done = grammarSummary(GRAMMAR, learner.grammarRecords());
-    return <GrammarIntro level={level()} levelLabel={levelName(GRAMMAR, level())} topics={(topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t)} done={done} onStart={begin} onBack={onLeave} />;
+    return <GrammarIntro level={level()} levelLabel={levelName(GRAMMAR, level())} topics={(topics ?? []).map((t) => GRAMMAR.topics.find((x) => x.id === t)?.name ?? t)} done={done} mastery={masterySummary(learner.grammarTimed(), learner.clock())} onStart={begin} onBack={onLeave} />;
   }
   const view = sitting.snapshot();
   return (
