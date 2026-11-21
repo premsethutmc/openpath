@@ -66,6 +66,9 @@ if (mode === "pilot") {
 const outName = process.argv.find((a) => a.startsWith("--out="))?.slice(6) ?? "dist-english";
 if (!/^dist-english[a-z0-9-]*$/.test(outName)) throw new Error("--out must name a dist-english* folder");
 const out = `${root}/${outName}`;
+// Read aloud (logic/read-aloud): on-phone speech recognition. Its library (5.8 MB) and model (about 40 MB) are fetched
+// only when a learner opens it; off unless OPENPATH_READ_ALOUD=1 where the site is built (never in a pilot build).
+const readAloud = process.env.OPENPATH_READ_ALOUD === "1" && mode !== "pilot";
 const licences = `${root}/../content/english/spelling/licences`;
 
 // the build's commit, shown in diagnostics reports (OPENPATH_COMMIT wins, e.g. in CI); never a secret
@@ -91,7 +94,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false", __OPENPATH_TAMIL__: process.env.OPENPATH_TAMIL_TILE === "1" ? "true" : "false" },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false", __OPENPATH_TAMIL__: process.env.OPENPATH_TAMIL_TILE === "1" ? "true" : "false", __OPENPATH_READ_ALOUD__: readAloud ? "true" : "false" },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);
@@ -107,6 +110,13 @@ await writeFile(
 // the writing check's spelling list (logic/writing/dictionary.ts): fetched only when a learner first checks a piece,
 // so it is not in the offline list below; its name carries the build version so a new list is never served stale
 await copyFile(`${root}/../content/english/spelling/speller-words.txt`, `${out}/assets/speller-words.txt`);
+
+if (readAloud) {
+  const { buildLibrary, buildModel } = await import("./vosk-model.mjs");
+  await buildLibrary(`${out}/assets/vosk`);
+  await buildModel(`${out}/assets/vosk`);
+  console.log("read aloud: assets/vosk/ (library and model)");
+}
 
 await mkdir(`${out}/licences`, { recursive: true });
 const notices = await readdir(licences);
@@ -131,7 +141,7 @@ await writeFile(
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Content-Security-Policy: frame-ancestors 'none'
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Permissions-Policy: camera=(), microphone=(self), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
 /sw.js
   Cache-Control: no-cache
@@ -152,7 +162,8 @@ self.addEventListener("activate", (e) => e.waitUntil(caches.keys().then((ks) => 
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   // never the account API: a pupil's record must not be cached, and must always be current
-  if (e.request.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/")) return;
+  // nor Read aloud's speech model (40 MB), which the recogniser keeps in its own storage
+  if (e.request.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/") || url.pathname.includes("/assets/vosk/")) return;
   e.respondWith(
     caches.match(e.request, { ignoreSearch: url.pathname.endsWith("/") || url.pathname.endsWith("index.html") }).then((hit) => {
       const net = fetch(e.request).then((res) => { if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone())); return res; }).catch(() => hit || caches.match("index.html"));

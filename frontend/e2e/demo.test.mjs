@@ -224,7 +224,7 @@ test("spoken words behind the demo login: the app asks the browser's voice to sa
   await page.locator("#password").fill(PASSWORD);
   await page.getByRole("button", { name: "Log in" }).click();
   const app = await page.request.get(URL_ + "/");
-  assert.match(app.headers()["permissions-policy"], /microphone=\(\)/, "the microphone stays off: dictation only plays speech");
+  assert.match(app.headers()["permissions-policy"], /microphone=\(self\)/, "the microphone is this site's only (Read aloud listens on the phone); no other site may use it");
   await page.getByRole("button", { name: "Let's begin" }).click();
   await page.getByLabel(/Name to show/).fill("Voice Learner");
   await page.getByRole("button", { name: "Continue" }).click();

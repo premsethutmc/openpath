@@ -36,6 +36,7 @@
     "english:e2e-books": "node --test e2e/books.test.mjs",
     "english:e2e-vocabulary": "node --test e2e/vocabulary.test.mjs",
     "english:e2e-daily": "node --test e2e/daily-english.test.mjs",
+    "english:e2e-read-aloud": "node --test e2e/read-aloud.test.mjs",
     "english:e2e-level": "node --test e2e/level-check.test.mjs",
     "english:e2e-grammar": "node --test e2e/grammar-syllabus.test.mjs",
     "english:e2e-first": "node --test e2e/first-words.test.mjs",
@@ -59,7 +60,8 @@
   "dependencies": {
     "jsxgraph": "1.14.3",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "vosk-browser": "0.0.8"
   },
   "devDependencies": {
     "@types/bun": "1.4.4",

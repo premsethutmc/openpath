@@ -1,0 +1,10 @@
+{
+  "about": "Words in content/english/dictation/sentences.json that the on-phone speech model (vosk-model-small-en-us-0.15) has no entry for; sentences with them are not offered in Read aloud. Regenerate with tools/english/read-aloud/vocab-check.py when sentences change.",
+  "model": "vosk-model-small-en-us-0.15",
+  "words": [
+    "guard's",
+    "librarian's",
+    "neighbour's",
+    "sender's"
+  ]
+}

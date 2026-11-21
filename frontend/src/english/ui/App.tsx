@@ -32,6 +32,7 @@ import type { Book } from "../logic/books.ts";
 import { VocabularyCheck } from "./VocabularyCheck.tsx";
 import { NewWords } from "./NewWords.tsx";
 import { ListenWrite } from "./ListenWrite.tsx";
+import { ReadAloud } from "./ReadAloud.tsx";
 import { LevelCheck } from "./LevelCheck.tsx";
 import { GrammarUse } from "./GrammarUse.tsx";
 import { ListenAnswer } from "./ListenAnswer.tsx";
@@ -135,6 +136,7 @@ export function App() {
   const [inVocab, setInVocab] = useState(false);
   const [inNewWords, setInNewWords] = useState(false);
   const [inListenWrite, setInListenWrite] = useState(false);
+  const [inReadAloud, setInReadAloud] = useState(false);
   const [dictPassage, setDictPassage] = useState<"unseen" | "seen" | null>(null);
   const [inLevelCheck, setInLevelCheck] = useState(false);
   const [grammarUse, setGrammarUse] = useState<{ topics?: string[]; from?: "syllabus" | "writing" } | null>(null);
@@ -193,6 +195,7 @@ export function App() {
       setInVocab(false);
       setInNewWords(false);
       setInListenWrite(false);
+      setInReadAloud(false);
       setInLevelCheck(false);
       setGrammarUse(null);
       setGuided(null);
@@ -675,6 +678,12 @@ export function App() {
         />
       </div>
     );
+  if (inReadAloud)
+    return (
+      <div className="vocab-screen" data-tick={tick} data-mode={mode}>
+        <ReadAloud learner={learner} voice={voice} onLeave={() => (setInReadAloud(false), changed())} />
+      </div>
+    );
   if (inListenWrite)
     return (
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
@@ -817,6 +826,7 @@ export function App() {
           onVocab={() => (setInVocab(true), scrollTo(0, 0))}
           onNewWords={() => (setInNewWords(true), scrollTo(0, 0))}
           onListenWrite={() => (setInListenWrite(true), scrollTo(0, 0))}
+          onReadAloud={() => (setInReadAloud(true), scrollTo(0, 0))}
           onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
           onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
