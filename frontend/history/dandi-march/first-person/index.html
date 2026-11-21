@@ -24,8 +24,63 @@
       <div id="view" class="view" role="img" aria-label="At a child’s eye level, a line of marchers on a dusty road outside Aslali. A man walks on your right.">
         <div class="plate"></div>
       </div>
-      <div class="location"><strong>Approaching Aslali</strong><span>12 March 1930 · Reconstruction</span></div>
+      <div class="location"><strong id="place">Approaching Aslali</strong><span id="place-date">12 March 1930 · Reconstruction</span></div>
     </div>
+    <div id="shore" class="scene shore" hidden>
+      <div class="coast-photo" aria-hidden="true"></div>
+      <div class="location"><strong>Dandi, Gujarat</strong><span id="shore-date">5 April 1930 · Reconstruction</span></div>
+      <div id="shore-caption" class="shore-caption">The marchers reach the coast. They wait until morning.</div>
+    </div>
+  </section>
+  <section id="route" class="card" aria-labelledby="route-title" hidden>
+    <p class="kicker">GUJARAT · 1930</p><h2 id="route-title" tabindex="-1">Weeks on the road</h2>
+    <p class="brief">A walk of about 390 kilometres. Follow four moments on the route.</p>
+    <svg class="route-art" viewBox="0 0 370 230" aria-hidden="true">
+      <rect width="370" height="230" fill="#302b23"/>
+      <path d="M0 12 75 30 112 65 131 103 153 127 168 153 185 190 206 230H0Z" fill="#313c3b"/>
+      <path d="M0 12 75 30 112 65 131 103 153 127 168 153 185 190 206 230" fill="none" stroke="#788780" stroke-width="2"/>
+      <path d="M145 114q25 7 51-9t49-11" fill="none" stroke="#788780" stroke-width="3"/>
+      <text x="16" y="190" fill="#9eb1a7">Arabian Sea</text><text x="248" y="64" fill="#b6a68e">Gujarat</text>
+      <path d="M195 32 198 64 224 109 219 135 235 166 221 208" fill="none" stroke="#d6b981" stroke-width="2" stroke-dasharray="5 5"/>
+      <g class="route-pin"><circle cx="195" cy="32" r="5"/><text x="208" y="36">Sabarmati</text></g>
+      <g class="route-pin"><circle cx="198" cy="64" r="5"/><text x="145" y="68">Aslali</text></g>
+      <g class="route-pin"><circle cx="224" cy="109" r="5"/><text x="240" y="113">Mahi River</text></g>
+      <g class="route-pin"><circle cx="221" cy="208" r="5"/><text x="236" y="212">Dandi</text></g>
+      <text x="16" y="218" fill="#a69781" font-size="10">SCHEMATIC · NOT TO SCALE</text>
+    </svg>
+    <ol class="route-list">
+      <li><button data-stop="0" aria-pressed="true"><time datetime="1930-03-12">12 Mar</time><b>Sabarmati</b></button></li>
+      <li><button data-stop="1" aria-pressed="false"><time datetime="1930-03-12">12 Mar</time><b>Aslali</b></button></li>
+      <li><button data-stop="2" aria-pressed="false"><time datetime="1930-03-20">19–20 Mar</time><b>Mahi River</b></button></li>
+      <li><button data-stop="3" aria-pressed="false"><time datetime="1930-04-05">5 Apr</time><b>Dandi</b></button></li>
+    </ol>
+    <p id="route-note" role="status" class="map-note"></p>
+    <div class="row"><button id="back-road">Back to the road</button><button id="to-shore" class="light">Go to Dandi</button></div>
+  </section>
+  <section id="spread" class="card" aria-labelledby="spread-title" hidden>
+    <p class="kicker">INDIA · APRIL 1930</p><h2 id="spread-title" tabindex="-1">One act, many marches</h2>
+    <p class="brief">People elsewhere could defy the same law. In the Madras Presidency, Rajaji led a separate march.</p>
+    <div class="spread-map" aria-label="Two separate routes, not to scale">
+      <div><small>GUJARAT</small><b>Sabarmati → Dandi</b><span>Salt law broken · 6 Apr</span>
+      <svg viewBox="0 0 180 38" aria-hidden="true"><path d="m15 8 34 9 34-3 32 9 45 8"/><circle cx="15" cy="8" r="4"/><circle cx="160" cy="31" r="4"/></svg></div>
+      <div><small>MADRAS PRESIDENCY</small><b>Tiruchirappalli → Vedaranyam</b><span>Salt law broken · 30 Apr</span>
+      <svg viewBox="0 0 180 38" aria-hidden="true"><path d="m15 12 39 5 20-5 45 13 41-5"/><circle cx="15" cy="12" r="4"/><circle cx="160" cy="20" r="4"/></svg></div>
+    </div>
+    <p class="route-disclaimer">Separate routes · not to scale</p>
+    <details class="inside">
+      <summary>Why it spread</summary>
+      <p>Everyone needed salt. By openly breaking the law without violence, people could turn an everyday need into a protest. In Tamil Nadu, people along Rajaji’s route welcomed marchers and offered support.</p>
+      <p>Rajaji left Tiruchirappalli on 13 April and arrived at Vedaranyam on 28 April. Like at Dandi, arrival and the salt act were separate events.</p>
+    </details>
+    <details class="inside">
+      <summary>Before and after the march</summary>
+      <ul class="history-context">
+        <li><b>1929:</b> After opposition to the Simon Commission, the Congress at Lahore declared complete independence (Purna Swaraj) its goal.</li>
+        <li><b>1930:</b> The Salt March became part of the wider Civil Disobedience Movement. Many people joined protests and many were arrested.</li>
+        <li><b>1931–32:</b> The Gandhi–Irwin Pact paused the campaign. Gandhi attended the Second Round Table Conference. After talks failed to settle the issue, Civil Disobedience resumed in 1932.</li>
+      </ul>
+    </details>
+    <div class="row"><button id="back-shore">Back to Dandi</button><button id="restart" class="light">Replay opening</button></div>
   </section>
   <section id="toolbar" aria-label="Take part in the march">
     <div id="film-controls" hidden>
@@ -39,20 +94,25 @@
         <button id="turn" aria-pressed="false">Look right →</button>
         <button id="walk" class="light" aria-pressed="false">Walk</button>
         <button id="ask" hidden>Why salt?</button>
+        <button id="see-route">See the route</button>
       </div>
+      <div id="walk-progress" class="walk-progress" role="progressbar" aria-label="Progress along this stretch of the march" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><span></span></div>
       <button id="replay" class="text">Replay opening</button>
+    </div>
+    <div id="shore-controls" class="row" hidden>
+      <button id="salt-act" class="light">Stay until dawn</button>
+      <button id="see-spread" class="light" hidden>See how it spread</button>
+      <button id="shore-route">Back to the route</button>
     </div>
   </section>
   <details>
     <summary>Archive and reconstruction</summary>
     <p>The opening uses genuine <a href="https://commons.wikimedia.org/wiki/File:Salt_March.ogv">1930 Salt March footage</a> from the GandhiServe/Wikimedia Commons compilation, listed there as public domain in India and the US. The score and footsteps are modern. The edit does not identify a precise filming location.</p>
-    <p>After the cut, you are an imagined local child. The companion, the photographic-style reconstruction (generated illustration), and the synthesized voice are not archival. Gandhi does not speak. Aslali was the march’s first night halt. Gandhi’s opposition to the salt tax included its burden on poor families.</p>
-    <p><a href="https://www.gandhiheritageportal.org/dandi-march-details">March chronology</a> · <a href="https://www.mkgandhi.org/ebks/Mahatma-Gandhi-Sushila-Nayar-volume6.pdf">Account quoting Gandhi’s 2 March letter</a></p>
+    <p>After the cut, you are an imagined local child. The companion, and the photographic-style reconstructions are imagined. The coastal salt image is an illustration, not an archival photograph of Gandhi. Gandhi does not speak. No synthetic dialogue plays. Aslali was the march’s first night halt. Gandhi’s opposition to the salt tax included its burden on poor families.</p>
+    <p><a href="https://www.gandhiheritageportal.org/dandi-march-details">March chronology</a> · <a href="https://www.mkgandhi.org/ebks/Mahatma-Gandhi-Sushila-Nayar-volume6.pdf">Account quoting Gandhi’s 2 March letter</a> · <a href="https://tamilnaduarchives.tn.gov.in/UPLOAD/PUBLICATION/PDF/6.pdf">Tamil Nadu Archives: Vedaranyam</a></p>
   </details>
   <footer>OpenPath · Founded and created by Premkumar Sethuraman</footer>
 </main>
-<audio id="invitation" preload="auto" src="./assets/walk.mp3"></audio>
-<audio id="answer" preload="auto" src="./assets/salt.mp3"></audio>
 <script type="module" src="./walk.mjs"></script>
 </body>
 </html>

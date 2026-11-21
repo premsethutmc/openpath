@@ -29,5 +29,6 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node --test --test-timeout=40000 e2e/history-dandi.test.mjs
 
+      - run: node --test history/dandi-march/first-person/journey.test.mjs
       - name: Cinematic first-person cut
-        run: node --test --test-timeout=40000 e2e/history-dandi-first-person.test.mjs
+        run: node --test --test-timeout=65000 e2e/history-dandi-first-person.test.mjs

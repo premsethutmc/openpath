@@ -5,8 +5,8 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
 ## Dandi history preview (2026-11-21, draft #288)
-- On `feat/history-dandi-march`: archive opening to a first-person road reconstruction and one optional, captioned exchange about salt. Original illustrated draft and standalone approved film preserved.
-- No merge or deploy authorized. Mobile Chromium checks in the dedicated workflow; physical Android review and a production performance remain outstanding.
+- On `feat/history-dandi-march`: unchanged archive opening, a controllable Aslali walk and optional captioned salt conversation, route via Mahi, distinct April 5–6 shore beats, Vedaranyam comparison and optional political context. Scratch dialogue removed. Original illustrated draft remains separate.
+- No merge or deploy authorized. Three deterministic journey tests and companion media/offline checks; dedicated mobile Chromium workflow covers the full journey. Physical Android review and a production human voice remain outstanding.
 
 ## Writing evaluator acceptance (2026-11-18, in progress)
 - Branch `feat/english-writing-evaluator-2026-11-18`, layered on #221. No provider activated or real learner text accepted.

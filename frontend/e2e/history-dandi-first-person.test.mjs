@@ -31,7 +31,7 @@ before(async () => {
 });
 after(async()=>{ await browser?.close(); server?.close(); });
 
-test('390 px first visit: archive hands off to the road, with speech on actual tap', {timeout:34000},async()=>{
+test('390 px archive to optional captioned exchange, controllable walk, and two routes', {timeout:55000},async()=>{
   const c = await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   try {
     const p = await c.newPage();
@@ -50,10 +50,31 @@ test('390 px first visit: archive hands off to the road, with speech on actual t
     assert.equal(await p.locator('#walk').getAttribute('aria-pressed'),'true');
     await p.locator('#turn').tap();
     await p.getByRole('button',{name:'Why salt?'}).tap();
-    await p.waitForFunction(()=>document.querySelector('#answer').currentTime>.1);
-    assert.match(await p.locator('#caption').innerText(),/tax weighs hardest/i);
+    assert.equal(await p.locator('audio').count(),0);
+    assert.match(await p.locator('#caption').innerText(),/tax hits poor families hardest/i);
     assert.equal(await p.locator('#view').getAttribute('data-answer'),'true');
     assert.equal(await p.locator('#walk').getAttribute('aria-pressed'),'false');
+    await p.locator('#walk').tap();
+    await p.waitForFunction(()=>document.querySelector('#walk-progress').getAttribute('aria-valuenow') >= 2);
+    await p.locator('#walk').tap();
+    const progress = await p.locator('#walk-progress').getAttribute('aria-valuenow');
+    await p.waitForTimeout(650);
+    assert.equal(await p.locator('#walk-progress').getAttribute('aria-valuenow'),progress);
+    await p.locator('#walk').tap();
+    await p.waitForFunction(()=>document.querySelector('#view').dataset.village === 'true');
+    assert.equal(await p.locator('#turn').isVisible(),false);
+    await p.waitForFunction(()=>document.querySelector('#walk').disabled,{},{timeout:14000});
+    await p.getByRole('button',{name:'See the route'}).tap();
+    await p.getByRole('button',{name:/Mahi River/}).tap();
+    assert.match(await p.locator('#route-note').innerText(),/Kareli/);
+    await p.getByRole('button',{name:'Go to Dandi'}).tap();
+    assert.match(await p.locator('#shore-date').innerText(),/5 April/);
+    assert.equal(await p.getByRole('button',{name:'See how it spread'}).isVisible(),false);
+    await p.getByRole('button',{name:'Stay until dawn'}).tap();
+    assert.match(await p.locator('#shore-date').innerText(),/6 April/);
+    await p.getByRole('button',{name:'See how it spread'}).tap();
+    assert.match(await p.locator('#spread').innerText(),/Tiruchirappalli → Vedaranyam/);
+    assert.match(await p.locator('#spread').innerText(),/30 Apr/);
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),390);
     assert.deepEqual(errors,[]);
   } finally { await c.close(); }
@@ -78,10 +99,17 @@ test('320 px mute, reduced motion, keyboard, background and replay',async()=>{
     });
     await p.keyboard.press('ArrowRight');
     await p.getByRole('button',{name:'Why salt?'}).click();
-    assert.equal(await p.locator('#answer').evaluate(a=>a.paused),true);
-    assert.match(await p.locator('#caption').innerText(),/pinch/);
+    assert.equal(await p.locator('audio').count(),0);
+    assert.match(await p.locator('#caption').innerText(),/Everyone needs salt/);
     await p.keyboard.press('ArrowLeft');
     assert.equal(await p.getByRole('button',{name:'Why salt?'}).isVisible(),false);
+    await p.getByRole('button',{name:'See the route'}).click();
+    await p.getByRole('button',{name:'Go to Dandi'}).click();
+    await p.getByRole('button',{name:'Stay until dawn'}).click();
+    await p.getByRole('button',{name:'See how it spread'}).click();
+    await p.getByRole('button',{name:'Back to Dandi'}).click();
+    assert.equal(await p.locator('#shore').getAttribute('data-salt'),'true');
+    await p.getByRole('button',{name:'See how it spread'}).click();
     await p.getByRole('button',{name:'Replay opening'}).click();
     await p.waitForFunction(()=>document.querySelector('video').currentTime>.1);
     assert.equal(await p.locator('video').evaluate(v=>v.muted),true);
