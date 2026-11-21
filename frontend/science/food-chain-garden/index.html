@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <title>Food Chain Garden · OpenPath</title>
+  <link rel="stylesheet" href="./garden.css">
+</head>
+<body>
+<main>
+  <header>
+    <a href="../">‹ All labs</a>
+    <span>OPENPATH / CLASS 5 SCIENCE</span>
+  </header>
+  <h1>Food Chain Garden</h1>
+  <p class="intro">Take away the leafy plants. What changes?</p>
+  <section class="field" aria-label="Play in the garden">
+    <div class="scene" id="scene">
+      <svg viewBox="0 0 620 365" role="img" aria-labelledby="art-title" xmlns="http://www.w3.org/2000/svg">
+        <title id="art-title">A garden with leafy plants, caterpillars and visiting birds</title>
+        <defs>
+          <linearGradient id="sky" x2="0%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#99c8dc"/><stop offset="1" stop-color="#fff0bb"/></linearGradient>
+          <linearGradient id="land" x2="0%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#b1ba66"/><stop offset="1" stop-color="#68824b"/></linearGradient>
+          <pattern id="soil" width="41" height="20" patternUnits="userSpaceOnUse"><rect width="41" height="20" fill="#98704e"/><path d="M2 7h6m16 8h4m5-11h3" stroke="#5f4838" opacity=".45"/><circle cx="16" cy="4" r="2" fill="#cc9a68"/></pattern>
+          <g id="plant"><path d="M0 5Q-6-18 0-59" fill="none" stroke="#244c3a" stroke-width="4" stroke-linecap="round"/><path d="M-1-16Q-28-13-36-40q27-3 35 24M-2-25q6-26 35-25-3 22-35 25M-1-39q-20-5-20-25 23 1 20 25M0-52q-5-17 7-33 12 19-7 33" fill="currentColor" stroke="#244c3a" stroke-width="1.1"/><path d="m-2-17-25-17m27 6 26-17m-26 5-16-18" stroke="#dde496" stroke-width="1" opacity=".7" fill="none"/></g>
+          <g id="larva"><path d="M3 7q6-13 12 0 5-13 11-2" fill="none" stroke="#263a2a" stroke-width="11" stroke-linecap="round"/><path d="M3 7q6-13 12 0 5-13 11-2" fill="none" stroke="#cad456" stroke-width="8" stroke-linecap="round"/><path d="m25 1 1-5m2 5 4-4" stroke="#263a2a" stroke-width="1.3"/><circle cx="28" cy="4" r="1.7" fill="#263a2a"/></g>
+          <g id="bird"><path d="M-20 8-39 6l12 10-11 9 25-9" fill="#4a3c51"/><path d="M-22 7Q-11-10 11-4q7-13 17-4 7 6 2 14-6 13-26 15-19 3-26-14" fill="#b25e42" stroke="#563936" stroke-width="1.3"/><path d="M-10 5Q2 0 13 6 1 20-14 16Z" fill="#f0c889"/><path d="m32-3 9 4-10 3" fill="#dca958"/><circle cx="26" cy="-4" r="2.2" fill="#191e28"/><path d="m-2 19-4 8m15-7 2 7" fill="none" stroke="#563936" stroke-width="2" stroke-linecap="round"/></g>
+        </defs>
+        <rect width="620" height="365" fill="url(#sky)"/>
+        <circle cx="97" cy="74" r="42" fill="#ffedaf" opacity=".92"/>
+        <path d="M0 147Q110 58 224 142T433 128Q522 62 620 128V260H0Z" fill="#8aa98e"/>
+        <path d="M0 191Q135 130 244 180t170-10q115-46 206 8v187H0Z" fill="url(#land)"/>
+        <path d="M0 221q115-58 224-4t197 9q109-49 199-8v147H0Z" fill="#78914e"/>
+        <path d="M0 250q108 10 179-24t243 10q100 30 198-5v134H0Z" fill="#8da359"/>
+        <path d="M-5 322q145-22 249 10t376-27v60H0Z" fill="#586f46"/>
+        <g fill="none" stroke="#d6cb88" stroke-width="3" opacity=".55"><path d="m0 207 12-5m32 28 22-7m106-24 34-6m208 30 37-9m58 17 22-7m59 21 30-4M22 292l32-2m420 46 36-13m-286 34 47-5"/></g>
+        <path d="M72 294q14-23 45-24l249-22q31-3 61 13l56 32q9 9-10 12l-326 34q-42 4-65-12-18-13-10-33Z" fill="url(#soil)" stroke="#6c5237" stroke-width="2"/>
+        <path d="M102 312q121-21 302-24m-282 38q142-18 329-24" fill="none" stroke="#5f4838" stroke-dasharray="5 10" opacity=".55"/>
+        <g id="plants" class="plants" color="#4a8a53">
+          <use href="#plant" transform="translate(124 304) scale(.87)"/>
+          <use href="#plant" transform="translate(172 288) scale(.92)" color="#76a65d"/>
+          <use href="#plant" transform="translate(225 307) scale(1.18)"/>
+          <use href="#plant" transform="translate(284 281) scale(.94)" color="#77a956"/>
+          <use href="#plant" transform="translate(337 284) scale(1.11)"/>
+          <use href="#plant" transform="translate(387 273) scale(.84)" color="#77a956"/>
+        </g>
+        <g id="caterpillars">
+          <use href="#larva" x="122" y="301"/><use href="#larva" x="169" y="290"/><use href="#larva" x="218" y="306"/><use href="#larva" x="277" y="288"/><use href="#larva" x="327" y="299"/><use href="#larva" x="379" y="281"/>
+        </g>
+        <path d="M410 164q75-5 201-64m-108 38q16-17 31-41m16 23 47 1" fill="none" stroke="#624d3e" stroke-width="7" stroke-linecap="round"/>
+        <path d="M473 151q46-10 121-42" fill="none" stroke="#9c7960" stroke-width="2"/>
+        <g id="birds">
+          <use href="#bird" x="466" y="132"/><use href="#bird" x="523" y="114"/><use href="#bird" x="584" y="91"/>
+        </g>
+        <g fill="#e6bc65"><circle cx="36" cy="318" r="3"/><circle cx="51" cy="332" r="3"/><circle cx="533" cy="279" r="3"/><circle cx="547" cy="299" r="3"/><circle cx="570" cy="272" r="3"/></g>
+      </svg>
+      <span id="week" class="week">Week 0</span>
+      <button id="plot" class="plot" type="button">Remove plants</button>
+    </div>
+    <ul class="counts" aria-label="What you can see this week">
+      <li><span class="cue leaf" aria-hidden="true"></span><b id="leaf-count">6</b><span>Plants</span></li>
+      <li><span class="cue insect" aria-hidden="true"></span><b id="caterpillar-count">6</b><span>Caterpillars</span></li>
+      <li><span class="cue bird" aria-hidden="true"></span><b id="bird-count">3</b><span>Birds</span></li>
+    </ul>
+    <p id="notice" role="status" aria-atomic="true">Caterpillars eat leaves. Birds eat caterpillars.</p>
+    <div class="controls">
+      <button id="next" type="button">Next week →</button>
+      <button id="reset" type="button">Start over</button>
+    </div>
+  </section>
+  <details>
+    <summary>Follow the food</summary>
+    <p><b>Plant → caterpillar → bird.</b> Plants make their own food. Caterpillars get food from plants, and these birds get food from caterpillars.</p>
+    <p>This is one garden food chain, not a forecast. The numbers show a possible pattern. Real birds can find other food and may visit other gardens.</p>
+  </details>
+</main>
+<script type="module" src="./garden.mjs"></script>
+</body>
+</html>

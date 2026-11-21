@@ -43,3 +43,7 @@ scope uses the same time scale for both notes, with the previous one dotted.
 Low-level additive Web Audio starts only on pluck; there are no audio files,
 remote calls, microphone inputs, or accounts. The waveform and text remain
 usable when muted; reduced-motion prefers a still string.
+
+### Food Chain Garden
+
+Class 5, Interdependence in Living Beings: one illustrative leaf → caterpillar → bird chain. Remove or restore the leafy plot; each simulated week changes caterpillar visits first and then bird visits, so the animals do not disappear or return on the same tap. The counts are teaching-model values, not forecasts or a complete food web. Labels and observation text work without motion. No account, backend, storage or external assets.

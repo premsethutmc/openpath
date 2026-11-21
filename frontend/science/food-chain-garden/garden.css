@@ -1,0 +1,38 @@
+:root{font:16px/1.45 system-ui,sans-serif;background:#f6f3e8;color:#23352c;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0}
+main{max-width:740px;margin:auto;padding:10px clamp(12px,4vw,30px) 32px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#45634e;font-size:.72rem;font-weight:800;letter-spacing:.07em}
+header a{display:inline-flex;align-items:center;min-height:44px;color:#21583c;letter-spacing:0;font-size:.86rem;text-underline-offset:.2em}
+h1{font-family:Georgia,serif;line-height:1.03;font-weight:600;font-size:clamp(2.1rem,6vw,3.6rem);margin:10px 0 4px}
+.intro{margin:0 0 12px;color:#3b5144}
+.field{overflow:hidden;border:1px solid #b6c1a5;border-radius:18px;background:#fffdf4;box-shadow:0 13px 30px #34443516}
+.scene{position:relative;background:#91ac77}
+.scene svg{display:block;width:100%;height:auto}
+.week,.plot{position:absolute}
+.week{top:8px;left:8px;background:#fff9e3;color:#263c2e;border:1px solid #adba99;border-radius:20px;padding:3px 10px;font-size:.74rem;font-weight:750}
+button{min-height:44px;font:inherit;font-weight:800;cursor:pointer;border:1px solid transparent;border-radius:10px}
+button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #123b70;outline-offset:3px}
+.plot{bottom:4%;left:8%;padding:0 10px;color:#223928;background:#fff6cc;border-color:#705838;box-shadow:0 3px 0 #4a3e2a;font-size:.85rem}
+.plot:active{transform:translateY(2px);box-shadow:0 1px 0 #4a3e2a}
+.plants{transition:opacity .3s,translate .3s}
+.scene[data-leaves="false"] .plants{opacity:0;translate:0 12px}
+#caterpillars use,#birds use{transition:opacity .35s,translate .35s;opacity:1}
+#caterpillars .away,#birds .away{opacity:0;translate:19px -10px}
+#birds .away{translate:37px -25px}
+.counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0;margin:0;list-style:none;border-bottom:1px solid #dadfc9}
+.counts li{display:grid;grid-template-columns:12px auto;gap:1px 5px;align-items:center;justify-content:center;padding:8px 1px;line-height:1.13;text-align:center}
+.counts li+li{border-left:1px solid #dadfc9}
+.counts li span:last-child{grid-column:1/-1;font-size:clamp(.72rem,2.6vw,.85rem);color:#3b5144}
+.counts b{font-size:1.25rem}
+.cue{width:10px;height:8px;background:#517e46;border-radius:8px 1px}
+.cue.insect{background:#8a7725;border-radius:9px;height:5px}
+.cue.bird{background:#a45137;border-radius:9px}
+#notice{font-weight:620;margin:0;padding:10px 12px 5px;min-height:3.35em}
+.controls{display:flex;gap:10px;flex-wrap:wrap;padding:5px 12px 13px}
+#next{background:#21583c;color:white;padding:0 15px}
+#reset{background:transparent;color:#315340;padding:0 10px;text-decoration:underline;text-underline-offset:.2em}
+details{margin:16px 2px;color:#394f42;font-size:.9rem}
+details p{max-width:53ch;margin:5px 2px 12px}
+summary{min-height:44px;align-content:center;font-weight:750;cursor:pointer}
+@media(prefers-reduced-motion:reduce){.plants,#caterpillars use,#birds use{transition:none}}

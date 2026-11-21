@@ -3,7 +3,7 @@
 set -eu
 src=frontend/science
 out=preview-dist
-mkdir -p "$out/plant-a-seed" "$out/pressure-in-sand" "$out/prism" "$out/salt-from-sand" "$out/separation-bench" "$out/chemistry-lab" "$out/flower-to-seed" "$out/shadow-lab" "$out/lift-the-rock" "$out/sound-studio"
+mkdir -p "$out/plant-a-seed" "$out/pressure-in-sand" "$out/prism" "$out/salt-from-sand" "$out/separation-bench" "$out/chemistry-lab" "$out/flower-to-seed" "$out/shadow-lab" "$out/lift-the-rock" "$out/sound-studio" "$out/food-chain-garden"
 cp "$src/index.html" "$src/science.css" "$out/"
 copy_lab() {
   lab=$1
@@ -20,4 +20,5 @@ copy_lab flower-to-seed index.html garden.css garden.mjs art.mjs model.mjs sound
 copy_lab shadow-lab index.html shadow.css shadow.mjs model.mjs
 copy_lab lift-the-rock index.html lever.css lever.mjs model.mjs
 copy_lab sound-studio index.html sound.css studio.mjs model.mjs
+copy_lab food-chain-garden index.html garden.css garden.mjs model.mjs
 printf 'User-agent: *\nDisallow: /\n' > "$out/robots.txt"
