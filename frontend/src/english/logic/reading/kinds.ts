@@ -137,6 +137,24 @@ export function nextKind(k: Kinds, records: readonly KindRecord[], start: number
   return fresh[0] ?? null;
 }
 
+/**
+ * What to read now: the next unread text, or, when every text near the level is read, one near the level read again
+ * (at the level first, read fewest times, longest ago, never the one just read). Null only when there are no texts.
+ */
+export function kindToRead(k: Kinds, records: readonly KindRecord[], start: number): { text: KindText; again: boolean } | null {
+  const fresh = nextKind(k, records, start);
+  if (fresh) return { text: fresh, again: false };
+  const at = kindLevel(k, records, start);
+  const times = new Map<string, number>();
+  const last = new Map<string, number>();
+  records.forEach((r, i) => (times.set(r.text, (times.get(r.text) ?? 0) + 1), last.set(r.text, i)));
+  const latest = records[records.length - 1]?.text;
+  const order = (l: number) => (l === at ? 0 : l === at - 1 ? 1 : 2);
+  const near = k.texts.filter((t) => Math.abs(t.level - at) <= 1 && t.id !== latest);
+  const again = near.sort((a, b) => order(a.level) - order(b.level) || (times.get(a.id) ?? 0) - (times.get(b.id) ?? 0) || (last.get(a.id) ?? -1) - (last.get(b.id) ?? -1))[0];
+  return again ? { text: again, again: true } : null;
+}
+
 export interface KindView {
   phase: "read" | "ask" | "answered" | "done";
   title: string;

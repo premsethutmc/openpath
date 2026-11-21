@@ -15,7 +15,7 @@
  *   node --import tsx scripts/sim-english-wide.mts --runs 10 --md sim-wide.md --strict
  */
 import { writeFileSync } from "node:fs";
-import { KINDS, KindSitting, nextKind, type KindRecord } from "../src/english/logic/reading/kinds.ts";
+import { KINDS, KindSitting, kindToRead, nextKind, type KindRecord } from "../src/english/logic/reading/kinds.ts";
 import { LONG, LongSitting, longLevel, nextStep, type LongRecord } from "../src/english/logic/reading/long-read.ts";
 import { StudySitting, chartFor, mapFor, nextStudy, notesFor, ownTrip, directions, kindStrength, type StudyKind, type StudyRecord } from "../src/english/logic/study/study.ts";
 import { SYLLABUSES, taskLine, type Syllabus } from "../src/english/logic/syllabus/syllabus.ts";
@@ -96,7 +96,7 @@ function runLearner(p: Persona, run: number): Stats {
   for (let day = 0; day < DAYS; day++) {
     // a poem or everyday text
     try {
-      const t = nextKind(KINDS, kindRecs, p.level);
+      const t = kindToRead(KINDS, kindRecs, p.level)?.text;
       if (!t) st.kinds.ranOut++;
       else {
         const s = new KindSitting(t);
