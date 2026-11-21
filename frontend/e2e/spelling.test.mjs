@@ -38,6 +38,13 @@ async function today(page) {
   await page.getByRole("heading", { name: "Today" }).waitFor();
 }
 
+/** Progress and Journey keep the skill-by-skill detail folded: open it. */
+async function skillBySkill(page) {
+  const fold = page.getByRole("button", { name: /^Skill by skill/ });
+  await fold.waitFor();
+  if ((await fold.getAttribute("aria-expanded")) === "false") await fold.click();
+}
+
 let browser;
 before(async () => {
   browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
@@ -151,9 +158,9 @@ test("with a voice: hear the word, repeat it, hear it in a sentence, type it; a 
   const { context, page, errors } = await device({ voice: true });
   await register(page, `dictation.${run}@example.org`, "Ravi");
   await placement(page);
-  // Today offers the dictation check
-  await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
+  // Today (in Journey, under Skill by skill) offers the dictation check
   await today(page);
+  await page.getByRole("heading", { name: "Spelling check: hear and spell" }).waitFor();
   await page.locator(".plan li", { hasText: "Spelling check: hear and spell" }).getByRole("button", { name: "Start" }).click();
   await page.locator(".spelling-intro").waitFor();
   await fits(page);
@@ -222,6 +229,7 @@ test("with a voice: hear the word, repeat it, hear it in a sentence, type it; a 
   // the Learner Vector moved (Progress shows a spelling estimate)
   await page.getByRole("button", { name: "Back to today" }).click();
   await page.getByRole("button", { name: "Progress", exact: true }).click();
+  await skillBySkill(page);
   await page.locator(".overview").waitFor();
   await shot(page, "progress-after-dictation");
 
@@ -298,6 +306,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   await page.getByRole("button", { name: "Start the spelling check" }).click();
   await answerAll();
   // Today: a check to collect the missing evidence
+  await today(page);
   const offer = page.locator('.plan li[data-action="evidence_check"]').first();
   await offer.waitFor({ timeout: 10000 });
   const cap = await offer.getAttribute("data-capability");
@@ -305,6 +314,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   await shot(page, "today-evidence-check");
   // Progress: the estimate is reported, the level is not called shown, and the card says what is missing
   await page.getByRole("button", { name: "Progress", exact: true }).click();
+  await skillBySkill(page);
   const card = page.locator(`.caps li[data-capability="${cap}"]`).first();
   await card.waitFor();
   assert.ok(!["shown", "confirmed"].includes(await card.getAttribute("data-standing")));
@@ -315,6 +325,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   await shot(page, "progress-not-yet-shown");
   // Journey (pilot skills only)
   await page.getByRole("button", { name: "Journey", exact: true }).click();
+  await skillBySkill(page);
   const onPath = page.locator(`.path > li[data-capability="${cap}"]`);
   if (await onPath.count()) assert.match(await onPath.innerText(), /more answers on your own at that level are needed/);
   // start it: by dictation where the skill has words at that level, otherwise a short check
