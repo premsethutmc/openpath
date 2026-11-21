@@ -1,6 +1,6 @@
 {
   "id": "grammar-learn",
-  "version": 5,
+  "version": 6,
   "status": "practice_only",
   "review": "Written for OpenPath, 20 Nov 2026; not educator-reviewed.",
   "format": "One card per Grammar in use topic, shown the first time a learner meets the topic (and again after two misses in a row): the rule, two examples, a common mistake beside the right version with a one-line reason, and two questions to try (not scored).",
@@ -32,6 +32,10 @@
           "ball",
           "a"
         ]
+      },
+      "simple": {
+        "say": "Ask: is it a thing? Noun. Is it something you do? Verb. Does it tell what a thing is like? Adjective.",
+        "example": "The (adjective) big (adjective) dog (noun) runs (verb)."
       }
     },
     {
@@ -61,6 +65,10 @@
           "city",
           "river"
         ]
+      },
+      "simple": {
+        "say": "Big letter at the start, dot at the end. People's names and place names always get a big first letter.",
+        "example": "Meena lives in Chennai."
       }
     },
     {
@@ -90,6 +98,10 @@
           "a hour",
           "an horse"
         ]
+      },
+      "simple": {
+        "say": "Say the next word aloud. If it starts with a, e, i, o or u sound, use an. Otherwise use a.",
+        "example": "an apple, an hour, a ball, a uniform"
       }
     },
     {
@@ -119,6 +131,10 @@
           "childs",
           "childes"
         ]
+      },
+      "simple": {
+        "say": "For more than one, add s. If the word ends with a hissing sound (s, x, ch, sh), add es.",
+        "example": "one cat, two cats; one box, two boxes"
       }
     },
     {
@@ -148,6 +164,10 @@
           "The dogs is barking.",
           "The dog are barking."
         ]
+      },
+      "simple": {
+        "say": "One person doing it? Put s on the action word. Many people? No s.",
+        "example": "Ravi runs. Ravi and Meena run."
       }
     },
     {
@@ -177,6 +197,10 @@
           "It",
           "She"
         ]
+      },
+      "simple": {
+        "say": "Instead of saying the name again, use a small word: he, she, it or they.",
+        "example": "Ravi is hungry. He wants lunch."
       }
     },
     {
@@ -206,6 +230,10 @@
           "visit",
           "visits"
         ]
+      },
+      "simple": {
+        "say": "Did it happen yesterday or before? Add ed to the action word.",
+        "example": "Today I play. Yesterday I played."
       }
     },
     {
@@ -235,6 +263,10 @@
           "in",
           "at"
         ]
+      },
+      "simple": {
+        "say": "Look at where it is. On top: on. Inside: in. Below: under. At a place: at.",
+        "example": "The book is on the table."
       }
     },
     {
@@ -264,6 +296,10 @@
           "because",
           "so"
         ]
+      },
+      "simple": {
+        "say": "And adds more. But says something different. Because tells why.",
+        "example": "I was tired because I ran."
       }
     },
     {
@@ -293,6 +329,10 @@
           "You did finish your work?",
           "Did you finished your work?"
         ]
+      },
+      "simple": {
+        "say": "Asking something? Put the question word or helping word first, and finish with ?",
+        "example": "Where is my bag?"
       }
     },
     {
@@ -322,6 +362,10 @@
           "slow",
           "slowness"
         ]
+      },
+      "simple": {
+        "say": "An adverb answers how? Most of the time, add ly to the describing word.",
+        "example": "She is quick. She runs quickly."
       }
     },
     {
@@ -351,6 +395,10 @@
           "Hurray!",
           "Wow!"
         ]
+      },
+      "simple": {
+        "say": "A word that bursts out with a feeling, like Wow or Oh, gets an ! after it.",
+        "example": "Wow! What a big cake!"
       }
     },
     {
@@ -380,6 +428,10 @@
           "search for",
           "look behind"
         ]
+      },
+      "simple": {
+        "say": "Some action words come with a little partner word, and the two together mean something new.",
+        "example": "look up a word = find it in the dictionary"
       }
     },
     {
@@ -409,6 +461,10 @@
           "practise only once",
           "perfect people never practise"
         ]
+      },
+      "simple": {
+        "say": "A proverb is wise advice in a few words. Think about what it teaches, not each word.",
+        "example": "Slow and steady wins the race."
       }
     },
     {
@@ -438,6 +494,10 @@
           "the boys cap",
           "the boys's cap"
         ]
+      },
+      "simple": {
+        "say": "To show whose it is, add 's to the owner. If the owner already ends in s, just add '.",
+        "example": "Ravi's bag; the boys' room"
       }
     },
     {
@@ -467,6 +527,10 @@
           "hotter",
           "most hot"
         ]
+      },
+      "simple": {
+        "say": "Two things: add er. Three or more, the top one: add est. Long words use more and most.",
+        "example": "tall, taller, tallest"
       }
     },
     {
@@ -496,6 +560,10 @@
           "Il'l",
           "Ill"
         ]
+      },
+      "simple": {
+        "say": "Two words squeeze into one. The ' goes where the letters were taken out.",
+        "example": "do not = don't; I am = I'm"
       }
     },
     {
@@ -525,6 +593,10 @@
           "writed",
           "written"
         ]
+      },
+      "simple": {
+        "say": "Some action words do not take ed for yesterday. They change into a new word. Learn them by heart.",
+        "example": "go, went; eat, ate"
       }
     },
     {
@@ -554,6 +626,10 @@
           "are play",
           "is playing"
         ]
+      },
+      "simple": {
+        "say": "Happening right now? Use am, is or are, and add ing to the action word.",
+        "example": "I am eating. She is reading."
       }
     },
     {
@@ -583,6 +659,10 @@
           "Anu said that she was ready.",
           "Anu told us she was ready."
         ]
+      },
+      "simple": {
+        "say": "The exact words someone said go inside quote marks. When you tell it later, drop the marks.",
+        "example": "\"I am hungry,\" said Ravi."
       }
     },
     {
@@ -612,6 +692,10 @@
           "It rained hard.",
           "Playing in the rain."
         ]
+      },
+      "simple": {
+        "say": "Two full sentences can join into one with and, but or so. Put a comma before the joining word.",
+        "example": "It rained, so we stayed in."
       }
     },
     {
@@ -641,6 +725,10 @@
           "then",
           "first"
         ]
+      },
+      "simple": {
+        "say": "Linking words show the order: first, then, next, finally.",
+        "example": "First I wash, then I eat."
       }
     },
     {
@@ -670,6 +758,10 @@
           "I bought pens books, and, bags.",
           "I bought, pens books and bags."
         ]
+      },
+      "simple": {
+        "say": "Telling? End with a dot. Asking? End with ?. A list? Put commas between the things.",
+        "example": "I like mango, banana and guava."
       }
     },
     {
@@ -699,6 +791,10 @@
           "has ate",
           "have eaten"
         ]
+      },
+      "simple": {
+        "say": "Started before and done up to now? Use have or has with the done form of the action word.",
+        "example": "I have finished my homework."
       }
     },
     {
@@ -728,6 +824,10 @@
           "their",
           "they're"
         ]
+      },
+      "simple": {
+        "say": "There is a place. Their means it belongs to them. They're is short for they are.",
+        "example": "They're putting their bags over there."
       }
     },
     {
@@ -757,6 +857,10 @@
           "which",
           "whose"
         ]
+      },
+      "simple": {
+        "say": "Who is for people. Which is for things. That works for both.",
+        "example": "The boy who sings is my friend."
       }
     },
     {
@@ -786,6 +890,10 @@
           "The cat in the hat",
           "the Cat In The Hat"
         ]
+      },
+      "simple": {
+        "say": "In a book or film name, the big words get capital letters. Little words like of and the stay small.",
+        "example": "The Jungle Book; Alice in Wonderland"
       }
     },
     {
@@ -815,6 +923,10 @@
           "\"Are you ready\"? asked Ravi.",
           "\"Are you ready,\" asked Ravi?"
         ]
+      },
+      "simple": {
+        "say": "Talking words go inside quote marks. The comma or ? comes before the closing mark.",
+        "example": "\"Come here,\" said Amma."
       }
     },
     {
@@ -844,6 +956,10 @@
           "we",
           "our"
         ]
+      },
+      "simple": {
+        "say": "Doing the action? I, he, she, we, they. Getting the action? me, him, her, us, them.",
+        "example": "I saw him. He saw me."
       }
     },
     {
@@ -873,6 +989,10 @@
           "their",
           "it's"
         ]
+      },
+      "simple": {
+        "say": "One thing: he, she or it. Many things: they and their.",
+        "example": "The girls lost their books."
       }
     },
     {
@@ -902,6 +1022,10 @@
           "brushed",
           "brushing"
         ]
+      },
+      "simple": {
+        "say": "Pick one time and stay there. If the story is in the past, every action word is in the past.",
+        "example": "She opened the door and walked in."
       }
     },
     {
@@ -931,6 +1055,10 @@
           "The children ate the cake.",
           "The children are eating the cake."
         ]
+      },
+      "simple": {
+        "say": "Put the thing that something happened to first. Then was or is, and the done form of the verb.",
+        "example": "The cake was eaten."
       }
     },
     {
@@ -960,6 +1088,10 @@
           "will",
           "am"
         ]
+      },
+      "simple": {
+        "say": "If one thing happens, another thing will happen. For a pretend wish, use if I were.",
+        "example": "If it rains, we will stay in."
       }
     },
     {
@@ -989,6 +1121,10 @@
           "leave",
           "leaved"
         ]
+      },
+      "simple": {
+        "say": "Talking about the past with should, must or might? Add have and the done form of the verb.",
+        "example": "I should have listened."
       }
     },
     {
@@ -1018,6 +1154,10 @@
           "leaving",
           "leave"
         ]
+      },
+      "simple": {
+        "say": "Some words take ing after them, some take to. Learn them as pairs.",
+        "example": "I enjoy reading. I want to read."
       }
     },
     {
@@ -1047,6 +1187,10 @@
           "quick, quietly and care",
           "quickly, quiet and caring"
         ]
+      },
+      "simple": {
+        "say": "Things in a list should match: all ing words, or all to words.",
+        "example": "I like running, swimming and dancing."
       }
     },
     {
@@ -1076,6 +1220,10 @@
           "First, they packed their bags.",
           "Then they took the train."
         ]
+      },
+      "simple": {
+        "say": "Tell the story in the order it happened: what came first, then next, then last.",
+        "example": "First I woke up. Then I ate. At last I left."
       }
     },
     {
@@ -1105,6 +1253,10 @@
           "He ran fast.",
           "The wind is strong."
         ]
+      },
+      "simple": {
+        "say": "A simile says one thing is like another, using like or as.",
+        "example": "as busy as a bee"
       }
     },
     {
@@ -1134,6 +1286,10 @@
           "a sweet food",
           "a small part"
         ]
+      },
+      "simple": {
+        "say": "An idiom is a saying where the words do not mean what they say. Learn the whole meaning.",
+        "example": "It is raining cats and dogs. (It is raining hard.)"
       }
     },
     {
@@ -1163,6 +1319,10 @@
           "goal",
           "net"
         ]
+      },
+      "simple": {
+        "say": "Each job or game has its own words. Think of the place: kitchen, field, school.",
+        "example": "We bake a cake. We bowl a ball."
       }
     },
     {
@@ -1192,6 +1352,10 @@
           "I love books.",
           "Books are on the shelf."
         ]
+      },
+      "simple": {
+        "say": "Say what you think, then add because and say why.",
+        "example": "I like rain because it cools the air."
       }
     },
     {
@@ -1221,6 +1385,10 @@
           "skipped",
           "raced"
         ]
+      },
+      "simple": {
+        "say": "Pick the word that shows the picture best, not just a plain word like went.",
+        "example": "The tired man trudged home."
       }
     },
     {
@@ -1250,6 +1418,10 @@
           "very happy",
           "happy again"
         ]
+      },
+      "simple": {
+        "say": "Un or re in front changes the meaning. Ful or less at the end changes it too.",
+        "example": "happy, unhappy; care, careful, careless"
       }
     },
     {
@@ -1279,6 +1451,10 @@
           "sleep",
           "arrive"
         ]
+      },
+      "simple": {
+        "say": "Ask: what? after the action word. If there is an answer, it has an object.",
+        "example": "She kicked the ball. (kicked what? the ball)"
       }
     },
     {
@@ -1308,6 +1484,10 @@
           "My aunt",
           "My"
         ]
+      },
+      "simple": {
+        "say": "Who is the sentence about? That is the subject. The rest, what they do, is the predicate.",
+        "example": "The dog (subject) barked loudly (predicate)."
       }
     },
     {
@@ -1337,6 +1517,10 @@
           "flock",
           "bunch"
         ]
+      },
+      "simple": {
+        "say": "Some words name a whole group at once.",
+        "example": "a flock of birds, a team of players"
       }
     },
     {
@@ -1366,6 +1550,10 @@
           "pot",
           "pun"
         ]
+      },
+      "simple": {
+        "say": "Look at the first letter and follow a, b, c. If they are the same, look at the next letter.",
+        "example": "ant, apple, bat"
       }
     },
     {
@@ -1395,6 +1583,10 @@
           "sad",
           "angry"
         ]
+      },
+      "simple": {
+        "say": "Same meaning: synonym. Opposite meaning: antonym.",
+        "example": "big and large: synonyms; big and small: antonyms"
       }
     },
     {
@@ -1424,6 +1616,10 @@
           "crunch",
           "tick"
         ]
+      },
+      "simple": {
+        "say": "Some words sound like the noise itself. Say them aloud.",
+        "example": "buzz, splash, hiss"
       }
     },
     {
@@ -1453,6 +1649,10 @@
           "apple",
           "chair"
         ]
+      },
+      "simple": {
+        "say": "A special name gets a capital: Madurai. Things you cannot count, like water, take much, not many.",
+        "example": "much water, many cups"
       }
     },
     {
@@ -1482,6 +1682,10 @@
           "because it was late",
           "after the rain"
         ]
+      },
+      "simple": {
+        "say": "A clause has someone and an action. If it makes sense on its own, it is the main clause.",
+        "example": "When it rained, we stayed inside."
       }
     },
     {
@@ -1511,6 +1715,10 @@
           "quality",
           "quantity"
         ]
+      },
+      "simple": {
+        "say": "Describing words can say what kind (red), how many (three) or how much (some).",
+        "example": "three red apples"
       }
     },
     {
@@ -1540,6 +1748,10 @@
           "a noun clause",
           "an adjective clause"
         ]
+      },
+      "simple": {
+        "say": "Ask what the clause does: names a thing (noun), describes a thing (adjective) or tells when or why (adverb).",
+        "example": "I will call you when I arrive."
       }
     },
     {
@@ -1569,6 +1781,10 @@
           "when the sun rose",
           "because she was ill"
         ]
+      },
+      "simple": {
+        "say": "Look for someone doing something. If both are there, it is a clause. If not, a phrase.",
+        "example": "in the garden (phrase); we played (clause)"
       }
     },
     {
@@ -1598,6 +1814,10 @@
           "simile",
           "metaphor"
         ]
+      },
+      "simple": {
+        "say": "Like or as: simile. Says it is: metaphor. A thing acting like a person: personification.",
+        "example": "The wind whispered."
       }
     },
     {
@@ -1627,6 +1847,10 @@
           "I thank you sincerely.",
           "Kindly accept my thanks."
         ]
+      },
+      "simple": {
+        "say": "Talking to a teacher or writing a letter? Be polite and full. With friends you can be casual.",
+        "example": "May I have leave tomorrow?"
       }
     },
     {
@@ -1656,6 +1880,10 @@
           "very cold",
           "very salty"
         ]
+      },
+      "simple": {
+        "say": "Do not know a word? Read the words around it. They give hints.",
+        "example": "He was famished after no food all day. (very hungry)"
       }
     },
     {
@@ -1685,6 +1913,10 @@
           "will visits",
           "visited"
         ]
+      },
+      "simple": {
+        "say": "Tomorrow or later? Put will before the action word, and keep the action word plain.",
+        "example": "I will go. She will play."
       }
     },
     {
@@ -1714,6 +1946,10 @@
           "I was tired, but I went to bed.",
           "Although I was tired, so I went to bed."
         ]
+      },
+      "simple": {
+        "say": "Use one joining word to make two sentences into one. Do not use two joining words together.",
+        "example": "Although it rained, we went out."
       }
     },
     {
@@ -1743,6 +1979,10 @@
           "He will lose interest at once",
           "He will buy a car"
         ]
+      },
+      "simple": {
+        "say": "Look for clues: a rhyme, a pattern, or what someone wants. Then guess what comes next.",
+        "example": "The cat wore a ... hat (it rhymes with cat)"
       }
     },
     {
@@ -1772,6 +2012,10 @@
           "fearful",
           "sad"
         ]
+      },
+      "simple": {
+        "say": "How does the text make you feel? That is the mood. Words like dark and cold make it scary.",
+        "example": "The house was dark and silent. (scary)"
       }
     },
     {
@@ -1801,6 +2045,10 @@
           "as a result",
           "first of all"
         ]
+      },
+      "simple": {
+        "say": "Look at how the text is built: steps, a problem then its answer, or two things compared.",
+        "example": "First, then, finally: steps in order"
       }
     },
     {
@@ -1830,6 +2078,10 @@
           "patient",
           "shy"
         ]
+      },
+      "simple": {
+        "say": "Listen to what a person says. It tells you what kind of person they are.",
+        "example": "\"Take my umbrella.\" (kind)"
       }
     },
     {
@@ -1859,6 +2111,10 @@
           "an egg",
           "nothing"
         ]
+      },
+      "simple": {
+        "say": "Tell what happened first, then next, then last.",
+        "example": "Seed, then sprout, then flower"
       }
     },
     {
@@ -1888,6 +2144,10 @@
           "are",
           "am"
         ]
+      },
+      "simple": {
+        "say": "I goes with am. One person or thing goes with is. You, we and they go with are.",
+        "example": "I am, she is, they are"
       }
     },
     {
@@ -1917,6 +2177,10 @@
           "That",
           "This"
         ]
+      },
+      "simple": {
+        "say": "One thing: this or that. Many things: these or those. Near you: this, these. Far: that, those.",
+        "example": "this pen here; those birds there"
       }
     },
     {
@@ -1946,6 +2210,10 @@
           "Reads Ravi a book.",
           "A book Ravi reads."
         ]
+      },
+      "simple": {
+        "say": "First who, then what they do, then the rest.",
+        "example": "Meena reads a book."
       }
     },
     {
@@ -1975,6 +2243,10 @@
           "has",
           "haves"
         ]
+      },
+      "simple": {
+        "say": "He, she, it or one name: has. I, you, we, they: have.",
+        "example": "She has a pen. I have a pen."
       }
     },
     {
@@ -2004,6 +2276,10 @@
           "It rained all night long.",
           "There was a lot of rain."
         ]
+      },
+      "simple": {
+        "say": "Tell what you see, hear, smell, taste or feel, with exact words.",
+        "example": "The sizzling dosa smelled buttery."
       }
     },
     {
@@ -2033,6 +2309,10 @@
           "Must I come in?",
           "Should I come in?"
         ]
+      },
+      "simple": {
+        "say": "Can, may, must, should and might help another verb. The verb after them stays plain.",
+        "example": "She can swim. You must go."
       }
     },
     {
@@ -2062,6 +2342,10 @@
           "didn't you",
           "do you"
         ]
+      },
+      "simple": {
+        "say": "A yes sentence gets a not tag. A not sentence gets a yes tag.",
+        "example": "It is hot, isn't it? It isn't hot, is it?"
       }
     },
     {
@@ -2091,6 +2375,10 @@
           "Union of Nations",
           "United Neighbours"
         ]
+      },
+      "simple": {
+        "say": "New words come from joining two words, cutting a word short, or using first letters.",
+        "example": "sun + flower = sunflower; telephone = phone"
       }
     },
     {
@@ -2120,6 +2408,10 @@
           "ga-rden",
           "gard-en"
         ]
+      },
+      "simple": {
+        "say": "Clap as you say the word. Each clap is one syllable.",
+        "example": "bas-ket (two claps)"
       }
     },
     {
@@ -2149,6 +2441,10 @@
           "freely",
           "freed"
         ]
+      },
+      "simple": {
+        "say": "Turn the action or describing word into a thing word, often with tion or ness.",
+        "example": "decide, decision; kind, kindness"
       }
     },
     {
@@ -2178,6 +2474,10 @@
           "Please return back the book.",
           "Please back return the book."
         ]
+      },
+      "simple": {
+        "say": "In English, a question starts with is, do or can. Say I know and I have, not I am knowing.",
+        "example": "Is he coming? I know the answer."
       }
     },
     {
@@ -2207,6 +2507,10 @@
           "The greeting",
           "The subject line"
         ]
+      },
+      "simple": {
+        "say": "A formal letter goes in this order: from, date, to, subject, greeting, message, ending, name.",
+        "example": "Respected Sir, ... Yours faithfully, Ravi"
       }
     },
     {
@@ -2236,6 +2540,10 @@
           "Yours faithfully, with love",
           "Thank you and goodbye"
         ]
+      },
+      "simple": {
+        "say": "A notice says: school name, NOTICE, date, heading, what, when, where, and who wrote it.",
+        "example": "NOTICE, 20 November, Quiz Club"
       }
     },
     {
@@ -2265,6 +2573,10 @@
           "Bye bye!!",
           "XOXO Arun"
         ]
+      },
+      "simple": {
+        "say": "An email has who it is to, a clear subject, hello, a short message, and goodbye with your name.",
+        "example": "Subject: Science homework question"
       }
     }
   ]

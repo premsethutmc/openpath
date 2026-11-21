@@ -27,10 +27,13 @@ def strings():
     g = json.loads((ROOT / "grammar/in-use.json").read_text("utf-8"))
     cards = json.loads((ROOT / "grammar/learn.json").read_text("utf-8"))["cards"]
     done = json.loads((ROOT / "help/tamil-ui.json").read_text("utf-8"))["strings"]
+    done = {**done, **json.loads((ROOT / "help/tamil-explain.json").read_text("utf-8"))["strings"]}
     level = {}
     for i in g["items"]:
         level[i["topic"]] = min(level.get(i["topic"], 9), i["level"])
-    out = []
+    out = ["Write this sentence again, with its mistakes put right.", "Another way to see it"]
+    # grammar-simple@1: the plainer way of every card, at every level
+    out += [c["simple"]["say"] for c in cards if c.get("simple")]
     for i in g["items"]:
         if i["level"] <= 4:
             out.append(i["rule"])

@@ -169,6 +169,9 @@ test("Look up grammar from Home, practise the topic found, then write a sentence
       else if (kind === "build") {
         for (let n = await page.locator(".grammar-pool .grammar-tile").count(); n > 0; n--) await page.locator(".grammar-pool .grammar-tile").first().click();
         await page.getByRole("button", { name: "Check" }).click();
+      } else if (kind === "rewrite") {
+        await page.locator(".grammar-rewrite").fill("We have it.");
+        await page.getByRole("button", { name: "Check" }).click();
       } else {
         await page.locator(".grammar-word").first().click();
         if (kind === "fix") await page.locator("#grammar-box").fill("has");

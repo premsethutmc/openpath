@@ -56,7 +56,7 @@ async function pastCard(page) {
   await page.locator('main[data-phase="ask"], main[data-phase="learn"]').first().waitFor();
   if (!(await page.locator('main[data-phase="learn"]').count())) return false;
   const card = page.locator(".grammar-learn");
-  await card.getByRole("heading", { name: /^New: / }).waitFor();
+  await card.getByRole("heading", { name: /^(New|Again): / }).waitFor();
   // a common mistake beside the right version, and why
   await card.locator(".grammar-mistake .mistake-wrong").waitFor();
   await shot(page, "0-card");
@@ -97,6 +97,11 @@ async function answer(page, wrong) {
     assert.ok(!(await page.locator(".grammar-words").innerText()).includes("["), "the wrong word is not marked");
     await page.locator(".grammar-word").nth(wrong ? (at + 1) % words.length : at).click();
     await page.locator("#grammar-box").fill(wrong ? "zzz" : it.right[0]);
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+  } else if (it.kind === "rewrite") {
+    await page.getByText("Write this sentence again, with its mistakes put right.").waitFor();
+    assert.equal(await page.locator(".grammar-rewrite").inputValue(), it.sentence, "the box starts with the sentence, to edit");
+    if (!wrong) await page.locator(".grammar-rewrite").fill(it.right[0]);
     await page.getByRole("button", { name: "Check", exact: true }).click();
   } else {
     const target = it.parts ?? it.sentence.split(" ");
@@ -497,5 +502,44 @@ test("Notes, charts and maps: from the Tamil Nadu Class 10 syllabus, make notes 
   await page.getByRole("heading", { name: "Class 10 English" }).waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
+  await context.close();
+});
+
+test("Write a sentence again, and after two misses in a row see the rule said a simpler way", async () => {
+  const { context, page, errors, fits } = await start("Rewriter");
+  await page.locator("#grammar-search").fill("capital");
+  await page.locator('.grammar-hits li[data-topic="capitals"]').getByRole("button", { name: "Practise" }).click();
+  await page.getByRole("button", { name: "Start", exact: true }).click();
+  let rewrote = false;
+  let simple = false;
+  for (let i = 0; i < 12 && !(rewrote && simple); i++) {
+    if (await page.locator('main[data-phase="done"]').count()) break;
+    await pastCard(page);
+    if (await page.locator('main[data-phase="done"]').count()) break;
+    const kind = await page.locator('main[data-phase="ask"]').getAttribute("data-kind");
+    // the first two answers wrong; then right, until a sentence to write again has come
+    const it = await answer(page, i < 2);
+    if (i === 1) {
+      await page.locator(".grammar-simple").getByText("Another way to see it").waitFor();
+      await page.getByText(read("grammar/learn.json").cards.find((c) => c.topic === "capitals").simple.say, { exact: true }).waitFor();
+      await fits(), await shot(page, "7-simpler");
+      simple = true;
+    }
+    if (kind === "rewrite") {
+      await page.locator(".dict-reveal").getByText(it.right[0]).waitFor();
+      await fits(), await shot(page, "8-rewrite");
+      rewrote = true;
+    }
+    await page.getByRole("button", { name: /^(Next sentence|Finish)$/ }).click();
+    // the card comes back after two misses, leading with the simpler way
+    if (i === 1) {
+      await page.locator(".grammar-learn").getByRole("heading", { name: /^Again: / }).waitFor();
+      await page.locator(".grammar-learn .grammar-simple").waitFor();
+      await page.getByRole("button", { name: "Skip to practice" }).click();
+    }
+  }
+  assert.ok(simple, "the simpler way was shown");
+  assert.ok(rewrote, "a sentence was written again, and the right one shown");
+  assert.deepEqual(errors, []);
   await context.close();
 });
