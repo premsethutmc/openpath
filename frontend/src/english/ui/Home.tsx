@@ -5,7 +5,7 @@
  */
 import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
-import { TamilToggle } from "./tamilHelp.tsx";
+import { TamilToggle, useTamilHelp } from "./tamilHelp.tsx";
 import { studySummary } from "../logic/study/study.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
@@ -45,6 +45,7 @@ declare const __OPENPATH_READ_ALOUD__: boolean | undefined;
 const READ_ALOUD_BUILT = typeof __OPENPATH_READ_ALOUD__ !== "undefined" && __OPENPATH_READ_ALOUD__ === true;
 
 export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onSounds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onSounds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
+  const tamil = useTamilHelp();
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
   const guided = !learner.content.gate && learner.levels().done;
@@ -78,7 +79,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             onLevelCheck={onLevelCheck}
             onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
-          <GrammarSearch onPractise={(topic) => onGrammarUse([topic])} />
+          <GrammarSearch tamil={tamil} onPractise={(topic) => onGrammarUse([topic])} />
           {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
             <span>{guided ? "More to practise" : "Or choose an activity"}</span>
@@ -97,8 +98,8 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
               {!guided && <FirstWordsCard learner={learner} onOpen={onFirstWords} />}
               <ListenAnswerCard learner={learner} onOpen={onListenAnswer} />
               {!guided && <GrammarUseCard learner={learner} onOpen={() => onGrammarUse()} />}
-              {!guided && <SlipsCard onOpen={() => onGrammarUse(["tamil_slips"])} />}
-              {!guided && onSounds && (
+              {!guided && tamil && <SlipsCard onOpen={() => onGrammarUse(["tamil_slips"])} />}
+              {!guided && tamil && onSounds && (
                 <section className="hub-card plain" aria-labelledby="sounds-card-title">
                   <h2 id="sounds-card-title">
                     <span aria-hidden="true">👂 </span>Sounds that are easy to mix up
@@ -422,9 +423,10 @@ function SlipsCard({ onOpen }: { onOpen: () => void }) {
   );
 }
 
-function GrammarSearch({ onPractise }: { onPractise: (topic: string) => void }) {
+function GrammarSearch({ onPractise, tamil }: { onPractise: (topic: string) => void; tamil: boolean }) {
   const [q, setQ] = useState("");
-  const hits = searchGrammar(q);
+  // the topic made for Tamil speakers is found only where Tamil help was chosen
+  const hits = searchGrammar(q).filter((h) => tamil || h.id !== "tamil_slips");
   return (
     <section className="grammar-search" aria-labelledby="grammar-search-title">
       <label id="grammar-search-title" htmlFor="grammar-search" className="grammar-search-label">

@@ -63,10 +63,29 @@ export function startTamilHelp() {
   if (stored()) apply(true);
 }
 
+const CHANGED = "openpath-tamil-help";
+
+/**
+ * Whether this device chose Tamil help. The activities made for Tamil speakers (slips from Tamil, sounds that are
+ * easy to mix up) are shown only then: a child from an English-medium home without the choice does not see them.
+ */
+export function useTamilHelp(): boolean {
+  const [on, setOn] = useState(stored);
+  useEffect(() => {
+    const h = () => setOn(stored());
+    window.addEventListener(CHANGED, h);
+    return () => window.removeEventListener(CHANGED, h);
+  }, []);
+  return on;
+}
+
 /** The switch: "தமிழ் உதவி / Tamil help". */
 export function TamilToggle() {
   const [on, setOn] = useState(stored);
-  useEffect(() => apply(on), [on]);
+  useEffect(() => {
+    apply(on);
+    window.dispatchEvent(new Event(CHANGED));
+  }, [on]);
   return (
     <button
       type="button"

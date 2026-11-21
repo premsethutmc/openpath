@@ -16,7 +16,7 @@ let browser;
 before(async () => (browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined })));
 after(() => browser?.close());
 
-async function home(context) {
+async function home(context, tamil = true) {
   await context.addInitScript(() => {
     const v = { name: "Test English (India)", lang: "en-IN", localService: true, default: true, voiceURI: "test-en-in" };
     window.__spoken = [];
@@ -29,6 +29,7 @@ async function home(context) {
   });
   const page = await context.newPage();
   await page.goto(URL);
+  if (tamil) await page.locator(".ta-toggle").first().click();
   await page.getByRole("button", { name: "Let's begin" }).click();
   await page.getByLabel(/Name to show/).fill("Slips");
   await page.getByRole("button", { name: "Continue" }).click();
@@ -40,6 +41,18 @@ async function home(context) {
   if ((await fold.getAttribute("aria-expanded")) !== "true") await fold.click();
   return page;
 }
+
+test("Without Tamil help the Tamil-speaker activities are not shown, nor found by grammar search", async () => {
+  const context = await browser.newContext(ANDROID);
+  const page = await home(context, false);
+  await page.locator("section[aria-labelledby='kinds-card-title']").waitFor();
+  assert.equal(await page.locator("section[aria-labelledby='slips-card-title']").count(), 0);
+  assert.equal(await page.locator("section[aria-labelledby='sounds-card-title']").count(), 0);
+  await page.locator("#grammar-search").fill("myself");
+  await page.waitForTimeout(300);
+  assert.equal(await page.locator('.grammar-hits li[data-topic="tamil_slips"]').count(), 0);
+  await context.close();
+});
 
 test("Slips Tamil speakers often make: opens grammar practice on that topic", async () => {
   const context = await browser.newContext(ANDROID);
