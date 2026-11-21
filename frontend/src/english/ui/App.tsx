@@ -45,6 +45,7 @@ import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
 import { readingAiFor } from "../logic/reading/ai-check.ts";
 import { FirstWords } from "./FirstWords.tsx";
+import { syllabusPractice } from "../logic/syllabus/practice.ts";
 import { StudySkills } from "./StudySkills.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board } from "../logic/syllabus/syllabus.ts";
@@ -633,6 +634,7 @@ export function App() {
           initial={learner.state.preferences?.school?.class ?? syllabusClass}
           initialBoard={learner.state.preferences?.school?.board ?? syllabusBoard}
           fixed={!!learner.state.preferences?.school}
+          mine={syllabusPractice(learner)}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
           onOpen={(where, topics, cls, line, board) => {
             setSyllabusClass(cls);

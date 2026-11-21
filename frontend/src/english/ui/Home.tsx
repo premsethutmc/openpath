@@ -7,7 +7,8 @@ import { longSummary } from "../logic/reading/long-read.ts";
 import { kindsSummary } from "../logic/reading/kinds.ts";
 import { TamilToggle, useTamilHelp } from "./tamilHelp.tsx";
 import { masterySummary } from "../logic/grammar-use/mastery.ts";
-import { studySummary } from "../logic/study/study.ts";
+import { STUDY_SKILL_NAMES, studySummary } from "../logic/study/study.ts";
+import { syllabusPractice } from "../logic/syllabus/practice.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
 import { useState } from "react";
@@ -90,6 +91,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
             onLevelCheck={onLevelCheck}
             onGo={(id, open, step) => (id === "words" ? (open === "first" ? onFirstWords() : onNewWords()) : id === "reading" ? onReading() : id === "listening" ? (open === "passage" ? onListenAnswer() : onListenWrite()) : id === "spelling" ? (open === "mywords" ? onMyWords() : open === "rule" && step ? onStart(step) : onBee()) : onGrammarUse(open === "naming" ? [NAMING_TOPIC] : undefined))}
           />
+          {onStudy && <StudyNudge learner={learner} onOpen={onStudy} />}
           <GrammarSearch tamil={tamil} onPractise={(topic) => onGrammarUse([topic])} />
           {/* once the daily rows are there, this lists only what they do not already open */}
           <button type="button" className="fold" aria-expanded={showAll} aria-controls="all-activities" onClick={() => setShowAll(!showAll)}>
@@ -143,7 +145,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           {showSchool && (
             <div id="school-work" className="compact-list">
               <p className="small">The class syllabus, and words and texts from school that a parent or the learner adds.</p>
-              <SyllabusCard onOpen={onSyllabus} school={school} />
+              <SyllabusCard onOpen={onSyllabus} school={school} learner={learner} />
               <MyWordsCard learner={learner} onOpen={onMyWords} />
               <MyBooksCard learner={learner} onOpen={onMyBooks} />
             </div>
@@ -500,6 +502,24 @@ function WrittenCard({ learner, onOpen }: { learner: Learner; onOpen: () => void
   );
 }
 
+/** A study skill that keeps going wrong is brought up on Home, with a way straight into it. */
+function StudyNudge({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
+  if (learner.content.gate) return null;
+  const s = studySummary(learner.studyRecords());
+  if (!s.weak.length) return null;
+  return (
+    <section className="hub-card plain" aria-labelledby="study-nudge-title" data-study-nudge={s.weak[0]}>
+      <h2 id="study-nudge-title">
+        <span aria-hidden="true">🎯 </span>To work on: {STUDY_SKILL_NAMES[s.weak[0]]}
+      </h2>
+      <p className="small">It has gone wrong more often than right in Notes, charts and maps. The next task there gives more of it.</p>
+      <button type="button" className="secondary" onClick={onOpen}>
+        Practise it
+      </button>
+    </section>
+  );
+}
+
 function StudyCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }) {
   if (learner.content.gate) return null;
   const s = studySummary(learner.studyRecords());
@@ -611,7 +631,8 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
 }
 
 /** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
-function SyllabusCard({ onOpen, school }: { onOpen: () => void; school?: SchoolPlace | null }) {
+function SyllabusCard({ onOpen, school, learner }: { onOpen: () => void; school?: SchoolPlace | null; learner?: Learner }) {
+  const mine = learner ? syllabusPractice(learner) : null;
   if (school)
     return (
       <section className="hub-card plain" aria-labelledby="syllabus-card-title">
@@ -620,6 +641,11 @@ function SyllabusCard({ onOpen, school }: { onOpen: () => void; school?: SchoolP
           {schoolLabel(school)} English
         </h2>
         <p>What the board lists for this class, and where to practise each part here.</p>
+        {mine && (
+          <p className="small" data-syllabus-practice={`${mine.secure}/${mine.practised}/${mine.total}`}>
+            {mine.secure} secure · {mine.practised - mine.secure} practising · {mine.total - mine.practised} not started{mine.notYet.length ? ` · next: ${mine.notYet[0].text}` : ""}
+          </p>
+        )}
         <button type="button" className="secondary" onClick={onOpen}>
           Open my class
         </button>

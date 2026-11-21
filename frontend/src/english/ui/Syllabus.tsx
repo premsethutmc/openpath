@@ -9,7 +9,7 @@ import { BOARDS, boardOf, coverage, taskLine, type Board, type Coverage, type Ou
 const TAG: Record<Coverage, string> = { covered: "In the app", partly: "Partly", guided: "With a grown-up", not: "Not yet" };
 const GO: Record<Where, string> = { words: "New words", reading: "Reading", listening: "Listen and write", listen: "Listen and answer", spelling: "Spelling Bee", grammar: "Grammar in use", guided: "Tasks with a grown-up", writing: "Essay studio", first: "First words", passage: "Listen and write a passage", passage_seen: "Read a passage, then write it from dictation", long: "Long reads", written: "Write an answer", kinds: "Poems and everyday texts", study: "Notes, charts and maps" };
 
-export function SyllabusView({ docs, initial, initialBoard = "icse", fixed, onOpen, onBack }: { docs: Doc[]; initial: number; initialBoard?: Board; fixed?: boolean; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }, board: Board) => void; onBack: () => void }) {
+export function SyllabusView({ docs, initial, initialBoard = "icse", fixed, mine, onOpen, onBack }: { docs: Doc[]; initial: number; initialBoard?: Board; fixed?: boolean; mine?: { syllabus: string; stages: { id: string; stage: "not_started" | "practising" | "secure" }[] } | null; onOpen: (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }, board: Board) => void; onBack: () => void }) {
   const [cls, setCls] = useState(initial);
   const boards = BOARDS.filter((b) => docs.some((d) => boardOf(d) === b.id));
   const [board, setBoard] = useState<Board>(boards.some((b) => b.id === initialBoard) ? initialBoard : (boards[0]?.id ?? "icse"));
@@ -58,7 +58,9 @@ export function SyllabusView({ docs, initial, initialBoard = "icse", fixed, onOp
             {st.outcomes.map((o) => (
               <li key={o.id} data-outcome={o.id} data-coverage={o.coverage}>
                 <p>
-                  <span className={`syllabus-tag ${o.coverage}`}>{TAG[o.coverage]}</span> {o.text}
+                  <span className={`syllabus-tag ${o.coverage}`}>{TAG[o.coverage]}</span>
+                  {mine?.syllabus === doc.id && (({ stage }) => stage !== "not_started" && <span className={`syllabus-stage ${stage}`} data-stage={stage}>{stage === "secure" ? " ✓ Secure" : " · Practising"}</span>)(mine.stages.find((x) => x.id === o.id) ?? { stage: "not_started" })}{" "}
+                  {o.text}
                 </p>
                 {(o.note || o.topics) && <p className="small">{[o.topics ? `Practised as: ${topicNames(o)}.` : "", o.note ?? ""].filter(Boolean).join(" ")}</p>}
                 {o.where && (
