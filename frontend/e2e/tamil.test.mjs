@@ -261,7 +261,8 @@ test("ICSE course: syllabus coverage and a writing task with a Tamil word count"
   await page.locator(".class-tile", { hasText: "வகுப்பு 9" }).tap();
   await page.getByRole("button", { name: /பாடத்திட்டம்/ }).tap();
   await page.getByRole("heading", { name: "Section A: Language (40 marks)" }).waitFor();
-  assert.ok((await page.locator(".outcome.covered").count()) >= 4);
+  assert.equal(await page.locator(".outcome.covered").count(), 3);
+  assert.equal(await page.locator(".outcome.not-yet").count(), 1);
   await page.screenshot({ path: "e2e/shots/tamil/icse-syllabus.png", fullPage: true });
   await page.getByRole("button", { name: "← வகுப்பு 9" }).tap();
   await page.locator(".writing-topic").first().tap();
