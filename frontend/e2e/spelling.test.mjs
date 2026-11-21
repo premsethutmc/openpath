@@ -292,7 +292,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   const h = (s) => [...s].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
   const right = (item) => item.b <= 3.6 && h(item.id) % 3 !== 0;
   const answerAll = async () => {
-    for (let k = 0; k < 30; k++) {
+    for (let k = 0; k < 60; k++) {
       await page.locator(".item, .done").first().waitFor({ timeout: 10000 });
       if (await page.locator(".done").count()) break;
       const item = items.get(await page.locator(".item").getAttribute("data-item"));
@@ -332,6 +332,7 @@ test("an evidence gap (C′): Today offers a check at the level, Progress and Jo
   await page.getByRole("button", { name: "Home", exact: true }).click();
   await today(page);
   await page.locator(`.plan li[data-action="evidence_check"][data-capability="${cap}"]`).getByRole("button", { name: "Start" }).click();
+  await page.locator(".spelling-intro, .item").first().waitFor();
   if (await page.locator(".spelling-intro").count()) await page.getByRole("button", { name: "Start the spelling check" }).click();
   await answerAll();
   // the record: the session carries the range and why; every question asked is in range and new
