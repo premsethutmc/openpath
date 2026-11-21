@@ -17,8 +17,9 @@ test("TH-1 every Tamil line is Tamil script and answers an English line the app 
 test("TH-2 grammar explanations in Tamil: each answers a rule, card rule or card reason in the grammar content", async () => {
   const explain = (await import("../../../../content/english/help/tamil-explain.json")).default as { strings: Record<string, string> };
   const g = (await import("../../../../content/english/grammar/in-use.json")).default as { items: { rule: string }[] };
-  const l = (await import("../../../../content/english/grammar/learn.json")).default as { cards: { rule: string; mistake: { why: string } }[] };
-  const known = new Set([...g.items.map((i) => i.rule), ...l.cards.flatMap((c) => [c.rule, c.mistake.why])]);
+  const l = (await import("../../../../content/english/grammar/learn.json")).default as { cards: { rule: string; mistake: { why: string }; simple?: { say: string } }[] };
+  // also the simpler way of saying a card's rule, and the two prompts that go with grammar explanations
+  const known = new Set([...g.items.map((i) => i.rule), ...l.cards.flatMap((c) => [c.rule, c.mistake.why, ...(c.simple ? [c.simple.say] : [])]), "Write this sentence again, with its mistakes put right.", "Another way to see it"]);
   assert.ok(Object.keys(explain.strings).length >= 400);
   for (const [en, ta] of Object.entries(explain.strings)) {
     assert.ok(known.has(en), `not a grammar explanation: ${en}`);

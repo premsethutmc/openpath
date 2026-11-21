@@ -12,7 +12,7 @@ import { type EssayEvent, type EvidenceEvent, type HintEvent, type Item, ASSISTE
 import { type JourneyView, hintText, journeyView, parentReport, type ParentReport } from "./journey.ts";
 import { exportBackup, type Backup } from "./backup.ts";
 import { type AppContent, type Code, type Lesson, type StrategyContent, activityAllowed, itemAllowed, lessonId, withRecordedQuestions } from "./content.ts";
-import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
+import { APP_VERSION, type AppEvent, type AttemptEvent, type EvidenceTarget, type LearnerBand, type LearnerGoal, type SchoolPlace, type PlanTrace, type Planned, type ProfileEvent, type Rating, type SelectionTrace, type SessionType, type SpeechRecord, type TraceEvent } from "./events.ts";
 import { type PilotSummary, pilotSummary } from "./pilot.ts";
 import { type Feedback, feedbackFor } from "./feedback.ts";
 import { type PlanStep, todayPlan } from "./plan.ts";
@@ -1015,8 +1015,8 @@ export class Learner {
   }
 
   /** Who is learning and their goal: recorded as the learner's choice; never used for scoring or the plan. */
-  async setPreferences(band: LearnerBand, goal: LearnerGoal): Promise<void> {
-    await this.add({ kind: "preferences", id: this.nextId(), at: this.clock(), band, goal });
+  async setPreferences(band: LearnerBand, goal: LearnerGoal, school: SchoolPlace | null | undefined = this.state.preferences?.school): Promise<void> {
+    await this.add({ kind: "preferences", id: this.nextId(), at: this.clock(), band, goal, ...(school ? { school } : {}) });
   }
 
   async setSpeech(on: boolean): Promise<void> {

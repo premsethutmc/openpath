@@ -114,8 +114,8 @@ async function answer(page, wrong) {
     await page.getByRole("button", { name: "Check", exact: true }).click();
   }
   await page.locator('main[data-phase="feedback"]').waitFor();
-  await page.getByText(wrong ? "Not quite" : "✓ Right").waitFor();
-  await page.getByText(it.rule, { exact: true }).waitFor();
+  await page.locator(`.gfb[data-correct="${!wrong}"] .gfb-verdict`).getByText(wrong ? "Not quite" : "Right!").waitFor();
+  await page.locator(".gfb-why").getByText(it.rule, { exact: true }).waitFor();
   return it;
 }
 
@@ -526,7 +526,7 @@ test("Write a sentence again, and after two misses in a row see the rule said a 
       simple = true;
     }
     if (kind === "rewrite") {
-      await page.locator(".dict-reveal").getByText(it.right[0]).waitFor();
+      await page.locator(`.gfb [data-row="right"], .gfb > .gfb-sentence`).getByText(it.right[0]).first().waitFor();
       await fits(), await shot(page, "8-rewrite");
       rewrote = true;
     }

@@ -115,7 +115,7 @@ export function ListenAnswer({ learner, voice, onLeave, onChanged }: { learner: 
   const [failed, setFailed] = useState(false);
   const run = useRef(0);
   const unsaved = useRef<ListenRecord[]>([]);
-  const level = () => levelFor(LISTENING, learner.listenRecords(), learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band));
+  const level = () => levelFor(LISTENING, learner.listenRecords(), learner.levels().listening?.level ?? startLevel(learner.state.preferences));
   const quiet = () => {
     run.current++;
     stopWord();

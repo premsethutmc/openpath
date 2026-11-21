@@ -109,7 +109,7 @@ async function register(page, email, name) {
   await page.getByRole("heading", { name: "Who is learning today?" }).waitFor();
   await page.getByRole("button", { name: "Add a learner" }).click();
   await page.getByLabel(/Name to show/).fill(name);
-  await page.getByRole("button", { name: /School learner/ }).click();
+  await page.getByRole("button", { name: /An adult/ }).click();
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: /Get better at spelling/ }).click();
   await page.locator("#consent").check();

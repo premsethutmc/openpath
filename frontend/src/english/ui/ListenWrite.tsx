@@ -208,7 +208,7 @@ export function ListenWrite({ learner, voice, passage, onLeave, onChanged }: { l
     void playWord(slow ? slowText(text) : text, voice).then(setHeard);
   };
   const begin = () => {
-    const at = levelFor(DICTATION, learner.dictationRecords(), learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band));
+    const at = levelFor(DICTATION, learner.dictationRecords(), learner.levels().listening?.level ?? startLevel(learner.state.preferences));
     const s = new DictationSitting(DICTATION, at, learner.dictationRecords(), passage ? (pickPassage(DICTATION, at, learner.dictationRecords()) ?? undefined) : undefined);
     plays.current = 0;
     setSitting(s);
@@ -220,7 +220,7 @@ export function ListenWrite({ learner, voice, passage, onLeave, onChanged }: { l
     onLeave();
   };
   if (!sitting) {
-    const level = levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences?.band)));
+    const level = levelFor(DICTATION, learner.dictationRecords(), (learner.levels().listening?.level ?? startLevel(learner.state.preferences)));
     const l = DICTATION.levels.find((x) => x.id === level)!;
     const next = passage ? pickPassage(DICTATION, level, learner.dictationRecords()) : null;
     if (next)

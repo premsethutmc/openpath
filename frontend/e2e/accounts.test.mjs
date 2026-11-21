@@ -153,7 +153,7 @@ async function signIn(page, email) {
 async function addLearner(page, name, goal = /Understand grammar/) {
   await page.getByRole("button", { name: "Add a learner" }).click();
   await page.getByLabel(/Name to show/).fill(name);
-  await page.getByRole("button", { name: /School learner/ }).click();
+  await page.getByRole("button", { name: /An adult/ }).click();
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: goal }).click();
   await page.locator("#consent").check();
@@ -195,7 +195,7 @@ test("the whole workflow: register, add Arun, assessment, evidence, plan, lesson
   // … creates Arun
   await page.getByRole("button", { name: "Add a learner" }).click();
   await page.getByLabel(/Name to show/).fill("Arun");
-  await page.getByRole("button", { name: /School learner/ }).click();
+  await page.getByRole("button", { name: /An adult/ }).click();
   await shot(page, "who-is-learning");
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: /Understand grammar/ }).click();
