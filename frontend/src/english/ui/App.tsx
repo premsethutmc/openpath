@@ -41,6 +41,7 @@ import { WrittenAnswer } from "./WrittenAnswer.tsx";
 import { setFlagLearner } from "./Flag.tsx";
 import { GuidedTasks } from "./Guided.tsx";
 import { serviceFor } from "../logic/writing/feedback.ts";
+import { readingAiFor } from "../logic/reading/ai-check.ts";
 import { FirstWords } from "./FirstWords.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
 import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board } from "../logic/syllabus/syllabus.ts";
@@ -114,6 +115,7 @@ export function App() {
   // AI feedback on writing tasks: only for a signed-in parent account, for the pupil whose record is open
   const feedbackPupil = mode === "account" && learner ? learner.profileId : null;
   const feedbackService = useMemo(() => (feedbackPupil ? serviceFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
+  const readingAi = useMemo(() => (feedbackPupil ? readingAiFor(api, feedbackPupil) : undefined), [api, feedbackPupil]);
   const [tab, setTab] = useState<Tab>("home");
   // "For a grown-up: why these?" opens Progress with the skill-by-skill overview unfolded
   const [why, setWhy] = useState(false);
@@ -513,6 +515,7 @@ export function App() {
       <div className="vocab-screen" data-tick={tick} data-mode={mode}>
         <WrittenAnswer
           learner={learner}
+          aiCheck={readingAi}
           onChanged={changed}
           onLeave={() => {
             setInSyllabus(written.from === "syllabus");

@@ -70,6 +70,8 @@ export interface WrittenMark {
   sentence: boolean;
   /** Why a answer holding the key words was still not accepted: a wrong answer named too, two choices, or far too long. */
   guard?: "wrong" | "choice" | "long";
+  /** reading-ai@1: the rules said wrong and the AI, checking again, said right ("right") or agreed ("wrong"). */
+  ai?: "right" | "wrong";
 }
 export function markWritten(it: WrittenItem, answer: string): WrittenMark {
   const t = norm(answer);
@@ -108,7 +110,7 @@ export function writtenProblems(w: typeof WRITTEN): string[] {
   if (p.length) throw new Error(`written answers: ${p.slice(0, 5).join("; ")}`);
 }
 
-export type WrittenRecord = { type: "answer"; sitting: string; id: string; level: number; correct: boolean; tries: number } | { type: "end"; sitting: string; asked: number; right: number };
+export type WrittenRecord = { type: "answer"; sitting: string; id: string; level: number; correct: boolean; tries: number; /** reading-ai@1: the AI's second check on an answer the rules marked wrong */ ai?: "right" | "wrong" } | { type: "end"; sitting: string; asked: number; right: number };
 
 /** The next questions: at the learner's reading level first (then nearest, lower before higher), unanswered right first. */
 export function pickWritten(records: readonly WrittenRecord[], level: number, n = SITTING): WrittenItem[] {
@@ -147,15 +149,25 @@ export class WrittenSitting {
     this.sitting = sitting;
   }
 
-  check(answer: string): void {
+  /** `ai`: the AI's second check, asked only when the rules mark the answer wrong (true: right after all). */
+  check(answer: string, ai?: boolean): void {
     const it = this.items[this.index];
     if (!it || this.done || (this.mark && (this.mark.correct || this.tries >= 2)) || !answer.trim()) return;
     this.tries++;
     this.mark = markWritten(it, answer);
+    if (!this.mark.correct && typeof ai === "boolean") this.mark = { ...this.mark, correct: ai, ai: ai ? "right" : "wrong" };
     if (this.mark.correct || this.tries >= 2) {
       if (this.mark.correct) this.right++;
-      this.log.push({ type: "answer", sitting: this.sitting, id: it.id, level: it.level, correct: this.mark.correct, tries: this.tries });
+      this.log.push({ type: "answer", sitting: this.sitting, id: it.id, level: it.level, correct: this.mark.correct, tries: this.tries, ...(this.mark.ai ? { ai: this.mark.ai } : {}) });
     }
+  }
+
+  /** Whether the AI may be asked about this answer: the rules say wrong and no guard (a wrong fact, a choice, a pasted passage) caught it. */
+  wantsSecondCheck(answer: string): boolean {
+    const it = this.items[this.index];
+    if (!it || !answer.trim()) return false;
+    const m = markWritten(it, answer);
+    return !m.correct && !m.guard && answer.length <= 300;
   }
 
   /** After a miss on the first try: write it again. */

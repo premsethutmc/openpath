@@ -95,3 +95,25 @@ test("WA-4 answers that hold the key words without meaning them are not marked r
   assert.equal(markWritten(tomato, "It was red, not green.").correct, true);
   assert.equal(markWritten(tomato, "Red.").correct, true);
 });
+
+test("WA-5 the AI's second check: asked only when the rules say wrong with no guard; its yes turns the answer right and is recorded, its no or no reply keeps the mark", () => {
+  const bus = WRITTEN.items.find((i) => i.id === "wa.L1.P1.1")!;
+  const s = new WrittenSitting([bus], "s-ai");
+  assert.equal(s.wantsSecondCheck("The bus was late because one tyre was flat."), false, "already right");
+  assert.equal(s.wantsSecondCheck("The tyre was flat or the driver was ill."), false, "a guard: two choices");
+  assert.equal(s.wantsSecondCheck("x".repeat(301)), false, "too long to send");
+  assert.equal(s.wantsSecondCheck("The wheel had no air in it."), true);
+  s.check("The wheel had no air in it.", true);
+  const v = s.snapshot();
+  assert.equal(v.mark!.correct, true);
+  assert.equal(v.mark!.ai, "right");
+  s.next();
+  assert.deepEqual(s.take()[0], { type: "answer", sitting: "s-ai", id: bus.id, level: bus.level, correct: true, tries: 1, ai: "right" });
+  const t = new WrittenSitting([bus], "s-ai2");
+  t.check("The wheel had no air in it.", false);
+  assert.equal(t.snapshot().mark!.correct, false);
+  assert.equal(t.snapshot().mark!.ai, "wrong");
+  t.again();
+  t.check("The wheel had no air in it.");
+  assert.deepEqual(t.take()[0], { type: "answer", sitting: "s-ai2", id: bus.id, level: bus.level, correct: false, tries: 2 });
+});

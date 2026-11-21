@@ -156,7 +156,8 @@ def week_of(day: datetime.date) -> datetime.date:
 
 
 def has_consent(pupil: Pupil) -> bool:
-    latest = pupil.writing_feedback_consents.order_by("-recorded_at", "-id").first()
+    # reading-ai@1 records share this table; they are a separate yes and never count here
+    latest = pupil.writing_feedback_consents.exclude(policy_version="reading-ai@1").order_by("-recorded_at", "-id").first()
     return bool(latest and latest.granted)
 
 

@@ -32,6 +32,10 @@ class EnglishUsageTests(TestCase):
         add("flag", t, item={"id": "grammar:gu.articles.01", "version": 0}, note="marked_wrong")
         add("flag", t, item={"id": "grammar:gu.articles.01", "version": 0}, note="confusing")
         add("flag", t, item={"id": "q-engine-item", "version": 3}, note="My own words about it")
+        # reading-ai@1: two answers checked again by the AI, one turned right and then reported
+        add("written_answer", t, record={"type": "answer", "sitting": "w1", "id": "wa.L1.T.1", "level": 1, "correct": True, "tries": 1, "ai": "right"})
+        add("written_answer", t, record={"type": "answer", "sitting": "w1", "id": "wa.L1.T.2", "level": 1, "correct": False, "tries": 2, "ai": "wrong"})
+        add("flag", t + timedelta(minutes=1), item={"id": "written:wa.L1.T.1", "version": 0}, note="marked_wrong")
         u = usage(30, now=now)
         rows = {a["activity"]: a for a in u["activities"]}
         d = rows["Listen and write"]
@@ -47,6 +51,8 @@ class EnglishUsageTests(TestCase):
         for private in ("Secretname", "garden", "The cat sat", "p@example.com"):
             self.assertNotIn(private, text)
         self.assertIn("Listen and write | 1 | 1 | 1 | 1 | 2 | 50 | 4.0", text)
-        self.assertEqual(u["flags"], [{"question": "grammar:gu.articles.01", "reports": 2, "reasons": {"marked_wrong": 1, "confusing": 1}}])
+        self.assertEqual(u["flags"][0], {"question": "grammar:gu.articles.01", "reports": 2, "reasons": {"marked_wrong": 1, "confusing": 1}})
+        self.assertEqual(u["reading_ai"], {"checked": 2, "turned_right": 1, "then_reported": 1})
+        self.assertIn("reading answers checked again by the AI: 2; turned right 1; of those, then reported as looking wrong 1", text)
         self.assertIn("grammar:gu.articles.01 | 2 | marked_wrong 1, confusing 1", text)
         self.assertNotIn("My own words", text)
