@@ -54,10 +54,10 @@ class Unusable(Exception):
     """The reply was not usable; never carries provider text."""
 
 
-@lru_cache(maxsize=1)
 TAMIL = CONTENT.parent / "tamil"
 
 
+@lru_cache(maxsize=1)
 def tasks() -> dict:
     """The guided writing tasks, by id: only these can be given feedback. English tasks, and the Tamil course's tasks (ids "ta.")."""
     data = json.loads((CONTENT / "guided" / "tasks.json").read_text(encoding="utf-8"))
