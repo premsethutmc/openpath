@@ -6,8 +6,7 @@
 import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
-import { KINDS, KIND_NAMES, KindSitting, SKILL_NAMES, kindsSummary, nextKind, type KindRecord } from "../logic/reading/kinds.ts";
-import { asReadingLevel } from "../logic/streams/level-check.ts";
+import { KINDS, KIND_NAMES, KindSitting, SKILL_NAMES, kindStart, kindsSummary, nextKind, type KindRecord } from "../logic/reading/kinds.ts";
 
 /**
  * Lines kept as written: a poem's lines and a letter's layout. In a timetable or chart, a block whose lines split into
@@ -46,7 +45,7 @@ export function KindsRead({ learner, onLeave, onChanged }: { learner: Learner; o
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<KindRecord[]>([]);
-  const level = asReadingLevel(learner.levels().reading?.start) ?? 2;
+  const level = kindStart(learner.levels().reading);
   const next = nextKind(KINDS, learner.kindRecords(), level);
   const tick = () => setTick((t) => t + 1);
   const save = async (s: KindSitting) => {

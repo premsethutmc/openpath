@@ -87,6 +87,15 @@ export function kindsProblems(k: Kinds): string[] {
 export type KindRecord = { type: "text"; text: string; answers: { skill: KindSkill; correct: boolean }[] };
 
 /**
+ * Where a learner starts here, from Find my level's reading part: its start level, and level 7 (above the passage
+ * course's top) for a reader who passed the top text. No reading part yet: level 2.
+ */
+export function kindStart(reading: { passed: number; start: number } | null | undefined): number {
+  if (!reading) return 2;
+  return reading.passed >= 6 ? KIND_LEVELS : Math.min(KIND_LEVELS, Math.max(1, reading.start));
+}
+
+/**
  * The learner's level in this activity: it starts at their reading level, goes up one after two strong texts in a
  * row (four of five or better) at that level or above, and down one after two weak ones (under half right).
  */

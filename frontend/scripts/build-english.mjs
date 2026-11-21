@@ -81,6 +81,19 @@ const commit = (() => {
   }
 })();
 
+// slow-phone@1: the generated spelling questions carry a note on how each was made (rationale) that the app never
+// shows or checks; they are left out of the app's script (the files themselves are unchanged)
+const LEAN = /spelling\/(generated-items|retired-generated)\.json$/;
+const lean = {
+  name: "lean-generated",
+  setup(b) {
+    b.onLoad({ filter: LEAN }, async (a) => {
+      const items = JSON.parse(await readFile(a.path, "utf8")).map(({ rationale, ...it }) => it);
+      return { contents: JSON.stringify(items), loader: "json" };
+    });
+  },
+};
+
 await rm(out, { recursive: true, force: true });
 await mkdir(`${out}/assets`, { recursive: true });
 await esbuild.build({
@@ -96,6 +109,7 @@ await esbuild.build({
   sourcemap: true,
   define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false", __OPENPATH_TAMIL__: process.env.OPENPATH_TAMIL_TILE === "1" ? "true" : "false", __OPENPATH_READ_ALOUD__: readAloud ? "true" : "false" },
   logLevel: "warning",
+  plugins: [lean],
 });
 const js = await readFile(`${out}/assets/app.js`);
 const css = await readFile(`${out}/assets/app.css`);
@@ -173,6 +187,15 @@ self.addEventListener("fetch", (e) => {
 });
 `,
 );
+// slow-phone@1: best-quality compressed copies of the big files, made once here instead of on the server at each start
+// (static-send.mjs sends file.br when it is not older than the file): about a tenth smaller than the server's quick copy
+{
+  const zlib = await import("node:zlib");
+  for (const f of ["assets/app.js", "assets/app.css", "assets/speller-words.txt"]) {
+    const raw = await readFile(`${out}/${f}`);
+    await writeFile(`${out}/${f}.br`, zlib.brotliCompressSync(raw, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: raw.length } }));
+  }
+}
 console.log(`wrote ${outName}/ (version ${version}, app.js ${Math.round(js.length / 1024)} kB)`);
 
 // OPENPATH_MATHS_TILE=1 alone shows the Maths tile and link for a deployment that builds My Learning Year itself, with its

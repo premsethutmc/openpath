@@ -9,7 +9,7 @@
  *
  * No dependency: node:zlib only. Small files (under 1 kB) and already-compressed kinds (fonts, images) are sent as they are.
  */
-import { createReadStream, statSync } from "node:fs";
+import { createReadStream, existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { extname } from "node:path";
 import { promisify } from "node:util";
@@ -28,6 +28,13 @@ function compressed(file, tag, encoding) {
   const key = `${file}|${encoding}`;
   const hit = cache.get(key);
   if (hit && hit.tag === tag) return hit.body;
+  // a build may leave a best-quality copy beside the file (file.br, slow-phone@1): sent as it is when it is not older
+  const pre = `${file}.br`;
+  if (encoding === "br" && existsSync(pre) && statSync(pre).mtimeMs >= statSync(file).mtimeMs) {
+    const body = readFile(pre);
+    cache.set(key, { tag, body });
+    return body;
+  }
   // quality 5: close to the best size for script at a fraction of the time (this runs once per file per process)
   const body = readFile(file).then((raw) => (encoding === "br" ? brotli(raw, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 5, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: raw.length } }) : gzip(raw, { level: 6 })));
   cache.set(key, { tag, body });

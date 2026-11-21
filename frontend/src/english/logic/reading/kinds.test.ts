@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { KINDS, KIND_LEVELS, KindSitting, kindChoices, kindsProblems, kindsSummary, nextKind, type KindRecord } from "./kinds.ts";
+import { KINDS, KIND_LEVELS, KindSitting, kindStart, kindChoices, kindsProblems, kindsSummary, nextKind, type KindRecord } from "./kinds.ts";
 import { loadContent } from "../content.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
@@ -78,4 +78,11 @@ test("KT-3 a sitting: read, answer each question, see why; stored as a text_read
   assert.notEqual(nextKind(KINDS, again.kindRecords(), 4)!.id, text.id);
   const sum = kindsSummary(again.kindRecords());
   assert.deepEqual([sum.texts, sum.right, sum.asked], [1, text.questions.length - 1, text.questions.length]);
+});
+
+test("KT-4 start: Find my level's reading start; level 7 for a reader who passed the top text; level 2 with no check", () => {
+  assert.equal(kindStart(null), 2);
+  assert.equal(kindStart({ passed: 3, start: 4 }), 4);
+  assert.equal(kindStart({ passed: 6, start: 6 }), 7);
+  assert.equal(nextKind(KINDS, [], kindStart({ passed: 6, start: 6 }))!.level, 7);
 });
