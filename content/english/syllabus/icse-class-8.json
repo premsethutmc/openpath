@@ -158,13 +158,14 @@
         {
           "id": "W4",
           "text": "Uses exact words and phrases, and language of the senses.",
-          "coverage": "partly",
+          "coverage": "covered",
           "where": "grammar",
           "topics": [
             "exact_words",
-            "sound_words"
+            "sound_words",
+            "senses"
           ],
-          "note": "Exact words and sound words are practised in sentences; writing with the senses is not marked."
+          "note": "Exact words, sound words and the language of the senses are practised in sentences, with a sentence of the learner's own checked for a sense word."
         },
         {
           "id": "W5",

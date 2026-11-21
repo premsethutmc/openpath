@@ -7,15 +7,15 @@ is labelled so in the app. Nothing is educator-reviewed.
 
 | Class | Lines | In the app | Partly | With a grown-up | Not yet |
 |---|---|---|---|---|---|
-| 1 | 38 | 16 | 6 | 16 | 0 |
-| 2 | 25 | 10 | 3 | 12 | 0 |
+| 1 | 38 | 17 | 5 | 16 | 0 |
+| 2 | 25 | 12 | 1 | 12 | 0 |
 | 3 | 24 | 12 | 1 | 11 | 0 |
 | 4 | 25 | 12 | 1 | 12 | 0 |
 | 5 | 33 | 21 | 0 | 12 | 0 |
-| 6 | 46 | 20 | 4 | 22 | 0 |
-| 7 | 25 | 11 | 2 | 12 | 0 |
-| 8 | 37 | 7 | 3 | 27 | 0 |
-| All | 253 | 109 | 20 | 124 | 0 |
+| 6 | 46 | 23 | 1 | 22 | 0 |
+| 7 | 25 | 13 | 0 | 12 | 0 |
+| 8 | 37 | 10 | 0 | 27 | 0 |
+| All | 253 | 120 | 9 | 124 | 0 |
 
 ## What was built
 
@@ -42,7 +42,7 @@ is labelled so in the app. Nothing is educator-reviewed.
 - Class 6 has 19 lines that are only partly covered: nine are writing; the rest include metaphor and personification, sorting verbs into transitive and intransitive, and reading between the lines.
 - All eight classes are loaded: 253 lines, none without a place (114 practised in the app, 15 partly, 124 with a grown-up).
 - Class 1 points to First words (see FIRST_WORDS.md) for reading with pictures, everyday words and three- and four-letter spelling; it added 28 tasks with a grown-up (166 in all) and alphabetical order by first letter.
-- Class 8 is mostly writing (13 of its 37 lines wait on the essay studio) and analysis of literature, so only two lines are fully practised in the app.
+- Class 8 is mostly writing (13 of its 37 lines wait on the essay studio) and analysis of literature, so few lines are fully practised in the app. W4 (exact words and the language of the senses) became fully practised on 21 November 2026 with the grammar topic "Language of the senses" (level 5, 14 sentences, a learn card and a write-your-own prompt).
 - Class 2: the lines are placed, but the present first levels of the app are hard for a child of that age. A beginner activity (pictures and sound, single words before sentences) is still to be built.
 - Classes 2 and 8 added two practice topics (kinds of noun, the main clause) and 48 tasks with a grown-up (138 in all).
 - Class 7 was read from a web page that sets out the syllabus, not from the pages of the document, so it has no page numbers and may be less complete than the others.
