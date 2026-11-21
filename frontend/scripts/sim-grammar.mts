@@ -9,7 +9,7 @@
  *
  * usage: node --import tsx scripts/sim-grammar.mts [--runs 20] [--weeks 12] [--md ../docs/english/SIM_GRAMMAR.md] [--strict]
  */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { GRAMMAR, GrammarSitting, LEARN, choices, fixParts, levelFor, spotWords, type GrammarItem, type GrammarRecord } from "../src/english/logic/grammar-use/grammar-use.ts";
 import { dueTopics, mastery, type Timed } from "../src/english/logic/grammar-use/mastery.ts";
 
@@ -219,5 +219,13 @@ lines.push(``, `Week by week (topics mastered, level):`, ``, ...curves, ``);
 lines.push(failures.length ? `Checks failed: ${failures.join("; ")}.` : `Checks passed: a beginner masters at least half the core topics in ${WEEKS} weeks, and spaced reviews come.`);
 const out = lines.join("\n") + "\n";
 console.log(out);
-if (MD) writeFileSync(MD, out);
+// keep what is written below the results by hand
+if (MD) {
+  let keep = "";
+  try {
+    const old = readFileSync(MD, "utf8");
+    keep = old.includes("\n## What it showed") ? old.slice(old.indexOf("\n## What it showed")) : "";
+  } catch {}
+  writeFileSync(MD, out + keep);
+}
 if (STRICT && failures.length) process.exit(1);
