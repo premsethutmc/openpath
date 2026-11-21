@@ -5,10 +5,42 @@
 import { useRef, useState } from "react";
 import { Flag } from "./Flag.tsx";
 import type { Learner } from "../logic/learner.ts";
-import { KIND_TITLES, STUDY, STUDY_SKILL_NAMES, StudySitting, checkSummary, nextStudy, studySummary, type ChartTask, type MapTask, type StudyRecord, type StudyTask } from "../logic/study/study.ts";
+import { KIND_TITLES, STUDY_SKILL_NAMES, StudySitting, chartFor, mapFor, nextStudy, notesFor, studySummary, type ChartTask, type MapTask, type OwnResult, type StudyRecord, type StudyTask } from "../logic/study/study.ts";
+
+/** A line graph: one point per label, joined, each with its figure. */
+function LineChart({ c }: { c: ChartTask }) {
+  const max = Math.max(...c.values);
+  const min = Math.min(...c.values);
+  const lo = Math.max(0, min - (max - min) * 0.3);
+  const x = (i: number) => 40 + (i * 280) / (c.labels.length - 1);
+  const y = (v: number) => 170 - ((v - lo) / (max - lo || 1)) * 140;
+  return (
+    <figure className="study-chart" data-chart={c.id} data-type="line">
+      <figcaption>
+        {c.title} ({c.unit})
+      </figcaption>
+      <svg viewBox="0 0 350 215" role="img" aria-label={`${c.title}: ${c.labels.map((l, i) => `${l} ${c.values[i]}`).join(", ")}`}>
+        <line x1="30" y1="175" x2="335" y2="175" stroke="#b9c2cf" />
+        <polyline points={c.values.map((v, i) => `${x(i)},${y(v)}`).join(" ")} fill="none" stroke="var(--accent, #2f6fd6)" strokeWidth="3" />
+        {c.values.map((v, i) => (
+          <g key={c.labels[i]}>
+            <circle cx={x(i)} cy={y(v)} r="4" fill="var(--accent, #2f6fd6)" />
+            <text x={x(i)} y={y(v) - 9} fontSize="12" textAnchor="middle" fill="currentColor">
+              {v}
+            </text>
+            <text x={x(i)} y="195" fontSize="11" textAnchor="middle" fill="currentColor">
+              {c.labels[i].length > 5 && !/^\d+$/.test(c.labels[i]) ? c.labels[i].slice(0, 3) : c.labels[i]}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </figure>
+  );
+}
 
 /** A horizontal bar chart: labels on the left, each bar with its figure, so it fits a phone. */
 export function BarChart({ c }: { c: ChartTask }) {
+  if (c.type === "line") return <LineChart c={c} />;
   const max = Math.max(...c.values);
   const row = 34;
   const h = c.labels.length * row + 30;
@@ -80,11 +112,13 @@ export function StreetMap({ m }: { m: MapTask }) {
 }
 
 function Material({ task }: { task: StudyTask }) {
-  if (task.kind === "chart") return <BarChart c={STUDY.charts.find((c) => c.id === task.id)!} />;
-  if (task.kind === "map") return <StreetMap m={STUDY.maps.find((m) => m.id === task.id)!} />;
+  if (task.kind === "chart") return <BarChart c={chartFor(task.id)} />;
+  if (task.kind === "map") return <StreetMap m={mapFor(task.id)} />;
   return (
     <article className="kind-text" data-passage={task.id}>
-      <p>{STUDY.notes.find((n) => n.id === task.id)!.text}</p>
+      {notesFor(task.id).text.split("\n\n").map((para, i) => (
+        <p key={i}>{para}</p>
+      ))}
     </article>
   );
 }
@@ -94,7 +128,7 @@ export function StudySkills({ learner, onLeave, onChanged }: { learner: Learner;
   const [, setTick] = useState(0);
   const [picked, setPicked] = useState<number[]>([]);
   const [own, setOwn] = useState("");
-  const [ownCheck, setOwnCheck] = useState<ReturnType<typeof checkSummary> | null>(null);
+  const [ownCheck, setOwnCheck] = useState<OwnResult | null>(null);
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<StudyRecord[]>([]);
   const tick = () => setTick((t) => t + 1);
@@ -177,21 +211,31 @@ export function StudySkills({ learner, onLeave, onChanged }: { learner: Learner;
     return (
       <main className="page vocab study" data-phase="own">
         {head}
-        <h2>Now write your own summary</h2>
-        <p className="small">Fifty words or fewer, in your own words. The app checks its length and whether it names the main ideas; it does not keep what you write.</p>
-        <textarea aria-label="Your summary" rows={5} value={own} onChange={(e) => setOwn(e.target.value)} />
+        <h2>{sitting.task.kind === "notes" ? "Now write your own summary" : sitting.task.kind === "chart" ? "Now write your own paragraph" : "Now write your own directions"}</h2>
+        <p className="prompt">{sitting.ownTask()}</p>
+        {sitting.task.kind !== "notes" && (
+          <details className="kind-back" open>
+            <summary>{sitting.task.kind === "chart" ? "The chart" : "The map"}</summary>
+            <Material task={sitting.task} />
+          </details>
+        )}
+        <p className="small">The app checks it by rule and tells you what to fix; it does not keep what you write.</p>
+        <textarea aria-label="What you write" rows={sitting.task.kind === "notes" ? 5 : 7} value={own} onChange={(e) => (setOwn(e.target.value), setOwnCheck(null))} />
         <p className="small" data-words>
           {own.trim() ? own.trim().split(/\s+/).length : 0} words
         </p>
         {ownCheck && (
-          <ul className="writing-notes" data-own-check>
-            {ownCheck.notes.map((n) => (
-              <li key={n}>{n}</li>
+          <ul className="writing-notes" data-own-check data-passed={ownCheck.passed} data-of={ownCheck.checks.length}>
+            {ownCheck.checks.map((c) => (
+              <li key={c.id} data-check={c.id} data-ok={c.ok}>
+                {c.ok ? "✓ " : "✗ "}
+                {c.note}
+              </li>
             ))}
           </ul>
         )}
         <button type="button" className="secondary" disabled={!own.trim()} onClick={() => setOwnCheck(sitting.writeOwn(own))}>
-          Check my summary
+          Check what I wrote
         </button>
         <button type="button" className="primary" onClick={() => (sitting.finish(), void save(sitting))}>
           {ownCheck ? "Finish" : "Skip and finish"}
@@ -302,7 +346,7 @@ export function StudySkills({ learner, onLeave, onChanged }: { learner: Learner;
               scrollTo(0, 0);
             }}
           >
-            {v.index + 1 < v.total ? "Next" : sitting.task.kind === "notes" ? "Write my own summary" : "Finish"}
+            {v.index + 1 < v.total ? "Next" : "Now write your own"}
           </button>
         </div>
       )}

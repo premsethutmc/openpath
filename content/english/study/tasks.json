@@ -19,19 +19,33 @@
       "points": [
         {
           "text": "Grows in dry places: deep roots find water",
-          "main": true
+          "main": true,
+          "k": [
+            "root"
+          ]
         },
         {
           "text": "Twigs used to clean teeth",
-          "main": true
+          "main": true,
+          "k": [
+            "teeth",
+            "twig"
+          ]
         },
         {
           "text": "Dried leaves keep insects from grain and clothes",
-          "main": true
+          "main": true,
+          "k": [
+            "insect"
+          ]
         },
         {
           "text": "Seed spray protects crops without strong chemicals",
-          "main": true
+          "main": true,
+          "k": [
+            "crop",
+            "seed"
+          ]
         },
         {
           "text": "Leaves taste bitter",
@@ -48,13 +62,7 @@
           "The neem tree grows in villages. People like to sit under it on hot afternoons and talk with their friends, and its leaves taste very bitter.",
           "Farmers spray chemicals on their crops every week, so neem trees die in dry places where their roots cannot find water."
         ]
-      },
-      "keys": [
-        "roots",
-        "teeth",
-        "insects",
-        "crops"
-      ]
+      }
     },
     {
       "id": "notes.rain",
@@ -71,19 +79,33 @@
       "points": [
         {
           "text": "Wells dry up though the monsoon is heavy",
-          "main": true
+          "main": true,
+          "k": [
+            "dry",
+            "run dry"
+          ]
         },
         {
           "text": "Most rain runs off into drains and is lost",
-          "main": true
+          "main": true,
+          "k": [
+            "drain"
+          ]
         },
         {
           "text": "Harvesting: roof pipes lead to a tank or a soak pit",
-          "main": true
+          "main": true,
+          "k": [
+            "tank",
+            "pit"
+          ]
         },
         {
           "text": "Stored water for washing and gardens; wells refill",
-          "main": true
+          "main": true,
+          "k": [
+            "well"
+          ]
         },
         {
           "text": "The pit is filled with stones and sand",
@@ -91,7 +113,11 @@
         },
         {
           "text": "Chennai's rule raised underground water",
-          "main": true
+          "main": true,
+          "k": [
+            "chennai",
+            "compulsory"
+          ]
         }
       ],
       "summaries": {
@@ -100,13 +126,7 @@
           "The monsoon brings heavy rain to India every year. Roads and roofs become wet, and drains carry the water away to the sea.",
           "Chennai built a large tank to store water for gardens, because its wells were full and the monsoon did not come that year."
         ]
-      },
-      "keys": [
-        "drains",
-        "tank",
-        "wells",
-        "Chennai"
-      ]
+      }
     },
     {
       "id": "notes.sleep",
@@ -123,23 +143,45 @@
       "points": [
         {
           "text": "Brain stores important experiences as memory",
-          "main": true
+          "main": true,
+          "k": [
+            "memor"
+          ]
         },
         {
           "text": "Body repairs and grows; young people need nine to eleven hours",
-          "main": true
+          "main": true,
+          "k": [
+            "repair",
+            "grow"
+          ]
         },
         {
           "text": "Too little sleep: poor focus, bad temper, mistakes",
-          "main": true
+          "main": true,
+          "k": [
+            "focus",
+            "concentrat",
+            "mood",
+            "mistake",
+            "accura"
+          ]
         },
         {
           "text": "Screen light at night delays sleepiness",
-          "main": true
+          "main": true,
+          "k": [
+            "screen",
+            "light"
+          ]
         },
         {
           "text": "Tips: no screens an hour before bed; a fixed bedtime",
-          "main": true
+          "main": true,
+          "k": [
+            "bedtime",
+            "bed"
+          ]
         },
         {
           "text": "Sleep is not the body switching off",
@@ -152,13 +194,7 @@
           "Scientists study phones and computers to find out why people become irritable and make mistakes when they study at night.",
           "Children and teenagers should study for nine to eleven hours every night, because the brain stores memories while they are awake."
         ]
-      },
-      "keys": [
-        "brain",
-        "repairs",
-        "screens",
-        "bed"
-      ]
+      }
     },
     {
       "id": "notes.plastic",
@@ -175,23 +211,45 @@
       "points": [
         {
           "text": "Rivers, wind and drains carry plastic to the sea",
-          "main": true
+          "main": true,
+          "k": [
+            "river",
+            "drain",
+            "wind"
+          ]
         },
         {
           "text": "Plastic does not rot; it breaks into tiny pieces",
-          "main": true
+          "main": true,
+          "k": [
+            "piece",
+            "break"
+          ]
         },
         {
           "text": "Turtles, seabirds and fish eat it; it reaches our food",
-          "main": true
+          "main": true,
+          "k": [
+            "food",
+            "eat"
+          ]
         },
         {
           "text": "Some countries ban thin bags; beach clean-ups",
-          "main": true
+          "main": true,
+          "k": [
+            "ban",
+            "clean"
+          ]
         },
         {
           "text": "Best answer: use less plastic",
-          "main": true
+          "main": true,
+          "k": [
+            "less",
+            "cloth",
+            "steel"
+          ]
         },
         {
           "text": "Turtles eat jellyfish",
@@ -204,13 +262,1192 @@
           "Sea turtles and seabirds live near beaches in many cities, where people hold clean-ups and carry cloth bags.",
           "Paper and food rot away in the sea within a few days, so plastic bags are safer for turtles and fish."
         ]
+      }
+    },
+    {
+      "id": "notes.roots",
+      "level": 5,
+      "source": "kt4.article",
+      "titles": {
+        "right": "Bridges grown from tree roots",
+        "wrong": [
+          "How to build a steel bridge",
+          "The rivers of Meghalaya"
+        ]
       },
-      "keys": [
-        "rivers",
-        "pieces",
-        "food",
-        "less"
-      ]
+      "points": [
+        {
+          "text": "Khasi people guide rubber-fig roots across streams",
+          "main": true,
+          "k": [
+            "guid",
+            "khasi",
+            "fig"
+          ]
+        },
+        {
+          "text": "Takes fifteen years or more to grow strong",
+          "main": true,
+          "k": [
+            "fifteen",
+            "years"
+          ]
+        },
+        {
+          "text": "Gets stronger each year, unlike wood or steel",
+          "main": true,
+          "k": [
+            "stronger"
+          ]
+        },
+        {
+          "text": "Scientists study it as building with nature",
+          "main": true,
+          "k": [
+            "nature",
+            "scientist"
+          ]
+        },
+        {
+          "text": "Betel-nut trunks are hollow",
+          "main": false
+        },
+        {
+          "text": "Some carry fifty people at once",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "In Meghalaya, the Khasi people guide rubber-fig roots across streams to grow bridges. A bridge takes fifteen years or more to grow, but then becomes stronger every year, unlike wood or steel. Scientists study them as building with nature.",
+        "wrong": [
+          "Meghalaya has many streams and hills, and the Khasi people walk across steel bridges built by scientists every year.",
+          "Rubber-fig trees grow quickly near rivers, and their roots can carry fifty people after one rainy season."
+        ]
+      }
+    },
+    {
+      "id": "notes.garden",
+      "level": 5,
+      "source": "kt4.speech2",
+      "titles": {
+        "right": "A garden for our school",
+        "wrong": [
+          "Broken desks behind the lab",
+          "How to cook spinach"
+        ]
+      },
+      "points": [
+        {
+          "text": "Empty space behind the lab could be a garden",
+          "main": true,
+          "k": [
+            "space",
+            "lab"
+          ]
+        },
+        {
+          "text": "A garden teaches science, maths and English",
+          "main": true,
+          "k": [
+            "teach",
+            "science",
+            "subject"
+          ]
+        },
+        {
+          "text": "Each class looks after one bed, twenty minutes a week",
+          "main": true,
+          "k": [
+            "class",
+            "bed",
+            "twenty"
+          ]
+        },
+        {
+          "text": "Sign the paper outside the office",
+          "main": true,
+          "k": [
+            "sign"
+          ]
+        },
+        {
+          "text": "The space is full of weeds",
+          "main": false
+        },
+        {
+          "text": "The canteen could cook the spinach",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "The speaker wants to turn the empty space behind the lab into a garden that would teach science, maths and English. If each class looks after one bed for twenty minutes a week, nobody is overloaded. Listeners should sign the paper.",
+        "wrong": [
+          "The speaker says the canteen should cook more spinach and asks classes to stop leaving broken desks behind the lab.",
+          "Gardens are too much work for schools, so the speaker asks thirty classes to sign a paper against the plan."
+        ]
+      }
+    },
+    {
+      "id": "notes.fireflies",
+      "level": 5,
+      "source": "kt5.article",
+      "titles": {
+        "right": "Fireflies: how and why they glow",
+        "wrong": [
+          "Street lights at night",
+          "Beetles that live in rivers"
+        ]
+      },
+      "points": [
+        {
+          "text": "Chemicals mix with oxygen: light with almost no heat",
+          "main": true,
+          "k": [
+            "chemical",
+            "oxygen",
+            "cold"
+          ]
+        },
+        {
+          "text": "They glow to find a partner, in coded patterns",
+          "main": true,
+          "k": [
+            "partner",
+            "pattern",
+            "code"
+          ]
+        },
+        {
+          "text": "Becoming rare: lights confuse them, homes are lost",
+          "main": true,
+          "k": [
+            "rare",
+            "light",
+            "confus"
+          ]
+        },
+        {
+          "text": "Help: turn off outdoor lights, keep wild grass",
+          "main": true,
+          "k": [
+            "turn off",
+            "grass",
+            "help"
+          ]
+        },
+        {
+          "text": "Fields near rivers fill with lights",
+          "main": false
+        },
+        {
+          "text": "A bulb wastes energy as heat",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Fireflies glow when chemicals in their tails mix with oxygen, making cold light. They flash coded patterns to find a partner. They are becoming rare because street lights confuse them, but turning off outdoor lights and keeping wild grass can help.",
+        "wrong": [
+          "Fireflies are small beetles that live in warm fields near rivers, and bulbs waste energy as heat instead of light.",
+          "Street lights help fireflies find partners, so towns should keep more lights on near ponds at night."
+        ]
+      }
+    },
+    {
+      "id": "notes.straws",
+      "level": 6,
+      "source": "kt5.article2",
+      "titles": {
+        "right": "Plastic straws: the problem and the ban",
+        "wrong": [
+          "How to recycle paper",
+          "Turtles of the Indian Ocean"
+        ]
+      },
+      "points": [
+        {
+          "text": "Millions used briefly; they slip past recycling into the sea",
+          "main": true,
+          "k": [
+            "recycl",
+            "million"
+          ]
+        },
+        {
+          "text": "Break into microplastics eaten by sea animals",
+          "main": true,
+          "k": [
+            "microplastic",
+            "piece"
+          ]
+        },
+        {
+          "text": "Some cities ban them; cafes use other straws",
+          "main": true,
+          "k": [
+            "ban",
+            "paper",
+            "steel",
+            "bamboo"
+          ]
+        },
+        {
+          "text": "Critics: a tiny part of the problem; some disabled people need them",
+          "main": true,
+          "k": [
+            "critic",
+            "disab",
+            "tiny"
+          ]
+        },
+        {
+          "text": "Supporters: a first step that makes people think",
+          "main": true,
+          "k": [
+            "first step",
+            "think"
+          ]
+        },
+        {
+          "text": "Microplastics found in sea salt",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Millions of plastic straws slip past recycling into the sea, where they break into microplastics that animals eat. Some cities ban them. Critics say straws are a tiny part of the problem and some disabled people need them; supporters call the ban a first step.",
+        "wrong": [
+          "Cafes now sell bamboo straws to turtles and seabirds, so the sea is free of plastic and microplastics.",
+          "Plastic straws are useful because they bend, so every city should make more of them and recycle them."
+        ]
+      }
+    },
+    {
+      "id": "notes.fivesecond",
+      "level": 6,
+      "source": "kt6.article",
+      "titles": {
+        "right": "Testing the five-second rule",
+        "wrong": [
+          "How bacteria grow",
+          "Watermelon is good for you"
+        ]
+      },
+      "points": [
+        {
+          "text": "Scientists dropped foods on floors covered with bacteria",
+          "main": true,
+          "k": [
+            "dropped",
+            "test",
+            "scientist"
+          ]
+        },
+        {
+          "text": "Bacteria moved in under one second; no safe time",
+          "main": true,
+          "k": [
+            "second",
+            "no safe"
+          ]
+        },
+        {
+          "text": "Wet food picked up the most",
+          "main": true,
+          "k": [
+            "wet",
+            "moist",
+            "watermelon"
+          ]
+        },
+        {
+          "text": "Conclusion: the rule is a myth that does not keep us safe",
+          "main": true,
+          "k": [
+            "myth",
+            "not safe",
+            "oversimpl",
+            "safe"
+          ]
+        },
+        {
+          "text": "Carpet passed fewer bacteria than tiles",
+          "main": false
+        },
+        {
+          "text": "The test was in 2016",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Scientists dropped foods onto floors covered with bacteria and found the bacteria moved in under one second, so there is no safe time. Wet food picked up the most. The five-second rule may comfort us, but it does not keep food safe.",
+        "wrong": [
+          "Carpet is the cleanest floor in a house, so food dropped on it can be eaten for up to five minutes.",
+          "Children like the five-second rule because watermelon and sweets taste better after falling on the floor."
+        ]
+      }
+    },
+    {
+      "id": "notes.wateraudit",
+      "level": 6,
+      "source": "kt6.report",
+      "titles": {
+        "right": "How much water our school wastes",
+        "wrong": [
+          "How to use a stopwatch",
+          "The school garden in October"
+        ]
+      },
+      "points": [
+        {
+          "text": "Pupils checked taps, toilets and the hose for a week",
+          "main": true,
+          "k": [
+            "checked",
+            "week",
+            "pupil"
+          ]
+        },
+        {
+          "text": "Leaking taps, running cisterns and the hose waste water",
+          "main": true,
+          "k": [
+            "tap",
+            "cistern",
+            "hose"
+          ]
+        },
+        {
+          "text": "About 1,500 litres wasted a day",
+          "main": true,
+          "k": [
+            "1,500",
+            "1500",
+            "litres"
+          ]
+        },
+        {
+          "text": "Repair, fit a timer, put up reminders",
+          "main": true,
+          "k": [
+            "repair",
+            "timer",
+            "reminder"
+          ]
+        },
+        {
+          "text": "Most waste is from cheap-to-fix faults",
+          "main": true,
+          "k": [
+            "cheap",
+            "pay for itself"
+          ]
+        },
+        {
+          "text": "Groups had four pupils each",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "For a week, Class 7B checked every tap, toilet and the hose. Leaking taps, running cisterns and the hose waste about 1,500 litres a day. Repairs, a hose timer and reminders would fix cheap faults that cause most waste.",
+        "wrong": [
+          "Class 7B used a stopwatch and buckets to find out how fast water flows from the garden hose every morning.",
+          "The school has forty-two taps and must buy new toilets, which will cost many lakhs of rupees."
+        ]
+      }
+    },
+    {
+      "id": "notes.switch",
+      "level": 6,
+      "source": "kt6.speech",
+      "titles": {
+        "right": "Switch off: saving electricity at school",
+        "wrong": [
+          "Our school football field",
+          "A holiday at the beach"
+        ]
+      },
+      "points": [
+        {
+          "text": "Many fans and lights run in empty classrooms",
+          "main": true,
+          "k": [
+            "fan",
+            "light",
+            "empty"
+          ]
+        },
+        {
+          "text": "The waste costs thousands of rupees a year",
+          "main": true,
+          "k": [
+            "thousand",
+            "rupee",
+            "money"
+          ]
+        },
+        {
+          "text": "The money could buy books or nets",
+          "main": true,
+          "k": [
+            "book",
+            "net"
+          ]
+        },
+        {
+          "text": "A Switch Monitor in every class checks switches",
+          "main": true,
+          "k": [
+            "monitor"
+          ]
+        },
+        {
+          "text": "Thirty-two classrooms in the school",
+          "main": false
+        },
+        {
+          "text": "Leaving a tap open on holiday",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "The speaker found many fans and lights running in empty classrooms. Across the school this wastes thousands of rupees a year that could buy books or nets. Each class should choose a Switch Monitor to turn everything off.",
+        "wrong": [
+          "The speaker went on holiday and left a tap open, so the school paid thousands of rupees for water.",
+          "One fan does not matter, so the speaker asks pupils to buy new football nets with the library's money."
+        ]
+      }
+    },
+    {
+      "id": "notes.homework",
+      "level": 7,
+      "source": "kt7.editorial",
+      "titles": {
+        "right": "How much homework is too much",
+        "wrong": [
+          "Why children should never study",
+          "Dinner time in Indian homes"
+        ]
+      },
+      "points": [
+        {
+          "text": "Homework has grown into a second school day",
+          "main": true,
+          "k": [
+            "second school",
+            "grown"
+          ]
+        },
+        {
+          "text": "It helps practice, habit and parents",
+          "main": true,
+          "k": [
+            "practice",
+            "habit",
+            "parent"
+          ]
+        },
+        {
+          "text": "Over an hour adds little and costs sleep and play",
+          "main": true,
+          "k": [
+            "hour",
+            "sleep",
+            "play"
+          ]
+        },
+        {
+          "text": "Fixes: one shared calendar, time limits, reading",
+          "main": true,
+          "k": [
+            "calendar",
+            "time",
+            "reading"
+          ]
+        },
+        {
+          "text": "Children are not machines",
+          "main": true,
+          "k": [
+            "machine",
+            "time to live",
+            "live"
+          ]
+        },
+        {
+          "text": "Copying answers at ten o'clock",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Homework has grown into a second school day. It builds practice and habit, but for young children more than an hour adds little and costs sleep and play. Schools should share a calendar, limit homework by time and include reading, leaving children time to live.",
+        "wrong": [
+          "Parents should help children copy answers at ten o'clock so that homework is finished before bedtime.",
+          "Homework should be abolished in every school because practice does not fix skills in the memory."
+        ]
+      }
+    },
+    {
+      "id": "notes.monsoon",
+      "level": 7,
+      "source": "kt7.feature",
+      "titles": {
+        "right": "How the monsoon works",
+        "wrong": [
+          "The history of Kerala",
+          "Farming in the Western Ghats"
+        ]
+      },
+      "points": [
+        {
+          "text": "Land heats faster than sea, making low pressure",
+          "main": true,
+          "k": [
+            "heat",
+            "pressure"
+          ]
+        },
+        {
+          "text": "Wind blows from sea to land carrying vapour",
+          "main": true,
+          "k": [
+            "wind",
+            "vapour",
+            "ocean",
+            "sea"
+          ]
+        },
+        {
+          "text": "Rising air cools and the vapour falls as rain",
+          "main": true,
+          "k": [
+            "cool",
+            "rain"
+          ]
+        },
+        {
+          "text": "It is irregular; El Niño can weaken it",
+          "main": true,
+          "k": [
+            "el niño",
+            "nino",
+            "irregular",
+            "late"
+          ]
+        },
+        {
+          "text": "Warming brings fewer, heavier bursts",
+          "main": true,
+          "k": [
+            "burst",
+            "heavier",
+            "warming",
+            "climate"
+          ]
+        },
+        {
+          "text": "The smell of rain on dry earth",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "The land heats faster than the sea, so wind blows inland carrying vapour, which falls as rain where the air rises and cools. The monsoon is irregular and can be weakened by El Niño, and warming is bringing fewer, heavier bursts of rain.",
+        "wrong": [
+          "The monsoon starts in Kerala because the Western Ghats are cold, and it always brings the same rain every year.",
+          "Farmers smell the first rain on dry earth in June and then cool the land with water from reservoirs."
+        ]
+      }
+    },
+    {
+      "id": "notes.languages",
+      "level": 7,
+      "source": "kt7.speech",
+      "titles": {
+        "right": "Why learn more than one language",
+        "wrong": [
+          "Tamil words for family",
+          "English opens every door"
+        ]
+      },
+      "points": [
+        {
+          "text": "Learning languages exercises the brain",
+          "main": true,
+          "k": [
+            "brain",
+            "mind"
+          ]
+        },
+        {
+          "text": "It shows people that they matter",
+          "main": true,
+          "k": [
+            "matter",
+            "shopkeeper",
+            "people"
+          ]
+        },
+        {
+          "text": "Each language is a window on new ideas",
+          "main": true,
+          "k": [
+            "idea",
+            "window"
+          ]
+        },
+        {
+          "text": "Learn a neighbour's language: hello, thank you, sorry",
+          "main": true,
+          "k": [
+            "neighbour",
+            "hello",
+            "thank"
+          ]
+        },
+        {
+          "text": "Amma means mother in several languages",
+          "main": false
+        },
+        {
+          "text": "Football is exercise for the legs",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "The speaker argues that learning more than one language exercises the brain, shows people they matter and opens windows on new ideas. Everyone should learn at least hello, thank you and sorry in a neighbour's language.",
+        "wrong": [
+          "The speaker says English opens every door, so other languages are a waste of time for children.",
+          "Amma means mother in Tamil, Kannada and Telugu, so these languages are really the same language."
+        ]
+      }
+    },
+    {
+      "id": "notes.stars",
+      "level": 7,
+      "source": "kt7.biography",
+      "titles": {
+        "right": "A hidden worker in science",
+        "wrong": [
+          "How to read Jupiter's moons",
+          "Life in old Madras"
+        ]
+      },
+      "points": [
+        {
+          "text": "A girl learned the stars with her father",
+          "main": true,
+          "k": [
+            "father",
+            "star"
+          ]
+        },
+        {
+          "text": "She found errors in printed tables",
+          "main": true,
+          "k": [
+            "error",
+            "mistake"
+          ]
+        },
+        {
+          "text": "The correction was printed without her name",
+          "main": true,
+          "k": [
+            "name",
+            "without"
+          ]
+        },
+        {
+          "text": "Thirty years as a lower-paid assistant",
+          "main": true,
+          "k": [
+            "assistant",
+            "paid",
+            "thirty"
+          ]
+        },
+        {
+          "text": "Historians now find such hidden workers",
+          "main": true,
+          "k": [
+            "historian",
+            "hidden"
+          ]
+        },
+        {
+          "text": "Kamala's father was a clerk",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Kamala learned the stars with her father and, as a girl, found errors in the observatory's printed tables, but the correction did not name her. She worked thirty years as a lower-paid assistant. Historians now find many such hidden workers in science.",
+        "wrong": [
+          "Kamala's father was a clerk who wrote the observatory's tables in Tamil, English and Latin.",
+          "The observatory director found the mistakes in the tables himself and thanked Kamala's father."
+        ]
+      }
+    },
+    {
+      "id": "notes.library",
+      "level": 7,
+      "source": "N6.T",
+      "titles": {
+        "right": "Why the library's evening visits grew",
+        "wrong": [
+          "Councillors waste electricity",
+          "How to borrow a book"
+        ]
+      },
+      "points": [
+        {
+          "text": "The library opened until nine",
+          "main": true,
+          "k": [
+            "nine",
+            "longer",
+            "hours"
+          ]
+        },
+        {
+          "text": "Evening visits doubled",
+          "main": true,
+          "k": [
+            "doubled",
+            "visits"
+          ]
+        },
+        {
+          "text": "Students came for tables and free internet",
+          "main": true,
+          "k": [
+            "internet",
+            "student"
+          ]
+        },
+        {
+          "text": "Lesson: offer what people actually lack",
+          "main": true,
+          "k": [
+            "lack",
+            "missing",
+            "ask"
+          ]
+        },
+        {
+          "text": "Four hundred visitors were surveyed",
+          "main": false
+        },
+        {
+          "text": "The reading room was empty after four",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "When the library opened until nine, evening visits doubled, but mainly because students came for quiet tables and free internet. The lesson: a service works when it gives people what they lack, so towns should ask residents first.",
+        "wrong": [
+          "The council surveyed four hundred visitors and decided to close the library at six to save electricity.",
+          "More people read books in the evening, so every town should keep all its buildings open until nine."
+        ]
+      }
+    },
+    {
+      "id": "notes.cyclelane",
+      "level": 7,
+      "source": "N6.P1",
+      "titles": {
+        "right": "What made the cycle lane work",
+        "wrong": [
+          "Shops on Market Road",
+          "Hot weather in small towns"
+        ]
+      },
+      "points": [
+        {
+          "text": "Cyclists rose from ninety to three hundred and forty a day",
+          "main": true,
+          "k": [
+            "ninety",
+            "three hundred",
+            "rose"
+          ]
+        },
+        {
+          "text": "Shop sales did not fall",
+          "main": true,
+          "k": [
+            "sales",
+            "shop"
+          ]
+        },
+        {
+          "text": "Lower speeds and repaired lights also helped",
+          "main": true,
+          "k": [
+            "light",
+            "speed"
+          ]
+        },
+        {
+          "text": "Towns with paint alone saw little change",
+          "main": true,
+          "k": [
+            "paint"
+          ]
+        },
+        {
+          "text": "Shopkeepers feared losing parking",
+          "main": false
+        },
+        {
+          "text": "Students made the count",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "After a cycle lane was painted on Market Road, cyclists rose from ninety to three hundred and forty a day and shop sales did not fall. Lower speeds and repaired street lights also helped; towns with paint alone saw little change.",
+        "wrong": [
+          "Shopkeepers on Market Road lost customers because the cycle lane took away parking spaces.",
+          "Three towns painted cycle lanes and saw many more cyclists because their weather was cooler."
+        ]
+      }
+    },
+    {
+      "id": "notes.homeworkclub",
+      "level": 7,
+      "source": "N6.P2",
+      "titles": {
+        "right": "Who the homework club really helped",
+        "wrong": [
+          "Tea for volunteer tutors",
+          "Bus timetables in villages"
+        ]
+      },
+      "points": [
+        {
+          "text": "Results rose after the club opened",
+          "main": true,
+          "k": [
+            "result",
+            "rose",
+            "improved"
+          ]
+        },
+        {
+          "text": "Mostly pupils already doing well attended",
+          "main": true,
+          "k": [
+            "already",
+            "doing well"
+          ]
+        },
+        {
+          "text": "Strugglers had siblings to mind or an early bus",
+          "main": true,
+          "k": [
+            "bus",
+            "brother",
+            "sister",
+            "sibling"
+          ]
+        },
+        {
+          "text": "A lunch-hour club tripled their attendance",
+          "main": true,
+          "k": [
+            "lunch",
+            "tripled"
+          ]
+        },
+        {
+          "text": "Check who attends before celebrating",
+          "main": true,
+          "k": [
+            "who attends",
+            "examine",
+            "check"
+          ]
+        },
+        {
+          "text": "The tutors found the room noisy",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Results rose after the homework club opened, but mostly pupils already doing well attended. Struggling pupils minded siblings or caught an early bus. Moving the club to lunch tripled their attendance. Schools should check who attends before celebrating.",
+        "wrong": [
+          "The homework club failed because struggling pupils were lazy and did not want to drink tea.",
+          "Test results fell after the club opened, so the head teacher closed it and moved lessons to the bus."
+        ]
+      }
+    },
+    {
+      "id": "notes.solarpump",
+      "level": 7,
+      "source": "N6.C1",
+      "titles": {
+        "right": "Why one solar pump failed and another worked",
+        "wrong": [
+          "The price of diesel",
+          "Farming in Karai"
+        ]
+      },
+      "points": [
+        {
+          "text": "At first diesel use fell and families cleared debts",
+          "main": true,
+          "k": [
+            "diesel",
+            "debt"
+          ]
+        },
+        {
+          "text": "A part failed; nobody could repair it for weeks",
+          "main": true,
+          "k": [
+            "repair",
+            "part",
+            "weeks"
+          ]
+        },
+        {
+          "text": "Farmers went back to diesel and borrowed more",
+          "main": true,
+          "k": [
+            "borrow",
+            "back"
+          ]
+        },
+        {
+          "text": "Sirumalai trained people and kept a spare-parts fund",
+          "main": true,
+          "k": [
+            "trained",
+            "spare",
+            "fund"
+          ]
+        },
+        {
+          "text": "Charities should budget for training and parts",
+          "main": true,
+          "k": [
+            "budget",
+            "charit"
+          ]
+        },
+        {
+          "text": "The technician was a day away",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Karai's solar pump at first cut diesel use and cleared debts, but when a part failed nobody could repair it, and farmers went back to diesel. Sirumalai trained people and kept a spare-parts fund. Charities should budget for training and parts.",
+        "wrong": [
+          "The solar pump in Karai was badly made, so the charity bought diesel for every family instead.",
+          "Sirumalai's pump worked better because the village is sunnier and its well is deeper."
+        ]
+      }
+    },
+    {
+      "id": "notes.laterstart",
+      "level": 7,
+      "source": "N6.C2",
+      "titles": {
+        "right": "Why a later school start helped",
+        "wrong": [
+          "Teenagers need more sleep",
+          "Cooks at Riverside School"
+        ]
+      },
+      "points": [
+        {
+          "text": "Late arrivals fell and first-lesson marks rose",
+          "main": true,
+          "k": [
+            "late",
+            "marks"
+          ]
+        },
+        {
+          "text": "Many pupils did not sleep longer",
+          "main": true,
+          "k": [
+            "sleep",
+            "stayed up",
+            "bed"
+          ]
+        },
+        {
+          "text": "Breakfast, not sleep, made the difference",
+          "main": true,
+          "k": [
+            "breakfast",
+            "hungry"
+          ]
+        },
+        {
+          "text": "A school breakfast made attendance almost perfect",
+          "main": true,
+          "k": [
+            "attendance",
+            "perfect",
+            "serving"
+          ]
+        },
+        {
+          "text": "Measure sleep and breakfast separately",
+          "main": true,
+          "k": [
+            "measure",
+            "separately"
+          ]
+        },
+        {
+          "text": "The cooks were less delighted",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "After Riverside started an hour later, late arrivals fell and marks rose, but many pupils did not sleep longer; breakfast made the difference. A school breakfast then made attendance almost perfect. Schools should measure sleep and breakfast separately.",
+        "wrong": [
+          "Riverside's pupils slept an extra hour every night, which is why their marks rose in every class.",
+          "The visiting doctor said teenagers need porridge, so the school started an hour earlier to cook it."
+        ]
+      }
+    },
+    {
+      "id": "notes.market",
+      "level": 7,
+      "source": "N6.C3",
+      "titles": {
+        "right": "How the moved market succeeded",
+        "wrong": [
+          "The old clock tower",
+          "Bus routes in Vellur"
+        ]
+      },
+      "points": [
+        {
+          "text": "The market moved from crowded lanes to a field",
+          "main": true,
+          "k": [
+            "moved",
+            "field"
+          ]
+        },
+        {
+          "text": "Takings fell at first",
+          "main": true,
+          "k": [
+            "fell",
+            "first"
+          ]
+        },
+        {
+          "text": "The council added shade, roofs and a bus stop",
+          "main": true,
+          "k": [
+            "shade",
+            "tree",
+            "roof",
+            "bus"
+          ]
+        },
+        {
+          "text": "Takings later rose and new stalls opened",
+          "main": true,
+          "k": [
+            "higher",
+            "rose",
+            "new stall",
+            "stalls"
+          ]
+        },
+        {
+          "text": "Watching and adjusting saved it",
+          "main": true,
+          "k": [
+            "adjust",
+            "listen",
+            "watch"
+          ]
+        },
+        {
+          "text": "Cafes opened under the clock tower",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Vellur's market moved from crowded lanes to a field, and takings fell at first. The council added shade, roofs and a bus stop, and takings then rose and new stalls opened. Its willingness to watch and adjust saved the move.",
+        "wrong": [
+          "Traders wanted the market moved to the field, and takings rose on the very first day.",
+          "The market stayed in the old lanes, where two cafes and a bookshop now sell vegetables."
+        ]
+      }
+    },
+    {
+      "id": "notes.silentreading",
+      "level": 7,
+      "source": "N6.C4",
+      "titles": {
+        "right": "What made pupils read more",
+        "wrong": [
+          "Detective stories for teachers",
+          "Marking exercise books"
+        ]
+      },
+      "points": [
+        {
+          "text": "Twenty minutes of silent reading after lunch",
+          "main": true,
+          "k": [
+            "twenty",
+            "silent"
+          ]
+        },
+        {
+          "text": "Library borrowing almost trebled",
+          "main": true,
+          "k": [
+            "borrow",
+            "treble",
+            "library"
+          ]
+        },
+        {
+          "text": "Pupils copied teachers who read",
+          "main": true,
+          "k": [
+            "teacher",
+            "imitat",
+            "copied"
+          ]
+        },
+        {
+          "text": "A school whose teachers marked books saw no change",
+          "main": true,
+          "k": [
+            "mark",
+            "no change",
+            "scarcely"
+          ]
+        },
+        {
+          "text": "Begin with the staff room",
+          "main": true,
+          "k": [
+            "staff"
+          ]
+        },
+        {
+          "text": "Fewer than a quarter read for pleasure before",
+          "main": false
+        }
+      ],
+      "summaries": {
+        "right": "Hillcrest set aside twenty minutes of silent reading after lunch, and library borrowing almost trebled, mainly because pupils saw their teachers reading. A school whose teachers marked books instead saw no change. A school that wants readers should begin with its staff.",
+        "wrong": [
+          "Hillcrest gave pupils prizes for reading after lunch, so the number of books borrowed trebled.",
+          "Teachers at Hillcrest marked exercise books while pupils read detective stories and poetry."
+        ]
+      }
     }
   ],
   "charts": [
