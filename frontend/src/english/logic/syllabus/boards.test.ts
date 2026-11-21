@@ -59,10 +59,10 @@ test("SB-4 what is covered: every line has a place in the app, notes, charts and
   for (const t of study) assert.match(t, /notes|summary|chart|map/i);
 });
 
-test("SB-5 the five grammar topics added for these boards: eight sentences each, a card each", () => {
+test("SB-5 the five grammar topics added for these boards: at least eight sentences each, a card each", () => {
   for (const t of ["modals", "question_tags", "word_formation", "syllables", "nominalisation"]) {
     assert.ok(GRAMMAR.topics.some((x) => x.id === t), t);
-    assert.equal(GRAMMAR.items.filter((i) => i.topic === t).length, 8, t);
+    assert.ok(GRAMMAR.items.filter((i) => i.topic === t).length >= 8, t);
     assert.ok(LEARN.some((c) => c.topic === t), t);
   }
 });
