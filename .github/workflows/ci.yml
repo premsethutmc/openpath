@@ -598,6 +598,7 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      - run: python3 ../tools/tamil/build_icse.py --check
       - run: npm run tamil:test
       - run: npm run tamil:build
       - run: npx playwright install --with-deps chromium

@@ -2,7 +2,7 @@
 # the difference is deploy/pilot/start.sh: its own PostgreSQL database is required, and nothing synthetic is assumed.
 FROM node:22-bookworm-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS web
 WORKDIR /app
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 OPENPATH_MATHS_TILE=1
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 OPENPATH_MATHS_TILE=1 OPENPATH_TAMIL_TILE=1
 COPY frontend/package.json frontend/package-lock.json frontend/
 # Optional CA for development networks with TLS inspection; absent on ordinary Render builds.
 RUN --mount=type=secret,id=build_ca \
@@ -12,7 +12,8 @@ COPY . .
 RUN cd frontend \
  && node scripts/build-mathematics-journey.mjs \
  && node scripts/build-year.mjs --name-start --shell-cache \
- && node scripts/build-curriculum.mjs
+ && node scripts/build-curriculum.mjs \
+ && node scripts/build-tamil.mjs --into dist-english/tamil
 
 FROM python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1

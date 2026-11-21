@@ -1,3 +1,3 @@
 import { createRoot } from "react-dom/client";
-import { TamilApp } from "./App";
-createRoot(document.getElementById("root")!).render(<TamilApp />);
+import { TamilHome } from "./Course";
+createRoot(document.getElementById("root")!).render(<TamilHome />);
