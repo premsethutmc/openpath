@@ -600,6 +600,7 @@ jobs:
       - run: npm run typecheck
       - run: python3 ../tools/tamil/build_icse.py --check
       - run: npm run tamil:test
+      - run: node --import tsx scripts/sim-tamil.mts --runs 10 --strict
       - run: npm run tamil:build
       - run: npx playwright install --with-deps chromium
       - name: Start Tamil preview and verify HTML

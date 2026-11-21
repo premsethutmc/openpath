@@ -37,8 +37,8 @@ export function fold(events: { kind?: string; q?: string; right?: boolean }[], i
   const p: Progress = { ...into };
   for (const e of events) {
     if (e.kind !== "tamil.answer" || typeof e.q !== "string") continue;
-    const was = p[e.q] ?? { right: 0, wrong: 0 };
-    p[e.q] = e.right ? { ...was, right: was.right + 1 } : { ...was, wrong: was.wrong + 1 };
+    const was = p[e.q] ?? { right: 0, wrong: 0, streak: 0 };
+    p[e.q] = e.right ? { ...was, right: was.right + 1, streak: (was.streak ?? 0) + 1 } : { ...was, wrong: was.wrong + 1, streak: 0 };
   }
   return p;
 }
@@ -46,7 +46,8 @@ export function fold(events: { kind?: string; q?: string; right?: boolean }[], i
 /** The larger count of each, so answers given on this device before signing in are not lost from view. */
 export function merge(a: Progress, b: Progress): Progress {
   const out: Progress = { ...a };
-  for (const [k, v] of Object.entries(b)) out[k] = { right: Math.max(v.right, out[k]?.right ?? 0), wrong: Math.max(v.wrong, out[k]?.wrong ?? 0) };
+  for (const [k, v] of Object.entries(b))
+    out[k] = { right: Math.max(v.right, out[k]?.right ?? 0), wrong: Math.max(v.wrong, out[k]?.wrong ?? 0), streak: Math.max(v.streak ?? 0, out[k]?.streak ?? 0) };
   return out;
 }
 

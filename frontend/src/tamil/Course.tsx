@@ -12,9 +12,11 @@ import {
   type CourseQuestion,
   type CourseTopic,
   type Progress,
+  type Sitting,
   type WritingTask,
   classDone,
   isRight,
+  nextTopic,
   record,
   round,
   syllabusFor,
@@ -23,6 +25,7 @@ import {
   topicsFor,
   writingFor,
 } from "../../../packages/tamil/src/icse";
+import { answerPlacement, currentQuestion, startPlacement, type PlacementState } from "../../../packages/tamil/src/placement";
 import { FeedbackBox } from "../year/Feedback";
 import { TamilRecord, type Pupil, call, merge, newId, pupils as loadPupils } from "./account";
 import { TamilApp } from "./App";
@@ -30,7 +33,7 @@ import { say, tamilVoice } from "./speech";
 
 const KEY = "openpath.tamil.icse.v1";
 const LEARNER = "openpath.tamil.learner";
-type Saved = { cls: number | null; board?: Board; progress: Progress };
+type Saved = { cls: number | null; board?: Board; progress: Progress; history?: Sitting[] };
 const load = (): Saved => {
   try {
     const raw = localStorage.getItem(KEY);
@@ -48,6 +51,7 @@ type Screen =
   | { name: "practice"; topic: CourseTopic }
   | { name: "writing"; task: WritingTask }
   | { name: "syllabus" }
+  | { name: "placement" }
   | { name: "foundation" };
 
 export function TamilHome() {
@@ -203,6 +207,28 @@ export function TamilHome() {
         </header>
         <h1>வகுப்பு {cls} — பாடங்கள்</h1>
         {who}
+        {(() => {
+          const next = nextTopic(cls, board, saved.progress, saved.history ?? [], !!voice);
+          if (!next)
+            return cls < 10 ? (
+              <button type="button" className="primary wide" onClick={() => setSaved({ ...saved, cls: cls + 1 })}>
+                வகுப்பு {cls} முடிந்தது! → வகுப்பு {cls + 1}
+              </button>
+            ) : null;
+          return (
+            <button type="button" className="topic next-card" onClick={() => setScreen({ name: "teach", topic: next.topic })}>
+              <span className="small">{next.stepBack ? "ஒரு படி பின் — A step back first, then try again" : "அடுத்து — Next for you"}</span>
+              <span className="topic-title">{next.topic.title}</span>
+              <span className="small">
+                {next.topic.titleEn}
+                {next.topic.class !== cls ? ` · Class ${next.topic.class}` : ""}
+              </span>
+            </button>
+          );
+        })()}
+        <button type="button" className="link" onClick={() => setScreen({ name: "placement" })}>
+          இந்த வகுப்பு சரியா? — Check where to start
+        </button>
         <ol className="topic-list">
           {topics.map((t) => {
             const done = topicDone(t, saved.progress);
@@ -241,6 +267,16 @@ export function TamilHome() {
       </main>
     );
   }
+
+  if (screen.name === "placement")
+    return (
+      <Placement
+        board={board}
+        from={cls}
+        onDone={(start) => (setSaved({ ...saved, cls: start }), setScreen({ name: "topics" }))}
+        onBack={() => setScreen({ name: "topics" })}
+      />
+    );
 
   if (screen.name === "syllabus") {
     const s = syllabusFor(cls, board);
@@ -327,6 +363,7 @@ export function TamilHome() {
       progress={saved.progress}
       voice={voice}
       onAnswer={answered}
+      onFinish={(right, total) => setSaved((x) => ({ ...x, history: [...(x.history ?? []), { topic: topic.id, right, total, stepBack: topic.class < cls }].slice(-30) }))}
       onBack={() => setScreen({ name: "topics" })}
       onTeach={() => setScreen({ name: "teach", topic })}
     />
@@ -338,6 +375,7 @@ function Practice({
   progress,
   voice,
   onAnswer,
+  onFinish,
   onBack,
   onTeach,
 }: {
@@ -345,6 +383,7 @@ function Practice({
   progress: Progress;
   voice: SpeechSynthesisVoice | null;
   onAnswer: (q: CourseQuestion, right: boolean) => void;
+  onFinish: (right: number, total: number) => void;
   onBack: () => void;
   onTeach: () => void;
 }) {
@@ -356,6 +395,11 @@ function Practice({
   useEffect(() => {
     if (q?.say) say(q.say, voice);
   }, [q, voice]);
+  const finished = !q && score.total > 0;
+  useEffect(() => {
+    if (finished) onFinish(score.right, score.total);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finished]);
 
   if (!q)
     return (
@@ -557,6 +601,49 @@ function Writing({ task, learner, onBack, onDone }: { task: WritingTask; learner
         </section>
       )}
       <FeedbackBox where={`tamil/${task.id}`} />
+    </main>
+  );
+}
+
+function Placement({ board, from, onDone, onBack }: { board: Board; from: number; onDone: (start: number) => void; onBack: () => void }) {
+  const [s, setS] = useState<PlacementState>(() => startPlacement(from));
+  if (s.done && s.start !== null)
+    return (
+      <main className="course">
+        <h1>வகுப்பு {s.start} இலிருந்து தொடங்கு</h1>
+        <p className="lede">
+          Start with Class {s.start}. ({s.asked} questions.) {s.start < from ? "Earlier classes first: that is the quickest way up." : ""}
+        </p>
+        <button type="button" className="primary wide" onClick={() => onDone(s.start!)}>
+          தொடங்கு — Start Class {s.start}
+        </button>
+        <button type="button" className="secondary wide" onClick={onBack}>
+          ← Stay in Class {from}
+        </button>
+      </main>
+    );
+  const q = currentQuestion(s, board);
+  return (
+    <main className="course">
+      <header>
+        <button type="button" className="link" onClick={onBack}>
+          ← Back
+        </button>
+        <span className="small">Question {s.asked + 1}</span>
+      </header>
+      <p className="small">எங்கிருந்து தொடங்குவது? Answer what you can; it is fine not to know.</p>
+      <h1 className="prompt">{q.prompt}</h1>
+      <p className="small prompt-en">{q.promptEn}</p>
+      <div className="choices">
+        {q.options.map((o) => (
+          <button key={o} type="button" onClick={() => setS(answerPlacement(s, isRight(q, o)))}>
+            {o}
+          </button>
+        ))}
+        <button type="button" className="secondary" onClick={() => setS(answerPlacement(s, false))}>
+          தெரியவில்லை — I don't know
+        </button>
+      </div>
     </main>
   );
 }
