@@ -494,7 +494,7 @@ export interface ListenPassageEvent {
   record: ListenRecord;
 }
 
-export type AppEvent = StudyEvent | TextReadEvent | WrittenAnswerEvent | LongReadEvent | FirstWordsEvent | GuidedTaskEvent | ListenPassageEvent | GrammarUseEvent | LevelCheckEvent | ReadingEvent | WordLearnEvent | DictationEvent | VocabEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
+export type AppEvent = SoundsEvent | StudyEvent | TextReadEvent | WrittenAnswerEvent | LongReadEvent | FirstWordsEvent | GuidedTaskEvent | ListenPassageEvent | GrammarUseEvent | LevelCheckEvent | ReadingEvent | WordLearnEvent | DictationEvent | VocabEvent | ProfileEvent | SessionEvent | SessionEndEvent | LessonEvent | AttemptEvent | SettingsEvent | PreferencesEvent | FlagEvent | RatingEvent | NoteEvent | TraceEvent | LedgerEvent | SpellEvent;
 /**
  * Reading comprehension course (logic/reading): one step of a unit — a lesson finished, a question shown, a hint, a
  * practice answer, a marked fresh check. Practice-only, like spelling: never evidence for the engine.
