@@ -55,7 +55,7 @@ const Arrow = () => (
 declare const __OPENPATH_MATHS__: boolean | undefined;
 export const MATHS_BUILT = typeof __OPENPATH_MATHS__ !== "undefined" && __OPENPATH_MATHS__ === true;
 
-export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, extra, maths = MATHS_BUILT }: { accounts: boolean; onBegin: () => void; onSignIn: () => void; onDevice: () => void; privateWindow: boolean; extra?: ReactNode; maths?: boolean }) {
+export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, extra, maths = MATHS_BUILT }: { accounts: boolean; onBegin: () => void; onSignIn: () => void; onDevice?: () => void; privateWindow: boolean; extra?: ReactNode; maths?: boolean }) {
   return (
     <Frame label="Welcome">
       <p className="eyebrow">A better way to learn</p>
@@ -88,9 +88,11 @@ export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, 
             <button type="button" className="secondary" onClick={onSignIn}>
               I have a parent account
             </button>
-            <button type="button" className="link" onClick={onDevice}>
-              Use on this device only, without an account
-            </button>
+            {onDevice && (
+              <button type="button" className="link" onClick={onDevice}>
+                Use on this device only, without an account
+              </button>
+            )}
           </>
         )}
       </div>

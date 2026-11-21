@@ -105,6 +105,8 @@ export function App() {
   const api = useMemo(() => new Api(), []);
   const [screen, setScreen] = useState<Screen>({ name: "loading" });
   const [accounts, setAccounts] = useState(false);
+  // sign-in-required@1: the site keeps every record on the server, so no device-only use is offered
+  const [signInOnly, setSignInOnly] = useState(false);
   const [mode, setMode] = useState<Mode>("device");
   const [email, setEmail] = useState<string | null>(null);
   const [repo, setRepo] = useState<Repo | null>(null);
@@ -227,6 +229,7 @@ export function App() {
       const [status, local] = await Promise.all([api.status(), openRepo()]);
       setDeviceRepo(local);
       setAccounts(status.available);
+      setSignInOnly(!!status.signInRequired);
       if (status.unreachable && store.get(MODE) === "account") return setScreen({ name: "unreachable" });
       if (reset && status.available) return setScreen({ name: "auth", mode: "reset" });
       if (status.account.authenticated) {
@@ -236,7 +239,7 @@ export function App() {
       }
       const last = store.get(LAST);
       const localProfiles = await local.profiles();
-      if (last && localProfiles.some((p) => p.id === last)) return chooseRepo(local, "device", true);
+      if (!status.signInRequired && last && localProfiles.some((p) => p.id === last)) return chooseRepo(local, "device", true);
       setRepo(local);
       setProfiles(localProfiles);
       setScreen({ name: "welcome" });
@@ -317,9 +320,9 @@ export function App() {
         privateWindow={deviceRepo?.kind === "memory"}
         onBegin={() => (chooseSubject(true), accounts ? setScreen({ name: "auth", mode: "register" }) : deviceRepo && chooseRepo(deviceRepo, "device", false))}
         onSignIn={() => setScreen({ name: "auth", mode: "login" })}
-        onDevice={() => deviceRepo && chooseRepo(deviceRepo, "device", false)}
+        onDevice={signInOnly ? undefined : () => deviceRepo && chooseRepo(deviceRepo, "device", false)}
         extra={
-          deviceRepo && (
+          deviceRepo && !signInOnly && (
             <ImportBackup
               repo={deviceRepo}
               onImported={(id) => {

@@ -67,7 +67,7 @@ class AccountTests(FamilyTestCase):
     def test_logout_then_login_with_the_same_password(self):
         client = self.parent()
         self.assertEqual(client.post("/api/account/logout/").status_code, 204)
-        self.assertEqual(client.get("/api/account/").json(), {"authenticated": False, "accounts": True})
+        self.assertEqual(client.get("/api/account/").json(), {"authenticated": False, "accounts": True, "sign_in_required": False})
         self.assertIn(client.get("/api/pupils/").status_code, (401, 403))
         wrong = client.post("/api/account/login/", {"email": "asha.parent@example.org", "password": "wrong-password-here"}, format="json")
         self.assertEqual(wrong.status_code, 400)
