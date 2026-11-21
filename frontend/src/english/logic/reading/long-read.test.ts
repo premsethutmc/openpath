@@ -11,7 +11,7 @@ import { eventProblem } from "../events.ts";
 function sit(text: (typeof LONG.texts)[number], part: number, right: (i: number) => boolean = () => true) {
   const s = new LongSitting(text, part);
   assert.equal(s.snapshot().phase, "read");
-  assert.ok(s.snapshot().text.length > 300);
+  assert.ok(s.snapshot().text.length > (text.level <= 2 ? 200 : 300));
   s.read();
   for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot()) {
     const c = choices(s.questions[v.index], `${text.id}|${part}|${v.index}`);
@@ -25,11 +25,14 @@ function sit(text: (typeof LONG.texts)[number], part: number, right: (i: number)
   return s.take();
 }
 
-test("LR-1 content: twelve stories on twelve themes at levels four to six, three parts, questions on theme, character and title", () => {
+test("LR-1 content: seventeen stories on seventeen themes at levels one to six, three parts, questions on theme, character and title", () => {
   assert.deepEqual(longProblems(LONG), []);
-  assert.equal(LONG.texts.length, 12);
-  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 12);
-  assert.deepEqual([...new Set(LONG.texts.map((t) => t.level))].sort(), [4, 5, 6]);
+  assert.equal(LONG.texts.length, 17);
+  assert.equal(new Set(LONG.texts.map((t) => t.theme)).size, 17);
+  assert.deepEqual([...new Set(LONG.texts.map((t) => t.level))].sort(), [1, 2, 3, 4, 5, 6]);
+  // a weak reader starts on a story at their own level, not a level 4 one
+  assert.equal(nextStep(LONG, [], 1)!.text.level, 1);
+  assert.equal(nextStep(LONG, [], 2)!.text.level, 2);
   // the right answer is not always in the same place
   const place = [0, 0, 0];
   for (const t of LONG.texts) [...t.parts.flatMap((p, k) => p.questions.map((q, i) => choices(q, `${t.id}|${k}|${i}`))), ...t.whole.map((q, i) => choices(q, `${t.id}|${PARTS}|${i}`))].forEach((c) => place[c.answer]++);
