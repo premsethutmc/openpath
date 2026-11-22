@@ -50,6 +50,7 @@ export function longProblems(l: LongReads): string[] {
   const ids = new Set<string>();
   for (const t of l.texts) {
     if (ids.has(t.id)) out.push(`${t.id}: listed twice`);
+    if (l.texts.some((x) => x !== t && x.title === t.title)) out.push(`${t.id}: title "${t.title}" used twice`);
     ids.add(t.id);
     if (t.parts.length !== PARTS) out.push(`${t.id}: ${t.parts.length} parts, not ${PARTS}`);
     if (!t.theme || !t.title) out.push(`${t.id}: no theme or title`);

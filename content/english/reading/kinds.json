@@ -6609,7 +6609,7 @@
       "id": "kt2.advert2",
       "level": 2,
       "kind": "advert",
-      "title": "Summer Art Camp",
+      "title": "Holiday Art Camp",
       "text": "SUMMER ART CAMP\n\nPaint, draw and make clay animals!\nFor children aged 6 to 9.\nEvery morning in May, 9 to 11.\nOnly 50 rupees a day.\n\nCall Mrs Das: 98765 43210",
       "questions": [
         {
@@ -6707,7 +6707,7 @@
       "id": "kt1.notice5",
       "level": 1,
       "kind": "notice",
-      "title": "Lost Water Bottle",
+      "title": "Lost: A Blue Bottle",
       "text": "LOST\n\nA blue water bottle\nwith a yellow cap.\nIt has the name RAJU on it.\n\nLost on Monday, near the swings.\n\nIf you find it, please give it to\nMiss Latha in Class 2.",
       "questions": [
         {
@@ -6805,7 +6805,7 @@
       "id": "kt1.instructions4",
       "level": 1,
       "kind": "instructions",
-      "title": "How to Wash Your Hands",
+      "title": "Clean Hands",
       "text": "How to wash your hands\n\n1. Wet your hands with water.\n2. Put on some soap.\n3. Rub your hands for as long as it takes to sing a short song.\n4. Wash off the soap.\n5. Dry your hands on a clean towel.",
       "questions": [
         {
@@ -6854,7 +6854,7 @@
       "id": "kt1.sign2",
       "level": 1,
       "kind": "notice",
-      "title": "Signs in the Park",
+      "title": "Park Rules",
       "text": "PARK RULES\n\nWalk on the path.\nDo not pick the flowers.\nPut rubbish in the bin.\nDogs must be on a lead.\n\nThe park opens at 6 in the morning\nand closes at 7 in the evening.",
       "questions": [
         {
@@ -6903,7 +6903,7 @@
       "id": "kt1.poem7",
       "level": 1,
       "kind": "poem",
-      "title": "The Moon",
+      "title": "Good Night, Moon",
       "text": "The moon comes out when I'm in bed,\na silver ball above my head.\nSometimes it's round, sometimes it's thin,\nlike a smile, or a cat's grin.\n\nGood night, moon, I close my eyes,\nsee you again when the stars rise.",
       "questions": [
         {
@@ -6952,7 +6952,7 @@
       "id": "kt1.menu2",
       "level": 1,
       "kind": "chart",
-      "title": "School Lunch Menu",
+      "title": "What's for Lunch?",
       "text": "School lunch\n\nMonday      rice and dal\nTuesday     idli and sambar\nWednesday   chapati and potato\nThursday    lemon rice\nFriday      dosa and chutney\n\nFruit every day.",
       "questions": [
         {
@@ -7099,7 +7099,7 @@
       "id": "kt1.poem8",
       "level": 1,
       "kind": "poem",
-      "title": "Little Seed",
+      "title": "I Put a Seed in the Ground",
       "text": "I put a seed in the ground,\nI did not hear a single sound.\nI gave it water, gave it sun,\nand waited, waited, one by one\n\nthe days went by, and then I saw\na tiny leaf, then two, then more!",
       "questions": [
         {
@@ -7344,7 +7344,7 @@
       "id": "kt2.instructions5",
       "level": 2,
       "kind": "instructions",
-      "title": "Make a Paper Fan",
+      "title": "A Folded Paper Fan",
       "text": "Make a paper fan\n\nYou need: one sheet of paper, crayons, tape.\n\n1. Colour a pattern on the paper.\n2. Fold the paper forward along the short side.\n3. Turn it over and fold it back the same width.\n4. Keep folding forward and back until it is all folded.\n5. Pinch one end together and tape it.\n6. Open out the other end. Now fan yourself!",
       "questions": [
         {
@@ -7442,7 +7442,7 @@
       "id": "kt2.timetable3",
       "level": 2,
       "kind": "timetable",
-      "title": "Swimming Classes",
+      "title": "Classes at the Town Pool",
       "text": "Swimming classes at the town pool\n\nDay         Time        Group\nMonday      4 pm        beginners\nWednesday   4 pm        beginners\nThursday    5 pm        swimmers who can do one length\nSaturday    9 am        everyone\n\nBring a towel and a cap.",
       "questions": [
         {
@@ -7491,7 +7491,7 @@
       "id": "kt2.article3",
       "level": 2,
       "kind": "article",
-      "title": "Elephants",
+      "title": "Elephants of the Forest",
       "text": "Elephants are the biggest animals that live on land. They live in forests and grasslands in India and Africa. An elephant uses its long trunk to pick up food, drink water and say hello to other elephants. Elephants eat grass, leaves and fruit, and they eat for most of the day. Baby elephants stay close to their mothers for many years.",
       "questions": [
         {
