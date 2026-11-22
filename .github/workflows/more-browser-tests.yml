@@ -70,11 +70,13 @@ jobs:
             done
           }
           # these pass today: a failure here fails the job
-          run a3-linear-equations curriculum-journey d1-grader-feedback foundation-preview interactive-preview learner-experience slice-journey
+          run a3-linear-equations curriculum-journey d1-grader-feedback foundation-preview interactive-preview learner-experience slice-journey \
+              tamil-help tamil-slips-sounds
           good=("${failed[@]}")
-          # these failed when first run in CI (22 Nov 2026): screens and flows changed since the tests were written.
+          # maths previews that failed when first run in CI (22 Nov 2026): lesson content and flows changed since the tests
+          # were written in October (for example a lesson now has three worked examples where the test expects one).
           # Shown, but not failing the job, until each is repaired and moved to the list above.
-          run tamil-help tamil-slips-sounds a2-explanations adaptive-loop curated-lessons h1-handover m2-scenarios \
+          run a2-explanations adaptive-loop curated-lessons h1-handover m2-scenarios \
               mathematics-completion showcase-journey teaching-contract teaching-first-learner teaching-first-preview \
               universal-teaching-presentation
           echo "known broken and still failing: ${failed[*]:-none}"
