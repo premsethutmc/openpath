@@ -1,0 +1,91 @@
+name: More browser tests
+# Browser test files that no other workflow runs: maths preview and year pages, the vertical slice, Tamil help.
+# Each file runs as its own suite (one failing does not hide the others); the job fails if any suite fails.
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  more:
+    name: More browser tests (maths previews, slice, Tamil)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r backend/requirements.txt
+      - run: npm ci
+        working-directory: frontend
+      - name: Build the English app, the year and curriculum pages (test builds) and the slice
+        working-directory: frontend
+        run: |
+          npm run english:build
+          node scripts/build-mathematics-journey.mjs
+          node scripts/build-year.mjs --test
+          node scripts/build-curriculum.mjs --test
+          node scripts/build-slice.mjs
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Run each browser test file
+        shell: bash
+        run: |
+          python backend/manage.py migrate --noinput
+          export OPENPATH_TEST_CLOCK_FILE=/tmp/more-clock.json
+          echo '{}' > "$OPENPATH_TEST_CLOCK_FILE"
+          OPENPATH_ACCOUNT_RATE=1000/hour python backend/manage.py runserver 127.0.0.1:8014 --noreload --nothreading > /tmp/more-api.log 2>&1 &
+          api_pid=$!
+          PORT=4190 API_TARGET=http://127.0.0.1:8014 node frontend/scripts/preview-english.mjs > /tmp/more-preview.log 2>&1 &
+          preview_pid=$!
+          # the English app on its own (device-only, no account API), as the English browser tests expect
+          PORT=4174 node frontend/scripts/preview-english.mjs > /tmp/more-english.log 2>&1 &
+          english_pid=$!
+          trap 'kill "$api_pid" "$preview_pid" "$english_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4190/api/account/ > /dev/null; then break; fi
+            sleep 1
+          done
+          cd frontend
+          export CHROMIUM_PATH='' YEAR_URL=http://127.0.0.1:4190 PREVIEW_URL=http://127.0.0.1:4190 E2E_URL=http://127.0.0.1:4174 PATHWAY_API=http://127.0.0.1:8014
+          mkdir -p /tmp/more-logs
+          run() { # run each file; print the start of each failure; list the files that failed in $failed
+            failed=()
+            for f in "$@"; do
+              t0=$SECONDS
+              if timeout 240 node --import tsx --test "e2e/$f.test.mjs" > "/tmp/more-logs/$f.log" 2>&1; then
+                echo "pass  $f ($((SECONDS - t0))s)"
+              else
+                echo "FAIL  $f ($((SECONDS - t0))s)"; failed+=("$f")
+                echo "::group::$f"; grep -A25 -m3 "^not ok" "/tmp/more-logs/$f.log" || tail -40 "/tmp/more-logs/$f.log"; echo "::endgroup::"
+              fi
+            done
+          }
+          # these pass today: a failure here fails the job
+          run a3-linear-equations curriculum-journey d1-grader-feedback foundation-preview interactive-preview learner-experience slice-journey \
+              tamil-help tamil-slips-sounds
+          good=("${failed[@]}")
+          # maths previews that failed when first run in CI (22 Nov 2026): lesson content and flows changed since the tests
+          # were written in October (for example a lesson now has three worked examples where the test expects one).
+          # Shown, but not failing the job, until each is repaired and moved to the list above.
+          run a2-explanations adaptive-loop curated-lessons h1-handover m2-scenarios \
+              mathematics-completion showcase-journey teaching-contract teaching-first-learner teaching-first-preview \
+              universal-teaching-presentation
+          echo "known broken and still failing: ${failed[*]:-none}"
+          echo "failing that should pass: ${good[*]:-none}"
+          [ ${#good[@]} -eq 0 ]
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: more-browser-tests-logs
+          path: /tmp/more-logs/
+          retention-days: 7
+          if-no-files-found: ignore
