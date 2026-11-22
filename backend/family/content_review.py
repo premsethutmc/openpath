@@ -44,6 +44,22 @@ def _load(name):
 
 
 @lru_cache
+def _corrected(m, fixes):
+    """screen-review@1: a module with its reviewed screen corrections applied, as content.ts applies them (withCorrections)
+    and in the same key order, so the hash is the app's: a correction applies only while the screen says its original."""
+    mine = {(c['section'], c['index']): c for c in fixes if c['competency'] == m['competency']}
+    if not mine:
+        return m
+    def fix(section):
+        def one(i, x):
+            c = mine.get((section, i))
+            return {**x, 'text': c['text']} if c and ' / '.join(x.get('text') or []) == c['original'] else x
+        return one
+    ch = fix('chapter')
+    return {**m, 'chapter': [ch(i, x) for i, x in enumerate(m['chapter'])],
+            'strategies': [{**s, 'screens': [fix(s['id'])(i, x) for i, x in enumerate(s['screens'])]} for s in m['strategies']]}
+
+
 def items():
     """Every reviewable item now: {item: {hash, version, kind, competency, families, title, author}}: question families,
     modules, and curriculum releases (their mappings)."""
@@ -55,7 +71,9 @@ def items():
     lib = _load('library.v1.json')
     pools = lib.get('authoredPools', {})
     mods = []
+    fixes = _load('screen-corrections.v1.json')['entries']
     for m in [*_load('modules.v1.json')['modules'], *_load('written-modules.v1.json')['modules']]:
+        m = _corrected(m, fixes)
         a = pools.get(m['competency'])
         # as the app builds it (content.ts): the main family as pool, every family as pools (pools@1)
         mods.append(({**m, 'pool': {'family': a['family'], 'version': a['version']}, **({'pools': a['pools']} if a.get('pools') else {})} if a else m, 'authored'))
@@ -63,7 +81,7 @@ def items():
     for m in lib['modules']:
         if m['competency'] in authored:
             continue  # an authored module stands in for the synthesised one (content.ts)
-        mods.append(({k: v for k, v in m.items() if k != 'provenance'}, m.get('provenance', {}).get('author', 'OpenPath')))
+        mods.append((_corrected({k: v for k, v in m.items() if k != 'provenance'}, fixes), m.get('provenance', {}).get('author', 'OpenPath')))
     # written@2: a module answered automatically also offers the competency's written tasks it does not ask itself
     tasks = _load('written.v1.json')['tasks']
     for i, (m, author) in enumerate(mods):
