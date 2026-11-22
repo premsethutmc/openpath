@@ -16,7 +16,7 @@ export const lessons = Object.freeze({
     clues:[['Look towards the platform','The Quit India Resolution','The All India Congress Committee called for British rule to end immediately. Gandhi urged nonviolent struggle and gave the call “Do or Die.”']]},
   arrests: {date:'BOMBAY · 9 AUGUST 1942',title:'The next morning',photo:'street',context:'By morning, Gandhi and other senior Congress leaders have been arrested. Can a movement continue without orders from its leaders?',
     clues:[['Read the notice','Leaders arrested','The colonial government arrested Gandhi and other senior Congress leaders. Gandhi was held at the Aga Khan Palace in Poona. People continued protesting even without direct instructions from the jailed leaders.']]},
-  radio: {date:'BOMBAY · LATER IN 1942',title:'A voice through the static',photo:'radio',context:'Usha Mehta and her colleagues used Congress Radio to share news despite censorship. Turn the dial to find the simulated station. No historical audio is playing.'},
+  radio: {date:'BOMBAY · LATER IN 1942',title:'A voice through the static',photo:'radio',context:'Usha Mehta and her colleagues used Congress Radio to share news despite censorship. Turn the dial to find the simulated station. The station voice is a reenactment, not archival audio.'},
   places: {date:'INDIA · FROM AUGUST 1942',title:'How it spread',context:'Students demonstrated, workers struck, and some towns set up local administrations. Choose a place to see how the movement took different forms.',
     clues:[
       ['Ballia','United Provinces · 1942','Local protesters challenged colonial control and briefly set up their own administration.'],

@@ -27,3 +27,14 @@ test('the causes, resolution, arrests, local action, suppression and 1947 are di
   assert.match(lessons.talks.clues[0][2],/after the war.*keep control/);
   assert.match(lessons.talks.clues[1][2],/real authority during the war/);
 });
+
+test('every scene has a transcript and a packaged speech asset', async () => {
+  const { narration } = await import('./voice.mjs');
+  const { readFile } = await import('node:fs/promises');
+  assert.deepEqual(Object.keys(narration), sceneOrder);
+  for (const key of [...sceneOrder, 'broadcast']) {
+    const bytes = await readFile(new URL('./assets/voice/' + key + '.mp3', import.meta.url));
+    assert.ok(bytes.byteLength > 4000, key + ' has actual audio data');
+    assert.equal(bytes.subarray(0,3).toString(), 'ID3');
+  }
+});

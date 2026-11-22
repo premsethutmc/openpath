@@ -66,3 +66,6 @@ footer{color:#bcad94;font-size:.74rem;padding-block:1rem}
 .date-track small{display:block;font:600 .72rem/1.5 system-ui,sans-serif;color:#e4d0a9}
 .reflection{flex:0 0 100%;margin:0 0 .2rem}
 @media(max-width:640px){#stage:is([data-scene=bridge],[data-scene=wardha],[data-scene=independence]){height:16rem}}
+
+.transcript{margin:.35rem 0 .65rem;padding:.35rem 0;border:0;font-size:.9rem}
+.transcript summary{cursor:pointer}

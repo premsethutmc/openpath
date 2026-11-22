@@ -1,7 +1,24 @@
 import {SIGNAL, STATION, sceneOrder, lessons, clampDial, hasSignal, moveScene} from './story.mjs';
+import {narration} from './voice.mjs';
 const $ = id => document.getElementById(id);
 let index=0, dialValue=0, signalShown=false, sound=false, contextAudio, audioBurst;
 const memory = new Map();
+const voice = $('voice');
+const voiceKeys = new Set([...sceneOrder,'broadcast']);
+function stopVoice() {
+  voice.pause();
+  if (!Number.isNaN(voice.duration)) voice.currentTime=0;
+  voice.removeAttribute('src');
+  voice.load();
+}
+function playVoice(key) {
+  if(!sound || document.hidden || !voiceKeys.has(key)) return;
+  stopVoice();
+  const src = document.getElementById('offline-audio-' + key)?.textContent || './assets/voice/' + key + '.mp3';
+  voice.src=src;
+  voice.play().catch(()=>{}); // captions work even when playback is blocked
+}
+const activeVoice = () => sceneOrder[index]==='radio' && hasSignal(dialValue) ? 'broadcast' : sceneOrder[index];
 const mapMarkup = `<svg class="place-map" viewBox="0 0 250 160" aria-hidden="true">
   <path class="outline" d="M67 10 80 16 99 11 99 27 108 38 119 42 128 53 148 61 157 69 172 65 182 55 204 49 213 44 221 47 224 58 237 66 224 81 221 97 209 90 199 82 185 86 174 83 166 95 154 104 144 104 135 116 120 124 113 135 100 151 91 158 83 145 78 125 69 112 60 101 54 83 40 83 34 77 42 74 32 69 32 63 54 59 58 45 64 39 60 27 67 20Z"/>
   <circle data-map-pin="0" cx="138" cy="66" r="4"/><text x="110" y="54">Ballia</text>
@@ -76,24 +93,38 @@ function renderRadio() {
   $('object').hidden=false;
   const dial=$('dial');
   dial.value=dialValue;
+  let wasLocked=hasSignal(dialValue);
+  const tune=(force=false)=>{
+    const locked=hasSignal(dialValue);
+    if(!locked && wasLocked) stopVoice();
+    syncReceiver(true,locked && (!wasLocked || force));
+    wasLocked=locked;
+  };
   dial.addEventListener('input',()=>{
-    readyAudio(); dialValue=clampDial(Number(dial.value)); syncReceiver(true);
+    readyAudio(); dialValue=clampDial(Number(dial.value)); tune();
   });
   $('controls').append(button('Tune to Congress Radio',()=>{
-    readyAudio(); dialValue=SIGNAL; dial.value=SIGNAL; syncReceiver(true);
+    readyAudio(); dialValue=SIGNAL; dial.value=SIGNAL; tune(true);
   }));
+  const replay=button('Replay station identification',()=>playVoice('broadcast'));
+  replay.id='broadcast-replay';
+  $('controls').append(replay);
   syncReceiver(false);
 }
-function syncReceiver(play) {
+function syncReceiver(play, broadcast=false) {
   const locked=hasSignal(dialValue);
   $('receiver').dataset.locked=String(locked);
   $('dial').setAttribute('aria-valuetext',locked?'Congress Radio found':dialValue<SIGNAL?'Searching; tune to the right':'Searching; tune to the left');
-  if(play) crackle(locked);
+  $('broadcast-replay').hidden=!(signalShown || locked);
+  $('broadcast-replay').disabled=!(sound && locked);
+  if(play && (!locked || broadcast)) crackle(locked);
+  if(broadcast) playVoice('broadcast');
   if (locked) signalShown=true;
-  if (signalShown) showEvidence('Congress Radio · Station identification',STATION+' Usha Mehta and her colleagues used radio to share news and speeches despite censorship.');
+  if (signalShown) showEvidence('Congress Radio · Station identification · Reenactment',STATION+' Usha Mehta and her colleagues used radio to share news and speeches despite censorship.');
 }
 function launch(step,focus=true) {
   stopStatic();
+  stopVoice();
   index=step;
   const kind=sceneOrder[index];
   const scene=lessons[kind];
@@ -102,6 +133,8 @@ function launch(step,focus=true) {
   $('date').textContent=scene.date;
   $('chapter').textContent=scene.title;
   $('context').textContent=scene.context;
+  $('transcript').open=false;
+  $('narration-text').textContent=narration[kind];
   $('reconstruction').hidden=!scene.photo;
   $('object').hidden=true;
   $('object').replaceChildren();
@@ -143,18 +176,23 @@ function launch(step,focus=true) {
     if(memory.has(kind)) clueActive(kind,memory.get(kind));
   }
   if(focus) $('chapter').focus();
+  if(focus && sound) playVoice(activeVoice());
 }
 
 $('sound').addEventListener('click',()=>{
   sound=!sound;
   $('sound').setAttribute('aria-pressed',String(sound));
   $('sound').textContent=sound?'Sound on':'Sound off';
-  if(sound) readyAudio(); else stopStatic();
+  $('narration-replay').disabled=!sound;
+  if(sceneOrder[index]==='radio') syncReceiver(false);
+  if(sound) { readyAudio(); playVoice(activeVoice()); }
+  else { stopStatic(); stopVoice(); }
 });
+$('narration-replay').addEventListener('click',()=>playVoice(sceneOrder[index]));
 $('back').addEventListener('click',()=>launch(moveScene(index,-1)));
 $('next').addEventListener('click',()=>{
   if(index===sceneOrder.length-1){memory.clear();signalShown=false;dialValue=0;launch(0);}
   else launch(moveScene(index,1));
 });
-document.addEventListener('visibilitychange',()=>{if(document.hidden) stopStatic();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden) { stopStatic(); stopVoice(); }});
 launch(0,false);

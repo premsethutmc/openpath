@@ -7,7 +7,7 @@ import { after, before, test } from 'node:test';
 import { chromium } from 'playwright';
 
 const dir = fileURLToPath(new URL('../history/quit-india/', import.meta.url));
-const mime = {'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.webp':'image/webp'};
+const mime = {'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.webp':'image/webp','.mp3':'audio/mpeg'};
 let server, browser, url;
 before(async () => {
   server = createServer(async (req,res) => {
@@ -97,5 +97,36 @@ test('320px keyboard, muted and reduced motion: optional evidence, revisit and r
     await p.getByRole('button',{name:'Step into 1942'}).click();
     assert.equal(await p.locator('#evidence').isVisible(),false);
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),320);
+  } finally {await c.close();}
+});
+
+test('Indian English voice is opt-in; radio takeover, replay and mute work', async () => {
+  const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  try {
+    const p=await c.newPage(), speech=[];
+    p.on('request', req=>{if(req.url().includes('/assets/voice/')) speech.push(req.url());});
+    const playing = key => p.waitForFunction(k=>{
+      const a=document.getElementById('voice');
+      return a.currentSrc.endsWith('/'+k+'.mp3') && !a.paused && a.currentTime > 0;
+    },key);
+    await p.goto(url);
+    await p.getByRole('button',{name:'Step into 1942'}).tap();
+    for(let i=0;i<5;i++) await p.locator('#next').tap();
+    assert.equal(speech.length,0);
+    await p.getByRole('button',{name:'Sound off'}).tap();
+    await playing('radio');
+    await p.getByRole('button',{name:'Tune to Congress Radio'}).tap();
+    await playing('broadcast');
+    assert.match(await p.locator('#label').innerText(),/Reenactment/);
+    assert.match(await p.locator('#answer').innerText(),/42.34 meters/);
+    await p.locator('#broadcast-replay').tap();
+    await playing('broadcast');
+    await p.getByRole('button',{name:'Sound on'}).tap();
+    assert.equal(await p.locator('#voice').evaluate(a=>a.paused && !a.hasAttribute('src')),true);
+    await p.locator('#next').tap();
+    await p.getByText('Narration transcript',{exact:true}).tap();
+    assert.match(await p.locator('#narration-text').innerText(),/Students demonstrated/);
+    assert.equal(await p.locator('#narration-replay').isDisabled(),true);
+    assert.ok(!speech.some(u=>u.endsWith('/places.mp3')));
   } finally {await c.close();}
 });
