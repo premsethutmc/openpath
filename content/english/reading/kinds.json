@@ -7633,6 +7633,752 @@
           "explain": "He waters, pulls weeds and looks after his plants all day."
         }
       ]
+    },
+    {
+      "id": "kt6.article4",
+      "level": 6,
+      "kind": "article",
+      "title": "The Quiet Work of Mangroves",
+      "text": "Along the coasts of Tamil Nadu, the Sundarbans and the Andaman Islands grow forests that most people never visit: mangroves, trees that stand with their roots in salt water. At low tide their roots look like a tangle of grey fingers poking out of the mud. It is easy to dismiss them as swamp. That would be a mistake.\n\nMangrove roots slow down waves. When the 2004 tsunami struck, several studies found that villages sheltered behind thick mangrove belts suffered less damage than villages where the trees had been cleared for shrimp farms. The roots also trap mud and hold the shoreline in place, and the calm water between them is a nursery where young fish and crabs grow before swimming out to sea. Fishing families depend on that nursery, often without knowing it.\n\nMangroves store carbon too, and far more of it per hectare than most forests on dry land, because the waterlogged mud keeps dead leaves and roots from rotting away. When a mangrove forest is cut, that carbon is slowly released.\n\nThe good news is that mangroves can be replanted. At Pichavaram, local volunteers and forest officers have dug channels to let tidal water reach dry patches and planted seedlings there, and the forest has grown back over several years. Replanting is slow, careful work, but it shows that a damaged coast is not a lost cause.",
+      "questions": [
+        {
+          "skill": "theme",
+          "prompt": "What is the writer's main point?",
+          "right": "Mangroves are more valuable than they look",
+          "wrong": [
+            "Mangroves are dangerous swamps to avoid",
+            "Shrimp farms are better than forests"
+          ],
+          "explain": "The article lists the ways mangroves protect coasts, fish and the climate."
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why do mangroves store so much carbon?",
+          "right": "waterlogged mud stops dead plants rotting",
+          "wrong": [
+            "their leaves are larger than other trees'",
+            "salt water turns carbon into stone"
+          ],
+          "explain": "\"The waterlogged mud keeps dead leaves and roots from rotting away.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why might fishing families depend on mangroves \"without knowing it\"?",
+          "right": "the fish they catch grew up among the roots",
+          "wrong": [
+            "they are paid to plant the trees",
+            "they live inside the forests"
+          ],
+          "explain": "The calm water between the roots is a nursery for young fish."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer end with Pichavaram?",
+          "right": "to show that damage can be repaired",
+          "wrong": [
+            "to advertise a holiday spot",
+            "to prove mangroves cannot grow back"
+          ],
+          "explain": "\"A damaged coast is not a lost cause.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "In the first paragraph, \"dismiss\" most nearly means",
+          "right": "treat as unimportant",
+          "wrong": [
+            "send away from school",
+            "describe in detail"
+          ],
+          "explain": "\"It is easy to dismiss them as swamp. That would be a mistake.\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.speech2",
+      "level": 6,
+      "kind": "speech",
+      "title": "A Speech on Sports Day",
+      "text": "Good morning, teachers, parents and fellow students.\n\nToday some of you will win medals, and most of you will not. I would like to speak to the second group, because I have been in it for nine years.\n\nIn Class 3, I came last in the sack race. I fell twice and finished long after the others had left the track. In Class 6, I was dropped from the relay team because I kept dropping the baton. Last year I finally reached the final of the 400 metres and came fifth out of six. That is my sporting record.\n\nYet I would not trade those years for a shelf of medals. Every morning at six I ran around this ground with Mr Ravi's stopwatch in my head. I learned that the body grows stronger slowly, that being tired is not the same as being finished, and that the people who cheer for you when you are fifth are the people worth keeping.\n\nSo, to everyone who will not stand on the podium today: run anyway. Run your own race as well as you can, and cheer for the person who beats you. The medal lasts a day. What you build by training lasts much longer.\n\nThank you.",
+      "questions": [
+        {
+          "skill": "purpose",
+          "prompt": "Who is the speaker mainly talking to?",
+          "right": "students who will not win medals",
+          "wrong": [
+            "the winners of every race",
+            "the parents who organised the day"
+          ],
+          "explain": "\"I would like to speak to the second group.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "Which happened last in the speaker's sporting life?",
+          "right": "coming fifth in the 400 metres final",
+          "wrong": [
+            "being dropped from the relay team",
+            "coming last in the sack race"
+          ],
+          "explain": "Class 3 sack race, Class 6 relay, last year the 400 metres."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"with Mr Ravi's stopwatch in my head\" suggest?",
+          "right": "the speaker kept timing and pushing himself",
+          "wrong": [
+            "the speaker had stolen the stopwatch",
+            "the speaker had a headache"
+          ],
+          "explain": "He imagined being timed, so he trained as if it mattered."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the main message?",
+          "right": "effort and training matter more than medals",
+          "wrong": [
+            "only winners should take part in sports",
+            "sports day should be cancelled"
+          ],
+          "explain": "\"The medal lasts a day. What you build by training lasts much longer.\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.pair3",
+      "level": 6,
+      "kind": "pair",
+      "title": "Two Views of the School Garden",
+      "text": "Meera's letter to the school magazine\nOur school has a strip of empty land behind the science block. I propose that we turn it into a vegetable garden. Each class could look after one bed. We would learn how plants grow by growing them, not only by reading about them, and the vegetables could go to the school kitchen. Gardening is also calm work: after a long test, half an hour with a watering can would do us all good.\n\nThe headmaster's reply\nI thank Meera for a thoughtful idea, and I agree that pupils learn best by doing. But I must point out two difficulties. First, the land behind the science block floods every monsoon, so any bed there would be washed away in July. Second, gardens need care in the holidays, when the school is closed for seven weeks. If Meera and her friends can suggest how to solve these two problems, I will gladly give them the land, and twenty bags of soil to begin.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "What do Meera and the headmaster agree about?",
+          "right": "pupils learn well by doing things",
+          "wrong": [
+            "the land is perfect for a garden",
+            "the kitchen does not need vegetables"
+          ],
+          "explain": "He says \"I agree that pupils learn best by doing.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What is one problem the headmaster raises?",
+          "right": "the land floods every monsoon",
+          "wrong": [
+            "vegetables are too expensive",
+            "pupils do not like gardening"
+          ],
+          "explain": "\"The land behind the science block floods every monsoon.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What is the headmaster's attitude to the idea?",
+          "right": "open to it if the problems are solved",
+          "wrong": [
+            "completely against it from the start",
+            "not interested at all"
+          ],
+          "explain": "He offers the land and soil if the problems are solved."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Which reason for the garden does Meera give that is about feelings, not learning?",
+          "right": "gardening is calm work after a test",
+          "wrong": [
+            "vegetables can go to the kitchen",
+            "each class can have one bed"
+          ],
+          "explain": "\"Gardening is also calm work.\""
+        }
+      ]
+    },
+    {
+      "id": "kt6.story2",
+      "level": 6,
+      "kind": "story",
+      "title": "The Night Train",
+      "text": "The train had stopped in the middle of nowhere. Through the window Anil could see only darkness and, far away, a single yellow light that might have been a farmhouse. The fan above his berth had stopped too, and the carriage was growing hot.\n\n\"Engine trouble,\" said the man in the opposite berth, without looking up from his newspaper. \"Two hours at least.\"\n\nAnil's grandmother, who had said almost nothing since Chennai, sat up. \"Then we have time,\" she said, and from her cloth bag she took a small steel box. Inside were savoury rice snacks, still crisp, and a handful of the sweet she called by its village name. She offered the box first to the man with the newspaper. He hesitated, then took one. Then a mother with two small children came over from the next bay, and a college student with headphones, and soon half the carriage was sitting on the berths and the floor, sharing what they had: oranges, biscuits, a flask of tea.\n\nSomeone asked Paati where she was going. She told them about the village she had left fifty years ago and was seeing again for the first time. People asked questions. The man with the newspaper folded it and listened.\n\nWhen the train jerked forward, two and a half hours later, there was a small groan of disappointment. Anil realised he had not looked at his phone once.",
+      "questions": [
+        {
+          "skill": "feelings",
+          "prompt": "How does the mood in the carriage change?",
+          "right": "from hot and dull to warm and friendly",
+          "wrong": [
+            "from cheerful to frightened",
+            "from noisy to completely silent"
+          ],
+          "explain": "At first it is hot and still; then people share food and stories."
+        },
+        {
+          "skill": "character",
+          "prompt": "What does Paati's offer show about her?",
+          "right": "she turns a bad moment into a shared one",
+          "wrong": [
+            "she wants to sell her food",
+            "she is angry about the delay"
+          ],
+          "explain": "She shares her food and brings strangers together."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why is there a \"groan of disappointment\" when the train moves?",
+          "right": "people were enjoying the gathering",
+          "wrong": [
+            "the train was going the wrong way",
+            "the food had run out"
+          ],
+          "explain": "They did not want the shared time to end."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Why is Paati making this journey?",
+          "right": "to see her village again after fifty years",
+          "wrong": [
+            "to start a new job",
+            "to visit a hospital in Chennai"
+          ],
+          "explain": "\"The village she had left fifty years ago and was seeing again for the first time.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What idea does the story explore?",
+          "right": "strangers can become a community by sharing",
+          "wrong": [
+            "trains are always late",
+            "phones are useful on long journeys"
+          ],
+          "explain": "Delayed strangers share food and stories and forget their phones."
+        }
+      ]
+    },
+    {
+      "id": "kt6.chart2",
+      "level": 6,
+      "kind": "chart",
+      "title": "How Our Class Gets to School",
+      "text": "How Class 9B travels to school (survey of 40 pupils, June and December)\n\nWay of travelling   June   December\nWalk                 12       9\nBicycle               6      13\nSchool bus           14      12\nTwo-wheeler with parent 6     4\nAuto or car           2       2\n\nNote: In September the town opened a cycle lane on Station Road, and the school added a covered bicycle stand.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many pupils came by bicycle in December?",
+          "right": "13",
+          "wrong": [
+            "6",
+            "12"
+          ],
+          "explain": "Bicycle, December: 13."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Which change was the largest between June and December?",
+          "right": "more pupils cycling",
+          "wrong": [
+            "fewer pupils taking the bus",
+            "more pupils coming by car"
+          ],
+          "explain": "Bicycle rose by 7; no other figure changed as much."
+        },
+        {
+          "skill": "cause",
+          "prompt": "What does the note suggest about the change?",
+          "right": "a new cycle lane and stand may have helped",
+          "wrong": [
+            "the bus became more expensive",
+            "the school moved to a new building"
+          ],
+          "explain": "The note mentions a cycle lane and a covered stand opened in September."
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why are there two columns of numbers?",
+          "right": "to compare two months",
+          "wrong": [
+            "to compare two classes",
+            "to show boys and girls"
+          ],
+          "explain": "The columns are June and December."
+        }
+      ]
+    },
+    {
+      "id": "kt6.poem4",
+      "level": 6,
+      "kind": "poem",
+      "title": "Inventory of a Grandfather's Drawer",
+      "text": "A pocket watch that lost its hands\nthe year the river changed its course;\na ticket stub from Madras Central,\nthird class, one way, nineteen-fifty;\n\na pencil sharpened down to nothing,\nas if he could not bear to waste it;\nthree buttons, none of them the same;\na letter, folded into eighths,\n\nthe ink too faded now to read.\nI cannot ask him what it said.\nI close the drawer the way he did,\nwith both hands, slowly, as a lid\non something that is not quite gone.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What does the ticket stub show?",
+          "right": "a one-way journey in 1950",
+          "wrong": [
+            "a return trip in first class",
+            "a ticket for a film"
+          ],
+          "explain": "\"Third class, one way, nineteen-fifty.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What does the tiny pencil suggest about the grandfather?",
+          "right": "he did not like to waste things",
+          "wrong": [
+            "he never wrote anything",
+            "he collected new pencils"
+          ],
+          "explain": "\"As if he could not bear to waste it.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "What feeling is strongest at the end?",
+          "right": "tender sadness and remembering",
+          "wrong": [
+            "anger at the mess",
+            "excitement about a treasure"
+          ],
+          "explain": "The speaker cannot ask him and closes the drawer gently."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"something that is not quite gone\" refer to?",
+          "right": "the grandfather's memory living on",
+          "wrong": [
+            "a lost button in the drawer",
+            "the river that changed course"
+          ],
+          "explain": "The objects keep him present though he has died."
+        }
+      ]
+    },
+    {
+      "id": "kt6.notice3",
+      "level": 6,
+      "kind": "notice",
+      "title": "Water Cut in Wards 4, 5 and 7",
+      "text": "TOWN WATER BOARD: NOTICE TO RESIDENTS OF WARDS 4, 5 AND 7\n\nOwing to the replacement of the main pipe under Gandhi Road, water supply to the above wards will be suspended from 6 a.m. on Tuesday 10 December until 6 p.m. on Thursday 12 December.\n\nDuring this period:\n- Water tankers will visit each street twice daily, at about 7 a.m. and 5 p.m.\n- Residents are advised to store enough drinking water for one day before Tuesday morning.\n- Tap water may look cloudy for up to 24 hours after supply resumes. Please run taps for two minutes before use.\n\nHospitals and schools in these wards will receive a separate supply.\nComplaints: 0452 2345 678 (8 a.m. to 8 p.m.)",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How long will the supply be off?",
+          "right": "about two and a half days",
+          "wrong": [
+            "one morning only",
+            "one whole week"
+          ],
+          "explain": "From 6 a.m. Tuesday to 6 p.m. Thursday."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why is the supply being stopped?",
+          "right": "a main pipe is being replaced",
+          "wrong": [
+            "the town has run out of water",
+            "the water is being cleaned"
+          ],
+          "explain": "\"Owing to the replacement of the main pipe under Gandhi Road.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What should a family do on Monday evening?",
+          "right": "store a day's drinking water",
+          "wrong": [
+            "run their taps for two minutes",
+            "phone the complaints number"
+          ],
+          "explain": "\"Store enough drinking water for one day before Tuesday morning.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you do if water looks cloudy afterwards?",
+          "right": "run the tap for two minutes first",
+          "wrong": [
+            "boil it for a whole hour",
+            "phone the hospital at once"
+          ],
+          "explain": "\"Please run taps for two minutes before use.\""
+        }
+      ]
+    },
+    {
+      "id": "kt7.article6",
+      "level": 7,
+      "kind": "article",
+      "title": "Is Boredom Good for You?",
+      "text": "For most of history, being bored was simply part of life: the long walk to market, the wait for a bus, the empty afternoon. Today a phone fills every gap. Psychologists have begun to ask whether something has been lost.\n\nIn one often-quoted experiment, volunteers were first given a dull task, copying numbers from a telephone directory, and then asked to think of as many uses as they could for a pair of plastic cups. Those who had been bored first came up with more ideas, and more unusual ones, than those who went straight to the cups. The researchers suggested that boredom pushes the mind to wander, and that a wandering mind makes unexpected connections.\n\nOther researchers urge caution. A single small experiment, they point out, cannot prove that boredom makes people creative in general, and later attempts to repeat such studies have had mixed results. Chronic boredom, the kind that lasts for months, is linked not with creativity but with low mood and risky behaviour.\n\nPerhaps the most reasonable conclusion is a modest one. Short spells of boredom are not an emergency that must be fixed at once. Letting the mind drift on a bus ride, instead of reaching for a screen, may sometimes lead somewhere interesting, and at worst it costs a few dull minutes.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did the bored volunteers do better?",
+          "right": "think of uses for plastic cups",
+          "wrong": [
+            "copy numbers quickly",
+            "remember telephone numbers"
+          ],
+          "explain": "They came up with more and more unusual ideas for the cups."
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which is the writer's opinion rather than a reported finding?",
+          "right": "a modest conclusion is most reasonable",
+          "wrong": [
+            "volunteers copied numbers from a directory",
+            "later studies had mixed results"
+          ],
+          "explain": "\"Perhaps the most reasonable conclusion is a modest one\" is the writer's judgement."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer include the third paragraph?",
+          "right": "to show the evidence has limits",
+          "wrong": [
+            "to prove boredom is always harmful",
+            "to describe a second experiment in detail"
+          ],
+          "explain": "Researchers \"urge caution\" and note mixed results."
+        },
+        {
+          "skill": "compare",
+          "prompt": "How is chronic boredom different from short boredom, according to the text?",
+          "right": "it is linked with low mood, not creativity",
+          "wrong": [
+            "it makes people more creative",
+            "it lasts only a few minutes"
+          ],
+          "explain": "\"Chronic boredom ... is linked not with creativity but with low mood.\""
+        },
+        {
+          "skill": "word_meaning",
+          "prompt": "\"Modest\" in the last paragraph means",
+          "right": "limited and careful",
+          "wrong": [
+            "shy and quiet",
+            "cheap and simple"
+          ],
+          "explain": "The conclusion claims only a little: short boredom is not an emergency."
+        }
+      ]
+    },
+    {
+      "id": "kt7.speech3",
+      "level": 7,
+      "kind": "speech",
+      "title": "Address to New Engineers",
+      "text": "Graduates, in a few weeks many of you will sign your name on a drawing for the first time, and someone will build what you have drawn. I want to talk about that signature.\n\nWhen I was your age I worked on a small footbridge over a canal. The calculations were routine, and I was in a hurry. I checked them once, signed, and went home early. That night I could not sleep. At two in the morning I took the file from my bag and found that I had used the load for a single walker where the code required a crowd. The bridge would have stood on an ordinary day. On a festival day, with people packed shoulder to shoulder, it might not have.\n\nI corrected the drawing before breakfast. No one ever knew, until now.\n\nI tell you this not to frighten you but to remind you that your work is not finished when it is clever. It is finished when it is safe for the people who will never read your calculations: the child on the bridge, the family in the building, the worker on the night shift. They are trusting you without knowing your name.\n\nCheck your work twice. Ask for a second pair of eyes, and do not be ashamed to be checked. And when you sign, sign as if you will be standing on the bridge yourself on the busiest day of the year.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What mistake had the speaker made?",
+          "right": "using the load for one walker instead of a crowd",
+          "wrong": [
+            "drawing the bridge far too short",
+            "building it over the wrong canal"
+          ],
+          "explain": "\"I had used the load for a single walker where the code required a crowd.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why could the speaker not sleep?",
+          "right": "a doubt about the work was troubling them",
+          "wrong": [
+            "the bridge had already fallen",
+            "there was a festival outside"
+          ],
+          "explain": "The unease led them to recheck the file at 2 a.m."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the speaker tell this personal story?",
+          "right": "to show why careful checking matters",
+          "wrong": [
+            "to boast about a famous bridge",
+            "to explain how canals are dug"
+          ],
+          "explain": "\"Your work is not finished when it is clever. It is finished when it is safe.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"sign as if you will be standing on the bridge yourself\" mean?",
+          "right": "take personal responsibility for safety",
+          "wrong": [
+            "write your name in large letters",
+            "visit every building you design"
+          ],
+          "explain": "Imagine your own safety depends on the work you sign."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "Who does the speaker say trusts engineers \"without knowing your name\"?",
+          "right": "the people who use what they build",
+          "wrong": [
+            "the professors at the college",
+            "the newspaper reporters"
+          ],
+          "explain": "The child on the bridge, the family in the building, the worker."
+        }
+      ]
+    },
+    {
+      "id": "kt7.pair4",
+      "level": 7,
+      "kind": "pair",
+      "title": "Homework: Two Opinions",
+      "text": "Letter from a parent\nMy daughter is in Class 7 and spends three hours on homework most evenings. She has no time to play, read for pleasure or help at home, and she goes to bed tired. Studies from several countries suggest that, for children under about thirteen, large amounts of homework do little to improve learning, while short tasks that practise what was taught that day can help. I am not asking for no homework. I am asking for less, and for homework that is planned across subjects so that it does not all arrive on the same night.\n\nReply from a teacher\nI understand this parent's concern, and I agree that three hours is too much for a twelve-year-old. But homework is often the only time a pupil works alone, without a teacher at her elbow, and that independence matters. In a class of forty, I cannot always see who has truly understood; homework shows me. The answer, I think, is not simply less homework but better homework, and a timetable so that teachers do not all set long tasks on the same day. On that last point, the parent and I are in complete agreement.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "On which proposal do both writers agree?",
+          "right": "homework should be planned across subjects",
+          "wrong": [
+            "homework should be stopped completely",
+            "three hours is the right amount"
+          ],
+          "explain": "Both want homework coordinated so it does not all come on one night."
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What benefit of homework does the teacher stress that the parent does not mention?",
+          "right": "pupils learn to work independently",
+          "wrong": [
+            "children have more time to play",
+            "it helps with jobs at home"
+          ],
+          "explain": "\"Homework is often the only time a pupil works alone.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What kind of homework does the parent say can help?",
+          "right": "short tasks practising that day's lesson",
+          "wrong": [
+            "long projects over the holidays",
+            "copying pages from textbooks"
+          ],
+          "explain": "\"Short tasks that practise what was taught that day can help.\""
+        },
+        {
+          "skill": "summary",
+          "prompt": "Which sums up the teacher's position?",
+          "right": "better, better-planned homework, not just less",
+          "wrong": [
+            "no homework at all for any class",
+            "much more homework for every pupil"
+          ],
+          "explain": "\"The answer ... is not simply less homework but better homework.\""
+        }
+      ]
+    },
+    {
+      "id": "kt7.story4",
+      "level": 7,
+      "kind": "story",
+      "title": "The Translator",
+      "text": "Kavitha's mother spoke Tamil, a little Telugu and almost no English, so from the age of nine Kavitha had translated for her: at the bank, at the doctor's, on the telephone with the landlord. She was good at it. She could make her mother's careful, polite sentences sound confident in English, and turn the bank manager's quick jargon into something her mother could follow.\n\nWhat she did not tell anyone was that she sometimes changed things. When the landlord was rude, she softened his words before passing them on. When her mother wanted to plead, Kavitha made her sound firm. She told herself she was protecting her mother. Gradually she began to feel that she, not her mother, was the head of the family.\n\nThe change came at the parent-teacher meeting in Class 10. Her mother had brought a neighbour's daughter, a college student, to translate, \"so that you do not have to talk about yourself.\" Kavitha sat silent as the teacher spoke and the student translated every word exactly. She heard her mother ask, in Tamil, a question Kavitha had never expected: whether her daughter had any time to be a child. The teacher paused, and then answered at length.\n\nOn the bus home, neither of them spoke for a while. Then her mother said, \"You have carried my words for six years. Some of them you can put down now.\"",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Why did Kavitha translate for her mother?",
+          "right": "her mother spoke almost no English",
+          "wrong": [
+            "her mother could not hear well",
+            "her mother was always busy"
+          ],
+          "explain": "\"Almost no English.\""
+        },
+        {
+          "skill": "character",
+          "prompt": "Why did Kavitha change some words?",
+          "right": "she wanted to protect her mother",
+          "wrong": [
+            "she wanted to trick the bank",
+            "she did not understand them"
+          ],
+          "explain": "\"She told herself she was protecting her mother.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why did the mother bring someone else to translate?",
+          "right": "so Kavitha would not have to speak about herself",
+          "wrong": [
+            "because Kavitha had refused to come",
+            "because the teacher asked her to"
+          ],
+          "explain": "\"So that you do not have to talk about yourself.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"Some of them you can put down now\" mean?",
+          "right": "Kavitha can let go of some responsibility",
+          "wrong": [
+            "Kavitha should stop speaking Tamil",
+            "Kavitha must carry the bags"
+          ],
+          "explain": "Her words were a burden she had carried; she can now set some down."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the story mainly about?",
+          "right": "a child carrying an adult's burden, then set free",
+          "wrong": [
+            "learning a new language at a school",
+            "a long quarrel with a rude landlord"
+          ],
+          "explain": "Kavitha has become her mother's voice; her mother lifts that weight."
+        }
+      ]
+    },
+    {
+      "id": "kt7.poem3",
+      "level": 7,
+      "kind": "poem",
+      "title": "Monsoon Ledger",
+      "text": "The farmer keeps two books. In one,\nthe bank's: what's owed, what's due by June,\nin columns that do not forgive.\nIn the other, kept in his head,\n\nthe sky's accounts: which year the clouds\ncame early, which year not at all,\nthe week in nineteen-ninety-one\nthe tank filled overnight, the calf\n\nborn in the rain. The bank's book\nnever balances. The sky's book\nis written in a hand he cannot rush,\nand still he reads it every dawn,\n\nface up, the way his father did,\nfor the first dark line along the hills.",
+      "questions": [
+        {
+          "skill": "compare",
+          "prompt": "How are the farmer's two \"books\" different?",
+          "right": "one holds debts, the other remembered weather",
+          "wrong": [
+            "one is in Tamil and the other in English",
+            "one is very old and the other is new"
+          ],
+          "explain": "The bank's book has columns of what is owed; the sky's is kept in his head."
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"columns that do not forgive\" suggest?",
+          "right": "debts must be paid whatever happens",
+          "wrong": [
+            "the numbers are written neatly",
+            "the bank is closed on holidays"
+          ],
+          "explain": "Figures in a ledger do not change for drought or hardship."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What is the \"first dark line along the hills\"?",
+          "right": "the first rain clouds arriving",
+          "wrong": [
+            "a road being built",
+            "the edge of the forest"
+          ],
+          "explain": "He watches the sky each dawn for signs of the monsoon."
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the poem suggest about the farmer's life?",
+          "right": "it depends on forces he cannot control",
+          "wrong": [
+            "it is easy and carefree",
+            "it is ruled only by the bank"
+          ],
+          "explain": "He owes money but must wait on a sky \"he cannot rush\"."
+        }
+      ]
+    },
+    {
+      "id": "kt7.article7",
+      "level": 7,
+      "kind": "article",
+      "title": "Why Old Buildings Stay Cool",
+      "text": "Walk into a traditional Chettinad house in the afternoon heat and the difference is immediate: the rooms are noticeably cooler than the street outside, though there is no air-conditioner. The builders of these houses had no electricity to spare, so they designed with the climate instead of against it.\n\nThe walls are thick, often of brick finished with a lime plaster that was traditionally mixed with egg white and polished until it shone. Thick walls absorb heat slowly through the day and release it at night, so the inside temperature changes less than the outside. The polished plaster reflects some sunlight and lets the wall breathe, so moisture can escape.\n\nAt the centre of the house is an open courtyard. Hot air inside the rooms rises and escapes through it, drawing cooler air in through doors and windows on the shaded side. High ceilings give the warm air somewhere to go above the people living below, and deep verandas shade the walls from the midday sun.\n\nModern buildings of concrete and glass often trap heat, and keep cool only by using a great deal of electricity. Some architects now study houses like these to borrow their ideas: courtyards, shading and walls that store heat. They are not suggesting that we all live in old mansions, but that the old builders solved a problem we have made harder for ourselves.",
+      "questions": [
+        {
+          "skill": "cause",
+          "prompt": "Why do thick walls help keep the house cool?",
+          "right": "they absorb heat slowly and release it at night",
+          "wrong": [
+            "they block all air from entering",
+            "they are painted white every year"
+          ],
+          "explain": "\"Thick walls absorb heat slowly ... and release it at night.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "How does the courtyard cool the rooms?",
+          "right": "hot air rises out and cooler air is drawn in",
+          "wrong": [
+            "rain falls into it and cools the floor",
+            "people sleep there in the afternoon"
+          ],
+          "explain": "Hot air escapes through the courtyard, drawing cooler air in."
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does the writer say we have \"made harder for ourselves\" the problem of heat?",
+          "right": "modern materials trap heat and need electricity",
+          "wrong": [
+            "old houses are too expensive to build",
+            "the climate was hotter in the past"
+          ],
+          "explain": "Concrete and glass trap heat and need a lot of electricity to cool."
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What is the main purpose of the article?",
+          "right": "to explain how traditional design keeps buildings cool",
+          "wrong": [
+            "to sell air-conditioners",
+            "to argue that everyone should move to old houses"
+          ],
+          "explain": "It explains walls, courtyards, ceilings and verandas, and why architects study them."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What was sometimes mixed into the lime plaster?",
+          "right": "egg white",
+          "wrong": [
+            "sugar cane",
+            "sea salt"
+          ],
+          "explain": "\"Lime plaster that was traditionally mixed with egg white.\""
+        }
+      ]
+    },
+    {
+      "id": "kt7.letter9",
+      "level": 7,
+      "kind": "letter",
+      "title": "About the 7.40 Bus",
+      "text": "To the Manager, City Bus Depot\n\nDear Sir or Madam,\n\nI am writing about the route 21 bus that leaves Anna Nagar at 7.40 each morning. I have travelled on it to college for two years, and in that time it has become steadily less reliable. On eleven of the last twenty school days it arrived more than fifteen minutes late; on three days it did not come at all, and no notice was given at the stop.\n\nI understand that buses are delayed by traffic, and I do not expect perfect timekeeping. My complaint is about the lack of information. When a bus is cancelled, passengers wait without knowing whether to walk, take an auto or keep waiting. Several of us have now missed examinations.\n\nI would like to suggest two inexpensive improvements. First, a notice board at the stop, or a message on the depot's existing phone line, giving cancellations each morning. Second, a fixed time after which, if the 7.40 has not arrived, passengers can be sure it is not coming.\n\nI have kept a record of the dates and times, which I can send if it would be useful. I look forward to your reply.\n\nYours faithfully,\nR. Srinivasan",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many times did the bus not come at all?",
+          "right": "three",
+          "wrong": [
+            "eleven",
+            "twenty"
+          ],
+          "explain": "\"On three days it did not come at all.\""
+        },
+        {
+          "skill": "point_of_view",
+          "prompt": "What is the writer's main complaint?",
+          "right": "passengers get no news of delays or cancellations",
+          "wrong": [
+            "the bus fare has gone up too much",
+            "the driver is rude to passengers"
+          ],
+          "explain": "\"My complaint is about the lack of information.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why does the writer say \"I do not expect perfect timekeeping\"?",
+          "right": "to show the complaint is fair and reasonable",
+          "wrong": [
+            "to excuse being late to college",
+            "to praise the bus drivers"
+          ],
+          "explain": "Admitting traffic delays makes the request seem reasonable."
+        },
+        {
+          "skill": "structure",
+          "prompt": "What does the writer do after describing the problem?",
+          "right": "suggests two low-cost solutions",
+          "wrong": [
+            "threatens legal action",
+            "describes the bus in detail"
+          ],
+          "explain": "\"I would like to suggest two inexpensive improvements.\""
+        }
+      ]
     }
   ]
 }
