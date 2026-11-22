@@ -830,18 +830,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.geometry.angle-pairs",
-   "section": "vertically_opposite",
-   "index": 0,
-   "original": "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°. / Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°.",
-   "text": [
-    "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
-    "Example: if one angle is 50°, the next is 180° − 50° = 130°, and the one after that is 180° − 130° = 50° again. So opposite angles are equal, and all four add to 360°."
-   ],
-   "problem": "The algebraic argument 180° − (180° − x) = x is beyond a Class 5 learner, who has not met letters for unknown angles.",
-   "severity": "low"
-  },
-  {
    "competency": "MATH.geometry.ceva-menelaus",
    "section": "chapter",
    "index": 0,

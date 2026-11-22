@@ -39022,7 +39022,7 @@
    "competency": "MATH.geometry.angle-pairs",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "c3bac7d3",
+   "contentHash": "e79c2f90",
    "state": "draft",
    "history": [
     {
@@ -39095,6 +39095,14 @@
      "role": "engineer",
      "at": "2026-11-22T05:21:55.576Z",
      "contentHash": "c3bac7d3",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-22T06:23:29.244Z",
+     "contentHash": "e79c2f90",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
