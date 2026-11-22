@@ -232,13 +232,13 @@
    "explanations": [
     "add-denominators (conceptual): The bottom numbers were added too; they name the size of the pieces, which does not change.",
     "multiply-tops (procedural): The top numbers were multiplied; adding fractions adds the pieces.",
-    "subtract-reversed (procedural): The smaller top number was taken from the larger one the wrong way round."
+    "subtract-reversed (procedural): The top numbers were taken away the wrong way round (10 − 11); take the second from the first: (11 − 10)/12."
    ],
    "teach": {
     "idea": "Like fractions count the same size of piece: add or take away the pieces.",
     "method": "Add or subtract the tops; the bottom (the size of the pieces) stays."
    },
-   "fingerprint": "4666c963",
+   "fingerprint": "d62303a1",
    "validation": {
     "family": "fadd",
     "deterministic": {
@@ -295,7 +295,7 @@
     "gen:cint:3,11,9:mc"
    ],
    "explanations": [
-    "fencepost-width (procedural): The whole numbers from a to b were counted (one too many); the width is b − a.",
+    "fencepost-width (procedural): The whole numbers from 8 to 12 were counted (5, one too many); the width is 12 − 8 = 4.",
     "add-width-height (conceptual): Width and height were added; the area multiplies them.",
     "fact-slip (prerequisite): A multiplication fact (12 × 4) is not yet reliable.",
     "forget-height (conceptual): Only the width was found; the area is width × height.",
@@ -305,7 +305,7 @@
     "idea": "The integral of a constant c from a to b is the area of a rectangle: width b − a, height c.",
     "method": "Width (upper minus lower) times height."
    },
-   "fingerprint": "12064e16",
+   "fingerprint": "0791564c",
    "validation": {
     "family": "cint",
     "deterministic": {
@@ -358,14 +358,14 @@
     "gen:quad:3,-18"
    ],
    "explanations": [
-    "root-signs (procedural): The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip.",
+    "root-signs (procedural): The numbers in the brackets were taken as the solutions; (x + 6)(x + 4) = 0 gives x = −6 or x = −4, so the signs flip.",
     "pair-product-only (prerequisite): The numbers 1 and 24 multiply to 24 but add to 25, not 10: the pair must give both the product and the sum."
    ],
    "teach": {
     "idea": "If a product is zero, one of its factors is zero.",
     "method": "Factorise x² + px + q = (x − r)(x − s), then each bracket gives a solution."
    },
-   "fingerprint": "8554aafb",
+   "fingerprint": "dc2b28d9",
    "validation": {
     "family": "quad",
     "deterministic": {
@@ -1798,14 +1798,14 @@
     "gen:prop:6,13,12:mc"
    ],
    "explanations": [
-    "additive (conceptual): The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.",
+    "additive (conceptual): The change in the number of pencils (4) was added to the price; every pencil costs the same, so find the price of one pencil and multiply it by 12.",
     "no-unit (procedural): The total for 8 was multiplied by 12; first find the price of one pencil."
    ],
    "teach": {
     "idea": "In a direct proportion, twice as many costs twice as much: the price of one stays the same.",
     "method": "Find the cost of one (divide), then multiply by how many you want."
    },
-   "fingerprint": "e765795e",
+   "fingerprint": "27eda5d2",
    "validation": {
     "family": "prop",
     "deterministic": {
@@ -2182,14 +2182,14 @@
    ],
    "explanations": [
     "zero-for-undefined (conceptual): 0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).",
-    "half-factor (procedural): Only one a was kept after cancelling (as if x² − a² were (x − a) × x, then x = a); it is (x − a)(x + a), which gives a + a = 2a.",
-    "top-only (conceptual): Only the top was worked out at x = a, as k × a²; the bottom is 0 there, so simplify first: cancel (x − a)."
+    "half-factor (procedural): x² − 81 was taken as (x − 9) × x, which gives 54; it is (x − 9)(x + 9), so after cancelling the limit is 6 × (9 + 9) = 108.",
+    "top-only (conceptual): Only x² was put equal to 81 (x = 9) and the rest was dropped, giving 6 × 81 = 486; at x = 9 the top and the bottom are both 0, so factorise and cancel (x − 9) first: the limit is 108."
    ],
    "teach": {
     "idea": "When substituting gives 0 ⁄ 0, the limit still exists: simplify first, then substitute.",
     "method": "Factorise x² − a² = (x − a)(x + a), cancel (x − a), then put x = a."
    },
-   "fingerprint": "b78c12de",
+   "fingerprint": "8b410c42",
    "validation": {
     "family": "lim",
     "deterministic": {
@@ -5809,7 +5809,7 @@
     "gen:aastadd:2,66:mc"
    ],
    "explanations": [
-    "subtracted (conceptual): The numbers were subtracted. 'Altogether' and 'more get on' join the two groups, so add.",
+    "subtracted (conceptual): The numbers were subtracted. In the story two groups are put together, so add them to find the total.",
     "no-regroup (procedural): The ten made in the ones column was not carried to the tens. When a column adds up to 10 or more, write the ones and carry the ten."
    ],
    "teach": {
@@ -5827,7 +5827,7 @@
      }
     ]
    },
-   "fingerprint": "459e4d9b",
+   "fingerprint": "272500a3",
    "validation": {
     "family": "aastadd",
     "deterministic": {
@@ -5880,7 +5880,7 @@
     "gen:aastsub:2,66:mc"
    ],
    "explanations": [
-    "added (conceptual): The numbers were added. 'Left' and 'flew away' mean some are taken away, so subtract.",
+    "added (conceptual): The numbers were added. In the story some are taken away from the group, so subtract to find how many remain.",
     "smaller-from-larger (procedural): In a column, the smaller digit was taken from the larger one, whichever was on top. When the top digit is smaller, regroup: exchange one ten for ten ones first."
    ],
    "teach": {
@@ -5898,7 +5898,7 @@
      }
     ]
    },
-   "fingerprint": "e4886e50",
+   "fingerprint": "37a1a16e",
    "validation": {
     "family": "aastsub",
     "deterministic": {
@@ -6786,7 +6786,7 @@
    "explanations": [
     "digit-by-digit (conceptual): Each digit was named on its own. The first digit stands for tens, so it has a tens name like twenty or sixty.",
     "reversed (procedural): The digits were named the other way round. The first digit is the tens, the second the ones.",
-    "teen-ty (recall): A −teen and a −ty word were mixed up. Fourteen is 14 (ten and four); forty is 40 (four tens)."
+    "teen-ty (recall): A −teen and a −ty word were mixed up. Nineteen is 19 (ten and nine); ninety is 90 (nine tens)."
    ],
    "teach": {
     "idea": "A two-digit number's name says the tens first (twenty, thirty …) and then the ones; 11 to 19 have their own names (eleven to nineteen).",
@@ -6803,7 +6803,7 @@
      }
     ]
    },
-   "fingerprint": "e47fb1a6",
+   "fingerprint": "7d2355fa",
    "validation": {
     "family": "aaname",
     "deterministic": {
@@ -22831,7 +22831,7 @@
    ],
    "explanations": [
     "last-term (procedural): Only the last odd number was given; the question asks for the total of all of them.",
-    "count-terms (procedural): There are 25 odd numbers from 1 to 49, so the total is the 25th square number.",
+    "count-terms (procedural): 26 × 26 was used, as if there were 26 odd numbers. There are 25 odd numbers from 1 to 49, so the total is 25 × 25.",
     "differ-by-one (conceptual): The two squares come next to each other in the list, but they are not next to each other as numbers: they differ by more than 1.",
     "missed-one (procedural): Going from 30 × 30 to 31 × 31 adds a row of 30, a column of 30 and one corner dot.",
     "doubled-one (procedural): The 20th triangular number was doubled; the question adds the 19th and the 20th.",
@@ -22854,7 +22854,7 @@
      }
     ]
    },
-   "fingerprint": "f357f46a",
+   "fingerprint": "c0ad1fda",
    "validation": {
     "family": "affigrel",
     "deterministic": {
@@ -25550,7 +25550,7 @@
    "explanations": [
     "swap (procedural): The quotient and the remainder swapped places. 99 ÷ 10 = 9 remainder 9: 9 wholes, and the 9 pieces left over go on top.",
     "too-few-wholes (procedural): One whole was missed: 19/10 is more than 1, so another whole can be taken out.",
-    "remainder-as-denominator (conceptual): The pieces keep their size: the denominator stays 10.",
+    "remainder-as-denominator (conceptual): 99 was written as the denominator; the pieces keep their size, so the denominator stays 10.",
     "division-slip (prerequisite): A slip in dividing 99 by 10. Check: 10 × whole number + numerator must give 99."
    ],
    "teach": {
@@ -25568,7 +25568,7 @@
      }
     ]
    },
-   "fingerprint": "d00fc6e9",
+   "fingerprint": "c7cb71cb",
    "validation": {
     "family": "agmix",
     "deterministic": {
@@ -25853,7 +25853,7 @@
     "gen:agprime:71,11"
    ],
    "explanations": [
-    "odd-is-prime (conceptual): Some odd numbers that are not prime were included (87, 91, 93). Being odd is not enough: test whether 3, 5, 7 or another number divides it.",
+    "odd-is-prime (conceptual): Some odd numbers that are not prime were included (87, 91, 93, 95, 99). Being odd is not enough: test whether 3, 5, 7 or another number divides it.",
     "one-is-prime (conceptual): 1 was counted as prime. A prime has exactly two factors; 1 has only one factor.",
     "two-not-prime (conceptual): 2 was left out because it is even. 2 has exactly two factors (1 and 2), so it is prime: the only even prime."
    ],
@@ -25881,7 +25881,7 @@
      }
     ]
    },
-   "fingerprint": "dab46b7f",
+   "fingerprint": "2d0fe555",
    "validation": {
     "family": "agprime",
     "deterministic": {
@@ -26771,7 +26771,7 @@
    ],
    "explanations": [
     "digits-joined (conceptual): The numerator and denominator were just written next to each other. 99/50 means 99 ÷ 50, and then × 100 for a percentage.",
-    "divided-wrong-way (procedural): 50 was divided by 99. The fraction 99/50 is 99 ÷ 50: the top divided by the bottom."
+    "divided-wrong-way (procedural): The fraction was turned upside down and written as 50.99. 99/50 means 99 ÷ 50, and then × 100 for a percentage."
    ],
    "teach": {
     "idea": "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal times a hundred (the number of hundredths).",
@@ -26797,7 +26797,7 @@
      }
     ]
    },
-   "fingerprint": "4afb29b5",
+   "fingerprint": "5f262d7d",
    "validation": {
     "family": "agfdec",
     "deterministic": {
@@ -26850,7 +26850,7 @@
     "gen:agptest:1,661:mc"
    ],
    "explanations": [
-    "up-to-half (conceptual): Primes up to half of 997 were tried. If 997 had a factor bigger than its square root, it would have a partner factor smaller than the square root, already tested. So stop at √997 ≈ 31.",
+    "up-to-half (conceptual): Primes up to half of 997 were tried. If 997 had a factor bigger than its square root, it would have a partner factor smaller than the square root, already tested. So stop at √997, which is between 31 and 32.",
     "root-not-prime (procedural): 31 is the whole number below √997, but only primes need to be tried: 31 is not prime.",
     "half-a-check (procedural): A factor was guessed without checking. Every prime up to √997 ≈ 31 leaves a remainder, so 997 is prime.",
     "stopped-early (procedural): Only 2, 3 and 5 were tried, and 989 was called prime. Keep going with 7, 11, 13, … up to √989 ≈ 31: 23 divides 989.",
@@ -26880,7 +26880,7 @@
      }
     ]
    },
-   "fingerprint": "7dd27dd6",
+   "fingerprint": "1875528c",
    "validation": {
     "family": "agptest",
     "deterministic": {
@@ -30189,7 +30189,7 @@
    "explanations": [
     "m-is-2m (procedural): 2m = 40, so m = 20; 40 itself was used as m.",
     "m-squared-only (procedural): Only m² = 400 was worked out; the rule says m² − 1.",
-    "not-squared (procedural): m and n were not squared (or 2mn was taken as 2m + n).",
+    "not-squared (procedural): m and n were not squared: 9 + 8 was worked out instead of 9² + 8².",
     "other-member (procedural): Another member of the triple was given; the question asks for m² + n²."
    ],
    "teach": {
@@ -30216,7 +30216,7 @@
      }
     ]
    },
-   "fingerprint": "dcb63ac6",
+   "fingerprint": "5dfbe9a6",
    "validation": {
     "family": "ahgen",
     "deterministic": {
@@ -30803,7 +30803,7 @@
     "gen:ahzk:1,3,-3,8:mc"
    ],
    "explanations": [
-    "sign (procedural): The coefficient of x must be 0, so k − 9 = 0 means k = 9; the sign was changed.",
+    "sign (procedural): The coefficient of x, k − 9, must be 0, so k = 9; the sign was changed.",
     "forgot-a (procedural): The coefficient of x² (5) was left out: sum = −k/5.",
     "divided-by-a (procedural): The product of the zeros is c/a = k/5, so k = 5 × −3; it was divided instead.",
     "one-zero-only (procedural): Only the zero 6 was used for k. Substitute x = 6 into p(x) = 0 and solve for k."
@@ -30832,7 +30832,7 @@
      }
     ]
    },
-   "fingerprint": "29bb8acf",
+   "fingerprint": "2a83606f",
    "validation": {
     "family": "ahzk",
     "deterministic": {
@@ -34756,7 +34756,7 @@
     "gen:aidword:3,16,15:mc"
    ],
    "explanations": [
-    "point-slip (procedural): The decimal point was moved in only one of the numbers. Multiply the dividend and the divisor by the SAME power of 10 so the divisor becomes a whole number.",
+    "point-slip (procedural): The decimal point was moved one place more in the dividend than in the divisor, so the answer came out 10 times too big. Move the point the SAME number of places in both numbers, just enough to make the divisor whole.",
     "point-slip-other (procedural): The answer's decimal point is one place out. Estimate first: the answer must be about 21 ÷ 1.",
     "multiplied (conceptual): The numbers were multiplied. Sharing or cutting into equal parts is a division."
    ],
@@ -34784,7 +34784,7 @@
      }
     ]
    },
-   "fingerprint": "172b3fcf",
+   "fingerprint": "44b698e3",
    "validation": {
     "family": "aidword",
     "deterministic": {
@@ -37339,8 +37339,8 @@
     "gen:ajinv:2,2,5,3,4:mc"
    ],
    "explanations": [
-    "reciprocal-instead (conceptual): The reciprocal was given. The additive inverse is the number that ADDS to give 0: just change the sign.",
-    "reciprocal-signed (conceptual): The fraction was turned upside down; the additive inverse keeps the numerator and denominator and only changes the sign.",
+    "reciprocal-instead (conceptual): The fraction was turned upside down and its sign changed; the additive inverse keeps the numerator and denominator and only changes the sign.",
+    "reciprocal-signed (conceptual): The reciprocal was given. The additive inverse is the number that ADDS to give 0: just change the sign.",
     "sign-changed (conceptual): The sign was changed as well. The reciprocal keeps the sign, because the product must be +1 (a negative times a negative is positive).",
     "additive-instead (conceptual): The additive inverse was given. The multiplicative inverse is the number that MULTIPLIES to give 1: turn the fraction upside down.",
     "factor-dropped (procedural): After taking out the common factor, only the bracket was worked out: 3/4 + 1/4 = 1 must still be multiplied by 9/8.",
@@ -37361,7 +37361,7 @@
      }
     ]
    },
-   "fingerprint": "ddd9dffc",
+   "fingerprint": "61420fa2",
    "validation": {
     "family": "ajinv",
     "deterministic": {
@@ -37798,8 +37798,8 @@
     "gen:ajrstd:2,9,4,1:mc"
    ],
    "explanations": [
-    "not-reduced (procedural): The sign was put in the right place, but 44 and 48 still have the common factor 4; divide both by it.",
-    "sign-lost (conceptual): The two minus signs were not cancelled correctly: a negative divided by a negative is positive.",
+    "not-reduced (procedural): The fraction was not simplified: 44 and 48 still have the common factor 4; divide both by it.",
+    "sign-lost (conceptual): A minus sign was wrongly put in the answer: the numerator and denominator have the same sign, so the number is positive (a negative divided by a negative is positive too).",
     "part-reduced (procedural): Only the common factor 2 was divided out; 4 is the highest common factor."
    ],
    "teach": {
@@ -37817,7 +37817,7 @@
      }
     ]
    },
-   "fingerprint": "0a688f35",
+   "fingerprint": "f1bf718b",
    "validation": {
     "family": "ajrstd",
     "deterministic": {
@@ -42149,7 +42149,7 @@
     "gen:alcub:-3,-2,3"
    ],
    "explanations": [
-    "bracket-signs (procedural): The numbers in the brackets were taken as the zeros; x − 2 = 0 gives x = 2, so each sign flips.",
+    "bracket-signs (procedural): The numbers in the brackets were taken as the zeros; x − 5 = 0 gives x = 5, so each sign flips.",
     "stop-at-one (procedural): Only the zero found by trial was given; after dividing, the quadratic quotient gives the other two."
    ],
    "teach": {
@@ -42167,7 +42167,7 @@
      }
     ]
    },
-   "fingerprint": "8ce3c327",
+   "fingerprint": "698e21f5",
    "validation": {
     "family": "alcub",
     "deterministic": {
@@ -42608,7 +42608,7 @@
    "explanations": [
     "after-cancel (conceptual): The value was found after cancelling; x = −6 still makes the original denominator zero, so it is excluded too.",
     "numerator (conceptual): The zeros of the numerator were given; the expression is undefined where the DENOMINATOR is zero.",
-    "sign (procedural): The numbers in the brackets were given; x + 3 = 0 when x = −3."
+    "sign (procedural): The numbers in the brackets were given; x + 6 = 0 when x = −6 and x + 5 = 0 when x = −5."
    ],
    "teach": {
     "idea": "Division by zero has no meaning, so a rational expression is undefined wherever its denominator is zero, even if a factor later cancels.",
@@ -42625,7 +42625,7 @@
      }
     ]
    },
-   "fingerprint": "ce353d5e",
+   "fingerprint": "21a47b1d",
    "validation": {
     "family": "alratx",
     "deterministic": {
@@ -44771,7 +44771,7 @@
     "gen:almono:7,2,5,-4,-4,0:mc"
    ],
    "explanations": [
-    "first-term-only (procedural): Only the first term was divided by 9; every term of the polynomial is divided by the monomial.",
+    "first-term-only (procedural): Only the first term was divided by the monomial; the other terms were left as they were, but every term must be divided by it.",
     "sign-lost (procedural): A minus sign was lost when dividing; a negative term divided by a positive monomial stays negative."
    ],
    "teach": {
@@ -44789,7 +44789,7 @@
      }
     ]
    },
-   "fingerprint": "d6bb0f11",
+   "fingerprint": "8b838339",
    "validation": {
     "family": "almono",
     "deterministic": {
@@ -45885,7 +45885,7 @@
    ],
    "explanations": [
     "multiplied (conceptual): f(t) and g(t) were multiplied; (f + g)(t) = f(t) + g(t).",
-    "minus-first-term (procedural): Only the x-term of g was subtracted; (f − g)(x) = f(x) − (px + c), so the constant is subtracted too.",
+    "minus-first-term (procedural): When g was taken away, the sign of its constant 3 was not changed, so it was added instead of subtracted; (f − g)(x) = f(x) − g(x): take away the whole of g, its constant too.",
     "added (conceptual): f(t) and g(t) were added; (fg)(t) = f(t) × g(t).",
     "upside-down (procedural): The fraction was turned upside down: (f/g)(t) = f(t) ÷ g(t).",
     "zero-of-f (conceptual): The zero of f was given; f/g is undefined where the DENOMINATOR g is zero.",
@@ -45906,7 +45906,7 @@
      }
     ]
    },
-   "fingerprint": "621810fb",
+   "fingerprint": "67c04d23",
    "validation": {
     "family": "alfop",
     "deterministic": {
@@ -50871,7 +50871,7 @@
      }
     ]
    },
-   "fingerprint": "fbd3e1ce",
+   "fingerprint": "cebf993a",
    "validation": {
     "family": "andice",
     "deterministic": {
@@ -51698,7 +51698,7 @@
     "gen:anumean:26,1,1:mc"
    ],
    "explanations": [
-    "frequencies-ignored (conceptual): The five values were averaged without their frequencies; a value that occurs 8 times counts 8 times.",
+    "frequencies-ignored (conceptual): The five values were averaged without their frequencies; 50 occurs 10 times, so it counts 10 times.",
     "divided-by-rows (procedural): Σfx was divided by 5 (the number of different values); divide by Σf = 34, the number of observations."
    ],
    "teach": {
@@ -51716,7 +51716,7 @@
      }
     ]
    },
-   "fingerprint": "1f27ea68",
+   "fingerprint": "299cada2",
    "validation": {
     "family": "anumean",
     "deterministic": {
@@ -52499,7 +52499,7 @@
     "gen:ansecpt:8,3,0,3:mc"
    ],
    "explanations": [
-    "sum-not-product (conceptual): cosec θ² − cot θ² = 1 was used as if (cosec θ + cot θ) + (cosec θ − cot θ) = 1; it factorises as a product: (cosec θ + cot θ)(cosec θ − cot θ) = 1.",
+    "sum-not-product (conceptual): cosec²θ − cot²θ = 1 was used as if (cosec θ + cot θ) + (cosec θ − cot θ) = 1; it factorises as a product: (cosec θ + cot θ)(cosec θ − cot θ) = 1.",
     "not-halved (procedural): The two equations were subtracted but the result was not halved: that gives 2cot θ.",
     "add-subtract-swapped (procedural): The equations were added; subtracting cancels cosec θ and leaves 2cot θ.",
     "upside-down (recall): The ratio was turned upside down: cos θ = cot θ ÷ cosec θ."
@@ -52519,7 +52519,7 @@
      }
     ]
    },
-   "fingerprint": "3509e2e5",
+   "fingerprint": "4312adbb",
    "validation": {
     "family": "ansecpt",
     "deterministic": {
@@ -54365,7 +54365,7 @@
    ],
    "explanations": [
     "nearest (conceptual): The numbers were rounded to the nearest integer; [x] always goes down to the integer at or below x.",
-    "drop-decimals (conceptual): The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3.",
+    "drop-decimals (conceptual): The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.1] = −3.",
     "ceiling (recall): The integer above was taken; the greatest integer function takes the integer at or below x."
    ],
    "teach": {
@@ -54383,7 +54383,7 @@
      }
     ]
    },
-   "fingerprint": "9978bfe7",
+   "fingerprint": "94c6e375",
    "validation": {
     "family": "aostd",
     "deterministic": {
@@ -54932,7 +54932,7 @@
     "gen:aopfq:2,6,5,-4,-2:mc"
    ],
    "explanations": [
-    "not-divided (procedural): N(5) was taken as A without dividing by 5² + 9 = 34.",
+    "not-divided (procedural): The value of the top at x = 5, 136, was taken as A without dividing by 5² + 9 = 34; A = 4.",
     "x2-as-B (procedural): B was taken as the whole x² coefficient 7; the x² terms come from A·x² and Bx·x, so B = 7 − A.",
     "c-sign (procedural): A sign slip matching the x terms: (Bx + C)(x − 5) gives (C − 5B)x."
    ],
@@ -54951,7 +54951,7 @@
      }
     ]
    },
-   "fingerprint": "d9bf12b4",
+   "fingerprint": "ffc79464",
    "validation": {
     "family": "aopfq",
     "deterministic": {
@@ -55407,7 +55407,7 @@
     "gen:aobinco:2,-3,8,6:mc"
    ],
    "explanations": [
-    "powers-left-out (conceptual): Only ⁸C₇ was given; the term also carries (3x)⁷ and (3)¹, so their powers are part of the coefficient.",
+    "powers-left-out (conceptual): Only ⁸C₇ was given; the term is ⁸C₇ × (3x)⁷ × (3)¹, so the coefficient is ⁸C₇ × (3)⁷ × (3)¹.",
     "general-term-index (procedural): The general term was used with the wrong index: the term with x⁷ uses ⁸C₇ and the powers 7 and 1.",
     "a-power-forgotten (procedural): The 3 in (3x)⁷ was not raised to the power 7.",
     "sign-lost (procedural): The minus sign was dropped; (−1)¹ is negative (a negative number to an odd power), so the coefficient is negative."
@@ -55427,7 +55427,7 @@
      }
     ]
    },
-   "fingerprint": "f8cef041",
+   "fingerprint": "7646a40f",
    "validation": {
     "family": "aobinco",
     "deterministic": {
@@ -56329,8 +56329,8 @@
     "gen:aoconj:3,-2,3:mc"
    ],
    "explanations": [
-    "sum-sign (procedural): p was taken as k × (sum of roots); the sum of the roots is −p/k, so p = −3 × 12 = −36.",
-    "i-squared (recall): (6 + 6i)(6 − 6i) was worked out with i² = +1; since i² = −1 the product is a² + b² = 72.",
+    "sum-sign (procedural): p was taken as 3 × (sum of the roots) = 36; the sum of the roots is −p/3, so p = −3 × 12 = −36.",
+    "i-squared (recall): (6 + 6i)(6 − 6i) was worked out with i² = +1; since i² = −1 the product is 6² + 6² = 72, so q = 3 × 72 = 216.",
     "k-forgotten (procedural): The leading coefficient 3 was forgotten; the quadratic is 3(x² − (sum)x + product)."
    ],
    "teach": {
@@ -56348,7 +56348,7 @@
      }
     ]
    },
-   "fingerprint": "ea89e753",
+   "fingerprint": "5b3349b9",
    "validation": {
     "family": "aoconj",
     "deterministic": {
@@ -56704,7 +56704,7 @@
     "union-given (procedural): n(A ∪ B ∪ C) was given; 'none' is the total minus that number.",
     "only-first (procedural): Only the first group's 'only' count was found; 'exactly one' adds the people in only the first, only the second and only the third group.",
     "at-least-one (conceptual): 'Exactly one' was taken as 'at least one'; people in two or three groups must be left out.",
-    "one-overlap (procedural): Only one of the two overlaps was taken away; people in the first group who are also in the third must be removed too.",
+    "one-overlap (procedural): Only the 6 in both the first and second groups were taken away; the 7 − 3 = 4 in the first and third groups but not the second must be taken away too.",
     "just-added (conceptual): The three totals were simply added; everyone in two or three groups is then counted more than once."
    ],
    "teach": {
@@ -56731,7 +56731,7 @@
      }
     ]
    },
-   "fingerprint": "b61a06db",
+   "fingerprint": "ec5bd9cf",
    "validation": {
     "family": "aoven3",
     "deterministic": {
@@ -57239,7 +57239,7 @@
     "gen:aoncrp:2,7,1:mc"
    ],
    "explanations": [
-    "difference (conceptual): ⁿCₐ = ⁿC_b was read as a − b or b − a = n; the property is ⁿCᵣ = ⁿCₙ₋ᵣ, so 16 = n − 14.",
+    "difference (conceptual): The difference 16 − 14 was taken as n; the property is ⁿCᵣ = ⁿCₙ₋ᵣ, so 16 = n − 14 and n = 14 + 16.",
     "larger-index (procedural): n was taken as the larger index 16; then ⁿC₁₄ and ⁿC₁₆ would be different.",
     "no-factorial (recall): ⁿPᵣ ÷ ⁿCᵣ was taken as r; it is r! (each selection has r! arrangements), so r! = 120.",
     "no-half (recall): ⁿC₂ was taken as n(n − 1); it is n(n − 1)/2.",
@@ -57271,7 +57271,7 @@
      }
     ]
    },
-   "fingerprint": "9c98bb26",
+   "fingerprint": "afb7ea42",
    "validation": {
     "family": "aoncrp",
     "deterministic": {
@@ -58051,7 +58051,7 @@
     "falls-only (conceptual): Only the distances going down were added; after each bounce the ball goes up AND comes down the same height.",
     "first-drop-doubled (procedural): The first drop of 30 m was counted twice; the ball is dropped (only down), and each later height is travelled twice.",
     "first-left-out (procedural): The first triangle was left out; its area 60 cm² is the first term.",
-    "side-ratio (conceptual): The areas were taken to go down by 1/4; joining midpoints makes the side 1/√2 times as long, so each area is HALF the one before.",
+    "side-ratio (conceptual): Each area was taken as 1/4 of the one before (as if the side were halved); joining midpoints makes the side 1/√2 times as long, so each area is HALF the one before.",
     "half-ratio (conceptual): Each triangle was taken as half the one before; joining midpoints halves the sides, so the area is a QUARTER."
    ],
    "teach": {
@@ -58078,7 +58078,7 @@
      }
     ]
    },
-   "fingerprint": "22044b2f",
+   "fingerprint": "905961a4",
    "validation": {
     "family": "aogpuse",
     "deterministic": {
@@ -58405,7 +58405,7 @@
     "bracket (procedural): The power was not multiplied into the whole bracket: (c⁴)^(x + 2) = c^(4(x + 2)) and (c²)^(x − 1) = c^(2(x − 1)), so every term of the exponent is multiplied.",
     "sign (procedural): A sign was lost when the x terms were collected; check by putting your answer back in.",
     "upside-down (procedural): 4x = 5 was solved as x = 4/5; divide 5 by 4.",
-    "subtract (procedural): The powers were subtracted; (cⁱ)ˣ = c^(ix), so ix = the other power."
+    "subtract (procedural): The powers were subtracted (5 − 4); since 625ˣ = 5^(4x) and 3125 = 5⁵, 4x = 5, so x = 5/4."
    ],
    "teach": {
     "idea": "If aᵐ = aⁿ with a > 0, a ≠ 1, then m = n. So an exponential equation whose two sides are powers of the same number becomes an ordinary equation in the powers.",
@@ -58431,7 +58431,7 @@
      }
     ]
    },
-   "fingerprint": "7e74d9e6",
+   "fingerprint": "225c21ed",
    "validation": {
     "family": "aoexpeq",
     "deterministic": {
@@ -58494,7 +58494,7 @@
     "gen:aochb:1,1,4,1,0:mc"
    ],
    "explanations": [
-    "upside-down (procedural): log cʲ/log cⁱ = j/i was turned upside down (as i/j); it is 5/3.",
+    "upside-down (procedural): The answer was turned upside down (3/5); by change of base the product is log(last number) ÷ log(first base), and these are the same prime to the powers 5 and 3, so it is 5/3.",
     "two-logs (conceptual): The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).",
     "not-reciprocal (procedural): log_(AB) X was worked out instead of log_X(AB): since X = (AB)³, log_(AB) X = 3, but the sum 1/log_A X + 1/log_B X = log_X A + log_X B = log_X(AB), which is 1/3."
    ],
@@ -58522,7 +58522,7 @@
      }
     ]
    },
-   "fingerprint": "17cb8699",
+   "fingerprint": "2b74f1c9",
    "validation": {
     "family": "aochb",
     "deterministic": {
@@ -58590,7 +58590,7 @@
     "cover-up-sign (procedural): In the cover-up step the other factor was worked out the wrong way round, so both partial-fraction numerators came out with the wrong sign.",
     "swapped (procedural): A and B were swapped; A goes with x − 4, found by putting x = 4.",
     "x-term-left-out (procedural): The 1 left after dividing was not integrated; ∫ 1 dx = x is part of the answer.",
-    "remainder-sign (procedural): The remainder was worked out as 4 − (5); x + 4 = (x − 5) + (4 + 5)."
+    "remainder-sign (procedural): The remainder was worked out as 4 − 5 = −1; since x + 4 = (x − 5) + 9, the remainder is 4 + 5 = 9."
    ],
    "teach": {
     "idea": "A fraction whose denominator factorises splits into simple fractions A/(x − a), each of which integrates to A log|x − a|. If the top has the same degree as the bottom, divide first.",
@@ -58616,7 +58616,7 @@
      }
     ]
    },
-   "fingerprint": "dff0a6e2",
+   "fingerprint": "1eab57be",
    "validation": {
     "family": "aopfint",
     "deterministic": {
@@ -59825,7 +59825,7 @@
    ],
    "explanations": [
     "strict-or-not (conceptual): Strict and non-strict were mixed up: > or < gives a round bracket, ≥ or ≤ a square one.",
-    "direction (conceptual): The direction was reversed: x > 6 means numbers to the right of 6, up to ∞.",
+    "direction (conceptual): The direction was reversed: x ≤ 6 means the numbers to the left of 6, down to −∞.",
     "brackets-swapped (conceptual): Square and round brackets were swapped: [ ] means the end IS included (≤), ( ) means it is not (<).",
     "one-end-read (procedural): Only one end was checked; decide separately for the left end and for the right end whether it is included."
    ],
@@ -59844,7 +59844,7 @@
      }
     ]
    },
-   "fingerprint": "87120b4b",
+   "fingerprint": "3ff5e196",
    "validation": {
     "family": "apintch",
     "deterministic": {
@@ -61398,8 +61398,8 @@
    ],
    "explanations": [
     "adjoint-only (procedural): The adjoint was given; A⁻¹ = adj A / |A|, so every entry must be divided by −24.",
-    "no-negation (procedural): a and d were swapped but b and c were not negated; adj A = [[d, −b], [−c, a]].",
-    "wrong-swap (procedural): The wrong pair was swapped: a and d change places, b and c only change sign.",
+    "no-negation (procedural): For A = [[a, b], [c, d]]: a and d were swapped but b and c were not negated; adj A = [[d, −b], [−c, a]].",
+    "wrong-swap (procedural): For A = [[a, b], [c, d]]: b and c were negated but a and d were not swapped; adj A = [[d, −b], [−c, a]]: a and d change places, b and c change sign.",
     "determinant-added (prerequisite): The determinant was found as ad + bc; it is ad − bc."
    ],
    "teach": {
@@ -61417,7 +61417,7 @@
      }
     ]
    },
-   "fingerprint": "2e25c4fa",
+   "fingerprint": "7831ec3c",
    "validation": {
     "family": "apinv2",
     "deterministic": {
@@ -63549,7 +63549,7 @@
    "explanations": [
     "kind-0 (conceptual): A straight line was thought to miss some values; over ℝ every y is reached, at x = (y − 3)/3.",
     "kind-1 (conceptual): x = (y − 3)/3 works over ℝ, but here inputs must be natural numbers: y = 1 has no natural-number input.",
-    "kind-2 (conceptual): Only the values y ≥ 3 were thought of; the codomain ℝ also contains values that x² never reaches.",
+    "kind-2 (conceptual): Every real y was assumed to be reached; but f(x) only takes values y ≥ 3, so it is not onto (and not one-one, since f(−1) = f(1)).",
     "kind-3 (conceptual): A square was assumed never to be onto; the codomain here is [3, ∞), and every y in it is reached. It is not one-one, since f(−1) = f(1).",
     "kind-4 (conceptual): x² was assumed never to be one-one; here the domain is [0, ∞), so no negative inputs: f(x₁) = f(x₂) forces x₁ = x₂.",
     "kind-5 (conceptual): Over ℤ the line 3x + 3 skips integers (it goes up in steps of 3), so it is not onto.",
@@ -63572,7 +63572,7 @@
      }
     ]
    },
-   "fingerprint": "11ee68b4",
+   "fingerprint": "ecef21ba",
    "validation": {
     "family": "aqonto",
     "deterministic": {
@@ -64522,7 +64522,7 @@
     "gen:aqodd:3,3,2,1:mc"
    ],
    "explanations": [
-    "all-vanish (conceptual): Every term was taken to vanish over a symmetric interval; only the odd part does. The even part kx² + m gives twice its integral from 0 to a.",
+    "all-vanish (conceptual): Every term was taken to vanish over a symmetric interval; only the odd part does. The even part 6x² + 5 gives twice its integral from 0 to 3.",
     "not-doubled (procedural): The even part was integrated from 0 to a but not doubled: ∫₋ₐᵃ g = 2∫₀ᵃ g for an even g."
    ],
    "teach": {
@@ -64540,7 +64540,7 @@
      }
     ]
    },
-   "fingerprint": "e1d6674b",
+   "fingerprint": "f59d7a82",
    "validation": {
     "family": "aqodd",
     "deterministic": {
@@ -67856,7 +67856,7 @@
     "gen:arparabola:1,0,10,-2,1:mc"
    ],
    "explanations": [
-    "no-quarter (recall): The number 16 was used as the focal distance; −1616·x means 4a = −16, so a = −4.",
+    "no-quarter (recall): The number 16 was used as the focal distance; in x² = −16(y − 3), 4a = −16, so a = −4.",
     "wrong-axis (conceptual): The focus was put on the wrong axis; the parabola opens along the y-direction (the variable that is not squared).",
     "vertex-sign (procedural): The vertex was read with the wrong signs: (x − h) means the vertex has x = h.",
     "direction-sign (procedural): The parabola was taken to open the other way; the sign in front of the linear side gives the direction."
@@ -67876,7 +67876,7 @@
      }
     ]
    },
-   "fingerprint": "9fda1624",
+   "fingerprint": "14035c72",
    "validation": {
     "family": "arparabola",
     "deterministic": {
@@ -68103,7 +68103,7 @@
    ],
    "explanations": [
     "any-two-squares-ellipse (conceptual): Two squared terms were taken to mean an ellipse; with equal coefficients the curve is a circle (a special ellipse with e = 0), which is the better answer.",
-    "linear-as-square (procedural): The single x term was treated like a squared term; only one variable is squared, which makes a parabola.",
+    "linear-as-square (procedural): The x term was read as if it were an x² term, so the equation seemed to have two squared terms and was taken for an ellipse; only y is squared, which makes a parabola.",
     "both-squares-circle (conceptual): Having both x² and y² was taken to mean a circle; a circle needs the x² and y² coefficients to be equal.",
     "sign-ignored (conceptual): The minus sign between the x² and y² terms was missed; opposite signs give a hyperbola, not an ellipse."
    ],
@@ -68122,7 +68122,7 @@
      }
     ]
    },
-   "fingerprint": "a171cb4a",
+   "fingerprint": "279b05ec",
    "validation": {
     "family": "arconicid",
     "deterministic": {
@@ -68613,7 +68613,7 @@
     "gen:arparaeq:3,0,9,0:mc"
    ],
    "explanations": [
-    "no-four (recall): The focal distance a = −12 was used as k; y² = 4ax, so k = 4a.",
+    "no-four (recall): The focal distance a = −12 was used as k; x² = 4ay, so k = 4a.",
     "directrix-side (conceptual): The parabola was opened towards the directrix; it opens away from it, towards the focus.",
     "swapped (procedural): The coordinates were put into the equation the wrong way round.",
     "lr-a (recall): The latus rectum was taken as 2a; it is 4a, so k equals ± the latus rectum.",
@@ -68634,7 +68634,7 @@
      }
     ]
    },
-   "fingerprint": "1ce8487c",
+   "fingerprint": "350c5ec0",
    "validation": {
     "family": "arparaeq",
     "deterministic": {
@@ -68700,7 +68700,7 @@
    ],
    "explanations": [
     "linear (conceptual): The cable was taken to rise in a straight line from the lowest point; it hangs in a parabola, rising like the square of the distance.",
-    "from-top (procedural): The height was measured down from the tower top: H − (H − L)x²/a² was used instead of L + (H − L)x²/a².",
+    "from-top (procedural): The height was measured down from the top of a tower: 12 − (12 − 8) × (6/40)² was used, but the cable rises from its lowest point: 8 + (12 − 8) × (6/40)².",
     "diameter (procedural): The diameter was used where the radius belongs: the rim point is (diameter ÷ 2, depth).",
     "a-not-quarter (recall): x² = 4fy was used as x² = fy, so the answer is 4 times too big.",
     "circle (conceptual): The arch was treated as a circle, y = √(a² − x²); a semi-elliptical arch of height b has y = b√(1 − x²/a²).",
@@ -68722,7 +68722,7 @@
      }
     ]
    },
-   "fingerprint": "5aa517c0",
+   "fingerprint": "75318030",
    "validation": {
     "family": "arconapp",
     "deterministic": {
@@ -71859,7 +71859,7 @@
     "gen:aspolm:4,6,6,1,0:mc"
    ],
    "explanations": [
-    "arguments-multiplied (conceptual): The arguments were multiplied like the moduli; when complex numbers are multiplied, the arguments are added.",
+    "arguments-multiplied (conceptual): The arguments were multiplied like the moduli (writing π only once); when complex numbers are multiplied, the arguments are added.",
     "subtracted-wrong-way (procedural): The arguments were subtracted the wrong way round, as arg z₂ − arg z₁; arg(z₁/z₂) = arg z₁ − arg z₂.",
     "not-principal (procedural): The argument was not brought into (−π, π]; add or subtract 2π.",
     "arguments-subtracted (recall): The arguments were subtracted (as for a quotient); for a product they are added."
@@ -71879,7 +71879,7 @@
      }
     ]
    },
-   "fingerprint": "8268c94e",
+   "fingerprint": "2b080d0c",
    "validation": {
     "family": "aspolm",
     "deterministic": {
@@ -72023,7 +72023,7 @@
    ],
    "explanations": [
     "modulus-not-raised (procedural): The modulus 2 must also be raised to the power 12: (r(cos θ + i sin θ))ⁿ = rⁿ(cos nθ + i sin nθ).",
-    "parts-raised (conceptual): Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + iⁿyⁿ. Use the polar form.",
+    "parts-raised (conceptual): Each part was raised to the power separately, giving xⁿ + yⁿi; (x + iy)ⁿ cannot be found that way. Use the polar form.",
     "angle-not-multiplied (procedural): The argument must be multiplied by 12 as well: cos 12θ + i sin 12θ."
    ],
    "teach": {
@@ -72041,7 +72041,7 @@
      }
     ]
    },
-   "fingerprint": "7cabb725",
+   "fingerprint": "4c45591b",
    "validation": {
     "family": "asdemo",
     "deterministic": {
@@ -75222,7 +75222,7 @@
      }
     ]
    },
-   "fingerprint": "0f45a10a",
+   "fingerprint": "763d3f64",
    "validation": {
     "family": "atsd",
     "deterministic": {
@@ -83198,7 +83198,7 @@
      }
     ]
    },
-   "fingerprint": "78857092",
+   "fingerprint": "1bc2c2a6",
    "validation": {
     "family": "auparts",
     "deterministic": {
@@ -84752,8 +84752,8 @@
    ],
    "explanations": [
     "multiply-both (conceptual): Top and bottom were both multiplied by 9: that gives an equal fraction, not 9 lots of it.",
-    "multiply-bottom (procedural): The bottom was multiplied; 9 glasses of 11/12 litre is 9 × 11 pieces of the same size.",
-    "add-whole (conceptual): 9 was added to the top; 9 glasses means 9 lots.",
+    "multiply-bottom (procedural): The bottom was multiplied; 9 pieces of 11/12 m is 9 × 11 parts of size 1/12, so multiply the top: 99/12.",
+    "add-whole (conceptual): 9 was added to the top; 9 pieces means 9 lots of 11/12, so multiply the top by 9: 99/12.",
     "no-divide (procedural): The number of students was multiplied by 11 but not divided by 12.",
     "one-part-only (procedural): Only 1/12 of the class was found (108 ÷ 12); 11/12 is 11 of those parts.",
     "upside-down (conceptual): The class was divided by 9 and multiplied by 11; 9/11 of a number means divide by 11, then multiply by 9."
@@ -84773,7 +84773,7 @@
      }
     ]
    },
-   "fingerprint": "66a0a608",
+   "fingerprint": "654d629e",
    "validation": {
     "family": "avfwq",
     "deterministic": {
@@ -87340,7 +87340,7 @@
    ],
    "explanations": [
     "upper-included (conceptual): A value equal to the upper limit 145 was counted in this class. It belongs to the next class, which starts at 145.",
-    "lower-excluded (conceptual): A value equal to the lower limit 145 was left out. The class includes its lower limit, so 145 is counted here."
+    "lower-excluded (conceptual): The values equal to the lower limit 145 were left out. The class includes its lower limit, so every 145 is counted here."
    ],
    "teach": {
     "idea": "A grouped frequency table puts each value in a class interval. Neighbouring classes share a boundary, and a value on a boundary belongs to the class that starts there: each class includes its lower limit but not its upper limit.",
@@ -87357,7 +87357,7 @@
      }
     ]
    },
-   "fingerprint": "46cb79b4",
+   "fingerprint": "080555f2",
    "validation": {
     "family": "akhtab",
     "deterministic": {
@@ -87940,7 +87940,7 @@
     "gen:amderive:8,6,1:mc"
    ],
    "explanations": [
-    "one-not-a-lot (conceptual): 1 was taken away. One more lot of 9 means taking away 9, not 1.",
+    "one-not-a-lot (conceptual): 1 was taken away. One lot fewer of 9 means taking away 9, not 1.",
     "wrong-lot (conceptual): 8 was taken away. The lots are 9s, so it is 9 that is taken away.",
     "added-two (conceptual): 2 was added to 54. Twice as many lots means doubling: 54 + 54.",
     "doubled-a (conceptual): 9 was doubled and added on. Doubling 6 doubles the whole answer."
@@ -87960,7 +87960,7 @@
      }
     ]
    },
-   "fingerprint": "2ab9da60",
+   "fingerprint": "485c5cd0",
    "validation": {
     "family": "amderive",
     "deterministic": {

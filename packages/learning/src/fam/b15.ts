@@ -1020,7 +1020,7 @@ export const B15: Def[] = [
     bugs: ([u, w, op]) => {
       const c = (f: (x: number) => number) => (op ? f(u / 10) - f(w / 10) : f(u / 10) + f(w / 10));
       return [
-        { id: "drop-decimals", kind: "conceptual", competency: STD, says: "The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3.", predict: c(Math.trunc) },
+        { id: "drop-decimals", kind: "conceptual", competency: STD, says: `The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [${dec(u < 0 ? u : w)}] = ${n_(Math.floor((u < 0 ? u : w) / 10))}.`, predict: c(Math.trunc) },
         { id: "nearest", kind: "conceptual", competency: STD, says: "The numbers were rounded to the nearest integer; [x] always goes down to the integer at or below x.", predict: c((x) => Math.round(x)) },
         { id: "ceiling", kind: "recall", competency: STD, says: "The integer above was taken; the greatest integer function takes the integer at or below x.", predict: c(Math.ceil) },
       ];
@@ -1327,7 +1327,7 @@ export const B15: Def[] = [
       const [p2, p1] = pfqNum([a, k, A, B, C]);
       const A2 = A * (a * a + k);
       return [
-        { id: "not-divided", kind: "procedural", competency: PF, says: `N(${n_(a)}) was taken as A without dividing by ${par2(a)}² + ${k} = ${a * a + k}.`, predict: tup(A2, p2 - A2, p1 + a * (p2 - A2)) },
+        { id: "not-divided", kind: "procedural", competency: PF, says: `The value of the top at x = ${n_(a)}, ${n_(A2)}, was taken as A without dividing by ${par2(a)}² + ${k} = ${a * a + k}; A = ${n_(A)}.`, predict: tup(A2, p2 - A2, p1 + a * (p2 - A2)) },
         { id: "x2-as-B", kind: "procedural", competency: PF, says: `B was taken as the whole x² coefficient ${n_(p2)}; the x² terms come from A·x² and Bx·x, so B = ${n_(p2)} − A.`, predict: tup(A, p2, p1 + a * p2) },
         ...(a !== 0 && B !== 0 ? [{ id: "c-sign", kind: "procedural", competency: PF, says: `A sign slip matching the x terms: (Bx + C)${bx(a)} gives (C ${a > 0 ? "−" : "+"} ${Math.abs(a) === 1 ? "" : Math.abs(a)}B)x.`, predict: tup(A, B, p1 - a * B) } as Bug] : []),
       ];
@@ -1575,7 +1575,7 @@ export const B15: Def[] = [
       return v === c[r];
     },
     bugs: ([a, b, n, r]) => [
-      { id: "powers-left-out", kind: "conceptual", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was given; the term also carries ${a === 1 ? "x" : `(${lin(a, 0)})`}${sup(r)} and (${n_(b)})${sup(n - r)}, so their powers are part of the coefficient.`, predict: choose(n, r) },
+      { id: "powers-left-out", kind: "conceptual", competency: BIN, says: `Only ${sup(n)}C${sub(r)} was given; the term is ${sup(n)}C${sub(r)} × ${a === 1 ? "x" : `(${lin(a, 0)})`}${sup(r)} × (${n_(b)})${sup(n - r)}, so the coefficient is ${sup(n)}C${sub(r)} × ${a === 1 ? "" : `(${n_(a)})${sup(r)} × `}(${n_(b)})${sup(n - r)}.`, predict: choose(n, r) },
       { id: "general-term-index", kind: "procedural", competency: BIN, says: `The general term was used with the wrong index: the term with ${xp(r)} uses ${sup(n)}C${sub(r)} and the powers ${r} and ${n - r}.`, predict: bco(a, b, n, r - 1) },
       ...(bco(a, b, n, r) < 0 ? [{ id: "sign-lost", kind: "procedural", competency: EXPN, says: `The minus sign was dropped; ${([[a, r], [b, n - r]] as [number, number][]).filter(([v, e]) => v < 0 && e % 2).map(([v, e]) => `(${n_(v)})${sup(e)}`).join(" and ")} is negative (a negative number to an odd power), so the coefficient is negative.`, predict: Math.abs(bco(a, b, n, r)) } as Bug] : []),
       ...(Math.abs(a) !== 1 ? [{ id: "a-power-forgotten", kind: "procedural", competency: EXPN, says: `The ${n_(a)} in (${lin(a, 0)})${sup(r)} was not raised to the power ${r}.`, predict: choose(n, r) * a * b ** (n - r) } as Bug] : []),
@@ -2160,8 +2160,8 @@ export const B15: Def[] = [
       return near(k * (a * a - b * b) + p * a + q, 0) && near(2 * k * a * b + p * b, 0);
     },
     bugs: ([k, a, b]) => [
-      ...(a !== 0 ? [{ id: "sum-sign", kind: "procedural", competency: QUAD, says: `p was taken as k × (sum of roots); the sum of the roots is −p/k, so p = −${k === 1 ? "" : `${k} × `}${par2(2 * a)} = ${n_(-2 * a * k)}.`, predict: tup(2 * a * k, k * (a * a + b * b)) } as Bug] : []),
-      { id: "i-squared", kind: "recall", competency: QC, says: `(${cplx(a, b)})(${cconj(a, b)}) was worked out with i² = +1; since i² = −1 the product is a² + b² = ${a * a + b * b}.`, predict: tup(-2 * a * k, k * (a * a - b * b)) },
+      ...(a !== 0 ? [{ id: "sum-sign", kind: "procedural", competency: QUAD, says: k === 1 ? `p was taken as the sum of the roots, ${n_(2 * a)}; the sum of the roots is −p, so p = ${n_(-2 * a)}.` : `p was taken as ${k} × (sum of the roots) = ${n_(2 * a * k)}; the sum of the roots is −p/${k}, so p = −${k} × ${par2(2 * a)} = ${n_(-2 * a * k)}.`, predict: tup(2 * a * k, k * (a * a + b * b)) } as Bug] : []),
+      { id: "i-squared", kind: "recall", competency: QC, says: `(${cplx(a, b)})(${cconj(a, b)}) was worked out with i² = +1; since i² = −1 the product is ${par2(a)}² + ${b}² = ${a * a + b * b}${k === 1 ? "" : `, so q = ${k} × ${a * a + b * b} = ${k * (a * a + b * b)}`}.`, predict: tup(-2 * a * k, k * (a * a - b * b)) },
       ...(k > 1 ? [{ id: "k-forgotten", kind: "procedural", competency: QUAD, says: `The leading coefficient ${k} was forgotten; the quadratic is ${k}(x² − (sum)x + product).`, predict: tup(-2 * a, a * a + b * b) } as Bug] : []),
     ],
     distractors: ([k, a, b]) => [tup(-a * k, k * (a * a + b * b)), tup(-2 * a * k, k * (a * a + b * b) + 1), tup(2 * a * k, k * (a * a - b * b))],
@@ -3451,7 +3451,7 @@ const NEW15: Def[] = [
       }
       if (p[8] === 3) {
         out.push({ id: "triple-not-added-back", kind: "procedural", competency: SETS, says: `n(A ∩ B) and n(C ∩ A) were both taken away, which removes the ${g.z} in all three twice; add them back once.`, predict: g.nA - g.nAB - g.nCA });
-        out.push({ id: "one-overlap", kind: "procedural", competency: SETS, says: "Only one of the two overlaps was taken away; people in the first group who are also in the third must be removed too.", predict: g.nA - g.nAB });
+        out.push({ id: "one-overlap", kind: "procedural", competency: SETS, says: `Only the ${g.nAB} in both the first and second groups were taken away; the ${g.nCA} − ${g.z} = ${g.nCA - g.z} in the first and third groups but not the second must be taken away too.`, predict: g.nA - g.nAB });
       }
       return out.filter((b) => b.predict !== ans);
     },
@@ -3953,7 +3953,7 @@ const NEW15: Def[] = [
     bugs: ([q, a, b]) => {
       const out: Bug[] = [];
       if (q === 0) {
-        out.push({ id: "difference", kind: "conceptual", competency: PERM, says: `ⁿCₐ = ⁿC_b was read as a − b or b − a = n; the property is ⁿCᵣ = ⁿCₙ₋ᵣ, so ${b} = n − ${a}.`, predict: b - a });
+        out.push({ id: "difference", kind: "conceptual", competency: PERM, says: `The difference ${b} − ${a} was taken as n; the property is ⁿCᵣ = ⁿCₙ₋ᵣ, so ${b} = n − ${a} and n = ${a} + ${b}.`, predict: b - a });
         out.push({ id: "larger-index", kind: "procedural", competency: PERM, says: `n was taken as the larger index ${b}; then ⁿC${sub(a)} and ⁿC${sub(b)} would be different.`, predict: b });
       }
       if (q === 1) out.push({ id: "no-factorial", kind: "recall", competency: PERM, says: `ⁿPᵣ ÷ ⁿCᵣ was taken as r; it is r! (each selection has r! arrangements), so r! = ${fact(b)}.`, predict: fact(b) });
@@ -4644,7 +4644,7 @@ const NEW15: Def[] = [
       }
       if (q === 2) {
         out.push({ id: "first-left-out", kind: "procedural", competency: GP, says: `The first square was left out; its area ${a * a} cm² is the first term.`, predict: a * a });
-        out.push({ id: "side-ratio", kind: "conceptual", competency: GP, says: "The areas were taken to go down by 1/4; joining midpoints makes the side 1/√2 times as long, so each area is HALF the one before.", predict: (4 * a * a) / 3 });
+        out.push({ id: "side-ratio", kind: "conceptual", competency: GP, says: "Each area was taken as 1/4 of the one before (as if the side were halved); joining midpoints makes the side 1/√2 times as long, so each area is HALF the one before.", predict: (4 * a * a) / 3 });
       }
       if (q === 3) {
         out.push({ id: "first-left-out", kind: "procedural", competency: GP, says: `The first triangle was left out; its area ${3 * a} cm² is the first term.`, predict: a });
@@ -4867,7 +4867,7 @@ const NEW15: Def[] = [
       const out: Bug[] = [];
       if (f === 1) {
         out.push({ id: "upside-down", kind: "procedural", competency: EXPN, says: `${i}x = ${u} was solved as x = ${i}/${u}; divide ${u} by ${i}.`, predict: i / u });
-        out.push({ id: "subtract", kind: "procedural", competency: EXPN, says: "The powers were subtracted; (cⁱ)ˣ = c^(ix), so ix = the other power.", predict: u - i });
+        out.push({ id: "subtract", kind: "procedural", competency: EXPN, says: `The powers were subtracted (${u} − ${i}); since ${EXB[p[1]] ** i}ˣ = ${EXB[p[1]]}^(${i}x) and ${EXB[p[1]] ** u} = ${EXB[p[1]]}${sup(u)}, ${i}x = ${u}, so x = ${u}/${i}.`, predict: u - i });
       } else {
         out.push({ id: "bracket", kind: "procedural", competency: EXPN, says: `The power was not multiplied into the whole bracket: (c${sup(i)})^${expo(u)} = c^(${i}${expo(u)}) and (c${sup(j)})^${expo(w)} = c^(${j}${expo(w)}), so every term of the exponent is multiplied.`, predict: (w - u) / (i - j) });
         out.push({ id: "sign", kind: "procedural", competency: LIN, says: "A sign was lost when the x terms were collected; check by putting your answer back in.", predict: -ans });
@@ -4923,7 +4923,7 @@ const NEW15: Def[] = [
     },
     bugs: ([q, , i, j]) =>
       q === 0
-        ? ([{ id: "upside-down", kind: "procedural", competency: LOG, says: `log cʲ/log cⁱ = j/i was turned upside down (as i/j); it is ${j}/${i}.`, predict: i / j }] as Bug[]).filter((b) => b.predict !== j / i)
+        ? ([{ id: "upside-down", kind: "procedural", competency: LOG, says: `The answer was turned upside down (${i}/${j}); by change of base the product is log(last number) ÷ log(first base), and these are the same prime to the powers ${j} and ${i}, so it is ${j}/${i}.`, predict: i / j }] as Bug[]).filter((b) => b.predict !== j / i)
         : ([{ id: "not-reciprocal", kind: "procedural", competency: LOG, says: `log_(AB) X was worked out instead of log_X(AB): since X = (AB)${sup(j)}, log_(AB) X = ${j}, but the sum 1/log_A X + 1/log_B X = log_X A + log_X B = log_X(AB), which is 1/${j}.`, predict: j }, { id: "two-logs", kind: "conceptual", competency: LOG, says: "The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).", predict: 2 / j }] as Bug[]).filter((b) => b.predict !== 1 / j),
     distractors: (p) => [chbAns(p) + 1, -chbAns(p)],
     variants: ([q, ci, i, j, bi]) => [[q, ci, i, j, (bi + 1) % 5]].filter(chbOk),
@@ -4983,7 +4983,7 @@ const NEW15: Def[] = [
         ];
       return [
         { id: "x-term-left-out", kind: "procedural", competency: PF, says: "The 1 left after dividing was not integrated; ∫ 1 dx = x is part of the answer.", predict: `${logT(a + A, a, true)}` },
-        ...(A !== a + A && A - a !== 0 && A - a !== a + A ? [{ id: "remainder-sign", kind: "procedural", competency: PF, says: `The remainder was worked out as ${n_(A)} − (${n_(a)}); x + ${n_(A)} = (x − ${n_(a)}) + (${n_(A)} + ${n_(a)}).`, predict: `x${logT(A - a, a, false)}` } as Bug] : []),
+        ...(A !== a + A && A - a !== 0 && A - a !== a + A ? [{ id: "remainder-sign", kind: "procedural", competency: PF, says: `The remainder was worked out as ${n_(A)} − ${par2(a)} = ${n_(A - a)}; since ${lin(1, A)} = (${fac(a)}) + ${par2(A + a)}, the remainder is ${n_(A)} + ${par2(a)} = ${n_(A + a)}.`, predict: `x${logT(A - a, a, false)}` } as Bug] : []),
       ];
     },
     distractors: (p) => (p[0] === 0 ? [pfiAnswer([0, p[1], p[2], p[3], -p[4]]), pfiAnswer([0, p[1], p[2], -p[3], p[4]])] : [`x${logT(-(p[1] + p[3]), p[1], false)}`, `2x${logT(p[1] + p[3], p[1], false)}`]),

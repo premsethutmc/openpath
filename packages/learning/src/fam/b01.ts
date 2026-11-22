@@ -2908,7 +2908,7 @@ const GAP01: Def[] = [
     bugs: ([lvl, seed]) => {
       const [a, b] = storyNums(0, lvl, seed);
       return [
-        bug("subtracted", "conceptual", SUB, "The numbers were subtracted. 'Altogether' and 'more get on' join the two groups, so add.", Math.abs(a - b)),
+        bug("subtracted", "conceptual", SUB, "The numbers were subtracted. In the story two groups are put together, so add them to find the total.", Math.abs(a - b)),
         bug("no-regroup", "procedural", "MATH.number.addition-regroup", "The ten made in the ones column was not carried to the tens. When a column adds up to 10 or more, write the ones and carry the ten.", lvl >= 1 ? digitwise(a, b, (x, y) => (x + y) % 10) : null),
       ];
     },
@@ -2966,7 +2966,7 @@ const GAP01: Def[] = [
     bugs: ([lvl, seed]) => {
       const [a, b] = storyNums(1, lvl, seed);
       return [
-        bug("added", "conceptual", ADD, "The numbers were added. 'Left' and 'flew away' mean some are taken away, so subtract.", a + b),
+        bug("added", "conceptual", ADD, "The numbers were added. In the story some are taken away from the group, so subtract to find how many remain.", a + b),
         bug("smaller-from-larger", "procedural", SUB, "In a column, the smaller digit was taken from the larger one, whichever was on top. When the top digit is smaller, regroup: exchange one ten for ten ones first.", lvl >= 1 ? digitwise(a, b, (x, y) => Math.abs(x - y)) : null),
       ];
     },
@@ -3693,7 +3693,7 @@ const GAP01: Def[] = [
       const c = nameChoices(n);
       return [
         bug("reversed", "procedural", PV, "The digits were named the other way round. The first digit is the tens, the second the ones.", ix(c.list, c.rev)),
-        bug("teen-ty", "recall", PV, "A -teen and a -ty word were mixed up. Fourteen is 14 (ten and four); forty is 40 (four tens).", ix(c.list, c.teen)),
+        bug("teen-ty", "recall", PV, ((k) => `A -teen and a -ty word were mixed up. ${cap(words(10 + k))} is ${10 + k} (ten and ${ONES[k]}); ${words(10 * k)} is ${10 * k} (${ONES[k]} tens).`)(n < 20 ? n % 10 : Math.floor(n / 10)), ix(c.list, c.teen)),
         bug("digit-by-digit", "conceptual", PV, "Each digit was named on its own. The first digit stands for tens, so it has a tens name like twenty or sixty.", ix(c.list, c.digit)),
       ];
     },

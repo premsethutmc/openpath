@@ -6079,13 +6079,13 @@
        "title": "Base angles of an isosceles triangle",
        "text": [
         "In an isosceles triangle the two sides that are equal face two equal angles (the base angles).",
-        "Take the vertex angle (the one between the equal sides) from 180deg, then halve what is left: each base angle is half of the remainder."
+        "Take the vertex angle (the one between the equal sides) from 180°, then halve what is left: each base angle is half of the remainder."
        ],
        "math": [
         "In an isosceles triangle the angle between the two equal sides is 50°. What is each of the other two angles, in degrees?",
-        "Angle sum: 180deg",
-        "Two equal base angles share 180deg - 50deg = 130deg",
-        "Each base angle: 130deg / 2 = 65deg"
+        "Angle sum: 180°",
+        "Two equal base angles share 180° - 50° = 130°",
+        "Each base angle: 130° / 2 = 65°"
        ],
        "role": "strategy",
        "instance": "gen:ahiso:50,0",
@@ -6094,7 +6094,7 @@
         "angles": [
          "?",
          "?",
-         "50deg"
+         "50°"
         ]
        }
       },
@@ -6102,13 +6102,13 @@
        "title": "A wider vertex angle",
        "text": [
         "The bigger the vertex angle, the smaller each base angle.",
-        "Always start with 180deg minus the vertex angle, then divide by 2."
+        "Always start with 180° minus the vertex angle, then divide by 2."
        ],
        "math": [
         "In an isosceles triangle the angle between the two equal sides is 100°. What is each of the other two angles, in degrees?",
-        "Angle sum: 180deg",
-        "Two equal base angles share 180deg - 100deg = 80deg",
-        "Each base angle: 80deg / 2 = 40deg"
+        "Angle sum: 180°",
+        "Two equal base angles share 180° - 100° = 80°",
+        "Each base angle: 80° / 2 = 40°"
        ],
        "role": "strategy",
        "instance": "gen:ahiso:100,0",
@@ -6117,7 +6117,7 @@
         "angles": [
          "?",
          "?",
-         "100deg"
+         "100°"
         ]
        }
       }
@@ -6138,22 +6138,22 @@
       {
        "title": "Find the vertex angle from a base angle",
        "text": [
-        "If you know one base angle, you know both (they are equal). Double the base angle and take it from 180deg.",
-        "Check: the vertex angle plus both base angles should add to 180deg."
+        "If you know one base angle, you know both (they are equal). Double the base angle and take it from 180°.",
+        "Check: the vertex angle plus both base angles should add to 180°."
        ],
        "math": [
         "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 35°. What is the third angle, in degrees?",
-        "Both base angles are 35deg",
-        "Together: 2 x 35deg = 70deg",
-        "Vertex angle: 180deg - 70deg = 110deg"
+        "Both base angles are 35°",
+        "Together: 2 x 35° = 70°",
+        "Vertex angle: 180° - 70° = 110°"
        ],
        "role": "strategy",
        "instance": "gen:ahiso:35,1",
        "widget": {
         "type": "triangle",
         "angles": [
-         "35deg",
-         "35deg",
+         "35°",
+         "35°",
          "?"
         ]
        }
@@ -6162,21 +6162,21 @@
        "title": "A larger base angle",
        "text": [
         "Larger base angles leave less room for the vertex angle.",
-        "Double the base angle first, then subtract from 180deg."
+        "Double the base angle first, then subtract from 180°."
        ],
        "math": [
         "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 75°. What is the third angle, in degrees?",
-        "Both base angles are 75deg",
-        "Together: 2 x 75deg = 150deg",
-        "Vertex angle: 180deg - 150deg = 30deg"
+        "Both base angles are 75°",
+        "Together: 2 x 75° = 150°",
+        "Vertex angle: 180° - 150° = 30°"
        ],
        "role": "strategy",
        "instance": "gen:ahiso:75,1",
        "widget": {
         "type": "triangle",
         "angles": [
-         "75deg",
-         "75deg",
+         "75°",
+         "75°",
          "?"
         ]
        }
@@ -6455,7 +6455,7 @@
     },
     {
      "id": "complementary_angles",
-     "title": "Complementary angles add up to 90deg",
+     "title": "Complementary angles add up to 90°",
      "kind": "conceptual",
      "needs": [],
      "scope": {
@@ -6464,16 +6464,16 @@
      },
      "screens": [
       {
-       "title": "Complementary angles add up to 90deg",
+       "title": "Complementary angles add up to 90°",
        "text": [
-        "Two angles are complementary when they together make a right angle: 90deg.",
-        "To find the missing complement, take the given angle away from 90deg."
+        "Two angles are complementary when they together make a right angle: 90°.",
+        "To find the missing complement, take the given angle away from 90°."
        ],
        "math": [
         "Two angles are complementary. One of them is 35°. What is the other angle, in degrees?",
-        "Complementary angles add up to 90deg",
-        "90deg - 35deg = 55deg",
-        "Check: 35deg + 55deg = 90deg"
+        "Complementary angles add up to 90°",
+        "90° - 35° = 55°",
+        "Check: 35° + 55° = 90°"
        ],
        "role": "strategy",
        "instance": "gen:afpair:0,35",
@@ -6486,14 +6486,14 @@
       {
        "title": "Complement of a larger angle",
        "text": [
-        "The closer the given angle is to 90deg, the smaller its complement.",
-        "Take the given angle from 90deg. Check that the two angles add up to 90deg."
+        "The closer the given angle is to 90°, the smaller its complement.",
+        "Take the given angle from 90°. Check that the two angles add up to 90°."
        ],
        "math": [
         "Two angles are complementary. One of them is 72°. What is the other angle, in degrees?",
-        "Complementary angles add up to 90deg",
-        "90deg - 72deg = 18deg",
-        "Check: 72deg + 18deg = 90deg"
+        "Complementary angles add up to 90°",
+        "90° - 72° = 18°",
+        "Check: 72° + 18° = 90°"
        ],
        "role": "strategy",
        "instance": "gen:afpair:0,72",
@@ -6509,7 +6509,7 @@
     },
     {
      "id": "supplementary_angles",
-     "title": "Supplementary angles add up to 180deg",
+     "title": "Supplementary angles add up to 180°",
      "kind": "conceptual",
      "needs": [],
      "scope": {
@@ -6518,16 +6518,16 @@
      },
      "screens": [
       {
-       "title": "Supplementary angles add up to 180deg",
+       "title": "Supplementary angles add up to 180°",
        "text": [
-        "Two angles are supplementary when they together make a straight angle: 180deg.",
-        "To find the missing supplement, take the given angle away from 180deg."
+        "Two angles are supplementary when they together make a straight angle: 180°.",
+        "To find the missing supplement, take the given angle away from 180°."
        ],
        "math": [
         "Two angles are supplementary. One of them is 55°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180deg",
-        "180deg - 55deg = 125deg",
-        "Check: 55deg + 125deg = 180deg"
+        "Supplementary angles add up to 180°",
+        "180° - 55° = 125°",
+        "Check: 55° + 125° = 180°"
        ],
        "role": "strategy",
        "instance": "gen:afpair:1,55",
@@ -6540,14 +6540,14 @@
       {
        "title": "Supplement of an obtuse angle",
        "text": [
-        "When the given angle is obtuse (more than 90deg), its supplement is acute (less than 90deg).",
-        "Take the given angle from 180deg. Check that the two add to 180deg."
+        "When the given angle is obtuse (more than 90°), its supplement is acute (less than 90°).",
+        "Take the given angle from 180°. Check that the two add to 180°."
        ],
        "math": [
         "Two angles are supplementary. One of them is 125°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180deg",
-        "180deg - 125deg = 55deg",
-        "Check: 125deg + 55deg = 180deg"
+        "Supplementary angles add up to 180°",
+        "180° - 125° = 55°",
+        "Check: 125° + 55° = 180°"
        ],
        "role": "strategy",
        "instance": "gen:afpair:1,125",
@@ -6575,13 +6575,13 @@
        "title": "Adjacent angles on a straight line",
        "text": [
         "Where two straight lines cross, each pair of neighbouring angles lies on a straight line.",
-        "Angles on a straight line add up to 180deg. Take the known angle from 180deg to find the one next to it."
+        "Angles on a straight line add up to 180°. Take the known angle from 180° to find the one next to it."
        ],
        "math": [
         "Two straight lines cross each other, making four angles. One of the angles is 52°. What is an angle next to it (they form a straight line together), in degrees?",
-        "Angles on a straight line add up to 180deg",
-        "180deg - 52deg = 128deg",
-        "The angle next to 52deg is 128deg"
+        "Angles on a straight line add up to 180°",
+        "180° - 52° = 128°",
+        "The angle next to 52° is 128°"
        ],
        "role": "strategy",
        "instance": "gen:afcross:52,1",
@@ -6590,7 +6590,7 @@
         "deg": 52,
         "cross": true,
         "labels": [
-         "52deg",
+         "52°",
          "?",
          "",
          ""
@@ -6601,13 +6601,13 @@
        "title": "Larger adjacent angle",
        "text": [
         "If the known angle is acute, the adjacent angle is obtuse, and the other way round.",
-        "Take the known angle from 180deg. The two together always make exactly 180deg."
+        "Take the known angle from 180°. The two together always make exactly 180°."
        ],
        "math": [
         "Two straight lines cross each other, making four angles. One of the angles is 138°. What is an angle next to it (they form a straight line together), in degrees?",
-        "Angles on a straight line add up to 180deg",
-        "180deg - 138deg = 42deg",
-        "The angle next to 138deg is 42deg"
+        "Angles on a straight line add up to 180°",
+        "180° - 138° = 42°",
+        "The angle next to 138° is 42°"
        ],
        "role": "strategy",
        "instance": "gen:afcross:138,1",
@@ -6616,7 +6616,7 @@
         "deg": 138,
         "cross": true,
         "labels": [
-         "138deg",
+         "138°",
          "?",
          "",
          ""
@@ -6640,14 +6640,14 @@
       {
        "title": "The other three angles at a crossing",
        "text": [
-        "All four angles at a crossing add up to 360deg (a full turn).",
-        "Find the other three by going round: opposite is equal, neighbours add to 180deg. Then add all three."
+        "All four angles at a crossing add up to 360° (a full turn).",
+        "Find the other three by going round: opposite is equal, neighbours add to 180°. Then add all three."
        ],
        "math": [
         "Two straight lines cross each other, making four angles. One of the angles is 47°. What do the other three angles add up to, in degrees?",
-        "The angle next to 47deg is 180deg - 47deg = 133deg",
-        "Opposite 47deg is another 47deg; opposite 133deg is another 133deg",
-        "Other three: 133deg + 47deg + 133deg = 313deg"
+        "The angle next to 47° is 180° - 47° = 133°",
+        "Opposite 47° is another 47°; opposite 133° is another 133°",
+        "Other three: 133° + 47° + 133° = 313°"
        ],
        "role": "strategy",
        "instance": "gen:afcross:47,2",
@@ -6656,7 +6656,7 @@
         "deg": 47,
         "cross": true,
         "labels": [
-         "47deg",
+         "47°",
          "?",
          "?",
          "?"
@@ -6667,13 +6667,13 @@
        "title": "When the angle is obtuse",
        "text": [
         "Even with an obtuse angle, the rule is the same: go round the crossing.",
-        "The four angles are the given angle, 180deg minus it, the given angle again, and 180deg minus it again. The other three add to 360deg minus the given."
+        "The four angles are the given angle, 180° minus it, the given angle again, and 180° minus it again. The other three add to 360° minus the given."
        ],
        "math": [
         "Two straight lines cross each other, making four angles. One of the angles is 131°. What do the other three angles add up to, in degrees?",
-        "The angle next to 131deg is 180deg - 131deg = 49deg",
-        "Opposite 131deg is another 131deg; opposite 49deg is another 49deg",
-        "Other three: 49deg + 131deg + 49deg = 229deg"
+        "The angle next to 131° is 180° - 131° = 49°",
+        "Opposite 131° is another 131°; opposite 49° is another 49°",
+        "Other three: 49° + 131° + 49° = 229°"
        ],
        "role": "strategy",
        "instance": "gen:afcross:131,2",
@@ -6682,7 +6682,7 @@
         "deg": 131,
         "cross": true,
         "labels": [
-         "131deg",
+         "131°",
          "?",
          "?",
          "?"
@@ -13920,7 +13920,7 @@
       "One pencil: ₹21 ÷ 3 = ₹7",
       "6 pencils: 6 × ₹7 = ₹42"
      ],
-     "tip": "The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.",
+     "tip": "The change in the number of pencils (3) was added to the price; every pencil costs the same, so find the price of one pencil and multiply it by 6.",
      "role": "concept",
      "instance": "gen:prop:3,7,6"
     },
@@ -14011,7 +14011,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “8 pencils cost ₹104. At the same price each, how much do 11 pencils cost, in rupees?” A common wrong answer is 107.",
-        "The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied."
+        "The change in the number of pencils (3) was added to the price; every pencil costs the same, so find the price of one pencil and multiply it by 11."
        ],
        "math": [
         "Not 107, but 143"
@@ -50951,11 +50951,11 @@
        "instance": "gen:alqline:2,-6,-8",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The graph of y = 2x² has been drawn. To solve 2x² − 6x − 8 = 0 with it, which straight line should be drawn on the same axes?” A common wrong answer is 3.",
+        "A question: “The graph of y = 2x² has been drawn. To solve 2x² − 6x − 8 = 0 with it, which straight line should be drawn on the same axes?” A common wrong answer is “y = −6x − 8”.",
         "The other terms were copied to the line without changing their signs; moving a term to the other side of = changes its sign."
        ],
        "math": [
-        "Not 3, but C"
+        "Not “y = −6x − 8”, but “y = 6x + 8”"
        ]
       }
      ],
@@ -54502,11 +54502,11 @@
        "instance": "gen:amreason:15,10,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “In ΔABC, ∠A = 50° and ∠B = 35°. A proof says: \"so ∠C = 95°.\" Which reason justifies this step?” A common wrong answer is 0.",
+        "A question: “In ΔABC, ∠A = 50° and ∠B = 35°. A proof says: \"so ∠C = 95°.\" Which reason justifies this step?” A common wrong answer is “An exterior angle of a triangle equals the sum of the two interior opposite angles.”.",
         "The exterior-angle reason was chosen, but the step uses the three angles inside the triangle."
        ],
        "math": [
-        "Not 0, but D"
+        "Not “An exterior angle of a triangle equals the sum of the two interior opposite angles.”, but “The three angles of a triangle add up to 180°.”"
        ]
       }
      ],
@@ -55927,11 +55927,11 @@
        "instance": "gen:anstack:10,4,14,14",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The clustered bar chart shows how many children of Class 9A and Class 9B walk to school and how many come by bus. If the same data were drawn as a 100% stacked bar chart, which class would have the longer 'walk' part of its bar?” A common wrong answer is 1.",
+        "A question: “The clustered bar chart shows how many children of Class 9A and Class 9B walk to school and how many come by bus. If the same data were drawn as a 100% stacked bar chart, which class would have the longer 'walk' part of its bar?” A common wrong answer is “Class 9B”.",
         "The class with more walkers was chosen. A 100% stacked bar shows each class as a whole (100%), so it compares the share of walkers, not the number."
        ],
        "math": [
-        "Not 1, but A"
+        "Not “Class 9B”, but “Class 9A”"
        ]
       }
      ],
@@ -57647,7 +57647,7 @@
       "[5.3] = 5: the integer at or just below it",
       "−3 − 5 = −8"
      ],
-     "tip": "The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3.",
+     "tip": "The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.9] = −3.",
      "role": "concept",
      "instance": "gen:aostd:-29,53,1"
     },
@@ -57739,7 +57739,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “[x] denotes the greatest integer less than or equal to x. Find [−5.7] − [9.6].” A common wrong answer is −14.",
-        "The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−2.3] = −3."
+        "The decimal part was simply removed; for a negative number that moves up, but [x] is the integer at or below x: [−5.7] = −6."
        ],
        "math": [
         "Not −14, but −15"
@@ -58889,7 +58889,7 @@
       "2¹ × 1² = 2",
       "Coefficient: 3 × 2 = 6"
      ],
-     "tip": "Only ³C₁ was given; the term also carries (2x)¹ and (1)², so their powers are part of the coefficient.",
+     "tip": "Only ³C₁ was given; the term is ³C₁ × (2x)¹ × (1)², so the coefficient is ³C₁ × (2)¹ × (1)².",
      "role": "concept",
      "instance": "gen:aobinco:2,1,3,1"
     },
@@ -59023,7 +59023,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “Find the coefficient of x³ in the expansion of (−2x + 1)⁸.” A common wrong answer is 56.",
-        "Only ⁸C₃ was given; the term also carries (−2x)³ and (1)⁵, so their powers are part of the coefficient."
+        "Only ⁸C₃ was given; the term is ⁸C₃ × (−2x)³ × (1)⁵, so the coefficient is ⁸C₃ × (−2)³ × (1)⁵."
        ],
        "math": [
         "Not 56, but −448"
@@ -62542,11 +62542,11 @@
        "instance": "gen:aqrank:-1,1,0,1,2,2",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Use the rank method to decide how many solutions this system has: x − y + z = 4, x + 2z = 4, 3x − y + 5z = 15.” A common wrong answer is 1.",
+        "A question: “Use the rank method to decide how many solutions this system has: x − y + z = 4, x + 2z = 4, 3x − y + 5z = 15.” A common wrong answer is “infinitely many solutions”.",
         "ρ(A) = 2 was taken to mean infinitely many solutions without comparing with ρ([A | B]). Here the augmented matrix has rank 3, so the system is inconsistent."
        ],
        "math": [
-        "Not 1, but C"
+        "Not “infinitely many solutions”, but “no solution”"
        ]
       }
      ],
@@ -62997,7 +62997,7 @@
       "f(x) = y is not solvable for some y in the codomain",
       "So f is neither one-one nor onto"
      ],
-     "tip": "Only the values y ≥ −1 were thought of; the codomain ℝ also contains values that x² never reaches.",
+     "tip": "Every real y was assumed to be reached; but f(x) only takes values y ≤ −1, so it is not onto (and not one-one, since f(−1) = f(1)).",
      "role": "concept",
      "instance": "gen:aqonto:2,-1,-1"
     }
@@ -63068,11 +63068,11 @@
        "instance": "gen:aqonto:3,2,-3",
        "title": "A common wrong answer",
        "text": [
-        "A question: “f: ℝ → [−3, ∞) is given by f(x) = 2x² − 3. Which is true?” A common wrong answer is 3.",
+        "A question: “f: ℝ → [−3, ∞) is given by f(x) = 2x² − 3. Which is true?” A common wrong answer is “neither one-one nor onto”.",
         "A square was assumed never to be onto; the codomain here is [−3, ∞), and every y in it is reached. It is not one-one, since f(−1) = f(1)."
        ],
        "math": [
-        "Not 3, but C"
+        "Not “neither one-one nor onto”, but “onto but not one-one”"
        ]
       }
      ],
@@ -63216,11 +63216,11 @@
        "instance": "gen:aqrel:69",
        "title": "A common wrong answer",
        "text": [
-        "A question: “On A = {1, 2, 3}, the relation R = {(1, 1), (1, 3), (3, 1)}. Which statement about R is true?” A common wrong answer is 3.",
+        "A question: “On A = {1, 2, 3}, the relation R = {(1, 1), (1, 3), (3, 1)}. Which statement about R is true?” A common wrong answer is “reflexive, symmetric, not transitive”.",
         "Reflexive needs (a, a) for EVERY a in A; one missing pair is enough to fail."
        ],
        "math": [
-        "Not 3, but A"
+        "Not “reflexive, symmetric, not transitive”, but “not reflexive, symmetric, not transitive”"
        ]
       }
      ],
@@ -63458,7 +63458,7 @@
       "The even part gives 2∫₀¹ (2x² + 4) dx",
       "= 28/3"
      ],
-     "tip": "Every term was taken to vanish over a symmetric interval; only the odd part does. The even part kx² + m gives twice its integral from 0 to a.",
+     "tip": "Every term was taken to vanish over a symmetric interval; only the odd part does. The even part 2x² + 4 gives twice its integral from 0 to 1.",
      "role": "concept",
      "instance": "gen:aqodd:2,1,2,4"
     },
@@ -63555,7 +63555,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “Evaluate ∫₋₃³ (x³ cos x + 3) dx.” A common wrong answer is 0.",
-        "Every term was taken to vanish over a symmetric interval; only the odd part does. The even part kx² + m gives twice its integral from 0 to a."
+        "Every term was taken to vanish over a symmetric interval; only the odd part does. The even part 3 gives twice its integral from 0 to 3."
        ],
        "math": [
         "Not 0, but 18"
@@ -64246,11 +64246,11 @@
        "instance": "gen:aqinvbr:1,1,0",
        "title": "A common wrong answer",
        "text": [
-        "A question: “What is the domain of cos⁻¹ (the set of real numbers x for which cos⁻¹(x) is defined)?” A common wrong answer is 2.",
+        "A question: “What is the domain of cos⁻¹ (the set of real numbers x for which cos⁻¹(x) is defined)?” A common wrong answer is “[0, π]”.",
         "The principal range of cos⁻¹ was given instead of its domain: the domain is the set of numbers x that cos⁻¹ accepts."
        ],
        "math": [
-        "Not 2, but D"
+        "Not “[0, π]”, but “[−1, 1]”"
        ]
       }
      ],
@@ -69525,7 +69525,7 @@
       "De Moivre: raise the modulus to the power 6 and multiply the argument by 6: 64(cos 2π + i sin 2π)",
       "Evaluate cos and sin of 2π: (64, 0)"
      ],
-     "tip": "Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + iⁿyⁿ. Use the polar form.",
+     "tip": "Each part was raised to the power separately, giving xⁿ + yⁿi; (x + iy)ⁿ cannot be found that way. Use the polar form.",
      "role": "concept",
      "instance": "gen:asdemo:7,6"
     },
@@ -69610,7 +69610,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “Use de Moivre's theorem to write (1 + √3 i)⁸ in the form x + iy. Type the answer as (x, y).” A common wrong answer is (1, 81).",
-        "Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + iⁿyⁿ. Use the polar form."
+        "Each part was raised to the power separately, giving xⁿ + yⁿi; (x + iy)ⁿ cannot be found that way. Use the polar form."
        ],
        "math": [
         "Not (1, 81), but (−128, 128√3)"
@@ -71068,11 +71068,11 @@
        "instance": "gen:atconv:1,4,2",
        "title": "A common wrong answer",
        "text": [
-        "A question: “For whole numbers n, consider the statement: \"If n is a multiple of 4, then n² is a multiple of 4.\" Which is correct about this statement and its converse?” A common wrong answer is 0.",
+        "A question: “For whole numbers n, consider the statement: \"If n is a multiple of 4, then n² is a multiple of 4.\" Which is correct about this statement and its converse?” A common wrong answer is “The statement and its converse are both true”.",
         "The converse was assumed to be true exactly when the statement is; a converse swaps the 'if' and 'then' parts and must be checked on its own."
        ],
        "math": [
-        "Not 0, but B"
+        "Not “The statement and its converse are both true”, but “The statement is true, but its converse is false”"
        ]
       }
      ],
@@ -72689,11 +72689,11 @@
        "instance": "gen:awctr:6,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “In △KLN, D is the midpoint of LN and KD = 9 cm. One of the four centres of the triangle is the point P on KD with KP = 6 cm and PD = 3 cm. Which centre is P?” A common wrong answer is 0.",
+        "A question: “In △KLN, D is the midpoint of LN and KD = 9 cm. One of the four centres of the triangle is the point P on KD with KP = 6 cm and PD = 3 cm. Which centre is P?” A common wrong answer is “the incentre”.",
         "A point well inside the triangle was taken to be the incentre. The incentre lies on the angle bisectors; a point on the line from a corner to a midpoint, two thirds of the way along, is the centroid."
        ],
        "math": [
-        "Not 0, but D"
+        "Not “the incentre”, but “the centroid”"
        ]
       }
      ],

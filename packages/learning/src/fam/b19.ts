@@ -2133,7 +2133,7 @@ const aspolm: Def = {
       return x;
     };
     return [
-      B("arguments-multiplied", "conceptual", POLAR, "The arguments were multiplied like the moduli; when complex numbers are multiplied, the arguments are added.", op ? null : piStr(red(R_(a1 * a2, 36)))),
+      B("arguments-multiplied", "conceptual", POLAR, "The arguments were multiplied like the moduli (writing π only once); when complex numbers are multiplied, the arguments are added.", op ? null : piStr(red(R_(a1 * a2, 36)))),
       op
         ? B("subtracted-wrong-way", "procedural", POLAR, "The arguments were subtracted the wrong way round, as arg z₂ − arg z₁; arg(z₁/z₂) = arg z₁ − arg z₂.", piStr(R_(prin6(a2 - a1), 6)))
         : B("arguments-subtracted", "recall", POLAR, "The arguments were subtracted (as for a quotient); for a product they are added.", piStr(R_(prin6(a1 - a2), 6))),
@@ -2307,7 +2307,7 @@ const asdemo: Def = {
     const imE = E_(R_(b.im[0]), b.im[1]);
     return [
       B("modulus-not-raised", "procedural", DM, `The modulus ${es(b.mod)} must also be raised to the power ${n}: (r(cos θ + i sin θ))ⁿ = rⁿ(cos nθ + i sin nθ).`, tup([es(c), es(s)])),
-      B("parts-raised", "conceptual", DM, "Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + iⁿyⁿ. Use the polar form.", tup([es(epow(reE, n)), es(epow(imE, n))])),
+      B("parts-raised", "conceptual", DM, "Each part was raised to the power separately, giving xⁿ + yⁿi; (x + iy)ⁿ cannot be found that way. Use the polar form.", tup([es(epow(reE, n)), es(epow(imE, n))])),
       B("angle-not-multiplied", "procedural", DM, `The argument must be multiplied by ${n} as well: cos ${n}θ + i sin ${n}θ.`, tup([es(emul(R, c1)), es(emul(R, s1))])),
     ];
   },

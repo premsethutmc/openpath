@@ -108,7 +108,7 @@ Every competency that has some content:
 | Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aedec draft, aedecc draft, aedpv draft, aedord draft, aedfr draft, aedfrl draft, aedlike draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
 | Classify numbers as even or odd (`MATH.number.even-odd`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeeven draft, aepair draft). |
-| Add and subtract like fractions (`MATH.number.fraction-add-like`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
+| Add and subtract like fractions (`MATH.number.fraction-add-like`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd draft). |
 | Read and compare large numbers (`MATH.number.large-numbers`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft, aeexpb draft). |
 | Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv draft, avdiv draft, avmdiv draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
@@ -189,7 +189,7 @@ Every competency that has some content:
 | Multiply integers using sign rules (`MATH.number.integer-multiply`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiintx draft, ajimul draft, ajidiv draft). |
 | Calculate percentages (`MATH.number.percentage`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families pct draft, agpfrac draft, agfdec draft, avpctof draft). |
 | Calculate profit loss and simple interest (`MATH.number.profit-loss`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajpl draft, ajsi draft, ajdisc draft, ajplamt draft, avmarked draft). |
-| Solve direct proportions (`MATH.number.proportion`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families prop submitted, avprop draft, avpmiss draft, avdirv draft). |
+| Solve direct proportions (`MATH.number.proportion`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families prop draft, avprop draft, avpmiss draft, avdirv draft). |
 | Divide a quantity in a given ratio (`MATH.number.ratio-division`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrdiv draft). |
 | Operate on rational numbers (`MATH.number.rational-numbers`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajrq draft, ajinv draft, ajrstd draft, ajrcq draft, ajrline draft). |
 | Estimate probability experimentally (`MATH.probability.experimental`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akexp draft). |
@@ -296,7 +296,7 @@ Every competency that has some content:
 | Use set operations (`MATH.algebra.sets`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aosetop draft, aosub draft, aoinex draft, aosetform draft, aosetcl draft, aosetlaw draft, aoven3 draft, aosamp draft, aonlread draft). |
 | Sketch and read graphs of standard real functions (`MATH.algebra.standard-function-graphs`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aostd draft, aograph draft). |
 | Differentiate from first principles (`MATH.calculus.derivatives`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqfp draft, aqvel draft). |
-| Evaluate elementary limits (`MATH.calculus.limits`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lim submitted, aultab draft, aulpow draft, auspd draft, aulstd draft, auliinf draft). |
+| Evaluate elementary limits (`MATH.calculus.limits`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families lim draft, aultab draft, aulpow draft, auspd draft, aulstd draft, auliinf draft). |
 | Analyse circle parabola ellipse and hyperbola (`MATH.coordinate.conics`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families arcircle draft, arparabola draft, areccentric draft, arconicarea draft, arconicid draft, arcone draft, arcirceq draft, arcircpos draft, arconprop draft, arconeq draft, arparaeq draft, arconapp draft, arxyconic draft). |
 | Derive the equation of a locus (`MATH.coordinate.locus`) | 11–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aslocus draft, aslocpar draft). |
 | Analyse pairs of straight lines from second-degree equations (`MATH.coordinate.pair-of-lines`) | 11–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aspair draft, aspairang draft, aspairbis draft). |
@@ -334,7 +334,7 @@ Every competency that has some content:
 | Test continuity (`MATH.calculus.continuity`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqcontk draft, aqcontd draft). |
 | Sketch curves using derivatives, symmetry and asymptotes (`MATH.calculus.curve-sketching`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqconc draft). |
 | Evaluate definite integrals using their properties (`MATH.calculus.definite-integral-properties`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqodd draft, aqking draft, aqabsint draft). |
-| Evaluate definite integrals (`MATH.calculus.definite-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint submitted, audfp draft, aurie draft, audbe draft). |
+| Evaluate definite integrals (`MATH.calculus.definite-integrals`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint draft, audfp draft, aurie draft, audbe draft). |
 | Apply differentiation rules (`MATH.calculus.derivative-rules`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
 | Test differentiability (`MATH.calculus.differentiability`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqdiffab draft). |
 | Solve elementary differential equations (`MATH.calculus.differential-equations`) | 12–12 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqsep draft, aqorddeg draft, aqlinde draft, aqdecl draft, aqsubsep draft). |
@@ -392,9 +392,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | mul: A multiplication fact | `MATH.number.multiplication-tables` | 121 | 0 | 16/48/57 | `dc107826` |
 | rect: Area of a rectangle | `MATH.measurement.rectangle-area` | 121 | 0 | 46/45/30 | `685c1810` |
 | eqfrac: A missing part of an equivalent fraction | `MATH.number.equivalent-fractions` | 405 | 0 | 90/135/180 | `29ddcacc` |
-| fadd: Adding or subtracting like fractions | `MATH.number.fraction-add-like` | 825 | 0 | 295/229/301 | `4666c963` |
-| cint: The definite integral of a constant | `MATH.calculus.definite-integrals` | 792 | 0 | 62/643/87 | `12064e16` |
-| quad: A quadratic equation with whole-number roots | `MATH.algebra.quadratics` | 127 | 0 | 20/20/87 | `8554aafb` |
+| fadd: Adding or subtracting like fractions | `MATH.number.fraction-add-like` | 825 | 0 | 295/229/301 | `d62303a1` |
+| cint: The definite integral of a constant | `MATH.calculus.definite-integrals` | 792 | 0 | 62/643/87 | `0791564c` |
+| quad: A quadratic equation with whole-number roots | `MATH.algebra.quadratics` | 127 | 0 | 20/20/87 | `dc2b28d9` |
 | linev: The value of y = mx + c for a given x | `MATH.algebra.variables` | 1512 | 0 | 506/286/720 | `6725de50` |
 | meet: Where a line meets y = x², by trying whole numbers | `MATH.algebra.linear-equations` | 13 | 0 | 0/13/0 | `160d13a5` |
 | above: Which graph is higher at a point | `MATH.algebra.functions` | 215 | 0 | 215/0/0 | `3cf29737` |
@@ -417,13 +417,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | root: The square root of a perfect square | `MATH.number.square-roots` | 99 | 0 | 9/5/85 | `fbbee837` |
 | vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `a4a7d050` |
 | lin: Solving ax + b = c | `MATH.algebra.linear-equations` | 1920 | 0 | 645/914/361 | `53af65fb` |
-| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `e765795e` |
+| prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `27eda5d2` |
 | factor: Factorising x² + px + q | `MATH.algebra.factorisation` | 288 | 0 | 72/72/144 | `7a772ff8` |
 | apn: The nth term of an arithmetic progression | `MATH.algebra.arithmetic-sequences` | 2560 | 0 | 480/1280/800 | `7cdbaeff` |
 | cdist: The distance between two points | `MATH.coordinate.distance` | 548 | 0 | 48/312/188 | `a08920e8` |
 | hcf: The highest common factor | `MATH.number.euclid-algorithm` | 1402 | 0 | 197/398/807 | `81deeef6` |
 | det2: A 2 × 2 determinant | `MATH.algebra.determinants` | 2076 | 0 | 576/1500/0 | `e06062d9` |
-| lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `b78c12de` |
+| lim: A limit that needs factorising | `MATH.calculus.limits` | 54 | 0 | 9/17/28 | `8b410c42` |
 | condp: A conditional probability from a table | `MATH.probability.conditional` | 625 | 0 | 250/375/0 | `6ed41416` |
 | cnt: Counting objects in a picture | `MATH.number.count-objects` | 120 | 0 | 30/30/60 | `d737e7c0` |
 | addr: Adding two-digit numbers with regrouping | `MATH.number.addition-regroup` | 400 | 0 | 79/97/224 | `84402a19` |
@@ -471,8 +471,8 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aasign: Comparing two numbers with <, > or = | `MATH.number.compare-numbers` | 189 | 0 | 29/80/80 | `61337c14` |
 | aadigmax: The greatest or smallest number made from given digits | `MATH.number.compare-numbers` | 300 | 0 | 60/165/75 | `5af85daf` |
 | aapass: Sorting a list by comparing neighbours (passes of swaps) | `MATH.reasoning.algorithms-flowcharts` | 174 | 0 | 40/80/54 | `ad63e19f` |
-| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `459e4d9b` |
-| aastsub: How many are left: subtraction story problems | `MATH.number.subtraction` | 296 | 0 | 96/100/100 | `e4886e50` |
+| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `272500a3` |
+| aastsub: How many are left: subtraction story problems | `MATH.number.subtraction` | 296 | 0 | 96/100/100 | `37a1a16e` |
 | aasenadd: Choosing the addition sentence for a story | `MATH.number.addition` | 232 | 0 | 112/120/0 | `c997751f` |
 | aasensub: Choosing the subtraction sentence for a take-away story | `MATH.number.subtraction` | 220 | 0 | 144/76/0 | `abc0dc4d` |
 | aaweek: The days of the week and the months in order | `MATH.measurement.calendar` | 126 | 0 | 14/36/76 | `1701e793` |
@@ -484,7 +484,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aacalpat: Patterns on a calendar: moving down, up and along the diagonals | `MATH.algebra.number-patterns` | 300 | 0 | 40/131/129 | `145ead77` |
 | aaways: Another way to make the same amount | `MATH.measurement.money-totals` | 195 | 0 | 46/54/95 | `4d4351f3` |
 | aabund: Counting a collection by making groups of ten | `MATH.number.place-value-tens` | 300 | 0 | 86/86/128 | `f9109202` |
-| aaname: The number name of a two-digit number | `MATH.number.place-value-tens` | 90 | 0 | 9/72/9 | `e47fb1a6` |
+| aaname: The number name of a two-digit number | `MATH.number.place-value-tens` | 90 | 0 | 9/72/9 | `7d2355fa` |
 | aaspan: Comparing lengths measured in hand spans, clips or sticks | `MATH.measurement.non-standard-units` | 300 | 0 | 138/12/150 | `432e9454` |
 | aaweave: Weaving patterns: over and under as an ordered sequence | `MATH.algebra.repeating-patterns` | 300 | 0 | 68/131/101 | `7d9effac` |
 | aamul01: Multiplying by 1 and by 0 | `MATH.number.zero` | 300 | 0 | 9/191/100 | `08a8f4c8` |
@@ -693,7 +693,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | afletter: Writing a number rule with a letter | `MATH.algebra.expressions-intro` | 132 | 0 | 22/11/99 | `cfbb6f7a` |
 | afmatch: Writing the rule of a growing pattern with a letter | `MATH.algebra.expressions-intro` | 90 | 0 | 15/30/45 | `d9ff5775` |
 | affig: Continuing square, triangular and other number patterns | `MATH.algebra.figurate-numbers` | 98 | 0 | 16/68/14 | `ab6d33ee` |
-| affigrel: Links between square, odd and triangular numbers | `MATH.algebra.figurate-numbers` | 94 | 0 | 6/46/42 | `f357f46a` |
+| affigrel: Links between square, odd and triangular numbers | `MATH.algebra.figurate-numbers` | 94 | 0 | 6/46/42 | `c0ad1fda` |
 | afprot: Reading an angle from a protractor | `MATH.geometry.angle-measure` | 300 | 0 | 34/180/86 | `36616e70` |
 | afpair: Missing angle in a complementary or supplementary pair | `MATH.geometry.angle-pairs` | 220 | 0 | 24/22/174 | `a258c1a7` |
 | afcross: Angles where two straight lines cross | `MATH.geometry.angle-pairs` | 300 | 0 | 107/92/101 | `a97ddf02` |
@@ -727,11 +727,11 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aglcm: The lowest common multiple of two numbers | `MATH.number.hcf-lcm` | 253 | 0 | 36/134/83 | `848d7188` |
 | aghcf3: The highest common factor of three numbers | `MATH.number.hcf-lcm` | 400 | 0 | 40/193/167 | `71221d81` |
 | agimp: Writing a mixed number as an improper fraction | `MATH.number.mixed-fractions` | 279 | 0 | 27/152/100 | `72d02d29` |
-| agmix: Writing an improper fraction as a mixed number | `MATH.number.mixed-fractions` | 279 | 0 | 18/81/180 | `d00fc6e9` |
+| agmix: Writing an improper fraction as a mixed number | `MATH.number.mixed-fractions` | 279 | 0 | 18/81/180 | `c7cb71cb` |
 | agbod: Order of operations with brackets | `MATH.number.order-of-operations` | 600 | 0 | 86/429/85 | `ce3b4bd3` |
 | agpct: Writing a fraction or decimal as a percentage | `MATH.number.percent-intro` | 198 | 0 | 5/90/103 | `ef4dbef5` |
 | agpctd: Writing a percentage as a decimal | `MATH.number.percent-intro` | 149 | 0 | 9/90/50 | `fa70be4c` |
-| agprime: Listing the prime numbers in a range | `MATH.number.primes` | 400 | 0 | 42/135/223 | `dab46b7f` |
+| agprime: Listing the prime numbers in a range | `MATH.number.primes` | 400 | 0 | 42/135/223 | `2d0fe555` |
 | agcex: Finding a counterexample to a claim | `MATH.reasoning.counterexamples-intro` | 200 | 0 | 100/50/50 | `b73d1d31` |
 | agnl: Fractions greater than 1 on a number line | `MATH.number.mixed-fractions` | 103 | 0 | 12/68/23 | `3dc4853a` |
 | agcop: Which pair of numbers is co-prime? | `MATH.number.hcf-lcm` | 160 | 0 | 0/102/58 | `e35e094a` |
@@ -742,8 +742,8 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aghlw: Sharing, grouping and timing problems: HCF or LCM? | `MATH.number.hcf-lcm` | 400 | 0 | 22/266/112 | `ab5a0d6c` |
 | aghlp: Using HCF × LCM = product of the two numbers | `MATH.number.hcf-lcm` | 400 | 0 | 134/133/133 | `cc64e37d` |
 | agpfrac: Writing a percentage or a decimal as a fraction in its simplest form | `MATH.number.percentage` | 238 | 0 | 58/82/98 | `413950eb` |
-| agfdec: Writing a fraction as a decimal or a percentage | `MATH.number.percentage` | 300 | 0 | 12/144/144 | `4afb29b5` |
-| agptest: Testing for primes by dividing up to the square root | `MATH.number.primes` | 393 | 0 | 63/187/143 | `7dd27dd6` |
+| agfdec: Writing a fraction as a decimal or a percentage | `MATH.number.percentage` | 300 | 0 | 12/144/144 | `5f262d7d` |
+| agptest: Testing for primes by dividing up to the square root | `MATH.number.primes` | 393 | 0 | 63/187/143 | `1875528c` |
 | agediv: The steps of Euclid's division algorithm | `MATH.number.euclid-algorithm` | 400 | 0 | 32/190/178 | `13743ef2` |
 | agfta: HCF and LCM from prime factorisations | `MATH.number.euclid-algorithm` | 400 | 0 | 53/0/347 | `1e53463b` |
 | agclass: Proper fractions, improper fractions and mixed numbers | `MATH.number.mixed-fractions` | 191 | 0 | 45/135/11 | `ccc80e13` |
@@ -783,14 +783,14 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ahidn: Quick calculation with identities | `MATH.algebra.identities` | 120 | 0 | 40/40/40 | `ca5163a0` |
 | ahcube: Expanding (x ± a)³, (x + a)(x + b)(x + c) and (x + ay + b)² | `MATH.algebra.identities` | 400 | 0 | 18/229/153 | `709b2978` |
 | ahconv: Is the triangle right-angled? The converse of Pythagoras | `MATH.geometry.pythagoras` | 360 | 0 | 61/237/62 | `b551e03d` |
-| ahgen: Generating Pythagorean triples by a rule | `MATH.geometry.pythagoras` | 146 | 0 | 108/18/20 | `dcb63ac6` |
+| ahgen: Generating Pythagorean triples by a rule | `MATH.geometry.pythagoras` | 146 | 0 | 108/18/20 | `5dfbe9a6` |
 | ahvary: Direct proportion, inverse proportion or neither? | `MATH.algebra.inverse-proportion` | 120 | 0 | 60/30/30 | `32e3e486` |
 | ahman: Inverse proportion: workers and time, speed and time | `MATH.algebra.inverse-proportion` | 400 | 0 | 189/211/0 | `856a8549` |
 | ahcomp: Compound variation: workers, hours and days | `MATH.algebra.inverse-proportion` | 397 | 0 | 0/198/199 | `4a8ba6c3` |
 | ahcal: Patterns in calendar and number-grid squares | `MATH.algebra.generalise-with-expressions` | 366 | 0 | 104/79/183 | `3bf6c96e` |
 | ahmap: Using a coordinate grid for a floor plan | `MATH.coordinate.cartesian` | 400 | 0 | 4/130/266 | `df11c823` |
 | ahexp: From an explicit rule to its terms and its recursive rule | `MATH.sequences.explicit-recursive-rules` | 504 | 0 | 144/324/36 | `40a3ea69` |
-| ahzk: Finding an unknown coefficient from a condition on the zeros | `MATH.algebra.polynomial-zeros` | 400 | 0 | 100/133/167 | `29bb8acf` |
+| ahzk: Finding an unknown coefficient from a condition on the zeros | `MATH.algebra.polynomial-zeros` | 400 | 0 | 100/133/167 | `2a83606f` |
 | ahpsq: Is it a perfect square? Last digits of squares | `MATH.number.square-roots` | 131 | 0 | 81/21/29 | `c1b2e3a1` |
 | ahsqd: The square root of a non-square, to one decimal place | `MATH.number.square-roots` | 186 | 0 | 42/67/77 | `492170f5` |
 | aipolymiss: The missing angle of a polygon | `MATH.geometry.polygon-angles` | 203 | 0 | 56/51/96 | `259ddc42` |
@@ -839,7 +839,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aiwiper: Areas of wipers, tile designs and lighthouse beams | `MATH.measurement.sectors` | 177 | 0 | 20/6/151 | `f97bb81a` |
 | aihollow: Surface area and volume of a hollow cylinder (a pipe) | `MATH.measurement.cylinder` | 400 | 0 | 134/133/133 | `c53f65fc` |
 | airad: Finding the radius or diameter from the circumference | `MATH.measurement.circle-area` | 130 | 0 | 40/20/70 | `a2029733` |
-| aidword: Word problems with dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 287/71/42 | `172b3fcf` |
+| aidword: Word problems with dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 287/71/42 | `44b698e3` |
 | ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `1c3da191` |
 | ajd99: Multiplying by a number near 100 using the distributive property | `MATH.number.operation-properties` | 352 | 0 | 76/100/176 | `930d53c6` |
 | ajbrk: Removing brackets after a minus sign | `MATH.number.operation-properties` | 400 | 0 | 193/207/0 | `f03d9a4e` |
@@ -872,13 +872,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ajcrcmp: The greatest of four numbers in lakhs and crores | `MATH.number.indian-international-numeration` | 400 | 0 | 136/264/0 | `711ad420` |
 | ajcmpx: Comparing two expressions without working them out | `MATH.number.operation-properties` | 500 | 0 | 146/136/218 | `6d3f5fe6` |
 | ajprop: Naming the property: closure, commutative, associative, distributive, identity and inverse | `MATH.number.operation-properties` | 500 | 0 | 134/265/101 | `6a82af79` |
-| ajinv: Inverses of rational numbers and the distributive property | `MATH.number.rational-numbers` | 400 | 0 | 92/92/216 | `ddd9dffc` |
+| ajinv: Inverses of rational numbers and the distributive property | `MATH.number.rational-numbers` | 400 | 0 | 92/92/216 | `61420fa2` |
 | ajtaxi: Numbers that are sums of two cubes in two ways | `MATH.number.cubes` | 135 | 0 | 27/24/84 | `84758761` |
 | ajrcmp: Comparing two ratios, or deciding whether they are equivalent | `MATH.number.ratio` | 450 | 0 | 39/30/381 | `5d092338` |
 | ajfare: Total cost from a fixed rate per kilometre or metre | `MATH.number.unit-rate` | 400 | 0 | 31/254/115 | `dbe46f7d` |
 | ajplamt: Profit or loss in rupees, and a missing price | `MATH.number.profit-loss` | 450 | 0 | 81/219/150 | `6da0fb30` |
 | ajidiv: Dividing integers | `MATH.number.integer-multiply` | 400 | 0 | 118/211/71 | `b45f025f` |
-| ajrstd: A rational number in standard form | `MATH.number.rational-numbers` | 400 | 0 | 139/60/201 | `0a688f35` |
+| ajrstd: A rational number in standard form | `MATH.number.rational-numbers` | 400 | 0 | 139/60/201 | `f1bf718b` |
 | ajrcq: Comparing two rational numbers | `MATH.number.rational-numbers` | 450 | 0 | 35/244/171 | `02e8e4e5` |
 | ajrline: Rational numbers on the number line, and one halfway between two | `MATH.number.rational-numbers` | 450 | 0 | 76/101/273 | `7b81aea1` |
 | ajcip: Compound interest half-yearly or quarterly, and compared with simple interest | `MATH.number.compound-interest` | 400 | 0 | 0/389/11 | `6366c58e` |
@@ -935,13 +935,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | alpdiv: The quotient when a cubic is divided by x − r | `MATH.algebra.polynomials` | 400 | 0 | 2/286/112 | `6d7c6b76` |
 | alrem: The remainder theorem | `MATH.algebra.factor-theorem` | 400 | 0 | 70/199/131 | `c4cacb7c` |
 | alfack: Finding k so that x − r is a factor | `MATH.algebra.factor-theorem` | 300 | 0 | 77/152/71 | `b009864c` |
-| alcub: All the zeros of a cubic, by the factor theorem | `MATH.algebra.factor-theorem` | 165 | 0 | 81/28/56 | `8ce3c327` |
+| alcub: All the zeros of a cubic, by the factor theorem | `MATH.algebra.factor-theorem` | 165 | 0 | 81/28/56 | `698e21f5` |
 | alrule: The rule behind a table of values | `MATH.algebra.linear-two-variables` | 300 | 0 | 51/186/63 | `4babe891` |
 | alsol2: Completing a solution of ax + by = c | `MATH.algebra.linear-two-variables` | 300 | 0 | 112/158/30 | `16368620` |
 | algcd: GCD of two quadratics | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 18/114/168 | `0279c287` |
 | allcm: LCM of two quadratics | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 35/109/156 | `96e26ff8` |
 | alratl: A rational expression in lowest terms | `MATH.algebra.rational-expressions` | 300 | 0 | 18/116/166 | `37d1d000` |
-| alratx: Excluded values of a rational expression | `MATH.algebra.rational-expressions` | 300 | 0 | 57/137/106 | `ce353d5e` |
+| alratx: Excluded values of a rational expression | `MATH.algebra.rational-expressions` | 300 | 0 | 57/137/106 | `21a47b1d` |
 | alcomp: Evaluating a composite function | `MATH.algebra.function-operations` | 400 | 0 | 58/257/85 | `4776f8b2` |
 | alcompx: The composite of two linear functions | `MATH.algebra.function-operations` | 400 | 0 | 17/74/309 | `1c951f2b` |
 | alsys: Solving a pair of linear equations | `MATH.algebra.linear-systems` | 500 | 0 | 91/292/117 | `db913d6a` |
@@ -968,7 +968,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | alpdeg: Degree and coefficients of a polynomial | `MATH.algebra.polynomials` | 239 | 0 | 120/59/60 | `da2d0eb9` |
 | aladd: Adding and subtracting polynomials | `MATH.algebra.polynomials` | 300 | 0 | 44/106/150 | `408c1523` |
 | aleval: The value of a polynomial and the zero of a linear polynomial | `MATH.algebra.polynomials` | 202 | 0 | 6/151/45 | `91ff88bf` |
-| almono: Dividing a polynomial by a monomial | `MATH.algebra.polynomials` | 300 | 0 | 25/199/76 | `d6bb0f11` |
+| almono: Dividing a polynomial by a monomial | `MATH.algebra.polynomials` | 300 | 0 | 25/199/76 | `8b838339` |
 | alldiv: The division algorithm with a non-monic or quadratic divisor | `MATH.algebra.polynomials` | 400 | 0 | 0/194/206 | `e91557b2` |
 | alsplit: Splitting the middle term of ax² + bx + c | `MATH.algebra.factorisation` | 400 | 0 | 62/215/123 | `89a59a2a` |
 | algcd3: GCD of cubics, and of three polynomials | `MATH.algebra.polynomial-gcd-lcm` | 300 | 0 | 0/33/267 | `a3f3be7e` |
@@ -981,7 +981,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | almeth: Substitution, elimination and cross-multiplication: the key step | `MATH.algebra.linear-systems` | 450 | 0 | 85/183/182 | `d6ab346f` |
 | alkcase: The value of k for no solution or infinitely many | `MATH.algebra.linear-systems` | 300 | 0 | 100/104/96 | `38b8eaa8` |
 | alsysx: Pairs of linear equations from ages, digits, speeds and rectangles | `MATH.algebra.linear-systems` | 400 | 0 | 109/72/219 | `1a4e75be` |
-| alfop: Sum, difference, product and quotient of functions | `MATH.algebra.function-operations` | 400 | 0 | 160/80/160 | `621810fb` |
+| alfop: Sum, difference, product and quotient of functions | `MATH.algebra.function-operations` | 400 | 0 | 160/80/160 | `67c04d23` |
 | alsump: Sums of series whose general term is a polynomial in k | `MATH.sequences.power-sums` | 300 | 0 | 80/156/64 | `3cb9c1db` |
 | alcvoc: Parts of a circle and its symmetry | `MATH.geometry.circle-theorems` | 400 | 0 | 165/160/75 | `6f4da6c0` |
 | alnear: Chords and their distances from the centre: which is longer, which is nearer | `MATH.geometry.circle-theorems` | 300 | 0 | 145/119/36 | `38f81621` |
@@ -1043,7 +1043,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | anweek: Day of the week after d days (modulo 7) | `MATH.number.modular-arithmetic` | 300 | 0 | 15/151/134 | `62085423` |
 | anbag: Probability of a colour drawn from a bag | `MATH.probability.classical` | 400 | 0 | 36/174/190 | `84d2abea` |
 | ancardn: Probability with numbered cards | `MATH.probability.classical` | 400 | 0 | 44/334/22 | `249755b6` |
-| andice: Probability with two dice | `MATH.probability.classical` | 98 | 0 | 17/70/11 | `fbd3e1ce` |
+| andice: Probability with two dice | `MATH.probability.classical` | 98 | 0 | 17/70/11 | `cebf993a` |
 | antree: Two counters drawn one after the other | `MATH.probability.tree-diagrams` | 400 | 0 | 53/143/204 | `ca9d0ef8` |
 | ancomp: Complementary and exhaustive events | `MATH.probability.complements` | 300 | 0 | 30/197/73 | `deb229ea` |
 | anunion: The addition rule P(A or B) | `MATH.probability.complements` | 300 | 0 | 19/142/139 | `08643907` |
@@ -1054,7 +1054,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | anpair: Modelling with a pair of linear equations | `MATH.reasoning.model-selection` | 400 | 0 | 139/129/132 | `5faa1788` |
 | anquad: Modelling with a quadratic and rejecting the impossible root | `MATH.reasoning.model-selection` | 300 | 0 | 103/92/105 | `97af0633` |
 | anfreq: Counting a class of a grouped frequency table from raw data | `MATH.statistics.grouped-data` | 300 | 0 | 60/64/176 | `f512d3b4` |
-| anumean: Mean of an ungrouped frequency distribution | `MATH.statistics.grouped-data` | 300 | 0 | 12/197/91 | `1f27ea68` |
+| anumean: Mean of an ungrouped frequency distribution | `MATH.statistics.grouped-data` | 300 | 0 | 12/197/91 | `299cada2` |
 | anstack: Absolute numbers versus proportions in bar charts | `MATH.statistics.stacked-bar-charts` | 300 | 0 | 85/213/2 | `d7023048` |
 | anpct: The percentage of a part in a 100% stacked bar | `MATH.statistics.stacked-bar-charts` | 300 | 0 | 70/156/74 | `9e56a97c` |
 | anwmean: The combined mean of two groups | `MATH.statistics.weighted-mean` | 300 | 0 | 112/72/116 | `d4581f86` |
@@ -1064,7 +1064,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | angmode: Mode of grouped data | `MATH.statistics.grouped-mean` | 300 | 0 | 100/114/86 | `ae4e5f7c` |
 | anheight: Heights and distances with one right triangle | `MATH.trigonometry.heights-distances` | 180 | 0 | 60/40/80 | `57c7e633` |
 | antwo: Heights and distances with two observation points | `MATH.trigonometry.heights-distances` | 234 | 0 | 39/39/156 | `0dcbb115` |
-| ansecpt: Using sec²θ − tan²θ = 1 when sec θ + tan θ is known | `MATH.trigonometry.identities` | 216 | 0 | 54/108/54 | `3509e2e5` |
+| ansecpt: Using sec²θ − tan²θ = 1 when sec θ + tan θ is known | `MATH.trigonometry.identities` | 216 | 0 | 54/108/54 | `4312adbb` |
 | anidsimp: Simplifying with the trigonometric identities | `MATH.trigonometry.identities` | 96 | 0 | 30/48/18 | `8ea9931e` |
 | anstd: Evaluating expressions with standard angles | `MATH.trigonometry.ratios` | 400 | 0 | 85/158/157 | `09e85f91` |
 | anratio: Finding the other trigonometric ratios from one | `MATH.trigonometry.ratios` | 400 | 0 | 24/232/144 | `fe4a0391` |
@@ -1087,20 +1087,20 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aorange: The range of a quadratic function | `MATH.algebra.functions` | 300 | 0 | 50/113/137 | `32a5d7d3` |
 | aofclass: Is a quadratic on a restricted domain one-one, onto, both or neither? | `MATH.algebra.functions` | 300 | 0 | 19/170/111 | `636a5013` |
 | aotrans: A point on a transformed graph | `MATH.algebra.function-transformations` | 300 | 0 | 19/134/147 | `a0b1c2ab` |
-| aostd: Evaluating the greatest integer function | `MATH.algebra.standard-function-graphs` | 300 | 0 | 0/206/94 | `9978bfe7` |
+| aostd: Evaluating the greatest integer function | `MATH.algebra.standard-function-graphs` | 300 | 0 | 0/206/94 | `94c6e375` |
 | aocorner: The corner point of a feasible region off the axes | `MATH.algebra.inequalities-two-variables` | 300 | 0 | 0/227/73 | `f86ec368` |
 | aoabseq: Solving |ax + b| = c | `MATH.algebra.absolute-value` | 300 | 0 | 50/94/156 | `a8003ec4` |
 | aoabsin: Solving |ax + b| < c, ≤ c, > c, ≥ c | `MATH.algebra.absolute-value` | 400 | 0 | 36/171/193 | `64c6b2a8` |
 | aoqin: Solving a quadratic inequality | `MATH.algebra.nonlinear-inequalities` | 400 | 0 | 60/150/190 | `6b945e83` |
 | aorat: Solving a rational inequality (x − a)/(x − b) compared with 0 | `MATH.algebra.nonlinear-inequalities` | 300 | 0 | 0/148/152 | `ea981aac` |
 | aopf: Partial fractions with two distinct linear factors | `MATH.algebra.partial-fractions` | 400 | 0 | 32/242/126 | `a53604c2` |
-| aopfq: Partial fractions with a linear and an irreducible quadratic factor | `MATH.algebra.partial-fractions` | 300 | 0 | 0/72/228 | `d9bf12b4` |
+| aopfq: Partial fractions with a linear and an irreducible quadratic factor | `MATH.algebra.partial-fractions` | 300 | 0 | 0/72/228 | `ffc79464` |
 | aofund: The multiplication and addition principles of counting | `MATH.algebra.permutations` | 604 | 0 | 464/40/100 | `bb868fc3` |
 | aonpr: Permutations of r out of n distinct objects | `MATH.algebra.permutations` | 110 | 0 | 28/28/54 | `9fd6ed4c` |
 | aoncr: Combinations: choosing r out of n | `MATH.algebra.permutations` | 153 | 0 | 33/28/92 | `ab92ef28` |
 | aocomm: Selections with a condition: exactly k from one group | `MATH.algebra.permutations` | 300 | 0 | 61/138/101 | `3a15d156` |
 | aomulti: Arrangements when some objects are identical | `MATH.algebra.permutations` | 111 | 0 | 22/33/56 | `ac7655ab` |
-| aobinco: A coefficient in the expansion of (ax + b)ⁿ | `MATH.algebra.binomial` | 400 | 0 | 35/112/253 | `f8cef041` |
+| aobinco: A coefficient in the expansion of (ax + b)ⁿ | `MATH.algebra.binomial` | 400 | 0 | 35/112/253 | `7646a40f` |
 | aobinexp: Expanding (ax + b)ⁿ | `MATH.algebra.binomial` | 116 | 0 | 10/70/36 | `2c97788c` |
 | aobinind: The term independent of x in (xᵖ ± k/x^q)ⁿ | `MATH.algebra.binomial` | 216 | 0 | 18/114/84 | `fef5edfa` |
 | aogp: The nth term of a geometric progression | `MATH.algebra.geometric-sequences` | 300 | 0 | 32/124/144 | `c3ee73a6` |
@@ -1112,17 +1112,17 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aolog: Evaluating a logarithm by writing both numbers as powers of one base | `MATH.algebra.logarithms` | 212 | 0 | 20/77/115 | `f126d18a` |
 | aologeq: Solving log x + log(x ± c) = k | `MATH.algebra.logarithms` | 268 | 0 | 34/46/188 | `5f836628` |
 | aocq: Solving a quadratic with negative discriminant over ℂ | `MATH.algebra.quadratic-complex` | 300 | 0 | 52/48/200 | `67625471` |
-| aoconj: A real quadratic from one complex root | `MATH.algebra.quadratic-complex` | 234 | 0 | 42/36/156 | `ea89e753` |
+| aoconj: A real quadratic from one complex root | `MATH.algebra.quadratic-complex` | 234 | 0 | 42/36/156 | `5b3349b9` |
 | aosetform: Converting between roster, set-builder and descriptive forms | `MATH.algebra.sets` | 255 | 0 | 85/136/34 | `c1f323df` |
 | aosetcl: Empty, singleton, finite, infinite, equal, equivalent and disjoint sets, subsets and power sets | `MATH.algebra.sets` | 438 | 0 | 36/384/18 | `217e7597` |
 | aosetlaw: Verifying the associative property of union and intersection | `MATH.algebra.sets` | 530 | 0 | 336/194/0 | `443af2f4` |
-| aoven3: Counting with three overlapping sets in a survey | `MATH.algebra.sets` | 400 | 0 | 0/76/324 | `b61a06db` |
+| aoven3: Counting with three overlapping sets in a survey | `MATH.algebra.sets` | 400 | 0 | 0/76/324 | `ec5bd9cf` |
 | aosamp: Sample spaces and events in set notation | `MATH.algebra.sets` | 87 | 0 | 2/44/41 | `bcbd5ddd` |
 | aoisfn: Deciding whether a relation is a function | `MATH.algebra.functions` | 190 | 0 | 20/100/70 | `6a549520` |
 | aofname: Naming a function: one-one or many-one, onto or into, identity or constant | `MATH.algebra.functions` | 161 | 0 | 21/69/71 | `a19fcbb0` |
 | aograph: Recognising the graph of a standard function | `MATH.algebra.standard-function-graphs` | 96 | 0 | 12/51/33 | `ffcca24f` |
 | aofact: Evaluating and simplifying expressions with factorials | `MATH.algebra.permutations` | 100 | 0 | 36/44/20 | `0bc4d494` |
-| aoncrp: Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule | `MATH.algebra.permutations` | 231 | 0 | 114/77/40 | `9c98bb26` |
+| aoncrp: Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule | `MATH.algebra.permutations` | 231 | 0 | 114/77/40 | `afb7ea42` |
 | aogeoc: Counting diagonals, triangles and lines with combinations | `MATH.algebra.permutations` | 137 | 0 | 29/54/54 | `8b63488a` |
 | aomix: Deciding whether order matters, and combining selection with arrangement | `MATH.algebra.permutations` | 95 | 0 | 0/55/40 | `c5268c72` |
 | aoarr: Arrangements with repetition, restrictions, around a circle, and the rank of a word | `MATH.algebra.permutations` | 91 | 0 | 38/24/29 | `2e546fef` |
@@ -1131,13 +1131,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aobinmid: The middle term or terms of (ax + b)ⁿ | `MATH.algebra.binomial` | 162 | 0 | 27/45/90 | `a35bd622` |
 | aogpid: Identifying a geometric progression | `MATH.algebra.geometric-sequences` | 144 | 0 | 36/36/72 | `6cd99a96` |
 | aogpgr: Growth, depreciation and compound interest with geometric progressions | `MATH.algebra.geometric-sequences` | 228 | 0 | 24/140/64 | `7fb261f4` |
-| aogpuse: Using the sum to infinity: recurring decimals, a bouncing ball, nested shapes | `MATH.algebra.geometric-sequences` | 569 | 0 | 27/348/194 | `22044b2f` |
+| aogpuse: Using the sum to infinity: recurring decimals, a bouncing ball, nested shapes | `MATH.algebra.geometric-sequences` | 569 | 0 | 27/348/194 | `905961a4` |
 | aogpcv: Does a geometric series converge, and to what? | `MATH.algebra.geometric-sequences` | 630 | 0 | 162/162/306 | `e01f46ff` |
 | aodk: Finding a parameter for which a quadratic has equal roots | `MATH.algebra.quadratic-discriminant` | 321 | 0 | 92/229/0 | `c77785d3` |
 | aodkr: Values of a parameter for real or no real roots | `MATH.algebra.quadratic-discriminant` | 190 | 0 | 72/72/46 | `9825d1a8` |
-| aoexpeq: Solving simple exponential equations by writing powers of one base | `MATH.algebra.logarithms` | 400 | 0 | 68/81/251 | `7e74d9e6` |
-| aochb: Change of base: products and sums of logarithms | `MATH.algebra.logarithms` | 192 | 0 | 0/156/36 | `17cb8699` |
-| aopfint: Integrating by partial fractions or by decomposition | `MATH.algebra.partial-fractions` | 400 | 0 | 80/80/240 | `dff0a6e2` |
+| aoexpeq: Solving simple exponential equations by writing powers of one base | `MATH.algebra.logarithms` | 400 | 0 | 68/81/251 | `225c21ed` |
+| aochb: Change of base: products and sums of logarithms | `MATH.algebra.logarithms` | 192 | 0 | 0/156/36 | `2b74f1c9` |
+| aopfint: Integrating by partial fractions or by decomposition | `MATH.algebra.partial-fractions` | 400 | 0 | 80/80/240 | `1eab57be` |
 | aonlread: Reading an interval from its number-line picture | `MATH.algebra.sets` | 480 | 0 | 48/144/288 | `165defca` |
 | apins: Inserting arithmetic means between two numbers | `MATH.sequences.am-gm-relation` | 400 | 0 | 40/202/158 | `29041bc9` |
 | apgms: Inserting geometric means between two numbers | `MATH.sequences.am-gm-relation` | 134 | 0 | 18/49/67 | `739a094d` |
@@ -1152,7 +1152,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | apcartset: Reading the sets from a Cartesian product | `MATH.sets-relations.cartesian-product` | 300 | 0 | 29/199/72 | `b9eb7118` |
 | apintop: Intersection, union and difference of intervals | `MATH.sets-relations.real-intervals` | 400 | 0 | 96/153/151 | `bb31a342` |
 | apineq: Solving a double linear inequality | `MATH.sets-relations.real-intervals` | 400 | 0 | 34/166/200 | `c7bc1b44` |
-| apintch: Matching a set of real numbers with its interval notation | `MATH.sets-relations.real-intervals` | 300 | 0 | 17/128/155 | `87120b4b` |
+| apintch: Matching a set of real numbers with its interval notation | `MATH.sets-relations.real-intervals` | 300 | 0 | 17/128/155 | `3ff5e196` |
 | apinvf: The inverse of a linear or fractional linear function | `MATH.algebra.inverse-functions` | 400 | 0 | 5/5/390 | `9d99cbc1` |
 | apinvv: A value of an inverse function | `MATH.algebra.inverse-functions` | 300 | 0 | 34/31/235 | `115a8af4` |
 | aplpmax: Maximising by the corner-point method | `MATH.algebra.linear-programming` | 400 | 0 | 0/165/235 | `6c59e58d` |
@@ -1170,7 +1170,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | apdesc: Descartes' rule of signs | `MATH.algebra.polynomial-root-analysis` | 486 | 0 | 32/130/324 | `4b4cffc3` |
 | apvsum: Symmetric functions of the roots of a cubic | `MATH.algebra.vieta-relations` | 400 | 0 | 44/90/266 | `11638169` |
 | apvform: Forming a quadratic with transformed roots | `MATH.algebra.vieta-relations` | 400 | 0 | 124/235/41 | `79b03c87` |
-| apinv2: The inverse of a 2 × 2 matrix | `MATH.matrices.adjoint-inverse` | 400 | 0 | 16/127/257 | `2e25c4fa` |
+| apinv2: The inverse of a 2 × 2 matrix | `MATH.matrices.adjoint-inverse` | 400 | 0 | 16/127/257 | `7831ec3c` |
 | apadj3: The adjoint of a 3 × 3 matrix | `MATH.matrices.adjoint-inverse` | 300 | 0 | 0/127/173 | `73a9abe5` |
 | aprank: The rank of a 3 × 4 matrix | `MATH.matrices.rank-row-reduction` | 300 | 0 | 100/100/100 | `a8a326e8` |
 | apcartl: Writing out the ordered pairs (or triples) of a Cartesian product | `MATH.sets-relations.cartesian-product` | 120 | 0 | 40/60/20 | `0a8b5d8e` |
@@ -1196,7 +1196,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aqtrab: The transpose of a product of 2 × 2 matrices | `MATH.matrices.transpose-symmetry` | 400 | 0 | 12/127/261 | `8308ea4f` |
 | aqbinid: The identity element and inverses for a binary operation | `MATH.sets-relations.binary-operations` | 300 | 0 | 12/152/136 | `569d7502` |
 | aqbinp: Is a binary operation commutative, associative, both or neither? | `MATH.sets-relations.binary-operations` | 147 | 0 | 62/46/39 | `248591d9` |
-| aqonto: Classifying a function as one-one, onto or bijective | `MATH.sets-relations.function-types` | 277 | 0 | 84/102/91 | `11ee68b4` |
+| aqonto: Classifying a function as one-one, onto or bijective | `MATH.sets-relations.function-types` | 277 | 0 | 84/102/91 | `ecef21ba` |
 | aqrel: Testing a relation for reflexivity, symmetry and transitivity | `MATH.sets-relations.relation-properties` | 400 | 0 | 174/114/112 | `c2bf1c25` |
 | aqeqcl: The fewest pairs that make a relation an equivalence relation | `MATH.sets-relations.relation-properties` | 400 | 0 | 0/23/377 | `cf781495` |
 | aqfp: The derivative from first principles | `MATH.calculus.derivatives` | 300 | 0 | 164/92/44 | `51fa1518` |
@@ -1208,7 +1208,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aqarea: Areas bounded by a parabola, a cubic or a quadratic and the axis | `MATH.calculus.area-integrals` | 121 | 0 | 0/100/21 | `0c691961` |
 | aqcontk: Choosing k to make a function continuous | `MATH.calculus.continuity` | 243 | 0 | 159/36/48 | `88af29a0` |
 | aqconc: Intervals of concavity of a cubic or quartic | `MATH.calculus.curve-sketching` | 400 | 0 | 110/66/224 | `052ca5d9` |
-| aqodd: Definite integrals over [−a, a] using odd and even functions | `MATH.calculus.definite-integral-properties` | 300 | 0 | 33/182/85 | `e1d6674b` |
+| aqodd: Definite integrals over [−a, a] using odd and even functions | `MATH.calculus.definite-integral-properties` | 300 | 0 | 33/182/85 | `f59d7a82` |
 | aqking: Definite integrals with the property ∫ f(x) dx = ∫ f(a + b − x) dx | `MATH.calculus.definite-integral-properties` | 300 | 0 | 8/232/60 | `73814a84` |
 | aqabsint: Splitting the interval: |x − c| and the greatest integer function | `MATH.calculus.definite-integral-properties` | 193 | 0 | 31/129/33 | `5186a139` |
 | aqdiffab: Choosing a and b to make a piecewise function differentiable | `MATH.calculus.differentiability` | 300 | 0 | 0/150/150 | `56e8cd9e` |
@@ -1249,17 +1249,17 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | arvolrev: Volume of a solid of revolution | `MATH.calculus.volumes-of-revolution` | 109 | 0 | 20/57/32 | `c0bedc0e` |
 | argamma: Improper integrals and the gamma integral | `MATH.calculus.improper-gamma-integrals` | 100 | 0 | 24/12/64 | `5767fb0f` |
 | arcircle: Centre and radius of a circle from its general equation | `MATH.coordinate.conics` | 400 | 0 | 16/118/266 | `055fc23b` |
-| arparabola: The focus of a parabola | `MATH.coordinate.conics` | 300 | 0 | 1/5/294 | `9fda1624` |
+| arparabola: The focus of a parabola | `MATH.coordinate.conics` | 300 | 0 | 1/5/294 | `14035c72` |
 | areccentric: Eccentricity of an ellipse or a hyperbola | `MATH.coordinate.conics` | 131 | 0 | 15/51/65 | `5ada0d20` |
 | arconicarea: Areas bounded by a parabola or an ellipse | `MATH.coordinate.conics` | 126 | 0 | 30/48/48 | `76997582` |
-| arconicid: Which conic does an equation represent? | `MATH.coordinate.conics` | 300 | 0 | 6/150/144 | `a171cb4a` |
+| arconicid: Which conic does an equation represent? | `MATH.coordinate.conics` | 300 | 0 | 6/150/144 | `279b05ec` |
 | arcone: Conic sections as sections of a double cone | `MATH.coordinate.conics` | 300 | 0 | 8/143/149 | `a699d4b0` |
 | arcirceq: The equation of a circle from given conditions | `MATH.coordinate.conics` | 400 | 0 | 100/200/100 | `03b3893d` |
 | arcircpos: Is a point inside, on or outside a circle? | `MATH.coordinate.conics` | 300 | 0 | 188/21/91 | `0b70eb55` |
 | arconprop: Latus rectum, directrix, foci and axes of a parabola, ellipse or hyperbola | `MATH.coordinate.conics` | 400 | 0 | 54/108/238 | `c3ff1d43` |
 | arconeq: The equation of an ellipse or a hyperbola from given data | `MATH.coordinate.conics` | 192 | 0 | 48/96/48 | `c08a277f` |
-| arparaeq: The equation of a parabola from its focus, directrix, a point or its latus rectum | `MATH.coordinate.conics` | 432 | 0 | 48/288/96 | `1ce8487c` |
-| arconapp: Conics in real life: arches, reflectors, cables and orbits | `MATH.coordinate.conics` | 400 | 0 | 169/63/168 | `5aa517c0` |
+| arparaeq: The equation of a parabola from its focus, directrix, a point or its latus rectum | `MATH.coordinate.conics` | 432 | 0 | 48/288/96 | `350c5ec0` |
+| arconapp: Conics in real life: arches, reflectors, cables and orbits | `MATH.coordinate.conics` | 400 | 0 | 169/63/168 | `75318030` |
 | arxyconic: Which conic does a general second-degree equation with an xy term represent? | `MATH.coordinate.conics` | 300 | 0 | 0/200/100 | `7c270b6a` |
 | arrolle: The point c in Rolle's theorem | `MATH.calculus.mean-value-theorems` | 289 | 0 | 33/80/176 | `6ea868e8` |
 | artaylor: A coefficient in the Taylor series about a point a | `MATH.calculus.taylor-series` | 115 | 0 | 44/26/45 | `04b85ba5` |
@@ -1297,9 +1297,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ascpow: Powers of i | `MATH.number.complex` | 256 | 0 | 36/160/60 | `8fe9472f` |
 | ascsqrt: The square root of a complex number | `MATH.number.complex` | 128 | 0 | 20/52/56 | `2c7d7677` |
 | asarg: The principal argument of a complex number | `MATH.number.complex-polar-form` | 135 | 0 | 36/18/81 | `1a6a6fb2` |
-| aspolm: Multiplying and dividing in polar form | `MATH.number.complex-polar-form` | 242 | 0 | 85/86/71 | `8268c94e` |
+| aspolm: Multiplying and dividing in polar form | `MATH.number.complex-polar-form` | 242 | 0 | 85/86/71 | `2b080d0c` |
 | ascloc: The circle described by a condition on |z| | `MATH.number.complex-locus` | 400 | 0 | 28/172/200 | `f1954e79` |
-| asdemo: Powers of a complex number by de Moivre's theorem | `MATH.number.de-moivre-roots` | 110 | 0 | 20/30/60 | `7cabb725` |
+| asdemo: Powers of a complex number by de Moivre's theorem | `MATH.number.de-moivre-roots` | 110 | 0 | 20/30/60 | `4c45591b` |
 | asroot: The nth roots of a complex number | `MATH.number.de-moivre-roots` | 120 | 0 | 9/42/69 | `098d5d45` |
 | asaddp: The addition rule for two events | `MATH.probability.events` | 400 | 0 | 17/195/188 | `10a997fe` |
 | asmex: Mutually exclusive and exhaustive events | `MATH.probability.events` | 320 | 0 | 80/160/80 | `eeb9aa3d` |
@@ -1337,7 +1337,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | atrows: True rows of a truth table | `MATH.reasoning.propositional-logic` | 400 | 0 | 106/195/99 | `ecbc1cad` |
 | atclass: Tautology, contradiction or contingency | `MATH.reasoning.propositional-logic` | 300 | 0 | 54/103/143 | `0c31a6fa` |
 | atvar: Variance of a frequency distribution | `MATH.statistics.dispersion` | 400 | 0 | 18/220/162 | `18321df5` |
-| atsd: Standard deviation of raw data (exact) | `MATH.statistics.dispersion` | 400 | 0 | 63/0/337 | `0f45a10a` |
+| atsd: Standard deviation of raw data (exact) | `MATH.statistics.dispersion` | 400 | 0 | 63/0/337 | `763d3f64` |
 | atcv: Comparing consistency by the coefficient of variation | `MATH.statistics.dispersion` | 300 | 0 | 0/132/168 | `552261f6` |
 | atmdmean: Mean deviation about the mean | `MATH.statistics.mean-deviation` | 400 | 0 | 52/348/0 | `13ec57cc` |
 | atmdmed: Mean deviation about the median | `MATH.statistics.mean-deviation` | 400 | 0 | 1/17/382 | `ffdeac57` |
@@ -1428,7 +1428,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | auform: Integrals of the standard forms 1/(x² − a²), 1/(a² − x²), 1/√(x² ± a²), √(x² ± a²) and (px + q)/(x² + bx + c) | `MATH.calculus.integration-methods` | 400 | 0 | 30/156/214 | `648642d7` |
 | aupi: Definite integrals of 1/(x² + a²), 1/√(a² − x²) and √(a² − x²) | `MATH.calculus.integration-methods` | 225 | 0 | 54/108/63 | `42dcdb4d` |
 | aupfr: Integrating by partial fractions: repeated factors and improper fractions | `MATH.calculus.integration-methods` | 400 | 0 | 57/143/200 | `d1b92fbe` |
-| auparts: Integration by parts, Bernoulli's formula and ∫ eˣ[f(x) + f′(x)] dx | `MATH.calculus.integration-methods` | 220 | 0 | 40/140/40 | `78857092` |
+| auparts: Integration by parts, Bernoulli's formula and ∫ eˣ[f(x) + f′(x)] dx | `MATH.calculus.integration-methods` | 220 | 0 | 40/140/40 | `1bc2c2a6` |
 | ausbd: A definite integral by substitution: ∫ c t/√(t² + d²) dt | `MATH.calculus.integration-methods` | 96 | 0 | 12/60/24 | `997c420e` |
 | audfp: Definite integrals of polynomials by the fundamental theorem | `MATH.calculus.definite-integrals` | 400 | 0 | 27/147/226 | `d6e39315` |
 | aurie: A definite integral as the limit of a sum | `MATH.calculus.definite-integrals` | 159 | 0 | 24/126/9 | `948b73cb` |
@@ -1447,7 +1447,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avlow: Reducing a fraction to its lowest terms | `MATH.number.equivalent-fractions` | 360 | 0 | 22/158/180 | `58fca38b` |
 | avlike: Telling like fractions from unlike fractions | `MATH.number.equivalent-fractions` | 300 | 0 | 25/78/197 | `63f3decd` |
 | avfas: Adding and subtracting unlike and mixed fractions | `MATH.number.fraction-add` | 420 | 0 | 6/58/356 | `884ea8de` |
-| avfwq: Fraction word problems with whole numbers | `MATH.number.fraction-multiply` | 400 | 0 | 52/88/260 | `66a0a608` |
+| avfwq: Fraction word problems with whole numbers | `MATH.number.fraction-multiply` | 400 | 0 | 52/88/260 | `654d629e` |
 | avarea: A fraction product in an area model | `MATH.number.fraction-product` | 360 | 0 | 14/131/215 | `882661ad` |
 | avstatq: Statistical questions, other questions and statements | `MATH.statistics.statistical-questions` | 108 | 0 | 36/36/36 | `d49135dc` |
 | avexpn: Writing a repeated product in exponential form | `MATH.number.exponents` | 320 | 0 | 70/103/147 | `c6dcd3b5` |
@@ -1478,7 +1478,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aerot: Rotating a point about the origin | `MATH.geometry.transformations` | 456 | 0 | 168/72/216 | `a7c12d59` |
 | aetfig: A figure and its image: the transformation, and the symmetry it makes | `MATH.geometry.transformations` | 160 | 0 | 40/60/60 | `d94e0ef0` |
 | aipolyc: Faces, vertices and edges of prisms and pyramids | `MATH.geometry.polyhedra-euler` | 96 | 0 | 8/8/80 | `d84312a2` |
-| akhtab: Grouping data into class intervals | `MATH.statistics.histograms` | 322 | 0 | 0/193/129 | `46cb79b4` |
+| akhtab: Grouping data into class intervals | `MATH.statistics.histograms` | 322 | 0 | 0/193/129 | `080555f2` |
 | akromr: Reading a Roman numeral | `MATH.number.roman-numerals` | 400 | 0 | 10/133/257 | `32852f5d` |
 | akromw: Writing a number in Roman numerals | `MATH.number.roman-numerals` | 400 | 0 | 39/100/261 | `c45ea5c6` |
 | aesym3: Mirror cuts of a box (planes of symmetry) | `MATH.geometry.symmetry-3d` | 400 | 0 | 270/124/6 | `f4d14a59` |
@@ -1486,7 +1486,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | amf2510: Times tables: 2, 5 and 10 | `MATH.number.multiplication-tables` | 135 | 0 | 52/24/59 | `cfc94a6d` |
 | amf34: Times tables: 3 and 4 | `MATH.number.multiplication-tables` | 92 | 0 | 36/16/40 | `c446449a` |
 | amf69: Times tables: 6, 7, 8 and 9 | `MATH.number.multiplication-tables` | 160 | 0 | 64/16/80 | `69eadd2f` |
-| amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `2ab9da60` |
+| amderive: A new fact from one you know | `MATH.number.multiplication-tables` | 140 | 0 | 49/35/56 | `485c5cd0` |
 | aefword: Adding and subtracting fractions in everyday stories | `MATH.number.fraction-add` | 400 | 0 | 38/221/141 | `8179163e` |
 | aedfrl: Halves, quarters, fifths and tenths as decimals, with lengths and money | `MATH.number.decimal-tenths` | 440 | 0 | 200/24/216 | `04ed595e` |
 | aedlike: Like, unlike and equivalent decimals | `MATH.number.decimal-tenths` | 400 | 0 | 200/200/0 | `22f402ce` |
@@ -1563,7 +1563,7 @@ By grade (a competency spanning grades counts in each):
 | Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft, adford draft, adfnl draft, adfcmpu draft, adfordu draft). |
-| Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
+| Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd draft). |
 | Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
@@ -1587,7 +1587,7 @@ By grade (a competency spanning grades counts in each):
 | Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft, adford draft, adfnl draft, adfcmpu draft, adfordu draft). |
-| Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
+| Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd draft). |
 | Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
 | Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
@@ -1632,7 +1632,7 @@ By grade (a competency spanning grades counts in each):
 | Evaluate variable expressions (`MATH.algebra.variables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families linev draft, auvexp draft). |
 | Solve linear equations (`MATH.algebra.linear-equations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lin draft, lboth draft, lbrk draft, auleq draft, aulwp draft). |
 | Calculate percentages (`MATH.number.percentage`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families pct draft, agpfrac draft, agfdec draft, avpctof draft). |
-| Solve direct proportions (`MATH.number.proportion`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families prop submitted, avprop draft, avpmiss draft, avdirv draft). |
+| Solve direct proportions (`MATH.number.proportion`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families prop draft, avprop draft, avpmiss draft, avdirv draft). |
 
 ### Grade 8: OpenPath Sample Mathematics, Grade 8 (openpath-sample-mathematics-grade-8@1.1.0)
 
@@ -1700,7 +1700,7 @@ By grade (a competency spanning grades counts in each):
 | Identify domain range and functions (`MATH.algebra.functions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aodom draft, aorange draft, aofclass draft, aoisfn draft, aofname draft). |
 | Use straight-line equations (`MATH.coordinate.straight-lines`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families asline draft, asperpd draft, asparld draft, aslang draft, aspar draft, asslope draft, ascoll draft, aslineq draft, aslinpar draft, asgenf draft, asside draft, asfam draft). |
 | Solve linear inequalities (`MATH.algebra.inequalities`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lineq draft, aeineqs draft, aeineqw draft, aenbhd draft). |
-| Evaluate elementary limits (`MATH.calculus.limits`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lim submitted, aultab draft, aulpow draft, auspd draft, aulstd draft, auliinf draft). |
+| Evaluate elementary limits (`MATH.calculus.limits`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families lim draft, aultab draft, aulpow draft, auspd draft, aulstd draft, auliinf draft). |
 | Differentiate from first principles (`MATH.calculus.derivatives`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqfp draft, aqvel draft). |
 
 ### Grade 12: OpenPath Sample Mathematics, Grade 12 (openpath-sample-mathematics-grade-12@1.1.0)
@@ -1720,7 +1720,7 @@ By grade (a competency spanning grades counts in each):
 | Apply differentiation rules (`MATH.calculus.derivative-rules`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families dpow submitted, dprod draft, audsum draft, audquo draft, audch draft, audinv draft, audel draft). |
 | Find antiderivatives (`MATH.calculus.indefinite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families pint submitted, aqivp draft, austd draft, aulax draft, auinit draft, pow draft). |
 | Integrate by substitution and parts (`MATH.calculus.integration-methods`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families subst submitted, autrig draft, auform draft, aupi draft, aupfr draft, auparts draft, ausbd draft, auinvf draft, auprq draft, pow draft). |
-| Evaluate definite integrals (`MATH.calculus.definite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint submitted, audfp draft, aurie draft, audbe draft). |
+| Evaluate definite integrals (`MATH.calculus.definite-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families cint draft, audfp draft, aurie draft, audbe draft). |
 | Calculate areas using integration (`MATH.calculus.area-integrals`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aqarea draft, alp submitted, aqlarea draft, aqcarea draft). |
 | Calculate conditional probabilities (`MATH.probability.conditional`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families condp draft, avcond draft, avdraw draft). |
 | Apply Bayes theorem (`MATH.probability.bayes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families asbayes draft, astotp draft). |

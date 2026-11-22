@@ -2762,7 +2762,7 @@ B09.push(
       const { a, b, ans } = dwData(p);
       const A = num(ans);
       return [
-        B("point-slip", "procedural", DEC, "The decimal point was moved in only one of the numbers. Multiply the dividend and the divisor by the SAME power of 10 so the divisor becomes a whole number.", r2(A * 10) === A ? null : r4(A * 10)),
+        B("point-slip", "procedural", DEC, b.includes(".") ? "The decimal point was moved one place more in the dividend than in the divisor, so the answer came out 10 times too big. Move the point the SAME number of places in both numbers, just enough to make the divisor whole." : `The decimal point in the answer was put one place too far to the right, so the answer came out 10 times too big. ${b} is already whole: keep the answer's point straight above the point in ${a}.`, r2(A * 10) === A ? null : r4(A * 10)),
         B("point-slip-other", "procedural", DEC, "The answer's decimal point is one place out. Estimate first: the answer must be about " + `${Math.round(num(val(a)!))} ÷ ${Math.max(1, Math.round(num(val(b)!)))}.`, r4(A / 10)),
         B("multiplied", "conceptual", "MATH.reasoning.operation-choice", "The numbers were multiplied. Sharing or cutting into equal parts is a division.", r4(num(val(a)!) * num(val(b)!))),
       ];

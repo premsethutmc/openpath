@@ -1093,8 +1093,8 @@ const P2: Def[] = [
       s === 0
         ? keepBugs([
             { id: "multiply-both", kind: "conceptual", competency: FM, says: `Top and bottom were both multiplied by ${k}: that gives an equal fraction, not ${k} lots of it.`, predict: a / b },
-            { id: "multiply-bottom", kind: "procedural", competency: FM, says: `The bottom was multiplied; ${k} glasses of ${a}/${b} litre is ${k} × ${a} pieces of the same size.`, predict: a / (b * k) },
-            { id: "add-whole", kind: "conceptual", competency: FM, says: `${k} was added to the top; ${k} glasses means ${k} lots.`, predict: (a + k) / b },
+            { id: "multiply-bottom", kind: "procedural", competency: FM, says: `The bottom was multiplied; ${k} ${NICE_DEN.includes(b) ? "glasses" : "pieces"} of ${a}/${b} ${NICE_DEN.includes(b) ? "litre" : "m"} is ${k} × ${a} parts of size 1/${b}, so multiply the top: ${k * a}/${b}.`, predict: a / (b * k) },
+            { id: "add-whole", kind: "conceptual", competency: FM, says: `${k} was added to the top; ${k} ${NICE_DEN.includes(b) ? "glasses" : "pieces"} means ${k} lots of ${a}/${b}, so multiply the top by ${k}: ${k * a}/${b}.`, predict: (a + k) / b },
           ])
         : keepBugs([
             { id: "one-part-only", kind: "procedural", competency: FM, says: `Only 1/${b} of the class was found (${b * k} ÷ ${b}); ${a}/${b} is ${a} of those parts.`, predict: a > 1 ? k : null },

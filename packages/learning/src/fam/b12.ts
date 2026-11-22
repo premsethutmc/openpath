@@ -463,7 +463,7 @@ export const B12: Def[] = [
     // independent: substitute each answer into p(x)
     validate: (r, v) => Array.isArray(v) && v.length === 3 && new Set(v).size === 3 && v.every((x) => horner(cubicFrom(r), x) === 0),
     bugs: ([r1, r2, r3]) => [
-      B("bracket-signs", "procedural", FT, "The numbers in the brackets were taken as the zeros; x − 2 = 0 gives x = 2, so each sign flips.", [-r3, -r2, -r1]),
+      B("bracket-signs", "procedural", FT, `The numbers in the brackets were taken as the zeros; ${pl([1, -(r3 || r1)])} = 0 gives x = ${N(r3 || r1)}, so each sign flips.`, [-r3, -r2, -r1]),
       B("stop-at-one", "procedural", FAC, "Only the zero found by trial was given; after dividing, the quadratic quotient gives the other two.", null),
     ],
     variants: () => [],
@@ -728,7 +728,7 @@ export const B12: Def[] = [
     bugs: ([a, b, c]) => [
       B("after-cancel", "conceptual", RATX, `The value was found after cancelling; x = ${N(-a)} still makes the original denominator zero, so it is excluded too.`, [-c]),
       B("numerator", "conceptual", RATX, "The zeros of the numerator were given; the expression is undefined where the DENOMINATOR is zero.", [-a, -b]),
-      B("sign", "procedural", FAC, "The numbers in the brackets were given; x + 3 = 0 when x = −3.", [a, c]),
+      B("sign", "procedural", FAC, `The numbers in the brackets were given; ${pl([1, a])} = 0 when x = ${N(-a)} and ${pl([1, c])} = 0 when x = ${N(-c)}.`, [a, c]),
     ],
     variants: () => [],
     explain: (s) => (s.id === "bottom" ? `Denominator: ${s.inputs[0]} = ${s.value}` : `It is zero when x = ${(s.value as number[]).map(N).join(" or x = ")}`),
@@ -2134,7 +2134,7 @@ export const B12: Def[] = [
     },
     bugs: ([k, , a, b, c]) =>
       keepBugs([
-        B("first-term-only", "procedural", POLY, `Only the first term was divided by ${k}; every term of the polynomial is divided by the monomial.`, tup(a, k * b, k * c)),
+        B("first-term-only", "procedural", POLY, "Only the first term was divided by the monomial; the other terms were left as they were, but every term must be divided by it.", tup(a, k * b, k * c)),
         B("sign-lost", "procedural", INTADD, "A minus sign was lost when dividing; a negative term divided by a positive monomial stays negative.", b < 0 || c < 0 ? tup(a, Math.abs(b), Math.abs(c)) : null),
       ]),
     distractors: ([, , a, b, c]) => [tup(a, b, c + 1), tup(a, -b, c), tup(a + 1, b, c)],
@@ -2885,7 +2885,7 @@ export const B12: Def[] = [
       const w = (x: number | null) => (x === null || !Number.isFinite(x) || close(x, right) ? null : x);
       if (k === 4) return keepBugs([B("zero-of-f", "conceptual", FOP, "The zero of f was given; f/g is undefined where the DENOMINATOR g is zero.", w(-b / a)), B("sign", "procedural", LIN, `px + c = 0 gives x = −c/p; the sign of ${N(c)} was not changed.`, w(c / p))]);
       return keepBugs([
-        k === 0 ? B("multiplied", "conceptual", FOP, "f(t) and g(t) were multiplied; (f + g)(t) = f(t) + g(t).", w(f * g)) : k === 1 ? B("minus-first-term", "procedural", INTADD, "Only the x-term of g was subtracted; (f − g)(x) = f(x) − (px + c), so the constant is subtracted too.", w(f - p * t + c)) : k === 2 ? B("added", "conceptual", FOP, "f(t) and g(t) were added; (fg)(t) = f(t) × g(t).", w(f + g)) : B("upside-down", "procedural", FOP, "The fraction was turned upside down: (f/g)(t) = f(t) ÷ g(t).", f !== 0 ? w(g / f) : null),
+        k === 0 ? B("multiplied", "conceptual", FOP, "f(t) and g(t) were multiplied; (f + g)(t) = f(t) + g(t).", w(f * g)) : k === 1 ? B("minus-first-term", "procedural", INTADD, `When g was taken away, the sign of its constant ${N(c)} was not changed, so it was added instead of subtracted; (f − g)(x) = f(x) − g(x): take away the whole of g, its constant too.`, w(f - p * t + c)) : k === 2 ? B("added", "conceptual", FOP, "f(t) and g(t) were added; (fg)(t) = f(t) × g(t).", w(f + g)) : B("upside-down", "procedural", FOP, "The fraction was turned upside down: (f/g)(t) = f(t) ÷ g(t).", f !== 0 ? w(g / f) : null),
       ]);
     },
     distractors: ([k, a, b, p, c, t]) => {
