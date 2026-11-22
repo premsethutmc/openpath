@@ -43,7 +43,6 @@ def _load(name):
     return json.loads((ROOT / name).read_text())
 
 
-@lru_cache
 def _corrected(m, fixes):
     """screen-review@1: a module with its reviewed screen corrections applied, as content.ts applies them (withCorrections)
     and in the same key order, so the hash is the app's: a correction applies only while the screen says its original."""
@@ -60,6 +59,7 @@ def _corrected(m, fixes):
             'strategies': [{**s, 'screens': [fix(s['id'])(i, x) for i, x in enumerate(s['screens'])]} for s in m['strategies']]}
 
 
+@lru_cache
 def items():
     """Every reviewable item now: {item: {hash, version, kind, competency, families, title, author}}: question families,
     modules, and curriculum releases (their mappings)."""
