@@ -64,11 +64,11 @@ test("Word check: answer, say 'I don't know', get a sample score, and find it ke
     else await page.getByRole("button", { name: "I don't know this word" }).click();
     await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
   }
-  await page.getByRole("heading", { name: "9 of 15 meanings correct" }).waitFor();
+  await page.getByRole("heading", { name: "6 of 12 meanings correct" }).waitFor();
   await page.getByText("Suggested practice: Level 5 of 8.").waitFor();
   await shot(page, "2-result");
   await page.reload();
-  await page.getByText("Last time: 9 of 15 correct").waitFor();
+  await page.getByText("Last time: 6 of 12 correct").waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

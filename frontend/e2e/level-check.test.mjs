@@ -63,7 +63,7 @@ async function start(name) {
   return { context, page, errors, foreign, fits };
 }
 
-async function wordsPart(page, knowsUpTo) {
+async function wordsPart(page, knowsUpTo, luckyTwoOfThree = false) {
   let n = 0;
   for (; n < 13; n++) {
     await page.waitForFunction(() => ["words", "reading"].includes(document.querySelector("main")?.getAttribute("data-phase")));
@@ -71,7 +71,8 @@ async function wordsPart(page, knowsUpTo) {
     const word = await page.locator("#vocab-word").innerText();
     const k = WORD_KEY.get(word);
     assert.ok(k, `a word of the check: ${word}`);
-    if (k.band <= knowsUpTo) await page.locator(".options .option", { hasText: k.right }).first().click();
+    if (luckyTwoOfThree && n % 3 === 2) await page.locator(".options .option:not(.vocab-unknown)").filter({ hasNotText: k.right }).first().click();
+    else if (luckyTwoOfThree || k.band <= knowsUpTo) await page.locator(".options .option", { hasText: k.right }).first().click();
     else await page.getByRole("button", { name: "I don't know this word" }).click();
     await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
   }
@@ -218,7 +219,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("button", { name: "Find my level" }).click();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   await page.getByText("Part 1 of 5: Words").waitFor();
-  await wordsPart(page, 0);
+  assert.equal(await wordsPart(page, 0, true), 12);
   await page.getByText("Part 2 of 5: Reading").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByText("Part 3 of 5: Listening").waitFor();
@@ -229,6 +230,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
+  await page.locator('[data-part="words"]').getByText("8 of 12 meanings correct").waitFor();
   assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 4);
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();
