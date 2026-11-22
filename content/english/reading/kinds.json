@@ -6653,6 +6653,986 @@
           "explain": "An advert asks people to join or buy."
         }
       ]
+    },
+    {
+      "id": "kt1.poem6",
+      "level": 1,
+      "kind": "poem",
+      "title": "My Red Kite",
+      "text": "My red kite flies up so high,\nit dances in the big blue sky.\nIt pulls my string, it wants to go,\nbut I hold on and say, \"No, no!\"\n\nWhen the wind stops, it comes down slow,\nand sleeps beside me, red and low.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is the kite?",
+          "right": "red",
+          "wrong": [
+            "blue",
+            "green"
+          ],
+          "explain": "\"My red kite flies up so high.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where does the kite dance?",
+          "right": "in the big blue sky",
+          "wrong": [
+            "in the garden",
+            "on the roof"
+          ],
+          "explain": "\"It dances in the big blue sky.\""
+        },
+        {
+          "skill": "cause",
+          "prompt": "Why does the kite come down?",
+          "right": "the wind stops",
+          "wrong": [
+            "the string breaks",
+            "it starts to rain"
+          ],
+          "explain": "\"When the wind stops, it comes down slow.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does \"it wants to go\" mean?",
+          "right": "the kite pulls as if it wants to fly away",
+          "wrong": [
+            "the kite can really talk",
+            "the kite is going to school"
+          ],
+          "explain": "A kite cannot want things; the poem talks about it as if it were alive."
+        }
+      ]
+    },
+    {
+      "id": "kt1.notice5",
+      "level": 1,
+      "kind": "notice",
+      "title": "Lost Water Bottle",
+      "text": "LOST\n\nA blue water bottle\nwith a yellow cap.\nIt has the name RAJU on it.\n\nLost on Monday, near the swings.\n\nIf you find it, please give it to\nMiss Latha in Class 2.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is the cap?",
+          "right": "yellow",
+          "wrong": [
+            "blue",
+            "red"
+          ],
+          "explain": "\"A blue water bottle with a yellow cap.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where was it lost?",
+          "right": "near the swings",
+          "wrong": [
+            "in the library",
+            "at the gate"
+          ],
+          "explain": "\"Lost on Monday, near the swings.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Who should you give it to?",
+          "right": "Miss Latha",
+          "wrong": [
+            "Raju's mother",
+            "the bus driver"
+          ],
+          "explain": "\"Please give it to Miss Latha in Class 2.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why was this notice written?",
+          "right": "to help find a lost bottle",
+          "wrong": [
+            "to sell a new bottle",
+            "to tell about a party"
+          ],
+          "explain": "It says LOST and asks people to give the bottle back."
+        }
+      ]
+    },
+    {
+      "id": "kt1.letter4",
+      "level": 1,
+      "kind": "letter",
+      "title": "A Letter to Paati",
+      "text": "Dear Paati,\n\nI miss you. Our cat had three kittens! They are black and white. One kitten likes to sleep in my shoe.\n\nAmma says we will visit you in May. I will bring a kitten photo.\n\nLove,\nDivya",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How many kittens did the cat have?",
+          "right": "three",
+          "wrong": [
+            "two",
+            "five"
+          ],
+          "explain": "\"Our cat had three kittens!\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where does one kitten like to sleep?",
+          "right": "in Divya's shoe",
+          "wrong": [
+            "on the bed",
+            "in a box"
+          ],
+          "explain": "\"One kitten likes to sleep in my shoe.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When will they visit Paati?",
+          "right": "in May",
+          "wrong": [
+            "in June",
+            "on Sunday"
+          ],
+          "explain": "\"We will visit you in May.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does Divya feel about Paati?",
+          "right": "she misses her",
+          "wrong": [
+            "she is cross with her",
+            "she is afraid of her"
+          ],
+          "explain": "\"I miss you.\""
+        }
+      ]
+    },
+    {
+      "id": "kt1.instructions4",
+      "level": 1,
+      "kind": "instructions",
+      "title": "How to Wash Your Hands",
+      "text": "How to wash your hands\n\n1. Wet your hands with water.\n2. Put on some soap.\n3. Rub your hands for as long as it takes to sing a short song.\n4. Wash off the soap.\n5. Dry your hands on a clean towel.",
+      "questions": [
+        {
+          "skill": "sequence",
+          "prompt": "What do you do first?",
+          "right": "wet your hands",
+          "wrong": [
+            "put on soap",
+            "dry your hands"
+          ],
+          "explain": "Step 1 is \"Wet your hands with water.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do after you put on soap?",
+          "right": "rub your hands",
+          "wrong": [
+            "dry your hands",
+            "wet your hands"
+          ],
+          "explain": "Step 3 comes after step 2: rub your hands."
+        },
+        {
+          "skill": "detail",
+          "prompt": "How long should you rub your hands?",
+          "right": "as long as a short song",
+          "wrong": [
+            "for one quick second",
+            "for a whole long hour"
+          ],
+          "explain": "\"For as long as it takes to sing a short song.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why are the steps numbered?",
+          "right": "to show the order to do them",
+          "wrong": [
+            "to count the hands",
+            "to show which is the hardest"
+          ],
+          "explain": "The numbers tell you which step comes first, second and so on."
+        }
+      ]
+    },
+    {
+      "id": "kt1.sign2",
+      "level": 1,
+      "kind": "notice",
+      "title": "Signs in the Park",
+      "text": "PARK RULES\n\nWalk on the path.\nDo not pick the flowers.\nPut rubbish in the bin.\nDogs must be on a lead.\n\nThe park opens at 6 in the morning\nand closes at 7 in the evening.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where should you walk?",
+          "right": "on the path",
+          "wrong": [
+            "on the grass",
+            "on the flowers"
+          ],
+          "explain": "\"Walk on the path.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where does rubbish go?",
+          "right": "in the bin",
+          "wrong": [
+            "under a tree",
+            "in the pond"
+          ],
+          "explain": "\"Put rubbish in the bin.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When does the park close?",
+          "right": "at 7 in the evening",
+          "wrong": [
+            "at 6 in the morning",
+            "at noon"
+          ],
+          "explain": "\"Closes at 7 in the evening.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What are these signs for?",
+          "right": "to tell people the park rules",
+          "wrong": [
+            "to sell flowers",
+            "to show a map of the town"
+          ],
+          "explain": "The heading says PARK RULES."
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem7",
+      "level": 1,
+      "kind": "poem",
+      "title": "The Moon",
+      "text": "The moon comes out when I'm in bed,\na silver ball above my head.\nSometimes it's round, sometimes it's thin,\nlike a smile, or a cat's grin.\n\nGood night, moon, I close my eyes,\nsee you again when the stars rise.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When does the moon come out?",
+          "right": "when the child is in bed",
+          "wrong": [
+            "when it is lunch time",
+            "early in the morning"
+          ],
+          "explain": "\"The moon comes out when I'm in bed.\""
+        },
+        {
+          "skill": "figurative",
+          "prompt": "What does the poem call the moon?",
+          "right": "a silver ball",
+          "wrong": [
+            "a yellow fruit",
+            "a white cloud"
+          ],
+          "explain": "\"A silver ball above my head.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "How does the moon look sometimes?",
+          "right": "thin, like a smile",
+          "wrong": [
+            "square, like a box",
+            "green, like a leaf"
+          ],
+          "explain": "\"Sometimes it's thin, like a smile.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How does the child feel about the moon?",
+          "right": "friendly; says good night to it",
+          "wrong": [
+            "very scared of the moon",
+            "cross and angry with it"
+          ],
+          "explain": "\"Good night, moon\" sounds like talking to a friend."
+        }
+      ]
+    },
+    {
+      "id": "kt1.menu2",
+      "level": 1,
+      "kind": "chart",
+      "title": "School Lunch Menu",
+      "text": "School lunch\n\nMonday      rice and dal\nTuesday     idli and sambar\nWednesday   chapati and potato\nThursday    lemon rice\nFriday      dosa and chutney\n\nFruit every day.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What is for lunch on Tuesday?",
+          "right": "idli and sambar",
+          "wrong": [
+            "lemon rice",
+            "dosa and chutney"
+          ],
+          "explain": "Find Tuesday: idli and sambar."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which day has lemon rice?",
+          "right": "Thursday",
+          "wrong": [
+            "Monday",
+            "Friday"
+          ],
+          "explain": "Lemon rice is next to Thursday."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do children get every day?",
+          "right": "fruit",
+          "wrong": [
+            "sweets",
+            "milk"
+          ],
+          "explain": "\"Fruit every day.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "How do you find Friday's lunch?",
+          "right": "look along the Friday line",
+          "wrong": [
+            "read the first line",
+            "count the days"
+          ],
+          "explain": "Each line is one day and its lunch."
+        }
+      ]
+    },
+    {
+      "id": "kt1.invite2",
+      "level": 1,
+      "kind": "letter",
+      "title": "Come to My Party",
+      "text": "Dear Babu,\n\nPlease come to my birthday party!\n\nDay: Saturday\nTime: 4 o'clock\nPlace: my house, 12 Lake Street\n\nWe will play games and eat cake.\n\nFrom your friend,\nNila",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Whose birthday is it?",
+          "right": "Nila's",
+          "wrong": [
+            "Babu's",
+            "Amma's"
+          ],
+          "explain": "It is signed by Nila: \"my birthday party\"."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What time is the party?",
+          "right": "4 o'clock",
+          "wrong": [
+            "2 o'clock",
+            "6 o'clock"
+          ],
+          "explain": "\"Time: 4 o'clock.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What will they do at the party?",
+          "right": "play games and eat cake",
+          "wrong": [
+            "go swimming in a lake",
+            "watch a film at home"
+          ],
+          "explain": "\"We will play games and eat cake.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Nila write this?",
+          "right": "to ask Babu to come to her party",
+          "wrong": [
+            "to say thank you for a gift",
+            "to tell Babu she is ill"
+          ],
+          "explain": "\"Please come to my birthday party!\""
+        }
+      ]
+    },
+    {
+      "id": "kt1.label2",
+      "level": 1,
+      "kind": "instructions",
+      "title": "On the Milk Packet",
+      "text": "FRESH MILK\n\n500 ml\n\nKeep cold.\nUse within 2 days of opening.\nShake before use.\n\nBest before: 25 November",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How much milk is in the packet?",
+          "right": "500 ml",
+          "wrong": [
+            "1 litre",
+            "2 litres"
+          ],
+          "explain": "\"500 ml.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "How should you keep the milk?",
+          "right": "cold",
+          "wrong": [
+            "hot",
+            "in the sun"
+          ],
+          "explain": "\"Keep cold.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you do before use?",
+          "right": "shake it",
+          "wrong": [
+            "boil it",
+            "freeze it"
+          ],
+          "explain": "\"Shake before use.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "After you open it, when should you finish it?",
+          "right": "within 2 days",
+          "wrong": [
+            "within a month",
+            "on 25 December"
+          ],
+          "explain": "\"Use within 2 days of opening.\""
+        }
+      ]
+    },
+    {
+      "id": "kt1.poem8",
+      "level": 1,
+      "kind": "poem",
+      "title": "Little Seed",
+      "text": "I put a seed in the ground,\nI did not hear a single sound.\nI gave it water, gave it sun,\nand waited, waited, one by one\n\nthe days went by, and then I saw\na tiny leaf, then two, then more!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Where did the child put the seed?",
+          "right": "in the ground",
+          "wrong": [
+            "in a cup of milk",
+            "on the window"
+          ],
+          "explain": "\"I put a seed in the ground.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did the child give the seed?",
+          "right": "water and sun",
+          "wrong": [
+            "bread and jam",
+            "toys and books"
+          ],
+          "explain": "\"I gave it water, gave it sun.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What came first after the waiting?",
+          "right": "a tiny leaf",
+          "wrong": [
+            "many flowers",
+            "a big tree"
+          ],
+          "explain": "\"A tiny leaf, then two, then more!\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What is the poem about?",
+          "right": "a seed slowly growing",
+          "wrong": [
+            "a noisy garden",
+            "a lost toy"
+          ],
+          "explain": "It tells how a seed grows after days of waiting."
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem5",
+      "level": 2,
+      "kind": "poem",
+      "title": "The Bus Stop",
+      "text": "At the bus stop, people wait,\nsome are early, some are late.\nA man with bags, a girl with books,\na baby giving funny looks.\n\nThen round the corner, big and red,\nthe bus comes rolling up ahead.\nThey all climb in, the doors go shut,\nand off it goes, past shop and hut.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What colour is the bus?",
+          "right": "red",
+          "wrong": [
+            "blue",
+            "yellow"
+          ],
+          "explain": "\"Big and red, the bus comes rolling up.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What is the girl carrying?",
+          "right": "books",
+          "wrong": [
+            "bags",
+            "a baby"
+          ],
+          "explain": "\"A girl with books.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What happens after they all climb in?",
+          "right": "the doors shut and it goes",
+          "wrong": [
+            "the bus breaks down",
+            "they wait some more"
+          ],
+          "explain": "\"The doors go shut, and off it goes.\""
+        },
+        {
+          "skill": "theme",
+          "prompt": "What does the poem describe?",
+          "right": "people waiting for and getting on a bus",
+          "wrong": [
+            "a man buying bags at a shop",
+            "a baby learning to walk"
+          ],
+          "explain": "It shows people at a bus stop until the bus comes."
+        }
+      ]
+    },
+    {
+      "id": "kt2.notice6",
+      "level": 2,
+      "kind": "notice",
+      "title": "Library Week",
+      "text": "LIBRARY WEEK\n\nMonday 2 to Friday 6 December\n\nEvery day at lunch time in the library:\n- Monday: story reading by Class 5\n- Wednesday: make your own bookmark\n- Friday: book quiz, with prizes\n\nBring a book from home to swap!\nAsk Mr Joseph for more details.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When is the book quiz?",
+          "right": "Friday",
+          "wrong": [
+            "Monday",
+            "Wednesday"
+          ],
+          "explain": "\"Friday: book quiz, with prizes.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What can you make on Wednesday?",
+          "right": "a bookmark",
+          "wrong": [
+            "a poster",
+            "a kite"
+          ],
+          "explain": "\"Wednesday: make your own bookmark.\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "What should you bring if you want to swap?",
+          "right": "a book from home",
+          "wrong": [
+            "some money",
+            "a lunch box"
+          ],
+          "explain": "\"Bring a book from home to swap!\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why is this notice put up?",
+          "right": "to tell children about Library Week",
+          "wrong": [
+            "to say the library is closed",
+            "to sell new books"
+          ],
+          "explain": "It lists the Library Week events and dates."
+        }
+      ]
+    },
+    {
+      "id": "kt2.letter5",
+      "level": 2,
+      "kind": "letter",
+      "title": "Thank You, Uncle",
+      "text": "Dear Uncle Mohan,\n\nThank you for the cricket bat you sent for my birthday. It is just the right size! I used it on Sunday and hit my first four. My friends were very surprised.\n\nAppa says you will come for Pongal. Please bring your old bat too, so we can play together.\n\nWith love,\nArjun",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What did Uncle Mohan send?",
+          "right": "a cricket bat",
+          "wrong": [
+            "a football",
+            "a book"
+          ],
+          "explain": "\"Thank you for the cricket bat.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What did Arjun do on Sunday?",
+          "right": "hit his first four",
+          "wrong": [
+            "lost a match",
+            "broke the bat"
+          ],
+          "explain": "\"Hit my first four.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When will Uncle come?",
+          "right": "for Pongal",
+          "wrong": [
+            "next week",
+            "on Arjun's birthday"
+          ],
+          "explain": "\"You will come for Pongal.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "Why did Arjun write the letter?",
+          "right": "to thank his uncle for the gift",
+          "wrong": [
+            "to ask his uncle for money",
+            "to say he is ill in bed"
+          ],
+          "explain": "It starts with \"Thank you for the cricket bat.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.diary3",
+      "level": 2,
+      "kind": "diary",
+      "title": "Rainy Day Diary",
+      "text": "Tuesday, 12 November\n\nIt rained all day today. School was closed because the road was full of water. I was happy at first, but by lunch I was bored. Then Amma showed me how to make paper boats. I made five! We floated them in the big puddle outside. The blue one went the farthest. I hope it rains tomorrow too.",
+      "questions": [
+        {
+          "skill": "cause",
+          "prompt": "Why was school closed?",
+          "right": "the road was full of water",
+          "wrong": [
+            "the teacher was away",
+            "it was a holiday"
+          ],
+          "explain": "\"School was closed because the road was full of water.\""
+        },
+        {
+          "skill": "feelings",
+          "prompt": "How did the writer feel by lunch?",
+          "right": "bored",
+          "wrong": [
+            "happy",
+            "scared"
+          ],
+          "explain": "\"By lunch I was bored.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "How many boats did the writer make?",
+          "right": "five",
+          "wrong": [
+            "two",
+            "ten"
+          ],
+          "explain": "\"I made five!\""
+        },
+        {
+          "skill": "inference",
+          "prompt": "Why does the writer hope it rains tomorrow?",
+          "right": "they had fun with the boats",
+          "wrong": [
+            "they want to stay in bed",
+            "they like wet clothes"
+          ],
+          "explain": "The day became fun once they made and floated boats."
+        }
+      ]
+    },
+    {
+      "id": "kt2.instructions5",
+      "level": 2,
+      "kind": "instructions",
+      "title": "Make a Paper Fan",
+      "text": "Make a paper fan\n\nYou need: one sheet of paper, crayons, tape.\n\n1. Colour a pattern on the paper.\n2. Fold the paper forward along the short side.\n3. Turn it over and fold it back the same width.\n4. Keep folding forward and back until it is all folded.\n5. Pinch one end together and tape it.\n6. Open out the other end. Now fan yourself!",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What do you need?",
+          "right": "paper, crayons and tape",
+          "wrong": [
+            "scissors and glue",
+            "string and sticks"
+          ],
+          "explain": "\"You need: one sheet of paper, crayons, tape.\""
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What do you do before folding?",
+          "right": "colour a pattern",
+          "wrong": [
+            "tape one end",
+            "open it out"
+          ],
+          "explain": "Step 1 is to colour a pattern."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do you do to one end?",
+          "right": "pinch it and tape it",
+          "wrong": [
+            "cut it off with scissors",
+            "paint it red all over"
+          ],
+          "explain": "\"Pinch one end together and tape it.\""
+        },
+        {
+          "skill": "structure",
+          "prompt": "Why does it list what you need first?",
+          "right": "so you can get everything ready",
+          "wrong": [
+            "so you can skip the steps",
+            "so it looks long"
+          ],
+          "explain": "You gather the things before starting the steps."
+        }
+      ]
+    },
+    {
+      "id": "kt2.advert3",
+      "level": 2,
+      "kind": "advert",
+      "title": "Sunny Ice Cream",
+      "text": "SUNNY ICE CREAM\n\nCold, creamy and full of fruit!\nMango, strawberry and banana.\n\nOnly 20 rupees a cup.\nBuy two, get one free on Sundays!\n\nFind our yellow cart near the bus stand.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "How much is one cup?",
+          "right": "20 rupees",
+          "wrong": [
+            "10 rupees",
+            "50 rupees"
+          ],
+          "explain": "\"Only 20 rupees a cup.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "When can you get one free?",
+          "right": "on Sundays",
+          "wrong": [
+            "on Mondays",
+            "every day"
+          ],
+          "explain": "\"Buy two, get one free on Sundays!\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "Where is the cart?",
+          "right": "near the bus stand",
+          "wrong": [
+            "at the school",
+            "in the market"
+          ],
+          "explain": "\"Near the bus stand.\""
+        },
+        {
+          "skill": "purpose",
+          "prompt": "What does this advert want you to do?",
+          "right": "buy the ice cream",
+          "wrong": [
+            "make ice cream at home",
+            "go to the bus stand to catch a bus"
+          ],
+          "explain": "Adverts try to make people buy things."
+        }
+      ]
+    },
+    {
+      "id": "kt2.timetable3",
+      "level": 2,
+      "kind": "timetable",
+      "title": "Swimming Classes",
+      "text": "Swimming classes at the town pool\n\nDay         Time        Group\nMonday      4 pm        beginners\nWednesday   4 pm        beginners\nThursday    5 pm        swimmers who can do one length\nSaturday    9 am        everyone\n\nBring a towel and a cap.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When is the Saturday class?",
+          "right": "9 am",
+          "wrong": [
+            "4 pm",
+            "5 pm"
+          ],
+          "explain": "Saturday: 9 am."
+        },
+        {
+          "skill": "detail",
+          "prompt": "Which days are for beginners?",
+          "right": "Monday and Wednesday",
+          "wrong": [
+            "Thursday and Saturday",
+            "only Saturday"
+          ],
+          "explain": "Monday and Wednesday say beginners."
+        },
+        {
+          "skill": "inference",
+          "prompt": "A child who cannot swim yet should go on which day?",
+          "right": "Monday",
+          "wrong": [
+            "Thursday",
+            "none of the days"
+          ],
+          "explain": "Monday is for beginners; Thursday needs one length."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What should you bring?",
+          "right": "a towel and a cap",
+          "wrong": [
+            "a ball and a bat",
+            "a book and a pen"
+          ],
+          "explain": "\"Bring a towel and a cap.\""
+        }
+      ]
+    },
+    {
+      "id": "kt2.article3",
+      "level": 2,
+      "kind": "article",
+      "title": "Elephants",
+      "text": "Elephants are the biggest animals that live on land. They live in forests and grasslands in India and Africa. An elephant uses its long trunk to pick up food, drink water and say hello to other elephants. Elephants eat grass, leaves and fruit, and they eat for most of the day. Baby elephants stay close to their mothers for many years.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "What are elephants?",
+          "right": "the biggest animals on land",
+          "wrong": [
+            "the fastest animals",
+            "the smallest animals"
+          ],
+          "explain": "\"Elephants are the biggest animals that live on land.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What does an elephant use its trunk for?",
+          "right": "picking up food and drinking",
+          "wrong": [
+            "flying from tree to tree",
+            "digging deep holes for water"
+          ],
+          "explain": "\"Uses its long trunk to pick up food, drink water ...\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What do elephants eat?",
+          "right": "grass, leaves and fruit",
+          "wrong": [
+            "fish and other meat",
+            "bread, rice and milk"
+          ],
+          "explain": "\"Elephants eat grass, leaves and fruit.\""
+        },
+        {
+          "skill": "fact_opinion",
+          "prompt": "Which is a fact from the text?",
+          "right": "baby elephants stay close to their mothers",
+          "wrong": [
+            "elephants are the best animals",
+            "elephants are funny"
+          ],
+          "explain": "The text tells it as a true thing, not what someone thinks."
+        }
+      ]
+    },
+    {
+      "id": "kt2.chart4",
+      "level": 2,
+      "kind": "chart",
+      "title": "Weather This Week",
+      "text": "Weather this week\n\nDay         Weather     Highest\nMonday      sunny       34°\nTuesday     sunny       35°\nWednesday   cloudy      31°\nThursday    rain        28°\nFriday      rain        27°",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "Which day is the hottest?",
+          "right": "Tuesday",
+          "wrong": [
+            "Monday",
+            "Friday"
+          ],
+          "explain": "Tuesday has the highest number, 35°."
+        },
+        {
+          "skill": "detail",
+          "prompt": "What is the weather on Wednesday?",
+          "right": "cloudy",
+          "wrong": [
+            "sunny",
+            "rain"
+          ],
+          "explain": "Wednesday: cloudy."
+        },
+        {
+          "skill": "inference",
+          "prompt": "On which day should you take an umbrella?",
+          "right": "Thursday",
+          "wrong": [
+            "Monday",
+            "Tuesday"
+          ],
+          "explain": "Thursday says rain."
+        },
+        {
+          "skill": "inference",
+          "prompt": "What happens to the heat as rain comes?",
+          "right": "it gets cooler",
+          "wrong": [
+            "it gets hotter",
+            "it stays the same"
+          ],
+          "explain": "The numbers go down on the rainy days."
+        }
+      ]
+    },
+    {
+      "id": "kt2.poem6",
+      "level": 2,
+      "kind": "poem",
+      "title": "Grandpa's Garden",
+      "text": "Grandpa's garden is small and neat,\nwith beans to pick and greens to eat.\nHe wakes at six, he waters rows,\nhe pulls the weeds, he talks to crows.\n\n\"Leave my chillies,\" Grandpa cries,\nthe crows just blink their beady eyes.\nAnd when the sun is low and red,\nhe sits and rests in the garden shed.",
+      "questions": [
+        {
+          "skill": "detail",
+          "prompt": "When does Grandpa wake?",
+          "right": "at six",
+          "wrong": [
+            "at nine",
+            "at noon"
+          ],
+          "explain": "\"He wakes at six.\""
+        },
+        {
+          "skill": "detail",
+          "prompt": "What does Grandpa tell the crows to leave?",
+          "right": "his chillies",
+          "wrong": [
+            "his beans",
+            "his shed"
+          ],
+          "explain": "\"Leave my chillies,\" Grandpa cries."
+        },
+        {
+          "skill": "sequence",
+          "prompt": "What does Grandpa do when the sun is low?",
+          "right": "rests in the shed",
+          "wrong": [
+            "waters the rows",
+            "picks the beans"
+          ],
+          "explain": "\"When the sun is low and red, he sits and rests.\""
+        },
+        {
+          "skill": "character",
+          "prompt": "What kind of person is Grandpa?",
+          "right": "hard-working and caring for his garden",
+          "wrong": [
+            "lazy and sleepy all day long",
+            "afraid of birds and their noise"
+          ],
+          "explain": "He waters, pulls weeds and looks after his plants all day."
+        }
+      ]
     }
   ]
 }
