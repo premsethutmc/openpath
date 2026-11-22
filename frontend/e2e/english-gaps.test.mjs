@@ -85,7 +85,7 @@ test("Listen and answer: hear a passage, answer four questions (one wrong), see 
   await context.close();
 });
 
-test("Word check: a few rounds of words, then roughly how many English words the learner knows", async () => {
+test("Word check: reports observed word meanings and keeps the count after leaving", async () => {
   const { context, page, errors, fits } = await start("Counter", false);
   await page.getByRole("button", { name: "Check my words" }).click();
   await page.locator('main.vocab[data-phase="intro"]').waitFor();
@@ -102,11 +102,14 @@ test("Word check: a few rounds of words, then roughly how many English words the
   }
   await page.locator('main.vocab[data-phase="done"]').waitFor();
   assert.ok(n >= 6, `${n} words asked`);
-  await page.getByRole("heading", { name: /^About [\d,]+ word families$/ }).waitFor();
+  const observed = page.getByRole("heading", { name: new RegExp(`^\\d+ of ${n} meanings correct$`) });
+  await observed.waitFor();
+  const correct = Number((await observed.innerText()).split(" ")[0]);
+  assert.ok(correct >= 0 && correct <= 6, "only the first six answers can earn credit");
   await shot(page, "3-word-check");
   await fits();
   await page.getByRole("button", { name: "Done" }).click();
-  await page.getByText(/Last time: about [\d,]+ word families/).waitFor();
+  await page.getByText(`Last time: ${correct} of ${n} correct`, { exact: true }).waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });
