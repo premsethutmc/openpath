@@ -144,18 +144,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.algebra.growing-patterns",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “The table shows a growing pattern of dots. How many dots will there be in step 7?” A common wrong answer is 35. / The step number was multiplied by 5, but the pattern started at 7, not at 5.",
-   "text": [
-    "A question: “The table shows a growing pattern of dots. How many dots will there be in step 7?” A common wrong answer is 35.",
-    "That answer counts 5 dots for every step, as if step 1 had 5 dots, but step 1 has 7. Start at 7 and add 5 for each new step: 7, 12, 17, 22, 27, 32, 37."
-   ],
-   "problem": "The explanation talks about multiplying (not taught in class 1) and 'started at 7, not at 5' without saying how to get the right answer.",
-   "severity": "low"
-  },
-  {
    "competency": "MATH.algebra.identities",
    "section": "ahid_concept",
    "index": 1,
@@ -273,18 +261,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.algebra.logarithms",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.” A common wrong answer is 2a + 2b. / log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a.",
-   "text": [
-    "A question: “Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.” A common wrong answer is 2a + 2b.",
-    "2a + 2b is log 36: the number was not fully factorised. 51.84 = 5184 ÷ 100 = 2⁶ × 3⁴ ÷ 10², so log 51.84 = 6a + 4b − 2."
-   ],
-   "problem": "The explanation (log 5 taken as log 2 + log 3) does not match the question: 51.84 = 2⁶ × 3⁴ ÷ 100 involves no 5; 2a + 2b is log 36, so only part of the number was used. Correct answer 6a + 4b − 2.",
-   "severity": "high"
-  },
-  {
    "competency": "MATH.algebra.matrices",
    "section": "columns",
    "index": 0,
@@ -379,18 +355,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.algebra.quadratic-graphs",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “The graph of y = 2x² has been drawn. To solve 2x² − 6x − 8 = 0 with it, which straight line should be drawn on the same axes?” A common wrong answer is 3. / The other terms were copied to the line without changing their signs; moving a term to the other side of = changes its sign.",
-   "text": [
-    "A question: “The graph of y = 2x² has been drawn. To solve 2x² − 6x − 8 = 0 with it, which straight line should be drawn on the same axes?” A common wrong answer is y = −6x − 8.",
-    "The other terms were copied to the line without changing their signs; moving a term to the other side of = changes its sign: 2x² = 6x + 8, so the line is y = 6x + 8."
-   ],
-   "problem": "The question asks for a straight line but the 'wrong answer' is the number 3, which does not match the explanation about copying terms without changing signs.",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.algebra.rational-expressions",
    "section": "numbers",
    "index": 0,
@@ -463,30 +427,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.calculus.continuity",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3. / The ratio was turned over, giving 3: the number in the sine goes on top, since sin(x)/(3x) = (1/3) × sin(x)/x, which tends to 1/3.",
-   "text": [
-    "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3.",
-    "The ratio was turned over. sin(x)/(3x) = (1/3) × sin(x)/x, and sin(x)/x → 1, so the limit is 1/3 and k = 1/3."
-   ],
-   "problem": "'The number in the sine goes on top' is confusing here because there is no number inside the sine; the explanation does not clearly state k.",
-   "severity": "low"
-  },
-  {
-   "competency": "MATH.calculus.definite-integral-properties",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Evaluate ∫₋₃³ (x³ cos x + 3) dx.” A common wrong answer is 0. / Every term was taken to vanish over a symmetric interval; only the odd part does. The even part kx² + m gives twice its integral from 0 to a.",
-   "text": [
-    "A question: “Evaluate ∫₋₃³ (x³ cos x + 3) dx.” A common wrong answer is 0.",
-    "Every term was taken to vanish over a symmetric interval; only the odd part x³ cos x does. The even part 3 gives 2 × ∫₀³ 3 dx = 18."
-   ],
-   "problem": "Explanation refers to an even part 'kx² + m' that is not in the question; the even part is just 3 (answer 18).",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.calculus.definite-integrals",
    "section": "chapter",
    "index": 0,
@@ -531,18 +471,6 @@
    ],
    "problem": "Defines v = ax + y + c and then switches to v = mx + y + c, and '(here ∫ dv/(v² + k²) …)' refers to an example not shown.",
    "severity": "medium"
-  },
-  {
-   "competency": "MATH.calculus.differential-equations",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2. / The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.",
-   "text": [
-    "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2.",
-    "The y on the right was ignored and only −3x − 1 was integrated. Divide by y first: dy/y = (−3x − 1) dx, so ln|y| = −3x²/2 − x + C, and with y = 2 at x = 0, y = 2e^(−3x²/2 − x)."
-   ],
-   "problem": "The explanation uses generic (px + q) instead of the question's −3x − 1, and never gives the correct answer.",
-   "severity": "low"
   },
   {
    "competency": "MATH.calculus.homogeneous-de",
@@ -687,18 +615,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.coordinate.conic-tangents-normals",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Find the equation of the tangent to the parabola y² = 16x at the point (36, −24). Write it as y = mx + c and type the right-hand side.” A common wrong answer is 3x − 132. / The normal (the line along the radius or perpendicular to the curve) was given; the tangent touches the curve, perpendicular to the normal.",
-   "text": [
-    "A question: “Find the equation of the tangent to the parabola y² = 16x at the point (36, −24). Write it as y = mx + c and type the right-hand side.” A common wrong answer is 3x − 132.",
-    "That is the normal (the line perpendicular to the curve at the point); the tangent touches the curve and is perpendicular to the normal: y = −x/3 − 12."
-   ],
-   "problem": "'the line along the radius' makes no sense for a parabola, which has no radius.",
-   "severity": "low"
-  },
-  {
    "competency": "MATH.coordinate.conics",
    "section": "chapter",
    "index": 10,
@@ -841,18 +757,6 @@
    "severity": "low"
   },
   {
-   "competency": "MATH.geometry.euclidean",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “In ΔABC, ∠A = 50° and ∠B = 35°. A proof says: \"so ∠C = 95°.\" Which reason justifies this step?” A common wrong answer is 0. / The exterior-angle reason was chosen, but the step uses the three angles inside the triangle.",
-   "text": [
-    "A question: “In ΔABC, ∠A = 50° and ∠B = 35°. A proof says: \"so ∠C = 95°.\" Which reason justifies this step?” A common wrong answer is 'exterior angle of a triangle'.",
-    "The exterior-angle reason was chosen, but the step uses the three angles inside the triangle: the angle sum of a triangle is 180°."
-   ],
-   "problem": "The wrong answer is shown as '0' (an option index), which means nothing to the learner.",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.geometry.lines-segments",
    "section": "chapter",
    "index": 0,
@@ -971,18 +875,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.geometry.rotational-symmetry",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “A regular dodecagon (a shape with 12 equal sides) (as in the picture) is turned about its centre. It looks exactly the same several times during a full turn. At what angle, in degrees, does it look the same for the 10th time?” A common wrong answer is 330. / The starting position was counted as the first time. The first time it looks the same is after the smallest turn.",
-   "text": [
-    "A question: “A regular dodecagon (a shape with 12 equal sides) (as in the picture) is turned about its centre. It looks exactly the same several times during a full turn. At what angle, in degrees, does it look the same for the 10th time?” A common wrong answer is 330.",
-    "One turn too many was counted. The smallest turn is 360° ÷ 12 = 30°, and the 10th time is after 10 of these turns: 10 × 30° = 300°."
-   ],
-   "problem": "Counting the start as the first time would give 270°, not 330°; 330° comes from one turn too many (the 10th time is 10 × 30° = 300°).",
-   "severity": "high"
-  },
-  {
    "competency": "MATH.geometry.scaled-construction",
    "section": "chapter",
    "index": 2,
@@ -1017,18 +909,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.geometry.triangle-concurrency",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “In △KLN, D is the midpoint of LN and KD = 9 cm. One of the four centres of the triangle is the point P on KD with KP = 6 cm and PD = 3 cm. Which centre is P?” A common wrong answer is 0. / A point well inside the triangle was taken to be the incentre. The incentre lies on the angle bisectors; a point on the line from a corner to a midpoint, two thirds of the way along, is the centroid.",
-   "text": [
-    "A question: “In △KLN, D is the midpoint of LN and KD = 9 cm. One of the four centres of the triangle is the point P on KD with KP = 6 cm and PD = 3 cm. Which centre is P?” A common wrong answer is the incentre.",
-    "A point well inside the triangle was taken to be the incentre. The incentre lies on the angle bisectors; a point on the line from a corner to a midpoint, two thirds of the way along, is the centroid."
-   ],
-   "problem": "The wrong answer is shown as '0' (an option index) instead of the centre named.",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.geometry.triangle-proof",
    "section": "chapter",
    "index": 1,
@@ -1051,30 +931,6 @@
    ],
    "problem": "Names 'Measure and draw angles' as the prerequisite, but finding the third angle uses adding and subtracting, not measuring.",
    "severity": "low"
-  },
-  {
-   "competency": "MATH.matrices.rank-row-reduction",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Find the rank of the matrix [[−1, −2, −1, 1], [−3, −6, −3, 3], [2, 4, 2, −2]].” A common wrong answer is 3. / The non-zero rows of the matrix as given were counted; first reduce it: every row is a multiple of the first, so it becomes a zero row.",
-   "text": [
-    "A question: “Find the rank of the matrix [[−1, −2, −1, 1], [−3, −6, −3, 3], [2, 4, 2, −2]].” A common wrong answer is 3.",
-    "The non-zero rows of the matrix as given were counted; first reduce it: rows 2 and 3 are multiples of row 1, so R₂ → R₂ − 3R₁ and R₃ → R₃ + 2R₁ make them zero rows, and the rank is 1."
-   ],
-   "problem": "'so it becomes a zero row' is ambiguous: the first row stays non-zero and the other two become zero rows, giving rank 1.",
-   "severity": "low"
-  },
-  {
-   "competency": "MATH.matrices.system-consistency",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Use the rank method to decide how many solutions this system has: x − y + z = 4, x + 2z = 4, 3x − y + 5z = 15.” A common wrong answer is 1. / ρ(A) = 2 was taken to mean infinitely many solutions without comparing with ρ([A | B]). Here the augmented matrix has rank 3, so the system is inconsistent.",
-   "text": [
-    "A question: “Use the rank method to decide how many solutions this system has: x − y + z = 4, x + 2z = 4, 3x − y + 5z = 15.” A common wrong answer is 1.",
-    "A unique solution was assumed without finding the ranks. Here ρ(A) = 2 (the third row is the first plus twice the second), so there cannot be exactly one solution; and ρ([A | B]) = 3 because 4 + 2 × 4 = 12, not 15. The ranks differ, so the system is inconsistent: 0 solutions."
-   ],
-   "problem": "The wrong answer is 1 (one solution) but the explanation says ρ(A) = 2 was taken to mean infinitely many solutions; the correct answer, 0 solutions, is not stated.",
-   "severity": "high"
   },
   {
    "competency": "MATH.measurement.clock",
@@ -1221,18 +1077,6 @@
   },
   {
    "competency": "MATH.number.complex-polar-form",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Find the principal argument θ (−π < θ ≤ π) of z = −9. Write θ in radians, in terms of π (you may type pi).” A common wrong answer is 0. / The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.",
-   "text": [
-    "A question: “Find the principal argument θ (−π < θ ≤ π) of z = −9. Write θ in radians, in terms of π (you may type pi).” A common wrong answer is 0.",
-    "The angle α = 0 from tan α = |y/x| was given. But −9 lies on the negative real axis, pointing the opposite way to the positive real axis, so its argument is π (not −π, because θ must satisfy −π < θ ≤ π)."
-   ],
-   "problem": "−9 is on the negative real axis, not in a quadrant, so 'z is not in the first quadrant… use the signs' does not explain why the answer is π.",
-   "severity": "medium"
-  },
-  {
-   "competency": "MATH.number.complex-polar-form",
    "section": "worked_steps",
    "index": 0,
    "original": "Find the acute angle α with tan α = |y/x|. Then use the quadrant: first α, second π − α, third −(π − α), fourth −α.",
@@ -1264,18 +1108,6 @@
     "That is why the prime factors of a cube always come in groups of three equal primes; taking one prime from each group gives back the cube root, 5."
    ],
    "problem": "'every prime of 5 appears three times' is garbled wording.",
-   "severity": "low"
-  },
-  {
-   "competency": "MATH.number.de-moivre-roots",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Use de Moivre's theorem to write (1 + √3 i)⁸ in the form x + iy. Type the answer as (x, y).” A common wrong answer is (1, 81). / Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + iⁿyⁿ. Use the polar form.",
-   "text": [
-    "A question: “Use de Moivre's theorem to write (1 + √3 i)⁸ in the form x + iy. Type the answer as (x, y).” A common wrong answer is (1, 81).",
-    "Each part was raised to the power separately; (x + iy)ⁿ is not xⁿ + i yⁿ. Use the polar form: 2⁸(cos 480° + i sin 480°) = (−128, 128√3)."
-   ],
-   "problem": "The wrong answer (1, 81) comes from xⁿ + i yⁿ, not xⁿ + iⁿyⁿ (which would give 82).",
    "severity": "low"
   },
   {
@@ -1604,18 +1436,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.probability.complements",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “A match can end in a win, a draw or a loss. The probability of a win is 1/10 and the probability of a draw is 3/20. What is the probability of a loss?” A common wrong answer is 4. / The fraction was turned upside down; 'not E' is what is left when E is taken from the sure event: 1 − P(E).",
-   "text": [
-    "A question: “A match can end in a win, a draw or a loss. The probability of a win is 1/10 and the probability of a draw is 3/20. What is the probability of a loss?” A common wrong answer is 4.",
-    "P(win or draw) = 2/20 + 3/20 = 1/4 was turned upside down to get 4, but a probability is never more than 1. 'Not E' is what is left when E is taken from the sure event: 1 − 1/4 = 3/4."
-   ],
-   "problem": "The wrong answer 4 comes from 1 ÷ P(win or draw), but the explanation ('the fraction was turned upside down') does not show this and never says that a probability can't be more than 1.",
-   "severity": "low"
-  },
-  {
    "competency": "MATH.probability.conditional",
    "section": "check_what_it_uses",
    "index": 0,
@@ -1687,18 +1507,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.reasoning.logic",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “For whole numbers n, consider the statement: \"If n is a multiple of 4, then n² is a multiple of 4.\" Which is correct about this statement and its converse?” A common wrong answer is 0. / The converse was assumed to be true exactly when the statement is; a converse swaps the 'if' and 'then' parts and must be checked on its own.",
-   "text": [
-    "A question: “For whole numbers n, consider the statement: \"If n is a multiple of 4, then n² is a multiple of 4.\" Which is correct about this statement and its converse?” A common wrong answer is 'both are true'.",
-    "The converse was assumed to be true because the statement is. The converse, 'if n² is a multiple of 4 then n is a multiple of 4', is false: n = 2 gives n² = 4. A converse swaps the 'if' and 'then' parts and must be checked on its own."
-   ],
-   "problem": "The wrong answer is given as '0', which is meaningless for a question asking which statement about truth values is correct.",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.reasoning.number-grid-puzzles",
    "section": "check_what_it_uses",
    "index": 0,
@@ -1733,30 +1541,6 @@
     "Do the same again: 4 left, then 0 — you take the last match, because your friend always faces a multiple of 4 and can never take all of it."
    ],
    "problem": "A 'Worked' example that has no steps: it only says that each step will have a reason.",
-   "severity": "medium"
-  },
-  {
-   "competency": "MATH.sets-relations.function-types",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “f: ℝ → [−3, ∞) is given by f(x) = 2x² − 3. Which is true?” A common wrong answer is 3. / A square was assumed never to be onto; the codomain here is [−3, ∞), and every y in it is reached. It is not one-one, since f(−1) = f(1).",
-   "text": [
-    "A question: “f: ℝ → [−3, ∞) is given by f(x) = 2x² − 3. Which is true?” A common wrong answer is 3.",
-    "A square was assumed never to be onto; the codomain here is [−3, ∞), and every y in it is reached, so f is onto. It is not one-one, since f(−1) = f(1). So f is onto but not one-one."
-   ],
-   "problem": "'Which is true?' gives no options, so the wrong answer '3' is meaningless to the learner.",
-   "severity": "medium"
-  },
-  {
-   "competency": "MATH.sets-relations.relation-properties",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “On A = {1, 2, 3}, the relation R = {(1, 1), (1, 3), (3, 1)}. Which statement about R is true?” A common wrong answer is 3. / Reflexive needs (a, a) for EVERY a in A; one missing pair is enough to fail.",
-   "text": [
-    "A question: “On A = {1, 2, 3}, the relation R = {(1, 1), (1, 3), (3, 1)}. Which statement about R is true?” A common wrong answer is 'R is reflexive'.",
-    "Reflexive needs (a, a) for EVERY a in A; (2, 2) and (3, 3) are missing, so R is not reflexive. R is symmetric, but not transitive: (3, 1) and (1, 3) are in R but (3, 3) is not."
-   ],
-   "problem": "The wrong answer is given as '3', which means nothing to the learner; the explanation also omits that R is not transitive either.",
    "severity": "medium"
   },
   {
@@ -1807,18 +1591,6 @@
    "severity": "medium"
   },
   {
-   "competency": "MATH.statistics.stacked-bar-charts",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “The clustered bar chart shows how many children of Class 9A and Class 9B walk to school and how many come by bus. If the same data were drawn as a 100% stacked bar chart, which class would have the longer 'walk' part of its bar?” A common wrong answer is 1. / The class with more walkers was chosen. A 100% stacked bar shows each class as a whole (100%), so it compares the share of walkers, not the number.",
-   "text": [
-    "A question: “The clustered bar chart shows how many children of Class 9A and Class 9B walk to school and how many come by bus. If the same data were drawn as a 100% stacked bar chart, which class would have the longer 'walk' part of its bar?” A common wrong answer is the class with more walkers.",
-    "That compares numbers of walkers. A 100% stacked bar shows each class as a whole (100%), so it compares the share of walkers, not the number."
-   ],
-   "problem": "The question asks which class (9A or 9B), but the 'common wrong answer' is given as '1', which is not one of the choices.",
-   "severity": "medium"
-  },
-  {
    "competency": "MATH.statistics.weighted-mean",
    "section": "check_what_it_uses",
    "index": 0,
@@ -1864,30 +1636,6 @@
    ],
    "problem": "The ranges given are wrong: tan⁻¹ is (−π/2, π/2), not the closed interval; cot⁻¹ is (0, π); cosec⁻¹ leaves out 0 and sec⁻¹ leaves out π/2.",
    "severity": "medium"
-  },
-  {
-   "competency": "MATH.trigonometry.inverse",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “What is the domain of cos⁻¹ (the set of real numbers x for which cos⁻¹(x) is defined)?” A common wrong answer is 2. / The principal range of cos⁻¹ was given instead of its domain: the domain is the set of numbers x that cos⁻¹ accepts.",
-   "text": [
-    "A question: “What is the domain of cos⁻¹ (the set of real numbers x for which cos⁻¹(x) is defined)?” A common wrong answer is 2.",
-    "The principal range of cos⁻¹, [0, π], was given instead of its domain: the domain is the set of numbers x that cos⁻¹ accepts, [−1, 1]."
-   ],
-   "problem": "A domain question with the 'wrong answer 2' makes no sense; the options are missing.",
-   "severity": "medium"
-  },
-  {
-   "competency": "MATH.trigonometry.ratios",
-   "section": "spot_the_mistake",
-   "index": 0,
-   "original": "A question: “Find the exact value of cos 45° − tan 60°.” A common wrong answer is (3√2 − 2√3)/6. / The values of sin and cos were swapped (and tan taken as cot): for example sin 30° = 1/2 and cos 30° = √3/2.",
-   "text": [
-    "A question: “Find the exact value of cos 45° − tan 60°.” A common wrong answer is (3√2 − 2√3)/6.",
-    "tan 60° was taken as 1/√3, which is tan 30°. tan 60° = sin 60° ÷ cos 60° = (√3/2) ÷ (1/2) = √3, so cos 45° − tan 60° = √2/2 − √3 = (√2 − 2√3)/2."
-   ],
-   "problem": "The wrong answer comes from taking tan 60° as 1/√3 (cos 45° is unchanged by swapping sin and cos), but the explanation talks about swapping sin/cos with an unrelated 30° example and never gives the correct value.",
-   "severity": "high"
   }
  ]
 }

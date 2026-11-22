@@ -23694,7 +23694,7 @@
     "gave-order (procedural): The order (how many times) was given instead of the angle. Share 360° by the order.",
     "upside-down (procedural): The fraction was written the wrong way up. The turn is 1 out of 8 equal parts of a full turn: 1/8.",
     "angle-not-fraction (procedural): The angle in degrees was given. As a fraction of a full turn, divide by 360.",
-    "counted-start (procedural): The starting position was counted as the first time. The first time it looks the same is after the smallest turn.",
+    "counted-start (procedural): One turn too many was counted: the 7th time is after 7 turns of 45°, not 8.",
     "first-angle (procedural): Only the smallest angle was given; the 7th time is 7 of those turns.",
     "counted-corners (conceptual): The corners were counted. Turn the shape: it only fits onto itself after a half turn and a full turn.",
     "mirror-only (conceptual): It has no mirror line, but it still looks the same after a half turn. Rotational symmetry is about turning, not folding."
@@ -23714,7 +23714,7 @@
      }
     ]
    },
-   "fingerprint": "e90b6d72",
+   "fingerprint": "74200d09",
    "validation": {
     "family": "afrot",
     "deterministic": {

@@ -2718,7 +2718,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "times-step",
    "revisions": [
     {
      "contentHash": "sha256:f6e9d2fa9624308ad9cef0142af5760951a507666407dee305eec34caa5e9eb2",
@@ -6110,7 +6110,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "five-as-sum",
    "revisions": [
     {
      "contentHash": "sha256:ad3aade6a3834b8fd396453b84b16b987c9e96e5c05538240a78a8e3f2dc9bf5",
@@ -9167,7 +9167,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "procedural",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "no-sign-change",
    "revisions": [
     {
      "contentHash": "sha256:147b956345bf78e0fee9a9c1a5d1328721f1fabe2a7689899644335b13d85dee",
@@ -10898,7 +10898,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "procedural",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "upside-down",
    "revisions": [
     {
      "contentHash": "sha256:168d544706eab05b92a6f53be3f0579c2aa7314d6252cf529ad456525b9aec2b",
@@ -11216,7 +11216,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "all-vanish",
    "revisions": [
     {
      "contentHash": "sha256:64293478da6a9c43ffbcaa73a8eec94d46430583beeba4e774ce26499aa8d0c1",
@@ -12158,7 +12158,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "y-dropped",
    "revisions": [
     {
      "contentHash": "sha256:2169966a0d23273beb0a4970c31aa422265e6f50ce9ed9b33387666b7d8e8f66",
@@ -15146,7 +15146,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "gave-normal",
    "revisions": [
     {
      "contentHash": "sha256:9a1b0a1c2cb38839ac4827013da38b48c909b3f74fa9f073079d02f438daa6f6",
@@ -18472,7 +18472,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "mix-5",
    "revisions": [
     {
      "contentHash": "sha256:6450a6cec425a47eb286d114483319fa54433eb69dce7b3ffa1cd9a7535a1d5a",
@@ -20800,7 +20800,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "procedural",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "counted-start",
    "revisions": [
     {
      "contentHash": "sha256:cf55bff6cf62a14bdb316393974da6d70ef44381597f3676309b0df47408fa04",
@@ -20832,6 +20832,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:cf55bff6cf62a14bdb316393974da6d70ef44381597f3676309b0df47408fa04"
+    },
+    {
+     "contentHash": "sha256:b1518dc2b0169a8915014506986a2c15b88e8b46cf245d82aaf39d694d25203c",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-22T07:33:13.884Z",
+      "note": "content changed: the decision on sha256:3871d6c01c15 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:3871d6c01c155b32801f47143daf6eb931dde0a43a8d25b842b283aa8bf99d8c"
     }
    ]
   },
@@ -23754,7 +23770,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "rows-counted",
    "revisions": [
     {
      "contentHash": "sha256:e29ed4f0f54322be8858c501aaeb18bba995a337236fca4956844019079d9512",
@@ -23900,7 +23916,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "singular-infinite",
    "revisions": [
     {
      "contentHash": "sha256:a1b4899207b82c4fb10f23b5a374fc9404c662dd247afdcbd37c74ecafdd7310",
@@ -30724,7 +30740,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "basic-angle-only",
    "revisions": [
     {
      "contentHash": "sha256:ff5fceafa9e03a194473b21913b2c9ec32d879e171c258f7e78f0451e31a5144",
@@ -31488,7 +31504,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "parts-raised",
    "revisions": [
     {
      "contentHash": "sha256:90d199b565f59342a595106afcbfd048132b5efdeb36c0b6fd42abdd47405492",
@@ -42527,7 +42543,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "reciprocal",
    "revisions": [
     {
      "contentHash": "sha256:9c84af60d97178be9e58acdb90274b4f7d7b661fbc9cdc6995d65af587f57032",
@@ -45051,7 +45067,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "converse-same-truth",
    "revisions": [
     {
      "contentHash": "sha256:a6ed8735edf88c933bfb3acc4b5f606c98ca6930762df0ee9a3943e0e5ed2ec2",
@@ -48651,7 +48667,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "kind-3",
    "revisions": [
     {
      "contentHash": "sha256:fa0b614d03d1330b3430c3c9aceff41d881c02c24d91b68c1854c24ddcd9ce87",
@@ -48875,7 +48891,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "reflexive",
    "revisions": [
     {
      "contentHash": "sha256:dc1d256082acbb69ead2b65f1163e4aa11b31180a6cdad1992c235450bcaefbd",
@@ -51658,7 +51674,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "counts-for-shares",
    "revisions": [
     {
      "contentHash": "sha256:94ff9acdbb5700439413f210ed8e0205f6a3f6ed3b8217227ea6989a6524c4b2",
@@ -53250,7 +53266,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "range-for-domain",
    "revisions": [
     {
      "contentHash": "sha256:a7cff91b2d1ac0a899aab5517bcdcb02d1f6246755463f7fc6fa06972474de7a",
@@ -53610,7 +53626,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "procedural",
    "misconceptionSpecific": true,
-   "addresses": null,
+   "addresses": "sin-cos-swapped",
    "revisions": [
     {
      "contentHash": "sha256:4e2502a7cf90555b6da90e1e09c8f01ff48a36be86987f943d290565dbaac7ee",
