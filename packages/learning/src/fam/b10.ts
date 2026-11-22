@@ -2103,8 +2103,8 @@ export const B10: Def[] = [
     bugs: ([m, a, b, c, d]) => {
       if (m === 0)
         return [
-          { id: "reciprocal-instead", kind: "conceptual", competency: RQ, says: "The reciprocal was given. The additive inverse is the number that ADDS to give 0: just change the sign.", predict: -b / a },
-          { id: "reciprocal-signed", kind: "conceptual", competency: RQ, says: "The fraction was turned upside down; the additive inverse keeps the numerator and denominator and only changes the sign.", predict: b / a },
+          { id: "reciprocal-instead", kind: "conceptual", competency: RQ, says: "The fraction was turned upside down and its sign changed; the additive inverse keeps the numerator and denominator and only changes the sign.", predict: -b / a },
+          { id: "reciprocal-signed", kind: "conceptual", competency: RQ, says: "The reciprocal was given. The additive inverse is the number that ADDS to give 0: just change the sign.", predict: b / a },
         ];
       if (m === 1)
         return [
@@ -2477,8 +2477,8 @@ export const B10: Def[] = [
       let sp = 2;
       while (k % sp) sp++;
       return keepBugs([
-        { id: "not-reduced", kind: "procedural", competency: RQ, says: `The sign was put in the right place, but ${k * Math.abs(p)} and ${k * q} still have the common factor ${k}; divide both by it.`, predict: `${n_(k * p)}/${k * q}` },
-        { id: "sign-lost", kind: "conceptual", competency: RQ, says: p < 0 ? "The minus sign was lost. A negative number divided by a positive one (or a positive by a negative) is negative." : "The two minus signs were not cancelled correctly: a negative divided by a negative is positive.", predict: `${n_(-p)}/${q}` },
+        { id: "not-reduced", kind: "procedural", competency: RQ, says: `The fraction was not simplified: ${k * Math.abs(p)} and ${k * q} still have the common factor ${k}; divide both by it.`, predict: `${n_(k * p)}/${k * q}` },
+        { id: "sign-lost", kind: "conceptual", competency: RQ, says: p < 0 ? "The minus sign was lost. A negative number divided by a positive one (or a positive by a negative) is negative." : "A minus sign was wrongly put in the answer: the numerator and denominator have the same sign, so the number is positive (a negative divided by a negative is positive too).", predict: `${n_(-p)}/${q}` },
         sp < k && { id: "part-reduced", kind: "procedural", competency: RQ, says: `Only the common factor ${sp} was divided out; ${k} is the highest common factor.`, predict: `${n_((k / sp) * p)}/${(k / sp) * q}` },
       ]);
     },

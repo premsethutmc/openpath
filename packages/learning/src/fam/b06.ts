@@ -1133,7 +1133,7 @@ export const B06: Def[] = [
       kind === 0
         ? [
             { id: "last-term", kind: "procedural", competency: FIG, says: "Only the last odd number was given; the question asks for the total of all of them.", predict: 2 * n - 1 },
-            { id: "count-terms", kind: "procedural", competency: FIG, says: `There are ${n} odd numbers from 1 to ${2 * n - 1}, so the total is the ${ord(n)} square number.`, predict: (n + 1) * (n + 1) },
+            { id: "count-terms", kind: "procedural", competency: FIG, says: `${n + 1} × ${n + 1} was used, as if there were ${n + 1} odd numbers. There are ${n} odd numbers from 1 to ${2 * n - 1}, so the total is ${n} × ${n}.`, predict: (n + 1) * (n + 1) },
           ]
         : kind === 1
           ? [

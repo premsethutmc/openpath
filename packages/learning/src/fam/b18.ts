@@ -1879,7 +1879,7 @@ export const B18: Def[] = [
       const [o, sg, N, h, k] = p;
       const s = sg ? -N : N;
       return [
-        bug("no-quarter", "recall", CON, `The number ${N} was used as the focal distance; ${coef(s)}${N}·x means 4a = ${s}, so a = ${nf(s / 4)}.`, o === 0 ? tup(h + s, k) : tup(h, k + s)),
+        bug("no-quarter", "recall", CON, `The number ${N} was used as the focal distance; in ${paraEq(p)}, 4a = ${nf(s)}, so a = ${nf(s / 4)}.`, o === 0 ? tup(h + s, k) : tup(h, k + s)),
         bug("wrong-axis", "conceptual", CON, `The focus was put on the wrong axis; the parabola opens along the ${o === 0 ? "x" : "y"}-direction (the variable that is not squared).`, o === 0 ? tup(h, k + s / 4) : tup(h + s / 4, k)),
         bug("vertex-sign", "procedural", CON, "The vertex was read with the wrong signs: (x − h) means the vertex has x = h.", h === 0 && k === 0 ? null : o === 0 ? tup(-h + s / 4, -k) : tup(-h, -k + s / 4)),
         bug("direction-sign", "procedural", CON, "The parabola was taken to open the other way; the sign in front of the linear side gives the direction.", o === 0 ? tup(h - s / 4, k) : tup(h, k - s / 4)),
@@ -2098,7 +2098,7 @@ export const B18: Def[] = [
           ? [bug("sign-ignored", "conceptual", CON, "The minus sign between the x² and y² terms was missed; opposite signs give a hyperbola, not an ellipse.", 2)]
           : t === 0
             ? [bug("any-two-squares-ellipse", "conceptual", CON, "Two squared terms were taken to mean an ellipse; with equal coefficients the curve is a circle (a special ellipse with e = 0), which is the better answer.", 2)]
-            : [bug("linear-as-square", "procedural", CON, "The single x term was treated like a squared term; only one variable is squared, which makes a parabola.", 2)],
+            : [bug("linear-as-square", "procedural", CON, "The x term was read as if it were an x² term, so the equation seemed to have two squared terms and was taken for an ellipse; only y is squared, which makes a parabola.", 2)],
     variants: () => [],
     explain: (s) => (s.id === "squares" ? `Look at the x² and y² coefficients (${s.inputs[0]} and ${s.inputs[1]}): ${s.value}` : `So the curve is ${CID_CHOICES[Number(s.value)]}`),
     domain: CID_D,
@@ -2411,7 +2411,7 @@ export const B18: Def[] = [
       const k = peK(p);
       const out: Bug[] = [];
       if (kind === 0 || kind === 1) {
-        out.push(bug("no-four", "recall", CON, `The focal distance a = ${nf(k / 4)} was used as k; y² = 4ax, so k = 4a.`, k / 4));
+        out.push(bug("no-four", "recall", CON, `The focal distance a = ${nf(k / 4)} was used as k; ${p[1] ? "x² = 4ay" : "y² = 4ax"}, so k = 4a.`, k / 4));
         if (kind === 1) out.push(bug("directrix-side", "conceptual", CON, "The parabola was opened towards the directrix; it opens away from it, towards the focus.", -k));
       }
       if (kind === 2) out.push(bug("swapped", "procedural", CON, "The coordinates were put into the equation the wrong way round.", (p[1] ? v * v : u * u) / (p[1] ? u : v)));
@@ -2455,10 +2455,10 @@ export const B18: Def[] = [
       const [kind, u, v, w, z] = p;
       const ans = caAppAnswer(p);
       const out: Bug[] = [];
-      if (kind === 0) out.push(bug("linear", "conceptual", MODEL, "The height was taken to fall in proportion to the distance from the centre (a straight-line roof); a parabola falls like the square of the distance.", v * (1 - w / u)), bug("from-top", "procedural", CON, "The drop below the top was found, h × (d/a)², but not taken away from the height.", (v * w * w) / (u * u)));
+      if (kind === 0) out.push(bug("linear", "conceptual", MODEL, "The height was taken to fall in proportion to the distance from the centre (a straight-line roof); a parabola falls like the square of the distance.", v * (1 - w / u)), bug("from-top", "procedural", CON, `The drop below the top, ${nf(v)} × (${nf(w)}/${nf(u)})², was found but not taken away from the height ${nf(v)} m.`, (v * w * w) / (u * u)));
       if (kind === 1) out.push(bug("diameter", "procedural", CON, "The diameter was used where the radius belongs: the rim point is (diameter ÷ 2, depth).", (u * u) / (4 * v)), bug("a-not-quarter", "recall", CON, "x² = 4fy was used as x² = fy, so the answer is 4 times too big.", (u * u) / (4 * v)));
       if (kind === 2) out.push(bug("linear", "conceptual", MODEL, "The height was taken to fall in proportion to the distance from the centre; an ellipse follows y = b√(1 − x²/a²).", v * (1 - w / (5 * z))), bug("circle", "conceptual", CON, "The arch was treated as a circle, y = √(a² − x²); a semi-elliptical arch of height b has y = b√(1 − x²/a²).", Math.sqrt(25 * z * z - w * w)));
-      if (kind === 3) out.push(bug("linear", "conceptual", MODEL, "The cable was taken to rise in a straight line from the lowest point; it hangs in a parabola, rising like the square of the distance.", w + ((v - w) * z) / u), bug("from-top", "procedural", CON, "The height was measured down from the tower top: H − (H − L)x²/a² was used instead of L + (H − L)x²/a².", v - ((v - w) * z * z) / (u * u)));
+      if (kind === 3) out.push(bug("linear", "conceptual", MODEL, "The cable was taken to rise in a straight line from the lowest point; it hangs in a parabola, rising like the square of the distance.", w + ((v - w) * z) / u), bug("from-top", "procedural", CON, `The height was measured down from the top of a tower: ${nf(v)} − (${nf(v)} − ${nf(w)}) × (${nf(z)}/${nf(u)})² was used, but the cable rises from its lowest point: ${nf(w)} + (${nf(v)} − ${nf(w)}) × (${nf(z)}/${nf(u)})².`, v - ((v - w) * z * z) / (u * u)));
       if (kind === 4) out.push(bug("swapped", "recall", CON, w === 2 ? "The nearest distance a(1 − e) was given; the farthest is a(1 + e)." : "The farthest distance a(1 + e) was given; the nearest is a(1 − e).", u * (1 + (w === 2 ? -1 : 1) * (v / 10))), bug("focus-distance", "procedural", CON, "The distance from the centre to the focus, ae, was given; the distances from the focus to the ends of the major axis are a − ae and a + ae.", (u * v) / 10));
       for (const b of out) b.predict = Math.round((b.predict as number) * 1e9) / 1e9;
       return out.filter((b) => Number.isFinite(b.predict as number) && Math.abs((b.predict as number) - ans) > 1e-9 && ca2(b.predict as number));

@@ -1710,7 +1710,7 @@ export const B16: Def[] = [
           ]
         : [
             B("strict-or-not", "conceptual", IVL, "Strict and non-strict were mixed up: > or < gives a round bracket, ≥ or ≤ a square one.", at(s ^ 1)),
-            B("direction", "conceptual", IVL, `The direction was reversed: x > ${n_(p[0])} means numbers to the right of ${n_(p[0])}, up to ∞.`, at(s ^ 2)),
+            B("direction", "conceptual", IVL, `The direction was reversed: ${chIv(p).ineq} means the numbers to the ${s < 2 ? "right" : "left"} of ${n_(p[0])}, ${s < 2 ? "up to ∞" : "down to −∞"}.`, at(s ^ 2)),
           ];
     },
     variants: () => [],
@@ -2729,8 +2729,8 @@ export const B16: Def[] = [
       const det2 = [a, b, c, d].every((x) => x >= -3 && x <= 5) && [a, b, c, d].filter((x) => x < 0).length <= 1 && a * d !== 0 && b * c !== 0 ? `gen:det2:${a},${b},${c},${d}` : undefined;
       return [
         B("adjoint-only", "procedural", ADJ, `The adjoint was given; A⁻¹ = adj A / |A|, so every entry must be divided by ${n_(D)}.`, Math.abs(D) === 1 && D === 1 ? null : matN([[d, -b], [-c, a]])),
-        B("no-negation", "procedural", ADJ, "a and d were swapped but b and c were not negated; adj A = [[d, −b], [−c, a]].", matS(mscale(toM([[d, b], [c, a]]), rr(1, D)))),
-        B("wrong-swap", "procedural", ADJ, "The wrong pair was swapped: a and d change places, b and c only change sign.", matS(mscale(toM([[a, -b], [-c, d]]), rr(1, D)))),
+        B("no-negation", "procedural", ADJ, "For A = [[a, b], [c, d]]: a and d were swapped but b and c were not negated; adj A = [[d, −b], [−c, a]].", matS(mscale(toM([[d, b], [c, a]]), rr(1, D)))),
+        B("wrong-swap", "procedural", ADJ, "For A = [[a, b], [c, d]]: b and c were negated but a and d were not swapped; adj A = [[d, −b], [−c, a]]: a and d change places, b and c change sign.", matS(mscale(toM([[a, -b], [-c, d]]), rr(1, D)))),
         ...(a * d + b * c !== 0 ? [B("determinant-added", "prerequisite", DET, "The determinant was found as ad + bc; it is ad − bc.", matS(mscale(toM([[d, -b], [-c, a]]), rr(1, a * d + b * c))), det2)] : []),
       ];
     },

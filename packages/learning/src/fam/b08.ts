@@ -2500,7 +2500,7 @@ B08.push(
       const ans = genAns([mode, m, n]);
       const k = (x: number) => (x === ans || x <= 0 ? null : x);
       if (mode <= 1) return [Bq("m-is-2m", "procedural", PYTH, `2m = ${2 * m}, so m = ${m}; ${2 * m} itself was used as m.`, k(mode === 0 ? 4 * m * m + 1 : 4 * m * m - 1)), Bq("m-squared-only", "procedural", PYTH, `Only m² = ${m * m} was worked out; the rule says m² ${mode === 0 ? "+" : "−"} 1.`, k(m * m))];
-      return [Bq("not-squared", "procedural", PYTH, "m and n were not squared (or 2mn was taken as 2m + n).", k(mode === 2 ? m - n : mode === 3 ? 2 * m + n : m + n)), Bq("other-member", "procedural", PYTH, `Another member of the triple was given; the question asks for ${["m² − n²", "2mn", "m² + n²"][mode - 2]}.`, k(genAns([mode === 4 ? 2 : mode + 1, m, n])))];
+      return [Bq("not-squared", "procedural", PYTH, `${mode === 3 ? `2mn was worked out as 2m + n; 2mn means 2 × ${m} × ${n}.` : `m and n were not squared: ${m} ${mode === 2 ? "−" : "+"} ${n} was worked out instead of ${m}² ${mode === 2 ? "−" : "+"} ${n}².`}`, k(mode === 2 ? m - n : mode === 3 ? 2 * m + n : m + n)), Bq("other-member", "procedural", PYTH, `Another member of the triple was given; the question asks for ${["m² − n²", "2mn", "m² + n²"][mode - 2]}.`, k(genAns([mode === 4 ? 2 : mode + 1, m, n])))];
     },
     variants: () => [],
     explain: (s) => (s.id === "m" ? `2m = ${s.inputs[0]}, so m = ${s.value}` : `${s.inputs[0]} with ${s.inputs[1]}: ${s.value}`),
@@ -2917,7 +2917,7 @@ B08.push(
       if (mode === 0) return [Bq("sign", "conceptual", PZEROS, "The sum of the zeros is −b/a: the minus sign was left out.", q(a * s)), Bq("forgot-a", "procedural", PZEROS, `The coefficient of x² (${a}) was left out: sum = −k/${a}.`, a === 1 ? null : q(-s))];
       if (mode === 1) return [Bq("divided-by-a", "procedural", PZEROS, `The product of the zeros is c/a = k/${a}, so k = ${a} × ${n_(s)}; it was divided instead.`, Number.isInteger(s / a) ? q(s / a) : null), Bq("sign", "conceptual", PZEROS, "The product of the zeros is +c/a; a minus sign was added.", q(-a * s))];
       if (mode === 2) return [Bq("sign", "conceptual", PZEROS, `The sum of the zeros is −k, so k = −(${n_(a)} + ${n_(s)}); the minus was left out.`, q(a + s)), Bq("one-zero-only", "procedural", PZEROS, `Only the zero ${n_(a)} was used for k. Substitute x = ${n_(a)} into p(x) = 0 and solve for k.`, q(-a))];
-      return [Bq("sign", "procedural", PZEROS, `The coefficient of x must be 0, so k − ${n_(a)} = 0 means k = ${n_(a)}; the sign was changed.`, q(-a))];
+      return [Bq("sign", "procedural", PZEROS, `The coefficient of x, ${a < 0 ? `k + ${-a}` : `k − ${a}`}, must be 0, so k = ${n_(a)}; the sign was changed.`, q(-a))];
     },
     variants: () => [],
     explain: (s) => (s.id === "sum" ? `Sum of the zeros = −k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "product" ? `Product of the zeros = k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "substitute" ? `The zeros are ${n_(Number(s.inputs[0]))} and ${n_(Number(s.inputs[1]))} (their product is the constant term), so k = −(sum) = ${n_(Number(s.value))}` : `Opposite zeros add to 0, so the coefficient of x is 0: k = ${n_(Number(s.value))}`),

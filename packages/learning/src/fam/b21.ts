@@ -3011,7 +3011,7 @@ const auparts = F({
   validate: (P, v) => derivAgrees(v, ptG(P), XSMALL),
   bugs: (P) => {
     const k = P[0];
-    if (k <= 2) return [bug("sign", "procedural", IM, "The sign of the second term was wrong: by parts subtracts ∫ v du, and integrating sin gives −cos.", ptAns(P, "sign")), bug("product", "conceptual", IM, "Each factor was integrated separately and the results multiplied; the integral of a product is not the product of the integrals.", ptAns(P, "product"))];
+    if (k <= 2) return [bug("sign", "procedural", IM, `The sign of the second term was wrong: by parts subtracts ∫ v du${k === 0 ? "" : ", and integrating sin gives −cos"}.`, ptAns(P, "sign")), bug("product", "conceptual", IM, "Each factor was integrated separately and the results multiplied; the integral of a product is not the product of the integrals.", ptAns(P, "product"))];
     if (k === 3) return [bug("first-only", "procedural", IM, "Only uv was written; the remaining integral −∫ v du still has to be worked out.", ptAns(P, "first")), bug("sign", "procedural", IM, "The remaining integral was added; by parts subtracts it.", ptAns(P, "sign"))];
     if (k === 4) return [bug("fp", "recall", IM, "eˣ f′(x) was given; the rule is ∫ eˣ[f + f′] dx = eˣ f(x) + C.", ptAns(P, "fp")), bug("kept-both", "conceptual", IM, "The bracket was kept as it is; the whole bracket combines into eˣ f(x).", ptAns(P, "both"))];
     return [bug("stopped-early", "procedural", IM, "Bernoulli's formula was stopped too early; continue until the derivative of x² reaches 0 (three terms).", ptAns(P, "first")), bug("signs-not-alternating", "recall", IM, "The signs in Bernoulli's formula alternate + − + − …; here they were all taken as +.", ptAns(P, "sign"))];

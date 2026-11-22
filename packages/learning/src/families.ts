@@ -141,7 +141,7 @@ const F: Def[] = [
             { id: "add-denominators", kind: "conceptual", competency: "MATH.number.fraction-add-like", says: "The bottom numbers were added too; they name the size of the pieces, which does not change.", predict: (a + b) / (2 * n) },
             { id: "multiply-tops", kind: "procedural", competency: "MATH.number.fraction-add-like", says: "The top numbers were multiplied; adding fractions adds the pieces.", predict: (a * b) / n },
           ]
-        : [{ id: "subtract-reversed", kind: "procedural", competency: "MATH.number.fraction-add-like", says: "The smaller top number was taken from the larger one the wrong way round.", predict: a === b ? null : (b - a) / n }].filter((x) => x.predict !== null) as Bug[],
+        : [{ id: "subtract-reversed", kind: "procedural", competency: "MATH.number.fraction-add-like", says: `The top numbers were taken away the wrong way round (${b} − ${a}); take the second from the first: (${a} − ${b})/${n}.`, predict: a === b ? null : (b - a) / n }].filter((x) => x.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[1, 5], [1, 5], [5, 9]], ([a, b, n]) => a + b < n).map((q) => [...q, 1]),
     explain: (s) => `${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${show(s.value)} pieces of the same size`,
   },
@@ -169,7 +169,7 @@ const F: Def[] = [
     },
     bugs: ([a, b, c]) => [
       { id: "ignore-lower-limit", kind: "conceptual", competency: "MATH.calculus.definite-integrals", says: "The width was taken as the upper limit only; the width is upper minus lower.", predict: a === 0 ? null : c * b },
-      { id: "fencepost-width", kind: "procedural", competency: "MATH.calculus.definite-integrals", says: "The whole numbers from a to b were counted (one too many); the width is b − a.", predict: c * (b - a + 1) },
+      { id: "fencepost-width", kind: "procedural", competency: "MATH.calculus.definite-integrals", says: `The whole numbers from ${a} to ${b} were counted (${b - a + 1}, one too many); the width is ${b} − ${a} = ${b - a}.`, predict: c * (b - a + 1) },
       { id: "forget-height", kind: "conceptual", competency: "MATH.calculus.definite-integrals", says: "Only the width was found; the area is width × height.", predict: b - a },
       { id: "add-width-height", kind: "conceptual", competency: "MATH.calculus.definite-integrals", says: "Width and height were added; the area multiplies them.", predict: c + (b - a) },
       factSlip(c, b - a),
@@ -209,7 +209,7 @@ const F: Def[] = [
       const r = Math.sqrt(p * p - 4 * q);
       const roots = [(-p - r) / 2, (-p + r) / 2];
       return [
-        { id: "root-signs", kind: "procedural", competency: "MATH.algebra.quadratics", says: "The numbers in the brackets were taken as the solutions; (x − 2) = 0 gives x = 2, so the signs flip.", predict: roots.map((x) => -x) },
+        { id: "root-signs", kind: "procedural", competency: "MATH.algebra.quadratics", says: `The numbers in the brackets were taken as the solutions; ${roots.map((x) => (x === 0 ? "x" : `(x ${x > 0 ? "−" : "+"} ${Math.abs(x)})`)).join("")} = 0 gives x = ${roots.map((x) => (x < 0 ? `−${-x}` : String(x))).join(" or x = ")}, so the signs flip.`, predict: roots.map((x) => -x) },
         { id: "one-root", kind: "conceptual", competency: "MATH.algebra.quadratics", says: "Only one solution was found; a quadratic like this has two.", predict: null },
         // the factor pair has the right product but not the right sum: a factorisation gap (algebra), not a quadratics one
         ...wrongPair(p, q, roots),
@@ -963,7 +963,7 @@ const F: Def[] = [
       return v === total;
     },
     bugs: ([a, u, c]) => [
-      { id: "additive", kind: "conceptual", competency: "MATH.number.proportion", says: `The difference in pencils was added to the price; in a proportion every pencil costs the same, so the price is multiplied.`, predict: a * u + (c - a) > 0 ? a * u + (c - a) : null },
+      { id: "additive", kind: "conceptual", competency: "MATH.number.proportion", says: `The change in the number of pencils (${Math.abs(c - a)}) was ${c > a ? "added to" : "taken from"} the price; every pencil costs the same, so find the price of one pencil and multiply it by ${c}.`, predict: a * u + (c - a) > 0 ? a * u + (c - a) : null },
       { id: "no-unit", kind: "procedural", competency: "MATH.number.proportion", says: `The total for ${a} was multiplied by ${c}; first find the price of one pencil.`, predict: a * u * c },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 6], [2, 9], [2, 9]], ([a, , c]) => a !== c).slice(0, 80),
@@ -1163,8 +1163,8 @@ const F: Def[] = [
     },
     bugs: ([a, k]) => [
       { id: "zero-for-undefined", kind: "conceptual", competency: "MATH.calculus.limits", says: "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).", predict: 0 },
-      { id: "half-factor", kind: "procedural", competency: "MATH.algebra.identities", says: "Only one a was kept after cancelling (as if x² − a² were (x − a) × x, then x = a); it is (x − a)(x + a), which gives a + a = 2a.", predict: a * k },
-      { id: "top-only", kind: "conceptual", competency: "MATH.calculus.limits", says: "Only the top was worked out at x = a, as k × a²; the bottom is 0 there, so simplify first: cancel (x − a).", predict: k * a * a },
+      { id: "half-factor", kind: "procedural", competency: "MATH.algebra.identities", says: `x² − ${a * a} was taken as (x − ${a}) × x, which gives ${a * k}; it is (x − ${a})(x + ${a}), so after cancelling the limit is ${k === 1 ? "" : `${k} × `}(${a} + ${a}) = ${2 * a * k}.`, predict: a * k },
+      { id: "top-only", kind: "conceptual", competency: "MATH.calculus.limits", says: `Only x² was put equal to ${a * a} (x = ${a}) and the rest was dropped, giving ${k === 1 ? `${a * a}` : `${k} × ${a * a} = ${k * a * a}`}; at x = ${a} the top and the bottom are both 0, so factorise and cancel (x − ${a}) first: the limit is ${2 * a * k}.`, predict: k * a * a },
     ],
     variants: (p) => pairs(p, [[1, 9], [1, 4]], () => true),
     explain: (s) => (s.id === "factor" ? `x² − ${(s.inputs[0] as number) ** 2} = (x − ${s.inputs[0]})(x + ${s.inputs[0]}); cancel (x − ${s.inputs[0]})` : `Then put x = ${s.inputs[0]}: ${s.inputs[1]} × (${s.inputs[0]} + ${s.inputs[0]}) = ${show(s.value)}`),

@@ -805,7 +805,7 @@ export const B17: Def[] = [
       const says = [
         `A straight line was thought to miss some values; over ℝ every y is reached, at x = (y ${b < 0 ? "+" : "−"} ${Math.abs(b)})/${N(a)}.`,
         `x = (y − ${b})/${a} works over ℝ, but here inputs must be natural numbers: y = 1 has no natural-number input.`,
-        `Only the values y ≥ ${N(b)} were thought of; the codomain ℝ also contains values that x² never reaches.`,
+        `Every real y was assumed to be reached; but f(x) only takes values y ${a > 0 ? "≥" : "≤"} ${N(b)}, so it is not onto (and not one-one, since f(−1) = f(1)).`,
         `A square was assumed never to be onto; the codomain here is [${N(b)}, ∞), and every y in it is reached. It is not one-one, since f(−1) = f(1).`,
         "x² was assumed never to be one-one; here the domain is [0, ∞), so no negative inputs: f(x₁) = f(x₂) forces x₁ = x₂.",
         `Over ℤ the line ${kx(a)}${sg(b)} skips integers (it goes up in steps of ${Math.abs(a)}), so it is not onto.`,
@@ -1439,7 +1439,7 @@ export const B17: Def[] = [
     // independent: Simpson's rule on the whole integrand
     validate: ([o, a, k, m], v) => typeof v === "number" && near(simpson((x) => ODD[o][1](x) + k * x * x + m, -a, a, 4000), v, 1e-7),
     bugs: ([, a, k, m]) => [
-      { id: "all-vanish", kind: "conceptual", competency: DIP, says: "Every term was taken to vanish over a symmetric interval; only the odd part does. The even part kx² + m gives twice its integral from 0 to a.", predict: 0 },
+      { id: "all-vanish", kind: "conceptual", competency: DIP, says: `Every term was taken to vanish over a symmetric interval; only the odd part does. The even part ${pp([[k, 2], [m, 0]])} gives twice its integral from 0 to ${a}.`, predict: 0 },
       { id: "not-doubled", kind: "procedural", competency: DIP, says: "The even part was integrated from 0 to a but not doubled: ∫₋ₐᵃ g = 2∫₀ᵃ g for an even g.", predict: (k * a ** 3 + 3 * m * a) / 3 },
     ],
     variants: () => [],

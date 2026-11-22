@@ -52,7 +52,7 @@
     {
       "competency": "MATH.geometry.triangle-properties",
       "strategy": "isosceles_base",
-      "contentHash": "6338220e75166eb6826993d09b9ad625610d322b0078e3fca9f5884d520585aa",
+      "contentHash": "373538e771405f355049298f38fcef96d5764089e4dd03f4b11c031a9bf38c0a",
       "methods": [
         "triangle-angle-sum",
         "isosceles-base"
@@ -63,7 +63,7 @@
     {
       "competency": "MATH.geometry.triangle-properties",
       "strategy": "isosceles_vertex",
-      "contentHash": "d949ca9f0854f6e938b8087c5e659837d926669cf6a0b7d957bff96c397101ee",
+      "contentHash": "667e7ea7b7a84c1354db89d44b808b3ad11e2bc79856d22dcc433868a9d4f211",
       "methods": [
         "triangle-angle-sum",
         "isosceles-vertex"

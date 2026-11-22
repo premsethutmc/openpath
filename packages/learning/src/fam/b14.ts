@@ -810,7 +810,7 @@ export const B14: Def[] = [
     bugs: ([k, s]) => {
       const c = diceCount(k, s);
       const u = diceUnordered(k, s);
-      const out: Bug[] = [{ id: "order-ignored", kind: "conceptual", competency: SS, says: "(1, 2) and (2, 1) were counted as one outcome; the two dice are different, so they are two of the 36 outcomes.", predict: u === c ? null : u / 36 }];
+      const out: Bug[] = [{ id: "order-ignored", kind: "conceptual", competency: SS, says: (() => { let e = "(1, 2) and (2, 1)"; for (let a = 6; a >= 1; a--) for (let b = 6; b > a; b--) if (DICE[k].test(a, b, s)) e = `(${a}, ${b}) and (${b}, ${a})`; return `${e} were counted as one outcome; the two dice are different, so they are two of the 36 outcomes.`; })(), predict: u === c ? null : u / 36 }];
       if (k === 0) out.push({ id: "sums-equally-likely", kind: "conceptual", competency: PROB, says: "The 11 sums 2 to 12 were taken as equally likely; a sum like 7 can happen in more ways than 2 or 12.", predict: close(1 / 11, c / 36) ? null : 1 / 11 });
       if (k === 6) out.push({ id: "double-counted", kind: "procedural", competency: SS, says: `(${s}, ${s}) was counted twice, once for each die; it is one outcome.`, predict: 12 / 36 });
       if (k === 7) out.push({ id: "one-die-only", kind: "conceptual", competency: TREE, says: "Only one die was considered; both dice must show a number above it.", predict: (6 - s) / 6 });
@@ -1407,12 +1407,12 @@ export const B14: Def[] = [
       return close(nv(v), t / list.length);
     },
     bugs: (p) => {
-      const { xs, sf, sfx } = umean(p);
+      const { xs, fs, sf, sfx } = umean(p);
       const m = sfx / sf;
       const sx = xs.reduce((a, b) => a + b, 0);
       const pr = (x: number) => (close(x, m) ? null : dv(x));
       return [
-        { id: "frequencies-ignored", kind: "conceptual", competency: GD, says: "The five values were averaged without their frequencies; a value that occurs 8 times counts 8 times.", predict: pr(sx / 5) },
+        { id: "frequencies-ignored", kind: "conceptual", competency: GD, says: `The five values were averaged without their frequencies; ${xs[fs.indexOf(Math.max(...fs))]} occurs ${Math.max(...fs)} times, so it counts ${Math.max(...fs)} times.`, predict: pr(sx / 5) },
         { id: "divided-by-rows", kind: "procedural", competency: AVG, says: `Σfx was divided by 5 (the number of different values); divide by Σf = ${sf}, the number of observations.`, predict: pr(sfx / 5) },
       ];
     },
@@ -2029,7 +2029,7 @@ export const B14: Def[] = [
       const ans = secptAns(p, q, ask);
       const [A, B] = f === 0 ? ["sec θ", "tan θ"] : ["cosec θ", "cot θ"];
       const out: Bug[] = [];
-      if (ask === 0) out.push({ id: "sum-not-product", kind: "conceptual", competency: IDN, says: `${A}² − ${B}² = 1 was used as if (${A} + ${B}) + (${A} − ${B}) = 1; it factorises as a product: (${A} + ${B})(${A} − ${B}) = 1.`, predict: 1 - k });
+      if (ask === 0) out.push({ id: "sum-not-product", kind: "conceptual", competency: IDN, says: `${A.split(" ")[0]}²θ − ${B.split(" ")[0]}²θ = 1 was used as if (${A} + ${B}) + (${A} − ${B}) = 1; it factorises as a product: (${A} + ${B})(${A} − ${B}) = 1.`, predict: 1 - k });
       if (ask === 1 || ask === 2) out.push({ id: "not-halved", kind: "procedural", competency: IDN, says: `The two equations were ${ask === 1 ? "added" : "subtracted"} but the result was not halved: that gives 2${ask === 1 ? A : B}.`, predict: 2 * ans });
       if (ask === 1 || ask === 2) out.push({ id: "add-subtract-swapped", kind: "procedural", competency: IDN, says: `The equations were ${ask === 1 ? "subtracted" : "added"}; ${ask === 1 ? `adding cancels ${B} and leaves 2${A}` : `subtracting cancels ${A} and leaves 2${B}`}.`, predict: secptAns(p, q, ask === 1 ? 2 : 1) });
       if (ask === 3) out.push({ id: "upside-down", kind: "recall", competency: TR, says: `The ratio was turned upside down: ${SECPT[f].asks[3]} = ${B} ÷ ${A}.`, predict: 1 / ans });

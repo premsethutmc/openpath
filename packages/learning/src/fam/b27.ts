@@ -145,7 +145,7 @@ export const B27: Def[] = [
       ]);
       const sign = k === 0 ? 1 : -1;
       return keepPred([
-        { id: "one-not-a-lot", kind: "conceptual", competency: MT, says: `1 was ${k === 0 ? "added" : "taken away"}. One more lot of ${a} means ${k === 0 ? "adding" : "taking away"} ${a}, not 1.`, predict: ab + sign },
+        { id: "one-not-a-lot", kind: "conceptual", competency: MT, says: `1 was ${k === 0 ? "added" : "taken away"}. ${k === 0 ? "One more lot" : "One lot fewer"} of ${a} means ${k === 0 ? "adding" : "taking away"} ${a}, not 1.`, predict: ab + sign },
         { id: "wrong-lot", kind: "conceptual", competency: MT, says: `${b} was ${k === 0 ? "added" : "taken away"}. The lots are ${a}s, so it is ${a} that is ${k === 0 ? "added" : "taken away"}.`, predict: a !== b ? ab + sign * b : null },
       ]);
     },

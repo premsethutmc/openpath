@@ -1350,7 +1350,7 @@ export const B20: Def[] = [
       const m = meanOf(p);
       return [
         { id: "variance-given", kind: "procedural", competency: DISP, says: "The variance was given; the standard deviation is its square root.", predict: F(M / 36) },
-        { id: "divide-by-n-minus-1", kind: "conceptual", competency: DISP, says: "The squared deviations were divided by n − 1 = 5; for the standard deviation of these data divide by n = 6.", predict: fracRoot(M, 180) },
+        { id: "divide-by-n-minus-1", kind: "conceptual", competency: DISP, says: "The squared deviations were divided by n − 1 = 5; for the standard deviation of these data divide by n = 6.", predict: fracRoot(M, 30) },
         { id: "mean-deviation-given", kind: "conceptual", competency: MD, says: "The mean of the distances from the mean (mean deviation) was found; the standard deviation squares the deviations first.", predict: F(p.reduce((a, x) => a + Math.abs(x - m), 0) / 6) },
       ];
     },

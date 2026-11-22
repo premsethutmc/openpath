@@ -815,7 +815,7 @@ export const B07: Def[] = [
       return [
         { id: "swap", kind: "procedural", competency: MIX, says: `The quotient and the remainder swapped places. ${n} ÷ ${d} = ${w} remainder ${r}: ${w} ${w === 1 ? "whole" : "wholes"}, and the ${r} ${r === 1 ? "piece" : "pieces"} left over ${r === 1 ? "goes" : "go"} on top.`, predict: w === r ? null : `${r} ${w}/${d}` },
         { id: "too-few-wholes", kind: "procedural", competency: DIVR, says: `One whole was missed: ${r + d}/${d} is more than 1, so another whole can be taken out.`, predict: w > 1 ? `${w - 1} ${r + d}/${d}` : null },
-        { id: "remainder-as-denominator", kind: "conceptual", competency: MIX, says: `The pieces keep their size: the denominator stays ${d}.`, predict: `${w} ${r}/${n}` },
+        { id: "remainder-as-denominator", kind: "conceptual", competency: MIX, says: `${n} was written as the denominator; the pieces keep their size, so the denominator stays ${d}.`, predict: `${w} ${r}/${n}` },
         { id: "division-slip", kind: "prerequisite", competency: DIVR, says: `A slip in dividing ${n} by ${d}. Check: ${d} × whole number + numerator must give ${n}.`, predict: r + 1 < d ? `${w} ${r + 1}/${d}` : `${w + 1} ${r}/${d}`, ...(n >= 10 && n <= 99 && d <= 9 && n >= 2 * d ? { probe: `gen:divr:${n},${d}` } : {}) },
       ];
     },
@@ -1106,7 +1106,7 @@ export const B07: Def[] = [
         else if (k > 1 && k % 2 === 1) looks.push(k);
       }
       return [
-        { id: "odd-is-prime", kind: "conceptual", competency: PRI, says: `Some odd numbers that are not prime were included (${looks.slice(0, 3).join(", ")}). Being odd is not enough: test whether 3, 5, 7 or another number divides it.`, predict: looks.length ? [...ps, ...looks].sort((x, y) => x - y) : null },
+        { id: "odd-is-prime", kind: "conceptual", competency: PRI, says: `Some odd numbers that are not prime were included (${looks.join(", ")}). Being odd is not enough: test whether 3, 5, 7 or another number divides it.`, predict: looks.length ? [...ps, ...looks].sort((x, y) => x - y) : null },
         { id: "one-is-prime", kind: "conceptual", competency: PRI, says: "1 was counted as prime. A prime has exactly two factors; 1 has only one factor.", predict: a === 1 ? [1, ...ps] : null },
         { id: "two-not-prime", kind: "conceptual", competency: PRI, says: "2 was left out because it is even. 2 has exactly two factors (1 and 2), so it is prime: the only even prime.", predict: a <= 2 ? ps.filter((k) => k !== 2) : null },
       ];
@@ -1425,7 +1425,9 @@ function fdOpts([mode, n, d]: number[]) {
   // a percentage is 100n ÷ d, divided out exactly with whole numbers (no floating-point × 100)
   const right = mode === 0 ? dec : `${longDiv(100 * n, d)}%`;
   const asDigits = mode === 0 ? `${n}.${d}` : `${n}${d}%`;
-  const flip = mode === 0 ? longDiv(d, n).slice(0, 5) : `${d}.${n}%`;
+  // rounded, not cut short: 40 ÷ 53 = 0.7547… is offered as 0.755, what a learner dividing the wrong way would write
+  const back = longDiv(d, n);
+  const flip = mode === 0 ? (back.length > 5 ? String(Math.round((d / n) * 1000) / 1000) : back) : `${d}.${n}%`;
   const tenth = mode === 0 ? longDiv(n, 10) : `${n}%`;
   const near = mode === 0 ? longDiv(Math.round((100 * n) / d) + 1, 100) : `${Math.round((100 * n) / d) + 1}%`;
   const set: string[] = [];
@@ -2121,7 +2123,7 @@ B07.push(
       const { opts, asDigits, flip } = fdOpts(p);
       return [
         Bg("digits-joined", "conceptual", PERC, `The numerator and denominator were just written next to each other${mode === 0 ? " with a point between them" : ""}. ${n}/${d} means ${n} ÷ ${d}${mode === 1 ? ", and then × 100 for a percentage" : ""}.`, opts.indexOf(asDigits)),
-        Bg("divided-wrong-way", "procedural", "MATH.number.long-division", `${d} was divided by ${n}. The fraction ${n}/${d} is ${n} ÷ ${d}: the top divided by the bottom.`, opts.indexOf(flip)),
+        Bg("divided-wrong-way", "procedural", "MATH.number.long-division", (mode === 0 ? `${d} was divided by ${n}. The fraction ${n}/${d} is ${n} ÷ ${d}: the top divided by the bottom.` : `The fraction was turned upside down and written as ${d}.${n}. ${n}/${d} means ${n} ÷ ${d}, and then × 100 for a percentage.`), opts.indexOf(flip)),
       ];
     },
     variants: () => [],
@@ -2185,7 +2187,7 @@ B07.push(
         let half = Math.floor(n / 2);
         while (!isPr(half)) half--;
         const r = Math.floor(Math.sqrt(n));
-        return [Bg("up-to-half", "conceptual", PRI, `Primes up to half of ${n} were tried. If ${n} had a factor bigger than its square root, it would have a partner factor smaller than the square root, already tested. So stop at √${n} ≈ ${r}.`, half), Bg("root-not-prime", "procedural", PRI, `${r} is the whole number below √${n}, but only primes need to be tried: ${r} is not prime.`, isPr(r) ? null : r)];
+        return [Bg("up-to-half", "conceptual", PRI, `Primes up to half of ${n} were tried. If ${n} had a factor bigger than its square root, it would have a partner factor smaller than the square root, already tested. So stop at √${n}, which is between ${r} and ${r + 1}.`, half), Bg("root-not-prime", "procedural", PRI, `${r} is the whole number below √${n}, but only primes need to be tried: ${r} is not prime.`, isPr(r) ? null : r)];
       }
       const p = spf(n);
       return p === n

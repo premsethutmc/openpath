@@ -243,7 +243,7 @@ export const B25: Def[] = [
       const onLower = vals.filter((v) => v === a).length;
       return differ(n, [
         { id: "upper-included", kind: "conceptual", competency: HIST, says: `A value equal to the upper limit ${b} was counted in this class. It belongs to the next class, which starts at ${b}.`, predict: onUpper ? n + onUpper : null },
-        { id: "lower-excluded", kind: "conceptual", competency: HIST, says: `A value equal to the lower limit ${a} was left out. The class includes its lower limit, so ${a} is counted here.`, predict: onLower ? n - onLower : null },
+        { id: "lower-excluded", kind: "conceptual", competency: HIST, says: `The values equal to the lower limit ${a} were left out. The class includes its lower limit, so every ${a} is counted here.`, predict: onLower ? n - onLower : null },
       ]);
     },
     distractors: ([s, j]) => {
