@@ -10,7 +10,7 @@ jobs:
   more:
     name: More browser tests (maths previews, slice, Tamil)
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
@@ -59,7 +59,7 @@ jobs:
                    showcase-journey slice-journey tamil-help tamil-slips-sounds teaching-contract teaching-first-learner \
                    teaching-first-preview universal-teaching-presentation; do
             t0=$SECONDS
-            if timeout 600 node --import tsx --test "e2e/$f.test.mjs" > "/tmp/more-logs/$f.log" 2>&1; then
+            if timeout 240 node --import tsx --test "e2e/$f.test.mjs" > "/tmp/more-logs/$f.log" 2>&1; then
               echo "pass  $f ($((SECONDS - t0))s)"
             else
               echo "FAIL  $f ($((SECONDS - t0))s)"; failed+=("$f")
