@@ -231,6 +231,14 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
   await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
   await page.locator('[data-part="words"]').getByText("8 of 12 meanings correct").waitFor();
+  await page.getByRole("button", { name: "Try 3 harder words" }).click();
+  await page.getByRole("button", { name: "I'm not sure" }).click();
+  await page.getByText("reluctant", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "Unwilling at first, but eventually agreed" }).click();
+  await page.getByRole("button", { name: "Chosen for now but not final" }).click();
+  await page.getByRole("heading", { name: "2 of 3 correct in context" }).waitFor();
+  await page.getByRole("button", { name: "Back to results", exact: true }).click();
+  await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
   assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 4);
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();
