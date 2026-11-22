@@ -1515,7 +1515,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **345/347 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 345 (hand-written 24, synthesised from blueprints 321)
 - Problem families (generated questions with independent checks): 1119
-- Review registry (repository copy): draft 1451, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1455, submitted 9, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
