@@ -8,7 +8,7 @@ import { kindsSummary } from "../logic/reading/kinds.ts";
 import { TamilToggle, useTamilHelp } from "./tamilHelp.tsx";
 import { masterySummary } from "../logic/grammar-use/mastery.ts";
 import { STUDY_SKILL_NAMES, studySummary } from "../logic/study/study.ts";
-import { syllabusPractice } from "../logic/syllabus/practice.ts";
+import { syllabusPractice, type LineLink } from "../logic/syllabus/practice.ts";
 import { writtenSummary } from "../logic/reading/written.ts";
 import { searchGrammar } from "../logic/grammar-use/search.ts";
 import { useState } from "react";
@@ -48,7 +48,7 @@ const Arrow = () => (
 declare const __OPENPATH_READ_ALOUD__: boolean | undefined;
 const READ_ALOUD_BUILT = typeof __OPENPATH_READ_ALOUD__ !== "undefined" && __OPENPATH_READ_ALOUD__ === true;
 
-export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onListenAnswer, onLongRead, onKinds, onSounds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onSounds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks, onVocab, onNewWords, onListenWrite, onReading, onLevelCheck, onGrammarUse, onSyllabus, onSyllabusLine, onListenAnswer, onLongRead, onKinds, onSounds, onStudy, onWritten, onFirstWords, onParent, onPath, onReadAloud }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void; onVocab: () => void; onNewWords: () => void; onListenWrite: () => void; onReading: () => void; onLevelCheck: () => void; onGrammarUse: (topics?: string[]) => void; onSyllabus: () => void; onSyllabusLine?: (go: NonNullable<LineLink["go"]>) => void; onListenAnswer: () => void; onLongRead?: () => void; onKinds?: () => void; onSounds?: () => void; onStudy?: () => void; onWritten?: () => void; onFirstWords: () => void; onParent?: () => void; onPath?: () => void; onReadAloud?: () => void }) {
   const tamil = useTamilHelp();
   // once a level is found, "Your English today" leads and the rest is folded away; before that the lists are open.
   // the older journey (General English) is in Journey, except in a pilot build, where it is the whole app.
@@ -145,7 +145,7 @@ export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy,
           {showSchool && (
             <div id="school-work" className="compact-list">
               <p className="small">The class syllabus, and words and texts from school that a parent or the learner adds.</p>
-              <SyllabusCard onOpen={onSyllabus} school={school} learner={learner} />
+              <SyllabusCard onOpen={onSyllabus} onLine={onSyllabusLine} school={school} learner={learner} />
               <MyWordsCard learner={learner} onOpen={onMyWords} />
               <MyBooksCard learner={learner} onOpen={onMyBooks} />
             </div>
@@ -631,8 +631,11 @@ function GrammarUseCard({ learner, onOpen }: { learner: Learner; onOpen: () => v
 }
 
 /** The school syllabuses the app holds (logic/syllabus): an inventory with pointers to practice. */
-function SyllabusCard({ onOpen, school, learner }: { onOpen: () => void; school?: SchoolPlace | null; learner?: Learner }) {
+function SyllabusCard({ onOpen, onLine, school, learner }: { onOpen: () => void; onLine?: (go: NonNullable<LineLink["go"]>) => void; school?: SchoolPlace | null; learner?: Learner }) {
   const mine = learner ? syllabusPractice(learner) : null;
+  // the line to do now: one due for a check first, then one not started
+  const due = mine?.dueLines.find((x) => x.go);
+  const next = due ?? mine?.notYet.find((x) => x.go);
   if (school)
     return (
       <section className="hub-card plain" aria-labelledby="syllabus-card-title">
@@ -644,8 +647,13 @@ function SyllabusCard({ onOpen, school, learner }: { onOpen: () => void; school?
         {mine && (
           <p className="small" data-syllabus-practice={`${mine.secure}/${mine.practised}/${mine.total}`}>
             {mine.secure} secure{mine.due ? ` · ${mine.due} due for a check` : ""} · {mine.practised - mine.secure - mine.due} practising · {mine.total - mine.practised} not started
-            {mine.dueLines.length ? ` · check again: ${mine.dueLines[0].text}` : mine.notYet.length ? ` · next: ${mine.notYet[0].text}` : ""}
+            {!onLine && (mine.dueLines.length ? ` · check again: ${mine.dueLines[0].text}` : mine.notYet.length ? ` · next: ${mine.notYet[0].text}` : "")}
           </p>
+        )}
+        {next && onLine && (
+          <button type="button" className="primary" data-syllabus-next={due ? "due" : "new"} onClick={() => onLine(next.go!)}>
+            {due ? `Check it again: ${next.text}` : `Start: ${next.text}`}
+          </button>
         )}
         <button type="button" className="secondary" onClick={onOpen}>
           Open my class

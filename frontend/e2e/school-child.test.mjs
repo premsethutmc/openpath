@@ -8,7 +8,7 @@
  *   E2E_URL=http://127.0.0.1:4174 node --test e2e/school-child.test.mjs
  */
 import assert from "node:assert/strict";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { chromium } from "playwright";
 
@@ -52,7 +52,8 @@ test("a school child: class and board fixed, levels hidden, clear grammar feedba
   await page.getByRole("heading", { name: /a quick warm-up/ }).waitFor();
   await shot(page, "2-home");
 
-  // School work: straight to Class 5, nothing to switch
+  // School work: the class card offers the first line to start, and opens Class 5 with nothing to switch
+  assert.match(await page.locator("[data-syllabus-next='new']").innerText(), /^Start: /);
   await page.getByRole("button", { name: "Open my class" }).click();
   await page.getByRole("heading", { name: "Class 5 English" }).waitFor();
   assert.equal(await page.getByRole("group", { name: "Class" }).count(), 0);
@@ -109,3 +110,37 @@ test("an adult: every class open, levels shown", async () => {
   assert.deepEqual(errors, []);
   await context.close();
 });
+
+test("a weak Class 2 reader's first week starts easy: the first line to start, and a long read at level 1 or 2", async () => {
+  const LONG = JSON.parse(readFileSync(new globalThis.URL("../../content/english/reading/long-reads.json", import.meta.url), "utf8"));
+  const level = new Map(LONG.texts.map((t) => [t.title, t.level]));
+  const { context, page, errors } = await open();
+  await page.getByLabel(/Name to show/).fill("Kavi");
+  await page.getByRole("button", { name: /A school child/ }).click();
+  await page.getByRole("button", { name: "Choose the class" }).waitFor();
+  await page.getByRole("group", { name: "Which class?" }).getByRole("button", { name: "2", exact: true }).click();
+  await page.getByRole("button", { name: "Choose the board" }).waitFor();
+  await page.getByRole("button", { name: "ICSE", exact: true }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await page.locator("#consent").check();
+  await page.getByRole("button", { name: "Build my path" }).click();
+  await page.locator("[data-school]", { hasText: "Class 2 · ICSE" }).waitFor();
+  const fits = async () => {
+    const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
+    assert.ok(sw <= w, "no sideways scrolling");
+  };
+  await fits();
+  // the class card names a line to start
+  assert.match(await page.locator("[data-syllabus-next='new']").innerText(), /^Start: /);
+  // Long reads: a story at level 1 or 2, not a level 4 one
+  await page.getByRole("button", { name: /More to practise|Or choose an activity/ }).click();
+  await page.getByRole("button", { name: "Try a long read" }).click();
+  await page.locator('main.long-read[data-phase="intro"]').waitFor();
+  const title = await page.locator(".long-read .tile h2").innerText();
+  assert.ok((level.get(title) ?? 99) <= 2, `${title} is level ${level.get(title)}`);
+  await fits();
+  await shot(page, "class2-long-read");
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+

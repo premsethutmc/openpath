@@ -16,7 +16,7 @@
 import type { Learner } from "../learner.ts";
 import type { AppEvent } from "../events.ts";
 import { LABEL_OWN } from "../reading/session.ts";
-import { BOARDS, syllabusFor, taskLine, type Outcome, type Syllabus } from "./syllabus.ts";
+import { BOARDS, syllabusFor, taskLine, type Board, type Outcome, type Syllabus, type Where } from "./syllabus.ts";
 
 export type Stage = "not_started" | "practising" | "secure" | "due";
 /** How long a secure line holds without being answered again before it is first due for a check. */
@@ -73,19 +73,36 @@ function outcomes(e: AppEvent, o: Outcome, studyKind: "notes" | "chart" | "map" 
 
 /** Where one line stands for this learner. */
 export function lineStage(learner: Learner, s: Syllabus, o: Outcome): Stage {
-  if (o.coverage === "not" || !o.where) return "not_started";
+  return lineState(learner, s, o).stage;
+}
+
+/**
+ * Where one line stands, and whether it has slipped: it was secure once, but the latest session on it did not hold
+ * (a check after the wait, or later practice, went mostly wrong).
+ */
+export function lineState(learner: Learner, s: Syllabus, o: Outcome): { stage: Stage; slipped: boolean } {
+  const no = { stage: "not_started" as Stage, slipped: false };
+  if (o.coverage === "not" || !o.where) return no;
+  const { sessions, from, started } = lineSessions(learner, s, o);
+  if (!sessions.length) return started ? { stage: "practising", slipped: false } : no;
+  // secure at a session that held, once there have been enough sessions (two days of answers; one task or check)
+  const secureAt = (i: number) => i >= from && sessions[i].held;
+  const last = sessions.length - 1;
+  if (!secureAt(last)) return { stage: "practising", slipped: sessions.slice(0, last).some((_, i) => secureAt(i)) };
+  return { stage: stale(learner, sessions[last].last, waitDays(sessions, 1)) ? "due" : "secure", slipped: false };
+}
+
+/** The sessions on a line in order, the first session that can make it secure, and whether anything was done there. */
+function lineSessions(learner: Learner, s: Syllabus, o: Outcome): { sessions: Session[]; from: number; started: boolean } {
   if (o.where === "guided") {
+    // a task with a grown-up holds when everything the adult looks for was ticked
     const line = taskLine(s, o);
-    const done = learner.state.events.flatMap((e) => (e.kind === "guided_task" && e.record.syllabus === line.syllabus && e.record.outcome === line.outcome ? [{ at: e.at, r: e.record }] : []));
-    if (!done.length) return "not_started";
-    const full = (r: (typeof done)[number]["r"]) => r.of > 0 && r.seen.length === r.of;
-    if (!done.some((d) => full(d.r))) return "practising";
-    const sessions = done.map((d) => ({ first: d.at, last: d.at, held: full(d.r) }));
-    return stale(learner, done[done.length - 1].at, waitDays(sessions, 1)) ? "due" : "secure";
+    const sessions = learner.state.events.flatMap((e) => (e.kind === "guided_task" && e.record.syllabus === line.syllabus && e.record.outcome === line.outcome ? [{ first: e.at, last: e.at, held: e.record.of > 0 && e.record.seen.length === e.record.of }] : []));
+    return { sessions, from: 0, started: sessions.length > 0 };
   }
+  const dayOf = learner.dayFn();
   if (o.where === "reading") {
     // a day with a reading check holds when a check that day was passed on one's own
-    const dayOf = learner.dayFn();
     const byDay = new Map<string, Session>();
     for (const e of learner.state.events) {
       if (e.kind !== "reading" || e.record.type !== "check_result") continue;
@@ -94,13 +111,9 @@ export function lineStage(learner: Learner, s: Syllabus, o: Outcome): Stage {
       const held = e.record.passed && e.record.label === LABEL_OWN;
       byDay.set(d, { first: was?.first ?? e.at, last: e.at, held: !!was?.held || held });
     }
-    const sessions = [...byDay.keys()].sort().map((d) => byDay.get(d)!);
-    if (!sessions.some((x) => x.held)) return learner.readingRecords().length ? "practising" : "not_started";
-    const last = sessions[sessions.length - 1];
-    if (!last.held) return "practising";
-    return stale(learner, last.last, waitDays(sessions, 1)) ? "due" : "secure";
+    return { sessions: [...byDay.keys()].sort().map((d) => byDay.get(d)!), from: 0, started: learner.readingRecords().length > 0 };
   }
-  const dayOf = learner.dayFn();
+  // answers: a day holds when at least four in five were right; secure needs a second day
   const k = studyKindOf(o);
   const byDay = new Map<string, { first: string; last: string; got: boolean[] }>();
   for (const e of learner.state.events) {
@@ -110,14 +123,11 @@ export function lineStage(learner: Learner, s: Syllabus, o: Outcome): Stage {
     const was = byDay.get(d);
     byDay.set(d, { first: was?.first ?? e.at, last: e.at, got: [...(was?.got ?? []), ...got] });
   }
-  if (!byDay.size) return "not_started";
   const sessions = [...byDay.keys()].sort().map((d) => {
     const x = byDay.get(d)!;
     return { first: x.first, last: x.last, held: x.got.filter(Boolean).length / x.got.length >= 0.8 };
   });
-  const last = sessions[sessions.length - 1];
-  if (sessions.length < 2 || !last.held) return "practising";
-  return stale(learner, last.last, waitDays(sessions, 1)) ? "due" : "secure";
+  return { sessions, from: 1, started: sessions.length > 0 };
 }
 
 /** The wait has passed since the line was last answered. */
@@ -181,20 +191,32 @@ export interface SyllabusPractice {
   stages: { id: string; text: string; stage: Stage }[];
   /** Lines the app has a place for (every line, unless one is marked not yet in the app). */
   total: number;
+  /** Lines that were secure once but did not hold on the latest session: worth more practice. */
+  slipped: LineLink[];
   /** Lines due for a fresh check, in syllabus order. */
-  dueLines: { id: string; text: string }[];
+  dueLines: LineLink[];
   /** Lines not yet practised, in syllabus order. */
-  notYet: { id: string; text: string }[];
+  notYet: LineLink[];
 }
 
 /** For a learner with a class and board set; null for anyone else (an adult, or not in school). */
+/** A syllabus line and how to open its practice (null for a line with nowhere to practise it here). */
+export interface LineLink {
+  id: string;
+  text: string;
+  go: { where: Where; topics: string[] | undefined; cls: number; board: Board; line: { syllabus: string; outcome: string; text: string } } | null;
+}
+
 export function syllabusPractice(learner: Learner): SyllabusPractice | null {
   const place = learner.state.preferences?.school;
   if (!place) return null;
   const s = syllabusFor(place.class, place.board);
   if (s.class !== place.class) return null; // a class the board's syllabus does not hold (ICSE 9 to 12)
   const lines = s.strands.flatMap((st) => st.outcomes).filter((o) => o.coverage !== "not");
-  const stages = lines.map((o) => ({ id: o.id, text: o.text, stage: lineStage(learner, s, o) }));
+  const staged = lines.map((o) => ({ o, id: o.id, text: o.text, ...lineState(learner, s, o) }));
+  const stages = staged.map(({ id, text, stage }) => ({ id, text, stage }));
+  // what a button needs to open the line's practice: where, its grammar topics, and the line for a guided task
+  const go = (o: Outcome) => (o.where ? { where: o.where, topics: o.topics, cls: s.class, board: place.board, line: { ...taskLine(s, o), text: o.text } } : null);
   return {
     secure: stages.filter((x) => x.stage === "secure").length,
     due: stages.filter((x) => x.stage === "due").length,
@@ -203,7 +225,8 @@ export function syllabusPractice(learner: Learner): SyllabusPractice | null {
     syllabus: s.id,
     practised: stages.filter((x) => x.stage !== "not_started").length,
     total: lines.length,
-    notYet: stages.filter((x) => x.stage === "not_started").map(({ id, text }) => ({ id, text })),
-    dueLines: stages.filter((x) => x.stage === "due").map(({ id, text }) => ({ id, text })),
+    notYet: staged.filter((x) => x.stage === "not_started").map(({ id, text, o }) => ({ id, text, go: go(o) })),
+    dueLines: staged.filter((x) => x.stage === "due").map(({ id, text, o }) => ({ id, text, go: go(o) })),
+    slipped: staged.filter((x) => x.slipped).map(({ id, text, o }) => ({ id, text, go: go(o) })),
   };
 }
