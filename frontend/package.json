@@ -41,6 +41,7 @@
     "english:e2e-grammar": "node --test e2e/grammar-syllabus.test.mjs",
     "english:e2e-first": "node --test e2e/first-words.test.mjs",
     "english:e2e-reading": "node --test e2e/reading.test.mjs",
+    "english:e2e-school": "node --test e2e/school-child.test.mjs e2e/long-read.test.mjs e2e/kinds.test.mjs e2e/english-gaps.test.mjs",
     "english:e2e-parent-content": "node --test e2e/parent-content.test.mjs",
     "english:demo-server": "node scripts/demo-server.mjs",
     "english:demo-hash-password": "node scripts/demo-hash-password.mjs",

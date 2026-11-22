@@ -88,6 +88,7 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
       {s.syllabus && (
         <p className="small" data-line="syllabus">
           {s.syllabus.name} syllabus, {s.syllabus.total} lines: {s.syllabus.secure} secure,{s.syllabus.due ? ` ${s.syllabus.due} due for a check,` : ""} {s.syllabus.practised - s.syllabus.secure - s.syllabus.due} practising, {s.syllabus.total - s.syllabus.practised} not started
+          {s.syllabus.slipped.length ? `; slipped back, worth more practice: ${s.syllabus.slipped.join("; ")}` : ""}
           {s.syllabus.notYet.length ? `; not yet: ${s.syllabus.notYet.join("; ")}` : ""}
         </p>
       )}

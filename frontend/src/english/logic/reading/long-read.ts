@@ -5,6 +5,8 @@
  * and what the title means. One part a sitting; the next sitting goes on from where the learner stopped.
  * Each answer shows its explanation. Practice-only: nothing here is evidence for the engine.
  */
+import { COURSE } from "./course.ts";
+import { progress, type ReadingRecord } from "./session.ts";
 import longJson from "../../../../../content/english/reading/long-reads.json";
 
 export type LongSkill = "detail" | "inference" | "cause" | "sequence" | "feelings" | "theme" | "character" | "title";
@@ -75,6 +77,16 @@ export function longProblems(l: LongReads): string[] {
 export type LongRecord =
   /** One part read and its questions answered (part 0 to 2), or the questions on the whole (part 3). */
   { type: "part"; text: string; part: number; answers: { skill: LongSkill; correct: boolean }[] };
+
+/**
+ * Where long reads start: the level from the Reading level check (none: a school child's class up to 3, else 3), or
+ * the highest level passed in the Reading lessons when that is higher, so a reader who has grown there is not kept on
+ * easy stories.
+ */
+export function longStart(checked: number | undefined, reading: readonly ReadingRecord[], cls?: number): number {
+  const passed = [...progress(COURSE, reading).units].filter(([, u]) => u.status === "passed_own" || u.status === "passed_after_help").map(([k]) => Number(k.split("@")[1]));
+  return Math.max(checked ?? (cls ? Math.min(3, Math.max(1, cls)) : 3), ...passed);
+}
 
 /**
  * The level to choose stories at: where the reader started, one level up after two stories at that level or above

@@ -48,7 +48,7 @@ import { FirstWords } from "./FirstWords.tsx";
 import { syllabusPractice } from "../logic/syllabus/practice.ts";
 import { StudySkills } from "./StudySkills.tsx";
 import { SyllabusView } from "./Syllabus.tsx";
-import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board } from "../logic/syllabus/syllabus.ts";
+import { DEFAULT_BOARD, DEFAULT_CLASS, SYLLABUSES, type Board, type Where } from "../logic/syllabus/syllabus.ts";
 import { ParentView } from "./ParentView.tsx";
 import { Reading } from "./Reading.tsx";
 import type { SpellSource } from "../logic/events.ts";
@@ -300,6 +300,28 @@ export function App() {
     setScreen({ name: "auth", mode: "login" });
   };
 
+  // open the practice for one syllabus line (from the syllabus screen, or Home's "check it again")
+  const openLine = (where: Where, topics: string[] | undefined, cls: number, line: { syllabus: string; outcome: string; text: string }, board: Board) => {
+    setSyllabusClass(cls);
+    setSyllabusBoard(board);
+    // writing is practised in the essay studio, a separate part of the app
+    if (where === "writing") return void location.assign("?experience=essay-live");
+    if (where === "passage" || where === "passage_seen") return (setInSyllabus(false), setDictPassage(where === "passage" ? "unseen" : "seen"), setInListenWrite(true), scrollTo(0, 0));
+    if (where === "first") return (setInSyllabus(false), setInFirst(true), scrollTo(0, 0));
+    if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
+    setInSyllabus(false);
+    scrollTo(0, 0);
+    if (where === "grammar") setGrammarUse({ topics, from: "syllabus" });
+    else if (where === "words") setInNewWords(true);
+    else if (where === "reading") setInReading(true);
+    else if (where === "listening") setInListenWrite(true);
+    else if (where === "listen") setListenAnswer({ from: "syllabus" });
+    else if (where === "long") setLongRead({ from: "syllabus" });
+    else if (where === "kinds") setKindsRead({ from: "syllabus" });
+    else if (where === "study") setStudy({ from: "syllabus" });
+    else if (where === "written") setWritten({ from: "syllabus" });
+    else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
+  };
   if (screen.name === "loading") return <p className="loading">Opening OpenPath English…</p>;
 
   if (screen.name === "unreachable")
@@ -636,27 +658,7 @@ export function App() {
           fixed={!!learner.state.preferences?.school}
           mine={syllabusPractice(learner)}
           onBack={() => (setInSyllabus(false), scrollTo(0, 0))}
-          onOpen={(where, topics, cls, line, board) => {
-            setSyllabusClass(cls);
-            setSyllabusBoard(board);
-            // writing is practised in the essay studio, a separate part of the app
-            if (where === "writing") return void location.assign("?experience=essay-live");
-            if (where === "passage" || where === "passage_seen") return (setInSyllabus(false), setDictPassage(where === "passage" ? "unseen" : "seen"), setInListenWrite(true), scrollTo(0, 0));
-            if (where === "first") return (setInSyllabus(false), setInFirst(true), scrollTo(0, 0));
-            if (where === "guided") return (setInSyllabus(false), setGuided(line), scrollTo(0, 0));
-            setInSyllabus(false);
-            scrollTo(0, 0);
-            if (where === "grammar") setGrammarUse({ topics, from: "syllabus" });
-            else if (where === "words") setInNewWords(true);
-            else if (where === "reading") setInReading(true);
-            else if (where === "listening") setInListenWrite(true);
-            else if (where === "listen") setListenAnswer({ from: "syllabus" });
-            else if (where === "long") setLongRead({ from: "syllabus" });
-            else if (where === "kinds") setKindsRead({ from: "syllabus" });
-            else if (where === "study") setStudy({ from: "syllabus" });
-            else if (where === "written") setWritten({ from: "syllabus" });
-            else setBee({ source: { type: "bank", id: "spelling-bee" }, title: "Spelling Bee", back: "home" });
-          }}
+          onOpen={openLine}
         />
       </div>
     );
@@ -850,6 +852,7 @@ export function App() {
           onLevelCheck={() => (setInLevelCheck(true), scrollTo(0, 0))}
           onGrammarUse={(topics) => (setGrammarUse(topics ? { topics } : {}), scrollTo(0, 0))}
           onSyllabus={() => (setInSyllabus(true), scrollTo(0, 0))}
+          onSyllabusLine={(g) => openLine(g.where, g.topics, g.cls, g.line, g.board)}
           onListenAnswer={() => (setListenAnswer({}), scrollTo(0, 0))}
           onLongRead={() => (setLongRead({}), scrollTo(0, 0))}
           onKinds={() => (setKindsRead({}), scrollTo(0, 0))}

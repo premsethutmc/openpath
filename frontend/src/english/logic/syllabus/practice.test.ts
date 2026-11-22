@@ -30,7 +30,7 @@ test("SP-1 a CBSE Class 10 child: nothing practised, then a grammar topic and a 
   assert.ok(lines(["G3", "W2"]).every((o) => !after.notYet.some((n) => n.id === o.id)), "modals (G3) and the chart paragraph (W2) are practised");
   assert.equal(after.practised, 2);
   assert.equal(after.secure, 0, "answers on one day are practising, not secure");
-  assert.deepEqual(childSummary(l, clock()).syllabus, { name: "CBSE Class 10", secure: 0, due: 0, practised: 2, total, notYet: after.notYet.slice(0, 3).map((x) => x.text) });
+  assert.deepEqual(childSummary(l, clock()).syllabus, { name: "CBSE Class 10", secure: 0, due: 0, practised: 2, total, notYet: after.notYet.slice(0, 3).map((x) => x.text), slipped: [] });
   await l.setPreferences("older", "grammar", null);
   assert.equal(syllabusPractice(l), null);
 });
@@ -59,6 +59,8 @@ test("SP-2 secure needs two days and four in five right on the latest; a grown-u
   // the check: mostly wrong goes back to practising; right again is secure
   await l.recordGrammar([ans(false), ans(false), ans(true)]);
   assert.equal(stage("G3"), "practising");
+  assert.deepEqual(syllabusPractice(l)!.slipped.map((x) => x.id), ["G3"], "slipped back: the parent sees it");
+  assert.deepEqual(syllabusPractice(l)!.dueLines, []);
   now += 86_400_000;
   await l.recordGrammar([ans(true), ans(true), ans(true), ans(true)]);
   assert.equal(stage("G3"), "secure");
