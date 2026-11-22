@@ -62,6 +62,7 @@ export function kindsProblems(k: Kinds): string[] {
   const ids = new Set<string>();
   for (const t of k.texts) {
     if (ids.has(t.id)) out.push(`${t.id}: listed twice`);
+    if (k.texts.some((x) => x !== t && x.title === t.title)) out.push(`${t.id}: title "${t.title}" used twice`);
     ids.add(t.id);
     if (!(t.kind in KIND_NAMES)) out.push(`${t.id}: unknown kind ${t.kind}`);
     if (!Number.isInteger(t.level) || t.level < 1 || t.level > KIND_LEVELS) out.push(`${t.id}: level ${t.level}`);

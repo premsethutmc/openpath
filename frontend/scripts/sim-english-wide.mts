@@ -63,11 +63,11 @@ const problems: string[] = [];
 const fail = (msg: string) => problems.push(msg);
 
 interface Stats {
-  kinds: { sittings: number; right: number; asked: number; ranOut: number };
-  long: { sittings: number; right: number; asked: number; ranOut: number };
+  kinds: { sittings: number; right: number; asked: number; ranOut: number; again: number; firstAgain: number | null };
+  long: { sittings: number; right: number; asked: number; ranOut: number; again: number; firstAgain: number | null };
   study: { tasks: Record<StudyKind, number>; right: number; asked: number; ownPassed: number; ownOf: number; generated: number; repeats: number };
 }
-const blank = (): Stats => ({ kinds: { sittings: 0, right: 0, asked: 0, ranOut: 0 }, long: { sittings: 0, right: 0, asked: 0, ranOut: 0 }, study: { tasks: { notes: 0, chart: 0, map: 0 }, right: 0, asked: 0, ownPassed: 0, ownOf: 0, generated: 0, repeats: 0 } });
+const blank = (): Stats => ({ kinds: { sittings: 0, right: 0, asked: 0, ranOut: 0, again: 0, firstAgain: null }, long: { sittings: 0, right: 0, asked: 0, ranOut: 0, again: 0, firstAgain: null }, study: { tasks: { notes: 0, chart: 0, map: 0 }, right: 0, asked: 0, ownPassed: 0, ownOf: 0, generated: 0, repeats: 0 } });
 
 /** The learner's own piece: a strong writer gives the model answer, a weak one a thin or wrong one. */
 function ownPiece(s: StudySitting, well: boolean): string {
@@ -96,7 +96,10 @@ function runLearner(p: Persona, run: number): Stats {
   for (let day = 0; day < DAYS; day++) {
     // a poem or everyday text
     try {
-      const t = kindToRead(KINDS, kindRecs, p.level)?.text;
+      const pick = kindToRead(KINDS, kindRecs, p.level);
+      const t = pick?.text;
+      // a text read again: counted, with the first day it happened
+      if (pick?.again) (st.kinds.again++, (st.kinds.firstAgain ??= day + 1));
       if (!t) st.kinds.ranOut++;
       else {
         const s = new KindSitting(t);
@@ -120,6 +123,7 @@ function runLearner(p: Persona, run: number): Stats {
       const lvl = longLevel(LONG, longRecs, p.level);
       const step = nextStep(LONG, longRecs, lvl);
       if (step && step.part === 0 && step.text.level > lvl + 1) fail(`${p.name} ${run}: a level ${step.text.level} long read given at level ${lvl}`);
+      if (step && step.part === 0 && longRecs.some((r) => r.text === step.text.id)) (st.long.again++, (st.long.firstAgain ??= day + 1));
       if (!step) st.long.ranOut++;
       else {
         const s = new LongSitting(step.text, step.part);
@@ -205,19 +209,20 @@ for (const p of PERSONAS) for (let run = 0; run < RUNS; run++) rows.push({ perso
 const lines = SYLLABUSES.reduce((n, s) => n + walkSyllabus(s), 0);
 
 const pct = (a: number, b: number) => (b ? `${Math.round((100 * a) / b)}%` : "–");
+const first = (xs: (number | null)[]) => (xs.some((x) => x === null) ? "never" : String(Math.min(...(xs as number[]))));
 const avg = (xs: number[]) => (xs.length ? (xs.reduce((a, b) => a + b, 0) / xs.length).toFixed(1) : "–");
 const out: string[] = [
   "# Simulated learners: texts, notes, charts and maps, and every syllabus line",
   "",
   `${PERSONAS.length} kinds of learner, ${RUNS} of each, ${DAYS} days, one sitting of each activity a day. Behaviour only; see frontend/scripts/sim-english-wide.mts.`,
   "",
-  "| learner | texts right | long reads right | study right | own writing checks met | notes / charts / maps | generated tasks | texts ran out (days) |",
-  "|---|---|---|---|---|---|---|---|",
+  "| learner | texts right | long reads right | study right | own writing checks met | notes / charts / maps | generated tasks | texts ran out (days) | texts read again (first on day) | long reads read again (first on day) |",
+  "|---|---|---|---|---|---|---|---|---|---|",
 ];
 for (const p of PERSONAS) {
   const rs = rows.filter((x) => x.persona === p.name).map((x) => x.s);
   const sum = (f: (s: Stats) => number) => rs.reduce((a, s) => a + f(s), 0);
-  out.push(`| ${p.name} | ${pct(sum((s) => s.kinds.right), sum((s) => s.kinds.asked))} | ${pct(sum((s) => s.long.right), sum((s) => s.long.asked))} | ${pct(sum((s) => s.study.right), sum((s) => s.study.asked))} | ${pct(sum((s) => s.study.ownPassed), sum((s) => s.study.ownOf))} | ${avg(rs.map((s) => s.study.tasks.notes))} / ${avg(rs.map((s) => s.study.tasks.chart))} / ${avg(rs.map((s) => s.study.tasks.map))} | ${avg(rs.map((s) => s.study.generated))} | ${avg(rs.map((s) => s.kinds.ranOut + s.long.ranOut))} |`);
+  out.push(`| ${p.name} | ${pct(sum((s) => s.kinds.right), sum((s) => s.kinds.asked))} | ${pct(sum((s) => s.long.right), sum((s) => s.long.asked))} | ${pct(sum((s) => s.study.right), sum((s) => s.study.asked))} | ${pct(sum((s) => s.study.ownPassed), sum((s) => s.study.ownOf))} | ${avg(rs.map((s) => s.study.tasks.notes))} / ${avg(rs.map((s) => s.study.tasks.chart))} / ${avg(rs.map((s) => s.study.tasks.map))} | ${avg(rs.map((s) => s.study.generated))} | ${avg(rs.map((s) => s.kinds.ranOut + s.long.ranOut))} | ${avg(rs.map((s) => s.kinds.again))} (${first(rs.map((s) => s.kinds.firstAgain))}) | ${avg(rs.map((s) => s.long.again))} (${first(rs.map((s) => s.long.firstAgain))}) |`);
 }
 out.push("", `Syllabus: ${SYLLABUSES.length} syllabuses, ${lines} lines walked.`, "", problems.length ? `## Problems (${problems.length})\n\n${[...new Set(problems)].slice(0, 50).map((x) => `- ${x}`).join("\n")}` : "No problems found.");
 const md = out.join("\n");

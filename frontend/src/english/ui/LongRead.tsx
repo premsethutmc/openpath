@@ -5,7 +5,7 @@
 import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
-import { LONG, LongSitting, PARTS, longLevel, longSummary, nextStep, type LongRecord } from "../logic/reading/long-read.ts";
+import { LONG, LongSitting, PARTS, longLevel, longStart, longSummary, nextStep, type LongRecord } from "../logic/reading/long-read.ts";
 import { asReadingLevel } from "../logic/streams/level-check.ts";
 
 const partName = (part: number) => (part < PARTS ? `Part ${part + 1} of ${PARTS}` : "The whole story");
@@ -15,8 +15,8 @@ export function LongRead({ learner, onLeave, onChanged }: { learner: Learner; on
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
   const unsaved = useRef<LongRecord[]>([]);
-  // the reading level found at the start (Reading level check), raised as stories go well
-  const level = () => longLevel(LONG, learner.longRecords(), asReadingLevel(learner.levels().reading?.start) ?? 3);
+  // the reading level found at the start, or the highest level passed in Reading lessons if higher; raised as stories go well
+  const level = () => longLevel(LONG, learner.longRecords(), longStart(asReadingLevel(learner.levels().reading?.start), learner.readingRecords(), learner.state.preferences?.school?.class));
   const step = nextStep(LONG, learner.longRecords(), level());
   const tick = () => setTick((t) => t + 1);
   const save = async (s: LongSitting) => {
