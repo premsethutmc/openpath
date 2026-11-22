@@ -24,3 +24,9 @@ test("every correction is what the learner sees", () => {
     assert.ok(c.text.every((t) => t.trim().length > 0));
   }
 });
+
+test("a correction never changes a method-aligned lesson (its alignment pins the exact text)", async () => {
+  const { default: a } = await import("../../../content/learning/method-alignment.v1.json");
+  const aligned = new Set((a as { lessons: { competency: string; strategy: string }[] }).lessons.map((l) => `${l.competency}|${l.strategy}`));
+  assert.deepEqual(screenCorrections.filter((c) => aligned.has(`${c.competency}|${c.section}`)).map((c) => `${c.competency} ${c.section}`), []);
+});
