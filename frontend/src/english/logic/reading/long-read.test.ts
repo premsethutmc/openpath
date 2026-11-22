@@ -2,7 +2,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LONG, LongSitting, PARTS, choices, longProblems, longLevel, longStart, longSummary, nextStep, type LongRecord } from "./long-read.ts";
-import { LABEL_OWN } from "./session.ts";
+import { LABEL_OWN, type ReadingRecord } from "./session.ts";
 import { loadContent } from "../content.ts";
 import { testClock } from "../journey-sim.ts";
 import { Learner } from "../learner.ts";
@@ -110,7 +110,7 @@ test("LR-3 stored on the learner's record without touching the engine", async ()
 test("LR-5 long reads start at the level check, or higher when the Reading lessons have been passed higher", () => {
   assert.equal(longStart(undefined, []), 3);
   assert.equal(longStart(1, []), 1);
-  const pass = (level: number) => ({ type: "check_result" as const, unit: { skill: "detail" as const, level: level as 1 }, answers: [], passed: true, label: LABEL_OWN });
+  const pass = (level: number) => ({ type: "check_result", unit: { skill: "detail", level }, answers: [], passed: true, label: LABEL_OWN }) as ReadingRecord;
   assert.equal(longStart(1, [pass(2), pass(4)]), 4);
   assert.equal(longStart(5, [pass(2)]), 5);
   // no level check: a Class 1 or 2 child starts at their class, older children at 3
