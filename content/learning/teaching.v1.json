@@ -522,7 +522,7 @@
    "kind": "card",
    "competency": "MATH.algebra.arithmetic-sequences",
    "title": "Use arithmetic progressions",
-   "hash": "595a8464",
+   "hash": "ba7ddb65",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -641,7 +641,7 @@
    "kind": "card",
    "competency": "MATH.algebra.figurate-numbers",
    "title": "Relate figurate number sequences to their dot and shape pictures",
-   "hash": "f1fe7124",
+   "hash": "b89eb53d",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -961,7 +961,7 @@
    "kind": "card",
    "competency": "MATH.algebra.logarithms",
    "title": "Use logarithm laws and solve logarithmic equations",
-   "hash": "a0767f09",
+   "hash": "2b7d6df4",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1101,7 +1101,7 @@
    "kind": "card",
    "competency": "MATH.algebra.polynomial-equation-solving",
    "title": "Solve higher-degree polynomial equations using structure",
-   "hash": "f10a50fc",
+   "hash": "229a2a87",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1138,7 +1138,7 @@
    "kind": "card",
    "competency": "MATH.algebra.polynomial-square-root",
    "title": "Find square roots of polynomials",
-   "hash": "56cb504e",
+   "hash": "17a4bf86",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1163,7 +1163,7 @@
    "kind": "card",
    "competency": "MATH.algebra.polynomials",
    "title": "Operate on polynomials",
-   "hash": "34282531",
+   "hash": "f1eba3a0",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1379,7 +1379,7 @@
    "kind": "card",
    "competency": "MATH.calculus.continuity",
    "title": "Test continuity",
-   "hash": "51208386",
+   "hash": "101b780c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1476,7 +1476,7 @@
    "kind": "card",
    "competency": "MATH.calculus.differential-equations",
    "title": "Solve elementary differential equations",
-   "hash": "72274d49",
+   "hash": "54df4ee4",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1724,7 +1724,7 @@
    "kind": "card",
    "competency": "MATH.calculus.volumes-of-revolution",
    "title": "Find volumes of solids of revolution by integration",
-   "hash": "4a88b097",
+   "hash": "5412a9c5",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2236,7 +2236,7 @@
    "kind": "card",
    "competency": "MATH.geometry.parallel-angles",
    "title": "Use angles with parallel lines",
-   "hash": "b658ac6b",
+   "hash": "a9bdb43a",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2537,7 +2537,7 @@
    "kind": "card",
    "competency": "MATH.geometry.tessellations",
    "title": "Decide which polygons tile the plane and create tilings",
-   "hash": "7c9bce17",
+   "hash": "6a9240dc",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3395,7 +3395,7 @@
    "kind": "card",
    "competency": "MATH.number.complex-polar-form",
    "title": "Write complex numbers in modulus-argument (polar) form",
-   "hash": "0f088152",
+   "hash": "3b43048d",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3565,7 +3565,7 @@
    "kind": "card",
    "competency": "MATH.number.euclid-algorithm",
    "title": "Use Euclidean algorithm and prime factorisation",
-   "hash": "14423e2f",
+   "hash": "7e8367ba",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4396,7 +4396,7 @@
    "kind": "card",
    "competency": "MATH.number.square-roots",
    "title": "Find squares and square roots",
-   "hash": "955c1518",
+   "hash": "1ce206d5",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4545,7 +4545,7 @@
    "kind": "card",
    "competency": "MATH.probability.classical",
    "title": "Calculate equally likely event probabilities",
-   "hash": "c46dd33e",
+   "hash": "21ba9f7e",
    "source": "rule",
    "from": "lesson",
    "classes": [
