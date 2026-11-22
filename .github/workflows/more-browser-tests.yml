@@ -63,7 +63,7 @@ jobs:
               echo "pass  $f ($((SECONDS - t0))s)"
             else
               echo "FAIL  $f ($((SECONDS - t0))s)"; failed+=("$f")
-              grep -E "^not ok|error:|Error|expected|actual" "/tmp/more-logs/$f.log" | head -12 | while IFS= read -r line; do echo "::error title=$f::$line"; done
+              grep -E "^not ok|error:|Error|expected|actual" "/tmp/more-logs/$f.log" | head -12 | while IFS= read -r line; do echo "::error title=$f::$line"; done || true
             fi
           done
           echo "failed: ${failed[*]:-none}"
