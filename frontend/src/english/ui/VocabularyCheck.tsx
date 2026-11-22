@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { CHECK, ROUNDS, ROUND_SIZE, SizeCheckSession, latestResult, startBand, type CheckView, type SizeCheck, type VocabRecord } from "../logic/vocabulary/size-check.ts";
+import { VocabularyStretch } from "./VocabularyStretch.tsx";
 import { NoteBox } from "./Note.tsx";
 
 export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: number; answered: number } | null; onStart: () => void; onBack: () => void }) {
@@ -27,7 +28,7 @@ export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: n
   );
 }
 
-export function VocabularyView({ check, view, onAnswer, onLeave }: { check: SizeCheck; view: CheckView; onAnswer: (choice: number | null) => void; onLeave: () => void }) {
+export function VocabularyView({ check, view, onAnswer, onLeave, onStretch }: { check: SizeCheck; view: CheckView; onAnswer: (choice: number | null) => void; onLeave: () => void; onStretch?: () => void }) {
   if (view.phase === "asking" && view.word)
     return (
       <main className="page vocab" data-phase="asking">
@@ -59,7 +60,7 @@ export function VocabularyView({ check, view, onAnswer, onLeave }: { check: Size
       <p className="eyebrow">Words · Word check</p>
       <h1 className="hero">{r.correct} of {r.answered} meanings correct</h1>
       <p className="sub">{r.band === 0 ? "Not enough evidence to suggest a higher practice level yet." : `Suggested practice: Level ${Math.min(check.bands.length, r.band + 1)} of ${check.bands.length}.`}</p>
-      <p className="small">These are answers to a short recognition check. They do not measure how many words you know or can use.</p>
+      <p className="small">These are answers to a short recognition check. Advanced vocabulary in context was not tested.</p>
       <ul className="vocab-bands">
         {r.perBand.map((b) => (
           <li key={b.band}>
@@ -70,6 +71,7 @@ export function VocabularyView({ check, view, onAnswer, onLeave }: { check: Size
           </li>
         ))}
       </ul>
+      {onStretch && <button type="button" className="secondary" onClick={onStretch}>Try 3 harder words</button>}
       <button type="button" className="primary" onClick={onLeave}>
         Done
       </button>
@@ -81,6 +83,7 @@ export function VocabularyCheck({ learner, onLeave, onChanged }: { learner: Lear
   const [session, setSession] = useState<SizeCheckSession | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [stretch, setStretch] = useState(false);
   const unsaved = useRef<VocabRecord[]>([]);
   /** Store each step before the screen moves on; anything that could not be saved goes first next time. */
   const step = async (s: SizeCheckSession, act?: () => void) => {
@@ -110,6 +113,7 @@ export function VocabularyCheck({ learner, onLeave, onChanged }: { learner: Lear
         }}
       />
     );
+  if (stretch) return <VocabularyStretch onBack={() => setStretch(false)} />;
   const view = session.snapshot();
   return (
     <>
@@ -118,7 +122,7 @@ export function VocabularyCheck({ learner, onLeave, onChanged }: { learner: Lear
           This step could not be saved. Check the connection; your next answer will try again.
         </p>
       )}
-      <VocabularyView check={CHECK} view={view} onAnswer={(c) => void step(session, () => session.answer(c))} onLeave={onLeave} />
+      <VocabularyView check={CHECK} view={view} onAnswer={(c) => void step(session, () => session.answer(c))} onLeave={onLeave} onStretch={() => setStretch(true)} />
       {view.phase === "done" && (
         <div className="page vocab-note">
           <NoteBox learner={learner} screen="vocabulary-check:result" label="Did this result look right? Was any word or meaning confusing?" />

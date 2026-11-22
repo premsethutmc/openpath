@@ -15,6 +15,7 @@ import { BANDS } from "../logic/vocabulary/daily-words.ts";
 import { CHECK, SizeCheckSession, startBand } from "../logic/vocabulary/size-check.ts";
 import { slowText } from "./ListenWrite.tsx";
 import { syncAutoLists } from "../logic/streams/joined.ts";
+import { VocabularyStretch } from "./VocabularyStretch.tsx";
 import { NoteBox } from "./Note.tsx";
 import { speechPossible } from "./speech.ts";
 import { playWord, stopWord, type PlayOutcome } from "./wordPlayer.ts";
@@ -218,7 +219,7 @@ export function LevelGrammar({ view, onDone, onSkip, onStop }: { view: GrammarPl
   );
 }
 
-export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Levels; skipped: Part[]; onDone: () => void; onGrammar?: () => void }) {
+export function LevelResult({ levels, skipped, onDone, onGrammar, onStretch }: { levels: Levels; skipped: Part[]; onDone: () => void; onGrammar?: () => void; onStretch?: () => void }) {
   const reading = levels.reading && COURSE.levels.find((l) => l.id === levels.reading!.start)!;
   const line = (part: Part) => skipped.includes(part) && <span className="small"> Skipped: the app starts you by age here.</span>;
   return (
@@ -232,6 +233,7 @@ export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Le
           <span>
             <b>🌱 Words</b>
             {line("words")}
+            {levels.words && !skipped.includes("words") && <span className="small"> Advanced vocabulary in context was not tested.</span>}
             {levels.words?.correct !== undefined && !skipped.includes("words") && <span className="small"> {levels.words.correct} of {levels.words.answered} meanings correct</span>}
           </span>
           <span className="status">{levels.words && !skipped.includes("words") ? levels.words.band > 0 ? `Suggested practice: Level ${Math.min(BANDS, levels.words.band + 1)} of ${BANDS}` : "Not enough evidence yet" : "—"}</span>
@@ -283,6 +285,7 @@ export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Le
           </button>
         </section>
       )}
+      {onStretch && levels.words && !skipped.includes("words") && <button type="button" className="secondary" onClick={onStretch}>Try 3 harder words</button>}
       <button type="button" className="primary" onClick={onDone}>
         See what to do today
       </button>
@@ -295,6 +298,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
   const [part, setPart] = useState<Part | "intro" | "result">("intro");
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [stretch, setStretch] = useState(false);
   const [heard, setHeard] = useState<PlayOutcome | null>(null);
   const words = useRef<SizeCheckSession | null>(null);
   const reading = useRef<ReadingPlacement | null>(null);
@@ -504,10 +508,11 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
       </>
     );
   }
+  if (stretch) return <VocabularyStretch onBack={() => setStretch(false)} />;
   return (
     <>
       {warn}
-      <LevelResult levels={learner.levels()} skipped={skipped.current} onDone={onLeave} onGrammar={onGrammar} />
+      <LevelResult levels={learner.levels()} skipped={skipped.current} onDone={onLeave} onGrammar={onGrammar} onStretch={() => setStretch(true)} />
       <div className="page vocab-note">
         <NoteBox learner={learner} screen="level-check:result" label="Do these levels look right? Was any part confusing?" />
       </div>

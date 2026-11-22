@@ -19,3 +19,11 @@ Content: `content/english/vocabulary/size-check.json`. Logic: `frontend/src/engl
 The eight difficulty bands and distractors are not calibrated with learners. Multiple-choice answers can still
 be guessed or inferred by elimination. The next validation step is stronger distractors and independent
 context or recall tasks, with repeated use by real learners before claiming vocabulary growth or exam readiness.
+
+## Context challenge (provisional)
+
+After either check, learners can try one harder word in a sentence and two fresh follow-ups. A correct
+first answer opens two more demanding words; if it is wrong or skipped, the learner gets two more
+accessible contrasts. They can rule out and restore any option before committing. Feedback after all
+three explains the clue and why each option fits or fails. The score is for these three items alone,
+does not change placement, and is not stored as evidence of mastery or independent word use.
