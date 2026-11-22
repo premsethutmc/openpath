@@ -1,6 +1,6 @@
 /**
  * End-to-end: the Word check on an Android-sized phone (Chromium emulating 412×915; not a physical phone). A learner
- * who knows the words of the first four bands and says "I don't know" above them gets about 4,000 word families;
+ * who knows the words of the first four bands and says "I don't know" above them gets a sample score and provisional practice recommendation;
  * the result is kept after a reload. Device-only, against the production build; nothing is requested elsewhere.
  *
  *   npm run english:build && npm run english:preview &
@@ -24,7 +24,7 @@ before(async () => {
 });
 after(() => browser?.close());
 
-test("Word check: answer, say 'I don't know', get a rough estimate, and find it kept", async () => {
+test("Word check: answer, say 'I don't know', get a sample score, and find it kept", async () => {
   const context = await browser.newContext(ANDROID);
   const page = await context.newPage();
   const errors = [];
@@ -43,7 +43,7 @@ test("Word check: answer, say 'I don't know', get a rough estimate, and find it 
   await page.getByRole("button", { name: "Build my path" }).click();
 
   await page.getByRole("button", { name: "Check my words" }).click();
-  await page.getByRole("heading", { name: "How many words do you know?" }).waitFor();
+  await page.getByRole("heading", { name: "Check your word meanings" }).waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   const asked = [];
   for (let i = 1; i <= 24; i++) {
@@ -64,11 +64,11 @@ test("Word check: answer, say 'I don't know', get a rough estimate, and find it 
     else await page.getByRole("button", { name: "I don't know this word" }).click();
     await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
   }
-  await page.getByRole("heading", { name: "About 4,000 word families" }).waitFor();
-  await page.getByText("Most likely between 3,500 and 4,500.").waitFor();
+  await page.getByRole("heading", { name: "9 of 15 meanings correct" }).waitFor();
+  await page.getByText("Suggested practice: Level 5 of 8.").waitFor();
   await shot(page, "2-result");
   await page.reload();
-  await page.getByText("Last time: about 4,000 word families").waitFor();
+  await page.getByText("Last time: 9 of 15 correct").waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

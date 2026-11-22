@@ -233,7 +233,7 @@ export function LevelResult({ levels, skipped, onDone, onGrammar }: { levels: Le
             <b>🌱 Words</b>
             {line("words")}
           </span>
-          <span className="status">{levels.words && !skipped.includes("words") ? `Level ${Math.min(BANDS, levels.words.band + 1)} of ${BANDS}` : "—"}</span>
+          <span className="status">{levels.words && !skipped.includes("words") ? levels.words.band > 0 ? `Suggested practice: Level ${Math.min(BANDS, levels.words.band + 1)} of ${BANDS}` : "Not enough evidence yet" : "—"}</span>
         </li>
         <li data-part="reading">
           <span>
@@ -400,7 +400,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
               s.answer(c);
               const records = s.take();
               const r = s.snapshot().result;
-              if (r) open("reading", [() => learner.recordVocab(records), level({ type: "words", band: r.band, estimate: r.estimate, answered: r.answered })]);
+              if (r) open("reading", [() => learner.recordVocab(records), level({ type: "words", band: r.band, answered: r.answered })]);
               else void save(() => learner.recordVocab(records));
             }}
           />

@@ -158,7 +158,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-part="grammar"] .status', { hasText: "Level 4 of 7" }).waitFor();
   await page.getByText("Naming a noun and a verb comes first.").waitFor();
   await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: "Level 4 of 8" }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "Suggested practice: Level 4 of 8" }).waitFor();
   await page.locator('[data-part="reading"] .status', { hasText: "Expert (level 6 of 6)" }).waitFor();
   await page.locator('[data-part="listening"] .status', { hasText: "Level 7 of 7" }).waitFor();
   await fits();
@@ -228,7 +228,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByText("Part 5 of 5: Grammar").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: "Level 1 of 8" }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
   assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 4);
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();

@@ -4,7 +4,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { CHECK, OPTIONS, ROUNDS, ROUND_SIZE, SizeCheckSession, buildCheck, checkProblems, estimate, knownShare, latestResult, seenWords, startBand, type VocabRecord } from "./size-check.ts";
+import { CHECK, OPTIONS, ROUNDS, ROUND_SIZE, SizeCheckSession, buildCheck, checkProblems, score, latestResult, seenWords, startBand, wordPracticeBand, type VocabRecord } from "./size-check.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -36,38 +36,38 @@ test("VC-1 content: eight bands of ten words, three different meanings each, non
   assert.match(checkProblems(bad).join("\n"), /cat: needs 3 different meanings[\s\S]*cat: a meaning uses the word itself/);
 });
 
-test("VC-2 the estimate follows what the learner knows, and the range contains it", () => {
-  const sizes = [0, 1000, 2000, 3000, 4000, 5000, 7000, 10000, 14000];
-  let last = -1;
-  for (let top = 0; top <= 8; top++) {
-    const { result, asked } = sit(top);
-    assert.equal(result.estimate, sizes[top], `knows bands up to ${top}`);
-    assert.equal(result.band, top);
-    assert.ok(result.low <= result.estimate && result.estimate <= result.high);
-    assert.ok(result.estimate > last);
-    last = result.estimate;
-    assert.equal(new Set(asked).size, asked.length, "no word twice in a sitting");
-    assert.ok(asked.length >= ROUND_SIZE * 4 && asked.length <= ROUND_SIZE * ROUNDS, `${asked.length} words`);
+test("VC-2 only tested words count, and a single lucky round cannot set placement", () => {
+  for (const [start, knows] of [[1, 0], [3, 4], [6, 4], [4, 8], [8, 8]]) {
+    const { result, asked, records } = sit(knows, null, [], start);
+    assert.equal(result.answered, asked.length);
+    assert.equal(result.correct, records.filter((r) => r.type === "answer" && r.outcome === "right").length);
+    assert.ok(result.band <= knows);
+    assert.equal(new Set(asked).size, asked.length);
+    assert.ok(asked.length <= ROUND_SIZE * ROUNDS);
   }
-  // wherever the check starts, the same learner gets nearly the same answer
-  for (const start of [1, 3, 6]) assert.ok(Math.abs(sit(4, null, [], start).result.estimate - 4000) <= 500, `start ${start}`);
+  assert.equal(sit(0, null, [], 8).result.correct, 0, "starting high cannot add credit");
+  assert.equal(score(CHECK, Array.from({ length: 3 }, () => ({ band: 6, outcome: "right" as const }))).band, 0);
+  assert.equal(sit(4).result.band, 4);
+  assert.equal(sit(8).result.band, 8);
 });
 
-test("VC-3 guessing does not pay: on average it earns nothing in a band, and less than saying 'I don't know' costs nothing", () => {
-  assert.equal(knownShare(1, 2, 3), 0, "one lucky guess in three is cancelled by the two misses");
-  assert.equal(knownShare(3, 0, 3), 1);
-  assert.equal(knownShare(0, 0, 3), 0);
-  assert.equal(knownShare(0, 3, 3), 0, "never below zero");
-  assert.equal(OPTIONS, 3);
-  // a learner who knows bands 1-3 and guesses at random above: the estimate stays near 3,000 on average
-  let total = 0;
-  const runs = 300;
+test("VC-3 lucky two-of-three rounds cannot climb to a high practice level", () => {
+  const s = new SizeCheckSession(CHECK, 3, [], 4);
+  const bands: number[] = [];
+  for (let v = s.snapshot(), i = 0; v.phase === "asking"; v = s.snapshot(), i++) {
+    const w = byWord.get(v.word!.word)!;
+    bands.push(w.band);
+    s.answer(i % 3 === 2 ? (w.answer + 1) % OPTIONS : w.answer);
+  }
+  assert.equal(s.snapshot().result!.band, 0);
+  assert.ok(Math.max(...bands) <= 3, "old routing reached band 6 and displayed practice level 7");
   let seed = 12345;
-  const rnd = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0), seed / 2 ** 32);
-  for (let k = 0; k < runs; k++) total += sit(3, () => Math.floor(rnd() * 3)).result.estimate;
-  const mean = total / runs;
-  assert.ok(mean > 2700 && mean < 3900, `mean estimate with guessing ${mean.toFixed(0)}`);
-  assert.equal(sit(3).result.estimate, 3000);
+  let high = 0;
+  for (let k = 0; k < 10000; k++) {
+    const nextGuess = () => Math.floor(((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 2 ** 32) * OPTIONS);
+    if (sit(0, nextGuess).result.band >= 6) high++;
+  }
+  assert.equal(high, 0, "no tested blind guesser reaches practice level 7 in 10,000 full checks");
 });
 
 test("VC-4 a retake uses unseen words first, and the latest result is the one reported", () => {
@@ -82,12 +82,18 @@ test("VC-4 a retake uses unseen words first, and the latest result is the one re
   }
   assert.ok(reused.length <= 4, `${reused.length} words came round again`);
   assert.equal(sit(4, null, first.records, 4).asked.slice(0, 3).filter((w) => first.asked.includes(w)).length, 0);
-  assert.equal(second.result.estimate, 4000);
+  assert.equal(second.result.band, 4);
   assert.equal(seenWords(second.records).size, new Set([...first.asked, ...second.asked]).size);
-  assert.equal(latestResult(second.records)!.estimate, 4000);
+  assert.equal(latestResult(second.records)!.band, 4);
   assert.equal(latestResult([]), null);
+  const old = { type: "result", check: "1", estimate: 6500, low: 5500, high: 7500, band: 6, answered: 12 } as const;
+  assert.deepEqual(latestResult([old]), old);
+  assert.equal(wordPracticeBand([old], 6), undefined);
+  assert.equal(wordPracticeBand([old, ...second.records], 6), 4);
   assert.deepEqual([startBand("early"), startBand("school"), startBand("older"), startBand(null)], [2, 3, 4, 3]);
-  assert.equal(estimate(CHECK, []).estimate, 0);
+  assert.equal(score(CHECK, []).correct, 0);
+  const third = sit(4, null, second.records);
+  assert.equal(new Set(third.asked).size, third.asked.length, "no duplicates after the unseen list is exhausted");
 });
 
 test("VC-5 the record is kept with the learner and never reaches the engine", async () => {
@@ -103,6 +109,6 @@ test("VC-5 the record is kept with the learner and never reaches the engine", as
   assert.ok(!events.some((e) => e.kind === "evidence" || e.kind === "session"));
   assert.equal(picture(), before);
   const again = await Learner.open(c, repo, "p-vocab", clock);
-  assert.equal(latestResult(again.vocabRecords())!.estimate, 5000);
+  assert.equal(latestResult(again.vocabRecords())!.band, 5);
   assert.match(String(eventProblem({ kind: "vocab", id: "x", at: clock(), record: {} })), /without its type/);
 });

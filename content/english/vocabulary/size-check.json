@@ -1,9 +1,9 @@
 {
   "id": "vocabulary-size-check",
-  "version": 1,
+  "version": 2,
   "status": "candidate: words, meanings and frequency bands chosen by OpenPath; the bands are estimates, not taken from a measured frequency list, and nothing here is reviewed by an educator",
   "review": "candidate-unvalidated",
-  "evidence": "practice-only: the result is an estimate shown to the learner; it changes no capability estimate",
+  "evidence": "practice-only: the result reports sampled recognition and suggests practice; it changes no capability estimate",
   "bands": [
     { "id": 1, "families": 1000, "label": "the 1,000 most common words" },
     { "id": 2, "families": 1000, "label": "words 1,001 to 2,000" },

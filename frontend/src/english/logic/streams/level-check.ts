@@ -42,7 +42,7 @@ export const SPELLING_STEPS = 6;
 
 export type LevelCheckRecord =
   | { type: "start" }
-  | { type: "words"; band: number; estimate: number; answered: number }
+  | { type: "words"; band: number; estimate?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
@@ -54,7 +54,7 @@ export type LevelCheckRecord =
 export interface Levels {
   /** Whether a level check was finished at least once. */
   done: boolean;
-  words: { band: number; estimate: number } | null;
+  words: { band: number; estimate?: number } | null;
   /** `start`: the reading level to begin at. */
   reading: { passed: number; start: number } | null;
   listening: { level: number } | null;

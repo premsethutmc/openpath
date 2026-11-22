@@ -110,7 +110,7 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Syllabus tasks: {s.writing.tasks} done{s.writing.pieces ? `, ${s.writing.pieces} written ${s.writing.pieces === 1 ? "piece" : "pieces"} (${s.writing.words} words in all)` : ""}
         </p>
       )}
-      {s.words && <p className="small">Word check: about {s.words.estimate.toLocaleString("en-IN")} word families</p>}
+      {s.words && <p className="small">Word check: {s.words.correct} of {s.words.answered} meanings correct</p>}
       {s.newWords && (
         <p className="small" data-line="new-words">
           New words: {s.newWords.learnt} learnt, {s.newWords.learning} still learning{s.newWords.tricky.length ? `. Finding hard: ${s.newWords.tricky.join(", ")}` : ""}
