@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { moduleFor } from "../../../packages/learning/src/content";
 import { cardFor } from "../../../packages/learning/src/step-help";
-import { TERM_SKILLS, linkTerms } from "../../../packages/learning/src/terms";
+import { TERM_SKILLS, TERM_WORDS, linkTerms, meaningOf } from "../../../packages/learning/src/terms";
 import { allowTerm } from "./Terms";
 
 test("every linked word belongs to a real skill that has a rule to show", () => {
@@ -24,4 +24,17 @@ test("a word is linked only outside its own skill and only to a skill taught no 
   assert.equal(allowTerm("MATH.trigonometry.compound-angle-identities")("MATH.trigonometry.ratios"), true);
   assert.equal(allowTerm("MATH.trigonometry.ratios")("MATH.trigonometry.ratios"), false, "not inside its own lesson");
   assert.equal(allowTerm("MATH.number.rounding")("MATH.calculus.derivatives"), false, "never forward to a later class");
+});
+
+test("every linked word says what it means, and sin means sin (not the earlier lesson's method)", () => {
+  const all = () => true;
+  for (const word of ["sin", "cos", "tan", "sine", "cosine", "tangent", "radians", "prime", "primes", "composite number", "factors", "multiples", "HCF", "LCM", "numerator", "denominators", "equivalent fractions", "mixed number", "improper fraction", "percentage", "per cent", "ratio", "proportions", "integers", "negative numbers", "remainder", "perimeter", "square roots", "exponent", "indices", "logarithm", "derivatives", "differentiate", "differentiation", "integral", "integrating", "matrix", "matrices", "determinant", "vectors", "quadratic equation", "polynomials", "linear equations", "Pythagoras", "congruent", "similar triangles", "probability", "median", "lines of symmetry", "acute", "obtuse", "right angle", "arithmetic progression", "geometric sequences", "complex numbers"]) {
+    const piece = linkTerms(`Here ${word} is used.`, all).find((x) => x.skill);
+    assert.ok(piece?.text === word && piece.meaning, `"${word}" has no meaning`);
+  }
+  assert.equal(TERM_WORDS.length > 30, true);
+  assert.match(meaningOf("sin")!, /opposite side ÷ hypotenuse/);
+  assert.match(meaningOf("Cosines") ?? meaningOf("cosine")!, /adjacent side ÷ hypotenuse/);
+  assert.match(meaningOf("denominators")!, /bottom number/);
+  assert.equal(linkTerms("sin(A + B) is long.", all)[0].meaning, meaningOf("sin"));
 });
