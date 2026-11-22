@@ -111,13 +111,23 @@ function launch(step,focus=true) {
   $('navigation').hidden=kind==='title';
   $('position').textContent=kind==='title'?'':index+' / '+(sceneOrder.length-1);
   $('back').textContent=index===1?'← Opening':'← Back';
-  $('next').textContent=kind==='aftermath'?'Replay ↻':index===sceneOrder.length-2?'See the aftermath →':'Next →';
+  $('next').textContent=kind==='independence'?'Replay ↻':kind==='aftermath'?'Go to 1947 →':'Next →';
   if(kind==='title') $('controls').append(button('Step into 1942',()=>launch(1),'primary'));
   if(kind==='radio') renderRadio();
   if(kind==='places') { $('object').innerHTML=mapMarkup; $('object').hidden=false; }
-  if(kind==='aftermath') {
+  if(kind==='bridge' || kind==='wardha') {
+    $('object').innerHTML=kind==='bridge'
+      ? '<div class="date-track"><span>1930 <small>Dandi</small></span><span aria-hidden="true">→</span><span>1942 <small>Quit India</small></span></div>'
+      : '<div class="date-track"><span>14 July <small>Wardha</small></span><span aria-hidden="true">→</span><span>8 August <small>Bombay</small></span></div>';
+    $('object').hidden=false;
+  }
+  if(kind==='independence') {
     $('object').innerHTML='<div class="end-years"><span>1942</span><span aria-hidden="true">······</span><span>1947</span></div>';
     $('object').hidden=false;
+    const reflection=document.createElement('p');
+    reflection.className='reflection';
+    reflection.textContent='Optional: explain why the movement continued after the arrests. Use two things you saw. Then compare your retelling.';
+    $('controls').append(reflection);
     if (location.protocol==='http:'||location.protocol==='https:') {
       const a=document.createElement('a');
       a.href='../dandi-march/first-person/index.html'; a.textContent='Revisit the Dandi March';

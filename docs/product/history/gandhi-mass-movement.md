@@ -1,6 +1,6 @@
 # Gandhi and the mass phase: from Dandi to Quit India
 
-Status: curriculum map and production plan. A first playable Quit India slice now lives at `frontend/history/quit-india/`. The approved Dandi build is unchanged. Draft PR #288 only; no merge or deploy.
+Status: curriculum map and production plan. The playable Quit India lesson now covers the wartime context through the separate 1947 ending at `frontend/history/quit-india/`. The approved Dandi build is unchanged. Draft PR #288 only; no merge or deploy.
 
 ## Chapter scope
 
@@ -11,7 +11,7 @@ The ICSE Class X Mass Phase of the National Movement (1915–1947) is the refere
 | Gandhi's method | Satyagraha and nonviolence; use Champaran as an introductory example, not a claim that this example is required by every board. Explain how a local grievance can become public collective action. | Short visual opener; planned. |
 | Non-Cooperation | Rowlatt Act and Jallianwala Bagh, Khilafat background, withdrawal of cooperation, impact, and suspension after Chauri Chaura. | Interactive choices showing what it means to withhold cooperation; do not reenact violence. Planned. |
 | Civil Disobedience | Reaction to the Simon Commission and Purna Swaraj at Lahore, 1929. Why salt, how it was used to break a specific law, and how participation and repression spread. Gandhi–Irwin Pact, Second Round Table Conference, and renewal. | Dandi visual journey and optional political context exist. Add a short bridge later for campaign programme, impacts and renewal; the journey is not the full chapter. |
-| Quit India | World War II context, threat from Japan, failed Cripps Mission, demand for immediate British withdrawal, arrests, how the protest continued locally, suppression, and significance. | First playable draft implemented; further polish and learner review pending. |
+| Quit India | World War II context, threat from Japan, failed Cripps Mission, demand for immediate British withdrawal, arrests, how the protest continued locally, suppression, and significance. | Complete core story in draft; mobile and learner review gates are separate. |
 | Beyond Gandhi | Forward Bloc and INA, then Cabinet Mission, Mountbatten Plan, Independence and Partition. Distinguish those parallel and later elements from what Quit India directly achieved. | Separate short lessons; not part of the first production slice. |
 
 CISCE Class VIII: teach causes, sequence and impact; keep advanced constitutional/political detail optional. ICSE Class X: causes, resolution and significance of Quit India are core. Do not require memorising clauses of the Cripps proposal. Tamil Nadu Class X, Volume 2, Unit 8 covers the national Gandhian phase; Unit 9 §9.5(b) and §9.6 add Vedaranyam and the local Quit India experience. CBSE Class X map overlay includes Dandi; do not imply that Quit India is a listed CBSE map requirement.

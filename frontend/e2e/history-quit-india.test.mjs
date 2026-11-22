@@ -29,10 +29,16 @@ test('390px touch plays the entire lesson and tunes the radio from the dial',asy
     p.on('pageerror',error=>errs.push(error.message));
     await p.goto(url);
     await p.getByRole('button',{name:'Step into 1942'}).tap();
+    assert.match(await p.locator('#context').innerText(),/Dandi in 1930.*By 1942/);
+    await p.locator('#next').tap();
     await p.getByRole('button',{name:'British draft'}).tap();
     assert.match(await p.locator('#answer').innerText(),/after the war/);
     await p.getByRole('button',{name:'Congress reply'}).tap();
     assert.match(await p.locator('#answer').innerText(),/during the war/);
+    await p.locator('#next').tap();
+    assert.match(await p.locator('#date').innerText(),/14 JULY/);
+    await p.getByRole('button',{name:'Follow the resolution'}).tap();
+    assert.match(await p.locator('#answer').innerText(),/All India Congress Committee/);
     await p.locator('#next').tap();
     await p.getByRole('button',{name:'Look towards the platform'}).tap();
     assert.match(await p.locator('#answer').innerText(),/Do or Die/);
@@ -54,7 +60,14 @@ test('390px touch plays the entire lesson and tunes the radio from the dial',asy
     }
     assert.match(await p.locator('#answer').innerText(),/Madurai/);
     await p.locator('#next').tap();
-    assert.match(await p.locator('#context').innerText(),/did not end in 1942.*1947.*Partition/);
+    assert.match(await p.locator('#context').innerText(),/suppress.*nonviolence/);
+    await p.locator('#next').tap();
+    assert.match(await p.locator('#context').innerText(),/did not end in 1942/);
+    await p.locator('#next').tap();
+    assert.match(await p.locator('#context').innerText(),/independent in 1947.*Partition/);
+    assert.equal(await p.locator('#evidence').isVisible(), false);
+    await p.getByRole('button',{name:'Compare your retelling'}).tap();
+    assert.match(await p.locator('#answer').innerText(),/Local action continued/);
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth),390);
     assert.deepEqual(errs,[]);
   } finally {await c.close();}
@@ -69,14 +82,16 @@ test('320px keyboard, muted and reduced motion: optional evidence, revisit and r
     await p.getByRole('button',{name:'Step into 1942'}).focus();
     await p.keyboard.press('Enter');
     assert.equal(await p.locator('#picture').evaluate(el=>getComputedStyle(el).animationName),'none');
-    for(let i=0;i<3;i++) await p.locator('#next').click();
+    for(let i=0;i<5;i++) await p.locator('#next').click();
     await p.getByRole('button',{name:'Tune to Congress Radio'}).focus();
     await p.keyboard.press('Enter');
     assert.match(await p.locator('#answer').innerText(),/42.34/);
     assert.equal(await p.locator('#sound').getAttribute('aria-pressed'),'false');
     await p.locator('#back').click();await p.locator('#next').click();
     assert.match(await p.locator('#answer').innerText(),/Congress Radio/);
-    await p.locator('#next').click();await p.locator('#next').click();await p.locator('#next').click();
+    for(let i=0;i<4;i++) await p.locator('#next').click();
+    assert.match(await p.locator('#chapter').innerText(),/Five years later/);
+    await p.locator('#next').click();
     assert.equal(await p.locator('#chapter').innerText(),'The Morning After');
     assert.equal(await p.locator('#evidence').isVisible(),false);
     await p.getByRole('button',{name:'Step into 1942'}).click();

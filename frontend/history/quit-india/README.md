@@ -1,6 +1,6 @@
 # The Morning After
 
-First playable standalone episode for the Quit India Movement. See the [chapter map and production plan](../../../docs/product/history/gandhi-mass-movement.md). In this version children compare two documents, look towards the August 8 gathering, read the next morning’s arrest notice, tune Congress Radio, explore four regional examples, and reflect on what changed and what did not. The August chronology, sources and short optional comparisons are separate from the interactive scenes. No quiz gates, backend, sign-in, storage or paid runtime calls.
+Playable standalone Quit India episode. The main path covers the Dandi-to-1942 bridge, failed Cripps talks, Wardha, the August 8 Bombay resolution, the August 9 arrests, Congress Radio, local responses, repression, significance and a separate 1947 ending. Children can open historical evidence, tune the radio, explore four local cases and compare their own retelling. The core story remains understandable without opening extras or turning on sound. No quiz gates, backend, sign-in, storage or paid runtime calls. See the [chapter map](../../../docs/product/history/gandhi-mass-movement.md).
 
 Serve this directory with a static HTTP server or run `python3 package.py The-Morning-After.html` here for an offline single file. In the repository setting the end links back to the existing Dandi journey; this change does not edit that lesson.
 

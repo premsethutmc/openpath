@@ -5,7 +5,7 @@ Read this file first; status is branch-local, so verify refs. Keep it under ~60 
 Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
 ## Quit India history preview (2026-11-21, draft #288)
-- Standalone `frontend/history/quit-india/`: Cripps evidence, 8 August gathering, 9 August arrests, Congress Radio dial, four regional lenses, and 1942–47 aftermath. Existing Dandi runtime unchanged.
+- Standalone `frontend/history/quit-india/`: Dandi bridge, Cripps, Wardha, Bombay resolution, arrests, radio, regional responses, repression, significance, separate 1947 ending and optional retelling. Dandi runtime unchanged.
 - Model and offline checks, isolated mobile Chromium workflow, no merge/deploy. No voices, recording, sign-in or paid runtime calls. See `docs/product/history/gandhi-mass-movement.md`.
 
 ## Dandi history preview (2026-11-21, draft #288)
