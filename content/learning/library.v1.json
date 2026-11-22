@@ -35547,7 +35547,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “A regular dodecagon (a shape with 12 equal sides) (as in the picture) is turned about its centre. It looks exactly the same several times during a full turn. At what angle, in degrees, does it look the same for the 10th time?” A common wrong answer is 330.",
-        "The starting position was counted as the first time. The first time it looks the same is after the smallest turn."
+        "One turn too many was counted: the 10th time is after 10 turns of 30°, not 11."
        ],
        "math": [
         "Not 330, but 300"

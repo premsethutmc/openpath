@@ -1742,7 +1742,7 @@ export const B06: Def[] = [
         ];
       if (ask === 1) return [{ id: "half-turn-shared", kind: "conceptual", competency: RS, says: "180° was shared out instead of a full turn, 360°.", predict: 180 / o }, { id: "gave-order", kind: "procedural", competency: RS, says: "The order (how many times) was given instead of the angle. Share 360° by the order.", predict: o }];
       if (ask === 2) return [{ id: "upside-down", kind: "procedural", competency: RS, says: `The fraction was written the wrong way up. The turn is 1 out of ${o} equal parts of a full turn: 1/${o}.`, predict: o }, { id: "angle-not-fraction", kind: "procedural", competency: RS, says: "The angle in degrees was given. As a fraction of a full turn, divide by 360.", predict: 360 / o }];
-      return [{ id: "counted-start", kind: "procedural", competency: RS, says: "The starting position was counted as the first time. The first time it looks the same is after the smallest turn.", predict: (360 / o) * (m + 1) <= 360 ? (360 / o) * (m + 1) : null }, { id: "first-angle", kind: "procedural", competency: RS, says: `Only the smallest angle was given; the ${ord(m)} time is ${m} of those turns.`, predict: 360 / o }];
+      return [{ id: "counted-start", kind: "procedural", competency: RS, says: `One turn too many was counted: the ${ord(m)} time is after ${m} turns of ${360 / o}°, not ${m + 1}.`, predict: (360 / o) * (m + 1) <= 360 ? (360 / o) * (m + 1) : null }, { id: "first-angle", kind: "procedural", competency: RS, says: `Only the smallest angle was given; the ${ord(m)} time is ${m} of those turns.`, predict: 360 / o }];
     },
     distractors: ([shape, ask]) => {
       const o = ROT[shape].o;

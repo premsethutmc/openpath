@@ -14,6 +14,7 @@ import { explainStep, problemOf, show as showValue, type Problem as FamilyProble
 import { canonicalOf, expandedForm, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
 import { MARKED_NOT, MARKED_RIGHT, outOf, tasksFor, writtenTask } from "./written";
 import { selectable } from "./question-status";
+import { withCorrections } from "./screen-corrections";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -173,7 +174,7 @@ export const withoutQuarantined = (m: Module): Module => {
     ...(m.written ? { written: m.written.filter(keep("written")) } : {}),
   };
 };
-export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withWritten).map(withoutQuarantined);
+export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withCorrections).map(withWritten).map(withoutQuarantined);
 /** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
 export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);
 export const questions = [...data.questions, ...markedData.questions] as unknown as Question[];

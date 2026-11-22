@@ -704,7 +704,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | afpaint: Painted faces in a block of small cubes | `MATH.geometry.nets` | 84 | 0 | 4/54/26 | `e3ce9010` |
 | afquad: Classifying quadrilaterals from their sides and angles | `MATH.geometry.quadrilateral-classification` | 180 | 0 | 60/60/60 | `1a30b5d7` |
 | afpara: Unknown angles in a parallelogram or rhombus | `MATH.geometry.quadrilateral-classification` | 108 | 0 | 48/48/12 | `b61e53e8` |
-| afrot: Order and angle of rotational symmetry | `MATH.geometry.rotational-symmetry` | 107 | 0 | 7/31/69 | `e90b6d72` |
+| afrot: Order and angle of rotational symmetry | `MATH.geometry.rotational-symmetry` | 107 | 0 | 7/31/69 | `74200d09` |
 | aftri: Classifying triangles by their angles | `MATH.geometry.triangle-types` | 180 | 0 | 60/60/60 | `d79d0aa0` |
 | aftris: Classifying triangles by their sides | `MATH.geometry.triangle-types` | 180 | 0 | 60/60/60 | `fe23c256` |
 | afapr: Rectangles with the same area or the same perimeter | `MATH.measurement.area-perimeter-relation` | 300 | 0 | 72/100/128 | `9575c2a9` |
