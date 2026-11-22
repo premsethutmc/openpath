@@ -70,8 +70,8 @@ export function DailyProgress({ learner }: { learner: Learner }) {
   const lines: [string, string][] = [];
   if (s.first) lines.push(["🐱 First words", `${s.first.met} of ${s.first.total} words found, ${s.first.sure} sure`]);
   const w = wordsSummary(learner.wordLearnRecords(), learner.clock(), learner.dayFn());
-  if (w.learnt + w.learning) lines.push(["🌱 Words", `${w.learnt} learnt, ${w.learning} still learning${s.words ? `; you know about ${s.words.estimate.toLocaleString("en-IN")} word families` : ""}`]);
-  else if (s.words) lines.push(["🌱 Words", `You know about ${s.words.estimate.toLocaleString("en-IN")} word families`]);
+  if (w.learnt + w.learning) lines.push(["🌱 Words", `${w.learnt} learnt, ${w.learning} still learning${s.words ? `; ${s.words.correct} of ${s.words.answered} meanings correct in the word check` : ""}`]);
+  else if (s.words) lines.push(["🌱 Words", `${s.words.correct} of ${s.words.answered} meanings correct in the word check`]);
   if (s.reading) lines.push(["📖 Reading", `${s.reading.passed} ${s.reading.passed === 1 ? "skill" : "skills"} passed${s.reading.needsPractice.length ? `; more practice: ${s.reading.needsPractice.join("; ")}` : ""}`]);
   if (s.written) lines.push(["✏️ Written answers", `${s.written.right} of ${s.written.answered} right`]);
   if (s.long) lines.push(["📚 Long reads", `${s.long.parts} ${s.long.parts === 1 ? "part" : "parts"} read, ${s.long.finished} ${s.long.finished === 1 ? "story" : "stories"} finished`]);

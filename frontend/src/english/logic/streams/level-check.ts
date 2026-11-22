@@ -42,7 +42,7 @@ export const SPELLING_STEPS = 6;
 
 export type LevelCheckRecord =
   | { type: "start" }
-  | { type: "words"; band: number; estimate: number; answered: number }
+  | { type: "words"; band: number; estimate?: number; correct?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
@@ -54,7 +54,7 @@ export type LevelCheckRecord =
 export interface Levels {
   /** Whether a level check was finished at least once. */
   done: boolean;
-  words: { band: number; estimate: number } | null;
+  words: { band: number; estimate?: number; correct?: number; answered?: number } | null;
   /** `start`: the reading level to begin at. */
   reading: { passed: number; start: number } | null;
   listening: { level: number } | null;
@@ -68,7 +68,7 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
   const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null, grammar: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
-    if (r.type === "words") out.words = { band: r.band, estimate: r.estimate };
+    if (r.type === "words") out.words = r.correct === undefined ? { band: r.band, estimate: r.estimate } : { band: r.band, correct: r.correct, answered: r.answered };
     if (r.type === "reading") {
       const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
       // start at the highest level passed: its units still teach skills not yet checked there (sim-english@2: one above

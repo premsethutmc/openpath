@@ -9,8 +9,8 @@ const { VocabularyIntro, VocabularyView } = await import("./VocabularyCheck.tsx"
 const html = (el: React.ReactElement) => renderToStaticMarkup(el).replaceAll("&#x27;", "'");
 
 test("VU-1 intro, a question and the result", () => {
-  assert.match(html(React.createElement(VocabularyIntro, { last: null, onStart() {}, onBack() {} })), /guessing makes the result worse/);
-  assert.match(html(React.createElement(VocabularyIntro, { last: { estimate: 4500, low: 4000, high: 5000 }, onStart() {}, onBack() {} })), /Last time: about 4,500 word families[\s\S]*Check again</);
+  assert.match(html(React.createElement(VocabularyIntro, { last: null, onStart() {}, onBack() {} })), /checks recognition/);
+  assert.match(html(React.createElement(VocabularyIntro, { last: { correct: 9, answered: 15 }, onStart() {}, onBack() {} })), /Last time: 9 of 15 correct[\s\S]*Check again</);
   const s = new SizeCheckSession(CHECK, 3);
   let v = s.snapshot();
   const w = CHECK.words.find((x) => x.word === v.word!.word)!;
@@ -21,8 +21,8 @@ test("VU-1 intro, a question and the result", () => {
   assert.ok(!page.includes("is-right"));
   for (; v.phase === "asking"; v = s.snapshot()) s.answer(CHECK.words.find((x) => x.word === v.word!.word)!.band <= 4 ? CHECK.words.find((x) => x.word === v.word!.word)!.answer : null);
   page = html(React.createElement(VocabularyView, { check: CHECK, view: v, onAnswer() {}, onLeave() {} }));
-  assert.match(page, /About 4,000 word families/);
-  assert.match(page, /Most likely between 3,500 and 4,500/);
-  assert.match(page, /rough first estimate from 15 words/);
-  assert.match(page, /6 of 6 known/);
+  assert.match(page, /9 of 15 meanings correct/);
+  assert.match(page, /Suggested practice: Level 5 of 8/);
+  assert.match(page, /short recognition check/);
+  assert.match(page, /6 of 6 correct/);
 });

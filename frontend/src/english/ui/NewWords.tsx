@@ -6,7 +6,7 @@ import { Flag } from "./Flag.tsx";
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { NEW_PER_DAY, WORDS, WordSitting, baseBand, summary, type Card, type SittingView, type Summary, type WordRecord } from "../logic/vocabulary/daily-words.ts";
-import { latestResult } from "../logic/vocabulary/size-check.ts";
+import { wordPracticeBand } from "../logic/vocabulary/size-check.ts";
 import { syncAutoLists } from "../logic/streams/joined.ts";
 import { NoteBox } from "./Note.tsx";
 import { playWord } from "./wordPlayer.ts";
@@ -190,7 +190,7 @@ export function NewWords({ learner, voice, onLeave, onChanged }: { learner: Lear
         s={summary(learner.wordLearnRecords(), learner.clock(), learner.dayFn())}
         onBack={onLeave}
         onStart={(extra) => {
-          const base = baseBand(latestResult(learner.vocabRecords())?.band, learner.state.preferences?.band) /* the level check's words part writes a word check result, so it is included */;
+          const base = baseBand(wordPracticeBand(learner.vocabRecords()), learner.state.preferences?.band) /* the level check's words part writes a word check result, so it is included */;
           const s = new WordSitting(WORDS, base, learner.wordLearnRecords(), learner.clock(), { dayOf: learner.dayFn(), extra });
           setSitting(s);
           void step(s);

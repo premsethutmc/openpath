@@ -10,7 +10,7 @@ import { COURSE } from "../reading/course.ts";
 import { progress as readingProgress, recommend } from "../reading/session.ts";
 import { BANK, LEVEL_NAMES, levelOf } from "../spelling.ts";
 import { BANDS, NEW_PER_DAY, WORDS, baseBand, progress as wordProgress, summary as wordSummary, teachBand } from "../vocabulary/daily-words.ts";
-import { latestResult } from "../vocabulary/size-check.ts";
+import { wordPracticeBand } from "../vocabulary/size-check.ts";
 import { GRAMMAR, levelFor as grammarLevel, startLevel as grammarStart } from "../grammar-use/grammar-use.ts";
 import { waiting } from "./joined.ts";
 import { asReadingLevel } from "./level-check.ts";
@@ -70,7 +70,7 @@ export function streamRows(learner: Learner, now: string): StreamRow[] {
 
   const history = learner.wordLearnRecords();
   const ws = wordSummary(history, now, dayOf);
-  const band = teachBand(WORDS, wordProgress(history), baseBand(levels.words?.band ?? latestResult(learner.vocabRecords())?.band, age));
+  const band = teachBand(WORDS, wordProgress(history), baseBand(wordPracticeBand(learner.vocabRecords(), levels.words?.band), age));
   const wordsDone = ws.newToday >= NEW_PER_DAY && ws.dueNow === 0;
 
   const start = asReadingLevel(levels.reading?.start);

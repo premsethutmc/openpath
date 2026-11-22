@@ -351,8 +351,8 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
       <h2 id="vocab-card-title">
         <span aria-hidden="true">🔤 </span>Word check
       </h2>
-      <p>Find out roughly how many English words you know. Three to five minutes.</p>
-      {last && <p className="small">Last time: about {last.estimate.toLocaleString("en-IN")} word families</p>}
+      <p>Check which meanings you recognise. Up to five minutes.</p>
+      {last?.correct !== undefined && <p className="small">Last time: {last.correct} of {last.answered} correct</p>}
       <button type="button" className="secondary" onClick={onOpen}>
         {last ? "Check again" : "Check my words"}
       </button>

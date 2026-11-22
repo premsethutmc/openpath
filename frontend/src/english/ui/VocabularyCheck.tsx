@@ -1,15 +1,9 @@
-/**
- * Word check (logic/vocabulary/size-check.ts): a few minutes of "which meaning fits this word?", ending in a rough
- * estimate of how many English word families the learner knows. Practice-only: it changes no capability estimate.
- */
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { CHECK, ROUNDS, ROUND_SIZE, SizeCheckSession, latestResult, startBand, type CheckView, type SizeCheck, type VocabRecord } from "../logic/vocabulary/size-check.ts";
 import { NoteBox } from "./Note.tsx";
 
-const n = (x: number) => x.toLocaleString("en-IN");
-
-export function VocabularyIntro({ last, onStart, onBack }: { last: { estimate: number; low: number; high: number } | null; onStart: () => void; onBack: () => void }) {
+export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: number; answered: number } | null; onStart: () => void; onBack: () => void }) {
   return (
     <main className="page vocab" data-phase="intro" aria-labelledby="vocab-title">
       <button type="button" className="link" onClick={onBack}>
@@ -17,13 +11,13 @@ export function VocabularyIntro({ last, onStart, onBack }: { last: { estimate: n
       </button>
       <p className="eyebrow">Words · Word check</p>
       <h1 id="vocab-title" className="hero">
-        How many words do you know?
+        Check your word meanings
       </h1>
-      <p className="sub">You will see a word and three meanings. Pick the meaning that fits. If you do not know the word, say so: guessing makes the result worse, not better.</p>
-      <p className="small">About {ROUND_SIZE * 4} to {ROUND_SIZE * ROUNDS} words. It takes three to five minutes.</p>
-      {last && (
+      <p className="sub">You will see a word and three meanings. Pick the meaning that fits. If you do not know the word, say so. This checks recognition, not whether you can use a word.</p>
+      <p className="small">Up to {ROUND_SIZE * ROUNDS} words. It takes three to five minutes.</p>
+      {last?.correct !== undefined && (
         <p className="pill">
-          Last time: about {n(last.estimate)} word families
+          Last time: {last.correct} of {last.answered} correct
         </p>
       )}
       <button type="button" className="primary" onClick={onStart}>
@@ -60,25 +54,18 @@ export function VocabularyView({ check, view, onAnswer, onLeave }: { check: Size
       </main>
     );
   const r = view.result!;
-  const total = check.bands.reduce((s, b) => s + b.families, 0);
   return (
     <main className="page vocab" data-phase="done">
       <p className="eyebrow">Words · Word check</p>
-      <h1 className="hero">About {n(r.estimate)} word families</h1>
-      {r.low !== r.high && (
-        <p className="sub">
-          Most likely between {n(r.low)} and {n(r.high)}.
-        </p>
-      )}
-      <p className="small">
-        A word family is a word with its close relatives: help, helps, helped, helpful. This check goes up to {n(total)}. It is a rough first estimate from {r.answered} words, and the word levels it uses are our own estimates, so treat it as a guide.
-      </p>
+      <h1 className="hero">{r.correct} of {r.answered} meanings correct</h1>
+      <p className="sub">{r.band === 0 ? "Not enough evidence to suggest a higher practice level yet." : `Suggested practice: Level ${Math.min(check.bands.length, r.band + 1)} of ${check.bands.length}.`}</p>
+      <p className="small">These are answers to a short recognition check. They do not measure how many words you know or can use.</p>
       <ul className="vocab-bands">
         {r.perBand.map((b) => (
           <li key={b.band}>
             <span>{check.bands.find((x) => x.id === b.band)!.label}</span>
             <span className="status">
-              {b.known} of {b.asked} known
+              {b.correct} of {b.asked} correct
             </span>
           </li>
         ))}
