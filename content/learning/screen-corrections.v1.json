@@ -595,18 +595,6 @@
   {
    "competency": "MATH.calculus.integration-methods",
    "section": "chapter",
-   "index": 10,
-   "original": "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of d(t² + d²). The limits change with the variable. / Let u = t² + d², so t dt = du/2. Change the limits (t = 0 gives u = d², t = b gives u = b² + d²), integrate (1/2)u^(−1/2) to √u, and subtract.",
-   "text": [
-    "A definite integral by substitution: ∫ c t/√(t² + k²) dt: When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of the differential of t² + k². The limits change with the variable.",
-    "Let u = t² + k², so t dt = du/2. Change the limits (t = 0 gives u = k², t = b gives u = b² + k²), integrate (c/2)u^(−1/2) to c√u, and subtract."
-   ],
-   "problem": "The letter d is used both as a constant and as the differential sign in 'd(t² + d²)', which is confusing.",
-   "severity": "low"
-  },
-  {
-   "competency": "MATH.calculus.integration-methods",
-   "section": "chapter",
    "index": 12,
    "original": "A factor x² + a² that does not factorise needs a linear top: (Bx + C)/(x² + a²). Its x part integrates to a logarithm and its constant part to a tan⁻¹. / Write the integrand as A/(x − r) + (Bx + C)/(x² + a²); find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + C.",
    "text": [
@@ -798,7 +786,7 @@
    "index": 0,
    "original": "Two angles are complementary when they together make a right angle: 90deg. / To find the missing complement, take the given angle away from 90deg.",
    "text": [
-    "Complementary angles add up to 90°: Two angles are complementary when they together make a right angle: 90°.",
+    "Two angles are complementary when they together make a right angle: 90°.",
     "To find the missing complement, take the given angle away from 90°."
    ],
    "problem": "Shows the unit as 'deg' (e.g. '90deg') instead of the degree sign learners see in their books.",
@@ -846,7 +834,7 @@
    "index": 0,
    "original": "Two angles are supplementary when they together make a straight angle: 180deg. / To find the missing supplement, take the given angle away from 180deg.",
    "text": [
-    "Supplementary angles add up to 180°: Two angles are supplementary when they together make a straight angle: 180°.",
+    "Two angles are supplementary when they together make a straight angle: 180°.",
     "To find the missing supplement, take the given angle away from 180°."
    ],
    "problem": "Shows the unit as 'deg' (e.g. '90deg') instead of the degree sign learners see in their books.",

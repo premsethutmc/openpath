@@ -37395,7 +37395,7 @@
    "competency": "MATH.calculus.integration-methods",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "0304759a",
+   "contentHash": "7c001af2",
    "state": "draft",
    "history": [
     {
@@ -37468,6 +37468,14 @@
      "role": "engineer",
      "at": "2026-11-22T04:41:09.979Z",
      "contentHash": "0304759a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-22T05:21:55.576Z",
+     "contentHash": "7c001af2",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -38998,7 +39006,7 @@
    "competency": "MATH.geometry.angle-pairs",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "45dd86fa",
+   "contentHash": "c3bac7d3",
    "state": "draft",
    "history": [
     {
@@ -39063,6 +39071,14 @@
      "role": "engineer",
      "at": "2026-11-22T04:41:09.979Z",
      "contentHash": "45dd86fa",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-22T05:21:55.576Z",
+     "contentHash": "c3bac7d3",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
