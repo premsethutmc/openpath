@@ -46,13 +46,16 @@ jobs:
           api_pid=$!
           PORT=4190 API_TARGET=http://127.0.0.1:8014 node frontend/scripts/preview-english.mjs > /tmp/more-preview.log 2>&1 &
           preview_pid=$!
-          trap 'kill "$api_pid" "$preview_pid"' EXIT
+          # the English app on its own (device-only, no account API), as the English browser tests expect
+          PORT=4174 node frontend/scripts/preview-english.mjs > /tmp/more-english.log 2>&1 &
+          english_pid=$!
+          trap 'kill "$api_pid" "$preview_pid" "$english_pid"' EXIT
           for attempt in {1..30}; do
             if curl --fail --silent http://127.0.0.1:4190/api/account/ > /dev/null; then break; fi
             sleep 1
           done
           cd frontend
-          export CHROMIUM_PATH='' YEAR_URL=http://127.0.0.1:4190 PREVIEW_URL=http://127.0.0.1:4190 E2E_URL=http://127.0.0.1:4190 PATHWAY_API=http://127.0.0.1:8014
+          export CHROMIUM_PATH='' YEAR_URL=http://127.0.0.1:4190 PREVIEW_URL=http://127.0.0.1:4190 E2E_URL=http://127.0.0.1:4174 PATHWAY_API=http://127.0.0.1:8014
           mkdir -p /tmp/more-logs
           run() { # run each file; print the start of each failure; list the files that failed in $failed
             failed=()
