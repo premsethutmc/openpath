@@ -16,7 +16,7 @@ import {
   recommend,
   rng,
 } from "../../../packages/english-core/src/index.ts";
-import { type ResponderOptions, type SimLearner, respond, trueLevels, writeResponse } from "./learners.ts";
+import { CAP, type ResponderOptions, type SimLearner, respond, trueLevel, trueLevels, writeResponse } from "./learners.ts";
 
 export const T0 = Date.UTC(2026, 9, 12, 10, 30); // 12 Oct 2026, 16:00 IST
 export const at = (day: number, minute = 0): string => new Date(T0 + day * 86_400_000 + minute * 60_000).toISOString();
@@ -65,6 +65,12 @@ export interface RunOptions {
   writing?: boolean;
   /** Selection mode; omitted means the engine's automatic choice. */
   mode?: "assessment" | "learning" | "hybrid";
+  /**
+   * Experiment: start the learner from a placement result instead of the middle of the scale. `noise` is the spread of
+   * the placement's error in levels; the placement is cautious (it reads half a level low on average), as Find my
+   * level's checks are. Strands not listed start from the overall result with a wider spread.
+   */
+  start?: { noise: number; strands: string[] };
   /** Stop early when this returns true (checked after each item). */
   stop?: (ledger: Ledger, now: string) => boolean;
   onItem?: (info: { session: number; n: number; item: string; rec: Recommendation | null; ledger: Ledger; now: string }) => void;
@@ -95,6 +101,24 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
     events.push(e);
     ledger.apply(e);
   };
+  if (o.start) {
+    const all = ["EN.FND", "EN.VOC", "EN.GRM", "EN.SEN", "EN.RDG", "EN.WRT", "EN.LIS", "EN.SPK"];
+    const truth = (strand: string) => {
+      const ls = Object.values(CAP).filter((c) => c.startsWith(strand + ".")).map((c) => trueLevel(learner, c, o.sessionDays[0]));
+      return ls.length ? ls.reduce((a, b) => a + b, 0) / ls.length : null;
+    };
+    const gauss = () => Math.sqrt(-2 * Math.log(Math.max(1e-9, next()))) * Math.cos(2 * Math.PI * next());
+    const place = (t: number) => Math.min(8, Math.max(1, Math.floor(t + o.start!.noise * gauss())));
+    const known = all.map(truth).filter((v): v is number => v !== null);
+    const overall = place(known.reduce((a, b) => a + b, 0) / Math.max(1, known.length));
+    const strands: Record<string, { mean: number; sd: number }> = {};
+    for (const st of all) {
+      const t = truth(st);
+      strands[st] = o.start.strands.includes(st) && t !== null ? { mean: place(t) + 0.5, sd: 1 } : { mean: overall + 0.5, sd: 1.25 };
+    }
+    push({ kind: "starting_point", id: `${learner.id}-start`, at: at(o.sessionDays[0]), source: "sim-placement", strands });
+  }
+
   if (o.writing !== false) push(await qualify(evaluator, writingTasks(ctx), (t, id) => anchorRequest(ctx, t, id, at(day)), at(day, -1), { candidateAnchors: true }));
 
   const seen = new Set<string>();
