@@ -3,6 +3,7 @@
  * on, and their word lists. A parent adds a practice or a test list for a child here; the child finds it under
  * My Words. Read from each child's own record; only saving or deleting a list writes anything.
  */
+import { levelLine } from "../logic/vocabulary/size-check.ts";
 import { useEffect, useMemo, useState } from "react";
 import type { AppContent } from "../logic/content.ts";
 import { Learner } from "../logic/learner.ts";
@@ -110,7 +111,7 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
           Syllabus tasks: {s.writing.tasks} done{s.writing.pieces ? `, ${s.writing.pieces} written ${s.writing.pieces === 1 ? "piece" : "pieces"} (${s.writing.words} words in all)` : ""}
         </p>
       )}
-      {s.words && <p className="small">Word check: {s.words.correct} of {s.words.answered} meanings correct</p>}
+      {s.words && <p className="small">Word check: {levelLine(s.words.band)}</p>}
       {s.newWords && (
         <p className="small" data-line="new-words">
           New words: {s.newWords.learnt} learnt, {s.newWords.learning} still learning{s.newWords.tricky.length ? `. Finding hard: ${s.newWords.tricky.join(", ")}` : ""}

@@ -50,7 +50,8 @@ export interface ChildSummary {
   /** Kinds of spelling mistake made in the last 30 days, most frequent first (clear cases only). */
   patterns: { id: string; name: string; times: number }[];
   /** The latest word check, if one was finished. */
-  words: { correct: number; answered: number } | null;
+  /** The word check's latest result: the word level reached (0: below the first level). */
+  words: { band: number } | null;
   /** New words: how many are learnt or being learnt, and the ones missed. */
   newWords: { learnt: number; learning: number; tricky: string[] } | null;
   /** Listen and write: sentences done, how many right first time, and words missed most. */
@@ -141,7 +142,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     lists,
     bee: p.practised ? { level, levelName: LEVEL_NAMES[level], practised: p.practised, total: p.total, reviewList: p.reviewList } : null,
     patterns: patternCounts([...st.sessions.values()].flatMap((s) => s.answers.filter((a) => Date.parse(now) - Date.parse(a.at) < 30 * DAY).map((a) => a.pattern))),
-    words: w?.correct !== undefined ? { correct: w.correct, answered: w.answered } : null,
+    words: w ? { band: w.band } : null,
     newWords: nw.learning + nw.learnt ? { learnt: nw.learnt, learning: nw.learning, tricky: nw.tricky.slice(0, 6) } : null,
     listening: heard.passages ? { passages: heard.passages, right: heard.right, asked: heard.asked, weak: heard.weak } : null,
     grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5), mastered: masterySummary(learner.grammarTimed(), now).mastered } : null,

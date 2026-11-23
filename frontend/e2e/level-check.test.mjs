@@ -19,7 +19,7 @@ if (SHOTS) mkdirSync(SHOTS, { recursive: true });
 const shot = async (page, name) => SHOTS && page.screenshot({ path: `${SHOTS}/level-${name}.png`, fullPage: true });
 const ANDROID = { viewport: { width: 412, height: 915 }, deviceScaleFactor: 2.625, isMobile: true, hasTouch: true };
 const read = (p) => JSON.parse(readFileSync(new globalThis.URL(`../../content/english/${p}`, import.meta.url), "utf8"));
-const WORD_KEY = new Map(read("vocabulary/size-check.json").words.map(([band, word, right]) => [word, { band, right }]));
+const WORD_KEY = new Map(read("vocabulary/size-check.json").words.map(([band, , , word, right]) => [word, { band, right }]));
 const SENTENCES = new Map(read("dictation/sentences.json").sentences.map(([id, level, text]) => [id, { level, text }]));
 const DICT = new Map(read("spelling/dictation-bank.json").items.map((it) => [it.id, it.answers[0]]));
 const BEE = new Map(read("spelling/spelling-bee.json").words.map((w) => [w.id, { level: w.level, word: w.word ?? DICT.get(w.item?.id) }]));
@@ -63,18 +63,32 @@ async function start(name) {
   return { context, page, errors, foreign, fits };
 }
 
-async function wordsPart(page, knowsUpTo, luckyTwoOfThree = false) {
+/** Answer the word-check question on screen as a learner who knows the real words up to a level; returns what was asked. */
+async function wordStep(page, n, knowsUpTo, KEY = WORD_KEY) {
+  await page.getByText(new RegExp(`^Question ${n} of about \\d+$`)).waitFor();
+  const word = await page.locator("#vocab-word").innerText();
+  const kind = await page.locator("#vocab-word").getAttribute("data-kind");
+  const k = KEY.get(word);
+  const knows = !!k && k.band <= knowsUpTo;
+  if (kind === "know") {
+    assert.equal(await page.locator(".options .option").count(), 2, "yes or no");
+    await page.getByRole("button", { name: knows ? "Yes, I know it" : "No, I don't know it" }).click();
+  } else {
+    assert.ok(k, `a closest-word question is about a real word: ${word}`);
+    assert.equal(await page.locator(".options .option").count(), 5, "four words and 'I don't know'");
+    if (knows) await page.getByRole("button", { name: k.right, exact: true }).click();
+    else await page.getByRole("button", { name: "I don't know this word" }).click();
+  }
+  return { word, kind, real: !!k };
+}
+
+async function wordsPart(page, knowsUpTo) {
   let n = 0;
-  for (; n < 13; n++) {
+  for (; n < 40; n++) {
     await page.waitForFunction(() => ["words", "reading"].includes(document.querySelector("main")?.getAttribute("data-phase")));
     if ((await page.locator("main").getAttribute("data-phase")) !== "words") break;
-    const word = await page.locator("#vocab-word").innerText();
-    const k = WORD_KEY.get(word);
-    assert.ok(k, `a word of the check: ${word}`);
-    if (luckyTwoOfThree && n % 3 === 2) await page.locator(".options .option:not(.vocab-unknown)").filter({ hasNotText: k.right }).first().click();
-    else if (luckyTwoOfThree || k.band <= knowsUpTo) await page.locator(".options .option", { hasText: k.right }).first().click();
-    else await page.getByRole("button", { name: "I don't know this word" }).click();
-    await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
+    await wordStep(page, n + 1, knowsUpTo);
+    await page.waitForFunction((t) => !document.querySelector(".vocab .pill")?.textContent?.includes(t) || document.querySelector("main")?.getAttribute("data-phase") !== "words", `Question ${n + 1} of`);
   }
   return n;
 }
@@ -92,7 +106,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByText("Part 1 of 5: Words").waitFor();
   await fits();
   const asked = await wordsPart(page, 3);
-  assert.ok(asked >= 6 && asked <= 12, `${asked} words`);
+  assert.ok(asked >= 10 && asked <= 30, `${asked} word questions`);
 
   await page.getByText("Part 2 of 5: Reading").waitFor();
   await fits();
@@ -159,7 +173,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-part="grammar"] .status', { hasText: "Level 4 of 7" }).waitFor();
   await page.getByText("Naming a noun and a verb comes first.").waitFor();
   await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: "wider reading words (level 3 of 8)" }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "common reading words (word level 2 on a scale of 1 to 8)" }).waitFor();
   await page.locator('[data-part="reading"] .status', { hasText: "Expert (level 6 of 6)" }).waitFor();
   await page.locator('[data-part="listening"] .status', { hasText: "Level 7 of 7" }).waitFor();
   await fits();
@@ -168,7 +182,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
 
   await page.getByRole("heading", { name: "Your English today" }).waitFor();
   assert.equal(await page.locator(".stream-rows li").count(), 5);
-  await page.locator('[data-stream="words"]', { hasText: "Level 4 of 8" }).waitFor();
+  await page.locator('[data-stream="words"]', { hasText: "Level 3 of 8" }).waitFor();
   await page.locator('[data-stream="reading"]', { hasText: "Expert" }).waitFor();
   await page.locator('[data-stream="listening"]', { hasText: "Level 7 of 7" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
@@ -208,7 +222,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByRole("button", { name: "Start", exact: true }).click();
   const band = await page.locator('main[data-phase="meet"]').getAttribute("data-word");
   const level = read("vocabulary/daily-words.json").words.find((w) => w[2] === band)[0];
-  assert.equal(level, 4, "new words start at the level found");
+  assert.equal(level, 3, "new words start at the level found");
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();
@@ -219,7 +233,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("button", { name: "Find my level" }).click();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   await page.getByText("Part 1 of 5: Words").waitFor();
-  assert.equal(await wordsPart(page, 0, true), 12);
+  assert.ok((await wordsPart(page, 0)) <= 20, "a learner who knows none of the words is through quickly");
   await page.getByText("Part 2 of 5: Reading").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByText("Part 3 of 5: Listening").waitFor();
@@ -229,8 +243,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByText("Part 5 of 5: Grammar").waitFor();
   await page.getByRole("button", { name: "Skip this part" }).click();
   await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
-  await page.locator('[data-part="words"]').getByText("8 of 12 meanings correct").waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "below everyday words for now" }).waitFor();
   await page.getByRole("button", { name: "Try 3 harder words" }).click();
   await page.getByRole("button", { name: "I'm not sure" }).click();
   await page.getByText("reluctant", { exact: true }).waitFor();
@@ -238,7 +251,7 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("button", { name: "Chosen for now but not final" }).click();
   await page.getByRole("heading", { name: "2 of 3 correct in context" }).waitFor();
   await page.getByRole("button", { name: "Back to results", exact: true }).click();
-  await page.locator('[data-part="words"] .status', { hasText: "Not enough evidence yet" }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "below everyday words for now" }).waitFor();
   assert.equal(await page.getByText("Skipped: the app starts you by age here.").count(), 4);
   await fits();
   await page.getByRole("button", { name: "See what to do today" }).click();
