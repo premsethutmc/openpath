@@ -7,3 +7,9 @@
 .sh-check{border-top:1px dashed var(--line,rgba(127,127,127,.3));padding-top:8px;display:grid;gap:6px;justify-items:start}
 .sh-answer{font-weight:700}
 .sh-show{font:inherit;font-weight:700;border:1px solid var(--sh-accent);color:inherit;background:transparent;border-radius:999px;padding:8px 14px;cursor:pointer}
+.sh-options{display:grid;gap:8px}
+.sh-option{font:inherit;text-align:left;border:1px solid var(--line,rgba(127,127,127,.4));background:transparent;color:inherit;border-radius:12px;padding:12px 14px;cursor:pointer}
+.sh-option.right{border-color:#2e9d5b;background:rgba(46,157,91,.15);font-weight:700}
+.sh-option.wrong{border-color:#d2553f;background:rgba(210,85,63,.12);opacity:.75}
+.sh-feedback{border-left:3px solid #d2553f;padding-left:10px}.sh-feedback.good{border-left-color:#2e9d5b}
+.sh-answer-key{font-size:.92rem}

@@ -48,8 +48,8 @@ export function sampleOf(f: Spec): Sample | null {
   return { family: f.id, title: f.title, question: p.prompt, answer: show(p.answer), certified: certified.has(f.id), mistakes: p.bugs.filter((b) => b.says && b.predict !== null && b.predict !== undefined).map((b) => ({ wrong: show(b.predict), says: b.says! })) };
 }
 
-export interface Totals { skills: number; screens: number; corrected: number; families: number; certified: number; foundations: number }
-export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0), foundations: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + f.screens.length, 0), 0) });
+export interface Totals { skills: number; screens: number; corrected: number; families: number; certified: number; foundations: number; practice: number }
+export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0), foundations: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + f.screens.length, 0), 0), practice: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + (f.practice?.length ?? 0), 0), 0) });
 /** Skills of a topic whose title, lesson text or question-type titles contain the words typed. */
 export function search(skills: Skill[], q: string): Skill[] {
   const w = q.trim().toLowerCase();
