@@ -1348,7 +1348,7 @@ export const B17: Def[] = [
         if (v !== 0) out.push({ id: "move-sign", kind: "prerequisite", competency: "MATH.algebra.linear-equations", says: `${N(v)} was moved across without changing its sign: ${lhs} = ${N(R)} was written as ${coef(u)}k = ${N(R)}${sg(v)}. Moving a number to the other side changes its sign: ${coef(u)}k = ${N(R)}${sg(-v)}.`, predict: (R + v) / u });
         if (u !== 1 && R - v !== (R - v) / u) out.push({ id: "no-divide", kind: "procedural", competency: CONT, says: `The equation ${lhs} = ${N(R)} was not finished: ${u}k = ${N(R - v)} was given as the answer, but k = ${N(R - v)} ÷ ${u}.`, predict: R - v });
       } else if (kind === 1) {
-        if (u !== v) out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over, giving ${F(v / u)}: the number in the sine goes on top, since sin(${kx(u)})/${v === 1 ? "x" : `(${kx(v)})`} = ${v === 1 ? u : `(${u}/${v})`} × sin(${kx(u)})/${u === 1 ? "x" : `(${kx(u)})`}, which tends to ${F(u / v)}.`, predict: v / u });
+        if (u !== v) out.push({ id: "upside-down", kind: "procedural", competency: LIM, says: `The ratio was turned over, giving ${F(v / u)}: sin(${kx(u)})/${v === 1 ? "x" : `(${kx(v)})`} = ${v === 1 ? u : `(${u}/${v})`} × sin(${kx(u)})/${u === 1 ? "x" : `(${kx(u)})`}, and sin θ/θ tends to 1 as θ tends to 0, so the limit is ${F(u / v)}.`, predict: v / u });
         if (u !== 1) out.push({ id: "m-lost", kind: "procedural", competency: LIM, says: `sin(${u}x)/x was taken as 1; it tends to ${u}, since sin θ/θ → 1 needs θ = ${u}x in both places.`, predict: 1 / v });
       } else if (kind === 2) {
         out.push({ id: "half-lost", kind: "procedural", competency: LIM, says: "1 − cos θ is about θ²/2 for small θ; the ½ was lost.", predict: (u * u) / v });
@@ -1606,7 +1606,7 @@ export const B17: Def[] = [
         const e = sepExpo(p, q);
         if (y0 !== 1) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant of integration was dropped; y = ${y0} at x = 0 fixes it: y = Ae^(…) with A = ${y0}.`, predict: `e^(${e})` });
         out.push({ id: "constant-in-exponent", kind: "procedural", competency: DE, says: `log y = ${e} + C gives C = log ${y0}, not ${y0}; the constant was put into the exponent as ${y0}.`, predict: `e^(${e} + ${y0})` });
-        out.push({ id: "y-dropped", kind: "conceptual", competency: DE, says: "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.", predict: sum([[p / 2, "x²"], [q, "x"], [y0, ""]]) });
+        out.push({ id: "y-dropped", kind: "conceptual", competency: DE, says: `The y on the right was ignored and only ${br(pp([[p, 1], [q, 0]]))} was integrated; divide by y first: dy/y = ${br(pp([[p, 1], [q, 0]]))} dx.`, predict: sum([[p / 2, "x²"], [q, "x"], [y0, ""]]) });
       } else {
         if (y0 !== 1) out.push({ id: "constant-dropped", kind: "procedural", competency: DE, says: `The constant was dropped; y(1) = ${y0} gives y = ${y0}${xp1(p)}.`, predict: xp1(p) });
         out.push({ id: "constant-added-late", kind: "procedural", competency: DE, says: "The constant was added after taking exponentials; log y = p log x + C gives y = Axᵖ, a constant multiple.", predict: `${xp1(p)} + ${y0 - 1 === 0 ? "1" : y0 - 1}` });

@@ -21972,7 +21972,7 @@
    "item": "help:ausbd",
    "kind": "help",
    "competency": "MATH.calculus.integration-methods",
-   "title": "A definite integral by substitution: ∫ c t/√(t² + d²) dt",
+   "title": "A definite integral by substitution: ∫ c t/√(t² + k²) dt",
    "hash": "83f36e36",
    "source": "rule",
    "from": "steps",

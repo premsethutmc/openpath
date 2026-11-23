@@ -1055,7 +1055,7 @@ export const B03: Def[] = [
     bugs: ([a, d, k]) => [
       { id: "next-only", kind: "procedural", competency: GROW, says: `Only the next step (step 4) was found. Keep adding ${d} until step ${k}.`, predict: k > 4 ? a + 3 * d : null },
       { id: "one-too-many", kind: "procedural", competency: GROW, says: `${d} was added ${k} times, but step 1 already has ${a}; from step 1 to step ${k} there are ${k - 1} jumps.`, predict: a + k * d },
-      { id: "times-step", kind: "conceptual", competency: GROW, says: `The step number was multiplied by ${d}, but the pattern started at ${a}, not at ${d}.`, predict: k * d },
+      { id: "times-step", kind: "conceptual", competency: GROW, says: `${d} was counted for every step, as if step 1 had ${d}, but step 1 has ${a}. Start at ${a} and add ${d} for each new step.`, predict: k * d },
     ],
     variants: () => [],
     explain: (s) => (s.id === "rule" ? `From ${s.inputs[0]} to ${s.inputs[1]}: the pattern grows by ${s.value} each step` : `Keep adding ${s.inputs[1]}: ${s.value}`),

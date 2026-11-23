@@ -2822,7 +2822,7 @@ export const B16: Def[] = [
     bugs: ([r]) =>
       r < 3
         ? [
-            B("rows-counted", "conceptual", RANK, `The non-zero rows of the matrix as given were counted; first reduce it: ${r === 2 ? "one row is a combination of the other two" : "every row is a multiple of the first"}, so it becomes a zero row.`, 3),
+            B("rows-counted", "conceptual", RANK, `The non-zero rows of the matrix as given were counted; first reduce it: ${r === 2 ? "one row is a combination of the other two" : "every row is a multiple of the first"}, so ${r === 2 ? "it becomes a zero row" : "the other two become zero rows"}.`, 3),
             ...(r === 1 ? [B("one-row-removed", "procedural", RANK, "Only one row was reduced to zero; the third row is also a multiple of the first.", 2)] : []),
           ]
         : [B("columns-counted", "conceptual", RANK, "The number of columns was taken; the rank is at most the number of rows (3) and is the number of non-zero rows in echelon form.", 4)],

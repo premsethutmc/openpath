@@ -3052,11 +3052,11 @@ const auparts = F({
 });
 
 const SB3 = [[3, 4, 5], [4, 3, 5], [5, 12, 13], [12, 5, 13], [6, 8, 10], [8, 6, 10], [8, 15, 17], [15, 8, 17], [7, 24, 25], [24, 7, 25], [9, 12, 15], [12, 9, 15], [12, 16, 20], [16, 12, 20], [20, 21, 29], [21, 20, 29]];
-/** [j, c]: ∫ from 0 to b of c t/√(t² + d²) dt, with b² + d² = h². */
+/** [j, c]: ∫ from 0 to b of c t/√(t² + k²) dt, with b² + k² = h². */
 const ausbd = F({
   id: "ausbd",
   arity: 2,
-  title: "A definite integral by substitution: ∫ c t/√(t² + d²) dt",
+  title: "A definite integral by substitution: ∫ c t/√(t² + k²) dt",
   competency: IM,
   type: "integer",
   mc: true,
@@ -3082,15 +3082,15 @@ const ausbd = F({
     ];
   },
   domain: [[0, 15], [1, 6]],
-  why: "Upper limits and constants that make b² + d² a perfect square, with c from 1 to 6.",
+  why: "Upper limits and constants that make b² + k² a perfect square, with c from 1 to 6.",
   difficulty: ([j]) => (j <= 1 ? 1 : j >= 12 ? 3 : 2),
   word: ([j, c]) => `Water flows into a tank at a rate of ${c === 1 ? "" : c}t/√(t² + ${SB3[j][1] ** 2}) litres per minute, t minutes after the tap is opened. How many litres flow in during the first ${SB3[j][0]} minutes?`,
   teach: {
-    idea: "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of d(t² + d²). The limits change with the variable.",
-    method: "Let u = t² + d², so t dt = du/2. Change the limits (t = 0 gives u = d², t = b gives u = b² + d²), integrate (1/2)u^(−1/2) to √u, and subtract.",
+    idea: "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of the differential of t² + k². The limits change with the variable.",
+    method: "Let u = t² + k², so t dt = du/2. Change the limits (t = 0 gives u = k², t = b gives u = b² + k²), integrate (1/2)u^(−1/2) to √u, and subtract.",
     alternatives: [
-      { id: "back_substitute", title: "Back-substitute instead", kind: "procedural", text: ["Find the antiderivative √(t² + d²) first.", "Evaluate it at t = b and t = 0 and subtract."] },
-      { id: "check", title: "Check the derivative", kind: "conceptual", text: ["d/dt √(t² + d²) = t/√(t² + d²).", "So the integral is the change in √(t² + d²)."] },
+      { id: "back_substitute", title: "Back-substitute instead", kind: "procedural", text: ["Find the antiderivative √(t² + k²) first.", "Evaluate it at t = b and t = 0 and subtract."] },
+      { id: "check", title: "Check the derivative", kind: "conceptual", text: ["d/dt √(t² + k²) = t/√(t² + k²).", "So the integral is the change in √(t² + k²)."] },
     ],
   },
   limits: "Pythagorean pairs only, so that the answer is a whole number.",
