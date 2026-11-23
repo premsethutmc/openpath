@@ -585,7 +585,7 @@ export function createDemoServer(
     }
     if (home !== "/" && path === "/english") return sendFile(res, req, join(dist, "index.html"));
     // Built sub-applications keep their own entry points; relative asset paths need the trailing slash.
-    for (const entry of ["/tamil", "/maths", "/year", "/review", "/curriculum"]) {
+    for (const entry of ["/tamil", "/maths", "/year", "/review", "/owner", "/curriculum"]) {
       if (path === entry) {
         res.writeHead(301, { ...base(), Location: `${entry}/${url.search}` });
         return res.end();
