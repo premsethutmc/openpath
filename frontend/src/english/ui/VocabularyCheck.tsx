@@ -59,7 +59,7 @@ export function VocabularyView({ check, view, onAnswer, onLeave, onStretch }: { 
     <main className="page vocab" data-phase="done">
       <p className="eyebrow">Words · Word check</p>
       <h1 className="hero">{r.correct} of {r.answered} meanings correct</h1>
-      <p className="sub">{r.band === 0 ? "Not enough evidence to suggest a higher practice level yet." : `Suggested practice: Level ${Math.min(check.bands.length, r.band + 1)} of ${check.bands.length}.`}</p>
+      <p className="sub">{r.band === 0 ? "Not enough evidence for a word level yet." : `Your words reach ${check.bands[r.band - 1].label} (level ${r.band} of ${check.bands.length}).`}</p>
       <p className="small">These are answers to a short recognition check. Advanced vocabulary in context was not tested.</p>
       <ul className="vocab-bands">
         {r.perBand.map((b) => (

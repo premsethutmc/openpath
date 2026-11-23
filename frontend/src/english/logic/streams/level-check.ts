@@ -18,6 +18,7 @@
  */
 import { OLD_LEVELS, mark, pick, wordsOf, type Dictation, type DictationRecord, type Sentence } from "../dictation/dictation.ts";
 import { SCALE, rescale } from "../scale.ts";
+import { CHECK_VERSION } from "../vocabulary/size-check.ts";
 import { checkSpot, fixParts, spotWords, type Ask, type GrammarItem, type GrammarUse } from "../grammar-use/grammar-use.ts";
 import { checkSpelling, type SpellWord } from "../spelling.ts";
 import { OLD_LEVELS as READING_OLD, type Course, type Level, type Passage, type Question, type SkillId } from "../reading/course.ts";
@@ -42,7 +43,8 @@ export const SPELLING_STEPS = 6;
 
 export type LevelCheckRecord =
   | { type: "start" }
-  | { type: "words"; band: number; estimate?: number; correct?: number; answered: number }
+  /** `scale`: the word check version; a words result on another version used other levels and is not used. */
+  | { type: "words"; band: number; scale?: number; estimate?: number; correct?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
@@ -68,7 +70,8 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
   const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null, grammar: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
-    if (r.type === "words") out.words = r.correct === undefined ? { band: r.band, estimate: r.estimate } : { band: r.band, correct: r.correct, answered: r.answered };
+    if (r.type === "words" && r.scale !== CHECK_VERSION) out.words = null;
+    else if (r.type === "words") out.words = r.correct === undefined ? { band: r.band, estimate: r.estimate } : { band: r.band, correct: r.correct, answered: r.answered };
     if (r.type === "reading") {
       const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
       // start at the highest level passed: its units still teach skills not yet checked there (sim-english@2: one above

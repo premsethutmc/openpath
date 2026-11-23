@@ -191,7 +191,7 @@ export function teachBand(c: DailyWords, p: Progress, base: number): number {
 
 /** The base level: one above the highest band the word check found known, or a start by age. */
 export const baseBand = (checkBand: number | null | undefined, age: "early" | "school" | "older" | null | undefined) =>
-  checkBand != null ? Math.min(BANDS, checkBand + 1) : age === "early" ? 1 : age === "older" ? 3 : 2;
+  checkBand != null ? Math.min(BANDS, checkBand + 1) : age === "early" ? 1 : 2;
 
 /** New words still untaught, nearest level first (the level itself, then above, then below), in a fixed order per level. */
 export function freshWords(c: DailyWords, p: Progress, band: number, skip: ReadonlySet<string> = new Set()): DailyWord[] {

@@ -159,7 +159,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.locator('[data-part="grammar"] .status', { hasText: "Level 4 of 7" }).waitFor();
   await page.getByText("Naming a noun and a verb comes first.").waitFor();
   await page.getByRole("button", { name: "Do the grammar check now" }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: "Suggested practice: Level 4 of 8" }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: "wider reading words (level 3 of 8)" }).waitFor();
   await page.locator('[data-part="reading"] .status', { hasText: "Expert (level 6 of 6)" }).waitFor();
   await page.locator('[data-part="listening"] .status', { hasText: "Level 7 of 7" }).waitFor();
   await fits();

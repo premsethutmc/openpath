@@ -30,10 +30,10 @@ test("VC-1 content: eight bands of ten words, three different meanings each, non
   assert.equal(CHECK.words.length, 80);
   for (const b of CHECK.bands) assert.equal(CHECK.words.filter((w) => w.band === b.id).length, 10);
   assert.equal(CHECK.bands.reduce((s, b) => s + b.families, 0), 14000);
-  const position = [0, 1, 2].map((i) => CHECK.words.filter((w) => w.answer === i).length);
-  for (const k of position) assert.ok(k >= 15, `right answers by position: ${position}`);
+  const position = [0, 1, 2, 3].map((i) => CHECK.words.filter((w) => w.answer === i).length);
+  for (const k of position) assert.ok(k >= 12, `right answers by position: ${position}`);
   const bad = buildCheck({ version: 1, status: "", bands: CHECK.bands, words: [[1, "cat", "a cat that purrs", "a dog", "a dog"]] });
-  assert.match(checkProblems(bad).join("\n"), /cat: needs 3 different meanings[\s\S]*cat: a meaning uses the word itself/);
+  assert.match(checkProblems(bad).join("\n"), /cat: needs 4 different meanings[\s\S]*cat: a meaning uses the word itself/);
 });
 
 test("VC-2 only tested words count, and a single lucky round cannot set placement", () => {
@@ -87,10 +87,10 @@ test("VC-4 a retake uses unseen words first, and the latest result is the one re
   assert.equal(latestResult(second.records)!.band, 4);
   assert.equal(latestResult([]), null);
   const old = { type: "result", check: "1", estimate: 6500, low: 5500, high: 7500, band: 6, answered: 12 } as const;
-  assert.deepEqual(latestResult([old]), old);
-  assert.equal(wordPracticeBand([old], 6), undefined);
+  assert.equal(latestResult([old]), null, "a result on an older check used other levels");
+  assert.equal(wordPracticeBand([old], 6), 6);
   assert.equal(wordPracticeBand([old, ...second.records], 6), 4);
-  assert.deepEqual([startBand("early"), startBand("school"), startBand("older"), startBand(null)], [2, 3, 4, 3]);
+  assert.deepEqual([startBand("early"), startBand("school"), startBand("older"), startBand(null)], [1, 2, 2, 2]);
   assert.equal(score(CHECK, []).correct, 0);
   const third = sit(4, null, second.records);
   assert.equal(new Set(third.asked).size, third.asked.length, "no duplicates after the unseen list is exhausted");
