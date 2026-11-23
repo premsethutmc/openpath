@@ -22,7 +22,7 @@ test("VU-1 intro, a question and the result", () => {
   for (; v.phase === "asking"; v = s.snapshot()) s.answer(CHECK.words.find((x) => x.word === v.word!.word)!.band <= 4 ? CHECK.words.find((x) => x.word === v.word!.word)!.answer : null);
   page = html(React.createElement(VocabularyView, { check: CHECK, view: v, onAnswer() {}, onLeave() {} }));
   assert.match(page, /9 of 15 meanings correct/);
-  assert.match(page, /Suggested practice: Level 5 of 8/);
+  assert.match(page, /Knows words up to level 4 of 8/);
   assert.match(page, /short recognition check/);
   assert.match(page, /6 of 6 correct/);
 });

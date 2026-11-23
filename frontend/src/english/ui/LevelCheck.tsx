@@ -13,6 +13,8 @@ import { COURSE } from "../logic/reading/course.ts";
 import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
 import { BANDS } from "../logic/vocabulary/daily-words.ts";
 import { CHECK, SizeCheckSession, startBand } from "../logic/vocabulary/size-check.ts";
+/** The highest word level the quick check can reach: one level up per round from where it starts. */
+const QUICK_TOP = startBand(null) + WORD_ROUNDS - 1;
 import { slowText } from "./ListenWrite.tsx";
 import { syncAutoLists } from "../logic/streams/joined.ts";
 import { VocabularyStretch } from "./VocabularyStretch.tsx";
@@ -236,7 +238,7 @@ export function LevelResult({ levels, skipped, onDone, onGrammar, onStretch }: {
             {levels.words && !skipped.includes("words") && <span className="small"> Advanced vocabulary in context was not tested.</span>}
             {levels.words?.correct !== undefined && !skipped.includes("words") && <span className="small"> {levels.words.correct} of {levels.words.answered} meanings correct</span>}
           </span>
-          <span className="status">{levels.words && !skipped.includes("words") ? levels.words.band > 0 ? `Suggested practice: Level ${Math.min(BANDS, levels.words.band + 1)} of ${BANDS}` : "Not enough evidence yet" : "—"}</span>
+          <span className="status">{levels.words && !skipped.includes("words") ? levels.words.band > 0 ? `Knows words up to level ${levels.words.band} of ${BANDS}${levels.words.band >= QUICK_TOP ? " (the quick check stops here; the full word check goes higher)" : ""}` : "Not enough evidence yet" : "—"}</span>
         </li>
         <li data-part="reading">
           <span>
