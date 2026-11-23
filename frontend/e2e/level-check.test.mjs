@@ -112,7 +112,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await fits();
   await shot(page, "2-reading");
   const levels = new Set();
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < 19; i++) {
     await page.waitForFunction(() => ["reading", "listening", "result"].includes(document.querySelector("main")?.getAttribute("data-phase")));
     const main = page.locator("main");
     if ((await main.getAttribute("data-phase")) !== "reading") break;
@@ -132,8 +132,11 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByText("Part 3 of 5: Listening").waitFor();
   await fits();
   await shot(page, "3-listening");
-  for (let i = 1; i <= 4; i++) {
-    await page.getByText(`Sentence ${i} of 4.`, { exact: false }).waitFor();
+  for (let i = 1; i <= 7; i++) {
+    await page.waitForFunction(() => ["listening", "spelling"].includes(document.querySelector("main")?.getAttribute("data-phase")));
+    if ((await page.locator("main").getAttribute("data-phase")) !== "listening") break;
+    assert.ok(i <= 6, "at most six sentences");
+    await page.getByText(`Sentence ${i} of up to 6.`, { exact: false }).waitFor();
     const s = SENTENCES.get(await page.locator("main").getAttribute("data-sentence"));
     assert.equal(await page.getByText(s.text, { exact: true }).count(), 0, "the sentence is not on screen");
     await page.locator("#dict-box").fill(s.text);
@@ -142,8 +145,11 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   await page.getByText("Part 4 of 5: Spelling").waitFor();
   await fits();
   await shot(page, "3b-spelling");
-  for (let i = 1; i <= 6; i++) {
-    await page.getByText(`Word ${i} of 6.`, { exact: false }).waitFor();
+  for (let i = 1; i <= 9; i++) {
+    await page.waitForFunction(() => ["spelling", "grammar"].includes(document.querySelector("main")?.getAttribute("data-phase")));
+    if ((await page.locator("main").getAttribute("data-phase")) !== "spelling") break;
+    assert.ok(i <= 8, "at most eight words");
+    await page.getByText(`Word ${i} of up to 8.`, { exact: false }).waitFor();
     const w = BEE.get(await page.locator("main").getAttribute("data-word-id"));
     assert.equal(await page.getByText(w.word, { exact: true }).count(), 0, "the word is not on screen");
     assert.equal(await page.locator("#spell-box").getAttribute("autocapitalize"), "none");
