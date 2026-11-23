@@ -17,7 +17,7 @@ import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
 import { FIRST } from "../first/first.ts";
 import { rightAnswer } from "../test-helpers.ts";
-import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_LEAST, LISTENING_STEPS, ListeningPlacement, PARTS, READING_CHECK, READING_SKILLS, READING_TEXTS, ReadingPlacement, SPELLING_LEAST, SPELLING_STEPS, SpellingPlacement, TYPED_CHECK, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
+import { GRAMMAR_LEAST, GRAMMAR_STEPS, GrammarPlacement, QUICK, startFromWords, MIDDLE, LISTENING_LEAST, LISTENING_STEPS, ListeningPlacement, PARTS, READING_CHECK, READING_SKILLS, READING_TEXTS, ReadingPlacement, SPELLING_LEAST, SPELLING_STEPS, SpellingPlacement, TYPED_CHECK, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { NAMING_TOPIC, streamRows } from "./streams.ts";
 import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
 
@@ -318,17 +318,45 @@ function grammarCheck(names: boolean, can: number) {
   return { ...s.result(), kinds };
 }
 
-test("LC-9 grammar: a noun and a verb for everyone, then four on a staircase from the middle; every level within reach", () => {
+test("LC-9 grammar: a noun and a verb for everyone, then sentences by elimination; one lucky tap is not a level", () => {
   const all = grammarCheck(true, 6);
   assert.deepEqual(all.kinds.slice(0, 2), ["noun", "verb"]);
-  assert.equal(all.kinds.length, GRAMMAR_STEPS);
-  assert.deepEqual([all.basics, all.level, all.scale], [{ right: 2, asked: 2 }, 6, 2]);
-  assert.deepEqual([7, 6, 5, 4, 3, 2, 1, 0].map((can) => grammarCheck(true, can).level), [7, 6, 5, 4, 3, 2, 1, 1]);
+  assert.ok(all.kinds.length >= 2 + GRAMMAR_LEAST && all.kinds.length <= GRAMMAR_STEPS);
+  assert.deepEqual([all.basics, all.scale, all.check], [{ right: 2, asked: 2 }, 2, TYPED_CHECK]);
+  for (let can = 0; can <= 7; can++) {
+    const level = grammarCheck(true, can).level;
+    assert.ok(level <= Math.max(1, can) && level >= Math.max(1, can - 1), `does sentences to ${can}: placed ${level}`);
+  }
+  assert.deepEqual([grammarCheck(true, 7).level, grammarCheck(true, 0).level], [7, 1], "both ends can be reached from the middle");
+  // simulated learners who tap at random when they do not know: rarely placed above their level
+  const rng = (seed: number) => {
+    let x = seed >>> 0;
+    return () => (x = (Math.imul(x, 1664525) + 1013904223) >>> 0) / 2 ** 32;
+  };
+  const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+  for (let t = 1; t <= 6; t++) {
+    const rnd = rng(40 + t);
+    const N = 1200;
+    const placed = Array<number>(9).fill(0);
+    for (let i = 0; i < N; i++) {
+      const s = new GrammarPlacement(GRAMMAR, MIDDLE.grammar);
+      for (let v = s.snapshot(); v.phase === "ask"; v = s.snapshot()) {
+        const it = GRAMMAR.items.find((x) => x.id === v.id)!;
+        const rightAt = it.kind === "spot" ? v.words.findIndex((w) => it.right!.includes(bare(w))) : it.sentence.split(" ").findIndex((w) => w.includes("["));
+        const knows = rnd() < 0.9 / (1 + Math.exp(-(1.3 * (t - (v.index < 2 ? 1 : it.level)) + 1.0)));
+        s.answer(knows ? rightAt : Math.floor(rnd() * v.words.length));
+      }
+      placed[s.result().level]++;
+    }
+    const from = (lo: number) => placed.slice(lo).reduce((x, y) => x + y, 0) / N;
+    assert.ok(from(t + 1) <= 0.23 && from(t + 2) <= 0.1, `grammar, does sentences at ${t}: above ${(100 * from(t + 1)).toFixed(1)}%, two up ${(100 * from(t + 2)).toFixed(1)}%`);
+  }
   // someone who does sentences well but cannot name a noun or a verb: the level stands, and the gap is recorded
   const gap = grammarCheck(false, 5);
-  assert.deepEqual([gap.basics, gap.level], [{ right: 0, asked: 2 }, 5]);
-  assert.deepEqual(levelsFrom([{ type: "grammar", ...gap }]).grammar, { level: 5, basics: false });
-  assert.deepEqual(levelsFrom([{ type: "grammar", ...all }]).grammar, { level: 6, basics: true });
+  assert.deepEqual(gap.basics, { right: 0, asked: 2 });
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...gap }]).grammar, { level: gap.level, basics: false });
+  assert.deepEqual(levelsFrom([{ type: "grammar", ...all }]).grammar, { level: all.level, basics: true });
+  assert.equal(levelsFrom([{ type: "grammar", ...all, check: undefined }]).grammar, null, "a result of the older, looser grammar part is not used");
 });
 
 test("LC-10 after the check, the grammar row starts at the level found, and names naming words first when that was missed", async () => {
@@ -336,12 +364,13 @@ test("LC-10 after the check, the grammar row starts at the level found, and name
   const clock = testClock();
   const l = await Learner.create(c, new MemoryRepo(), "Grammar", "guardian", clock, "p-grammar");
   const row = () => streamRows(l, clock()).find((r) => r.id === "grammar")!;
-  await l.recordLevelCheck([{ type: "start" }, { type: "grammar", ...grammarCheck(false, 5) }, { type: "done" }]);
-  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 7", "Start with naming words: noun and verb", "naming"]);
-  const s = new GrammarSitting(GRAMMAR, 5, [], [NAMING_TOPIC]);
+  const found = grammarCheck(false, 5);
+  await l.recordLevelCheck([{ type: "start" }, { type: "grammar", ...found }, { type: "done" }]);
+  assert.deepEqual([row().level, row().next, row().open], [`Level ${found.level} of 7`, "Start with naming words: noun and verb", "naming"]);
+  const s = new GrammarSitting(GRAMMAR, found.level, [], [NAMING_TOPIC]);
   for (let v = s.snapshot(); v.phase !== "done"; v = s.snapshot()) if (v.phase === "learn") s.learned(); else (s.spot(0), s.next());
   await l.recordGrammar(s.take());
-  assert.deepEqual([row().level, row().next, row().open], ["Level 5 of 7", "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
+  assert.deepEqual([row().level, row().next, row().open], [`Level ${found.level} of 7`, "Eight sentences to fix and build", undefined], "a topic sitting does not move the level");
 });
 test("reading placement uses the practice text that carries every placement skill, never an inference-only text", () => {
   const expected = ["L1.P2", "N2.P2", "L2.P2", "N4.P2", "L3.P2", "N6.P2"];
@@ -372,12 +401,55 @@ test("LC-11 grammar placement: a right answer high up followed by misses does no
     }
     return s.result();
   };
-  // 3 right → 5 right → 6 wrong → 5 wrong: the highest right was 5, but the learner then missed at 5
-  const lucky = run([true, true, false, false]);
-  assert.deepEqual(lucky.steps.map((x) => [x.level, x.correct]), [[3, true], [5, true], [6, false], [5, false]]);
-  assert.equal(lucky.level, 4);
-  // 3 right → 5 wrong → 4 right → 5 right: ends where it was answered right
-  assert.equal(run([true, false, true, true]).level, 5);
+  // right at the start, right once higher up, then every later sentence missed: the one right answer high up is no level
+  const lucky = run([true, true, false, false, false, false, false]);
+  const high = Math.max(...lucky.steps.filter((x) => x.correct).map((x) => x.level));
+  assert.ok(high > 3 && lucky.level < high, `highest right ${high}, placed ${lucky.level}`);
+  assert.ok(lucky.level <= 3);
+  // every sentence right: the top
+  assert.equal(run([true, true, true, true, true, true, true]).level, 7);
+});
+
+test("LC-11b the quick check: the word level decides where a part starts asking, never its level", () => {
+  assert.deepEqual([startFromWords(null, 7, 3), startFromWords(0, 7, 3), startFromWords(1, 7, 3), startFromWords(8, 7, 3), startFromWords(8, 5, 3), startFromWords(4, 6, 3)], [3, 1, 1, 7, 5, 3]);
+  const bare = (w: string) => w.replace(/[^A-Za-z']/g, "");
+  /** The four quick parts for a learner whose word level says `band` but who can really do each part only up to `can`. */
+  const quick = (band: number, can: number) => {
+    const rp = new ReadingPlacement(COURSE, startFromWords(band, 6, MIDDLE.reading), QUICK.reading);
+    let texts = 0;
+    for (let v = rp.snapshot(), last = ""; v.phase === "asking"; v = rp.snapshot()) {
+      if (v.passage!.title !== last) texts++;
+      last = v.passage!.title;
+      const q = keyFor(v.question!.prompt, v.level, v.passage!.title);
+      rp.answer(v.level <= can ? q.answer : (q.answer + 1) % q.options.length);
+    }
+    const lp = new ListeningPlacement(DICTATION, startFromWords(band, 7, MIDDLE.listening), [], QUICK.listening);
+    let sentences = 0;
+    for (; !lp.finished; sentences++) {
+      const text = lp.spoken()!;
+      lp.check(DICTATION.sentences.find((x) => x.text === text)!.level <= can ? text : "no idea", 1);
+    }
+    const gp = new GrammarPlacement(GRAMMAR, startFromWords(band, 7, MIDDLE.grammar), QUICK.grammar, 2);
+    let taps = 0;
+    for (let v = gp.snapshot(); v.phase === "ask"; v = gp.snapshot(), taps++) {
+      const it = GRAMMAR.items.find((x) => x.id === v.id)!;
+      const at = it.kind === "spot" ? v.words.findIndex((w) => it.right!.includes(bare(w))) : it.sentence.split(" ").findIndex((w) => w.includes("["));
+      gp.answer(v.index < 2 || it.level <= can ? at : it.kind === "spot" ? v.words.findIndex((w) => !it.right!.includes(bare(w))) : (at + 1) % v.words.length);
+    }
+    return { reading: rp.result().passed, listening: lp.result().level, grammar: gp.result().level, texts, sentences, taps };
+  };
+  for (const band of [1, 4, 8])
+    for (const can of [1, 3, 6]) {
+      const r = quick(band, can);
+      assert.ok(r.reading <= can && r.listening <= can && r.grammar <= can, `word level ${band}, can do ${can}: placed ${JSON.stringify(r)}`);
+      assert.ok(r.texts <= QUICK.reading.most && r.sentences === QUICK.listening.most && r.taps <= 2 + QUICK.grammar.most);
+    }
+  // strong words but weak everything else: the other parts start high and still come out low
+  const uneven = quick(8, 1);
+  assert.deepEqual([uneven.reading <= 1, uneven.listening, uneven.grammar], [true, 1, 1]);
+  // words and the rest agree: the quick check confirms the level in a handful of answers
+  const even = quick(4, 3);
+  assert.ok(even.reading >= 2 && even.listening >= 2 && even.grammar >= 2, JSON.stringify(even));
 });
 
 test("LC-12 a beginner's Words row opens First words until First sentences open", async () => {
