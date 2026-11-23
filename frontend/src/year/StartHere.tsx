@@ -1,6 +1,7 @@
 /** foundations@1: the "Start here" part of a new skill's first lesson: the ideas the lesson relies on, with a picture. */
 import { useState } from "react";
-import { foundationsOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
+import { PictureRound, TriangleExplore } from "./PictureTasks";
+import { foundationsOf, picturesOf, roundFor, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 const S = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 const A = { ...S, stroke: "var(--sh-accent, #e8862a)", strokeWidth: 3 };
@@ -40,7 +41,7 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
 }
 
 /** foundation-practice@1: the idea's own questions, one at a time. A wrong choice says what went wrong and can be tried again. */
-export function FoundationPractice({ questions }: { questions: FoundationQuestion[] }) {
+export function FoundationPractice({ questions, onDone }: { questions: FoundationQuestion[]; onDone?: () => void }) {
   const [i, setI] = useState(0);
   const [tried, setTried] = useState<number[]>([]);
   const [firstTry, setFirstTry] = useState(0);
@@ -54,19 +55,32 @@ export function FoundationPractice({ questions }: { questions: FoundationQuestio
         {shownOrder(q).map((k) => <button key={k} type="button" className={`sh-option${tried.includes(k) ? (k === q.answer ? " right" : " wrong") : ""}`} disabled={right || tried.includes(k)} onClick={() => setTried([...tried, k])}>{q.options[k]}</button>)}
       </div>
       {last !== undefined && <p className={right ? "sh-feedback good" : "sh-feedback"} role="status">{right ? `Yes. ${q.why}` : `Not quite. ${q.wrong[last] || "Look at the idea again and try another choice."}`}</p>}
-      {right && <button type="button" className="sh-show" onClick={() => { if (tried.length === 1) setFirstTry(firstTry + 1); setTried([]); setI(i + 1); }}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
+      {right && <button type="button" className="sh-show" onClick={() => { if (tried.length === 1) setFirstTry(firstTry + 1); setTried([]); setI(i + 1); if (i + 1 >= questions.length) onDone?.(); }}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
     </section>
   );
 }
 
+/** How many times this idea's practice was finished on this device (so the next visit gets the next round). Never evidence. */
+const KEY = (competency: string, concept: string) => `openpath:start-here:${competency}:${concept}`;
+const visits = (k: string) => { try { return Number(localStorage.getItem(k)) || 0; } catch { return 0; } };
+const bump = (k: string) => { try { localStorage.setItem(k, String(visits(k) + 1)); } catch { /* private mode: the same round next time */ } };
+
 /** In front of a new skill's first lesson: nothing when the skill has no start-here teaching. */
 export function StartHere({ competency }: { competency: string }) {
   const all = foundationsOf(competency);
+  // one draw per visit: the picture questions and the round of questions stay the same while the page is open
+  const [seed] = useState(() => Math.floor(Math.random() * 1e9));
+  const [visit] = useState(() => all.map((f) => visits(KEY(competency, f.concept))));
   if (!all.length) return null;
   return (
     <div className="sh" data-start-here={competency}>
       <p className="sh-eyebrow">Start here</p>
-      {all.map((f, k) => <div className="sh" key={k}>{f.screens.map((s, i) => <FoundationCard key={i} s={s} />)}{f.practice?.length ? <FoundationPractice questions={f.practice} /> : null}</div>)}
+      {all.map((f, k) => <div className="sh" key={k}>
+        {f.screens.map((s, i) => <FoundationCard key={i} s={s} />)}
+        {picturesOf(f).includes("right-triangle") ? <TriangleExplore /> : null}
+        {picturesOf(f).map((p, i) => <PictureRound key={p} kind={p} seed={seed + k * 101 + i * 13 + visit[k] * 7919} />)}
+        {roundFor(f, visit[k]).length ? <FoundationPractice questions={roundFor(f, visit[k])} onDone={() => bump(KEY(competency, f.concept))} /> : null}
+      </div>)}
     </div>
   );
 }

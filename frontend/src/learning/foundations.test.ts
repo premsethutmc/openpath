@@ -32,7 +32,10 @@ test("every start-here idea has practice a child can check: four choices, one ri
   let n = 0;
   for (const f of foundations) {
     assert.ok(f.practice && f.practice.length >= 3, `${f.competency}: ${f.concept} has no practice`);
-    for (const q of f.practice!) {
+    assert.ok((f.rounds ?? []).length >= 2 && f.rounds!.every((r) => r.length >= 3), `${f.competency}: ${f.concept} has no further rounds`);
+    const asked = [f.practice!, ...f.rounds!].flat().map((q) => q.question);
+    assert.equal(new Set(asked).size, asked.length, `${f.competency}: a question is repeated between rounds`);
+    for (const q of [f.practice!, ...f.rounds!].flat()) {
       n++;
       const at = `${f.competency}: ${q.question}`;
       assert.equal(q.options.length, 4, at);
@@ -43,5 +46,37 @@ test("every start-here idea has practice a child can check: four choices, one ri
       assert.deepEqual([...shownOrder(q)].sort(), [0, 1, 2, 3], at);
     }
   }
-  assert.ok(n >= 500);
+  assert.ok(n >= 1700);
+});
+
+test("picture tasks: every kind asks about parts its picture has, and a new visit gets new tasks", async () => {
+  const { describe, partsOf, pictureTasks, rightTap } = await import("../../../packages/learning/src/foundation-pictures");
+  for (const kind of PICTURES) {
+    const seen = new Set<string>();
+    for (let seed = 1; seed <= 40; seed++) {
+      const tasks = pictureTasks(kind, seed);
+      assert.ok(tasks.length >= 2, kind);
+      assert.deepEqual(pictureTasks(kind, seed), tasks, `${kind}: same seed, same tasks`);
+      for (const t of tasks) {
+        const parts = partsOf(t.scene);
+        if (t.count !== undefined) assert.ok(t.count >= 1 && t.count < parts.length && rightTap(t, "", t.count) && !rightTap(t, "", t.count + 1), kind);
+        else { assert.ok(t.answer.length >= 1 && t.answer.every((a) => parts.includes(a)), `${kind}: ${t.prompt}`); assert.ok(parts.some((p) => !rightTap(t, p)), kind); }
+        for (const p of parts) assert.ok(describe(t.scene, p)?.length > 5, `${kind}: ${p}`);
+        assert.ok(!/undefined|NaN/.test(t.prompt + t.hint), kind);
+      }
+      seen.add(JSON.stringify(tasks));
+    }
+    assert.ok(seen.size >= 2, `${kind} never changes`);
+  }
+  const tri = pictureTasks("right-triangle", 7);
+  for (const t of tri) if (t.scene.kind === "right-triangle" && t.prompt.includes("opposite")) assert.deepEqual(t.answer, [t.scene.thetaAt === "left" ? "right" : "bottom"]);
+});
+
+test("a repeat visit gets the next round of questions, round and round", async () => {
+  const { roundFor } = await import("../../../packages/learning/src/foundations");
+  const f = foundationsOf("MATH.trigonometry.ratios")[0];
+  assert.deepEqual(roundFor(f, 0), f.practice);
+  assert.deepEqual(roundFor(f, 1), f.rounds![0]);
+  assert.deepEqual(roundFor(f, 2), f.rounds![1]);
+  assert.deepEqual(roundFor(f, 3), f.practice);
 });

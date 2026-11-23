@@ -16,7 +16,7 @@ export type Picture = (typeof PICTURES)[number];
 export interface FoundationScreen { title: string; text: string[]; example?: string[]; check?: { question: string; answer: string }; picture?: Picture | null }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
-export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[]; practice?: FoundationQuestion[] }
+export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[]; practice?: FoundationQuestion[]; /** more rounds of the same four kinds of question, so a repeat visit is not the same four */ rounds?: FoundationQuestion[][] }
 export const foundations = (data as unknown as { entries: Foundation[] }).entries;
 const by = new Map<string, Foundation[]>();
 for (const f of foundations) by.set(f.competency, [...(by.get(f.competency) ?? []), f]);
@@ -30,3 +30,10 @@ export function shownOrder(q: FoundationQuestion): number[] {
   for (let i = order.length - 1; i > 0; i--) { h = (Math.imul(h, 1103515245) + 12345) >>> 0; const j = h % (i + 1); [order[i], order[j]] = [order[j], order[i]]; }
   return order;
 }
+/** practice-rounds@1: the round of questions for this visit: the first visit gets the first round, the next the next, round and round. */
+export function roundFor(f: Foundation, visit: number): FoundationQuestion[] {
+  const all = [f.practice ?? [], ...(f.rounds ?? [])].filter((r) => r.length);
+  return all.length ? all[((visit % all.length) + all.length) % all.length] : [];
+}
+/** The pictures of an idea (each once): each gets tap-the-picture questions. */
+export const picturesOf = (f: Foundation): Picture[] => [...new Set(f.screens.map((s) => s.picture).filter((p): p is Picture => !!p))];

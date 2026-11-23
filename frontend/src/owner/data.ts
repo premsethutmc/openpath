@@ -49,7 +49,7 @@ export function sampleOf(f: Spec): Sample | null {
 }
 
 export interface Totals { skills: number; screens: number; corrected: number; families: number; certified: number; foundations: number; practice: number }
-export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0), foundations: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + f.screens.length, 0), 0), practice: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + (f.practice?.length ?? 0), 0), 0) });
+export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0), foundations: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + f.screens.length, 0), 0), practice: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + (f.practice?.length ?? 0) + (f.rounds ?? []).reduce((a, r) => a + r.length, 0), 0), 0) });
 /** Skills of a topic whose title, lesson text or question-type titles contain the words typed. */
 export function search(skills: Skill[], q: string): Skill[] {
   const w = q.trim().toLowerCase();
