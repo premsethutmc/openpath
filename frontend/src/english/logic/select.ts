@@ -155,7 +155,51 @@ export const focusGoal = (cap: string): Goal => ({ id: `focus:${cap}`, name: cap
 /** Grammar or vocabulary: the engine's hybrid scheduler on one capability (retention checks, probes and practice). */
 export function guidedNext(s: AppState, c: AppContent, session: SessionState, now: string): Next | null {
   if (session.answered.length >= (session.event.length ?? GUIDED_LENGTH)) return null;
-  return decide(s, c, focusGoal(session.event.capability!), now, "hybrid", "practice", session);
+  return mistakeFollowUp(s, c, session) ?? decide(s, c, focusGoal(session.event.capability!), now, "hybrid", "practice", session);
+}
+
+/** The kinds of mistake a question can show: the tags on its wrong answers (typed) and wrong choices. */
+export const mistakesShownBy = (i: Code): string[] => [...new Set([...Object.values(i.wrong ?? {}), ...Object.values(i.distractor_tags ?? {})])];
+
+/**
+ * Diagnostic follow-up (follow-up@1), guided practice only.
+ *
+ * When the learner's last unaided answer was wrong in a way the question names (a tagged wrong answer, such as an
+ * attraction error in subject-verb agreement), one wrong answer cannot say whether that was a slip or a real gap, and
+ * an easier question on the same skill does not say either. So the next question is one that can show the same
+ * mistake again: same capability, a different question, no harder than the one just missed. Right: the engine lets
+ * the mistake fade, as it does today. Wrong in the same way: the engine's record of the mistake strengthens, and its
+ * planner and lessons act on it. One follow-up per mistake: after two answers in a row wrong in the same way it is
+ * not asked again, and the engine's own choice (and its teaching) takes over.
+ *
+ * It changes only which question comes next. The answer is ordinary evidence, scored and recorded as any other.
+ */
+export function mistakeFollowUp(s: AppState, c: AppContent, session: SessionState): Next | null {
+  const cap = session.event.capability;
+  const own = session.attempts.filter((a) => !a.assisted);
+  const last = own.at(-1);
+  if (!cap || !last || last.correct || !last.misconceptions.length) return null;
+  // the latest answer of all must be that unaided one: a retry or a hint since then means teaching is under way
+  if (session.attempts.at(-1) !== last) return null;
+  const before = own.at(-2);
+  if (before && !before.correct && before.misconceptions.some((m) => last.misconceptions.includes(m))) return null;
+  const missed = c.ctx.content.items.get(last.item.id);
+  if (missed?.kind !== "code" || missed.target !== cap) return null;
+  const asked = new Set(session.attempts.map((a) => a.item.id));
+  const allowed = eligibility(s, c, "practice", session).only;
+  const pool = [...allowed]
+    .map((id) => c.ctx.content.items.get(id))
+    .filter((i): i is Code => i?.kind === "code" && i.target === cap && !asked.has(i.id) && !s.ledger.exposures.has(i.id) && i.b <= missed.b + 0.25 && mistakesShownBy(i).some((m) => last.misconceptions.includes(m)));
+  // the nearest in difficulty to the question missed, never harder: the same mistake in a new sentence
+  const item = pool.sort((x, y) => y.b - x.b || x.id.localeCompare(y.id))[0];
+  if (!item) return null;
+  const mistake = last.misconceptions.find((m) => mistakesShownBy(item).includes(m))!;
+  return {
+    item,
+    use: "practice",
+    why: "The last answer slipped in one particular way. This question checks the same thing in a new sentence.",
+    trace: { selector: "engine", use: "practice", path: "misconception_follow_up", explanation: `follow-up@1: the last unaided answer (${missed.id}, difficulty ${missed.b}) was wrong with the tagged mistake "${mistake}". This question (${item.id}, difficulty ${item.b}) can show the same mistake again, so one more answer tells a slip from a gap.` },
+  };
 }
 
 /**
