@@ -12,12 +12,13 @@ import { Learner } from "../learner.ts";
 import { COURSE } from "../reading/course.ts";
 import { progress, recommend } from "../reading/session.ts";
 import { MemoryRepo } from "../store.ts";
+import { WORDS } from "../vocabulary/daily-words.ts";
 import { CHECK, CHECK_VERSION, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
 import { FIRST } from "../first/first.ts";
 import { rightAnswer } from "../test-helpers.ts";
-import { GRAMMAR_LEAST, GRAMMAR_STEPS, GrammarPlacement, QUICK, startFromWords, MIDDLE, LISTENING_LEAST, LISTENING_STEPS, ListeningPlacement, PARTS, READING_CHECK, READING_SKILLS, READING_TEXTS, ReadingPlacement, SPELLING_LEAST, SPELLING_STEPS, SpellingPlacement, TYPED_CHECK, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
+import { GAP_CHECK, GAP_LEAST, GAP_MOST, GapCheck, gapItems, GRAMMAR_LEAST, GRAMMAR_STEPS, GrammarPlacement, QUICK, startFromWords, MIDDLE, LISTENING_LEAST, LISTENING_STEPS, ListeningPlacement, PARTS, READING_CHECK, READING_SKILLS, READING_TEXTS, ReadingPlacement, SPELLING_LEAST, SPELLING_STEPS, SpellingPlacement, TYPED_CHECK, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { NAMING_TOPIC, streamRows } from "./streams.ts";
 import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
 
@@ -450,6 +451,70 @@ test("LC-11b the quick check: the word level decides where a part starts asking,
   // words and the rest agree: the quick check confirms the level in a handful of answers
   const even = quick(4, 3);
   assert.ok(even.reading >= 2 && even.listening >= 2 && even.grammar >= 2, JSON.stringify(even));
+});
+
+test("LC-11c the quick gap check: one overall level in a dozen typed answers, and only a starting point for the other parts", () => {
+  const items = gapItems(WORDS.words);
+  for (let level = 1; level <= 8; level++) assert.ok(items.filter((it) => it.level === level).length >= 12, `level ${level}`);
+  for (const it of items) {
+    assert.equal(`${it.shown.toLowerCase()}${it.word.slice(it.shown.length)}`, it.word, it.word);
+    assert.ok(it.missing >= 2 && !`${it.before}${it.after}`.toLowerCase().match(new RegExp(`\\b${it.word}\\b`)), `${it.word}: the answer is not in the sentence`);
+  }
+  const byText = new Map(items.map((it) => [`${it.before}|${it.shown}|${it.after}`, it]));
+  const sit = (answer: (it: (typeof items)[number], i: number) => string, met = new Set<string>()) => {
+    const s = new GapCheck(WORDS.words, 4, met);
+    const asked: string[] = [];
+    for (let i = 0; !s.finished; i++) {
+      const v = s.snapshot();
+      assert.ok(!JSON.stringify(v).includes(byText.get(`${v.item!.before}|${v.item!.shown}|${v.item!.after}`)!.word), "the screen never holds the whole word");
+      const it = byText.get(`${v.item!.before}|${v.item!.shown}|${v.item!.after}`)!;
+      asked.push(it.word);
+      s.answer(answer(it, i));
+    }
+    return { ...s.result(), asked };
+  };
+  for (let can = 0; can <= 8; can++) {
+    const r = sit((it) => (it.level <= can ? it.word.slice(it.shown.length) : ""));
+    assert.ok(r.level <= can && r.level >= can - 1, `finishes words to level ${can}: placed ${r.level}`);
+    assert.ok(r.asked.length >= GAP_LEAST && r.asked.length <= GAP_MOST && new Set(r.asked).size === r.asked.length);
+  }
+  assert.deepEqual([sit((it) => it.word.toUpperCase()).level, sit(() => "").level], [8, 0], "the whole word is accepted too; nothing right is below the first level");
+  assert.equal(sit((it, i) => (i === 0 ? it.word : "zz")).level, 0, "one right answer is not a level");
+  const first = sit((it) => it.word);
+  assert.ok(!sit((it) => it.word, new Set(first.asked)).asked.some((w) => first.asked.includes(w)), "words met in New words are not asked");
+
+  // simulated learners: rarely above their level, done in about a dozen answers
+  const rng = (seed: number) => {
+    let x = seed >>> 0;
+    return () => (x = (Math.imul(x, 1664525) + 1013904223) >>> 0) / 2 ** 32;
+  };
+  for (let t = 1; t <= 8; t++) {
+    const rnd = rng(60 + t);
+    const N = 1200;
+    const placed = Array<number>(10).fill(0);
+    let asked = 0;
+    for (let i = 0; i < N; i++) {
+      const r = sit((it) => (rnd() < 0.04 + 0.9 / (1 + Math.exp(-(1.3 * (t - it.level) + 1.0))) ? it.word : ""));
+      placed[r.level]++;
+      asked += r.asked.length;
+    }
+    const from = (lo: number) => placed.slice(lo).reduce((x, y) => x + y, 0) / N;
+    assert.ok(from(t + 1) <= 0.09 && from(t + 2) <= 0.01, `gap check, words reach ${t}: above ${(100 * from(t + 1)).toFixed(1)}%, two up ${(100 * from(t + 2)).toFixed(1)}%`);
+    assert.ok(from(t - 1) >= 0.9 && asked / N <= 15, `gap check, words reach ${t}: at ${t} or one below ${(100 * from(t - 1)).toFixed(0)}%, ${(asked / N).toFixed(1)} answers`);
+  }
+
+  // what the other parts get from it: a starting point, rounded down, never in place of a measured level
+  const gaps = (level: number): LevelCheckRecord => ({ type: "gaps", level, check: GAP_CHECK, steps: [] });
+  const from4 = levelsFrom([{ type: "start", mode: "gaps" }, gaps(4), { type: "done" }]);
+  assert.deepEqual([from4.done, from4.words, from4.reading, from4.listening, from4.spelling, from4.grammar], [true, { band: 4 }, { passed: 3, start: 3 }, { level: 2 }, { level: 2 }, { level: 3, basics: true }]);
+  assert.deepEqual([...from4.estimated!].sort(), ["grammar", "listening", "reading", "spelling", "words"]);
+  const zero = levelsFrom([gaps(0)]);
+  assert.deepEqual([zero.words, zero.reading, zero.listening], [{ band: 0 }, { passed: 0, start: 1 }, { level: 1 }]);
+  const measuredFirst = levelsFrom([{ type: "listening", level: 2, scale: 2, check: TYPED_CHECK, steps: [] }, gaps(8)]);
+  assert.deepEqual([measuredFirst.listening, measuredFirst.estimated!.includes("listening")], [{ level: 2 }, false], "a measured level is never replaced by the gap check");
+  const measuredAfter = levelsFrom([gaps(8), { type: "spelling", level: 1, check: TYPED_CHECK, steps: [] }]);
+  assert.deepEqual([measuredAfter.spelling, measuredAfter.estimated!.includes("spelling"), measuredAfter.grammar], [{ level: 1 }, false, { level: 7, basics: true }]);
+  assert.equal(levelsFrom([{ type: "gaps", level: 6, check: 0, steps: [] }]).words, null, "a result of another version of the gap check is not used");
 });
 
 test("LC-12 a beginner's Words row opens First words until First sentences open", async () => {

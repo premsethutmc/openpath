@@ -32,7 +32,7 @@ import { OLD_LEVELS as READING_OLD, type Course, type Level, type Passage, type 
  * reports only what its own answers show, by the same rules as the full check, so a learner with strong words and
  * weak listening is placed low in listening. Starting in the right place is what makes a few questions enough.
  */
-export type Mode = "quick" | "full";
+export type Mode = "gaps" | "quick" | "full";
 export interface Limits {
   /** Fewest and most questions (reading: texts) before the part ends. */
   least: number;
@@ -96,12 +96,19 @@ export type LevelCheckRecord =
   | { type: "listening"; level: number; scale?: number; check?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; check?: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "grammar"; level: number; scale?: number; check?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
+  /** The quick gap check (GapCheck): one overall level on the eight word levels. `check`: its version. */
+  | { type: "gaps"; level: number; check: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
 
 export interface Levels {
   /** Whether a level check was finished at least once. */
   done: boolean;
+  /**
+   * Parts whose level is a starting point worked out from the quick gap check, not measured in that part. A part
+   * measured before or after the gap check always keeps its measured level.
+   */
+  estimated?: Part[];
   words: { band: number; estimate?: number; correct?: number; answered?: number } | null;
   /** `start`: the reading level to begin at. */
   reading: { passed: number; start: number } | null;
@@ -116,6 +123,30 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
   const out: Levels = { done: false, words: null, reading: null, listening: null, spelling: null, grammar: null };
   for (const r of records) {
     if (r.type === "done") out.done = true;
+    if (r.type === "gaps" && r.check === GAP_CHECK) {
+      // the gap check fills only the parts that have no measured level: it never replaces one
+      const tops = { reading: readingLevels, listening: 7, spelling: 5, grammar: 7 };
+      const est = new Set(out.estimated ?? []);
+      const fill = (part: Part, set: () => void) => {
+        if (out[part] && !est.has(part)) return;
+        set();
+        est.add(part);
+      };
+      fill("words", () => (out.words = { band: r.level }));
+      fill("reading", () => {
+        const at = r.level <= 0 ? 0 : startFromWords(r.level, tops.reading, 1);
+        out.reading = { passed: at, start: Math.max(1, at) };
+      });
+      // listening is not in the gap check at all, so it starts one level lower still
+      fill("listening", () => (out.listening = { level: Math.max(1, startFromWords(r.level, tops.listening, 1) - 1) }));
+      fill("spelling", () => (out.spelling = { level: startFromWords(r.level, tops.spelling, 1) }));
+      fill("grammar", () => (out.grammar = { level: startFromWords(r.level, tops.grammar, 1), basics: true }));
+      out.estimated = [...est];
+    }
+    const measured = (part: Part) => {
+      if (out.estimated?.includes(part)) out.estimated = out.estimated.filter((x) => x !== part);
+    };
+    if (r.type === "words" || r.type === "reading" || r.type === "listening" || r.type === "spelling" || r.type === "grammar") measured(r.type);
     if (r.type === "words" && r.scale !== CHECK_VERSION) out.words = null;
     else if (r.type === "words") out.words = r.correct === undefined ? { band: r.band, estimate: r.estimate } : { band: r.band, correct: r.correct, answered: r.answered };
     if (r.type === "reading" && r.check !== READING_CHECK) out.reading = null;
@@ -457,6 +488,109 @@ export class SpellingPlacement {
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
     return this.finished ? { phase: "done", index: this.steps.length, total: this.limits.most, id: null } : { phase: "write", index: this.steps.length, total: this.limits.most, id: this.current!.id };
+  }
+}
+
+/**
+ * The quick gap check: one overall level in about three minutes (version GAP_CHECK).
+ *
+ * Each question is a sentence with one word half hidden: the first half of the word is shown and the learner types
+ * the rest. To finish the word a learner has to know it, spell it, and read the sentence it sits in, so one answer
+ * says something about words, spelling, grammar and reading together. Nothing is offered to choose from.
+ *
+ * The words and sentences are those of New words (never one the learner has met there), and a word's level is its
+ * measured level on the eight word levels. Questions are chosen by elimination (typedBelief), and the level is the
+ * highest one the answers make likely that also has two right answers at that level or above.
+ *
+ * What it gives the other parts is only a place to start (levelsFrom): reading, spelling and grammar start at the
+ * matching level rounded down, listening one lower because nothing here is heard. A part's own check, taken before
+ * or after, always replaces that starting point.
+ */
+export const GAP_CHECK = 1;
+export const GAP_LEAST = 10;
+export const GAP_MOST = 16;
+export interface GapItem {
+  word: string;
+  level: number;
+  /** The sentence before and after the word, and the word's first letters as shown. */
+  before: string;
+  after: string;
+  shown: string;
+  missing: number;
+}
+/** The gap questions that can be made from sentence words: the word must stand in its sentence once and have four letters or more. */
+export function gapItems(words: readonly { word: string; band: number; sentence: string }[]): GapItem[] {
+  const out: GapItem[] = [];
+  for (const w of words) {
+    if (!/^[a-z]{4,}$/.test(w.word)) continue;
+    const at = w.sentence.search(new RegExp(`\\b${w.word}\\b`, "i"));
+    if (at < 0) continue;
+    const keep = Math.ceil(w.word.length / 2);
+    out.push({ word: w.word, level: w.band, before: w.sentence.slice(0, at), after: w.sentence.slice(at + w.word.length), shown: w.sentence.slice(at, at + keep), missing: w.word.length - keep });
+  }
+  return out.map((it) => ({ it, k: hash(`gap-check|${it.word}`) })).sort((a, b) => a.k - b.k || (a.it.word < b.it.word ? -1 : 1)).map((x) => x.it);
+}
+export interface GapView {
+  phase: "ask" | "done";
+  index: number;
+  total: number;
+  /** The question on screen: the answer is not in it. */
+  item: { before: string; shown: string; missing: number; after: string } | null;
+}
+export class GapCheck {
+  private readonly items: GapItem[];
+  private readonly top: number;
+  private readonly start: number;
+  private current: GapItem | null = null;
+  private steps: { word: string; level: number; correct: boolean }[] = [];
+
+  /** `met`: words the learner has met in New words; they are not asked. */
+  constructor(words: readonly { word: string; band: number; sentence: string }[], start: number, met: ReadonlySet<string> = new Set()) {
+    this.items = gapItems(words).filter((it) => !met.has(it.word));
+    this.top = Math.max(1, ...this.items.map((it) => it.level));
+    this.start = Math.min(this.top, Math.max(1, start));
+    this.load();
+  }
+
+  private get answers() {
+    // the first half of the word and the sentence help: a learner who half knows the word gets it now and then
+    return this.steps.map((s) => ({ level: s.level, right: s.correct, lucky: 0.08 }));
+  }
+
+  private load(): void {
+    const used = new Set(this.steps.map((s) => s.word));
+    const next = typedNext(this.answers, this.start, this.top, GAP_LEAST, GAP_MOST, 0.5);
+    this.current = null;
+    if (next.done) return;
+    const levels = Array.from({ length: this.top }, (_, i) => i + 1).sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b);
+    for (const level of levels) {
+      this.current = this.items.find((it) => it.level === level && !used.has(it.word)) ?? null;
+      if (this.current) break;
+    }
+  }
+
+  get finished(): boolean {
+    return !this.current;
+  }
+
+  /** `typed`: the missing letters, or the whole word. Nothing typed is "I don't know". */
+  answer(typed: string): void {
+    const it = this.current;
+    if (!it) return;
+    const t = typed.trim().toLowerCase().replace(/[^a-z]/g, "");
+    const correct = t === it.word.slice(it.shown.length) || t === it.word;
+    this.steps.push({ word: it.word, level: it.level, correct });
+    this.load();
+  }
+
+  /** The overall level, 0 to 8 (0: below the first level). */
+  result(): { level: number; check: number; steps: { word: string; level: number; correct: boolean }[] } {
+    return { level: typedLevel(this.answers, this.top, 0), check: GAP_CHECK, steps: [...this.steps] };
+  }
+
+  snapshot(): GapView {
+    const it = this.current;
+    return it ? { phase: "ask", index: this.steps.length, total: GAP_MOST, item: { before: it.before, shown: it.shown, missing: it.missing, after: it.after } } : { phase: "done", index: this.steps.length, total: GAP_MOST, item: null };
   }
 }
 
