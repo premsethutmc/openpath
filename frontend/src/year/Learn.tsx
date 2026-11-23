@@ -24,6 +24,7 @@ import { Explore } from "./Explore";
 import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
+import { StartHere } from "./StartHere";
 import { ScribblePad } from "./ScribblePad";
 import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
 import { WorkedByYou } from "./WorkedByYou";
@@ -908,6 +909,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {!embedded && <h1>{name}</h1>}
         <p className="kid-new">✨ New skill. The lesson is just below.</p>
+        <StartHere competency={competency} />
         <Lesson opening grade={currentEnrolment(ctx.records)?.grade ?? null} competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
         <button className="link kid-skip" onClick={() => setTestMe(true)}>I know this — test me</button>
       </div>

@@ -2,6 +2,8 @@
 import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { sampleOf, search, skillsOf, topicName, topics, totalsOf, type Skill } from "./data";
+import { FoundationCard } from "../year/StartHere";
+import "../year/start-here.css";
 import "./owner.css";
 
 function Tile({ n, of, label }: { n: number; of?: number; label: string }) {
@@ -15,9 +17,10 @@ function SkillCard({ s }: { s: Skill }) {
     <details className="skill" onToggle={(e) => setOpen((e.target as HTMLDetailsElement).open)}>
       <summary>
         <span className="skill-title">{s.title}</span>
-        <span className="skill-meta">{s.cls ? `Class ${s.cls} · ` : ""}{s.screens.length} screens · {s.families.length} question types{s.corrected ? ` · ${s.corrected} fixed by review` : ""}{s.certified < s.families.length ? ` · ${s.families.length - s.certified} not certified` : ""}</span>
+        <span className="skill-meta">{s.cls ? `Class ${s.cls} · ` : ""}{s.foundations.length ? `starts with ${s.foundations.map((f) => f.concept).join(", ")} · ` : ""}{s.screens.length} screens · {s.families.length} question types{s.corrected ? ` · ${s.corrected} fixed by review` : ""}{s.certified < s.families.length ? ` · ${s.families.length - s.certified} not certified` : ""}</span>
       </summary>
       {open && <>
+        {s.foundations.length > 0 && <><h3>Start here (shown before the lesson)</h3><div className="sh">{s.foundations.flatMap((f) => f.screens).map((x, i) => <FoundationCard key={i} s={x} />)}</div></>}
         <h3>Lesson screens</h3>
         {s.screens.map((x, i) => (
           <section className="screen" key={i}>
@@ -56,6 +59,7 @@ function App() {
       <div className="tiles">
         <Tile n={t.skills} label="skills" />
         <Tile n={t.screens} label="lesson screens read by AI review" />
+        <Tile n={t.foundations} label="start-here screens added" />
         <Tile n={t.corrected} label="screens fixed by review" />
         <Tile n={t.certified} of={t.families} label="question types with certified answers" />
       </div>

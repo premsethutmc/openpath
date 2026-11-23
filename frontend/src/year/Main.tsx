@@ -54,6 +54,7 @@ import { afterHelpOf, afterHelpTiles, afterHelpSummary, qualifiedEvidence, type 
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 import "./look.css";
+import "./start-here.css";
 import { KID, kidName } from "./kid";
 
 declare const OPENPATH_REVIEW_FIXTURE: boolean;
