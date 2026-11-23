@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { sampleOf, search, skillsOf, topicName, topics, totalsOf, type Skill } from "./data";
 import { FoundationCard } from "../year/StartHere";
+import "../year/start-here.css";
 import "./owner.css";
 
 function Tile({ n, of, label }: { n: number; of?: number; label: string }) {

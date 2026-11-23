@@ -1,6 +1,5 @@
 /** foundations@1: the "Start here" part of a new skill's first lesson: the ideas the lesson relies on, with a picture. */
 import { useState } from "react";
-import "./start-here.css";
 import { foundationsOf, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 const S = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
