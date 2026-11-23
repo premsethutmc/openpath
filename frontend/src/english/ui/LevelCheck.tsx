@@ -10,7 +10,7 @@ import { DICTATION, wordsOf } from "../logic/dictation/dictation.ts";
 import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
 import type { Learner } from "../logic/learner.ts";
 import { COURSE } from "../logic/reading/course.ts";
-import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
+import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, READING_TEXTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
 import { BANDS } from "../logic/vocabulary/daily-words.ts";
 import { ABOUT, CHECK, CHECK_VERSION, SizeCheckSession, levelLine, startBand, type CheckItem } from "../logic/vocabulary/size-check.ts";
 import { WordQuestion } from "./VocabularyCheck.tsx";
@@ -55,7 +55,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
           <b>Words</b>: about {ABOUT} quick questions. Say whether you know a word (some are made up), then pick the closest word for a few.
         </li>
         <li>
-          <b>Reading</b>: read up to three short texts and answer four questions on each.
+          <b>Reading</b>: read up to three short texts and answer six questions on each. Say "I'm not sure" rather than guess.
         </li>
         <li>
           <b>Listening</b>: hear four sentences and write them.
@@ -87,7 +87,7 @@ export function LevelWords({ item, asked, about, onAnswer, onSkip, onStop }: { i
   );
 }
 
-export function LevelReading({ view, onAnswer, onSkip, onStop }: { view: ReadingPlacementView; onAnswer: (choice: number) => void; onSkip: () => void; onStop: () => void }) {
+export function LevelReading({ view, onAnswer, onSkip, onStop }: { view: ReadingPlacementView; onAnswer: (choice: number | null) => void; onSkip: () => void; onStop: () => void }) {
   return (
     <main className="page vocab level reading" data-phase="reading" data-level={view.level} data-question={view.index}>
       <PartHead part="reading" onSkip={onSkip} onStop={onStop} />
@@ -98,7 +98,7 @@ export function LevelReading({ view, onAnswer, onSkip, onStop }: { view: Reading
         ))}
       </section>
       <p className="small">
-        Question {view.index + 1} of {view.total}
+        Text {view.step + 1} of up to {READING_TEXTS} · Question {view.index + 1} of {view.total}
       </p>
       <p className="prompt" id="level-question">
         {view.question!.prompt}
@@ -109,6 +109,9 @@ export function LevelReading({ view, onAnswer, onSkip, onStop }: { view: Reading
             {o}
           </button>
         ))}
+        <button key={`${view.step}:${view.index}:unsure`} type="button" className="option vocab-unknown" onClick={() => onAnswer(null)}>
+          I'm not sure
+        </button>
       </div>
     </main>
   );
