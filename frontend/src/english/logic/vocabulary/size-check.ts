@@ -1,6 +1,9 @@
 /** Short adaptive word-meaning check and provisional practice placement, not a vocabulary-size estimate. */
 import checkJson from "../../../../../content/english/vocabulary/size-check.json";
 
+/** The version of the check whose levels are in use; results on other versions are not used. */
+export const CHECK_VERSION: number = (checkJson as { version: number }).version;
+
 export const ROUND_SIZE = 3;
 export const ROUNDS = 8;
 export const OPTIONS = 4;
@@ -109,9 +112,11 @@ export interface CheckView {
   result: Result | null;
 }
 
-export const startBand = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 2 : age === "older" ? 4 : 3);
+/** Where the check starts. The levels run up to rare GRE words, so most learners start low and climb (check v5). */
+export const startBand = (age: "early" | "school" | "older" | null | undefined) => (age === "early" ? 1 : 2);
 export const seenWords = (records: readonly VocabRecord[]) => new Set(records.flatMap((r) => (r.type === "answer" ? [r.word] : [])));
-export const latestResult = (records: readonly VocabRecord[]) => [...records].reverse().find((r): r is Extract<VocabRecord, { type: "result" }> => r.type === "result") ?? null;
+/** The latest result on today's check. A result on an older version of the check used other levels and is not used. */
+export const latestResult = (records: readonly VocabRecord[]) => [...records].reverse().find((r): r is Extract<VocabRecord, { type: "result" }> => r.type === "result" && r.check === `${CHECK_VERSION}`) ?? null;
 
 /** Preserve old results for replay, but do not let a legacy score select today's practice band. */
 export function wordPracticeBand(records: readonly VocabRecord[], fallback?: number): number | undefined {

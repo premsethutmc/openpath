@@ -87,10 +87,10 @@ test("VC-4 a retake uses unseen words first, and the latest result is the one re
   assert.equal(latestResult(second.records)!.band, 4);
   assert.equal(latestResult([]), null);
   const old = { type: "result", check: "1", estimate: 6500, low: 5500, high: 7500, band: 6, answered: 12 } as const;
-  assert.deepEqual(latestResult([old]), old);
-  assert.equal(wordPracticeBand([old], 6), undefined);
+  assert.equal(latestResult([old]), null, "a result on an older check used other levels");
+  assert.equal(wordPracticeBand([old], 6), 6);
   assert.equal(wordPracticeBand([old, ...second.records], 6), 4);
-  assert.deepEqual([startBand("early"), startBand("school"), startBand("older"), startBand(null)], [2, 3, 4, 3]);
+  assert.deepEqual([startBand("early"), startBand("school"), startBand("older"), startBand(null)], [1, 2, 2, 2]);
   assert.equal(score(CHECK, []).correct, 0);
   const third = sit(4, null, second.records);
   assert.equal(new Set(third.asked).size, third.asked.length, "no duplicates after the unseen list is exhausted");

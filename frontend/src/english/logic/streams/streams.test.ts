@@ -12,7 +12,7 @@ import { Learner } from "../learner.ts";
 import { COURSE } from "../reading/course.ts";
 import { progress, recommend } from "../reading/session.ts";
 import { MemoryRepo } from "../store.ts";
-import { CHECK, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
+import { CHECK, CHECK_VERSION, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
 import { FIRST } from "../first/first.ts";
@@ -101,7 +101,7 @@ test("LC-3 the words part is the word check, cut to four rounds", () => {
 });
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {
-  const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
+  const records: LevelCheckRecord[] = [{ type: "start" }, { type: "words", band: 3, scale: CHECK_VERSION, estimate: 3000, answered: 12 }, { type: "skipped", part: "reading" }, { type: "listening", level: 2, steps: [] }];
   assert.deepEqual(levelsFrom(records), { done: false, words: { band: 3, estimate: 3000 }, reading: null, listening: { level: 3 }, spelling: null, grammar: null }, "a level stored on the old three-level scale is read on today's");
   const again: LevelCheckRecord[] = [...records, { type: "done" }, { type: "start" }, { type: "reading", passed: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "spelling", level: 4, steps: [] }, { type: "done" }];
   assert.deepEqual(levelsFrom(again), { done: true, words: { band: 3, estimate: 3000 }, reading: { passed: 3, start: 3 }, listening: { level: 3 }, spelling: { level: 4 }, grammar: null });
@@ -127,7 +127,7 @@ test("LC-6 home rows: a level and a next step per stream, a tick for today, and 
   assert.deepEqual(streamRows(l, clock()).map((r) => r.id), ["words", "reading", "listening", "spelling", "grammar"]);
   assert.equal(row("listening").level, `Level ${startLevel(l.state.preferences?.band)} of 7`);
   assert.match(row("reading").level, /^Starter \(level 1 of 6\)$/);
-  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, estimate: 4000, answered: 12 }, { type: "reading", passed: 1, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "done" }]);
+  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, scale: CHECK_VERSION, estimate: 4000, answered: 12 }, { type: "reading", passed: 1, steps: [] }, { type: "listening", level: 3, steps: [] }, { type: "done" }]);
   assert.equal(l.levels().done, true);
   assert.equal(row("words").level, "Level 5 of 8");
   assert.equal(row("words").next, "Five new words");
@@ -270,7 +270,7 @@ test("LC-12 a beginner's Words row opens First words until First sentences open"
   const c = loadContent({ mode: "development" });
   const clock = testClock();
   const l = await Learner.create(c, new MemoryRepo(), "New", "guardian", clock, "p-new");
-  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 0, estimate: 0, answered: 12 }, { type: "reading", passed: 0, scale: 2, steps: [] }, { type: "listening", level: 1, scale: 2, steps: [] }, { type: "done" }]);
+  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 0, scale: CHECK_VERSION, estimate: 0, answered: 12 }, { type: "reading", passed: 0, scale: 2, steps: [] }, { type: "listening", level: 1, scale: 2, steps: [] }, { type: "done" }]);
   const words = () => streamRows(l, clock()).find((r) => r.id === "words")!;
   assert.deepEqual([words().level, words().next, words().open], ["First words", "Find words in pictures", "first"]);
   // once twenty words are sure, First sentences open and the row goes back to Words
@@ -285,7 +285,7 @@ test("LC-13 the Spelling row offers the next spelling rule (lesson then practice
   const clock = testClock();
   const l = await Learner.create(c, new MemoryRepo(), "Rules", "guardian", clock, "p-rules");
   l.speechAvailable = true;
-  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, estimate: 3000, answered: 12 }, { type: "reading", passed: 3, scale: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "done" }]);
+  await l.recordLevelCheck([{ type: "start" }, { type: "words", band: 4, scale: CHECK_VERSION, estimate: 3000, answered: 12 }, { type: "reading", passed: 3, scale: 2, steps: [] }, { type: "listening", level: 3, scale: 2, steps: [] }, { type: "done" }]);
   const spelling = () => streamRows(l, clock()).find((r) => r.id === "spelling")!;
   const row = spelling();
   assert.equal(row.open, "rule");
