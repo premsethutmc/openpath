@@ -9,6 +9,7 @@ import { screenCorrections } from "../../../packages/learning/src/screen-correct
 import specs from "../../../content/learning/family-specs.v1.json";
 import validation from "../../../content/learning/machine-validation.v1.json";
 import { classOfSkill } from "../year/StepCoach";
+import { foundationsOf, type Foundation } from "../../../packages/learning/src/foundations";
 
 type Spec = { id: string; title: string; competency: string; examples?: string[] };
 const families = (specs as unknown as { families: Spec[] }).families;
@@ -22,7 +23,7 @@ export const topicName = (t: string) => WORD[t] ?? t[0].toUpperCase() + t.slice(
 export const topics: string[] = [...new Set(maths.map((m) => topicOf(m.competency)))].sort((a, b) => (a === "trigonometry" ? -1 : b === "trigonometry" ? 1 : a.localeCompare(b)));
 
 export interface Screen { section: string; title: string; text: string[]; math: string[]; corrected: boolean }
-export interface Skill { competency: string; title: string; cls: number | null; screens: Screen[]; families: Spec[]; corrected: number; certified: number }
+export interface Skill { competency: string; title: string; cls: number | null; screens: Screen[]; families: Spec[]; corrected: number; certified: number; foundations: Foundation[] }
 export function skillsOf(topic: string): Skill[] {
   return maths.filter((m) => topicOf(m.competency) === topic).map((m) => {
     const fixed = new Set(screenCorrections.filter((c) => c.competency === m.competency).map((c) => `${c.section}|${c.index}`));
@@ -31,7 +32,7 @@ export function skillsOf(topic: string): Skill[] {
       ...m.strategies.flatMap((st) => st.screens.map((s, i) => ({ section: st.id === "spot_the_mistake" ? "Common mistake" : "Another way", title: s.title ?? "", text: s.text ?? [], math: (s as { math?: string[] }).math ?? [], corrected: fixed.has(`${st.id}|${i}`) }))),
     ];
     const fams = families.filter((f) => f.competency === m.competency);
-    return { competency: m.competency, title: m.title, cls: classOfSkill(m.competency) ?? null, screens, families: fams, corrected: screens.filter((s) => s.corrected).length, certified: fams.filter((f) => certified.has(f.id)).length };
+    return { competency: m.competency, title: m.title, cls: classOfSkill(m.competency) ?? null, screens, families: fams, corrected: screens.filter((s) => s.corrected).length, certified: fams.filter((f) => certified.has(f.id)).length, foundations: foundationsOf(m.competency) };
   }).sort((a, b) => (a.cls ?? 99) - (b.cls ?? 99) || a.title.localeCompare(b.title));
 }
 
@@ -47,10 +48,10 @@ export function sampleOf(f: Spec): Sample | null {
   return { family: f.id, title: f.title, question: p.prompt, answer: show(p.answer), certified: certified.has(f.id), mistakes: p.bugs.filter((b) => b.says && b.predict !== null && b.predict !== undefined).map((b) => ({ wrong: show(b.predict), says: b.says! })) };
 }
 
-export interface Totals { skills: number; screens: number; corrected: number; families: number; certified: number }
-export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0) });
+export interface Totals { skills: number; screens: number; corrected: number; families: number; certified: number; foundations: number }
+export const totalsOf = (skills: Skill[]): Totals => ({ skills: skills.length, screens: skills.reduce((n, s) => n + s.screens.length, 0), corrected: skills.reduce((n, s) => n + s.corrected, 0), families: skills.reduce((n, s) => n + s.families.length, 0), certified: skills.reduce((n, s) => n + s.certified, 0), foundations: skills.reduce((n, s) => n + s.foundations.reduce((k, f) => k + f.screens.length, 0), 0) });
 /** Skills of a topic whose title, lesson text or question-type titles contain the words typed. */
 export function search(skills: Skill[], q: string): Skill[] {
   const w = q.trim().toLowerCase();
-  return !w ? skills : skills.filter((s) => `${s.title} ${s.screens.map((x) => `${x.title} ${x.text.join(" ")}`).join(" ")} ${s.families.map((f) => f.title).join(" ")}`.toLowerCase().includes(w));
+  return !w ? skills : skills.filter((s) => `${s.title} ${s.foundations.map((f) => `${f.concept} ${f.screens.map((x) => `${x.title} ${x.text.join(" ")}`).join(" ")}`).join(" ")} ${s.screens.map((x) => `${x.title} ${x.text.join(" ")}`).join(" ")} ${s.families.map((f) => f.title).join(" ")}`.toLowerCase().includes(w));
 }
