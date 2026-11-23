@@ -3,7 +3,7 @@ import checkJson from "../../../../../content/english/vocabulary/size-check.json
 
 export const ROUND_SIZE = 3;
 export const ROUNDS = 8;
-export const OPTIONS = 3;
+export const OPTIONS = 4;
 
 export interface Band {
   id: number;

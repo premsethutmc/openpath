@@ -30,10 +30,10 @@ test("VC-1 content: eight bands of ten words, three different meanings each, non
   assert.equal(CHECK.words.length, 80);
   for (const b of CHECK.bands) assert.equal(CHECK.words.filter((w) => w.band === b.id).length, 10);
   assert.equal(CHECK.bands.reduce((s, b) => s + b.families, 0), 14000);
-  const position = [0, 1, 2].map((i) => CHECK.words.filter((w) => w.answer === i).length);
-  for (const k of position) assert.ok(k >= 15, `right answers by position: ${position}`);
+  const position = [0, 1, 2, 3].map((i) => CHECK.words.filter((w) => w.answer === i).length);
+  for (const k of position) assert.ok(k >= 12, `right answers by position: ${position}`);
   const bad = buildCheck({ version: 1, status: "", bands: CHECK.bands, words: [[1, "cat", "a cat that purrs", "a dog", "a dog"]] });
-  assert.match(checkProblems(bad).join("\n"), /cat: needs 3 different meanings[\s\S]*cat: a meaning uses the word itself/);
+  assert.match(checkProblems(bad).join("\n"), /cat: needs 4 different meanings[\s\S]*cat: a meaning uses the word itself/);
 });
 
 test("VC-2 only tested words count, and a single lucky round cannot set placement", () => {
