@@ -20,6 +20,7 @@
     "src/year",
     "src/learning",
     "src/review",
+    "src/owner",
     "src/curriculum",
     "../packages/learning/src",
     "../packages/learning/scripts",
