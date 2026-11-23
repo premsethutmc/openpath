@@ -545,7 +545,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acpictmore: Comparing two rows of a pictograph | `MATH.statistics.pictographs` | 300 | 0 | 75/150/75 | `63438f78` |
 | acbalance: Making both sides of a number sentence equal | `MATH.algebra.equality-inequality` | 400 | 0 | 70/197/133 | `72accc7b` |
 | acmissing: Finding the missing number in a number sentence | `MATH.algebra.missing-number` | 400 | 0 | 41/172/187 | `87f5465d` |
-| acgrow: Continuing a growing pattern | `MATH.algebra.growing-patterns` | 300 | 0 | 30/150/120 | `73b33e90` |
+| acgrow: Continuing a growing pattern | `MATH.algebra.growing-patterns` | 300 | 0 | 30/150/120 | `f81cddfa` |
 | acsticks: Matchstick shapes in a row | `MATH.algebra.growing-patterns` | 84 | 0 | 16/14/54 | `3c4bcbf4` |
 | aclines: Counting line segments and lines through points | `MATH.geometry.lines-segments` | 90 | 0 | 40/20/30 | `32c9fa25` |
 | actile: How many tiles cover a floor | `MATH.geometry.shape-tiling` | 124 | 0 | 37/73/14 | `8a7b52d7` |
@@ -1045,7 +1045,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ancardn: Probability with numbered cards | `MATH.probability.classical` | 400 | 0 | 44/334/22 | `249755b6` |
 | andice: Probability with two dice | `MATH.probability.classical` | 98 | 0 | 17/70/11 | `cebf993a` |
 | antree: Two counters drawn one after the other | `MATH.probability.tree-diagrams` | 400 | 0 | 53/143/204 | `ca9d0ef8` |
-| ancomp: Complementary and exhaustive events | `MATH.probability.complements` | 300 | 0 | 30/197/73 | `deb229ea` |
+| ancomp: Complementary and exhaustive events | `MATH.probability.complements` | 300 | 0 | 30/197/73 | `9e38df40` |
 | anunion: The addition rule P(A or B) | `MATH.probability.complements` | 300 | 0 | 19/142/139 | `08643907` |
 | anvalid: Which number cannot be a probability | `MATH.probability.complements` | 200 | 0 | 61/69/70 | `72360263` |
 | angarr: The largest product from four digits | `MATH.reasoning.mathematical-argument` | 126 | 0 | 15/34/77 | `b7794859` |
@@ -1172,7 +1172,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | apvform: Forming a quadratic with transformed roots | `MATH.algebra.vieta-relations` | 400 | 0 | 124/235/41 | `79b03c87` |
 | apinv2: The inverse of a 2 × 2 matrix | `MATH.matrices.adjoint-inverse` | 400 | 0 | 16/127/257 | `7831ec3c` |
 | apadj3: The adjoint of a 3 × 3 matrix | `MATH.matrices.adjoint-inverse` | 300 | 0 | 0/127/173 | `73a9abe5` |
-| aprank: The rank of a 3 × 4 matrix | `MATH.matrices.rank-row-reduction` | 300 | 0 | 100/100/100 | `a8a326e8` |
+| aprank: The rank of a 3 × 4 matrix | `MATH.matrices.rank-row-reduction` | 300 | 0 | 100/100/100 | `5ef557b8` |
 | apcartl: Writing out the ordered pairs (or triples) of a Cartesian product | `MATH.sets-relations.cartesian-product` | 120 | 0 | 40/60/20 | `0a8b5d8e` |
 | apcarteq: Equal ordered pairs | `MATH.sets-relations.cartesian-product` | 1008 | 0 | 168/672/168 | `d89157a3` |
 | apmcon: Constructing a matrix from a rule aᵢⱼ (and its transpose) | `MATH.algebra.matrices` | 160 | 0 | 20/12/128 | `1d436557` |
@@ -1206,13 +1206,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aqabs: Absolute maximum and minimum on a closed interval | `MATH.calculus.applications` | 300 | 0 | 74/131/95 | `7b5ffec5` |
 | aqrr: Rates of change of related quantities | `MATH.calculus.applications` | 400 | 0 | 118/165/117 | `a47199dc` |
 | aqarea: Areas bounded by a parabola, a cubic or a quadratic and the axis | `MATH.calculus.area-integrals` | 121 | 0 | 0/100/21 | `0c691961` |
-| aqcontk: Choosing k to make a function continuous | `MATH.calculus.continuity` | 243 | 0 | 159/36/48 | `88af29a0` |
+| aqcontk: Choosing k to make a function continuous | `MATH.calculus.continuity` | 243 | 0 | 159/36/48 | `af95d072` |
 | aqconc: Intervals of concavity of a cubic or quartic | `MATH.calculus.curve-sketching` | 400 | 0 | 110/66/224 | `052ca5d9` |
 | aqodd: Definite integrals over [−a, a] using odd and even functions | `MATH.calculus.definite-integral-properties` | 300 | 0 | 33/182/85 | `f59d7a82` |
 | aqking: Definite integrals with the property ∫ f(x) dx = ∫ f(a + b − x) dx | `MATH.calculus.definite-integral-properties` | 300 | 0 | 8/232/60 | `73814a84` |
 | aqabsint: Splitting the interval: |x − c| and the greatest integer function | `MATH.calculus.definite-integral-properties` | 193 | 0 | 31/129/33 | `5186a139` |
 | aqdiffab: Choosing a and b to make a piecewise function differentiable | `MATH.calculus.differentiability` | 300 | 0 | 0/150/150 | `56e8cd9e` |
-| aqsep: Separating the variables in an initial value problem | `MATH.calculus.differential-equations` | 300 | 0 | 35/60/205 | `1f9c3159` |
+| aqsep: Separating the variables in an initial value problem | `MATH.calculus.differential-equations` | 300 | 0 | 35/60/205 | `5622325b` |
 | aqorddeg: The order and degree of a differential equation | `MATH.calculus.differential-equations` | 360 | 0 | 180/45/135 | `b9bb3dd0` |
 | aqlinde: A linear differential equation with an integrating factor | `MATH.calculus.differential-equations` | 300 | 0 | 46/78/176 | `3f1547a5` |
 | aqhom: A homogeneous differential equation with y = vx | `MATH.calculus.homogeneous-de` | 141 | 0 | 32/96/13 | `8689daec` |
@@ -1278,7 +1278,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | asparld: The distance between two parallel lines | `MATH.coordinate.straight-lines` | 400 | 0 | 29/114/257 | `7e56c57d` |
 | aslang: The angle between two lines in general form | `MATH.coordinate.straight-lines` | 400 | 0 | 40/181/179 | `a74c46d2` |
 | aspar: Parallel, perpendicular or neither | `MATH.coordinate.straight-lines` | 300 | 0 | 11/58/231 | `7695dea2` |
-| astan: The tangent or normal to a circle or parabola at a point | `MATH.coordinate.conic-tangents-normals` | 372 | 0 | 144/156/72 | `3d4aa24d` |
+| astan: The tangent or normal to a circle or parabola at a point | `MATH.coordinate.conic-tangents-normals` | 372 | 0 | 144/156/72 | `c7d28d53` |
 | astanc: The condition for y = mx + c to be a tangent | `MATH.coordinate.conic-tangents-normals` | 584 | 0 | 102/270/212 | `837696f8` |
 | asdist3: The distance between two points in space | `MATH.coordinate.space-coordinates` | 400 | 0 | 15/185/200 | `247df9e5` |
 | assect3: The point dividing a segment in space in a ratio | `MATH.coordinate.space-coordinates` | 400 | 0 | 38/142/220 | `af916e28` |
@@ -1296,7 +1296,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ascmod: The modulus of a product or quotient of complex numbers | `MATH.number.complex` | 400 | 0 | 105/295/0 | `1aec1593` |
 | ascpow: Powers of i | `MATH.number.complex` | 256 | 0 | 36/160/60 | `8fe9472f` |
 | ascsqrt: The square root of a complex number | `MATH.number.complex` | 128 | 0 | 20/52/56 | `2c7d7677` |
-| asarg: The principal argument of a complex number | `MATH.number.complex-polar-form` | 135 | 0 | 36/18/81 | `1a6a6fb2` |
+| asarg: The principal argument of a complex number | `MATH.number.complex-polar-form` | 135 | 0 | 36/18/81 | `ce59f27c` |
 | aspolm: Multiplying and dividing in polar form | `MATH.number.complex-polar-form` | 242 | 0 | 85/86/71 | `2b080d0c` |
 | ascloc: The circle described by a condition on |z| | `MATH.number.complex-locus` | 400 | 0 | 28/172/200 | `f1954e79` |
 | asdemo: Powers of a complex number by de Moivre's theorem | `MATH.number.de-moivre-roots` | 110 | 0 | 20/30/60 | `4c45591b` |
@@ -1429,7 +1429,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aupi: Definite integrals of 1/(x² + a²), 1/√(a² − x²) and √(a² − x²) | `MATH.calculus.integration-methods` | 225 | 0 | 54/108/63 | `42dcdb4d` |
 | aupfr: Integrating by partial fractions: repeated factors and improper fractions | `MATH.calculus.integration-methods` | 400 | 0 | 57/143/200 | `d1b92fbe` |
 | auparts: Integration by parts, Bernoulli's formula and ∫ eˣ[f(x) + f′(x)] dx | `MATH.calculus.integration-methods` | 220 | 0 | 40/140/40 | `1bc2c2a6` |
-| ausbd: A definite integral by substitution: ∫ c t/√(t² + d²) dt | `MATH.calculus.integration-methods` | 96 | 0 | 12/60/24 | `997c420e` |
+| ausbd: A definite integral by substitution: ∫ c t/√(t² + k²) dt | `MATH.calculus.integration-methods` | 96 | 0 | 12/60/24 | `07f4075c` |
 | audfp: Definite integrals of polynomials by the fundamental theorem | `MATH.calculus.definite-integrals` | 400 | 0 | 27/147/226 | `d6e39315` |
 | aurie: A definite integral as the limit of a sum | `MATH.calculus.definite-integrals` | 159 | 0 | 24/126/9 | `948b73cb` |
 | audbe: Definite integrals by parts and Bernoulli's formula | `MATH.calculus.definite-integrals` | 90 | 0 | 45/27/18 | `a9076bec` |

@@ -65,7 +65,7 @@ const blueprints = [
         // TP-GEO-02 "Explanation"
         screens: [oppositeScreen("Vertically opposite angles are equal", [
           "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
-          "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."], 128)],
+          "Go round: if one angle is 128°, the next is 180° − 128° = 52°, and the one after that is 180° − 52° = 128° again. So opposite angles are equal, and all four add to 360°."], 128)],
         guided: "gen:afcross:29,0:mc", check: "gen:afcross:158,0:mc" },
       { id: "crossed_pencils", title: "Two crossed pencils", kind: "conceptual", needs: [], scope: { family: "afcross", subSkill: OPP },
         // TP-GEO-02 "Alternative explanation: Two crossed pencils"

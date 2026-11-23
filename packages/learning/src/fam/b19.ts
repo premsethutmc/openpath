@@ -837,7 +837,7 @@ const astan: Def = {
     const [m] = tanLine(pp, w);
     const other = kind === 0 && w === 0 && x1 === 0 ? null : tanLine(pp, 1 - w);
     return [
-      B(w ? "gave-tangent" : "gave-normal", "conceptual", TAN, w ? "The tangent was given; the normal is perpendicular to the tangent at the point, so its slope is −1/(tangent slope)." : "The normal (the line along the radius or perpendicular to the curve) was given; the tangent touches the curve, perpendicular to the normal.", other ? poly([[other[0], "x"], [other[1], ""]]) : null),
+      B(w ? "gave-tangent" : "gave-normal", "conceptual", TAN, w ? "The tangent was given; the normal is perpendicular to the tangent at the point, so its slope is −1/(tangent slope)." : `The normal (the line ${kind === 0 ? "along the radius" : "perpendicular to the curve at the point"}) was given; the tangent touches the curve, perpendicular to the normal.`, other ? poly([[other[0], "x"], [other[1], ""]]) : null),
       B("intercept-sign", "procedural", LINE, "In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted when finding c.", x1 !== 0 && m[0] !== 0 ? poly([[m, "x"], [radd(R_(y1), rmul(m, R_(x1))), ""]]) : null),
       ...(kind === 1 && w === 1 ? [B("normal-term-lost", "procedural", TAN, `The normal to y² = 4ax at (at², 2at) is y = −tx + 2at + at³; the at³ term (${mi(p * q * q * q)}) was lost.`, poly([[R_(-q), "x"], [R_(2 * p * q), ""]]))] : []),
     ];
@@ -2051,7 +2051,7 @@ const asarg: Def = {
     const x = A.re[0];
     const y = A.im[0];
     return [
-      B("basic-angle-only", "conceptual", POLAR, `The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.`, piStr(basic)),
+      B("basic-angle-only", "conceptual", POLAR, y === 0 || x === 0 ? `Only the size of the angle, ${piStr(basic)}, was given, without looking at which way z points: z lies on the ${y === 0 ? "negative real" : "negative imaginary"} axis, so its argument is ${piStr(k)}.` : `The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y.`, piStr(basic)),
       B("arctan-quadrant", "conceptual", POLAR, "tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.", x < 0 ? piStr(y > 0 ? rsub(k, R_(1)) : y < 0 ? radd(k, R_(1)) : R_(0)) : null),
       B("not-principal", "procedural", POLAR, "The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.", k[0] < 0 ? piStr(radd(k, R_(2))) : null),
       B("degrees-given", "procedural", POLAR, "The argument was given in degrees; in radians 180° is π (so 45° is π/4).", mi(Math.round(rv(k) * 180))),

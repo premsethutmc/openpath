@@ -11518,7 +11518,7 @@
    "explanations": [
     "next-only (procedural): Only the next step (step 4) was found. Keep adding 6 until step 8.",
     "one-too-many (procedural): 6 was added 8 times, but step 1 already has 10; from step 1 to step 8 there are 7 jumps.",
-    "times-step (conceptual): The step number was multiplied by 6, but the pattern started at 10, not at 6."
+    "times-step (conceptual): 6 was counted for every step, as if step 1 had 6, but step 1 has 10. Start at 10 and add 6 for each new step."
    ],
    "teach": {
     "idea": "In a growing pattern the same amount is added each time; find that amount and keep adding it.",
@@ -11535,7 +11535,7 @@
      }
     ]
    },
-   "fingerprint": "73b33e90",
+   "fingerprint": "f81cddfa",
    "validation": {
     "family": "acgrow",
     "deterministic": {
@@ -51014,7 +51014,7 @@
     "gen:ancomp:1,8,1,12:mc"
    ],
    "explanations": [
-    "reciprocal (conceptual): The fraction was turned upside down; 'not E' is what is left when E is taken from the sure event: 1 − P(E).",
+    "reciprocal (conceptual): P(win or draw) = 19/20 was turned upside down, but a probability is never more than 1; a loss is what is left: 1 − 19/20.",
     "rest-over-event (conceptual): The outcomes against E were compared with the outcomes for E; a probability is always out of all the outcomes.",
     "one-subtracted (procedural): Only the win was taken from 1; the draw must be taken away too, since win, draw and loss together make 1."
    ],
@@ -51033,7 +51033,7 @@
      }
     ]
    },
-   "fingerprint": "deb229ea",
+   "fingerprint": "9e38df40",
    "validation": {
     "family": "ancomp",
     "deterministic": {
@@ -61586,7 +61586,7 @@
      }
     ]
    },
-   "fingerprint": "a8a326e8",
+   "fingerprint": "5ef557b8",
    "validation": {
     "family": "aprank",
     "deterministic": {
@@ -64355,7 +64355,7 @@
    "explanations": [
     "move-sign (prerequisite): 3 was moved across without changing its sign: 3k + 3 = 30 was written as 3k = 30 + 3. Moving a number to the other side changes its sign: 3k = 30 − 3.",
     "no-divide (procedural): The equation 3k + 3 = 30 was not finished: 3k = 27 was given as the answer, but k = 27 ÷ 3.",
-    "upside-down (procedural): The ratio was turned over, giving 5/6: the number in the sine goes on top, since sin(6x)/(5x) = (6/5) × sin(6x)/(6x), which tends to 6/5.",
+    "upside-down (procedural): The ratio was turned over, giving 5/6: sin(6x)/(5x) = (6/5) × sin(6x)/(6x), and sin θ/θ tends to 1 as θ tends to 0, so the limit is 6/5.",
     "m-lost (procedural): sin(6x)/x was taken as 1; it tends to 6, since sin θ/θ → 1 needs θ = 6x in both places.",
     "half-lost (procedural): After multiplying top and bottom by √(1 + 6x) + 1, the bottom has the factor √(1 + 6x) + 1, which tends to 2; that 2 was lost.",
     "not-squared (procedural): 1 − cos(6x) = 2 sin²(6x/2), which gives (6x)²/2: the 6 is squared.",
@@ -64377,7 +64377,7 @@
      }
     ]
    },
-   "fingerprint": "88af29a0",
+   "fingerprint": "af95d072",
    "validation": {
     "family": "aqcontk",
     "deterministic": {
@@ -64831,7 +64831,7 @@
    ],
    "explanations": [
     "constant-in-exponent (procedural): log y = 2x² + 2x + C gives C = log 5, not 5; the constant was put into the exponent as 5.",
-    "y-dropped (conceptual): The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.",
+    "y-dropped (conceptual): The y on the right was ignored and only (4x + 2) was integrated; divide by y first: dy/y = (4x + 2) dx.",
     "constant-dropped (procedural): The constant was dropped; y(1) = 5 gives y = 5x⁴.",
     "constant-added-late (procedural): The constant was added after taking exponentials; log y = p log x + C gives y = Axᵖ, a constant multiple."
    ],
@@ -64850,7 +64850,7 @@
      }
     ]
    },
-   "fingerprint": "1f9c3159",
+   "fingerprint": "5622325b",
    "validation": {
     "family": "aqsep",
     "deterministic": {
@@ -70241,7 +70241,7 @@
     "gen:astan:1,5,-3,0:mc"
    ],
    "explanations": [
-    "gave-normal (conceptual): The normal (the line along the radius or perpendicular to the curve) was given; the tangent touches the curve, perpendicular to the normal.",
+    "gave-normal (conceptual): The normal (the line perpendicular to the curve at the point) was given; the tangent touches the curve, perpendicular to the normal.",
     "intercept-sign (procedural): In y − y₁ = m(x − x₁), the term −m·x₁ was added instead of subtracted when finding c.",
     "gave-tangent (conceptual): The tangent was given; the normal is perpendicular to the tangent at the point, so its slope is −1/(tangent slope).",
     "normal-term-lost (procedural): The normal to y² = 4ax at (at², 2at) is y = −tx + 2at + at³; the at³ term (162) was lost."
@@ -70261,7 +70261,7 @@
      }
     ]
    },
-   "fingerprint": "3d4aa24d",
+   "fingerprint": "c7d28d53",
    "validation": {
     "family": "astan",
     "deterministic": {
@@ -71777,7 +71777,7 @@
     "arctan-quadrant (conceptual): tan⁻¹(y/x) only gives angles between −π/2 and π/2; when the real part is negative, add or subtract π.",
     "not-principal (procedural): The angle was measured from 0 to 2π; the principal argument lies in (−π, π], so subtract 2π.",
     "degrees-given (procedural): The argument was given in degrees; in radians 180° is π (so 45° is π/4).",
-    "basic-angle-only (conceptual): The acute angle α with tan α = |y/x| was given; z is not in the first quadrant, so the argument is found from α using the signs of x and y."
+    "basic-angle-only (conceptual): Only the size of the angle, 0, was given, without looking at which way z points: z lies on the negative real axis, so its argument is π."
    ],
    "teach": {
     "idea": "The argument is the angle from the positive real axis to the point z in the Argand plane; the principal argument is the one in (−π, π].",
@@ -71794,7 +71794,7 @@
      }
     ]
    },
-   "fingerprint": "1a6a6fb2",
+   "fingerprint": "ce59f27c",
    "validation": {
     "family": "asarg",
     "deterministic": {
@@ -83220,7 +83220,7 @@
   {
    "id": "ausbd",
    "version": "1.0.0",
-   "title": "A definite integral by substitution: ∫ c t/√(t² + d²) dt",
+   "title": "A definite integral by substitution: ∫ c t/√(t² + k²) dt",
    "competency": "MATH.calculus.integration-methods",
    "skill": "MATH.calculus.integration-methods",
    "type": "integer",
@@ -83255,15 +83255,15 @@
     "missed-half (procedural): du = 2t dt, so t dt = du/2; the factor 1/2 was left out."
    ],
    "teach": {
-    "idea": "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of d(t² + d²). The limits change with the variable.",
-    "method": "Let u = t² + d², so t dt = du/2. Change the limits (t = 0 gives u = d², t = b gives u = b² + d²), integrate (1/2)u^(−1/2) to √u, and subtract.",
+    "idea": "When the integrand contains a function and (a multiple of) its derivative, substitute u for the function: t dt is half of the differential of t² + k². The limits change with the variable.",
+    "method": "Let u = t² + k², so t dt = du/2. Change the limits (t = 0 gives u = k², t = b gives u = b² + k²), integrate (1/2)u^(−1/2) to √u, and subtract.",
     "alternatives": [
      {
       "id": "back_substitute",
       "title": "Back-substitute instead",
       "kind": "procedural",
       "text": [
-       "Find the antiderivative √(t² + d²) first.",
+       "Find the antiderivative √(t² + k²) first.",
        "Evaluate it at t = b and t = 0 and subtract."
       ]
      },
@@ -83272,13 +83272,13 @@
       "title": "Check the derivative",
       "kind": "conceptual",
       "text": [
-       "d/dt √(t² + d²) = t/√(t² + d²).",
-       "So the integral is the change in √(t² + d²)."
+       "d/dt √(t² + k²) = t/√(t² + k²).",
+       "So the integral is the change in √(t² + k²)."
       ]
      }
     ]
    },
-   "fingerprint": "997c420e",
+   "fingerprint": "07f4075c",
    "validation": {
     "family": "ausbd",
     "deterministic": {

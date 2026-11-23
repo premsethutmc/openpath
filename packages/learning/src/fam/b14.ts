@@ -940,7 +940,7 @@ export const B14: Def[] = [
     bugs: ([m, a, c, d]) => {
       const ans = (d - a - c) / d;
       const out: Bug[] = [
-        { id: "reciprocal", kind: "conceptual", competency: COMP, says: "The fraction was turned upside down; 'not E' is what is left when E is taken from the sure event: 1 − P(E).", predict: d / (a + c) },
+        { id: "reciprocal", kind: "conceptual", competency: COMP, says: m === 0 ? "P(E) was turned upside down, but a probability is never more than 1; 'not E' is what is left when E is taken from the sure event: 1 − P(E)." : `P(win or draw) = ${probText(a + c, d)} was turned upside down, but a probability is never more than 1; a loss is what is left: 1 − ${probText(a + c, d)}.`, predict: d / (a + c) },
         { id: "rest-over-event", kind: "conceptual", competency: PROB, says: "The outcomes against E were compared with the outcomes for E; a probability is always out of all the outcomes.", predict: close((d - a - c) / (a + c), ans) ? null : (d - a - c) / (a + c) },
       ];
       if (m === 1) out.push({ id: "one-subtracted", kind: "procedural", competency: COMP, says: "Only the win was taken from 1; the draw must be taken away too, since win, draw and loss together make 1.", predict: (d - a) / d });
