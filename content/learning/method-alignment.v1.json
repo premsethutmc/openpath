@@ -134,7 +134,7 @@
     {
       "competency": "MATH.calculus.integration-methods",
       "strategy": "limits_table",
-      "contentHash": "6c74ff14e9c9fb880ad5e2d3d0231714eb9099a7f5e771b7ffce6102afdb8627",
+      "contentHash": "b6c01733561335ac4c7311beef83be1e5ded444ceab1c7a0bab3316627ebeded",
       "methods": [
         "quadratic-substitution",
         "change-integral-limits",
