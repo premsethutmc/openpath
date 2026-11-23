@@ -10,8 +10,8 @@ import { DICTATION, wordsOf } from "../logic/dictation/dictation.ts";
 import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
 import type { Learner } from "../logic/learner.ts";
 import { COURSE } from "../logic/reading/course.ts";
-import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, QUICK, READING_TEXTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, startFromWords, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Mode, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
-import { BANDS } from "../logic/vocabulary/daily-words.ts";
+import { GapCheck, GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, QUICK, READING_TEXTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, startFromWords, type GapView, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Mode, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
+import { BANDS, WORDS } from "../logic/vocabulary/daily-words.ts";
 import { ABOUT, CHECK, CHECK_VERSION, SizeCheckSession, levelLine, startBand, type CheckItem } from "../logic/vocabulary/size-check.ts";
 import { WordQuestion } from "./VocabularyCheck.tsx";
 import { slowText } from "./ListenWrite.tsx";
@@ -49,31 +49,61 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
       <h1 id="level-title" className="hero">
         Where should you start?
       </h1>
-      <p className="sub">The quick check takes about seven minutes. It finds where your words reach first, and uses that to ask only a few well-chosen questions in each other part.</p>
-      <ol className="level-parts">
-        <li>
-          <b>Words</b>: about {ABOUT} quick questions. Say whether you know a word (some are made up), then pick the closest word for a few.
-        </li>
-        <li>
-          <b>Reading</b>: one or two short texts with six questions each. Say "I'm not sure" rather than guess.
-        </li>
-        <li>
-          <b>Listening</b>: hear three sentences and write them.
-        </li>
-        <li>
-          <b>Spelling</b>: hear four words and spell them.
-        </li>
-        <li>
-          <b>Grammar</b>: tap a word in a few sentences.
-        </li>
-      </ol>
-      <p className="small">It is not a test. If you do not know something, say so: it only helps the app choose the right place to start. Each level shown is only what your answers in that part showed, never a guess from another part. You can skip a part.</p>
-      <button type="button" className="primary" onClick={() => onStart("quick")}>
+      <p className="sub">The quick check takes about three minutes. You see a sentence with one word half hidden, and type the rest of the word. The words get harder until the check finds ones you cannot finish: everyone meets some.</p>
+      <p className="small">One answer shows several things at once: whether you know the word, can spell it, and can read the sentence around it. The check gives one overall level, and every part of English starts from it. It is not a test: if you do not know a word, say so.</p>
+      <button type="button" className="primary" onClick={() => onStart("gaps")}>
         {again ? "Quick check again" : "Start the quick check"}
+      </button>
+      <p className="small">Want a level measured in each part? These take longer: words, reading, listening, spelling and grammar, one after the other. Any part can be skipped.</p>
+      <button type="button" className="secondary" onClick={() => onStart("quick")}>
+        Check each part (about seven minutes)
       </button>
       <button type="button" className="secondary" onClick={() => onStart("full")}>
         Take the full check instead (about fifteen minutes)
       </button>
+    </main>
+  );
+}
+
+/** One question of the quick gap check: a sentence with one word half hidden. Nothing is marked on screen. */
+export function LevelGap({ view, onAnswer, onStop }: { view: GapView; onAnswer: (typed: string) => void; onStop: () => void }) {
+  const [text, setText] = useState("");
+  const [shown, setShown] = useState(view.index);
+  if (shown !== view.index) {
+    setShown(view.index);
+    setText("");
+  }
+  const item = view.item!;
+  return (
+    <main className="page vocab level gap-check" data-phase="gaps" data-index={view.index}>
+      <button type="button" className="link" onClick={onStop}>
+        ← Stop
+      </button>
+      <p className="pill">
+        Question {view.index + 1} of up to {view.total}
+      </p>
+      <p className="small">Finish the word. Type the missing letters.</p>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onAnswer(text);
+        }}
+      >
+        <p className="prompt gap-sentence" id="gap-sentence">
+          {item.before}
+          <b className="gap-shown">{item.shown}</b>
+          <input id="gap-box" className="gap-box" aria-label={`The rest of the word that starts ${item.shown}: ${item.missing} letters`} value={text} onChange={(e) => setText(e.target.value)} maxLength={item.missing + 2} style={{ width: `${(item.missing + 1) * 1.25}ch` }} placeholder={"·".repeat(item.missing)} autoCapitalize="none" autoComplete="off" autoCorrect="off" spellCheck={false} enterKeyHint="next" autoFocus />
+          {item.after}
+        </p>
+        <div className="options">
+          <button type="submit" className="primary" disabled={!text.trim()}>
+            Next
+          </button>
+          <button type="button" className="option vocab-unknown" onClick={() => onAnswer("")}>
+            I don't know this word
+          </button>
+        </div>
+      </form>
     </main>
   );
 }
@@ -216,22 +246,24 @@ export function LevelGrammar({ view, onDone, onSkip, onStop }: { view: GrammarPl
   );
 }
 
-export function LevelResult({ levels, skipped, quick = false, onDone, onGrammar, onStretch }: { levels: Levels; skipped: Part[]; quick?: boolean; onDone: () => void; onGrammar?: () => void; onStretch?: () => void }) {
+export function LevelResult({ levels, skipped, quick = false, gaps = false, onDone, onGrammar, onStretch }: { levels: Levels; skipped: Part[]; quick?: boolean; gaps?: boolean; onDone: () => void; onGrammar?: () => void; onStretch?: () => void }) {
   const reading = levels.reading && COURSE.levels.find((l) => l.id === levels.reading!.start)!;
-  const line = (part: Part) => skipped.includes(part) && <span className="small"> Skipped: the app starts you by age here.</span>;
+  const line = (part: Part) =>
+    skipped.includes(part) ? <span className="small"> Skipped: the app starts you by age here.</span> : levels.estimated?.includes(part) ? <span className="small" data-estimated="true"> A starting point from the quick check, not yet measured in this part.</span> : false;
   return (
     <main className="page vocab level" data-phase="result" aria-labelledby="level-result-title">
       <p className="eyebrow">Find my level</p>
       <h1 id="level-result-title" className="hero">
         Here is where to start
       </h1>
+      {gaps && <p className="small" data-gaps="true">This was the quick check: one overall level from the words you finished. Each part starts from it, a little lower where the check could not see (listening is not in it). A level is never set higher than your answers showed, and practice or a check of that part moves it.</p>}
       {quick && <p className="small" data-quick="true">This was the quick check, so each level is a careful starting point: it may be a little lower than you can do, never higher. Practice moves it up, and the full check is there whenever you want it.</p>}
       <ul className="vocab-bands level-result">
         <li data-part="words">
           <span>
             <b>🌱 Words</b>
             {line("words")}
-            {levels.words && !skipped.includes("words") && <span className="small"> The words got harder until the check found ones you do not know yet.</span>}
+            {levels.words && !skipped.includes("words") && !levels.estimated?.includes("words") && <span className="small"> The words got harder until the check found ones you do not know yet.</span>}
           </span>
           <span className="status">{levels.words && !skipped.includes("words") ? levelLine(levels.words.band) : "—"}</span>
         </li>
@@ -292,7 +324,8 @@ export function LevelResult({ levels, skipped, quick = false, onDone, onGrammar,
 
 export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { learner: Learner; voice: SpeechSynthesisVoice | null; onLeave: () => void; onChanged: () => void; onGrammar?: () => void }) {
   const age = learner.state.preferences?.band;
-  const [part, setPart] = useState<Part | "intro" | "result">("intro");
+  const [part, setPart] = useState<Part | "intro" | "gaps" | "result">("intro");
+  const gap = useRef<GapCheck | null>(null);
   const [, setTick] = useState(0);
   const [failed, setFailed] = useState(false);
   const [stretch, setStretch] = useState(false);
@@ -391,10 +424,34 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
           skipped.current = [];
           mode.current = m;
           wordBand.current = null;
+          if (m === "gaps") {
+            // the quick gap check: words the learner has met in New words are not asked
+            gap.current = new GapCheck(WORDS.words, startBand(age), new Set(learner.wordLearnRecords().flatMap((d) => ("word" in d.record ? [d.record.word] : []))));
+            scrollTo(0, 0);
+            setPart("gaps");
+            return void save(level({ type: "start", mode: m }));
+          }
           open("words", [level({ type: "start", mode: m })]);
         }}
       />
     );
+  if (part === "gaps") {
+    const g = gap.current!;
+    return (
+      <>
+        {warn}
+        <LevelGap
+          view={g.snapshot()}
+          onStop={stop}
+          onAnswer={(typed) => {
+            g.answer(typed);
+            if (g.finished) return open("result", [level({ type: "gaps", ...g.result() })]);
+            setTick((t) => t + 1);
+          }}
+        />
+      </>
+    );
+  }
   if (part === "words") {
     const s = words.current!;
     const v = s.snapshot();
@@ -523,7 +580,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
   return (
     <>
       {warn}
-      <LevelResult levels={learner.levels()} skipped={skipped.current} quick={mode.current === "quick"} onDone={onLeave} onGrammar={onGrammar} onStretch={() => setStretch(true)} />
+      <LevelResult levels={learner.levels()} skipped={skipped.current} quick={mode.current === "quick"} gaps={mode.current === "gaps"} onDone={onLeave} onGrammar={onGrammar} onStretch={() => setStretch(true)} />
       <div className="page vocab-note">
         <NoteBox learner={learner} screen="level-check:result" label="Do these levels look right? Was any part confusing?" />
       </div>
