@@ -5,12 +5,13 @@
  *   words      the word check itself (logic/vocabulary/size-check.ts): a word level on the scale of eight;
  *   reading    up to three texts with six questions each, chosen by elimination (see ReadingPlacement): the level is
  *              the highest one the answers make likely, and the learner starts reading there;
- *   listening  four dictated sentences, one try each, a level up after a sentence whose words are right (capital
- *              letters and the end mark are not counted; a long sentence may have one slip) and down otherwise:
- *              the level is the highest one passed.
+ *   listening  four to six dictated sentences, one try each, chosen by elimination. A sentence is right when its words
+ *              are right (capital letters and the end mark are not counted; a long sentence may have one slip).
  *
- *   spelling   six dictated Spelling Bee words, a level up after a right one and down otherwise: the level is the
- *              highest one spelt right, and the Spelling Bee starts there.
+ *   spelling   five to eight dictated Spelling Bee words, one try each, chosen by elimination.
+ *
+ *              In both, the level is the highest one the answers make likely that also has two right answers at
+ *              that level or above (see typedBelief): one right answer is never a level.
  *
  * Grammar keeps its own, longer starting check (the engine's, which is real evidence); the result screen offers it
  * as the last step. Any part can be skipped. Practice-only: nothing here is evidence for the engine. The reading part uses a
@@ -38,12 +39,14 @@ export const READING_TEXTS = 3;
 export const READING_SURE = 0.85;
 /** The version of the reading part; a reading result of another version was measured more loosely and is not used. */
 export const READING_CHECK = 2;
-export const LISTENING_STEPS = 4;
-/** How far the level moves after each dictated sentence: a wide first move, then single steps. */
-export const LISTENING_MOVES = [2, 1, 1, 1];
+/** Listening: at most this many sentences, and at least LISTENING_LEAST before it may stop. */
+export const LISTENING_STEPS = 6;
+export const LISTENING_LEAST = 4;
 /** Does a dictated sentence pass for placement? Every word spelt right; one slip allowed from eight words up. */
 export const listeningPass = (right: number, total: number): boolean => right >= total - (total >= 8 ? 1 : 0);
-export const SPELLING_STEPS = 6;
+/** Spelling: at most this many words, and at least SPELLING_LEAST before it may stop. */
+export const SPELLING_STEPS = 8;
+export const SPELLING_LEAST = 5;
 
 export type LevelCheckRecord =
   | { type: "start" }
@@ -51,8 +54,9 @@ export type LevelCheckRecord =
   | { type: "words"; band: number; scale?: number; estimate?: number; correct?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
   | { type: "reading"; passed: number; scale?: number; check?: number; steps: { level: number; right: number; asked: number }[] }
-  | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
-  | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
+  /** `check`: the version of the typed parts; a listening or spelling result of another version is not used. */
+  | { type: "listening"; level: number; scale?: number; check?: number; steps: { id: string; level: number; perfect: boolean }[] }
+  | { type: "spelling"; level: number; check?: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "grammar"; level: number; scale?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
@@ -83,8 +87,8 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
       // placed most learners a level high and made the first week harder, with no gain by the end of the month)
       out.reading = { passed, start: Math.min(readingLevels, Math.max(1, passed)) };
     }
-    if (r.type === "listening") out.listening = { level: rescale(r, OLD_LEVELS) };
-    if (r.type === "spelling") out.spelling = { level: r.level };
+    if (r.type === "listening") out.listening = r.check === TYPED_CHECK ? { level: rescale(r, OLD_LEVELS) } : null;
+    if (r.type === "spelling") out.spelling = r.check === TYPED_CHECK ? { level: r.level } : null;
     if (r.type === "grammar") out.grammar = { level: r.level, basics: r.basics.right >= r.basics.asked };
   }
   return out;
@@ -212,7 +216,56 @@ export class ReadingPlacement {
   }
 }
 
-/** The listening part: four sentences, one try each, with a wide first move so six levels are within reach. Each is stored as a Listen and write answer, so it is not asked again soon. */
+/**
+ * Typed parts (listening and spelling), by elimination (version TYPED_CHECK).
+ *
+ * A typed answer cannot be guessed from choices, but one right answer is still not a level: a learner may happen to
+ * know one hard word, or slip on an easy one. So both parts hold a belief about the level the learner can write at,
+ * ask next at the level that splits that belief most evenly, and report the highest level the answers make likely
+ * (TYPED_SURE) that also has TYPED_NEED right answers at that level or above. streams.test.ts holds them to that
+ * with simulated learners.
+ */
+export const TYPED_CHECK = 2;
+export const TYPED_SURE = 0.75;
+export const TYPED_NEED = 2;
+const canWrite = (level: number, a: number) => 1 / (1 + Math.exp(-(2 * (a - level) + 1.4)));
+export function typedBelief(answers: readonly { level: number; right: boolean }[], top: number): { grid: number[]; p: number[]; median: number; spread: number } {
+  const grid = Array.from({ length: 2 * (top + 1) + 1 }, (_, i) => i / 2);
+  const p = grid.map(() => 1);
+  for (const x of answers)
+    grid.forEach((a, i) => {
+      const k = canWrite(x.level, a);
+      // knows it but slips in typing one time in eight; does not know it but happens to get it one time in twenty
+      const hit = k * 0.875 + (1 - k) * 0.05;
+      p[i] *= x.right ? hit : 1 - hit;
+    });
+  const total = p.reduce((t, x) => t + x, 0);
+  const q = p.map((x) => x / total);
+  let sum = 0;
+  const median = grid[q.findIndex((x) => (sum += x) >= 0.5)];
+  const mean = q.reduce((t, x, i) => t + x * grid[i], 0);
+  return { grid, p: q, median, spread: Math.sqrt(q.reduce((t, x, i) => t + x * (grid[i] - mean) ** 2, 0)) };
+}
+/**
+ * The level to ask next, and whether enough has been asked. `reach`: how far above the middle of the belief to ask.
+ * Spelling has five levels and asks close to the middle, so a level is confirmed; listening has seven and few
+ * sentences, so it reaches further up to get to the top in time.
+ */
+function typedNext(answers: readonly { level: number; right: boolean }[], start: number, top: number, least: number, most: number, reach: number): { level: number; done: boolean } {
+  if (!answers.length) return { level: start, done: false };
+  const b = typedBelief(answers, top);
+  return { level: Math.min(top, Math.max(1, Math.round(b.median + reach))), done: answers.length >= most || (answers.length >= least && b.spread <= 0.5) };
+}
+/** The level to report: never below `floor`, never the best guess. */
+function typedLevel(answers: readonly { level: number; right: boolean }[], top: number, floor: number): number {
+  const { grid, p } = typedBelief(answers, top);
+  let level = floor;
+  for (let l = floor + 1; l <= top; l++) if (p.reduce((t, x, i) => t + (grid[i] >= l ? x : 0), 0) >= TYPED_SURE) level = l;
+  while (level > floor && answers.filter((x) => x.right && x.level >= level).length < TYPED_NEED) level--;
+  return level;
+}
+
+/** The listening part: LISTENING_LEAST to LISTENING_STEPS sentences, one try each, chosen by elimination. Each is stored as a Listen and write answer, so it is not asked again soon. */
 export class ListeningPlacement {
   private readonly content: Dictation;
   private readonly history: DictationRecord[];
@@ -228,13 +281,27 @@ export class ListeningPlacement {
     this.load();
   }
 
+  private get answers() {
+    return this.steps.map((s) => ({ level: s.level, right: s.perfect }));
+  }
+  private get ids() {
+    return this.content.levels.map((l) => l.id as number);
+  }
+
+  /** A sentence of the level wanted, else of the nearest level that still has one. */
   private load(): void {
     const used = new Set(this.steps.map((s) => s.id));
-    this.current = pick(this.content, this.level, this.history).find((s) => !used.has(s.id)) ?? null;
+    const next = typedNext(this.answers, this.level, Math.max(...this.ids), LISTENING_LEAST, LISTENING_STEPS, 0.5);
+    this.current = null;
+    if (next.done) return;
+    for (const level of [...this.ids].sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b)) {
+      this.current = pick(this.content, level, this.history).find((s) => !used.has(s.id)) ?? null;
+      if (this.current) break;
+    }
   }
 
   get finished(): boolean {
-    return this.steps.length >= LISTENING_STEPS || !this.current;
+    return !this.current;
   }
 
   /** The sentence to say aloud: for the speaker only. */
@@ -260,13 +327,11 @@ export class ListeningPlacement {
     this.log.push(record);
     this.history.push(record);
     this.steps.push({ id: s.id, level: s.level, perfect: passed });
-    const ids = this.content.levels.map((l) => l.id);
-    this.level = Math.min(Math.max(...ids), Math.max(Math.min(...ids), this.level + (passed ? 1 : -1) * (LISTENING_MOVES[this.steps.length - 1] ?? 1)));
     this.load();
   }
 
-  result(): { level: number; scale: number; steps: { id: string; level: number; perfect: boolean }[] } {
-    return { scale: SCALE, level: Math.max(Math.min(...this.content.levels.map((l) => l.id)), ...this.steps.filter((s) => s.perfect).map((s) => s.level)), steps: [...this.steps] };
+  result(): { level: number; scale: number; check: number; steps: { id: string; level: number; perfect: boolean }[] } {
+    return { scale: SCALE, check: TYPED_CHECK, level: typedLevel(this.answers, Math.max(...this.ids), Math.min(...this.ids)), steps: [...this.steps] };
   }
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
@@ -285,7 +350,7 @@ function hash(s: string): number {
   return h;
 }
 
-/** The spelling part: six dictated words of the Spelling Bee, one try each, a level up after a right one and down otherwise. */
+/** The spelling part: SPELLING_LEAST to SPELLING_STEPS dictated words of the Spelling Bee, one try each, chosen by elimination. */
 export class SpellingPlacement {
   private readonly words: SpellWord[];
   private readonly top: number;
@@ -300,13 +365,25 @@ export class SpellingPlacement {
     this.load();
   }
 
+  private get answers() {
+    return this.steps.map((s) => ({ level: s.level, right: s.correct }));
+  }
+
+  /** A word of the level wanted, else of the nearest level that still has one. */
   private load(): void {
     const used = new Set(this.steps.map((s) => s.word));
-    this.current = this.words.find((w) => w.level === this.level && !used.has(w.word)) ?? null;
+    const next = typedNext(this.answers, this.level, this.top, SPELLING_LEAST, SPELLING_STEPS, 0.25);
+    this.current = null;
+    if (next.done) return;
+    const levels = Array.from({ length: this.top }, (_, i) => i + 1).sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b);
+    for (const level of levels) {
+      this.current = this.words.find((w) => w.level === level && !used.has(w.word)) ?? null;
+      if (this.current) break;
+    }
   }
 
   get finished(): boolean {
-    return this.steps.length >= SPELLING_STEPS || !this.current;
+    return !this.current;
   }
 
   /** What to say aloud: the word, its sentence, the word again. For the speaker only. */
@@ -321,12 +398,11 @@ export class SpellingPlacement {
     if (this.finished || !w || !typed.trim()) return;
     const correct = checkSpelling(w, typed);
     this.steps.push({ word: w.word, level: w.level!, correct });
-    this.level = Math.min(this.top, Math.max(1, this.level + (correct ? 1 : -1)));
     this.load();
   }
 
-  result(): { level: number; steps: { word: string; level: number; correct: boolean }[] } {
-    return { level: Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level)), steps: [...this.steps] };
+  result(): { level: number; check: number; steps: { word: string; level: number; correct: boolean }[] } {
+    return { check: TYPED_CHECK, level: typedLevel(this.answers, this.top, 1), steps: [...this.steps] };
   }
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
