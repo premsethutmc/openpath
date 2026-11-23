@@ -10,11 +10,10 @@ import { DICTATION, wordsOf } from "../logic/dictation/dictation.ts";
 import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
 import type { Learner } from "../logic/learner.ts";
 import { COURSE } from "../logic/reading/course.ts";
-import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
+import { GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
 import { BANDS } from "../logic/vocabulary/daily-words.ts";
-import { CHECK, CHECK_VERSION, SizeCheckSession, startBand } from "../logic/vocabulary/size-check.ts";
-/** The highest word level the quick check can reach: one level up per round from where it starts. */
-const QUICK_TOP = startBand(null) + WORD_ROUNDS - 1;
+import { ABOUT, CHECK, CHECK_VERSION, SizeCheckSession, levelLine, startBand, type CheckItem } from "../logic/vocabulary/size-check.ts";
+import { WordQuestion } from "./VocabularyCheck.tsx";
 import { slowText } from "./ListenWrite.tsx";
 import { syncAutoLists } from "../logic/streams/joined.ts";
 import { VocabularyStretch } from "./VocabularyStretch.tsx";
@@ -53,7 +52,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
       <p className="sub">Five short parts, about twelve minutes in all. Then the app shows your level in each and where to begin.</p>
       <ol className="level-parts">
         <li>
-          <b>Words</b>: pick the meaning of about twelve words.
+          <b>Words</b>: about {ABOUT} quick questions. Say whether you know a word (some are made up), then pick the closest word for a few.
         </li>
         <li>
           <b>Reading</b>: read up to three short texts and answer four questions on each.
@@ -76,24 +75,14 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
   );
 }
 
-export function LevelWords({ word, count, onAnswer, onSkip, onStop }: { word: { word: string; options: string[] }; count: number; onAnswer: (choice: number | null) => void; onSkip: () => void; onStop: () => void }) {
+export function LevelWords({ item, asked, about, onAnswer, onSkip, onStop }: { item: CheckItem; asked: number; about: number; onAnswer: (choice: boolean | number | null) => void; onSkip: () => void; onStop: () => void }) {
   return (
     <main className="page vocab level" data-phase="words">
       <PartHead part="words" onSkip={onSkip} onStop={onStop} />
-      <p className="small">Word {count}. Which meaning fits?</p>
-      <p className="prompt vocab-word" id="vocab-word">
-        {word.word}
+      <p className="pill">
+        Question {asked + 1} of about {about}
       </p>
-      <div className="options" role="group" aria-labelledby="vocab-word">
-        {word.options.map((o, i) => (
-          <button key={`${word.word}:${i}`} type="button" className="option" onClick={() => onAnswer(i)}>
-            {o}
-          </button>
-        ))}
-        <button type="button" className="option vocab-unknown" onClick={() => onAnswer(null)}>
-          I don't know this word
-        </button>
-      </div>
+      <WordQuestion item={item} onAnswer={onAnswer} />
     </main>
   );
 }
@@ -235,10 +224,9 @@ export function LevelResult({ levels, skipped, onDone, onGrammar, onStretch }: {
           <span>
             <b>🌱 Words</b>
             {line("words")}
-            {levels.words && !skipped.includes("words") && <span className="small"> Advanced vocabulary in context was not tested.</span>}
-            {levels.words?.correct !== undefined && !skipped.includes("words") && <span className="small"> {levels.words.correct} of {levels.words.answered} meanings correct</span>}
+            {levels.words && !skipped.includes("words") && <span className="small"> The words got harder until the check found ones you do not know yet.</span>}
           </span>
-          <span className="status">{levels.words && !skipped.includes("words") ? levels.words.band > 0 ? `${CHECK.bands[levels.words.band - 1].label} (level ${levels.words.band} of ${BANDS})${levels.words.band >= QUICK_TOP ? ": the quick check stops here, the full word check goes higher" : ""}` : "Not enough evidence yet" : "—"}</span>
+          <span className="status">{levels.words && !skipped.includes("words") ? levelLine(levels.words.band) : "—"}</span>
         </li>
         <li data-part="reading">
           <span>
@@ -340,7 +328,7 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
   /** Open a part (started by a tap, so the first sentence may be spoken straight away). */
   const open = (next: Part | "result", extra: (() => Promise<void>)[] = []) => {
     scrollTo(0, 0);
-    if (next === "words") words.current = new SizeCheckSession(CHECK, startBand(null), learner.vocabRecords(), WORD_ROUNDS);
+    if (next === "words") words.current = new SizeCheckSession(CHECK, startBand(age), learner.vocabRecords());
     if (next === "reading") reading.current = new ReadingPlacement(COURSE, MIDDLE.reading);
     if ((next === "listening" || next === "spelling") && !speechPossible()) {
       skipped.current.push(next);
@@ -397,17 +385,18 @@ export function LevelCheck({ learner, voice, onLeave, onChanged, onGrammar }: { 
     return (
       <>
         {warn}
-        {v.word && (
+        {v.item && (
           <LevelWords
-            word={v.word}
-            count={v.round * 3 + v.position + 1}
+            item={v.item}
+            asked={v.asked}
+            about={v.about}
             onStop={stop}
             onSkip={() => skip("words")}
             onAnswer={(c) => {
               s.answer(c);
               const records = s.take();
               const r = s.snapshot().result;
-              if (r) open("reading", [() => learner.recordVocab(records), level({ type: "words", band: r.band, scale: CHECK_VERSION, correct: r.correct, answered: r.answered })]);
+              if (r) open("reading", [() => learner.recordVocab(records), level({ type: "words", band: r.band, scale: CHECK_VERSION, estimate: r.estimate, correct: r.correct, answered: r.answered })]);
               else void save(() => learner.recordVocab(records));
             }}
           />

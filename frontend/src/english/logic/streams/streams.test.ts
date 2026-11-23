@@ -12,12 +12,12 @@ import { Learner } from "../learner.ts";
 import { COURSE } from "../reading/course.ts";
 import { progress, recommend } from "../reading/session.ts";
 import { MemoryRepo } from "../store.ts";
-import { CHECK, CHECK_VERSION, ROUND_SIZE, SizeCheckSession } from "../vocabulary/size-check.ts";
+import { CHECK, CHECK_VERSION, SizeCheckSession } from "../vocabulary/size-check.ts";
 import { BANK, levelOf } from "../spelling.ts";
 import { listeningPass } from "./level-check.ts";
 import { FIRST } from "../first/first.ts";
 import { rightAnswer } from "../test-helpers.ts";
-import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, WORD_ROUNDS, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
+import { GRAMMAR_STEPS, GrammarPlacement, MIDDLE, LISTENING_STEPS, ListeningPlacement, PARTS, READING_SKILLS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, levelsFrom, readingStart, spellingStart, type LevelCheckRecord } from "./level-check.ts";
 import { NAMING_TOPIC, streamRows } from "./streams.ts";
 import { GRAMMAR, GrammarSitting } from "../grammar-use/grammar-use.ts";
 
@@ -85,19 +85,17 @@ test("LC-2 listening: four sentences, one try each, a wide first move then singl
   assert.equal(levelFor(DICTATION, r.records, 3), 3, "answers without a finished sitting do not move the Listen and write level");
 });
 
-test("LC-3 the words part is the word check, cut to four rounds", () => {
-  const s = new SizeCheckSession(CHECK, 3, [], WORD_ROUNDS);
+test("LC-3 the words part is the word check itself, and its level is the one Find my level reports", () => {
+  const s = new SizeCheckSession(CHECK, 4);
   let n = 0;
   for (let v = s.snapshot(); v.phase === "asking"; v = s.snapshot(), n++) {
-    const w = CHECK.words.find((x) => x.word === v.word!.word)!;
-    s.answer(w.band <= 5 ? w.answer : null);
+    const w = CHECK.words.find((x) => x.word === v.item!.word);
+    if (v.item!.kind === "know") s.answer(!!w && w.band <= 5);
+    else s.answer(w!.band <= 5 ? w!.answer : null);
   }
-  assert.ok(n <= WORD_ROUNDS * ROUND_SIZE, `${n} words`);
-  assert.ok(s.snapshot().result!.band >= 4);
-  let full = 0;
-  const f = new SizeCheckSession(CHECK, 3);
-  for (let v = f.snapshot(); v.phase === "asking"; v = f.snapshot(), full++) f.answer(CHECK.words.find((x) => x.word === v.word!.word)!.answer);
-  assert.ok(full > n, "the full check is still longer");
+  assert.ok(n <= 30, `${n} questions`);
+  const band = s.snapshot().result!.band;
+  assert.ok(band === 4 || band === 5, `placed ${band}`);
 });
 
 test("LC-4 the latest level of each part counts; a skipped part leaves none", () => {

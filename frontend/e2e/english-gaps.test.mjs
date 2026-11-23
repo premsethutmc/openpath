@@ -91,25 +91,20 @@ test("Word check: reports observed word meanings and keeps the count after leavi
   await page.locator('main.vocab[data-phase="intro"]').waitFor();
   await page.getByRole("button", { name: "Start", exact: true }).click();
   let n = 0;
-  for (; n < 80 && !(await page.locator('main.vocab[data-phase="done"]').count()); n++) {
-    await page.locator('main.vocab[data-phase="asking"], main.vocab[data-phase="done"]').first().waitFor();
-    if (await page.locator('main.vocab[data-phase="done"]').count()) break;
-    const word = await page.locator("#vocab-word").innerText();
-    // knows the first few words, then not
-    if (n < 6) await page.locator(".options .option").first().click();
+  for (; n < 40 && !(await page.locator('main.vocab[data-phase="done"]').count()); n++) {
+    await page.getByText(new RegExp(`^Question ${n + 1} of about \\d+$`)).waitFor();
+    // says yes to the first few words, then no; knows none of the closest-word questions
+    if ((await page.locator("#vocab-word").getAttribute("data-kind")) === "know") await page.getByRole("button", { name: n < 6 ? "Yes, I know it" : "No, I don't know it" }).click();
     else await page.getByRole("button", { name: "I don't know this word" }).click();
-    await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w || document.querySelector('main.vocab[data-phase="done"]'), word);
+    await page.waitForFunction((t) => !document.querySelector(".vocab .pill")?.textContent?.includes(t) || document.querySelector('main.vocab[data-phase="done"]'), `Question ${n + 1} of`);
   }
   await page.locator('main.vocab[data-phase="done"]').waitFor();
-  assert.ok(n >= 6, `${n} words asked`);
-  const observed = page.getByRole("heading", { name: new RegExp(`^\\d+ of ${n} meanings correct$`) });
-  await observed.waitFor();
-  const correct = Number((await observed.innerText()).split(" ")[0]);
-  assert.ok(correct >= 0 && correct <= 6, "only the first six answers can earn credit");
+  assert.ok(n >= 6, `${n} questions asked`);
+  await page.getByRole("heading", { name: "Your words are below everyday words for now" }).waitFor();
   await shot(page, "3-word-check");
   await fits();
   await page.getByRole("button", { name: "Done" }).click();
-  await page.getByText(`Last time: ${correct} of ${n} correct`, { exact: true }).waitFor();
+  await page.getByText("Last time: below everyday words for now", { exact: true }).waitFor();
   assert.deepEqual(errors, []);
   await context.close();
 });

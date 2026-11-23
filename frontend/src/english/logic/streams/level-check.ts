@@ -2,7 +2,7 @@
  * Find my level: one short check when a learner starts English, so the app can say where to begin in each stream.
  * Three parts, each adaptive and each giving its own level (there is no single English number):
  *
- *   words      a short word check (the word check's own session, four rounds): a band out of eight;
+ *   words      the word check itself (logic/vocabulary/size-check.ts): a word level on the scale of eight;
  *   reading    one text with four questions at a starting level, then up to two more, the first move two levels wide: three of four right
  *              passes a level; the learner starts reading at the level above the highest one passed;
  *   listening  four dictated sentences, one try each, a level up after a sentence whose words are right (capital
@@ -31,7 +31,6 @@ export const MIDDLE = { reading: 3, listening: 3, spelling: 3, grammar: 3 } as c
 export const GRAMMAR_BASICS: Ask[] = ["noun", "verb"];
 export const GRAMMAR_STEPS = 6;
 export const GRAMMAR_MOVES = [2, 1, 1, 1];
-export const WORD_ROUNDS = 4;
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
 export const READING_PASS = 3;
 export const LISTENING_STEPS = 4;

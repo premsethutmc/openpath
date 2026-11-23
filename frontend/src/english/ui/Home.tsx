@@ -19,7 +19,7 @@ import { type PlanStep, patternTitle } from "../logic/plan.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { dueWords } from "../logic/state.ts";
 import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
-import { latestResult } from "../logic/vocabulary/size-check.ts";
+import { latestResult, levelLine } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
 import { FIRST, firstSummary, isBeginner } from "../logic/first/first.ts";
@@ -351,8 +351,8 @@ function VocabCard({ learner, onOpen }: { learner: Learner; onOpen: () => void }
       <h2 id="vocab-card-title">
         <span aria-hidden="true">🔤 </span>Word check
       </h2>
-      <p>Check which meanings you recognise. Up to five minutes.</p>
-      {last?.correct !== undefined && <p className="small">Last time: {last.correct} of {last.answered} correct</p>}
+      <p>Find where your words reach. About three minutes.</p>
+      {last && <p className="small">Last time: {levelLine(last.band)}</p>}
       <button type="button" className="secondary" onClick={onOpen}>
         {last ? "Check again" : "Check my words"}
       </button>

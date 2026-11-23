@@ -23,9 +23,9 @@ import { DICTATION, DictationSitting, levelFor as dictationLevel, type Dictation
 import { LISTENING, ListenSitting, choices as listenChoices, levelFor as listenLevel, type ListenRecord } from "../src/english/logic/listening/passages.ts";
 import { GRAMMAR, GrammarSitting, choices as grammarChoices, fixParts, levelFor as grammarLevel, spotWords, type GrammarRecord } from "../src/english/logic/grammar-use/grammar-use.ts";
 import { BANDS, WORDS, WordSitting, baseBand, progress as wordProgress, question as wordQuestion, teachBand, type Dated } from "../src/english/logic/vocabulary/daily-words.ts";
-import { CHECK, SizeCheckSession } from "../src/english/logic/vocabulary/size-check.ts";
+import { CHECK, CHECK_VERSION, SizeCheckSession, startBand } from "../src/english/logic/vocabulary/size-check.ts";
 import { isBeginner } from "../src/english/logic/first/first.ts";
-import { GrammarPlacement, ListeningPlacement, MIDDLE, ReadingPlacement, WORD_ROUNDS, levelsFrom, type LevelCheckRecord } from "../src/english/logic/streams/level-check.ts";
+import { GrammarPlacement, ListeningPlacement, MIDDLE, ReadingPlacement, levelsFrom, type LevelCheckRecord } from "../src/english/logic/streams/level-check.ts";
 
 type Stream = "words" | "reading" | "dictation" | "passages" | "grammar";
 const STREAMS: Stream[] = ["words", "reading", "dictation", "passages", "grammar"];
@@ -114,16 +114,21 @@ function note(s: StreamStats, level: number, right: number, asked: number) {
 // ---------------------------------------------------------------- Find my level
 function placement(m: Mind) {
   const records: LevelCheckRecord[] = [];
-  // words: the vocabulary check, four rounds
-  const wc = new SizeCheckSession(CHECK, 3, [], WORD_ROUNDS);
+  // words: the word check itself (yes or no with made-up words, then closest-word questions)
+  const wc = new SizeCheckSession(CHECK, startBand(null));
   for (let v = wc.snapshot(), g = 0; v.phase === "asking" && g < 40; v = wc.snapshot(), g++) {
-    const w = CHECK.words.find((x) => x.word === v.word!.word)!;
-    const right = m.right("words", w.band, 3);
-    // a learner who does not know a word says so, unless they guess
-    wc.answer(right ? w.answer : m.p.guess ? other(3, w.answer, m.r) : null);
+    const item = v.item!;
+    const w = CHECK.words.find((x) => x.word === item.word);
+    // a guesser says yes to anything; other learners say yes to the real words they know
+    if (item.kind === "know") wc.answer(m.p.guess ? true : !!w && m.right("words", w.band));
+    else {
+      const right = m.right("words", w!.band, item.options.length);
+      // a learner who does not know a word says so, unless they guess
+      wc.answer(right ? w!.answer : m.p.guess ? other(item.options.length, w!.answer, m.r) : null);
+    }
   }
   const wr = wc.snapshot().result!;
-  records.push({ type: "words", band: wr.band, estimate: wr.estimate, answered: wr.answered });
+  records.push({ type: "words", band: wr.band, scale: CHECK_VERSION, estimate: wr.estimate, answered: wr.answered });
   // reading: a text with four questions, moved by two then one
   const rp = new ReadingPlacement(COURSE, MIDDLE.reading);
   for (let v = rp.snapshot(), g = 0; v.phase === "asking" && g < 30; v = rp.snapshot(), g++) {

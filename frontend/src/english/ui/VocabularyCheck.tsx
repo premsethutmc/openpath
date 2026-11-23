@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import type { Learner } from "../logic/learner.ts";
-import { CHECK, ROUNDS, ROUND_SIZE, SizeCheckSession, latestResult, startBand, type CheckView, type SizeCheck, type VocabRecord } from "../logic/vocabulary/size-check.ts";
+import { ABOUT, CHECK, SizeCheckSession, latestResult, levelLine, startBand, type CheckItem, type CheckView, type Result, type SizeCheck, type VocabRecord } from "../logic/vocabulary/size-check.ts";
 import { VocabularyStretch } from "./VocabularyStretch.tsx";
 import { NoteBox } from "./Note.tsx";
 
-export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: number; answered: number } | null; onStart: () => void; onBack: () => void }) {
+export function VocabularyIntro({ last, onStart, onBack }: { last: { band: number } | null; onStart: () => void; onBack: () => void }) {
   return (
     <main className="page vocab" data-phase="intro" aria-labelledby="vocab-title">
       <button type="button" className="link" onClick={onBack}>
@@ -12,15 +12,11 @@ export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: n
       </button>
       <p className="eyebrow">Words · Word check</p>
       <h1 id="vocab-title" className="hero">
-        Check your word meanings
+        Find where your words reach
       </h1>
-      <p className="sub">You will see a word and three meanings. Pick the meaning that fits. If you do not know the word, say so. This checks recognition, not whether you can use a word.</p>
-      <p className="small">Up to {ROUND_SIZE * ROUNDS} words. It takes three to five minutes.</p>
-      {last?.correct !== undefined && (
-        <p className="pill">
-          Last time: {last.correct} of {last.answered} correct
-        </p>
-      )}
+      <p className="sub">First you see one word at a time: say whether you know it. Some of the words are made up, so only say yes when you are sure. Then, for a few words, pick the word closest in meaning.</p>
+      <p className="small">About {ABOUT} quick questions, around three minutes. The words get harder until the check finds ones you do not know yet: everyone meets some.</p>
+      {last && <p className="pill">Last time: {levelLine(last.band)}</p>}
       <button type="button" className="primary" onClick={onStart}>
         {last ? "Check again" : "Start"}
       </button>
@@ -28,49 +24,76 @@ export function VocabularyIntro({ last, onStart, onBack }: { last: { correct?: n
   );
 }
 
-export function VocabularyView({ check, view, onAnswer, onLeave, onStretch }: { check: SizeCheck; view: CheckView; onAnswer: (choice: number | null) => void; onLeave: () => void; onStretch?: () => void }) {
-  if (view.phase === "asking" && view.word)
+/** One question of the check: "Do you know this word?" or "Which word is closest in meaning?". Nothing is marked on screen. */
+export function WordQuestion({ item, onAnswer }: { item: CheckItem; onAnswer: (choice: boolean | number | null) => void }) {
+  if (item.kind === "know")
+    return (
+      <>
+        <p className="small">Do you know this word?</p>
+        <p className="prompt vocab-word" id="vocab-word" data-kind="know">
+          {item.word}
+        </p>
+        <div className="options" role="group" aria-labelledby="vocab-word">
+          <button key={`${item.word}:yes`} type="button" className="option vocab-yes" onClick={() => onAnswer(true)}>
+            Yes, I know it
+          </button>
+          <button key={`${item.word}:no`} type="button" className="option vocab-unknown" onClick={() => onAnswer(false)}>
+            No, I don't know it
+          </button>
+        </div>
+      </>
+    );
+  return (
+    <>
+      <p className="small">Which word is closest in meaning?</p>
+      <p className="prompt vocab-word" id="vocab-word" data-kind="pick">
+        {item.word}
+      </p>
+      <div className="options" role="group" aria-labelledby="vocab-word">
+        {item.options.map((o, i) => (
+          <button key={`${item.word}:${i}`} type="button" className="option" onClick={() => onAnswer(i)}>
+            {o}
+          </button>
+        ))}
+        <button type="button" className="option vocab-unknown" onClick={() => onAnswer(null)}>
+          I don't know this word
+        </button>
+      </div>
+    </>
+  );
+}
+
+/** What the result says under the level: how the check works, and what saying yes to made-up words did. */
+export function resultNotes(r: Result): string[] {
+  const out = ["The words got harder until the check found ones you do not know yet. This is a place on the word scale, not marks out of eight."];
+  if (r.fakeYes > 0) out.push(`${r.fakeYes} of the ${r.fakes} made-up words were marked as known, so the check trusted "yes" less and went by the closest-word answers.`);
+  return out;
+}
+
+export function VocabularyView({ check, view, onAnswer, onLeave, onStretch }: { check: SizeCheck; view: CheckView; onAnswer: (choice: boolean | number | null) => void; onLeave: () => void; onStretch?: () => void }) {
+  if (view.phase === "asking" && view.item)
     return (
       <main className="page vocab" data-phase="asking">
         <button type="button" className="link" onClick={onLeave}>
           ← Stop
         </button>
         <p className="pill">
-          Word {view.round * ROUND_SIZE + view.position + 1}
+          Question {view.asked + 1} of about {view.about}
         </p>
-        <p className="small">Which meaning fits?</p>
-        <p className="prompt vocab-word" id="vocab-word">
-          {view.word.word}
-        </p>
-        <div className="options" role="group" aria-labelledby="vocab-word">
-          {view.word.options.map((o, i) => (
-            <button key={`${view.word!.word}:${i}`} type="button" className="option" onClick={() => onAnswer(i)}>
-              {o}
-            </button>
-          ))}
-          <button type="button" className="option vocab-unknown" onClick={() => onAnswer(null)}>
-            I don't know this word
-          </button>
-        </div>
+        <WordQuestion item={view.item} onAnswer={onAnswer} />
       </main>
     );
   const r = view.result!;
   return (
     <main className="page vocab" data-phase="done">
       <p className="eyebrow">Words · Word check</p>
-      <h1 className="hero">{r.correct} of {r.answered} meanings correct</h1>
-      <p className="sub">{r.band === 0 ? "Not enough evidence for a word level yet." : `Your words reach ${check.bands[r.band - 1].label} (level ${r.band} of ${check.bands.length}).`}</p>
-      <p className="small">These are answers to a short recognition check. Advanced vocabulary in context was not tested.</p>
-      <ul className="vocab-bands">
-        {r.perBand.map((b) => (
-          <li key={b.band}>
-            <span>{check.bands.find((x) => x.id === b.band)!.label}</span>
-            <span className="status">
-              {b.correct} of {b.asked} correct
-            </span>
-          </li>
-        ))}
-      </ul>
+      <h1 className="hero">{r.band > 0 ? `Your words reach ${check.bands[r.band - 1].label}` : "Your words are below everyday words for now"}</h1>
+      <p className="sub">{r.band > 0 ? `Word level ${r.band} on a scale of 1 to ${check.bands.length}. New words starts you just above it.` : "New words starts you with the commonest words."}</p>
+      {resultNotes(r).map((n) => (
+        <p key={n} className="small">
+          {n}
+        </p>
+      ))}
       {onStretch && <button type="button" className="secondary" onClick={onStretch}>Try 3 harder words</button>}
       <button type="button" className="primary" onClick={onLeave}>
         Done

@@ -3,6 +3,7 @@
  * where the learner is on each one's ladder and what moves them up (Journey), and what they have done (Progress).
  * The older journey's skill-by-skill view stays below each, folded away.
  */
+import { levelLine } from "../logic/vocabulary/size-check.ts";
 import { useState, type ReactNode } from "react";
 import type { Learner } from "../logic/learner.ts";
 import { childSummary } from "../logic/parent-view.ts";
@@ -70,8 +71,8 @@ export function DailyProgress({ learner }: { learner: Learner }) {
   const lines: [string, string][] = [];
   if (s.first) lines.push(["🐱 First words", `${s.first.met} of ${s.first.total} words found, ${s.first.sure} sure`]);
   const w = wordsSummary(learner.wordLearnRecords(), learner.clock(), learner.dayFn());
-  if (w.learnt + w.learning) lines.push(["🌱 Words", `${w.learnt} learnt, ${w.learning} still learning${s.words ? `; ${s.words.correct} of ${s.words.answered} meanings correct in the word check` : ""}`]);
-  else if (s.words) lines.push(["🌱 Words", `${s.words.correct} of ${s.words.answered} meanings correct in the word check`]);
+  if (w.learnt + w.learning) lines.push(["🌱 Words", `${w.learnt} learnt, ${w.learning} still learning${s.words ? `; word check: ${levelLine(s.words.band)}` : ""}`]);
+  else if (s.words) lines.push(["🌱 Words", `Word check: ${levelLine(s.words.band)}`]);
   if (s.reading) lines.push(["📖 Reading", `${s.reading.passed} ${s.reading.passed === 1 ? "skill" : "skills"} passed${s.reading.needsPractice.length ? `; more practice: ${s.reading.needsPractice.join("; ")}` : ""}`]);
   if (s.written) lines.push(["✏️ Written answers", `${s.written.right} of ${s.written.answered} right`]);
   if (s.long) lines.push(["📚 Long reads", `${s.long.parts} ${s.long.parts === 1 ? "part" : "parts"} read, ${s.long.finished} ${s.long.finished === 1 ? "story" : "stories"} finished`]);
