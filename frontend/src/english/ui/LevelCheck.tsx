@@ -49,7 +49,7 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
       <h1 id="level-title" className="hero">
         Where should you start?
       </h1>
-      <p className="sub">Five short parts, about twelve minutes in all. Then the app shows your level in each and where to begin.</p>
+      <p className="sub">Five short parts, about fifteen minutes in all. Then the app shows your level in each and where to begin.</p>
       <ol className="level-parts">
         <li>
           <b>Words</b>: about {ABOUT} quick questions. Say whether you know a word (some are made up), then pick the closest word for a few.
@@ -58,10 +58,10 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
           <b>Reading</b>: read up to three short texts and answer six questions on each. Say "I'm not sure" rather than guess.
         </li>
         <li>
-          <b>Listening</b>: hear four sentences and write them.
+          <b>Listening</b>: hear up to six sentences and write them.
         </li>
         <li>
-          <b>Spelling</b>: hear six words and spell them.
+          <b>Spelling</b>: hear up to eight words and spell them.
         </li>
         <li>
           <b>Grammar</b>: tap a word in six sentences.
@@ -128,7 +128,7 @@ export function LevelListening({ id, index, heard, onPlay, onDone, onSkip, onSto
     <main className="page vocab level dict" data-phase="listening" data-sentence={id}>
       <PartHead part="listening" onSkip={onSkip} onStop={onStop} />
       <p className="small">
-        Sentence {index + 1} of {LISTENING_STEPS}. Write it just as you hear it.
+        Sentence {index + 1} of up to {LISTENING_STEPS}. Write it just as you hear it.
       </p>
       <div className="dict-play">
         <button type="button" className="primary" onClick={() => onPlay(false)}>
@@ -169,7 +169,7 @@ export function LevelSpelling({ id, index, heard, onPlay, onDone, onSkip, onStop
     <main className="page vocab level dict" data-phase="spelling" data-word-id={id}>
       <PartHead part="spelling" onSkip={onSkip} onStop={onStop} />
       <p className="small">
-        Word {index + 1} of {SPELLING_STEPS}. You will hear the word, a sentence with it, and the word again. Type the word.
+        Word {index + 1} of up to {SPELLING_STEPS}. You will hear the word, a sentence with it, and the word again. Type the word.
       </p>
       <div className="dict-play">
         <button type="button" className="primary" onClick={() => onPlay(false)}>

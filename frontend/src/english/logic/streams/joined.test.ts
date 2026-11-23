@@ -82,7 +82,7 @@ test("JS-4 new words remembered after the first day become 'Spell my new words';
   assert.deepEqual((await syncAutoLists(l)).newWords, [a.word], "only the one remembered");
   const list = l.wordLists().find((x) => x.id === NEW_WORD_SPELLING.id)!;
   assert.deepEqual(list.words.map((w) => [w.word, w.sentence]), [[a.word, a.sentence]]);
-  await l.recordLevelCheck([{ type: "spelling", level: 1, steps: [{ word: "friend", level: 1, correct: true }, { word: "laugh", level: 2, correct: false }] }]);
+  await l.recordLevelCheck([{ type: "spelling", level: 1, check: 2, steps: [{ word: "friend", level: 1, correct: true }, { word: "laugh", level: 2, correct: false }] }]);
   const added = await syncAutoLists(l);
   assert.deepEqual(added.tricky, ["laugh"]);
   assert.ok(l.spellingWords({ type: "list", id: TRICKY.id })[0].sentence, "with the Spelling Bee's own sentence");
