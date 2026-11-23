@@ -10,6 +10,7 @@ import { dictationSummary } from "./dictation/dictation.ts";
 import type { Learner } from "./learner.ts";
 import { BANK, LEVEL_NAMES, levelOf, sourceProgress } from "./spelling.ts";
 import { patternCounts } from "./spelling-patterns.ts";
+import { learnerPicture } from "./streams/picture.ts";
 import { latestResult } from "./vocabulary/size-check.ts";
 import { COURSE } from "./reading/course.ts";
 import { progress as readingProgress } from "./reading/session.ts";
@@ -65,7 +66,10 @@ export interface ChildSummary {
   /** weekly-note@1: each activity used in the last seven days and on how many of them, most days first. */
   week: { activity: string; days: number }[];
   /** Where each daily activity stands, as the child's home screen shows it. */
-  levels: { name: string; level: string }[];
+  /** `sure`: how sure that level is, and what it could be (streams/picture.ts). */
+  levels: { name: string; level: string; sure?: string }[];
+  /** The overall level the quick gap check measured, on the scale of eight, and how sure it is. */
+  overall: { level: number; sure: string } | null;
   /** Reading: skills checked and passed, and the ones that need more practice ("Main idea, level 3"). */
   reading: { passed: number; needsPractice: string[] } | null;
   /** Writing and other syllabus tasks: how many done, and how many words written in all (the writing itself is never kept). */
@@ -112,6 +116,7 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
   for (const s of st.sessions.values()) for (const a of s.answers) if (Date.parse(now) - Date.parse(a.at) < 7 * DAY && Date.parse(a.at) <= Date.parse(now)) days.add(a.at.slice(0, 10));
   const events = learner.state.events;
   const w = latestResult(learner.vocabRecords());
+  const view = learnerPicture(learner, now);
   const nw = wordsSummary(learner.wordLearnRecords(), now, learner.dayFn());
   const dict = dictationSummary(learner.dictationRecords());
   const gram = grammarSummary(GRAMMAR, learner.grammarRecords());
@@ -148,7 +153,8 @@ export function childSummary(learner: Learner, now: string): ChildSummary {
     grammar: gram.answered ? { answered: gram.answered, right: gram.right, weak: gram.weak.slice(0, 5), mastered: masterySummary(learner.grammarTimed(), now).mastered } : null,
     englishDays: english.size,
     week: [...byActivity].map(([activity, d]) => ({ activity, days: d.size })).sort((a, b) => b.days - a.days || (a.activity < b.activity ? -1 : 1)),
-    levels: streamRows(learner, now).map((r) => ({ name: r.name, level: r.level })),
+    levels: view.parts.map((r) => ({ name: r.name, level: r.level, sure: r.note })),
+    overall: view.overall === null ? null : { level: view.overall, sure: view.low < view.high ? `${view.overallSure}: could be ${view.low} to ${view.high}` : view.overallSure },
     reading: units.some(([, u]) => u.checks) ? { passed: units.filter(([, u]) => u.status === "passed_own" || u.status === "passed_after_help").length, needsPractice: units.filter(([, u]) => u.status === "needs_practice" || u.status === "no_fresh_check").map(([k]) => unitName(k)).slice(0, 4) } : null,
     writing: guided.length ? { tasks: guidedSummary(guided).done.size, pieces: pieces.length, words: pieces.reduce((a, r) => a + (r.words ?? 0), 0) } : null,
     written: learner.writtenRecords().length ? writtenSummary(learner.writtenRecords()) : null,

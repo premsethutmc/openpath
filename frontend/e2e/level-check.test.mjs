@@ -194,6 +194,9 @@ test("Find my level: four parts, a level for each stream, and a home screen that
   assert.equal(await page.locator(".stream-rows li").count(), 5);
   await page.locator('[data-stream="words"]', { hasText: "Level 3 of 8" }).waitFor();
   await page.locator('[data-stream="reading"]', { hasText: "Expert" }).waitFor();
+  // each level says how sure it is; with no quick check taken there is no overall number
+  await page.locator('[data-stream="listening"] [data-sure]', { hasText: "fairly sure" }).waitFor();
+  assert.equal(await page.locator("[data-overall]").count(), 0);
   await page.locator('[data-stream="listening"]', { hasText: "Level 7 of 7" }).waitFor();
   await page.locator('[data-stream="spelling"]', { hasText: "Intermediate (level 3 of 5)" }).waitFor();
   await page.locator('[data-stream="grammar"]', { hasText: "Level 3 of 7" }).waitFor();
@@ -319,6 +322,11 @@ test("Find my level: the quick gap check gives one overall level and a starting 
   await page.getByRole("button", { name: "See what to do today" }).click();
   await page.getByRole("heading", { name: "Your English today" }).waitFor();
   assert.equal(await page.locator(".stream-rows li").count(), 5);
+  // the home screen says how sure each level is: after the quick check every part is a starting point
+  await page.getByText(/Overall, from the quick check: level [23] of 8/).waitFor();
+  assert.equal(await page.locator("[data-sure]", { hasText: "a starting point from the quick check" }).count(), 5);
+  await fits();
+  await shot(page, "7-gap-home");
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

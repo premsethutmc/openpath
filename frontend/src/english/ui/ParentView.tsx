@@ -57,11 +57,17 @@ export function ChildCard({ s, onOpen }: { s: ChildSummary; onOpen: () => void }
       <p className="small">
         Last active: {day(s.lastActive)} · practised English on {s.englishDays} of the last 7 days (spelling on {s.daysPractisedThisWeek})
       </p>
+      {s.overall && (
+        <p className="small" data-line="overall">
+          <b>Overall English, from the quick check: level {s.overall.level} of 8</b> ({s.overall.sure}). Each part below has its own ladder; a "starting point" or "first estimate" firms up when that part is checked in Find my level.
+        </p>
+      )}
       {s.levels.length > 0 && (
         <ul className="parent-levels small" data-line="levels">
           {s.levels.map((l) => (
             <li key={l.name}>
               <b>{l.name}:</b> {l.level}
+              {l.sure ? ` (${l.sure})` : ""}
             </li>
           ))}
         </ul>
