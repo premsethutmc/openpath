@@ -3,8 +3,8 @@
  * Three parts, each adaptive and each giving its own level (there is no single English number):
  *
  *   words      the word check itself (logic/vocabulary/size-check.ts): a word level on the scale of eight;
- *   reading    one text with four questions at a starting level, then up to two more, the first move two levels wide: three of four right
- *              passes a level; the learner starts reading at the level above the highest one passed;
+ *   reading    up to three texts with six questions each, chosen by elimination (see ReadingPlacement): the level is
+ *              the highest one the answers make likely, and the learner starts reading there;
  *   listening  four dictated sentences, one try each, a level up after a sentence whose words are right (capital
  *              letters and the end mark are not counted; a long sentence may have one slip) and down otherwise:
  *              the level is the highest one passed.
@@ -31,8 +31,13 @@ export const MIDDLE = { reading: 3, listening: 3, spelling: 3, grammar: 3 } as c
 export const GRAMMAR_BASICS: Ask[] = ["noun", "verb"];
 export const GRAMMAR_STEPS = 6;
 export const GRAMMAR_MOVES = [2, 1, 1, 1];
-export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "main_idea"];
-export const READING_PASS = 3;
+/** The reading part: every text is asked on these six skills; READING_PASS or more right of the six is a text read well. */
+export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "feelings", "main_idea", "fact_opinion"];
+export const READING_PASS = 4;
+export const READING_TEXTS = 3;
+export const READING_SURE = 0.85;
+/** The version of the reading part; a reading result of another version was measured more loosely and is not used. */
+export const READING_CHECK = 2;
 export const LISTENING_STEPS = 4;
 /** How far the level moves after each dictated sentence: a wide first move, then single steps. */
 export const LISTENING_MOVES = [2, 1, 1, 1];
@@ -45,7 +50,7 @@ export type LevelCheckRecord =
   /** `scale`: the word check version; a words result on another version used other levels and is not used. */
   | { type: "words"; band: number; scale?: number; estimate?: number; correct?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
-  | { type: "reading"; passed: number; scale?: number; steps: { level: number; right: number; asked: number }[] }
+  | { type: "reading"; passed: number; scale?: number; check?: number; steps: { level: number; right: number; asked: number }[] }
   | { type: "listening"; level: number; scale?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; steps: { word: string; level: number; correct: boolean }[] }
   | { type: "grammar"; level: number; scale?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
@@ -71,7 +76,8 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     if (r.type === "done") out.done = true;
     if (r.type === "words" && r.scale !== CHECK_VERSION) out.words = null;
     else if (r.type === "words") out.words = r.correct === undefined ? { band: r.band, estimate: r.estimate } : { band: r.band, correct: r.correct, answered: r.answered };
-    if (r.type === "reading") {
+    if (r.type === "reading" && r.check !== READING_CHECK) out.reading = null;
+    else if (r.type === "reading") {
       const passed = r.scale === SCALE ? r.passed : READING_OLD[r.passed] ?? r.passed;
       // start at the highest level passed: its units still teach skills not yet checked there (sim-english@2: one above
       // placed most learners a level high and made the first week harder, with no gain by the end of the month)
@@ -86,7 +92,6 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
 
 export const readingStart = (age: "early" | "school" | "older" | null | undefined): number => (age === "early" ? 1 : 3);
 /** How far the reading level moves after each text: a wide first move, then one step. At most three texts. */
-export const READING_MOVES = [2, 1];
 
 export interface ReadingPlacementView {
   phase: "asking" | "done";
@@ -99,53 +104,105 @@ export interface ReadingPlacementView {
   question: { prompt: string; options: string[] } | null;
 }
 
-/** The reading part: a practice text at a level with four questions; then two levels up or down, then one. At most three texts. */
+/**
+ * The reading part, by elimination (reading check version READING_CHECK).
+ *
+ * It holds a belief about the level of text the learner can read, starts with a text from the middle, and after
+ * each text picks the level that splits the belief most evenly: a text read badly sends it well down, a text read
+ * well sends it up. Every text has six questions, one for each reading skill, and each can be answered "I'm not
+ * sure". At most READING_TEXTS texts.
+ *
+ * The level reported is the highest one the answers make likely (READING_SURE), never the best guess, and never a
+ * level without a text at that level or above read well (READING_PASS of six right). Three choices a question means
+ * a blind guess is right one time in three, so the belief counts every right answer for only what a guess leaves.
+ * streams.test.ts holds it to that with simulated readers.
+ */
+const READING_GRID = (top: number) => Array.from({ length: 2 * (top + 1) + 1 }, (_, i) => i / 2);
+const canRead = (level: number, a: number) => 1 / (1 + Math.exp(-(2.4 * (a - level) + 1.4)));
+/** The belief about the level of text a learner can read, after these answers. */
+export function readingBelief(answers: readonly { level: number; right: boolean; unsure?: boolean; options: number }[], top: number): { grid: number[]; p: number[] } {
+  const grid = READING_GRID(top);
+  const p = grid.map(() => 1);
+  // How often this learner says "I'm not sure" instead of guessing. A learner who says so when they do not know is
+  // not marked down for it: their right answers are then worth more, because they were not guesses.
+  const unsure = answers.filter((x) => x.unsure).length;
+  const wrong = answers.filter((x) => !x.right && !x.unsure).length;
+  const says = (unsure + 0.5) / (unsure + 1.5 * wrong + 1.5);
+  for (const x of answers)
+    grid.forEach((a, i) => {
+      const k = canRead(x.level, a);
+      const hit = k * 0.92 + ((1 - k) * (1 - says)) / x.options;
+      p[i] *= x.right ? hit : x.unsure ? (1 - k) * says + 0.01 : k * 0.08 + (1 - k) * (1 - says) * (1 - 1 / x.options) + 0.01;
+    });
+  const total = p.reduce((s, x) => s + x, 0);
+  return { grid, p: p.map((x) => x / total) };
+}
+
 export class ReadingPlacement {
   private readonly course: Course;
+  private readonly top: number;
   private level: number;
   private questions: Question[] = [];
   private passage: Passage | null = null;
   private index = 0;
   private right = 0;
+  private readonly used = new Set<string>();
+  private answers: { level: number; right: boolean; unsure: boolean; options: number }[] = [];
   private steps: { level: number; right: number; asked: number }[] = [];
   private finished = false;
 
   constructor(course: Course, start: number) {
     this.course = course;
+    this.top = Math.max(...course.levels.map((l) => l.id));
     this.level = start;
-    this.load();
+    this.load(start);
   }
 
-  private load(): void {
-    const texts = [...this.course.passages.values()].filter((p) => p.level === this.level && p.role === "practice" && READING_SKILLS.every(skill=>this.course.questions.some(q=>q.passage===p.id&&q.skill===skill&&q.role==="practice")));
-    this.passage = texts.at(-1) ?? null;
-    this.questions = this.passage ? READING_SKILLS.flatMap((s) => this.course.questions.filter((q) => q.passage === this.passage!.id && q.skill === s && q.role === "practice").slice(0, 1)) : [];
+  /** Practice texts of a level that carry a question for every placement skill and have not been used in this sitting. */
+  private texts(level: number): Passage[] {
+    return [...this.course.passages.values()].filter((p) => p.level === level && p.role === "practice" && !this.used.has(p.id) && READING_SKILLS.every((skill) => this.course.questions.some((q) => q.passage === p.id && q.skill === skill && q.role === "practice")));
+  }
+
+  /** A text of the level wanted, else of the nearest level that still has one. */
+  private load(want: number): void {
+    const levels = this.course.levels.map((l) => l.id as number).sort((a, b) => Math.abs(a - want) - Math.abs(b - want) || a - b);
+    const level = levels.find((l) => this.texts(l).length > 0);
+    this.passage = level === undefined ? null : this.texts(level).at(-1)!;
+    if (!this.passage) return void (this.finished = true);
+    this.level = level!;
+    this.used.add(this.passage.id);
+    this.questions = READING_SKILLS.flatMap((s) => this.course.questions.filter((q) => q.passage === this.passage!.id && q.skill === s && q.role === "practice").slice(0, 1));
     this.index = 0;
     this.right = 0;
-    if (!this.questions.length) this.finished = true;
   }
 
-  answer(choice: number): void {
+  /** `choice`: the index of an answer, or null for "I'm not sure". */
+  answer(choice: number | null): void {
     const q = this.questions[this.index];
-    if (this.finished || !q || !Number.isInteger(choice) || choice < 0 || choice >= q.options.length) return;
-    if (choice === q.answer) this.right++;
+    if (this.finished || !q) return;
+    if (choice !== null && (!Number.isInteger(choice) || choice < 0 || choice >= q.options.length)) return;
+    const right = choice === q.answer;
+    if (right) this.right++;
+    this.answers.push({ level: this.level, right, unsure: choice === null, options: q.options.length });
     if (++this.index < this.questions.length) return;
-    const passedHere = this.right >= READING_PASS;
     this.steps.push({ level: this.level, right: this.right, asked: this.questions.length });
-    const top = Math.max(...this.course.levels.map((l) => l.id));
-    const move = READING_MOVES[this.steps.length - 1];
-    const next = Math.min(top, Math.max(1, this.level + (passedHere ? 1 : -1) * (move ?? 1)));
-    if (move === undefined || next === this.level || this.steps.some((s) => s.level === next)) {
-      this.finished = true;
-      return;
-    }
-    this.level = next;
-    this.load();
+    const { grid, p } = readingBelief(this.answers, this.top);
+    const mean = p.reduce((s, x, i) => s + x * grid[i], 0);
+    const spread = Math.sqrt(p.reduce((s, x, i) => s + x * (grid[i] - mean) ** 2, 0));
+    if (this.steps.length >= READING_TEXTS || (this.steps.length >= 2 && spread <= 0.5)) return void (this.finished = true);
+    let sum = 0;
+    const median = grid[p.findIndex((x) => (sum += x) >= 0.5)];
+    this.load(Math.min(this.top, Math.max(1, Math.round(median + 0.5))));
   }
 
-  /** The highest level passed (0: none), with what was asked. */
-  result(): { passed: number; scale: number; steps: { level: number; right: number; asked: number }[] } {
-    return { scale: SCALE, passed: Math.max(0, ...this.steps.filter((s) => s.right >= READING_PASS).map((s) => s.level)), steps: [...this.steps] };
+  /** The highest level shown (0: none), with what was asked. */
+  result(): { passed: number; scale: number; check: number; steps: { level: number; right: number; asked: number }[] } {
+    const { grid, p } = readingBelief(this.answers, this.top);
+    let passed = 0;
+    for (let level = 1; level <= this.top; level++) if (p.reduce((s, x, i) => s + (grid[i] >= level ? x : 0), 0) >= READING_SURE) passed = level;
+    // a level needs a text at that level or above read well: one lucky text lower down is not enough
+    while (passed > 0 && !this.steps.some((x) => x.level >= passed && x.right >= READING_PASS)) passed--;
+    return { scale: SCALE, check: READING_CHECK, passed, steps: [...this.steps] };
   }
 
   snapshot(): ReadingPlacementView {
