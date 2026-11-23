@@ -241,7 +241,7 @@ test("Find my level: four parts, a level for each stream, and a home screen that
 test("Find my level: a part can be skipped, and the app says it starts by age there", async () => {
   const { context, page, errors, fits } = await start("Skipper");
   await page.getByRole("button", { name: "Find my level" }).click();
-  await page.getByRole("button", { name: "Start the quick check" }).click();
+  await page.getByRole("button", { name: "Check each part (about seven minutes)" }).click();
   await page.getByText("Part 1 of 5: Words").waitFor();
   assert.ok((await wordsPart(page, 0)) <= 20, "a learner who knows none of the words is through quickly");
   await page.getByText("Part 2 of 5: Reading").waitFor();
@@ -273,5 +273,53 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await page.getByRole("button", { name: "Check my level again" }).click();
   await page.getByRole("button", { name: "Check again" }).waitFor();
   assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test("Find my level: the quick gap check gives one overall level and a starting point for every part", async () => {
+  const { context, page, errors, foreign, fits } = await start("Gaps");
+  const WORDS = read("vocabulary/daily-words.json").words.map(([band, , word, , sentence]) => ({ band, word, sentence }));
+  await page.getByRole("button", { name: "Find my level" }).click();
+  await page.getByText("about three minutes", { exact: false }).waitFor();
+  await page.getByRole("button", { name: "Start the quick check" }).click();
+  const asked = [];
+  for (let i = 1; i <= 17; i++) {
+    await page.waitForFunction(() => ["gaps", "result"].includes(document.querySelector("main")?.getAttribute("data-phase")));
+    if ((await page.locator("main").getAttribute("data-phase")) !== "gaps") break;
+    assert.ok(i <= 16, "at most sixteen questions");
+    await page.getByText(`Question ${i} of up to 16`).waitFor();
+    const shown = await page.locator(".gap-shown").innerText();
+    const before = await page.evaluate(() => {
+      const n = document.querySelector("#gap-sentence").firstChild;
+      return n.nodeType === 3 ? n.textContent : "";
+    });
+    const w = WORDS.find((x) => x.sentence.startsWith(before + shown) && x.sentence.slice(before.length).toLowerCase().startsWith(x.word));
+    assert.ok(w, `a sentence of New words: ${before}${shown}`);
+    assert.ok(!asked.includes(w.word), "no word twice");
+    asked.push(w.word);
+    assert.equal(await page.getByText(w.word, { exact: false }).count(), 0, "the whole word is not on screen");
+    if (i === 1) {
+      await fits();
+      await shot(page, "5-gap");
+    }
+    // this learner can finish words up to level 3
+    if (w.band <= 3) {
+      await page.locator("#gap-box").fill(w.word.slice(shown.length));
+      await page.getByRole("button", { name: "Next", exact: true }).click();
+    } else await page.getByRole("button", { name: "I don't know this word" }).click();
+    await page.waitForFunction((n) => document.querySelector("main")?.getAttribute("data-index") !== String(n - 1) || document.querySelector("main")?.getAttribute("data-phase") !== "gaps", i);
+  }
+  assert.ok(asked.length >= 10, `${asked.length} questions`);
+  await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
+  await page.getByText("This was the quick check: one overall level", { exact: false }).waitFor();
+  await page.locator('[data-part="words"] .status', { hasText: /word level [23] on a scale of 1 to 8/ }).waitFor();
+  assert.equal(await page.locator('[data-estimated="true"]').count(), 5, "every part is marked as a starting point");
+  await fits();
+  await shot(page, "6-gap-result");
+  await page.getByRole("button", { name: "See what to do today" }).click();
+  await page.getByRole("heading", { name: "Your English today" }).waitFor();
+  assert.equal(await page.locator(".stream-rows li").count(), 5);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(foreign, []);
   await context.close();
 });
