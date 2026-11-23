@@ -24,14 +24,52 @@ import { checkSpot, fixParts, spotWords, type Ask, type GrammarItem, type Gramma
 import { checkSpelling, type SpellWord } from "../spelling.ts";
 import { OLD_LEVELS as READING_OLD, type Course, type Level, type Passage, type Question, type SkillId } from "../reading/course.ts";
 
+/**
+ * The quick check: the word check first, then a short confirmation in each other part.
+ *
+ * Word knowledge is the quickest thing to measure well (about twenty taps) and goes with the other skills more often
+ * than not, so the word level decides WHERE each other part starts asking. It never decides a level: every part still
+ * reports only what its own answers show, by the same rules as the full check, so a learner with strong words and
+ * weak listening is placed low in listening. Starting in the right place is what makes a few questions enough.
+ */
+export type Mode = "quick" | "full";
+export interface Limits {
+  /** Fewest and most questions (reading: texts) before the part ends. */
+  least: number;
+  most: number;
+  /**
+   * Quick check only. `near`: how firmly the part keeps asking close to where it started (in levels); `reach`: how far
+   * above the middle of its belief it asks. Both only choose the next question: they never enter the level reported.
+   */
+  near?: number;
+  reach?: number;
+}
+export const QUICK: { reading: Limits; listening: Limits; spelling: Limits; grammar: Limits } = {
+  reading: { least: 1, most: 2 },
+  listening: { least: 3, most: 3, near: 1.25, reach: 0 },
+  spelling: { least: 4, most: 4, near: 1.25, reach: 0 },
+  grammar: { least: 3, most: 4, near: 1.25, reach: 0 },
+};
+/** Where a part with `top` levels starts asking, given the word level found (1 to 8; 0 or none: the bottom or the middle). */
+export function startFromWords(band: number | null | undefined, top: number, middle: number): number {
+  if (band === null || band === undefined) return middle;
+  if (band <= 0) return 1;
+  // rounded down: a part that starts a little low gets right answers first, which is what a level needs
+  return Math.min(top, Math.max(1, Math.floor(1 + ((band - 1) * (top - 1)) / 7)));
+}
+
 export type Part = "words" | "reading" | "listening" | "spelling" | "grammar";
 export const PARTS: Part[] = ["words", "reading", "listening", "spelling", "grammar"];
 /** Every part starts in the middle of its scale, whatever the learner's age or class: the answers move it from there. */
 export const MIDDLE = { reading: 3, listening: 3, spelling: 3, grammar: 3 } as const;
-/** The grammar part: two naming-words questions (a noun, a verb), then four on a staircase of levels. */
+/** The grammar part: two naming-words questions (a noun, a verb), then sentences chosen by elimination. */
 export const GRAMMAR_BASICS: Ask[] = ["noun", "verb"];
-export const GRAMMAR_STEPS = 6;
-export const GRAMMAR_MOVES = [2, 1, 1, 1];
+/** After the two naming questions: at least GRAMMAR_LEAST sentences, at most GRAMMAR_MOST. GRAMMAR_STEPS: the most questions in all. */
+/** A tapped answer can be a lucky tap, so a grammar level needs three right answers at that level or above. */
+export const GRAMMAR_NEED = 3;
+export const GRAMMAR_LEAST = 4;
+export const GRAMMAR_MOST = 7;
+export const GRAMMAR_STEPS = GRAMMAR_BASICS.length + GRAMMAR_MOST;
 /** The reading part: every text is asked on these six skills; READING_PASS or more right of the six is a text read well. */
 export const READING_SKILLS: SkillId[] = ["detail", "sequence", "cause", "feelings", "main_idea", "fact_opinion"];
 export const READING_PASS = 4;
@@ -49,7 +87,7 @@ export const SPELLING_STEPS = 8;
 export const SPELLING_LEAST = 5;
 
 export type LevelCheckRecord =
-  | { type: "start" }
+  | { type: "start"; mode?: Mode }
   /** `scale`: the word check version; a words result on another version used other levels and is not used. */
   | { type: "words"; band: number; scale?: number; estimate?: number; correct?: number; answered: number }
   /** `passed`: the highest reading level passed (0: none). */
@@ -57,7 +95,7 @@ export type LevelCheckRecord =
   /** `check`: the version of the typed parts; a listening or spelling result of another version is not used. */
   | { type: "listening"; level: number; scale?: number; check?: number; steps: { id: string; level: number; perfect: boolean }[] }
   | { type: "spelling"; level: number; check?: number; steps: { word: string; level: number; correct: boolean }[] }
-  | { type: "grammar"; level: number; scale?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
+  | { type: "grammar"; level: number; scale?: number; check?: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] }
   | { type: "skipped"; part: Part }
   | { type: "done" };
 
@@ -89,7 +127,7 @@ export function levelsFrom(records: readonly LevelCheckRecord[], readingLevels =
     }
     if (r.type === "listening") out.listening = r.check === TYPED_CHECK ? { level: rescale(r, OLD_LEVELS) } : null;
     if (r.type === "spelling") out.spelling = r.check === TYPED_CHECK ? { level: r.level } : null;
-    if (r.type === "grammar") out.grammar = { level: r.level, basics: r.basics.right >= r.basics.asked };
+    if (r.type === "grammar") out.grammar = r.check === TYPED_CHECK ? { level: r.level, basics: r.basics.right >= r.basics.asked } : null;
   }
   return out;
 }
@@ -155,8 +193,11 @@ export class ReadingPlacement {
   private steps: { level: number; right: number; asked: number }[] = [];
   private finished = false;
 
-  constructor(course: Course, start: number) {
+  private readonly limits: Limits;
+
+  constructor(course: Course, start: number, limits: Limits = { least: 2, most: READING_TEXTS }) {
     this.course = course;
+    this.limits = limits;
     this.top = Math.max(...course.levels.map((l) => l.id));
     this.level = start;
     this.load(start);
@@ -193,7 +234,9 @@ export class ReadingPlacement {
     const { grid, p } = readingBelief(this.answers, this.top);
     const mean = p.reduce((s, x, i) => s + x * grid[i], 0);
     const spread = Math.sqrt(p.reduce((s, x, i) => s + x * (grid[i] - mean) ** 2, 0));
-    if (this.steps.length >= READING_TEXTS || (this.steps.length >= 2 && spread <= 0.5)) return void (this.finished = true);
+    // one text is enough only in the quick check, and only when it was read clearly well or clearly badly
+    const clear = this.steps.length >= 2 || this.right >= this.questions.length - 1 || this.right <= 1;
+    if (this.steps.length >= this.limits.most || (this.steps.length >= this.limits.least && clear && spread <= (this.steps.length >= 2 ? 0.5 : 0.8))) return void (this.finished = true);
     let sum = 0;
     const median = grid[p.findIndex((x) => (sum += x) >= 0.5)];
     this.load(Math.min(this.top, Math.max(1, Math.round(median + 0.5))));
@@ -229,14 +272,15 @@ export const TYPED_CHECK = 2;
 export const TYPED_SURE = 0.75;
 export const TYPED_NEED = 2;
 const canWrite = (level: number, a: number) => 1 / (1 + Math.exp(-(2 * (a - level) + 1.4)));
-export function typedBelief(answers: readonly { level: number; right: boolean }[], top: number): { grid: number[]; p: number[]; median: number; spread: number } {
+export function typedBelief(answers: readonly { level: number; right: boolean; lucky?: number }[], top: number, prior?: { centre: number; sd: number }): { grid: number[]; p: number[]; median: number; spread: number } {
   const grid = Array.from({ length: 2 * (top + 1) + 1 }, (_, i) => i / 2);
-  const p = grid.map(() => 1);
+  const p = grid.map((a) => (prior ? Math.exp(-((a - prior.centre) ** 2) / (2 * prior.sd ** 2)) : 1));
   for (const x of answers)
     grid.forEach((a, i) => {
       const k = canWrite(x.level, a);
-      // knows it but slips in typing one time in eight; does not know it but happens to get it one time in twenty
-      const hit = k * 0.875 + (1 - k) * 0.05;
+      // knows it but slips one time in eight; does not know it but happens to get it: one time in twenty when typed,
+      // or the chance of a blind tap when the answer is tapped (`lucky`)
+      const hit = k * 0.875 + (1 - k) * (x.lucky ?? 0.05);
       p[i] *= x.right ? hit : 1 - hit;
     });
   const total = p.reduce((t, x) => t + x, 0);
@@ -251,17 +295,17 @@ export function typedBelief(answers: readonly { level: number; right: boolean }[
  * Spelling has five levels and asks close to the middle, so a level is confirmed; listening has seven and few
  * sentences, so it reaches further up to get to the top in time.
  */
-function typedNext(answers: readonly { level: number; right: boolean }[], start: number, top: number, least: number, most: number, reach: number): { level: number; done: boolean } {
+function typedNext(answers: readonly { level: number; right: boolean; lucky?: number }[], start: number, top: number, least: number, most: number, reach: number, near?: number): { level: number; done: boolean } {
   if (!answers.length) return { level: start, done: false };
-  const b = typedBelief(answers, top);
+  const b = typedBelief(answers, top, near ? { centre: start, sd: near } : undefined);
   return { level: Math.min(top, Math.max(1, Math.round(b.median + reach))), done: answers.length >= most || (answers.length >= least && b.spread <= 0.5) };
 }
 /** The level to report: never below `floor`, never the best guess. */
-function typedLevel(answers: readonly { level: number; right: boolean }[], top: number, floor: number): number {
+function typedLevel(answers: readonly { level: number; right: boolean; lucky?: number }[], top: number, floor: number, need = TYPED_NEED): number {
   const { grid, p } = typedBelief(answers, top);
   let level = floor;
   for (let l = floor + 1; l <= top; l++) if (p.reduce((t, x, i) => t + (grid[i] >= l ? x : 0), 0) >= TYPED_SURE) level = l;
-  while (level > floor && answers.filter((x) => x.right && x.level >= level).length < TYPED_NEED) level--;
+  while (level > floor && answers.filter((x) => x.right && x.level >= level).length < need) level--;
   return level;
 }
 
@@ -274,7 +318,10 @@ export class ListeningPlacement {
   private steps: { id: string; level: number; perfect: boolean }[] = [];
   private log: DictationRecord[] = [];
 
-  constructor(content: Dictation, start: number, history: readonly DictationRecord[]) {
+  private readonly limits: Limits;
+
+  constructor(content: Dictation, start: number, history: readonly DictationRecord[], limits: Limits = { least: LISTENING_LEAST, most: LISTENING_STEPS }) {
+    this.limits = limits;
     this.content = content;
     this.history = [...history];
     this.level = start;
@@ -291,7 +338,7 @@ export class ListeningPlacement {
   /** A sentence of the level wanted, else of the nearest level that still has one. */
   private load(): void {
     const used = new Set(this.steps.map((s) => s.id));
-    const next = typedNext(this.answers, this.level, Math.max(...this.ids), LISTENING_LEAST, LISTENING_STEPS, 0.5);
+    const next = typedNext(this.answers, this.level, Math.max(...this.ids), this.limits.least, this.limits.most, this.limits.reach ?? 0.5, this.limits.near);
     this.current = null;
     if (next.done) return;
     for (const level of [...this.ids].sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b)) {
@@ -335,7 +382,7 @@ export class ListeningPlacement {
   }
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
-    return this.finished ? { phase: "done", index: this.steps.length, total: LISTENING_STEPS, id: null } : { phase: "write", index: this.steps.length, total: LISTENING_STEPS, id: this.current!.id };
+    return this.finished ? { phase: "done", index: this.steps.length, total: this.limits.most, id: null } : { phase: "write", index: this.steps.length, total: this.limits.most, id: this.current!.id };
   }
 }
 
@@ -358,7 +405,10 @@ export class SpellingPlacement {
   private current: SpellWord | null = null;
   private steps: { word: string; level: number; correct: boolean }[] = [];
 
-  constructor(words: readonly SpellWord[], start: number) {
+  private readonly limits: Limits;
+
+  constructor(words: readonly SpellWord[], start: number, limits: Limits = { least: SPELLING_LEAST, most: SPELLING_STEPS }) {
+    this.limits = limits;
     this.words = words.filter((w) => w.level !== undefined).map((w) => ({ w, k: hash(`level-check|${w.id}`) })).sort((a, b) => a.k - b.k || (a.w.id < b.w.id ? -1 : 1)).map((x) => x.w);
     this.top = Math.max(1, ...this.words.map((w) => w.level!));
     this.level = Math.min(this.top, Math.max(1, start));
@@ -372,7 +422,7 @@ export class SpellingPlacement {
   /** A word of the level wanted, else of the nearest level that still has one. */
   private load(): void {
     const used = new Set(this.steps.map((s) => s.word));
-    const next = typedNext(this.answers, this.level, this.top, SPELLING_LEAST, SPELLING_STEPS, 0.25);
+    const next = typedNext(this.answers, this.level, this.top, this.limits.least, this.limits.most, this.limits.reach ?? 0.25, this.limits.near);
     this.current = null;
     if (next.done) return;
     const levels = Array.from({ length: this.top }, (_, i) => i + 1).sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b);
@@ -406,7 +456,7 @@ export class SpellingPlacement {
   }
 
   snapshot(): { phase: "write" | "done"; index: number; total: number; id: string | null } {
-    return this.finished ? { phase: "done", index: this.steps.length, total: SPELLING_STEPS, id: null } : { phase: "write", index: this.steps.length, total: SPELLING_STEPS, id: this.current!.id };
+    return this.finished ? { phase: "done", index: this.steps.length, total: this.limits.most, id: null } : { phase: "write", index: this.steps.length, total: this.limits.most, id: this.current!.id };
   }
 }
 
@@ -422,9 +472,11 @@ export interface GrammarPlacementView {
 }
 
 /**
- * The grammar part, by tapping only: first a noun and a verb to find (the basics, asked of everyone), then four
- * sentences on a staircase of levels, each either a kind of word to find or one wrong word to tap. A wide first
- * move, then single steps. The level is the highest one answered right.
+ * The grammar part, by tapping only: first a noun and a verb to find (the basics, asked of everyone), then
+ * GRAMMAR_LEAST to GRAMMAR_MOST sentences chosen by elimination, each either a kind of word to find or one wrong
+ * word to tap. A blind tap is right about one time in the number of words, and the belief counts a right answer
+ * for only what that leaves. The level is the highest one the answers make likely that also has two right answers
+ * at that level or above (see typedBelief): one lucky tap is never a level.
  */
 export class GrammarPlacement {
   private readonly items: GrammarItem[];
@@ -432,9 +484,15 @@ export class GrammarPlacement {
   private level: number;
   private current: GrammarItem | null = null;
   private basics: { id: string; correct: boolean }[] = [];
-  private steps: { id: string; level: number; correct: boolean }[] = [];
+  private steps: { id: string; level: number; correct: boolean; lucky: number }[] = [];
 
-  constructor(content: GrammarUse, start: number) {
+  private readonly limits: Limits;
+  private readonly need: number;
+
+  /** `need`: right answers at a level or above for that level (three in the full check; two in the quick one, which asks fewer). */
+  constructor(content: GrammarUse, start: number, limits: Limits = { least: GRAMMAR_LEAST, most: GRAMMAR_MOST }, need = GRAMMAR_NEED) {
+    this.limits = limits;
+    this.need = need;
     this.items = content.items.filter((it) => it.kind === "spot" || it.kind === "fix").map((it) => ({ it, k: hash(`level-check|${it.id}`) })).sort((a, b) => a.k - b.k || (a.it.id < b.it.id ? -1 : 1)).map((x) => x.it);
     this.top = Math.max(1, ...content.levels.map((l) => l.id));
     this.level = Math.min(this.top, Math.max(1, start));
@@ -445,12 +503,23 @@ export class GrammarPlacement {
     const used = new Set([...this.basics, ...this.steps].map((s) => s.id));
     const ask = GRAMMAR_BASICS[this.basics.length];
     const lowest = (pool: GrammarItem[]) => pool.sort((a, b) => a.level - b.level)[0] ?? null;
-    if (ask) this.current = lowest(this.items.filter((it) => it.kind === "spot" && it.ask === ask && !used.has(it.id)));
-    else this.current = this.items.find((it) => it.level === this.level && !used.has(it.id)) ?? null;
+    if (ask) return void (this.current = lowest(this.items.filter((it) => it.kind === "spot" && it.ask === ask && !used.has(it.id))));
+    const next = typedNext(this.answers, this.level, this.top, this.limits.least, this.limits.most, this.limits.reach ?? 0.5, this.limits.near);
+    this.current = null;
+    if (next.done) return;
+    const levels = Array.from({ length: this.top }, (_, i) => i + 1).sort((a, b) => Math.abs(a - next.level) - Math.abs(b - next.level) || a - b);
+    for (const level of levels) {
+      this.current = this.items.find((it) => it.level === level && !used.has(it.id)) ?? null;
+      if (this.current) break;
+    }
+  }
+
+  private get answers() {
+    return this.steps.map((s) => ({ level: s.level, right: s.correct, lucky: s.lucky }));
   }
 
   get finished(): boolean {
-    return this.basics.length + this.steps.length >= GRAMMAR_STEPS || !this.current;
+    return !this.current;
   }
 
   answer(tapped: number): void {
@@ -461,25 +530,20 @@ export class GrammarPlacement {
     const correct = it.kind === "spot" ? checkSpot(it, tapped) : tapped === fixParts(it).wrong;
     if (this.basics.length < GRAMMAR_BASICS.length) this.basics.push({ id: it.id, correct });
     else {
-      this.steps.push({ id: it.id, level: it.level, correct });
-      this.level = Math.min(this.top, Math.max(1, this.level + (correct ? 1 : -1) * (GRAMMAR_MOVES[this.steps.length - 1] ?? 1)));
+      this.steps.push({ id: it.id, level: it.level, correct, lucky: 1 / words.length });
     }
     this.load();
   }
 
-  result(): { level: number; scale: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] } {
-    // where the staircase ended, never above the highest level answered right: a lucky tap high up followed by a miss
-    // does not set the level (sim-english@1: "highest answered right" placed most learners half a level high). A
-    // learner who cannot name a noun or a verb keeps the level found and is sent to naming words first (streams.ts).
-    const right = Math.max(1, ...this.steps.filter((s) => s.correct).map((s) => s.level));
-    const level = Math.min(right, this.level);
-    return { level: Math.max(1, level), scale: SCALE, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: [...this.steps] };
+  result(): { level: number; scale: number; check: number; basics: { right: number; asked: number }; steps: { id: string; level: number; correct: boolean }[] } {
+    // A learner who cannot name a noun or a verb keeps the level found and is sent to naming words first (streams.ts).
+    return { level: typedLevel(this.answers, this.top, 1, this.need), scale: SCALE, check: TYPED_CHECK, basics: { right: this.basics.filter((b) => b.correct).length, asked: this.basics.length }, steps: this.steps.map(({ id, level, correct }) => ({ id, level, correct })) };
   }
 
   snapshot(): GrammarPlacementView {
     const it = this.current;
     const index = this.basics.length + this.steps.length;
-    if (this.finished || !it) return { phase: "done", index, total: GRAMMAR_STEPS, id: null, words: [], task: null };
-    return it.kind === "spot" ? { phase: "ask", index, total: GRAMMAR_STEPS, id: it.id, words: spotWords(it), task: { kind: "spot", ask: it.ask! } } : { phase: "ask", index, total: GRAMMAR_STEPS, id: it.id, words: fixParts(it).words, task: { kind: "fix" } };
+    if (this.finished || !it) return { phase: "done", index, total: GRAMMAR_BASICS.length + this.limits.most, id: null, words: [], task: null };
+    return it.kind === "spot" ? { phase: "ask", index, total: GRAMMAR_BASICS.length + this.limits.most, id: it.id, words: spotWords(it), task: { kind: "spot", ask: it.ask! } } : { phase: "ask", index, total: GRAMMAR_BASICS.length + this.limits.most, id: it.id, words: fixParts(it).words, task: { kind: "fix" } };
   }
 }
