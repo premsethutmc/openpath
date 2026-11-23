@@ -553,6 +553,25 @@ export interface QualificationEvent {
   estimates_allowed?: boolean;
 }
 
+/**
+ * Where a learner's estimates start (starting-point@1). Without one, every capability starts at the framework's
+ * prior, the middle of the scale, whoever the learner is. A placement check knows better than that.
+ *
+ * It is not evidence. It moves only capabilities that have no direct evidence yet, and only their starting mean and
+ * spread: it adds no observation, no context and no demonstration, so nothing can become "shown" or "mastered" from
+ * it, and the first real answers pull the estimate wherever they point. A later starting point replaces an earlier
+ * one for capabilities still without evidence.
+ */
+export interface StartingPointEvent {
+  kind: "starting_point";
+  id: string;
+  at: string;
+  /** What it came from, for the record ("find-my-level"). */
+  source: string;
+  /** Strand id ("EN.VOC") → where its capabilities start, on the framework's scale. */
+  strands: Record<string, { mean: number; sd: number }>;
+}
+
 export interface RevokeEvent {
   kind: "revoke";
   id: string;
@@ -574,7 +593,7 @@ export interface EssayEvent {
   record: EssayRecord;
 }
 
-export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent | EssayEvent;
+export type LedgerEvent = EvidenceEvent | ProposalEvent | QualificationEvent | RevokeEvent | ProvenanceEvent | EssayEvent | StartingPointEvent;
 
 export type Verdict = "accepted" | "held" | "rejected" | "revoked" | "ignored";
 

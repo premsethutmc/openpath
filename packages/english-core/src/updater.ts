@@ -15,7 +15,7 @@ import { applyDirect, createComposite, leafView } from "./composite.ts";
 import { type ContentIndex, binaryParams, contextOf, familyOf, itemParams, itemVersion, scoreCode, wordCount } from "./content.ts";
 import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency, instructionLike, isBandCriterion, isV2, parseShortProposal, shortCorrect } from "./freeform.ts";
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
-import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
+import { type FrameworkIndex, misconceptionIds, strandOf } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
 import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, PASSAGE_POLICY, ASSISTED_POLICY, isIndependentProvenance } from "./types.ts";
 
@@ -150,6 +150,18 @@ export class Ledger {
         return this.record([], event);
       case "revoke":
         return this.record([], event);
+      case "starting_point": {
+        // starting-point@1: where estimates start for capabilities with no direct evidence yet; never evidence
+        const { min, max } = this.ctx.index.framework.scale;
+        for (const [id, node] of Object.entries(this.composite.nodes)) {
+          const start = event.strands[strandOf(id)];
+          if (!start || node.directN > 0 || !(start.sd > 0) || !Number.isFinite(start.mean)) continue;
+          const at = { mean: Math.min(max, Math.max(min, start.mean)), variance: start.sd * start.sd };
+          node.combined = { ...at };
+          node.direct = { ...at };
+        }
+        return this.record([], event);
+      }
       case "assisted_response":
         this.helped.add(event.item.id);
         return this.record([], event);
