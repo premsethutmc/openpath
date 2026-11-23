@@ -65,7 +65,7 @@ test("Word check: answer, say 'I don't know', get a sample score, and find it ke
     await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
   }
   await page.getByRole("heading", { name: "6 of 12 meanings correct" }).waitFor();
-  await page.getByText("Suggested practice: Level 5 of 8.").waitFor();
+  await page.getByText("Knows words up to level 4 of 8.").waitFor();
   await shot(page, "2-result");
   await page.getByText("Advanced vocabulary in context was not tested.", { exact: false }).waitFor();
   await page.getByRole("button", { name: "Try 3 harder words" }).click();
