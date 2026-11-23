@@ -64,8 +64,8 @@ test("Word check: answer, say 'I don't know', get a sample score, and find it ke
     else await page.getByRole("button", { name: "I don't know this word" }).click();
     await page.waitForFunction((w) => document.querySelector("#vocab-word")?.textContent !== w, word);
   }
-  await page.getByRole("heading", { name: "6 of 12 meanings correct" }).waitFor();
-  await page.getByText("Knows words up to level 4 of 8.").waitFor();
+  await page.getByRole("heading", { name: "12 of 18 meanings correct" }).waitFor();
+  await page.getByText("Your words reach advanced reading words (level 4 of 8).").waitFor();
   await shot(page, "2-result");
   await page.getByText("Advanced vocabulary in context was not tested.", { exact: false }).waitFor();
   await page.getByRole("button", { name: "Try 3 harder words" }).click();
@@ -87,9 +87,9 @@ test("Word check: answer, say 'I don't know', get a sample score, and find it ke
   await page.getByRole("heading", { name: "3 of 3 correct in context" }).waitFor();
   await page.getByText("She gave reasons on both sides; there is no open opposition.", { exact: false }).waitFor();
   await page.getByRole("button", { name: "Back to results", exact: true }).click();
-  await page.getByRole("heading", { name: "6 of 12 meanings correct" }).waitFor();
+  await page.getByRole("heading", { name: "12 of 18 meanings correct" }).waitFor();
   await page.reload();
-  await page.getByText("Last time: 6 of 12 correct").waitFor();
+  await page.getByText("Last time: 12 of 18 correct").waitFor();
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

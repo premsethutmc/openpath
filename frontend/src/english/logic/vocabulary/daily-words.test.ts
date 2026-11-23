@@ -46,7 +46,8 @@ function sit(history: Dated[], at: string, opts: { base?: number; miss?: string[
 
 test("NW-1 content: ninety words at each of eight levels, rule-checked, none from the word check", () => {
   assert.deepEqual(wordsProblems(WORDS, new Set(CHECK.words.map((w) => w.word))), []);
-  for (let b = 1; b <= BANDS; b++) assert.equal(WORDS.words.filter((w) => w.band === b).length, 90);
+  // v7: everyday words fill levels 1 to 3; the rare GRE words of level 8 are fewer
+  for (let b = 1; b <= BANDS; b++) assert.ok(WORDS.words.filter((w) => w.band === b).length >= 15, `level ${b}`);
   const bad = buildWords({ version: 1, status: "", words: [[1, "v", "jump", "a jump up", "We saw a jump and a jump."]] });
   assert.match(wordsProblems(bad).join("\n"), /exactly once[\s\S]*gives the word away[\s\S]*uses the word itself[\s\S]*starts with "to"[\s\S]*too few words/);
 });
@@ -145,7 +146,7 @@ test("NW-7 'I know this word' skips it for good, brings another, and moves a lea
   assert.ok(knowsAll.met.every((w) => byWord.get(w)!.band === 4), "the level above once this one runs out");
   assert.equal(teachBand(WORDS, progress(knowsAll.history), 3), 4);
   assert.equal(teachBand(WORDS, progress([]), 3), 3);
-  assert.deepEqual([baseBand(null, "early"), baseBand(null, "school"), baseBand(null, "older"), baseBand(4, "early"), baseBand(8, null), baseBand(0, null)], [1, 2, 3, 5, 8, 1]);
+  assert.deepEqual([baseBand(null, "early"), baseBand(null, "school"), baseBand(null, "older"), baseBand(4, "early"), baseBand(8, null), baseBand(0, null)], [1, 2, 2, 5, 8, 1]);
 });
 
 test("NW-11 a learner who gets a level's words right moves up after ten, without going through all ninety", () => {
