@@ -19,6 +19,7 @@ import { type PlanStep, patternTitle } from "../logic/plan.ts";
 import { type PatternPlan, spellingPlan } from "../logic/select.ts";
 import { dueWords } from "../logic/state.ts";
 import { LEVEL_NAMES, sourceProgress } from "../logic/spelling.ts";
+import { learnerPicture } from "../logic/streams/picture.ts";
 import { latestResult, levelLine } from "../logic/vocabulary/size-check.ts";
 import { NEW_PER_DAY, summary as wordsSummary } from "../logic/vocabulary/daily-words.ts";
 import { dictationSummary } from "../logic/dictation/dictation.ts";
@@ -379,6 +380,8 @@ function LevelPanel({ learner, child, onLevelCheck, onGo }: { learner: Learner; 
       </section>
     );
   const rows = streamRows(learner, learner.clock());
+  const view = learnerPicture(learner, learner.clock());
+  const sure = new Map(view.parts.map((p) => [p.id, p.note]));
   const left = rows.filter((r) => !r.doneToday && !r.idle).length;
   return (
     <section className="hub-card plain levels" aria-labelledby="levels-title">
@@ -386,6 +389,11 @@ function LevelPanel({ learner, child, onLevelCheck, onGo }: { learner: Learner; 
         <span aria-hidden="true">🧭 </span>Your English today
       </h2>
       <p className="small">{left ? (child ? "Pick any; a little of each is best." : "Your level in each stream, and the next thing to do. Pick any; a little of each is best.") : "You have done something in every stream today. Well done!"}</p>
+      {!child && view.overall !== null && (
+        <p className="small" data-overall={view.overall}>
+          <b>Overall, from the quick check: level {view.overall} of 8</b> ({view.overallSure}{view.low < view.high ? `: could be ${view.low} to ${view.high}` : ""}).
+        </p>
+      )}
       <ul className="stream-rows">
         {rows.map((r) => (
           <li key={r.id} data-stream={r.id} data-done={r.doneToday}>
@@ -394,7 +402,12 @@ function LevelPanel({ learner, child, onLevelCheck, onGo }: { learner: Learner; 
             </span>
             <div>
               <b>{r.name}</b>
-              {!child && <p className="small stream-level">{r.level}</p>}
+              {!child && (
+                <p className="small stream-level">
+                  {r.level}
+                  <span className="stream-sure" data-sure> · {sure.get(r.id)}</span>
+                </p>
+              )}
               <p className="small">{r.doneToday ? `✓ Done today${r.id === "words" ? "" : ` · next: ${r.next}`}` : r.next}</p>
             </div>
             <button type="button" className="secondary" aria-label={`Today: ${r.name}`} disabled={r.idle} onClick={() => onGo(r.id, r.open, r.step)}>
