@@ -1,6 +1,6 @@
 /** foundations@1: the "Start here" part of a new skill's first lesson: the ideas the lesson relies on, with a picture. */
 import { useState } from "react";
-import { foundationsOf, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
+import { foundationsOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 const S = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 const A = { ...S, stroke: "var(--sh-accent, #e8862a)", strokeWidth: 3 };
@@ -39,6 +39,26 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
   );
 }
 
+/** foundation-practice@1: the idea's own questions, one at a time. A wrong choice says what went wrong and can be tried again. */
+export function FoundationPractice({ questions }: { questions: FoundationQuestion[] }) {
+  const [i, setI] = useState(0);
+  const [tried, setTried] = useState<number[]>([]);
+  const [firstTry, setFirstTry] = useState(0);
+  if (i >= questions.length) return <section className="sh-card sh-done" role="status"><h3>You have got the idea</h3><p>{firstTry} of {questions.length} right the first time. The lesson is next.</p></section>;
+  const q = questions[i], last = tried[tried.length - 1], right = last === q.answer;
+  return (
+    <section className="sh-card sh-practice" data-foundation-practice>
+      <p className="sh-eyebrow">Now you try · {i + 1} of {questions.length}</p>
+      <h3>{q.question}</h3>
+      <div className="sh-options">
+        {shownOrder(q).map((k) => <button key={k} type="button" className={`sh-option${tried.includes(k) ? (k === q.answer ? " right" : " wrong") : ""}`} disabled={right || tried.includes(k)} onClick={() => setTried([...tried, k])}>{q.options[k]}</button>)}
+      </div>
+      {last !== undefined && <p className={right ? "sh-feedback good" : "sh-feedback"} role="status">{right ? `Yes. ${q.why}` : `Not quite. ${q.wrong[last] || "Look at the idea again and try another choice."}`}</p>}
+      {right && <button type="button" className="sh-show" onClick={() => { if (tried.length === 1) setFirstTry(firstTry + 1); setTried([]); setI(i + 1); }}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
+    </section>
+  );
+}
+
 /** In front of a new skill's first lesson: nothing when the skill has no start-here teaching. */
 export function StartHere({ competency }: { competency: string }) {
   const all = foundationsOf(competency);
@@ -46,7 +66,7 @@ export function StartHere({ competency }: { competency: string }) {
   return (
     <div className="sh" data-start-here={competency}>
       <p className="sh-eyebrow">Start here</p>
-      {all.flatMap((f) => f.screens).map((s, i) => <FoundationCard key={i} s={s} />)}
+      {all.map((f, k) => <div className="sh" key={k}>{f.screens.map((s, i) => <FoundationCard key={i} s={s} />)}{f.practice?.length ? <FoundationPractice questions={f.practice} /> : null}</div>)}
     </div>
   );
 }

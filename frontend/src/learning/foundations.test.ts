@@ -26,3 +26,22 @@ test("trigonometry starts with what sin, cos and tan are", () => {
   assert.ok(f.length > 0 && all.includes("opposite") && all.includes("hypotenuse") && all.includes("adjacent"));
   assert.ok(f.some((x) => x.screens.some((s) => s.picture === "right-triangle")));
 });
+
+test("every start-here idea has practice a child can check: four choices, one right, feedback on each wrong one", async () => {
+  const { shownOrder } = await import("../../../packages/learning/src/foundations");
+  let n = 0;
+  for (const f of foundations) {
+    assert.ok(f.practice && f.practice.length >= 3, `${f.competency}: ${f.concept} has no practice`);
+    for (const q of f.practice!) {
+      n++;
+      const at = `${f.competency}: ${q.question}`;
+      assert.equal(q.options.length, 4, at);
+      assert.equal(new Set(q.options.map((o) => o.trim().toLowerCase())).size, 4, at);
+      assert.ok(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4 && q.why.trim().length > 5, at);
+      assert.ok(q.wrong.length === 4 && q.wrong.every((w, i) => (i === q.answer ? true : w.trim().length > 5)), at);
+      assert.ok(!q.options.some((x) => /all of the above|none of the(se| above)/i.test(x)) && !/undefined|NaN|\\\(|\*\*/.test([q.question, ...q.options, q.why, ...q.wrong].join(" ")), at);
+      assert.deepEqual([...shownOrder(q)].sort(), [0, 1, 2, 3], at);
+    }
+  }
+  assert.ok(n >= 500);
+});
