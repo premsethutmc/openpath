@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "e0ff2c8f73e597e150b859549d91b4d49069077d2fde6995ecff8cee4f15a9f8",
+ "sha256": "595a1695bd23ab93bab7b8ef3dee8125d570072391cd12a74c7c93da0a83df39",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -147,8 +147,8 @@
   "packages/english-core/src/planner.ts": "145e7cd36291b58270d6a22931f8dd147cc47feb247a7e76b3b51f0b59e8a74f",
   "packages/english-core/src/retention.ts": "f76c366044eee6c575dad2734b1a29bb8b166b7243ff0aa84dede8222ee6f830",
   "packages/english-core/src/rule-evidence.ts": "1a19d5f356a1efa67da16eece9f64e30c569cf324ae8b35a1d0b505064a12035",
-  "packages/english-core/src/types.ts": "02c13682a8d9349bba963137729902f2e6df032b5a92abcccc029cf8199f5581",
-  "packages/english-core/src/updater.ts": "22c1643e890905d45ae0214f70d2f3d4d0ce55815a4aeaf9110ee28f28b90e68",
+  "packages/english-core/src/types.ts": "746b1117f4812fe098275022257f72b9f5e4cd373275fa9df70a2cc44814ac2c",
+  "packages/english-core/src/updater.ts": "26c6e3a58ee0ad841621f80b16b8963612b5633734dbc6a7c595d2f2b9915c9f",
   "packages/english-core/src/verification.ts": "e21974aac262e69d2fbc9392f9f403ecf3b85bc79d1d9a466871b84e841ac97b",
   "packages/learning/src/acceptance-gate.ts": "dd05659d26a2857d70936a3e945320eb3e94211418f6c1fceddc953639887b09",
   "packages/learning/src/answer-core.ts": "22256345b41a5f86d5ae7564b56123c2d50b45087ab8d45e4200f085d6a157ec",
