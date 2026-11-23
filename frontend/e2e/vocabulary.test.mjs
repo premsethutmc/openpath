@@ -54,7 +54,7 @@ test("Word check: answer, say 'I don't know', get a sample score, and find it ke
     assert.ok(k, `a word of the check: ${word}`);
     assert.ok(!asked.includes(word), "no word twice");
     asked.push(word);
-    assert.equal(await page.locator(".options .option").count(), 4, "three meanings and 'I don't know'");
+    assert.equal(await page.locator(".options .option").count(), 5, "four meanings and 'I don't know'");
     if (i === 1) {
       const { sw, w } = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, w: window.innerWidth }));
       assert.ok(sw <= w);
