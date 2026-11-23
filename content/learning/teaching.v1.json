@@ -1379,7 +1379,7 @@
    "kind": "card",
    "competency": "MATH.calculus.continuity",
    "title": "Test continuity",
-   "hash": "51208386",
+   "hash": "d975283e",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1476,7 +1476,7 @@
    "kind": "card",
    "competency": "MATH.calculus.differential-equations",
    "title": "Solve elementary differential equations",
-   "hash": "72274d49",
+   "hash": "0f0d26bb",
    "source": "rule",
    "from": "lesson",
    "classes": [

@@ -4503,7 +4503,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2.",
-        "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx."
+        "The y on the right was ignored and only (−3x − 1) was integrated; divide by y first: dy/y = (−3x − 1) dx."
        ],
        "math": [
         "Not −3x²/2 − x + 2, but 2e^(−3x²/2 − x)"
@@ -6389,7 +6389,7 @@
        "title": "Vertically opposite angles are equal",
        "text": [
         "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
-        "Go round: if one angle is 50°, the next is 180° − 50° = 130°, and the one after that is 180° − 130° = 50° again. So opposite angles are equal, and all four add to 360°."
+        "Go round: if one angle is 128°, the next is 180° − 128° = 52°, and the one after that is 180° − 52° = 128° again. So opposite angles are equal, and all four add to 360°."
        ],
        "math": [
         "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
@@ -11192,7 +11192,7 @@
        "title": "A common wrong answer",
        "text": [
         "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3.",
-        "The ratio was turned over, giving 3: the number in the sine goes on top, since sin(x)/(3x) = (1/3) × sin(x)/x, which tends to 1/3."
+        "The ratio was turned over, giving 3: sin(x)/(3x) = (1/3) × sin(x)/x, and sin θ/θ tends to 1 as θ tends to 0, so the limit is 1/3."
        ],
        "math": [
         "Not 3, but 1/3"
