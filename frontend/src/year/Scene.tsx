@@ -7,7 +7,8 @@
  *
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
-import { useMemo, useRef, useState, type JSX, type PointerEvent } from "react";
+import { createElement, useMemo, useRef, useState, type JSX, type PointerEvent, type ReactNode } from "react";
+import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { SCENE_BOX, check, controls, describe, draw, draggable as follows, grip, initial, met, nudge, pointer, readout, set, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 function shape(s: Shape, i: number): JSX.Element {
@@ -93,6 +94,16 @@ export function SceneFigure({ scene, state, label }: { scene: Scene; state?: Sce
   return (
     <figure className="scene scene-figure" data-scene-figure={scene.kind}>
       <svg viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`} role="img" aria-label={label}>{draw(scene, { ...initial(scene), ...state }).map(shape)}</svg>
+    </figure>
+  );
+}
+
+/** figure-marks@1: a question's picture, drawn from the engine's marks (figure-marks.ts). The one place they are drawn. */
+const mark = (k: Mark | string | number, i: number): ReactNode => (typeof k === "object" ? createElement(k.tag, { ...k.at, key: i }, ...k.kids.map(mark)) : k);
+export function FigureMarks({ w, h, marks, label }: { w: number; h: number; marks: Mark[]; label: string }) {
+  return (
+    <figure className="figure" aria-label={label} role="img">
+      <svg viewBox={`0 0 ${w} ${h}`} width="100%" style={{ maxWidth: Math.min(w, 420) }} aria-hidden="true">{marks.map(mark)}</svg>
     </figure>
   );
 }

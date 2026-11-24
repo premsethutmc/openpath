@@ -1,6 +1,8 @@
 /** foundations@1: every start-here entry belongs to a real skill and is complete enough to teach from. */
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { readFileSync } from "node:fs";
+import { figureDraw } from "../../../packages/learning/src/figure-marks";
 import { moduleFor } from "../../../packages/learning/src/content";
 import { foundations, foundationsOf, PICTURES } from "../../../packages/learning/src/foundations";
 
@@ -90,7 +92,7 @@ test("a touch on a figure lands on the part under it (the side, the point, the e
 });
 
 test("one picture system: pictures are drawn by the scene engine, not by new components", async () => {
-  const { readdirSync, readFileSync, statSync } = await import("node:fs");
+  const { readdirSync, statSync } = await import("node:fs");
   const root = new URL("../", import.meta.url).pathname;
   // the files that draw today: the engine's player, and the older question-figure and app-chrome drawings. A new picture
   // or interaction is a scene description (packages/learning/src/scene.ts), not a new file here: do not add to this list.
@@ -143,4 +145,12 @@ test("picture-decision@1: every idea either has a picture or says why it has non
   }
   // most ideas need no picture: that is a decision, not a gap
   assert.ok(foundations.filter((f) => f.show?.decision === "none").length > foundations.filter((f) => !f.show).length);
+});
+
+test("figure-marks@1: a question's picture is worked out in the engine and drawn by its one player", () => {
+  const fig = readFileSync(new URL("../year/Figure.tsx", import.meta.url), "utf8");
+  assert.ok(!fig.includes("<svg") && fig.includes("figureDraw(v)"));
+  const d = figureDraw({ type: "clock", h: 3, m: 30 });
+  assert.ok(d && d.as === "marks" && d.marks.some((k) => k.tag === "line"));
+  assert.equal(figureDraw({ type: "table", head: [], rows: [] }), null);
 });
