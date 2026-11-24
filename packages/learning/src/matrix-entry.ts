@@ -23,3 +23,17 @@ export function gridOf(text: string): Grid | null {
   const rows = [...t.matchAll(/\[([^[\]]*)\]/g)].map((m) => m[1].split(",").map((c) => c.trim()));
   return rows.length <= MAX_SIDE && rows[0].length <= MAX_SIDE && rows.every((r) => r.length === rows[0].length && r.every((c) => c !== "")) ? rows : null;
 }
+
+const LIT = String.raw`\[\[[^[\]]*\](?:,\s*\[[^[\]]*\])*\]`;
+const RULES: [RegExp, string][] = [
+  [new RegExp(String.raw`, written as (?:a column )?${LIT}`, "g"), ""],
+  [/, written as a matrix/g, ""],
+  [new RegExp(String.raw` Write \S+ as ${LIT}, row by row\.`, "g"), ""],
+  [new RegExp(String.raw`Write the product as ${LIT}`, "g"), "Write the product"],
+  [new RegExp(String.raw` as a column matrix ${LIT}`, "g"), " as a column matrix"],
+  [new RegExp(String.raw`, e\.g\. ${LIT}\.\)`, "g"), ".)"],
+];
+/** grid-wording@1: a matrix question as it is asked when the answer is built in the grid. The part that says how to TYPE
+ *  the matrix ("written as [[a, b], [c, d]]") is left out: there are no brackets to type. Everything else is unchanged,
+ *  including which row comes first where the question says so. */
+export const gridWording = (prompt: string) => RULES.reduce((t, [re, to]) => t.replace(re, to), prompt);
