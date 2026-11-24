@@ -17,7 +17,6 @@
   "year/icons.tsx"
  ],
  "toMove": [
-  "year/Figure.tsx",
   "year/Learn.tsx",
   "year/WhereUsed.tsx",
   "curriculum/TeachingPrimitives.tsx",
