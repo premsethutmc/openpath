@@ -13,8 +13,13 @@ export function FoundationPicture({ kind }: { kind: Picture }) {
   return <SceneFigure scene={scene} state={state} label={kind.replace(/-/g, " ")} />;
 }
 
+/** steps-everywhere@1: a generated lesson's worked question: the question, then each line of working in its own box. */
+export function SteppedMath({ lines }: { lines: string[] }) {
+  return <div className="formula stepped" data-stepped><p className="sh-ask">{mx(lines[0])}</p><ol>{lines.slice(1).map((m, k) => <li className="sh-step" key={k}><p className="sh-step-do"><span className="sh-step-n">Step {k + 1}</span></p><div className="sh-step-lines"><div>{mx(m)}</div></div></li>)}</ol></div>;
+}
+
 /** break-it-down@1: a worked problem, one step at a time. Each step can show its reason; one button shows them all. */
-function Steps({ steps }: { steps: NonNullable<FoundationScreen["steps"]> }) {
+function Steps({ steps, cases }: { steps: NonNullable<FoundationScreen["steps"]>; cases?: boolean }) {
   const [open, setOpen] = useState<boolean[]>(() => steps.map(() => false));
   const all = open.every(Boolean);
   return (
@@ -23,7 +28,7 @@ function Steps({ steps }: { steps: NonNullable<FoundationScreen["steps"]> }) {
       <ol>
         {steps.map((st, i) => (
           <li key={i} className="sh-step">
-            <p className="sh-step-do"><span className="sh-step-n">Step {i + 1}</span> {st.do}</p>
+            <p className="sh-step-do"><span className="sh-step-n">{cases ? "Example" : "Step"} {i + 1}</span> {st.do}</p>
             <div className="sh-step-lines">{st.lines.map((l, j) => <div key={j}>{l}</div>)}</div>
             {open[i] ? <div className="sh-why" data-why>{st.why.map((w, j) => <p key={j}>{w}</p>)}</div> : null}
             <button type="button" className="sh-why-btn" aria-expanded={open[i]} onClick={() => setOpen(open.map((o, j) => (j === i ? !o : o)))}>{open[i] ? "Hide" : "Why?"}</button>
@@ -44,7 +49,7 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
       {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
-      {s.steps?.length ? <Steps steps={s.steps} /> : null}
+      {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} /> : null}
       {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{mx(t)}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(t)}</div>)}</div> : null}
       {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(s.check.question)}</p>{shown ? <p className="sh-answer">{mx(s.check.answer)}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}

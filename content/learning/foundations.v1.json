@@ -34391,17 +34391,60 @@
       "Now stand on a balcony and look down at a ball on the ground. The angle through which you lower your eyes from the horizontal is the angle of depression.",
       "In both cases the height, the distance along the ground and the line of sight make a right triangle. The line of sight is its hypotenuse. (We usually ignore the height of the person's eyes unless it is given.)"
      ],
-     "example": [
-      "You stand 10 m from a tree. The angle of elevation of its top is 45°.",
-      "Opposite = the tree's height h. Adjacent = 10 m.",
-      "tan 45° = h ÷ 10, and tan 45° = 1",
-      "So h = 10 m."
-     ],
      "check": {
       "question": "From a bridge you look down at a boat. Is the angle between the horizontal and your line of sight an angle of elevation or of depression?",
       "answer": "An angle of depression"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "You stand 10 m from a tree. The angle of elevation of its top is 45°. How tall is the tree?",
+     "steps": [
+      {
+       "do": "See the right triangle.",
+       "lines": [
+        "Across the ground: 10 m",
+        "Straight up: the height h"
+       ],
+       "why": [
+        "The ground is flat and the tree stands straight up, so they meet at a right angle. Your line of sight to the top is the slanting third side.",
+        "The angle of elevation is the angle at your feet, between the ground and your line of sight."
+       ]
+      },
+      {
+       "do": "Name the two sides you care about.",
+       "lines": [
+        "Opposite = h",
+        "Adjacent = 10 m"
+       ],
+       "why": [
+        "From the 45° angle, the tree is across from you: opposite. The ground is next to the angle: adjacent.",
+        "The slanting line of sight is the hypotenuse. We neither know it nor want it."
+       ]
+      },
+      {
+       "do": "Choose the ratio that uses those two sides.",
+       "lines": [
+        "tan 45° = h ÷ 10"
+       ],
+       "why": [
+        "tan is opposite ÷ adjacent, exactly the two sides in this problem. sin and cos both need the hypotenuse, which we do not have."
+       ]
+      },
+      {
+       "do": "Put in the value of tan 45° and find h.",
+       "lines": [
+        "tan 45° = 1",
+        "1 = h ÷ 10",
+        "h = 10 m"
+       ],
+       "why": [
+        "tan 45° is 1: at 45° the two short sides of the triangle are equal.",
+        "If h ÷ 10 is 1, then h must be 10. Multiply both sides by 10 to see it."
+       ]
+      }
+     ],
+     "after": [
+      "Strictly, this is the height above your eye level. Questions usually tell you to ignore your own height, or give it so that you can add it."
+     ]
     }
    ],
    "practice": [
@@ -34613,16 +34656,45 @@
       "In a right triangle, opposite² + adjacent² = hypotenuse². Divide every term by hypotenuse². You get (opposite ÷ hypotenuse)² + (adjacent ÷ hypotenuse)² = 1.",
       "But opposite ÷ hypotenuse is sin θ and adjacent ÷ hypotenuse is cos θ. So sin²θ + cos²θ = 1, whatever the angle θ is."
      ],
-     "example": [
-      "Triangle 3, 4, 5 with θ facing the side 3: sin θ = 3/5, cos θ = 4/5",
-      "sin²θ = 9/25 and cos²θ = 16/25",
-      "9/25 + 16/25 = 25/25 = 1"
-     ],
      "check": {
       "question": "For some angle, sin²θ = 0.36. What is cos²θ?",
       "answer": "0.64 (because they add up to 1)"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "Check that sin²θ + cos²θ = 1 in the 3, 4, 5 triangle, with θ facing the side 3.",
+     "steps": [
+      {
+       "do": "Write sin θ and cos θ.",
+       "lines": [
+        "sin θ = 3/5",
+        "cos θ = 4/5"
+       ],
+       "why": [
+        "sin is opposite ÷ hypotenuse = 3 ÷ 5. cos is adjacent ÷ hypotenuse = 4 ÷ 5."
+       ]
+      },
+      {
+       "do": "Square each one.",
+       "lines": [
+        "sin²θ = 3/5 × 3/5 = 9/25",
+        "cos²θ = 4/5 × 4/5 = 16/25"
+       ],
+       "why": [
+        "Squaring means multiplying a number by itself. For a fraction, square the top and square the bottom."
+       ]
+      },
+      {
+       "do": "Add them.",
+       "lines": [
+        "9/25 + 16/25 = 25/25",
+        "= 1"
+       ],
+       "why": [
+        "The bottoms are the same, so just add the tops: 9 + 16 = 25. And 25 out of 25 is one whole.",
+        "It is no accident. 9 + 16 = 25 is 3² + 4² = 5², the rule of Pythagoras for this triangle. The identity is Pythagoras written with sin and cos, which is why it works for every angle."
+       ]
+      }
+     ]
     },
     {
      "title": "Two more identities from the same triangle",
@@ -34631,16 +34703,45 @@
       "opposite ÷ adjacent is tan θ, and hypotenuse ÷ adjacent is sec θ. So tan²θ + 1 = sec²θ, which is the same as sec²θ − tan²θ = 1.",
       "Dividing by opposite² instead gives 1 + cot²θ = cosec²θ, the same as cosec²θ − cot²θ = 1. All three identities are Pythagoras' theorem in different clothes."
      ],
-     "example": [
-      "Triangle 3, 4, 5 with θ facing the side 3: tan θ = 3/4, sec θ = 5/4",
-      "sec²θ = 25/16 and tan²θ = 9/16",
-      "sec²θ − tan²θ = 25/16 − 9/16 = 16/16 = 1"
-     ],
      "check": {
       "question": "If tan²θ = 3, what is sec²θ?",
       "answer": "4 (sec²θ = 1 + tan²θ)"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "Check that sec²θ − tan²θ = 1 in the 3, 4, 5 triangle, with θ facing the side 3.",
+     "steps": [
+      {
+       "do": "Write tan θ and sec θ.",
+       "lines": [
+        "tan θ = 3/4",
+        "sec θ = 5/4"
+       ],
+       "why": [
+        "tan is opposite ÷ adjacent = 3 ÷ 4. sec is cos turned upside down: cos θ = 4/5, so sec θ = 5/4."
+       ]
+      },
+      {
+       "do": "Square each one.",
+       "lines": [
+        "sec²θ = 25/16",
+        "tan²θ = 9/16"
+       ],
+       "why": [
+        "Square the top and the bottom: 5² = 25, 3² = 9 and 4² = 16."
+       ]
+      },
+      {
+       "do": "Subtract.",
+       "lines": [
+        "25/16 − 9/16 = 16/16",
+        "= 1"
+       ],
+       "why": [
+        "Same bottoms, so subtract the tops: 25 − 9 = 16. And 16 out of 16 is one whole.",
+        "Again this is Pythagoras: 5² − 3² = 4², with every term divided by 4²."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -34870,15 +34971,45 @@
       "Careful: the small −1 here does not mean 'one divided by'. 1 ÷ sin x is cosec x, a different thing.",
       "There is a difficulty. Many angles have the same sine: sin 30° = 1/2 and sin 150° = 1/2. A function must give one answer, so everyone agrees to pick the angle from one fixed stretch of angles. The angle picked is called the principal value."
      ],
-     "example": [
-      "sin 30° = 1/2, so sin⁻¹(1/2) = 30° = π/6",
-      "tan 45° = 1, so tan⁻¹(1) = 45° = π/4",
-      "cos 60° = 1/2, so cos⁻¹(1/2) = 60° = π/3"
-     ],
      "check": {
       "question": "sin 90° = 1. What is sin⁻¹(1)?",
       "answer": "90°, that is π/2"
-     }
+     },
+     "ask": "Find sin⁻¹(1/2), tan⁻¹(1) and cos⁻¹(1/2).",
+     "steps": [
+      {
+       "do": "sin⁻¹(1/2): which angle has sine 1/2?",
+       "lines": [
+        "sin 30° = 1/2",
+        "sin⁻¹(1/2) = 30° = π/6"
+       ],
+       "why": [
+        "sin⁻¹ asks the question backwards. Not \"what is the sine of this angle?\" but \"which angle has this sine?\".",
+        "The small −1 does not mean 1 ÷ sin. It only means \"go backwards\". 30° is π/6 in radians because 180° is π."
+       ]
+      },
+      {
+       "do": "tan⁻¹(1): which angle has tangent 1?",
+       "lines": [
+        "tan 45° = 1",
+        "tan⁻¹(1) = 45° = π/4"
+       ],
+       "why": [
+        "At 45° the opposite and adjacent sides are equal, so their division is 1."
+       ]
+      },
+      {
+       "do": "cos⁻¹(1/2): which angle has cosine 1/2?",
+       "lines": [
+        "cos 60° = 1/2",
+        "cos⁻¹(1/2) = 60° = π/3"
+       ],
+       "why": [
+        "Notice that sin 30° and cos 60° are both 1/2. The two sharp angles of a right triangle add up to 90°, and the sine of one is the cosine of the other."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Which numbers go in, which angles come out",
@@ -35627,16 +35758,48 @@
       "So the angle in radians tells how many radius-lengths fit along the arc: angle = arc length ÷ radius.",
       "All the way round, the arc is the whole circumference, 2π × radius. That is 2π radius-lengths. So a full turn is 2π radians, which means 2π radians = 360° and π radians = 180°."
      ],
-     "example": [
-      "Radius 5 cm, arc 5 cm: angle = 5 ÷ 5 = 1 radian",
-      "Radius 5 cm, arc 10 cm: angle = 10 ÷ 5 = 2 radians",
-      "Half the circle: arc = π × 5 cm, so angle = π radians = 180°"
-     ],
      "check": {
       "question": "An arc is 3 times as long as the radius. What is the angle at the centre, in radians?",
       "answer": "3 radians"
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "A circle has radius 5 cm. Find the angle, in radians, for three different arcs.",
+     "steps": [
+      {
+       "do": "An arc as long as the radius.",
+       "lines": [
+        "arc 5 cm, radius 5 cm",
+        "angle = 5 ÷ 5 = 1 radian"
+       ],
+       "why": [
+        "The angle in radians is the arc length divided by the radius. It counts how many radius-lengths fit along the arc.",
+        "When exactly one radius fits, the angle is 1 radian. It is a little less than 60°."
+       ]
+      },
+      {
+       "do": "An arc twice as long.",
+       "lines": [
+        "arc 10 cm, radius 5 cm",
+        "angle = 10 ÷ 5 = 2 radians"
+       ],
+       "why": [
+        "Two radius-lengths fit along the arc, so the angle is 2 radians."
+       ]
+      },
+      {
+       "do": "Half the circle.",
+       "lines": [
+        "arc = π × 5 cm",
+        "angle = 5π ÷ 5 = π radians",
+        "π radians = 180°"
+       ],
+       "why": [
+        "All the way round a circle is 2 × π × radius. Half of that is π × radius, here π × 5 cm.",
+        "Divide by the radius and the 5 cancels, leaving π. So half a turn, 180°, is π radians, whatever the size of the circle."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -35866,17 +36029,44 @@
       "From the angle θ, each side gets a name. The hypotenuse is the longest side, the one facing the right angle: the ladder. The opposite side is the one across from θ, not touching it: the wall. The adjacent side is the one next to θ that is not the hypotenuse: the ground.",
       "If you look from the other sharp angle (at the top of the ladder), opposite and adjacent swap. The hypotenuse stays the same."
      ],
-     "example": [
-      "A right triangle has sides 3, 4 and 5. The angle θ faces the side 3.",
-      "Hypotenuse = 5 (the longest side)",
-      "Opposite = 3 (across from θ)",
-      "Adjacent = 4 (next to θ)"
-     ],
      "check": {
       "question": "In a right triangle with sides 5, 12 and 13, which side is the hypotenuse?",
       "answer": "13, the longest side"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "A right triangle has sides 3, 4 and 5. The angle θ faces the side 3. Name each side.",
+     "steps": [
+      {
+       "do": "Find the hypotenuse first.",
+       "lines": [
+        "Hypotenuse = 5"
+       ],
+       "why": [
+        "The hypotenuse is always the longest side. It is the one facing the right angle, and it never touches the little square that marks 90°.",
+        "It does not depend on which angle you call θ."
+       ]
+      },
+      {
+       "do": "Find the side across from θ.",
+       "lines": [
+        "Opposite = 3"
+       ],
+       "why": [
+        "Stand at the angle θ and look straight across the triangle. The side you are looking at, the one θ does not touch, is the opposite side.",
+        "The question said θ faces the side 3, so the opposite side is 3."
+       ]
+      },
+      {
+       "do": "The side left over is the adjacent.",
+       "lines": [
+        "Adjacent = 4"
+       ],
+       "why": [
+        "Adjacent means next to. Two sides touch the angle θ: the hypotenuse and one more. That other one is the adjacent side.",
+        "If you had chosen the other sharp angle as θ, opposite and adjacent would swap. The hypotenuse would stay 5."
+       ]
+      }
+     ]
     },
     {
      "title": "sin, cos and tan are three divisions",
@@ -35886,17 +36076,59 @@
       "Why bother? If you know an angle and one side, these ratios give the other sides. That is how people find the height of a tower or a hill without climbing it.",
       "sin 30° = 1/2 means: in every right triangle with a 30° angle, the side opposite that angle is half the hypotenuse."
      ],
-     "example": [
-      "Sides 3, 4, 5 with θ facing the side 3.",
-      "sin θ = opposite ÷ hypotenuse = 3/5",
-      "cos θ = adjacent ÷ hypotenuse = 4/5",
-      "tan θ = opposite ÷ adjacent = 3/4"
-     ],
      "check": {
       "question": "In a right triangle, the side opposite θ is 5 and the hypotenuse is 13. What is sin θ?",
       "answer": "5/13"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "A right triangle has sides 3, 4 and 5, and θ faces the side 3. Find sin θ, cos θ and tan θ.",
+     "steps": [
+      {
+       "do": "Name the three sides.",
+       "lines": [
+        "Opposite = 3",
+        "Adjacent = 4",
+        "Hypotenuse = 5"
+       ],
+       "why": [
+        "Every ratio is one named side divided by another, so the names come first.",
+        "5 is the longest side: the hypotenuse. 3 is across from θ: the opposite. 4 is the one left, next to θ: the adjacent."
+       ]
+      },
+      {
+       "do": "sin θ is opposite ÷ hypotenuse.",
+       "lines": [
+        "sin θ = 3 ÷ 5 = 3/5"
+       ],
+       "why": [
+        "sin is only a short name for this one division: the side across from the angle, divided by the longest side.",
+        "3/5 is 0.6. It says the opposite side is six tenths as long as the hypotenuse."
+       ]
+      },
+      {
+       "do": "cos θ is adjacent ÷ hypotenuse.",
+       "lines": [
+        "cos θ = 4 ÷ 5 = 4/5"
+       ],
+       "why": [
+        "cos is the side next to the angle divided by the longest side.",
+        "Both sin and cos divide by the hypotenuse, the longest side, so in a right triangle they are always less than 1."
+       ]
+      },
+      {
+       "do": "tan θ is opposite ÷ adjacent.",
+       "lines": [
+        "tan θ = 3 ÷ 4 = 3/4"
+       ],
+       "why": [
+        "tan does not use the hypotenuse at all: it is the side across divided by the side next to the angle.",
+        "It tells how steep the slanting side is: 3 up for every 4 along."
+       ]
+      }
+     ],
+     "after": [
+      "A way to remember the three: SOH CAH TOA. Sin is Opposite over Hypotenuse, Cos is Adjacent over Hypotenuse, Tan is Opposite over Adjacent."
+     ]
     }
    ],
    "practice": [
@@ -36125,15 +36357,56 @@
       "They are read 'cosecant', 'secant' and 'cotangent'. A way to remember the pairs: each pair has exactly one 'co': sin with cosec, cos with sec, tan with cot.",
       "One more piece of writing. sin²θ means (sin θ)², that is sin θ × sin θ. The small 2 is put after 'sin' so that nobody thinks the angle is being squared."
      ],
-     "example": [
-      "Sides 3, 4, 5 with θ facing the side 3: sin θ = 3/5, cos θ = 4/5, tan θ = 3/4",
-      "cosec θ = 5/3, sec θ = 5/4, cot θ = 4/3",
-      "sin²θ = 3/5 × 3/5 = 9/25"
-     ],
      "check": {
       "question": "tan θ = 2/7. What is cot θ?",
       "answer": "7/2"
-     }
+     },
+     "ask": "For the same 3, 4, 5 triangle, sin θ = 3/5, cos θ = 4/5 and tan θ = 3/4. Find cosec θ, sec θ, cot θ and sin²θ.",
+     "steps": [
+      {
+       "do": "cosec θ is sin θ turned upside down.",
+       "lines": [
+        "sin θ = 3/5",
+        "cosec θ = 5/3"
+       ],
+       "why": [
+        "Turning a fraction upside down means swapping its top and bottom. cosec θ is 1 ÷ sin θ, and that is the same as swapping.",
+        "So cosec θ is hypotenuse ÷ opposite."
+       ]
+      },
+      {
+       "do": "sec θ is cos θ turned upside down.",
+       "lines": [
+        "cos θ = 4/5",
+        "sec θ = 5/4"
+       ],
+       "why": [
+        "sec θ is 1 ÷ cos θ: hypotenuse ÷ adjacent.",
+        "A way to keep the pairs straight: each pair has exactly one \"co\". Sin goes with cosec, cos goes with sec."
+       ]
+      },
+      {
+       "do": "cot θ is tan θ turned upside down.",
+       "lines": [
+        "tan θ = 3/4",
+        "cot θ = 4/3"
+       ],
+       "why": [
+        "cot θ is 1 ÷ tan θ: adjacent ÷ opposite."
+       ]
+      },
+      {
+       "do": "sin²θ means sin θ times sin θ.",
+       "lines": [
+        "sin²θ = 3/5 × 3/5",
+        "= 9/25"
+       ],
+       "why": [
+        "The small 2 is written straight after sin, but it squares the whole value of sin θ. It does not square the angle.",
+        "To multiply fractions, multiply the tops (3 × 3 = 9) and the bottoms (5 × 5 = 25)."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -36366,15 +36639,42 @@
       "1 degree = 60 minutes. A minute of angle is written with a small mark: 60′. So 30′ is half a degree and 6′ is one tenth of a degree.",
       "46°32′ is read '46 degrees 32 minutes'. It is a little more than 46 and a half degrees. Tables list values every 6′ and give a small correction for the 1′ to 5′ in between. For sin and tan the correction is added. For cos it is subtracted, because cos gets smaller as the angle grows."
      ],
-     "example": [
-      "46°32′ = 46° and 32′",
-      "32′ = 30′ + 2′",
-      "So look in the 46° row under 30′, then use the correction for 2′ (add it for sin and tan, subtract it for cos)."
-     ],
      "check": {
       "question": "How many minutes are there in half a degree?",
       "answer": "30′"
-     }
+     },
+     "ask": "How do you look up sin 46°32′ in the tables?",
+     "steps": [
+      {
+       "do": "Split the angle into degrees and minutes.",
+       "lines": [
+        "46°32′ = 46° and 32′"
+       ],
+       "why": [
+        "A degree is cut into 60 smaller parts called minutes, written with the mark ′. So 32′ is a little more than half a degree."
+       ]
+      },
+      {
+       "do": "Split the minutes into a column and a small extra.",
+       "lines": [
+        "32′ = 30′ + 2′"
+       ],
+       "why": [
+        "The table has columns only for some minutes, such as 0′, 6′, 12′ … or 0′, 10′, 20′, 30′ …. 30′ has a column; the 2′ left over is handled by the small correction columns at the side."
+       ]
+      },
+      {
+       "do": "Read the row and the column, then correct.",
+       "lines": [
+        "Row 46°, column 30′",
+        "then the correction for 2′"
+       ],
+       "why": [
+        "Go along the 46° row to the 30′ column and read the number.",
+        "For sin and tan the value grows as the angle grows, so add the correction. For cos the value gets smaller as the angle grows, so subtract it."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -36607,12 +36907,6 @@
       "Call the corners A, B and C. The same capital letters also stand for the angles at those corners. Each side is named with the small letter of the corner it faces: side a is opposite angle A (it joins B and C), side b is opposite angle B, and side c is opposite angle C.",
       "So a and A never touch: they face each other across the triangle. The bigger an angle, the longer the side facing it. The sine rule says exactly how: a ÷ sin A, b ÷ sin B and c ÷ sin C are all the same number."
      ],
-     "example": [
-      "Triangle ABC with A = 30°, B = 45°, a = 2",
-      "a = 2 is the side BC, facing the 30° angle.",
-      "b is the side AC, facing the 45° angle. It must be longer than a.",
-      "Sine rule: 2 ÷ sin 30° = 2 ÷ 1/2 = 4, so b = 4 × sin 45° = 2√2, about 2.83."
-     ],
      "check": {
       "question": "In triangle ABC, which side is opposite the angle B?",
       "answer": "Side b (the side joining A and C)"
@@ -36633,6 +36927,51 @@
         ]
        },
        "caption": "Side a faces corner A. Side b faces corner B. Side c faces corner C."
+      }
+     ],
+     "ask": "In triangle ABC, A = 30°, B = 45° and a = 2. Find b.",
+     "steps": [
+      {
+       "do": "Say which side is which.",
+       "lines": [
+        "a = BC, facing angle A",
+        "b = AC, facing angle B"
+       ],
+       "why": [
+        "Each side has the small letter of the corner it faces. Side a does not touch corner A: it joins the other two corners, B and C."
+       ]
+      },
+      {
+       "do": "Write the sine rule for these two pairs.",
+       "lines": [
+        "a ÷ sin A = b ÷ sin B"
+       ],
+       "why": [
+        "The sine rule says: a side divided by the sine of the angle facing it gives the same number for every side of the triangle.",
+        "We know a complete pair (a and A) and half of another (B), so the rule gives the missing half, b."
+       ]
+      },
+      {
+       "do": "Work out the known pair.",
+       "lines": [
+        "2 ÷ sin 30°",
+        "= 2 ÷ 1/2 = 4"
+       ],
+       "why": [
+        "sin 30° is 1/2. Dividing by a half is the same as multiplying by 2, so 2 ÷ 1/2 = 4."
+       ]
+      },
+      {
+       "do": "Use it to find b.",
+       "lines": [
+        "b ÷ sin 45° = 4",
+        "b = 4 × sin 45°",
+        "= 4 × √2/2 = 2√2"
+       ],
+       "why": [
+        "Multiply both sides by sin 45° to get b alone. sin 45° is √2/2.",
+        "2√2 is about 2.83. That makes sense: b faces the bigger angle (45° against 30°), so b must be longer than a = 2."
+       ]
       }
      ]
     }
