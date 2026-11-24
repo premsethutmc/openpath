@@ -38426,38 +38426,101 @@
       }
      ],
      "text": [
-      "Find the tangent to the ellipse x²/8 + y²/2 = 1 at the point (2, 1), and write it as y = mx + c.",
-      "Where people slip. In step 2, the numbers under x² and y² are already a² and b² (here 8 and 2). Use them as they are: do not square them again. In step 5, x changes sign when it moves to the other side.",
-      "Check the answer against the picture: the line goes down to the right (slope −1/2) and crosses the y-axis at 2."
-     ],
-     "example": [
-      "Step 1. Is the point on the curve? 2²/8 + 1²/2 = 4/8 + 1/2 = 1. Yes.",
-      "Step 2. Write the rule with a² = 8, b² = 2, x₁ = 2, y₁ = 1:",
-      "        (x × 2)/8 + (y × 1)/2 = 1",
-      "Step 3. Simplify each fraction: x/4 + y/2 = 1",
-      "Step 4. Multiply every term by 4: x + 2y = 4",
-      "Step 5. Get y alone: 2y = −x + 4",
-      "        y = −x/2 + 2",
-      "The slope is −1/2 and c = 2."
+      "This is the whole job done once, slowly. Tap Why? on any step that is not clear, or Break it down to open them all."
      ],
      "check": {
       "question": "The tangent is x + 2y = 4. Is the point (4, 0) on it?",
       "answer": "Yes: 4 + 2 × 0 = 4. That is where the line crosses the x-axis in the picture."
-     }
+     },
+     "ask": "Find the tangent to the ellipse x²/8 + y²/2 = 1 at the point (2, 1). Write it as y = mx + c.",
+     "steps": [
+      {
+       "do": "Check that the point is on the curve.",
+       "lines": [
+        "2²/8 + 1²/2",
+        "= 4/8 + 1/2",
+        "= 1/2 + 1/2 = 1 ✓"
+       ],
+       "why": [
+        "The point (2, 1) means x = 2 and y = 1.",
+        "Put those numbers in place of x and y in the equation of the ellipse. 2² is 2 × 2 = 4, and 1² is 1 × 1 = 1.",
+        "4/8 is the same as 1/2, and two halves make 1. The equation asks for 1, so the point really is on the ellipse."
+       ]
+      },
+      {
+       "do": "Write the tangent rule with this ellipse's numbers.",
+       "lines": [
+        "Rule: x·x₁/a² + y·y₁/b² = 1",
+        "(x × 2)/8 + (y × 1)/2 = 1"
+       ],
+       "why": [
+        "x₁ and y₁ are only names for the two numbers of the point: x₁ = 2 and y₁ = 1.",
+        "a² is the number under x² in the equation of the ellipse, so a² = 8. b² is the number under y², so b² = 2. Use 8 and 2 as they are. Do not square them again.",
+        "x and y stay as letters. They stand for any point on the tangent line."
+       ]
+      },
+      {
+       "do": "Make each fraction simpler.",
+       "lines": [
+        "(x × 2)/8 = x/4",
+        "(y × 1)/2 = y/2",
+        "x/4 + y/2 = 1"
+       ],
+       "why": [
+        "2 out of 8 is the same as 1 out of 4 (divide the top and the bottom by 2). So 2x/8 is x/4.",
+        "Multiplying by 1 changes nothing, so (y × 1)/2 is just y/2."
+       ]
+      },
+      {
+       "do": "Remove the fractions: multiply every term by 4.",
+       "lines": [
+        "x/4 × 4 = x",
+        "y/2 × 4 = 2y",
+        "1 × 4 = 4",
+        "x + 2y = 4"
+       ],
+       "why": [
+        "Fractions are the awkward part, so we get rid of them. 4 is the smallest number that both 4 and 2 divide into.",
+        "An equation stays true when you do the same thing to every term on both sides. So the 1 on the right is multiplied by 4 as well."
+       ]
+      },
+      {
+       "do": "Get y alone on the left.",
+       "lines": [
+        "x + 2y = 4",
+        "2y = −x + 4",
+        "y = −x/2 + 2"
+       ],
+       "why": [
+        "Take x away from both sides. On the left it is gone; on the right it appears as −x. That is why x changes sign when it moves across.",
+        "Now y is multiplied by 2, so divide every term by 2: −x becomes −x/2 and 4 becomes 2."
+       ]
+      },
+      {
+       "do": "Read off the slope and where the line crosses.",
+       "lines": [
+        "y = −x/2 + 2",
+        "m = −1/2 and c = 2"
+       ],
+       "why": [
+        "In y = mx + c, m is the number multiplying x. It says how steep the line is: −1/2 means the line goes down 1 for every 2 it goes to the right.",
+        "c is the number on its own. It is where the line crosses the y-axis: at 2. Both match the picture above."
+       ]
+      }
+     ],
+     "after": [
+      "Where people slip: in step 2 they square 8 and 2 again, and in step 5 they forget that x changes sign when it moves across."
+     ]
     },
     {
      "title": "The slope in one line",
      "text": [
       "Often you only need the slope of the tangent. Rearrange the rule once, with letters, and you never have to do it again.",
       "From x·x₁/a² + y·y₁/b² = 1, get y alone: y = −(b²x₁ / a²y₁)·x + b²/y₁.",
-      "So the slope of the tangent at (x₁, y₁) is m = −b²x₁ / (a²y₁), and it crosses the y-axis at c = b²/y₁.",
-      "The lesson below uses this step when it says that the slope of the tangent to x²/9 + y²/16 = 1 at (12/5, 12/5) is −16/9. Here it is in full."
+      "So the slope of the tangent at (x₁, y₁) is m = −b²x₁ / (a²y₁), and the line crosses the y-axis at c = b²/y₁."
      ],
      "example": [
-      "Our example: a² = 8, b² = 2, point (2, 1).",
-      "m = −(2 × 2)/(8 × 1) = −4/8 = −1/2",
-      "c = 2/1 = 2. The same line as before: y = −x/2 + 2.",
-      "",
+      "The same shortcut on the example in the lesson below:",
       "x²/9 + y²/16 = 1 at (12/5, 12/5): a² = 9, b² = 16.",
       "m = −(16 × 12/5)/(9 × 12/5) = −16/9  (the 12/5 cancels)",
       "c = 16 ÷ 12/5 = 16 × 5/12 = 20/3",
@@ -38466,7 +38529,50 @@
      "check": {
       "question": "For x²/8 + y²/2 = 1, what is the slope of the tangent at the point (−2, 1)?",
       "answer": "m = −(2 × −2)/(8 × 1) = 4/8 = 1/2. On the left side the tangent goes up to the right."
-     }
+     },
+     "ask": "Find the slope of the tangent to x²/8 + y²/2 = 1 at (2, 1), using m = −b²x₁ / (a²y₁).",
+     "steps": [
+      {
+       "do": "Pick out the four numbers.",
+       "lines": [
+        "a² = 8 and b² = 2",
+        "x₁ = 2 and y₁ = 1"
+       ],
+       "why": [
+        "a² and b² are the numbers under x² and y² in the equation of the ellipse.",
+        "x₁ and y₁ are the two numbers of the point (2, 1)."
+       ]
+      },
+      {
+       "do": "Top of the fraction: b² × x₁.",
+       "lines": [
+        "2 × 2 = 4"
+       ],
+       "why": [
+        "b² is the number under y², but it is paired with the x of the point. This crossing over is the part people mix up."
+       ]
+      },
+      {
+       "do": "Bottom of the fraction: a² × y₁.",
+       "lines": [
+        "8 × 1 = 8"
+       ],
+       "why": [
+        "a² is the number under x², paired with the y of the point."
+       ]
+      },
+      {
+       "do": "Divide, with the minus sign in front.",
+       "lines": [
+        "m = −4/8",
+        "m = −1/2"
+       ],
+       "why": [
+        "4/8 is the same as 1/2. The minus sign in front is part of the rule.",
+        "It is the same slope the long way gave on the screen before."
+       ]
+      }
+     ]
     },
     {
      "title": "The normal: at right angles to the tangent",
@@ -38489,17 +38595,60 @@
       "Two lines at right angles have slopes that multiply to −1. So if the tangent has slope m, the normal has slope −1/m: turn the fraction over and change its sign.",
       "This lesson was only about the ellipse. The hyperbola uses the same rule with one sign changed, and points given by an angle θ come in the lesson below."
      ],
-     "example": [
-      "Tangent at (2, 1) on x²/8 + y²/2 = 1 has slope −1/2.",
-      "Normal slope = −1 ÷ (−1/2) = 2",
-      "Line through (2, 1) with slope 2: y − 1 = 2(x − 2)",
-      "y − 1 = 2x − 4",
-      "y = 2x − 3"
-     ],
      "check": {
       "question": "A tangent has slope 3. What is the slope of the normal at the same point?",
       "answer": "−1/3. Turn 3 over to get 1/3 and change the sign."
-     }
+     },
+     "ask": "Find the normal to x²/8 + y²/2 = 1 at the point (2, 1).",
+     "steps": [
+      {
+       "do": "Start from the tangent's slope.",
+       "lines": [
+        "m = −1/2"
+       ],
+       "why": [
+        "We found this on the screens before. The normal is at a right angle to the tangent, so its slope comes from this one."
+       ]
+      },
+      {
+       "do": "Turn the fraction over and change its sign.",
+       "lines": [
+        "−1 ÷ (−1/2) = 2"
+       ],
+       "why": [
+        "Turn 1/2 over and you get 2/1, which is 2. The tangent was minus, so the normal is plus.",
+        "Check: −1/2 × 2 = −1. Slopes of lines at right angles always multiply to −1."
+       ]
+      },
+      {
+       "do": "Write the line through (2, 1) with slope 2.",
+       "lines": [
+        "y − 1 = 2(x − 2)"
+       ],
+       "why": [
+        "A line with slope m through the point (x₁, y₁) is y − y₁ = m(x − x₁). Here y₁ = 1, x₁ = 2 and m = 2."
+       ]
+      },
+      {
+       "do": "Open the bracket.",
+       "lines": [
+        "y − 1 = 2x − 4"
+       ],
+       "why": [
+        "The 2 multiplies both things inside the bracket: 2 × x = 2x and 2 × (−2) = −4."
+       ]
+      },
+      {
+       "do": "Get y alone.",
+       "lines": [
+        "y = 2x − 4 + 1",
+        "y = 2x − 3"
+       ],
+       "why": [
+        "Add 1 to both sides. −4 + 1 = −3."
+       ]
+      }
+     ]
     }
    ],
    "practice": [

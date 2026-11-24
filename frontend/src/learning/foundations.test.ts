@@ -177,7 +177,7 @@ test("idea-figures@1: every still picture of an idea is drawn by the engine, pas
 test("taught-lesson@1 and conic-tangent@1: a taught lesson moves a real ellipse, and every scene on a screen can reach its goal", () => {
   const taught = foundations.filter((f) => f.lesson);
   assert.ok(taught.some((f) => f.competency === "MATH.coordinate.conic-tangents-normals"));
-  for (const f of taught) assert.ok(f.screens.length >= 4 && f.screens.some((s) => s.scene) && f.screens.some((s) => (s.example ?? []).filter((l) => /^Step \d/.test(l)).length >= 4) && f.practice?.length, `${f.concept}: a taught lesson shows, explains, works every step and asks`);
+  for (const f of taught) assert.ok(f.screens.length >= 4 && f.screens.some((s) => s.scene) && f.screens.some((s) => (s.steps ?? []).length >= 4) && f.practice?.length, `${f.concept}: a taught lesson shows, explains, works every step and asks`);
   for (const f of foundations) for (const s of f.screens) if (s.scene) {
     assert.deepEqual(checkScene(s.scene), [], f.concept);
     const start = initial(s.scene); assert.ok(!met(s.scene, start), "the goal is not met before the learner moves anything");
@@ -191,4 +191,13 @@ test("taught-lesson@1 and conic-tangent@1: a taught lesson moves a real ellipse,
   assert.match(readout(sc, setScene(sc, initial(sc), "turn", 0)), /no slope/);
   assert.equal(pointer(sc, initial(sc), 170, 20).turn, 90); // a finger above the centre puts the point at the top
   assert.match(checkScene({ ...sc, a: 9 }).join(), /2 to 6/);
+});
+
+test("break-it-down@1: a worked problem is separate steps, and every step can say why in plain words", () => {
+  let n = 0;
+  for (const f of foundations) for (const s of f.screens) if (s.steps) {
+    assert.ok(s.ask?.trim() && s.steps.length >= 3 && s.steps.length <= 7, `${f.concept}: ${s.title}`);
+    for (const st of s.steps) { n++; assert.ok(st.do.trim() && st.do.length <= 70 && st.lines.length >= 1 && st.lines.length <= 4 && st.lines.every((l) => l.trim() && l.length <= 34) && st.why.length >= 1 && st.why.every((w) => w.trim().length > 20), `${s.title}: ${st.do}`); }
+  }
+  assert.ok(n >= 15);
 });
