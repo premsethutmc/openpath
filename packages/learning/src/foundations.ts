@@ -9,6 +9,7 @@
  * practice@1), written for that class and solved blind by a second reader before being kept. The learner's first lesson of a skill opens with these; they are
  * not evidence, are never graded, and do not change the skill's lesson, questions or review records.
  */
+import type { Scene } from "./scene";
 import data from "../../../content/learning/foundations.v1.json";
 
 /** The pictures an idea can ask for. Each is a scene description for the scene engine (foundation-pictures.ts). */
@@ -16,10 +17,19 @@ export const PICTURES = ["right-triangle", "unit-circle", "angle", "circle-parts
 export type Picture = (typeof PICTURES)[number];
 export interface FoundationScreen { title: string; text: string[]; example?: string[]; check?: { question: string; answer: string }; picture?: Picture | null;
   /** idea-figures@1: still pictures of the idea, each with a line saying what to see in it. They are the engine's question pictures (figure-marks.ts): the same clock, number line, shapes and labelled diagrams the questions use. */
-  figures?: { v: { type: string; [k: string]: unknown }; caption: string }[] }
+  figures?: { v: { type: string; [k: string]: unknown }; caption: string }[];
+  /** idea-scene@1: something to move on this screen: a scene of the scene engine (scene.ts), with its own goal. */
+  scene?: Scene;
+  /** break-it-down@1: a worked problem as separate steps. `ask` is the problem. Each step says what is done (`do`), shows the
+   *  mathematics one line at a time (`lines`), and holds the reason in plain words (`why`), opened by "Why?" on that step or by
+   *  "Break it down" for all of them. `after` is said once the steps have been seen (the slips to avoid). */
+  ask?: string; steps?: { do: string; lines: string[]; why: string[] }[]; after?: string[] }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
 export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[];
+  /** taught-lesson@1: these screens teach the skill itself, step by step (show it, one rule, why, every step, try it), where the
+   *  generated lesson is only a summary of rules. They are shown first, under "Learn it step by step". */
+  lesson?: boolean;
   /** picture-decision@1: an idea with no picture says why. "none": it is a word, a symbol, a rule or a procedure, and needs no picture. "new": a picture would help, but it needs a figure the scene engine does not have yet (named here). Never a gap left unsaid. */
   show?: { decision: "none"; why: "word" | "symbol" | "rule" | "procedure" } | { decision: "new"; figure: string };
   practice?: FoundationQuestion[]; /** more rounds of the same four kinds of question, so a repeat visit is not the same four */ rounds?: FoundationQuestion[][] }

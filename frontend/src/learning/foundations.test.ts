@@ -1,6 +1,8 @@
 /** foundations@1: every start-here entry belongs to a real skill and is complete enough to teach from. */
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { check as checkScene, initial, met, pointer, readout, set as setScene, type Scene } from "../../../packages/learning/src/scene";
+import { tangentOf } from "../../../packages/learning/src/scene-figures";
 import { readFileSync } from "node:fs";
 import { describe as describeFigure, diagramProblems, figureDraw } from "../../../packages/learning/src/figure-marks";
 import { moduleFor } from "../../../packages/learning/src/content";
@@ -12,7 +14,7 @@ test("start-here teaching is attached to real skills and is well formed", () => 
     assert.ok(moduleFor(f.competency), `${f.competency} is not a skill with a lesson`);
     assert.ok(!seen.has(`${f.competency}|${f.concept}`), `${f.competency}: ${f.concept} twice`);
     seen.add(`${f.competency}|${f.concept}`);
-    assert.ok(f.concept.trim() && f.screens.length >= 1 && f.screens.length <= 3, `${f.competency}: ${f.concept}`);
+    assert.ok(f.concept.trim() && f.screens.length >= 1 && f.screens.length <= (f.lesson ? 6 : 3), `${f.competency}: ${f.concept}`);
     for (const s of f.screens) {
       assert.ok(s.title.trim() && s.text.length >= 1 && s.text.every((t) => t.trim().length > 0), `${f.competency}: ${s.title}`);
       assert.ok(!s.picture || (PICTURES as readonly string[]).includes(s.picture), `${f.competency}: picture ${s.picture}`);
@@ -141,7 +143,7 @@ test("understanding@1: a finished round is kept as what was done, moves the next
 
 test("picture-decision@1: every idea either has a picture or says why it has none", () => {
   for (const f of foundations) {
-    const pictured = f.screens.some((s) => s.picture || s.figures?.length);
+    const pictured = f.screens.some((s) => s.picture || s.figures?.length || s.scene);
     assert.ok(pictured ? !f.show : f.show && (f.show.decision === "none" ? ["word", "symbol", "rule", "procedure"].includes(f.show.why) : f.show.figure.trim().length > 5), `${f.competency}: ${f.concept}`);
   }
 });
@@ -170,4 +172,32 @@ test("idea-figures@1: every still picture of an idea is drawn by the engine, pas
   assert.match(diagramProblems({ ...base, parts: [{ p: "segment", from: [10, 10], to: [110, 10], ticks: 1 }, { p: "segment", from: [10, 30], to: [150, 30], ticks: 1 }] }).join(), /not equal in length/);
   assert.match(diagramProblems({ ...base, parts: [{ p: "point", at: [500, 10] }] }).join(), /outside the box/);
   assert.equal(figureDraw({ ...base, parts: [{ p: "right", at: [50, 50], a: [100, 50], b: [90, 100] }] })?.as, "na");
+});
+
+test("taught-lesson@1 and conic-tangent@1: a taught lesson moves a real ellipse, and every scene on a screen can reach its goal", () => {
+  const taught = foundations.filter((f) => f.lesson);
+  assert.ok(taught.some((f) => f.competency === "MATH.coordinate.conic-tangents-normals"));
+  for (const f of taught) assert.ok(f.screens.length >= 4 && f.screens.some((s) => s.scene) && f.screens.some((s) => (s.steps ?? []).length >= 4) && f.practice?.length, `${f.concept}: a taught lesson shows, explains, works every step and asks`);
+  for (const f of foundations) for (const s of f.screens) if (s.scene) {
+    assert.deepEqual(checkScene(s.scene), [], f.concept);
+    const start = initial(s.scene); assert.ok(!met(s.scene, start), "the goal is not met before the learner moves anything");
+    let reached = false; for (let t = 0; t < 360; t += 15) reached ||= met(s.scene, setScene(s.scene, start, "turn", t));
+    assert.ok(reached, `${f.concept}: the goal of "${s.title}" cannot be reached`);
+  }
+  // the slope is the exact slope of the tangent: −b²x/(a²y); flat at the top, no slope at the ends
+  const p = tangentOf(4, 3, 45); assert.ok(Math.abs(p.slope - -0.75) < 1e-9 && Math.abs((p.x * p.x) / 16 + (p.y * p.y) / 9 - 1) < 1e-9);
+  assert.ok(tangentOf(4, 3, 90).flat && tangentOf(4, 3, 90).slope === 0 && tangentOf(4, 3, 0).upright && Number.isNaN(tangentOf(4, 3, 180).slope));
+  const sc: Scene = { type: "scene", kind: "tangent", a: 4, b: 3, prompt: "p", success: "s", goal: { measure: "flat", equals: 1 } };
+  assert.match(readout(sc, setScene(sc, initial(sc), "turn", 0)), /no slope/);
+  assert.equal(pointer(sc, initial(sc), 170, 20).turn, 90); // a finger above the centre puts the point at the top
+  assert.match(checkScene({ ...sc, a: 9 }).join(), /2 to 6/);
+});
+
+test("break-it-down@1: a worked problem is separate steps, and every step can say why in plain words", () => {
+  let n = 0;
+  for (const f of foundations) for (const s of f.screens) if (s.steps) {
+    assert.ok(s.ask?.trim() && s.steps.length >= 3 && s.steps.length <= 7, `${f.concept}: ${s.title}`);
+    for (const st of s.steps) { n++; assert.ok(st.do.trim() && st.do.length <= 70 && st.lines.length >= 1 && st.lines.length <= 4 && st.lines.every((l) => l.trim() && l.length <= 34) && st.why.length >= 1 && st.why.every((w) => w.trim().length > 20), `${s.title}: ${st.do}`); }
+  }
+  assert.ok(n >= 15);
 });

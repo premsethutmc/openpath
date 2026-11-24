@@ -154,3 +154,32 @@ export function ratiosDraw(angle: number, size: number, one: (n: number) => stri
 }
 /** The angle and size a finger at (x, y) asks for (the top corner follows the finger). */
 export const ratiosAt = (x: number, y: number) => ({ angle: (Math.atan2(Math.max(1, RA.y - y), Math.max(1, x - RA.x)) * 180) / Math.PI, size: Math.hypot(x - RA.x, RA.y - y) / RA.k });
+
+/* conic-tangent@1: a point going round the ellipse x²/a² + y²/b² = 1, and the tangent there */
+const TG = { cx: 170, cy: 108 };
+const tgScale = (a: number, b: number) => Math.min(120 / a, 78 / b);
+/** The point at `turn` degrees round the ellipse (a cos t, b sin t) and the tangent's slope there, −b²x/(a²y). At the two ends
+ * of the wide axis the tangent is straight up and has no slope; at the top and bottom it is flat. */
+export function tangentOf(a: number, b: number, turn: number) {
+  const t = (turn * Math.PI) / 180, q = ((turn % 360) + 360) % 360;
+  const upright = q === 0 || q === 180, flat = q === 90 || q === 270;
+  const x = upright ? (q === 0 ? a : -a) : flat ? 0 : a * Math.cos(t), y = flat ? (q === 90 ? b : -b) : upright ? 0 : b * Math.sin(t);
+  return { x, y, upright, flat, slope: upright ? NaN : flat ? 0 : -(b * b * x) / (a * a * y) };
+}
+export function tangentDraw(a: number, b: number, turn: number, normal: boolean): Shape[] {
+  const k = tgScale(a, b), p = tangentOf(a, b, turn), px = TG.cx + p.x * k, py = TG.cy - p.y * k;
+  // the tangent's direction on the page (y goes down the page)
+  const [dx, dy] = p.upright ? [0, 1] : [1 / Math.hypot(1, p.slope), -p.slope / Math.hypot(1, p.slope)], L = 95;
+  const out: Shape[] = [
+    { t: "line", x1: TG.cx - a * k - 26, y1: TG.cy, x2: TG.cx + a * k + 26, y2: TG.cy, role: "axis" }, { t: "line", x1: TG.cx, y1: TG.cy + b * k + 14, x2: TG.cx, y2: TG.cy - b * k - 14, role: "axis" },
+    { t: "path", d: `M${TG.cx - a * k} ${TG.cy}A${a * k} ${b * k} 0 1 0 ${TG.cx + a * k} ${TG.cy}A${a * k} ${b * k} 0 1 0 ${TG.cx - a * k} ${TG.cy}Z`, role: "curve" },
+    { t: "text", x: TG.cx + a * k + 12, y: TG.cy + 15, s: String(a), role: "label" }, { t: "text", x: TG.cx - a * k - 14, y: TG.cy + 15, s: `−${a}`, role: "label" },
+    { t: "text", x: TG.cx + 10, y: TG.cy - b * k - 4, s: String(b), role: "label" }, { t: "text", x: TG.cx + 12, y: TG.cy + b * k + 13, s: `−${b}`, role: "label" },
+    { t: "line", x1: px - dx * L, y1: py - dy * L, x2: px + dx * L, y2: py + dy * L, role: "curve2" },
+  ];
+  if (normal) out.push({ t: "line", x1: px + dy * 60, y1: py - dx * 60, x2: px - dy * 60, y2: py + dx * 60, role: "guide" });
+  out.push({ t: "circle", cx: px, cy: py, r: 8, role: "handle" });
+  return out;
+}
+/** How far round a finger at (x, y) is, measured the way the point is placed (so the point follows the finger). */
+export const tangentAt = (a: number, b: number, x: number, y: number) => { const k = tgScale(a, b), d = (Math.atan2((TG.cy - y) / (b * k), (x - TG.cx) / (a * k)) * 180) / Math.PI; return (Math.round(d / 15) * 15 + 360) % 360; };

@@ -38279,6 +38279,590 @@
      }
     ]
    ]
+  },
+  {
+   "competency": "MATH.coordinate.conic-tangents-normals",
+   "class": 11,
+   "lesson": true,
+   "concept": "the tangent to an ellipse at a point: what it is, the rule and why it works, and the normal",
+   "evidence": "The lesson's screen gives four formulas for two curves in one paragraph, has no picture, and its worked example states the tangent's slope (−16/9) without showing how it is found.",
+   "screens": [
+    {
+     "title": "A line that just touches",
+     "scene": {
+      "type": "scene",
+      "kind": "tangent",
+      "a": 4,
+      "b": 3,
+      "prompt": "Drag the blue point round the ellipse and watch the blue line turn. Find a place where the line is flat.",
+      "success": "The tangent is flat at the very top and the very bottom of the ellipse, where x = 0. At the two ends, left and right, it stands straight up.",
+      "goal": {
+       "measure": "flat",
+       "equals": 1
+      }
+     },
+     "text": [
+      "Rest a ruler against the side of a round bowl. It touches the bowl at one point and does not cut into it. A line that touches a curve like this is called the tangent at that point.",
+      "The picture shows the ellipse x²/16 + y²/9 = 1. It reaches 4 to the left and right and 3 up and down. The blue line is the tangent at the blue point.",
+      "Every point of the curve has its own tangent. Move the point and the tangent turns with it. How steep the tangent is at a point is its slope there. In the top right quarter the line goes down as you go right, so its slope is negative."
+     ],
+     "check": {
+      "question": "At the very top of the ellipse the tangent is flat. What is its slope there?",
+      "answer": "0. A flat line does not go up or down at all."
+     }
+    },
+    {
+     "title": "The rule, and why it has that shape",
+     "text": [
+      "Take the ellipse x²/a² + y²/b² = 1 and a point (x₁, y₁) on it. The tangent at that point is x·x₁/a² + y·y₁/b² = 1.",
+      "How to remember it: x² means x times x. Keep one x and change the other into x₁. Do the same with y². Nothing else changes.",
+      "Why believe it? First, the line really passes through the point. Put x = x₁ and y = y₁ into the rule and you get x₁²/a² + y₁²/b² = 1, which is true because the point is on the ellipse.",
+      "Second, try it where you already know the answer. In the picture you moved, the tangent at the top point (0, 3) was the flat line y = 3. The rule must give the same line."
+     ],
+     "example": [
+      "Ellipse x²/16 + y²/9 = 1, top point (0, 3).",
+      "Rule: (x × 0)/16 + (y × 3)/9 = 1",
+      "0 + y/3 = 1",
+      "y = 3. The flat line at the top, as in the picture.",
+      "Right-hand end (4, 0): (x × 4)/16 + 0 = 1, so x = 4. The line standing straight up."
+     ],
+     "check": {
+      "question": "Use the rule to write the tangent to x²/16 + y²/9 = 1 at the bottom point (0, −3).",
+      "answer": "(y × −3)/9 = 1, so −y/3 = 1 and y = −3: the flat line at the bottom."
+     }
+    },
+    {
+     "title": "One full example, every step",
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "w": 340,
+        "h": 195,
+        "says": "The ellipse x²/8 + y²/2 = 1 with the point (2, 1) marked on it. A straight line touches the ellipse at that point; it crosses the y-axis at 2 and the x-axis at 4.",
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           20,
+           112
+          ],
+          "to": [
+           330,
+           112
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           185
+          ],
+          "to": [
+           150,
+           12
+          ]
+         },
+         {
+          "p": "ellipse",
+          "at": [
+           150,
+           112
+          ],
+          "rx": 113.14,
+          "ry": 56.57
+         },
+         {
+          "p": "segment",
+          "from": [
+           134.0,
+           24.0
+          ],
+          "to": [
+           326.0,
+           120.0
+          ],
+          "accent": true
+         },
+         {
+          "p": "point",
+          "at": [
+           230,
+           72
+          ],
+          "label": "(2, 1)",
+          "side": "ne"
+         },
+         {
+          "p": "point",
+          "at": [
+           150,
+           32
+          ],
+          "label": "2",
+          "side": "nw"
+         },
+         {
+          "p": "point",
+          "at": [
+           310,
+           112
+          ],
+          "label": "4",
+          "side": "s"
+         },
+         {
+          "p": "text",
+          "at": [
+           262,
+           52
+          ],
+          "s": "tangent",
+          "accent": true
+         }
+        ]
+       },
+       "caption": "The ellipse x²/8 + y²/2 = 1 and its tangent at (2, 1)."
+      }
+     ],
+     "text": [
+      "This is the whole job done once, slowly. Tap Why? on any step that is not clear, or Break it down to open them all."
+     ],
+     "check": {
+      "question": "The tangent is x + 2y = 4. Is the point (4, 0) on it?",
+      "answer": "Yes: 4 + 2 × 0 = 4. That is where the line crosses the x-axis in the picture."
+     },
+     "ask": "Find the tangent to the ellipse x²/8 + y²/2 = 1 at the point (2, 1). Write it as y = mx + c.",
+     "steps": [
+      {
+       "do": "Check that the point is on the curve.",
+       "lines": [
+        "2²/8 + 1²/2",
+        "= 4/8 + 1/2",
+        "= 1/2 + 1/2 = 1 ✓"
+       ],
+       "why": [
+        "The point (2, 1) means x = 2 and y = 1.",
+        "Put those numbers in place of x and y in the equation of the ellipse. 2² is 2 × 2 = 4, and 1² is 1 × 1 = 1.",
+        "4/8 is the same as 1/2, and two halves make 1. The equation asks for 1, so the point really is on the ellipse."
+       ]
+      },
+      {
+       "do": "Write the tangent rule with this ellipse's numbers.",
+       "lines": [
+        "Rule: x·x₁/a² + y·y₁/b² = 1",
+        "(x × 2)/8 + (y × 1)/2 = 1"
+       ],
+       "why": [
+        "x₁ and y₁ are only names for the two numbers of the point: x₁ = 2 and y₁ = 1.",
+        "a² is the number under x² in the equation of the ellipse, so a² = 8. b² is the number under y², so b² = 2. Use 8 and 2 as they are. Do not square them again.",
+        "x and y stay as letters. They stand for any point on the tangent line."
+       ]
+      },
+      {
+       "do": "Make each fraction simpler.",
+       "lines": [
+        "(x × 2)/8 = x/4",
+        "(y × 1)/2 = y/2",
+        "x/4 + y/2 = 1"
+       ],
+       "why": [
+        "2 out of 8 is the same as 1 out of 4 (divide the top and the bottom by 2). So 2x/8 is x/4.",
+        "Multiplying by 1 changes nothing, so (y × 1)/2 is just y/2."
+       ]
+      },
+      {
+       "do": "Remove the fractions: multiply every term by 4.",
+       "lines": [
+        "x/4 × 4 = x",
+        "y/2 × 4 = 2y",
+        "1 × 4 = 4",
+        "x + 2y = 4"
+       ],
+       "why": [
+        "Fractions are the awkward part, so we get rid of them. 4 is the smallest number that both 4 and 2 divide into.",
+        "An equation stays true when you do the same thing to every term on both sides. So the 1 on the right is multiplied by 4 as well."
+       ]
+      },
+      {
+       "do": "Get y alone on the left.",
+       "lines": [
+        "x + 2y = 4",
+        "2y = −x + 4",
+        "y = −x/2 + 2"
+       ],
+       "why": [
+        "Take x away from both sides. On the left it is gone; on the right it appears as −x. That is why x changes sign when it moves across.",
+        "Now y is multiplied by 2, so divide every term by 2: −x becomes −x/2 and 4 becomes 2."
+       ]
+      },
+      {
+       "do": "Read off the slope and where the line crosses.",
+       "lines": [
+        "y = −x/2 + 2",
+        "m = −1/2 and c = 2"
+       ],
+       "why": [
+        "In y = mx + c, m is the number multiplying x. It says how steep the line is: −1/2 means the line goes down 1 for every 2 it goes to the right.",
+        "c is the number on its own. It is where the line crosses the y-axis: at 2. Both match the picture above."
+       ]
+      }
+     ],
+     "after": [
+      "Where people slip: in step 2 they square 8 and 2 again, and in step 5 they forget that x changes sign when it moves across."
+     ]
+    },
+    {
+     "title": "The slope in one line",
+     "text": [
+      "Often you only need the slope of the tangent. Rearrange the rule once, with letters, and you never have to do it again.",
+      "From x·x₁/a² + y·y₁/b² = 1, get y alone: y = −(b²x₁ / a²y₁)·x + b²/y₁.",
+      "So the slope of the tangent at (x₁, y₁) is m = −b²x₁ / (a²y₁), and the line crosses the y-axis at c = b²/y₁."
+     ],
+     "example": [
+      "The same shortcut on the example in the lesson below:",
+      "x²/9 + y²/16 = 1 at (12/5, 12/5): a² = 9, b² = 16.",
+      "m = −(16 × 12/5)/(9 × 12/5) = −16/9  (the 12/5 cancels)",
+      "c = 16 ÷ 12/5 = 16 × 5/12 = 20/3",
+      "y = −(16/9)x + 20/3"
+     ],
+     "check": {
+      "question": "For x²/8 + y²/2 = 1, what is the slope of the tangent at the point (−2, 1)?",
+      "answer": "m = −(2 × −2)/(8 × 1) = 4/8 = 1/2. On the left side the tangent goes up to the right."
+     },
+     "ask": "Find the slope of the tangent to x²/8 + y²/2 = 1 at (2, 1), using m = −b²x₁ / (a²y₁).",
+     "steps": [
+      {
+       "do": "Pick out the four numbers.",
+       "lines": [
+        "a² = 8 and b² = 2",
+        "x₁ = 2 and y₁ = 1"
+       ],
+       "why": [
+        "a² and b² are the numbers under x² and y² in the equation of the ellipse.",
+        "x₁ and y₁ are the two numbers of the point (2, 1)."
+       ]
+      },
+      {
+       "do": "Top of the fraction: b² × x₁.",
+       "lines": [
+        "2 × 2 = 4"
+       ],
+       "why": [
+        "b² is the number under y², but it is paired with the x of the point. This crossing over is the part people mix up."
+       ]
+      },
+      {
+       "do": "Bottom of the fraction: a² × y₁.",
+       "lines": [
+        "8 × 1 = 8"
+       ],
+       "why": [
+        "a² is the number under x², paired with the y of the point."
+       ]
+      },
+      {
+       "do": "Divide, with the minus sign in front.",
+       "lines": [
+        "m = −4/8",
+        "m = −1/2"
+       ],
+       "why": [
+        "4/8 is the same as 1/2. The minus sign in front is part of the rule.",
+        "It is the same slope the long way gave on the screen before."
+       ]
+      }
+     ]
+    },
+    {
+     "title": "The normal: at right angles to the tangent",
+     "scene": {
+      "type": "scene",
+      "kind": "tangent",
+      "a": 4,
+      "b": 3,
+      "normal": true,
+      "prompt": "The dashed line is the normal. Move the point until the slope of the tangent is −0.75, then read the slope of the normal.",
+      "success": "The tangent has slope −3/4 and the normal has slope 4/3. Multiply them: −3/4 × 4/3 = −1. That is true for any two lines at right angles.",
+      "goal": {
+       "measure": "slope",
+       "equals": -0.75,
+       "tol": 0.001
+      }
+     },
+     "text": [
+      "The normal at a point is the line through that point at a right angle to the tangent. Think of a nail driven straight into the curve.",
+      "Two lines at right angles have slopes that multiply to −1. So if the tangent has slope m, the normal has slope −1/m: turn the fraction over and change its sign.",
+      "This lesson was only about the ellipse. The hyperbola uses the same rule with one sign changed, and points given by an angle θ come in the lesson below."
+     ],
+     "check": {
+      "question": "A tangent has slope 3. What is the slope of the normal at the same point?",
+      "answer": "−1/3. Turn 3 over to get 1/3 and change the sign."
+     },
+     "ask": "Find the normal to x²/8 + y²/2 = 1 at the point (2, 1).",
+     "steps": [
+      {
+       "do": "Start from the tangent's slope.",
+       "lines": [
+        "m = −1/2"
+       ],
+       "why": [
+        "We found this on the screens before. The normal is at a right angle to the tangent, so its slope comes from this one."
+       ]
+      },
+      {
+       "do": "Turn the fraction over and change its sign.",
+       "lines": [
+        "−1 ÷ (−1/2) = 2"
+       ],
+       "why": [
+        "Turn 1/2 over and you get 2/1, which is 2. The tangent was minus, so the normal is plus.",
+        "Check: −1/2 × 2 = −1. Slopes of lines at right angles always multiply to −1."
+       ]
+      },
+      {
+       "do": "Write the line through (2, 1) with slope 2.",
+       "lines": [
+        "y − 1 = 2(x − 2)"
+       ],
+       "why": [
+        "A line with slope m through the point (x₁, y₁) is y − y₁ = m(x − x₁). Here y₁ = 1, x₁ = 2 and m = 2."
+       ]
+      },
+      {
+       "do": "Open the bracket.",
+       "lines": [
+        "y − 1 = 2x − 4"
+       ],
+       "why": [
+        "The 2 multiplies both things inside the bracket: 2 × x = 2x and 2 × (−2) = −4."
+       ]
+      },
+      {
+       "do": "Get y alone.",
+       "lines": [
+        "y = 2x − 4 + 1",
+        "y = 2x − 3"
+       ],
+       "why": [
+        "Add 1 to both sides. −4 + 1 = −3."
+       ]
+      }
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "question": "What is the tangent to a curve at a point?",
+     "options": [
+      "A line that touches the curve at that point without cutting through it there",
+      "A line that cuts the curve at two points",
+      "A line through the centre of the curve",
+      "A line at a right angle to the curve at that point"
+     ],
+     "answer": 0,
+     "why": "A tangent just touches the curve at the point.",
+     "wrong": [
+      "",
+      "A line that cuts the curve at two points is a secant. A tangent only touches.",
+      "A line through the centre cuts across the ellipse. A tangent stays outside and touches at one point.",
+      "That describes the normal. The tangent runs along the curve at the point."
+     ]
+    },
+    {
+     "question": "Where on the ellipse x²/16 + y²/9 = 1 is the tangent flat (slope 0)?",
+     "options": [
+      "At (4, 0) and (−4, 0)",
+      "At (0, 3) and (0, −3)",
+      "At every point",
+      "Nowhere"
+     ],
+     "answer": 1,
+     "why": "At the top and the bottom the tangent is flat.",
+     "wrong": [
+      "At the two ends the tangent stands straight up. It is flat at the top and the bottom.",
+      "",
+      "The tangent turns as the point moves, so its slope changes from point to point.",
+      "At the top and bottom of the ellipse the curve stops rising and the tangent is flat."
+     ]
+    },
+    {
+     "question": "Which is the tangent to x²/8 + y²/2 = 1 at the point (2, 1)?",
+     "options": [
+      "2x/8 + y/2 = 1",
+      "x²/8 + y/2 = 1",
+      "2x/64 + y/4 = 1",
+      "2x/8 − y/2 = 1"
+     ],
+     "answer": 0,
+     "why": "Change one x into 2 and one y into 1: (x × 2)/8 + (y × 1)/2 = 1.",
+     "wrong": [
+      "",
+      "Only one x was meant to stay. x² becomes x × 2, not x².",
+      "8 and 2 are already a² and b². Do not square them again.",
+      "For an ellipse the sign stays +. The minus sign belongs to the hyperbola."
+     ]
+    },
+    {
+     "question": "A tangent has slope −1/2. What is the slope of the normal at the same point?",
+     "options": [
+      "1/2",
+      "−2",
+      "2",
+      "−1/2"
+     ],
+     "answer": 2,
+     "why": "−1 ÷ (−1/2) = 2: turn the fraction over and change the sign.",
+     "wrong": [
+      "You changed the sign but did not turn the fraction over.",
+      "You turned the fraction over but did not change the sign.",
+      "",
+      "That is the slope of the tangent itself. The normal is at a right angle to it."
+     ]
+    }
+   ],
+   "rounds": [
+    [
+     {
+      "question": "For x²/a² + y²/b² = 1, the tangent at (x₁, y₁) is",
+      "options": [
+       "x·x₁/a² + y·y₁/b² = 1",
+       "x²/a² + y²/b² = x₁y₁",
+       "x·x₁/a + y·y₁/b = 1",
+       "x₁²/a² + y₁²/b² = 1"
+      ],
+      "answer": 0,
+      "why": "One x becomes x₁ and one y becomes y₁; a² and b² stay.",
+      "wrong": [
+       "",
+       "The right side stays 1. Only one x and one y are changed.",
+       "The numbers underneath stay a² and b², not a and b.",
+       "That only says the point is on the ellipse. It has no x or y left, so it is not a line."
+      ]
+     },
+     {
+      "question": "On x²/16 + y²/9 = 1, what is the tangent at the right-hand end (4, 0)?",
+      "options": [
+       "y = 0",
+       "x = 4",
+       "y = 4",
+       "x = 0"
+      ],
+      "answer": 1,
+      "why": "(x × 4)/16 + 0 = 1 gives x = 4: the line standing straight up.",
+      "wrong": [
+       "y = 0 is the x-axis, which cuts through the ellipse.",
+       "",
+       "y = 4 is a flat line above the ellipse; it does not touch it.",
+       "x = 0 is the y-axis, which cuts through the ellipse."
+      ]
+     },
+     {
+      "question": "What is the slope of the tangent to x²/8 + y²/2 = 1 at (2, 1)? Use m = −b²x₁/(a²y₁).",
+      "options": [
+       "−2",
+       "−1/2",
+       "1/2",
+       "−4"
+      ],
+      "answer": 1,
+      "why": "m = −(2 × 2)/(8 × 1) = −4/8 = −1/2.",
+      "wrong": [
+       "You put a² on top. b² goes on top with x₁: −(2 × 2)/(8 × 1).",
+       "",
+       "The minus sign in front was dropped. In the top right quarter the tangent goes down.",
+       "That is only the top of the fraction. Divide by a²y₁ = 8."
+      ]
+     },
+     {
+      "question": "The tangent at a point has slope 4. The normal there has slope",
+      "options": [
+       "−4",
+       "1/4",
+       "−1/4",
+       "4"
+      ],
+      "answer": 2,
+      "why": "−1 ÷ 4 = −1/4.",
+      "wrong": [
+       "You changed the sign but did not turn 4 over.",
+       "You turned 4 over but did not change the sign.",
+       "",
+       "That is the tangent's slope. The normal is at a right angle to it."
+      ]
+     }
+    ],
+    [
+     {
+      "question": "Is the point (2, 1) on the ellipse x²/8 + y²/2 = 1?",
+      "options": [
+       "Yes, because 4/8 + 1/2 = 1",
+       "No, because 2/8 + 1/2 is not 1",
+       "Yes, because 2 + 1 = 3",
+       "No, because 2 is less than 8"
+      ],
+      "answer": 0,
+      "why": "Square the coordinates first: 2²/8 + 1²/2 = 1/2 + 1/2 = 1.",
+      "wrong": [
+       "",
+       "x is squared before dividing: 2² = 4, and 4/8 + 1/2 = 1.",
+       "Put the coordinates into the equation; adding them tells you nothing.",
+       "Being on the curve means the equation is true for the point, not that the numbers are small."
+      ]
+     },
+     {
+      "question": "Write x/4 + y/2 = 1 as y = mx + c.",
+      "options": [
+       "y = −x/2 + 2",
+       "y = x/2 + 2",
+       "y = −x/2 + 1",
+       "y = −2x + 2"
+      ],
+      "answer": 0,
+      "why": "Multiply by 4: x + 2y = 4, so 2y = −x + 4 and y = −x/2 + 2.",
+      "wrong": [
+       "",
+       "x changes sign when it moves across: 2y = −x + 4.",
+       "Every term is divided by 2, the 4 as well: 4 ÷ 2 = 2.",
+       "Divide −x by 2, do not multiply: 2y = −x + 4 gives y = −x/2 + 2."
+      ]
+     },
+     {
+      "question": "On x²/8 + y²/2 = 1, what is the slope of the tangent at (−2, 1)?",
+      "options": [
+       "−1/2",
+       "1/2",
+       "2",
+       "0"
+      ],
+      "answer": 1,
+      "why": "m = −(2 × −2)/(8 × 1) = 4/8 = 1/2.",
+      "wrong": [
+       "That is the slope at (2, 1). Here x₁ is −2, so the two minus signs make a plus.",
+       "",
+       "b² × x₁ goes on top: (2 × 2)/(8 × 1) = 1/2.",
+       "The tangent is flat only at the top and bottom, where x₁ = 0."
+      ]
+     },
+     {
+      "question": "The normal to x²/8 + y²/2 = 1 at (2, 1) has slope 2. Which line is it?",
+      "options": [
+       "y = 2x − 3",
+       "y = 2x + 1",
+       "y = 2x − 1",
+       "y = −x/2 + 2"
+      ],
+      "answer": 0,
+      "why": "y − 1 = 2(x − 2) gives y = 2x − 4 + 1 = 2x − 3.",
+      "wrong": [
+       "",
+       "2 × (−2) = −4 was left out: y − 1 = 2x − 4.",
+       "The 1 moves across as +1: y = 2x − 4 + 1 = 2x − 3.",
+       "That is the tangent. The normal has slope 2."
+      ]
+     }
+    ]
+   ]
   }
  ]
 }
