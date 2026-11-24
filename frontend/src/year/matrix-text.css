@@ -6,3 +6,16 @@
 .mx-bar { border-left: 1px solid currentColor; padding-left: 0.6em; margin-left: -0.25em; }
 .mx-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .formula .mx, .option .mx { margin-top: 0.3em; margin-bottom: 0.3em; }
+
+/* matrix-entry@1: a matrix answer built as a grid of boxes */
+.mxa { display: grid; gap: 10px; justify-items: start; }
+.mxa-top { display: flex; align-items: center; gap: 10px; max-width: 100%; }
+.mxa-grid { display: grid; grid-template-columns: repeat(var(--mxa-cols), minmax(0, 3.6em)); gap: 6px; padding: 8px 10px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; border-radius: 6px; }
+.mxa-grid input { width: 100%; min-width: 0; height: 44px; padding: 0 4px; text-align: center; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.mxa-size { display: flex; gap: 6px; }
+.mxa-top .mxa-size { flex-direction: column-reverse; }
+.mxa-size button { width: 44px; height: 44px; padding: 0; font-size: 1.3rem; line-height: 1; }
+.mxa-keys { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mxa-cap { font-size: 0.8rem; opacity: 0.7; align-self: center; }
+.mxa-top .mxa-size .mxa-cap { order: 3; }
+.mxa-keys { padding-top: 8px; border-top: 1px dashed color-mix(in srgb, currentColor 25%, transparent); width: 100%; }
