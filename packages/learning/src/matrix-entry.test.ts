@@ -39,3 +39,33 @@ describe("matrix-entry@1: a matrix answer built box by box", () => {
     expect(seen).toBeGreaterThan(300);
   });
 });
+
+import { gridWording } from "./matrix-entry";
+import { problemOf } from "./families";
+import { matrixPieces } from "./matrix-text";
+describe("grid-wording@1: a grid answer is not asked for in brackets", () => {
+  it("leaves out only how the matrix is typed", () => {
+    expect(gridWording("A = [[1, 2], [3, 4]] and B = [[0, 1], [1, 0]]. Find AB, written as [[a, b], [c, d]].")).toBe("A = [[1, 2], [3, 4]] and B = [[0, 1], [1, 0]]. Find AB.");
+    expect(gridWording("A = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]. Find A⁻¹, written as [[a, b, c], [d, e, f], [g, h, i]] (fractions are fine as entries).")).toBe("A = [[1, 0, 0], [0, 1, 0], [0, 0, 2]]. Find A⁻¹ (fractions are fine as entries).");
+    expect(gridWording("A = [[2, 1], [1, 1]]. Find A⁻¹. (Fractions are fine as entries, e.g. [[1/2, 0], [−3/2, 1]].)")).toBe("A = [[2, 1], [1, 1]]. Find A⁻¹. (Fractions are fine as entries.)");
+    expect(gridWording("Find QP, written as a column [[a], [b]].")).toBe("Find QP.");
+    expect(gridWording("Write the product as [[a, b], [c, d]] (canteen P first; batter, then oil).")).toBe("Write the product (canteen P first; batter, then oil).");
+    expect(gridWording("aᵢⱼ = i + j, and write its transpose Aᵀ. Write Aᵀ as [[…], […]], row by row. (Fractions are fine as entries.)")).toBe("aᵢⱼ = i + j, and write its transpose Aᵀ. (Fractions are fine as entries.)");
+  });
+  it("leaves no typing form in any released matrix-answer question, and keeps its numbers", () => {
+    let seen = 0;
+    for (const f of FAMILIES.values()) {
+      if (!f.domain || f.type !== "matrix") continue;
+      for (const p of pool(f.id).items) for (const t of [p.prompt, f.word ? problemOf(`${p.id}:w`)?.prompt : undefined]) {
+        if (!t) continue;
+        const g = gridWording(t);
+        expect(g).not.toMatch(/written as (a column )?\[\[|written as a matrix|row by row|e\.g\. \[\[|\[\[[^\]]*[a-z…][^\]]*\]/);
+        // every matrix of numbers in the question is still there
+        const nums = (s: string) => matrixPieces(s).flatMap((x) => ("matrix" in x && !/[a-z…]/.test(x.matrix.raw) ? [x.matrix.raw] : []));
+        expect(nums(g)).toEqual(nums(t));
+        seen++;
+      }
+    }
+    expect(seen).toBeGreaterThan(5000);
+  });
+});
