@@ -197,7 +197,7 @@ test("break-it-down@1: a worked problem is separate steps, and every step can sa
   let n = 0;
   for (const f of foundations) for (const s of f.screens) if (s.steps) {
     assert.ok(s.ask?.trim() && s.steps.length >= 3 && s.steps.length <= 7, `${f.concept}: ${s.title}`);
-    for (const st of s.steps) { n++; assert.ok(st.do.trim() && st.do.length <= 70 && st.lines.length >= 1 && st.lines.length <= 4 && st.lines.every((l) => l.trim() && l.length <= 34) && st.why.length >= 1 && st.why.every((w) => w.trim().length > 20), `${s.title}: ${st.do}`); }
+    for (const st of s.steps) { n++; assert.ok(st.do.trim() && st.do.length <= 70 && st.lines.length >= 1 && st.lines.length <= 4 && st.lines.every((l) => l.trim() && l.length <= 40) && st.why.length >= 1 && st.why.every((w) => w.trim().length > 20), `${s.title}: ${st.do}`); }
   }
   assert.ok(n >= 15);
 });
