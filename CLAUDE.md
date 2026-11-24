@@ -29,4 +29,7 @@ engine; do not build beside it.
   `frontend/src/learning/svg-allowed.json` to get past it. Its `toMove` list is the maths teaching pictures still drawn
   outside the engine; when you work on one, move it into the engine and take it off the list. `notTeaching` (icons, the
   cat, writing surfaces, English pictures) stays.
+- A still picture in a question (a clock, a bar chart, a labelled triangle) is worked out in
+  `packages/learning/src/figure-marks.ts` and drawn by the same player (`FigureMarks`). A new kind of question picture is a
+  new case there.
 - The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
