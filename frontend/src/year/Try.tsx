@@ -76,6 +76,7 @@ function Sandbox({ skill, back, only }: { skill: Skill; back: () => void; only?:
     records: st.records, evidence: st.evidence, now, session: "try:sandbox:1", saving: false,
     answer: (qid: string, response: string, activity: LearningActivity, o = {}) => push(make.attempt(at(), qid, response, activity, o)),
     teach: (competency: string, strategy: string, rule: string) => push(make.teach(at(), competency, strategy, rule.slice(0, 40))),
+    understand: (competency: string, concept: string, round: number, asked: number, firstTry: number) => push(make.understand(at(), competency, concept, round, asked, firstTry)),
     recorded: () => null,
   };
   const m = moduleFor(skill.competency)!;

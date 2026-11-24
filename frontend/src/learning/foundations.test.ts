@@ -110,3 +110,25 @@ test("a repeat visit gets the next round of questions, round and round", async (
   assert.deepEqual(roundFor(f, 2), f.rounds![1]);
   assert.deepEqual(roundFor(f, 3), f.practice);
 });
+
+test("understanding@1: a finished round is kept as what was done, moves the next visit on, and is never an attempt", async () => {
+  const { readRecords } = await import("../../../packages/learning/src/records");
+  const { make } = await import("../../../packages/learning/src/session");
+  const { understandingOf } = await import("../../../packages/learning/src/foundations");
+  const skill = "MATH.trigonometry.ratios", ideas = foundationsOf(skill);
+  let n = 0;
+  const c = () => ({ learnerId: "L", sessionId: "learn:L:1", at: new Date(Date.UTC(2026, 10, 24, 0, 0, n++)).toISOString() }) as never;
+  const one = (firstTry: number, k = 0) => make.understand(c(), skill, ideas[k].concept, 0, 4, firstTry);
+  assert.equal(understandingOf(skill, []).state, "new");
+  assert.equal(understandingOf("MATH.number.no-such-skill", []).state, "none");
+  const shaky = readRecords("L", [one(1)], [], []);
+  assert.equal(shaky.attempts.length, 0);
+  assert.deepEqual(shaky.understanding.map((u) => [u.concept, u.asked, u.firstTry]), [[ideas[0].concept, 4, 1]]);
+  assert.equal(understandingOf(skill, shaky.understanding).state, "shaky");
+  // the latest round of each idea is the one that counts
+  const all = readRecords("L", [one(1), ...ideas.map((_, k) => one(4, k))], [], []);
+  assert.equal(understandingOf(skill, all.understanding).state, "met");
+  assert.equal(understandingOf(skill, all.understanding).ideas[0].rounds, 2);
+  // a record that overstates itself is not read
+  assert.equal(readRecords("L", [{ ...one(4), firstTry: 9 } as never], [], []).understanding.length, 0);
+});

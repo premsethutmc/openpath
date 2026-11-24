@@ -334,6 +334,7 @@ function App() {
     saving,
     answer: (qid: string, response: string, activity: LearningActivity, o = {}) => { const ms = onScreen(); return save(make.attempt(ctxOf(), qid, response, activity, { ...o, ...(ms ? { ms } : {}) })); },
     recorded: () => lastDecision.current,
+    understand: (competency: string, concept: string, round: number, asked: number, firstTry: number) => save(make.understand(ctxOf(), competency, concept, round, asked, firstTry)),
     teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40), o?.episode ? { episode: o.episode } : {})),
   };
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;
@@ -1262,6 +1263,19 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
           </ul>
         </section>
       )}
+      {(() => {
+        // understanding@1: the ideas behind the skills (start here): what was done, in counts; never a claim that a skill is learned
+        const latest = new Map<string, (typeof st.records.understanding)[number] & { rounds: number }>();
+        for (const u of st.records.understanding) latest.set(`${u.competency}|${u.concept}`, { ...u, rounds: (latest.get(`${u.competency}|${u.concept}`)?.rounds ?? 0) + 1 });
+        const rows = [...latest.values()].sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 12);
+        return rows.length ? (
+          <section aria-label="The ideas behind the skills" data-understanding>
+            <h2>The ideas behind the skills</h2>
+            <p className="muted small">Before a new skill, {name} meets the idea it rests on and answers a few questions about it. This is what happened; it does not count towards a skill.</p>
+            <ul className="plain">{rows.map((u) => <li key={`${u.competency}|${u.concept}`}><b>{u.concept}</b> <span className="muted small">({skillName(u.competency)})</span>: {u.firstTry} of {u.asked} right at the first choice{u.firstTry * 2 < u.asked ? ", so it will be offered again" : ""} · {u.rounds} round{u.rounds === 1 ? "" : "s"} · {ago(u.at)}</li>)}</ul>
+          </section>
+        ) : null;
+      })()}
       <section aria-label="The year so far">
         <h2>The school year so far</h2>
         {sum ? <p>{sum.verified} skill{sum.verified === 1 ? "" : "s"} checked again a week later and still right · {sum.shown} shown on their own · {sum.developing} being learned · {sum.notStarted} not started.</p> : <p className="muted">No school year has been set up yet.</p>}

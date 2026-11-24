@@ -36,5 +36,16 @@ export function roundFor(f: Foundation, visit: number): FoundationQuestion[] {
   const all = [f.practice ?? [], ...(f.rounds ?? [])].filter((r) => r.length);
   return all.length ? all[((visit % all.length) + all.length) % all.length] : [];
 }
+/**
+ * understanding@1: how a learner stands on the ideas in front of a skill, from their finished rounds (the latest round of
+ * each idea counts). "shaky" when the latest round of any idea had fewer than half right at the first choice; "met" when
+ * every idea has a finished round and none is shaky; "new" when an idea has no finished round. Never mastery of a skill.
+ */
+export function understandingOf(competency: string, done: readonly { competency: string; concept: string; asked: number; firstTry: number }[]): { state: "none" | "new" | "shaky" | "met"; ideas: { concept: string; rounds: number; asked: number; firstTry: number }[] } {
+  const all = foundationsOf(competency);
+  if (!all.length) return { state: "none", ideas: [] };
+  const ideas = all.map((f) => { const mine = done.filter((d) => d.competency === competency && d.concept === f.concept), last = mine[mine.length - 1]; return { concept: f.concept, rounds: mine.length, asked: last?.asked ?? 0, firstTry: last?.firstTry ?? 0 }; });
+  return { state: ideas.some((i) => i.rounds > 0 && i.firstTry * 2 < i.asked) ? "shaky" : ideas.some((i) => i.rounds === 0) ? "new" : "met", ideas };
+}
 /** The pictures of an idea (each once): each gets tap-the-picture questions. */
 export const picturesOf = (f: Foundation): Picture[] => [...new Set(f.screens.map((s) => s.picture).filter((p): p is Picture => !!p))];
