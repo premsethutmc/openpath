@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { pictureScene } from "../../../packages/learning/src/foundation-pictures";
 import { PictureExplore, PictureRound } from "./PictureTasks";
-import { SceneFigure } from "./Scene";
+import { SceneFigure, ScenePlayer } from "./Scene";
 import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
@@ -18,6 +18,7 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
     <section className="sh-card">
       <h3>{s.title}</h3>
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
+      {s.scene ? <ScenePlayer scene={s.scene} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {s.text.map((t, i) => <p key={i}>{t}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{t}</div>)}</div> : null}
@@ -65,7 +66,7 @@ export function StartHere({ competency, done, onRound, again }: { competency: st
   if (!all.length) return null;
   return (
     <div className="sh" data-start-here={competency}>
-      <p className="sh-eyebrow">{again ? "First, the idea behind this" : "Start here"}</p>
+      <p className="sh-eyebrow">{again ? "First, the idea behind this" : all.some((f) => f.lesson) ? "Learn it step by step" : "Start here"}</p>
       {all.map((f, k) => { const rounds = [f.practice ?? [], ...(f.rounds ?? [])].filter((r) => r.length), at = rounds.length ? visit[k] % rounds.length : 0; return <div className="sh" key={k}>
         {f.screens.map((s, i) => <FoundationCard key={i} s={s} />)}
         {picturesOf(f).map((p) => <PictureExplore key={p} kind={p} seed={seed + visit[k]} />)}

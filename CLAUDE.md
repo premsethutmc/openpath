@@ -36,4 +36,7 @@ engine; do not build beside it.
   are functions in `packages/learning/src/lesson-marks.ts`, drawn with `MarksSvg`.
 - A Start here idea shows still pictures through `figures` on its screen (`content/learning/foundations.v1.json`); an idea
   with no picture records why in `show`.
+- A senior skill whose generated lesson is only a list of rules gets a taught lesson: a `lesson: true` entry in
+  `content/learning/foundations.v1.json` (show it with a scene, one rule, why it works, every step, the slip to avoid,
+  then practice). `MATH.coordinate.conic-tangents-normals` is the model.
 - The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
