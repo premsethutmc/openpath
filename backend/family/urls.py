@@ -1,7 +1,7 @@
 from . import writing_views
 from django.urls import path
 
-from . import written, content_review, developer, educator_access, feedback, handoff, handover, link, reading_ai, views, word_problem, writing_feedback
+from . import placements, written, content_review, developer, educator_access, feedback, handoff, handover, link, reading_ai, views, word_problem, writing_feedback
 
 urlpatterns = [
     path("pupils/<uuid:pupil_id>/writing/", writing_views.WritingLessonsView.as_view(), name="writing-lessons"),
@@ -25,6 +25,7 @@ urlpatterns = [
     path("pupils/<uuid:pupil_id>/events/scrub/", views.PupilScrubView.as_view(), name="pupil-events-scrub"),
     path("pupils/<uuid:pupil_id>/export/", views.PupilExportView.as_view(), name="pupil-export"),
     path("content-review/", content_review.ContentReviewView.as_view(), name="content-review"),
+    path("placements/", placements.PlacementsView.as_view(), name="placements"),
     path("written/queue/", written.MarkingQueueView.as_view(), name="written-queue"),
     path("written/marks/", written.WrittenMarkView.as_view(), name="written-marks"),
     path("pupils/<uuid:pupil_id>/marking-share/", written.MarkingShareView.as_view(), name="marking-share"),

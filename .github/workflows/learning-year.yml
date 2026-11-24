@@ -27,6 +27,8 @@ on:
         "frontend/src/review/**",
         "frontend/e2e/educator-marking.test.mjs",
         "frontend/e2e/educator-access.test.mjs",
+        "frontend/e2e/placements.test.mjs",
+        "backend/family/placements.py",
         "frontend/e2e/integrated-skills.test.mts",
         "frontend/e2e/deep-recovery-app.test.mts",
         "frontend/e2e/run-deep-recovery.sh",
@@ -180,6 +182,7 @@ jobs:
           # sets through manage.py in this throwaway database (no secret, no real account).
           suite educator-marking env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-marking/ node --import tsx --test e2e/educator-marking.test.mjs
           suite educator-access env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-access/ node --import tsx --test e2e/educator-access.test.mjs
+          suite placements env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/placements/ node --test e2e/placements.test.mjs
           fi
           python3 ../.github/scripts/year-summary.py /tmp/year-results.tsv "$LOGS" /tmp/year-screens/summary.json
           if grep -q $'\tfail\t' /tmp/year-results.tsv; then
