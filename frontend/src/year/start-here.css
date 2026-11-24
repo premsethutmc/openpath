@@ -13,3 +13,11 @@
 .sh-feedback{border-left:3px solid #d2553f;padding-left:10px}.sh-feedback.good{border-left-color:#2e9d5b}
 .sh-answer-key{font-size:.92rem}
 .sh-figs{display:grid;gap:10px}.sh-figs.many{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.sh-fig{display:grid;gap:4px;justify-items:center;align-content:start}.sh-fig .figure{margin:0;width:100%;display:flex;justify-content:center}.sh-cap{font-size:.92rem;text-align:center;color:var(--muted,inherit)}
+.sh-ask{font-weight:800;font-size:1.05rem}
+.sh-steps{display:grid;gap:10px}.sh-steps ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sh-step{border:1px solid var(--line,rgba(127,127,127,.3));border-left:4px solid var(--sh-accent);border-radius:12px;padding:10px 12px;display:grid;gap:6px;justify-items:start}
+.sh-step-do{font-weight:700}.sh-step-n{display:inline-block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sh-accent);margin-right:6px}
+.sh-step-lines{font-size:1.12rem;display:grid;gap:4px;padding:2px 0;overflow-x:auto;max-width:100%}
+.sh-why{border-top:1px dashed var(--line,rgba(127,127,127,.3));padding-top:6px;display:grid;gap:6px;font-size:.96rem}
+.sh-why-btn{font:inherit;font-size:.9rem;font-weight:700;background:transparent;color:inherit;border:1px solid var(--line,rgba(127,127,127,.45));border-radius:999px;padding:5px 12px;cursor:pointer;min-height:36px}
+.sh-break{justify-self:start}.sh-after{font-weight:600}

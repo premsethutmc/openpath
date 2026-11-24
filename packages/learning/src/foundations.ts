@@ -19,7 +19,11 @@ export interface FoundationScreen { title: string; text: string[]; example?: str
   /** idea-figures@1: still pictures of the idea, each with a line saying what to see in it. They are the engine's question pictures (figure-marks.ts): the same clock, number line, shapes and labelled diagrams the questions use. */
   figures?: { v: { type: string; [k: string]: unknown }; caption: string }[];
   /** idea-scene@1: something to move on this screen: a scene of the scene engine (scene.ts), with its own goal. */
-  scene?: Scene }
+  scene?: Scene;
+  /** break-it-down@1: a worked problem as separate steps. `ask` is the problem. Each step says what is done (`do`), shows the
+   *  mathematics one line at a time (`lines`), and holds the reason in plain words (`why`), opened by "Why?" on that step or by
+   *  "Break it down" for all of them. `after` is said once the steps have been seen (the slips to avoid). */
+  ask?: string; steps?: { do: string; lines: string[]; why: string[] }[]; after?: string[] }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
 export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[];
