@@ -9,6 +9,7 @@ import { leafView, type Response } from "../../../../packages/english-core/src/i
 import { type Code, loadContent } from "./content.ts";
 import { testClock } from "./journey-sim.ts";
 import { Learner } from "./learner.ts";
+import { MISTAKE_LESSON } from "./mistake-lessons.ts";
 import { mistakesShownBy } from "./select.ts";
 import { MemoryRepo } from "./store.ts";
 import { rightAnswer } from "./test-helpers.ts";
@@ -65,7 +66,7 @@ test("FU-1 after a tagged mistake the next question can show the same mistake, o
   assert.equal(l.state.ledger.decisions.find((d) => d.source === ev[0].id)!.verdict, "accepted");
 });
 
-test("FU-2 the same mistake again strengthens the record of it, and is not followed by a third question of the kind", async () => {
+test("FU-2 the same mistake again confirms it: the lesson about that mistake comes next, once, then questions go on", async () => {
   const { l, clock, tag } = await untilMistake();
   const cur = await l.current();
   const probe = cur.next!.item as Code;
@@ -73,8 +74,36 @@ test("FU-2 the same mistake again strengthens the record of it, and is not follo
   const before = strength(l, clock, tag);
   await l.answer(probe, again.response, { use: cur.next!.use });
   assert.ok(strength(l, clock, tag) > before, `the mistake is now stronger: ${before} to ${strength(l, clock, tag)}`);
+  const taught = await l.current();
+  assert.equal(taught.next, null, "no question before the lesson");
+  assert.equal(taught.lesson?.id, `${CAP}#${MISTAKE_LESSON[CAP][tag]}`);
+  assert.match(taught.reteach ?? "", /same way/);
+  // asking again before the lesson is read shows the same lesson, not a question
+  assert.equal((await l.current()).lesson?.id, taught.lesson!.id);
+  await l.finishLesson(taught.lesson!.id, true);
   const next = await l.current();
-  assert.notEqual(next.next?.trace?.path, "misconception_follow_up", "one follow-up per mistake");
+  assert.equal(next.lesson, null, "the lesson is shown once");
+  assert.ok(next.next, "questions go on");
+  assert.notEqual(next.next!.trace?.path, "misconception_follow_up", "one follow-up per mistake");
+  // the lesson is on the record as teaching, so what follows in this session is practice after teaching
+  assert.ok(l.events.some((e) => e.kind === "intervention" && e.content === taught.lesson!.id));
+  const fb = await l.answer(next.next!.item, rightAnswer(next.next!.item), { use: next.next!.use });
+  assert.equal(fb.correct, true);
+  const ev = l.events.filter((e) => e.kind === "evidence").at(-1)!;
+  assert.equal(l.state.ledger.decisions.find((d) => d.source === ev.id)!.observation?.setting, "after_teaching");
+});
+
+test("FU-2b every listed mistake is one the framework lists for the skill, and its lesson exists", () => {
+  let pairs = 0;
+  for (const [cap, map] of Object.entries(MISTAKE_LESSON)) {
+    const known = new Set(content.index.leaves.get(cap)?.misconceptions?.map((m) => m.id) ?? []);
+    for (const [mistake, step] of Object.entries(map)) {
+      assert.ok(known.has(mistake), `${cap}: ${mistake} is not a listed mistake`);
+      assert.ok(content.lessons.get(`${cap}#${step}`), `${cap}#${step}: no such lesson`);
+      pairs++;
+    }
+  }
+  assert.ok(pairs >= 25, `${pairs} mistakes have a lesson`);
 });
 
 test("FU-3 no follow-up after a right answer, after a retry, or outside guided practice", async () => {

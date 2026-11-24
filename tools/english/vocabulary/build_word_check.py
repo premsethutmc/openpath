@@ -9,7 +9,7 @@ Rarer words sit at higher levels. The frequency list is not kept in this reposit
 and run:  python3 tools/english/vocabulary/build_word_check.py package/index.json
 
 Each word carries one closest word and three wrong ones. The wrong ones are close on purpose (the same kind of
-word, the same field of meaning, or a look-alike), and every choice must be a commoner word than the word tested,
+word, the same field of meaning, and at most one look-alike), and every choice must be a commoner word than the word tested,
 so a learner cannot work the answer out from the choices. The script refuses to write if a rule is broken.
 """
 import bisect, json, pathlib, re, sys
@@ -56,7 +56,7 @@ a shrewd clever greedy strict rude
 a candid honest friendly calm funny
 a cautious careful worried slow quiet
 a trivial unimportant simple boring silly
-v contemplate consider discuss decide remember
+v contemplate consider discuss complete remember
 a valiant brave loyal proud noble
 v boast brag shout joke lie
 a immense huge heavy strong deep
@@ -106,37 +106,37 @@ a taciturn quiet gloomy shy stern
 a ambivalent unsure uncaring flexible dishonest
 a opulent luxurious spacious colourful ancient
 v abate lessen worsen delay spread
-a affable friendly talkative capable wealthy
-a recalcitrant disobedient forgetful hesitant regretful
+a affable friendly talkative wealthy polite
+a recalcitrant disobedient reluctant careless forgetful
 a verbose wordy loud clever vague
 a churlish rude childish stingy gloomy
-a diffident shy unusual lazy uncaring
+a diffident shy uncaring cautious gloomy
 a garrulous talkative quarrelsome greedy cheerful
-a indolent lazy rude careless poor
-a intransigent stubborn temporary ignorant impatient
+a indolent lazy rude careless weary
+a intransigent stubborn temporary aggressive impatient
 a erudite educated polite blunt wealthy
 v extol praise demand remove announce
-a lugubrious gloomy slippery ridiculous sluggish
+a lugubrious gloomy slippery sluggish weary
 a limpid clear weak pale damp
-v ameliorate improve combine measure delay
+v ameliorate improve combine worsen delay
 a brusque blunt lively brutal hasty
-a truculent fierce honest sluggish greedy
-a pusillanimous cowardly stingy tiny quarrelsome
-a sagacious wise brave talkative greedy
-v castigate scold throw cleanse imprison
+a truculent fierce honest sulky cowardly
+a pusillanimous cowardly stingy cautious tiny
+a sagacious wise brave talkative patient
+v castigate scold mock imprison banish
 v enervate weaken excite annoy awaken
-a vociferous loud greedy truthful fierce
+a vociferous loud greedy talkative fierce
 a munificent generous splendid powerful wealthy
 a phlegmatic unemotional sickly stubborn practical
 a querulous complaining curious argumentative nervous
-a refulgent shining overflowing disgusting rebellious
-a risible laughable noticeable growing risky
-a sedulous persistent tempting calm secretive
-a timorous fearful punctual angry tiny
-a impecunious poor rude flawless stubborn
+a refulgent shining overflowing fragrant rebellious
+a risible laughable noticeable risky shameful
+a sedulous persistent tempting calm loyal
+a timorous fearful punctual angry gentle
+a impecunious poor rude flawless stingy
 a inveterate habitual experienced spineless innocent
-a sycophantic flattering crazy musical sickly
-v excoriate condemn excite expel examine
+a sycophantic flattering obedient deceitful crazy
+v excoriate condemn expel forgive mock
 """
 # Invented words: none is a real English word. "plain" ones look everyday, "long" ones look learned.
 FAKE = {"plain": "plindle drasket quibbet traskle dromble noffle grombin frandle mesker morvish pavelin wendrick".split(),
@@ -180,6 +180,19 @@ def main(freq_path: str) -> None:
             if rank(o) >= r and level(r) > 1: problems.append(f"{word}: choice '{o}' (rank {rank(o)}) is not commoner than the word (rank {r})")
             if o not in speller and o not in cnt: problems.append(f"{word}: choice '{o}' is not a listed word")
         words.append([level(r), r, pos, word, right, *wrong])
+    # No surface rule may beat the questions. Two rules a learner who does not know the word could try: "pick a choice
+    # that looks like the word" and "avoid the choices that look like it" (looks like: shares its first two letters).
+    # On each level's words neither may score better than one in three, where blind guessing scores one in four.
+    def surface(w, avoid):
+        word, right, wrong = w[3], w[4], w[5:]
+        alike = [o for o in (right, *wrong) if o[:2] == word[:2]]
+        pool = [o for o in (right, *wrong) if (o not in alike) == avoid] or [right, *wrong]
+        return (right in pool) / len(pool)
+    for b in range(1, 9):
+        at = [w for w in words if w[0] == b]
+        for avoid, name in ((False, "pick the look-alike"), (True, "avoid the look-alikes")):
+            score = sum(surface(w, avoid) for w in at) / max(1, len(at))
+            if score > 1 / 3: problems.append(f"level {b}: the rule '{name}' scores {score:.2f} without knowing a word (limit 0.33)")
     for kind, fs in FAKE.items():
         for f in fs:
             if f in speller or f in cnt: problems.append(f"{f}: is a real word")

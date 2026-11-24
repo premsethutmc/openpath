@@ -75,6 +75,14 @@ export function buildCheck(raw: unknown): SizeCheck {
   return { version: r.version, status: r.status, bands: r.bands.map((b) => ({ id: b.id, label: b.label })), words, fake: r.fake.map(([word, look]) => ({ word, look })) };
 }
 
+/** The chance of the right choice for a learner who does not know the word and goes by looks alone. */
+export function surfaceGuess(w: { word: string; options: readonly string[]; answer: number }, avoid: boolean): number {
+  const alike = w.options.filter((o) => o.slice(0, 2) === w.word.slice(0, 2));
+  const kept = w.options.filter((o) => alike.includes(o) !== avoid);
+  const pool = kept.length ? kept : w.options;
+  return pool.includes(w.options[w.answer]) ? 1 / pool.length : 0;
+}
+
 export function checkProblems(c: SizeCheck): string[] {
   const out: string[] = [];
   const seen = new Set<string>();
@@ -91,6 +99,16 @@ export function checkProblems(c: SizeCheck): string[] {
     seen.add(f.word);
   }
   for (const b of c.bands) if (c.words.filter((w) => w.band === b.id).length < 10) out.push(`band ${b.id}: needs at least 10 words`);
+  // No surface rule may beat the questions of a level: "pick a choice that looks like the word" and "avoid the choices
+  // that look like it" (looks like: shares its first two letters) may each score at most one in three there, where a
+  // blind guess scores one in four. The build script holds new words to the same rule.
+  for (const b of c.bands) {
+    const at = c.words.filter((w) => w.band === b.id);
+    for (const avoid of [false, true]) {
+      const score = at.reduce((t, w) => t + surfaceGuess(w, avoid), 0) / Math.max(1, at.length);
+      if (score > 1 / 3) out.push(`band ${b.id}: "${avoid ? "avoid the look-alikes" : "pick the look-alike"}" scores ${score.toFixed(2)} without knowing a word`);
+    }
+  }
   for (const look of ["plain", "long"] as const) if (c.fake.filter((f) => f.look === look).length < 8) out.push(`invented words (${look}): needs at least 8`);
   return out;
 }
