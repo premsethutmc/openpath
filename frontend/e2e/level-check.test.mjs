@@ -279,54 +279,18 @@ test("Find my level: a part can be skipped, and the app says it starts by age th
   await context.close();
 });
 
-test("Find my level: the quick gap check gives one overall level and a starting point for every part", async () => {
-  const { context, page, errors, foreign, fits } = await start("Gaps");
-  const WORDS = read("vocabulary/daily-words.json").words.map(([band, , word, , sentence]) => ({ band, word, sentence }));
+test("Find my level: the quick gap check is not offered, and the check each part is the first choice", async () => {
+  const { context, page, errors, foreign } = await start("Gaps");
   await page.getByRole("button", { name: "Find my level" }).click();
-  await page.getByText("about three minutes", { exact: false }).waitFor();
-  await page.getByRole("button", { name: "Start the quick check" }).click();
-  const asked = [];
-  for (let i = 1; i <= 17; i++) {
-    await page.waitForFunction(() => ["gaps", "result"].includes(document.querySelector("main")?.getAttribute("data-phase")));
-    if ((await page.locator("main").getAttribute("data-phase")) !== "gaps") break;
-    assert.ok(i <= 16, "at most sixteen questions");
-    await page.getByText(`Question ${i} of up to 16`).waitFor();
-    const shown = await page.locator(".gap-shown").innerText();
-    const before = await page.evaluate(() => {
-      const n = document.querySelector("#gap-sentence").firstChild;
-      return n.nodeType === 3 ? n.textContent : "";
-    });
-    const w = WORDS.find((x) => x.sentence.startsWith(before + shown) && x.sentence.slice(before.length).toLowerCase().startsWith(x.word));
-    assert.ok(w, `a sentence of New words: ${before}${shown}`);
-    assert.ok(!asked.includes(w.word), "no word twice");
-    asked.push(w.word);
-    assert.equal(await page.getByText(w.word, { exact: false }).count(), 0, "the whole word is not on screen");
-    if (i === 1) {
-      await fits();
-      await shot(page, "5-gap");
-    }
-    // this learner can finish words up to level 3
-    if (w.band <= 3) {
-      await page.locator("#gap-box").fill(w.word.slice(shown.length));
-      await page.getByRole("button", { name: "Next", exact: true }).click();
-    } else await page.getByRole("button", { name: "I don't know this word" }).click();
-    await page.waitForFunction((n) => document.querySelector("main")?.getAttribute("data-index") !== String(n - 1) || document.querySelector("main")?.getAttribute("data-phase") !== "gaps", i);
-  }
-  assert.ok(asked.length >= 10, `${asked.length} questions`);
-  await page.getByRole("heading", { name: "Here is where to start" }).waitFor();
-  await page.getByText("This was the quick check: one overall level", { exact: false }).waitFor();
-  await page.locator('[data-part="words"] .status', { hasText: /word level [23] on a scale of 1 to 8/ }).waitFor();
-  assert.equal(await page.locator('[data-estimated="true"]').count(), 5, "every part is marked as a starting point");
-  await fits();
-  await shot(page, "6-gap-result");
-  await page.getByRole("button", { name: "See what to do today" }).click();
-  await page.getByRole("heading", { name: "Your English today" }).waitFor();
-  assert.equal(await page.locator(".stream-rows li").count(), 5);
-  // the home screen says how sure each level is: after the quick check every part is a starting point
-  await page.getByText(/Overall, from the quick check: level [23] of 8/).waitFor();
-  assert.equal(await page.locator("[data-sure]", { hasText: "a starting point from the quick check" }).count(), 5);
-  await fits();
-  await shot(page, "7-gap-home");
+  await page.getByText("The check begins with words", { exact: false }).waitFor();
+  assert.equal(await page.getByRole("button", { name: /quick check/i }).count(), 0, "the gap check is switched off until its questions are fixed");
+  const first = page.getByRole("button", { name: "Check each part (about seven minutes)" });
+  assert.match(await first.getAttribute("class"), /primary/);
+  await first.click();
+  // it opens on the word check
+  await page.waitForFunction(() => document.querySelector("main")?.getAttribute("data-phase") !== "intro");
+  assert.equal(await page.locator(".gap-check").count(), 0);
+  await shot(page, "7-no-gap-check");
   assert.deepEqual(errors, []);
   assert.deepEqual(foreign, []);
   await context.close();

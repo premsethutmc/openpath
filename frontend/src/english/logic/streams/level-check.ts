@@ -506,7 +506,16 @@ export class SpellingPlacement {
  * matching level rounded down, listening one lower because nothing here is heard. A part's own check, taken before
  * or after, always replaces that starting point.
  */
-export const GAP_CHECK = 1;
+/**
+ * Version 2 (24 November 2026): results of version 1 are no longer used, and the check is not offered (GAP_OFFERED).
+ * The first real sitting placed a capable adult (about level 5 by their own estimate) at level 1: six of twelve
+ * level-2 words right, missing fade, mend and tease. A typed gap can fit another word or be lost to a slip of the
+ * thumb, so a miss here is not good evidence that the word is unknown. Until the questions are fixed and tried on
+ * real people, Find my level starts with the word check instead, and a stored version-1 result gives no part a
+ * starting point. The check itself and its tests are kept.
+ */
+export const GAP_CHECK = 2;
+export const GAP_OFFERED = false;
 export const GAP_LEAST = 10;
 export const GAP_MOST = 16;
 export interface GapItem {

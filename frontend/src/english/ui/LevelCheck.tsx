@@ -10,7 +10,7 @@ import { DICTATION, wordsOf } from "../logic/dictation/dictation.ts";
 import { BANK, LEVEL_NAMES } from "../logic/spelling.ts";
 import type { Learner } from "../logic/learner.ts";
 import { COURSE } from "../logic/reading/course.ts";
-import { GapCheck, GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, QUICK, READING_TEXTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, startFromWords, type GapView, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Mode, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
+import { GAP_OFFERED, GapCheck, GrammarPlacement, LISTENING_STEPS, ListeningPlacement, MIDDLE, PARTS, QUICK, READING_TEXTS, ReadingPlacement, SPELLING_STEPS, SpellingPlacement, startFromWords, type GapView, type GrammarPlacementView, type LevelCheckRecord, type Levels, type Mode, type Part, type ReadingPlacementView } from "../logic/streams/level-check.ts";
 import { BANDS, WORDS } from "../logic/vocabulary/daily-words.ts";
 import { ABOUT, CHECK, CHECK_VERSION, SizeCheckSession, levelLine, startBand, type CheckItem } from "../logic/vocabulary/size-check.ts";
 import { WordQuestion } from "./VocabularyCheck.tsx";
@@ -49,14 +49,22 @@ export function LevelIntro({ again, onStart, onBack }: { again: boolean; onStart
       <h1 id="level-title" className="hero">
         Where should you start?
       </h1>
-      <p className="sub">The quick check takes about three minutes. You see a sentence with one word half hidden, and type the rest of the word. The words get harder until the check finds ones you cannot finish: everyone meets some.</p>
-      <p className="small">One answer shows several things at once: whether you know the word, can spell it, and can read the sentence around it. The check gives one overall level, and every part of English starts from it. It is not a test: if you do not know a word, say so.</p>
-      <button type="button" className="primary" onClick={() => onStart("gaps")}>
-        {again ? "Quick check again" : "Start the quick check"}
-      </button>
-      <p className="small">Want a level measured in each part? These take longer: words, reading, listening, spelling and grammar, one after the other. Any part can be skipped.</p>
-      <button type="button" className="secondary" onClick={() => onStart("quick")}>
-        Check each part (about seven minutes)
+      {GAP_OFFERED ? (
+        <>
+          <p className="sub">The quick check takes about three minutes. You see a sentence with one word half hidden, and type the rest of the word. The words get harder until the check finds ones you cannot finish: everyone meets some they cannot.</p>
+          <button type="button" className="primary" onClick={() => onStart("gaps")}>
+            {again ? "Quick check again" : "Start the quick check"}
+          </button>
+          <p className="small">Want a level measured in each part? These take longer: words, reading, listening, spelling and grammar, one after the other. Any part can be skipped.</p>
+        </>
+      ) : (
+        <>
+          <p className="sub">The check begins with words, then reading, listening, spelling and grammar, a few questions each. The questions get harder until the check finds ones you cannot do: everyone meets some they cannot.</p>
+          <p className="small">It is not a test. Any part can be skipped.</p>
+        </>
+      )}
+      <button type="button" className={GAP_OFFERED ? "secondary" : "primary"} onClick={() => onStart("quick")}>
+        {again && !GAP_OFFERED ? "Check again (about seven minutes)" : "Check each part (about seven minutes)"}
       </button>
       <button type="button" className="secondary" onClick={() => onStart("full")}>
         Take the full check instead (about fifteen minutes)
