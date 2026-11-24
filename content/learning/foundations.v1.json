@@ -2960,7 +2960,7 @@
       "Two shops record a day's sales. Shop 1 sold 5 pens and 2 notebooks. Shop 2 sold 3 pens and 4 notebooks. Written as a table, that is two rows of two numbers.",
       "Take away the labels and keep only the block of numbers: that block is a matrix. Each number in it is called an entry.",
       "Rows go across and columns go down. A matrix with 2 rows and 2 columns has order 2 × 2: rows are always said first.",
-      "This app writes a matrix one row at a time: [[5, 2], [3, 4]] has first row 5, 2 and second row 3, 4. A matrix gets a capital letter as its name, such as A."
+      "A matrix is written inside big brackets, rows across and columns down. A = [[5, 2], [3, 4]] has first row 5, 2 and second row 3, 4. A matrix gets a capital letter as its name, such as A."
      ],
      "check": {
       "question": "How many rows does [[1, 2, 3], [4, 5, 6]] have?",
@@ -3216,7 +3216,7 @@
        "6, 1"
       ],
       "answer": 1,
-      "why": "The app writes one row at a time. The second row is 1, 8.",
+      "why": "Rows go across. The second row is 1, 8.",
       "wrong": [
        "0, 8 is column 2. Rows go across.",
        "",
@@ -18599,7 +18599,7 @@
       "A teacher writes the marks of 2 children in 3 tests as a neat table: one line across for each child, one line down for each test. A table of numbers like this, put inside brackets, is called a matrix. We name it with a capital letter such as A.",
       "The lines going across are rows. The lines going down are columns. Each number is called an entry.",
       "The order (size) of a matrix is rows × columns, said 'rows by columns'. A matrix with 2 rows and 3 columns is a 2 × 3 matrix. A matrix with the same number of rows and columns is a square matrix, for example 3 × 3.",
-      "In this app a matrix is typed row by row: [[1, 2, 3], [4, 5, 6]] has first row 1, 2, 3 and second row 4, 5, 6."
+      "Inside the brackets each row goes across: A = [[1, 2, 3], [4, 5, 6]] has first row 1, 2, 3 and second row 4, 5, 6."
      ],
      "check": {
       "question": "In A = [[1, 2, 3], [4, 5, 6]], which entry is in row 1, column 2?",
