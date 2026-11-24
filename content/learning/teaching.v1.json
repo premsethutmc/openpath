@@ -489,6 +489,69 @@
    ]
   },
   {
+   "item": "recipe:MATH.matrices.transpose-symmetry",
+   "kind": "recipe",
+   "competency": "MATH.matrices.transpose-symmetry",
+   "title": "Flip it across the diagonal",
+   "hash": "099a7202",
+   "source": "written",
+   "classes": [
+    "TN 10",
+    "TN 11",
+    "CBSE 12",
+    "ICSE 12"
+   ]
+  },
+  {
+   "item": "recipe:MATH.matrices.adjoint-inverse",
+   "kind": "recipe",
+   "competency": "MATH.matrices.adjoint-inverse",
+   "title": "Cross out, sign, flip",
+   "hash": "3109da72",
+   "source": "written",
+   "classes": [
+    "CBSE 12",
+    "ICSE 12",
+    "TN 12"
+   ]
+  },
+  {
+   "item": "recipe:MATH.matrices.rank-row-reduction",
+   "kind": "recipe",
+   "competency": "MATH.matrices.rank-row-reduction",
+   "title": "Which rows really count?",
+   "hash": "84fd24bf",
+   "source": "written",
+   "classes": [
+    "TN 12"
+   ]
+  },
+  {
+   "item": "recipe:MATH.matrices.system-consistency",
+   "kind": "recipe",
+   "competency": "MATH.matrices.system-consistency",
+   "title": "One answer, many, or none?",
+   "hash": "84db6f7d",
+   "source": "written",
+   "classes": [
+    "ICSE 12",
+    "TN 12"
+   ]
+  },
+  {
+   "item": "recipe:MATH.algebra.matrix-systems",
+   "kind": "recipe",
+   "competency": "MATH.algebra.matrix-systems",
+   "title": "Equations packed into AX = B",
+   "hash": "5cc1f982",
+   "source": "written",
+   "classes": [
+    "CBSE 12",
+    "ICSE 12",
+    "TN 12"
+   ]
+  },
+  {
    "item": "card:MATH.algebra.absolute-value",
    "kind": "card",
    "competency": "MATH.algebra.absolute-value",
@@ -18287,7 +18350,7 @@
    "kind": "help",
    "competency": "MATH.algebra.matrices",
    "title": "The order and the type of a matrix",
-   "hash": "78165b78",
+   "hash": "c9996b7d",
    "source": "rule",
    "from": "steps",
    "classes": [

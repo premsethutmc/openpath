@@ -11,6 +11,9 @@ OPTS = None
 def options(q):
     """the option texts of a typed multiple-choice question (exported separately by the certifier from the statement data)"""
     global OPTS
+    # the exported question carries its own option texts; the separate file is only needed for older exports
+    if q.get('choices'):
+        return q['choices']
     if OPTS is None:
         OPTS = json.load(open('/tmp/certout/algebra-b/choice_options.json'))
     return OPTS[q['id'].split(':')[1]][q['id']]
