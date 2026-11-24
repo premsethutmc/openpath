@@ -40,7 +40,10 @@ export type LearningRecord =
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string; methodAlignment?: string; episode?: string })
   | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "study_session"; planId:string; revision:number; phase:"start"|"active"|"ended"; time:StudyTime; advice?:StudyAdvice; summary?:StudySummary })
-  | (Base & { record: "skip"; target: string });
+  | (Base & { record: "skip"; target: string })
+  // understanding@1: one finished round of a start-here idea's own questions (foundations@1): how many were asked and how many
+  // were right at the first choice. What the learner DID on the idea behind a skill; never an attempt, never mastery evidence.
+  | (Base & { record: "understand"; policy: "understanding@1"; competency: string; concept: string; round: number; asked: number; firstTry: number });
 
 /** grading-decision@1 as the SERVER recorded it (stage 7). Only the server adds it (a browser that sends one is refused), so it is the
  *  recorded, authoritative verdict replay reads (D11); a later superseding decision (a regrade) is merged in by the loader. */
@@ -97,6 +100,8 @@ export interface LearnerRecords {
   attempts: Attempt[];
   teaching: { at: string; rule: string; strategy: string; competency: string; session: string; methodAlignment?: string; episode?: string }[];
   skips: { at: string; target: string }[];
+  /** understanding@1: finished start-here rounds, oldest first. Shown to the parent; used to offer the idea again. Not evidence of a skill. */
+  understanding: { at: string; competency: string; concept: string; round: number; asked: number; firstTry: number }[];
   sessions: Record<string, string>;
   /** written@1: written answers not yet marked. */
   pending: PendingWritten[];
@@ -112,7 +117,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
   // handover@1: only well-formed server acknowledgements, oldest first (deterministic)
   const acks = acknowledgements.filter((x) => !!x && typeof x.id === "string" && typeof x.competency === "string" && x.by === "educator" && !Number.isNaN(Date.parse(x.at)))
     .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const, ...(typeof x.recoveryEpisode === "string" ? { recoveryEpisode: x.recoveryEpisode } : {}) })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
-  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [], acknowledgements: acks };
+  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], understanding: [], sessions: {}, pending: [], unresolved: [], acknowledgements: acks };
   const markOf = new Map(marks.map((m) => [m.attemptId, m]));
   const seen = new Set<string>();
   const count = new Map<string, number>();
@@ -147,6 +152,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution || (r.activity === "guided" && out.teaching.some((t) => t.rule === "foundation-lesson-review@1" && t.session === r.sessionId && t.competency === r.competency && Date.parse(t.at) <= Date.parse(r.at))), competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) , ...(r.assessment ? { assessment: r.assessment } : {}), ...(typeof r.ms === "number" && r.ms > 0 && r.ms <= 600_000 ? { ms: r.ms } : {}) });
     } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId, ...(r.methodAlignment ? { methodAlignment: r.methodAlignment } : {}), ...(r.episode !== undefined ? { episode: r.episode } : {}) });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });
+    else if (r.record === "understand") { if (r.policy === "understanding@1" && typeof r.competency === "string" && typeof r.concept === "string" && [r.round, r.asked, r.firstTry].every((n) => Number.isInteger(n) && n >= 0) && r.asked >= 1 && r.firstTry <= r.asked) out.understanding.push({ at: r.at, competency: r.competency, concept: r.concept, round: r.round, asked: r.asked, firstTry: r.firstTry }); }
   }
   return out;
 }

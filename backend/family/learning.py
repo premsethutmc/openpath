@@ -37,6 +37,8 @@ RECORDS = {
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment', 'ms'},
     'teach': {'rule', 'strategy', 'competency', 'episode', 'methodAlignment'},
     'skip': {'target'},
+    # understanding@1: a finished round of a start-here idea's own questions; what the learner did, never an attempt or mastery
+    'understand': {'policy', 'competency', 'concept', 'round', 'asked', 'firstTry'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
 }
@@ -326,6 +328,13 @@ def _known_release(ref, prior):
     )
 
 
+@lru_cache
+def _start_here():
+    """understanding@1: for each start-here idea (skill, idea), how many questions each of its rounds has."""
+    with open(Path(settings.BASE_DIR).parent / ROOT / 'foundations.v1.json', encoding='utf-8') as f:
+        return {(e['competency'], e['concept']): [len(r) for r in [e.get('practice') or [], *(e.get('rounds') or [])] if r] for e in json.load(f)['entries']}
+
+
 def checked_learning(event, pupil):
     c = content()
     record = event.get('record')
@@ -446,6 +455,14 @@ def checked_learning(event, pupil):
     elif record == 'skip':
         if not _text(event.get('target'), 120):
             _reject('Invalid skip.')
+    elif record == 'understand':
+        whole = lambda v: isinstance(v, int) and not isinstance(v, bool)
+        rounds = _start_here().get((event.get('competency'), event.get('concept')))
+        if event.get('policy') != 'understanding@1' or not rounds:
+            _reject('Unknown start-here idea for this skill.')
+        r, asked, first = event.get('round'), event.get('asked'), event.get('firstTry')
+        if not (whole(r) and whole(asked) and whole(first)) or not 0 <= r < len(rounds) or asked != rounds[r] or not 0 <= first <= asked:
+            _reject('Invalid start-here round.')
     # the server keeps the time: the delayed check and everything else is measured by it
     return {**event, 'at': now.isoformat().replace('+00:00', 'Z'), 'savedAt': now.isoformat()}
 

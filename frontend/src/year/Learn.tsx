@@ -25,6 +25,7 @@ import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
 import { StartHere } from "./StartHere";
+import { understandingOf } from "../../../packages/learning/src/foundations";
 import { ScribblePad } from "./ScribblePad";
 import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
 import { WorkedByYou } from "./WorkedByYou";
@@ -82,6 +83,8 @@ export interface Ctx {
   answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[]; clarifications?: number }) => Promise<boolean>;
   /** `episode` (research, deep-recovery@0): the recovery that delivered this lesson; omitted everywhere else */
   teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => Promise<boolean>;
+  /** understanding@1: a finished round of a start-here idea's questions (what was done; never evidence of the skill) */
+  understand?: (competency: string, concept: string, round: number, asked: number, firstTry: number) => Promise<boolean>;
   /** the server's recorded decision for the answer just saved (authoritative); null when the server recorded none */
   recorded?: () => ServerDecision | null;
 }
@@ -890,6 +893,8 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
+        {/* understanding@1: a learner being taught again whose idea behind the skill is new or shaky meets that idea first */}
+        {KID && ["new", "shaky"].includes(understandingOf(competency, ctx.records.understanding).state) && <StartHere again competency={competency} done={ctx.records.understanding} onRound={ctx.understand} />}
         <p className="small muted" role="note" data-content-review={ms.contentReview?.status ?? "unknown"}>{ms.contentReview?.educatorApproved ? ms.contentReview.label : `${ms.contentReview?.label ?? "Demonstration: this explanation has not been approved by an educator."} ${ms.teachingReview === "machine-checked" ? "It has been checked automatically against its question." : "It has not been checked automatically."}`}</p>
         <Lesson competency={competency} key={ms.strategy.id} resumeKey={lessonKey && `${lessonKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
@@ -909,7 +914,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       <div className="stack">
         {!embedded && <h1>{name}</h1>}
         <p className="kid-new">✨ New skill. The lesson is just below.</p>
-        <StartHere competency={competency} />
+        <StartHere competency={competency} done={ctx.records.understanding} onRound={ctx.understand} />
         <Lesson opening grade={currentEnrolment(ctx.records)?.grade ?? null} competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
         <button className="link kid-skip" onClick={() => setTestMe(true)}>I know this — test me</button>
       </div>

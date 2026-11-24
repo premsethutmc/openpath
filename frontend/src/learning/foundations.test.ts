@@ -94,12 +94,15 @@ test("one picture system: pictures are drawn by the scene engine, not by new com
   const root = new URL("../", import.meta.url).pathname;
   // the files that draw today: the engine's player, and the older question-figure and app-chrome drawings. A new picture
   // or interaction is a scene description (packages/learning/src/scene.ts), not a new file here: do not add to this list.
-  const allowed = new Set(JSON.parse(readFileSync(new URL("./svg-allowed.json", import.meta.url), "utf8")) as string[]);
+  const lists = JSON.parse(readFileSync(new URL("./svg-allowed.json", import.meta.url), "utf8")) as { engine: string[]; notTeaching: string[]; toMove: string[] };
+  const allowed = new Set([...lists.engine, ...lists.notTeaching, ...lists.toMove]);
   const found: string[] = [];
   const walk = (dir: string) => { for (const n of readdirSync(dir)) { const p = `${dir}/${n}`; if (statSync(p).isDirectory()) walk(p); else if (/\.tsx$/.test(n) && !/\.test\.tsx$/.test(n) && /<svg[\s>]/.test(readFileSync(p, "utf8"))) found.push(p.slice(root.length)); } };
   walk(root.replace(/\/$/, ""));
   assert.deepEqual(found.filter((f) => !allowed.has(f)), [], "these files draw their own pictures: describe the picture as a scene for the scene engine instead (see CLAUDE.md)");
   assert.ok(!found.includes("year/StartHere.tsx") && !found.includes("year/PictureTasks.tsx"));
+  // the lists only shrink: a file that no longer draws must leave its list
+  assert.deepEqual([...allowed].filter((f) => !found.includes(f)), [], "these files no longer draw: remove them from svg-allowed.json");
 });
 
 test("a repeat visit gets the next round of questions, round and round", async () => {
@@ -109,4 +112,35 @@ test("a repeat visit gets the next round of questions, round and round", async (
   assert.deepEqual(roundFor(f, 1), f.rounds![0]);
   assert.deepEqual(roundFor(f, 2), f.rounds![1]);
   assert.deepEqual(roundFor(f, 3), f.practice);
+});
+
+test("understanding@1: a finished round is kept as what was done, moves the next visit on, and is never an attempt", async () => {
+  const { readRecords } = await import("../../../packages/learning/src/records");
+  const { make } = await import("../../../packages/learning/src/session");
+  const { understandingOf } = await import("../../../packages/learning/src/foundations");
+  const skill = "MATH.trigonometry.ratios", ideas = foundationsOf(skill);
+  let n = 0;
+  const c = () => ({ learnerId: "L", sessionId: "learn:L:1", at: new Date(Date.UTC(2026, 10, 24, 0, 0, n++)).toISOString() }) as never;
+  const one = (firstTry: number, k = 0) => make.understand(c(), skill, ideas[k].concept, 0, 4, firstTry);
+  assert.equal(understandingOf(skill, []).state, "new");
+  assert.equal(understandingOf("MATH.number.no-such-skill", []).state, "none");
+  const shaky = readRecords("L", [one(1)], [], []);
+  assert.equal(shaky.attempts.length, 0);
+  assert.deepEqual(shaky.understanding.map((u) => [u.concept, u.asked, u.firstTry]), [[ideas[0].concept, 4, 1]]);
+  assert.equal(understandingOf(skill, shaky.understanding).state, "shaky");
+  // the latest round of each idea is the one that counts
+  const all = readRecords("L", [one(1), ...ideas.map((_, k) => one(4, k))], [], []);
+  assert.equal(understandingOf(skill, all.understanding).state, "met");
+  assert.equal(understandingOf(skill, all.understanding).ideas[0].rounds, 2);
+  // a record that overstates itself is not read
+  assert.equal(readRecords("L", [{ ...one(4), firstTry: 9 } as never], [], []).understanding.length, 0);
+});
+
+test("picture-decision@1: every idea either has a picture or says why it has none", () => {
+  for (const f of foundations) {
+    const pictured = f.screens.some((s) => s.picture);
+    assert.ok(pictured ? !f.show : f.show && (f.show.decision === "none" ? ["word", "symbol", "rule", "procedure"].includes(f.show.why) : f.show.figure.trim().length > 5), `${f.competency}: ${f.concept}`);
+  }
+  // most ideas need no picture: that is a decision, not a gap
+  assert.ok(foundations.filter((f) => f.show?.decision === "none").length > foundations.filter((f) => !f.show).length);
 });

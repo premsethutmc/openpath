@@ -239,7 +239,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.determinants",
@@ -719,7 +723,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.algebra.function-operations",
@@ -975,7 +983,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.algebra.generalise-with-expressions",
@@ -1231,7 +1243,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "procedure"
+   }
   },
   {
    "competency": "MATH.algebra.geometric-sequences",
@@ -1470,7 +1486,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.geometric-sequences",
@@ -2723,7 +2743,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.algebra.matrices",
@@ -3719,7 +3743,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "counters filling a box with some left over"
+   }
   },
   {
    "competency": "MATH.algebra.partial-fractions",
@@ -3959,7 +3987,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "procedure"
+   }
   },
   {
    "competency": "MATH.algebra.pattern-rules",
@@ -4198,7 +4230,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.permutations",
@@ -4436,7 +4472,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.polynomials",
@@ -4692,7 +4732,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.quadratic-complex",
@@ -4948,7 +4992,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.quadratic-discriminant",
@@ -5205,7 +5253,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "rule"
+   }
   },
   {
    "competency": "MATH.algebra.relations",
@@ -5444,7 +5496,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.algebra.sets",
@@ -5941,7 +5997,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.algebra.vieta-relations",
@@ -6181,7 +6241,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.calculus.differentiability",
@@ -6698,7 +6762,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.calculus.implicit-parametric-differentiation",
@@ -6954,7 +7022,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "procedure"
+   }
   },
   {
    "competency": "MATH.calculus.integration-methods",
@@ -7450,7 +7522,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a graph with a hole and approaching points"
+   }
   },
   {
    "competency": "MATH.calculus.limits",
@@ -7706,7 +7782,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.calculus.linear-approximation",
@@ -7963,7 +8043,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a surface drawn over an x-y grid"
+   }
   },
   {
    "competency": "MATH.calculus.taylor-series",
@@ -8201,7 +8285,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.calculus.taylor-series",
@@ -8457,7 +8545,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.coordinate.cartesian",
@@ -9194,7 +9286,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "an ellipse with foci, axes and vertices"
+   }
   },
   {
    "competency": "MATH.coordinate.polygon-area",
@@ -9672,7 +9768,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "three axes with a point (x, y, z)"
+   }
   },
   {
    "competency": "MATH.coordinate.space-lines",
@@ -10151,7 +10251,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a plane with its normal arrow"
+   }
   },
   {
    "competency": "MATH.coordinate.straight-lines",
@@ -11143,7 +11247,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a triangle with a cevian to a side"
+   }
   },
   {
    "competency": "MATH.geometry.circle-tangents",
@@ -11381,7 +11489,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a circle with tangent, secant and contact radius"
+   }
   },
   {
    "competency": "MATH.geometry.circle-theorems",
@@ -12114,7 +12226,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a segment with midpoint and perpendicular bisector"
+   }
   },
   {
    "competency": "MATH.geometry.constructions-bisectors",
@@ -12370,7 +12486,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "two congruent triangles with matching sides marked"
+   }
   },
   {
    "competency": "MATH.geometry.lines-segments",
@@ -12607,7 +12727,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a point, a line segment and a line"
+   }
   },
   {
    "competency": "MATH.geometry.lines-segments",
@@ -13082,7 +13206,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a child making quarter, half and full turns"
+   }
   },
   {
    "competency": "MATH.geometry.nets",
@@ -13319,7 +13447,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "polygons with seven to ten sides, named"
+   }
   },
   {
    "competency": "MATH.geometry.polyhedra-euler",
@@ -13556,7 +13688,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a cube with faces, edges and vertices marked"
+   }
   },
   {
    "competency": "MATH.geometry.pythagoras",
@@ -13811,7 +13947,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.geometry.quadrilateral-classification",
@@ -14049,7 +14189,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a quadrilateral ABCD with sides and corners labelled"
+   }
   },
   {
    "competency": "MATH.geometry.quadrilateral-classification",
@@ -14304,7 +14448,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.geometry.shape-properties",
@@ -14541,7 +14689,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "triangle, square, rectangle, pentagon, hexagon and circle"
+   }
   },
   {
    "competency": "MATH.geometry.shape-properties",
@@ -14778,7 +14930,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "cube, cuboid, sphere, cylinder, cone and pyramid"
+   }
   },
   {
    "competency": "MATH.geometry.tessellations",
@@ -15015,7 +15171,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "regular and non-regular polygons side by side"
+   }
   },
   {
    "competency": "MATH.geometry.transformations",
@@ -15748,7 +15908,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a triangle with median, altitude and bisectors"
+   }
   },
   {
    "competency": "MATH.matrices.adjoint-inverse",
@@ -17241,7 +17405,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a measuring jug marked in millilitres"
+   }
   },
   {
    "competency": "MATH.measurement.circle-area",
@@ -17959,7 +18127,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a ruler showing centimetres and millimetres"
+   }
   },
   {
    "competency": "MATH.measurement.length-conversion",
@@ -18456,7 +18628,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a rectangle covered with unit squares"
+   }
   },
   {
    "competency": "MATH.measurement.sectors",
@@ -19176,7 +19352,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a triangle with base and perpendicular height"
+   }
   },
   {
    "competency": "MATH.measurement.volume-cubes",
@@ -19415,7 +19595,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a box built from unit cubes"
+   }
   },
   {
    "competency": "MATH.number.addition",
@@ -19654,7 +19838,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.number.compare-numbers",
@@ -19893,7 +20081,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a 0 to 10 number line with jumps"
+   }
   },
   {
    "competency": "MATH.number.complex",
@@ -20152,7 +20344,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.number.complex",
@@ -20659,7 +20855,8 @@
      "check": {
       "question": "In 6.2, what does the digit 2 count: ones or tenths?",
       "answer": "Tenths (6.2 is 6 wholes and 2 tenths)"
-     }
+     },
+     "picture": "fraction-bar"
     }
    ],
    "practice": [
@@ -21131,7 +21328,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.number.factors-multiples",
@@ -21388,7 +21589,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.fraction-add",
@@ -21627,7 +21832,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.fraction-comparison",
@@ -22603,7 +22812,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.number.modular-arithmetic",
@@ -22842,7 +23055,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a clock face with numbers wrapping round"
+   }
   },
   {
    "competency": "MATH.number.multi-multiplication",
@@ -23081,7 +23298,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.number-bases",
@@ -23320,7 +23541,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "objects bundled in trays of five"
+   }
   },
   {
    "competency": "MATH.number.place-value-tens",
@@ -23559,7 +23784,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.primes",
@@ -23815,7 +24044,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "dots arranged in a square array"
+   }
   },
   {
    "competency": "MATH.number.profit-loss",
@@ -24054,7 +24287,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.proportion",
@@ -24276,7 +24513,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.ratio",
@@ -24515,7 +24756,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.rational-numbers",
@@ -24994,7 +25239,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.number.root-length-construction",
@@ -25233,7 +25482,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.shares-dividends",
@@ -25472,7 +25725,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.number.subtraction",
@@ -25711,7 +25968,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.probability.binomial-distribution",
@@ -25969,7 +26230,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.probability.classical",
@@ -26208,7 +26473,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.probability.continuous-random-variables",
@@ -26687,7 +26956,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.probability.sample-space",
@@ -26925,7 +27198,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.mathematical-argument",
@@ -27421,7 +27698,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.model-selection",
@@ -27678,7 +27959,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.multi-step",
@@ -27916,7 +28201,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.reasoning.operation-choice",
@@ -28154,7 +28443,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.propositional-logic",
@@ -28411,7 +28704,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.puzzle-strategy",
@@ -28649,7 +28946,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.reasoning.systematic-enumeration",
@@ -28887,7 +29188,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "procedure"
+   }
   },
   {
    "competency": "MATH.sequences.am-gm-relation",
@@ -29124,7 +29429,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.sequences.explicit-recursive-rules",
@@ -29362,7 +29671,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.sequences.infinite-series-expansions",
@@ -29618,7 +29931,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.sequences.infinite-series-expansions",
@@ -29856,7 +30173,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.sequences.power-sums",
@@ -30094,7 +30415,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.sets-relations.binary-operations",
@@ -30333,7 +30658,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.sets-relations.function-types",
@@ -30590,7 +30919,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "arrow diagram mapping set A to B"
+   }
   },
   {
    "competency": "MATH.sets-relations.relation-properties",
@@ -30848,7 +31181,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.statistics.dispersion",
@@ -31105,7 +31442,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "two dot plots with different spread"
+   }
   },
   {
    "competency": "MATH.statistics.grouped-data",
@@ -31343,7 +31684,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.statistics.grouped-mean",
@@ -31581,7 +31926,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.statistics.mean-deviation",
@@ -32041,7 +32390,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.statistics.ogive-quartiles",
@@ -32280,7 +32633,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "an ogive with Q1, median, Q3 marked"
+   }
   },
   {
    "competency": "MATH.statistics.pie-charts",
@@ -33254,7 +33611,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.trigonometry.inverse",
@@ -34487,7 +34848,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "symbol"
+   }
   },
   {
    "competency": "MATH.trigonometry.ratios",
@@ -34724,7 +35089,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "none",
+    "why": "word"
+   }
   },
   {
    "competency": "MATH.trigonometry.triangle-laws",
@@ -34962,7 +35331,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a triangle labelled A, B, C and a, b, c"
+   }
   },
   {
    "competency": "MATH.vectors.algebra",
@@ -34986,7 +35359,8 @@
      "check": {
       "question": "Write 5î − 2ĵ + k̂ as components (x, y, z).",
       "answer": "(5, −2, 1)"
-     }
+     },
+     "picture": "vector-arrow"
     }
    ],
    "practice": [
@@ -36213,7 +36587,11 @@
       ]
      }
     ]
-   ]
+   ],
+   "show": {
+    "decision": "new",
+    "figure": "a parallelepiped with edge vectors a, b, c"
+   }
   }
  ]
 }

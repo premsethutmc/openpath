@@ -26,5 +26,7 @@ engine; do not build beside it.
   A new need (a new figure, a new way to answer on a picture) is a new scene kind or figure in the engine, with its
   checks, so every lesson can use it. It is never a new drawing component.
 - `frontend/src/learning/foundations.test.ts` fails when a new file draws its own `<svg>`. Do not add to
-  `frontend/src/learning/svg-allowed.json` to get past it; that list is the older drawings still to be moved into the engine.
+  `frontend/src/learning/svg-allowed.json` to get past it. Its `toMove` list is the maths teaching pictures still drawn
+  outside the engine; when you work on one, move it into the engine and take it off the list. `notTeaching` (icons, the
+  cat, writing surfaces, English pictures) stays.
 - The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
