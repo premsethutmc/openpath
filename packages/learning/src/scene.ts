@@ -27,7 +27,7 @@
  * and areas), a `triangle` kind (two angles set, the third follows), and a line that turns about a fixed point (`through`).
  */
 
-import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, type PickFigure } from "./scene-figures";
+import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, tangentAt, tangentDraw, tangentOf, type PickFigure } from "./scene-figures";
 export type { PickFigure } from "./scene-figures";
 
 /** A polynomial as its coefficients, lowest power first: 5x² is [0, 0, 5]. */
@@ -113,7 +113,10 @@ export interface BarsScene extends Base { kind: "bars"; labels: string[]; values
 export interface PickScene extends Base { kind: "pick"; figure: PickFigure; ask: string[]; hint: string; labels?: boolean }
 /** A right triangle with θ at the left: the angle (whole steps of 5°) and the hypotenuse are set; the three ratios follow. */
 export interface RatiosScene extends Base { kind: "ratios" }
-export type Scene = PickScene | RatiosScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
+/** conic-tangent@1: the ellipse x²/a² + y²/b² = 1 (a and b whole, 2 to 6) with a point that goes round it in steps of 15°.
+ * The tangent at the point is drawn (with `normal`, the normal as well) and its slope is worked out exactly: −b²x/(a²y). */
+export interface TangentScene extends Base { kind: "tangent"; a: number; b: number; normal?: boolean }
+export type Scene = PickScene | RatiosScene | TangentScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -198,6 +201,7 @@ function tri(state: SceneState) { const a = state.a, b = Math.min(state.b, 170 -
 /** The controls of a scene: what can be set, on what grid, and where it starts. */
 export function controls(s: Scene): Control[] {
   if (s.kind === "pick") return [{ key: "part", label: "Which part", min: 0, max: pickParts(s.figure).length, step: 1, start: 0 }];
+  if (s.kind === "tangent") return [{ key: "turn", label: "Move the point round", min: 0, max: 345, step: 15, start: s.goal.measure === "turn" && s.goal.equals === 30 ? 60 : 30 }];
   if (s.kind === "ratios") return [{ key: "angle", label: "Angle θ", min: 15, max: 70, step: 5, start: s.goal.measure === "angle" && s.goal.equals === 40 ? 25 : 40 }, { key: "size", label: "Size", min: 5, max: 10, step: 1, start: s.goal.measure === "size" && s.goal.equals === 8 ? 6 : 8 }];
   if (s.kind === "strips") return [{ key: "n", label: "Strips", min: 1, max: s.max ?? 100, step: 1, start: Math.min(4, s.max ?? 100) }];
   if (s.kind === "triangle") {
@@ -288,6 +292,7 @@ function joinOf(s: JoinScene, state: SceneState) {
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return { part: state.part, wrong: id !== undefined && s.ask.includes(id) ? 0 : 1 }; }
+  if (s.kind === "tangent") { const t = tangentOf(s.a, s.b, state.turn); return { turn: state.turn, x: r6(t.x), y: r6(t.y), flat: t.flat ? 1 : 0, upright: t.upright ? 1 : 0, slope: t.upright ? 0 : r6(t.slope), sloped: t.upright ? 0 : 1 }; }
   if (s.kind === "ratios") { const r = ratiosOf(state.angle, state.size); return { angle: state.angle, size: state.size, sin: r6(r.sin), cos: r6(r.cos), tan: r6(r.tan) }; }
   if (s.kind === "bars") {
     const y = state.y, more = "more" in s.ask ? s.values[s.ask.more[0]] - y : 0;
@@ -329,7 +334,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { tangent: ["turn", "x", "y", "flat", "upright", "slope", "sloped"], pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -382,6 +387,7 @@ export function nudge(s: Scene, state: SceneState): string | null {
 
 export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined ? "Tap the picture to choose." : `You chose ${pickName(s.figure, id).split(":")[0]}.`; }
+  if (s.kind === "tangent") { const t = tangentOf(s.a, s.b, state.turn), two = (n: number) => fmt(Math.round(n * 100) / 100); return `Point (${two(t.x)}, ${two(t.y)}) · ${t.upright ? "the tangent is straight up: it has no slope" : t.flat ? "the tangent is flat: slope 0" : `slope of the tangent = ${two(t.slope)}`}${s.normal && !t.upright && !t.flat ? ` · slope of the normal = ${two(-1 / t.slope)}` : ""}`; }
   if (s.kind === "ratios") { const r = ratiosOf(state.angle, state.size), one = (n: number) => fmt(Math.round(n * 10) / 10), two = (n: number) => fmt(Math.round(n * 100) / 100); return `θ = ${state.angle}° · sin θ = ${one(r.opp)} ÷ ${one(state.size)} = ${two(r.sin)} · cos θ = ${two(r.cos)} · tan θ = ${two(r.tan)}`; }
   const m = measures(s, state);
   if (s.kind === "slope") return named(s, `At x = ${fmt(m.x)} the slope is ${fmt(m.slope)}`);
@@ -431,6 +437,7 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1] ?? null; return pickDraw(s.figure, id, id !== null && s.ask.includes(id), !!s.labels); }
+  if (s.kind === "tangent") return tangentDraw(s.a, s.b, state.turn, !!s.normal);
   if (s.kind === "ratios") return ratiosDraw(state.angle, state.size, (n) => fmt(Math.round(n * 10) / 10));
   const out: Shape[] = [];
   if (s.kind === "bars") {
@@ -632,6 +639,7 @@ export function grip(s: Scene, state: SceneState, x: number, y: number): number 
  *  `hold` is the handle taken at the start of the drag (see `grip`); without it the nearer handle is taken. */
 export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?: number): SceneState {
   if (s.kind === "pick") { const part = pickAt(s.figure, x, y); return part ? set(s, state, "part", part) : state; }
+  if (s.kind === "tangent") return set(s, state, "turn", tangentAt(s.a, s.b, x, y));
   if (s.kind === "ratios") { const at = ratiosAt(x, y); return set(s, set(s, state, "angle", at.angle), "size", at.size); }
   if (s.kind === "triangle") {
     // the angles the finger makes with the two ends of an unscaled base (60..280 at y = 185), in whole degrees
@@ -678,6 +686,7 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
 /** The picture in words, for a screen reader. It says what can be moved, never the answer. */
 export function describe(s: Scene): string {
   if (s.kind === "pick") return `A picture of ${pickWords(s.figure)}. Its parts can be chosen by tapping them, or with a slider. ${s.prompt}`;
+  if (s.kind === "tangent") return `An interactive ellipse, ${s.a} units wide each side of its centre and ${s.b} units high. A point moves round it, by dragging or with a slider, and the tangent line${s.normal ? " and the normal" : ""} at the point is drawn, with its slope. ${s.prompt}`;
   if (s.kind === "ratios") return `An interactive right triangle with the angle θ at the left. Two sliders set the angle and the size, and sin θ, cos θ and tan θ are worked out from its sides. ${s.prompt}`;
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
@@ -742,6 +751,8 @@ export function check(v: unknown): string[] {
     if (why) bad.push(why);
     else if (!(Array.isArray(s.ask) && s.ask.length >= 1 && s.ask.every((a) => pickParts(s.figure).includes(a)))) bad.push("ask must name parts of the figure");
     if (typeof s.hint !== "string" || !s.hint.trim() || s.hint.length > 200) bad.push("hint must be 1 to 200 characters");
+  } else if (s.kind === "tangent") {
+    if (!(Number.isInteger(s.a) && Number.isInteger(s.b) && s.a >= 2 && s.a <= 6 && s.b >= 2 && s.b <= 6)) bad.push("an ellipse needs whole half-widths a and b from 2 to 6");
   } else if (s.kind === "ratios") {
     // nothing more to check: the triangle has no parameters
   } else if (s.kind === "bars") {

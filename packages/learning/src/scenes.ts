@@ -371,7 +371,7 @@ export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "fraction") return s.goal.measure === "exact" ? s.target[0] / s.target[1] : null;
   if (s.kind === "array") return s.rows !== undefined && s.goal.measure === "off" ? s.total : null;
   if (s.kind === "bars") return "read" in s.ask ? s.values[s.ask.read] : s.values[s.ask.more[0]] - s.values[s.ask.more[1]];
-  if (s.kind === "line" || s.kind === "transform" || s.kind === "join" || s.kind === "commas" || s.kind === "pick" || s.kind === "ratios") return null;
+  if (s.kind === "line" || s.kind === "transform" || s.kind === "join" || s.kind === "commas" || s.kind === "pick" || s.kind === "ratios" || s.kind === "tangent") return null;
   if (s.kind === "order") return s.ask === "largest" ? Math.max(s.values[0], s.values[1]) : s.ask === "smallest" ? Math.min(s.values[0], s.values[1]) : null;
   if (s.kind === "numberline") return s.goal.measure === "x" && s.goal.equals !== undefined ? s.goal.equals : null;
   const f = curveOf(s);
