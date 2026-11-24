@@ -259,18 +259,66 @@
       "The determinant of the 3 × 3 matrix is: each entry of the first row times its own cofactor, all added up.",
       "The adjoint, adj A, is the matrix of all nine cofactors with its rows written as columns."
      ],
-     "example": [
-      "A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]].",
-      "Entry 1: block [[4, 5], [0, 6]], minor 24, sign +, cofactor 24.",
-      "Entry 2: block [[0, 5], [1, 6]], minor −5, sign −, cofactor 5.",
-      "Entry 3: block [[0, 4], [1, 0]], minor −4, sign +, cofactor −4.",
-      "|A| = 1 × 24 + 2 × 5 + 3 × (−4) = 22."
-     ],
      "check": {
       "question": "Which sign goes with the entry in row 1, column 2?",
       "answer": "Minus."
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]]. Find |A| by expanding along row 1.",
+     "steps": [
+      {
+       "do": "Entry 1 (the 1): cover its row and column.",
+       "lines": [
+        "Block left: [[4, 5], [0, 6]]",
+        "Minor = 4 × 6 − 5 × 0 = 24"
+       ],
+       "why": [
+        "Cover row 1 and column 1. The four numbers left make a 2 × 2 block. Its determinant is the minor.",
+        "For a 2 × 2 block, multiply down the main diagonal and subtract the other diagonal."
+       ]
+      },
+      {
+       "do": "Give it its sign.",
+       "lines": [
+        "Sign +, cofactor = 24"
+       ],
+       "why": [
+        "Signs go + − + along row 1, like a chessboard starting with + in the top left. The cofactor is the minor with that sign."
+       ]
+      },
+      {
+       "do": "Entry 2 (the 2).",
+       "lines": [
+        "Block [[0, 5], [1, 6]]",
+        "Minor = 0 × 6 − 5 × 1 = −5",
+        "Sign −, cofactor = 5"
+       ],
+       "why": [
+        "Cover row 1 and column 2. The sign in this place is −, so the cofactor is −(−5) = 5."
+       ]
+      },
+      {
+       "do": "Entry 3 (the 3).",
+       "lines": [
+        "Block [[0, 4], [1, 0]]",
+        "Minor = 0 × 0 − 4 × 1 = −4",
+        "Sign +, cofactor = −4"
+       ],
+       "why": [
+        "Cover row 1 and column 3. The sign here is +, so the cofactor stays −4."
+       ]
+      },
+      {
+       "do": "Each entry times its cofactor, added.",
+       "lines": [
+        "1 × 24 + 2 × 5 + 3 × (−4)",
+        "= 24 + 10 − 12 = 22"
+       ],
+       "why": [
+        "The determinant is the sum of (entry × its cofactor) along any one row."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -1868,17 +1916,45 @@
       "The inequality x + y ≤ 4 is true for far more points: every point on that line, and every point on one side of it. This half of the plane is called a half-plane, and the line is its boundary.",
       "To find which side, test one easy point, usually (0, 0). Here 0 + 0 = 0 and 0 ≤ 4 is true, so the side containing the origin is the one we want."
      ],
-     "example": [
-      "Region: x + y ≤ 4.",
-      "(1, 2): 1 + 2 = 3, and 3 ≤ 4. Inside.",
-      "(4, 0): 4 + 0 = 4, and 4 ≤ 4. On the boundary, so inside.",
-      "(3, 3): 3 + 3 = 6, and 6 ≤ 4 is false. Outside."
-     ],
      "check": {
       "question": "Is the point (1, 1) in the region x + y ≤ 4?",
       "answer": "Yes, because 1 + 1 = 2 and 2 ≤ 4."
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Which of (1, 2), (4, 0) and (3, 3) lie in the region x + y ≤ 4?",
+     "steps": [
+      {
+       "do": "Test (1, 2).",
+       "lines": [
+        "1 + 2 = 3",
+        "3 ≤ 4 ✓ Inside"
+       ],
+       "why": [
+        "Put the point's numbers in for x and y. If the inequality comes out true, the point is in the region."
+       ]
+      },
+      {
+       "do": "Test (4, 0).",
+       "lines": [
+        "4 + 0 = 4",
+        "4 ≤ 4 ✓ On the line"
+       ],
+       "why": [
+        "≤ means \"less than or equal to\". 4 equals 4, so the point counts. It sits on the boundary line x + y = 4, which is drawn solid."
+       ]
+      },
+      {
+       "do": "Test (3, 3).",
+       "lines": [
+        "3 + 3 = 6",
+        "6 ≤ 4 ✗ Outside"
+       ],
+       "why": [
+        "6 is more than 4, so the point is on the other side of the line, outside the shaded region."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Constraints and the feasible region",
@@ -1887,17 +1963,53 @@
       "The feasible region is the set of points that obey every constraint together: the overlap of all the half-planes. x ≥ 0 and y ≥ 0 keep us to the right of the y-axis and above the x-axis.",
       "The region has straight edges. Its corner points are where two boundary lines cross, and you find one by solving those two lines as a pair of equations."
      ],
-     "example": [
-      "Constraints: x ≥ 0, y ≥ 0, x + y ≤ 4, x ≤ 3.",
-      "The lines x = 3 and x + y = 4 cross where 3 + y = 4, so y = 1.",
-      "Corner points: (0, 0), (3, 0), (3, 1), (0, 4).",
-      "(3, 1) is the one corner that is not on an axis."
-     ],
      "check": {
       "question": "Does (2, 1) obey all of x ≥ 0, y ≥ 0, x + y ≤ 4 and x ≤ 3?",
       "answer": "Yes."
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "The region is x ≥ 0, y ≥ 0, x + y ≤ 4 and x ≤ 3. Find its corner points.",
+     "steps": [
+      {
+       "do": "The two axes give the first corner.",
+       "lines": [
+        "x = 0 meets y = 0 at (0, 0)"
+       ],
+       "why": [
+        "x ≥ 0 and y ≥ 0 keep us in the top right quarter. Its corner is the origin."
+       ]
+      },
+      {
+       "do": "Where x = 3 meets the x-axis.",
+       "lines": [
+        "(3, 0)"
+       ],
+       "why": [
+        "x ≤ 3 is a wall standing up at x = 3. It meets the floor y = 0 at (3, 0)."
+       ]
+      },
+      {
+       "do": "Where x = 3 meets x + y = 4.",
+       "lines": [
+        "3 + y = 4",
+        "y = 1, so (3, 1)"
+       ],
+       "why": [
+        "A corner where two lines cross lies on both. Put x = 3 into the second line and solve for y."
+       ]
+      },
+      {
+       "do": "Where x + y = 4 meets the y-axis.",
+       "lines": [
+        "x = 0: y = 4",
+        "(0, 4)"
+       ],
+       "why": [
+        "On the y-axis x is 0, so y = 4.",
+        "Going round, the corners are (0, 0), (3, 0), (3, 1), (0, 4)."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -2384,17 +2496,43 @@
       "A linear programming problem says: maximise (or minimise) Z subject to the constraints. 'Subject to' means 'while obeying'.",
       "Because Z and the constraints are all straight-line expressions, the best value is found at a corner of the region, so you only need to test the corners."
      ],
-     "example": [
-      "Maximise Z = 3x + 2y subject to x + y ≤ 4, x ≥ 0, y ≥ 0.",
-      "Corners of the region: (0, 0), (4, 0), (0, 4).",
-      "Z there: 0, 12, 8.",
-      "The maximum is Z = 12, at (4, 0)."
-     ],
      "check": {
       "question": "What is Z = 3x + 2y at the point (1, 1)?",
       "answer": "5"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Maximise Z = 3x + 2y with x + y ≤ 4, x ≥ 0 and y ≥ 0.",
+     "steps": [
+      {
+       "do": "Find the corners of the region.",
+       "lines": [
+        "(0, 0), (4, 0), (0, 4)"
+       ],
+       "why": [
+        "The region is a triangle: the two axes and the line x + y = 4. Its corners are where those lines meet."
+       ]
+      },
+      {
+       "do": "Work out Z at each corner.",
+       "lines": [
+        "(0, 0): Z = 0",
+        "(4, 0): Z = 3 × 4 = 12",
+        "(0, 4): Z = 2 × 4 = 8"
+       ],
+       "why": [
+        "The best value of a straight-line Z over such a region is always at a corner, so we only need to test the corners."
+       ]
+      },
+      {
+       "do": "Pick the largest.",
+       "lines": [
+        "Maximum Z = 12 at (4, 0)"
+       ],
+       "why": [
+        "We were asked to maximise, so we take the biggest. To minimise we would take the smallest."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -3618,17 +3756,62 @@
       "Multiply A by X, row by column: row 1 gives 2x + y and row 2 gives x + 3y. So the single line AX = B says both equations at once. If a variable is missing from an equation, its coefficient is 0.",
       "The number equation 3x = 6 is solved by dividing by 3. In the same way AX = B is solved by X = A⁻¹B, which works whenever |A| is not 0."
      ],
-     "example": [
-      "A = [[2, 1], [1, 3]], B = [[5], [10]]. |A| = 6 − 1 = 5.",
-      "A⁻¹ = (1/5)[[3, −1], [−1, 2]].",
-      "x = (3 × 5 − 1 × 10) ÷ 5 = 1, and y = (−1 × 5 + 2 × 10) ÷ 5 = 3.",
-      "Check: 2 × 1 + 3 = 5 and 1 + 3 × 3 = 10."
-     ],
      "check": {
       "question": "In the equation 2y + 2z = 6, what is the coefficient of x that goes into A?",
       "answer": "0"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Solve 2x + y = 5 and x + 3y = 10 using A⁻¹.",
+     "steps": [
+      {
+       "do": "Write A and B.",
+       "lines": [
+        "A = [[2, 1], [1, 3]]",
+        "B = [[5], [10]]"
+       ],
+       "why": [
+        "A holds the numbers in front of x and y, row by row. B holds the right-hand sides."
+       ]
+      },
+      {
+       "do": "Find the determinant.",
+       "lines": [
+        "|A| = 2 × 3 − 1 × 1 = 5"
+       ],
+       "why": [
+        "Main diagonal product minus the other diagonal product. It is not 0, so A has an inverse."
+       ]
+      },
+      {
+       "do": "Write the inverse.",
+       "lines": [
+        "A⁻¹ = (1/5)[[3, −1], [−1, 2]]"
+       ],
+       "why": [
+        "Swap the two diagonal numbers, change the signs of the other two, and divide by the determinant."
+       ]
+      },
+      {
+       "do": "X = A⁻¹B.",
+       "lines": [
+        "x = (3 × 5 − 1 × 10) ÷ 5 = 1",
+        "y = (−1 × 5 + 2 × 10) ÷ 5 = 3"
+       ],
+       "why": [
+        "Each row of A⁻¹ meets the column B: multiply the pairs and add, then divide by 5."
+       ]
+      },
+      {
+       "do": "Check in the original equations.",
+       "lines": [
+        "2 × 1 + 3 = 5 ✓",
+        "1 + 3 × 3 = 10 ✓"
+       ],
+       "why": [
+        "Always put the answers back. Both equations come out true."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -4107,17 +4290,51 @@
       "Partial fractions is the backward journey: start with one fraction whose denominator factorises, and split it into simple fractions, one for each factor. The unknown tops are called A and B.",
       "We do this because the simple pieces are much easier to work with later, for example when integrating."
      ],
-     "example": [
-      "Split 2x/((x − 1)(x + 1)) as A/(x − 1) + B/(x + 1).",
-      "Multiply through: 2x = A(x + 1) + B(x − 1).",
-      "Put x = 1: 2 = 2A, so A = 1.",
-      "Put x = −1: −2 = −2B, so B = 1.",
-      "So it is 1/(x − 1) + 1/(x + 1)."
-     ],
      "check": {
       "question": "Which single fraction do the pieces 1/2 and 1/3 add up to?",
       "answer": "5/6"
-     }
+     },
+     "ask": "Split 2x/((x − 1)(x + 1)) into A/(x − 1) + B/(x + 1).",
+     "steps": [
+      {
+       "do": "Multiply every term by (x − 1)(x + 1).",
+       "lines": [
+        "2x = A(x + 1) + B(x − 1)"
+       ],
+       "why": [
+        "This clears all the fractions. On the right, each bottom cancels with one of the two brackets."
+       ]
+      },
+      {
+       "do": "Choose x = 1 to make the B term vanish.",
+       "lines": [
+        "2 = A(2) + B(0)",
+        "A = 1"
+       ],
+       "why": [
+        "The equation is true for every x, so we may pick handy values. x = 1 makes (x − 1) zero, so B disappears."
+       ]
+      },
+      {
+       "do": "Choose x = −1 to make the A term vanish.",
+       "lines": [
+        "−2 = A(0) + B(−2)",
+        "B = 1"
+       ],
+       "why": [
+        "x = −1 makes (x + 1) zero, so only B is left."
+       ]
+      },
+      {
+       "do": "Write the answer.",
+       "lines": [
+        "1/(x − 1) + 1/(x + 1)"
+       ],
+       "why": [
+        "Check by adding them back: the top becomes (x + 1) + (x − 1) = 2x."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -5095,15 +5312,43 @@
       "Mathematicians add one new number to fix this. It is called i, and its defining property is i² = −1.",
       "With i, every negative number gets a square root. (3i)² = 9 × i² = −9, so √(−9) = 3i. In general, for a positive number k, √(−k) = i√k."
      ],
-     "example": [
-      "√(−4) = 2i, because (2i)² = 4 × (−1) = −4.",
-      "√(−25) = 5i.",
-      "√(−31) = i√31, which the lesson writes as √31i."
-     ],
      "check": {
       "question": "What is √(−16)?",
       "answer": "4i"
-     }
+     },
+     "ask": "Write √(−4), √(−25) and √(−31) using i.",
+     "steps": [
+      {
+       "do": "√(−4)",
+       "lines": [
+        "√(−4) = √4 × √(−1) = 2i",
+        "Check: (2i)² = 4 × (−1) = −4"
+       ],
+       "why": [
+        "No ordinary number squared is negative. So we name a new number i with i² = −1, that is, i = √(−1).",
+        "Split off the −1: the square root of a negative number is the root of its size, times i."
+       ]
+      },
+      {
+       "do": "√(−25)",
+       "lines": [
+        "√25 × i = 5i"
+       ],
+       "why": [
+        "25 is a perfect square, so the answer is a whole number times i."
+       ]
+      },
+      {
+       "do": "√(−31)",
+       "lines": [
+        "√31 × i = √31 i"
+       ],
+       "why": [
+        "31 is not a perfect square, so the root stays as √31, with i written after it. The i is outside the root: it is not √(31i)."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Complex numbers and conjugate pairs",
@@ -5113,16 +5358,53 @@
       "A conjugate pair has a real sum and a real product: the sum is 2a and the product is a² + b², because (a + bi)(a − bi) = a² − b² × i² = a² + b².",
       "The ± in the quadratic formula produces exactly such a pair when the discriminant is negative."
      ],
-     "example": [
-      "Solve x² + 2x + 5 = 0.",
-      "b² − 4ac = 4 − 20 = −16, and √(−16) = 4i.",
-      "x = (−2 ± 4i) ÷ 2 = −1 + 2i or −1 − 2i.",
-      "Sum = −2, product = 1 + 4 = 5: they match −b/a and c/a."
-     ],
      "check": {
       "question": "What is the conjugate of 4 + 7i?",
       "answer": "4 − 7i"
-     }
+     },
+     "ask": "Solve x² + 2x + 5 = 0.",
+     "steps": [
+      {
+       "do": "Find the discriminant.",
+       "lines": [
+        "a = 1, b = 2, c = 5",
+        "b² − 4ac = 4 − 20 = −16"
+       ],
+       "why": [
+        "It is negative, so there are no real roots. With i we can still go on."
+       ]
+      },
+      {
+       "do": "Take its square root.",
+       "lines": [
+        "√(−16) = 4i"
+       ],
+       "why": [
+        "√16 = 4, and the minus sign becomes i."
+       ]
+      },
+      {
+       "do": "Use the formula.",
+       "lines": [
+        "x = (−2 ± 4i) ÷ 2",
+        "x = −1 + 2i or −1 − 2i"
+       ],
+       "why": [
+        "Divide both parts by 2: −2 ÷ 2 = −1 and 4i ÷ 2 = 2i.",
+        "The two roots differ only in the sign of the i part. Such a pair is called conjugate."
+       ]
+      },
+      {
+       "do": "Check with sum and product.",
+       "lines": [
+        "Sum = −2 = −b/a ✓",
+        "Product = 1 + 4 = 5 = c/a ✓"
+       ],
+       "why": [
+        "Adding, the ±2i parts cancel. Multiplying (−1 + 2i)(−1 − 2i) gives 1 − 4i² = 1 + 4."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -6471,17 +6753,51 @@
       "Σαβ means the sum of every product of two different roots, each pair once: αβ + βγ + γα.",
       "αβγ, with no Σ, is simply the product of all three roots."
      ],
-     "example": [
-      "Take the roots 1, 2 and 3.",
-      "Σα = 1 + 2 + 3 = 6.",
-      "Σαβ = 1 × 2 + 2 × 3 + 3 × 1 = 11.",
-      "αβγ = 1 × 2 × 3 = 6.",
-      "Indeed (x − 1)(x − 2)(x − 3) = x³ − 6x² + 11x − 6."
-     ],
      "check": {
       "question": "The roots are 1, 1 and 2. What is Σα?",
       "answer": "4"
-     }
+     },
+     "ask": "For the roots 1, 2 and 3, find Σα, Σαβ and αβγ.",
+     "steps": [
+      {
+       "do": "Σα: add the roots.",
+       "lines": [
+        "1 + 2 + 3 = 6"
+       ],
+       "why": [
+        "α, β, γ are names for the three roots. Σα means add every one of them."
+       ]
+      },
+      {
+       "do": "Σαβ: add every product of two.",
+       "lines": [
+        "1 × 2 + 2 × 3 + 3 × 1",
+        "= 2 + 6 + 3 = 11"
+       ],
+       "why": [
+        "Take each different pair once, multiply, and add. With three roots there are three pairs."
+       ]
+      },
+      {
+       "do": "αβγ: multiply all three.",
+       "lines": [
+        "1 × 2 × 3 = 6"
+       ],
+       "why": [
+        "One product of all the roots together."
+       ]
+      },
+      {
+       "do": "Compare with the cubic.",
+       "lines": [
+        "(x − 1)(x − 2)(x − 3)",
+        "= x³ − 6x² + 11x − 6"
+       ],
+       "why": [
+        "The numbers 6, 11, 6 appear in the cubic, with signs going − + −. That is the pattern Vieta's relations describe."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -6715,18 +7031,52 @@
       "To find the steepness at a point P, take a second point Q on the curve near P. The straight line through P and Q is called a chord. Work out its slope. Now slide Q closer and closer to P. The chord slopes settle on one number. That number is the slope of the curve at P.",
       "The straight line through P with exactly this slope just touches the curve at P. It is called the tangent at P."
      ],
-     "example": [
-      "Curve y = x², point P(3, 9).",
-      "Q at x = 4: slope = (16 − 9) ÷ 1 = 7",
-      "Q at x = 3.1: slope = (9.61 − 9) ÷ 0.1 = 6.1",
-      "Q at x = 3.01: slope = (9.0601 − 9) ÷ 0.01 = 6.01",
-      "The slopes head towards 6. The slope of the curve at x = 3 is 6."
-     ],
      "check": {
       "question": "A straight line rises 6 units for every 2 units across. What is its slope?",
       "answer": "3"
      },
-     "picture": "tangent-slope"
+     "picture": "tangent-slope",
+     "ask": "On y = x², how steep is the curve at P(3, 9)?",
+     "steps": [
+      {
+       "do": "A chord to x = 4.",
+       "lines": [
+        "Q = (4, 16)",
+        "Slope = (16 − 9) ÷ 1 = 7"
+       ],
+       "why": [
+        "A chord is a straight line from P to another point Q on the curve. Its slope is rise ÷ run."
+       ]
+      },
+      {
+       "do": "Move Q closer: x = 3.1.",
+       "lines": [
+        "Q = (3.1, 9.61)",
+        "Slope = 0.61 ÷ 0.1 = 6.1"
+       ],
+       "why": [
+        "3.1² = 9.61. The closer Q is to P, the more the chord looks like the curve at P."
+       ]
+      },
+      {
+       "do": "Closer still: x = 3.01.",
+       "lines": [
+        "Slope = 0.0601 ÷ 0.01 = 6.01"
+       ],
+       "why": [
+        "3.01² = 9.0601, so the rise is 0.0601 for a run of 0.01."
+       ]
+      },
+      {
+       "do": "See where the slopes are heading.",
+       "lines": [
+        "7, 6.1, 6.01, … → 6"
+       ],
+       "why": [
+        "The slopes settle towards 6. That value is the slope of the curve at x = 3, called the derivative there."
+       ]
+      }
+     ]
     },
     {
      "title": "The derivative, and how we write it",
@@ -6736,17 +7086,53 @@
       "Finding the derivative is called differentiating. The symbol d/dx written in front of an expression means 'differentiate this with respect to x'.",
       "A function is differentiable at a point when it has one clear slope there, the same coming from the left as from the right. At a sharp corner the two sides give different slopes, so it is not differentiable there."
      ],
-     "example": [
-      "f(x) = x². Take the chord from x to x + h.",
-      "Slope = ((x + h)² − x²) ÷ h = (2xh + h²) ÷ h = 2x + h",
-      "As h shrinks towards 0, this heads to 2x.",
-      "So f′(x) = 2x, and f′(3) = 6, as we found before."
-     ],
      "check": {
       "question": "For f(x) = x² the derivative is f′(x) = 2x. What is f′(5)?",
       "answer": "10"
      },
-     "picture": "tangent-slope"
+     "picture": "tangent-slope",
+     "ask": "Find the derivative of f(x) = x² from a chord.",
+     "steps": [
+      {
+       "do": "Take a chord from x to x + h.",
+       "lines": [
+        "Rise = (x + h)² − x²"
+       ],
+       "why": [
+        "h is a small step to the right. The rise is how much f goes up over that step."
+       ]
+      },
+      {
+       "do": "Multiply out and simplify.",
+       "lines": [
+        "= x² + 2xh + h² − x²",
+        "= 2xh + h²"
+       ],
+       "why": [
+        "(x + h)² is (x + h)(x + h) = x² + 2xh + h². The x² parts cancel."
+       ]
+      },
+      {
+       "do": "Divide by the run h.",
+       "lines": [
+        "Slope = (2xh + h²) ÷ h",
+        "= 2x + h"
+       ],
+       "why": [
+        "Every term on top has an h, so each can be divided by h."
+       ]
+      },
+      {
+       "do": "Let h shrink towards 0.",
+       "lines": [
+        "2x + h → 2x",
+        "f′(x) = 2x, f′(3) = 6"
+       ],
+       "why": [
+        "As the step gets tiny, + h fades away. The result 2x is the slope at any x. At x = 3 it is 6, as found by the chords."
+       ]
+      }
+     ]
     },
     {
      "title": "Two slopes to remember",
@@ -6755,15 +7141,42 @@
       "The curve y = x² has derivative 2x.",
       "Slopes add. So the derivative of x² + ax + b is 2x + a. These two facts are all this skill needs."
      ],
-     "example": [
-      "y = −3x + 4 has derivative −3.",
-      "y = x² + 5x + 1 has derivative 2x + 5.",
-      "At x = 1 that slope is 2 × 1 + 5 = 7."
-     ],
      "check": {
       "question": "What is the derivative of 7x + 2?",
       "answer": "7"
-     }
+     },
+     "ask": "Find the slope of y = −3x + 4, and of y = x² + 5x + 1 at x = 1.",
+     "steps": [
+      {
+       "do": "A straight line.",
+       "lines": [
+        "y = −3x + 4",
+        "dy/dx = −3"
+       ],
+       "why": [
+        "A straight line has the same slope everywhere: the number with x. The + 4 only moves the line up, so its slope is 0."
+       ]
+      },
+      {
+       "do": "Differentiate term by term.",
+       "lines": [
+        "x² → 2x, 5x → 5, 1 → 0",
+        "dy/dx = 2x + 5"
+       ],
+       "why": [
+        "Each piece is done on its own and the results are added."
+       ]
+      },
+      {
+       "do": "Put in x = 1.",
+       "lines": [
+        "2 × 1 + 5 = 7"
+       ],
+       "why": [
+        "The derivative is a rule for the slope. Put in the x you want."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -6993,16 +7406,42 @@
       "Solving it means finding the functions y that fit. Integration brings in a constant C, so there are many of them. Together they are the general solution.",
       "One extra fact, such as 'y = 5 when x = 0', fixes C. It is called the starting value or initial condition. The single function you then get is the particular solution."
      ],
-     "example": [
-      "dy/dx = 2x",
-      "Integrate: y = x² + C",
-      "Given y = 5 when x = 0: 5 = 0 + C, so C = 5",
-      "Solution: y = x² + 5. Check: its derivative is 2x."
-     ],
      "check": {
       "question": "Does y = x² + 1 satisfy dy/dx = 2x?",
       "answer": "Yes, the derivative of x² + 1 is 2x"
-     }
+     },
+     "ask": "Solve dy/dx = 2x, given y = 5 when x = 0.",
+     "steps": [
+      {
+       "do": "Undo the derivative: integrate.",
+       "lines": [
+        "y = x² + C"
+       ],
+       "why": [
+        "Which function has slope 2x? x² does. Any number added on has slope 0, so we add C for \"some number\"."
+       ]
+      },
+      {
+       "do": "Use the given point to find C.",
+       "lines": [
+        "5 = 0² + C",
+        "C = 5"
+       ],
+       "why": [
+        "Put x = 0 and y = 5 into y = x² + C."
+       ]
+      },
+      {
+       "do": "Write the solution and check.",
+       "lines": [
+        "y = x² + 5",
+        "dy/dx = 2x ✓"
+       ],
+       "why": [
+        "Differentiate the answer: you get back 2x, and at x = 0 it gives 5."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -7235,16 +7674,52 @@
       "A circle of radius 5 round the origin is x² + y² = 25. Here x and y are mixed together. The equation still ties y to x: choose an x and it tells you which y fit. We say it gives y implicitly.",
       "We can find the slope dy/dx without solving for y first. Differentiate every term with respect to x. Remember that y is a hidden function of x. So, by the chain rule, a term like y² gives 2y × dy/dx, not just 2y. Then solve for dy/dx."
      ],
-     "example": [
-      "x² + y² = 25",
-      "Differentiate each term: 2x + 2y × dy/dx = 0",
-      "So dy/dx = −x ÷ y",
-      "At the point (3, 4): dy/dx = −3 ÷ 4 = −0.75"
-     ],
      "check": {
       "question": "Is the point (3, 4) on the curve x² + y² = 25?",
       "answer": "Yes, because 9 + 16 = 25"
-     }
+     },
+     "ask": "On the circle x² + y² = 25, find dy/dx at (3, 4).",
+     "steps": [
+      {
+       "do": "Differentiate each term with respect to x.",
+       "lines": [
+        "x² → 2x",
+        "y² → 2y × dy/dx",
+        "25 → 0"
+       ],
+       "why": [
+        "y depends on x, so when we differentiate y² we get 2y, times dy/dx (the chain rule). The number 25 does not change."
+       ]
+      },
+      {
+       "do": "Write the new equation.",
+       "lines": [
+        "2x + 2y × dy/dx = 0"
+       ],
+       "why": [
+        "Every term was differentiated, so the two sides are still equal."
+       ]
+      },
+      {
+       "do": "Get dy/dx alone.",
+       "lines": [
+        "2y × dy/dx = −2x",
+        "dy/dx = −x ÷ y"
+       ],
+       "why": [
+        "Move 2x across (it changes sign), then divide by 2y."
+       ]
+      },
+      {
+       "do": "Put in the point.",
+       "lines": [
+        "−3 ÷ 4 = −0.75"
+       ],
+       "why": [
+        "At (3, 4) the circle is going down to the right, so a negative slope makes sense."
+       ]
+      }
+     ]
     },
     {
      "title": "A third letter that drives both",
@@ -7253,16 +7728,49 @@
       "The extra letter t is called a parameter, and this way of giving a curve is the parametric form. Each value of t gives one point (x, y).",
       "For the slope of the path, compare how fast y and x change with t. In a tiny moment y changes dy/dt times as fast as t, and x changes dx/dt times as fast. So dy/dx = dy/dt ÷ dx/dt."
      ],
-     "example": [
-      "x = 2t, y = t²",
-      "dx/dt = 2 and dy/dt = 2t",
-      "dy/dx = 2t ÷ 2 = t",
-      "At t = 3 the ant is at (6, 9) and the slope of its path is 3."
-     ],
      "check": {
       "question": "x = 2t and y = t². Where is the point when t = 1?",
       "answer": "(2, 1)"
-     }
+     },
+     "ask": "An ant is at x = 2t, y = t² at time t. Find the slope of its path at t = 3.",
+     "steps": [
+      {
+       "do": "How fast x changes with t.",
+       "lines": [
+        "dx/dt = 2"
+       ],
+       "why": [
+        "Differentiate x = 2t with respect to t."
+       ]
+      },
+      {
+       "do": "How fast y changes with t.",
+       "lines": [
+        "dy/dt = 2t"
+       ],
+       "why": [
+        "Differentiate y = t² with respect to t."
+       ]
+      },
+      {
+       "do": "Divide to get dy/dx.",
+       "lines": [
+        "dy/dx = 2t ÷ 2 = t"
+       ],
+       "why": [
+        "For each small tick of t, y moves by dy/dt and x by dx/dt. Rise ÷ run is their ratio."
+       ]
+      },
+      {
+       "do": "Put in t = 3.",
+       "lines": [
+        "Point (6, 9), slope 3"
+       ],
+       "why": [
+        "x = 2 × 3 = 6 and y = 3² = 9. The slope there is t = 3."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -7495,15 +8003,40 @@
       "We write ∫ 2x dx = x² + C. The tall sign ∫ means 'integrate'. The dx at the end says that the variable is x. The function in between is called the integrand.",
       "Why + C? Because x² + 1 and x² − 7 also have the derivative 2x: a constant has slope 0. C stands for any constant. An integral written like this, with no numbers on the ∫ sign, is called an indefinite integral."
      ],
-     "example": [
-      "The derivative of x³ is 3x².",
-      "So ∫ 3x² dx = x³ + C.",
-      "Check by differentiating x³ + C: you get 3x² back."
-     ],
      "check": {
       "question": "The derivative of x² is 2x. What is ∫ 2x dx?",
       "answer": "x² + C"
-     }
+     },
+     "ask": "Find ∫ 3x² dx.",
+     "steps": [
+      {
+       "do": "Recall a derivative.",
+       "lines": [
+        "d/dx (x³) = 3x²"
+       ],
+       "why": [
+        "Integrating asks: which function has this derivative? So start from derivatives you know."
+       ]
+      },
+      {
+       "do": "Run it backwards.",
+       "lines": [
+        "∫ 3x² dx = x³ + C"
+       ],
+       "why": [
+        "Any constant has derivative 0, so x³ + 7 or x³ − 2 also work. C stands for that unknown constant."
+       ]
+      },
+      {
+       "do": "Check by differentiating.",
+       "lines": [
+        "d/dx (x³ + C) = 3x² ✓"
+       ],
+       "why": [
+        "Differentiating your answer must give back what was inside the integral."
+       ]
+      }
+     ]
     },
     {
      "title": "An integral between two numbers",
@@ -7512,17 +8045,42 @@
       "To work it out, find an antiderivative F. Then take F(upper limit) − F(lower limit). The constant C cancels in the subtraction, so we leave it out.",
       "What does the number mean? When the graph is above the x-axis, it is the area under the graph y = f(x) between the two limits. Picture the area cut into very thin strips, each of height f(x) and width dx. The sign ∫ is a stretched S for 'sum': add up all the strips."
      ],
-     "example": [
-      "∫ from 0 to 3 of 2x dx",
-      "An antiderivative of 2x is x².",
-      "Upper minus lower: 3² − 0² = 9",
-      "Check with area: under y = 2x from 0 to 3 is a triangle, ½ × 3 × 6 = 9."
-     ],
      "check": {
       "question": "An antiderivative of 2x is x². What is ∫ from 0 to 2 of 2x dx?",
       "answer": "2² − 0² = 4"
      },
-     "picture": "area-under-curve"
+     "picture": "area-under-curve",
+     "ask": "Work out the integral of 2x from 0 to 3.",
+     "steps": [
+      {
+       "do": "Find an antiderivative.",
+       "lines": [
+        "2x → x²"
+       ],
+       "why": [
+        "x² has derivative 2x. For a definite integral the + C is not needed: it cancels."
+       ]
+      },
+      {
+       "do": "Upper value minus lower value.",
+       "lines": [
+        "3² − 0² = 9"
+       ],
+       "why": [
+        "Put the top number in, then the bottom number, and subtract."
+       ]
+      },
+      {
+       "do": "Check with an area.",
+       "lines": [
+        "Triangle: base 3, height 6",
+        "½ × 3 × 6 = 9 ✓"
+       ],
+       "why": [
+        "Under y = 2x from 0 to 3 is a triangle. At x = 3 the height is 2 × 3 = 6."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -7752,13 +8310,6 @@
       "We write it lim (x → a) f(x). The arrow → is read 'approaches' or 'tends to'. It means x comes as near to a as we like, from the left and from the right, without having to be equal to a.",
       "A limit is about where f(x) is heading, not about what happens exactly at x = a. So a limit can exist even at a place where the function itself has no value."
      ],
-     "example": [
-      "f(x) = (x² − 1) ÷ (x − 1). At x = 1 this is 0 ÷ 0, which has no value.",
-      "x = 0.9 gives (0.81 − 1) ÷ (−0.1) = 1.9",
-      "x = 0.99 gives 1.99, and x = 1.01 gives 2.01",
-      "The values head towards 2 from both sides.",
-      "So lim (x → 1) of (x² − 1) ÷ (x − 1) = 2."
-     ],
      "check": {
       "question": "As x gets closer and closer to 4, what number does x + 1 get closer to?",
       "answer": "5"
@@ -7874,6 +8425,47 @@
         ]
        },
        "caption": "f(x) = (x² − 1) ÷ (x − 1). There is a hole at x = 1: the function has no value there. But as x gets close to 1 from either side, the graph heads to 2. The limit is 2."
+      }
+     ],
+     "ask": "Find the limit of (x² − 1) ÷ (x − 1) as x → 1.",
+     "steps": [
+      {
+       "do": "Try x = 1 itself.",
+       "lines": [
+        "(1 − 1) ÷ (1 − 1) = 0 ÷ 0"
+       ],
+       "why": [
+        "0 ÷ 0 has no value. So we look at what happens near x = 1 instead."
+       ]
+      },
+      {
+       "do": "Come in from the left.",
+       "lines": [
+        "x = 0.9: 1.9",
+        "x = 0.99: 1.99"
+       ],
+       "why": [
+        "(0.81 − 1) ÷ (−0.1) = 1.9. Closer gives 1.99."
+       ]
+      },
+      {
+       "do": "Come in from the right.",
+       "lines": [
+        "x = 1.01: 2.01"
+       ],
+       "why": [
+        "From above the values are just over 2."
+       ]
+      },
+      {
+       "do": "Read the limit.",
+       "lines": [
+        "Both sides → 2",
+        "Limit = 2"
+       ],
+       "why": [
+        "The limit is the value the function heads for, even though it is not defined at x = 1 itself."
+       ]
       }
      ]
     }
@@ -8104,16 +8696,49 @@
       "Adding the interest more and more often helps, but less and less. The amount does not grow for ever. It settles on one number, about 2.718. This number is called e. Like π, its decimals never end, so it gets a letter of its own.",
       "The function e^x means e raised to the power x. It is the growth function of calculus. e^0 = 1, e^1 is about 2.718 and e^2 is about 7.39."
      ],
-     "example": [
-      "Once a year: 1 × 2 = 2",
-      "Twice a year: 1.5 × 1.5 = 2.25",
-      "Four times a year: 1.25 × 1.25 × 1.25 × 1.25 = about 2.44",
-      "More and more often: closer and closer to 2.718..., which is e."
-     ],
      "check": {
       "question": "Which whole number is e nearest to: 2, 3 or 10?",
       "answer": "3, because e is about 2.718"
-     }
+     },
+     "ask": "Invest 1 rupee at 100% a year. Compound it more and more often.",
+     "steps": [
+      {
+       "do": "Once a year.",
+       "lines": [
+        "1 × 2 = 2"
+       ],
+       "why": [
+        "100% interest doubles the money."
+       ]
+      },
+      {
+       "do": "Twice a year.",
+       "lines": [
+        "1.5 × 1.5 = 2.25"
+       ],
+       "why": [
+        "Each half year adds 50%, so multiply by 1.5 twice. Interest now earns interest."
+       ]
+      },
+      {
+       "do": "Four times a year.",
+       "lines": [
+        "1.25⁴ ≈ 2.44"
+       ],
+       "why": [
+        "Each quarter adds 25%, so multiply by 1.25 four times."
+       ]
+      },
+      {
+       "do": "More and more often.",
+       "lines": [
+        "→ 2.718… = e"
+       ],
+       "why": [
+        "The total keeps growing, but by less each time, and settles towards 2.718… That number is called e."
+       ]
+      }
+     ]
     },
     {
      "title": "The natural logarithm",
@@ -8122,16 +8747,50 @@
       "The natural logarithm asks the same question with base e: which power of e gives this number? It is written ln x. In calculus, and in these lessons, plain log x means this same base e logarithm.",
       "So ln and e^x undo each other. If you raise e to a power and then take ln, you get the power back: ln(e^x) = x."
      ],
-     "example": [
-      "ln 1 = 0, because e^0 = 1",
-      "ln e = 1, because e^1 = e",
-      "ln(e²) = 2",
-      "ln 7.39 is about 2, because e² is about 7.39"
-     ],
      "check": {
       "question": "What is ln(e³)?",
       "answer": "3"
-     }
+     },
+     "ask": "Find ln 1, ln e, ln(e²) and ln 7.39.",
+     "steps": [
+      {
+       "do": "ln 1",
+       "lines": [
+        "e⁰ = 1, so ln 1 = 0"
+       ],
+       "why": [
+        "ln is the logarithm with base e: it asks \"e to what power gives this number?\" Any number to the power 0 is 1."
+       ]
+      },
+      {
+       "do": "ln e",
+       "lines": [
+        "e¹ = e, so ln e = 1"
+       ],
+       "why": [
+        "e to the power 1 is e itself."
+       ]
+      },
+      {
+       "do": "ln(e²)",
+       "lines": [
+        "ln(e²) = 2"
+       ],
+       "why": [
+        "ln undoes e to a power: the power is the answer."
+       ]
+      },
+      {
+       "do": "ln 7.39",
+       "lines": [
+        "e² ≈ 7.39, so ln 7.39 ≈ 2"
+       ],
+       "why": [
+        "e² = 2.718 × 2.718, about 7.39."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -8364,16 +9023,41 @@
       "A rule like this is called a function of two variables, written f(x, y). You put in a pair of numbers and get one number out.",
       "Its graph is not a curve. It is a surface, like a hillside drawn over a map: above each point (x, y) of the map, the height is f(x, y)."
      ],
-     "example": [
-      "f(x, y) = x² + 3y",
-      "f(2, 1) = 4 + 3 = 7",
-      "f(1, 2) = 1 + 6 = 7",
-      "f(0, 5) = 0 + 15 = 15"
-     ],
      "check": {
       "question": "f(x, y) = xy. What is f(3, 4)?",
       "answer": "12"
-     }
+     },
+     "ask": "f(x, y) = x² + 3y. Find f(2, 1), f(1, 2) and f(0, 5).",
+     "steps": [
+      {
+       "do": "f(2, 1)",
+       "lines": [
+        "2² + 3 × 1 = 4 + 3 = 7"
+       ],
+       "why": [
+        "Put the first number in for x and the second for y."
+       ]
+      },
+      {
+       "do": "f(1, 2)",
+       "lines": [
+        "1² + 3 × 2 = 1 + 6 = 7"
+       ],
+       "why": [
+        "Swapping the inputs changed the working but gave the same answer here. In general it would not."
+       ]
+      },
+      {
+       "do": "f(0, 5)",
+       "lines": [
+        "0² + 3 × 5 = 15"
+       ],
+       "why": [
+        "The order matters: x always first, y second."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Changing one input at a time",
@@ -8382,17 +9066,51 @@
       "The slope when only x changes is called the partial derivative of f with respect to x. It is written ∂f/∂x, with a curly d, or f_x for short. To find it, treat y as a fixed number and differentiate in x as usual. The partial derivative with respect to y, written ∂f/∂y or f_y, treats x as the fixed number.",
       "For a small step dx in x and dy in y together, the two effects add: f changes by about f_x × dx + f_y × dy."
      ],
-     "example": [
-      "f(x, y) = x²y",
-      "f_x = 2xy (y treated as a number)",
-      "f_y = x² (x treated as a number)",
-      "At (3, 2): f = 18, f_x = 12, f_y = 9",
-      "Step dx = 0.1: estimate 18 + 12 × 0.1 = 19.2; exact f(3.1, 2) = 19.22"
-     ],
      "check": {
       "question": "f(x, y) = 5x + 2y. What is f_x?",
       "answer": "5"
-     }
+     },
+     "ask": "f(x, y) = x²y. Find f_x and f_y at (3, 2), and estimate f(3.1, 2).",
+     "steps": [
+      {
+       "do": "f_x: treat y as a fixed number.",
+       "lines": [
+        "f_x = 2x × y = 2xy"
+       ],
+       "why": [
+        "Differentiate with respect to x only. y behaves like a constant multiplier."
+       ]
+      },
+      {
+       "do": "f_y: treat x as a fixed number.",
+       "lines": [
+        "f_y = x²"
+       ],
+       "why": [
+        "Now x² is the constant multiplier and y is the variable: the derivative of y is 1."
+       ]
+      },
+      {
+       "do": "Values at (3, 2).",
+       "lines": [
+        "f = 9 × 2 = 18",
+        "f_x = 12, f_y = 9"
+       ],
+       "why": [
+        "f_x = 2 × 3 × 2 = 12 and f_y = 3² = 9."
+       ]
+      },
+      {
+       "do": "Estimate a small step in x.",
+       "lines": [
+        "18 + 12 × 0.1 = 19.2",
+        "Exact: 3.1² × 2 = 19.22"
+       ],
+       "why": [
+        "New value ≈ old value + slope × step. The estimate is very close because the step is small."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -8625,16 +9343,49 @@
       "Differentiate f once and you get f′. Differentiate f′ and you get the second derivative, written f″ ('f double dash') or d²y/dx². It tells how fast the slope itself is changing. Differentiate again for the third derivative, and so on.",
       "Dashes become hard to count, so for the nth derivative we write the number in small brackets: f⁽ⁿ⁾(x) means 'f differentiated n times'. And f⁽ⁿ⁾(0) means: differentiate n times, then put x = 0."
      ],
-     "example": [
-      "f(x) = x³",
-      "f′(x) = 3x²",
-      "f″(x) = 6x",
-      "Third derivative = 6, and the fourth derivative = 0."
-     ],
      "check": {
       "question": "f(x) = x². What is f″(x)?",
       "answer": "2, because f′(x) = 2x and differentiating 2x gives 2"
-     }
+     },
+     "ask": "f(x) = x³. Find its derivatives one after another.",
+     "steps": [
+      {
+       "do": "First derivative.",
+       "lines": [
+        "f′(x) = 3x²"
+       ],
+       "why": [
+        "Bring the power down to the front and lower the power by one."
+       ]
+      },
+      {
+       "do": "Second derivative.",
+       "lines": [
+        "f″(x) = 6x"
+       ],
+       "why": [
+        "Differentiate 3x²: 3 × 2x = 6x."
+       ]
+      },
+      {
+       "do": "Third derivative.",
+       "lines": [
+        "f‴(x) = 6"
+       ],
+       "why": [
+        "The derivative of 6x is 6."
+       ]
+      },
+      {
+       "do": "Fourth derivative.",
+       "lines": [
+        "0"
+       ],
+       "why": [
+        "6 is a constant: it does not change, so its derivative is 0. Every later one is 0 too."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -8867,16 +9618,49 @@
       "So the idea is to write a hard function as a polynomial that goes on for ever: a + bx + cx² + dx³ + ... Such an endless sum is called a series. The numbers a, b, c, d, ... in front of the powers are its coefficients.",
       "You already know one. The geometric series 1 + x + x² + x³ + ... adds up to 1 ÷ (1 − x) when x is between −1 and 1. So the function 1 ÷ (1 − x) is equal to that series. When x is small, the first few terms already give a very good value."
      ],
-     "example": [
-      "Take x = 0.1. Exact value: 1 ÷ 0.9 = 1.1111...",
-      "Two terms: 1 + 0.1 = 1.1",
-      "Three terms: 1 + 0.1 + 0.01 = 1.11",
-      "Four terms: 1.111. Each term brings us closer."
-     ],
      "check": {
       "question": "In the series 1 + x + x² + x³ + ..., what is the coefficient of x²?",
       "answer": "1"
-     }
+     },
+     "ask": "Approximate 1 ÷ (1 − x) at x = 0.1 with 1 + x + x² + …",
+     "steps": [
+      {
+       "do": "The exact value.",
+       "lines": [
+        "1 ÷ 0.9 = 1.1111…"
+       ],
+       "why": [
+        "First work out 1 − 0.1, which is 0.9."
+       ]
+      },
+      {
+       "do": "Two terms.",
+       "lines": [
+        "1 + 0.1 = 1.1"
+       ],
+       "why": [
+        "Start with the first two terms of the series."
+       ]
+      },
+      {
+       "do": "Three terms.",
+       "lines": [
+        "1 + 0.1 + 0.01 = 1.11"
+       ],
+       "why": [
+        "x² = 0.1 × 0.1 = 0.01."
+       ]
+      },
+      {
+       "do": "Four terms.",
+       "lines": [
+        "1.11 + 0.001 = 1.111"
+       ],
+       "why": [
+        "Each new term is ten times smaller, so each adds one more correct digit."
+       ]
+      }
+     ]
     },
     {
      "title": "Where the coefficients come from",
@@ -8885,16 +9669,51 @@
       "Why does this work? Put x = 0 in the series: only the constant term is left, so it must be f(0). Differentiate once and put x = 0: only the coefficient of x is left, so it is f′(0). Differentiate twice and put x = 0: you get 2 × (coefficient of x²), so that coefficient is f″(0) ÷ 2. Each further step works the same way.",
       "A Taylor series about x = a does the same thing in powers of (x − a), using the derivatives at a instead of at 0. It is the right tool when you care about x near a."
      ],
-     "example": [
-      "f(x) = e^x. Every derivative of e^x is e^x, and e^0 = 1.",
-      "So the coefficient of x to the power n is 1 ÷ n!.",
-      "e^x = 1 + x + x² ÷ 2 + x³ ÷ 6 + ...",
-      "At x = 1: 1 + 1 + 0.5 + 0.1667 = 2.6667, already close to e = 2.718..."
-     ],
      "check": {
       "question": "In the Maclaurin series of e^x, what is the coefficient of x²?",
       "answer": "1 ÷ 2! = 1/2"
-     }
+     },
+     "ask": "Build the series for eˣ and test it at x = 1.",
+     "steps": [
+      {
+       "do": "Derivatives of eˣ at 0.",
+       "lines": [
+        "Every derivative is eˣ",
+        "e⁰ = 1"
+       ],
+       "why": [
+        "eˣ is the function that is its own derivative."
+       ]
+      },
+      {
+       "do": "Coefficient of xⁿ.",
+       "lines": [
+        "f⁽ⁿ⁾(0) ÷ n! = 1 ÷ n!"
+       ],
+       "why": [
+        "The Maclaurin rule: the coefficient of xⁿ is the n-th derivative at 0, divided by n! (n factorial: 1 × 2 × … × n)."
+       ]
+      },
+      {
+       "do": "Write the series.",
+       "lines": [
+        "eˣ = 1 + x + x²/2 + x³/6 + …"
+       ],
+       "why": [
+        "Here 2! = 2 × 1 = 2 and 3! = 3 × 2 × 1 = 6."
+       ]
+      },
+      {
+       "do": "Test at x = 1.",
+       "lines": [
+        "1 + 1 + 0.5 + 0.1667",
+        "= 2.6667"
+       ],
+       "why": [
+        "Four terms already come close to e = 2.718…"
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -9367,18 +10186,52 @@
       "Put the centre at the origin. By the distance formula, a point (x, y) is √(x² + y²) away from the origin. So it is on the circle of radius r exactly when x² + y² = r². That is the equation of the circle.",
       "If the centre is (h, k) instead, the same idea gives (x − h)² + (y − k)² = r². Multiply out the brackets and you get the long 'general' form, with x², y², an x term, a y term and a constant. Completing the square takes you back, so the centre and the radius can be read off."
      ],
-     "example": [
-      "Centre (0, 0), radius 5: x² + y² = 25",
-      "(3, 4): 9 + 16 = 25, so it is on the circle.",
-      "(1, 2): 1 + 4 = 5, less than 25, so it is inside.",
-      "Centre (2, 1), radius 3: (x − 2)² + (y − 1)² = 9",
-      "Multiplied out: x² + y² − 4x − 2y − 4 = 0"
-     ],
      "check": {
       "question": "What is the radius of the circle x² + y² = 49?",
       "answer": "7"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Write the circle with centre (0, 0) and radius 5; test two points; then move the centre to (2, 1) with radius 3.",
+     "steps": [
+      {
+       "do": "Centre (0, 0), radius 5.",
+       "lines": [
+        "x² + y² = 25"
+       ],
+       "why": [
+        "Every point on the circle is 5 from the centre. By Pythagoras, x² + y² is the square of that distance."
+       ]
+      },
+      {
+       "do": "Test (3, 4) and (1, 2).",
+       "lines": [
+        "9 + 16 = 25: on",
+        "1 + 4 = 5 < 25: inside"
+       ],
+       "why": [
+        "Equal to 25 means exactly on the circle. Less means closer than 5: inside."
+       ]
+      },
+      {
+       "do": "Centre (2, 1), radius 3.",
+       "lines": [
+        "(x − 2)² + (y − 1)² = 9"
+       ],
+       "why": [
+        "Measure across and up from the new centre: x − 2 and y − 1."
+       ]
+      },
+      {
+       "do": "Multiply out.",
+       "lines": [
+        "x² − 4x + 4 + y² − 2y + 1 = 9",
+        "x² + y² − 4x − 2y − 4 = 0"
+       ],
+       "why": [
+        "(x − 2)² = x² − 4x + 4 and (y − 1)² = y² − 2y + 1. Then move 9 across: 4 + 1 − 9 = −4."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -9607,12 +10460,6 @@
       "Each pin is a focus (plural: foci). The point midway between the foci is the centre. The longest width, through the foci, is the major axis, and half of it is called a. The shortest width is the minor axis, and half of it is b. The ends of the major axis are the vertices. The distance from the centre to a focus is c.",
       "With the centre at the origin and the foci on the x-axis, the equation is x²/a² + y²/b² = 1, and c² = a² − b². The fixed sum of the two distances is 2a."
      ],
-     "example": [
-      "x²/25 + y²/9 = 1, so a = 5 and b = 3.",
-      "c² = 25 − 9 = 16, so c = 4. The foci are (4, 0) and (−4, 0).",
-      "Point (5, 0): distances 1 and 9. Sum = 10.",
-      "Point (0, 3): distances 5 and 5. Sum = 10 = 2a."
-     ],
      "check": {
       "question": "For the ellipse x²/25 + y²/9 = 1, how long is the major axis?",
       "answer": "10, which is 2a with a = 5"
@@ -9726,6 +10573,49 @@
        },
        "caption": "x²/25 + y²/9 = 1. The foci F₁ and F₂ are at (−4, 0) and (4, 0). For P at the top, PF₁ = 5 and PF₂ = 5: the two distances add up to 10, as they do for every point on the curve."
       }
+     ],
+     "ask": "For x²/25 + y²/9 = 1, find the foci and check the sum of distances.",
+     "steps": [
+      {
+       "do": "Read a and b.",
+       "lines": [
+        "a² = 25, b² = 9",
+        "a = 5, b = 3"
+       ],
+       "why": [
+        "a is how far the ellipse reaches left and right; b how far up and down."
+       ]
+      },
+      {
+       "do": "Find c.",
+       "lines": [
+        "c² = a² − b² = 16",
+        "c = 4, foci (±4, 0)"
+       ],
+       "why": [
+        "The foci are the two \"pins\" on the long axis."
+       ]
+      },
+      {
+       "do": "Point (5, 0).",
+       "lines": [
+        "Distances 1 and 9",
+        "Sum = 10"
+       ],
+       "why": [
+        "From (5, 0) to (4, 0) is 1; to (−4, 0) is 9."
+       ]
+      },
+      {
+       "do": "Point (0, 3).",
+       "lines": [
+        "Distances 5 and 5",
+        "Sum = 10 = 2a"
+       ],
+       "why": [
+        "√(4² + 3²) = 5 each. Every point on the ellipse has the same sum, 2a."
+       ]
+      }
      ]
     },
     {
@@ -9736,16 +10626,52 @@
       "With the centre at the origin and the foci on the x-axis, the equation is x²/a² − y²/b² = 1, and c² = a² + b². The fixed difference of the distances is 2a.",
       "The eccentricity e = c ÷ a says how far a curve is from being a circle. For a circle it is 0, for an ellipse it is between 0 and 1, and for a hyperbola it is more than 1."
      ],
-     "example": [
-      "x²/9 − y²/16 = 1, so a = 3 and b = 4.",
-      "c² = 9 + 16 = 25, so c = 5. The foci are (5, 0) and (−5, 0).",
-      "Vertex (3, 0): distances 2 and 8. Difference = 6 = 2a.",
-      "e = c ÷ a = 5 ÷ 3, which is more than 1."
-     ],
      "check": {
       "question": "An ellipse has a = 5 and c = 4. What is its eccentricity?",
       "answer": "4 ÷ 5 = 0.8"
-     }
+     },
+     "ask": "For x²/9 − y²/16 = 1, find the foci, the difference of distances and e.",
+     "steps": [
+      {
+       "do": "Read a and b.",
+       "lines": [
+        "a² = 9, b² = 16",
+        "a = 3, b = 4"
+       ],
+       "why": [
+        "The minus sign makes it a hyperbola."
+       ]
+      },
+      {
+       "do": "Find c.",
+       "lines": [
+        "c² = a² + b² = 25",
+        "c = 5, foci (±5, 0)"
+       ],
+       "why": [
+        "For a hyperbola c² is a² plus b² (for an ellipse it was minus)."
+       ]
+      },
+      {
+       "do": "Vertex (3, 0).",
+       "lines": [
+        "Distances 2 and 8",
+        "Difference = 6 = 2a"
+       ],
+       "why": [
+        "For a hyperbola the difference of the distances to the foci is always 2a."
+       ]
+      },
+      {
+       "do": "Eccentricity.",
+       "lines": [
+        "e = c ÷ a = 5/3"
+       ],
+       "why": [
+        "e > 1 for every hyperbola; e < 1 for every ellipse."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -10247,13 +11173,6 @@
       "In space we use three axes that meet at the origin, each at right angles to the other two. Think of a corner of the room: the x-axis and the y-axis run along the floor, and the z-axis runs straight up.",
       "A point is written (x, y, z). To reach it from the origin, go x along the x-axis, then y in the direction of the y-axis, then z straight up (or down if z is negative). Points on the floor have z = 0, so (2, 3, 0) is the floor point directly below (2, 3, 4)."
      ],
-     "example": [
-      "To reach (2, 3, 4): go 2 along x, 3 along y, then 4 up.",
-      "Distance from the origin, in two steps:",
-      "Across the floor: 2² + 3² = 13",
-      "Then up: 13 + 4² = 29",
-      "Distance = √29"
-     ],
      "check": {
       "question": "How high above the floor (the plane z = 0) is the point (5, 1, 7)?",
       "answer": "7"
@@ -10385,6 +11304,45 @@
         ]
        },
        "caption": "To reach (2, 3, 4): go 2 along x, then 3 along y, then 4 up."
+      }
+     ],
+     "ask": "How far is (2, 3, 4) from the origin?",
+     "steps": [
+      {
+       "do": "Walk to the point.",
+       "lines": [
+        "2 along x, 3 along y, 4 up"
+       ],
+       "why": [
+        "The three numbers are three moves at right angles."
+       ]
+      },
+      {
+       "do": "Across the floor first.",
+       "lines": [
+        "2² + 3² = 13"
+       ],
+       "why": [
+        "On the floor, Pythagoras gives the square of the diagonal."
+       ]
+      },
+      {
+       "do": "Then straight up.",
+       "lines": [
+        "13 + 4² = 29"
+       ],
+       "why": [
+        "The upward move is at right angles to the floor diagonal, so use Pythagoras again."
+       ]
+      },
+      {
+       "do": "Take the square root.",
+       "lines": [
+        "Distance = √29"
+       ],
+       "why": [
+        "In general, distance = √(x² + y² + z²)."
+       ]
       }
      ]
     }
@@ -10615,18 +11573,52 @@
       "Let a be the position vector of one known point of the line, and let b be a vector that points along the line. Start at a and add any amount of b: r = a + λb. Here λ (the Greek letter lambda) is any number, positive, negative or a fraction. It is called a parameter. Each value of λ gives one point of the line, and every point of the line comes from some λ. A second line usually uses another letter, μ (mu).",
       "The three components of b are called direction ratios of the line. Any multiple of b points along the same line, so (1, 2, 3) and (2, 4, 6) are direction ratios of the same direction. Divide them by the length of b and you get the direction cosines."
      ],
-     "example": [
-      "Line through (1, 0, 2) with direction (2, 1, −1):",
-      "r = (1, 0, 2) + λ(2, 1, −1)",
-      "λ = 0 gives (1, 0, 2)",
-      "λ = 1 gives (3, 1, 1)",
-      "λ = −1 gives (−1, −1, 3)"
-     ],
      "check": {
       "question": "On the line r = (1, 0, 2) + λ(2, 1, −1), which point has λ = 2?",
       "answer": "(5, 2, 0)"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "Write the line through (1, 0, 2) with direction (2, 1, −1) and find three points on it.",
+     "steps": [
+      {
+       "do": "Write the vector equation.",
+       "lines": [
+        "r = (1, 0, 2) + λ(2, 1, −1)"
+       ],
+       "why": [
+        "Start at the point, then take λ steps of the direction. λ can be any number, so every point of the line is reached."
+       ]
+      },
+      {
+       "do": "λ = 0.",
+       "lines": [
+        "(1, 0, 2)"
+       ],
+       "why": [
+        "No steps: the start point."
+       ]
+      },
+      {
+       "do": "λ = 1.",
+       "lines": [
+        "(1 + 2, 0 + 1, 2 − 1)",
+        "= (3, 1, 1)"
+       ],
+       "why": [
+        "One whole step forward along the direction."
+       ]
+      },
+      {
+       "do": "λ = −1.",
+       "lines": [
+        "(1 − 2, 0 − 1, 2 + 1)",
+        "= (−1, −1, 3)"
+       ],
+       "why": [
+        "A negative λ walks backwards along the same line."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -10855,13 +11847,6 @@
       "In space, one equation in x, y and z describes a surface, not a line. The simplest are flat: z = 0 is the floor, and z = 3 is a flat ceiling 3 units up. In general a plane has an equation ax + by + cz + d = 0. A point is on the plane exactly when its coordinates fit the equation.",
       "The numbers in front of x, y and z make a normal vector of the plane: (a, b, c) is at right angles to it. That is why these three numbers appear in the formulas for distances and angles."
      ],
-     "example": [
-      "Plane x + y + z − 3 = 0.",
-      "(3, 0, 0): 3 − 3 = 0, on the plane. So are (0, 3, 0) and (1, 1, 1).",
-      "(1, 1, 2): 4 − 3 = 1, not 0, so it is off the plane.",
-      "A step inside the plane, from (3, 0, 0) to (0, 3, 0), is (−3, 3, 0).",
-      "Dot it with the normal (1, 1, 1): −3 + 3 + 0 = 0. At right angles."
-     ],
      "check": {
       "question": "Is the point (1, 2, 0) on the plane x + y + z − 3 = 0?",
       "answer": "Yes, because 1 + 2 + 0 − 3 = 0"
@@ -10929,6 +11914,48 @@
         ]
        },
        "caption": "A plane is a flat surface. Its normal is a direction at right angles to it, like a table leg to the table top."
+      }
+     ],
+     "ask": "Which points lie on the plane x + y + z − 3 = 0? Why is (1, 1, 1) its normal?",
+     "steps": [
+      {
+       "do": "Test (3, 0, 0).",
+       "lines": [
+        "3 + 0 + 0 − 3 = 0 ✓"
+       ],
+       "why": [
+        "A point is on the plane when its numbers make the left side exactly 0.",
+        "(0, 3, 0) and (1, 1, 1) also give 0."
+       ]
+      },
+      {
+       "do": "Test (1, 1, 2).",
+       "lines": [
+        "1 + 1 + 2 − 3 = 1",
+        "Not 0: off the plane"
+       ],
+       "why": [
+        "Any value other than 0 means the point is above or below the plane."
+       ]
+      },
+      {
+       "do": "A step inside the plane.",
+       "lines": [
+        "(0, 3, 0) − (3, 0, 0)",
+        "= (−3, 3, 0)"
+       ],
+       "why": [
+        "Subtract two points on the plane: the arrow between them lies flat in the plane."
+       ]
+      },
+      {
+       "do": "Dot it with (1, 1, 1).",
+       "lines": [
+        "−3 + 3 + 0 = 0"
+       ],
+       "why": [
+        "A dot product of 0 means the two arrows are at right angles. (1, 1, 1), the numbers in front of x, y and z, is at right angles to the plane: its normal."
+       ]
       }
      ]
     }
@@ -17864,17 +18891,43 @@
       "The inverse of a square matrix A is the matrix, written A⁻¹, for which A × A⁻¹ = I and A⁻¹ × A = I. The small −1 means 'inverse'. It does not mean 1 divided by each entry.",
       "Why we want it: a system AX = B is solved in one step by X = A⁻¹B. Not every matrix has an inverse. If the determinant |A| is 0 there is none, just as the number 0 has no reciprocal."
      ],
-     "example": [
-      "A = [[2, 1], [1, 1]] and A⁻¹ = [[1, −1], [−1, 2]]",
-      "Row 1 of the product: 2 × 1 + 1 × (−1) = 1 and 2 × (−1) + 1 × 2 = 0",
-      "Row 2 of the product: 1 × 1 + 1 × (−1) = 0 and 1 × (−1) + 1 × 2 = 1",
-      "A × A⁻¹ = [[1, 0], [0, 1]] = I, so it really is the inverse."
-     ],
      "check": {
       "question": "If A × B = I and B × A = I, what is B called?",
       "answer": "The inverse of A, written A⁻¹."
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[2, 1], [1, 1]] and A⁻¹ = [[1, −1], [−1, 2]]. Check A × A⁻¹ = I.",
+     "steps": [
+      {
+       "do": "Row 1 of A with each column.",
+       "lines": [
+        "2 × 1 + 1 × (−1) = 1",
+        "2 × (−1) + 1 × 2 = 0"
+       ],
+       "why": [
+        "Each entry of the product is one row meeting one column: multiply the pairs and add."
+       ]
+      },
+      {
+       "do": "Row 2 of A with each column.",
+       "lines": [
+        "1 × 1 + 1 × (−1) = 0",
+        "1 × (−1) + 1 × 2 = 1"
+       ],
+       "why": [
+        "The same two meetings, now with row 2 of A, which is 1, 1."
+       ]
+      },
+      {
+       "do": "Put the four answers in place.",
+       "lines": [
+        "[[1, 0], [0, 1]] = I"
+       ],
+       "why": [
+        "I has 1s on the diagonal and 0s elsewhere. Getting I shows A⁻¹ really undoes A."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18104,17 +19157,52 @@
       "For working, we write A and B side by side with a bar between them. This is the augmented matrix [A | B]. Each row is one equation.",
       "A system is called consistent if it has at least one solution, and inconsistent if it has none."
      ],
-     "example": [
-      "x + y = 5 and x − y = 1",
-      "A = [[1, 1], [1, −1]], X = column (x, y), B = column (5, 1)",
-      "[A | B] = [[1, 1 | 5], [1, −1 | 1]]",
-      "Solution x = 3, y = 2: the system is consistent."
-     ],
      "check": {
       "question": "For the system 2x + 3y = 7 and x + 4y = 6, what is the first row of [A | B]?",
       "answer": "2, 3 | 7"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Write x + y = 5 and x − y = 1 as AX = B, form [A | B], and solve.",
+     "steps": [
+      {
+       "do": "A: the numbers in front of x and y.",
+       "lines": [
+        "A = [[1, 1], [1, −1]]"
+       ],
+       "why": [
+        "Row 1 comes from the first equation, row 2 from the second. x − y means 1x + (−1)y."
+       ]
+      },
+      {
+       "do": "X and B.",
+       "lines": [
+        "X = column (x, y)",
+        "B = column (5, 1)"
+       ],
+       "why": [
+        "X holds the unknowns, B the right-hand sides."
+       ]
+      },
+      {
+       "do": "The augmented matrix.",
+       "lines": [
+        "[[1, 1 | 5], [1, −1 | 1]]"
+       ],
+       "why": [
+        "[A | B] is A with B stuck on the right, the bar marking the join. Row operations work on it all at once."
+       ]
+      },
+      {
+       "do": "Solve.",
+       "lines": [
+        "Add: 2x = 6, x = 3",
+        "y = 5 − 3 = 2"
+       ],
+       "why": [
+        "Adding the equations cancels y. A solution exists, so the system is consistent."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18343,16 +19431,42 @@
       "Done on the rows of a matrix, these same three moves are called elementary row operations. The short way to write 'replace row 2 by row 2 minus 2 times row 1' is R2 → R2 − 2R1.",
       "The aim is to make zeros in the bottom left, so the rows form a staircase: each row starts with more zeros than the row above, and any row of all zeros sits at the bottom. This staircase shape is called echelon form."
      ],
-     "example": [
-      "Start with [[1, 2], [3, 4]]",
-      "R2 → R2 − 3R1: row 2 becomes (3 − 3, 4 − 6) = (0, −2)",
-      "Echelon form: [[1, 2], [0, −2]]"
-     ],
      "check": {
       "question": "Do R2 → R2 − R1 on [[1, 4], [1, 6]]. What is the new row 2?",
       "answer": "0, 2"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Bring [[1, 2], [3, 4]] to echelon form.",
+     "steps": [
+      {
+       "do": "Choose what to remove.",
+       "lines": [
+        "Make the 3 below the 1 into 0"
+       ],
+       "why": [
+        "Echelon form means a staircase: zeros below the first number of each row."
+       ]
+      },
+      {
+       "do": "R2 → R2 − 3R1.",
+       "lines": [
+        "(3 − 3 × 1, 4 − 3 × 2)",
+        "= (0, −2)"
+       ],
+       "why": [
+        "Take 3 times row 1 away from row 2. 3 was chosen because 3 × 1 cancels the 3."
+       ]
+      },
+      {
+       "do": "Write the result.",
+       "lines": [
+        "[[1, 2], [0, −2]]"
+       ],
+       "why": [
+        "Row 1 is unchanged. Row operations keep the same solutions to the equations."
+       ]
+      }
+     ]
     },
     {
      "title": "Rank: how many rows really count",
@@ -18361,17 +19475,54 @@
       "The rank of a matrix counts the rows that carry real information. To find it, reduce the matrix to echelon form and count the rows that are not all zeros. The rank of A is written ρ(A), using the Greek letter rho.",
       "For a system, compare ρ(A) with ρ([A | B]). If they are different, some row says 0 = a non-zero number, which is impossible: no solution. If they are equal, there are solutions: exactly one when the rank equals the number of unknowns, and infinitely many when it is smaller."
      ],
-     "example": [
-      "A = [[1, 2], [2, 4]]. R2 → R2 − 2R1 gives [[1, 2], [0, 0]], so ρ(A) = 1.",
-      "With right sides 3 and 6: [A | B] becomes [[1, 2 | 3], [0, 0 | 0]], rank 1.",
-      "Ranks equal (1) but fewer than 2 unknowns: infinitely many solutions.",
-      "With right sides 3 and 7 instead: last row 0, 0 | 1, so ρ([A | B]) = 2 ≠ 1: no solution."
-     ],
      "check": {
       "question": "An echelon form is [[1, 5, 2], [0, 3, 1], [0, 0, 0]]. What is the rank?",
       "answer": "2 (two rows are not all zeros)."
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[1, 2], [2, 4]]. Find ρ(A), then compare with right sides (3, 6) and (3, 7).",
+     "steps": [
+      {
+       "do": "Reduce A.",
+       "lines": [
+        "R2 → R2 − 2R1",
+        "[[1, 2], [0, 0]], ρ(A) = 1"
+       ],
+       "why": [
+        "Row 2 is just twice row 1, so it vanishes. Rank counts the rows that are not all zero."
+       ]
+      },
+      {
+       "do": "Right sides 3 and 6.",
+       "lines": [
+        "[[1, 2 | 3], [0, 0 | 0]]",
+        "ρ([A | B]) = 1"
+       ],
+       "why": [
+        "6 − 2 × 3 = 0, so the extra row is 0 = 0: true and no use."
+       ]
+      },
+      {
+       "do": "Compare: equal ranks, fewer than 2.",
+       "lines": [
+        "ρ = 1 = 1 < 2 unknowns",
+        "Infinitely many solutions"
+       ],
+       "why": [
+        "Equal ranks: consistent. Only one real equation for two unknowns, so one can be chosen freely."
+       ]
+      },
+      {
+       "do": "Right sides 3 and 7.",
+       "lines": [
+        "Last row 0, 0 | 1",
+        "ρ([A | B]) = 2 ≠ 1: none"
+       ],
+       "why": [
+        "7 − 2 × 3 = 1, so the row says 0 = 1, which is impossible."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -22229,17 +23380,49 @@
       "With i, every negative number gets a square root: √(−9) = √9 × i = 3i. Check: (3i)² = 9 × i² = 9 × (−1) = −9.",
       "i is called the imaginary unit. The name is only historical. i obeys the ordinary rules of algebra and is used every day in the study of electricity and waves."
      ],
-     "example": [
-      "Solve x² = −25.",
-      "x = √(−25) or x = −√(−25)",
-      "√(−25) = √25 × i = 5i",
-      "So x = 5i or x = −5i.",
-      "Check: (5i)² = 25 × i² = 25 × (−1) = −25"
-     ],
      "check": {
       "question": "What is i × i?",
       "answer": "−1"
-     }
+     },
+     "ask": "Solve x² = −25.",
+     "steps": [
+      {
+       "do": "Take square roots of both sides.",
+       "lines": [
+        "x = √(−25) or −√(−25)"
+       ],
+       "why": [
+        "Every number has two square roots, one positive and one negative."
+       ]
+      },
+      {
+       "do": "Split off the minus sign.",
+       "lines": [
+        "√(−25) = √25 × i = 5i"
+       ],
+       "why": [
+        "i is the number whose square is −1, so √(−1) = i."
+       ]
+      },
+      {
+       "do": "Write both answers.",
+       "lines": [
+        "x = 5i or x = −5i"
+       ],
+       "why": [
+        "The ± from step 1 gives the pair."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "(5i)² = 25 × i² = −25 ✓"
+       ],
+       "why": [
+        "i² = −1, so 25 × (−1) = −25."
+       ]
+      }
+     ]
     },
     {
      "title": "Complex numbers: a + bi",
@@ -22249,16 +23432,43 @@
       "Every real number is also a complex number, with b = 0: 5 = 5 + 0i. A number such as 4i, with a = 0, is called purely imaginary.",
       "Two complex numbers are equal only when their real parts match and their imaginary parts match. To calculate, treat i like a letter in algebra and replace i² by −1 whenever it appears."
      ],
-     "example": [
-      "(2 + 3i) + (1 + 4i) = 3 + 7i",
-      "i × (2 + 3i) = 2i + 3i²",
-      "= 2i + 3 × (−1)",
-      "= −3 + 2i"
-     ],
      "check": {
       "question": "What is the imaginary part of 7 − 4i?",
       "answer": "−4"
-     }
+     },
+     "ask": "Work out (2 + 3i) + (1 + 4i), and i × (2 + 3i).",
+     "steps": [
+      {
+       "do": "Adding: real with real, i with i.",
+       "lines": [
+        "(2 + 1) + (3 + 4)i",
+        "= 3 + 7i"
+       ],
+       "why": [
+        "Treat i like a letter: collect the plain numbers, then the i terms."
+       ]
+      },
+      {
+       "do": "Multiplying: open the bracket.",
+       "lines": [
+        "i × 2 + i × 3i",
+        "= 2i + 3i²"
+       ],
+       "why": [
+        "i multiplies each part inside."
+       ]
+      },
+      {
+       "do": "Use i² = −1.",
+       "lines": [
+        "= 2i + 3 × (−1)",
+        "= −3 + 2i"
+       ],
+       "why": [
+        "Write the plain part first: a + bi form."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -22492,17 +23702,42 @@
       "The modulus of z, written |z|, is the distance of its point from the origin. By Pythagoras, |a + bi| = √(a² + b²). It measures the size of a complex number, just as the absolute value does for a real number.",
       "The conjugate of a + bi is a − bi. Its point (a, −b) is the mirror image of (a, b) in the real axis."
      ],
-     "example": [
-      "z = 3 + 4i is the point (3, 4).",
-      "|z| = √(3² + 4²)",
-      "= √(9 + 16) = √25",
-      "= 5"
-     ],
      "check": {
       "question": "Which point of the Argand plane stands for 2 + 5i?",
       "answer": "(2, 5)"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Find the size |z| of z = 3 + 4i.",
+     "steps": [
+      {
+       "do": "Plot it.",
+       "lines": [
+        "z = 3 + 4i is the point (3, 4)"
+       ],
+       "why": [
+        "The real part goes across, the i part goes up."
+       ]
+      },
+      {
+       "do": "Use Pythagoras.",
+       "lines": [
+        "|z| = √(3² + 4²)"
+       ],
+       "why": [
+        "|z| is the distance from 0 to the point: the long side of a right triangle with sides 3 and 4."
+       ]
+      },
+      {
+       "do": "Work it out.",
+       "lines": [
+        "= √(9 + 16) = √25",
+        "= 5"
+       ],
+       "why": [
+        "Square each part, add, then take the square root."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -22732,18 +23967,51 @@
       "Drop a perpendicular from the point to the real axis. In the right triangle with hypotenuse r, x = r cos θ and y = r sin θ. So z = r cos θ + i r sin θ = r(cos θ + i sin θ). This is called the polar form, or modulus-argument form, of z. The usual x + iy is the rectangular form.",
       "The angle is given in radians: π radians = 180°, so π/2 = 90° and π/4 = 45°."
      ],
-     "example": [
-      "z = 1 + i is the point (1, 1).",
-      "r = √(1² + 1²) = √2",
-      "The point is on the line y = x in the first quadrant, so θ = 45° = π/4.",
-      "z = √2 (cos π/4 + i sin π/4)",
-      "Check: √2 × cos π/4 = √2 × 1/√2 = 1, and the same for sin π/4."
-     ],
      "check": {
       "question": "The number i is the point (0, 1). What are its modulus and its argument?",
       "answer": "Modulus 1, argument π/2 (90°)"
      },
-     "picture": "unit-circle"
+     "picture": "unit-circle",
+     "ask": "Write z = 1 + i in polar form.",
+     "steps": [
+      {
+       "do": "Find the distance r.",
+       "lines": [
+        "r = √(1² + 1²) = √2"
+       ],
+       "why": [
+        "r is how far the point (1, 1) is from 0."
+       ]
+      },
+      {
+       "do": "Find the angle θ.",
+       "lines": [
+        "On y = x, first quarter",
+        "θ = 45° = π/4"
+       ],
+       "why": [
+        "Across 1, up 1: the line makes 45° with the x-axis."
+       ]
+      },
+      {
+       "do": "Write the polar form.",
+       "lines": [
+        "z = √2 (cos π/4 + i sin π/4)"
+       ],
+       "why": [
+        "r times (cos θ + i sin θ): distance and direction instead of across and up."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "√2 × cos π/4 = √2 × 1/√2 = 1"
+       ],
+       "why": [
+        "That gives back the across part, 1. sin π/4 is also 1/√2, giving the up part, 1."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -28265,16 +29533,53 @@
       "The list of every value of X with its probability is called the probability distribution of X. The probabilities in it always add up to 1.",
       "The mean of X, written E(X), is the average value you would get over very many tries. Multiply each value by its probability and add."
      ],
-     "example": [
-      "Two coins: HH, HT, TH, TT are 4 equally likely outcomes.",
-      "P(X = 0) = 1/4, P(X = 1) = 2/4 = 1/2, P(X = 2) = 1/4",
-      "P(X ≤ 1) = 1/4 + 1/2 = 3/4",
-      "E(X) = 0 × 1/4 + 1 × 1/2 + 2 × 1/4 = 1"
-     ],
      "check": {
       "question": "For the two coins, what is P(X ≥ 1), the probability of at least one head?",
       "answer": "3/4 (1/2 + 1/4, or 1 − 1/4)."
-     }
+     },
+     "ask": "Toss two coins. X is the number of heads. Find its probabilities, P(X ≤ 1) and E(X).",
+     "steps": [
+      {
+       "do": "List the outcomes.",
+       "lines": [
+        "HH, HT, TH, TT",
+        "4 equally likely"
+       ],
+       "why": [
+        "Each coin can land two ways, so 2 × 2 = 4 outcomes."
+       ]
+      },
+      {
+       "do": "Probability of each value.",
+       "lines": [
+        "P(X = 0) = 1/4 (TT)",
+        "P(X = 1) = 2/4 = 1/2",
+        "P(X = 2) = 1/4 (HH)"
+       ],
+       "why": [
+        "Count the outcomes with that many heads, out of 4."
+       ]
+      },
+      {
+       "do": "P(X ≤ 1).",
+       "lines": [
+        "1/4 + 1/2 = 3/4"
+       ],
+       "why": [
+        "\"At most 1 head\" means 0 heads or 1 head: add them."
+       ]
+      },
+      {
+       "do": "Expected value E(X).",
+       "lines": [
+        "0 × 1/4 + 1 × 1/2 + 2 × 1/4",
+        "= 1"
+       ],
+       "why": [
+        "Each value times its probability, added: the average number of heads over many tosses."
+       ]
+      }
+     ]
     },
     {
      "title": "Success, failure and the binomial pattern",
@@ -28284,16 +29589,49 @@
       "Let X be the number of successes in n trials. Then X is said to have a binomial distribution with n and p.",
       "To get exactly k successes: one fixed order has probability p multiplied k times and q multiplied (n − k) times. There are nCk such orders. Multiply the two."
      ],
-     "example": [
-      "Two coin tosses, success = head: n = 2, p = 1/2, q = 1/2.",
-      "Exactly 1 head, one order (HT): 1/2 × 1/2 = 1/4",
-      "Number of orders: 2C1 = 2 (HT and TH)",
-      "P(X = 1) = 2 × 1/4 = 1/2, the same as counting outcomes."
-     ],
      "check": {
       "question": "A seed sprouts with probability p = 3/4. What is q, the probability that it does not sprout?",
       "answer": "1/4 (q = 1 − 3/4)."
-     }
+     },
+     "ask": "Two tosses, success = head. Find P(exactly 1 head) by the binomial rule.",
+     "steps": [
+      {
+       "do": "Name n, p and q.",
+       "lines": [
+        "n = 2, p = 1/2, q = 1/2"
+       ],
+       "why": [
+        "n trials, p the chance of success each time, q = 1 − p the chance of failure."
+       ]
+      },
+      {
+       "do": "One particular order, HT.",
+       "lines": [
+        "1/2 × 1/2 = 1/4"
+       ],
+       "why": [
+        "One success and one failure: multiply their chances."
+       ]
+      },
+      {
+       "do": "Count the orders.",
+       "lines": [
+        "2C1 = 2 (HT and TH)"
+       ],
+       "why": [
+        "The head can be on toss 1 or toss 2."
+       ]
+      },
+      {
+       "do": "Multiply.",
+       "lines": [
+        "P(X = 1) = 2 × 1/4 = 1/2"
+       ],
+       "why": [
+        "The same as counting outcomes directly: the rule works."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -28794,17 +30132,43 @@
       "We draw a curve y = f(x) over the possible values, called the probability density function. Its height shows where X is more crowded. The probability that X lies between b and c is the area under the curve from b to c.",
       "Two rules follow. The curve is never below the axis. The whole area under it is exactly 1, because X must land somewhere. The integral of f from b to c is simply the tool that measures this area."
      ],
-     "example": [
-      "Bus example: f(x) = 1/10 for 0 ≤ x ≤ 10, a flat line.",
-      "Whole area: a rectangle 10 wide and 1/10 high: 10 × 1/10 = 1",
-      "P(2 ≤ X ≤ 5): a rectangle 3 wide and 1/10 high",
-      "= 3 × 1/10 = 3/10"
-     ],
      "check": {
       "question": "For the same bus, what is P(0 ≤ X ≤ 5), the probability of waiting at most 5 minutes?",
       "answer": "1/2 (a rectangle 5 wide and 1/10 high)."
      },
-     "picture": "area-under-curve"
+     "picture": "area-under-curve",
+     "ask": "A bus comes some time in the next 10 minutes, f(x) = 1/10. Find P(2 ≤ X ≤ 5).",
+     "steps": [
+      {
+       "do": "Picture f(x).",
+       "lines": [
+        "A flat line at height 1/10",
+        "from x = 0 to x = 10"
+       ],
+       "why": [
+        "Every moment is equally likely, so the graph is flat."
+       ]
+      },
+      {
+       "do": "Check the whole area.",
+       "lines": [
+        "10 × 1/10 = 1"
+       ],
+       "why": [
+        "For any probability density, the total area must be 1: the bus surely comes."
+       ]
+      },
+      {
+       "do": "The area between 2 and 5.",
+       "lines": [
+        "Width 5 − 2 = 3, height 1/10",
+        "3 × 1/10 = 3/10"
+       ],
+       "why": [
+        "For a continuous X, probability is area under f between the two values."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -30764,16 +32128,41 @@
       "p ∧ q is read 'p and q': it is true only when both are true. p ∨ q is read 'p or q': it is true when at least one is true (both true is allowed), and false only when both are false.",
       "A statement built from others with these symbols is called a compound statement. The symbols are called connectives."
      ],
-     "example": [
-      "Suppose p is T (it is raining) and q is F (I have no umbrella).",
-      "¬p is F. ¬q is T.",
-      "p ∧ q is F, because q is false.",
-      "p ∨ q is T, because p is true."
-     ],
      "check": {
       "question": "p is true and q is true. Is p ∧ q true or false?",
       "answer": "True"
-     }
+     },
+     "ask": "p is true (it is raining) and q is false. Find ¬p, ¬q, p ∧ q and p ∨ q.",
+     "steps": [
+      {
+       "do": "not: ¬",
+       "lines": [
+        "¬p is F, ¬q is T"
+       ],
+       "why": [
+        "¬ flips true and false."
+       ]
+      },
+      {
+       "do": "and: ∧",
+       "lines": [
+        "p ∧ q is F"
+       ],
+       "why": [
+        "\"and\" is true only when both parts are true. q is false."
+       ]
+      },
+      {
+       "do": "or: ∨",
+       "lines": [
+        "p ∨ q is T"
+       ],
+       "why": [
+        "\"or\" is true when at least one part is true. p is true."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "If ... then, and the rows of a truth table",
@@ -30782,16 +32171,54 @@
       "p ↔ q is read 'p if and only if q'. It is true when p and q have the same truth value: both true or both false.",
       "A truth table lists every possible case, one case per row. Each letter can be T or F. With two letters there are 2 × 2 = 4 rows: TT, TF, FT, FF. With three letters there are 2 × 2 × 2 = 8 rows. In each row you work out the brackets first, then the whole statement."
      ],
-     "example": [
-      "Row p = T, q = F: p → q is F (the broken promise). p ↔ q is F.",
-      "Row p = F, q = F: p → q is T. p ↔ q is T.",
-      "Row p = F, q = T: p → q is T. p ↔ q is F.",
-      "Row p = T, q = T: p → q is T. p ↔ q is T."
-     ],
      "check": {
       "question": "How many rows does a truth table for p, q and r have?",
       "answer": "8"
-     }
+     },
+     "ask": "Fill p → q and p ↔ q for all four rows.",
+     "steps": [
+      {
+       "do": "p = T, q = F.",
+       "lines": [
+        "p → q is F",
+        "p ↔ q is F"
+       ],
+       "why": [
+        "A promise \"if p then q\" is broken only when p happens and q does not."
+       ]
+      },
+      {
+       "do": "p = F, q = F.",
+       "lines": [
+        "p → q is T",
+        "p ↔ q is T"
+       ],
+       "why": [
+        "If p does not happen, the promise is not broken. ↔ is true when both sides agree."
+       ]
+      },
+      {
+       "do": "p = F, q = T.",
+       "lines": [
+        "p → q is T",
+        "p ↔ q is F"
+       ],
+       "why": [
+        "Still not broken. But the two sides differ, so ↔ is false."
+       ]
+      },
+      {
+       "do": "p = T, q = T.",
+       "lines": [
+        "p → q is T",
+        "p ↔ q is T"
+       ],
+       "why": [
+        "The promise was kept, and both sides agree."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -31508,15 +32935,42 @@
       "The geometric mean (GM) is the middle number when you go up by multiplying. It is the square root of the product: √(4 × 9) = √36 = 6. Then 4, 6, 9 is a geometric progression, each term 1.5 times the one before. You can picture 6 as the side of a square with the same area as a 4 by 9 rectangle.",
       "For two positive numbers the AM is never smaller than the GM. They are equal only when the two numbers are equal. This is the fact written as AM ≥ GM."
      ],
-     "example": [
-      "For 4 and 9: AM = 6.5 and GM = 6, and 6.5 ≥ 6.",
-      "For 5 and 5: AM = 5 and GM = √25 = 5. Equal.",
-      "For 2 and 8: AM = 5 and GM = √16 = 4, and 5 ≥ 4."
-     ],
      "check": {
       "question": "What is the geometric mean of 2 and 8?",
       "answer": "√(2 × 8) = √16 = 4."
-     }
+     },
+     "ask": "Compare the AM and GM of 4 and 9, of 5 and 5, and of 2 and 8.",
+     "steps": [
+      {
+       "do": "4 and 9.",
+       "lines": [
+        "AM = (4 + 9) ÷ 2 = 6.5",
+        "GM = √(4 × 9) = √36 = 6"
+       ],
+       "why": [
+        "AM adds and halves. GM multiplies and takes the square root. 6.5 ≥ 6."
+       ]
+      },
+      {
+       "do": "5 and 5.",
+       "lines": [
+        "AM = 5, GM = √25 = 5"
+       ],
+       "why": [
+        "They are equal exactly when the two numbers are equal."
+       ]
+      },
+      {
+       "do": "2 and 8.",
+       "lines": [
+        "AM = 5, GM = √16 = 4"
+       ],
+       "why": [
+        "5 ≥ 4. The AM is never smaller than the GM."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -32018,17 +33472,50 @@
       "A sum with endlessly many terms is called an infinite series. If the running totals settle towards one number, that number is called the sum of the series (the sum to infinity). Here 1/2 + 1/4 + 1/8 + ... has the sum 1.",
       "This works only when the terms shrink fast enough. 1 + 1 + 1 + ... just grows for ever and has no sum."
      ],
-     "example": [
-      "1/2 = 0.5",
-      "1/2 + 1/4 = 0.75",
-      "1/2 + 1/4 + 1/8 = 0.875",
-      "1/2 + 1/4 + 1/8 + 1/16 = 0.9375",
-      "The totals close in on 1."
-     ],
      "check": {
       "question": "Do the running totals of 1/2 + 1/4 + 1/8 + ... ever go above 1?",
       "answer": "No. They get closer and closer to 1."
-     }
+     },
+     "ask": "Add 1/2 + 1/4 + 1/8 + … one term at a time.",
+     "steps": [
+      {
+       "do": "One term.",
+       "lines": [
+        "1/2 = 0.5"
+       ],
+       "why": [
+        "Start with the first term, one half."
+       ]
+      },
+      {
+       "do": "Two terms.",
+       "lines": [
+        "0.5 + 0.25 = 0.75"
+       ],
+       "why": [
+        "Each new term is half the one before."
+       ]
+      },
+      {
+       "do": "Three and four terms.",
+       "lines": [
+        "0.75 + 0.125 = 0.875",
+        "0.875 + 0.0625 = 0.9375"
+       ],
+       "why": [
+        "Each time, the gap to 1 halves."
+       ]
+      },
+      {
+       "do": "Where it is heading.",
+       "lines": [
+        "→ 1"
+       ],
+       "why": [
+        "The totals never pass 1 but get as close as we like. We say the endless sum equals 1."
+       ]
+      }
+     ]
     },
     {
      "title": "Series in powers of x",
@@ -32037,15 +33524,41 @@
       "Example: 1 ÷ (1 − x) = 1 + x + x² + x³ + ... The powers x, x², x³ shrink only when x lies between −1 and 1. That is what |x| < 1 says: |x| is the size of x with its sign ignored, so |−0.5| = 0.5. Outside this range the series has no sum.",
       "The sign ! is read 'factorial'. 3! means 3 × 2 × 1 = 6, and 2! = 2 × 1 = 2. Factorials appear under the terms of these series."
      ],
-     "example": [
-      "Put x = 1/2 in 1 ÷ (1 − x): 1 ÷ (1/2) = 2.",
-      "The series gives 1 + 1/2 + 1/4 + 1/8 + ..., and its totals 1, 1.5, 1.75, 1.875 close in on 2.",
-      "In 1 + x + x² + x³ + ..., the coefficient of x² is 1."
-     ],
      "check": {
       "question": "What is 3! ?",
       "answer": "3 × 2 × 1 = 6."
-     }
+     },
+     "ask": "Put x = 1/2 into 1 ÷ (1 − x) and into 1 + x + x² + …",
+     "steps": [
+      {
+       "do": "The function.",
+       "lines": [
+        "1 ÷ (1 − 1/2) = 1 ÷ (1/2)",
+        "= 2"
+       ],
+       "why": [
+        "1 − 1/2 = 1/2, and dividing by a half doubles."
+       ]
+      },
+      {
+       "do": "The series.",
+       "lines": [
+        "1 + 1/2 + 1/4 + 1/8 + …"
+       ],
+       "why": [
+        "Each power of 1/2 halves the term before."
+       ]
+      },
+      {
+       "do": "Its running totals.",
+       "lines": [
+        "1, 1.5, 1.75, 1.875, … → 2"
+       ],
+       "why": [
+        "They close in on 2, the value of the function. The coefficient of x² in the series is 1."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -32278,16 +33791,42 @@
       "Add the interest more and more often and the amount keeps rising, but it does not grow without end. It settles near 2.71828. This fixed number is called e. Like π, its decimals never end, and e is about 2.718.",
       "e raised to the power x, typed e^x, is called the exponential function. The natural logarithm undoes it: the natural log of y is the power to which e must be raised to give y. So the natural log of e is 1, and the natural log of 1 is 0, because e^0 = 1."
      ],
-     "example": [
-      "e can be found from a series: e = 1 + 1 + 1/2! + 1/3! + 1/4! + ...",
-      "1/2! = 0.5, 1/3! is about 0.1667, 1/4! is about 0.0417.",
-      "1 + 1 + 0.5 + 0.1667 + 0.0417 = 2.7084.",
-      "Five terms already give a value close to 2.718."
-     ],
      "check": {
       "question": "What is the natural logarithm of 1?",
       "answer": "0, because e^0 = 1."
-     }
+     },
+     "ask": "Add the first five terms of e = 1 + 1 + 1/2! + 1/3! + 1/4! + …",
+     "steps": [
+      {
+       "do": "Work out the factorials.",
+       "lines": [
+        "2! = 2, 3! = 6, 4! = 24"
+       ],
+       "why": [
+        "n! means 1 × 2 × … × n."
+       ]
+      },
+      {
+       "do": "Turn them into decimals.",
+       "lines": [
+        "1/2 = 0.5, 1/6 ≈ 0.1667",
+        "1/24 ≈ 0.0417"
+       ],
+       "why": [
+        "The terms shrink very fast."
+       ]
+      },
+      {
+       "do": "Add.",
+       "lines": [
+        "1 + 1 + 0.5 + 0.1667 + 0.0417",
+        "= 2.7084"
+       ],
+       "why": [
+        "Five terms already give 2.71, close to e = 2.718…"
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -32792,16 +34331,42 @@
       "'On ℤ' tells which set the numbers come from. ℤ is the set of integers (... −2, −1, 0, 1, 2 ...), ℚ is the set of rational numbers (fractions) and ℝ is the set of real numbers.",
       "For ordinary +, the number 0 changes nothing: a + 0 = a. For ×, the number 1 changes nothing. Such a 'do nothing' element is called the identity, written e. The inverse of a is the element that brings a back to the identity: for +, the inverse of 3 is −3, because 3 + (−3) = 0."
      ],
-     "example": [
-      "On ℤ, a ∗ b = a + b − 6",
-      "4 ∗ 5 = 4 + 5 − 6 = 3",
-      "Identity: a ∗ 6 = a + 6 − 6 = a, so e = 6 (not 0).",
-      "Inverse of 4: 4 ∗ 8 = 4 + 8 − 6 = 6 = e, so the inverse of 4 is 8."
-     ],
      "check": {
       "question": "With a ∗ b = a + b − 6, what is 10 ∗ 2?",
       "answer": "6"
-     }
+     },
+     "ask": "On whole numbers, a ∗ b = a + b − 6. Find 4 ∗ 5, the identity and the inverse of 4.",
+     "steps": [
+      {
+       "do": "Use the rule.",
+       "lines": [
+        "4 ∗ 5 = 4 + 5 − 6 = 3"
+       ],
+       "why": [
+        "∗ is a new operation: add the two numbers, then take 6 away."
+       ]
+      },
+      {
+       "do": "Find the identity e.",
+       "lines": [
+        "a ∗ e = a + e − 6 = a",
+        "e = 6"
+       ],
+       "why": [
+        "The identity changes nothing, like 0 for +. Here it is 6, not 0."
+       ]
+      },
+      {
+       "do": "Find the inverse of 4.",
+       "lines": [
+        "4 ∗ b = 4 + b − 6 = 6",
+        "b = 8"
+       ],
+       "why": [
+        "The inverse brings you back to the identity, 6."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -33490,16 +35055,49 @@
       "So a relation R on a set A is simply a set of ordered pairs of elements of A. (a, b) ∈ R is read 'a is related to b'. Any set of such pairs counts as a relation, even one with no rule in words.",
       "Reflexive, symmetric and transitive are three questions about the list: is everything related to itself? Does every link go both ways? Do links chain together?"
      ],
-     "example": [
-      "A = {1, 2, 3}, R = 'is less than' = {(1, 2), (1, 3), (2, 3)}",
-      "Reflexive? (1, 1) is not in R, so no.",
-      "Symmetric? (1, 2) is in R but (2, 1) is not, so no.",
-      "Transitive? (1, 2) and (2, 3) are in R, and so is (1, 3). Yes."
-     ],
      "check": {
       "question": "On A = {1, 2, 3}, is the pair (3, 1) in the relation 'is less than'?",
       "answer": "No, because 3 is not less than 1"
-     }
+     },
+     "ask": "A = {1, 2, 3} and R is 'is less than'. Is R reflexive, symmetric, transitive?",
+     "steps": [
+      {
+       "do": "List R.",
+       "lines": [
+        "R = {(1, 2), (1, 3), (2, 3)}"
+       ],
+       "why": [
+        "Every pair (a, b) from A with a < b."
+       ]
+      },
+      {
+       "do": "Reflexive?",
+       "lines": [
+        "(1, 1) is not in R: no"
+       ],
+       "why": [
+        "Reflexive needs every (a, a). No number is less than itself."
+       ]
+      },
+      {
+       "do": "Symmetric?",
+       "lines": [
+        "(1, 2) in R, (2, 1) not: no"
+       ],
+       "why": [
+        "Symmetric needs (b, a) whenever (a, b)."
+       ]
+      },
+      {
+       "do": "Transitive?",
+       "lines": [
+        "(1, 2), (2, 3) and (1, 3): yes"
+       ],
+       "why": [
+        "Transitive: if a < b and b < c, then a < c. That always holds."
+       ]
+      }
+     ]
     },
     {
      "title": "Equivalence: alike in some way",
@@ -33508,17 +35106,50 @@
       "An equivalence relation sorts the set into groups, called equivalence classes. Everything in a group is related to everything in that group (itself included), and nothing is related across groups.",
       "That makes counting easy. In a group of n elements, each of the n is related to each of the n, so the group gives n × n = n² pairs."
      ],
-     "example": [
-      "A = {1, 2, 3}, relation 'both odd or both even'",
-      "Groups: {1, 3} and {2}",
-      "Pairs from {1, 3}: (1, 1), (1, 3), (3, 1), (3, 3). That is 2² = 4.",
-      "Pairs from {2}: (2, 2). That is 1² = 1.",
-      "The relation has 4 + 1 = 5 pairs."
-     ],
      "check": {
       "question": "An equivalence relation puts 3 elements all in one group. How many ordered pairs does it have?",
       "answer": "9 (3² = 9)"
-     }
+     },
+     "ask": "A = {1, 2, 3}, related when 'both odd or both even'. Count the pairs.",
+     "steps": [
+      {
+       "do": "Sort into groups.",
+       "lines": [
+        "{1, 3} and {2}"
+       ],
+       "why": [
+        "An equivalence relation splits the set into groups of alike members."
+       ]
+      },
+      {
+       "do": "Pairs inside {1, 3}.",
+       "lines": [
+        "(1, 1), (1, 3), (3, 1), (3, 3)",
+        "2² = 4 pairs"
+       ],
+       "why": [
+        "Every member is related to every member of its own group, itself included."
+       ]
+      },
+      {
+       "do": "Pairs inside {2}.",
+       "lines": [
+        "(2, 2): 1² = 1 pair"
+       ],
+       "why": [
+        "A group of one gives just one pair."
+       ]
+      },
+      {
+       "do": "Add.",
+       "lines": [
+        "4 + 1 = 5 pairs"
+       ],
+       "why": [
+        "There are no pairs between groups."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -34636,17 +36267,50 @@
       "The bars | | ask only for that distance and drop the sign. |3| = 3 and |−3| = 3. This is called the absolute value. It is never negative.",
       "So |x − x̄| means: how far the value x is from the mean x̄, no matter whether x is above or below it. The mean deviation is the mean of these distances."
      ],
-     "example": [
-      "Data: 2, 4, 9. Mean x̄ = 15 ÷ 3 = 5",
-      "x − x̄: −3, −1, 4",
-      "|x − x̄|: 3, 1, 4. They add up to 8.",
-      "Mean deviation = 8 ÷ 3 = 8/3"
-     ],
      "check": {
       "question": "What is |−7|?",
       "answer": "7"
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Find the mean deviation of 2, 4, 9.",
+     "steps": [
+      {
+       "do": "Find the mean.",
+       "lines": [
+        "(2 + 4 + 9) ÷ 3 = 15 ÷ 3 = 5"
+       ],
+       "why": [
+        "Total shared equally."
+       ]
+      },
+      {
+       "do": "Each value minus the mean.",
+       "lines": [
+        "−3, −1, 4"
+       ],
+       "why": [
+        "These add to 0, so their plain average would be 0 and tell us nothing."
+       ]
+      },
+      {
+       "do": "Take the sizes.",
+       "lines": [
+        "3, 1, 4. Total 8"
+       ],
+       "why": [
+        "The bars | | drop the sign: we want how far, not which side."
+       ]
+      },
+      {
+       "do": "Average them.",
+       "lines": [
+        "8 ÷ 3 = 8/3"
+       ],
+       "why": [
+        "On average each value is 8/3 away from the mean."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -38431,16 +40095,43 @@
       "Every vector is so many î plus so many ĵ plus so many k̂. So 2î + 3ĵ − k̂ is the same vector as (2, 3, −1). A missing letter means that component is 0: 4î + 2ĵ = (4, 2, 0).",
       "The position vector of a point P is the arrow from the origin O to P, written OP. Its components are simply the coordinates of P."
      ],
-     "example": [
-      "P is (3, −1, 2). Its position vector is 3î − ĵ + 2k̂.",
-      "−6î − k̂ = (−6, 0, −1)",
-      "A(1, 2, 0) and B(4, 2, 5): AB = OB − OA = (3, 0, 5) = 3î + 5k̂"
-     ],
      "check": {
       "question": "Write 5î − 2ĵ + k̂ as components (x, y, z).",
       "answer": "(5, −2, 1)"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "Write P(3, −1, 2) and −6î − k̂ in both forms, and find AB for A(1, 2, 0), B(4, 2, 5).",
+     "steps": [
+      {
+       "do": "Position vector of P.",
+       "lines": [
+        "3î − ĵ + 2k̂"
+       ],
+       "why": [
+        "î, ĵ, k̂ are one-unit steps along x, y and z. The coordinates say how many of each."
+       ]
+      },
+      {
+       "do": "Read −6î − k̂ as numbers.",
+       "lines": [
+        "(−6, 0, −1)"
+       ],
+       "why": [
+        "No ĵ term means 0 steps along y."
+       ]
+      },
+      {
+       "do": "AB = B − A.",
+       "lines": [
+        "(4 − 1, 2 − 2, 5 − 0)",
+        "= (3, 0, 5) = 3î + 5k̂"
+       ],
+       "why": [
+        "The arrow from A to B is end minus start."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -38670,17 +40361,43 @@
       "Multiplying a vector by a number stretches it. 2a is twice as long as a in the same direction. −a has the same length and the opposite direction. Every component is multiplied by the number. The number is called a scalar.",
       "A mixture such as 3a − 2b is called a linear combination of a and b."
      ],
-     "example": [
-      "a = (3, 1, 0) and b = (1, 2, 0)",
-      "a + b = (3 + 1, 1 + 2, 0 + 0) = (4, 3, 0)",
-      "2a = (6, 2, 0)",
-      "2a − b = (6 − 1, 2 − 2, 0 − 0) = (5, 0, 0)"
-     ],
      "check": {
       "question": "a = (1, 2, 3). What is 2a?",
       "answer": "(2, 4, 6)"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "a = (3, 1, 0), b = (1, 2, 0). Find a + b, 2a and 2a − b.",
+     "steps": [
+      {
+       "do": "a + b.",
+       "lines": [
+        "(3 + 1, 1 + 2, 0 + 0)",
+        "= (4, 3, 0)"
+       ],
+       "why": [
+        "Add matching parts: x with x, y with y, z with z."
+       ]
+      },
+      {
+       "do": "2a.",
+       "lines": [
+        "(6, 2, 0)"
+       ],
+       "why": [
+        "Doubling stretches the arrow: every part doubles."
+       ]
+      },
+      {
+       "do": "2a − b.",
+       "lines": [
+        "(6 − 1, 2 − 2, 0 − 0)",
+        "= (5, 0, 0)"
+       ],
+       "why": [
+        "Subtract matching parts."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -38909,17 +40626,42 @@
       "A quantity with a size and a direction is called a vector. We draw it as an arrow: its length shows the size and it points in the direction. A movement from one place to another, a velocity and a force are vectors. A quantity with only a size, such as mass or time, is called a scalar.",
       "The vector that takes you from point A to point B is written AB with an arrow on top. Two arrows with the same length and the same direction are the same vector, wherever they are drawn."
      ],
-     "example": [
-      "Walk 3 km east, then 4 km north.",
-      "You are now 3 east and 4 north of the start.",
-      "Straight-line distance: √(3² + 4²) = √25 = 5 km.",
-      "Your whole movement is one arrow, 5 km long, from start to finish."
-     ],
      "check": {
       "question": "Is temperature a vector or a scalar?",
       "answer": "A scalar: it has a size but no direction"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "Walk 3 km east, then 4 km north. How far are you from the start?",
+     "steps": [
+      {
+       "do": "Where you end up.",
+       "lines": [
+        "3 east and 4 north"
+       ],
+       "why": [
+        "The two walks are at right angles."
+       ]
+      },
+      {
+       "do": "Use Pythagoras.",
+       "lines": [
+        "√(3² + 4²) = √25",
+        "= 5 km"
+       ],
+       "why": [
+        "The straight line home is the long side of a 3, 4 right triangle."
+       ]
+      },
+      {
+       "do": "One arrow does it all.",
+       "lines": [
+        "5 km, from start to finish"
+       ],
+       "why": [
+        "A vector holds both how far (5 km) and which way. One arrow replaces the two walks."
+       ]
+      }
+     ]
     },
     {
      "title": "A vector as three numbers",
@@ -38928,16 +40670,42 @@
       "To get the vector from A to B, subtract the coordinates of A from those of B: end minus start. In short, AB = B − A.",
       "The length of a vector is called its magnitude and is written with bars, |AB|. By Pythagoras, used twice, it is √(x² + y² + z²), where x, y and z are the components."
      ],
-     "example": [
-      "A is (1, 1, 0) and B is (3, 2, 2).",
-      "AB = B − A = (3 − 1, 2 − 1, 2 − 0) = (2, 1, 2)",
-      "|AB| = √(4 + 1 + 4) = √9 = 3"
-     ],
      "check": {
       "question": "A is (0, 0, 0) and B is (1, 2, 2). What is |AB|?",
       "answer": "3, because √(1 + 4 + 4) = √9"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "A is (1, 1, 0) and B is (3, 2, 2). Find AB and its length.",
+     "steps": [
+      {
+       "do": "AB = B − A.",
+       "lines": [
+        "(3 − 1, 2 − 1, 2 − 0)",
+        "= (2, 1, 2)"
+       ],
+       "why": [
+        "End minus start, part by part."
+       ]
+      },
+      {
+       "do": "Square and add the parts.",
+       "lines": [
+        "4 + 1 + 4 = 9"
+       ],
+       "why": [
+        "The length is Pythagoras in three directions."
+       ]
+      },
+      {
+       "do": "Take the square root.",
+       "lines": [
+        "|AB| = √9 = 3"
+       ],
+       "why": [
+        "The arrow from A to B is 3 units long."
+       ]
+      }
+     ]
     },
     {
      "title": "Unit vectors and direction cosines",
@@ -38946,17 +40714,41 @@
       "The components of a unit vector have a meaning. Take the angle between the vector and the x-axis. In the right triangle with the vector as hypotenuse, the x-component is the adjacent side. So the cosine of that angle is (x-component) ÷ (length). The same holds for the y-axis and the z-axis.",
       "These three cosines are called the direction cosines, written l, m, n. The undivided components, or any multiple of them, are called direction ratios."
      ],
-     "example": [
-      "v = (2, 1, 2) has length 3.",
-      "Unit vector: (2/3, 1/3, 2/3)",
-      "Direction cosines: l = 2/3, m = 1/3, n = 2/3",
-      "Check: 4/9 + 1/9 + 4/9 = 1"
-     ],
      "check": {
       "question": "What is the length of a unit vector?",
       "answer": "1"
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "v = (2, 1, 2) has length 3. Find its unit vector and direction cosines.",
+     "steps": [
+      {
+       "do": "Divide each part by the length.",
+       "lines": [
+        "(2/3, 1/3, 2/3)"
+       ],
+       "why": [
+        "A unit vector points the same way but has length 1."
+       ]
+      },
+      {
+       "do": "These are the direction cosines.",
+       "lines": [
+        "l = 2/3, m = 1/3, n = 2/3"
+       ],
+       "why": [
+        "Each is the cosine of the angle between v and one axis."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "4/9 + 1/9 + 4/9 = 1"
+       ],
+       "why": [
+        "l² + m² + n² is always 1, because the unit vector has length 1."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -39185,17 +40977,51 @@
       "The dot product a · b is a number, not a vector. It equals |a| × |b| × cos θ, where θ is the angle between the two arrows. If they point the same way, cos θ = 1 and the dot product is as big as it can be. If they are at right angles, cos 90° = 0, so the dot product is 0. If the angle is more than 90°, it is negative.",
       "There is an easy way to work it out: multiply the matching components and add. Having two ways to get the same number is what lets us find the angle."
      ],
-     "example": [
-      "a = (3, 0, 0) and b = (2, 2, 0)",
-      "a · b = 3 × 2 + 0 × 2 + 0 × 0 = 6",
-      "|a| = 3 and |b| = √8 = 2√2",
-      "cos θ = 6 ÷ (3 × 2√2) = 1 ÷ √2, so θ = 45°"
-     ],
      "check": {
       "question": "a = (1, 0, 0) and b = (0, 1, 0). What is a · b?",
       "answer": "0, because the two vectors are at right angles"
      },
-     "picture": "vector-arrow"
+     "picture": "vector-arrow",
+     "ask": "a = (3, 0, 0) and b = (2, 2, 0). Find a · b and the angle between them.",
+     "steps": [
+      {
+       "do": "Multiply matching parts and add.",
+       "lines": [
+        "3 × 2 + 0 × 2 + 0 × 0 = 6"
+       ],
+       "why": [
+        "The dot product of two vectors is a single number."
+       ]
+      },
+      {
+       "do": "Find the lengths.",
+       "lines": [
+        "|a| = 3",
+        "|b| = √(4 + 4) = √8 = 2√2"
+       ],
+       "why": [
+        "Length by Pythagoras."
+       ]
+      },
+      {
+       "do": "cos θ = a · b ÷ (|a| |b|).",
+       "lines": [
+        "6 ÷ (3 × 2√2) = 1/√2"
+       ],
+       "why": [
+        "The dot product equals |a| |b| cos θ."
+       ]
+      },
+      {
+       "do": "Find θ.",
+       "lines": [
+        "cos θ = 1/√2, so θ = 45°"
+       ],
+       "why": [
+        "b goes 2 across and 2 up from a, at 45°."
+       ]
+      }
+     ]
     },
     {
      "title": "The cross product: a new arrow at right angles",
@@ -39204,17 +41030,50 @@
       "The cross product a × b is a vector. It is at right angles to both a and b. Its length is |a| × |b| × sin θ, which is the area of the parallelogram with sides a and b.",
       "There are two opposite directions at right angles to both arrows. The right-hand rule picks one: point the fingers of your right hand along a and curl them towards b. Your thumb shows the direction of a × b. So b × a points the opposite way. The order matters."
      ],
-     "example": [
-      "a = (2, 0, 0) and b = (0, 3, 0)",
-      "a × b = (0 × 0 − 0 × 3, −(2 × 0 − 0 × 0), 2 × 3 − 0 × 0) = (0, 0, 6)",
-      "It points along the z-axis, at right angles to both.",
-      "Its length 6 is the area of the 2 by 3 rectangle on a and b.",
-      "b × a = (0, 0, −6)"
-     ],
      "check": {
       "question": "Is a × b a number or a vector?",
       "answer": "A vector"
-     }
+     },
+     "ask": "a = (2, 0, 0) and b = (0, 3, 0). Find a × b and b × a.",
+     "steps": [
+      {
+       "do": "Use the rule.",
+       "lines": [
+        "(0 × 0 − 0 × 3, −(2 × 0 − 0 × 0),",
+        "2 × 3 − 0 × 0) = (0, 0, 6)"
+       ],
+       "why": [
+        "Each part is a little 2 × 2 determinant of the other two parts. The middle one has a minus sign in front."
+       ]
+      },
+      {
+       "do": "Its direction.",
+       "lines": [
+        "Along the z-axis"
+       ],
+       "why": [
+        "a is along x, b along y. a × b points at right angles to both."
+       ]
+      },
+      {
+       "do": "Its length.",
+       "lines": [
+        "6 = 2 × 3"
+       ],
+       "why": [
+        "The length of a × b is the area of the rectangle (in general, parallelogram) on a and b."
+       ]
+      },
+      {
+       "do": "Swap the order.",
+       "lines": [
+        "b × a = (0, 0, −6)"
+       ],
+       "why": [
+        "Reversing the order flips the arrow: the cross product is not like ordinary multiplication."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -39444,12 +41303,6 @@
       "The number a · (b × c) gives exactly this. The length of b × c is the area of the base on b and c, and dotting with a picks out the height. This number is called the scalar triple product and is written [a b c]. It can come out negative, so the volume is its size, |[a b c]|.",
       "If a, b and c all lie flat in one plane, the box has no height and the volume is 0. Such vectors are called coplanar."
      ],
-     "example": [
-      "a = (2, 0, 0), b = (0, 3, 0), c = (0, 0, 4): an upright 2 by 3 by 4 box.",
-      "b × c = (3 × 4 − 0 × 0, −(0 × 4 − 0 × 0), 0 × 0 − 3 × 0) = (12, 0, 0)",
-      "a · (b × c) = 2 × 12 + 0 + 0 = 24",
-      "Check: 2 × 3 × 4 = 24"
-     ],
      "check": {
       "question": "A box has edges 1, 2 and 5 that meet at right angles. What is its volume?",
       "answer": "10"
@@ -39630,6 +41483,37 @@
         ]
        },
        "caption": "A parallelepiped: a leaning box. The three edges a, b and c that leave one corner fix the whole box."
+      }
+     ],
+     "ask": "a = (2, 0, 0), b = (0, 3, 0), c = (0, 0, 4). Find a · (b × c).",
+     "steps": [
+      {
+       "do": "Cross product first.",
+       "lines": [
+        "b × c = (3 × 4 − 0 × 0, 0, 0)",
+        "= (12, 0, 0)"
+       ],
+       "why": [
+        "The brackets say do b × c first. Its length 12 is the area of the 3 by 4 face."
+       ]
+      },
+      {
+       "do": "Then dot with a.",
+       "lines": [
+        "2 × 12 + 0 + 0 = 24"
+       ],
+       "why": [
+        "Multiply matching parts and add."
+       ]
+      },
+      {
+       "do": "Check with the box.",
+       "lines": [
+        "2 × 3 × 4 = 24 ✓"
+       ],
+       "why": [
+        "The scalar triple product is the volume of the box on a, b and c."
+       ]
       }
      ]
     }
@@ -39886,17 +41770,42 @@
       "Why believe it? First, the line really passes through the point. Put x = x₁ and y = y₁ into the rule and you get x₁²/a² + y₁²/b² = 1, which is true because the point is on the ellipse.",
       "Second, try it where you already know the answer. In the picture you moved, the tangent at the top point (0, 3) was the flat line y = 3. The rule must give the same line."
      ],
-     "example": [
-      "Ellipse x²/16 + y²/9 = 1, top point (0, 3).",
-      "Rule: (x × 0)/16 + (y × 3)/9 = 1",
-      "0 + y/3 = 1",
-      "y = 3. The flat line at the top, as in the picture.",
-      "Right-hand end (4, 0): (x × 4)/16 + 0 = 1, so x = 4. The line standing straight up."
-     ],
      "check": {
       "question": "Use the rule to write the tangent to x²/16 + y²/9 = 1 at the bottom point (0, −3).",
       "answer": "(y × −3)/9 = 1, so −y/3 = 1 and y = −3: the flat line at the bottom."
-     }
+     },
+     "ask": "Use the rule on x²/16 + y²/9 = 1 at the top point (0, 3) and the end (4, 0).",
+     "steps": [
+      {
+       "do": "Top point (0, 3).",
+       "lines": [
+        "(x × 0)/16 + (y × 3)/9 = 1"
+       ],
+       "why": [
+        "Change one x into x₁ = 0 and one y into y₁ = 3."
+       ]
+      },
+      {
+       "do": "Simplify.",
+       "lines": [
+        "0 + y/3 = 1",
+        "y = 3"
+       ],
+       "why": [
+        "3/9 = 1/3. This is the flat line at the top, as in the picture."
+       ]
+      },
+      {
+       "do": "Right-hand end (4, 0).",
+       "lines": [
+        "(x × 4)/16 + 0 = 1",
+        "x/4 = 1, so x = 4"
+       ],
+       "why": [
+        "The line standing straight up at the end."
+       ]
+      }
+     ]
     },
     {
      "title": "One full example, every step",
