@@ -16,16 +16,41 @@
       "Two letters written side by side are multiplied: xy means x × y. And 7x² means 7 × x × x.",
       "x and x² are different amounts, so they are not like terms. If x is 3, then x is 3 but x² is 9."
      ],
-     "example": [
-      "Let x = 3 and y = 2.",
-      "x² = 3 × 3 = 9.",
-      "xy = 3 × 2 = 6.",
-      "7x² = 7 × 9 = 63."
-     ],
      "check": {
       "question": "If x = 5, what is x²?",
       "answer": "25"
-     }
+     },
+     "ask": "Let x = 3 and y = 2. Find x², xy and 7x².",
+     "steps": [
+      {
+       "do": "x²",
+       "lines": [
+        "x² = x × x = 3 × 3 = 9"
+       ],
+       "why": [
+        "The small 2 means \"times itself\". It is not x × 2."
+       ]
+      },
+      {
+       "do": "xy",
+       "lines": [
+        "xy = x × y = 3 × 2 = 6"
+       ],
+       "why": [
+        "Two letters side by side mean they are multiplied. The × sign is left out."
+       ]
+      },
+      {
+       "do": "7x²",
+       "lines": [
+        "7x² = 7 × 9 = 63"
+       ],
+       "why": [
+        "Do the square first (x² = 9), then multiply by 7. It is not (7 × 3)²."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -548,16 +573,52 @@
       "You already know how to expand: (x + 2)(x + 3) = x² + 5x + 6. Factorising goes the other way: it starts from x² + 5x + 6 and finds the brackets (x + 2)(x + 3).",
       "Look at where 5 and 6 came from: 2 + 3 = 5 and 2 × 3 = 6. That is the clue the lesson uses."
      ],
-     "example": [
-      "Factorise x² + 7x + 10.",
-      "Find two numbers that multiply to 10 and add to 7: 2 and 5.",
-      "So x² + 7x + 10 = (x + 2)(x + 5).",
-      "Check by expanding: x² + 5x + 2x + 10 = x² + 7x + 10."
-     ],
      "check": {
       "question": "(x + 1)(x + 4) expands to x² + 5x + 4. So what does x² + 5x + 4 factorise to?",
       "answer": "(x + 1)(x + 4)"
-     }
+     },
+     "ask": "Factorise x² + 7x + 10.",
+     "steps": [
+      {
+       "do": "Look for two numbers.",
+       "lines": [
+        "Multiply to 10",
+        "Add to 7"
+       ],
+       "why": [
+        "When you expand (x + p)(x + q) you get x² + (p + q)x + pq. So we need p × q = 10 and p + q = 7."
+       ]
+      },
+      {
+       "do": "Try the pairs that make 10.",
+       "lines": [
+        "1 × 10: adds to 11",
+        "2 × 5: adds to 7 ✓"
+       ],
+       "why": [
+        "List the ways to multiply to 10 and check each sum."
+       ]
+      },
+      {
+       "do": "Write the brackets.",
+       "lines": [
+        "(x + 2)(x + 5)"
+       ],
+       "why": [
+        "Each number goes into its own bracket with x."
+       ]
+      },
+      {
+       "do": "Check by expanding.",
+       "lines": [
+        "x² + 5x + 2x + 10",
+        "= x² + 7x + 10 ✓"
+       ],
+       "why": [
+        "Multiply each part of one bracket by each part of the other. We get back where we started."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -1108,16 +1169,40 @@
       "A number written just outside a bracket multiplies everything inside it. This is called opening (or expanding) the bracket.",
       "2(n + 3) means 2 × n and 2 × 3. So 2(n + 3) = 2n + 6."
      ],
-     "example": [
-      "Try n = 4.",
-      "With the bracket: 2(4 + 3) = 2 × 7 = 14.",
-      "Opened: 2 × 4 + 6 = 8 + 6 = 14.",
-      "Both give 14, so 2(n + 3) = 2n + 6."
-     ],
      "check": {
       "question": "Open the bracket: 3(n + 2).",
       "answer": "3n + 6"
-     }
+     },
+     "ask": "Check that 2(n + 3) = 2n + 6 by trying n = 4.",
+     "steps": [
+      {
+       "do": "Work it out with the bracket.",
+       "lines": [
+        "2(4 + 3) = 2 × 7 = 14"
+       ],
+       "why": [
+        "Brackets first: 4 + 3 = 7. Then times 2."
+       ]
+      },
+      {
+       "do": "Work it out opened up.",
+       "lines": [
+        "2 × 4 + 6 = 8 + 6 = 14"
+       ],
+       "why": [
+        "Opening the bracket means the 2 multiplies both parts: 2 × n and 2 × 3 = 6."
+       ]
+      },
+      {
+       "do": "Compare.",
+       "lines": [
+        "14 = 14"
+       ],
+       "why": [
+        "Both ways give the same answer. Try any n and they always will: 2(n + 3) = 2n + 6."
+       ]
+      }
+     ]
     },
     {
      "title": "Putting like things together",
@@ -1126,16 +1211,40 @@
       "Terms with the same letter are called like terms. You add or take away the numbers in front of them.",
       "Plain numbers are collected with plain numbers. A term with n and a plain number cannot be joined: 5n + 6 stays as it is."
      ],
-     "example": [
-      "Simplify 2n + 6 + 3n − 6.",
-      "n terms: 2n + 3n = 5n.",
-      "Numbers: 6 − 6 = 0.",
-      "Answer: 5n."
-     ],
      "check": {
       "question": "What is 4n + 3n?",
       "answer": "7n"
-     }
+     },
+     "ask": "Simplify 2n + 6 + 3n − 6.",
+     "steps": [
+      {
+       "do": "Collect the n terms.",
+       "lines": [
+        "2n + 3n = 5n"
+       ],
+       "why": [
+        "2 lots of n and 3 more lots of n make 5 lots of n."
+       ]
+      },
+      {
+       "do": "Collect the plain numbers.",
+       "lines": [
+        "6 − 6 = 0"
+       ],
+       "why": [
+        "Numbers and n terms are different kinds, so they are added separately, like apples and oranges."
+       ]
+      },
+      {
+       "do": "Put them together.",
+       "lines": [
+        "5n + 0 = 5n"
+       ],
+       "why": [
+        "Adding 0 changes nothing."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -2238,16 +2347,42 @@
       "Four signs say this in maths. < means 'is less than'. > means 'is greater than'. ≤ means 'is less than or equal to'. ≥ means 'is greater than or equal to'.",
       "An inequation is like an equation, but with one of these signs in place of =. Every number that makes it true is a solution, and all the solutions together are called the solution set."
      ],
-     "example": [
-      "x + 2 < 6, where x is 0, 1, 2, 3, 4 or 5.",
-      "x = 3: 3 + 2 = 5, and 5 < 6 is true.",
-      "x = 4: 4 + 2 = 6, and 6 < 6 is false.",
-      "The solution set is {0, 1, 2, 3}."
-     ],
      "check": {
       "question": "Is 5 ≤ 5 true?",
       "answer": "Yes. ≤ allows 'equal to' as well as 'less than'."
-     }
+     },
+     "ask": "x can be 0, 1, 2, 3, 4 or 5. Which make x + 2 < 6 true?",
+     "steps": [
+      {
+       "do": "Try x = 3.",
+       "lines": [
+        "3 + 2 = 5",
+        "5 < 6 ✓"
+       ],
+       "why": [
+        "< means \"is less than\". 5 is less than 6, so 3 works."
+       ]
+      },
+      {
+       "do": "Try x = 4.",
+       "lines": [
+        "4 + 2 = 6",
+        "6 < 6 ✗"
+       ],
+       "why": [
+        "6 is not less than 6: they are equal. So 4 does not work."
+       ]
+      },
+      {
+       "do": "Collect the ones that work.",
+       "lines": [
+        "{0, 1, 2, 3}"
+       ],
+       "why": [
+        "0, 1 and 2 also give less than 6. 5 gives 7, which is too big. The solution set lists them all."
+       ]
+      }
+     ]
     },
     {
      "title": "Which numbers is x allowed to be?",
@@ -2256,17 +2391,43 @@
       "Natural numbers are the counting numbers: 1, 2, 3, 4, … Whole numbers are the natural numbers and 0: 0, 1, 2, 3, …",
       "Integers are the whole numbers and their negatives: …, −3, −2, −1, 0, 1, 2, 3, … On a number line they are the evenly spaced dots on both sides of 0."
      ],
-     "example": [
-      "Solve x < 3.",
-      "If x is a natural number: 1, 2.",
-      "If x is a whole number: 0, 1, 2.",
-      "If x is an integer from −5 to 5: −5, −4, −3, −2, −1, 0, 1, 2."
-     ],
      "check": {
       "question": "Is 0 a natural number or a whole number?",
       "answer": "A whole number. The natural numbers start at 1."
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Solve x < 3 when x is a natural number, a whole number, or an integer from −5 to 5.",
+     "steps": [
+      {
+       "do": "Natural numbers.",
+       "lines": [
+        "1, 2"
+       ],
+       "why": [
+        "Natural numbers are the counting numbers 1, 2, 3, … Those below 3 are 1 and 2."
+       ]
+      },
+      {
+       "do": "Whole numbers.",
+       "lines": [
+        "0, 1, 2"
+       ],
+       "why": [
+        "Whole numbers are the natural numbers with 0 added."
+       ]
+      },
+      {
+       "do": "Integers from −5 to 5.",
+       "lines": [
+        "−5, −4, −3, −2, −1,",
+        "0, 1, 2"
+       ],
+       "why": [
+        "Integers include the negative numbers. Every one from −5 up to 2 is less than 3."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -4041,12 +4202,6 @@
       "The marbles left over are called the remainder. So when 11 is put into groups of 9, the remainder is 2.",
       "If nothing is left over, the remainder is 0."
      ],
-     "example": [
-      "13 marbles, boxes of 9.",
-      "One box is full: that uses 9.",
-      "13 − 9 = 4 are left over.",
-      "The remainder is 4."
-     ],
      "check": {
       "question": "You have 10 marbles and a box that holds 9. How many are left over?",
       "answer": "1"
@@ -4059,6 +4214,36 @@
         "perRow": 9
        },
        "caption": "11 marbles. The top row is the full box of 9. The 2 below are left over: the remainder is 2."
+      }
+     ],
+     "ask": "13 marbles go into boxes of 9. How many are left over?",
+     "steps": [
+      {
+       "do": "Fill one box.",
+       "lines": [
+        "1 box uses 9"
+       ],
+       "why": [
+        "A box holds exactly 9. There are not enough for two boxes (that needs 18)."
+       ]
+      },
+      {
+       "do": "Take them away.",
+       "lines": [
+        "13 − 9 = 4"
+       ],
+       "why": [
+        "Count what is not in the box."
+       ]
+      },
+      {
+       "do": "Say the answer.",
+       "lines": [
+        "Remainder 4"
+       ],
+       "why": [
+        "The marbles left over are called the remainder."
+       ]
       }
      ]
     }
@@ -4568,16 +4753,41 @@
       "'The n-th number' means the number in place n. If n is 5, it is the 5th number. If n is 9, it is the 9th number.",
       "n − 1 means one less than the place number. If n is 5, then n − 1 is 4."
      ],
-     "example": [
-      "Pattern: 2, 4, 6, 8, …",
-      "The number in place n is n × 2.",
-      "n = 1 gives 2. n = 3 gives 6.",
-      "n = 10 gives 20, so the 10th number is 20."
-     ],
      "check": {
       "question": "If n is 7, what is n − 1?",
       "answer": "6"
-     }
+     },
+     "ask": "In the pattern 2, 4, 6, 8, … what number is in place 10?",
+     "steps": [
+      {
+       "do": "Find the rule.",
+       "lines": [
+        "Place n holds n × 2"
+       ],
+       "why": [
+        "Place 1 holds 2, place 2 holds 4, place 3 holds 6: always the place times 2."
+       ]
+      },
+      {
+       "do": "Test it.",
+       "lines": [
+        "n = 1: 2 ✓",
+        "n = 3: 6 ✓"
+       ],
+       "why": [
+        "Check the rule on places you can see before you trust it."
+       ]
+      },
+      {
+       "do": "Use it for place 10.",
+       "lines": [
+        "10 × 2 = 20"
+       ],
+       "why": [
+        "n stands for any place number. Put 10 in place of n."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -4811,15 +5021,42 @@
       "So 3! = 6, 4! = 24 and 5! = 120. Also 1! = 1, and by agreement 0! = 1.",
       "A big factorial contains the smaller ones: 5! = 5 × 4 × 3!. That is why factorials cancel so neatly in fractions."
      ],
-     "example": [
-      "4! = 4 × 3 × 2 × 1 = 24.",
-      "5! = 5 × 4! = 5 × 24 = 120.",
-      "5!/3! = (5 × 4 × 3!) ÷ 3! = 5 × 4 = 20."
-     ],
      "check": {
       "question": "What is 3!?",
       "answer": "6"
-     }
+     },
+     "ask": "Find 4!, 5! and 5!/3!.",
+     "steps": [
+      {
+       "do": "4!",
+       "lines": [
+        "4 × 3 × 2 × 1 = 24"
+       ],
+       "why": [
+        "! means multiply all the whole numbers from that number down to 1."
+       ]
+      },
+      {
+       "do": "5!",
+       "lines": [
+        "5 × 4! = 5 × 24 = 120"
+       ],
+       "why": [
+        "5! = 5 × 4 × 3 × 2 × 1, and the part after 5 is 4!. So reuse 24."
+       ]
+      },
+      {
+       "do": "5!/3!",
+       "lines": [
+        "(5 × 4 × 3!) ÷ 3!",
+        "= 5 × 4 = 20"
+       ],
+       "why": [
+        "Write 5! as 5 × 4 × 3!. The 3! on top and bottom cancel."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -5052,16 +5289,42 @@
       "p(x) does not mean p times x.",
       "p(2) means: put 2 in place of every x and work it out. The answer is called the value of p(x) at x = 2."
      ],
-     "example": [
-      "Let p(x) = x² + 3x.",
-      "p(2) = 2 × 2 + 3 × 2 = 4 + 6 = 10.",
-      "p(0) = 0 + 0 = 0.",
-      "p(1) = 1 + 3 = 4."
-     ],
      "check": {
       "question": "p(x) = 2x + 1. What is p(3)?",
       "answer": "7"
-     }
+     },
+     "ask": "p(x) = x² + 3x. Find p(2), p(0) and p(1).",
+     "steps": [
+      {
+       "do": "p(2)",
+       "lines": [
+        "2 × 2 + 3 × 2",
+        "= 4 + 6 = 10"
+       ],
+       "why": [
+        "p(2) means \"put 2 in place of every x\"."
+       ]
+      },
+      {
+       "do": "p(0)",
+       "lines": [
+        "0 + 0 = 0"
+       ],
+       "why": [
+        "Every term has an x in it, so with x = 0 everything is 0."
+       ]
+      },
+      {
+       "do": "p(1)",
+       "lines": [
+        "1 + 3 = 4"
+       ],
+       "why": [
+        "1² = 1 and 3 × 1 = 3."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Dividing leaves a quotient and a remainder",
@@ -5070,16 +5333,43 @@
       "Polynomials divide in the same way. Dividing p(x) by x − r gives a quotient (another polynomial) and a remainder (a number), with p(x) = (x − r) × quotient + remainder.",
       "You can always check a division by multiplying back and adding the remainder."
      ],
-     "example": [
-      "Divide x² + 3x + 5 by x + 1.",
-      "The quotient is x + 2 and the remainder is 3.",
-      "Check: (x + 1)(x + 2) = x² + 3x + 2.",
-      "Add the remainder: x² + 3x + 2 + 3 = x² + 3x + 5."
-     ],
      "check": {
       "question": "In 17 = 5 × 3 + 2, which number is the remainder?",
       "answer": "2"
-     }
+     },
+     "ask": "Divide x² + 3x + 5 by x + 1.",
+     "steps": [
+      {
+       "do": "Say the result.",
+       "lines": [
+        "Quotient x + 2",
+        "Remainder 3"
+       ],
+       "why": [
+        "Like 17 ÷ 5 = 3 remainder 2, a polynomial division gives an answer and something left over."
+       ]
+      },
+      {
+       "do": "Multiply back.",
+       "lines": [
+        "(x + 1)(x + 2)",
+        "= x² + 3x + 2"
+       ],
+       "why": [
+        "Divisor × quotient: x × x + 2x + x + 2."
+       ]
+      },
+      {
+       "do": "Add the remainder.",
+       "lines": [
+        "x² + 3x + 2 + 3",
+        "= x² + 3x + 5 ✓"
+       ],
+       "why": [
+        "Divisor × quotient + remainder gives back what we divided. That is the check."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -6252,16 +6542,49 @@
       "We write a set by listing its elements inside curly brackets, with commas: A = {2, 4, 6}. Each element is written once, and the order does not matter.",
       "The sign ∈ means 'is an element of'. So 4 ∈ A says 4 belongs to A. The number 5 does not belong to A."
      ],
-     "example": [
-      "V is the set of vowels: V = {a, e, i, o, u}.",
-      "e ∈ V, because e is in the list.",
-      "b is not an element of V.",
-      "V has 5 elements."
-     ],
      "check": {
       "question": "A = {1, 3, 5, 7}. Is 5 ∈ A true?",
       "answer": "Yes, 5 is one of the elements of A."
-     }
+     },
+     "ask": "V is the set of vowels. Write V, and say whether e and b are in it.",
+     "steps": [
+      {
+       "do": "List the members.",
+       "lines": [
+        "V = {a, e, i, o, u}"
+       ],
+       "why": [
+        "Curly brackets hold the members of a set, each written once."
+       ]
+      },
+      {
+       "do": "Is e in V?",
+       "lines": [
+        "e ∈ V"
+       ],
+       "why": [
+        "∈ means \"is a member of\". e is in the list."
+       ]
+      },
+      {
+       "do": "Is b in V?",
+       "lines": [
+        "b ∉ V"
+       ],
+       "why": [
+        "∉ means \"is not a member of\"."
+       ]
+      },
+      {
+       "do": "How many members?",
+       "lines": [
+        "n(V) = 5"
+       ],
+       "why": [
+        "Count them. n(V) is the number of members of V."
+       ]
+      }
+     ]
     },
     {
      "title": "The whole box U, and counting with n(A)",
@@ -6270,17 +6593,41 @@
       "Every other set in the question is made from elements of U. In a picture, U is a rectangle and each set is a circle inside it. This picture is called a Venn diagram.",
       "n(A) means the number of elements in A. It is a count, not a set."
      ],
-     "example": [
-      "U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}.",
-      "A is the set of even numbers in U.",
-      "A = {2, 4, 6, 8, 10}.",
-      "n(A) = 5."
-     ],
      "check": {
       "question": "B = {3, 6, 9}. What is n(B)?",
       "answer": "3"
      },
-     "picture": "venn"
+     "picture": "venn",
+     "ask": "U = {1, 2, …, 10}. A is the set of even numbers in U. Find A and n(A).",
+     "steps": [
+      {
+       "do": "Go through U.",
+       "lines": [
+        "2, 4, 6, 8, 10 are even"
+       ],
+       "why": [
+        "U is the whole box we choose from. Only numbers in U can go into A."
+       ]
+      },
+      {
+       "do": "Write A.",
+       "lines": [
+        "A = {2, 4, 6, 8, 10}"
+       ],
+       "why": [
+        "Even numbers are the ones in the 2 times table."
+       ]
+      },
+      {
+       "do": "Count.",
+       "lines": [
+        "n(A) = 5"
+       ],
+       "why": [
+        "n(A) is how many members A has."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -6510,16 +6857,40 @@
       "Here x is just a stand-in name for each element in turn. The colon : means 'such that'. After the colon comes the test.",
       "To list the set, go through U one element at a time and keep the ones that pass the test."
      ],
-     "example": [
-      "U = {1, 2, 3, …, 12}. A = {x ∈ U : x is a multiple of 4}.",
-      "Go through U: 4 passes, 8 passes, 12 passes.",
-      "No other number in U is a multiple of 4.",
-      "A = {4, 8, 12}."
-     ],
      "check": {
       "question": "U = {1, 2, 3, 4, 5, 6}. List {x ∈ U : x is odd}.",
       "answer": "{1, 3, 5}"
-     }
+     },
+     "ask": "U = {1, 2, …, 12}. A = {x ∈ U : x is a multiple of 4}. List A.",
+     "steps": [
+      {
+       "do": "Read the rule.",
+       "lines": [
+        "x from U, a multiple of 4"
+       ],
+       "why": [
+        "The colon is read \"such that\". A holds every x in U that obeys the rule."
+       ]
+      },
+      {
+       "do": "Test the numbers in U.",
+       "lines": [
+        "4 ✓, 8 ✓, 12 ✓"
+       ],
+       "why": [
+        "4 × 1, 4 × 2, 4 × 3. 4 × 4 = 16 is beyond 12."
+       ]
+      },
+      {
+       "do": "Write A.",
+       "lines": [
+        "A = {4, 8, 12}"
+       ],
+       "why": [
+        "No other number from 1 to 12 is in the 4 times table."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -9947,17 +10318,50 @@
       "On the x-axis, positive numbers are to the right and negative numbers to the left. On the y-axis, positive numbers are up and negative numbers are down.",
       "Every point gets two numbers in brackets, like (4, 3). They are its coordinates. The first, the x-coordinate, says how far across. The second, the y-coordinate, says how far up or down. The order matters: (4, 3) and (3, 4) are different points."
      ],
-     "example": [
-      "To find (4, 3): start at the origin (0, 0).",
-      "Go 4 to the right.",
-      "Then go 3 up. Mark the point.",
-      "(3, 4) is 3 right and 4 up: a different point."
-     ],
      "check": {
       "question": "Start at the origin, go 2 to the right and then 5 up. What are the coordinates of the point you reach?",
       "answer": "(2, 5)"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Find the point (4, 3). Is it the same as (3, 4)?",
+     "steps": [
+      {
+       "do": "Start at the origin.",
+       "lines": [
+        "(0, 0)"
+       ],
+       "why": [
+        "The origin is where the two number lines cross."
+       ]
+      },
+      {
+       "do": "First number: go across.",
+       "lines": [
+        "4 to the right"
+       ],
+       "why": [
+        "The first number always says how far across (along x)."
+       ]
+      },
+      {
+       "do": "Second number: go up.",
+       "lines": [
+        "3 up. Mark it."
+       ],
+       "why": [
+        "The second number says how far up (along y)."
+       ]
+      },
+      {
+       "do": "Swap the numbers.",
+       "lines": [
+        "(3, 4): 3 right, 4 up"
+       ],
+       "why": [
+        "That lands somewhere else. The order matters."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -12508,17 +12912,41 @@
       "Along its curved edge are marks from 0 to 180. Each small step is 1 degree. In the middle of its straight edge is a small mark called the centre. The line through the centre along the straight edge is the zero line.",
       "To measure an angle, put the centre exactly on the corner of the angle. Turn the protractor until the zero line lies along one arm. Then read the number where the other arm crosses the curved edge. There are two rows of numbers so that you can start from the left or from the right. Use the row that shows 0 on your first arm."
      ],
-     "example": [
-      "One arm lies on the 0 of the inner row.",
-      "The other arm crosses the mark 60 on the inner row.",
-      "The angle is 60°.",
-      "The outer row says 120 there. We do not use it, because the outer row does not show 0 on the first arm."
-     ],
      "check": {
       "question": "The first arm is on 0 and the other arm is on 90 of the same row. How big is the angle?",
       "answer": "90°."
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "Read the angle with a protractor.",
+     "steps": [
+      {
+       "do": "Line up one arm with 0.",
+       "lines": [
+        "Arm on 0 of the inner row"
+       ],
+       "why": [
+        "The centre of the protractor sits on the corner of the angle, and one arm lies along 0."
+       ]
+      },
+      {
+       "do": "Read where the other arm crosses.",
+       "lines": [
+        "Inner row: 60"
+       ],
+       "why": [
+        "Use the same row that showed 0 on the first arm."
+       ]
+      },
+      {
+       "do": "Say the angle.",
+       "lines": [
+        "60°"
+       ],
+       "why": [
+        "The outer row shows 120 there. That row starts from the other side, so we do not use it."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -12747,17 +13175,50 @@
       "When two straight lines start from one point, the opening between them is called an angle. The angle tells how far one line has turned away from the other.",
       "The size of an angle does not depend on how long the lines are. Long scissors and short scissors opened the same amount make the same angle."
      ],
-     "example": [
-      "Close a book: no opening.",
-      "Open it a little: a small angle between the covers.",
-      "Open it wider: a bigger angle.",
-      "Lay it flat: the covers make one straight line."
-     ],
      "check": {
       "question": "Which makes the bigger angle: scissors opened wide, or scissors opened a little?",
       "answer": "Scissors opened wide."
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "Open a book slowly and watch the covers.",
+     "steps": [
+      {
+       "do": "Book closed.",
+       "lines": [
+        "No opening"
+       ],
+       "why": [
+        "The two covers lie on top of each other: there is no turn between them."
+       ]
+      },
+      {
+       "do": "A little open.",
+       "lines": [
+        "A small angle"
+       ],
+       "why": [
+        "An angle measures how much one arm has turned away from the other."
+       ]
+      },
+      {
+       "do": "Wider.",
+       "lines": [
+        "A bigger angle"
+       ],
+       "why": [
+        "The more it turns, the bigger the angle. How long the covers are does not matter."
+       ]
+      },
+      {
+       "do": "Lying flat.",
+       "lines": [
+        "One straight line"
+       ],
+       "why": [
+        "The covers have turned half way round. That is a straight angle, 180°."
+       ]
+      }
+     ]
     },
     {
      "title": "Measuring a turn in degrees",
@@ -12766,17 +13227,41 @@
       "Think of one full turn, all the way round. People agreed to cut it into 360 equal tiny turns. Each tiny turn is 1 degree. So a full turn is 360°.",
       "A half turn is 180°. It makes a straight line. A quarter turn is 90°. It makes a square corner, and it is called a right angle."
      ],
-     "example": [
-      "Full turn = 360°.",
-      "Half turn = 360° ÷ 2 = 180°.",
-      "Quarter turn = 360° ÷ 4 = 90°.",
-      "The corner of a page is a quarter turn, so it is 90°."
-     ],
      "check": {
       "question": "How many degrees is a right angle?",
       "answer": "90°."
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "A full turn is 360°. Find a half turn and a quarter turn.",
+     "steps": [
+      {
+       "do": "Half turn.",
+       "lines": [
+        "360° ÷ 2 = 180°"
+       ],
+       "why": [
+        "Half of a full turn: you end up facing the other way."
+       ]
+      },
+      {
+       "do": "Quarter turn.",
+       "lines": [
+        "360° ÷ 4 = 90°"
+       ],
+       "why": [
+        "Four quarter turns make a full turn."
+       ]
+      },
+      {
+       "do": "Where you see 90°.",
+       "lines": [
+        "A page corner = 90°"
+       ],
+       "why": [
+        "The corner of a page is a quarter turn: a right angle."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -14060,17 +14545,42 @@
       "Press the point on the paper at a place P and swing the pencil round. You get a circle. If you swing only part of the way, you get a piece of a circle, called an arc. P is the centre. The gap you chose is the radius.",
       "Every point of the arc is the same distance from the centre. So 'with centre A and radius 4 cm, draw an arc' means: open the compasses to 4 cm on a ruler, put the point on A, and draw a curve."
      ],
-     "example": [
-      "Open the compasses to 4 cm. Draw an arc with centre A.",
-      "Keep the same opening. Draw an arc with centre B.",
-      "The arcs cross at P. P is on both arcs.",
-      "So PA = 4 cm and PB = 4 cm: PA = PB."
-     ],
      "check": {
       "question": "An arc is drawn with centre A and radius 5 cm. How far from A is any point on the arc?",
       "answer": "5 cm."
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "Draw arcs from A and B with the same opening of 4 cm. Where they cross, P, how far is P from A and from B?",
+     "steps": [
+      {
+       "do": "Arc with centre A.",
+       "lines": [
+        "Every point 4 cm from A"
+       ],
+       "why": [
+        "Compasses keep one fixed opening, so every point they draw is the same distance from the point."
+       ]
+      },
+      {
+       "do": "Arc with centre B, same opening.",
+       "lines": [
+        "Every point 4 cm from B"
+       ],
+       "why": [
+        "The opening was not changed, so this arc is 4 cm from B."
+       ]
+      },
+      {
+       "do": "They cross at P.",
+       "lines": [
+        "PA = 4 cm and PB = 4 cm",
+        "So PA = PB"
+       ],
+       "why": [
+        "P is on both arcs, so it is 4 cm from both points."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -14299,11 +14809,6 @@
       "The point that cuts a line segment AB into two equal parts is its midpoint M, so AM = MB. The perpendicular bisector of AB is the line through M that crosses AB at a right angle (90°).",
       "An angle can be bisected too. The angle bisector is the line from the corner of the angle that cuts it into two equal angles."
      ],
-     "example": [
-      "AB = 6 cm. Its midpoint M is 3 cm from A and 3 cm from B.",
-      "The line through M at 90° to AB is the perpendicular bisector of AB.",
-      "An angle of 80° is bisected into two angles of 40°."
-     ],
      "check": {
       "question": "An angle of 60° is bisected. How big is each part?",
       "answer": "30°."
@@ -14399,7 +14904,38 @@
        },
        "caption": "M is the midpoint of AB, so AM = MB (same marks). The dashed line through M at 90° is the perpendicular bisector of AB."
       }
-     ]
+     ],
+     "ask": "AB = 6 cm. Find the midpoint and the perpendicular bisector. Bisect an angle of 80°.",
+     "steps": [
+      {
+       "do": "The midpoint.",
+       "lines": [
+        "M is 3 cm from A and B"
+       ],
+       "why": [
+        "Half of 6 cm is 3 cm."
+       ]
+      },
+      {
+       "do": "The perpendicular bisector.",
+       "lines": [
+        "The line through M at 90°"
+       ],
+       "why": [
+        "\"Bisect\" means cut into two equal parts. \"Perpendicular\" means at a right angle."
+       ]
+      },
+      {
+       "do": "Bisect 80°.",
+       "lines": [
+        "80° ÷ 2 = 40° each"
+       ],
+       "why": [
+        "An angle bisector cuts the angle into two equal angles."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -14628,12 +15164,6 @@
       "Two triangles are congruent when all three sides and all three angles of one match those of the other. In the lessons, an equals sign with a small wave on top means 'is congruent to'.",
       "The order of the letters tells which corners match. 'Triangle ABC is congruent to triangle PQR' means A lies on P, B on Q and C on R. So AB matches PQ, BC matches QR and CA matches RP."
      ],
-     "example": [
-      "Triangle ABC has AB = 3 cm, BC = 4 cm, CA = 5 cm.",
-      "Triangle PQR is congruent to triangle ABC.",
-      "PQ matches AB, so PQ = 3 cm.",
-      "QR matches BC, so QR = 4 cm. RP matches CA, so RP = 5 cm."
-     ],
      "check": {
       "question": "Triangle ABC is congruent to triangle PQR. Which corner of PQR matches B?",
       "answer": "Q."
@@ -14776,6 +15306,37 @@
        },
        "caption": "Triangle PQR fits exactly on triangle ABC. Sides with the same marks are equal: PQ = AB, QR = BC, RP = CA."
       }
+     ],
+     "ask": "Triangle PQR is congruent to triangle ABC, which has AB = 3, BC = 4, CA = 5 cm. Find the sides of PQR.",
+     "steps": [
+      {
+       "do": "Match the letters in order.",
+       "lines": [
+        "P ↔ A, Q ↔ B, R ↔ C"
+       ],
+       "why": [
+        "Congruent means one fits exactly on the other. The order of the letters tells which corner goes on which."
+       ]
+      },
+      {
+       "do": "PQ matches AB.",
+       "lines": [
+        "PQ = 3 cm"
+       ],
+       "why": [
+        "First and second letters in both names."
+       ]
+      },
+      {
+       "do": "QR matches BC, RP matches CA.",
+       "lines": [
+        "QR = 4 cm",
+        "RP = 5 cm"
+       ],
+       "why": [
+        "Matching sides of congruent shapes are equal."
+       ]
+      }
      ]
     },
     {
@@ -14785,16 +15346,50 @@
       "Once two triangles are congruent, every matching part is equal, the angles as well. The short name for this is CPCT: corresponding parts of congruent triangles. 'Corresponding' just means matching.",
       "This is how compasses prove things. The arcs give equal sides, SSS gives congruent triangles, and CPCT gives equal angles. In the lessons a double arrow between two statements means 'so'."
      ],
-     "example": [
-      "To bisect an angle at O: an arc with centre O cuts the two arms at P and Q, so OP = OQ (same opening of the compasses).",
-      "Arcs with centres P and Q, drawn with one opening, cross at R, so PR = QR. Join OR: it is a side of both triangles OPR and OQR.",
-      "Three pairs of equal sides: triangles OPR and OQR are congruent by SSS.",
-      "So the matching angles POR and QOR are equal by CPCT. OR cuts the angle in half."
-     ],
      "check": {
       "question": "Two triangles each have sides of 5 cm, 6 cm and 7 cm. Are they congruent?",
       "answer": "Yes, by SSS."
-     }
+     },
+     "ask": "Show that the compass construction really cuts angle O in half.",
+     "steps": [
+      {
+       "do": "First arc from O.",
+       "lines": [
+        "OP = OQ"
+       ],
+       "why": [
+        "One opening of the compasses gives two equal lengths."
+       ]
+      },
+      {
+       "do": "Arcs from P and Q meet at R.",
+       "lines": [
+        "PR = QR",
+        "OR is shared"
+       ],
+       "why": [
+        "Same opening again gives PR = QR. OR belongs to both triangles OPR and OQR."
+       ]
+      },
+      {
+       "do": "Three pairs of equal sides.",
+       "lines": [
+        "△OPR ≅ △OQR by SSS"
+       ],
+       "why": [
+        "SSS: if all three sides match, the triangles are congruent."
+       ]
+      },
+      {
+       "do": "Matching angles are equal.",
+       "lines": [
+        "∠POR = ∠QOR by CPCT"
+       ],
+       "why": [
+        "CPCT: corresponding parts of congruent triangles are equal. So OR cuts the angle in half."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -15023,11 +15618,6 @@
       "Make another point B. Join A to B with a ruler. This straight path is a line segment. It has two ends, A and B. We call it AB. Going from B to A is the same path, so BA is the same segment.",
       "A line is also straight, but it does not stop. It goes on and on both ways. We draw a small arrow at each end to show this. A line segment is a piece of a line."
      ],
-     "example": [
-      "Mark three points A, B and C, not in a row.",
-      "Join every pair: AB, AC, BC.",
-      "That makes 3 line segments."
-     ],
      "check": {
       "question": "How many end points does a line segment have?",
       "answer": "2."
@@ -15133,6 +15723,36 @@
         ]
        },
        "caption": "A line through A and B. The arrows show that it goes on for ever both ways."
+      }
+     ],
+     "ask": "Mark A, B and C, not in a row. Join every pair. How many line segments?",
+     "steps": [
+      {
+       "do": "Mark the points.",
+       "lines": [
+        "A, B, C"
+       ],
+       "why": [
+        "A point is a place. It has no size."
+       ]
+      },
+      {
+       "do": "Join every pair.",
+       "lines": [
+        "AB, AC, BC"
+       ],
+       "why": [
+        "A line segment is the straight path between two points. It stops at both ends."
+       ]
+      },
+      {
+       "do": "Count.",
+       "lines": [
+        "3 line segments"
+       ],
+       "why": [
+        "They make a triangle."
+       ]
       }
      ]
     }
@@ -15363,16 +15983,41 @@
       "A square corner has a special name: a right angle. Two straight lines that meet and make a square corner are called perpendicular.",
       "To test a corner, put the corner of a page into it. If both edges of the page lie along the two lines, it is a right angle. If the lines are closer together or wider apart than the page corner, it is not."
      ],
-     "example": [
-      "Look at the letter T.",
-      "The top bar and the stem meet. A page corner fits exactly there.",
-      "So the bar and the stem are perpendicular."
-     ],
      "check": {
       "question": "Is the corner of a square tile a right angle?",
       "answer": "Yes."
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "Are the top bar and the stem of the letter T perpendicular?",
+     "steps": [
+      {
+       "do": "Find where they meet.",
+       "lines": [
+        "The bar meets the stem"
+       ],
+       "why": [
+        "Look at the corner where the two lines touch."
+       ]
+      },
+      {
+       "do": "Test with a page corner.",
+       "lines": [
+        "It fits exactly"
+       ],
+       "why": [
+        "A page corner is a square corner: a right angle."
+       ]
+      },
+      {
+       "do": "Say what that means.",
+       "lines": [
+        "Perpendicular"
+       ],
+       "why": [
+        "Two lines meeting at a square corner are called perpendicular."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -15601,15 +16246,41 @@
       "Face the door again. Turn until your back is to the door. That is a half turn. You now face the opposite way. Two half turns make one full turn.",
       "A quarter turn is half of a half turn. Turn only until your shoulder points at the door. Four quarter turns make one full turn. A turn to the right goes the way your right hand points."
      ],
-     "example": [
-      "Ravi faces North. He makes a quarter turn right. Now he faces East.",
-      "He makes one more quarter turn right. Now he faces South.",
-      "Two quarter turns make a half turn, and South is the opposite of North."
-     ],
      "check": {
       "question": "How many quarter turns make one full turn?",
       "answer": "4."
-     }
+     },
+     "ask": "Ravi faces North and makes two quarter turns to the right. Which way does he face?",
+     "steps": [
+      {
+       "do": "First quarter turn right.",
+       "lines": [
+        "North → East"
+       ],
+       "why": [
+        "A quarter turn right moves to the next direction clockwise: North, East, South, West."
+       ]
+      },
+      {
+       "do": "Second quarter turn right.",
+       "lines": [
+        "East → South"
+       ],
+       "why": [
+        "One more step clockwise."
+       ]
+      },
+      {
+       "do": "Two quarter turns.",
+       "lines": [
+        "= a half turn",
+        "South is opposite North"
+       ],
+       "why": [
+        "Two quarters make a half. A half turn always faces you the opposite way."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -15842,11 +16513,6 @@
       "A polygon has as many corners as sides. A corner is also called a vertex. For more than one we say vertices.",
       "A prism or a pyramid is named after its base. The base is the flat face it stands on. A hexagonal prism has a hexagon at the bottom and another at the top. A nonagonal pyramid stands on a nonagon."
      ],
-     "example": [
-      "Take a heptagonal pyramid. Its base is a heptagon, with 7 corners.",
-      "It has 1 more corner: the point at the top.",
-      "7 + 1 = 8 vertices in all."
-     ],
      "check": {
       "question": "How many sides does an octagon have?",
       "answer": "8."
@@ -15883,6 +16549,36 @@
         "name": "decagon"
        },
        "caption": "decagon: 10 sides"
+      }
+     ],
+     "ask": "How many vertices does a heptagonal pyramid have?",
+     "steps": [
+      {
+       "do": "The base.",
+       "lines": [
+        "A heptagon: 7 corners"
+       ],
+       "why": [
+        "\"Hepta\" means seven. The base of the pyramid has 7 sides and 7 corners."
+       ]
+      },
+      {
+       "do": "The top.",
+       "lines": [
+        "1 more corner"
+       ],
+       "why": [
+        "All the sloping faces meet at one point at the top."
+       ]
+      },
+      {
+       "do": "Add.",
+       "lines": [
+        "7 + 1 = 8 vertices"
+       ],
+       "why": [
+        "A vertex is a corner. Count the base corners and the top."
+       ]
       }
      ]
     }
@@ -16113,11 +16809,6 @@
       "A solid whose faces are all flat polygons is called a polyhedron. Cubes, cuboids, prisms and pyramids are polyhedra. A cylinder, a cone and a sphere are not, because they have curved surfaces.",
       "A face is one flat surface. An edge is the line where two faces meet. A vertex is a corner where edges meet (for more than one we say vertices). In the formula, F is the number of faces, V the number of vertices and E the number of edges."
      ],
-     "example": [
-      "Count on a cube: F = 6 faces.",
-      "V = 8 vertices and E = 12 edges.",
-      "F + V − E = 6 + 8 − 12 = 2."
-     ],
      "check": {
       "question": "Is a cricket ball a polyhedron?",
       "answer": "No, its surface is curved."
@@ -16129,6 +16820,36 @@
         "name": "cube"
        },
        "caption": "A cube is a polyhedron: 6 flat faces, 12 edges and 8 corners. Three faces, three edges and one corner are hidden at the back."
+      }
+     ],
+     "ask": "Count the faces, vertices and edges of a cube and work out F + V − E.",
+     "steps": [
+      {
+       "do": "Faces.",
+       "lines": [
+        "F = 6"
+       ],
+       "why": [
+        "A face is a flat side. A cube has top, bottom and four sides."
+       ]
+      },
+      {
+       "do": "Vertices and edges.",
+       "lines": [
+        "V = 8, E = 12"
+       ],
+       "why": [
+        "4 corners on top and 4 on the bottom. 4 edges on top, 4 on the bottom and 4 upright."
+       ]
+      },
+      {
+       "do": "Work it out.",
+       "lines": [
+        "6 + 8 − 12 = 2"
+       ],
+       "why": [
+        "F + V − E = 2 for every polyhedron without holes. This is Euler's rule."
+       ]
       }
      ]
     }
@@ -16359,15 +17080,41 @@
       "We write a small raised 2 for this. 3² is read '3 squared' and means 3 × 3 = 9. In the same way 5² = 5 × 5 = 25 and 10² = 10 × 10 = 100.",
       "Be careful: 5² is not 5 × 2. It is 5 × 5. A square with side 5 cm has an area of 5² = 25 square centimetres, which is why it is called squaring."
      ],
-     "example": [
-      "4² = 4 × 4 = 16.",
-      "7² = 7 × 7 = 49.",
-      "3² + 4² = 9 + 16 = 25."
-     ],
      "check": {
       "question": "What is 6²?",
       "answer": "36."
-     }
+     },
+     "ask": "Find 4², 7² and 3² + 4².",
+     "steps": [
+      {
+       "do": "4²",
+       "lines": [
+        "4 × 4 = 16"
+       ],
+       "why": [
+        "The small 2 means \"times itself\". It is not 4 × 2."
+       ]
+      },
+      {
+       "do": "7²",
+       "lines": [
+        "7 × 7 = 49"
+       ],
+       "why": [
+        "A square number is the number of dots in a square of that size."
+       ]
+      },
+      {
+       "do": "3² + 4²",
+       "lines": [
+        "9 + 16 = 25"
+       ],
+       "why": [
+        "Square each one first, then add."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Going back: the square root",
@@ -16376,16 +17123,40 @@
       "This backwards step is called taking the square root. Its sign is √. So √25 = 5, because 5 × 5 = 25. Also √49 = 7 and √100 = 10.",
       "In a right-angled triangle we add the squares of the two shorter sides, and then take the square root to get the longest side."
      ],
-     "example": [
-      "Shorter sides 3 cm and 4 cm.",
-      "3² + 4² = 9 + 16 = 25.",
-      "√25 = 5, because 5 × 5 = 25.",
-      "The longest side is 5 cm."
-     ],
      "check": {
       "question": "What is √36?",
       "answer": "6, because 6 × 6 = 36."
-     }
+     },
+     "ask": "A right triangle has shorter sides 3 cm and 4 cm. Find the longest side.",
+     "steps": [
+      {
+       "do": "Square the shorter sides and add.",
+       "lines": [
+        "3² + 4² = 9 + 16 = 25"
+       ],
+       "why": [
+        "Pythagoras: the two smaller squares add up to the square of the longest side."
+       ]
+      },
+      {
+       "do": "Undo the square.",
+       "lines": [
+        "√25 = 5"
+       ],
+       "why": [
+        "√ asks: which number times itself gives 25? 5 × 5 = 25."
+       ]
+      },
+      {
+       "do": "Say the answer.",
+       "lines": [
+        "5 cm"
+       ],
+       "why": [
+        "The longest side is always opposite the right angle."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -16618,12 +17389,6 @@
       "We name it by its corners in order, going round: ABCD. Its sides are AB, BC, CD and DA. Sides that share a corner are neighbouring sides, like AB and BC. Sides that do not touch are opposite sides, like AB and CD. Angles A and C are opposite angles.",
       "Two sides are parallel when they run in the same direction and would never meet, like railway tracks. In the lessons, two small upright strokes between two names mean 'is parallel to'."
      ],
-     "example": [
-      "Take a rectangle ABCD.",
-      "AB and DC are opposite sides. They are parallel and equal.",
-      "AD and BC are the other pair of opposite sides.",
-      "Angle A is opposite angle C."
-     ],
      "check": {
       "question": "In quadrilateral ABCD, which side is opposite to AB?",
       "answer": "CD (also written DC)."
@@ -16697,6 +17462,37 @@
         ]
        },
        "caption": "Rectangle ABCD, named by its corners in order going round. AB and DC are opposite sides. AB and BC are neighbouring sides: they share the corner B."
+      }
+     ],
+     "ask": "In a rectangle ABCD, name the opposite sides and opposite angles.",
+     "steps": [
+      {
+       "do": "Go round the letters.",
+       "lines": [
+        "A → B → C → D"
+       ],
+       "why": [
+        "The corners are named in order going round."
+       ]
+      },
+      {
+       "do": "Opposite sides.",
+       "lines": [
+        "AB and DC",
+        "AD and BC"
+       ],
+       "why": [
+        "Opposite sides do not touch. In a rectangle they are parallel and equal."
+       ]
+      },
+      {
+       "do": "Opposite angles.",
+       "lines": [
+        "A and C, B and D"
+       ],
+       "why": [
+        "Opposite corners are across from each other."
+       ]
       }
      ]
     }
@@ -16927,15 +17723,40 @@
       "2x means 2 × x. So 2x + 4 means: double the number, then add 4. If x is 3, then 2x + 4 = 2 × 3 + 4 = 10.",
       "4x − 2 means: 4 times the number, then take away 2. If x is 3, then 4x − 2 = 12 − 2 = 10."
      ],
-     "example": [
-      "Let x = 5.",
-      "2x + 4 = 2 × 5 + 4 = 14.",
-      "4x − 2 = 4 × 5 − 2 = 18."
-     ],
      "check": {
       "question": "If x = 2, what is 3x?",
       "answer": "6."
-     }
+     },
+     "ask": "Let x = 5. Find 2x + 4 and 4x − 2.",
+     "steps": [
+      {
+       "do": "2x + 4",
+       "lines": [
+        "2 × 5 + 4 = 14"
+       ],
+       "why": [
+        "2x means 2 times x. Multiply first, then add."
+       ]
+      },
+      {
+       "do": "4x − 2",
+       "lines": [
+        "4 × 5 − 2 = 18"
+       ],
+       "why": [
+        "Same order: multiply, then subtract."
+       ]
+      },
+      {
+       "do": "Compare.",
+       "lines": [
+        "14 and 18: not equal"
+       ],
+       "why": [
+        "With x = 5 the two are different. On the next screen we find the x that makes them equal."
+       ]
+      }
+     ]
     },
     {
      "title": "Finding the hidden number",
@@ -16944,16 +17765,50 @@
       "Opposite sides of a parallelogram are equal. If they are 2x + 4 and 4x − 2, then 2x + 4 = 4x − 2. This is called an equation. We want the number x that makes both sides the same.",
       "Do the same thing to both sides until x stands alone. Then put your x back into both sides to check."
      ],
-     "example": [
-      "2x + 4 = 4x − 2. Add 2 to both sides: 2x + 6 = 4x.",
-      "Take 2x from both sides: 6 = 2x.",
-      "Divide both sides by 2: x = 3.",
-      "Check: 2 × 3 + 4 = 10 and 4 × 3 − 2 = 10. Equal."
-     ],
      "check": {
       "question": "If 3x = 12, what is x?",
       "answer": "4."
-     }
+     },
+     "ask": "Solve 2x + 4 = 4x − 2.",
+     "steps": [
+      {
+       "do": "Add 2 to both sides.",
+       "lines": [
+        "2x + 6 = 4x"
+       ],
+       "why": [
+        "Doing the same to both sides keeps them balanced, like a see-saw."
+       ]
+      },
+      {
+       "do": "Take 2x from both sides.",
+       "lines": [
+        "6 = 2x"
+       ],
+       "why": [
+        "Now x appears on one side only."
+       ]
+      },
+      {
+       "do": "Divide both sides by 2.",
+       "lines": [
+        "x = 3"
+       ],
+       "why": [
+        "If 2 lots of x make 6, one x is 3."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "2 × 3 + 4 = 10",
+        "4 × 3 − 2 = 10 ✓"
+       ],
+       "why": [
+        "Both sides give 10, so x = 3 is right."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -17186,11 +18041,6 @@
       "A flat shape gets its name from how many sides it has. 3 sides: a triangle. 4 sides: a square or a rectangle. 5 sides: a pentagon. 6 sides: a hexagon.",
       "A square has 4 sides that are all the same length. A rectangle has 2 long sides and 2 short sides. A circle is round, like a bangle. It has no straight sides at all."
      ],
-     "example": [
-      "A shape has straight sides. Count them: 1, 2, 3, 4, 5.",
-      "It has 5 sides.",
-      "So it is a pentagon."
-     ],
      "check": {
       "question": "A shape has 6 straight sides. What is it called?",
       "answer": "A hexagon."
@@ -17239,6 +18089,36 @@
         "type": "circle"
        },
        "caption": "circle: round, no straight sides"
+      }
+     ],
+     "ask": "A shape has straight sides. What is it called?",
+     "steps": [
+      {
+       "do": "Count the sides.",
+       "lines": [
+        "1, 2, 3, 4, 5"
+       ],
+       "why": [
+        "Touch each straight side once as you count."
+       ]
+      },
+      {
+       "do": "Say how many.",
+       "lines": [
+        "5 sides"
+       ],
+       "why": [
+        "Each side is a straight line."
+       ]
+      },
+      {
+       "do": "Name it.",
+       "lines": [
+        "A pentagon"
+       ],
+       "why": [
+        "\"Penta\" means five. 3 sides is a triangle, 4 a quadrilateral, 6 a hexagon."
+       ]
       }
      ]
     }
@@ -17469,11 +18349,6 @@
       "A cube is like a dice: every face is a square of the same size. A cuboid is like a brick or a matchbox: a box shape. A sphere is like a ball: round all over.",
       "A cylinder is like a tin or a pipe: a circle at each end. A cone is like an ice-cream cone: a circle at one end and a point at the other. A square pyramid has a square at the bottom and 4 triangles that meet at a point on top."
      ],
-     "example": [
-      "Think of a matchbox.",
-      "It is a box, but its faces are not all the same size.",
-      "So it is a cuboid, not a cube."
-     ],
      "check": {
       "question": "Is a ball a cube or a sphere?",
       "answer": "A sphere."
@@ -17520,6 +18395,36 @@
         "name": "pyramid"
        },
        "caption": "pyramid"
+      }
+     ],
+     "ask": "Is a matchbox a cube or a cuboid?",
+     "steps": [
+      {
+       "do": "Look at the shape.",
+       "lines": [
+        "A box"
+       ],
+       "why": [
+        "It has 6 flat faces, all rectangles."
+       ]
+      },
+      {
+       "do": "Compare the faces.",
+       "lines": [
+        "Not all the same size"
+       ],
+       "why": [
+        "A cube has 6 faces that are all equal squares."
+       ]
+      },
+      {
+       "do": "Name it.",
+       "lines": [
+        "A cuboid"
+       ],
+       "why": [
+        "A box with rectangle faces of different sizes is a cuboid."
+       ]
       }
      ]
     }
@@ -17750,11 +18655,6 @@
       "A regular polygon has all its sides equal and all its corner angles equal. A triangle with three equal sides is regular, and each of its corners is 60°. A square is regular, and each of its corners is 90°.",
       "A rectangle that is longer than it is wide is not regular. Its corners are all 90°, but its sides are not all equal."
      ],
-     "example": [
-      "Put 4 square tiles round one point.",
-      "Each corner is 90°.",
-      "90° × 4 = 360°: a full turn, so there is no gap."
-     ],
      "check": {
       "question": "A triangle has sides of 3 cm, 3 cm and 5 cm. Is it regular?",
       "answer": "No, because its sides are not all equal."
@@ -17788,6 +18688,36 @@
         "kind": "kite"
        },
        "caption": "Not regular: the sides are not all equal."
+      }
+     ],
+     "ask": "Do square tiles fit round a point with no gap?",
+     "steps": [
+      {
+       "do": "Put 4 squares round one point.",
+       "lines": [
+        "4 corners meet"
+       ],
+       "why": [
+        "Each tile puts one corner at the point."
+       ]
+      },
+      {
+       "do": "Each corner is a right angle.",
+       "lines": [
+        "90° each"
+       ],
+       "why": [
+        "Every corner of a square is 90°."
+       ]
+      },
+      {
+       "do": "Add them.",
+       "lines": [
+        "90° × 4 = 360°"
+       ],
+       "why": [
+        "360° is a full turn, so the tiles close up with no gap and no overlap."
+       ]
       }
      ]
     }
@@ -18018,17 +18948,50 @@
       "Draw a number line lying flat. It is called the x-axis. Draw another standing up. It is called the y-axis. They cross where both show 0. That crossing point is called the origin, and its letter is O.",
       "Every point gets two numbers in brackets, like (3, 2). The first number is x: how far across from O. The second number is y: how far up from O. The two numbers are called the coordinates of the point."
      ],
-     "example": [
-      "Find the point (3, 2).",
-      "Start at O. Go 3 steps across to the right.",
-      "Then go 2 steps up. Mark the point.",
-      "(2, 3) is a different point: 2 across, then 3 up."
-     ],
      "check": {
       "question": "For the point (4, 1), how many steps up do you go?",
       "answer": "1."
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Find the point (3, 2).",
+     "steps": [
+      {
+       "do": "Start at O.",
+       "lines": [
+        "(0, 0)"
+       ],
+       "why": [
+        "O is the corner where the two lines start."
+       ]
+      },
+      {
+       "do": "First number: across.",
+       "lines": [
+        "3 steps right"
+       ],
+       "why": [
+        "The first number is always how far across."
+       ]
+      },
+      {
+       "do": "Second number: up.",
+       "lines": [
+        "2 steps up. Mark it."
+       ],
+       "why": [
+        "The second number is how far up."
+       ]
+      },
+      {
+       "do": "Swap them.",
+       "lines": [
+        "(2, 3) is a different point"
+       ],
+       "why": [
+        "2 across then 3 up lands somewhere else."
+       ]
+      }
+     ]
     },
     {
      "title": "A line called x = 5",
@@ -18037,16 +19000,42 @@
       "That whole line is named x = 5, because every point on it has x equal to 5. In the same way, y = 5 is the line lying flat that is 5 steps up.",
       "To see how far a point is from the line x = 5, compare its x with 5."
      ],
-     "example": [
-      "Is (5, 7) on the line x = 5? Its x is 5, so yes.",
-      "Where is (0, 5)? Its x is 0.",
-      "5 − 0 = 5, so it is 5 steps to the left of the line x = 5."
-     ],
      "check": {
       "question": "Is the point (5, 2) on the line x = 5?",
       "answer": "Yes, because its x is 5."
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Is (5, 7) on the line x = 5? How far is (0, 5) from it?",
+     "steps": [
+      {
+       "do": "What x = 5 means.",
+       "lines": [
+        "Every point with x = 5"
+       ],
+       "why": [
+        "It is an upright line, 5 steps across from O."
+       ]
+      },
+      {
+       "do": "Test (5, 7).",
+       "lines": [
+        "Its x is 5: on the line"
+       ],
+       "why": [
+        "Only the first number matters for this line."
+       ]
+      },
+      {
+       "do": "Where is (0, 5)?",
+       "lines": [
+        "x is 0",
+        "5 − 0 = 5 steps left"
+       ],
+       "why": [
+        "Its first number is 0, so it is 5 steps to the left of the line."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18275,16 +19264,42 @@
       "On a number line, the numbers 1, 2, 3 go to the right of 0. The negative numbers −1, −2, −3 go to the left of 0. The small sign − in front is called the minus sign. −2 is 2 steps to the left of 0, just as 2 is 2 steps to the right.",
       "On a grid, a negative x means go left from the origin O. A negative y means go down from O. Changing the sign means changing 2 into −2, or −2 into 2."
      ],
-     "example": [
-      "Find (−2, 3): from O go 2 steps left, then 3 steps up.",
-      "Find (2, −3): from O go 2 steps right, then 3 steps down.",
-      "These two points are on opposite sides of O and equally far from it."
-     ],
      "check": {
       "question": "On the number line, is −3 to the left or to the right of 0?",
       "answer": "To the left."
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Find (−2, 3) and (2, −3).",
+     "steps": [
+      {
+       "do": "(−2, 3)",
+       "lines": [
+        "2 left, then 3 up"
+       ],
+       "why": [
+        "A minus sign on the first number means go left instead of right."
+       ]
+      },
+      {
+       "do": "(2, −3)",
+       "lines": [
+        "2 right, then 3 down"
+       ],
+       "why": [
+        "A minus sign on the second number means go down instead of up."
+       ]
+      },
+      {
+       "do": "Compare.",
+       "lines": [
+        "Opposite sides of O",
+        "Same distance from O"
+       ],
+       "why": [
+        "Every number was changed in sign, so the points mirror each other through O."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18513,12 +19528,6 @@
       "An altitude goes from a corner straight to the opposite side, meeting it at a right angle. It is the height of the triangle from that corner. If the triangle has an angle bigger than 90°, the opposite side may have to be made longer for the altitude to meet it.",
       "A perpendicular bisector of a side passes through the midpoint of that side at a right angle; it need not pass through a corner. An angle bisector starts at a corner and cuts the angle there into two equal angles. Every triangle has three of each kind. Lines that all pass through one point are called concurrent."
      ],
-     "example": [
-      "In triangle ABC, BC = 10 cm and D is the midpoint of BC.",
-      "So BD = DC = 5 cm, and AD is a median.",
-      "If AE meets BC at 90°, then AE is an altitude.",
-      "If AF makes angle BAF equal to angle FAC, then AF is an angle bisector."
-     ],
      "check": {
       "question": "A line joins corner A to the midpoint of side BC. What is it called?",
       "answer": "A median."
@@ -18661,7 +19670,40 @@
        },
        "caption": "AD is a median: D is the midpoint of BC (same marks). AE is an altitude: it meets BC at 90°."
       }
-     ]
+     ],
+     "ask": "In triangle ABC, BC = 10 cm and D is the midpoint of BC. Name AD, AE and AF.",
+     "steps": [
+      {
+       "do": "AD goes to the midpoint.",
+       "lines": [
+        "BD = DC = 5 cm",
+        "AD is a median"
+       ],
+       "why": [
+        "A median joins a corner to the middle of the opposite side."
+       ]
+      },
+      {
+       "do": "AE meets BC at 90°.",
+       "lines": [
+        "AE is an altitude"
+       ],
+       "why": [
+        "An altitude is the height: it drops straight down to the opposite side."
+       ]
+      },
+      {
+       "do": "AF cuts angle A in half.",
+       "lines": [
+        "∠BAF = ∠FAC",
+        "AF is an angle bisector"
+       ],
+       "why": [
+        "An angle bisector splits the corner angle into two equal parts."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -20392,16 +21434,40 @@
       "The small measure is the millilitre. A small spoon of medicine is about 5 millilitres. We write mL for millilitre.",
       "It takes 1000 millilitres to make 1 litre. So half a litre is 500 mL."
      ],
-     "example": [
-      "A jug has 200 mL of water.",
-      "Amma pours in 100 mL more.",
-      "200 + 100 = 300",
-      "Now the jug has 300 mL."
-     ],
      "check": {
       "question": "Which is more: 1 litre or 1 millilitre?",
       "answer": "1 litre. It is as much as 1000 millilitres."
-     }
+     },
+     "ask": "A jug has 200 mL of water. Amma pours in 100 mL more. How much is in the jug now?",
+     "steps": [
+      {
+       "do": "What is there already.",
+       "lines": [
+        "200 mL"
+       ],
+       "why": [
+        "mL means millilitres: a small amount of water. 1000 mL make 1 litre."
+       ]
+      },
+      {
+       "do": "What is poured in.",
+       "lines": [
+        "100 mL more"
+       ],
+       "why": [
+        "Pouring \"more\" in means we add."
+       ]
+      },
+      {
+       "do": "Add.",
+       "lines": [
+        "200 + 100 = 300 mL"
+       ],
+       "why": [
+        "Both amounts are in mL, so we can add the numbers straight away."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -20635,17 +21701,41 @@
       "The angle at the pointed tip, at the centre, tells how big the slice is. We often call this angle θ. It is a Greek letter, said 'theta', used as a name for an angle, just as x is a name for a number.",
       "A full turn at the centre is 360°. So a slice with angle θ is θ/360 of the whole circle: that fraction of its area, and that fraction of its circumference."
      ],
-     "example": [
-      "A circle has an area of 154 cm² and a circumference of 44 cm.",
-      "A sector has θ = 90°. Fraction: 90/360 = 1/4",
-      "Area of the sector: 1/4 of 154 = 38.5 cm²",
-      "Its arc: 1/4 of 44 = 11 cm"
-     ],
      "check": {
       "question": "A sector has an angle of 180° at the centre. What fraction of the circle is it?",
       "answer": "Half (180/360 = 1/2)."
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "A circle has area 154 cm² and circumference 44 cm. Find the area and arc of a 90° sector.",
+     "steps": [
+      {
+       "do": "What fraction of the circle?",
+       "lines": [
+        "90/360 = 1/4"
+       ],
+       "why": [
+        "A whole circle is 360°. The slice takes 90° of it."
+       ]
+      },
+      {
+       "do": "Area of the sector.",
+       "lines": [
+        "1/4 of 154 = 38.5 cm²"
+       ],
+       "why": [
+        "The slice gets the same fraction of the area."
+       ]
+      },
+      {
+       "do": "Length of its arc.",
+       "lines": [
+        "1/4 of 44 = 11 cm"
+       ],
+       "why": [
+        "And the same fraction of the distance round."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -21140,16 +22230,40 @@
       "A millimetre (mm) is tiny: the small gaps between the little lines on your ruler. Ten of them fit in 1 centimetre.",
       "A metre (m) is about one very big step. It is 100 centimetres. A kilometre (km) is a long walk of about 15 minutes. It is 1000 metres."
      ],
-     "example": [
-      "Look at a ruler from 0 to 1 cm.",
-      "Count the small gaps: there are 10.",
-      "So 1 cm = 10 mm.",
-      "Then 3 cm = 10 + 10 + 10 = 30 mm."
-     ],
      "check": {
       "question": "Which unit would you use for the length of your pencil: cm or km?",
       "answer": "cm. A pencil is about 15 cm long. A kilometre is far too big."
-     }
+     },
+     "ask": "How many mm are in 1 cm, and in 3 cm?",
+     "steps": [
+      {
+       "do": "Look at a ruler from 0 to 1 cm.",
+       "lines": [
+        "Count the small gaps"
+       ],
+       "why": [
+        "The tiny marks between 0 and 1 are millimetres."
+       ]
+      },
+      {
+       "do": "Count them.",
+       "lines": [
+        "10 gaps: 1 cm = 10 mm"
+       ],
+       "why": [
+        "Every centimetre is cut into 10 millimetres."
+       ]
+      },
+      {
+       "do": "3 cm.",
+       "lines": [
+        "10 + 10 + 10 = 30 mm"
+       ],
+       "why": [
+        "Three centimetres, each 10 mm."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -21383,16 +22497,41 @@
       "We write 3 whole centimetres and 5 tenths as 3.5 cm. The dot is called the decimal point. Whole ones go before the dot. Tenths go just after it.",
       "We read 3.5 as 'three point five'."
      ],
-     "example": [
-      "A leaf is 4 cm and 2 mm long.",
-      "2 mm is 2 tenths of a centimetre.",
-      "So the leaf is 4.2 cm long."
-     ],
      "check": {
       "question": "A nail is 2 cm and 7 mm long. Write this in cm with a dot.",
       "answer": "2.7 cm"
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "A leaf is 4 cm and 2 mm long. Write it in cm.",
+     "steps": [
+      {
+       "do": "Whole centimetres.",
+       "lines": [
+        "4 cm"
+       ],
+       "why": [
+        "These go before the dot."
+       ]
+      },
+      {
+       "do": "The millimetres.",
+       "lines": [
+        "2 mm = 2 tenths of a cm"
+       ],
+       "why": [
+        "1 cm is 10 mm, so each mm is one tenth of a cm."
+       ]
+      },
+      {
+       "do": "Write it with a dot.",
+       "lines": [
+        "4.2 cm"
+       ],
+       "why": [
+        "The first place after the dot counts tenths."
+       ]
+      }
+     ]
     },
     {
      "title": "Two places after the dot",
@@ -21402,16 +22541,40 @@
       "If there are fewer than 10 centimetres, put a 0 first. 3 m 5 cm is 3.05 m, not 3.5 m.",
       "Money works the same way: 100 paise make 1 rupee, so 2 rupees 75 paise is written 2.75 rupees."
      ],
-     "example": [
-      "Write 1 m 40 cm in metres.",
-      "1 whole metre goes before the dot.",
-      "40 cm goes after the dot.",
-      "1 m 40 cm = 1.40 m"
-     ],
      "check": {
       "question": "Write 5 m 25 cm in metres with a dot.",
       "answer": "5.25 m"
-     }
+     },
+     "ask": "Write 1 m 40 cm in metres.",
+     "steps": [
+      {
+       "do": "Whole metres.",
+       "lines": [
+        "1 before the dot"
+       ],
+       "why": [
+        "There is 1 whole metre."
+       ]
+      },
+      {
+       "do": "The centimetres.",
+       "lines": [
+        "40 cm = 40 hundredths of a m"
+       ],
+       "why": [
+        "100 cm make 1 m, so each cm is one hundredth of a metre. Two places after the dot."
+       ]
+      },
+      {
+       "do": "Write it.",
+       "lines": [
+        "1.40 m"
+       ],
+       "why": [
+        "It can also be written 1.4 m. Writing 1.04 m would be wrong: that is 1 m 4 cm."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -21641,12 +22804,6 @@
       "Area in cm² is how many of these little squares cover a shape. Length is measured in cm. Area is measured in cm².",
       "For big things we use a bigger square. A square with sides of 1 m covers 1 m² (one square metre)."
      ],
-     "example": [
-      "A card is 3 cm long and 2 cm wide.",
-      "It holds 2 rows of 3 little squares.",
-      "2 × 3 = 6 squares",
-      "Area = 6 cm²"
-     ],
      "check": {
       "question": "A shape is covered by exactly 5 squares, each 1 cm by 1 cm. What is its area?",
       "answer": "5 cm²"
@@ -21659,6 +22816,36 @@
         "cols": 3
        },
        "caption": "A card 3 cm long and 2 cm wide: 2 rows of 3 little squares. Each little square is 1 cm². Area = 6 cm²."
+      }
+     ],
+     "ask": "A card is 3 cm long and 2 cm wide. Find its area.",
+     "steps": [
+      {
+       "do": "Fill it with 1 cm squares.",
+       "lines": [
+        "2 rows of 3"
+       ],
+       "why": [
+        "Each little square is 1 cm by 1 cm. That is 1 cm²."
+       ]
+      },
+      {
+       "do": "Count the squares.",
+       "lines": [
+        "2 × 3 = 6"
+       ],
+       "why": [
+        "Rows times how many in each row."
+       ]
+      },
+      {
+       "do": "Say the area.",
+       "lines": [
+        "6 cm²"
+       ],
+       "why": [
+        "Area is how many 1 cm squares fit inside."
+       ]
       }
      ]
     }
@@ -21890,16 +23077,41 @@
       "A segment is not a sector. A sector is a slice from the centre O with two radii as edges. A segment is cut off by one chord.",
       "Join O to A and to B. The sector OAB is the triangle OAB plus the minor segment. So minor segment = sector − triangle."
      ],
-     "example": [
-      "A sector OAB has an area of 50 cm².",
-      "The triangle OAB inside it has an area of 32 cm².",
-      "Minor segment = 50 − 32 = 18 cm²"
-     ],
      "check": {
       "question": "A chord cuts a circle of area 100 cm² into two segments. The minor segment is 20 cm². What is the major segment?",
       "answer": "80 cm²"
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "A sector OAB has area 50 cm² and the triangle OAB inside it has area 32 cm². Find the minor segment.",
+     "steps": [
+      {
+       "do": "See the pieces.",
+       "lines": [
+        "Sector = triangle + segment"
+       ],
+       "why": [
+        "The chord AB cuts the slice into a triangle and a curved piece. The curved piece is the segment."
+       ]
+      },
+      {
+       "do": "Take the triangle away.",
+       "lines": [
+        "50 − 32 = 18"
+       ],
+       "why": [
+        "What is left of the sector is the segment."
+       ]
+      },
+      {
+       "do": "Say the answer.",
+       "lines": [
+        "18 cm²"
+       ],
+       "why": [
+        "The minor segment is the smaller curved piece."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -22129,17 +23341,41 @@
       "For every circle, big or small, the string is a little more than 3 times the diameter. This fixed number is called π (say 'pie'). We use 22/7 or 3.14 for it.",
       "So circumference = π × diameter. Half a circle is called a semicircle. Its curved edge is half the circumference."
      ],
-     "example": [
-      "A bangle has a diameter of 7 cm. Take π = 22/7.",
-      "Circumference = π × diameter",
-      "= 22/7 × 7 = 22 cm",
-      "Curved edge of half the bangle: 22 ÷ 2 = 11 cm"
-     ],
      "check": {
       "question": "A circle has a diameter of 10 cm. Is its circumference about 3 cm, about 30 cm or about 300 cm?",
       "answer": "About 30 cm (a little more than 3 times 10)."
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "A bangle has diameter 7 cm. Take π = 22/7. Find its circumference.",
+     "steps": [
+      {
+       "do": "Use the rule.",
+       "lines": [
+        "Circumference = π × diameter"
+       ],
+       "why": [
+        "Every circle is a little more than 3 times as far round as it is across. That number is π."
+       ]
+      },
+      {
+       "do": "Put in the numbers.",
+       "lines": [
+        "22/7 × 7 = 22 cm"
+       ],
+       "why": [
+        "The 7 on the bottom cancels with the 7 of the diameter."
+       ]
+      },
+      {
+       "do": "Half the bangle.",
+       "lines": [
+        "22 ÷ 2 = 11 cm"
+       ],
+       "why": [
+        "Half of the circle has half the curved edge."
+       ]
+      }
+     ]
     },
     {
      "title": "The space inside a circle",
@@ -22148,17 +23384,41 @@
       "The rule uses the radius r. Area = π × r × r. The short way to write r × r is r², so the rule is written πr².",
       "A semicircle is half a circle, so its area is half of πr². A quadrant is a quarter of a circle, so its area is a quarter of πr²."
      ],
-     "example": [
-      "A circle has a radius of 7 cm. Take π = 22/7.",
-      "r × r = 7 × 7 = 49",
-      "Area = 22/7 × 49 = 154 cm²",
-      "Semicircle: 154 ÷ 2 = 77 cm²"
-     ],
      "check": {
       "question": "A circle has an area of 100 cm². What is the area of a semicircle cut from it?",
       "answer": "50 cm²"
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "A circle has radius 7 cm. Take π = 22/7. Find its area and the area of a semicircle.",
+     "steps": [
+      {
+       "do": "Square the radius.",
+       "lines": [
+        "7 × 7 = 49"
+       ],
+       "why": [
+        "Area = π × r × r. The radius is from the centre to the edge."
+       ]
+      },
+      {
+       "do": "Multiply by π.",
+       "lines": [
+        "22/7 × 49 = 22 × 7 = 154 cm²"
+       ],
+       "why": [
+        "49 ÷ 7 = 7, then 22 × 7 = 154."
+       ]
+      },
+      {
+       "do": "Half the circle.",
+       "lines": [
+        "154 ÷ 2 = 77 cm²"
+       ],
+       "why": [
+        "A semicircle is half a circle."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -22388,12 +23648,6 @@
       "The height is the straight-up distance from the base to the opposite corner. It meets the base at a right angle (90°). A slanting side is longer than the height, so do not use it.",
       "In a right-angled triangle it is easy: the two sides that meet at the right angle are the base and the height."
      ],
-     "example": [
-      "A triangle has a base of 6 cm.",
-      "Its top corner is 4 cm straight above the base, so the height is 4 cm.",
-      "Its slanting sides are 5 cm, but we do not use them.",
-      "Area = half of 6 × 4 = half of 24 = 12 cm²"
-     ],
      "check": {
       "question": "A triangle has a base of 10 cm, a slanting side of 7 cm, and its top corner is 6 cm straight above the base. What is its height?",
       "answer": "6 cm"
@@ -22408,6 +23662,36 @@
         "height": "height"
        },
        "caption": "The height (dashed) goes straight up from the base to the top corner. The slanting sides are longer than the height."
+      }
+     ],
+     "ask": "A triangle has base 6 cm and height 4 cm. Its slanting sides are 5 cm. Find its area.",
+     "steps": [
+      {
+       "do": "Find the height.",
+       "lines": [
+        "Straight up from the base: 4 cm"
+       ],
+       "why": [
+        "The height goes up at a right angle to the base. The slanting sides are not the height."
+       ]
+      },
+      {
+       "do": "Base × height.",
+       "lines": [
+        "6 × 4 = 24"
+       ],
+       "why": [
+        "That would be the area of a rectangle around the triangle."
+       ]
+      },
+      {
+       "do": "Halve it.",
+       "lines": [
+        "24 ÷ 2 = 12 cm²"
+       ],
+       "why": [
+        "The triangle is exactly half of that rectangle."
+       ]
       }
      ]
     }
@@ -22622,12 +23906,6 @@
       "Volume is how much space a thing fills. We measure it by counting how many 1 cm cubes fit inside.",
       "A hollow 1 cm cube holds exactly 1 millilitre of water. So 1 cm³ and 1 ml are the same amount of space."
      ],
-     "example": [
-      "A box is 3 cm long, 2 cm wide and 2 cm high.",
-      "Bottom layer: 3 × 2 = 6 cubes",
-      "2 layers: 6 × 2 = 12 cubes",
-      "Volume = 12 cm³, so it would hold 12 ml of water."
-     ],
      "check": {
       "question": "A block is made of 8 cubes, each with edges of 1 cm. What is its volume?",
       "answer": "8 cm³"
@@ -22644,6 +23922,36 @@
         ]
        },
        "caption": "1 cm³: a cube 1 cm long, 1 cm wide and 1 cm high."
+      }
+     ],
+     "ask": "A box is 3 cm long, 2 cm wide and 2 cm high. Find its volume.",
+     "steps": [
+      {
+       "do": "Bottom layer.",
+       "lines": [
+        "3 × 2 = 6 cubes"
+       ],
+       "why": [
+        "Fill the floor with 1 cm cubes: 2 rows of 3."
+       ]
+      },
+      {
+       "do": "Stack the layers.",
+       "lines": [
+        "6 × 2 = 12 cubes"
+       ],
+       "why": [
+        "The box is 2 cm high, so there are 2 layers."
+       ]
+      },
+      {
+       "do": "Say the volume.",
+       "lines": [
+        "12 cm³"
+       ],
+       "why": [
+        "Each cube is 1 cm³, which holds 1 mL of water. The box holds 12 mL."
+       ]
       }
      ]
     }
@@ -22875,16 +24183,41 @@
       "The sign + is called plus. It means put together. The sign = is called equals. It means makes, or is the same as.",
       "So 2 + 1 = 3 is read: 2 plus 1 equals 3. When you see 2 + 1 = ? it is asking: how many in all?"
      ],
-     "example": [
-      "3 + 2 = ?",
-      "3 balls and 2 more balls.",
-      "Count them all: 1, 2, 3, 4, 5.",
-      "3 + 2 = 5"
-     ],
      "check": {
       "question": "What is 1 + 1?",
       "answer": "2"
-     }
+     },
+     "ask": "3 + 2 = ?",
+     "steps": [
+      {
+       "do": "Show 3.",
+       "lines": [
+        "● ● ●"
+       ],
+       "why": [
+        "Start with 3 balls in a row."
+       ]
+      },
+      {
+       "do": "Bring 2 more.",
+       "lines": [
+        "● ● ● ● ●"
+       ],
+       "why": [
+        "+ means \"put together with\"."
+       ]
+      },
+      {
+       "do": "Count them all.",
+       "lines": [
+        "1, 2, 3, 4, 5",
+        "3 + 2 = 5"
+       ],
+       "why": [
+        "= means \"is the same as\". 3 and 2 together are the same as 5."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -23118,12 +24451,6 @@
       "When you go to the right, the numbers get bigger, 1 more each step. When you go to the left, they get smaller, 1 less each step.",
       "A hop to the right is called a jump forward. A hop to the left is called a jump back."
      ],
-     "example": [
-      "Stand on 3.",
-      "Jump 2 steps to the right: 4, 5.",
-      "You land on 5.",
-      "5 is to the right of 3, so 5 is more than 3."
-     ],
      "check": {
       "question": "On a number line, which number is just to the right of 6?",
       "answer": "7"
@@ -23149,6 +24476,37 @@
         ]
        },
        "caption": "Stand on 3. Two jumps to the right land on 5."
+      }
+     ],
+     "ask": "Stand on 3 and jump 2 steps to the right. Where do you land?",
+     "steps": [
+      {
+       "do": "Stand on 3.",
+       "lines": [
+        "Start at 3"
+       ],
+       "why": [
+        "Numbers sit in order on the line. Bigger numbers are to the right."
+       ]
+      },
+      {
+       "do": "Jump 2 to the right.",
+       "lines": [
+        "4, then 5"
+       ],
+       "why": [
+        "Count each jump: one, two."
+       ]
+      },
+      {
+       "do": "Where you land.",
+       "lines": [
+        "5",
+        "5 is more than 3"
+       ],
+       "why": [
+        "Moving right means going up. 3 + 2 = 5."
+       ]
       }
      ]
     }
@@ -24241,18 +25599,50 @@
       "Cut 1 whole into 10 equal parts. Each part is one tenth, written 0.1. Cut each tenth into 10 equal parts. Each tiny part is one hundredth, written 0.01. The first place after the point counts tenths. The second place counts hundredths.",
       "So 3.4 means 3 wholes and 4 tenths. 3.47 means 3 wholes, 4 tenths and 7 hundredths. Numbers written like this are called decimals."
      ],
-     "example": [
-      "2.35 = ?",
-      "2 ones",
-      "3 tenths = 0.3",
-      "5 hundredths = 0.05",
-      "2 + 0.3 + 0.05 = 2.35"
-     ],
      "check": {
       "question": "In 6.2, what does the digit 2 count: ones or tenths?",
       "answer": "Tenths (6.2 is 6 wholes and 2 tenths)"
      },
-     "picture": "fraction-bar"
+     "picture": "fraction-bar",
+     "ask": "What does each digit of 2.35 stand for?",
+     "steps": [
+      {
+       "do": "Before the point.",
+       "lines": [
+        "2 ones"
+       ],
+       "why": [
+        "Digits before the point are whole ones."
+       ]
+      },
+      {
+       "do": "First place after the point.",
+       "lines": [
+        "3 tenths = 0.3"
+       ],
+       "why": [
+        "Each tenth is one whole cut into 10 parts."
+       ]
+      },
+      {
+       "do": "Second place after the point.",
+       "lines": [
+        "5 hundredths = 0.05"
+       ],
+       "why": [
+        "Each hundredth is one whole cut into 100 parts."
+       ]
+      },
+      {
+       "do": "Put them together.",
+       "lines": [
+        "2 + 0.3 + 0.05 = 2.35"
+       ],
+       "why": [
+        "The point separates the whole ones from the parts."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -24481,16 +25871,41 @@
       "There is a short way to write it: 12 ÷ 3 = 4. The sign ÷ is called divided by. It means share equally, or make equal groups.",
       "12 ÷ 3 can be read in two ways. Share 12 among 3: how many does each get? Or: how many groups of 3 are there in 12? Both give 4, because 3 × 4 = 12."
      ],
-     "example": [
-      "10 ÷ 2 = ?",
-      "Share 10 sweets between 2 children.",
-      "Each child gets 5, because 2 × 5 = 10.",
-      "10 ÷ 2 = 5"
-     ],
      "check": {
       "question": "What is 6 ÷ 2?",
       "answer": "3"
-     }
+     },
+     "ask": "10 ÷ 2 = ?",
+     "steps": [
+      {
+       "do": "Read it as sharing.",
+       "lines": [
+        "10 sweets, 2 children"
+       ],
+       "why": [
+        "÷ means share equally."
+       ]
+      },
+      {
+       "do": "Share them out.",
+       "lines": [
+        "Each gets 5"
+       ],
+       "why": [
+        "Give one each, again and again, until none are left."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "2 × 5 = 10 ✓",
+        "10 ÷ 2 = 5"
+       ],
+       "why": [
+        "Division undoes multiplication."
+       ]
+      }
+     ]
     },
     {
      "title": "Names for the numbers in a division",
@@ -24500,17 +25915,49 @@
       "The answer, the number of full groups, is called the quotient. Anything left over is called the remainder.",
       "Three groups of 4 make 12, and 2 are left. So for 14 ÷ 4 the quotient is 3 and the remainder is 2."
      ],
-     "example": [
-      "17 ÷ 5",
-      "The dividend is 17 and the divisor is 5.",
-      "3 groups of 5 make 15.",
-      "17 − 15 = 2 are left over.",
-      "Quotient 3, remainder 2."
-     ],
      "check": {
       "question": "In 20 ÷ 4 = 5, which number is the divisor?",
       "answer": "4"
-     }
+     },
+     "ask": "Work out 17 ÷ 5 and name each number.",
+     "steps": [
+      {
+       "do": "Name the numbers.",
+       "lines": [
+        "Dividend 17, divisor 5"
+       ],
+       "why": [
+        "The dividend is shared out. The divisor is how many in each group (or how many groups)."
+       ]
+      },
+      {
+       "do": "Make groups of 5.",
+       "lines": [
+        "3 groups make 15"
+       ],
+       "why": [
+        "4 groups would need 20, which is too many."
+       ]
+      },
+      {
+       "do": "What is left.",
+       "lines": [
+        "17 − 15 = 2"
+       ],
+       "why": [
+        "Not enough for another group."
+       ]
+      },
+      {
+       "do": "Say the answer.",
+       "lines": [
+        "Quotient 3, remainder 2"
+       ],
+       "why": [
+        "The quotient is the number of groups; the remainder is left over."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -24743,16 +26190,40 @@
       "A multiple of a number is what you get when you multiply it by 1, 2, 3, 4 and so on. The multiples of a number go on for ever.",
       "A common multiple of two numbers is a number that is in both their times tables. 12 is a common multiple of 3 and 4."
      ],
-     "example": [
-      "Multiples of 4:",
-      "4 × 1 = 4, 4 × 2 = 8, 4 × 3 = 12, 4 × 4 = 16",
-      "So 4, 8, 12 and 16 are multiples of 4.",
-      "10 is not a multiple of 4: it is not in the 4 times table."
-     ],
      "check": {
       "question": "Is 15 a multiple of 5?",
       "answer": "Yes, because 5 × 3 = 15"
-     }
+     },
+     "ask": "Which numbers are multiples of 4? Is 10 one?",
+     "steps": [
+      {
+       "do": "Go up the 4 times table.",
+       "lines": [
+        "4, 8, 12, 16"
+       ],
+       "why": [
+        "4 × 1, 4 × 2, 4 × 3, 4 × 4."
+       ]
+      },
+      {
+       "do": "Name them.",
+       "lines": [
+        "Multiples of 4"
+       ],
+       "why": [
+        "A multiple of 4 is any answer in the 4 times table."
+       ]
+      },
+      {
+       "do": "Test 10.",
+       "lines": [
+        "8, then 12: 10 is missed"
+       ],
+       "why": [
+        "10 is not in the 4 times table, so it is not a multiple of 4."
+       ]
+      }
+     ]
     },
     {
      "title": "Factors",
@@ -24762,16 +26233,40 @@
       "Factors and multiples are two ways of saying one thing. 2 × 3 = 6, so 2 and 3 are factors of 6, and 6 is a multiple of 2 and of 3.",
       "A common factor of two numbers is a factor of both. 3 is a common factor of 6 and 9."
      ],
-     "example": [
-      "Is 4 a factor of 12?",
-      "12 ÷ 4 = 3 with no remainder, so yes.",
-      "Is 5 a factor of 12?",
-      "12 ÷ 5 = 2 remainder 2, so no."
-     ],
      "check": {
       "question": "Is 3 a factor of 9?",
       "answer": "Yes, because 9 ÷ 3 = 3 exactly"
-     }
+     },
+     "ask": "Is 4 a factor of 12? Is 5?",
+     "steps": [
+      {
+       "do": "Try 4.",
+       "lines": [
+        "12 ÷ 4 = 3, no remainder"
+       ],
+       "why": [
+        "A factor divides exactly, leaving nothing over."
+       ]
+      },
+      {
+       "do": "So 4 is a factor.",
+       "lines": [
+        "4 × 3 = 12"
+       ],
+       "why": [
+        "4 and 3 are both factors of 12."
+       ]
+      },
+      {
+       "do": "Try 5.",
+       "lines": [
+        "12 ÷ 5 = 2 remainder 2"
+       ],
+       "why": [
+        "Something is left over, so 5 is not a factor of 12."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -25005,16 +26500,40 @@
       "In 3/8 the numerator is 3 and the denominator is 8: three parts, each one eighth of the whole.",
       "A common denominator is one bottom number shared by two fractions, so that their parts are the same size."
      ],
-     "example": [
-      "Look at 5/6.",
-      "Numerator: 5",
-      "Denominator: 6",
-      "It means 5 parts, each one sixth of a whole."
-     ],
      "check": {
       "question": "What is the denominator of 2/7?",
       "answer": "7"
-     }
+     },
+     "ask": "Name the parts of 5/6.",
+     "steps": [
+      {
+       "do": "The bottom number.",
+       "lines": [
+        "Denominator: 6"
+       ],
+       "why": [
+        "The whole is cut into 6 equal parts."
+       ]
+      },
+      {
+       "do": "The top number.",
+       "lines": [
+        "Numerator: 5"
+       ],
+       "why": [
+        "We take 5 of those parts."
+       ]
+      },
+      {
+       "do": "What it means.",
+       "lines": [
+        "5 parts, each one sixth"
+       ],
+       "why": [
+        "5/6 is 5 pieces when the whole is cut into 6 equal pieces."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -25248,17 +26767,41 @@
       "To make an equal fraction, multiply the top and the bottom by the same number. This only cuts every piece into smaller pieces. 1/2 = 2/4 because 1 × 2 = 2 and 2 × 2 = 4.",
       "This helps when two fractions have different bottom numbers. Rename them so that both have the same bottom number. Then the pieces are the same size and you can just compare the tops."
      ],
-     "example": [
-      "Which is greater, 1/2 or 3/8?",
-      "Rename 1/2 in eighths: 1 × 4 = 4 and 2 × 4 = 8, so 1/2 = 4/8.",
-      "Now compare 4/8 and 3/8.",
-      "4 pieces are more than 3 pieces of the same size, so 1/2 is greater."
-     ],
      "check": {
       "question": "1/3 = ?/6. What is the missing top number?",
       "answer": "2"
      },
-     "picture": "fraction-bar"
+     "picture": "fraction-bar",
+     "ask": "Which is greater, 1/2 or 3/8?",
+     "steps": [
+      {
+       "do": "Make the bottoms the same.",
+       "lines": [
+        "1/2 = 4/8"
+       ],
+       "why": [
+        "Multiply top and bottom by 4. Cutting each half into 4 makes eighths, but the amount stays the same."
+       ]
+      },
+      {
+       "do": "Compare the tops.",
+       "lines": [
+        "4/8 and 3/8"
+       ],
+       "why": [
+        "Now the pieces are the same size, so just compare how many."
+       ]
+      },
+      {
+       "do": "Decide.",
+       "lines": [
+        "4 > 3, so 1/2 is greater"
+       ],
+       "why": [
+        "4 pieces are more than 3 pieces of the same size."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -25488,17 +27031,41 @@
       "The bottom number tells how many equal parts the whole is cut into. The top number tells how many of those parts we mean. The parts must all be the same size.",
       "The whole can also be a group of things. Put 8 beads into 4 equal groups: there are 2 beads in each group. One group is 1/4 of the beads, so 1/4 of 8 is 2."
      ],
-     "example": [
-      "A chocolate bar has 6 equal pieces. You eat 5 of them.",
-      "Bottom number: 6 equal parts in the whole bar.",
-      "Top number: 5 parts eaten.",
-      "You ate 5/6 of the bar."
-     ],
      "check": {
       "question": "A dosa is cut into 2 equal parts and you eat 1 part. What fraction of the dosa did you eat?",
       "answer": "1/2 (one half)"
      },
-     "picture": "fraction-bar"
+     "picture": "fraction-bar",
+     "ask": "A bar has 6 equal pieces. You eat 5. What fraction did you eat?",
+     "steps": [
+      {
+       "do": "The bottom number.",
+       "lines": [
+        "6 equal pieces"
+       ],
+       "why": [
+        "The bottom says how many equal pieces make the whole bar."
+       ]
+      },
+      {
+       "do": "The top number.",
+       "lines": [
+        "5 eaten"
+       ],
+       "why": [
+        "The top says how many of those pieces we are talking about."
+       ]
+      },
+      {
+       "do": "Write it.",
+       "lines": [
+        "5/6 of the bar"
+       ],
+       "why": [
+        "Read it \"five sixths\"."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -25728,15 +27295,41 @@
       "There are other uses. A basement two floors below the ground floor is floor −2. Owing 30 rupees can be written as −30.",
       "Numbers above zero, like 5, are called positive numbers. Zero is neither positive nor negative."
      ],
-     "example": [
-      "3 degrees below zero is written −3 °C.",
-      "7 degrees above zero is written 7 °C.",
-      "20 metres below sea level is written −20 m."
-     ],
      "check": {
       "question": "How do we write 8 degrees below zero?",
       "answer": "−8 °C"
-     }
+     },
+     "ask": "Write: 3 degrees below zero, 7 degrees above zero, and 20 m below sea level.",
+     "steps": [
+      {
+       "do": "3 degrees below zero.",
+       "lines": [
+        "−3 °C"
+       ],
+       "why": [
+        "Below zero gets a minus sign."
+       ]
+      },
+      {
+       "do": "7 degrees above zero.",
+       "lines": [
+        "7 °C"
+       ],
+       "why": [
+        "Above zero is an ordinary number. A + sign is not needed."
+       ]
+      },
+      {
+       "do": "20 m below sea level.",
+       "lines": [
+        "−20 m"
+       ],
+       "why": [
+        "Sea level is the zero here."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "The number line goes both ways",
@@ -25746,16 +27339,41 @@
       "The counting numbers, zero and the negative numbers −1, −2, −3 and so on are together called the integers.",
       "Be careful: −5 is smaller than −2, because it is further to the left. It is colder, deeper, or more money owed."
      ],
-     "example": [
-      "Start at 2 and go down 3 steps.",
-      "From 2: 1, 0, −1.",
-      "You land on −1."
-     ],
      "check": {
       "question": "Which is colder: −4 °C or −1 °C?",
       "answer": "−4 °C"
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Start at 2 and go down 3 steps.",
+     "steps": [
+      {
+       "do": "Start at 2.",
+       "lines": [
+        "2"
+       ],
+       "why": [
+        "Below zero the line carries on: −1, −2, −3 …"
+       ]
+      },
+      {
+       "do": "Go down 3 steps.",
+       "lines": [
+        "1, 0, −1"
+       ],
+       "why": [
+        "Count each step. Going past 0 is allowed."
+       ]
+      },
+      {
+       "do": "Where you land.",
+       "lines": [
+        "−1"
+       ],
+       "why": [
+        "Going down 3 from 2 is 2 − 3 = −1."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -26542,16 +28160,40 @@
       "The answer to a multiplication is called the product. The product of 6 and 2 is 12.",
       "The numbers that are multiplied together are called factors. In 6 × 2 = 12 the factors are 6 and 2."
      ],
-     "example": [
-      "5 × 4 = 20",
-      "The factors are 5 and 4.",
-      "The product is 20.",
-      "5 + 4 = 9, so the sum of 5 and 4 is 9."
-     ],
      "check": {
       "question": "What is the product of 3 and 2?",
       "answer": "6"
-     }
+     },
+     "ask": "5 × 4 = 20. Name the parts. What is the sum of 5 and 4?",
+     "steps": [
+      {
+       "do": "The numbers multiplied.",
+       "lines": [
+        "Factors: 5 and 4"
+       ],
+       "why": [
+        "Numbers multiplied together are called factors."
+       ]
+      },
+      {
+       "do": "The answer to ×.",
+       "lines": [
+        "Product: 20"
+       ],
+       "why": [
+        "The answer to a multiplication is the product."
+       ]
+      },
+      {
+       "do": "The answer to +.",
+       "lines": [
+        "5 + 4 = 9: the sum"
+       ],
+       "why": [
+        "Sum is for adding, product is for multiplying."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -26785,12 +28427,6 @@
       "The base is the size of the bundle. In base 5 the places are worth 1, 5, 25 (which is 5 × 5), 125 and so on, where base ten has 1, 10, 100, 1000.",
       "Base 5 needs only the digits 0, 1, 2, 3 and 4, because five loose ones are at once bundled into the next place. Computers work in base 2, using only the digits 0 and 1."
      ],
-     "example": [
-      "What is the base-5 numeral 23 in ordinary base ten?",
-      "It means 2 fives and 3 ones.",
-      "2 × 5 + 3 × 1 = 10 + 3",
-      "= 13"
-     ],
      "check": {
       "question": "In base 5, what ordinary (base-ten) number does the numeral 10 stand for?",
       "answer": "5 (1 five and 0 ones)"
@@ -26803,6 +28439,37 @@
         "perRow": 5
        },
        "caption": "7 eggs: 1 full tray of 5 (top row) and 2 loose eggs."
+      }
+     ],
+     "ask": "What is the base-5 numeral 23 in ordinary numbers?",
+     "steps": [
+      {
+       "do": "Read the places.",
+       "lines": [
+        "2 fives and 3 ones"
+       ],
+       "why": [
+        "In base 5 we bundle in fives, not tens. The left digit counts fives."
+       ]
+      },
+      {
+       "do": "Work out each part.",
+       "lines": [
+        "2 × 5 = 10",
+        "3 × 1 = 3"
+       ],
+       "why": [
+        "Fives place times 5, ones place times 1."
+       ]
+      },
+      {
+       "do": "Add.",
+       "lines": [
+        "10 + 3 = 13"
+       ],
+       "why": [
+        "23 in base 5 is 13 in base ten."
+       ]
       }
      ]
     }
@@ -27034,16 +28701,40 @@
       "In 25 the digits are 2 and 5. The first digit, 2, is on the left. The last digit, 5, is on the right.",
       "The same digits in another order make another number: 25 and 52 are not the same."
      ],
-     "example": [
-      "Look at 38.",
-      "It has two digits.",
-      "The first digit is 3.",
-      "The last digit is 8."
-     ],
      "check": {
       "question": "How many digits does the number 64 have?",
       "answer": "2 (the digits 6 and 4)"
-     }
+     },
+     "ask": "Look at 38. Name its digits.",
+     "steps": [
+      {
+       "do": "Count the digits.",
+       "lines": [
+        "Two digits"
+       ],
+       "why": [
+        "A digit is one of 0 to 9."
+       ]
+      },
+      {
+       "do": "The first digit.",
+       "lines": [
+        "3: three tens"
+       ],
+       "why": [
+        "The left digit counts tens."
+       ]
+      },
+      {
+       "do": "The last digit.",
+       "lines": [
+        "8: eight ones"
+       ],
+       "why": [
+        "The right digit counts ones. 30 + 8 = 38."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -27277,11 +28968,6 @@
       "The numbers 1, 4, 9, 16, 25 and so on are called square numbers or perfect squares, because each one is a whole number times itself.",
       "Be careful: 3² does not mean 3 × 2. It means 3 × 3."
      ],
-     "example": [
-      "4² = 4 × 4 = 16",
-      "5² = 5 × 5 = 25",
-      "10² = 10 × 10 = 100"
-     ],
      "check": {
       "question": "What is 2²?",
       "answer": "4"
@@ -27295,7 +28981,38 @@
        },
        "caption": "3 rows of 3 dots: 3 × 3 = 9. So 3² = 9."
       }
-     ]
+     ],
+     "ask": "Find 4², 5² and 10².",
+     "steps": [
+      {
+       "do": "4²",
+       "lines": [
+        "4 × 4 = 16"
+       ],
+       "why": [
+        "The small 2 means the number times itself."
+       ]
+      },
+      {
+       "do": "5²",
+       "lines": [
+        "5 × 5 = 25"
+       ],
+       "why": [
+        "25 dots make a 5 by 5 square."
+       ]
+      },
+      {
+       "do": "10²",
+       "lines": [
+        "10 × 10 = 100"
+       ],
+       "why": [
+        "That is why these are called square numbers."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Square roots",
@@ -27304,16 +29021,40 @@
       "The sign √ asks: which number times itself gives this number?",
       "Most numbers are not perfect squares. Then the square root lies between two whole numbers. 4 × 4 = 16 and 5 × 5 = 25, so √20 is more than 4 and less than 5."
      ],
-     "example": [
-      "√36 = ?",
-      "Try 5: 5 × 5 = 25. Too small.",
-      "Try 6: 6 × 6 = 36. Yes.",
-      "√36 = 6"
-     ],
      "check": {
       "question": "What is √16?",
       "answer": "4"
-     }
+     },
+     "ask": "Find √36.",
+     "steps": [
+      {
+       "do": "Try 5.",
+       "lines": [
+        "5 × 5 = 25: too small"
+       ],
+       "why": [
+        "√ asks: which number times itself makes 36?"
+       ]
+      },
+      {
+       "do": "Try 6.",
+       "lines": [
+        "6 × 6 = 36 ✓"
+       ],
+       "why": [
+        "6 times itself is exactly 36."
+       ]
+      },
+      {
+       "do": "Answer.",
+       "lines": [
+        "√36 = 6"
+       ],
+       "why": [
+        "Finding a square root undoes squaring."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -27543,16 +29284,40 @@
       "A rate of 5% per year means 5 rupees of interest each year for every 100 rupees of principal. The amount is everything paid back at the end: principal plus interest.",
       "It works the other way too. When you keep money in a bank, the bank is borrowing from you, and it pays you interest. In simple interest, the interest is worked out on the principal alone, so it is the same every year."
      ],
-     "example": [
-      "Principal 1000 rupees, rate 5% per year, time 1 year.",
-      "Interest for one year: 5% of 1000 = 50 rupees.",
-      "Amount = 1000 + 50 = 1050 rupees.",
-      "For 2 years the simple interest is 2 × 50 = 100 rupees."
-     ],
      "check": {
       "question": "100 rupees is lent for 1 year at 10% per year. How much is the interest?",
       "answer": "10 rupees"
-     }
+     },
+     "ask": "Borrow 1000 rupees at 5% a year. Find the interest, the amount after 1 year, and the interest for 2 years.",
+     "steps": [
+      {
+       "do": "Interest for one year.",
+       "lines": [
+        "5% of 1000 = 50"
+       ],
+       "why": [
+        "5% means 5 for every 100. 1000 has ten 100s, so 10 × 5 = 50."
+       ]
+      },
+      {
+       "do": "Amount after one year.",
+       "lines": [
+        "1000 + 50 = 1050"
+       ],
+       "why": [
+        "Amount is what you pay back: the money borrowed plus the interest."
+       ]
+      },
+      {
+       "do": "Interest for two years.",
+       "lines": [
+        "2 × 50 = 100"
+       ],
+       "why": [
+        "Simple interest is the same every year."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -27786,16 +29551,40 @@
       "The first and last numbers, here 1 and 10, are called the extremes: they sit at the two ends. The two middle numbers, here 2 and 5, are called the means.",
       "Notice that 1 × 10 = 10 and 2 × 5 = 10. In every proportion the product of the extremes equals the product of the means. This gives a quick test."
      ],
-     "example": [
-      "Is 2 : 3 :: 4 : 6 a proportion?",
-      "Extremes: 2 × 6 = 12",
-      "Means: 3 × 4 = 12",
-      "The products are equal, so yes: 2 : 3 and 4 : 6 are equal ratios."
-     ],
      "check": {
       "question": "In 3 : 4 :: 6 : 8, which two numbers are the extremes?",
       "answer": "3 and 8"
-     }
+     },
+     "ask": "Is 2 : 3 :: 4 : 6 a proportion?",
+     "steps": [
+      {
+       "do": "Multiply the outer numbers.",
+       "lines": [
+        "2 × 6 = 12"
+       ],
+       "why": [
+        "In a : b :: c : d, a and d are the extremes (the outside pair)."
+       ]
+      },
+      {
+       "do": "Multiply the inner numbers.",
+       "lines": [
+        "3 × 4 = 12"
+       ],
+       "why": [
+        "b and c are the means (the inside pair)."
+       ]
+      },
+      {
+       "do": "Compare.",
+       "lines": [
+        "12 = 12: yes"
+       ],
+       "why": [
+        "When the two products are equal, the ratios are equal."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -28012,16 +29801,40 @@
       "The two numbers are called the terms of the ratio. Their order matters: water to juice is 3 : 1. Both quantities must be measured in the same unit.",
       "2 : 6 and 1 : 3 describe the same mixture, so they are equal ratios, just as 2/6 and 1/3 are equal fractions."
      ],
-     "example": [
-      "A class has 10 girls and 15 boys.",
-      "Girls to boys = 10 : 15",
-      "Divide both terms by 5: 2 : 3",
-      "For every 2 girls there are 3 boys."
-     ],
      "check": {
       "question": "A box has 4 red beads and 7 blue beads. What is the ratio of red beads to blue beads?",
       "answer": "4 : 7"
-     }
+     },
+     "ask": "A class has 10 girls and 15 boys. Write the ratio of girls to boys simply.",
+     "steps": [
+      {
+       "do": "Write the ratio.",
+       "lines": [
+        "10 : 15"
+       ],
+       "why": [
+        "Girls first, because the question says girls to boys."
+       ]
+      },
+      {
+       "do": "Divide both by 5.",
+       "lines": [
+        "2 : 3"
+       ],
+       "why": [
+        "5 goes into both. Dividing both sides by the same number keeps the ratio the same."
+       ]
+      },
+      {
+       "do": "Say what it means.",
+       "lines": [
+        "For every 2 girls, 3 boys"
+       ],
+       "why": [
+        "The class could be split into 5 groups, each with 2 girls and 3 boys."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -28255,17 +30068,51 @@
       "So 3/4, −1/2 and 7/5 are rational numbers. Integers are rational too, because 5 = 5/1 and −2 = −2/1. So are decimals such as 0.3 = 3/10.",
       "On the number line the negative fractions lie to the left of 0, in between the negative integers. −1/2 is halfway between 0 and −1. The minus sign can be written in front or on the top: −1/2 and (−1)/2 are the same number."
      ],
-     "example": [
-      "Is −7 a rational number?",
-      "Write it as −7/1: an integer over a non-zero integer, so yes.",
-      "Where is −3/2 on the number line?",
-      "−3/2 = −1 1/2, halfway between −1 and −2."
-     ],
      "check": {
       "question": "Is −2/3 to the left or to the right of 0 on the number line?",
       "answer": "To the left, because it is negative"
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Is −7 rational? Where is −3/2 on the number line?",
+     "steps": [
+      {
+       "do": "Write −7 as a fraction.",
+       "lines": [
+        "−7 = −7/1"
+       ],
+       "why": [
+        "A rational number is an integer over a non-zero integer."
+       ]
+      },
+      {
+       "do": "So −7 is rational.",
+       "lines": [
+        "Yes"
+       ],
+       "why": [
+        "Every integer is rational."
+       ]
+      },
+      {
+       "do": "Change −3/2 to a mixed number.",
+       "lines": [
+        "−3/2 = −1½"
+       ],
+       "why": [
+        "3 halves is 1 and a half."
+       ]
+      },
+      {
+       "do": "Place it.",
+       "lines": [
+        "Halfway between −1 and −2"
+       ],
+       "why": [
+        "Negative numbers go left from 0."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -28495,16 +30342,40 @@
       "Other numbers are made by writing letters side by side, biggest first, and adding their values: II = 1 + 1 = 2, VI = 5 + 1 = 6, XV = 10 + 5 = 15.",
       "One special rule: a smaller letter written just before a bigger one is taken away from it. IV = 5 − 1 = 4 and IX = 10 − 1 = 9."
      ],
-     "example": [
-      "XII = ?",
-      "X = 10, I = 1, I = 1",
-      "10 + 1 + 1 = 12",
-      "XII = 12"
-     ],
      "check": {
       "question": "Which number does the letter V stand for?",
       "answer": "5"
-     }
+     },
+     "ask": "What is XII?",
+     "steps": [
+      {
+       "do": "Read each letter.",
+       "lines": [
+        "X = 10, I = 1, I = 1"
+       ],
+       "why": [
+        "Roman numerals use letters: I = 1, V = 5, X = 10, L = 50 …"
+       ]
+      },
+      {
+       "do": "Add them.",
+       "lines": [
+        "10 + 1 + 1 = 12"
+       ],
+       "why": [
+        "When a smaller letter comes after a bigger one, add it."
+       ]
+      },
+      {
+       "do": "Answer.",
+       "lines": [
+        "XII = 12"
+       ],
+       "why": [
+        "IX would be different: a smaller letter before a bigger one is taken away, so IX = 9."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -29290,16 +31161,41 @@
       "The sign − is called minus. It means take away.",
       "The first number is how many you had. The number after − is how many go away. The number after = is how many are left."
      ],
-     "example": [
-      "4 − 1 = ?",
-      "4 birds sit on a wire. 1 flies away.",
-      "Count the birds left: 1, 2, 3.",
-      "4 − 1 = 3"
-     ],
      "check": {
       "question": "What is 3 − 1?",
       "answer": "2"
-     }
+     },
+     "ask": "4 − 1 = ?",
+     "steps": [
+      {
+       "do": "Start with 4.",
+       "lines": [
+        "4 birds on a wire"
+       ],
+       "why": [
+        "The first number is what you start with."
+       ]
+      },
+      {
+       "do": "Take 1 away.",
+       "lines": [
+        "1 flies away"
+       ],
+       "why": [
+        "The − sign means take away."
+       ]
+      },
+      {
+       "do": "Count what is left.",
+       "lines": [
+        "1, 2, 3",
+        "4 − 1 = 3"
+       ],
+       "why": [
+        "3 birds are still on the wire."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -30398,16 +32294,49 @@
       "The thing we are hoping for is called an event, for example 'the sweet is red'.",
       "Probability of an event = outcomes that fit the event ÷ all the outcomes. We write P(red) for 'the probability of red'. It is 0 if the event cannot happen, 1 if it must happen, and a fraction in between otherwise."
      ],
-     "example": [
-      "All the outcomes: 3 + 1 = 4 sweets",
-      "Outcomes that fit 'red': 3",
-      "P(red) = 3 ÷ 4 = 3/4",
-      "P(green) = 1 ÷ 4 = 1/4"
-     ],
      "check": {
       "question": "A fair coin has two sides, head and tail. What is P(head)?",
       "answer": "1/2 (1 outcome fits out of 2)."
-     }
+     },
+     "ask": "A bag has 3 red sweets and 1 green. Find P(red) and P(green).",
+     "steps": [
+      {
+       "do": "Count all the outcomes.",
+       "lines": [
+        "3 + 1 = 4 sweets"
+       ],
+       "why": [
+        "Each sweet is equally likely to be picked."
+       ]
+      },
+      {
+       "do": "Count the red ones.",
+       "lines": [
+        "3"
+       ],
+       "why": [
+        "These are the outcomes that fit \"red\"."
+       ]
+      },
+      {
+       "do": "P(red).",
+       "lines": [
+        "3 ÷ 4 = 3/4"
+       ],
+       "why": [
+        "Probability = outcomes that fit ÷ all outcomes."
+       ]
+      },
+      {
+       "do": "P(green).",
+       "lines": [
+        "1 ÷ 4 = 1/4"
+       ],
+       "why": [
+        "3/4 + 1/4 = 1: something is always picked."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -30641,15 +32570,41 @@
       "This kind of product comes up so often that it has a short sign. 3! means 3 × 2 × 1. We say 'three factorial'. The ! here is a maths sign, not surprise.",
       "In the same way 2! = 2 × 1 = 2 and 4! = 4 × 3 × 2 × 1 = 24. n! is the number of ways to put n different things in a row."
      ],
-     "example": [
-      "Rows of A, B, C: ABC, ACB, BAC, BCA, CAB, CBA",
-      "That is 6 rows.",
-      "3! = 3 × 2 × 1 = 6"
-     ],
      "check": {
       "question": "What is 2! ?",
       "answer": "2 (2 × 1). Two people can stand in a row in 2 ways."
-     }
+     },
+     "ask": "In how many orders can A, B and C stand in a row?",
+     "steps": [
+      {
+       "do": "List them.",
+       "lines": [
+        "ABC, ACB, BAC,",
+        "BCA, CAB, CBA"
+       ],
+       "why": [
+        "Start with each letter in front and list the two ways to finish."
+       ]
+      },
+      {
+       "do": "Count.",
+       "lines": [
+        "6 rows"
+       ],
+       "why": [
+        "3 choices for first, then 2 for second, then 1 left."
+       ]
+      },
+      {
+       "do": "Write it with !",
+       "lines": [
+        "3! = 3 × 2 × 1 = 6"
+       ],
+       "why": [
+        "3! (three factorial) counts the orders of 3 things."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -30882,17 +32837,42 @@
       "Pythagoras' theorem gives the slanting side: PQ² = 3² + 4² = 9 + 16 = 25, so PQ = 5.",
       "In general, write the points as (x₁, y₁) and (x₂, y₂). The small 1 and 2 are only labels: 'first point' and 'second point'. The step across is x₂ − x₁ and the step up is y₂ − y₁. So PQ² = (x₂ − x₁)² + (y₂ − y₁)². A negative step does not matter, because squaring makes it positive."
      ],
-     "example": [
-      "P(1, 2) and Q(4, 6)",
-      "Across: 4 − 1 = 3. Up: 6 − 2 = 4.",
-      "PQ² = 3² + 4² = 25",
-      "PQ = √25 = 5"
-     ],
      "check": {
       "question": "How far is the point (6, 8) from (0, 0)?",
       "answer": "10 (6² + 8² = 100, and √100 = 10)"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "Find the distance from P(1, 2) to Q(4, 6).",
+     "steps": [
+      {
+       "do": "How far across and up.",
+       "lines": [
+        "Across: 4 − 1 = 3",
+        "Up: 6 − 2 = 4"
+       ],
+       "why": [
+        "Subtract the matching numbers."
+       ]
+      },
+      {
+       "do": "Use Pythagoras.",
+       "lines": [
+        "PQ² = 3² + 4² = 25"
+       ],
+       "why": [
+        "Across and up meet at a right angle. PQ is the longest side."
+       ]
+      },
+      {
+       "do": "Square root.",
+       "lines": [
+        "PQ = √25 = 5"
+       ],
+       "why": [
+        "Check it: 5 × 5 = 25, so PQ is 5."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -31121,16 +33101,41 @@
       "3 pens cost 3 times x. We write this as 3x. A number written next to a letter means multiply. The number in front (here 3) is called the coefficient.",
       "Now we can write the shopkeeper's fact as 3x = 30. A sentence with an equals sign and a hidden number is called an equation. Solving it means finding the number that makes it true."
      ],
-     "example": [
-      "3x = 30",
-      "3 times what number is 30?",
-      "30 ÷ 3 = 10, so x = 10.",
-      "Check: 3 × 10 = 30. One pen costs 10 rupees."
-     ],
      "check": {
       "question": "x + 5 = 9. What number is x?",
       "answer": "4"
-     }
+     },
+     "ask": "3 pens cost 30 rupees: 3x = 30. Find x.",
+     "steps": [
+      {
+       "do": "Read it.",
+       "lines": [
+        "3 times what is 30?"
+       ],
+       "why": [
+        "3x means 3 times the hidden number x."
+       ]
+      },
+      {
+       "do": "Undo the times.",
+       "lines": [
+        "30 ÷ 3 = 10",
+        "x = 10"
+       ],
+       "why": [
+        "Dividing undoes multiplying."
+       ]
+      },
+      {
+       "do": "Check.",
+       "lines": [
+        "3 × 10 = 30 ✓"
+       ],
+       "why": [
+        "One pen costs 10 rupees."
+       ]
+      }
+     ]
     },
     {
      "title": "Two hidden numbers need two facts",
@@ -31140,16 +33145,42 @@
       "One fact alone is not enough: x + y = 7 could be 1 and 6, or 2 and 5, or 3 and 4 ... We need the pair that makes both facts true. Compare the facts: the second has one more pencil and costs 4 rupees more. So a pencil costs 4 rupees.",
       "These are called linear equations because the letters appear only by themselves: a letter is never multiplied by another letter or by itself (no x × y and no x × x). The answer is written as a pair (x, y)."
      ],
-     "example": [
-      "x + y = 7 and 2x + y = 11",
-      "Take the first from the second: x = 11 − 7 = 4",
-      "Put x = 4 in the first: 4 + y = 7, so y = 3",
-      "Check the second: 2 × 4 + 3 = 11. So (x, y) = (4, 3)."
-     ],
      "check": {
       "question": "x + y = 10 and x = 6. What is y?",
       "answer": "4"
-     }
+     },
+     "ask": "Solve x + y = 7 and 2x + y = 11.",
+     "steps": [
+      {
+       "do": "Take the first from the second.",
+       "lines": [
+        "(2x + y) − (x + y) = 11 − 7",
+        "x = 4"
+       ],
+       "why": [
+        "The y parts are the same, so they cancel. Only x is left."
+       ]
+      },
+      {
+       "do": "Find y.",
+       "lines": [
+        "4 + y = 7",
+        "y = 3"
+       ],
+       "why": [
+        "Put x = 4 into the first fact."
+       ]
+      },
+      {
+       "do": "Check the other fact.",
+       "lines": [
+        "2 × 4 + 3 = 11 ✓"
+       ],
+       "why": [
+        "Both facts must be true. (x, y) = (4, 3)."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -31382,16 +33413,40 @@
       "If the area is 25 square metres, then x² = 25. Which number times itself gives 25? 5 × 5 = 25, so x = 5.",
       "An equation in which x² is the highest power of the hidden number (there is x × x, but no x × x × x or more) is called a quadratic equation. A number that makes the equation true is called a root of the equation."
      ],
-     "example": [
-      "x² = 25",
-      "Try 4: 4 × 4 = 16. Too small.",
-      "Try 5: 5 × 5 = 25. Yes.",
-      "So 5 is a root: the side is 5 m."
-     ],
      "check": {
       "question": "A square has area 36 square metres. How long is its side?",
       "answer": "6 m (6 × 6 = 36)"
-     }
+     },
+     "ask": "A square garden has area 25 m²: x² = 25. Find the side.",
+     "steps": [
+      {
+       "do": "Try 4.",
+       "lines": [
+        "4 × 4 = 16: too small"
+       ],
+       "why": [
+        "x² means x times x, not x times 2."
+       ]
+      },
+      {
+       "do": "Try 5.",
+       "lines": [
+        "5 × 5 = 25 ✓"
+       ],
+       "why": [
+        "5 times itself is exactly 25."
+       ]
+      },
+      {
+       "do": "Answer.",
+       "lines": [
+        "The side is 5 m"
+       ],
+       "why": [
+        "A length must be positive, so we keep 5."
+       ]
+      }
+     ]
     },
     {
      "title": "Two roots, but only one makes sense",
@@ -31401,16 +33456,40 @@
       "A quadratic equation usually has two roots. Here the other one is −5, a number below zero: (−5) × (−3) is also 15. You will learn later why two negative numbers multiply to a positive one.",
       "But a plot cannot be −5 metres wide. So we throw that root away and keep 3. Always ask: does this root make sense in the story?"
      ],
-     "example": [
-      "x(x + 2) = 15",
-      "x = 3: 3 × (3 + 2) = 3 × 5 = 15. Works.",
-      "x = −5: (−5) × (−5 + 2) = (−5) × (−3) = 15. Also works.",
-      "A width cannot be negative, so the width is 3 m and the length is 5 m."
-     ],
      "check": {
       "question": "The roots of an equation for a rope's length are 4 and −9. Which one is the length?",
       "answer": "4 (a length cannot be negative)"
-     }
+     },
+     "ask": "A field has width x and length x + 2, with area 15: x(x + 2) = 15. Find its size.",
+     "steps": [
+      {
+       "do": "Try x = 3.",
+       "lines": [
+        "3 × 5 = 15 ✓"
+       ],
+       "why": [
+        "If x is 3, the length x + 2 is 5."
+       ]
+      },
+      {
+       "do": "Try x = −5.",
+       "lines": [
+        "(−5) × (−3) = 15 ✓"
+       ],
+       "why": [
+        "Minus times minus is plus, so this also works in the equation."
+       ]
+      },
+      {
+       "do": "Choose the one that fits.",
+       "lines": [
+        "Width 3 m, length 5 m"
+       ],
+       "why": [
+        "A width cannot be negative, so x = −5 is thrown away."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -31643,16 +33722,40 @@
       "Speed tells how far something goes in one hour. A bigger speed means it goes farther in the same time.",
       "If the bus goes 40 km in each hour, then in 2 hours it goes 40 + 40 = 80 km. So distance = speed × time."
      ],
-     "example": [
-      "Speed: 40 km in each hour.",
-      "In 1 hour: 40 km.",
-      "In 2 hours: 40 × 2 = 80 km.",
-      "In 3 hours: 40 × 3 = 120 km."
-     ],
      "check": {
       "question": "A cyclist rides at 10 km per hour. How far does she ride in 2 hours?",
       "answer": "20 km"
-     }
+     },
+     "ask": "A bus goes 40 km each hour. How far does it go in 1, 2 and 3 hours?",
+     "steps": [
+      {
+       "do": "1 hour.",
+       "lines": [
+        "40 km"
+       ],
+       "why": [
+        "Speed tells how far in one hour."
+       ]
+      },
+      {
+       "do": "2 hours.",
+       "lines": [
+        "40 × 2 = 80 km"
+       ],
+       "why": [
+        "Each hour adds another 40 km."
+       ]
+      },
+      {
+       "do": "3 hours.",
+       "lines": [
+        "40 × 3 = 120 km"
+       ],
+       "why": [
+        "Distance = speed × time."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -31885,16 +33988,40 @@
       "Now you have 6 laddus and 2 friends. You give one to each friend, again and again, until none are left. Each friend gets 3.",
       "We write this as 6 ÷ 2 = 3. The sign ÷ means 'shared equally'. We say '6 shared by 2 is 3'."
      ],
-     "example": [
-      "8 sweets, 2 children.",
-      "Give one each, again and again: 2, 4, 6, 8 sweets given.",
-      "That was 4 rounds, so each child gets 4.",
-      "8 ÷ 2 = 4"
-     ],
      "check": {
       "question": "4 bananas are shared equally by 2 children. How many does each child get?",
       "answer": "2 (4 ÷ 2 = 2)"
-     }
+     },
+     "ask": "Share 8 sweets between 2 children.",
+     "steps": [
+      {
+       "do": "Give one each, again and again.",
+       "lines": [
+        "2, 4, 6, 8 given"
+       ],
+       "why": [
+        "Each round gives 2 sweets away."
+       ]
+      },
+      {
+       "do": "Count the rounds.",
+       "lines": [
+        "4 rounds"
+       ],
+       "why": [
+        "Each child got one sweet every round."
+       ]
+      },
+      {
+       "do": "Write it.",
+       "lines": [
+        "8 ÷ 2 = 4"
+       ],
+       "why": [
+        "÷ means share equally."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -32451,16 +34578,40 @@
       "k is like an empty box. For each game you put that game's number in the box. If you may take 1, 2 or 3, then k is 3.",
       "k + 1 means 'one more than that number'. A number written right in front of a bracket means multiply: 2(k + 1) means 2 × (k + 1)."
      ],
-     "example": [
-      "The game lets you take 1, 2 or 3 counters, so k = 3.",
-      "k + 1 = 3 + 1 = 4",
-      "2(k + 1) = 2 × 4 = 8",
-      "The safe numbers are 0, 4, 8, 12 ..."
-     ],
      "check": {
       "question": "In a game you may take 1 or 2 counters, so k = 2. What is k + 1?",
       "answer": "3"
-     }
+     },
+     "ask": "You may take 1, 2 or 3 counters, so k = 3. Find the safe numbers.",
+     "steps": [
+      {
+       "do": "Work out k + 1.",
+       "lines": [
+        "3 + 1 = 4"
+       ],
+       "why": [
+        "k is the most you may take."
+       ]
+      },
+      {
+       "do": "Twice that.",
+       "lines": [
+        "2(k + 1) = 2 × 4 = 8"
+       ],
+       "why": [
+        "The bracket is worked out first."
+       ]
+      },
+      {
+       "do": "The safe numbers.",
+       "lines": [
+        "0, 4, 8, 12, …"
+       ],
+       "why": [
+        "They are the multiples of k + 1. Leave your friend one of these and you can always win."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -32694,15 +34845,40 @@
       "So there are 3 + 2 + 1 = 6 pairs. The rule: to choose 2 things from a group, start one less than the group's size and add down to 1.",
       "This is what the rectangle question uses. A rectangle has a left edge and a right edge, so it needs 2 of the upright lines. With 7 upright lines there are 6 + 5 + 4 + 3 + 2 + 1 = 21 ways to pick them. A rectangle also has a top edge and a bottom edge, so it needs 2 of the lines across as well. Every way of picking the upright lines can go with every way of picking the lines across, so we multiply the two numbers."
      ],
-     "example": [
-      "Choose 2 lines from 4 lines: 3 + 2 + 1 = 6 ways.",
-      "Choose 2 lines from 7 lines: 6 + 5 + 4 + 3 + 2 + 1 = 21 ways.",
-      "A grid with 7 upright lines and 4 lines across: 21 ways for the upright pair × 6 ways for the pair across = 126 rectangles."
-     ],
      "check": {
       "question": "Three friends shake hands, each pair once. How many handshakes?",
       "answer": "3 (2 + 1 = 3)"
-     }
+     },
+     "ask": "How many rectangles are in a grid of 7 upright lines and 4 lines across?",
+     "steps": [
+      {
+       "do": "Pairs from 4 lines.",
+       "lines": [
+        "3 + 2 + 1 = 6"
+       ],
+       "why": [
+        "The first line pairs with 3 others, the next with 2 new ones, then 1."
+       ]
+      },
+      {
+       "do": "Pairs from 7 lines.",
+       "lines": [
+        "6 + 5 + 4 + 3 + 2 + 1 = 21"
+       ],
+       "why": [
+        "Same pattern, starting from 6."
+       ]
+      },
+      {
+       "do": "Multiply.",
+       "lines": [
+        "21 × 6 = 126 rectangles"
+       ],
+       "why": [
+        "A rectangle needs one upright pair and one pair across. Every choice of one with the other makes a new rectangle."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -35746,16 +37922,49 @@
       "Σ is the Greek capital letter S, called sigma. S for Sum. It is an instruction: add up everything in that column. Σf means 'add all the frequencies'. That gives the number of values.",
       "fx means f × x: the value, counted as many times as it occurs. Σfx means 'work out f × x in each row, then add them all'. That gives the total of all the values. So mean = Σfx ÷ Σf is simply total ÷ how many."
      ],
-     "example": [
-      "x: 1, 2, 3 with f: 2, 1, 2 (the list is 1, 1, 2, 3, 3)",
-      "Σf = 2 + 1 + 2 = 5",
-      "fx: 2 × 1 = 2, 1 × 2 = 2, 2 × 3 = 6, so Σfx = 2 + 2 + 6 = 10",
-      "Mean = Σfx ÷ Σf = 10 ÷ 5 = 2"
-     ],
      "check": {
       "question": "The frequencies in a table are 3, 4 and 5. What is Σf?",
       "answer": "12"
-     }
+     },
+     "ask": "x is 1, 2, 3 with f = 2, 1, 2. Find the mean.",
+     "steps": [
+      {
+       "do": "Count the values.",
+       "lines": [
+        "Σf = 2 + 1 + 2 = 5"
+       ],
+       "why": [
+        "f says how many times each x appears. Σ means add them all up."
+       ]
+      },
+      {
+       "do": "Multiply each x by its f.",
+       "lines": [
+        "1 × 2 = 2, 2 × 1 = 2, 3 × 2 = 6"
+       ],
+       "why": [
+        "That is the total for each value."
+       ]
+      },
+      {
+       "do": "Add those totals.",
+       "lines": [
+        "Σfx = 2 + 2 + 6 = 10"
+       ],
+       "why": [
+        "This is the sum of the whole list 1, 1, 2, 3, 3."
+       ]
+      },
+      {
+       "do": "Divide.",
+       "lines": [
+        "10 ÷ 5 = 2"
+       ],
+       "why": [
+        "Mean = total ÷ how many."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -36522,16 +38731,40 @@
       "That equal share, 4, is called the mean. Mean = the total of all the values ÷ how many values there are.",
       "An average is one number that stands for a whole set of numbers. The mean is one kind of average. The median (the middle value) and the mode (the most common value) are two other kinds. They can give different answers for the same data."
      ],
-     "example": [
-      "Values: 2, 4, 6",
-      "Total: 2 + 4 + 6 = 12",
-      "Number of values: 3",
-      "Mean = 12 ÷ 3 = 4"
-     ],
      "check": {
       "question": "What is the mean of 5 and 7?",
       "answer": "6 (12 ÷ 2)"
-     }
+     },
+     "ask": "Find the mean of 2, 4, 6.",
+     "steps": [
+      {
+       "do": "Add them.",
+       "lines": [
+        "2 + 4 + 6 = 12"
+       ],
+       "why": [
+        "First find the total of all the values."
+       ]
+      },
+      {
+       "do": "Count them.",
+       "lines": [
+        "3 values"
+       ],
+       "why": [
+        "How many numbers there are."
+       ]
+      },
+      {
+       "do": "Divide.",
+       "lines": [
+        "12 ÷ 3 = 4"
+       ],
+       "why": [
+        "The mean shares the total out equally."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -37043,17 +39276,41 @@
       "So a full turn is 360°. Half a turn is 180°. A quarter turn, the corner of a book, is 90°.",
       "A slice of a pie chart is called a sector. Its pointed corner sits at the centre of the circle. The size of that corner, in degrees, is the sector's angle. All the slices together go once round the centre, so their angles add up to 360°."
      ],
-     "example": [
-      "A quarter of a class likes mangoes.",
-      "Their slice is a quarter of the circle.",
-      "1/4 of 360° = 360° ÷ 4 = 90°",
-      "The mango sector has an angle of 90°."
-     ],
      "check": {
       "question": "Half the class comes by bus. What is the angle of the bus sector?",
       "answer": "180°"
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "A quarter of a class likes mangoes. What angle is their slice of the pie chart?",
+     "steps": [
+      {
+       "do": "The whole circle.",
+       "lines": [
+        "360°"
+       ],
+       "why": [
+        "A pie chart uses a full turn for the whole class."
+       ]
+      },
+      {
+       "do": "Take a quarter.",
+       "lines": [
+        "360° ÷ 4 = 90°"
+       ],
+       "why": [
+        "A quarter of the class gets a quarter of the turn."
+       ]
+      },
+      {
+       "do": "Answer.",
+       "lines": [
+        "The mango slice is 90°"
+       ],
+       "why": [
+        "A right angle at the centre."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -37911,15 +40168,45 @@
       "Such a stretch of numbers is written with brackets. [−1, 1] means all numbers from −1 to 1, with both ends included. A round bracket leaves the end out: (0, π) means all numbers between 0 and π, but not 0 or π themselves.",
       "So 'sin⁻¹ has domain [−1, 1] and range [−π/2, π/2]' means: put in any number from −1 to 1, and the answer is an angle from −π/2 to π/2 (from −90° to 90°)."
      ],
-     "example": [
-      "sin⁻¹(1/2): 1/2 lies in [−1, 1], so it is allowed. The answer π/6 lies in [−π/2, π/2].",
-      "sin⁻¹(2): 2 is outside [−1, 1], so it is not defined.",
-      "5 is in [0, 5] but not in [0, 5)."
-     ],
      "check": {
       "question": "Is the number 1 inside the interval (0, 1)?",
       "answer": "No. The round bracket leaves 1 out."
-     }
+     },
+     "ask": "Decide whether sin⁻¹(1/2) and sin⁻¹(2) exist, and whether 5 is in [0, 5).",
+     "steps": [
+      {
+       "do": "sin⁻¹(1/2)",
+       "lines": [
+        "1/2 is in [−1, 1]: allowed",
+        "Answer π/6, in [−π/2, π/2]"
+       ],
+       "why": [
+        "The sine of any angle is between −1 and 1, so only those numbers can go into sin⁻¹.",
+        "sin⁻¹ always answers with an angle between −π/2 and π/2, so there is just one answer."
+       ]
+      },
+      {
+       "do": "sin⁻¹(2)",
+       "lines": [
+        "2 is outside [−1, 1]",
+        "Not defined"
+       ],
+       "why": [
+        "No angle has a sine of 2, so there is nothing to give back."
+       ]
+      },
+      {
+       "do": "Is 5 in [0, 5)?",
+       "lines": [
+        "[ includes 0",
+        "5 is not in [0, 5)"
+       ],
+       "why": [
+        "A square bracket includes its end number. A round bracket leaves it out. So [0, 5) stops just before 5."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -38153,16 +40440,46 @@
       "Definition: cos θ is the x-coordinate of P and sin θ is the y-coordinate of P. And tan θ = sin θ ÷ cos θ.",
       "For an acute angle this is the old definition: drop a line from P to the x-axis and you get a right triangle with hypotenuse 1, adjacent side x and opposite side y. So cos θ = x ÷ 1 and sin θ = y ÷ 1. But the new definition works for every angle, even negative ones."
      ],
-     "example": [
-      "θ = 90°: P is at the top of the circle, (0, 1). So cos 90° = 0 and sin 90° = 1.",
-      "θ = 180°: P is at (−1, 0). So cos 180° = −1 and sin 180° = 0.",
-      "θ = 270°: P is at (0, −1). So cos 270° = 0 and sin 270° = −1."
-     ],
      "check": {
       "question": "After a full turn, θ = 360°, the point P is back at (1, 0). What is sin 360°?",
       "answer": "0 (the y-coordinate of P)"
      },
-     "picture": "unit-circle"
+     "picture": "unit-circle",
+     "ask": "Use the point P on the circle of radius 1 to find sin and cos of 90°, 180° and 270°.",
+     "steps": [
+      {
+       "do": "θ = 90°",
+       "lines": [
+        "P = (0, 1)",
+        "cos 90° = 0, sin 90° = 1"
+       ],
+       "why": [
+        "P goes round a circle of radius 1. cos θ is how far across P is; sin θ is how far up.",
+        "A quarter turn puts P at the very top."
+       ]
+      },
+      {
+       "do": "θ = 180°",
+       "lines": [
+        "P = (−1, 0)",
+        "cos 180° = −1, sin 180° = 0"
+       ],
+       "why": [
+        "A half turn puts P on the far left: across −1, up 0."
+       ]
+      },
+      {
+       "do": "θ = 270°",
+       "lines": [
+        "P = (0, −1)",
+        "cos 270° = 0, sin 270° = −1"
+       ],
+       "why": [
+        "Three quarter turns put P at the bottom."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Four quadrants decide the sign",
@@ -38171,17 +40488,52 @@
       "The signs come from the coordinates of P. In quadrant I, x and y are both positive, so sin and cos are both positive. In II, x is negative and y positive: cos is negative, sin positive. In III both are negative (so tan, their quotient, is positive). In IV, x is positive and y negative: cos positive, sin negative.",
       "The size comes from the reference angle: the acute angle between the line OP and the x-axis (O is the origin, the centre of the circle). P sits at the same height and the same distance sideways as the point for the reference angle, only perhaps on the other side."
      ],
-     "example": [
-      "θ = 150° is in quadrant II. Its reference angle is 180° − 150° = 30°.",
-      "For 30°, the point is (√3/2, 1/2). For 150° it is the mirror image: (−√3/2, 1/2).",
-      "So sin 150° = 1/2 and cos 150° = −√3/2.",
-      "This also shows sin(180° − θ) = sin θ."
-     ],
      "check": {
       "question": "The angle 100° is in quadrant II. Is cos 100° positive or negative?",
       "answer": "Negative (the x-coordinate is negative there)"
      },
-     "picture": "unit-circle"
+     "picture": "unit-circle",
+     "ask": "Find sin 150° and cos 150°.",
+     "steps": [
+      {
+       "do": "Which quarter?",
+       "lines": [
+        "150° is in quadrant II"
+       ],
+       "why": [
+        "Between 90° and 180°: top left. There across is negative and up is positive."
+       ]
+      },
+      {
+       "do": "The reference angle.",
+       "lines": [
+        "180° − 150° = 30°"
+       ],
+       "why": [
+        "How far the line is from the x-axis. It tells the size of sin and cos."
+       ]
+      },
+      {
+       "do": "Mirror the 30° point.",
+       "lines": [
+        "30°: (√3/2, 1/2)",
+        "150°: (−√3/2, 1/2)"
+       ],
+       "why": [
+        "150° is 30° reflected across the y-axis, so only the across number changes sign."
+       ]
+      },
+      {
+       "do": "Read off sin and cos.",
+       "lines": [
+        "sin 150° = 1/2",
+        "cos 150° = −√3/2"
+       ],
+       "why": [
+        "This shows sin(180° − θ) = sin θ."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -38411,16 +40763,43 @@
       "A turning thing can keep going. One full turn is 360°, two full turns are 720°, and 450° is one full turn and then 90° more. The ray for 450° ends in the same place as the ray for 90°.",
       "So angles can be any number: big, small or negative."
      ],
-     "example": [
-      "450° = 360° + 90°: one full turn, then a quarter turn.",
-      "−720° = −360° − 360°: two full turns clockwise.",
-      "−90° and 270° end in the same place, pointing straight down."
-     ],
      "check": {
       "question": "A wheel turns −360°. Where does a mark on it end up?",
       "answer": "Exactly where it started (one full turn clockwise)"
      },
-     "picture": "angle"
+     "picture": "angle",
+     "ask": "Describe 450°, −720° and −90°.",
+     "steps": [
+      {
+       "do": "450°",
+       "lines": [
+        "360° + 90°"
+       ],
+       "why": [
+        "One full turn, then a quarter turn more. It ends where 90° ends."
+       ]
+      },
+      {
+       "do": "−720°",
+       "lines": [
+        "−360° − 360°"
+       ],
+       "why": [
+        "A minus sign means turning clockwise. Two full turns that way."
+       ]
+      },
+      {
+       "do": "−90° and 270°",
+       "lines": [
+        "Same end position",
+        "Pointing straight down"
+       ],
+       "why": [
+        "A quarter turn clockwise ends where three quarter turns anticlockwise end."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
