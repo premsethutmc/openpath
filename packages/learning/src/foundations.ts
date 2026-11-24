@@ -11,6 +11,7 @@
  */
 import data from "../../../content/learning/foundations.v1.json";
 
+/** The pictures an idea can ask for. Each is a scene description for the scene engine (foundation-pictures.ts). */
 export const PICTURES = ["right-triangle", "unit-circle", "angle", "circle-parts", "number-line", "coordinate-plane", "tangent-slope", "area-under-curve", "fraction-bar", "matrix-grid", "vector-arrow", "venn"] as const;
 export type Picture = (typeof PICTURES)[number];
 export interface FoundationScreen { title: string; text: string[]; example?: string[]; check?: { question: string; answer: string }; picture?: Picture | null }

@@ -49,8 +49,9 @@ test("every start-here idea has practice a child can check: four choices, one ri
   assert.ok(n >= 1700);
 });
 
-test("picture tasks: every kind asks about parts its picture has, and a new visit gets new tasks", async () => {
-  const { describe, partsOf, pictureTasks, rightTap } = await import("../../../packages/learning/src/foundation-pictures");
+test("picture tasks are scenes of the engine: every one passes its check, can be reached, and a new visit gets new ones", async () => {
+  const { exploreScene, pictureScene, pictureTasks } = await import("../../../packages/learning/src/foundation-pictures");
+  const E = await import("../../../packages/learning/src/scene");
   for (const kind of PICTURES) {
     const seen = new Set<string>();
     for (let seed = 1; seed <= 40; seed++) {
@@ -58,18 +59,47 @@ test("picture tasks: every kind asks about parts its picture has, and a new visi
       assert.ok(tasks.length >= 2, kind);
       assert.deepEqual(pictureTasks(kind, seed), tasks, `${kind}: same seed, same tasks`);
       for (const t of tasks) {
-        const parts = partsOf(t.scene);
-        if (t.count !== undefined) assert.ok(t.count >= 1 && t.count < parts.length && rightTap(t, "", t.count) && !rightTap(t, "", t.count + 1), kind);
-        else { assert.ok(t.answer.length >= 1 && t.answer.every((a) => parts.includes(a)), `${kind}: ${t.prompt}`); assert.ok(parts.some((p) => !rightTap(t, p)), kind); }
-        for (const p of parts) assert.ok(describe(t.scene, p)?.length > 5, `${kind}: ${p}`);
-        assert.ok(!/undefined|NaN/.test(t.prompt + t.hint), kind);
+        assert.deepEqual(E.check(t), [], `${kind}: ${t.prompt}`);
+        assert.ok(E.draw(t, E.initial(t)).length > 0 && !/undefined|NaN/.test(t.prompt + t.success + E.describe(t)), kind);
+        if (t.kind === "pick") {
+          // a wrong tap is named back, never the answer; the right tap reaches the goal
+          const parts = (await import("../../../packages/learning/src/scene-figures")).pickParts(t.figure);
+          const wrong = parts.findIndex((p) => !t.ask.includes(p)) + 1, right = parts.indexOf(t.ask[0]) + 1;
+          assert.ok(wrong > 0 && E.nudge(t, { part: wrong })?.startsWith("That is ") && !E.met(t, { part: wrong }) && E.met(t, { part: right }), `${kind}: ${t.prompt}`);
+        }
       }
       seen.add(JSON.stringify(tasks));
     }
     assert.ok(seen.size >= 2, `${kind} never changes`);
+    const { scene, state } = pictureScene(kind);
+    assert.ok(E.draw(scene, { ...E.initial(scene), ...state }).length > 3, `${kind}: lesson picture`);
   }
-  const tri = pictureTasks("right-triangle", 7);
-  for (const t of tri) if (t.scene.kind === "right-triangle" && t.prompt.includes("opposite")) assert.deepEqual(t.answer, [t.scene.thetaAt === "left" ? "right" : "bottom"]);
+  const explore = exploreScene("right-triangle", 3)!;
+  assert.deepEqual(E.check(explore), []);
+  assert.equal(exploreScene("venn", 3), null);
+});
+
+test("a touch on a figure lands on the part under it (the side, the point, the entry), and on nothing when far away", async () => {
+  const { pickAt, pickParts } = await import("../../../packages/learning/src/scene-figures");
+  const at = (f: Parameters<typeof pickAt>[0], x: number, y: number) => pickParts(f)[pickAt(f, x, y) - 1] ?? null;
+  const tri = { of: "right-triangle", thetaAt: "left" } as const;
+  assert.equal(at(tri, 170, 182), "bottom"); assert.equal(at(tri, 282, 110), "right"); assert.equal(at(tri, 170, 113), "slant"); assert.equal(at(tri, 120, 60), null);
+  assert.equal(at({ of: "circle" }, 170, 110), "centre"); assert.equal(at({ of: "circle" }, 120, 112), "diameter"); assert.equal(at({ of: "circle" }, 128, 186), "arc");
+  assert.equal(at({ of: "venn" }, 100, 110), "A"); assert.equal(at({ of: "venn" }, 170, 110), "AB"); assert.equal(at({ of: "venn" }, 40, 190), "out");
+  assert.equal(at({ of: "plane" }, 170 - 3 * 22, 110 - 22), "p:-3,1"); assert.equal(at({ of: "matrix", values: [[1, 2, 3], [4, 5, 6]] }, 170 - 56, 110 + 23), "e:2,1");
+});
+
+test("one picture system: pictures are drawn by the scene engine, not by new components", async () => {
+  const { readdirSync, readFileSync, statSync } = await import("node:fs");
+  const root = new URL("../", import.meta.url).pathname;
+  // the files that draw today: the engine's player, and the older question-figure and app-chrome drawings. A new picture
+  // or interaction is a scene description (packages/learning/src/scene.ts), not a new file here: do not add to this list.
+  const allowed = new Set(JSON.parse(readFileSync(new URL("./svg-allowed.json", import.meta.url), "utf8")) as string[]);
+  const found: string[] = [];
+  const walk = (dir: string) => { for (const n of readdirSync(dir)) { const p = `${dir}/${n}`; if (statSync(p).isDirectory()) walk(p); else if (/\.tsx$/.test(n) && !/\.test\.tsx$/.test(n) && /<svg[\s>]/.test(readFileSync(p, "utf8"))) found.push(p.slice(root.length)); } };
+  walk(root.replace(/\/$/, ""));
+  assert.deepEqual(found.filter((f) => !allowed.has(f)), [], "these files draw their own pictures: describe the picture as a scene for the scene engine instead (see CLAUDE.md)");
+  assert.ok(!found.includes("year/StartHere.tsx") && !found.includes("year/PictureTasks.tsx"));
 });
 
 test("a repeat visit gets the next round of questions, round and round", async () => {

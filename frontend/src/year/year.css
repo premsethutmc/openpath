@@ -326,55 +326,6 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .kid-focus button { justify-self: start; }
 
 /* scene@1: the interactive scene player (Scene.tsx). The drawing sits on white, like every figure, so its colours are fixed. */
-.scene { margin: 10px 0 14px; padding: 0; max-width: 460px; }
-.scene svg { width: 100%; height: auto; display: block; background: #fff; border-radius: 14px; }
-.scene svg.scene-drag { touch-action: none; cursor: grab; }
-.scene .sc-axis { stroke: #9aa5b8; stroke-width: 1; }
-.scene .sc-curve { fill: none; stroke: #1f2a37; stroke-width: 2.2; stroke-linejoin: round; }
-.scene .sc-strip { fill: #d6e4ff; stroke: #2f5fd0; stroke-width: 0.6; }
-.scene .sc-fill { fill: #d6e4ff; stroke: none; }
-.scene .sc-edge { stroke: #2f5fd0; stroke-width: 1.5; stroke-dasharray: 4 4; }
-.scene .sc-accent { stroke: #2f5fd0; stroke-width: 3; stroke-linecap: round; }
-.scene .sc-handle { fill: #2f5fd0; stroke: #fff; stroke-width: 3; }
-.scene .sc-up { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
-.scene .sc-down { stroke: #b4532a; stroke-width: 4; stroke-linecap: round; }
-.scene .sc-flat { stroke: #5f6b84; stroke-width: 4; stroke-linecap: round; }
-.scene .sc-target { fill: #b4532a; stroke: #fff; stroke-width: 2; }
-.scene .sc-label { fill: #5f6b84; font-size: 12px; }
-.scene .sc-shape { fill: #f4f1ff; stroke: #1f2a37; stroke-width: 2.2; stroke-linejoin: round; }
-.scene .sc-wedge0 { fill: #d6e4ff; stroke: #2f5fd0; stroke-width: 1; }
-.scene .sc-wedge1 { fill: #c8efe2; stroke: #0f7a5d; stroke-width: 1; }
-.scene .sc-wedge2 { fill: #f8d5c4; stroke: #b4532a; stroke-width: 1; }
-.scene .sc-value { fill: #1f2a37; font-size: 13px; font-weight: 700; }
-.scene .sc-pivot { fill: #2f5fd0; stroke: #fff; stroke-width: 2; }
-.scene .sc-grid { stroke: #e3e8f0; stroke-width: 1; }
-.scene .sc-cell { fill: #7fa6f5; stroke: #2f5fd0; stroke-width: 1; }
-.scene .sc-fraclabel { fill: #1f2a37; font-size: 15px; font-weight: 700; }
-.scene .sc-guide { stroke: #0f7a5d; stroke-width: 2; stroke-dasharray: 5 4; }
-.scene .sc-outline { fill: none; stroke: #2f5fd0; stroke-width: 3; stroke-linejoin: round; }
-.scene .sc-curve2 { fill: none; stroke: #2f5fd0; stroke-width: 2.6; }
-.scene .sc-card { fill: #fff; stroke: #2f5fd0; stroke-width: 2.5; }
-.scene .sc-cardtext { fill: #1f2a37; font-size: 20px; font-weight: 700; }
-.scene .sc-digit { fill: #1f2a37; font-size: 30px; font-weight: 700; }
-.scene .sc-comma { fill: #2f5fd0; font-size: 34px; font-weight: 700; }
-.scene .sc-blank { fill: #fff; stroke: #a9c4f7; stroke-width: 1; }
-.scene .sc-open { fill: #fff; stroke: #1f2a37; stroke-width: 2; }
-.scene .sc-ghost { fill: none; stroke: #9aa5b8; stroke-width: 1.5; stroke-dasharray: 4 4; }
-.scene .sc-moved { fill: #f8d5c4; fill-opacity: 0.75; stroke: #b4532a; stroke-width: 2; stroke-linejoin: round; }
-.scene .sc-arrow0 { stroke: #2f5fd0; stroke-width: 4; stroke-linecap: round; }
-.scene .sc-arrow1 { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
-.scene .sc-handle0 { fill: #2f5fd0; stroke: #fff; stroke-width: 3; }
-.scene .sc-handle1 { fill: #0f7a5d; stroke: #fff; stroke-width: 3; }
-.scene-controls.many > summary { cursor: pointer; font-weight: 700; color: var(--brand, #2563eb); padding: 10px 0; min-height: 44px; }
-.scene-controls.many label span { min-width: 9.5em; font-size: 0.9rem; }
-.scene-controls label { display: flex; align-items: center; gap: 12px; margin: 8px 0 0; font-weight: 600; }
-.scene-controls label span { min-width: 3.2em; }
-.scene-controls input { flex: 1; min-height: 44px; accent-color: var(--brand, #2563eb); }
-.scene-controls :focus-visible { outline: 3px solid var(--brand, #2563eb); outline-offset: 3px; }
-.scene-readout { margin: 6px 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
-.scene-goal { margin: 6px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft, #eaf1ff); color: var(--brand-text, #1e40af); }
-.scene-goal.done { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
-@media print { .scene-controls { display: none; } }
 
 /* recipe@1: the lesson recipe player (Recipe.tsx) */
 .explore-open { margin-top: 12px; min-height: 44px; }
@@ -449,13 +400,11 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .slip-choices { display: grid; gap: 8px; }
 .slip-choices button { text-align: left; white-space: normal; font-weight: 600; }
 /* nudge@1 */
-.scene-nudge { margin: 6px 0 0; font-size: 0.95rem; color: #9a5b00; }
 
 /* places@1: the place-value chart to fill; one row, each box as wide as its seats, its name underneath */
 .qcard .kid-fields.kid-places { display: flex; flex-wrap: nowrap; gap: 6px; align-items: flex-start; }
 .qcard .kid-places label.kid-unit { flex-direction: column; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; flex: 0 1 auto; }
 .qcard .kid-places .kid-unit input { flex: none; width: var(--seats); max-width: 100%; text-align: center; letter-spacing: 0.2em; font-variant-numeric: tabular-nums; padding: 12px 4px; font-size: 1.3rem; }
-.scene-first { margin-top: 6px; }
 
 /* one-help@1: the step help sits inside the working */
 .coach-help { min-height: 44px; }
@@ -488,9 +437,6 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .scribble-modes .kid-tap[aria-checked="true"] { border-color: var(--brand, #2563eb); background: var(--brand-soft, #eaf1ff); }
 
 /* tried@1 */
-.scene-tried { margin: 6px 0 0; }
-.scene-tried p { margin: 0 0 2px; }
-.scene-tried ul { margin: 0; padding-left: 20px; display: grid; gap: 2px; font-weight: 700; }
 
 /* clips@1 */
 .coach-clip { min-height: 44px; justify-self: start; }

@@ -15,3 +15,16 @@ Several sessions (Claude and Codex) work on this repository at the same time. To
   typecheck fails for everyone.
 - Screens that fold sections ("School work", "Skill by skill") must keep the browser tests in `frontend/e2e/` opening
   those folds; run or update the tests that touch a screen you change.
+
+## One engine for pictures and interactions
+
+Before building anything a learner sees or moves, find the engine that already owns it and say what it lacks. Extend the
+engine; do not build beside it.
+
+- A teaching picture, or anything a learner taps, drags or slides, is a **scene**: a description for the scene engine
+  (`packages/learning/src/scene.ts`, figures in `scene-figures.ts`), drawn by its one player (`frontend/src/year/Scene.tsx`).
+  A new need (a new figure, a new way to answer on a picture) is a new scene kind or figure in the engine, with its
+  checks, so every lesson can use it. It is never a new drawing component.
+- `frontend/src/learning/foundations.test.ts` fails when a new file draws its own `<svg>`. Do not add to
+  `frontend/src/learning/svg-allowed.json` to get past it; that list is the older drawings still to be moved into the engine.
+- The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
