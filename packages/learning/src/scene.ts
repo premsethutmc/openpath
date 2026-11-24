@@ -10,6 +10,9 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@9 adds a `pick` kind (a labelled figure whose parts the learner taps: the side opposite θ, a point of a grid, an
+ * entry of a matrix, a part of a Venn diagram; see scene-figures.ts) and a `ratios` kind (a right triangle whose angle and
+ * size are set; sin, cos and tan follow the angle only).
  * scene@8 adds a `bars` kind (a bar chart with a reading line the learner slides up to a bar's top).
  * scene@7 adds an `order` kind (number cards the learner arranges, smallest on the left).
  * scene@6 adds a `commas` kind (the digits of a whole number, with commas the learner places).
@@ -23,6 +26,9 @@
  * scene@2 adds: curves beyond polynomials (`terms`: powers, sine, cosine, exponential, natural logarithm, with exact slopes
  * and areas), a `triangle` kind (two angles set, the third follows), and a line that turns about a fixed point (`through`).
  */
+
+import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, type PickFigure } from "./scene-figures";
+export type { PickFigure } from "./scene-figures";
 
 /** A polynomial as its coefficients, lowest power first: 5x² is [0, 0, 5]. */
 export type Poly = number[];
@@ -102,7 +108,12 @@ export interface OrderScene extends Base { kind: "order"; values: number[]; ask?
  *  and how far the taller rises above it is their difference. `scale` is the gap between numbered lines of the scale;
  *  `unit` is the grid the line moves on (default 1). */
 export interface BarsScene extends Base { kind: "bars"; labels: string[]; values: number[]; scale?: number; unit?: number; ask: { read: number } | { more: [number, number] } }
-export type Scene = StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
+/** A labelled figure whose parts can be tapped. `ask` names the right part or parts; a wrong tap is named back with `hint`.
+ *  `labels` writes every part's name on the figure (a picture to read, in a lesson). `part` is the part chosen, from 1. */
+export interface PickScene extends Base { kind: "pick"; figure: PickFigure; ask: string[]; hint: string; labels?: boolean }
+/** A right triangle with θ at the left: the angle (whole steps of 5°) and the hypotenuse are set; the three ratios follow. */
+export interface RatiosScene extends Base { kind: "ratios" }
+export type Scene = PickScene | RatiosScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -186,6 +197,8 @@ function tri(state: SceneState) { const a = state.a, b = Math.min(state.b, 170 -
 
 /** The controls of a scene: what can be set, on what grid, and where it starts. */
 export function controls(s: Scene): Control[] {
+  if (s.kind === "pick") return [{ key: "part", label: "Which part", min: 0, max: pickParts(s.figure).length, step: 1, start: 0 }];
+  if (s.kind === "ratios") return [{ key: "angle", label: "Angle θ", min: 15, max: 70, step: 5, start: s.goal.measure === "angle" && s.goal.equals === 40 ? 25 : 40 }, { key: "size", label: "Size", min: 5, max: 10, step: 1, start: s.goal.measure === "size" && s.goal.equals === 8 ? 6 : 8 }];
   if (s.kind === "strips") return [{ key: "n", label: "Strips", min: 1, max: s.max ?? 100, step: 1, start: Math.min(4, s.max ?? 100) }];
   if (s.kind === "triangle") {
     const near = Math.abs(s.angles[0] - 60) + Math.abs(s.angles[1] - 60) < 12;
@@ -274,6 +287,8 @@ function joinOf(s: JoinScene, state: SceneState) {
 
 /** The numbers a scene can be judged by, for a state. Goals name one of these. */
 export function measures(s: Scene, state: SceneState): Record<string, number> {
+  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return { part: state.part, wrong: id !== undefined && s.ask.includes(id) ? 0 : 1 }; }
+  if (s.kind === "ratios") { const r = ratiosOf(state.angle, state.size); return { angle: state.angle, size: state.size, sin: r6(r.sin), cos: r6(r.cos), tan: r6(r.tan) }; }
   if (s.kind === "bars") {
     const y = state.y, more = "more" in s.ask ? s.values[s.ask.more[0]] - y : 0;
     return { y, miss: Math.abs(y - s.values[barsAim(s)]), above: more };
@@ -314,7 +329,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -342,6 +357,8 @@ export function triedLine(s: Scene, rows: number): string | null {
   return `${rows} rows: ${each} in each, ${over === 0 ? "nobody left over" : `${over} left over`}`;
 }
 export function nudge(s: Scene, state: SceneState): string | null {
+  // pick-nudge@1: a wrong tap is named back (what that part is), with the scene's own hint; never which part is right
+  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined || s.ask.includes(id) ? null : `That is ${pickName(s.figure, id)}. ${s.hint}`; }
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
   if (s.kind === "numberline" && s.jump && !s.quiet && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
     const steps = Math.abs(r6(state.x - s.start));
@@ -364,6 +381,8 @@ export function nudge(s: Scene, state: SceneState): string | null {
 }
 
 export function readout(s: Scene, state: SceneState): string {
+  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined ? "Tap the picture to choose." : `You chose ${pickName(s.figure, id).split(":")[0]}.`; }
+  if (s.kind === "ratios") { const r = ratiosOf(state.angle, state.size), one = (n: number) => fmt(Math.round(n * 10) / 10), two = (n: number) => fmt(Math.round(n * 100) / 100); return `θ = ${state.angle}° · sin θ = ${one(r.opp)} ÷ ${one(state.size)} = ${two(r.sin)} · cos θ = ${two(r.cos)} · tan θ = ${two(r.tan)}`; }
   const m = measures(s, state);
   if (s.kind === "slope") return named(s, `At x = ${fmt(m.x)} the slope is ${fmt(m.slope)}`);
   if (s.kind === "accumulate") return named(s, `From x = ${fmt(s.from)} to x = ${fmt(m.x)}: area ${fmt(m.total)}`);
@@ -411,6 +430,8 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
+  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1] ?? null; return pickDraw(s.figure, id, id !== null && s.ask.includes(id), !!s.labels); }
+  if (s.kind === "ratios") return ratiosDraw(state.angle, state.size, (n) => fmt(Math.round(n * 10) / 10));
   const out: Shape[] = [];
   if (s.kind === "bars") {
     const top = barsTop(s), g = s.scale ?? 1, lines = Math.round(top / g), every = lines > 12 ? Math.ceil(lines / 10) : 1, n = s.values.length, slot = BW / n;
@@ -610,6 +631,8 @@ export function grip(s: Scene, state: SceneState, x: number, y: number): number 
 /** A touch or drag at a point of the 340 × 220 box. Draggable scenes follow the finger; others are unchanged.
  *  `hold` is the handle taken at the start of the drag (see `grip`); without it the nearer handle is taken. */
 export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?: number): SceneState {
+  if (s.kind === "pick") { const part = pickAt(s.figure, x, y); return part ? set(s, state, "part", part) : state; }
+  if (s.kind === "ratios") { const at = ratiosAt(x, y); return set(s, set(s, state, "angle", at.angle), "size", at.size); }
   if (s.kind === "triangle") {
     // the angles the finger makes with the two ends of an unscaled base (60..280 at y = 185), in whole degrees
     const up = Math.max(8, 185 - y);
@@ -654,6 +677,8 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
 
 /** The picture in words, for a screen reader. It says what can be moved, never the answer. */
 export function describe(s: Scene): string {
+  if (s.kind === "pick") return `A picture of ${pickWords(s.figure)}. Its parts can be chosen by tapping them, or with a slider. ${s.prompt}`;
+  if (s.kind === "ratios") return `An interactive right triangle with the angle θ at the left. Two sliders set the angle and the size, and sin θ, cos θ and tan θ are worked out from its sides. ${s.prompt}`;
   if (s.kind === "strips") return `${named(s, `An interactive graph of y = ${curveText(s)} from x = ${fmt(s.from)} to x = ${fmt(s.to)}.`)} A slider sets how many strips are drawn under the curve. ${s.prompt}`;
   if (s.kind === "slope") return `${named(s, `An interactive graph of y = ${curveText(s)}.`)} A point slides along the curve and the tangent line is drawn at it. ${s.prompt}`;
   if (s.kind === "accumulate") return `${named(s, `An interactive graph of y = ${curveText(s)}. The area is shaded from x = ${fmt(s.from)} to an edge that can be moved as far as x = ${fmt(s.to)}.`)} ${s.prompt}`;
@@ -712,7 +737,14 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "bars") {
+  if (s.kind === "pick") {
+    const why = pickCheck(s.figure);
+    if (why) bad.push(why);
+    else if (!(Array.isArray(s.ask) && s.ask.length >= 1 && s.ask.every((a) => pickParts(s.figure).includes(a)))) bad.push("ask must name parts of the figure");
+    if (typeof s.hint !== "string" || !s.hint.trim() || s.hint.length > 200) bad.push("hint must be 1 to 200 characters");
+  } else if (s.kind === "ratios") {
+    // nothing more to check: the triangle has no parameters
+  } else if (s.kind === "bars") {
     const n = Array.isArray(s.values) ? s.values.length : 0, at = (v: unknown) => Number.isInteger(v) && (v as number) >= 0 && (v as number) < n;
     if (n < 2 || n > 8 || !s.values.every((v) => fin(v) && v >= 0 && v <= 100000) || !(Array.isArray(s.labels) && s.labels.length === n && s.labels.every((t) => typeof t === "string" && t.trim() && t.length <= 24))) bad.push("a bar chart needs 2 to 8 labelled bars");
     if ((s.scale !== undefined && !(fin(s.scale) && s.scale > 0)) || (s.unit !== undefined && !(fin(s.unit) && s.unit > 0))) bad.push("scale and unit must be positive");

@@ -1,0 +1,76 @@
+/* The styles of the scene engine's one player (Scene.tsx). Loaded by every page that shows a scene. */
+.scene { margin: 10px 0 14px; padding: 0; max-width: 460px; }
+.scene svg { width: 100%; height: auto; display: block; background: #fff; border-radius: 14px; }
+.scene svg.scene-drag { touch-action: none; cursor: grab; }
+.scene .sc-axis { stroke: #9aa5b8; stroke-width: 1; }
+.scene .sc-curve { fill: none; stroke: #1f2a37; stroke-width: 2.2; stroke-linejoin: round; }
+.scene .sc-strip { fill: #d6e4ff; stroke: #2f5fd0; stroke-width: 0.6; }
+.scene .sc-fill { fill: #d6e4ff; stroke: none; }
+.scene .sc-edge { stroke: #2f5fd0; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.scene .sc-accent { stroke: #2f5fd0; stroke-width: 3; stroke-linecap: round; }
+.scene .sc-handle { fill: #2f5fd0; stroke: #fff; stroke-width: 3; }
+.scene .sc-up { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-down { stroke: #b4532a; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-flat { stroke: #5f6b84; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-target { fill: #b4532a; stroke: #fff; stroke-width: 2; }
+.scene .sc-label { fill: #5f6b84; font-size: 12px; }
+.scene .sc-shape { fill: #f4f1ff; stroke: #1f2a37; stroke-width: 2.2; stroke-linejoin: round; }
+.scene .sc-wedge0 { fill: #d6e4ff; stroke: #2f5fd0; stroke-width: 1; }
+.scene .sc-wedge1 { fill: #c8efe2; stroke: #0f7a5d; stroke-width: 1; }
+.scene .sc-wedge2 { fill: #f8d5c4; stroke: #b4532a; stroke-width: 1; }
+.scene .sc-value { fill: #1f2a37; font-size: 13px; font-weight: 700; }
+.scene .sc-pivot { fill: #2f5fd0; stroke: #fff; stroke-width: 2; }
+.scene .sc-grid { stroke: #e3e8f0; stroke-width: 1; }
+.scene .sc-cell { fill: #7fa6f5; stroke: #2f5fd0; stroke-width: 1; }
+.scene .sc-fraclabel { fill: #1f2a37; font-size: 15px; font-weight: 700; }
+.scene .sc-guide { stroke: #0f7a5d; stroke-width: 2; stroke-dasharray: 5 4; }
+.scene .sc-outline { fill: none; stroke: #2f5fd0; stroke-width: 3; stroke-linejoin: round; }
+.scene .sc-curve2 { fill: none; stroke: #2f5fd0; stroke-width: 2.6; }
+.scene .sc-card { fill: #fff; stroke: #2f5fd0; stroke-width: 2.5; }
+.scene .sc-cardtext { fill: #1f2a37; font-size: 20px; font-weight: 700; }
+.scene .sc-digit { fill: #1f2a37; font-size: 30px; font-weight: 700; }
+.scene .sc-comma { fill: #2f5fd0; font-size: 34px; font-weight: 700; }
+.scene .sc-blank { fill: #fff; stroke: #a9c4f7; stroke-width: 1; }
+.scene .sc-open { fill: #fff; stroke: #1f2a37; stroke-width: 2; }
+.scene .sc-ghost { fill: none; stroke: #9aa5b8; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.scene .sc-moved { fill: #f8d5c4; fill-opacity: 0.75; stroke: #b4532a; stroke-width: 2; stroke-linejoin: round; }
+.scene .sc-arrow0 { stroke: #2f5fd0; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-arrow1 { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
+.scene .sc-handle0 { fill: #2f5fd0; stroke: #fff; stroke-width: 3; }
+.scene .sc-handle1 { fill: #0f7a5d; stroke: #fff; stroke-width: 3; }
+.scene-controls.many > summary { cursor: pointer; font-weight: 700; color: var(--brand, #2563eb); padding: 10px 0; min-height: 44px; }
+.scene-controls.many label span { min-width: 9.5em; font-size: 0.9rem; }
+.scene-controls label { display: flex; align-items: center; gap: 12px; margin: 8px 0 0; font-weight: 600; }
+.scene-controls label span { min-width: 3.2em; }
+.scene-controls input { flex: 1; min-height: 44px; accent-color: var(--brand, #2563eb); }
+.scene-controls :focus-visible { outline: 3px solid var(--brand, #2563eb); outline-offset: 3px; }
+.scene-readout { margin: 6px 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
+.scene-goal { margin: 6px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft, #eaf1ff); color: var(--brand-text, #1e40af); }
+.scene-goal.done { background: var(--good-soft, #e9faf4); color: var(--good-ink, #126c55); font-weight: 700; }
+@media print { .scene-controls { display: none; } }
+.scene-nudge { margin: 6px 0 0; font-size: 0.95rem; color: #9a5b00; }
+.scene-first { margin-top: 6px; }
+.scene-tried { margin: 6px 0 0; }
+.scene-tried p { margin: 0 0 2px; }
+.scene-tried ul { margin: 0; padding-left: 20px; display: grid; gap: 2px; font-weight: 700; }
+/* scene@9: the parts of a pick figure, and the marks on it */
+.scene .sc-pline { stroke: #1f2a37; stroke-width: 3; stroke-linecap: round; }
+.scene .sc-pline-right { stroke: #0f7a5d; stroke-width: 6; stroke-linecap: round; }
+.scene .sc-pline-wrong { stroke: #b4532a; stroke-width: 6; stroke-linecap: round; }
+.scene .sc-parc { fill: none; stroke: #c9731a; stroke-width: 5; stroke-linecap: round; }
+.scene .sc-parc-right { fill: none; stroke: #0f7a5d; stroke-width: 7; stroke-linecap: round; }
+.scene .sc-parc-wrong { fill: none; stroke: #b4532a; stroke-width: 7; stroke-linecap: round; }
+.scene .sc-ppoint { fill: #1f2a37; stroke: #fff; stroke-width: 2; }
+.scene .sc-ppoint-right { fill: #0f7a5d; stroke: #fff; stroke-width: 2; }
+.scene .sc-ppoint-wrong { fill: #b4532a; stroke: #fff; stroke-width: 2; }
+.scene .sc-pdot { fill: #9aa5b8; }
+.scene .sc-pregion { fill: #fff; stroke: #1f2a37; stroke-width: 2; }
+.scene .sc-pregion-right { fill: #c8efe2; stroke: #0f7a5d; stroke-width: 2.5; }
+.scene .sc-pregion-wrong { fill: #f8d5c4; stroke: #b4532a; stroke-width: 2.5; }
+.scene .sc-pcell { fill: #1f2a37; font-size: 22px; font-weight: 700; }
+.scene .sc-pbox-right { fill: #c8efe2; stroke: #0f7a5d; stroke-width: 2; }
+.scene .sc-pbox-wrong { fill: #f8d5c4; stroke: #b4532a; stroke-width: 2; }
+.scene .sc-mark { fill: none; stroke: #1f2a37; stroke-width: 1.5; }
+.scene .sc-theta { fill: none; stroke: #c9731a; stroke-width: 3; stroke-linecap: round; }
+.scene.scene-figure { margin: 0 auto; }
+.scene svg.scene-drag.scene-tap { cursor: pointer; }

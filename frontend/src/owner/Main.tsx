@@ -3,8 +3,9 @@ import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { sampleOf, search, skillsOf, topicName, topics, totalsOf, type Skill } from "./data";
 import { FoundationCard } from "../year/StartHere";
-import { PictureRound, TriangleExplore } from "../year/PictureTasks";
+import { PictureExplore, PictureRound } from "../year/PictureTasks";
 import { picturesOf } from "../../../packages/learning/src/foundations";
+import "../year/scene.css";
 import "../year/start-here.css";
 import "./owner.css";
 
@@ -25,7 +26,7 @@ function SkillCard({ s }: { s: Skill }) {
         <span className="skill-meta">{s.cls ? `Class ${s.cls} · ` : ""}{s.foundations.length ? `starts with ${s.foundations.map((f) => f.concept).join(", ")} · ` : ""}{s.screens.length} screens · {s.families.length} question types{s.corrected ? ` · ${s.corrected} fixed by review` : ""}{s.certified < s.families.length ? ` · ${s.families.length - s.certified} not certified` : ""}</span>
       </summary>
       {open && <>
-        {s.foundations.length > 0 && <><h3>Start here (shown before the lesson)</h3>{s.foundations.map((f, k) => <div className="sh" key={k}>{f.screens.map((x, i) => <FoundationCard key={i} s={x} />)}{picturesOf(f).includes("right-triangle") ? <TriangleExplore /> : null}{picturesOf(f).map((p) => <PictureRound key={p} kind={p} seed={SEED} />)}{f.practice?.length ? <section className="sh-card"><p className="sh-eyebrow">Practice on this idea: {1 + (f.rounds?.length ?? 0)} rounds of {f.practice.length}, a new round each visit</p>{[f.practice, ...(f.rounds ?? [])].flat().map((q, i) => <div className="sh-answer-key" key={i}><p><b>{i + 1}. {q.question}</b></p><ul>{q.options.map((o, j) => <li key={j}>{j === q.answer ? <b>{o} ✓ {q.why}</b> : <>{o}: {q.wrong[j]}</>}</li>)}</ul></div>)}</section> : null}</div>)}</>}
+        {s.foundations.length > 0 && <><h3>Start here (shown before the lesson)</h3>{s.foundations.map((f, k) => <div className="sh" key={k}>{f.screens.map((x, i) => <FoundationCard key={i} s={x} />)}{picturesOf(f).map((p) => <PictureExplore key={p} kind={p} seed={SEED} />)}{picturesOf(f).map((p) => <PictureRound key={p} kind={p} seed={SEED} />)}{f.practice?.length ? <section className="sh-card"><p className="sh-eyebrow">Practice on this idea: {1 + (f.rounds?.length ?? 0)} rounds of {f.practice.length}, a new round each visit</p>{[f.practice, ...(f.rounds ?? [])].flat().map((q, i) => <div className="sh-answer-key" key={i}><p><b>{i + 1}. {q.question}</b></p><ul>{q.options.map((o, j) => <li key={j}>{j === q.answer ? <b>{o} ✓ {q.why}</b> : <>{o}: {q.wrong[j]}</>}</li>)}</ul></div>)}</section> : null}</div>)}</>}
         <h3>Lesson screens</h3>
         {s.screens.map((x, i) => (
           <section className="screen" key={i}>
