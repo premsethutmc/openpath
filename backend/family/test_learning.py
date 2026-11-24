@@ -296,6 +296,24 @@ class PlatformTests(LearningBase):
         self.assertEqual(self.save(self.rec('teach', competency=m['competency'], strategy=m['strategies'][0]['id'], rule='procedural')).status_code, 201)
         self.assertEqual(self.save(self.rec('teach', competency=m['competency'], strategy='invented', rule='procedural')).status_code, 400)
 
+    def test_a_finished_start_here_round_is_kept_and_a_made_up_one_is_refused(self):
+        # understanding@1: what the learner did on the idea behind a skill; it must be a real idea, a real round, a possible score
+        self.save(self.enrol())
+        idea = {'policy': 'understanding@1', 'competency': 'MATH.trigonometry.ratios', 'concept': 'what sin, cos and tan are', 'round': 0, 'asked': 4, 'firstTry': 3}
+        import json as _json
+        from pathlib import Path as _Path
+        from django.conf import settings as _settings
+        entry = next(e for e in _json.loads((_Path(_settings.BASE_DIR).parent / 'content/learning/foundations.v1.json').read_text())['entries'] if e['competency'] == idea['competency'])
+        idea = {**idea, 'concept': entry['concept'], 'asked': len(entry['practice'])}
+        self.assertEqual(self.save(self.rec('understand', **idea)).status_code, 201)
+        kept = [r for r in self.records() if r['record'] == 'understand']
+        self.assertEqual((len(kept), kept[0]['firstTry'], kept[0]['concept']), (1, 3, entry['concept']))
+        for bad in ({'concept': 'no such idea'}, {'competency': 'MATH.number.no-such-skill'}, {'round': 9}, {'firstTry': idea['asked'] + 1}, {'asked': idea['asked'] + 1}, {'firstTry': True}, {'policy': 'other@1'}):
+            self.assertEqual(self.save(self.rec('understand', **{**idea, **bad})).status_code, 400, bad)
+        self.assertEqual(self.save(self.rec('understand', **idea, mastered=True)).status_code, 400)
+        # it is not an attempt: nothing about the skill has been answered
+        self.assertFalse([r for r in self.records() if r['record'] == 'attempt'])
+
     def test_a_multiple_choice_generated_question_is_checked_by_letter(self):
         self.save(self.enrol())
         ok = self.rec('attempt', questionId='gen:subst:0,2,1,2:mc', response='C', activity='practice', hints=0, solution=False, competency='MATH.calculus.integration-methods')

@@ -26,7 +26,7 @@ function SkillCard({ s }: { s: Skill }) {
         <span className="skill-meta">{s.cls ? `Class ${s.cls} · ` : ""}{s.foundations.length ? `starts with ${s.foundations.map((f) => f.concept).join(", ")} · ` : ""}{s.screens.length} screens · {s.families.length} question types{s.corrected ? ` · ${s.corrected} fixed by review` : ""}{s.certified < s.families.length ? ` · ${s.families.length - s.certified} not certified` : ""}</span>
       </summary>
       {open && <>
-        {s.foundations.length > 0 && <><h3>Start here (shown before the lesson)</h3>{s.foundations.map((f, k) => <div className="sh" key={k}>{f.screens.map((x, i) => <FoundationCard key={i} s={x} />)}{picturesOf(f).map((p) => <PictureExplore key={p} kind={p} seed={SEED} />)}{picturesOf(f).map((p) => <PictureRound key={p} kind={p} seed={SEED} />)}{f.practice?.length ? <section className="sh-card"><p className="sh-eyebrow">Practice on this idea: {1 + (f.rounds?.length ?? 0)} rounds of {f.practice.length}, a new round each visit</p>{[f.practice, ...(f.rounds ?? [])].flat().map((q, i) => <div className="sh-answer-key" key={i}><p><b>{i + 1}. {q.question}</b></p><ul>{q.options.map((o, j) => <li key={j}>{j === q.answer ? <b>{o} ✓ {q.why}</b> : <>{o}: {q.wrong[j]}</>}</li>)}</ul></div>)}</section> : null}</div>)}</>}
+        {s.foundations.length > 0 && <><h3>Start here (shown before the lesson)</h3>{s.foundations.map((f, k) => <div className="sh" key={k}><p className="muted small">{f.concept}: {!f.show ? "has a picture" : f.show.decision === "none" ? `no picture needed (it is a ${f.show.why})` : `no picture yet: needs a new figure in the engine (${f.show.figure})`}</p>{f.screens.map((x, i) => <FoundationCard key={i} s={x} />)}{picturesOf(f).map((p) => <PictureExplore key={p} kind={p} seed={SEED} />)}{picturesOf(f).map((p) => <PictureRound key={p} kind={p} seed={SEED} />)}{f.practice?.length ? <section className="sh-card"><p className="sh-eyebrow">Practice on this idea: {1 + (f.rounds?.length ?? 0)} rounds of {f.practice.length}, a new round each visit</p>{[f.practice, ...(f.rounds ?? [])].flat().map((q, i) => <div className="sh-answer-key" key={i}><p><b>{i + 1}. {q.question}</b></p><ul>{q.options.map((o, j) => <li key={j}>{j === q.answer ? <b>{o} ✓ {q.why}</b> : <>{o}: {q.wrong[j]}</>}</li>)}</ul></div>)}</section> : null}</div>)}</>}
         <h3>Lesson screens</h3>
         {s.screens.map((x, i) => (
           <section className="screen" key={i}>
@@ -70,6 +70,7 @@ function App() {
         <Tile n={t.corrected} label="screens fixed by review" />
         <Tile n={t.certified} of={t.families} label="question types with certified answers" />
       </div>
+      {t.ideas > 0 && <p className="muted" data-picture-decisions>Start here: {t.ideas} ideas. {t.pictured} have a picture to tap or move. {t.noPicture} need none (a word, a symbol or a rule). {t.newFigure} would be helped by a figure the engine does not have yet.</p>}
       <input className="search" type="search" placeholder={`Search ${topicName(topic).toLowerCase()}`} value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search" />
       {shown.map((s) => <SkillCard key={s.competency} s={s} />)}
       {shown.length === 0 && <p className="muted">Nothing matches.</p>}

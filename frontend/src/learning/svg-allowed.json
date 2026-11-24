@@ -1,24 +1,31 @@
-[
- "activities/apple-shopping/AppleShopping.tsx",
- "curriculum/TeachingPrimitives.tsx",
- "english/ui/ItemView.tsx",
- "english/ui/Pic.tsx",
- "english/ui/SpellingBee.tsx",
- "english/ui/StudySkills.tsx",
- "geometry/TriangleAngleLab.tsx",
- "math/components/FractionBarViz.tsx",
- "math/components/TeacherGuide.tsx",
- "mathematics/chapter/Main.tsx",
- "mathematics/journey/Main.tsx",
- "mathematics/unit/Unit.tsx",
- "writing/ProgressiveDivision.tsx",
- "writing/Surface.tsx",
- "year/Chintu.tsx",
- "year/Figure.tsx",
- "year/Learn.tsx",
- "year/Main.tsx",
- "year/Scene.tsx",
- "year/SketchPad.tsx",
- "year/WhereUsed.tsx",
- "year/icons.tsx"
-]
+{
+ "note": "Files that draw with their own <svg>. 'engine' is the scene engine's player. 'notTeaching' are not teaching pictures and stay as they are: icons, the cat, writing and drawing surfaces, the English app's pictures, the old shopping game. 'toMove' are maths teaching pictures drawn outside the engine: each is to become scene descriptions for the engine and then leave this list. A new file may be added to none of these lists: describe the picture as a scene (see CLAUDE.md).",
+ "engine": [
+  "year/Scene.tsx"
+ ],
+ "notTeaching": [
+  "activities/apple-shopping/AppleShopping.tsx",
+  "english/ui/ItemView.tsx",
+  "english/ui/Pic.tsx",
+  "english/ui/SpellingBee.tsx",
+  "english/ui/StudySkills.tsx",
+  "writing/ProgressiveDivision.tsx",
+  "writing/Surface.tsx",
+  "year/Chintu.tsx",
+  "year/Main.tsx",
+  "year/SketchPad.tsx",
+  "year/icons.tsx"
+ ],
+ "toMove": [
+  "year/Figure.tsx",
+  "year/Learn.tsx",
+  "year/WhereUsed.tsx",
+  "curriculum/TeachingPrimitives.tsx",
+  "geometry/TriangleAngleLab.tsx",
+  "math/components/FractionBarViz.tsx",
+  "math/components/TeacherGuide.tsx",
+  "mathematics/chapter/Main.tsx",
+  "mathematics/journey/Main.tsx",
+  "mathematics/unit/Unit.tsx"
+ ]
+}
