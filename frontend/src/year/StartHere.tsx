@@ -6,6 +6,7 @@ import { SceneFigure } from "./Scene";
 import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
+import { mx } from "./MatrixText";
 /** The labelled picture of an idea, drawn by the scene engine from its description (foundation-pictures.ts). */
 export function FoundationPicture({ kind }: { kind: Picture }) {
   const { scene, state } = pictureScene(kind);
@@ -19,9 +20,9 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
       <h3>{s.title}</h3>
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
-      {s.text.map((t, i) => <p key={i}>{t}</p>)}
-      {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{t}</div>)}</div> : null}
-      {s.check ? <div className="sh-check"><p><b>Quick check:</b> {s.check.question}</p>{shown ? <p className="sh-answer">{s.check.answer}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
+      {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
+      {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(t)}</div>)}</div> : null}
+      {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(s.check.question)}</p>{shown ? <p className="sh-answer">{mx(s.check.answer)}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
     </section>
   );
 }
@@ -36,11 +37,11 @@ export function FoundationPractice({ questions, onDone }: { questions: Foundatio
   return (
     <section className="sh-card sh-practice" data-foundation-practice>
       <p className="sh-eyebrow">Now you try · {i + 1} of {questions.length}</p>
-      <h3>{q.question}</h3>
+      <h3>{mx(q.question)}</h3>
       <div className="sh-options">
-        {shownOrder(q).map((k) => <button key={k} type="button" className={`sh-option${tried.includes(k) ? (k === q.answer ? " right" : " wrong") : ""}`} disabled={right || tried.includes(k)} onClick={() => setTried([...tried, k])}>{q.options[k]}</button>)}
+        {shownOrder(q).map((k) => <button key={k} type="button" className={`sh-option${tried.includes(k) ? (k === q.answer ? " right" : " wrong") : ""}`} disabled={right || tried.includes(k)} onClick={() => setTried([...tried, k])}>{mx(q.options[k])}</button>)}
       </div>
-      {last !== undefined && <p className={right ? "sh-feedback good" : "sh-feedback"} role="status">{right ? `Yes. ${q.why}` : `Not quite. ${q.wrong[last] || "Look at the idea again and try another choice."}`}</p>}
+      {last !== undefined && <p className={right ? "sh-feedback good" : "sh-feedback"} role="status">{mx(right ? `Yes. ${q.why}` : `Not quite. ${q.wrong[last] || "Look at the idea again and try another choice."}`)}</p>}
       {right && <button type="button" className="sh-show" onClick={() => { const got = firstTry + (tried.length === 1 ? 1 : 0); setFirstTry(got); setTried([]); setI(i + 1); if (i + 1 >= questions.length) onDone?.(got); }}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
     </section>
   );

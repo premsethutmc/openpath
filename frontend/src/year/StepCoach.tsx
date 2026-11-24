@@ -17,6 +17,7 @@ import { gradeOfQuestion, problemOf } from "../../../packages/learning/src/famil
 import { allSkills } from "./try-skills";
 import { Chintu } from "./Chintu";
 
+import { mx } from "./MatrixText";
 export const LAST_CHINTU_CLASS = 5;
 /** The class a question belongs to: its own (where a type marks some of its questions as later work), else the first
  *  class in which any board's book teaches its skill. Null when neither is known. */
@@ -115,7 +116,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
                   <aside className="coach-card coach-how-card" aria-label="How it is worked out" data-testid="coach-how">
                     <Board rows={s.how.board ?? s.how.lines} />
                     {skill && <button type="button" className="coach-chip" aria-expanded={howCard} onClick={() => setHowCard(!howCard)}>{howCard ? "Hide the rule" : `This is ${skill.name.charAt(0).toLowerCase()}${skill.name.slice(1)}: show me the rule`}</button>}
-                    {skill && howCard && <>{skill.rule.map((t, k) => <p key={k}>{t}</p>)}</>}
+                    {skill && howCard && <>{skill.rule.map((t, k) => <p key={k}>{mx(t)}</p>)}</>}
                   </aside>
                 )}
               </li>

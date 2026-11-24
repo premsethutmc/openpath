@@ -6,7 +6,9 @@ import { FoundationCard } from "../year/StartHere";
 import { PictureExplore, PictureRound } from "../year/PictureTasks";
 import { picturesOf } from "../../../packages/learning/src/foundations";
 import "../year/scene.css";
+import "../year/matrix-text.css";
 import "../year/start-here.css";
+import { mx } from "../year/MatrixText";
 import "./owner.css";
 
 /** one draw per page load: the picture questions change when the page is opened again, not while it is being read */
@@ -32,17 +34,17 @@ function SkillCard({ s }: { s: Skill }) {
           <section className="screen" key={i}>
             <p className="eyebrow">{x.section}{x.corrected ? " · fixed by review" : ""}</p>
             {x.title && <h4>{x.title}</h4>}
-            {x.text.map((t, j) => <p key={j}>{t}</p>)}
-            {x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{t}</div>)}</div>}
+            {x.text.map((t, j) => <p key={j}>{mx(t)}</p>)}
+            {x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
           </section>
         ))}
         <h3>Question types and wrong-answer feedback</h3>
         {samples.map((q) => (
           <section className="screen" key={q!.family}>
             <p className="eyebrow">{q!.title}{q!.certified ? " · answers certified" : " · not certified"}</p>
-            <p><b>Sample:</b> {q!.question}</p>
-            <p><b>Answer:</b> {q!.answer}</p>
-            {q!.mistakes.length > 0 && <ul>{q!.mistakes.map((m, j) => <li key={j}>If the answer is <b>{m.wrong}</b>: {m.says}</li>)}</ul>}
+            <p><b>Sample:</b> {mx(q!.question)}</p>
+            <p><b>Answer:</b> {mx(q!.answer)}</p>
+            {q!.mistakes.length > 0 && <ul>{q!.mistakes.map((m, j) => <li key={j}>If the answer is <b>{mx(m.wrong)}</b>: {mx(m.says)}</li>)}</ul>}
           </section>
         ))}
       </>}

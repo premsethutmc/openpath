@@ -73,6 +73,7 @@ import { KID, kidName } from "./kid";
 import { FeedbackBox } from "./Feedback";
 import { checkLines, simplerFor } from "../../../packages/learning/src/working";
 
+import { mx } from "./MatrixText";
 export const LETTERS = ["A", "B", "C", "D"];
 
 export interface Ctx {
@@ -270,7 +271,7 @@ function TestReview({ held, onDone }: { held: Held[]; onDone: () => void }) {
           const mix = h.right ? null : answerFeedback(q, h.response);
           return (
             <li key={`${h.qid}-${i}`} className={h.right ? "ok" : "bad"}>
-              <p className="review-q">{k?.say ?? q.prompt}</p>
+              <p className="review-q">{mx(k?.say ?? q.prompt)}</p>
               <p className="review-a">{h.right ? "✓" : "✗"} Your answer: <b>{h.response || "—"}</b>{h.right ? "" : ` · Right answer: ${q.answer}`}</p>
               {!!h.working?.length && (
                 <ol className="review-working" aria-label="Your working">
@@ -504,7 +505,7 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
         {q.options!.map((o, i) => (
           <button key={i} type="button" role="radio" aria-checked={value === LETTERS[i]} className={`option ${value === LETTERS[i] ? "picked" : ""}`} disabled={disabled} onClick={() => setValue(LETTERS[i])}>
             <span className="letter">{LETTERS[i]}</span>
-            <span>{o}</span>
+            <span>{mx(o)}</span>
           </button>
         ))}
       </div>
@@ -571,7 +572,7 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
       {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
         <strong>Your working</strong>
         <p>{judged?.message ?? "Your working is saved. It has not been marked right or wrong. Show an intermediate step or review a supported lesson; no method mastery is claimed."}</p>
-        <ol>{fb.working.map((line,i)=><li key={i}>{line}{judged?.steps[i] && <span className="small"> — {judged.steps[i].verified ? "Checked" : judged.steps[i].badge === "invalid" ? "Check this step" : "Not checked"}</span>}</li>)}</ol>
+        <ol>{fb.working.map((line,i)=><li key={i}>{mx(line)}{judged?.steps[i] && <span className="small"> — {judged.steps[i].verified ? "Checked" : judged.steps[i].badge === "invalid" ? "Check this step" : "Not checked"}</span>}</li>)}</ol>
       </div>}
       {/* adaptive loop: a wrong answer on a problem OpenPath can reason about opens the same recovery as "I'm stuck" */}
       {onInvestigate && !fb.right && !undecided ? <button className="secondary wide" onClick={onInvestigate}>Find out what went wrong</button> : null}
@@ -639,7 +640,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
-      <p className="prompt">{kq ? kq.say : q.prompt}</p>
+      <p className="prompt">{mx(kq ? kq.say : q.prompt)}</p>
       {figure && ((figure as { type?: string }).type === "scene"
         ? <ScenePlayer key={`${qid}:${step}`} scene={figure as unknown as Scene} />
         : <Figure v={still(figure, isTest(activity))} />)}
@@ -789,18 +790,18 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{sc.math[0]}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
-        {KID ? <KidText competency={competency} fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
+        {KID ? <KidText competency={competency} fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{mx(t)}</p>)}
         {/* a scene made from the question's own picture replaces the still picture */}
         {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
         {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
         {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
-        {sc.tip && <p className="hint">{sc.tip}</p>}
+        {sc.tip && <p className="hint">{mx(sc.tip)}</p>}
         {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
       </div>
       {/* below-the-work@1: in the child's lesson the button comes after the steps; it never floats over them */}

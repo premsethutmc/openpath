@@ -55,6 +55,7 @@ import "../mathematics/chapter/chapter.css";
 import "./year.css";
 import "./look.css";
 import "./scene.css";
+import "./matrix-text.css";
 import "./start-here.css";
 import { KID, kidName } from "./kid";
 

@@ -27,6 +27,7 @@ import { kidQuestion } from "../../../packages/learning/src/kid-say";
 import { isDrawing, SketchView } from "../year/SketchPad";
 import "../mathematics/chapter/chapter.css";
 import "../year/year.css";
+import "../year/matrix-text.css";
 import "./review.css";
 
 const api = new Api();

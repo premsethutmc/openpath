@@ -21,6 +21,7 @@ import { Figure } from "./Figure";
 import { KID } from "./kid";
 import { ScenePlayer } from "./Scene";
 
+import { mx } from "./MatrixText";
 const LABEL = { question: "The question", predict: "Your guess", mission: "Find out", name: "Name it", solve: "How to solve it", try: "Try one", think: "Think about it" } as const;
 const clean = (t: string) => t.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "");
 const where = (recipe: Recipe, part: string) => clean(`recipe:${recipe.competency}:${part}`);
@@ -83,13 +84,13 @@ function Choices({ ask, choices, picked, onPick, untilRight }: { ask: string; ch
   const chosen = picked === null ? null : choices[picked];
   return (
     <>
-      <p>{ask}</p>
+      <p>{mx(ask)}</p>
       <div className="recipe-choices" role="group" aria-label={ask}>
         {choices.map((c, i) => (
-          <button key={c.label} type="button" className={`secondary${picked === i ? " picked" : ""}`} aria-pressed={picked === i} onClick={() => onPick(i)}>{c.label}</button>
+          <button key={c.label} type="button" className={`secondary${picked === i ? " picked" : ""}`} aria-pressed={picked === i} onClick={() => onPick(i)}>{mx(c.label)}</button>
         ))}
       </div>
-      {chosen && <p className={`recipe-reply${chosen.right ? " right" : ""}`} role="status">{chosen.reply}{untilRight && !chosen.right ? " Choose again." : ""}</p>}
+      {chosen && <p className={`recipe-reply${chosen.right ? " right" : ""}`} role="status">{mx(chosen.reply)}{untilRight && !chosen.right ? " Choose again." : ""}</p>}
     </>
   );
 }
@@ -97,9 +98,9 @@ function Choices({ ask, choices, picked, onPick, untilRight }: { ask: string; ch
 function Worked({ worked, shown, more }: { worked: NonNullable<ReturnType<typeof workedFor>>; shown: number; more: () => void }) {
   return (
     <>
-      <p>{worked.prompt}</p>
+      <p>{mx(worked.prompt)}</p>
       {worked.figure && <Figure v={worked.figure} />}
-      <ol className="recipe-steps">{worked.steps.slice(0, shown).map((t, k) => <li key={k}>{t}</li>)}</ol>
+      <ol className="recipe-steps">{worked.steps.slice(0, shown).map((t, k) => <li key={k}>{mx(t)}</li>)}</ol>
       {shown <= worked.steps.length
         ? <button type="button" className="secondary" onClick={more}>{shown < worked.steps.length ? "Show the next step" : "Show the answer"}</button>
         : <p className="recipe-reply right" role="status">Answer: {worked.answer}</p>}
@@ -140,10 +141,10 @@ function RecipeFlow({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe; 
     newest.current?.scrollIntoView?.({ behavior: calm ? "auto" : "smooth", block: "start" });
   }, [open, at]);
   const body = (s: RecipeStep): JSX.Element =>
-    s.kind === "question" ? <>{recipe.question!.map((t, k) => <p key={k}>{t}</p>)}</>
+    s.kind === "question" ? <>{recipe.question!.map((t, k) => <p key={k}>{mx(t)}</p>)}</>
     : s.kind === "predict" ? <Choices ask={recipe.predict!.ask} choices={recipe.predict!.choices} picked={guess} onPick={(k) => keep({ g: k })} untilRight={false} />
     : s.kind === "mission" ? <ScenePlayer key={s.index} scene={recipe.missions[s.index] as Scene} onReached={() => keep({ m: s.index + 1 })} />
-    : s.kind === "name" ? <>{recipe.name.map((t, k) => <p key={k}>{t}</p>)}</>
+    : s.kind === "name" ? <>{recipe.name.map((t, k) => <p key={k}>{mx(t)}</p>)}</>
     : s.kind === "solve" ? <Worked worked={worked!} shown={shown} more={() => keep({ s: shown + 1 })} />
     : <Choices ask={recipe.choose.ask} choices={recipe.choose.choices} picked={choice} onPick={setChoice} untilRight />;
   return (
@@ -197,12 +198,12 @@ function RecipeSteps({ recipe, onDone, doneLabel, resumeKey }: { recipe: Recipe;
       <div className="panel lesson recipe">
         <p className="eyebrow">{recipe.title} · {i + 1} of {steps.length}</p>
         <h3>{step.kind === "predict" && storyWithGuess ? LABEL.question : headingOf(recipe, step)}</h3>
-        {(step.kind === "question" || (step.kind === "predict" && storyWithGuess)) && recipe.question!.map((t, k) => <p key={k}>{t}</p>)}
+        {(step.kind === "question" || (step.kind === "predict" && storyWithGuess)) && recipe.question!.map((t, k) => <p key={k}>{mx(t)}</p>)}
         {step.kind === "predict" && <Choices ask={recipe.predict!.ask} choices={recipe.predict!.choices} picked={guess} onPick={(k) => { keep({ g: k }); setNudge(""); }} untilRight={false} />}
         {/* try-first@1: a learner with no guess to make can go and try it; the guess is not evidence, so nothing is lost */}
         {step.kind === "predict" && guess === null && steps[i + 1]?.kind === "mission" && <button type="button" className="link" data-testid="try-first" onClick={() => go(i + 1)}>Not sure? Try it first</button>}
         {step.kind === "mission" && <ScenePlayer key={step.index} scene={recipe.missions[step.index]} onReached={() => { setReached((r) => ({ ...r, [step.index]: true })); setNudge(""); }} />}
-        {step.kind === "name" && recipe.name.map((t, k) => <p key={k}>{t}</p>)}
+        {step.kind === "name" && recipe.name.map((t, k) => <p key={k}>{mx(t)}</p>)}
         {step.kind === "solve" && worked && <Worked worked={worked} shown={shown} more={() => { keep({ s: shown + 1 }); setNudge(""); }} />}
         {step.kind === "choose" && <Choices ask={recipe.choose.ask} choices={recipe.choose.choices} picked={choice} onPick={(k) => { setChoice(k); setNudge(""); }} untilRight />}
         {nudge && <p className="recipe-nudge" role="alert">{nudge}</p>}

@@ -8,6 +8,7 @@ import { useMemo, useState } from "react";
 import { explored, explorerFor } from "../../../packages/learning/src/explore";
 import { Figure } from "./Figure";
 
+import { mx } from "./MatrixText";
 export function Explore({ qid }: { qid: string }) {
   const e = useMemo(() => explorerFor(qid), [qid]);
   const [open, setOpen] = useState(false);
@@ -29,9 +30,9 @@ export function Explore({ qid }: { qid: string }) {
           </label>
         );
       })}
-      <p className="prompt">{x.prompt}</p>
+      <p className="prompt">{mx(x.prompt)}</p>
       <Figure v={x.figure} />
-      <ol className="recipe-steps">{x.steps.map((t, k) => <li key={k}>{t}</li>)}</ol>
+      <ol className="recipe-steps">{x.steps.map((t, k) => <li key={k}>{mx(t)}</li>)}</ol>
       <p className="recipe-reply right" role="status">Answer: {x.answer}</p>
       {x.changed && <button type="button" className="secondary" onClick={() => setAt(null)}>Back to the example</button>}
     </div>
