@@ -26,6 +26,7 @@ import { Explore } from "./Explore";
 import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
+import { MatrixAnswer } from "./MatrixAnswer";
 import { StartHere, SteppedMath } from "./StartHere";
 import { understandingOf } from "../../../packages/learning/src/foundations";
 import { ScribblePad } from "./ScribblePad";
@@ -522,6 +523,8 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
         <textarea aria-label="Your answer" rows={6} maxLength={4000} value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} />
       </label>
     );
+  // matrix-entry@1: a child builds a matrix answer as a grid of boxes; nothing but numbers is typed
+  if (KID && q.type === "matrix") return <MatrixAnswer value={value} setValue={setValue} disabled={disabled} />;
   const label = ANSWER_LABEL[q.type] ?? "Your answer";
   return (
     <label className="field">
