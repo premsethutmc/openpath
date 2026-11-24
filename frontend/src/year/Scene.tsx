@@ -57,7 +57,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`}
         aria-hidden="true"
-        className={draggable ? "scene-drag" : undefined}
+        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : "scene-drag") : undefined}
         onPointerDown={draggable ? (e) => { const [x, y] = at(e); hold.current = grip(scene, state, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? () => { dragging.current = false; } : undefined}
@@ -75,7 +75,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
         </div>
       )}
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
-      {gate ? null : cs.length > 2 || scene.kind === "commas" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
+      {gate ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, state)}</p>}
       {tried.length > 0 && (
         <div className="scene-tried" data-testid="scene-tried">
@@ -84,6 +84,15 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
         </div>
       )}
       {!done && touched && nudge(scene, state) && <p className="scene-nudge" role="status">{nudge(scene, state)}</p>}
+    </figure>
+  );
+}
+
+/** A scene drawn to be read, not moved: a lesson's labelled picture. The same engine draws it; there is nothing to set. */
+export function SceneFigure({ scene, state, label }: { scene: Scene; state?: SceneState; label: string }) {
+  return (
+    <figure className="scene scene-figure" data-scene-figure={scene.kind}>
+      <svg viewBox={`0 0 ${SCENE_BOX.w} ${SCENE_BOX.h}`} role="img" aria-label={label}>{draw(scene, { ...initial(scene), ...state }).map(shape)}</svg>
     </figure>
   );
 }

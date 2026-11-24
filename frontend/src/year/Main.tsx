@@ -54,6 +54,7 @@ import { afterHelpOf, afterHelpTiles, afterHelpSummary, qualifiedEvidence, type 
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 import "./look.css";
+import "./scene.css";
 import "./start-here.css";
 import { KID, kidName } from "./kid";
 
