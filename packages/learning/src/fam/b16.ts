@@ -477,7 +477,9 @@ function mtyMatrix([q, t, seed]: number[]): number[][] {
     return fill(n, n, (i, j) => (i === j ? k : 0));
   }
   if (t === 5) return fill(n, n, (i, j) => (i === j ? 1 : 0));
-  if (t === 6) return fill(r(2, 3), r(2, 3), () => 0);
+  // zero-not-square@1: a square zero matrix is also a scalar matrix (k = 0), so "the most precise true one" would have
+  // two true options. The zero matrices asked about are 2 × 3 or 3 × 2, where only "a zero matrix" is true.
+  if (t === 6) { const m0 = r(2, 3); return fill(m0, m0 === 2 ? 3 : 2, () => 0); }
   const m2_ = r(2, 3);
   return fill(m2_, m2_ === 2 ? 3 : 2, (i, j) => (i === 0 && j === 0 ? nz() : r(-4, 6)));
 }

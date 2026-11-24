@@ -77,7 +77,7 @@ Competencies the curricula require: **345**; complete (criteria 1–11): **335**
 
 ## Question families
 
-1119 families, 353271 problems in release pools. Answer types: integer 433, fraction 158, set 27, choice 177, exact 128, interval 16, expression 31, tuple 112, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 316; with an everyday (transfer) form: 775; with alternative explanations: 1081. Written (educator-marked) tasks: 379.
+1119 families, 353269 problems in release pools. Answer types: integer 433, fraction 158, set 27, choice 177, exact 128, interval 16, expression 31, tuple 112, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 316; with an everyday (transfer) form: 775; with alternative explanations: 1081. Written (educator-marked) tasks: 379.
 
 ## Assessment diversity and pool sufficiency (distinct@1, depth@1)
 

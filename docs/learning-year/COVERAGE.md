@@ -1176,7 +1176,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | apcartl: Writing out the ordered pairs (or triples) of a Cartesian product | `MATH.sets-relations.cartesian-product` | 120 | 0 | 40/60/20 | `0a8b5d8e` |
 | apcarteq: Equal ordered pairs | `MATH.sets-relations.cartesian-product` | 1008 | 0 | 168/672/168 | `d89157a3` |
 | apmcon: Constructing a matrix from a rule aᵢⱼ (and its transpose) | `MATH.algebra.matrices` | 160 | 0 | 20/12/128 | `1d436557` |
-| apmtype: The order and the type of a matrix | `MATH.algebra.matrices` | 281 | 0 | 215/0/66 | `a81ea195` |
+| apmtype: The order and the type of a matrix | `MATH.algebra.matrices` | 279 | 0 | 213/0/66 | `5eab4334` |
 | apmeq: Equality of matrices | `MATH.algebra.matrices` | 2171 | 0 | 1859/156/156 | `7f2b85c1` |
 | apmmod: Modelling a situation with a matrix product | `MATH.algebra.matrices` | 300 | 0 | 0/5/295 | `68ad8103` |
 | apsysw: Word problems with three unknowns, solved by the inverse, Cramer's rule or Gaussian elimination | `MATH.algebra.matrix-systems` | 400 | 0 | 0/180/220 | `e619a02b` |
