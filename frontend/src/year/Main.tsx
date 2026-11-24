@@ -1739,6 +1739,6 @@ if (SHELL_CACHE && "serviceWorker" in navigator) {
 }
 
 // try-as-child@1: /year/#try opens the owner's sandbox view of any skill (nothing saved); everything else is the app
-const trying = () => location.hash === "#try" || location.hash.startsWith("#try=");
+const trying = () => location.hash === "#try" || location.hash.startsWith("#try=") || location.hash.startsWith("#try-skill=");
 createRoot(document.getElementById("root")!).render(trying() ? <TryAsChild /> : <App />);
 addEventListener("hashchange", () => { if (trying() !== !!document.querySelector(".try-page") || location.hash.startsWith("#try=")) location.reload(); });

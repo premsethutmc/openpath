@@ -33,6 +33,10 @@ export function TryAsChild() {
     const s = (c && (all.find((x) => x.competency === c && x.board === "icse") ?? all.find((x) => x.competency === c))) || null;
     return s ? <Sandbox key={only} skill={s} back={() => { location.hash = "#try"; }} only={only} /> : <main className="page try-page"><p className="error" data-testid="try-missing">No skill teaches the question {only}.</p></main>;
   }
+  // open-skill@1: /year/#try-skill=<competency> opens that skill as a child gets it (the owner's dashboard links here)
+  const linked = useMemo(() => { if (!location.hash.startsWith("#try-skill=")) return null; const c = decodeURIComponent(location.hash.slice(11).split("&")[0]); return all.find((x) => x.competency === c && x.board === "icse") ?? all.find((x) => x.competency === c) ?? null; }, [all]);
+  const [left, setLeft] = useState(false);
+  if (linked && !left && !skill) return <Sandbox key={`link:${linked.competency}`} skill={linked} back={() => { setLeft(true); history.replaceState(null, "", "#try"); }} />;
   if (skill) return <Sandbox key={`${skill.release.id}:${skill.competency}`} skill={skill} back={() => setSkill(null)} />;
   let chapter = "";
   return (
