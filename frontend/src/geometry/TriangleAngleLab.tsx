@@ -1,3 +1,5 @@
+import { triangleAngleMarks } from "../../../packages/learning/src/lesson-marks";
+import { MarksSvg } from "../year/Scene";
 import { useEffect, useId, useRef, useState } from 'react';
 import { A, B, INITIAL_C, clampC, triangleAngles, type Point } from './triangle';
 declare const OPENPATH_GEOMETRY_LAB: boolean;
@@ -5,20 +7,10 @@ const INTERACTIVE = typeof OPENPATH_GEOMETRY_LAB !== 'undefined' && OPENPATH_GEO
 const COLORS = ['#215bbb', '#a84d08', '#713cc6'];
 const xy = ([x,y]: Point) => [40+x*45, 280-y*45];
 
-const wedge = (cx: number, cy: number, from: number[], to: number[], radius = 28) => {
-  const start = Math.atan2(from[1]-cy, from[0]-cx), end = Math.atan2(to[1]-cy, to[0]-cx);
-  const delta = Math.atan2(Math.sin(end-start), Math.cos(end-start));
-  return `M ${cx} ${cy} L ${cx+radius*Math.cos(start)} ${cy+radius*Math.sin(start)} A ${radius} ${radius} 0 0 ${delta>0?1:0} ${cx+radius*Math.cos(end)} ${cy+radius*Math.sin(end)} Z`;
-};
 /** Same geometry as the interactive board, usable in print and without the library. */
 export function TriangleAngleStatic({ c = INITIAL_C, proof = true }: { c?: Point; proof?: boolean }) {
   const [cx,cy] = xy(c), angles = triangleAngles(c);
-  return <svg viewBox="0 0 350 310" role="img" aria-label={angles ? `Triangle ABC: A ${angles[0].toFixed(1)} degrees, B ${angles[1].toFixed(1)} degrees, C ${angles[2].toFixed(1)} degrees.${proof ? ' A line through C is parallel to AB.' : ''}` : 'A, B and C are too close to a straight line to measure a triangle reliably.'}>
-    {proof && angles && <g>{[[[cx-100,cy],[40,280],COLORS[0]],[[40,280],[310,280],COLORS[2]],[[310,280],[cx+100,cy],COLORS[1]]].map(([from,to,color],i)=><path key={i} d={wedge(cx,cy,from as number[],to as number[])} fill={String(color)} fillOpacity="0.22" stroke={String(color)} />)}</g>}
-    <polygon points={`40,280 310,280 ${cx},${cy}`} fill="#eee8ff" fillOpacity="0.45" stroke="#34415a" strokeWidth="2.5" />
-    {proof && angles && <><path d={`M 12 ${cy} H 338`} stroke="#6b7280" strokeDasharray="6 5" strokeWidth="2" /><text x="15" y={Math.max(14,cy-12)} fontSize="12">parallel to AB</text><text x={cx-34} y={cy+15} fontSize="13">A</text><text x={cx+20} y={cy+24} fontSize="13">B</text><text x="48" y="303" fontSize="12">A + C + B make a straight angle at C</text></>}
-    {[[40,280,'A',COLORS[0]],[310,280,'B',COLORS[1]],[cx,cy,'C',COLORS[2]]].map(([x,y,label,color])=><g key={String(label)}><circle cx={Number(x)} cy={Number(y)} r="5" fill={String(color)} /><text x={Number(x)+(label==='C'?-14:8)} y={Number(y)+(label==='C'?-8:-8)} fill={String(color)} fontSize="17" fontWeight="bold">{label}</text></g>)}
-  </svg>;
+  return <MarksSvg viewBox="0 0 350 310" role="img" aria-label={angles ? `Triangle ABC: A ${angles[0].toFixed(1)} degrees, B ${angles[1].toFixed(1)} degrees, C ${angles[2].toFixed(1)} degrees.${proof ? ' A line through C is parallel to AB.' : ''}` : 'A, B and C are too close to a straight line to measure a triangle reliably.'} marks={triangleAngleMarks(cx, cy, angles, proof, COLORS)} />;
 }
 export function TriangleAngleLab({ proof = true }: { proof?: boolean }) {
   const id = `triangle-${useId().replace(/:/g,'')}`, boardEl = useRef<HTMLDivElement>(null);

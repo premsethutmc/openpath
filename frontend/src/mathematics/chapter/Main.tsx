@@ -2,6 +2,8 @@
  * Mathematics home and the first JEE Main chapter, for a phone, top to bottom: one thing per screen, large cards,
  * no drop-downs. Same OpenPath account and learner as English; progress is saved to the account after every step.
  */
+import { parabolaMarks } from "../../../../packages/learning/src/lesson-marks";
+import { MarksSvg } from "../../year/Scene";
 import { setGradingMode } from "../../../../packages/learning/src/grading/mode";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
@@ -469,15 +471,7 @@ function Parabola(props: { a: number; b: number; c: number; interactive?: boolea
   const [a, setA] = useState(props.a);
   const [b, setB] = useState(props.b);
   const [c, setC] = useState(props.c);
-  const W = 320, H = 220, X = 6, Y = props.yMax ?? 10;
-  const sx = (x: number) => ((x + X) / (2 * X)) * W;
-  const sy = (y: number) => H / 2 - (y / Y) * (H / 2);
-  const pts: string[] = [];
-  for (let i = 0; i <= 240; i++) {
-    const x = -X + (2 * X * i) / 240;
-    const y = a * x * x + b * x + c;
-    pts.push(`${sx(x).toFixed(1)},${sy(Math.max(-3 * Y, Math.min(3 * Y, y))).toFixed(1)}`);
-  }
+  const W = 320, H = 220, Y = props.yMax ?? 10;
   const D = b * b - 4 * a * c;
   const roots = D > 0 ? [(-b - Math.sqrt(D)) / (2 * a), (-b + Math.sqrt(D)) / (2 * a)] : D === 0 ? [-b / (2 * a)] : [];
   const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2)).replace("-", "−");
@@ -492,13 +486,7 @@ function Parabola(props: { a: number; b: number; c: number; interactive?: boolea
   );
   return (
     <figure className="graph">
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Graph of ${eq}. ${nature}.`}>
-        <line x1={0} y1={sy(0)} x2={W} y2={sy(0)} className="axis" />
-        <line x1={sx(0)} y1={0} x2={sx(0)} y2={H} className="axis" />
-        {[-4, -2, 2, 4].map((t) => <text key={t} x={sx(t)} y={sy(0) + 14} className="tick">{String(t).replace("-", "−")}</text>)}
-        <polyline points={pts.join(" ")} className="curve" />
-        {roots.filter((r) => Math.abs(r) <= X).map((r, i) => <circle key={i} cx={sx(r)} cy={sy(0)} r={5} className="root" />)}
-      </svg>
+      <MarksSvg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Graph of ${eq}. ${nature}.`} marks={parabolaMarks(a, b, c, Y, roots)} />
       <figcaption>
         <strong>{eq}</strong>
         <span>D = {fmt(D)}. {nature}{roots.length ? `: x = ${roots.map(fmt).join(" and ")}` : ""}.</span>

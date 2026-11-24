@@ -26,10 +26,14 @@ engine; do not build beside it.
   A new need (a new figure, a new way to answer on a picture) is a new scene kind or figure in the engine, with its
   checks, so every lesson can use it. It is never a new drawing component.
 - `frontend/src/learning/foundations.test.ts` fails when a new file draws its own `<svg>`. Do not add to
-  `frontend/src/learning/svg-allowed.json` to get past it. Its `toMove` list is the maths teaching pictures still drawn
-  outside the engine; when you work on one, move it into the engine and take it off the list. `notTeaching` (icons, the
-  cat, writing surfaces, English pictures) stays.
+  `frontend/src/learning/svg-allowed.json` to get past it. Every maths teaching picture is now in the engine, so its
+  `toMove` list is empty and stays empty. `notTeaching` (icons, the cat, writing surfaces, English pictures) stays.
 - A still picture in a question (a clock, a bar chart, a labelled triangle) is worked out in
   `packages/learning/src/figure-marks.ts` and drawn by the same player (`FigureMarks`). A new kind of question picture is a
   new case there.
+- A labelled drawing (points, segments, circles, right-angle and equal-length marks) is a `diagram` figure there: it is
+  refused if a marked right angle is not 90° or segments marked equal are not equal. Drawings of the older lesson pages
+  are functions in `packages/learning/src/lesson-marks.ts`, drawn with `MarksSvg`.
+- A Start here idea shows still pictures through `figures` on its screen (`content/learning/foundations.v1.json`); an idea
+  with no picture records why in `show`.
 - The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
