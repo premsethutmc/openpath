@@ -28,9 +28,9 @@ function Steps({ steps, cases }: { steps: NonNullable<FoundationScreen["steps"]>
       <ol>
         {steps.map((st, i) => (
           <li key={i} className="sh-step">
-            <p className="sh-step-do"><span className="sh-step-n">{cases ? "Example" : "Step"} {i + 1}</span> {st.do}</p>
-            <div className="sh-step-lines">{st.lines.map((l, j) => <div key={j}>{l}</div>)}</div>
-            {open[i] ? <div className="sh-why" data-why>{st.why.map((w, j) => <p key={j}>{w}</p>)}</div> : null}
+            <p className="sh-step-do"><span className="sh-step-n">{cases ? "Example" : "Step"} {i + 1}</span> {mx(st.do)}</p>
+            <div className="sh-step-lines">{st.lines.map((l, j) => <div key={j}>{mx(l)}</div>)}</div>
+            {open[i] ? <div className="sh-why" data-why>{st.why.map((w, j) => <p key={j}>{mx(w)}</p>)}</div> : null}
             <button type="button" className="sh-why-btn" aria-expanded={open[i]} onClick={() => setOpen(open.map((o, j) => (j === i ? !o : o)))}>{open[i] ? "Hide" : "Why?"}</button>
           </li>
         ))}

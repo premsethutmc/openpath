@@ -743,16 +743,46 @@
       "f(x) = 2x + 1 says: double the input, then add 1. To find f(3), put 3 wherever x stands.",
       "Two functions are usually called f and g so that we can tell them apart."
      ],
-     "example": [
-      "f(x) = 2x + 1.",
-      "f(3) = 2 × 3 + 1 = 7.",
-      "f(0) = 2 × 0 + 1 = 1.",
-      "f(−2) = 2 × (−2) + 1 = −3."
-     ],
      "check": {
       "question": "f(x) = x + 5. What is f(2)?",
       "answer": "7"
-     }
+     },
+     "ask": "The rule is f(x) = 2x + 1. Find f(3), f(0) and f(−2).",
+     "steps": [
+      {
+       "do": "Put 3 in place of x.",
+       "lines": [
+        "f(3) = 2 × 3 + 1",
+        "= 6 + 1 = 7"
+       ],
+       "why": [
+        "f(x) = 2x + 1 is a rule: double the number, then add 1. The x only marks where the number goes.",
+        "f(3) means \"use the rule on 3\". It does not mean f times 3."
+       ]
+      },
+      {
+       "do": "Put 0 in place of x.",
+       "lines": [
+        "f(0) = 2 × 0 + 1",
+        "= 0 + 1 = 1"
+       ],
+       "why": [
+        "Twice nothing is nothing, so only the + 1 is left."
+       ]
+      },
+      {
+       "do": "Put −2 in place of x.",
+       "lines": [
+        "f(−2) = 2 × (−2) + 1",
+        "= −4 + 1 = −3"
+       ],
+       "why": [
+        "Twice −2 is −4. Adding 1 to −4 moves one step up the number line, to −3.",
+        "Negative inputs are fine. The brackets round −2 keep the minus sign with its number."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Domain and range: what goes in, what comes out",
@@ -761,15 +791,43 @@
       "The domain of a function is the set of inputs it is allowed to take. The range is the set of outputs that actually come out.",
       "The notation f : A → B means the inputs come from the set A and the outputs land in the set B. The set B is called the codomain. The range is the part of B that is really reached."
      ],
-     "example": [
-      "f(x) = x² with domain {1, 2, 3}.",
-      "f(1) = 1, f(2) = 4, f(3) = 9.",
-      "The range is {1, 4, 9}."
-     ],
      "check": {
       "question": "Can 0 be in the domain of f(x) = 1/x?",
       "answer": "No, because 1 ÷ 0 has no meaning."
-     }
+     },
+     "ask": "f(x) = x², and only 1, 2 and 3 are allowed in. Find the range.",
+     "steps": [
+      {
+       "do": "Use the rule on each allowed input.",
+       "lines": [
+        "f(1) = 1 × 1 = 1",
+        "f(2) = 2 × 2 = 4",
+        "f(3) = 3 × 3 = 9"
+       ],
+       "why": [
+        "The domain is the set of numbers you are allowed to put in: here {1, 2, 3}.",
+        "x² means x times x, not x times 2."
+       ]
+      },
+      {
+       "do": "Collect the answers.",
+       "lines": [
+        "Outputs: 1, 4, 9"
+       ],
+       "why": [
+        "Every input gave exactly one output. That is what makes the rule a function."
+       ]
+      },
+      {
+       "do": "Write them as a set: that is the range.",
+       "lines": [
+        "Range = {1, 4, 9}"
+       ],
+       "why": [
+        "The range is the set of answers that actually come out. It depends on the domain: allow different inputs and the range changes."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -1263,16 +1321,43 @@
       "The first term is often written simply as a.",
       "Sₙ means the sum of the first n terms added together."
      ],
-     "example": [
-      "Sequence: 3, 6, 12, 24, …",
-      "a₁ = 3, a₂ = 6, a₃ = 12.",
-      "S₃ = 3 + 6 + 12 = 21.",
-      "S₄ = 21 + 24 = 45."
-     ],
      "check": {
       "question": "In the sequence 5, 10, 20, 40, … what is a₂?",
       "answer": "10"
-     }
+     },
+     "ask": "The sequence is 3, 6, 12, 24, … Name its terms and find S₃ and S₄.",
+     "steps": [
+      {
+       "do": "Label the terms in order.",
+       "lines": [
+        "a₁ = 3, a₂ = 6",
+        "a₃ = 12, a₄ = 24"
+       ],
+       "why": [
+        "The small number tells the position: a₁ is the first term, a₂ the second, and so on. It is a label, not a multiplication."
+       ]
+      },
+      {
+       "do": "S₃ is the first three terms added.",
+       "lines": [
+        "S₃ = 3 + 6 + 12",
+        "= 21"
+       ],
+       "why": [
+        "S stands for sum. Sₙ means \"add the first n terms\"."
+       ]
+      },
+      {
+       "do": "S₄ adds one more term.",
+       "lines": [
+        "S₄ = S₃ + a₄",
+        "= 21 + 24 = 45"
+       ],
+       "why": [
+        "You do not have to start again. The sum of four terms is the sum of three, plus the fourth."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -1506,17 +1591,55 @@
       "|r| < 1 means r is less than 1 step from 0, so r lies between −1 and 1. For example 1/2, −1/2 and −2/3 all have |r| < 1.",
       "This matters because multiplying again and again by such a number makes things smaller each time: 8, 4, 2, 1, 1/2, … With r = 2 or r = −2 the terms would grow instead."
      ],
-     "example": [
-      "|−5| = 5.",
-      "|1/5| = 1/5, which is less than 1.",
-      "|−2/3| = 2/3, which is less than 1.",
-      "|−3| = 3, which is not less than 1."
-     ],
      "check": {
       "question": "Is |−1/2| < 1?",
       "answer": "Yes. |−1/2| = 1/2, and 1/2 is less than 1."
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Which of −5, 1/5, −2/3 and −3 have a size less than 1?",
+     "steps": [
+      {
+       "do": "Size of −5.",
+       "lines": [
+        "|−5| = 5",
+        "5 is not less than 1"
+       ],
+       "why": [
+        "The two bars mean \"how far from zero\", ignoring the sign. −5 is 5 steps from zero."
+       ]
+      },
+      {
+       "do": "Size of 1/5.",
+       "lines": [
+        "|1/5| = 1/5",
+        "1/5 is less than 1"
+       ],
+       "why": [
+        "A positive number is its own size. One fifth is smaller than one whole."
+       ]
+      },
+      {
+       "do": "Size of −2/3.",
+       "lines": [
+        "|−2/3| = 2/3",
+        "2/3 is less than 1"
+       ],
+       "why": [
+        "Drop the minus sign. Two thirds is still less than one whole."
+       ]
+      },
+      {
+       "do": "Size of −3.",
+       "lines": [
+        "|−3| = 3",
+        "3 is not less than 1"
+       ],
+       "why": [
+        "Be careful: −3 is less than 1 on the number line, but its size, 3, is not. The condition |r| < 1 is about size."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -2501,16 +2624,55 @@
       "The small number is called the base. In general, log of X to base B is the power y for which B raised to y equals X.",
       "So a logarithm is not a new kind of number. It is just a power, found backwards."
      ],
-     "example": [
-      "log₂ 8 = 3, because 2³ = 8.",
-      "log₅ 25 = 2, because 5² = 25.",
-      "log₁₀ 1000 = 3, because 10³ = 1000.",
-      "log₂ 2 = 1, because 2 to the power 1 is 2."
-     ],
      "check": {
       "question": "What is log₁₀ 100?",
       "answer": "2, because 10² = 100."
-     }
+     },
+     "ask": "Find log₂ 8, log₅ 25, log₁₀ 1000 and log₂ 2.",
+     "steps": [
+      {
+       "do": "log₂ 8: 2 to what power is 8?",
+       "lines": [
+        "2 × 2 × 2 = 8",
+        "2³ = 8, so log₂ 8 = 3"
+       ],
+       "why": [
+        "A logarithm asks a question: \"what power of the small number (the base) gives the big number?\"",
+        "Count the 2s multiplied together: three of them make 8."
+       ]
+      },
+      {
+       "do": "log₅ 25: 5 to what power is 25?",
+       "lines": [
+        "5 × 5 = 25",
+        "5² = 25, so log₅ 25 = 2"
+       ],
+       "why": [
+        "Two 5s multiplied make 25, so the power is 2."
+       ]
+      },
+      {
+       "do": "log₁₀ 1000: 10 to what power is 1000?",
+       "lines": [
+        "10 × 10 × 10 = 1000",
+        "log₁₀ 1000 = 3"
+       ],
+       "why": [
+        "For base 10, the power is the number of zeros: 1000 has three."
+       ]
+      },
+      {
+       "do": "log₂ 2: 2 to what power is 2?",
+       "lines": [
+        "2¹ = 2",
+        "log₂ 2 = 1"
+       ],
+       "why": [
+        "Any number to the power 1 is itself. So the log of a number to its own base is always 1."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Plain 'log' means base 10, and why logs add",
@@ -2520,16 +2682,53 @@
       "When you multiply powers of 10, the powers add: 10² × 10³ = 10 × 10 × 10 × 10 × 10, which is 10 to the power 5. Logs are those powers, so the log of a product is the sum of the logs.",
       "This is why logarithms were invented: they turn multiplying into adding."
      ],
-     "example": [
-      "log 100 = 2 and log 1000 = 3.",
-      "100 × 1000 = 100000, which is 10 to the power 5.",
-      "So log(100 × 1000) = 5 = 2 + 3.",
-      "That is the law log(xy) = log x + log y."
-     ],
      "check": {
       "question": "log 100 + log 10 equals the log of which number?",
       "answer": "1000 (2 + 1 = 3, and log 1000 = 3)."
-     }
+     },
+     "ask": "Check that log(100 × 1000) = log 100 + log 1000.",
+     "steps": [
+      {
+       "do": "Find the two logs.",
+       "lines": [
+        "log 100 = 2",
+        "log 1000 = 3"
+       ],
+       "why": [
+        "With no base written, log means base 10. 100 is 10², so its log is 2. 1000 is 10³, so its log is 3."
+       ]
+      },
+      {
+       "do": "Multiply the two numbers.",
+       "lines": [
+        "100 × 1000 = 100000",
+        "= 10⁵"
+       ],
+       "why": [
+        "Count the zeros: 2 zeros and 3 zeros make 5 zeros. That is 10 to the power 5."
+       ]
+      },
+      {
+       "do": "Find the log of the product.",
+       "lines": [
+        "log 100000 = 5"
+       ],
+       "why": [
+        "The power of 10 is 5, so the log is 5."
+       ]
+      },
+      {
+       "do": "Compare.",
+       "lines": [
+        "5 = 2 + 3",
+        "log(xy) = log x + log y"
+       ],
+       "why": [
+        "When you multiply powers of 10 you add the powers. Logs are those powers, so multiplying numbers adds their logs.",
+        "This is why logs were invented: they turn a hard multiplication into an easy addition."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -2763,17 +2962,44 @@
       "Rows go across and columns go down. A matrix with 2 rows and 2 columns has order 2 × 2: rows are always said first.",
       "This app writes a matrix one row at a time: [[5, 2], [3, 4]] has first row 5, 2 and second row 3, 4. A matrix gets a capital letter as its name, such as A."
      ],
-     "example": [
-      "A = [[5, 2], [3, 4]].",
-      "Row 1 is 5, 2. Row 2 is 3, 4.",
-      "Column 1 is 5, 3. Column 2 is 2, 4.",
-      "The entry in row 2, column 1 is 3."
-     ],
      "check": {
       "question": "How many rows does [[1, 2, 3], [4, 5, 6]] have?",
       "answer": "2 (and 3 columns, so its order is 2 × 3)."
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[5, 2], [3, 4]]. Name its rows and columns, and find the entry in row 2, column 1.",
+     "steps": [
+      {
+       "do": "Rows go across.",
+       "lines": [
+        "Row 1 is 5, 2",
+        "Row 2 is 3, 4"
+       ],
+       "why": [
+        "A row is a line of numbers read from left to right, like a row of seats."
+       ]
+      },
+      {
+       "do": "Columns go down.",
+       "lines": [
+        "Column 1 is 5, 3",
+        "Column 2 is 2, 4"
+       ],
+       "why": [
+        "A column is read from top to bottom, like a pillar."
+       ]
+      },
+      {
+       "do": "Row 2, column 1.",
+       "lines": [
+        "Row 2 is 3, 4",
+        "Its first number is 3"
+       ],
+       "why": [
+        "Always say the row first, then the column. Go to row 2, then take the number in the first place."
+       ]
+      }
+     ]
     },
     {
      "title": "Why a row meets a column",
@@ -2782,17 +3008,44 @@
       "That is a row of quantities (5, 2) times a column of prices (10, 30): multiply the matching entries and add.",
       "Multiplying matrices does exactly this again and again: each row of the first matrix is combined with each column of the second. The result for row i and column j is written in row i, column j of the answer."
      ],
-     "example": [
-      "[[5, 2], [3, 4]] times the column [[10], [30]].",
-      "Row 1: 5 × 10 + 2 × 30 = 110.",
-      "Row 2: 3 × 10 + 4 × 30 = 150.",
-      "The answer is the column [[110], [150]]: each shop's takings."
-     ],
      "check": {
       "question": "Combine the row (1, 2) with the column (3, 4).",
       "answer": "1 × 3 + 2 × 4 = 11"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Multiply [[5, 2], [3, 4]] by the column [[10], [30]].",
+     "steps": [
+      {
+       "do": "Row 1 meets the column.",
+       "lines": [
+        "5 × 10 + 2 × 30",
+        "= 50 + 60 = 110"
+       ],
+       "why": [
+        "Take the first number of the row with the first of the column, the second with the second, multiply each pair, and add.",
+        "Think of a shop: 5 of one item at 10 each and 2 of another at 30 each."
+       ]
+      },
+      {
+       "do": "Row 2 meets the column.",
+       "lines": [
+        "3 × 10 + 4 × 30",
+        "= 30 + 120 = 150"
+       ],
+       "why": [
+        "Same method with the second row: the second shop's takings."
+       ]
+      },
+      {
+       "do": "Write the answers as a column.",
+       "lines": [
+        "[[110], [150]]"
+       ],
+       "why": [
+        "Each row gave one number, and they are stacked in the same order as the rows."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -3021,17 +3274,54 @@
       "For numbers, 5 × 1/5 = 1: multiplying by 1/5 undoes multiplying by 5. For a matrix A, the matrix that undoes it is called its inverse and is written A⁻¹. It satisfies A × A⁻¹ = I.",
       "So if a message was changed by multiplying by A, multiplying by A⁻¹ brings it back."
      ],
-     "example": [
-      "A = [[2, 1], [1, 1]] and A⁻¹ = [[1, −1], [−1, 2]].",
-      "Row 1 of A × A⁻¹: 2 × 1 + 1 × (−1) = 1, and 2 × (−1) + 1 × 2 = 0.",
-      "Row 2: 1 × 1 + 1 × (−1) = 0, and 1 × (−1) + 1 × 2 = 1.",
-      "The product is [[1, 0], [0, 1]] = I."
-     ],
      "check": {
       "question": "What is A × I?",
       "answer": "A"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[2, 1], [1, 1]] and A⁻¹ = [[1, −1], [−1, 2]]. Check that A × A⁻¹ = I.",
+     "steps": [
+      {
+       "do": "Row 1 of A with column 1 of A⁻¹.",
+       "lines": [
+        "2 × 1 + 1 × (−1)",
+        "= 2 − 1 = 1"
+       ],
+       "why": [
+        "Each entry of a product is one row meeting one column: multiply the pairs and add."
+       ]
+      },
+      {
+       "do": "Row 1 of A with column 2 of A⁻¹.",
+       "lines": [
+        "2 × (−1) + 1 × 2",
+        "= −2 + 2 = 0"
+       ],
+       "why": [
+        "Column 2 of A⁻¹ is −1, 2."
+       ]
+      },
+      {
+       "do": "Row 2 of A with each column.",
+       "lines": [
+        "1 × 1 + 1 × (−1) = 0",
+        "1 × (−1) + 1 × 2 = 1"
+       ],
+       "why": [
+        "The same two meetings, now with row 2 of A, which is 1, 1."
+       ]
+      },
+      {
+       "do": "Put the four answers in place.",
+       "lines": [
+        "[[1, 0], [0, 1]] = I"
+       ],
+       "why": [
+        "I has 1s down the diagonal and 0s elsewhere. Multiplying by it changes nothing, like multiplying a number by 1.",
+        "A⁻¹ undoes A, the way dividing by 2 undoes multiplying by 2."
+       ]
+      }
+     ]
     },
     {
      "title": "Finding the inverse of a 2 × 2 matrix",
@@ -3040,17 +3330,65 @@
       "Next write the adjoint, adj A = [[d, −b], [−c, a]]: swap a and d, and change the signs of b and c.",
       "Then A⁻¹ = adj A divided by |A|: every entry is divided. If |A| = 0 you cannot divide, and A has no inverse."
      ],
-     "example": [
-      "A = [[3, 2], [4, 3]]. |A| = 3 × 3 − 2 × 4 = 1.",
-      "adj A = [[3, −2], [−4, 3]], so A⁻¹ = [[3, −2], [−4, 3]].",
-      "Decode the column (13, 19): 3 × 13 − 2 × 19 = 1, and −4 × 13 + 3 × 19 = 5.",
-      "The message is (1, 5). Numbering the alphabet 1 for A, 2 for B, 3 for C and so on, these are the letters A and E."
-     ],
      "check": {
       "question": "What is the determinant of [[2, 1], [1, 1]]?",
       "answer": "2 × 1 − 1 × 1 = 1"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[3, 2], [4, 3]]. Find A⁻¹ and use it to decode the column (13, 19).",
+     "steps": [
+      {
+       "do": "Find the determinant |A|.",
+       "lines": [
+        "3 × 3 − 2 × 4",
+        "= 9 − 8 = 1"
+       ],
+       "why": [
+        "For [[a, b], [c, d]] the determinant is ad − bc: multiply down the main diagonal, then subtract the product of the other diagonal.",
+        "If it came to 0, the matrix would have no inverse."
+       ]
+      },
+      {
+       "do": "Write the adjoint.",
+       "lines": [
+        "adj A = [[3, −2], [−4, 3]]"
+       ],
+       "why": [
+        "Swap the two numbers on the main diagonal (3 and 3) and change the signs of the other two (2 becomes −2, 4 becomes −4)."
+       ]
+      },
+      {
+       "do": "Divide by the determinant.",
+       "lines": [
+        "A⁻¹ = adj A ÷ 1",
+        "= [[3, −2], [−4, 3]]"
+       ],
+       "why": [
+        "The inverse is the adjoint divided by the determinant. Dividing by 1 changes nothing."
+       ]
+      },
+      {
+       "do": "Decode: row 1 meets (13, 19).",
+       "lines": [
+        "3 × 13 − 2 × 19",
+        "= 39 − 38 = 1"
+       ],
+       "why": [
+        "Multiplying the coded column by A⁻¹ undoes the coding. Row 1 gives the first number of the message."
+       ]
+      },
+      {
+       "do": "Row 2 meets (13, 19).",
+       "lines": [
+        "−4 × 13 + 3 × 19",
+        "= −52 + 57 = 5"
+       ],
+       "why": [
+        "Row 2 gives the second number. The message is (1, 5).",
+        "With A = 1, B = 2, C = 3 and so on, 1 and 5 are the letters A and E."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -5017,16 +5355,53 @@
       "a is the number in front of x², b is the number in front of x, and c is the number on its own. Each keeps its sign. If a term is missing, its number is 0.",
       "A solution (also called a root) is a value of x that makes the equation true."
      ],
-     "example": [
-      "x² − 5x + 6 = 0 has a = 1, b = −5, c = 6.",
-      "Try x = 2: 4 − 10 + 6 = 0. True, so 2 is a root.",
-      "Try x = 3: 9 − 15 + 6 = 0. True, so 3 is a root.",
-      "Try x = 1: 1 − 5 + 6 = 2. Not 0, so 1 is not a root."
-     ],
      "check": {
       "question": "In 3x² + 4x − 7 = 0, what is c?",
       "answer": "−7"
-     }
+     },
+     "ask": "For x² − 5x + 6 = 0, name a, b and c. Then test whether 2, 3 and 1 are roots.",
+     "steps": [
+      {
+       "do": "Read off a, b and c.",
+       "lines": [
+        "a = 1, b = −5, c = 6"
+       ],
+       "why": [
+        "A quadratic is written ax² + bx + c = 0. a is the number with x², b the number with x, and c the number alone.",
+        "x² with no number in front means 1x². The minus sign belongs to b: b is −5, not 5."
+       ]
+      },
+      {
+       "do": "Test x = 2.",
+       "lines": [
+        "2² − 5 × 2 + 6",
+        "= 4 − 10 + 6 = 0 ✓"
+       ],
+       "why": [
+        "A root is a number that makes the equation true. Put it in place of x and see whether you get 0."
+       ]
+      },
+      {
+       "do": "Test x = 3.",
+       "lines": [
+        "3² − 5 × 3 + 6",
+        "= 9 − 15 + 6 = 0 ✓"
+       ],
+       "why": [
+        "It also gives 0, so 3 is a root too. A quadratic can have two roots."
+       ]
+      },
+      {
+       "do": "Test x = 1.",
+       "lines": [
+        "1² − 5 × 1 + 6",
+        "= 1 − 5 + 6 = 2 ✗"
+       ],
+       "why": [
+        "2 is not 0, so 1 does not make the equation true. It is not a root."
+       ]
+      }
+     ]
     },
     {
      "title": "The formula, and why b² − 4ac decides",
@@ -5036,16 +5411,53 @@
       "If it is positive, the + and the − give two different answers. If it is 0, adding or taking away 0 changes nothing, so there is one answer. If it is negative, it has no real square root, so there is no real answer.",
       "So you can count the solutions from b² − 4ac alone, before solving."
      ],
-     "example": [
-      "x² − 5x + 6 = 0: a = 1, b = −5, c = 6.",
-      "b² − 4ac = 25 − 24 = 1, and √1 = 1.",
-      "x = (5 + 1) ÷ 2 = 3, or x = (5 − 1) ÷ 2 = 2.",
-      "The discriminant was positive, and there are two solutions."
-     ],
      "check": {
       "question": "If b² − 4ac = 0, how many different solutions are there?",
       "answer": "One."
-     }
+     },
+     "ask": "Solve x² − 5x + 6 = 0 with the formula x = (−b ± √(b² − 4ac)) ÷ 2a.",
+     "steps": [
+      {
+       "do": "Write a, b and c.",
+       "lines": [
+        "a = 1, b = −5, c = 6"
+       ],
+       "why": [
+        "Take each with its sign. b is −5."
+       ]
+      },
+      {
+       "do": "Work out b² − 4ac first.",
+       "lines": [
+        "(−5)² − 4 × 1 × 6",
+        "= 25 − 24 = 1"
+       ],
+       "why": [
+        "(−5)² is −5 × −5 = 25: a minus times a minus is a plus.",
+        "This number under the root is called the discriminant. It decides how many answers there are."
+       ]
+      },
+      {
+       "do": "Take its square root.",
+       "lines": [
+        "√1 = 1"
+       ],
+       "why": [
+        "If the discriminant were negative there would be no real square root, and so no real solution. If it were 0 there would be just one."
+       ]
+      },
+      {
+       "do": "Use + and then −.",
+       "lines": [
+        "x = (5 + 1) ÷ 2 = 3",
+        "x = (5 − 1) ÷ 2 = 2"
+       ],
+       "why": [
+        "−b is −(−5) = 5. The ± sign means do it twice: once adding the root, once subtracting it.",
+        "2a is 2 × 1 = 2. The two answers, 3 and 2, are the roots found by testing on the screen before."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -5279,16 +5691,52 @@
       "A relation from A to B is then just the set of all the pairs that are linked, with the first entry from A and the second from B.",
       "A × B is the set of every possible pair. A relation picks out some of them, which is why it is called a subset of A × B."
      ],
-     "example": [
-      "A = {1, 2, 3} and B = {2, 3}. The link is 'a is less than b'.",
-      "1 is less than 2 and 3: pairs (1, 2), (1, 3).",
-      "2 is less than 3: pair (2, 3). 3 is less than nothing in B.",
-      "R = {(1, 2), (1, 3), (2, 3)}: 3 of the 6 pairs in A × B."
-     ],
      "check": {
       "question": "In the example, is (3, 2) in R?",
       "answer": "No, because 3 is not less than 2."
-     }
+     },
+     "ask": "A = {1, 2, 3} and B = {2, 3}. The link is 'a is less than b'. List the relation R.",
+     "steps": [
+      {
+       "do": "Start with 1 from A.",
+       "lines": [
+        "1 < 2 ✓ and 1 < 3 ✓",
+        "Pairs (1, 2), (1, 3)"
+       ],
+       "why": [
+        "Take each member of A in turn and ask which members of B it is linked to. A pair is written (from A, from B)."
+       ]
+      },
+      {
+       "do": "Then 2 from A.",
+       "lines": [
+        "2 < 2 ✗, 2 < 3 ✓",
+        "Pair (2, 3)"
+       ],
+       "why": [
+        "2 is not less than itself, so (2, 2) is not in the relation."
+       ]
+      },
+      {
+       "do": "Then 3 from A.",
+       "lines": [
+        "3 < 2 ✗, 3 < 3 ✗",
+        "No pairs"
+       ],
+       "why": [
+        "3 is not less than anything in B. A member of A is allowed to have no partner."
+       ]
+      },
+      {
+       "do": "Collect the pairs.",
+       "lines": [
+        "R = {(1, 2), (1, 3), (2, 3)}"
+       ],
+       "why": [
+        "A × B has every possible pair: 3 × 2 = 6 of them. A relation keeps only the pairs where the link is true: here 3 of the 6."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -9526,17 +9974,51 @@
       "The absolute value of a number is its distance from 0 on the number line. It is written with two upright bars: |−3| = 3 and |3| = 3. It removes a minus sign and leaves a positive number as it is.",
       "An area can never be negative. But a formula built from coordinates can come out negative, depending on the order in which you take the points. The bars put that right."
      ],
-     "example": [
-      "|−10| = 10",
-      "|10| = 10",
-      "|0| = 0",
-      "½ × |−10| = ½ × 10 = 5"
-     ],
      "check": {
       "question": "What is |−7|?",
       "answer": "7"
      },
-     "picture": "number-line"
+     "picture": "number-line",
+     "ask": "Work out |−10|, |10|, |0| and ½ × |−10|.",
+     "steps": [
+      {
+       "do": "|−10|",
+       "lines": [
+        "|−10| = 10"
+       ],
+       "why": [
+        "The two bars ask \"how far from zero?\". −10 is 10 steps from zero. A distance is never negative."
+       ]
+      },
+      {
+       "do": "|10|",
+       "lines": [
+        "|10| = 10"
+       ],
+       "why": [
+        "A positive number is already its own distance from zero."
+       ]
+      },
+      {
+       "do": "|0|",
+       "lines": [
+        "|0| = 0"
+       ],
+       "why": [
+        "Zero is no distance from itself."
+       ]
+      },
+      {
+       "do": "½ × |−10|",
+       "lines": [
+        "½ × 10 = 5"
+       ],
+       "why": [
+        "Do the bars first, then the multiplying. This is how the area formula uses them: an area cannot be negative, so the bars throw the sign away."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -10677,17 +11159,45 @@
       "For a line on a grid, pick any two points on it. The rise is the change in y. The run is the change in x. The slope is rise ÷ run, and its letter is m. On a straight line you get the same answer whichever two points you pick. That is what makes it straight.",
       "A line going uphill from left to right has a positive slope. Downhill is negative. A flat line has slope 0. A line going straight up and down has no slope, because its run is 0 and we cannot divide by 0."
      ],
-     "example": [
-      "A is (1, 2) and B is (3, 8).",
-      "Rise = 8 − 2 = 6",
-      "Run = 3 − 1 = 2",
-      "Slope = 6 ÷ 2 = 3: for every 1 step right, the line goes 3 up."
-     ],
      "check": {
       "question": "A line passes through (0, 0) and (2, 4). What is its slope?",
       "answer": "2"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "A is (1, 2) and B is (3, 8). Find the slope of the line AB.",
+     "steps": [
+      {
+       "do": "Rise: how far up from A to B?",
+       "lines": [
+        "Rise = 8 − 2 = 6"
+       ],
+       "why": [
+        "The second number of a point is its height. B is at height 8 and A at height 2, so the line climbs 6."
+       ]
+      },
+      {
+       "do": "Run: how far across?",
+       "lines": [
+        "Run = 3 − 1 = 2"
+       ],
+       "why": [
+        "The first number of a point is how far across it is. From 1 to 3 is 2 steps to the right.",
+        "Subtract in the same order both times: B minus A for the rise, and B minus A for the run."
+       ]
+      },
+      {
+       "do": "Slope is rise ÷ run.",
+       "lines": [
+        "Slope = 6 ÷ 2 = 3"
+       ],
+       "why": [
+        "Slope tells how much the line goes up for each single step to the right. Here it goes up 3 for every 1 across."
+       ]
+      }
+     ],
+     "after": [
+      "Where people slip: dividing run by rise, or subtracting one way on top and the other way underneath."
+     ]
     },
     {
      "title": "An equation that draws a line",
@@ -10696,17 +11206,53 @@
       "The equation of a line is a rule that is true for every point on the line and for no other point. To test a point, put its x and y into the equation.",
       "In y = mx + c, the number m is the slope. The number c is where the line crosses the y-axis, because x = 0 gives y = c. It is called the y-intercept. So to write the equation of a line you need two things: its slope, and one point to fix c."
      ],
-     "example": [
-      "y = 2x + 1",
-      "From (0, 1) to (1, 3): rise 2, run 1, so the slope is 2. That is m.",
-      "It crosses the y-axis at (0, 1), so c = 1.",
-      "Is (3, 7) on the line? 2 × 3 + 1 = 7. Yes."
-     ],
      "check": {
       "question": "What is the slope of the line y = 5x − 2?",
       "answer": "5"
      },
-     "picture": "coordinate-plane"
+     "picture": "coordinate-plane",
+     "ask": "For the line y = 2x + 1, find the slope, find where it crosses the y-axis, and test the point (3, 7).",
+     "steps": [
+      {
+       "do": "Find two points on the line.",
+       "lines": [
+        "x = 0: y = 2 × 0 + 1 = 1",
+        "x = 1: y = 2 × 1 + 1 = 3"
+       ],
+       "why": [
+        "Choose any x, use the equation, and you get the y that goes with it. So (0, 1) and (1, 3) are on the line."
+       ]
+      },
+      {
+       "do": "Slope from those points.",
+       "lines": [
+        "Rise = 3 − 1 = 2, run = 1",
+        "Slope = 2"
+       ],
+       "why": [
+        "The slope is the number multiplying x in the equation. In y = mx + c that number is called m."
+       ]
+      },
+      {
+       "do": "Where it crosses the y-axis.",
+       "lines": [
+        "At x = 0, y = 1",
+        "c = 1"
+       ],
+       "why": [
+        "The y-axis is where x = 0. There only the number on its own is left. That number is c."
+       ]
+      },
+      {
+       "do": "Test the point (3, 7).",
+       "lines": [
+        "2 × 3 + 1 = 7 ✓"
+       ],
+       "why": [
+        "A point is on the line when its two numbers make the equation true. Put x = 3 in: you get 7, which is the y of the point."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -11432,11 +11978,6 @@
       "The point D where a cevian from A lands on BC cuts BC into two parts, BD and DC. The ratio BD : DC compares them, and BD/DC is the same ratio written as a fraction.",
       "In the same way, let the cevian from B land at E on CA, and the cevian from C land at F on AB. Go round the triangle one way: B to C, C to A, A to B. That gives three ratios: BD/DC, CE/EA and AF/FB. Ceva's theorem says three cevians pass through one point exactly when these three multiply to 1."
      ],
-     "example": [
-      "Take the three medians: D, E and F are midpoints.",
-      "BD = DC, so BD/DC = 1. In the same way CE/EA = 1 and AF/FB = 1.",
-      "1 × 1 × 1 = 1, so the three medians meet at one point."
-     ],
      "check": {
       "question": "D is on BC with BD = 2 cm and DC = 6 cm. What is BD : DC in simplest form?",
       "answer": "1 : 3."
@@ -11518,6 +12059,39 @@
         ]
        },
        "caption": "AD is a cevian: it goes from the corner A to a point D on the opposite side. D cuts BC into two parts, BD and DC."
+      }
+     ],
+     "ask": "In triangle ABC, D, E and F are the midpoints of BC, CA and AB. Show that the three medians meet at one point.",
+     "steps": [
+      {
+       "do": "Use what a midpoint means.",
+       "lines": [
+        "BD = DC",
+        "BD/DC = 1"
+       ],
+       "why": [
+        "A midpoint cuts its side into two equal parts. Any length divided by an equal length is 1."
+       ]
+      },
+      {
+       "do": "The same on the other two sides.",
+       "lines": [
+        "CE/EA = 1",
+        "AF/FB = 1"
+       ],
+       "why": [
+        "E is the midpoint of CA and F is the midpoint of AB, so each of these ratios is 1 as well."
+       ]
+      },
+      {
+       "do": "Multiply the three ratios.",
+       "lines": [
+        "1 × 1 × 1 = 1"
+       ],
+       "why": [
+        "Ceva's theorem says: three cevians meet at one point exactly when these three ratios multiply to 1.",
+        "They do, so the three medians meet at a single point. It is called the centroid."
+       ]
       }
      ]
     }
@@ -11748,12 +12322,6 @@
       "A line that cuts through a circle meets it at two points; it is called a secant. From a point P outside the circle you can draw two tangents. 'The length of the tangent from P' means the distance from P to the point of contact T.",
       "The spoke that goes straight down to the road is upright. In the same way, the radius drawn to the point of contact always meets the tangent at a right angle. This gives a right-angled triangle to work with."
      ],
-     "example": [
-      "Centre O, radius OT = 3 cm, and P is outside with OP = 5 cm.",
-      "Triangle OTP has its right angle at T, so OP is the longest side.",
-      "PT² = 5² − 3² = 25 − 9 = 16.",
-      "PT = √16 = 4 cm."
-     ],
      "check": {
       "question": "At how many points does a tangent meet a circle?",
       "answer": "Exactly one."
@@ -11884,6 +12452,47 @@
         ]
        },
        "caption": "The tangent touches the circle at one point, T (the point of contact). The radius OT meets it at 90°. The secant cuts the circle at two points."
+      }
+     ],
+     "ask": "A circle has centre O and radius OT = 3 cm. P is outside with OP = 5 cm, and PT is a tangent. Find PT.",
+     "steps": [
+      {
+       "do": "See the right angle.",
+       "lines": [
+        "Angle OTP = 90°"
+       ],
+       "why": [
+        "A tangent always meets the radius at the point of contact at a right angle. So triangle OTP is a right triangle with the right angle at T."
+       ]
+      },
+      {
+       "do": "Find the longest side.",
+       "lines": [
+        "OP = 5 cm is the hypotenuse"
+       ],
+       "why": [
+        "The longest side of a right triangle faces the right angle. The right angle is at T, so the side facing it is OP."
+       ]
+      },
+      {
+       "do": "Use the rule of Pythagoras.",
+       "lines": [
+        "PT² + 3² = 5²",
+        "PT² = 25 − 9 = 16"
+       ],
+       "why": [
+        "In a right triangle, the squares of the two shorter sides add up to the square of the longest side.",
+        "We want a shorter side, so we subtract: 5² − 3²."
+       ]
+      },
+      {
+       "do": "Take the square root.",
+       "lines": [
+        "PT = √16 = 4 cm"
+       ],
+       "why": [
+        "PT² = 16 asks: which number times itself is 16? It is 4."
+       ]
       }
      ]
     }
@@ -12114,17 +12723,44 @@
       "Take an arc AB of a circle with centre O. Join A and B to O: angle AOB is the angle the arc makes at the centre. Now pick a point C on the rest of the circle and join A and B to C: angle ACB is the angle the arc makes at a point on the circle. Books say the arc 'subtends' these angles; it only means 'makes'.",
       "The key fact of this skill: the angle at the centre is twice the angle at the circle on the same arc."
      ],
-     "example": [
-      "Arc AB makes angle AOB = 100° at the centre.",
-      "At a point C on the rest of the circle, angle ACB = 100° ÷ 2 = 50°.",
-      "At another such point D, angle ADB = 50° as well.",
-      "If AB is a diameter, angle AOB = 180°, so angle ACB = 90°."
-     ],
      "check": {
       "question": "The angle at the centre is 80°. What is the angle at a point on the circle, on the same arc?",
       "answer": "40°."
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "Arc AB makes an angle of 100° at the centre O. What angle does it make at a point C on the rest of the circle?",
+     "steps": [
+      {
+       "do": "Use the rule: half the angle at the centre.",
+       "lines": [
+        "Angle ACB = 100° ÷ 2",
+        "= 50°"
+       ],
+       "why": [
+        "The angle an arc makes at the centre is twice the angle it makes at any point on the rest of the circle. So at the circle it is half."
+       ]
+      },
+      {
+       "do": "Try another point D on the same side.",
+       "lines": [
+        "Angle ADB = 50° as well"
+       ],
+       "why": [
+        "The rule gives half of 100° wherever the point is, so every such angle is the same. This is \"angles in the same segment are equal\"."
+       ]
+      },
+      {
+       "do": "The special case of a diameter.",
+       "lines": [
+        "Angle AOB = 180°",
+        "Angle ACB = 180° ÷ 2 = 90°"
+       ],
+       "why": [
+        "If AB passes through the centre, the angle at the centre is a straight line, 180°. Half of that is 90°: the angle in a semicircle is a right angle."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Segments and cyclic quadrilaterals",
@@ -12133,16 +12769,42 @@
       "'Angles in the same segment' are angles such as ACB and ADB, where C and D are on the circle on the same side of the chord AB. They stand on the same arc, so they are equal.",
       "A quadrilateral with all four corners on one circle is called a cyclic quadrilateral. Points that lie on one circle are called concyclic. In a cyclic quadrilateral, opposite angles add up to 180°."
      ],
-     "example": [
-      "ABCD is a cyclic quadrilateral with angle A = 70°.",
-      "Angle C is opposite angle A.",
-      "Angle C = 180° − 70° = 110°."
-     ],
      "check": {
       "question": "Where do the four corners of a cyclic quadrilateral lie?",
       "answer": "All on one circle."
      },
-     "picture": "circle-parts"
+     "picture": "circle-parts",
+     "ask": "ABCD is a cyclic quadrilateral with angle A = 70°. Find angle C.",
+     "steps": [
+      {
+       "do": "Find the angle opposite A.",
+       "lines": [
+        "Opposite A is C"
+       ],
+       "why": [
+        "Going round the shape the corners are A, B, C, D. The corner across from A, not next to it, is C."
+       ]
+      },
+      {
+       "do": "Use the rule: opposite angles add to 180°.",
+       "lines": [
+        "A + C = 180°"
+       ],
+       "why": [
+        "A cyclic quadrilateral has all four corners on one circle. For such a shape, each pair of opposite angles adds up to 180°."
+       ]
+      },
+      {
+       "do": "Subtract.",
+       "lines": [
+        "C = 180° − 70°",
+        "= 110°"
+       ],
+       "why": [
+        "If 70° and C together make 180°, then C is what is left after taking 70° away."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -17939,17 +18601,51 @@
       "The order (size) of a matrix is rows × columns, said 'rows by columns'. A matrix with 2 rows and 3 columns is a 2 × 3 matrix. A matrix with the same number of rows and columns is a square matrix, for example 3 × 3.",
       "In this app a matrix is typed row by row: [[1, 2, 3], [4, 5, 6]] has first row 1, 2, 3 and second row 4, 5, 6."
      ],
-     "example": [
-      "A = [[1, 2, 3], [4, 5, 6]]",
-      "It has 2 rows and 3 columns: a 2 × 3 matrix.",
-      "Row 2 is 4, 5, 6. Column 3 is 3, 6.",
-      "The entry in row 2, column 1 is 4."
-     ],
      "check": {
       "question": "In A = [[1, 2, 3], [4, 5, 6]], which entry is in row 1, column 2?",
       "answer": "2"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "A = [[1, 2, 3], [4, 5, 6]]. What is its order? What is the entry in row 2, column 1?",
+     "steps": [
+      {
+       "do": "Count the rows.",
+       "lines": [
+        "2 rows"
+       ],
+       "why": [
+        "Rows go across. There are two lines of numbers: 1, 2, 3 and 4, 5, 6."
+       ]
+      },
+      {
+       "do": "Count the columns.",
+       "lines": [
+        "3 columns"
+       ],
+       "why": [
+        "Columns go down. There are three: 1, 4 then 2, 5 then 3, 6."
+       ]
+      },
+      {
+       "do": "Write the order: rows × columns.",
+       "lines": [
+        "A is a 2 × 3 matrix"
+       ],
+       "why": [
+        "The order always gives the rows first. 2 × 3 here is a name, read \"2 by 3\"; it is not asking you to multiply."
+       ]
+      },
+      {
+       "do": "Row 2, column 1.",
+       "lines": [
+        "Row 2 is 4, 5, 6",
+        "Its first number is 4"
+       ],
+       "why": [
+        "Go to the second row, then take the number in the first place."
+       ]
+      }
+     ]
     },
     {
      "title": "Adding matrices and multiplying by a number",
@@ -17958,17 +18654,41 @@
       "To multiply a matrix by a number, multiply every entry by that number. So half of a matrix means halve every entry, and −A means change the sign of every entry.",
       "Two matrices are equal only when they have the same order and every pair of matching entries is equal."
      ],
-     "example": [
-      "[[1, 2], [3, 4]] + [[5, 6], [7, 8]]",
-      "= [[1 + 5, 2 + 6], [3 + 7, 4 + 8]]",
-      "= [[6, 8], [10, 12]]",
-      "Half of that: [[3, 4], [5, 6]]"
-     ],
      "check": {
       "question": "What is 2 × [[1, 0], [3, 2]]?",
       "answer": "[[2, 0], [6, 4]]"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Add [[1, 2], [3, 4]] and [[5, 6], [7, 8]], then take half of the answer.",
+     "steps": [
+      {
+       "do": "Add the numbers in matching places.",
+       "lines": [
+        "[[1 + 5, 2 + 6], [3 + 7, 4 + 8]]"
+       ],
+       "why": [
+        "Top left goes with top left, top right with top right, and so on. Matrices can only be added when they have the same order."
+       ]
+      },
+      {
+       "do": "Work out each sum.",
+       "lines": [
+        "[[6, 8], [10, 12]]"
+       ],
+       "why": [
+        "Four small additions, each staying in its own place."
+       ]
+      },
+      {
+       "do": "Half of it: halve every entry.",
+       "lines": [
+        "[[3, 4], [5, 6]]"
+       ],
+       "why": [
+        "Multiplying a matrix by a number multiplies every entry by that number. Here the number is ½."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18197,17 +18917,44 @@
       "The transpose of A is written A′. Row 1 of A becomes column 1 of A′, row 2 becomes column 2, and so on.",
       "In a square matrix, the entries from the top left corner to the bottom right corner form the main diagonal. They stay where they are when you transpose. Every other entry swaps with its mirror partner across the diagonal."
      ],
-     "example": [
-      "A = [[1, 2], [3, 4]]",
-      "Row 1 (1, 2) becomes column 1. Row 2 (3, 4) becomes column 2.",
-      "A′ = [[1, 3], [2, 4]]",
-      "The diagonal 1, 4 stayed. The 2 and 3 swapped."
-     ],
      "check": {
       "question": "What is the transpose of [[5, 7], [0, 9]]?",
       "answer": "[[5, 0], [7, 9]]"
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Find the transpose of A = [[1, 2], [3, 4]].",
+     "steps": [
+      {
+       "do": "Row 1 becomes column 1.",
+       "lines": [
+        "Row 1 is 1, 2",
+        "Column 1 of A′ is 1, 2"
+       ],
+       "why": [
+        "The transpose turns every row into a column, in the same order. It is written A′ or Aᵀ."
+       ]
+      },
+      {
+       "do": "Row 2 becomes column 2.",
+       "lines": [
+        "Row 2 is 3, 4",
+        "Column 2 of A′ is 3, 4"
+       ],
+       "why": [
+        "Write 3, 4 going down, beside the first column."
+       ]
+      },
+      {
+       "do": "Write the result.",
+       "lines": [
+        "A′ = [[1, 3], [2, 4]]"
+       ],
+       "why": [
+        "Read it across: row 1 is now 1, 3 and row 2 is 2, 4.",
+        "The diagonal numbers 1 and 4 stayed where they were. The 2 and the 3 swapped places, as in a mirror along the diagonal."
+       ]
+      }
+     ]
     },
     {
      "title": "Symmetric and skew-symmetric",
@@ -18216,17 +18963,55 @@
       "Some become their own negative when flipped: A′ = −A. They are called skew-symmetric. Each entry is the opposite of its mirror partner, and every diagonal entry must be 0, because 0 is the only number equal to its own opposite.",
       "Most matrices are neither. But every square matrix can be split into a symmetric part plus a skew-symmetric part, and that is what the next lesson does."
      ],
-     "example": [
-      "P = [[1, 5], [5, 2]]: mirror partners are 5 and 5, so P′ = P. Symmetric.",
-      "Q = [[0, 3], [−3, 0]]: mirror partners are 3 and −3, diagonal is 0.",
-      "Q′ = [[0, −3], [3, 0]] = −Q. Skew-symmetric.",
-      "P + Q = [[1, 8], [2, 2]], which is neither."
-     ],
      "check": {
       "question": "Is [[2, 7], [7, 9]] symmetric?",
       "answer": "Yes. The mirror partners are 7 and 7, so flipping changes nothing."
      },
-     "picture": "matrix-grid"
+     "picture": "matrix-grid",
+     "ask": "Decide what kind of matrix each is: P = [[1, 5], [5, 2]] and Q = [[0, 3], [−3, 0]]. What about P + Q?",
+     "steps": [
+      {
+       "do": "P: compare the mirror partners.",
+       "lines": [
+        "Top right 5, bottom left 5",
+        "P′ = P: symmetric"
+       ],
+       "why": [
+        "Mirror partners are the entries that swap when you flip the matrix along its diagonal. If each pair is equal, flipping changes nothing, so the matrix equals its transpose."
+       ]
+      },
+      {
+       "do": "Q: compare the mirror partners.",
+       "lines": [
+        "Top right 3, bottom left −3",
+        "Diagonal: 0 and 0"
+       ],
+       "why": [
+        "Here the partners are opposites, and the diagonal entries are 0."
+       ]
+      },
+      {
+       "do": "Flip Q.",
+       "lines": [
+        "Q′ = [[0, −3], [3, 0]]",
+        "Q′ = −Q: skew-symmetric"
+       ],
+       "why": [
+        "Flipping swaps 3 and −3. That is the same as changing the sign of every entry of Q. A matrix like that is called skew-symmetric.",
+        "The diagonal must be 0, because 0 is the only number equal to its own opposite."
+       ]
+      },
+      {
+       "do": "Add them.",
+       "lines": [
+        "P + Q = [[1, 8], [2, 2]]",
+        "Neither"
+       ],
+       "why": [
+        "Add matching places: 5 + 3 = 8 and 5 + (−3) = 2. The partners 8 and 2 are not equal and not opposites."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -18939,16 +19724,42 @@
       "The slant height l is the distance from the tip down the sloping side to the edge of the base. It is what you would measure with a tape on the outside of the hat.",
       "Slice the cone straight down through the tip. You see a right triangle: r along the bottom, h standing up, and l as the sloping side (the hypotenuse). So by Pythagoras, l² = r² + h²."
      ],
-     "example": [
-      "A cone has r = 3 cm and h = 4 cm.",
-      "l² = 3² + 4² = 9 + 16 = 25",
-      "l = √25 = 5 cm"
-     ],
      "check": {
       "question": "Which is longer on a cone: the height h or the slant height l?",
       "answer": "The slant height l. It is the hypotenuse, the longest side of the right triangle."
      },
-     "picture": "right-triangle"
+     "picture": "right-triangle",
+     "ask": "A cone has radius r = 3 cm and height h = 4 cm. Find its slant height l.",
+     "steps": [
+      {
+       "do": "See the right triangle inside the cone.",
+       "lines": [
+        "Sides r and h, long side l"
+       ],
+       "why": [
+        "The height goes straight down the middle and the radius goes straight across the base, so they meet at a right angle. The slant height joins their ends: it is the longest side."
+       ]
+      },
+      {
+       "do": "Use the rule of Pythagoras.",
+       "lines": [
+        "l² = r² + h²",
+        "l² = 3² + 4² = 9 + 16 = 25"
+       ],
+       "why": [
+        "The squares of the two shorter sides add up to the square of the longest side."
+       ]
+      },
+      {
+       "do": "Take the square root.",
+       "lines": [
+        "l = √25 = 5 cm"
+       ],
+       "why": [
+        "Which number times itself is 25? It is 5. The slant height is always longer than both r and h."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -23906,16 +24717,54 @@
       "The double arrow ⇒ means so, or it follows that: if the statement on its left is true, the statement on its right must be true as well.",
       "Two integers are called coprime when their only common factor is 1, that is, their HCF is 1. A fraction a/b in lowest terms always has a and b coprime."
      ],
-     "example": [
-      "5 | 20 is true, because 20 = 5 × 4.",
-      "5 | 12 is false, because 12 ÷ 5 leaves remainder 2.",
-      "2 | a says a is even, so a = 2 × c for some integer c. With the arrow: 2 | a ⇒ a = 2 × c.",
-      "HCF(4, 9) = 1, so 4 and 9 are coprime."
-     ],
      "check": {
       "question": "True or false: 4 | 12?",
       "answer": "True, because 12 = 4 × 3"
-     }
+     },
+     "ask": "Read these statements: 5 | 20, 5 | 12, 2 | a, and HCF(4, 9) = 1.",
+     "steps": [
+      {
+       "do": "5 | 20",
+       "lines": [
+        "20 = 5 × 4",
+        "True"
+       ],
+       "why": [
+        "The upright bar is read \"divides\". 5 | 20 says 5 goes into 20 exactly, with nothing left over."
+       ]
+      },
+      {
+       "do": "5 | 12",
+       "lines": [
+        "12 = 5 × 2 + 2",
+        "False"
+       ],
+       "why": [
+        "12 ÷ 5 leaves a remainder of 2, so 5 does not divide 12."
+       ]
+      },
+      {
+       "do": "2 | a",
+       "lines": [
+        "a is even",
+        "2 | a ⇒ a = 2 × c"
+       ],
+       "why": [
+        "If 2 divides a, then a is some whole number c doubled.",
+        "The arrow ⇒ is read \"so\" or \"implies\": if the left side is true, the right side must be true."
+       ]
+      },
+      {
+       "do": "HCF(4, 9) = 1",
+       "lines": [
+        "4 and 9 are coprime"
+       ],
+       "why": [
+        "The only number that divides both 4 and 9 is 1. Two numbers like that are called coprime. Neither needs to be a prime itself."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -24149,12 +24998,6 @@
       "Two integers are called congruent modulo n when they leave the same remainder on division by n. That is the same as saying that their difference is a multiple of n. 15 and 3 are congruent modulo 12, because 15 − 3 = 12.",
       "This is written with a sign like an equals sign with three bars, followed by (mod n), and read as 15 is congruent to 3 mod 12. The remainder itself, one of 0, 1, 2 up to n − 1, is called the least non-negative residue."
      ],
-     "example": [
-      "Find 17 modulo 5.",
-      "17 = 5 × 3 + 2",
-      "The remainder is 2.",
-      "So 17 is congruent to 2 (mod 5), and 2 is the least non-negative residue."
-     ],
      "check": {
       "question": "What remainder does 9 leave on division by 7?",
       "answer": "2, so 9 is congruent to 2 (mod 7)"
@@ -24167,6 +25010,39 @@
         "m": 0
        },
        "caption": "It is 10 o'clock. Count 5 hours on: 11, 12, 1, 2, 3. After 12 the numbers start again."
+      }
+     ],
+     "ask": "Find 17 modulo 5.",
+     "steps": [
+      {
+       "do": "How many whole 5s fit into 17?",
+       "lines": [
+        "5 × 3 = 15",
+        "5 × 4 = 20 is too big"
+       ],
+       "why": [
+        "Modulo 5 means we only care about what is left after taking out as many 5s as possible."
+       ]
+      },
+      {
+       "do": "What is left over?",
+       "lines": [
+        "17 − 15 = 2",
+        "17 = 5 × 3 + 2"
+       ],
+       "why": [
+        "Three 5s make 15. From 15 up to 17 is 2 more. That leftover is the remainder."
+       ]
+      },
+      {
+       "do": "Write it in the new words.",
+       "lines": [
+        "17 ≡ 2 (mod 5)"
+       ],
+       "why": [
+        "\"17 is congruent to 2 modulo 5\" means 17 and 2 leave the same remainder when divided by 5.",
+        "2 is called the least non-negative residue: the smallest remainder that is not below zero."
+       ]
       }
      ]
     }
@@ -26594,16 +27470,54 @@
       "A rational number is one that can be written as a fraction p/q with integers p and q, q ≠ 0. Its decimal either stops or repeats. A number that cannot be written as any such fraction is called irrational. √2 is irrational, and so are √3, √5 and π.",
       "So an irrational length cannot be measured off exactly on a ruler marked in fractions of a unit. It can still be built exactly, as the hypotenuse of a right triangle. That is what this lesson does."
      ],
-     "example": [
-      "Is √9 irrational? No: √9 = 3 = 3/1, which is rational.",
-      "Is √5 irrational? 2² = 4 and 3² = 9, so √5 lies between 2 and 3.",
-      "5 is not a perfect square, so √5 is irrational.",
-      "√5 = 2.2360679... and the digits never end or repeat."
-     ],
      "check": {
       "question": "Is √16 rational or irrational?",
       "answer": "Rational, because √16 = 4"
-     }
+     },
+     "ask": "Are √9 and √5 rational or irrational?",
+     "steps": [
+      {
+       "do": "√9",
+       "lines": [
+        "√9 = 3 = 3/1",
+        "Rational"
+       ],
+       "why": [
+        "A rational number can be written as a whole number over a whole number. 3 is 3/1, so it is rational.",
+        "A root is only irrational when it does not come out exactly."
+       ]
+      },
+      {
+       "do": "Where does √5 lie?",
+       "lines": [
+        "2² = 4 and 3² = 9",
+        "√5 is between 2 and 3"
+       ],
+       "why": [
+        "5 lies between 4 and 9, so its square root lies between 2 and 3. It is not a whole number."
+       ]
+      },
+      {
+       "do": "Is √5 rational?",
+       "lines": [
+        "5 is not a perfect square",
+        "√5 is irrational"
+       ],
+       "why": [
+        "The square root of a whole number is either a whole number or irrational. There is nothing in between."
+       ]
+      },
+      {
+       "do": "What that looks like.",
+       "lines": [
+        "√5 = 2.2360679…"
+       ],
+       "why": [
+        "The digits go on for ever without settling into a repeating pattern. That is the mark of an irrational number."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     }
    ],
    "practice": [
@@ -26837,16 +27751,44 @@
       "Afterwards people buy and sell shares among themselves in the stock market. The price there changes from day to day and is called the market value. Above the face value, the share is at a premium. Below it, the share is at a discount.",
       "When the company makes a profit, it pays part of it out to the shareholders. This payment is called the dividend. It is announced as a per cent of the face value, never of the market value."
      ],
-     "example": [
-      "Face value 100 rupees, market value today 120 rupees.",
-      "Buying 10 shares costs 10 × 120 = 1200 rupees.",
-      "A 5% dividend pays 5% of 100 = 5 rupees on each share.",
-      "Income from 10 shares: 10 × 5 = 50 rupees."
-     ],
      "check": {
       "question": "A share has a face value of 10 rupees and a 10% dividend is declared. How much dividend does one share earn?",
       "answer": "1 rupee"
-     }
+     },
+     "ask": "A share has face value 100 rupees and market value 120 rupees. It pays a 5% dividend. You buy 10 shares. Find the cost and the yearly income.",
+     "steps": [
+      {
+       "do": "Cost: you pay the market value.",
+       "lines": [
+        "10 × 120 = 1200 rupees"
+       ],
+       "why": [
+        "The market value is today's price in the market. That is what you actually pay for each share."
+       ]
+      },
+      {
+       "do": "Dividend on one share: use the face value.",
+       "lines": [
+        "5% of 100 = 5 rupees"
+       ],
+       "why": [
+        "The dividend is always worked out on the face value, the value printed on the share, never on the price you paid.",
+        "5% means 5 out of every 100, so 5% of 100 is 5."
+       ]
+      },
+      {
+       "do": "Income from all your shares.",
+       "lines": [
+        "10 × 5 = 50 rupees"
+       ],
+       "why": [
+        "Each share pays 5 rupees, and you hold 10 of them."
+       ]
+      }
+     ],
+     "after": [
+      "Where people slip: taking 5% of 120. The dividend ignores the market price."
+     ]
     }
    ],
    "practice": [
@@ -27585,16 +28527,40 @@
       "The number of ways to choose r things out of n, when order does not matter, is written nCr. Here it is 4C2 = 6. We say '4 choose 2'.",
       "To work it out without listing: multiply r numbers counting down from n, then divide by r × (r − 1) × ... × 1. For 4C2: (4 × 3) ÷ (2 × 1) = 6. Also, nC1 = n."
      ],
-     "example": [
-      "8C2: two numbers counting down from 8: 8 × 7 = 56",
-      "Divide by 2 × 1 = 2",
-      "8C2 = 56 ÷ 2 = 28",
-      "So 2 bulbs can be chosen from 8 bulbs in 28 ways."
-     ],
      "check": {
       "question": "What is 3C2? (Hint: how many pairs can you make from A, B, C?)",
       "answer": "3 (AB, AC, BC). By the rule: (3 × 2) ÷ (2 × 1) = 3."
-     }
+     },
+     "ask": "In how many ways can 2 bulbs be chosen from 8? Find 8C2.",
+     "steps": [
+      {
+       "do": "Top: count down from 8, two numbers.",
+       "lines": [
+        "8 × 7 = 56"
+       ],
+       "why": [
+        "There are 8 ways to pick the first bulb and 7 ways to pick the second. The 2 in 8C2 says how many numbers to multiply."
+       ]
+      },
+      {
+       "do": "Bottom: count down from 2 to 1.",
+       "lines": [
+        "2 × 1 = 2"
+       ],
+       "why": [
+        "Picking bulb A then bulb B is the same pair as picking B then A. Each pair has been counted twice, so we divide by 2."
+       ]
+      },
+      {
+       "do": "Divide.",
+       "lines": [
+        "8C2 = 56 ÷ 2 = 28"
+       ],
+       "why": [
+        "So there are 28 different pairs of bulbs. Order does not matter in a group: that is what the C (combination) means."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -30783,16 +31749,43 @@
       "We use the letter t for 'term' and show its place in the queue with a small number written low, just after the t. Here we type it as t1, t2, t3. In 5, 8, 11, 14 we have t1 = 5, t2 = 8, t3 = 11 and t4 = 14.",
       "When the place could be any number, we use the letter n. So tn is the term in place n, and the term just after it is in place n + 1. A rule such as 'the term in place n + 1 equals tn + 3' means: to get the next term, add 3 to the term you have. A rule of this kind, with a starting term, is called a recursive rule."
      ],
-     "example": [
-      "t1 = 5, and the next term is always the present term + 3.",
-      "t2 = t1 + 3 = 5 + 3 = 8.",
-      "t3 = t2 + 3 = 8 + 3 = 11.",
-      "t4 = t3 + 3 = 11 + 3 = 14."
-     ],
      "check": {
       "question": "In the sequence 2, 4, 6, 8, what is t3?",
       "answer": "6."
-     }
+     },
+     "ask": "t₁ = 5, and each next term is the present term + 3. Find t₂, t₃ and t₄.",
+     "steps": [
+      {
+       "do": "Second term.",
+       "lines": [
+        "t₂ = t₁ + 3",
+        "= 5 + 3 = 8"
+       ],
+       "why": [
+        "The small number is the position of the term. The rule says: to get the next term, add 3 to the one you have."
+       ]
+      },
+      {
+       "do": "Third term.",
+       "lines": [
+        "t₃ = t₂ + 3",
+        "= 8 + 3 = 11"
+       ],
+       "why": [
+        "Use the term you just found. A rule like this, which builds each term from the one before, is called recursive."
+       ]
+      },
+      {
+       "do": "Fourth term.",
+       "lines": [
+        "t₄ = t₃ + 3",
+        "= 11 + 3 = 14"
+       ],
+       "why": [
+        "To reach the 100th term this way you would need all 99 before it. That is why a direct rule for the n-th term is also useful."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -31527,16 +32520,45 @@
       "After the sigma comes a rule with a letter, usually k. The rule is the k-th term: it gives the term in place k. With it we say where k starts and where it stops. 'Sigma, k from 1 to 4, of 2k' means: put k = 1, 2, 3, 4 into 2k and add the results.",
       "When no start and stop are written, k runs from 1 to n. So 'sigma k' is 1 + 2 + 3 up to n, and 'sigma k²' is 1² + 2² + 3² up to n². Three dots in a sum mean 'carry on in the same pattern'."
      ],
-     "example": [
-      "Sigma, k from 1 to 4, of 2k.",
-      "k = 1 gives 2. k = 2 gives 4. k = 3 gives 6. k = 4 gives 8.",
-      "2 + 4 + 6 + 8 = 20.",
-      "Sigma, k from 1 to 3, of k² = 1 + 4 + 9 = 14."
-     ],
      "check": {
       "question": "What is sigma, k from 1 to 3, of k?",
       "answer": "1 + 2 + 3 = 6."
-     }
+     },
+     "ask": "Work out Σ 2k for k from 1 to 4.",
+     "steps": [
+      {
+       "do": "Put in each value of k in turn.",
+       "lines": [
+        "k = 1: 2 × 1 = 2",
+        "k = 2: 2 × 2 = 4",
+        "k = 3: 2 × 3 = 6",
+        "k = 4: 2 × 4 = 8"
+       ],
+       "why": [
+        "Σ (sigma) means \"add up\". The numbers below and above it say where k starts and stops: here k goes 1, 2, 3, 4.",
+        "2k is the thing to work out for each k."
+       ]
+      },
+      {
+       "do": "Add the results.",
+       "lines": [
+        "2 + 4 + 6 + 8 = 20"
+       ],
+       "why": [
+        "Sigma is only shorthand. Written out in full, it is this ordinary sum."
+       ]
+      },
+      {
+       "do": "Another one: Σ k² for k from 1 to 3.",
+       "lines": [
+        "1² + 2² + 3²",
+        "= 1 + 4 + 9 = 14"
+       ],
+       "why": [
+        "Same method: put in k = 1, 2, 3, work out k² each time, and add."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -32013,16 +33035,44 @@
       "The domain is the set of inputs the machine accepts. The codomain is the set in which the outputs are allowed to land. We write f: A → B, read 'f from A to B': A is the domain and B the codomain.",
       "ℝ stands for the set of all real numbers, that is every point of the number line. So f: ℝ → ℝ means: any real number may go in, and a real number comes out."
      ],
-     "example": [
-      "f(x) = 2x + 1",
-      "f(0) = 2 × 0 + 1 = 1",
-      "f(3) = 2 × 3 + 1 = 7",
-      "f(−1) = 2 × (−1) + 1 = −1"
-     ],
      "check": {
       "question": "f(x) = x + 5. What is f(2)?",
       "answer": "7"
-     }
+     },
+     "ask": "The rule is f(x) = 2x + 1. Find f(0), f(3) and f(−1).",
+     "steps": [
+      {
+       "do": "Put 0 in place of x.",
+       "lines": [
+        "f(0) = 2 × 0 + 1",
+        "= 1"
+       ],
+       "why": [
+        "f(x) = 2x + 1 says: double the input, then add 1. f(0) means \"use the rule on 0\"."
+       ]
+      },
+      {
+       "do": "Put 3 in place of x.",
+       "lines": [
+        "f(3) = 2 × 3 + 1",
+        "= 7"
+       ],
+       "why": [
+        "Double 3 is 6, and 1 more is 7. Put 3 in again and you get 7 again: one input, one answer."
+       ]
+      },
+      {
+       "do": "Put −1 in place of x.",
+       "lines": [
+        "f(−1) = 2 × (−1) + 1",
+        "= −2 + 1 = −1"
+       ],
+       "why": [
+        "Double −1 is −2. Adding 1 moves one step up the number line, to −1."
+       ]
+      }
+     ],
+     "stepsAre": "cases"
     },
     {
      "title": "Outputs that are used, and outputs that are not",
@@ -32031,11 +33081,6 @@
       "The outputs are f(1) = 1, f(2) = 4, f(3) = 9. The set of outputs actually produced, {1, 4, 9}, is called the range. It sits inside the codomain B.",
       "Different inputs gave different outputs here. Such a function is called one-one. But 10 is in the codomain and no input gives it. So f is not onto: 'onto' means every element of the codomain is used. A function that is both one-one and onto is called bijective.",
       "Notice that the same formula can change its answer if you change the sets. With B = {1, 4, 9} this f would be onto. With A = {−1, 1} it would not be one-one, because f(−1) = f(1) = 1."
-     ],
-     "example": [
-      "A = {1, 2, 3}, B = {1, 4, 9, 10}, f(x) = x²",
-      "Outputs: 1, 4, 9. All different, so f is one-one.",
-      "10 is never an output, so f is not onto."
      ],
      "check": {
       "question": "f(x) = x² with inputs −2 and 2. Do the two inputs give different outputs?",
@@ -32181,6 +33226,39 @@
         ]
        },
        "caption": "f(x) = x² from A to B. Every input has exactly one arrow. No arrow reaches 10, so the range {1, 4, 9} is smaller than B."
+      }
+     ],
+     "ask": "A = {1, 2, 3}, B = {1, 4, 9, 10} and f(x) = x². Is f one-one? Is it onto?",
+     "steps": [
+      {
+       "do": "Find every output.",
+       "lines": [
+        "f(1) = 1, f(2) = 4",
+        "f(3) = 9"
+       ],
+       "why": [
+        "Use the rule on each member of A. The set of answers, {1, 4, 9}, is the range."
+       ]
+      },
+      {
+       "do": "One-one: are the outputs all different?",
+       "lines": [
+        "1, 4, 9 are all different",
+        "f is one-one"
+       ],
+       "why": [
+        "One-one means no two inputs share an output. In the arrow picture, no member of B has two arrows arriving."
+       ]
+      },
+      {
+       "do": "Onto: is every member of B used?",
+       "lines": [
+        "10 is never an output",
+        "f is not onto"
+       ],
+       "why": [
+        "Onto means every member of B is hit by some arrow. 10 is in B but no input gives 10, so f is not onto."
+       ]
       }
      ]
     }
@@ -32673,11 +33751,6 @@
       "We need a second number that tells how far the values are spread out from the mean. Such a number is called a measure of dispersion (dispersion means spread).",
       "Start with the deviation of each value: value − mean. Asha's deviations are −1, 0, 1. Bala's are −50, 0, 50. Big deviations mean a big spread."
      ],
-     "example": [
-      "Asha: 49 − 50 = −1, 50 − 50 = 0, 51 − 50 = 1",
-      "Bala: 0 − 50 = −50, 50 − 50 = 0, 100 − 50 = 50",
-      "Bala's deviations are much bigger: his scores are more spread out."
-     ],
      "check": {
       "question": "All five values in a data set are 7. How far is each value from the mean?",
       "answer": "0 (there is no spread at all)"
@@ -32711,6 +33784,42 @@
        },
        "caption": "Bala's scores: 0, 50, 100. Same mean of 50, but spread far apart."
       }
+     ],
+     "ask": "Asha scores 49, 50, 51. Bala scores 0, 50, 100. Both have mean 50. Compare their deviations.",
+     "steps": [
+      {
+       "do": "Asha: each score minus the mean.",
+       "lines": [
+        "49 − 50 = −1",
+        "50 − 50 = 0",
+        "51 − 50 = 1"
+       ],
+       "why": [
+        "A deviation is how far a value is from the mean. Below the mean it is negative, above it positive."
+       ]
+      },
+      {
+       "do": "Bala: each score minus the mean.",
+       "lines": [
+        "0 − 50 = −50",
+        "50 − 50 = 0",
+        "100 − 50 = 50"
+       ],
+       "why": [
+        "Same method, same mean of 50, but the distances are far larger."
+       ]
+      },
+      {
+       "do": "Compare the sizes.",
+       "lines": [
+        "Asha: 1, 0, 1",
+        "Bala: 50, 0, 50"
+       ],
+       "why": [
+        "Ignore the signs and look at the sizes. Bala's scores lie much further from the mean: they are more spread out.",
+        "The mean alone could not show this difference. A measure of spread can."
+       ]
+      }
      ]
     },
     {
@@ -32721,17 +33830,63 @@
       "Squaring changed the units (runs became 'square runs'), so we take the square root to come back. The square root of the variance is the standard deviation, σ.",
       "A shortcut that gives the same variance: σ² = (the mean of the squares of the values) − x̄²."
      ],
-     "example": [
-      "Data: 2, 4, 6. N = 3 and x̄ = 12 ÷ 3 = 4",
-      "Deviations: −2, 0, 2. Their squares: 4, 0, 4",
-      "Variance σ² = (4 + 0 + 4) ÷ 3 = 8/3",
-      "Standard deviation σ = √(8/3), about 1.63",
-      "Shortcut: (4 + 16 + 36) ÷ 3 − 4² = 56/3 − 48/3 = 8/3. The same."
-     ],
      "check": {
       "question": "The variance of some data is 9. What is the standard deviation?",
       "answer": "3 (√9)"
-     }
+     },
+     "ask": "Find the variance and standard deviation of the data 2, 4, 6.",
+     "steps": [
+      {
+       "do": "Find the mean.",
+       "lines": [
+        "2 + 4 + 6 = 12",
+        "x̄ = 12 ÷ 3 = 4"
+       ],
+       "why": [
+        "The mean is the total shared equally. N is how many values there are: 3."
+       ]
+      },
+      {
+       "do": "Find how far each value is from the mean.",
+       "lines": [
+        "2 − 4 = −2",
+        "4 − 4 = 0",
+        "6 − 4 = 2"
+       ],
+       "why": [
+        "These are the deviations. They always add up to 0, because the minus ones cancel the plus ones."
+       ]
+      },
+      {
+       "do": "Square each deviation.",
+       "lines": [
+        "(−2)² = 4, 0² = 0, 2² = 4"
+       ],
+       "why": [
+        "Squaring makes every deviation positive, so they can no longer cancel."
+       ]
+      },
+      {
+       "do": "Variance: the mean of the squares.",
+       "lines": [
+        "σ² = (4 + 0 + 4) ÷ 3",
+        "= 8/3"
+       ],
+       "why": [
+        "Add the squared deviations and divide by how many there are."
+       ]
+      },
+      {
+       "do": "Standard deviation: its square root.",
+       "lines": [
+        "σ = √(8/3)",
+        "about 1.63"
+       ],
+       "why": [
+        "Squaring changed the units (marks became marks squared). Taking the square root brings the answer back to the units of the data."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -33202,16 +34357,53 @@
       "In a table of marks with classes 0–10, 10–20, 20–30, the cumulative frequency of a class tells how many students scored less than the upper limit of that class.",
       "It is how we find the middle. With n values, the middle is at position n/2. Go down the cf column: the first class whose cf reaches n/2 holds the median. It is called the median class. The last cf always equals n."
      ],
-     "example": [
-      "Classes 0–10, 10–20, 20–30 with f = 3, 5, 2",
-      "cf = 3, 3 + 5 = 8, 8 + 2 = 10",
-      "So 8 students scored less than 20, and n = 10.",
-      "n/2 = 5. The cf first reaches 5 in the class 10–20: that is the median class."
-     ],
      "check": {
       "question": "The frequencies are 4 and 6. What is the cumulative frequency of the second class?",
       "answer": "10"
-     }
+     },
+     "ask": "Classes 0–10, 10–20 and 20–30 have frequencies 3, 5 and 2. Find the cumulative frequencies and the median class.",
+     "steps": [
+      {
+       "do": "Add the frequencies as you go down.",
+       "lines": [
+        "3",
+        "3 + 5 = 8",
+        "8 + 2 = 10"
+       ],
+       "why": [
+        "Cumulative means \"piled up so far\". Each cf is the number of students in that class and all the classes before it."
+       ]
+      },
+      {
+       "do": "Read what they mean.",
+       "lines": [
+        "8 scored less than 20",
+        "n = 10 students in all"
+       ],
+       "why": [
+        "The last cumulative frequency is always the total number, n."
+       ]
+      },
+      {
+       "do": "Find the middle position.",
+       "lines": [
+        "n/2 = 10 ÷ 2 = 5"
+       ],
+       "why": [
+        "The median is the value of the middle student, so we look for position n/2."
+       ]
+      },
+      {
+       "do": "Find the class where the cf first reaches 5.",
+       "lines": [
+        "cf: 3, then 8",
+        "Median class is 10–20"
+       ],
+       "why": [
+        "After the first class only 3 students are counted, not yet 5. After the second, 8 are counted, so the 5th student is in the class 10–20."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -33909,16 +35101,52 @@
       "So with n students, Q1 is at position n/4, the median at n/2 and Q3 at 3n/4. On an ogive you find that position on the upright axis, go across to the curve and read the mark below.",
       "The interquartile range is Q3 − Q1. It is the spread of the middle half of the students. A small value means the middle students have nearly the same marks."
      ],
-     "example": [
-      "n = 40 students",
-      "Q1 is at position 40 ÷ 4 = 10, the median at 20, Q3 at 30.",
-      "Suppose the ogive gives Q1 = 45 marks and Q3 = 65 marks.",
-      "Interquartile range = 65 − 45 = 20 marks."
-     ],
      "check": {
       "question": "There are 80 students. At which position is the lower quartile Q1?",
       "answer": "Position 20 (80 ÷ 4)"
-     }
+     },
+     "ask": "40 students are lined up by marks. The ogive gives Q1 = 45 and Q3 = 65. Find the positions of the quartiles and the interquartile range.",
+     "steps": [
+      {
+       "do": "Position of Q1.",
+       "lines": [
+        "40 ÷ 4 = 10"
+       ],
+       "why": [
+        "Q1 is one quarter of the way along the line, so a quarter of the 40 students: the 10th."
+       ]
+      },
+      {
+       "do": "Positions of the median and Q3.",
+       "lines": [
+        "Median: 40 ÷ 2 = 20",
+        "Q3: 3 × 10 = 30"
+       ],
+       "why": [
+        "The median is halfway (the 20th). Q3 is three quarters of the way (the 30th)."
+       ]
+      },
+      {
+       "do": "Read the marks from the ogive.",
+       "lines": [
+        "Q1 = 45 marks",
+        "Q3 = 65 marks"
+       ],
+       "why": [
+        "On the ogive, go across from 10 on the upright axis to the curve, then down to read the mark. Do the same from 30."
+       ]
+      },
+      {
+       "do": "Interquartile range.",
+       "lines": [
+        "Q3 − Q1 = 65 − 45",
+        "= 20 marks"
+       ],
+       "why": [
+        "It is the spread of the middle half of the students. Very high and very low marks do not affect it."
+       ]
+      }
+     ]
     }
    ],
    "practice": [
@@ -36955,10 +38183,10 @@
        "do": "Work out the known pair.",
        "lines": [
         "2 ÷ sin 30°",
-        "= 2 ÷ 1/2 = 4"
+        "= 2 ÷ (1/2) = 4"
        ],
        "why": [
-        "sin 30° is 1/2. Dividing by a half is the same as multiplying by 2, so 2 ÷ 1/2 = 4."
+        "sin 30° is 1/2. Dividing by a half is the same as multiplying by 2, so 2 ÷ (1/2) = 4."
        ]
       },
       {
@@ -38862,7 +40090,7 @@
       "The same shortcut on the example in the lesson below:",
       "x²/9 + y²/16 = 1 at (12/5, 12/5): a² = 9, b² = 16.",
       "m = −(16 × 12/5)/(9 × 12/5) = −16/9  (the 12/5 cancels)",
-      "c = 16 ÷ 12/5 = 16 × 5/12 = 20/3",
+      "c = 16 ÷ (12/5) = 16 × 5/12 = 20/3",
       "y = −(16/9)x + 20/3"
      ],
      "check": {
