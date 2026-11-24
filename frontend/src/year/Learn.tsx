@@ -26,7 +26,7 @@ import { Explore } from "./Explore";
 import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
-import { StartHere } from "./StartHere";
+import { StartHere, SteppedMath } from "./StartHere";
 import { understandingOf } from "../../../packages/learning/src/foundations";
 import { ScribblePad } from "./ScribblePad";
 import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
@@ -790,7 +790,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">

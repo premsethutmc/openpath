@@ -23,7 +23,9 @@ export interface FoundationScreen { title: string; text: string[]; example?: str
   /** break-it-down@1: a worked problem as separate steps. `ask` is the problem. Each step says what is done (`do`), shows the
    *  mathematics one line at a time (`lines`), and holds the reason in plain words (`why`), opened by "Why?" on that step or by
    *  "Break it down" for all of them. `after` is said once the steps have been seen (the slips to avoid). */
-  ask?: string; steps?: { do: string; lines: string[]; why: string[] }[]; after?: string[] }
+  ask?: string; steps?: { do: string; lines: string[]; why: string[] }[]; after?: string[];
+  /** "cases": the boxes are separate examples of one idea, not steps that follow each other, and are numbered as examples. */
+  stepsAre?: "cases" }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
 export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[];
