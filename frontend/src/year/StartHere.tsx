@@ -47,8 +47,8 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
       {s.scene ? <ScenePlayer scene={s.scene} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
-      {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
       {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
+      {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
       {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} /> : null}
       {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{mx(t)}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(t)}</div>)}</div> : null}
