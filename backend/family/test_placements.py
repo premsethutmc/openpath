@@ -5,7 +5,7 @@ from django.test import TestCase, override_settings
 from rest_framework.test import APIClient
 
 from family.models import DiagnosticAccessLog, Pupil, PupilEvent
-from family.placements import placements
+from family.placements import log_lines, placements
 
 NOW = datetime.now(tz.utc)  # the page reads the last sixty days from the real clock
 
@@ -85,3 +85,25 @@ class PlacementsTests(TestCase):
 
     def test_old_sittings_are_left_out(self):
         self.assertEqual(placements(self.parent, days=60, now=NOW + timedelta(days=90))["placements"], [])
+
+    @override_settings(OWNER_EMAILS={"p@example.com"})
+    def test_the_server_log_has_no_names_and_words_only_for_the_owners_own_learners(self):
+        from io import StringIO
+        from django.core.management import call_command
+
+        lines = log_lines(now=NOW)
+        text = "\n".join(lines)
+        self.assertTrue(all(line.startswith("placements@1 |") for line in lines))
+        for hidden in ["Friendname", "Secretname", "rithm", "example.com"]:
+            self.assertNotIn(hidden, text)
+        self.assertIn("Learner 1 (owner account)", text)
+        self.assertIn("Word check", text)
+        self.assertRegex(text, r"level 3 \(2-4\) start 4 answers 3 invented-claimed 0/1 \| L1 Y L6 n")
+        self.assertIn("glad(1)said-knows blenfor(inv)said-not abhor(6)wrong", text)
+        self.assertRegex(text, r"Reading \S+ level 2 answers 1 \| L2 5/6")
+        other = text.split("Learner 2")[1]
+        self.assertNotIn("glad", other)
+        self.assertIn("L1 Y L6 n", other)
+        out = StringIO()
+        call_command("placements_log", stdout=out)
+        self.assertIn("Learner 1 (owner account)", out.getvalue())
