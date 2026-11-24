@@ -1,3 +1,5 @@
+import { fractionStripMarks } from "../../../../packages/learning/src/lesson-marks";
+import { MarksSvg } from "../../year/Scene";
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../../english/logic/account";
@@ -420,24 +422,11 @@ function App() {
                             <p>
                               {selected}/{parts} of the same whole
                             </p>
-                            <svg
+                            <MarksSvg
                               viewBox="0 0 280 45"
                               role="img"
                               aria-label={`${selected} of ${parts} equal parts`}
-                              width="100%"
-                            >
-                              {Array.from({ length: parts }, (_, i) => (
-                                <rect
-                                  key={i}
-                                  x={(i * 280) / parts}
-                                  y="2"
-                                  width={280 / parts}
-                                  height="36"
-                                  fill={i < selected ? "#6755df" : "#fff"}
-                                  stroke="#203047"
-                                />
-                              ))}
-                            </svg>
+                              width="100%" marks={fractionStripMarks(parts, selected)} />
                           </div>
                         ))}
                       </section>
@@ -562,24 +551,11 @@ function FractionVisual() {
     <section aria-label="Interactive equal fractions">
       <h3>Keep the same whole</h3>
       <p>Shade one half. Split the same bar into more equal parts.</p>
-      <svg
+      <MarksSvg
         viewBox="0 0 280 45"
         role="img"
         aria-label={`${parts / 2} shaded out of ${parts} equal parts; the same amount as one half`}
-        width="100%"
-      >
-        {Array.from({ length: parts }, (_, i) => (
-          <rect
-            key={i}
-            x={(i * 280) / parts}
-            y="2"
-            width={280 / parts}
-            height="36"
-            fill={i < parts / 2 ? "#6755df" : "#fff"}
-            stroke="#203047"
-          />
-        ))}
-      </svg>
+        width="100%" marks={fractionStripMarks(parts, parts / 2)} />
       <p>
         {parts / 2}/{parts} = 1/2. The whole and shaded amount stay the same.
       </p>

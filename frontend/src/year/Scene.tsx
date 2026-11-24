@@ -7,7 +7,7 @@
  *
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
-import { createElement, useMemo, useRef, useState, type JSX, type PointerEvent, type ReactNode } from "react";
+import { createElement, useMemo, useRef, useState, type JSX, type PointerEvent, type ReactNode, type SVGProps } from "react";
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { SCENE_BOX, check, controls, describe, draw, draggable as follows, grip, initial, met, nudge, pointer, readout, set, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
@@ -106,4 +106,9 @@ export function FigureMarks({ w, h, marks, label }: { w: number; h: number; mark
       <svg viewBox={`0 0 ${w} ${h}`} width="100%" style={{ maxWidth: Math.min(w, 420) }} aria-hidden="true">{marks.map(mark)}</svg>
     </figure>
   );
+}
+
+/** lesson-marks@1: any drawing the engine has worked out, in the svg the page asks for. */
+export function MarksSvg({ marks, ...svg }: { marks: Mark[] } & SVGProps<SVGSVGElement>) {
+  return <svg {...svg}>{marks.map(mark)}</svg>;
 }

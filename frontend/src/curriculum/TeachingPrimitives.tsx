@@ -1,3 +1,5 @@
+import { dotRowsMarks, labelledRectMarks, movementLineMarks, rightTriangleMarks } from "../../../packages/learning/src/lesson-marks";
+import { MarksSvg } from "../year/Scene";
 import { useEffect, useState, type ReactNode } from "react";
 import type { Question, Screen } from "../../../packages/learning/src/content";
 import type { Problem as FamilyProblem } from "../../../packages/learning/src/families";
@@ -34,23 +36,9 @@ export function PairGrid({ rows, columns }: { rows: (string | number)[]; columns
 
 /** A compact, labelled number-line move. It is used when the movement matters more than every unit tick. */
 export function MovementNumberLine({ start, end }: { start: number; end: number }) {
-  const low = Math.min(start, end, 0);
-  const high = Math.max(start, end, 0);
-  const pad = Math.max(2, Math.ceil((high - low) * .08));
-  const from = low - pad;
-  const to = high + pad;
-  const x = (value: number) => 24 + ((value - from) / (to - from || 1)) * 312;
-  const mid = (x(start) + x(end)) / 2;
   const direction = end >= start ? "right" : "left";
   return <figure className="movement-line" role="img" aria-label={`Number line movement ${direction} from ${signed(start)} to ${signed(end)}`}>
-    <svg viewBox="0 0 360 112" aria-hidden="true">
-      <defs><marker id={`movement-arrow-${start}-${end}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6654cc" /></marker></defs>
-      <line x1="18" y1="76" x2="342" y2="76" stroke="#252834" strokeWidth="2" />
-      {[0, start, end].filter((value, index, values) => values.indexOf(value) === index).map((value) => <g key={value}><line x1={x(value)} y1="69" x2={x(value)} y2="83" stroke="#252834" /><text x={x(value)} y="101" textAnchor="middle">{signed(value)}</text></g>)}
-      <path d={`M ${x(start)} 68 Q ${mid} 13 ${x(end)} 68`} fill="none" stroke="#6654cc" strokeWidth="3" markerEnd={`url(#movement-arrow-${start}-${end})`} />
-      <circle cx={x(start)} cy="76" r="5" fill="#6654cc" />
-      <text className="movement-label" x={mid} y="24" textAnchor="middle">{signed(end - start)}</text>
-    </svg>
+    <MarksSvg viewBox="0 0 360 112" aria-hidden="true" marks={movementLineMarks(start, end)} />
   </figure>;
 }
 
@@ -81,7 +69,7 @@ export function LabeledGeometry({ shape, labels }: Extract<TeachingVisual, { kin
   const length = `${String(labels.length ?? labels.base ?? "l")} ${dimensionUnit}`.trim();
   const width = `${String(labels.width ?? labels.height ?? "w")} ${dimensionUnit}`.trim();
   const unit = String(labels.measureUnit ?? "");
-  return <figure className={`teaching-data-visual geometry-visual ${shape}`} aria-label={`Labeled ${shape}`}><svg viewBox="0 0 320 170"><rect x="55" y="30" width="210" height="105" rx="2" /><text x="160" y="22" textAnchor="middle">{length}</text><text x="35" y="88" textAnchor="middle">{width}</text></svg><figcaption>{Object.entries(labels).filter(([key]) => key !== "measureUnit" && key !== "dimensionUnit").map(([key, value]) => <span key={key}><b>{key}</b>: {value}{key === "area" || key === "perimeter" ? ` ${unit}` : ""}</span>)}</figcaption></figure>;
+  return <figure className={`teaching-data-visual geometry-visual ${shape}`} aria-label={`Labeled ${shape}`}><MarksSvg viewBox="0 0 320 170" marks={labelledRectMarks(length, width)} /><figcaption>{Object.entries(labels).filter(([key]) => key !== "measureUnit" && key !== "dimensionUnit").map(([key, value]) => <span key={key}><b>{key}</b>: {value}{key === "area" || key === "perimeter" ? ` ${unit}` : ""}</span>)}</figcaption></figure>;
 }
 
 /** One renderer for typed presentation data. No grade or competency routing lives here. */
@@ -101,22 +89,14 @@ export function RepresentationRenderer({ representation: r }: { representation: 
     const width = Math.max(...rows), gap = 26, w = width * gap + 12, h = rows.length * gap + 12;
     const label = r.kind === "dot-array" ? `${r.rows} rows of ${r.cols} dots, ${r.value} in all` : `A triangle of dots with rows of ${rows.join(", ")}: ${r.value} in all`;
     return <figure className="teaching-data-visual dot-visual" role="img" aria-label={label} data-kind={r.kind} data-value={r.value}>
-      <svg viewBox={`0 0 ${w} ${h}`} aria-hidden="true">
-        {rows.flatMap((count, row) => Array.from({ length: count }, (_, col) => <circle key={`${row}-${col}`} cx={6 + gap / 2 + col * gap} cy={6 + gap / 2 + row * gap} r={8} />))}
-      </svg>
+      <MarksSvg viewBox={`0 0 ${w} ${h}`} aria-hidden="true" marks={dotRowsMarks(rows, gap)} />
       <figcaption>{r.caption}</figcaption>
     </figure>;
   }
   if (r.kind === "right-triangle") {
     const side = (v: number | null, name: string) => (v === null ? `${name} = ?` : `${name} = ${v} cm`);
     return <figure className="teaching-data-visual triangle-visual" role="img" aria-label={`Right triangle: ${side(r.a, "a")}, ${side(r.b, "b")}, hypotenuse ${side(r.c, "c")}`} data-kind={r.kind}>
-      <svg viewBox="0 0 300 190" aria-hidden="true">
-        <polygon points="80,160 280,160 80,30" />
-        <polyline points="80,144 96,144 96,160" fill="none" />
-        <text x="180" y="182" textAnchor="middle">{r.b === null ? "b = ?" : `b = ${r.b}`}</text>
-        <text x="72" y="98" textAnchor="end">{r.a === null ? "a = ?" : `a = ${r.a}`}</text>
-        <text x="190" y="86" textAnchor="start" className={r.c === null ? "asked" : ""}>{r.c === null ? "c = ?" : `c = ${r.c}`}</text>
-      </svg>
+      <MarksSvg viewBox="0 0 300 190" aria-hidden="true" marks={rightTriangleMarks(r)} />
       <figcaption>{r.caption}</figcaption>
     </figure>;
   }

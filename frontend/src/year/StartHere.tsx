@@ -3,6 +3,7 @@ import { useState } from "react";
 import { pictureScene } from "../../../packages/learning/src/foundation-pictures";
 import { PictureExplore, PictureRound } from "./PictureTasks";
 import { SceneFigure } from "./Scene";
+import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 /** The labelled picture of an idea, drawn by the scene engine from its description (foundation-pictures.ts). */
@@ -17,6 +18,7 @@ export function FoundationCard({ s }: { s: FoundationScreen }) {
     <section className="sh-card">
       <h3>{s.title}</h3>
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
+      {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {s.text.map((t, i) => <p key={i}>{t}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{t}</div>)}</div> : null}
       {s.check ? <div className="sh-check"><p><b>Quick check:</b> {s.check.question}</p>{shown ? <p className="sh-answer">{s.check.answer}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}

@@ -12,3 +12,4 @@
 .sh-option.wrong{border-color:#d2553f;background:rgba(210,85,63,.12);opacity:.75}
 .sh-feedback{border-left:3px solid #d2553f;padding-left:10px}.sh-feedback.good{border-left-color:#2e9d5b}
 .sh-answer-key{font-size:.92rem}
+.sh-figs{display:grid;gap:10px}.sh-figs.many{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.sh-fig{display:grid;gap:4px;justify-items:center;align-content:start}.sh-fig .figure{margin:0;width:100%;display:flex;justify-content:center}.sh-cap{font-size:.92rem;text-align:center;color:var(--muted,inherit)}

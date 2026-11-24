@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { readFileSync } from "node:fs";
-import { figureDraw } from "../../../packages/learning/src/figure-marks";
+import { describe as describeFigure, diagramProblems, figureDraw } from "../../../packages/learning/src/figure-marks";
 import { moduleFor } from "../../../packages/learning/src/content";
 import { foundations, foundationsOf, PICTURES } from "../../../packages/learning/src/foundations";
 
@@ -103,6 +103,7 @@ test("one picture system: pictures are drawn by the scene engine, not by new com
   walk(root.replace(/\/$/, ""));
   assert.deepEqual(found.filter((f) => !allowed.has(f)), [], "these files draw their own pictures: describe the picture as a scene for the scene engine instead (see CLAUDE.md)");
   assert.ok(!found.includes("year/StartHere.tsx") && !found.includes("year/PictureTasks.tsx"));
+  assert.deepEqual(lists.toMove, [], "no maths teaching picture is drawn outside the engine");
   // the lists only shrink: a file that no longer draws must leave its list
   assert.deepEqual([...allowed].filter((f) => !found.includes(f)), [], "these files no longer draw: remove them from svg-allowed.json");
 });
@@ -140,11 +141,9 @@ test("understanding@1: a finished round is kept as what was done, moves the next
 
 test("picture-decision@1: every idea either has a picture or says why it has none", () => {
   for (const f of foundations) {
-    const pictured = f.screens.some((s) => s.picture);
+    const pictured = f.screens.some((s) => s.picture || s.figures?.length);
     assert.ok(pictured ? !f.show : f.show && (f.show.decision === "none" ? ["word", "symbol", "rule", "procedure"].includes(f.show.why) : f.show.figure.trim().length > 5), `${f.competency}: ${f.concept}`);
   }
-  // most ideas need no picture: that is a decision, not a gap
-  assert.ok(foundations.filter((f) => f.show?.decision === "none").length > foundations.filter((f) => !f.show).length);
 });
 
 test("figure-marks@1: a question's picture is worked out in the engine and drawn by its one player", () => {
@@ -153,4 +152,22 @@ test("figure-marks@1: a question's picture is worked out in the engine and drawn
   const d = figureDraw({ type: "clock", h: 3, m: 30 });
   assert.ok(d && d.as === "marks" && d.marks.some((k) => k.tag === "line"));
   assert.equal(figureDraw({ type: "table", head: [], rows: [] }), null);
+});
+
+test("idea-figures@1: every still picture of an idea is drawn by the engine, passes its checks and says what to see", () => {
+  let n = 0;
+  for (const f of foundations) for (const s of f.screens) for (const g of s.figures ?? []) {
+    n++;
+    const d = figureDraw(g.v);
+    assert.ok(d && d.as === "marks" && d.marks.length > 0, `${f.concept}: ${g.v.type} is not drawn`);
+    if (g.v.type === "diagram") assert.deepEqual(diagramProblems(g.v), [], f.concept);
+    assert.ok(g.caption.trim().length > 3 && !/not available/i.test(describeFigure(g.v)), f.concept);
+  }
+  assert.ok(n >= 40);
+  // a diagram cannot show what is not true
+  const base = { type: "diagram", says: "A corner with a square mark." };
+  assert.match(diagramProblems({ ...base, parts: [{ p: "right", at: [50, 50], a: [100, 50], b: [90, 100] }] }).join(), /not 90°/);
+  assert.match(diagramProblems({ ...base, parts: [{ p: "segment", from: [10, 10], to: [110, 10], ticks: 1 }, { p: "segment", from: [10, 30], to: [150, 30], ticks: 1 }] }).join(), /not equal in length/);
+  assert.match(diagramProblems({ ...base, parts: [{ p: "point", at: [500, 10] }] }).join(), /outside the box/);
+  assert.equal(figureDraw({ ...base, parts: [{ p: "right", at: [50, 50], a: [100, 50], b: [90, 100] }] })?.as, "na");
 });

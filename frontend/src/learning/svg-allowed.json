@@ -1,5 +1,5 @@
 {
- "note": "Files that draw with their own <svg>. 'engine' is the scene engine's player. 'notTeaching' are not teaching pictures and stay as they are: icons, the cat, writing and drawing surfaces, the English app's pictures, the old shopping game. 'toMove' are maths teaching pictures drawn outside the engine: each is to become scene descriptions for the engine and then leave this list. A new file may be added to none of these lists: describe the picture as a scene (see CLAUDE.md).",
+ "note": "Files that draw with their own <svg>. 'engine' is the scene engine's player. 'notTeaching' are not teaching pictures and stay as they are: icons, the cat and the owl, writing and drawing surfaces, the English app's pictures, the old shopping game. 'toMove' is empty and stays empty: every maths teaching picture is worked out in packages/learning/src (scene.ts, figure-marks.ts, lesson-marks.ts) and drawn by the player. A new file may be added to none of these lists (see CLAUDE.md).",
  "engine": [
   "year/Scene.tsx"
  ],
@@ -9,6 +9,7 @@
   "english/ui/Pic.tsx",
   "english/ui/SpellingBee.tsx",
   "english/ui/StudySkills.tsx",
+  "math/components/TeacherGuide.tsx",
   "writing/ProgressiveDivision.tsx",
   "writing/Surface.tsx",
   "year/Chintu.tsx",
@@ -16,15 +17,5 @@
   "year/SketchPad.tsx",
   "year/icons.tsx"
  ],
- "toMove": [
-  "year/Learn.tsx",
-  "year/WhereUsed.tsx",
-  "curriculum/TeachingPrimitives.tsx",
-  "geometry/TriangleAngleLab.tsx",
-  "math/components/FractionBarViz.tsx",
-  "math/components/TeacherGuide.tsx",
-  "mathematics/chapter/Main.tsx",
-  "mathematics/journey/Main.tsx",
-  "mathematics/unit/Unit.tsx"
- ]
+ "toMove": []
 }

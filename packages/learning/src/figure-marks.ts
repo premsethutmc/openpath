@@ -7,8 +7,12 @@
 import { check as checkScene, describe as describeScene, type Scene } from "./scene";
 
 /** One drawn mark: an SVG element's name, its attributes, and what is inside it (words, or more marks). */
-export type Mark = { tag: "rect" | "circle" | "line" | "path" | "text" | "polyline" | "polygon" | "g" | "ellipse" | "tspan"; at: Record<string, unknown>; kids: (Mark | string | number)[] };
-const mk = (tag: Mark["tag"], at: Record<string, unknown>, ...kids: (Mark | Mark[] | string | number | null | undefined | false)[]): Mark => ({ tag, at, kids: kids.flat().filter((k): k is Mark | string | number => k !== null && k !== undefined && k !== false) });
+export type Mark = { tag: "rect" | "circle" | "line" | "path" | "text" | "polyline" | "polygon" | "g" | "ellipse" | "tspan" | "defs" | "marker" | "title"; at: Record<string, unknown>; kids: (Mark | string | number)[] };
+type Kid = Mark | string | number | null | undefined | false | Kid[];
+const flat = (kids: Kid[]): (Mark | string | number)[] => kids.flatMap((k) => (Array.isArray(k) ? flat(k) : k === null || k === undefined || k === false ? [] : [k]));
+export const mk = (tag: Mark["tag"], at: Record<string, unknown>, ...kids: Kid[]): Mark => ({ tag, at, kids: flat(kids) });
+/** A list of marks from pieces that may be missing (a part shown only sometimes) or lists themselves. */
+export const marks = (...kids: Kid[]): Mark[] => flat(kids).filter((k): k is Mark => typeof k === "object");
 /** What the player is given: marks in a box; or a picture that must not be drawn (and why); or only its words; or null when the
  * figure is not a drawing at all (a table, written working, money piles: laid out by the page). */
 export type FigureDrawing = { as: "marks"; w: number; h: number; marks: Mark[] } | { as: "na"; message: string; invalid: "true" | "unchecked" | "missing" } | { as: "words"; fallback: "strips" } | null;
@@ -182,13 +186,96 @@ function anglesOf(v: V): { label: string; deg: number }[] | null {
   if (A.length < 2 || A.length > 4 || !A.every((x) => x && typeof x.label === "string" && x.label.trim() && Number.isFinite(x.deg) && x.deg > 0 && x.deg <= 360)) return null;
   return new Set(A.map((x) => x.label)).size === A.length ? A : null;
 }
+/** diagram@1: a labelled drawing made of points, segments, circles and curves, placed in a box of w by h (300 by 200 unless
+ * given). It is checked before it is drawn, so a diagram cannot show what is not true: a right-angle mark is refused unless
+ * its two arms really are at 90°, and segments carrying the same equal-length marks (ticks) must really be equal in length.
+ * `says` is the same picture in words. */
+type Pt = [number, number];
+export type DiagramPart =
+  | { p: "point"; at: Pt; label?: string; side?: "n" | "s" | "e" | "w" | "ne" | "nw" | "se" | "sw"; hollow?: boolean }
+  | { p: "segment"; from: Pt; to: Pt; dashed?: boolean; accent?: boolean; arrow?: boolean | "both"; ticks?: 1 | 2 | 3 }
+  | { p: "circle"; at: Pt; r: number; dashed?: boolean }
+  | { p: "ellipse"; at: Pt; rx: number; ry: number }
+  | { p: "right"; at: Pt; a: Pt; b: Pt }
+  | { p: "polygon"; points: Pt[]; fill?: boolean }
+  | { p: "curve"; points: Pt[]; accent?: boolean }
+  | { p: "text"; at: Pt; s: string; accent?: boolean };
+export function diagramProblems(v: V): string[] {
+  const out: string[] = [];
+  const w = num(v.w, 300), h = num(v.h, 200);
+  if (typeof v.says !== "string" || v.says.trim().length < 10) out.push("a diagram says in words what it shows");
+  if (!(w >= 60 && w <= 420 && h >= 40 && h <= 320)) out.push("the box is out of range");
+  const parts = arr<DiagramPart>(v.parts);
+  if (!parts.length) out.push("a diagram has parts");
+  const pt = (q: unknown): q is Pt => Array.isArray(q) && q.length === 2 && q.every((n) => typeof n === "number" && Number.isFinite(n)) && q[0] >= 0 && q[0] <= w && q[1] >= 0 && q[1] <= h;
+  const pos = (n: unknown) => typeof n === "number" && Number.isFinite(n) && n > 0;
+  const ticked = new Map<number, number[]>();
+  parts.forEach((q, i) => {
+    const bad = (why: string) => out.push(`part ${i + 1} (${String(q?.p)}): ${why}`);
+    if (!q || typeof q !== "object") return bad("not a part");
+    if (q.p === "point") { if (!pt(q.at)) bad("is outside the box"); }
+    else if (q.p === "segment") {
+      if (!pt(q.from) || !pt(q.to)) return bad("is outside the box");
+      const len = Math.hypot(q.to[0] - q.from[0], q.to[1] - q.from[1]);
+      if (len < 4) bad("has no length");
+      if (q.ticks !== undefined) { if (![1, 2, 3].includes(q.ticks)) bad("ticks are 1, 2 or 3"); else ticked.set(q.ticks, [...(ticked.get(q.ticks) ?? []), len]); }
+    } else if (q.p === "circle") { if (!pt(q.at) || !pos(q.r) || q.at[0] - q.r < 0 || q.at[0] + q.r > w || q.at[1] - q.r < 0 || q.at[1] + q.r > h) bad("does not fit in the box"); }
+    else if (q.p === "ellipse") { if (!pt(q.at) || !pos(q.rx) || !pos(q.ry) || q.at[0] - q.rx < 0 || q.at[0] + q.rx > w || q.at[1] - q.ry < 0 || q.at[1] + q.ry > h) bad("does not fit in the box"); }
+    else if (q.p === "right") {
+      if (!pt(q.at) || !pt(q.a) || !pt(q.b)) return bad("is outside the box");
+      const [ax, ay, bx, by] = [q.a[0] - q.at[0], q.a[1] - q.at[1], q.b[0] - q.at[0], q.b[1] - q.at[1]];
+      const la = Math.hypot(ax, ay), lb = Math.hypot(bx, by);
+      if (la < 4 || lb < 4 || Math.abs((ax * bx + ay * by) / (la * lb)) > 0.02) bad("marks a right angle that is not 90°");
+    } else if (q.p === "polygon" || q.p === "curve") { if (!Array.isArray(q.points) || q.points.length < (q.p === "polygon" ? 3 : 2) || !q.points.every(pt)) bad("has a point outside the box"); }
+    else if (q.p === "text") { if (!pt(q.at) || typeof q.s !== "string" || !q.s.trim()) bad("needs words inside the box"); }
+    else bad("is not a kind of part");
+  });
+  for (const [k, L] of ticked) if (Math.max(...L) - Math.min(...L) > 0.02 * Math.max(...L)) out.push(`segments marked equal (${k} tick${k === 1 ? "" : "s"}) are not equal in length`);
+  return out;
+}
+const diagramOk = (v: V) => diagramProblems(v).length === 0;
+function diagramMarks(v: V): Mark[] {
+  const out: Mark[] = [];
+  const r2 = (n: number) => Math.round(n * 100) / 100;
+  const head = (from: Pt, to: Pt, c: string) => { const d = Math.hypot(to[0] - from[0], to[1] - from[1]) || 1, ux = (to[0] - from[0]) / d, uy = (to[1] - from[1]) / d; return mk("path", { d: `M ${r2(to[0])} ${r2(to[1])} L ${r2(to[0] - 10 * ux - 4.5 * uy)} ${r2(to[1] - 10 * uy + 4.5 * ux)} L ${r2(to[0] - 10 * ux + 4.5 * uy)} ${r2(to[1] - 10 * uy - 4.5 * ux)} Z`, fill: c }); };
+  for (const q of arr<DiagramPart>(v.parts)) {
+    if (q.p === "polygon") out.push(mk("polygon", { points: q.points.map((a) => a.join(",")).join(" "), fill: q.fill ? SOFT : "none", stroke: INK, strokeWidth: 2 }));
+    else if (q.p === "circle") out.push(mk("circle", { cx: q.at[0], cy: q.at[1], r: q.r, fill: "none", stroke: INK, strokeWidth: 2, ...(q.dashed ? { strokeDasharray: "5 4" } : {}) }));
+    else if (q.p === "ellipse") out.push(mk("ellipse", { cx: q.at[0], cy: q.at[1], rx: q.rx, ry: q.ry, fill: "none", stroke: INK, strokeWidth: 2 }));
+    else if (q.p === "curve") out.push(mk("polyline", { points: q.points.map((a) => a.join(",")).join(" "), fill: "none", stroke: q.accent ? ACC : INK, strokeWidth: 2.5 }));
+    else if (q.p === "segment") {
+      const c = q.accent ? ACC : INK;
+      out.push(mk("line", { x1: q.from[0], y1: q.from[1], x2: q.to[0], y2: q.to[1], stroke: c, strokeWidth: 2, ...(q.dashed ? { strokeDasharray: "5 4" } : {}) }));
+      if (q.arrow) out.push(head(q.from, q.to, c));
+      if (q.arrow === "both") out.push(head(q.to, q.from, c));
+      if (q.ticks) {
+        const d = Math.hypot(q.to[0] - q.from[0], q.to[1] - q.from[1]), ux = (q.to[0] - q.from[0]) / d, uy = (q.to[1] - q.from[1]) / d, mx = (q.from[0] + q.to[0]) / 2, my = (q.from[1] + q.to[1]) / 2;
+        for (let k = 0; k < q.ticks; k++) { const o = (k - (q.ticks - 1) / 2) * 5; out.push(mk("line", { x1: r2(mx + o * ux - 6 * uy), y1: r2(my + o * uy + 6 * ux), x2: r2(mx + o * ux + 6 * uy), y2: r2(my + o * uy - 6 * ux), stroke: ACC, strokeWidth: 2 })); }
+      }
+    } else if (q.p === "right") {
+      const u = (t: Pt) => { const d = Math.hypot(t[0] - q.at[0], t[1] - q.at[1]); return [((t[0] - q.at[0]) / d) * 11, ((t[1] - q.at[1]) / d) * 11]; };
+      const [a, b] = [u(q.a), u(q.b)];
+      out.push(mk("path", { d: `M ${r2(q.at[0] + a[0])} ${r2(q.at[1] + a[1])} L ${r2(q.at[0] + a[0] + b[0])} ${r2(q.at[1] + a[1] + b[1])} L ${r2(q.at[0] + b[0])} ${r2(q.at[1] + b[1])}`, fill: "none", stroke: INK, strokeWidth: 1.5 }));
+    }
+  }
+  // points and words go on top of the lines
+  for (const q of arr<DiagramPart>(v.parts)) {
+    if (q.p === "point") {
+      out.push(mk("circle", { cx: q.at[0], cy: q.at[1], r: 4.5, fill: q.hollow ? "#fff" : INK, stroke: q.hollow ? ACC : INK, strokeWidth: q.hollow ? 2.5 : 1 }));
+      if (q.label) { const s = q.side ?? "n", dx = s.includes("e") ? 9 : s.includes("w") ? -9 : 0, dy = s.includes("n") ? -9 : s.includes("s") ? 19 : 5; out.push(mk("text", { x: q.at[0] + dx, y: q.at[1] + dy, fontSize: 14, fontWeight: 700, textAnchor: dx > 0 ? "start" : dx < 0 ? "end" : "middle", fill: INK }, q.label)); }
+    } else if (q.p === "text") out.push(mk("text", { x: q.at[0], y: q.at[1], fontSize: 13, textAnchor: "middle", fill: q.accent ? ACC : INK }, q.s));
+  }
+  return out;
+}
 export function describe(v: V): string {
   switch (v.type) {
     case "scene":
       // scene@1: an interactive scene describes itself (what can be moved, never the answer)
       return checkScene(v).length === 0 ? describeScene(v as unknown as Scene) : "This picture is not available.";
     case "dots":
-      return `${num(v.count)} objects`;
+      return intIn(v.perRow, 1, 10) ? `${num(v.count)} objects in rows of ${num(v.perRow)}` : `${num(v.count)} objects`;
+    case "diagram":
+      return diagramOk(v) ? str(v.says) : NA;
     case "tenframe":
       return `${num(v.frames, 1)} ten frame${num(v.frames, 1) > 1 ? "s" : ""} with ${num(v.filled)} counters`;
     case "blocks":
@@ -330,9 +417,11 @@ export function figureDraw(v: V): FigureDrawing {
   const box = (w: number, h: number, body: Mark | Mark[]): FigureDrawing => ({ as: "marks", w, h, marks: [body].flat() });
   const unavailable = (): FigureDrawing => ({ as: "na", message: NA, invalid: "true" });
   switch (v.type) {
+    case "diagram":
+      return diagramOk(v) ? box(num(v.w, 300), num(v.h, 200), diagramMarks(v)) : unavailable();
     case "dots": {
       const n = num(v.count);
-      const per = n > 10 ? 10 : n;
+      const per = intIn(v.perRow, 1, 10) ? num(v.perRow) : n > 10 ? 10 : n;
       const rows = Math.ceil(n / per);
       return box(per * 30 + 10, rows * 30 + 10, Array.from({ length: n }, (_, i) => mk("circle", { cx: 20 + (i % per) * 30, cy: 20 + Math.floor(i / per) * 30, r: 11, fill: ACC })));
     }
@@ -373,8 +462,8 @@ export function figureDraw(v: V): FigureDrawing {
         out.push(mk("text", { x: X(n), y: 84, fontSize: 12, textAnchor: "middle", fill: INK }, num(v.unknown, NaN) === n ? "?" : minus(Math.round(n * 100) / 100)));
       }
       for (const m of arr<number>(v.marks)) out.push(mk("circle", { cx: X(m), cy: 60, r: 6, fill: ACC }));
-      arr<[number, number]>(v.jumps).forEach(([a, b], i) => out.push(mk("path", { d: `M ${X(a)} 54 Q ${(X(a) + X(b)) / 2} ${14} ${X(b)} 54`, fill: "none", stroke: ACC, strokeWidth: 2, markerEnd: "" })));
-      arr<Iv>(v.intervals).forEach((iv, i) => {
+      arr<[number, number]>(v.jumps).forEach(([a, b]) => out.push(mk("path", { d: `M ${X(a)} 54 Q ${(X(a) + X(b)) / 2} ${14} ${X(b)} 54`, fill: "none", stroke: ACC, strokeWidth: 2, markerEnd: "" })));
+      arr<Iv>(v.intervals).forEach((iv) => {
         const x0 = iv.lo === null ? 10 : X(iv.lo);
         const x1 = iv.hi === null ? 390 : X(iv.hi);
         out.push(mk("line", { x1: x0, y1: 60, x2: x1, y2: 60, stroke: ACC, strokeWidth: 6, strokeLinecap: "butt" }));
@@ -413,7 +502,7 @@ export function figureDraw(v: V): FigureDrawing {
       const items = arr<number>(v.items);
       let x = 6;
       const out: Mark[] = [];
-      items.forEach((c, i) => {
+      items.forEach((c) => {
         if (c >= 10 && c !== 10 && c !== 20) {
           // a note
           out.push(mk("rect", { x: x, y: 14, width: 86, height: 44, rx: 4, fill: SOFT, stroke: INK }), mk("text", { x: x + 43, y: 42, fontSize: 16, textAnchor: "middle", fill: INK }, `₹${c}`));
@@ -477,11 +566,8 @@ export function figureDraw(v: V): FigureDrawing {
       });
       return box(W + 4, H + 40, out);
     }
-    case "table": {
-      const head = arr<string>(v.head);
-      const rows = arr<(string | number)[]>(v.rows);
+    case "table":
       return null;
-    }
     case "shape": {
       if (!shapeOk(v)) return unavailable();
       // named quadrilaterals and an L-shape are drawn as themselves (not as a regular polygon); labels go side by side
@@ -713,8 +799,8 @@ export function figureDraw(v: V): FigureDrawing {
       for (let k = q1 ? 0 : -R; k <= R; k++) out.push(mk("line", { x1: X(k), y1: q1 ? Y(R) : 10, x2: X(k), y2: q1 ? o1 : 210, stroke: SOFT }), mk("line", { x1: q1 ? o0 : 10, y1: Y(k), x2: q1 ? X(R) : 210, y2: Y(k), stroke: SOFT }));
       if (q1) for (let k = 1; k <= R; k++) out.push(mk("text", { x: X(k), y: o1 + 14, fontSize: 10, textAnchor: "middle", fill: INK }, k), mk("text", { x: o0 - 6, y: Y(k) + 4, fontSize: 10, textAnchor: "end", fill: INK }, k));
       out.push(mk("line", { x1: q1 ? o0 : 10, y1: o1, x2: q1 ? X(R) + 6 : 210, y2: o1, stroke: INK }), mk("line", { x1: o0, y1: q1 ? Y(R) - 6 : 10, x2: o0, y2: q1 ? o1 : 210, stroke: INK }), mk("text", { x: q1 ? X(R) + 4 : 204, y: o1 + (q1 ? -6 : 14), fontSize: 12, fill: INK }, `x`), mk("text", { x: o0 + 6, y: q1 ? Y(R) - 4 : 20, fontSize: 12, fill: INK }, `y`));
-      arr<[[number, number], [number, number]]>(v.segments).forEach(([a, b], i) => out.push(mk("line", { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), stroke: ACC, strokeWidth: 2 })));
-      arr<[number, number, string?]>(v.points).forEach(([x, y, l], i) => out.push(mk("circle", { cx: X(x), cy: Y(y), r: 4, fill: ACC }), mk("text", { x: X(x) + 6, y: Y(y) - 6, fontSize: 12, fill: INK }, l ?? "")));
+      arr<[[number, number], [number, number]]>(v.segments).forEach(([a, b]) => out.push(mk("line", { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), stroke: ACC, strokeWidth: 2 })));
+      arr<[number, number, string?]>(v.points).forEach(([x, y, l]) => out.push(mk("circle", { cx: X(x), cy: Y(y), r: 4, fill: ACC }), mk("text", { x: X(x) + 6, y: Y(y) - 6, fontSize: 12, fill: INK }, l ?? "")));
       return box(220, 220, out);
     }
     case "fold": {
@@ -724,14 +810,14 @@ export function figureDraw(v: V): FigureDrawing {
       const w = n * W + (n - 1) * gap + 20, h = top + H + 40;
       return box(w, h, F.items.flatMap((it, k) => {
         const x0 = 10 + k * (W + gap), cx = x0 + W / 2, cy = top + H / 2;
-        const cells = (pick: (i: number, j: number) => boolean, fill: string, key: string) =>
+        const cells = (pick: (i: number, j: number) => boolean, fill: string) =>
           it.rows.flatMap((r, i) => [...r].map((ch, j) => (ch === "#" && pick(i, j) ? mk("rect", { x: x0 + j * c, y: top + i * c, width: c - 1, height: c - 1, fill: fill }) : null)).filter(Boolean)) as Mark[];
         // the half that folds: left columns (up-and-down line) or top rows (line across); the middle column/row stays
         const moving = (i: number, j: number) => (F.axis === "v" ? j < 2 : i < 2);
         return [
-          ...cells(() => true, SOFT, `b${k}`),
-          ...cells((i, j) => !moving(i, j), INK, `s${k}`),
-          mk("g", { className: `fold-${F.axis}`, style: { transformOrigin: `${cx}px ${cy}px` } }, cells(moving, ACC, `m${k}`)),
+          ...cells(() => true, SOFT),
+          ...cells((i, j) => !moving(i, j), INK),
+          mk("g", { className: `fold-${F.axis}`, style: { transformOrigin: `${cx}px ${cy}px` } }, cells(moving, ACC)),
           F.axis === "v"
             ? mk("line", { x1: cx, y1: top - 6, x2: cx, y2: top + H + 6, stroke: INK, strokeWidth: 1.5, strokeDasharray: "4 3" })
             : mk("line", { x1: x0 - 6, y1: cy, x2: x0 + W + 6, y2: cy, stroke: INK, strokeWidth: 1.5, strokeDasharray: "4 3" }),

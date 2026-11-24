@@ -10,6 +10,8 @@
  * Interactive models (algebra tiles, the balance) are exploration only: nothing about them is recorded. Every answer,
  * hint and worked solution is saved to the account as the unit's own activity records.
  */
+import { algebraTilesMarks, minimumBarsMarks } from "../../../../packages/learning/src/lesson-marks";
+import { MarksSvg } from "../../year/Scene";
 import React, { useEffect, useMemo, useState } from "react";
 import { advice, canComplete, LETTERS, misconception, normalise, question, replay, resumePoint, stageOf, standing, struggling, unit, type Example, type Screen, type Section, type UnitAction, type UnitActivity, type UnitQuestion, type UnitState } from "../../../../packages/mathematics/src/unit";
 import { activeBranch, explain, firstDifficultyExample, outcome, returnPoint, rule as ruleOf, rules, type Branch, type RuleOutcome } from "../../../../packages/mathematics/src/remediation";
@@ -225,23 +227,12 @@ export function MinimumExplorer({ p, q }: { p: number; q: number }) {
   const xs = Array.from({ length: 9 }, (_, i) => centre - 4 + i);
   const [x, setX] = useState(centre + 2);
   const f = (v: number) => (v + p) ** 2 + q;
-  const top = f(xs[0]);
-  const W = 300, H = 150, bw = W / xs.length;
+  const W = 300, H = 150;
   const sq = (x + p) ** 2;
   const bracket = p < 0 ? `(x − ${-p})²` : `(x + ${p})²`;
   return (
     <figure className="minimum">
-      <svg viewBox={`0 0 ${W} ${H + 18}`} role="img" aria-label={`Values of ${bracket} + ${q} for x from ${xs[0]} to ${xs.at(-1)}; the smallest is ${q} at x = ${centre}.`}>
-        {xs.map((v, i) => {
-          const h = (f(v) / top) * H;
-          return (
-            <g key={v}>
-              <rect x={i * bw + 4} y={H - h} width={bw - 8} height={h} className={v === x ? "mbar on" : v === centre ? "mbar min" : "mbar"} />
-              <text x={i * bw + bw / 2} y={H + 14} className="tile-label">{String(v).replace("-", "−")}</text>
-            </g>
-          );
-        })}
-      </svg>
+      <MarksSvg viewBox={`0 0 ${W} ${H + 18}`} role="img" aria-label={`Values of ${bracket} + ${q} for x from ${xs[0]} to ${xs.at(-1)}; the smallest is ${q} at x = ${centre}.`} marks={minimumBarsMarks(xs, p, q, x)} />
       <label className="slider">
         <span>x = {String(x).replace("-", "−")}</span>
         <input type="range" min={xs[0]} max={xs.at(-1)} step={1} value={x} onChange={(e) => setX(Number(e.target.value))} />
@@ -696,11 +687,6 @@ export function Tiles({ b: start, mode, choose }: { b: number; mode: "show" | "s
   const corner = right * bottom;
   const square = right === bottom && filled === corner && corner > 0;
   const pickB = (n: number) => { setB(n); setRight(n); setFilled(0); };
-  const tiles: React.ReactNode[] = [];
-  for (let k = 0; k < Math.min(filled, corner); k++) {
-    const c = k % Math.max(right, 1), r = Math.floor(k / Math.max(right, 1));
-    tiles.push(<rect key={`t${k}`} x={pad + X + c * u} y={pad + X + r * u} width={u} height={u} className="tile-unit" />);
-  }
   const terms = [`x²`, right ? `${right}x` : "", bottom ? `${bottom}x` : "", filled ? `${filled}` : ""].filter(Boolean).join(" + ");
   return (
     <figure className="tiles">
@@ -709,18 +695,7 @@ export function Tiles({ b: start, mode, choose }: { b: number; mode: "show" | "s
           {[2, 4, 6, 8, 10].map((n) => <button key={n} className={`chip ${n === b ? "on" : ""}`} onClick={() => pickB(n)}>x² + {n}x</button>)}
         </div>
       )}
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${right} strips on the right, ${bottom} at the bottom, ${filled} unit tiles. ${square ? "A complete square." : ""}`}>
-        <text x={pad + X / 2} y={pad - 7} className="tile-label">x</text>
-        <text x={pad - 12} y={pad + X / 2} className="tile-label">x</text>
-        <rect x={pad} y={pad} width={X} height={X} className="tile-x2" />
-        <text x={pad + X / 2} y={pad + X / 2 + 6} className="tile-name">x²</text>
-        {Array.from({ length: right }, (_, i) => <rect key={`r${i}`} x={pad + X + i * u} y={pad} width={u} height={X} className="tile-x" />)}
-        {Array.from({ length: bottom }, (_, j) => <rect key={`b${j}`} x={pad} y={pad + X + j * u} width={X} height={u} className="tile-x" />)}
-        {corner > 0 && filled < corner && <rect x={pad + X} y={pad + X} width={right * u} height={bottom * u} className="tile-gap" />}
-        {tiles}
-        {right > 0 && <text x={pad + X + (right * u) / 2} y={pad - 7} className="tile-label">{right}</text>}
-        {bottom > 0 && <text x={pad - 12} y={pad + X + (bottom * u) / 2 + 4} className="tile-label">{bottom}</text>}
-      </svg>
+      <MarksSvg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${right} strips on the right, ${bottom} at the bottom, ${filled} unit tiles. ${square ? "A complete square." : ""}`} marks={algebraTilesMarks(right, bottom, filled)} />
       <figcaption>
         <strong>{terms}</strong>
         <span>

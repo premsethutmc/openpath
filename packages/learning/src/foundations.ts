@@ -14,7 +14,9 @@ import data from "../../../content/learning/foundations.v1.json";
 /** The pictures an idea can ask for. Each is a scene description for the scene engine (foundation-pictures.ts). */
 export const PICTURES = ["right-triangle", "unit-circle", "angle", "circle-parts", "number-line", "coordinate-plane", "tangent-slope", "area-under-curve", "fraction-bar", "matrix-grid", "vector-arrow", "venn"] as const;
 export type Picture = (typeof PICTURES)[number];
-export interface FoundationScreen { title: string; text: string[]; example?: string[]; check?: { question: string; answer: string }; picture?: Picture | null }
+export interface FoundationScreen { title: string; text: string[]; example?: string[]; check?: { question: string; answer: string }; picture?: Picture | null;
+  /** idea-figures@1: still pictures of the idea, each with a line saying what to see in it. They are the engine's question pictures (figure-marks.ts): the same clock, number line, shapes and labelled diagrams the questions use. */
+  figures?: { v: { type: string; [k: string]: unknown }; caption: string }[] }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
 export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[];

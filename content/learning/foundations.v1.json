@@ -3529,7 +3529,17 @@
      "check": {
       "question": "You have 10 marbles and a box that holds 9. How many are left over?",
       "answer": "1"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "dots",
+        "count": 11,
+        "perRow": 9
+       },
+       "caption": "11 marbles. The top row is the full box of 9. The 2 below are left over: the remainder is 2."
+      }
+     ]
     }
    ],
    "practice": [
@@ -3743,11 +3753,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "counters filling a box with some left over"
-   }
+   ]
   },
   {
    "competency": "MATH.algebra.partial-fractions",
@@ -7308,7 +7314,120 @@
      "check": {
       "question": "As x gets closer and closer to 4, what number does x + 1 get closer to?",
       "answer": "5"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A straight-line graph that rises to the right, with an open circle (a hole) on it above x = 1 at height 2.",
+        "w": 300,
+        "h": 195,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           60,
+           185
+          ],
+          "to": [
+           60,
+           15
+          ],
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           10,
+           170
+          ],
+          "to": [
+           285,
+           170
+          ],
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           20,
+           160
+          ],
+          "to": [
+           160,
+           20
+          ],
+          "accent": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           170
+          ],
+          "to": [
+           110,
+           70
+          ],
+          "dashed": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           60,
+           70
+          ],
+          "to": [
+           110,
+           70
+          ],
+          "dashed": true
+         },
+         {
+          "p": "point",
+          "at": [
+           110,
+           70
+          ],
+          "hollow": true
+         },
+         {
+          "p": "text",
+          "at": [
+           110,
+           188
+          ],
+          "s": "1"
+         },
+         {
+          "p": "text",
+          "at": [
+           48,
+           75
+          ],
+          "s": "2"
+         },
+         {
+          "p": "text",
+          "at": [
+           278,
+           188
+          ],
+          "s": "x"
+         },
+         {
+          "p": "text",
+          "at": [
+           75,
+           22
+          ],
+          "s": "f(x)"
+         }
+        ]
+       },
+       "caption": "f(x) = (x² − 1) ÷ (x − 1). There is a hole at x = 1: the function has no value there. But as x gets close to 1 from either side, the graph heads to 2. The limit is 2."
+      }
+     ]
     }
    ],
    "practice": [
@@ -7522,11 +7641,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a graph with a hole and approaching points"
-   }
+   ]
   },
   {
    "competency": "MATH.calculus.limits",
@@ -9053,7 +9168,117 @@
      "check": {
       "question": "For the ellipse x²/25 + y²/9 = 1, how long is the major axis?",
       "answer": "10, which is 2a with a = 5"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "An ellipse with centre at the origin, reaching 5 left and right and 3 up and down. Its two foci are at 4 left and 4 right of the centre. A point P at the top is joined to both foci.",
+        "w": 300,
+        "h": 200,
+        "parts": [
+         {
+          "p": "ellipse",
+          "at": [
+           150,
+           100
+          ],
+          "rx": 120,
+          "ry": 72
+         },
+         {
+          "p": "segment",
+          "from": [
+           30,
+           100
+          ],
+          "to": [
+           270,
+           100
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           54,
+           100
+          ],
+          "to": [
+           150,
+           28
+          ],
+          "dashed": true,
+          "accent": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           28
+          ],
+          "to": [
+           246,
+           100
+          ],
+          "dashed": true,
+          "accent": true
+         },
+         {
+          "p": "point",
+          "at": [
+           54,
+           100
+          ],
+          "label": "F₁",
+          "side": "s"
+         },
+         {
+          "p": "point",
+          "at": [
+           246,
+           100
+          ],
+          "label": "F₂",
+          "side": "s"
+         },
+         {
+          "p": "point",
+          "at": [
+           150,
+           28
+          ],
+          "label": "P",
+          "side": "n"
+         },
+         {
+          "p": "text",
+          "at": [
+           150,
+           118
+          ],
+          "s": "centre"
+         },
+         {
+          "p": "text",
+          "at": [
+           284,
+           104
+          ],
+          "s": "5"
+         },
+         {
+          "p": "text",
+          "at": [
+           150,
+           190
+          ],
+          "s": "3 up, 3 down"
+         }
+        ]
+       },
+       "caption": "x²/25 + y²/9 = 1. The foci F₁ and F₂ are at (−4, 0) and (4, 0). For P at the top, PF₁ = 5 and PF₂ = 5: the two distances add up to 10, as they do for every point on the curve."
+      }
+     ]
     },
     {
      "title": "The hyperbola: two branches",
@@ -9286,11 +9511,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "an ellipse with foci, axes and vertices"
-   }
+   ]
   },
   {
    "competency": "MATH.coordinate.polygon-area",
@@ -9554,7 +9775,136 @@
      "check": {
       "question": "How high above the floor (the plane z = 0) is the point (5, 1, 7)?",
       "answer": "7"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Three axes x, y and z meeting at the origin O. A path goes 2 along x, then 3 along y, then 4 up, to the point (2, 3, 4).",
+        "w": 310,
+        "h": 215,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           110,
+           150
+          ],
+          "to": [
+           47.0,
+           195.0
+          ],
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           150
+          ],
+          "to": [
+           290,
+           150
+          ],
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           150
+          ],
+          "to": [
+           110.0,
+           18.0
+          ],
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           150
+          ],
+          "to": [
+           82,
+           170
+          ],
+          "accent": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           82,
+           170
+          ],
+          "to": [
+           172,
+           170
+          ],
+          "accent": true,
+          "dashed": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           172,
+           170
+          ],
+          "to": [
+           172,
+           74
+          ],
+          "accent": true,
+          "dashed": true
+         },
+         {
+          "p": "point",
+          "at": [
+           110,
+           150
+          ],
+          "label": "O",
+          "side": "nw"
+         },
+         {
+          "p": "point",
+          "at": [
+           172,
+           74
+          ],
+          "label": "(2, 3, 4)",
+          "side": "n"
+         },
+         {
+          "p": "text",
+          "at": [
+           37.0,
+           197.0
+          ],
+          "s": "x"
+         },
+         {
+          "p": "text",
+          "at": [
+           298,
+           154
+          ],
+          "s": "y"
+         },
+         {
+          "p": "text",
+          "at": [
+           122,
+           22
+          ],
+          "s": "z"
+         }
+        ]
+       },
+       "caption": "To reach (2, 3, 4): go 2 along x, then 3 along y, then 4 up."
+      }
+     ]
     }
    ],
    "practice": [
@@ -9768,11 +10118,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "three axes with a point (x, y, z)"
-   }
+   ]
   },
   {
    "competency": "MATH.coordinate.space-lines",
@@ -10037,7 +10383,72 @@
      "check": {
       "question": "Is the point (1, 2, 0) on the plane x + y + z − 3 = 0?",
       "answer": "Yes, because 1 + 2 + 0 − 3 = 0"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A flat four-sided piece of a plane, with an arrow standing straight up from it, labelled normal.",
+        "w": 300,
+        "h": 180,
+        "parts": [
+         {
+          "p": "polygon",
+          "points": [
+           [
+            40,
+            160
+           ],
+           [
+            200,
+            160
+           ],
+           [
+            260,
+            100
+           ],
+           [
+            100,
+            100
+           ]
+          ],
+          "fill": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           130
+          ],
+          "to": [
+           150,
+           35
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "text",
+          "at": [
+           185,
+           50
+          ],
+          "s": "normal",
+          "accent": true
+         },
+         {
+          "p": "text",
+          "at": [
+           110,
+           150
+          ],
+          "s": "plane"
+         }
+        ]
+       },
+       "caption": "A plane is a flat surface. Its normal is a direction at right angles to it, like a table leg to the table top."
+      }
+     ]
     }
    ],
    "practice": [
@@ -10251,11 +10662,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a plane with its normal arrow"
-   }
+   ]
   },
   {
    "competency": "MATH.coordinate.straight-lines",
@@ -11033,7 +11440,86 @@
      "check": {
       "question": "D is on BC with BD = 2 cm and DC = 6 cm. What is BD : DC in simplest form?",
       "answer": "1 : 3."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Triangle ABC. A segment from corner A to a point D on the side BC.",
+        "w": 300,
+        "h": 200,
+        "parts": [
+         {
+          "p": "polygon",
+          "points": [
+           [
+            120,
+            30
+           ],
+           [
+            40,
+            170
+           ],
+           [
+            260,
+            170
+           ]
+          ],
+          "fill": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           120,
+           30
+          ],
+          "to": [
+           130,
+           170
+          ],
+          "accent": true
+         },
+         {
+          "p": "point",
+          "at": [
+           120,
+           30
+          ],
+          "label": "A",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           40,
+           170
+          ],
+          "label": "B",
+          "side": "sw"
+         },
+         {
+          "p": "point",
+          "at": [
+           260,
+           170
+          ],
+          "label": "C",
+          "side": "se"
+         },
+         {
+          "p": "point",
+          "at": [
+           130,
+           170
+          ],
+          "label": "D",
+          "side": "s"
+         }
+        ]
+       },
+       "caption": "AD is a cevian: it goes from the corner A to a point D on the opposite side. D cuts BC into two parts, BD and DC."
+      }
+     ]
     }
    ],
    "practice": [
@@ -11247,11 +11733,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a triangle with a cevian to a side"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.circle-tangents",
@@ -11275,7 +11757,135 @@
      "check": {
       "question": "At how many points does a tangent meet a circle?",
       "answer": "Exactly one."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A circle with centre O. A tangent from the outside point P touches the circle at one point, T; the radius OT meets the tangent at a right angle. A secant cuts the circle at two points.",
+        "w": 300,
+        "h": 200,
+        "parts": [
+         {
+          "p": "circle",
+          "at": [
+           110,
+           100
+          ],
+          "r": 60
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           100
+          ],
+          "to": [
+           134.0,
+           45.01
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           89.9,
+           25.76
+          ],
+          "to": [
+           260,
+           100
+          ],
+          "accent": true
+         },
+         {
+          "p": "right",
+          "at": [
+           134.0,
+           45.01
+          ],
+          "a": [
+           110,
+           100
+          ],
+          "b": [
+           260,
+           100
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           20,
+           130
+          ],
+          "to": [
+           215,
+           130
+          ]
+         },
+         {
+          "p": "point",
+          "at": [
+           110,
+           100
+          ],
+          "label": "O",
+          "side": "w"
+         },
+         {
+          "p": "point",
+          "at": [
+           134.0,
+           45.01
+          ],
+          "label": "T",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           260,
+           100
+          ],
+          "label": "P",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           58.04,
+           130
+          ]
+         },
+         {
+          "p": "point",
+          "at": [
+           161.96,
+           130
+          ]
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           72
+          ],
+          "s": "tangent",
+          "accent": true
+         },
+         {
+          "p": "text",
+          "at": [
+           240,
+           134
+          ],
+          "s": "secant"
+         }
+        ]
+       },
+       "caption": "The tangent touches the circle at one point, T (the point of contact). The radius OT meets it at 90°. The secant cuts the circle at two points."
+      }
+     ]
     }
    ],
    "practice": [
@@ -11489,11 +12099,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a circle with tangent, secant and contact radius"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.circle-theorems",
@@ -12012,7 +12618,99 @@
      "check": {
       "question": "An angle of 60° is bisected. How big is each part?",
       "answer": "30°."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Segment AB with midpoint M. A dashed line through M crosses AB at a right angle: the perpendicular bisector.",
+        "w": 300,
+        "h": 200,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           50,
+           120
+          ],
+          "to": [
+           150,
+           120
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           120
+          ],
+          "to": [
+           250,
+           120
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           25
+          ],
+          "to": [
+           150,
+           190
+          ],
+          "dashed": true,
+          "accent": true
+         },
+         {
+          "p": "right",
+          "at": [
+           150,
+           120
+          ],
+          "a": [
+           250,
+           120
+          ],
+          "b": [
+           150,
+           25
+          ]
+         },
+         {
+          "p": "point",
+          "at": [
+           50,
+           120
+          ],
+          "label": "A",
+          "side": "sw"
+         },
+         {
+          "p": "point",
+          "at": [
+           250,
+           120
+          ],
+          "label": "B",
+          "side": "se"
+         },
+         {
+          "p": "point",
+          "at": [
+           150,
+           120
+          ],
+          "label": "M",
+          "side": "sw"
+         }
+        ]
+       },
+       "caption": "M is the midpoint of AB, so AM = MB (same marks). The dashed line through M at 90° is the perpendicular bisector of AB."
+      }
+     ]
     }
    ],
    "practice": [
@@ -12226,11 +12924,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a segment with midpoint and perpendicular bisector"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.constructions-bisectors",
@@ -12254,7 +12948,146 @@
      "check": {
       "question": "Triangle ABC is congruent to triangle PQR. Which corner of PQR matches B?",
       "answer": "Q."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Two triangles, ABC and PQR, of the same shape and size. AB and PQ carry one mark, BC and QR two marks, CA and RP three marks.",
+        "w": 320,
+        "h": 185,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           40,
+           72
+          ],
+          "to": [
+           40,
+           150
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           40,
+           150
+          ],
+          "to": [
+           144,
+           150
+          ],
+          "ticks": 2
+         },
+         {
+          "p": "segment",
+          "from": [
+           144,
+           150
+          ],
+          "to": [
+           40,
+           72
+          ],
+          "ticks": 3
+         },
+         {
+          "p": "segment",
+          "from": [
+           190,
+           72
+          ],
+          "to": [
+           190,
+           150
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           190,
+           150
+          ],
+          "to": [
+           294,
+           150
+          ],
+          "ticks": 2
+         },
+         {
+          "p": "segment",
+          "from": [
+           294,
+           150
+          ],
+          "to": [
+           190,
+           72
+          ],
+          "ticks": 3
+         },
+         {
+          "p": "point",
+          "at": [
+           40,
+           72
+          ],
+          "label": "A",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           40,
+           150
+          ],
+          "label": "B",
+          "side": "sw"
+         },
+         {
+          "p": "point",
+          "at": [
+           144,
+           150
+          ],
+          "label": "C",
+          "side": "se"
+         },
+         {
+          "p": "point",
+          "at": [
+           190,
+           72
+          ],
+          "label": "P",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           190,
+           150
+          ],
+          "label": "Q",
+          "side": "sw"
+         },
+         {
+          "p": "point",
+          "at": [
+           294,
+           150
+          ],
+          "label": "R",
+          "side": "se"
+         }
+        ]
+       },
+       "caption": "Triangle PQR fits exactly on triangle ABC. Sides with the same marks are equal: PQ = AB, QR = BC, RP = CA."
+      }
+     ]
     },
     {
      "title": "SSS and CPCT",
@@ -12486,11 +13319,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "two congruent triangles with matching sides marked"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.lines-segments",
@@ -12513,7 +13342,110 @@
      "check": {
       "question": "How many end points does a line segment have?",
       "answer": "2."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A point named A.",
+        "w": 300,
+        "h": 60,
+        "parts": [
+         {
+          "p": "point",
+          "at": [
+           150,
+           35
+          ],
+          "label": "A",
+          "side": "e"
+         }
+        ]
+       },
+       "caption": "A point. We name it A."
+      },
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A line segment from point A to point B.",
+        "w": 300,
+        "h": 60,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           60,
+           35
+          ],
+          "to": [
+           240,
+           35
+          ]
+         },
+         {
+          "p": "point",
+          "at": [
+           60,
+           35
+          ],
+          "label": "A",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           240,
+           35
+          ],
+          "label": "B",
+          "side": "n"
+         }
+        ]
+       },
+       "caption": "The line segment AB. It stops at A and at B."
+      },
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A line through points A and B, with an arrow at each end.",
+        "w": 300,
+        "h": 60,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           15,
+           35
+          ],
+          "to": [
+           285,
+           35
+          ],
+          "arrow": "both"
+         },
+         {
+          "p": "point",
+          "at": [
+           100,
+           35
+          ],
+          "label": "A",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           200,
+           35
+          ],
+          "label": "B",
+          "side": "n"
+         }
+        ]
+       },
+       "caption": "A line through A and B. The arrows show that it goes on for ever both ways."
+      }
+     ]
     }
    ],
    "practice": [
@@ -12727,11 +13659,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a point, a line segment and a line"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.lines-segments",
@@ -13233,7 +14161,41 @@
      "check": {
       "question": "How many sides does an octagon have?",
       "answer": "8."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "shape",
+        "sides": 7,
+        "name": "heptagon"
+       },
+       "caption": "heptagon: 7 sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "sides": 8,
+        "name": "octagon"
+       },
+       "caption": "octagon: 8 sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "sides": 9,
+        "name": "nonagon"
+       },
+       "caption": "nonagon: 9 sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "sides": 10,
+        "name": "decagon"
+       },
+       "caption": "decagon: 10 sides"
+      }
+     ]
     }
    ],
    "practice": [
@@ -13447,11 +14409,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "polygons with seven to ten sides, named"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.polyhedra-euler",
@@ -13474,7 +14432,16 @@
      "check": {
       "question": "Is a cricket ball a polyhedron?",
       "answer": "No, its surface is curved."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "solid",
+        "name": "cube"
+       },
+       "caption": "A cube is a polyhedron: 6 flat faces, 12 edges and 8 corners. Three faces, three edges and one corner are hidden at the back."
+      }
+     ]
     }
    ],
    "practice": [
@@ -13688,11 +14655,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a cube with faces, edges and vertices marked"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.pythagoras",
@@ -13975,7 +14938,78 @@
      "check": {
       "question": "In quadrilateral ABCD, which side is opposite to AB?",
       "answer": "CD (also written DC)."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A rectangle with corners named in order going round: A, B, C, D.",
+        "w": 300,
+        "h": 190,
+        "parts": [
+         {
+          "p": "polygon",
+          "points": [
+           [
+            60,
+            45
+           ],
+           [
+            240,
+            45
+           ],
+           [
+            240,
+            150
+           ],
+           [
+            60,
+            150
+           ]
+          ],
+          "fill": true
+         },
+         {
+          "p": "point",
+          "at": [
+           60,
+           45
+          ],
+          "label": "A",
+          "side": "nw"
+         },
+         {
+          "p": "point",
+          "at": [
+           240,
+           45
+          ],
+          "label": "B",
+          "side": "ne"
+         },
+         {
+          "p": "point",
+          "at": [
+           240,
+           150
+          ],
+          "label": "C",
+          "side": "se"
+         },
+         {
+          "p": "point",
+          "at": [
+           60,
+           150
+          ],
+          "label": "D",
+          "side": "sw"
+         }
+        ]
+       },
+       "caption": "Rectangle ABCD, named by its corners in order going round. AB and DC are opposite sides. AB and BC are neighbouring sides: they share the corner B."
+      }
+     ]
     }
    ],
    "practice": [
@@ -14189,11 +15223,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a quadrilateral ABCD with sides and corners labelled"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.quadrilateral-classification",
@@ -14475,7 +15505,53 @@
      "check": {
       "question": "A shape has 6 straight sides. What is it called?",
       "answer": "A hexagon."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "shape",
+        "sides": 3,
+        "name": "triangle"
+       },
+       "caption": "triangle: 3 sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "kind": "square"
+       },
+       "caption": "square: 4 equal sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "kind": "rectangle"
+       },
+       "caption": "rectangle: 2 long sides and 2 short sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "sides": 5,
+        "name": "pentagon"
+       },
+       "caption": "pentagon: 5 sides"
+      },
+      {
+       "v": {
+        "type": "shape",
+        "sides": 6,
+        "name": "hexagon"
+       },
+       "caption": "hexagon: 6 sides"
+      },
+      {
+       "v": {
+        "type": "circle"
+       },
+       "caption": "circle: round, no straight sides"
+      }
+     ]
     }
    ],
    "practice": [
@@ -14689,11 +15765,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "triangle, square, rectangle, pentagon, hexagon and circle"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.shape-properties",
@@ -14716,7 +15788,51 @@
      "check": {
       "question": "Is a ball a cube or a sphere?",
       "answer": "A sphere."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "solid",
+        "name": "cube"
+       },
+       "caption": "cube"
+      },
+      {
+       "v": {
+        "type": "solid",
+        "name": "cuboid"
+       },
+       "caption": "cuboid"
+      },
+      {
+       "v": {
+        "type": "solid",
+        "name": "sphere"
+       },
+       "caption": "sphere"
+      },
+      {
+       "v": {
+        "type": "solid",
+        "name": "cylinder"
+       },
+       "caption": "cylinder"
+      },
+      {
+       "v": {
+        "type": "solid",
+        "name": "cone"
+       },
+       "caption": "cone"
+      },
+      {
+       "v": {
+        "type": "solid",
+        "name": "pyramid"
+       },
+       "caption": "pyramid"
+      }
+     ]
     }
    ],
    "practice": [
@@ -14930,11 +16046,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "cube, cuboid, sphere, cylinder, cone and pyramid"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.tessellations",
@@ -14957,7 +16069,38 @@
      "check": {
       "question": "A triangle has sides of 3 cm, 3 cm and 5 cm. Is it regular?",
       "answer": "No, because its sides are not all equal."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "shape",
+        "sides": 5,
+        "name": "regular pentagon"
+       },
+       "caption": "Regular: all 5 sides are equal and all 5 corners are equal."
+      },
+      {
+       "v": {
+        "type": "shape",
+        "kind": "square"
+       },
+       "caption": "Regular: a square."
+      },
+      {
+       "v": {
+        "type": "shape",
+        "kind": "rectangle"
+       },
+       "caption": "Not regular: the corners are equal, but the sides are not all equal."
+      },
+      {
+       "v": {
+        "type": "shape",
+        "kind": "kite"
+       },
+       "caption": "Not regular: the sides are not all equal."
+      }
+     ]
     }
    ],
    "practice": [
@@ -15171,11 +16314,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "regular and non-regular polygons side by side"
-   }
+   ]
   },
   {
    "competency": "MATH.geometry.transformations",
@@ -15694,7 +16833,146 @@
      "check": {
       "question": "A line joins corner A to the midpoint of side BC. What is it called?",
       "answer": "A median."
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Triangle ABC. D is the midpoint of BC and AD is drawn. AE is drawn from A to BC, meeting it at a right angle.",
+        "w": 300,
+        "h": 205,
+        "parts": [
+         {
+          "p": "polygon",
+          "points": [
+           [
+            110,
+            30
+           ],
+           [
+            40,
+            170
+           ],
+           [
+            260,
+            170
+           ]
+          ],
+          "fill": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           40,
+           170
+          ],
+          "to": [
+           150,
+           170
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           150,
+           170
+          ],
+          "to": [
+           260,
+           170
+          ],
+          "ticks": 1
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           30
+          ],
+          "to": [
+           150,
+           170
+          ],
+          "accent": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           110,
+           30
+          ],
+          "to": [
+           110,
+           170
+          ],
+          "dashed": true
+         },
+         {
+          "p": "right",
+          "at": [
+           110,
+           170
+          ],
+          "a": [
+           110,
+           30
+          ],
+          "b": [
+           260,
+           170
+          ]
+         },
+         {
+          "p": "point",
+          "at": [
+           110,
+           30
+          ],
+          "label": "A",
+          "side": "n"
+         },
+         {
+          "p": "point",
+          "at": [
+           40,
+           170
+          ],
+          "label": "B",
+          "side": "sw"
+         },
+         {
+          "p": "point",
+          "at": [
+           260,
+           170
+          ],
+          "label": "C",
+          "side": "se"
+         },
+         {
+          "p": "point",
+          "at": [
+           150,
+           170
+          ],
+          "label": "D",
+          "side": "s"
+         },
+         {
+          "p": "point",
+          "at": [
+           110,
+           170
+          ],
+          "label": "E",
+          "side": "s"
+         }
+        ]
+       },
+       "caption": "AD is a median: D is the midpoint of BC (same marks). AE is an altitude: it meets BC at 90°."
+      }
+     ]
     }
    ],
    "practice": [
@@ -15908,11 +17186,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a triangle with median, altitude and bisectors"
-   }
+   ]
   },
   {
    "competency": "MATH.matrices.adjoint-inverse",
@@ -18414,7 +19688,17 @@
      "check": {
       "question": "A shape is covered by exactly 5 squares, each 1 cm by 1 cm. What is its area?",
       "answer": "5 cm²"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "grid",
+        "rows": 2,
+        "cols": 3
+       },
+       "caption": "A card 3 cm long and 2 cm wide: 2 rows of 3 little squares. Each little square is 1 cm². Area = 6 cm²."
+      }
+     ]
     }
    ],
    "practice": [
@@ -18628,11 +19912,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a rectangle covered with unit squares"
-   }
+   ]
   },
   {
    "competency": "MATH.measurement.sectors",
@@ -19155,7 +20435,19 @@
      "check": {
       "question": "A triangle has a base of 10 cm, a slanting side of 7 cm, and its top corner is 6 cm straight above the base. What is its height?",
       "answer": "6 cm"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "triangle",
+        "sides": [
+         "base"
+        ],
+        "height": "height"
+       },
+       "caption": "The height (dashed) goes straight up from the base to the top corner. The slanting sides are longer than the height."
+      }
+     ]
     }
    ],
    "practice": [
@@ -19352,11 +20644,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a triangle with base and perpendicular height"
-   }
+   ]
   },
   {
    "competency": "MATH.measurement.volume-cubes",
@@ -19381,7 +20669,21 @@
      "check": {
       "question": "A block is made of 8 cubes, each with edges of 1 cm. What is its volume?",
       "answer": "8 cm³"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "solid",
+        "name": "cube",
+        "dims": [
+         "1 cm",
+         "1 cm",
+         "1 cm"
+        ]
+       },
+       "caption": "1 cm³: a cube 1 cm long, 1 cm wide and 1 cm high."
+      }
+     ]
     }
    ],
    "practice": [
@@ -19595,11 +20897,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a box built from unit cubes"
-   }
+   ]
   },
   {
    "competency": "MATH.number.addition",
@@ -19867,7 +21165,30 @@
      "check": {
       "question": "On a number line, which number is just to the right of 6?",
       "answer": "7"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "numberline",
+        "from": 0,
+        "to": 10,
+        "marks": [
+         3
+        ],
+        "jumps": [
+         [
+          3,
+          4
+         ],
+         [
+          4,
+          5
+         ]
+        ]
+       },
+       "caption": "Stand on 3. Two jumps to the right land on 5."
+      }
+     ]
     }
    ],
    "practice": [
@@ -20081,11 +21402,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a 0 to 10 number line with jumps"
-   }
+   ]
   },
   {
    "competency": "MATH.number.complex",
@@ -22841,7 +24158,17 @@
      "check": {
       "question": "What remainder does 9 leave on division by 7?",
       "answer": "2, so 9 is congruent to 2 (mod 7)"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "clock",
+        "h": 10,
+        "m": 0
+       },
+       "caption": "It is 10 o'clock. Count 5 hours on: 11, 12, 1, 2, 3. After 12 the numbers start again."
+      }
+     ]
     }
    ],
    "practice": [
@@ -23055,11 +24382,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a clock face with numbers wrapping round"
-   }
+   ]
   },
   {
    "competency": "MATH.number.multi-multiplication",
@@ -23327,7 +24650,17 @@
      "check": {
       "question": "In base 5, what ordinary (base-ten) number does the numeral 10 stand for?",
       "answer": "5 (1 five and 0 ones)"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "dots",
+        "count": 7,
+        "perRow": 5
+       },
+       "caption": "7 eggs: 1 full tray of 5 (top row) and 2 loose eggs."
+      }
+     ]
     }
    ],
    "practice": [
@@ -23541,11 +24874,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "objects bundled in trays of five"
-   }
+   ]
   },
   {
    "competency": "MATH.number.place-value-tens",
@@ -23812,7 +25141,17 @@
      "check": {
       "question": "What is 2²?",
       "answer": "4"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "dots",
+        "count": 9,
+        "perRow": 3
+       },
+       "caption": "3 rows of 3 dots: 3 × 3 = 9. So 3² = 9."
+      }
+     ]
     },
     {
      "title": "Square roots",
@@ -24044,11 +25383,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "dots arranged in a square array"
-   }
+   ]
   },
   {
    "competency": "MATH.number.profit-loss",
@@ -30705,7 +32040,149 @@
      "check": {
       "question": "f(x) = x² with inputs −2 and 2. Do the two inputs give different outputs?",
       "answer": "No, both give 4 (so this f is not one-one)"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "Two ovals, A holding 1, 2, 3 and B holding 1, 4, 9, 10. Arrows go from 1 to 1, from 2 to 4 and from 3 to 9. Nothing points to 10.",
+        "w": 300,
+        "h": 210,
+        "parts": [
+         {
+          "p": "ellipse",
+          "at": [
+           75,
+           112
+          ],
+          "rx": 45,
+          "ry": 85
+         },
+         {
+          "p": "ellipse",
+          "at": [
+           225,
+           112
+          ],
+          "rx": 45,
+          "ry": 90
+         },
+         {
+          "p": "text",
+          "at": [
+           75,
+           18
+          ],
+          "s": "A"
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           16
+          ],
+          "s": "B"
+         },
+         {
+          "p": "text",
+          "at": [
+           75,
+           65
+          ],
+          "s": "1"
+         },
+         {
+          "p": "text",
+          "at": [
+           75,
+           115
+          ],
+          "s": "2"
+         },
+         {
+          "p": "text",
+          "at": [
+           75,
+           165
+          ],
+          "s": "3"
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           50
+          ],
+          "s": "1"
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           95
+          ],
+          "s": "4"
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           140
+          ],
+          "s": "9"
+         },
+         {
+          "p": "text",
+          "at": [
+           225,
+           185
+          ],
+          "s": "10"
+         },
+         {
+          "p": "segment",
+          "from": [
+           90,
+           60
+          ],
+          "to": [
+           207,
+           45
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           90,
+           110
+          ],
+          "to": [
+           207,
+           90
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           90,
+           160
+          ],
+          "to": [
+           207,
+           135
+          ],
+          "accent": true,
+          "arrow": true
+         }
+        ]
+       },
+       "caption": "f(x) = x² from A to B. Every input has exactly one arrow. No arrow reaches 10, so the range {1, 4, 9} is smaller than B."
+      }
+     ]
     }
    ],
    "practice": [
@@ -30919,11 +32396,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "arrow diagram mapping set A to B"
-   }
+   ]
   },
   {
    "competency": "MATH.sets-relations.relation-properties",
@@ -31208,7 +32681,37 @@
      "check": {
       "question": "All five values in a data set are 7. How far is each value from the mean?",
       "answer": "0 (there is no spread at all)"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "numberline",
+        "from": 0,
+        "to": 100,
+        "step": 10,
+        "marks": [
+         49,
+         50,
+         51
+        ]
+       },
+       "caption": "Asha's scores: 49, 50, 51. They sit almost on one spot."
+      },
+      {
+       "v": {
+        "type": "numberline",
+        "from": 0,
+        "to": 100,
+        "step": 10,
+        "marks": [
+         0,
+         50,
+         100
+        ]
+       },
+       "caption": "Bala's scores: 0, 50, 100. Same mean of 50, but spread far apart."
+      }
+     ]
     },
     {
      "title": "Variance σ² and standard deviation σ",
@@ -31442,11 +32945,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "two dot plots with different spread"
-   }
+   ]
   },
   {
    "competency": "MATH.statistics.grouped-data",
@@ -35117,7 +36616,25 @@
      "check": {
       "question": "In triangle ABC, which side is opposite the angle B?",
       "answer": "Side b (the side joining A and C)"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "triangle",
+        "sides": [
+         "c",
+         "a",
+         "b"
+        ],
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ]
+       },
+       "caption": "Side a faces corner A. Side b faces corner B. Side c faces corner C."
+      }
+     ]
     }
    ],
    "practice": [
@@ -35331,11 +36848,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a triangle labelled A, B, C and a, b, c"
-   }
+   ]
   },
   {
    "competency": "MATH.vectors.algebra",
@@ -36373,7 +37886,185 @@
      "check": {
       "question": "A box has edges 1, 2 and 5 that meet at right angles. What is its volume?",
       "answer": "10"
-     }
+     },
+     "figures": [
+      {
+       "v": {
+        "type": "diagram",
+        "says": "A leaning box whose six faces are parallelograms. Three arrows a, b and c leave one corner along its edges.",
+        "w": 300,
+        "h": 195,
+        "parts": [
+         {
+          "p": "segment",
+          "from": [
+           200,
+           165
+          ],
+          "to": [
+           255,
+           127
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           200,
+           165
+          ],
+          "to": [
+           228,
+           77
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           115,
+           127
+          ],
+          "to": [
+           255,
+           127
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           115,
+           127
+          ],
+          "to": [
+           143,
+           39
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           88,
+           77
+          ],
+          "to": [
+           228,
+           77
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           88,
+           77
+          ],
+          "to": [
+           143,
+           39
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           255,
+           127
+          ],
+          "to": [
+           283,
+           39
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           228,
+           77
+          ],
+          "to": [
+           283,
+           39
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           143,
+           39
+          ],
+          "to": [
+           283,
+           39
+          ]
+         },
+         {
+          "p": "segment",
+          "from": [
+           60,
+           165
+          ],
+          "to": [
+           200,
+           165
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           60,
+           165
+          ],
+          "to": [
+           115,
+           127
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "segment",
+          "from": [
+           60,
+           165
+          ],
+          "to": [
+           88,
+           77
+          ],
+          "accent": true,
+          "arrow": true
+         },
+         {
+          "p": "text",
+          "at": [
+           130,
+           182
+          ],
+          "s": "a",
+          "accent": true
+         },
+         {
+          "p": "text",
+          "at": [
+           98,
+           138
+          ],
+          "s": "b",
+          "accent": true
+         },
+         {
+          "p": "text",
+          "at": [
+           62,
+           112
+          ],
+          "s": "c",
+          "accent": true
+         }
+        ]
+       },
+       "caption": "A parallelepiped: a leaning box. The three edges a, b and c that leave one corner fix the whole box."
+      }
+     ]
     }
    ],
    "practice": [
@@ -36587,11 +38278,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "new",
-    "figure": "a parallelepiped with edge vectors a, b, c"
-   }
+   ]
   }
  ]
 }
