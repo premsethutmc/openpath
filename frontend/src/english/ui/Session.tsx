@@ -51,7 +51,7 @@ export function Session({ learner, voice, onLeave, onChanged }: Props) {
 
   const type = cur.session.event.type;
   const title = Learner.sessionTitle(type);
-  if (cur.lesson) return <LessonView lesson={cur.lesson} title={title} onLeave={onLeave} onDone={async (ok) => (await learner.finishLesson(cur.lesson!.id, ok), refresh())} />;
+  if (cur.lesson) return <LessonView lesson={cur.lesson} title={title} why={cur.reteach} onLeave={onLeave} onDone={async (ok) => (await learner.finishLesson(cur.lesson!.id, ok), refresh())} />;
   if (!cur.next) return <Done learner={learner} cur={cur} onLeave={onLeave} />;
 
   // the device can no longer say the words (no voice now, or hearing words switched off): never ask a word unheard
@@ -204,7 +204,7 @@ function Report({ onSend, onCancel }: { onSend: (note: string) => void; onCancel
   );
 }
 
-function LessonView({ lesson, title, onDone, onLeave }: { lesson: Lesson; title: string; onDone: (ok: boolean) => void; onLeave: () => void }) {
+function LessonView({ lesson, title, why, onDone, onLeave }: { lesson: Lesson; title: string; why?: string; onDone: (ok: boolean) => void; onLeave: () => void }) {
   const [pick, setPick] = useState<number | null>(null);
   const answered = pick !== null;
   return (
@@ -219,6 +219,11 @@ function LessonView({ lesson, title, onDone, onLeave }: { lesson: Lesson; title:
         <span className="pill">
           <span aria-hidden="true">📖</span> Discover
         </span>
+        {why && (
+          <p className="small note" data-reteach>
+            {why}
+          </p>
+        )}
         <h1 id="lesson-title">{lesson.title}</h1>
         <p className="rule">{lesson.rule}</p>
         <ul className="examples">

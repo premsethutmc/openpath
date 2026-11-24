@@ -6,7 +6,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import checkJson from "../../../../../content/english/vocabulary/size-check.json";
-import { ABOUT, CHECK, KNOW_MAX, OPTIONS, PICK_MAX_UNTRUSTED, SizeCheckSession, belief, checkProblems, falseYes, latestResult, levelLine, measure, seenWords, startBand, wordPracticeBand, type Evidence, type VocabRecord } from "./size-check.ts";
+import { surfaceGuess, ABOUT, CHECK, KNOW_MAX, OPTIONS, PICK_MAX_UNTRUSTED, SizeCheckSession, belief, checkProblems, falseYes, latestResult, levelLine, measure, seenWords, startBand, wordPracticeBand, type Evidence, type VocabRecord } from "./size-check.ts";
 import { loadContent } from "../content.ts";
 import { eventProblem } from "../events.ts";
 import { testClock } from "../journey-sim.ts";
@@ -207,4 +207,18 @@ test("VC-6 the record is kept with the learner and never reaches the engine", as
   const again = await Learner.open(c, repo, "p-vocab", clock);
   assert.equal(latestResult(again.vocabRecords())!.band, done.result.band);
   assert.match(String(eventProblem({ kind: "vocab", id: "x", at: clock(), record: {} })), /without its type/);
+});
+
+test("VC-7 going by looks alone does not beat the questions at any level, the top ones included", () => {
+  assert.deepEqual(checkProblems(CHECK), []);
+  for (const b of CHECK.bands) {
+    const at = CHECK.words.filter((w) => w.band === b.id);
+    for (const avoid of [false, true]) {
+      const score = at.reduce((t, w) => t + surfaceGuess(w, avoid), 0) / at.length;
+      assert.ok(score <= 1 / 3, `level ${b.id}, ${avoid ? "avoiding" : "picking"} look-alikes: ${score.toFixed(2)}`);
+    }
+  }
+  // the rule sees the pattern it guards against: three look-alike wrong choices give the answer away
+  assert.equal(surfaceGuess({ word: "excoriate", options: ["condemn", "excite", "expel", "examine"], answer: 0 }, true), 1);
+  assert.equal(surfaceGuess(CHECK.words.find((w) => w.word === "excoriate")!, true), 1 / 3);
 });

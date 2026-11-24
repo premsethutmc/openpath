@@ -14,6 +14,8 @@
  * session the app can actually run, and words it for a child and for a parent. Replaying the same events gives
  * the same profile and plan.
  */
+import { strandStarts } from "./streams/engine-start.ts";
+import { levelsFrom } from "./streams/level-check.ts";
 import {
   type CapabilitySnapshot,
   type DevelopmentPlan,
@@ -514,6 +516,9 @@ const CHILD: Record<Activity["kind"], string> = {
   show_what_you_know: "Show what you know",
 };
 
+/** Did Find my level measure at least one part (so the engine has a starting point from it)? */
+const measuredStart = (s: AppState): boolean => Object.keys(strandStarts(levelsFrom(s.events.flatMap((e) => (e.kind === "level_check" ? [e.record] : []))))).length > 0;
+
 /** Map the plan onto sessions the app can run, worded for a child. Nothing is offered that cannot be delivered. */
 function activities(s: AppState, c: AppContent, now: string, speech: boolean, plan: DevelopmentPlan, caps: CapabilityProfile[], teach: Map<string, { title: string; step: PlanStep } | null>): Activity[] {
   // the initial assessment is the existing starting point: placement, then the spelling check (dictation)
@@ -525,7 +530,10 @@ function activities(s: AppState, c: AppContent, now: string, speech: boolean, pl
         kind: "start",
         label: CHILD.start,
         title: "Find your starting point",
-        line: "A few questions on spelling, grammar and words, so the plan starts in the right place. You can stop and carry on later.",
+        // after Find my level these questions begin at the level it measured (streams/engine-start.ts), and the line says so
+        line: measuredStart(s)
+          ? "A few questions on spelling, grammar and words. They begin at the levels Find my level found, so the lessons start in the right place. You can stop and carry on later."
+          : "A few questions on spelling, grammar and words, so the plan starts in the right place. You can stop and carry on later.",
         step: { type: "placement", title: "Find your starting point", reason: first.why },
         recommendation: first,
       },

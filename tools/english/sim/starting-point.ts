@@ -6,10 +6,22 @@ import { runLearner } from "./run.ts";
 import { fingerprint, measures } from "./simulate.ts";
 const ctx = loadContext({ allowCandidateAnchors: true, framework: FROZEN_FRAMEWORK });
 const goal = ctx.content.goals.get(PROTOCOL.goal)!;
-const variants: [string, { noise: number; strands: string[] } | undefined][] = [
-  ["middle of the scale (today)", undefined],
+// The app's rule (frontend engine-start.ts): the five parts Find my level measures, the centre moved and the spread
+// left as wide as the framework's own (1.5), and the other strands left alone. The later rows read every ladder off
+// the framework's scale, in opposite directions for neighbouring parts: the worst case for parts whose ladders have
+// not been put on that scale.
+const APP = ["EN.VOC", "EN.RDG", "EN.GRM", "EN.FND", "EN.LIS"];
+const off = (by: number) => ({ "EN.VOC": by, "EN.RDG": -by, "EN.GRM": by, "EN.FND": -by, "EN.LIS": by });
+const app = (by?: number) => ({ noise: 0.7, strands: APP, only: true, sd: 1.5, ...(by ? { bias: off(by) } : {}) });
+const variants: [string, { noise: number; strands: string[]; only?: boolean; bias?: Record<string, number>; sd?: number } | undefined][] = [
+  ["middle of the scale (before)", undefined],
   ["overall level only (gap check)", { noise: 0.7, strands: [] }],
   ["per part: words, reading, grammar, spelling", { noise: 0.7, strands: ["EN.VOC", "EN.RDG", "EN.GRM", "EN.FND"] }],
+  ["the app's rule: five parts, spread 1.5, others untouched", app()],
+  ["the app's rule, ladders 1 level off (+ - + - +)", app(1)],
+  ["the app's rule, ladders 1 level off (- + - + -)", app(-1)],
+  ["the app's rule, ladders 1.5 levels off (+ - + - +)", app(1.5)],
+  ["the app's rule, ladders 1.5 levels off (- + - + -)", app(-1.5)],
 ];
 const num = (v: string) => Number((v.match(/-?\d+(\.\d+)?/) ?? ["NaN"])[0]);
 for (const [name, start] of variants) {
