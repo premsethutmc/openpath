@@ -4,6 +4,7 @@ import { briefOf, cardFor } from "../../../packages/learning/src/step-help";
 import { linkTerms } from "../../../packages/learning/src/terms";
 import { classOfSkill } from "./StepCoach";
 
+import { mx } from "./MatrixText";
 /** A word is linked when its skill has a card, is not the skill being read, and is taught no later than it. */
 export function allowTerm(reading: string | undefined) {
   const here = classOfSkill(reading);
@@ -19,7 +20,7 @@ export function TermText({ text, competency }: { text: string; competency?: stri
     <>
       <p>{pieces.map((p, i) => (p.skill
         ? <button key={i} type="button" className="term" aria-expanded={open === p.skill} data-term={p.skill} onClick={() => setOpen(open === p.skill ? null : p.skill!)}>{p.text}</button>
-        : <span key={i}>{p.text}</span>))}</p>
+        : <span key={i}>{mx(p.text)}</span>))}</p>
       {card && (
         <aside className="coach-card term-card" aria-label={word?.text ?? card.name}>
           {word?.meaning

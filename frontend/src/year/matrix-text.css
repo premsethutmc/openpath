@@ -1,0 +1,8 @@
+/* matrix-text@1: a matrix set out as rows and columns inside a line of text */
+.mx { position: relative; display: inline-grid; grid-template-columns: repeat(var(--mx-cols), auto); gap: 0.2em 0.85em; vertical-align: middle; margin: 0.2em 0.25em; padding: 0.25em 0.55em; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; line-height: 1.35;
+  border-left: 2px solid currentColor; border-right: 2px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) left top / 0.4em 2px no-repeat, linear-gradient(currentColor, currentColor) left bottom / 0.4em 2px no-repeat, linear-gradient(currentColor, currentColor) right top / 0.4em 2px no-repeat, linear-gradient(currentColor, currentColor) right bottom / 0.4em 2px no-repeat; }
+.mx-c { min-width: 1ch; }
+.mx-bar { border-left: 1px solid currentColor; padding-left: 0.6em; margin-left: -0.25em; }
+.mx-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.formula .mx, .option .mx { margin-top: 0.3em; margin-bottom: 0.3em; }

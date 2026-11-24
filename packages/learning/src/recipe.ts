@@ -18,6 +18,7 @@ import { check, type Scene } from "./scene";
 import { moduleFor } from "./content";
 import { explainStep, problemOf } from "./families";
 import { CLASS5_RECIPES } from "./recipes-class5";
+import { MATRIX_RECIPES } from "./recipes-matrices";
 
 /** One choice the learner can tap, with what is said back. Exactly one choice of a set is `right`. */
 export interface Choice { label: string; reply: string; right?: true }
@@ -425,6 +426,7 @@ const RECIPES: Recipe[] = [
 
 /** Every recipe (for tests and review). */
 RECIPES.push(...CLASS5_RECIPES);
+RECIPES.push(...MATRIX_RECIPES);
 
 export const ALL_RECIPES: readonly Recipe[] = RECIPES;
 /** The recipe for a competency, or null: none written, or one with any problem. */
