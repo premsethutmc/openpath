@@ -3,6 +3,7 @@
  * The React interface only calls these methods, so the whole learning journey can be tested without a
  * browser (learner.test.ts) and in one (e2e/english.test.mjs).
  */
+import { reteach } from "./mistake-lessons.ts";
 import type { LongRecord } from "./reading/long-read.ts";
 import type { KindRecord } from "./reading/kinds.ts";
 import type { SoundRecord } from "./sounds/sounds.ts";
@@ -51,6 +52,8 @@ export interface Current {
   session: SessionState;
   /** A lesson to read first (shown once per lesson). */
   lesson: Lesson | null;
+  /** Set when the lesson is shown again because the same mistake came twice running: why, in the learner's words. */
+  reteach?: string;
   /** The next question, or null when the session has just finished. */
   next: Next | null;
   done: number;
@@ -652,7 +655,10 @@ export class Learner {
       return { session: this.state.sessions.get(session.event.session)!, lesson: null, next: null, done: session.answered.length, total: session.answered.length };
     }
     const lessonId = session.event.lesson;
-    const lesson = lessonId && !this.state.lessons.has(lessonId) ? (this.content.lessons.get(lessonId) ?? null) : null;
+    const opening = lessonId && !this.state.lessons.has(lessonId) ? (this.content.lessons.get(lessonId) ?? null) : null;
+    // the same mistake twice running in guided practice: the lesson about it comes before the next question (reteach@1)
+    const again = opening ? null : reteach(this.state, this.content, session);
+    const lesson = opening ?? again?.lesson ?? null;
     const t = perfNow();
     const next = lesson ? null : this.nextQuestion(session);
     if (next) record({ name: "select_ms", ms: perfNow() - t });
@@ -676,7 +682,7 @@ export class Learner {
       const presented = await this.present(next.item, next.use);
       if (fresh && next.trace) await this.traceSelection(presented, { id: next.item.id, version: next.item.version }, next.trace);
     }
-    return { session: this.state.open ?? session, lesson, next, done: session.answered.length, total };
+    return { session: this.state.open ?? session, lesson, ...(again ? { reteach: again.why } : {}), next, done: session.answered.length, total };
   }
 
   private nextQuestion(session: SessionState): Next | null {

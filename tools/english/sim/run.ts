@@ -68,9 +68,11 @@ export interface RunOptions {
   /**
    * Experiment: start the learner from a placement result instead of the middle of the scale. `noise` is the spread of
    * the placement's error in levels; the placement is cautious (it reads half a level low on average), as Find my
-   * level's checks are. Strands not listed start from the overall result with a wider spread.
+   * level's checks are. Strands not listed start from the overall result with a wider spread, or, with `only`, are
+   * left at the framework's prior. `bias`: levels added to a strand's reading, for a part whose ladder is not on the
+   * framework's scale (a ladder that reads high or low). `sd`: the spread given to a listed strand (1 if omitted).
    */
-  start?: { noise: number; strands: string[] };
+  start?: { noise: number; strands: string[]; only?: boolean; bias?: Record<string, number>; sd?: number };
   /** Stop early when this returns true (checked after each item). */
   stop?: (ledger: Ledger, now: string) => boolean;
   onItem?: (info: { session: number; n: number; item: string; rec: Recommendation | null; ledger: Ledger; now: string }) => void;
@@ -114,7 +116,9 @@ export async function runLearner(ctx: Context, learner: SimLearner, o: RunOption
     const strands: Record<string, { mean: number; sd: number }> = {};
     for (const st of all) {
       const t = truth(st);
-      strands[st] = o.start.strands.includes(st) && t !== null ? { mean: place(t) + 0.5, sd: 1 } : { mean: overall + 0.5, sd: 1.25 };
+      const listed = o.start.strands.includes(st) && t !== null;
+      if (!listed && o.start.only) continue;
+      strands[st] = listed ? { mean: Math.min(8, Math.max(1, place(t!) + (o.start.bias?.[st] ?? 0))) + 0.5, sd: o.start.sd ?? 1 } : { mean: overall + 0.5, sd: 1.25 };
     }
     push({ kind: "starting_point", id: `${learner.id}-start`, at: at(o.sessionDays[0]), source: "sim-placement", strands });
   }

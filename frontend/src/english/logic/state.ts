@@ -2,6 +2,7 @@
  * The app's state, derived from the event list by a deterministic fold (like the engine's ledger).
  * Nothing here is stored: reopening the app, importing a backup or moving devices all rebuild it.
  */
+import { withEngineStart } from "./streams/engine-start.ts";
 import { Ledger, type LedgerEvent, RECALL_TEMPLATES, itemVersion } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, SPELLING, lessonId } from "./content.ts";
 import { type AppEvent, type AttemptEvent, type FlagEvent, type LessonEvent, type PreferencesEvent, type ProfileEvent, type SessionEndEvent, type SessionEvent, isLedgerEvent } from "./events.ts";
@@ -67,7 +68,9 @@ export function patternKey(capability: string, step: string): string {
 }
 
 export function fold(content: AppContent, events: AppEvent[]): AppState {
-  const ledgerEvents = events.filter(isLedgerEvent) as LedgerEvent[];
+  // the engine starts each strand from the level Find my level measured for it (streams/engine-start.ts): worked out
+  // here, never stored, and never evidence
+  const ledgerEvents = withEngineStart(events).filter((e) => e.kind === "starting_point" || isLedgerEvent(e)) as LedgerEvent[];
   const learner = (events.find((e) => e.kind === "profile") as ProfileEvent | undefined)?.id ?? "local";
   const ledger = Ledger.rebuild(content.ctx, learner, ledgerEvents);
   const s: AppState = {
