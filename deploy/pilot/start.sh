@@ -38,6 +38,8 @@ python manage.py migrate --noinput
 python manage.py check --deploy --fail-level ERROR
 # english-usage@1: counts only (no names, no typed words), printed to the server log at each start; never blocks start
 python manage.py english_usage || true
+# real placements, without names, so they can be checked against the people who sat them (family/placements.py)
+python manage.py placements_log || true
 # writing-feedback@1: a one-off measurement with six made-up pieces, only while this setting is 1 (turned off after)
 if [ "${OPENPATH_WRITING_FEEDBACK_SELFTEST:-0}" = 1 ]; then
     python manage.py writing_feedback_selftest || echo "writing-feedback selftest failed"

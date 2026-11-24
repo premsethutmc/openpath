@@ -103,6 +103,64 @@ def placements(user, days: int = 60, now=None) -> dict:
     return {"placements": learners, "days": days, "everyone": everyone}
 
 
+# ---------------------------------------------------------------- the server log (placements-log@1)
+#
+# The same sittings as lines of text for the server's own log, which only the people who run the server can read.
+# This is how placements are checked during development without anyone copying them out by hand. No names at all:
+# learners are numbered. The words asked are included only for learners on an owner's, administrator's or
+# developer's own account and for learners a parent shared for diagnostics; for everyone else, only each answer's
+# level and outcome. Nothing a learner typed is included.
+
+TAG = "placements@1 |"
+PART_NAMES = {"words": "Word check", "gaps": "Quick check", "reading": "Reading", "listening": "Listening", "spelling": "Spelling", "grammar": "Grammar"}
+
+
+def _right(a: dict) -> bool:
+    if a.get("outcome"):
+        return a["outcome"] == "no" if a.get("level") == 0 else a["outcome"] in ("yes", "right")
+    return a.get("right") is True
+
+
+def _by_level(answers: list[dict]) -> str:
+    real = [a for a in answers if a.get("level") not in (0, None)]
+    out = []
+    for level in sorted({a["level"] for a in real}):
+        at = [a for a in real if a["level"] == level]
+        marks = "".join(f" {a['right']}/{a['asked']}" if isinstance(a.get("right"), int) and not isinstance(a.get("right"), bool) else ("Y" if _right(a) else "n") for a in at)
+        out.append(f"L{level} {marks.strip()}")
+    return " ".join(out)
+
+
+def _say(a: dict) -> str:
+    return {"yes": "said-knows", "no": "said-not", "unknown": "unsure"}.get(a.get("outcome"), "right" if _right(a) else "wrong")
+
+
+def log_lines(days: int = 14, now=None) -> list[str]:
+    now = now or timezone.now()
+    since = now - timedelta(days=days)
+    with_events = PupilEvent.objects.filter(subject="english", kind__in=KINDS, occurred_at__gte=since, occurred_at__lte=now)
+    pupils = Pupil.objects.filter(id__in=with_events.values("pupil_id")).select_related("parent").order_by("created_at", "id")[:MAX_LEARNERS]
+    lines = [f"{TAG} word check and Find my level, last {days} days, {now.isoformat()[:16]} UTC; owner accounts configured: {len(getattr(settings, 'OWNER_EMAILS', ()))}"]
+    for n, p in enumerate(pupils, start=1):
+        own = sees_all(p.parent)
+        full = own or p.shared_for_diagnostics
+        rows = sittings(with_events.filter(pupil=p).order_by("seq").values_list("kind", "occurred_at", "body").iterator(), words=full)
+        if not rows:
+            continue
+        lines.append(f"{TAG} Learner {n}{' (owner account)' if own else ' (shared)' if full else ''}")
+        for s in rows:
+            level = "not finished" if s.get("level") is None else f"level {s['level']}"
+            span = f" ({s['low']}-{s['high']})" if isinstance(s.get("low"), (int, float)) and isinstance(s.get("high"), (int, float)) else ""
+            start = f" start {s['start']}" if s.get("start") is not None else ""
+            fake = [a for a in s["answers"] if a.get("level") == 0]
+            claimed = f" invented-claimed {sum(a.get('outcome') == 'yes' for a in fake)}/{len(fake)}" if fake else ""
+            lines.append(f"{TAG}   {PART_NAMES[s['part']]} {s['at'][:16]} {level}{span}{start} answers {len(s['answers'])}{claimed} | {_by_level(s['answers'])}")
+            asked = [f"{a['asked']}({'inv' if a.get('level') == 0 else a.get('level')}){_say(a)}" for a in s["answers"] if isinstance(a.get("asked"), str)]
+            for i in range(0, len(asked), 12):
+                lines.append(f"{TAG}     {' '.join(asked[i:i + 12])}")
+    return lines
+
+
 class PlacementsView(AccountBase):
     """GET: real sittings of the word check and Find my level (see the module's note on who sees what)."""
 
