@@ -314,6 +314,11 @@ export const B01: Def[] = [
       return [...new Set(unit.map((i) => v[i])), v[3]];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "unit"
+        ? ["A repeating pattern is one small part said again and again. Finding that part tells us everything that comes later."]
+        : s.id === "place"
+          ? ["The part keeps starting over, so we only need to know where the ? falls inside one copy of the part."]
+          : ["The ? takes whatever sits at that same place in the repeating part."]),
     explain: (s) => (s.id === "unit" ? `The part that repeats is ${s.value}.` : s.id === "place" ? `The ? is place ${s.value} of the repeating part.` : `So the next number is ${s.value}.`),
     domain: [[0, 5], [1, 9], [1, 9], [0, 3]],
     cap: 400,
@@ -372,6 +377,9 @@ export const B01: Def[] = [
     },
     distractors: ([u]) => [UNITS[u].length + 1, UNITS[u].length - 1],
     variants: () => [],
+    stepWhy: (s) => (s.id === "unit"
+        ? ["Look for the shortest group that, said again and again, makes the whole pattern. That group is the part that repeats."]
+        : ["The question asks how many shapes are in that one part, so we count only one copy of it."]),
     explain: (s) => (s.id === "unit" ? `The part that repeats is ${s.value}.` : `It has ${s.value} shapes.`),
     domain: [[0, 5], [0, 11], [0, 3]],
     difficulty: ([u]) => (u === 0 ? 1 : u <= 3 ? 2 : 3),
@@ -439,6 +447,9 @@ export const B01: Def[] = [
           ],
     distractors: ([n, k, kind]) => [k, n - k + 1, k - 1, n - k, n, k + 1].filter((x) => (kind <= 1 ? x >= 1 && x <= n : x >= 0 && x < n)),
     variants: () => [],
+    stepWhy: (s) => (s.id === "find"
+        ? ["First we must see exactly where the animal stands before we can say its place."]
+        : ["A place like first, second or third depends on which end you count from, so we count from the side the question says."]),
     explain: (s) => (s.id === "find" ? `Find the animal in the row: it is in box ${s.value} from the left.` : `Count from the side asked about: the answer is ${s.value}.`),
     domain: [[4, 8], [1, 8], [0, 3], [0, 2]],
     cap: 300,
@@ -505,6 +516,9 @@ export const B01: Def[] = [
     },
     distractors: ([S, , , seed]) => shelfOf(S, seed).counts,
     variants: () => [],
+    stepWhy: (s) => (s.id === "shelf"
+        ? ["Above means higher up and below means lower down. We find the right shelf before counting anything."]
+        : ["Only the things on that one shelf are asked for, so we count just those."]),
     explain: (s) => (s.id === "shelf" ? `The shelf just ${s.inputs[1] === 0 ? "above" : "below"} is the ${String(s.value).toLowerCase()} shelf.` : `It has ${s.value} ${s.value === 1 ? "thing" : "things"} on it.`),
     domain: [[3, 4], [0, 3], [0, 1], [0, 11]],
     difficulty: ([S, , dir]) => (S === 3 && dir === 0 ? 1 : S === 3 ? 2 : 3),
@@ -579,6 +593,9 @@ export const B01: Def[] = [
       return [right + 1, right + 2, right - 1];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "sort"
+        ? ["Things that look different can still have the same shape. We look only at the shape, not the size, colour or use."]
+        : ["Counting the things we picked out tells us how many have that shape."]),
     explain: (s) => (s.id === "sort" ? `Shaped like this: ${s.value}.` : `That is ${s.value}.`),
     domain: [[0, 4], [0, 79]],
     cap: 300,
@@ -645,6 +662,9 @@ export const B01: Def[] = [
       return [c + 1, c + 2, len];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "find"
+        ? ["A shape keeps its name when it is turned or left empty inside. Its sides and corners decide what it is."]
+        : ["Counting each shape once, without missing any, gives how many there are."]),
     explain: (s) => (s.id === "find" ? `Look for every ${s.value}, whichever way it is turned.` : `There ${s.value === 1 ? "is" : "are"} ${s.value}.`),
     domain: [[0, 3], [6, 9], [0, 29]],
     cap: 300,
@@ -699,6 +719,9 @@ export const B01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "first"
+        ? ["Each column of the calendar is one day of the week, so the first date in that column is the first such day of the month."]
+        : ["A week has 7 days, so the same day comes again 7 dates later, one row down."]),
     explain: (s) => (s.id === "first" ? `The first ${s.inputs[0]} is on date ${s.value}.` : `Each week down the column adds 7: ${s.inputs[0]} + 7 × ${s.inputs[1]} = ${s.value}.`),
     domain: [[0, 1], [0, 11], [0, 6], [1, 5]],
     cap: 300,
@@ -749,6 +772,9 @@ export const B01: Def[] = [
     },
     distractors: () => [3, 4, 5, 6],
     variants: () => [],
+    stepWhy: (s) => (s.id === "first"
+        ? ["All the dates for one day of the week sit in the same column, so we start at the top of that column."]
+        : ["Every date in that column is the same day of the week, so counting them gives how many there are in the month."]),
     explain: (s) => (s.id === "first" ? `The first one is on the ${s.value}.` : `Going down the column there are ${s.value} dates.`),
     domain: [[0, 1], [0, 11], [0, 6]],
     difficulty: ([yr, m, w]) => (MLEN[m] === 28 ? 1 : w < firstDay(yr, m) ? 3 : 2),
@@ -792,6 +818,7 @@ export const B01: Def[] = [
       bug("count-between", "procedural", CAL, "Only the days in between were counted. The day itself must be reached too.", g - 1),
     ],
     variants: () => [],
+    stepWhy: () => ["The number of days from one date to a later date is how far apart the two numbers are, so we take the smaller from the bigger."],
     explain: (s) => `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} days.`,
     domain: [[0, 1], [0, 11], [1, 28], [2, 20]],
     cap: 300,
@@ -834,6 +861,9 @@ export const B01: Def[] = [
       bug("count-both", "procedural", CAL, "Today was counted as well as the birthday. Start counting with tomorrow.", o + d2 + 1),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "rest"
+        ? ["The two dates are in different months, so we first count the days left until this month ends."]
+        : ["After the month ends, the dates start again from 1, so we add the days into the next month."]),
     explain: (s) => (s.id === "rest" ? `From the ${s.inputs[1]} to the end of the month (${s.inputs[0]}) is ${nOf(Number(s.value), "days")}.` : `Then ${nOf(Number(s.inputs[1]), "more days")} into the next month: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}.`),
     domain: [[0, 1], [0, 11], [0, 9], [1, 10]],
     cap: 300,
@@ -879,6 +909,7 @@ export const B01: Def[] = [
     },
     distractors: ([k]) => [...Array(k)].map((_, i) => i + 1),
     variants: () => [],
+    stepWhy: () => ["When things start at the same line, the one whose other end reaches furthest is the longest."],
     explain: (s) => `They all start on the same line; compare the other ends: number ${s.value} is the one asked for.`,
     domain: [[4, 5], [0, 119], [0, 1], [0, 2]],
     cap: 300,
@@ -932,6 +963,7 @@ export const B01: Def[] = [
       return swaps([...Array(k)].map((_, i) => i + 1).sort((a, b) => (dir === 0 ? L[a - 1] - L[b - 1] : L[b - 1] - L[a - 1])));
     },
     variants: () => [],
+    stepWhy: () => ["Line the ends up at the same start. Then the one that stops first is shortest, and the one that goes furthest is longest."],
     explain: (s) => `From the picture, in order: ${s.value}.`,
     domain: [[3, 4], [0, 23], [0, 1], [0, 2]],
     difficulty: ([k, , dir]) => (k === 3 && dir === 0 ? 1 : k === 3 ? 2 : 3),
@@ -973,6 +1005,7 @@ export const B01: Def[] = [
     ],
     distractors: () => [1, 2, 3, 4],
     variants: () => [],
+    stepWhy: () => ["A heavier parcel needs more cubes on the other side to balance it. The biggest-looking parcel is not always the heaviest."],
     explain: (s) => `Compare the cubes: number ${s.value} is the one asked for.`,
     domain: [[0, 23], [1, 4], [0, 1], [0, 1]],
     difficulty: ([, , kind]) => (kind === 0 ? 2 : 3),
@@ -1020,6 +1053,7 @@ export const B01: Def[] = [
     },
     distractors: ([q]) => swaps(perm(3, q).map((x) => x + 1)),
     variants: () => [],
+    stepWhy: () => ["On a balance the heavier side goes down. Using what each balance showed, we can line the bags up from lightest to heaviest."],
     explain: (s) => `Lightest to heaviest: ${s.value}.`,
     domain: [[0, 5], [0, 3], [0, 1], [0, 2]],
     difficulty: ([, f, o]) => (f === 0 && o === 0 ? 2 : 3),
@@ -1094,6 +1128,9 @@ export const B01: Def[] = [
       return kind === 2 ? [c - 1, c + 1, c + 2, c + 3].filter((x) => x >= 1 && x <= it.length + 1) : [...new Set(it)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "read"
+        ? ["The number printed on a coin or note is its value, not its size. We read each value first."]
+        : ["Now we compare the values we read to pick or count the ones the question asks for."]),
     explain: (s) => (s.id === "read" ? `The money is ${s.value}.` : `So the answer is ${s.value}.`),
     domain: [[0, 2], [0, 59], [0, 1]],
     cap: 300,
@@ -1157,6 +1194,7 @@ export const B01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["To find the total, we add the value of each coin or note one at a time, keeping a running total."],
     explain: (s) => `₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}`,
     domain: [[0, 299], [0, 1]],
     cap: 300,
@@ -1220,6 +1258,9 @@ export const B01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rest"
+        ? ["Any note used pays part of the amount, so we take it away to see how much the coins must still pay."]
+        : ["Each coin pays the same amount, so we see how many of those coins fit into what is left."]),
     explain: (s) => (s.id === "rest" ? `₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value} still to pay.` : `₹${s.inputs[0]} in ₹${s.inputs[1]} coins is ${s.value} coins.`),
     domain: [[2, 100], [0, 3], [0, 3]],
     difficulty: ([N, bi, ci]) => (N <= 20 && COIN_C[ci] <= 2 ? 1 : N <= 50 || NOTE_B[bi] === 0 ? 2 : 3),
@@ -1264,6 +1305,7 @@ export const B01: Def[] = [
       bug("count-marks", "procedural", NSU, `The dots or marks were counted instead of the ${NSU_UNITS[u][1]} between them. There is one more mark than ${NSU_UNITS[u][1]}.`, L + 1),
     ],
     variants: () => [],
+    stepWhy: () => ["A length is how many units fit along it, end to end. Counting the jumps from start to end counts the units."],
     explain: (s) => `From ${s.inputs[0]} to ${s.inputs[1]} there are ${s.value} jumps, so ${s.value} units.`,
     domain: [[0, 6], [2, 12], [0, 2]],
     difficulty: ([a, L]) => (a === 0 && L <= 6 ? 1 : a === 0 || L <= 6 ? 2 : 3),
@@ -1302,6 +1344,7 @@ export const B01: Def[] = [
     ],
     distractors: () => [1, 2, 3, 4],
     variants: () => [],
+    stepWhy: () => ["Every bottle was filled with the same glass, so the bottle that needed the most glasses holds the most. Being tall does not decide it."],
     explain: (s) => `Number ${s.value} took the number of cups asked for.`,
     domain: [[0, 23], [1, 4], [0, 1], [0, 1]],
     difficulty: ([, , kind]) => (kind === 0 ? 2 : 3),
@@ -1356,6 +1399,7 @@ export const B01: Def[] = [
       return swaps([...Array(k)].map((_, t) => pi.indexOf(t) + 1));
     },
     variants: () => [],
+    stepWhy: () => ["Things in a day happen one after another. We think about what must come first, like waking before going to school."],
     explain: (s) => `First to last: ${s.value}.`,
     domain: [[3, 4], [0, 69], [0, 23]],
     cap: 300,
@@ -1394,6 +1438,7 @@ export const B01: Def[] = [
     ],
     distractors: () => [1, 2, 3, 4],
     variants: () => [],
+    stepWhy: () => ["Some things are over in moments and some take hours. We think about how long each one really takes."],
     explain: (s) => `Number ${s.value} is the one asked for.`,
     domain: [[0, 34], [0, 23], [0, 1]],
     cap: 300,
@@ -1437,6 +1482,9 @@ export const B01: Def[] = [
       bug("one-extra", "procedural", ADD, "One number too many was counted. Count exactly as many steps as the number you add.", a + b + 1),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "start"
+        ? ["Adding means putting more on, so we begin at the first number."]
+        : ["Each step forward on the number line is one more. Taking as many steps as the number we add gives the total."]),
     explain: (s) => (s.id === "start" ? `Start at ${s.value}.` : `Count on ${s.inputs[1]}: you land on ${s.value}.`),
     domain: [[1, 19], [1, 19]],
     difficulty: ([a, b]) => (a + b <= 9 ? 1 : a + b <= 10 || (a % 10) + (b % 10) < 10 ? 2 : 3),
@@ -1484,6 +1532,7 @@ export const B01: Def[] = [
       bug("count-start", "procedural", ADD, `${a} was counted as one of the steps. Start counting at the next number after ${a}.`, t - a + 1),
     ],
     variants: () => [],
+    stepWhy: () => ["The missing number is how many more we need. Counting up from what we have to what we want tells us that."],
     explain: (s) => `From ${s.inputs[0]}, count up to ${s.inputs[1]}: ${s.value} more.`,
     domain: [[1, 19], [5, 20]],
     difficulty: ([, t]) => (t === 10 ? 1 : t < 10 ? 2 : 3),
@@ -1533,6 +1582,9 @@ export const B01: Def[] = [
         : [bug("other-way", "conceptual", CMP, `The ${kind === 0 ? "smaller" : "bigger"} number was chosen. On the number line, the number further right is more.`, other)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["Tens are worth more than ones, so the number with more tens is the bigger number."]
+        : ["On a number line, numbers get bigger as you go right. The one further left is less, the one further right is more."]),
     explain: (s) => (s.id === "tens" ? `Compare the tens: ${s.inputs[0]} tens and ${s.inputs[1]} tens. So the answer is ${s.value}.` : `On the number line, ${s.value} is the one asked for.`),
     domain: [[1, 99], [1, 99], [0, 1]],
     cap: 300,
@@ -1585,6 +1637,9 @@ export const B01: Def[] = [
           ]
           : [bug("next-of-last", "procedural", CMP, `The number after ${n + 1} was given. The number between ${n - 1} and ${n + 1} is the one we say in the middle.`, n + 2)],
     variants: () => [],
+    stepWhy: (s) => (s.op === "count back"
+        ? ["The number just before is one less. Counting back one step finds it."]
+        : ["The number just after is one more. Counting on one step finds it."]),
     explain: (s) => `Count: the answer is ${s.value}.`,
     domain: [[1, 99], [0, 2]],
     difficulty: ([n, kind]) => (n <= 20 ? 1 : n % 10 === 9 || n % 10 === 0 || kind === 0 ? 3 : 2),
@@ -1637,6 +1692,7 @@ export const B01: Def[] = [
     },
     distractors: ([seed, k, dir]) => swaps([...ordNums(seed, k)].sort((a, b) => (dir === 0 ? a - b : b - a))),
     variants: () => [],
+    stepWhy: () => ["To put numbers in order, compare their tens first. If the tens are the same, the ones decide."],
     explain: (s) => `In order: ${s.value}.`,
     domain: [[0, 199], [3, 4], [0, 1]],
     cap: 300,
@@ -1683,6 +1739,11 @@ export const B01: Def[] = [
       bug("join-digits", "conceptual", PV, `${o} ones were written next to the tens. ${o} ones are 1 ten and ${o - 10} ${o - 10 === 1 ? "one" : "ones"}, so there are ${t + 1} tens.`, o >= 10 ? Number(`${t}${o}`) : null),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["Each long block is ten small cubes stuck together, so we count the long blocks in tens."]
+        : s.id === "ones"
+          ? ["The small cubes are single ones, so we count them one by one."]
+          : ["The number is the tens and the ones put together."]),
     explain: (s) => (s.id === "tens" ? `${s.inputs[0]} ${s.inputs[0] === 1 ? "ten is" : "tens are"} ${s.value}.` : s.id === "ones" ? `${s.value} ${s.value === 1 ? "one" : "ones"}.` : `${s.inputs[0]} and ${s.inputs[1]} make ${s.value}.`),
     domain: [[1, 9], [0, 14]],
     difficulty: ([, o]) => (o === 0 ? 1 : o <= 9 ? 2 : 3),
@@ -1743,6 +1804,9 @@ export const B01: Def[] = [
         ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "place"
+        ? ["A digit's value depends on its place. In a two-digit number the first digit counts tens and the last counts ones."]
+        : ["A digit in the tens place stands for that many tens, and a digit in the ones place stands for that many ones."]),
     explain: (s) => (s.id === "place" ? (s.value === "ones" ? `In ${s.inputs[0]}, the last digit is in the ones place.` : `In ${s.inputs[0]}, the first digit is in the tens place.`) : `So the answer is ${s.value}.`),
     domain: [[10, 99], [0, 2]],
     difficulty: ([n, kind]) => (kind === 1 && n < 50 ? 1 : kind !== 0 ? 2 : 3),
@@ -1802,6 +1866,9 @@ export const B01: Def[] = [
       return kind === 0 ? [10 * c + a, 10 * b + a] : [10 * c + (a || b), 10 * (a || b) + c];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["The tens place is worth more than the ones place, so the tens digit matters most. It decides how big the number is."]
+        : ["The tens digit is now fixed, so we use the best card left for the ones place."]),
     explain: (s) => (s.id === "tens" ? `Tens place: ${s.value}.` : `Ones place: ${s.value}.`),
     domain: [[0, 119], [0, 1]],
     difficulty: ([x, kind]) => (kind === 0 ? 2 : combo(10, 3, x)[0] === 0 ? 3 : 2),
@@ -1846,6 +1913,9 @@ export const B01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["A number name tells us how many tens there are. We write that as the tens digit."]
+        : ["Then the name tells us how many ones are left over. We write that as the ones digit."]),
     explain: (s) => (s.id === "tens" ? `${s.value} ${s.value === 1 ? "ten" : "tens"}` : `and ${s.value} ${s.value === 1 ? "one" : "ones"}.`),
     domain: [[11, 99]],
     difficulty: ([n]) => (n % 10 === 0 ? 1 : n < 20 ? 2 : 3),
@@ -1887,6 +1957,9 @@ export const B01: Def[] = [
       bug("one-extra", "procedural", SUB, "One too many was taken away. Take away exactly as many as the number says.", a - b - 1),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "start"
+        ? ["Taking away starts from everything we have, so we begin with the first number."]
+        : ["Each one taken away leaves one fewer. What is still there after taking them away is the answer."]),
     explain: (s) => (s.id === "start" ? `Start with ${s.value}.` : `Take away ${s.inputs[1]}: ${s.value} ${s.value === 1 ? "is" : "are"} left.`),
     domain: [[2, 20], [1, 19]],
     difficulty: ([a, b]) => (a <= 9 ? 1 : a - b >= 10 || a <= 10 ? 2 : 3),
@@ -1931,6 +2004,7 @@ export const B01: Def[] = [
       bug("gave-smaller", "conceptual", SUB, "The smaller group's number was given. Match the two rows one to one and count the extra ones.", y),
     ],
     variants: () => [],
+    stepWhy: () => ["Match the two groups one to one. The ones left without a partner are how many more, and subtracting counts them."],
     explain: (s) => `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} more.`,
     domain: [[2, 12], [1, 11], [0, 2], [0, 1]],
     cap: 300,
@@ -1980,6 +2054,7 @@ export const B01: Def[] = [
         ? [bug("zero-makes-zero", "conceptual", ZERO, `It was thought that anything with 0 gives 0. ${kind === 2 ? "Taking away" : "Adding"} nothing leaves the number the same: ${a}.`, 0)]
         : [bug("nothing-taken", "conceptual", ZERO, `Taking away all ${a} leaves nothing: an empty group is 0.`, a)],
     variants: () => [],
+    stepWhy: () => ["Zero means nothing. Adding nothing or taking away nothing keeps the number the same, and taking away all of something leaves zero."],
     explain: (s) => `${s.inputs[0]} = ${s.value}.`,
     domain: [[0, 3], [1, 20]],
     difficulty: ([kind]) => (kind <= 2 ? 1 : 2),
@@ -2510,6 +2585,9 @@ const GAP01: Def[] = [
       return [bug("front-behind", "conceptual", POS, `The child just ${ask ? "in front of" : "behind"} ${w.x} was chosen. In front of means nearer the counter; behind means further back in the queue.`, ix(cs, w.other))];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "pick"
+        ? ["We match what we saw in the picture to the choice that says it."]
+        : ["Words like inside, outside, near, far, in front and behind tell us where something is compared with something else. We check the picture for that."]),
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Look at the picture: the answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 1]],
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
@@ -2574,6 +2652,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["Pair each thing on one plate with one on the other. The plate with things left over has more; if nothing is left over, they are the same."],
     explain: (s) => `Match them one to one: ${s.value}.`,
     domain: [[1, 9], [1, 9], [0, 1], [0, 1]],
     difficulty: ([a, b, mode]) => (mode === 0 && Math.abs(a - b) >= 3 ? 1 : a === b || Math.abs(a - b) === 1 ? 3 : 2),
@@ -2620,6 +2699,7 @@ const GAP01: Def[] = [
     },
     bugs: (p) => [bug("opposite", "conceptual", CMP, `The ${p[2] ? "bigger" : "smaller"} one was chosen. ${p[2] ? "Smaller means it takes up less room." : "Bigger means it takes up more room."}`, bigPair(p).indexOf(BIGS[p[2] ? p[1] : p[0]][0]))],
     variants: () => [],
+    stepWhy: () => ["We picture the two real things side by side and think about which takes up more room."],
     explain: (s) => `${s.value} is the one asked for.`,
     domain: [[0, 10], [0, 10], [0, 1]],
     difficulty: ([i, j]) => (j - i >= 5 ? 1 : j - i >= 3 ? 2 : 3),
@@ -2684,6 +2764,9 @@ const GAP01: Def[] = [
     },
     distractors: (p) => swaps(ordxAnswer(p)),
     variants: () => [],
+    stepWhy: (s) => (s.id === "compare"
+        ? ["A number with more digits is bigger. When the digits are the same in count, the first different digit from the left decides."]
+        : ["Ascending means going up, so we write the smallest first and the greatest last."]),
     explain: (s) => (s.id === "compare" ? "Compare the numbers: first count the digits, then compare place by place from the left." : `In order: ${s.value}.`),
     domain: [[0, 6], [0, 29], [0, 1]],
     grade: ([lvl, seed]) => digitGrade(Math.max(...ordxNums(lvl, seed))),
@@ -2737,6 +2820,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["The open side of < or > faces the bigger number, and = means both are the same."],
     explain: (s) => `${indian(Number(s.inputs[0]))} ${s.value} ${indian(Number(s.inputs[1]))}`,
     domain: [[0, 4], [0, 39]],
     grade: ([lvl, seed]) => digitGrade(Math.max(...signPair(lvl, seed))),
@@ -2797,6 +2881,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "biggest digit first"
+        ? ["The first place is worth the most, so the biggest digit goes there. Then the next biggest, and so on."]
+        : ["The first place is worth the most, so the smallest digit goes there. A number cannot start with 0, so 0 never goes first."]),
     explain: (s) => `Arrange the digits: ${s.value}.`,
     domain: [[3, 7], [0, 19], [0, 1], [0, 1]],
     grade: ([n]) => digitGrade(10 ** (n - 1)),
@@ -2865,6 +2952,7 @@ const GAP01: Def[] = [
     },
     distractors: ([n, seed, P]) => swaps(bubble(passNums(n, seed), P)),
     variants: () => [],
+    stepWhy: () => ["In one pass we walk along the list and swap any two neighbours that are in the wrong order. Each pass pushes the biggest number still out of place to its end."],
     explain: (s) => `After pass ${s.inputs[0]}: ${s.value}.`,
     domain: [[4, 6], [0, 39], [1, 2]],
     difficulty: ([n, , P]) => (n === 4 && P === 1 ? 1 : P === 1 ? 2 : 3),
@@ -2913,6 +3001,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "sentence"
+        ? ["The two amounts are put together into one group, and putting together is adding."]
+        : ["Add the ones, then the tens, carrying a ten if the ones make ten or more."]),
     explain: (s) => (s.id === "sentence" ? `The story joins two groups: ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [0, 99]],
     grade: ([lvl, seed]) => {
@@ -2971,6 +3062,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "sentence"
+        ? ["Some are given away or taken, so the group gets smaller. That is subtracting."]
+        : ["Take away the ones, then the tens. If there are not enough ones, break one ten into ten ones first."]),
     explain: (s) => (s.id === "sentence" ? `Some are taken away: ${s.value}.` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [0, 99]],
     grade: ([lvl, seed]) => sizeGrade(...storyNums(1, lvl, seed)),
@@ -3025,6 +3119,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["When one group joins another, the number sentence is an addition: the first group plus the group that came."],
     explain: (s) => `The two groups are joined: ${s.value}.`,
     domain: [[2, 9], [2, 9], [0, 3]],
     cap: 300,
@@ -3072,6 +3167,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["When some go away, the number sentence is a subtraction: start with all of them and take away the part that went."],
     explain: (s) => `Start with all of them and take away the part that went: ${s.value}.`,
     domain: [[3, 12], [2, 11], [0, 3]],
     cap: 300,
@@ -3128,6 +3224,7 @@ const GAP01: Def[] = [
         ];
     },
     variants: () => [],
+    stepWhy: () => ["The days of the week always come in the same order and start again after Saturday. Saying them in order finds the answer."],
     explain: (s) => `Say them in order: the answer is ${s.value}.`,
     domain: [[0, 2], [0, 11], [0, 5]],
     difficulty: ([kind, , k]) => (kind === 0 && Math.abs(STEPK[k]) === 1 ? 1 : kind === 2 || Math.abs(STEPK[k]) === 1 ? 2 : 3),
@@ -3193,6 +3290,9 @@ const GAP01: Def[] = [
       return [bug("next-row", "procedural", CAL, "The row next to the right one was read. Find the month's name in the Months column first.", cs.indexOf(SEASONS[mod(right + 1, 4)][0]))];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "month"
+        ? ["We must know exactly which month or season we are looking for before we read the table."]
+        : ["The table lists which months belong to each season, so we read the row for our month or season."]),
     explain: (s) => (s.id === "month" ? `The month (or season) to look for is ${s.value}.` : `The table says: ${s.value}.`),
     domain: [[0, 2], [0, 11], [0, 6]],
     difficulty: ([kind, , k]) => (kind === 0 ? 1 : kind === 2 || k <= 2 ? 2 : 3),
@@ -3286,6 +3386,7 @@ const GAP01: Def[] = [
       return [bug("ten-per", "conceptual", CAL, kind === 3 ? "A year was taken as 10 months. A year has 12 months." : "A week was taken as 10 days. A week has 7 days.", 10 * a + b)];
     },
     variants: () => [],
+    stepWhy: () => ["Some calendar facts never change: a week has 7 days and a year has 12 months. A month has 28 to 31 days, and February has 29 in a leap year."],
     explain: (s) => `That is ${s.value}.`,
     domain: [[0, 5], [0, 11], [0, 8]],
     difficulty: ([kind, a]) => (kind === 0 && a !== 1 ? 1 : kind <= 1 || kind >= 3 ? 2 : 3),
@@ -3344,6 +3445,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["DD/MM/YYYY means two digits for the day, then two for the month, then four for the year. A single digit gets a 0 in front."],
     explain: (s) => `Day ${s.inputs[0]}, month ${s.inputs[1]}: ${s.value}.`,
     domain: [[0, 1], [0, 11], [1, 28]],
     cap: 300,
@@ -3403,6 +3505,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "years"
+        ? ["Age goes up by one each year, so the difference between the two years is a first guess."]
+        : ["Age only goes up on the birthday. If the birthday has not come yet this year, the person is still one year younger."]),
     explain: (s) => (s.id === "years" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}.` : `The birthday this year: ${s.inputs[0]}. Age: ${s.value}.`),
     domain: [[0, 9], [0, 11], [0, 11], [0, 1]],
     cap: 300,
@@ -3447,6 +3552,7 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["Each column of the calendar is one day of the week, so the column a date is in tells us its day."],
     explain: (s) => `${s.inputs[0]} is in the ${s.value} column.`,
     domain: [[0, 1], [0, 11], [1, 31]],
     cap: 300,
@@ -3512,6 +3618,9 @@ const GAP01: Def[] = [
       return [right + 1, right - 1, right + 7, right - 7, right + 2, right - 2].filter((x) => x >= 1 && x <= MLEN[m]);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rule"
+        ? ["On a calendar, one row down adds 7 and one column right adds 1. Putting the parts of a move together gives the change for one move."]
+        : ["Every move changes the date by the same amount, so we add that change once for each move."]),
     explain: (s) => (s.id === "rule" ? `One move changes the date by ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} moves: ${s.value}.`),
     domain: [[0, 1], [0, 11], [1, 31], [0, 3], [1, 3]],
     cap: 300,
@@ -3584,6 +3693,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["Different coins and notes can make the same amount. We add each choice to see what it makes."]
+        : ["The right choice is the one whose total is the same as Anu's amount."]),
     explain: (s) => (s.id === "total" ? `${s.inputs[0]} makes ₹${s.value}.` : `So ${s.value} is another way.`),
     domain: [[0, 1], [0, 99]],
     cap: 300,
@@ -3653,6 +3765,9 @@ const GAP01: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "group"
+        ? ["Ten ones make one ten. Putting things into tens makes a big number easy to count."]
+        : ["Now we read off the part the question asks for."]),
     explain: (s) => (s.id === "group" ? `Grouping gives ${s.value}.` : `So the answer is ${s.value}.`),
     domain: [[3, 9], [0, 19], [0, 2]],
     cap: 300,
@@ -3698,6 +3813,9 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["The tens digit gives the first part of a number's name, like twenty or forty."]
+        : ["After the tens we say the ones, so the whole name is the tens word followed by the ones word."]),
     explain: (s) => (s.id === "tens" ? `The tens digit is ${s.inputs[0]}.` : `${s.inputs[0]} is written ${s.value}.`),
     domain: [[10, 99]],
     difficulty: ([n]) => (n % 10 === 0 ? 1 : n < 20 ? 3 : 2),
@@ -3760,6 +3878,9 @@ const GAP01: Def[] = [
         : [bug("more-units-longer", "conceptual", NSU, "The unit used more times was taken as the longer unit. A longer unit fits fewer times into the same length.", cs.indexOf(a > b ? `a ${SPAN_UNIT[c][0]}` : `a ${SPAN_UNIT[c][1]}`))];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "compare the counts"
+        ? ["Both things were measured with the same unit, so the one that needed more units is longer."]
+        : ["The same thing was measured twice. A longer unit fits fewer times, so the unit needed fewer times is the longer one."]),
     explain: (s) => `Compare ${s.inputs[0]} and ${s.inputs[1]}: ${s.value}.`,
     domain: [[0, 1], [3, 15], [3, 15], [0, 2]],
     cap: 300,
@@ -3828,6 +3949,11 @@ const GAP01: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "repeat"
+        ? ["Over and under keep repeating, so one 'over' group and one 'under' group make a part that starts again and again."]
+        : s.id === "count"
+          ? ["Count the full repeats first, since each has the same number of overs. Then check the crossings left over."]
+          : ["Each repeating part holds the same number of unders. Counting whole parts first, then the place inside the next part, finds the crossing."]),
     explain: (s) => (s.id === "repeat" ? `The pattern repeats every ${s.value} crossings.` : `So the answer is ${s.value}.`),
     domain: [[1, 3], [1, 3], [10, 40], [0, 1]],
     cap: 300,
@@ -3892,6 +4018,9 @@ const GAP01: Def[] = [
               bug("number-in-box", "procedural", ZERO, "The number itself was put in the box. Check: the number times itself is much bigger.", n),
             ],
     variants: () => [],
+    stepWhy: (s) => (s.op === "multiplying by 0 gives 0"
+        ? ["Multiplying by 0 means taking no groups at all, or groups with nothing in them, so the answer is 0."]
+        : ["Multiplying by 1 means just one group of the number, so the number stays the same."]),
     explain: (s) => `So the answer is ${s.value}.`,
     domain: [[0, 5], [2, 999]],
     // level@1: multiplying by 1 and by 0 is Grade 3 work (multiplication), though the family sits under zero

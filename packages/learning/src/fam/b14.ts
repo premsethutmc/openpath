@@ -528,6 +528,10 @@ export const B14: Def[] = [
     },
     distractors: ([N, n]) => [((N % n) + n + 1) % n, ((N % n) + n + 2) % n],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "quotient": ["The remainder must be between 0 and one less than the modulus, so we use the largest multiple that is not bigger than the number, even for a negative number."], "residue": ["What is left above that multiple is the remainder."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "quotient" ? `The largest multiple of ${s.inputs[1]} not above ${n_(Number(s.inputs[0]))} is ${s.inputs[1]} × ${n_(Number(s.value))} = ${n_(Number(s.value) * Number(s.inputs[1]))}` : `${n_(Number(s.inputs[0]))} − (${n_(Number(s.inputs[1]))}) = ${s.value}, which is between 0 and the modulus`),
     domain: [[-80, 250], [3, 13]],
     keep: ([N, n]) => Math.abs(N) >= n && N % n !== 0,
@@ -582,6 +586,10 @@ export const B14: Def[] = [
     },
     distractors: ([a, b, n]) => [(b + 1) % n, (b + n - 1) % n],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "lift": ["Adding the modulus does not change a number's remainder, so we add it until the number can be divided exactly by the coefficient."], "divide": ["Now dividing gives a whole number that solves the congruence."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "lift" ? `Add ${s.inputs[2]} to ${s.inputs[0]} (${s.inputs[1]} times) until it divides by the coefficient: ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, so x ≡ ${s.value}`),
     domain: [[2, 12], [1, 12], [5, 13]],
     keep: ([a, b, n]) => a < n && b < n && gcd(a, n) === 1,
@@ -630,6 +638,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "residue": ["Days of the week repeat every 7 days, so whole weeks bring us back to the same day; only the remainder matters."], "count-on": ["Counting the leftover days on from the starting day gives the answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "residue" ? `${s.inputs[0]} = 7 × ${Math.floor(Number(s.inputs[0]) / 7)} + ${s.value}: the whole weeks change nothing` : `Count ${s.inputs[1]} days on from ${DAYS[Number(s.inputs[0])]}: ${DAYS[Number(s.value)]}`),
     domain: [[0, 6], [10, 400]],
     keep: ([, d]) => d % 7 !== 0,
@@ -686,6 +698,10 @@ export const B14: Def[] = [
       return [(k + 1) / (T + 1), 1 - k / T].filter((x) => !close(x, k / T));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["Probability compares the outcomes we want with all the equally likely outcomes, so we count all the balls."], "favourable": ["Then we count the balls that fit."], "probability": ["Probability is the number of fitting outcomes divided by the number of all equally likely outcomes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `All the balls: ${s.inputs.filter((x) => x !== 0).join(" + ")} = ${s.value}` : s.id === "favourable" ? `${s.value} of them are ${s.inputs[0]}` : `P = ${s.inputs[0]}/${s.inputs[1]}`),
     domain: [[1, 9], [1, 9], [0, 9], [0, 2]],
     keep: ([r, b, g, c]) => [r, b, g][c] > 0,
@@ -768,6 +784,10 @@ export const B14: Def[] = [
       return [c / (N - 1), (c + 1) / N].filter((x) => !close(x, c / N));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "favourable": ["We count the cards that have the property."], "probability": ["Probability is the number of fitting outcomes divided by the number of all equally likely outcomes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "favourable" ? `${s.value} of the cards 1 to ${s.inputs[0]} have that property` : `P = ${s.inputs[0]}/${s.inputs[1]}`),
     domain: [[10, 60], [0, 3], [0, 9]],
     keep: ([N, e, k]) => (e === 1 || e === 2 ? k === 0 : k >= 2 && 2 * k <= N),
@@ -822,6 +842,10 @@ export const B14: Def[] = [
       return [(c + 1) / 36, (c - 1) / 36, (36 - c) / 36].filter((x) => x > 0 && !close(x, c / 36));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "outcomes": ["Every number on one die can go with every number on the other, so the pairs are counted by multiplying."], "favourable": ["Then we count the pairs that fit."], "probability": ["Probability is the number of fitting outcomes divided by the number of all equally likely outcomes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "outcomes" ? "Each of the 6 numbers on the first die goes with each of the 6 on the second: 6 × 6 = 36 equally likely outcomes" : s.id === "favourable" ? `${s.value} of the 36 pairs fit` : `P = ${s.inputs[0]}/36`),
     domain: [[0, 8], [0, 36]],
     keep: ([k, s]) => DICE[k].ok(s) && diceCount(k, s) > 0 && diceCount(k, s) < 36,
@@ -887,6 +911,10 @@ export const B14: Def[] = [
       return [1 - p, treeP(r, b, w, (e + 1) % 4)].filter((x) => x > 0 && !close(x, p));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first": ["The first draw's chance is the fitting balls out of all the balls."], "second": ["Without replacement, the first ball is gone, so the second draw has fewer balls and the counts change."], "branches": ["Along a path both things must happen, so the chances multiply; different paths cannot both happen, so they add."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "first" ? `First draw: P(red) = ${s.inputs[0]}/${s.inputs[1]}` : s.id === "second" ? `Second draw, after a red: P(red) = ${s.inputs[0]}/${s.inputs[1]}` : "Multiply along each path of the tree and add the paths that give the event"),
     domain: [[1, 8], [1, 8], [0, 1], [0, 3]],
     keep: ([r, b, w, e]) => r + b >= 3 && !(w === 0 && e === 0 && r < 2),
@@ -948,6 +976,10 @@ export const B14: Def[] = [
     },
     distractors: ([, a, c, d]) => [(a + c) / d, (d - a - c + 1) / d].filter((x) => !close(x, (d - a - c) / d)),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "complement": ["Something either happens or it does not, so the two chances add up to 1."], "known": ["Outcomes that cannot happen together have chances that add."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "known" ? `${s.inputs[0]} + ${s.inputs[1]} = ${fmt(Number(s.value))}` : `P(the rest) = 1 − ${s.inputs[1]}: the probabilities of all the outcomes add up to 1`),
     domain: [[0, 1], [1, 19], [0, 19], [3, 20]],
     keep: ([m, a, c, d]) => (m === 0 ? c === 0 && a < d && gcd(a, d) === 1 : c >= 1 && a + c < d && gcd(gcd(a, c), d) === 1),
@@ -995,6 +1027,10 @@ export const B14: Def[] = [
     ],
     distractors: ([x, y, z, d]) => [(x + y + z) / d, 1 - (x + y - z) / d].filter((t) => t > 0 && t <= 1 && !close(t, (x + y - z) / d)),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "add": ["P(A or B) starts by adding the chances of A and of B."], "overlap": ["Outcomes in both A and B were counted twice, so we take them away once."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "add" ? `P(A) + P(B) = ${s.inputs[0]} + ${s.inputs[1]}` : `Take away P(A and B) once, because it was counted in both: ${s.inputs[1]}`),
     domain: [[1, 20], [1, 20], [1, 10], [6, 20]],
     keep: ([x, y, z, d]) => z < Math.min(x, y) && x + y - z <= d && !unionDup([x, y, z, d]),
@@ -1044,6 +1080,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "range": ["A probability can never be less than 0 (impossible) or more than 1 (certain)."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `A probability is between 0 and 1 (0 and 1 included): ${s.inputs[Number(s.value)]} is outside`,
     domain: [[1, 8], [2, 9], [1, 99], [0, 5]],
     keep: ([a, b, dd]) => a < b && dd % 10 !== 0 && Math.abs(dd / 100 - a / b) > 1e-9,
@@ -1089,6 +1129,10 @@ export const B14: Def[] = [
     ],
     distractors: ([p, q, r, s]) => [(10 * p + s) * (10 * q + r) + 100, (10 * p + s) * (10 * q + r) + 10],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "tens": ["The tens digits count ten times as much, so the largest digits go there."], "units": ["For the biggest product the two numbers should be as close as possible, so the larger units digit goes with the smaller tens digit."], "product": ["Multiplying gives the largest product."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "tens" ? `The two largest digits, ${s.inputs[0]} and ${s.inputs[1]}, go in the tens places (each counts ten times)` : s.id === "units" ? `The larger units digit goes with the smaller tens digit: ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 9], [1, 9], [1, 9], [1, 9]],
     keep: ([p, q, r, s]) => p > q && q > r && r > s,
@@ -1143,6 +1187,10 @@ export const B14: Def[] = [
             ? [{ id: "right-angle-only", kind: "procedural", competency: ARG, says: "Only a right angle was tested. Also compare the three lengths: two equal sides make the triangle isosceles.", predict: 3 }]
             : [],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "distances": ["Squared distances come from the distance rule and are enough to compare lengths."], "decide": ["If two distances add to the third, the points are on one line; if two squares add to the third square, there is a right angle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "distances" ? `${s.inputs.join(", ")}` : `So: ${PTS[Number(s.value)].toLowerCase()}`),
     domain: [[0, 3], [-4, 4], [-4, 4], [1, 4], [-3, 3]],
     keep: (p) => ptsByVectors(ptsOf(p)) === p[0],
@@ -1191,6 +1239,10 @@ export const B14: Def[] = [
       return [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factors": ["A number ends in 0 only if it is divisible by 10 = 2 × 5, so we check which of 2 and 5 divide the base."], "decide": ["Raising a number to a power does not bring in any new prime factors, so without a 5 in the base, the power never ends in 0."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factors" ? `${s.inputs[0]}: ${s.value}` : `Ending in 0 means divisible by 10 = 2 × 5, and the primes in ${"a"}ⁿ are exactly the primes in a: ${["yes", "no 5", "no 2", "neither"][Number(s.value)]}`),
     domain: [[2, 150]],
     difficulty: ([a]) => (a % 10 === 0 ? 1 : a % 5 === 0 ? 3 : 2),
@@ -1243,6 +1295,10 @@ export const B14: Def[] = [
       return [[x + b1, y - a1], [x - b2, y + a2], [x + 1, y + 1]].filter(([u, w]) => u > 0 && w > 0).map(([u, w]) => `(${u}, ${w})`);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["Each condition in the story becomes an equation in the two unknowns."], "eliminate": ["Making the x terms equal and subtracting removes x, leaving one equation in y."], "y": ["Dividing both sides by the number in front of y leaves y."], "x": ["Putting y back into an equation gives x."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "model" ? `The conditions: ${s.inputs.join(" and ")}` : s.id === "eliminate" ? `Make the x terms equal and subtract: ${s.value}` : s.id === "y" ? `y = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `Put y = ${s.inputs[2]} into the first equation: ${s.inputs[3]}x = ${s.inputs[0]} − ${s.inputs[1]} × ${s.inputs[2]}, so x = ${s.value}`),
     domain: [[5, 30], [10, 60], [0, 5]],
     keep: ([x, y]) => x !== y,
@@ -1286,6 +1342,10 @@ export const B14: Def[] = [
     ],
     distractors: ([w, d]) => [w + 1, w - 1, d].filter((x) => x > 0 && x !== w),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["Writing the sides with a letter turns the area fact into a quadratic equation."], "roots": ["Solving the quadratic gives the two numbers that make it true."], "reject": ["A length cannot be negative, so only the positive root fits the story."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "model" ? `Width x, length x + ${s.inputs[0].toString().match(/\+ (\d+)/)?.[1]}: ${s.inputs[0]}, so ${s.value}` : s.id === "roots" ? `The roots are ${s.value}` : `${s.inputs[0]} is not a possible width, so the width is ${s.value} m`),
     domain: [[2, 30], [1, 15]],
     cap: 300,
@@ -1346,6 +1406,10 @@ export const B14: Def[] = [
       return [c + 2, c - 1].filter((x) => x >= 0);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "tally": ["A group includes its lower end but not its upper end, so each value is counted in exactly one group."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Count the values from ${s.inputs[0]} up to (but not including) ${s.inputs[1]}: ${s.value}`,
     domain: [[0, 149], [0, 4], [0, 1]],
     cap: 300,
@@ -1421,6 +1485,10 @@ export const B14: Def[] = [
       return [dv((sfx + 1) / sf), dv(sf / 5)].filter((x) => !close(nv(x), sfx / sf) && typeof x === "string");
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fx": ["Each value appears as many times as its frequency, so value × frequency added gives the total of all the values."], "f": ["Adding the frequencies counts how many values there are."], "mean": ["The mean shares the total equally, so it is the total divided by the count."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "fx" ? `Multiply each value by its frequency and add: Σfx = ${s.value}` : s.id === "f" ? `Number of observations: Σf = ${s.value}` : `Mean = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 30], [1, 5], [0, 39]],
     keep: (p) => {
@@ -1472,6 +1540,10 @@ export const B14: Def[] = [
     },
     bugs: ([a1, , a2]) => [{ id: "counts-for-shares", kind: "conceptual", competency: STACK, says: "The class with more walkers was chosen. A 100% stacked bar shows each class as a whole (100%), so it compares the share of walkers, not the number.", predict: a1 > a2 ? 0 : 1 }],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "shares": ["Different groups have different sizes, so we compare the fraction in each, not the counts."], "compare": ["Cross-multiplying compares two fractions without finding a common denominator."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "shares" ? `The walking shares are ${s.value}` : `Compare by cross-multiplying: ${s.inputs[0]} and ${s.inputs[1]}`),
     domain: [[2, 40], [2, 40], [2, 40], [2, 40]],
     keep: (p) => {
@@ -1531,6 +1603,10 @@ export const B14: Def[] = [
       return [dv(100 - p), dv(p + 10)].filter((x) => !close(nv(x), p));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["A percentage is a part out of the whole, so we need the whole first."], "percent": ["Dividing the part by the whole and multiplying by 100 gives the percentage."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `Whole class: ${s.inputs.join(" + ")} = ${s.value}` : `${s.inputs[0]}/${s.inputs[1]} × 100 = ${s.value}%`),
     domain: [[1, 40], [1, 40], [1, 40], [0, 2]],
     keep: ([a, b, c, s]) => (1000 * [a, b, c][s]) % (a + b + c) === 0,
@@ -1580,6 +1656,10 @@ export const B14: Def[] = [
     },
     distractors: ([n1, m1, n2, m2]) => [dv(Math.max(m1, m2)), dv(Math.min(m1, m2))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total-a": ["A mean times the number of values gives their total."], "total-b": ["A mean times the number of values gives their total."], "total": ["The totals of the parts add to the total of everything."], "mean": ["The overall mean is the overall total divided by everyone counted."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total-a" || s.id === "total-b" ? `Total of the section: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "total" ? `Total of all marks: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `Mean = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[10, 45], [40, 90], [10, 45], [40, 90]],
     keep: ([n1, m1, n2, m2]) => n1 !== n2 && m1 !== m2 && ((n1 * m1 + n2 * m2) * 10) % (n1 + n2) === 0,
@@ -1639,6 +1719,10 @@ export const B14: Def[] = [
       return [m, op === 0 ? m + 1 : m - 1, op === 0 ? m - 1 : m + 1].filter((x) => !close(x, t / c)).map(dv);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["The mean times the number of values gives their total, which is easier to change."], "new-total|add": ["Adding a value adds it to the total."], "new-total|subtract": ["Removing a value takes it from the total."], "mean": ["The new mean is the new total divided by the new count."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `Old total = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "new-total" ? `New total = ${s.value}` : `New mean = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[4, 20], [10, 60], [5, 99], [0, 1]],
     keep: ([n, m, v, op]) => {
@@ -1696,6 +1780,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "marks": ["In grouped data we do not know each value, so we use the middle of each class to stand for it."], "fx": ["Each class mark counts as many times as its frequency."], "f": ["Adding the frequencies counts the values."], "mean": ["The mean is the total divided by the count."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "marks" ? `Class mark = (lower + upper) ÷ 2, e.g. (${s.inputs[0]} + ${s.inputs[1]}) ÷ 2 = ${s.value}` : s.id === "fx" ? `Σfx = ${s.value}` : s.id === "f" ? `Σf = ${s.value}` : `Mean = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 5], [0, 2], [0, 199]],
     keep: (p) => {
@@ -1769,6 +1857,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "half": ["The median is the middle value, so we find half the number of values."], "class": ["The class where the running total first reaches half holds the middle value."], "formula": ["The formula assumes values are spread evenly in the class and finds how far into it the middle value lies."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "half" ? `n = ${s.inputs[0]}, so n/2 = ${s.value}` : s.id === "class" ? `The cumulative frequency first reaches n/2 in the class ${s.value}` : `Median = l + ((n/2 − cf) ÷ f) × h = ${s.inputs[0]} + ((${s.inputs[1]} − ${s.inputs[2]}) ÷ ${s.inputs[3]}) × ${s.inputs[4]} = ${s.value}`),
     domain: [[0, 5], [0, 2], [0, 199]],
     keep: (p) => {
@@ -1836,6 +1928,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "modal-class": ["The mode is the most common value, so it lies in the class with the highest frequency."], "formula": ["The formula moves the mode towards whichever neighbouring class has more values."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "modal-class" ? `The highest frequency is ${s.inputs[0]}, so the modal class is ${s.value}` : `Mode = l + ((f₁ − f₀) ÷ (2f₁ − f₀ − f₂)) × h = ${s.inputs[0]} + ((${s.inputs[1]} − ${s.inputs[2]}) ÷ (2 × ${s.inputs[1]} − ${s.inputs[2]} − ${s.inputs[3]})) × ${s.inputs[4]} = ${s.value}`),
     domain: [[0, 5], [0, 2], [0, 199]],
     keep: (p) => {
@@ -1893,6 +1989,10 @@ export const B14: Def[] = [
       return [...out, String(2 * d), surdStr(d, 1, 3), surdStr(d, 2, 3)].filter((x) => !close(ev(x), right * d));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratio": ["We choose the trigonometric ratio that links the side we know with the side we want."], "solve": ["Rearranging that ratio gives the unknown length."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "ratio" ? `The sides involved need ${s.inputs[0]} ${s.inputs[1]}° = ${s.value}` : `So the answer is ${s.value} m`),
     domain: [[0, 2], [5, 100], [0, 2]],
     keep: ([, d]) => d % 5 === 0,
@@ -1973,6 +2073,10 @@ export const B14: Def[] = [
       return [qscale(right, 2), qscale(right, 1, 2), qadd(right, Qn(d))].filter((x) => !qeq(x, right)).map(qstr);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "near": ["From the near point, tan of the angle links the height with the distance."], "far": ["From the far point the same height gives a second equation."], "x": ["Both expressions are the same height, so setting them equal gives the distance."], "h": ["Putting the distance back gives the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "near" || s.id === "far" ? `${s.inputs[0]}, with tan = ${s.value}` : s.id === "x" ? `Equate the two expressions for h and solve: x = ${s.value}` : `h = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [4, 80], [0, 1]],
     keep: ([, d]) => d % 2 === 0,
@@ -2040,6 +2144,10 @@ export const B14: Def[] = [
       return [p / q, (p * p + q * q) / (p * p - q * q), q / (2 * p)].filter((x) => !close(x, ans));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "conjugate": ["Since sec²θ − tan²θ = 1, (sec θ + tan θ)(sec θ − tan θ) = 1, so knowing one bracket gives the other."], "add": ["Adding the two equations removes tan θ, leaving twice sec θ."], "subtract": ["Subtracting them removes sec θ, leaving twice tan θ."], "quotient": ["Dividing the two values gives the ratio asked for."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "conjugate" ? `(${SECPT[String(s.inputs[0]).startsWith("cosec") ? 1 : 0].given})(${s.inputs[0]}) = 1, so ${s.inputs[0]} = ${s.inputs[1]} = ${fmt(Number(s.value))}` : s.id === "quotient" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${fmt(Number(s.value))}` : `${s.id === "add" ? "Add" : "Subtract"} the two equations and halve: (${s.inputs[0]} ${s.id === "add" ? "+" : "−"} ${s.inputs[1]}) ÷ 2 = ${fmt(Number(s.value))}`),
     domain: [[2, 9], [1, 8], [0, 1], [0, 3]],
     keep: ([p, q]) => p > q && gcd(p, q) === 1,
@@ -2088,6 +2196,10 @@ export const B14: Def[] = [
       ].filter((b) => (b.predict as number) >= 0);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "identity": ["sin²θ + cos²θ = 1 and its relatives let us replace an expression with a simpler one."], "factor": ["The number in front is carried along."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "identity" ? `Using the identities, ${s.inputs[0]} = ${s.value}` : `Multiply by ${s.inputs[0]}: ${s.value}`),
     domain: [[0, IDS.length - 1], [1, 6]],
     difficulty: ([t]) => (t <= 3 || t === 11 ? 1 : t >= 13 ? 3 : 2),
@@ -2151,6 +2263,10 @@ export const B14: Def[] = [
       return [0, 1, 2, 3, 4].filter((o) => o !== op).map((o) => stdCombine(TRIG[f1][t1]!, TRIG[f2][t2]!, o)).filter((x) => !qeq(x, right)).map(qstr);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first": ["Values for standard angles like 30°, 45° and 60° come from half an equilateral triangle or half a square."], "second": ["Values for standard angles like 30°, 45° and 60° come from half an equilateral triangle or half a square."], "combine": ["Putting in the known values turns the expression into arithmetic."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "first" || s.id === "second" ? `${s.inputs[0]} ${s.inputs[1]}° = ${s.value}` : `Combine the values: ${s.value}`),
     domain: [[0, 2], [0, 4], [0, 2], [0, 4], [0, 4]],
     keep: (p) => {
@@ -2231,6 +2347,10 @@ export const B14: Def[] = [
       return [0, 1, 2, 3, 4, 5].filter((b) => b !== a).map((b) => ratioOf(b, s)).filter((x) => !close(ev(x), right));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sides": ["A trigonometric ratio compares two sides of a right triangle, so we draw one with those sides."], "third": ["Pythagoras gives the third side."], "ratio": ["With all three sides known, any ratio can be read off."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sides" ? `${s.inputs[0]} θ = ${s.inputs[1]}/${s.inputs[2]}: take those two sides of a right triangle` : s.id === "third" ? `By Pythagoras the third side is ${s.value}` : `${s.inputs[0]} θ = ${s.value}`),
     domain: [[0, 2], [1, 9], [1, 10], [0, 5]],
     keep: ([g, p, q, a]) => gcd(p, q) === 1 && (g === 2 ? p * p + q * q <= 100 : p < q) && a !== g && a !== g + 3,
@@ -2290,6 +2410,10 @@ export const B14: Def[] = [
       return [A + 2, A - 2, 90 - A].filter((x) => x > 0 && x !== A);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "complement": ["sin of an angle equals cos of its complement, so equal values mean the two angles add up to 90°."], "solve": ["Solving that equation gives A."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "complement" ? `cos y = sin(90° − y), so the angles are complementary: ${s.value}` : `${s.inputs[0]}A = ${s.inputs[1]}°, so A = ${s.value}°`),
     domain: [[1, 4], [-30, 30], [1, 3], [-30, 30]],
     keep: ([p, c1, q, c2]) => {
@@ -2354,6 +2478,10 @@ export const B14: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "true-mean": ["The true mean is the total of all the values divided by how many there are."], "compare": ["Averaging the two means treats the sections as equal in size, but the bigger section should count more."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "true-mean" ? `The true mean is ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `Compare it with ${s.inputs[0]}: ${["they are equal, because the sections are the same size", "the true mean is higher, pulled towards the larger section", "the true mean is lower, pulled towards the larger section"][Number(s.value)]}`),
     domain: [[10, 45], [0, 25], [-3, 3], [0, 25]],
     keep: (p) => {
@@ -2424,6 +2552,10 @@ export const B14: Def[] = [
       return [S + 1, S - 1, S + 2].filter((x) => x !== S);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "deviations": ["Measuring each class mark from a middle value makes the numbers small and easy to multiply."], "sum": ["Each deviation counts as many times as its class's frequency."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "deviations" ? `The values of ${s.inputs[0]} for the five classes are ${s.value}` : `Multiply each by its frequency and add: ${n_(Number(s.value))}`),
     domain: [[0, 1], [0, 5], [0, 2], [0, 199]],
     keep: (p) => stepSum(p) !== 0,
@@ -2486,6 +2618,10 @@ export const B14: Def[] = [
       return t.xs.filter((x) => !close(x, t.med)).map(dv);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "n": ["We need the number of values to find where the middle is."], "cf": ["Running totals show which value is in each position, so we can find the middle ones."], "median": ["The median is the value in the middle position."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "n" ? `N = Σf = ${s.value}` : s.id === "cf" ? `The cumulative frequencies are ${s.value}; the median is the ${s.inputs[0]} observation` : `So the median is ${s.value}`),
     domain: [[1, 30], [1, 5], [0, 39]],
     cap: 300,
@@ -2576,6 +2712,10 @@ export const B14: Def[] = [
       return [right + 1, right - 1, right + d].filter((x) => x !== right).map(dv);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "largest": ["The value with the largest frequency is the mode."], "relation": ["For moderately uneven data, mode ≈ 3 median − 2 mean links the three averages."], "evaluate": ["Putting in the known values gives the missing one."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "largest" ? `The largest frequency is ${s.inputs[0]}, for the value ${s.value}` : s.id === "relation" ? `Empirical relation: ${s.value}` : `So the answer is ${s.value}`),
     domain: [[0, 3], [20, 80], [-6, 6], [0, 69]],
     keep: (p) => (p[0] === 0 ? p[2] === 0 && p[1] % 5 === 0 && empTable(p).unique : p[2] !== 0 && p[3] === 0),
@@ -2623,6 +2763,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["We count the outcomes that make the event happen."], "classify": ["An event that never happens has probability 0; one that always happens has probability 1."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "count" ? `${s.value} of the ${s.inputs[0]} outcomes make the event happen` : ["None does: an impossible event, P = 0", "All do: a sure event, P = 1", "Some do and some do not: 0 < P < 1"][Number(s.value)]),
     domain: [[0, 6], [0, 13], [0, 6]],
     keep: ([e, k, j]) => SURE[e].ok(k, j),
@@ -2670,6 +2814,10 @@ export const B14: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "check": ["For a valid set of probabilities, each must be between 0 and 1 and together they must add up to 1."], "choose": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "check" ? `${s.inputs[0]}: ${s.value}` : `So the valid one is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 299]],
     // level@1: the axiomatic approach to probability is Grade 11 (NCERT Class 11, Ch. 14)
@@ -2739,6 +2887,10 @@ export const B14: Def[] = [
       return [right + 1, right - 1, 0, 2 * right].filter((x) => x !== right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "complement": ["The ratio of an angle equals the co-ratio of its complement, so the terms can be written with the same ratio."], "evaluate": ["Once the terms match, they cancel or combine to give a number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "complement" ? `Use ${s.value}` : `So the value is ${n_(Number(s.value))}`),
     domain: [[0, 4], [10, 80], [1, 6], [1, 6]],
     keep: ([f, t, a, b]) => t !== 45 && !((f === 2 || f === 3) && b !== 1) && !(f === 1 && a === b) && t % 2 === 0,
@@ -2794,6 +2946,10 @@ export const B14: Def[] = [
       return [t.base + (p[0] === 1 ? -1 : 1) * 0.001 * 3, t.next, t.base + 0.01].map((x) => dvAns(p[0], x * L)).filter((x) => x !== dvAns(p[0], t.answer));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "column": ["The table gives values for whole degrees and some minutes, so we read the nearest entry."], "mean-difference|add": ["The mean difference column adds the small change for the extra minutes; this ratio grows as the angle grows."], "mean-difference|subtract": ["This ratio gets smaller as the angle grows, so the change for the extra minutes is taken away."], "height": ["Multiplying the distance by the ratio from the table gives the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "column" ? `In the ${String(s.inputs[0]).split("°")[0]}° row, under ${String(s.inputs[0]).split("°")[1]}: ${s.value}` : s.id === "mean-difference" ? `${s.op === "subtract" ? "Subtract" : "Add"} the mean difference for ${s.inputs[0]}′ (${s.inputs[1]} in the last place): ${s.value}` : `Height = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} m`),
     domain: [[0, 3], [10, 80], [0, 9], [1, 5]],
     keep: (p) => tableOk(p),
@@ -2868,6 +3024,10 @@ export const B14: Def[] = [
       return [k / r, w / (m + w), 1 - right].filter((x) => x >= 0 && x <= 1 && !close(x, right));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["Any group of the right size is equally likely, so we count all groups with nCr."], "favourable": ["Choices from different groups are independent, so their counts multiply."], "probability": ["Probability is the number of fitting outcomes divided by the number of all equally likely outcomes."], "none": ["Counting the groups with none of them is easier than counting those with at least one."], "complement": ["'At least one' is everything except 'none', so we take that chance from 1."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `All selections: ${s.inputs[0]}C${s.inputs[1]} = ${s.value}` : s.id === "favourable" ? `Favourable: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "none" ? `Selections with no girl: ${s.inputs[0]}C${s.inputs[1]} = ${s.value}` : `P = ${fmt(Number(s.value))}`),
     domain: [[0, 2], [2, 8], [2, 8], [2, 4], [0, 4]],
     keep: (p) => ncrOk(p),

@@ -859,6 +859,12 @@ export const B16: Def[] = [
     },
     distractors: ([a, d, k]) => [tup(Array.from({ length: k }, (_, i) => rr(a + (k - i) * d))), tup(Array.from({ length: k }, (_, i) => rr(a + (i + 1) * (d + 1))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "terms": ["The two given numbers become the first and last terms, with the means in between. The number of equal gaps is one less than the number of terms."],
+        "difference": ["In an AP the whole distance from first to last is shared equally among the gaps, so divide it by the number of gaps to get the common difference."],
+        "means": ["Each term of an AP is the one before plus d, so keep adding d from the first number."],
+      }),
     explain: (s) => (s.id === "terms" ? `With ${s.inputs[0]} means there are ${s.value} terms in all, so ${Number(s.value) - 1} equal gaps` : s.id === "difference" ? `d = ${n_(Number(s.inputs[0]))} ÷ ${s.inputs[1]} = ${n_(Number(s.value))}` : `Add d again and again: ${s.value}`),
     domain: [[-10, 20], [-6, 9], [2, 5]],
     keep: ([, d]) => d !== 0,
@@ -929,6 +935,12 @@ export const B16: Def[] = [
     },
     distractors: (p) => [tup([...gmMeans(p)].reverse()), tup(gmMeans(p).map((x) => rmul(x, rr(2))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio-power": ["In a GP each step multiplies by r. Going from the first term to the last takes several steps, so last ÷ first is r multiplied by itself once per step."],
+        "ratio": ["Undo that repeated multiplication by taking the matching root. The means are to be positive, so take the positive root."],
+        "means": ["Each term of a GP is the one before times r, so keep multiplying by r from the first number."],
+      }),
     explain: (s) => (s.id === "ratio-power" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}: this is r multiplied by itself once for each step` : s.id === "ratio" ? `r = the ${s.inputs[1] === 3 ? "cube" : "fourth"} root of ${s.inputs[0]} = ${s.value}` : `Multiply by r again and again: ${s.value}`),
     domain: [[1, 9], [2, 5], [2, 3], [0, 1]],
     difficulty: ([, r, k, s]) => (k === 2 && r <= 3 && !s ? 1 : s ? 3 : 2),
@@ -999,6 +1011,12 @@ export const B16: Def[] = [
       return [surd(4 * k, m), String(2 * a * b), surd(3 * k, m), String(2 * (a + b)), String(a * b)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "product": ["AM ≥ GM gives a lower bound for a sum only when the product of the two terms is a fixed number. Multiplying the terms shows that the x cancels."],
+        "gm": ["The geometric mean of two positive numbers is the square root of their product. Here the product is fixed, so the GM is fixed too."],
+        "least": ["The arithmetic mean is at least the geometric mean, so the sum, which is twice the AM, is at least twice the GM. Equality is possible when the two terms are equal, so this bound is the least value."],
+      }),
     explain: (s) => (s.id === "product" ? `${s.inputs[0] === "x" ? "x" : `(${s.inputs[0]})`}(${s.inputs[1]}) = ${s.value}: x cancels, so the product is fixed` : s.id === "gm" ? `GM = √${s.inputs[0]} = ${s.value}` : `AM ≥ GM: the sum ≥ 2 × ${s.inputs[1]} = ${s.value}, with equality when the two terms are equal`),
     domain: [[1, 12], [1, 30]],
     cap: 360,
@@ -1070,6 +1088,12 @@ export const B16: Def[] = [
       return [rs(rmul(c, rr(-1))), rs(rmul(c, rr(2)))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "falling": ["For any power n, even negative or a fraction, the binomial series has coefficients n(n − 1)(n − 2)…/r!. Start with the top: r factors, each one less than the last."],
+        "choose": ["Divide by r! to finish the binomial coefficient, just as in ⁿCᵣ."],
+        "power": ["The term also carries the number in front of x raised to the same power r, so multiply by that too."],
+      }),
     explain: (s) => (s.id === "falling" ? `n(n − 1)… with ${s.inputs[1]} factors, n = ${s.inputs[0]}: ${s.value}` : s.id === "choose" ? `Divide by ${s.inputs[1]}: ${s.value}` : `Multiply by ${s.inputs[1]}: ${s.value}`),
     domain: [[-3, 3], [1, 3], [-3, 3], [2, 3]],
     keep: ([p, q, k]) => p !== 0 && k !== 0 && gcd(Math.abs(p), q) === 1 && (q > 1 || p < 0),
@@ -1136,6 +1160,14 @@ export const B16: Def[] = [
     },
     distractors: ([f, a, b, r]) => [rs(rmul(rr(-1), f ? rmul(rpow(rr(a, b), r), rr(r % 2 ? 1 : -1, r)) : rdiv(rpow(rr(a, b), r), rr(fact(r))))), rs(rpow(rr(a, b), r - 1))],
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "general"
+        ? s.inputs[0] === "log"
+          ? ["The series for log(1 + y) is y − y²/2 + y³/3 − …, with signs taking turns. Knowing its general term picks out the power we need."]
+          : ["The series for e^y is 1 + y + y²/2! + y³/3! + …. Knowing its general term picks out the power we need."]
+        : s.id === "power"
+          ? ["Here y is a number times x, so raising y to the power also raises that number to the same power."]
+          : ["Finish the term by dividing as the general term says, keeping its sign."],
     explain: (s) => (s.id === "general" ? (s.inputs[0] === "log" ? `log(1 + y): the term in y^${s.inputs[1]} is ${s.value}` : `e^y: the term in y^${s.inputs[1]} is ${s.value}`) : s.id === "power" ? `(${s.inputs[0]})^${s.inputs[1]} = ${s.value}` : `Divide by ${s.inputs[1]} (with the sign): ${s.value}`),
     domain: [[0, 1], [-4, 4], [1, 3], [2, 5]],
     keep: ([f, a, b]) => a !== 0 && gcd(Math.abs(a), b) === 1 && (f === 0 || Math.abs(a) < b * 2),
@@ -1202,6 +1234,12 @@ export const B16: Def[] = [
     },
     distractors: ([t, d, e]) => (t ? [polyS([1, d, e + 1], "n"), polyS([1, -d, e], "n")] : [polyS([d, e + 1], "n"), polyS([d, -e], "n"), polyS([-d, e], "n")]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "first-diff": ["Differences between neighbouring terms show the rule. If they are all the same, the sequence is an AP and its general term is linear in n."],
+        "second-diff": ["When the differences themselves go up by a constant amount, the general term is a quadratic in n."],
+        "fit": ["The form of the general term is known, so the first terms fix its unknown numbers. Check the rule against a later term."],
+      }),
     explain: (s) => (s.id === "first-diff" ? `a₂ − a₁ = ${n_(Number(s.value))}` : s.id === "second-diff" ? "The differences go up by 2 each time, so aₙ = n² + bn + c" : `Match a₁ and a₂: aₙ = ${s.value}`),
     domain: [[0, 1], [-6, 9], [-9, 9]],
     keep: ([t, d, e]) => (t === 0 ? d !== 0 : Math.abs(d) <= 4 && Math.abs(e) <= 5),
@@ -1260,6 +1298,12 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "kth": ["Sigma notation needs one formula that gives every term from its position k. Find how each term depends on its position."],
+        "limits": ["k must take one value for each term, starting at 1, so it ends at the number of terms."],
+        "choose": ["Pick the sigma form whose formula and limits give exactly these terms."],
+      }),
     explain: (s) => (s.id === "kth" ? `The k-th term is ${s.value}` : s.id === "limits" ? `k runs from 1 to ${s.value}, one value for each term` : `So the series is ${s.inputs[0]}`),
     domain: [[-5, 9], [-4, 6], [4, 12]],
     keep: ([, d]) => d !== 0,
@@ -1319,6 +1363,12 @@ export const B16: Def[] = [
     },
     distractors: ([d, e, n]) => [rs(rr(n, (d + e) * (d * n + e))), rs(rr(n + 1, (d + e) * (d * n + d + e)))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "split": ["Splitting each term into a difference of two simple fractions makes neighbouring terms share pieces that cancel."],
+        "cancel": ["Written out, the second part of each term cancels the first part of the next. Only the very first and very last pieces survive."],
+        "scale": ["The partial fractions had a number in front, so multiply the result by it."],
+      }),
     explain: (s) => (s.id === "split" ? `Partial fractions: each term is ${s.value}` : s.id === "cancel" ? `Writing out the terms, everything cancels except ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Multiply by ${s.inputs[0]}: ${s.value}`),
     domain: [[1, 4], [-3, 6], [4, 30]],
     keep: ([d, e]) => d + e >= 1,
@@ -1381,6 +1431,14 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "s3": ["The sum of a sum is the sum of each part, so we need Σk³ on its own. Its standard formula is the square of Σk."],
+        "s2": ["Each power of k is summed separately, and Σk² has a standard formula."],
+        "s1": ["Σk is the sum of the first n whole numbers, which has the formula n(n + 1)/2."],
+        "s0": ["A constant term is added once for every term, so it contributes the constant times the number of terms."],
+        "combine": ["A number in front can be taken outside a sigma, so multiply each standard sum by its coefficient and add."],
+      }),
     explain: (s) => (s.id === "s3" ? `Σk³ = [n(n + 1)/2]² = ${s.value}` : s.id === "s2" ? `Σk² = n(n + 1)(2n + 1)/6 = ${s.value}` : s.id === "s1" ? `Σk = n(n + 1)/2 = ${s.value}` : s.id === "s0" ? `Σ ${n_(Number(s.inputs[0]))} over ${s.inputs[1]} terms = ${n_(Number(s.value))}` : `Combine with the coefficients: ${n_(Number(s.value))}`),
     domain: [[0, 2], [-3, 3], [-5, 5], [-6, 6], [5, 20]],
     keep: ([c3, c2, c1, c0]) => (c3 !== 0 || c2 !== 0) && [c3, c2, c1, c0].filter((x) => x !== 0).length >= 2,
@@ -1469,6 +1527,14 @@ export const B16: Def[] = [
                 B("forgot-a", "procedural", CART, `Only B ∩ C was counted; each of its ${o} elements pairs with each of the ${m} elements of A.`, o),
               ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "count-a": ["We need the number of elements, so list the set from its rule first."],
+        "product": ["Every element of the first set pairs with every element of the second, so the number of ordered pairs is the product of the sizes."],
+        "pairs": ["Every element of the first set pairs with every element of the second, so the counts multiply."],
+        "union": ["The two products share no pair, because their first entries come from sets with nothing in common. So the size of the union is the sum."],
+        "common": ["A pair is in both products only if its second entry is in both B and C. So the intersection is A × (B ∩ C)."],
+      }),
     explain: (s) => (s.id === "count-a" ? `List A: it has ${s.value} elements` : s.id === "pairs" ? `n(A × B) = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "union" ? `B × A has ${s.inputs[1]} pairs too, none of them in A × B (A and B have no common element): ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "common" ? `B ∩ C has ${s.value} elements, and (A × B) ∩ (A × C) = A × (B ∩ C)` : `Multiply: ${s.inputs.join(" × ")} = ${s.value}`),
     domain: [[0, 3], [2, 6], [2, 5], [0, 4]],
     keep: ([v, , n, o]) => (v === 2 ? o === 0 : v === 3 ? o >= 1 && o <= n - 1 : true),
@@ -1522,6 +1588,10 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "entries": ["Every pair in A × B has its first entry from A and its second from B. So the set wanted is made of those entries, each written once."],
+      }),
     explain: (s) => `Read the ${s.inputs[0]} of the pairs, each value once: ${(s.value as number[]).map(n_).join(", ")}`,
     domain: [[2, 3], [2, 3], [-3, 5], [-3, 5], [0, 1]],
     cap: 300,
@@ -1593,6 +1663,11 @@ export const B16: Def[] = [
       return [ivsS(r.map((iv) => ({ ...iv, lc: !iv.lc, hc: !iv.hc }))), ivsS(r.map((iv) => ({ ...iv, lc: false, hc: false }))), ivsS(r.map((iv, i) => (i === r.length - 1 ? { ...iv, hi: radd(iv.hi, rr(1)) } : iv))), ivsS(r.map((iv, i) => (i === 0 ? { ...iv, lo: rsub(iv.lo, rr(1)) } : iv)))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "line": ["Drawing both intervals on one number line shows at once which numbers are in one set, the other, or both."],
+        "ends": ["An end is included only if the operation keeps that exact number. Check each end against both sets."],
+      }),
     explain: (s) => (s.id === "line" ? `Draw ${s.inputs[0]} and ${s.inputs[1]} on one number line and shade ${s.value}` : `Read off the ends, deciding for each whether it is included: ${s.value}`),
     domain: [[-5, 3], [2, 6], [-3, 5], [2, 6], [0, 3], [0, 3], [0, 2]],
     cap: 400,
@@ -1662,6 +1737,12 @@ export const B16: Def[] = [
       return [ivS({ ...r, lc: false, hc: false }), ivS({ ...r, lc: !r.lc, hc: !r.hc })];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "subtract": ["Doing the same thing to all three parts keeps a double inequality true. Subtracting the constant leaves only the x term in the middle."],
+        "divide": ["Divide all three parts to get x alone. Dividing by a negative number reverses the inequality signs."],
+        "write": ["Interval notation uses a square bracket for an end that is included and a round bracket for one that is not."],
+      }),
     explain: (s) => (s.id === "subtract" ? `Subtract ${n_(Number(s.inputs[1]))} from all three parts: the ends become ${s.value}` : s.id === "divide" ? `Divide all three parts by ${n_(Number(s.inputs[0]))}: ${s.value}` : `In interval notation: ${s.value}`),
     domain: [[-5, 5], [-9, 9], [-15, 10], [2, 12], [0, 1]],
     keep: ([a]) => Math.abs(a) >= 2,
@@ -1716,6 +1797,11 @@ export const B16: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ends": ["Read where the set starts and ends and whether each end is included. A square bracket includes the end, a round one does not."],
+        "choose": ["Choose the interval that has the same ends and the same brackets."],
+      }),
     explain: (s) => (s.id === "ends" ? `${s.inputs[0]} in interval notation is ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: [[-6, 6], [1, 8], [0, 3], [0, 1], [0, 1]],
     keep: ([, w, , k]) => k === 0 || w === 1,
@@ -1785,6 +1871,12 @@ export const B16: Def[] = [
           ],
     distractors: ([a, b, c, d]) => (c === 0 ? [polyS([a, -b])] : [fracS(a, b, c, d), `${wrapTop(polyS([d, b]))}/${wrapBot(polyS([c, a]))}`]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "swap": ["The inverse undoes f, taking each output back to its input. Writing y = f(x) lets us work backwards from y to x."],
+        "collect": ["Make x the subject. That shows which input gives a chosen output y."],
+        "rename": ["The inverse is a function in its own right, so it is written with x as its input."],
+      }),
     explain: (s) => (s.id === "swap" ? `Write ${s.value}` : s.id === "collect" ? `Collect the x terms: ${s.value}` : `Solve and rename y as x: f⁻¹(x) = ${s.value}`),
     domain: [[-5, 5], [-6, 6], [0, 3], [-6, 6]],
     keep: ([a, b, c, d]) => (c === 0 ? d === 1 && a !== 0 : a * d - b * c !== 0),
@@ -1838,6 +1930,12 @@ export const B16: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "set": ["f⁻¹(k) is the x that f sends to k. So solve f(x) = k instead of finding the whole inverse."],
+        "multiply": ["Multiplying both sides by the bottom clears the fraction."],
+        "solve": ["Now it is a linear equation: collect the x terms on one side and divide."],
+      }),
     explain: (s) => (s.id === "set" ? `Solve ${s.value}` : s.id === "multiply" ? `Multiply up: ${s.value}` : `Collect x: x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${s.value}`),
     domain: [[-5, 5], [-6, 6], [1, 3], [-6, 6], [-6, 6]],
     keep: ([a, b, c, d, t]) => a * d - b * c !== 0 && c * t - a !== 0,
@@ -1882,6 +1980,11 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "corners": ["A linear objective over a bounded feasible region takes its greatest and least values at corner points. So find the corners first."],
+        "evaluate": ["Work out Z at every corner and compare. The largest value is the maximum."],
+      }),
     explain: (s) => (s.id === "corners" ? `The corner points of the feasible region are ${s.value}` : `Z at the corners: ${s.inputs.join(", ")}; the greatest is ${s.value}`),
     domain: [[1, 6], [1, 6], [1, 5], [1, 5], [1, 5], [1, 5], [1, 9], [1, 9]],
     keep: lpKeep,
@@ -1930,6 +2033,11 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "corners": ["The optimum of a linear objective, when it exists, is at a corner of the feasible region. So find the corners first."],
+        "evaluate": ["Work out Z at every corner and compare. The smallest value is the minimum."],
+      }),
     explain: (s) => (s.id === "corners" ? `The corner points of the feasible region are ${s.value}` : `Z at the corners: ${s.inputs.join(", ")}; the least is ${s.value}`),
     domain: [[1, 6], [1, 6], [1, 5], [1, 5], [1, 5], [1, 5], [1, 9], [1, 9]],
     keep: lpKeep,
@@ -1990,6 +2098,11 @@ export const B16: Def[] = [
     },
     distractors: (p) => lpCorners(p, false).filter((c) => c[0] || c[1]).map((c) => `(${c.join(", ")})`),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "corners": ["The optimum of a linear objective over the feasible region is at a corner point, so list the corners first."],
+        "evaluate": ["Work out Z at each corner. The corner with the largest value is where the maximum is."],
+      }),
     explain: (s) => (s.id === "corners" ? `The corner points are ${s.value}` : `Z at the corners: ${s.inputs.join(", ")}; the maximum is at ${s.value}`),
     domain: [[1, 6], [1, 6], [1, 5], [1, 5], [1, 5], [1, 5], [1, 9], [1, 9]],
     keep: lpKeep,
@@ -2050,6 +2163,11 @@ export const B16: Def[] = [
     },
     distractors: (p) => [matS(mmul(toM(m2(p)), toM(m2(p, 4))).map((r) => r.map((x) => rmul(x, rr(-1)))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "row1": ["Each entry of AB is a row of A times a column of B: multiply matching entries and add. Row 1 of A gives row 1 of AB."],
+        "row2": ["In the same way, row 2 of A with each column of B gives row 2 of AB."],
+      }),
     explain: (s) => `${s.inputs[0]} with each of the ${s.inputs[1]}: ${s.value}`,
     domain: [[-3, 5], [-3, 5], [-3, 5], [-3, 5], [-3, 5], [-3, 5], [-3, 5], [-3, 5]],
     keep: (p) => {
@@ -2105,6 +2223,11 @@ export const B16: Def[] = [
     },
     distractors: (p) => [matN(m2(p, 2).map((r) => r.map((x) => -x))), matN(mT(m2(p, 2)))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "move": ["Matrix equations are solved like ordinary ones. Moving A to the other side leaves only the X term."],
+        "divide": ["Dividing a matrix by a number divides every entry, which leaves X."],
+      }),
     explain: (s) => (s.id === "move" ? `${s.op === "add" ? "Add" : "Subtract"} A on both sides: ${s.inputs[0] === "A" ? "" : ""}the right side is ${s.value}` : `Divide every entry by ${s.inputs[0]}: X = ${s.value}`),
     domain: [[2, 4], [0, 1], [-4, 5], [-4, 5], [-4, 5], [-4, 5], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
     keep: (p) => p.slice(2, 6).filter((x) => x === 0).length <= 1 && !mT(m2(p, 2)).every((r, i) => r.every((x, j) => x === m2(p, 2)[i][j])),
@@ -2161,6 +2284,11 @@ export const B16: Def[] = [
       return [matN([[T[0] + 10], [T[1]]]), matN([[T[0]], [T[1] - 10]])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "row1": ["An entry of a product is a row times a column: multiply matching entries and add. Here that adds up quantity times price."],
+        "row2": ["The second row works the same way, giving the second entry of the product."],
+      }),
     explain: (s) => `Row (${s.inputs[0]}) times column (${s.inputs[1]}): ${s.value}`,
     domain: [[1, 9], [1, 9], [1, 9], [1, 9], [1, 9], [1, 9], [0, 7], [0, 7], [0, 7]],
     keep: (p) => new Set(p.slice(6)).size === 3,
@@ -2223,6 +2351,12 @@ export const B16: Def[] = [
     },
     distractors: (p) => [tup([p[10], p[9], p[11]].map((x) => rr(x))), tup([p[9], p[11], p[10]].map((x) => rr(x))), tup([p[9] + 1, p[10], p[11]].map((x) => rr(x))), tup([p[9], p[10] - 1, p[11]].map((x) => rr(x)))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "det": ["A system AX = B has exactly one solution when A has an inverse, and A has an inverse only when |A| ≠ 0. So check the determinant first."],
+        "adj": ["A⁻¹ is the adjoint divided by |A|. The adjoint is the transpose of the matrix of cofactors."],
+        "solve": ["Multiplying AX = B on the left by A⁻¹ leaves X = A⁻¹B. So multiply the adjoint by B and divide by |A|."],
+      }),
     explain: (s) => (s.id === "det" ? `|A| = ${n_(Number(s.value))} (not 0, so A⁻¹ exists)` : s.id === "adj" ? `adj A = (matrix of cofactors)ᵀ = ${s.value}` : `X = (1/|A|) adj A · B: ${s.inputs[0]}, divided by ${n_(Number(s.inputs[1]))}, gives ${s.value}`),
     domain: [[-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-3, 4], [-3, 4], [-3, 4]],
     keep: (p) => {
@@ -2277,6 +2411,12 @@ export const B16: Def[] = [
     },
     distractors: ([, , , , x, y]) => [`(${x + 1}, ${y})`, `(${x}, ${y + 1})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "det": ["A 2 × 2 matrix has an inverse only if its determinant ad − bc is not 0. The inverse also uses it."],
+        "inverse": ["For a 2 × 2 matrix, swap the diagonal entries, change the signs of the other two and divide by the determinant."],
+        "solve": ["Multiplying AX = B on the left by A⁻¹ leaves X alone, so X = A⁻¹B."],
+      }),
     explain: (s) => (s.id === "det" ? `|A| = ${n_(Number(s.value))}` : s.id === "inverse" ? `A⁻¹ = ${s.value}` : `X = A⁻¹B = ${s.value}`),
     domain: [[1, 6], [1, 6], [1, 6], [1, 6], [1, 12], [1, 12]],
     keep: ([a, b, c, d]) => a * d - b * c !== 0,
@@ -2332,6 +2472,14 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "middle"
+        ? s.inputs[2] === "product"
+          ? ["Write the roots in GP as a/r, a and ar. Their product is a³, and the product of the roots comes from the coefficients, so a is a cube root."]
+          : ["Write the roots in AP as a − d, a and a + d. Their sum is 3a, and the sum of the roots comes from the coefficients, so a is found at once."]
+        : s.id === "factor"
+          ? ["A known root r means (x − r) is a factor. Dividing it out leaves a quadratic, which is easier to solve."]
+          : ["Solve the quadratic to get the other two roots, then list all three."],
     explain: (s) => (s.id === "middle" ? (s.inputs[2] === "product" ? `The product of the roots is ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${n_(Number(s.inputs[0]) / Number(s.inputs[1]))}, the cube of the middle root, so the middle root is ∛(${n_(Number(s.inputs[0]) / Number(s.inputs[1]))}) = ${n_(Number(s.value))}` : `The sum of the roots is three times the middle root, so the middle root is ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}`) : s.id === "factor" ? `Dividing by (x ${Number(s.inputs[0]) < 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[0]))}) leaves ${s.value}` : `The roots are ${(s.value as number[]).map(n_).join(", ")}`),
     domain: [[0, 1], [-5, 6], [-3, 6], [1, 2]],
     keep: ([g, u, v]) => (g === 0 ? v >= 1 : u !== 0 && Math.abs(u) <= 3 && [-3, -2, 2, 3].includes(v)),
@@ -2378,6 +2526,13 @@ export const B16: Def[] = [
       B("signs-reversed", "recall", FACT, "All the signs were reversed; if x − s is a factor then x = s (not −s) is a root.", [-p / q, -s, -t]),
     ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "candidates": ["A rational root p/q in lowest terms must have p dividing the constant term and q dividing the leading coefficient. That gives a short list to try."],
+        "test": ["If p(a) = 0 then (x − a) is a factor, by the factor theorem."],
+        "divide": ["Dividing by the known factor lowers the degree, leaving a quadratic."],
+        "roots": ["Solve the quadratic and list all the roots."],
+      }),
     explain: (s) => (s.id === "candidates" ? `Possible rational roots: ${s.value}` : s.id === "test" ? `p(${n_(Number(s.inputs[0]))}) = 0, so x − (${n_(Number(s.inputs[0]))}) is a factor` : s.id === "divide" ? `Dividing leaves ${s.value}` : `The roots are ${(s.value as number[]).map((x) => (Number.isInteger(x) ? n_(x) : rs(rr(Math.round(x * 6), 6)))).join(", ")}`),
     domain: [[-5, 5], [2, 3], [-4, 4], [-4, 4]],
     keep: ([p, q, s, t]) => p !== 0 && gcd(Math.abs(p), q) === 1 && s < t && s * t !== 0,
@@ -2419,6 +2574,12 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "signs": ["Descartes' rule says the number of positive roots is at most the number of sign changes. One change means exactly one positive root."],
+        "divisors": ["If a whole number is a root, it must divide the constant term, because every other term has a factor of x."],
+        "test": ["Try the divisors until one makes the polynomial 0. That one is the root."],
+      }),
     explain: (s) => (s.id === "signs" ? "The signs + + + − change once, so there is exactly one positive root (Descartes)" : s.id === "divisors" ? `A whole-number root divides ${s.inputs[0]}` : `x = ${s.inputs[0]} makes the polynomial 0`),
     distractors: ([x]) => [x - 1, x + 1, x - 2, x + 2],
     // a positive root: 0 and negative numbers are not offered
@@ -2486,6 +2647,12 @@ export const B16: Def[] = [
     },
     distractors: ([u, wi, r]) => [`${surdPlus(u, -1, SURDS[wi])}, ${n_(r + 1)}`, `${surdPlus(u, -1, SURDS[wi])}, ${n_(r - 1)}`, `${surdPlus(u, 1, SURDS[wi])}, ${n_(r)}`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "conjugate": ["When a polynomial has rational coefficients, roots of the form a + √b come in pairs with a − √b."],
+        "quadratic": ["The two conjugate roots give two factors. Multiplying them makes the surds cancel, leaving a quadratic with rational coefficients."],
+        "third": ["The cubic is the quadratic times one more linear factor, so dividing leaves that factor and the third root."],
+      }),
     explain: (s) => (s.id === "conjugate" ? `The coefficients are rational, so the conjugate ${s.value} is also a root` : s.id === "quadratic" ? `(x − (${s.inputs[0]}))(x − (${s.inputs[1]})) = ${s.value}` : `Dividing the cubic by ${s.inputs[0]} leaves x − (${s.value}), so the third root is ${s.value}`),
     domain: [[-4, 4], [0, 4], [-5, 5]],
     cap: 300,
@@ -2557,6 +2724,13 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "signs": ["Descartes' rule says the number of positive real roots is at most the number of sign changes in the coefficients, taken in order."],
+        "substitute": ["Negative roots of p(x) are positive roots of p(−x). Putting −x changes the sign of every odd power."],
+        "signs-neg": ["Counting sign changes in p(−x) gives the most negative roots p(x) can have."],
+        "nonreal": ["The degree says how many roots there are in all. Whatever cannot be positive, negative or 0 must be non-real."],
+      }),
     explain: (s) => (s.id === "substitute" ? `p(−x) = ${s.value}` : s.id === "nonreal" ? `At most ${s.inputs[1]} positive and ${s.inputs[2]} negative roots, and 0 is not a root, so at least 5 − ${s.inputs[1]} − ${s.inputs[2]} = ${s.value} roots are not real` : `Signs: ${s.inputs[0]}, so ${s.value} change${s.value === 1 ? "" : "s"}`),
     // a quintic has at most 5 sign changes
     range: [0, 5],
@@ -2620,6 +2794,12 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vieta": ["The sums and products of the roots can be read from the coefficients, without solving the equation."],
+        "rewrite": ["Expanding the expression writes it using only those symmetric sums, whose values we know."],
+        "value": ["Put in the values from the coefficients."],
+      }),
     explain: (s) => (s.id === "vieta" ? s.value as string : s.id === "rewrite" ? `Write it with these sums: ${s.value}` : `Substitute: ${s.value}`),
     domain: [[1, 3], [-6, 6], [-6, 6], [-6, 6], [0, 2]],
     keep: ([a, b, c, d]) => d !== 0 && cubicDisc(a, b, c, d) !== 0,
@@ -2688,6 +2868,13 @@ export const B16: Def[] = [
       return [polyS([1, -b, c]), polyS([1, b, -c]), polyS([1, b, c + 1]), polyS([1, b + 1, c])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vieta": ["The sum and product of the roots come straight from the coefficients, so the roots themselves are not needed."],
+        "sum": ["Write the new sum of zeros using the old sum and product."],
+        "product": ["Write the new product of zeros using the old sum and product."],
+        "form": ["A quadratic with leading coefficient 1 is x² − (sum of zeros)x + (product of zeros)."],
+      }),
     explain: (s) => (s.id === "vieta" ? s.value as string : s.id === "sum" ? `New sum of zeros: ${n_(Number(s.value))}` : s.id === "product" ? `New product of zeros: ${n_(Number(s.value))}` : `x² − (sum)x + (product) = ${s.value}`),
     domain: [[-6, 6], [-6, 6], [0, 2], [-3, 3]],
     keep: ([, q, t, k]) => q !== 0 && (t === 0 ? k !== 0 : t === 1 ? Math.abs(k) >= 2 : k === 1),
@@ -2738,6 +2925,12 @@ export const B16: Def[] = [
     },
     distractors: ([a, b, c, d]) => [matS(mscale(toM([[d, -b], [-c, a]]), rr(-1, a * d - b * c))), matN([[a, b], [c, d]]), matS(mscale(toM([[a, c], [b, d]]), rr(1, a * d - b * c)))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "det": ["A matrix has an inverse only when its determinant is not 0, and the inverse is divided by it."],
+        "adj": ["For a 2 × 2 matrix the adjoint is made by swapping the diagonal entries and changing the signs of the other two."],
+        "divide": ["A⁻¹ is the adjoint divided by the determinant, so divide every entry."],
+      }),
     explain: (s) => (s.id === "det" ? `|A| = ad − bc = ${n_(Number(s.value))} (not 0, so A⁻¹ exists)` : s.id === "adj" ? `adj A = ${s.value}` : `Divide every entry by ${n_(Number(s.inputs[0]))}: ${s.value}`),
     domain: [[-4, 6], [-4, 6], [-4, 6], [-4, 6]],
     keep: ([a, b, c, d]) => a * d - b * c !== 0 && [a, b, c, d].filter((x) => x === 0).length <= 1,
@@ -2782,6 +2975,12 @@ export const B16: Def[] = [
     ],
     distractors: (p) => [matN(mT(cofactors(m3(p))).map((r) => r.map((x) => -x)))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "minors": ["Each cofactor starts from a minor: the determinant left when that entry's row and column are removed."],
+        "cofactors": ["A cofactor is the minor with a sign from the chessboard pattern, + where the row and column numbers add to an even number."],
+        "transpose": ["The adjoint is the transpose of the matrix of cofactors, so rows become columns."],
+      }),
     explain: (s) => (s.id === "minors" ? `Minors (delete the row and column of each entry): ${s.value}` : s.id === "cofactors" ? `Attach the signs + − + / − + − / + − +: ${s.value}` : `Transpose: adj A = ${s.value}`),
     domain: [[-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3]],
     keep: (p) => {
@@ -2832,6 +3031,11 @@ export const B16: Def[] = [
     distractors: () => [1, 2, 3],
     range: ([r]) => (r === 3 ? [1, 4] : [1, 3]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reduce": ["Row operations do not change the rank, and in echelon form the rank is easy to see."],
+        "count": ["In echelon form each non-zero row is independent of the others, so the rank is the number of non-zero rows."],
+      }),
     explain: (s) => (s.id === "reduce" ? `Use row operations Rᵢ → Rᵢ − kRⱼ to reach echelon form` : `Count the non-zero rows: rank = ${s.value}`),
     domain: [[1, 3], [0, 119]],
     cap: 300,
@@ -3084,6 +3288,11 @@ const NEW16: Def[] = [
       return out.filter((b) => b.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pairs": ["A × B is every ordered pair with its first entry from A and its second from B. Going through A in order makes sure none is missed."],
+        "pick": ["Choose the set with exactly these pairs, in this order inside each pair."],
+      }),
     explain: (s) => (s.id === "pairs" ? `Go through the first set and pair each element with every element of the next: ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: D_CL16,
     keep: cl16Ok,
@@ -3150,6 +3359,11 @@ const NEW16: Def[] = [
     },
     distractors: ([, x, y]) => [`(${n_(x + 1)}, ${n_(y)})`, `(${n_(x)}, ${n_(y - 1)})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "equate": ["Two ordered pairs are equal only when their first entries are equal and their second entries are equal."],
+        "solve": ["Each equation has one unknown, so solve each on its own."],
+      }),
     explain: (s) => (s.id === "equate" ? `Equal ordered pairs: equate the ${s.inputs[0]} and the ${s.inputs[1]}: ${s.value}` : `Solving gives (x, y) = ${s.value}`),
     domain: D_CEQ,
     keep: ceqOk,
@@ -3205,6 +3419,11 @@ const NEW16: Def[] = [
       return [matS(X.map((r) => r.map((x) => radd(x, rr(1))))), matS(X.map((r) => r.map((x) => rmul(x, rr(-1)))))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "entries": ["aᵢⱼ is the entry in row i and column j. Putting each position into the rule gives every entry."],
+        "transpose": ["The transpose swaps rows and columns, so row i becomes column i."],
+      }),
     explain: (s) => (s.id === "entries" ? `Put i = row number and j = column number into aᵢⱼ = ${s.inputs[0]}: A = ${s.value}` : `Rows become columns: Aᵀ = ${s.value}`),
     domain: D_MCON,
     keep: mconOk,
@@ -3265,6 +3484,11 @@ const NEW16: Def[] = [
       return out.filter((b) => b.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "look": ["The order of a matrix is its number of rows by its number of columns, rows first."],
+        "pick": ["Choose the statement that matches the rows and columns counted."],
+      }),
     explain: (s) => (s.id === "look" ? `A has ${s.inputs[0]} row${Number(s.inputs[0]) === 1 ? "" : "s"} and ${s.inputs[1]} column${Number(s.inputs[1]) === 1 ? "" : "s"}: ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: D_MTY,
     keep: mtyOk,
@@ -3314,6 +3538,11 @@ const NEW16: Def[] = [
     },
     distractors: ([f, x, y, z]) => (f === 2 ? [`(${n_(x + 1)}, ${n_(y)}, ${n_(z)})`, `(${n_(x)}, ${n_(y)}, ${n_(z + 1)})`] : [`(${n_(x + 1)}, ${n_(y)})`, `(${n_(x)}, ${n_(y + 1)})`]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "equate": ["Two matrices are equal only when every pair of matching entries is equal. That turns one matrix equation into ordinary equations."],
+        "solve": ["Solve the equations together."],
+      }),
     explain: (s) => (s.id === "equate" ? `Equal matrices have equal ${s.inputs[0]}: ${s.value}` : `Solving: ${s.value}`),
     domain: D_MEQ,
     keep: meqOk,
@@ -3366,6 +3595,11 @@ const NEW16: Def[] = [
     },
     distractors: (p) => [matS(mmodP(p).map((r) => r.map((x) => radd(x, rr(2)))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "model": ["Each workshop's daily output times each item's needs, added up, gives that workshop's total need. That is exactly a row-times-column product, so the orders must match."],
+        "product": ["Each entry is a row of the first matrix times a column of the second: multiply matching entries and add."],
+      }),
     explain: (s) => (s.id === "model" ? `Production ${s.inputs[0]} times needs ${s.inputs[1]}: ${s.value}` : `Multiply ${s.inputs[0]}: ${s.value}`),
     domain: D_MMOD,
     keep: mmodOk,
@@ -3431,6 +3665,17 @@ const NEW16: Def[] = [
     },
     distractors: ([x, y, z]) => [`(${y}, ${x}, ${z})`, `(${x}, ${z}, ${y})`, `(${x + 1}, ${y}, ${z})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "model": ["Writing the equations as AX = B puts the coefficients in A, the unknowns in X and the totals in B, so matrix methods can be used."],
+        "det": ["The system has exactly one solution when |A| ≠ 0, because then A has an inverse."],
+        "inverse": ["A⁻¹ is the adjoint divided by |A|, so find the adjoint first."],
+        "solve|multiply": ["Multiplying AX = B by A⁻¹ on the left leaves X = A⁻¹B."],
+        "cramer": ["Cramer's rule replaces one column of A at a time with B. Each such determinant over |A| gives one unknown."],
+        "solve|divide": ["Divide each of those determinants by |A| to get the unknowns."],
+        "echelon": ["Row operations do not change the solutions. In triangular form the last equation has one unknown."],
+        "solve|back-substitute": ["Solve the last equation, then put that value into the one above, and so on up."],
+      }),
     explain: (s) => (s.id === "model" ? `Write the equations as ${s.value}` : s.id === "det" ? `|A| = ${n_(Number(s.value))} ≠ 0, so there is exactly one solution` : s.id === "inverse" ? `adj A = ${s.value}` : s.id === "cramer" ? `Δ₁, Δ₂, Δ₃ = ${s.value}` : s.id === "echelon" ? `Row-reduce ${s.inputs[0]} to ${s.value}` : `So (x, y, z) = ${s.value}`),
     domain: D_SYSW,
     keep: syswOk,
@@ -3499,6 +3744,11 @@ const NEW16: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "region": ["The feasible region is where every constraint holds at once. Drawing them shows whether such points exist and whether the region is bounded."],
+        "decide": ["If no point satisfies every constraint, or Z can grow without limit, there is no optimal value. Otherwise the optimum is at a corner."],
+      }),
     explain: (s) => (s.id === "region" ? `Draw ${s.inputs[0]}: the feasible region is ${s.value}` : `So: ${s.inputs[0]}`),
     domain: D_LPF,
     keep: lpfOk,
@@ -3565,6 +3815,11 @@ const NEW16: Def[] = [
     },
     distractors: (p) => [Math.round((sappAns(p) + 0.001) * 1e6) / 1e6],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "terms": ["Writing the number as a nice number times (1 + x) with x small lets the binomial series be used. The first few terms already give a close value, as the later ones are tiny."],
+        "add": ["Adding the first three terms gives the approximation."],
+      }),
     explain: (s) => (s.id === "terms" ? `The first three terms are ${s.inputs.join(", ")}` : `Adding them: ${s.value}`),
     domain: D_SAPP,
     keep: sappOk,
@@ -3616,6 +3871,10 @@ const NEW16: Def[] = [
       return [`(${n_(-X)}, ${n_(Y)})`, `(${n_(X)}, ${n_(-Y)})`, `(${n_(-X)}, ${n_(-Y)})`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "multiply": ["A matrix acts on a point by multiplying its column of coordinates. Each new coordinate is a row of the matrix times that column."],
+      }),
     explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`,
     domain: D_ROT,
     keep: rotOk,
@@ -3657,6 +3916,11 @@ const NEW16: Def[] = [
     },
     distractors: (p) => [matS(orthM(p).map((r) => r.map((x) => rmul(x, rr(2)))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rule": ["The inverse is the matrix that multiplies A to give I. For an orthogonal matrix AAᵀ = I, so the transpose does that job."],
+        "transpose": ["Swap rows and columns of A to get Aᵀ, which is A⁻¹."],
+      }),
     explain: (s) => (s.id === "rule" ? `For an orthogonal matrix AAᵀ = I, so ${s.value}` : `Transpose A: ${s.value}`),
     domain: D_ORTH,
     keep: orthOk,
@@ -3723,6 +3987,13 @@ const NEW16: Def[] = [
       return p[0] === 0 ? [`(${p[2] + 1}, ${p[3]})`, `(${p[3]}, ${p[2]})`] : [`(${C[0] + 1}, ${C[1]})`, `(${C[1]}, ${C[0]})`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "inverse": ["Coding multiplied by A, so decoding must undo that by multiplying by A⁻¹."],
+        "decode": ["Multiplying the coded column by A⁻¹ gives back the original numbers, which are letter positions."],
+        "letters": ["Each number is a position in the alphabet, so turn it back into its letter."],
+        "encode": ["Coding means multiplying the message column by A."],
+      }),
     explain: (s) => (s.id === "inverse" ? `A⁻¹ = ${s.value}` : s.id === "decode" ? `${s.inputs[0]} = ${s.value}, the letters ${(() => { const m = String(s.value).match(/\d+/g)!; return m.map((x) => ABC[Number(x) - 1]).join(""); })()}` : s.id === "letters" ? `${s.inputs[0]} is ${s.value}` : `C = ${s.inputs[0]}M = ${s.value}`),
     domain: D_CODE,
     cap: 300,
@@ -3767,6 +4038,12 @@ const NEW16: Def[] = [
     },
     distractors: ([s]) => [matN(gjA(s))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "augment": ["Whatever row operations turn A into I, the same ones turn I into A⁻¹. Writing A and I side by side lets us do both at once."],
+        "reduce": ["Row operations do not change what the system means. Keep going until the left half is the identity."],
+        "read": ["When the left half is I, the right half has received the same operations, so it is A⁻¹."],
+      }),
     explain: (s) => (s.id === "augment" ? `Write ${s.value} with A = ${s.inputs[0]}` : s.id === "reduce" ? `Use ${s.inputs[0]} until the left half is I: ${s.value}` : `The ${s.inputs[0]} is A⁻¹ = ${s.value}`),
     domain: D_GJ,
     keep: gjOk,
@@ -3810,6 +4087,12 @@ const NEW16: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "factor": ["In an odd-degree reciprocal equation of this kind, x = −1 is always a root. Dividing out (x + 1) leaves an even-degree reciprocal equation."],
+        "substitute": ["In a reciprocal equation the coefficients read the same from both ends. Dividing by x² pairs x² with 1/x² and x with 1/x, and y = x + 1/x turns these pairs into a quadratic in y."],
+        "roots": ["Each y gives x + 1/x = y, which is a quadratic in x. Solve each one."],
+      }),
     explain: (s) => (s.id === "factor" ? `x = −1 is a root, so ${s.value}` : s.id === "substitute" ? `Dividing by x² and putting ${s.inputs[0]} gives a quadratic in y: ${s.value}` : `Solving x + 1/x = y for each y: x = ${(s.value as number[]).map((x) => rs(rr(Math.round(x * 6), 6))).join(", ")}`),
     domain: D_REC,
     keep: recOk,
@@ -3852,6 +4135,12 @@ const NEW16: Def[] = [
       return [B("y-given", "procedural", PES, `The values of y = ${base}^x were given; x is the power: ${base}^x = y.`, [base ** a, base ** b])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "quadratic": ["The equation uses a quantity and its square. Calling that quantity y turns it into a quadratic, which we can solve."],
+        "reject": ["Here y stands for √x, and a square root is never negative. So a negative value of y gives no x and must be thrown away."],
+        "back": ["Each allowed y gives x by undoing the substitution."],
+      }),
     explain: (s) => (s.id === "quadratic" ? `With ${s.inputs[0]} the equation becomes a quadratic: ${s.value}` : s.id === "reject" ? `y = ${n_(Number(s.inputs[0]))} is rejected: ${s.value}` : `Back to x: ${(s.value as number[]).join(", ")}`),
     domain: D_RED,
     keep: redOk,
@@ -3899,6 +4188,12 @@ const NEW16: Def[] = [
     distractors: ([, x]) => [x + 1, x - 1, x + 2].filter((t) => t > 0),
     range: [1, Infinity],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cubic": ["Volume is base area times height. Setting that equal to the given volume gives a cubic in x."],
+        "signs": ["Descartes' rule: the number of positive roots is at most the number of sign changes. One change means exactly one positive root, and a length must be positive."],
+        "root": ["A whole-number root must divide the constant term, so try those divisors."],
+      }),
     explain: (s) => (s.id === "cubic" ? `Volume = ${s.inputs[0]} gives ${s.value}` : s.id === "signs" ? "The coefficients change sign once, so there is exactly one positive root (Descartes' rule)" : `x = ${s.inputs[0]} makes the cubic 0 (it divides the constant term)`),
     domain: D_VOLG,
     keep: volgOk,
@@ -3961,6 +4256,11 @@ const NEW16: Def[] = [
     distractors: (p) => [vboxAns(p) + 2, vboxAns(p) * 2],
     range: [1, Infinity],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vieta": ["The sum of the roots, the sum of products in pairs and the product can be read from the coefficients, without solving."],
+        "value": ["The quantity asked for is built from those sums, like surface area 2(lb + bh + hl) or volume lbh, so put in the values."],
+      }),
     explain: (s) => (s.id === "vieta" ? `For x³ − px² + qx − r = 0: ${s.value}` : `So the value asked for is ${s.value}`),
     domain: D_VBOX,
     keep: vboxOk,

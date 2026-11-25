@@ -602,6 +602,10 @@ export const B13: Def[] = [
       return a === 0 ? [String(l + 1), String(l - 1), String(2 * l)] : [dec(qm(pi, Q(r * r))), dec(qm(pi, Q(2 * r * (l + r)))), dec(qm(pi, Q(r * l * 2 + r * r)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "squares": ["The radius, the height and the slant height make a right triangle, so Pythagoras links them."], "slant": ["The square root of that sum is the slant height."], "csa": ["The curved surface of a cone opens out into a sector, whose area is π × radius × slant height."], "base": ["A closed cone also has a circle at the bottom."], "tsa": ["The total surface is the curved part plus the base."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ squares: "r² + h²", slant: "Slant height l", csa: "Curved surface πrl", base: "Base πr²", tsa: "Total surface area" }),
     domain: CONE_DOM,
     cap: 300,
@@ -675,6 +679,10 @@ export const B13: Def[] = [
       return [dec(qm(qm(pi, Q(r * r * h)), q(2, 3))), dec(qm(qm(pi, Q(4 * r * r * h)), q(1, 3)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "volume": ["A cone holds exactly one third of the cylinder with the same base and height."], "height": ["The radius, height and slant height make a right triangle, so Pythagoras gives the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ height: "Height h", volume: "Volume ⅓πr²h" }),
     domain: CONEV_DOM,
     cap: 300,
@@ -756,6 +764,10 @@ export const B13: Def[] = [
       return a === 0 ? [dec(qm(qm(PI7, Q(s ? 4 : 2)), r2)), dec(qm(qm(PI7, Q(6)), r2))] : [dec(qm(qm(PI7, Q(2)), qm(r2, r))), dec(qm(qm(PI7, q(1, 3)), qm(r2, r)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "surface": ["A sphere's surface is exactly four times the area of its biggest circle: 4πr²."], "radius": ["The rules use the radius, which is half the diameter."], "volume": ["A sphere's volume is 4/3 π r³."], "curved": ["A hemisphere's curved surface is half the sphere's surface, 2πr²."], "flat": ["A solid hemisphere also has a flat circle on top."], "total": ["The total surface is the curved part plus the flat circle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ radius: "Radius", surface: "Surface area 4πr²", curved: "Curved surface 2πr²", flat: "Flat face πr²", total: "Total surface area", volume: "Volume" }),
     domain: SPH_DOM,
     difficulty: ([, s, , g]) => (!s && !g ? 1 : s && g ? 3 : 2),
@@ -825,6 +837,10 @@ export const B13: Def[] = [
       return s < 2 ? [dec(q((s ? 2 : 4) * (R ** 3 + r ** 3), 3)), dec(q((s ? 2 : 4) * (R * R - r * r), 1))] : [String(4 * R * R), String(2 * (R * R + r * r) + 2 * (R * R - r * r))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cubes": ["The metal is the outer ball with the hollow inside taken away; both volumes have 4/3 π, so we take away the cubes first."], "volume": ["Multiplying the difference of the cubes by 4/3 gives the metal's volume as a multiple of π."], "outer": ["A hemisphere's curved surface is 2πr², so the outside uses the outer radius."], "inner": ["The inside of a hollow bowl has its own curved surface, using the inner radius."], "rim": ["The flat rim is a ring: the big circle with the small circle taken away."], "total": ["All the surfaces are added together."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ cubes: "R³ − r³", volume: "Metal, as a multiple of π", outer: "Outside 2πR²", inner: "Inside 2πr²", rim: "Rim ring π(R² − r²)", total: "Total, as a multiple of π" }),
     domain: SHELL_DOM,
     cap: 300,
@@ -881,6 +897,10 @@ export const B13: Def[] = [
       return [surd(4 * P), surd(P * 2)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "s": ["Heron's formula finds a triangle's area from its three sides, starting with half the perimeter."], "differences": ["The formula uses how much the semi-perimeter is more than each side."], "product": ["Heron's formula multiplies s by the three differences."], "root": ["The area is the square root of that product."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ s: "Semi-perimeter s", differences: "Differences", product: "s(s − a)(s − b)(s − c)", root: "Area" }),
     domain: HER_DOM,
     cap: 400,
@@ -945,6 +965,10 @@ export const B13: Def[] = [
       return [2 * (A1 + A2), Math.abs(A1 - A2) || A1 + A2 + 6];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "abc": ["A diagonal splits the field into two triangles; Heron's formula gives each one's area from its sides."], "acd": ["The second triangle's area also comes from Heron's formula."], "total": ["The two triangles cover the field with no overlap, so their areas add."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ abc: "Area of ΔABC", acd: "Area of ΔACD", total: "Area of the field" }),
     domain: [[0, QUADS.length - 1]],
     cap: 300,
@@ -999,6 +1023,10 @@ export const B13: Def[] = [
       return [surd(4 * P), surd(P + s)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "s": ["Brahmagupta's formula for a four-sided shape with its corners on a circle starts with half the perimeter."], "product": ["The formula multiplies how much the semi-perimeter is more than each side."], "root": ["The area is the square root of that product."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ s: "Semi-perimeter s", product: "(s − a)(s − b)(s − c)(s − d)", root: "Area" }),
     domain: BRA_DOM,
     cap: 300,
@@ -1060,6 +1088,10 @@ export const B13: Def[] = [
       return [String(2 * m * l + (a ? 4 * m * m : 0)), String(4 * m * l + (a ? 8 * m * m : 2 * m * m))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "face": ["Each sloping face of a pyramid is a triangle: half of base × slant height."], "lateral": ["A square pyramid has four equal sloping faces."], "slant": ["The height, half the base and the slant height make a right triangle, so Pythagoras gives the slant height."], "base": ["The square base is also part of the surface."], "total": ["The total surface is the sloping faces plus the base."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ slant: "Slant height", face: "One face", lateral: "Four faces", base: "Base", total: "Total surface area" }),
     domain: PYRS_DOM,
     difficulty: ([, , , a, g]) => (a + g === 0 ? 1 : a + g === 1 ? 2 : 3),
@@ -1113,6 +1145,10 @@ export const B13: Def[] = [
       return [dec(qm(base, q(2 * h, 3))), dec(qm(base, q(h, 6)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "base": ["The volume of a pyramid starts with the area of its base."], "volume": ["A pyramid holds one third of the prism with the same base and height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ base: "Base area", volume: "Volume" }),
     domain: PYRV_DOM,
     cap: 300,
@@ -1182,6 +1218,10 @@ export const B13: Def[] = [
       return [dec(qm(r2, Q(H + h))), dec(qm(r2, qa(Q(s === 0 ? h : H), r)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "hem": ["A combined solid is worked out part by part, using the rule for each simple shape."], "cone": ["A combined solid is worked out part by part, using the rule for each simple shape."], "cyl": ["A combined solid is worked out part by part, using the rule for each simple shape."], "total": ["The parts fill the solid with no overlap, so their volumes add."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ total: "Total volume" }),
     domain: CV_DOM,
     cap: 300,
@@ -1263,6 +1303,10 @@ export const B13: Def[] = [
       return [dec(qm(pi, qm(total, Q(2)))), dec(qm(pi, qa(total, Q(10))))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cone": ["A combined solid is worked out part by part, using the rule for each simple shape.", "Only the surfaces on the outside count."], "hem": ["A combined solid is worked out part by part, using the rule for each simple shape.", "Only the surfaces on the outside count."], "base": ["A combined solid is worked out part by part, using the rule for each simple shape.", "Only the surfaces on the outside count."], "side": ["A combined solid is worked out part by part, using the rule for each simple shape.", "Only the surfaces on the outside count."], "total": ["The outside surface is all the outside parts added together."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ total: "Outside surface" }),
     domain: CS_DOM,
     cap: 300,
@@ -1334,6 +1378,10 @@ export const B13: Def[] = [
     },
     distractors: ([m, a, b, c, d]) => (m === 0 ? [String((c === 1 ? b ** 3 : c === 2 ? b ** 3 / 2 : 2 * b ** 3) * 2), String(3 * b)] : m === 1 ? [dec(q(2 * a ** 3, 3 * b * b)), dec(q(4 * a * a, 3 * b))] : [dec(q(6 * a * a * b, c * c * d)), dec(q(a * a * b, 3 * c * c * d))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "big": ["When metal is melted and recast, its volume does not change, so we find the volume we start with."], "small": ["Then the volume of one new piece."], "ratio": ["The number of pieces is the total volume divided by the volume of one piece."], "equal": ["The metal's volume stays the same when it is reshaped, so the two volumes are equal."], "length": ["Solving that equation gives the unknown length."], "count": ["The number of pieces is the total volume divided by the volume of one piece."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ big: "Volume of the big solid", small: "Volume of one small piece", ratio: "Number of small pieces", equal: "Same volume of metal", length: "Length", count: "Number of cones" }),
     domain: RC_DOM,
     cap: 300,
@@ -1401,6 +1449,10 @@ export const B13: Def[] = [
       return p[0] === 0 ? [dec(qm(PI7, q(h * (R * R - r * r), 3))), dec(qm(PI7, q(h * R * R, 3)))] : [dec(qm(PI7, Q(l * (R + r) * 2))), dec(qm(PI7, Q(l * (R + r) + (R - r) ** 2)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["A frustum is a cone with its top cut off; its volume rule uses R² + r² + Rr."], "volume": ["The frustum's volume is ⅓πh(R² + r² + Rr)."], "slant": ["The height and the difference of the radii make a right triangle with the slant height, so Pythagoras gives it."], "csa": ["The curved surface of a frustum is π × slant height × (R + r)."], "ends": ["A closed frustum also has a circle at each end."], "tsa": ["The total surface is the curved part plus both ends."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ sum: "R² + r² + Rr", volume: "Volume ⅓πh(R² + r² + Rr)", slant: "Slant height l", csa: "Curved surface π l (R + r)", ends: "Two ends π(R² + r²)", tsa: "Total surface area" }),
     domain: FR_DOM,
     cap: 300,
@@ -1470,6 +1522,10 @@ export const B13: Def[] = [
       return ask ? [dec(qa(qm(PI314, Q(r * r)), tri)), dec(qs(qm(PI314, Q(r * r)), tri))] : [dec(qm(sector, Q(2))), dec(qs(qm(sector, Q(2)), tri))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sector": ["A segment is a sector with a triangle cut off, so we find the sector first."], "triangle": ["The triangle is made by the two radii and the chord."], "minor": ["Taking the triangle from the sector leaves the small segment."], "circle": ["The big segment is the rest of the circle, so we need the whole circle."], "major": ["The big segment is the whole circle minus the small segment."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ sector: "Sector OAB", triangle: "Triangle OAB", minor: "Minor segment", circle: "Whole circle", major: "Major segment" }),
     // level@1: a segment cut off by a right angle at the centre (sector minus a right triangle) is Grade 8 combined-shape work;
     // the 60° and 120° segments need (√3/4)r², which is Grade 10
@@ -1527,6 +1583,10 @@ export const B13: Def[] = [
       return [dec(qm(q(30 * t, 180), whole)), dec(qm(q(30 * t + 30, 360), whole))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "angle": ["A full turn of 360° takes 60 minutes, so the minute hand turns 6° each minute."], "whole": ["The hand sweeps part of a circle, so we find the whole circle's area."], "part": ["The angle turned out of 360° is the fraction of the circle swept."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ angle: "Angle turned", whole: "Whole circle", part: "The part turned" }),
     domain: CLK_DOM,
     cap: 300,
@@ -1581,6 +1641,10 @@ export const B13: Def[] = [
       return p[2] === 2 ? [String(r + 7), String(2 * r)] : [String(360 - th), String(th + 30)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "circ": ["The arc is a fraction of the whole circumference, so we find the whole first."], "angle": ["The arc's fraction of the circumference is the same fraction of 360°."], "circle": ["The sector is a fraction of the whole circle's area."], "r2": ["Rearranging the sector formula gives r²."], "radius": ["The square root of r² is the radius."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ circ: "Whole circumference", circle: "Whole circle's area", angle: "Angle = fraction of the circle × 360°", r2: "r²", radius: "Radius" }),
     domain: INV_DOM,
     difficulty: ([, , ask]) => (ask === 0 ? 1 : ask === 1 ? 2 : 3),
@@ -1635,6 +1699,10 @@ export const B13: Def[] = [
       return [dec(qa(v, q(1, 9))), dec(qm(v, q(10, 11)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "times10": ["Multiplying by a power of 10 moves the repeating part so that subtracting makes it vanish."], "times100": ["The block repeats every two digits, so multiplying by 100 lines the repeats up; subtracting removes them."], "times": ["One multiple lines up the repeating part and the other removes the part that does not repeat, so subtracting leaves a whole number."], "divide": ["Dividing both sides gives the fraction, which we simplify."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ times10: "Multiply by 10 and subtract", times100: "Multiply by 100 and subtract", times: "Multiply by 100 and by 10 and subtract", divide: "Divide" }),
     domain: REC_DOM,
     cap: 400,
@@ -1690,6 +1758,10 @@ export const B13: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "simplify": ["A fraction must be in its simplest form before its denominator is tested."], "factors": ["A fraction ends as a decimal exactly when its simplified denominator has no prime factors except 2 and 5, because only those divide powers of 10."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ simplify: "Simplify first", factors: "Look at the denominator's prime factors" }),
     domain: TERM_DOM,
     cap: 300,
@@ -1739,6 +1811,10 @@ export const B13: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "simplify": ["A fraction must be in its simplest form before its denominator is tested."], "factors": ["Writing the denominator as 2s and 5s shows which power of 10 it fits into."], "places": ["The decimal needs as many places as the larger of the two powers, since that power of 10 is the first one the denominator divides."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ simplify: "Simplify", factors: "Denominator", places: "Places" }),
     domain: PL_DOM,
     cap: 300,
@@ -1788,6 +1864,10 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "check": ["A rational number can be written as one whole number over another; the square root of a whole number that is not a perfect square cannot."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ check: "Irrational" }),
     domain: IRR_DOM,
     cap: 300,
@@ -1852,6 +1932,10 @@ export const B13: Def[] = [
       return [dec(qm(Q(side), q(m * m, SIM_N[ni] * SIM_N[ni]))), dec(qm(Q(side + 1), q(m, SIM_N[ni])))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "scale": ["Similar triangles have all matching sides in the same ratio, so a pair of matching sides gives the scale factor."], "side": ["Every other matching side is multiplied by the same scale factor."], "perimeter": ["We need the first triangle's perimeter, so we add its sides."], "perim-scaled": ["Every side is multiplied by the scale factor, so the perimeter is too."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ scale: "Scale factor PQ ÷ AB", side: "Multiply the matching side", perimeter: "Perimeter of ΔABC", "perim-scaled": "Perimeters scale by the same factor: perimeter of ΔPQR" }),
     domain: SIM_DOM,
     cap: 300,
@@ -1916,6 +2000,10 @@ export const B13: Def[] = [
     },
     distractors: ([mode, p, qq, r]) => [dec(qa(bptAns([mode, p, qq, r]), Q(1))), dec(q(r * qq, p + qq + 1))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratio": ["A line parallel to one side of a triangle cuts the other two sides in the same ratio (the basic proportionality theorem)."], "ec": ["Cross-multiplying the equal ratios gives the missing length."], "x": ["Cross-multiplying the equal ratios gives the missing length."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ ratio: "Equal ratios", ec: "EC", x: "Unknown length" }),
     // level@1: the basic proportionality theorem is Grade 10 (CBSE and TN); a Grade 8 learner is not asked it
     grade: () => 10,
@@ -1962,6 +2050,10 @@ export const B13: Def[] = [
     },
     distractors: ([mode, m, n, x]) => (mode === 0 ? [String(x * n * n * 2), String(x * (n * n - m * m))] : [String(n * ((x % 4) + 1) + 1), String(2 * n * ((x % 4) + 1))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratio": ["Areas of similar triangles are in the ratio of the squares of matching sides, because area grows in two directions."], "area": ["Multiplying by the area ratio gives the other area."], "side": ["Sides scale by the square root of the area ratio."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ ratio: "Ratio", area: "Area of the larger triangle", side: "Side of the larger triangle" }),
     // level@1: areas of similar triangles are Grade 10
     grade: () => 10,
@@ -2017,6 +2109,10 @@ export const B13: Def[] = [
     },
     distractors: ([x, y, ask]) => (ask === 1 ? [surd(x * x + y * y + 1), surd(2 * (x * x + y * y))] : [surd(y * y - x * x + 1), surd(2 * (y * y - x * x))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "right": ["A tangent meets the radius at right angles, so the radius, tangent and line to the centre form a right triangle."], "diff": ["By Pythagoras, the tangent's square is the hypotenuse's square minus the radius's square."], "root": ["The square root gives the length."], "squares": ["By Pythagoras, the square of the line to the centre is the sum of the other two squares."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ right: "Right angle at T", squares: "OT² + PT²", diff: "OP² − OT²", root: "Length" }),
     domain: TL_DOM,
     cap: 300,
@@ -2091,6 +2187,10 @@ export const B13: Def[] = [
       return [B("complement", "conceptual", TAN, "90° − x was used, as if the radius were involved. The tangent–chord angle equals the angle in the alternate segment.", 90 - x), B("supplement", "conceptual", TAN, "180° − x was used. That is the angle in the segment on the same side, not the alternate one.", 180 - x), B("double", "conceptual", "MATH.geometry.circle-theorems", "The angle was doubled. 2x is the angle at the centre on the chord AB, not the angle at C.", 2 * x)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "right": ["A tangent meets the radius at right angles."], "quad": ["The four angles of a four-sided shape add up to 360°."], "equal": ["Two tangents from the same outside point are equal, so the triangle they make with the chord is isosceles."], "base": ["The two base angles of an isosceles triangle are equal, so they share what is left of 180°."], "pab": ["The two base angles of an isosceles triangle are equal, so they share what is left of 180°."], "oab": ["The tangent and radius make 90°, so the angle beside it is 90° minus the other part."], "alt": ["The alternate segment theorem says the angle between a tangent and a chord equals the angle in the other segment."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ right: "Tangent ⟂ radius", quad: "Angles of OAPB add to 360°", equal: "Equal tangents", base: "Base angle", pab: "∠PAB", oab: "∠OAB = 90° − ∠PAB", alt: "Alternate segment theorem" }),
     domain: TG_DOM,
     difficulty: ([, mode]) => (mode === 0 ? 1 : mode === 1 ? 2 : 3),
@@ -2145,6 +2245,10 @@ export const B13: Def[] = [
     },
     distractors: ([m, p, qq, r]) => (m === 0 ? [String(p + r - qq + 1), String(p + r)] : [D(p + qq + r, 3), D(r, 2)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "pitot": ["Tangents from one corner to a circle are equal, so each side is made of two tangent pieces; this makes opposite sides add to the same total."], "da": ["Using that equal total, the missing side is the difference."], "s": ["Each tangent piece appears twice round the shape, so half the perimeter is useful."], "af": ["Each side is made of two tangent pieces, and the pieces from one corner are equal, so a corner's piece is the semi-perimeter minus the side opposite that corner."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ pitot: "Opposite sides", da: "DA = AB + CD − BC", s: "Semi-perimeter s", af: "AF = s − BC" }),
     domain: TQ_DOM,
     cap: 300,
@@ -2207,6 +2311,10 @@ export const B13: Def[] = [
       return [red(b * c, a * d), red(a * d, b * c), red(b * d + 1, a * c)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["Ceva's theorem says three lines from the corners meet at one point exactly when the product of these ratios is 1."], "solve": ["Rearranging the product gives the missing ratio."], "simplify": ["A ratio is written with whole numbers in its simplest form."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ rule: "The theorem", solve: "AF/FB", simplify: "Simplest form" }),
     domain: CEVA_DOM,
     cap: 300,
@@ -2261,6 +2369,10 @@ export const B13: Def[] = [
     },
     distractors: ([m, x, y, z]) => (m === 0 ? [D(x, 4), D(x + 2, 2)] : m === 1 ? [String(4 * x), String(2 * x + 2)] : [D(x + y + z, 3), String(2 * (x + y + z))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["The midpoint theorem: joining midpoints of two sides gives a line parallel to the third side and half as long."], "de": ["The line joining the midpoints is half the third side."], "bc": ["The line joining the midpoints is half the third side, so the third side is twice it."], "sides": ["Each side of the midpoint triangle is half of a side of the big triangle."], "perimeter": ["The perimeter is the three sides added."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ rule: "Midpoint theorem", de: "DE", bc: "BC", sides: "Sides", perimeter: "Perimeter" }),
     domain: MID_DOM,
     cap: 300,
@@ -2320,6 +2432,10 @@ export const B13: Def[] = [
     },
     distractors: ([x, y]) => [`(${x + 1}, ${y})`, `(${x}, ${y + 1})`, `(${x + 1}, ${y + 1})`],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "eq1": ["The diagonals of a parallelogram cut each other in half, so the two parts are equal: that gives an equation."], "eq2": ["The other diagonal is cut in half too, giving a second equation."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ eq1: "First pair", eq2: "Second pair" }),
     domain: PG_DOM,
     cap: 300,
@@ -2389,6 +2505,10 @@ export const B13: Def[] = [
       return [B(`mix-${r}`, "conceptual", r >= 5 ? TPROP : PAR, says[r], opts.indexOf(REASON_MIS[r]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "reason": ["Every step in geometry must be backed by a known fact; this is the fact that makes the step true."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `The reason: ${s.inputs[0]}`,
     domain: RS_DOM,
     cap: 300,
@@ -2448,6 +2568,10 @@ export const B13: Def[] = [
       return [B(`rule-${c}`, "conceptual", CONG, says[c], opts.indexOf(CRIT_MIS[c]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["Each congruence test needs a particular set of matching sides and angles, so we see which set the facts give."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]}.`,
     domain: CR_DOM,
     cap: 300,
@@ -2490,6 +2614,10 @@ export const B13: Def[] = [
     bugs: ([m, x, y, z]) => (m === 0 ? [B("midpoint", "conceptual", TP, "D was taken as the midpoint of BC. The bisector of the angle splits BC in the ratio AB : AC, not equally.", D(z, 2)), B("swapped", "procedural", TP, "The sides were swapped: BD goes with AB, so BD = BC × AB/(AB + AC).", dec(q(z * y, x + y)))] : [B("swapped", "procedural", TP, "The ratio was turned round: AC goes with DC, so AC = AB × DC/BD.", dec(q(z * x, y))), ...(z + y - x > 0 ? [B("add-difference", "conceptual", TP, "The same difference was added. The theorem is about equal ratios.", String(z + y - x))] : [])]),
     distractors: ([m, x, y, z]) => (m === 0 ? [dec(q(z * x, y)), dec(qa(abAns([m, x, y, z]), Q(1)))] : [dec(q(z * y, x + y)), dec(qa(abAns([m, x, y, z]), Q(1)))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["The angle bisector theorem: the bisector splits the opposite side in the same ratio as the two sides next to the angle."], "bd": ["BD is its share of BC, in the ratio AB to AB + AC."], "ac": ["Rearranging the equal ratios gives the missing side."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ rule: "Angle bisector theorem", bd: "BD = BC × AB/(AB + AC)", ac: "AC = AB × DC/BD" }),
     domain: AB_DOM,
     cap: 300,
@@ -2544,6 +2672,10 @@ export const B13: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Comparing the distance to the centre with the radius shows where the point is: inside gives no tangents, on the circle one, outside two."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]}, so the number of tangents is ${s.value}.`,
     domain: TC_DOM,
     difficulty: ([r, d]) => (d === r ? 2 : d === 0 ? 1 : Math.abs(d - r) <= 1 ? 3 : 1),
@@ -2584,6 +2716,10 @@ export const B13: Def[] = [
       return d.trap >= 0 ? [B(`trap-${p[0]}`, "conceptual", RN, classSlip(p[0], d.opts[d.trap]), d.trap)] : [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "kind": ["Simplifying first shows what kind of number each one really is."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say(),
     domain: [[0, 4], [0, 59]],
     keep: (p) => !classDup(p),
@@ -2664,6 +2800,10 @@ export const B13: Def[] = [
       return [dec(qa(r, Q(1))), dec(qm(r, Q(2))), dec(qa(r, q(1, 2)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "inside": ["The value inside the absolute value bars is worked out first."], "abs": ["The absolute value is the distance from 0, which is never negative."], "diff": ["The distance between two points is the difference of their values."], "move|subtract": ["Moving left on the number line takes away."], "move|add": ["Moving right on the number line adds."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ abs: "Absolute value", move: "Move along the line" }),
     domain: [[0, 2], [-9, 9], [2, 9], [-9, 9], [0, 9]],
     keep: nlineOk,
@@ -2730,6 +2870,10 @@ export const B13: Def[] = [
       return [...new Set(block.split("").map(Number))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "block": ["A fraction's decimal repeats one block of digits over and over, so we find the block."], "place": ["The block repeats, so the remainder after dividing by its length tells which digit of the block it is."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ block: "The repeating block", place: "Position in the block" }),
     domain: [[0, 1], [1, 12], [7, 60]],
     keep: ([t, k]) => k < (t ? 13 : 7),
@@ -2772,6 +2916,10 @@ export const B13: Def[] = [
       ].filter((x) => typeof x.predict === "number" && x.predict >= 0 && x.predict !== o.right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "divide": ["Dividing the top by the bottom gives the decimal; when a remainder comes back, the digits start to repeat."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say(),
     domain: [[1, 24], [3, 25]],
     difficulty: ([n, d]) => (terminating(q(n, d)) ? (d <= 8 ? 1 : 2) : decExp(n, d).length > 14 ? 3 : 2),
@@ -2831,6 +2979,10 @@ export const B13: Def[] = [
       return t === 0 ? [String(a * b * k), String(a + b * k * k), String(a * k + b)] : t === 1 ? [String(a * a), String(a * a - m * m)] : t === 2 ? [surdSum(m + k, 1, m * k), surdSum(0, 2, m * k)] : [surdSum(a * k, a + b * k, m), surdSum(a * k + b * m, a * k, m)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "simplify": ["Taking square factors out of a surd lets like surds be seen."], "collect": ["Like surds have the same root part, so they are added like like terms."], "identity": ["The identity (x + y)(x − y) = x² − y² removes the surds, because squaring a square root gives a whole number."], "value|subtract": ["Squaring each surd gives a whole number, so the result has no roots."], "value|note": ["Squaring a square root gives the number inside, so the whole-number parts can be added."], "expand": ["Every term of the first bracket multiplies every term of the second."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ simplify: "Simplify", collect: "Collect like surds", identity: "Identity", expand: "Expand" }),
     domain: [[0, 3], [1, 9], [1, 6], [2, 7], [1, 7]],
     keep: ropOk,
@@ -2902,6 +3054,10 @@ export const B13: Def[] = [
       return w === 1 ? [dec(Q(a ** 3)), dec(qa(Q(a ** 3), qm(pr2, Q(m === 1 ? 2 * h : 2))))] : [dec(Q(6 * a * a)), dec(qa(Q(5 * a * a), pr2))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cube": ["We start with the whole solid before any part is cut out or added."], "part": ["Then we work out what the change adds or takes away."], "total": ["Putting the whole and the change together gives the answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ cube: "Cube", part: "Change", total: "Total" }),
     domain: [[0, 2], [0, 1], [7, 30], [1, 4], [0, 20]],
     keep: cubeOk,
@@ -2958,6 +3114,10 @@ export const B13: Def[] = [
       return [dec(parts[0][1]), dec(qm(t, Q(2))), dec(qm(t, q(1, 2)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["Seeing which simple shapes the object is made of tells us which formulas to use."], "p#": ["Each part is worked out with the formula for its shape."], "total": ["The parts together make the whole surface or volume."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ model: "Model", total: "Total" }),
     domain: [[0, 3], [1, 4], [0, 12], [0, 24]],
     keep: modelOk,
@@ -3020,6 +3180,10 @@ export const B13: Def[] = [
       return [dec(parts[0][1]), dec(qa(t, parts[parts.length - 1][1])), dec(qm(t, Q(2)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "p#": ["The shape is split into simple parts, and each is worked out with its own formula."], "total": ["The parts together make the whole."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ total: "Total" }),
     domain: [[0, 4], [2, 40], [0, 40], [1, 4]],
     keep: cshapeOk,
@@ -3081,6 +3245,10 @@ export const B13: Def[] = [
     },
     distractors: ([m, x, y]) => [dec(Q(x + 1)), dec(q(x + y, 2))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "converse": ["A line through one side's midpoint, parallel to another side, cuts the third side in half (the converse of the midpoint theorem)."], "half": ["The line joining the midpoints is half the parallel side."], "double": ["The parallel side is twice the line joining the midpoints."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ half: "Half", double: "Twice" }),
     domain: [[0, 2], [3, 40], [4, 40]],
     keep: ([, x, y]) => y % 2 === 0 && y !== x,
@@ -3162,6 +3330,10 @@ export const B13: Def[] = [
       return [`${dec(lat)} + ${dec(qm(base, Q(2)))}√3`, `${dec(qm(lat, Q(2)))} + ${dec(base) === "1" ? "" : dec(base)}√3`];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "base|multiply": ["The base is part of the surface, so we find its area."], "base|note": ["The base is an equilateral triangle, whose area is (√3/4) × side²."], "faces1": ["Opposite faces are equal triangles, so we take two of each: each is half of base × slant height."], "faces2": ["Opposite faces are equal triangles, so we take two of each: each is half of base × slant height."], "perimeter": ["All the sloping faces have the same slant height, so their total is half the base's perimeter × slant height."], "lateral": ["Half of perimeter × slant height adds all the triangular faces at once."], "total": ["The total surface is all the faces added."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ total: "Total surface area" }),
     domain: [[0, 3], [2, 20], [3, 30], [0, 131]],
     keep: pyrpOk,
@@ -3220,6 +3392,10 @@ export const B13: Def[] = [
       return [B(`crit-${c}`, "conceptual", SIM, says[c], o.indexOf([3, 3, 1, 1, 2][c]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["Two triangles are similar when two pairs of angles are equal (AA), or when all sides are in the same ratio (SSS), or two sides in ratio with the angle between equal (SAS)."], "ratios": ["If every matching pair of sides has the same ratio, the triangles are similar."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : say()(s)),
     domain: [[0, 4], [0, 11], [0, 5]],
     keep: (p) => !simcDup(p),
@@ -3269,6 +3445,10 @@ export const B13: Def[] = [
       return out.filter((b) => b.predict !== right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "match": ["Similar triangles have matching angles equal, so the order of the letters tells which angles match."], "angle": ["The three angles of a triangle add up to 180°."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ angle: "Angle sum" }),
     domain: [[0, 2], [20, 130], [20, 130]],
     keep: ([, x, y]) => x % 5 === 0 && y % 5 === 0 && x + y <= 150 && x !== y && x + 2 * y !== 180 && 2 * x + y !== 180,
@@ -3314,6 +3494,10 @@ export const B13: Def[] = [
     },
     distractors: ([, m, n, x]) => [dec(Q(x)), dec(q(2 * x * n, m))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "scale": ["In similar triangles every matching length, including altitudes, is in the same ratio as the sides."], "answer": ["Multiplying by the ratio gives the matching length."], "root": ["Areas grow as the square of lengths, so the length ratio is the square root of the area ratio."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ root: "Ratio of sides = √(ratio of areas)", answer: "Corresponding length" }),
     // level@1: altitudes, perimeters (and areas) of similar triangles in a given ratio are Grade 10
     grade: () => 10,
@@ -3390,6 +3574,10 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratios": ["If a line cuts two sides of a triangle in the same ratio, it is parallel to the third side."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : say()(s)),
     // level@1: the converses of the BPT and of the angle bisector theorem are Grade 10
     grade: () => 10,
@@ -3435,6 +3623,10 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Comparing a line's distance from the centre with the radius tells whether it misses, touches or cuts the circle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say(),
     domain: [[2, 15], [0, 34], [0, 1]],
     keep: ([r, d]) => d <= 2 * r + 4,
@@ -3509,6 +3701,10 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Comparing the distance between centres with the sum and difference of the radii tells how the circles sit, and so how many common tangents there are."], "right": ["Drawing a line parallel to the tangent makes a right triangle whose sides we know."], "pyth": ["Pythagoras gives the missing side, which equals the tangent length."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ pyth: "Length" }),
     domain: [[0, 2], [1, 20], [1, 20], [0, 45]],
     keep: ctanOk,
@@ -3576,6 +3772,10 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "product": ["The theorem is about the product of the three ratios, so we multiply them."], "rule": ["The product is checked against 1 to decide."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ product: "Product of the three ratios" }),
     domain: [[0, 1], [1, 6], [1, 6], [1, 6], [1, 6], [0, 1]],
     keep: menOk,

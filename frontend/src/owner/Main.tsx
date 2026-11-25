@@ -6,6 +6,7 @@ import { FoundationCard, SteppedMath } from "../year/StartHere";
 import { PictureExplore, PictureRound } from "../year/PictureTasks";
 import { picturesOf } from "../../../packages/learning/src/foundations";
 import "../year/scene.css";
+import "../year/start-here.css";
 import "../year/matrix-text.css";
 import "../year/start-here.css";
 import { mx } from "../year/MatrixText";

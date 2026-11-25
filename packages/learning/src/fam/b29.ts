@@ -95,6 +95,10 @@ const gst: Def = {
     return [right + 10, right - 10, right * 1.1, right + 100].filter((x) => x > 0 && !near(x, right));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "tax": ["GST is a percentage of the price before tax."], "pay": ["The buyer pays the price plus the tax."], "half": ["Inside a state, GST is shared equally between the centre (CGST) and the state (SGST)."], "total-percent": ["The price before GST is 100%, so the amount paid is 100% plus the GST rate."], "unitary": ["The amount paid is a known percentage of the price, so we find 1% and then 100%."], "discount": ["The discount is taken off first, and GST is charged on the price after discount."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "discount"
       ? `Price after a ${s.inputs[1]}% discount: ₹${s.inputs[0]} − ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${money(s.value as number)}`
@@ -181,6 +185,10 @@ const rd: Def = {
     return [right + 100, right - 50, right * 2, right + 12].filter((x) => x > 0 && !near(x, right));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "months": ["Each monthly deposit earns interest only for the months it stays in the account, so we add up those months."], "interest": ["Interest is principal × rate × time, with the time in years, so months are divided by 12."], "maturity": ["At the end you get back all you put in plus the interest."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "months"
       ? `Money is in the account for ${s.inputs[0]} + ${Number(s.inputs[0]) - 1} + … + 1 = ${s.inputs[0]} × ${Number(s.inputs[0]) + 1} ÷ 2 = ${s.value} month-deposits`
@@ -274,6 +282,10 @@ const shares: Def = {
     return [right + 1, right * 2, right / 2, right + 10].filter((x) => x > 0 && !near(x, right));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "per-share": ["Dividend is paid as a percentage of a share's face value, not what was paid for it."], "income": ["Each share earns the same dividend, so we multiply by the number of shares."], "invest": ["The money invested is what was paid for the shares: the market price times the number."], "return": ["The return is the yearly income as a percentage of the money invested."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "invest"
       ? `Money invested = ${s.inputs[0]} × ₹${money(s.inputs[1] as number)} = ₹${money(s.value as number)}`
@@ -389,6 +401,10 @@ const ogive: Def = {
     return [right + 1, right - 1, right + WIDTH[p[0]] / 2, right + 2].filter((x) => x > 0 && !near(x, right));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "cumulate": ["A cumulative frequency counts all the values below a limit, so we add the classes below it."], "total": ["The total frequency is needed to find the quartile positions."], "q1": ["The lower quartile is a quarter of the way through the data; we assume values are spread evenly in its class."], "q2": ["The median is half-way through the data; we assume values are spread evenly in its class."], "q3": ["The upper quartile is three quarters of the way through the data; we assume values are spread evenly in its class."], "iqr": ["The interquartile range is the spread of the middle half of the data: upper quartile minus lower quartile."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "cumulate"
       ? `Add the frequencies of the classes below the limit: ${s.inputs.join(" + ")} = ${s.value}`

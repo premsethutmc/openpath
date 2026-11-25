@@ -272,6 +272,10 @@ const auleq = F({
       ...(p[0] === 2 ? [bug("give-away-added", "conceptual", LIN, `Giving away ${p[2]} sweets was written as adding ${p[2]}; giving away makes the number smaller, so it is − ${p[2]}.`, o.sign)] : []),
     ];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "unknown": ["A letter stands for the number we do not know yet, so we can write about it."], "build": ["Each action in the story becomes an operation on x, in the same order, so the equation says exactly what the story says."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [2, 9], [1, 20], [2, 15]],
   keep: ([t, a, b, x]) => a !== b && leqC([t, a, b, x]) > 0,
   why: "A story with a × x ± b, a from 2 to 9 (not equal to b), b up to 20, x from 2 to 15.",
@@ -342,6 +346,10 @@ const aulwp = F({
       bug("bracket-not-expanded", "procedural", IDI, `10(x + ${b}) was written as 10x + ${b}; the 10 multiplies both x and ${b}.`, q(T - b, 15)),
       bug("dropped-extra", "conceptual", LIN, `The ${b} was left out, as if both numbers were the same.`, q(T, 15)),
     ];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "form": ["Calling the unknown x and writing the other amounts with it turns the story into one equation."], "subtract": ["An equation is like a balance: doing the same thing to both sides keeps it true.", "Taking away the plain number leaves only the x term on one side."], "divide": ["Dividing both sides by the number in front of x leaves x on its own."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 3], [2, 6], [1, 10], [3, 30]],
   // k = 1 is told as a mother's and a child's ages: the mother is 20 to 40 years older than the child and at most 60
@@ -419,6 +427,10 @@ const auvexp = F({
   distractors: ([k, l, a, b]) => {
     const L = LET[l];
     return [`${a}${L} + ${b}`, `${b + a}${L}`, `${b}${L} + ${a + 1}`];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "first": ["We turn the words into symbols piece by piece; 'times' means multiply."], "whole": ["The rest of the words add or take away from that part, in the order the statement gives."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 4], [0, 4], [1, 9], [2, 9]],
   keep: ([, , a, b]) => a !== b,
@@ -505,6 +517,10 @@ const aubin = F({
     ];
   },
   distractors: ([k, a, b, c, d]) => (k === 2 ? [`${a * c}x${sup(b + d)}`, `${a * c}x${sup(b + d + 1)}y`] : [sum([[a * c, "x²"], [a * d + b * c + 1, "x"], [b * d, ""]]), sum([[a + c, "x"], [b * d, ""]])]),
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "cells": ["In the area model each term of one bracket multiplies each term of the other, one cell for every pair."], "collect": ["The two middle cells are like terms, so they are added."], "coef": ["When multiplying terms, the numbers multiply together and the letters multiply together, separately."], "powers": ["Multiplying powers of the same letter adds the powers."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [1, 6], [-9, 9], [1, 6], [-9, 9]],
   keep: ([k, a, b, c, d]) =>
     k === 0 ? a === 1 && c === 1 && b !== 0 && d !== 0 && b < d && b + d !== 0 : k === 1 ? a * c >= 2 && a <= 4 && c <= 4 && b !== 0 && d !== 0 && Math.abs(b) <= 6 && Math.abs(d) <= 6 && gcd(a, b) === 1 && gcd(c, d) === 1 && a * d + b * c !== 0 : a >= 2 && c >= 2 && b >= 1 && b <= 3 && d >= 1 && d <= 3,
@@ -569,6 +585,10 @@ const auapis = F({
       ? [bug("difference-reversed", "procedural", AP, "The common difference was found as a term minus the next term; d is each term minus the one before it.", o.rev)]
       : [bug("first-difference-only", "conceptual", AP, "Only the first two terms were compared; in an AP every difference between neighbouring terms must be the same.", o.ap)];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "diffs": ["An arithmetic progression adds the same amount each time, so we check the differences."], "decide": ["It is an AP only if every difference is the same."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[-10, 20], [-6, 7], [0, 2], [2, 4]],
   keep: ([a, d, t, j]) => d !== 0 && (t === 1 ? ((a + 20) % 3 === 0) : j === 2),
   why: "Five whole-number terms: an AP, an AP with one term changed, or a list whose differences grow by 1.",
@@ -632,6 +652,10 @@ const auapk = F({
       ];
     return [bug("forgot-plus-one", "procedural", AP, "(l − a) ÷ d counts the steps between terms; the number of terms is one more.", N - 1)];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "set": ["The nth term of an AP is a + (n − 1)d, so setting it equal to the given term gives an equation for n."], "n|divide": ["Dividing by d gives n − 1, then we add 1."], "reverse": ["Read backwards, an AP is still an AP: it starts at the last term and steps by −d."], "term": ["Putting the position into the term rule gives the term."], "n|add": ["The term rule uses n − 1, so we add 1 to get n."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [-10, 20], [-5, 9], [8, 40], [2, 30]],
   keep: ([k, , d, N, n]) => d !== 0 && (k === 0 ? N === 8 : k === 1 ? n <= N - 1 && n <= 15 : n === 2),
   why: "Whole-number APs: which term has a value, the nth term from the end, or how many terms there are (8 to 40 terms).",
@@ -676,6 +700,10 @@ const auaps = F({
     bug("single-a", "recall", AP, "The formula was used as n/2 × [a + (n − 1)d]; it is n/2 × [2a + (n − 1)d] (the first term and the last term together).", (n * (a + (n - 1) * d)) % 2 === 0 ? (n * (a + (n - 1) * d)) / 2 : null),
     bug("last-times-n", "conceptual", AP, "Every term was taken to be as large as the last one; the terms grow (or shrink) evenly, so their average is (first + last)/2.", n * (a + (n - 1) * d)),
   ],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "last": ["The sum rule needs the last term, which comes from a + (n − 1)d."], "sum": ["Pairing the first and last, the second and second-last, and so on, gives equal pairs, so the sum is n × (first + last) ÷ 2."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[1, 60], [-6, 12], [5, 25]],
   keep: ([a, d, n]) => d !== 0 && (d < 0 ? a + (n - 1) * d >= 1 : true),
   why: "Whole-number APs with 5 to 25 terms, every term positive (savings and instalments grow; rows of logs shrink).",
@@ -745,6 +773,10 @@ const auapc = F({
     ];
   },
   distractors: ([k]) => [k + 1, k - 1, -k],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "condition": ["Three numbers are in AP when the middle one is the same step from both ends, so 2b = a + c."], "collect": ["Collecting like terms on each side makes the equation simpler."], "solve": ["Dividing by the number in front of k leaves k on its own."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[-5, 8], [1, 4], [1, 5], [1, 4], [-9, 9], [-9, 9]],
   keep: (p) => {
     const [k, pp, r, t, q, s] = p;
@@ -815,6 +847,10 @@ const auaprec = F({
     const T = recTerms(p);
     return [tup([T[0], T[1], T[2], T[3] + 1]), tup([T[0], T[1] + 1, T[2] + 2, T[3] + 3])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "sub": ["An explicit rule gives any term straight away: put in its position n."], "start": ["A recursive rule needs a first term to start from."], "next": ["Each term is made from the one before by the rule, so we go step by step."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 1], [-2, 3], [-9, 9], [-5, 6]],
   keep: ([k, p, q, A]) => p !== 0 && (k === 0 ? Math.abs(q) <= 9 : Math.abs(q) <= 5 && q !== 0),
   why: "A quadratic rule aₙ = pn² + An + q, or a₁ = A and aₙ = p·aₙ₋₁ + q, with small whole numbers.",
@@ -861,6 +897,10 @@ const auapln = F({
       ? [bug("intercept-is-first-term", "conceptual", AP, "The first term was taken as c; c is the value at n = 0, one step before the first term, so c = a − d.", tup([d, a])), bug("order-swapped", "procedural", AP, "The two numbers were given in the wrong order: m (the slope) comes first.", tup([a - d, d]))]
       : [bug("first-term-is-intercept", "conceptual", AP, "The constant of the line was taken as the first term; the first term is the value at x = 1, so a = m + c.", tup([a - d, d])), bug("order-swapped", "procedural", AP, "The two numbers were given in the wrong order: the first term a comes first.", tup([d, a]))],
   distractors: ([k, a, d]) => (k === 0 ? [tup([d, a + d]), tup([-d, a - d])] : [tup([a + d, d]), tup([a, -d])]),
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "slope": ["The terms of an AP lie on a straight line; each step of 1 in n adds d, so d is the slope."], "intercept": ["The line meets the y-axis at n = 0, one step before the first term, so c = a − d."], "d": ["The terms of an AP lie on a straight line whose slope is the common difference."], "a": ["The first term is the value of the line at n = 1."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 1], [1, 30], [1, 9]],
   keep: ([k, a, d]) => a !== d && (k === 0 ? a <= 15 : true) && a - d !== d,
   why: "APs with a positive first term up to 30 and a positive whole-number difference up to 9.",
@@ -945,6 +985,10 @@ const auqstd = F({
       ...(p[0] === 0 ? [bug("right-side-dropped", "conceptual", QUAD, "Only the left side was expanded and the right side was forgotten; standard form needs everything on one side with 0 on the other.", o.idx[2])] : [bug("x2-added", "procedural", QUAD, "The x² on the right was added to the 2x² on the left; moving it across makes it − x².", o.idx[2])]),
     ];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "expand": ["Standard form has every term on one side and 0 on the other, so we expand and collect."], "decide": ["It is a quadratic only if an x² term is still there after collecting."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [-6, 6], [-6, 6], [-9, 9], [-9, 9]],
   keep: ([k, p, q, r, s]) => r !== 0 && s !== 0 && p !== 0 && (k === 1 ? 2 * p !== r && q === 1 : q !== 0) && (k === 2 ? p + 2 * q !== r || p * q !== s : true),
   why: "Products of two brackets equal to a linear or quadratic expression, with small whole numbers.",
@@ -998,6 +1042,10 @@ const auqsplit = F({
     bug("inverted", "procedural", LIN, "The fraction was turned upside down: ax + b = 0 gives x = −b/a, not −a/b.", b !== 0 && d !== 0 && !near(a / b, c / d) ? [-a / b, -c / d] : null),
   ],
   distractors: ([a, b, c, d]) => [[-b / a, d / c], [b / a, -d / c]],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "product": ["To split the middle term we need two numbers with product a × c and sum b."], "factor": ["Splitting the middle term lets us group the terms in pairs that share a bracket."], "roots": ["A product is 0 only when one of its brackets is 0, so each bracket gives a root."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[1, 6], [-9, 9], [1, 6], [-9, 9]],
   keep: ([a, b, c, d]) => a * c >= 2 && b !== 0 && d !== 0 && gcd(a, b) === 1 && gcd(c, d) === 1 && (a < c || (a === c && b < d)) && !near(-b / a, -d / c) && Math.abs(a * d + b * c) <= 30 && Math.abs(b * d) <= 40 && a * d + b * c !== 0,
   why: "(ax + b)(cx + d) = 0 with a·c ≥ 2, whole numbers up to 9, two different rational roots.",
@@ -1071,6 +1119,10 @@ const auqf = F({
     const D = B * B - 4 * A * C;
     return [qfRoots(A, B, D, A), qfRoots(A, -B, D, A), qfRoots(A, B, D, 4 * A), qfRoots(A, -B, D, 4 * A)];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "disc": ["The discriminant b² − 4ac decides how many real roots there are, and it goes under the square root in the formula."], "formula": ["The quadratic formula comes from completing the square and works for every quadratic."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[1, 5], [-9, 9], [-9, 9]],
   keep: ([A, B, C]) => C !== 0 && B * B - 4 * A * C > 0 && !isSq(B * B - 4 * A * C) && gcd(gcd(A, Math.abs(B)), Math.abs(C)) === 1,
   why: "Ax² + Bx + C = 0 with whole-number coefficients (A up to 5) and a positive discriminant that is not a perfect square.",
@@ -1110,6 +1162,10 @@ const auqcs = F({
     bug("not-halved", "recall", QUAD, `h was taken as the whole coefficient ${nf(b)}; (x + h)² = x² + 2hx + h², so h is half of it.`, tup([nf(b), nf(c - b * b)])),
     bug("sign-of-h", "procedural", QUAD, `The sign of h was changed; with + ${nf(b)}x the bracket is (x ${b < 0 ? "−" : "+"} ${rat(Math.abs(b), 2)}).`, tup([rat(-b, 2), rat(4 * c - b * b, 4)])),
   ],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "half": ["(x + h)² = x² + 2hx + h², so h is half the coefficient of x."], "adjust": ["Writing (x + h)² adds h², so the same amount is taken away to keep the expression equal."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[-10, 10], [-15, 15]],
   keep: ([b]) => b !== 0,
   why: "Monic quadratics x² + bx + c with b from −10 to 10 (not 0) and c from −15 to 15.",
@@ -1174,6 +1230,10 @@ const auqwp = F({
       bug("kept-impossible-root", "conceptual", "MATH.reasoning.model-selection", "The negative root of the equation was given; a number of years, a speed or a positive number cannot be negative, so that root is rejected.", other),
       bug("other-quantity", "procedural", QUAD, k === 2 ? "The faster speed was given; the question asks for the usual speed." : k === 1 ? `${who}'s age was given; the question asks for the brother's.` : "The larger number was given; the question asks for the smaller one.", k === 0 ? x + 1 : x + s),
     ];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "form": ["Calling the unknown x and writing the facts with it turns the story into a quadratic equation."], "roots": ["Factorising shows the two values that make the equation true."], "reject": ["Both roots solve the equation, but only one makes sense in the story."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 3], [3, 80], [1, 20], [1, 3]],
   keep: (p) => {
@@ -1250,6 +1310,10 @@ const ausec = F({
     const { A, B, P } = secPts(p);
     return [P2((A[0] + B[0]) / 2, (A[1] + B[1]) / 2), P2(P[0], -P[1]), P2(P[1], P[0])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "ratio": ["The section formula needs the ratio in which P divides the segment."], "formula": ["The section formula takes a weighted average of the two ends: the further end gets the smaller weight."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[-6, 6], [-6, 6], [-3, 3], [-3, 3], [1, 4], [1, 4]],
   keep: (p) => {
     const [, , ux, uy, m, n] = p;
@@ -1325,6 +1389,10 @@ const aurat = F({
     ];
   },
   distractors: ([, , , , , m, n]) => [`${m}:${m + n}`, `${m + n}:${n}`, `${m + 1}:${n}`],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "set": ["Calling the ratio λ : 1 and using the section formula on one coordinate gives an equation for λ."], "solve": ["Solving gives λ, which we write as a whole-number ratio."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [-8, 8], [-8, 8], [-3, 3], [-3, 3], [1, 5], [1, 5]],
   keep: (p) => {
     const [k, x1, y1, ux, uy, m, n] = p;
@@ -1392,6 +1460,10 @@ const aucen = F({
     const { G, C } = cenPts(p);
     const T = p[0] === 0 ? G : C;
     return [P2(T[0] + 1, T[1]), P2(T[1], T[0]), P2(-T[0], T[1]), P2(T[0], T[1] - 1), P2(T[0] - 1, T[1] + 1)];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "add": ["The centroid is the average of the three corners, so we add the coordinates first."], "divide": ["Dividing by 3 gives the average."], "times3": ["The centroid is the average of the corners, so the corners' coordinates add to 3 times the centroid's."], "subtract": ["Taking away the two known corners leaves the third."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 1], [-4, 4], [-4, 4], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
   keep: (p) => {
@@ -1496,6 +1568,10 @@ const au3cl = F({
           ? [bug("equal-sides-missed", "procedural", SPC, "Two of the distances are equal, which makes the triangle isosceles; compare the squared distances before taking square roots.", o.indexOf(CL3[3]))]
           : [bug("pythagoras-misread", "procedural", SPC, "The squared distances were compared wrongly; Pythagoras needs the two smaller squares to add up exactly to the largest.", o.indexOf(CL3[1]))];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "dist": ["Distances show whether the points are in a line, and squared distances avoid square roots while we work."], "decide": ["Points are in a line exactly when the two shorter distances add up to the longest."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 3], [-1, 2], [-1, 2], [-1, 2], [-2, 2], [-2, 2], [-2, 2], [0, 7]],
   keep: (p) => {
     const [t, , , , u1, u2, u3, j] = p;
@@ -1566,6 +1642,10 @@ const au3ce = F({
     const { G, A, B } = ce3Pts(p);
     return [P3([0, 1, 2].map((i) => (A[i] + B[i]) / 2)), P3([G[1], G[0], G[2]]), P3([G[0] + 1, G[1], G[2]]), P3([G[0], G[1], G[2] - 1])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "add": ["The centroid is the average of the three corners, so we add each coordinate."], "divide": ["Dividing by 3 gives the average."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[-3, 3], [-3, 3], [-3, 3], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5]],
   keep: (p) => {
     const { A, B, C } = ce3Pts(p);
@@ -1624,6 +1704,10 @@ const au3ex = F({
   distractors: (p) => {
     const { A, B, P } = ex3Pts(p);
     return [P3([0, 1, 2].map((i) => (A[i] + B[i]) / 2)), P3(P.map((x) => -x))];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "formula": ["For a point dividing the line outside the segment, the section formula has a minus sign."], "value": ["Working out each coordinate gives the point."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[-4, 4], [-4, 4], [-4, 4], [-2, 2], [-2, 2], [-2, 2], [1, 4], [1, 4]],
   keep: (p) => {
@@ -1692,6 +1776,10 @@ const aultab = F({
     if (k === 0) return [bug("undefined-means-zero", "conceptual", LIM, `Because f is not defined at x = ${a}, the limit was taken as 0; a limit is about the values near ${a}, which the table shows.`, 0), bug("far-value", "procedural", LIM, `The value farthest from ${a} in the table was rounded; the limit is what the values approach as x gets closest to ${a}.`, Math.round(tabF([0, a, pp, q])(a + 0.1)))];
     return [bug("other-side", "conceptual", LIM, `The rule for the other side of ${a} was used; the ${k === 1 ? "left-hand limit uses the values for x < " : "right-hand limit uses the values for x > "}${a}.`, k === 1 ? r * a + s : pp * a + q)];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "read": ["A limit is the value the function gets closer to as x gets closer to the point, from both sides."], "piece": ["Near the point from one side, only that side's rule is used."], "value": ["That rule is smooth near the point, so we can put the point in to see where it heads."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [-3, 5], [1, 5], [-6, 6], [-5, 5], [-6, 6]],
   keep: ([k, a, p, q, r, s]) => (k === 0 ? a >= 1 && a <= 4 && q >= 2 && q <= 4 && r === 0 && s === 0 : p * a + q !== r * a + s && a !== 0 && (r !== p || s !== q)),
   why: "Tables of p(xⁿ − aⁿ)/(x − a) near a (n up to 4), or piecewise straight lines with a jump at a.",
@@ -1746,6 +1834,10 @@ const aulpow = F({
         ]
       : [bug("leading-terms", "conceptual", LIM, "The leading coefficients were divided, as for a limit at infinity; here x tends to a number, so factorise and cancel the common factor first.", 1), bug("zero-over-zero", "conceptual", LIM, "Direct substitution gives 0/0, which was taken as 0; 0/0 is not a value — it says a common factor must be cancelled.", 0)];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "standard": ["The standard limit of (xⁿ − aⁿ)/(x − a) is naⁿ⁻¹, so we split the expression into such pieces."], "factor": ["Putting the point in gives 0/0, so a common bracket must be hiding; factorising shows it."], "value|simplify": ["Simplifying the numbers gives the limit."], "value|substitute": ["Once the bracket that made 0/0 is cancelled, the point can be put in."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 1], [1, 7], [1, 5], [-5, 5], [-6, 6]],
   keep: ([k, n, m, a, b]) => a !== 0 && (k === 0 ? n >= 2 && n !== m && Math.abs(a) <= 4 && Math.abs(a) ** n <= 2500 && b === 0 : n === 1 && m === 1 && b !== a && b !== -a),
   why: "(xⁿ − aⁿ)/(xᵐ − aᵐ) with n up to 7, or a quadratic over x² − a² with a common factor.",
@@ -1779,6 +1871,10 @@ const auspd = F({
     bug("no-n", "recall", LIM, `The factor n = ${n} was left out: lim (tⁿ − aⁿ)/(t − a) = naⁿ⁻¹.`, c * a ** (n - 1)),
     bug("c-dropped", "procedural", LIM, `The constant ${c} in front was dropped; a constant factor stays in the limit.`, c !== 1 ? n * a ** (n - 1) : null),
   ],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "standard": ["The expression matches the standard limit (tⁿ − aⁿ)/(t − a) → naⁿ⁻¹."], "times": ["The factor outside the standard limit stays as it is."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[1, 6], [2, 4], [1, 6]],
   keep: ([c, n, a]) => c * n * a ** (n - 1) <= 900,
   why: "c from 1 to 6, powers 2 to 4 and a from 1 to 6.",
@@ -1823,6 +1919,10 @@ const aulstd = F({
     k === 4
       ? [bug("no-square", "recall", LIM, `1 − cos ${ax_(a)} behaves like (${a}x)²/2 near 0, so a² appears, not a.`, a / (2 * b)), bug("no-half", "recall", LIM, `1 − cos θ behaves like θ²/2 for small θ; the 1/2 was left out.`, (a * a) / b)]
       : [bug("upside-down", "procedural", LIM, `The fraction was turned over: the ${a} inside the function goes on top.`, b / a), bug("always-one", "conceptual", LIM, `The standard limit was used as if it were 1 here; it is 1 only when the angle (or exponent) matches the denominator exactly, so first make ${ax_(a)} appear below.`, 1)],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rewrite": ["sin θ/θ → 1 only when the angle and the bottom match, so we multiply and divide to make them match."], "value": ["Each standard part becomes 1, leaving the number in front."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 4], [1, 9], [1, 9]],
   keep: ([, a, b]) => a !== b,
   why: "The five standard forms with whole-number multipliers from 1 to 9 (different).",
@@ -1873,6 +1973,10 @@ const auliinf = F({
         ? [bug("constants", "conceptual", LIM, "The constant terms were divided; as x → ∞ the highest powers matter, and the constants become negligible.", r !== 0 ? r / t : null)]
         : [bug("leading-ratio", "conceptual", LIM, `The leading coefficients ${p} and ${s} were divided; the bottom has the higher power, so it grows much faster and the fraction tends to 0.`, p / s)],
   distractors: ([k, p, q, r, s, t]) => (k === 0 ? [p / (4 * q), (2 * p) / q] : k === 1 ? [q / s, (p + q) / s] : [q / t, 1]),
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "conjugate": ["Multiplying by the conjugate removes the square root from the top, using (a − b)(a + b) = a² − b²."], "value|substitute": ["Once the troublesome factor is cancelled, the point can be put in."], "divide": ["Dividing by the highest power of x shows which terms vanish as x grows very large."], "value|evaluate": ["Terms with 1/x shrink to 0, so only the leading numbers remain."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 2], [1, 9], [-7, 7], [-6, 6], [1, 9], [1, 6]],
   keep: ([k, p, q, r, s, t]) => (k === 0 ? q >= 1 && q <= 6 && r === 0 && s === 1 && t === 1 : k === 1 ? p !== s && q !== 0 && r !== 0 && (p + s + t) % 2 === 0 : r === 0 && q !== 0 && (p + q + s + t) % 4 === 0),
   why: "√(px + q²) − q over x at 0, and quotients of polynomials of degree up to 2 at infinity.",
@@ -1914,6 +2018,10 @@ const audsum = F({
     bug("power-not-lowered", "recall", DR, "Each term was multiplied by its power but the power was not lowered by 1: d/dx xⁿ = nxⁿ⁻¹.", sum([[n * a, xpw(n)], [2 * b, "x²"], [c, "x"]])),
     bug("power-not-multiplied", "recall", DR, "The powers were lowered but the coefficients were not multiplied by the old power.", sum([[a, xpw(n - 1)], [b, "x"], [c, ""]])),
   ],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "terms": ["The derivative of a sum is the sum of the derivatives, and d/dx(xⁿ) = nxⁿ⁻¹."], "sum": ["Adding the parts gives the derivative."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[1, 5], [3, 6], [-6, 6], [-9, 9], [1, 99]],
   keep: ([, , b, c, d]) => b !== 0 && c !== 0 && d % 3 === 0,
   why: "A polynomial axⁿ + bx² + cx + d with n from 3 to 6 and every term present.",
@@ -1968,6 +2076,10 @@ const audquo = F({
       bug("not-squared", "recall", DR, "The bottom was not squared; the quotient rule divides by v².", over(q.num, q.den)),
       bug("derivative-over-derivative", "conceptual", DR, "The derivative of the top was divided by the derivative of the bottom; a quotient is not differentiated part by part.", over(q.top, q.bot)),
     ];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rule": ["The function is one expression divided by another, so the quotient rule is used."], "apply": ["Putting u, v and their derivatives into the rule and simplifying gives the answer."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 3], [1, 5], [-6, 6], [1, 5], [-6, 6]],
   // k = 1, 2: x + b ≠ 0 near the sample points (b ≥ 1 or b ≤ −3)
@@ -2038,6 +2150,10 @@ const audch = F({
     if (k === 4) return [`${mono(a, 1)}/(${inner})`, `(${inner})/(${2 * a}x)`];
     const cs = n === 2 ? `cos(${ax})` : `cos^${n - 1}(${ax})`;
     return [`−${a} ${cs} sin(${ax})`, `−${n * a} cos^${n}(${ax}) sin(${ax})`];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rule": ["The function is one function inside another, so the chain rule is used."], "apply": ["Differentiate the outside, keep the inside, then multiply by the inside's derivative."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 5], [1, 5], [-5, 9], [2, 6]],
   keep: ([k, a, b, n]) => (k === 0 ? b !== 0 && a >= 2 : k === 5 ? b === 1 && n <= 4 && a >= 2 : n === 2 && (k === 2 || k === 4 ? b >= 1 : k === 3 ? b >= -3 && b <= 3 : b !== 0)),
@@ -2116,6 +2232,10 @@ const audinv = F({
     if (k === 4) return [a > c ? xe1(a - c) : `1/${xe1(c - a)}`, a > c ? mono(a / c, a - c - 1) : `${a}/(${c}${xe1(c - a + 1)})`];
     return [`tan(${ax})`, `−cosec^2(${ax})`];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rule": ["These are the standard derivatives of the inverse sine and cosine; u′ comes from the chain rule."], "simplify": ["Tidying the square root gives the simplest form."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 5], [1, 9], [1, 6]],
   keep: ([k, a, c]) => (k <= 2 ? a >= 3 : k === 3 ? a >= 2 : k === 4 ? a >= 2 && a <= 7 && c >= 2 && c <= 5 && a !== c && gcd(a, c) === 1 : c === 1),
   why: "c·sin⁻¹(x/a), c·cos⁻¹(x/a), c·tan⁻¹(x/a), c·tan⁻¹(ax), xᵃ with respect to xᶜ, and sin ax with respect to cos ax.",
@@ -2176,6 +2296,10 @@ const audel = F({
         : k === 2
           ? [`${mono(c * a, a - 1)} log x + ${c}/x`, `${mono(c * a, a - 1)} log x − ${mono(c, a - 1)}`]
           : [`${cf(c * a)}${eax(a)} log x − ${cf(c)}${eax(a)}/x`, a > 1 ? `${cf(c)}${eax(a)} log x + ${cf(c)}${eax(a)}/x` : `${cf(c)}x ${eax(a)} log x`],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rule": ["These are the standard derivatives of the exponential and the logarithm."], "apply": ["Each term is differentiated with its rule and the results are added."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 3], [1, 9], [1, 6], [-6, 6]],
   keep: ([k, a, c, d]) => (k === 0 ? a <= 5 && d !== 0 : k === 1 ? a >= 2 && d === 1 && a !== 4 && a !== 8 && a !== 9 : k === 2 ? a >= 2 && a <= 5 && d === 1 : a <= 5 && d === 1),
   why: "c·e^(ax) + d log x, c·aˣ, c·xᵃ log x and c·e^(ax) log x with small whole numbers.",
@@ -2238,6 +2362,10 @@ const audt3 = F({
       bug("entrywise", "conceptual", "MATH.algebra.matrices", "The matrices were multiplied entry by entry; matrix multiplication combines rows with columns (or use |AB| = |A||B|).", det2(a * p, b * q, c * r, d * s)),
     ];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "expand": ["A 3 × 3 determinant is found by expanding along a row: each entry times its cofactor, with signs + − +."], "value": ["Adding the three parts gives the determinant."], "each": ["We find each determinant on its own first."], "product": ["The determinant of a product is the product of the determinants."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 1], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4]],
   keep: ([k, ...e]) => (k === 0 ? e.filter((x) => x === 0).length <= 2 && cof3(rows3(e)) !== 0 : e[8] === 0 && det2(e[0], e[1], e[2], e[3]) !== 0 && det2(e[4], e[5], e[6], e[7]) !== 0 && e.slice(0, 8).filter((x) => x === 0).length <= 1),
   why: "3 × 3 matrices with entries from −3 to 4 (at most two zeros), or two 2 × 2 matrices for |AB|.",
@@ -2298,6 +2426,10 @@ const audk = F({
       bug("no-half", "recall", DET, "The determinant was set equal to the area; the area is half the absolute value of the determinant, so the determinant is ± twice the area.", [(A - be) / al, (-A - be) / al]),
       bug("one-sign", "conceptual", DET, "Only the positive value of the determinant was used; the absolute value means the determinant can be + or − twice the area, which gives two positions for the vertex.", [r[0]]),
     ];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "det": ["The area of a triangle is half the determinant made from its corners' coordinates, without the sign."], "equation": ["The determinant can be positive or negative, so both signs give an equation."], "solve": ["Solving each equation gives the possible values of k."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [-5, 5]],
   keep: (p) => {
@@ -2389,6 +2521,10 @@ const audsg = F({
     ];
   },
   distractors: (p) => [sgK(p) + 1, sgK(p) - 1, -sgK(p)],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "condition": ["A singular matrix has no inverse, which happens exactly when its determinant is 0."], "expand": ["Expanding the determinant gives an expression in k."], "solve": ["Setting it equal to 0 gives k."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 1], [0, 8], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4]],
   keep: (p) => {
     const [a, b] = sgAB(p);
@@ -2456,6 +2592,10 @@ const auinv = F({
     const m = rows3(e);
     const D = cof3(m);
     return [matR(adj3(m), -D), mat(m.map((r) => r.map((x) => -x)))];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "det": ["The inverse divides by the determinant, so it must not be 0."], "adj": ["The adjoint is the transpose of the matrix of cofactors; it is the main part of the inverse."], "inverse": ["A⁻¹ = adj A ÷ |A|, because A × adj A = |A| × I."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3], [-2, 3]],
   keep: (e) => {
@@ -2528,6 +2668,10 @@ const austd = F({
     const [a2, m2] = STD[j].F(n);
     return [antiSum([[-c1 * a1, m1], [c2 * a2, m2]]), antiSum([[c1 * a1, m1], [-c2 * a2, m2]])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "each": ["The integral of a sum is the sum of the integrals, and each term has a standard integral."], "sum": ["Constants stay in front, and + C is added because many functions have the same derivative."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 6], [1, 7], [-6, 6], [-6, 6], [2, 6]],
   keep: ([i, j, c1, c2, n]) => i < j && c1 !== 0 && c2 !== 0 && (i === 0 ? true : n === 2) && !(i === 3 && j === 7) && !(i === 6 && j === 7),
   why: "Two of xⁿ, sin x, cos x, sec²x, eˣ, 1/x, cosec²x and sec x tan x, with whole-number coefficients.",
@@ -2581,6 +2725,10 @@ const aulax = F({
     ...(p[0] === 0 ? [bug("power-not-divided", "recall", IND, `The new power ${p[3] + 1} was not used to divide.`, `(${nf(1 / p[1])})(${lxIn(p)})^${p[3] + 1} + C`.replace(/^\(1\)/, ""))] : []),
   ],
   distractors: (p) => [lxF(p, -p[1]), lxF(p, 2 * p[1])],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "rule": ["When x is replaced by ax + b, the chain rule in reverse means we divide by a."], "apply": ["We integrate the outer form and divide by a."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 4], [2, 6], [-5, 5], [2, 5]],
   keep: ([k, , b, n]) => b !== 0 && (k === 0 ? true : n === 2),
   why: "(ax + b)ⁿ, cos(ax + b), sin(ax + b), e^(ax + b) and 1/(ax + b) with a from 2 to 6.",
@@ -2628,6 +2776,10 @@ const auinit = F({
     bug("powers-not-divided", "recall", IND, "The powers were raised but not divided by the new power.", sum([[P[0], "x³"], [P[1], "x²"], [P[2], "x"], [P[4] - (P[0] + P[1] + P[2]) * P[3], ""]])),
   ],
   distractors: (P) => [initStr(P, initC(P) + 1), initStr(P, -initC(P))],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "integrate": ["Integrating the derivative gives the function, up to an unknown constant C."], "constant": ["The given value fixes C, because only one constant makes the function pass through that point."], "answer": ["Putting C back gives the function."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 6], [-6, 6], [1, 20], [0, 1], [5, 60]],
   keep: ([p, q, , , v]) => (p !== 0 || q !== 0) && v % 5 === 0,
   why: "Quadratic derivatives with small whole-number coefficients and one value of f at x = 0 or x = 1.",
@@ -2715,6 +2867,10 @@ const autrig = F({
     if (k === 4) return [`log|${sum([[2 * a, "x"], [b, ""]])}| + C`, `2log|${sum([[a, "x²"], [b, "x"], [c, ""]])}| + C`];
     const inner = sum([[a, "x²"], [b, ""]]);
     return [`${sum([[1 / a, `sin(${inner})`]])} + C`, `${sum([[-1 / (2 * a), `sin(${inner})`]])} + C`];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "identity": ["sin²θ has no simple integral, but the double-angle identity turns it into terms that do."], "integrate": ["Each term is now a standard integral."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 5], [1, 6], [-6, 6], [-9, 9]],
   // k = 0, 1, 3: c (1 to 4) is a factor in front
@@ -2810,6 +2966,10 @@ const auform = F({
     const first = `${p === 2 ? "" : p % 2 === 0 ? p / 2 : `(${rat(p, 2)})`}log|${sfQuad(P)}|`;
     return [`${first} ${B < 0 ? "+" : "−"} (${rat(Math.abs(B), 2 * a)})${L} + C`, `${cf(p)}log|${sfQuad(P)}| ${B < 0 ? "−" : "+"} (${rat(Math.abs(B), 2 * a)})${L} + C`];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "square": ["Completing the square turns the bottom into a standard form u² ± a²."], "form": ["This standard integral matches the shape we made."], "answer": ["Putting u and a back gives the answer."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 6], [1, 9], [-4, 4], [1, 6], [-6, 6]],
   // k = 1, 3: p is a whole-number factor in front; k = 5, 6: b = a up to 9
   keep: ([k, a, h, p, q]) => k >= 5 ? h === 0 && q === 0 && a >= 2 && gcd(a, p) === 1 && p / a < 0.62 : a <= 6 && (k === 1 || k === 3 ? h === 0 && q === 0 : k === 4 ? h * h !== a * a && q - p * h !== 0 && h !== 0 : h * h !== a * a && p === 1 && q === 0) && (k === 1 ? a >= 3 : true),
@@ -2876,6 +3036,10 @@ const aupi = F({
     return [piQ(2 * n, d), piQ(n, 2 * d), rat(n, d)];
   },
   range: [0, Infinity],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "form": ["This standard integral matches the shape of the integrand."], "value": ["Putting in the limits gives a known angle in radians."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 4], [1, 9], [1, 6]],
   keep: ([k, , c]) => (k === 2 ? c === 1 : true),
   why: "Five definite standard forms with a from 1 to 9 and a whole-number factor up to 6.",
@@ -2939,6 +3103,10 @@ const aupfr = F({
     const L = (c: number, r: number) => sum([[c, `log|${xm(r)}|`]]);
     if (k === 0) return [`${L(A, a)} ${-B > 0 ? "+" : "−"} ${Math.abs(B)}/${br(xm(a))}^2 + C`, `${A !== B ? L(A - B, a) : L(A, a)} + C`];
     return [`x + ${L(A, a)} ${-B > 0 ? "+" : "−"} ${L(Math.abs(B), b)} + C`.replace(/\+ −/g, "− "), `${sum([[1 / 2, "x²"], [A, `log|${xm(a)}|`], [B, `log|${xm(b)}|`]])} + C`];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "split": ["Splitting into partial fractions turns one hard fraction into simple ones we can integrate."], "integrate": ["Each simple fraction has a standard integral."], "divide": ["Partial fractions need the top's degree to be less than the bottom's, so we divide first."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 1], [-3, 3], [-3, 3], [-5, 5], [-5, 5]],
   keep: ([k, a, b, A, B]) => A !== 0 && B !== 0 && (k === 0 ? b === 0 : a < b),
@@ -3035,6 +3203,10 @@ const auparts = F({
       k === 5 ? [[c / a, `x² ${E}`], [(-2 * c) / a ** 2, `x ${E}`], [(2 * c) / a ** 3, E]] : [[c / a, `x² sin(${ax})`], [(2 * c) / a ** 2, `x cos(${ax})`], [(-2 * c) / a ** 3, `sin(${ax})`]];
     return [S([t[0], t[1], [-t[2][0], t[2][1]]]), S([t[0], [t[1][0] / 2, t[1][1]], [t[2][0] / 2, t[2][1]]])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "choose": ["Integration by parts turns ∫ u dv into uv − ∫ v du; we choose u so that differentiating makes it simpler."], "answer": ["The new integral is easier, so it can be finished."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 6], [1, 5], [0, 4], [1, 4]],
   keep: ([k, , n]) => (k === 3 ? true : n === 0),
   why: "x e^(ax), x sin ax, x cos ax, xⁿ log(ax), eˣ[f + f′], x² e^(ax) and x² cos ax with small whole numbers.",
@@ -3081,6 +3253,10 @@ const ausbd = F({
       bug("missed-half", "procedural", IM, "du = 2t dt, so t dt = du/2; the factor 1/2 was left out.", 2 * c * (h - d)),
     ];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "sub": ["Substituting u for the inside makes the integral simpler, and du takes care of the rest; the limits change to u values."], "integrate": ["The integral in u is a standard one."], "value": ["Putting in the new limits gives the answer directly."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 15], [1, 6]],
   why: "Upper limits and constants that make b² + k² a perfect square, with c from 1 to 6.",
   difficulty: ([j]) => (j <= 1 ? 1 : j >= 12 ? 3 : 2),
@@ -3124,6 +3300,10 @@ const audfp = F({
       bug("powers-not-divided", "recall", IND, "The powers were raised without dividing by the new powers.", p * (b ** 3 - a ** 3) + q * (b * b - a * a) + r * (b - a)),
       bug("integrand-difference", "conceptual", DEF, "The integrand itself was evaluated at the limits; the antiderivative must be used.", p * (b * b - a * a) + q * (b - a)),
     ];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "anti": ["A definite integral is worked out from an antiderivative."], "ftc": ["The fundamental theorem of calculus says the integral is F at the top limit minus F at the bottom."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 3], [-4, 6], [0, 9], [0, 3], [1, 6]],
   keep: ([p, q, r, a, b]) => b > a && (p !== 0 || q !== 0) && [0, 0.25, 0.5, 0.75, 1].every((t) => p * (a + t * (b - a)) ** 2 + q * (a + t * (b - a)) + r > 0),
@@ -3185,6 +3365,10 @@ const aurie = F({
   distractors: (P) => {
     const x = constOf(rsAns(P));
     return P[0] === 2 ? [piQ(P[1], 8), piQ(P[1], 1)] : [fmt(2 * x).replace(/-/g, "−"), fmt(x + 1).replace(/-/g, "−"), fmt(x / 2).replace(/-/g, "−")];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "riemann": ["A sum of thin strips of width 1/n becomes an integral as n grows, so we read off the function and limits."], "value": ["Working out the integral gives the limit of the sum."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[0, 3], [1, 9], [0, 6], [1, 5]],
   keep: ([k, p, q, m]) => (k <= 1 ? m === 1 : k === 2 ? q === 0 && m === 1 : q === 0 && m >= 2 && p <= 6),
@@ -3269,6 +3453,10 @@ const audbe = F({
     const opts = [...new Set(out)].filter((x) => x !== ans && x !== "0");
     return (opts.length >= 2 ? opts : [...opts, times(2 * c, v)]).slice(0, 3);
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "method": ["Bernoulli's formula repeats integration by parts in one go, which is quick when u is a power of x."], "evaluate": ["The definite integral is the value at the top limit minus the value at the bottom."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 3], [0, 3], [1, 9]],
   keep: ([k, n]) => !!beData(k, n),
   why: "xⁿeˣ on [0, 1], xⁿ cos x on [0, π/2], xⁿ sin x on [0, π] and xⁿ log x on [1, e], with powers up to 3 and a factor up to 9.",
@@ -3350,6 +3538,10 @@ const auinvf = F({
     if (k === 4) return [anti([[c / 2, `log(x² + ${a * a})`], [-q / a, T1(a)]]), anti([[c / 2, `log(x² + ${a * a})`], [a > 1 ? q / (a * a) : q / 2, T1(a)]])];
     return [anti([[c / 2, `x√(${a * a} − x²)`], [-(c * a * a) / 2, S1(a)]]), anti([[c, `x√(${a * a} − x²)`], [c * a * a, S1(a)]])];
   },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "shape": ["Matching the integrand with a standard form tells us which formula to use."], "form": ["This standard integral matches the shape of the integrand."], "answer": ["Putting u and a in gives the answer."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   domain: [[0, 5], [1, 7], [-3, 3], [1, 6], [-6, 6]],
   keep: ([k, a, h, c, q]) =>
     k === 0 ? h === 0 && q === 0 : k === 1 ? a >= 3 && h === 0 && q === 0 : k === 2 ? h !== 0 && q === 0 : k === 3 ? a >= 4 && Math.abs(h) === 1 && q === 0 : k === 4 ? h === 0 && q !== 0 && a <= 6 : a >= 3 && h === 0 && q === 0,
@@ -3411,6 +3603,10 @@ const auprq = F({
   distractors: (P) => {
     const ans = pqAns(P).replace(/ \+ C$/, "");
     return [`−(${ans}) + C`, `2(${ans}) + C`];
+  },
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "split": ["Partial fractions break the fraction into simple parts; a quadratic factor that will not factorise gets a top of the form Bx + C."], "parts": ["Each simple part has a standard integral."], "answer": ["Adding the parts and + C gives the answer."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
   },
   domain: [[-3, 3], [1, 4], [-4, 4], [-4, 4], [-6, 6]],
   keep: ([r, a, A, B, C]) => A !== 0 && C !== 0 && B !== 0 && a !== 1 && A + B !== 0 && Math.abs(A * a * a - C * r) <= 60,

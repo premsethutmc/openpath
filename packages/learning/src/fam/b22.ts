@@ -201,6 +201,11 @@ const P1: Def[] = [
           ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "takes": ["Dividing asks how many times one number fits into another. Taking it away again and again, and counting, answers exactly that."],
+        "division": ["The count of take-aways is the answer to the division, and whatever is left over is the remainder."],
+      }),
     explain: (s) => (s.id === "takes" ? `${s.inputs[0]} − ${s.inputs[1]} − ${s.inputs[1]} − … : ${s.inputs[1]} is taken away ${s.inputs[2]} times and ${s.value} is left` : `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.inputs[2]}${s.inputs[3] ? ` remainder ${s.inputs[3]}` : ""}`),
     domain: D_RSUB,
     keep: K_RSUB,
@@ -260,6 +265,12 @@ const P1: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "groups": ["Multiplication and division are opposites. A multiplication fact with the same three numbers shows the division."],
+        "undo": ["If groups of a size make the total, then sharing the total into groups of that size undoes it and gives back the number of groups."],
+        "pick": ["Pick the option with the fact that uses the same three numbers."],
+      }),
     explain: (s) => (s.id === "groups" ? `${s.inputs[0]} groups of ${s.inputs[1]} make ${s.value}` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `So ${s.inputs[0]} shared into groups of ${s.inputs[1]} gives ${s.value}: ${s.inputs[1]} × ${s.value} = ${s.inputs[0]}`),
     domain: D_DFACT,
     keep: ([d, q]) => d !== q,
@@ -314,6 +325,15 @@ const P1: Def[] = [
               { id: "only-half", kind: "procedural", competency: MT, says: `Only the half (5 × ${b}) was given; the 10 × ${b} part must be added.`, predict: 5 * b },
             ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ten": ["Splitting a number into ten and the rest makes a hard multiplication into two easy ones. Times ten is easy."],
+        "rest": ["Now multiply the small part, which is a fact we already know."],
+        "join": ["Multiplying each part and adding gives the same as multiplying the whole number, because multiplication spreads over addition."],
+        "half": ["A table can be built from a smaller one: start from the fact for half the number."],
+        "double": ["Doubling the number doubles the product, so double the known fact."],
+        "halve": ["Halving the number halves the product, so take half of the known fact."],
+      }),
     explain: (s) => (s.id === "double" ? `Double it: 2 × ${s.inputs[1]} = ${s.value}` : s.id === "halve" ? `Half of ${s.inputs[0]} is ${s.value}` : s.id === "join" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: D_TAB,
     keep: K_TAB,
@@ -370,6 +390,12 @@ const P1: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "swap": ["Swapping the order of a multiplication does not change the answer, so use the order that is easier."],
+        "round": ["Rounding one number to a nearby multiple of ten makes the multiplication easy."],
+        "adjust": ["The rounded number had a few extra or too few groups, so take them away or add them back."],
+      }),
     explain: (s) => (s.id === "swap" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "round" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.op === "subtract" ? "−" : "+"} ${s.inputs[1]} = ${s.value}`),
     domain: D_STRAT,
     keep: K_STRAT,
@@ -431,6 +457,12 @@ const P1: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "tens": ["Splitting a number into tens and ones makes two easier multiplications. Do the tens part first."],
+        "ones": ["Then multiply by the ones part."],
+        "sum": ["Multiplying each part and adding gives the whole product, because multiplication spreads over addition."],
+      }),
     explain: (s) => (s.id === "sum" ? `Add the partial products: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: D_PP,
     keep: K_PP,
@@ -507,6 +539,10 @@ const P1: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "carry"
+        ? ["Each diagonal is one place value: ones, tens, hundreds and so on. When a diagonal total is 10 or more, carry the tens digit into the next diagonal on the left."]
+        : ["Each box holds a product split into tens and ones. Numbers on the same diagonal have the same place value, so they can be added."],
     explain: (s) => (s.id === "carry" ? `Diagonal totals ${[...(s.inputs as number[])].reverse().join(", ")} (from the left), carried into place: ${s.value}` : `Diagonal ${Number(s.inputs[0]) + 1} from the right adds up to ${s.value}`),
     // level@1: lattice multiplication is a Grade 4 method (not taught in CBSE or TN Grade 7): review only
     grade: () => 4,
@@ -587,6 +623,14 @@ const P1: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "long": ["Long division shares the number one place at a time, from the largest place down, carrying what is left to the next place."],
+        "back": ["Multiplying the quotient by the divisor shows how much has been shared out."],
+        "left": ["What is not shared out is the remainder; it must be smaller than the divisor."],
+        "dq": ["Division and multiplication undo each other. To check, or to find the number divided, multiply the divisor by the quotient."],
+        "plus": ["Add the remainder back on, because it was left over from the division."],
+      }),
     explain: (s) => (s.id === "long" ? `${s.inputs[0]} ÷ ${s.inputs[1]}: the quotient is ${s.value}` : s.id === "back" || s.id === "dq" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "left" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} is the remainder` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: D_DIV,
     keep: K_DIV,
@@ -654,6 +698,12 @@ const P1: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "join"
+        ? ["Dividing each part and adding gives the same as dividing the whole number, because division spreads over addition."]
+        : String(s.id).startsWith("h")
+          ? ["Dividing by a number like 4 or 8 is the same as halving again and again, which is easy to do in your head."]
+          : ["Split the number into parts that the divisor goes into easily, and divide each part."],
     explain: (s) => (s.id === "join" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.op === "divide" && String(s.id).startsWith("h") ? `Half of ${s.inputs[0]} is ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: D_MDIV,
     keep: K_MDIV,
@@ -873,6 +923,12 @@ const P2: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "parts": ["Folding the other way cuts every strip into the same number of parts, so the whole sheet has strips times parts small pieces."],
+        "coloured": ["Each coloured strip is now cut into that many small parts too."],
+        "equal": ["The coloured paper has not changed, only the way it is cut. So the two fractions show the same amount and are equal."],
+      }),
     explain: (s) => (s.id === "parts" ? `${s.inputs[0]} strips × ${s.inputs[1]} parts = ${s.value} small parts in all` : s.id === "coloured" ? `${s.inputs[0]} coloured strips × ${s.inputs[1]} = ${s.value} coloured small parts` : `${s.inputs[0]}/${s.inputs[1]} = ${s.value}: the same amount is coloured`),
     domain: D_FOLD,
     keep: K_FOLD,
@@ -918,6 +974,11 @@ const P2: Def[] = [
     },
     distractors: ([a, b, k]) => [`${a}/${b * k}`, `${a + 1}/${b + 1}`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "hcf": ["A fraction is in lowest terms when the top and bottom have no common factor except 1. Dividing both by their highest common factor gets there in one go."],
+        "divide": ["Dividing the top and the bottom by the same number gives an equal fraction with smaller numbers."],
+      }),
     explain: (s) => (s.id === "hcf" ? `The highest common factor of ${s.inputs[0]} and ${s.inputs[1]} is ${s.value}` : `Divide the top and the bottom by ${s.inputs[2]}: ${s.value}`),
     domain: D_LOW,
     keep: K_LOW,
@@ -964,6 +1025,10 @@ const P2: Def[] = [
       { id: "equal-means-like", kind: "conceptual", competency: EQF, says: "Equal (equivalent) fractions were taken as like fractions; they show the same amount, but their denominators differ, so they are unlike.", predict: likePerm(p).indexOf(2) },
     ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "bottoms": ["Like fractions have the same denominator, which means the whole is cut into the same number of equal parts."],
+      }),
     explain: (s) => `${s.value}: the denominators are both ${s.inputs[0]}, so the parts are the same size`,
     domain: D_LIKE,
     keep: K_LIKE,
@@ -1038,6 +1103,13 @@ const P2: Def[] = [
       return [mixedStr(n + D, D), n > D ? mixedStr(n - D, D) : mixedStr(n * 2, D)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "common": ["Fractions can be added or taken away only when the pieces are the same size, so find a common denominator."],
+        "rename": ["Write each number as an improper fraction with that denominator, multiplying top and bottom by the same number so its value does not change."],
+        "combine": ["The pieces are now the same size, so just add or take away how many pieces there are."],
+        "simplify": ["Give the answer in its simplest form, as a mixed number if it is more than 1."],
+      }),
     explain: (s) =>
       s.id === "common"
         ? `A common denominator of ${s.inputs[0]} and ${s.inputs[1]}: ${s.value}`
@@ -1102,6 +1174,13 @@ const P2: Def[] = [
             { id: "upside-down", kind: "conceptual", competency: FM, says: `The class was divided by ${a} and multiplied by ${b}; ${a}/${b} of a number means divide by ${b}, then multiply by ${a}.`, predict: (b * b * k) % a === 0 && a > 1 ? (b * b * k) / a : null },
           ]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "tops": ["Taking a fraction several times means taking that many of its pieces, so multiply the number of pieces."],
+        "keep": ["The pieces are still the same size, so the denominator stays the same."],
+        "one-part": ["A fraction of a quantity: one part is the quantity shared into as many equal parts as the denominator."],
+        "parts": ["The numerator says how many of those equal parts to take."],
+      }),
     explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} pieces: ${s.value} pieces` : s.id === "keep" ? `${s.inputs[0]} pieces of size 1/${s.inputs[1]}: ${show(s.value)}` : s.id === "one-part" ? `1/${s.inputs[1]} of ${s.inputs[0]} is ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `${s.inputs[1]} of those parts: ${s.inputs[1]} × ${s.inputs[0]} = ${s.value}`),
     domain: D_FWQ,
     keep: K_FWQ,
@@ -1163,6 +1242,12 @@ const P2: Def[] = [
           ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "both": ["The part shaded twice is the fraction of a fraction. It covers the shaded columns times the shaded rows."],
+        "all": ["The whole rectangle is cut into columns times rows small rectangles of equal size."],
+        "fraction": ["The fraction is the number shaded twice out of the total number of small rectangles."],
+      }),
     explain: (s) => (s.id === "both" ? `${s.inputs[0]} blue ${Number(s.inputs[0]) === 1 ? "column" : "columns"} × ${s.inputs[1]} yellow ${Number(s.inputs[1]) === 1 ? "row" : "rows"}: ${s.value} ${Number(s.value) === 1 ? "rectangle" : "rectangles"} shaded twice` : s.id === "all" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value} small rectangles in all` : `${s.inputs[0]} out of ${s.inputs[1]}: ${show(s.value)}`),
     domain: D_AREA,
     keep: K_AREA,
@@ -1213,6 +1298,10 @@ const P2: Def[] = [
             ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "classify": ["A statistical question expects answers that vary, so it needs data collected from many people or times. A question with one fixed answer is not statistical."],
+      }),
     explain: (s) => `“${s.inputs[0]}” is ${String(s.value).toLowerCase()}`,
     domain: D_SQ,
     difficulty: ([, kind]) => (kind === 2 ? 1 : kind === 0 ? 2 : 3),
@@ -1258,6 +1347,10 @@ const P2: Def[] = [
       ]),
     distractors: ([, , m, n]) => [`(${m + 1}, ${n})`, `(${m}, ${n + 1})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "count": ["A power says how many times a number is multiplied by itself. Count how many times each number appears."],
+      }),
     explain: (s) => `${s.inputs[0]} appears ${tm(Number(s.inputs[1]))} and ${s.inputs[2]} appears ${tm(Number(s.inputs[3]))}: ${s.inputs[0]}${sup(Number(s.inputs[1]))} × ${s.inputs[2]}${sup(Number(s.inputs[3]))}`,
     domain: D_EXPN,
     keep: K_EXPN,
@@ -1314,6 +1407,10 @@ const P2: Def[] = [
     },
     distractors: (e) => [`(${[e[1], e[0], e[2], e[3]].join(", ")})`, `(${e.map((x) => x + 1).join(", ")})`],
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "index"
+        ? ["A power says how many times a prime is used as a factor. Count how many times each prime was divided out; a prime not used has power 0."]
+        : ["Keep dividing by primes until 1 is reached. Every prime divided out is a factor, and together they multiply back to the number."],
     explain: (s) => (s.id === "index" ? `Count each prime: 2${sup(Number(s.inputs[0]))} × 3${sup(Number(s.inputs[1]))} × 5${sup(Number(s.inputs[2]))} × 7${sup(Number(s.inputs[3]))}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: D_PPF,
     keep: K_PPF,
@@ -1353,6 +1450,12 @@ const P2: Def[] = [
         { id: "zero-power-base", kind: "conceptual", competency: EXP, says: "A zero power was taken as the number itself; a⁰ = 1, because a⁰ = aᵐ ÷ aᵐ.", predict: f === 0 ? a : f === 1 ? k * a : f === 2 ? a + k : f === 3 ? a ** (m + 1) : k * a },
       ]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "subtract-powers": ["When dividing powers of the same base, the powers are subtracted, because the factors on top and bottom cancel."],
+        "zero": ["Any non-zero number divided by itself is 1, so a power of 0 must mean 1."],
+        "value": ["So the whole expression is 1."],
+      }),
     explain: (s) => (s.id === "subtract-powers" ? `Same base, so subtract the powers: ${s.inputs[1]} − ${s.inputs[2]} = 0` : s.id === "zero" ? `${s.inputs[0]}⁰ = 1` : `So ${s.inputs[0]} = ${s.value}`),
     domain: D_ZERO,
     keep: K_ZERO,
@@ -1413,6 +1516,13 @@ const P2: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "index": ["A fractional power means a root: the bottom of the fraction is the root and the top is the power."],
+        "root": ["Taking the root first keeps the numbers small."],
+        "power": ["Then raise the root to the power on top of the fraction."],
+        "reciprocal": ["A negative power means 1 divided by the positive power."],
+      }),
     explain: (s) => (s.id === "index" ? `The power inside over the root: x^(${s.inputs[0]}/${s.inputs[1]})` : s.id === "root" ? `The ${s.inputs[1] === 2 ? "square" : s.inputs[1] === 3 ? "cube" : `${s.inputs[1]}th`} root of ${s.inputs[0]} is ${s.value}` : s.id === "power" ? `${s.inputs[0]}${sup(Number(s.inputs[1]))} = ${s.value}` : `The negative power gives the reciprocal: 1/${s.inputs[1]}`),
     domain: D_FEXP,
     keep: K_FEXP,
@@ -1505,6 +1615,16 @@ const P2: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "add": ["Only the remainders affect the remainder of a sum, since the multiples of the divisor divide exactly. So add the remainders."],
+        "mult": ["Only the remainders affect the remainder of a product, since every other part is a multiple of the divisor. So multiply the remainders."],
+        "reduce": ["If that result is not smaller than the divisor, divide again to get a true remainder."],
+        "multiple": ["Start from the nearest multiple of the divisor, because it leaves remainder 0."],
+        "next": ["Adding the wanted remainder to a multiple gives a number with that remainder. If it is too small, add the divisor again."],
+        "first": ["Numbers with the same remainder come once in every block of divisor-many numbers, starting from the first one."],
+        "count": ["They come every divisor-many numbers, so dividing and rounding down counts the steps, and 1 more counts the first number."],
+      }),
     explain: (s) =>
       s.id === "add" || s.id === "mult"
         ? `The remainders ${s.id === "add" ? "added" : "multiplied"}: ${s.value}`
@@ -1690,6 +1810,13 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "round-a": ["Rounding to the greatest place gives a number with one non-zero digit, which is easy to multiply."],
+        "round-b": ["Round the second number the same way."],
+        "digits": ["Multiply the non-zero digits first."],
+        "zeros": ["Every zero is a factor of 10, so put all the zeros back on the end."],
+      }),
     explain: (s) => (s.id === "round-a" || s.id === "round-b" ? `${ind(Number(s.inputs[0]))} rounds to ${ind(Number(s.value))}` : s.id === "digits" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `Put back the zeros: ${ind(Number(s.inputs[0]))} × ${s.inputs[1]} = ${ind(Number(s.value))}`),
     domain: D_PEST,
     keep: K_PEST,
@@ -1761,6 +1888,15 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "fraction": ["A percentage compares a part with the whole, so first write the part as a fraction of the original."],
+        "percent": ["Per cent means per hundred, so multiply the fraction by 100."],
+        "change": ["A percentage increase or decrease compares the change with the original, so find the change first."],
+        "part": ["A percentage of a number is that many hundredths of it."],
+        "new|add": ["An increase is added to the original amount."],
+        "new|subtract": ["A decrease is taken away from the original amount."],
+      }),
     explain: (s) => (s.id === "change" ? `The change: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "fraction" ? `As a fraction of the original: ${s.inputs[0]}/${s.inputs[1]}` : s.id === "percent" ? `Times 100: ${s.value}%` : s.id === "part" ? `${s.inputs[0]}% of ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}`),
     domain: D_PCTOF,
     keep: K_PCTOF,
@@ -1840,6 +1976,14 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pays": ["A discount is a percentage of the marked price, so the customer pays the rest of 100%."],
+        "mp": ["We know what that percentage of the marked price is in rupees. Find 1% and then 100%."],
+        "cp": ["Overheads such as repairs or transport are part of what the item cost, so add them to the price paid."],
+        "gain": ["Profit is selling price minus cost price."],
+        "percent": ["Profit percentage compares the profit with the cost price, so divide by the cost price and multiply by 100."],
+      }),
     explain: (s) => (s.id === "cp" ? `Cost price = price paid + overheads: ${s.inputs[0]} + ${s.inputs[1]} = ₹${s.value}` : s.id === "gain" ? `${s.inputs[0]} − ${s.inputs[1]} = ₹${s.value}` : s.id === "percent" ? `${s.inputs[0]} ÷ ${s.inputs[1]} × 100 = ${s.value}%` : s.id === "pays" ? `The shirt sells for ${s.value}% of its marked price` : `${s.value}% of the marked price is ₹${s.inputs[0]}, so the marked price is ₹${s.inputs[0]} ÷ ${s.inputs[1]} × 100 = ₹${s.value}`),
     domain: D_MARK,
     keep: K_MARK,
@@ -1896,6 +2040,13 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "first": ["The total cost of each kind is its amount times its price per unit."],
+        "second": ["Do the same for the second kind."],
+        "total": ["The mixture costs the two totals together."],
+        "share": ["The price per unit of the mixture is the total cost shared over the total amount. That is a weighted average, not the plain average of the two prices."],
+      }),
     explain: (s) => (s.id === "total" ? `Total: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "share" ? `Per unit of the mixture: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: D_MIX,
     keep: K_MIX,
@@ -1946,6 +2097,13 @@ const P3: Def[] = [
           : [{ id: "differences-differ", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "The differences were compared and found unequal; in a proportion the ratios are equal, so the differences usually are not.", predict: pr.indexOf(1) }];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "extremes": ["Four numbers are in proportion when the first ratio equals the second. That is the same as the product of the outer numbers equalling the product of the middle numbers."],
+        "means": ["Now multiply the two middle numbers, the means."],
+        "compare": ["Equal products mean the numbers are in proportion; unequal products mean they are not."],
+        "pick": ["Choose the option that matches."],
+      }),
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.id === "extremes" ? `Product of the extremes: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "means" ? `Product of the means: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[0] === s.inputs[1] ? "=" : "≠"} ${s.inputs[1]}: ${String(s.value).toLowerCase()}`),
     domain: D_PRP,
     keep: K_PRP,
@@ -2005,6 +2163,11 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "product": ["In a proportion the product of the extremes equals the product of the means. Multiplying the known pair gives that product."],
+        "divide": ["The missing number times its partner must give the same product, so divide."],
+      }),
     explain: (s) => (s.id === "product" ? `Extremes × means: the known pair multiplies to ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: D_PMISS,
     keep: K_PMISS,
@@ -2063,6 +2226,12 @@ const P3: Def[] = [
         : [{ id: "both-increase", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "Both quantities increase together, but that is not enough: in direct variation y ÷ x is the same for every pair (and y = 0 when x = 0).", predict: pr.indexOf(0) }];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratios": ["Two quantities vary directly when one is always the same multiple of the other, so y ÷ x is the same for every pair."],
+        "decide": ["If every ratio is equal, they vary directly; if not, they do not."],
+        "pick": ["Choose the option that matches."],
+      }),
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, because ${s.inputs[1]}` : s.id === "ratios" ? `y ÷ x for each pair: ${s.inputs.join(", ")} — ${typeof s.value === "number" ? `all equal to ${s.value}` : "not all equal"}` : String(s.value)),
     domain: D_DIRV,
     cap: 300,
@@ -2131,6 +2300,14 @@ const P3: Def[] = [
           ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "total": ["The mean is the total shared equally, so the total is the mean times how many numbers there are."],
+        "given": ["Add the numbers we already know."],
+        "fifth": ["The missing number is whatever is needed to make up the total."],
+        "devs": ["The distances above and below the mean always balance out to zero. Adding the known ones shows how much the missing one must balance."],
+        "balance": ["The missing number's distance from the mean must cancel the others, which fixes it."],
+      }),
     explain: (s) => (s.id === "total" ? `The five numbers add up to 5 × ${s.inputs[1]} = ${s.value}` : s.id === "given" ? `The four given numbers add up to ${s.value}` : s.id === "fifth" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "devs" ? `Deviations of the four: ${(s.inputs as number[]).map((d) => (d < 0 ? `−${-d}` : `+${d}`)).join(", ")}; they add up to ${neg(Number(s.value))}` : `The fifth balances them: ${neg(Number(s.value))}`),
     domain: D_MISS,
     keep: K_MISS,
@@ -2194,6 +2371,12 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "n": ["The median is the middle value, so first count how many values there are."],
+        "cumulative": ["Running totals show which row each position in the ordered list falls in."],
+        "middle": ["Find the middle position, or the two middle positions for an even count, and read the value in that row."],
+      }),
     explain: (s) => (s.id === "n" ? `There are ${s.inputs.join(" + ")} = ${s.value} values in all` : s.id === "cumulative" ? `Running totals: ${s.inputs.join(", ")}` : (s.inputs.length === 2 ? `The number of values is even, so the median is halfway between value number ${s.inputs[0]} and value number ${s.inputs[1]}; both fall in the row of ${s.value}, so the median is ${s.value}` : `The number of values is odd, so the middle is value number ${s.inputs[0]}; it falls in the row of ${s.value}`)),
     domain: D_FMED,
     keep: K_FMED,
@@ -2259,6 +2442,12 @@ const P3: Def[] = [
               { id: "conditional-as-joint", kind: "conceptual", competency: COND, says: "P(A | B) was given as P(A ∩ B); the joint probability also needs the chance that B happens.", predict: u / v },
             ]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["Given B happened, only outcomes in B count. So the chance of A is the part of B that is also in A, divided by all of B."],
+        "complement": ["Given B, either A happens or it does not, so the two conditional probabilities add to 1."],
+        "multiply": ["Rearranging the conditional probability rule gives P(A ∩ B) = P(B) × P(A | B)."],
+      }),
     explain: (s) => (s.id === "formula" ? `P(A | B) = P(A ∩ B) ÷ P(B) = ${show(Number(s.inputs[0]))} ÷ ${show(Number(s.inputs[1]))} = ${show(s.value)}` : s.id === "complement" ? `P(A′ | B) = 1 − ${show(Number(s.inputs[1]))} = ${show(s.value)}` : `P(A ∩ B) = P(B) × P(A | B) = ${show(Number(s.inputs[0]))} × ${show(Number(s.inputs[1]))} = ${show(s.value)}`),
     domain: D_COND,
     keep: K_COND,
@@ -2333,6 +2522,15 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "first": ["Each ball is equally likely, so the chance is the number of wanted balls out of all the balls."],
+        "second": ["The first ball is not put back, so there is one fewer ball and maybe one fewer of the wanted colour."],
+        "both": ["For both to happen, the first and then the second must happen, so multiply."],
+        "rr": ["Both red means red then red, so multiply the two chances."],
+        "bb": ["Both blue means blue then blue, so multiply the two chances."],
+        "either": ["Both red and both blue cannot happen together, so add them."],
+      }),
     explain: (s) => (s.id === "first" ? `First draw: ${s.inputs[0]}/${s.inputs[1]}` : s.id === "second" ? `Second draw, given the first: ${s.inputs[0]}/${s.inputs[1]}` : s.id === "both" ? `Multiply: ${show(Number(s.inputs[0]))} × ${show(Number(s.inputs[1]))} = ${show(s.value)}` : s.id === "either" ? `Add the two ways: ${show(Number(s.inputs[0]))} + ${show(Number(s.inputs[1]))} = ${show(s.value)}` : `${show(Number(s.inputs[0]))} × ${show(Number(s.inputs[1]))} = ${show(s.value)}`),
     domain: D_DRAW,
     difficulty: ([, , mode]) => (mode === 3 ? 1 : mode === 2 ? 3 : 2),
@@ -2389,6 +2587,12 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "a": ["Volume counts the unit cubes that fill the box: length times width times height."],
+        "b": ["Count the second box the same way."],
+        "compare": ["The box with more cubes has the greater volume."],
+      }),
     explain: (s) => (s.id === "compare" ? String(s.value) : `Box ${s.id === "a" ? "A" : "B"}: ${s.inputs.join(" × ")} = ${s.value} cubes`),
     domain: D_VC,
     keep: K_VC,
@@ -2430,6 +2634,12 @@ const P3: Def[] = [
       { id: "perimeter-only", kind: "procedural", competency: RP, says: `The length of fencing (${2 * (l + w)} m) was given; each metre costs ₹${5 * k}.`, predict: 2 * (l + w) },
     ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pair": ["A rectangle has two lengths and two widths, so the distance round it is twice one length plus one width."],
+        "perimeter": ["Double that sum to go all the way round."],
+        "cost": ["Fencing is paid per metre, so multiply the perimeter by the price of one metre."],
+      }),
     explain: (s) => (s.id === "pair" ? `One length and one width: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value} m` : s.id === "perimeter" ? `Perimeter: 2 × ${s.inputs[1]} = ${s.value} m` : `${s.inputs[0]} m × ₹${s.inputs[1]} = ₹${s.value}`),
     domain: D_FENCE,
     keep: K_FENCE,
