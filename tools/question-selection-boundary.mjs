@@ -31,10 +31,6 @@ export const REGISTERED_SELECTORS = ["frontend/src/curriculum/TeachingContent.ts
       // selectable()) to rebuild the lesson page's practice candidates exactly as TeachingContent.tsx does; nothing it returns is served
       "packages/learning/src/lesson-checks.ts",
       "packages/learning/src/library.ts",
-      // mixed-practice.ts: added with mixed-practice@1 (interleaving). mixedPracticeItem asks the module's own fromPool (selectable() applied,
-      // never a question already met, grade ceiling kept) for the practice phase only, plus keyboardOffered(); checks and tests are never
-      // mixed. See frontend/src/learning/mixed-practice.test.ts
-      "packages/learning/src/mixed-practice.ts",
       // play.ts: added in a reviewed change (play@1). playPool reads modulePhasePool (selectable() applied) for the practice phase only,
       // skips every question already asked (exposureKey) and keeps the grade ceiling (withinGrade); checks and delayed checks stay fresh.
       // See frontend/src/year/play.test.ts
