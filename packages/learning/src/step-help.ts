@@ -203,6 +203,8 @@ function youngStep(family: string, s: { op: string; inputs?: unknown; value?: un
   if (s.op === "opposite" && typeof nums[0] === "number" && typeof v === "number") return { cue: `find the number as far from 0 as ${n(nums[0])}, on the other side`, ask: { lead: "The opposite is", value: n(v) } };
   if (s.op === "move" && nums.length === 2 && nums[1] !== 0 && typeof v === "number") return { cue: `start at ${n(nums[0])} and move ${Math.abs(nums[1])} to the ${nums[1] < 0 ? "left" : "right"}`, ask: { lead: "You reach", value: n(v) } };
   if (nums.length === 2 && typeof v === "number" && (s.op === "add" || s.op === "add the prices") && Math.abs(nums[0] + nums[1] - v) < 1e-9) return { cue: nums[0] === 0 ? `start with ${m(nums[1])}` : `add ${m(nums[1])} to ${m(nums[0])}`, ask: typed() };
+  // change-up@1: change that is fewer steps to count up than to take away is counted up, as the lift does it
+  if (family === "abchange" && nums.length === 2 && typeof v === "number" && v > 0 && v < nums[1] && Math.abs(nums[0] - nums[1] - v) < 1e-9) return { cue: `count up from ${m(nums[1])} to ${m(nums[0])}`, ask: typed() };
   if (nums.length === 2 && typeof v === "number" && (s.op === "subtract" || s.op === "take away") && Math.abs(nums[0] - nums[1] - v) < 1e-9) return { cue: `take ${m(nums[1])} away from ${m(nums[0])}`, ask: typed() };
   return null;
 }
