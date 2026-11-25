@@ -138,8 +138,11 @@ try {
         }
         if (c.name.startsWith("calculus teaching")) {
           // Read the lesson in the viewport, including the last mathematical line above the sticky controls.
+          // steps-everywhere@1: a worked question is a box per step, so the last line is the last step's working; a long
+          // worked question is scrolled to its last line, which must then sit above the sticky controls
           await page.locator(".lesson").evaluate(el => el.scrollIntoView({ block: "center", behavior: "instant" }));
-          const math = page.locator(".lesson .formula span").last();
+          const math = page.locator(".lesson .formula > span, .lesson .formula .sh-step-lines > div").last();
+          if (await math.count()) await math.evaluate(el => el.scrollIntoView({ block: "center", behavior: "instant" }));
           if (await math.count()) assert.ok(await math.evaluate(el => {
             const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
             const hit = document.elementFromPoint(x, y);
