@@ -179,3 +179,12 @@
 @keyframes sc-boxes-pulse { 50% { transform: scale(1.06); } }
 @keyframes sc-boxes-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .scene [class*="sc-boxes"] { animation: none !important; transition: none !important; } }
+/* boxes@1: a swipe on the board or the boxes scrolls the page; only the things themselves take the finger */
+.scene svg.scene-drag.scene-things { touch-action: pan-y pinch-zoom; }
+.scene svg.scene-things [data-tap] { touch-action: none; }
+@media (prefers-color-scheme: dark) {
+  .scene[data-scene="boxes"][data-scene-done="yes"] .scene-readout { color: #7fdc8a; }
+  .scene[data-scene="boxes"] .scene-nudge-big { color: #ffc56b; }
+}
+:root[data-theme="dark"] .scene[data-scene="boxes"][data-scene-done="yes"] .scene-readout { color: #7fdc8a; }
+:root[data-theme="dark"] .scene[data-scene="boxes"] .scene-nudge-big { color: #ffc56b; }

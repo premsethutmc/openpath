@@ -68,13 +68,15 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const speaks = ok && (scene.kind === "tally" || talks);
   const refusal = speaks && touched ? nudge(scene, state) : null;
   const lastSaid = useRef<string | null>(null);
-  const say = (t?: string) => { if (!t) return; lastSaid.current = t; sayAloud(t); };
+  // boxes@1: the instruction is said at the first tap and that tap still counts, so the two are said as one line
+  const pre = useRef<string | null>(null);
+  const say = (t?: string) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line); };
   const [doneNow, setDoneNow] = useState(false);
   // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
   const said = useRef(false);
   const sayFirst = () => { if (speaks && !said.current) { said.current = true; lastSaid.current = scene.prompt; sayAloud(scene.prompt); } };
   // boxes@1: the first tap only starts (says what to do), where the phone can speak: the mock's "Start"
-  const starting = () => { if (!talks || said.current || !canSpeak()) return false; sayFirst(); return true; };
+  const starting = () => { if (!talks || said.current || !canSpeak()) return false; said.current = true; pre.current = scene.prompt; return false; };
   useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (refusal && !talks) sayAloud(refusal); }, [refusal, state.refused]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (speaks && !talks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, talks, doneNow, scene]);
@@ -154,8 +156,8 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${box.w} ${box.h}`}
         aria-hidden={talks ? undefined : "true"}
-        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : "scene-drag") : undefined}
-        onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally")) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
+        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : scene.kind === "boxes" ? "scene-drag scene-things" : "scene-drag") : undefined}
+        onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally")) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (!dragging.current && pre.current && !(e.target as Element).closest?.("[data-tap]")) { const p = pre.current; pre.current = null; lastSaid.current = p; sayAloud(p); } if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? letGo : undefined}
         onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, live.current, -box.w, box.h)); } : undefined}

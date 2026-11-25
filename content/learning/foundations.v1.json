@@ -24195,12 +24195,8 @@
       }
      },
      "text": [
-      "3 and 2 make 5. We write 3 + 2 = 5: + is plus, = is equals."
-     ],
-     "check": {
-      "question": "What is 1 + 1?",
-      "answer": "2"
-     }
+      "Count each box. Then put them all on the board."
+     ]
     },
     {
      "title": "Ride the lift",
