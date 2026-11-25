@@ -416,3 +416,91 @@ export function boxesDraw(L: BoxesLayout, v: BoxesView): Shape[] {
   if (v.finger) text(v.finger[0], v.finger[1], "👆", "boxes-finger");
   return out;
 }
+
+/* lift@1: the lift ride (lift.ts), the approved mock. A building cut open on the left (x 0–196): a row per floor, the
+ * number at the left, the shaft with the car (Chintu in it, sliding doors), and the shop and the cars at the right. The
+ * lift panel on the right (x 206–340): the floor display, the big round ▲ and ▼ buttons (r 45: at least 84 px on a phone),
+ * and the task card ("▼ 5", a dot per floor) or the Start / Again button. Geometry only; lift.ts and scene.ts do the rest. */
+const LP = { x: 206, w: 134, cx: 273, up: 126, down: 226, r: 45, card: 282 };
+const liftDots = (n: number) => (n <= 18 ? { per: 6, r: 6.5, gap: 19 } : { per: 10, r: 4.2, gap: 11.6 });
+export function liftLayout(tiles: number[], floors: [number, number]) {
+  const rows = floors[1] - floors[0] + 1, H = Math.min(40, Math.floor((460 / rows) * 10) / 10);
+  const most = Math.max(...tiles.map((t) => Math.abs(t))), d = liftDots(most);
+  const panel = LP.card + 46 + Math.ceil(most / d.per) * d.gap + 14;
+  return { H, rows, panel, h: Math.ceil(Math.max(panel, rows * H)) + 2 };
+}
+/** Which lift button a touch at (x, y) is on: 0 up, 1 down, 2 Start / Again (when it is shown), −1 none. */
+export function liftButtonAt(x: number, y: number, start: boolean): number {
+  const near = (cy: number) => Math.hypot(x - LP.cx, y - cy) <= LP.r + 8;
+  if (near(LP.up)) return 0;
+  if (near(LP.down)) return 1;
+  if (start && x >= LP.x && y >= LP.card && y <= LP.card + 70) return 2;
+  return -1;
+}
+export interface LiftView {
+  start: number; tiles: number[]; floors: [number, number];
+  /** where the car is (between two floors while it moves) */
+  at: number; door: boolean; lit: boolean; started: boolean; finished: boolean;
+  /** the move being made, how many of its floors are pressed, the button wanted (1 up, −1 down) */
+  k: number; done: number; want: number;
+  wrong?: { b: number; odd: boolean }; held?: number; finger?: number;
+}
+export function liftDraw(v: LiftView): Shape[] {
+  const out: Shape[] = [], [lo, hi] = v.floors, L = liftLayout(v.tiles, v.floors), H = L.H;
+  const top = (f: number) => px((hi - f) * H), sign = (n: number) => (n < 0 ? `−${-n}` : `${n}`);
+  const text = (x: number, y: number, s: string, role: string) => out.push({ t: "text", x: px(x), y: px(y), s, role });
+  const here = Math.round(v.at), small = H < 24;
+  // the floors: sky above, the shop at 0, the car park below
+  for (let f = hi; f >= lo; f--) {
+    out.push({ t: "rect", x: 0, y: top(f), w: 196, h: H, role: f > 0 ? (f % 2 ? "lift-sky2" : "lift-sky") : f === 0 ? "lift-shop" : f % 2 ? "lift-park2" : "lift-park" });
+    if (H >= 10) out.push({ t: "line", x1: 0, y1: px(top(f) + H - 0.5), x2: 196, y2: px(top(f) + H - 0.5), role: "lift-floorline" });
+    if (H >= 18) {
+      const deco = f > 0 ? "▫▫" : f === 0 ? (H >= 26 ? "🛍️ shop" : "🛍️") : "🚗";
+      text(f === 0 && H >= 26 ? 156 : 172, top(f) + H / 2 + 6, deco, f === 0 ? "lift-deco-shop" : small ? "lift-deco-s" : "lift-deco");
+    }
+  }
+  if (lo <= 0 && hi >= 0) out.push({ t: "line", x1: 0, y1: px(top(0) + H), x2: 196, y2: px(top(0) + H), role: "lift-groundline" });
+  if (v.lit) out.push({ t: "rect", x: 1.5, y: px(top(here) + 1.5), w: 193, h: px(H - 3), role: "lift-lit" });
+  // the numbers: every floor when there is room, else at a steady step; the floor Chintu is on always, in gold
+  const shown = tallyLabelled(v.floors, [here], H, 0, v.start).filter((f) => f === here || Math.abs(f - here) * H >= 16);
+  if (!shown.includes(here)) shown.push(here);
+  if (lo <= 0 && hi >= 0 && Math.abs(here) * H >= 16 && !shown.includes(0)) shown.push(0);
+  for (const f of shown) {
+    const y = top(f) + H / 2;
+    if (f === here) { const bh = Math.max(14, Math.min(30, H - 4)); out.push({ t: "rect", x: 3, y: px(y - bh / 2), w: 34, h: px(bh), role: "lift-here" }); }
+    text(20, y + (small ? 4.5 : 6), sign(f), f === here ? (small ? "lift-no-here-s" : "lift-no-here") : f === 0 ? "lift-no-0" : small ? "lift-no-s" : "lift-no");
+  }
+  // the shaft and the car, with Chintu and its two doors (open: drawn back to the sides)
+  out.push({ t: "line", x1: 44, y1: 0, x2: 44, y2: px(L.rows * H), role: "lift-shaft" }, { t: "line", x1: 106, y1: 0, x2: 106, y2: px(L.rows * H), role: "lift-shaft" });
+  const ch = Math.max(16, Math.min(38, H - 2)), cy = (hi - v.at) * H + H / 2;
+  out.push({ t: "rect", x: 47, y: px(cy - ch / 2), w: 56, h: px(ch), role: "lift-car" });
+  text(75, cy + (ch >= 30 ? 8.5 : 5), "🐱", ch >= 30 ? "lift-cat" : "lift-cat-s");
+  const dw = v.door ? 26.5 : 3;
+  out.push({ t: "rect", x: 48.5, y: px(cy - ch / 2 + 1.5), w: dw, h: px(ch - 3), role: "lift-door" }, { t: "rect", x: px(101.5 - dw), y: px(cy - ch / 2 + 1.5), w: dw, h: px(ch - 3), role: "lift-door" });
+  // the panel: the display, the two buttons (the wanted one glows, the other is dimmed; a wrong one shakes)
+  out.push({ t: "rect", x: LP.x, y: 0, w: LP.w, h: L.panel, role: "lift-panel" }, { t: "rect", x: LP.x + 8, y: 8, w: LP.w - 16, h: 60, role: "lift-disp" });
+  text(LP.cx, 55, sign(here), "lift-disp-text");
+  ([[0, LP.up, 1, "▲", "Up"], [1, LP.down, -1, "▼", "Down"]] as const).forEach(([i, cy, d, glyph, label]) => {
+    const name = d > 0 ? "lift-up" : "lift-down";
+    const mod = v.wrong?.b === i ? (v.wrong.odd ? "-no" : "-no2") : v.held === i ? "-press" : v.want && v.want !== d ? "-dim" : "";
+    if (v.want === d) out.push({ t: "circle", cx: LP.cx, cy, r: LP.r + 7, role: "lift-glow" });
+    out.push({ t: "circle", cx: LP.cx, cy, r: LP.r, role: `${name}${mod}`, tap: { i, label } });
+    text(LP.cx, cy + 14, glyph, `lift-arrow${mod}`);
+  });
+  // the task card: the move ("▼ 5") and a dot per floor, filled as they are pressed; or the Start / Again button
+  if (v.started && !v.finished) {
+    const t = v.tiles[v.k], n = Math.abs(t), d = liftDots(n), rows = Math.ceil(n / d.per);
+    out.push({ t: "rect", x: LP.x + 8, y: LP.card, w: LP.w - 16, h: px(46 + rows * d.gap), role: "lift-task" });
+    text(LP.cx, LP.card + 34, `${t < 0 ? "▼" : "▲"} ${n}`, t < 0 ? "lift-task-d" : "lift-task-u");
+    for (let i = 0; i < n; i++) {
+      const row = Math.floor(i / d.per), inRow = Math.min(d.per, n - row * d.per), col = i % d.per;
+      out.push({ t: "circle", cx: px(LP.cx + (col - (inRow - 1) / 2) * d.gap), cy: px(LP.card + 52 + row * d.gap), r: d.r, role: i < v.done ? "lift-tick-on" : "lift-tick" });
+    }
+  } else {
+    out.push({ t: "rect", x: LP.x + 8, y: LP.card + 8, w: LP.w - 16, h: 56, role: "lift-go", tap: { i: 2, label: v.finished ? "Again" : "Start" } });
+    text(LP.cx, LP.card + 44, v.finished ? "↻ Again" : "▶ Start", "lift-go-text");
+  }
+  // the finger of the demonstration comes up from below onto the button wanted
+  if (v.finger !== undefined) text(LP.cx + 10, (v.want > 0 ? LP.up : LP.down) + 40 + (2 - v.finger) * 90, "👆", "lift-finger");
+  return out;
+}

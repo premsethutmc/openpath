@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { STEP_SCENE_FAMILIES, breakItDown, chainOf, stepScene } from "../../../packages/learning/src/step-scenes";
-import { check, draw, initial, met, readout, set, type Shape } from "../../../packages/learning/src/scene";
+import { check, draw, initial, isLift, met, readout, sceneBox, set, type Shape } from "../../../packages/learning/src/scene";
 import { tallyAt, tallyClicks, tallyProblems } from "../../../packages/learning/src/tally";
 import { classOfQuestion } from "../year/StepCoach";
 
@@ -107,7 +107,7 @@ test("step-scene@1: the picture's layout: labels never reach the counter, floors
   let n = 0;
   for (const fam of Object.keys(STEP_SCENE_FAMILIES)) for (const pr of pool(fam).items) {
     const s = stepScene(pr.id);
-    if (!s) continue;
+    if (!s || isLift(s)) continue;
     n++;
     for (const dropped of [0, s.tiles.length]) {
       const shapes = draw(s, set(s, initial(s), "dropped", dropped));
@@ -147,7 +147,37 @@ test("step-scene@1: the picture's layout: labels never reach the counter, floors
       }
     }
   }
+  assert.ok(n > 100, String(n));
+});
+
+test("lift@1: every lift ride of a worked question fits a phone: big buttons, floor numbers apart, the car on its floor", () => {
+  type T = Extract<Shape, { t: "text" }>;
+  let n = 0, tallest = 0;
+  for (const fam of Object.keys(STEP_SCENE_FAMILIES)) for (const pr of pool(fam).items) for (const cls of [1, 4, 6]) {
+    const s = stepScene(pr.id, cls);
+    if (!s || !isLift(s)) continue;
+    n++;
+    const box = sceneBox(s);
+    tallest = Math.max(tallest, box.h);
+    assert.ok(box.w === 340 && box.h <= 470, `${pr.id}: box ${box.h}`);
+    assert.ok(s.prompt.split(" ").length <= 6 && !/tile|drop/i.test(s.prompt), `${pr.id}: ${s.prompt}`);
+    for (const dropped of [0, s.tiles.length]) {
+      const shapes = draw(s, set(s, initial(s), "dropped", dropped));
+      for (const sh of shapes) {
+        if (sh.t === "rect") assert.ok(sh.x >= 0 && sh.x + sh.w <= 340 && sh.y >= 0 && sh.y + sh.h <= box.h, `${pr.id}: ${sh.role} outside the box`);
+        if (sh.t === "circle" && sh.tap) assert.ok(sh.r >= 45, `${pr.id}: a button of radius ${sh.r}`);
+      }
+      const nums = shapes.filter((x): x is T => x.t === "text" && x.role.startsWith("lift-no")), ys = nums.map((x) => x.y).sort((a, b) => a - b);
+      for (let i = 1; i < ys.length; i++) assert.ok(ys[i] - ys[i - 1] >= 12, `${pr.id}: floor numbers too close`);
+      const end = tallyAt(s.start, s.tiles, dropped), sign = (v: number) => (v < 0 ? `−${-v}` : String(v));
+      assert.ok(nums.some((x) => x.role.startsWith("lift-no-here") && x.s === sign(end)), `${pr.id}: the floor the lift is on is numbered in gold`);
+      assert.ok(shapes.some((x) => x.t === "text" && x.role === "lift-disp-text" && x.s === sign(end)), `${pr.id}: the display`);
+      assert.equal(shapes.filter((x) => x.t === "circle" && x.tap).length, 2, `${pr.id}: up and down`);
+      if (dropped === s.tiles.length) assert.ok(shapes.some((x) => x.t === "rect" && x.tap?.label === "Again"), `${pr.id}: Again`);
+    }
+  }
   assert.ok(n > 300, String(n));
+  console.log(`lift@1: ${n} lift rides; the tallest picture is ${tallest} high`);
 });
 
 test("young-lift@1 and change-up@1: change is counted up when that is shorter, and a Class 1–2 lift stays small", () => {

@@ -188,3 +188,63 @@
 }
 :root[data-theme="dark"] .scene[data-scene="boxes"][data-scene-done="yes"] .scene-readout { color: #7fdc8a; }
 :root[data-theme="dark"] .scene[data-scene="boxes"] .scene-nudge-big { color: #ffc56b; }
+/* lift@1: the lift ride (the approved lift mock): a building cut open (sky floors, the gold shop at 0, the grey car park
+ * below) beside a dark lift panel with big round ▲ (green) and ▼ (orange) buttons. Light and dark. */
+.scene[data-look="lift"] svg { --lf-bg: #e8f2fb; --lf-sky: #cfe6fb; --lf-sky2: #bcdaf6; --lf-park: #c9ccd3; --lf-park2: #bfc3cb; --lf-shaft: #9fb3c8; --lf-ink: #172338; --lf-panel: #2b3442; background: var(--lf-bg); max-width: 420px; margin: 0 auto; overflow: visible; -webkit-user-select: none; user-select: none; font-family: "Baloo 2", system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) {
+  .scene[data-look="lift"] svg { --lf-bg: #0e1a2b; --lf-sky: #29476b; --lf-sky2: #24405f; --lf-park: #3a3f49; --lf-park2: #343843; --lf-shaft: #55677c; --lf-ink: #eef3fb; --lf-panel: #1c2430; }
+}
+:root[data-theme="dark"] .scene[data-look="lift"] svg { --lf-bg: #0e1a2b; --lf-sky: #29476b; --lf-sky2: #24405f; --lf-park: #3a3f49; --lf-park2: #343843; --lf-shaft: #55677c; --lf-ink: #eef3fb; --lf-panel: #1c2430; }
+:root[data-theme="light"] .scene[data-look="lift"] svg { --lf-bg: #e8f2fb; --lf-sky: #cfe6fb; --lf-sky2: #bcdaf6; --lf-park: #c9ccd3; --lf-park2: #bfc3cb; --lf-shaft: #9fb3c8; --lf-ink: #172338; --lf-panel: #2b3442; }
+.scene .sc-lift-sky { fill: var(--lf-sky); }
+.scene .sc-lift-sky2 { fill: var(--lf-sky2); }
+.scene .sc-lift-shop { fill: #ffdf85; }
+.scene .sc-lift-park { fill: var(--lf-park); }
+.scene .sc-lift-park2 { fill: var(--lf-park2); }
+.scene .sc-lift-floorline { stroke: rgba(0, 0, 0, 0.08); stroke-width: 1.5; }
+.scene .sc-lift-groundline { stroke: #3b2a00; stroke-width: 4; }
+.scene .sc-lift-lit { fill: none; stroke: #f4b400; stroke-width: 3; }
+.scene .sc-lift-shaft { stroke: var(--lf-shaft); stroke-width: 3; }
+.scene [class^="sc-lift-no"] { fill: var(--lf-ink); font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; pointer-events: none; }
+.scene .sc-lift-no-s, .scene .sc-lift-no-here-s { font-size: 12px; }
+.scene .sc-lift-no-0 { fill: #3b2a00; font-size: 20px; }
+.scene .sc-lift-no-here, .scene .sc-lift-no-here-s { fill: #2b1d00; }
+.scene .sc-lift-here { fill: #f4b400; rx: 10px; }
+.scene [class^="sc-lift-deco"] { font-size: 18px; opacity: 0.85; letter-spacing: 2px; pointer-events: none; fill: var(--lf-ink); }
+.scene .sc-lift-deco-s { font-size: 12px; }
+.scene .sc-lift-deco-shop { fill: #3b2a00; }
+.scene .sc-lift-car { fill: #fff; stroke: #3a4a5e; stroke-width: 3; rx: 8px; }
+.scene [class^="sc-lift-cat"] { font-size: 24px; pointer-events: none; }
+.scene .sc-lift-cat-s { font-size: 13px; }
+.scene .sc-lift-door { fill: #c9d3de; stroke: #9aa9ba; stroke-width: 1; pointer-events: none; }
+.scene .sc-lift-panel { fill: var(--lf-panel); rx: 18px; }
+.scene .sc-lift-disp { fill: #0b0f14; rx: 10px; }
+.scene .sc-lift-disp-text { fill: #f4b400; font-size: 46px; font-weight: 800; font-variant-numeric: tabular-nums; pointer-events: none; }
+.scene [class^="sc-lift-up"], .scene [class^="sc-lift-down"] { stroke: rgba(0, 0, 0, 0.2); stroke-width: 4; cursor: pointer; outline: none; filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0.27)); transform-box: fill-box; transform-origin: center; }
+.scene [class^="sc-lift-up"] { fill: #1f9d55; }
+.scene [class^="sc-lift-down"] { fill: #d9622b; }
+.scene [class^="sc-lift-up"]:focus-visible, .scene [class^="sc-lift-down"]:focus-visible, .scene .sc-lift-go:focus-visible { stroke: #f4b400; stroke-width: 5; }
+.scene .sc-lift-up-press, .scene .sc-lift-down-press { transform: translateY(3px); filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.27)); }
+.scene .sc-lift-up-dim, .scene .sc-lift-down-dim, .scene .sc-lift-arrow-dim { opacity: 0.35; }
+.scene [class^="sc-lift-arrow"] { fill: #fff; font-size: 40px; font-weight: 800; pointer-events: none; transform-box: fill-box; transform-origin: center; }
+.scene .sc-lift-glow { fill: none; stroke: #f4b400; stroke-width: 5; transform-box: fill-box; transform-origin: center; animation: sc-lift-pulse 1s ease-in-out infinite; pointer-events: none; }
+.scene [class^="sc-lift"][class$="-no"] { animation: sc-lift-no 0.45s; }
+.scene [class^="sc-lift"][class$="-no2"] { animation: sc-lift-no2 0.45s; }
+.scene .sc-lift-task { fill: rgba(255, 255, 255, 0.07); rx: 12px; }
+.scene .sc-lift-task-d { fill: #ff9b6b; font-size: 30px; font-weight: 800; pointer-events: none; }
+.scene .sc-lift-task-u { fill: #6fe39a; font-size: 30px; font-weight: 800; pointer-events: none; }
+.scene .sc-lift-tick { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 2; }
+.scene .sc-lift-tick-on { fill: #f4b400; stroke: #f4b400; stroke-width: 2; }
+.scene .sc-lift-go { fill: #2f6fde; rx: 28px; cursor: pointer; outline: none; filter: drop-shadow(0 4px 0 #1d4aa0); }
+.scene .sc-lift-go-text { fill: #fff; font-size: 22px; font-weight: 800; pointer-events: none; }
+.scene .sc-lift-finger { font-size: 46px; pointer-events: none; }
+.scene[data-look="lift"] .scene-goal { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 1.5rem; font-weight: 800; line-height: 1.15; min-height: calc(2.3em + 20px); }
+.scene[data-look="lift"] .scene-say { min-width: 52px; min-height: 52px; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
+.scene[data-look="lift"] .scene-readout { min-height: 1.4em; margin: 8px 0 0; font-size: 2.4rem; font-weight: 800; }
+.scene[data-look="lift"][data-scene-done="yes"] .scene-readout { color: #1f9d55; }
+@media (prefers-color-scheme: dark) { .scene[data-look="lift"][data-scene-done="yes"] .scene-readout { color: #6fe39a; } }
+:root[data-theme="dark"] .scene[data-look="lift"][data-scene-done="yes"] .scene-readout { color: #6fe39a; }
+@keyframes sc-lift-pulse { 50% { transform: scale(1.06); } }
+@keyframes sc-lift-no { 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+@keyframes sc-lift-no2 { 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+@media (prefers-reduced-motion: reduce) { .scene [class*="sc-lift"] { animation: none !important; transition: none !important; } }
