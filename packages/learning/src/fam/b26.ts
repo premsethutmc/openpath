@@ -176,6 +176,10 @@ export const B26: Def[] = [
     },
     distractors: ([n]) => [n + 10, n + 1, n > 5 ? n - 5 : n + 5, n + 100].filter((v) => v > 0),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "part#": ["A Roman numeral is read in parts from the left; a smaller numeral before a larger one is taken away from it."], "total": ["The parts are added to give the number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "total"
         ? `Add the parts: ${s.inputs.join(" + ")} = ${s.value}`
@@ -235,6 +239,10 @@ export const B26: Def[] = [
       return list.filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "part#": ["A number is written in Roman numerals one place at a time: thousands, hundreds, tens, then ones."], "join": ["The parts go side by side, largest first, just as the number's places go from largest."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "pick"
         ? `That is option ${"ABCD"[Number(s.value)]}, so the answer is ${"ABCD"[Number(s.value)]}`
@@ -285,6 +293,10 @@ export const B26: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "middle": ["A cut through the middle, parallel to a pair of faces, makes two equal halves; there is one for each pair of faces."], "square": ["A square face also has diagonals, and a cut along them through the solid makes two mirror halves too."], "total": ["All the different planes of symmetry together are counted."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "middle"
         ? "Cuts through the middle, parallel to a pair of faces: 3 (one for each pair of opposite faces)"
@@ -363,6 +375,10 @@ export const B26: Def[] = [
       return differ(answer, list);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read#": ["Each grid line stands for the same amount, so counting lines and multiplying gives the value."], "compare": ["'How much more' is found by taking the smaller value from the larger."], "rises": ["The line goes up wherever a value is bigger than the one before it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "read1" || s.id === "read2"
         ? `The point is ${s.inputs[0]} lines up; each line is ${s.inputs[1]}, so it shows ${s.value}`
