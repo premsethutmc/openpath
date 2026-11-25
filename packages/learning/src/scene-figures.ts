@@ -328,3 +328,91 @@ export function tallyDraw(v: TallyView): Shape[] {
   }
   return out;
 }
+
+/* boxes@1: things in two boxes, then a ten-spot board (boxes.ts). Two boxes side by side at the top, each as wide as its
+ * things need (mock: 3fr 2fr), with a number badge on its top edge; under them the wooden board of 2 rows of 5 spots.
+ * Things are cells of `c` (60 when they fit: about 58 px on a phone). Geometry only. */
+export interface BoxesLayout {
+  w: number; h: number; c: number;
+  /** the two boxes: x, y, w, h, and how many things across */
+  box: { x: number; y: number; w: number; h: number; cols: number }[];
+  board: { x: number; y: number; w: number; h: number };
+  /** the middle of each of the ten spots, and their radius */
+  spots: [number, number][]; r: number;
+}
+const BOXES_TOP = 24, BOXES_PAD = 6, BOXES_HEAD = 18;
+export function boxesLayout(a: number, b: number): BoxesLayout {
+  const across = (n: number) => (n <= 3 ? n : n === 4 ? 2 : 3);
+  const cols = [across(a), across(b)], rows = [Math.ceil(a / cols[0]), Math.ceil(b / cols[1])];
+  const c = Math.min(60, Math.floor((340 - 8 - 8 - 4 * BOXES_PAD) / (cols[0] + cols[1])));
+  const h = BOXES_HEAD + Math.max(...rows) * c + BOXES_PAD;
+  const wA = cols[0] * c + 2 * BOXES_PAD, wB = cols[1] * c + 2 * BOXES_PAD, x0 = (340 - wA - 8 - wB) / 2;
+  const box = [{ x: px(x0), y: BOXES_TOP, w: wA, h, cols: cols[0] }, { x: px(x0 + wA + 8), y: BOXES_TOP, w: wB, h, cols: cols[1] }];
+  const by = BOXES_TOP + h + 16, pitch = (332 - 16) / 5, board = { x: 4, y: by, w: 332, h: 2 * pitch + 14 };
+  const spots: [number, number][] = Array.from({ length: 10 }, (_, i) => [px(12 + pitch * ((i % 5) + 0.5)), px(by + 8 + pitch * (Math.floor(i / 5) + 0.5))]);
+  return { w: 340, h: px(by + board.h + 6), c, box, board, spots, r: px(pitch / 2 - 4) };
+}
+/** The middle of thing `i` (the first box's are 0 … a−1) in its box: rows from the top, each row centred. */
+export function boxesThingXY(L: BoxesLayout, a: number, b: number, i: number): [number, number] {
+  const k = i < a ? 0 : 1, j = k ? i - a : i, n = k ? b : a, bx = L.box[k], cols = bx.cols;
+  const row = Math.floor(j / cols), inRow = Math.min(cols, n - row * cols), col = j % cols;
+  const rowsAll = Math.ceil(n / cols), top = bx.y + BOXES_HEAD + (bx.h - BOXES_HEAD - BOXES_PAD - rowsAll * L.c) / 2;
+  return [px(bx.x + bx.w / 2 + (col - (inRow - 1) / 2) * L.c), px(top + (row + 0.5) * L.c)];
+}
+/** The thing a touch at (x, y) lands on, among those still in a box, or −1. */
+export function boxesThingAt(L: BoxesLayout, a: number, b: number, gone: number[], x: number, y: number): number {
+  for (let i = 0; i < a + b; i++) { if (gone.includes(i)) continue; const [tx, ty] = boxesThingXY(L, a, b, i); if (Math.abs(x - tx) <= L.c / 2 + 2 && Math.abs(y - ty) <= L.c / 2 + 2) return i; }
+  return -1;
+}
+/** Whether a thing let go at (x, y) is on the board (or near enough to it). */
+export const boxesOnBoard = (L: BoxesLayout, x: number, y: number) => x >= L.board.x - 20 && x <= L.board.x + L.board.w + 20 && y >= L.board.y - 20 && y <= L.board.y + L.board.h + 20;
+
+export interface BoxesView {
+  a: number; b: number; thing: string; name: string;
+  /** the things counted in each box (by place in the box, in the order tapped) and those on the board */
+  ka: number[]; kb: number[]; gone: number[];
+  /** the box lit (1, 2 or 0), the box shaking (with which of two shakes, so a second one plays again) */
+  glow: number; shake?: { box: number; odd: boolean };
+  /** the boxes whose number is shown */
+  badges: [boolean, boolean];
+  /** the spot to fill next (−1: none), the spot just filled (−1: none) */
+  next: number; lit: number;
+  /** a thing in the hand (dragged or carried by the finger), and the finger */
+  held?: { i: number; x: number; y: number }; finger?: [number, number];
+}
+export function boxesDraw(L: BoxesLayout, v: BoxesView): Shape[] {
+  const out: Shape[] = [];
+  const text = (x: number, y: number, s: string, role: string) => out.push({ t: "text", x: px(x), y: px(y), s, role });
+  const pill = (x: number, y: number, s: string, role: string, sh = "") => { out.push({ t: "rect", x: px(x - 13), y: px(y - 11), w: 26, h: 22, role: `${role}${sh}` }); text(x, y + 6, s, `${role}-text${sh}`); };
+  const shakes = (k: number) => (v.shake && v.shake.box === k + 1 ? (v.shake.odd ? "-no" : "-no2") : "");
+  // the boxes, each with its things and its number
+  for (const k of [0, 1]) {
+    const bx = L.box[k], sh = shakes(k);
+    if (v.glow === k + 1) out.push({ t: "rect", x: bx.x - 5, y: bx.y - 5, w: bx.w + 10, h: bx.h + 10, role: `boxes-glow${sh}` });
+    out.push({ t: "rect", x: bx.x, y: bx.y, w: bx.w, h: bx.h, role: `boxes-box${sh}` });
+    const n = k ? v.b : v.a, counted = k ? v.kb : v.ka;
+    for (let j = 0; j < n; j++) {
+      const i = k ? v.a + j : j;
+      if (v.gone.includes(i)) continue;
+      const [x, y] = boxesThingXY(L, v.a, v.b, i), away = v.held?.i === i, at = counted.indexOf(j);
+      text(x, y, v.thing, `boxes-thing${away ? "-ghost" : at >= 0 ? "-done" : ""}${sh}`);
+      if (at >= 0 && !away) pill(x + L.c / 2 - 15, y + L.c / 2 - 13, String(at + 1), "boxes-count", sh);
+      out.push({ t: "rect", x: px(x - L.c / 2), y: px(y - L.c / 2), w: L.c, h: L.c, role: "boxes-hit", tap: { i, label: `${v.name}${at >= 0 ? `, counted ${at + 1}` : ""}, in the ${k ? "second" : "first"} box` } });
+    }
+    if (v.badges[k]) { out.push({ t: "rect", x: px(bx.x + bx.w / 2 - 22), y: bx.y - 16, w: 44, h: 32, role: `boxes-badge${sh}` }); text(bx.x + bx.w / 2, bx.y + 8, String(n), `boxes-badge-text${sh}`); }
+  }
+  // the board: ten spots, filled in order, each numbered; a "+" where the second box's things begin
+  const bd = L.board;
+  out.push({ t: "rect", x: bd.x, y: bd.y, w: bd.w, h: bd.h, role: "boxes-board" });
+  L.spots.forEach(([x, y], i) => {
+    out.push({ t: "circle", cx: x, cy: y, r: L.r, role: i === v.next ? "boxes-spot-next" : "boxes-spot" });
+    if (i >= v.gone.length) return;
+    text(x, y, v.thing, "boxes-on");
+    pill(x + L.r - 8, y + L.r - 8, String(i + 1), i === v.lit ? "boxes-num-lit" : "boxes-num");
+  });
+  if (v.gone.length >= v.a && v.b > 0) { const [x, y] = L.spots[v.a]; text(x - L.r - 4, y - 10, "+", "boxes-plus"); }
+  // what is in the hand, over everything; the finger under it
+  if (v.held) text(v.held.x, v.held.y, v.thing, "boxes-held");
+  if (v.finger) text(v.finger[0], v.finger[1], "👆", "boxes-finger");
+  return out;
+}

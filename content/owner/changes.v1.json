@@ -4,6 +4,18 @@
  "entries": [
   {
    "date": "2026-11-25",
+   "status": "in review",
+   "title": "Mango boxes: count, then put together on a ten-spot board",
+   "what": "Class 1 adding now opens with the approved mango picture. The child taps each mango in the first box, then the second (every number is said aloud), a finger shows one mango going onto a wooden board of ten spots, and the child moves the rest by tapping or dragging, the count going on: 1, 2, 3, +, 4, 5. It ends with '3 + 2 = 5', said as 'three plus two makes five.' A tap on the wrong box shakes it: 'First this box.' The lift for 3 + 2 follows as before.",
+   "links": [
+    {
+     "label": "Class 1 adding: Start here, Plus and equals",
+     "href": "/year/#try-skill=MATH.number.addition"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
    "status": "live",
    "title": "The counter and the lift for young children",
    "what": "On a Class 1–5 adding or taking-away question, 'Break it down' (above 'Work it with me') opens a lift. The child drops +/− tiles (₹ coins for money) and the counter clicks through every number, pausing at 0. Change is counted up from the price. The instruction is read aloud after the first tap. Class 1–3 see no written reasons, and each 'Work it with me' step now states its numbers.",
