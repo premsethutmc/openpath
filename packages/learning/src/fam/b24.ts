@@ -261,6 +261,10 @@ export const B24: Def[] = [
     },
     distractors: ([x, kind]) => (kind === 0 ? [x + 10, 10 * x + 10, 1000 * x] : kind === 1 ? [100 * x + 100, 1000 * x, 10 * x + 1] : [x + 1, 100 * x, x * 1000]).filter((v) => v > 0),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "million": ["1 million is 10 lakh, so we can change between the two systems."], "billion": ["1 billion is 100 crore, so we can change between the two systems."], "crore": ["10 million is 1 crore, so we can change between the two systems."], "total|multiply": ["Each million is worth 10 lakh, so we multiply."], "total|divide": ["Every 10 million make 1 crore, so we divide by 10."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "million"
         ? "1 million = 10,00,000 = 10 lakh"
@@ -339,6 +343,10 @@ export const B24: Def[] = [
       return [a * 10, Math.max(1, Math.round(a / 10)), a + 1, a * 60];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "per": ["To compare with the big number, we first find how many units there are in one bigger unit."], "share": ["Dividing the big number by that amount changes it into the bigger unit, which is easier to picture."], "round": ["A rounded answer is easier to picture and is close enough for judging size."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "per"
         ? `${(s.inputs as number[]).join(" × ")} = ${s.value}`
@@ -415,6 +423,10 @@ export const B24: Def[] = [
       return [c.change + 100, c.change - 100, c.change + 10, c.change - 10].filter((u) => u > 0).map(rupees);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "bill": ["The bill is the total of everything bought, so we add the prices."], "change": ["The change is what is left of the money given after paying the bill."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "bill" ? `Bill: ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : `Change: ₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[5, 240], [0, 9], [5, 240], [0, 9], [0, 2]],
     cap: 500,
@@ -507,6 +519,10 @@ export const B24: Def[] = [
       return kind === 0 ? [t[n + 1], t[n + 1] - 1, t[n]] : [Math.ceil(n / FIB_GAP[kind]) + 1, Math.floor(n / FIB_GAP[kind]) - 1, Math.floor(n / 2) + 1].filter((v) => v > 0);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "s#": ["Each running total is the total so far plus the next number of the sequence."], "list": ["We first write out the numbers of the sequence, each the sum of the two before it."], "count": ["Then we count the ones that fit the condition."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "list" ? `The first ${s.inputs[0]} numbers: ${s.value}` : s.id === "count" ? `Multiples of ${s.inputs[1]} among them: ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[3, 40], [0, 3]],
     difficulty: ([n, kind]) => (kind === 0 ? (n <= 6 ? 1 : n <= 9 ? 2 : 3) : kind === 1 && n <= 12 ? 2 : 3),
@@ -574,6 +590,10 @@ export const B24: Def[] = [
     // a point on an axis has fewer distinct mistakes: (y, x), (−y, x) and (x + y, y − x) keep four options
     distractors: ([x, y]) => [tup(x, -y), tup(-y, -x), tup(x, y), tup(y, x), tup(-y, x), tup(x + y, y - x)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "swap": ["A quarter turn about the origin swaps the roles of x and y."], "sign": ["The direction of the turn decides which coordinate changes sign."], "half": ["A half turn about the origin sends a point to the opposite side, so both coordinates change sign."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "half"
         ? `A half turn about O sends (${n_(Number(s.inputs[0]))}, ${n_(Number(s.inputs[1]))}) to the opposite side of O: ${s.value}`
@@ -662,6 +682,10 @@ export const B24: Def[] = [
       return list.filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "turned": ["A turn keeps the letters going round the same way; a flip reverses it. This tells a rotation from a reflection."], "name": ["Where the image lies tells which mirror line or turn was used."], "copies": ["The pattern is made from the shape and its image together."], "symmetry": ["A shape and its mirror image together have that mirror as a line of symmetry."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "pick"
         ? `That is option ${"ABCD"[Number(s.value)]}, so the answer is ${"ABCD"[Number(s.value)]}`

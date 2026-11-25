@@ -124,6 +124,10 @@ const intl: Def = {
         ];
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "group": ["The international system groups digits in threes from the right: thousands, millions, billions."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}` : `${s.inputs[0]} in the international system is ${s.value}`),
   domain: [[1, 99], [0, 9], [0, 1], [0, 3]],
   cap: 400,
@@ -170,6 +174,10 @@ const expb: Def = {
   },
   distractors: (p) => [expNum(p) * 10, Math.floor(expNum(p) / 10), expNum(p) + PLACE[2]].filter((x) => x !== expNum(p)),
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "place": ["Each digit is worth its place value, and a number is the sum of those values."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => `Adding the places: ${s.inputs.join(" + ")} = ${s.value}`,
   domain: [[5, 8], [0, 99]],
   keep: ([L, s]) => s < (L === 5 ? 60 : 100),
@@ -215,6 +223,10 @@ const desc: Def = {
   },
   distractors: ([s, k]) => descSet(s).filter((x) => x !== [...descSet(s)].sort((a, b) => b - a)[k - 1]),
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "order": ["Numbers are compared from the biggest place on the left; the first place that differs decides."], "pick": ["Once the numbers are in order, counting along gives the one in the asked position."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "order" ? `Compare place by place from the left: ${s.value}` : `Position ${s.inputs[0]} is ${s.value}`),
   domain: [[0, 79], [2, 4]],
   cap: 240,
@@ -271,6 +283,10 @@ const est: Def = {
   },
   distractors: ([, q]) => [q * 10, q + 1, q - 1].filter((x) => x > 0),
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "round-D": ["Rounding to easy numbers lets us estimate in our heads."], "round-d": ["Rounding to easy numbers lets us estimate in our heads."], "divide": ["Working with the rounded numbers gives a quick answer close to the true one."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "divide" ? `Divide the rounded numbers: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} to the nearest ${s.inputs[1]} is ${s.value}`),
   domain: [[2, 9], [2, 60], [0, 8], [0, 4]],
   keep: ([, , e, o]) => (e + o) % 3 === 0,
@@ -343,6 +359,10 @@ const comp: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "factors": ["A composite number has more than two factors, and a prime has exactly two, so listing factors decides."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}` : `The factors of ${s.inputs[0]} are ${s.value}`),
   domain: [[0, 1], [0, 24], [0, 11], [0, 3]],
   keep: ([, , s, pos]) => (s + pos) % 2 === 0,
@@ -400,6 +420,10 @@ const ints: Def = {
         ];
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "sort": ["Integers are whole numbers and their negatives, so a number with a fraction part is not one."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}` : `${s.inputs[0]} is ${s.value}`),
   domain: [[0, 1], [0, 11], [0, 8], [0, 3]],
   keep: ([, a, b, pos]) => (a + b + pos) % 2 === 0,
@@ -450,6 +474,10 @@ const idesc: Def = {
   },
   distractors: ([s, k]) => idescSet(s).filter((x) => x !== [...idescSet(s)].sort((a, b) => b - a)[k - 1]),
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "order": ["On a number line the larger number is further right, so negative numbers are smaller the further they are from 0."], "pick": ["Once the numbers are in order, counting along gives the one in the asked position."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "order" ? `On a number line the larger number is further right: ${s.value}` : `Position ${s.inputs[0]} is ${s.value}`),
   domain: [[0, 99], [1, 5]],
   keep: ([s, k]) => (s + k) % 2 === 0 && idescSet(s).length === 5,
@@ -495,6 +523,10 @@ const fpct: Def = {
     return [r + 5, r * 2, 100 - r].filter((x) => x > 0 && x !== r && x <= 200);
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "scale": ["Per cent means out of 100, so we write the fraction with 100 on the bottom, multiplying top and bottom by the same number."], "hundredths": ["Hundredths are parts out of 100, so they are already per cent."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "hundredths" ? `${s.inputs[0]} is ${s.value} hundredths, so ${s.value}%` : `${s.inputs[0]}/${s.inputs[1]} = ${s.value}/100 (multiply top and bottom by ${s.inputs[2]}), so ${s.value}%`),
   domain: [[0, 1], [0, DEN.length - 1], [1, 99]],
   cap: 300,

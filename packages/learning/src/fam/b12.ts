@@ -269,6 +269,10 @@ export const B12: Def[] = [
     ].filter((x) => x.predict !== null),
     distractors: ([a, b, c, d, e]) => [tup(a * c, a * d + b * c, a * e + b * d, -b * e), tup(a * c, a * d - b * c, a * e + b * d, b * e), tup(a + c, a * d + b * c, a * e + b * d, b * e)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first": ["Every term of the first polynomial must multiply every term of the second, so we take one term at a time."], "second": ["The next term multiplies the whole second polynomial too."], "collect": ["Terms with the same power of x are like terms, so they are added together."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "first" ? `${s.inputs[0]} × (${s.inputs[1]}) = ${s.value}` : s.id === "second" ? `${s.inputs[0]} × (${s.inputs[1]}) = ${s.value}` : `Add the two rows and collect like terms: the coefficients are ${s.value}`),
     domain: [[1, 4], [-6, 6], [1, 3], [-5, 5], [-6, 6]],
     cap: 400,
@@ -331,6 +335,10 @@ export const B12: Def[] = [
     },
     distractors: ([a, , q, s]) => [pl([a, q, s + 1]), pl([a, -q, s]), pl([a, q, -s - 1]), pl([a, q + 1, s])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "bring": ["Synthetic division starts by bringing the first coefficient straight down: it becomes the first coefficient of the quotient."], "second": ["Each new number is the last one times the number we divide by, plus the next coefficient. This is a short way of doing long division."], "third": ["Each new number is the last one times the number we divide by, plus the next coefficient. This is a short way of doing long division."], "remainder": ["The last number made this way is what is left over: the remainder."], "quotient": ["The numbers before the remainder are the quotient's coefficients, starting one power lower than the polynomial."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "bring" ? `Bring down the first coefficient: ${s.value}` : s.id === "quotient" ? `The quotient is ${s.value}` : s.id === "remainder" ? `${N(Number(s.inputs[0]))} × ${N(Number(s.inputs[1]))} + ${N(Number(s.inputs[2]))} = ${N(Number(s.value))}: this last number is the remainder` : `${N(Number(s.inputs[0]))} × ${N(Number(s.inputs[1]))} + ${N(Number(s.inputs[2]))} = ${N(Number(s.value))}`,
     domain: [[1, 3], [-4, 4], [-6, 6], [-9, 9], [-9, 9]],
@@ -376,6 +384,10 @@ export const B12: Def[] = [
       B("cube-of-negative", "prerequisite", EXP, `(${N(r)})³ was taken as positive; a negative number cubed stays negative.`, r < 0 ? a * -(r ** 3) + b * r * r + c * r + d : null),
     ].filter((x) => x.predict !== null),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "zero": ["The remainder theorem says dividing by x − a leaves p(a), so we find the a that makes the divisor zero."], "cube": ["To find p(a), each power of a is worked out first."], "square": ["To find p(a), each power of a is worked out first."], "substitute": ["Putting a into the polynomial gives the remainder, without doing the division."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "zero" ? `x − (${N(Number(s.inputs[0]))}) = 0 when x = ${N(Number(s.value))}` : s.id === "cube" ? `(${N(Number(s.inputs[0]))})³ = ${N(Number(s.value))}` : s.id === "square" ? `(${N(Number(s.inputs[0]))})² = ${N(Number(s.value))}` : `The remainder is p(${N(Number(s.inputs[4]))}) = ${N(Number(s.value))}`),
     domain: [[1, 3], [-6, 6], [-6, 6], [-9, 9], [-3, 3]],
     cap: 400,
@@ -425,6 +437,10 @@ export const B12: Def[] = [
       ].filter((x) => x.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "substitute": ["If x − a is a factor, then p(a) must be 0, so we put a into the polynomial."], "solve": ["Setting the result equal to 0 gives an equation for k."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "substitute" ? `Put x = ${N(Number(s.inputs[0]))}: the known terms add up to ${N(Number(s.value))}` : `For a factor the remainder is 0: ${N(Number(s.inputs[0]))} + ${s.inputs[1] === 1 ? "k" : `${N(Number(s.inputs[1]))}k`} = 0, so k = ${N(Number(s.value))}`),
     domain: [[0, 1], [1, 3], [-6, 6], [-9, 9], [-3, 3]],
     cap: 300,
@@ -467,6 +483,10 @@ export const B12: Def[] = [
       B("stop-at-one", "procedural", FAC, "Only the zero found by trial was given; after dividing, the quadratic quotient gives the other two.", null),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "try": ["If p(a) = 0 then x − a is a factor (factor theorem), so we try small numbers that divide the constant term."], "divide": ["Dividing by the factor we found leaves a quadratic, which is easier to factorise."], "factorise": ["A quadratic splits into two brackets using two numbers with the right sum and product."], "zeros": ["A product is 0 when one of its brackets is 0, so each bracket gives a zero."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "try" ? `p(${N(Number(s.inputs[0]))}) = 0, so x − (${N(Number(s.inputs[0]))}) is a factor` : s.id === "divide" ? `Divide by it: the quotient is ${s.value}` : s.id === "factorise" ? `${s.inputs[0]} = ${s.value}` : `The zeros are ${(s.value as number[]).map(N).join(", ")}`),
     domain: [[-5, 5], [-5, 5], [-5, 5]],
     difficulty: ([r1, r2, r3]) => ([r1, r2, r3].includes(1) || [r1, r2, r3].includes(-1) ? 1 : [r1, r2, r3].includes(0) ? 2 : 3),
@@ -513,6 +533,10 @@ export const B12: Def[] = [
     ].filter((x) => x.predict !== null),
     distractors: ([a, b]) => [pl([a, b + a]), pl([a + 1, b]), pl([b === 0 ? a + 2 : b, a]), pl([a, -b - 1])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "step": ["For a straight-line rule, y changes by the same amount each time x goes up by 1; that amount is the number in front of x."], "start": ["Going back to x = 0 gives the number on its own in the rule."], "rule": ["The change per step and the starting value together make the rule y = mx + c."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "step" ? `Each time x goes up by 1, y changes by ${N(Number(s.value))}` : s.id === "start" ? `Go back to x = 0: y = ${N(Number(s.value))}` : `So y = ${s.value}`),
     figure: ([a, b, s]) => ({ type: "table", head: ["x", ...[0, 1, 2, 3, 4].map((i) => N(s + i))], rows: [["y", ...[0, 1, 2, 3, 4].map((i) => N(a * (s + i) + b))]] }),
     domain: [[-6, 6], [-10, 10], [0, 2]],
@@ -553,6 +577,10 @@ export const B12: Def[] = [
       B("no-divide", "procedural", LIN, `${b}y = ${c - a * t} was taken as y = ${c - a * t}; divide by ${b} as well.`, c - a * t),
     ].filter((x) => x.predict !== null),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "substitute": ["Putting the known value of x into the equation leaves only y unknown."], "subtract": ["Taking the x part away from both sides keeps the balance and leaves the y part alone."], "divide": ["Dividing both sides by the number in front of y leaves y on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "substitute" ? `Put x = ${s.inputs[1]}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "subtract" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so the y part is ${s.value}` : `y = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 9], [2, 9], [10, 60], [1, 6]],
     cap: 300,
@@ -603,6 +631,10 @@ export const B12: Def[] = [
     ],
     distractors: ([a, b, c]) => [pl([1, c]), pl([1, b + c]), pl([1, a + 1])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor1": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "factor2": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "common": ["The greatest common divisor is made of the factors that appear in both."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "common" ? `The factor in both is ${s.value}` : `${s.inputs[0]} = ${s.value}`),
     domain: [[-6, 6], [-6, 6], [-6, 6]],
     cap: 300,
@@ -651,6 +683,10 @@ export const B12: Def[] = [
     ],
     distractors: ([a, b, c]) => [`(${pl([1, -a])})(${pl([1, b])})(${pl([1, c])})`, `(${pl([1, a])})(${pl([1, b + c])})`],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor1": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "factor2": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "lcm": ["The lowest common multiple must contain each factor of both, but a shared factor only once."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "lcm" ? `Take every factor once: ${s.value}` : `${s.inputs[0]} = ${s.value}`),
     domain: [[-6, 6], [-6, 6], [-6, 6]],
     cap: 300,
@@ -695,6 +731,10 @@ export const B12: Def[] = [
     ],
     distractors: ([a, b, c]) => [tup(c, b), tup(b, a), tup(b + a, c + a)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "top": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "bottom": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "cancel": ["A factor on both top and bottom divides out, just as with numbers in a fraction."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "cancel" ? `Cancel the common factor ${s.inputs[0]}: ${s.value}` : `${s.inputs[0]} = ${s.value}`),
     domain: [[-6, 6], [-6, 6], [-6, 6]],
     cap: 300,
@@ -731,6 +771,10 @@ export const B12: Def[] = [
       B("sign", "procedural", FAC, `The numbers in the brackets were given; ${pl([1, a])} = 0 when x = ${N(-a)} and ${pl([1, c])} = 0 when x = ${N(-c)}.`, [a, c]),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "bottom": ["We cannot divide by zero, so we must find when the bottom is zero; factorising shows this."], "zeros": ["A product is 0 when one of its brackets is 0, so those values of x are not allowed."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "bottom" ? `Denominator: ${s.inputs[0]} = ${s.value}` : `It is zero when x = ${(s.value as number[]).map(N).join(" or x = ")}`),
     domain: [[-6, 6], [-6, 6], [-6, 6]],
     cap: 300,
@@ -772,6 +816,10 @@ export const B12: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "inner": ["In f(g(x)) the inner function is worked out first; its answer goes into the outer function."], "outer": ["The answer from the inner function is now the input of the outer one."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "inner" ? `First ${s.inputs[0]}(${N(Number(s.inputs[1]))}) = ${N(Number(s.value))}` : `Then ${s.inputs[0]}(${N(Number(s.inputs[1]))}) = ${N(Number(s.value))}`),
     domain: [[-4, 4], [-6, 6], [-6, 6], [-3, 3], [0, 1]],
     cap: 400,
@@ -807,6 +855,10 @@ export const B12: Def[] = [
     ].filter((x) => x.predict !== null),
     distractors: ([a, b, c, d]) => [pl([a + c, b + d]), pl([a * c, a * d - b]), pl([a * c, b * d])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "substitute": ["In f(g(x)) every x in f is replaced by the whole of g(x)."], "expand": ["Multiplying out and collecting like terms gives the simplest form."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "substitute" ? `Replace x in f by g(x) = ${s.inputs[0]}: ${s.value}` : `Multiply out and simplify: ${s.value}`),
     domain: [[-5, 5], [-6, 6], [-5, 5], [-6, 6]],
     cap: 400,
@@ -866,6 +918,10 @@ export const B12: Def[] = [
     },
     distractors: ([, , , , x, y]) => [tup(x + 1, y), tup(x, y + 1), tup(x - 1, y + 2), tup(-x, y)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "scale": ["Multiplying an equation by a number keeps it true, and making one letter's coefficients match lets us remove it."], "eliminate": ["Adding or taking away the equations removes one letter, leaving one equation with one unknown."], "back": ["Putting the value found into an equation gives the other unknown."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "scale" ? `Make the x coefficients equal: ${s.value}` : s.id === "eliminate" ? `Subtract: ${N(Number(s.inputs[0]))}y = ${N(Number(s.inputs[1]))}, so y = ${N(Number(s.value))}` : `Put y = ${N(Number(s.inputs[3]))} into the first equation: x = ${N(Number(s.value))}`),
     domain: [[1, 5], [-4, 4], [1, 5], [-4, 4], [-5, 5], [-5, 5]],
     cap: 500,
@@ -920,6 +976,10 @@ export const B12: Def[] = [
     },
     distractors: ([, , , , x, j]) => [tup(x + 1, 5 * j - 1), tup(x, 5 * j + 5), tup(x - 1, 5 * j)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["Letting letters stand for the unknown prices turns each sentence into an equation."], "eliminate": ["Taking one equation from the other removes one letter, leaving one equation with one unknown."], "back": ["Putting the value found into an equation gives the other unknown."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "model" ? `With x = price of a pen and y = price of a notebook: ${s.value}` : s.id === "eliminate" ? `Remove x: ${N(Number(s.inputs[0]))}y = ${N(Number(s.inputs[1]))}, so y = ${s.value}` : `Then x = ${s.value}`),
     domain: [[1, 4], [1, 4], [1, 4], [1, 4], [3, 15], [2, 8]],
     cap: 300,
@@ -967,6 +1027,10 @@ export const B12: Def[] = [
         B("equal-ratios-parallel", "conceptual", SYS, "Equal ratios a₁/a₂ = b₁/b₂ were taken to mean parallel lines; when c₁/c₂ is equal as well, the two equations describe the same line.", kind === 2 ? 1 : null),
       ].filter((b) => b.predict !== null),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratios": ["Comparing the ratios of the coefficients tells how two lines meet: different slopes cross once; equal slopes are parallel or the same line."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Compare a₁/a₂ = ${s.inputs[0]}, b₁/b₂ = ${s.inputs[1]} and c₁/c₂ = ${s.inputs[2]}: ${["the first two differ, so the lines cross once", "the first two are equal but the third is not: parallel lines, no solution", "all three are equal: the same line, infinitely many solutions"][Number(s.value)]}`,
     domain: [[1, 5], [-5, 5], [1, 9], [2, 4], [0, 2], [-1, 1]],
     cap: 360,
@@ -1013,6 +1077,10 @@ export const B12: Def[] = [
       ].filter((b) => b.predict !== null),
     distractors: ([, x, y, z]) => [tup(x + 1, y, z), tup(x, y + 1, z - 1), tup(-x, y, z)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "eliminate": ["Removing the same letter from two pairs of equations leaves two equations in two unknowns, which we know how to solve."], "pair": ["Solving the smaller system gives two of the unknowns."], "back": ["Putting them into an original equation gives the third."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "eliminate" ? "Use one equation to remove x from the other two: this leaves two equations in y and z" : s.id === "pair" ? `Solve those two: (y, z) = ${s.value}` : `Substitute back into an original equation: x = ${N(Number(s.value))}`),
     domain: [[0, 7], [-4, 4], [-4, 4], [-4, 4]],
     cap: 300,
@@ -1057,6 +1125,10 @@ export const B12: Def[] = [
     ].filter((x) => x.predict !== null),
     distractors: ([a, b, c]) => [pl([a, b, c + 1]), pl([a, -b, c]), pl([a, b + 1, c])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first": ["The square root's first term squared must give the first term of the polynomial."], "second": ["Each new term of the root comes from dividing the next leftover term by twice the first term, as in long division for square roots."], "third": ["Each new term of the root comes from dividing the next leftover term by twice the first term, as in long division for square roots."], "check": ["Squaring the root back checks that it gives the polynomial."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "first" ? `√(${s.inputs[0]}x⁴) = ${s.value}` : s.id === "check" ? `Check: (${s.inputs[0]})² = ${s.value}` : `${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} gives the next term ${s.value}`),
     domain: [[1, 4], [-6, 6], [-6, 6]],
     cap: 300,
@@ -1114,6 +1186,10 @@ export const B12: Def[] = [
           : [B("forgot-2ab", "procedural", IDN, "α² + β² was taken as (α + β)²; subtract 2αβ first.", (S * S) / P), B("plus-2ab", "procedural", IDN, "2αβ was added instead of subtracted in α² + β².", (S * S + 2 * P) / P)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["For ax² + bx + c the roots add to −b/a, so we know their sum without finding them."], "product": ["For ax² + bx + c the roots multiply to c/a."], "combine": ["The expression is written using only the sum and the product, which we know."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `α + β = −b/a = ${Q(Number(s.value))}` : s.id === "product" ? `αβ = c/a = ${Q(Number(s.value))}` : `${["α² + β² = (α + β)² − 2αβ", "1/α + 1/β = (α + β)/(αβ)", "α/β + β/α = (α² + β²)/(αβ)"][Number(s.inputs[0])]} = ${Q(Number(s.value))}`),
     domain: [[1, 4], [-9, 9], [-9, 9], [0, 2]],
     cap: 450,
@@ -1181,6 +1257,10 @@ export const B12: Def[] = [
           ].filter((x) => x.predict !== null),
     distractors: ([kind, u, v]) => (kind === 0 ? [pl([1, -u, u * u - v]), pl([1, -2 * u, v]), pl([1, -2 * u, u * u - v + 1])] : [pl([1, -u, -v]), pl([1, -u, v + 1]), pl([1, u, -v])]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["A quadratic with x² first is x² − (sum of zeros)x + (product of zeros), so we need the sum."], "product": ["We also need the product of the zeros."], "form": ["Putting the sum and product into the pattern gives the quadratic."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `Sum of the zeros: ${N(Number(s.value))}` : s.id === "product" ? `Product of the zeros: ${N(Number(s.value))}` : `x² − (sum)x + (product) = ${s.value}`),
     domain: [[0, 1], [-6, 6], [-12, 15]],
     difficulty: ([kind, u]) => (kind === 1 && u > 0 ? 1 : kind === 1 || u === 0 ? 2 : 3),
@@ -1228,6 +1308,10 @@ export const B12: Def[] = [
       B("one-sign-changed", "procedural", LIN, "Only one of the two terms changed sign when it moved; both px and q move to the other side, so both change sign.", [perm(pp, 4).indexOf(2), perm(pp, 4).indexOf(3)]),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rearrange": ["Moving terms so the curve y = x² is on one side leaves a straight line on the other."], "line": ["Where the line and the curve meet, both sides are equal, so those x values solve the equation."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "rearrange" ? `${s.inputs[0]} = 0 is the same as ${s.value}` : `So draw y = ${pl([Number(s.inputs[0]), Number(s.inputs[1])])}; the x-coordinates where it meets the curve are the solutions`),
     domain: [[1, 2], [-6, 6], [-9, 9]],
     cap: 300,
@@ -1265,6 +1349,10 @@ export const B12: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read": ["The solutions of an equation are where y is 0, which is where the graph crosses the x-axis."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `In the table, y = ${N(Number(s.inputs[0]))} when x = ${(s.value as number[]).map(N).join(" and x = ")}`,
     figure: ([r, s, k]) => ({ type: "table", head: ["x", ...[...Array(9).keys()].map((i) => N(i - 4))], rows: [["y", ...[...Array(9).keys()].map((i) => N((i - 4) ** 2 - (r + s) * (i - 4) + r * s + k))]] }),
     domain: [[-4, 4], [-4, 4], [-6, 6]],
@@ -1311,6 +1399,10 @@ export const B12: Def[] = [
       ][kind];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "terms": ["The formula needs to know how many numbers are added."], "formula": ["Pairing the first and last numbers, the second and second-last, and so on, gives equal pairs; that is why n(n + 1)/2 works."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "terms" ? `There are ${s.value} terms` : `${["n(n + 1)/2", "n²", "n(n + 1)(2n + 1)/6", "(n(n + 1)/2)²"][Number(s.inputs[0])]} with n = ${s.inputs[1]} gives ${s.value}`),
     domain: [[0, 3], [5, 30]],
     difficulty: ([kind, n]) => (kind <= 1 && n <= 20 ? 1 : kind <= 1 || n <= 12 ? 2 : 3),
@@ -1359,6 +1451,10 @@ export const B12: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "to-n": ["A sum that starts in the middle is the sum from 1 to the end, minus the sum of the part before."], "to-m": ["This is the part before the start, which must be taken away."], "subtract": ["Taking away the part before leaves just the numbers wanted."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "to-n" ? `Sum from 1 to ${s.inputs[1]}: ${s.value}` : s.id === "to-m" ? `Sum from 1 to ${s.inputs[1]}: ${s.value}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [3, 15], [10, 30]],
     cap: 300,
@@ -1417,6 +1513,10 @@ export const B12: Def[] = [
     },
     distractors: ([x1, y1, x2, y2]) => [surd((x2 - x1) ** 2 + (y2 - y1) ** 2 + 1), surd(2 * ((x2 - x1) ** 2 + (y2 - y1) ** 2)), String(Math.abs(x2 - x1) * Math.abs(y2 - y1))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "across": ["The distance between points is the slanting side of a right triangle; the across side is the difference of the x numbers."], "up": ["The up side is the difference of the y numbers."], "squares": ["By Pythagoras, the square of the slanting side is the sum of the squares of the other two."], "root": ["The square root of that sum gives the distance."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "across" ? `Across: ${N(Number(s.inputs[0]))} − (${N(Number(s.inputs[1]))}) = ${N(Number(s.value))}` : s.id === "up" ? `Up: ${N(Number(s.inputs[0]))} − (${N(Number(s.inputs[1]))}) = ${N(Number(s.value))}` : s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `√${s.inputs[0]} = ${s.value}`),
     figure: ([x1, y1, x2, y2]) => ({ type: "plane", points: [[x1, y1, "A"], [x2, y2, "B"]], segments: [[[x1, y1], [x2, y2]]], range: 7 }),
     domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6]],
@@ -1471,6 +1571,10 @@ export const B12: Def[] = [
           ],
     distractors: ([kind, x1, y1, x2, y2]) => (kind === 0 ? [tup((y1 + y2) / 2, (x1 + x2) / 2), tup((x1 + x2) / 2 + 1, (y1 + y2) / 2)] : [tup(2 * x2 + x1, 2 * y2 + y1), tup(2 * y2 - y1, 2 * x2 - x1), tup(2 * x2 - x1 + 1, 2 * y2 - y1)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "x": ["The midpoint is half-way between the two points, so its x is the average of the two x numbers."], "y": ["Its y is the average of the two y numbers."], "bx": ["The midpoint is the average of the ends, so the missing end is twice the midpoint minus the known end."], "by": ["The same works for the y numbers."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "x" || s.id === "y" ? `${s.id}: (${N(Number(s.inputs[0]))} + ${N(Number(s.inputs[1]))}) ÷ 2 = ${Q(Number(s.value))}` : `${s.id === "bx" ? "x" : "y"}: 2 × ${N(Number(s.inputs[1]))} − (${N(Number(s.inputs[0]))}) = ${N(Number(s.value))}`),
     figure: ([kind, x1, y1, x2, y2]) => ({ type: "plane", points: [[x1, y1, "A"], [x2, y2, kind ? "M" : "B"]], ...(kind ? {} : { segments: [[[x1, y1], [x2, y2]]] }), range: 7 }),
     domain: [[0, 1], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
@@ -1515,6 +1619,10 @@ export const B12: Def[] = [
     },
     distractors: ([ax, ay, u1, v1, u2, v2]) => [tup(ax + u2 + 1, ay + v2), tup(ax - u2, ay - v2), tup(ax + u1, ay + v2)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "midpoint": ["The diagonals of a parallelogram cut each other in half, so they share a midpoint."], "other-end": ["That shared midpoint is the average of B and D, so D is twice the midpoint minus B."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "midpoint" ? `The diagonals bisect each other: the midpoint of AC is ${s.value}` : `D is the other end of the diagonal from B through that midpoint: D = ${s.value}`),
     figure: ([ax, ay, u1, v1, u2, v2]) => ({ type: "plane", points: [[ax, ay, "A"], [ax + u1, ay + v1, "B"], [ax + u1 + u2, ay + v1 + v2, "C"]], segments: [[[ax, ay], [ax + u1, ay + v1]], [[ax + u1, ay + v1], [ax + u1 + u2, ay + v1 + v2]]], range: 8 }),
     domain: [[-2, 2], [-2, 2], [-3, 3], [-3, 3], [-3, 3], [-3, 3]],
@@ -1579,6 +1687,10 @@ export const B12: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sides": ["Squared side lengths come from the distance rule without square roots, and are enough to compare sides."], "classify": ["Equal sides show isosceles or equilateral; if two squares add to the third, there is a right angle (Pythagoras)."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sides" ? `Squared sides: ${s.value}` : ["Two squared sides add up to the third, and no two sides are equal: right-angled", "Two sides are equal and no right angle: isosceles", "Two squared sides add to the third and two sides are equal: right-angled and isosceles", "No two sides are equal and no two squares add to the third: neither"][Number(s.value)]),
     figure: ([ax, ay, u1, v1, u2, v2]) => ({ type: "plane", points: [[ax, ay, "A"], [ax + u1, ay + v1, "B"], [ax + u2, ay + v2, "C"]], segments: [[[ax, ay], [ax + u1, ay + v1]], [[ax + u1, ay + v1], [ax + u2, ay + v2]], [[ax + u2, ay + v2], [ax, ay]]], range: 7 }),
     domain: [[-2, 2], [-2, 2], [-4, 4], [-4, 4], [-4, 4], [-4, 4]],
@@ -1622,6 +1734,10 @@ export const B12: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["This formula gives twice the area of a triangle straight from the coordinates of its corners."], "half": ["The area is half of that number, without its sign."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂) = ${N(Number(s.value))}` : `Area = ½ × |${N(Number(s.inputs[0]))}| = ${Q(Number(s.value))}`),
     figure: ([x1, y1, x2, y2, x3, y3]) => ({ type: "plane", points: [[x1, y1, "A"], [x2, y2, "B"], [x3, y3, "C"]], segments: [[[x1, y1], [x2, y2]], [[x2, y2], [x3, y3]], [[x3, y3], [x1, y1]]], range: 6 }),
     domain: [[-4, 0], [-4, 0], [1, 5], [-4, 2], [-3, 4], [1, 5]],
@@ -1663,6 +1779,10 @@ export const B12: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "area-zero": ["Three points lie on one line exactly when the triangle they make has no area."], "solve": ["Solving that equation gives the k that makes the area zero."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "area-zero" ? `The area of the triangle must be 0: ${s.value}` : `k = ${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} = ${Q(Number(s.value))}`),
     domain: [[-5, -1], [-5, 5], [1, 5], [-5, 5], [-6, 6]],
     cap: 300,
@@ -1752,6 +1872,10 @@ export const B12: Def[] = [
         [B("whole-centre-angle", "procedural", TRI, "∠AOB was found; OM bisects it, and the question asks for half of it, ∠AOM.", 180 - 2 * x), B("no-right-angle", "conceptual", CT, "The right angle at M was not used; the line from the centre to the midpoint of a chord is perpendicular to the chord, so ∠AOM = 90° − ∠OAM.", 180 - x)],
       ][k].filter((b) => b.predict !== null),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fact": ["A circle theorem links the angle we want to angles we know."], "compute": ["Using that fact with the given angle gives the answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "fact" ? `Use: ${s.value}` : `So the angle is ${s.value}°`),
     // right triangle: the right angle (C) is the bottom-left corner, side 1 the hypotenuse (the diameter AB); in the
     // isosceles triangle OAB the two radii (sides 1 and 2) meet at the top corner O
@@ -1805,6 +1929,10 @@ export const B12: Def[] = [
       ).filter((b) => b.predict !== null && num(b.predict) !== (k === 0 ? 2 : 1) * Math.sqrt(r * r - d * d)),
     distractors: ([k, r, d]) => [surd(r * r - d * d + 1), surd(k === 0 ? r * r - d * d : 4 * (r * r - d * d)), String(r + d)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "bisect": ["The line from the centre at right angles to a chord cuts it in half, making a right triangle with the radius as its longest side."], "half": ["By Pythagoras, half the chord is the square root of radius² minus distance²."], "double": ["That was only half the chord, so we double it."], "distance": ["By Pythagoras, the distance from the centre is the square root of radius² minus (half the chord)²."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "bisect" ? `Use: ${s.value}, making a right triangle with the radius as hypotenuse` : s.id === "double" ? `The chord is twice that: ${s.value} cm` : `√(${s.inputs[0]} − ${s.inputs[1]}) = ${s.value}`),
     // right triangle: sides 0 and 2 are the legs, side 1 the hypotenuse (the radius)
     figure: ([k, r, d]) => ({ type: "triangle", sides: k === 0 ? [`${d} cm`, `${r} cm`, "half the chord"] : [`${d} cm`, `${r} cm`, "distance"], right: true }),
@@ -1846,6 +1974,10 @@ export const B12: Def[] = [
       B("mixed-up-fact", "conceptual", CT, ["The fact about angles in the same segment was chosen; here one of the angles is at the centre, so the centre-angle fact applies.", "The centre-angle fact was chosen; here both angles are on the circle, standing on the same arc.", "The fact about angles in the same segment was chosen; the step uses the diameter, so the semicircle fact applies.", "Opposite angles of a cyclic quadrilateral were taken to be equal; they add up to 180°, and that is what the step uses.", "The fact about equal chords was chosen; this step is about one chord and the perpendicular from the centre.", "The fact about the perpendicular bisecting a chord was chosen; this step compares two equal chords."][SITS[s].f], perm([s, x], 4).indexOf(1)),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fact": ["Each step of a proof must be backed by a known fact; this is the fact that makes it true."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `The step uses: ${s.value}`,
     domain: [[0, SITS.length - 1], [20, 80]],
     cap: 400,
@@ -1917,6 +2049,10 @@ export const B12: Def[] = [
           ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "test": ["A polynomial has only whole-number powers of x (0, 1, 2, …), and x is never under a root or on the bottom."], "choose": ["Each option is checked against what we worked out, and only one of them agrees with it."], "collect": ["Collecting like terms and ordering by power shows the polynomial in standard form."], "name": ["The degree is the highest power left after collecting."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "test" ? `${s.inputs[0]} has ${s.value}` : s.id === "collect" ? `Collect like terms and order by powers: ${s.value}` : s.id === "name" ? `It has ${s.inputs[0]} as its ${Number(s.value) === Number(s.inputs[0]) ? "degree" : "number of terms"}: answer ${"ABCD"[Number(s.value)]}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 3], [0, 59]],
     keep: (p) => firstOnly("alpoly", [[0, 3], [0, 59]], (p) => `${B12.find((d) => d.id === "alpoly")!.prompt(p)}|${B12.find((d) => d.id === "alpoly")!.choices!(p).join("|")}`)(p),
@@ -1977,6 +2113,10 @@ export const B12: Def[] = [
       return [a + 1, a - 1, a + 2].filter((x) => k === 1 || x >= 0);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read|read": ["The degree of a polynomial is the highest power of x in it."], "read|add": ["The degree of a term with several letters is the total of their powers."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `In ${s.inputs[0]} the answer is ${N(Number(s.value))}`,
     domain: [[0, 3], [0, 59]],
     keep: (p) => firstOnly("alpdeg", [[0, 3], [0, 59]], (p) => B12.find((d) => d.id === "alpdeg")!.prompt(p))(p),
@@ -2033,6 +2173,10 @@ export const B12: Def[] = [
       return [tup(...P.map((c, i) => c - (op ? -1 : 1) * Qp[i])), tup(...r.map((c, i) => (i === 3 ? c + 1 : c))), tup(...r.map((c, i) => (i === 2 ? -c : c)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "collect": ["Only like terms, with the same power of x, can be added, so we add the coefficients power by power."], "signs": ["Subtracting a bracket changes the sign of every term in it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "signs" ? `Subtracting (${s.inputs[0]}) adds ${s.value}` : `Add the coefficients of each power: ${s.value}`),
     domain: [[0, 1], [0, 149]],
     cap: 300,
@@ -2100,6 +2244,10 @@ export const B12: Def[] = [
       return k === 0 ? [r + 2, r - 2, horner(g.P, -g.t)].filter((x) => x !== r) : [g.P[1], -g.P[1], r + 1];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "substitute": ["Putting the number in place of x gives the polynomial's value there."], "equate": ["A zero of a polynomial is where its value is 0, so we set it equal to 0 and solve."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "substitute" ? `Put x = ${N(Number(s.inputs[1]))} into ${s.inputs[0]}: ${Q(Number(s.value))}` : `${N(Number(s.inputs[0]))}x + ${N(Number(s.inputs[1]))} = 0 gives x = ${Q(Number(s.value))}`),
     domain: [[0, 1], [0, 119]],
     keep: (p) => firstOnly("aleval", [[0, 1], [0, 119]], (p) => B12.find((d) => d.id === "aleval")!.prompt(p))(p),
@@ -2139,6 +2287,10 @@ export const B12: Def[] = [
       ]),
     distractors: ([, , a, b, c]) => [tup(a, b, c + 1), tup(a, -b, c), tup(a + 1, b, c)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "each": ["Dividing by a single term divides every term; dividing powers of x subtracts the powers."], "collect": ["Reading the coefficients off in order gives the numbers asked for."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "each" ? `Divide each term by ${s.inputs[0]}x${Number(s.inputs[1]) === 1 ? "" : sup(Number(s.inputs[1]))}: subtract the powers and divide the coefficients: ${s.value}` : `So (p, q, r) = ${s.value}`),
     domain: [[2, 9], [1, 3], [1, 6], [-6, 6], [-6, 6], [0, 0]],
     cap: 300,
@@ -2211,6 +2363,10 @@ export const B12: Def[] = [
     },
     distractors: ([, , , p, q, s, R]) => [tup(p, q, s, -R), tup(p, -q, s, R), tup(p, q, s + 1, R)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first|divide": ["In long division each quotient term is what the divisor's first term must be multiplied by to match the leading term left."], "second|divide": ["In long division each quotient term is what the divisor's first term must be multiplied by to match the leading term left."], "third|divide": ["In long division each quotient term is what the divisor's first term must be multiplied by to match the leading term left."], "remainder": ["When what is left has a lower power than the divisor, no more division is possible: that is the remainder."], "answer": ["Reading the quotient and remainder gives the numbers asked for."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "answer" ? `The quotient is ${s.inputs[0]} and the remainder is ${s.inputs[1]}, so (a, b, c, d) = ${s.value}` : s.id === "remainder" ? `What is left is the remainder: ${typeof s.value === "number" ? N(s.value) : s.value}` : `Next quotient coefficient: ${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} = ${Q(Number(s.value))}`),
     domain: [[0, 1], [-5, 5], [-5, 5], [1, 3], [-5, 5], [-5, 5], [-9, 9]],
     cap: 400,
@@ -2276,6 +2432,10 @@ export const B12: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "product": ["To factorise ax² + bx + c we need two numbers with product a × c and sum b."], "split": ["Splitting the middle term with those numbers lets us group the terms in pairs."], "factors": ["Each pair shares a bracket, which is then taken out."], "zeros": ["A product is 0 when one of its brackets is 0, so each bracket gives a zero."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "product" ? `a × c = ${s.inputs[0]} × ${par(Number(s.inputs[1]))} = ${s.value}` : s.id === "split" ? `Two numbers with sum ${N(Number(s.inputs[0]))} and product a × c: ${(s.value as number[]).map(N).join(" and ")}` : s.id === "factors" ? `Group in pairs and take out common factors: ${s.inputs[0]} = ${s.value}` : `Each bracket equal to 0: x = ${(s.value as number[]).map(Q).join(" or x = ")}`),
     domain: [[0, 1], [1, 4], [-6, 6], [1, 4], [-6, 6]],
     cap: 400,
@@ -2331,6 +2491,10 @@ export const B12: Def[] = [
           ],
     distractors: ([k, a, b, c]) => [pl([1, -b]), `(${pl([1, a])})(${pl([1, c])})`, pl([1, a + 1])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factorise": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "common": ["The greatest common divisor is made of the factors that appear in all of them."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factorise" ? `Factorise each: ${s.value}` : `The factors in all of them: ${s.value}`),
     domain: [[0, 1], [-5, 5], [-5, 5], [-5, 5], [-5, 5]],
     cap: 300,
@@ -2392,6 +2556,10 @@ export const B12: Def[] = [
           ],
     distractors: ([k, a, b, c]) => (k === 0 ? [pl(mulP([1, -a], [1, c])), pl(mulP([1, a], [1, b + c]))] : [pl(mulP(mulP([1, -a], [1, b]), [1, c])), pl(mulP(mulP([1, a], [1, b]), [1, -c]))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "relation": ["For two polynomials, GCD × LCM = the product of the two, so the unknown one is GCD × LCM divided by the known one."], "divide": ["Doing the division gives the missing polynomial."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "relation" ? `Rearrange: ${s.value}` : `Dividing gives ${s.value}`),
     domain: [[0, 1], [-6, 6], [-6, 6], [-6, 6]],
     cap: 300,
@@ -2450,6 +2618,10 @@ export const B12: Def[] = [
           ]),
     distractors: ([k, a, b, c, d]) => (k <= 1 ? [tup(d, a), tup(a, b), tup(a + d, d)] : [tup(c * d, c * b + d * a), tup(k === 2 ? c + d : c - d, c + d), tup(k === 2 ? c + d + 1 : c - d + 1, k === 2 ? c * b + d * a : c * b - d * a), tup(k === 2 ? c + d : c - d, (k === 2 ? c * b + d * a : c * b - d * a) + 1)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factorise": ["Factorising writes an expression as a product of simpler brackets, so shared parts can be seen."], "cancel": ["A factor on both the top and the bottom divides out."], "invert": ["Dividing by a fraction is multiplying by it turned upside down."], "common": ["Fractions can only be added when their bottoms are the same, so each top is multiplied to match."], "collect": ["Like terms in the top are collected."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factorise" ? `Factorise: ${s.value}` : s.id === "cancel" ? `Cancel the factors in both the top and the bottom: ${s.value}` : s.id === "invert" ? `Multiply by the second fraction turned upside down and cancel: ${s.value}` : s.id === "common" ? `Over the common denominator the numerator is ${s.value}` : `Collect terms: ${s.value}`),
     domain: [[0, 3], [-6, 6], [-6, 6], [-6, 6], [-6, 6]],
     cap: 400,
@@ -2508,6 +2680,10 @@ export const B12: Def[] = [
       return [k + 1, 2 * k, k / 2].filter((x) => !close(x, k));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "disc": ["A quadratic has equal roots exactly when its discriminant b² − 4ac is 0."], "solve": ["Solving that equation gives the value of k."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "disc" ? `Equal roots when the discriminant b² − 4ac = 0: ${s.value}` : `So k = ${Q(Number(s.value))}`),
     domain: [[0, 2], [-12, 12], [-12, 12]],
     cap: 300,
@@ -2559,6 +2735,10 @@ export const B12: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["Going round the corners in order, this formula gives twice the area of the shape from its coordinates."], "half": ["The area is half of that number, without its sign."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `(x₁y₂ − x₂y₁) + (x₂y₃ − x₃y₂) + (x₃y₄ − x₄y₃) + (x₄y₁ − x₁y₄) = ${N(Number(s.value))}` : `Area = ½ × |${N(Number(s.inputs[0]))}| = ${Q(Number(s.value))}`),
     figure: (p) => {
       const V = quadV(p);
@@ -2617,6 +2797,10 @@ export const B12: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["A rule that fits the data lets us work out values we have not measured."], "predict": ["Putting the new time into the rule gives the prediction."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "model" ? `The ${Number(s.inputs[1]) < 0 ? "decrease" : "increase"} is the same each step, so p(t) = ${s.value}` : `p(${s.inputs[0]}) = ${N(Number(s.value))}`),
     domain: [[0, 7], [20, 200], [2, 15], [2, 12]],
     cap: 400,
@@ -2666,6 +2850,10 @@ export const B12: Def[] = [
     },
     bugs: (p) => [p[4] === 0 ? B("one-solution-only", "conceptual", L2, "A linear equation in two variables was thought to have only one solution, so a second, different pair was rejected; there are infinitely many pairs, all on one straight line.", 1) : B("not-substituted", "procedural", L2, "A pair was accepted without substituting it into the equation; put x and y in and check that both sides are equal.", 0)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "substitute": ["A pair is a solution only if it makes the equation true, so we test each pair."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Substitute each pair into the equation: ${["both make it true", "only the first does", "only the second does", "neither does"][Number(s.value)]}`,
     domain: [[1, 6], [1, 6], [0, 5], [0, 6], [0, 3]],
     cap: 300,
@@ -2719,6 +2907,10 @@ export const B12: Def[] = [
     },
     bugs: (p) => methOpts(p).slice(1).map((o, j) => B(o.id, "procedural", p[0] === 1 ? SYS : p[0] === 0 ? LIN : SYS, o.says, perm(p, 4).indexOf(j + 1))),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "method": ["Using one equation to replace a letter in the other leaves one equation with one unknown."], "solve": ["Solving it and putting the answer back gives both unknowns."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "method" ? `${["Substituting", "Eliminating y", "Cross-multiplying"][Number(s.inputs[0])]} gives ${s.value}` : `which leads to the solution ${s.value}`),
     domain: [[0, 2], [1, 5], [-4, 4], [1, 5], [-4, 4], [-5, 5], [-5, 5]],
     cap: 450,
@@ -2774,6 +2966,10 @@ export const B12: Def[] = [
       return [k + 1, -k, k + m].filter((x) => x !== k);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratio": ["Two lines are parallel, with no solution, when the x and y coefficients are in the same ratio but the constants are not."], "solve": ["Making the coefficients match that ratio gives k."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "ratio" ? `Use ${s.value}` : `The second equation's coefficients are ${s.inputs[0]} times the first's, so k = ${N(Number(s.value))}`),
     domain: [[0, 2], [1, 6], [-6, 6], [1, 12], [2, 4], [-3, 3]],
     cap: 300,
@@ -2830,6 +3026,10 @@ export const B12: Def[] = [
       return [tup(x + 1, y - 1), tup(x, y + 1), tup(x - 1, y)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "model": ["Letters for the two unknowns turn the two facts in the story into two equations."], "solve": ["Solving the pair together gives both unknowns."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "model" ? `Let the two unknowns be x and y: ${s.value}` : `Solving the pair gives ${s.value}`),
     domain: [[0, 3], [1, 20], [0, 15], [1, 5]],
     keep: (p) => sysxOk(p),
@@ -2894,6 +3094,10 @@ export const B12: Def[] = [
       return k === 4 ? [-c, c, b / a] : [f, g, -([f + g, f - g, f * g, f / g][k])];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "f": ["To combine the functions at a point, we first find each one's value there."], "g": ["To combine the functions at a point, we first find each one's value there."], "combine": ["Combining functions at a point combines their values in the same way."], "zero": ["We cannot divide by zero, so any x that makes the bottom function 0 is left out."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "zero" ? `g(x) = 0 when x = ${Q(Number(s.value))}, so that number is excluded` : s.id === "combine" ? `Combine: ${Q(Number(s.value))}` : `${s.inputs[0]}(${N(Number(s.inputs[1]))}) = ${N(Number(s.value))}`),
     domain: [[0, 4], [-4, 4], [-6, 6], [1, 3], [-6, 6], [-3, 3]],
     cap: 400,
@@ -2952,6 +3156,10 @@ export const B12: Def[] = [
       return [right + (f === 1 ? b * b : a), right - n, right + n];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "general": ["Writing the general term lets us split the sum into sums we have formulas for."], "formulas": ["The standard formulas give Σk, Σk² and Σk³ without adding term by term."], "combine": ["The sum of the parts is the sum of the whole."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "general" ? `The general term is ${s.value}` : s.id === "formulas" ? `Σk, Σk², Σk³ up to ${s.inputs[0]}: ${s.value}` : `Combine: ${s.value}`),
     domain: [[0, 2], [5, 20], [1, 5], [-3, 3]],
     cap: 300,
@@ -2992,6 +3200,10 @@ export const B12: Def[] = [
       return it.mix && opts.includes(it.mix) ? [B("mixed-up-part", "conceptual", CT, it.why, opts.indexOf(it.mix))] : [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "name": ["Each part of a circle has its own name depending on where its ends are and whether it passes through the centre."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `This is ${s.value}`,
     domain: [[0, 19], [0, 5], [0, 4]],
     keep: (p) => firstOnly("alcvoc", [[0, 19], [0, 5], [0, 4]], (q) => `${VOC[q[0]].say(LETS[q[1]], 3 + 2 * q[2])}|${vocOpts(q).join("|")}`)(p),
@@ -3039,6 +3251,10 @@ export const B12: Def[] = [
         ? [B("equal-not-decided", "conceptual", CT, dir === 0 ? "Chords the same distance from the centre were thought possibly different; in one circle, chords equidistant from the centre are equal (the converse of 'equal chords are equidistant')." : "Equal chords were thought possibly at different distances; in one circle, equal chords are equidistant from the centre.", 3)]
         : [B("farther-longer", "conceptual", CT, dir === 0 ? "The chord farther from the centre was taken as longer; it is the other way: the nearer a chord is to the centre, the longer it is (the diameter, through the centre, is the longest)." : "The shorter chord was taken as nearer the centre; the longer chord is the nearer one.", dir === 0 ? (p < q ? 1 : 0) : p > q ? 1 : 0)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fact": ["Chords nearer the centre are longer, and chords the same distance from the centre are equal."], "compare": ["Applying the fact to the given distances answers the question."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "fact" ? `Use: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 1], [5, 15], [1, 14], [1, 14]],
     keep: ([dir, r, p, q]) => p < r && q < r && (p === q || (hsh(`${dir},${r},${p},${q}`) % 6 === 0)),
@@ -3099,6 +3315,10 @@ export const B12: Def[] = [
       return keepBugs([B(k === 1 ? "same-side-supplementary" : "opposite-side-equal", "conceptual", CT, k === 1 ? "The angles were tested for adding up to 180°; with C and D on the SAME side of AB, the points are concyclic when the angles are equal." : "The angles were tested for being equal; with C and D on OPPOSITE sides of AB, the points are concyclic when the angles add up to 180°.", k === 1 ? (x + y === 180 && x !== y ? 0 : yes ? 1 : null) : x === y && x + y !== 180 ? 0 : yes ? 1 : null), B("not-decidable", "conceptual", CT, "It was thought the angles cannot decide it; the converse of the theorem says equal angles on the same side (or supplementary angles on opposite sides) put the four points on one circle.", 2)]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "test": ["On a circle, opposite angles of a four-cornered shape add up to 180°, and angles standing on the same arc on the same side are equal. So we check the angle fact that fits."], "decide": ["The converse is also true, so the angle check decides whether the four points lie on a circle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "test" ? `Check: ${s.value}` : s.value === 0 ? "So they lie on one circle (the converse of the theorem)" : "So they do not lie on one circle"),
     domain: [[0, 2], [6, 30], [6, 30], [0, 30]],
     keep: cycKeep,
@@ -3147,6 +3367,10 @@ export const B12: Def[] = [
     },
     distractors: (p) => [0, 1, 2, 3].filter((x) => x !== [2, 1, 0, 3, 1, 2][p[0]]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["A zero of a polynomial is where its graph meets the x-axis, so counting the meeting points counts the zeros."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `The curve meets the x-axis at ${s.value} ${s.value === 1 ? "point" : "points"}, so p(x) has ${s.value} ${s.value === 1 ? "zero" : "zeros"}`,
     domain: [[0, 5], [-3, 3], [-3, 3], [-3, 3], [0, 1]],
     keep: (p) => zgrOk(p),
@@ -3202,6 +3426,10 @@ export const B12: Def[] = [
           ? [B("contradiction-as-many", "conceptual", SYS3, "Ending with 0 = a non-zero number was read as 'infinitely many'; that equation can never be true, so there is no solution.", 2), B("always-one", "conceptual", SYS3, "Three equations in three unknowns were assumed always to have exactly one solution; check whether one equation follows from the others.", 0)]
           : [],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "eliminate": ["Removing letters one at a time shows whether the equations can all be true together."], "decide": ["A line like 0 = a non-zero number can never be true, so there is no solution; 0 = 0 means many solutions."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "eliminate" ? `Eliminate one variable at a time: ${s.value}` : ["So there is exactly one solution", "So there is no solution", "So there are infinitely many solutions"][Number(s.value)]),
     domain: [[0, 7], [-3, 3], [-3, 3], [-3, 3], [0, 2], [0, 2]],
     keep: (p) => !(p[4] === 0 && p[5] !== 0) && (p[4] !== 0 || hsh(p.join(",")) % 3 === 0) && firstOnly("al3cons", [[0, 7], [-3, 3], [-3, 3], [-3, 3], [0, 2], [0, 2]], (q) => sys3Eqs(q).map(([r, c]) => eq3(r, c)).join(";"))(p),

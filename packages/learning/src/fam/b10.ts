@@ -146,6 +146,10 @@ export const B10: Def[] = [
       return [tup(p), tup([s[1], s[0], s[2], s[3]]), tup([s[0], s[1], s[3], s[2]])];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "place": ["On the number line numbers grow from left to right, so a negative number is smaller the further it is from 0."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `On the number line, numbers increase from left to right: ${s.value}`,
     domain: [[-9, 9], [-9, 9], [-9, 9], [-9, 9]],
     keep: (p) => new Set(p).size === 4 && p.filter((x) => x < 0).length >= 2 && p.some((x) => x > 0) && !p.every((x, i) => i === 0 || x > p[i - 1]),
@@ -195,6 +199,10 @@ export const B10: Def[] = [
       { id: "part-left-out", kind: "procedural", competency: OPP, says: `Only ${k} × 100 was found; the ${k} × ${Math.abs(d)} part was left out.`, predict: k * 100 },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "hundred": ["A number near 100 is easier to use as 100 and a small change, so we multiply by 100 first."], "part": ["Then we work out the small part we added on or left out."], "combine|subtract": ["The number was 100 minus a little, so we take away the extra we added."], "combine|add": ["The number was 100 plus a little, so we add the small part on."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "hundred" ? `${s.inputs[0]} × 100 = ${s.value}` : s.id === "part" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.op === "subtract" ? "−" : "+"} ${s.inputs[1]} = ${s.value}`),
     domain: [[12, 99], [-2, 2]],
     keep: ([, d]) => d !== 0,
@@ -246,6 +254,10 @@ export const B10: Def[] = [
     ],
     distractors: ([a, b, c, s]) => [s ? a + b + c : a + b - c],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "remove": ["A minus sign in front of a bracket takes away everything inside, so every sign inside changes when the bracket goes."], "first": ["With no brackets left, we work from left to right."], "last": ["With no brackets left, we work from left to right."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "remove" ? `Without brackets: ${s.value} (the minus sign changes every sign inside)` : `${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}`),
     domain: [[20, 99], [10, 60], [2, 30], [0, 1]],
     keep: ([a, b, c]) => (a - b) % 10 === 0 && a - b > 0 && b > c && a - b - c >= 0,
@@ -312,6 +324,10 @@ export const B10: Def[] = [
       return [tup([ps[0] * ps[1], ...ps.slice(2)].sort((a, b) => a - b)), tup([...ps, ps[ps.length - 1]])];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "div#": ["We keep dividing by the smallest prime that goes in exactly, until 1 is left. That way every factor we use is prime."], "list": ["The primes we divided by, multiplied together, give back the number, so they are its prime factors."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "list" ? `The divisors are the prime factors: ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[16, 400]],
     cap: 400,
@@ -383,6 +399,10 @@ export const B10: Def[] = [
       return [primeList(n)[0], n / m, 2 * m];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["A perfect square has every prime in pairs, so we split the number into primes to see which are paired."], "unpaired": ["Multiplying by the primes without a partner gives each one a pair, so the result is a perfect square."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factor" ? `${s.inputs[0]} = ${s.value}` : `Primes without a partner: ${s.inputs.join(" × ")} = ${s.value}`),
     domain: [[8, 500]],
     difficulty: ([n]) => {
@@ -439,6 +459,10 @@ export const B10: Def[] = [
     },
     distractors: ([x, y, g]) => [`${x * g}:${y * g}`, `${x + 1}:${y}`, `${x}:${y + 1}`],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "hcf": ["Dividing both terms by their highest common factor gives the simplest ratio in one go."], "divide": ["Dividing both terms by the same number keeps the ratio the same."], "units": ["Both quantities must be in the same unit before they can be compared in a ratio."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "units" ? `${s.inputs[0]} m = ${s.value} cm` : s.id === "hcf" ? `The highest common factor of ${s.inputs[0]} and ${s.inputs[1]} is ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[2]} : ${s.inputs[1]} ÷ ${s.inputs[2]} = ${s.value}`),
     domain: [[1, 12], [1, 12], [2, 75], [0, 1]],
     keep: ([x, y, g, u]) => x !== y && gcd(x, y) === 1 && (u === 0 ? g <= 15 : (y * g) % 100 === 0),
@@ -486,6 +510,10 @@ export const B10: Def[] = [
       ...((s ? x : y) >= 2 && (s ? x : y) <= 9 && k <= 9 ? [factSlip(s ? x : y, k)] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "scale": ["Equal ratios are made by multiplying both terms by the same number, so we find that number."], "apply": ["The other term must be multiplied by the same number to keep the ratio equal."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "scale" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}: the terms were multiplied by ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 12], [1, 12], [2, 12], [0, 1]],
     keep: ([x, y]) => x !== y,
@@ -532,6 +560,10 @@ export const B10: Def[] = [
       { id: "division-slip", kind: "recall", competency: MT, says: `A division step slipped. Check by multiplying back: the answer × ${k} should give ${r * k}.`, predict: [r + 1, r - 1] },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "share": ["A rate is the amount for one unit, so we divide the total by the number of units."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`,
     domain: [[12, 99], [3, 12], [0, 3]],
     cap: 400,
@@ -582,6 +614,10 @@ export const B10: Def[] = [
       { id: "price-difference", kind: "procedural", competency: UR, says: "The difference between the two prices per soap was given; the question asks for the price of one soap in the better pack.", predict: Math.abs(u - w) },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "unitA": ["Packs of different sizes can only be compared fairly by the price of one item."], "unitB": ["Packs of different sizes can only be compared fairly by the price of one item."], "compare": ["The lower price for one item is the better buy."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "compare" ? `₹${s.value} is the lower price per soap` : `${s.id === "unitA" ? "Pack A" : "Pack B"}: ₹${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value} per soap`),
     domain: [[2, 11], [10, 50], [3, 12], [10, 50]],
     keep: ([a, u, b, w]) => a < b && u !== w,
@@ -624,6 +660,10 @@ export const B10: Def[] = [
       { id: "rate-not-inverted", kind: "procedural", competency: UR, says: `The work done in one day (1/${a} + 1/${b}) was given; the number of days is 1 divided by that.`, predict: (a + b) / (a * b) },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rates": ["Someone who takes d days alone does 1/d of the job each day. Working together, their parts add up."], "invert": ["The whole job is 1, so dividing 1 by the work done each day gives the number of days."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "rates" ? `In one day together they do ${s.inputs[0]} + ${s.inputs[1]} = ${fmtQ(Number(s.value))} of the job` : `Days = 1 ÷ (work per day) = ${s.inputs[0]}/${s.inputs[1]} = ${fmtQ(Number(s.value))}`),
     domain: [[2, 23], [3, 24]],
     keep: ([a, b]) => a < b,
@@ -676,6 +716,10 @@ export const B10: Def[] = [
       o === 2 && { id: "power-of-power", kind: "procedural", competency: EXP, says: "The first power was raised to the second; the powers simply multiply.", predict: m ** n <= 10000 ? m ** n : null },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "subtract": ["Dividing powers of the same base cancels the common factors, so the powers are taken away."], "add": ["Multiplying powers of the same base puts all the factors together, so the powers are added."], "multiply": ["A power of a power repeats the whole group of factors, so the powers are multiplied."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} ${s.op === "add" ? "+" : s.op === "subtract" ? "−" : "×"} ${s.inputs[1]} = ${s.value}`,
     domain: [[2, 9], [1, 12], [1, 12], [0, 2]],
     cap: 450,
@@ -739,6 +783,10 @@ export const B10: Def[] = [
       return [d, (d * d) % 10, (d * d * d) % 10, (d * d * d * d) % 10];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cycle": ["The last digit of a product depends only on the last digits, so the last digits of powers repeat in a cycle."], "position": ["The cycle repeats every few powers, so the remainder tells where in the cycle this power falls. A remainder of 0 means the end of the cycle."], "digit": ["Powers at the same place in the cycle end in the same digit."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "cycle" ? `Units digits of the powers of ${s.inputs[0]} repeat: ${s.value}, …` : s.id === "position" ? `${s.inputs[0]} ÷ ${s.inputs[1]} leaves the place ${s.value} in the cycle` : `The digit in place ${s.inputs[0]} is ${s.value}`),
     domain: [[2, 39], [10, 60]],
     cap: 350,
@@ -787,6 +835,10 @@ export const B10: Def[] = [
     // only values that show as exact fractions (denominators up to 1000), never a long decimal
     distractors: ([a, m, k]) => [a ** (m - k - 1), a ** (m - k + 1), a ** (k - m)].filter((x) => Number.isInteger(x) || Number.isInteger(Math.round(1 / x)) && Math.round(1 / x) <= 1000),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "value": ["A negative power means one over the positive power."], "combine": ["Multiplying powers of the same base adds the powers, even when some are negative."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "combine" ? `Add the powers: ${s.inputs[0]} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : `${s.inputs[0]} to the power ${n_(Number(s.inputs[1]))} = ${Number(s.value) < 1 ? `1/${Math.round(1 / Number(s.value))}` : s.value}`),
     domain: [[2, 10], [0, 5], [1, 8]],
     // answers written as exact fractions: denominators up to 1000
@@ -839,6 +891,10 @@ export const B10: Def[] = [
       { id: "lakh-is-million", kind: "conceptual", competency: IIN, says: "1 lakh was taken as 1 million. 1 lakh is 1,00,000 = one hundred thousand; 10 lakh make a million.", predict: 10 * c + 10 * k },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "crore": ["1 crore is 10 million, so we multiply the crores by 10."], "lakh": ["10 lakh make 1 million, so we divide the lakhs by 10."], "total": ["Both parts are now in millions, so they can be added."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "crore" ? `${s.inputs[0]} crore = ${s.value} million (1 crore = 10 million)` : s.id === "lakh" ? `${s.inputs[0]} lakh = ${s.value} million (10 lakh = 1 million)` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} million`),
     domain: [[1, 99], [0, 9]],
     cap: 350,
@@ -894,6 +950,10 @@ export const B10: Def[] = [
     ],
     distractors: ([a, b]) => [Math.abs(a) + Math.abs(b), a * b + Math.sign(a * b) * Math.abs(a), a * b - Math.sign(a * b) * Math.abs(b)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "size": ["First multiply the numbers without their signs."], "sign": ["Multiplying or dividing two numbers with the same sign gives a positive answer; with different signs it gives a negative answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "size" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${Number(s.inputs[0]) < 0 === Number(s.inputs[1]) < 0 ? "Same signs give a positive product" : "Different signs give a negative product"}: ${n_(Number(s.value))}`),
     domain: [[-15, 15], [-15, 15]],
     keep: ([a, b]) => Math.abs(a) >= 2 && Math.abs(b) >= 2 && (a < 0 || b < 0),
@@ -964,6 +1024,10 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "amount": ["A percentage profit or loss is worked out on the cost price, so we take that percentage of the cost."], "price|add": ["A profit means the selling price is more than the cost, so we add."], "price|subtract": ["A loss means the selling price is less than the cost, so we take away."], "percent": ["The cost price is 100%, so with a profit or loss the selling price is that many percent of the cost."], "back": ["The selling price is a known percentage of the cost, so we find 1% and then 100%."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "amount" ? `${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "price" ? `₹${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ₹${s.inputs[1]} = ₹${s.value}` : s.id === "percent" ? `The selling price is ${s.value}% of the cost price` : `Cost price = ₹${s.inputs[0]} × 100 ÷ ${s.inputs[1]} = ₹${s.value}`),
     domain: [[5, 50], [5, 40], [0, 1], [0, 1]],
     keep: ([, p]) => p % 5 === 0,
@@ -1074,6 +1138,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "year": ["Simple interest is the same every year: the rate percent of the principal."], "years": ["The same interest is added each year, so we multiply by the number of years."], "amount": ["The amount is what you get back: the principal plus the interest."], "rate": ["Simple interest = principal × rate × time ÷ 100, so the rate is the interest × 100 divided by principal × time."], "time": ["The interest is the same each year, so dividing the total by one year's interest counts the years."], "principal": ["Simple interest = principal × rate × time ÷ 100, so the principal is the interest × 100 divided by rate × time."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "year" ? `One year's interest: ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "years" ? `For ${s.inputs[1]} ${s.inputs[1] === 1 ? "year" : "years"}: ₹${s.inputs[0]} × ${s.inputs[1]} = ₹${s.value}` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : s.id === "rate" ? `R = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "principal" ? `P = ${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `T = ₹${s.inputs[0]} ÷ ₹${s.inputs[1]} = ${s.value} ${s.value === 1 ? "year" : "years"}`),
     domain: [[1, 40], [2, 15], [1, 6], [0, 4]],
     cap: 500,
@@ -1145,6 +1213,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "amount": ["A percentage change is worked out on the original price, so we take that percentage of it."], "price|subtract": ["A discount makes the price lower, so we take it away."], "price|add": ["An increase makes the price higher, so we add it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "amount" ? `${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : `₹${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[2, 60], [1, 10], [0, 1]],
     // GST slabs since September 2025: 5% and 18% (the 12% and 28% slabs are gone)
@@ -1219,6 +1291,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "parts": ["A ratio shares the amount in equal parts, so we count how many parts there are in all."], "one": ["Dividing the amount by the number of parts gives the size of one part."], "share": ["Each share is its number of parts times one part."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "parts" ? `Total parts: ${s.inputs.join(" + ")} = ${s.value}` : s.id === "one" ? `One part: ₹${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `${s.inputs[1]} parts: ${s.inputs[1]} × ₹${s.inputs[0]} = ₹${s.value}`),
     domain: [[1, 9], [1, 9], [0, 9], [2, 40], [0, 2]],
     cap: 450,
@@ -1286,6 +1362,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "common": ["Fractions can only be added or taken away when their denominators are the same."], "combine": ["With the same denominator, the numerators are combined, keeping their signs."], "multiply": ["To multiply fractions, multiply the tops and multiply the bottoms. Two negatives multiply to a positive."], "flip": ["Dividing by a number is the same as multiplying by its reciprocal."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "common" ? `Common denominator: ${s.value}` : s.id === "flip" ? `Dividing by ${s.inputs[0]} is multiplying by its reciprocal` : `${String(s.inputs[0]).replace(/^-/, "−")} ${s.op === "add" ? "+" : s.op === "subtract" ? "−" : "×"} ${String(s.inputs[1]).startsWith("-") ? `(${String(s.inputs[1]).replace(/^-/, "−")})` : s.inputs[1]} = ${fmtQ(Number(s.value))}`),
     domain: [[-8, 8], [2, 9], [-8, 8], [2, 9], [0, 3]],
     // dividing a positive number by a negative one has no sensible everyday form (a negative time)
@@ -1359,6 +1439,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["In compound interest each year's interest is added before the next year starts, so the value is multiplied by the same factor every year."], "value": ["Multiplying the principal by the yearly factor once for each year gives the amount."], "interest": ["The interest is the amount at the end with the principal taken away."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factor" ? `Each ${s.inputs[2] === 1 ? "half-year" : "year"} multiplies the value by ${String(s.value).replace(/\^\d+$/, "")}; over ${s.inputs[1]} ${s.inputs[2] === 1 ? "half-years" : "years"} that is ${s.value}` : s.id === "value" ? `₹${s.inputs[0]} becomes ₹${s.value}` : `Interest = ₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[1, 50], [2, 20], [2, 3], [0, 2]],
     cap: 400,
@@ -1419,6 +1503,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cube": ["A cube is a number multiplied by itself three times."], "root": ["The cube root is the number that, multiplied by itself three times, gives the number."], "sign": ["A negative number multiplied by itself three times stays negative, so a negative number has a negative cube root."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "cube" ? `${n_(Number(s.inputs[0]))} × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}` : s.id === "root" ? `${s.value} × ${s.value} × ${s.value} = ${s.inputs[0]}` : `The cube root of a negative number is negative: ${n_(Number(s.value))}`),
     domain: [[0, 2], [2, 50]],
     keep: ([m, n]) => n <= [25, 50, 30][m],
@@ -1485,6 +1573,10 @@ export const B10: Def[] = [
     },
     distractors: ([n]) => [cubeMult(n) * 2, cubeMult(n) * 3, primeList(n)[primeList(n).length - 1]],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["A perfect cube has every prime in groups of three, so we split the number into primes to see which groups are not complete."], "complete": ["Multiplying by the primes that are missing from each group makes every group of three complete, so the result is a cube."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factor" ? `${s.inputs[0]} = ${s.value}` : `Complete each group of three equal primes: multiply by ${s.value}`),
     domain: [[16, 2000]],
     difficulty: ([n]) => ([...expo(n)].filter(([, e]) => e % 3).length === 1 ? 1 : n <= 300 ? 2 : 3),
@@ -1557,6 +1649,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "before": ["Comparing the two plans day by day shows which one is ahead."], "after": ["A plan that multiplies grows faster and faster, so in the end it passes a plan that adds the same amount each day."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Day ${s.inputs[0]}: Plan A ₹${s.inputs[1]}, Plan B ₹${s.inputs[2]}`,
     domain: [[10, 100], [5, 50], [1, 10]],
     cap: 300,
@@ -1620,6 +1716,10 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "place#": ["In binary each place is worth a power of 2, so each digit is multiplied by the value of its place."], "sum": ["A number is the sum of its digits' place values."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `Add the place values: ${s.inputs.join(" + ")} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]}${sup(Number(s.inputs[2]))} = ${s.value}`),
     domain: [[2, 9], [4, 400]],
     cap: 400,
@@ -1687,6 +1787,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "div#": ["Dividing by the base again and again splits the number into powers of the base; each remainder is one digit."], "read": ["The first remainder is the ones digit, so the digits are read from the last remainder to the first."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "read" ? `Read the remainders from the last to the first: ${s.inputs.join(", ")}, so the numeral is ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} remainder ${s.inputs[2]}`),
     domain: [[2, 9], [4, 400]],
     cap: 400,
@@ -1745,6 +1849,10 @@ export const B10: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["One number divides another only when every prime power in it is also in the other. A shared prime means a common factor greater than 1."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the true statement is: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 4], [0, 3], [0, 2], [0, 1], [0, 4], [0, 3], [0, 2], [0, 1]],
     keep: pfdOk,
@@ -1824,6 +1932,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "move": ["Moving right on the number line adds, moving left takes away."], "represent": ["Above or gain is positive; below or loss is negative."], "opposite": ["Opposite numbers are the same distance from 0, on different sides."], "count": ["The distance between two numbers is how many steps from one to the other."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "move" ? `Starting at ${n_(Number(s.inputs[0]))} and moving ${Math.abs(Number(s.inputs[1]))} to the ${Number(s.inputs[1]) < 0 ? "left" : "right"} reaches ${n_(Number(s.value))}` : s.id === "count" ? `From ${n_(Number(s.inputs[0]))} to ${n_(Number(s.inputs[1]))} is ${s.value} units` : s.id === "opposite" ? `The opposite is the same distance from 0 on the other side: ${n_(Number(s.value))}` : `Written as an integer: ${n_(Number(s.value))}`),
     domain: [[0, 3], [-60, 60], [-9, 9]],
     keep: intlOk,
@@ -1905,6 +2017,10 @@ export const B10: Def[] = [
     },
     distractors: ([m, x, y, z]) => (m === 0 ? [(x * 1e7 + y * 1e5 + z * 1e3) * 10, (x * 1e7 + y * 1e5 + z * 1e3) / 10, x * 1e7 + z * 1e5 + y * 1e3] : []),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "crore": ["In the Indian system, commas mark ones-thousands-lakhs-crores, so each part sits in its own places."], "lakh": ["In the Indian system, commas mark ones-thousands-lakhs-crores, so each part sits in its own places."], "thousand": ["In the Indian system, commas mark ones-thousands-lakhs-crores, so each part sits in its own places."], "million": ["10 lakh make 1 million, so each million is 10 lakh."], "billion": ["100 crore make 1 billion, so each billion is 100 crore."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "crore" ? `${s.inputs[0]} crore = ${inr(Number(s.value))}` : s.id === "lakh" ? `${s.inputs[0]} lakh = ${inr(Number(s.value))}` : s.id === "thousand" ? `${s.inputs[0]} thousand = ${inr(Number(s.value))}` : s.id === "million" ? `${s.inputs[0]} million = ${s.inputs[0]} × 10 lakh = ${s.value} lakh` : `${s.inputs[0]} billion = ${s.inputs[0]} × 100 crore = ${s.value} crore`),
     // a domain small enough to be listed in full (not sampled), so the million and billion questions reach the pool too
     domain: [[0, 2], [1, 99], [0, 99], [0, 9]],
@@ -1951,6 +2067,10 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Numbers are compared from the biggest place first: the most crores wins, then the most lakhs, and so on."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `No other option is bigger, so choose ${s.inputs[0]}.` : `The greatest is ${s.inputs[0]}: it has the most crores and lakhs.`),
     domain: [[0, 699]],
     cap: 400,
@@ -2003,6 +2123,10 @@ export const B10: Def[] = [
       return [{ id: [4, 5, 6, 9].includes(t) ? "distribute-one" : t === 3 ? "plus-bracket" : "inner-sign", kind: "conceptual", competency: OPP, says, predict: o.indexOf(CMPX_SLIP[t]) }];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Rewriting one side using the rules for brackets and signs shows whether the two sides are really the same."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `${s.inputs[0] === "<" ? "The first expression is the smaller one" : s.inputs[0] === "=" ? "The two expressions are equal" : "The first expression is the bigger one"}, so the sign between them is ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 9], [2, 99], [2, 49], [2, 9]],
     keep: cmpxOk,
@@ -2055,6 +2179,10 @@ export const B10: Def[] = [
       return [{ id: `confuse-${k}`, kind: "conceptual", competency: OPP, says, predict: propOpts(p).indexOf(PROP_CONF[k]) }];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "name": ["Each property describes one kind of change: swapping order, regrouping, or sharing multiplication over addition."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `That is the option to choose: ${s.inputs[0]}.` : `The statement shows the ${String(s.inputs[0]).replace(/ \(.*\)$/, "").toLowerCase()}.`),
     domain: [[0, 7], [0, 1], [0, 1], [0, 99], [0, 99], [0, 99]],
     keep: propOk,
@@ -2117,6 +2245,10 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "additive": ["A number and its opposite add up to 0, so the additive inverse is the number with its sign changed."], "reciprocal": ["A number and its reciprocal multiply to 1, so the reciprocal is the fraction turned upside down."], "factor": ["Multiplication shares over addition, so a common factor can be taken out of both terms."], "times": ["Multiplying the factor by what is left in the bracket finishes the working."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "additive" ? `${String(s.inputs[0]).replace(/^-/, "−")} + (${fmtQ(Number(s.value))}) = 0` : s.id === "reciprocal" ? `${String(s.inputs[0]).replace(/^-/, "−")} × ${fmtQ(Number(s.value))} = 1` : s.id === "factor" ? `Take out the common factor: ${String(s.inputs[0]).replace(/^-/, "−")} × (${s.inputs[1]} + ${s.inputs[2]}) = ${String(s.inputs[0]).replace(/^-/, "−")} × 1` : `= ${fmtQ(Number(s.value))}`),
     domain: [[0, 2], [-9, 9], [2, 9], [1, 8], [2, 9]],
     keep: invOk,
@@ -2196,6 +2328,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "subtract": ["Taking away one cube leaves what the other cube must be."], "root": ["The cube root tells which whole number makes that cube."], "cubes": ["Adding the two cubes checks that they make the number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "cubes" ? `${Math.round(Math.cbrt(Number(s.inputs[0])))}³ + ${Math.round(Math.cbrt(Number(s.inputs[1])))}³ = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "subtract" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The cube root of ${s.inputs[0]} is ${s.value}`),
     domain: [[0, 26], [0, 4]],
     difficulty: ([i, w]) => (w === 4 ? 1 : i < 6 ? 2 : 3),
@@ -2252,6 +2388,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "cross": ["To compare two ratios, write them as fractions and cross-multiply: this is comparing them over the same denominator."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Cross-multiply: ${s.inputs[0]} and ${s.inputs[1]}. ${Number(s.inputs[0]) === Number(s.inputs[1]) ? "They are equal, so the ratios are equivalent" : Number(s.inputs[0]) > Number(s.inputs[1]) ? "The first is bigger, so the first ratio is greater" : "The second is bigger, so the second ratio is greater"}`,
     domain: [[1, 12], [1, 12], [1, 36], [1, 36]],
     keep: rcmpOk,
@@ -2295,6 +2435,10 @@ export const B10: Def[] = [
       ...(r <= 12 && k <= 12 && r >= 2 ? [factSlip(r, k)] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["The fare is the same for each unit, so we multiply."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[1]} × ₹${s.inputs[0]} = ₹${s.value}`,
     domain: [[5, 30], [2, 25], [0, 3]],
     cap: 400,
@@ -2360,6 +2504,10 @@ export const B10: Def[] = [
       return [{ id: "applied-to-sp", kind: "conceptual", competency: PL, says: g > 0 ? "The profit was added to the selling price. The selling price already includes the profit, so take it away to get the cost price." : "The loss was taken away from the selling price. The cost price is more than the selling price by the loss, so add it.", predict: cp + 2 * g }];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "diff": ["Profit or loss is the difference between the selling price and the cost price."], "sp|add": ["With a profit the selling price is the cost plus the profit."], "sp|subtract": ["With a loss the selling price is the cost minus the loss."], "cp|subtract": ["With a profit the cost is the selling price minus the profit."], "cp|add": ["With a loss the cost is the selling price plus the loss."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "diff" ? `₹${s.inputs[0]} − ₹${s.inputs[1]} = ${n_(Number(s.value))} (${Number(s.value) > 0 ? "a profit" : "a loss"})` : `₹${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[5, 100], [-30, 30], [0, 2]],
     keep: ([c, d]) => d !== 0 && 5 * Math.abs(d) < 10 * c,
@@ -2417,6 +2565,10 @@ export const B10: Def[] = [
       { id: "multiplied", kind: "conceptual", competency: IMUL, says: "The numbers were multiplied instead of divided.", predict: q * d * d },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "size": ["First divide the numbers without their signs."], "sign": ["Multiplying or dividing two numbers with the same sign gives a positive answer; with different signs it gives a negative answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "size" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `${(Number(s.inputs[0]) < 0) === (Number(s.inputs[1]) < 0) ? "Same signs give a positive quotient" : "Different signs give a negative quotient"}: ${n_(Number(s.value))}`),
     domain: [[-15, 15], [-12, 12]],
     keep: ([q, d]) => Math.abs(q) >= 2 && Math.abs(d) >= 2 && (q < 0 || d < 0),
@@ -2484,6 +2636,10 @@ export const B10: Def[] = [
     },
     distractors: ([p, q]) => [`${n_(p)}/${q + 1}`, `${n_(q)}/${Math.abs(p) === 1 ? q + 2 : Math.abs(p)}`],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "divide": ["A rational number is in standard form when the top and bottom have no common factor, so we divide both by their highest common factor."], "sign": ["Multiplying the top and bottom by the same number gives an equal fraction; using −1 changes the signs without changing the value."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sign" ? `Multiply the numerator and denominator by −1: ${s.value}` : `Divide both by the highest common factor ${s.inputs[2]}: ${s.value}`),
     domain: [[-11, 11], [2, 12], [2, 6], [0, 1]],
     keep: ([p, q, k]) => p !== 0 && Math.abs(p) < q && gcd(Math.abs(p), q) === 1 && k * q <= 60,
@@ -2533,6 +2689,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "common": ["Writing both with the same positive denominator makes the parts the same size, so we only compare the numerators."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `${s.inputs[1]}: ${s.inputs[0]}.` : `With a common denominator: ${String(s.inputs[0])} and ${String(s.inputs[1])}; compare the numerators.`),
     domain: [[-9, 9], [2, 9], [-18, 18], [2, 18]],
     keep: rcqOk,
@@ -2608,6 +2768,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "mark|add": ["Moving right on the number line adds."], "mark|subtract": ["Moving left on the number line takes away."], "sum": ["The point half-way between two numbers is their average: add them and halve."], "half": ["The point half-way between two numbers is their average: add them and halve."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "mark" ? `${n_(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${fmtQ(Number(s.value))}` : s.id === "sum" ? `${String(s.inputs[0]).replace(/^-/, "−")} + ${String(s.inputs[1]).startsWith("-") ? `(${String(s.inputs[1]).replace(/^-/, "−")})` : s.inputs[1]} = ${fmtQ(Number(s.value))}` : `${fmtQ(Number(s.inputs[0]))} ÷ 2 = ${fmtQ(Number(s.value))}`),
     domain: [[0, 1], [-9, 9], [2, 9], [-9, 9], [2, 9]],
     keep: rlineOk,
@@ -2712,6 +2876,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "period": ["When interest is added more than once a year, each period gets its share of the yearly rate."], "amount": ["Each period's interest is added before the next, so the principal is multiplied by the same factor every period."], "interest": ["The interest is the amount at the end with the principal taken away."], "ci": ["The interest is the amount at the end with the principal taken away."], "si": ["Simple interest is worked out only on the principal, every time."], "diff": ["Compound interest earns interest on interest too, so it is more than simple interest; we find by how much."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "period" ? `Rate for each period: ${s.inputs[0]}% ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} × (1 + ${s.inputs[1]}/100)^${s.inputs[2]} = ₹${fmtMoney(Number(s.value))}` : s.id === "si" ? `Simple interest = ₹${s.inputs[0]} × ${s.inputs[1]} × ${s.inputs[2]} ÷ 100 = ₹${fmtMoney(Number(s.value))}` : s.id === "diff" ? `Difference = ₹${fmtMoney(Number(s.inputs[0]))} − ₹${fmtMoney(Number(s.inputs[1]))} = ₹${fmtMoney(Number(s.value))}` : `Interest = ₹${fmtMoney(Number(s.inputs[0]))} − ₹${s.inputs[1]} = ₹${fmtMoney(Number(s.value))}`),
     domain: [[1, 100], [1, 20], [2, 4], [0, 2]],
     keep: cipOk,
@@ -2781,6 +2949,10 @@ export const B10: Def[] = [
       ]),
     distractors: ([, p, q]) => [`(${q}, ${p})`, `(${p}, ${2 * q})`, `(${p + 1}, ${q})`],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "identity": ["A difference of two squares, a² − b², always factorises as (a + b)(a − b)."], "read": ["Matching the factors with the form asked for gives the numbers to type."], "common": ["Taking out a common factor first leaves a simpler expression that matches an identity."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => {
       if (s.id === "common") return `Take out the common factor: ${s.value}`;
       if (s.id !== "read") return `Using the identity: ${s.value}`;
@@ -2849,6 +3021,10 @@ export const B10: Def[] = [
         m < 2 && a * b > 2 && { id: "squares-multiplied", kind: "procedural", competency: "MATH.algebra.identities", says: `The two squares ${a * a} and ${b * b} were multiplied; the middle term is a × b = ${a} × ${b}.`, predict: a * a * b * b },
       ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "match": ["Matching the expression with the identity tells us what a and b are."], "box": ["Once a and b are known, the identity gives the missing term."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "match" ? `Match the identity: ${s.inputs[0]}` : `The middle term is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [1, 5], [1, 9], [0, 4]],
     keep: fcubOk,
@@ -2907,6 +3083,10 @@ export const B10: Def[] = [
         ? [{ id: "only-letters", kind: "procedural", competency: FACT, says: `Only xy was taken out. The numbers ${p * q} and ${p * r} also have the common factor ${p}; the highest common factor includes it.`, predict: `(1, ${p * q}, ${p * r})` }]
         : keepBugs([r < 0 && { id: "second-group-sign", kind: "procedural", competency: FACT, says: `When −${-r} is taken out of the last two terms, the signs inside the bracket change: ${r * p}x ${r * s < 0 ? "−" : "+"} ${Math.abs(r * s)} = −${-r}(${lin(p, s)}).`, predict: tup([q, -r]) }]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "hcf": ["The highest common factor of the terms can be taken out of every term."], "read": ["Dividing each term by the common factor shows what is left inside the bracket."], "group": ["Taking a common factor out of each pair makes the same bracket appear twice."], "common": ["When the same bracket appears in both parts, it is a common factor and can be taken out."], "other": ["Matching the factors with the form asked for gives the numbers to type."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => {
       if (s.id === "hcf") return `The highest common factor of the two terms is ${s.value}`;
       if (s.id === "group") return `Group in pairs: ${s.value}`;
@@ -2962,6 +3142,10 @@ export const B10: Def[] = [
       ]),
     distractors: ([, q, , s]) => [tup([q, -s]), tup([-q, s])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "product": ["To factorise ax² + bx + c, we look for two numbers whose product is a × c and whose sum is b."], "split": ["Splitting the middle term this way lets us group the terms in pairs that share a bracket."], "group": ["Taking a common factor from each pair leaves the same bracket, which can then be taken out."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "product" ? `a × c = ${n_(Number(s.inputs[0]))} × ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "split" ? `Split the middle term into ${n_(Number(s.inputs[0]))}x and ${n_(Number(s.inputs[1]))}x (their product is a × c and their sum is ${n_(Number(s.value))})` : `Group and take out the common bracket: ${s.value}`),
     domain: [[1, 6], [-9, 9], [1, 6], [-9, 9]],
     keep: fsplOk,
@@ -3012,6 +3196,10 @@ export const B10: Def[] = [
         (p > 1 || r > 1) && { id: "coefficient-ignored", kind: "procedural", competency: ZERO, says: `x was not divided by its coefficient: ${lin(p, q)} = 0 gives ${p === 1 ? "x" : `${p}x`} = ${n_(-q)}, so x = ${fmtQ(-q / p)}.`, predict: [-q, -s] },
       ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["Factorising turns the polynomial into a product of brackets."], "zeros": ["A product is 0 only when one of its factors is 0, so each bracket gives one zero."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factor" ? `p(x) = ${s.value}` : `Each bracket is 0: x = ${(s.value as number[]).map(fmtQ).join(" or x = ")}`),
     domain: [[1, 6], [-9, 9], [1, 6], [-9, 9]],
     keep: zeroOk,
@@ -3074,6 +3262,10 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "check": ["For ax² + bx + c the zeros add to −b/a and multiply to c/a. Both must match for the numbers to be the zeros."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => s.inputs.join("; "),
     domain: [[1, 6], [-9, 9], [1, 6], [-9, 9], [0, 3]],
     keep: zchkOk,

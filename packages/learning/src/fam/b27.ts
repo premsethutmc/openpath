@@ -151,6 +151,10 @@ export const B27: Def[] = [
     },
     distractors: ([a, b, k]) => [a * b, a * b + 2 * a, a * b - 2 * a].filter((x) => x > 0 && x !== (k === 0 ? a * (b + 1) : k === 1 ? a * (b - 1) : 2 * a * b)) as Value[],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "one-more": ["A fact we do not know can be built from one we do: one more lot means adding one more of the number."], "double": ["Twice as many lots means doubling the fact we know."], "one-less": ["One lot fewer means taking one of the number away from the fact we know."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "double" ? `Twice as many lots: ${s.inputs[0]} + ${s.inputs[0]} = ${s.value}` : s.id === "one-more" ? `One more lot: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `One lot less: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[3, 9], [2, 9], [0, 2]],
     cap: 300,

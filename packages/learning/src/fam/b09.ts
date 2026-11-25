@@ -212,6 +212,10 @@ export const B09: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "triangles": ["Lines from one corner cut a polygon into triangles, two fewer than its sides, and each triangle's angles add to 180°."], "sum": ["All the triangles' angles together make up the polygon's angles, so we multiply by 180°."], "given": ["We add the angles we know, so we can see how much of the total they use."], "last": ["The missing angle is whatever is left of the total angle sum."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ triangles: "Triangles from one corner", sum: "Angle sum", given: "Given angles", last: "Last angle" }),
     domain: [[5, 8], [0, 59]],
     keep: ([n, s]) => {
@@ -276,6 +280,10 @@ export const B09: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "triangles|subtract": ["Lines from one corner cut a polygon into triangles, two fewer than its sides, and each triangle's angles add to 180°."], "triangles|divide": ["Each triangle gives 180°, so dividing the angle sum by 180° tells how many triangles there are."], "sum": ["All the triangles' angles together make up the polygon's angles, so we multiply by 180°."], "sides|add": ["A polygon has two more sides than the triangles made from one corner."], "each": ["A regular polygon has all its angles equal, so they share the angle sum equally."], "sides|divide": ["Walking round a polygon you turn through 360° in all, and in a regular polygon every turn is the same, so 360° divided by one turn counts the sides."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ triangles: "Triangles", sum: "Angle sum", sides: "Sides", each: "Each angle" }),
     domain: [[3, 36], [0, 3]],
     keep: ([n, m]) => m < 2 || 360 % n === 0,
@@ -330,6 +338,10 @@ export const B09: Def[] = [
       return [B("forgot-two", "procedural", EULER, "The 2 in F + V − E = 2 was forgotten: V = E − F + 2.", E - F), B("added-all", "procedural", EULER, "The faces were added to the edges; V = 2 + E − F.", E + F - 2)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fv": ["Euler's rule for a solid with flat faces says F + V − E = 2, so we need F + V first."], "edges": ["From F + V − E = 2, the edges are two fewer than faces and vertices together."], "ev": ["From F + V − E = 2, we can get the faces once we know E − V."], "faces": ["Rearranging F + V − E = 2 gives F = E − V + 2."], "ef": ["From F + V − E = 2, we can get the vertices once we know E − F."], "vertices": ["Rearranging F + V − E = 2 gives V = E − F + 2."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ fv: "F + V", edges: "E = F + V − 2", ev: "E − V", faces: "F = E − V + 2", ef: "E − F", vertices: "V = E − F + 2" }),
     domain: [[0, 2], [3, 12], [0, 2]],
     difficulty: ([k, n]) => (n <= 5 ? 1 : k === 2 || n >= 10 ? 3 : 2),
@@ -395,6 +407,10 @@ export const B09: Def[] = [
       return [w === 0 ? c.V : c.F, w === 1 ? c.V : c.E];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "faces": ["A prism has one side face for each side of its base, plus its two ends. A pyramid has one side face for each side of its base, plus the base."], "edges": ["Edges come in equal groups, one edge for each side of the base in every group, so we multiply by the number of base sides."], "vertices|multiply": ["A prism has a copy of the base at each end, so it has the base's corners twice."], "vertices|add": ["A pyramid has all the corners of its base plus one more at the top."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ faces: "Faces", edges: "Edges", vertices: "Vertices" }),
     domain: [[0, 1], [3, 10], [0, 2], [0, 1]],
     difficulty: ([k, n, w, t]) => (n <= 4 && !t ? 1 : t && w > 0 ? 3 : 2),
@@ -436,6 +452,10 @@ export const B09: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "given": ["The four angles of any quadrilateral add up to 360°, because a diagonal cuts it into two triangles. So we add the three we know."], "last": ["The missing angle is what is left of 360°."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ given: "Three angles", last: "∠S" }),
     domain: [[8, 34], [8, 34], [8, 34]],
     keep: ([a, b, c]) => {
@@ -484,6 +504,10 @@ export const B09: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "adjacent": ["Neighbouring angles of a parallelogram are co-interior angles between parallel sides, so they add up to 180°."], "opposite": ["Opposite angles of a parallelogram are equal."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "opposite" ? `∠C is opposite ∠A, and opposite angles of a parallelogram are equal: ∠C = ${s.value}°` : `∠A and this angle are neighbours on parallel sides, so they add to 180°: 180° − ${s.inputs[1]}° = ${s.value}°`),
     domain: [[7, 34], [0, 2], [0, 1]],
     keep: ([A]) => A !== 18,
@@ -528,6 +552,10 @@ export const B09: Def[] = [
         ? [B("whole-diagonal", "procedural", QUAD, "The whole diagonal was given; the diagonals of a rectangle are equal and cut each other in half, so OB is half of BD.", 2 * m), B("side-for-half-diagonal", "conceptual", QUAD, "The side AB was used; OB is half of the diagonal BD, not a side.", b)]
         : [B("diagonals-equal", "conceptual", QUAD, "The diagonals of a parallelogram were taken to be equal; they cut each other in half but need not be equal (that is only true in a rectangle).", 2 * b), B("not-doubled", "procedural", QUAD, "OA is only half of AC; O is the midpoint of AC.", m), B("added-halves", "procedural", QUAD, "OA and OB were added; they lie on different diagonals. AC = OA + OC = 2 × OA.", m + b)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "equal": ["The diagonals of a rectangle are always the same length."], "half": ["The diagonals of a parallelogram, and so of a rectangle, cut each other into two equal halves."], "double": ["The diagonals cut each other in half, so a whole diagonal is twice the part from the middle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "equal" ? `The diagonals of a rectangle are equal: BD = AC = ${s.value} cm` : s.id === "half" ? `They cut each other in half: OB = ${s.inputs[0]} ÷ 2 = ${s.value} cm` : `O is the midpoint of AC: AC = 2 × ${s.inputs[1]} = ${s.value} cm`),
     domain: [[0, 1], [2, 20], [2, 30]],
     keep: ([s, m, b]) => b !== m && (s === 0 ? b < 2 * m : b <= 20),
@@ -574,6 +602,10 @@ export const B09: Def[] = [
         : [B("multiplied", "conceptual", SCALE, `The real distance was multiplied by ${k}; the map is smaller, so divide by ${k}.`, k * k * d), B("subtracted", "conceptual", SCALE, `${k} was taken away; find how many lots of ${k} km make the distance.`, k * d - k)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "real": ["The scale says how much real distance each centimetre on the map stands for, so we multiply."], "map": ["Each map centimetre stands for a fixed real distance, so dividing tells how many map centimetres are needed."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "real" ? `${s.inputs[0]} cm × ${s.inputs[1]} km for each cm = ${s.value} km` : `${s.inputs[0]} km ÷ ${s.inputs[1]} km for each cm = ${s.value} cm`),
     domain: [[0, SCALES.length - 1], [2, 15], [0, 1]],
     difficulty: ([i, d]) => (SCALES[i] <= 10 && d <= 9 ? 1 : SCALES[i] === 25 || d > 12 ? 3 : 2),
@@ -619,6 +651,10 @@ export const B09: Def[] = [
     },
     distractors: ([i, d]) => [D(d * RATIOS[i], 10), D(d * RATIOS[i] * 10, RATIOS[i] <= 1000 ? 100 : 100000), D(d + RATIOS[i])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "real-cm": ["A scale ratio says each unit on the drawing stands for that many of the same unit in real life, so we multiply."], "convert": ["There are 100 cm in a metre, so dividing by 100 changes centimetres into metres."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "real-cm" ? `Every 1 cm stands for ${s.inputs[1]} cm: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm` : `${s.inputs[0]} cm ÷ ${s.inputs[1]} = ${s.value} ${Number(s.inputs[1]) === 100 ? "m" : "km"}`),
     domain: [[0, RATIOS.length - 1], [1, 20]],
     difficulty: ([i]) => (RATIOS[i] <= 200 ? 1 : RATIOS[i] <= 1000 ? 2 : 3),
@@ -654,6 +690,10 @@ export const B09: Def[] = [
       B("surface-for-volume", "conceptual", SURF, "The area of the outside faces was found; volume measures the space inside.", 2 * (l * w + w * h + h * l)),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "base": ["Volume counts unit cubes. One layer on the base holds length × width cubes."], "volume": ["The box is a stack of equal layers, one for each unit of height, so we multiply by the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ base: "Base area (cubes in one layer)", volume: "Volume" }),
     domain: [[2, 25], [2, 25], [2, 25]],
     keep: ([l, w]) => l >= w,
@@ -698,6 +738,10 @@ export const B09: Def[] = [
         ? [B("cm3-not-litres", "procedural", UNIT, "The volume in cm³ was given; 1000 cm³ make 1 litre, so divide by 1000.", 1000 * a * b * c), B("hundred-for-thousand", "recall", UNIT, "It was divided by 100; 1 litre is 1000 cm³.", 10 * a * b * c)]
         : [B("m3-not-litres", "procedural", UNIT, "The volume in m³ was given; each m³ holds 1000 litres.", a * b * c), B("hundred-for-thousand", "recall", UNIT, "It was multiplied by 100; 1 m³ holds 1000 litres.", 100 * a * b * c)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "volume": ["The space inside a box is length × width × height."], "litres|divide": ["One litre is 1000 cm³, so dividing by 1000 changes cubic centimetres into litres."], "litres|multiply": ["One cubic metre holds 1000 litres, so we multiply by 1000."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "volume" ? `Volume: ${s.inputs.join(" × ")} = ${s.value} ${s.inputs[0] && Number(s.inputs[0]) >= 10 ? "cm³" : "m³"}` : s.op === "divide" ? `${s.inputs[0]} cm³ ÷ 1000 = ${s.value} litres` : `${s.inputs[0]} m³ × 1000 = ${s.value} litres`),
     domain: [[1, 10], [1, 10], [1, 10], [0, 1]],
     keep: ([a, b, c, u]) => a >= b && (u === 0 || Math.max(a, b, c) <= 5),
@@ -738,6 +782,10 @@ export const B09: Def[] = [
       B("rounded-up", "procedural", CVOL, "A part of a cube was counted as a whole one; only whole cubes fit, so round each count down.", Math.ceil(L / a) * Math.ceil(W / a) * Math.ceil(H / a)),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "along": ["Only whole cubes fit, so we see how many fit along, and ignore any space too small for a cube."], "across": ["Only whole cubes fit, so we see how many fit across, and ignore any space too small for a cube."], "up": ["Only whole cubes fit, so we see how many fit going up, and ignore any space too small for a cube."], "total": ["The cubes form rows, layers and stacks, so we multiply the three counts."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `${s.inputs.join(" × ")} = ${s.value} cubes` : `${s.inputs[0]} cm ÷ ${s.inputs[1]} cm: ${s.value} whole cubes fit`),
     domain: [[2, 5], [4, 20], [4, 20], [4, 20]],
     keep: ([a, L, W, H]) => L >= W && Math.min(L, W, H) >= a && !(L % a === 0 && W % a === 0 && H % a === 0),
@@ -773,6 +821,10 @@ export const B09: Def[] = [
     ],
     distractors: ([b, h]) => [D(b * h, 4), D(2 * b * h), D(b + h, 2)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rectangle": ["A triangle is exactly half of a rectangle with the same base and height, so we find that rectangle first."], "half": ["The triangle covers half of that rectangle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ rectangle: "Rectangle base × height", half: "Triangle area" }),
     domain: [[2, 30], [2, 20], [0, 1]],
     cap: 400,
@@ -819,6 +871,10 @@ export const B09: Def[] = [
     },
     distractors: ([b, h, k]) => [String(2 * (k === 0 ? h : b)), String((k === 0 ? h : b) + 1), D(b * h)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "double": ["The triangle is half of a rectangle with the same base and height, so doubling the area gives that rectangle."], "divide": ["A rectangle's area is base × height, so dividing by the base gives the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "double" ? `Twice the area: 2 × ${s.inputs[1]} = ${s.value} cm² (the matching rectangle)` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} cm`),
     domain: [[2, 24], [2, 20], [0, 1]],
     keep: ([b, h]) => b !== h,
@@ -863,6 +919,10 @@ export const B09: Def[] = [
     },
     distractors: ([r, , pm]) => [dec(qm(piOf(pm), [r, 1])), dec(qm(piOf(pm), [4 * r, 1])), D(2 * r * 3)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "diameter": ["The diameter goes right across through the centre, so it is two radii."], "circumference": ["The distance round any circle is always about 3.14 times its diameter; this number is π."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "diameter" ? `Diameter = 2 × radius = ${s.value} cm` : `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm`),
     domain: [[1, 50], [0, 1], [0, 1]],
     keep: ([r, , pm]) => pm === 1 || r % 7 === 0,
@@ -907,6 +967,10 @@ export const B09: Def[] = [
     },
     distractors: ([r, , pm]) => [dec(qm(piOf(pm), [2 * r * r, 1])), dec(qm(piOf(pm), [4 * r * r, 1])), D(r * r)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "square": ["The area of a circle uses r × r, the radius squared."], "area": ["A circle's area is π times the radius squared."], "radius": ["The radius is half the diameter, and the area rule uses the radius."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "radius" ? `Radius = diameter ÷ 2 = ${s.value} cm` : s.id === "square" ? `r² = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `A = π × r² = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm²`),
     domain: [[1, 40], [0, 1], [0, 1]],
     keep: ([r, , pm]) => pm === 1 || r % 7 === 0,
@@ -964,6 +1028,10 @@ export const B09: Def[] = [
     },
     distractors: ([k, n, m]) => (m === 0 ? [D(22 * k * n, 100), D(44 * k * n, 1000), D(44 * k * n, 10)] : [String(2 * n), String(n + 10), D(22 * n, 7)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "circumference": ["In one full turn the wheel rolls along the ground the length of its rim, its circumference."], "distance": ["Each turn covers the same distance, so we multiply by the number of turns."], "metres": ["There are 100 cm in a metre, so dividing by 100 changes centimetres into metres."], "cm": ["The circumference is in centimetres, so the distance must be in centimetres too before we compare them."], "turns": ["Each turn covers one circumference, so dividing the distance by it counts the turns."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "circumference" ? `One turn rolls the circumference: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm` : s.id === "distance" ? `${s.inputs[1]} turns: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm` : s.id === "metres" ? `${s.inputs[0]} cm ÷ 100 = ${s.value} m` : s.id === "cm" ? `${s.inputs[0]} m = ${s.value} cm` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} turns`),
     domain: [[1, 6], [5, 60], [0, 1]],
     cap: 300,
@@ -1028,6 +1096,10 @@ export const B09: Def[] = [
       return a === 1 ? [dec(qm(f, [44 * k, 1])), dec(qm(f, [308 * k * k, 1])), String(154 * k * k)] : [dec(qm(f, [22 * k, 1])), dec(qm(f, [88 * k, 1])), String(44 * k)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "circle": ["An arc is part of the whole circumference, so we find the whole first."], "arc": ["The angle at the centre out of 360° tells what fraction of the circle the sector is."], "circle-area": ["A sector is part of the whole circle, so we find the whole area first."], "area": ["The angle at the centre out of 360° tells what fraction of the circle's area the sector has."], "perimeter": ["The edge of a sector is the curved arc plus the two straight radii."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "circle" ? `Whole circumference: 2 × 22/7 × ${s.inputs[2]} = ${s.value} cm` : s.id === "arc" ? `Arc: ${s.inputs[0]} of ${s.inputs[1]} = ${s.value} cm` : s.id === "circle-area" ? `Whole circle: 22/7 × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value} cm²` : s.id === "area" ? `Sector: ${s.inputs[0]} of ${s.inputs[1]} = ${s.value} cm²` : `Perimeter: arc + 2 radii = ${s.inputs.join(" + ")} = ${s.value} cm`),
     domain: [[1, 6], [0, ANGLES.length - 1], [0, 2]],
     difficulty: ([k, t]) => ([90, 180].includes(ANGLES[t]) ? 1 : 360 % ANGLES[t] === 0 ? 2 : 3),
@@ -1070,6 +1142,10 @@ export const B09: Def[] = [
     ],
     distractors: ([r, w]) => [dec(qm(PI314, [2 * r * w, 1])), dec(qm(PI314, [r * r, 1])), dec(qm(PI314, [(r + w) * (r + w) + r * r, 1]))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "outer": ["The path goes all round the outside, so the outer radius is the inner radius plus the path's width."], "squares": ["The path is the big circle with the small circle taken away. Both areas have π, so we can take away the squares first."], "area": ["The path's area is π times the difference of the squares of the radii."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ outer: "Outer radius", squares: "R² − r²", area: "Path area" }),
     domain: [[2, 20], [1, 6]],
     difficulty: ([r, w]) => (r <= 10 && w <= 2 ? 1 : r <= 15 ? 2 : 3),
@@ -1126,6 +1202,10 @@ export const B09: Def[] = [
     },
     distractors: ([b, h, m]) => (m === 0 ? [String(2 * (b + h)), String(b * h + b), String(b + h)] : m === 1 ? [String(2 * h), String(h + 1), String(b * h * b)] : [String(2 * b + slant(b, h)), String(4 * b), String(b * slant(b, h))]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "area": ["A parallelogram can be cut and moved into a rectangle with the same base and height, so its area is base × height."], "height": ["Area = base × height, so dividing the area by the base gives the height."], "pair": ["Opposite sides of a parallelogram are equal, so the perimeter is two lots of one base and one slanting side."], "perimeter": ["The other two sides repeat the first pair, so we double it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "area" ? `Area = base × height = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm²` : s.id === "height" ? `Height = area ÷ base = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} cm` : s.id === "pair" ? `One base and one slanting side: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value} cm` : `Perimeter = 2 × ${s.inputs[1]} = ${s.value} cm`),
     domain: [[3, 25], [2, 20], [0, 2]],
     cap: 400,
@@ -1166,6 +1246,10 @@ export const B09: Def[] = [
         : [B("not-doubled", "conceptual", PARA, `The area was divided by ${p} without doubling it first; area = ½ × d₁ × d₂.`, D(d, 2)), B("subtracted", "conceptual", PARA, "The diagonal was taken from the area; undo the multiplying by dividing.", (p * d) / 2 - p > 0 ? D(p * d - 2 * p, 2) : null)],
     distractors: ([p, d, m]) => (m === 0 ? [D(p * d, 4), String(2 * p * d), String(p * p)] : [String(2 * d), String(d + 2), String(p * d)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "double": ["A rhombus's area is half of the two diagonals multiplied, so doubling the area gives the product of the diagonals."], "diagonal": ["Dividing the product by the known diagonal leaves the other one."], "product": ["A rhombus fits inside a rectangle as long and wide as its diagonals, and it takes up exactly half of it."], "half": ["The rhombus covers half of the rectangle made by its diagonals."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "product" ? `d₁ × d₂ = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "half" ? `Area = half of ${s.inputs[0]} = ${s.value} cm²` : s.id === "double" ? `d₁ × d₂ = 2 × area = ${s.value}` : `d₂ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} cm`),
     domain: [[2, 30], [2, 30], [0, 1]],
     keep: ([p, d, m]) => p !== d && (m === 1 || p > d),
@@ -1205,6 +1289,10 @@ export const B09: Def[] = [
       B("walls-only", "procedural", SURF, "Only the four side faces were added; the top and bottom count too.", 2 * h * (l + w)),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "lw": ["A cuboid has three different pairs of faces; the top and bottom are length × width."], "wh": ["The two ends are width × height."], "hl": ["The front and back are height × length."], "three": ["We add one face from each pair first."], "total": ["Each face has an equal partner opposite it, so the total is twice the three faces."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ lw: "Top (and bottom)", wh: "One end (and the other)", hl: "Front (and back)", three: "Three different faces", total: "Total surface area" }),
     domain: [[1, 15], [1, 15], [1, 15]],
     keep: ([l, w, h]) => l >= w && w >= h,
@@ -1243,6 +1331,10 @@ export const B09: Def[] = [
       B("total-surface", "conceptual", SURF, "Floor and ceiling were included; the walls are only the four sides.", 2 * (l * w + w * h + h * l)),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "around": ["Opened out, the four walls make one long rectangle as long as the distance round the floor."], "walls": ["That long strip is as tall as the room, so its area is the distance round × the height."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ around: "Distance round the floor", walls: "Four walls" }),
     domain: [[3, 15], [3, 15], [2, 6]],
     keep: ([l, w]) => l >= w,
@@ -1293,6 +1385,10 @@ export const B09: Def[] = [
       return [dec(qm(base, [2 * h, 1])), dec(base), dec(qm(base, [h, 2]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "base": ["A cylinder is a stack of equal circles, so we start with the area of one circle."], "volume": ["Stacking the base area up through the height gives the volume."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "base" ? `Base area πr² = ${s.inputs.join(" × ")} = ${s.value} cm²` : `Volume = base area × height = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} cm³`),
     domain: [[1, 6], [2, 30], [0, 1]],
     cap: 300,
@@ -1346,6 +1442,10 @@ export const B09: Def[] = [
       return [dec(qm(csa, [2, 1])), dec(qa(csa, qm(PI7, [7 * k, 1]))), dec(qm(PI7, qm(r, r)))].filter((x) => a || x !== dec(csa));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "csa": ["The curved surface unrolls into a rectangle: one side is the distance round the circle, the other is the height."], "ends": ["A closed cylinder also has two circles, top and bottom."], "tsa": ["The total surface is the curved part plus the two ends."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "csa" ? `Curved surface 2πrh = ${s.inputs.join(" × ")} = ${s.value} cm²` : s.id === "ends" ? `Two circles 2πr² = ${s.inputs.join(" × ")} = ${s.value} cm²` : `Total = ${s.inputs.join(" + ")} = ${s.value} cm²`),
     domain: [[1, 6], [2, 30], [0, 1]],
     cap: 300,
@@ -1383,6 +1483,10 @@ export const B09: Def[] = [
     ],
     distractors: ([a, b, h]) => [D((a + b) * h, 4), D(b * h), D(a * b, 2)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["Two copies of a trapezium make a parallelogram whose base is the two parallel sides added together."], "times": ["That parallelogram's area is its base × the height."], "half": ["The trapezium is half of that parallelogram."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ sum: "Parallel sides added", times: "× height", half: "Area" }),
     domain: [[3, 30], [2, 29], [2, 20]],
     keep: ([a, b]) => b < a,
@@ -1432,6 +1536,10 @@ export const B09: Def[] = [
         ? [B("whole-rectangle", "procedural", TRAP, "The whole rectangle was found but the cut-out corner was not taken away.", W * H), B("perimeter-for-area", "conceptual", TRAP, "The sides were added (the perimeter); area counts the squares inside.", 2 * (W + H)), B("added-cut", "procedural", TRAP, "The cut-out was added instead of taken away.", W * H + p * c)]
         : [B("cut-shortens", "conceptual", RPER, `Cutting the corner was thought to shorten the perimeter; the two new edges (${p} cm and ${c} cm) replace exactly the edges that were removed.`, 2 * (W + H) - p - c), B("area-for-perimeter", "conceptual", RPER, "The area was found; the perimeter is the distance around the edge.", W * H - p * c), B("missed-side", "procedural", RPER, "One of the six sides was missed; go all the way round.", 2 * (W + H) - Math.min(p, c))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "whole": ["The L shape is a whole rectangle with a corner rectangle cut out, so we find the whole first."], "cut": ["Then we find the piece that is missing."], "area": ["Taking the missing piece away from the whole leaves the L shape."], "perimeter": ["The perimeter is the distance all the way round, so every one of the six edges is added."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ whole: "Whole rectangle", cut: "Cut-out corner", area: "Area", perimeter: "Perimeter, all six sides" }),
     domain: [[4, 12], [4, 12], [1, 11], [1, 11], [0, 1]],
     keep: ([W, H, p, c]) => p < W && c < H,
@@ -1480,6 +1588,10 @@ export const B09: Def[] = [
         ? [B("width-once", "procedural", TRAP, `The path width was added only once to each side; the path is on both sides, so the outer rectangle is ${L + 2 * x} m by ${W + 2 * x} m.`, (L + x) * (W + x) - L * W), B("corners-missed", "conceptual", TRAP, "The four strips along the sides were found, but the four corner squares were missed.", 2 * x * (L + W)), B("outer-only", "procedural", TRAP, "The outer rectangle was found but the garden was not taken away.", (L + 2 * x) * (W + 2 * x))]
         : [B("width-once", "procedural", TRAP, `The path width was taken off only once; the path is on both sides, so the inner rectangle is ${L - 2 * x} m by ${W - 2 * x} m.`, L * W - (L - x) * (W - x)), B("corners-twice", "conceptual", TRAP, "The four strips along the sides were added, so the corner squares were counted twice.", 2 * x * (L + W)), B("inner-only", "procedural", TRAP, "The inner rectangle (the part without the path) was given.", (L - 2 * x) * (W - 2 * x))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "outer": ["The path and the garden together make a bigger rectangle, so we find its area first."], "garden": ["The garden alone is the inner rectangle."], "inner": ["The part not covered by the path is the inner rectangle."], "path": ["The path is the big rectangle with the inner one taken away."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ outer: "Garden with path", garden: "Garden", inner: "Garden without the path", path: "Path" }),
     domain: [[5, 30], [3, 20], [1, 3], [0, 1]],
     keep: ([L, W, x, s]) => L > W && (s === 0 || W - 2 * x >= 1),
@@ -1523,6 +1635,10 @@ export const B09: Def[] = [
     ],
     distractors: ([m, a, n, b]) => [D(m * n, 10 ** Math.max(0, a + b - 1)), D(m * n, 10 ** (a + b + 1)), D(m * n * 10, 10 ** (a + b))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "digits": ["The digits of the answer do not depend on the decimal points, so we multiply as whole numbers first."], "places": ["Each decimal place in a number we multiply makes the answer smaller by ten, so the answer has as many decimal places as both numbers together."], "point": ["Putting that many decimal places back gives the true size of the answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "digits" ? `Multiply as whole numbers: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "places" ? `Decimal places: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `Put ${s.inputs[1] === 10 ? "1 decimal place" : `${String(s.inputs[1]).length - 1} decimal places`} in ${s.inputs[0]}: ${s.value}`),
     domain: [[2, 99], [0, 2], [2, 99], [0, 2]],
     keep: ([m, a, n, b]) => a + b >= 1 && !(a > 0 && m % 10 === 0) && !(b > 0 && n % 10 === 0),
@@ -1571,6 +1687,10 @@ export const B09: Def[] = [
     ],
     distractors: ([m, a]) => [D(m * 10, 10 ** a), D(m, 10 ** (a + 1)), D(m * 100, 10 ** a)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "shift": ["Multiplying both numbers by the same power of 10 does not change the answer to a division, and it makes the divisor a whole number."], "divide": ["With a whole-number divisor, the division is done in the usual way."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "shift" ? (Number(s.inputs[1]) === 1 ? `The divisor is already a whole number, so divide as it stands` : `Multiply both numbers by ${s.inputs[1]} so the divisor is whole: the dividend becomes ${s.value}`) : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 99], [0, 2], [2, 30], [0, 2]],
     keep: ([m, a, n, b]) => a + b >= 1 && !(a > 0 && m % 10 === 0) && !(b > 0 && n % 10 === 0),
@@ -1612,6 +1732,10 @@ export const B09: Def[] = [
     ],
     distractors: ([m, a, k, o]) => (o ? [D(m, 10 ** (a + k + 1)), D(m * 10 ** k, 10 ** a), D(m, 10 ** a)] : [D(m * 10 ** (k + 1), 10 ** a), D(m, 10 ** (a + k)), D(m, 10 ** a)]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "move|multiply": ["Each place is worth ten times the place to its right, so multiplying by 10, 100 or 1000 moves digits one place left for each zero."], "move|divide": ["Each place is worth a tenth of the place to its left, so dividing by 10, 100 or 1000 moves digits one place right for each zero."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.op === "divide" ? "Dividing" : "Multiplying"} by ${s.inputs[1]} moves every digit ${String(s.inputs[1]).length - 1} ${String(s.inputs[1]).length - 1 === 1 ? "place" : "places"} ${s.op === "divide" ? "to the right (the number gets smaller)" : "to the left (the number gets bigger)"}: ${s.inputs[0]} → ${s.value}`,
     domain: [[1, 999], [1, 3], [1, 3], [0, 1]],
     keep: ([m]) => m % 10 !== 0,
@@ -1659,6 +1783,10 @@ export const B09: Def[] = [
       ...(w ? [B("whole-kept-apart", "procedural", "MATH.number.mixed-fractions", `Only the fraction part was multiplied and ${w} was kept as it was; change the mixed number to an improper fraction first (${w} ${a}/${b} = ${w * b + a}/${b}).`, w + (a * c) / (b * d))] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "tops": ["Taking a fraction of a fraction multiplies the numerators: it counts the parts taken."], "bottoms": ["Multiplying the denominators tells how many equal parts the whole is now cut into."], "simplify": ["Dividing top and bottom by the same number gives an equal fraction in its simplest form."], "improper": ["A mixed number must be made into an improper fraction before multiplying, so every part is counted."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "improper" ? `Mixed number to improper fraction: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value} on top` : s.id === "tops" ? `Tops: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "bottoms" ? `Bottoms: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `Simplify ${s.inputs[0]} (divide top and bottom by ${s.inputs[1]}): ${fmt(Number(s.value))}`),
     domain: [[0, 2], [1, 11], [2, 12], [1, 11], [2, 12]],
     keep: ([, a, b, c, d]) => a < b && c < d && gcd(a, b) === 1 && gcd(c, d) === 1,
@@ -1698,6 +1826,10 @@ export const B09: Def[] = [
       ...(d === 1 ? [B("multiplied-by-whole", "conceptual", FRP, `The fraction was multiplied by ${c}; sharing into ${c} equal parts makes each part smaller.`, (a * c) / b)] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "reciprocal": ["Dividing asks how many of the divisor fit in. Multiplying by the flipped fraction gives the same answer."], "multiply": ["Now it is a multiplication: multiply tops and multiply bottoms."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "reciprocal" ? `Dividing by ${s.inputs[0]} is the same as multiplying by its reciprocal ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 11], [2, 12], [1, 12], [1, 12]],
     keep: ([a, b, c, d]) => a < b && gcd(a, b) === 1 && (d === 1 ? c >= 2 && c <= 9 : c < d && gcd(c, d) === 1),
@@ -1758,6 +1890,10 @@ export const B09: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "add": ["To add a negative number, move left on the number line, so the result goes down by that much."], "opposite": ["Taking away a negative is the same as adding its positive."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "opposite" ? `To ${s.inputs[0]}, ${s.value}` : `${s.inputs.map((x) => par(x)).join(" + ")} = ${String(s.value).replace(/^-/, "−")}`),
     domain: [[-40, 40], [-40, 40], [0, 1]],
     keep: ([a, b]) => a !== 0 && b !== 0 && (a < 0 || b < 0),
@@ -1802,6 +1938,10 @@ export const B09: Def[] = [
       B("sizes-added", "conceptual", INT, "The sizes were added; both values are below zero, so the gap is the difference of the sizes.", b < 0 ? -a - b : null),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "difference": ["The change is always end minus start; a rise is positive and a fall is negative."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Rise = end − start = ${neg(Number(s.inputs[0]))} − (${neg(Number(s.inputs[1]))}) = ${s.value}`,
     domain: [[-25, -1], [-20, 25], [0, 1]],
     keep: ([a, b]) => b > a && b !== 0 && b - a <= 30,
@@ -2115,6 +2255,10 @@ B09.push(
       B("wrong-reciprocal", "procedural", FRP, `The reciprocal of ${w} was taken instead of the reciprocal of ${c}/${d}. Keep ${w} and turn the divisor over.`, num(q(c, d * w))),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "reciprocal": ["Dividing by a fraction is the same as multiplying by its reciprocal, the fraction turned upside down."], "multiply": ["Now it is a multiplication: multiply tops and multiply bottoms."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ reciprocal: "The reciprocal of the divisor", multiply: "Multiply by it" }),
     domain: [[2, 12], [1, 9], [2, 10]],
     keep: ([w, c, d]) => c < d && gcd(c, d) === 1,
@@ -2162,6 +2306,10 @@ B09.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "choose": ["The story tells us the operation: 'how many fit' means divide, and 'a part of' means multiply."], "work|divide": ["Dividing by a fraction counts how many of those parts fit into the amount."], "work|multiply": ["Taking a fraction of an amount means multiplying by that fraction."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "choose" ? `Decide the operation: ${s.value}` : `${s.inputs[0]} ${s.op === "divide" ? "÷" : "×"} ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 5], [1, 9], [2, 10], [1, 12], [1, 10]],
     keep: fwOk,
@@ -2224,6 +2372,10 @@ B09.push(
       return [B("rose", "conceptual", INTA, "The temperature was made to rise. A fall is a negative change: add −" + b + " for each hour.", k(a + b * c)), B("one-hour", "procedural", IMUL, `Only one hour's fall was taken. It fell ${b} °C every hour for ${c} hours: ${c} × (−${b}).`, k(a - b))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "p1": ["Multiplication comes before adding and taking away. Two numbers with the same sign multiply to a positive; different signs give a negative."], "p2": ["Multiplication comes before adding and taking away. Two numbers with the same sign multiply to a positive; different signs give a negative."], "sum": ["Now that the products are worked out, we add them, keeping their signs."], "q": ["Division comes before adding and taking away. Same signs divide to a positive; different signs give a negative."], "diff": ["Taking away a number is adding its opposite, so the signs need care."], "right": ["Each right answer earns the same marks, so we multiply."], "wrong": ["Each wrong answer loses marks, which is a negative number, so we multiply by a negative."], "total": ["The final score is the gains and losses added together."], "fall": ["A fall is a negative change, and the same fall happens each time, so we multiply by a negative."], "end": ["Adding the change to the starting temperature gives the end temperature."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ p1: "First product", p2: "Second product", q: "The division", sum: "Add", diff: "Subtract", right: "Right answers", wrong: "Wrong answers", total: "Total", fall: "The fall", end: "The final temperature" }),
     domain: [[0, 3], [-9, 15], [-9, 9], [-60, 60], [-9, 9]],
     keep: ixOk,
@@ -2282,6 +2434,10 @@ B09.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "up": ["A rise means adding: we move up the number line from where we are."], "up#": ["A rise means adding: we move up the number line from where we are."], "down": ["A fall means taking away: we move down the number line from where we are."], "down#": ["A fall means taking away: we move down the number line from where we are."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ up: "First change", down: "Second change", up2: "Third change" }),
     domain: [[0, 2], [-40, 15], [1, 25], [1, 30], [1, 20]],
     keep: muOk,
@@ -2331,6 +2487,10 @@ B09.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "round#": ["Rounding to easy numbers lets us work the answer out in our heads, to check it is about the right size."], "estimate": ["Working with the rounded numbers gives a quick answer close to the true one."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ round1: "Round the first number", round2: "Round the second number", estimate: "The estimate" }),
     domain: [[0, 1], [11, 999], [11, 99]],
     keep: estOk,
@@ -2392,6 +2552,10 @@ B09.push(
       return [B("no-double", "procedural", TRAP, "The area was divided by the sum of the parallel sides without doubling it first. Area = ½ × (a + b) × h, so h = 2 × area ÷ (a + b).", num(q(c, 2))), B("one-side", "procedural", TRAP, "The area was divided by one parallel side only.", p2(q((a + b) * c, 2 * a)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "t1": ["A diagonal splits the shape into two triangles, and each triangle is half of base × height."], "t2": ["A diagonal splits the shape into two triangles, and each triangle is half of base × height."], "sum": ["The two parts cover the whole shape with no overlap, so their areas add."], "rect": ["The shape is split into simple pieces whose areas we know how to find."], "tri": ["A triangle is half of a rectangle with the same base and height."], "area": ["A triangle is half of a rectangle with the same base and height."], "cost": ["The cost is the same for each unit of area, so we multiply by the area."], "double": ["A triangle's area is half of base × height, so twice the area is base × height."], "height": ["Dividing base × height by the base leaves the height, the distance we want."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ t1: "Triangle ABC", t2: "Triangle ACD", sum: "Total area", rect: "The rectangle", tri: "The triangle", area: "Area of the field", cost: "Cost", double: "Twice the area", height: "The distance" }),
     domain: [[0, 3], [4, 60], [3, 25], [2, 40], [0, 12]],
     keep: splitOk,
@@ -2462,6 +2626,10 @@ B09.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ratio": ["Dividing the distance round by the distance across shows how many diameters fit round the circle."], "same": ["Every circle is a scaled copy of every other, so this ratio is the same for all circles."], "answer": ["The question asks for the ratio, rounded as it says."], "circ": ["Since circumference ÷ diameter is π, the circumference is π × diameter."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} ≈ ${String(s.value)} (rounded)` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : s.id === "answer" ? `So for this wheel, circumference ÷ diameter = ${String(s.value)}, correct to two decimal places` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
     domain: [[0, 2], [0, 7], [0, 1500]],
     keep: piOk,
@@ -2532,6 +2700,10 @@ B09.push(
       return mode === 0 && cvxAngles(kind, s).some((x) => x > 90) ? [B("obtuse-is-dent", "conceptual", QUAD, "An obtuse angle (more than 90°) was taken as a dent. A figure is non-convex only when an angle is more than 180°.", o.indexOf(CVX[1]))] : [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "straight": ["If an angle were 180°, two sides would lie in a straight line and the corner would not be a real corner."], "reflex": ["A shape is convex when no corner points inwards, which means every angle is less than 180°."], "check": ["If you turn the same way at every corner going round, no corner points inwards, so the shape is convex."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : s.id === "straight" ? (s.value === "none" ? "No angle is 180°, so no three corners lie in a line" : `${s.value}: three corners lie in a straight line, so the figure is really a triangle`) : s.id === "reflex" ? (s.value === "none" ? "Every angle is less than 180°, so no corner points inwards" : `${s.value} is more than 180°: that corner points inwards`) : `Look at the ${s.inputs[0]}: ${s.value}`),
     domain: [[0, 1], [0, 2], [0, 39]],
     keep: cvxOk,
@@ -2597,6 +2769,10 @@ B09.push(
       return [B("full-circle", "conceptual", SECT, `The area of the whole circle was found. The light covers only ${WANG[t]}/360 of it.`, p2(qm(PI7, q(b * b, 1)))), B("arc-not-area", "procedural", SECT, "The arc length was found instead of the area. The area of a sector is (θ/360) × πr².", p2(qm(qm(PI7, f), q(2 * b, 1))))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "outer": ["The blade sweeps a sector, a slice of a circle, out to its tip."], "inner": ["The part near the centre that the blade does not reach is a smaller sector of the same angle."], "clean": ["The cleaned area is the big sector with the small sector taken away."], "square": ["The shaded part is what is left of the square tile, so we find the whole square first."], "quarters": ["Four quarter circles together make one whole circle, so we find one circle's area."], "left": ["The part left is the square with the circle parts taken away."], "quarter": ["A quarter circle is one quarter of a whole circle."], "segment": ["A segment is a sector with its triangle cut off, so we take the triangle away."], "leaf": ["The leaf shape is made of two equal segments back to back."], "sector": ["The angle at the centre out of 360° tells what fraction of the circle the sector is."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ outer: "Sector out to the blade's tip", inner: "Sector the blade does not reach", clean: "Area cleaned", square: "The tile", quarters: "Four quarter circles = one circle", left: "Area left", quarter: "Quarter circle", segment: "One segment (quarter circle − triangle)", leaf: "The leaf (two segments)", sector: "The lit sector" }),
     domain: [[0, 3], [0, 42], [0, 56], [0, 7]],
     keep: wipOk,
@@ -2670,6 +2846,10 @@ B09.push(
       return [B("difference-squared", "conceptual", CYL, "(R − r)² was used. The metal's cross-section is πR² − πr², not π(R − r)².", num(qm(qm(PI7, qm(qs(Ro, ri), qs(Ro, ri))), q(h, 1)))), B("outer-only", "procedural", CYL, "The whole cylinder's volume was found. Take away the hollow inside: πr²h.", num(qm(qm(PI7, qm(Ro, Ro)), q(h, 1))))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "outside": ["The outside curved surface unrolls into a rectangle: the distance round × the length."], "inside": ["The inside of a hollow pipe has its own curved surface, using the inner radius."], "total": ["All the surfaces that are painted or covered are added together."], "ends": ["Each end is a ring, and there are two of them."], "ring": ["A ring is the big circle with the small circle taken away."], "volume": ["The metal is a ring-shaped slice stacked through the length, so we multiply its area by the length."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: say({ outside: "Outside curved surface", inside: "Inside curved surface", ends: "Two ring-shaped ends", total: "Total", ring: "Area of the ring", volume: "Volume of metal" }),
     domain: [[0, 2], [2, 12], [1, 11], [15, 140]],
     keep: holOk,
@@ -2716,6 +2896,10 @@ B09.push(
       return [B("gave-diameter", "procedural", CIRC, "C ÷ π gives the diameter. The radius is half of it.", 14 * k), ...(mode === 2 ? [B("whole-distance", "procedural", CIRC, `The whole distance was used. In one turn the wheel rolls its circumference: ${D(44 * k * n, 100)} m ÷ ${n} turns.`, 7 * k * n)] : [B("times-pi", "conceptual", CIRC, "The circumference was multiplied by π. To undo C = 2πr, divide by 2π.", p2(qm(q(44 * k, 2), PI7)))])];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "diameter": ["Circumference is π × diameter, so dividing by π gives the diameter."], "radius": ["The radius is half the diameter."], "per-turn": ["In one turn the wheel rolls its circumference, so dividing the distance by the turns gives it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "per-turn" ? `One turn rolls ${s.inputs[0]} cm ÷ ${s.inputs[1]} = ${s.value} cm, the circumference` : s.id === "diameter" ? `d = C ÷ π = ${s.inputs[0]} × 7/22 = ${s.value} cm` : `r = d ÷ 2 = ${s.value} cm`),
     domain: [[0, 2], [1, 30], [0, 100]],
     keep: radOk,
@@ -2768,6 +2952,10 @@ B09.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "shift": ["Multiplying both numbers by the same power of 10 does not change the answer to a division, and it makes the divisor a whole number."], "divide": ["With a whole-number divisor, the division is done in the usual way."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "shift" ? `Make the divisor a whole number: ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 3], [4, 2500], [3, 95]],
     keep: dwOk,
