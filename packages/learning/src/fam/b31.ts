@@ -80,6 +80,10 @@ export const B31: Def[] = [
         ? []
         : [{ id: "wrong-scale", kind: "procedural", competency: AM, says: `The arm was turned to ${5 * k} on the other scale. Count from the 0 that the fixed arm lies on, and use that same scale.`, predict: 180 - 5 * k }],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "scale": ["A protractor has two scales; we use the one that reads 0 on the first arm, so we count from there."], "turn": ["The angle is how far the other arm turns from 0 on that same scale."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "scale" ? `Use the ${s.inputs[0]} scale: it reads 0 on the fixed arm` : `Turn the other arm to ${s.value} on that scale: the angle is ${s.value}°`),
     domain: [[2, 34], [0, 1], [0, 2]],
     difficulty: ([k, side]) => (side === 0 && k <= 18 ? 1 : side === 0 ? 2 : 3),
@@ -131,6 +135,10 @@ export const B31: Def[] = [
         : [{ id: "lines-not-values", kind: "conceptual", competency: BAR, says: `The bars were drawn one line for each unit. Each line of this scale stands for ${step}, so a value of ${vals[0]} reaches line ${vals[0] / step}.`, predict: tup(vals.map((x) => x * step)) }];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "lines": ["Each grid line stands for the same amount, so dividing a value by it tells how many lines tall the bar is."], "heights": ["Listing the heights in order gives the bars to draw."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "lines" ? `How many lines tall each bar is: ${s.value}` : `So the bar heights, in order, are ${s.value}`),
     domain: [[0, BARDATA.length - 1], [0, STEPS.length - 1], [0, 39]],
     difficulty: ([, si]) => (si === 0 ? 1 : si <= 2 ? 2 : 3),
