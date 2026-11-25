@@ -297,6 +297,10 @@ export type Def = {
   bugs: (p: number[]) => Bug[];
   variants: (p: number[]) => number[][];
   explain: (s: Step) => string;
+  /** step-why@1: why this step is done, in plain words for a child who has forgotten the basics (one to three short
+   *  sentences, keyed on s.id or s.op). Shown under the step when the learner taps "Why?" or "Break it down". It must say
+   *  why, not repeat the working, and must never contradict it. Return null for a step that needs no reason. */
+  stepWhy?: (s: Step) => string[] | null;
   // ---- the family specification (spec@1, spec.ts): what an educator approves for release
   /** The approved generation space: inclusive ranges per parameter (filtered by `keep`, then by `reject`). */
   domain?: [number, number][];

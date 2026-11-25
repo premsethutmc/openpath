@@ -10,6 +10,7 @@ import "../year/matrix-text.css";
 import "../year/start-here.css";
 import { mx } from "../year/MatrixText";
 import "./owner.css";
+import { stepWhys } from "../../../packages/learning/src/families";
 
 /** one draw per page load: the picture questions change when the page is opened again, not while it is being read */
 const SEED = Math.floor(Math.random() * 1e9);
@@ -36,7 +37,7 @@ function SkillCard({ s }: { s: Skill }) {
             <p className="eyebrow">{x.section}{x.corrected ? " · fixed by review" : ""}</p>
             {x.title && <h4>{x.title}</h4>}
             {x.text.map((t, j) => <p key={j}>{mx(t)}</p>)}
-            {x.math.length >= 3 ? <SteppedMath lines={x.math} /> : x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
+            {x.math.length >= 3 ? <SteppedMath lines={x.math} whys={stepWhys(x.instance)} /> : x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
           </section>
         ))}
         <h3>Question types and wrong-answer feedback</h3>

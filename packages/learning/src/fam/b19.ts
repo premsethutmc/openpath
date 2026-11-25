@@ -505,6 +505,12 @@ const asline: Def = {
     return [poly([[m, "x"], [R_(y1), ""]]), poly([[m, "x"], [R_(y2 + 1), ""]]), poly([[radd(m, R_(1)), "x"], [R_(y1 - x1), ""]])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    s.id === "slope"
+      ? ["Slope says how steep the line is: how far it goes up for each one step across.", "Up is the difference of the y numbers, across is the difference of the x numbers. Subtract both in the same order, B minus A."]
+      : s.id === "intercept"
+        ? ["Every point on the line makes y = mx + c true. We know m now, and A is on the line, so putting A's x and y in leaves only c to find."]
+        : ["Put the slope m and the number c into y = mx + c. That one equation describes every point of the line."],
   explain: (s) => (s.id === "slope" ? `Slope m = (y₂ − y₁)/(x₂ − x₁) = ${mi(Number(s.inputs[0]))}/${mi(Number(s.inputs[1]))} = ${s.value}` : s.id === "intercept" ? `Put A into y = mx + c: c = y₁ − m·x₁ = ${s.value}` : `So y = ${s.value}`),
   domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6]],
   cap: 400,

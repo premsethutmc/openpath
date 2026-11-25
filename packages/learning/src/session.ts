@@ -36,6 +36,7 @@ export const make = {
     const a = decide(questionId, response, o.working ?? [], o.clarifications ?? 0);
     return { ...base(c), record: "attempt", questionId, response: a.recordAs ?? response, activity, hints: o.hints ?? 0, solution: o.solution ?? false, competency: question(questionId).competency, ...(typeof o.ms === "number" && Number.isFinite(o.ms) && o.ms > 0 && o.ms <= 600_000 ? { ms: Math.round(o.ms) } : {}), ...(o.context ? { context: o.context } : {}), ...(o.working?.length ? { working: o.working.slice(0, 8).map((l) => l.slice(0, 80)) } : {}), ...(a.evidence.source === "educator" ? {} : { assessment: a.evidence as AttemptAssessment }) };
   },
+  why: (c: Ctx, competency: string, screen: string, step: number): LearningRecord => ({ ...base(c), record: "why", policy: "why-taps@1", competency, screen, step }),
   understand: (c: Ctx, competency: string, concept: string, round: number, asked: number, firstTry: number): LearningRecord => ({ ...base(c), record: "understand", policy: "understanding@1", competency, concept, round, asked, firstTry }),
   teach: (c: Ctx, competency: string, strategy: string, rule: string, o: { episode?: string } = {}): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule, ...(() => { const m=moduleFor(competency), s=m?.strategies.find(s=>s.id===strategy); const methodAlignment=m&&s?alignmentRecord(m,s):undefined; return methodAlignment?{methodAlignment}:{}; })(), ...(o.episode !== undefined ? { episode: o.episode } : {}) }),
 };

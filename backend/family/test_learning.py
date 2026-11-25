@@ -314,6 +314,17 @@ class PlatformTests(LearningBase):
         # it is not an attempt: nothing about the skill has been answered
         self.assertFalse([r for r in self.records() if r['record'] == 'attempt'])
 
+    def test_a_why_tap_is_kept_and_a_malformed_one_is_refused(self):
+        # why-taps@1: a learner opening the reason of a worked step (or all of them, step -1) is kept; nothing else is
+        self.save(self.enrol())
+        tap = {'policy': 'why-taps@1', 'competency': 'MATH.coordinate.straight-lines', 'screen': 'The method', 'step': 1}
+        self.assertEqual(self.save(self.rec('why', **tap)).status_code, 201)
+        self.assertEqual(self.save(self.rec('why', **{**tap, 'step': -1})).status_code, 201)
+        self.assertEqual(len([r for r in self.records() if r['record'] == 'why']), 2)
+        for bad in ({'step': -2}, {'step': 31}, {'step': True}, {'step': '1'}, {'competency': ''}, {'policy': 'x'}):
+            self.assertEqual(self.save(self.rec('why', **{**tap, **bad})).status_code, 400, bad)
+        self.assertEqual(self.save(self.rec('why', **tap, extra=1)).status_code, 400)
+
     def test_a_multiple_choice_generated_question_is_checked_by_letter(self):
         self.save(self.enrol())
         ok = self.rec('attempt', questionId='gen:subst:0,2,1,2:mc', response='C', activity='practice', hints=0, solution=False, competency='MATH.calculus.integration-methods')
@@ -486,3 +497,4 @@ class QuarantineTests(LearningBase):
         self.assertEqual(len(recs), 5)                                              # every answer is kept
         self.assertTrue(all(credited(generated(self.Q), e) is False for e in recs))
         self.assertIsNone(independent_at(recs, spec[1]))                            # five "right" answers are no evidence
+
