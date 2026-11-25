@@ -252,6 +252,12 @@ const aslocus: Def = {
     return [circ([D, E, R_(-F[0], F[1])]), circ([E, D, F])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "square": ["A locus is described by an equation that every position of P satisfies. Writing both distances with the distance formula and squaring removes the square roots."],
+      "expand": ["Expanding and collecting everything on one side gives the equation in the usual general form."],
+      "divide": ["The answer is wanted with x² having coefficient 1, so divide every term by the same number. That does not change which points satisfy it."],
+    }),
   explain: (s) =>
     s.id === "square"
       ? `Write PA and PB with the distance formula and square PA = ${s.inputs[0]}·PB to remove the roots: ${s.value}`
@@ -317,6 +323,12 @@ const aslocpar: Def = {
     return [poly([[R_(1, den), "y²"], [R_(-2 * b, den), "y"], [R_(-(b * b + a * a - h * h), den), ""]]), poly([[R_(-1, den), "y²"], [R_(2 * b, den), "y"], [R_(b * b + a * a - h * h, den), ""]])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "equal": ["P is equally far from the point and the line. Squaring both distances avoids the square root and the modulus."],
+      "cancel": ["After expanding, x² appears on both sides and cancels, leaving x only to the first power, as a parabola with a horizontal axis should."],
+      "divide": ["Divide by the coefficient of x to write x in terms of y."],
+    }),
   explain: (s) => (s.id === "equal" ? `PS² = (distance to the line)²: ${s.value}` : s.id === "cancel" ? `Expand; the x² terms cancel: ${s.value}` : `Divide by ${s.inputs[0]}: x = ${s.value}`),
   domain: [[-6, 6], [-6, 6], [-6, 6]],
   cap: 400,
@@ -387,6 +399,11 @@ const aspair: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "substitute": ["Each line through the origin is y = mx. Putting this in and dividing by x² leaves a quadratic whose roots are the two slopes."],
+      "solve": ["Solve the quadratic in m. Its two roots are the slopes of the two lines."],
+    }),
   explain: (s) => (s.id === "substitute" ? `Put y = mx and divide by x²: ${s.value}` : `Solve the quadratic in m (sum of the roots ${s.inputs[0]}, product ${s.inputs[1]}): the slopes are ${(s.value as number[]).map((x) => rs(R_(Math.round(x * 6), 6))).join(" and ")}`),
   domain: PAIR_D,
   keep: pairOk,
@@ -453,6 +470,12 @@ const aspairang: Def = {
     return [rs(R_(den, num)), rs(R_(2 * num, den)), rs(R_(num + den, den))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "coefficients": ["The angle formula is written for ax² + 2hxy + by² = 0, so match the equation to it. Remember the xy coefficient is 2h, so h is half of it."],
+      "discriminant": ["h² − ab measures how far apart the two slopes are; if it were 0, the lines would coincide."],
+      "tan": ["Writing the angle between two lines in terms of the sum and product of their slopes gives tan θ = |2√(h² − ab)/(a + b)|."],
+    }),
   explain: (s) => (s.id === "coefficients" ? `Compare with ax² + 2hxy + by² = 0: ${s.value}` : s.id === "discriminant" ? `h² − ab = ${s.value}` : `tan θ = |2√(h² − ab)/(a + b)| = ${s.value}`),
   domain: PAIR_D,
   keep: (pp) => pairOk(pp) && pp[0] * pp[2] + pp[1] * pp[3] !== 0,
@@ -570,6 +593,12 @@ const asperpd: Def = {
     return [String(n), sq(R_(n + 1, N), N), rs(R_(n, Math.abs(a) + Math.abs(b))), String(2 * n), rs(R_(n, 2))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "substitute": ["The value of ax + by + c at a point grows in proportion to its distance from the line, and is 0 on the line. So put the point in first."],
+      "normal": ["That value must be scaled by the length of the normal vector (a, b), which is √(a² + b²)."],
+      "divide": ["Dividing by √(a² + b²) turns the value into the true perpendicular distance; the modulus makes it positive."],
+    }),
   explain: (s) => (s.id === "substitute" ? `Put the point into ax + by + c: ${s.value}` : s.id === "normal" ? `√(a² + b²) = ${s.value}` : `Distance = |ax₀ + by₀ + c|/√(a² + b²) = ${s.value}`),
   domain: [[0, 5], [-5, 5], [-9, 9], [-5, 5], [-5, 5]],
   cap: 400,
@@ -632,6 +661,11 @@ const asparld: Def = {
     return [sq(R_(n, k * N * 2), N), rs(R_(n, k)), sq(R_(n + k, k * N), N)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "match": ["The distance formula needs the two parallel lines written with the same x and y coefficients, so scale one equation to match."],
+      "divide": ["With matching coefficients, the lines differ only in their constants. Dividing the difference by √(a² + b²) gives the perpendicular distance between them."],
+    }),
   explain: (s) => (s.id === "match" ? (s.inputs[0] === 1 ? `The x and y coefficients already match: ${s.value}` : `Divide the second equation by ${s.inputs[0]} so the coefficients match: ${s.value}`) : `Distance = |c₁ − c₂|/√(a² + b²) = ${s.inputs[0]}/√${s.inputs[1]} = ${s.value}`),
   domain: [[0, 5], [-5, 5], [-9, 9], [1, 3], [-12, 12]],
   cap: 400,
@@ -706,6 +740,11 @@ const aslang: Def = {
     return [rs(rdiv(R_(1), ans)), rs(radd(ans, R_(1)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "slopes": ["The angle between two lines depends on their slopes. Making y the subject of ax + by + c = 0 shows the slope is −a/b."],
+      "tan": ["The angle between lines is the difference of the angles they make with the x-axis. The tan of a difference gives |(m₁ − m₂)/(1 + m₁m₂)|; the modulus gives the acute angle."],
+    }),
   explain: (s) => (s.id === "slopes" ? `The slope of ax + by + c = 0 is −a/b: the slopes are ${s.value}` : `tan θ = |(m₁ − m₂)/(1 + m₁m₂)| = |${s.inputs[0]}| ÷ |${s.inputs[1]}| = ${s.value}`),
   domain: [[-5, 5], [1, 5], [-5, 5], [1, 5]],
   cap: 400,
@@ -766,6 +805,12 @@ const aspar: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "cross": ["Two lines are parallel when their x and y coefficients are in the same ratio, which is the same as a₁b₂ − a₂b₁ = 0."],
+      "dot": ["Two lines are perpendicular when their normal vectors are, which is when a₁a₂ + b₁b₂ = 0."],
+      "decide": ["Put the two checks together to describe the lines."],
+    }),
   explain: (s) => (s.id === "cross" ? `a₁b₂ − a₂b₁ = ${s.value} (0 means parallel)` : s.id === "dot" ? `a₁a₂ + b₁b₂ = ${s.value} (0 means perpendicular)` : `So the lines are ${PARCH[Number(s.value)]}`),
   domain: [[0, 6], [-6, 6], [-6, 6], [-6, 6]],
   cap: 300,
@@ -853,6 +898,12 @@ const astan: Def = {
     return [poly([[m, "x"], [R_(-c[0], c[1]), ""]]), poly([[R_(-m[0], m[1]), "x"], [c, ""]]), poly([[rdiv(R_(1), m[0] === 0 ? R_(1) : m), "x"], [radd(c, R_(1)), ""]])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "slope-curve": ["The tangent at a point has the same slope as the curve there, which differentiation gives."],
+      "slope-line": ["A tangent uses that slope. A normal is perpendicular to the tangent, so its slope is −1 divided by the tangent's slope."],
+      "equation": ["A line through a known point with a known slope is y − y₁ = m(x − x₁)."],
+    }),
   explain: (s) => (s.id === "slope-curve" ? `The slope of the curve ${s.inputs[0]} at the point (the tangent's slope) is ${s.value}` : s.id === "slope-line" ? (s.inputs[0] ? `The normal is perpendicular to the tangent: its slope is ${s.value}` : `The tangent has slope ${s.value}`) : `Use y − y₁ = m(x − x₁): y = ${s.value}`),
   domain: [[0, 1], [-6, 6], [-6, 6], [0, 1]],
   difficulty: ([kind, , , w]) => (kind === 0 && w === 1 ? 1 : kind === 0 ? 2 : 3),
@@ -942,6 +993,12 @@ const astanc: Def = {
     return pp[0] === 0 ? [rs(R_(-pp[2], pp[1])), rs(R_(2 * pp[2], pp[1])), rs(R_(pp[2], 2 * pp[1]))] : [sq(R_(1), N + 1), sq(R_(2), N), sq(R_(1, 2), N)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "condition": ["A line touches a conic when it meets it at exactly one point. Substituting the line into the conic gives a quadratic, and a repeated root gives this condition on c."],
+      "substitute": ["Put the slope and the conic's constants into the condition."],
+      "root": ["That gives the value of c, or the values if the condition gives two."],
+    }),
   explain: (s) => (s.id === "condition" ? `For this conic, y = mx + c is a tangent when ${s.value}` : s.id === "substitute" ? `Substitute m and the constants: ${Number(s.inputs[0]) === 0 && false ? "" : s.value}` : `So c = ${s.value}`),
   domain: [[0, 3], [-4, 4], [1, 6], [1, 6]],
   difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 2 ? 2 : 3),
@@ -1004,6 +1061,12 @@ const asdist3: Def = {
     return [sq(R_(1), N + 1), sq(R_(2), N), sq(R_(1), N + 2 * Math.abs(d[0]) + 1)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "differences": ["Distance in space comes from Pythagoras, using how far apart the points are along each axis."],
+      "squares": ["Square each difference and add, as Pythagoras' theorem does in three dimensions."],
+      "root": ["The distance is the square root of that sum."],
+    }),
   explain: (s) => (s.id === "differences" ? `Differences of the coordinates: ${s.value}` : s.id === "squares" ? `Sum of their squares: ${(s.inputs as number[]).map((x) => (x < 0 ? `(${mi(x)})²` : `${x}²`)).join(" + ")} = ${s.value}` : `Distance = √${s.inputs[0]} = ${s.value}`),
   domain: Array(6).fill([-5, 5]) as [number, number][],
   cap: 400,
@@ -1064,6 +1127,11 @@ const assect3: Def = {
   },
   distractors: (p) => [tup([0, 1, 2].map((i) => rs(R_(p[3 + i] + p[i], 2)))), tup([0, 1, 2].map((i) => rs(R_(p[3 + i] - p[i], p[6] + p[7]))))],
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "weights": ["The dividing point is a weighted average of the two ends. For the ratio m : n, B gets weight m and A gets weight n, which pulls the point towards the end with the larger weight."],
+      "divide": ["Dividing by the total weight m + n finishes the average."],
+    }),
   explain: (s) => (s.id === "weights" ? `Weight B by ${s.inputs[0]} and A by ${s.inputs[1]}: ${s.value}` : `Divide by m + n = ${s.inputs[0]}: ${s.value}`),
   domain: [...Array(6).fill([-5, 5]), [1, 4], [1, 4]] as [number, number][],
   cap: 400,
@@ -1127,6 +1195,11 @@ const asoct: Def = {
     return [B("sign-ignored", "procedural", SPC, `The negative ${L[neg]}-coordinate was read as positive; the sign of each coordinate decides the octant.`, opts.indexOf(octRight(q)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "signs": ["The three coordinate planes split space into eight octants, and the signs of x, y and z say which one a point is in."],
+      "place": ["Choose the octant with those signs."],
+    }),
   explain: (s) => (s.id === "signs" ? `Signs of (x, y, z): ${s.value}` : `So the point lies in ${s.inputs[0]}`),
   domain: [[-5, 5], [-5, 5], [-5, 5]],
   cap: 300,
@@ -1199,6 +1272,12 @@ const asdcos: Def = {
     return [tup(d.map((x) => rs(R_(x, s)))), tup([d[1], d[2], d[0]].map((x) => sq(R_(x, dot(d, d)), dot(d, d))))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "ratios": ["The direction of the line from A to B is the vector B − A. Its components are direction ratios."],
+      "length": ["Direction cosines describe a unit vector, so we need the length of B − A."],
+      "divide": ["Dividing by the length makes it a unit vector, whose components are the direction cosines."],
+    }),
   explain: (s) => (s.id === "ratios" ? `Direction ratios: B − A = ${s.value}` : s.id === "length" ? `Length |AB| = ${s.value}` : `Divide each ratio by the length: ${s.value}`),
   domain: Array(6).fill([-4, 4]) as [number, number][],
   cap: 400,
@@ -1274,6 +1353,12 @@ const asangl: Def = {
     return [sq(R_(d + 1, N), N), sq(R_(1, 1), Math.max(1, N - d * d)), sq(R_(d + 2, N), N)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "dot": ["The angle between lines is the angle between their direction vectors. The dot product of two vectors is |u||v| cos θ."],
+      "lengths": ["To get cos θ from the dot product, we need the lengths of both vectors."],
+      "cos": ["Divide the dot product by the product of the lengths. The modulus gives the acute angle, since a line has no preferred direction."],
+    }),
   explain: (s) => (s.id === "dot" ? `Dot product of the direction vectors: u·v = ${s.value}` : s.id === "lengths" ? `|u||v| = ${s.value}` : `cos θ = |u·v|/(|u||v|) = ${s.value}`),
   domain: Array(6).fill([-3, 3]) as [number, number][],
   cap: 400,
@@ -1343,6 +1428,12 @@ const asfoot: Def = {
     return [P3(footP(p)), P3(F.map((x, i) => (i === 0 ? x + 1 : x)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "general": ["Every point of the line is the fixed point plus λ times the direction. Writing a general point lets us look for the right λ."],
+      "perpendicular": ["The foot Q is the point where PQ is at right angles to the line, so (Q − P)·d = 0. That gives one equation in λ."],
+      "foot": ["Putting that λ into the general point gives the foot."],
+    }),
   explain: (s) => (s.id === "general" ? `A general point of the line: ${s.value}` : s.id === "perpendicular" ? `PQ is perpendicular to the direction d: (Q − P)·d = 0 gives ${s.inputs[1]}λ = ${s.inputs[0]}, so λ = ${s.value}` : `Put λ = ${s.inputs[0]} into the general point: ${s.value}`),
   domain: [[-3, 3], [-3, 3], [-3, 3], [-2, 2], [-2, 2], [-2, 2], [-2, 2], [-2, 2]],
   cap: 400,
@@ -1433,6 +1524,12 @@ const aslrel: Def = {
     return [B("one-equation-only", "procedural", SL, "λ and μ found from two coordinates must also satisfy the third coordinate; here they do, so the lines meet.", 2)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "directions": ["If u × v = 0, the directions are parallel and so are the lines (or they are the same line)."],
+      "join": ["If the directions are not parallel, the lines meet only if they lie in one plane, which happens when (B − A)·(u × v) = 0. Otherwise they are skew."],
+      "decide": ["Put the two checks together to describe the lines."],
+    }),
   explain: (s) => (s.id === "directions" ? `u × v = ${s.value} (zero means the directions are parallel)` : s.id === "join" ? `(B − A)·(u × v) = ${s.value} (zero means the lines lie in one plane and meet)` : `So the lines are ${LREL[Number(s.value)]}`),
   domain: [[0, 11], [0, 11], [-2, 2], [-2, 2], [-1, 1]],
   difficulty: ([iu, iv, , , ga]) => (iu === iv ? 1 : ga === 0 ? 2 : 3),
@@ -1509,6 +1606,12 @@ const asskew: Def = {
     return [sq(R_(t + 1, N), N), rs(R_(t, N)), sq(R_(2 * t, N), N)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "normal": ["The shortest segment between two skew lines is perpendicular to both, so it points along u × v."],
+      "join": ["Take any vector from a point on one line to a point on the other."],
+      "project": ["The shortest distance is how much of that joining vector lies along the common perpendicular. Projecting it onto u × v gives |(B − A)·(u × v)|/|u × v|."],
+    }),
   explain: (s) => (s.id === "normal" ? `The common perpendicular is u × v = ${s.value}` : s.id === "join" ? `The vector joining the given points: B − A = ${s.value}` : `Shortest distance = |(B − A)·(u × v)|/|u × v| = ${Math.abs(Number(s.inputs[0]))}/√${s.inputs[1]} = ${s.value}`),
   domain: [...Array(6).fill([-2, 2]), ...Array(3).fill([-3, 3])] as [number, number][],
   cap: 400,
@@ -1586,6 +1689,11 @@ const asparl3: Def = {
     return [sq(R_(1, U), (M + 1) * U), rs(R_(M, U)), sq(R_(2, U), M * U)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "cross": ["The distance between parallel lines is the height of a parallelogram with sides B − A and u. The cross product's length is that parallelogram's area."],
+      "divide": ["Area divided by base gives height, so divide |(B − A) × u| by |u|."],
+    }),
   explain: (s) => (s.id === "cross" ? `(B − A) × u = ${s.value}` : `Distance = |(B − A) × u|/|u| = √${s.inputs[0]}/√${s.inputs[1]} = ${s.value}`),
   domain: [[-2, 2], [-2, 2], [-2, 2], [-2, 2], [-3, 3], [-3, 3], [-3, 3]],
   cap: 400,
@@ -1667,6 +1775,12 @@ const asplaned: Def = {
     return [String(n), sq(R_(Math.abs(s0 - d), N), N), ...(d !== 0 ? [sq(R_(Math.abs(d), N), N)] : []), rs(R_(n, Math.abs(a) + Math.abs(b) + Math.abs(c))), String(n + 1), String(n + 2)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "substitute": ["The value of ax + by + cz + d at a point grows in proportion to its distance from the plane, and is 0 on the plane. So put the point in first."],
+      "normal": ["That value must be scaled by the length of the normal vector (a, b, c)."],
+      "divide": ["Dividing by |n| turns the value into the true perpendicular distance; the modulus makes it positive."],
+    }),
   explain: (s) => (s.id === "substitute" ? `Put the point into ax + by + cz + d: ${s.value}` : s.id === "normal" ? `|n| = √(a² + b² + c²) = ${s.value}` : `Distance = |ax₀ + by₀ + cz₀ + d|/√(a² + b² + c²) = ${s.value}`),
   domain: [[-4, 4], [-4, 4], [-4, 4], [-9, 9], [-4, 4], [-4, 4], [-4, 4]],
   cap: 400,
@@ -1729,6 +1843,12 @@ const asmeet: Def = {
     return [P3(scl(p[6], p.slice(3, 6))), P3(P.map((x, i) => (i === 2 ? x + 1 : x)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "substitute": ["A point of the line is on the plane when it satisfies the plane's equation. Putting the general point in gives an equation in λ."],
+      "lambda": ["Solve that equation for λ."],
+      "point": ["Putting that λ back into the line gives the meeting point."],
+    }),
   explain: (s) => (s.id === "substitute" ? `Put the general point a + λu into the plane: ${s.value}` : s.id === "lambda" ? `Solve: λ = ${s.value}` : `The meeting point is a + ${s.inputs[0]}u = ${s.value}`),
   domain: [[-3, 3], [-3, 3], [-3, 3], [-2, 2], [-2, 2], [-2, 2], [-3, 3], [0, 11]],
   cap: 400,
@@ -1786,6 +1906,12 @@ const asimage: Def = {
     return [P3(scl(-1, P)), P3(sub(P, scl(4 * p[4], n)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "normal-line": ["The image is on the line through P at right angles to the plane, which runs along the normal."],
+      "foot": ["That line meets the plane at the foot of the perpendicular. Substituting the line into the plane finds it."],
+      "image": ["A reflection is as far behind the mirror as P is in front, so the foot is the midpoint of P and its image."],
+    }),
   explain: (s) => (s.id === "normal-line" ? `The line through P along the normal: ${s.value}` : s.id === "foot" ? `It meets the plane at λ = ${mi(Number(s.inputs[0]))}: the foot is ${s.value}` : `The foot is the midpoint of P and its image, so the image is ${s.value}`),
   domain: [[-4, 4], [-4, 4], [-4, 4], [0, 11], [-2, 2]],
   cap: 400,
@@ -1854,6 +1980,13 @@ const ascop: Def = {
   },
   distractors: ([a, b, c, d, op]) => (op ? [pairT(R_(b * c - a * d, c * c + d * d), R_(a * c + b * d, c * c + d * d)), pairT(R_(-(a * c + b * d), c * c + d * d), R_(b * c - a * d, c * c + d * d))] : [pairT(R_(a * c - b * d), R_(-(a * d + b * c))), pairT(R_(a * d + b * c), R_(a * c - b * d))]),
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "expand": ["Multiply complex numbers like brackets in algebra: every part by every part."],
+      "i-squared": ["i² = −1, so the i² term becomes a real number. Then collect the real and imaginary parts."],
+      "conjugate": ["Multiplying top and bottom by the conjugate of the bottom makes the bottom real, because (a + bi)(a − bi) = a² + b²."],
+      "split": ["With a real bottom, divide the real and imaginary parts separately."],
+    }),
   explain: (s) => (s.id === "expand" ? `Multiply every part by every part: ${s.value}` : s.id === "i-squared" ? `Use i² = −1 and collect: ${s.value}` : s.id === "conjugate" ? `Multiply the top and bottom by the conjugate ${s.inputs[0]}: ${s.value}` : `Split into real and imaginary parts: ${s.value}`),
   domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6], [0, 1]],
   cap: 400,
@@ -1911,6 +2044,12 @@ const ascmod: Def = {
     return op ? [sq(R_(1, N1), N1 * N2), sq(R_(1, N2), N1 + N2), sq(R_(2, N2), N1 * N2)] : [sq(R_(1), N1 + N2), sq(R_(2), N1 * N2), sq(R_(1), N1 * N2 + 1)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "moduli": ["The modulus is the distance from 0, √(x² + y²). It is easier to find the modulus of each factor than to multiply out first."],
+      "combine|multiply": ["The modulus of a product is the product of the moduli."],
+      "combine|divide": ["The modulus of a quotient is the quotient of the moduli."],
+    }),
   explain: (s) => (s.id === "moduli" ? `The moduli: ${s.value}` : s.inputs[0] ? `|z₁/z₂| = |z₁|/|z₂| = ${s.value}` : `|z₁z₂| = |z₁||z₂| = ${s.value}`),
   domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6], [0, 1]],
   cap: 400,
@@ -1961,6 +2100,11 @@ const ascpow: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "remainder": ["The powers of i repeat every 4, because i⁴ = 1. So only the remainder on dividing by 4 matters."],
+      "cycle": ["Read the answer from the cycle i, −1, −i, 1."],
+    }),
   explain: (s) => (s.id === "remainder" ? `${mi(Number(s.inputs[0]))} = 4 × ${Math.floor(Number(s.inputs[0]) / 4) < 0 ? `(${mi(Math.floor(Number(s.inputs[0]) / 4))})` : Math.floor(Number(s.inputs[0]) / 4)} + ${s.value}: the remainder is ${s.value}` : `The powers repeat every 4, so i${sup(Number(s.inputs[0]))} = ${IPOW[Number(s.value)]}`),
   domain: [[-60, 200]],
   difficulty: ([n]) => (n > 0 && n <= 40 ? 1 : n > 0 ? 2 : 3),
@@ -2004,6 +2148,12 @@ const ascsqrt: Def = {
   ],
   distractors: ([p, q]) => [P2(p + 1, q), P2(p, q + (q > 0 ? 1 : -1))],
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "modulus": ["If (x + iy)² = z, then x² + y² = |z| and x² − y² is the real part of z. So we need |z|."],
+      "real": ["Adding those two equations gives 2x² = |z| + real part, which fixes x. The root wanted has a positive real part."],
+      "imag": ["The imaginary part of (x + iy)² is 2xy, so y = (imaginary part)/(2x)."],
+    }),
   explain: (s) => (s.id === "modulus" ? `|z| = √(${mi(Number(s.inputs[0]))}² + ${mi(Number(s.inputs[1]))}²) = ${s.value}` : s.id === "real" ? `x² = (|z| + real part)/2 = (${s.inputs[0]} + ${mi(Number(s.inputs[1]))})/2, so x = ${s.value}` : `y = (imaginary part)/(2x) = ${mi(Number(s.inputs[0]))}/${s.inputs[1]} = ${mi(Number(s.value))}`),
   domain: [[1, 8], [-8, 8]],
   difficulty: ([p, q]) => (p + Math.abs(q) <= 5 ? 1 : p + Math.abs(q) <= 9 ? 2 : 3),
@@ -2068,6 +2218,12 @@ const asarg: Def = {
     return [piStr([-k[0], k[1]]), piStr(rsub(R_(1, 2), k)), piStr(R_(k[0], 2 * k[1]))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "modulus": ["The argument is the angle from the positive real axis to the point, so it helps to know the point's distance from 0."],
+      "basic": ["First find the acute angle the point makes with the real axis, from tan α = |y/x|."],
+      "quadrant": ["The signs of the real and imaginary parts show the quadrant. Adjust the acute angle so it lies between −π and π in that quadrant."],
+    }),
   explain: (s) => (s.id === "modulus" ? `|z| = ${s.value}` : s.id === "basic" ? `The acute angle α with tan α = |y/x| is ${s.value}` : `Use the quadrant (signs of the parts): θ = ${s.value}`),
   domain: [[0, 14], [1, 9]],
   difficulty: ([j]) => {
@@ -2151,6 +2307,14 @@ const aspolm: Def = {
     return [piStr(R_(prin6(-s6 === -6 ? 3 : -s6), 6)), piStr(R_(prin6(s6 + 2), 6)), piStr(R_(prin6(s6 - 3), 6)), piStr(R_(prin6(s6 + 6), 6))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "modulus|multiply": ["Multiplying complex numbers multiplies their moduli. The modulus is a length, so it does not affect the angle."],
+      "modulus|divide": ["Dividing complex numbers divides their moduli. The modulus is a length, so it does not affect the angle."],
+      "argument|add": ["Multiplying complex numbers adds their arguments, because the angles turn one after the other."],
+      "argument|subtract": ["Dividing complex numbers subtracts their arguments."],
+      "principal": ["The principal argument must lie between −π and π. Adding or taking away a full turn, 2π, gives the same direction."],
+    }),
   explain: (s) => (s.id === "modulus" ? `(The modulus is ${s.op === "divide" ? "r₁/r₂" : "r₁r₂"} = ${s.value}; it does not change the argument.)` : s.id === "argument" ? `${s.op === "subtract" ? "Subtract" : "Add"} the arguments: ${s.value}` : `The principal argument (add or subtract 2π if needed): ${s.value}`),
   domain: [[1, 6], [-5, 6], [1, 6], [-5, 6], [0, 1]],
   keep: (p) => {
@@ -2235,6 +2399,14 @@ const ascloc: Def = {
     return [tup([s[1], s[0], s[2]].map((x, i) => (i < 2 ? rs(R_(Math.round(x * 24), 24)) : aslocAns(p).split(", ")[2].replace(/\)$/, "")))), tup([rs(R_(Math.round(-s[0] * 24), 24)), rs(R_(Math.round(-s[1] * 24), 24)), aslocAns(p).split(", ")[2].replace(/\)$/, "")]), ...(p[0] === 1 ? [tup([rs(R_(p[1], p[5])), rs(R_(p[2], p[5])), String(p[3] * p[5])]), tup([rs(R_(p[1], p[5])), rs(R_(p[2], p[5])), String(p[3] + 1)])] : [])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "divide": ["The rule is easier to read with a coefficient of 1 on z, so divide through."],
+      "read": ["|z − w| is the distance from z to w. A fixed distance from w is a circle with centre w."],
+      "square": ["Moduli are distances, which hold square roots. Writing z = x + iy and squaring removes them."],
+      "expand": ["Expanding gives a circle's equation. Dividing makes the coefficients of x² and y² equal to 1."],
+      "complete": ["Completing the square in x and in y writes it as (x − h)² + (y − k)² = r², which shows the centre and radius."],
+    }),
   explain: (s) => (s.id === "divide" ? `Divide by ${s.inputs[0]}: ${s.value}` : s.id === "read" ? `|z − w| = r is the circle with centre w and radius r: ${s.value}` : s.id === "square" ? `Write z = x + iy and square: ${s.value}` : s.id === "expand" ? `Expand and divide by ${s.inputs[0]}: ${s.value}` : `Complete the squares to read the centre and radius: ${s.value}`),
   domain: [[0, 1], [-5, 5], [-5, 5], [-5, 5], [-5, 5], [2, 3]],
   cap: 400,
@@ -2324,6 +2496,12 @@ const asdemo: Def = {
     return [tup([es(emul(R, s)), es(emul(R, c))]), tup([es(emul(R, c)), es(emul(E_([-1, 1]), emul(R, s)))]), tup([es(emul(R, emul(E_([-1, 1]), c))), es(emul(R, s))])];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "polar": ["De Moivre's theorem works with the modulus and the argument, so write the number in polar form first."],
+      "power": ["Raising to a power multiplies the angle each time, so the argument is multiplied by n and the modulus is raised to the power n."],
+      "evaluate": ["Work out the cos and sin to return to x + iy."],
+    }),
   explain: (s) => (s.id === "polar" ? `In polar form the base is ${s.value}` : s.id === "power" ? `De Moivre: raise the modulus to the power ${s.inputs[0]} and multiply the argument by ${s.inputs[0]}: ${s.value}` : `Evaluate cos and sin of ${s.inputs[0]}: ${s.value}`),
   domain: [[0, 9], [2, 12]],
   difficulty: ([j, n]) => (j < 4 && n <= 6 ? 1 : n <= 6 ? 2 : 3),
@@ -2380,6 +2558,12 @@ const asroot: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "polar": ["An angle and that angle plus any multiple of 2π give the same complex number. Writing all of them is what lets us find every root."],
+      "divide": ["Taking the nth root divides every one of these arguments by n, giving n different angles."],
+      "list": ["Keep the angles in the asked range; after n of them they start to repeat."],
+    }),
   explain: (s) => (s.id === "polar" ? `Write the right-hand side with all its arguments: ${s.value}` : s.id === "divide" ? `Take the nth root: ${s.value}` : `So k = ${(s.value as number[]).map((x) => rs(R_(Math.round(x * 24), 24))).join(", ")}`),
   domain: [[2, 6], [0, 7], [1, 3]],
   difficulty: ([n, f]) => (f === 0 && n <= 4 ? 1 : n <= 3 ? 2 : 3),
@@ -2460,6 +2644,13 @@ const asaddp: Def = {
     return [B("gave-P-A", "conceptual", EV, "P(A) includes the outcomes where B also happens; take P(A ∩ B) away.", a / N), B("subtracted-P-B", "procedural", EV, "P(B) was subtracted; only the overlap P(A ∩ B) is removed from P(A).", a > b ? (a - b) / N : null)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "add": ["Adding P(A) and P(B) counts the outcomes in both twice, so take P(A ∩ B) away once."],
+      "rearrange": ["The addition rule links all four probabilities, so rearrange it to find the one that is missing."],
+      "complement": ["Neither happening is the opposite of at least one happening, so the probabilities add to 1."],
+      "only": ["A splits into the part also in B and the part not in B, so take the overlap away from P(A)."],
+    }),
   explain: (s) => (s.id === "add" ? `P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = ${s.inputs[0]} + ${s.inputs[1]} − ${s.inputs[2]}` : s.id === "rearrange" ? `P(A ∩ B) = P(A) + P(B) − P(A ∪ B) = ${s.inputs[0]} + ${s.inputs[1]} − ${s.inputs[2]}` : s.id === "complement" ? `Neither = 1 − P(A ∪ B) = 1 − ${s.inputs[0]}` : `P(A ∩ B′) = P(A) − P(A ∩ B) = ${s.inputs[0]} − ${s.inputs[1]}`),
   domain: [[10, 30], [1, 29], [1, 29], [0, 15], [0, 3]],
   cap: 400,
@@ -2535,6 +2726,12 @@ const asmex: Def = {
     return [B("different-means-exclusive", "conceptual", EV, "Different events are not automatically mutually exclusive; look for an outcome that is in both sets.", 0)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "intersection": ["Events are mutually exclusive when they cannot happen together, which means they share no outcome."],
+      "union": ["Events are exhaustive when together they cover every outcome of the sample space."],
+      "decide": ["Put the two checks together."],
+    }),
   explain: (s) => (s.id === "intersection" ? `A ∩ B = ${s.value}` : s.id === "union" ? `A ∪ B = ${s.value}` : `So A and B are ${MEX[Number(s.value)]}`),
   domain: [[0, 3], [0, 79]],
   difficulty: ([cat]) => (cat === 3 ? 1 : cat === 2 ? 3 : 2),
@@ -2606,6 +2803,12 @@ const asbayes: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "joint": ["The chance a bolt comes from a machine and is defective is that machine's share times its defect rate, by the multiplication rule."],
+      "total": ["A defective bolt came from exactly one machine, so add the three joint chances to get the total probability."],
+      "bayes": ["Given that the bolt is defective, the chance it came from this machine is its share of all the defectives."],
+    }),
   explain: (s) => (s.id === "joint" ? `P(${"machine"} and defective) = ${Number(s.inputs[0]) * 10}% × ${s.inputs[1]}% = ${s.value}` : s.id === "total" ? `Total probability of a defective bolt = ${s.value}` : `Bayes: divide the machine's share of defectives by the total: ${s.inputs[0]}/${s.inputs[1]}`),
   domain: [[1, 8], [1, 9], [1, 9], [1, 9], [1, 9], [0, 2]],
   cap: 400,
@@ -2679,6 +2882,13 @@ const astotp: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "bag1": ["To get a red ball through Bag I, the die must choose Bag I and then the ball must be red, so multiply the two probabilities."],
+      "bag2": ["The same for the path through Bag II."],
+      "total": ["A red ball comes from exactly one of the bags, so add the two paths."],
+      "bayes": ["Given red, the chance it came from Bag I is that path's share of the total chance of red."],
+    }),
   explain: (s) => (s.id === "bag1" ? `Bag I and red: ${s.inputs[0]} × ${s.inputs[1]}` : s.id === "bag2" ? `Bag II and red: ${s.inputs[0]} × ${s.inputs[1]}` : s.id === "total" ? "Add the two branches: P(red), the total probability" : "Bayes: P(Bag I | red) = P(Bag I and red) ÷ P(red)"),
   domain: [[1, 5], [1, 6], [1, 6], [1, 6], [1, 6]],
   cap: 400,
@@ -2757,6 +2967,13 @@ const asbinom: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "formula": ["Each of the n trials succeeds with probability p, independently. ⁿCₖ counts which trials succeed, and pᵏqⁿ⁻ᵏ is the chance of one such pattern."],
+      "terms": ["Different values of X cannot happen together, so add their probabilities."],
+      "combine|add": ["The values added are exactly the ones asked for, so their sum is the answer."],
+      "combine|subtract": ["When it is shorter, work out the opposite event and subtract from 1, because all the probabilities add to 1."],
+    }),
   explain: (s) => (s.id === "formula" ? `For a binomial distribution: ${s.value}` : s.id === "terms" ? `Add P(X = k) for k = ${s.inputs.join(", ")}` : s.inputs[0] === "1 −" ? "Use the complement: subtract that sum from 1" : "That sum is the answer"),
   // exact fractions (one integer division each), so no option shows a rounding residue
   distractors: ([n, a, d, r]) => {
@@ -2839,6 +3056,14 @@ const asbinmv: Def = {
   },
   distractors: ([n, a, d, mode]) => (mode ? [tup([String(n + 1), pf(a, d)]), tup([String(2 * n), pf(a, 2 * d)])] : [tup([rs(R_(n * a, d)), rs(R_(n * a * (d - a), d))]), tup([rs(R_(n * (d - a), d)), rs(R_(n * a * (d - a), d * d))]), tup([rs(R_(n * a, d)), rs(R_(2 * n * a * (d - a), d * d))]), tup([rs(R_(n * a + d, d)), rs(R_(n * a * (d - a), d * d))])]),
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "q": ["For a binomial distribution the mean is np and the variance is npq. Dividing the variance by the mean leaves q."],
+      "p": ["Each trial either succeeds or fails, so p + q = 1."],
+      "n": ["The mean is np, so dividing it by p gives n."],
+      "mean": ["The mean of a binomial distribution is np: n trials, each succeeding a fraction p of the time."],
+      "variance": ["The variance of a binomial distribution is npq, with q = 1 − p."],
+    }),
   explain: (s) => (s.id === "mean" ? `Mean = np = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "variance" ? `Variance = npq = ${s.inputs[0]} × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}` : s.id === "q" ? `q = npq ÷ np = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "p" ? `p = 1 − q = ${s.value}` : `n = mean ÷ p = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
   domain: [[2, 40], [1, 9], [2, 10], [0, 1]],
   cap: 400,
@@ -2955,6 +3180,13 @@ const ascinv: Def = {
   },
   distractors: ([a, b, c, d, op]) => (op === 2 ? [pairT(R_(-a, a * a + b * b), R_(b, a * a + b * b)), pairT(R_(b, a * a + b * b), R_(a, a * a + b * b))] : [pairT(R_(a + c + 1), R_(b + (op ? -d : d))), pairT(R_(b + (op ? -d : d)), R_(a + (op ? -c : c)))]),
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "conjugate": ["The inverse is 1/z. Multiplying top and bottom by the conjugate makes the bottom real, a² + b²."],
+      "split": ["With a real bottom, divide the real and imaginary parts separately."],
+      "real": ["Complex numbers are added or subtracted part by part, so the real parts combine on their own."],
+      "imag": ["In the same way, the imaginary parts combine on their own."],
+    }),
   explain: (s) => (s.id === "real" ? `Real parts: ${mi(Number(s.inputs[0]))} and ${mi(Number(s.inputs[1]))} give ${s.value}` : s.id === "imag" ? `Imaginary parts: ${mi(Number(s.inputs[0]))} and ${mi(Number(s.inputs[1]))} give ${s.value}` : s.id === "conjugate" ? `Multiply the top and the bottom by the conjugate ${s.inputs[0]}: ${s.value}` : `Divide each part by ${s.inputs[0]}: ${s.value}`),
   domain: [[-6, 6], [-6, 6], [0, 4], [-3, 3], [0, 2]],
   keep: (p) => ascinvOk(p),
@@ -3020,6 +3252,13 @@ const asconj: Def = {
   },
   distractors: ([a, b]) => [pairT(R_(a), R_(-b)), pairT(R_(-a), R_(b))],
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "property|multiply": ["A number times its conjugate is a² + b², which is |z|², a real number."],
+      "property|conjugate": ["Taking the conjugate commutes with multiplying and dividing, so it can be done to each part separately."],
+      "conj": ["The conjugate keeps the real part and changes the sign of the imaginary part."],
+      "product": ["Now do the arithmetic, using i² = −1."],
+    }),
   explain: (s) => (s.id === "property" ? `Use ${s.value}` : s.id === "conj" ? `The conjugate of ${s.inputs[0]} is ${s.value}` : `Work it out: ${s.value}`),
   domain: [[-6, 6], [-6, 6], [-4, 4], [0, 4], [0, 3]],
   keep: (p) => asconjOk(p),
@@ -3095,6 +3334,12 @@ const asslope: Def = {
     return kind === 0 ? [es(sinE), es(neg), "1", "−1", "√3"] : [asslopeLine(sinE, x1, y1), asslopeLine(neg, x1, y1), asslopeLine(E_(R_(1)), x1, y1), asslopeLine(E_(R_(-1)), x1, y1), asslopeLine(E_(R_(2)), x1, y1)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "tan|solve": ["The slope of a line is the tan of the angle it makes with the positive x-axis. That angle is taken between 0° and 180°."],
+      "tan|evaluate": ["The slope of a line is the tan of the angle it makes with the positive x-axis."],
+      "line": ["A line through a known point with a known slope is y − y₁ = m(x − x₁)."],
+    }),
   explain: (s) => (s.id === "tan" ? (typeof s.value === "number" ? `tan θ = ${s.inputs[0]} with 0° ≤ θ < 180° gives θ = ${s.value}°` : `m = tan ${s.inputs[0]}° = ${s.value}`) : `y − ${par(Number(s.inputs[1]))} = m(x − ${par(Number(s.inputs[0]))}), so y = ${s.value}`),
   domain: [[0, 2], [0, 6], [-3, 3], [-3, 3]],
   keep: (p) => asslopeOk(p),
@@ -3159,6 +3404,11 @@ const ascoll: Def = {
     return [rs(radd(R_(y2), rmul(R_(y2 - y1, x2 - x1), R_(x3)))), rs(R_(y1 + y2 - x3)), rs(radd(k, R_(1))), rs(rsub(k, R_(2))), rs(rmul(k, R_(-1)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "slope": ["Points are on one line exactly when the slope between any two of them is the same. Find the slope of AB first."],
+      "equal": ["Setting the slope of AC equal to that slope gives an equation for k."],
+    }),
   explain: (s) => (s.id === "slope" ? `Slope of AB = ${mi(Number(s.inputs[0]))}/${mi(Number(s.inputs[1]))} = ${s.value}` : `Collinear points give equal slopes: slope AC = slope AB, so k = ${s.value}`),
   domain: [[-5, 5], [-5, 5], [-5, 5], [-5, 5], [-6, 6]],
   keep: (p) => ascollOk(p),
@@ -3278,6 +3528,11 @@ const aslineq: Def = {
     return [rhsR(R_(1), R_(a + b)), rhsR(R_(-1), R_(b)), rhsR(R_(2), R_(a - 1)), rhsR(R_(-1, 2), R_(b + 1)), rhsR(R_(3), R_(-b))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "form": ["A line is fixed by a point and a direction. The point–slope form uses exactly those."],
+      "answer": ["Make y the subject to get the y = mx + c form."],
+    }),
   explain: (s) => (s.id === "form" ? `Use ${s.value}` : `So the answer is ${s.value}`),
   domain: [[0, 6], [-5, 6], [-4, 5], [-4, 4], [-4, 4]],
   keep: (p) => aslineqOk(p),
@@ -3334,6 +3589,11 @@ const aslinpar: Def = {
     return [`(${mi(x1 + r)}, ${mi(y1 + r)})`, `(${mi(x1 - r)}, ${mi(y1 - r)})`, `(${mi(x1)}, ${mi(y1 + r)})`];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "param": ["Moving a distance r from A along the line changes x by r cos θ and y by r sin θ."],
+      "point": ["Put in the given r to get the point."],
+    }),
   explain: (s) => (s.id === "param" ? `Parametric form: ${s.value}` : `Put r = ${mi(Number(s.inputs[0]))}: ${s.value}`),
   domain: [[-4, 4], [-4, 4], [0, 7], [0, 2]],
   cap: 300,
@@ -3463,6 +3723,11 @@ const asgenf: Def = {
     return [rhsR(R_(-A, Bc), R_(Cc)), rhsR(R_(A, Bc), R_(0))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "convert": ["Making y the subject shows the slope as the coefficient of x and the y-intercept as the constant."],
+      "answer": ["Read the asked-for value from that form."],
+    }),
   explain: (s) => (s.id === "convert" ? `Rearrange: ${s.value}` : `So the answer is ${s.value}`),
   domain: [[0, 6], [-1, 4], [-4, 4], [-6, 6], [0, 3]],
   keep: (p) => asgenfOk(p),
@@ -3565,6 +3830,12 @@ const asevset: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "A": ["An event is a set of outcomes. Listing them makes the combinations easy."],
+      "B": ["List the second event the same way."],
+      "combine": ["'Or' is the union, 'and' is the intersection, and 'not' is the complement within the sample space."],
+    }),
   explain: (s) => (s.id === "A" ? `A = ${s.value}` : s.id === "B" ? `B = ${s.value}` : `${s.inputs[0]} = ${s.value}`),
   domain: [[0, 3], [0, 7], [0, 7], [0, 4]],
   keep: (p) => asevsetOk(p),
@@ -3649,6 +3920,15 @@ const asadd3: Def = {
     return [(p[6] ? U : c.N - U) / c.N, (U - 1) / c.N];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "singles": ["Start by adding the three single probabilities. This overcounts outcomes in more than one event."],
+      "pairs": ["Outcomes in two events were counted twice, so subtract each pairwise overlap once."],
+      "triple": ["Outcomes in all three were added three times and taken away three times, so add them back once."],
+      "pairs2": ["For exactly one event, outcomes in two events must not count at all. They were counted twice, so subtract the pairwise overlaps twice."],
+      "triple3": ["Outcomes in all three were added three times and then taken away six times, so add them back three times to leave zero."],
+      "complement": ["None of the events is the opposite of at least one, so subtract the union from 1."],
+    }),
   explain: (s) => (s.id === "singles" ? `P(A) + P(B) + P(C) = ${s.value}` : s.id === "pairs" ? `Subtract P(A ∩ B) + P(B ∩ C) + P(A ∩ C) = ${s.value}` : s.id === "triple" ? `Add back P(A ∩ B ∩ C): P(A ∪ B ∪ C) = ${s.value}` : s.id === "pairs2" ? `Subtract twice P(A ∩ B) + P(B ∩ C) + P(A ∩ C): 2 × that = ${s.value}` : s.id === "triple3" ? `Add back three times P(A ∩ B ∩ C): P(exactly one) = ${s.value}` : `None of them: 1 − P(A ∪ B ∪ C) = ${s.value}`),
   range: [0, 1],
   domain: [[1, 6], [1, 6], [1, 6], [0, 4], [0, 4], [0, 4], [0, 2]],
@@ -3713,6 +3993,11 @@ const asbern: Def = {
   },
   distractors: ([kind, a, d, u, v]) => (kind === 4 ? [1, u * u] : kind <= 1 ? [a / (2 * d), (a + 1) / (d + 1)] : [u * (a / d), v * (a / d)]),
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "formula": ["A Bernoulli variable is 1 with probability p and 0 otherwise. Its mean is p and its variance is pq."],
+      "value": ["Put in the given probability."],
+    }),
   explain: (s) => (s.id === "formula" ? (s.value as string) : `So the answer is ${fracTxt(Number(s.value))}`),
   range: ([kind]) => (kind <= 1 ? [0, 1] : null),
   domain: [[0, 4], [1, 11], [2, 12], [-5, 10], [-5, 10]],
@@ -3810,6 +4095,11 @@ const asleq: Def = {
   },
   distractors: ([, a, b, c, l, m, n]) => [tup([l, m, n, a, b, c].map(mi))],
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "standard": ["The standard form (x − a₁)/b₁ = … shows a point and a direction straight away. Each top must be the variable alone with coefficient 1, so divide to make it so."],
+      "read": ["In standard form, the numbers taken from x, y and z give a point on the line, and the bottoms give the direction."],
+    }),
   explain: (s) => (s.id === "standard" ? `Standard form: ${s.value}` : `So (a₁, a₂, a₃, b₁, b₂, b₃) = ${s.value}`),
   domain: [[0, 2], [-2, 2], [-2, 2], [-2, 2], [-3, 3], [-3, 3], [-3, 3]],
   keep: (p) => asleqOk(p),
@@ -3871,6 +4161,12 @@ const asint3: Def = {
     return [P3(a), P3(b)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "equate": ["Lines meet where one point lies on both, so the two general points must be equal in every component."],
+      "solve": ["Two equations fix λ and μ. The third must also hold, otherwise the lines do not meet."],
+      "point": ["Put λ back into its line to get the meeting point."],
+    }),
   explain: (s) => (s.id === "equate" ? `Set ${s.value}` : s.id === "solve" ? `Solve two of the equations: ${s.value}` : `Substitute: the point is ${s.value}`),
   domain: [[-2, 2], [-2, 2], [-2, 2], [0, 5], [6, 11], [-2, 2], [-2, 2]],
   keep: (p) => asint3Ok(p),
@@ -3979,6 +4275,11 @@ const asplaneq: Def = {
     return [tup(normPlane(n, d + 1).map(mi)), tup(normPlane(n, d - 2).map(mi)), tup(normPlane([n[1], n[0], n[2]], d).map(mi)), tup(normPlane([n[0], n[1], -n[2]], d + 3).map(mi)), tup(normPlane([n[0] + 1, n[1], n[2]], d).map(mi))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "normal": ["A plane's equation needs a normal vector. Two directions lying in the plane are found from the given data, and their cross product is perpendicular to both."],
+      "equation": ["With normal (a, b, c), the plane is ax + by + cz = d. Any known point on it gives d."],
+    }),
   explain: (s) => (s.id === "normal" ? `Find the normal: ${s.value}` : `So (a, b, c, d) = ${s.value}`),
   domain: [[0, 4], [0, 11], [-4, 4], [-4, 4], [-4, 4]],
   keep: (p) => asplaneqOk(p),
@@ -4047,6 +4348,12 @@ const asplang: Def = {
     return [es(E_(R_(Math.abs(dot(u, w)), dot(u, u) + dot(w, w)))), "1/2", "1/3", "√2/2", "√3/2", "2/3"];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "vectors": ["The angle between two planes is the angle between their normals. The normal's components are the coefficients of x, y and z."],
+      "dot": ["The dot product of the normals is |n₁||n₂| cos θ. The modulus keeps the angle acute."],
+      "value": ["Divide by the product of the normals' lengths to get cos θ."],
+    }),
   explain: (s) => (s.id === "vectors" ? `Use the ${s.value}` : s.id === "dot" ? `|dot product| = ${s.value}` : `Divide by √${s.inputs[0]} × √${s.inputs[1]}: ${s.value}`),
   range: [0, 1],
   domain: [[0, 1], [0, 11], [0, 11]],
@@ -4138,6 +4445,12 @@ const astaneh: Def = {
     return [rhsR(rmul(m, R_(-1)), c), rhsR(m, rmul(c, R_(-1)))];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "point": ["The tangent or normal passes through the point of contact, so we need it."],
+      "slope": ["The derivative at the point gives the tangent's slope. The normal is perpendicular to the tangent, so its slope is −1 divided by that."],
+      "line": ["A line through a known point with a known slope is y − y₁ = m(x − x₁)."],
+    }),
   explain: (s) => (s.id === "point" ? `The point is ${s.value}` : s.id === "slope" ? `Differentiating (or from xx₁/a² ± yy₁/b² = 1), the ${s.inputs[0] ? "normal's" : "tangent's"} slope is ${s.value}` : `y = ${s.value}`),
   domain: [[0, 1], [2, 6], [1, 6], [0, 7], [0, 1], [0, 1]],
   keep: (p) => astanehOk(p),
@@ -4193,6 +4506,11 @@ const aspairbis: Def = {
     return [k + 1, 2 * k, (Bc + A) / (H2 / 2)];
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "formula": ["A point on a bisector is equally far from both lines. For a pair through the origin that gives the standard equation (x² − y²)/(a − b) = xy/h."],
+      "rearrange": ["Rearrange it to the asked form to read off the coefficient."],
+    }),
   explain: (s) => (s.id === "formula" ? `The bisectors of ax² + 2hxy + by² = 0 are ${s.value}` : `So the bisectors are ${s.value}`),
   domain: PAIR_D,
   keep: (pp) => aspairbisOk(pp),
@@ -4270,6 +4588,11 @@ const asside: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "values": ["ax + by + c is 0 on the line, positive on one side and negative on the other. So put each point in and look at the signs."],
+      "signs": ["The same sign means the same side, opposite signs mean opposite sides, and 0 means on the line."],
+    }),
   explain: (s) => (s.id === "values" ? `Put P and Q into the left-hand side: ${s.value}` : `${Number(s.inputs[0]) * Number(s.inputs[1]) === 0 ? "A zero value means the point is on the line" : Number(s.inputs[0]) * Number(s.inputs[1]) > 0 ? "Same signs: the same side" : "Opposite signs: opposite sides"} (option ${"ABC"[Number(s.value)]})`),
   domain: [[-2, 2], [-2, 2], [-4, 4], [0, 11], [0, 11]],
   // lines released in lowest terms with a positive leading coefficient (x − y + 2 = 0, not −2x + 2y − 4 = 0)
@@ -4376,6 +4699,12 @@ const asfam: Def = {
   },
   distractors: ([ix, iy]) => [rhsR(R_(1), R_(iy - ix)), rhsR(R_(-1), R_(iy + ix)), rhsR(R_(2), R_(iy - 2 * ix)), rhsR(R_(-1, 2), R_(iy + 1)), rhsR(R_(3), R_(iy))],
   variants: () => [],
+  stepWhy: (s) =>
+    ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+      "family": ["If two lines meet at a point, L₁ + λL₂ = 0 is a line through that point for every λ. So there is no need to find the point first."],
+      "lambda": ["The extra condition picks out one member of the family, which fixes λ."],
+      "line": ["Put that λ back and rearrange to y = mx + c."],
+    }),
   explain: (s) => (s.id === "family" ? s.value as string : s.id === "lambda" ? `Use the condition: ${s.value}` : `y = ${s.value}`),
   domain: [[-3, 3], [-3, 3], [0, 9], [0, 9], [0, 2], [0, 9]],
   keep: (p) => asfamOk(p),
