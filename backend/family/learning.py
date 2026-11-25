@@ -39,6 +39,8 @@ RECORDS = {
     'skip': {'target'},
     # understanding@1: a finished round of a start-here idea's own questions; what the learner did, never an attempt or mastery
     'understand': {'policy', 'competency', 'concept', 'round', 'asked', 'firstTry'},
+    # why-taps@1: a learner opened the reason of a worked step (step -1: all of them); which explanations are needed
+    'why': {'policy', 'competency', 'screen', 'step'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
 }
@@ -463,6 +465,10 @@ def checked_learning(event, pupil):
         r, asked, first = event.get('round'), event.get('asked'), event.get('firstTry')
         if not (whole(r) and whole(asked) and whole(first)) or not 0 <= r < len(rounds) or asked != rounds[r] or not 0 <= first <= asked:
             _reject('Invalid start-here round.')
+    elif record == 'why':
+        step = event.get('step')
+        if event.get('policy') != 'why-taps@1' or not _text(event.get('competency'), 120) or not _text(event.get('screen'), 200) or not (isinstance(step, int) and not isinstance(step, bool) and -1 <= step <= 30):
+            _reject('Invalid why tap.')
     # the server keeps the time: the delayed check and everything else is measured by it
     return {**event, 'at': now.isoformat().replace('+00:00', 'Z'), 'savedAt': now.isoformat()}
 

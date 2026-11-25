@@ -43,7 +43,10 @@ export type LearningRecord =
   | (Base & { record: "skip"; target: string })
   // understanding@1: one finished round of a start-here idea's own questions (foundations@1): how many were asked and how many
   // were right at the first choice. What the learner DID on the idea behind a skill; never an attempt, never mastery evidence.
-  | (Base & { record: "understand"; policy: "understanding@1"; competency: string; concept: string; round: number; asked: number; firstTry: number });
+  | (Base & { record: "understand"; policy: "understanding@1"; competency: string; concept: string; round: number; asked: number; firstTry: number })
+  // why-taps@1: the learner asked for the reason of a worked step (step = its number from 0, or -1 for "Break it down", all
+  // steps). Not an attempt and not evidence: it shows which explanations children need, so the step can be written better.
+  | (Base & { record: "why"; policy: "why-taps@1"; competency: string; screen: string; step: number });
 
 /** grading-decision@1 as the SERVER recorded it (stage 7). Only the server adds it (a browser that sends one is refused), so it is the
  *  recorded, authoritative verdict replay reads (D11); a later superseding decision (a regrade) is merged in by the loader. */

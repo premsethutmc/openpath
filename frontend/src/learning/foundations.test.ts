@@ -201,3 +201,23 @@ test("break-it-down@1: a worked problem is separate steps, and every step can sa
   }
   assert.ok(n >= 15);
 });
+
+test("step-why@1: a family's step reasons are plain sentences for every step it makes, and the lesson lines them up", async () => {
+  const { FAMILIES, pool, stepWhys } = await import("../../../packages/learning/src/families");
+  let fams = 0, steps = 0, covered = 0;
+  for (const [id, f] of FAMILIES) {
+    if (!f.stepWhy) continue;
+    fams++;
+    for (const pr of pool(id).items.slice(0, 6)) for (const st of pr.steps) {
+      steps++;
+      const w = f.stepWhy(st);
+      if (!w) continue;
+      covered++;
+      assert.ok(Array.isArray(w) && w.length >= 1 && w.length <= 4 && w.every((x) => typeof x === "string" && x.trim().length > 20 && x.length <= 400 && !/undefined|NaN|\[object/.test(x)), `${id} ${st.id}: ${JSON.stringify(w)}`);
+    }
+  }
+  assert.ok(fams >= 1 && covered >= 1);
+  const ex = pool("asline").items[0];
+  if (ex) assert.equal(stepWhys(ex.id)?.length, ex.steps.length);
+  console.log(`step-why@1: ${fams} families, ${covered} of ${steps} sampled steps have a reason`);
+});

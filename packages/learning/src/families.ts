@@ -1511,6 +1511,15 @@ function euclidTeaching([a, b]: number[]): InstanceTeaching {
   };
 }
 export const explainStep = (pr: Problem, s: Step) => prose(FAMILIES.get(pr.family)!.explain(s));
+/** step-why@1: the plain-words reason for each step of a worked question (null where the family gives none). */
+export const whyStep = (pr: Problem, s: Step): string[] | null => { const w = FAMILIES.get(pr.family)?.stepWhy?.(s); return w && w.length ? w.map(prose) : null; };
+/** The reasons for every step of question `id`, lined up with its worked lines (worked(): the prompt, then one line a step). */
+export function stepWhys(id: string | undefined): (string[] | null)[] | null {
+  const pr = id ? problemOf(id) : null;
+  if (!pr) return null;
+  const w = pr.steps.map((s) => whyStep(pr, s));
+  return w.some(Boolean) ? w : null;
+}
 
 // ---------------------------------------------------------------- decomposition (decomposition@2)
 
