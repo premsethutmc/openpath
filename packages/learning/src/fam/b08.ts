@@ -227,6 +227,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "undo-subtract": ["An equation is like a balance: doing the same thing to both sides keeps it true.", "Taking away the number added to x leaves x on its own."], "undo-add": ["An equation is like a balance: doing the same thing to both sides keeps it true.", "Adding back the number that was taken from x leaves x on its own."], "undo-divide": ["An equation is like a balance: doing the same thing to both sides keeps it true.", "Dividing undoes multiplying, so it leaves x on its own."], "undo-multiply": ["An equation is like a balance: doing the same thing to both sides keeps it true.", "Multiplying undoes dividing, so it leaves x on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => {
       const [b, a] = s.inputs;
       return s.op === "subtract" ? `Take ${a} from both sides: x = ${b} − ${a} = ${s.value}` : s.op === "add" ? `Add ${a} to both sides: x = ${b} + ${a} = ${s.value}` : s.op === "divide" ? `Divide both sides by ${a}: x = ${b} ÷ ${a} = ${s.value}` : `Multiply both sides by ${a}: x = ${b} × ${a} = ${s.value}`;
@@ -292,6 +296,10 @@ export const B08: Def[] = [
     },
     distractors: ([a, b, c, d]) => [poly([[a + c, "x"], [b - d, "y"]]), poly([[a - c, "x"], [b + d, "y"]]), poly([[b + d, "x"], [a + c, "y"]])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "x-terms": ["Like terms have the same letter, so they count the same kind of thing and can be added.", "We add the numbers in front of x, keeping their signs."], "y-terms": ["The y terms are a different kind of thing from the x terms, so they are collected on their own."], "write": ["x terms and y terms cannot be joined into one term, so the answer keeps both, each with its sign."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "x-terms" ? `x terms: ${n_(Number(s.inputs[0]))} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "x"]])}` : s.id === "y-terms" ? `y terms: ${n_(Number(s.inputs[0]))} ${signed(Number(s.inputs[1]))} = ${n_(Number(s.value))}, so ${poly([[Number(s.value), "y"]])}` : `Together: ${s.value}`),
     domain: [[1, 9], [-9, 9], [-9, 9], [-9, 9]],
     cap: 400,
@@ -347,6 +355,10 @@ export const B08: Def[] = [
     ],
     distractors: ([a, b, c, d]) => [poly([[a - c, "x"], [d - b, ""]]), poly([[a - c, "x"], [b, ""]])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "open": ["A minus sign in front of a bracket takes away everything inside it, so every term inside changes its sign."], "x-terms": ["Once the bracket is gone, terms with x are like terms and can be combined."], "numbers": ["Plain numbers are like terms too, so they are combined together, keeping their signs."], "result": ["x terms and plain numbers cannot be joined, so the simplest form keeps one of each."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "result" ? `Put the x terms and the numbers together: ${s.value}` : s.id === "open" ? `−(${s.inputs[0]}) = ${s.value}: every sign in the bracket changes` : s.id === "x-terms" ? `x terms: ${s.inputs[0]}x − ${s.inputs[1]}x = ${poly([[Number(s.value), "x"]])}` : `Numbers: ${n_(Number(s.inputs[0]))} ${signed(-Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: [[2, 12], [-12, 12], [1, 12], [-12, 12]],
     cap: 400,
@@ -399,6 +411,10 @@ export const B08: Def[] = [
     },
     distractors: ([p, q, r, s, ask]) => [p, q, r, s].filter((_, i) => i !== ask),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read": ["The coefficient of a term is the number multiplying it, and the sign in front belongs to that number.", "A term with no letter is the constant term."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.inputs[0] === "constant" ? `The constant term is the term with no letter: ${n_(Number(s.value))}` : `The number (with its sign) in front of ${s.inputs[0]} is ${n_(Number(s.value))}`),
     domain: [[1, 9], [-9, 9], [-9, 9], [-9, 9], [0, 3]],
     cap: 300,
@@ -453,6 +469,10 @@ export const B08: Def[] = [
     ],
     distractors: (p) => [poly([[PYR_W[p[0]] + 1, "x"], [pyrConst(p, PYR_W), ""]]), poly([[PYR_W[p[0]], "x"], [pyrConst(p, PYR_W) + 1, ""]])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "row2": ["Each block is the sum of the two blocks just below it, so the second row is made from pairs of the bottom row."], "top": ["Every block above is again a sum of two below, so we keep adding until one block is left.", "Collecting like terms at each stage keeps the expression short."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "row2" ? `Second row: ${s.value}` : `Keep adding pairs to the top and collect like terms: ${s.value}`),
     figure: (p) => ({ type: "table", head: ["Row", "Blocks"], rows: [["Top", "?"], ["Third", "? ?"], ["Second", "? ? ?"], ["Bottom", pyrRow(p).join("   ")]] }),
     domain: [[0, 3], [1, 15], [1, 15], [1, 15]],
@@ -516,6 +536,10 @@ export const B08: Def[] = [
       { id: "constant-forgotten", kind: "procedural", competency: GEN, says: `Only the growing part ${d}n was written. Check with Figure 1: ${d} × 1 = ${d}, but the figure has ${d + c}.`, predict: c !== 0 ? poly([[d, "n"]]) : null },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "growth": ["Each figure adds the same number of sticks, so the number of sticks grows by that amount every time n goes up by 1. That amount is the number in front of n."], "start": ["The rule must give the right count for Figure 1, so we compare it with Figure 1 and add or take away the difference."], "write": ["Putting the growth and the adjustment together gives one rule that works for every figure."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "growth" ? `Each figure adds ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so the expression has ${s.value}n` : s.id === "write" ? `So Figure n has ${s.value}` : `Figure 1 has ${s.inputs[0]}; ${s.inputs[1]} × 1 = ${s.inputs[1]}, so add ${n_(Number(s.value))}`),
     figure: ([d, c, ctx]) => ({ type: "table", head: ["Figure", "1", "2", "3", "4", "n"], rows: [[ctx ? "Tiles" : "Matchsticks", d + c, 2 * d + c, 3 * d + c, 4 * d + c, "?"]] }),
     domain: [[2, 9], [-1, 9], [0, 1]],
@@ -579,6 +603,10 @@ export const B08: Def[] = [
     ],
     distractors: ([a, b, c]) => [poly([[a + c, "n"]]), poly([[a * c, "n"], [b, ""]])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "build": ["A letter can stand for any starting number, so following each instruction on n shows what happens to every number at once."], "expand": ["Multiplying out the bracket means every term inside is multiplied, so like terms can then be collected."], "simplify": ["Collecting like terms shows the simplest form, which tells us what the trick always does."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "build" ? `Following the steps: ${s.value}` : s.id === "expand" ? `Open the bracket: ${s.value}` : `The numbers cancel, leaving ${s.value}: the result is always ${s.inputs[0]} times the starting number`),
     domain: [[2, 9], [1, 9], [2, 5]],
     difficulty: ([a, b, c]) => (a * c <= 12 ? 1 : a * c <= 24 ? 2 : 3),
@@ -624,6 +652,10 @@ export const B08: Def[] = [
     ]),
     distractors: ([a, r, d]) => [tup(recTerms(a, r, d + 1)), tup(recTerms(a + 1, r, d))],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "t#": ["A recursive rule makes each term from the one just before it, so we put the previous term into the rule."], "list": ["The answer asks for the terms in order, starting with t₁."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => {
       if (s.id === "list") return `The first five terms: ${s.value}`;
       const [t, r, d] = s.inputs.map(Number);
@@ -685,6 +717,10 @@ export const B08: Def[] = [
     ],
     distractors: ([a, d]) => [poly([[d, "n"], [a + d, ""]]), poly([[-d, "n"], [a - d, ""]])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "jumps": ["Each step adds the same amount, and from the first term to term n there are n − 1 steps, so that amount is added n − 1 times."], "formula": ["Term n is the first term plus all the steps after it, so we add t₁ to the total of the steps."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "jumps" ? `From t₁ to tₙ there are n − 1 steps of ${n_(Number(s.inputs[0]))}: ${s.value}` : `Add t₁ = ${n_(Number(s.inputs[0]))}: tₙ = ${s.value}`),
     domain: [[-9, 20], [-6, 9]],
     cap: 300,
@@ -733,6 +769,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "t#": ["Every term after the first two is the sum of the two terms just before it, so each new term needs the two before it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.id.replace("t", "Term ")}: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`,
     domain: [[1, 9], [1, 9], [5, 10]],
     cap: 300,
@@ -784,6 +824,10 @@ export const B08: Def[] = [
       { id: "not-divided", kind: "procedural", competency: INV, says: `The product ${a} × ${d} = ${a * d} is right, but it must then be shared by ${b}.`, predict: a * d },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "product": ["In inverse proportion, when one quantity grows the other shrinks so that their product stays the same.", "So the known pair gives the fixed product."], "share": ["The product is the same for every pair, so the missing number is the product divided by the number we know."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "product" ? `x × y stays the same: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `y = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 12], [2, 30], [2, 15]],
     cap: 400,
@@ -828,6 +872,10 @@ export const B08: Def[] = [
       { id: "rate-not-flipped", kind: "procedural", competency: INV, says: `The work per day, 1/${p} + 1/${q}, was given as the answer. That is the part of the job done in one day; the days needed is 1 divided by it.`, predict: (p + q) / (p * q) },
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rates": ["Working together, the parts of the job each person does in one day add up.", "Someone who takes d days alone does 1/d of the job each day."], "flip": ["The whole job is 1. Dividing 1 by the part done each day tells how many days the whole job takes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "rates" ? `Part of the job done in one day together: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `Days for the whole job: 1 ÷ ${s.inputs[1]} = ${fmt(Number(s.value))}`),
     domain: [[2, 19], [3, 20]],
     // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
@@ -894,6 +942,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "lcd": ["Multiplying every term by a number all the bottoms divide into clears the fractions.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "collect": ["With no fractions left, the x terms are like terms and can be added."], "divide": ["x is multiplied by a number, so dividing both sides by that number leaves x on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "lcd" ? `Multiply every term by ${s.inputs[0]}: the right side becomes ${s.value}` : s.id === "collect" ? `The left side becomes ${s.inputs[0]}x ${Number(s.value) < Number(s.inputs[0]) ? "−" : "+"} ${s.inputs[1]}x = ${s.value}x` : `x = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 8], [3, 9], [1, 6], [0, 1]],
     difficulty: ([a, b, , s]) => (gcd(a, b) === 1 && a * b <= 12 && !s ? 1 : s ? 3 : 2),
@@ -942,6 +994,10 @@ export const B08: Def[] = [
       { id: "wrong-way-round", kind: "procedural", competency: INTADD, says: "The numbers were subtracted the wrong way round, giving the right size with the wrong sign. Check by putting the answer back into both sides.", predict: (b - d) / (a - c) },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "x-left": ["Getting all the x terms on one side leaves just one x term to deal with.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "numbers-right": ["Moving the plain numbers to the other side leaves only the x term on the left.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "divide": ["x is multiplied by a number, so dividing both sides by that number leaves x on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "x-left" ? `${Number(s.inputs[1]) < 0 ? `Add ${poly([[-Number(s.inputs[1]), "x"]])} to` : `Take ${poly([[Number(s.inputs[1]), "x"]])} from`} both sides: ${poly([[Number(s.value), "x"]])} on the left` : s.id === "numbers-right" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: ${n_(Number(s.inputs[0]))} + ${-Number(s.inputs[1])} = ${n_(Number(s.value))} on the right` : `Take ${s.inputs[1]} from both sides: ${n_(Number(s.inputs[0]))} − ${s.inputs[1]} = ${n_(Number(s.value))} on the right`) : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${fmt(Number(s.value)).replace(/^-/, "−")}`),
     domain: [[2, 9], [-15, 15], [-5, 8], [-15, 15]],
     cap: 400,
@@ -993,6 +1049,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "x-left": ["Getting all the x terms on one side leaves just one x term to deal with.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "numbers-right": ["Moving the plain numbers to the other side leaves only the x term on the left.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "divide": ["x is multiplied by a number, so dividing both sides by that number leaves x on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "x-left" ? `Take ${linTerm(Number(s.inputs[1]), 0)} from both sides: ${linTerm(Number(s.value), 0)} on the left` : s.id === "numbers-right" ? `Take ${s.inputs[1]} from both sides: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} on the right` : `Divide by ${s.inputs[1]}: x = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 9], [1, 20], [1, 8], [1, 12]],
     cap: 400,
@@ -1040,6 +1100,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "expand": ["The number outside the bracket multiplies every term inside, so the bracket can be removed."], "x-left": ["Getting all the x terms on one side leaves just one x term to deal with.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "numbers-right": ["Moving the plain numbers to the other side leaves only the x term on the left.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "divide": ["x is multiplied by a number, so dividing both sides by that number leaves x on its own."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "expand" ? `Multiply out: ${s.inputs[0]} × ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "x-left" ? `Take ${linTerm(Number(s.inputs[1]), 0)} from both sides: ${linTerm(Number(s.value), 0)} on the left` : s.id === "numbers-right" ? `Move the number: ${n_(Number(s.inputs[0]))} − ${Number(s.inputs[1]) < 0 ? `(${n_(Number(s.inputs[1]))})` : s.inputs[1]} = ${n_(Number(s.value))}` : `Divide by ${s.inputs[1]}: x = ${n_(Number(s.inputs[0]))} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 6], [-6, 6], [1, 5], [1, 15]],
     cap: 400,
@@ -1081,6 +1145,10 @@ export const B08: Def[] = [
     ]),
     distractors: ([x, y]) => [tup([-x, y]), tup([x, -y]), tup([-y, -x])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "across": ["The first coordinate, x, says how far across from the origin: right is positive, left is negative."], "up": ["The second coordinate, y, says how far up or down: up is positive, down is negative."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "across" ? `From the origin, go ${Math.abs(Number(s.value))} ${Number(s.value) < 0 ? "left" : "right"}: x = ${n_(Number(s.value))}` : `Then ${Math.abs(Number(s.value))} ${Number(s.value) < 0 ? "down" : "up"}: y = ${n_(Number(s.value))}`),
     figure: ([x, y]) => ({ type: "plane", points: [[x, y, "A"]], range: 6 }),
     domain: [[-6, 6], [-6, 6]],
@@ -1125,6 +1193,10 @@ export const B08: Def[] = [
     },
     distractors: () => [1, 2, 3, 4],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "signs": ["The axes split the plane into four quadrants, and the signs of x and y tell which one a point is in.", "Quadrant I is top right, and the numbers go round anticlockwise."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `x is ${s.inputs[0] === "+" ? "positive (right)" : "negative (left)"} and y is ${s.inputs[1] === "+" ? "positive (up)" : "negative (down)"}: quadrant ${["I", "II", "III", "IV"][Number(s.value) - 1]}`,
     domain: [[-9, 9], [-9, 9]],
     cap: 300,
@@ -1167,6 +1239,10 @@ export const B08: Def[] = [
     ]),
     distractors: ([x, y, dx, dy]) => [tup([x - dx, y - dy]), tup([x + dx, y - dy]), tup([x - dx, y + dy])],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "x": ["Moving right or left changes only x: right adds, left takes away."], "y": ["Moving up or down changes only y: up adds, down takes away."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.id === "x" ? "x" : "y"}: ${n_(Number(s.inputs[0]))} ${Number(s.inputs[1]) < 0 ? "−" : "+"} ${Math.abs(Number(s.inputs[1]))} = ${n_(Number(s.value))}`,
     domain: [[-5, 5], [-5, 5], [-6, 6], [-6, 6]],
     cap: 300,
@@ -1207,6 +1283,10 @@ export const B08: Def[] = [
       { id: "one-angle-only", kind: "procedural", competency: TRI, says: "Only one of the two angles was taken from 180°. Both known angles must be taken away.", predict: [180 - a, 180 - b] },
     ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "known": ["The three angles of a triangle always add up to 180°, so first we find how much the two known angles use."], "rest": ["Whatever is left of 180° must be the third angle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "known" ? `The two angles together: ${s.inputs[0]}° + ${s.inputs[1]}° = ${s.value}°` : `Third angle: 180° − ${s.inputs[1]}° = ${s.value}°`),
     figure: ([a, b]) => ({ type: "triangle", angles: [`${a}°`, `${b}°`, "?"] }),
     domain: [[15, 150], [15, 150]],
@@ -1255,6 +1335,10 @@ export const B08: Def[] = [
           { id: "adjacent-interior", kind: "conceptual", competency: TRI, says: "The interior angle next to the exterior angle was found (180° − exterior). The question asks for the other opposite angle.", predict: 180 - (a + b) },
         ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["The exterior angle and its neighbouring interior angle make a straight line, 180°, and so do all three interior angles. So the exterior angle equals the two opposite interior angles added."], "diff": ["The exterior angle is the sum of the two opposite interior angles, so taking away the known one leaves the other."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `Exterior angle = sum of the interior opposite angles: ${s.inputs[0]}° + ${s.inputs[1]}° = ${s.value}°` : `Other opposite angle = exterior − known: ${s.inputs[0]}° − ${s.inputs[1]}° = ${s.value}°`),
     domain: [[20, 120], [20, 120], [0, 1]],
     cap: 400,
@@ -1297,6 +1381,10 @@ export const B08: Def[] = [
           { id: "halved", kind: "procedural", competency: TRI, says: "The remaining angle was halved, but here only one angle (the third) is missing.", predict: (180 - v) % 2 === 0 ? (180 - v) / 2 : null },
         ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rest": ["The three angles of a triangle add up to 180°, so taking away the angles we know leaves what the others share."], "half": ["In an isosceles triangle the two angles opposite the equal sides are equal, so they share what is left equally."], "double": ["The two angles opposite the equal sides are equal, so the known one counts twice."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "half" ? `The two equal angles share ${s.inputs[0]}°: each is ${s.value}°` : s.id === "double" ? `The two equal angles: 2 × ${s.inputs[0]}° = ${s.value}°` : `180° − ${s.inputs[1]}° = ${s.value}°`),
     figure: ([v, f]) => ({ type: "triangle", angles: f === 0 ? ["?", "?", `${v}°`] : [`${v}°`, `${v}°`, "?"] }),
     domain: [[20, 160], [0, 1]],
@@ -1340,6 +1428,10 @@ export const B08: Def[] = [
           { id: "any-length", kind: "conceptual", competency: TRI, says: `It was thought any length will do. The two shorter sides together must be longer than the longest side, so the third side must be more than ${b} − ${a}.`, predict: b - a + 1 === 1 ? null : 1 },
         ]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["Any two sides of a triangle together must be longer than the third side, or the sides cannot meet to close the triangle."], "below": ["The side must be less than that sum, and a whole number, so it is the whole number just below it."], "diff": ["The third side must also be longer than the difference of the other two, or the two shorter sides could not reach across."], "above": ["The side must be more than that difference, and a whole number, so it is the whole number just above it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `The third side must be less than ${s.inputs[0]} + ${s.inputs[1]} = ${s.value} cm` : s.id === "below" ? `The longest whole number below ${s.inputs[0]} is ${s.value}` : s.id === "diff" ? `The third side must be more than ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} cm` : `The shortest whole number above ${s.inputs[0]} is ${s.value}`),
     domain: [[2, 20], [2, 20], [0, 1]],
     cap: 380,
@@ -1411,6 +1503,10 @@ export const B08: Def[] = [
     },
     distractors: ([, f, , s1, s2, s3]) => (f === 0 ? [s1, s2, s3] : congAngles(s1, s2)),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "match": ["In a congruence statement the letters are written in matching order, so matching places give matching sides.", "Matching sides of congruent triangles are equal."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `In the statement, ${s.inputs[0]} sits in the same places as ${s.inputs[1]}, so ${s.inputs[0]} = ${s.inputs[1]} = ${s.value}${String(s.inputs[0]).length === 1 ? "°" : " cm"}`,
     domain: [[1, 5], [0, 1], [0, 2], [3, 11], [3, 11], [3, 11]],
     cap: 400,
@@ -1460,6 +1556,10 @@ export const B08: Def[] = [
       ? [{ id: "equal-for-supplementary", kind: "conceptual", competency: PAR, says: `The ${RELSHORT[rel]} angle was taken to be equal. ${rel === 2 ? "Co-interior angles" : "Angles in a linear pair"} add up to 180°.`, predict: a }]
       : [{ id: "supplementary-for-equal", kind: "conceptual", competency: PAR, says: `The ${RELSHORT[rel]} angle was taken from 180°. With parallel lines, ${RELSHORT[rel]} angles are equal.`, predict: 180 - a }]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "corresponding": ["When a line crosses two parallel lines, it crosses both at the same slant, so angles in the same position at each crossing are equal."], "alternate-interior": ["Alternate angles between parallel lines make a Z shape, and the angles in a Z are equal."], "co-interior": ["Co-interior angles lie between the parallel lines on the same side of the crossing line, and they always add up to 180°."], "vertically-opposite": ["When two lines cross, the angles opposite each other are equal."], "linear-pair": ["Angles next to each other on a straight line make up the straight line, so they add up to 180°."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.op === "equal" ? `${s.id.replace(/-/g, " ")} angles are equal: ${s.value}°` : `${s.id.replace(/-/g, " ")} angles add to 180°: 180° − ${s.inputs[0]}° = ${s.value}°`),
     domain: [[30, 150], [0, 4]],
     cap: 400,
@@ -1527,6 +1627,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "equal": ["Alternate angles between parallel lines are equal, so the two expressions must be equal. That gives an equation for x.", "An equation is like a balance: doing the same thing to both sides keeps it true."], "divide": ["x is multiplied by a number, so dividing both sides by that number leaves x on its own."], "sum": ["Co-interior angles add up to 180°, so the two expressions together make 180°. That gives an equation for x."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "equal" ? `Alternate angles are equal: ${s.inputs[0]} = ${s.inputs[1]}, so ${s.value}` : s.id === "sum" ? `Co-interior angles add to 180°: ${s.inputs[0]} + ${s.inputs[1]} = 180, so ${s.value}` : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${s.value}`),
     domain: [[0, 1], [1, 5], [1, 5], [5, 35], [0, 8]],
     cap: 400,
@@ -1591,6 +1695,10 @@ export const B08: Def[] = [
       ]);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "squares": ["In a right-angled triangle, the square on the longest side equals the squares on the other two sides added together."], "difference": ["The square on the longest side is the sum of the other two squares, so taking away the known square leaves the missing one."], "root": ["We have the square of the side, so the square root gives the side itself."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "difference" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `√${s.inputs[0]} = ${s.value}`),
     figure: ([a, b, f]) => {
       const c = Math.sqrt(a * a + b * b);
@@ -1678,6 +1786,10 @@ export const B08: Def[] = [
     },
     distractors: ([n1, k1, n2, k2, t]) => [interior(n1), (360 - k1 * interior(n1) - k2 * interior(n2)) / t + 10, Math.abs(180 - (360 - k1 * interior(n1) - k2 * interior(n2)) / t)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "angle#": ["The corners of a regular polygon are all equal. Its outside turns add to 360°, so each corner is 180° minus one outside turn."], "used": ["We first find how much of the full turn the known tiles already take up."], "rest": ["Around a point where tiles meet with no gaps or overlaps, the corners add up to 360°."], "share": ["The remaining tiles have equal corners, so they share the gap equally."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.op === "interior-angle" ? `Each corner of a regular ${s.inputs[0]}-sided polygon is 180° − 360° ÷ ${s.inputs[0]} = ${s.value}°` : s.id === "used" ? `Corners already there: ${s.inputs[0]} × ${s.inputs[1]}°${Number(s.inputs[2]) ? ` + ${s.inputs[2]} × ${s.inputs[3]}°` : ""} = ${s.value}°` : s.id === "rest" ? `The gap left: 360° − ${s.inputs[1]}° = ${s.value}°` : `Two equal corners share it: ${s.inputs[0]}° ÷ 2 = ${s.value}°`),
     domain: [[3, 12], [1, 5], [3, 12], [0, 4], [1, 2]],
     difficulty: ([n1, , , k2, t]) => (k2 === 0 && t === 1 && (n1 === 3 || n1 === 4 || n1 === 6) ? 1 : k2 === 0 || t === 1 ? 2 : 3),
@@ -2117,6 +2229,10 @@ B08.push(
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "locate": ["Angles in matching places at the two crossings form pairs, so we find the angle's place and look for the same place at the other line."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.inputs.length === 1 ? `Find angle ${s.inputs[0]} in the table and move to the matching place: ${s.value}` : `Angles ${s.inputs[0]} and ${s.inputs[1]} are ${s.value}`),
     domain: [[0, 1], [0, 2], [0, 7], [0, 7]],
     keep: nameOk,
@@ -2168,6 +2284,10 @@ B08.push(
         : [Bq("all-of-them", "procedural", SEQ, "All the arrangements were counted. Only those that start with the given part are asked: after it, the rest can be any arrangement of the remaining length.", k(rhythms(n))), Bq("wrong-rest", "procedural", SEQ, `The rest was taken to have length ${mode === 1 ? n - 1 : n - 2}. After a ${mode === 1 ? "long (2)" : "short (1)"} part, ${mode === 1 ? n - 2 : n - 1} remains.`, k(mode === 1 ? rhythms(n - 1) : rhythms(n - 2)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "len#": ["Every rhythm ends with a short part or a long part. Taking off a short part leaves a rhythm one beat shorter; taking off a long part leaves one two beats shorter.", "So the two counts before are added."], "start": ["Once the first part is fixed, the rest can be any rhythm that fills the beats left, so we count those."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "start" ? `After the first part, the rest has length ${s.inputs[0]}: ${s.value} ways` : `Length ${s.inputs[0]}: ${s.inputs[1]} (ending with a short part) + ${s.inputs[2]} (ending with a long part) = ${s.value}`),
     domain: [[0, 3], [0, 2], [3, 18]],
     difficulty: ([, mode, n]) => (n <= 6 && mode === 0 ? 1 : mode === 0 ? 2 : 3),
@@ -2212,6 +2332,10 @@ B08.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "compare": ["Congruent figures are the same shape and the same size, so all their measurements must match, in any order."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, the same shape and the same size` : `Match the measurements in any order (${s.inputs[0]}): ${s.value} fits exactly`),
     domain: [[0, 2], [0, 59]],
     keep: cfigOk,
@@ -2274,6 +2398,10 @@ B08.push(
         : [Bq("minus-squared", "conceptual", IDN, `(−${q})² was written as −${q * q}. The square of a negative number is positive: the last term of (a − b)² is +b².`, form === 1 ? k(-(q * q)) : null), Bq("q-doubled", "procedural", IDN, `${q} was doubled instead of squared: b² = ${q} × ${q}.`, k(2 * q))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "a2": ["The identity starts with a², so we square the first term."], "2ab": ["The middle term is two times the first term times the second term, with the sign of the identity."], "b2|negate-square": ["For (a + b)(a − b) the middle products cancel, and the last term is minus b²."], "b2": ["The identity ends with b², so we square the second term. A square is never negative."], "box": ["Compare our expansion with the boxed one, term by term, to see which number belongs in the box."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => {
       const value = String(s.value).replace(/^-/, "−");
       if (s.id === "a2") return `a² = (${s.inputs[0]})² = ${value}`;
@@ -2342,6 +2470,10 @@ B08.push(
           : [Bq("plus-b2", "conceptual", IDN, `b² was added. (a + b)(a − b) = a² − b²: subtract ${b * b}.`, a * a + b * b), Bq("b-not-squared", "procedural", IDN, `${b} was taken away instead of ${b}² = ${b * b}.`, b * b === b ? null : a * a - b)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "split": ["Writing the numbers using a round number and a small one lets us use the identity with easy squares."], "use": ["The identity turns the hard multiplication into a few easy parts, because squaring and multiplying a round number is easy."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "split" ? `Write it as ${s.value}` : s.inputs[3] === 2 ? `${s.inputs[0]} − ${s.inputs[2]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[3] === 0 ? "+" : "−"} ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     domain: [[0, 2], [1, 10], [1, 4]],
     keep: numOk,
@@ -2395,6 +2527,10 @@ B08.push(
       return [Bq("no-doubling", "conceptual", IDN, "The cross term was not doubled. (a + b + c)² has 2ab + 2bc + 2ca.", k(ans / 2)), Bq("cross-forgotten", "procedural", IDN, "A cross term was missed out (counted as 0); every pair of the three terms gives a doubled product.", k(0))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "identity": ["Putting the two terms of the bracket into a and b in the identity gives each term of the expansion without multiplying out three brackets."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} = ${s.value}`,
     domain: [[0, 3], [-6, 6], [-6, 9], [-6, 6], [1, 5]],
     keep: cubeOk,
@@ -2449,6 +2585,10 @@ B08.push(
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "longest": ["If the triangle has a right angle, it is opposite the longest side, so that side is the one to test."], "squares": ["Pythagoras' rule works both ways: if the two shorter sides' squares add up to the longest side's square, the angle is 90°."], "test": ["Comparing the two numbers tells us whether the rule holds, and so whether the angle is a right angle."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : s.id === "longest" ? `The longest side is ${s.value}` : s.id === "squares" ? `The squares of the other two add to ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} and ${s.inputs[1]} are ${s.value}, so ${s.value === "equal" ? "the angle opposite the longest side is 90°" : "the triangle is not right-angled"}`),
     domain: [[0, TRIPLES.length - 1], [0, 2], [0, 2], [0, 1]],
     keep: convOk,
@@ -2503,6 +2643,10 @@ B08.push(
       return [Bq("not-squared", "procedural", PYTH, `${mode === 3 ? `2mn was worked out as 2m + n; 2mn means 2 × ${m} × ${n}.` : `m and n were not squared: ${m} ${mode === 2 ? "−" : "+"} ${n} was worked out instead of ${m}² ${mode === 2 ? "−" : "+"} ${n}².`}`, k(mode === 2 ? m - n : mode === 3 ? 2 * m + n : m + n)), Bq("other-member", "procedural", PYTH, `Another member of the triple was given; the question asks for ${["m² − n²", "2mn", "m² + n²"][mode - 2]}.`, k(genAns([mode === 4 ? 2 : mode + 1, m, n])))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "m": ["The even member is 2m, so halving it gives m."], "member": ["Putting m into the rule gives the other members of the triple."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "m" ? `2m = ${s.inputs[0]}, so m = ${s.value}` : `${s.inputs[0]} with ${s.inputs[1]}: ${s.value}`),
     domain: [[0, 4], [2, 20], [0, 8]],
     keep: genOk,
@@ -2553,6 +2697,10 @@ B08.push(
       ][kind];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "products": ["In inverse proportion the product x × y stays the same, so we check the products."], "ratios": ["In direct proportion y ÷ x stays the same, so we check the ratios too."], "decide": ["Whichever of the two stays the same in every row tells the kind of proportion. If neither does, it is neither."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, because ${s.inputs[1]}` : s.id === "products" ? `x × y in each row: ${s.value}` : s.id === "ratios" ? `y ÷ x in each row: ${s.value}` : `So: ${s.value}`),
     domain: [[0, 3], [0, 29]],
     keep: varyOk,
@@ -2601,6 +2749,10 @@ B08.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["The total amount of work stays the same however many workers share it, so we find it first."], "share": ["More workers share the same work, so each number of workers takes the total divided by that number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `The whole job is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} (it stays the same)` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [2, 80], [2, 30], [2, 80]],
     keep: manOk,
@@ -2654,6 +2806,10 @@ B08.push(
         : [Bq("saris-ignored", "procedural", INV, `Only the change in weavers was used. The number of saris changed too (${d.x1} to ${d.x2}): more saris take more days.`, k((d.m1 * d.d1) / d.m2)), Bq("weavers-direct", "conceptual", INV, "More weavers were taken to need more days. More weavers finish SOONER: days go down in the same ratio as weavers go up.", k((d.d1 * d.m2 * d.x2) / (d.m1 * d.x1)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["The job needs the same amount of work, measured in worker-hours, so we multiply workers, hours per day and days."], "share": ["The new team does a fixed amount of work each day, so the number of days is the total work divided by that daily amount."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `The work stays in proportion: ${s.inputs.join(" × ")} = ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} days`),
     domain: [[0, 1], [0, 199]],
     keep: compOk,
@@ -2723,6 +2879,10 @@ B08.push(
       return shape === 0 ? [Bq("divide-by-four", "procedural", GEN, `The sum was divided by 4, giving the average of the four numbers, not the smallest. Solve 4n + ${2 * w + 2} = ${calSum(p)}.`, k(calSum(p) / 4)), Bq("forgot-constant", "procedural", GEN, `The ${2 * w + 2} was added instead of taken away.`, k((calSum(p) + 2 * w + 2) / 4))] : [Bq("gave-centre", "procedural", GEN, `Sum ÷ 9 = ${calSum(p) / 9} is the MIDDLE number. The smallest is ${w + 1} less.`, k(calSum(p) / 9)), Bq("one-row-back", "procedural", GEN, `Only one row back was taken from the middle number; the smallest is one row up AND one column left.`, k(calSum(p) / 9 - w))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "expr": ["Dates in a row go up by 1 and dates in a column go up by 7, so all four can be written using the smallest one, n."], "sub": ["Putting the smallest number in place of n gives the total without adding one by one."], "solve": ["The total gives an equation in n, and solving it finds the smallest number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "expr" ? `With n the smallest, the square's numbers add up to ${s.value}` : s.id === "sub" ? `Put n = ${s.inputs[1]}: ${s.value}` : `Solve ${s.inputs[0]}: n = ${s.value}`),
     domain: [[0, 1], [0, 1], [0, 1], [1, 89]],
     keep: calOk,
@@ -2792,6 +2952,10 @@ B08.push(
       return [Bq("half-sizes", "procedural", CART, `Half the length and half the width were given as the coordinates. Start at corner A ${tup([x, y])} and move half way across and half way up.`, x === 0 && y === 0 ? null : tup([w / 2, h / 2])), Bq("corner-c", "procedural", CART, "The far corner was given. The centre is half way between A and C.", tup([x + w, y + h]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "same-x": ["Points straight above or below each other have the same x-coordinate."], "same-y": ["Points level with each other have the same y-coordinate."], "mid-x": ["The middle point is half-way across, so its x is half-way between the two x numbers."], "mid-y": ["The middle point is half-way up, so its y is half-way between the two y numbers."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "same-x" ? `D is straight above A, so its x-coordinate is A's: ${s.value}` : s.id === "same-y" ? `D is level with C, so its y-coordinate is C's: ${s.value}` : `Half-way between ${s.inputs[0]} and ${s.inputs[1]} is ${s.value}`),
     domain: [[0, 2], [-7, 2], [-6, 2], [2, 8], [2, 6]],
     keep: mapOk,
@@ -2850,6 +3014,10 @@ B08.push(
       return [Bq("t1-times-r", "procedural", SEQ, `t₁ was taken as ${b} × ${a}. For n = 1 the power is ${a}⁰ = 1, so t₁ = ${b}.`, tup([a * b, a])), Bq("swapped", "procedural", SEQ, "The ratio and the first term were swapped.", a === b ? null : tup([a, b]))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "t#": ["An explicit rule gives any term straight away: put in the term's number for n."], "d": ["In an arithmetic sequence each term is the one before plus the same step, so the step is the difference of two neighbouring terms."], "r": ["In a geometric sequence each term is the one before times the same number, so dividing neighbouring terms gives it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id.startsWith("t") && s.id !== "t1" ? `t${s.inputs[0]} = ${s.value}` : s.id === "t1" ? `Put n = 1: t₁ = ${s.value}` : s.id === "d" ? `The step: t₂ − t₁ = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The ratio: t₂ ÷ t₁ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [-5, 9], [-9, 9]],
     keep: expOk,
@@ -2920,6 +3088,10 @@ B08.push(
       return [Bq("sign", "procedural", PZEROS, `The coefficient of x, ${a < 0 ? `k + ${-a}` : `k − ${a}`}, must be 0, so k = ${n_(a)}; the sign was changed.`, q(-a))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sum": ["For ax² + bx + c, the zeros add up to −b/a. This ties the zeros to the coefficients, so it gives an equation for k."], "product": ["For ax² + bx + c, the zeros multiply to c/a. This ties the zeros to the coefficients, so it gives an equation for k."], "substitute": ["A zero makes the polynomial 0. When the number in front of x² is 1, the zeros multiply to the constant term and add up to minus the number in front of x."], "sum0": ["Opposite zeros add up to 0, and the sum of the zeros is minus the coefficient of x divided by the coefficient of x², so the coefficient of x must be 0."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sum" ? `Sum of the zeros = −k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "product" ? `Product of the zeros = k/${s.inputs[1]} = ${n_(Number(s.inputs[2]))}, so k = ${n_(Number(s.value))}` : s.id === "substitute" ? `The zeros are ${n_(Number(s.inputs[0]))} and ${n_(Number(s.inputs[1]))} (their product is the constant term), so k = −(sum) = ${n_(Number(s.value))}` : `Opposite zeros add to 0, so the coefficient of x is 0: k = ${n_(Number(s.value))}`),
     domain: [[0, 3], [-9, 9], [-6, 6], [-9, 9]],
     keep: zkOk,
@@ -2972,6 +3144,10 @@ B08.push(
       return [...(good !== right ? [Bq("doubled", "procedural", SQRT, `The last digit was doubled instead of squared: ${m % 10} × ${m % 10} = ${(m % 10) ** 2}, which ends in ${right}.`, opts.indexOf(good))] : []), ...(same !== right ? [Bq("same-digit", "conceptual", SQRT, `The square was taken to end in the same digit as ${m}. Only the last digit of ${m % 10} × ${m % 10} matters: ${(m % 10) ** 2}.`, opts.indexOf(same))] : [])];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "last-digits": ["The last digit of a square depends only on the last digit of the number squared, and no square ends in 2, 3, 7 or 8. This rules some numbers out quickly."], "root": ["Finding a whole number that multiplies by itself to give the number proves it is a perfect square."], "units": ["The last digit of a product depends only on the last digits of the numbers multiplied, so only the last digit needs squaring."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "last-digits" ? `Rule out by last digits: ${s.value}` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.id === "root" ? `${s.inputs[0]} = ${s.value} × ${s.value}` : `The last digit of ${s.inputs[0]} × ${s.inputs[0]} = ${s.value}`),
     domain: [[0, 1], [11, 99]],
     keep: psqOk,
@@ -3023,6 +3199,10 @@ B08.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "digits": ["The long-division method finds a square root one digit at a time; pairs of digits are used because squaring doubles the number of digits."], "round": ["We find one more digit than we need so we can round correctly."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "digits" ? sqrtLongDivision(Number(s.inputs[0])) : `Rounded to one decimal place: ${s.value}`),
     domain: [[2, 200]],
     keep: sqdOk,
