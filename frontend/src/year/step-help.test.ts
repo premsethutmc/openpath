@@ -40,7 +40,8 @@ test("every question's help is its own steps, in order, with nothing worked in t
     h!.forEach((x, i) => {
       assert.equal(x.shown, explainStep(q, q.steps[i]), q.id);
       // what to do is the step's operation in words; it never contains the step's own result
-      assert.ok(/^(First|Next|Last|Now): .+\.$/.test(x.next), `${q.id}: ${x.next}`);
+      // (young-cue@1: "First: add or take away?" is a question the child answers by tapping)
+      assert.ok(/^(First|Next|Last|Now): .+\.$/.test(x.next) || (!!x.ask?.choices && /\?$/.test(x.next)), `${q.id}: ${x.next}`);
       assert.ok(x.next.length <= 80 && x.next !== `${i === 0 ? "First" : "Next"}: ${x.shown}.`, `${q.id}: ${x.next}`);
       // the other skill a step leans on is named only when it is another skill, and only when it has a card
       if (x.needs) { needing++; assert.notEqual(x.needs, q.competency); assert.equal(x.needs, q.steps[i].competency); assert.ok(cardFor(x.needs)); }
@@ -82,4 +83,28 @@ test("a card is the skill's own lesson words and, where it has one, its own veri
   assert.ok(cards >= 300 && examples >= 280, `cards ${cards}, with an example ${examples}, of ${skills.size} skills`);
   assert.equal(cardFor("MATH.no.such.skill"), null);
   assert.ok(problemOf(sample[0].id));
+});
+
+test("young-cue@1: Class 1–5 adding and taking away: every step says its numbers and asks for something", async () => {
+  const { STEP_SCENE_FAMILIES } = await import("../../../packages/learning/src/step-scenes");
+  const { askOf } = await import("../../../packages/learning/src/step-ask");
+  const h = stepsHelp("gen:aaadd:5,2")!;
+  assert.deepEqual(h.map((x) => x.next), ["First: start at 5.", "Last: count on 2 from 5."]);
+  assert.deepEqual(h.map((x) => x.ask?.value), ["5", "7"]);
+  const sub = stepsHelp("gen:aasub:18,9")!;
+  assert.equal(sub.at(-1)!.next, "Last: take 9 away from 18.");
+  assert.equal(sub.at(-1)!.ask?.value, "9");
+  assert.equal(stepsHelp("gen:abchange:1,0")![0].ask?.value, "9");
+  const story = stepsHelp(pool("acstory9").items[0].id)!;
+  assert.deepEqual(story[0].ask?.choices, ["add", "take away"]);
+  for (const fam of Object.keys(STEP_SCENE_FAMILIES)) for (const pr of pool(fam).items.slice(0, 80)) {
+    const p = problemOf(pr.id)!;
+    for (const x of stepsHelp(pr.id)!) {
+      if (x.closing) continue;
+      // never a bare operation ("start at.", "count back."), and never the step's result in the cue
+      assert.ok(!/^(First|Next|Last): (start at|count back|count on|choose operation|move|opposite)\.$/.test(x.next), `${pr.id}: ${x.next}`);
+      if (/^gen:(aa|ab|ac)/.test(pr.id)) assert.ok(!!x.ask || !!askOf(x.shown), `${pr.id}: nothing to answer at "${x.next}"`);
+    }
+    void p;
+  }
 });

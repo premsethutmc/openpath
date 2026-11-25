@@ -253,7 +253,7 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     const young = STEP_SCENE_FAMILIES[p.family] ? youngStep(p.family, s as { op: string; inputs?: unknown; value?: unknown }, shownHere) : null;
     const cue = young?.cue ?? plainCue(cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op);
     const own: StepHelp = {
-      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cue}${/\?$/.test(cue) ? "" : "."}`,
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cue}${young?.cue && /\?$/.test(cue) ? "" : "."}`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
       ...(cardFor(s.competency) ? { rule: s.competency } : {}),
