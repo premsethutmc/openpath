@@ -99,7 +99,7 @@ export interface FractionScene extends Base { kind: "fraction"; target: [number,
 /** A point on a number line. `label` is the gap between numbered marks (default: every mark); `hide` keeps the point's
  *  number off the screen (for finding a number by counting marks); `near` shows how far the point is from the multiples
  *  of that number on each side (for rounding); `jump` draws the move from the start as a jump (for adding integers). */
-export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean }
+export interface NumberLineScene extends Base { kind: "numberline"; from: number; to: number; step: number; start: number; label?: number; hide?: boolean; near?: number; jump?: boolean; size?: boolean }
 /** Counters in equal rows. `total` is how many are asked for; `rows`, when given, fixes the number of rows. With `share`,
  *  the total is being shared out: `left` is how many are left over once the rows are as full as they can be (999 until
  *  then, and when too many are used), and the readout says how many are left over. */
@@ -358,7 +358,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
     const { n, k } = fracOf(s, state), [tn, td] = s.target, cross = k * td - tn * n;
     return { n, k, miss: Math.abs(cross) / (n * td), ahead: cross / (n * td), behind: -cross / (n * td), other: cross === 0 && n !== td ? 0 : 1, exact: n === td && k === tn ? 0 : 1 };
   }
-  if (s.kind === "numberline") return { x: state.x, moved: r6(state.x - s.start) };
+  if (s.kind === "numberline") return { x: state.x, moved: r6(state.x - s.start), size: Math.abs(state.x) };
   if (s.kind === "array") { const { rows, cols } = arrOf(s, state); const spare = s.total - rows * cols; return { rows, cols, count: rows * cols, off: Math.abs(spare), left: spare >= 0 && spare < rows ? spare : 999 }; }
   if (s.kind === "rectangle") {
     const { w, h } = state, perimeter = 2 * (w + h), area = w * h;
@@ -381,7 +381,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { boxes: ["placed", "counted", "step"], tally: ["total", "dropped"], tangent: ["turn", "x", "y", "flat", "upright", "slope", "sloped"], pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { boxes: ["placed", "counted", "step"], tally: ["total", "dropped"], tangent: ["turn", "x", "y", "flat", "upright", "slope", "sloped"], pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved", "size"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -478,6 +478,7 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "fraction") return `${m.k} of ${m.n} equal ${m.n === 1 ? "piece" : "pieces"} shaded`;
   if (s.kind === "numberline") {
     if (s.hide) return "Count the marks from a number you can see.";
+    if (s.size) return m.x === 0 ? "At 0 · no distance from 0 · |0| = 0" : `${fmt(m.x)} is ${fmt(m.size)} from 0 · |${fmt(m.x)}| = ${fmt(m.size)}`;
     if (s.jump) return m.moved === 0 ? `Start at ${fmt(s.start)}` : `Start at ${fmt(s.start)} · ${fmt(Math.abs(m.moved))} ${m.moved < 0 ? "back" : "forward"} · now at ${fmt(m.x)}`;
     if (s.near) { const lo = Math.floor(m.x / s.near + 1e-9) * s.near; return Math.abs(m.x - lo) < 1e-9 ? `At ${fmt(m.x)}` : `At ${fmt(m.x)} · ${fmt(m.x - lo)} from ${fmt(lo)} · ${fmt(lo + s.near - m.x)} from ${fmt(lo + s.near)}`; }
     return `At ${fmt(m.x)}`;
@@ -608,6 +609,12 @@ export function draw(s: Scene, state: SceneState): Shape[] {
       const a = lineX(s, s.start), b = lineX(s, state.x);
       if (a !== b) out.push({ t: "path", d: `M${a} ${y0 - 14}Q${px((a + b) / 2)} ${px(y0 - 14 - Math.min(70, Math.abs(b - a) / 2 + 14))} ${b} ${y0 - 14}`, role: "curve2" });
       out.push({ t: "circle", cx: a, cy: y0, r: 6, role: "open" });
+    }
+    if (s.size) {
+      // the distance from 0: a bar above the line from 0 to the point, its length written over it
+      const a = lineX(s, 0), b = lineX(s, state.x);
+      out.push({ t: "circle", cx: a, cy: y0, r: 5, role: "open" });
+      if (a !== b) out.push({ t: "line", x1: a, y1: y0 - 22, x2: b, y2: y0 - 22, role: "curve2" }, { t: "line", x1: a, y1: y0 - 30, x2: a, y2: y0 - 14, role: "curve2" }, { t: "line", x1: b, y1: y0 - 30, x2: b, y2: y0 - 14, role: "curve2" }, { t: "text", x: px((a + b) / 2), y: y0 - 36, s: `${fmt(Math.abs(state.x))} from 0`, role: "value" });
     }
     out.push({ t: "circle", cx: lineX(s, state.x), cy: y0, r: 11, role: "handle" });
     if (!s.hide) out.push({ t: "text", x: lineX(s, state.x), y: y0 + 48, s: fmt(state.x), role: "value" });
@@ -909,7 +916,7 @@ export function describe(s: Scene): string {
   if (s.kind === "order") return `${s.values.length} number cards in a row: ${s.values.map(fmt).join(", ")}. They can be put in order by dragging, or by giving each its place with a slider. ${s.prompt}`;
   if (s.kind === "commas") return `The digits of the number ${s.digits}, with ${commaPlaces(s).length === 1 ? "a comma" : "commas"} that can be moved between them by dragging or with sliders. ${s.prompt}`;
   if (s.kind === "fraction") return `An interactive ${(s.pieces ?? 0) === 100 ? "square of 100 small squares" : "bar cut into equal pieces"}, some of them shaded${s.show ? ", under a second bar to compare with" : ""}. ${s.pieces === undefined ? "A slider sets how many pieces there are. " : ""}${s.shaded === undefined ? "A slider sets how many are shaded. " : ""}${s.prompt}`;
-  if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}. ${s.prompt}`;
+  if (s.kind === "numberline") return `An interactive number line from ${fmt(s.from)} to ${fmt(s.to)} with a point that slides along it${s.jump ? `, starting from ${fmt(s.start)}` : ""}${s.size ? "; a bar from 0 to the point shows its distance from 0" : ""}. ${s.prompt}`;
   if (s.kind === "array") return `An interactive set of counters in equal rows. ${s.rows === undefined ? "Sliders set the number of rows and how many are in each row" : `There are ${s.rows} rows, and a slider sets how many are in each row`}. ${s.prompt}`;
   if (s.kind === "rectangle") return `An interactive rectangle on a grid of unit squares. Its width and height are set by two sliders or by dragging its corner. ${s.prompt}`;
   if (s.kind === "join") return `An interactive graph in two pieces that meet at x = ${fmt(s.at)}. ${s.mode === "shift" ? "The right-hand piece can be slid up and down." : "The single point at the meeting place can be moved up and down."} ${s.prompt}`;
@@ -1010,6 +1017,8 @@ export function check(v: unknown): string[] {
     if (s.label !== undefined && !(fin(s.label) && s.label > 0)) bad.push("label must be a positive gap");
     if (s.first && !(typeof s.first.ask === "string" && s.first.ask.trim() && Array.isArray(s.first.choices) && s.first.choices.length >= 2 && s.first.choices.length <= 4 && new Set(s.first.choices).size === s.first.choices.length && Number.isInteger(s.first.right) && s.first.right >= 0 && s.first.right < s.first.choices.length && Array.isArray(s.first.why) && s.first.why.length === s.first.choices.length && s.first.why.every((w, i) => i === s.first!.right || (typeof w === "string" && w.trim())))) bad.push("first must be 2 to 4 different choices, one right, with a reply to each wrong one");
     if (s.near !== undefined && !(fin(s.near) && s.near > 0)) bad.push("near must be positive");
+    if (s.size !== undefined && typeof s.size !== "boolean") bad.push("size must be true or false");
+    if (s.size && !(s.from < 0 && s.to > 0)) bad.push("a size line must have 0 inside it");
   } else if (s.kind === "array") {
     if (!(Number.isInteger(s.total) && s.total >= 2 && s.total <= 150)) bad.push("total must be a whole number from 2 to 150");
     if (s.rows !== undefined && !(Number.isInteger(s.rows) && s.rows >= 1 && s.rows <= 10)) bad.push("rows must be 1 to 10");
