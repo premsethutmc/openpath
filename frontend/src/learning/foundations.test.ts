@@ -1,7 +1,7 @@
 /** foundations@1: every start-here entry belongs to a real skill and is complete enough to teach from. */
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { check as checkScene, initial, met, pointer, readout, set as setScene, type Scene } from "../../../packages/learning/src/scene";
+import { check as checkScene, initial, met, pointer, readout, set as setScene, states, type Scene } from "../../../packages/learning/src/scene";
 import { tangentOf } from "../../../packages/learning/src/scene-figures";
 import { readFileSync } from "node:fs";
 import { describe as describeFigure, diagramProblems, figureDraw } from "../../../packages/learning/src/figure-marks";
@@ -181,7 +181,7 @@ test("taught-lesson@1 and conic-tangent@1: a taught lesson moves a real ellipse,
   for (const f of foundations) for (const s of f.screens) if (s.scene) {
     assert.deepEqual(checkScene(s.scene), [], f.concept);
     const start = initial(s.scene); assert.ok(!met(s.scene, start), "the goal is not met before the learner moves anything");
-    let reached = false; for (let t = 0; t < 360; t += 15) reached ||= met(s.scene, setScene(s.scene, start, "turn", t));
+    let reached = false; for (const st of states(s.scene)) if (met(s.scene, st)) { reached = true; break; }
     assert.ok(reached, `${f.concept}: the goal of "${s.title}" cannot be reached`);
   }
   // the slope is the exact slope of the tangent: −b²x/(a²y); flat at the top, no slope at the ends

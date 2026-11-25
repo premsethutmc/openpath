@@ -7,6 +7,8 @@ import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 import { mx } from "./MatrixText";
+import { breakItDown, liftFor } from "../../../packages/learning/src/step-scenes";
+import { classOfQuestion } from "./StepCoach";
 /** The labelled picture of an idea, drawn by the scene engine from its description (foundation-pictures.ts). */
 export function FoundationPicture({ kind }: { kind: Picture }) {
   const { scene, state } = pictureScene(kind);
@@ -17,15 +19,34 @@ export function FoundationPicture({ kind }: { kind: Picture }) {
 /** why-taps@1: where a "Why?" or "Break it down" tap is recorded. The app sets it once a learner is known; unset, nothing is kept. */
 export const whyTaps: { record?: (competency: string, screen: string, step: number) => void } = {};
 
-export function SteppedMath({ lines, whys, onWhy }: { lines: string[]; whys?: (string[] | null)[] | null; onWhy?: (step: number, all: boolean) => void }) {
-  // step-why@1: when the question's family gives reasons, each step has its own Why? and Break it down opens them all
-  const has = !!whys && whys.length === lines.length - 1 && whys.some(Boolean);
+/**
+ * step-scene@1: what "Break it down" opens for question `qid` (step-scenes.ts, by the question's class). A Class 1–5
+ * child gets the counter and the lift when the steps are adding or taking away, and then no written reasons; Class 1–3
+ * gets no written reasons at all. Class 6 and up keeps the reasons, with the picture too when the numbers go below 0.
+ */
+export function stepHelpOf(qid: string | undefined) {
+  return qid ? breakItDown(qid, classOfQuestion(qid)) : { scene: null, words: true };
+}
+
+export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys?: (string[] | null)[] | null; qid?: string; onWhy?: (step: number, all: boolean) => void }) {
+  const [help] = useState(() => stepHelpOf(qid));
+  const [young] = useState(() => { const c = qid ? classOfQuestion(qid) : null; return c !== null && c <= 3; });
+  // step-why@1: when the question's family gives reasons (and the learner can read them), each step has its own Why? and Break it down opens them all
+  const has = help.words && !!whys && whys.length === lines.length - 1 && whys.some(Boolean);
+  const scene = help.scene;
   const [open, setOpen] = useState<boolean[]>(() => lines.slice(1).map(() => false));
-  const all = has && whys!.every((w, k) => !w || open[k]);
+  const [shown, setShown] = useState(false);
+  const all = scene ? shown : has && whys!.every((w, k) => !w || open[k]);
+  const toggle = () => {
+    if (scene) setShown(!all);
+    if (has) setOpen(whys!.map((w) => !all && !!w));
+    if (!all) onWhy?.(-1, true);
+  };
   return (
     <div className="formula stepped" data-stepped>
       <p className="sh-ask">{mx(lines[0])}</p>
-      {has && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={() => { setOpen(whys!.map((w) => !all && !!w)); if (!all) onWhy?.(-1, true); }}>{all ? "Show less" : "Break it down"}</button>}
+      {(has || scene) && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={toggle}>{all ? "Show less" : "Break it down"}</button>}
+      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={young} /></div> : null}
       <ol>{lines.slice(1).map((m, k) => (
         <li className="sh-step" key={k}>
           <p className="sh-step-do"><span className="sh-step-n">Step {k + 1}</span></p>
@@ -38,10 +59,33 @@ export function SteppedMath({ lines, whys, onWhy }: { lines: string[]; whys?: (s
   );
 }
 
+/**
+ * step-scene@1 where the child works the example ("Work it with me"): for a Class 1–5 question that has the counter and
+ * the lift, "Break it down" opens it above the child's own steps, so the child can watch and do the drops first.
+ */
+export function LiftHelp({ qid, onOpen }: { qid: string; onOpen?: () => void }) {
+  const [cls] = useState(() => classOfQuestion(qid));
+  const [scene] = useState(() => liftFor(qid, cls));
+  const [open, setOpen] = useState(false);
+  if (!scene) return null;
+  return (
+    <div className="sh-lift" data-lift-help>
+      <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <><span aria-hidden="true" className="sh-lift-icon">▲▼</span> Break it down</>}</button>
+      {open && <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={cls !== null && cls <= 3} /></div>}
+    </div>
+  );
+}
+
 /** break-it-down@1: a worked problem, one step at a time. Each step can show its reason; one button shows them all. */
-function Steps({ steps, cases, where }: { steps: NonNullable<FoundationScreen["steps"]>; cases?: boolean; where?: [string, string] }) {
+function Steps({ steps, cases, where, words = true }: { steps: NonNullable<FoundationScreen["steps"]>; cases?: boolean; where?: [string, string]; words?: boolean }) {
   const [open, setOpen] = useState<boolean[]>(() => steps.map(() => false));
   const all = open.every(Boolean);
+  // step-scene@1's class rule: a Class 1–3 child sees the steps, not written reasons (no "Why?", no "Break it down")
+  if (!words) return (
+    <div className="sh-steps" data-steps>
+      <ol>{steps.map((st, i) => <li key={i} className="sh-step"><p className="sh-step-do"><span className="sh-step-n">{cases ? "Example" : "Step"} {i + 1}</span> {mx(st.do)}</p><div className="sh-step-lines">{st.lines.map((l, j) => <div key={j}>{mx(l)}</div>)}</div></li>)}</ol>
+    </div>
+  );
   return (
     <div className="sh-steps" data-steps>
       <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={() => { setOpen(steps.map(() => !all)); if (!all && where) whyTaps.record?.(where[0], where[1], -1); }}>{all ? "Show less" : "Break it down"}</button>
@@ -59,17 +103,18 @@ function Steps({ steps, cases, where }: { steps: NonNullable<FoundationScreen["s
   );
 }
 
-export function FoundationCard({ s, competency }: { s: FoundationScreen; competency?: string }) {
+/** `cls`: the class the entry is written for; Class 1–3 gets the steps without written reasons. */
+export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; competency?: string; cls?: number }) {
   const [shown, setShown] = useState(false);
   return (
     <section className="sh-card">
       <h3>{s.title}</h3>
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
-      {s.scene ? <ScenePlayer scene={s.scene} /> : null}
+      {s.scene ? <ScenePlayer scene={s.scene} young={cls !== undefined && cls <= 3} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
       {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
-      {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} /> : null}
+      {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
       {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{mx(t)}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(t)}</div>)}</div> : null}
       {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(s.check.question)}</p>{shown ? <p className="sh-answer">{mx(s.check.answer)}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
@@ -118,7 +163,7 @@ export function StartHere({ competency, done, onRound, again }: { competency: st
     <div className="sh" data-start-here={competency}>
       <p className="sh-eyebrow">{again ? "First, the idea behind this" : all.some((f) => f.lesson) ? "Learn it step by step" : "Start here"}</p>
       {all.map((f, k) => { const rounds = [f.practice ?? [], ...(f.rounds ?? [])].filter((r) => r.length), at = rounds.length ? visit[k] % rounds.length : 0; return <div className="sh" key={k}>
-        {f.screens.map((s, i) => <FoundationCard key={i} s={s} competency={competency} />)}
+        {f.screens.map((s, i) => <FoundationCard key={i} s={s} competency={competency} cls={f.class} />)}
         {picturesOf(f).map((p) => <PictureExplore key={p} kind={p} seed={seed + visit[k]} />)}
         {picturesOf(f).map((p, i) => <PictureRound key={p} kind={p} seed={seed + k * 101 + i * 13 + visit[k] * 7919} />)}
         {rounds.length ? <FoundationPractice questions={rounds[at]} onDone={(firstTry) => { if (onRound) onRound(competency, f.concept, at, rounds[at].length, firstTry); else bump(KEY(competency, f.concept)); }} /> : null}

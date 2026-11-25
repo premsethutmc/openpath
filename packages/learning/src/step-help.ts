@@ -13,6 +13,8 @@ import { deeperCalculus } from "./deeper-calculus";
 import { moduleFor } from "./content";
 import { explainStep, pool, problemOf } from "./families";
 import { graph } from "./graph";
+import { STEP_SCENE_FAMILIES } from "./step-scenes";
+import { askOf } from "./step-ask";
 
 export interface Card {
   competency: string;
@@ -45,8 +47,9 @@ export interface StepHelp {
   how?: { lines: string[]; board?: string[]; skill?: string };
   /** closing@1: the step that writes the answer, added where the type's own steps never do */
   closing?: true;
-  /** type-it@1: a number the learner enters for a step that is shown as a sentence (see Worked.ask) */
-  ask?: { lead: string; value: string };
+  /** type-it@1: a number the learner enters for a step that is shown as a sentence (see Worked.ask); `choices`: tapped,
+   *  not typed (young-cue@1: "add or take away?"); `unit`: shown after the box ("change") */
+  ask?: { lead: string; value: string; unit?: string; choices?: string[] };
 }
 
 const short = (t: string) => t.trim().length > 0 && t.length <= 260;
@@ -177,6 +180,34 @@ function cueLabel(shown: string, value: unknown, answer: string, given: Set<numb
   if (/\b(is|are|was|were|has|have|says?|gives?|means?|shows?|decides?|adds?|makes?|leaves?|goes|fits?|equals?|becomes?|stays?|needs?|takes?|comes?|tells?|must|can|will|does|do|did)\b/.test(lower)) return null;
   return `find ${/^(the|a|an|each|every|both|all|its|their|how|what|which)\b/.test(lower) ? "" : "the "}${lower}`;
 }
+/**
+ * young-cue@1 (the Class 1–5 adding and taking-away families that have the counter and the lift): "First: start at." told
+ * a child nothing and gave them nothing to do. Here every step says its own numbers ("start at 5", "count on 2 from 5",
+ * "take 9 away from 18") and asks for something: the number reached, typed, or "add or take away?", tapped. The numbers
+ * named are the question's own (or the picture's coins); the result is never in the cue.
+ */
+function youngStep(family: string, s: { op: string; inputs?: unknown; value?: unknown }, shown: string): { cue?: string; ask?: StepHelp["ask"] } | null {
+  const ins = Array.isArray(s.inputs) ? s.inputs : [], v = s.value;
+  const nums = ins.filter((x): x is number => typeof x === "number");
+  const money = /₹/.test(shown);
+  const n = (x: number) => (x < 0 ? `−${-x}` : String(x)), m = (x: number) => (money && x >= 0 ? `₹${x}` : n(x));
+  const pick = family === "acstory" ? ["add", "take away", "multiply", "share"] : ["add", "take away"];
+  const which = pick.length > 2 ? "add, take away, multiply or share?" : "add or take away?";
+  // a step whose result ends a sentence ("₹10 − ₹1 = ₹9 change.") is asked for as the same step without its full stop
+  const typed = (): StepHelp["ask"] | undefined => { const a = askOf(shown.replace(/(\D)\.$/, "$1")); return a ? { lead: a.lead, value: a.value, ...(a.unit ? { unit: a.unit } : {}) } : undefined; };
+  if (s.op === "start at" && typeof v === "number") return { cue: `start at ${m(v)}`, ask: { lead: money ? "Start at ₹" : "Start at", value: n(v) } };
+  if (s.op === "count on" && nums.length === 2 && typeof v === "number") return { cue: `count on ${nums[1]} from ${m(nums[0])}`, ask: { lead: `Count on ${nums[1]} from ${m(nums[0])}. You land on`, value: n(v) } };
+  if (s.op === "count back" && nums.length === 2 && typeof v === "number") return { cue: `take ${nums[1]} away from ${m(nums[0])}`, ask: { lead: `Take ${nums[1]} away from ${m(nums[0])}. Left:`, value: n(v) } };
+  if (s.op === "choose operation" && typeof ins[0] === "string" && pick.includes(ins[0])) return { cue: which, ask: { lead: "Tap one:", value: ins[0], choices: pick } };
+  if (s.op === "write the addition" || s.op === "write the subtraction") return { cue: which, ask: { lead: "Tap one:", value: s.op === "write the addition" ? "add" : "take away", choices: pick } };
+  if (s.op === "opposite" && typeof nums[0] === "number" && typeof v === "number") return { cue: `find the number as far from 0 as ${n(nums[0])}, on the other side`, ask: { lead: "The opposite is", value: n(v) } };
+  if (s.op === "move" && nums.length === 2 && nums[1] !== 0 && typeof v === "number") return { cue: `start at ${n(nums[0])} and move ${Math.abs(nums[1])} to the ${nums[1] < 0 ? "left" : "right"}`, ask: { lead: "You reach", value: n(v) } };
+  if (nums.length === 2 && typeof v === "number" && (s.op === "add" || s.op === "add the prices") && Math.abs(nums[0] + nums[1] - v) < 1e-9) return { cue: nums[0] === 0 ? `start with ${m(nums[1])}` : `add ${m(nums[1])} to ${m(nums[0])}`, ask: typed() };
+  // change-up@1: change that is fewer steps to count up than to take away is counted up, as the lift does it
+  if (family === "abchange" && nums.length === 2 && typeof v === "number" && v > 0 && v < nums[1] && Math.abs(nums[0] - nums[1] - v) < 1e-9) return { cue: `count up from ${m(nums[1])} to ${m(nums[0])}`, ask: typed() };
+  if (nums.length === 2 && typeof v === "number" && (s.op === "subtract" || s.op === "take away") && Math.abs(nums[0] - nums[1] - v) < 1e-9) return { cue: `take ${m(nums[1])} away from ${m(nums[0])}`, ask: typed() };
+  return null;
+}
 /** The steps of a question as help, in order; null when it is not a generated question or has no steps. */
 /**
  * methods@1: the ways a question's help can be worked, by name, the taught method first. Where the taught method is
@@ -221,11 +252,14 @@ export function stepsHelp(qid: string, method = 0): StepHelp[] | null {
     // the learner; only a number that first appears in this step is the step's own choice
     const given = new Set<number>([...inQuestion, ...p.steps.slice(0, i).flatMap((t) => { const v = (t as { value?: unknown }).value; return [...(typeof v === "number" ? [v] : []), ...numbersIn(explainStep(p, t))]; })]);
     const shownHere = explainStep(p, s), inputs = (s as { inputs?: unknown }).inputs, value = (s as { value?: unknown }).value;
+    const young = STEP_SCENE_FAMILIES[p.family] ? youngStep(p.family, s as { op: string; inputs?: unknown; value?: unknown }, shownHere) : null;
+    const cue = young?.cue ?? plainCue(cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op);
     const own: StepHelp = {
-      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${plainCue(cueWith(s.op, inputs, value, shownHere, given) ?? cueOne(s.op, inputs, value, given) ?? cueLabel(shownHere, value, p.answer, given) ?? NEXT[s.op] ?? s.op)}.`,
+      next: `${i === 0 ? "First" : i === p.steps.length - 1 ? "Last" : "Next"}: ${cue}${young?.cue && /\?$/.test(cue) ? "" : "."}`,
       shown: explainStep(p, s),
       needs: s.competency !== p.competency && cardFor(s.competency) ? s.competency : null,
       ...(cardFor(s.competency) ? { rule: s.competency } : {}),
+      ...(young?.ask ? { ask: young.ask } : {}),
     };
     // deepen@1: the working inside the step, line by line, comes before the step itself (which then sums it up)
     if (worked.length) return i === 0 ? [own, ...worked.map((w) => ({ ...w, ...(own.rule ? { rule: own.rule } : {}) }))] : [own];

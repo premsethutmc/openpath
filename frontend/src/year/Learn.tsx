@@ -27,7 +27,7 @@ import { StepCoach, classOfSkill } from "./StepCoach";
 import { WhereUsed } from "./WhereUsed";
 import { TermText } from "./Terms";
 import { MatrixAnswer } from "./MatrixAnswer";
-import { StartHere, SteppedMath, whyTaps } from "./StartHere";
+import { LiftHelp, StartHere, SteppedMath, whyTaps } from "./StartHere";
 import { understandingOf } from "../../../packages/learning/src/foundations";
 import { ScribblePad } from "./ScribblePad";
 import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
@@ -793,7 +793,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div>{/* step-scene@1: the lift above the child's own steps (Class 1–5 adding and taking away) */}<LiftHelp key={`lift:${raw.instance}`} qid={raw.instance!} onOpen={() => whyTaps.record?.(competency ?? "", sc.title ?? s.title, -1)} /><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} qid={raw.instance} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">

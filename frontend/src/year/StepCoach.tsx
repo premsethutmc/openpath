@@ -46,9 +46,19 @@ function ClipButton({ competency }: { competency: string | null }) {
 
 /** step-ask@1: the step with its result left out, for the child to enter. Right moves on by itself; wrong says so and
  *  leaves the smaller question and "Show me this step" to help. Nothing is recorded: it is part of the help. */
-function StepEntry({ ask, onRight }: { ask: StepAsk; onRight: () => void }) {
+function StepEntry({ ask, onRight }: { ask: StepAsk & { choices?: string[] }; onRight: () => void }) {
   const [v, setV] = useState("");
   const [state, setState] = useState<"" | "right" | "wrong">("");
+  // young-cue@1: "add or take away?" is tapped, not typed (a Class 1 child cannot spell it)
+  if (ask.choices) return (
+    <div className="step-entry" data-step-entry={state || "asked"}>
+      <div className="kid-taps" role="radiogroup" aria-label={ask.lead}>
+        {ask.choices.map((c) => <button key={c} type="button" className={`kid-tap${v === c ? " on" : ""}`} role="radio" aria-checked={v === c} disabled={state === "right"}
+          onClick={() => { setV(c); if (c === ask.value) { setState("right"); setTimeout(onRight, 700); } else setState("wrong"); }}>{c === "add" ? "+ add" : c === "take away" ? "− take away" : c === "multiply" ? "× multiply" : c === "share" ? "÷ share" : c}</button>)}
+      </div>
+      {state === "right" ? <span className="ws-mark ok" role="status">Yes.</span> : state === "wrong" ? <span className="ws-mark bad" role="status">Not yet. Have another go.</span> : null}
+    </div>
+  );
   const check = () => {
     if (!v.trim() || state === "right") return;
     if (judge(ask, v)) { setState("right"); setTimeout(onRight, 700); } else setState("wrong");
@@ -78,7 +88,11 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   const [method, setMethod] = useState(() => { try { const i = methods.indexOf(localStorage.getItem("openpath-way") ?? ""); return i > 0 ? i : 0; } catch { return 0; } });
   const steps = useMemo(() => stepsHelp(qid, method), [qid, method]);
   // chintu@1: on a question of Classes 1 to 5, Chintu the cat says what to do next
-  const buddy = useMemo(() => { const g = classOfQuestion(qid); return g !== null && g <= LAST_CHINTU_CLASS; }, [qid]);
+  const cls = useMemo(() => classOfQuestion(qid), [qid]);
+  const buddy = cls !== null && cls <= LAST_CHINTU_CLASS;
+  // step-scene@1's class rule: a Class 1–3 child gets no written rule ("Why? Show me the rule", "This needs: …"); the
+  // picture is "Break it down" above the steps
+  const reads = cls === null || cls > 3;
   const [open, setOpen] = useState(startOpen);
   const [at, setAt] = useState(0);
   const [card, setCard] = useState(false);
@@ -91,9 +105,9 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
   const now = at < steps.length ? steps[at] : null;
   // why@1: the rule behind a step can always be opened: the other skill it leans on, or the question's own skill
   const ruleOf = now?.needs ?? now?.rule ?? null;
-  const rule = ruleOf ? cardFor(ruleOf) : null;
+  const rule = ruleOf && reads ? cardFor(ruleOf) : null;
   // type-it@1: a step shown as a sentence but answered by a number ("How many 6s fit in 34?") is entered too
-  const entry = now ? (now.ask ? { lead: now.ask.lead, lhs: now.ask.value, value: now.ask.value } : askOf(now.shown)) : null;
+  const entry = now ? (now.ask ? { lead: now.ask.lead, lhs: now.ask.value, value: now.ask.value, ...(now.ask.unit ? { unit: now.ask.unit } : {}), ...(now.ask.choices ? { choices: now.ask.choices } : {}) } : askOf(now.shown)) : null;
   // stay-open@1: a step that has been done stays on the page with what was done and why; the next step's "what to do"
   // is there straight away, and an opened rule stays open while the next step uses the same rule
   const advance = () => { const next = steps[at + 1]; if ((next?.needs ?? next?.rule ?? null) !== ruleOf) setCard(false); setAt(at + 1); if (at + 1 >= steps.length) onDone?.(); };
@@ -107,7 +121,7 @@ export function StepCoach({ qid, onUsed, opener = "I'm stuck", startOpen = false
       {at > 0 && (
         <ol className="recipe-steps coach-done">
           {steps.slice(0, at).map((s, i) => {
-            const skill = s.how?.skill ? cardFor(s.how.skill) : null;
+            const skill = s.how?.skill && reads ? cardFor(s.how.skill) : null;
             return (
               <li key={i}>
                 <span className="coach-did">{s.next}</span> <span className="coach-shown">{s.shown}</span>

@@ -28,8 +28,9 @@ export function askOf(shown: string): StepAsk | null {
 /** A value that differs from the right one (to be sure the checker can tell them apart). */
 const wrongFor = (v: string) => (/^[−-]?\d+(?:\.\d+)?$/.test(v) ? String(Number(v.replace("−", "-")) + 1) : `2(${v}) + 1`);
 export function judge(ask: StepAsk, typed: string): boolean {
-  // a step whose answer is a word (yes or no: "does G fold onto itself?") is right when the same word is typed
-  if (ask.lhs === ask.value && /^[a-z]+$/i.test(ask.value)) return typed.trim().toLowerCase() === ask.value.toLowerCase() || (ask.value === "yes" && /^y$/i.test(typed.trim())) || (ask.value === "no" && /^n$/i.test(typed.trim()));
+  // a step whose answer is a word or words (yes or no: "does G fold onto itself?"; "take away", tapped) is right when the
+  // same words are given
+  if (ask.lhs === ask.value && /^[a-z]+( [a-z]+)*$/i.test(ask.value)) return typed.trim().replace(/\s+/g, " ").toLowerCase() === ask.value.toLowerCase() || (ask.value === "yes" && /^y$/i.test(typed.trim())) || (ask.value === "no" && /^n$/i.test(typed.trim()));
   // commas inside a number (1,234 or 12,34,567) are how it is written, not part of the calculation
   const bare = (x: string) => x.replace(/(\d),(?=\d)/g, "$1");
   const t = bare(typed.trim().replace(/\s*\+\s*[cC]$/, "").replace(/^₹\s*/, ""));

@@ -20,8 +20,9 @@
 .sh-step-do{font-weight:700}.sh-step-n{display:inline-block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sh-accent);margin-right:6px}
 .sh-step-lines{font-size:1.12rem;display:grid;gap:4px;padding:2px 0;overflow-x:auto;max-width:100%}
 .sh-why{border-top:1px dashed var(--line,rgba(127,127,127,.3));padding-top:6px;display:grid;gap:6px;font-size:.96rem}
-.sh-why-btn{font:inherit;font-size:.9rem;font-weight:700;background:transparent;color:inherit;border:1px solid var(--line,rgba(127,127,127,.45));border-radius:999px;padding:5px 12px;cursor:pointer;min-height:36px}
+.sh-why-btn{font:inherit;font-size:.9rem;font-weight:700;background:transparent;color:inherit;border:1px solid var(--line,rgba(127,127,127,.45));border-radius:999px;padding:5px 12px;cursor:pointer;min-height:44px;min-width:64px}
 .sh-break{justify-self:start}.sh-after{font-weight:600}
 .formula.stepped{background:transparent;padding:0;border:0;font-family:inherit;font-weight:400;font-size:1rem;display:grid;gap:10px;white-space:normal;overflow:visible}
 .formula.stepped ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}.formula.stepped .sh-step{width:100%;box-sizing:border-box}.formula.stepped .sh-step-lines{font-size:1.05rem;overflow-wrap:anywhere}.formula.stepped .sh-step-do{margin:0}.formula.stepped .sh-ask{margin:0}
 .sh-example{font-family:inherit;font-size:1rem;gap:0}.sh-example>div{padding:7px 0;border-bottom:1px dashed var(--line,rgba(127,127,127,.25))}.sh-example>div:last-child{border-bottom:0}
+.sh-lift{display:grid;gap:8px;margin:6px 0 10px}.sh-lift-btn{min-height:48px;font-size:1.05rem}.sh-lift-icon{font-size:.8em;letter-spacing:-.1em;margin-right:2px}

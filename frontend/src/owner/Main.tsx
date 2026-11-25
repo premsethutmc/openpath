@@ -39,7 +39,7 @@ function SkillCard({ s }: { s: Skill }) {
             <p className="eyebrow">{x.section}{x.corrected ? " · fixed by review" : ""}</p>
             {x.title && <h4>{x.title}</h4>}
             {x.text.map((t, j) => <p key={j}>{mx(t)}</p>)}
-            {x.math.length >= 3 ? <SteppedMath lines={x.math} whys={stepWhys(x.instance)} /> : x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
+            {x.math.length >= 3 ? <SteppedMath lines={x.math} whys={stepWhys(x.instance)} qid={x.instance} /> : x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
           </section>
         ))}
         <h3>Question types and wrong-answer feedback</h3>
