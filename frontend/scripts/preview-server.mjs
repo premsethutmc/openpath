@@ -8,6 +8,7 @@
  *                        scrypt at start-up and never logged. DEMO_PASSWORD_HASH still works and wins when set.
  *   DEMO_API_TARGET      e.g. http://127.0.0.1:8000: /api/ is forwarded there (any method), only with a session.
  *   /tamil/              the Tamil pilot build (dist-english/tamil/), its own entry point.
+ *   /count/              Count with me (dist-english/count/), a self-contained page for ages 3–6.
  *
  * Private demo server: the built English app (dist-english/) behind a server-side password, for one product owner.
  *
@@ -585,7 +586,7 @@ export function createDemoServer(
     }
     if (home !== "/" && path === "/english") return sendFile(res, req, join(dist, "index.html"));
     // Built sub-applications keep their own entry points; relative asset paths need the trailing slash.
-    for (const entry of ["/tamil", "/maths", "/year", "/review", "/owner", "/curriculum"]) {
+    for (const entry of ["/tamil", "/count", "/maths", "/year", "/review", "/owner", "/curriculum"]) {
       if (path === entry) {
         res.writeHead(301, { ...base(), Location: `${entry}/${url.search}` });
         return res.end();

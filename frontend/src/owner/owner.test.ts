@@ -31,7 +31,7 @@ test("changes@1: every change says what and links to the exact place to see it, 
     if (i) assert.ok(c.entries[i - 1].date >= e.date, "newest first");
     assert.ok(e.title.trim() && e.what.trim().length > 20 && e.links.length >= 1, e.title);
     for (const l of e.links) {
-      assert.ok(/^\/(year|owner)\//.test(l.href), `${e.title}: ${l.href}`);
+      assert.ok(/^\/(year|owner|count)\//.test(l.href), `${e.title}: ${l.href}`);
       const m = l.href.match(/#try-skill=(.+)$/);
       if (m) assert.ok(moduleFor(decodeURIComponent(m[1])), `${e.title}: no such skill ${m[1]}`);
     }
