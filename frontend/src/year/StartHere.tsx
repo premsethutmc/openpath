@@ -7,6 +7,8 @@ import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 import { mx } from "./MatrixText";
+import { breakItDown } from "../../../packages/learning/src/step-scenes";
+import { classOfQuestion } from "./StepCoach";
 /** The labelled picture of an idea, drawn by the scene engine from its description (foundation-pictures.ts). */
 export function FoundationPicture({ kind }: { kind: Picture }) {
   const { scene, state } = pictureScene(kind);
@@ -17,15 +19,35 @@ export function FoundationPicture({ kind }: { kind: Picture }) {
 /** why-taps@1: where a "Why?" or "Break it down" tap is recorded. The app sets it once a learner is known; unset, nothing is kept. */
 export const whyTaps: { record?: (competency: string, screen: string, step: number) => void } = {};
 
-export function SteppedMath({ lines, whys, onWhy }: { lines: string[]; whys?: (string[] | null)[] | null; onWhy?: (step: number, all: boolean) => void }) {
-  // step-why@1: when the question's family gives reasons, each step has its own Why? and Break it down opens them all
-  const has = !!whys && whys.length === lines.length - 1 && whys.some(Boolean);
+/**
+ * step-scene@1: what "Break it down" opens for question `qid` (step-scenes.ts, by the question's class). A Class 1–5
+ * child gets the counter and the lift when the steps are adding or taking away, and then no written reasons; Class 1–3
+ * gets no written reasons at all. Class 6 and up keeps the reasons, with the picture too when the numbers go below 0.
+ */
+export function stepHelpOf(qid: string | undefined) {
+  return qid ? breakItDown(qid, classOfQuestion(qid)) : { scene: null, words: true };
+}
+
+export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys?: (string[] | null)[] | null; qid?: string; onWhy?: (step: number, all: boolean) => void }) {
+  const [help] = useState(() => stepHelpOf(qid));
+  // step-why@1: when the question's family gives reasons (and the learner can read them), each step has its own Why? and Break it down opens them all
+  const has = help.words && !!whys && whys.length === lines.length - 1 && whys.some(Boolean);
+  const scene = help.scene;
   const [open, setOpen] = useState<boolean[]>(() => lines.slice(1).map(() => false));
-  const all = has && whys!.every((w, k) => !w || open[k]);
+  const [shown, setShown] = useState(false);
+  const all = scene ? shown : has && whys!.every((w, k) => !w || open[k]);
+  const toggle = () => {
+    if (scene) setShown(!all);
+    if (has) setOpen(whys!.map((w) => !all && !!w));
+    if (!all) onWhy?.(-1, true);
+  };
   return (
     <div className="formula stepped" data-stepped>
       <p className="sh-ask">{mx(lines[0])}</p>
-      {has && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={() => { setOpen(whys!.map((w) => !all && !!w)); if (!all) onWhy?.(-1, true); }}>{all ? "Show less" : "Break it down"}</button>}
+      {(has || scene) && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={toggle}>{all ? "Show less" : "Break it down"}</button>}
+      {/* the counter and the lift: one tile per step below, so the child links each drop to a step. TallyScene is not yet
+          in the engine's Scene union on this branch (the engine branch adds it); the cast goes once both are merged. */}
+      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene as unknown as Parameters<typeof ScenePlayer>[0]["scene"]} /></div> : null}
       <ol>{lines.slice(1).map((m, k) => (
         <li className="sh-step" key={k}>
           <p className="sh-step-do"><span className="sh-step-n">Step {k + 1}</span></p>
