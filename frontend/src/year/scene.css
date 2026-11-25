@@ -91,7 +91,13 @@
 .scene .sc-tally-trail-down { fill: #f9d3bf; }
 .scene .sc-tally-dot { fill: #1f2a37; opacity: 0.45; }
 .scene .sc-tally-car { fill: #2f5fd0; stroke: #1e3a8a; stroke-width: 2; rx: 5px; }
-.scene .sc-tally-door { stroke: #fff; stroke-width: 1.5; opacity: 0.55; }
+.scene .sc-tally-step-up { fill: none; stroke: #1f8a5c; stroke-width: 2.5; stroke-linejoin: round; }
+.scene .sc-tally-step-down { fill: none; stroke: #d0612a; stroke-width: 2.5; stroke-linejoin: round; }
+.scene .sc-tally-step-up-head { fill: #1f8a5c; }
+.scene .sc-tally-step-down-head { fill: #d0612a; }
+.scene .sc-tally-step-up-text { fill: #126b44; font-size: 14px; font-weight: 800; }
+.scene .sc-tally-step-down-text { fill: #9e4414; font-size: 14px; font-weight: 800; }
+.scene .sc-tally-arrowhead { fill: none; stroke: #2f5fd0; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 .scene .sc-tally-cartext { fill: #fff; font-size: 18px; font-weight: 800; paint-order: stroke; stroke: #2f5fd0; stroke-width: 4px; }
 .scene .sc-tally-cartext-small { fill: #fff; font-size: 13px; font-weight: 800; paint-order: stroke; stroke: #2f5fd0; stroke-width: 3px; }
 .scene .sc-tally-counter { fill: #1f2a37; rx: 18px; }

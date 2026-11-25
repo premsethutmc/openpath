@@ -37,6 +37,9 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   // frames@1: the pictures between two states (a counter clicking through every number), shown one after another
   const [shown, setShown] = useState<SceneState | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // the state as of the last move, for a finger that lifts before the page has drawn its going down (a quick tap)
+  const live = useRef(state);
+  live.current = state;
   useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
@@ -48,8 +51,9 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
     if (timer.current) return;
     setTouched(true);
     const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const fr: Frame[] = frames(scene, state, target).filter((f, i, all) => i === all.length - 1 || !(still && f.motion));
+    const fr: Frame[] = frames(scene, live.current, target).filter((f, i, all) => i === all.length - 1 || !(still && f.motion));
     const next = fr[fr.length - 1].state;
+    live.current = next;
     setState(next);
     if (scene.kind === "array" && scene.log && triedLine(scene, next.r) && !tried.includes(next.r)) setTried([...tried, next.r]);
     if (fr.length === 1) { finish(next); return; }
@@ -66,8 +70,8 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
     const r = e.currentTarget.getBoundingClientRect();
     return [((e.clientX - r.left) * box.w) / r.width, ((e.clientY - r.top) * box.h) / r.height] as const;
   };
-  const move = (e: PointerEvent<SVGSVGElement>) => { const [x, y] = at(e); apply(pointer(scene, state, x, y, hold.current)); };
-  const letGo = (e: PointerEvent<SVGSVGElement>) => { if (!dragging.current) return; dragging.current = false; const [x, y] = at(e); apply(release(scene, state, x, y)); };
+  const move = (e: PointerEvent<SVGSVGElement>) => { const [x, y] = at(e); apply(pointer(scene, live.current, x, y, hold.current)); };
+  const letGo = (e: PointerEvent<SVGSVGElement>) => { if (!dragging.current) return; dragging.current = false; const [x, y] = at(e); apply(release(scene, live.current, x, y)); };
   const done = !busy && (reached || met(scene, state));
   // every control is also a native slider (keyboard and switch access); more than two are folded away under the picture
   const sliders = cs.map((c) => (
@@ -87,7 +91,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
         onPointerDown={draggable ? (e) => { if (busy) return; const [x, y] = at(e); hold.current = grip(scene, state, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? letGo : undefined}
-        onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, state, -box.w, box.h)); } : undefined}
+        onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, live.current, -box.w, box.h)); } : undefined}
       >
         {draw(scene, view).map(shape)}
       </svg>}

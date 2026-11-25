@@ -474,7 +474,7 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 export function draw(s: Scene, state: SceneState): Shape[] {
   if (s.kind === "tally") {
     const used = tallyOrder(s, state), held = state.held !== undefined && state.held >= 0 ? { i: state.held, x: state.hx, y: state.hy } : undefined;
-    return tallyDraw({ floors: s.floors, tiles: s.tiles, used, at: state.at ?? tallyTotal(s, state), from: state.from, held, refused: state.refused ? state.refused - 1 : undefined, unit: s.unit, hintArrow: used.length === 0 && !held });
+    return tallyDraw({ floors: s.floors, start: s.start, tiles: s.tiles, used, at: state.at ?? tallyTotal(s, state), from: state.from, held, refused: state.refused ? state.refused - 1 : undefined, unit: s.unit, hintArrow: used.length === 0 && !held });
   }
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1] ?? null; return pickDraw(s.figure, id, id !== null && s.ask.includes(id), !!s.labels); }
   if (s.kind === "tangent") return tangentDraw(s.a, s.b, state.turn, !!s.normal);
@@ -740,7 +740,7 @@ export function release(s: Scene, state: SceneState, x: number, y: number): Scen
   if (s.kind !== "tally" || state.held === undefined) return state;
   const i = state.held, rest = tallyRest(state), order = tallyOrder(s, state);
   const tap = Math.hypot(x - (state.sx ?? x), y - (state.sy ?? y)) < 10;
-  if (!tap && !tallyInDrop(y)) return rest;
+  if (!tap && !tallyInDrop(x, y)) return rest;
   if (order.includes(i) || (!s.anyOrder && i !== order.length)) return { ...rest, refused: i + 1 };
   return { ...rest, dropped: order.length + 1, ...(s.anyOrder ? { seq: Number([...order, i].map((k) => k + 1).join("")) } : {}) };
 }
@@ -763,7 +763,7 @@ export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
   }
   if (prev.held !== undefined && next.held === undefined) {
     // the tile slides back to its place in the tray
-    const [tx, ty] = tallyTileXY(s.tiles.length, prev.held), home = [tx + 36, ty + 25];
+    const [tx, ty] = tallyTileXY(s.tiles.length, prev.held), home = [tx + 36, ty + 25]; // the tile's middle
     const slide = [0.35, 0.65, 0.88].map((t) => ({ state: { ...next, held: prev.held, hx: prev.hx + (home[0] - prev.hx) * t, hy: prev.hy + (home[1] - prev.hy) * t }, ms: 40, motion: true }));
     return [{ state: { ...next, held: prev.held, hx: prev.hx, hy: prev.hy }, ms: 40, motion: true }, ...slide, { state: next, ms: 0 }];
   }
