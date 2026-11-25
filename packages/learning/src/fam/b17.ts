@@ -465,6 +465,12 @@ export const B17: Def[] = [
             ]
           : [{ id: "singular-infinite", kind: "conceptual", competency: SC, says: "ρ(A) = 2 was taken to mean infinitely many solutions without comparing with ρ([A | B]). Here the augmented matrix has rank 3, so the system is inconsistent.", predict: 1 }],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rankA": ["The rank counts how many equations are truly independent. Row reduction does not change it, and in echelon form it is the number of non-zero rows."],
+        "rankAB": ["Do the same for the augmented matrix, which includes the right-hand sides. If it has more independent rows than A, some equations contradict each other."],
+        "compare": ["If the two ranks differ, the system is inconsistent. If they are equal, there is a solution: exactly one when the rank equals the number of unknowns, and infinitely many when it is smaller."],
+      }),
     explain: (s) => (s.id === "rankA" ? `Row-reduce A: it has ${s.value} non-zero rows, so ρ(A) = ${s.value}` : s.id === "rankAB" ? `Row-reduce [A | B]: ρ([A | B]) = ${s.value}` : s.value === 0 ? "ρ(A) = ρ([A | B]) = 3 = number of unknowns: exactly one solution" : s.value === 1 ? "ρ(A) = ρ([A | B]) = 2 < 3: consistent, with infinitely many solutions" : "ρ(A) = 2 ≠ ρ([A | B]) = 3: inconsistent, no solution"),
     domain: [[-2, 2], [1, 3], [-2, 3], [1, 2], [-2, 2], [0, 2]],
     keep: sysKeep,
@@ -531,6 +537,13 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "det": ["A system has a unique solution exactly when the determinant of its coefficient matrix is not 0. So write the determinant in terms of λ."],
+        "solve": ["When |A| = 0 the equations are not independent, so there cannot be a unique solution."],
+        "combine": ["With that λ, one equation's left side is a combination of the other two. Finding the combination shows what its right side must be."],
+        "rhs": ["For infinitely many solutions the third equation must agree with the other two, so its right side must be the same combination of their right sides. Any other value makes the system inconsistent."],
+      }),
     explain: (s) => (s.id === "det" ? `Expanding, |A| = ${s.value}` : s.id === "solve" ? `|A| = 0 when λ = ${N(Number(s.value))}: then there is no unique solution` : s.id === "combine" ? `The left side of the third equation is ${s.value}` : `For ρ([A | B]) = ρ(A) = 2 the right side must match: μ = ${N(Number(s.value))}`),
     domain: [[-2, 2], [1, 3], [-2, 3], [1, 2], [-2, 2], [0, 1]],
     keep: sysKeep,
@@ -589,6 +602,13 @@ export const B17: Def[] = [
       return [mat(A), mat(A.map((r, i) => r.map((x, j) => (i === j ? (p[6] ? x : 0) : x))))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "transpose": ["Any square matrix is (A + A′)/2 plus (A − A′)/2. The first part is symmetric and the second skew-symmetric, so we need A′."],
+        "combine|add": ["A + A′ is unchanged when transposed, so it is symmetric."],
+        "combine|subtract": ["A − A′ changes sign when transposed, so it is skew-symmetric."],
+        "halve": ["Halving makes the two parts add back to A exactly."],
+      }),
     explain: (s) => (s.id === "transpose" ? `Swap rows and columns: A′ = ${s.value}` : s.id === "combine" ? `${s.inputs[0]} = ${s.value}` : `Halve every entry: ${s.value}`),
     domain: [[-4, 5], [-4, 5], [-4, 5], [-4, 5], [-4, 5], [-4, 5], [0, 1]],
     keep: ([u, v, w, x, y, z]) => [u !== v, w !== x, y !== z].filter(Boolean).length >= 2,
@@ -646,6 +666,11 @@ export const B17: Def[] = [
       return [mat(BA), mat(R.map((r) => r.map((x) => -x))), mat([[R[0][0], R[1][0]], [R[0][1], R[1][1]]]), mat(R.map((r) => r.map((x) => x + 1)))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "transposes": ["The transpose of a product is the product of the transposes in the reverse order, so we need A′ and B′."],
+        "product": ["(AB)′ = B′A′: the order reverses because rows and columns swap roles. Multiply B′ by A′ in that order."],
+      }),
     explain: (s) => (s.id === "transposes" ? `A′ = ${s.inputs[0]}, B′ = ${s.inputs[1]}` : `(AB)′ = B′A′ = ${s.value}`),
     domain: [[-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4], [-3, 4]],
     keep: ([a, b, c, d, e, f, g, h]) => {
@@ -716,6 +741,11 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "identity": ["The identity e is the element that leaves every a unchanged. Solving a ∗ e = a for all a finds it."],
+        "inverse": ["The inverse of a is the element b that combines with a to give the identity. So solve a ∗ b = e."],
+      }),
     explain: (s) => (s.id === "identity" ? `Solve a ∗ e = a for every a: e = ${F(Number(s.value))}` : `Solve ${N(Number(s.inputs[0]))} ∗ b = ${F(Number(s.inputs[1]))}: b = ${F(Number(s.value))}`),
     domain: [[0, 3], [-3, 9], [-5, 6], [0, 1]],
     cap: 300,
@@ -762,6 +792,12 @@ export const B17: Def[] = [
       ] as Bug[];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "swap": ["An operation is commutative if the order of the two elements never changes the result. Compare a ∗ b with b ∗ a."],
+        "group": ["It is associative if the grouping never changes the result. Work out both groupings and compare."],
+        "decide": ["Put the two checks together to choose the statement."],
+      }),
     explain: (s) => (s.id === "swap" ? `a ∗ b and b ∗ a are ${s.value}` : s.id === "group" ? `(a ∗ b) ∗ c and a ∗ (b ∗ c) are ${s.value}` : `So ∗ is ${BIN_CHOICES[Number(s.value)]}`),
     domain: [[0, 10], [-4, 5], [-3, 6]],
     difficulty: ([form]) => (form === 0 || form === 1 || form === 7 ? 1 : form === 2 || form === 9 ? 3 : 2),
@@ -817,6 +853,12 @@ export const B17: Def[] = [
       return [{ id: `kind-${kind}`, kind: "conceptual", competency: FT, says, predict } as Bug];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "one-one": ["A function is one-one when equal outputs force equal inputs. Start from f(x₁) = f(x₂) and see if it gives x₁ = x₂."],
+        "onto": ["A function is onto when every element of the codomain is an output. Try to solve f(x) = y and check the x found lies in the domain."],
+        "decide": ["Put the two checks together to choose the statement."],
+      }),
     explain: (s) => (s.id === "one-one" ? `If f(x₁) = f(x₂), then ${s.value}` : s.id === "onto" ? `f(x) = y is ${s.value} in the codomain` : `So f is ${ONTO_CHOICES[Number(s.value)]}`),
     domain: [[0, 8], [-3, 3], [-3, 3]],
     cap: 300,
@@ -864,6 +906,12 @@ export const B17: Def[] = [
       ] as Bug[];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reflexive": ["Reflexive means every element is related to itself, so every (a, a) must be in R."],
+        "symmetric": ["Symmetric means the relation works both ways, so every pair must have its reverse in R."],
+        "transitive": ["Transitive means links chain together: whenever (a, b) and (b, c) are in R, (a, c) must be too."],
+      }),
     explain: (s) => (s.id === "reflexive" ? `Is every (a, a) in R? ${s.value}` : s.id === "symmetric" ? `Does each (a, b) have its reverse (b, a)? ${s.value}` : `Does each chain (a, b), (b, c) have (a, c)? ${s.value}`),
     domain: [[0, 511]],
     cap: 400,
@@ -926,6 +974,12 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "classes": ["An equivalence relation splits the set into classes where everything is related to everything else. Elements linked by R, directly or through a chain, must end up in the same class."],
+        "pairs": ["Inside a class of n elements every ordered pair is needed, including each (a, a), so the class gives n² pairs."],
+        "added": ["R already has some of those pairs, so only the rest need to be added."],
+      }),
     explain: (s) => (s.id === "classes" ? `R links the elements into classes of sizes ${s.value}` : s.id === "pairs" ? `An equivalence relation with these classes has ${s.value} pairs (a class of size n gives n² pairs)` : `Pairs to add: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[4, 5], [0, 65535]],
     cap: 400,
@@ -976,6 +1030,11 @@ export const B17: Def[] = [
     },
     distractors: (p) => [fpAnswerText(p), `−(${fpAnswer(p)})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "quotient": ["The derivative is the slope of a chord over a tiny gap h, as h shrinks. We cannot put h = 0 straight away, so first simplify until the h on the bottom cancels."],
+        "limit": ["Once h has cancelled, putting h = 0 gives the slope of the tangent, which is f′(x)."],
+      }),
     explain: (s) => (s.id === "quotient" ? `Write [f(x + h) − f(x)]/h for f(x) = ${s.inputs[0]} and simplify until h cancels` : `Let h → 0: f′(x) = ${s.value}`),
     domain: [[0, 4], [1, 6], [-5, 5], [-5, 5]],
     keep: fpOk,
@@ -1014,6 +1073,11 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ds": ["Velocity is the rate at which distance changes with time, which is the derivative ds/dt."],
+        "sub": ["Instantaneous velocity at a moment means putting that t into the velocity formula."],
+      }),
     explain: (s) => (s.id === "ds" ? `v = ds/dt = ${s.value}` : `At t = ${s.inputs[0]}: v = ${s.value} m/s`),
     word: ([a, b, c, t0]) => `A toy train on a straight track at a Chennai exhibition is s = ${pp([[a, 3], [b, 2], [c, 1]], "t")} metres from the station t seconds after it starts. How fast, in m/s, is it moving at t = ${t0}?`,
     domain: [[0, 2], [-3, 5], [0, 12], [1, 5]],
@@ -1057,6 +1121,12 @@ export const B17: Def[] = [
     },
     distractors: ([al, be]) => [`(−∞, ${N(al)})`, `(${N(al)}, ∞)`, `(−∞, ${N(be)})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "derivative": ["A function goes up where its slope is positive and down where it is negative, so we need f′."],
+        "critical": ["f′ can change sign only where it is 0. Those points split the line into intervals."],
+        "sign": ["On each interval f′ keeps one sign, so test one number in each. Where f′ > 0, f is increasing; where f′ < 0, it is decreasing."],
+      }),
     explain: (s) => (s.id === "derivative" ? `f′(x) = ${s.value}` : s.id === "critical" ? `f′(x) = 0 at x = ${s.value}` : `Test the sign of f′ on each side of the roots: ${s.inputs[0]} on ${s.value}`),
     domain: [[-4, 4], [-4, 5], [-1, 1], [0, 1], [-3, 3]],
     keep: ([al, be, s]) => al < be && s !== 0 && Math.abs(al * be) <= 12,
@@ -1109,6 +1179,12 @@ export const B17: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "critical": ["At a local maximum or minimum the tangent is flat, so f′(x) = 0 there."],
+        "test": ["At a local maximum f′ changes from positive to negative; at a local minimum from negative to positive. The sign of f′ on each side, or of f″ at the point, shows which."],
+        "value": ["The question asks for the value, so put that x back into f."],
+      }),
     explain: (s) => (s.id === "critical" ? `f′(x) = 0 at x = ${s.value}` : s.id === "test" ? `By the sign of f′ (or f″), the local ${s.inputs[0]} is at x = ${N(Number(s.value))}` : `f(${N(Number(s.inputs[0]))}) = ${N(Number(s.value))}`),
     domain: [[-4, 4], [-4, 5], [-1, 1], [0, 1], [-5, 10]],
     keep: ([al, be, s, , c]) => al < be && s !== 0 && Math.abs(al * be) <= 12 && Math.abs(cubic(al, be, s, c)(al)) <= 250 && Math.abs(cubic(al, be, s, c)(be)) <= 250,
@@ -1159,6 +1235,12 @@ export const B17: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "critical": ["On a closed interval the greatest and least values happen either at a turning point or at an end. So find the turning points inside the interval first."],
+        "values": ["Work out f at every candidate: the turning points and both ends."],
+        "compare": ["The largest of these is the absolute maximum, the smallest the absolute minimum."],
+      }),
     explain: (s) => (s.id === "critical" ? `Turning points inside the interval: x = ${s.value}` : s.id === "values" ? `f at the end points and turning points: ${s.value}` : `The ${s.inputs[0]} of these is ${N(Number(s.value))}`),
     domain: [[-3, 3], [-3, 3], [-4, 3], [-3, 5], [0, 1]],
     cap: 300,
@@ -1219,6 +1301,11 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "chain": ["Both quantities change with time. Differentiating the formula with respect to t, by the chain rule, links their rates."],
+        "substitute": ["The rates are wanted at one moment, so put in the values at that moment."],
+      }),
     explain: (s) => (s.id === "chain" ? `Differentiate with respect to time (chain rule): ${s.value}` : `Substitute the values: ${N(Number(s.value))}`),
     domain: [[0, 4], [2, 12], [1, 5], [1, 20]],
     keep: rrOk,
@@ -1291,6 +1378,12 @@ export const B17: Def[] = [
       return [fmt(2 * valueOf(ans)), fmt(valueOf(ans) + 1)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      s.id === "setup"
+        ? s.inputs[0] === 0
+          ? ["An integral adds up thin strips of height times width. The parabola is symmetric about the x-axis, so find the area above the axis and double it."]
+          : ["Area is never negative, but an integral counts parts below the x-axis as negative. So integrate the size |y|, splitting where the curve crosses the axis."]
+        : ["Find the antiderivative of each piece, subtract its values at the limits, and add the pieces."],
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Evaluating gives ${s.value} square units`),
     // an area is never negative: negative options are not offered
     range: [0, Infinity],
@@ -1362,6 +1455,11 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "limit": ["f is continuous at the joining point only if both pieces meet there. Find the value the other piece approaches."],
+        "match": ["Setting the piece with k equal to that value at the point makes the two pieces join, which is continuity."],
+      }),
     explain: (s) => (s.id === "limit" ? `The limit of the other piece at the point is ${F(Number(s.value))}` : `Continuity needs f(a) = that limit, so k = ${F(Number(s.value))}`),
     domain: [[0, 4], [1, 6], [-3, 6], [-3, 6], [-3, 3]],
     keep: contOk,
@@ -1407,6 +1505,11 @@ export const B17: Def[] = [
     },
     distractors: ([, al, be]) => [`(${N(al)}, ∞)`, `(−∞, ${N(be)})`, `(${N(be)}, ∞)`, `(−∞, ${N(al)})`, `(${N(al - 1)}, ∞)`, `(−∞, ${N(be + 1)})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "second": ["Concavity is about whether the slope is increasing or decreasing, which the second derivative tells us."],
+        "sign": ["Where y″ > 0 the slope is increasing and the curve is concave upward; where y″ < 0 it is concave downward. Test the sign between the roots of y″."],
+      }),
     explain: (s) => (s.id === "second" ? `y″ = ${s.value}` : `${s.inputs[0]} on ${s.value}`),
     domain: [[0, 1], [-3, 4], [-3, 4], [0, 1], [-5, 5]],
     keep: ([kind, al, be]) => (kind === 0 ? al < be : al === be),
@@ -1443,6 +1546,12 @@ export const B17: Def[] = [
       { id: "not-doubled", kind: "procedural", competency: DIP, says: "The even part was integrated from 0 to a but not doubled: ∫₋ₐᵃ g = 2∫₀ᵃ g for an even g.", predict: (k * a ** 3 + 3 * m * a) / 3 },
     ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "odd": ["An odd function has f(−x) = −f(x), so its area on the left cancels its area on the right. Its integral over [−a, a] is 0."],
+        "even": ["An even function is symmetric about the y-axis, so its integral over [−a, a] is twice the integral over [0, a]."],
+        "value": ["Only the even part is left to work out."],
+      }),
     explain: (s) => (s.id === "odd" ? `${s.inputs[0]} is odd (f(−x) = −f(x)), so its integral over [−a, a] is 0` : s.id === "even" ? `The even part gives ${s.value}` : `= ${F(Number(s.value))}`),
     domain: [[0, 4], [1, 3], [0, 6], [0, 5]],
     keep: ([, , k, m]) => k + m > 0,
@@ -1474,6 +1583,12 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reflect": ["Replacing x by a + b − x does not change a definite integral from a to b. Here it swaps the top with the other term of the bottom."],
+        "add": ["Adding the two forms, the tops add to the bottom, so the integrand becomes 1. The integral of 1 is just the length of the interval."],
+        "halve": ["That sum is twice the integral, so halve it."],
+      }),
     explain: (s) => (s.id === "reflect" ? `Replace x by ${s.inputs[0]} − x: ${s.value}` : s.id === "add" ? `Add the two forms: 2I = ∫ 1 dx = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `So I = ${F(Number(s.value))}`),
     // the answer (b − a)/2 is the smallest of the explained answers: further options below or above it, varying
     distractors: ([kind, a, b]) => [[(b - a) / 4, (b - a) / 3], [(b - a) / 4, b - a + 1], [b - a + 1, b - a + 2]][(kind + a + 2 * b) % 3],
@@ -1526,6 +1641,11 @@ export const B17: Def[] = [
             { id: "one-too-many", kind: "procedural", competency: DIP, says: `The last unit interval was counted up to ${N(b)}; the pieces are [${N(a)}, ${N(a + 1)}), …, [${N(b - 1)}, ${N(b)}), with values ${N(a)} to ${N(b - 1)}.`, predict: range(a, b).reduce((s, k) => s + k, 0) },
           ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "split": ["|x − c| is x − c on one side of c and c − x on the other. Splitting the integral at that point removes the modulus."],
+        "pieces": ["Each piece is an ordinary integral. Work out both and add them."],
+      }),
     explain: (s) => (s.id === "split" ? `Split: ${s.value}` : `Add the pieces: ${F(Number(s.value))}`),
     domain: [[0, 1], [-4, 2], [-1, 6], [-3, 5]],
     keep: ([kind, a, b, c]) => (kind === 0 ? a < c && c < b : c === 0 && a >= -3 && b >= a + 2),
@@ -1571,6 +1691,11 @@ export const B17: Def[] = [
     ],
     distractors: ([c, p, q]) => [`(${N(p - 2 * c)}, ${N(q - c * c)})`, `(${N(p)}, ${N(q)})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "slopes": ["Differentiable at a point means the slopes from the left and right are equal there. That gives an equation for a."],
+        "join": ["A differentiable function must also be continuous, so both pieces must give the same value at the point. That gives b."],
+      }),
     explain: (s) => (s.id === "slopes" ? `Equal one-sided derivatives: 2(${N(Number(s.inputs[0]))}) + a = ${N(Number(s.inputs[1]))}, so a = ${N(Number(s.value))}` : `Equal values at x = ${N(Number(s.inputs[0]))} (continuity): b = ${N(Number(s.value))}`),
     domain: [[-3, 3], [-5, 5], [-5, 5]],
     keep: ([c]) => c !== 0,
@@ -1615,6 +1740,12 @@ export const B17: Def[] = [
     },
     distractors: (p) => { const a = String(B17.find((d) => d.id === "aqsep")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "separate": ["Collect all the y terms with dy and all the x terms with dx. Then each side can be integrated on its own."],
+        "integrate": ["Integrate both sides. One constant C covers both sides."],
+        "constant": ["The starting value picks the one curve that passes through it, which fixes C."],
+      }),
     explain: (s) => (s.id === "separate" ? `Separate the variables: ${s.value}` : s.id === "integrate" ? `Integrate both sides: ${s.value}` : `Use y = ${s.inputs[0]} at the starting point to find the constant: y = ${s.value}`),
     word: ([kind, p, q, y0]) => (kind === 0 ? `A quantity y changes so that its rate of change dy/dx equals ${br(pp([[p, 1], [q, 0]]))} times y, and y = ${y0} when x = 0. Find y as an expression in x.` : `For x > 0, a quantity y changes so that dy/dx = ${N(p)}y/x, and y = ${y0} when x = 1. Find y as an expression in x.`),
     domain: [[0, 1], [-4, 4], [-3, 3], [1, 5]],
@@ -1654,6 +1785,11 @@ export const B17: Def[] = [
     },
     distractors: ([n, pw]) => [`(${n + 1}, ${pw})`, `(${n}, ${pw + 1})`, `(${n === 1 ? 2 : n - 1}, ${pw})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "order": ["The order of a differential equation is the order of its highest derivative."],
+        "degree": ["The degree is the power of that highest derivative, once the equation is free of roots and fractions in its derivatives."],
+      }),
     explain: (s) => (s.id === "order" ? `The highest derivative is ${D(Number(s.value))}: order ${s.value}` : `It appears to the power ${s.value}: degree ${s.value}`),
     domain: [[1, 4], [1, 5], [1, 6], [0, 2]],
     difficulty: ([n, pw, m]) => (m <= pw ? 1 : n === 1 ? 2 : 3),
@@ -1692,6 +1828,12 @@ export const B17: Def[] = [
     },
     distractors: (p) => { const a = String(B17.find((d) => d.id === "aqlinde")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "if": ["For dy/dx + Py = Q, multiplying by e^(∫P dx) makes the left side exactly the derivative of y times that factor."],
+        "integrate": ["The left side is now the derivative of a product, so integrating it simply gives the product."],
+        "constant": ["The given value fixes the constant C."],
+      }),
     explain: (s) => (s.id === "if" ? `Integrating factor: e^(∫${s.inputs[0]}/x dx) = ${s.value}` : s.id === "integrate" ? `Multiply through and integrate: ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[1, 3], [1, 6], [0, 3], [-3, 4]],
     cap: 300,
@@ -1735,6 +1877,12 @@ export const B17: Def[] = [
     },
     distractors: (p) => { const a = String(B17.find((d) => d.id === "aqhom")!.solve(p).answer); return [`−${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `2${/^[a-z][^ ]*$/.test(a) ? a : `(${a})`}`, `${a} + 1`]; },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "substitute": ["In a homogeneous equation the right side depends only on y/x. Putting y = vx makes it depend only on v, so the variables can be separated."],
+        "separate": ["Now x and v can be put on separate sides and each integrated."],
+        "constant": ["Use the given value to fix the constant, then put v = y/x back."],
+      }),
     explain: (s) => (s.id === "substitute" ? `Put y = vx, dy/dx = v + x dv/dx: ${s.value}` : s.id === "separate" ? `Separate and integrate ${s.value}` : `Use y(1) = ${N(Number(s.inputs[0]))}: y = ${s.value}`),
     domain: [[0, 2], [1, 4], [1, 4], [-3, 6]],
     keep: homOk,
@@ -1781,6 +1929,11 @@ export const B17: Def[] = [
       return [`(${first})²`, `−(${d2Answers(p)[1]})`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "first": ["The second derivative is the derivative of the first, so find dy/dx first, using the product or chain rule as needed."],
+        "second": ["Differentiate dy/dx again in the same way."],
+      }),
     explain: (s) => (s.id === "first" ? `dy/dx = ${s.value}` : `Differentiate again: d²y/dx² = ${s.value}`),
     domain: [[0, 5], [-2, 5], [0, 5]],
     keep: d2Ok,
@@ -1837,6 +1990,11 @@ export const B17: Def[] = [
       return [`(${N(q)}, ${N(p)})`, `(${N(p + 1)}, ${N(q)})`, `(${N(-p)}, ${N(-q)})`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "derivatives": ["To find a relation that holds for every A and B, we need y, dy/dx and d²y/dx² side by side."],
+        "eliminate": ["Each part e^(rx) works when r² + pr + q = 0, so the two r values are the roots of that quadratic. Their sum and product give p and q."],
+      }),
     explain: (s) => (s.id === "derivatives" ? "Find dy/dx and d²y/dx²" : `Eliminate A and B (or use the roots of r² + pr + q = 0): (p, q) = ${s.value}`),
     domain: [[0, 2], [-5, 6], [-5, 6]],
     keep: ([kind, m, n]) => (kind === 0 ? m < n : kind === 1 ? m >= -3 && m <= 3 && n >= 1 && n <= 4 : m !== 0 && m <= 5 && n === 0),
@@ -1911,6 +2069,11 @@ export const B17: Def[] = [
       return out.filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "branch": ["sin, cos and tan repeat their values, so their inverses need a restricted range where each value appears once. That chosen range is the principal value branch."],
+        "pick": ["Choose the option that matches that branch."],
+      }),
     explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is option ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [0, 3], [0, 7]],
     // the range and domain questions (ask 0, 1) are one question per function: s only reorders their options, so only
@@ -1974,6 +2137,12 @@ export const B17: Def[] = [
       return out.filter((x) => x.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pieces": ["Each piece is a polynomial, and polynomials are continuous everywhere. So the only places f might break are where the pieces meet."],
+        "left-right": ["At a joining point f is continuous only if the two pieces give the same value. A difference there is a jump."],
+        "decide": ["Only joining points inside the given interval matter. Choose the statement that matches."],
+      }),
     explain: (s) => (s.id === "pieces" ? `A polynomial is continuous everywhere, so ${s.value}` : s.id === "left-right" ? `Compare the two pieces at each break point (right-hand value minus left-hand value): ${s.value}` : `So the true statement is option ${"ABCD"[Number(s.value)]}`),
     domain: [[-3, 2], [1, 3], [-2, 2], [-2, 2], [-2, 2], [-2, 2], [-2, 2], [0, 2]],
     keep: (p) => cdOk(p),
@@ -2024,6 +2193,12 @@ export const B17: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "second": ["At a critical point the slope is 0. The second derivative tells whether the slope is increasing or decreasing there."],
+        "value": ["Put the critical point into f″ to find its sign."],
+        "test": ["If f″ > 0 the curve bends upward, so it is a local minimum; if f″ < 0 a local maximum. If f″ = 0 the test decides nothing."],
+      }),
     explain: (s) => (s.id === "second" ? `f″(x) = ${s.value}` : s.id === "value" ? `At x = ${N(Number(s.inputs[0]))}, f″ = ${N(Number(s.value))}` : `So: ${D2T_TEXT(Number(s.inputs[0]))}`),
     domain: [[0, 3], [-4, 4], [-4, 5], [-1, 1], [0, 1]],
     keep: (p) => d2tOk(p),
@@ -2087,6 +2262,11 @@ export const B17: Def[] = [
     },
     distractors: (p) => [laAnswer(p) + 1, laAnswer(p) / 2],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "setup": ["The area under a curve is the integral of its height, between the x values where the region starts and ends."],
+        "evaluate": ["Find the antiderivative and subtract its values at the limits."],
+      }),
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Evaluating gives ${F(Number(s.value))} square units`),
     range: [0, Infinity],
     domain: [[0, 2], [-3, 8], [-6, 8], [-4, 4], [-3, 6]],
@@ -2146,6 +2326,11 @@ export const B17: Def[] = [
       return [piSurd(2 * a, 2 * b, 2 * c), piSurd(a, -b, -c), piSurd(a / 2, b / 2, c / 2)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "setup": ["The area between two curves is the integral of the top curve minus the bottom curve, between the x values where they meet."],
+        "evaluate": ["Find the antiderivatives and subtract their values at the limits."],
+      }),
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Evaluating gives ${s.value} square units`),
     range: [0, Infinity],
     domain: [[0, 3], [1, 12], [0, 5]],
@@ -2206,6 +2391,12 @@ export const B17: Def[] = [
     },
     distractors: (p) => [ivpAnswer(p) + 1, ivpAnswer(p) * 2],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "antiderivative": ["A rate is a derivative, so integrating it gives back the quantity, up to a constant."],
+        "constant": ["The starting value fixes the constant."],
+        "value": ["With C known, put in the asked-for value."],
+      }),
     explain: (s) => (s.id === "antiderivative" ? `Integrate the rate: ${s.value}` : s.id === "constant" ? `Use the starting value at ${s.inputs[0] === 1 ? "x = 1" : "the start"}: C = ${F(Number(s.value))}` : `Substitute ${s.inputs[0]}: ${F(Number(s.value))}`),
     domain: [[0, 2], [0, 3], [-3, 6], [-4, 10], [-5, 20], [1, 6]],
     keep: (p) => ivpOk(p),
@@ -2256,6 +2447,12 @@ export const B17: Def[] = [
     },
     distractors: ([, , , , x0, y0]) => [`(${N(x0)}, 0, ${N(y0)}, 0)`, `(${N(y0)}, 1, ${N(x0)}, 1)`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rank": ["When the rank is the same for A and [A | B] but less than the number of unknowns, the system is consistent with a free unknown."],
+        "reduce": ["Only the independent equations carry information. Letting one unknown be any number t lets the others be written in terms of it."],
+        "solve": ["Solve the remaining equations for the other unknowns in terms of t."],
+      }),
     explain: (s) => (s.id === "rank" ? `By row reduction, ${s.value}: infinitely many solutions` : s.id === "reduce" ? `${String(s.value)[0].toUpperCase()}${String(s.value).slice(1)}` : `Solve for x and y in terms of t: ${s.value}`),
     domain: [[-2, 2], [-2, 2], [1, 2], [-2, 2], [-2, 3], [-2, 3], [1, 2], [-1, 1]],
     keep: (p) => ssOk(p),
@@ -2358,6 +2555,14 @@ export const B17: Def[] = [
       return [pa([[sl, 1], [y0, 0]]), pa([[sl + 1, 1], [y0 - (sl + 1) * x0, 0]]), pa([[sl, 1], [k + 1, 0]]), pa([[sl, 1], [k - 2, 0]]), pa([[-sl, 1], [k, 0]])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "point": ["The tangent passes through the point of contact, so we need its y-value too."],
+        "slope": ["The derivative at a point is the slope of the tangent there."],
+        "line": ["A line through a known point with a known slope is y − y₁ = m(x − x₁)."],
+        "slopes": ["The angle between two curves where they cross is the angle between their tangents there. The derivatives give the tangent slopes."],
+        "angle": ["The angle between two lines with slopes m₁ and m₂ satisfies tan θ = |(m₁ − m₂)/(1 + m₁m₂)|."],
+      }),
     explain: (s) => (s.id === "point" ? `At x = ${N(Number(s.inputs[0]))}, y = ${N(Number(s.value))}` : s.id === "slope" ? `dy/dx at x = ${N(Number(s.inputs[0]))} is ${N(Number(s.value))}` : s.id === "line" ? `y − y₁ = m(x − x₁) with slope ${s.inputs[0]}: y = ${s.value}` : s.id === "slopes" ? `The tangent slopes at x = ${s.inputs[0]} are ${s.value}` : `tan θ = |(m₁ − m₂)/(1 + m₁m₂)| = ${s.value}`),
     range: (p) => (p[0] === 2 ? [0, Infinity] : null),
     domain: [[0, 2], [0, 1], [-3, 3], [-4, 4], [-5, 5], [-2, 3]],
@@ -2413,6 +2618,12 @@ export const B17: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "kind": ["An equation with derivatives in only one variable is ordinary; with partial derivatives in several it is partial."],
+        "linear": ["It is linear when y and its derivatives appear only to the first power, never multiplied together or inside another function."],
+        "pick": ["Choose the option that matches both checks."],
+      }),
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}` : String(s.value)),
     domain: [[0, 23], [1, 5]],
     difficulty: ([t]) => (DECL[t].partial ? 1 : DECL[t].varCoef || (DECL[t].nonlinear && DECL[t].why.includes("multiplied")) ? 3 : 2),
@@ -2456,6 +2667,12 @@ export const B17: Def[] = [
       return [`−(${a})`, `${a} + 1`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "substitute": ["The right side depends on x and y only through one bracket. Calling that bracket v makes dv/dx depend on v alone."],
+        "separate": ["Now v and x can be separated. The standard integral of 1/(v² + a²) is (1/a) tan⁻¹(v/a)."],
+        "constant": ["Use the starting value to fix C, then put the bracket back for v and solve for y."],
+      }),
     explain: (s) => (s.id === "substitute" ? `Put ${s.inputs[0]}: ${s.value}` : s.id === "separate" ? `Separate: dv/(v² + ${Number(s.inputs[0]) ** 2}) = dx, so ${s.value}` : `Use the starting value and go back to y: y = ${s.value}`),
     domain: [[-3, 3], [-3, 3], [1, 3], [-1, 1]],
     cap: 300,
@@ -2525,6 +2742,11 @@ export const B17: Def[] = [
       ] as Bug[];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rule": ["Commutative means swapping the two elements never changes the result; associative means grouping never does. Check both."],
+        "decide": ["Choose the statement that matches the checks."],
+      }),
     explain: (s) => (s.id === "rule" ? String(s.value) : `So the true statement is option ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 3], [0, 12], [0, 7], [0, 11]],
     keep: (p) => bmOk(p),
