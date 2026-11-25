@@ -28,6 +28,9 @@ export interface TallyScene {
   floors: [number, number];
   /** What is being counted, when it is not just numbers ("₹", "marbles"). */
   unit?: string;
+  /** change-up@1: each tile says the floor it takes the lift to ("↑₹50"), not how far it goes, so the size (the answer,
+   *  in counting up for change) is found by the child; it is written on the tile's bracket once the lift is there. */
+  goTo?: boolean;
   /** The tiles may be dropped in any order (adding); otherwise in the order given. */
   anyOrder?: boolean;
   quiet?: boolean;

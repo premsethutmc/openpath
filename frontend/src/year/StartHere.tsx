@@ -30,6 +30,7 @@ export function stepHelpOf(qid: string | undefined) {
 
 export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys?: (string[] | null)[] | null; qid?: string; onWhy?: (step: number, all: boolean) => void }) {
   const [help] = useState(() => stepHelpOf(qid));
+  const [young] = useState(() => { const c = qid ? classOfQuestion(qid) : null; return c !== null && c <= 3; });
   // step-why@1: when the question's family gives reasons (and the learner can read them), each step has its own Why? and Break it down opens them all
   const has = help.words && !!whys && whys.length === lines.length - 1 && whys.some(Boolean);
   const scene = help.scene;
@@ -45,7 +46,7 @@ export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys
     <div className="formula stepped" data-stepped>
       <p className="sh-ask">{mx(lines[0])}</p>
       {(has || scene) && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={toggle}>{all ? "Show less" : "Break it down"}</button>}
-      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} /></div> : null}
+      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={young} /></div> : null}
       <ol>{lines.slice(1).map((m, k) => (
         <li className="sh-step" key={k}>
           <p className="sh-step-do"><span className="sh-step-n">Step {k + 1}</span></p>
@@ -63,13 +64,14 @@ export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys
  * the lift, "Break it down" opens it above the child's own steps, so the child can watch and do the drops first.
  */
 export function LiftHelp({ qid, onOpen }: { qid: string; onOpen?: () => void }) {
-  const [scene] = useState(() => liftFor(qid, classOfQuestion(qid)));
+  const [cls] = useState(() => classOfQuestion(qid));
+  const [scene] = useState(() => liftFor(qid, cls));
   const [open, setOpen] = useState(false);
   if (!scene) return null;
   return (
     <div className="sh-lift" data-lift-help>
       <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <><span aria-hidden="true" className="sh-lift-icon">▲▼</span> Break it down</>}</button>
-      {open && <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} /></div>}
+      {open && <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={cls !== null && cls <= 3} /></div>}
     </div>
   );
 }
@@ -108,7 +110,7 @@ export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; co
     <section className="sh-card">
       <h3>{s.title}</h3>
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
-      {s.scene ? <ScenePlayer scene={s.scene} /> : null}
+      {s.scene ? <ScenePlayer scene={s.scene} young={cls !== undefined && cls <= 3} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
       {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}

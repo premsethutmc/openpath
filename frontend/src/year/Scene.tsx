@@ -7,10 +7,10 @@
  *
  * Every control is also a native slider, so a scene works by keyboard and switch access as well as by finger.
  */
-import { createElement, useEffect, useMemo, useRef, useState, type JSX, type PointerEvent, type ReactNode, type SVGProps } from "react";
+import { createElement, useEffect, useMemo, useRef, useState, type JSX, type KeyboardEvent, type PointerEvent, type ReactNode, type SVGProps } from "react";
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
-import { check, controls, describe, draw, draggable as follows, frames, grip, initial, met, nudge, pointer, readout, release, sceneBox, set, type Frame, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { check, controls, describe, draw, draggable as follows, frames, grip, initial, met, nudge, pointer, readout, release, sceneBox, set, tallyOrder, type Frame, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 function shape(s: Shape, i: number): JSX.Element {
   const c = `sc-${s.role}`;
@@ -27,7 +27,12 @@ function shape(s: Shape, i: number): JSX.Element {
   return <text key={i} className={c} x={s.x} y={s.y} textAnchor="middle">{s.s}</text>;
 }
 
-export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: () => void }) {
+/**
+ * `speakNow`: the picture was opened by a tap ("Break it down"), so its instruction is said at once; otherwise it is said
+ * at the learner's first touch on or near the picture (never as the page opens). `young`: a Class 1–3 child, who gets no
+ * "Set by sliders" (the focused picture still answers the arrow keys).
+ */
+export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: () => void; speakNow?: boolean; young?: boolean }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
   const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
   const [reached, setReached] = useState(false);
@@ -44,6 +49,8 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   // a move made while the counter is still counting (the next tile tapped) waits its turn instead of being lost
   const queued = useRef<SceneState | null>(null);
+  // the tile tapped while the lift is still moving: shown taken (faded, ticked) until its turn
+  const [taken, setTaken] = useState<number | null>(null);
   // the state as of the last move, for a finger that lifts before the page has drawn its going down (a quick tap)
   const live = useRef(state);
   live.current = state;
@@ -53,7 +60,10 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const speaks = ok && scene.kind === "tally";
   const refusal = speaks && touched ? nudge(scene, state) : null;
   const [doneNow, setDoneNow] = useState(false);
-  useEffect(() => { if (speaks) sayAloud(scene.prompt); }, [speaks, scene]);
+  // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
+  const said = useRef(false);
+  const sayFirst = () => { if (speaks && !said.current) { said.current = true; sayAloud(scene.prompt); } };
+  useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (refusal) sayAloud(refusal); }, [refusal, state.refused]);
   useEffect(() => { if (speaks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, doneNow, scene]);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
@@ -63,7 +73,10 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
   const draggable = follows(scene) && !gate;
   const finish = (next: SceneState) => { if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); setDoneNow(true); } };
   const apply = (target: SceneState) => {
-    if (timer.current) { queued.current = target; live.current = target; return; }
+    if (timer.current) {
+      if (scene.kind === "tally") { const was = tallyOrder(scene, live.current), now = tallyOrder(scene, target); if (now.length > was.length) setTaken(now[now.length - 1]); }
+      queued.current = target; live.current = target; return;
+    }
     setTouched(true);
     const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
     const fr: Frame[] = frames(scene, live.current, target).filter((f, i, all) => i === all.length - 1 || !(still && f.motion));
@@ -77,6 +90,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
       if (k >= fr.length - 1) {
         timer.current = null; setShown(null); finish(next);
         const q = queued.current;
+        setTaken(null);
         if (q) { queued.current = null; live.current = next; apply(q); }
         return;
       }
@@ -85,7 +99,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
     };
     play(0);
   };
-  const box = sceneBox(scene), busy = shown !== null, view = shown ?? state;
+  const box = sceneBox(scene), busy = shown !== null, view = shown && taken !== null ? { ...shown, taken: taken + 1 } : shown ?? state;
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     return [((e.clientX - r.left) * box.w) / r.width, ((e.clientY - r.top) * box.h) / r.height] as const;
@@ -101,9 +115,21 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
     </label>
   ));
   return (
-    <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"}>
+    <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"}
+      onPointerDown={speaks ? sayFirst : undefined}
+      {...(scene.kind === "tally" ? {
+        // the lift by keyboard: the picture takes focus, and the arrow keys put a tile in (→ ↑) or take the last out (← ↓)
+        tabIndex: 0,
+        onKeyDown: (e: KeyboardEvent<HTMLElement>) => {
+          const d = e.key === "ArrowRight" || e.key === "ArrowUp" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowDown" ? -1 : 0;
+          if (!d || e.target !== e.currentTarget) return;
+          e.preventDefault(); sayFirst();
+          const n = Math.max(0, Math.min(scene.tiles.length, (live.current.dropped ?? 0) + d));
+          if (n !== (live.current.dropped ?? 0)) apply(set(scene, live.current, "dropped", n));
+        },
+      } : {})}>
       {/* what to do is read before the picture, not found under it */}
-      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onClick={() => sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt))}><span aria-hidden="true">🔊</span></button>}</p>}
+      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onPointerDown={(e) => e.stopPropagation()} onClick={() => { said.current = true; sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt)); }}><span aria-hidden="true">🔊</span></button>}</p>}
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${box.w} ${box.h}`}
         aria-hidden="true"
@@ -127,7 +153,7 @@ export function ScenePlayer({ scene, onReached }: { scene: Scene; onReached?: ()
         </div>
       )}
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
-      {gate ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
+      {gate || (young && scene.kind === "tally") ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, view)}</p>}
       {tried.length > 0 && (
         <div className="scene-tried" data-testid="scene-tried">

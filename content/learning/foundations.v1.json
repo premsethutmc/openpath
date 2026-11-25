@@ -24224,20 +24224,19 @@
      "scene": {
       "type": "scene",
       "kind": "tally",
-      "start": 0,
+      "start": 3,
       "tiles": [
-       2,
-       6
+       2
       ],
       "floors": [
        0,
        10
       ],
-      "prompt": "Put the tiles in the lift, one by one.",
-      "success": "2, then 6 more: 8! So 2 + 6 = 8.",
+      "prompt": "Start at 3. Put 2 more in.",
+      "success": "3, then 2 more: 5! So 3 + 2 = 5.",
       "goal": {
        "measure": "total",
-       "equals": 8
+       "equals": 5
       }
      },
      "text": [

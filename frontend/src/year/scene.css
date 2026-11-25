@@ -38,7 +38,11 @@
 .scene .sc-arrow1 { stroke: #0f7a5d; stroke-width: 4; stroke-linecap: round; }
 .scene .sc-handle0 { fill: #2f5fd0; stroke: #fff; stroke-width: 3; }
 .scene .sc-handle1 { fill: #0f7a5d; stroke: #fff; stroke-width: 3; }
-.scene-controls.many > summary { cursor: pointer; font-weight: 700; color: var(--brand, #2563eb); padding: 10px 0; min-height: 44px; }
+.scene-controls.many > summary { cursor: pointer; font-weight: 700; color: var(--brand, #2563eb); padding: 10px 0; min-height: 44px; display: block; list-style: none; }
+/* its own ▶ / ▼ (a page that lays its summaries out as a grid, like the owner's view, loses the browser's marker) */
+.scene-controls.many > summary::-webkit-details-marker { display: none; }
+.scene-controls.many > summary::before { content: "▶ "; font-size: 0.8em; }
+.scene-controls.many[open] > summary::before { content: "▼ "; }
 .scene-controls.many label span { min-width: 9.5em; font-size: 0.9rem; }
 .scene-controls label { display: flex; align-items: center; gap: 12px; margin: 8px 0 0; font-weight: 600; }
 .scene-controls label span { min-width: 3.2em; }
@@ -119,6 +123,9 @@
 .scene .sc-tally-minus-coin, .scene .sc-tally-minus-coin-no, .scene .sc-tally-minus-coin-held { fill: #d0612a; stroke: #9e4414; stroke-width: 3; rx: 25px; }
 .scene .sc-tally-plus-coin-held, .scene .sc-tally-minus-coin-held { filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3)); }
 .scene .sc-tally-plus-coin-no, .scene .sc-tally-minus-coin-no { transform-box: fill-box; transform-origin: center; animation: sc-tally-shake 0.4s ease-in-out; }
+.scene .sc-tally-taken { fill: rgba(255, 255, 255, 0.72); stroke: #9aa5b8; stroke-width: 2; stroke-dasharray: 6 5; rx: 12px; pointer-events: none; }
+.scene .sc-tally-takentext { fill: #1f8a5c; font-size: 18px; font-weight: 800; pointer-events: none; }
+.scene[data-scene="tally"]:focus-visible { outline: 3px solid var(--brand, #2563eb); outline-offset: 4px; border-radius: 12px; }
 .scene .sc-tally-slot { fill: none; stroke: #9aa5b8; stroke-width: 2; stroke-dasharray: 6 5; rx: 12px; }
 .scene .sc-tally-zone { fill: none; stroke: #b7c3d6; stroke-width: 2; stroke-dasharray: 8 6; rx: 16px; }
 .scene .sc-tally-zone-on { fill: rgba(47, 95, 208, 0.07); stroke: #2f5fd0; stroke-width: 3; stroke-dasharray: 8 6; rx: 16px; }
@@ -127,9 +134,10 @@
 .scene[data-scene="tally"] .scene-goal { min-height: 3.4em; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 1.1rem; }
 .scene-say { flex: none; min-width: 44px; min-height: 44px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.7); font-size: 1.3rem; cursor: pointer; }
 .scene-nudge-big { min-height: 1.6em; margin: 2px 0 0; text-align: center; font-size: 1.2rem; font-weight: 800; color: #9a4a00; }
-@keyframes sc-tally-up { from { transform: translateY(26px); opacity: 0.2; } to { transform: none; opacity: 1; } }
-@keyframes sc-tally-down { from { transform: translateY(-26px); opacity: 0.2; } to { transform: none; opacity: 1; } }
-@keyframes sc-tally-glow { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+/* the digits slide in sharp (no fading: a faded digit reads as blurred) */
+@keyframes sc-tally-up { from { transform: translateY(18px); } to { transform: none; } }
+@keyframes sc-tally-down { from { transform: translateY(-18px); } to { transform: none; } }
+@keyframes sc-tally-glow { 0% { transform: scale(1); } 40% { transform: scale(1.15); } 100% { transform: scale(1); } }
 @keyframes sc-tally-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
 @keyframes sc-tally-march { to { stroke-dashoffset: -26; } }
 @media (prefers-reduced-motion: reduce) { .scene [class*="sc-tally"] { animation: none !important; transition: none !important; } }

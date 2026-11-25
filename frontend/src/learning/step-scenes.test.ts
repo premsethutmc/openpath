@@ -20,7 +20,8 @@ test("step-scene@1: every pool question of a mapped family that gets a picture i
       const p = problemOf(id)!;
       assert.deepEqual(tallyProblems(s), [], id);
       const end = tallyAt(s.start, s.tiles, s.tiles.length);
-      assert.equal(String(end), String(p.answer), id);
+      // change-up@1: change counted up from the price ends on the money given; how far it went is the answer
+      assert.equal(String(s.goTo ? s.tiles[0] : end), String(p.answer), id);
       // the engine's own check: the player draws it (not "This picture is not available"), the goal is not met before the
       // first tile, and once every tile is in it is met with the lift on the answer
       assert.deepEqual(check(s), [], id);
@@ -125,7 +126,18 @@ test("step-scene@1: the picture's layout: labels never reach the counter, floors
       const end = tallyAt(s.start, s.tiles, s.tiles.length), say = (v: number) => (v < 0 ? `−${-v}` : String(v));
       // (the start gives way to the end when the two are too close to write both)
       const fh = 382 / (s.floors[1] - s.floors[0] + 1);
-      for (const v of [s.start, end]) if (v !== 0 && (v === end || Math.abs(v - end) * fh >= 20)) assert.ok(fl.some((x) => x.s === say(v)), `${pr.id}: floor ${v} is labelled`);
+      for (const v of [s.start, end]) if (v !== 0 && (v === end || Math.abs(v - end) * fh >= 20) && (v !== end || dropped === s.tiles.length)) assert.ok(fl.some((x) => x.s === say(v)), `${pr.id}: floor ${v} is labelled`);
+      // even-floors@1: before the lift gets there the end has no number of its own, and the numbers go up in one fixed
+      // step (only the start, and later the end, may sit off it)
+      const nums = fl.map((x) => Number(x.s.replace("−", "-").replace("₹", "")));
+      if (dropped === 0 && end !== s.start && nums.includes(end)) {
+        const regular = nums.filter((v) => v !== s.start);
+        const gaps = regular.slice(1).map((v, i) => v - regular[i]);
+        assert.ok(regular.every((v) => (v - regular[0]) % (gaps.length ? Math.min(...gaps) : 1) === 0), `${pr.id}: the end floor ${end} is labelled on its own before the lift is there`);
+      }
+      const others = nums.filter((v) => v !== s.start && v !== end && v !== 0);
+      const gs = others.slice(1).map((v, i) => v - others[i]);
+      if (dropped === 0 && gs.length) { const step = Math.min(...gs); assert.ok(others.every((v) => (v - others[0]) % step === 0), `${pr.id}: floor numbers ${nums} are not evenly spaced`); }
       // clear of the round 0 marker
       const zero = shapes.find((x) => x.role === "tally-zero" || x.role === "tally-zero-on") as Extract<Shape, { t: "circle" }> | undefined;
       if (zero) for (const t of fl) assert.ok(Math.abs(t.y - 5 - zero.cy) >= zero.r + 9, `${pr.id}: label ${t.s} on the 0 marker`);
@@ -136,4 +148,27 @@ test("step-scene@1: the picture's layout: labels never reach the counter, floors
     }
   }
   assert.ok(n > 300, String(n));
+});
+
+test("young-lift@1 and change-up@1: change is counted up when that is shorter, and a Class 1–2 lift stays small", () => {
+  // ₹50 − ₹48: up from ₹48 to ₹50, a tile that says where it goes, not how far
+  const c = pool("abchange").items.find((pr) => { const p = problemOf(pr.id)!; const [x, y] = p.steps[0].inputs as number[]; return x - y < y && x - y <= 5; })!;
+  const s = stepScene(c.id, 1)!;
+  assert.ok(s && s.goTo && s.tiles.length === 1 && s.tiles[0] > 0, c.id);
+  assert.equal(String(s.tiles[0]), String(problemOf(c.id)!.answer));
+  assert.match(s.prompt, /^Count up from ₹\d+ to ₹\d+\.$/);
+  assert.ok(s.floors[1] - s.floors[0] <= 30, String(s.floors));
+  assert.ok(draw(s, initial(s)).filter((x) => x.t === "text").every((x) => !(x as { s: string }).s.includes(`+₹${s.tiles[0]}`)), "the change is not on the tile");
+  assert.match(readout(s, initial(s)), /^Start at/);
+  assert.match(readout(s, set(s, initial(s), "dropped", 1)), new RegExp(`\\+ ₹${s.tiles[0]} =`));
+  // a small price is still taken away (₹10 − ₹1)
+  const t = stepScene("gen:abchange:1,0", 1)!;
+  assert.ok(t && !t.goTo && t.tiles[0] === -1);
+  // Class 1–5: no tile of more than 20 clicks; Class 1–2: no shaft of more than 30 floors
+  for (const fam of Object.keys(STEP_SCENE_FAMILIES)) for (const pr of pool(fam).items.slice(0, 300)) for (const cls of [1, 2, 4]) {
+    const x = stepScene(pr.id, cls);
+    if (!x) continue;
+    assert.ok(x.tiles.every((n) => Math.abs(n) <= 20), `${pr.id}: ${x.tiles}`);
+    if (cls <= 2) assert.ok(x.floors[1] - x.floors[0] <= 30, `${pr.id}: floors ${x.floors}`);
+  }
 });

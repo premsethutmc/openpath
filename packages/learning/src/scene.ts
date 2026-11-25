@@ -31,8 +31,8 @@
  * and areas), a `triangle` kind (two angles set, the third follows), and a line that turns about a fixed point (`through`).
  */
 
-import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, TALLY_BOX, tallyDraw, tallyInDrop, tallyTileAt, tallyNum, tallyTileXY, tangentAt, tangentDraw, tangentOf, tileText, type PickFigure } from "./scene-figures";
-import { tallyClicks, tallyProblems, type TallyScene } from "./tally";
+import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, TALLY_BOX, tallyDraw, tallyInDrop, tallyTileAt, tallyNum, tallyTileXY, tallyTileLabel, tangentAt, tangentDraw, tangentOf, tileText, type PickFigure } from "./scene-figures";
+import { tallyAt, tallyClicks, tallyProblems, type TallyScene } from "./tally";
 export type { PickFigure } from "./scene-figures";
 
 /** A polynomial as its coefficients, lowest power first: 5x² is [0, 0, 5]. */
@@ -388,7 +388,7 @@ export function triedLine(s: Scene, rows: number): string | null {
 }
 export function nudge(s: Scene, state: SceneState): string | null {
   // tally@1: a tile dropped out of turn went back; the one to drop now is named (it is the next tile, not an answer)
-  if (s.kind === "tally") return state.refused && state.dropped < s.tiles.length ? `Not yet. First the ${tileText(s.tiles[state.dropped], s.unit)} tile.` : null;
+  if (s.kind === "tally") return state.refused && state.dropped < s.tiles.length ? `Not yet. First the ${tallyTileLabel(s.tiles, state.dropped, s.start, s.unit, s.goTo)} tile.` : null;
   // pick-nudge@1: a wrong tap is named back (what that part is), with the scene's own hint; never which part is right
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined || s.ask.includes(id) ? null : `That is ${pickName(s.figure, id)}. ${s.hint}`; }
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
@@ -419,6 +419,8 @@ export function readout(s: Scene, state: SceneState): string {
     // money reads in rupees everywhere it is written ("₹2 + ₹2 = ₹4"), as the tiles, the car and the counter do
     const u = (n: number) => tallyNum(n, s.unit);
     if (!order.length) return `Start at ${u(s.start)}`;
+    // change-up@1: how far it went is what the child finds: "₹48 + ? = ₹50" until the lift is there
+    if (s.goTo) { const end = tallyAt(s.start, s.tiles, s.tiles.length), there = order.length === s.tiles.length && (state.at === undefined || state.at === total); return `${u(s.start)} + ${there ? u(end - s.start) : "?"} = ${u(end)}`; }
     // a start of 0 is left out once two tiles are in ("2 + 6 = 8"); one tile from 0 reads "0 + 2 = 2"
     const bare = s.start === 0 && s.tiles[order[0]] > 0 && order.length > 1;
     const terms = order.map((i, k) => (k === 0 && bare ? u(s.tiles[i]) : `${s.tiles[i] < 0 ? "−" : "+"} ${u(Math.abs(s.tiles[i]))}`));
@@ -477,7 +479,7 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 export function draw(s: Scene, state: SceneState): Shape[] {
   if (s.kind === "tally") {
     const used = tallyOrder(s, state), held = state.held !== undefined && state.held >= 0 ? { i: state.held, x: state.hx, y: state.hy } : undefined;
-    return tallyDraw({ floors: s.floors, start: s.start, tiles: s.tiles, used, at: state.at ?? tallyTotal(s, state), from: state.from, held, refused: state.refused ? state.refused - 1 : undefined, unit: s.unit, hintArrow: used.length === 0 && !held });
+    return tallyDraw({ floors: s.floors, start: s.start, tiles: s.tiles, used, at: state.at ?? tallyTotal(s, state), from: state.from, held, refused: state.refused ? state.refused - 1 : undefined, unit: s.unit, hintArrow: used.length === 0 && !held, ...(s.goTo ? { goTo: true } : {}), ...(state.taken ? { taken: state.taken - 1 } : {}) });
   }
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1] ?? null; return pickDraw(s.figure, id, id !== null && s.ask.includes(id), !!s.labels); }
   if (s.kind === "tangent") return tangentDraw(s.a, s.b, state.turn, !!s.normal);
@@ -777,7 +779,7 @@ export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
 export function describe(s: Scene): string {
   if (s.kind === "tally") {
     const [lo, hi] = s.floors, u = s.unit ? ` (${s.unit})` : "";
-    return `A lift beside a big counter${u}. The lift starts on floor ${fmt(s.start)}. Its floors go from ${fmt(lo)} to ${fmt(hi)}; 0 is the ground floor${lo < 0 ? ", and the floors below it are basement floors with minus numbers" : ""}. Tiles to put in the lift${s.anyOrder ? ", in any order" : ", one after another"}: ${s.tiles.map((t) => tileText(t, s.unit)).join(", ")}. A plus tile takes the lift up and a minus tile takes it down, one floor at a time, and the counter says every number on the way. Tap a tile or drag it to the lift, or use the slider. ${s.prompt}`;
+    return `A lift beside a big counter${u}. The lift starts on floor ${fmt(s.start)}. Its floors go from ${fmt(lo)} to ${fmt(hi)}; 0 is the ground floor${lo < 0 ? ", and the floors below it are basement floors with minus numbers" : ""}. Tiles to put in the lift${s.anyOrder ? ", in any order" : ", one after another"}: ${s.goTo ? s.tiles.map((_, i) => `one that takes it to ${fmt(tallyAt(s.start, s.tiles, i + 1))}`).join(", ") : s.tiles.map((t) => tileText(t, s.unit)).join(", ")}. A plus tile takes the lift up and a minus tile takes it down, one floor at a time, and the counter says every number on the way. Tap a tile or drag it to the lift, or use the slider. ${s.prompt}`;
   }
   if (s.kind === "pick") return `A picture of ${pickWords(s.figure)}. Its parts can be chosen by tapping them, or with a slider. ${s.prompt}`;
   if (s.kind === "tangent") return `An interactive ellipse, ${s.a} units wide each side of its centre and ${s.b} units high. A point moves round it, by dragging or with a slider, and the tangent line${s.normal ? " and the normal" : ""} at the point is drawn, with its slope. ${s.prompt}`;
@@ -844,6 +846,7 @@ export function check(v: unknown): string[] {
     if (!Array.isArray(s.tiles) || !Array.isArray(s.floors) || s.floors.length !== 2) bad.push("tiles and floors are needed");
     else bad.push(...tallyProblems(s as unknown as TallyScene));
     if (s.anyOrder !== undefined && typeof s.anyOrder !== "boolean") bad.push("anyOrder must be true or false");
+    if (s.goTo !== undefined && (s.goTo !== true || s.anyOrder)) bad.push("goTo must be true, and not with anyOrder");
     if (s.unit !== undefined && !(typeof s.unit === "string" && s.unit.trim() && s.unit.length <= 12)) bad.push("unit must be 1 to 12 characters");
   } else if (s.kind === "pick") {
     const why = pickCheck(s.figure);

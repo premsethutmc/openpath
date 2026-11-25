@@ -195,6 +195,9 @@ const CT = { x: 186, y: 14, w: 144, h: 100 }, WIN = { x: 194, y: 24, w: 128, h: 
 export const tallyNum = (n: number, unit?: string) => `${n < 0 ? "−" : ""}${unit === "₹" ? "₹" : ""}${Math.abs(n)}`;
 /** A tile as it is written on it: "+2", "−10", "+₹2" for money. */
 export const tileText = (t: number, unit?: string) => `${t < 0 ? "−" : "+"}${unit === "₹" ? "₹" : ""}${Math.abs(t)}`;
+/** What tile `i` says: its move ("+2", "−₹10"), or with `goTo` the floor it takes the lift to ("↑₹50", change-up@1). */
+export const tallyTileLabel = (tiles: number[], i: number, start: number, unit?: string, goTo?: boolean) =>
+  goTo ? `${tiles[i] > 0 ? "↑" : "↓"}${tallyNum(start + tiles.slice(0, i + 1).reduce((a, b) => a + b, 0), unit)}` : tileText(tiles[i], unit);
 /** Where tile `i` of `n` sits in the tray (its top-left corner): one column of up to four, or two columns. */
 export function tallyTileXY(n: number, i: number): [number, number] {
   const two = n > 4, col = two ? i % 2 : 0, row = two ? Math.floor(i / 2) : i;
@@ -212,23 +215,29 @@ export interface TallyView {
   floors: [number, number]; start: number; tiles: number[]; used: number[]; at: number;
   /** the number the latest move started from (its floors are lit as a trail) */
   from?: number; held?: { i: number; x: number; y: number }; refused?: number; unit?: string; hintArrow?: boolean;
+  /** change-up@1: tiles say where they go, not how far (TallyScene.goTo) */
+  goTo?: boolean;
+  /** a tile tapped while the lift is still moving: it waits its turn, shown faded and ticked (it is taken) */
+  taken?: number;
 }
 /**
- * The floors that get a number: every floor when they are roomy and there are at most 15; otherwise every 2nd or 5th
- * (or 10th). The end and the start always get theirs (the start gives way to the end when they are too close for two),
- * and a regular label too near one of them is left out. 0 has its own round marker (radius `zr`): a regular label too
- * near it is left out (the start or the end there is moved clear of it when drawn).
+ * even-floors@1: the floors that get a number, at one fixed step (every floor when they are roomy and at most 15, else
+ * every 2nd, 5th or 10th, a step the start falls on where one fits), so the spacing never points at a floor. The start
+ * always has its number (it gives way to the end, first in `keep` once the lift is there, when the two are too close). A regular number too near one of those is
+ * left out, and none goes on the round 0 marker (radius `zr`).
  */
-export function tallyLabelled(floors: [number, number], keep: number[], fh: number, zr = 15): number[] {
+export function tallyLabelled(floors: [number, number], keep: number[], fh: number, zr = 15, start: number | undefined = keep[0]): number[] {
   const [lo, hi] = floors, n = hi - lo;
-  const every = n <= 15 && fh >= 13 ? 1 : [2, 5, 10, 20].find((k) => fh * k >= 15 && n / k <= 15) ?? 20;
+  const fits = (k: number) => (k === 1 ? n <= 15 && fh >= 13 : fh * k >= 15 && n / k <= 15);
+  const steps = [1, 2, 5, 10, 20];
+  const every = steps.find((k) => fits(k) && (start === undefined || start % k === 0)) ?? steps.find(fits) ?? 20;
   const near = (f: number, g: number) => Math.abs(f - g) * fh < 20;
   const must: number[] = [];
   for (const f of keep) if (f !== 0 && f >= lo && f <= hi && !must.some((g) => g === f || near(f, g))) must.push(f);
   const out = new Set(must);
   for (let f = lo; f <= hi; f++) {
     if (f === 0 || f % every !== 0 || must.some((g) => g !== f && near(f, g))) continue;
-    if (Math.abs(f) * fh < zr + 9) continue; // clear of the 0 marker
+    if (lo <= 0 && Math.abs(f) * fh < zr + 9) continue; // clear of the 0 marker
     out.add(f);
   }
   return [...out].sort((a, b) => a - b);
@@ -245,12 +254,16 @@ export function tallyDraw(v: TallyView): Shape[] {
   if (lo < 0) out.push({ t: "rect", x: TS.x, y: edge(Math.min(0, hi + 1)), w: TS.w, h: px(TS.bottom - edge(Math.min(0, hi + 1))), role: "tally-basement" });
   for (let f = lo; f <= hi; f++) if (fh >= 5 || f % 5 === 0) out.push({ t: "line", x1: TS.x, y1: edge(f), x2: TS.x + TS.w, y2: edge(f), role: "tally-floor" });
   const zr = px(Math.max(9, Math.min(15, fh / 2 + 1))), hasZero = lo <= 0 && hi >= 0;
-  for (const f of tallyLabelled(v.floors, [end, v.start], fh, hasZero ? zr : 0)) {
+  // the end floor gets its own number only once the lift is there (before, a lone number there would give it away)
+  const arrived = v.used.length === v.tiles.length && v.at === end;
+  const mall = !v.unit || /floor/i.test(v.unit);
+  for (const f of tallyLabelled(v.floors, arrived ? [end, v.start] : [v.start], fh, hasZero ? zr : 0, v.start)) {
     // a start or an end just by 0 is lifted (or lowered) clear of the round 0 marker
     const y = !hasZero ? mid(f) + 5 : f > 0 ? Math.min(mid(f) + 5, mid(0) - zr - 6) : Math.max(mid(f) + 5, mid(0) + zr + 16);
     text(TS.x - 17, px(y), num(f), "tally-flabel");
     // the basement floors as a mall lift names them
-    if (f < 0 && fh >= 12) text(12, px(mid(f) + 4.5), `B${-f}`, "tally-hint");
+    // (a mall lift only: never on a thermometer or a sea-level picture, whose unit is °C or m)
+    if (mall && f < 0 && fh >= 12) text(12, px(mid(f) + 4.5), `B${-f}`, "tally-hint");
   }
   // the trail: every floor the latest move went through, a dot on each
   if (v.from !== undefined && v.from !== v.at) {
@@ -265,17 +278,19 @@ export function tallyDraw(v: TallyView): Shape[] {
     out.push({ t: "line", x1: TS.x - 34, y1: edge(0), x2: TS.x + TS.w + 4, y2: edge(0), role: "tally-groundline" });
     out.push({ t: "circle", cx: TS.x - 17, cy: mid(0), r: zr, role: on ? "tally-zero-on" : "tally-zero" });
     text(TS.x - 17, px(mid(0) + 5.5), "0", "tally-zerotext");
-    if (fh >= 12 && lo < 0) text(8, px(mid(0) + 4.5), "G", "tally-hint");
+    if (mall && fh >= 12 && lo < 0) text(6, px(mid(0) + 4.5), "G", "tally-hint");
   }
   // beside the shaft, what each tile did: a bracket from where it started to the floor it took the lift to (an arrowhead
-  // there, and the tile's own "+2" beside it). Brackets take turns between two columns, so a way back does not hide the way there.
+  // there, and the tile's own "+2" beside it). Each tile has its own lane, so up, down and up again stay three brackets.
   let p = v.start;
+  const lane = v.tiles.length > 1 ? Math.min(12, 22 / (v.tiles.length - 1)) : 0;
   v.used.forEach((ti, k) => {
     const t = v.tiles[ti], last = k === v.used.length - 1, to = last ? v.at : p + t;
     if (to !== p) {
-      const x = TS.x + TS.w + 5 + (k % 2) * 13, y1 = mid(p), y2 = mid(to), role = t > 0 ? "tally-step-up" : "tally-step-down";
+      const x = px(TS.x + TS.w + 5 + k * lane), y1 = mid(p), y2 = mid(to), role = t > 0 ? "tally-step-up" : "tally-step-down";
       out.push({ t: "path", d: `M${x} ${y1}H${x + 6}V${y2}H${x + 1}`, role }, { t: "path", d: `M${x + 7} ${px(y2 - 6)}L${x - 1} ${y2}L${x + 7} ${px(y2 + 6)}Z`, role: `${role}-head` });
-      text(163, px(y2 + 5), tileText(t, v.unit), `${role}-text`);
+      // the size of a goTo tile (the change) is written only once the lift has got there
+      if (!(v.goTo && last && v.at !== p + t)) text(163, px(y2 + 5), tileText(t, v.unit), `${role}-text`);
     }
     p += t;
   });
@@ -290,7 +305,7 @@ export function tallyDraw(v: TallyView): Shape[] {
   if (v.unit && !money) text(WIN.x + WIN.w / 2, 128, v.unit, "label");
   // the tray: the tiles not yet used; a refused one shakes; the one in the hand follows the finger. Money is coins.
   const tile = (i: number, x: number, y: number, extra: string) => {
-    const t = v.tiles[i], s = tileText(t, v.unit), coin = money ? "-coin" : "";
+    const t = v.tiles[i], s = tallyTileLabel(v.tiles, i, v.start, v.unit, v.goTo), coin = money ? "-coin" : "";
     out.push({ t: "rect", x, y, w: TW, h: TH, role: `tally-${t > 0 ? "plus" : "minus"}${coin}${extra}` }, { t: "text", x: px(x + TW / 2), y: px(y + TH / 2 + (s.length > 3 ? 7 : 9)), s, role: `tally-tiletext${money && t > 0 ? "-coin" : ""}${s.length > 3 ? "-long" : ""}` });
   };
   const rows = v.tiles.length > 4 ? Math.ceil(v.tiles.length / 2) : v.tiles.length;
@@ -300,6 +315,7 @@ export function tallyDraw(v: TallyView): Shape[] {
     const [x, y] = tallyTileXY(v.tiles.length, i);
     if (v.held?.i === i) { out.push({ t: "rect", x, y, w: TW, h: TH, role: "tally-slot" }); return; }
     tile(i, x, y, v.refused === i ? "-no" : "");
+    if (v.taken === i) out.push({ t: "rect", x, y, w: TW, h: TH, role: "tally-taken" }, { t: "text", x: px(x + TW - 12), y: px(y + 18), s: "✓", role: "tally-takentext" });
   });
   // before the first tile: an arrow from it into the lift car (where the tile goes), not at a floor number
   if (v.hintArrow && !v.held) {
