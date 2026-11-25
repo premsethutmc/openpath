@@ -2,12 +2,126 @@
  "policy": "changes@1",
  "note": "The owner's record of what changed and where to see it. Every pull request that changes what a learner or the owner sees adds one entry at the top: the date, what changed in plain words, and links to the exact place to look. Shown at /owner/#changes.",
  "entries": [
-  {"date": "2026-11-25", "status": "in review", "title": "The counter and the lift for young children", "what": "On a Class 1–5 adding or taking-away question, 'Break it down' opens a lift. The child drops +/− tiles (₹ coins for money) and the counter clicks through every number, pausing at 0. The instruction is read aloud. Class 1–3 see no written reasons.", "links": [{"label": "Class 1 adding: go to the lesson, tap Break it down", "href": "/year/#try-skill=MATH.number.addition"}, {"label": "Class 1 taking away", "href": "/year/#try-skill=MATH.number.subtraction"}, {"label": "Negative numbers (Start here)", "href": "/year/#try-skill=MATH.number.integers"}], "pr": 356},
-  {"date": "2026-11-25", "status": "live", "title": "Why? on every step of the generated lessons", "what": "Each worked step in a lesson has a Why? button; Break it down opens them all. 1,110 of 1,119 question types have reasons. Each tap is recorded.", "links": [{"label": "Trigonometry lessons in your dashboard (open a skill, look at Lesson screens)", "href": "/owner/"}, {"label": "As a child: sin, cos and tan", "href": "/year/#try-skill=MATH.trigonometry.ratios"}], "pr": 354, "commit": "a9e9a8b"},
-  {"date": "2026-11-24", "status": "live", "title": "Break it down on every Start here example (Class 1–12)", "what": "Every worked example before a lesson is shown as steps, each with its own Why?.", "links": [{"label": "Class 1 adding", "href": "/year/#try-skill=MATH.number.addition"}, {"label": "Class 9–10 matrices", "href": "/year/#try-skill=MATH.matrices.transpose-symmetry"}, {"label": "Class 11–12 determinants", "href": "/year/#try-skill=MATH.algebra.determinants"}], "pr": 352, "commit": "df2f7ea"},
-  {"date": "2026-11-24", "status": "live", "title": "A taught lesson for tangents to an ellipse", "what": "Five screens before the formula sheet: drag a point round an ellipse, one rule and why, every step written out, the normal. Twelve practice questions.", "links": [{"label": "Open as a child", "href": "/year/#try-skill=MATH.coordinate.conic-tangents-normals"}], "pr": 343, "commit": "48a8d7a"},
-  {"date": "2026-11-24", "status": "live", "title": "Open as a child, from your dashboard", "what": "Each skill in the dashboard has an 'Open as a child' link. The practice list is labelled as an answer key.", "links": [{"label": "Dashboard (open any skill)", "href": "/owner/"}], "pr": 341, "commit": "0a84baa"},
-  {"date": "2026-11-24", "status": "live", "title": "Pictures for the ideas before a lesson, and older drawings moved into the engine", "what": "28 more Start here ideas have a picture; every idea either has one or says why not. All maths teaching pictures are drawn by the one picture engine.", "links": [{"label": "Dashboard: picture decisions per idea", "href": "/owner/"}, {"label": "Solid shapes, as a child", "href": "/year/#try-skill=MATH.geometry.shape-properties"}], "pr": 340, "commit": "995f65c"},
-  {"date": "2026-11-24", "status": "live", "title": "Start here is measured", "what": "A finished Start here round is recorded and shown to the parent; a shaky idea is offered again before the chapter.", "links": [{"label": "Trigonometry, as a child", "href": "/year/#try-skill=MATH.trigonometry.ratios"}], "pr": 336, "commit": "b42de1d"}
+  {
+   "date": "2026-11-25",
+   "status": "live",
+   "title": "The counter and the lift for young children",
+   "what": "On a Class 1–5 adding or taking-away question, 'Break it down' (above 'Work it with me') opens a lift. The child drops +/− tiles (₹ coins for money) and the counter clicks through every number, pausing at 0. Change is counted up from the price. The instruction is read aloud after the first tap. Class 1–3 see no written reasons, and each 'Work it with me' step now states its numbers.",
+   "links": [
+    {
+     "label": "Class 1 adding: Lesson, then Break it down",
+     "href": "/year/#try-skill=MATH.number.addition"
+    },
+    {
+     "label": "Class 1 taking away: Lesson, then Break it down",
+     "href": "/year/#try-skill=MATH.number.subtraction"
+    },
+    {
+     "label": "Negative numbers: Start here lift",
+     "href": "/year/#try-skill=MATH.number.integers"
+    }
+   ],
+   "pr": 356
+  },
+  {
+   "date": "2026-11-25",
+   "status": "live",
+   "title": "Why? on every step of the generated lessons",
+   "what": "Each worked step in a lesson has a Why? button; Break it down opens them all. 1,110 of 1,119 question types have reasons. Each tap is recorded.",
+   "links": [
+    {
+     "label": "Trigonometry lessons in your dashboard (open a skill, look at Lesson screens)",
+     "href": "/owner/"
+    },
+    {
+     "label": "As a child: sin, cos and tan",
+     "href": "/year/#try-skill=MATH.trigonometry.ratios"
+    }
+   ],
+   "pr": 354,
+   "commit": "a9e9a8b"
+  },
+  {
+   "date": "2026-11-24",
+   "status": "live",
+   "title": "Break it down on every Start here example (Class 1–12)",
+   "what": "Every worked example before a lesson is shown as steps, each with its own Why?.",
+   "links": [
+    {
+     "label": "Class 1 adding",
+     "href": "/year/#try-skill=MATH.number.addition"
+    },
+    {
+     "label": "Class 9–10 matrices",
+     "href": "/year/#try-skill=MATH.matrices.transpose-symmetry"
+    },
+    {
+     "label": "Class 11–12 determinants",
+     "href": "/year/#try-skill=MATH.algebra.determinants"
+    }
+   ],
+   "pr": 352,
+   "commit": "df2f7ea"
+  },
+  {
+   "date": "2026-11-24",
+   "status": "live",
+   "title": "A taught lesson for tangents to an ellipse",
+   "what": "Five screens before the formula sheet: drag a point round an ellipse, one rule and why, every step written out, the normal. Twelve practice questions.",
+   "links": [
+    {
+     "label": "Open as a child",
+     "href": "/year/#try-skill=MATH.coordinate.conic-tangents-normals"
+    }
+   ],
+   "pr": 343,
+   "commit": "48a8d7a"
+  },
+  {
+   "date": "2026-11-24",
+   "status": "live",
+   "title": "Open as a child, from your dashboard",
+   "what": "Each skill in the dashboard has an 'Open as a child' link. The practice list is labelled as an answer key.",
+   "links": [
+    {
+     "label": "Dashboard (open any skill)",
+     "href": "/owner/"
+    }
+   ],
+   "pr": 341,
+   "commit": "0a84baa"
+  },
+  {
+   "date": "2026-11-24",
+   "status": "live",
+   "title": "Pictures for the ideas before a lesson, and older drawings moved into the engine",
+   "what": "28 more Start here ideas have a picture; every idea either has one or says why not. All maths teaching pictures are drawn by the one picture engine.",
+   "links": [
+    {
+     "label": "Dashboard: picture decisions per idea",
+     "href": "/owner/"
+    },
+    {
+     "label": "Solid shapes, as a child",
+     "href": "/year/#try-skill=MATH.geometry.shape-properties"
+    }
+   ],
+   "pr": 340,
+   "commit": "995f65c"
+  },
+  {
+   "date": "2026-11-24",
+   "status": "live",
+   "title": "Start here is measured",
+   "what": "A finished Start here round is recorded and shown to the parent; a shaky idea is offered again before the chapter.",
+   "links": [
+    {
+     "label": "Trigonometry, as a child",
+     "href": "/year/#try-skill=MATH.trigonometry.ratios"
+    }
+   ],
+   "pr": 336,
+   "commit": "b42de1d"
+  }
  ]
 }
