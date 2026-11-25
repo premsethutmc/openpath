@@ -22,7 +22,7 @@
   },
   {
    "date": "2026-11-25",
-   "status": "pending",
+   "status": "live",
    "title": "Count with me: a counting game for ages 3–6",
    "what": "A new 'Count with me' tile on the home screen opens a self-contained counting game: 10 illustrated pages (floor tiles, meadow sheep, pond, garden, mango tree, sea, night sky, hen house, market, road), counting up to 3 on page 1 and up to 10 on page 10. Each page has five rounds: count every one, find only one kind, compare which group has more, make a number, and a quick look at up to 5. Numbers are spoken (English or Tamil), difficulty adapts to the child, a hint glows after 7 seconds, and a grown-ups panel on its first screen shows progress on this phone.",
    "links": [
@@ -34,7 +34,9 @@
      "label": "Page 2, meadow sheep",
      "href": "/count/#p2"
     }
-   ]
+   ],
+   "pr": 361,
+   "commit": "61229a6"
   },
   {
    "date": "2026-11-25",
