@@ -4,7 +4,7 @@
  "entries": [
   {
    "date": "2026-11-25",
-   "status": "built",
+   "status": "live",
    "title": "The lift ride: Chintu in a building, a lift panel with big buttons",
    "what": "The lift is now the approved design. A building cut open: floors above in sky blue, floor 0 is the gold shop, the car park (minus floors) below, only the floors the question needs. Chintu rides in the lift; the child taps Start and presses the big green up or orange down button once for every floor. Each press closes the doors, moves one floor, opens them with a ding and says the floor ('minus one'; 0 is 'zero. The shop.'). A finger shows the first press, then 'Now you.' The wrong button shakes: 'Down, not up.' Quick taps all count. After each move the sum so far shows and is said (3 − 5 = −2), and at the end the whole sum (3 − 5 + 4 = 2), with Again. Lines are no longer said on top of each other. Money and temperature keep the counter.",
    "links": [
@@ -18,7 +18,7 @@
     }
    ],
    "pr": 362,
-   "commit": null
+   "commit": "73633a8"
   },
   {
    "date": "2026-11-25",
