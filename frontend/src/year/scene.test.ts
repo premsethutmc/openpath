@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { FAMILIES, pool } from "../../../packages/learning/src/families";
 import { evaluate, numericValue, parse, rhs } from "../../../packages/learning/src/answer-types";
-import { check, controls, curveOf, curveText, derivative, describe, draggable, draw, evalPoly, grip, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
+import { check, controls, curveOf, sceneBox, curveText, derivative, describe, draggable, draw, evalPoly, grip, fmt, initial, integral, measures, met, pointer, polyText, readout, set, states, type Scene } from "../../../packages/learning/src/scene";
 import { FIGURE_SCENES, SCENE_FAMILIES, sceneAnswer, sceneIsPicture, sceneForQuestion, sceneProbes } from "../../../packages/learning/src/scenes";
 
 const strips: Scene = { type: "scene", kind: "strips", poly: [0.5, 0, 0.25], from: 0, to: 4, prompt: "Add strips.", success: "Done.", goal: { measure: "gap", below: 0.1 } };
@@ -386,8 +386,9 @@ test("every scene of a released question states that question's own mathematics"
 test("tally@1: the counter and the lift counts every number, pauses at 0, keeps to its floors and its order", async () => {
   const E = await import("../../../packages/learning/src/scene");
   const { tallyClicks } = await import("../../../packages/learning/src/tally");
-  const add: Scene = { type: "scene", kind: "tally", start: 0, tiles: [2, 6], floors: [0, 10], prompt: "Put the tiles in the lift.", success: "2 and 6 more make 8.", goal: { measure: "total", equals: 8 } };
-  const down: Scene = { type: "scene", kind: "tally", start: 5, tiles: [-10], floors: [-6, 6], prompt: "Put the tile in.", success: "5 − 10 = −5.", goal: { measure: "total", equals: -5 } };
+  // (a counter with tiles: a thermometer; a scene without ₹, °C or m is a lift ride, tested below)
+  const add: Scene = { type: "scene", kind: "tally", start: 0, tiles: [2, 6], floors: [0, 10], unit: "°C", prompt: "Put the tiles in the lift.", success: "2 and 6 more make 8.", goal: { measure: "total", equals: 8 } };
+  const down: Scene = { type: "scene", kind: "tally", start: 5, tiles: [-10], floors: [-6, 6], unit: "°C", prompt: "Put the tile in.", success: "5 − 10 = −5.", goal: { measure: "total", equals: -5 } };
   for (const s of [add, down]) {
     assert.deepEqual(check(s), [], s.prompt);
     assert.equal(met(s, initial(s)), false);
@@ -429,6 +430,135 @@ test("tally@1: the counter and the lift counts every number, pauses at 0, keeps 
   assert.equal(first.dropped, 1); assert.equal(measures(any, first).total, 6); assert.equal(readout(any, first), "0 + 6 = 6");
   const both = E.release(any, pointer(any, first, x0, y0, 0), 120, 100);
   assert.equal(readout(any, both), "6 + 2 = 8"); assert.ok(met(any, both));
+});
+
+test("lift@1: the lift ride: Start, a finger's press, one press per floor said aloud, a wrong button refused, the sums", async () => {
+  const E = await import("../../../packages/learning/src/scene");
+  const { liftFloors, sayMs } = await import("../../../packages/learning/src/lift");
+  const s: Scene = { type: "scene", kind: "tally", start: 3, tiles: [-5, 4], floors: [-4, 6], prompt: "Go down 5 floors, then up 4.", success: "3 − 5 = −2, then −2 + 4 = 2.", goal: { measure: "total", equals: 2 } };
+  assert.deepEqual(check(s), []);
+  assert.ok(E.isLift(s) && !E.isLift({ ...s, unit: "₹" }) && !E.isLift({ ...s, unit: "°C" }) && !E.isLift({ ...s, unit: "m" }));
+  assert.ok(describe(s).includes("lift") && describe(s).includes("car park") && !describe(s).includes("makes 2"));
+  // only the floors the ride needs, a floor of margin (not a fixed −4 … 6); the ground when the ride is near it
+  assert.deepEqual(liftFloors(s as never), [-3, 4]);
+  assert.deepEqual(liftFloors({ start: 6, tiles: [3] }), [5, 10]);
+  assert.deepEqual(liftFloors({ start: 2, tiles: [3] }), [0, 6]);
+  assert.deepEqual(liftFloors({ start: 25, tiles: [-12] }), [12, 26]);
+  // a press is a tap: the finger goes down on a button and comes up on it; slid off, nothing is pressed
+  const at = (st: Record<string, number>, i: number): [number, number] => {
+    const b = draw(s, st).find((d) => (d.t === "circle" || d.t === "rect") && d.tap?.i === i) as { cx?: number; cy?: number; x?: number; y?: number; w?: number; h?: number } | undefined;
+    assert.ok(b, `button ${i} is drawn as a button`);
+    return b.cx !== undefined ? [b.cx, b.cy!] : [b.x! + b.w! / 2, b.y! + b.h! / 2];
+  };
+  const tap = (st: Record<string, number>, i: number) => E.release(s, pointer(s, st, ...at(st, i), grip(s, st, ...at(st, i))), ...at(st, i));
+  let st: Record<string, number> = initial(s);
+  assert.equal(E.cue(s, st), "Chintu takes the lift");
+  assert.equal(readout(s, st), "");
+  assert.equal(E.release(s, pointer(s, st, ...at(st, 2), 2), 5, 5).run, undefined, "slid off Start: nothing");
+  // before Start the lift buttons do nothing
+  assert.deepEqual(E.frames(s, st, tap(st, 1)).map((f) => f.say).filter(Boolean), []);
+  const log: string[] = [];
+  const go = (next: Record<string, number>) => { const fr = E.frames(s, st, next); for (const f of fr) if (f.say) log.push(f.say); for (const f of fr) if (f.say && f.say.split(" ").length > 3 && f !== fr[fr.length - 1]) assert.ok(f.ms >= sayMs(f.say), `"${f.say}" is given the time to be said`); st = fr[fr.length - 1].state; return fr; };
+  const intro = go(tap(st, 2));
+  assert.deepEqual(log, ["Chintu is on floor three.", "Go down five floors. Press down, five times.", "two", "Now you. Four more."]);
+  assert.ok(intro.some((f) => f.state.fin !== undefined && draw(s, f.state).some((d) => d.role === "lift-finger")), "a finger shows the first press");
+  assert.ok(intro.some((f) => f.state.door === 2) && intro.some((f) => f.sound === 1), "the doors close, and a ding at the floor");
+  assert.ok(intro.filter((f) => !f.motion).some((f) => f.state.fin === 2), "the finger is shown without motion too");
+  assert.equal(E.cue(s, st), "Now you");
+  // the wanted button glows, the other is dimmed; the task card says ▼ 5 with one dot filled
+  let sh = draw(s, st);
+  assert.ok(sh.some((d) => d.role === "lift-glow") && sh.some((d) => d.role === "lift-up-dim") && sh.some((d) => d.t === "text" && d.s === "▼ 5"));
+  assert.equal(sh.filter((d) => d.role === "lift-tick-on").length, 1);
+  assert.ok(sh.some((d) => d.t === "text" && d.role === "lift-disp-text" && d.s === "2"));
+  // the wrong button shakes and says which way
+  log.length = 0;
+  go(tap(st, 0));
+  assert.deepEqual(log, ["Down, not up."]);
+  assert.equal(E.nudge(s, st), "Down, not up.");
+  assert.ok(draw(s, st).some((d) => d.role === "lift-up-dim-no"), "the wrong button shakes and stays dimmed");
+  assert.equal(E.remind(s, st), "Press down. Four more.");
+  // four presses at once (fast taps, queued by the player): every floor is said, 0 is the shop, then where he is
+  log.length = 0;
+  let q = st; for (let i = 0; i < 4; i++) q = E.press(s, q, 1);
+  const fast = go(q);
+  assert.deepEqual(log, ["one", "zero. The shop.", "minus one", "minus two", "Floor minus two. That is basement two, in the car park. Now go up four floors."]);
+  assert.equal(fast.find((f) => f.say === "zero. The shop.")!.sound, 2);
+  assert.equal(E.nudge(s, st), null, "a good press clears the refusal");
+  assert.equal(readout(s, st), "3 − 5 = −2");
+  assert.equal(readout(s, fast.find((f) => f.say === "minus two")!.state), "", "the sum comes with its line");
+  assert.equal(E.cue(s, st), "Now go up 4 floors");
+  assert.ok(draw(s, st).some((d) => d.role === "lift-here") && draw(s, st).some((d) => d.t === "text" && d.role === "lift-disp-text" && d.s === "−2"));
+  assert.equal(met(s, st), false, "−2 on the way is not the end");
+  log.length = 0;
+  for (let i = 0; i < 3; i++) go(tap(st, 0));
+  const last = go(tap(st, 0));
+  assert.deepEqual(log, ["minus one", "zero. The shop.", "one", "two", "Floor two. Three, minus five, plus four, makes two."]);
+  // "Well done!" and Again only once the whole sum has been said (then Again works at once: nothing is playing)
+  for (const f of last.slice(0, -1)) { assert.notEqual(E.cue(s, f.state), "Well done!"); assert.ok(!draw(s, f.state).some((d) => d.t === "rect" && d.tap), "no Again yet"); }
+  // about 0.8 s a floor (the mock's pace), every floor word still said
+  const perFloor = last.slice(0, last.findIndex((f) => f.say === "two") + 1).reduce((a, f) => a + f.ms, 0);
+  assert.ok(perFloor <= 900, `${perFloor} ms for one floor`);
+  assert.ok(met(s, st));
+  assert.equal(readout(s, st), "3 − 5 + 4 = 2");
+  sh = draw(s, st);
+  assert.ok(sh.some((d) => d.t === "rect" && d.tap?.label === "Again") && !sh.some((d) => d.role === "lift-glow"));
+  // Again: the whole ride again, from floor 3
+  log.length = 0;
+  go(tap(st, 2));
+  assert.equal(log[0], "Chintu is on floor three.");
+  assert.equal(met(s, st), false);
+  // by keyboard: press() is the same as a tap; the slider sets the moves done
+  assert.equal(measures(s, E.press(s, st, 1)).total, 3);
+  assert.equal(liftAt(s, set(s, initial(s), "dropped", 1)), -2);
+  assert.ok(met(s, set(s, initial(s), "dropped", 2)));
+  // a press the wrong way while the car still moves is dropped, not refused seconds later; every other press waits its turn
+  assert.equal(E.queueable(s, st, E.press(s, st, 1)), true); assert.equal(E.queueable(s, st, E.press(s, st, 0)), false);
+  // the building: rows of at least 28, a window that follows the car on a long ride, stretched beside the panel when short
+  const { liftLayout } = await import("../../../packages/learning/src/scene-figures");
+  const tall = liftLayout([-30, 20], [-40, 22]), short = liftLayout([2], [0, 6]);
+  assert.ok(tall.H >= 28 && tall.seen === 16 && short.H * short.rows >= short.panel - 1, JSON.stringify([tall, short]));
+  const long: Scene = { ...s, start: 10, tiles: [-30, 20], floors: [-25, 15], goal: { measure: "dropped", equals: 2 } };
+  assert.deepEqual(check(long), []);
+  const car = (x: Record<string, number>) => (draw(long, x).find((d) => d.role === "lift-car") as { y: number }).y;
+  for (let p = 0; p <= 50; p++) { const y = car({ go: 1, p }); assert.ok(y >= 0 && y + 30 <= sceneBox(long).h, `the car is in view at press ${p}`); }
+  assert.ok(Math.abs(car({ go: 1, p: 15 }) + 19 - sceneBox(long).h / 2) < 30, "mid-ride the building scrolls to keep the car in the middle");
+  // reduced motion keeps every word and every floor
+  const still = E.frames(s, set(s, initial(s), "dropped", 1), set(s, initial(s), "dropped", 2)).filter((f) => !f.motion);
+  assert.deepEqual(still.map((f) => f.say).filter(Boolean).slice(0, 4), ["minus one", "zero. The shop.", "one", "two"]);
+  // a move of one floor gets no finger: "Press up, once."
+  const one: Scene = { ...s, tiles: [1], goal: { measure: "dropped", equals: 1 } };
+  assert.deepEqual(E.frames(one, initial(one), E.press(one, initial(one), 2)).map((f) => f.say).filter(Boolean), ["Chintu is on floor three.", "Go up one floor. Press up, once."]);
+  function liftAt(sc: Scene, x: Record<string, number>) { const t = draw(sc, x).find((d) => d.role === "lift-disp-text") as { s: string }; return Number(t.s.replace("−", "-")); }
+});
+
+test("play@1: taps at 80, 250 and 600 ms apart each move the lift one floor; none is lost, a wrong one is dropped", async () => {
+  const E = await import("../../../packages/learning/src/scene");
+  const { Playback } = await import("../../../packages/learning/src/scene-play");
+  const s: Scene = { type: "scene", kind: "tally", start: 3, tiles: [-5, 4], floors: [-4, 6], prompt: "Go down 5 floors, then up 4.", success: "Done.", goal: { measure: "total", equals: 2 } };
+  for (const gap of [1, 80, 250, 600, 1500]) {
+    // a fake clock: timers run in time order as the clock moves on
+    let now = 0;
+    const timers: { at: number; fn: () => void }[] = [];
+    const run = (until: number) => { for (;;) { timers.sort((a, b) => a.at - b.at); const t = timers[0]; if (!t || t.at > until) break; timers.shift(); now = t.at; t.fn(); } now = until; };
+    let shown: Record<string, number> = initial(s);
+    const said: string[] = [];
+    const pb: InstanceType<typeof Playback> = new Playback(s, initial(s), { state: (n) => { shown = n; }, show: () => undefined, frame: (f) => { if (f.say) said.push(f.say); }, done: () => undefined, later: (fn, ms) => timers.push({ at: now + ms, fn }) });
+    // a tap is the player's: finger down on the button (pointer), finger up on it (release), both from `live`
+    const tap = (i: number) => { const [x, y] = i === 0 ? [273, 126] : i === 1 ? [273, 226] : [273, 320]; pb.apply(E.pointer(s, pb.live, x, y)); pb.apply(E.release(s, pb.live, x, y)); };
+    tap(2); run(now + 60000);
+    assert.equal(liftFloor(pb.live), 2, "after the finger's press");
+    for (let k = 0; k < 4; k++) { tap(1); run(now + gap); }
+    tap(1); run(now + gap); // one too many, while the car still moves: dropped (no "Down, not up." to a press that was right then)
+    run(now + 60000);
+    assert.equal(liftFloor(shown), -2, `taps ${gap} ms apart: four floors down`);
+    assert.ok(!said.includes("Up, not down."), `taps ${gap} ms apart: ${said.join(" | ")}`);
+    for (let k = 0; k < 4; k++) { tap(0); run(now + gap); }
+    run(now + 60000);
+    assert.equal(liftFloor(shown), 2, `taps ${gap} ms apart: four floors up`);
+    assert.ok(E.met(s, shown));
+    assert.deepEqual(said.filter((t) => /^(minus |zero|one$|two$)/.test(t)), ["two", "one", "zero. The shop.", "minus one", "minus two", "minus one", "zero. The shop.", "one", "two"], `taps ${gap} ms apart`);
+  }
+  function liftFloor(x: Record<string, number>) { return Number((draw(s, x).find((d) => d.role === "lift-disp-text") as { s: string }).s.replace("−", "-")); }
 });
 
 test("boxes@1: things in two boxes are counted box by box, then put on the ten-spot board in order", async () => {

@@ -9,6 +9,10 @@
  * Where it is used: Class 1–2 adding (only + tiles, floors from 0), Class 3–4 taking away (− tiles, never below 0),
  * Class 6–7 integers (below 0). Money and objects are the same picture with a `unit`.
  *
+ * lift@1: a tally scene that counts floors (no ₹, °C or m, and not change counted up) is drawn and worked as a lift ride
+ * instead (lift.ts: a building with Chintu in the lift and a ▲ ▼ panel, one press per floor); money and thermometers keep
+ * the counter and tiles described here.
+ *
  * This file holds the description and the arithmetic only. The scene engine (scene.ts) gives it controls, a goal and a
  * drawing, and the one player (frontend/src/year/Scene.tsx) draws it. step-scenes.ts builds one from a worked question.
  */

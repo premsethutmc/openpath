@@ -3,6 +3,7 @@ import { useState } from "react";
 import { pictureScene } from "../../../packages/learning/src/foundation-pictures";
 import { PictureExplore, PictureRound } from "./PictureTasks";
 import { SceneFigure, ScenePlayer } from "./Scene";
+import { isLift } from "../../../packages/learning/src/scene";
 import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
@@ -112,7 +113,8 @@ export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; co
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
       {s.scene ? <ScenePlayer scene={s.scene} young={cls !== undefined && cls <= 3} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
-      {s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
+      {/* lift@1: a lift ride says everything itself; no reading under it for a child who cannot read yet */}
+      {s.scene && isLift(s.scene) ? null : s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
       {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
       {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
       {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{mx(t)}</p>)}

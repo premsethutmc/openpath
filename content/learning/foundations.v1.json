@@ -24211,7 +24211,7 @@
        0,
        10
       ],
-      "prompt": "Start at 3. Put 2 more in.",
+      "prompt": "Go up 2 floors.",
       "success": "3, then 2 more: 5! So 3 + 2 = 5.",
       "goal": {
        "measure": "total",
@@ -24219,7 +24219,7 @@
       }
      },
      "text": [
-      "Watch the lift go up. Count with it."
+      "Press up once for every floor. Count with Chintu."
      ]
     }
    ],
@@ -27388,7 +27388,7 @@
        -4,
        6
       ],
-      "prompt": "Put the tiles in the lift, one by one.",
+      "prompt": "Go down 5 floors, then up 4.",
       "success": "3 − 5 = −2, then −2 + 4 = 2. Down past 0, and back up.",
       "goal": {
        "measure": "total",
@@ -27396,7 +27396,7 @@
       }
      },
      "text": [
-      "Below the ground floor 0 are −1, −2, −3: the B1, B2, B3 of a mall lift."
+      "Below the shop on floor 0 is the car park: floors −1, −2, −3."
      ]
     }
    ],
