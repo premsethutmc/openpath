@@ -31,7 +31,7 @@
  * and areas), a `triangle` kind (two angles set, the third follows), and a line that turns about a fixed point (`through`).
  */
 
-import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, TALLY_BOX, tallyDraw, tallyInDrop, tallyTileAt, tallyTileXY, tangentAt, tangentDraw, tangentOf, tileText, type PickFigure } from "./scene-figures";
+import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, TALLY_BOX, tallyDraw, tallyInDrop, tallyTileAt, tallyNum, tallyTileXY, tangentAt, tangentDraw, tangentOf, tileText, type PickFigure } from "./scene-figures";
 import { tallyClicks, tallyProblems, type TallyScene } from "./tally";
 export type { PickFigure } from "./scene-figures";
 
@@ -137,7 +137,8 @@ export type Shape =
   | { t: "path"; d: string; role: string }
   | { t: "rect"; x: number; y: number; w: number; h: number; role: string }
   | { t: "circle"; cx: number; cy: number; r: number; role: string }
-  | { t: "text"; x: number; y: number; s: string; role: string };
+  /** `clip`: the text is seen only inside this box (a counter's rolling digit stays in its window) */
+  | { t: "text"; x: number; y: number; s: string; role: string; clip?: { x: number; y: number; w: number; h: number } };
 
 export const SCENE_BOX = { w: 340, h: 220 } as const;
 /** The box a scene is drawn in: 340 × 220, except the tall lift of a tally scene. */
@@ -387,7 +388,7 @@ export function triedLine(s: Scene, rows: number): string | null {
 }
 export function nudge(s: Scene, state: SceneState): string | null {
   // tally@1: a tile dropped out of turn went back; the one to drop now is named (it is the next tile, not an answer)
-  if (s.kind === "tally") return state.refused && state.dropped < s.tiles.length ? `Not yet. First the ${tileText(s.tiles[state.dropped])} tile.` : null;
+  if (s.kind === "tally") return state.refused && state.dropped < s.tiles.length ? `Not yet. First the ${tileText(s.tiles[state.dropped], s.unit)} tile.` : null;
   // pick-nudge@1: a wrong tap is named back (what that part is), with the scene's own hint; never which part is right
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined || s.ask.includes(id) ? null : `That is ${pickName(s.figure, id)}. ${s.hint}`; }
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
@@ -415,12 +416,14 @@ export function readout(s: Scene, state: SceneState): string {
   if (s.kind === "tally") {
     // "2 + 6 = 8" from the tiles in so far ("5 − 10 = −5"); "= …" while the counter is still counting
     const order = tallyOrder(s, state), total = tallyTotal(s, state);
-    if (!order.length) return `Start at ${fmt(s.start)}`;
+    // money reads in rupees everywhere it is written ("₹2 + ₹2 = ₹4"), as the tiles, the car and the counter do
+    const u = (n: number) => tallyNum(n, s.unit);
+    if (!order.length) return `Start at ${u(s.start)}`;
     // a start of 0 is left out once two tiles are in ("2 + 6 = 8"); one tile from 0 reads "0 + 2 = 2"
     const bare = s.start === 0 && s.tiles[order[0]] > 0 && order.length > 1;
-    const terms = order.map((i, k) => (k === 0 && bare ? fmt(s.tiles[i]) : `${s.tiles[i] < 0 ? "−" : "+"} ${fmt(Math.abs(s.tiles[i]))}`));
-    const head = bare ? terms.join(" ") : `${fmt(s.start)} ${terms.join(" ")}`;
-    return `${head} = ${state.at !== undefined && state.at !== total ? "…" : fmt(total)}`;
+    const terms = order.map((i, k) => (k === 0 && bare ? u(s.tiles[i]) : `${s.tiles[i] < 0 ? "−" : "+"} ${u(Math.abs(s.tiles[i]))}`));
+    const head = bare ? terms.join(" ") : `${u(s.start)} ${terms.join(" ")}`;
+    return `${head} = ${state.at !== undefined && state.at !== total ? "…" : u(total)}`;
   }
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined ? "Tap the picture to choose." : `You chose ${pickName(s.figure, id).split(":")[0]}.`; }
   if (s.kind === "tangent") { const t = tangentOf(s.a, s.b, state.turn), two = (n: number) => fmt(Math.round(n * 100) / 100); return `Point (${two(t.x)}, ${two(t.y)}) · ${t.upright ? "the tangent is straight up: it has no slope" : t.flat ? "the tangent is flat: slope 0" : `slope of the tangent = ${two(t.slope)}`}${s.normal && !t.upright && !t.flat ? ` · slope of the normal = ${two(-1 / t.slope)}` : ""}`; }
@@ -774,7 +777,7 @@ export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
 export function describe(s: Scene): string {
   if (s.kind === "tally") {
     const [lo, hi] = s.floors, u = s.unit ? ` (${s.unit})` : "";
-    return `A lift beside a big counter${u}. The lift starts on floor ${fmt(s.start)}. Its floors go from ${fmt(lo)} to ${fmt(hi)}; 0 is the ground floor${lo < 0 ? ", and the floors below it are basement floors with minus numbers" : ""}. Tiles to put in the lift${s.anyOrder ? ", in any order" : ", one after another"}: ${s.tiles.map(tileText).join(", ")}. A plus tile takes the lift up and a minus tile takes it down, one floor at a time, and the counter says every number on the way. Tap a tile or drag it to the lift, or use the slider. ${s.prompt}`;
+    return `A lift beside a big counter${u}. The lift starts on floor ${fmt(s.start)}. Its floors go from ${fmt(lo)} to ${fmt(hi)}; 0 is the ground floor${lo < 0 ? ", and the floors below it are basement floors with minus numbers" : ""}. Tiles to put in the lift${s.anyOrder ? ", in any order" : ", one after another"}: ${s.tiles.map((t) => tileText(t, s.unit)).join(", ")}. A plus tile takes the lift up and a minus tile takes it down, one floor at a time, and the counter says every number on the way. Tap a tile or drag it to the lift, or use the slider. ${s.prompt}`;
   }
   if (s.kind === "pick") return `A picture of ${pickWords(s.figure)}. Its parts can be chosen by tapping them, or with a slider. ${s.prompt}`;
   if (s.kind === "tangent") return `An interactive ellipse, ${s.a} units wide each side of its centre and ${s.b} units high. A point moves round it, by dragging or with a slider, and the tangent line${s.normal ? " and the normal" : ""} at the point is drawn, with its slope. ${s.prompt}`;

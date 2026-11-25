@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { STEP_SCENE_FAMILIES, breakItDown, chainOf, stepScene } from "../../../packages/learning/src/step-scenes";
-import { check, initial, met, set } from "../../../packages/learning/src/scene";
+import { check, draw, initial, met, readout, set, type Shape } from "../../../packages/learning/src/scene";
 import { tallyAt, tallyClicks, tallyProblems } from "../../../packages/learning/src/tally";
 import { classOfQuestion } from "../year/StepCoach";
 
@@ -99,4 +99,41 @@ test("step-scene@1: the class rule: pictures instead of words up to Class 5, no 
   assert.deepEqual(breakItDown(pos, 6), { scene: null, words: true });
   // an unknown class keeps things as they were
   assert.deepEqual(breakItDown(a, null), { scene: null, words: true });
+});
+
+test("step-scene@1: the picture's layout: labels never reach the counter, floors are not crowded, money reads in rupees", () => {
+  type T = Extract<Shape, { t: "text" }>;
+  let n = 0;
+  for (const fam of Object.keys(STEP_SCENE_FAMILIES)) for (const pr of pool(fam).items) {
+    const s = stepScene(pr.id);
+    if (!s) continue;
+    n++;
+    for (const dropped of [0, s.tiles.length]) {
+      const shapes = draw(s, set(s, initial(s), "dropped", dropped));
+      const texts = shapes.filter((x): x is T => x.t === "text");
+      const counter = shapes.find((x) => x.role === "tally-counter") as Extract<Shape, { t: "rect" }>;
+      // a step label ("+2", "−₹48") is centred in its own column and ends before the counter's column starts
+      for (const t of texts.filter((x) => /^tally-step-(up|down)-text$/.test(x.role))) assert.ok(t.x + (t.s.length * 9) / 2 < counter.x, `${pr.id}: ${t.s} reaches the counter`);
+      // the rolling digit is clipped to the counter's window
+      const roll = texts.find((x) => x.role.startsWith("tally-roll"))!;
+      assert.ok(roll.clip && roll.clip.x >= counter.x && roll.clip.x + roll.clip.w <= counter.x + counter.w, pr.id);
+      // floor numbers: at most 16, never two on top of each other, the start and the end always among them
+      const fl = texts.filter((x) => x.role === "tally-flabel");
+      assert.ok(fl.length <= 16, `${pr.id}: ${fl.length} floor labels`);
+      const ys = fl.map((x) => x.y).sort((a, b) => a - b);
+      for (let i = 1; i < ys.length; i++) assert.ok(ys[i] - ys[i - 1] >= 13, `${pr.id}: floor labels too close`);
+      const end = tallyAt(s.start, s.tiles, s.tiles.length), say = (v: number) => (v < 0 ? `−${-v}` : String(v));
+      // (the start gives way to the end when the two are too close to write both)
+      const fh = 382 / (s.floors[1] - s.floors[0] + 1);
+      for (const v of [s.start, end]) if (v !== 0 && (v === end || Math.abs(v - end) * fh >= 15)) assert.ok(fl.some((x) => x.s === say(v)), `${pr.id}: floor ${v} is labelled`);
+      // clear of the round 0 marker
+      const zero = shapes.find((x) => x.role === "tally-zero" || x.role === "tally-zero-on") as Extract<Shape, { t: "circle" }> | undefined;
+      if (zero) for (const t of fl) assert.ok(Math.abs(t.y - 5 - zero.cy) >= zero.r + 5, `${pr.id}: label ${t.s} on the 0 marker`);
+      if (s.unit === "₹") {
+        assert.ok(texts.filter((x) => x.role.startsWith("tally-tiletext") || x.role.startsWith("tally-cartext")).every((x) => x.s.includes("₹")), `${pr.id}: tiles and car in rupees`);
+        assert.ok(roll.s.includes("₹") && readout(s, set(s, initial(s), "dropped", dropped)).includes("₹"), pr.id);
+      }
+    }
+  }
+  assert.ok(n > 300, String(n));
 });

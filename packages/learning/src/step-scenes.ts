@@ -139,3 +139,11 @@ export function breakItDown(questionId: string, cls: number | null): { scene: Ta
   const below = !!scene && tallyClicks(scene.start, scene.tiles).some((n) => n < 0);
   return { scene: below ? scene : null, words: true };
 }
+
+/**
+ * step-scene@1 where the child works the example ("Work it with me", the child build's lessons): the counter and the
+ * lift for a Class 1–5 question (`cls`, the question's class) that has one, opened by "Break it down" above the steps.
+ */
+export function liftFor(questionId: string, cls: number | null): TallyScene | null {
+  return cls !== null && cls <= 5 ? stepScene(questionId) : null;
+}

@@ -9,21 +9,31 @@
 import { useState } from "react";
 
 /** How a line of maths is said aloud. */
-export const spoken = (t: string) => t.replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/=/g, " equals ").replace(/▢|□|\?$/g, " what ").replace(/√/g, " the square root of ").replace(/\s+/g, " ").trim();
-const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+export const spoken = (t: string) => t.replace(/₹(\d+)/g, "$1 rupees ").replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/=/g, " equals ").replace(/▢|□|\?$/g, " what ").replace(/√/g, " the square root of ").replace(/\s+/g, " ").trim();
+export const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+
+/**
+ * Say `text` aloud with the phone's own voice (an Indian English one when the phone lists it), stopping anything still
+ * being said. Quietly does nothing where there is no speech. `done` is called when it ends or fails.
+ */
+export function sayAloud(text: string, done?: () => void): boolean {
+  if (!canSpeak()) return false;
+  try {
+    const synth = window.speechSynthesis;
+    if (synth.speaking || synth.pending) synth.cancel();
+    const u = new SpeechSynthesisUtterance(spoken(text));
+    const voice = (synth.getVoices?.() ?? []).find((v) => v.lang.replace("_", "-").toLowerCase() === "en-in");
+    if (voice) u.voice = voice;
+    u.lang = "en-IN"; u.rate = 0.9;
+    u.onend = () => done?.(); u.onerror = () => done?.();
+    synth.speak(u);
+    return true;
+  } catch { done?.(); return false; }
+}
 
 export function Chintu({ say }: { say: string }) {
   const [talking, setTalking] = useState(false);
-  const hear = () => {
-    try {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(spoken(say));
-      u.lang = "en-IN"; u.rate = 0.9;
-      u.onend = () => setTalking(false); u.onerror = () => setTalking(false);
-      setTalking(true);
-      window.speechSynthesis.speak(u);
-    } catch { setTalking(false); }
-  };
+  const hear = () => setTalking(sayAloud(say, () => setTalking(false)));
   return (
     <div className="chintu" data-testid="chintu">
       <svg className="chintu-cat" viewBox="0 0 64 64" role="img" aria-label="Chintu the cat">
