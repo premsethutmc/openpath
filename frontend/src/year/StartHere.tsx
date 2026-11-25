@@ -45,9 +45,7 @@ export function SteppedMath({ lines, whys, qid, onWhy }: { lines: string[]; whys
     <div className="formula stepped" data-stepped>
       <p className="sh-ask">{mx(lines[0])}</p>
       {(has || scene) && <button type="button" className="sh-show sh-break" aria-pressed={all} onClick={toggle}>{all ? "Show less" : "Break it down"}</button>}
-      {/* the counter and the lift: one tile per step below, so the child links each drop to a step. TallyScene is not yet
-          in the engine's Scene union on this branch (the engine branch adds it); the cast goes once both are merged. */}
-      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene as unknown as Parameters<typeof ScenePlayer>[0]["scene"]} /></div> : null}
+      {scene && shown ? <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} /></div> : null}
       <ol>{lines.slice(1).map((m, k) => (
         <li className="sh-step" key={k}>
           <p className="sh-step-do"><span className="sh-step-n">Step {k + 1}</span></p>
