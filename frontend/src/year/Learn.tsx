@@ -15,6 +15,7 @@ import { checkWorkingLines } from "../../../packages/learning/src/line-check";
 import { MORE_KEYS, typeKey } from "./working-keys";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useEffect, useMemo, useState, useRef } from "react";
+import { mixedPracticeItem } from "../../../packages/learning/src/mixed-practice";
 import {useResume} from "./resume";
 import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
@@ -916,6 +917,17 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
   const teachMe = KID && reviewStrategy && (ms.phase === "explore" || ms.phase === "check")
     ? <button className="secondary wide kid-learn" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>I don't know this yet — teach me 📖</button>
     : null;
+  // mixed-practice@1: in practice with feedback, after a few answers on this skill, one fresh question from a skill shown earlier
+  // (most faded first). It is an ordinary practice answer on that skill; a check or test is never mixed.
+  const mixed = ms.question && curActivity === "practice" && !withinRecovery && !established ? mixedPracticeItem(competency, ctx.records, ctx.now, ctx.session) : null;
+  if (mixed)
+    return (
+      <div className="stack" data-mixed-practice={mixed.competency}>
+        {head}
+        <p className={KID ? "kid-saved" : "why"} role="note">{KID ? "🔀 A quick one from earlier — keep it fresh!" : `Mixed practice: a question from ${graph.get(mixed.competency).name}, which you showed earlier, to keep it fresh.`}</p>
+        <Ask resumeKey={resumeKey && `${resumeKey}:mixed:${mixed.question}`} key={`mixed:${mixed.question}`} qid={mixed.question} activity="practice" ctx={ctx} onAnswered={setFb} />
+      </div>
+    );
   if (ms.question)
     return (
       <div className="stack">
