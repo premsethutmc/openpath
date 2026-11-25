@@ -187,9 +187,13 @@ test("the fraction bar, the number line and the rows of counters", () => {
   const one: Scene = { type: "scene", kind: "fraction", target: [1, 4], shaded: 1, prompt: "Smaller.", success: "Smaller.", goal: { measure: "ahead", below: 0 } };
   const jump: Scene = { type: "scene", kind: "numberline", from: -10, to: 10, step: 1, start: 3, label: 5, jump: true, prompt: "Jump.", success: "There.", goal: { measure: "x", equals: -2 } };
   const near: Scene = { type: "scene", kind: "numberline", from: 340, to: 350, step: 1, start: 347, near: 10, prompt: "Nearest.", success: "350.", goal: { measure: "x", equals: 350 } };
+  const size: Scene = { type: "scene", kind: "numberline", from: -6, to: 6, step: 1, start: 2, size: true, prompt: "Slide.", success: "4 from 0.", goal: { measure: "x", equals: -4 } };
+  assert.equal(readout(size, { x: -4 }), "−4 is 4 from 0 · |−4| = 4"); assert.equal(measures(size, { x: -4 }).size, 4);
+  assert.ok(JSON.stringify(draw(size, { x: -4 })).includes("4 from 0") && !JSON.stringify(draw(size, { x: 0 })).includes("from 0"));
+  assert.deepEqual(check({ ...size, from: 1 } as Scene).length, 1);
   const dots: Scene = { type: "scene", kind: "array", total: 12, rows: 3, prompt: "Make 12.", success: "3 rows of 4.", goal: { measure: "off", equals: 0 } };
   const free: Scene = { type: "scene", kind: "array", total: 13, prompt: "Make 13.", success: "One row.", goal: { measure: "off", equals: 0 } };
-  for (const s of [bar, hundred, one, jump, near, dots, free]) {
+  for (const s of [bar, hundred, one, jump, near, size, dots, free]) {
     assert.deepEqual(check(s), [], s.kind); assert.ok(describe(s).length > 20 && !met(s, initial(s)));
     for (const st of states(s)) {
       for (const v of Object.values(measures(s, st))) assert.ok(Number.isFinite(v));
@@ -211,7 +215,7 @@ test("the fraction bar, the number line and the rows of counters", () => {
   // the number line: the point follows the finger to the nearest mark
   const at = draw(jump, { x: -2 }).filter((x) => x.t === "circle" && x.role === "handle")[0] as { cx: number; cy: number };
   assert.deepEqual(pointer(jump, initial(jump), at.cx, at.cy), { x: -2 });
-  assert.deepEqual(measures(jump, { x: -2 }), { x: -2, moved: -5 });
+  assert.deepEqual(measures(jump, { x: -2 }), { x: -2, moved: -5, size: 2 });
   assert.equal(readout(near, { x: 350 }), "At 350");
   assert.deepEqual(measures(dots, { c: 4 }), { rows: 3, cols: 4, count: 12, off: 0, left: 0 });
   assert.equal(readout(dots, { c: 5 }), "3 rows of 5 = 15 · 3 more than 12"); assert.equal(readout(free, { r: 1, c: 13 }), "1 row of 13 = 13");

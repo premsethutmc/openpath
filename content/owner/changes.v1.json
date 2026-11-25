@@ -4,6 +4,20 @@
  "entries": [
   {
    "date": "2026-11-25",
+   "status": "built",
+   "title": "Absolute value: a live number line instead of a still picture",
+   "what": "In the polygon-area skill (Class 10–11), the Start here idea on the | | bars now has a number line the learner slides. A bar from 0 to the point shows its distance from 0 and reads |−4| = 4. The lift story and the 'removes a minus sign' shortcut are gone; the text now says plainly why the area formula needs the bars.",
+   "links": [
+    {
+     "label": "Polygon areas: Start here, The bars mean distance from 0",
+     "href": "/year/#try-skill=MATH.coordinate.polygon-area"
+    }
+   ],
+   "pr": null,
+   "commit": null
+  },
+  {
+   "date": "2026-11-25",
    "status": "live",
    "title": "The lift ride: Chintu in a building, a lift panel with big buttons",
    "what": "The lift is now the approved design. A building cut open: floors above in sky blue, floor 0 is the gold shop, the car park (minus floors) below, only the floors the question needs. Chintu rides in the lift; the child taps Start and presses the big green up or orange down button once for every floor. Each press closes the doors, moves one floor, opens them with a ding and says the floor ('minus one'; 0 is 'zero. The shop.'). A finger shows the first press, then 'Now you.' The wrong button shakes: 'Down, not up.' Quick taps all count. After each move the sum so far shows and is said (3 − 5 = −2), and at the end the whole sum (3 − 5 + 4 = 2), with Again. Lines are no longer said on top of each other. Money and temperature keep the counter.",

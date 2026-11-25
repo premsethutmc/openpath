@@ -11298,17 +11298,15 @@
    "evidence": "The area formula 'Area = ½ |x₁(y₂ − y₃) + ...|' and the step '½ × |−10| = 5' use the bars, but absolute value is only taught in a class 11 skill.",
    "screens": [
     {
-     "title": "The bars mean size only",
+     "title": "The bars mean distance from 0",
      "text": [
-      "A lift standing 3 floors below the ground is at floor −3. How far is it from the ground floor? 3 floors. A distance does not care about direction.",
-      "The absolute value of a number is its distance from 0 on the number line. It is written with two upright bars: |−3| = 3 and |3| = 3. It removes a minus sign and leaves a positive number as it is.",
-      "An area can never be negative. But a formula built from coordinates can come out negative, depending on the order in which you take the points. The bars put that right."
+      "|x| is how far x is from 0. A distance has no direction, so it is never negative: |−4| = 4, |4| = 4, |0| = 0.",
+      "Why you need it here: the area formula gives +10 if you go round a triangle one way and −10 the other way. Area = ½ × |−10| = 5 either way. The bars keep the size and drop the direction."
      ],
      "check": {
       "question": "What is |−7|?",
       "answer": "7"
      },
-     "picture": "number-line",
      "ask": "Work out |−10|, |10|, |0| and ½ × |−10|.",
      "steps": [
       {
@@ -11348,7 +11346,22 @@
        ]
       }
      ],
-     "stepsAre": "cases"
+     "stepsAre": "cases",
+     "scene": {
+      "type": "scene",
+      "kind": "numberline",
+      "from": -6,
+      "to": 6,
+      "step": 1,
+      "start": 2,
+      "size": true,
+      "prompt": "Slide the point to −4. Watch its distance from 0.",
+      "success": "−4 is 4 from 0, so |−4| = 4. The same as |4|.",
+      "goal": {
+       "measure": "x",
+       "equals": -4
+      }
+     }
     }
    ],
    "practice": [
