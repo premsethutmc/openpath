@@ -106,7 +106,14 @@ export const LIFT = {
   /** the end: the whole sum */
   sum: (s: Ride) => { const end = tallyClicks(s.start, s.tiles).pop()!; return `Floor ${numWords(end)}. ${cap(numWords(s.start))}, ${s.tiles.map((t) => `${t < 0 ? "minus" : "plus"} ${numWords(Math.abs(t))}`).join(", ")}, makes ${numWords(end)}.`; },
   wrong: (want: number) => (want < 0 ? "Down, not up." : "Up, not down."),
+  /** said again when no button is pressed for a while */
+  remind: (want: number, left: number) => `Press ${want > 0 ? "up" : "down"}. ${cap(numWords(left))} more.`,
 };
+/** What to say when the child has pressed nothing for a while in the middle of a ride, or null. */
+export function liftRemind(s: Ride, st: St): string | null {
+  const n = liftNow(s, st);
+  return n.started && !n.finished ? LIFT.remind(n.want, Math.abs(s.tiles[n.k]) - n.done) : null;
+}
 /** How long a line takes to say (rate 0.9): the next line waits for it, so two lines never run into each other. */
 export const sayMs = (t: string) => 200 + 360 * t.split(/\s+/).filter(Boolean).length + 250 * Math.max(0, (t.match(/[.!?]/g) ?? []).length - 1);
 
@@ -115,6 +122,8 @@ export function liftCue(s: Ride, st: St): string {
   const n = liftNow(s, st), t = s.tiles[Math.min(n.k, s.tiles.length - 1)], go = (x: number) => `${dirOf(x)} ${Math.abs(x)} floor${Math.abs(x) === 1 ? "" : "s"}`;
   if (!n.started) return "Chintu takes the lift";
   if (st.ph === 1) return `Chintu is on floor ${liftSign(s.start)}`;
+  // (until the whole sum has been said, the last move is still the line)
+  if (n.finished && st.hold) return `${s.tiles.length > 1 ? "Now go" : "Go"} ${go(s.tiles[s.tiles.length - 1])}`;
   if (n.finished) return "Well done!";
   if (st.ph === 2 || (n.k === 0 && n.done === 0)) return `Go ${go(t)}`;
   return n.k === 0 ? "Now you" : `Now go ${go(t)}`;
@@ -127,17 +136,21 @@ export function liftSum(s: Ride, st: St): string {
   return `${liftSign(s.start)} ${ts.map((t) => `${t < 0 ? "−" : "+"} ${Math.abs(t)}`).join(" ")} = ${liftSign(end)}`;
 }
 
-/** The floors from press `from` to press `to`, one by one: doors shut, the car moves, doors open with a ding and the
- *  floor said; a finished move adds its line. `extra` is kept on every picture (the finger of the demonstration). */
+/** How long a floor stays once reached: long enough for its word (said quickly, it is one or two words). */
+const floorMs = (f: number) => (f === 0 ? 1000 : Math.max(480, 150 + 330 * LIFT.floor(f).split(" ").length - 340));
+/** The floors from press `from` to press `to`, one by one (about 0.8 s a floor): doors shut, the car moves, doors open
+ *  with a ding and the floor said; a finished move adds its line. `extra` is kept on every picture (the finger of the
+ *  demonstration). The end (`hold`) keeps Again and "Well done!" back until the whole sum has been said. */
 function ride(s: Ride, base: St, from: number, to: number, extra: St = {}): Frame[] {
   const path = tallyClicks(s.start, s.tiles), cum = liftCum(s.tiles), out: Frame[] = [];
   for (let q = from + 1; q <= to; q++) {
     const a = path[q - 1], b = path[q], at = { ...base, ...extra, p: q - 1 }, j = cum.indexOf(q);
-    out.push({ state: { ...at, at: a, door: 2 }, ms: 220, motion: true });
-    for (const t of [0.35, 0.7]) out.push({ state: { ...at, at: a + (b - a) * t, door: 2 }, ms: 130, motion: true });
-    out.push({ state: { ...base, ...extra, p: q, at: b, lit: 1, ...(j > 0 ? { wait: 1 } : {}) }, ms: Math.max(700, sayMs(LIFT.floor(b))), say: LIFT.floor(b), sound: b === 0 ? 2 : 1 });
+    const end: St = j === s.tiles.length ? { hold: 1 } : {};
+    out.push({ state: { ...at, at: a, door: 2 }, ms: 120, motion: true });
+    for (const t of [0.4, 0.75]) out.push({ state: { ...at, at: a + (b - a) * t, door: 2 }, ms: 110, motion: true });
+    out.push({ state: { ...base, ...extra, p: q, at: b, lit: 1, ...end, ...(j > 0 ? { wait: 1 } : {}) }, ms: floorMs(b), say: LIFT.floor(b), sound: b === 0 ? 2 : 1 });
     if (j > 0 && j < s.tiles.length) { const line = LIFT.next(b, s.tiles[j]); out.push({ state: { ...base, ...extra, p: q }, ms: sayMs(line), say: line }); }
-    if (j === s.tiles.length) { const line = LIFT.sum(s); out.push({ state: { ...base, ...extra, p: q }, ms: sayMs(line), say: line }); }
+    if (j === s.tiles.length) { const line = LIFT.sum(s); out.push({ state: { ...base, ...extra, p: q, hold: 1 }, ms: sayMs(line), say: line }); }
   }
   return out;
 }
@@ -148,7 +161,7 @@ export function liftFrames(s: Ride, prev: St, next: St): Frame[] {
   // Start (or Again): where Chintu is, the first move, and a finger that makes its first press
   if ((next.run ?? 0) !== (prev.run ?? 0)) {
     const base = liftRest(next), t0 = s.tiles[0], intro = LIFT.intro(s.start), move = LIFT.move(t0);
-    const out: Frame[] = [{ state: { ...base, ph: 1 }, ms: sayMs(intro), say: intro }];
+    const out: Frame[] = [{ state: { ...base, ph: 1 }, ms: sayMs(intro), say: intro, fresh: true }];
     if (Math.abs(t0) < 2) return [...out, { state: base, ms: 0, say: move }];
     out.push({ state: { ...base, ph: 2 }, ms: sayMs(move), say: move });
     for (const f of [1, 1.35, 1.7]) out.push({ state: { ...base, ph: 2, fin: f }, ms: f === 1 ? 450 : 160, motion: true });

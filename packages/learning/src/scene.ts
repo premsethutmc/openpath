@@ -39,7 +39,7 @@
 
 import { pickAt, pickCheck, pickDraw, pickName, pickParts, pickWords, ratiosAt, ratiosDraw, ratiosOf, TALLY_BOX, tallyDraw, tallyInDrop, tallyTileAt, tallyNum, tallyTileXY, tallyTileLabel, tangentAt, tangentDraw, tangentOf, tileText, type PickFigure } from "./scene-figures";
 import { tallyAt, tallyClicks, tallyProblems, type TallyScene } from "./tally";
-import { LIFT, liftAct, liftCue, liftCum, liftFloors, liftFrames, liftLook, liftNow, liftProblems, liftRest, liftSum } from "./lift";
+import { LIFT, liftAct, liftRemind, liftCue, liftCum, liftFloors, liftFrames, liftLook, liftNow, liftProblems, liftRest, liftSum } from "./lift";
 import { liftButtonAt, liftDraw, liftLayout } from "./scene-figures";
 import { boxesDraw, boxesLayout, boxesOnBoard, boxesThingAt, boxesThingXY } from "./scene-figures";
 import { boxesAct, boxesAt, boxesCue, boxesMany, boxesNow, boxesProblems, boxesRefusal, boxesRest, boxesSum, WORDS, type BoxesScene } from "./boxes";
@@ -521,8 +521,8 @@ export function draw(s: Scene, state: SceneState): Shape[] {
   if ((s.kind === "tally" && liftLook(s))) {
     const n = liftNow(s, state);
     return liftDraw({
-      start: s.start, tiles: s.tiles, floors: liftFloors(s), at: state.at ?? n.floor, door: state.door === 2, lit: !!state.lit, started: n.started, finished: n.finished,
-      k: n.k, done: n.done, want: n.want, ...(state.nb ? { wrong: { b: state.nb - 1, odd: (state.no ?? 0) % 2 === 1 } } : {}),
+      start: s.start, tiles: s.tiles, floors: liftFloors(s), at: state.at ?? n.floor, door: state.door === 2, lit: !!state.lit, started: n.started, finished: n.finished && !state.hold,
+      k: Math.min(n.k, s.tiles.length - 1), done: n.finished ? Math.abs(s.tiles[s.tiles.length - 1]) : n.done, want: n.want, ...(state.nb ? { wrong: { b: state.nb - 1, odd: (state.no ?? 0) % 2 === 1 } } : {}),
       ...(state.held !== undefined && state.held >= 0 ? { held: state.held } : {}), ...(state.fin !== undefined ? { finger: state.fin } : {}),
     });
   }
@@ -811,6 +811,13 @@ export function release(s: Scene, state: SceneState, x: number, y: number): Scen
   return { ...rest, dropped: order.length + 1, ...(s.anyOrder ? { seq: Number([...order, i].map((k) => k + 1).join("")) } : {}) };
 }
 
+/** lift@1: what is said again when nothing has been pressed for a while ("Press down. Four more."), or null. */
+export const remind = (s: Scene, state: SceneState): string | null => (s.kind === "tally" && liftLook(s) ? liftRemind(s, state) : null);
+
+/** play@1: whether a move made while pictures still play waits its turn. A lift button pressed the wrong way meanwhile is
+ *  dropped (refused seconds later, it would point at nothing); every other move is queued. */
+export const queueable = (s: Scene, from: SceneState, to: SceneState): boolean => !(s.kind === "tally" && liftLook(s) && (to.no ?? 0) > (from.no ?? 0));
+
 /** boxes@1: thing `i` pressed by keyboard (Enter on it): the same as a tap. Other kinds are unchanged. */
 export const press = (s: Scene, state: SceneState, i: number): SceneState => (s.kind === "boxes" ? boxesAct(s as BoxesScene, state, i) : (s.kind === "tally" && liftLook(s)) ? liftAct(s, state, i) : state);
 
@@ -820,8 +827,9 @@ export const cue = (s: Scene, state: SceneState): string | null => (s.kind === "
 
 /** One picture of a move, and how long it stays before the next (`motion`: only movement; left out for reduced motion).
  *  `say`: what is said as it is shown (boxes@1: every number counted, and what to do next). `sound`: a ding as it is
- *  shown (lift@1: 1 a floor reached, 2 the ground floor, higher). */
-export interface Frame { state: SceneState; ms: number; motion?: boolean; say?: string; sound?: 1 | 2 }
+ *  shown (lift@1: 1 a floor reached, 2 the ground floor, higher). `fresh`: whatever is still being said is stopped
+ *  first (lift@1 says each line after the one before it, except Start and Again). */
+export interface Frame { state: SceneState; ms: number; motion?: boolean; say?: string; sound?: 1 | 2; fresh?: boolean }
 
 /** boxes@1: the pictures of a move. A thing counted or put on the board says its number. The last thing of a box says
  *  how many ("three mangoes.") once its number is on the box. After the second box, the finger carries one thing to the

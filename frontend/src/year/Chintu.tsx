@@ -14,13 +14,14 @@ export const canSpeak = () => typeof window !== "undefined" && "speechSynthesis"
 
 /**
  * Say `text` aloud with the phone's own voice (an Indian English one when the phone lists it), stopping anything still
- * being said. Quietly does nothing where there is no speech. `done` is called when it ends or fails.
+ * being said (with `after`, once it has been said). Quietly does nothing where there is no speech. `done` is called when it ends or fails.
  */
-export function sayAloud(text: string, done?: () => void): boolean {
+export function sayAloud(text: string, done?: () => void, after = false): boolean {
   if (!canSpeak()) return false;
   try {
     const synth = window.speechSynthesis;
-    if (synth.speaking || synth.pending) synth.cancel();
+    // `after`: wait for what is being said (lift@1: a floor word never cuts an instruction off)
+    if (!after && (synth.speaking || synth.pending)) synth.cancel();
     const u = new SpeechSynthesisUtterance(spoken(text));
     const voice = (synth.getVoices?.() ?? []).find((v) => v.lang.replace("_", "-").toLowerCase() === "en-in");
     if (voice) u.voice = voice;

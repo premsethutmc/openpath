@@ -225,7 +225,7 @@
 .scene [class^="sc-lift-down"] { fill: #d9622b; }
 .scene [class^="sc-lift-up"]:focus-visible, .scene [class^="sc-lift-down"]:focus-visible, .scene .sc-lift-go:focus-visible { stroke: #f4b400; stroke-width: 5; }
 .scene .sc-lift-up-press, .scene .sc-lift-down-press { transform: translateY(3px); filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.27)); }
-.scene .sc-lift-up-dim, .scene .sc-lift-down-dim, .scene .sc-lift-arrow-dim { opacity: 0.35; }
+.scene [class^="sc-lift-up-dim"], .scene [class^="sc-lift-down-dim"], .scene [class^="sc-lift-arrow-dim"] { opacity: 0.35; }
 .scene [class^="sc-lift-arrow"] { fill: #fff; font-size: 40px; font-weight: 800; pointer-events: none; transform-box: fill-box; transform-origin: center; }
 .scene .sc-lift-glow { fill: none; stroke: #f4b400; stroke-width: 5; transform-box: fill-box; transform-origin: center; animation: sc-lift-pulse 1s ease-in-out infinite; pointer-events: none; }
 .scene [class^="sc-lift"][class$="-no"] { animation: sc-lift-no 0.45s; }

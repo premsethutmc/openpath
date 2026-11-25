@@ -423,12 +423,16 @@ export function boxesDraw(L: BoxesLayout, v: BoxesView): Shape[] {
  * and the task card ("▼ 5", a dot per floor) or the Start / Again button. Geometry only; lift.ts and scene.ts do the rest. */
 const LP = { x: 206, w: 134, cx: 273, up: 126, down: 226, r: 45, card: 282 };
 const liftDots = (n: number) => (n <= 18 ? { per: 6, r: 6.5, gap: 19 } : { per: 10, r: 4.2, gap: 11.6 });
+/** The rows of the building: at least 28 high (a window of 16 floors that follows the car when the ride passes more),
+ *  stretched to the panel's height when there are few. `h` is the picture's height. */
 export function liftLayout(tiles: number[], floors: [number, number]) {
-  const rows = floors[1] - floors[0] + 1, H = Math.min(40, Math.floor((460 / rows) * 10) / 10);
+  const rows = floors[1] - floors[0] + 1;
   const most = Math.max(...tiles.map((t) => Math.abs(t))), d = liftDots(most);
   const panel = LP.card + 46 + Math.ceil(most / d.per) * d.gap + 14;
-  return { H, rows, panel, h: Math.ceil(Math.max(panel, rows * H)) + 2 };
+  const seen = Math.min(rows, LIFT_SEEN), H = Math.round(Math.max(28, Math.min(56, Math.max(panel, Math.min(40 * seen, 460)) / seen)) * 10) / 10;
+  return { H, rows, seen, panel, h: Math.ceil(Math.max(panel, seen * H)) + 2 };
 }
+const LIFT_SEEN = 16;
 /** Which lift button a touch at (x, y) is on: 0 up, 1 down, 2 Start / Again (when it is shown), −1 none. */
 export function liftButtonAt(x: number, y: number, start: boolean): number {
   const near = (cy: number) => Math.hypot(x - LP.cx, y - cy) <= LP.r + 8;
@@ -446,35 +450,36 @@ export interface LiftView {
   wrong?: { b: number; odd: boolean }; held?: number; finger?: number;
 }
 export function liftDraw(v: LiftView): Shape[] {
-  const out: Shape[] = [], [lo, hi] = v.floors, L = liftLayout(v.tiles, v.floors), H = L.H;
-  const top = (f: number) => px((hi - f) * H), sign = (n: number) => (n < 0 ? `−${-n}` : `${n}`);
+  const out: Shape[] = [], [lo, hi] = v.floors, L = liftLayout(v.tiles, v.floors), H = L.H, BH = L.seen * H;
+  // the floor at the top of the building as drawn: the top floor, or (a window) the car kept in the middle, the window
+  // sliding with it; a building shorter than the panel is centred beside it
+  const vt = L.rows > L.seen ? Math.max(lo + L.seen - 1, Math.min(hi, v.at + (L.seen - 1) / 2)) : hi, y0 = (L.h - 2 - BH) / 2;
+  const top = (f: number) => y0 + (vt - f) * H, sign = (n: number) => (n < 0 ? `−${-n}` : `${n}`);
+  const clip = (a: number, b: number) => [Math.max(y0, a), Math.min(y0 + BH, b)] as const;
   const text = (x: number, y: number, s: string, role: string) => out.push({ t: "text", x: px(x), y: px(y), s, role });
-  const here = Math.round(v.at), small = H < 24;
-  // the floors: sky above, the shop at 0, the car park below
+  const here = Math.round(v.at), seen = (f: number) => top(f) + H / 2 >= y0 + 6 && top(f) + H / 2 <= y0 + BH - 6;
+  // the floors: sky above, the shop at 0, the car park below (only those inside the building as drawn)
   for (let f = hi; f >= lo; f--) {
-    out.push({ t: "rect", x: 0, y: top(f), w: 196, h: H, role: f > 0 ? (f % 2 ? "lift-sky2" : "lift-sky") : f === 0 ? "lift-shop" : f % 2 ? "lift-park2" : "lift-park" });
-    if (H >= 10) out.push({ t: "line", x1: 0, y1: px(top(f) + H - 0.5), x2: 196, y2: px(top(f) + H - 0.5), role: "lift-floorline" });
-    if (H >= 18) {
-      const deco = f > 0 ? "▫▫" : f === 0 ? (H >= 26 ? "🛍️ shop" : "🛍️") : "🚗";
-      text(f === 0 && H >= 26 ? 156 : 172, top(f) + H / 2 + 6, deco, f === 0 ? "lift-deco-shop" : small ? "lift-deco-s" : "lift-deco");
-    }
+    const [a, b] = clip(top(f), top(f) + H);
+    if (b - a < 0.5) continue;
+    out.push({ t: "rect", x: 0, y: px(a), w: 196, h: px(b - a), role: f > 0 ? (f % 2 ? "lift-sky2" : "lift-sky") : f === 0 ? "lift-shop" : f % 2 ? "lift-park2" : "lift-park" });
+    if (top(f) + H - 0.5 <= y0 + BH) out.push({ t: "line", x1: 0, y1: px(top(f) + H - 0.5), x2: 196, y2: px(top(f) + H - 0.5), role: "lift-floorline" });
+    if (seen(f)) text(f === 0 ? 156 : 172, top(f) + H / 2 + 6, f > 0 ? "▫▫" : f === 0 ? "🛍️ shop" : "🚗", f === 0 ? "lift-deco-shop" : "lift-deco");
   }
-  if (lo <= 0 && hi >= 0) out.push({ t: "line", x1: 0, y1: px(top(0) + H), x2: 196, y2: px(top(0) + H), role: "lift-groundline" });
-  if (v.lit) out.push({ t: "rect", x: 1.5, y: px(top(here) + 1.5), w: 193, h: px(H - 3), role: "lift-lit" });
-  // the numbers: every floor when there is room, else at a steady step; the floor Chintu is on always, in gold
-  const shown = tallyLabelled(v.floors, [here], H, 0, v.start).filter((f) => f === here || Math.abs(f - here) * H >= 16);
-  if (!shown.includes(here)) shown.push(here);
-  if (lo <= 0 && hi >= 0 && Math.abs(here) * H >= 16 && !shown.includes(0)) shown.push(0);
-  for (const f of shown) {
+  if (lo <= 0 && hi >= 0 && top(0) + H >= y0 && top(0) + H <= y0 + BH) out.push({ t: "line", x1: 0, y1: px(top(0) + H), x2: 196, y2: px(top(0) + H), role: "lift-groundline" });
+  if (v.lit) { const [a, b] = clip(top(here) + 1.5, top(here) + H - 1.5); out.push({ t: "rect", x: 1.5, y: px(a), w: 193, h: px(b - a), role: "lift-lit" }); }
+  // every floor has its number (rows are at least 28 high); the floor Chintu is on in gold
+  for (let f = hi; f >= lo; f--) {
+    if (!seen(f)) continue;
     const y = top(f) + H / 2;
-    if (f === here) { const bh = Math.max(14, Math.min(30, H - 4)); out.push({ t: "rect", x: 3, y: px(y - bh / 2), w: 34, h: px(bh), role: "lift-here" }); }
-    text(20, y + (small ? 4.5 : 6), sign(f), f === here ? (small ? "lift-no-here-s" : "lift-no-here") : f === 0 ? "lift-no-0" : small ? "lift-no-s" : "lift-no");
+    if (f === here) out.push({ t: "rect", x: 3, y: px(y - 14), w: 34, h: 28, role: "lift-here" });
+    text(20, y + 6, sign(f), f === here ? "lift-no-here" : f === 0 ? "lift-no-0" : "lift-no");
   }
   // the shaft and the car, with Chintu and its two doors (open: drawn back to the sides)
-  out.push({ t: "line", x1: 44, y1: 0, x2: 44, y2: px(L.rows * H), role: "lift-shaft" }, { t: "line", x1: 106, y1: 0, x2: 106, y2: px(L.rows * H), role: "lift-shaft" });
-  const ch = Math.max(16, Math.min(38, H - 2)), cy = (hi - v.at) * H + H / 2;
+  out.push({ t: "line", x1: 44, y1: px(y0), x2: 44, y2: px(y0 + BH), role: "lift-shaft" }, { t: "line", x1: 106, y1: px(y0), x2: 106, y2: px(y0 + BH), role: "lift-shaft" });
+  const ch = Math.min(38, H - 2), cy = top(v.at) + H / 2;
   out.push({ t: "rect", x: 47, y: px(cy - ch / 2), w: 56, h: px(ch), role: "lift-car" });
-  text(75, cy + (ch >= 30 ? 8.5 : 5), "🐱", ch >= 30 ? "lift-cat" : "lift-cat-s");
+  text(75, cy + 8.5, "🐱", "lift-cat");
   const dw = v.door ? 26.5 : 3;
   out.push({ t: "rect", x: 48.5, y: px(cy - ch / 2 + 1.5), w: dw, h: px(ch - 3), role: "lift-door" }, { t: "rect", x: px(101.5 - dw), y: px(cy - ch / 2 + 1.5), w: dw, h: px(ch - 3), role: "lift-door" });
   // the panel: the display, the two buttons (the wanted one glows, the other is dimmed; a wrong one shakes)
@@ -482,7 +487,8 @@ export function liftDraw(v: LiftView): Shape[] {
   text(LP.cx, 55, sign(here), "lift-disp-text");
   ([[0, LP.up, 1, "▲", "Up"], [1, LP.down, -1, "▼", "Down"]] as const).forEach(([i, cy, d, glyph, label]) => {
     const name = d > 0 ? "lift-up" : "lift-down";
-    const mod = v.wrong?.b === i ? (v.wrong.odd ? "-no" : "-no2") : v.held === i ? "-press" : v.want && v.want !== d ? "-dim" : "";
+    // the button not wanted stays dimmed, and shakes when it is pressed
+    const dim = v.want && v.want !== d ? "-dim" : "", mod = v.wrong?.b === i ? `${dim}${v.wrong.odd ? "-no" : "-no2"}` : v.held === i ? "-press" : dim;
     if (v.want === d) out.push({ t: "circle", cx: LP.cx, cy, r: LP.r + 7, role: "lift-glow" });
     out.push({ t: "circle", cx: LP.cx, cy, r: LP.r, role: `${name}${mod}`, tap: { i, label } });
     text(LP.cx, cy + 14, glyph, `lift-arrow${mod}`);

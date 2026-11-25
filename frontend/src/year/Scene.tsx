@@ -10,7 +10,8 @@
 import { createElement, useEffect, useMemo, useRef, useState, type JSX, type KeyboardEvent, type PointerEvent, type ReactNode, type SVGProps } from "react";
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
-import { check, controls, cue, describe, draw, draggable as follows, frames, grip, initial, isLift, met, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Frame, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { Playback, type PlayHooks } from "../../../packages/learning/src/scene-play";
+import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, remind, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 /** lift@1: the lift's ding as it reaches a floor (`high` for the ground floor). Quietly nothing where there is no sound. */
 let audio: AudioContext | null = null;
@@ -71,15 +72,19 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const hold = useRef(0);
   // frames@1: the pictures between two states (a counter clicking through every number), shown one after another
   const [shown, setShown] = useState<SceneState | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  // a move made while the counter is still counting (the next tile tapped) waits its turn instead of being lost
-  const queued = useRef<SceneState | null>(null);
   // the tile tapped while the lift is still moving: shown taken (faded, ticked) until its turn
   const [taken, setTaken] = useState<number | null>(null);
-  // the state as of the last move, for a finger that lifts before the page has drawn its going down (a quick tap)
-  const live = useRef(state);
-  live.current = state;
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
+  // play@1: the moves played one after another; a move made while one plays (the next press, a quick tap) is queued and
+  // `live` is that queued state, so the next touch builds on it and none is lost. The hooks always reach this render.
+  const hooks = useRef<PlayHooks | null>(null);
+  const playback = useRef<Playback | null>(null);
+  playback.current ??= new Playback(scene, state, {
+    state: (n) => hooks.current!.state(n), show: (p) => hooks.current!.show(p), frame: (f) => hooks.current!.frame(f), done: (n) => hooks.current!.done(n),
+    queued: (a, b) => hooks.current!.queued?.(a, b), later: (fn, ms) => setTimeout(fn, ms), stop: (h) => clearTimeout(h as ReturnType<typeof setTimeout>),
+    still: () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches,
+  });
+  const live = { get current() { return playback.current!.live; } };
+  useEffect(() => () => playback.current?.stop(), []);
   // read-aloud@1 (the counter and the lift, for a child who may not read): the prompt is said when the picture opens,
   // a refusal ("Not yet …") when it happens, and the success line when the goal is reached; a speaker button repeats
   // boxes@1 speaks every move: each picture of a move can carry a line (Frame.say), and the speaker repeats the last one
@@ -91,7 +96,8 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const lastSaid = useRef<string | null>(null);
   // boxes@1: the instruction is said at the first tap and that tap still counts, so the two are said as one line
   const pre = useRef<string | null>(null);
-  const say = (t?: string) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line); };
+  // lift@1: its lines wait for the one being said (a floor word never cuts "Down, not up."); Start and Again begin afresh
+  const say = (t?: string, fresh = false) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line, undefined, lift && !fresh); };
   const [doneNow, setDoneNow] = useState(false);
   // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
   const said = useRef(false);
@@ -101,41 +107,34 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (refusal && !talks) sayAloud(refusal); }, [refusal, state.refused]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (speaks && !talks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, talks, doneNow, scene]);
+  const reachedNow = useRef(false);
+  // lift@1: stuck in the middle of a ride (nothing pressed for 6 s), the move is said again, a few times at most
+  useEffect(() => {
+    if (!lift || shown !== null) return;
+    const line = remind(scene, state);
+    if (!line) return;
+    let n = 0;
+    const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; sayAloud(line, undefined, true); }, 6000);
+    return () => clearInterval(id);
+  }, [lift, shown, state, scene]);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const gate = scene.first && picked !== scene.first.right ? scene.first : null;
   const cs = controls(scene);
   const draggable = follows(scene) && !gate;
-  const finish = (next: SceneState) => { if (met(scene, next)) { if (!reached) onReached?.(); setReached(true); setDoneNow(true); } };
-  const apply = (target: SceneState) => {
-    if (timer.current) {
-      if (scene.kind === "tally" && !lift) { const was = tallyOrder(scene, live.current), now = tallyOrder(scene, target); if (now.length > was.length) setTaken(now[now.length - 1]); }
-      queued.current = target; live.current = target; return;
-    }
-    setTouched(true);
-    const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const fr: Frame[] = frames(scene, live.current, target).filter((f, i, all) => i === all.length - 1 || !(still && f.motion));
-    const next = fr[fr.length - 1].state;
-    live.current = next;
-    setState(next);
-    if (scene.kind === "array" && scene.log && triedLine(scene, next.r) && !tried.includes(next.r)) setTried([...tried, next.r]);
-    if (fr.length === 1) { say(fr[0].say); if (fr[0].sound) ding(fr[0].sound === 2); finish(next); return; }
-    // one picture after another; the goal is said once the last one is shown
-    const play = (k: number) => {
-      say(fr[k].say);
-      if (fr[k].sound) ding(fr[k].sound === 2);
-      if (k >= fr.length - 1) {
-        timer.current = null; setShown(null); finish(next);
-        const q = queued.current;
-        setTaken(null);
-        if (q) { queued.current = null; live.current = next; apply(q); }
-        return;
-      }
-      setShown(fr[k].state);
-      timer.current = setTimeout(() => play(k + 1), fr[k].ms);
-    };
-    play(0);
+  hooks.current = {
+    state: (next) => {
+      setTouched(true); setState(next);
+      if (scene.kind === "array" && scene.log && triedLine(scene, next.r)) setTried((t) => (t.includes(next.r) ? t : [...t, next.r]));
+    },
+    show: setShown,
+    frame: (f) => { say(f.say, f.fresh); if (f.sound) ding(f.sound === 2); },
+    done: (next) => { setTaken(null); if (met(scene, next)) { if (!reachedNow.current) onReached?.(); reachedNow.current = true; setReached(true); setDoneNow(true); } },
+    // a tile tapped while the counter is still counting is shown taken until its turn
+    queued: (from, to) => { if (scene.kind === "tally" && !lift) { const was = tallyOrder(scene, from), now = tallyOrder(scene, to); if (now.length > was.length) setTaken(now[now.length - 1]); } },
+    later: () => null,
   };
+  const apply = (target: SceneState) => { playback.current!.apply(target); };
   const box = sceneBox(scene), busy = shown !== null, view = shown && taken !== null ? { ...shown, taken: taken + 1 } : shown ?? state;
   const at = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -207,7 +206,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
         </div>
       )}
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
-      {gate || (young && (scene.kind === "tally" || talks)) ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" || talks ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
+      {gate || lift || (young && (scene.kind === "tally" || talks)) ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" || talks ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && !lift && <p className="scene-readout" aria-live="polite">{readout(scene, view)}</p>}
       {tried.length > 0 && (
         <div className="scene-tried" data-testid="scene-tried">
