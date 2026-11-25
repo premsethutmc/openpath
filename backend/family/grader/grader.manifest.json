@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "ccaefccb6560768140709e7a8886f8abf562b977fd9cb63741d76fce03ae1025",
+ "sha256": "e3ded1678b89427882281e7ac21953548c0fd6828f6870f28262505d473c8dc8",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -329,7 +329,7 @@
   "packages/learning/src/skill-units.ts": "d760b26ae1da783c0ee3d7a488032d6741d5cc4354c249e763a57ae0389d2358",
   "packages/learning/src/solution-sets.ts": "7d42a20cd953be3ba6fbe1a2e2caae10060aa5511046b8c9be75613cf4ee15f6",
   "packages/learning/src/spec.ts": "6836b7d17759de539bd2236dce0d3b90e2c77adec58f89c9b9639522e5f0fc37",
-  "packages/learning/src/step-ask.ts": "c6df42026a659eb703556831dce2ea8c8788229fee75d86118ebc77604f76733",
+  "packages/learning/src/step-ask.ts": "02423d8bfcb3a2a041de0430b8ed142a24d73af7a2f7fd62dc81257e7d71068d",
   "packages/learning/src/step-help.ts": "c61f6f3fbc70893bbd6f9a85cbb1a3f2806e905b5856140ee82ff84dee320f15",
   "packages/learning/src/step-scenes.ts": "3a0d471e49913eb6e4a47ca441696ffd3408415727ba24b470b8460356dde580",
   "packages/learning/src/subskill-config-addition-regroup.ts": "ac87873b8ecbf3a8c771de36938d8edad51312d6ecdd74b964270d6ae48433a2",
