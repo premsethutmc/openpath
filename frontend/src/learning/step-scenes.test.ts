@@ -125,10 +125,10 @@ test("step-scene@1: the picture's layout: labels never reach the counter, floors
       const end = tallyAt(s.start, s.tiles, s.tiles.length), say = (v: number) => (v < 0 ? `−${-v}` : String(v));
       // (the start gives way to the end when the two are too close to write both)
       const fh = 382 / (s.floors[1] - s.floors[0] + 1);
-      for (const v of [s.start, end]) if (v !== 0 && (v === end || Math.abs(v - end) * fh >= 15)) assert.ok(fl.some((x) => x.s === say(v)), `${pr.id}: floor ${v} is labelled`);
+      for (const v of [s.start, end]) if (v !== 0 && (v === end || Math.abs(v - end) * fh >= 20)) assert.ok(fl.some((x) => x.s === say(v)), `${pr.id}: floor ${v} is labelled`);
       // clear of the round 0 marker
       const zero = shapes.find((x) => x.role === "tally-zero" || x.role === "tally-zero-on") as Extract<Shape, { t: "circle" }> | undefined;
-      if (zero) for (const t of fl) assert.ok(Math.abs(t.y - 5 - zero.cy) >= zero.r + 5, `${pr.id}: label ${t.s} on the 0 marker`);
+      if (zero) for (const t of fl) assert.ok(Math.abs(t.y - 5 - zero.cy) >= zero.r + 9, `${pr.id}: label ${t.s} on the 0 marker`);
       if (s.unit === "₹") {
         assert.ok(texts.filter((x) => x.role.startsWith("tally-tiletext") || x.role.startsWith("tally-cartext")).every((x) => x.s.includes("₹")), `${pr.id}: tiles and car in rupees`);
         assert.ok(roll.s.includes("₹") && readout(s, set(s, initial(s), "dropped", dropped)).includes("₹"), pr.id);

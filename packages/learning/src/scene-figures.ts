@@ -222,13 +222,13 @@ export interface TallyView {
 export function tallyLabelled(floors: [number, number], keep: number[], fh: number, zr = 15): number[] {
   const [lo, hi] = floors, n = hi - lo;
   const every = n <= 15 && fh >= 13 ? 1 : [2, 5, 10, 20].find((k) => fh * k >= 15 && n / k <= 15) ?? 20;
-  const near = (f: number, g: number) => Math.abs(f - g) * fh < 15;
+  const near = (f: number, g: number) => Math.abs(f - g) * fh < 20;
   const must: number[] = [];
   for (const f of keep) if (f !== 0 && f >= lo && f <= hi && !must.some((g) => g === f || near(f, g))) must.push(f);
   const out = new Set(must);
   for (let f = lo; f <= hi; f++) {
     if (f === 0 || f % every !== 0 || must.some((g) => g !== f && near(f, g))) continue;
-    if (Math.abs(f) * fh < zr + 5) continue; // clear of the 0 marker
+    if (Math.abs(f) * fh < zr + 9) continue; // clear of the 0 marker
     out.add(f);
   }
   return [...out].sort((a, b) => a - b);
@@ -247,7 +247,7 @@ export function tallyDraw(v: TallyView): Shape[] {
   const zr = px(Math.max(9, Math.min(15, fh / 2 + 1))), hasZero = lo <= 0 && hi >= 0;
   for (const f of tallyLabelled(v.floors, [end, v.start], fh, hasZero ? zr : 0)) {
     // a start or an end just by 0 is lifted (or lowered) clear of the round 0 marker
-    const y = !hasZero ? mid(f) + 5 : f > 0 ? Math.min(mid(f) + 5, mid(0) - zr - 2) : Math.max(mid(f) + 5, mid(0) + zr + 12);
+    const y = !hasZero ? mid(f) + 5 : f > 0 ? Math.min(mid(f) + 5, mid(0) - zr - 6) : Math.max(mid(f) + 5, mid(0) + zr + 16);
     text(TS.x - 17, px(y), num(f), "tally-flabel");
     // the basement floors as a mall lift names them
     if (f < 0 && fh >= 12) text(12, px(mid(f) + 4.5), `B${-f}`, "tally-hint");
