@@ -107,7 +107,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false", __OPENPATH_TAMIL__: process.env.OPENPATH_TAMIL_TILE === "1" ? "true" : "false", __OPENPATH_READ_ALOUD__: readAloud ? "true" : "false" },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false", __OPENPATH_TAMIL__: process.env.OPENPATH_TAMIL_TILE === "1" ? "true" : "false", __OPENPATH_COUNT__: process.env.OPENPATH_COUNT_TILE === "1" ? "true" : "false", __OPENPATH_READ_ALOUD__: readAloud ? "true" : "false" },
   logLevel: "warning",
   plugins: [lean],
 });
