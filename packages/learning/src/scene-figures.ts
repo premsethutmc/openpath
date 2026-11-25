@@ -183,3 +183,105 @@ export function tangentDraw(a: number, b: number, turn: number, normal: boolean)
 }
 /** How far round a finger at (x, y) is, measured the way the point is placed (so the point follows the finger). */
 export const tangentAt = (a: number, b: number, x: number, y: number) => { const k = tgScale(a, b), d = (Math.atan2((TG.cy - y) / (b * k), (x - TG.cx) / (a * k)) * 180) / Math.PI; return (Math.round(d / 15) * 15 + 360) % 360; };
+
+/* tally@1: the counter and the lift (tally.ts). A tall box: the lift shaft down the left, the big counter at the top
+ * right, the tiles in a tray under it. Geometry only; scene.ts gives it controls, measures and checks. */
+export const TALLY_BOX = { w: 340, h: 420 } as const;
+const TS = { x: 48, w: 70, top: 20, bottom: 402 }, TRAY = { x: 176, y: 134 }, TW = 72, TH = 50;
+/** A tile as it is written on it: "+2", "−10". */
+export const tileText = (t: number) => (t < 0 ? `−${-t}` : `+${t}`);
+/** Where tile `i` of `n` sits in the tray (its top-left corner): one column of up to four, or two columns. */
+export function tallyTileXY(n: number, i: number): [number, number] {
+  const two = n > 4, col = two ? i % 2 : 0, row = two ? Math.floor(i / 2) : i;
+  return [two ? 181 + col * 76 : 219, TRAY.y + 12 + row * 66];
+}
+/** The tile a touch at (x, y) lands on, among those not yet used, or −1. */
+export function tallyTileAt(n: number, used: number[], x: number, y: number): number {
+  for (let i = 0; i < n; i++) { if (used.includes(i)) continue; const [tx, ty] = tallyTileXY(n, i); if (x >= tx - 6 && x <= tx + TW + 6 && y >= ty - 6 && y <= ty + TH + 6) return i; }
+  return -1;
+}
+/** Whether a tile let go at (x, y) has been put in: anywhere off the tray (on the lift, beside it, on the counter). */
+export const tallyInDrop = (x: number, y: number) => x < TRAY.x - 4 || y < TRAY.y - 4;
+
+export interface TallyView {
+  floors: [number, number]; start: number; tiles: number[]; used: number[]; at: number;
+  /** the number the latest move started from (its floors are lit as a trail) */
+  from?: number; held?: { i: number; x: number; y: number }; refused?: number; unit?: string; hintArrow?: boolean;
+}
+export function tallyDraw(v: TallyView): Shape[] {
+  const out: Shape[] = [], [lo, hi] = v.floors, n = hi - lo + 1, fh = (TS.bottom - TS.top) / n;
+  const mid = (f: number) => px(TS.bottom - (f - lo + 0.5) * fh), edge = (f: number) => px(TS.bottom - (f - lo) * fh);
+  const text = (x: number, y: number, s: string, role: string) => out.push({ t: "text", x, y, s, role });
+  const num = (f: number) => (f < 0 ? `−${-f}` : `${f}`);
+  // the building: the shaft, with the basement (below 0) in the colour of earth
+  out.push({ t: "rect", x: TS.x, y: TS.top, w: TS.w, h: TS.bottom - TS.top, role: "tally-shaft" });
+  if (lo < 0) out.push({ t: "rect", x: TS.x, y: edge(Math.min(0, hi + 1)), w: TS.w, h: px(TS.bottom - edge(Math.min(0, hi + 1))), role: "tally-basement" });
+  const every = fh >= 13 ? 1 : fh * 2 >= 13 ? 2 : fh * 5 >= 13 ? 5 : 10;
+  for (let f = lo; f <= hi; f++) {
+    if (fh >= 5 || f % 5 === 0) out.push({ t: "line", x1: TS.x, y1: edge(f), x2: TS.x + TS.w, y2: edge(f), role: "tally-floor" });
+    if (f !== 0 && (f % every === 0 || ((f === lo || f === hi) && Math.abs(f - Math.round(f / every) * every) * fh >= 13))) {
+      text(TS.x - 16, px(mid(f) + 5), num(f), "tally-flabel");
+      // the basement floors as a mall lift names them
+      if (f < 0 && fh >= 11) text(10, px(mid(f) + 4), `B${-f}`, "tally-hint");
+    }
+  }
+  // the trail: every floor the latest move went through, a dot on each
+  if (v.from !== undefined && v.from !== v.at) {
+    const a = Math.min(v.from, v.at), b = Math.max(v.from, v.at);
+    out.push({ t: "rect", x: TS.x + 3, y: edge(b + 1), w: TS.w - 6, h: px((b - a + 1) * fh), role: v.at > v.from ? "tally-trail-up" : "tally-trail-down" });
+    for (let f = a; f <= b; f++) if (fh >= 7) out.push({ t: "circle", cx: TS.x + TS.w - 9, cy: mid(f), r: Math.min(3.5, fh / 4), role: "tally-dot" });
+  }
+  // ground floor 0: a band across the shaft and a round label that lights up when the lift is there
+  if (lo <= 0 && hi >= 0) {
+    const on = v.at === 0;
+    out.push({ t: "rect", x: TS.x - 32, y: edge(1), w: TS.w + 32, h: px(fh), role: on ? "tally-ground-on" : "tally-ground" });
+    out.push({ t: "line", x1: TS.x - 34, y1: edge(0), x2: TS.x + TS.w + 4, y2: edge(0), role: "tally-groundline" });
+    out.push({ t: "circle", cx: TS.x - 16, cy: mid(0), r: Math.max(10, Math.min(15, fh / 2 + 3)), role: on ? "tally-zero-on" : "tally-zero" });
+    text(TS.x - 16, px(mid(0) + 5.5), "0", "tally-zerotext");
+    if (fh >= 11 && lo < 0) text(6, px(mid(0) + 4), "G", "tally-hint");
+  }
+  // beside the shaft, what each tile did: a bracket from where it started to the floor it took the lift to (an arrowhead
+  // there, and the tile's own "+2" beside it). Brackets take turns between two columns, so a way back does not hide the way there.
+  let p = v.start;
+  v.used.forEach((ti, k) => {
+    const t = v.tiles[ti], last = k === v.used.length - 1, end = last ? v.at : p + t;
+    if (end !== p) {
+      const x = TS.x + TS.w + 5 + (k % 2) * 13, y1 = mid(p), y2 = mid(end), role = t > 0 ? "tally-step-up" : "tally-step-down";
+      out.push({ t: "path", d: `M${x} ${y1}H${x + 6}V${y2}H${x + 1}`, role }, { t: "path", d: `M${x + 7} ${px(y2 - 6)}L${x - 1} ${y2}L${x + 7} ${px(y2 + 6)}Z`, role: `${role}-head` });
+      text(158, px(y2 + 5), tileText(t), `${role}-text`);
+    }
+    p += t;
+  });
+  // the lift car, with the floor it is on written on it
+  const ch = Math.max(20, Math.min(40, fh - 3)), cy = mid(v.at);
+  out.push({ t: "rect", x: TS.x + 6, y: px(cy - ch / 2), w: TS.w - 12, h: px(ch), role: "tally-car" });
+  text(TS.x + TS.w / 2, px(cy + (ch >= 28 ? 6.5 : 4.5)), num(v.at), ch >= 28 ? "tally-cartext" : "tally-cartext-small");
+  // the big counter: its digits roll, up when counting on and down when counting back
+  const shown = `${v.unit && v.unit.length <= 2 ? v.unit : ""}${num(v.at)}`;
+  out.push({ t: "rect", x: 158, y: 14, w: 172, h: 100, role: "tally-counter" }, { t: "rect", x: 168, y: 24, w: 152, h: 80, role: "tally-window" });
+  text(244, shown.length <= 3 ? 87 : 82, shown, `tally-roll-${v.from === undefined || v.from === v.at ? "still" : v.at > v.from ? "up" : "down"}${shown.length > 3 ? "-long" : ""}`);
+  if (v.unit && v.unit.length > 2) text(244, 128, v.unit, "label");
+  // the tray: the tiles not yet used; a refused one shakes; the one in the hand follows the finger
+  const tile = (i: number, x: number, y: number, extra: string) => {
+    const t = v.tiles[i];
+    out.push({ t: "rect", x, y, w: TW, h: TH, role: `tally-${t > 0 ? "plus" : "minus"}${extra}` }, { t: "text", x: px(x + TW / 2), y: px(y + TH / 2 + 9), s: tileText(t), role: "tally-tiletext" });
+  };
+  const rows = v.tiles.length > 4 ? Math.ceil(v.tiles.length / 2) : v.tiles.length;
+  if (v.used.length < v.tiles.length) out.push({ t: "rect", x: TRAY.x, y: TRAY.y, w: 330 - TRAY.x, h: rows * 66 + 14, role: "tally-tray" });
+  v.tiles.forEach((_, i) => {
+    if (v.used.includes(i)) return;
+    const [x, y] = tallyTileXY(v.tiles.length, i);
+    if (v.held?.i === i) { out.push({ t: "rect", x, y, w: TW, h: TH, role: "tally-slot" }); return; }
+    tile(i, x, y, v.refused === i ? "-no" : "");
+  });
+  // before the first tile: an arrow from it to the lift
+  if (v.hintArrow && !v.held) {
+    const [x, y] = tallyTileXY(v.tiles.length, 0), ay = y + TH / 2, ax = TS.x + TS.w + 8;
+    out.push({ t: "path", d: `M${x - 8} ${ay}H${ax}`, role: "tally-arrow" }, { t: "path", d: `M${ax + 11} ${ay - 9}L${ax} ${ay}L${ax + 11} ${ay + 9}`, role: "tally-arrowhead" });
+  }
+  if (v.held) {
+    out.push({ t: "rect", x: TS.x - 5, y: TS.top - 5, w: TS.w + 10, h: TS.bottom - TS.top + 10, role: tallyInDrop(v.held.x, v.held.y) ? "tally-zone-on" : "tally-zone" });
+    tile(v.held.i, px(v.held.x - TW / 2), px(v.held.y - TH / 2), "-held");
+  }
+  return out;
+}
