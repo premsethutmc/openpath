@@ -74,3 +74,45 @@
 .scene .sc-theta { fill: none; stroke: #c9731a; stroke-width: 3; stroke-linecap: round; }
 .scene.scene-figure { margin: 0 auto; }
 .scene svg.scene-drag.scene-tap { cursor: pointer; }
+/* tally@1: the counter and the lift (a tall picture; kept to phone width on a wide screen) */
+.scene[data-scene="tally"] svg, .scene[data-scene-figure="tally"] svg { max-width: 380px; margin: 0 auto; }
+.scene .sc-tally-shaft { fill: #eef5ff; stroke: #9aa5b8; stroke-width: 1.5; }
+.scene .sc-tally-basement { fill: #e9dfcd; }
+.scene .sc-tally-floor { stroke: #c5cfdd; stroke-width: 1; }
+.scene .sc-tally-flabel { fill: #1f2a37; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.scene .sc-tally-hint { fill: #7a8599; font-size: 11px; font-weight: 600; }
+.scene .sc-tally-ground { fill: #fff4c2; transition: fill 0.2s; }
+.scene .sc-tally-ground-on { fill: #ffd84d; transition: fill 0.2s; }
+.scene .sc-tally-groundline { stroke: #1f2a37; stroke-width: 3; }
+.scene .sc-tally-zero { fill: #fff; stroke: #1f2a37; stroke-width: 2.5; }
+.scene .sc-tally-zero-on { fill: #ffc107; stroke: #9a6a00; stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: sc-tally-glow 0.9s ease-out; }
+.scene .sc-tally-zerotext { fill: #1f2a37; font-size: 16px; font-weight: 800; pointer-events: none; }
+.scene .sc-tally-trail-up { fill: #bfeedd; }
+.scene .sc-tally-trail-down { fill: #f9d3bf; }
+.scene .sc-tally-dot { fill: #1f2a37; opacity: 0.45; }
+.scene .sc-tally-car { fill: #2f5fd0; stroke: #1e3a8a; stroke-width: 2; rx: 5px; }
+.scene .sc-tally-door { stroke: #fff; stroke-width: 1.5; opacity: 0.55; }
+.scene .sc-tally-cartext { fill: #fff; font-size: 18px; font-weight: 800; paint-order: stroke; stroke: #2f5fd0; stroke-width: 4px; }
+.scene .sc-tally-cartext-small { fill: #fff; font-size: 13px; font-weight: 800; paint-order: stroke; stroke: #2f5fd0; stroke-width: 3px; }
+.scene .sc-tally-counter { fill: #1f2a37; rx: 18px; }
+.scene .sc-tally-window { fill: #0b1220; rx: 10px; }
+.scene [class^="sc-tally-roll"] { fill: #ffe58a; font-size: 64px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.scene [class^="sc-tally-roll"][class$="-long"] { font-size: 48px; }
+.scene [class^="sc-tally-roll-up"] { animation: sc-tally-up 0.16s ease-out; }
+.scene [class^="sc-tally-roll-down"] { animation: sc-tally-down 0.16s ease-out; }
+.scene .sc-tally-tray { fill: #f6f7fb; stroke: #e3e8f0; stroke-width: 1.5; rx: 14px; }
+.scene .sc-tally-plus, .scene .sc-tally-plus-no, .scene .sc-tally-plus-held { fill: #1f8a5c; stroke: #126b44; stroke-width: 3; rx: 12px; }
+.scene .sc-tally-minus, .scene .sc-tally-minus-no, .scene .sc-tally-minus-held { fill: #d0612a; stroke: #9e4414; stroke-width: 3; rx: 12px; }
+.scene .sc-tally-plus-held, .scene .sc-tally-minus-held { filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3)); }
+.scene .sc-tally-plus-no, .scene .sc-tally-minus-no { transform-box: fill-box; transform-origin: center; animation: sc-tally-shake 0.4s ease-in-out; }
+.scene .sc-tally-tiletext { fill: #fff; font-size: 26px; font-weight: 800; pointer-events: none; }
+.scene .sc-tally-slot { fill: none; stroke: #9aa5b8; stroke-width: 2; stroke-dasharray: 6 5; rx: 12px; }
+.scene .sc-tally-zone { fill: none; stroke: #b7c3d6; stroke-width: 2; stroke-dasharray: 8 6; rx: 16px; }
+.scene .sc-tally-zone-on { fill: rgba(47, 95, 208, 0.07); stroke: #2f5fd0; stroke-width: 3; stroke-dasharray: 8 6; rx: 16px; }
+.scene .sc-tally-arrow { fill: none; stroke: #2f5fd0; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 7 6; animation: sc-tally-march 1s linear infinite; }
+@keyframes sc-tally-up { from { transform: translateY(26px); opacity: 0.2; } to { transform: none; opacity: 1; } }
+@keyframes sc-tally-down { from { transform: translateY(-26px); opacity: 0.2; } to { transform: none; opacity: 1; } }
+@keyframes sc-tally-glow { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes sc-tally-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+@keyframes sc-tally-march { to { stroke-dashoffset: -26; } }
+@media (prefers-reduced-motion: reduce) { .scene [class*="sc-tally"] { animation: none !important; transition: none !important; } }

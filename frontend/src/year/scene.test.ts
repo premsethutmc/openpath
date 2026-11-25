@@ -382,3 +382,51 @@ test("every scene of a released question states that question's own mathematics"
   assert.equal(sceneForQuestion("gen:constructor:1"), null);
   assert.equal(sceneForQuestion("not an id"), null);
 });
+
+test("tally@1: the counter and the lift counts every number, pauses at 0, keeps to its floors and its order", async () => {
+  const E = await import("../../../packages/learning/src/scene");
+  const { tallyClicks } = await import("../../../packages/learning/src/tally");
+  const add: Scene = { type: "scene", kind: "tally", start: 0, tiles: [2, 6], floors: [0, 10], prompt: "Put the tiles in the lift.", success: "2 and 6 more make 8.", goal: { measure: "total", equals: 8 } };
+  const down: Scene = { type: "scene", kind: "tally", start: 5, tiles: [-10], floors: [-6, 6], prompt: "Put the tile in.", success: "5 − 10 = −5.", goal: { measure: "total", equals: -5 } };
+  for (const s of [add, down]) {
+    assert.deepEqual(check(s), [], s.prompt);
+    assert.equal(met(s, initial(s)), false);
+    assert.ok([...states(s)].some((st) => met(s, st)), "the goal is reachable");
+    assert.ok(draw(s, initial(s)).length > 10 && draggable(s) && describe(s).includes("lift"));
+  }
+  // the click path: counting on through every number, and counting back through 0
+  assert.deepEqual(tallyClicks(0, [2, 6]), [0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  const back = tallyClicks(5, [-10]);
+  assert.ok(back.includes(0) && back[back.length - 1] === -5 && back.every((v, i) => i === 0 || Math.abs(v - back[i - 1]) === 1));
+  // the engine changes by whole tiles; frames show every number in between, one floor per click, with a pause at 0
+  const one = set(add, initial(add), "dropped", 1), two = set(add, one, "dropped", 2);
+  assert.equal(measures(add, two).total, 8);
+  assert.equal(readout(add, two), "2 + 6 = 8");
+  const fr = E.frames(add, one, two), nums = fr.map((f) => f.state.at ?? measures(add, f.state).total);
+  assert.deepEqual(nums, [2, 3, 4, 5, 6, 7, 8], "the counter does not jump");
+  const fd = E.frames(down, initial(down), set(down, initial(down), "dropped", 1));
+  assert.deepEqual(fd.map((f) => f.state.at ?? -5), [5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5]);
+  assert.ok(fd.find((f) => f.state.at === 0)!.ms > fd[1].ms, "a beat at 0");
+  assert.equal(readout(down, set(down, initial(down), "dropped", 1)), "5 − 10 = −5");
+  // a description whose lift would leave its floors is refused
+  assert.match(check({ ...down, floors: [0, 6] }).join(), /leave the drawn floors/);
+  assert.match(check({ ...add, tiles: [2, 0] }).join(), /non-zero/);
+  // drag or tap: a tile is gripped in the tray, let go above it goes in; out of turn it is refused and goes back
+  const xy = (s: Scene, i: number) => { const sh = draw(s, initial(s)).filter((d) => d.t === "text" && d.role === "tally-tiletext"); const t = sh[i] as { x: number; y: number }; return [t.x, t.y - 9] as const; };
+  const [x1, y1] = xy(add, 1);
+  assert.equal(grip(add, initial(add), x1, y1), 1);
+  let st = pointer(add, initial(add), x1, y1, 1); st = pointer(add, st, 120, 100, 1);
+  const refused = E.release(add, st, 120, 100);
+  assert.equal(refused.dropped, 0); assert.equal(refused.refused, 2); assert.match(E.nudge(add, refused) ?? "", /\+2/);
+  const [x0, y0] = xy(add, 0);
+  const tapped = E.release(add, pointer(add, initial(add), x0, y0, 0), x0 + 2, y0);
+  assert.equal(tapped.dropped, 1, "a tap puts the tile in");
+  assert.equal(E.release(add, pointer(add, pointer(add, initial(add), x0, y0, 0), x0 + 60, y0, 0), x0 + 60, y0).dropped, 0, "let go on the tray, it goes back");
+  assert.equal(grip(add, tapped, x0, y0), -1, "a used tile is gone");
+  // any order: the second tile may go first, and the readout keeps the order it went in
+  const any: Scene = { ...add, anyOrder: true };
+  const first = E.release(any, pointer(any, initial(any), x1, y1, 1), 120, 100);
+  assert.equal(first.dropped, 1); assert.equal(measures(any, first).total, 6); assert.equal(readout(any, first), "0 + 6 = 6");
+  const both = E.release(any, pointer(any, first, x0, y0, 0), 120, 100);
+  assert.equal(readout(any, both), "6 + 2 = 8"); assert.ok(met(any, both));
+});

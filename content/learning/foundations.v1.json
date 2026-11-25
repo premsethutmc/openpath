@@ -24218,6 +24218,31 @@
        ]
       }
      ]
+    },
+    {
+     "title": "Ride the lift",
+     "scene": {
+      "type": "scene",
+      "kind": "tally",
+      "start": 0,
+      "tiles": [
+       2,
+       6
+      ],
+      "floors": [
+       0,
+       10
+      ],
+      "prompt": "Put the tiles in the lift, one by one.",
+      "success": "2, then 6 more: 8! So 2 + 6 = 8.",
+      "goal": {
+       "measure": "total",
+       "equals": 8
+      }
+     },
+     "text": [
+      "Watch the lift go up. Count with it."
+     ]
     }
    ],
    "practice": [
@@ -24431,11 +24456,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "none",
-    "why": "symbol"
-   }
+   ]
   },
   {
    "competency": "MATH.number.compare-numbers",
@@ -27373,6 +27394,31 @@
         "Going down 3 from 2 is 2 − 3 = −1."
        ]
       }
+     ]
+    },
+    {
+     "title": "The lift goes below 0",
+     "scene": {
+      "type": "scene",
+      "kind": "tally",
+      "start": 3,
+      "tiles": [
+       -5,
+       4
+      ],
+      "floors": [
+       -4,
+       6
+      ],
+      "prompt": "Put the tiles in the lift, one by one.",
+      "success": "3 − 5 = −2, then −2 + 4 = 2. Down past 0, and back up.",
+      "goal": {
+       "measure": "total",
+       "equals": 2
+      }
+     },
+     "text": [
+      "Below the ground floor 0 are −1, −2, −3: the B1, B2, B3 of a mall lift."
      ]
     }
    ],
