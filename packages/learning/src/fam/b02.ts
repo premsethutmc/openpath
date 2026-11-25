@@ -181,6 +181,11 @@ export const B02: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "first"
+        ? ["When a button must match two things, we sort in two steps. First we keep only the buttons with the first thing."]
+        : s.id === "second"
+          ? ["The buttons we kept already match the first thing, so now we keep only those that also match the second."]
+          : ["Only one thing has to match, so we tick every button that has it and count the ticks."]),
     explain: (s) => (s.id === "first" ? `First find the ${s.inputs[0]} buttons: there are ${s.value}.` : s.id === "second" ? `Of the ${s.inputs[1]} buttons, the ${s.inputs[0]} ones are: ${s.value}.` : `Tick every ${s.inputs[0]} button: there are ${s.value}.`),
     figure: (p) => ({ type: "table", head: ["Button", "Colour", "Size"], rows: buttons(p).map(([c, s], i) => [i + 1, c, s]) }),
     domain: [[0, 4], [0, 4], [0, 4], [0, 4], [0, 7]],
@@ -246,6 +251,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "row"
+        ? ["In a picture graph each picture stands for one thing, so counting the pictures in a row tells how many."]
+        : ["The pictures are the same size, so the longest row has the most pictures and stands for the most."]),
     explain: (s) => (s.id === "row" ? `Count the ● in the ${s.inputs[0]} row: ${s.value}.` : `The longest row is ${s.inputs[0]}, with ${s.value} pictures.`),
     figure: (p) => pictograph(p.slice(0, 4)),
     domain: [[1, 8], [1, 8], [1, 8], [1, 8], [0, 4]],
@@ -305,6 +313,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "read"
+        ? ["We read both rows first, because we need both numbers to compare them."]
+        : ["How many more means the difference between the two counts, so we take the smaller from the bigger."]),
     explain: (s) => (s.id === "read" ? `${s.inputs[0]}: ${(s.value as number[])[0]}; ${s.inputs[1]}: ${(s.value as number[])[1]}.` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} more.`),
     figure: (p) => pictograph(p.slice(0, 4)),
     domain: [[1, 9], [1, 9], [1, 9], [1, 9], [0, 3], [0, 3]],
@@ -365,6 +376,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rule"
+        ? ["In this kind of pattern every jump from one number to the next is the same. Finding one jump gives the rule."]
+        : ["The rule stays the same all the way, so the next number is one more jump of the same size."]),
     explain: (s) => (s.id === "rule" ? `From ${s.inputs[0]} to ${s.inputs[1]} is a jump of ${Math.abs(Number(s.value))}${Number(s.value) < 0 ? " back" : ""}.` : `Make the same jump from ${s.inputs[0]}: the next number is ${s.value}.`),
     figure: ([s, k, d]) => {
       const t = seq(s, STEPS[k], d, 5);
@@ -434,6 +448,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rule"
+        ? ["Every jump in the pattern is the same size, so we find that jump from two numbers next to each other."]
+        : ["The missing number is one jump along from the number before it, so we make the same jump."]),
     explain: (s) => (s.id === "rule" ? `Each jump is ${Math.abs(Number(s.value))} (${Number(s.value) < 0 ? "going down" : "going up"}).` : `One jump from ${s.inputs[0]} gives ${s.value}.`),
     figure: ([s, k, d, p]) => {
       const t = seq(s, MSTEPS[k], d, 5);
@@ -491,6 +508,7 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["A straight line never bends, and a curved line bends smoothly. We look at every stroke of each letter to see which kind it has."],
     explain: (s) => `Check each letter of ${s.inputs[0]} for curves: ${s.value} ${s.inputs[1] === "curved" ? "have a curved line" : "are made only of straight lines"}.`,
     figure: ([w]) => letterFigure(WORDS[w]),
     domain: [[0, WORDS.length - 1], [0, 1]],
@@ -552,6 +570,11 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "across"
+        ? ["On a grid we can only move along the lines, so we count the squares across first."]
+        : s.id === "up"
+          ? ["Then we count the squares up or down, the other way we must move."]
+          : ["The whole walk is the squares across and the squares up or down together, so we add them."]),
     explain: (s) => (s.id === "across" ? `Across: ${s.value} ${plural(Number(s.value), "square", "squares")}.` : s.id === "up" ? `Up or down: ${s.value} ${plural(Number(s.value), "square", "squares")}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} ${plural(Number(s.value), "square", "squares")}.`),
     figure: ([a, b, c, d]) => ({ type: "plane", points: [[a, b, "S"], [c, d, "E"]], range: 6 }),
     domain: [[0, 5], [0, 5], [0, 5], [0, 5]],
@@ -605,6 +628,9 @@ export const B02: Def[] = [
     },
     distractors: ([x, y, dx, dy]) => [tup(x + dx, y), tup(x, y + dy), tup(x - dx >= 0 ? x - dx : x + dx + 1, y - dy >= 0 ? y - dy : y + dy + 1)],
     variants: () => [],
+    stepWhy: (s) => (s.id === "across"
+        ? (s.op === "add" ? ["Moving right makes the across number bigger, so we add the squares moved."] : ["Moving left makes the across number smaller, so we take away the squares moved."])
+        : (s.op === "add" ? ["Moving up makes the up number bigger, so we add the squares moved."] : ["Moving down makes the up number smaller, so we take away the squares moved."])),
     explain: (s) => (s.id === "across" ? `Across: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}.` : `Up: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}.`),
     figure: ([x, y]) => ({ type: "plane", points: [[x, y, "A"]], range: 6 }),
     domain: [[0, 5], [0, 5], [-3, 3], [-3, 3]],
@@ -662,6 +688,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["Each shape of the same kind has the same number, so we multiply by how many shapes there are, then add the two kinds."]
+        : ["Every shape of one kind has the same number of sides and corners. We find it for one shape first."]),
     explain: (s) => (s.id === "each" || s.id === "each2" ? `A ${s.inputs[0]} has ${s.value} ${s.inputs[1]}.` : `${s.inputs[1]} × ${s.inputs[0]}${Number(s.inputs[3]) ? ` and ${s.inputs[3]} × ${s.inputs[2]}` : ""}: ${s.value} in all.`),
     figure: ([s1, k1, s2, k2]) => (k1 === 1 && k2 === 0 ? { type: "shape", sides: s1, name: SHAPES[s1][0] } : { type: "table", head: ["Shape", "How many"], rows: [[SHAPES[s1][1], k1], ...(k2 ? [[SHAPES[s2][1], k2]] : [])] }),
     domain: [[3, 6], [1, 3], [0, 6], [0, 3], [0, 1]],
@@ -727,6 +756,7 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["A curved surface lets a thing roll, and a flat surface lets it slide. We look at each thing's surfaces to decide."],
     explain: (s) => `Check each thing's surfaces: ${s.value} can ${s.inputs[0] === "both" ? "both roll and slide" : s.inputs[0]}.`,
     figure: ([m]) => ({ type: "table", head: ["Thing", "Its shape"], rows: chosen(m).map(([n, s]) => [n, LOOK[s]]) }),
     domain: [[1, 1023], [0, 2]],
@@ -795,6 +825,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["The question asks about all the solids together, so we add what each one has."]
+        : ["Each kind of solid always has the same number of faces, edges and corners, so we find it for this solid."]),
     explain: (s) => (s.id === "total" ? `Add for every solid: ${s.value} in all.` : `A ${s.inputs[0]} has ${s.value} ${s.inputs[1]}.`),
     figure: ([a, b, c]) => (a + b + c === 1 ? { type: "solid", name: a ? "cube" : b ? "cuboid" : "pyramid" } : { type: "table", head: ["Solid", "How many"], rows: [a, b, c].flatMap((n, i) => (n ? [[SOLIDS_PL[i], n]] : [])) }),
     domain: [[0, 3], [0, 3], [0, 3], [0, 2]],
@@ -847,6 +880,7 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["A shape has a line of symmetry if it can be folded so that one half lies exactly on the other. We try folding each letter in our mind."],
     explain: (s) => `Fold each letter of ${s.inputs[0]} in your mind: ${s.value} ${s.inputs[1] === "not" ? "do not match on any fold" : "have a fold where the halves match"}.`,
     figure: ([w]) => letterFigure(WORDS[w]),
     domain: [[0, WORDS.length - 1], [0, 1]],
@@ -916,6 +950,11 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "compare"
+        ? ["How many more cups means the difference between the two amounts, so we subtract the smaller from the bigger."]
+        : s.id === "read2"
+          ? ["To compare two containers we need both amounts, so we read both bars."]
+          : ["Each bar reaches the number of cups that container holds, so we read where it ends."]),
     explain: (s) => (s.id === "read" ? `The ${s.inputs[0]} bar reaches ${s.value} cups.` : s.id === "read2" ? `${s.inputs[0]}: ${(s.value as number[])[0]} cups; ${s.inputs[1]}: ${(s.value as number[])[1]} cups.` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} cups more.`),
     figure: (p) => ({ type: "bars", title: "cups of water to fill each container", labels: CONTAINERS, values: p.slice(0, 3), scale: 1 }),
     domain: [[2, 12], [2, 12], [2, 12], [0, 2], [0, 2]],
@@ -987,6 +1026,9 @@ export const B02: Def[] = [
       return [ans + ts, ans - ts, ans + 50, ans - 50].filter((x) => x > 0 && x < cap);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "read"
+        ? ["The marks on the jug's scale tell how much water is in it. We read the mark at the water level."]
+        : ["The water still needed is the gap between the full mark and the level now, so we subtract."]),
     explain: (s) => (s.id === "read" ? `The level is at ${s.value} mL.` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} mL more.`),
     figure: ([j, n]) => ({ type: "numberline", from: 0, to: JUGS[j][0], step: JUGS[j][1], marks: [n * JUGS[j][2]] }),
     domain: [[0, 2], [1, 19], [0, 1]],
@@ -1042,6 +1084,9 @@ export const B02: Def[] = [
     },
     distractors: ([h, k]) => [tup(h, (5 * k + 30) % 60), tup((h % 12) + 1, 5 * k), tup(h === 1 ? 12 : h - 1, 5 * k)],
     variants: () => [],
+    stepWhy: (s) => (s.id === "hour"
+        ? ["The short hand moves slowly and shows the hour."]
+        : ["The long hand shows the minutes. Each number it passes is 5 more minutes, starting from 0 at the 12."]),
     explain: (s) => (s.id === "hour" ? `The short hand shows the hour: ${s.value}.` : `The long hand points to ${Number(s.inputs[1]) === 0 ? 12 : s.inputs[1]}: ${s.value} minutes past.`),
     figure: ([h, k]) => ({ type: "clock", h, m: 5 * k }),
     domain: [[1, 12], [0, 11]],
@@ -1086,6 +1131,7 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["Change is the money given back when we pay more than the price, so we take the price away from what was paid."],
     explain: (s) => `₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value} change.`,
     figure: ([, k]) => ({ type: "coins", items: [NOTES[k]] }),
     domain: [[1, 99], [0, 3]],
@@ -1145,6 +1191,9 @@ export const B02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["First we find how much money there already is by adding the coins."]
+        : ["The money still needed is the gap between the price and what we have, so we subtract."]),
     explain: (s) => (s.id === "total" ? `Anu's coins: ${(s.inputs as number[]).map((c) => `₹${c}`).join(" + ")} = ₹${s.value}.` : `₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value} more.`),
     figure: (p) => ({ type: "coins", items: coinsOf(p) }),
     domain: [[0, 3], [0, 2], [0, 2], [0, 2], [4, 60]],
@@ -1185,6 +1234,7 @@ export const B02: Def[] = [
       { id: "started-at-one", kind: "procedural", competency: LEN, says: "Counting started from 1 at the end of the ruler. Measuring starts at 0.", predict: a === 0 ? b - 1 : null },
     ],
     variants: () => [],
+    stepWhy: () => ["A length is the distance between where a thing starts and where it ends on the ruler. If it does not start at 0, we take the start mark away from the end mark."],
     explain: (s) => `From ${s.inputs[1]} to ${s.inputs[0]} is ${s.value} cm.`,
     figure: ([a, b]) => ({ type: "numberline", from: 0, to: 15, step: 1, marks: [a, b], jumps: [[a, b]] }),
     domain: [[0, 8], [2, 15]],
@@ -1242,6 +1292,9 @@ export const B02: Def[] = [
       return [g + 100, g - 100, g + 50, g + 200].filter((x) => x > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "kg"
+        ? ["The answer is asked in grams, and 1 kg is 1000 g, so we change kilograms into grams first."]
+        : ["The balance is level, so the bag weighs the same as all the weights together. We add them in grams."]),
     explain: (s) => (s.id === "kg" ? `${s.inputs[0]} kg = ${s.value} g.` : `${(s.inputs as string[]).join(" + ")} = ${s.value} g.`),
     figure: (p) => ({ type: "balance", left: "bag of rice", right: weightList(p).join(" + ") }),
     domain: [[0, 2], [0, 1], [0, 2], [0, 2], [0, 1]],
@@ -1291,6 +1344,9 @@ export const B02: Def[] = [
       { id: "extra-group", kind: "procedural", competency: GROUPS, says: `One group too many was counted: the count went on after the last plate. Say one number for each plate and stop at the last one.`, predict: (g + 1) * e },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "repeat"
+        ? ["Equal groups can be counted by adding the same number again and again, once for each group."]
+        : ["Multiplication is a short way to add equal groups: the number of groups times the number in each group."]),
     explain: (s) => (s.id === "repeat" ? `${(s.inputs as number[]).join(" + ")} = ${s.value}` : `${s.inputs[0]} groups of ${s.inputs[1]} is ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}.`),
     figure: ([g, e]) => ({ type: "array", rows: g, cols: e }),
     domain: [[2, 10], [2, 10]],
@@ -1339,6 +1395,11 @@ export const B02: Def[] = [
       { id: "tens-ones-swapped", kind: "procedural", competency: PV, says: "The tens and the ones were written in each other's places. Tens come before ones.", predict: t !== o ? h * 100 + o * 10 + t : null },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "hundreds"
+        ? ["Each hundreds block stands for 100, so we find how much the hundreds are worth."]
+        : s.id === "tens"
+          ? ["Each tens block stands for 10, so we find how much the tens are worth."]
+          : ["The number is the hundreds, the tens and the ones put together, so we add their values."]),
     explain: (s) => (s.id === "hundreds" ? `${s.inputs[0]} ${plural(Number(s.inputs[0]), "hundred", "hundreds")} = ${s.value}` : s.id === "tens" ? `${s.inputs[0]} ${plural(Number(s.inputs[0]), "ten", "tens")} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     figure: ([h, t, o]) => ({ type: "blocks", hundreds: h, tens: t, ones: o }),
     domain: [[1, 9], [0, 9], [0, 9]],
@@ -1391,6 +1452,9 @@ export const B02: Def[] = [
       { id: "dropped-extra", kind: "conceptual", competency: PV, says: `Only the last digit of ${t >= 10 ? t : o} was kept. The extra ${t >= 10 ? "ten tens make a hundred" : "ten ones make a ten"}: add it to the next place.`, predict: h * 100 + (t % 10) * 10 + (o % 10) },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "regroup"
+        ? ["A place can hold only up to 9. Ten of one place make one of the next place, so we regroup the extra."]
+        : ["Once each place is worth its value, we add the hundreds, tens and ones to get the number."]),
     explain: (s) => (s.id === "regroup" ? (s.inputs[1] === "tens" ? `${s.inputs[0]} tens = ${s.value}` : `${s.inputs[0]} ones = 1 ten and ${Number(s.inputs[0]) - 10} ${plural(Number(s.inputs[0]) - 10, "one", "ones")}`) : `${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     figure: ([h, t, o]) => ({ type: "blocks", hundreds: h, tens: t, ones: o }),
     domain: [[1, 8], [0, 19], [0, 19]],
@@ -1716,6 +1780,9 @@ const GAP02: Def[] = [
         : [B("from-other-end", "conceptual", MAPS, `The direction from the ${m.around[d]} to the ${m.centre} was given. Start at the ${m.centre} and look towards the ${m.around[d]}.`, cs.indexOf(DIRS[(d + 2) % 4]))];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "pick"
+        ? ["We match the direction we found to the choice that says it."]
+        : ["North, East, South and West go round in a fixed order. A right turn moves one step clockwise and a left turn one step the other way."]),
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `The answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 2]],
     difficulty: ([kind, , b]) => (kind === 1 ? 1 : b === 2 ? 2 : 3),
@@ -1818,6 +1885,13 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "squares"
+        ? ["The walk goes along the grid lines, so its length in squares is the squares across added to the squares up or down."]
+        : s.id === "scale"
+          ? ["The scale tells how far one square stands for, so we multiply the number of squares by it."]
+          : s.id === "routes"
+            ? ["To find the shortest way, we first add up the length of each route from the table."]
+            : ["Now that we know each route's length, the shortest is the smallest of them."]),
     explain: (s) => (s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value} squares.` : s.id === "scale" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}.` : s.id === "routes" ? `The three routes are ${s.value} km long.` : `The shortest is ${s.value} km.`),
     domain: [[0, 1], [0, 99]],
     difficulty: ([kind, seed]) => (kind === 0 ? (pathOf(seed).S <= 5 ? 1 : 2) : 3),
@@ -1883,6 +1957,7 @@ const GAP02: Def[] = [
           : [B("any-curve", "conceptual", SHAPE, "Every shape with a curve was counted. A circle has no straight side; only the half circles have both.", n(1) + n(2))];
     },
     variants: () => [],
+    stepWhy: () => ["A shape with only straight sides has no bends, and a curved side bends smoothly. We check every side of each shape."],
     explain: (s) => `There are ${s.value}.`,
     domain: [[6, 9], [0, 29], [0, 2]],
     cap: 300,
@@ -1967,6 +2042,11 @@ const GAP02: Def[] = [
         ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["We add what all the shapes have to get the total the question asks for."]
+        : s.op === "check each shape"
+          ? ["We check each shape for the property asked about, one at a time, and count the ones that have it."]
+          : ["Every shape of one kind has the same number of sides and corners, so we find it for one shape first."]),
     explain: (s) => (s.id === "each" || s.id === "each2" ? `A ${s.inputs[0]} has ${s.value} ${s.inputs[1]}.` : `That makes ${s.value}.`),
     domain: [[0, 1], [0, 39], [0, 3], [0, 23], [0, 3]],
     // level@1: diagonals are later work: of squares and rectangles Grade 4, of pentagons and hexagons Grade 5
@@ -2045,6 +2125,9 @@ const GAP02: Def[] = [
       ].filter((b) => b.predict !== ans);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["The question asks about all the solids together, so we add what each one has."]
+        : ["Every solid of one kind has the same faces and edges, so we work it out for one of that kind."]),
     explain: (s) => (s.id === "total" ? `In all: ${s.value}.` : `A ${s.inputs[0]}: ${s.value}.`),
     domain: [[0, 2], [1, 3], [0, 4], [0, 3], [0, 4]],
     cap: 300,
@@ -2097,6 +2180,7 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["We look at each thing's edges: straight edges do not bend, curved ones do. Then we count the things that match."],
     explain: (s) => `They are: ${(s.inputs as string[]).join(", ")}, so ${s.value}.`,
     domain: [[0, 59], [0, 1]],
     difficulty: ([, q]) => (q ? 1 : 2),
@@ -2159,6 +2243,7 @@ const GAP02: Def[] = [
       });
     },
     variants: () => [],
+    stepWhy: () => ["Every container was filled with the same cup, so the one that took more cups holds more. Being taller does not decide it."],
     explain: (s) => `By cups: ${s.value}.`,
     domain: [[3, 4], [0, 23], [0, 23], [0, 1]],
     cap: 300,
@@ -2221,6 +2306,11 @@ const GAP02: Def[] = [
         ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rise"
+        ? ["When a thing sinks in water it pushes the water up by exactly its own volume. The rise in level is that volume."]
+        : s.id === "share"
+          ? ["The marbles are all the same, so each one pushed the water up by the same amount. We share the rise equally."]
+          : ["The volume of the thing is the space it takes up, which is the amount the water was pushed up."]),
     explain: (s) => (s.id === "rise" ? `The water goes from ${s.inputs[1]} ml to ${s.inputs[0]} ml: a rise of ${s.value} ml.` : s.id === "share" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}.` : `So the answer is ${s.value}.`),
     domain: [[0, 2], [2, 8], [2, 30], [1, 5]],
     cap: 300,
@@ -2275,6 +2365,7 @@ const GAP02: Def[] = [
       B("counted-start", "procedural", ADD, `When counting on, ${a} itself was counted as the first step. Start at ${a} and say the next number for each rupee.`, a + b - 1),
     ],
     variants: () => [],
+    stepWhy: () => ["The cost of buying both things is the two prices together, so we add them."],
     explain: (s) => `₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}`,
     domain: [[2, 15], [2, 15], [0, 3]],
     cap: 300,
@@ -2328,6 +2419,9 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["We must pay for both things, so first we find what they cost together."]
+        : ["Money is enough if it is the same as the total or more than it, and not enough if it is less."]),
     explain: (s) => (s.id === "total" ? `Together they cost ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}.` : `₹${s.inputs[0]} compared with ₹${s.inputs[1]}: ${String(s.value).toLowerCase()}.`),
     domain: [[2, 9], [2, 9], [0, 8]],
     cap: 300,
@@ -2389,6 +2483,9 @@ const GAP02: Def[] = [
         ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "add one row at a time"
+        ? ["Equal rows can be counted by adding the number in one row again and again, once for each row."]
+        : ["When the same number is added again and again, multiplying is a short way to write it: how many times it is added, times the number."]),
     explain: (s) => `${s.inputs[0]} groups of ${s.inputs[1]}: ${s.value}.`,
     domain: [[0, 1], [2, 7], [2, 10]],
     difficulty: ([kind, g]) => (kind === 0 && g <= 4 ? 1 : kind === 0 ? 2 : 3),
@@ -2449,6 +2546,9 @@ const GAP02: Def[] = [
           ...(kind === 1 ? [B("steps-as-metres", "conceptual", LEN, "Each quarter metre was counted as a whole metre. It takes 4 quarter metres to make 1 m.", b - a)] : [B("counted-marks", "procedural", LEN, "The marks were counted instead of the spaces between them. There is one more mark than spaces.", b - a + 1)]),
         ],
     variants: () => [],
+    stepWhy: (s) => (s.op === "read cm and mm"
+        ? ["Each centimetre has 10 small millimetre marks, so we change the centimetres to millimetres and add the extra millimetres."]
+        : ["A length is from the start mark to the end mark. If the start is not at 0, we take it away from the end."]),
     explain: (s) => (s.op === "read cm and mm" ? `${s.inputs[0]} cm and ${s.inputs[1]} mm is ${s.value} mm.` : `${fmt2(Number(s.inputs[0]))} − ${fmt2(Number(s.inputs[1]))} = ${s.value}`),
     domain: [[0, 2], [0, 14], [0, 20]],
     // level@1: quarter metres are Grade 4 (fractions of a unit), millimetres Grade 3
@@ -2538,6 +2638,7 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["We pick the unit that fits the size of the thing: millimetres for tiny things, centimetres for small ones, metres for rooms and kilometres for long journeys."],
     explain: (s) => `The best choice is ${s.value}.`,
     domain: [[0, 2], [0, 39]],
     difficulty: ([kind]) => (kind === 1 ? 1 : kind === 0 ? 2 : 3),
@@ -2617,6 +2718,7 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["We compare with things we know. Grams suit light things like a pencil, and kilograms suit heavy things like a bag of rice."],
     explain: (s) => `The answer is: ${s.value}.`,
     domain: [[0, 2], [0, 23], [0, 2]],
     // level@1: milligrams (and the four-digit gram facts behind them) are Grade 4
@@ -2672,6 +2774,9 @@ const GAP02: Def[] = [
     },
     distractors: ([kg, f]) => [tup(kg + 1, 5 * f), tup(kg, 1000 - 5 * f), tup(kg - 1, 5 * f)],
     variants: () => [],
+    stepWhy: (s) => (s.id === "kg"
+        ? ["1000 g make 1 kg, so each full thousand grams is one kilogram."]
+        : ["The grams that do not make a full thousand stay as grams."]),
     explain: (s) => (s.id === "kg" ? `${s.inputs[0]} g has ${s.value} full thousands, so ${s.value} kg.` : `and ${s.value} g left over.`),
     domain: [[1, 9], [1, 199]],
     // level@1: four-digit gram amounts are Grade 4
@@ -2765,6 +2870,11 @@ const GAP02: Def[] = [
       return [[t[0] + 1, t[1]], [t[0], t[1] + 1], [t[0] - 1, t[1]], [t[0], t[1] - 1], [t[0] + 2, t[1]], [t[0], t[1] + 2], [t[0] - 2, t[1]], [t[0], t[1] - 2]].filter(([x, y]) => ok(x, y)).map(([x, y]) => tup(x, y));
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "move back" || s.op === "move right"
+        ? ["Moving back goes to bigger row numbers and moving right to bigger seat numbers, so we add the moves to the starting place."]
+        : s.id === "row"
+          ? ["Rows count from the front, so we find which row the child sits in."]
+          : ["Seats count from the left, so we find which seat in that row it is."]),
     explain: (s) => (s.id === "row" ? `Row ${s.value}.` : `Seat ${s.value}.`),
     domain: [[0, 1], [0, 39], [0, 19]],
     cap: 300,
@@ -2837,6 +2947,9 @@ const GAP02: Def[] = [
         : [B("decimal-hours", "conceptual", CLOCK, `${b} and ${["", "a half", "a quarter", "three quarters"][a]} hours was read like ${b}.${["", "5", "25", "75"][a]} with 100 minutes in an hour. An hour has 60 minutes.`, 100 * b + [0, 50, 25, 75][a])];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "1 hour = 60 minutes"
+        ? ["One hour is 60 minutes, so a quarter hour is 15 minutes and half an hour is 30. We change the hours into minutes."]
+        : ["The long hand shows the minutes. Each number on the clock is 5 minutes more, starting from 0 at the 12."]),
     explain: (s) => `That is ${s.value} minutes.`,
     domain: [[0, 2], [0, 12], [1, 59]],
     cap: 300,
@@ -2887,6 +3000,11 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "add 12 to the p.m. hours"
+        ? ["The 24-hour clock keeps counting after noon, so 1 p.m. is 13:00. We add 12 to an afternoon or evening hour."]
+        : s.op === "take 12 from the hours after noon"
+          ? ["The 24-hour clock counts past 12 after noon. Taking 12 away gives the p.m. hour on a 12-hour clock."]
+          : ["Before noon both clocks show the same hour, so the hours stay as they are and only a.m. is added or taken off."]),
     explain: (s) => `${s.value}`,
     domain: [[0, 1], [0, 23], [0, 11]],
     // level@1: the 24-hour clock is Grade 4
@@ -2949,6 +3067,13 @@ const GAP02: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "digits"
+        ? ["10 is one more than 9, so each digit leaves the same remainder by 9 as the digit itself. Adding the digits keeps that remainder."]
+        : s.id === "each"
+          ? ["The check number of a sum or product can be found from the check numbers of its parts, so we find each one first."]
+          : s.id === "combine"
+            ? ["Remainders by 9 behave well: adding or multiplying the numbers adds or multiplies their check numbers too."]
+            : ["Taking away nines does not change the remainder by 9, so we keep taking nines until one digit is left."]),
     explain: (s) => (s.id === "digits" ? `The digits of ${s.inputs[0]} add up to ${s.value}.` : s.id === "each" ? `The check numbers are ${s.value}.` : s.id === "combine" ? `${s.inputs[0]} and ${s.inputs[1]} give ${s.value}.` : `Casting out nines leaves ${s.value}.`),
     domain: [[0, 2], [0, 99]],
     // level@1: casting out nines is Grade 4 work (Grade 5 with four-digit numbers)
@@ -3036,6 +3161,11 @@ const GAP02: Def[] = [
       return [B("same-difference", "conceptual", PAT, "The last difference was added again. On this diagonal the differences grow: they are the numbers on the diagonal before.", last + diff !== terms[a] ? last + diff : null)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "double"
+        ? ["Each number in a row is passed down to two numbers in the next row, so each row adds up to twice the one before."]
+        : s.id === "next"
+          ? ["Each number in the triangle is the sum of the two numbers just above it. One of them is the number before it on the same diagonal."]
+          : ["Each number in the triangle is the sum of the two numbers just above it."]),
     explain: (s) => (s.id === "rule" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "double" ? `The row sums double: 2 multiplied by itself ${s.inputs[0]} times is ${s.value}.` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [2, 17], [1, 9]],
     // level@1: Pascal's triangle is Grade 6 (number patterns)

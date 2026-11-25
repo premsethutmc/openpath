@@ -728,6 +728,11 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([n, a, b, c]) => [[n, a, 0, c], [n, a, b, a]].filter((q) => K_PDFP(q) && q.join() !== [n, a, b, c].join()),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cdf": ["For a continuous variable, probability is area under the density curve. Integrating the density gives F(x), the area up to x."],
+        "limits": ["The area between two values is the area up to the upper one minus the area up to the lower one."],
+      }),
     explain: (s) => (s.id === "cdf" ? `Integrate the density from 0: ${s.value}` : `P = F(${s.inputs[0]}) − F(${s.inputs[1]}) = ${F(Number(s.value))}`),
     domain: D_PDFP,
     keep: K_PDFP,
@@ -777,6 +782,11 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([n, lo, hi]) => [[n, 0, hi], [n, lo, hi + 1]].filter((q) => K_PDFK(q) && q.join() !== [n, lo, hi].join()),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "total": ["X must take some value, so the total area under a density curve is 1. Work out that area in terms of k."],
+        "solve": ["Setting the total area equal to 1 gives an equation for k."],
+      }),
     explain: (s) => (s.id === "total" ? `The total area is ${s.value}` : `Set it equal to 1: k = ${s.inputs[0]}/${s.inputs[1]} = ${F(Number(s.value))}`),
     domain: D_PDFK,
     keep: K_PDFK,
@@ -841,6 +851,11 @@ export const B20: Def[] = [
       ];
     },
     variants: ([a, b, k]) => [0, 1, 2, 3].filter((x) => x !== k).map((x) => [a, b, x]),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "both": ["For independent events, one happening does not change the chance of the other, so the chance of both is the product."],
+        "combine": ["The other probabilities are built from P(A), P(B) and P(A ∩ B): the addition rule for 'at least one', the complements for 'neither', and the two 'only' parts for 'exactly one'."],
+      }),
     explain: (s) => (s.id === "both" ? `P(A ∩ B) = P(A) × P(B) = ${s.inputs[0]} × ${s.inputs[1]} = ${dec(+Number(s.value).toFixed(4))}` : `Combine: ${["P(A ∩ B)", "P(A) + P(B) − P(A ∩ B)", "(1 − P(A))(1 − P(B))", "P(A) + P(B) − 2P(A ∩ B)"][Number(s.inputs[0])]} = ${F(Number(s.value))}`),
     domain: D_INDU,
     difficulty: ([, , k]) => (k === 0 ? 1 : k === 1 ? 2 : 3),
@@ -897,6 +912,11 @@ export const B20: Def[] = [
       ];
     },
     variants: ([N, a, m]) => [[N, a, m + 1], [N, a, m - 1]].filter((q) => inBox(q, D_INDT) && K_INDT(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "count": ["With equally likely outcomes, each probability is a count divided by the total, so count the outcomes in A, in B and in both."],
+        "compare": ["A and B are independent when P(A ∩ B) = P(A) × P(B). Multiplying through by N² turns that into comparing whole numbers."],
+      }),
     explain: (s) => (s.id === "count" ? `n(A) = ${s.inputs[0]}, n(B) = ${s.inputs[1]}, n(A ∩ B) = ${s.inputs[2]}` : `Compare N × n(A ∩ B) = ${s.inputs[0]} with n(A) × n(B) = ${s.inputs[1]}: ${INDT_CHOICES[Number(s.value)]}`),
     domain: D_INDT,
     keep: K_INDT,
@@ -947,6 +967,10 @@ export const B20: Def[] = [
       ];
     },
     variants: (p) => [[p[0] + 1, ...p.slice(1)]].filter((q) => inBox(q, D_RV)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "products": ["The mean of a random variable is a weighted average: each value counts in proportion to its probability. So multiply each value by its probability and add."],
+      }),
     explain: (s) => `E(X) = Σ x P(x) = ${s.inputs.join("")} = ${F(Number(s.value))}`,
     domain: D_RV,
     keep: K_RV,
@@ -999,6 +1023,12 @@ export const B20: Def[] = [
       ];
     },
     variants: (p) => [[p[0] - 1, ...p.slice(1)]].filter((q) => inBox(q, D_RV)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "mean": ["Variance measures spread about the mean, so the mean is needed first."],
+        "ex2": ["The shortcut formula for variance uses the mean of the squares, E(X²)."],
+        "var": ["Var(X) = E(X²) − [E(X)]². This comes from expanding the average of (X − mean)²."],
+      }),
     explain: (s) => (s.id === "mean" ? `E(X) = Σ x P(x) = ${F(Number(s.value))}` : s.id === "ex2" ? `E(X²) = Σ x² P(x) = ${F(Number(s.value))}` : `Var(X) = E(X²) − [E(X)]² = ${F(Number(s.inputs[0]))} − (${F(Number(s.inputs[1]))})² = ${F(Number(s.value))}`),
     domain: D_RV,
     keep: K_RV,
@@ -1055,6 +1085,12 @@ export const B20: Def[] = [
       { id: "one-case-only", kind: "procedural", competency: TOT, says: "Only the Bag I case was counted; a red ball can also come from Bag II, so add both cases.", predict: (k / 6) * (r1 / (r1 + b1)) },
     ],
     variants: ([k, ...r]) => [[k === 3 ? 2 : 3, ...r]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "bag1": ["A red ball through Bag I needs Bag I to be chosen and then a red ball from it, so multiply the two probabilities."],
+        "bag2": ["The same for the path through Bag II."],
+        "total": ["The ball comes from exactly one bag, so the two paths cannot both happen. Add them for the total probability."],
+      }),
     explain: (s) => (s.id === "total" ? `Add the two cases: P(red) = ${F(Number(s.value))}` : `P(${s.id === "bag1" ? "Bag I" : "Bag II"}) × P(red | ${s.id === "bag1" ? "Bag I" : "Bag II"}) = ${s.inputs[0]} × ${s.inputs[1]} = ${F(Number(s.value))}`),
     domain: D_TOT,
     cap: 400,
@@ -1116,6 +1152,11 @@ export const B20: Def[] = [
       ];
     },
     variants: ([kind, a, b]) => (kind === 0 ? [[0, b, a]] : []),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "converse": ["The converse of 'if P then Q' is 'if Q then P': the condition and the conclusion swap places."],
+        "decide": ["A statement and its converse are different claims, so each must be checked on its own. One false example is enough to show a claim is false."],
+      }),
     explain: (s) => (s.id === "converse" ? `The converse swaps the parts: "${s.value}"` : `The statement is ${s.inputs[0]}; the converse is ${s.inputs[1]}`),
     domain: D_CONV,
     keep: K_CONV,
@@ -1161,6 +1202,11 @@ export const B20: Def[] = [
     bugs: ([a, c]) => [{ id: "obvious-factor-not-smallest", kind: "procedural", competency: LOG, says: `n = ${c} makes every term a multiple of ${c}, so it is a counterexample, but the question asks for the SMALLEST one; check n = 1, 2, 3, … in order.`, predict: c }],
     distractors: ([a, c]) => [cexAns(a, c) + 1, cexAns(a, c) - 1, c - 1],
     variants: ([a, c]) => [[a + 1, c]].filter((q) => inBox(q, D_CEX) && K_CEX(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "search": ["A claim about every n is disproved by one counterexample. Trying n in order finds the smallest one."],
+        "factor": ["A number is not prime if it is less than 2 or has a factor other than 1 and itself. Showing that makes it a counterexample."],
+      }),
     explain: (s) => (s.id === "search" ? `For n = ${s.inputs[0]} to ${s.inputs[1]} the values are all prime` : Number(s.inputs[0]) < 2 ? `At n = ${s.value} the value is ${s.inputs[0]}, which is not prime` : `At n = ${s.value} the value is ${s.inputs[0]} = ${s.inputs[1]} × ${Number(s.inputs[0]) / Number(s.inputs[1])}, not prime`),
     domain: D_CEX,
     keep: K_CEX,
@@ -1207,6 +1253,10 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([x, o1, y, o2, z]) => [[x, o2, y, o1, z]].filter((q) => q.join() !== [x, o1, y, o2, z].join()),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rows": ["Each row of the truth table is one choice of true and false for the letters. Working the statement out row by row and counting covers every case."],
+      }),
     explain: (s) => `Work out ${s.inputs[0]} in each of the 8 rows: ${s.value} rows are true`,
     domain: D_ROWS,
     keep: K_ROWS,
@@ -1251,6 +1301,11 @@ export const B20: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rows": ["Each row is one choice of true and false for the letters. Working the statement out in every row shows when it is true."],
+        "classify": ["True in every row is a tautology, false in every row a contradiction, and anything in between a contingency."],
+      }),
     explain: (s) => (s.id === "rows" ? `Work out ${s.inputs[0]} in the 4 rows: true in ${s.value} of them` : `${s.inputs[0]} true rows out of 4: ${["a tautology", "a contradiction", "a contingency"][Number(s.value)]}`),
     domain: D_CLASS,
     keep: K_CLASS,
@@ -1308,6 +1363,12 @@ export const B20: Def[] = [
       ];
     },
     variants: (p) => [[p[0] + 1, ...p.slice(1)]].filter((q) => inBox(q, D_VAR)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "mean": ["Variance measures spread about the mean, so find the mean first, using the frequencies as weights."],
+        "ex2": ["The shortcut formula needs the mean of the squares, again weighting each value by its frequency."],
+        "var": ["Variance is the mean of the squares minus the square of the mean, which is the same as averaging the squared distances from the mean."],
+      }),
     explain: (s) => (s.id === "mean" ? `x̄ = Σfx/N = ${s.inputs[0]}/${s.inputs[1]} = ${F(Number(s.value))}` : s.id === "ex2" ? `Σfx²/N = ${s.inputs[0]}/${s.inputs[1]} = ${F(Number(s.value))}` : `σ² = Σfx²/N − x̄² = ${F(Number(s.inputs[0]))} − (${F(Number(s.inputs[1]))})² = ${F(Number(s.value))}`),
     domain: D_VAR,
     cap: 400,
@@ -1356,6 +1417,12 @@ export const B20: Def[] = [
     },
     distractors: (p) => [rootS(sdM(p)), fracRoot(sdM(p), 6)],
     variants: (p) => [p.map((x) => x + 1)].filter((q) => inBox(q, D_SD)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "mean": ["Standard deviation measures spread about the mean, so find the mean first."],
+        "var": ["Square each distance from the mean, so that distances above and below do not cancel, and average them. That is the variance."],
+        "sd": ["The variance is in squared units, so take the square root to get back to the units of the data."],
+      }),
     explain: (s) => (s.id === "mean" ? `x̄ = ${s.inputs[0]}/6 = ${F(Number(s.value))}` : s.id === "var" ? `σ² = Σ(x − x̄)²/6 = ${F(Number(s.value))}` : `σ = √(${s.inputs[0]}) = ${s.value}`),
     domain: D_SD,
     keep: K_SD,
@@ -1397,6 +1464,12 @@ export const B20: Def[] = [
       { id: "higher-mean", kind: "conceptual", competency: DISP, says: "The higher average was chosen; a higher mean means scoring more, not scoring more steadily.", predict: m1 > m2 ? 0 : 1 },
     ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cv1": ["The coefficient of variation is the standard deviation as a percentage of the mean. It lets us compare spread fairly when the means are different."],
+        "cv2": ["Work out the second coefficient of variation the same way."],
+        "compare": ["A smaller CV means less variation compared with the average, which means more consistent."],
+      }),
     explain: (s) => (s.id === "compare" ? (Number(s.value) === 2 ? "The two CVs are equal, so they are equally consistent" : "The smaller CV is more consistent") : `CV = ${s.inputs[0]}/${s.inputs[1]} × 100 = ${+Number(s.value).toFixed(2)}%`),
     domain: D_CV,
     keep: K_CV,
@@ -1453,6 +1526,12 @@ export const B20: Def[] = [
       ];
     },
     variants: (p) => [p.map((x) => x + 2)].filter((q) => inBox(q, D_MD6)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "mean": ["Mean deviation about the mean measures the average distance from the mean, so find the mean first."],
+        "deviations": ["Distances are never negative, so take |x − x̄| for each value and add them."],
+        "md": ["Divide the total distance by the number of values to get the average distance."],
+      }),
     explain: (s) => (s.id === "mean" ? `x̄ = ${s.inputs[0]}/6 = ${F(Number(s.value))}` : s.id === "deviations" ? `The distances |x − x̄| are ${s.inputs[0]}; they add up to ${F(Number(s.value))}` : `M.D. = ${F(Number(s.inputs[0]))}/6 = ${F(Number(s.value))}`),
     domain: D_MD6,
     keep: K_MD6,
@@ -1495,6 +1574,12 @@ export const B20: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "order": ["The median is the middle value, so put the data in order first."],
+        "distances": ["Find how far each value is from the median, ignoring signs, and add."],
+        "md": ["Divide by the number of values to get the average distance."],
+      }),
     explain: (s) => (s.id === "order" ? `In order: ${s.inputs[0]}; the median is ${s.value}` : s.id === "distances" ? `The distances |x − ${s.inputs[0]}| add up to ${s.value}` : `M.D. = ${s.inputs[0]}/7 = ${F(Number(s.value))}`),
     domain: D_MD7,
     keep: K_MD7,
@@ -1543,6 +1628,11 @@ export const B20: Def[] = [
     },
     distractors: ([ai, bi, o, f]) => [sFmt(sNeg(compValue(f, CA[ai], CB[bi], o))), sFmt(compValue(f === 0 ? 1 : f === 1 ? 0 : 2, CA[ai], CB[bi], o)), sFmt(compValue(f, CA[ai], CB[bi], 1 - o)), ...(f === 2 ? ["2 + √3", "2 − √3", "−2 − √3", "√3 − 2"] : ["(√6 + √2)/4", "(√6 − √2)/4", "−(√6 + √2)/4", "(√2 − √6)/4"])],
     variants: ([ai, bi, o, f]) => [[ai, bi, 1 - o, f]].filter((q) => K_COMP(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "parts": ["A compound-angle formula builds the trig ratio of A ± B from the ratios of A and B, which we know exactly for standard angles."],
+        "formula": ["Put those values into the formula and simplify, rationalising the denominator if needed."],
+      }),
     explain: (s) => (s.id === "parts" ? `sin ${s.inputs[0]}°, cos ${s.inputs[0]}° and sin ${s.inputs[1]}°, cos ${s.inputs[1]}°: ${s.value}` : `Put them into the ${s.inputs[0]}(A ${Number(s.inputs[1]) ? "−" : "+"} B) formula and simplify: ${s.value}`),
     domain: D_COMP,
     keep: K_COMP,
@@ -1600,6 +1690,11 @@ export const B20: Def[] = [
       return [-v, 1 / v, v / 2];
     },
     variants: ([t, g, q, h]) => [0, 1, 2].filter((x) => x !== h).map((x) => [t, g, q, x]),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "other": ["The double-angle formula needs both sin A and cos A. sin²A + cos²A = 1 gives the missing one, and the quadrant tells its sign."],
+        "double": ["Use the double-angle formula, which writes the ratio of 2A using the ratios of A."],
+      }),
     explain: (s) => (s.id === "other" ? `From sin²A + cos²A = 1 with the quadrant's sign: ${s.inputs[0]} = ${F(Number(s.value))}` : `${s.inputs[0]} = ${["2 sin A cos A", "cos²A − sin²A", "2 tan A/(1 − tan²A)"][DBL_F.indexOf(String(s.inputs[0]))]} = ${F(Number(s.value))}`),
     domain: D_DBL,
     difficulty: ([t, , q, h]) => (q === 1 && t === 0 ? 1 : h === 2 || q > 2 ? 3 : 2),
@@ -1647,6 +1742,11 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([t, a, b]) => [0, 1, 2, 3].filter((x) => x !== t).map((x) => [x, a, b]),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["A product of sines and cosines can be written as a sum or difference using the product-to-sum formulas. The new angles are A + B and A − B."],
+        "choose": ["Pick the option that matches the result."],
+      }),
     explain: (s) => (s.id === "choose" ? `So the equal option is ${"ABCD"[Number(s.value)]}` : `The angles are A + B = ${ax(Number(s.inputs[1]))} and A − B = ${ax(Number(s.inputs[2]))}: ${s.inputs[0]} = ${s.value}`),
     domain: D_P2S,
     keep: K_P2S,
@@ -1704,6 +1804,11 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([f, v, k, w]) => [[f, v, k === 1 ? 2 : 1, w]].filter((q) => K_PRINC(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "principal": ["The inverse function gives one angle with the required value, the principal value. Every other solution comes from it."],
+        "general": ["sin, cos and tan repeat, so there are other angles with the same value. List them all, then keep only those in the asked range."],
+      }),
     explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is ${s.value}` : `All angles with this value, divided by ${s.inputs[0]} and kept in 0 ≤ x < 2π: x = ${(s.value as number[]).map((c) => piStr(Math.round(c * 144), 144)).join(", ")} `),
     domain: D_PRINC,
     keep: K_PRINC,
@@ -1768,6 +1873,11 @@ export const B20: Def[] = [
       ];
     },
     variants: ([f, v, k, w]) => [[f, v, k === 1 ? 2 : 1, w]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "principal": ["The inverse function gives one angle α with the required value. The general solution is built from it."],
+        "general": ["Because the functions repeat, each standard form lists every angle with that value: nπ + (−1)ⁿα for sin, 2nπ ± α for cos, nπ + α for tan. Then divide to get x."],
+      }),
     explain: (s) => (s.id === "principal" ? `The principal value of ${s.inputs[0]}⁻¹(${s.inputs[1]}) is α = ${s.value}` : `For ${s.inputs[0]}: ${["kx = nπ + (−1)ⁿα", "kx = 2nπ ± α", "kx = nπ + α"][FN.indexOf(String(s.inputs[0]))]}, then divide by ${s.inputs[1]}`),
     domain: D_GEN,
     difficulty: ([f, v, k]) => (k === 1 && GENV[f][v].v > 0 ? 1 : k === 1 ? 2 : 3),
@@ -1830,6 +1940,12 @@ export const B20: Def[] = [
       return out;
     },
     variants: ([f, m]) => [[f, m + 2], [f, -m]].filter((q) => inBox(q, D_VAL) && K_VAL(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reduce": ["Adding or taking away full turns of 360° lands in the same position, so the trig ratios are the same."],
+        "reference": ["The reference angle is the acute angle to the x-axis. Its ratio gives the size of the answer."],
+        "sign": ["The quadrant decides the sign: all positive in the first, sin in the second, tan in the third, cos in the fourth."],
+      }),
     explain: (s) => (s.id === "reduce" ? `${neg(Number(s.inputs[0]))}° is the same position as ${s.value}°` : s.id === "reference" ? `${s.inputs[0]}° has reference angle ${s.value}°` : `Use the reference angle with the sign of ${s.inputs[0]} in that quadrant: ${s.value}`),
     domain: D_VAL,
     keep: K_VAL,
@@ -1882,6 +1998,11 @@ export const B20: Def[] = [
       ];
     },
     variants: ([f, k, a, c]) => [[f, k === 6 ? 2 : k + 1, a, c]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "base": ["Start from the period of the basic function."],
+        "divide": ["Multiplying x by k makes the graph run through its cycle k times as fast, so the period is divided by k."],
+      }),
     explain: (s) => (s.id === "base" ? `${s.inputs[0]} x repeats every ${s.value}` : `Multiplying x by ${s.inputs[0]} divides the period by ${s.inputs[0]}: ${s.value}`),
     domain: D_PER,
     cap: 300,
@@ -1922,6 +2043,10 @@ export const B20: Def[] = [
     ],
     distractors: ([m]) => [piStr(5 * m, 90), piStr(-5 * m, 180)],
     variants: ([m]) => [[-m]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "multiply": ["A full turn is 360° or 2π radians, so 180° = π radians. Multiplying by π/180 converts degrees into radians."],
+      }),
     explain: (s) => `${neg(Number(s.inputs[0]))}° × π/180 = ${s.value}`,
     domain: D_RAD,
     keep: ([m]) => m !== 0,
@@ -1954,6 +2079,10 @@ export const B20: Def[] = [
     ],
     distractors: ([k, d]) => [(90 * k) / d, (180 * d) / k, -(180 * k) / d],
     variants: ([k, d]) => [[-k, d]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "multiply": ["π radians is 180°, so replacing π by 180° converts radians into degrees."],
+      }),
     explain: (s) => `Replace π by 180°: ${s.inputs[0]} = ${F(Number(s.value))}°`,
     domain: D_DEG,
     keep: K_DEG,
@@ -2014,6 +2143,13 @@ export const B20: Def[] = [
       ];
     },
     variants: ([kind, a, b]) => [[kind, a, b + 1]].filter((q) => inBox(q, D_ARC) && K_ARC(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "radians": ["The formulas l = rθ and A = ½r²θ only work with θ in radians, so convert first."],
+        "arc": ["An angle of θ radians cuts off an arc θ times the radius, which is what a radian means."],
+        "angle": ["Since l = rθ, dividing the arc by the radius gives the angle in radians."],
+        "area": ["A sector is a fraction θ/(2π) of the whole circle, so its area is that fraction of πr², which is ½r²θ."],
+      }),
     explain: (s) => (s.id === "radians" ? `${s.inputs[0]}° = ${s.inputs[0]} × π/180 = ${F(Number(s.value))} radians (π = 22/7)` : s.id === "arc" ? `l = rθ = ${s.inputs[0]} × ${s.inputs[1]} = ${F(Number(s.value))}` : s.id === "angle" ? `θ = l/r = ${s.inputs[0]}/${s.inputs[1]} = ${F(Number(s.value))}` : `A = ½r²θ = ½ × ${s.inputs[0]}² × ${s.inputs[1]} = ${F(Number(s.value))}`),
     domain: D_ARC,
     keep: K_ARC,
@@ -2070,6 +2206,11 @@ export const B20: Def[] = [
     },
     distractors: ([pi, a]) => [sFmt(sScale(sMul(sinE(SPAIRS[pi][1]), sinE(SPAIRS[pi][0])), [a, 1])), String(a)],
     variants: ([pi, a]) => [[pi, a + 1]].filter((q) => inBox(q, D_SINR)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rule": ["In any triangle each side divided by the sine of the opposite angle gives the same number. We know a full pair (a and A), so the rule gives b."],
+        "evaluate": ["Put in the sines of the standard angles."],
+      }),
     explain: (s) => (s.id === "rule" ? `a/sin A = b/sin B, so ${s.value}` : `sin B = ${s.inputs[0]}, sin A = ${s.inputs[1]}: b = ${s.value}`),
     domain: D_SINR,
     cap: 300,
@@ -2119,6 +2260,11 @@ export const B20: Def[] = [
       { id: "wrong-angle", kind: "procedural", competency: TRL, says: "The formula for a different angle was used; for A, the side a (opposite A) is the one taken away.", predict: (a * a + c * c - b * b) / (2 * a * c) },
     ],
     variants: ([a, b, c]) => [[b, a, c]].filter((q) => K_COSR(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rule": ["When all three sides are known, the cosine rule a² = b² + c² − 2bc cos A gives the angle. Rearranged, cos A = (b² + c² − a²)/(2bc)."],
+        "divide": ["Divide by 2bc to finish."],
+      }),
     explain: (s) => (s.id === "rule" ? `b² + c² − a² = ${s.inputs[0]} + ${s.inputs[1]} − ${s.inputs[2]} = ${s.value}` : `cos A = ${s.inputs[0]}/${s.inputs[1]} = ${F(Number(s.value))}`),
     domain: D_COSR,
     keep: K_COSR,
@@ -2160,6 +2306,10 @@ export const B20: Def[] = [
     ],
     distractors: ([a, b]) => [F((a * b) / 2), String(a * b)],
     variants: ([a, b, ci]) => [[a, b, (ci + 1) % 7]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["With two sides and the angle between them, the height on one side is the other side times sin C. So the area ½ × base × height becomes ½ab sin C."],
+      }),
     explain: (s) => `Area = ½ab sin C = ½ × ${s.inputs[0]} × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}`,
     domain: D_TAREA,
     keep: K_TAREA,
@@ -2211,6 +2361,14 @@ export const B20: Def[] = [
       return [piStr(K + 6, 12), piStr(K - 6, 12), piStr(12 - K, 12), piStr(-K, 12)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "term0": ["Each inverse trig value means the principal value, the one angle in the function's fixed range."],
+        "term1": ["Find this principal value in the same way."],
+        "term2": ["Find this principal value in the same way."],
+        "term3": ["Find this principal value in the same way."],
+        "total": ["With each term as a single angle, add them."],
+      }),
     explain: (s) => (s.id === "total" ? `Add the principal values: ${s.value}` : `${s.inputs[0]}(${s.inputs[1]}) = ${s.value}`),
     domain: D_INV,
     keep: K_INV,
@@ -2255,6 +2413,11 @@ export const B20: Def[] = [
       return [piStr(-K, m), piStr(m - K, m), piStr(K + m, m)];
     },
     variants: ([f, k, m]) => [[f, k + 1, m]].filter((q) => inBox(q, D_INVC) && K_INVC(q)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "shift": ["Adding or removing whole turns of 2π does not change the trig ratio, so bring the angle near the range first."],
+        "branch": ["The inverse gives an angle only in its principal range, so find the angle in that range with the same ratio. It need not be the angle we started with."],
+      }),
     explain: (s) => (s.id === "shift" ? `${s.inputs[0]} has the same ratio as ${s.value} (a whole number of turns removed)` : `The angle in ${s.inputs[0]} with the same ratio is ${s.value}`),
     domain: D_INVC,
     keep: K_INVC,
@@ -2316,6 +2479,11 @@ export const B20: Def[] = [
       return [tupS(a.map((v, i) => p * v - q * b[i])), tupS(a.map((v, i) => q * v + p * b[i]))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "scale": ["Multiplying a vector by a number multiplies every component by it."],
+        "add": ["Vectors are added component by component: x with x, y with y, z with z."],
+      }),
     explain: (s) => (s.id === "scale" ? `${s.inputs[0]}a = ${s.value}` : `Add ${s.inputs[0]} component by component: ${s.value}`),
     domain: D_LIN,
     keep: K_LIN,
@@ -2363,6 +2531,12 @@ export const B20: Def[] = [
     },
     distractors: (x) => [rootS(len2(sub(x.slice(3), x.slice(0, 3))) + 1), String(len2(sub(x.slice(3), x.slice(0, 3))) * 2)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vector": ["The vector from A to B is the position of B minus the position of A."],
+        "square": ["By Pythagoras in three dimensions, the squared length is the sum of the squared components."],
+        "root": ["The length is the square root of that sum."],
+      }),
     explain: (s) => (s.id === "vector" ? `AB = OB − OA = ${s.value}` : s.id === "square" ? `x² + y² + z² = ${s.value}` : `|AB| = √${s.inputs[0]} = ${s.value}`),
     domain: D_MAG,
     keep: K_MAG,
@@ -2423,6 +2597,11 @@ export const B20: Def[] = [
     },
     distractors: (x) => [tupS(x.slice(0, 3).map((v, i) => (v + x[3 + i]) / 2)), tupS(x.slice(3, 6).map((v, i) => v - x[i])), tupS(x.slice(3, 6).map((v, i) => v + x[i])), tupS(x.slice(3, 6).map((v, i) => 2 * v - x[i]))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["The section formula gives the dividing point as a weighted average of the two position vectors. For external division one weight is subtracted."],
+        "evaluate": ["Work out the formula one component at a time."],
+      }),
     explain: (s) => (s.id === "formula" ? `r = ${s.value}` : `Component by component: r = ${s.value}`),
     domain: D_SEC,
     keep: K_SEC,
@@ -2476,6 +2655,12 @@ export const B20: Def[] = [
     },
     distractors: (x) => [tupS(x.slice(0, 3).map((c) => c / len2(x.slice(0, 3))))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratios": ["The direction of AB is the vector B − A; its components are the direction ratios."],
+        "length": ["Direction cosines describe a unit vector, so we need the length."],
+        "divide": ["Dividing each component by the length gives a unit vector, whose components are the cosines of the angles with the axes."],
+      }),
     explain: (s) => (s.id === "ratios" ? `Direction ratios: B − A = ${s.value}` : s.id === "length" ? `|AB| = √${s.inputs[0]} = ${s.value}` : `Divide each by ${s.inputs[0]}: ${s.value}`),
     domain: D_DC,
     keep: K_DC,
@@ -2539,6 +2724,12 @@ export const B20: Def[] = [
       return [overRoot(-d === 0 ? 1 : -d, len2(a) * len2(b)), overRoot(e, len2(a) + len2(b)), overRoot(d, len2(b)), overRoot(e, (len2(a) * len2(b)) ** 2), overRoot(e, (len2(a) + len2(b)) ** 2)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "dot": ["The dot product of two vectors equals |a||b| cos θ, so it carries the angle."],
+        "lengths": ["To get cos θ out, we need both lengths."],
+        "cos": ["Divide the dot product by the product of the lengths."],
+      }),
     explain: (s) => (s.id === "dot" ? `a · b = ${s.value}` : s.id === "lengths" ? `|a| = ${String(s.value).split(", ")[0]}, |b| = ${String(s.value).split(", ")[1]}` : `cos θ = ${s.inputs[0]}/(|a||b|) = ${s.value}`),
     domain: D_VV,
     keep: K_ANG,
@@ -2590,6 +2781,12 @@ export const B20: Def[] = [
     },
     distractors: (x) => [overRoot(-dot(x.slice(0, 3), x.slice(3)), len2(x.slice(3)))],
     variants: (x) => [[...x.slice(3), ...x.slice(0, 3)]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "dot": ["The projection of a on b is |a| cos θ, and a · b = |a||b| cos θ. So the dot product is the starting point."],
+        "length": ["We need |b| to divide by."],
+        "divide": ["Dividing a · b by |b| leaves |a| cos θ, the projection."],
+      }),
     explain: (s) => (s.id === "dot" ? `a · b = ${s.value}` : s.id === "length" ? `|b| = ${s.value}` : `Projection = a · b/|b| = ${s.inputs[0]}/${s.inputs[1]} = ${s.value}`),
     domain: D_VV,
     keep: (x) => K_ANG(x) && dot(x.slice(0, 3), x.slice(3)) !== 0,
@@ -2642,6 +2839,12 @@ export const B20: Def[] = [
       return [tupS([c[1], c[2], c[0]]), tupS([c[0] + 1, c[1], c[2]]), tupS([c[0], c[1], c[2] - 1])];
     },
     variants: (x) => [[...x.slice(3), ...x.slice(0, 3)]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "i": ["Each component of a × b is a 2 × 2 determinant using the other two components. The î part uses the y and z parts."],
+        "j": ["The ĵ part uses the x and z parts, and carries a minus sign from the expansion."],
+        "k": ["The k̂ part uses the x and y parts."],
+      }),
     explain: (s) => `${s.id === "i" ? "î" : s.id === "j" ? "ĵ" : "k̂"}: ${s.inputs[0]} = ${neg(Number(s.value))}`,
     domain: D_VV,
     keep: K_CROSS,
@@ -2699,6 +2902,12 @@ export const B20: Def[] = [
       return [overRoot(Math.abs(dot(AB, AC)) || 1, 4), rootS(len2(cross(AB, AC)) * 4)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "sides": ["Two sides from the same corner describe the triangle, so find the vectors AB and AC."],
+        "cross": ["The length of AB × AC is the area of the parallelogram on those sides."],
+        "area": ["The triangle is half of that parallelogram."],
+      }),
     explain: (s) => (s.id === "sides" ? `AB = ${s.inputs[0]}, AC = ${s.value}` : s.id === "cross" ? `AB × AC = ${s.value}` : `Area = ½|AB × AC| = ½√${s.inputs[0]} = ${s.value}`),
     domain: D_TRI,
     keep: K_TRI,
@@ -2757,6 +2966,11 @@ export const B20: Def[] = [
       return [a[0] * b[1] * c[2] + a[1] * b[2] * c[0] + a[2] * b[0] * c[1], a[0] * m[0] - a[1] * m[1] - a[2] * m[2], -(a[2] * b[1] * c[0] + a[0] * b[2] * c[1] + a[1] * b[0] * c[2])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "minors": ["a · (b × c) is the determinant with rows a, b and c. Expanding along a needs the 2 × 2 minors from b and c, which are the components of b × c."],
+        "expand": ["Multiply each component of a by its minor with the signs +, −, + and add."],
+      }),
     explain: (s) => (s.id === "minors" ? `The 2 × 2 minors of b and c: ${s.value}` : `Expand along a = (${s.inputs.join(", ")}) with signs +, −, +: ${s.value}`),
     domain: D_V3,
     keep: K_STP,
@@ -2806,6 +3020,11 @@ export const B20: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "det": ["Three vectors are coplanar exactly when the box they make has no volume, which is when [a b c] = 0."],
+        "solve": ["Setting the triple product to 0 gives an equation for λ."],
+      }),
     explain: (s) => (s.id === "det" ? `[a b c] = ${s.value}` : `Set it to 0: λ = ${F(Number(s.value))}`),
     domain: D_COPL,
     keep: K_COPL,
@@ -2859,6 +3078,11 @@ export const B20: Def[] = [
       return [tupS(cross(b, c)), tupS(cross(a, b))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "dots": ["The vector triple product follows a × (b × c) = (a · c)b − (a · b)c, so only two dot products are needed."],
+        "combine": ["Put the dot products into the identity and combine the vectors component by component."],
+      }),
     explain: (s) => (s.id === "dots" ? `a · c = ${s.inputs[0]}, a · b = ${s.value}` : `(a · c)b − (a · b)c = ${s.inputs[0]}b − (${s.inputs[1]})c = ${s.value}`),
     domain: D_V3,
     keep: K_VTP,
@@ -2908,6 +3132,11 @@ export const B20: Def[] = [
       return [tupS([sFmt(sNeg(cosE(d))), sFmt(sinE(d))]), tupS([sFmt(cosE(d)), sFmt(sNeg(sinE(d)))]), tupS([sFmt(sNeg(cosE(d))), sFmt(sNeg(sinE(d)))])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "angle": ["Going round the unit circle a distance t turns through t radians. Whole turns of 2π bring you back to the same point."],
+        "point": ["The point reached is (cos t, sin t), by the definition of cos and sin on the unit circle."],
+      }),
     explain: (s) => (s.id === "angle" ? `t = ${s.inputs[0]} is the same turn as ${s.value}` : `So P(t) = (cos t, sin t) = ${s.value}`),
     domain: [[0, 4], [-24, 24]],
     keep: (p) => unitOk(p),
@@ -2955,6 +3184,11 @@ export const B20: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reduce": ["Whole turns of 2π bring you back to the same point, so only what is left over after removing them matters."],
+        "quadrant": ["The quadrant of that leftover angle decides the signs of cos t and sin t."],
+      }),
     explain: (s) => (s.id === "reduce" ? `Removing whole turns, t is ${s.value}π more than a multiple of 2π` : `That is quadrant ${Number(s.value) + 1}: ${QUADS[Number(s.value)]}`),
     domain: [[0, 1], [-120, 120], [0, 6]],
     keep: (p) => signOk(p) && (p[0] === 1 || hsh(p, 41) % 3 === 0),
@@ -2994,6 +3228,11 @@ export const B20: Def[] = [
       return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", TF, x.says!, o.indexOf(x)));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "basic": ["Recall where the function is defined: sin and cos work for every real number, while tan, sec, cosec and cot fail where their bottom is 0."],
+        "choose": ["Choose the option that matches."],
+      }),
     explain: (s) => (s.id === "basic" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [0, 1], [1, 4], [1, 5]],
     keep: ([f, ask, k, a]) => (ask === 0 ? a <= 2 && (f !== 0 && f !== 1 ? true : k <= 2) : k <= 2 || f >= 2),
@@ -3035,6 +3274,11 @@ export const B20: Def[] = [
       return o.filter((x) => x.id !== "right" && x.says).map((x) => bg(x.id, "recall", COMP, x.says!, o.indexOf(x)));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["The expression matches one side of a compound-angle or double-angle identity, so it can be written as a single ratio."],
+        "choose": ["Choose the option that matches."],
+      }),
     explain: (s) => (s.id === "formula" ? `${s.inputs[0]} = ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [2, 7], [1, 6]],
     keep: ([, k, m]) => m < k,
@@ -3081,6 +3325,11 @@ export const B20: Def[] = [
     bugs: (p) => halfBugs(p),
     distractors: (p) => [halfNeg(p), "1/2", "√2/2"],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "other": ["The half-angle formula uses cos A. sin²A + cos²A = 1 gives it, and the quadrant tells its sign."],
+        "half": ["The half-angle formulas come from cos A = 1 − 2 sin²(A/2) = 2cos²(A/2) − 1. The quadrant of A/2 decides the sign of the root."],
+      }),
     explain: (s) => (s.id === "other" ? `From sin²A + cos²A = 1 with the quadrant's sign: ${s.inputs[0]} = ${F(Number(s.value))}` : `${s.inputs[0]}(A/2) = ${["±√((1 − cos A)/2)", "±√((1 + cos A)/2)", "sin A/(1 + cos A)"][["sin", "cos", "tan"].indexOf(String(s.inputs[0]))]} with the sign for A/2: ${s.value}`),
     domain: [[0, 4], [0, 1], [1, 4], [0, 2]],
     difficulty: ([, , q, h]) => (q === 1 && h === 0 ? 1 : h === 2 || q >= 3 ? 3 : 2),
@@ -3138,6 +3387,12 @@ export const B20: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "centre": ["Mean deviation is measured from a centre, the mean or the median, so find it first using the frequencies."],
+        "deviations": ["Each value's distance from the centre counts once for every time the value occurs, so multiply by the frequency and add."],
+        "md": ["Divide by the total frequency to get the average distance."],
+      }),
     explain: (s) => (s.id === "centre" ? `N = ${s.inputs[0]}; the centre is ${s.value}` : s.id === "deviations" ? `Σf|x − centre| = ${s.value}` : `M.D. = ${F(Number(s.inputs[0]))}/${s.inputs[1]} = ${dp2(Number(s.value)) ? neg(String(Math.round(Number(s.value) * 100) / 100)) : F(Number(s.value))}`),
     domain: [[0, 2], [1, 20], [1, 4], [0, 59]],
     keep: (p) => firstOnly("atmdf", [[0, 2], [1, 20], [1, 4], [0, 59]], mdfOk, shown("atmdf"))(p),
@@ -3202,6 +3457,12 @@ export const B20: Def[] = [
       ].filter((b) => b.predict !== null);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "u": ["Shifting all values by A and dividing by the class width h gives small whole numbers u, which make the sums easy."],
+        "sums": ["The variance of u needs Σfu and Σfu²."],
+        "variance": ["Shifting does not change the spread, but dividing by h shrinks the variance by h². So find the variance of u and multiply by h²."],
+      }),
     explain: (s) => (s.id === "u" ? `A = ${s.inputs[0]}, h = ${s.inputs[1]}: u = −2, −1, 0, 1, 2` : s.id === "sums" ? s.value as string : `σ² = ${s.inputs[0]}² × [Σfu²/${s.inputs[1]} − (Σfu/${s.inputs[1]})²] = ${F(Number(s.value))}`),
     domain: [[0, 2], [0, 5], [0, 2], [0, 79]],
     keep: (p) => gvarOk(p),
@@ -3249,6 +3510,11 @@ export const B20: Def[] = [
     },
     distractors: ([, ...x]) => [rootS(len2(cross(x.slice(0, 3), x.slice(3))) * 4), String(Math.abs(dot(x.slice(0, 3), x.slice(3))) || 1)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cross": ["The length of the cross product of two side vectors is the area of the parallelogram they make."],
+        "area": ["The area is that length; a triangle on the same two sides is half of it."],
+      }),
     explain: (s) => (s.id === "cross" ? `The cross product is ${s.value}` : `Area = ${Number(s.inputs[1]) ? "½" : ""}√${s.inputs[0]} = ${s.value}`),
     domain: [[0, 1], V4, V4, V4, V4, V4, V4],
     keep: (p) => paraOk(p),
@@ -3301,6 +3567,11 @@ export const B20: Def[] = [
       return [fracRoot(P + Q, 2 * Q), fracRoot(P, 2 * Q), fracRoot(Q, 4 * P)].filter((x) => num(x) !== null);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "s": ["The half-angle formulas in a triangle are written with the semi-perimeter s."],
+        "formula": ["Combining the cosine rule with the half-angle identities gives these formulas in terms of the sides and s, so no angle needs to be found first."],
+      }),
     explain: (s) => (s.id === "s" ? `s = (a + b + c)/2 = ${s.value}` : `${["sin(A/2) = √((s − b)(s − c)/(bc))", "cos(A/2) = √(s(s − a)/(bc))", "tan(A/2) = √((s − b)(s − c)/(s(s − a)))"][Number(s.inputs[0])]} = √(${s.inputs[1]}/${s.inputs[2]}) = ${s.value}`),
     domain: [[0, 2], [2, 15], [2, 15], [2, 15]],
     keep: (p) => halftOk(p),
@@ -3365,6 +3636,14 @@ export const B20: Def[] = [
     },
     distractors: (p) => (p[0] === 0 ? [rootS(p[1] * p[1] + p[2] * p[2] + 1), String(p[1] + p[2])] : [String(2 * p[2]), sFmt(sScale(sOf(1, 1, 3), [p[2], 1]))]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rule|substitute": ["Two sides and the angle between them are known, so the cosine rule gives the third side."],
+        "root": ["The cosine rule gives the square of the distance, so take the square root."],
+        "angle": ["The angles of a triangle add up to 180°, and an exterior angle equals the two opposite interior angles. That gives the angle needed for the sine rule."],
+        "rule|rewrite": ["With a side and its opposite angle known, the sine rule links the other sides and angles."],
+        "evaluate": ["Put in the values and work out the length."],
+      }),
     explain: (s) => (s.id === "rule" ? (s.inputs.length === 3 ? `By the cosine rule, d² = ${s.inputs[0]}² + ${s.inputs[1]}² − 2 × ${s.inputs[0]} × ${s.inputs[1]} × cos ${s.inputs[2]}° = ${s.value}` : `By the sine rule in triangle ABT: ${s.value}`) : s.id === "angle" ? `The angle at T is ${s.inputs[0]}° − ${s.inputs[1]}° = ${s.value}°` : s.id === "root" ? `d = √${s.inputs[0]} = ${s.value} km` : `BT = ${s.value} m`),
     domain: [[0, 1], [0, 30], [2, 60], [0, 1]],
     keep: (p) => appOk(p),
@@ -3406,6 +3685,10 @@ export const B20: Def[] = [
       return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", VA, x.says!, o.indexOf(x)));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "decide": ["A vector quantity has both size and direction, like velocity or force. A scalar has only size, like mass or time."],
+      }),
     explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
     domain: [[0, 4], [0, 59], [0, 3]],
     // kinds 0, 1 and 4 share one wording each (only the options change): fewer of them, so most released questions differ
@@ -3447,6 +3730,11 @@ export const B20: Def[] = [
       return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", INV, x.says!, o.indexOf(x)));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "branch": ["An inverse function's domain is the range of the original. sin and cos only give values from −1 to 1, so sin⁻¹ and cos⁻¹ accept only those."],
+        "choose": ["Choose the option that matches."],
+      }),
     explain: (s) => (s.id === "branch" ? `For ${s.inputs[0]}: ${s.value}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 5], [0, 1], [1, 4], [1, 4]],
     // the plain branches (k = a = 1) are asked by aqinvbr (b17); this family keeps the scaled forms
@@ -3504,6 +3792,11 @@ export const B20: Def[] = [
       return [-r, 1 / r, r + 1].filter((x) => Number.isFinite(x) && !near(x, r, 1e-12));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula": ["The sum of two inverse tangents can be combined into one, from the tan of a sum formula. Then taking tan of both sides removes the inverses."],
+        "solve": ["Solve the equation and keep only a solution for which the combining formula was valid."],
+      }),
     explain: (s) => (s.id === "formula" ? `Use ${s.value}` : `So x = ${F(Number(s.value))}`),
     domain: [[0, 3], [1, 9], [0, 9]],
     keep: (p) => inveqOk(p),
@@ -3554,6 +3847,11 @@ export const B20: Def[] = [
       return [tupS([t[0], -t[1], t[2]]), tupS([t[0] + 1, t[1], t[2]])];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "arm": ["Torque is measured about a point, so the arm is the vector from that point to where the force acts."],
+        "cross": ["Torque is r × F: its size is the turning effect and its direction is the axis of turning."],
+      }),
     explain: (s) => (s.id === "arm" ? `The arm is r = P − A = ${s.value}` : `τ = r × F = ${s.value}`),
     domain: [V3, V3, V3, V3, V3, V3, V3, V3, V3],
     keep: (p) => torqOk(p),
@@ -3608,6 +3906,11 @@ export const B20: Def[] = [
       return [s / (kind ? 2 : 2), s + 1, kind ? s : 2 * s];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "triple": ["The scalar triple product [a b c] gives the volume of the box on three edges, up to sign."],
+        "volume": ["Volume is never negative, so take the size. A tetrahedron on the same edges has a sixth of that volume."],
+      }),
     explain: (s) => (s.id === "triple" ? `[a b c] = ${neg(Number(s.value))}` : `Volume = ${Number(s.inputs[1]) === 6 ? "⅙ × " : ""}${s.inputs[0]} = ${F(Number(s.value))}`),
     domain: [[0, 1], V3, V3, V3, V3, V3, V3, V3, V3, V3],
     keep: (p) => K_STP(p.slice(1)),
@@ -3664,6 +3967,12 @@ export const B20: Def[] = [
       return [r / 2, Math.min(1, r * 2), 1 - r].filter((x) => !near(x, r, 1e-12) && x > 0);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "space": ["With equally likely outcomes, a probability is a count divided by the total number of outcomes. So count the whole sample space first."],
+        "value|count": ["Count the outcomes that give the asked-for value; that share of all outcomes is the probability."],
+        "value|add": ["The event is made of several values of X that cannot happen together, so add their probabilities."],
+      }),
     explain: (s) => (s.id === "space" ? `The sample space has ${s.value} equally likely outcomes` : `${F(Number(s.value))} of the probability belongs to the event`),
     domain: [[0, 11], [0, 6], [0, 12]],
     keep: (p) => pmfOk(p),
@@ -3722,6 +4031,11 @@ export const B20: Def[] = [
           : [bg("integrated", "conceptual", CRV, "F was integrated; the density is the DERIVATIVE of the distribution function, f(x) = F′(x).", mono(1, n + 2, (n + 2) * a ** (n + 1))), bg("power-not-brought-down", "procedural", DERIV, `The power was reduced but not brought down in front: the derivative of x${sup(n + 1)} is ${n + 1}${xpow(n)}.`, mono(1, n, a ** (n + 1)))],
     distractors: ([kind, n, a]) => (kind === 2 ? [`x/${a + 1}`, `(x + ${n + 1})/${a}`, `${a}x`] : kind === 0 ? [mono(1, n + 1, a ** n), mono(1, n, a ** (n + 1))] : [mono(n + 1, n, a ** n), mono(1, n + 1, a ** (n + 1))]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "integrate": ["F(x) is P(X ≤ x), the area under the density from the left end up to x, so integrate the density."],
+        "differentiate": ["The density is the rate at which F builds up, so it is the derivative of F."],
+      }),
     explain: (s) => (s.id === "integrate" ? `F(x) = ∫ ${s.inputs[0]} dt from the left end to x = ${s.value}` : `f(x) = F′(x) = ${s.value}`),
     domain: [[0, 2], [0, 5], [1, 9]],
     keep: (p) => cdfOk(p),
@@ -3789,6 +4103,14 @@ export const B20: Def[] = [
       return [r + 1, r / 2, -r].filter((x) => !near(x, r, 1e-12));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "integral": ["The mean of a continuous variable is a weighted average: each x is weighted by its density. Integrating x f(x) adds these up."],
+        "ex2": ["The variance shortcut needs E(X²), the average of x², found the same way."],
+        "var": ["Var(X) = E(X²) − [E(X)]², which comes from expanding the average of (X − mean)²."],
+        "property": ["Scaling and shifting X change the mean and variance in simple ways: E(cX + d) = cE(X) + d, and Var(cX + d) = c²Var(X), since a shift moves every value but does not change the spread. So there is no need to integrate again."],
+        "evaluate": ["Put in the known values."],
+      }),
     explain: (s) => (s.id === "integral" ? `E(X) = ∫₀^${s.inputs[1]} x f(x) dx = ${F(Number(s.value))}` : s.id === "ex2" ? `E(X²) = ∫ x² f(x) dx = ${F(Number(s.value))}` : s.id === "var" ? `Var(X) = E(X²) − [E(X)]² = ${F(Number(s.value))}` : s.id === "property" ? `Use ${s.value}` : `= ${F(Number(s.value))}`),
     // a variance is never negative; a mean of X on [0, c] lies in [0, c]
     range: ([kind, , c]) => (kind === 1 || kind === 3 ? [0, Infinity] : kind === 0 ? [0, c] : null),
@@ -3832,6 +4154,10 @@ export const B20: Def[] = [
       return o.filter((x) => x.slip).map((x) => bg(x.slip!, "conceptual", PROP, x.says!, o.indexOf(x)));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "decide": ["A statement is a sentence that is either true or false, but not both. Questions, orders and opinions are not statements."],
+      }),
     explain: (s) => `So the answer is ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`,
     domain: [[0, 2], [0, 63], [0, 3]],
     keep: (p) => stmtOk(p),
