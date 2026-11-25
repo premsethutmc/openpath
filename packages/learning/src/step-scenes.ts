@@ -30,7 +30,7 @@ export const STEP_SCENE_FAMILIES: Record<string, Kind> = {
 };
 
 const ADD = new Set(["add", "count on", "add the prices", "move"]);
-const SUB = new Set(["subtract", "count back"]);
+const SUB = new Set(["subtract", "take away", "count back"]);
 const PASS = new Set(["choose operation", "write the addition", "write the subtraction", "note"]);
 
 /** The start and the tiles of a worked question, or null when its steps are not a clean add / take-away chain. */
