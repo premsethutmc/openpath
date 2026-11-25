@@ -163,6 +163,9 @@ export const B07: Def[] = [
       { id: "division-slip", kind: "prerequisite", competency: LDIV, says: `A slip in dividing ${s * t} by ${t}. Check by multiplying back: the answer × ${t} must give ${s * t}.`, predict: [s + 1, s - 1, s + 10, s - 10].filter((x) => x > 0), ...(s >= 12 && s <= 99 ? { probe: `gen:ldiv:${s},${t}` } : {}) },
     ],
     variants: () => [],
+    stepWhy: (st) => (st.id === "total"
+        ? ["Speed means how far is gone in each hour or minute, so we need the whole distance and the whole time."]
+        : ["If the speed stays the same, the distance is shared equally among the hours or minutes, so we divide."]),
     explain: (st) => (st.id === "total" ? `${st.inputs[0]} ${st.inputs[2]} are covered in ${st.inputs[1]} equal ${st.inputs[3]}` : `Share it equally: ${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value} in each one`),
     domain: [[12, 90], [2, 6], [0, 1]],
     cap: 400,
@@ -217,6 +220,9 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "compare"
+        ? ["Both speeds now say how far is gone in one minute, so the bigger number is the faster one."]
+        : ["The two took different times, so we find how far each goes in one minute. Then they can be compared fairly."]),
     explain: (st) => (st.id === "compare" ? `${st.inputs[0]} and ${st.inputs[1]} metres a minute: the faster speed is ${st.value} metres a minute` : `${st.inputs[0]}: ${st.inputs[1]} m ÷ ${st.inputs[2]} minutes = ${st.value} m in each minute`),
     domain: [[20, 80], [2, 6], [20, 80], [2, 6]],
     keep: ([a, t1, b, t2]) => a < b && t1 !== t2 && a * t1 !== b * t2 && a * t1 <= 400 && b * t2 <= 400 && (a % 5 === 0 || b % 5 === 0),
@@ -282,6 +288,9 @@ export const B07: Def[] = [
       return decDistract(r, 2, [], [r + 10, r - 10, r + 100, r - 100, r + 1]);
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "line-up"
+        ? ["Only the same places can be added or taken away, so we line up the decimal points. Zeros at the end of a decimal do not change it."]
+        : ["With the points lined up, we work column by column from the right, carrying or regrouping just as with whole numbers."]),
     explain: (st) => (st.id === "line-up" ? `Line up the decimal points: ${st.inputs[0]} = ${st.inputs[1]}` : `${st.inputs[0]} ${st.inputs[2]} ${st.inputs[1]} = ${st.value}, column by column from the hundredths`),
     domain: [[11, 199], [101, 999], [0, 1]],
     cap: 500,
@@ -374,6 +383,15 @@ export const B07: Def[] = [
       return decDistract(r, 2, [r + 100, r - 100], [r + 10, r - 10, r + 1000, r - 5], true);
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "paise"
+        ? ["We work with the paise first, because 100 paise make ₹1 and the extra may change the rupees."]
+        : st.id === "exchange"
+          ? (st.inputs.length === 2
+            ? ["There are too few paise to take away, so we change ₹1 into 100 paise."]
+            : ["100 paise make ₹1, so a full hundred paise is carried to the rupees."])
+          : st.id === "total"
+            ? ["Money is written with rupees before the point and paise as two digits after it."]
+            : ["Then we work with the rupees, including any rupee carried or changed."]),
     explain: (st) =>
       st.id === "paise"
         ? `Paise: ${st.inputs[0]} ${st.op === "add" ? "+" : "−"} ${st.inputs[1]} = ${st.value} paise`
@@ -445,6 +463,7 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["Factors come in pairs that multiply to the number. Testing each number in turn finds every pair, and once the pairs meet in the middle we can stop."],
     explain: (st) => `${st.inputs[0]} × ${st.inputs[1]} = ${st.value}, so ${st.inputs[0]}${st.inputs[0] === st.inputs[1] ? " is a factor" : ` and ${st.inputs[1]} are factors`}`,
     domain: [[4, 100]],
     difficulty: ([n]) => (n <= 30 ? 1 : n <= 60 ? 2 : 3),
@@ -510,6 +529,9 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "factors-a"
+        ? ["A common factor must divide both numbers, so we list the factors of one of them first."]
+        : ["We keep only the factors of the first number that also divide the second."]),
     explain: (st) => (st.id === "factors-a" ? `Factors of ${st.inputs[0]}: ${(st.value as number[]).join(", ")}` : `Keep those that also divide ${st.inputs[0]}: ${(st.value as number[]).join(", ")}`),
     domain: [[6, 59], [7, 60]],
     keep: ([a, b]) => a < b && gcd(a, b) >= 4 && !isPrime(gcd(a, b)),
@@ -572,6 +594,9 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "first"
+        ? ["They land together only on a number in both times tables. The first such number is the lowest common multiple."]
+        : ["After that, they land together again every time that same number is added on, so we list its multiples."]),
     explain: (st) => (st.id === "first" ? `The first number both land on is ${st.value}: it is in the ${st.inputs[0]} times table and the ${st.inputs[1]} times table` : `They land together on every multiple of ${st.inputs[0]} up to ${st.inputs[1]}: ${(st.value as number[]).join(", ")}`),
     domain: [[2, 11], [3, 12], [20, 60]],
     keep: ([a, b, N]) => a < b && b % a !== 0 && 2 * lcm(a, b) <= N,
@@ -631,6 +656,9 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "hcf"
+        ? ["The lowest common multiple of two numbers is their product divided by their HCF, so we find the HCF first."]
+        : ["Dividing one number by the HCF removes the part the two numbers share. Multiplying what is left by the other number gives the smallest number both divide, with nothing counted twice."]),
     explain: (st) => (st.id === "hcf" ? (st.value === 1 ? `${st.inputs[0]} and ${st.inputs[1]} have no common factor other than 1` : `The highest common factor of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}`) : `LCM = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} (check: both ${st.inputs[1]} and the other number divide it)`),
     domain: [[2, 23], [3, 24]],
     keep: ([a, b]) => a < b,
@@ -698,6 +726,9 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "two"
+        ? ["The HCF of three numbers must divide all three. We find the HCF of two of them first."]
+        : ["Any factor of all three must divide the first HCF and the third number, so we take the HCF of those."]),
     explain: (st) => (st.id === "two" ? `HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}` : `Now with ${st.inputs[1]}: the HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}`),
     domain: [[6, 70], [7, 71], [8, 72]],
     keep: ([a, b, c]) => {
@@ -761,6 +792,11 @@ export const B07: Def[] = [
       { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The multiplication ${w} × ${d} is not yet reliable.`, predict: [`${w * d + d + n}/${d}`, ...(w > 1 ? [`${w * d - d + n}/${d}`] : [])] as unknown as Bug["predict"], ...(w >= 2 && d >= 2 ? { probe: `gen:mul:${w},${d}` } : {}) },
     ],
     variants: () => [],
+    stepWhy: (st) => (st.id === "wholes"
+        ? ["Each whole is cut into the same number of pieces as the bottom number, so we change the wholes into pieces."]
+        : st.id === "add"
+          ? ["The pieces from the wholes and the extra pieces together are all the pieces."]
+          : ["An improper fraction writes all the pieces on top, keeping the same size of piece on the bottom."]),
     explain: (st) => (st.id === "wholes" ? `${st.inputs[0]} wholes = ${st.inputs[0]} × ${st.inputs[1]} = ${st.value} pieces` : `${st.inputs[0]} + ${st.inputs[1]} = ${st.value} pieces in all`),
     distractors: ([w, n, d]) => [`${w * d + n}/${d + 1}`, `${w * d - n}/${d}`, `${w * d + n + 1}/${d}`, `${w} ${n}/${d}`],
     domain: [[1, 9], [1, 9], [2, 10]],
@@ -821,6 +857,9 @@ export const B07: Def[] = [
     },
     distractors: ([n, d]) => [`${Math.floor(n / d) + 1} ${n % d}/${d}`, `${Math.floor(n / d)} ${d - (n % d) || 1}/${d}`, `${Math.floor(n / d)} ${n}/${d}`],
     variants: () => [],
+    stepWhy: (st) => (st.id === "divide"
+        ? ["Each whole is made of as many pieces as the bottom number, so dividing shows how many full wholes the pieces make."]
+        : ["The pieces that do not make a full whole are the fraction part."]),
     explain: (st) => (st.id === "divide" ? `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value} whole ones` : `${st.inputs[0]} − ${st.inputs[1]} = ${st.value} pieces left over`),
     domain: [[3, 99], [2, 10]],
     keep: ([n, d]) => n > d && n < 10 * d && n % d !== 0 && gcd(n, d) === 1,
@@ -900,6 +939,13 @@ export const B07: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "first"
+        ? ["The rule is to multiply and divide before adding and taking away, so everyone gets the same answer."]
+        : st.id === "bracket"
+          ? ["Brackets are worked out first, because they group what belongs together."]
+          : st.id === "left"
+            ? ["When adding and taking away are left, we work from left to right."]
+            : ["With the stronger operation done, we finish what is left."]),
     explain: (st) =>
       st.id === "first"
         ? `${st.inputs[2] === "÷" ? "Divide" : "Multiply"} first: ${st.inputs[0]} ${st.inputs[2]} ${st.inputs[1]} = ${st.value}`
@@ -999,6 +1045,9 @@ export const B07: Def[] = [
     },
     distractors: ([, x]) => [x + 10, x - 10, x + 5, 100 - x, x + 1].filter((y) => y > 0 && y !== x).map(String),
     variants: () => [],
+    stepWhy: (st) => (st.id === "scale"
+        ? ["Percent means out of 100, so we make the bottom 100. Multiplying top and bottom by the same number keeps the value."]
+        : ["The top of a fraction out of 100 is the number of hundredths, which is the percent."]),
     explain: (st) => (st.id === "scale" ? `Multiply top and bottom by ${st.inputs[2]}: ${st.inputs[0]}/${st.inputs[1]} = ${st.value}/100` : `${st.inputs[0]} is ${st.value} hundredths, so it is ${st.value}%`),
     domain: [[0, 1], [1, 99]],
     difficulty: ([m, x]) => (m === 0 && [25, 50, 75, 10, 20].includes(x) ? 1 : m === 1 && x % 10 !== 0 ? 2 : 3),
@@ -1049,6 +1098,7 @@ export const B07: Def[] = [
       ]),
     distractors: ([x]) => decDistract(10 * x, 3, [x * 100, x, x * 1000], [10 * x + 100, 10 * x + 10, 10 * (100 - x), 10 * (100 + x)]),
     variants: () => [],
+    stepWhy: () => ["Percent means out of 100, so a percent is a number of hundredths. Dividing by 100 gives it as a decimal."],
     explain: (st) => `${st.inputs[0]}% = ${st.inputs[0]}/100 = ${st.value}`,
     domain: [[1, 150]],
     keep: ([x]) => x !== 100,
@@ -1112,6 +1162,7 @@ export const B07: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["A prime number has exactly two factors, 1 and itself. Any number with another factor is not prime."],
     explain: (st) => `Test each number from ${st.inputs[0]} to ${st.inputs[1]} for factors other than 1 and itself: the primes are ${(st.value as number[]).join(", ")}`,
     domain: [[1, 90], [10, 20]],
     cap: 400,
@@ -1167,6 +1218,7 @@ export const B07: Def[] = [
       return list.filter((n) => n !== counter);
     },
     variants: () => [],
+    stepWhy: () => ["A claim that says always is shown false by one example where it fails. That example is called a counterexample."],
     explain: (st) => `Test each number: ${st.value} fits the first part of the claim but not the second, so it is a counterexample`,
     domain: [[0, 3], [0, CEX_SEEDS - 1]],
     difficulty: ([k]) => (k === 0 || k === 3 ? 1 : k === 2 ? 2 : 3),
@@ -1638,6 +1690,9 @@ B07.push(
     },
     distractors: ([n, d]) => [mixedOf(n + d, d), mixedOf(Math.max(d + 1, n - 1), d), `${Math.floor(n / d) + 1} ${1}/${d}`].filter((x) => x !== mixedOf(n, d)),
     variants: () => [],
+    stepWhy: (st) => (st.id === "count"
+        ? ["Equal jumps along the line add the same fraction each time, so all the jumps make that many of the fraction."]
+        : ["A whole one needs as many jumps as the bottom number. The full wholes and the jumps left give the mixed number."]),
     explain: (st) => (st.id === "count" ? `${st.inputs[0]} jumps of ${st.inputs[1]} take her to ${st.value}` : `${st.inputs[0]}/${st.inputs[1]} = ${st.value}: count the whole ones (each is ${st.inputs[1]} jumps) and the jumps left over`),
     domain: [[3, 32], [2, 8]],
     keep: nlOk,
@@ -1690,6 +1745,9 @@ B07.push(
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "pick"
+        ? ["Co-prime means the HCF is 1, so we pick the only pair with no common factor except 1."]
+        : ["Two numbers are co-prime when their HCF is 1, so we find the HCF of each pair."]),
     explain: (st) => (st.id === "pick" ? `Only ${st.inputs[0]} and ${st.inputs[1]} have no common factor except 1, so the answer is option ${"ABCD"[Number(st.value)]}` : `HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}${st.value === 1 ? ": co-prime" : ""}`),
     domain: [[0, 159]],
     keep: ([s]) => firstSeeds("agcop", 160, (k) => copSet(k).pairs.map((p) => p.join(",")).join(";")).has(s),
@@ -1733,6 +1791,11 @@ B07.push(
       return [Bg("brackets", "conceptual", OOO, WRITE_SAYS[f][0], opts.indexOf(all[1])), Bg("order-of-story", "procedural", OOO, WRITE_SAYS[f][1], opts.indexOf(all[2]))];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "write"
+        ? ["We write each part of the story as numbers and signs. Brackets are needed only where a part must be worked out before the rest."]
+        : st.id === "pick"
+          ? ["We match the expression that tells the story to the choice that shows it."]
+          : ["Working out the expression, multiplying before adding, checks that it gives the story's answer."]),
     explain: (st) => (st.id === "write" ? `The story is ${st.value}` : st.id === "pick" ? `The expression that tells the story is ${st.inputs[0]}, so the answer is option ${"ABCD"[Number(st.value)]}` : `${st.inputs[0]} = ${st.value}`),
     domain: [[0, 5], [2, 40], [2, 12], [2, 12]],
     keep: writeOk,
@@ -1795,6 +1858,13 @@ B07.push(
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "split"
+        ? ["Terms are the parts joined by + and − outside brackets, so we cut the expression there."]
+        : st.id === "count"
+          ? ["Each piece between the cuts is one term."]
+          : st.id === "term"
+            ? ["A term keeps the sign in front of it, because that sign belongs to it."]
+            : ["We work out the term on its own, keeping its sign."]),
     explain: (st) => (st.id === "split" ? `Cut at each + and − outside brackets: ${st.value}` : st.id === "count" ? `${st.value} terms` : st.id === "term" ? `The term is ${st.value}` : `${st.inputs[0]} = ${st.value}`),
     domain: [[0, 149], [0, 1]],
     keep: (p) => termOk(p) && firstSeeds("agterm", 150, (k) => termExpr(k).text).has(p[0]),
@@ -1861,6 +1931,9 @@ B07.push(
       return [u + f / 10, u - f / 10, u + f].filter((x) => x > 0).map((x) => String(Math.round((x / f) * 1e6) / 1e6));
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "convert"
+        ? ["Measures must be in the same unit before we add or take away, so we change the smaller unit into the bigger one."]
+        : ["Now both are in the same unit, so we line up the decimal points and work column by column."]),
     explain: (st) => (st.id === "convert" ? `${st.inputs[0]} ${st.inputs[1]} = ${st.inputs[0]} ÷ ${st.inputs[2]} = ${st.value} ${st.inputs[3]}` : `${st.inputs[0]} ${st.inputs[3]} ${st.inputs[2]} ${st.inputs[1]} ${st.inputs[3]} = ${st.value} ${st.inputs[3]}, with the decimal points lined up`),
     domain: [[0, 3], [11, 99], [1, 19], [0, 1]],
     keep: measOk,
@@ -1904,6 +1977,9 @@ B07.push(
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "two"
+        ? ["The LCM of three numbers must be a multiple of all three. We find the LCM of two of them first."]
+        : ["A multiple of the first two and the third is a multiple of their LCM and the third, so we take the LCM of those."]),
     explain: (st) => (st.id === "two" ? `LCM of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}` : `LCM of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}`),
     domain: [[2, 18], [3, 19], [4, 20]],
     keep: ([a, b, c]) => a < b && b < c && lcm3(a, b, c) <= 420 && lcm3(a, b, c) !== c,
@@ -1951,6 +2027,13 @@ B07.push(
       return [Bg("hcf-for-lcm", "conceptual", HL, "The HCF was found. Waiting until two repeating things happen together needs the smallest number both divide into: the LCM.", g), Bg("product", "procedural", HL, `${a} × ${b} is a common multiple, but ${a} and ${b} share the factor ${g}, so they meet sooner.`, a * b)];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "decide"
+        ? (st.value === "HCF"
+          ? ["Cutting both amounts into equal parts with nothing left needs a common factor, and largest means the highest one."]
+          : ["Things that repeat meet again on a common multiple, and soonest means the lowest one."])
+        : (st.op === "hcf"
+          ? ["The HCF is the largest number that divides both exactly."]
+          : ["The LCM is the smallest number that both divide exactly."])),
     explain: (st) => (st.id === "decide" ? (st.value === "HCF" ? "The parts must divide both amounts exactly and be as large as possible: use the HCF" : "The two must happen together again as soon as possible: use the LCM") : `${st.op === "hcf" ? "HCF" : "LCM"} of ${st.inputs[0]} and ${st.inputs[1]} = ${st.value}`),
     domain: [[0, 5], [2, 95], [3, 96]],
     keep: hlwOk,
@@ -2010,6 +2093,9 @@ B07.push(
       return [Bg("lcm-over-number", "procedural", HL, `The LCM was divided by one number. The HCF is the product of the two numbers ÷ the LCM.`, L / A === g ? null : L / A), Bg("product-is-hcf", "conceptual", HL, "The product of the numbers was not divided by the LCM. HCF × LCM = product, so the HCF = product ÷ LCM.", A * Bn)];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "product"
+        ? ["For any two numbers, HCF × LCM is the same as the product of the two numbers. So we multiply the two values that make one side."]
+        : ["Dividing that product by the known value gives the missing one, because HCF × LCM equals the product of the numbers."]),
     explain: (st) => (st.id === "product" ? `${st.inputs[0]} × ${st.inputs[1]} = ${st.value}` : `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}`),
     domain: [[0, 2], [2, 15], [1, 11], [2, 12]],
     keep: hlpOk,
@@ -2073,6 +2159,9 @@ B07.push(
     },
     distractors: ([mode, n, d]) => [mixedOf(d, n), mixedOf(n + 1, d), mixedOf(n, d * 2)].filter((x) => x !== mixedOf(n, d)),
     variants: () => [],
+    stepWhy: (st) => (st.id === "over"
+        ? ["Percent means out of 100, so a percent is a fraction with 100 on the bottom."]
+        : ["Dividing top and bottom by a common factor keeps the value, and writes the fraction in its simplest form."]),
     explain: (st) => (st.id === "over" ? `${st.inputs[0]} = ${st.value}` : `Divide the top and bottom by ${st.inputs[2]}: ${st.value}`),
     domain: [[0, 1], [1, 99], [2, 50]],
     keep: pfOk,
@@ -2127,6 +2216,11 @@ B07.push(
       ];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "divide"
+        ? ["A fraction means the top divided by the bottom, so dividing gives the decimal."]
+        : st.id === "pick"
+          ? ["We match the value we found to the choice that shows it."]
+          : ["The decimal and the percentage are the same amount. A percentage is just the decimal times 100."]),
     explain: (st) => (st.id === "divide" ? `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}` : st.id === "pick" ? `${st.inputs[0]} is option ${"ABCD"[Number(st.value)]}, so the answer is ${"ABCD"[Number(st.value)]}` : `So the ${st.inputs[0] === 0 ? "decimal" : "percentage"} is ${st.value}`),
     domain: [[0, 1], [1, 99], [4, 50]],
     keep: fdOk,
@@ -2199,6 +2293,11 @@ B07.push(
       return [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31].filter((q) => q !== a && (mode === 0 || n % q !== 0)).slice(0, 4);
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "root"
+        ? ["If a number has a factor bigger than its square root, it also has a partner factor smaller than the root. So we only need to test up to the square root."]
+        : st.id === "prime"
+          ? ["Every factor can be broken into prime factors, so testing the primes up to the square root is enough."]
+          : ["We try each prime up to the square root. The first that divides is the smallest prime factor; if none divides, the number is prime."]),
     explain: (st) => (st.id === "root" ? `√${st.inputs[0]} is a little more than ${st.value} (${st.value}² = ${Number(st.value) ** 2})` : st.id === "prime" ? `The largest prime not more than ${st.inputs[0]} is ${st.value}` : `Try the primes up to ${st.inputs[1]}: ${st.value}`),
     domain: [[0, 1], [50, 999]],
     keep: ptOk,
@@ -2258,6 +2357,9 @@ B07.push(
       return [ans + 1, ans + 2, ans - 1, mode === 1 ? S[2].r : ans + 3].filter((x) => x >= 0 && x !== ans);
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "count"
+        ? ["Each division counts, including the last one where the remainder is 0, which shows the HCF has been reached."]
+        : ["Euclid's way: the HCF of two numbers is the same as the HCF of the smaller one and the remainder. So we keep dividing until the remainder is 0."]),
     explain: (st) => (st.id === "count" ? `${st.value} divisions altogether, counting the last one with remainder 0` : st.id === "second" ? `In the second division, ${st.inputs[0]} ÷ ${st.inputs[1]}, the remainder is ${st.value}` : `${st.inputs[0]} = ${st.inputs[1]} × ${st.inputs[2]} + ${st.value}`),
     domain: [[0, 1], [21, 999], [20, 998]],
     keep: edOk,
@@ -2320,6 +2422,11 @@ B07.push(
         : [Bg("lowest-for-lcm", "conceptual", EUC, "Only the common primes were taken, each the smaller number of times: that is the HCF. The LCM takes every prime that appears, as many times as the number that has it MOST.", lo), Bg("product", "conceptual", EUC, `The two numbers were multiplied. They share primes, so the LCM is ${A} × ${Bn} ÷ HCF.`, A * Bn)];
     },
     variants: () => [],
+    stepWhy: (st) => (st.id === "powers"
+        ? (st.op === "lowest-powers"
+          ? ["The HCF must divide both numbers, so it can only use the prime factors they share, as many times as both have them."]
+          : ["The LCM must be a multiple of both numbers, so it needs every prime factor as many times as the number that has it most."])
+        : ["Multiplying the chosen prime factors back together gives the number."]),
     explain: (st) => (st.id === "powers" ? `${st.op === "lowest-powers" ? "Common primes, each as many times as both numbers have it" : "Every prime, as many times as the number that has it most"}: ${st.value}` : `${st.inputs[0]} = ${st.value}`),
     domain: [[0, 1], [0, 65535]],
     keep: ftaOk,
@@ -2369,6 +2476,7 @@ B07.push(
       return [Bg("more-than-one-improper", "conceptual", MIX, `${classText(p)} is more than 1, so it was called improper. It is written as a whole number and a proper fraction side by side: a mixed number.`, o.indexOf(FKIND[1]))];
     },
     variants: () => [],
+    stepWhy: () => ["A proper fraction has a top smaller than its bottom, so it is less than one whole. An improper fraction has a top at least as big, and a mixed number has a whole part in front."],
     explain: (st) => `${st.inputs[0]} is ${st.value}`,
     domain: [[0, 2], [1, 36], [2, 12]],
     keep: classOk,
@@ -2421,6 +2529,7 @@ B07.push(
       ];
     },
     variants: () => [],
+    stepWhy: () => ["In an expression tree each box uses the answers of the boxes below it, so we work from the bottom up. That is the same as doing the brackets first."],
     explain: (st) => `${st.inputs[0]} ${st.inputs[1]} ${st.inputs[2]} = ${st.value}`,
     domain: [[0, 2], [0, 79]],
     keep: (p) => treeOk(p) && firstSeeds(`agtree${p[0]}`, 80, (k) => (treeOk([p[0], k]) ? tbr(treeOf(p[0], k)) : `x${k}`)).has(p[1]),
