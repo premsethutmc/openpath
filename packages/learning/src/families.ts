@@ -49,6 +49,7 @@ const F: Def[] = [
     },
     bugs: ([a, b]) => [{ ...factSlip(a, b), kind: "recall" }, addForMul(a, b)],
     variants: (p) => pairs(p, [[2, 9], [2, 9]], ([a, b]) => a >= 2 && b >= 2),
+    stepWhy: () => ["Multiplying counts equal groups quickly: the first number of groups, each holding the second number."],
     explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`,
     // level@1: a single times-table fact is Grade 3 work (prerequisite fluency and review for older learners)
     grade: () => 3,
@@ -82,6 +83,7 @@ const F: Def[] = [
       factSlip(l, w),
     ],
     variants: (p) => pairs(p, [[2, 9], [2, 9]], () => true),
+    stepWhy: () => ["Area is how many unit squares cover the rectangle. They sit in equal rows, so rows times squares in each row counts them all."],
     explain: (s) => `Rows × columns of unit squares: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`,
   },
   {
@@ -116,6 +118,9 @@ const F: Def[] = [
       ];
     },
     variants: (p) => pairs(p, [[1, 7], [2, 9], [2, 5]], ([a, b, k]) => a < b).map(([a, b, k]) => [a, b, b * k]),
+    stepWhy: (s) => (s.op === "divide"
+        ? ["Equal fractions come from multiplying the top and the bottom by the same number. We find that number from the bottoms."]
+        : ["Whatever the bottom was multiplied by, the top must be multiplied by too, so the fraction keeps its value."]),
     explain: (s) => (s.op === "divide" ? `${s.inputs[1]} × ${show(s.value)} = ${s.inputs[0]}, so multiply by ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
   },
   {
@@ -143,6 +148,9 @@ const F: Def[] = [
           ]
         : [{ id: "subtract-reversed", kind: "procedural", competency: "MATH.number.fraction-add-like", says: `The top numbers were taken away the wrong way round (${b} − ${a}); take the second from the first: (${a} − ${b})/${n}.`, predict: a === b ? null : (b - a) / n }].filter((x) => x.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[1, 5], [1, 5], [5, 9]], ([a, b, n]) => a + b < n).map((q) => [...q, 1]),
+    stepWhy: (s) => (s.op === "add"
+        ? ["The pieces are already the same size, so we just add how many pieces there are. The bottom stays the same."]
+        : ["The pieces are already the same size, so we just take away pieces. The bottom stays the same."]),
     explain: (s) => `${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${show(s.value)} pieces of the same size`,
   },
   {
@@ -175,6 +183,9 @@ const F: Def[] = [
       factSlip(c, b - a),
     ].filter((x) => x.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[0, 4], [3, 9], [2, 9]], ([a, b]) => b > a && b - a <= 9),
+    stepWhy: (s) => (s.op === "subtract"
+        ? ["The integral of a constant is the area of a rectangle under a flat line. Its width is the distance between the limits."]
+        : ["The height of the rectangle is the constant, so the area is height times width."]),
     explain: (s) => (s.op === "subtract" ? `Width: ${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : `Area under y = ${s.inputs[0]}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
   },
   {
@@ -216,6 +227,9 @@ const F: Def[] = [
       ].filter((x) => x.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[-4, 4], [-4, 4]], ([r, s]) => r !== s && r !== 0 && s !== 0).map(([r, s]) => [-(r + s), r * s]).filter(([pp, qq], i, a) => a.findIndex((x) => x[0] === pp && x[1] === qq) === i),
+    stepWhy: (s) => (s.op === "pair"
+        ? ["If x² + px + q = (x + a)(x + b), then a × b = q and a + b = p. So we look for two numbers with that product and sum."]
+        : ["If two numbers multiply to 0, one of them must be 0. So each bracket being 0 gives one solution."]),
     explain: (s) => (s.op === "pair" ? `Two numbers that multiply to ${s.inputs[0]} and add to ${s.inputs[1]}` : `Each bracket can be zero: x = ${show(s.value).replace(",", " or x = ")}`),
   },
   {
@@ -239,6 +253,9 @@ const F: Def[] = [
     validate: ([m, c, t], v) => v === [...Array(Math.abs(t))].reduce((s) => s + Math.sign(t) * m, 0) + c,
     bugs: ([m, c, t]) => [{ id: "concatenate", kind: "conceptual", competency: "MATH.algebra.variables", says: `${m}x with x = ${t} was read as the digits ${m}${t}; ${m}x means ${m} × x.`, predict: m > 0 && t > 0 && m < 10 && t < 10 ? 10 * m + t + c : null }, { id: "add-for-multiply", kind: "conceptual", competency: MT, says: `${m}x was worked out as ${m} + x; it means ${m} × x.`, predict: m + t + c }].filter((x) => x.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 5], [-3, 5], [2, 5]], () => true),
+    stepWhy: (s) => (s.op === "multiply"
+        ? ["mx means m times x, so we put the value of x in and multiply first."]
+        : ["Then we add the constant c, because y = mx + c."]),
     explain: (s) => (s.op === "multiply" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
   },
   {
@@ -263,6 +280,7 @@ const F: Def[] = [
     validate: ([m, c], v) => Array.isArray(v) && v.length === 2 && v.every((x) => x * x - m * x - c === 0),
     bugs: ([m, c]) => [{ id: "square-as-double", kind: "conceptual", competency: "MATH.algebra.variables", says: "x × x was worked out as x + x (doubling); x × x is x squared.", predict: [...Array(9).keys()].map((k) => k - 4).filter((x) => 2 * x === m * x + c) }].filter((b) => (b.predict as number[]).length > 0) as Bug[],
     variants: () => [[1, 2], [1, 6], [2, 3], [0, 4], [-1, 2], [3, -2]].filter(([m, c]) => [...Array(9).keys()].map((k) => k - 4).filter((x) => x * x === m * x + c).length === 2),
+    stepWhy: () => ["The two sides are equal only at the x values where the graphs meet. Trying each whole number in the range finds them."],
     explain: (s) => `x × x = ${s.inputs[0]}x + ${s.inputs[1]} at x = ${show(s.value).replace(",", " and x = ")}`,
   },
   {
@@ -279,6 +297,7 @@ const F: Def[] = [
     validate: ([m, c, t], v) => v === (m * t + c - t * t > 0 ? 0 : 1),
     bugs: () => [],
     variants: (p) => [[p[0], p[1], p[2] + 1]],
+    stepWhy: () => ["The higher graph at a point is the one with the bigger y value there, so we work out both y values at that x."],
     explain: (s) => `Line: ${s.inputs[0]}; parabola: ${s.inputs[1]}`,
   },
   {
@@ -336,6 +355,13 @@ const F: Def[] = [
       ];
     },
     variants: (p) => [[1, 2], [1, 6], [2, 3], [0, 4], [1, 12], [3, 4]].filter((q) => q[0] !== p[0] || q[1] !== p[1]),
+    stepWhy: (s) => (s.id === "line-value"
+        ? ["Putting a value of x into the line's equation gives the line's height there, which shows where the line runs."]
+        : s.id === "meet-try" || s.id === "meet"
+          ? ["The region ends where the line and the parabola meet. Setting x² equal to the line gives those meeting points."]
+          : s.id === "above"
+            ? ["Between the meeting points one graph stays on top. Checking one x between them shows which, so we subtract the right way."]
+            : ["Integrating top minus bottom between the meeting points adds up thin strips across the region, which gives its area."]),
     explain: (s) => s.id,
   },
 
@@ -365,6 +391,7 @@ const F: Def[] = [
       { id: "add-for-power", kind: "conceptual", competency: EXP, says: "The two numbers were added; a power is repeated multiplication.", predict: a + n },
     ],
     variants: (p) => pairs(p, [[2, 9], [2, 4]], ([a, n]) => powerOf(a, n) <= 1300),
+    stepWhy: () => ["A power means multiplying the base by itself. The small raised number says how many times the base is used."],
     explain: (s) => `${[...Array(Number(s.inputs[1]))].map(() => s.inputs[0]).join(" × ")} = ${show(s.value)}`,
   },
   {
@@ -394,6 +421,9 @@ const F: Def[] = [
       factSlip(a, b),
     ],
     variants: (p) => pairs(p, [[2, 9], [2, 9]], ([a, b]) => a !== b),
+    stepWhy: (s) => (s.id === "x-term"
+        ? ["The number outside the bracket multiplies everything inside it, so it multiplies x."]
+        : ["It also multiplies the number inside the bracket."]),
     explain: (s) => (s.id === "x-term" ? `${s.inputs[0]} × x = ${s.inputs[0]}x` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
   },
   {
@@ -419,6 +449,9 @@ const F: Def[] = [
       ...(Math.sign(a) !== Math.sign(b) ? [{ id: "sign-slip", kind: "prerequisite" as const, competency: "MATH.number.integer-add", says: `${a} + ${b} was worked out without the signs; adding numbers with different signs is a difference.`, predict: Math.abs(a) + Math.abs(b) === a + b ? -(a + b) : Math.sign(a + b) * (Math.abs(a) + Math.abs(b)) }] : []),
     ],
     variants: (p) => pairs(p, [[-5, 5], [-5, 5]], ([a, b]) => a !== 0 && b !== 0 && a < b && a + b !== 0),
+    stepWhy: (s) => (s.id === "collect"
+        ? ["The two x terms are like terms, so they can be added into one."]
+        : ["Each term in one bracket multiplies each term in the other. These are the two products that give x terms."]),
     explain: (s) => (s.id === "collect" ? `${neg(s.inputs[0])}x + ${par(s.inputs[1])}x = ${neg(show(s.value))}x` : s.id === "outer" ? `x × ${par(s.inputs[1])} = ${neg(s.inputs[1])}x` : `${par(s.inputs[0])} × x = ${neg(s.inputs[0])}x`),
   },
   {
@@ -450,6 +483,11 @@ const F: Def[] = [
       ...(n - 1 >= 2 && t >= 2 ? [powerSlip(t, n - 1, k * n * t * (n - 1))] : []),
     ],
     variants: (p) => pairs(p, [[1, 4], [2, 4], [1, 3]], ([k, n, t]) => k * n * powerOf(t, n - 1) <= 400),
+    stepWhy: (s) => (s.id === "rule"
+        ? ["The power rule: to differentiate xⁿ, bring the power n down in front and lower the power by 1."]
+        : s.id === "power"
+          ? ["The derivative is a formula in x. To find its value at a point, we put that x into the power part."]
+          : ["Multiplying the number in front by that power gives the slope at the point."]),
     explain: (s) => (s.id === "rule" ? `Bring the power down: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "power" ? `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
   },
   {
@@ -481,6 +519,11 @@ const F: Def[] = [
       ...(b >= 2 ? [powerSlip(b, n + 1, (k * ((n + 1) * b - (n + 1) * a)) / (n + 1))] : []),
     ],
     variants: (p) => pairs(p, [[0, 1], [2, 3], [1, 6], [1, 3]], () => true),
+    stepWhy: (s) => (s.id === "antiderivative"
+        ? ["Integrating undoes differentiating. Raising the power by 1 and dividing by the new power gives a function whose derivative is the one we started with."]
+        : s.id === "difference"
+          ? ["A definite integral is the antiderivative at the top limit minus its value at the bottom limit."]
+          : ["We need the antiderivative's value at each limit, so we put that limit into the power."]),
     explain: (s) => (s.id === "antiderivative" ? `Raise the power and divide: F(x) = ${s.inputs[0]}x${sup(s.inputs[1])} ⁄ ${s.inputs[1]}` : s.id === "difference" ? `F(${s.inputs[0]}) − F(${s.inputs[1]}) = ${show(s.value)}` : `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}`),
   },
   {
@@ -515,6 +558,13 @@ const F: Def[] = [
       ];
     },
     variants: (p) => pairs(p, [[0, 1], [1, 2], [1, 3], [1, 2]], ([a, b]) => b > a),
+    stepWhy: (s) => (s.id === "u-limits"
+        ? ["Changing the variable to u means the limits must change too, so we find the u value at each x limit."]
+        : s.id === "antiderivative"
+          ? ["2x dx is exactly du, so the integral becomes a simple power of u, which we integrate by the power rule."]
+          : s.id === "difference"
+            ? ["A definite integral is the antiderivative at the top limit minus its value at the bottom limit."]
+            : ["We need the antiderivative's value at each u limit."]),
     explain: (s) => (s.id === "u-limits" ? `Let u = x² + ${s.inputs[2]}: x = ${s.inputs[0]} gives u = ${(s.value as number[])[0]}, x = ${s.inputs[1]} gives u = ${(s.value as number[])[1]}` : s.id === "antiderivative" ? `2x dx = du, so the integral is ∫ u${sup(s.inputs[0])} du = u${sup(s.inputs[1])} ⁄ ${s.inputs[1]}` : s.id === "difference" ? `Between u = ${s.inputs[1]} and u = ${s.inputs[0]}: ${show(s.value)}` : `${s.inputs[0]}${sup(s.inputs[1])} = ${show(s.value)}`),
   },
   {
@@ -554,6 +604,13 @@ const F: Def[] = [
       ].filter((x) => x.predict !== null && x.predict !== right) as Bug[];
     },
     variants: (p) => pairs(p, [[-6, 6], [-9, 9]], ([pp, qq]) => pp !== 0 && qq !== 0),
+    stepWhy: (s) => (s.id === "square"
+        ? ["The discriminant b² − 4ac decides how many real solutions there are, so we work out each part. First b²."]
+        : s.id === "four-q"
+          ? ["Next is the 4ac part of b² − 4ac."]
+          : s.id === "discriminant"
+            ? ["The discriminant is the part under the square root in the quadratic formula."]
+            : ["A positive discriminant gives two real solutions, zero gives one, and a negative one gives none, because a negative number has no real square root."]),
     explain: (s) => (s.id === "square" ? `b² = ${par(s.inputs[0])}² = ${show(s.value)}` : s.id === "four-q" ? `4ac = 4 × ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "discriminant" ? `b² − 4ac = ${s.inputs[0]} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : `${show(s.inputs[0] as number)} is ${(s.inputs[0] as number) > 0 ? "positive: two solutions" : s.inputs[0] === 0 ? "zero: one solution" : "negative: no real solutions"}`),
     teach: {
       idea: "The discriminant b² − 4ac of ax² + bx + c = 0 decides how many real solutions there are: positive, two; zero, one; negative, none.",
@@ -591,6 +648,9 @@ const F: Def[] = [
       { id: "three-sides", kind: "procedural", competency: "MATH.measurement.rectangle-perimeter", says: "One side was left out; go all the way around: four sides.", predict: 2 * l + w },
     ],
     variants: (p) => pairs(p, [[2, 12], [1, 9]], ([l, w]) => l > w),
+    stepWhy: (s) => (s.id === "pair"
+        ? ["A rectangle has two lengths and two widths, so going round is one length and one width, twice."]
+        : ["The other half of the way round is the same, so we double the pair."]),
     explain: (s) => (s.id === "pair" ? `One length and one width: ${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `Twice round that pair: 2 × ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[2, 20], [1, 19]],
     keep: ([l, w]) => l > w,
@@ -626,6 +686,9 @@ const F: Def[] = [
       ];
     },
     variants: (p) => pairs(p, [[12, 49], [2, 9]], ([a]) => a % 10 !== 0).slice(0, 80),
+    stepWhy: (s) => (s.id === "sum"
+        ? ["Multiplying each part and adding the answers gives the same as multiplying the whole number."]
+        : ["Splitting a number into tens and ones makes each multiplication easy."]),
     explain: (s) => (s.id === "sum" ? `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([a, b]) => ((a % 10) * b < 10 ? 1 : a < 50 ? 2 : 3),
@@ -662,6 +725,9 @@ const F: Def[] = [
       ];
     },
     variants: (p) => pairs(p, [[20, 60], [3, 9]], ([n, d]) => n % d !== 0).slice(0, 80),
+    stepWhy: (s) => (s.id === "groups"
+        ? ["We make as many whole groups as we can without going over the number."]
+        : ["A remainder is what is left when no more whole groups fit."]),
     explain: (s) => (s.id === "groups" ? `${s.inputs[0]} groups of ${s.inputs[1]} make ${show(s.value)}` : `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)} left over`),
     domain: [[10, 99], [2, 9]],
     difficulty: ([n, d]) => (d <= 5 && n < 50 ? 1 : d <= 7 ? 2 : 3),
@@ -697,6 +763,15 @@ const F: Def[] = [
       { id: "one-group-off", kind: "recall", competency: MT, says: `A multiplication fact with ${d} slipped by one group.`, predict: [q + 1, q - 1] },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[12, 40], [2, 9]], () => true).slice(0, 80),
+    stepWhy: (s) => (s.id === "tens"
+        ? ["Long division shares the big part first. We take out as many tens of the divisor as fit."]
+        : s.id === "rest"
+          ? ["Taking away what has been shared shows how much is still to divide."]
+          : s.id === "ones"
+            ? ["The part that is left is small enough to divide in one step."]
+            : s.id === "whole"
+              ? ["Putting the parts of the answer together gives the whole quotient."]
+              : ["The answer is the tens part and the ones part added together."]),
     explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "whole" ? `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([q, d]) => (d <= 5 && q < 30 ? 1 : q < 60 ? 2 : 3),
@@ -728,6 +803,11 @@ const F: Def[] = [
       ...(a >= 2 && k * a + a <= 144 ? [{ id: "fact-slip-multiply", kind: "prerequisite" as const, competency: MT, says: `${k} × ${a} was taken as ${(k + 1) * a}, one group of ${a} too many: the method was right, the multiplication fact was not.`, predict: ((k + 1) * a) / b, ...(a <= 12 ? { probe: `gen:mul:${k},${a}` } : {}) }] : []),
     ],
     variants: (p) => pairs(p, [[1, 5], [2, 8], [2, 6]], ([a, b]) => a < b).slice(0, 80),
+    stepWhy: (s) => (s.id === "tops"
+        ? ["Multiplying a fraction by a whole number takes that many lots of the pieces, so we multiply the number of pieces."]
+        : s.id === "keep"
+          ? ["Taking more lots does not change the size of each piece, so the bottom number stays the same."]
+          : ["We write the answer as a fraction, and as a whole or simpler fraction when the pieces allow."]),
     explain: (s) => (s.id === "result" ? fmulwResult(s.inputs as number[], s.value as number) : s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
     domain: [[1, 11], [2, 12], [2, 9]],
     keep: ([a, b]) => a < b,
@@ -766,6 +846,11 @@ const F: Def[] = [
       ];
     },
     variants: (p) => pairs(p, [[1, 3], [2, 6], [1, 3], [2, 6]], ([a, b, c, d]) => a < b && c < d && b < d).slice(0, 80),
+    stepWhy: (s) => (s.id === "common"
+        ? ["Fractions can only be added when the pieces are the same size, so we first find a bottom number both can share."]
+        : s.id === "rename"
+          ? ["Multiplying the top and bottom by the same number keeps each fraction's value, so we rewrite both with the new bottom."]
+          : ["Now the pieces are the same size, so we add how many pieces there are and keep the bottom."]),
     explain: (s) => (s.id === "common" ? `A common denominator of ${s.inputs[0]} and ${s.inputs[1]}: ${show(s.value)}` : s.id === "rename" ? `Rename both: ${(s.value as number[])[0]} and ${(s.value as number[])[1]} of those pieces` : `${s.inputs[0]} + ${s.inputs[1]} = ${(s.inputs[0] as number) + (s.inputs[1] as number)} pieces of ${s.inputs[2]}: ${show(s.value)}`),
     domain: [[1, 9], [2, 10], [1, 9], [2, 10]],
     keep: ([a, b, c, d]) => a < b && c < d && b < d,
@@ -804,6 +889,9 @@ const F: Def[] = [
       { id: "subtracted", kind: "procedural", competency: "MATH.number.percentage", says: `${p}% of ${n} is a part of ${n}, not ${n} minus ${p}.`, predict: n - p > 0 ? n - p : null },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 19], [1, 20]], () => true).map(([a, b]) => [5 * a, 20 * b]).filter(([a, b]) => (a * b) % 100 === 0).slice(0, 80),
+    stepWhy: (s) => (s.id === "one"
+        ? ["Percent means out of 100. We first find an easy part, like 1%, 5% or 10%, by dividing."]
+        : ["The percent asked for is a number of those easy parts, so we multiply."]),
     explain: (s) => (s.id === "one" ? `${s.inputs[1]}% of ${s.inputs[0]} is ${s.inputs[0]} ÷ ${100 / (s.inputs[1] as number)} = ${show(s.value)}` : `${s.inputs[2]}% is ${s.inputs[0]} ${s.inputs[0] === 1 ? "lot" : "lots"} of that: ${s.inputs[0]} × ${show(s.inputs[1] as number)} = ${show(s.value)}`),
     domain: [[5, 95], [20, 400]],
     keep: ([p, n]) => p % 5 === 0 && n % 20 === 0,
@@ -847,6 +935,9 @@ const F: Def[] = [
       ].filter((b) => b.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[1, 9], [2, 10], [3, 11], [4, 12]], (v) => v[0] < v[1] && v[1] < v[2] && v[2] < v[3] && v.reduce((s, x) => s + x, 0) % 4 === 0).slice(0, 80),
+    stepWhy: (s) => (s.id === "total"
+        ? ["The mean shares the total out evenly, so first we find the total."]
+        : ["Sharing the total equally among the numbers gives each the same value, which is the mean."]),
     explain: (s) => (s.id === "total" ? `${s.inputs.join(" + ")} = ${show(s.value)}` : `${s.inputs[0]} ÷ 4 = ${show(s.value)}`),
     domain: [[1, 12], [1, 12], [1, 12], [1, 12]],
     keep: (v) => v[0] < v[1] && v[1] < v[2] && v[2] < v[3],
@@ -872,6 +963,7 @@ const F: Def[] = [
       { id: "near-square", kind: "recall", competency: MT, says: "A square fact next to the right one was used.", predict: [n + 1, n - 1] },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => [...Array(18).keys()].map((k) => [k + 2]).filter(([n]) => n !== p[0]),
+    stepWhy: () => ["The square root is the number that, multiplied by itself, gives the number under the √."],
     explain: (s) => `${show(s.value)} × ${show(s.value)} = ${s.inputs[0]}`,
     domain: [[2, 100]],
     difficulty: ([n]) => (n <= 10 ? 1 : n <= 15 ? 2 : 3),
@@ -900,6 +992,9 @@ const F: Def[] = [
       { id: "outside-only", kind: "conceptual", competency: "MATH.measurement.volume-cubes", says: "The squares on the outside faces were counted; volume counts the cubes inside too.", predict: 2 * (l * w + w * h + l * h) },
     ],
     variants: (p) => pairs(p, [[2, 6], [2, 5], [2, 4]], ([l, w]) => l >= w).slice(0, 80),
+    stepWhy: (s) => (s.id === "layer"
+        ? ["The cubes sit in layers. One layer is a rectangle of rows and columns, so we multiply."]
+        : ["Every layer has the same number of cubes, so we multiply by the number of layers."]),
     explain: (s) => (s.id === "layer" ? `One layer: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} cubes` : `${s.inputs[1]} layers: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[2, 8], [2, 8], [2, 8]],
     keep: ([l, w]) => l >= w,
@@ -936,6 +1031,9 @@ const F: Def[] = [
       ].filter((b2) => b2.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[2, 6], [1, 12], [1, 9]], () => true).slice(0, 80),
+    stepWhy: (s) => (s.id === "undo-add"
+        ? ["The same thing done to both sides keeps the balance. Taking away the number added leaves only the x term on one side."]
+        : ["The x is multiplied by a number, so dividing both sides by that number leaves x on its own."]),
     explain: (s) => (s.id === "undo-add" ? `Take ${s.inputs[1]} from both sides: ${show(s.value)}` : `Divide by ${s.inputs[1]}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[2, 9], [1, 30], [1, 12]],
     keep: ([, b]) => b <= 20,
@@ -967,6 +1065,9 @@ const F: Def[] = [
       { id: "no-unit", kind: "procedural", competency: "MATH.number.proportion", says: `The total for ${a} was multiplied by ${c}; first find the price of one pencil.`, predict: a * u * c },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 6], [2, 9], [2, 9]], ([a, , c]) => a !== c).slice(0, 80),
+    stepWhy: (s) => (s.id === "unit"
+        ? ["At the same price each, finding the cost of one makes it easy to find the cost of any number."]
+        : ["Each one costs the same, so we multiply the cost of one by how many."]),
     explain: (s) => (s.id === "unit" ? `One pencil: ₹${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${show(s.value)}` : `${s.inputs[1]} pencils: ${s.inputs[1]} × ₹${s.inputs[0]} = ₹${show(s.value)}`),
     domain: [[2, 8], [2, 15], [2, 12]],
     difficulty: ([a, u, c]) => (u * c <= 40 ? 1 : u * c <= 100 ? 2 : 3),
@@ -992,6 +1093,11 @@ const F: Def[] = [
       { id: "constant-minus", kind: "procedural", competency: "MATH.algebra.factorisation", says: "The given number was taken away from the constant; the two numbers multiply to the constant.", predict: m * n - m },
     ],
     variants: (p) => pairs(p, [[-5, 5], [-6, 6]], ([m, n]) => m !== 0 && n !== 0 && m !== n && m + n !== 0).slice(0, 80),
+    stepWhy: (s) => (s.id === "product"
+        ? ["When (x + m)(x + n) is multiplied out, the constant is m × n. So the missing number times the given one must make the constant."]
+        : s.id === "check-sum"
+          ? ["The x coefficient is m + n, so the two numbers must also add to it. Checking this makes sure the pair is right."]
+          : ["The two numbers add to the x coefficient, so the missing one is the coefficient minus the given number."]),
     explain: (s) => (s.id === "box" ? `So the number in the box is ${neg(show(s.value))}: the x coefficient minus the given number, ${neg(s.inputs[0])} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "product" ? `The numbers multiply to ${neg(s.inputs[0])}: ${neg(s.inputs[0])} ÷ ${par(s.inputs[1])} = ${neg(show(s.value))}` : `Check they add to the x coefficient: ${neg(s.inputs[0])} + ${par(s.inputs[1])} = ${neg(show(s.value))}`),
     domain: [[-9, 9], [-9, 9]],
     // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
@@ -1023,6 +1129,11 @@ const F: Def[] = [
       { id: "forgot-start", kind: "procedural", competency: "MATH.algebra.arithmetic-sequences", says: "Only the jumps were counted; the sequence starts at the first term.", predict: (n - 1) * d },
     ],
     variants: (p) => pairs(p, [[1, 9], [2, 5], [5, 12]], () => true).slice(0, 80),
+    stepWhy: (s) => (s.id === "steps"
+        ? ["Term 1 needs no jump, so the term we want is one jump fewer than its number."]
+        : s.id === "jump"
+          ? ["Every jump adds the same common difference, so all the jumps add that many times it."]
+          : ["The term is the first term with all the jumps added on."]),
     explain: (s) => (s.id === "steps" ? `From term 1 to term ${s.inputs[0]}: ${show(s.value)} jumps` : s.id === "jump" ? `${s.inputs[0]} jumps of ${s.inputs[1]}: ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[1, 20], [2, 9], [5, 20]],
     difficulty: ([, d, n]) => (n <= 10 && d <= 5 ? 1 : n <= 15 ? 2 : 3),
@@ -1063,6 +1174,13 @@ const F: Def[] = [
       ].filter((b) => b.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[-3, 3], [-3, 3], [-3, 6], [-3, 6]], (q) => q[0] !== q[2] && q[1] !== q[3] && Number.isInteger(Math.hypot(q[2] - q[0], q[3] - q[1]))).slice(0, 80),
+    stepWhy: (s) => (s.id === "across"
+        ? ["The straight line between the points is the long side of a right triangle. Its across side is the difference of the x values."]
+        : s.id === "up"
+          ? ["The up or down side is the difference of the y values."]
+          : s.id === "squares"
+            ? ["By Pythagoras' theorem, the square of the long side equals the sum of the squares of the other two sides."]
+            : ["Taking the square root undoes the squaring and gives the distance."]),
     explain: (s) => (s.id === "across" ? `Across: from ${neg(s.inputs[1])} to ${neg(s.inputs[0])} is ${show(s.value)}` : s.id === "up" ? `Up or down: from ${neg(s.inputs[1])} to ${neg(s.inputs[0])} is ${show(s.value)}` : s.id === "squares" ? `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `√${s.inputs[0]} = ${show(s.value)}`),
     domain: [[-6, 6], [-6, 6], [-6, 6], [-6, 6]],
     keep: ([x1, y1, x2, y2]) => x1 < x2 || (x1 === x2 && y1 < y2),
@@ -1104,6 +1222,7 @@ const F: Def[] = [
       ].filter((x) => x.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[12, 40], [14, 60]], ([a, b]) => a < b && gcd(a, b) >= 2 && gcd(a, b) !== a).slice(0, 80),
+    stepWhy: () => ["Any number that divides both numbers also divides the remainder. So the HCF does not change when we replace the bigger number by the remainder, and we repeat until the remainder is 0."],
     explain: (s) => `${s.inputs[0]} = ${Math.floor((s.inputs[0] as number) / (s.inputs[1] as number))} × ${s.inputs[1]} + ${show(s.value)}${s.value === 0 ? `: the remainder is 0, so the HCF is ${s.inputs[1]}` : ""}`,
     domain: [[12, 98], [13, 99]],
     keep: ([a, b]) => a < b,
@@ -1138,6 +1257,11 @@ const F: Def[] = [
       { id: "reversed", kind: "procedural", competency: "MATH.algebra.determinants", says: "The products were subtracted the wrong way round: ad − bc, not bc − ad.", predict: b * c - a * d },
     ],
     variants: (p) => pairs(p, [[1, 5], [1, 5], [1, 5], [1, 5]], (v) => v[0] * v[3] !== v[1] * v[2]).slice(0, 80),
+    stepWhy: (s) => (s.id === "main"
+        ? ["The determinant of a 2 by 2 matrix is the main diagonal product minus the other diagonal product. First the main diagonal."]
+        : s.id === "other"
+          ? ["Then the product along the other diagonal."]
+          : ["The determinant is the first product minus the second."]),
     explain: (s) => (s.id === "difference" ? `${neg(s.inputs[0])} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : `${par(s.inputs[0])} × ${par(s.inputs[1])} = ${neg(show(s.value))}`),
     domain: [[-6, 9], [-6, 9], [-6, 9], [-6, 9]],
     keep: (v) => v.every((x) => x >= -3 && x <= 5) && v.filter((x) => x < 0).length <= 1,
@@ -1167,6 +1291,9 @@ const F: Def[] = [
       { id: "top-only", kind: "conceptual", competency: "MATH.calculus.limits", says: `Only x² was put equal to ${a * a} (x = ${a}) and the rest was dropped, giving ${k === 1 ? `${a * a}` : `${k} × ${a * a} = ${k * a * a}`}; at x = ${a} the top and the bottom are both 0, so factorise and cancel (x − ${a}) first: the limit is ${2 * a * k}.`, predict: k * a * a },
     ],
     variants: (p) => pairs(p, [[1, 9], [1, 4]], () => true),
+    stepWhy: (s) => (s.id === "factor"
+        ? ["Putting x straight in gives 0 ⁄ 0, which has no value. Factorising shows a common factor that can be cancelled while x is not exactly the limit point."]
+        : ["After cancelling, the expression has no problem at that point, so putting x in gives the limit."]),
     explain: (s) => (s.id === "factor" ? `x² − ${(s.inputs[0] as number) ** 2} = (x − ${s.inputs[0]})(x + ${s.inputs[0]}); cancel (x − ${s.inputs[0]})` : `Then put x = ${s.inputs[0]}: ${s.inputs[1]} × (${s.inputs[0]} + ${s.inputs[0]}) = ${show(s.value)}`),
     domain: [[1, 9], [1, 6]],
     difficulty: ([a, k]) => (k === 1 ? 1 : a * k <= 12 ? 2 : 3),
@@ -1197,6 +1324,9 @@ const F: Def[] = [
       { id: "not-over-yes", kind: "procedural", competency: "MATH.probability.conditional", says: "Chess girls were compared with non-chess girls; a probability divides by all the girls.", predict: p / r },
     ],
     variants: (p) => pairs(p, [[1, 6], [1, 4], [1, 6], [1, 4]], () => true).slice(0, 80),
+    stepWhy: (s) => (s.id === "given"
+        ? ["We already know the chosen one is a girl, so only the girls count. We find how many girls there are."]
+        : ["The probability is the girls in the chess club out of all the girls."]),
     explain: (s) => (s.id === "given" ? `Girls: ${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `Chess girls out of all girls: ${s.inputs[0]} ⁄ ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[2, 15], [2, 15], [2, 15], [2, 15]],
     keep: (v) => v.every((x) => x <= 6),
