@@ -10,7 +10,8 @@
  */
 import { problemOf } from "./families";
 import type { Step } from "./family-kit";
-import { tallyAt, tallyClicks, tallyProblems, type TallyScene } from "./tally";
+import { check } from "./scene";
+import { tallyAt, tallyClicks, type TallyScene } from "./tally";
 
 type Kind = "count" | "money" | "change" | "integer" | "lift";
 /** The families mapped, and what their numbers count. */
@@ -117,8 +118,11 @@ export function stepScene(questionId: string): TallyScene | null {
     prompt = tiles.length > 1 ? "Drop them in, one by one." : kind === "integer" ? "Drop the tile in." : tiles[0] > 0 ? `Put ${tiles[0]} more in.` : `Take ${-tiles[0]} away.`;
     success = kind === "integer" ? `It stops at ${sign(end)}.` : adding ? `${say(end)} in all.` : taking ? `${say(end)} left.` : `${say(end)}.`;
   }
-  const scene: TallyScene = { type: "scene", kind: "tally", prompt, success, goal: { measure: "total", equals: end }, start, tiles, floors, ...(unit ? { unit } : {}), ...(adding && tiles.length > 1 ? { anyOrder: true } : {}) };
-  return tallyProblems(scene).length ? null : scene;
+  // the goal is every tile in (the lift then stands on the answer): a question whose answer is its start (up 3, down 5,
+  // up 2) is still a picture to work, where a goal on the total would be met before the first tile
+  const scene: TallyScene = { type: "scene", kind: "tally", prompt, success, goal: { measure: "dropped", equals: tiles.length }, start, tiles, floors, ...(unit ? { unit } : {}), ...(adding && tiles.length > 1 ? { anyOrder: true } : {}) };
+  // the engine's whole check (the shape, the floors, a goal not met at the start and reachable): null only when it fails
+  return check(scene).length ? null : scene;
 }
 
 /**

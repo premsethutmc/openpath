@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { STEP_SCENE_FAMILIES, breakItDown, chainOf, stepScene } from "../../../packages/learning/src/step-scenes";
+import { check, initial, met, set } from "../../../packages/learning/src/scene";
 import { tallyAt, tallyClicks, tallyProblems } from "../../../packages/learning/src/tally";
 import { classOfQuestion } from "../year/StepCoach";
 
@@ -20,7 +21,13 @@ test("step-scene@1: every pool question of a mapped family that gets a picture i
       assert.deepEqual(tallyProblems(s), [], id);
       const end = tallyAt(s.start, s.tiles, s.tiles.length);
       assert.equal(String(end), String(p.answer), id);
-      assert.equal(s.goal.equals, end, id);
+      // the engine's own check: the player draws it (not "This picture is not available"), the goal is not met before the
+      // first tile, and once every tile is in it is met with the lift on the answer
+      assert.deepEqual(check(s), [], id);
+      assert.equal(met(s, initial(s)), false, `${id}: not done before a tile`);
+      const all = set(s, initial(s), "dropped", s.tiles.length);
+      assert.ok(met(s, all), `${id}: done with every tile in`);
+      assert.deepEqual(s.goal, { measure: "dropped", equals: s.tiles.length }, id);
       assert.equal(s.tiles.length, p.steps.filter((x) => ARITH.has(x.op)).length, `${id}: one tile per step`);
       assert.ok(s.floors[1] - s.floors[0] <= 60, id);
       const below = tallyClicks(s.start, s.tiles).some((n) => n < 0);
@@ -39,6 +46,10 @@ test("step-scene@1: every pool question of a mapped family that gets a picture i
     const items = pool(fam).items, miss = items.filter((pr) => !stepScene(pr.id) && (fam !== "aimulti" || tallyClicks(pr.params[1], [pr.params[2], -pr.params[3], pr.params[4]]).every((n) => Math.abs(n) < 50)));
     assert.deepEqual(miss.map((m) => m.id), [], `${fam}: every question that fits a lift`);
   }
+  // up and back to where it started (answer = start): still a picture, not "This picture is not available"
+  const round = pool("aimulti").items.filter((pr) => { const s = stepScene(pr.id); return !!s && tallyAt(s.start, s.tiles, s.tiles.length) === s.start; });
+  assert.ok(round.length >= 1, "some lift questions end where they start");
+  for (const pr of round) assert.deepEqual(check(stepScene(pr.id)), [], pr.id);
   for (const pr of pool("acstory").items) assert.equal(!!stepScene(pr.id), pr.params[0] <= 1, `${pr.id}: add and take away only`);
   // stories count things: the unit is the story's own noun
   assert.equal(stepScene(pool("acstory9").items[0].id)?.unit, "balloons");
