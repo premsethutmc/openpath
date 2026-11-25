@@ -20,3 +20,20 @@ test("trigonometry shows its screens, question types and wrong-answer feedback",
   for (const s of samples) for (const m of s!.mistakes) assert.ok(m.says.length > 10 && !/undefined|NaN/.test(m.wrong));
   assert.ok(search(trig, "compound").length > 0 && search(trig, "zzzz").length === 0);
 });
+
+test("changes@1: every change says what and links to the exact place to see it, newest first", async () => {
+  const { readFileSync } = await import("node:fs");
+  const c = JSON.parse(readFileSync(new URL("../../../content/owner/changes.v1.json", import.meta.url), "utf8")) as { entries: { date: string; status: string; title: string; what: string; links: { label: string; href: string }[] }[] };
+  const { moduleFor } = await import("../../../packages/learning/src/content");
+  assert.ok(c.entries.length > 0);
+  c.entries.forEach((e, i) => {
+    assert.match(e.date, /^\d{4}-\d{2}-\d{2}$/);
+    if (i) assert.ok(c.entries[i - 1].date >= e.date, "newest first");
+    assert.ok(e.title.trim() && e.what.trim().length > 20 && e.links.length >= 1, e.title);
+    for (const l of e.links) {
+      assert.ok(/^\/(year|owner)\//.test(l.href), `${e.title}: ${l.href}`);
+      const m = l.href.match(/#try-skill=(.+)$/);
+      if (m) assert.ok(moduleFor(decodeURIComponent(m[1])), `${e.title}: no such skill ${m[1]}`);
+    }
+  });
+});

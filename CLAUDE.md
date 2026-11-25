@@ -40,3 +40,11 @@ engine; do not build beside it.
   `content/learning/foundations.v1.json` (show it with a scene, one rule, why it works, every step, the slip to avoid,
   then practice). `MATH.coordinate.conic-tangents-normals` is the model.
 - The scene styles live in `frontend/src/year/scene.css`; a page that shows a scene imports it.
+
+## Show the owner where to look
+
+Every pull request that changes what a learner or the owner sees adds one entry at the top of
+`content/owner/changes.v1.json`: the date, what changed in plain words, and links to the exact place to see it (a child's
+view of a skill is `/year/#try-skill=<competency>`; the owner's view is `/owner/`). It is shown at `/owner/#changes`, and
+`frontend/src/owner/owner.test.ts` checks that every link points at a real skill. When the change goes live, set its
+`status` to `live` and add the commit. Reports to the owner always include those links.

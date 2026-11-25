@@ -11,6 +11,7 @@ import "../year/matrix-text.css";
 import "../year/start-here.css";
 import { mx } from "../year/MatrixText";
 import "./owner.css";
+import changes from "../../../content/owner/changes.v1.json";
 import { stepWhys } from "../../../packages/learning/src/families";
 
 /** one draw per page load: the picture questions change when the page is opened again, not while it is being read */
@@ -55,7 +56,24 @@ function SkillCard({ s }: { s: Skill }) {
   );
 }
 
+/** changes@1: what changed, newest first, each with the exact place to look. */
+function Changes() {
+  return (
+    <section className="changes" data-changes>
+      {changes.entries.map((c, i) => (
+        <article className="change" key={i}>
+          <p className="muted small">{c.date} · {c.status === "live" ? "live" : "not live yet: " + c.status}{c.pr ? <> · <a href={`https://github.com/premsethutmc/openpath/pull/${c.pr}`} target="_blank" rel="noreferrer">PR #{c.pr}</a></> : null}{c.commit ? ` · ${c.commit}` : ""}</p>
+          <h3>{c.title}</h3>
+          <p>{c.what}</p>
+          <ul className="plain">{c.links.map((l, j) => <li key={j}><a className="child-link" href={l.href} target="_blank" rel="noreferrer">{l.label} ↗</a></li>)}</ul>
+        </article>
+      ))}
+    </section>
+  );
+}
+
 function App() {
+  const [view, setView] = useState(location.hash === "#changes" ? "changes" : "maths");
   const [topic, setTopic] = useState(topics[0]);
   const [q, setQ] = useState("");
   const all = useMemo(() => skillsOf(topic), [topic]);
@@ -63,6 +81,8 @@ function App() {
   const t = totalsOf(all);
   return (
     <main className="owner">
+      <nav className="chips" aria-label="Pages"><button className={view === "changes" ? "chip on" : "chip"} onClick={() => { setView("changes"); history.replaceState(null, "", "#changes"); }}>What changed</button><button className={view === "maths" ? "chip on" : "chip"} onClick={() => { setView("maths"); history.replaceState(null, "", "#"); }}>Maths by topic</button></nav>
+      {view === "changes" ? <><h1>What changed</h1><p className="muted">Newest first. Each change links to the exact place to see it.</p><Changes /></> : <>
       <h1>Maths, topic by topic</h1>
       <p className="muted">Everything a learner is told, and where the checks stand. This page always shows the version that is live.</p>
       <nav className="chips" aria-label="Topics">{topics.map((x) => <button key={x} className={x === topic ? "chip on" : "chip"} onClick={() => { setTopic(x); setQ(""); }}>{topicName(x)}</button>)}</nav>
@@ -79,6 +99,7 @@ function App() {
       <input className="search" type="search" placeholder={`Search ${topicName(topic).toLowerCase()}`} value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search" />
       {shown.map((s) => <SkillCard key={s.competency} s={s} />)}
       {shown.length === 0 && <p className="muted">Nothing matches.</p>}
+      </>}
     </main>
   );
 }
