@@ -572,6 +572,11 @@ export const B18: Def[] = [
     },
     distractors: ([a, b, c, d]) => [`−(${sum([[a, "x"], [b, "y"]])})/(${sum([[b, "x"], [c, "y"], [d, ""]])})`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "diff": ["y depends on x, so by the chain rule the derivative of anything in y carries a factor dy/dx. Differentiating both sides of the equation keeps it true."],
+        "solve": ["dy/dx appears only to the first power, so it can be collected on one side and found by dividing, like solving a linear equation."],
+      }),
     explain: (s) => (s.id === "diff" ? `Differentiate every term with respect to x, writing dy/dx for the derivative of y and using the product rule on xy: ${s.value}` : `Collect the dy/dx terms and divide: dy/dx = ${s.value}`),
     domain: IMPL_D,
     keep: implKeep,
@@ -618,6 +623,12 @@ export const B18: Def[] = [
     ],
     distractors: ([p, m, q, n]) => [tpow((q * n) / (p * m), n - m + 1), tpow((-q * n) / (p * m), n - m)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "dx": ["Both x and y depend on t. To find how y changes with x, first find how each changes with t."],
+        "dy": ["Now the rate of change of y with t."],
+        "divide": ["By the chain rule, dy/dt = (dy/dx)(dx/dt). Dividing dy/dt by dx/dt therefore gives dy/dx."],
+      }),
     explain: (s) => (s.id === "dx" ? `dx/dt = ${s.value}` : s.id === "dy" ? `dy/dt = ${s.value}` : `dy/dx = (dy/dt) ÷ (dx/dt) = ${s.value}`),
     domain: PAR_D,
     keep: parKeep,
@@ -673,6 +684,12 @@ export const B18: Def[] = [
       return [`${y} · ln(${I})`];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "log": ["When the power itself contains x, the usual rules do not apply. Taking logarithms brings the power down as a multiplier."],
+        "diff": ["The derivative of ln y is (1/y) dy/dx by the chain rule. The right side is now a product, so use the product rule."],
+        "multiply": ["Multiplying by y, which is the original function, leaves dy/dx on its own."],
+      }),
     explain: (s) => (s.id === "log" ? `Take logarithms: ${s.value}` : s.id === "diff" ? `Differentiate both sides (product rule on the right): ${s.value}` : `Multiply by y: dy/dx = ${s.value}`),
     domain: LOGD_D,
     difficulty: ([a, b]) => (a === 1 && b === 0 ? 1 : b === 0 ? 2 : 3),
@@ -747,6 +764,13 @@ export const B18: Def[] = [
         [nf(a ** 3 / (6 * b)), nf(a ** 2 / (3 * b))],
       ][f],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "form": ["l'Hôpital's rule is used only for indeterminate forms such as 0/0 or ∞/∞, so first check that putting x in gives one."],
+        "log": ["A power whose base tends to 1 and whose power grows is hard to handle directly. Taking logarithms turns the power into a product, which becomes a 0/0 form."],
+        "rule": ["For a 0/0 or ∞/∞ form, the limit of the fraction equals the limit of the derivative of the top over the derivative of the bottom. Repeat if the form is still indeterminate."],
+        "value": ["Once substituting no longer gives an indeterminate form, the value obtained is the limit. If logarithms were taken, raise e to that value."],
+      }),
     explain: (s) => (s.id === "form" ? `Substituting x = 0 gives the indeterminate form ${s.value}` : s.id === "log" ? `Take logarithms and apply l'Hôpital's rule: ${s.value}` : s.id === "rule" ? "Differentiate the numerator and the denominator separately (as often as needed) and substitute x = 0" : `The limit is ${s.value}`),
     domain: LH_D,
     keep: lhKeep,
@@ -809,6 +833,12 @@ export const B18: Def[] = [
             bug("change-sign", "procedural", LA, `The change Δx = ${nf(d)} was used with the wrong sign.`, a - d / (3 * a * a)),
           ],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "base": ["Near a point, a curve is almost the same as its tangent line. Start from a nearby point where f is easy to work out."],
+        "slope": ["The tangent's slope there is f′, which says how fast f changes near the point."],
+        "estimate": ["Moving a small step Δx along the tangent changes f by about f′ × Δx. Add that to the known value."],
+      }),
     explain: (s) => (s.id === "base" ? `Start from a nearby value you know: f(${s.inputs[0]}) = ${s.value}` : s.id === "slope" ? `The slope there: f′(${s.inputs[0]}) = ${nf(Number(s.value))}` : `f(x₀ + Δx) ≈ f(x₀) + f′(x₀)Δx = ${s.inputs[0]} + ${nf(Number(s.inputs[1]))} × (${nf(Number(s.inputs[2]))}) = ${nf(Number(s.value))}`),
     domain: LIN_D,
     keep: linKeep,
@@ -883,6 +913,12 @@ export const B18: Def[] = [
       return [100 * n * ds, (100 * der * ds) / x];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "derivative": ["A small change in a quantity causes a change in what depends on it of about the derivative times the small change. So find the derivative at the measured value."],
+        "abs": ["The approximate error is the derivative times the error in the measurement."],
+        "pct": ["A percentage error compares the error with the whole value, so divide by the value and multiply by 100."],
+      }),
     explain: (s) => (s.id === "derivative" ? `dV/dx = ${s.value} at x = ${s.inputs[2]}` : s.id === "abs" ? `ΔV ≈ (dV/dx) Δx = ${s.inputs[0]} × ${s.inputs[1]} = ${nf(Number(s.value))}` : `Percentage error = ΔV / V × 100 = ${nf(Number(s.inputs[0]))} ÷ ${s.inputs[1]} × 100 = ${nf(Number(s.value))}%`),
     domain: ERR_D,
     keep: errKeep,
@@ -962,6 +998,12 @@ export const B18: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "if": ["For dy/dx + Py = Q, multiplying by e^(∫P dx) makes the left side exactly the derivative of (that factor × y)."],
+        "integrate": ["Since the left side is the derivative of a product, integrating both sides gives the product directly. Dividing by the factor leaves y."],
+        "constant": ["The starting value picks out the one solution through that point, which fixes C."],
+      }),
     explain: (s) => (s.id === "if" ? `Integrating factor: e^(∫P dx) = ${s.value}` : s.id === "integrate" ? `Multiply through, integrate (IF × y) = ∫ IF × Q dx, and divide by the IF: ${s.value}` : `Put in the starting value: C = ${s.value}`),
     domain: LDE_D,
     keep: ldeKeep,
@@ -1045,6 +1087,13 @@ export const B18: Def[] = [
     },
     distractors: ([p, a, b]) => [nf(a + (b - a) / 3), nf(b - (b - a) / 3)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "slope": ["The mean value theorem says that somewhere between the ends the tangent is parallel to the chord. So find the chord's slope first."],
+        "equation": ["A tangent parallel to the chord has the same slope, so set f′(c) equal to the chord's slope."],
+        "solve": ["This is a quadratic in c, so solve it."],
+        "inside": ["The theorem promises c strictly between the ends, so throw away any root outside the open interval."],
+      }),
     explain: (s) => (s.id === "slope" ? `Slope of the chord: (f(${nf(Number(s.inputs[3]))}) − f(${nf(Number(s.inputs[2]))}))/(${nf(Number(s.inputs[3]))} − (${nf(Number(s.inputs[2]))})) = ${nf(Number(s.value))}` : s.id === "equation" ? `Set f′(c) equal to it: ${s.value}` : s.id === "solve" ? `Solve the quadratic: c = ${s.value}` : `Keep only the values inside (${nf(Number(s.inputs[0]))}, ${nf(Number(s.inputs[1]))}): ${s.value}`),
     domain: MVT_D,
     keep: mvtKeep,
@@ -1116,6 +1165,12 @@ export const B18: Def[] = [
     },
     distractors: ([al, be]) => [`x > ${nf(al)}`, `x < ${nf(be)}`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "derivative": ["A function is increasing where its slope is positive and decreasing where it is negative, so we need f′."],
+        "critical": ["f′ can change sign only where it is 0. Those points split the line into intervals."],
+        "sign": ["Test the sign of f′ in each interval: f increases where f′ > 0 and decreases where f′ < 0."],
+      }),
     explain: (s) => (s.id === "derivative" ? s.value as string : s.id === "critical" ? `f′(x) = 0 at x = ${s.value}` : `Test the sign of f′ on each side of the stationary points: ${s.value}`),
     domain: MON_D,
     keep: monKeep,
@@ -1171,6 +1226,11 @@ export const B18: Def[] = [
     // cubes the middle term −ab dropped
     distractors: ([t, k, b]) => (t === 0 ? [2 * b, -2 * k * b, k * b] : t === 3 ? [2 * k * k * b * b, 3 * b * b, 3 * k * b * b] : [b, -k * b, k * k * b]),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "form": ["Substituting directly gives 0/0, which has no value. That tells us a common factor is hiding in the top and bottom."],
+        "simplify": ["Factorise the top and cancel the factor that made the bottom 0. The simpler expression is continuous, so substituting now gives the limit."],
+      }),
     explain: (s) => (s.id === "form" ? `Substituting (${nf(Number(s.inputs[1]))}, ${nf(Number(s.inputs[2]))}) gives 0/0` : `Simplify (${s.inputs[0]}), then substitute: the limit is ${nf(Number(s.value))}`),
     domain: MVL_D,
     keep: mvlKeep,
@@ -1226,6 +1286,12 @@ export const B18: Def[] = [
             ...(!s && p + q === 2 && (p === 0 || q === 0) ? [bug("other-axis", "conceptual", MVL, "Only the other axis was tried, which gives a non-zero constant; along the first axis the values are 0.", 1)] : []),
           ],
     variants: ([p, q, k, c, s]) => [[p, q, k, c, 1 - s]],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "split": ["Split off the part that is easy, so only the fraction that might cause trouble near the origin is left to study."],
+        "degree": ["Near the origin, a top of higher total degree than the bottom shrinks faster, while a lower degree can make the fraction stay large or depend on direction."],
+        "paths": ["A limit exists only if every path to the point gives the same value. Polar coordinates can show the value is squeezed to one number; two lines y = mx giving different values show there is no limit."],
+      }),
     explain: (s) => (s.id === "split" ? `Divide: ${s.value}` : s.id === "degree" ? `Top degree ${s.inputs[0]}, bottom degree ${s.inputs[1]}` : s.value === 0 ? "In polar form |f| ≤ (constant) × r^(p+q−2) → 0, so the limit is 0" : s.value === 1 ? "The fraction part is at most (constant) × r^(p+q−2) in polar form, so it tends to 0 and the limit is 1" : "Along y = mx the value depends on m (or grows without bound), so the limit does not exist"),
     domain: MVLX_D,
     keep: mvlxKeep,
@@ -1327,6 +1393,14 @@ export const B18: Def[] = [
       return [a * b * b, T1, (T1 + S) / 2];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "model": ["A rate proportional to the amount present gives exponential change. Solving the differential equation gives that form."],
+        "ratio": ["In each equal time period the amount, or the difference from the surroundings, is multiplied by the same factor. The data give that factor."],
+        "square": ["Two periods means multiplying by that factor twice."],
+        "periods": ["Exponential change multiplies by the same factor every equal period, so count how many periods fit into the time."],
+        "value": ["Multiply the starting amount by the factor once for each period."],
+      }),
     explain: (s) => (s.id === "model" ? `Solving the differential equation: ${s.value}` : s.id === "periods" ? `${s.inputs[0]} is ${s.value} periods of ${s.inputs[1]}` : s.id === "ratio" ? `In 10 minutes the difference from the room is multiplied by ${s.inputs[0]}/${s.inputs[1]} = ${nf(Number(s.value))}` : s.id === "square" ? `In 20 minutes it is multiplied by that twice: T = ${nf(Number(s.value))}` : `So the answer is ${nf(Number(s.value))}`),
     domain: ODE_D,
     keep: odeKeep,
@@ -1392,6 +1466,11 @@ export const B18: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "hold": ["A partial derivative measures change in one variable while every other variable is kept fixed. So the other variable behaves like a number."],
+        "diff": ["Differentiate term by term with the usual rules; terms with only the fixed variable are constants and give 0."],
+      }),
     explain: (s) => (s.id === "hold" ? `Treat ${s.value} as a constant` : `Differentiate each term with respect to ${s.inputs[0]}: ${s.value}`),
     domain: PD_D,
     keep: pdKeep,
@@ -1446,6 +1525,12 @@ export const B18: Def[] = [
       return [(d + 1) * eulF([d, A, B, C])(u, v), v * fy, fx + fy];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "degree": ["Euler's theorem applies to a homogeneous function, one where every term has the same total degree. That degree n is what the theorem uses."],
+        "value": ["The theorem gives x f_x + y f_y = n f, so we need f at the point."],
+        "euler": ["By Euler's theorem the expression equals n times f, without finding any partial derivatives."],
+      }),
     explain: (s) => (s.id === "degree" ? `Every term has degree ${s.value}` : s.id === "value" ? `f(${s.inputs[0]}, ${nf(Number(s.inputs[1]))}) = ${s.value}` : `By Euler's theorem, x f_x + y f_y = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: EUL_D,
     keep: eulKeep,
@@ -1518,6 +1603,12 @@ export const B18: Def[] = [
     },
     distractors: ([a, b, A, B]) => [pfTwo(A + B, a, -B, b), `${lnT(A, lin1(a))} + C`],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "factor": ["Partial fractions need the factors of the denominator."],
+        "split": ["Each simple fraction over a linear factor is easy to integrate, so split the integrand into them."],
+        "integrate": ["The integral of a sum is the sum of the integrals, and ∫ 1/(x − a) dx = ln|x − a|."],
+      }),
     explain: (s) => (s.id === "factor" ? `Factorise the denominator: ${s.value}` : s.id === "split" ? `Split into partial fractions: ${s.value}` : `Integrate each part: ∫ dx/(x − a) = ln|x − a|, so the answer is ${s.value}`),
     domain: PF_D,
     keep: pfKeep,
@@ -1575,6 +1666,11 @@ export const B18: Def[] = [
       return [redStr(scaleW(w, 2, 1)), redStr(scaleW(w, 1, 2))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reduce": ["The reduction formula lowers a power by 2 each time, ending at an integral we know. Multiplying the factors gives the value."],
+        "double": ["Over [0, π] the graph is two mirror-image copies of the part over [0, π/2], so the integral is twice that."],
+      }),
     explain: (s) => (s.id === "reduce" ? `Lower the powers two at a time, Iₘ,ₙ = (m − 1)/(m + n) Iₘ₋₂,ₙ (and the same for n): over [0, π/2] the value is ${s.value}` : `Over [0, π] it is twice that: ${s.value}`),
     domain: RED_D,
     keep: redKeep,
@@ -1628,6 +1724,11 @@ export const B18: Def[] = [
       return [c / p[1], -c, c * p[1]];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "series": ["Standard series like those for eˣ, sin x and log(1 + x) are known term by term. Using one saves differentiating many times."],
+        "substitute": ["Replace the variable of the standard series by the given expression. The power of the number in front of x comes with the power of x."],
+      }),
     explain: (s) => (s.id === "series" ? `The general term of the standard series is ${s.value}` : `Put u = ${ax(Number(s.inputs[0]))} and pick out the ${pw("x", Number(s.inputs[1]))} term: its coefficient is ${nf(Number(s.value))}`),
     domain: TAY_D,
     keep: tayKeep,
@@ -1701,6 +1802,11 @@ export const B18: Def[] = [
     },
     distractors: (p) => [piStr(2 * volR(p)), piStr(volR(p) / 2)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "square": ["Rotating the region makes each thin slice a disc. Its volume is π × radius² × thickness, so we need the radius squared."],
+        "integrate": ["Adding up all the thin discs is the integral of π × radius² along the axis."],
+      }),
     explain: (s) => (s.id === "square" ? `Square the radius of a slice: ${s.inputs[0] === 3 ? "x²" : "y²"} = ${s.value}` : `V = π∫ from ${s.inputs[2]} to ${s.inputs[3]} of ${s.inputs[0]} d${s.inputs[1]} = ${s.value}`),
     domain: VOL_D,
     keep: volKeep,
@@ -1768,6 +1874,11 @@ export const B18: Def[] = [
       return p[0] === 2 ? [piStr(1 / (4 * p[2])), piStr(2 / p[2])] : [nf(2 * x), rat(...ratio(x / 2))];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "method": ["An integral to infinity is the limit of integrals up to a growing upper limit. A standard result or method gives its value without a long working."],
+        "limit": ["The integrand shrinks fast enough that the area settles at a finite value, so the integral converges to it."],
+      }),
     explain: (s) => (s.id === "method" ? `Use ${s.inputs[0]}` : `The integral converges to ${s.value}`),
     domain: GAM_D,
     keep: gamKeep,
@@ -1823,6 +1934,12 @@ export const B18: Def[] = [
     },
     distractors: ([, h, k, R]) => [tup(k, h, rootOver(R, 1)), tup(2 * h, 2 * k, rootOver(R, 1))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "divide": ["The standard form needs x² and y² to have coefficient 1, so divide every term by their coefficient."],
+        "centre": ["x² + y² + 2gx + 2fy + c = 0 can be written (x + g)² + (y + f)² = g² + f² − c by completing the square. So the centre is (−g, −f)."],
+        "radius": ["The same completed square shows the radius squared is g² + f² − c."],
+      }),
     explain: (s) => (s.id === "divide" ? `Divide by ${s.inputs[0]}: ${s.value}` : s.id === "centre" ? `Compare with x² + y² + 2gx + 2fy + c = 0: g = ${nf(Number(s.inputs[0]))}, f = ${nf(Number(s.inputs[1]))}, so the centre is (−g, −f) = ${s.value}` : `r = √(g² + f² − c) = √(${s.inputs[0]} − (${nf(Number(s.inputs[1]))})) = ${s.value}`),
     domain: CIRC_D,
     cap: 400,
@@ -1886,6 +2003,12 @@ export const B18: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vertex": ["The equation is a standard parabola shifted. The vertex is where the bracketed parts are 0."],
+        "a": ["In the standard form, the number multiplying the bracket is 4a, and a is the distance from the vertex to the focus."],
+        "focus": ["The focus is on the axis, a units from the vertex, on the side the parabola opens towards."],
+      }),
     explain: (s) => (s.id === "vertex" ? `The vertex is ${s.value}` : s.id === "a" ? `4a = ${nf(Number(s.inputs[0]))}, so a = ${nf(Number(s.value))}` : `Move a units from the vertex along the axis: the focus is ${s.value}`),
     domain: PARA_D,
     cap: 300,
@@ -1958,6 +2081,13 @@ export const B18: Def[] = [
     },
     distractors: ([kind, a, b]) => [rootOver(kind ? a * a + b * b : Math.abs(a * a - b * b), a * a), nf(kind ? b / a : Math.min(a, b) / Math.max(a, b))],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "standard": ["Eccentricity is read from the standard form with 1 on the right, so divide through."],
+        "axes": ["The larger denominator belongs to the major axis. Its square root is a, the semi-major axis."],
+        "c": ["The distance from the centre to a focus is c, with c² = a² − b² for an ellipse and a² + b² for a hyperbola."],
+        "e": ["Eccentricity measures how stretched the conic is: e = c/a."],
+      }),
     explain: (s) => (s.id === "standard" ? `Divide by ${s.inputs[0]}: ${s.value}` : s.id === "axes" ? `${s.value}` : s.id === "c" ? `${s.value}` : `e = c/a = √${s.inputs[0]}/${s.inputs[1]} = ${s.value}`),
     domain: ECC_D,
     keep: eccKeep,
@@ -2031,6 +2161,11 @@ export const B18: Def[] = [
       return pi ? [piStr((2 * x) / Math.PI), piStr(x / Math.PI / 2)] : [carAnsScaled(p, 2), carAnsScaled(p, 1 / 2), carAnsScaled(p, 3 / 4)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "setup": ["The area is the integral of the height of the region. If it is symmetric about an axis, find one half and double it."],
+        "integrate": ["Find the antiderivative and subtract its values at the limits."],
+      }),
     explain: (s) => (s.id === "setup" ? `Area = ${s.value}` : `Integrate and substitute the limits: ${s.value}`),
     domain: CAR_D,
     keep: carKeep,
@@ -2100,6 +2235,11 @@ export const B18: Def[] = [
             ? [bug("any-two-squares-ellipse", "conceptual", CON, "Two squared terms were taken to mean an ellipse; with equal coefficients the curve is a circle (a special ellipse with e = 0), which is the better answer.", 2)]
             : [bug("linear-as-square", "procedural", CON, "The x term was read as if it were an x² term, so the equation seemed to have two squared terms and was taken for an ellipse; only y is squared, which makes a parabola.", 2)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "squares": ["The type of conic is decided by the x² and y² terms: equal coefficients give a circle, same signs give an ellipse, opposite signs a hyperbola, and only one square a parabola."],
+        "name": ["Choose the curve that matches."],
+      }),
     explain: (s) => (s.id === "squares" ? `Look at the x² and y² coefficients (${s.inputs[0]} and ${s.inputs[1]}): ${s.value}` : `So the curve is ${CID_CHOICES[Number(s.value)]}`),
     domain: CID_D,
     cap: 300,
@@ -2163,6 +2303,12 @@ export const B18: Def[] = [
       return out.filter((x) => x.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "compare": ["The section depends on how steep the plane is compared with the cone's side. Compare the plane's angle with the axis to the semi-vertical angle."],
+        "vertex": ["A plane through the vertex gives only a point, a line or two lines, so check whether it passes through the vertex."],
+        "name": ["If the plane makes a bigger angle with the axis than the side does, the section is an ellipse (a circle at 90°). An equal angle gives a parabola, and a smaller angle a hyperbola."],
+      }),
     explain: (s) => (s.id === "compare" ? `Compare the plane's angle with the axis, β = ${s.inputs[1]}°, with the semi-vertical angle α = ${s.inputs[0]}°: ${s.value}` : s.id === "vertex" ? `The plane is ${s.value}` : `So the section is option ${"ABCD"[Number(s.value)]}`),
     domain: [[3, 15], [0, 18], [0, 1]],
     cap: 300,
@@ -2218,6 +2364,12 @@ export const B18: Def[] = [
       return [ceEq(k, h, R2), ceEq2(h, k, R2), ceEq(h, k, R2 + 1)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "centre": ["A circle is all the points at a fixed distance from its centre, so we need the centre first."],
+        "radius": ["The equation uses r², the square of the distance from the centre to any point on the circle."],
+        "expand": ["(x − h)² + (y − k)² = r² is the distance rule. Expanding and moving everything to one side gives the general form."],
+      }),
     explain: (s) => (s.id === "centre" ? `Use ${s.inputs[0]}: the centre is ${s.value}` : s.id === "radius" ? `r² = ${s.value}` : `Expand (x − h)² + (y − k)² = r²: ${s.value} = 0`),
     domain: [[0, 3], [-4, 4], [-4, 4], [-5, 8], [-5, 5], [0, 0]],
     keep: (p) => ceOk(p),
@@ -2271,6 +2423,11 @@ export const B18: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "power": ["Putting a point into the left side of the circle's equation gives its squared distance from the centre minus r²."],
+        "sign": ["Negative means closer than r, so inside; zero means on the circle; positive means outside."],
+      }),
     explain: (s) => (s.id === "power" ? `Put (${nf(Number(s.inputs[0]))}, ${nf(Number(s.inputs[1]))}) into the left-hand side: ${nf(Number(s.value))}` : `${Number(s.inputs[0]) < 0 ? "Negative" : Number(s.inputs[0]) === 0 ? "Zero" : "Positive"}, so the answer is option ${"ABC"[Number(s.value)]}`),
     domain: [[-3, 3], [-3, 3], [2, 6], [-7, 7], [-7, 7]],
     keep: ([, , r, u, w]) => Math.abs(u * u + w * w - r * r) <= 2 * r + 4 && (u !== 0 || w !== 0),
@@ -2328,6 +2485,12 @@ export const B18: Def[] = [
     },
     distractors: (p) => [cpAnswer(p) + 1, 2 * cpAnswer(p)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "read": ["Compare the equation with the standard form to read off its key numbers."],
+        "c": ["The focus distance c comes from c² = a² − b² for an ellipse and c² = a² + b² for a hyperbola."],
+        "value": ["The asked-for property comes straight from these numbers."],
+      }),
     explain: (s) => (s.id === "read" ? `From ${s.inputs[0]}: ${s.value}` : s.id === "c" ? `${Number(s.inputs[0]) === 1 ? "c² = a² − b²" : "c² = a² + b²"}, so ${s.value}` : `So the answer is ${nf(Number(s.value))}`),
     domain: [[0, 2], [0, 1], [0, 16], [0, 1], [0, 5], [0, 3]],
     keep: (p) => cpOkk(p),
@@ -2376,6 +2539,12 @@ export const B18: Def[] = [
       return [tup(A + 1, B), tup(A, B + 1), tup(2 * A, 2 * B)];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "a": ["The vertices are a units from the centre along the major axis, so a can be read from them."],
+        "b": ["The foci are c units from the centre. For an ellipse b² = a² − c², and for a hyperbola b² = c² − a²."],
+        "form": ["The denominators of the standard form are a² and b²."],
+      }),
     explain: (s) => (s.id === "a" ? `From the data, ${s.value}` : s.id === "b" ? `${s.value}` : `So (A, B) = ${s.value}`),
     domain: [[1, 2], [0, 1], [0, 7], [0, 3], [1, 4]],
     // triples 4, 5 are twice triples 0, 1: with the multiplier m they would repeat questions, so they are left out
@@ -2420,6 +2589,11 @@ export const B18: Def[] = [
     },
     distractors: (p) => [peK(p) / 2, -peK(p)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "a": ["For a parabola with vertex at the origin, a is the distance to the focus, with a sign showing which way it opens."],
+        "k": ["The standard form is y² = 4ax, so k = 4a."],
+      }),
     explain: (s) => (s.id === "a" ? `From the data, ${s.value}` : `k = 4a = ${nf(Number(s.value))}`),
     domain: [[0, 3], [0, 1], [-12, 12], [-12, 12]],
     keep: (p) => peOk(p),
@@ -2465,6 +2639,11 @@ export const B18: Def[] = [
     },
     distractors: (p) => [caAppAnswer(p) + 1, caAppAnswer(p) / 2, caAppAnswer(p) + 0.5, 2 * caAppAnswer(p)].filter(ca2),
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "model": ["Put the origin at a convenient point and write the curve in its standard form. The given measurements fix its constants."],
+        "value": ["Put in the asked-for position to read the value from the model."],
+      }),
     explain: (s) => (s.id === "model" ? `Model: ${s.value}` : `So the answer is ${nf(Number(s.value))}`),
     range: [0, Infinity],
     domain: [[0, 4], [2, 40], [1, 12], [0, 12], [0, 6]],
@@ -2510,6 +2689,11 @@ export const B18: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "disc": ["With an xy term, the conic type is decided by B² − 4AC, just as the discriminant decides the roots of a quadratic."],
+        "name": ["Negative means an ellipse, zero a parabola, positive a hyperbola."],
+      }),
     explain: (s) => (s.id === "disc" ? `A = ${s.inputs[0]}, B = ${s.inputs[1]}, C = ${s.inputs[2]}: B² − 4AC = ${s.value}` : `${Number(s.inputs[0]) < 0 ? "Negative: an ellipse" : Number(s.inputs[0]) === 0 ? "Zero: a parabola" : "Positive: a hyperbola"} (option ${"ABCD"[Number(s.value)]})`),
     domain: [[0, 2], [1, 4], [1, 4], [-6, 6], [0, 8]],
     keep: (P) => xcOk(P),
@@ -2576,6 +2760,13 @@ export const B18: Def[] = [
     },
     distractors: ([, a, b]) => [nf(a + (b - a) / 3), nf(b - (b - a) / 3)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "conditions": ["Rolle's theorem needs f to be continuous on the closed interval, differentiable inside it, and equal at the two ends. Then it promises a flat tangent somewhere in between."],
+        "equation": ["A flat tangent means slope 0, so solve f′(c) = 0."],
+        "solve": ["Solve the equation for c."],
+        "inside": ["The theorem promises c strictly between the ends, so throw away any root outside the open interval."],
+      }),
     explain: (s) => (s.id === "conditions" ? `Conditions: ${s.value}` : s.id === "equation" ? `Solve f′(c) = 0: ${s.value}` : s.id === "solve" ? `c = ${s.value}` : `Keep only the values inside (${nf(Number(s.inputs[0]))}, ${nf(Number(s.inputs[1]))}): ${s.value}`),
     domain: [[-4, 4], [-4, 3], [-3, 5]],
     keep: (P) => rolleOk(P),
@@ -2630,6 +2821,11 @@ export const B18: Def[] = [
     },
     distractors: (p) => [tyCoef(p) * 2, tyCoef(p) + 1],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "derivative": ["The coefficient of (x − a)ᵏ in a Taylor series is f⁽ᵏ⁾(a)/k!, so find the kth derivative at a."],
+        "divide": ["Divide by k! to finish the coefficient."],
+      }),
     explain: (s) => (s.id === "derivative" ? `f⁽ᵏ⁾(a) = ${s.value} for k = ${s.inputs[1]}` : `Divide by ${s.inputs[0]}: the coefficient is ${nf(Number(s.value))}`),
     domain: [[0, 4], [-3, 5], [1, 4]],
     keep: (p) => tyOk(p),
@@ -2679,6 +2875,11 @@ export const B18: Def[] = [
     },
     distractors: (p) => [lhiAnswer(p) * 2, lhiAnswer(p) + 1, -lhiAnswer(p)],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "rewrite": ["For ∞/∞, dividing top and bottom by the highest power of x, or using l'Hôpital's rule, turns it into a form whose value can be seen."],
+        "value": ["The smaller terms die away as x grows, leaving the limit."],
+      }),
     explain: (s) => (s.id === "rewrite" ? `For the form ${s.inputs[0]}: ${s.value}` : `The limit is ${nf(Number(s.value))}`),
     domain: [[0, 5], [1, 6], [1, 6]],
     keep: (p) => lhiOk(p),
@@ -2735,6 +2936,11 @@ export const B18: Def[] = [
       return out.filter((x) => x.predict !== mvcChoices(p).indexOf(MVC_NAMES[lab]));
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "limit": ["A function is continuous at a point only if its limit there exists and equals its value. So find the limit first."],
+        "compare": ["Compare the limit with the given value at the origin: equal means continuous, different or no limit means not."],
+      }),
     explain: (s) => (s.id === "limit" ? `The limit at the origin ${s.value === "does not exist" ? "does not exist" : `is ${s.value}`}` : `Compare with f(0, 0) = ${nf(Number(s.inputs[0]))}: option ${"ABC"[Number(s.value)]}`),
     domain: [[0, 7], [1, 4], [-2, 4]],
     keep: ([t, a, k]) => (MVC[t].limit(a) === null ? k >= -1 && k <= 1 : true),
@@ -2806,6 +3012,12 @@ export const B18: Def[] = [
     },
     distractors: (p) => [la2Answer(p) + 0.1, la2Answer(p) - 0.5],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "partials": ["A small change in f comes from small changes in x and y. Each partial derivative says how much f changes per unit change in one variable."],
+        "df": ["The total differential adds the two effects: f_x dx + f_y dy."],
+        "add": ["The new value is about the old value plus the small change."],
+      }),
     explain: (s) => (s.id === "partials" ? `At (${nf(Number(s.inputs[0]))}, ${nf(Number(s.inputs[1]))}): ${s.value}` : s.id === "df" ? `df = f_x dx + f_y dy = ${nf(Number(s.value))}` : `f ≈ ${nf(Number(s.inputs[0]))} + (${nf(Number(s.inputs[1]))}) = ${nf(Number(s.value))}`),
     domain: [[-2, 3], [-3, 3], [-2, 3], [1, 4], [-3, 4], [0, 7], [0, 1]],
     keep: (p) => la2Ok(p),
@@ -2867,6 +3079,12 @@ export const B18: Def[] = [
       return [(b * x + 2 * c * y) * 2 * t0, (2 * a * x + b * y) * p - (b * x + 2 * c * y) * 2 * t0];
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "point": ["The partial derivatives are needed at the point the curve passes through at that time, so find x and y there."],
+        "partials": ["w depends on x and y, which both depend on t. Each partial derivative says how w responds to one of them."],
+        "chain": ["By the chain rule, dw/dt adds the effect through x and the effect through y: (∂w/∂x)(dx/dt) + (∂w/∂y)(dy/dt)."],
+      }),
     explain: (s) => (s.id === "point" ? `At t = ${nf(Number(s.inputs[0]))}: ${s.value}` : s.id === "partials" ? s.value as string : `dw/dt = (∂w/∂x)(${nf(Number(s.inputs[0]))}) + (∂w/∂y)(${nf(Number(s.inputs[1]))}) = ${nf(Number(s.value))}`),
     domain: [[-2, 3], [-3, 3], [-2, 3], [-3, 3], [-3, 3], [-3, 3], [-2, 3]],
     keep: (P) => chOk(P),
@@ -2927,6 +3145,12 @@ export const B18: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "form": ["Here x is the unknown function and y the variable. Writing it as dx/dy + P₁x = Q₁ shows it is linear in x."],
+        "if": ["Multiplying by e^(∫P₁ dy) makes the left side the derivative of x times that factor."],
+        "integrate": ["Integrate both sides, then use the starting value to fix the constant."],
+      }),
     explain: (s) => (s.id === "form" ? `Write it as ${s.value}` : s.id === "if" ? `Integrating factor e^(∫P₁ dy) = ${s.value}` : `x × (IF) = ∫ Q₁ × (IF) dy + C; with the starting value, x = ${s.value}`),
     domain: [[0, 2], [1, 4], [-5, 5], [-3, 4]],
     keep: (p) => ldxOk(p),
@@ -2979,6 +3203,12 @@ export const B18: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "model": ["The salt changes at the rate it comes in minus the rate it goes out. The outflow carries salt at the current concentration, amount ÷ volume."],
+        "solve": ["The equation is linear in Q, so it can be solved with an integrating factor or by separating variables."],
+        "constant": ["The starting amount fixes the constant."],
+      }),
     explain: (s) => (s.id === "model" ? `Rate in − rate out: ${s.value}` : s.id === "solve" ? `This is linear: ${s.value}` : `Use Q(0) = ${s.inputs[0]}: Q = ${s.value}`),
     domain: [[0, 4], [1, 20], [0, 5], [0, 30]],
     keep: (p) => mixOk(p),

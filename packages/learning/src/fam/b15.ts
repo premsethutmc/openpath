@@ -490,6 +490,12 @@ export const B15: Def[] = [
       return out;
     },
     variants: ([N, a, b, op]) => [[N, a, b, (op + 1) % 5], [N, b, a, op]].filter(setopOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "A": ["A set is easiest to work with when its elements are written out. The rule says which numbers of U belong, so test each one."],
+        "B": ["List B the same way, so both sets can be compared element by element."],
+        "combine": ["With both lists in front of us, the operation just says which elements to keep: union keeps anything in either set, intersection keeps what is in both, difference keeps what is in one but not the other, and the complement keeps what is in neither."],
+      }),
     explain: (s) => (s.id === "A" ? `A = {${(s.value as number[]).join(", ")}}` : s.id === "B" ? `B = {${(s.value as number[]).join(", ")}}` : `${s.inputs[0]} = {${(s.value as number[]).join(", ")}}`),
     domain: D_SETOP,
     keep: setopOk,
@@ -558,6 +564,13 @@ export const B15: Def[] = [
       ];
     },
     variants: ([n, q, r]) => [[n + 1, q, r], [n, (q + 1) % 3, 0]].filter(subOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "power": ["To build a subset, decide for each element on its own whether it goes in or stays out. Two choices for every element multiply together, giving 2 to the power of the number of elements."],
+        "choose": ["A subset with a fixed number of elements is just a choice of that many elements, with order not mattering. That is exactly what the combination counts."],
+        "adjust|subtract": ["A proper subset is any subset except A itself, so A is taken away from the total. If the empty set is also not allowed, it is taken away as well."],
+        "adjust|halve": ["Pair each subset with the one that differs only in the given element. In every pair exactly one contains it, so exactly half of all subsets contain it."],
+      }),
     explain: (s) => (s.id === "power" ? `Each of the ${s.inputs[1]} elements is either in a subset or not: 2${sup(Number(s.inputs[1]))} = ${s.value} subsets` : s.id === "choose" ? `Choose ${s.inputs[1]} of the ${s.inputs[0]} elements: ${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${s.value}` : `So the number asked for is ${s.value}`),
     domain: D_SUB,
     keep: subOk,
@@ -616,6 +629,12 @@ export const B15: Def[] = [
       ];
     },
     variants: ([a, b, c, k]) => [[a, b, c, (k + 1) % 3]].filter(inexOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "formula|subtract": ["Adding n(A) and n(B) counts the elements in both sets twice. So n(A) + n(B) is bigger than n(A ∪ B) by exactly n(A ∩ B), and taking n(A ∪ B) away leaves the overlap."],
+        "formula|add": ["Adding n(A) and n(B) counts the elements in both sets twice. Taking away n(A ∩ B) once leaves each element counted exactly once, which is n(A ∪ B)."],
+        "only": ["The elements of A split into those also in B and those not in B. Taking the overlap away from n(A) leaves only the ones in A and not in B."],
+      }),
     explain: (s) => (s.id === "only" ? `n(A − B) = n(A) − n(A ∩ B) = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.op === "add" ? `n(A ∪ B) = ${s.inputs[0]} + ${s.inputs[1]} − ${s.inputs[2]} = ${s.value}` : `n(A ∩ B) = n(A) + n(B) − n(A ∪ B) = ${s.inputs[0]} + ${s.inputs[1]} − ${s.inputs[2]} = ${s.value}`),
     domain: D_INEX,
     keep: inexOk,
@@ -674,6 +693,12 @@ export const B15: Def[] = [
             ]
           : [{ id: "subtracted", kind: "conceptual", competency: REL, says: `n(A) was subtracted from n(A × B); n(A × B) = n(A) × n(B), so divide by ${m}.`, predict: m * n - m }],
     variants: ([m, n, q]) => [[m, n, (q + 1) % 3]].filter(cartOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pairs|multiply": ["An ordered pair takes its first entry from A and its second from B. Every choice from A can go with every choice from B, so the counts multiply."],
+        "pairs|divide": ["n(A × B) is n(A) times n(B), because every element of A pairs with every element of B. Dividing the product by n(A) gives back n(B)."],
+        "subsets": ["A relation from A to B is any set of these ordered pairs. Each pair is either in the relation or not, so there are 2 choices per pair."],
+      }),
     explain: (s) => (s.id === "subsets" ? `A relation is any subset of the ${s.inputs[1]} pairs: 2^${s.inputs[1]} = ${s.value}` : s.op === "divide" ? `n(B) = n(A × B) ÷ n(A) = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `n(A × B) = n(A) × n(B) = ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: D_CART,
     keep: cartOk,
@@ -743,6 +768,12 @@ export const B15: Def[] = [
       return out;
     },
     variants: ([rule, k, n]) => [[rule, k, n + 1], [rule, k + 1, n]].filter(relOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reflexive": ["Reflexive means every element is related to itself, so check (a, a) for each a in the set. One missing pair is enough to say no."],
+        "symmetric": ["Symmetric means the relation works both ways: whenever (a, b) is in R, (b, a) must be too. Check each pair for its reverse."],
+        "transitive": ["Transitive means links chain together: if a is related to b and b to c, then a must be related to c. Check every such chain."],
+      }),
     explain: (s) => (s.id === "reflexive" ? `Reflexive (every (a, a) in R): ${s.value ? "yes" : "no"}` : s.id === "symmetric" ? `Symmetric (each (a, b) has its (b, a)): ${s.value ? "yes" : "no"}` : `Transitive (each chain (a, b), (b, c) has its (a, c)): ${s.value ? "yes" : "no"}`),
     domain: D_REL,
     keep: relOk,
@@ -806,6 +837,16 @@ export const B15: Def[] = [
     },
     distractors: ([t, a, b]) => (t === 0 ? ["(−∞, ∞)", a > 0 ? ivs([[null, false, -b / a, true]]) : ivs([[-b / a, true, null, false]])] : ["(−∞, ∞)", ivs([[a, false, b, false]]), ivs([[null, false, a, true], [b, false, null, false]])]),
     variants: ([t, a, b]) => [[(t + 1) % 5, a, b]].filter(domOk),
+    stepWhy: (s) =>
+      s.id === "factor"
+        ? ["Whether a product is positive, negative or zero depends on the sign of each factor. Factorising shows the two numbers where the expression changes sign."]
+        : s.id === "condition"
+          ? String(s.inputs[0]).includes("≠")
+            ? ["Division by zero has no meaning, so the bottom of the fraction must not be 0. Every other real x is allowed."]
+            : String(s.inputs[0]).includes(">")
+              ? ["The square root of a negative number is not a real number, and the root is also on the bottom of a fraction, so it must not be 0 either. The quantity under the root must be strictly positive."]
+              : ["The square root of a negative number is not a real number, so the quantity under the root must not be negative. The root of 0 is 0, which is allowed."]
+          : ["The domain is every real x that satisfies the condition. Solving the inequality and writing the answer as an interval gives exactly those x."],
     explain: (s) => (s.id === "factor" ? `Factorise: ${s.value}` : s.id === "condition" ? (s.inputs.length === 1 && typeof s.inputs[0] === "string" && s.inputs[0].includes("x") ? `The quantity under the root must be non-negative: ${s.value}` : `Condition on (x − a)(x − b): ${s.inputs[0]}`) : `Solve the condition: x ∈ ${s.value}`),
     domain: D_DOM,
     keep: domOk,
@@ -865,6 +906,11 @@ export const B15: Def[] = [
     },
     distractors: ([, , k]) => ["(−∞, ∞)", ray(k + 1, true), ray(k - 1, false)],
     variants: ([a, h, k]) => [[-a, h, k], [a, h + 1, k]].filter(rangeOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vertex": ["Completing the square writes f as a number times a square, plus a constant. A square is never negative, so this form shows the lowest or highest value straight away."],
+        "extreme": ["The square is 0 at the vertex and grows away from it. With a positive front number f is smallest there, with a negative one it is largest, and every value beyond that is reached, which gives the range."],
+      }),
     explain: (s) => (s.id === "vertex" ? `Complete the square: f(x) = ${s.value}` : `The square is never negative, so the ${s.inputs[1]} value is f(${n_(Number(s.inputs[0]))}) = ${n_(Number(s.value))}`),
     domain: D_RANGE,
     keep: rangeOk,
@@ -930,6 +976,12 @@ export const B15: Def[] = [
       return out;
     },
     variants: ([h, c, d, s]) => [[h, c, d, (s + 1) % 3], [h, c, d + 1, s]].filter(fclOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "vertex": ["A parabola turns at its vertex: on each side of it the graph goes only up or only down. Completing the square shows where the vertex is."],
+        "one-one": ["A function is one-one when no two inputs give the same output. A parabola repeats its values on the two sides of the vertex, so it is one-one only if the domain stays on one side."],
+        "onto": ["Onto means every element of the codomain is an output. Compare the range, the outputs actually reached, with the codomain."],
+      }),
     explain: (s) => (s.id === "vertex" ? `Complete the square: f(x) = ${s.value}, so the vertex is at x = ${n_(Number(s.inputs[0]))}` : s.id === "one-one" ? `One-one (the domain starts at ${n_(Number(s.inputs[1]))}, ${Number(s.inputs[1]) >= Number(s.inputs[0]) ? "not left of" : "left of"} the vertex): ${s.value ? "yes" : "no"}` : `Onto (the range is [${n_(Number(s.inputs[0]))}, ∞); is every element of the codomain reached?): ${s.value ? "yes" : "no"}`),
     domain: D_FCL,
     keep: fclOk,
@@ -972,6 +1024,11 @@ export const B15: Def[] = [
     ],
     distractors: ([p, q, h, v, a, s]) => [tup(h + s * p, -(a * q + v)), tup(p + v, a * q + h), tup(h + s * p + 1, a * q + v)],
     variants: ([p, q, h, v, a, s]) => [[p, q, h, v, a, -s], [p, q, -h, v, a, s]].filter(trOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "inside": ["We know f only at the given point, so what is inside the bracket must equal that point's x. Solving for x tells us which x to use on the new graph."],
+        "outside": ["At that x, f gives the known y-value of the point. The outside numbers then stretch and shift that value, which gives the new y."],
+      }),
     explain: (s) => (s.id === "inside" ? `The input to f must be ${n_(Number(s.inputs[2]))}: x = ${n_(Number(s.value))}` : `Then y = ${n_(Number(s.inputs[0]))} × ${n_(Number(s.inputs[1]))} ${Number(s.inputs[2]) < 0 ? "−" : "+"} ${Math.abs(Number(s.inputs[2]))} = ${n_(Number(s.value))}`),
     domain: D_TR,
     keep: trOk,
@@ -1026,6 +1083,12 @@ export const B15: Def[] = [
       ];
     },
     variants: ([u, w, op]) => [[u, w, 1 - op], [-u, w, op]].filter(stdOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "first": ["The greatest integer [x] is the largest whole number that is not more than x. For a negative number that means going further from zero, not just dropping the decimals."],
+        "second": ["Use the same rule: take the integer at or just below the number on the number line."],
+        "combine": ["Both brackets are now ordinary integers, so finish the arithmetic, taking care with the signs."],
+      }),
     explain: (s) => (s.id === "combine" ? `${n_(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${Number(s.inputs[1]) < 0 ? `(${n_(Number(s.inputs[1]))})` : s.inputs[1]} = ${n_(Number(s.value))}` : `[${fr(Number(s.inputs[0])).includes("/") ? n_(Number(s.inputs[0])) : n_(Number(s.inputs[0]))}] = ${n_(Number(s.value))}: the integer at or just below it`),
     domain: D_STD,
     keep: stdOk,
@@ -1072,6 +1135,11 @@ export const B15: Def[] = [
     },
     distractors: ([x, y]) => [tup(x + 1, y), tup(x, y + 1), tup(x + 1, y - 1)],
     variants: ([x, y, a, b, d, e]) => [[x, y, d, e, a, b], [y, x, a, b, d, e]].filter(corOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "lines": ["A corner of the feasible region is where two of its edges meet. Off the axes, the edges are the lines where the inequalities become equalities."],
+        "solve": ["The corner lies on both lines, so its x and y must make both equations true. Solving them together gives that one point."],
+      }),
     explain: (s) => (s.id === "lines" ? `The corner is where the boundary lines meet: ${s.value}` : `Solve them together: (x, y) = ${s.value}`),
     domain: D_COR,
     keep: corOk,
@@ -1111,6 +1179,11 @@ export const B15: Def[] = [
       ...(b !== 0 ? [{ id: "b-sign", kind: "procedural", competency: LIN, says: `${Math.abs(b)} was moved across without changing its sign.`, predict: [(c + b) / a, (b - c) / a] } as Bug] : []),
     ],
     variants: ([a, b, c]) => [[a, b, c + 1], [a, -b, c]].filter((p) => inDom(p, D_ABSE)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cases": ["The modulus |A| is the distance of A from zero. A number at that distance can be on either side of zero, so A is that number or its negative."],
+        "divide": ["Each case is now an ordinary linear equation. Solving both gives the two solutions."],
+      }),
     explain: (s) => (s.id === "cases" ? `|A| = ${s.inputs[0].toString().split(" = ")[1]} means A = ${s.inputs[0].toString().split(" = ")[1]} or A = −${s.inputs[0].toString().split(" = ")[1]}: ${s.inputs[0]} or ${s.inputs[1]}` : `Divide by ${s.inputs[0]}: x = ${(s.value as number[]).map(fr).join(" or x = ")}`),
     domain: D_ABSE,
     cap: 300,
@@ -1158,6 +1231,11 @@ export const B15: Def[] = [
     },
     distractors: ([a, b, c, r]) => [absIneqAnswer((-c - b) / a, (c - b) / a, r ^ 3), "(−∞, ∞)"],
     variants: ([a, b, c, r]) => [[a, b, c, (r + 2) % 4]].filter((p) => inDom(p, D_ABSI)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "unfold": ["|A| < k says A is less than k away from zero, so A lies between −k and k. That one double inequality has no modulus left in it."],
+        "solve": ["Do the same thing to all three parts of the double inequality to get x alone in the middle. That gives the interval of solutions."],
+      }),
     explain: (s) => (s.id === "unfold" ? `Remove the modulus: ${s.value}` : `Solve for x: ${s.value}`),
     domain: D_ABSI,
     cap: 400,
@@ -1198,6 +1276,11 @@ export const B15: Def[] = [
     ],
     distractors: ([a, b, r, m]) => [ivs([[b, r % 2 === 1, null, false]]), ivs([[null, false, a, r % 2 === 1]])],
     variants: ([a, b, r, m]) => [[a, b, (r + 2) % 4, m], [a, b, r, -m]].filter(qinOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "factor": ["A product changes sign only where one of its factors is 0. Factorising shows those numbers, which split the number line into regions."],
+        "signs": ["Inside each region the expression keeps one sign, so test one number in each. Keep the regions with the sign the inequality asks for, and include the roots only when equality is allowed."],
+      }),
     explain: (s) => (s.id === "factor" ? `Factorise: ${s.value}` : `Roots ${n_(Number(s.inputs[0]))} and ${n_(Number(s.inputs[1]))}; with the sign of each region: ${s.value}`),
     domain: D_QIN,
     keep: qinOk,
@@ -1239,6 +1322,11 @@ export const B15: Def[] = [
     ],
     distractors: ([a, b, r]) => [ratAnswer(b, a, r), "(−∞, ∞)"],
     variants: ([a, b, r]) => [[b, a, r], [a, b, (r + 1) % 4]].filter(ratOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "critical": ["A fraction can change sign only where its top or bottom is 0. Where the bottom is 0 the fraction is not defined, so that number can never be in the answer."],
+        "signs": ["Between these numbers the fraction keeps one sign, so test a number in each region and keep the regions that make the inequality true."],
+      }),
     explain: (s) => (s.id === "critical" ? `The top is 0 at x = ${n_(Number((s.inputs as number[])[0]))}; the bottom is 0 at x = ${n_(Number((s.inputs as number[])[1]))}, which is never allowed` : `Signs in each region give ${s.value}`),
     domain: D_RAT,
     keep: ratOk,
@@ -1283,6 +1371,12 @@ export const B15: Def[] = [
     ],
     distractors: ([, , A, B]) => [tup(A, -B), tup(-A, B), tup(A + 1, B)],
     variants: ([a, b, A, B]) => [[a, b, B, A], [a, b + 1, A, B]].filter(pfOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "factor": ["Partial fractions split a fraction into simpler fractions, one for each factor of the denominator. So we need the factors first."],
+        "A": ["Multiply both sides by the whole denominator. Putting in the x that makes A's partner factor 0 makes the B term vanish, leaving only A."],
+        "B": ["In the same way, putting in the x that makes the other factor 0 makes the A term vanish, leaving only B."],
+      }),
     explain: (s) => (s.id === "factor" ? `Factorise the denominator: ${s.value}` : `Put x = ${n_(Number(s.inputs[0]))}: ${s.id} = ${n_(Number(s.inputs[1]))} ÷ ${par2(Number(s.inputs[2]))} = ${n_(Number(s.value))}`),
     domain: D_PF,
     keep: pfOk,
@@ -1334,6 +1428,12 @@ export const B15: Def[] = [
     },
     distractors: ([, , A, B, C]) => [tup(A, -B, C), tup(A, B, -C), tup(-A, B, C)],
     variants: ([a, k, A, B, C]) => [[a, k + 1, A, B, C]].filter(pfqOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "A": ["After clearing the denominator, putting in the x that makes the linear factor 0 makes the (Bx + C) term vanish, leaving only A."],
+        "B": ["The two sides are the same polynomial, so their x² coefficients must match. That gives an equation with B as the only unknown."],
+        "C": ["In the same way the x coefficients must match. With B known, that gives C."],
+      }),
     explain: (s) => (s.id === "A" ? `Put x = ${n_(Number(s.inputs[0]))}: A = ${n_(Number(s.inputs[1]))} ÷ ${s.inputs[2]} = ${n_(Number(s.value))}` : s.id === "B" ? `x² terms: A + B = ${n_(Number(s.inputs[0]))}, so B = ${n_(Number(s.value))}` : `x terms: C − (${n_(Number(s.inputs[1]))})B = ${n_(Number(s.inputs[0]))}, so C = ${n_(Number(s.value))}`),
     domain: D_PFQ,
     keep: pfqOk,
@@ -1378,6 +1478,10 @@ export const B15: Def[] = [
       ...(r < n - 1 && n <= 10 ? [{ id: "divide-by-r", kind: "recall", competency: PERM, says: `${n}! was divided by ${r}!; ${sup(n)}P${sub(r)} = ${n}!/(${n} − ${r})!.`, predict: fact(n) / fact(r) } as Bug] : []),
     ],
     variants: ([n, r]) => [[n, r - 1], [n + 1, r]].filter(nprOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "slots": ["Arranging means filling places in order. The first place has all the objects to choose from, and each later place has one fewer, because an object already placed cannot be used again."],
+      }),
     explain: (s) => `${s.inputs.length} places, filled one after another: ${s.inputs.join(" × ")} = ${s.value}`,
     domain: D_NPR,
     keep: nprOk,
@@ -1426,6 +1530,12 @@ export const B15: Def[] = [
       { id: "multiply-n-r", kind: "conceptual", competency: PERM, says: `${n} and ${r} were multiplied; count the ordered choices ${n} × ${n - 1} × … and divide by ${r}!.`, predict: n * r },
     ],
     variants: ([n, r]) => [[n, n - r], [n + 1, r]].filter(ncrOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "symmetry": ["Choosing which objects to take is the same as choosing which to leave behind. So the smaller choice gives the same count and is easier to work out."],
+        "arrange": ["First count the choices as if order mattered, filling places one after another."],
+        "divide": ["In a choice the order does not matter, but the ordered count lists each choice once for every way of arranging it. Dividing by that number removes the repeats."],
+      }),
     explain: (s) => (s.id === "symmetry" ? `${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[2]))} (choosing ${s.inputs[1]} to take is choosing ${s.inputs[2]} to leave)` : s.id === "arrange" ? `In order: ${sup(Number(s.inputs[0]))}P${sub(Number(s.inputs[1]))} = ${s.value}` : `Each choice was counted ${s.inputs[1]} times (its arrangements): ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: D_NCR,
     keep: ncrOk,
@@ -1479,6 +1589,12 @@ export const B15: Def[] = [
       ...(perm(w, k) * perm(m, r - k) <= 1e12 ? [{ id: "order-counted", kind: "conceptual", competency: PERM, says: "The members were arranged in order; a committee is a selection, so use combinations.", predict: perm(w, k) * perm(m, r - k) } as Bug] : []),
     ],
     variants: ([m, w, r, k]) => [[m, w, r, k + 1], [m, w, r, k - 1]].filter(commOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "women": ["Pick the women first. Order inside the committee does not matter, so this is a combination."],
+        "men": ["Then pick the men in the same way, as a combination."],
+        "together": ["Any choice of women can go with any choice of men. When one choice follows another, the counts multiply."],
+      }),
     explain: (s) => (s.id === "together" ? `Each choice of women goes with each choice of men: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.id === "women" ? "Women" : "Men"}: ${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${s.value}`),
     domain: D_COMM,
     keep: commOk,
@@ -1536,6 +1652,11 @@ export const B15: Def[] = [
       ];
     },
     variants: ([r, b, g]) => [[r + 1, b, g], [r, b, g + 1]].filter(mulOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "all": ["Start by pretending every letter is different. Then every order is a new arrangement, and there are n! of them."],
+        "divide": ["Swapping identical letters gives the same word, but the count above treated those as different. Each word was counted once for every shuffle of its equal letters, so divide by those."],
+      }),
     explain: (s) => (s.id === "all" ? `If all letters were different: ${s.inputs[0]}! = ${s.value}` : `Divide by the shuffles of equal letters: ${s.inputs[0]} ÷ (${s.inputs.slice(1).join(" × ")}) = ${s.value}`),
     domain: D_MUL,
     keep: mulOk,
@@ -1581,6 +1702,13 @@ export const B15: Def[] = [
       ...(Math.abs(a) !== 1 ? [{ id: "a-power-forgotten", kind: "procedural", competency: EXPN, says: `The ${n_(a)} in (${lin(a, 0)})${sup(r)} was not raised to the power ${r}.`, predict: choose(n, r) * a * b ** (n - r) } as Bug] : []),
     ],
     variants: ([a, b, n, r]) => [[a, b, n, r + 1], [a, -b, n, r]].filter(bcoOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "term": ["In the binomial theorem each term is a combination times a power of the first part times a power of the second, and the powers add up to n. Pick the term whose power of x is the one asked for."],
+        "choose": ["The combination counts how many ways that term arises when the brackets are multiplied out."],
+        "powers": ["The number parts of each piece are raised to their powers too, signs included. Only x is left out, because we want the coefficient."],
+        "coefficient": ["The coefficient is everything in the term except the power of x, so multiply the number parts together."],
+      }),
     explain: (s) => (s.id === "term" ? `The term with ${xp(Number(s.inputs[1]))} is ${s.value}` : s.id === "choose" ? `${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${s.value}` : s.id === "powers" ? `${par2(Number(s.inputs[0]))}${sup(Number(s.inputs[1]))} × ${par2(Number(s.inputs[2]))}${sup(Number(s.inputs[3]))} = ${n_(Number(s.value))}` : `Coefficient: ${s.inputs[0]} × ${par2(Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: D_BCO,
     keep: bcoOk,
@@ -1627,6 +1755,11 @@ export const B15: Def[] = [
     ],
     distractors: ([a, b, n]) => [poly(bexCs(a, b, n).map((c, i) => (i === 1 ? c + 1 : c))), poly(bexCs(a, b, n).map((c, i) => (i === n ? c * 2 : c)))],
     variants: ([a, b, n]) => [[a, b, n + 1], [a, -b, n]].filter(bexOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "row": ["The binomial coefficients for power n are the numbers in row n of Pascal's triangle. They say how many ways each term comes out of the brackets."],
+        "terms": ["In each term the first part's power goes down by one while the second part's goes up by one. Multiply each coefficient by its powers, keeping the signs."],
+      }),
     explain: (s) => (s.id === "row" ? `Row ${s.inputs[0]} of Pascal's triangle: ${(s.value as number[]).join(", ")}` : `Multiply each by the powers of ${s.inputs[0] === 1 ? "x" : `${s.inputs[0]}x`} and ${n_(Number(s.inputs[1]))}: ${s.value}`),
     domain: D_BEX,
     keep: bexOk,
@@ -1683,6 +1816,12 @@ export const B15: Def[] = [
       return out;
     },
     variants: ([p, q, k, n]) => [[p, q, -k, n], [p, q, k, n + p + q]].filter(bindOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "general": ["Writing a general term, with r as the unknown, lets us see what power of x every term has at once."],
+        "r": ["A term is independent of x when x's power is 0. Setting the power to 0 tells us which r gives that term."],
+        "term": ["Put that r into the general term. The x parts cancel, leaving just a number."],
+      }),
     explain: (s) => (s.id === "general" ? `General term: ${s.value}` : s.id === "r" ? `The power of x is 0 when ${s.inputs[1]}r = ${s.inputs[0]}: r = ${s.value}` : `Term: ${s.inputs[0]} × (${n_(Number(s.inputs[1]))})${sup(Number(s.inputs[2]))} = ${n_(Number(s.value))}`),
     domain: D_BIND,
     keep: bindOk,
@@ -1726,6 +1865,12 @@ export const B15: Def[] = [
       ...(Math.abs((a * r) ** (n - 1)) <= 1e9 && a !== 1 ? [{ id: "ar-power", kind: "procedural", competency: EXPN, says: `(ar)^${n - 1} was worked out; only r is raised to the power, then multiply by a.`, predict: (a * r) ** (n - 1) } as Bug] : []),
     ],
     variants: ([a, r, n]) => [[a, r, n + 1], [a, -r, n]].filter(gpOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["In a geometric progression every term is the one before multiplied by the same number r. Dividing a term by the one before finds r."],
+        "power": ["To reach the nth term from the first we multiply by r once for each step, and there are n − 1 steps."],
+        "term": ["So the nth term is the first term times r to the power n − 1."],
+      }),
     explain: (s) => (s.id === "ratio" ? `r = ${n_(Number(s.inputs[0]))} ÷ ${par2(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "power" ? `r^${s.inputs[1]} = ${n_(Number(s.value))}` : `aₙ = a r^(n − 1) = ${n_(Number(s.inputs[0]))} × ${par2(Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: D_GP,
     keep: gpOk,
@@ -1773,6 +1918,12 @@ export const B15: Def[] = [
       ...(Number.isInteger((a * (r ** n - 1)) / r) ? [{ id: "divide-by-r", kind: "recall", competency: GP, says: "The formula was divided by r; it is divided by r − 1.", predict: (a * (r ** n - 1)) / r } as Bug] : []),
     ],
     variants: ([a, r, n]) => [[a, r, n + 1], [a, -r, n]].filter(gpsOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["The sum formula needs the common ratio r, found by dividing a term by the one before."],
+        "power": ["The sum formula uses r to the power of the number of terms."],
+        "sum": ["Multiplying the sum by r shifts every term along one place. Subtracting cancels all but the first and last pieces, which gives the formula a(rⁿ − 1)/(r − 1)."],
+      }),
     explain: (s) => (s.id === "ratio" ? `r = ${n_(Number(s.inputs[0]))} ÷ ${par2(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "power" ? `r^${s.inputs[1]} = ${n_(Number(s.value))}` : `Sₙ = a(rⁿ − 1)/(r − 1) = ${n_(Number(s.inputs[0]))} × (${n_(Number(s.inputs[1]))} − 1) ÷ (${n_(Number(s.inputs[2]))} − 1) = ${n_(Number(s.value))}`),
     domain: D_GPS,
     keep: gpsOk,
@@ -1819,6 +1970,11 @@ export const B15: Def[] = [
       { id: "first-terms-only", kind: "conceptual", competency: GP, says: "Only the terms shown were added; the series goes on for ever, and the sum to infinity adds all of them.", predict: clean(a + (a * p) / q + (a * p * p) / (q * q)) },
     ],
     variants: ([a, p, q]) => [[a, -p, q], [a, p, q + 1]].filter(gpiOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["An infinite geometric series has a sum only when |r| < 1, because then the terms shrink towards 0. So find r first and check it."],
+        "sum": ["When |r| < 1, rⁿ gets closer and closer to 0, so the sum of n terms settles at a/(1 − r)."],
+      }),
     explain: (s) => (s.id === "ratio" ? `r = ${fr(Number(s.inputs[0]))} ÷ ${par2(Number(s.inputs[1]))} = ${fr(Number(s.value))}; |r| < 1, so the series converges` : `S∞ = a/(1 − r) = ${n_(Number(s.inputs[0]))} ÷ ${fr(Number(s.inputs[1]))} = ${fr(Number(s.value))}`),
     domain: D_GPI,
     keep: gpiOk,
@@ -1872,6 +2028,12 @@ export const B15: Def[] = [
       ];
     },
     variants: ([a, d, p, q]) => [[a, d + 1, p, q], [a, d, p, q + 1]].filter(agpOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "shift": ["Each term is an AP number times a GP power. Multiplying the series by r and subtracting lines up equal powers, so the AP parts reduce to their common difference."],
+        "gp": ["What is left after the subtraction is a first term plus a geometric series, which we can sum with a/(1 − r)."],
+        "divide": ["That result is S times (1 − r), so divide by 1 − r to get S itself."],
+      }),
     explain: (s) => (s.id === "shift" ? `Subtract r times the series from itself: ${s.value}` : s.id === "gp" ? `The geometric part sums to ${fr(Number(s.inputs[0]))}/(1 − ${fr(Number(s.inputs[1]))}), so S(1 − r) = ${fr(Number(s.value))}` : `Divide by 1 − r = ${fr(Number(s.inputs[1]))}: S = ${fr(Number(s.value))}`),
     domain: D_AGP,
     keep: agpOk,
@@ -1910,6 +2072,11 @@ export const B15: Def[] = [
       ...((2 * a * b) / gcd(a + b, 2 * a * b) <= 1000 ? [{ id: "not-inverted", kind: "procedural", competency: AGP, says: "The mean of the reciprocals was found but not turned back over.", predict: (a + b) / (2 * a * b) } as Bug] : []),
     ],
     variants: ([a, b]) => [[a, b + 1], [a + 1, b]].filter(hmOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "reciprocals": ["The harmonic mean is built from reciprocals: its reciprocal is the average of the reciprocals of the numbers. So add the reciprocals first."],
+        "hm": ["The average of the two reciprocals is their sum over 2. The harmonic mean is the reciprocal of that, which is 2 divided by the sum."],
+      }),
     explain: (s) => (s.id === "reciprocals" ? `1/${s.inputs[0]} + 1/${s.inputs[1]} = ${fr(Number(s.value))}` : `H = 2 ÷ ${fr(Number(s.inputs[1]))} = ${fr(Number(s.value))}`),
     domain: D_HM,
     keep: hmOk,
@@ -1969,6 +2136,12 @@ export const B15: Def[] = [
     },
     distractors: ([i, j, k]) => [lawAnswer(j, i - k, k), lawAnswer(i - k, j, -k), lawAnswer(i - k + 1, j, k), lawAnswer(i - k, j + 1, k), lawAnswer(i - k, j, k + 1)],
     variants: ([i, j, k]) => [[i + 1, j, k], [i, j, k - 1]].filter(lawOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "factor": ["We only know log 2 and log 3, so write the number as a product of powers of 2, 3 and 5. Then the log laws can break it into pieces we know."],
+        "five": ["log 5 is not given, but 5 = 10 ÷ 2 and log 10 = 1 in base 10. So log 5 can be written using log 2."],
+        "laws": ["The log of a product is the sum of the logs, and the log of a power is the power times the log. Applying these turns the product into a combination of a and b."],
+      }),
     explain: (s) => (s.id === "factor" ? `Write ${s.value} with powers of 2, 3 and 5: 2${sup(Number(s.inputs[0]))} × 3${sup(Number(s.inputs[1]))} × 5${sup(Number(s.inputs[2]))}` : s.id === "five" ? `log 5 = log(10/2) = 1 − a` : `log(xy) = log x + log y and log xⁿ = n log x give ${s.value}`),
     domain: D_LAW,
     keep: lawOk,
@@ -2010,6 +2183,11 @@ export const B15: Def[] = [
       ];
     },
     variants: ([c, i, j]) => [[c, i, -j], [c, i + 1, j]].filter(logOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "powers": ["A logarithm asks what power of the base gives the number. Writing both as powers of the same number makes that easy to compare."],
+        "ratio": ["When the bases match, the powers must match too. That gives a simple equation for the logarithm."],
+      }),
     explain: (s) => (s.id === "powers" ? `Write both as powers of ${s.inputs[0]}: ${s.value}` : `(c^${s.inputs[1]})^y = c^${s.inputs[0]} when ${s.inputs[1]}y = ${s.inputs[0]}, so the logarithm is ${fr(Number(s.value))}`),
     domain: D_LOG,
     keep: logOk,
@@ -2068,6 +2246,12 @@ export const B15: Def[] = [
       return out;
     },
     variants: ([bi, k, u, t]) => [[bi, k, u, 1 - t]].filter(leqOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "combine": ["The sum of two logs to the same base is the log of the product. Then log_B(something) = k means the something equals B to the power k, which removes the logs."],
+        "roots": ["The equation without logs is a quadratic, so solve it in the usual way."],
+        "check": ["A logarithm is defined only for positive numbers. Any root that makes a bracket inside a log zero or negative must be thrown away."],
+      }),
     explain: (s) => (s.id === "combine" ? `log x + log y = log(xy), and log_B(…) = ${s.inputs[1]} means … = ${s.inputs[0]}${sup(Number(s.inputs[1]))}: ${s.value}` : s.id === "roots" ? `Solve the quadratic: x = ${(s.value as number[]).map(n_).join(" or x = ")}` : `Only x = ${(s.value as number[])[0]} keeps both logarithms defined`),
     domain: D_LEQ,
     keep: leqOk,
@@ -2120,6 +2304,12 @@ export const B15: Def[] = [
     },
     distractors: ([a, b, c]) => [tup(-b / (2 * a), surdOver(4 * a * c - b * b, 4 * a)), tup(-b / a, surdOver(4 * a * c - b * b, 2 * a)), tup(-b / (2 * a), surdOver(4 * a * c + b * b, 2 * a))],
     variants: ([a, b, c]) => [[a, -b, c], [a, b, c + 1]].filter(cqOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "disc": ["The discriminant b² − 4ac decides the kind of roots. When it is negative, the square root in the formula is of a negative number, so the roots are complex."],
+        "root": ["The square root of a negative number −k is √k times i, because i² = −1."],
+        "roots": ["The quadratic formula still works with complex numbers. Split the answer into its real part and its i part to read off p and q."],
+      }),
     explain: (s) => (s.id === "disc" ? `b² − 4ac = ${n_(Number(s.value))} < 0: the roots are not real` : s.id === "root" ? `√(${n_(-Number(s.inputs[0]))}) = ${s.value}` : `x = (${n_(Number(s.inputs[0]))} ± √(b² − 4ac))/${s.inputs[1]}, so (p, q) = ${s.value}`),
     domain: D_CQ,
     keep: cqOk,
@@ -2166,6 +2356,13 @@ export const B15: Def[] = [
     ],
     distractors: ([k, a, b]) => [tup(-a * k, k * (a * a + b * b)), tup(-2 * a * k, k * (a * a + b * b) + 1), tup(2 * a * k, k * (a * a - b * b))],
     variants: ([k, a, b]) => [[k, -a, b], [k, a, b + 1]].filter((p) => inDom(p, D_CJ)),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "conjugate": ["When a polynomial has real coefficients, its complex roots come in conjugate pairs. So a − bi is a root too."],
+        "sum": ["For x² + px + q, the sum of the roots is −p. Adding the conjugates cancels the i parts."],
+        "product": ["The product of the roots is q. A number times its conjugate is a² + b², a real number."],
+        "coefficients": ["A quadratic with given roots is x² − (sum of roots)x + (product of roots). Comparing with the equation gives p and q."],
+      }),
     explain: (s) => (s.id === "conjugate" ? `Real coefficients: the conjugate ${s.value} is also a root` : s.id === "sum" ? `Sum of roots = ${n_(Number(s.value))}` : s.id === "product" ? `Product of roots = a² + b² = ${s.value}` : `${s.inputs[0] === 1 ? "" : s.inputs[0]}(x² − (sum)x + product), so (p, q) = ${s.value}`),
     domain: D_CJ,
     difficulty: ([k, a]) => (k === 1 && a >= 0 ? 1 : k === 1 ? 2 : 3),
@@ -3211,6 +3408,11 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== -1);
     },
     variants: ([t, k, m, d]) => [[t, k, m, (d + 1) % 3]].filter(sfOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "list": ["Set-builder form gives a rule instead of a list. Listing the elements each rule makes is the surest way to compare it with the set."],
+        "match": ["The right choice is the rule whose list is exactly the given set, nothing missing and nothing extra."],
+      }),
     explain: (s) => (s.id === "list" ? `${s.inputs[0]} = ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: D_SF,
     keep: sfOk,
@@ -3320,6 +3522,11 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== clChoices(p).indexOf(clRightLabel(p)) && b.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "decide": ["Whether a set is empty, finite or infinite depends on its elements. Listing them, or seeing that none exist, settles it."],
+        "pick": ["Choose the statement that agrees with what the listing showed."],
+      }),
     explain: (s) => (s.id === "decide" ? `Listing the elements shows: ${s.value}` : `So the answer is: ${s.inputs[0]}`),
     domain: D_CL,
     keep: clOk,
@@ -3387,6 +3594,12 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== null && (b.predict as number[]).join(",") !== ans.join(","));
     },
     variants: ([s, q]) => [[s, q ^ 1], [s, q ^ 2]].filter(law3Ok),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "inner": ["Brackets are worked out first, so find the set inside the bracket before anything else."],
+        "outer": ["Now combine A with the set we just found, using the same operation."],
+        "other": ["The associative property says grouping does not change a union or an intersection. Working it out the other way and getting the same set checks the answer."],
+      }),
     explain: (s) => (s.id === "inner" ? `${s.inputs[0]} = ${braces((s.value as number[]).filter((x) => x))}` : s.id === "outer" ? `${s.inputs[0]} = ${braces(s.value as number[])}` : `Check: ${s.inputs[0]} = ${braces(s.value as number[])} too, as the associative property says`),
     domain: D_LAW3,
     keep: law3Ok,
@@ -3457,6 +3670,12 @@ const NEW15: Def[] = [
     },
     distractors: (p) => [v3Ans(p) + 1, v3Ans(p) + v3Given(p).z, Math.max(1, v3Ans(p) - 2)],
     variants: (p) => [[...p.slice(0, 8), p[8] === 0 ? 1 : 0]].filter(v3Ok),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "union": ["Adding the three sets counts people in two sets twice and people in all three three times. Taking away the pairwise overlaps and adding back the triple overlap leaves each person counted once."],
+        "none": ["Everyone is either in at least one set or in none. So those in none are the total minus those in the union."],
+        "only": ["In a three-set Venn diagram, fill the centre first, then the pairwise-only regions, then each set alone. Each region is what is left after removing the parts already filled."],
+      }),
     explain: (s) => (s.id === "union" ? `n(A ∪ B ∪ C) = ${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} − ${s.inputs[3]} − ${s.inputs[4]} − ${s.inputs[5]} + ${s.inputs[6]} = ${s.value}` : s.id === "none" ? `None of the three: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Fill the Venn regions from the middle outwards: the number asked for is ${s.value}`),
     domain: D_V3,
     keep: v3Ok,
@@ -3525,6 +3744,11 @@ const NEW15: Def[] = [
       return out;
     },
     variants: ([e, k, ev]) => [[e, k, ev + 1], [e, k, 0]].filter(sampOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "list": ["The sample space is the set of every possible outcome. Listing them in a fixed order makes sure none is missed or repeated."],
+        "pick": ["Choose the set that contains exactly these outcomes."],
+      }),
     explain: (s) => (s.id === "list" ? `Listing the outcomes systematically gives ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: D_SAMP,
     keep: sampOk,
@@ -3588,6 +3812,11 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== ch.indexOf(FNQ[c]));
     },
     variants: ([f, c, s]) => [[f, (c + 1) % 3, s], [(f + 1) % 3, c, s]].filter(isfOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "images": ["A relation from A to B is a function only if every element of A has exactly one image in B. So count the images of each element."],
+        "pick": ["Choose the statement that matches what the count showed."],
+      }),
     explain: (s) => (s.id === "images" ? `Count the images of each element of A: ${s.value}` : `So: ${s.inputs[0]}`),
     domain: D_ISF,
     keep: isfOk,
@@ -3662,6 +3891,11 @@ const NEW15: Def[] = [
       return out;
     },
     variants: ([q, c, s]) => [[q, (c + 1) % 4, s]].filter(fnameOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "images": ["One-one means different elements of A have different images. Onto means every element of B is an image of something. Checking the images settles both."],
+        "pick": ["Choose the statement that matches what the check showed."],
+      }),
     explain: (s) => (s.id === "images" ? `Checking images: ${s.value}` : `So: ${s.inputs[0]}`),
     domain: D_FNAME,
     keep: fnameOk,
@@ -3738,6 +3972,11 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== null);
     },
     variants: ([f, d, k]) => [[f, (d + 1) % 3, k]].filter(grOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "features": ["A graph is recognised by its features: its shape, where it is defined, and where it crosses the axes. Comparing these with each choice rules out the wrong ones."],
+        "pick": ["Choose the function whose features all match the picture."],
+      }),
     explain: (s) => (s.id === "features" ? `Its shape, where it is defined and where it crosses the axes match ${s.value}` : `So the answer is ${s.inputs[0]}`),
     domain: D_GR,
     keep: grOk,
@@ -3814,6 +4053,13 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== null && x.predict !== ans);
     },
     variants: ([q, a, b, c]) => [[q, a + 1, b, c], [q, a, b, c + 1]].filter(fundOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "mult": ["When one choice is made and then another, every first choice can go with every second choice. So the numbers of choices multiply."],
+        "slots": ["Fill the places one after another. Each place is a new choice that goes with all the earlier ones, so the counts multiply."],
+        "via": ["Going through the middle point means one route for the first part and then one for the second. Every first route can go with every second route, so multiply."],
+        "either": ["When the cases cannot happen together, one or the other, the counts are added."],
+      }),
     explain: (s) => (s.id === "mult" || s.id === "slots" || s.id === "via" ? `One choice after another, so multiply: ${s.inputs.join(" × ")} = ${s.value}` : `Separate cases (one or the other), so add: ${s.inputs.join(" + ")} = ${s.value}`),
     domain: D_FUND,
     keep: fundOk,
@@ -3886,6 +4132,15 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: ([q, n, m]) => [[q, n + 1, m], [q, n, m + 1]].filter(factOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "cancel": ["The larger factorial contains the smaller one as a factor. Cancelling it leaves only the few numbers between them to multiply."],
+        "common": ["To add fractions with factorials on the bottom, write both over the same factorial, just like a common denominator."],
+        "add": ["With the same bottom, fractions add by adding their tops. The right side has that same bottom, so x is the sum of the tops."],
+        "divide": ["Dividing by the other factorial cancels it, leaving a short product."],
+        "simplify": ["n! is n × (n − 1) × (n − 2)!, so dividing by (n − 2)! leaves just n(n − 1)."],
+        "solve": ["n and n − 1 are two whole numbers next to each other, so look for two consecutive numbers with that product."],
+      }),
     explain: (s) => (s.id === "cancel" ? `Cancel the common factorial: ${s.inputs.join(" × ")}${s.inputs.length > 1 ? "" : ""} → ${s.value}` : s.id === "common" ? `Write both over ${Number(s.inputs[0]) + 2}!: ${s.value}` : s.id === "add" ? `x = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "divide" ? `Divide by the other factorial: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "simplify" ? `n!/(n − 2)! = n(n − 1) = ${s.value}` : `Two consecutive numbers with product ${s.inputs[0]}: n = ${s.value}`),
     domain: D_FACT,
     keep: factOk,
@@ -3970,6 +4225,16 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ncrpAns([q, a, b]) && (typeof x.predict !== "number" || x.predict > 0));
     },
     variants: ([q, a, b]) => [[q, a + 1, b], [q, a, b + 1]].filter(ncrpOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "symmetry": ["Choosing a things is the same as leaving n − a behind, so ⁿCₐ = ⁿCₙ₋ₐ. If two different combinations are equal, their lower numbers must add up to n."],
+        "ratio": ["ⁿPᵣ counts ordered choices and ⁿCᵣ unordered ones. Each choice can be arranged in r! ways, so the ratio is r!."],
+        "r": ["Find the whole number whose factorial is this number."],
+        "equation": ["ⁿC₂ = n(n − 1)/2, so doubling gives the product of two consecutive whole numbers."],
+        "n": ["Look for two consecutive whole numbers with that product; n is the larger."],
+        "pascal": ["Pascal's rule says two neighbouring combinations add to one in the next row: ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ."],
+        "value": ["Now work out that single combination."],
+      }),
     explain: (s) => (s.id === "symmetry" ? `ⁿCₐ = ⁿC_b with a ≠ b means a = n − b, so n = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "ratio" ? `r! = ⁿPᵣ ÷ ⁿCᵣ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "r" ? `r! = ${s.inputs[0]} gives r = ${s.value}` : s.id === "equation" ? `n(n − 1)/2 = ${s.inputs[0]}, so n(n − 1) = ${s.value}` : s.id === "n" ? `${s.inputs[0]} = ${s.value} × ${Number(s.value) - 1}, so n = ${s.value}` : s.id === "pascal" ? `By Pascal's rule the sum is ${s.value}` : `${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${s.value}`),
     domain: D_NCRP,
     keep: ncrpOk,
@@ -4059,6 +4324,14 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: ([q, n, m]) => [[q, n + 1, m], [q, n, m + 1]].filter(geocOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "pairs": ["Any two of the points fix a line segment, and order does not matter, so count pairs with a combination."],
+        "sides": ["Pairs of neighbouring corners are the sides of the polygon, not diagonals, so take them away."],
+        "triples": ["Any three points that are not on one line make a triangle. Start by counting all choices of three."],
+        "collinear": ["Three points on the same line make no triangle, so remove every choice of three taken from the collinear points."],
+        "one-line": ["All the pairs from the collinear points give the same single line. Remove those pairs and add that one line back."],
+      }),
     explain: (s) => (s.id === "pairs" ? `Pairs of points: ${sup(Number(s.inputs[0]))}C₂ = ${s.value}` : s.id === "triples" ? `Triples of points: ${sup(Number(s.inputs[0]))}C₃ = ${s.value}` : s.id === "sides" ? `Remove the ${s.inputs[1]} sides: ${s.value}` : s.id === "collinear" ? `Remove the choices from the ${s.inputs[0]} collinear points: ${s.value}` : `Add back the one line through the collinear points: ${s.value}`),
     domain: D_GEOC,
     keep: geocOk,
@@ -4143,6 +4416,15 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: ([q, n, r, b]) => [[q === 0 ? 1 : 0, n, Math.min(r, 3), b]].filter(mixOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "decide": ["The key question is whether order matters. If swapping the chosen things gives something different, it is an arrangement; if not, it is a selection."],
+        "count|choose": ["Order does not matter here, so count with a combination."],
+        "count|arrange": ["Order matters here, so count with a permutation."],
+        "select": ["First choose which things are used. Order does not matter yet, so this is a combination."],
+        "arrange": ["Each chosen group can then be arranged in order, so multiply by the number of arrangements."],
+        "chair": ["Picking the chairperson is a further choice made after the committee, so multiply."],
+      }),
     explain: (s) => (s.id === "decide" ? `The wording means ${s.inputs[0]}: use a ${s.value}` : s.id === "count" ? `${sup(Number(s.inputs[0]))}${s.op === "choose" ? "C" : "P"}${sub(Number(s.inputs[1]))} = ${s.value}` : s.id === "select" ? (s.inputs.length === 2 && Number(s.inputs[1]) > 3 ? `Choose: ${s.value} selections` : `Choose: ${s.value} selections`) : s.id === "arrange" ? `Arrange each selection: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `Pick the chairperson: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: D_MIX,
     keep: mixOk,
@@ -4249,6 +4531,19 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans && (x.predict as number) > 0);
     },
     variants: ([q, n, r]) => [[q, n + 1, r]].filter(arrOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "power": ["Repetition is allowed, so every place has the full set of choices. Places are filled one after another, so the choices multiply."],
+        "block": ["Tie the people who must be together into one block. Then count the arrangements of the block with everyone else."],
+        "inside": ["The people inside the block can still swap among themselves. Each order inside goes with each arrangement outside, so multiply."],
+        "all": ["Count every arrangement first, with no condition."],
+        "together": ["Count the arrangements where they are together by treating them as one block that can be arranged inside."],
+        "apart": ["Every arrangement has them either together or apart. So apart is all arrangements minus the together ones."],
+        "circle": ["Turning a circle round gives the same seating. Fixing one person stops that, and the rest are arranged in a row."],
+        "flip": ["A necklace can also be turned over, which makes each arrangement match its mirror image. So every arrangement was counted twice."],
+        "before": ["Words in dictionary order come before ours if they start with an earlier letter at the first place where they differ. For each place, count earlier unused letters times the arrangements of the remaining letters."],
+        "rank": ["The word comes straight after all the words before it, so its rank is that count plus 1."],
+      }),
     explain: (s) => (s.id === "power" ? `${s.inputs[1]} places with ${s.inputs[0]} choices each: ${s.inputs[0]}${sup(Number(s.inputs[1]))} = ${s.value}` : s.id === "block" ? `Treat the group as one block: ${s.inputs[0]} things in a row, ${s.inputs[0]}! = ${s.value}` : s.id === "inside" ? `The group can be arranged inside the block: × ${s.inputs[1]} = ${s.value}` : s.id === "all" ? `All arrangements: ${s.inputs[0]}! = ${s.value}` : s.id === "together" ? `Arrangements with them together: ${s.inputs[1]} × ${s.inputs[0]} = ${s.value}` : s.id === "apart" ? `Not together: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "circle" ? `Fix one and arrange the rest: (${Number(s.inputs[0]) + 1} − 1)! = ${s.value}` : s.id === "flip" ? `Turning over gives the same: ${s.inputs[0]} ÷ 2 = ${s.value}` : s.id === "before" ? `Words before it, letter by letter: ${(s.inputs as number[]).join(" + ")} = ${s.value}` : `Its rank is ${s.value}`),
     domain: D_ARR,
     keep: arrOk,
@@ -4319,6 +4614,12 @@ const NEW15: Def[] = [
       return out.filter((x) => x.predict !== ans);
     },
     variants: ([q, n, r]) => [[q, n + 1, r], [q, n, r + 1]].filter(pasOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "neighbours": ["In Pascal's triangle every inside entry is the sum of the two entries just above it."],
+        "position": ["The numbers in row n are the coefficients of the expansion of (a + b) to the power n, in order. So read the entry at the right position."],
+        "sum": ["The entries of row n add up to 2 to the power n, because putting a = b = 1 in (a + b)ⁿ gives that sum."],
+      }),
     explain: (s) => (s.id === "neighbours" ? `Add the two entries above: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "position" ? `The coefficient is in position ${s.inputs[1]} of row ${s.inputs[0]}: ${s.value}` : `Each row's sum doubles: 2${sup(Number(s.inputs[0]))} = ${s.value}`),
     domain: D_PAS,
     keep: pasOk,
@@ -4383,6 +4684,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => (p[0] === 0 ? [bappAns(p) + 10 ** p[1], bappAns(p) - 1] : [Math.round((bappAns(p) + 0.01) * 1e4) / 1e4]),
     variants: ([q, k, a, n]) => [[q, k, -a, n], [q, k, a, n + 1]].filter(bappOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "terms": ["Writing the number as a power of 10 plus or minus a small number makes each term of the binomial expansion easy to work out. Then add them up."],
+        "three": ["When x is very small, its higher powers are tiny. So the first three terms of (1 + x)ⁿ give a good value."],
+      }),
     explain: (s) => (s.id === "terms" ? `The terms ⁿCᵣ (10ᵏ)ⁿ⁻ʳ aʳ are ${(s.inputs as number[]).map(n_).join(", ")}; they add up to ${s.value}` : `1 + nx + ⁿC₂x² = 1 + ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     domain: D_BAPP,
     keep: bappOk,
@@ -4453,6 +4759,12 @@ const NEW15: Def[] = [
       return [mono(-c, n - r), mono(c, n - r + 1), mono(2 * c, n - r)];
     },
     variants: ([a, b, n, s]) => [[a, b, n + 1, 0], [a, -b, n, s]].filter(bmidOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "which": ["An expansion of power n has n + 1 terms. The middle term or terms sit in the centre of that list, and term T(r + 1) uses r."],
+        "term": ["Write that term from the general term ⁿCᵣ aⁿ⁻ʳ bʳ."],
+        "value": ["Multiply the number parts together and keep the power of x."],
+      }),
     explain: (s) => (s.id === "which" ? `There are ${Number(s.inputs[0]) + 1} terms; the one asked for is T${sub(Number(s.inputs[1]))}, so r = ${s.value}` : s.id === "term" ? `T${sub(Number(s.inputs[1]) + 1)} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} × ${par2(Number(s.inputs[2]))} gives ${s.value}`),
     domain: D_BMID,
     keep: bmidOk,
@@ -4501,6 +4813,11 @@ const NEW15: Def[] = [
       ];
     },
     variants: ([a, ri, f, s]) => [[a, ri, 1 - f, s], [a, ri, f, 1 - s]].filter(gpidOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["In a geometric progression each term is the one before times the same ratio. The first two terms fix what that ratio must be."],
+        "check": ["A sequence is geometric only if every neighbouring pair has the same ratio, not just the first pair."],
+      }),
     explain: (s) => (s.id === "ratio" ? `Second term ÷ first term = ${s.value}` : `Only ${s.inputs[0]} keeps that same ratio between every pair of neighbouring terms`),
     domain: D_GPID,
     keep: gpidOk,
@@ -4566,6 +4883,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => [Math.round(gpgrVal(p) * 1.1 * 100) / 100, Math.round(gpgrVal(p) * 0.95 * 100) / 100],
     variants: ([q, pi, ri, n]) => [[q, pi, ri, n + 1], [q, (pi + 1) % 6, ri, n]].filter(gpgrOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["Growing by a fixed percentage multiplies the amount by the same number each time. Numbers made that way form a geometric progression."],
+        "term": ["After n steps the starting amount has been multiplied by r n times, which is r to the power n."],
+      }),
     explain: (s) => (s.id === "ratio" ? `Each ${Number(s.inputs[0]) === 3 ? "hour" : "year"} the amount is multiplied by the same number, r = ${dec4(Number(s.value))}: a geometric progression` : `After ${s.inputs[2]} steps: ${s.inputs[0]} × ${dec4(Number(s.inputs[1]))}${sup(Number(s.inputs[2]))} = ${dec4(Number(s.value))}`),
     domain: D_GPGR,
     keep: gpgrOk,
@@ -4654,6 +4976,15 @@ const NEW15: Def[] = [
     },
     distractors: (p) => [gpuseAns(p) + 1, gpuseAns(p) * 2],
     variants: ([q, a, b, c]) => [[q, a + 1, b, c]].filter(gpuseOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "series": ["Each repeat of the block is the previous one shifted further right, which is multiplying by a fixed fraction. So the recurring part is a geometric series."],
+        "sum": ["The ratio is less than 1 in size, so the infinite geometric series has the sum a/(1 − r)."],
+        "whole": ["The recurring part was only what lies after the decimal point, so add back the whole-number part."],
+        "ups": ["Each rebound is the previous height times the same fraction, so the rebound heights form a geometric series."],
+        "total": ["The ball falls the first drop once, then every rebound height is travelled twice, up and down again."],
+        "ratio": ["Each term is the one before multiplied by the same number, which is what makes the sequence geometric."],
+      }),
     explain: (s) => (s.id === "series" ? `The recurring part is ${s.inputs[0]} + ${s.inputs[0]} × ${s.inputs[1]} + …: a GP with r = ${s.inputs[1]}` : s.id === "sum" ? `S∞ = a/(1 − r): ${s.inputs[0]} ÷ ${s.inputs[1]} = ${typeof s.value === "number" ? fr(s.value) : s.value}` : s.id === "whole" ? `Add the whole-number part ${s.inputs[0]}: ${s.value}` : s.id === "ups" ? `The heights after the bounces form a GP: ${s.inputs[0]} + … = ${s.value}` : s.id === "total" ? `Total = first drop + 2 × (sum of the rebound heights) = ${s.value}` : `Each term is the one before × ${s.inputs[0]}`),
     domain: D_GPUSE,
     keep: gpuseOk,
@@ -4716,6 +5047,11 @@ const NEW15: Def[] = [
       return out.filter((b) => b.predict !== ch.indexOf(L[right]));
     },
     variants: ([a, p, q]) => [[a, -p, q], [a, p, q + 1]].filter(gpcvOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ratio": ["An infinite geometric series has a sum only if |r| < 1. Then the terms shrink towards 0; otherwise they do not."],
+        "pick": ["Choose the statement that matches what the ratio showed."],
+      }),
     explain: (s) => (s.id === "ratio" ? `r = ${s.inputs[0]}: |r| ${s.value ? "<" : "≥"} 1, so the series ${s.value ? "converges" : "diverges"}` : `So: ${s.inputs[0]}`),
     domain: D_GPCV,
     keep: gpcvOk,
@@ -4771,6 +5107,11 @@ const NEW15: Def[] = [
     distractors: (p) => [dkAns(p) * 2, dkAns(p) / 2],
     range: [0, Infinity],
     variants: ([f, a, b]) => [[f, a, b + 1], [(f + 1) % 3, a, b]].filter(dkOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "disc": ["The roots of ax² + bx + c = 0 involve √(b² − 4ac). They are equal exactly when that square root is 0, so set the discriminant to 0."],
+        "solve": ["Solving that equation gives the values of k. Keep the one the question asks for."],
+      }),
     explain: (s) => (s.id === "disc" ? `Equal roots ⇔ the discriminant b² − 4ac is 0: ${s.value}` : `Solve: k = ${fr(Number(s.value))}`),
     domain: D_DK,
     keep: dkOk,
@@ -4823,6 +5164,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => ["all real numbers", dkrAns(p, undefined, true)],
     variants: ([f, a, b]) => [[(f + 2) % 4, a, b]].filter(dkrOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "disc": ["The roots involve √(b² − 4ac). They are real when that number is not negative, and not real when it is negative."],
+        "solve": ["Solve the inequality for k."],
+      }),
     explain: (s) => (s.id === "disc" ? `${s.inputs[0] === 0 || s.inputs[0] === 1 ? "Real roots" : "No real roots"} ⇔ ${s.value}` : `Solve for k: ${s.value}`),
     domain: D_DKR,
     keep: dkrOk,
@@ -4876,6 +5222,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => [exqAns(p) + 1, exqAns(p) - 1],
     variants: ([f, ci, i, j, u, w]) => [[f, ci, i, j, u + 1, w]].filter(exqOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "base": ["If two powers of the same base are equal, their powers must be equal. So write both sides with the same base first."],
+        "solve": ["Now it is an ordinary equation in x."],
+      }),
     explain: (s) => (s.id === "base" ? `Write both sides as powers of ${s.inputs[0]} and equate the powers: ${s.value}` : `x = ${s.value}`),
     domain: D_EXQ,
     keep: exqOk,
@@ -4927,6 +5278,13 @@ const NEW15: Def[] = [
         : ([{ id: "not-reciprocal", kind: "procedural", competency: LOG, says: `log_(AB) X was worked out instead of log_X(AB): since X = (AB)${sup(j)}, log_(AB) X = ${j}, but the sum 1/log_A X + 1/log_B X = log_X A + log_X B = log_X(AB), which is 1/${j}.`, predict: j }, { id: "two-logs", kind: "conceptual", competency: LOG, says: "The two reciprocals were each taken as 1/(the power); 1/log_A X = log_X A, and the two logs add to log_X(AB).", predict: 2 / j }] as Bug[]).filter((b) => b.predict !== 1 / j),
     distractors: (p) => [chbAns(p) + 1, -chbAns(p)],
     variants: ([q, ci, i, j, bi]) => [[q, ci, i, j, (bi + 1) % 5]].filter(chbOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "change": ["The change of base rule writes any log as a fraction of logs in one common base. Then matching logs cancel across the product."],
+        "powers": ["Both numbers left are powers of the same prime, and log of a power is the power times the log. So the fraction is a ratio of the powers."],
+        "flip": ["1/log_A X = log_X A by change of base. Then the sum of logs to the same base is the log of the product."],
+        "value": ["The product is a known power of X, so its log to base X is easy to read."],
+      }),
     explain: (s) => (s.id === "change" || s.id === "flip" ? `Change of base: ${s.value}` : `So the value is ${s.value}`),
     domain: D_CHB,
     keep: chbOk,
@@ -4988,6 +5346,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => (p[0] === 0 ? [pfiAnswer([0, p[1], p[2], p[3], -p[4]]), pfiAnswer([0, p[1], p[2], -p[3], p[4]])] : [`x${logT(-(p[1] + p[3]), p[1], false)}`, `2x${logT(p[1] + p[3], p[1], false)}`]),
     variants: ([q, a, b, A, B]) => [[q, a, b, A + 1, B]].filter(pfiOk),
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "split": ["We cannot integrate the fraction as it stands, but each simple fraction over a linear factor is easy. So split it into partial fractions first."],
+        "integrate": ["The integral of a sum is the sum of the integrals, and ∫ 1/(x − a) dx = log|x − a|."],
+      }),
     explain: (s) => (s.id === "split" ? `Write the integrand as ${s.value}` : `Integrate term by term (${s.inputs[0]}): ${s.value} + C`),
     domain: D_PFI,
     keep: pfiOk,
@@ -5042,6 +5405,11 @@ const NEW15: Def[] = [
     },
     distractors: (p) => [ivs(nlrPieces(p, true)), "(−∞, ∞)"],
     variants: () => [],
+    stepWhy: (s) =>
+      ((w: Record<string, string[]>) => w[`${s.id}|${s.op}`] ?? w[s.id] ?? null)({
+        "ends": ["A filled dot means the end number is in the set, a hollow dot means it is not, and an arrow means the set goes on for ever."],
+        "write": ["Interval notation uses a square bracket for an end that is included and a round bracket for one that is not or for infinity."],
+      }),
     explain: (s) => (s.id === "ends" ? `Read the ends and their dots: ${s.value}` : `In interval notation: ${s.value}`),
     domain: D_NLR,
     keep: nlrOk,

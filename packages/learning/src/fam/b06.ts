@@ -485,6 +485,13 @@ export const B06: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "carry"
+        ? (Number(s.value)
+          ? (s.op === "carry"
+            ? ["A column that adds to 10 or more passes a ten into the next column. We must know this before working out the hidden column."]
+            : ["A column that is too small borrows 1 from the next column on its left, so that column has 1 less. We must know this first."])
+          : ["The column to the right fits without carrying or exchanging, so it changes nothing in the hidden column."])
+        : ["Each column of a sum must work by itself once we count what came from the column on its right. That leaves only one digit that fits."]),
     explain: (s) => (s.id === "carry" ? (Number(s.value) ? (s.op === "carry" ? "The column to the right makes a carry of 1 into this column" : "The column to the right is regrouped: 1 from this column is exchanged for 10 there, so this column has 1 less") : "The column to the right needs no regrouping (nothing is carried or exchanged)") : `Work the hidden column, using the ${s.inputs[2] === 0 ? "carry" : "exchange"}: the missing digit is ${s.value}`),
     domain: [[0, 59], [0, 2], [0, 1], [0, 1]],
     cap: 400,
@@ -554,6 +561,9 @@ export const B06: Def[] = [
       ...(rule === 1 ? [{ id: "wrong-goal", kind: "conceptual", competency: PZ, says: "This game was played as if taking the last counter wins. Here you want to leave the other player exactly 1 counter at the end.", predict: n % (k + 1) === 0 ? null : n % (k + 1) } as Bug] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "safe"
+        ? ["Whatever the other player takes, you can take enough to complete a fixed total for the pair of turns. So you can keep the counters at a safe number after each of your turns."]
+        : ["The remainder is what stops the counters being at a safe number, so taking exactly that many leaves the other player stuck."]),
     explain: (s) => (s.id === "safe" ? `Whatever the other player takes, you can make the pair of turns add up to ${s.value}. So leave a number that is ${s.inputs[1] === 0 ? `a multiple of ${s.value}` : `1 more than a multiple of ${s.value}`}` : `${s.inputs[0]} ÷ ${s.inputs[1]} leaves remainder ${s.value}: take ${s.value}`),
     domain: [[5, 30], [2, 5], [0, 1]],
     keep: ([n, k, rule]) => n >= k + 2 && (rule === 0 ? n % (k + 1) : (n - 1) % (k + 1)) !== 0,
@@ -605,6 +615,9 @@ export const B06: Def[] = [
       ...(c > 1 ? [{ id: "add-last-group", kind: "procedural", competency: EN, says: `The pairs were found (${a} × ${b}), but then the sweets were added. Every pair goes with each of the ${c} sweets, so multiply again.`, predict: a * b + c } as Bug, { id: "forgot-group", kind: "procedural", competency: EN, says: "One group was left out. A meal has one item from each of the three groups.", predict: a * b } as Bug] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "pairs"
+        ? ["Every first choice can go with every second choice, so the pairs make a grid: rows times columns."]
+        : ["Each pair can go with every last choice, so we multiply again."]),
     explain: (s) => (s.id === "pairs" ? `Each of the ${s.inputs[0]} first choices goes with each of the ${s.inputs[1]} second choices: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `Each of those ${s.inputs[0]} goes with each of the ${s.inputs[1]} last choices: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 6], [2, 6], [1, 4]],
     difficulty: ([a, b, c]) => (c === 1 && a * b <= 12 ? 1 : c === 1 ? 2 : 3),
@@ -667,6 +680,9 @@ export const B06: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "choices"
+        ? ["We fill the places one at a time and see how many digits are still allowed in each place."]
+        : ["Every choice for one place can go with every choice for the next, so we multiply the numbers of choices."]),
     explain: (s) => (s.id === "choices" ? `Choices for each place, from the left: ${s.value}` : `Multiply the choices: ${s.inputs.join(" × ")} = ${s.value}`),
     domain: [[2, 5], [2, 3], [0, 1], [0, 1], [0, 2]],
     keep: ([n, k, rep, zero]) => digitChoices(n, k, rep, zero).reduce((x, y) => x * y, 1) <= 125 && (rep === 1 || k <= n),
@@ -726,6 +742,9 @@ export const B06: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "missing"
+        ? ["All the parts of a pie chart together make the whole circle, which is 1. So the missing part is 1 minus the parts we know."]
+        : ["A part of the circle stands for the same fraction of the total, so we take that fraction of the total."]),
     explain: (s) => (s.id === "missing" ? `The whole circle is 1, so the missing part is 1 − ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} of ${s.inputs[1]} = ${s.value}`),
     domain: [[0, PIES.length - 1], [0, 4], [0, PIET.length - 1], [0, 1]],
     keep: ([pie, cat, ti]) => cat < PIES[pie].length && PIES[pie].every((x) => (PIET[ti] * x) % 24 === 0),
@@ -797,6 +816,11 @@ export const B06: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "fraction"
+        ? ["Each group gets the same fraction of the circle as its share of the total, so we find that fraction first."]
+        : s.id === "angle"
+          ? ["The whole circle is 360°, so a group's angle is its fraction of 360°."]
+          : ["The slice shows a fraction of everyone, so we take that fraction of the total number."]),
     explain: (s) => (s.id === "fraction" ? `Fraction of the whole: ${s.inputs[0]} out of ${s.inputs[1]} = ${s.value}` : s.id === "angle" ? `${s.inputs[0]} of 360° = ${s.value}°` : `${s.inputs[0]} of ${s.inputs[1]} students = ${s.value}`),
     domain: [[0, 12], [1, 179], [0, 1]],
     keep: ([ti, x]) => x < PIEANG[ti] && (360 * x) % PIEANG[ti] === 0 && 2 * x !== PIEANG[ti],
@@ -867,6 +891,11 @@ export const B06: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "read1" || s.id === "read2"
+        ? ["On a scaled bar chart each line stands for more than one, so we multiply the lines by the scale."]
+        : s.id === "compare"
+          ? ["How many more is the difference between the two values, so we subtract."]
+          : ["Together means adding the two values."]),
     explain: (s) => (s.id === "read1" || s.id === "read2" ? `The bar reaches ${s.inputs[0]} lines; each line is ${s.inputs[1]}, so it shows ${s.value}` : s.id === "compare" ? `How many more: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Together: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, SCALES.length - 1], [0, 2], [0, 19]],
     cap: 360,
@@ -958,6 +987,7 @@ export const B06: Def[] = [
       return [`${L} + ${a + 1}`, `${a + 1}${L}`, `${L}${a > 2 ? ` − ${a - 1}` : " + 1"}`, `${a}${L} − ${b}`];
     },
     variants: () => [],
+    stepWhy: () => ["The letter stands for any number we put in. Writing what the machine does to the letter gives a rule that works for every number."],
     explain: (s) => `Start with ${s.inputs[0]} and do what the machine does: ${s.value}`,
     domain: [[0, 3], [2, 12], [1, 9]],
     keep: ([kind, , b]) => kind === 3 || b === 1,
@@ -1007,6 +1037,11 @@ export const B06: Def[] = [
     ],
     distractors: ([a, b]) => [linRule(a + 1, b), `n + ${a + b}`],
     variants: () => [],
+    stepWhy: (s) => (s.id === "step"
+        ? ["Each shape adds the same amount, so the rule has that amount times the shape number n."]
+        : s.id === "start"
+          ? ["The step times n may not give the first shape exactly. The difference is a fixed amount added to every shape."]
+          : ["Putting the step and the fixed amount together gives a rule for any shape number n."]),
     explain: (s) => (s.id === "step" ? `Each shape has ${s.value} more than the one before (${s.inputs[0]} − ${s.inputs[1]})` : s.id === "start" ? `${s.inputs[1]} × 1 = ${s.inputs[1]}, and shape 1 has ${s.inputs[0]}, so add ${s.value}` : `Rule: ${s.value}`),
     domain: [[2, 6], [0, 5], [0, 2]],
     difficulty: ([a, b]) => (b === 0 ? 1 : a <= 3 ? 2 : 3),
@@ -1059,6 +1094,9 @@ export const B06: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "rule"
+        ? ["Figurate numbers grow in a fixed way as the shape gets bigger, so a rule in n gives any one of them."]
+        : ["We put the place number in for n in the rule."]),
     explain: (s) => (s.id === "rule" ? `The rule for the ${ord(1)}, ${ord(2)}, ${ord(3)} … number: ${s.value}` : `For n = ${s.inputs[0]}: ${s.value}`),
     domain: [[0, FIGK.length - 1], [5, 30]],
     keep: ([kind, n]) => n >= FIGK[kind].lo && n <= FIGK[kind].hi,
@@ -1150,6 +1188,13 @@ export const B06: Def[] = [
                 { id: "counted-both-ends", kind: "procedural", competency: FIG, says: "Both squares were counted; numbers between them do not include the ends.", predict: 2 * n + 2 },
               ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "square"
+        ? ["Each odd number adds an L-shaped border round a square of dots, making the next square. So the first odd numbers add up to a square number."]
+        : s.id === "gap"
+          ? ["To make the next square, add one row, one column and the corner dot."]
+          : s.id === "tri"
+            ? ["Two neighbouring triangle numbers fit together like two staircases into a square."]
+            : ["The numbers strictly between two squares do not include either end, so we leave one end out of the gap."]),
     explain: (s) =>
       s.id === "square"
         ? `The first ${s.inputs[0]} odd numbers make ${aNum(s.inputs[0])} × ${s.inputs[0]} square of dots: ${s.value}`
@@ -1205,6 +1250,9 @@ export const B06: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "scale"
+        ? ["A protractor has two scales that run opposite ways. Reading both arms on the same scale keeps the readings matched."]
+        : ["The angle is the turn from one arm to the other, which is the difference between the two readings."]),
     explain: (s) => (s.id === "scale" ? `Use one scale for both arms (here the inner one): the readings are ${s.inputs[0]} and ${s.inputs[1]}` : `The angle is the difference: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}°`),
     domain: [[0, 36], [0, 36]],
     cap: 300,
@@ -1248,6 +1296,9 @@ export const B06: Def[] = [
       { id: "full-turn", kind: "recall", competency: ANG, says: `360° is a full turn. ${kind === 0 ? "Complementary angles add up to 90°." : "Supplementary angles add up to 180°."}`, predict: 360 - a },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "total"
+        ? ["Complementary angles together make a right angle, and supplementary angles together make a straight line. That tells us the total."]
+        : ["The unknown angle is what is left of the total after the known angle, so we subtract."]),
     explain: (s) => (s.id === "total" ? `${s.inputs[0] === 0 ? "Complementary" : "Supplementary"} angles add up to ${s.value}°` : `${s.inputs[0]}° − ${s.inputs[1]}° = ${s.value}°`),
     domain: [[0, 1], [10, 170]],
     keep: ([kind, a]) => a <= (kind === 0 ? 80 : 170),
@@ -1303,6 +1354,11 @@ export const B06: Def[] = [
           ? [{ id: "neighbour-equal", kind: "conceptual", competency: AP, says: "Angles next to each other are not equal (unless both are 90°); together they make a straight line, 180°.", predict: a }, { id: "full-turn", kind: "recall", competency: ANG, says: "Two angles on a straight line add up to 180°, not 360°.", predict: 360 - a }]
           : [{ id: "straight-only", kind: "procedural", competency: AP, says: "Only one neighbouring angle was found. All four angles together make a full turn, 360°.", predict: 180 - a }, { id: "all-equal", kind: "conceptual", competency: AP, says: "The four angles are not all equal: only opposite angles are equal.", predict: 3 * a }],
     variants: () => [],
+    stepWhy: (s) => (s.id === "opposite"
+        ? ["When two lines cross, opposite angles are equal: each one and the angle beside it make a straight line, 180°."]
+        : s.id === "linear"
+          ? ["Angles side by side on a straight line add to 180°, so the neighbour is 180° minus the angle."]
+          : ["All the angles round a point make a full turn, 360°."]),
     explain: (s) => (s.id === "opposite" ? `Vertically opposite angles are equal: ${s.value}°` : s.id === "linear" ? `Angles on a straight line add to 180°: 180° − ${s.inputs[1]}° = ${s.value}°` : `All four angles make a full turn, 360°, so the other three make 360° − ${s.inputs[0]}° = ${s.value}°`),
     domain: [[20, 160], [0, 2]],
     keep: ([a]) => a !== 90,
@@ -1358,6 +1414,9 @@ export const B06: Def[] = [
       return [(k % 8) / 8 + 1 / 8, Math.abs(k - 1) / 8 || 3 / 8];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "steps"
+        ? ["The 8 compass directions split a full turn into 8 equal steps, so we count the steps in the direction of the turn."]
+        : ["Each step is one eighth of a full turn, so the steps out of 8 give the fraction."]),
     explain: (s) => (s.id === "steps" ? `Count the steps ${s.inputs[2] ? "clockwise" : "anticlockwise"} from ${DIRS[Number(s.inputs[0])]} to ${DIRS[Number(s.inputs[1])]}: ${s.value} eighths` : `${s.inputs[0]} out of 8 steps = ${fmt(Number(s.value))} of a full turn`),
     domain: [[0, 7], [0, 7], [0, 1]],
     keep: ([s, e]) => s !== e,
@@ -1406,6 +1465,9 @@ export const B06: Def[] = [
       { id: "other-way", kind: "procedural", competency: AT, says: "The angle the other way round the clock was found. The hand turned clockwise, so count the numbers it passes going clockwise.", predict: 360 - 30 * k },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "each"
+        ? ["The 12 numbers are evenly spaced round the full 360°, so each gap is an equal share of it."]
+        : ["Each number passed adds the same turn, so we multiply."]),
     explain: (s) => (s.id === "each" ? `12 numbers share a full turn: 360° ÷ 12 = 30° from one number to the next` : `${s.inputs[0]} numbers × 30° = ${s.value}°`),
     domain: [[1, 12], [1, 11]],
     difficulty: ([, k]) => (k % 3 === 0 ? 1 : k % 2 === 0 ? 2 : 3),
@@ -1458,6 +1520,7 @@ export const B06: Def[] = [
       { id: "stage-off-by-one", kind: "procedural", competency: FR, says: `Stage 0 is the start, so stage ${n} has had ${n} replacements; one stage too few was counted.`, predict: a * k ** (n - 1) },
     ],
     variants: () => [],
+    stepWhy: () => ["At every stage each piece is replaced by the same number of new pieces, so the count is multiplied by that number each time."],
     explain: (s) => `${s.id.replace("stage", "Stage ")}: ${s.inputs[0]} pieces, each replaced by ${s.inputs[1]}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`,
     domain: [[1, 4], [2, 8], [2, 6], [0, 1]],
     keep: ([a, k, n]) => (k <= 5 || (k === 8 && a === 1)) && a * k ** n <= 1000,
@@ -1518,6 +1581,9 @@ export const B06: Def[] = [
           : [{ id: "forgot-apex", kind: "procedural", competency: NETS, says: "The top point (apex) is a vertex too.", predict: n }];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "count"
+        ? ["A prism or pyramid is built from its base, its top (if any) and its sides, so we count those parts."]
+        : ["For any solid like this, faces + vertices − edges = 2 (Euler's rule), so knowing two counts gives the third."]),
     explain: (s) => (s.id === "count" ? `Count base, top and sides: ${s.value}` : `Rearrange faces + vertices − edges = 2 for the missing count: ${s.value}`),
     domain: [[0, 1], [3, 10], [0, 2], [0, 1]],
     difficulty: ([, n, , mode]) => (mode === 1 ? 3 : n <= 4 ? 1 : 2),
@@ -1574,6 +1640,13 @@ export const B06: Def[] = [
           ? [{ id: "whole-faces", kind: "procedural", competency: NETS, says: "Every cube on a face was counted. Cubes on the edges of a face have paint on two or three faces; only the middle part of each face counts.", predict: 2 * (a * b + b * c + a * c) }]
           : [{ id: "one-layer", kind: "procedural", competency: NETS, says: "Only one layer was taken off each length. The paint is on both sides, so take 2 from each length.", predict: (a - 1) * (b - 1) * (c - 1) }, { id: "outside-cubes", kind: "conceptual", competency: NETS, says: "The question asks for the cubes with no paint: the hidden ones inside, not the ones on the outside.", predict: a * b * c - (a - 2) * (b - 2) * (c - 2) }],
     variants: () => [],
+    stepWhy: (s) => (s.id === "inner"
+        ? ["The outside layer of cubes is on the faces of the big block. Leaving it out on both sides gives the lengths of the inside part."]
+        : s.inputs[3] === 1
+          ? ["Cubes with exactly two painted faces sit along the edges but not at the corners. A block has 12 edges, 4 in each direction."]
+          : s.inputs[3] === 2
+            ? ["Cubes with exactly one painted face sit in the middle of a face, away from its edges. A block has 6 faces, in 3 matching pairs."]
+            : ["Cubes with no paint are hidden inside, away from every face, so they form a smaller block."]),
     explain: (s) => (s.id === "inner" ? `Leave out the outside layer on both sides: the inside lengths are ${s.value}` : s.inputs[3] === 1 ? `Each of the 12 edges has its middle cubes: 4 × (${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]}) = ${s.value}` : s.inputs[3] === 2 ? `The middle of each of the 6 faces: 2 × (${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[1]} × ${s.inputs[2]} + ${s.inputs[0]} × ${s.inputs[2]}) = ${s.value}` : `The hidden block inside: ${s.inputs[0]} × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}`),
     domain: [[2, 6], [2, 6], [2, 6], [1, 3]],
     keep: ([a, b, c, ask]) => a <= b && b <= c && paintCount(a, b, c, ask) > 0,
@@ -1629,6 +1702,9 @@ export const B06: Def[] = [
           : [{ id: "only-slanted", kind: "conceptual", competency: QC, says: "Only the slanted shapes with unequal sides were counted. Squares, rectangles and rhombuses also have opposite sides equal and parallel, so they are parallelograms too.", predict: has(3) }, { id: "right-angles-excluded", kind: "conceptual", competency: QC, says: "Shapes with right angles were left out; rectangles and squares are parallelograms as well.", predict: has(2) + has(3) }, { id: "trapezium-included", kind: "conceptual", competency: QC, says: "A trapezium was counted. Its opposite sides are not equal and only one pair is parallel, so it is not a parallelogram.", predict: 5 }];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "sort"
+        ? ["Each four-sided shape is named by its sides and angles, so we check them for every shape."]
+        : ["A special shape still belongs to the bigger family: a square is also a rectangle, a rhombus and a parallelogram. So we count the special ones too."]),
     explain: (s) => (s.id === "sort" ? `Name each shape by its sides and angles: ${s.value}` : `Count every shape that fits (including the special ones): ${s.value}`),
     domain: [[0, 2], [0, 59]],
     difficulty: ([ask]) => (ask === 0 ? 1 : ask === 1 ? 2 : 3),
@@ -1678,6 +1754,11 @@ export const B06: Def[] = [
           ? [{ id: "all-equal", kind: "conceptual", competency: QC, says: "Only opposite angles are equal. Angles next to each other add up to 180°.", predict: a }, { id: "full-turn", kind: "recall", competency: QC, says: "Neighbouring angles add to 180°; 360° is all four angles together.", predict: 360 - a }]
           : [{ id: "no-split", kind: "conceptual", competency: QC, says: "The diagonal of a rhombus cuts angle A into two equal halves; the whole angle was given.", predict: a }, { id: "wrong-angle-halved", kind: "procedural", competency: QC, says: "Angle B was halved instead of angle A. The diagonal AC starts at A, so it splits angle A.", predict: intOrNull((180 - a) / 2) }],
     variants: () => [],
+    stepWhy: (s) => (s.id === "opposite"
+        ? ["In a parallelogram opposite angles are equal, because the opposite sides are parallel."]
+        : s.id === "adjacent"
+          ? ["Angles next to each other in a parallelogram are between parallel sides, so they add to 180°."]
+          : ["In a rhombus each diagonal cuts the angle into two equal halves, because all four sides are equal."]),
     explain: (s) => (s.id === "opposite" ? `Opposite angles of a parallelogram are equal: ${s.value}°` : s.id === "adjacent" ? `Angles next to each other add to 180°: 180° − ${s.inputs[1]}° = ${s.value}°` : `In a rhombus a diagonal splits the angle in half: ${s.inputs[0]}° ÷ 2 = ${s.value}°`),
     domain: [[0, 1], [30, 150], [0, 2]],
     keep: ([shape, a, ask]) => a !== 90 && a % 5 === 0 && (ask !== 2 || (shape === 1 && a % 2 === 0)),
@@ -1749,6 +1830,11 @@ export const B06: Def[] = [
       return ask === 2 ? [1 / (o + 1), 2 / o === 1 ? 1 / 4 : 2 / o] : [];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "order"
+        ? ["The order of rotational symmetry is how many times a shape looks the same during one full turn."]
+        : s.id === "fraction"
+          ? ["Those matching turns share a full turn equally, so each is that fraction of a full turn."]
+          : ["The matching positions are spread equally round 360°, so each turn is 360° shared by the order."]),
     explain: (s) => (s.id === "order" ? `It looks the same ${s.value} times in a full turn` : s.id === "fraction" ? `Each matching turn is 1 ÷ ${s.inputs[1]} = ${s.value} of a full turn` : `360° ÷ ${s.inputs[1]} = ${360 / Number(s.inputs[1])}° each time${Number(s.inputs[2]) > 1 ? `; the ${ord(Number(s.inputs[2]))} time is ${s.value}°` : ""}`),
     domain: [[0, ROT.length - 1], [0, 3], [1, 11]],
     keep: ([shape, ask, m]) => (ask < 3 ? m === 1 : m >= 2 && m < ROT[shape].o),
@@ -1809,6 +1895,9 @@ export const B06: Def[] = [
           : [{ id: "right-as-obtuse", kind: "recall", competency: ANG, says: "A 90° angle was counted as obtuse. Obtuse means more than 90°.", predict: c(1) + c(2) }, { id: "biggest-first", kind: "procedural", competency: TT, says: "Only the first angle of each triangle was checked. Look at all three angles: the largest one decides the type.", predict: tris(seed).filter((a) => a[0] > 90).length }];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "largest"
+        ? ["A triangle can have at most one right or obtuse angle, so its largest angle decides its name."]
+        : ["Now we count the triangles that have the name asked for."]),
     explain: (s) => (s.id === "largest" ? `The largest angle decides: ${s.value}` : `Count them: ${s.value}`),
     domain: [[0, 2], [0, 59]],
     difficulty: ([ask]) => (ask === 1 ? 1 : ask === 2 ? 2 : 3),
@@ -1854,6 +1943,9 @@ export const B06: Def[] = [
           : [{ id: "equilateral-included", kind: "procedural", competency: TT, says: "The equilateral triangles were counted too; the question asks for exactly two equal sides.", predict: c(0) + c(1) }, { id: "names-swapped", kind: "recall", competency: TT, says: "Isosceles and scalene were mixed up. Isosceles: two sides equal. Scalene: all different.", predict: c(2) }];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "compare"
+        ? ["A triangle is named by its sides: all equal is equilateral, two equal is isosceles, none equal is scalene."]
+        : ["Now we count the triangles that have the name asked for."]),
     explain: (s) => (s.id === "compare" ? `Compare the three sides of each: ${s.value}` : `Count them: ${s.value}`),
     domain: [[0, 2], [0, 59]],
     difficulty: ([ask]) => (ask === 1 ? 1 : ask === 0 ? 2 : 3),
@@ -1917,6 +2009,13 @@ export const B06: Def[] = [
             { id: "gave-perimeter", kind: "procedural", competency: APR, says: "The perimeter was given; the question asks for the area (the squares inside).", predict: 2 * (l + w) },
           ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "area"
+        ? ["A rectangle holds rows of unit squares, so its area is length times breadth."]
+        : s.id === "side"
+          ? (s.op === "divide"
+            ? ["The new rectangle has the same area, and area is one side times the other. So dividing the area by the known side gives the other side."]
+            : ["The new rectangle has the same perimeter. Half the perimeter is one length plus one breadth, so taking away the known side gives the other."])
+          : ["A rectangle has two lengths and two breadths, so its perimeter is twice their sum."]),
     explain: (s) =>
       s.id === "area"
         ? `Area of the first rectangle: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} square cm`
@@ -2437,6 +2536,15 @@ B06.push(
     },
     distractors: (p) => [riverAns(p) + 2, riverAns(p) - 2, riverAns(p) + 1].filter((x) => x > 0),
     variants: () => [],
+    stepWhy: (s) => (s.id === "one"
+        ? ["The boat must always come back, so it takes several crossings to move one person over and get everything else back where it was."]
+        : s.id === "all"
+          ? ["Every person needs the same set of crossings, so we multiply by the number of people."]
+          : s.id === "net"
+            ? ["Someone has to row the boat back after each trip across, so a round trip moves fewer people than the boat holds."]
+            : s.id === "rounds"
+              ? ["The last trip does not need to come back, so it can carry a full boat. The others must be moved by round trips, and a part trip still needs a whole round trip."]
+              : ["Each round trip is two crossings, and the last trip across is one more."]),
     explain: (s) =>
       s.id === "one"
         ? "For one soldier: both children cross, one child rows back, the soldier crosses, the other child rows back: 4 crossings, and everything is as before except one soldier is across"
@@ -2497,6 +2605,9 @@ B06.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "eighths"
+        ? ["The 8 compass directions split a full turn into 8 equal steps, so we change the turn into steps."]
+        : ["We count that many steps round the compass in the direction of the turn."]),
     explain: (s) => (s.id === "eighths" ? `The turn is ${s.inputs[0]} eighth${s.inputs[0] === 1 ? "" : "s"} of a full turn: ${s.inputs[0]} step${s.inputs[0] === 1 ? "" : "s"} round the 8 directions` : `Count ${s.inputs[1]} step${s.inputs[1] === 1 ? "" : "s"} ${s.inputs[2] ? "clockwise" : "anticlockwise"} from ${DIRS[Number(s.inputs[0])]}: ${s.value}`),
     domain: [[0, 7], [1, 7], [0, 1]],
     difficulty: ([s, k]) => (s % 2 === 0 && k % 2 === 0 ? 1 : k % 2 === 0 ? 2 : 3),
@@ -2543,6 +2654,11 @@ B06.push(
       return say[kind].map(([id, k, s]) => B(id, "conceptual", QC, s, o.indexOf(k)));
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "sides"
+        ? ["Four-sided shapes are named by their sides and angles, so we first find the side lengths."]
+        : s.id === "parallel"
+          ? ["Whether opposite sides are parallel also decides the name."]
+          : ["We give the most special name that fits all the facts, since that tells the most about the shape."]),
     explain: (s) => (s.id === "sides" ? `The sides in order are ${s.value} (cm)` : s.id === "parallel" ? `Parallel sides: ${s.value}` : `So the most special name is ${s.inputs[1]}`),
     domain: [[0, 5], [0, 19]],
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind <= 3 ? 2 : 3),
@@ -2612,6 +2728,17 @@ B06.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "half"
+        ? ["In a parallelogram opposite sides are equal, so the perimeter is two copies of one pair of neighbouring sides."]
+        : s.id === "other"
+          ? ["Half the perimeter is two neighbouring sides together, so taking away the one we know gives the other."]
+          : s.id === "quarter"
+            ? ["All four sides of a rhombus or square are equal, so the perimeter shared by 4 gives one side."]
+            : s.id === "equate"
+              ? ["The two sides must be equal, so we set them equal and solve for x."]
+              : s.id === "side"
+                ? ["Now that x is known, we put it back into the side to find its length."]
+                : ["All four sides are equal, so the perimeter is 4 times one side."]),
     explain: (s) =>
       s.id === "half"
         ? `Opposite sides are equal, so AB + BC is half the perimeter: ${s.inputs[0]} ÷ 2 = ${s.value} cm`
@@ -2698,6 +2825,15 @@ B06.push(
     },
     distractors: (p) => [hiddenAns(p) + 1, hiddenAns(p) - 1, hiddenAns(p) + 5].filter((x) => x > 0),
     variants: () => [],
+    stepWhy: (s) => (s.id === "across"
+        ? ["A rectangle is fixed by choosing two upright lines for its sides, so we count the ways to choose two of them."]
+        : s.id === "down"
+          ? ["It also needs two lines across for its top and bottom."]
+          : s.id === "pairs"
+            ? ["A triangle here is fixed by choosing two of the lines from the top corner, so we count the ways to choose two."]
+            : s.id.startsWith("size")
+              ? ["We count squares one size at a time. A square of each size fits in a set number of places across and down."]
+              : ["Every choice for one part goes with every choice for the other, or the counts for each size add up, to give all of them."]),
     explain: (s) =>
       s.id === "across"
         ? `A rectangle needs 2 of the ${s.inputs[0]} upright lines: ${s.value} ways`
@@ -2782,6 +2918,9 @@ B06.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "pick"
+        ? ["We match what we found to the choice that says it."]
+        : ["Folding a net square by square shows which faces end up opposite. Faces opposite each other never touch."]),
     explain: (s) => (s.id === "pick" ? `So the answer is ${s.inputs[0]}` : s.id === "fold" && s.inputs[0] === "six squares" ? `Fold it square by square: ${s.value}` : `Folding square by square, face ${s.value} ends up opposite face ${s.inputs[0]}`),
     domain: [[0, 1], [0, 215], [0, 5]],
     keep: ([mode, i, q]) => (mode === 0 ? i < NET_LIST.length : i < HEXOMINOES.length && q === 0 && (foldsToCube(HEXOMINOES[i]) || hh(`afcube:keep:${i}`) % 3 === 0)),
@@ -2858,6 +2997,9 @@ B06.push(
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "pick"
+        ? ["We match what we found to the choice that says it."]
+        : ["A net, or a view from one side, shows the shape of each face. Matching those shapes tells which solid it is."]),
     explain: (s) => (s.id === "pick" ? `So the answer is ${s.inputs[0]}` : `The ${s.inputs[1]} of ${an(String(s.inputs[0]))}: ${s.value}`),
     domain: [[0, 16], [0, 5]],
     keep: netOk,
@@ -2925,6 +3067,11 @@ B06.push(
       return [a + 1, a - 1, a + 2, a - 2].filter((x) => x > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "top"
+        ? ["From above you only see the top of each stack, so each covered square of the mat shows once."]
+        : s.id === "tallest"
+          ? ["From the side, cubes behind each other hide one another, so each line shows only as tall as its tallest stack."]
+          : ["The view is made of all those squares together, so we add them."]),
     explain: (s) => (s.id === "top" ? `From above, one square for each square of the mat with cubes: ${s.value}` : s.id === "tallest" ? `The tallest stack in ${s.inputs[0]}: ${s.value}` : `Add them: ${s.value} squares`),
     domain: [[0, 59], [0, 2]],
     difficulty: ([g, ask]) => (ask === 0 ? 1 : VIEW_GRIDS[g].length === 2 ? 2 : 3),
@@ -2987,6 +3134,9 @@ B06.push(
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "gaps"
+        ? ["Looking at the gaps between numbers often shows the pattern, such as the gaps growing by the same amount."]
+        : ["A rule must work for every number in the list, not just the first few, so we check each choice against all of them."]),
     explain: (s) => (s.id === "gaps" ? `The steps from one number to the next are ${s.value}` : `The rule that fits every number is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`),
     domain: [[0, 5], [0, 30], [0, 12]],
     keep: ruleOk,

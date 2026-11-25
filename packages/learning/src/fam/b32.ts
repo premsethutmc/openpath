@@ -79,6 +79,10 @@ export const B32: Def[] = [
           ]),
     distractors: ([f, k]) => [answerOf(f, k) + 1, answerOf(f, k) + 2, Math.max(1, answerOf(f, k) - 1)],
     variants: ([f, k]) => [[f, k + 1 > (f === 3 ? 7 : f === 2 ? 20 : 40) ? k - 1 : k + 1]],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "next": ["In the induction step we go from k to k + 1, which adds one more term to the sum."], "sum": ["The sum up to k + 1 is the sum up to k, which we assume is known, plus the new term."], "times4": ["4ᵏ⁺¹ − 1 can be written as 4(4ᵏ − 1) + 3, and we already know 4ᵏ − 1 is 3m."], "plus3": ["The + 3 is the rest of 4ᵏ⁺¹ − 1."], "divide3": ["Showing it is 3 times a whole number proves it is divisible by 3."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "next"
         ? `The next term, for n = ${s.inputs[0]}: ${s.value}`

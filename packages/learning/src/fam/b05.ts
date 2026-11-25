@@ -239,6 +239,11 @@ export const B05: Def[] = [
       { id: "next-only", kind: "procedural", competency: GROW, says: "Only the next number after those shown was found; keep using the rule until you reach the place asked for.", predict: a + 4 * d },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "jumps"
+        ? ["The first number needs no jump. Every number after it is one more jump, so there is one jump fewer than the place we want."]
+        : s.id === "total"
+          ? ["Every jump is the same size, so all the jumps together are the number of jumps times the size of one jump."]
+          : ["The number we want is the start with all the jumps added on."]),
     explain: (s) => (s.id === "jumps" ? `From the 1st number to the ${ord(Number(s.inputs[0]))} there ${Number(s.value) === 1 ? "is 1 jump" : `are ${s.value} jumps`}` : s.id === "total" ? `${s.inputs[0]} jumps of ${s.inputs[1]} make ${s.value}` : `Start at ${s.inputs[0]} and add ${s.inputs[1]}: ${s.value}`),
     domain: [[1, 30], [2, 9], [6, 12]],
     cap: 400,
@@ -296,6 +301,9 @@ export const B05: Def[] = [
     ],
     distractors: ([s, r, c]) => [s + 10 * (r + 1) + c, s + 10 * r, s + r + c].filter((x) => x > 0 && x <= 100),
     variants: () => [],
+    stepWhy: (s) => (s.id === "down"
+        ? ["On a hundred square each row holds 10 numbers, so moving one row down adds 10."]
+        : ["Moving one square to the right adds 1, so we add one for each square moved."]),
     explain: (s) => (s.id === "down" ? `${s.inputs[1]} ${s.inputs[1] === 1 ? "row" : "rows"} down adds ${10 * Number(s.inputs[1])}: ${s.inputs[0]} → ${s.value}` : `${s.inputs[1]} to the right adds ${s.inputs[1]}: ${s.value}`),
     domain: [[1, 70], [1, 3], [0, 4]],
     cap: 400,
@@ -355,6 +363,7 @@ export const B05: Def[] = [
       ][t] as Bug[],
     distractors: (p) => angleList(p),
     variants: () => [],
+    stepWhy: () => ["Angle names come from comparing with a right angle (90°) and a straight angle (180°). Acute is less than 90°, obtuse is between 90° and 180°."],
     explain: (s) => (s.inputs[0] === "acute" ? `An acute angle is less than 90°: ${s.value}°` : s.inputs[0] === "right" ? "A right angle is exactly 90°" : s.inputs[0] === "obtuse" ? `An obtuse angle is more than 90° but less than 180°: ${s.value}°` : "A straight angle is exactly 180°"),
     domain: [[0, 3], [2, 17], [19, 34], [0, 3]],
     cap: 400,
@@ -411,6 +420,9 @@ export const B05: Def[] = [
     ],
     distractors: ([, s]) => [30 * (s + 2), 30 * (s - 1), 360].filter((x) => x > 0 && x <= 360),
     variants: () => [],
+    stepWhy: (s) => (s.id === "each"
+        ? ["The hand turns a full 360° to pass all 12 numbers, and the numbers are evenly spaced. So each gap is an equal share of 360°."]
+        : ["Each number the hand passes adds the same turn, so we multiply that turn by the number of steps."]),
     explain: (s) => (s.id === "each" ? "A full turn of 360° is shared by 12 numbers: 30° from one number to the next" : `${s.inputs[0]} ${s.inputs[0] === 1 ? "step" : "steps"} of 30° make ${s.value}°`),
     domain: [[1, 12], [1, 11]],
     difficulty: ([, s]) => (s % 3 === 0 ? 1 : s <= 6 ? 2 : 3),
@@ -461,6 +473,9 @@ export const B05: Def[] = [
           ],
     distractors: ([dir, x]) => (dir === 0 ? [3 * x, 4 * x, x + 2] : [x - 2, x % 4 === 0 ? x / 4 : 3 * x, x + 2]),
     variants: () => [],
+    stepWhy: (s) => (s.id === "double"
+        ? ["The diameter goes right across the circle through the centre, so it is two radii end to end."]
+        : ["The radius goes from the centre to the edge, which is half of the diameter."]),
     explain: (s) => (s.id === "double" ? `Diameter = 2 × radius = 2 × ${s.inputs[0]} = ${s.value} cm` : `Radius = diameter ÷ 2 = ${s.inputs[0]} ÷ 2 = ${s.value} cm`),
     domain: [[0, 1], [1, 120]],
     difficulty: ([dir, x]) => (x <= 10 ? 1 : dir === 0 || x <= 40 ? 2 : 3),
@@ -513,6 +528,7 @@ export const B05: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["A line of symmetry is a fold line where one half lands exactly on the other. We check each letter for a fold in the direction asked."],
     explain: (s) => (s.value === 0 ? `No letter has a ${s.inputs[0]} line of symmetry` : `${s.inputs[1]} ${s.value === 1 ? "has" : "have"} a ${s.inputs[0]} line of symmetry: ${s.value}`),
     domain: [[0, 1], [0, 299]],
     difficulty: ([axis, seed]) => {
@@ -573,6 +589,9 @@ export const B05: Def[] = [
     ],
     distractors: ([axis, m, x, y]) => [tup(x, y), axis ? tup(x, 2 * m - y + (y > m ? -1 : 1)) : tup(2 * m - x + (x > m ? -1 : 1), y), axis ? tup(2 * m - y, x) : tup(y, 2 * m - x)],
     variants: () => [],
+    stepWhy: (s) => (s.id === "distance"
+        ? ["A mirror image is as far behind the mirror as the point is in front of it, so first we measure that distance."]
+        : ["The image is the same distance away, straight across on the other side of the mirror line."]),
     explain: (s) => (s.id === "distance" ? `P is ${Math.abs(Number(s.value))} ${Math.abs(Number(s.value)) === 1 ? "unit" : "units"} from the mirror line` : `Go the same distance to the other side of the line: the image is ${s.value}`),
     domain: [[0, 1], [1, 9], [0, 10], [0, 10]],
     cap: 400,
@@ -630,6 +649,9 @@ export const B05: Def[] = [
     ],
     distractors: ([x, y, a, b]) => [tup(x + a, y), tup(x, y + b), onGrid(x - a, y - b), tup(x + a, y + b + (y + b < 10 ? 1 : -1))].filter((t): t is string => t !== null),
     variants: () => [],
+    stepWhy: (s) => (s.id === "across"
+        ? ["Sliding a shape moves every point the same way. Moving right adds to the across number and moving left takes away."]
+        : ["Moving up adds to the up number and moving down takes away."]),
     explain: (s) => (s.id === "across" ? `Across: ${n_(Number(s.inputs[0]))} ${Number(s.inputs[1]) > 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : `Up or down: ${n_(Number(s.inputs[0]))} ${Number(s.inputs[1]) > 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: [[0, 10], [0, 10], [-4, 4], [-4, 4]],
     cap: 400,
@@ -683,6 +705,7 @@ export const B05: Def[] = [
       return [tup((H + 12) % 24, 5 * k), tup(H, (5 * k + 30) % 60), tup((H + 1) % 24, 5 * k)];
     },
     variants: () => [],
+    stepWhy: () => ["The 24-hour clock keeps counting after noon instead of starting again. So p.m. hours after 12 noon get 12 added, while a.m. hours stay the same, except 12 a.m., which is 00."],
     explain: (s) => (Number(s.inputs[1]) === 1 ? (s.inputs[0] === 12 ? "12 noon stays 12 in 24-hour time" : `p.m.: add 12 to the hours: ${s.inputs[0]} + 12 = ${s.value}`) : s.inputs[0] === 12 ? "12 a.m. is just after midnight: the hour is 00" : `a.m.: the hours stay ${s.value}`),
     domain: [[1, 12], [0, 11], [0, 1]],
     difficulty: ([h, , pm]) => (h === 12 ? 3 : pm ? 2 : 1),
@@ -735,6 +758,7 @@ export const B05: Def[] = [
       return [tup(h === 12 ? 11 : h + 1, 5 * k), tup(h, (5 * k + 30) % 60), tup(H === 0 ? 24 : H, 5 * k)];
     },
     variants: () => [],
+    stepWhy: () => ["The 12-hour clock starts again at 1 after noon, so hours after 12 lose 12. Hour 00 is midnight, written 12 a.m."],
     explain: (s) => (s.inputs[0] === 0 ? "00 hours is midnight: the clock shows 12" : s.inputs[0] === 12 ? "12 hours is 12 noon: the clock shows 12" : `After noon, take away 12: ${s.inputs[0]} − 12 = ${s.value}`),
     domain: [[0, 23], [0, 11]],
     difficulty: ([H]) => (H === 0 || H === 12 ? 3 : H >= 20 ? 2 : 1),
@@ -804,6 +828,9 @@ export const B05: Def[] = [
       return [tup(a + 1, b), tup(a, (b + 10) % 60), tup(a + 1, (60 - b) % 60)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "minutes"
+        ? ["We take away the minutes first. If there are not enough, one hour is changed into 60 minutes."]
+        : ["Then we take away the hours, remembering any hour that was changed into minutes."]),
     explain: (s) => (s.id === "minutes" ? `Minutes: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}${Number(s.inputs[0]) >= 60 ? " (1 hour changed into 60 minutes)" : ""}` : `Hours: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[5, 20], [0, 11], [6, 23], [0, 11]],
     cap: 400,
@@ -851,6 +878,7 @@ export const B05: Def[] = [
     ],
     distractors: ([r, c]) => [(r + 1) * c, r * (c + 1), (r - 1) * c],
     variants: () => [],
+    stepWhy: () => ["Area is how many unit squares cover a shape. The squares make equal rows, so rows times squares in a row counts them all."],
     explain: (s) => `${s.inputs[0]} rows of ${s.inputs[1]} squares: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} square units`,
     domain: [[2, 10], [2, 12]],
     difficulty: ([r, c]) => (r * c <= 20 ? 1 : r <= 6 && c <= 6 ? 2 : 3),
@@ -901,6 +929,9 @@ export const B05: Def[] = [
     ],
     distractors: ([, a, b]) => [2 * a + b, a + 2 * b, a * b + 2 * (a + b)],
     variants: () => [],
+    stepWhy: (s) => (s.id === "area"
+        ? ["Covering a surface is about the space inside, which is the area, so we count the squares in rows."]
+        : ["Going round the edge is about the distance around, which is the perimeter, so we add all four sides."]),
     explain: (s) => (s.id === "area" ? `Covering needs the area: ${s.inputs[0]} rows of ${s.inputs[1]} squares = ${s.value}` : `Going round needs the perimeter: ${s.inputs[1]} + ${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[0]} = ${s.value}`),
     figure: ([need, a, b, ctx]) => ({ type: "shape", kind: "rectangle", lengths: [`${b} ${ctx === 1 ? "cm" : "m"}`, `${a} ${ctx === 1 ? "cm" : "m"}`] }),
     domain: [[0, 1], [2, 15], [3, 16], [0, 2]],
@@ -1008,6 +1039,13 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f), tup(Math.max(0, Math.floor(tot / f) - 1), tot % f), tup(Math.floor(tot / f), near)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "regroup"
+        ? ["The small unit has reached a whole big unit or more, so we change that part into the big unit."]
+        : s.id === "borrow"
+          ? ["There are not enough of the small unit to take away, so we change one big unit into small units."]
+          : s.id === "small"
+            ? ["We work with the small units first, so any extra or shortage can be passed to the big units."]
+            : ["Then we work with the big units, including any carried or changed."]),
     explain: (s) => {
       const [U, u] = s.inputs.slice(-2);
       return s.id === "regroup"
@@ -1106,6 +1144,11 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "small"
+        ? ["We multiply the small units first, so any whole big units they make can be carried."]
+        : s.id === "regroup"
+          ? ["Every full group of small units makes one big unit, so we carry those to the big units."]
+          : ["Then we multiply the big units and add the big units carried from the small ones."]),
     explain: (s) => {
       const [U, u] = s.inputs.slice(-2);
       return s.id === "small" ? `${u}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} ${u}` : s.id === "regroup" ? `${s.inputs[0]} ${u} make ${s.value} ${U}${Number(s.inputs[0]) % Number(s.inputs[1]) ? ` and ${Number(s.inputs[0]) % Number(s.inputs[1])} ${u} left over` : ""}` : `${U}: ${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[2]} = ${s.value} ${U}`;
@@ -1182,6 +1225,9 @@ export const B05: Def[] = [
       return [(b + 1) * f + sm, (b - 1) * f + sm, b * f + sm + d, b * f + sm - d].filter((x) => x > 0 && x !== b * f + sm);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "big"
+        ? ["One big unit is a fixed number of small units, so we multiply to change into the small unit."]
+        : ["Now both parts are in the same small unit, so we can add them."]),
     explain: (s) => (s.id === "big" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} + ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}`),
     domain: [[0, 5], [1, 9], [1, 199]],
     cap: 450,
@@ -1249,6 +1295,9 @@ export const B05: Def[] = [
       return [2 * a, a % 2 === 0 ? a / 2 : 3 * a, a + n];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "small"
+        ? ["The parts are measured in the small unit, so we change the whole amount into that unit first."]
+        : ["We see how many equal parts fit into the whole, which is a division."]),
     explain: (s) => (s.id === "small" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} parts`),
     domain: [[0, 4], [1, 9], [0, 1]],
     difficulty: ([q, n]) => (n === 1 || PARTS[q] === 500 ? 1 : PARTS[q] === 125 ? 3 : 2),
@@ -1299,6 +1348,11 @@ export const B05: Def[] = [
     ],
     distractors: ([w, t, h]) => [ds(100 * (w + 1) + 10 * t + h), ...(w > 0 ? [ds(10 * t + h)] : []), `${w}.0${t}${h}`],
     variants: () => [],
+    stepWhy: (s) => (s.id === "tenths"
+        ? ["The first digit after the point counts tenths, so this many tenths is written there."]
+        : s.id === "hundredths"
+          ? ["The second digit after the point counts hundredths."]
+          : ["The number is all its place values added together."]),
     explain: (s) => (s.id === "tenths" ? `${s.inputs[0]} tenths = ${ds(10 * Number(s.inputs[0]))}` : s.id === "hundredths" ? `${s.inputs[0]} hundredths = ${ds(Number(s.inputs[0]))}` : `${s.inputs[0]} + ${ds(10 * Number(s.inputs[1]))} + ${ds(Number(s.inputs[2]))} = ${s.value}`),
     domain: [[0, 5], [0, 9], [0, 9]],
     cap: 400,
@@ -1354,6 +1408,7 @@ export const B05: Def[] = [
         : [{ id: "shorter-is-larger", kind: "conceptual", competency: DEC, says: `${w}.${t} was taken as greater because hundredths are small pieces; but ${w}.${u}${v} has more tenths (${u} against ${t}).`, predict: x }];
     },
     variants: () => [],
+    stepWhy: () => ["Decimals are compared from the left like whole numbers. When the whole parts are equal, the tenths decide."],
     explain: (s) => `Compare the tenths: ${s.inputs[0]} and ${s.inputs[1]}. The greater number is ${s.value}`,
     domain: [[0, 3], [1, 9], [0, 9], [1, 9]],
     cap: 300,
@@ -1404,6 +1459,7 @@ export const B05: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["Tens, hundreds and thousands are all even, so only the ones digit decides whether a number is even or odd."],
     explain: (s) => `Look at the ones digit: numbers ending in 0, 2, 4, 6 or 8 are even: ${(s.value as number[]).join(", ")}`,
     domain: [[0, 499]],
     difficulty: ([seed]) => (evenList(seed).every((x) => x < 100) ? 1 : evenList(seed).filter((x) => x >= 100).length >= 4 ? 3 : 2),
@@ -1466,6 +1522,11 @@ export const B05: Def[] = [
     },
     distractors: ([L, T, H, r]) => [L * 1000000 + T * 1000 + H * 100 + REST[r], L * 100000 + T * 10000 + H * 100 + REST[r], L * 100000 + T * 1000 + H * 10 + REST[r]],
     variants: () => [],
+    stepWhy: (s) => (s.id === "lakhs"
+        ? ["In the Indian system digits are read in groups called periods: crores, lakhs, thousands and then hundreds, tens and ones. We find the lakhs first."]
+        : s.id === "thousands"
+          ? ["The thousands period has two places: ten thousands and thousands. We write the thousands into it."]
+          : ["The last period holds hundreds, tens and ones. Putting all the periods together gives the number."]),
     explain: (s) =>
       s.id === "lakhs"
         ? `${s.inputs[0]} lakh = ${ind(Number(s.value))}`
@@ -1524,6 +1585,7 @@ export const B05: Def[] = [
       return [`(${[s[0], s[2], s[1], s[3]].join(", ")})`, `(${[s[0], s[1], s[3], s[2]].join(", ")})`];
     },
     variants: () => [],
+    stepWhy: () => ["A whole number with more digits is always bigger. When the digit counts are the same, the first place from the left that differs decides."],
     explain: (s) => `Fewest digits first; numbers with the same number of digits are compared place by place from the left: ${s.value}`,
     domain: [[0, 299]],
     difficulty: () => 2,
@@ -1592,6 +1654,9 @@ export const B05: Def[] = [
     },
     distractors: ([op, k, m]) => (op === 0 ? [m * 10 ** (k + 2), m * 10 ** (k + 1), m] : [m * 10, m * 100, m * 10 ** k]),
     variants: () => [],
+    stepWhy: (s) => (s.id === "add-zeros"
+        ? ["Multiplying by 10 makes each digit worth ten times more, so every digit moves one place to the left."]
+        : ["Dividing by 10 makes each digit worth ten times less, so every digit moves one place to the right."]),
     explain: (s) => (s.id === "add-zeros" ? `× ${s.inputs[1]}: each digit moves ${String(s.inputs[1]).length - 1} ${String(s.inputs[1]).length === 2 ? "place" : "places"} left: ${s.inputs[0]} → ${s.value}` : `÷ ${s.inputs[1]}: each digit moves ${String(s.inputs[1]).length - 1} ${String(s.inputs[1]).length === 2 ? "place" : "places"} right: ${s.inputs[0]} → ${s.value}`),
     domain: [[0, 1], [1, 3], [2, 999]],
     cap: 400,
@@ -1651,6 +1716,9 @@ export const B05: Def[] = [
       { id: "tens-only", kind: "procedural", competency: MM, says: `Only the tens digit of ${a} was multiplied; the ones digit must be multiplied too.`, predict: Math.floor(a / 10) * 10 * d * 10 ** k },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "product"
+        ? ["A number like 50 or 300 is a small number times 10 or 100. We multiply the small numbers first."]
+        : ["Then we multiply by the 10, 100 or 1000 we left out, which puts zeros on the end."]),
     explain: (s) => (s.id === "product" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `× ${s.inputs[1]}: put ${String(s.inputs[1]).length - 1} ${String(s.inputs[1]).length === 2 ? "zero" : "zeros"} on the end: ${s.value}`),
     domain: [[11, 99], [2, 9], [1, 2]],
     cap: 400,
@@ -1721,6 +1789,9 @@ export const B05: Def[] = [
       return [down, down + u, down - u, roundTo(n, u / 10), roundTo(n, 10), down + 2 * u, roundTo(n, 10 * u)].filter((x) => x > 0 && x !== n);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "look"
+        ? ["The digit just after the rounding place tells which round number is nearer. 5 or more goes up, less than 5 stays down."]
+        : ["We pick the round number the given number is nearer to."]),
     explain: (s) => (s.id === "look" ? `Look at the digit after the place you round to: it is ${s.value}` : `${s.inputs[0]} is nearer to ${s.value}`),
     domain: [[1, 3], [11, 9999]],
     cap: 450,
@@ -1817,6 +1888,9 @@ export const B05: Def[] = [
       return [e + u, e - u, e + 2 * u].filter((v) => v > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "combine"
+        ? ["Round numbers are easy to work with in our head, and the answer is close to the real one."]
+        : ["Rounding gives a nearby easy number, so the estimate is quick but still close."]),
     explain: (s) => (s.id === "combine" ? `${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
     domain: [[1, 2], [11, 99], [11, 99], [0, 1]],
     cap: 400,
@@ -1894,6 +1968,11 @@ export const B05: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "cost1" || s.id === "cost2"
+        ? ["Buying several of the same thing costs the price that many times, so we multiply."]
+        : s.id === "total"
+          ? ["The whole bill is the costs of all the things added together."]
+          : ["Change is what is left of the money given after paying the bill, so we subtract."]),
     explain: (s) => (s.id === "cost1" || s.id === "cost2" ? `${s.inputs[0]} × ₹${s.inputs[1]} = ₹${s.value}` : s.id === "total" ? `Total: ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : `Change: ₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[0, 17], [2, 5], [0, 17], [1, 3], [0, 3]],
     cap: 400,
@@ -1956,6 +2035,9 @@ export const B05: Def[] = [
       { id: "one-hour", kind: "procedural", competency: MULTI, says: `Only the water for 1 hour was found; multiply by ${h} for all the hours.`, predict: h > 1 ? 5 * r * 60 : null },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "minutes"
+        ? ["The rate is given per minute, so we change the time into minutes to match."]
+        : ["The same amount drips every minute, so the total is that amount times the number of minutes."]),
     explain: (s) => (s.id === "minutes" ? `${s.inputs[0]} ${s.inputs[0] === 1 ? "hour" : "hours"} = ${s.value} minutes` : `${s.inputs[0]} mL × ${s.inputs[1]} minutes = ${s.value} mL`),
     domain: [[1, 10], [1, 12]],
     difficulty: ([r, h]) => (h <= 2 && r <= 4 ? 1 : h <= 6 ? 2 : 3),
@@ -2295,6 +2377,7 @@ const GEO_MORE: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: () => ["A right angle is a square corner. We compare an angle with a square corner, such as a folded paper corner, to see if it is smaller, the same or bigger."],
     explain: (s) => (s.inputs[0] === 0 ? `Compare with a square corner (90°): the angle is ${RT_CMP[Number(s.inputs[1]) < 90 ? 0 : Number(s.inputs[1]) === 90 ? 1 : 2]}` : "Only the square corner fits a folded-paper right angle exactly"),
     domain: [[0, 1], [0, 299]],
     difficulty: ([mode, v]) => (mode === 1 ? 2 : Math.abs(RT_DEGS[v] - 90) <= 25 ? 3 : 1),
@@ -2345,6 +2428,7 @@ const GEO_MORE: Def[] = [
       return out.filter((b) => (b.predict as number) >= 0);
     },
     variants: () => [],
+    stepWhy: () => ["Angles are named by comparing with 90° and 180°: acute is less than 90°, right is 90°, obtuse is between 90° and 180°, straight is 180°, reflex is more than 180°."],
     explain: (s) => {
       const d = Number(s.inputs[0]);
       return d < 90 ? `${d}° is less than 90°: acute` : d === 90 ? "90° is a right angle" : d < 180 ? `${d}° is between 90° and 180°: obtuse` : d === 180 ? "180° is a straight angle" : `${d}° is between 180° and 360°: reflex`;
@@ -2407,6 +2491,7 @@ const GEO_MORE: Def[] = [
       return q.s1! < q.s2! ? [] : [{ id: "longer-arms", kind: "conceptual", competency: ANG, says: "∠Y was taken as bigger because its arms are longer; the size of an angle is the amount of turn between the arms, not how long the arms are drawn.", predict: q.at(1) }];
     },
     variants: () => [],
+    stepWhy: () => ["An angle is named by three letters with the corner in the middle. The middle letter is the vertex, and the arms go from it to the other two points."],
     explain: (s) => (s.inputs[0] === 0 ? `In ∠${s.inputs[1]} the middle letter is the vertex` : s.inputs[0] === 1 ? `The arms of ∠${s.inputs[1]} are the two rays from the middle letter` : "Compare the amounts of turn: 30° for each number the hand passes"),
     domain: [[0, 2], [0, 59]],
     difficulty: ([kind, s]) => (kind === 0 ? 1 : kind === 1 ? 2 : (1 + (s % 5)) >= 1 + Math.floor(s / 5) ? 3 : 2),
@@ -2457,6 +2542,7 @@ const GEO_MORE: Def[] = [
       return B.filter((b) => (b.predict as number) >= 0);
     },
     variants: () => [],
+    stepWhy: () => ["Each part of a circle has a name. The centre is the middle point, the radius goes from the centre to the edge, and the diameter goes right across through the centre."],
     explain: (s) => `That is ${s.inputs[0]}`,
     domain: [[0, 6], [0, 31]],
     difficulty: ([part]) => (part <= 2 ? 1 : part <= 4 ? 2 : 3),
@@ -2530,6 +2616,7 @@ const GEO_MORE: Def[] = [
       return [n + 1, n + 2, n - 1, 4, 2, 0].filter((x) => x >= 0 && x !== n);
     },
     variants: () => [],
+    stepWhy: () => ["A line of symmetry is a fold where both halves match exactly. We try each possible fold and count the ones that work."],
     explain: (s) => (s.inputs[0] === 0 ? `Fold along each of the four lines: ${s.value} ${s.value === 1 ? "fold makes" : "folds make"} the halves match` : `It has ${s.value} ${s.value === 1 ? "line" : "lines"} of symmetry`),
     domain: [[0, 1], [0, 199]],
     difficulty: ([kind, s]) => (kind === 1 ? (SSHAPES[s].lines >= 5 ? 3 : 2) : design(s).g.some((l) => l === "d" || l === "e") ? 3 : design(s).g.length ? 2 : 1),
@@ -2578,6 +2665,7 @@ const GEO_MORE: Def[] = [
     },
     distractors: ([axis, s]) => [0, 1, 2, 3, 4, 5].filter((x) => x !== digList(s, axis).filter((n) => hasLineSeg(n, axis)).length),
     variants: () => [],
+    stepWhy: () => ["A number has a line of symmetry if folding it makes the two halves match. Every digit must match its partner across the fold."],
     explain: (s) => `${s.inputs[1]} ${Number(s.value) === 1 ? "has" : "have"} a ${s.inputs[0]} line of symmetry: ${s.value}`,
     domain: [[0, 1], [0, 199]],
     difficulty: ([axis, s]) => (axis === 1 ? (digList(s, axis).some((x) => x > 9) ? 2 : 1) : 3),
@@ -2634,6 +2722,7 @@ const GEO_MORE: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: () => ["A mirror swaps sides but keeps distances the same. A word looks the same in it only if each letter and the order both still look the same after the flip."],
     explain: (s) => (s.inputs[0] === "side" ? `In a mirror beside it, ${s.inputs[1]} is reversed and every letter is flipped left to right, and it comes back the same` : `In the water every letter of ${s.inputs[1]} is flipped top to bottom, the order stays, and each letter looks the same`),
     domain: [[0, 1], [0, 199]],
     difficulty: ([kind]) => (kind === 0 ? 2 : 3),
@@ -2966,6 +3055,9 @@ const NUM_MORE: Def[] = [
       ].filter((b) => b.predict !== null && b.predict !== q.at(n % 2));
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "pairs"
+        ? ["Even means things can be put in pairs with none left over, so we make as many pairs as we can."]
+        : ["If one is left with no partner the number is odd; if none is left it is even."]),
     explain: (s) => (s.id === "pairs" ? `${s.inputs[0]} make ${s.value} pairs` : Number(s.inputs[0]) ? "One is left over without a partner: odd" : "None is left over: even"),
     domain: [[0, 1], [5, 50]],
     difficulty: ([pic, n]) => (n <= 12 ? 1 : pic === 1 ? 2 : 3),
@@ -3048,6 +3140,13 @@ const NUM_MORE: Def[] = [
     },
     distractors: ([kind, x]) => (kind === 0 ? [x + rev(x) + 10, x + rev(x) - 10, x + rev(x) + 11] : kind === 1 ? [palSteps(x) + 2, 1] : kind === 2 ? [10, 11, 4] : [11, 10, 21 - x === x + 1 ? 9 : Math.abs(10 - x) + 1]),
     variants: () => [],
+    stepWhy: (s) => (s.id === "sum"
+        ? ["A two-digit number and its reverse together have each digit once as tens and once as ones. So the sum is 11 times the sum of the digits."]
+        : s.id === "steps"
+          ? ["We keep reversing and adding until the number reads the same both ways, and count how many times that took."]
+          : s.id === "row"
+            ? ["Adding 1 to one number changes the sum by 1, so along a row the sums take turns between even and odd."]
+            : ["On an addition chart, one step right and one step up keeps the sum the same, so equal sums lie on one slanting line."]),
     explain: (s) => (s.id === "sum" ? `${s.inputs[0]} + ${rev(Number(s.inputs[0]))} = ${s.value}; such sums are always multiples of 11` : s.id === "steps" ? `${s.value} reverse-and-add ${s.value === 1 ? "step makes" : "steps make"} a palindrome` : s.id === "row" ? `The sums go even, odd, even … in turn: ${s.value} of the 11 are even` : `The cells with sum ${s.inputs[0]} lie on one slanting line of the chart: ${s.value} cells`),
     domain: [[0, 3], [0, 99]],
     difficulty: ([kind, x]) => (kind === 0 ? ((x % 10) + Math.floor(x / 10) >= 10 ? 2 : 1) : kind === 1 ? 3 : 2),
@@ -3108,6 +3207,11 @@ const NUM_MORE: Def[] = [
           ],
     distractors: ([kind, a, k]) => (kind === 0 ? [k * a + (k * (k - 1)) / 2 + k, k * a + (k * (k + 1)) / 2] : [a + 1, a - 1].filter((x) => x > 0)),
     variants: () => [],
+    stepWhy: (s) => (s.id === "pairs"
+        ? ["The first and last numbers add to the same as the second and second-last, and so on. So we count pairs instead of adding one by one."]
+        : s.id === "middle"
+          ? ["Consecutive numbers balance around the middle one, so their sum shared equally gives the middle number."]
+          : ["The numbers go up by 1, so the smallest is that many steps below the middle."]),
     explain: (s) => (s.id === "pairs" ? `Pair the first and last, the second and second-last …: the sum is ${s.inputs[0]} × (first + last) ÷ 2 = ${s.value}` : s.id === "middle" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, the middle number` : `The smallest is ${s.inputs[1]} less than the middle: ${s.value}`),
     domain: [[0, 1], [1, 40], [3, 6]],
     difficulty: ([kind, a, k]) => (kind === 1 ? 3 : k <= 4 && a <= 20 ? 1 : 2),
@@ -3175,6 +3279,11 @@ const NUM_MORE: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "commas"
+        ? ["Commas split the digits into periods from the right, so the number is easy to read. Indian and international systems group them differently."]
+        : s.id === "expand"
+          ? ["Each digit is worth the digit times its place value, and the number is all these values added together."]
+          : ["We read the number one period at a time, saying the period's name after each group."]),
     explain: (s) => (s.id === "commas" ? `Group the digits from the right: ${s.inputs[0] === 1 ? ind(Number(s.inputs[1])) : intl(Number(s.inputs[1]))}` : s.id === "expand" ? `Each digit times its place value: ${expanded(Number(s.inputs[1]))}` : `Read period by period: ${s.inputs[0] === 4 ? intlName(Number(s.inputs[1])) : indName(Number(s.inputs[1]))}`),
     domain: [[0, 5], [0, 149]],
     cap: 600,
@@ -3243,6 +3352,9 @@ const NUM_MORE: Def[] = [
       return [roundTo(n, u) + u, roundTo(n, u) - u].filter((x) => x > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "look"
+        ? ["The digit just after the rounding place tells which round number is nearer. 5 or more rounds up, less than 5 rounds down."]
+        : ["We keep the round number that the given number is nearer to."]),
     explain: (s) => (s.id === "look" ? `Look at the digit just after the place you round to: it is ${s.value}` : `${ind(Number(s.inputs[0]))} is nearer to ${ind(Number(s.value))}`),
     domain: [[3, 7], [0, 59]],
     difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
@@ -3312,6 +3424,9 @@ const NUM_MORE: Def[] = [
       return [e * 10, e + (mode ? 1000 : 100)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "product"
+        ? ["Round numbers are easy to multiply in our head, and the answer is close to the real product."]
+        : ["Rounding each number first makes the multiplying quick."]),
     explain: (s) => (s.id === "product" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
     domain: [[0, 1], [11, 999], [11, 99]],
     cap: 450,
@@ -3406,6 +3521,11 @@ const NUM_MORE: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (Number(s.inputs[0]) === 1
+        ? ["Sometimes only a rough size is needed and sometimes every unit counts. What the answer is used for decides whether an estimate is good enough."]
+        : Number(s.inputs[0]) === 2
+          ? ["Rounding each number to its biggest place leaves easy numbers to multiply, giving a quick rough answer."]
+          : ["An answer far from a rough estimate must have a mistake. Estimating is a quick way to check."]),
     explain: (s) => ["Round the numbers, work out the estimate and compare the answer with it", "Ask whether only the rough size matters, or every unit counts", "Round each number to its biggest place and multiply"][Number(s.inputs[0])],
     domain: [[0, 2], [0, 299]],
     difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
@@ -3474,6 +3594,9 @@ const NUM_MORE: Def[] = [
       return [(r + u) / 1000, (r - u) / 1000];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "look"
+        ? ["The digit just after the place we round to decides: 5 or more rounds up, less than 5 rounds down."]
+        : ["We keep the digits up to the rounding place and drop the rest, after rounding up if needed."]),
     explain: (s) => (s.id === "look" ? `Look at the digit after the ${["ones", "tenths", "hundredths"][Number(s.inputs[1])]} place: it is ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
     domain: [[0, 2], [0, 199]],
     difficulty: ([place]) => (place === 0 ? 1 : place === 1 ? 2 : 3),
@@ -3696,6 +3819,11 @@ const MEAS_MORE: Def[] = [
       return [tup(b + 1, s), tup(b, (s + UNITS[kind].step) % UNITS[kind].f)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "big"
+        ? ["We share the big units first, so what is left over can be changed into small units."]
+        : s.id === "regroup"
+          ? ["What is left of the big unit cannot be shared whole, so we change it into small units and add them to the small units already there."]
+          : ["Now we share the small units equally."]),
     explain: (s) => {
       const [U, u] = s.inputs.slice(-2);
       return s.id === "big" ? `${U}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} ${U} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} ${U} left over into ${u} and add the ${s.inputs[2]} ${u}: ${s.value} ${u}` : `${u}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} ${u}`;
@@ -3768,6 +3896,11 @@ const MEAS_MORE: Def[] = [
       return [tup(Math.floor(a / f) + 1, a % f), tup(Math.floor(a / f), (a % f) * 10 < f ? (a % f) * 10 : Math.floor((a % f) / 10))];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "big"
+        ? ["Each full group of small units makes one big unit, so we see how many whole big units there are."]
+        : s.id === "left"
+          ? ["What is left after the whole big units stays in the small unit."]
+          : ["The answer is the whole big units and the small units left, written together."]),
     explain: (s) => {
       const [U, u] = s.inputs.slice(-2);
       return s.id === "big"
@@ -3839,6 +3972,7 @@ const MEAS_MORE: Def[] = [
       return [a / (CU[k].f * 10), a / 10 === a / CU[k].f ? a : a / 10];
     },
     variants: () => [],
+    stepWhy: () => ["Changing a small unit to a bigger one gives fewer units, so we divide. Dividing by 10, 100 or 1000 moves the decimal point to the left."],
     explain: (s) => `${s.inputs[0]} ÷ ${s.inputs[1]} = ${String(s.value)}`,
     domain: [[0, 5], [0, 179]],
     cap: 450,
@@ -3911,6 +4045,9 @@ const MEAS_MORE: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "convert"
+        ? ["We can only compare weights in the same unit. 1 kg is 1000 g, so we change everything into grams."]
+        : ["Now both are in grams, so the bigger number is the heavier weight."]),
     explain: (s) => (s.id === "convert" ? `${s.inputs[0]} ${s.inputs[2]} ${s.inputs[1]} ${s.inputs[3]} = ${s.inputs[0]} × 1000 + ${s.inputs[1]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} ${s.inputs[4]} ${s.inputs[1]} ${s.inputs[3]}, so the sign is ${s.inputs[4]}`),
     domain: [[0, 1], [0, 149]],
     difficulty: ([kind, s]) => (s % 3 === 1 ? 3 : kind ? 2 : 1),
@@ -3973,6 +4110,11 @@ const MEAS_MORE: Def[] = [
           ],
     distractors: ([kind, a, b]) => (kind === 2 ? [a * REFS[b][1] * 10, (a + 1) * REFS[b][1]] : [30 * a + 2.5 * b + 30, 3 * a]),
     variants: () => [],
+    stepWhy: (s) => (s.id === "feet"
+        ? ["One foot is about 30 cm, so we multiply the feet by 30 to get centimetres."]
+        : s.id === "inches"
+          ? ["One inch is about 2.5 cm. Changing the inches too lets us add both parts in centimetres."]
+          : ["Each piece has the same length, so we multiply to find the length of all of them."]),
     explain: (s) => (s.id === "times" ? `${s.inputs[0]} × ${s.inputs[1]} m = ${s.value} m` : s.id === "feet" ? `${s.inputs[0]} feet ≈ ${s.inputs[0]} × 30 = ${s.value} cm` : `${s.inputs[0]} inches ≈ ${s.inputs[0]} × 2.5 = ${s.value} cm; add the two parts`),
     domain: [[0, 2], [1, 12], [0, 11]],
     difficulty: ([kind, , b]) => (kind === 0 ? 1 : kind === 2 ? 2 : b % 2 ? 3 : 2),
@@ -4040,6 +4182,7 @@ const MEAS_MORE: Def[] = [
       return [out * 10, out + [5, 18, 2.54, 8, 10 * (82 + r)][kind]];
     },
     variants: () => [],
+    stepWhy: () => ["Changing a unit means multiplying by how many of the new unit make one of the old. For example, 1 km/h is 1000 m in 3600 s, which is 5/18 m/s."],
     explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)}`,
     domain: [[0, 4], [1, 40], [0, 6]],
     difficulty: ([kind]) => (kind >= 2 ? 2 : 3),
@@ -4126,6 +4269,9 @@ const MIX_MORE: Def[] = [
       { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The division fact ${d * q} ÷ ${d} is not yet reliable.`, predict: [(q + 1) * 10 ** k, (q - 1) * 10 ** k].filter((x) => x > 0), probe: `gen:mul:${d},${q}` },
     ],
     variants: () => [],
+    stepWhy: (s) => (s.id === "fact"
+        ? ["A number like 40 or 600 is a small number of tens or hundreds. We divide the small number first, using a fact we know."]
+        : ["We were dividing tens or hundreds, so the answer is that many tens or hundreds."]),
     explain: (s) => (s.id === "fact" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `So ${s.inputs[0]} ${["", "tens", "hundreds", "thousands"][String(s.inputs[1]).length - 1]}: ${s.value}`),
     domain: [[2, 9], [2, 9], [1, 3]],
     difficulty: ([, , k]) => (k === 1 ? 1 : k === 2 ? 2 : 3),
@@ -4195,6 +4341,11 @@ const MIX_MORE: Def[] = [
       return [a + 10, a * 2, a + 1];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "cost0"
+        ? ["Buying several of the same thing costs its price that many times, so we multiply."]
+        : s.id === "total"
+          ? ["The whole bill is the cost of every row added together."]
+          : ["Sharing the total equally means dividing it by the number of people."]),
     explain: (s) => (s.id === "cost0" ? `${s.inputs[0]} × ₹${s.inputs[1]} = ₹${s.value}` : s.id === "total" ? `₹${s.inputs[0]} + ₹${s.inputs[1]} + ₹${s.inputs[2]} = ₹${s.value}` : `₹${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [0, 199]],
     difficulty: ([kind]) => (kind === 0 ? 3 : 2),
@@ -4266,6 +4417,13 @@ const MIX_MORE: Def[] = [
       return [ans + (kind === 0 ? 10 + c : 50 + 10 * c), ans * 2];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "distance"
+        ? ["Speed is the distance covered in each hour, so distance is speed times time."]
+        : s.id === "fare"
+          ? ["The fare is charged for each kilometre, so we multiply the distance by the price per kilometre."]
+          : s.id === "time"
+            ? ["Time is how many hours the distance takes at that speed, so we divide distance by speed."]
+            : ["The hire is charged for each hour, so we multiply the hours by the price per hour."]),
     explain: (s) => (s.id === "distance" ? `Distance = ${s.inputs[0]} km/h × ${s.inputs[1]} h = ${s.value} km` : s.id === "fare" ? `Fare = ${s.inputs[0]} km × ₹${s.inputs[1]} = ₹${s.value}` : s.id === "time" ? `Time = ${s.inputs[0]} km ÷ ${s.inputs[1]} km/h = ${s.value} hours (there and back)` : `Hire = ${s.inputs[0]} hours × ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[0, 1], [0, 4], [1, 5], [0, 10]],
     cap: 400,
@@ -4341,6 +4499,11 @@ const MIX_MORE: Def[] = [
       return [ans + 1000, ans - 1000, ans + 10000];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "add"
+        ? ["The story adds an amount on, so we add, lining up the places."]
+        : s.op === "subtract"
+          ? ["The story takes an amount away, so we subtract, lining up the places."]
+          : ["The same amount comes again and again, so we multiply."]),
     explain: (s) => (s.op === "add" ? `${ind(Number(s.inputs[0]))} + ${ind(Number(s.inputs[1]))} = ${ind(Number(s.value))}` : s.op === "subtract" ? `${ind(Number(s.inputs[0]))} − ${ind(Number(s.inputs[1]))} = ${ind(Number(s.value))}` : `${ind(Number(s.inputs[0]))} × ${s.inputs[1]} = ${ind(Number(s.value))}`),
     domain: [[0, 2], [0, 99]],
     difficulty: ([kind]) => (kind === 0 ? 2 : 3),
@@ -4409,6 +4572,7 @@ const MIX_MORE: Def[] = [
       return neg ? [{ id: "not-read-as-yes", kind: "procedural", competency: MULTI, says: `The clue "${clueText(d, neg)}" was read as if it said ${d.people[neg.who]} does; a "not" clue only rules ${d.people[neg.who]} out.`, predict: q.at(neg.who) }] : [];
     },
     variants: () => [],
+    stepWhy: () => ["Each person matches exactly one thing. A grid shows every pairing at once, so ruling out pairs leaves the only one that can be right."],
     explain: () => "Make a grid of people and things, put ✗ for every clue that rules a pair out and ✓ for every clue that fixes one; a row or column with three ✗ has its ✓ in the last place",
     domain: [[0, 199]],
     difficulty: ([s]) => (matchData(s) && matchData(s)!.clues.length <= 4 ? 2 : 3),
@@ -4503,6 +4667,13 @@ const MIX_MORE: Def[] = [
       return [Math.abs(z.a - z.b) + 1, Math.abs(z.a - z.b) + 2].filter((x) => x > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "full"
+        ? ["To estimate the area of a curved shape, we count full squares and squares more than half covered as whole squares."]
+        : s.id === "halves"
+          ? ["Squares exactly half covered count as half each, so two halves make one square."]
+          : s.id === "total"
+            ? ["The area is about all the whole squares and the halves together. Squares less than half covered are left out."]
+            : ["To compare the two areas we take the smaller count from the bigger."]),
     explain: (s) => (s.id === "full" ? `Full squares and squares more than half covered: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "halves" ? `${s.inputs[0]} half squares make ${String(s.value)}` : s.id === "total" ? `About ${s.inputs[0]} + ${String(s.inputs[1])} = ${String(s.value)} square units` : `A covers ${s.inputs[0]} squares and B covers ${s.inputs[1]}: the difference is ${s.value}`),
     domain: [[0, 1], [0, 199]],
     difficulty: ([kind, s]) => (kind === 1 ? 1 : irrData(s).half % 2 ? 3 : 2),
@@ -4579,6 +4750,11 @@ const DEC_MORE: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "place"
+        ? ["Places to the left of the point are ones, tens, hundreds; places to the right are tenths, hundredths, thousandths."]
+        : s.id === "expand"
+          ? ["Each digit is worth the digit times its place value. Zeros add nothing, so they are left out."]
+          : ["Each digit goes in the place its value names, with 0 in any empty place."]),
     explain: (s) => (s.id === "place" ? `In ${s.inputs[0]}, that digit is in the ${PLACES3[Number(s.inputs[1])]} place` : s.id === "expand" ? `Write each digit times its place value, leaving out the zeros: ${s.inputs[0]}` : `Put each digit in its place: ${s.inputs[0]}`),
     domain: [[0, 2], [0, 149]],
     difficulty: ([kind]) => (kind === 0 ? 2 : kind === 1 ? 2 : 3),
@@ -4634,6 +4810,7 @@ const DEC_MORE: Def[] = [
       return [decTuple([x[1], x[0], x[2], x[3]]), decTuple([x[0], x[1], x[3], x[2]])];
     },
     variants: () => [],
+    stepWhy: () => ["Giving every decimal the same number of places lets us compare them digit by digit like whole numbers. Extra zeros at the end do not change a decimal."],
     explain: (s) => `Give every number three decimal places (${s.inputs.map((x) => { const [w, f = ""] = String(x).split("."); return `${w}.${f.padEnd(3, "0")}`; }).join(", ")}) and compare: ${s.value}`,
     domain: [[0, 299]],
     difficulty: ([s]) => (s % 10 === 0 ? 2 : 3),
@@ -4697,6 +4874,11 @@ const DEC_MORE: Def[] = [
       return [{ id: "digits-as-decimal", kind: "conceptual", competency: DEC, says: `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} was written as ${q.base[1]} by putting a point between the top and bottom numbers; a fraction is a division: ${FRACS[p[1]][0]} ÷ ${FRACS[p[1]][1]}.`, predict: q.at(1) }];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "tenths"
+        ? ["The last place of a decimal tells its bottom number: tenths, hundredths or thousandths. The digits after the point are the top."]
+        : s.id === "simplest"
+          ? ["A fraction is in simplest form when top and bottom share no common factor, so we cancel any common factor."]
+          : ["A fraction means the top divided by the bottom. Making the bottom 10, 100 or 1000 turns it straight into a decimal."]),
     explain: (s) => (s.id === "tenths" ? `Read the decimal with its last place: ${s.inputs[0]}` : s.id === "simplest" ? `Write ${s.inputs[0]} over 10, 100 or 1000 and cancel common factors` : `Divide the top by the bottom (or make the bottom 10, 100 or 1000): ${s.inputs[0]}`),
     domain: [[0, 2], [0, 58]],
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
@@ -4744,6 +4926,7 @@ const DEC_MORE: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: () => ["a.m. means before noon and p.m. means after noon. On the 12-hour clock the hours start again at 1 after 12."],
     explain: (s) => (Number(s.inputs[0]) < 12 ? "Before noon: a.m." : "After noon: p.m.") + "; the hours after 12 start again at 1",
     domain: [[0, 23], [0, 11]],
     difficulty: ([H]) => (H === 0 || H === 12 ? 3 : H >= 13 ? 2 : 1),
@@ -4811,6 +4994,9 @@ const DEC_MORE: Def[] = [
       return kind === 0 ? [rs.length + 1, rs.length + 2] : [rs[1] + 1, rs[2] ?? rs[1] + 2];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "first"
+        ? ["Any number that divides both numbers also divides the remainder. So the HCF of the two numbers is the HCF of the smaller one and the remainder."]
+        : ["We keep dividing the last divisor by the last remainder, and the numbers shrink each time, until the remainder is 0."]),
     explain: (s) => (s.id === "first" ? `${s.inputs[0]} ÷ ${s.inputs[1]} leaves remainder ${s.value}` : `Repeated division of ${s.inputs[0]} and ${s.inputs[1]} takes ${s.value} divisions`),
     domain: [[0, 1], [20, 240], [8, 239]],
     cap: 300,
@@ -5027,6 +5213,11 @@ const CORE_MORE: Def[] = [
     },
     distractors: ([, a, b]) => [a + b + 10, a + b - 10, a + b + 1],
     variants: () => [],
+    stepWhy: (s) => (s.id === "tens"
+        ? ["Breaking each number into tens and ones makes adding easy. We add the tens together first."]
+        : s.id === "ones"
+          ? ["Then we add the ones together."]
+          : ["The sum is the tens and the ones put back together."]),
     explain: (s) => (s.id === "tens" ? `Tens: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "ones" ? `Ones: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 1], [10, 199], [10, 99]],
     cap: 450,
@@ -5077,6 +5268,7 @@ const CORE_MORE: Def[] = [
     ].filter((x) => x.predict !== a + b),
     distractors: ([a, b]) => [a + b + 100, a + b - 10, a + b + 1],
     variants: () => [],
+    stepWhy: () => ["We add place by place, ones with ones, tens with tens and hundreds with hundreds, because only the same places can be added."],
     explain: (s) => `${s.id[0].toUpperCase()}${s.id.slice(1)}: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`,
     domain: [[100, 899], [10, 899]],
     cap: 400,
@@ -5125,6 +5317,9 @@ const CORE_MORE: Def[] = [
       return [r + 1000, r - 100, r + 10];
     },
     variants: () => [],
+    stepWhy: (s) => (s.op === "add"
+        ? ["We add column by column from the ones. When a column makes 10 or more, a ten is carried to the next place."]
+        : ["We take away column by column from the ones. When a column has too few, we take one from the next place."]),
     explain: (s) => `${ind(Number(s.inputs[0]))} ${s.op === "add" ? "+" : "−"} ${ind(Number(s.inputs[1]))}: column by column from the ones, ${s.op === "add" ? "carrying" : "regrouping"} ${s.inputs[2]} times: ${ind(Number(s.value))}`,
     domain: [[0, 1], [1000, 99999], [1000, 99999]],
     cap: 450,
@@ -5185,6 +5380,9 @@ const CORE_MORE: Def[] = [
       return out.filter((b) => b.predict === null || (Array.isArray(b.predict) && b.predict.length > 0));
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "bound"
+        ? ["An inequality is solved like an equation: doing the same to both sides keeps it true. Dividing by a negative number turns the sign round."]
+        : ["The answer is every number of the kind asked for on the right side of the boundary."]),
     explain: (s) => (s.id === "bound" ? `Undo the + or − and divide by ${n_(Number(s.inputs[1]))}${Number(s.inputs[1]) < 0 ? " (reversing the sign)" : ""}: the boundary is ${fmtQ(Number(s.value))}` : `The ${s.inputs[0]}s that fit: ${setStr(s.value as number[])}`),
     domain: [[0, 2], [-4, 5], [-9, 9], [-15, 30], [0, 1]],
     cap: 450,
@@ -5246,6 +5444,9 @@ const CORE_MORE: Def[] = [
       return [ivStr(d.L - 1, !d.strict1, d.U, !d.strict2), ivStr(d.L, !d.strict1, d.U + 1, !d.strict2)];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "both"
+        ? ["The numbers we want must make both true at once, so we keep only where the two answers overlap."]
+        : ["We solve each inequality on its own, doing the same to both sides, and turning the sign round if we multiply or divide by a negative."]),
     explain: (s) => (s.id === "both" ? `Both must hold: ${s.value}` : `Inequality ${s.inputs[0]} gives ${s.value}`),
     domain: [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]],
     cap: 450,
@@ -5337,6 +5538,9 @@ const CORE_MORE: Def[] = [
       return [`${9 * (a - 5) + 31} <= F <= ${9 * (b - 5) + 33}`, `${9 * (a - 5) + 32} < F < ${9 * (b - 5) + 32}`];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "model"
+        ? ["Words like at least, at most and more than tell us which sign to use. Writing the story as an inequality lets us solve it."]
+        : ["We solve the inequality like an equation, then keep only the answers the story allows."]),
     explain: (s) => (s.id === "model" ? `Write the condition as an inequality: ${s.inputs[0]}` : `Solve it: ${s.value}`),
     domain: [[0, 2], [5, 95], [5, 95], [0, 10]],
     cap: 450,
@@ -5403,6 +5607,9 @@ const CORE_MORE: Def[] = [
     ],
     distractors: ([kind, a, d]) => [kind === 2 ? `(−∞, ${n_(a - d)}] ∪ [${n_(a + d)}, ∞)` : `(${n_(a - 2 * d)}, ${n_(a + 2 * d)})`, `(${n_(a - d)}, ∞)`],
     variants: () => [],
+    stepWhy: (s) => (s.id === "ends"
+        ? ["Points within a set distance of a number lie on both sides of it. The ends are that distance below and above it."]
+        : ["Every point between the two ends is close enough, so the set is the interval from one end to the other."]),
     explain: (s) => (s.id === "ends" ? `The points at distance ${s.inputs[1]} from ${n_(Number(s.inputs[0]))} are ${s.value}` : `So the set is ${s.value}`),
     domain: [[0, 2], [-10, 10], [1, 9]],
     // level@1: neighbourhoods in interval notation are Grade 11 work (never asked of a younger learner)
@@ -5526,6 +5733,9 @@ const SURD_MORE: Def[] = [
       return [a + 1, a + 2, a - 1].filter((x) => x > 0);
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "model"
+        ? ["Calling the unknown x lets us write what the story says as an equation."]
+        : ["Doing the same to both sides keeps the equation balanced, so we can get x on its own."]),
     explain: (s) => (s.id === "model" ? `Let x be the unknown; the story gives ${s.value}` : `Solve the equation: x = ${s.value}${String(s.inputs[0]).startsWith("x + (") ? " (the smallest multiple)" : ""}`),
     domain: [[0, 4], [2, 20], [0, 23]],
     cap: 450,
@@ -5598,6 +5808,11 @@ const SURD_MORE: Def[] = [
       ][kind] as Bug[];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "add" || s.id === "subtract"
+        ? ["Only like surds can be added or taken away, the same way as like terms. Taking the square factors out shows which surds are alike."]
+        : s.id === "multiply"
+          ? ["The root of a product is the product of the roots, so the roots can be joined under one √. Then a square factor can be taken out."]
+          : ["The root of a quotient is the quotient of the roots, so the division can be done under one √."]),
     explain: (s) => (s.id === "add" || s.id === "subtract" ? `Simplify each surd in ${s.inputs[0]} and combine the like surds` : s.id === "multiply" ? `√a × √b = √(ab); then take out the largest square factor` : `√a ÷ √b = √(a ÷ b)`),
     domain: [[0, 3], [1, 6], [1, 6], [0, 6]],
     cap: 450,
@@ -5677,6 +5892,9 @@ const SURD_MORE: Def[] = [
       ].filter((b) => b.predict !== null) as Bug[];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "irrational"
+        ? ["A root of a number that is not a perfect square (or cube) is never a whole number or a fraction. Such a root is called a surd."]
+        : ["Bigger positive numbers have bigger squares, so squaring both surds and comparing the squares compares the surds."]),
     explain: (s) => (s.id === "irrational" ? "A surd is a root that is irrational: the number under √ is not a perfect square (and the cube root is not of a perfect cube)" : "Square both: (p√m)² = p² × m; the bigger square belongs to the bigger surd"),
     domain: [[0, 1], [0, 103]],
     difficulty: ([kind]) => (kind === 0 ? 1 : 2),
@@ -5738,6 +5956,9 @@ const SURD_MORE: Def[] = [
           ];
     },
     variants: () => [],
+    stepWhy: (s) => (s.id === "root"
+        ? ["A root times itself gives a whole number, so multiplying top and bottom by it clears the root from the bottom. Multiplying top and bottom by the same thing keeps the value."]
+        : ["(a + b)(a − b) = a² − b², so the conjugate squares each root and the roots disappear from the bottom."]),
     explain: (s) => (s.id === "root" ? `Multiply top and bottom of ${s.inputs[0]} by the root in the bottom` : `Multiply top and bottom of ${s.inputs[0]} by the conjugate (change the sign between the terms); the bottom becomes a difference of squares`),
     domain: [[0, 1], [1, 12], [2, 15], [0, 4], [0, 1]],
     cap: 400,

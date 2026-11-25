@@ -173,6 +173,10 @@ export const B25: Def[] = [
       return [ans + 1, ans - 1, ans + 2, 2 * ans].filter((v) => v > 0);
     },
     variants: ([k, n, a]) => [[k, n + 1, a], [k, n, a < 3 ? (a + 1) % 3 : 3 + ((a - 2) % 3)]].filter(([, m]) => m <= 10),
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sides": ["A prism has one side face for each side of its base."], "total": ["A prism also has the two ends, top and bottom."], "ends": ["A prism has a copy of the base at each end, so each corner of the base appears twice."], "edges3": ["Edges come from the edges round each end and the upright edges joining them, one for each base corner."], "rule": ["The counting rule ties the number of faces to the number of sides of the base."], "back|subtract": ["Working the rule backwards gives the number of sides of the base."], "back|divide": ["Working the rule backwards gives the number of sides of the base."], "apex": ["A pyramid has all the corners of its base plus one at the top."], "edges2": ["A pyramid has the edges round its base and one edge from each base corner up to the top."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "rule"
         ? `For a ${SOLID[Number(s.inputs[0])]} with an n-sided base: ${s.value}`
@@ -251,6 +255,10 @@ export const B25: Def[] = [
       return [n + 1, n - 1, n + 2].filter((v) => v >= 0);
     },
     variants: ([s, j]) => [[s, (j + 1) % 5], [s + 4, j]].filter(hOk),
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "rule": ["A class includes its lower limit but not its upper limit, so each value belongs to exactly one class."], "tally": ["Counting the values that fit gives the frequency of the class."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "rule" ? `A value is in the class when ${s.value}` : s.inputs.length ? `The values in the class: ${s.inputs.join(", ")}; there are ${s.value}` : `No value is in the class: 0`),
     domain: [[0, 79], [0, 4]],
     keep: hOk,

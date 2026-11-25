@@ -89,6 +89,10 @@ const fword: Def = {
     return [r + 1 / ((b * d) / gcd(b, d)), r * 2, Math.abs(r - 1 / ((b * d) / gcd(b, d)))].filter((x) => x > 0 && !near(x, r));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "operation": ["The story tells us what to do: putting amounts together means add, and finding what is left or the difference means take away."], "common": ["Fractions can only be added or taken away when the pieces are the same size, so we find a common denominator."], "rename": ["Each fraction is written with that denominator by multiplying its top and bottom by the same number, which keeps its value."], "combine": ["With same-sized pieces, we just add or take away the numbers of pieces."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "operation"
       ? s.value === "add" ? "The story puts two amounts together, so add" : "The story takes one amount away from another, so subtract"
@@ -165,6 +169,10 @@ const fracDec: Def = {
     return [r + 0.1, r - 0.1, r + 1, n + (b - a) / b].filter((x) => x > 0 && !near(x, r));
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "scale": ["Decimals count tenths and hundredths, so we make the bottom 10 or 100 by multiplying top and bottom by the same number."], "tenths": ["The first place after the point is tenths and the second is hundredths."], "whole": ["The whole number part goes in front of the point."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) =>
     s.id === "scale"
       ? `Multiply top and bottom by ${s.inputs[2]}: ${s.inputs[0]}/${s.inputs[1]} = ${s.value}`
@@ -251,6 +259,10 @@ const likeDec: Def = {
     return out;
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "compare|count places": ["Like decimals have the same number of decimal places."], "compare|compare values": ["A zero at the end of a decimal adds no tenths or hundredths, so it does not change the value."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}, so the answer is ${LETTER[Number(s.value)]}` : s.value === "same value" ? `${s.inputs[0]} has the same value: a zero at the end of a decimal does not change it` : `${s.inputs[0]}: both numbers have the same number of decimal places`),
   domain: [[0, 1], [0, 3239]],
   // the equivalent-decimal question does not use the third digit: keep one choice of it, so no question repeats
@@ -316,6 +328,10 @@ const twin: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "check": ["Twin primes are two primes that differ by 2, so both conditions must be checked."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}, so the answer is ${LETTER[Number(s.value)]}` : `${s.inputs[0]} and ${s.inputs[1]} are both prime, and ${s.inputs[1]} − ${s.inputs[0]} = 2`),
   domain: [[0, TWINS.length - 1], [0, NOT_TWIN.length - 1], [0, COUSIN.length - 1], [0, 3]],
   cap: 300,
@@ -367,6 +383,10 @@ const grid: Def = {
     return [r + 10, r - 10, r + 1, r - 1].filter((x) => x > 0 && x < 100 && x !== r);
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "count": ["The grid has 100 squares, and per cent means out of 100, so each square is 1%."], "rest": ["The whole grid is 100%, so the part not shaded is 100% minus the shaded part."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "count" ? `${s.value} of the 100 squares are shaded, so ${s.value}% is shaded` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so ${s.value}% is not shaded`),
   domain: [[1, 99], [0, 1]],
   difficulty: ([n, m]) => (n % 10 === 0 && !m ? 1 : m ? 3 : 2),
@@ -442,6 +462,10 @@ const pat2: Def = {
     ];
   },
   variants: () => [],
+  stepWhy: (s) => {
+    const w: Record<string, string[]> = { "shapes": ["A pattern can repeat its shapes and its colours on different cycles, so we find each repeat separately."], "colours": ["A pattern can repeat its shapes and its colours on different cycles, so we find each repeat separately."], "next": ["Continuing both repeats tells the next shape and the next colour."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+    return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+  },
   explain: (s) => (s.id === "pick" ? `That is option ${LETTER[Number(s.value)]}, so the answer is ${LETTER[Number(s.value)]}` : s.id === "next" ? `So the next item is a ${s.value}` : String(s.value).replace(/^the/, "The")),
   domain: [[2, 3], [2, 3], [0, 3], [0, 3], [7, 10]],
   // a pattern changing in two ways at once is Class 5 work, though repeating patterns start in Class 1

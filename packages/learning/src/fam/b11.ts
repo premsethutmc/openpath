@@ -392,6 +392,10 @@ export const B11: Def[] = [
     },
     distractors: ([m, e]) => [T2(m / 10, e - 1), T2(sciA(m), e - 1), T2(sciA(m), -e)],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "point": ["In scientific notation the front number is at least 1 and less than 10, so we move the point until it is.", "Each place the point moves is one power of ten; moving right for a small number gives a negative power."], "write": ["The front number and the power of ten together keep the same value as the original number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "point" ? (Number(s.value) > 0 ? `Move the decimal point ${s.value} places to the left to get ${s.inputs[1]}, so n = ${s.value}` : `Move the decimal point ${-Number(s.value)} places to the right to get ${s.inputs[1]}, so n = −${-Number(s.value)}`) : `${s.inputs[0]} × 10${sup(String(s.inputs[1]))}, written ${s.value}`),
     domain: [[101, 999], [-7, 10]],
     keep: ([m, e]) => m % 10 !== 0 && (e < 0 || e >= 4),
@@ -465,6 +469,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "shift": ["Multiplying by a power of ten moves the point right; a negative power means dividing by ten that many times, so the point moves left."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (Number(s.inputs[1]) > 0 ? `Multiply ${s.inputs[0]} by 10, ${s.inputs[1]} times: move the point ${s.inputs[1]} places to the right to get ${s.value}` : `Divide ${s.inputs[0]} by 10, ${-Number(s.inputs[1])} ${Number(s.inputs[1]) === -1 ? "time" : "times"}: move the point ${-Number(s.inputs[1])} places to the left to get ${s.value}`),
     // powers down to 10⁻³ only, so the answer and every option are written in ordinary place-value notation
     domain: [[101, 999], [-3, 8]],
@@ -525,6 +533,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["A square root splits a number into two equal factors, so we break the number into primes and look for pairs."], "pairs": ["Each pair of equal primes gives one prime to each of the two equal factors, so one from each pair makes the root."], "drop-point": ["A decimal is easier to root as a whole number over a power of ten, because each part can be rooted on its own."], "point": ["The square root of the bottom is a simple power of ten, so the decimal point is put back by dividing."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "drop-point" ? `${s.inputs[0]} = ${s.inputs[1]} ÷ 100, so find √${s.inputs[1]} first` : s.id === "factor" ? `${s.inputs[0]} = ${s.value}` : s.id === "pairs" ? `Take one prime from each pair: ${s.inputs[0]} = ${s.value}` : `√100 = 10, so divide by 10: ${s.value}`),
     domain: [[0, 1], [11, 120]],
     keep: ([d, n]) => (d === 0 ? n >= 26 : n <= 99 && n % 10 !== 0),
@@ -584,6 +596,10 @@ export const B11: Def[] = [
       return [T2(a + 1, a + 2), T2(a - 1, a), T2(a, a + 2)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "below": ["We look for the nearest perfect square just below the number."], "above": ["We look for the nearest perfect square just above the number."], "between": ["A bigger number has a bigger square root, so the root lies between the roots of those two squares."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "below" ? `${s.inputs[0]}² = ${s.value}, which is less than the number` : s.id === "between" ? `So the square root lies between ${s.inputs[0]} and ${s.inputs[1]}: ${s.value}` : `${s.inputs[0]}² = ${s.value}, which is more than the number`),
     domain: [[2, 999]],
     cap: 300,
@@ -634,6 +650,10 @@ export const B11: Def[] = [
       bug("just-n", "conceptual", SQ, `The answer was taken as ${n}. Try a small case: between 2² = 4 and 3² = 9 there are 5, 6, 7, 8 — four numbers, which is 2 × 2.`, n),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "gap": ["Taking the smaller square from the bigger one counts the numbers from one up to the other."], "inside": ["Only the numbers strictly between the squares are wanted, so the square at the end is left out."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "gap" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Leave out the square at the end: ${s.inputs[0]} − 1 = ${s.value}`),
     domain: [[2, 99]],
     difficulty: ([n]) => (n <= 12 ? 1 : n <= 30 ? 2 : 3),
@@ -688,6 +708,10 @@ export const B11: Def[] = [
     },
     distractors: ([r, b, g, q]) => (q >= 2 ? [1 / 2, q === 2 ? 1 : 0] : [1 / 2, 1]),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["Probability compares the outcomes we want with all the equally likely outcomes, so we count all of them first."], "favourable": ["Then we count the outcomes that fit what is asked."], "probability": ["Probability is the fitting outcomes divided by all the outcomes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `There are ${s.inputs.join(" + ")} = ${s.value} marbles in all` : s.id === "favourable" ? `${s.value} of them ${Number(s.value) === 1 ? "fits" : "fit"}: ${s.inputs[0]}` : `Probability = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${fracText(Number(s.inputs[0]), Number(s.inputs[1]))}`),
     figure: ([r, b, g]) => ({ type: "table", head: ["Colour", "Number of marbles"], rows: [["Red", r], ["Blue", b], ...(g ? [["Green", g]] : [])] }),
     domain: [[1, 9], [1, 9], [0, 6], [0, 3]],
@@ -748,6 +772,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read": ["Experimental probability uses what really happened, so we read how often the event happened."], "relative": ["Dividing by the number of trials gives the fraction of times it happened."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "read" ? `${s.inputs[0]} happened ${s.value} times` : `Experimental probability = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${fracText(Number(s.inputs[0]), Number(s.inputs[1]))}`),
     distractors: ([c, s, j]) => {
       const { n, f } = expData(c, s);
@@ -802,6 +830,10 @@ export const B11: Def[] = [
       ...(x ? [bug("added-then-multiplied", "procedural", SS, "Two stages were added and then multiplied by the third. Multiply all the stages.", (a + b) * x)] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "two": ["Each way for the first choice can go with each way for the second, so the counts multiply."], "three": ["Each new choice can go with every way so far, so we multiply again."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`,
     domain: [[0, 2], [2, 6], [2, 6], [0, 5]],
     keep: ([, , , x]) => x !== 1,
@@ -876,6 +908,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "space": ["Every outcome of the first can go with every outcome of the second, so the pairs are counted by multiplying."], "favourable": ["Then we count the pairs that fit what is asked."], "probability": ["Probability is the fitting outcomes divided by all the equally likely outcomes."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "space" ? `There are ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} equally likely pairs` : s.id === "favourable" ? `${s.value} pairs fit: ${s.inputs[0]}` : `Probability = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${fracText(Number(s.inputs[0]), Number(s.inputs[1]))}`),
     distractors: ([m, n, q, s]) => {
       let c = 0;
@@ -938,6 +974,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "add#": ["Each time round the loop, the current value of K is added to S, then K goes up by 1."], "stop": ["The loop stops as soon as its test fails, so S then holds the answer."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "stop" ? `K is now ${s.inputs[0]}, which is more than ${s.inputs[1]}, so stop: S = ${s.value}` : `S = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
     figure: ([a, d, N]) => ({ type: "table", head: ["Step", "Instruction"], rows: [["1", `Start with S = 0 and K = ${a}.`], ["2", "Add K to S."], ["3", `Increase K by ${d}.`], ["4", `If K is ${N} or less, go back to Step 2. Otherwise, stop.`]] }),
     domain: [[1, 9], [1, 5], [5, 40]],
@@ -1000,6 +1040,10 @@ export const B11: Def[] = [
       bug("past-the-end", "procedural", ALG, "One move too many was made (x − x = 0). The game stops as soon as the two cards are equal.", 0),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "move#": ["Taking the smaller number from the bigger one does not change their common factors, so the highest common factor stays the same while the numbers get smaller."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}: the cards now show ${s.value} and ${s.inputs[1]}`,
     domain: [[6, 90], [4, 60]],
     keep: ([a, b]) => {
@@ -1070,6 +1114,10 @@ export const B11: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "largest": ["Kaprekar's routine uses the biggest number the digits can make, digits from largest to smallest."], "smallest": ["It also uses the smallest number the digits can make, digits from smallest to largest."], "subtract": ["The routine takes the smaller from the bigger to make the next number."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "largest" ? `Digits from largest to smallest: ${s.value}` : s.id === "smallest" ? `Digits from smallest to largest: ${String(s.value).padStart(4, "0")}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[1000, 9999]],
     cap: 300,
@@ -1123,6 +1171,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "t#|multiply": ["The rule for an odd number is multiply by 3 and add 1."], "t#|divide": ["The rule for an even number is halve it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (Number(s.inputs[0]) % 2 ? `${s.inputs[0]} is odd: 3 × ${s.inputs[0]} + 1 = ${s.value}` : `${s.inputs[0]} is even: ${s.inputs[0]} ÷ 2 = ${s.value}`),
     domain: [[3, 60], [3, 8]],
     keep: ([n, k]) => !collatz(n, k - 1).includes(1),
@@ -1169,6 +1221,10 @@ export const B11: Def[] = [
       ...(s ? [bug("start-ignored", "procedural", CONJ, `The sum was taken from 1. It starts at ${2 * s + 1}, so take away 1 + 3 + … + ${2 * s - 1} = ${s}².`, n * n), bug("removed-too-many", "procedural", CONJ, `Too many odd numbers were taken away. Below ${2 * s + 1} there are ${s} odd numbers, so subtract ${s}².`, n * n - (s + 1) * (s + 1))] : []),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["The odd numbers from 1 make a square pattern: the first n of them always add to n²."], "square": ["The first n odd numbers add up to n × n, so we square the count."], "remove": ["The sum wanted does not start at 1, so we take away the odd numbers before it, which also make a square."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "count" ? `From 1 to ${s.inputs[0]} there are ${s.value} odd numbers` : s.id === "square" ? `So 1 + 3 + … + ${2 * Number(s.inputs[0]) - 1} = ${s.inputs[0]}² = ${s.value}` : `Take away 1 + 3 + … + ${s.inputs[2]} = ${Math.sqrt(Number(s.inputs[1]))}² = ${s.inputs[1]}: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[4, 50], [0, 20]],
     keep: ([n, s]) => s <= n - 3 && (s === 0 || s >= 2 || n <= 20),
@@ -1240,6 +1296,10 @@ export const B11: Def[] = [
       return [bug("only-test-for-3", "procedural", DIV, "Only the test for 3 was used. A number divisible by 6 must pass the tests for BOTH 2 and 3: its last digit must also be even.", smallest((y) => (S + y) % 3 === 0)), bug("only-test-for-2", "procedural", DIV, "Only the test for 2 was used. A number divisible by 6 must also have a digit sum that is a multiple of 3.", smallest((y) => (pos === d.length - 1 ? y : d[d.length - 1]) % 2 === 0)), bug("not-smallest", "procedural", DIV, "A digit that works was chosen, but not the smallest. Try 0, 1, 2 … in order.", largest((y) => (S + y) % 3 === 0 && (pos === d.length - 1 ? y : d[d.length - 1]) % 2 === 0))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "digit-sum": ["A number is divisible by 3 or 9 when its digit sum is, so we add the known digits."], "digit": ["We try the smallest digits first, so the first one that works is the smallest."], "alternate": ["A number is divisible by 11 when the difference of the sums of alternate digits is a multiple of 11 (or 0)."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "digit-sum" ? `The known digits add to ${s.inputs.join(" + ")} = ${s.value}` : s.id === "alternate" ? `Alternate digits from the right: one group adds to ${s.inputs[0]}, the other to ${s.inputs[1]} (not counting the box)` : digitWhy(s)),
     domain: [[0, 3], [0, 149]],
     keep: ([di, s]) => divSolve(di, s) !== null,
@@ -1308,6 +1368,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "total": ["In a magic square every row, column and diagonal adds to the same total, so a full line tells us that total."], "known": ["We add what is already in the line with the gap."], "missing": ["The gap must make the line up to the magic total."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "total" ? `A complete line: ${s.inputs.join(" + ")} = ${s.value}, so every line adds to ${s.value}` : s.id === "known" ? `The line with ? already has ${s.inputs.join(" + ")} = ${s.value}` : `? = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     figure: ([c, x, y, t]) => {
       const g: (number | string)[] = magicCells(c, x, y);
@@ -1371,6 +1435,10 @@ export const B11: Def[] = [
       return [...(c ? [bug("carry-forgotten", "procedural", ADDR, `The carry from the ones column was forgotten. P + ${b} = ${P + b}, so 1 ten is carried into the tens column.`, Math.floor(S / 10) - Math.floor(x / 10))] : []), bug("tens-of-answer", "procedural", DIG, "The tens digit of the answer was copied. Q is what must be added to the tens digit of the first number to make it.", Math.floor(S / 10) % 10)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "ones": ["Column addition starts at the ones, so we work out the ones digit first."], "carry": ["Anything 10 or more in a column carries 1 to the next column, so we check for a carry."], "tens": ["The tens column adds the tens digits and any carry."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "ones" ? `Ones column: P + ${s.inputs[1]} ends in ${s.inputs[0]}, so P = ${s.value}` : s.id === "carry" ? (s.value ? `${s.inputs[0]} + ${s.inputs[1]} = ${Number(s.inputs[0]) + Number(s.inputs[1])}: carry 1 ten` : `${s.inputs[0]} + ${s.inputs[1]} = ${Number(s.inputs[0]) + Number(s.inputs[1])}: nothing to carry`) : `Tens: ${s.inputs[1]} + Q + ${s.inputs[2]} = ${s.inputs[0]}, so Q = ${s.value}`),
     domain: [[10, 99], [10, 99], [0, 1]],
     keep: ([x, y]) => x % 10 !== Math.floor(y / 10),
@@ -1426,6 +1494,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "e#": ["Odd and even follow rules: even ± even and odd ± odd are even; a product is odd only if every number in it is odd."], "count": ["Now we count the ones that came out odd."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "count" ? `${s.value} of the five give an odd answer` : `${s.inputs[0]} gives an ${s.value ? "odd" : "even"} answer`),
     distractors: ([s]) => {
       const es = parData(s);
@@ -1475,6 +1547,10 @@ export const B11: Def[] = [
       bug("factor-only", "procedural", PROPN, `Only the factor ${W} ÷ ${a} was found. Multiply the ${c ? "cups of rice" : "height"} by it.`, W / a),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "factor": ["Every length in a resized picture is multiplied by the same scale factor, so we find it from a pair we know."], "scale": ["The other length is multiplied by the same scale factor."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "factor" ? `The scale factor is ${s.inputs[0]} ÷ ${s.inputs[1]} = ${Number.isInteger(Number(s.value)) ? s.value : `${s.inputs[0]}/${s.inputs[1]}`}` : `Multiply: ${s.inputs[0]} × ${Number.isInteger(Number(s.inputs[1])) ? s.inputs[1] : "the factor"} = ${s.value}`),
     domain: [[0, 1], [2, 12], [2, 20], [3, 30]],
     // each choice is shown as a photo AND as rice (prompt and word swap them): 1/3 to 1 cup of rice per person, photos 5 cm wide or more
@@ -1527,6 +1603,10 @@ export const B11: Def[] = [
     ],
     variants: () => [],
     distractors: ([, k]) => [k + 2, k - 1, k + 3].filter((v) => v >= 1 && v <= 25),
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "first": ["A shift code moves every letter the same number of places, so one letter and its code tell the shift."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]} is letter ${s.inputs[1]} and ${s.inputs[2]} is letter ${s.inputs[3]}: the shift is ${s.value} places${Number(s.inputs[3]) < Number(s.inputs[1]) ? " (going round past Z)" : ""}`,
     domain: [[0, WORDS.length - 1], [1, 25]],
     cap: 400,
@@ -1577,6 +1657,10 @@ export const B11: Def[] = [
       bug("divisor-given", "procedural", PROOF, `The number divided by was given. Follow each step with n for the secret number to see what is left.`, d),
     ],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "times": ["Calling the number n lets us follow the trick for every number at once."], "plus": ["Each instruction is done to the whole expression."], "divide": ["Dividing everything by the same number divides each term."], "minus": ["Taking away the starting number removes n, so the answer no longer depends on it."], "end": ["What is left is a plain number, the same whatever number was chosen."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "times" ? `Call the number n. Multiply by ${s.inputs[0]}: ${s.value}` : s.id === "plus" ? `Add ${s.inputs[0]}: ${s.value}` : s.id === "divide" ? `Divide everything by ${s.inputs[0]}: ${s.value}` : s.id === "minus" ? `Take away ${Number(s.inputs[0]) === 1 ? "n" : `${s.inputs[0]}n`}: the n is gone, leaving ${s.value}` : `Add ${s.inputs[1]}: ${s.value}`),
     domain: [[2, 5], [1, 4], [1, 12], [0, 6]],
     cap: 300,
@@ -1635,6 +1719,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "tally": ["Tallying counts how many times each value appears."], "add": ["The question asks about several values together, so we add their frequencies."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "tally" ? `Tally the ${s.inputs[0]} values: ${s.value}` : `Add the frequencies: ${s.inputs.join(" + ")} = ${s.value}`),
     figure: ([c, s, q]) => ({ type: "table", head: ["", "", "", "", "", ""], rows: chunk(freqData(c, s, q).xs, 6) }),
     domain: [[0, 2], [0, 59], [0, 1]],
@@ -1687,6 +1775,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["A group includes its lower end but not its upper end, so each value goes in exactly one group."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `Count the marks from ${s.inputs[0]} up to (but not including) ${s.inputs[1]}: ${s.value}`,
     figure: ([s]) => ({ type: "table", head: ["", "", "", "", "", ""], rows: chunk(groupData(s), 6) }),
     domain: [[0, 99], [0, 4]],
@@ -1746,6 +1838,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read": ["Each bar's height is its amount, read against the scale."], "total": ["A percentage is a part out of the whole, so we need the whole total first."], "percent": ["Dividing the part by the whole and multiplying by 100 gives the percentage."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "read" ? `Read the bars: ${s.value}` : s.id === "total" ? `Total: ${s.inputs.join(" + ")} = ${s.value}` : `${s.inputs[0]} out of ${s.inputs[1]} = ${s.inputs[0]} ÷ ${s.inputs[1]} × 100% = ${s.value}%`),
     figure: ([c, s]) => ({ type: "bars", title: BPC[c].desc, labels: BPC[c].labels, values: barData(c, s).v, scale: barData(c, s).u }),
     domain: [[0, 2], [0, 49], [0, 3]],
@@ -1808,6 +1904,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sort": ["The median is the middle value, so the values must be in order first."], "middle": ["With the values in order, the middle one has as many values above it as below it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "sort" ? `In order: ${s.value}` : s.inputs.length === 1 ? `The middle value is ${s.value}` : `The two middle values are ${s.inputs[0]} and ${s.inputs[1]}: (${s.inputs[0]} + ${s.inputs[1]}) ÷ 2 = ${s.value}`),
     domain: [[0, 79], [5, 10]],
     cap: 400,
@@ -1857,6 +1957,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["The mode is the value that appears most often, so we count each value."], "mode": ["The value with the highest count is the mode."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "count" ? `${s.inputs[0]} appears ${s.value} times, more than any other value` : `So the mode is ${s.value}`),
     domain: [[0, 199]],
     difficulty: ([s]) => (modeData(s).xs.length <= 10 ? 1 : 2),
@@ -1924,6 +2028,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "products": ["Each value appears as many times as its frequency, so value × frequency gives the total for that value."], "sum-fx": ["Adding these gives the total of all the values."], "sum-f": ["Adding the frequencies counts how many values there are."], "mean": ["The mean shares the total equally, so it is the total divided by how many values."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "products" ? `Multiply each value by its frequency: ${s.inputs.join(", ")} = ${s.value}` : s.id === "sum-fx" ? `Total of all values: ${s.value}` : s.id === "sum-f" ? `Number of values: ${s.inputs.join(" + ")} = ${s.value}` : `Mean = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     figure: ([s]) => {
       const { C, xs, fs } = fmeanData(s);
@@ -1994,6 +2102,10 @@ export const B11: Def[] = [
       return [bug("boundary-class-included", "conceptual", HIST, "The bar starting at the value was included. Its values are that value or more, so it does not count.", sum(f.slice(0, j + 1))), bug("one-class-short", "procedural", HIST, "The bar just below the value was left out. Every bar that ends at or below the value counts.", sum(f.slice(0, j - 1)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "read": ["Each bar's height shows how many values are in that group."], "add": ["The question asks about several groups together, so we add their bars."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "read" ? `Read the bar heights needed: ${s.value}` : `Add them: ${s.inputs.join(" + ")} = ${s.value}`),
     figure: ([s, q]) => {
       const { C, f, labels } = histData(s, q);
@@ -2051,6 +2163,10 @@ export const B11: Def[] = [
       return [bug(`trap-${p[0]}`, "conceptual", DIV, DSORT_SLIP[p[0]], d.trap)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "test": ["Each divisibility rule looks at the digits, so we can test without dividing."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 5], [0, 99]],
     difficulty: ([k]) => (k <= 2 ? 1 : k === 3 ? 2 : 3),
@@ -2135,6 +2251,10 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "s#|subtract": ["Kaprekar's routine makes the biggest and smallest numbers from the digits and takes one from the other; repeating it leads to a fixed number."], "s#|add": ["The routine adds a number to its reverse; repeating it usually leads to a palindrome."], "sum#": ["Adding the digits again and again keeps the same remainder on division by 9, until one digit is left."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.op === "add" && s.competency === ADD ? `Digit sum of ${s.inputs[0]}: ${s.value}` : `${s.inputs[0]} → ${s.value}`),
     domain: [[0, 2], [10, 9999]],
     keep: digOk,
@@ -2180,6 +2300,10 @@ export const B11: Def[] = [
       return [...(max !== n ? [bug("start-taken", "conceptual", CONJ, "The starting number was taken as the largest. Odd numbers make the sequence climb (3 × n + 1) before it falls.", n)] : [])].filter((b) => b.predict !== max);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "seq": ["The rule is: halve an even number, and multiply an odd number by 3 and add 1. We keep going until we reach 1."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `The sequence: ${s.inputs[0]}`,
     domain: [[0, 1], [3, 60]],
     keep: ([m, n]) => (m === 0 ? colInfo(n).steps <= 25 : colInfo(n).max <= 300),
@@ -2230,6 +2354,10 @@ export const B11: Def[] = [
       ].filter((b) => b.predict !== d.right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "powers": ["In scientific notation the power of ten tells the size first; a bigger power means a bigger number."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 399]],
     cap: 400,
@@ -2279,6 +2407,10 @@ export const B11: Def[] = [
       return [...(d !== 0 ? [bug("difference-reversed", "procedural", SCI, "The difference was taken the other way round: claim's power minus the true power.", -d)] : []), bug("digits-for-power", "procedural", SCI, "The number of digits was used as the true power; the true power is one less than the number of digits.", d - 1)];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "value": ["Multiplying the parts of the quantity gives its true size."], "power": ["The order of magnitude is the power of ten closest below it: one less than the number of digits."], "claim": ["Taking the true power from the claim's power tells how many times ten the claim is out by."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "value" ? `${s.inputs[0]} = ${inr(Number(s.value))}` : s.id === "power" ? `${inr(Number(s.inputs[0]))} has ${String(s.inputs[0]).length} digits, so it is about 10${sup(Number(s.value))}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 5], [1, 99], [0, 1], [-3, 3]],
     keep: magOk,
@@ -2341,6 +2473,10 @@ export const B11: Def[] = [
       return [`(${A}, ${neg(N + 1)})`, `(${A}, ${neg(N - 1)})`];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "front|multiply": ["Multiplication can be done in any order, so the front numbers and the powers of ten are multiplied separately."], "front|divide": ["The front numbers and the powers of ten can be divided separately."], "powers|add": ["Multiplying powers of ten adds the powers."], "powers|subtract": ["Dividing powers of ten subtracts the powers."], "normal": ["The front number must be at least 1 and less than 10; moving the point changes the power to keep the value the same."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "front" ? `First ${s.inputs[0]}: ${s.value}` : s.id === "powers" ? `Then ${s.inputs[0]}: ${s.value}` : `In scientific notation: ${String(s.value).replace(/\^(-?\d+)/, (_, k) => sup(Number(k)))}`),
     domain: [[0, 1], [11, 99], [11, 99], [-8, 12], [-8, 12]],
     keep: ([, a, b, e, f]) => a % 10 !== 0 && b % 10 !== 0 && e !== 0 && f !== 0,
@@ -2398,6 +2534,10 @@ export const B11: Def[] = [
       return [(x + 1) % 10, (x + 9) % 10, (x + 2) % 10];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "fill": ["Each letter stands for one digit, so trying digits until the sum works gives the letter."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `The puzzle is ${String(s.inputs[1]).replace("*", " × ").replace("+", " + ").replace("=", " = ")}, so the letter is ${s.value}`,
     domain: [[0, 1], [0, 75], [0, 6]],
     keep: cryptOk,
@@ -2445,6 +2585,10 @@ export const B11: Def[] = [
       return out.filter((x) => x.predict !== -1);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "chance": ["Probability is the fitting outcomes out of all the equally likely ones, and it sits on a scale from 0 (impossible) to 1 (certain)."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => String(s.inputs[0]),
     domain: [[0, 5], [0, 9], [0, 9]],
     keep: scaleOk,
@@ -2492,6 +2636,10 @@ export const B11: Def[] = [
       return d.bug ? [bug(d.bug.id, "conceptual", SS, d.bug.says, d.bug.at)] : [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "list": ["The sample space lists every possible outcome once."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 1], [0, 8], [0, 11]],
     keep: sslOk,
@@ -2530,6 +2678,10 @@ export const B11: Def[] = [
       ].filter((b) => b.predict !== right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "count": ["Fixing one place and arranging the rest counts each order exactly once; n things can be arranged in n! ways."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]}: ${s.value}`,
     domain: [[0, 4], [3, 6], [0, 19]],
     keep: ([t, n, s]) => n >= (t >= 3 ? 4 : 3) && n <= (t >= 3 ? 6 : 5) && !arrDup([t, n, s]),
@@ -2582,6 +2734,10 @@ export const B11: Def[] = [
             : [bug("products-only", "procedural", PROP, "Only x × y was checked; it changes from column to column, so 'neither' was chosen. Check y ÷ x as well: here it is the same in every column, so y is in direct proportion to x.", o.indexOf(2))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "test": ["In direct proportion y ÷ x stays the same; in inverse proportion x × y stays the same."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 3], [2, 9], [0, 5]],
     difficulty: ([t]) => (t === 0 ? 1 : t === 1 ? 2 : 3),
@@ -2615,6 +2771,10 @@ export const B11: Def[] = [
       return [...(other !== right ? [bug("wrong-branch", "procedural", ALG, "The other branch of a decision box was followed. Answer the question in the diamond for this input: Yes and No lead to different boxes.", other)] : []), ...(t === 4 ? [bug("loop-once-more", "procedural", ALG, "The loop ran one extra time. Check the decision before going round again.", right + x + 1), bug("loop-stopped-early", "procedural", ALG, "The loop stopped one time too early. Check the decision after each step.", right - x)] : [])].filter((b) => b.predict !== right);
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "trace": ["A flow chart is followed one box at a time; at each question box the answer chooses the path."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => `${s.inputs[0]}`,
     domain: [[0, 4], [1, 250]],
     keep: ([t, x]) => x >= FLOW[t].lo && x <= FLOW[t].hi,
@@ -2668,6 +2828,10 @@ export const B11: Def[] = [
       return [bug("key-backwards", "procedural", CIPH, "The key was read the wrong way: the code letters were looked up in the Plain row. To decode, find each letter in the Code row and read the Plain letter above it.", o.indexOf(subWord(subWord(WORDS[w], k), k)))];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "code|encode": ["A shift code moves every letter forward the same number of places in the alphabet."], "code|decode": ["Decoding undoes the code, so each letter moves back the same number of places."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 2], [0, 19], [2, 25]],
     cap: 450,
@@ -2706,6 +2870,10 @@ export const B11: Def[] = [
       return d.trap >= 0 ? [bug(p[0] ? "asking-is-secondary" : "copied-is-primary", "conceptual", FREQ, p[0] ? "Asking other people questions was taken as secondary data. A survey you carry out yourself is primary data, even though other people give the answers." : "Copying figures out yourself was taken as collecting primary data. The figures were collected by someone else, so they are secondary data, whoever copies them.", d.trap)] : [];
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "who": ["Primary data is collected first-hand; secondary data comes from someone else's records."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 1], [0, 199]],
     keep: (p) => !primDup(p),
@@ -2759,6 +2927,10 @@ export const B11: Def[] = [
       return out;
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "sets": ["Events are mutually exclusive when they share no outcome, and exhaustive when together they cover every outcome."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => s.inputs.join("; "),
     domain: [[0, 2], [0, 9], [0, 9]],
     keep: mexOk,
