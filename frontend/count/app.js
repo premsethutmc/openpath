@@ -97,7 +97,9 @@ const sceneryInk={
  market:'<path d="M6 75h388M6 142h388M6 206h388M6 270h388M6 334h388" stroke="#ffe4a8" stroke-width="2" opacity=".4"/><path d="M0 62H400" stroke="#a84f39" stroke-width="7" opacity=".42"/>',
  road:'<path d="M0 61H400M0 338H400" stroke="#fff1be" stroke-width="3" opacity=".46"/><path d="M0 133H400M0 269H400" stroke="#353444" stroke-width="2" stroke-dasharray="3 18" opacity=".33"/>'
 };
-const sceneSVG=bg=>`<svg class="bgsvg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[bg]()}<g fill="none" stroke-linecap="round">${sceneryInk[bg]}</g><rect width="400" height="400" fill="url(#pageLight)"/></svg>`;
+const vectorScene=bg=>`<svg class="bgsvg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${SCENES[bg]()}<g fill="none" stroke-linecap="round">${sceneryInk[bg]}</g><rect width="400" height="400" fill="url(#pageLight)"/></svg>`;
+const sceneSVG=bg=>vectorScene(bg)+(bg==='pond'?'<img class="bgsvg pond-paint" src="pond.webp" alt="" aria-hidden="true">':'');
+
 
 const PLAN=['count','find','more','make','quick'];
 const SKILLS={count:'Count',find:'Find',more:'Compare',make:'Make',quick:'Quick look'};
@@ -178,7 +180,7 @@ function newRound(){
  draw();
 }
 function setMsg(b,m){$('big').innerHTML=b===''||b==null?'':b+(Number.isInteger(+b)&&+b<=10&&b!==''?`<small>${W(+b)}</small>`:'');$('msg').innerHTML=m}
-function drawBg(){$('scene').className='scene'+(pg.air?' air':'')+(pg.bg==='tiles'?' tiles-land':'');$('scene').innerHTML=sceneSVG(pg.bg)+'<div class="layer" id="items"></div><div class="cover" id="cover" hidden>?</div>'}
+function drawBg(){$('scene').className='scene'+(pg.air?' air':'')+(pg.bg==='tiles'?' tiles-land':pg.bg==='pond'?' pond-land':'');$('scene').innerHTML=sceneSVG(pg.bg)+'<div class="layer" id="items"></div><div class="cover" id="cover" hidden>?</div>'}
 function draw(fresh){
  $('items').innerHTML=items.map(t=>`<button class="it${t.on?' on':''}${t.on&&t.id===fresh?' fresh':''}${mode==='more'&&t.k===pair[1]?' b2':''}" data-id="${t.id}" style="left:${t.x}%;top:${t.y}%;--d:${t.d}s" aria-label="${NAMES[t.k][0]}${t.on?', '+t.num:''}">${use(t.k)}<span class="n">${t.on?t.num:''}</span></button>`).join('');
 }
