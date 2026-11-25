@@ -430,3 +430,98 @@ test("tally@1: the counter and the lift counts every number, pauses at 0, keeps 
   const both = E.release(any, pointer(any, first, x0, y0, 0), 120, 100);
   assert.equal(readout(any, both), "6 + 2 = 8"); assert.ok(met(any, both));
 });
+
+test("boxes@1: things in two boxes are counted box by box, then put on the ten-spot board in order", async () => {
+  const E = await import("../../../packages/learning/src/scene");
+  const { boxesNow } = await import("../../../packages/learning/src/boxes");
+  const s: Scene = { type: "scene", kind: "boxes", a: 3, b: 2, thing: "🥭", names: ["mango", "mangoes"], prompt: "Count the mangoes in this box. Tap each one.", success: "Well done!", goal: { measure: "placed", equals: 5 } };
+  assert.deepEqual(check(s), []);
+  assert.equal(met(s, initial(s)), false);
+  assert.ok([...states(s)].some((st) => met(s, st)), "the goal is reachable by the slider too");
+  // refused: a total over the board's ten, a box with nothing, a goal that is not every thing on the board
+  assert.match(check({ ...s, a: 6, b: 5, goal: { measure: "placed", equals: 11 } }).join(), /at most 10/);
+  assert.match(check({ ...s, b: 0, goal: { measure: "placed", equals: 3 } }).join(), /from 1/);
+  assert.match(check({ ...s, a: 2.5 }).join(), /from 1/);
+  assert.match(check({ ...s, goal: { measure: "placed", equals: 4 } }).join(), /every thing/);
+  assert.match(check({ ...s, names: ["mango"] as unknown as [string, string] }).join(), /names/);
+  // the description says what is there and what to do, never the sum
+  assert.ok(describe(s).includes("3 in the first box") && describe(s).includes("ten spots") && !describe(s).includes("5"));
+  assert.ok(draggable(s));
+  // a tap, as the player sends it: a finger goes down on a thing and comes up where it went down
+  const tap = (st: Record<string, number>, i: number) => E.release(s, pointer(s, st, ...xy(st, i), grip(s, st, ...xy(st, i))), ...xy(st, i));
+  const xy = (st: Record<string, number>, i: number): [number, number] => {
+    const hit = draw(s, st).find((d) => d.t === "rect" && d.tap?.i === i) as { x: number; y: number; w: number; h: number } | undefined;
+    assert.ok(hit, `thing ${i} is drawn as a button`);
+    return [hit.x + hit.w / 2, hit.y + hit.h / 2];
+  };
+  const said = (a: Record<string, number>, b: Record<string, number>) => E.frames(s, a, b).map((f) => f.say).filter(Boolean);
+  let st: Record<string, number> = initial(s);
+  assert.equal(E.cue(s, st), "Count this box");
+  assert.equal(draw(s, st).filter((d) => d.t === "rect" && d.tap).length, 5, "five things, each a button");
+  // the second box first: refused, it is the first box that shakes, "First this box."
+  const wrong = tap(st, 3);
+  assert.equal(measures(s, wrong).counted, 0);
+  assert.equal(E.nudge(s, wrong), "First this box.");
+  assert.deepEqual(said(st, wrong), ["First this box."]);
+  assert.ok(draw(s, wrong).some((d) => d.role.startsWith("boxes-box-no")));
+  st = wrong;
+  // count the first box: each tap says its number; a thing tapped twice is not counted twice
+  let next = tap(st, 1); assert.deepEqual(said(st, next), ["one"]); st = next;
+  assert.equal(E.nudge(s, st), null, "a good tap clears the refusal");
+  assert.equal(measures(s, tap(st, 1)).counted, 1);
+  next = tap(st, 0); assert.deepEqual(said(st, next), ["two"]); st = next;
+  assert.ok(draw(s, st).some((d) => d.t === "text" && d.role === "boxes-count-text" && d.s === "2"), "the thing is numbered");
+  next = tap(st, 2); assert.deepEqual(said(st, next), ["three", "three mangoes.", "Now count this box."]); st = next;
+  assert.equal(E.cue(s, st), "Now count this box");
+  assert.ok(draw(s, st).some((d) => d.t === "text" && d.role === "boxes-badge-text" && d.s === "3"), "the first box has its number");
+  assert.equal(readout(s, st), "");
+  // now the first box is refused: "Now this box."
+  assert.equal(E.nudge(s, tap(st, 0)), "Now this box.");
+  // the second box counts from 1 again; its last thing starts the finger's demonstration, which puts one thing on
+  next = tap(st, 4); assert.deepEqual(said(st, next), ["one"]); st = next;
+  next = tap(st, 3);
+  const demo = E.frames(s, st, next);
+  assert.deepEqual(demo.map((f) => f.say).filter(Boolean), ["two", "two mangoes.", "Watch. Put them on the board, one by one.", "one", "Now you. Move the rest."]);
+  assert.ok(demo.some((f) => f.motion) && demo.filter((f) => !f.motion).some((f) => f.state.fx !== undefined), "the finger slides, and is still shown without motion");
+  assert.ok(demo.some((f) => E.cue(s, f.state) === "Watch") && draw(s, demo.find((f) => f.state.carry)!.state).some((d) => d.role === "boxes-finger"));
+  st = next;
+  assert.equal(measures(s, st).placed, 1);
+  assert.equal(readout(s, st), "3 and 2");
+  assert.equal(E.cue(s, st), "Now you");
+  // the second box before the first is empty: refused
+  const early = tap(st, 4);
+  assert.equal(measures(s, early).placed, 1); assert.equal(E.nudge(s, early), "First this box.");
+  // a drag let go away from the board puts nothing on; let go on the board, it goes on
+  const [x1, y1] = xy(st, 1);
+  let held = pointer(s, st, x1, y1, grip(s, st, x1, y1)); held = pointer(s, held, x1 + 40, y1 + 4, 1);
+  assert.ok(draw(s, held).some((d) => d.role === "boxes-held"), "the thing follows the finger");
+  assert.equal(measures(s, E.release(s, held, x1 + 40, y1 + 4)).placed, 1, "let go in the box: it goes back");
+  held = pointer(s, held, 170, 230, 1);
+  next = E.release(s, held, 170, 230); assert.deepEqual(said(st, next), ["two"]); st = next;
+  // a tap, and Enter on the thing (press), put the rest on; the count goes on along the board, with a "+" after 3
+  next = E.press(s, st, 2); assert.deepEqual(said(st, next), ["three"]); st = next;
+  assert.ok(draw(s, st).some((d) => d.role === "boxes-plus"));
+  next = tap(st, 4); assert.deepEqual(said(st, next), ["four"]); st = next;
+  assert.equal(met(s, st), false);
+  next = tap(st, 3);
+  const end = E.frames(s, st, next);
+  assert.deepEqual(end.map((f) => f.say), ["five", "three plus two makes five."]);
+  assert.equal(readout(s, end[0].state), "3 and 2", "the sum is shown with the last words");
+  st = next;
+  assert.ok(met(s, st));
+  assert.equal(readout(s, st), "3 + 2 = 5");
+  assert.equal(E.cue(s, st), "Well done!");
+  assert.ok(draw(s, st).filter((d) => d.role === "boxes-on").length === 5 && !draw(s, st).some((d) => d.t === "rect" && d.tap));
+  // the slider goes through the same steps in the plain order, and only its last step is the goal
+  const steps = [...states(s)];
+  assert.equal(steps.length, 10);
+  assert.deepEqual(steps.map((x) => met(s, x)), [false, false, false, false, false, false, false, false, false, true]);
+  assert.deepEqual(steps.map((x) => [measures(s, x).counted, measures(s, x).placed]).slice(4, 7), [[4, 0], [5, 1], [5, 2]]);
+  // any small adding story fits: 7 balloons and 3 more
+  const big: Scene = { ...s, a: 7, b: 3, thing: "🎈", names: ["balloon", "balloons"], goal: { measure: "placed", equals: 10 } };
+  assert.deepEqual(check(big), []);
+  const { boxesLayout, boxesThingXY } = await import("../../../packages/learning/src/scene-figures");
+  const L = boxesLayout(7, 3);
+  for (let i = 0; i < 10; i++) { const [x, y] = boxesThingXY(L, 7, 3, i), bx = L.box[i < 7 ? 0 : 1]; assert.ok(x > bx.x && x < bx.x + bx.w && y > bx.y && y < bx.y + bx.h, `thing ${i} sits in its box`); }
+  assert.ok(boxesNow(big, initial(big)).want === 1);
+});

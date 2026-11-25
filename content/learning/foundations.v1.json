@@ -24177,47 +24177,30 @@
    "screens": [
     {
      "title": "Plus and equals",
+     "scene": {
+      "type": "scene",
+      "kind": "boxes",
+      "a": 3,
+      "b": 2,
+      "thing": "🥭",
+      "names": [
+       "mango",
+       "mangoes"
+      ],
+      "prompt": "Count the mangoes in this box. Tap each one.",
+      "success": "Well done!",
+      "goal": {
+       "measure": "placed",
+       "equals": 5
+      }
+     },
      "text": [
-      "Put 2 mangoes on a plate. Now put 1 more mango on it. Count them all: 1, 2, 3. There are 3 mangoes.",
-      "We write this in a short way: 2 + 1 = 3.",
-      "The sign + is called plus. It means put together. The sign = is called equals. It means makes, or is the same as.",
-      "So 2 + 1 = 3 is read: 2 plus 1 equals 3. When you see 2 + 1 = ? it is asking: how many in all?"
+      "3 and 2 make 5. We write 3 + 2 = 5: + is plus, = is equals."
      ],
      "check": {
       "question": "What is 1 + 1?",
       "answer": "2"
-     },
-     "ask": "3 + 2 = ?",
-     "steps": [
-      {
-       "do": "Show 3.",
-       "lines": [
-        "● ● ●"
-       ],
-       "why": [
-        "Start with 3 balls in a row."
-       ]
-      },
-      {
-       "do": "Bring 2 more.",
-       "lines": [
-        "● ● ● ● ●"
-       ],
-       "why": [
-        "+ means \"put together with\"."
-       ]
-      },
-      {
-       "do": "Count them all.",
-       "lines": [
-        "1, 2, 3, 4, 5",
-        "3 + 2 = 5"
-       ],
-       "why": [
-        "= means \"is the same as\". 3 and 2 together are the same as 5."
-       ]
-      }
-     ]
+     }
     },
     {
      "title": "Ride the lift",

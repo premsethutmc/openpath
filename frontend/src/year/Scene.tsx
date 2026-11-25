@@ -10,10 +10,16 @@
 import { createElement, useEffect, useMemo, useRef, useState, type JSX, type KeyboardEvent, type PointerEvent, type ReactNode, type SVGProps } from "react";
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
-import { check, controls, describe, draw, draggable as follows, frames, grip, initial, met, nudge, pointer, readout, release, sceneBox, set, tallyOrder, type Frame, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { check, controls, cue, describe, draw, draggable as follows, frames, grip, initial, met, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Frame, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
-function shape(s: Shape, i: number): JSX.Element {
+/** `onTap`: what Enter or Space does on a thing the learner taps (boxes@1); such a shape is a focusable button. */
+function shape(s: Shape, i: number, onTap?: (i: number, e: KeyboardEvent<SVGElement>) => void): JSX.Element {
   const c = `sc-${s.role}`;
+  if (s.t === "rect" && s.tap) {
+    const k = s.tap.i;
+    return <rect key={`tap${k}`} className={c} x={s.x} y={s.y} width={s.w} height={s.h} rx={12} role="button" tabIndex={0} aria-label={s.tap.label} data-tap={k}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTap?.(k, e); } }} />;
+  }
   // a "roll" text is new each time it changes, so its CSS entrance (the counter's digits rolling) plays on every change
   if (s.t === "text" && s.role.includes("roll")) {
     const t = <text key={`${i}:${s.s}`} className={c} x={s.x} y={s.y} textAnchor="middle">{s.s}</text>;
@@ -57,15 +63,21 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
   // read-aloud@1 (the counter and the lift, for a child who may not read): the prompt is said when the picture opens,
   // a refusal ("Not yet …") when it happens, and the success line when the goal is reached; a speaker button repeats
-  const speaks = ok && scene.kind === "tally";
+  // boxes@1 speaks every move: each picture of a move can carry a line (Frame.say), and the speaker repeats the last one
+  const talks = ok && scene.kind === "boxes";
+  const speaks = ok && (scene.kind === "tally" || talks);
   const refusal = speaks && touched ? nudge(scene, state) : null;
+  const lastSaid = useRef<string | null>(null);
+  const say = (t?: string) => { if (!t) return; lastSaid.current = t; sayAloud(t); };
   const [doneNow, setDoneNow] = useState(false);
   // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
   const said = useRef(false);
-  const sayFirst = () => { if (speaks && !said.current) { said.current = true; sayAloud(scene.prompt); } };
+  const sayFirst = () => { if (speaks && !said.current) { said.current = true; lastSaid.current = scene.prompt; sayAloud(scene.prompt); } };
+  // boxes@1: the first tap only starts (says what to do), where the phone can speak: the mock's "Start"
+  const starting = () => { if (!talks || said.current || !canSpeak()) return false; sayFirst(); return true; };
   useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => { if (refusal) sayAloud(refusal); }, [refusal, state.refused]);
-  useEffect(() => { if (speaks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, doneNow, scene]);
+  useEffect(() => { if (refusal && !talks) sayAloud(refusal); }, [refusal, state.refused]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (speaks && !talks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, talks, doneNow, scene]);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const gate = scene.first && picked !== scene.first.right ? scene.first : null;
@@ -84,9 +96,10 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     live.current = next;
     setState(next);
     if (scene.kind === "array" && scene.log && triedLine(scene, next.r) && !tried.includes(next.r)) setTried([...tried, next.r]);
-    if (fr.length === 1) { finish(next); return; }
+    if (fr.length === 1) { say(fr[0].say); finish(next); return; }
     // one picture after another; the goal is said once the last one is shown
     const play = (k: number) => {
+      say(fr[k].say);
       if (k >= fr.length - 1) {
         timer.current = null; setShown(null); finish(next);
         const q = queued.current;
@@ -107,6 +120,14 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const move = (e: PointerEvent<SVGSVGElement>) => { const [x, y] = at(e); apply(pointer(scene, live.current, x, y, hold.current)); };
   const letGo = (e: PointerEvent<SVGSVGElement>) => { if (!dragging.current) return; dragging.current = false; const [x, y] = at(e); apply(release(scene, live.current, x, y)); };
   const done = !busy && (reached || met(scene, state));
+  // boxes@1 by keyboard: Enter on a thing is a tap; focus stays on that thing, or goes to the first one left
+  const tapKey = (i: number, e: KeyboardEvent<SVGElement>) => {
+    if (starting() || busy) return;
+    const svg = e.currentTarget.ownerSVGElement;
+    apply(press(scene, live.current, i));
+    setTimeout(() => { const el = svg?.querySelector<SVGElement>(`[data-tap="${i}"]`) ?? svg?.querySelector<SVGElement>("[data-tap]"); el?.focus(); }, 0);
+  };
+  const line = cue(scene, view);
   // every control is also a native slider (keyboard and switch access); more than two are folded away under the picture
   const sliders = cs.map((c) => (
     <label key={c.key}>
@@ -129,17 +150,17 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
         },
       } : {})}>
       {/* what to do is read before the picture, not found under it */}
-      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onPointerDown={(e) => e.stopPropagation()} onClick={() => { said.current = true; sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt)); }}><span aria-hidden="true">🔊</span></button>}</p>}
+      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet ? scene.success : line ?? scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onPointerDown={(e) => e.stopPropagation()} onClick={() => { said.current = true; if (talks) { sayAloud(lastSaid.current ?? scene.prompt); return; } sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt)); }}><span aria-hidden="true">🔊</span></button>}</p>}
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${box.w} ${box.h}`}
-        aria-hidden="true"
+        aria-hidden={talks ? undefined : "true"}
         className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : "scene-drag") : undefined}
-        onPointerDown={draggable ? (e) => { if (busy && scene.kind !== "tally") return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
+        onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally")) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? letGo : undefined}
         onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, live.current, -box.w, box.h)); } : undefined}
       >
-        {draw(scene, view).map(shape)}
+        {draw(scene, view).map((d, i) => shape(d, i, tapKey))}
       </svg>}
       {/* a refused tile is said right under the picture, big, beside where the tiles are */}
       {speaks && <p className="scene-nudge scene-nudge-big" role="status" data-testid="scene-not-yet">{!done && refusal}</p>}
@@ -153,7 +174,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
         </div>
       )}
       {/* commas are dragged where they sit; their sliders are for a keyboard or a switch, so they are folded away too */}
-      {gate || (young && scene.kind === "tally") ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
+      {gate || (young && (scene.kind === "tally" || talks)) ? null : cs.length > 2 || scene.kind === "commas" || scene.kind === "pick" || scene.kind === "tally" || talks ? <details className="scene-controls many"><summary>Set by sliders</summary>{sliders}</details> : <div className="scene-controls">{sliders}</div>}
       {!gate && <p className="scene-readout" aria-live="polite">{readout(scene, view)}</p>}
       {tried.length > 0 && (
         <div className="scene-tried" data-testid="scene-tried">
@@ -170,7 +191,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
 export function SceneFigure({ scene, state, label }: { scene: Scene; state?: SceneState; label: string }) {
   return (
     <figure className="scene scene-figure" data-scene-figure={scene.kind}>
-      <svg viewBox={`0 0 ${sceneBox(scene).w} ${sceneBox(scene).h}`} role="img" aria-label={label}>{draw(scene, { ...initial(scene), ...state }).map(shape)}</svg>
+      <svg viewBox={`0 0 ${sceneBox(scene).w} ${sceneBox(scene).h}`} role="img" aria-label={label}>{draw(scene, { ...initial(scene), ...state }).map((d, i) => shape(d, i))}</svg>
     </figure>
   );
 }

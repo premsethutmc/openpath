@@ -141,3 +141,40 @@
 @keyframes sc-tally-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
 @keyframes sc-tally-march { to { stroke-dashoffset: -26; } }
 @media (prefers-reduced-motion: reduce) { .scene [class*="sc-tally"] { animation: none !important; transition: none !important; } }
+/* boxes@1: things in two boxes, then the wooden ten-spot board (the approved mango mock: leaf-green ground, cream boxes,
+ * green number badges, gold for what to touch now). Its own ground, light and dark; big emoji things. */
+.scene[data-scene="boxes"] svg, .scene[data-scene-figure="boxes"] svg { --bx-bg: #eaf6e4; --bx-box: #fff8e6; --bx-boxline: #c9934e; --bx-wood: #d9a066; --bx-woodline: #b07a43; --bx-spot: #f7e3c4; background: var(--bx-bg); max-width: 420px; margin: 0 auto; overflow: visible; -webkit-user-select: none; user-select: none; }
+@media (prefers-color-scheme: dark) {
+  .scene[data-scene="boxes"] svg, .scene[data-scene-figure="boxes"] svg { --bx-bg: #10230f; --bx-box: #2a3a20; --bx-boxline: #7a5a2c; --bx-wood: #8a5a2b; --bx-woodline: #5e3b19; --bx-spot: #c79a63; }
+}
+.scene[data-scene="boxes"] .scene-goal { min-height: 2.6em; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 1.5rem; font-weight: 800; line-height: 1.15; }
+.scene[data-scene="boxes"] .scene-say { min-width: 52px; min-height: 52px; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
+.scene[data-scene="boxes"] .scene-readout { min-height: 1.45em; margin: 8px 0 0; font-size: 2.6rem; font-weight: 800; letter-spacing: 1px; }
+.scene .sc-boxes-box, .scene [class^="sc-boxes-box-no"] { fill: var(--bx-box); stroke: var(--bx-boxline); stroke-width: 4; rx: 16px; }
+.scene .sc-boxes-glow, .scene [class^="sc-boxes-glow-no"] { fill: none; stroke: #f4b400; stroke-width: 6; rx: 20px; }
+.scene [class^="sc-boxes-thing"] { font-size: 46px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.scene [class^="sc-boxes-thing-done"] { filter: saturate(1.25); }
+.scene [class^="sc-boxes-thing-ghost"] { opacity: 0.25; }
+.scene [class^="sc-boxes-count"], .scene [class^="sc-boxes-num"] { fill: #fff; rx: 11px; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35)); pointer-events: none; }
+.scene [class^="sc-boxes-count"][class*="-text"], .scene [class^="sc-boxes-num"][class*="-text"] { fill: #222; font-size: 16px; font-weight: 800; filter: none; }
+.scene .sc-boxes-num-lit { fill: #f4b400; }
+.scene [class^="sc-boxes-badge"] { fill: #2f8f3a; rx: 16px; pointer-events: none; }
+.scene [class^="sc-boxes-badge-text"] { fill: #fff; font-size: 24px; font-weight: 800; }
+.scene .sc-boxes-badge, .scene .sc-boxes-badge-text { transform-box: fill-box; transform-origin: center; animation: sc-boxes-pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.scene .sc-boxes-hit { fill: transparent; stroke: none; cursor: pointer; outline: none; }
+.scene .sc-boxes-hit:focus-visible { stroke: #f4b400; stroke-width: 4; }
+.scene .sc-boxes-board { fill: var(--bx-wood); stroke: var(--bx-woodline); stroke-width: 6; rx: 22px; }
+.scene .sc-boxes-spot, .scene .sc-boxes-spot-next { fill: var(--bx-spot); stroke: rgba(0, 0, 0, 0.18); stroke-width: 2; }
+.scene .sc-boxes-spot-next { stroke: #f4b400; stroke-width: 4; stroke-dasharray: 8 5; transform-box: fill-box; transform-origin: center; animation: sc-boxes-pulse 1s ease-in-out infinite; }
+.scene .sc-boxes-on { font-size: 40px; text-anchor: middle; dominant-baseline: central; pointer-events: none; transform-box: fill-box; transform-origin: center; animation: sc-boxes-pop 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.scene .sc-boxes-plus { fill: #fff; font-size: 30px; font-weight: 800; paint-order: stroke; stroke: rgba(0, 0, 0, 0.45); stroke-width: 3px; pointer-events: none; }
+.scene .sc-boxes-held { font-size: 56px; text-anchor: middle; dominant-baseline: central; pointer-events: none; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3)); }
+.scene .sc-boxes-finger { font-size: 44px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+/* a refused box shakes with everything in it (two names, so a second refusal plays again) */
+.scene [class^="sc-boxes"][class$="-no"] { transform-box: view-box; animation: sc-boxes-no 0.5s; }
+.scene [class^="sc-boxes"][class$="-no2"] { transform-box: view-box; animation: sc-boxes-no2 0.5s; }
+@keyframes sc-boxes-no { 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+@keyframes sc-boxes-no2 { 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+@keyframes sc-boxes-pulse { 50% { transform: scale(1.06); } }
+@keyframes sc-boxes-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .scene [class*="sc-boxes"] { animation: none !important; transition: none !important; } }
