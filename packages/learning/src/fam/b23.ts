@@ -414,6 +414,10 @@ export const B23: Def[] = [
       return S.slips.map((x) => Bg(x.id, x.kind, x.comp, x.says(L), ctrOrder(p).indexOf(x.to)));
     },
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "identify|name the centre": ["Each special point of a triangle is where three special lines meet, so naming the lines names the point."], "identify|name the lines": ["Each special point of a triangle is where one kind of special line meets, so the point tells us the lines."], "identify|name the segment": ["Each special line is defined by where it starts and ends and how it meets the side, so checking those names it."], "pick": ["Each option is checked against what we worked out, and only one of them agrees with it."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: D_CTR,
     difficulty: ([k]) => STMTS[k].level,
@@ -467,6 +471,10 @@ export const B23: Def[] = [
     },
     distractors: ([f, x]) => [x, cenAns([f, x]) + 1, 2 * cenAns([f, x])].filter((v) => v !== cenAns([f, x])),
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "part": ["The centroid cuts each median in the ratio 2 : 1, so the median is made of 3 equal parts."], "scale": ["The longer piece, from the corner to the centroid, is 2 of those parts."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) => (s.id === "part" ? `One part: ${s.inputs[0]} cm makes ${s.inputs[1]} part${s.inputs[1] === 1 ? "" : "s"}, so one part is ${Number(s.value)} cm` : `${s.inputs[1]} part${s.inputs[1] === 1 ? "" : "s"} of ${Number(s.inputs[0])} cm: ${Number(s.value)} cm`),
     domain: D_CEN,
     keep: K_CEN,
@@ -534,6 +542,10 @@ export const B23: Def[] = [
     distractors: (p) => [incAns(p) + 10, incAns(p) - 10, 180 - incAns(p)].filter((v) => v > 0 && v < 180 && v !== incAns(p)),
     range: [1, 179],
     variants: () => [],
+    stepWhy: (s) => {
+      const w: Record<string, string[]> = { "base|subtract": ["The three angles of a triangle add up to 180°, so the two base angles together are 180° minus the top angle."], "base|add": ["The angle at the incentre depends on the two base angles together, so we add them first."], "halves": ["The incentre lies on the lines that cut each angle in half, so the small triangle gets half of each base angle."], "rest": ["The angles of the small triangle also add up to 180°."], "excess": ["The angle at the incentre is always 90° plus half the top angle, so the extra over 90° is half of it."], "double": ["That was half the angle, so doubling gives the whole angle."] };
+      return w[`${s.id}|${s.op}`] ?? w[s.id] ?? w[`${s.id.replace(/\d+$/, "#")}|${s.op}`] ?? w[s.id.replace(/\d+$/, "#")] ?? w["*"] ?? null;
+    },
     explain: (s) =>
       s.id === "base"
         ? s.op === "add"
