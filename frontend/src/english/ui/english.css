@@ -458,6 +458,7 @@ button:disabled {
 .subject-tile.english { background: radial-gradient(120% 140% at 100% 0%, #9b8cff 0%, transparent 55%), linear-gradient(135deg, #6a55f0 0%, #4a36c9 100%); }
 .subject-tile.maths { background: radial-gradient(120% 140% at 100% 0%, #5fe0b4 0%, transparent 55%), linear-gradient(135deg, #14a37a 0%, #0b7457 100%); box-shadow: 0 14px 30px -14px rgba(8, 90, 66, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
 .subject-tile.tamil { background: radial-gradient(120% 140% at 100% 0%, #ffc46b 0%, transparent 55%), linear-gradient(135deg, #f28c28 0%, #c8590f 100%); box-shadow: 0 14px 30px -14px rgba(150, 70, 10, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
+.subject-tile.count { background: radial-gradient(120% 140% at 100% 0%, #8fd9ff 0%, transparent 55%), linear-gradient(135deg, #2f7de1 0%, #1c58bf 100%); box-shadow: 0 14px 30px -14px rgba(20, 70, 160, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
 .tamil-glyph { font-family: "Noto Sans Tamil", "Tamil Sangam MN", Latha, system-ui, sans-serif; font-weight: 800; }
 /* two soft circles in the corner */
 .subject-tile::before,
