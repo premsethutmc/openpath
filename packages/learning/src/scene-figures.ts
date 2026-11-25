@@ -410,7 +410,7 @@ export function boxesDraw(L: BoxesLayout, v: BoxesView): Shape[] {
     text(x, y, v.thing, "boxes-on");
     pill(x + L.r - 8, y + L.r - 8, String(i + 1), i === v.lit ? "boxes-num-lit" : "boxes-num");
   });
-  if (v.gone.length >= v.a && v.b > 0) { const [x, y] = L.spots[v.a]; text(x - L.r - 4, y + 10, "+", "boxes-plus"); }
+  if (v.gone.length >= v.a && v.b > 0) { const [x, y] = L.spots[v.a]; text(x - L.r - 4, y - 10, "+", "boxes-plus"); }
   // what is in the hand, over everything; the finger under it
   if (v.held) text(v.held.x, v.held.y, v.thing, "boxes-held");
   if (v.finger) text(v.finger[0], v.finger[1], "👆", "boxes-finger");

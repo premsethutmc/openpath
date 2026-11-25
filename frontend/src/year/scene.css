@@ -147,7 +147,8 @@
 @media (prefers-color-scheme: dark) {
   .scene[data-scene="boxes"] svg, .scene[data-scene-figure="boxes"] svg { --bx-bg: #10230f; --bx-box: #2a3a20; --bx-boxline: #7a5a2c; --bx-wood: #8a5a2b; --bx-woodline: #5e3b19; --bx-spot: #c79a63; }
 }
-.scene[data-scene="boxes"] .scene-goal { min-height: 2.6em; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 1.5rem; font-weight: 800; line-height: 1.15; }
+.scene[data-scene="boxes"] .scene-goal { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 1.5rem; font-weight: 800; line-height: 1.15; min-height: calc(2.3em + 20px); }
+.scene[data-scene="boxes"][data-scene-done="yes"] .scene-readout { color: #2f8f3a; }
 .scene[data-scene="boxes"] .scene-say { min-width: 52px; min-height: 52px; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
 .scene[data-scene="boxes"] .scene-readout { min-height: 1.45em; margin: 8px 0 0; font-size: 2.6rem; font-weight: 800; letter-spacing: 1px; }
 .scene .sc-boxes-box, .scene [class^="sc-boxes-box-no"] { fill: var(--bx-box); stroke: var(--bx-boxline); stroke-width: 4; rx: 16px; }
@@ -167,7 +168,7 @@
 .scene .sc-boxes-spot, .scene .sc-boxes-spot-next { fill: var(--bx-spot); stroke: rgba(0, 0, 0, 0.18); stroke-width: 2; }
 .scene .sc-boxes-spot-next { stroke: #f4b400; stroke-width: 4; stroke-dasharray: 8 5; transform-box: fill-box; transform-origin: center; animation: sc-boxes-pulse 1s ease-in-out infinite; }
 .scene .sc-boxes-on { font-size: 40px; text-anchor: middle; dominant-baseline: central; pointer-events: none; transform-box: fill-box; transform-origin: center; animation: sc-boxes-pop 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
-.scene .sc-boxes-plus { fill: #fff; font-size: 30px; font-weight: 800; paint-order: stroke; stroke: rgba(0, 0, 0, 0.45); stroke-width: 3px; pointer-events: none; }
+.scene .sc-boxes-plus { fill: #fff; font-size: 44px; font-weight: 900; text-anchor: middle; dominant-baseline: central; paint-order: stroke; stroke: #5e3b19; stroke-width: 5px; pointer-events: none; }
 .scene .sc-boxes-held { font-size: 56px; text-anchor: middle; dominant-baseline: central; pointer-events: none; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3)); }
 .scene .sc-boxes-finger { font-size: 44px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
 /* a refused box shakes with everything in it (two names, so a second refusal plays again) */

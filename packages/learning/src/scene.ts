@@ -818,7 +818,7 @@ function boxesFrames(s: BoxesKind, prev: SceneState, next: SceneState): Frame[] 
       { state: { ...before, w: 1 }, ms: 1800, say: "Watch. Put them on the board, one by one." },
       { state: { ...before, w: 1, ...at(0) }, ms: 600 },
       ...slide,
-      { state: { ...next, w: 1, lit: 1, fx: px(x1 + 16), fy: px(y1 + 34) }, ms: 900, say: "one" },
+      { state: { ...next, w: 1, lit: 1, fx: px(x1 - 12), fy: px(y1 + 40) }, ms: 900, say: "one" },
       { state: next, ms: 0, say: "Now you. Move the rest." },
     ];
   }
