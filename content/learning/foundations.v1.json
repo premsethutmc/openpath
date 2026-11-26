@@ -311,10 +311,10 @@
       "answer": "Minus."
      },
      "picture": "matrix-grid",
-     "ask": "A = [[{@a}, {@b}, {@c}], [0, 4, 5], [1, 0, 6]]. Find |A| along row 1.",
+     "ask": "A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]]. Find |A| along row 1.",
      "steps": [
       {
-       "do": "Entry {a}: cover row 1 and column 1.",
+       "do": "Entry 1: cover row 1 and column 1.",
        "lines": [
         "Block left: [[4, 5], [0, 6]]",
         "Minor = 4 × 6 − 5 × 0 = 24"
@@ -334,7 +334,7 @@
        ]
       },
       {
-       "do": "Entry {b}: cover row 1 and column 2.",
+       "do": "Entry 2: cover row 1 and column 2.",
        "lines": [
         "Block [[0, 5], [1, 6]]",
         "Minor = 0 × 6 − 5 × 1 = −5",
@@ -345,7 +345,7 @@
        ]
       },
       {
-       "do": "Entry {c}: cover row 1 and column 3.",
+       "do": "Entry 3: cover row 1 and column 3.",
        "lines": [
         "Block [[0, 4], [1, 0]]",
         "Minor = 0 × 0 − 4 × 1 = −4",
@@ -358,39 +358,14 @@
       {
        "do": "Each entry times its cofactor, added.",
        "lines": [
-        "{a} × 24 + {b} × 5 + {c} × (−4)",
-        "= {p} + {q} − {r} = {d}"
+        "1 × 24 + 2 × 5 + 3 × (−4)",
+        "= 24 + 10 − 12 = 22"
        ],
        "why": [
         "The determinant is the sum of (entry × its cofactor) along any one row."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 1,
-       "min": 1,
-       "max": 9
-      },
-      "b": {
-       "value": 2,
-       "min": 1,
-       "max": 9
-      },
-      "c": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "p": "24 * a",
-      "q": "5 * b",
-      "r": "4 * c",
-      "d": "p + q - r"
-     },
-     "require": [
-      "p + q > r"
-     ],
-     "note": "Make the last number of row 1 smaller, so |A| stays above 0.",
      "after": [
       "Rows 2 and 3 fix the three cofactors. Row 1 only says how much of each to take.",
       "The adjoint, adj A, is the matrix of all nine cofactors, with its rows written as columns."
@@ -1619,20 +1594,20 @@
     {
      "title": "Terms and their labels",
      "text": [
-      "Start at {@a} and multiply by {@r} each time.",
+      "Start at 3 and multiply by 2 each time.",
       "A list in a fixed order like this is a sequence. Each number in it is a term."
      ],
      "check": {
       "question": "In the sequence 5, 10, 20, 40, … what is a₂?",
       "answer": "10"
      },
-     "ask": "The sequence is {a}, {b}, {c}, {d}, … Label its terms and find S₃ and S₄.",
+     "ask": "The sequence is 3, 6, 12, 24, … Label its terms and find S₃ and S₄.",
      "steps": [
       {
        "do": "Label the terms in order.",
        "lines": [
-        "a₁ = {a}, a₂ = {b}",
-        "a₃ = {c}, a₄ = {d}"
+        "a₁ = 3, a₂ = 6",
+        "a₃ = 12, a₄ = 24"
        ],
        "why": [
         "The small low number is the place: a₁ is the first term, a₂ the second. It is a label, not a power."
@@ -1641,8 +1616,8 @@
       {
        "do": "S₃: add the first three terms.",
        "lines": [
-        "S₃ = {a} + {b} + {c}",
-        "= {s3}"
+        "S₃ = 3 + 6 + 12",
+        "= 21"
        ],
        "why": [
         "S stands for sum. Sₙ means add the first n terms."
@@ -1652,30 +1627,13 @@
        "do": "S₄ adds one more term.",
        "lines": [
         "S₄ = S₃ + a₄",
-        "= {s3} + {d} = {s4}"
+        "= 21 + 24 = 45"
        ],
        "why": [
         "No need to start again. Four terms are the first three plus the fourth."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "r": {
-       "value": 2,
-       "min": 2,
-       "max": 3
-      },
-      "b": "a * r",
-      "c": "a * r * r",
-      "d": "a * r * r * r",
-      "s3": "a + b + c",
-      "s4": "s3 + d"
-     },
      "after": [
       "aₙ is the term in place n. The first term is often just called a.",
       "Sₙ is the sum of the first n terms."
@@ -2186,58 +2144,49 @@
     {
      "title": "An inequality in x and y shades a region",
      "text": [
-      "The line x + y = {@k} passes through (0, {k}), (1, {k1}) and ({k}, 0).",
-      "x + y ≤ {k} is true on that line and on one whole side of it. That side is a half-plane. The line is its boundary.",
-      "To find the side, test (0, 0): 0 + 0 = 0, and 0 ≤ {k} is true. So the origin's side is the region."
+      "The line x + y = 4 passes through (0, 4), (1, 3) and (4, 0).",
+      "x + y ≤ 4 is true on that line and on one whole side of it. That side is a half-plane. The line is its boundary.",
+      "To find the side, test (0, 0): 0 + 0 = 0, and 0 ≤ 4 is true. So the origin's side is the region."
      ],
      "check": {
-      "question": "Is the point (1, 1) in the region x + y ≤ {k}?",
-      "answer": "Yes, because 1 + 1 = 2 and 2 ≤ {k}."
+      "question": "Is the point (1, 1) in the region x + y ≤ 4?",
+      "answer": "Yes, because 1 + 1 = 2 and 2 ≤ 4."
      },
      "picture": "coordinate-plane",
-     "ask": "Which of (1, 2), ({k}, 0) and ({k1}, 3) lie in the region x + y ≤ {k}?",
+     "ask": "Which of (1, 2), (4, 0) and (3, 3) lie in the region x + y ≤ 4?",
      "steps": [
       {
        "do": "Test (1, 2).",
        "lines": [
         "1 + 2 = 3",
-        "3 ≤ {k} ✓ Inside"
+        "3 ≤ 4 ✓ Inside"
        ],
        "why": [
         "Put the point's numbers in for x and y. If the inequality comes out true, the point is in the region."
        ]
       },
       {
-       "do": "Test ({k}, 0).",
+       "do": "Test (4, 0).",
        "lines": [
-        "{k} + 0 = {k}",
-        "{k} ≤ {k} ✓ On the line"
+        "4 + 0 = 4",
+        "4 ≤ 4 ✓ On the line"
        ],
        "why": [
         "≤ means less than or equal to. The point sits on the boundary line, drawn solid, so it counts."
        ]
       },
       {
-       "do": "Test ({k1}, 3).",
+       "do": "Test (3, 3).",
        "lines": [
-        "{k1} + 3 = {s3}",
-        "{s3} ≤ {k} ✗ Outside"
+        "3 + 3 = 6",
+        "6 ≤ 4 ✗ Outside"
        ],
        "why": [
-        "{s3} is more than {k}, so the point is on the far side of the line, outside the region."
+        "6 is more than 4, so the point is on the far side of the line, outside the region."
        ]
       }
      ],
-     "stepsAre": "cases",
-     "vary": {
-      "k": {
-       "value": 4,
-       "min": 4,
-       "max": 9
-      },
-      "k1": "k - 1",
-      "s3": "k + 2"
-     }
+     "stepsAre": "cases"
     },
     {
      "title": "Constraints and the feasible region",
@@ -2247,11 +2196,11 @@
       "Its corners are where two boundary lines cross. Solve those two lines together to find one."
      ],
      "check": {
-      "question": "Does (1, 1) obey x ≥ 0, y ≥ 0, x + y ≤ {k} and x ≤ {m}?",
-      "answer": "Yes: 1 + 1 = 2 is at most {k}, and 1 is at most {m}."
+      "question": "Does (1, 1) obey x ≥ 0, y ≥ 0, x + y ≤ 4 and x ≤ 3?",
+      "answer": "Yes: 1 + 1 = 2 is at most 4, and 1 is at most 3."
      },
      "picture": "coordinate-plane",
-     "ask": "The region is x ≥ 0, y ≥ 0, x + y ≤ {@k} and x ≤ {@m}. Find its corners.",
+     "ask": "The region is x ≥ 0, y ≥ 0, x + y ≤ 4 and x ≤ 3. Find its corners.",
      "steps": [
       {
        "do": "The two axes give the first corner.",
@@ -2263,53 +2212,36 @@
        ]
       },
       {
-       "do": "Where x = {m} meets the x-axis.",
+       "do": "Where x = 3 meets the x-axis.",
        "lines": [
-        "({m}, 0)"
+        "(3, 0)"
        ],
        "why": [
-        "x ≤ {m} is a wall standing up at x = {m}. It meets the floor y = 0 at ({m}, 0)."
+        "x ≤ 3 is a wall standing up at x = 3. It meets the floor y = 0 at (3, 0)."
        ]
       },
       {
-       "do": "Where x = {m} meets x + y = {k}.",
+       "do": "Where x = 3 meets x + y = 4.",
        "lines": [
-        "{m} + y = {k}",
-        "y = {y}, so ({m}, {y})"
+        "3 + y = 4",
+        "y = 1, so (3, 1)"
        ],
        "why": [
-        "A corner where two lines cross lies on both. Put x = {m} into x + y = {k} and solve for y."
+        "A corner where two lines cross lies on both. Put x = 3 into x + y = 4 and solve for y."
        ]
       },
       {
-       "do": "Where x + y = {k} meets the y-axis.",
+       "do": "Where x + y = 4 meets the y-axis.",
        "lines": [
-        "x = 0, so y = {k}",
-        "(0, {k})"
+        "x = 0, so y = 4",
+        "(0, 4)"
        ],
        "why": [
         "On the y-axis x is 0, so only y is left.",
-        "Going round, the corners are (0, 0), ({m}, 0), ({m}, {y}) and (0, {k})."
+        "Going round, the corners are (0, 0), (3, 0), (3, 1) and (0, 4)."
        ]
       }
-     ],
-     "vary": {
-      "k": {
-       "value": 4,
-       "min": 3,
-       "max": 9
-      },
-      "m": {
-       "value": 3,
-       "min": 1,
-       "max": 8
-      },
-      "y": "k - m"
-     },
-     "require": [
-      "m < k"
-     ],
-     "note": "Keep the second number smaller than the first, so the region has four corners."
+     ]
     }
    ],
    "practice": [
@@ -2608,21 +2540,21 @@
       "answer": "A whole number. The natural numbers start at 1."
      },
      "picture": "number-line",
-     "ask": "Solve x < {@c} when x is a natural number, a whole number, or an integer from −5 to 5.",
+     "ask": "Solve x < 3 when x is a natural number, a whole number, or an integer from −5 to 5.",
      "steps": [
       {
        "do": "Natural numbers.",
        "lines": [
-        "{if c = 2}1{end}{if c = 3}1, 2{end}{if c = 4}1, 2, 3{end}{if c = 5}1, 2, 3, 4{end}"
+        "1, 2"
        ],
        "why": [
-        "Natural numbers are the counting numbers 1, 2, 3, … Keep those below {c}."
+        "Natural numbers are the counting numbers 1, 2, 3, … Keep those below 3."
        ]
       },
       {
        "do": "Whole numbers.",
        "lines": [
-        "0, {if c = 2}1{end}{if c = 3}1, 2{end}{if c = 4}1, 2, 3{end}{if c = 5}1, 2, 3, 4{end}"
+        "0, 1, 2"
        ],
        "why": [
         "Whole numbers are the natural numbers with 0 added."
@@ -2632,22 +2564,14 @@
        "do": "Integers from −5 to 5.",
        "lines": [
         "−5, −4, −3, −2, −1,",
-        "0, {if c = 2}1{end}{if c = 3}1, 2{end}{if c = 4}1, 2, 3{end}{if c = 5}1, 2, 3, 4{end}"
+        "0, 1, 2"
        ],
        "why": [
-        "Integers include the negative numbers. Every one from −5 up to {c1} is less than {c}."
+        "Integers include the negative numbers. Every one from −5 up to 2 is less than 3."
        ]
       }
      ],
      "stepsAre": "cases",
-     "vary": {
-      "c": {
-       "value": 3,
-       "min": 2,
-       "max": 5
-      },
-      "c1": "c - 1"
-     },
      "after": [
       "Natural numbers: 1, 2, 3, … (the counting numbers).",
       "Whole numbers: 0, 1, 2, 3, … (the natural numbers and 0).",
@@ -5711,7 +5635,7 @@
       "question": "In 17 = 5 × 3 + 2, which number is the remainder?",
       "answer": "2"
      },
-     "ask": "Divide x² + {@s}x + {@c} by x + {@d}.",
+     "ask": "Divide x² + 3x + 5 by x + 1.",
      "steps": [
       {
        "do": "Divide the first terms.",
@@ -5719,23 +5643,23 @@
         "x² ÷ x = x"
        ],
        "why": [
-        "x × (x + {d}) = {if d = 1}x² + x{else}x² + {d}x{end}. Take that away. {q}x + {c} is left."
+        "x × (x + 1) = x² + x. Take that away. 2x + 5 is left."
        ]
       },
       {
        "do": "Divide again.",
        "lines": [
-        "{q}x ÷ x = {q}"
+        "2x ÷ x = 2"
        ],
        "why": [
-        "{q} × (x + {d}) = {q}x + {dq}. Take that away: {c} − {dq} = {r} is left."
+        "2 × (x + 1) = 2x + 2. Take that away: 5 − 2 = 3 is left."
        ]
       },
       {
        "do": "Say the result.",
        "lines": [
-        "Quotient x + {q}",
-        "Remainder {r}"
+        "Quotient x + 2",
+        "Remainder 3"
        ],
        "why": [
         "Like 17 ÷ 5 = 3 remainder 2: an answer and something left over."
@@ -5744,43 +5668,18 @@
       {
        "do": "Check: multiply back, add the remainder.",
        "lines": [
-        "(x + {d})(x + {q}) + {r}",
-        "= x² + {s}x + {dq} + {r}",
-        "= x² + {s}x + {c} ✓"
+        "(x + 1)(x + 2) + 3",
+        "= x² + 3x + 2 + 3",
+        "= x² + 3x + 5 ✓"
        ],
        "why": [
         "Divisor × quotient + remainder gives back what we divided."
        ]
       }
      ],
-     "vary": {
-      "d": {
-       "value": 1,
-       "min": 1,
-       "max": 5
-      },
-      "s": {
-       "value": 3,
-       "min": 3,
-       "max": 10
-      },
-      "c": {
-       "value": 5,
-       "min": 1,
-       "max": 30
-      },
-      "q": "s - d",
-      "dq": "d * (s - d)",
-      "r": "c - d * (s - d)"
-     },
-     "require": [
-      "s - d >= 2",
-      "c >= d * (s - d)"
-     ],
-     "note": "Pick numbers that leave a remainder of 0 or more.",
      "after": [
-      "Dividing by x + {d} gave a quotient, x + {q}, and a remainder, {r}.",
-      "x² + {s}x + {c} = (x + {d}) × (x + {q}) + {r}. You can always check a division this way."
+      "Dividing by x + 1 gave a quotient, x + 2, and a remainder, 3.",
+      "x² + 3x + 5 = (x + 1) × (x + 2) + 3. You can always check a division this way."
      ]
     }
    ],
@@ -6335,82 +6234,56 @@
     {
      "title": "A quadratic equation and its a, b and c",
      "text": [
-      "Multiply out (x − {@p})(x − {@q}). You get x² − {s}x + {c}.",
+      "Multiply out (x − 2)(x − 3). You get x² − 5x + 6.",
       "An equation whose highest power is x² is a quadratic equation."
      ],
      "check": {
       "question": "In 3x² + 4x − 7 = 0, what is c?",
       "answer": "−7"
      },
-     "ask": "For x² − {s}x + {c} = 0, name a, b and c. Then test whether {p}, {q} and {t} are roots.",
+     "ask": "For x² − 5x + 6 = 0, name a, b and c. Then test whether 2, 3 and 4 are roots.",
      "steps": [
       {
        "do": "Read off a, b and c.",
        "lines": [
-        "a = 1, b = −{s}, c = {c}"
+        "a = 1, b = −5, c = 6"
        ],
        "why": [
         "The form is ax² + bx + c = 0. a goes with x², b goes with x, and c stands alone.",
-        "x² alone means 1x². The minus sign belongs to b: b is −{s}, not {s}."
+        "x² alone means 1x². The minus sign belongs to b: b is −5, not 5."
        ]
       },
       {
-       "do": "Test x = {p}.",
+       "do": "Test x = 2.",
        "lines": [
-        "{p}² − {s} × {p} + {c}",
-        "= {pp} − {sp} + {c} = 0 ✓"
+        "2² − 5 × 2 + 6",
+        "= 4 − 10 + 6 = 0 ✓"
        ],
        "why": [
         "A root makes the equation true. Put it in place of x and see if you get 0."
        ]
       },
       {
-       "do": "Test x = {q}.",
+       "do": "Test x = 3.",
        "lines": [
-        "{q}² − {s} × {q} + {c}",
-        "= {qq} − {sq} + {c} = 0 ✓"
+        "3² − 5 × 3 + 6",
+        "= 9 − 15 + 6 = 0 ✓"
        ],
        "why": [
-        "It gives 0 too, so {q} is also a root. A quadratic can have two roots."
+        "It gives 0 too, so 3 is also a root. A quadratic can have two roots."
        ]
       },
       {
-       "do": "Test x = {t}.",
+       "do": "Test x = 4.",
        "lines": [
-        "{t}² − {s} × {t} + {c}",
-        "= {tt} − {st} + {c} = {v} ✗"
+        "4² − 5 × 4 + 6",
+        "= 16 − 20 + 6 = 2 ✗"
        ],
        "why": [
-        "{v} is not 0, so {t} does not make the equation true. It is not a root."
+        "2 is not 0, so 4 does not make the equation true. It is not a root."
        ]
       }
      ],
-     "vary": {
-      "p": {
-       "value": 2,
-       "min": 1,
-       "max": 5
-      },
-      "q": {
-       "value": 3,
-       "min": 2,
-       "max": 7
-      },
-      "s": "p + q",
-      "c": "p * q",
-      "t": "q + 1",
-      "pp": "p * p",
-      "sp": "s * p",
-      "qq": "q * q",
-      "sq": "s * q",
-      "tt": "t * t",
-      "st": "s * t",
-      "v": "tt - st + c"
-     },
-     "require": [
-      "p < q"
-     ],
-     "note": "Make the second number bigger than the first.",
      "after": [
       "Every quadratic can be written ax² + bx + c = 0, the standard form. Each number keeps its sign. A missing term has number 0.",
       "A root (or solution) is a value of x that makes the equation true."
@@ -8280,7 +8153,7 @@
       "question": "Does y = x² + 1 satisfy dy/dx = 2x?",
       "answer": "Yes, the derivative of x² + 1 is 2x"
      },
-     "ask": "Solve dy/dx = 2x, given y = {@y0} when x = {@x0}.",
+     "ask": "Solve dy/dx = 2x, given y = 5 when x = 0.",
      "steps": [
       {
        "do": "Undo the derivative: integrate.",
@@ -8294,42 +8167,24 @@
       {
        "do": "Use the given point to find C.",
        "lines": [
-        "{y0} = {x0}² + C",
-        "C = {y0} − {sq} = {C}"
+        "5 = 0² + C",
+        "C = 5 − 0 = 5"
        ],
        "why": [
-        "Put x = {x0} and y = {y0} into y = x² + C."
+        "Put x = 0 and y = 5 into y = x² + C."
        ]
       },
       {
        "do": "Write the solution and check.",
        "lines": [
-        "y = x² + {C}",
+        "y = x² + 5",
         "dy/dx = 2x ✓"
        ],
        "why": [
-        "Differentiate the answer: you get back 2x. At x = {x0} it gives {sq} + {C} = {y0}."
+        "Differentiate the answer: you get back 2x. At x = 0 it gives 0 + 5 = 5."
        ]
       }
-     ],
-     "vary": {
-      "x0": {
-       "value": 0,
-       "min": 0,
-       "max": 4
-      },
-      "y0": {
-       "value": 5,
-       "min": 1,
-       "max": 30
-      },
-      "sq": "x0 * x0",
-      "C": "y0 - sq"
-     },
-     "require": [
-      "C > 0"
-     ],
-     "note": "Pick a bigger y, so that C stays above 0."
+     ]
     }
    ],
    "practice": [
@@ -12236,8 +12091,8 @@
            150
           ],
           "to": [
-           47.0,
-           195.0
+           47,
+           195
           ],
           "arrow": true
          },
@@ -12260,8 +12115,8 @@
            150
           ],
           "to": [
-           110.0,
-           18.0
+           110,
+           18
           ],
           "arrow": true
          },
@@ -12324,8 +12179,8 @@
          {
           "p": "text",
           "at": [
-           37.0,
-           197.0
+           37,
+           197
           ],
           "s": "x"
          },
@@ -13233,21 +13088,21 @@
       "answer": "2"
      },
      "picture": "coordinate-plane",
-     "ask": "A is ({@x1}, {@y1}) and B is ({@x2}, {@y2}). Find the slope of the line AB.",
+     "ask": "A is (1, 2) and B is (3, 8). Find the slope of the line AB.",
      "steps": [
       {
        "do": "Rise: how far up from A to B?",
        "lines": [
-        "Rise = {y2} − {y1} = {rise}"
+        "Rise = 8 − 2 = 6"
        ],
        "why": [
-        "The second number of a point is its height. B is at {y2} and A at {y1}."
+        "The second number of a point is its height. B is at 8 and A at 2."
        ]
       },
       {
        "do": "Run: how far across?",
        "lines": [
-        "Run = {x2} − {x1} = {run}"
+        "Run = 3 − 1 = 2"
        ],
        "why": [
         "The first number says how far across. Subtract the same way both times: B minus A."
@@ -13256,44 +13111,13 @@
       {
        "do": "Slope is rise ÷ run.",
        "lines": [
-        "Slope = {rise} ÷ {run} = {m}"
+        "Slope = 6 ÷ 2 = 3"
        ],
        "why": [
-        "Slope is how much the line climbs for each 1 step right. Here it climbs {m} for every 1 across."
+        "Slope is how much the line climbs for each 1 step right. Here it climbs 3 for every 1 across."
        ]
       }
      ],
-     "vary": {
-      "x1": {
-       "value": 1,
-       "min": 0,
-       "max": 6
-      },
-      "y1": {
-       "value": 2,
-       "min": 0,
-       "max": 6
-      },
-      "x2": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "y2": {
-       "value": 8,
-       "min": 1,
-       "max": 9
-      },
-      "run": "x2 - x1",
-      "rise": "y2 - y1",
-      "m": "rise / run"
-     },
-     "require": [
-      "x2 > x1",
-      "y2 > y1",
-      "rise % run = 0"
-     ],
-     "note": "Put B to the right of A and higher, with the climb a whole number of times the step across.",
      "after": [
       "The slope's letter is m. Any two points on a straight line give the same slope.",
       "Uphill is positive, downhill is negative, flat is 0. An upright line has no slope: its run is 0.",
@@ -14566,7 +14390,7 @@
            100
           ],
           "to": [
-           134.0,
+           134,
            45.01
           ]
          },
@@ -14585,7 +14409,7 @@
          {
           "p": "right",
           "at": [
-           134.0,
+           134,
            45.01
           ],
           "a": [
@@ -14620,7 +14444,7 @@
          {
           "p": "point",
           "at": [
-           134.0,
+           134,
            45.01
           ],
           "label": "T",
@@ -14671,7 +14495,7 @@
        "caption": "The tangent touches the circle at one point, T (the point of contact). The radius OT meets it at 90°. The secant cuts the circle at two points."
       }
      ],
-     "ask": "A circle has centre O and radius OT = {@r} cm. P is outside with OP = {d} cm, and PT is a tangent. Find PT.",
+     "ask": "A circle has centre O and radius OT = 3 cm. P is outside with OP = 5 cm, and PT is a tangent. Find PT.",
      "steps": [
       {
        "do": "See the right angle.",
@@ -14685,7 +14509,7 @@
       {
        "do": "Find the longest side.",
        "lines": [
-        "OP = {d} cm is the hypotenuse"
+        "OP = 5 cm is the hypotenuse"
        ],
        "why": [
         "The longest side faces the right angle. The right angle is at T, so it is OP."
@@ -14694,41 +14518,24 @@
       {
        "do": "Use the rule of Pythagoras.",
        "lines": [
-        "PT² + {r}² = {d}²",
-        "PT² = {dd} − {rr} = {tt}"
+        "PT² + 3² = 5²",
+        "PT² = 25 − 9 = 16"
        ],
        "why": [
         "The squares of the two shorter sides add up to the square of the longest side.",
-        "We want a shorter side, so we subtract: {d}² − {r}²."
+        "We want a shorter side, so we subtract: 5² − 3²."
        ]
       },
       {
        "do": "Take the square root.",
        "lines": [
-        "PT = √{tt} = {t} cm"
+        "PT = √16 = 4 cm"
        ],
        "why": [
-        "Which number times itself is {tt}? It is {t}."
+        "Which number times itself is 16? It is 4."
        ]
       }
      ],
-     "vary": {
-      "r": {
-       "value": 3,
-       "min": 3,
-       "max": 15
-      },
-      "k": "r / 3",
-      "d": "5 * k",
-      "t": "4 * k",
-      "rr": "r * r",
-      "dd": "d * d",
-      "tt": "t * t"
-     },
-     "require": [
-      "r % 3 = 0"
-     ],
-     "note": "Use 3, 6, 9, 12 or 15, so that the lengths come out whole.",
      "after": [
       "A line that touches a circle at exactly one point is a tangent. That point is the point of contact.",
       "A line that cuts a circle at two points is a secant. From a point outside you can draw two tangents.",
@@ -16087,7 +15894,7 @@
        "caption": "Triangle PQR fits exactly on triangle ABC. Sides with the same marks are equal: PQ = AB, QR = BC, RP = CA."
       }
      ],
-     "ask": "Triangle PQR is congruent to triangle ABC. AB = {@a} cm, BC = {@b} cm and CA = {@c} cm. Find the sides of PQR.",
+     "ask": "Triangle PQR is congruent to triangle ABC. AB = 3 cm, BC = 4 cm and CA = 5 cm. Find the sides of PQR.",
      "steps": [
       {
        "do": "Match the letters in order.",
@@ -16101,7 +15908,7 @@
       {
        "do": "PQ matches AB.",
        "lines": [
-        "PQ = {a} cm"
+        "PQ = 3 cm"
        ],
        "why": [
         "First and second letters in both names."
@@ -16110,37 +15917,14 @@
       {
        "do": "QR matches BC, RP matches CA.",
        "lines": [
-        "QR = {b} cm",
-        "RP = {c} cm"
+        "QR = 4 cm",
+        "RP = 5 cm"
        ],
        "why": [
         "Matching sides of congruent shapes are equal."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 3,
-       "min": 2,
-       "max": 12
-      },
-      "b": {
-       "value": 4,
-       "min": 2,
-       "max": 12
-      },
-      "c": {
-       "value": 5,
-       "min": 2,
-       "max": 12
-      }
-     },
-     "require": [
-      "a + b > c",
-      "b + c > a",
-      "a + c > b"
-     ],
-     "note": "Those sides cannot make a triangle. Keep the longest side shorter than the other two added.",
      "after": [
       "Congruent triangles match in all three sides and all three angles.",
       "'Triangle ABC is congruent to triangle PQR' means A lies on P, B on Q and C on R. In the lessons, an equals sign with a small wave on top means 'is congruent to'."
@@ -17362,15 +17146,15 @@
        "caption": "decagon: 10 sides"
       }
      ],
-     "ask": "A pyramid stands on a base with {@s} sides. How many vertices does it have?",
+     "ask": "A pyramid stands on a base with 7 sides. How many vertices does it have?",
      "steps": [
       {
        "do": "The base.",
        "lines": [
-        "A {if s = 5}pentagon{end}{if s = 6}hexagon{end}{if s = 7}heptagon{end}{if s = 8}octagon{end}{if s = 9}nonagon{end}{if s = 10}decagon{end}: {s} corners"
+        "A heptagon: 7 corners"
        ],
        "why": [
-        "{if s = 5}\"Penta\" means five{end}{if s = 6}\"Hexa\" means six{end}{if s = 7}\"Hepta\" means seven{end}{if s = 8}\"Octa\" means eight{end}{if s = 9}\"Nona\" means nine{end}{if s = 10}\"Deca\" means ten{end}. The base has {s} sides and {s} corners."
+        "\"Hepta\" means seven. The base has 7 sides and 7 corners."
        ]
       },
       {
@@ -17385,24 +17169,16 @@
       {
        "do": "Add.",
        "lines": [
-        "{s} + 1 = {v} vertices"
+        "7 + 1 = 8 vertices"
        ],
        "why": [
         "Count the corners of the base, then the point at the top."
        ]
       }
      ],
-     "vary": {
-      "s": {
-       "value": 7,
-       "min": 5,
-       "max": 10
-      },
-      "v": "s + 1"
-     },
      "after": [
       "triangle 3, quadrilateral 4, pentagon 5, hexagon 6, heptagon 7, octagon 8, nonagon 9, decagon 10.",
-      "A pyramid is named after its base. This one is a {if s = 5}pentagonal{end}{if s = 6}hexagonal{end}{if s = 7}heptagonal{end}{if s = 8}octagonal{end}{if s = 9}nonagonal{end}{if s = 10}decagonal{end} pyramid."
+      "A pyramid is named after its base. This one is a heptagonal pyramid."
      ]
     }
    ],
@@ -17981,13 +17757,13 @@
       "question": "What is √36?",
       "answer": "6, because 6 × 6 = 36."
      },
-     "ask": "A right triangle has shorter sides {@a} cm and {b} cm. Find the longest side.",
+     "ask": "A right triangle has shorter sides 3 cm and 4 cm. Find the longest side.",
      "steps": [
       {
        "do": "Square the shorter sides and add.",
        "lines": [
-        "{a}² + {b}²",
-        "= {a2} + {b2} = {c2}"
+        "3² + 4²",
+        "= 9 + 16 = 25"
        ],
        "why": [
         "Pythagoras: the two smaller squares add up to the square of the longest side."
@@ -17996,38 +17772,22 @@
       {
        "do": "Undo the square.",
        "lines": [
-        "√{c2} = {c}"
+        "√25 = 5"
        ],
        "why": [
-        "√ asks: which number times itself makes {c2}? {c} × {c} = {c2}."
+        "√ asks: which number times itself makes 25? 5 × 5 = 25."
        ]
       },
       {
        "do": "Say the answer.",
        "lines": [
-        "{c} cm"
+        "5 cm"
        ],
        "why": [
         "The longest side is always opposite the right angle."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 3,
-       "min": 3,
-       "max": 15
-      },
-      "b": "a * 4 / 3",
-      "c": "a * 5 / 3",
-      "a2": "a * a",
-      "b2": "b * b",
-      "c2": "c * c"
-     },
-     "require": [
-      "a % 3 = 0"
-     ],
-     "note": "Use 3, 6, 9, 12 or 15. The other side follows from it.",
      "after": [
       "Going back from a square is called taking the square root. Its sign is √. √25 = 5 because 5 × 5 = 25.",
       "In a right-angled triangle, add the squares of the two shorter sides. The square root of that is the longest side."
@@ -19869,7 +19629,7 @@
       "question": "For the point (4, 1), how many steps up do you go?",
       "answer": "1."
      },
-     "ask": "Find the point ({@x}, {@y}).",
+     "ask": "Find the point (3, 2).",
      "steps": [
       {
        "do": "Start at O, where the two lines cross.",
@@ -19883,7 +19643,7 @@
       {
        "do": "First number: go across.",
        "lines": [
-        "{x} {x|step|steps} right"
+        "3 steps right"
        ],
        "why": [
         "The first number always says how far across."
@@ -19892,7 +19652,7 @@
       {
        "do": "Second number: go up.",
        "lines": [
-        "{y} {y|step|steps} up. Mark it."
+        "2 steps up. Mark it."
        ],
        "why": [
         "The second number always says how far up."
@@ -19901,29 +19661,13 @@
       {
        "do": "Swap the numbers.",
        "lines": [
-        "({y}, {x}) is a different point"
+        "(2, 3) is a different point"
        ],
        "why": [
-        "Going {y} across and {x} up lands somewhere else."
+        "Going 2 across and 3 up lands somewhere else."
        ]
       }
      ],
-     "vary": {
-      "x": {
-       "value": 3,
-       "min": 1,
-       "max": 4
-      },
-      "y": {
-       "value": 2,
-       "min": 1,
-       "max": 4
-      }
-     },
-     "require": [
-      "x != y"
-     ],
-     "note": "Pick two different numbers, so swapping them gives a new point.",
      "scene": {
       "type": "scene",
       "kind": "pick",
@@ -19931,11 +19675,11 @@
        "of": "plane"
       },
       "ask": [
-       "p:{x},{y}"
+       "p:3,2"
       ],
       "hint": "The first number is how far across. The second is how far up.",
-      "prompt": "Start at O, where the lines cross. Go {x} across, then {y} up. Tap that point.",
-      "success": "Yes. That is ({x}, {y}): {x} across, {y} up.",
+      "prompt": "Start at O, where the lines cross. Go 3 across, then 2 up. Tap that point.",
+      "success": "Yes. That is (3, 2): 3 across, 2 up.",
       "goal": {
        "measure": "wrong",
        "equals": 0
@@ -19943,7 +19687,7 @@
      },
      "after": [
       "The flat line is the x-axis. The upright line is the y-axis. They cross at the origin, O.",
-      "The two numbers ({x}, {y}) are called the coordinates of the point."
+      "The two numbers (3, 2) are called the coordinates of the point."
      ]
     },
     {
@@ -20940,13 +20684,13 @@
       "answer": "The inverse of A, written A⁻¹."
      },
      "picture": "matrix-grid",
-     "ask": "A = [[{a}, {@b}], [{@c}, 1]] and A⁻¹ = [[1, −{b}], [−{c}, {a}]]. Check A × A⁻¹ = I.",
+     "ask": "A = [[2, 1], [1, 1]] and A⁻¹ = [[1, −1], [−1, 2]]. Check A × A⁻¹ = I.",
      "steps": [
       {
        "do": "Row 1 of A with each column.",
        "lines": [
-        "{a} × 1 + {b} × (−{c}) = 1",
-        "{a} × (−{b}) + {b} × {a} = 0"
+        "2 × 1 + 1 × (−1) = 1",
+        "2 × (−1) + 1 × 2 = 0"
        ],
        "why": [
         "Each entry of the product is one row meeting one column: multiply the pairs and add."
@@ -20955,11 +20699,11 @@
       {
        "do": "Row 2 of A with each column.",
        "lines": [
-        "{c} × 1 + 1 × (−{c}) = 0",
-        "{c} × (−{b}) + 1 × {a} = 1"
+        "1 × 1 + 1 × (−1) = 0",
+        "1 × (−1) + 1 × 2 = 1"
        ],
        "why": [
-        "The same two meetings, now with row 2 of A, which is {c}, 1."
+        "The same two meetings, now with row 2 of A, which is 1, 1."
        ]
       },
       {
@@ -20971,20 +20715,7 @@
         "I has 1s on the diagonal and 0s elsewhere. Getting I shows A⁻¹ really undoes A."
        ]
       }
-     ],
-     "vary": {
-      "b": {
-       "value": 1,
-       "min": 1,
-       "max": 4
-      },
-      "c": {
-       "value": 1,
-       "min": 1,
-       "max": 4
-      },
-      "a": "b * c + 1"
-     }
+     ]
     }
    ],
    "practice": [
@@ -21209,7 +20940,7 @@
     {
      "title": "Equations packed into matrices",
      "text": [
-      "Look at x + y = {@s} and x − y = {@d}. All the information is in the numbers.",
+      "Look at x + y = 5 and x − y = 1. All the information is in the numbers.",
       "Put the coefficients in a matrix A, one row per equation. Put the unknowns in a column X and the right sides in a column B. Then the whole system is one line: AX = B.",
       "Write A and B side by side with a bar between. This is the augmented matrix [A | B]. Each row is one equation.",
       "A system with at least one solution is consistent. One with no solution is inconsistent."
@@ -21219,7 +20950,7 @@
       "answer": "2, 3 | 7"
      },
      "picture": "matrix-grid",
-     "ask": "Write x + y = {s} and x − y = {d} as AX = B, form [A | B], and solve.",
+     "ask": "Write x + y = 5 and x − y = 1 as AX = B, form [A | B], and solve.",
      "steps": [
       {
        "do": "A: the numbers in front of x and y.",
@@ -21234,7 +20965,7 @@
        "do": "X and B.",
        "lines": [
         "X = column (x, y)",
-        "B = column ({s}, {d})"
+        "B = column (5, 1)"
        ],
        "why": [
         "X holds the unknowns, B the right-hand sides."
@@ -21243,7 +20974,7 @@
       {
        "do": "The augmented matrix.",
        "lines": [
-        "[[1, 1 | {s}], [1, −1 | {d}]]"
+        "[[1, 1 | 5], [1, −1 | 1]]"
        ],
        "why": [
         "[A | B] is A with B stuck on the right, the bar marking the join. Row operations work on it all at once."
@@ -21252,34 +20983,14 @@
       {
        "do": "Solve.",
        "lines": [
-        "Add: 2x = {sd}, x = {x}",
-        "y = {s} − {x} = {y}"
+        "Add: 2x = 6, x = 3",
+        "y = 5 − 3 = 2"
        ],
        "why": [
         "Adding the equations cancels y. A solution exists, so the system is consistent."
        ]
       }
-     ],
-     "vary": {
-      "s": {
-       "value": 5,
-       "min": 2,
-       "max": 20
-      },
-      "d": {
-       "value": 1,
-       "min": 1,
-       "max": 19
-      },
-      "sd": "s + d",
-      "x": "(s + d) / 2",
-      "y": "(s - d) / 2"
-     },
-     "require": [
-      "d < s",
-      "(s + d) % 2 = 0"
-     ],
-     "note": "Choose a smaller second number, and make both even or both odd, so x and y are whole."
+     ]
     }
    ],
    "practice": [
@@ -21513,65 +21224,42 @@
       "answer": "0, 2"
      },
      "picture": "matrix-grid",
-     "ask": "Bring [[1, {@b}], [{@k}, {@c}]] to echelon form.",
+     "ask": "Bring [[1, 2], [3, 4]] to echelon form.",
      "steps": [
       {
        "do": "Choose what to remove.",
        "lines": [
-        "Make the {k} below the 1 into 0"
+        "Make the 3 below the 1 into 0"
        ],
        "why": [
         "Echelon form is a staircase: zeros below the first number of each row."
        ]
       },
       {
-       "do": "R2 → R2 − {k}R1.",
+       "do": "R2 → R2 − 3R1.",
        "lines": [
-        "({k} − {k} × 1, {c} − {k} × {b})",
-        "= (0, {if e < 0}−{ne}{else}{e}{end})"
+        "(3 − 3 × 1, 4 − 3 × 2)",
+        "= (0, −2)"
        ],
        "why": [
-        "Take {k} times row 1 away from row 2. We use {k} because {k} times the 1 cancels the {k}."
+        "Take 3 times row 1 away from row 2. We use 3 because 3 times the 1 cancels the 3."
        ]
       },
       {
        "do": "Write the result.",
        "lines": [
-        "[[1, {b}], [0, {if e < 0}−{ne}{else}{e}{end}]]"
+        "[[1, 2], [0, −2]]"
        ],
        "why": [
         "Row 1 is unchanged. Row operations keep the same solutions to the equations."
        ]
       }
-     ],
-     "vary": {
-      "b": {
-       "value": 2,
-       "min": 1,
-       "max": 5
-      },
-      "k": {
-       "value": 3,
-       "min": 2,
-       "max": 5
-      },
-      "c": {
-       "value": 4,
-       "min": 1,
-       "max": 9
-      },
-      "e": "c - k * b",
-      "ne": "abs(e)"
-     },
-     "require": [
-      "e != 0"
-     ],
-     "note": "That makes row 2 all zeros. Try another number."
+     ]
     },
     {
      "title": "Rank: how many rows really count",
      "text": [
-      "Take x + {b}y = {p} and {k}x + {kb}y = {kp}. The second is the first times {k}. It says nothing new: there is really one equation.",
+      "Take x + 2y = 3 and 2x + 4y = 6. The second is the first times 2. It says nothing new: there is really one equation.",
       "The rank of a matrix counts the rows that carry real information. Reduce it to echelon form and count the rows that are not all zeros. The rank of A is written ρ(A) (rho).",
       "For a system, compare ρ(A) with ρ([A | B]). Different: some row says 0 = a non-zero number, so no solution. Equal: solutions exist, exactly one when the rank equals the number of unknowns, infinitely many when it is smaller."
      ],
@@ -21580,26 +21268,26 @@
       "answer": "2 (two rows are not all zeros)."
      },
      "picture": "matrix-grid",
-     "ask": "A = [[1, {@b}], [{@k}, {kb}]]. Find ρ(A), then compare with right sides ({@p}, {kp}) and ({p}, {kp1}).",
+     "ask": "A = [[1, 2], [2, 4]]. Find ρ(A), then compare with right sides (3, 6) and (3, 7).",
      "steps": [
       {
        "do": "Reduce A.",
        "lines": [
-        "R2 → R2 − {k}R1",
-        "[[1, {b}], [0, 0]], ρ(A) = 1"
+        "R2 → R2 − 2R1",
+        "[[1, 2], [0, 0]], ρ(A) = 1"
        ],
        "why": [
-        "Row 2 is just {k} times row 1, so it vanishes. Rank counts the rows that are not all zero."
+        "Row 2 is just 2 times row 1, so it vanishes. Rank counts the rows that are not all zero."
        ]
       },
       {
-       "do": "Right sides {p} and {kp}.",
+       "do": "Right sides 3 and 6.",
        "lines": [
-        "[[1, {b} | {p}], [0, 0 | 0]]",
+        "[[1, 2 | 3], [0, 0 | 0]]",
         "ρ([A | B]) = 1"
        ],
        "why": [
-        "{kp} − {k} × {p} = 0, so the extra row says 0 = 0: true, and no use."
+        "6 − 2 × 3 = 0, so the extra row says 0 = 0: true, and no use."
        ]
       },
       {
@@ -21613,36 +21301,16 @@
        ]
       },
       {
-       "do": "Right sides {p} and {kp1}.",
+       "do": "Right sides 3 and 7.",
        "lines": [
         "Last row 0, 0 | 1",
         "ρ([A | B]) = 2 ≠ 1: none"
        ],
        "why": [
-        "{kp1} − {k} × {p} = 1, so the row says 0 = 1, which is impossible."
+        "7 − 2 × 3 = 1, so the row says 0 = 1, which is impossible."
        ]
       }
-     ],
-     "vary": {
-      "b": {
-       "value": 2,
-       "min": 1,
-       "max": 5
-      },
-      "k": {
-       "value": 2,
-       "min": 2,
-       "max": 5
-      },
-      "p": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "kb": "k * b",
-      "kp": "k * p",
-      "kp1": "k * p + 1"
-     }
+     ]
     }
    ],
    "practice": [
@@ -22797,14 +22465,14 @@
       "answer": "Half, because 180° is half of 360°."
      },
      "picture": "circle-parts",
-     "ask": "A circle has radius 14 cm, area 616 cm² and circumference 88 cm. Find the area and the arc of a {@t}° slice.",
+     "ask": "A circle has radius 14 cm, area 616 cm² and circumference 88 cm. Find the area and the arc of a 90° slice.",
      "steps": [
       {
        "do": "What part of the circle?",
        "lines": [
         "360° ÷ 8 = 45°",
-        "{t}° is {n} × 45°",
-        "That is {n} {n|eighth|eighths} of the circle"
+        "90° is 2 × 45°",
+        "That is 2 eighths of the circle"
        ],
        "why": [
         "A full turn at the centre is 360°. Cut it into 8 equal slices of 45°."
@@ -22813,7 +22481,7 @@
       {
        "do": "Area of the sector.",
        "lines": [
-        "616 ÷ 8 × {n} = {A} cm²"
+        "616 ÷ 8 × 2 = 154 cm²"
        ],
        "why": [
         "The slice gets the same part of the area."
@@ -22822,27 +22490,13 @@
       {
        "do": "Length of its arc.",
        "lines": [
-        "88 ÷ 8 × {n} = {Lc} cm"
+        "88 ÷ 8 × 2 = 22 cm"
        ],
        "why": [
         "And the same part of the distance round."
        ]
       }
      ],
-     "vary": {
-      "t": {
-       "value": 90,
-       "min": 45,
-       "max": 315
-      },
-      "n": "t / 45",
-      "A": "77 * t / 45",
-      "Lc": "11 * t / 45"
-     },
-     "require": [
-      "t % 45 = 0"
-     ],
-     "note": "Use 45, 90, 135, 180, 225, 270 or 315.",
      "after": [
       "The angle at the centre is often called θ (theta). It names an angle, just as x names a number.",
       "A slice with angle θ is θ/360 of the circle: of its area and of its circumference."
@@ -23078,7 +22732,7 @@
       "answer": "The slant height l. It is the hypotenuse, the longest side of the right triangle."
      },
      "picture": "right-triangle",
-     "ask": "A cone has radius r = {@r} cm and height h = {h} cm. Find its slant height l.",
+     "ask": "A cone has radius r = 3 cm and height h = 4 cm. Find its slant height l.",
      "steps": [
       {
        "do": "See the right triangle inside the cone.",
@@ -23093,7 +22747,7 @@
        "do": "Use the rule of Pythagoras.",
        "lines": [
         "l² = r² + h²",
-        "l² = {r}² + {h}² = {rr} + {hh} = {ll}"
+        "l² = 3² + 4² = 9 + 16 = 25"
        ],
        "why": [
         "The squares of the two shorter sides add up to the square of the longest side."
@@ -23102,30 +22756,13 @@
       {
        "do": "Take the square root.",
        "lines": [
-        "l = √{ll} = {l} cm"
+        "l = √25 = 5 cm"
        ],
        "why": [
-        "Which number times itself is {ll}? It is {l}. The slant height is always longer than both r and h."
+        "Which number times itself is 25? It is 5. The slant height is always longer than both r and h."
        ]
       }
      ],
-     "vary": {
-      "r": {
-       "value": 3,
-       "min": 3,
-       "max": 15
-      },
-      "k": "r / 3",
-      "h": "4 * k",
-      "l": "5 * k",
-      "rr": "r * r",
-      "hh": "h * h",
-      "ll": "l * l"
-     },
-     "require": [
-      "r % 3 = 0"
-     ],
-     "note": "Use 3, 6, 9, 12 or 15, so that the lengths come out whole.",
      "after": [
       "r is the radius of the round base. h is the height, from the centre of the base straight up to the tip.",
       "l, the slant height, runs down the outside from the tip to the edge of the base. A tape on the hat measures it."
@@ -24601,12 +24238,12 @@
       "answer": "50 cm²"
      },
      "picture": "circle-parts",
-     "ask": "A circle has radius {@r} cm. Take π = 22/7. Find its area and the area of a semicircle.",
+     "ask": "A circle has radius 7 cm. Take π = 22/7. Find its area and the area of a semicircle.",
      "steps": [
       {
        "do": "Square the radius.",
        "lines": [
-        "{r} × {r} = {r2}"
+        "7 × 7 = 49"
        ],
        "why": [
         "Area = π × r × r. The radius goes from the centre to the edge."
@@ -24615,37 +24252,22 @@
       {
        "do": "Multiply by π.",
        "lines": [
-        "22/7 × {r2} = {A} cm²"
+        "22/7 × 49 = 154 cm²"
        ],
        "why": [
-        "{r2} ÷ 7 = {k}, then 22 × {k} = {A}."
+        "49 ÷ 7 = 7, then 22 × 7 = 154."
        ]
       },
       {
        "do": "Half the circle.",
        "lines": [
-        "{A} ÷ 2 = {h} cm²"
+        "154 ÷ 2 = 77 cm²"
        ],
        "why": [
         "A semicircle is half a circle, so it has half the area."
        ]
       }
      ],
-     "vary": {
-      "r": {
-       "value": 7,
-       "min": 7,
-       "max": 28
-      },
-      "r2": "r * r",
-      "k": "r * r / 7",
-      "A": "22 * r * r / 7",
-      "h": "11 * r * r / 7"
-     },
-     "require": [
-      "r % 7 = 0"
-     ],
-     "note": "Use 7, 14, 21 or 28, so the 7 cancels.",
      "after": [
       "r × r is written r², so the rule is written Area = πr².",
       "A semicircle has half of πr². A quadrant, a quarter of a circle, has a quarter of πr²."
@@ -24892,21 +24514,21 @@
        "caption": "The height (dashed) goes straight up from the base to the top corner. The slanting sides are longer than the height."
       }
      ],
-     "ask": "A triangle has base {@b} cm and height {@h} cm. One slanting side is {@s} cm. Find its area.",
+     "ask": "A triangle has base 6 cm and height 4 cm. One slanting side is 5 cm. Find its area.",
      "steps": [
       {
        "do": "Find the height.",
        "lines": [
-        "Straight up from the base: {h} cm"
+        "Straight up from the base: 4 cm"
        ],
        "why": [
-        "The height meets the base at a right angle. The {s} cm side slants, so it is not the height."
+        "The height meets the base at a right angle. The 5 cm side slants, so it is not the height."
        ]
       },
       {
        "do": "Base × height.",
        "lines": [
-        "{b} × {h} = {bh}"
+        "6 × 4 = 24"
        ],
        "why": [
         "That is the area of a rectangle around the triangle."
@@ -24915,37 +24537,13 @@
       {
        "do": "Halve it.",
        "lines": [
-        "{bh} ÷ 2 = {ar} cm²"
+        "24 ÷ 2 = 12 cm²"
        ],
        "why": [
         "The triangle is exactly half of that rectangle."
        ]
       }
      ],
-     "vary": {
-      "b": {
-       "value": 6,
-       "min": 2,
-       "max": 16
-      },
-      "h": {
-       "value": 4,
-       "min": 2,
-       "max": 12
-      },
-      "s": {
-       "value": 5,
-       "min": 3,
-       "max": 15
-      },
-      "bh": "b * h",
-      "ar": "b * h / 2"
-     },
-     "require": [
-      "s > h",
-      "b * h % 2 = 0"
-     ],
-     "note": "A slanting side is longer than the height, and base × height must be even here.",
      "after": [
       "The side the triangle stands on is called the base.",
       "The height is the straight-up distance from the base to the opposite corner. It meets the base at 90°. A slanting side is longer, so do not use it.",
@@ -29110,30 +28708,30 @@
       "question": "Which is colder: −4 °C or −1 °C?",
       "answer": "−4 °C"
      },
-     "ask": "Start at {@s} and go down {@n} steps.",
+     "ask": "Start at 2 and go down 3 steps.",
      "steps": [
       {
-       "do": "Start at {s}.",
+       "do": "Start at 2.",
        "lines": [
-        "{s}"
+        "2"
        ],
        "why": [
         "The line carries on below zero: −1, −2, −3 and so on."
        ]
       },
       {
-       "do": "Go down {s} to reach 0.",
+       "do": "Go down 2 to reach 0.",
        "lines": [
-        "{s} − {s} = 0"
+        "2 − 2 = 0"
        ],
        "why": [
         "Count each step down. You land on 0."
        ]
       },
       {
-       "do": "Go down {m} more.",
+       "do": "Go down 1 more.",
        "lines": [
-        "0 − {m} = −{m}"
+        "0 − 1 = −1"
        ],
        "why": [
         "Going past 0 is allowed. Each step is 1 less."
@@ -29142,44 +28740,26 @@
       {
        "do": "Where you land.",
        "lines": [
-        "−{m}"
+        "−1"
        ],
        "why": [
-        "Going down {n} from {s} gives {s} − {n} = −{m}."
+        "Going down 3 from 2 gives 2 − 3 = −1."
        ]
       }
      ],
-     "vary": {
-      "s": {
-       "value": 2,
-       "min": 1,
-       "max": 6
-      },
-      "n": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "m": "n - s",
-      "e": "s - n"
-     },
-     "require": [
-      "n > s"
-     ],
-     "note": "Go down more steps than your start, so you pass 0.",
      "scene": {
       "type": "scene",
       "kind": "numberline",
       "from": -9,
       "to": 7,
       "step": 1,
-      "start": "{s}",
+      "start": 2,
       "jump": true,
-      "prompt": "Start at {s}. Slide the point down {n} {n|step|steps}.",
-      "success": "{s} − {n} = −{m}. You went past 0.",
+      "prompt": "Start at 2. Slide the point down 3 steps.",
+      "success": "2 − 3 = −1. You went past 0.",
       "goal": {
        "measure": "x",
-       "equals": "{e}"
+       "equals": -1
       }
      },
      "after": [
@@ -29761,61 +29341,39 @@
        "caption": "It is 10 o'clock. Count 5 hours on: 11, 12, 1, 2, 3. After 12 the numbers start again."
       }
      ],
-     "ask": "Find {@a} modulo {@n}.",
+     "ask": "Find 17 modulo 5.",
      "steps": [
       {
-       "do": "How many whole {n}s fit into {a}?",
+       "do": "How many whole 5s fit into 17?",
        "lines": [
-        "{n} × {q} = {u}",
-        "{n} × {q1} = {u1} is too big"
+        "5 × 3 = 15",
+        "5 × 4 = 20 is too big"
        ],
        "why": [
-        "Modulo {n} means: take out as many {n}s as you can, and keep only what is left."
+        "Modulo 5 means: take out as many 5s as you can, and keep only what is left."
        ]
       },
       {
        "do": "What is left over?",
        "lines": [
-        "{a} − {u} = {r}",
-        "{a} = {n} × {q} + {r}"
+        "17 − 15 = 2",
+        "17 = 5 × 3 + 2"
        ],
        "why": [
-        "{q} {q|lot|lots} of {n} make {u}. {if r = 0}Nothing is left, so the remainder is 0.{else}From {u} up to {a} is {r}. That leftover is the remainder.{end}"
+        "3 lots of 5 make 15. From 15 up to 17 is 2. That leftover is the remainder."
        ]
       },
       {
        "do": "Write it in the new words.",
        "lines": [
-        "{a} ≡ {r} (mod {n})"
+        "17 ≡ 2 (mod 5)"
        ],
        "why": [
-        "Read it as: {a} is congruent to {r} modulo {n}. They leave the same remainder when divided by {n}.",
-        "{r} is the least non-negative residue: the remainder, one of 0 up to {n1}."
+        "Read it as: 17 is congruent to 2 modulo 5. They leave the same remainder when divided by 5.",
+        "2 is the least non-negative residue: the remainder, one of 0 up to 4."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 17,
-       "min": 8,
-       "max": 60
-      },
-      "n": {
-       "value": 5,
-       "min": 2,
-       "max": 12
-      },
-      "q": "floor(a / n)",
-      "r": "a % n",
-      "u": "n * q",
-      "q1": "q + 1",
-      "u1": "n * q1",
-      "n1": "n - 1"
-     },
-     "require": [
-      "a > n"
-     ],
-     "note": "Use a number bigger than the one you work modulo.",
      "after": [
       "The number at which counting wraps is the modulus, n. A clock has modulus 12. The days of the week have 7.",
       "Two numbers are congruent modulo n when they leave the same remainder on division by n. Then their difference is a multiple of n."
@@ -30355,12 +29913,12 @@
        "caption": "7 eggs: 1 full tray of 5 (top row) and 2 loose eggs."
       }
      ],
-     "ask": "A base-5 numeral has the digits {@t} and {@o}: it is {t}{o}. What is it in ordinary numbers?",
+     "ask": "A base-5 numeral has the digits 2 and 3: it is 23. What is it in ordinary numbers?",
      "steps": [
       {
        "do": "Read the places.",
        "lines": [
-        "{t} {t|five|fives} and {o} {o|one|ones}"
+        "2 fives and 3 ones"
        ],
        "why": [
         "In base 5 we bundle in fives, not tens. The left digit counts fives."
@@ -30369,8 +29927,8 @@
       {
        "do": "Work out each part.",
        "lines": [
-        "{t} × 5 = {f}",
-        "{o} × 1 = {o}"
+        "2 × 5 = 10",
+        "3 × 1 = 3"
        ],
        "why": [
         "The fives place counts 5 each. The ones place counts 1 each."
@@ -30379,27 +29937,13 @@
       {
        "do": "Add.",
        "lines": [
-        "{f} + {o} = {v}"
+        "10 + 3 = 13"
        ],
        "why": [
-        "So {t}{o} in base 5 is {v} in our ordinary base ten."
+        "So 23 in base 5 is 13 in our ordinary base ten."
        ]
       }
      ],
-     "vary": {
-      "t": {
-       "value": 2,
-       "min": 1,
-       "max": 4
-      },
-      "o": {
-       "value": 3,
-       "min": 0,
-       "max": 4
-      },
-      "f": "t * 5",
-      "v": "f + o"
-     },
      "after": [
       "We count in tens, so ordinary numbers are base ten. The base is the size of the bundle.",
       "Base-5 places are worth 1, 5, 25, 125 … Base 5 uses only the digits 0 to 4: five loose ones make a new bundle.",
@@ -36198,12 +35742,12 @@
       "question": "4 bananas are shared equally by 2 children. How many does each child get?",
       "answer": "2 (4 ÷ 2 = 2)"
      },
-     "ask": "Share {@a} sweets equally between {@b} children.",
+     "ask": "Share 8 sweets equally between 2 children.",
      "steps": [
       {
        "do": "Give 1 to each child, again and again.",
        "lines": [
-        "{b} given each round"
+        "2 given each round"
        ],
        "why": [
         "Every child gets one sweet in each round."
@@ -36212,52 +35756,34 @@
       {
        "do": "Count the rounds.",
        "lines": [
-        "{q} rounds",
-        "{b} × {q} = {a}"
+        "4 rounds",
+        "2 × 4 = 8"
        ],
        "why": [
-        "The sweets run out after {q} rounds, so each child has {q}."
+        "The sweets run out after 4 rounds, so each child has 4."
        ]
       },
       {
        "do": "Write it.",
        "lines": [
-        "{a} ÷ {b} = {q}"
+        "8 ÷ 2 = 4"
        ],
        "why": [
-        "We read it: {a} shared by {b} is {q}."
+        "We read it: 8 shared by 2 is 4."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 8,
-       "min": 4,
-       "max": 20
-      },
-      "b": {
-       "value": 2,
-       "min": 2,
-       "max": 5
-      },
-      "q": "a / b"
-     },
-     "require": [
-      "a % b = 0",
-      "a >= 2 * b"
-     ],
-     "note": "Pick sweets that share out with none left, and at least 2 for each child.",
      "scene": {
       "type": "scene",
       "kind": "array",
-      "total": "{a}",
-      "rows": "{b}",
+      "total": 8,
+      "rows": 2,
       "share": true,
       "prompt": "Each row is one child. Give every child the same.",
-      "success": "Each child gets {q}. No sweets are left.",
+      "success": "Each child gets 4. No sweets are left.",
       "goal": {
        "measure": "left",
-       "below": "{b}"
+       "below": 2
       }
      },
      "after": [
@@ -36818,12 +36344,12 @@
       "question": "In a game you may take 1 or 2 counters, so k = 2. What is k + 1?",
       "answer": "3"
      },
-     "ask": "You may take 1 to {@k} counters each turn, so k = {k}. Find the safe numbers.",
+     "ask": "You may take 1 to 3 counters each turn, so k = 3. Find the safe numbers.",
      "steps": [
       {
        "do": "Work out k + 1.",
        "lines": [
-        "{k} + 1 = {k1}"
+        "3 + 1 = 4"
        ],
        "why": [
         "k + 1 means one more than the most you may take."
@@ -36832,7 +36358,7 @@
       {
        "do": "Work out 2(k + 1).",
        "lines": [
-        "2(k + 1) = 2 × {k1} = {dd}"
+        "2(k + 1) = 2 × 4 = 8"
        ],
        "why": [
         "A number just before a bracket means multiply. Work out the bracket first."
@@ -36841,23 +36367,13 @@
       {
        "do": "List the safe numbers.",
        "lines": [
-        "0, {k1}, {dd}, {t3}, …"
+        "0, 4, 8, 12, …"
        ],
        "why": [
         "They are the multiples of k + 1. Leave your friend one of these and you can always win."
        ]
       }
-     ],
-     "vary": {
-      "k": {
-       "value": 3,
-       "min": 2,
-       "max": 6
-      },
-      "k1": "k + 1",
-      "dd": "2 * k1",
-      "t3": "3 * k1"
-     }
+     ]
     }
    ],
    "practice": [
@@ -40267,12 +39783,12 @@
       "question": "The frequencies in a table are 3, 4 and 5. What is Σf?",
       "answer": "12"
      },
-     "ask": "x is 1, 2, 3 with f = {@a}, {@b}, {@c}. Find the mean.",
+     "ask": "x is 1, 2, 3 with f = 2, 1, 2. Find the mean.",
      "steps": [
       {
        "do": "Count the values.",
        "lines": [
-        "Σf = {a} + {b} + {c} = {n}"
+        "Σf = 2 + 1 + 2 = 5"
        ],
        "why": [
         "f says how many times each x appears. Σ means add them all up."
@@ -40281,8 +39797,8 @@
       {
        "do": "Multiply each x by its f.",
        "lines": [
-        "1 × {a} = {a}, 2 × {b} = {f2}",
-        "3 × {c} = {f3}"
+        "1 × 2 = 2, 2 × 1 = 2",
+        "3 × 2 = 6"
        ],
        "why": [
         "Each product is the total for that one value."
@@ -40291,7 +39807,7 @@
       {
        "do": "Add those totals.",
        "lines": [
-        "Σfx = {a} + {f2} + {f3} = {s}"
+        "Σfx = 2 + 2 + 6 = 10"
        ],
        "why": [
         "This is the total of every value in the list."
@@ -40300,39 +39816,13 @@
       {
        "do": "Divide.",
        "lines": [
-        "{s} ÷ {n} = {mean}"
+        "10 ÷ 5 = 2"
        ],
        "why": [
         "Mean = total ÷ how many values."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 2,
-       "min": 1,
-       "max": 9
-      },
-      "b": {
-       "value": 1,
-       "min": 1,
-       "max": 9
-      },
-      "c": {
-       "value": 2,
-       "min": 1,
-       "max": 9
-      },
-      "n": "a + b + c",
-      "f2": "2 * b",
-      "f3": "3 * c",
-      "s": "a + f2 + f3",
-      "mean": "s / n"
-     },
-     "require": [
-      "s % n = 0"
-     ],
-     "note": "Pick frequencies that make the mean a whole number.",
      "after": [
       "Σ is the Greek capital S, called sigma. S for Sum.",
       "Σf is how many values there are. Σfx is their total. So mean = Σfx ÷ Σf."
@@ -40571,14 +40061,14 @@
       "question": "The frequencies are 4 and 6. What is the cumulative frequency of the second class?",
       "answer": "10"
      },
-     "ask": "Classes 0–10, 10–20 and 20–30 have frequencies {@a}, {@b} and {@c}. Find the cumulative frequencies and the median class.",
+     "ask": "Classes 0–10, 10–20 and 20–30 have frequencies 3, 5 and 2. Find the cumulative frequencies and the median class.",
      "steps": [
       {
        "do": "Add the frequencies as you go down.",
        "lines": [
-        "{a}",
-        "{a} + {b} = {ab}",
-        "{ab} + {c} = {n}"
+        "3",
+        "3 + 5 = 8",
+        "8 + 2 = 10"
        ],
        "why": [
         "Each running total counts that class and all the classes before it."
@@ -40587,8 +40077,8 @@
       {
        "do": "Read what they mean.",
        "lines": [
-        "{ab} scored less than 20",
-        "n = {n} students in all"
+        "8 scored less than 20",
+        "n = 10 students in all"
        ],
        "why": [
         "The last running total is always the number of students, n."
@@ -40597,49 +40087,23 @@
       {
        "do": "Find the middle position.",
        "lines": [
-        "n/2 = {n} ÷ 2 = {h}"
+        "n/2 = 10 ÷ 2 = 5"
        ],
        "why": [
         "The median is the mark of the middle student, at position n/2."
        ]
       },
       {
-       "do": "Find the class where the total first reaches {h}.",
+       "do": "Find the class where the total first reaches 5.",
        "lines": [
-        "cf: {a}, then {ab}",
+        "cf: 3, then 8",
         "Median class is 10–20"
        ],
        "why": [
-        "After the first class only {a} {a|student is|students are} counted, fewer than {h}. After the second, {ab} are counted, so student {h} is in 10–20."
+        "After the first class only 3 students are counted, fewer than 5. After the second, 8 are counted, so student 5 is in 10–20."
        ]
       }
      ],
-     "vary": {
-      "a": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "b": {
-       "value": 5,
-       "min": 1,
-       "max": 9
-      },
-      "c": {
-       "value": 2,
-       "min": 1,
-       "max": 9
-      },
-      "ab": "a + b",
-      "n": "a + b + c",
-      "h": "n / 2"
-     },
-     "require": [
-      "n % 2 = 0",
-      "2 * a < n",
-      "2 * ab >= n"
-     ],
-     "note": "Pick numbers with an even total, where the middle student falls in the class 10–20.",
      "after": [
       "This running total is the cumulative frequency, written cf.",
       "The class where the cf first reaches n/2 holds the median. It is called the median class."
@@ -45238,7 +44702,7 @@
     {
      "title": "Adding arrows, stretching arrows",
      "text": [
-      "Walk {a1} east and {a2} north. Then walk {b1} east and {b2} north. Altogether you went {s1} east and {s2} north.",
+      "Walk 3 east and 1 north. Then walk 1 east and 2 north. Altogether you went 4 east and 3 north.",
       "That is vector addition: follow the first arrow, then the second from where the first ended. So vectors add part by part.",
       "Multiplying by a number stretches a vector: every part is multiplied. 2a is twice as long, −a points the other way. The number is a scalar.",
       "A mixture such as 2a − b is a linear combination of a and b."
@@ -45248,13 +44712,13 @@
       "answer": "(2, 4, 6)"
      },
      "picture": "vector-arrow",
-     "ask": "a = ({@a1}, {@a2}, 0), b = ({@b1}, {@b2}, 0). Find a + b, 2a and 2a − b.",
+     "ask": "a = (3, 1, 0), b = (1, 2, 0). Find a + b, 2a and 2a − b.",
      "steps": [
       {
        "do": "a + b.",
        "lines": [
-        "({a1} + {b1}, {a2} + {b2}, 0 + 0)",
-        "= ({s1}, {s2}, 0)"
+        "(3 + 1, 1 + 2, 0 + 0)",
+        "= (4, 3, 0)"
        ],
        "why": [
         "Add matching parts: x with x, y with y, z with z."
@@ -45263,56 +44727,23 @@
       {
        "do": "2a.",
        "lines": [
-        "({d1}, {d2}, 0)"
+        "(6, 2, 0)"
        ],
        "why": [
-        "Doubling stretches the arrow: every part doubles, so 2 × {a1} = {d1}."
+        "Doubling stretches the arrow: every part doubles, so 2 × 3 = 6."
        ]
       },
       {
        "do": "2a − b.",
        "lines": [
-        "({d1} − {b1}, {d2} − {b2}, 0 − 0)",
-        "= ({e1}, {e2}, 0)"
+        "(6 − 1, 2 − 2, 0 − 0)",
+        "= (5, 0, 0)"
        ],
        "why": [
         "Subtract matching parts, one by one."
        ]
       }
-     ],
-     "vary": {
-      "a1": {
-       "value": 3,
-       "min": 1,
-       "max": 9
-      },
-      "a2": {
-       "value": 1,
-       "min": 1,
-       "max": 9
-      },
-      "b1": {
-       "value": 1,
-       "min": 1,
-       "max": 9
-      },
-      "b2": {
-       "value": 2,
-       "min": 1,
-       "max": 9
-      },
-      "s1": "a1 + b1",
-      "s2": "a2 + b2",
-      "d1": "2 * a1",
-      "d2": "2 * a2",
-      "e1": "d1 - b1",
-      "e2": "d2 - b2"
-     },
-     "require": [
-      "b1 <= 2 * a1",
-      "b2 <= 2 * a2"
-     ],
-     "note": "Keep each part of b at most double that part of a, so 2a − b has no negative parts."
+     ]
     }
    ],
    "practice": [
@@ -46798,12 +46229,12 @@
          {
           "p": "segment",
           "from": [
-           134.0,
-           24.0
+           134,
+           24
           ],
           "to": [
-           326.0,
-           120.0
+           326,
+           120
           ],
           "accent": true
          },
