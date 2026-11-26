@@ -11521,7 +11521,7 @@
     "times-step (conceptual): 6 was counted for every step, as if step 1 had 6, but step 1 has 10. Start at 10 and add 6 for each new step."
    ],
    "teach": {
-    "idea": "In a growing pattern the same amount is added each time; find that amount and keep adding it.",
+    "idea": "A growing pattern grows by the same amount each time. Find that amount and keep adding it.",
     "method": "Find how much the pattern grows from one step to the next. Keep adding that amount, step by step, until you reach the step you want.",
     "alternatives": [
      {
@@ -11535,7 +11535,7 @@
      }
     ]
    },
-   "fingerprint": "f81cddfa",
+   "fingerprint": "6a23acd9",
    "validation": {
     "family": "acgrow",
     "deterministic": {

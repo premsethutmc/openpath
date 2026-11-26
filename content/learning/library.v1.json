@@ -25634,12 +25634,12 @@
     {
      "title": "Continuing a growing pattern",
      "text": [
-      "In a growing pattern the same amount is added each time; find that amount and keep adding it."
+      "A growing pattern grows by the same amount each time. Find that amount and keep adding it."
      ],
      "math": [
       "The table shows a growing pattern of dots. How many dots will there be in step 5?",
-      "From 7 to 10: the pattern grows by 3 each step",
-      "Keep adding 3: 19"
+      "Step 1 has 7 and step 2 has 10, so the pattern grows by 3 each step",
+      "Keep adding 3: 13, 16, 19"
      ],
      "widget": {
       "type": "table",
@@ -25714,8 +25714,8 @@
        ],
        "math": [
         "The table shows a growing pattern of dots. How many dots will there be in step 8?",
-        "From 4 to 10: the pattern grows by 6 each step",
-        "Keep adding 6: 46"
+        "Step 1 has 4 and step 2 has 10, so the pattern grows by 6 each step",
+        "Keep adding 6: 16, 22, 28, 34, 40, 46"
        ],
        "widget": {
         "type": "table",
@@ -25755,8 +25755,8 @@
        ],
        "math": [
         "The table shows a growing pattern of dots. How many dots will there be in step 6?",
-        "From 7 to 10: the pattern grows by 3 each step",
-        "Keep adding 3: 22"
+        "Step 1 has 7 and step 2 has 10, so the pattern grows by 3 each step",
+        "Keep adding 3: 13, 16, 19, 22"
        ],
        "widget": {
         "type": "table",

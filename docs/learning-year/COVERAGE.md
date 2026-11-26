@@ -545,7 +545,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acpictmore: Comparing two rows of a pictograph | `MATH.statistics.pictographs` | 300 | 0 | 75/150/75 | `63438f78` |
 | acbalance: Making both sides of a number sentence equal | `MATH.algebra.equality-inequality` | 400 | 0 | 70/197/133 | `72accc7b` |
 | acmissing: Finding the missing number in a number sentence | `MATH.algebra.missing-number` | 400 | 0 | 41/172/187 | `87f5465d` |
-| acgrow: Continuing a growing pattern | `MATH.algebra.growing-patterns` | 300 | 0 | 30/150/120 | `f81cddfa` |
+| acgrow: Continuing a growing pattern | `MATH.algebra.growing-patterns` | 300 | 0 | 30/150/120 | `6a23acd9` |
 | acsticks: Matchstick shapes in a row | `MATH.algebra.growing-patterns` | 84 | 0 | 16/14/54 | `3c4bcbf4` |
 | aclines: Counting line segments and lines through points | `MATH.geometry.lines-segments` | 90 | 0 | 40/20/30 | `32c9fa25` |
 | actile: How many tiles cover a floor | `MATH.geometry.shape-tiling` | 124 | 0 | 37/73/14 | `8a7b52d7` |
