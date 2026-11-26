@@ -48,7 +48,7 @@ function mark(detail: string, since: number) {
  * own Next button is untouched, the guess is not evidence, and what is recorded is only whether it was right, wrong or
  * skipped (a `lesson_part` measurement).
  */
-export function GuessFirst({ guess, competency, children }: { guess: Guess; competency: string; children: ReactNode }) {
+export function GuessFirst({ guess, competency, children, pinned = false }: { guess: Guess; competency: string; children: ReactNode; pinned?: boolean }) {
   const [picked, setPicked] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const since = useRef(Date.now());
@@ -57,7 +57,7 @@ export function GuessFirst({ guess, competency, children }: { guess: Guess; comp
     <div className="guess-first" data-guess={open ? "open" : "closed"}>
       {!open && <p className="eyebrow">Have a guess first</p>}
       {/* a bare number offered as an angle is shown as an angle (105°), as the picture labels it */}
-      <Choices ask={guess.prompt} choices={/\bangles?\b/i.test(guess.prompt) ? guess.choices.map((c) => (/^\d+(\.\d+)?$/.test(c.label) ? { ...c, label: `${c.label}°` } : c)) : guess.choices} picked={picked} onPick={(i) => { setPicked(i); reveal(guess.choices[i].right ? "right" : "wrong"); }} untilRight={false} />
+      <Choices showAsk={!pinned} ask={guess.prompt} choices={/\bangles?\b/i.test(guess.prompt) ? guess.choices.map((c) => (/^\d+(\.\d+)?$/.test(c.label) ? { ...c, label: `${c.label}°` } : c)) : guess.choices} picked={picked} onPick={(i) => { setPicked(i); reveal(guess.choices[i].right ? "right" : "wrong"); }} untilRight={false} />
       {!open && <button type="button" className="secondary guess-skip" onClick={() => reveal("skipped")}>Show me how</button>}
       <div hidden={!open}>{children}</div>
     </div>
@@ -80,11 +80,12 @@ export function PlayFirst({ scene, competency, children }: { scene: Scene; compe
   );
 }
 
-function Choices({ ask, choices, picked, onPick, untilRight }: { ask: string; choices: Choice[]; picked: number | null; onPick: (i: number) => void; untilRight: boolean }) {
+function Choices({ ask, choices, picked, onPick, untilRight, showAsk = true }: { ask: string; choices: Choice[]; picked: number | null; onPick: (i: number) => void; untilRight: boolean; showAsk?: boolean }) {
   const chosen = picked === null ? null : choices[picked];
   return (
     <>
-      <p>{mx(ask)}</p>
+      {/* lesson-pin@1: the question is pinned above the lesson, so it is not said twice */}
+      {showAsk && <p>{mx(ask)}</p>}
       <div className="recipe-choices" role="group" aria-label={ask}>
         {choices.map((c, i) => (
           <button key={c.label} type="button" className={`secondary${picked === i ? " picked" : ""}`} aria-pressed={picked === i} onClick={() => onPick(i)}>{mx(c.label)}</button>
