@@ -3,6 +3,20 @@
  "note": "The owner's record of what changed and where to see it. Every pull request that changes what a learner or the owner sees adds one entry at the top: the date, what changed in plain words, and links to the exact place to look. Shown at /owner/#changes.",
  "entries": [
   {
+   "date": "2026-11-26",
+   "status": "built",
+   "title": "Lessons: method on screen, Example and Scribble as buttons, question pinned",
+   "what": "Every child's lesson screen now shows only the method text at first. Two separate buttons stay at the bottom of the lesson: Example (the guess and the worked steps) and Scribble (the rough-work pad). Each one that is on turns blue with a tick, and both can be open together. When the example is open, its question (and its own picture, if it has one) stays pinned at the top while the steps scroll under it; 'Make smaller' shrinks it to one line. A screen with no method text opens on its example.",
+   "links": [
+    {
+     "label": "Solve pairs of linear equations: the new lesson screen",
+     "href": "/year/#try-skill=MATH.algebra.linear-systems"
+    }
+   ],
+   "pr": null,
+   "commit": null
+  },
+  {
    "date": "2026-11-25",
    "status": "built",
    "title": "Absolute value: a live number line instead of a still picture",
