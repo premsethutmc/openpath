@@ -287,7 +287,7 @@
   "packages/learning/src/intervention.ts": "27867be94dc8324eecb5cc3b4c493cbafc44d0ce159170a18f1f2197ad141432",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/learner-vector.ts": "dc40a1983f1ec75a4c8ce72827e5ab53d43da967bb51a67289fbe7c74bfc9523",
-  "packages/learning/src/library.ts": "12e54618377460a18990155202ff8824efc6ea36429e76af5fbdefda439c8d8e",
+  "packages/learning/src/library.ts": "8235f690be34ea014087b148e08014289f3191796211fddd620aa20151192a06",
   "packages/learning/src/lift.ts": "f3531dfe47a1fba9c44d8101bd3eaca506e4c20ed67c8fd8104938c0d937a34c",
   "packages/learning/src/line-check.ts": "b6b4aa3c33cbd31d5e298d6df602c08b962cb9cca123bfa0b26a14807713239a",
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",

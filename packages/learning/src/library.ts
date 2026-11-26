@@ -15,7 +15,7 @@
  * The output is written to content/learning/library.v1.json by scripts/library.ts, so the app and the server read the
  * same modules; a test checks that the file is exactly what the blueprints synthesise.
  */
-import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
+import { poolFamilies, withPlainReading, type Module, type Screen, type Strategy } from "./content";
 import { pictured, type Visual } from "./family-kit";
 import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
@@ -409,5 +409,6 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
     const pools = poolsFor(m.competency, f.id);
     return [[m.competency, { family: f.id, version: FAMILY_VERSION[f.id], ...(pools.length > 1 ? { pools } : {}) }]];
   }));
-  return { modules: [...fromBlueprints, ...fromTemplates], fromBlueprints, fromTemplates, authoredPools, notBuilt };
+  // plain-reading@1: built lessons read plainly (no semicolon-joined sentences), as the authored files do
+  return { modules: [...fromBlueprints, ...fromTemplates].map(withPlainReading), fromBlueprints, fromTemplates, authoredPools, notBuilt };
 }
