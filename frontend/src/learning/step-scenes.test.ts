@@ -202,3 +202,30 @@ test("young-lift@1 and change-up@1: change is counted up when that is shorter, a
     if (cls <= 2) assert.ok(x.floors[1] - x.floors[0] <= 30, `${pr.id}: floors ${x.floors}`);
   }
 });
+
+test("sort-step@1: every absort question gets the button sort with its own buttons, ending on its answer, and no words for Class 1", async () => {
+  const { sortScene, liftFor } = await import("../../../packages/learning/src/step-scenes");
+  const { sortNow, sortAt, sortMoves } = await import("../../../packages/learning/src/sort");
+  const items = pool("absort").items;
+  assert.ok(items.length > 20);
+  for (const pr of items) {
+    const s = sortScene(pr.id);
+    assert.ok(s, `${pr.id}: a sort`);
+    assert.deepEqual(check(s!), [], pr.id);
+    assert.deepEqual(s!.counts, pr.params.slice(0, 4), pr.id);
+    const end = sortAt(s!, sortMoves(s!)), n = sortNow(s!, end);
+    assert.ok(n.finished && met(s!, end), pr.id);
+    // the buttons that end in the last jar are the question's answer
+    assert.equal(String(n.jar[s!.ask.colour && s!.ask.size ? 1 : 0]), String(pr.answer), pr.id);
+    assert.equal(breakItDown(pr.id, classOfQuestion(pr.id)).words, false, pr.id);
+    assert.equal(breakItDown(pr.id, classOfQuestion(pr.id)).scene?.kind, "sort", pr.id);
+    assert.equal(liftFor(pr.id, classOfQuestion(pr.id))?.kind, "sort", pr.id);
+  }
+  assert.equal(sortScene(pool("aaadd").items[0].id), null);
+  assert.equal(sortScene("nonsense"), null);
+  // the wording slip: one is "there is 1", never "there are 1"
+  const one = items.find((p) => p.steps.some((st) => st.value === 1));
+  const { FAMILIES: F } = await import("../../../packages/learning/src/families");
+  for (const pr of items) for (const st of pr.steps) assert.doesNotMatch(F.get("absort")!.explain!(st) as string, /there are 1\b/, pr.id);
+  if (one) assert.ok(one.steps.some((st) => /there is 1\b|are: 1/.test(F.get("absort")!.explain!(st) as string)));
+});

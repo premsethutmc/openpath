@@ -510,3 +510,87 @@ export function liftDraw(v: LiftView): Shape[] {
   if (v.finger !== undefined) text(LP.cx + 10, (v.want > 0 ? LP.up : LP.down) + 40 + (2 - v.finger) * 90, "👆", "lift-finger");
   return out;
 }
+
+/* sort@1: the button sort (sort.ts), the approved button mock. A wooden table of sewing buttons at the top (rows of 4,
+ * or 5 when there are 9 or 10, a little out of line as if tipped from a tin); under it one glass jar, or two side by side
+ * (sorting twice). Each jar has a tag (a word and a small button) on its top edge, and its count in a green badge.
+ * Buttons in a jar are drawn smaller (SORT_SIZE.jar). Geometry only; sort.ts and scene.ts do the rest. */
+export const SORT_SIZE = { big: 30, small: 18, jar: 0.72 } as const;
+const SORT_CELL = 46, SORT_JH = 160;
+const SJX = [-4, 3, -2, 4, 2, -3, 3, -1, 4, -4, 1, -2], SJY = [-6, 5, -2, 6, -4, 3, 5, -5, 1, 4, -3, 6];
+export interface SortLayout { w: number; h: number; table: { x: number; y: number; w: number; h: number }; slots: [number, number][]; jars: { x: number; y: number; w: number; h: number }[]; go: { x: number; y: number; w: number; h: number } }
+export function sortLayout(n: number, jars: number): SortLayout {
+  const cols = n > 8 && n <= 10 ? 5 : 4, rows = Math.max(1, Math.ceil(n / cols)), pitch = 340 / cols, py = 76, th = rows * py + 16;
+  const slots: [number, number][] = Array.from({ length: n }, (_, i) => {
+    const r = Math.floor(i / cols), inRow = Math.min(cols, n - r * cols), c = i % cols;
+    return [px(170 + (c - (inRow - 1) / 2) * pitch + SJX[i % 12]), px(8 + py * (r + 0.5) + SJY[i % 12])];
+  });
+  const jy = th + 30;
+  const js = jars === 2 ? [{ x: 6, y: jy, w: 160, h: SORT_JH }, { x: 174, y: jy, w: 160, h: SORT_JH }] : [{ x: 50, y: jy, w: 240, h: SORT_JH }];
+  return { w: 340, h: jy + SORT_JH + 8, table: { x: 0, y: 0, w: 340, h: th }, slots, jars: js, go: { x: 80, y: px(th / 2 - 32), w: 180, h: 64 } };
+}
+/** The middle of the `j`-th of `count` buttons in jar `k`: rows from the bottom, each row centred. */
+export function sortJarXY(L: SortLayout, k: number, j: number, count: number): [number, number] {
+  const J = L.jars[k], per = Math.max(1, Math.floor((J.w - 12) / SORT_CELL)), row = Math.floor(j / per), inRow = Math.min(per, count - row * per), col = j % per;
+  return [px(J.x + J.w / 2 + (col - (inRow - 1) / 2) * SORT_CELL), px(J.y + J.h - 14 - SORT_CELL / 2 - row * SORT_CELL)];
+}
+/** The tappable button nearest (x, y), among `can`, or −1 (a big one is taken within 32, a small one within 28). */
+export function sortButtonAt(xy: [number, number][], radius: number[], can: number[], x: number, y: number): number {
+  let best = -1, d = Infinity;
+  for (const i of can) { const e = Math.hypot(x - xy[i][0], y - xy[i][1]); if (e <= radius[i] && e < d) { best = i; d = e; } }
+  return best;
+}
+export const sortOnGo = (L: SortLayout, x: number, y: number) => x >= L.go.x - 6 && x <= L.go.x + L.go.w + 6 && y >= L.go.y - 6 && y <= L.go.y + L.go.h + 6;
+
+export interface SortView {
+  buttons: { c: string; s: string }[];
+  /** where each button is drawn (table or jar), whether it is in a jar, and which can be tapped now */
+  xy: [number, number][]; inJar: boolean[]; can: number[];
+  jars: { word: string; icons: { c: string; s: string }[]; n: number; glow: boolean }[];
+  /** Start, Again, or neither */
+  go: "start" | "again" | null;
+  shake?: { i: number; odd: boolean };
+  fly?: { i: number; x: number; y: number; k: number };
+  finger?: [number, number];
+}
+/** A sewing button: the colour, a rim, four holes and a shine (`sh`: a shake). */
+function sewing(out: Shape[], x: number, y: number, r: number, c: string, sh = "") {
+  out.push({ t: "circle", cx: px(x), cy: px(y), r: px(r), role: `sort-${c}${sh}` });
+  out.push({ t: "circle", cx: px(x), cy: px(y), r: px(r * 0.78), role: `sort-rim${sh}` });
+  const h = r * 0.22;
+  for (const [a, b] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) out.push({ t: "circle", cx: px(x + a * h * 1.5), cy: px(y + b * h * 1.5), r: px(h * 0.7), role: `sort-hole${sh}` });
+  out.push({ t: "circle", cx: px(x - r * 0.4), cy: px(y - r * 0.45), r: px(r * 0.18), role: `sort-shine${sh}` });
+}
+export function sortDraw(L: SortLayout, v: SortView): Shape[] {
+  const out: Shape[] = [], T = L.table;
+  out.push({ t: "rect", x: T.x, y: T.y, w: T.w, h: T.h, role: "sort-table" });
+  for (let x = 40; x < T.w; x += 40) out.push({ t: "line", x1: x, y1: T.y + 4, x2: x, y2: T.y + T.h - 4, role: "sort-plank" });
+  // the jars: a glow on the one taking buttons now, the glass, its lip, its tag and its count
+  L.jars.forEach((J, k) => {
+    const jar = v.jars[k], rr = 34, d = `M${J.x} ${J.y} L${J.x} ${J.y + J.h - rr} Q${J.x} ${J.y + J.h} ${J.x + rr} ${J.y + J.h} L${J.x + J.w - rr} ${J.y + J.h} Q${J.x + J.w} ${J.y + J.h} ${J.x + J.w} ${J.y + J.h - rr} L${J.x + J.w} ${J.y} Z`;
+    if (jar?.glow) out.push({ t: "path", d, role: "sort-glow" });
+    out.push({ t: "path", d, role: "sort-jar" });
+    out.push({ t: "rect", x: J.x - 4, y: J.y - 4, w: J.w + 8, h: 8, role: "sort-lip" });
+    if (!jar) return;
+    const two = L.jars.length === 2, fs = two ? 7.4 : 8.6, tw = px(14 + jar.word.length * fs + jar.icons.length * 21);
+    out.push({ t: "rect", x: J.x + 6, y: J.y - 18, w: tw, h: 30, role: "sort-tag" });
+    out.push({ t: "text", x: px(J.x + 13 + (jar.word.length * fs) / 2), y: J.y + 2, s: jar.word, role: two ? "sort-tag-text-s" : "sort-tag-text" });
+    jar.icons.forEach((b, j) => sewing(out, J.x + 13 + jar.word.length * fs + 10 + j * 21, J.y - 3, 8.5, b.c));
+    if (jar.n > 0) { out.push({ t: "circle", cx: J.x + J.w - 18, cy: J.y - 2, r: 18, role: "sort-badge" }); out.push({ t: "text", x: J.x + J.w - 18, y: J.y + 6, s: String(jar.n), role: "sort-badge-text" }); }
+  });
+  // the buttons, on the table and in the jars; each that can be tapped now has a tap circle over it
+  v.buttons.forEach((b, i) => {
+    if (v.fly?.i === i) return;
+    const [x, y] = v.xy[i], r = SORT_SIZE[b.s as "big" | "small"] * (v.inJar[i] ? SORT_SIZE.jar : 1);
+    sewing(out, x, y, r, b.c, v.shake?.i === i ? (v.shake.odd ? "-no" : "-no2") : "");
+  });
+  for (const i of v.can) { const b = v.buttons[i], [x, y] = v.xy[i]; out.push({ t: "circle", cx: x, cy: y, r: v.inJar[i] ? 23 : b.s === "big" ? 32 : 28, role: "sort-hit", tap: { i, label: `${b.s} ${b.c} button${v.inJar[i] ? ", in the first jar" : ""}` } }); }
+  if (v.fly) { const b = v.buttons[v.fly.i]; sewing(out, v.fly.x, v.fly.y, SORT_SIZE[b.s as "big" | "small"] * v.fly.k, b.c, "-fly"); }
+  if (v.go) {
+    const G = L.go;
+    out.push({ t: "rect", x: G.x, y: G.y, w: G.w, h: G.h, role: "sort-go", tap: { i: 99, label: v.go === "start" ? "Start" : "Again" } });
+    out.push({ t: "text", x: G.x + G.w / 2, y: G.y + G.h / 2 + 9, s: v.go === "start" ? "▶ Start" : "↻ Again", role: "sort-go-text" });
+  }
+  if (v.finger) out.push({ t: "text", x: v.finger[0], y: v.finger[1], s: "👆", role: "sort-finger" });
+  return out;
+}

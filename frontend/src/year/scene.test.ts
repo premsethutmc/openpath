@@ -659,3 +659,101 @@ test("boxes@1: things in two boxes are counted box by box, then put on the ten-s
   for (let i = 0; i < 10; i++) { const [x, y] = boxesThingXY(L, 7, 3, i), bx = L.box[i < 7 ? 0 : 1]; assert.ok(x > bx.x && x < bx.x + bx.w && y > bx.y && y < bx.y + bx.h, `thing ${i} sits in its box`); }
   assert.ok(boxesNow(big, initial(big)).want === 1);
 });
+
+test("sort@1: buttons sorted into jars: Start, a finger's tap, counts said, wrong ones refused, red AND big sorted twice, Again", async () => {
+  const E = await import("../../../packages/learning/src/scene");
+  const { Playback } = await import("../../../packages/learning/src/scene-play");
+  const { sortButtons, SORT_GO } = await import("../../../packages/learning/src/sort");
+  const s: Scene = { type: "scene", kind: "sort", counts: [2, 2, 2, 2], warm: { size: "big" }, ask: { colour: "red", size: "big" }, prompt: "Buttons from the sewing tin", success: "Well done!", goal: { measure: "done", equals: 1 } };
+  assert.deepEqual(check(s), []);
+  assert.equal(met(s, initial(s)), false);
+  assert.ok([...states(s)].some((st) => met(s, st)), "the slider reaches the end too");
+  // refused: too many of a kind, no button that belongs, a warm-up with two properties, a goal that is not the end
+  assert.match(check({ ...s, counts: [5, 2, 2, 2] }).join(), /0 to 4/);
+  assert.match(check({ ...s, counts: [0, 2, 2, 2] }).join(), /red and big/);
+  assert.match(check({ ...s, warm: { colour: "red", size: "big" } }).join(), /warm/);
+  assert.match(check({ ...s, ask: {} }).join(), /ask/);
+  assert.match(check({ ...s, goal: { measure: "step", equals: 3 } }).join(), /sort done/);
+  // the words for a screen reader say what is there and what to do, never how many
+  assert.ok(describe(s).includes("Tap Start") && !/\d/.test(describe(s).replace(s.prompt, "")));
+  // every button is drawn as a real sewing button: colour, rim, four holes, shine; it fits a phone (340 wide)
+  const B = sortButtons(s.counts), d0 = draw(s, initial(s));
+  assert.equal(d0.filter((d) => d.role === "sort-hole").length, (8 + 2) * 4, "8 buttons and the tag's two");
+  assert.equal(d0.filter((d) => d.role === "sort-red" || d.role === "sort-blue").length, 8 + 2, "8 buttons and the tag's two");
+  assert.ok(d0.some((d) => d.t === "rect" && d.tap?.i === SORT_GO) && !d0.some((d) => d.t === "circle" && d.tap), "only Start before Start");
+  assert.equal(E.sceneBox(s).w, 340);
+  for (const sh of d0) if (sh.t === "circle") assert.ok(sh.cx - sh.r >= -1 && sh.cx + sh.r <= 341, "inside the width");
+  // the player's taps, on a fake clock: finger down and up on a thing (pointer, release), from `live`
+  let now = 0;
+  const timers: { at: number; fn: () => void }[] = [];
+  const run = (until: number) => { for (;;) { timers.sort((a, b) => a.at - b.at); const t = timers[0]; if (!t || t.at > until) break; timers.shift(); now = t.at; t.fn(); } now = until; };
+  const said: string[] = []; let shown = initial(s); let motion = 0;
+  const pb = new Playback(s, initial(s), { state: (n) => { shown = n; }, show: () => undefined, frame: (f) => { if (f.say) said.push(f.say); if (f.motion) motion++; }, done: () => undefined, later: (fn, ms) => timers.push({ at: now + ms, fn }) });
+  const tap = (i: number) => {
+    const h = draw(s, pb.live).find((d) => (d.t === "circle" || d.t === "rect") && d.tap?.i === i);
+    if (!h) return false;
+    const [x, y] = h.t === "circle" ? [h.cx, h.cy] : h.t === "rect" ? [h.x + h.w / 2, h.y + h.h / 2] : [0, 0];
+    pb.apply(pointer(s, pb.live, x, y)); pb.apply(E.release(s, pb.live, x, y));
+    return true;
+  };
+  const all = (f: (b: { c: string; s: string }) => boolean) => B.map((_, i) => i).filter((i) => f(B[i]));
+  assert.ok(tap(SORT_GO)); run(now + 60000);
+  assert.deepEqual(said.splice(0), ["Look at the buttons.", "Put the big buttons in the jar.", "one", "Now you. Find the big buttons."]);
+  assert.ok(motion > 0, "the finger and the button move");
+  assert.equal(E.cue(s, shown), "Now you");
+  // a small one: it shakes and is named; nothing moves
+  const small = all((b) => b.s === "small")[0];
+  tap(small); run(now + 3000);
+  assert.deepEqual(said.splice(0), ["No. That one is small."]);
+  assert.equal(E.nudge(s, pb.live), "No. That one is small.");
+  assert.ok(draw(s, pb.live).some((d) => /^sort-(red|blue)-no2?$/.test(d.role)), "the button shakes");
+  // the other big ones, 80 ms apart (each queued behind the flight before it): every one counts
+  for (const i of all((b) => b.s === "big")) { tap(i); run(now + 80); }
+  run(now + 60000);
+  assert.deepEqual(said.splice(0), ["two", "three", "four", "four big buttons.", "Now a harder one. Red, and big.", "First, put all the red buttons in this jar."]);
+  assert.equal(E.cue(s, shown), "Red and big");
+  // part 2: a fresh table, two jars; blue is refused by its colour; the red ones, 80 ms apart
+  assert.equal(draw(s, shown).filter((d) => d.role === "sort-jar").length, 2);
+  tap(all((b) => b.c === "blue")[0]); run(now + 3000);
+  assert.deepEqual(said.splice(0), ["No. That one is blue."]);
+  for (const i of all((b) => b.c === "red")) { tap(i); run(now + 80); }
+  run(now + 60000);
+  assert.deepEqual(said.splice(0), ["one", "two", "three", "four", "four red buttons. Now, out of these red ones, which are big?"]);
+  assert.equal(readout(s, shown), "4 red");
+  assert.equal(E.cue(s, shown), "Which red ones are big?");
+  // the big ones inside jar 1 are tapped into jar 2; a small one there is refused; a blue one on the table does nothing
+  assert.equal(tap(all((b) => b.c === "blue")[0]), false, "the table is not tapped now");
+  tap(all((b) => b.c === "red" && b.s === "small")[0]); run(now + 3000);
+  assert.deepEqual(said.splice(0), ["No. That one is small."]);
+  // a button taken out of jar 1 leaves its place: the others stay where they are (a quick next tap lands on its button)
+  const { sortXY } = await import("../../../packages/learning/src/sort");
+  const [b1, b2] = all((b) => b.c === "red" && b.s === "big"), was = sortXY(s as never, pb.live, b2);
+  assert.deepEqual(sortXY(s as never, E.press(s, pb.live, b1), b2), was);
+  assert.notEqual(b1, b2);
+  for (const i of all((b) => b.c === "red" && b.s === "big")) { tap(i); run(now + 80); }
+  run(now + 60000);
+  assert.deepEqual(said.splice(0), ["one", "two", "two buttons are red and big."]);
+  assert.ok(met(s, shown));
+  assert.equal(readout(s, shown), "Red and big: 2");
+  assert.equal(E.cue(s, shown), "Well done!");
+  assert.ok(draw(s, shown).some((d) => d.t === "text" && d.s === "↻ Again"));
+  // nothing tapped for a while: what to do is said again (the player does it every 7 s, three times at most)
+  assert.equal(E.remind(s, shown), null, "not once it is done");
+  // Again starts afresh, with the finger
+  tap(SORT_GO); run(now + 60000);
+  assert.deepEqual(said.splice(0), ["Look at the buttons.", "Put the big buttons in the jar.", "one", "Now you. Find the big buttons."]);
+  assert.equal(E.remind(s, shown), "Find a big button. Tap it.");
+  assert.equal(E.remindMs(s), 7000);
+  assert.ok(E.ownStart(s));
+  // reduced motion: the same words, and no picture that is only movement
+  const still = E.frames(s, initial(s), E.press(s, initial(s), SORT_GO)).filter((f) => !f.motion);
+  assert.deepEqual(still.map((f) => f.say).filter(Boolean), ["Look at the buttons.", "Put the big buttons in the jar.", "one", "Now you. Find the big buttons."]);
+  // one property alone (red), with one red button only: no finger, the one tap ends it
+  const one: Scene = { ...s, warm: undefined, counts: [1, 0, 2, 1], ask: { colour: "red" } };
+  assert.deepEqual(check(one), []);
+  const st1 = E.press(one, initial(one), SORT_GO);
+  assert.deepEqual(E.frames(one, initial(one), st1).map((f) => f.say).filter(Boolean), ["Look at the buttons.", "Put the red buttons in the jar."]);
+  const red = sortButtons(one.counts).findIndex((b) => b.c === "red"), end = E.press(one, st1, red);
+  assert.deepEqual(E.frames(one, st1, end).map((f) => f.say).filter(Boolean), ["one", "one red button."]);
+  assert.ok(met(one, end));
+});

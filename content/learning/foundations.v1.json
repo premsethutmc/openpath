@@ -24450,6 +24450,204 @@
    ]
   },
   {
+   "competency": "MATH.reasoning.sort-by-attribute",
+   "class": 1,
+   "concept": "sorting by one thing, then by two",
+   "evidence": "The sorting lesson for 5- and 6-year-olds is only written sentences ('Things that share the same property… Tick every big button: there are 1.') over a table of words. A child who cannot read yet never sees a sort happen, and never meets 'red AND big' as two sorts, one after the other.",
+   "screens": [
+    {
+     "title": "Sort the buttons",
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       2,
+       2,
+       2,
+       2
+      ],
+      "warm": {
+       "size": "big"
+      },
+      "ask": {
+       "colour": "red",
+       "size": "big"
+      },
+      "prompt": "Buttons from the sewing tin",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     },
+     "text": [
+      "Tap the buttons that belong. Then sort again."
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "question": "The jar is for big buttons. Which one goes in?",
+     "options": [
+      "a big blue button",
+      "a small blue button",
+      "a small red button",
+      "a tiny white bead"
+     ],
+     "answer": 0,
+     "why": "It is big. Big red and big blue buttons both go in.",
+     "wrong": [
+      "",
+      "It is small. Only big ones go in.",
+      "It is small. Only big ones go in.",
+      "A bead is not a big button."
+     ]
+    },
+    {
+     "question": "2 big red buttons and 2 big blue buttons. How many big buttons?",
+     "options": [
+      "2",
+      "4",
+      "3",
+      "8"
+     ],
+     "answer": 1,
+     "why": "Red or blue, they are all big. 1, 2, 3, 4.",
+     "wrong": [
+      "You counted only the red ones. The blue ones are big too.",
+      "",
+      "Count again: 2 and 2 more is 4.",
+      "There are only 4 buttons. Count each one once."
+     ]
+    },
+    {
+     "question": "Red AND big. Which one goes in?",
+     "options": [
+      "a big red button",
+      "a small red button",
+      "a big blue button",
+      "a small blue button"
+     ],
+     "answer": 0,
+     "why": "It is red, and it is big. It has both.",
+     "wrong": [
+      "",
+      "It is red, but it is small.",
+      "It is big, but it is blue.",
+      "It is blue and small."
+     ]
+    }
+   ],
+   "rounds": [
+    [
+     {
+      "question": "The jar is for red buttons. Which one goes in?",
+      "options": [
+       "a small red button",
+       "a big blue button",
+       "a small blue button",
+       "a green leaf"
+      ],
+      "answer": 0,
+      "why": "It is red. Big or small, red ones go in.",
+      "wrong": [
+       "",
+       "It is blue. Only red ones go in.",
+       "It is blue. Only red ones go in.",
+       "A leaf is not a red button."
+      ]
+     },
+     {
+      "question": "3 red buttons are in the jar. 1 of them is big. How many are red AND big?",
+      "options": [
+       "3",
+       "1",
+       "2",
+       "4"
+      ],
+      "answer": 1,
+      "why": "Out of the red ones, only 1 is big.",
+      "wrong": [
+       "3 are red, but only 1 of them is big.",
+       "",
+       "Only 1 of the red ones is big.",
+       "There are only 3 red ones. 1 is big."
+      ]
+     },
+     {
+      "question": "A small blue button. Does it go in the jar for big buttons?",
+      "options": [
+       "Yes, it is blue",
+       "No, it is small",
+       "Yes, it is a button",
+       "No, it is blue"
+      ],
+      "answer": 1,
+      "why": "The jar is for big ones. This one is small.",
+      "wrong": [
+       "Blue does not matter here. The jar is for big ones.",
+       "",
+       "Every one is a button. The jar is only for big ones.",
+       "Blue does not matter here. It is small, so no."
+      ]
+     }
+    ],
+    [
+     {
+      "question": "The jar is for small buttons. Which one goes in?",
+      "options": [
+       "a small blue button",
+       "a big blue button",
+       "a big red button",
+       "a big yellow button"
+      ],
+      "answer": 0,
+      "why": "It is small. Small ones go in.",
+      "wrong": [
+       "",
+       "It is big. Only small ones go in.",
+       "It is big. Only small ones go in.",
+       "It is big. Only small ones go in."
+      ]
+     },
+     {
+      "question": "Red AND small. Which one goes in?",
+      "options": [
+       "a small red button",
+       "a big red button",
+       "a small blue button",
+       "a big blue button"
+      ],
+      "answer": 0,
+      "why": "It is red, and it is small. It has both.",
+      "wrong": [
+       "",
+       "It is red, but it is big.",
+       "It is small, but it is blue.",
+       "It is blue and big."
+      ]
+     },
+     {
+      "question": "2 blue buttons and 2 red buttons. How many are blue?",
+      "options": [
+       "2",
+       "4",
+       "1",
+       "0"
+      ],
+      "answer": 0,
+      "why": "Only the blue ones: 1, 2.",
+      "wrong": [
+       "",
+       "4 is all the buttons. Count only the blue ones.",
+       "Count again. There are 2 blue ones.",
+       "There are blue ones. Count them: 1, 2."
+      ]
+     }
+    ]
+   ]
+  },
+  {
    "competency": "MATH.number.compare-numbers",
    "class": 1,
    "concept": "what a number line is",

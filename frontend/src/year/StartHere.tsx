@@ -71,7 +71,7 @@ export function LiftHelp({ qid, onOpen }: { qid: string; onOpen?: () => void }) 
   if (!scene) return null;
   return (
     <div className="sh-lift" data-lift-help>
-      <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <><span aria-hidden="true" className="sh-lift-icon">▲▼</span> Break it down</>}</button>
+      <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <>{scene.kind === "sort" ? null : <span aria-hidden="true" className="sh-lift-icon">▲▼</span>} Break it down</>}</button>
       {open && <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={cls !== null && cls <= 3} /></div>}
     </div>
   );
