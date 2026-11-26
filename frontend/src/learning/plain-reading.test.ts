@@ -16,8 +16,8 @@ const LONG_SENTENCES = 115; // Class 1–3 lesson texts with a sentence over 22 
 const maths = modules.filter((m) => m.competency.startsWith("MATH."));
 const textsOf = (m: (typeof modules)[number]) => [...m.chapter, ...m.strategies.flatMap((s) => s.screens)].flatMap((s) => s.text ?? []);
 
-test("no maths lesson sentence is joined with a semicolon", () => {
-  const joined = maths.flatMap((m) => textsOf(m).filter((t) => /;\s+[a-z]/.test(t)).map((t) => `${m.competency}: ${t}`));
+test("no maths lesson sentence is joined with a semicolon (a quoted question keeps its own wording)", () => {
+  const joined = maths.flatMap((m) => textsOf(m).filter((t) => /;\s+[a-z]/.test(t.replace(/“[^”]*”/g, ""))).map((t) => `${m.competency}: ${t}`));
   assert.deepEqual(joined.slice(0, 5), []);
 });
 

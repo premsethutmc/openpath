@@ -15072,7 +15072,7 @@
        "instance": "gen:det2:3,1,1,-2",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Find the determinant of the matrix [[3, 1], [1, −2]] (first row 3, 1. Second row 1, −2).” A common wrong answer is −5.",
+        "A question: “Find the determinant of the matrix [[3, 1], [1, −2]] (first row 3, 1; second row 1, −2).” A common wrong answer is −5.",
         "The two diagonal products were added. The determinant subtracts them: ad − bc."
        ],
        "math": [
@@ -20687,7 +20687,7 @@
        "instance": "gen:aapass:5,10,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “A list is sorted by this rule. Compare the 1st and 2nd numbers and swap them if the first is bigger. Then compare the 2nd and 3rd, and so on to the end of the list. That is one pass. Start with 42, 28, 84, 55, 40. Write the list after one pass, with commas between the numbers.” A common wrong answer is 28, 40, 42, 55, 84.",
+        "A question: “A list is sorted by this rule. Compare the 1st and 2nd numbers and swap them if the first is bigger; then compare the 2nd and 3rd, and so on to the end of the list. That is one pass. Start with 42, 28, 84, 55, 40. Write the list after one pass, with commas between the numbers.” A common wrong answer is 28, 40, 42, 55, 84.",
         "The whole list was sorted. The question asks what the list looks like after only one pass."
        ],
        "math": [
@@ -30992,7 +30992,7 @@
        "instance": "gen:aet24:6,4,0",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Write 6:20 a.m. in 24-hour time. Give the hours and the minutes as (hours, minutes). For example, 13:05 is written (13, 5).” A common wrong answer is (18, 20).",
+        "A question: “Write 6:20 a.m. in 24-hour time. Give the hours and the minutes as (hours, minutes); for example, 13:05 is written (13, 5).” A common wrong answer is (18, 20).",
         "12 was added to a morning time. A.m. times keep the same hour in 24-hour time."
        ],
        "math": [
@@ -31421,7 +31421,7 @@
        "instance": "gen:aemix:1,1,147,77",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Subtract: 7 kg 350 g − 3 kg 850 g. Write the answer as (kg, g). For example, 3 kg 45 g is (3, 45).” A common wrong answer is (4, 500).",
+        "A question: “Subtract: 7 kg 350 g − 3 kg 850 g. Write the answer as (kg, g); for example, 3 kg 45 g is (3, 45).” A common wrong answer is (4, 500).",
         "350 − 850 cannot be done, so 350 was taken from 850. Instead, change 1 kg into 1000 g first."
        ],
        "math": [
@@ -38137,7 +38137,7 @@
        "instance": "gen:agtree:2,9",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The table describes a tree diagram for a numerical expression. Each box does its operation on the values of its left and right branches. A branch can be a number or another box. What is the value of the whole expression (the box at the top)?” A common wrong answer is −6.",
+        "A question: “The table describes a tree diagram for a numerical expression. Each box does its operation on the values of its left and right branches; a branch can be a number or another box. What is the value of the whole expression (the box at the top)?” A common wrong answer is −6.",
         "The numbers and signs were read in a line from left to right (10 + 5 − 15 − 6), ignoring the branches. A box must be worked out before the box above it uses its value: that is what brackets do."
        ],
        "math": [
@@ -50622,7 +50622,7 @@
        "instance": "gen:al3sys:1,-1,-4,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Solve the system: x + 2y + z = −8; 2x + y − z = −7. X − y + 2z = 5. Give the solution as (x, y, z).” A common wrong answer is (1, −4, −1).",
+        "A question: “Solve the system: x + 2y + z = −8; 2x + y − z = −7; x − y + 2z = 5. Give the solution as (x, y, z).” A common wrong answer is (1, −4, −1).",
         "The values were written in a different order. Give them as (x, y, z)."
        ],
        "math": [
@@ -59400,7 +59400,7 @@
        "instance": "gen:aocq:1,8,20",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Solve x² + 8x + 20 = 0 over the complex numbers. The roots are p + qi and p − qi with q > 0. Write the pair (p, q).” A common wrong answer is (−4, 4).",
+        "A question: “Solve x² + 8x + 20 = 0 over the complex numbers. The roots are p + qi and p − qi with q > 0; write the pair (p, q).” A common wrong answer is (−4, 4).",
         "√(16) was not divided by 2a = 2. The whole of −b ± √(b² − 4ac) is divided by 2a."
        ],
        "math": [
@@ -61402,7 +61402,7 @@
        "instance": "gen:apsys3:-2,0,2,0,2,1,1,1,1,-2,-1,-2",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Solve by the matrix method (X = A⁻¹B): −2x + 2z = 0; 2y + z = −4. X + y + z = −5. Write the solution as (x, y, z).” A common wrong answer is (−1, −1, −2).",
+        "A question: “Solve by the matrix method (X = A⁻¹B): −2x + 2z = 0; 2y + z = −4; x + y + z = −5. Write the solution as (x, y, z).” A common wrong answer is (−1, −1, −2).",
         "The matrix of cofactors was used instead of its transpose. Adj A is the TRANSPOSE of the cofactor matrix."
        ],
        "math": [
@@ -70904,7 +70904,7 @@
        "instance": "gen:attotal:2,4,4,4,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “A die is thrown. If it shows 1 or 2, a ball is drawn from Bag I, which has 4 red and 4 black balls. Otherwise a ball is drawn from Bag II, which has 4 red and 1 black balls. Find the probability that the ball drawn is red.” A common wrong answer is 13/20.",
+        "A question: “A die is thrown. If it shows 1 or 2, a ball is drawn from Bag I, which has 4 red and 4 black balls; otherwise a ball is drawn from Bag II, which has 4 red and 1 black balls. Find the probability that the ball drawn is red.” A common wrong answer is 13/20.",
         "The two bags were treated as equally likely. The die chooses Bag I with probability 2/6, not 1/2."
        ],
        "math": [
@@ -71998,7 +71998,7 @@
        "instance": "gen:atdc:0,2,-1,-4,-3,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “A and B are the points (−4, −3, 1) and (−4, −1, 0). Find the direction cosines of the vector AB. Write them as (l, m, n). Square roots may stay in the answer.” A common wrong answer is (0, 2, −1).",
+        "A question: “A and B are the points (−4, −3, 1) and (−4, −1, 0). Find the direction cosines of the vector AB. Write them as (l, m, n); square roots may stay in the answer.” A common wrong answer is (0, 2, −1).",
         "The direction ratios (the components of AB) were given. Direction cosines are the components divided by the length |AB|."
        ],
        "math": [
