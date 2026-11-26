@@ -46,7 +46,10 @@ export type LearningRecord =
   | (Base & { record: "understand"; policy: "understanding@1"; competency: string; concept: string; round: number; asked: number; firstTry: number })
   // why-taps@1: the learner asked for the reason of a worked step (step = its number from 0, or -1 for "Break it down", all
   // steps). Not an attempt and not evidence: it shows which explanations children need, so the step can be written better.
-  | (Base & { record: "why"; policy: "why-taps@1"; competency: string; screen: string; step: number });
+  | (Base & { record: "why"; policy: "why-taps@1"; competency: string; screen: string; step: number })
+  // own-numbers@1: the learner changed the numbers of an explanation (vary.ts) to their own, e.g. "a=10,b=4". What the child
+  // explored, for the parent and for choosing examples later; never an attempt and never evidence of the skill.
+  | (Base & { record: "explore"; policy: "own-numbers@1"; competency: string; screen: string; values: string });
 
 /** grading-decision@1 as the SERVER recorded it (stage 7). Only the server adds it (a browser that sends one is refused), so it is the
  *  recorded, authoritative verdict replay reads (D11); a later superseding decision (a regrade) is merged in by the loader. */

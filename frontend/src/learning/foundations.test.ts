@@ -6,7 +6,10 @@ import { tangentOf } from "../../../packages/learning/src/scene-figures";
 import { readFileSync } from "node:fs";
 import { describe as describeFigure, diagramProblems, figureDraw } from "../../../packages/learning/src/figure-marks";
 import { moduleFor } from "../../../packages/learning/src/content";
-import { foundations, foundationsOf, PICTURES, type FoundationQuestion } from "../../../packages/learning/src/foundations";
+import { foundations as written, filledScreen, foundationsOf, PICTURES, type FoundationQuestion } from "../../../packages/learning/src/foundations";
+// own-numbers@1: a screen with changeable numbers is read here as the learner first sees it (the example's own numbers);
+// every other choice of numbers is checked in vary.test.ts
+const foundations = written.map((f) => ({ ...f, screens: f.screens.map((s) => filledScreen(s)) }));
 
 test("start-here teaching is attached to real skills and is well formed", () => {
   const seen = new Set<string>();

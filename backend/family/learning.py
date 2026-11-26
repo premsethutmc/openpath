@@ -41,6 +41,8 @@ RECORDS = {
     'understand': {'policy', 'competency', 'concept', 'round', 'asked', 'firstTry'},
     # why-taps@1: a learner opened the reason of a worked step (step -1: all of them); which explanations are needed
     'why': {'policy', 'competency', 'screen', 'step'},
+    # own-numbers@1: the learner changed an explanation's numbers to their own ("a=10,b=4"); never an attempt or evidence
+    'explore': {'policy', 'competency', 'screen', 'values'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
 }
@@ -57,6 +59,8 @@ DEEP_CONTEXT = re.compile(r'deep:[^|#@>\s]{1,120}\|[A-Za-z0-9._\-]{1,80}(?:>[A-Z
 DEEP_CONTEXT_LIMIT = 600
 DEEP_EPISODE = re.compile(r'deep:([^|#@>\s]{1,120})#(\d{4}-\d\d-\d\dT[0-9:.]+(?:Z|[+-]\d\d:\d\d))')
 INDEPENDENT_MIN = 2
+# own-numbers@1: the numbers a learner chose, as name=value pairs ("a=10,b=4"), at most six
+OWN_VALUES = re.compile(r'[a-z]\w{0,7}=-?\d{1,6}(?:,[a-z]\w{0,7}=-?\d{1,6}){0,5}')
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
 
 
@@ -469,6 +473,9 @@ def checked_learning(event, pupil):
         step = event.get('step')
         if event.get('policy') != 'why-taps@1' or not _text(event.get('competency'), 120) or not _text(event.get('screen'), 200) or not (isinstance(step, int) and not isinstance(step, bool) and -1 <= step <= 30):
             _reject('Invalid why tap.')
+    elif record == 'explore':
+        if event.get('policy') != 'own-numbers@1' or not _text(event.get('competency'), 120) or not _text(event.get('screen'), 200) or not isinstance(event.get('values'), str) or not OWN_VALUES.fullmatch(event['values']):
+            _reject('Invalid own numbers.')
     # the server keeps the time: the delayed check and everything else is measured by it
     return {**event, 'at': now.isoformat().replace('+00:00', 'Z'), 'savedAt': now.isoformat()}
 

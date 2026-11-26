@@ -10,6 +10,7 @@
  * not evidence, are never graded, and do not change the skill's lesson, questions or review records.
  */
 import type { Scene } from "./scene";
+import { fill, fillScene, firstValues, type Values, type Vary } from "./vary";
 import data from "../../../content/learning/foundations.v1.json";
 
 /** The pictures an idea can ask for. Each is a scene description for the scene engine (foundation-pictures.ts). */
@@ -25,7 +26,11 @@ export interface FoundationScreen { title: string; text: string[]; example?: str
    *  "Break it down" for all of them. `after` is said once the steps have been seen (the slips to avoid). */
   ask?: string; steps?: { do: string; lines: string[]; why: string[] }[]; after?: string[];
   /** "cases": the boxes are separate examples of one idea, not steps that follow each other, and are numbered as examples. */
-  stepsAre?: "cases" }
+  stepsAre?: "cases";
+  /** own-numbers@1 (vary.ts): the example's numbers the learner can change in place, the numbers that follow from them, what
+   *  must stay true (`require`) and what to try otherwise (`note`). The screen's text, steps, check and scene then carry slots
+   *  ({a}, {@a}, {a|one|many}, {if …}…{else}…{end}) and are written again for the learner's numbers. */
+  vary?: Vary; require?: string[]; note?: string }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
 export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[];
   /** practice-scene@1: a question the child does instead of reads (Class 1: a sort with other buttons): a scene of the
@@ -40,6 +45,16 @@ export interface Foundation { competency: string; class: number; concept: string
   show?: { decision: "none"; why: "word" | "symbol" | "rule" | "procedure" } | { decision: "new"; figure: string };
   practice?: FoundationQuestion[]; /** more rounds of the same four kinds of question, so a repeat visit is not the same four */ rounds?: FoundationQuestion[][] }
 export const foundations = (data as unknown as { entries: Foundation[] }).entries;
+/** own-numbers@1: a screen written out for one choice of its numbers (the example's own by default); a screen without
+ *  changeable numbers is returned as it is. Every check of a screen's text, steps and scene reads it this way. */
+export function filledScreen(s: FoundationScreen, v?: Values): FoundationScreen {
+  if (!s.vary) return s;
+  const at = v ?? firstValues(s.vary), T = (t: string) => fill(t, at);
+  return { ...s, text: s.text.map(T), ...(s.ask ? { ask: T(s.ask) } : {}), ...(s.example ? { example: s.example.map(T) } : {}), ...(s.after ? { after: s.after.map(T) } : {}),
+    ...(s.check ? { check: { question: T(s.check.question), answer: T(s.check.answer) } } : {}),
+    ...(s.steps ? { steps: s.steps.map((st) => ({ do: T(st.do), lines: st.lines.map(T), why: st.why.map(T) })) } : {}),
+    ...(s.scene ? { scene: fillScene(s.scene, at) } : {}) };
+}
 const by = new Map<string, Foundation[]>();
 for (const f of foundations) by.set(f.competency, [...(by.get(f.competency) ?? []), f]);
 /** The start-here teaching in front of this skill's lesson (empty for most skills). */

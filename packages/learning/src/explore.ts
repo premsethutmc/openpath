@@ -22,8 +22,8 @@ export interface Dial {
    *  question moves with it; otherwise null (the question's wording changes, and is shown). */
   shown: string | null;
 }
-export interface Explorer { base: string; family: string; params: number[]; dials: Dial[] }
-export interface Explored { prompt: string; figure: NonNullable<Problem["figure"]>; steps: string[]; answer: string; changed: boolean }
+export interface Explorer { base: string; family: string; params: number[]; dials: Dial[]; /** own-numbers@1: also offered where the family draws no picture */ pictureless?: boolean }
+export interface Explored { prompt: string; figure: NonNullable<Problem["figure"]> | null; steps: string[]; answer: string; changed: boolean }
 
 const GEN = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/;
 const REACH = 12, MOST = 9, FEWEST = 3;
@@ -31,26 +31,30 @@ const numbers = (t: string) => t.match(/\d+(?:[.,]\d+)*/g) ?? [];
 const idOf = (family: string, params: number[]) => `gen:${family}:${params.join(",")}`;
 
 /** A changed question, or null: not valid, no picture, or one a learner may be tested on. */
-function variant(family: string, params: number[], released: Set<string>): Problem | null {
+function variant(family: string, params: number[], released: Set<string>, picture = true): Problem | null {
   const id = idOf(family, params);
   let p: Problem | null = null;
   try { p = problemOf(id); } catch { return null; }
-  if (!p || !p.figure || !p.steps.length || p.type === "choice") return null;
+  if (!p || (picture && !p.figure) || !p.steps.length || p.type === "choice") return null;
   if (inPool(id) || released.has(exposureKey(id))) return null;
   return p;
 }
 
 const cache = new Map<string, Explorer | null>();
 /** The numbers of a worked example that can be changed, or null when none can (or it is not a generated question). */
-export function explorerFor(qid: string): Explorer | null {
+/** `picture: false` (own-numbers@1, the child's lesson): a family without a picture can be changed too; its question and
+ *  working still change. */
+export function explorerFor(qid: string, opts: { picture?: boolean } = {}): Explorer | null {
+  const picture = opts.picture ?? true;
   const m = GEN.exec(qid);
   if (!m) return null;
   const family = m[1], params = m[2].split(",").map(Number), base = idOf(family, params);
-  if (cache.has(base)) return cache.get(base)!;
+  const key = picture ? base : `${base}|any`;
+  if (cache.has(key)) return cache.get(key)!;
   let found: Explorer | null = null;
   try {
     const b = problemOf(base);
-    if (b && b.figure && b.type !== "choice") {
+    if (b && (b.figure || !picture) && b.type !== "choice") {
       const released = new Set(pool(family).items.map((q) => exposureKey(q.id)));
       const dials: Dial[] = [];
       params.forEach((own, index) => {
@@ -58,7 +62,7 @@ export function explorerFor(qid: string): Explorer | null {
         for (let d = -REACH; d <= REACH; d++) {
           if (d === 0) { values.push(own); continue; }
           const t = [...params]; t[index] = own + d;
-          if (variant(family, t, released)) values.push(own + d);
+          if (variant(family, t, released, picture)) values.push(own + d);
         }
         if (values.length < FEWEST + 1) return;
         // the nearest values on each side of the example's own, so the dial is short and the example sits inside it
@@ -79,10 +83,10 @@ export function explorerFor(qid: string): Explorer | null {
       });
       // at most two dials: those whose change is a number of the question first, then those with the most values
       dials.sort((x, y) => Number(y.shown !== null) - Number(x.shown !== null) || y.values.length - x.values.length || x.index - y.index);
-      if (dials.length) found = { base, family, params, dials: dials.slice(0, 2).sort((x, y) => x.index - y.index) };
+      if (dials.length) found = { base, family, params, dials: dials.slice(0, 2).sort((x, y) => x.index - y.index), ...(picture ? {} : { pictureless: true }) };
     }
   } catch { found = null; }
-  cache.set(base, found);
+  cache.set(key, found);
   return found;
 }
 
@@ -93,6 +97,6 @@ export function explored(e: Explorer, dial: number, value: number): Explored | n
   if (!d || !d.values.includes(value)) return null;
   const params = [...e.params]; params[d.index] = value;
   const p = problemOf(idOf(e.family, params));
-  if (!p || !p.figure) return null;
-  return { prompt: p.prompt, figure: p.figure, steps: p.steps.map((s) => explainStep(p, s)), answer: p.answer, changed: value !== e.params[d.index] };
+  if (!p || (!p.figure && !e.pictureless)) return null;
+  return { prompt: p.prompt, figure: p.figure ?? null, steps: p.steps.map((s) => explainStep(p, s)), answer: p.answer, changed: value !== e.params[d.index] };
 }
