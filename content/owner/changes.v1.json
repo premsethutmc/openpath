@@ -5,6 +5,24 @@
   {
    "date": "2026-11-26",
    "status": "built",
+   "title": "Tap-the-picture cards: a wrong tap says what is off and which way to go",
+   "what": "On the 'On the picture' cards, a wrong tap used to repeat itself ('You chose row 1, column 2. That is the entry in row 1, column 2.'). Now it says what is off and which way to move: 'That is column 2. The row is right: you need column 3, 1 column to the right.' Points on a grid say the same: 'That is (2, 3). Go 1 step to the right, then 5 steps down.' Other pictures (circles, angles, Venn diagrams) keep naming the part tapped, without giving the answer away.",
+   "links": [
+    {
+     "label": "Matrices (Class 10): Start here, On the picture",
+     "href": "/year/#try-skill=MATH.algebra.matrices"
+    },
+    {
+     "label": "Matrix inverse (Class 12): On the picture",
+     "href": "/year/#try-skill=MATH.matrices.adjoint-inverse"
+    }
+   ],
+   "pr": null,
+   "commit": null
+  },
+  {
+   "date": "2026-11-26",
+   "status": "live",
    "title": "Changeable numbers only where changing them shows something",
    "what": "30 Start here screens lose their changeable numbers and go back to fixed examples (keeping their rewritten words). They felt locked: a number that could take only a few values, too few choices in all, tiles pulled out of the matrix onto a separate 'Change:' line, or a fixed picture showing the example's numbers that wouldn't follow them. The matrix inverse screen is one. 83 screens stay changeable. A new automatic rule keeps it that way for every screen.",
    "links": [
@@ -17,8 +35,8 @@
      "href": "/year/#try-skill=MATH.number.division-remainders"
     }
    ],
-   "pr": null,
-   "commit": null
+   "pr": 373,
+   "commit": "d118dd0ad3dfbcf3820ed19611d672e53b01ec77"
   },
   {
    "date": "2026-11-26",
