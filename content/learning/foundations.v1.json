@@ -25877,55 +25877,90 @@
    "evidence": "'The remainder of a division' starts with '39 ÷ 5 = 7 remainder' and 'keep subtracting the divisor', but the sharing skill before it never writes ÷ and no lesson names the numbers in a division (long division in class 4 also relies on these words).",
    "screens": [
     {
-     "title": "The divide sign",
-     "text": [
-      "12 laddus are shared equally among 3 children. Each child gets 4. You have done this kind of sharing already.",
-      "There is a short way to write it: 12 ÷ 3 = 4. The sign ÷ is called divided by. It means share equally, or make equal groups.",
-      "12 ÷ 3 can be read in two ways. Share 12 among 3: how many does each get? Or: how many groups of 3 are there in 12? Both give 4, because 3 × 4 = 12."
-     ],
-     "check": {
-      "question": "What is 6 ÷ 2?",
-      "answer": "3"
+     "title": "Sharing, and what is left over",
+     "vary": {
+      "a": {
+       "value": 13,
+       "min": 4,
+       "max": 30
+      },
+      "b": {
+       "value": 3,
+       "min": 2,
+       "max": 9
+      },
+      "q": "floor(a / b)",
+      "r": "a % b",
+      "used": "b * q"
      },
-     "ask": "10 ÷ 2 = ?",
+     "require": [
+      "a >= 2 * b"
+     ],
+     "note": "Use enough laddus for every child to get at least 2.",
+     "text": [
+      "You have shared things out fairly before: everyone gets the same."
+     ],
+     "ask": "{@a} laddus, shared equally among {@b} children.",
+     "scene": {
+      "type": "scene",
+      "kind": "array",
+      "total": "{a}",
+      "rows": "{b}",
+      "share": true,
+      "prompt": "Each row is one child. Give every child the same number, as many as you can.",
+      "success": "{b} rows of {q} use {used} laddus. {if r = 0}Nothing is left over.{else}The {r} left {r|is|are} not enough for another round.{end}",
+      "goal": {
+       "measure": "left",
+       "below": "{b}"
+      }
+     },
      "steps": [
       {
-       "do": "Read it as sharing.",
+       "do": "Share.",
        "lines": [
-        "10 sweets, 2 children"
+        "Each child gets {q}"
        ],
        "why": [
-        "÷ means share equally."
+        "Give 1 to each child, again and again, until there are not enough for everyone."
        ]
       },
       {
-       "do": "Share them out.",
+       "do": "What is left?",
        "lines": [
-        "Each gets 5"
+        "{if r = 0}Nothing is left{else}{r} {r|laddu is|laddus are} left{end}",
+        "{if r = 0}{a} ÷ {b} = {q}{else}{a} ÷ {b} = {q} remainder {r}{end}"
        ],
        "why": [
-        "Give one each, again and again, until none are left."
+        "{if r = 0}It shares out exactly, so the remainder is 0.{else}{r} {r|is|are} not enough for all {b} children, so {r|it stays|they stay} on the plate. That is the remainder.{end}"
        ]
       },
       {
        "do": "Check.",
        "lines": [
-        "2 × 5 = 10 ✓",
-        "10 ÷ 2 = 5"
+        "{b} × {q} = {used}",
+        "{if r = 0}{used} = {a} ✓{else}{used} + {r} = {a} ✓{end}"
        ],
        "why": [
-        "Division undoes multiplication."
+        "The shares and what is left make all the laddus again."
        ]
       }
-     ]
+     ],
+     "after": [
+      "The sign ÷ is read divided by. It means share equally.",
+      "The remainder is always smaller than the number of children ({b}). If {b} or more were left, everyone could get 1 more."
+     ],
+     "check": {
+      "question": "Share 11 laddus among 4 children. How many does each get, and how many are left?",
+      "answer": "Each gets 2 and 3 are left: 11 ÷ 4 = 2 remainder 3."
+     }
     },
     {
      "title": "Names for the numbers in a division",
      "text": [
-      "Each number in a division has a name. Look at 14 ÷ 4.",
-      "The number being shared out, 14, is called the dividend. The number you divide by, 4, is called the divisor.",
+      "Each number in a division has a name. Look at {@a} ÷ {@b}.",
+      "The number being shared out, {a}, is called the dividend. The number you divide by, {b}, is called the divisor.",
       "The answer, the number of full groups, is called the quotient. Anything left over is called the remainder.",
-      "Three groups of 4 make 12, and 2 are left. So for 14 ÷ 4 the quotient is 3 and the remainder is 2."
+      "{q} {q|group|groups} of {b} make {used}, and {if r = 0}nothing is left{else}{r} {r|is|are} left{end}. So for {a} ÷ {b} the quotient is {q} and the remainder is {r}."
      ],
      "check": {
       "question": "In 20 ÷ 4 = 5, which number is the divisor?",
@@ -25969,7 +26004,26 @@
         "The quotient is the number of groups; the remainder is left over."
        ]
       }
-     ]
+     ],
+     "vary": {
+      "a": {
+       "value": 14,
+       "min": 2,
+       "max": 40
+      },
+      "b": {
+       "value": 4,
+       "min": 2,
+       "max": 10
+      },
+      "q": "floor(a / b)",
+      "r": "a % b",
+      "used": "b * q"
+     },
+     "require": [
+      "a >= b"
+     ],
+     "note": "Use a number at least as big as the one you divide by."
     }
    ],
    "practice": [
@@ -26183,11 +26237,7 @@
       ]
      }
     ]
-   ],
-   "show": {
-    "decision": "none",
-    "why": "symbol"
-   }
+   ]
   },
   {
    "competency": "MATH.number.factors-multiples",

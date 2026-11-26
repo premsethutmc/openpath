@@ -59,6 +59,7 @@ import "./matrix-text.css";
 import "./start-here.css";
 import { KID, kidName } from "./kid";
 import { whyTaps } from "./StartHere";
+import { ownNumbers } from "./OwnNumbers";
 
 declare const OPENPATH_REVIEW_FIXTURE: boolean;
 // TEST BUILDS ONLY: treat every question as educator-reviewed, so acceptance tests can show a verified (green) skill.
@@ -328,6 +329,8 @@ function App() {
   const name = pupils.find((p) => p.id === learner)?.display_name ?? "Learner";
   // why-taps@1: a "Why?" tap on a worked step is kept for this learner (which explanations children need)
   whyTaps.record = (competency: string, screen: string, step: number) => { if (competency) void save(make.why(ctxOf(), competency, screen.slice(0, 200), step)); };
+  // own-numbers@1: an explanation the learner wrote again with their own numbers is kept for this learner (not evidence)
+  ownNumbers.record = (competency: string, screen: string, values: string) => { if (competency) void save(make.explore(ctxOf(), competency, screen.slice(0, 200), values.slice(0, 80))); };
   const ctx: Ctx = {
     records: st.records.pathway?.active ? st.selectionRecords : st.records,
     // deep-recovery@0 on one learning goal (research switch; deep-goal.ts): only that goal's "recover" changes

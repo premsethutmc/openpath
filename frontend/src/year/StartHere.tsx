@@ -8,6 +8,8 @@ import { Figure } from "./Figure";
 import { foundationsOf, picturesOf, shownOrder, type FoundationQuestion, type FoundationScreen, type Picture } from "../../../packages/learning/src/foundations";
 
 import { mx } from "./MatrixText";
+import { useOwnNumbers } from "./OwnNumbers";
+import { fillScene } from "../../../packages/learning/src/vary";
 import { breakItDown, liftFor } from "../../../packages/learning/src/step-scenes";
 import { classOfQuestion } from "./StepCoach";
 /** The labelled picture of an idea, drawn by the scene engine from its description (foundation-pictures.ts). */
@@ -107,19 +109,31 @@ function Steps({ steps, cases, where, words = true }: { steps: NonNullable<Found
 /** `cls`: the class the entry is written for; Class 1–3 gets the steps without written reasons. */
 export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; competency?: string; cls?: number }) {
   const [shown, setShown] = useState(false);
+  // own-numbers@1: a screen with changeable numbers is written again for the learner's own numbers (vary.ts)
+  const own = useOwnNumbers(s.vary ? { vary: s.vary, require: s.require, note: s.note } : null, { competency, screen: s.title });
+  const T = (t: string) => (own ? own.text(t) : t);
+  const L = (t: string) => (own ? own.line(t) : mx(t));
+  const scene = s.scene && own ? fillScene(s.scene, own.values) : s.scene;
+  const sceneKey = own ? JSON.stringify(own.values) : "scene";
+  const steps = s.steps && own ? s.steps.map((st) => ({ do: T(st.do), lines: st.lines.map(T), why: st.why.map(T) })) : s.steps;
   return (
-    <section className="sh-card">
+    <section className="sh-card" data-own-numbers={own ? (own.changed ? "changed" : "first") : undefined}>
       <h3>{s.title}</h3>
+      {own?.hint}
       {s.picture ? <FoundationPicture kind={s.picture} /> : null}
-      {s.scene ? <ScenePlayer scene={s.scene} young={cls !== undefined && cls <= 3} /> : null}
+      {scene && !own ? <ScenePlayer scene={scene} young={cls !== undefined && cls <= 3} /> : null}
       {s.figures?.length ? <div className={`sh-figs${s.figures.length > 1 ? " many" : ""}`}>{s.figures.map((f, i) => <div className="sh-fig" key={i}><Figure v={f.v} /><p className="sh-cap">{f.caption}</p></div>)}</div> : null}
       {/* lift@1: a lift ride says everything itself; no reading under it for a child who cannot read yet */}
-      {s.scene && isLift(s.scene) ? null : s.text.map((t, i) => <p key={i}>{mx(t)}</p>)}
-      {s.ask ? <p className="sh-ask">{mx(s.ask)}</p> : null}
-      {s.steps?.length ? <Steps steps={s.steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
-      {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{mx(t)}</p>)}
-      {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(t)}</div>)}</div> : null}
-      {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(s.check.question)}</p>{shown ? <p className="sh-answer">{mx(s.check.answer)}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
+      {scene && isLift(scene) ? null : s.text.map((t, i) => <p key={i}>{L(t)}</p>)}
+      {s.ask ? <p className="sh-ask">{L(s.ask)}</p> : null}
+      {own?.note}
+      {/* own-numbers@1: the thing to move follows the sentence whose numbers it uses, and is made again for the learner's numbers */}
+      {scene && own ? <ScenePlayer key={sceneKey} scene={scene} young={cls !== undefined && cls <= 3} /> : null}
+      {steps?.length ? <Steps key={sceneKey} steps={steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
+      {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{L(t)}</p>)}
+      {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(T(t))}</div>)}</div> : null}
+      {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(T(s.check.question))}</p>{shown ? <p className="sh-answer">{mx(T(s.check.answer))}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
+      {own?.back}
     </section>
   );
 }

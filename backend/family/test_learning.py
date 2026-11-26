@@ -325,6 +325,17 @@ class PlatformTests(LearningBase):
             self.assertEqual(self.save(self.rec('why', **{**tap, **bad})).status_code, 400, bad)
         self.assertEqual(self.save(self.rec('why', **tap, extra=1)).status_code, 400)
 
+    def test_own_numbers_are_kept_and_malformed_ones_refused(self):
+        # own-numbers@1: an explanation the learner wrote again with their own numbers is kept; it is never an attempt
+        self.save(self.enrol())
+        own = {'policy': 'own-numbers@1', 'competency': 'MATH.number.division-remainders', 'screen': 'Sharing, and what is left over', 'values': 'a=10,b=4'}
+        self.assertEqual(self.save(self.rec('explore', **own)).status_code, 201)
+        self.assertEqual(len([r for r in self.records() if r['record'] == 'explore']), 1)
+        for bad in ({'values': ''}, {'values': 'a=10;b=4'}, {'values': 'A=1'}, {'values': 'a=1,' * 7 + 'b=2'}, {'values': 3}, {'competency': ''}, {'policy': 'x'}):
+            self.assertEqual(self.save(self.rec('explore', **{**own, **bad})).status_code, 400, bad)
+        self.assertEqual(self.save(self.rec('explore', **own, mastered=True)).status_code, 400)
+        self.assertFalse([r for r in self.records() if r['record'] == 'attempt'])
+
     def test_a_multiple_choice_generated_question_is_checked_by_letter(self):
         self.save(self.enrol())
         ok = self.rec('attempt', questionId='gen:subst:0,2,1,2:mc', response='C', activity='practice', hints=0, solution=False, competency='MATH.calculus.integration-methods')
