@@ -54,3 +54,12 @@ test("step-scene@1: Start here steps show no written reasons for Class 1–3, an
   const one = ["MATH.number.addition", "MATH.number.subtraction"].flatMap((c) => foundationsOf(c)).find((f) => f.class <= 3 && f.screens.some((s) => s.steps?.length));
   if (one) for (const s of one.screens) assert.doesNotMatch(renderToStaticMarkup(createElement(FoundationCard, { s, cls: one.class })), /Why\?/);
 });
+
+test("practice-scene@1: a practice question with a scene is the scene to do, with no choices to read", async () => {
+  const { FoundationPractice } = await import("./StartHere");
+  const [f] = foundationsOf("MATH.reasoning.sort-by-attribute");
+  const html = renderToStaticMarkup(createElement(FoundationPractice, { questions: f.practice! }));
+  assert.match(html, /data-practice-scene/);
+  assert.match(html, /data-scene="sort"/);
+  assert.doesNotMatch(html, /sh-option|not available/);
+});

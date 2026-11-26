@@ -5779,7 +5779,7 @@
    "kind": "help",
    "competency": "MATH.number.addition",
    "title": "Adding two numbers with a total up to 20",
-   "hash": "0ba33e11",
+   "hash": "a09818cb",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6253,7 +6253,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-totals",
    "title": "Adding up coins and notes",
-   "hash": "5ab93bc8",
+   "hash": "80199886",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6633,7 +6633,7 @@
    "kind": "help",
    "competency": "MATH.number.addition",
    "title": "How many altogether: addition story problems",
-   "hash": "36ce80a6",
+   "hash": "021238dd",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6650,7 +6650,7 @@
    "kind": "help",
    "competency": "MATH.number.subtraction",
    "title": "How many are left: subtraction story problems",
-   "hash": "457e6ed3",
+   "hash": "69548118",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6667,7 +6667,7 @@
    "kind": "help",
    "competency": "MATH.number.subtraction",
    "title": "Taking away within 20",
-   "hash": "c945f40a",
+   "hash": "7a2b7a60",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6818,7 +6818,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-change",
    "title": "Finding the change",
-   "hash": "6376b1ec",
+   "hash": "bef35b73",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -6851,7 +6851,7 @@
    "kind": "help",
    "competency": "MATH.measurement.money-totals",
    "title": "The total cost of two things",
-   "hash": "5034a001",
+   "hash": "8d842077",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -7465,7 +7465,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.sort-by-attribute",
    "title": "Sorting buttons by colour and size",
-   "hash": "c4bef92d",
+   "hash": "9c18f5b5",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8114,7 +8114,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.operation-choice",
    "title": "Choosing whether to add, take away, multiply or share",
-   "hash": "30675da1",
+   "hash": "8d00e27c",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -8160,7 +8160,7 @@
    "kind": "help",
    "competency": "MATH.reasoning.operation-choice",
    "title": "Small number stories: adding or taking away within 9",
-   "hash": "d79225b5",
+   "hash": "656a4a1a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12692,7 +12692,7 @@
    "kind": "help",
    "competency": "MATH.number.integer-add",
    "title": "Adding and subtracting integers",
-   "hash": "ec264d09",
+   "hash": "9a2c011a",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -12755,7 +12755,7 @@
    "kind": "help",
    "competency": "MATH.number.integer-add",
    "title": "Several integer changes in a row: temperatures, lifts and divers",
-   "hash": "d45c1758",
+   "hash": "5e326610",
    "source": "rule",
    "from": "steps",
    "classes": [
@@ -13534,7 +13534,7 @@
    "kind": "help",
    "competency": "MATH.number.integers",
    "title": "Integers on the number line and in real situations",
-   "hash": "da556b6d",
+   "hash": "34f8414f",
    "source": "rule",
    "from": "steps",
    "classes": [

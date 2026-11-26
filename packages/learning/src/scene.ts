@@ -146,6 +146,8 @@ export type SortKind = Omit<SortScene, "goal"> & Base;
 /** sort@1 and lift@1: a scene with its own Start and Again, whose lines are said one after another and repeated when the
  *  child does nothing for a while. */
 export const ownStart = (s: Scene): boolean => isLift(s) || s.kind === "sort";
+/** The tap that is Start for a scene with its own Start (the lift's 2, the sort's SORT_GO), or null. */
+export const startTap = (s: Scene): number | null => (s.kind === "sort" ? SORT_GO : isLift(s) ? 2 : null);
 /** How long the child may do nothing before what to do is said again (at most three times). */
 export const remindMs = (s: Scene): number => (s.kind === "sort" ? 7000 : 6000);
 export type Scene = SortKind | BoxesKind | TallyKind | PickScene | RatiosScene | TangentScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;

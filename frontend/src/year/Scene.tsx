@@ -11,7 +11,7 @@ import { createElement, useEffect, useMemo, useRef, useState, type JSX, type Key
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
 import { Playback, type PlayHooks } from "../../../packages/learning/src/scene-play";
-import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, ownStart, remind, remindMs, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, ownStart, remind, remindMs, startTap, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 /** lift@1: the lift's ding as it reaches a floor (`high` for the ground floor). Quietly nothing where there is no sound. */
 let audio: AudioContext | null = null;
@@ -58,7 +58,7 @@ function shape(s: Shape, i: number, onTap?: (i: number, e: KeyboardEvent<SVGElem
  * at the learner's first touch on or near the picture (never as the page opens). `young`: a Class 1–3 child, who gets no
  * "Set by sliders" (the focused picture still answers the arrow keys).
  */
-export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: () => void; speakNow?: boolean; young?: boolean }) {
+export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: (state: SceneState) => void; speakNow?: boolean; young?: boolean }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
   const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
   const [reached, setReached] = useState(false);
@@ -99,14 +99,26 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   // boxes@1: the instruction is said at the first tap and that tap still counts, so the two are said as one line
   const pre = useRef<string | null>(null);
   // lift@1: its lines wait for the one being said (a floor word never cuts "Down, not up."); Start and Again begin afresh
-  const say = (t?: string, fresh = false) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line, undefined, own && !fresh); };
+  // sort@1: a reminder still being said is cut short by what the next tap says (the mock's hush), so a count is not late
+  const reminding = useRef(false);
+  const say = (t?: string, fresh = false) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line, undefined, own && !fresh && !reminding.current); reminding.current = false; };
   const [doneNow, setDoneNow] = useState(false);
   // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
   const said = useRef(false);
   const sayFirst = () => { if (speaks && !own && !said.current) { said.current = true; lastSaid.current = scene.prompt; sayAloud(scene.prompt); } };
   // boxes@1: the first tap only starts (says what to do), where the phone can speak: the mock's "Start"
   const starting = () => { if (!talks || own || said.current || !canSpeak()) return false; said.current = true; pre.current = scene.prompt; return false; };
-  useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
+  // break-it-down@2: opened by a tap, the picture comes into view; a scene with its own Start (the lift, the sort) begins at
+  // once, so what to do is said on that same tap instead of a silent picture below the screen
+  const fig = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!speakNow) return;
+    sayFirst();
+    const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    fig.current?.scrollIntoView?.({ block: "center", behavior: still ? "auto" : "smooth" });
+    const k = own ? startTap(scene) : null;
+    if (k !== null) playback.current!.apply(press(scene, playback.current!.live, k));
+  }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (refusal && !talks) sayAloud(refusal); }, [refusal, state.refused]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (speaks && !talks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, talks, doneNow, scene]);
   const reachedNow = useRef(false);
@@ -116,7 +128,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     const line = remind(scene, state);
     if (!line) return;
     let n = 0;
-    const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; sayAloud(line, undefined, true); }, remindMs(scene));
+    const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; reminding.current = true; sayAloud(line, () => { reminding.current = false; }, true); }, remindMs(scene));
     return () => clearInterval(id);
   }, [own, shown, state, scene]);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
@@ -131,7 +143,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     },
     show: setShown,
     frame: (f) => { say(f.say, f.fresh); if (f.sound) ding(f.sound === 2); },
-    done: (next) => { setTaken(null); if (met(scene, next)) { if (!reachedNow.current) onReached?.(); reachedNow.current = true; setReached(true); setDoneNow(true); } },
+    done: (next) => { setTaken(null); if (met(scene, next)) { if (!reachedNow.current) onReached?.(next); reachedNow.current = true; setReached(true); setDoneNow(true); } },
     // a tile tapped while the counter is still counting is shown taken until its turn
     queued: (from, to) => { if (scene.kind === "tally" && !lift) { const was = tallyOrder(scene, from), now = tallyOrder(scene, to); if (now.length > was.length) setTaken(now[now.length - 1]); } },
     later: () => null,
@@ -162,7 +174,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     </label>
   ));
   return (
-    <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"} data-look={lift ? "lift" : undefined}
+    <figure ref={fig} className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"} data-look={lift ? "lift" : undefined}
       onPointerDown={speaks ? sayFirst : undefined}
       {...(scene.kind === "tally" ? {
         // the lift by keyboard: the picture takes focus, and the arrow keys put a tile in (→ ↑) or take the last out (← ↓);

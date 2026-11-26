@@ -683,6 +683,11 @@ test("sort@1: buttons sorted into jars: Start, a finger's tap, counts said, wron
   assert.ok(d0.some((d) => d.t === "rect" && d.tap?.i === SORT_GO) && !d0.some((d) => d.t === "circle" && d.tap), "only Start before Start");
   assert.equal(E.sceneBox(s).w, 340);
   for (const sh of d0) if (sh.t === "circle") assert.ok(sh.cx - sh.r >= -1 && sh.cx + sh.r <= 341, "inside the width");
+  // Start (and Again) sit under the jars: never over a button
+  const go = d0.find((d) => d.t === "rect" && d.tap?.i === SORT_GO) as { x: number; y: number; w: number; h: number };
+  for (const sh of d0) if (sh.t === "circle" && sh.role !== "sort-badge") assert.ok(sh.cy + sh.r < go.y, "Start is below every button and jar");
+  assert.ok(go.y + go.h <= E.sceneBox(s).h);
+  assert.equal(E.startTap(s), SORT_GO);
   // the player's taps, on a fake clock: finger down and up on a thing (pointer, release), from `live`
   let now = 0;
   const timers: { at: number; fn: () => void }[] = [];

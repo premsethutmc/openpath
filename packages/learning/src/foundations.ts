@@ -27,7 +27,11 @@ export interface FoundationScreen { title: string; text: string[]; example?: str
   /** "cases": the boxes are separate examples of one idea, not steps that follow each other, and are numbered as examples. */
   stepsAre?: "cases" }
 /** foundation-practice@1: a question on the idea itself; every wrong choice says which slip leads to it. */
-export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[] }
+export interface FoundationQuestion { question: string; options: string[]; answer: number; why: string; wrong: string[];
+  /** practice-scene@1: a question the child does instead of reads (Class 1: a sort with other buttons): a scene of the
+   *  engine, said aloud as it is done. It is answered by reaching the scene's goal; right the first time when nothing was
+   *  refused on the way. It has no options (`options` and `wrong` are empty). */
+  scene?: Scene }
 export interface Foundation { competency: string; class: number; concept: string; evidence: string; screens: FoundationScreen[];
   /** taught-lesson@1: these screens teach the skill itself, step by step (show it, one rule, why, every step, try it), where the
    *  generated lesson is only a summary of rules. They are shown first, under "Learn it step by step". */

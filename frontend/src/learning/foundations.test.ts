@@ -6,7 +6,7 @@ import { tangentOf } from "../../../packages/learning/src/scene-figures";
 import { readFileSync } from "node:fs";
 import { describe as describeFigure, diagramProblems, figureDraw } from "../../../packages/learning/src/figure-marks";
 import { moduleFor } from "../../../packages/learning/src/content";
-import { foundations, foundationsOf, PICTURES } from "../../../packages/learning/src/foundations";
+import { foundations, foundationsOf, PICTURES, type FoundationQuestion } from "../../../packages/learning/src/foundations";
 
 test("start-here teaching is attached to real skills and is well formed", () => {
   const seen = new Set<string>();
@@ -35,13 +35,22 @@ test("every start-here idea has practice a child can check: four choices, one ri
   const { shownOrder } = await import("../../../packages/learning/src/foundations");
   let n = 0;
   for (const f of foundations) {
-    assert.ok(f.practice && f.practice.length >= 3, `${f.competency}: ${f.concept} has no practice`);
-    assert.ok((f.rounds ?? []).length >= 2 && f.rounds!.every((r) => r.length >= 3), `${f.competency}: ${f.concept} has no further rounds`);
+    // practice-scene@1: a round of things to do (a Class 1 sort) may be two long; a round to read is at least three
+    const enough = (r: FoundationQuestion[]) => r.length >= (r.every((q) => q.scene) ? 2 : 3);
+    assert.ok(f.practice && enough(f.practice), `${f.competency}: ${f.concept} has no practice`);
+    assert.ok((f.rounds ?? []).length >= 2 && f.rounds!.every(enough), `${f.competency}: ${f.concept} has no further rounds`);
     const asked = [f.practice!, ...f.rounds!].flat().map((q) => q.question);
     assert.equal(new Set(asked).size, asked.length, `${f.competency}: a question is repeated between rounds`);
     for (const q of [f.practice!, ...f.rounds!].flat()) {
       n++;
       const at = `${f.competency}: ${q.question}`;
+      if (q.scene) {
+        // done, not read: a sound scene, not met at the start, that can be finished; it has no choices
+        assert.deepEqual(checkScene(q.scene), [], at);
+        assert.ok(!met(q.scene, initial(q.scene)) && [...states(q.scene)].some((st) => met(q.scene!, st)), at);
+        assert.ok(q.options.length === 0 && q.wrong.length === 0 && q.why.trim().length > 5 && q.question.trim(), at);
+        continue;
+      }
       assert.equal(q.options.length, 4, at);
       assert.equal(new Set(q.options.map((o) => o.trim().toLowerCase())).size, 4, at);
       assert.ok(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4 && q.why.trim().length > 5, at);
@@ -220,4 +229,15 @@ test("step-why@1: a family's step reasons are plain sentences for every step it 
   const ex = pool("asline").items[0];
   if (ex) assert.equal(stepWhys(ex.id)?.length, ex.steps.length);
   console.log(`step-why@1: ${fams} families, ${covered} of ${steps} sampled steps have a reason`);
+});
+
+test("practice-scene@1: the Class 1 sort's practice is done, not read: every round is sorts with other buttons", () => {
+  const [f] = foundationsOf("MATH.reasoning.sort-by-attribute");
+  assert.ok(f && f.class === 1);
+  const rounds = [f.practice!, ...f.rounds!];
+  assert.ok(rounds.every((r) => r.length >= 2 && r.every((q) => q.scene?.kind === "sort")));
+  // each round sorts one property, then two; no two practice sorts are the same
+  for (const r of rounds) assert.ok(r.some((q) => q.scene!.kind === "sort" && !(q.scene!.ask.colour && q.scene!.ask.size)) && r.some((q) => q.scene!.kind === "sort" && !!(q.scene!.ask.colour && q.scene!.ask.size)));
+  const keys = rounds.flat().map((q) => JSON.stringify(q.scene));
+  assert.equal(new Set(keys).size, keys.length);
 });

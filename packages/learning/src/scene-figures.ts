@@ -513,7 +513,7 @@ export function liftDraw(v: LiftView): Shape[] {
 
 /* sort@1: the button sort (sort.ts), the approved button mock. A wooden table of sewing buttons at the top (rows of 4,
  * or 5 when there are 9 or 10, a little out of line as if tipped from a tin); under it one glass jar, or two side by side
- * (sorting twice). Each jar has a tag (a word and a small button) on its top edge, and its count in a green badge.
+ * (sorting twice), and under them the Start / Again button. Each jar has a tag (a word and a small button) on its top edge, and its count in a green badge.
  * Buttons in a jar are drawn smaller (SORT_SIZE.jar). Geometry only; sort.ts and scene.ts do the rest. */
 export const SORT_SIZE = { big: 30, small: 18, jar: 0.72 } as const;
 const SORT_CELL = 46, SORT_JH = 160;
@@ -527,7 +527,9 @@ export function sortLayout(n: number, jars: number): SortLayout {
   });
   const jy = th + 30;
   const js = jars === 2 ? [{ x: 6, y: jy, w: 160, h: SORT_JH }, { x: 174, y: jy, w: 160, h: SORT_JH }] : [{ x: 50, y: jy, w: 240, h: SORT_JH }];
-  return { w: 340, h: jy + SORT_JH + 8, table: { x: 0, y: 0, w: 340, h: th }, slots, jars: js, go: { x: 80, y: px(th / 2 - 32), w: 180, h: 64 } };
+  // Start and Again under the jars (as in the mock), never over a button
+  const gy = jy + SORT_JH + 16;
+  return { w: 340, h: gy + 64 + 8, table: { x: 0, y: 0, w: 340, h: th }, slots, jars: js, go: { x: 80, y: gy, w: 180, h: 64 } };
 }
 /** The middle of the `j`-th of `count` buttons in jar `k`: rows from the bottom, each row centred. */
 export function sortJarXY(L: SortLayout, k: number, j: number, count: number): [number, number] {

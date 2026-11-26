@@ -24487,162 +24487,168 @@
    ],
    "practice": [
     {
-     "question": "The jar is for big buttons. Which one goes in?",
-     "options": [
-      "a big blue button",
-      "a small blue button",
-      "a small red button",
-      "a tiny white bead"
-     ],
+     "question": "Put the small buttons in the jar.",
+     "options": [],
      "answer": 0,
-     "why": "It is big. Big red and big blue buttons both go in.",
-     "wrong": [
-      "",
-      "It is small. Only big ones go in.",
-      "It is small. Only big ones go in.",
-      "A bead is not a big button."
-     ]
+     "why": "Red or blue, the small ones go in.",
+     "wrong": [],
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       1,
+       2,
+       2,
+       1
+      ],
+      "ask": {
+       "size": "small"
+      },
+      "prompt": "Your turn",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     }
     },
     {
-     "question": "2 big red buttons and 2 big blue buttons. How many big buttons?",
-     "options": [
-      "2",
-      "4",
-      "3",
-      "8"
-     ],
-     "answer": 1,
-     "why": "Red or blue, they are all big. 1, 2, 3, 4.",
-     "wrong": [
-      "You counted only the red ones. The blue ones are big too.",
-      "",
-      "Count again: 2 and 2 more is 4.",
-      "There are only 4 buttons. Count each one once."
-     ]
-    },
-    {
-     "question": "Red AND big. Which one goes in?",
-     "options": [
-      "a big red button",
-      "a small red button",
-      "a big blue button",
-      "a small blue button"
-     ],
+     "question": "Blue and big: sort twice.",
+     "options": [],
      "answer": 0,
-     "why": "It is red, and it is big. It has both.",
-     "wrong": [
-      "",
-      "It is red, but it is small.",
-      "It is big, but it is blue.",
-      "It is blue and small."
-     ]
+     "why": "First the blue ones; then, out of those, the big ones.",
+     "wrong": [],
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       2,
+       1,
+       2,
+       2
+      ],
+      "ask": {
+       "colour": "blue",
+       "size": "big"
+      },
+      "prompt": "Your turn",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     }
     }
    ],
    "rounds": [
     [
      {
-      "question": "The jar is for red buttons. Which one goes in?",
-      "options": [
-       "a small red button",
-       "a big blue button",
-       "a small blue button",
-       "a green leaf"
-      ],
+      "question": "Put the red buttons in the jar.",
+      "options": [],
       "answer": 0,
-      "why": "It is red. Big or small, red ones go in.",
-      "wrong": [
-       "",
-       "It is blue. Only red ones go in.",
-       "It is blue. Only red ones go in.",
-       "A leaf is not a red button."
-      ]
+      "why": "Big or small, the red ones go in.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        2,
+        1,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "red"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
      },
      {
-      "question": "3 red buttons are in the jar. 1 of them is big. How many are red AND big?",
-      "options": [
-       "3",
-       "1",
-       "2",
-       "4"
-      ],
-      "answer": 1,
-      "why": "Out of the red ones, only 1 is big.",
-      "wrong": [
-       "3 are red, but only 1 of them is big.",
-       "",
-       "Only 1 of the red ones is big.",
-       "There are only 3 red ones. 1 is big."
-      ]
-     },
-     {
-      "question": "A small blue button. Does it go in the jar for big buttons?",
-      "options": [
-       "Yes, it is blue",
-       "No, it is small",
-       "Yes, it is a button",
-       "No, it is blue"
-      ],
-      "answer": 1,
-      "why": "The jar is for big ones. This one is small.",
-      "wrong": [
-       "Blue does not matter here. The jar is for big ones.",
-       "",
-       "Every one is a button. The jar is only for big ones.",
-       "Blue does not matter here. It is small, so no."
-      ]
+      "question": "Red and small: sort twice.",
+      "options": [],
+      "answer": 0,
+      "why": "First the red ones; then, out of those, the small ones.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        1,
+        2,
+        2,
+        1
+       ],
+       "ask": {
+        "colour": "red",
+        "size": "small"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
      }
     ],
     [
      {
-      "question": "The jar is for small buttons. Which one goes in?",
-      "options": [
-       "a small blue button",
-       "a big blue button",
-       "a big red button",
-       "a big yellow button"
-      ],
+      "question": "Put the blue buttons in the jar.",
+      "options": [],
       "answer": 0,
-      "why": "It is small. Small ones go in.",
-      "wrong": [
-       "",
-       "It is big. Only small ones go in.",
-       "It is big. Only small ones go in.",
-       "It is big. Only small ones go in."
-      ]
+      "why": "Big or small, the blue ones go in.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        1,
+        2,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "blue"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
      },
      {
-      "question": "Red AND small. Which one goes in?",
-      "options": [
-       "a small red button",
-       "a big red button",
-       "a small blue button",
-       "a big blue button"
-      ],
+      "question": "Blue and small: sort twice.",
+      "options": [],
       "answer": 0,
-      "why": "It is red, and it is small. It has both.",
-      "wrong": [
-       "",
-       "It is red, but it is big.",
-       "It is small, but it is blue.",
-       "It is blue and big."
-      ]
-     },
-     {
-      "question": "2 blue buttons and 2 red buttons. How many are blue?",
-      "options": [
-       "2",
-       "4",
-       "1",
-       "0"
-      ],
-      "answer": 0,
-      "why": "Only the blue ones: 1, 2.",
-      "wrong": [
-       "",
-       "4 is all the buttons. Count only the blue ones.",
-       "Count again. There are 2 blue ones.",
-       "There are blue ones. Count them: 1, 2."
-      ]
+      "why": "First the blue ones; then, out of those, the small ones.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        2,
+        1,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "blue",
+        "size": "small"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
      }
     ]
    ]
