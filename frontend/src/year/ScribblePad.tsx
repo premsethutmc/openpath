@@ -14,8 +14,9 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 type Stroke = [number, number][];
 const W = 640, H = 420, MORE = 280, MOST = H * 5;
 
-export function ScribblePad() {
-  const [open, setOpen] = useState(false);
+/** lesson-tools@1: a lesson's Scribble button opens the pad straight away (the button is the opener). */
+export function ScribblePad({ startOpen = false, onHide }: { startOpen?: boolean; onHide?: () => void } = {}) {
+  const [open, setOpen] = useState(startOpen);
   const [strokes, setStrokes] = useState<Stroke[]>([]);
   const [mode, setMode] = useState<"draw" | "type">("draw");
   const [notes, setNotes] = useState("");
@@ -59,7 +60,7 @@ export function ScribblePad() {
         {mode === "draw" && <button type="button" className="link" data-testid="scribble-more" disabled={h >= MOST} onClick={grow}>More room</button>}
         {mode === "draw" && <button type="button" className="link" disabled={!strokes.length} onClick={() => setStrokes((all) => all.slice(0, -1))}>Undo</button>}
         <button type="button" className="link" disabled={mode === "draw" ? !strokes.length : !notes} onClick={() => (mode === "draw" ? (setStrokes([]), setH(H)) : setNotes(""))}>Clear</button>
-        <button type="button" className="link" onClick={() => setOpen(false)}>Hide</button>
+        <button type="button" className="link" onClick={() => (onHide ? onHide() : setOpen(false))}>Hide</button>
       </div>
     </div>
   );

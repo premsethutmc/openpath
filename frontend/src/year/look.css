@@ -302,3 +302,20 @@ details.working summary, .hint { color: var(--ink); }
 .ldp-digit { text-align: center; border-top: 3px solid currentColor; padding-top: 2px; }
 .ldp-take { border-bottom: 2px solid currentColor; padding-bottom: 3px; }
 .ldp-box { width: 2.2rem; height: 2.4rem; padding: 0; text-align: center; font-size: 1.3rem; font-weight: 700; border-radius: 8px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+
+/* lesson-tools@1 (owner, 26 Nov 2026): the extras of a child's lesson are separate, clearly tappable buttons that stay at
+   the bottom of the lesson while it scrolls; each one that is on is filled blue with a tick. */
+.lesson-tools { position: sticky; bottom: 0; z-index: 4; display: flex; gap: 10px; margin: 14px -4px 0; padding: 10px 4px 12px; background: var(--card); border-top: 1px solid var(--line); }
+.lesson-tool { flex: 1; min-height: 50px; border-radius: 999px; border: 2px solid var(--line); border-bottom-width: 4px; background: var(--brand-soft); color: var(--brand-text); font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer; }
+.lesson-tool[aria-pressed="true"] { background: var(--brand); border-color: var(--brand-deep); color: #fff; }
+.lesson-tools-note { margin: 6px 0 0; }
+.lesson-part { margin-top: 14px; }
+/* lesson-pin@1: the example's question (and its own picture) stays at the top while its steps scroll under it */
+.lesson-pin { position: sticky; top: 0; z-index: 5; margin: 14px -4px 0; padding: 10px 12px; border-radius: 16px; background: var(--card); border: 2px solid var(--brand); box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.35); max-height: 42vh; overflow: auto; }
+.lesson-pin-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.lesson-pin-head .eyebrow { margin: 0; }
+.lesson-pin-head .link { min-height: 36px; font-weight: 700; }
+.lesson-pin-ask { margin: 4px 0 0; font-weight: 700; font-size: 1.05rem; }
+.lesson-pin-picture .figure { margin: 6px 0 0; }
+.lesson-pin[data-small="yes"] .lesson-pin-picture { display: none; }
+.lesson-pin[data-small="yes"] .lesson-pin-ask { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.95rem; }

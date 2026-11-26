@@ -756,6 +756,9 @@ function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competen
 
 export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency, opening = false, grade = null }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string; opening?: boolean; grade?: number | null }) {
   const [stored, setI] = useResume(resumeKey, 0);
+  // lesson-tools@1 (owner, 26 Nov 2026): in the child's lesson the method stays on screen and the extras (the worked
+  // example, the scribble pad) are buttons that each add their panel, several at once; the question pinned above them
+  const [tools, setTools] = useState<{ at: string; example: boolean | null; pad: boolean; small: boolean }>({ at: "", example: null, pad: false, small: false });
   // recipe@1: the opening lesson of a new skill that has a lesson recipe starts with it (question, guess, missions, name,
   // when to use it); of the written sections only the worked examples follow. Other lessons of the skill (another way of
   // explaining after a mistake, a review) are unchanged. Nothing in a recipe is evidence.
@@ -793,19 +796,53 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div>{/* step-scene@1: the lift above the child's own steps (Class 1–5 adding and taking away) */}<LiftHelp key={`lift:${raw.instance}`} qid={raw.instance!} onOpen={() => whyTaps.record?.(competency ?? "", sc.title ?? s.title, -1)} /><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside the steps of a lesson too, never read */}<ScribblePad key={`pad:${raw.instance}`} /></> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} qid={raw.instance} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div>{/* step-scene@1: the lift above the child's own steps (Class 1–5 adding and taking away) */}<LiftHelp key={`lift:${raw.instance}`} qid={raw.instance!} onOpen={() => whyTaps.record?.(competency ?? "", sc.title ?? s.title, -1)} /><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside a lesson's steps is the lesson's Scribble button (lesson-tools@1) */}</> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} qid={raw.instance} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const here = `${s.title}-${i}`;
+  const t = tools.at === here ? tools : { at: here, example: null, pad: false, small: false };
+  const set = (p: Partial<typeof t>) => setTools({ ...t, ...p });
+  const showPicture = !(play && raw.instance && sceneIsPicture(raw.instance)) && !!picture;
+  const hasExample = !!(showPicture || scene || sc.math);
+  // a screen that is only its example (no words to read) opens on it
+  const exampleOpen = hasExample && (t.example ?? !sc.text.join("").trim());
+  // lesson-pin@1: the example's question (and its own still picture) stays pinned while the steps scroll under it; the
+  // guess no longer says the question again
+  const pin = KID && exampleOpen && raw.instance ? (guess ? guess.prompt : kq?.say ?? question(raw.instance).prompt) : null;
+  const pinPicture = !!pin && showPicture;
+  const example = <>{showPicture && !pinPicture && picture}{scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}{play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!} pinned={!!pin}>{working}</GuessFirst> : working}</>;
+  const pills: { id: "example" | "pad"; label: string; on: boolean; go: () => void }[] = [
+    ...(hasExample ? [{ id: "example" as const, label: "Example", on: exampleOpen, go: () => set({ example: !exampleOpen }) }] : []),
+    { id: "pad" as const, label: "Scribble", on: t.pad, go: () => set({ pad: !t.pad }) },
+  ];
   return (
-    <div className="stack enter" key={`${s.title}-${i}`}>
+    <div className="stack enter" key={here}>
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{screens.length > 1 ? ` · ${i + 1} of ${screens.length}` : ""}</p>
         <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
         {KID ? <KidText competency={competency} fold={(grade ?? classOfSkill(competency) ?? 1) <= 5} text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{mx(t)}</p>)}
-        {/* a scene made from the question's own picture replaces the still picture */}
-        {!(play && raw.instance && sceneIsPicture(raw.instance)) && picture}
-        {scene && !play && <ScenePlayer key={raw.instance} scene={scene} />}
-        {play ? <PlayFirst key={raw.instance} scene={scene!} competency={competency!}>{working}</PlayFirst> : guess ? <GuessFirst key={raw.instance} guess={guess} competency={competency!}>{working}</GuessFirst> : working}
-        {sc.tip && <p className="hint">{mx(sc.tip)}</p>}
-        {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
+        {sc.tip && KID && <p className="hint">{mx(sc.tip)}</p>}
+        {KID ? (
+          <>
+            {pin && (
+              <div className="lesson-pin" data-small={t.small ? "yes" : "no"} data-testid="lesson-pin">
+                <div className="lesson-pin-head"><span className="eyebrow">The question</span><button type="button" className="link" onClick={() => set({ small: !t.small })}>{t.small ? "Show bigger" : "Make smaller"}</button></div>
+                <p className="lesson-pin-ask">{mx(pin)}</p>
+                {pinPicture && <div className="lesson-pin-picture">{picture}</div>}
+              </div>
+            )}
+            {exampleOpen && <div className="lesson-part" data-part="example">{example}</div>}
+            {t.pad && <div className="lesson-part" data-part="pad"><ScribblePad key={`pad:${here}`} startOpen onHide={() => set({ pad: false })} /></div>}
+            {!exampleOpen && !t.pad && <p className="small muted lesson-tools-note">Tap a button below to open it. You can open both.</p>}
+            <FeedbackBox key={here} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />
+            <div className="lesson-tools" role="group" aria-label="Open in this lesson">
+              {pills.map((b) => <button key={b.id} type="button" className="lesson-tool" aria-pressed={b.on} data-testid={`lesson-tool-${b.id}`} onClick={b.go}>{b.on ? "✓ " : ""}{b.label}</button>)}
+            </div>
+          </>
+        ) : (
+          <>
+            {example}
+            {sc.tip && <p className="hint">{mx(sc.tip)}</p>}
+          </>
+        )}
       </div>
       {/* below-the-work@1: in the child's lesson the button comes after the steps; it never floats over them */}
       <div className={KID ? "actions" : "actions sticky"}>
