@@ -4,7 +4,7 @@
  "entries": [
   {
    "date": "2026-11-26",
-   "status": "built",
+   "status": "live",
    "title": "Change the numbers: explanations rewrite themselves",
    "what": "In Start here, a number of the example sits in a soft tile. Tap it, type another, and the whole explanation is written again for it: the words, the steps, the check and the picture. The first time, the tiles pulse with 'Tap a number to change it'. Numbers that don't fit get a short note, and 'Back to the first numbers' returns to the example. 113 Start here screens across Classes 1–12 now work this way, their words rewritten to show first and name after; every possible choice of numbers (about 500,000) is checked automatically for true sums and complete sentences. In lessons, the pinned question's numbers are tiles too (where the question family allows), replacing the separate 'What if the numbers change?' box. What a child tries is saved to their record (not counted as mastery).",
    "links": [
@@ -33,8 +33,8 @@
      "href": "/year/#try-skill=MATH.algebra.linear-equations"
     }
    ],
-   "pr": null,
-   "commit": null
+   "pr": 370,
+   "commit": "9bcc99d7b88912f811098f0a0cd54d2d287ef694"
   },
   {
    "date": "2026-11-26",
