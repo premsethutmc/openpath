@@ -30,6 +30,7 @@ import { MatrixAnswer } from "./MatrixAnswer";
 import { LiftHelp, StartHere, SteppedMath, whyTaps } from "./StartHere";
 import { understandingOf } from "../../../packages/learning/src/foundations";
 import { ScribblePad } from "./ScribblePad";
+import { useOwnExample } from "./OwnNumbers";
 import { LongDivisionPaper, divisionOf } from "./LongDivisionPaper";
 import { WorkedByYou } from "./WorkedByYou";
 import { SmallAsk as StepHelp } from "./SmallAsk";
@@ -766,6 +767,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const [recipeDone, setRecipeDone] = useResume<boolean>(resumeKey && recipe ? `${resumeKey}:recipe@1` : undefined, false);
   const screens = recipe ? s.screens.filter((x) => x.role === "worked-example") : s.screens;
   const i = Number.isInteger(stored) && stored >= 0 && stored < screens.length ? stored : 0;
+  // own-numbers@1: the numbers of the example's question are tiles the child can change (replaces "What if the numbers change?")
+  const ownEx = useOwnExample(KID ? screens[i]?.instance ?? null : null, competency);
   const m = competency ? moduleFor(competency) : null;
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
@@ -796,7 +799,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   // explore@1: under the working of an example, its own numbers can be changed (lessons only)
   // lesson-interactions@1 (the child build): the working of an example is done by the learner, step by step, and not only read
   const afterPicture = pics.after && <Picture w={pics.after} competency={competency} />;
-  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div>{/* step-scene@1: the lift above the child's own steps (Class 1–5 adding and taking away) */}<LiftHelp key={`lift:${raw.instance}`} qid={raw.instance!} onOpen={() => whyTaps.record?.(competency ?? "", sc.title ?? s.title, -1)} /><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside a lesson's steps is the lesson's Scribble button (lesson-tools@1) */}</> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} qid={raw.instance} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && <Explore key={raw.instance} qid={raw.instance} />}</>;
+  const working = sc.math && <>{later && laterPicture}{byYou ? <><div className="formula"><span>{mx(sc.math[0])}</span></div>{/* step-scene@1: the lift above the child's own steps (Class 1–5 adding and taking away) */}<LiftHelp key={`lift:${raw.instance}`} qid={raw.instance!} onOpen={() => whyTaps.record?.(competency ?? "", sc.title ?? s.title, -1)} /><WorkedByYou key={raw.instance} qid={raw.instance!} after={afterPicture || undefined} />{/* scribble@2: rough work beside a lesson's steps is the lesson's Scribble button (lesson-tools@1) */}</> : raw.instance && sc.math.length >= 3 ? <SteppedMath lines={sc.math} whys={stepWhys(raw.instance)} qid={raw.instance} onWhy={(step) => whyTaps.record?.(competency ?? "", sc.title ?? s.title, step)} /> : <div className="formula">{sc.math.map((m, k) => <span key={k}>{mx(m)}</span>)}</div>}{raw.instance && !KID && <Explore key={raw.instance} qid={raw.instance} />}</>;
   const here = `${s.title}-${i}`;
   const t = tools.at === here ? tools : { at: here, example: null, pad: false, small: false };
   const set = (p: Partial<typeof t>) => setTools({ ...t, ...p });
@@ -825,11 +828,19 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
             {pin && (
               <div className="lesson-pin" data-small={t.small ? "yes" : "no"} data-testid="lesson-pin">
                 <div className="lesson-pin-head"><span className="eyebrow">The question</span><button type="button" className="link" onClick={() => set({ small: !t.small })}>{t.small ? "Show bigger" : "Make smaller"}</button></div>
-                <p className="lesson-pin-ask">{mx(pin)}</p>
+                <p className="lesson-pin-ask">{ownEx ? ownEx.line(pin) : mx(pin)}</p>
+                {ownEx?.note}
                 {pinPicture && <div className="lesson-pin-picture">{picture}</div>}
               </div>
             )}
-            {exampleOpen && <div className="lesson-part" data-part="example">{example}</div>}
+            {exampleOpen && <div className="lesson-part" data-part="example">{ownEx?.explored ? (
+              <div className="explore" data-explore="changed">
+                {ownEx.explored.figure && <Figure v={ownEx.explored.figure} />}
+                <ol className="recipe-steps">{ownEx.explored.steps.map((t, k) => <li key={k}>{mx(t)}</li>)}</ol>
+                <p className="recipe-reply right" role="status">Answer: {mx(ownEx.explored.answer)}</p>
+                {ownEx.back}
+              </div>
+            ) : example}</div>}
             {t.pad && <div className="lesson-part" data-part="pad"><ScribblePad key={`pad:${here}`} startOpen onHide={() => set({ pad: false })} /></div>}
             {!exampleOpen && !t.pad && <p className="small muted lesson-tools-note">Tap a button below to open it. You can open both.</p>}
             <FeedbackBox key={here} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />

@@ -31,7 +31,7 @@ export function Explore({ qid }: { qid: string }) {
         );
       })}
       <p className="prompt">{mx(x.prompt)}</p>
-      <Figure v={x.figure} />
+      {x.figure && <Figure v={x.figure} />}
       <ol className="recipe-steps">{x.steps.map((t, k) => <li key={k}>{mx(t)}</li>)}</ol>
       <p className="recipe-reply right" role="status">Answer: {x.answer}</p>
       {x.changed && <button type="button" className="secondary" onClick={() => setAt(null)}>Back to the example</button>}

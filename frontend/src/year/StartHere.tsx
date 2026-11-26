@@ -128,8 +128,8 @@ export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; co
       {s.ask ? <p className="sh-ask">{L(s.ask)}</p> : null}
       {own?.note}
       {/* own-numbers@1: the thing to move follows the sentence whose numbers it uses, and is made again for the learner's numbers */}
-      {scene && own ? <ScenePlayer key={sceneKey} scene={scene} young={cls !== undefined && cls <= 3} /> : null}
-      {steps?.length ? <Steps key={sceneKey} steps={steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
+      {scene && own ? <ScenePlayer key={`scene:${sceneKey}`} scene={scene} young={cls !== undefined && cls <= 3} /> : null}
+      {steps?.length ? <Steps key={`steps:${sceneKey}`} steps={steps} cases={s.stepsAre === "cases"} where={competency ? [competency, s.title] : undefined} words={!(cls !== undefined && cls <= 3)} /> : null}
       {s.after?.map((t, i) => <p key={`a${i}`} className="sh-after">{L(t)}</p>)}
       {s.example?.length ? <div className="sh-example">{s.example.map((t, i) => <div key={i}>{mx(T(t))}</div>)}</div> : null}
       {s.check ? <div className="sh-check"><p><b>Quick check:</b> {mx(T(s.check.question))}</p>{shown ? <p className="sh-answer">{mx(T(s.check.answer))}</p> : <button type="button" className="sh-show" onClick={() => setShown(true)}>Show the answer</button>}</div> : null}
