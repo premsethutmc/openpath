@@ -8,7 +8,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { check as checkScene, initial, met, states, type Scene } from "../../../packages/learning/src/scene";
 import { filledScreen, foundations, type FoundationScreen } from "../../../packages/learning/src/foundations";
-import { calc, everyChoice, falseSums, fill, fillParts, inputsOf, isInput, refusal, valuesOf } from "../../../packages/learning/src/vary";
+import { calc, everyChoice, falseSums, fill, fillParts, inputsOf, isInput, refusal, valuesOf, type VaryInput } from "../../../packages/learning/src/vary";
 
 test("the calculator, the slots and the sum checker", () => {
   assert.equal(calc("floor(a / b)", { a: 13, b: 3 }), 4);
@@ -75,4 +75,30 @@ test("own-numbers@1: every choice a learner can make writes a complete, true exp
   }
   assert.ok(screens >= 2 && choices > 100, `${screens} screens, ${choices} choices`);
   console.log(`own-numbers@1: ${screens} screens, ${choices} choices of numbers, every one checked`);
+});
+
+/**
+ * worth-changing@1 (owner, 26 Nov 2026): numbers are changeable only where changing them shows something. A screen whose
+ * tiles let the child do little (an input with fewer than 4 values it may take, or fewer than 8 choices in all), whose
+ * tiles would have to sit outside the matrix they belong to, or whose fixed picture shows the example's numbers (it would
+ * not follow them) stays a fixed explanation. Changing one of those felt locked and confused more than it taught.
+ */
+function weakness(s: FoundationScreen): string | null {
+  if (!s.vary) return null;
+  const spec = { vary: s.vary, require: s.require, note: s.note }, first = valuesOf(s.vary);
+  for (const k of inputsOf(s.vary)) { const d = s.vary[k] as VaryInput; let n = 0; for (let v = d.min; v <= d.max; v++) if (refusal(spec, k, String(v), first) === null) n++; if (n < 4) return `${k} can take only ${n} values`; }
+  let total = 0; for (const _ of everyChoice(spec)) if (++total >= 8) break;
+  if (total < 8) return `only ${total} choices`;
+  if ([...s.text, s.ask ?? "", ...(s.after ?? [])].some((t) => t.includes("[[") && t.includes("{@"))) return "its tiles would sit outside the matrix";
+  const nums = new Set(Object.values(first).filter((n) => Math.abs(n) >= 2).map(String));
+  if ((JSON.stringify(s.figures ?? []).match(/-?\d+(\.\d+)?/g) ?? []).some((n) => nums.has(n))) return "a fixed picture shows the example's numbers";
+  return null;
+}
+test("worth-changing@1: a screen's numbers are changeable only where changing them shows something", () => {
+  const weak = foundations.flatMap((f) => f.screens.map((s) => [f.competency, s.title, weakness(s)] as const)).filter(([, , w]) => w);
+  assert.deepEqual(weak, []);
+  // the rule itself: a matrix screen like the inverse (two corners, determinant kept at 1) is refused
+  const inverse: FoundationScreen = { title: "t", text: [], ask: "A = [[{a}, {@b}], [{@c}, 1]]", vary: { b: { value: 1, min: 1, max: 4 }, c: { value: 1, min: 1, max: 4 }, a: "b * c + 1" } };
+  assert.match(weakness(inverse)!, /matrix/);
+  assert.match(weakness({ title: "t", text: ["{@a}"], vary: { a: { value: 2, min: 1, max: 3 } } })!, /only 3 values/);
 });

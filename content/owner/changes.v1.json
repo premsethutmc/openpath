@@ -4,6 +4,24 @@
  "entries": [
   {
    "date": "2026-11-26",
+   "status": "built",
+   "title": "Changeable numbers only where changing them shows something",
+   "what": "30 Start here screens lose their changeable numbers and go back to fixed examples (keeping their rewritten words). They felt locked: a number that could take only a few values, too few choices in all, tiles pulled out of the matrix onto a separate 'Change:' line, or a fixed picture showing the example's numbers that wouldn't follow them. The matrix inverse screen is one. 83 screens stay changeable. A new automatic rule keeps it that way for every screen.",
+   "links": [
+    {
+     "label": "Matrix inverse (Class 12): now a fixed example",
+     "href": "/year/#try-skill=MATH.matrices.adjoint-inverse"
+    },
+    {
+     "label": "Remainders (Class 2): still changeable",
+     "href": "/year/#try-skill=MATH.number.division-remainders"
+    }
+   ],
+   "pr": null,
+   "commit": null
+  },
+  {
+   "date": "2026-11-26",
    "status": "live",
    "title": "Change the numbers: explanations rewrite themselves",
    "what": "In Start here, a number of the example sits in a soft tile. Tap it, type another, and the whole explanation is written again for it: the words, the steps, the check and the picture. The first time, the tiles pulse with 'Tap a number to change it'. Numbers that don't fit get a short note, and 'Back to the first numbers' returns to the example. 113 Start here screens across Classes 1–12 now work this way, their words rewritten to show first and name after; every possible choice of numbers (about 500,000) is checked automatically for true sums and complete sentences. In lessons, the pinned question's numbers are tiles too (where the question family allows), replacing the separate 'What if the numbers change?' box. What a child tries is saved to their record (not counted as mastery).",
