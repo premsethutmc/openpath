@@ -43,7 +43,7 @@
    "index": 0,
    "original": "The general term of (u + v)ⁿ is ⁿCᵣ uʳ vⁿ⁻ʳ. With u = ax and v = b, the term with xʳ is ⁿCᵣ aʳ bⁿ⁻ʳ xʳ.",
    "text": [
-    "The general term of (u + v)ⁿ is ⁿCᵣ uⁿ⁻ʳ vʳ; since ⁿCᵣ = ⁿCₙ₋ᵣ it can also be written ⁿCᵣ uʳ vⁿ⁻ʳ. With u = ax and v = b, the second form shows that the term with xʳ is ⁿCᵣ aʳ bⁿ⁻ʳ xʳ."
+    "The general term of (u + v)ⁿ is ⁿCᵣ uⁿ⁻ʳ vʳ. Since ⁿCᵣ = ⁿCₙ₋ᵣ it can also be written ⁿCᵣ uʳ vⁿ⁻ʳ. With u = ax and v = b, the second form shows that the term with xʳ is ⁿCᵣ aʳ bⁿ⁻ʳ xʳ."
    ],
    "problem": "The general term is written ⁿCᵣ uʳ vⁿ⁻ʳ here but ⁿCᵣ uⁿ⁻ʳ vʳ (Tᵣ₊₁) in chapters 1 and 5, with no explanation that both are valid.",
    "severity": "low"
@@ -52,9 +52,9 @@
    "competency": "MATH.algebra.expressions-intro",
    "section": "chapter",
    "index": 1,
-   "original": "If a pattern grows by the same amount each time, that amount is the number multiplied by n; a fixed extra makes the first shape right. / Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add, then check the rule with a later shape.",
+   "original": "If a pattern grows by the same amount each time, that amount is the number multiplied by n. A fixed extra makes the first shape right. / Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add, then check the rule with a later shape.",
    "text": [
-    "If a pattern grows by the same amount each time, the rule starts with that amount times n; a fixed number added or taken away makes shape 1 come out right.",
+    "If a pattern grows by the same amount each time, the rule starts with that amount times n. A fixed number added or taken away makes shape 1 come out right.",
     "Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add or take away, then check the rule with a later shape."
    ],
    "problem": "'that amount is the number multiplied by n' is garbled: the growth amount is the number that multiplies n, not the result of multiplying.",
@@ -88,7 +88,7 @@
    "competency": "MATH.algebra.function-transformations",
    "section": "chapter",
    "index": 0,
-   "original": "In y = a·f(x − h) + v, the graph moves h to the right, is stretched by a (reflected if a < 0) and moves v up. A point (p, q) goes to (p + h, aq + v); f(h − x) also reflects it in the line x = h.",
+   "original": "In y = a·f(x − h) + v, the graph moves h to the right, is stretched by a (reflected if a < 0) and moves v up. A point (p, q) goes to (p + h, aq + v). F(h − x) also reflects it in the line x = h.",
    "text": [
     "In y = a·f(x − h) + v, the graph moves h to the right, is stretched by a (reflected in the x-axis if a < 0) and moves v up. A point (p, q) goes to (p + h, aq + v).",
     "y = f(h − x) reflects the graph of y = f(x) in the line x = h/2: the point (p, q) goes to (h − p, q)."
@@ -100,10 +100,10 @@
    "competency": "MATH.algebra.functions",
    "section": "chapter",
    "index": 3,
-   "original": "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex. / Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain.",
+   "original": "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex. / Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞). Otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain.",
    "text": [
     "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex.",
-    "Complete the square to find the vertex (h, c). Take a > 0 (for a < 0 swap 'increases' with 'decreases' and [ , ∞) with (−∞, ]). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d), so f is not one-one, and the range is [c, ∞). Compare the range with the codomain."
+    "Complete the square to find the vertex (h, c). Take a > 0 (for a < 0 swap 'increases' with 'decreases' and [ , ∞) with (−∞, ]). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞). Otherwise f(d) = f(2h − d), so f is not one-one, and the range is [c, ∞). Compare the range with the codomain."
    ],
    "problem": "The rule 'f only increases from the vertex' and 'range [c, ∞)' assume a > 0; for a negative x² coefficient f decreases and the range is (−∞, c].",
    "severity": "medium"
@@ -114,7 +114,7 @@
    "index": 1,
    "original": "Using a letter for the number lets you follow the trick for every number at once. When the added numbers cancel, the answer depends only on n, which is why the trick always works. / Write each step as an expression, using brackets when a whole result is multiplied. Expand the brackets and collect like terms.",
    "text": [
-    "Using a letter for the number lets you follow the trick for every number at once. If the n terms cancel, the answer is the same whatever number you started with; if all the plain numbers cancel, you get back exactly the number you started with. Either way the algebra shows it happens for every number, which is why the trick always works.",
+    "Using a letter for the number lets you follow the trick for every number at once. If the n terms cancel, the answer is the same whatever number you started with. If all the plain numbers cancel, you get back exactly the number you started with. Either way the algebra shows it happens for every number, which is why the trick always works.",
     "Write each step as an expression, using brackets when a whole result is multiplied. Expand the brackets and collect like terms."
    ],
    "problem": "Says the trick works because 'the answer depends only on n' when the added numbers cancel; a trick works for every number because the n terms cancel (fixed answer) or everything else cancels (you get n back), so the explanation is wrong/confusing.",
@@ -135,9 +135,9 @@
    "competency": "MATH.algebra.growing-patterns",
    "section": "chapter",
    "index": 1,
-   "original": "The first shape needs all its sticks; every shape after it shares one stick with its neighbour, so it needs one stick fewer. / Start with the sticks for one shape, then add (sides − 1) for each extra shape.",
+   "original": "The first shape needs all its sticks. Every shape after it shares one stick with its neighbour, so it needs one stick fewer. / Start with the sticks for one shape, then add (sides − 1) for each extra shape.",
    "text": [
-    "The first shape needs all its sticks; every shape after it shares one stick with its neighbour, so it needs one stick fewer.",
+    "The first shape needs all its sticks. Every shape after it shares one stick with its neighbour, so it needs one stick fewer.",
     "Start with the sticks for one shape, then add one stick fewer for each extra shape. Triangles: 3 sticks, then 2 more for each new triangle: 3, 5, 7, 9."
    ],
    "problem": "'Add (sides − 1) for each extra shape' is an abstract rule beyond a class 1 learner.",
@@ -171,10 +171,10 @@
    "competency": "MATH.algebra.identities",
    "section": "fix_middle_not_doubled",
    "index": 0,
-   "original": "A common mix-up is to write the middle term as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there. / There are two middle products, a×b and b×a; together they make 2ab.",
+   "original": "A common mix-up is to write the middle term as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there. / There are two middle products, a×b and b×a. Together they make 2ab.",
    "text": [
     "A common mix-up is to write (5x + 7)² as 25x² + 35x + 49, with middle term ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there, so the middle term is 70x.",
-    "There are two middle products, a×b and b×a; together they make 2ab."
+    "There are two middle products, a×b and b×a. Together they make 2ab."
    ],
    "problem": "Refers to products 5x × 7 and 7 × 5x from an example the learner has not been shown.",
    "severity": "low"
@@ -183,9 +183,9 @@
    "competency": "MATH.algebra.inequalities-two-variables",
    "section": "chapter",
    "index": 0,
-   "original": "Each constraint ≤ is a half-plane bounded by a line; the corner points of the feasible region are where two boundary lines meet inside the region.",
+   "original": "Each constraint ≤ is a half-plane bounded by a line. The corner points of the feasible region are where two boundary lines meet inside the region.",
    "text": [
-    "Each constraint ≤ is a half-plane bounded by a line; the corner points of the feasible region are the points where two boundary lines meet and that satisfy every constraint, so they lie on the edge of the region."
+    "Each constraint ≤ is a half-plane bounded by a line. The corner points of the feasible region are the points where two boundary lines meet and that satisfy every constraint, so they lie on the edge of the region."
    ],
    "problem": "Corner points lie on the boundary of the region, not 'inside' it, and include points on the axes.",
    "severity": "low"
@@ -194,7 +194,7 @@
    "competency": "MATH.algebra.inequations-intro",
    "section": "try_each",
    "index": 0,
-   "original": "Put x = 0, 1, 2, … (or −5 to 5) into the inequation one by one. / Keep each number that makes it true; stop when they stop working.",
+   "original": "Put x = 0, 1, 2, … (or −5 to 5) into the inequation one by one. / Keep each number that makes it true. Stop when they stop working.",
    "text": [
     "Put x = 0, 1, 2, … (or −5 to 5) into the inequation one by one.",
     "Keep each number that makes it true and drop each one that makes it false. Once you find the boundary, every number past it on the allowed side also works."
@@ -206,9 +206,9 @@
    "competency": "MATH.algebra.inverse-proportion",
    "section": "chapter",
    "index": 4,
-   "original": "With two changes, look at each separately: more workers or more hours a day mean fewer days (inverse); more work to do means more days (direct). The total work (worker-hours, or worker-days per item) stays the same. / Write the total work for the first situation (workers × hours a day × days). The second situation needs the same total, so divide it by workers × hours a day. For items, scale by the new number of items first.",
+   "original": "With two changes, look at each separately: more workers or more hours a day mean fewer days (inverse). More work to do means more days (direct). The total work (worker-hours, or worker-days per item) stays the same. / Write the total work for the first situation (workers × hours a day × days). The second situation needs the same total, so divide it by workers × hours a day. For items, scale by the new number of items first.",
    "text": [
-    "With two changes, look at each separately: more workers or more hours a day mean fewer days (inverse); more work to do means more days (direct).",
+    "With two changes, look at each separately: more workers or more hours a day mean fewer days (inverse). More work to do means more days (direct).",
     "Write the total work for the first situation (workers × hours a day × days). If the amount of work changes (for example twice as many items), multiply that total by the same factor. The second situation needs that total, so divide it by workers × hours a day to get the days."
    ],
    "problem": "'worker-days per item' and 'For items, scale by the new number of items first' are not explained and are hard to follow.",
@@ -229,9 +229,9 @@
    "competency": "MATH.algebra.linear-systems-three-variables",
    "section": "chapter",
    "index": 0,
-   "original": "Each equation removes one degree of freedom; three independent equations fix x, y and z. Eliminating one variable turns the problem into a pair of equations.",
+   "original": "Each equation removes one degree of freedom. Three independent equations fix x, y and z. Eliminating one variable turns the problem into a pair of equations.",
    "text": [
-    "One equation in x, y and z has many solutions; each extra independent equation narrows them down, and three independent equations fix x, y and z. Eliminating one variable turns the problem into a pair of equations in two variables."
+    "One equation in x, y and z has many solutions. Each extra independent equation narrows them down, and three independent equations fix x, y and z. Eliminating one variable turns the problem into a pair of equations in two variables."
    ],
    "problem": "'Removes one degree of freedom' is a term not taught in Class 10.",
    "severity": "low"
@@ -252,9 +252,9 @@
    "competency": "MATH.algebra.linear-two-variables",
    "section": "chapter",
    "index": 2,
-   "original": "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t; the change is negative for a steady decrease. / Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps.",
+   "original": "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t. The change is negative for a steady decrease. / Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps.",
    "text": [
-    "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t, where p(t) means the amount after t steps; the change is negative for a steady decrease.",
+    "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t, where p(t) means the amount after t steps. The change is negative for a steady decrease.",
     "Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps."
    ],
    "problem": "Function notation p(t) is not introduced or expected in class 7.",
@@ -289,9 +289,9 @@
    "competency": "MATH.algebra.polynomial-equation-solving",
    "section": "worked_steps",
    "index": 0,
-   "original": "For an AP, a = (−b/leading coefficient)/3; for a GP, a³ = −(constant)/(leading coefficient). Check a is a root, divide by (x − a) and solve the quadratic.",
+   "original": "For an AP, a = (−b/leading coefficient)/3. For a GP, a³ = −(constant)/(leading coefficient). Check a is a root, divide by (x − a) and solve the quadratic.",
    "text": [
-    "For roots in AP, the middle root is a = (−(coefficient of x²) ÷ leading coefficient) ÷ 3; for roots in GP, a³ = −(constant term) ÷ (leading coefficient). Check a is a root, divide by (x − a) and solve the quadratic."
+    "For roots in AP, the middle root is a = (−(coefficient of x²) ÷ leading coefficient) ÷ 3. For roots in GP, a³ = −(constant term) ÷ (leading coefficient). Check a is a root, divide by (x − a) and solve the quadratic."
    ],
    "problem": "Uses 'b' for the coefficient of x² without saying so, next to 'a' used for the middle root.",
    "severity": "low"
@@ -312,10 +312,10 @@
    "competency": "MATH.algebra.polynomial-square-root",
    "section": "check_what_it_uses",
    "index": 0,
-   "original": "Each step builds on another skill: Find squares and square roots; Use algebraic identities. If a step is slow, practise that skill first. / Then the method is: Take the square root of the first term; divide the x³ term by twice that to get the x term; find the constant from the x term (divide by twice the x term). Square your answer to check.",
+   "original": "Each step builds on another skill: Find squares and square roots; Use algebraic identities. If a step is slow, practise that skill first. / Then the method is: Take the square root of the first term. Divide the x³ term by twice that to get the x term. Find the constant from the x term (divide by twice the x term). Square your answer to check.",
    "text": [
     "Each step builds on another skill: Find squares and square roots; Use algebraic identities. If a step is slow, practise that skill first.",
-    "Then the method is: Take the square root of the first term; divide the x³ term by twice that to get the x term of the root; then divide the polynomial's x term by twice the root's x term to get the constant. Square your answer to check."
+    "Then the method is: Take the square root of the first term. Divide the x³ term by twice that to get the x term of the root. Then divide the polynomial's x term by twice the root's x term to get the constant. Square your answer to check."
    ],
    "problem": "Repeats the same ambiguous method wording about which x term to divide.",
    "severity": "low"
@@ -324,9 +324,9 @@
    "competency": "MATH.algebra.polynomial-square-root",
    "section": "worked_steps",
    "index": 0,
-   "original": "Take the square root of the first term; divide the x³ term by twice that to get the x term; find the constant from the x term (divide by twice the x term). Square your answer to check.",
+   "original": "Take the square root of the first term. Divide the x³ term by twice that to get the x term. Find the constant from the x term (divide by twice the x term). Square your answer to check.",
    "text": [
-    "Take the square root of the first term; divide the x³ term by twice that to get the x term of the root; then divide the polynomial's x term by twice the root's x term to get the constant. Square your answer to check."
+    "Take the square root of the first term. Divide the x³ term by twice that to get the x term of the root. Then divide the polynomial's x term by twice the root's x term to get the constant. Square your answer to check."
    ],
    "problem": "'Find the constant from the x term (divide by twice the x term)' does not say which x term (polynomial's or root's) is divided.",
    "severity": "low"
@@ -358,10 +358,10 @@
    "competency": "MATH.algebra.rational-expressions",
    "section": "numbers",
    "index": 0,
-   "original": "Put a value such as x = 1 into the original fraction and into your answer. / They must give the same value; cancelling x² terms (not factors) fails this test.",
+   "original": "Put a value such as x = 1 into the original fraction and into your answer. / They must give the same value. Cancelling x² terms (not factors) fails this test.",
    "text": [
     "Put a value such as x = 2 (any value that does not make the bottom zero) into the original fraction and into your answer.",
-    "They must give the same value; cancelling x² terms (not factors) fails this test."
+    "They must give the same value. Cancelling x² terms (not factors) fails this test."
    ],
    "problem": "x = 1 is suggested as a check value, but it makes many such fractions (including the one in this skill's own example) 0/0, so the check fails to give a value.",
    "severity": "low"
@@ -385,7 +385,7 @@
    "original": "Building a subset means deciding, for each element, in or out: two choices per element, so a set of n elements has 2ⁿ subsets, including ∅ and the set itself. / Count all subsets as 2ⁿ, then remove what the question excludes: A itself for proper subsets, ∅ as well for non-empty proper subsets. Subsets of a fixed size r are ⁿCᵣ.",
    "text": [
     "Building a subset means deciding, for each element, in or out: two choices per element, so a set of n elements has 2ⁿ subsets, including ∅ and the set itself.",
-    "Count all subsets as 2ⁿ, then remove what the question excludes: A itself for proper subsets, ∅ as well for non-empty proper subsets. Subsets of a fixed size r can be listed and counted; this number is written ⁿCᵣ."
+    "Count all subsets as 2ⁿ, then remove what the question excludes: A itself for proper subsets, ∅ as well for non-empty proper subsets. Subsets of a fixed size r can be listed and counted. This number is written ⁿCᵣ."
    ],
    "problem": "'Subsets of a fixed size r are ⁿCᵣ' uses combination notation that a Class 6 learner has never met and is not explained.",
    "severity": "medium"
@@ -394,9 +394,9 @@
    "competency": "MATH.algebra.sets",
    "section": "chapter",
    "index": 4,
-   "original": "A set is empty (∅) if it has no elements, a singleton if it has one, finite if its elements can be counted to an end, and infinite otherwise. A = B when they have the same elements; A and B are equivalent when n(A) = n(B); disjoint when A ∩ B = ∅. A ⊂ B when every element of A is in B and B has more. / First write each set in roster form (each element once), paying attention to the universe (ℕ, ℤ or ℝ). Then count, compare the elements one by one, and decide.",
+   "original": "A set is empty (∅) if it has no elements, a singleton if it has one, finite if its elements can be counted to an end, and infinite otherwise. A = B when they have the same elements; A and B are equivalent when n(A) = n(B). Disjoint when A ∩ B = ∅. A ⊂ B when every element of A is in B and B has more. / First write each set in roster form (each element once), paying attention to the universe (ℕ, ℤ or ℝ). Then count, compare the elements one by one, and decide.",
    "text": [
-    "A set is empty (∅) if it has no elements, a singleton if it has one, finite if its elements can be counted to an end, and infinite otherwise. A = B when they have the same elements; A and B are equivalent when n(A) = n(B); disjoint when A ∩ B = ∅. A ⊂ B when every element of A is in B and B has more.",
+    "A set is empty (∅) if it has no elements, a singleton if it has one, finite if its elements can be counted to an end, and infinite otherwise. A = B when they have the same elements; A and B are equivalent when n(A) = n(B). Disjoint when A ∩ B = ∅. A ⊂ B when every element of A is in B and B has more.",
     "First write each set in roster form (each element once), paying attention to which numbers are allowed (natural numbers ℕ, integers ℤ or real numbers ℝ). Then count, compare the elements one by one, and decide."
    ],
    "problem": "Refers to the universe ℝ (real numbers), which a Class 6 learner does not know.",
@@ -406,10 +406,10 @@
    "competency": "MATH.algebra.standard-function-graphs",
    "section": "chapter",
    "index": 1,
-   "original": "Each standard function has a recognisable graph: y = x a line through the origin, x² a parabola, x³ an S-shaped curve, |x| a V, 1/x two branches, sgn x three levels −1, 0, 1, [x] steps, 2ˣ an always-positive rising curve and log₂ x its mirror image for x > 0. / Look at where the graph is defined, where it crosses the axes, whether it has corners or jumps and how it behaves far out; then check one or two points, e.g. x = 1 and x = 2, in each option.",
+   "original": "Each standard function has a recognisable graph: y = x a line through the origin, x² a parabola, x³ an S-shaped curve, |x| a V, 1/x two branches, sgn x three levels −1, 0, 1, [x] steps, 2ˣ an always-positive rising curve and log₂ x its mirror image for x > 0. / Look at where the graph is defined, where it crosses the axes, whether it has corners or jumps and how it behaves far out. Then check one or two points, e.g. x = 1 and x = 2, in each option.",
    "text": [
     "Each standard function has a recognisable graph: y = x a line through the origin, x² a parabola, x³ an S-shaped curve, |x| a V, 1/x two branches, sgn x three levels −1, 0, 1, [x] steps, 2ˣ an always-positive rising curve and log₂ x its mirror image in the line y = x, defined only for x > 0.",
-    "Look at where the graph is defined, where it crosses the axes, whether it has corners or jumps and how it behaves far out; then check one or two points, e.g. x = 1 and x = 2, in each option."
+    "Look at where the graph is defined, where it crosses the axes, whether it has corners or jumps and how it behaves far out. Then check one or two points, e.g. x = 1 and x = 2, in each option."
    ],
    "problem": "'log₂ x its mirror image' does not say the mirror line (y = x).",
    "severity": "low"
@@ -418,10 +418,10 @@
    "competency": "MATH.calculus.continuity",
    "section": "chapter",
    "index": 3,
-   "original": "A function is continuous on a set when it is continuous at every point of it. Polynomials are continuous everywhere, so a piecewise function can only fail where its formula changes, and there it fails exactly when the two pieces do not meet. / List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there; different: a discontinuity.",
+   "original": "A function is continuous on a set when it is continuous at every point of it. Polynomials are continuous everywhere, so a piecewise function can only fail where its formula changes, and there it fails exactly when the two pieces do not meet. / List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there. Different: a discontinuity.",
    "text": [
     "A function is continuous on a set when it is continuous at every point of it. When each piece is continuous on its own part (polynomials, for example, are continuous everywhere), a piecewise function can only fail where its formula changes, and there it fails exactly when the two pieces do not meet.",
-    "List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there; different: a discontinuity."
+    "List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there. Different: a discontinuity."
    ],
    "problem": "The conclusion that a piecewise function can only fail where the formula changes needs each piece to be continuous; the text only justifies it for polynomial pieces without saying so.",
    "severity": "low"
@@ -432,7 +432,7 @@
    "index": 0,
    "original": "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b. Under a constant it is a rectangle.",
    "text": [
-    "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b when f(x) ≥ 0; parts of the graph below the x-axis count as negative. Under a positive constant it is a rectangle."
+    "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b when f(x) ≥ 0. Parts of the graph below the x-axis count as negative. Under a positive constant it is a rectangle."
    ],
    "problem": "A definite integral equals the area under the graph only when f(x) ≥ 0; parts below the x-axis count as negative.",
    "severity": "medium"
@@ -512,10 +512,10 @@
    "competency": "MATH.calculus.integration-methods",
    "section": "chapter",
    "index": 12,
-   "original": "A factor x² + a² that does not factorise needs a linear top: (Bx + C)/(x² + a²). Its x part integrates to a logarithm and its constant part to a tan⁻¹. / Write the integrand as A/(x − r) + (Bx + C)/(x² + a²); find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + C.",
+   "original": "A factor x² + a² that does not factorise needs a linear top: (Bx + C)/(x² + a²). Its x part integrates to a logarithm and its constant part to a tan⁻¹. / Write the integrand as A/(x − r) + (Bx + C)/(x² + a²). Find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + C.",
    "text": [
     "A factor x² + a² that does not factorise needs a linear top: (Bx + C)/(x² + a²). Its x part integrates to a logarithm and its constant part to a tan⁻¹.",
-    "Write the integrand as A/(x − r) + (Bx + C)/(x² + a²); find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + K, where K is the constant of integration."
+    "Write the integrand as A/(x − r) + (Bx + C)/(x² + a²). Find A by putting x = r, then B and C by comparing the x² and constant terms. Integrate: A log|x − r| + (B/2) log(x² + a²) + (C/a) tan⁻¹(x/a) + K, where K is the constant of integration."
    ],
    "problem": "C is used both as the partial-fraction coefficient and as the constant of integration in the same answer.",
    "severity": "medium"
@@ -550,7 +550,7 @@
    "original": "Find one simple solution of the full equation (for y′ + ay = b, the constant y = b/a). / Add C times a solution of y′ + Py = 0 (here e^(−ax) or x^(−a)) and choose C to fit the starting value.",
    "text": [
     "Find one simple solution of the full equation (for y′ + ay = b with a ≠ 0, the constant y = b/a).",
-    "Add C times a solution of y′ + Py = 0 (for y′ + ay = b this is e^(−ax); for y′ + (a/x)y = b it is x^(−a)) and choose C to fit the starting value."
+    "Add C times a solution of y′ + Py = 0 (for y′ + ay = b this is e^(−ax). For y′ + (a/x)y = b it is x^(−a)) and choose C to fit the starting value."
    ],
    "problem": "'here e^(−ax) or x^(−a)' is confusing: x^(−a) does not solve y′ + ay = 0; it belongs to y′ + (a/x)y = 0, which is never mentioned.",
    "severity": "medium"
@@ -559,9 +559,9 @@
    "competency": "MATH.calculus.multivariable-limits",
    "section": "chapter",
    "index": 1,
-   "original": "A limit at a point in the plane must be the same along every way of approaching; two paths with different limits prove there is no limit. / Try y = mx: if the result depends on m (or blows up), the limit does not exist. If the top has higher degree than the bottom, use polar coordinates to show the values shrink to 0.",
+   "original": "A limit at a point in the plane must be the same along every way of approaching. Two paths with different limits prove there is no limit. / Try y = mx: if the result depends on m (or blows up), the limit does not exist. If the top has higher degree than the bottom, use polar coordinates to show the values shrink to 0.",
    "text": [
-    "A limit at a point in the plane must be the same along every way of approaching; two paths with different limits prove there is no limit.",
+    "A limit at a point in the plane must be the same along every way of approaching. Two paths with different limits prove there is no limit.",
     "Try y = mx (and curves such as y = mx²): if the result depends on m (or blows up), the limit does not exist. To show the limit is 0, put x = r cos θ, y = r sin θ and show |f| is at most an expression in r alone that tends to 0, whatever θ is."
    ],
    "problem": "'If the top has higher degree than the bottom, the values shrink to 0' is false in general (e.g. (x³ + y³)/(x − y) has no limit at the origin).",
@@ -571,10 +571,10 @@
    "competency": "MATH.calculus.multivariable-limits",
    "section": "chapter",
    "index": 2,
-   "original": "f is continuous at (0, 0) when lim ((x, y) → (0, 0)) f(x, y) exists and equals f(0, 0). The limit must be the same along every path into the origin. / First decide whether the limit exists: polar coordinates (x = r cos θ, y = r sin θ) show a limit when r survives in the numerator; two paths with different limits show it does not. If it exists, compare it with f(0, 0).",
+   "original": "f is continuous at (0, 0) when lim ((x, y) → (0, 0)) f(x, y) exists and equals f(0, 0). The limit must be the same along every path into the origin. / First decide whether the limit exists: polar coordinates (x = r cos θ, y = r sin θ) show a limit when r survives in the numerator. Two paths with different limits show it does not. If it exists, compare it with f(0, 0).",
    "text": [
     "f is continuous at (0, 0) when lim ((x, y) → (0, 0)) f(x, y) exists and equals f(0, 0). The limit must be the same along every path into the origin.",
-    "First decide whether the limit exists: with x = r cos θ, y = r sin θ, if |f − L| is at most an expression in r alone that tends to 0 (whatever θ is), the limit is L; two paths with different limits show it does not exist. If it exists, compare it with f(0, 0)."
+    "First decide whether the limit exists: with x = r cos θ, y = r sin θ, if |f − L| is at most an expression in r alone that tends to 0 (whatever θ is), the limit is L. Two paths with different limits show it does not exist. If it exists, compare it with f(0, 0)."
    ],
    "problem": "'Polar coordinates show a limit when r survives in the numerator' is vague and not enough: the θ-part must also stay bounded.",
    "severity": "low"
@@ -598,7 +598,7 @@
    "original": "Each step builds on another skill: Evaluate definite integrals. If a step is slow, practise that skill first. / Then the method is: Write the radius of a slice in terms of the variable along the axis (y for the x-axis, x for the y-axis), square it, integrate over the range and keep π.",
    "text": [
     "Each step builds on another skill: Evaluate definite integrals. If a step is slow, practise that skill first.",
-    "Then the method is: Write the radius of a slice in terms of the variable along the axis (about the x-axis the radius is y, written in terms of x; about the y-axis it is x, written in terms of y), square it, integrate over the range and keep π."
+    "Then the method is: Write the radius of a slice in terms of the variable along the axis (about the x-axis the radius is y, written in terms of x. About the y-axis it is x, written in terms of y), square it, integrate over the range and keep π."
    ],
    "problem": "Repeats the confusing '(y for the x-axis, x for the y-axis)' method statement.",
    "severity": "medium"
@@ -609,7 +609,7 @@
    "index": 0,
    "original": "Write the radius of a slice in terms of the variable along the axis (y for the x-axis, x for the y-axis), square it, integrate over the range and keep π.",
    "text": [
-    "Write the radius of a slice in terms of the variable along the axis (about the x-axis the radius is y, written in terms of x; about the y-axis it is x, written in terms of y), square it, integrate over the range and keep π."
+    "Write the radius of a slice in terms of the variable along the axis (about the x-axis the radius is y, written in terms of x. About the y-axis it is x, written in terms of y), square it, integrate over the range and keep π."
    ],
    "problem": "'(y for the x-axis, x for the y-axis)' reads as if the variable along the x-axis is y; the radius is y but it must be written in terms of x.",
    "severity": "medium"
@@ -642,9 +642,9 @@
    "competency": "MATH.coordinate.space-planes",
    "section": "chapter",
    "index": 0,
-   "original": "The shortest distance from a point to a plane is along the normal (a, b, c); dividing ax₀ + by₀ + cz₀ + d by |n| measures it in units of length.",
+   "original": "The shortest distance from a point to a plane is along the normal (a, b, c). Dividing ax₀ + by₀ + cz₀ + d by |n| measures it in units of length.",
    "text": [
-    "The shortest distance from a point to a plane is along the normal (a, b, c); dividing |ax₀ + by₀ + cz₀ + d| by |n| = √(a² + b² + c²) measures it in units of length."
+    "The shortest distance from a point to a plane is along the normal (a, b, c). Dividing |ax₀ + by₀ + cz₀ + d| by |n| = √(a² + b² + c²) measures it in units of length."
    ],
    "problem": "The distance needs the absolute value |ax₀ + by₀ + cz₀ + d|; without it the 'distance' can come out negative.",
    "severity": "low"
@@ -666,7 +666,7 @@
    "index": 0,
    "original": "Every pair of points gives exactly one line segment (or one straight line), and AB is the same as BA.",
    "text": [
-    "Every pair of points gives exactly one line segment, and AB is the same as BA. Through two points there is exactly one straight line; if three or more points lie on the same line, they all share that one line."
+    "Every pair of points gives exactly one line segment, and AB is the same as BA. Through two points there is exactly one straight line. If three or more points lie on the same line, they all share that one line."
    ],
    "problem": "'Every pair of points gives exactly one line' over-counts lines when three or more points lie on one straight line.",
    "severity": "low"
@@ -687,10 +687,10 @@
    "competency": "MATH.geometry.maps-directions",
    "section": "chapter",
    "index": 3,
-   "original": "A map scale tells how much real distance one unit on the map stands for. A route's length is the sum of its parts; the shortest route is the one with the smallest total. / Count the squares along the path and multiply by the scale. For routes, add the roads along each one, then compare the totals.",
+   "original": "A map scale tells how much real distance one unit on the map stands for. A route's length is the sum of its parts. The shortest route is the one with the smallest total. / Count the squares along the path and multiply by the scale. For routes, add the roads along each one, then compare the totals.",
    "text": [
-    "A map scale tells how much real distance one square on the map stands for. A route's length is the sum of its parts; the shortest route is the one with the smallest total.",
-    "Count the squares along the path; if each square stands for more than 1 (say 2 m), count on by that amount for each square. For routes, add the roads along each one, then compare the totals."
+    "A map scale tells how much real distance one square on the map stands for. A route's length is the sum of its parts. The shortest route is the one with the smallest total.",
+    "Count the squares along the path. If each square stands for more than 1 (say 2 m), count on by that amount for each square. For routes, add the roads along each one, then compare the totals."
    ],
    "problem": "Asks class 2 learners to 'multiply by the scale', which is beyond class 2 arithmetic.",
    "severity": "low"
@@ -723,10 +723,10 @@
    "competency": "MATH.geometry.nets",
    "section": "chapter",
    "index": 2,
-   "original": "A net is a solid unfolded flat. For a cube the six squares must fold into six different faces; a square's neighbours in the net become its neighbours on the cube, and the face opposite it is one that never touches it. / Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right; in a straight row of squares, the squares one apart are opposite.",
+   "original": "A net is a solid unfolded flat. For a cube the six squares must fold into six different faces. A square's neighbours in the net become its neighbours on the cube, and the face opposite it is one that never touches it. / Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right. In a straight row of squares, the squares one apart are opposite.",
    "text": [
-    "A net is a solid unfolded flat. For a cube the six squares must fold into six different faces; a square's neighbours in the net become its neighbours on the cube, and the face opposite it is one that never touches it.",
-    "Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right; in a straight row of squares, two squares with exactly one square between them are opposite."
+    "A net is a solid unfolded flat. For a cube the six squares must fold into six different faces. A square's neighbours in the net become its neighbours on the cube, and the face opposite it is one that never touches it.",
+    "Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right. In a straight row of squares, two squares with exactly one square between them are opposite."
    ],
    "problem": "'the squares one apart are opposite' is ambiguous; it should say squares with one square between them.",
    "severity": "low"
@@ -782,9 +782,9 @@
    "competency": "MATH.geometry.scaled-construction",
    "section": "chapter",
    "index": 2,
-   "original": "For 7/5: mark 7 steps, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′; then a parallel to CA through C′ meets BA extended at A′.",
+   "original": "For 7/5: mark 7 steps, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′. Then a parallel to CA through C′ meets BA extended at A′.",
    "text": [
-    "For 7/5: draw a ray BX at an acute angle to BC and mark 7 equal steps B₁ to B₇ on it, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′; then a parallel to CA through C′ meets BA extended at A′."
+    "For 7/5: draw a ray BX at an acute angle to BC and mark 7 equal steps B₁ to B₇ on it, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′. Then a parallel to CA through C′ meets BA extended at A′."
    ],
    "problem": "Uses marks B₅, B₇ on a ray from B that has not been introduced (chapter 0 uses A₁, A₂ on AX).",
    "severity": "low"
@@ -805,9 +805,9 @@
    "competency": "MATH.geometry.tessellations",
    "section": "worked_steps",
    "index": 0,
-   "original": "Find each regular polygon's interior angle (180° − 360° ÷ number of sides), add the angles already at the point, and take the total from 360°; share the gap if more than one tile fills it.",
+   "original": "Find each regular polygon's interior angle (180° − 360° ÷ number of sides), add the angles already at the point, and take the total from 360°. Share the gap if more than one tile fills it.",
    "text": [
-    "Find each tile's corner angle (from the table, or 180° − 360° ÷ number of sides for a regular polygon), add the angles already at the point, and take the total from 360°; share the gap if more than one tile fills it."
+    "Find each tile's corner angle (from the table, or 180° − 360° ÷ number of sides for a regular polygon), add the angles already at the point, and take the total from 360°. Share the gap if more than one tile fills it."
    ],
    "problem": "The interior-angle formula 180° − 360° ÷ n for regular polygons is far beyond class 4.",
    "severity": "medium"
@@ -840,10 +840,10 @@
    "competency": "MATH.measurement.clock",
    "section": "chapter",
    "index": 2,
-   "original": "The 24-hour clock counts the hours from midnight (00:00) to 23:59. Times after noon have 12 added: 3:40 p.m. is 15:40. 12 noon is 12:00 and 12 midnight is 00:00. / 12-hour to 24-hour: for p.m. times after 12 noon add 12 to the hour; for a.m. times keep the hour (12 a.m. becomes 00). 24-hour to 12-hour: if the hour is 13 or more take away 12 and write p.m.",
+   "original": "The 24-hour clock counts the hours from midnight (00:00) to 23:59. Times after noon have 12 added: 3:40 p.m. is 15:40. 12 noon is 12:00 and 12 midnight is 00:00. / 12-hour to 24-hour: for p.m. times after 12 noon add 12 to the hour. For a.m. times keep the hour (12 a.m. becomes 00). 24-hour to 12-hour: if the hour is 13 or more take away 12 and write p.m.",
    "text": [
     "The 24-hour clock counts the hours from midnight (00:00) to 23:59. Times from 1 p.m. on have 12 added: 3:40 p.m. is 15:40. 12 noon is 12:00 and 12 midnight is 00:00.",
-    "12-hour to 24-hour: for times from 1:00 p.m. to 11:59 p.m. add 12 to the hour; 12:xx p.m. stays 12:xx; for a.m. times keep the hour (12 a.m. becomes 00). 24-hour to 12-hour: if the hour is 13 or more take away 12 and write p.m."
+    "12-hour to 24-hour: for times from 1:00 p.m. to 11:59 p.m. add 12 to the hour; 12:xx p.m. stays 12:xx. For a.m. times keep the hour (12 a.m. becomes 00). 24-hour to 12-hour: if the hour is 13 or more take away 12 and write p.m."
    ],
    "problem": "'For p.m. times after 12 noon add 12' wrongly turns 12:30 p.m. into 24:30; also the 24-hour clock is above class 2 level.",
    "severity": "medium"
@@ -864,10 +864,10 @@
    "competency": "MATH.measurement.length-conversion",
    "section": "chapter",
    "index": 2,
-   "original": "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number; going to a bigger unit makes groups. / To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000; what is left stays in the smaller unit.",
+   "original": "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number. Going to a bigger unit makes groups. / To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000. What is left stays in the smaller unit.",
    "text": [
-    "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number; going to a bigger unit makes groups.",
-    "To change to the smaller unit, multiply by 10 (cm to mm), 100 (m to cm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10, 100 or 1000; what is left stays in the smaller unit."
+    "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number. Going to a bigger unit makes groups.",
+    "To change to the smaller unit, multiply by 10 (cm to mm), 100 (m to cm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10, 100 or 1000. What is left stays in the smaller unit."
    ],
    "problem": "The method only gives ×10 (cm to mm) and ×1000 (km to m) and groups of 10 or 1000, leaving out the ×100 / groups of 100 needed between metres and centimetres named in the title.",
    "severity": "medium"
@@ -876,7 +876,7 @@
    "competency": "MATH.measurement.length-conversion",
    "section": "cm_to_m_cm",
    "index": 0,
-   "original": "Every hundred centimetres make one metre. / Take away the whole metres as hundreds of centimetres; the centimetres left are the answer.",
+   "original": "Every hundred centimetres make one metre. / Take away the whole metres as hundreds of centimetres. The centimetres left are the answer.",
    "text": [
     "Every hundred centimetres make one metre.",
     "Count how many whole hundreds there are: that is the metres. The centimetres left over are the centimetres. Write both: metres and centimetres."
@@ -888,7 +888,7 @@
    "competency": "MATH.measurement.length-conversion",
    "section": "m_to_km_m",
    "index": 0,
-   "original": "Every thousand metres make one kilometre. / Take away the whole kilometres as thousands of metres; the metres left are the answer.",
+   "original": "Every thousand metres make one kilometre. / Take away the whole kilometres as thousands of metres. The metres left are the answer.",
    "text": [
     "Every thousand metres make one kilometre.",
     "Count how many whole thousands there are: that is the kilometres. The metres left over are the metres. Write both: kilometres and metres."
@@ -900,7 +900,7 @@
    "competency": "MATH.measurement.length-conversion",
    "section": "mm_to_cm_mm",
    "index": 0,
-   "original": "Every ten millimetres make one centimetre. / Take away the whole centimetres as tens of millimetres; the millimetres left are the answer.",
+   "original": "Every ten millimetres make one centimetre. / Take away the whole centimetres as tens of millimetres. The millimetres left are the answer.",
    "text": [
     "Every ten millimetres make one centimetre.",
     "Count how many whole tens there are: that is the centimetres. The millimetres left over are the millimetres. Write both: centimetres and millimetres."
@@ -947,9 +947,9 @@
    "competency": "MATH.measurement.time-unit-conversion",
    "section": "chapter",
    "index": 3,
-   "original": "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months; months have 28, 30 or 31 days. / Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar or the knuckle rhyme.",
+   "original": "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months. Months have 28, 30 or 31 days. / Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar or the knuckle rhyme.",
    "text": [
-    "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months; months have 28, 30 or 31 days.",
+    "1 day = 24 hours, 1 week = 7 days, 1 year = 12 months. Months have 28, 30 or 31 days.",
     "Multiply the bigger unit by how many small units it holds, then add the extra small units. For days in a month, use a calendar, or count on your knuckles: each knuckle month (January, March, May, July, August, October, December) has 31 days, and each gap month has 30, except February."
    ],
    "problem": "Mentions 'the knuckle rhyme' without explaining it.",
@@ -994,10 +994,10 @@
    "competency": "MATH.number.count-objects",
    "section": "ten_frame",
    "index": 0,
-   "original": "Put the objects in a ten frame: each square holds one. / A full frame is 10; count the extra squares after 10.",
+   "original": "Put the objects in a ten frame: each square holds one. / A full frame is 10. Count the extra squares after 10.",
    "text": [
     "Put the objects in a ten frame: each square holds one.",
-    "A full frame is 10; put the rest in a second frame and count on: 11, 12, 13, …"
+    "A full frame is 10. Put the rest in a second frame and count on: 11, 12, 13, …"
    ],
    "problem": "A ten frame has only 10 squares, so there are no 'extra squares after 10'.",
    "severity": "low"
@@ -1006,10 +1006,10 @@
    "competency": "MATH.number.cubes",
    "section": "triples",
    "index": 0,
-   "original": "5³ = 5 × 5 × 5, so in prime factors every prime of 5 appears three times: 125 = 5 × 5 × 5. / That is why the prime factors of a cube always come in groups of three equal primes; taking one prime from each group gives back 5.",
+   "original": "5³ = 5 × 5 × 5, so in prime factors every prime of 5 appears three times: 125 = 5 × 5 × 5. / That is why the prime factors of a cube always come in groups of three equal primes. Taking one prime from each group gives back 5.",
    "text": [
     "5³ = 5 × 5 × 5, so the prime 5 appears three times: 125 = 5 × 5 × 5.",
-    "That is why the prime factors of a cube always come in groups of three equal primes; taking one prime from each group gives back the cube root, 5."
+    "That is why the prime factors of a cube always come in groups of three equal primes. Taking one prime from each group gives back the cube root, 5."
    ],
    "problem": "'every prime of 5 appears three times' is garbled wording.",
    "severity": "low"
@@ -1031,9 +1031,9 @@
    "competency": "MATH.number.exponents",
    "section": "chapter",
    "index": 5,
-   "original": "Every whole number greater than 1 is a product of primes in exactly one way; powers say how many times each prime appears. / Divide by 2 as often as possible, then by 3, 5 and 7, counting the divisions: the counts are the powers.",
+   "original": "Every whole number greater than 1 is a product of primes in exactly one way. Powers say how many times each prime appears. / Divide by 2 as often as possible, then by 3, 5 and 7, counting the divisions: the counts are the powers.",
    "text": [
-    "Every whole number greater than 1 is a product of primes in exactly one way; powers say how many times each prime appears.",
+    "Every whole number greater than 1 is a product of primes in exactly one way. Powers say how many times each prime appears.",
     "Divide by 2 as often as possible, then by 3, 5, 7, 11 and so on until 1 is left, counting the divisions: the counts are the powers."
    ],
    "problem": "Dividing only by 2, 3, 5 and 7 misses numbers with larger prime factors.",
@@ -1138,9 +1138,9 @@
    "competency": "MATH.number.mental-arithmetic",
    "section": "chapter",
    "index": 0,
-   "original": "Adding tens changes the tens digit; adding hundreds changes the hundreds digit. The ones stay the same.",
+   "original": "Adding tens changes the tens digit. Adding hundreds changes the hundreds digit. The ones stay the same.",
    "text": [
-    "Adding or taking away tens changes the tens digit; adding or taking away hundreds changes the hundreds digit. The ones stay the same. If the tens go past 9 or below 0, the hundreds change too: 622 − 30 = 592."
+    "Adding or taking away tens changes the tens digit. Adding or taking away hundreds changes the hundreds digit. The ones stay the same. If the tens go past 9 or below 0, the hundreds change too: 622 − 30 = 592."
    ],
    "problem": "'Adding tens changes the tens digit' ignores crossing a hundred; the lesson's own example 622 − 30 = 592 also changes the hundreds digit.",
    "severity": "medium"
@@ -1149,10 +1149,10 @@
    "competency": "MATH.number.modular-arithmetic",
    "section": "chapter",
    "index": 1,
-   "original": "ax ≡ b (mod n) asks for x so that a × x leaves remainder b. Since b, b + n, b + 2n … are all ≡ b, one of them divides exactly by a. / Write b, b + n, b + 2n, … until one is a multiple of a; divide it by a. Check: a times your answer leaves remainder b.",
+   "original": "ax ≡ b (mod n) asks for x so that a × x leaves remainder b. Since b, b + n, b + 2n … are all ≡ b, one of them divides exactly by a. / Write b, b + n, b + 2n, … until one is a multiple of a. Divide it by a. Check: a times your answer leaves remainder b.",
    "text": [
-    "ax ≡ b (mod n) asks for x so that a × x leaves remainder b when divided by n. When a and n have no common factor, one of b, b + n, b + 2n, …, b + (a − 1)n divides exactly by a; if they share a factor that does not divide b, there is no solution.",
-    "Write b, b + n, b + 2n, … until one is a multiple of a; divide it by a. Check: a times your answer leaves remainder b."
+    "ax ≡ b (mod n) asks for x so that a × x leaves remainder b when divided by n. When a and n have no common factor, one of b, b + n, b + 2n, …, b + (a − 1)n divides exactly by a. If they share a factor that does not divide b, there is no solution.",
+    "Write b, b + n, b + 2n, … until one is a multiple of a. Divide it by a. Check: a times your answer leaves remainder b."
    ],
    "problem": "Claims one of b, b + n, b + 2n, … is always divisible by a, which is false unless a and n have no common factor (e.g. 2x ≡ 1 (mod 4) has no solution).",
    "severity": "high"
@@ -1161,10 +1161,10 @@
    "competency": "MATH.number.multi-digit-add-subtract",
    "section": "chapter",
    "index": 2,
-   "original": "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the ones, which pair to 10. / To take away 9, take away 10 and add 1 back; to add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9 and the ones digit 10.",
+   "original": "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the ones, which pair to 10. / To take away 9, take away 10 and add 1 back. To add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9 and the ones digit 10.",
    "text": [
-    "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the last non-zero digit, which pairs to 10; zeros at the end stay 0.",
-    "To take away 9, take away 10 and add 1 back; to add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9, the last non-zero digit 10, and keep the end zeros: 3450 + 6550 = 10,000."
+    "Round numbers are easy: 9 is 10 − 1 and 99 is 100 − 1. To make 100 or 10,000, every digit pairs to 9 except the last non-zero digit, which pairs to 10. Zeros at the end stay 0.",
+    "To take away 9, take away 10 and add 1 back. To add 99, add 100 and take 1 away. To make 10,000, find what makes each digit 9, the last non-zero digit 10, and keep the end zeros: 3450 + 6550 = 10,000."
    ],
    "problem": "The 'every digit pairs to 9, the ones pair to 10' rule fails when the number ends in 0 (e.g. 10,000 − 3450 is 6550, not '6 5 4 10').",
    "severity": "medium"
@@ -1173,7 +1173,7 @@
    "competency": "MATH.number.multi-multiplication",
    "section": "chapter",
    "index": 1,
-   "original": "Doubling one factor and halving the other leaves the product unchanged; a factor next to a multiple of ten is that multiple minus (or plus) one group. / Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
+   "original": "Doubling one factor and halving the other leaves the product unchanged. A factor next to a multiple of ten is that multiple minus (or plus) one group. / Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
    "text": [
     "Doubling one factor and halving the other leaves the product unchanged. If a factor is one less (or one more) than a multiple of ten, multiply by that multiple of ten and take away (or add) one group of the other factor: 19 × 4 = 20 × 4 − 4.",
     "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group."
@@ -1221,10 +1221,10 @@
    "competency": "MATH.number.primes",
    "section": "sieve",
    "index": 0,
-   "original": "Write the numbers in a grid. Cross out 1. / Keep 2 and cross out every other multiple of 2; keep 3 and cross out its multiples; do the same for 5 and 7. The numbers left are prime.",
+   "original": "Write the numbers in a grid. Cross out 1. / Keep 2 and cross out every other multiple of 2. Keep 3 and cross out its multiples. Do the same for 5 and 7. The numbers left are prime.",
    "text": [
     "Write the numbers in a grid. Cross out 1.",
-    "Keep 2 and cross out all the other multiples of 2; keep 3 and cross out its other multiples; do the same for 5 and 7. The numbers left are prime."
+    "Keep 2 and cross out all the other multiples of 2. Keep 3 and cross out its other multiples. Do the same for 5 and 7. The numbers left are prime."
    ],
    "problem": "'Cross out every other multiple of 2' can be read as crossing out alternate multiples.",
    "severity": "low"
@@ -1233,10 +1233,10 @@
    "competency": "MATH.number.radicals",
    "section": "chapter",
    "index": 4,
-   "original": "a^(p/q) is the q-th root of a, raised to the power p: (ᵠ√a)ᵖ = ᵠ√(aᵖ). A negative power gives the reciprocal. / Take the root first (the denominator), then the power (the numerator); for a negative power, take the reciprocal at the end.",
+   "original": "a^(p/q) is the q-th root of a, raised to the power p: (ᵠ√a)ᵖ = ᵠ√(aᵖ). A negative power gives the reciprocal. / Take the root first (the denominator), then the power (the numerator). For a negative power, take the reciprocal at the end.",
    "text": [
     "a^(p/q) is the q-th root of a, raised to the power p: (q-th root of a)ᵖ = q-th root of (aᵖ). A negative power gives the reciprocal.",
-    "Take the root first (the denominator), then the power (the numerator); for a negative power, take the reciprocal at the end."
+    "Take the root first (the denominator), then the power (the numerator). For a negative power, take the reciprocal at the end."
    ],
    "problem": "Writes the q-th root as 'ᵠ√' (a superscript phi), which is not q and confuses the notation.",
    "severity": "low"
@@ -1245,10 +1245,10 @@
    "competency": "MATH.number.ratio",
    "section": "chapter",
    "index": 2,
-   "original": "Ratios compare by multiplication. a : b and c : d are equivalent when a/b = c/d; the one with the larger fraction is the greater ratio. / Cross-multiply: compare a × d with b × c. Equal products mean equivalent ratios; otherwise the larger product shows the greater ratio. Or write both with the same second term.",
+   "original": "Ratios compare by multiplication. a : b and c : d are equivalent when a/b = c/d. The one with the larger fraction is the greater ratio. / Cross-multiply: compare a × d with b × c. Equal products mean equivalent ratios. Otherwise the larger product shows the greater ratio. Or write both with the same second term.",
    "text": [
-    "Ratios compare by multiplication. a : b and c : d are equivalent when a/b = c/d; the one with the larger fraction is the greater ratio.",
-    "Cross-multiply: compare a × d with b × c. Equal products mean equivalent ratios; if a × d is larger, a : b is greater; if b × c is larger, c : d is greater. Or write both with the same second term."
+    "Ratios compare by multiplication. a : b and c : d are equivalent when a/b = c/d. The one with the larger fraction is the greater ratio.",
+    "Cross-multiply: compare a × d with b × c. Equal products mean equivalent ratios. If a × d is larger, a : b is greater. If b × c is larger, c : d is greater. Or write both with the same second term."
    ],
    "problem": "'The larger product shows the greater ratio' does not say which product belongs to which ratio.",
    "severity": "medium"
@@ -1257,9 +1257,9 @@
    "competency": "MATH.number.rational-numbers",
    "section": "chapter",
    "index": 4,
-   "original": "Between two integers the number line can be cut into q equal parts; each part is 1/q. A rational number halfway between x and y is their average. / Start at the named end and move s parts of 1/q (right adds, left subtracts). For halfway, add the two numbers and divide by 2.",
+   "original": "Between two integers the number line can be cut into q equal parts. Each part is 1/q. A rational number halfway between x and y is their average. / Start at the named end and move s parts of 1/q (right adds, left subtracts). For halfway, add the two numbers and divide by 2.",
    "text": [
-    "Between two integers the number line can be cut into q equal parts; each part is 1/q. A rational number halfway between x and y is their average.",
+    "Between two integers the number line can be cut into q equal parts. Each part is 1/q. A rational number halfway between x and y is their average.",
     "Start at the number the question names and move the given number of parts, each 1/q long (right adds, left subtracts): for example, starting at 2 and moving 3 parts of 1/4 to the right gives 2 3/4. For halfway, add the two numbers and divide by 2."
    ],
    "problem": "Uses q, s and 'the named end' without saying what they are.",
@@ -1282,11 +1282,11 @@
    "competency": "MATH.probability.bayes",
    "section": "chapter",
    "index": 1,
-   "original": "Bayes' theorem turns the question round: P(Bag I | red) = P(Bag I and red) / P(red), and P(red) adds up the red branches of both bags (total probability). / Draw a tree: first the bag (with the die's probabilities), then the colour. Multiply along each red branch; divide the Bag I red branch by the sum of both red branches.",
+   "original": "Bayes' theorem turns the question round: P(Bag I | red) = P(Bag I and red) / P(red), and P(red) adds up the red branches of both bags (total probability). / Draw a tree: first the bag (with the die's probabilities), then the colour. Multiply along each red branch. Divide the Bag I red branch by the sum of both red branches.",
    "text": [
     "Bayes' theorem turns the question round: P(Bag I | red) = P(Bag I and red)",
     "P(red), and P(red) adds up the red branches of both bags (total probability).",
-    "Draw a tree: first the bag (with the probability of choosing each bag, for example from a die throw), then the colour. Multiply along each red branch; divide the Bag I red branch by the sum of both red branches."
+    "Draw a tree: first the bag (with the probability of choosing each bag, for example from a die throw), then the colour. Multiply along each red branch. Divide the Bag I red branch by the sum of both red branches."
    ],
    "problem": "Mentions 'the die's probabilities' although no die has been described.",
    "severity": "low"
@@ -1369,7 +1369,7 @@
    "index": 2,
    "original": "Subtracting the smaller number does not change which numbers divide both cards, so the game ends at the largest number that divides both starting numbers: their HCF. / Write the pair after each move in a table. Keep replacing the larger number by the difference until the two numbers are equal.",
    "text": [
-    "In the game two cards show two numbers; each move replaces the larger number by the larger minus the smaller. Subtracting the smaller number does not change which numbers divide both cards, so the game ends at the largest number that divides both starting numbers: their HCF.",
+    "In the game two cards show two numbers. Each move replaces the larger number by the larger minus the smaller. Subtracting the smaller number does not change which numbers divide both cards, so the game ends at the largest number that divides both starting numbers: their HCF.",
     "Write the pair after each move in a table. Keep replacing the larger number by the difference until the two numbers are equal."
    ],
    "problem": "Refers to 'the game' and 'both cards' without describing the game, and uses HCF without saying how the pair changes.",
@@ -1390,10 +1390,10 @@
    "competency": "MATH.reasoning.conjecture-testing",
    "section": "chapter",
    "index": 3,
-   "original": "A conjecture is a guess from patterns: every four-digit number (not all digits equal) reaches 6174 by Kaprekar's routine in at most 7 steps; repeated digit sums give the remainder on dividing by 9 (or 9); reversing and adding usually reaches a palindrome. Testing many numbers builds confidence, but only a proof makes it certain. / Carry out the process carefully, writing every number, and count the steps. Check against the conjecture: the answer for Kaprekar is never more than 7; the digit-sum answer is the remainder on dividing by 9.",
+   "original": "A conjecture is a guess from patterns: every four-digit number (not all digits equal) reaches 6174 by Kaprekar's routine in at most 7 steps. Repeated digit sums give the remainder on dividing by 9 (or 9). Reversing and adding usually reaches a palindrome. Testing many numbers builds confidence, but only a proof makes it certain. / Carry out the process carefully, writing every number, and count the steps. Check against the conjecture: the answer for Kaprekar is never more than 7. The digit-sum answer is the remainder on dividing by 9.",
    "text": [
-    "A conjecture is a guess from patterns: every four-digit number (not all digits equal) reaches 6174 by Kaprekar's routine in at most 7 steps; repeated digit sums give the remainder on dividing by 9 (or 9 when the number divides exactly by 9); reversing and adding usually reaches a palindrome. Testing many numbers builds confidence, but only a proof makes it certain.",
-    "Carry out the process carefully, writing every number, and count the steps. Check against the conjecture: the answer for Kaprekar is never more than 7; the digit-sum answer is the remainder on dividing by 9 (9 if that remainder is 0)."
+    "A conjecture is a guess from patterns: every four-digit number (not all digits equal) reaches 6174 by Kaprekar's routine in at most 7 steps. Repeated digit sums give the remainder on dividing by 9 (or 9 when the number divides exactly by 9). Reversing and adding usually reaches a palindrome. Testing many numbers builds confidence, but only a proof makes it certain.",
+    "Carry out the process carefully, writing every number, and count the steps. Check against the conjecture: the answer for Kaprekar is never more than 7. The digit-sum answer is the remainder on dividing by 9 (9 if that remainder is 0)."
    ],
    "problem": "'give the remainder on dividing by 9 (or 9)' is garbled; the digit sum is 9, not 0, when the number divides by 9.",
    "severity": "medium"
@@ -1441,7 +1441,7 @@
    "text": [
     "Each step says what happens and, after the dash, why.",
     "Go first and take 3, leaving 12 — 12 is a multiple of 4 (1 + 3 = 4).",
-    "Your friend takes 1, 2 or 3; you take 3, 2 or 1 — together you take 4, so 8 are left.",
+    "Your friend takes 1, 2 or 3. You take 3, 2 or 1 — together you take 4, so 8 are left.",
     "Do the same again: 4 left, then 0 — you take the last match, because your friend always faces a multiple of 4 and can never take all of it."
    ],
    "problem": "A 'Worked' example that has no steps: it only says that each step will have a reason.",
@@ -1474,9 +1474,9 @@
    "competency": "MATH.statistics.mean-deviation",
    "section": "chapter",
    "index": 1,
-   "original": "The median is the middle value of the ORDERED data; the mean deviation about it is the average distance from it. / Sort the data, take the 4th value as the median M, add the distances |x − M| and divide by 7.",
+   "original": "The median is the middle value of the ORDERED data. The mean deviation about it is the average distance from it. / Sort the data, take the 4th value as the median M, add the distances |x − M| and divide by 7.",
    "text": [
-    "The median is the middle value of the ORDERED data; the mean deviation about it is the average distance from it.",
+    "The median is the middle value of the ORDERED data. The mean deviation about it is the average distance from it.",
     "Sort the data and take the middle value as the median M (for 7 values, the 4th). Add the distances |x − M| and divide by the number of values."
    ],
    "problem": "Says 'take the 4th value' and 'divide by 7' as a general method, though no data set of 7 values is given.",
@@ -1521,9 +1521,9 @@
    "competency": "MATH.trigonometry.heights-distances",
    "section": "chapter",
    "index": 1,
-   "original": "Each observation point gives a right triangle; the two triangles share the height h, and their bases differ by the distance walked. / Let x be the distance from the nearer point. Write h = x tan β and h = (x + d) tan α, set them equal, solve for x, then find h.",
+   "original": "Each observation point gives a right triangle. The two triangles share the height h, and their bases differ by the distance walked. / Let x be the distance from the nearer point. Write h = x tan β and h = (x + d) tan α, set them equal, solve for x, then find h.",
    "text": [
-    "Each observation point gives a right triangle; the two triangles share the height h, and their bases differ by the distance walked.",
+    "Each observation point gives a right triangle. The two triangles share the height h, and their bases differ by the distance walked.",
     "Let x be the distance from the nearer point, where the angle of elevation is β, and let α be the angle at the farther point, d further away. Write h = x tan β and h = (x + d) tan α, set them equal, solve for x, then find h."
    ],
    "problem": "The angles α and β are used without saying which point each belongs to.",
@@ -1533,9 +1533,9 @@
    "competency": "MATH.trigonometry.inverse",
    "section": "chapter",
    "index": 1,
-   "original": "Each inverse function returns one angle from its principal range: sin⁻¹, tan⁻¹, cosec⁻¹ in [−π/2, π/2]; cos⁻¹, cot⁻¹, sec⁻¹ in [0, π]. That is why it has a single value. / Find the standard angle whose ratio is the argument, then make sure it lies in the principal range: for a negative argument use −θ (sin⁻¹, tan⁻¹, cosec⁻¹) or π − θ (cos⁻¹, sec⁻¹, cot⁻¹).",
+   "original": "Each inverse function returns one angle from its principal range: sin⁻¹, tan⁻¹, cosec⁻¹ in [−π/2, π/2]. Cos⁻¹, cot⁻¹, sec⁻¹ in [0, π]. That is why it has a single value. / Find the standard angle whose ratio is the argument, then make sure it lies in the principal range: for a negative argument use −θ (sin⁻¹, tan⁻¹, cosec⁻¹) or π − θ (cos⁻¹, sec⁻¹, cot⁻¹).",
    "text": [
-    "Each inverse function returns one angle from its principal range: sin⁻¹ in [−π/2, π/2]; tan⁻¹ in (−π/2, π/2); cosec⁻¹ in [−π/2, π/2] without 0; cos⁻¹ in [0, π]; cot⁻¹ in (0, π); sec⁻¹ in [0, π] without π/2. That is why it has a single value.",
+    "Each inverse function returns one angle from its principal range: sin⁻¹ in [−π/2, π/2]. Tan⁻¹ in (−π/2, π/2). Cosec⁻¹ in [−π/2, π/2] without 0. Cos⁻¹ in [0, π]. Cot⁻¹ in (0, π). Sec⁻¹ in [0, π] without π/2. That is why it has a single value.",
     "Find the standard angle whose ratio is the argument, then make sure it lies in the principal range: for a negative argument use −θ (sin⁻¹, tan⁻¹, cosec⁻¹) or π − θ (cos⁻¹, sec⁻¹, cot⁻¹)."
    ],
    "problem": "The ranges given are wrong: tan⁻¹ is (−π/2, π/2), not the closed interval; cot⁻¹ is (0, π); cosec⁻¹ leaves out 0 and sec⁻¹ leaves out π/2.",

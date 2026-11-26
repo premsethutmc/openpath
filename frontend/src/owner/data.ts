@@ -22,14 +22,18 @@ export const topicName = (t: string) => WORD[t] ?? t[0].toUpperCase() + t.slice(
 /** Trigonometry first, then the rest by name. */
 export const topics: string[] = [...new Set(maths.map((m) => topicOf(m.competency)))].sort((a, b) => (a === "trigonometry" ? -1 : b === "trigonometry" ? 1 : a.localeCompare(b)));
 
-export interface Screen { section: string; title: string; text: string[]; math: string[]; corrected: boolean; instance?: string }
+import type { Screen as ModuleScreen } from "../../../packages/learning/src/content";
+/** owner-picture@1: the picture a child sees on the screen (its own, or its question's), so the owner sees it too. */
+export type ScreenPicture = NonNullable<ModuleScreen["widget"]>;
+const pictureOf = (s: ModuleScreen): ScreenPicture | undefined => s.widget ?? ((s.instance ? problemOf(s.instance.replace(/:(mc|w)$/, ""))?.figure : undefined) as ScreenPicture | undefined);
+export interface Screen { section: string; title: string; text: string[]; math: string[]; corrected: boolean; instance?: string; picture?: ScreenPicture }
 export interface Skill { competency: string; title: string; cls: number | null; screens: Screen[]; families: Spec[]; corrected: number; certified: number; foundations: Foundation[] }
 export function skillsOf(topic: string): Skill[] {
   return maths.filter((m) => topicOf(m.competency) === topic).map((m) => {
     const fixed = new Set(screenCorrections.filter((c) => c.competency === m.competency).map((c) => `${c.section}|${c.index}`));
     const screens: Screen[] = [
-      ...m.chapter.map((s, i) => ({ section: "Lesson", title: s.title ?? "", text: s.text ?? [], math: (s as { math?: string[] }).math ?? [], corrected: fixed.has(`chapter|${i}`), instance: (s as { instance?: string }).instance })),
-      ...m.strategies.flatMap((st) => st.screens.map((s, i) => ({ section: st.id === "spot_the_mistake" ? "Common mistake" : "Another way", title: s.title ?? "", text: s.text ?? [], math: (s as { math?: string[] }).math ?? [], corrected: fixed.has(`${st.id}|${i}`), instance: (s as { instance?: string }).instance }))),
+      ...m.chapter.map((s, i) => ({ section: "Lesson", title: s.title ?? "", text: s.text ?? [], math: (s as { math?: string[] }).math ?? [], corrected: fixed.has(`chapter|${i}`), instance: (s as { instance?: string }).instance, picture: pictureOf(s) })),
+      ...m.strategies.flatMap((st) => st.screens.map((s, i) => ({ section: st.id === "spot_the_mistake" ? "Common mistake" : "Another way", title: s.title ?? "", text: s.text ?? [], math: (s as { math?: string[] }).math ?? [], corrected: fixed.has(`${st.id}|${i}`), instance: (s as { instance?: string }).instance, picture: pictureOf(s) }))),
     ];
     const fams = families.filter((f) => f.competency === m.competency);
     return { competency: m.competency, title: m.title, cls: classOfSkill(m.competency) ?? null, screens, families: fams, corrected: screens.filter((s) => s.corrected).length, certified: fams.filter((f) => certified.has(f.id)).length, foundations: foundationsOf(m.competency) };

@@ -3708,7 +3708,7 @@
     {
      "title": "Enough information fixes a triangle",
      "text": [
-      "A triangle is fixed (only its position can change) by any of these: three sides (SSS); two sides and the angle between them (SAS); two angles and the side between them (ASA); a right angle, the hypotenuse and one side (RHS).",
+      "A triangle is fixed (only its position can change) by any of these: three sides (SSS). Two sides and the angle between them (SAS). Two angles and the side between them (ASA). A right angle, the hypotenuse and one side (RHS).",
       "Three angles alone are not enough: they fix the shape but not the size."
      ],
      "math": [
@@ -3760,7 +3760,7 @@
        "title": "Two circles of possible places",
        "text": [
         "The third corner must be on a circle round each end of the base. A triangle exists only when those two circles cross.",
-        "If the two radii add to less than the base, the circles are too small to reach each other; if they add to exactly the base, they touch on the base and the triangle is flat."
+        "If the two radii add to less than the base, the circles are too small to reach each other. If they add to exactly the base, they touch on the base and the triangle is flat."
        ],
        "math": [
         "radii r and s, base b: the arcs cross when r + s > b (and each of r, s is less than the other plus b)"
@@ -4131,7 +4131,7 @@
     {
      "title": "Dividing a segment in the ratio m : n",
      "text": [
-      "Draw AB and a ray AX at an acute angle. Mark m + n equal steps A₁, A₂, … on AX with a fixed compass opening. Join the last mark to B. Through Aₘ draw a line parallel to that join; it cuts AB at C."
+      "Draw AB and a ray AX at an acute angle. Mark m + n equal steps A₁, A₂, … on AX with a fixed compass opening. Join the last mark to B. Through Aₘ draw a line parallel to that join. It cuts AB at C."
      ],
      "math": [
       "Ratio 3 : 4: mark A₁ … A₇, join A₇B, through A₃ draw A₃C ∥ A₇B.",
@@ -4156,7 +4156,7 @@
     {
      "title": "Scale factor more than 1",
      "text": [
-      "For 7/5: mark 7 steps, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′; then a parallel to CA through C′ meets BA extended at A′."
+      "For 7/5: mark 7 steps, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′. Then a parallel to CA through C′ meets BA extended at A′."
      ],
      "math": [
       "BC′/BC = BB₇/BB₅ = 7/5"
@@ -4178,7 +4178,7 @@
       {
        "title": "Parallel lines share out lengths in proportion",
        "text": [
-        "If a line parallel to one side of a triangle cuts the other two sides, it divides them in the same ratio. Equal steps on the ray give a ratio you can count; the parallel copies that ratio onto the segment."
+        "If a line parallel to one side of a triangle cuts the other two sides, it divides them in the same ratio. Equal steps on the ray give a ratio you can count. The parallel copies that ratio onto the segment."
        ],
        "math": [
         "DE ∥ BC in △ABC  ⇒  AD/DB = AE/EC",
@@ -4199,7 +4199,7 @@
        "title": "Three questions to ask",
        "text": [
         "1. How many steps? Ratio m : n → m + n steps. Scale factor m/n → the larger of m and n.",
-        "2. Which mark do I join? The last mark for a ratio; the n-th (denominator) for a scale factor.",
+        "2. Which mark do I join? The last mark for a ratio. The n-th (denominator) for a scale factor.",
         "3. Through which mark is the parallel? The m-th."
        ],
        "math": [
@@ -4233,7 +4233,7 @@
     {
      "title": "Why five measurements",
      "text": [
-      "A diagonal splits a quadrilateral into two triangles. The first triangle needs 3 measurements; the second shares the diagonal, so it needs only 2 more.",
+      "A diagonal splits a quadrilateral into two triangles. The first triangle needs 3 measurements. The second shares the diagonal, so it needs only 2 more.",
       "Four sides alone are not enough: a quadrilateral made of four hinged sticks can be pushed into many shapes."
      ],
      "math": [
@@ -4471,7 +4471,7 @@
     {
      "title": "The square-root spiral",
      "text": [
-      "Start with OA₁ = 1. At A₁ draw 1 unit perpendicular to OA₁ to get A₂; at A₂ draw 1 unit perpendicular to OA₂; and so on."
+      "Start with OA₁ = 1. At A₁ draw 1 unit perpendicular to OA₁ to get A₂. At A₂ draw 1 unit perpendicular to OA₂. And so on."
      ],
      "math": [
       "OA₂² = 1² + 1² = 2",
@@ -4598,7 +4598,7 @@
       {
        "title": "A chain needs a first link",
        "text": [
-        "The step says: if one domino falls, the next one falls. The base case pushes the first domino. Without the push, nothing falls; without the step, only the first one does."
+        "The step says: if one domino falls, the next one falls. The base case pushes the first domino. Without the push, nothing falls. Without the step, only the first one does."
        ],
        "math": [
         "P(1) ✓, P(k) ⇒ P(k + 1)  ⇒  P(2) ✓ ⇒ P(3) ✓ ⇒ …"
@@ -4620,7 +4620,7 @@
        "text": [
         "Base: check the statement for the first value claimed.",
         "Hypothesis: assume it is true for some n = k.",
-        "Step: write the statement for n = k + 1 as the target; start from its left side, bring in the hypothesis, and simplify to the right side.",
+        "Step: write the statement for n = k + 1 as the target. Start from its left side, bring in the hypothesis, and simplify to the right side.",
         "Conclusion: by the principle of induction, it is true for every n."
        ],
        "math": [
@@ -4656,7 +4656,7 @@
      "title": "Work backwards from the end",
      "text": [
       "In a game where you take or say numbers, start from the winning moment and ask: which positions let me win next turn, whatever happens? Those are 'safe' positions.",
-      "Game: count up from 1, saying 1 or 2 numbers each turn; whoever says 10 wins. If I say 7, my friend says 8 or 8, 9, and I can always reach 10."
+      "Game: count up from 1, saying 1 or 2 numbers each turn. Whoever says 10 wins. If I say 7, my friend says 8 or 8, 9, and I can always reach 10."
      ],
      "math": [
       "Safe numbers: 10, 7, 4, 1 (count back in 3s = 1 + 2)"

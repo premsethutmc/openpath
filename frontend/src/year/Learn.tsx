@@ -716,7 +716,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   );
 }
 
-function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competency?: string }) {
+export function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competency?: string }) {
   // visuals@2: strips that state both fractions (bottomShaded / labels) are drawn by Figure (equal wholes, independent shading).
   // Legacy strips (top, bottom, shaded) state only the first fraction: the existing two-row picture with the derived equivalent
   // shading is kept only in an equivalence lesson, when that shading is exact; otherwise Figure says so in text (no guessed picture).

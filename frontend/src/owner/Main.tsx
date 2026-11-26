@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { sampleOf, search, skillsOf, topicName, topics, totalsOf, type Skill } from "./data";
 import { FoundationCard, SteppedMath } from "../year/StartHere";
+import { Picture } from "../year/Learn";
 import { PictureExplore, PictureRound } from "../year/PictureTasks";
 import { picturesOf } from "../../../packages/learning/src/foundations";
 import "../year/scene.css";
@@ -39,6 +40,7 @@ function SkillCard({ s }: { s: Skill }) {
             <p className="eyebrow">{x.section}{x.corrected ? " · fixed by review" : ""}</p>
             {x.title && <h4>{x.title}</h4>}
             {x.text.map((t, j) => <p key={j}>{mx(t)}</p>)}
+            {x.picture && <Picture w={x.picture} competency={s.competency} />}
             {x.math.length >= 3 ? <SteppedMath lines={x.math} whys={stepWhys(x.instance)} qid={x.instance} /> : x.math.length > 0 && <div className="math">{x.math.map((t, j) => <div key={j}>{mx(t)}</div>)}</div>}
           </section>
         ))}

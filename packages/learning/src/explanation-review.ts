@@ -23,6 +23,7 @@
  *
  * Nothing here decides WHAT to teach (intervention.ts does); it decides whether a chosen explanation may be shown.
  */
+import { plainSentences } from "./plain";
 import registryData from "../../../content/learning/explanation-review.v1.json";
 import blocklistData from "../../../content/learning/explanation-blocklist.v1.json";
 import { question, type Module, type Strategy } from "./content";
@@ -108,7 +109,7 @@ export function addressedMisconception(s: Strategy): string | null {
   }
   for (const sc of s.screens) {
     if (!(sc.role === "misconception" || (!sc.role && s.id === "spot_the_mistake")) || !sc.instance) continue;
-    const b = problemOf(sc.instance)?.bugs.find((x) => !!x.says && sc.text.includes(x.says));
+    const b = problemOf(sc.instance)?.bugs.find((x) => !!x.says && (sc.text.includes(x.says) || sc.text.includes(plainSentences(x.says))));
     if (b) return b.id;
   }
   return null;

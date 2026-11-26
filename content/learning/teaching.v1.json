@@ -686,7 +686,7 @@
    "kind": "card",
    "competency": "MATH.algebra.factorisation",
    "title": "Factor algebraic expressions",
-   "hash": "da1f0a69",
+   "hash": "3462edde",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -779,7 +779,7 @@
    "kind": "card",
    "competency": "MATH.algebra.geometric-sequences",
    "title": "Use geometric sequences and series",
-   "hash": "e06129ba",
+   "hash": "fb13ff3f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -797,7 +797,7 @@
    "kind": "card",
    "competency": "MATH.algebra.growing-patterns",
    "title": "Describe growing patterns",
-   "hash": "16de8326",
+   "hash": "9a12ffe3",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -835,7 +835,7 @@
    "kind": "card",
    "competency": "MATH.algebra.identities-intro",
    "title": "Expand simple products",
-   "hash": "e8ece70a",
+   "hash": "3bf64b8f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -849,7 +849,7 @@
    "kind": "card",
    "competency": "MATH.algebra.inequalities",
    "title": "Solve linear inequalities",
-   "hash": "aef4c98a",
+   "hash": "b01a4543",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -864,7 +864,7 @@
    "kind": "card",
    "competency": "MATH.algebra.inequalities-two-variables",
    "title": "Graph linear inequalities and systems in two variables",
-   "hash": "029ef55b",
+   "hash": "90a4afc2",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -878,7 +878,7 @@
    "kind": "card",
    "competency": "MATH.algebra.inequations-intro",
    "title": "Solve simple inequations over whole numbers or integers",
-   "hash": "57fbba91",
+   "hash": "0902251a",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1024,7 +1024,7 @@
    "kind": "card",
    "competency": "MATH.algebra.logarithms",
    "title": "Use logarithm laws and solve logarithmic equations",
-   "hash": "a0767f09",
+   "hash": "2b8a851e",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1037,7 +1037,7 @@
    "kind": "card",
    "competency": "MATH.algebra.matrices",
    "title": "Operate on matrices",
-   "hash": "28ff6b48",
+   "hash": "f9713e05",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1054,7 +1054,7 @@
    "kind": "card",
    "competency": "MATH.algebra.matrix-systems",
    "title": "Solve systems using matrices",
-   "hash": "0dab59be",
+   "hash": "b1c4ddec",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1149,7 +1149,7 @@
    "kind": "card",
    "competency": "MATH.algebra.permutations",
    "title": "Count permutations and combinations",
-   "hash": "4b7e351b",
+   "hash": "4a427cde",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1164,7 +1164,7 @@
    "kind": "card",
    "competency": "MATH.algebra.polynomial-equation-solving",
    "title": "Solve higher-degree polynomial equations using structure",
-   "hash": "229a2a87",
+   "hash": "39a8f6d2",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1201,7 +1201,7 @@
    "kind": "card",
    "competency": "MATH.algebra.polynomial-square-root",
    "title": "Find square roots of polynomials",
-   "hash": "17a4bf86",
+   "hash": "6fa3330e",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1511,7 +1511,7 @@
    "kind": "card",
    "competency": "MATH.calculus.derivatives",
    "title": "Differentiate from first principles",
-   "hash": "2aa49f8b",
+   "hash": "2f61206c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1525,7 +1525,7 @@
    "kind": "card",
    "competency": "MATH.calculus.differentiability",
    "title": "Test differentiability",
-   "hash": "1028db5d",
+   "hash": "7177cfa8",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1539,7 +1539,7 @@
    "kind": "card",
    "competency": "MATH.calculus.differential-equations",
    "title": "Solve elementary differential equations",
-   "hash": "0f0d26bb",
+   "hash": "b4164698",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1554,7 +1554,7 @@
    "kind": "card",
    "competency": "MATH.calculus.higher-derivatives",
    "title": "Find and use second-order derivatives",
-   "hash": "12c16558",
+   "hash": "c8285e89",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1637,7 +1637,7 @@
    "kind": "card",
    "competency": "MATH.calculus.lhopital",
    "title": "Evaluate indeterminate forms using l'Hopital's rule",
-   "hash": "82e226c5",
+   "hash": "e709ecbf",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1649,7 +1649,7 @@
    "kind": "card",
    "competency": "MATH.calculus.limits",
    "title": "Evaluate elementary limits",
-   "hash": "217d540f",
+   "hash": "7984093c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1676,7 +1676,7 @@
    "kind": "card",
    "competency": "MATH.calculus.linear-first-order-de",
    "title": "Solve linear first-order differential equations with an integrating factor",
-   "hash": "93a79656",
+   "hash": "63906bf1",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1701,7 +1701,7 @@
    "kind": "card",
    "competency": "MATH.calculus.monotonicity",
    "title": "Find intervals where a function increases or decreases",
-   "hash": "ad48241b",
+   "hash": "9be25422",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1714,7 +1714,7 @@
    "kind": "card",
    "competency": "MATH.calculus.multivariable-limits",
    "title": "Examine limits and continuity of functions of two variables",
-   "hash": "81e94705",
+   "hash": "298f1313",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1738,7 +1738,7 @@
    "kind": "card",
    "competency": "MATH.calculus.partial-derivatives",
    "title": "Compute partial derivatives and apply Euler's theorem",
-   "hash": "41ab43f2",
+   "hash": "0c95fd53",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1750,7 +1750,7 @@
    "kind": "card",
    "competency": "MATH.calculus.partial-fractions-integration",
    "title": "Integrate rational functions by partial fractions",
-   "hash": "200dab58",
+   "hash": "c25498b8",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1763,7 +1763,7 @@
    "kind": "card",
    "competency": "MATH.calculus.reduction-formulae",
    "title": "Use reduction formulae for definite integrals",
-   "hash": "e440880f",
+   "hash": "4796f1bc",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1775,7 +1775,7 @@
    "kind": "card",
    "competency": "MATH.calculus.taylor-series",
    "title": "Expand functions as Taylor and Maclaurin series",
-   "hash": "e3ee8410",
+   "hash": "171ae58c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1787,7 +1787,7 @@
    "kind": "card",
    "competency": "MATH.calculus.volumes-of-revolution",
    "title": "Find volumes of solids of revolution by integration",
-   "hash": "5412a9c5",
+   "hash": "f5546b3a",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1826,7 +1826,7 @@
    "kind": "card",
    "competency": "MATH.coordinate.conics",
    "title": "Analyse circle parabola ellipse and hyperbola",
-   "hash": "9301fcaa",
+   "hash": "212e51f7",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -1987,7 +1987,7 @@
    "kind": "card",
    "competency": "MATH.geometry.angle-measure",
    "title": "Measure and draw angles",
-   "hash": "7eb2e0f3",
+   "hash": "a7cc5462",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2019,7 +2019,7 @@
    "kind": "card",
    "competency": "MATH.geometry.angles-as-turns",
    "title": "Describe angles as fractions of a turn and direction of turning",
-   "hash": "87ff80ff",
+   "hash": "8a9ca6f4",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2031,7 +2031,7 @@
    "kind": "card",
    "competency": "MATH.geometry.angles-intro",
    "title": "Compare right acute and obtuse angles",
-   "hash": "26b3634b",
+   "hash": "dc22888f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2162,7 +2162,7 @@
    "kind": "card",
    "competency": "MATH.geometry.construction-triangles",
    "title": "Construct triangles from sufficient data",
-   "hash": "4cb9bb1f",
+   "hash": "72604eac",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2232,7 +2232,7 @@
    "kind": "card",
    "competency": "MATH.geometry.lines-segments",
    "title": "Distinguish lines rays and segments",
-   "hash": "9df69ecb",
+   "hash": "f51b25dd",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2450,7 +2450,7 @@
    "kind": "card",
    "competency": "MATH.geometry.scaled-construction",
    "title": "Construct similar figures",
-   "hash": "17a0a7d3",
+   "hash": "4da749ea",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2518,7 +2518,7 @@
    "kind": "card",
    "competency": "MATH.geometry.similarity",
    "title": "Apply triangle similarity",
-   "hash": "53fcdd58",
+   "hash": "bd67c2f3",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2563,7 +2563,7 @@
    "kind": "card",
    "competency": "MATH.geometry.symmetry-fold",
    "title": "Recognise folding symmetry",
-   "hash": "3c5f9345",
+   "hash": "985c0446",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2600,7 +2600,7 @@
    "kind": "card",
    "competency": "MATH.geometry.tessellations",
    "title": "Decide which polygons tile the plane and create tilings",
-   "hash": "6a9240dc",
+   "hash": "65684e9f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2689,7 +2689,7 @@
    "kind": "card",
    "competency": "MATH.matrices.adjoint-inverse",
    "title": "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)",
-   "hash": "3633fd8e",
+   "hash": "7b7d5ed8",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2887,7 +2887,7 @@
    "kind": "card",
    "competency": "MATH.measurement.compute-with-measures",
    "title": "Calculate with measured quantities in mixed units",
-   "hash": "d8a41c5c",
+   "hash": "d3161c35",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2905,7 +2905,7 @@
    "kind": "card",
    "competency": "MATH.measurement.cones-spheres",
    "title": "Calculate cone and sphere measures",
-   "hash": "08a59b24",
+   "hash": "fb798045",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -2970,7 +2970,7 @@
    "kind": "card",
    "competency": "MATH.measurement.frustum",
    "title": "Calculate frustum surface area and volume",
-   "hash": "2055822b",
+   "hash": "1632358f",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3027,7 +3027,7 @@
    "kind": "card",
    "competency": "MATH.measurement.mass-comparison",
    "title": "Compare masses",
-   "hash": "5c585846",
+   "hash": "cee4c0fd",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3164,7 +3164,7 @@
    "kind": "card",
    "competency": "MATH.measurement.rectangle-area",
    "title": "Calculate rectangle area",
-   "hash": "b61af752",
+   "hash": "d245c445",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -3200,7 +3200,7 @@
    "kind": "card",
    "competency": "MATH.measurement.sectors",
    "title": "Calculate sector and segment areas",
-   "hash": "9c0478f7",
+   "hash": "b06c615d",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4155,7 +4155,7 @@
    "kind": "card",
    "competency": "MATH.number.percent-intro",
    "title": "Represent percentages as hundredths",
-   "hash": "bdedbd90",
+   "hash": "cb87ce89",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4189,7 +4189,7 @@
    "kind": "card",
    "competency": "MATH.number.place-value-tens",
    "title": "Compose tens and ones",
-   "hash": "77cfc571",
+   "hash": "af067118",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4341,7 +4341,7 @@
    "kind": "card",
    "competency": "MATH.number.real-numbers",
    "title": "Represent rational and irrational numbers",
-   "hash": "1368df88",
+   "hash": "1c61cea5",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4522,7 +4522,7 @@
    "kind": "card",
    "competency": "MATH.number.unit-fractions",
    "title": "Recognise halves and quarters",
-   "hash": "29bc5951",
+   "hash": "c59190df",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4568,7 +4568,7 @@
    "kind": "card",
    "competency": "MATH.probability.bayes",
    "title": "Apply Bayes theorem",
-   "hash": "19dd65e1",
+   "hash": "799b75cb",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4668,7 +4668,7 @@
    "kind": "card",
    "competency": "MATH.probability.events",
    "title": "Apply event algebra",
-   "hash": "32760255",
+   "hash": "69e7899c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4771,7 +4771,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.algorithms-flowcharts",
    "title": "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts",
-   "hash": "d0965848",
+   "hash": "a2d32711",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4786,7 +4786,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.coding-ciphers",
    "title": "Encode and decode messages using rule-based ciphers",
-   "hash": "2291839d",
+   "hash": "65e28706",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4860,7 +4860,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.estimate-check",
    "title": "Estimate and check an answer",
-   "hash": "daaa405c",
+   "hash": "03c5ca25",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4890,7 +4890,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.logic",
    "title": "Use logical implications and counterexamples",
-   "hash": "aa8b7c7d",
+   "hash": "7e4649a8",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -4920,7 +4920,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.mathematical-induction",
    "title": "Prove statements by mathematical induction",
-   "hash": "0314cfdf",
+   "hash": "827fe820",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5007,7 +5007,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.parity",
    "title": "Reason with parity of sums and products",
-   "hash": "072d27c5",
+   "hash": "feba5146",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5085,7 +5085,7 @@
    "kind": "card",
    "competency": "MATH.reasoning.systematic-enumeration",
    "title": "List or count all arrangements or configurations systematically (including figures within a figure)",
-   "hash": "9afea65c",
+   "hash": "2339d2e1",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5268,7 +5268,7 @@
    "kind": "card",
    "competency": "MATH.sets-relations.relation-properties",
    "title": "Test relations for reflexivity, symmetry, transitivity and equivalence",
-   "hash": "6841d0fa",
+   "hash": "89948a06",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5300,7 +5300,7 @@
    "kind": "card",
    "competency": "MATH.statistics.bar-charts",
    "title": "Read simple bar charts",
-   "hash": "4c8fa3af",
+   "hash": "e56fb4cc",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5397,7 +5397,7 @@
    "kind": "card",
    "competency": "MATH.statistics.histograms",
    "title": "Interpret grouped histograms",
-   "hash": "0f25d984",
+   "hash": "c086ec91",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5436,7 +5436,7 @@
    "kind": "card",
    "competency": "MATH.statistics.median-mode",
    "title": "Calculate median and mode",
-   "hash": "165bf593",
+   "hash": "40802cdc",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5516,7 +5516,7 @@
    "kind": "card",
    "competency": "MATH.statistics.scaled-bars",
    "title": "Interpret scaled bar charts",
-   "hash": "3538d571",
+   "hash": "e165f9f4",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5594,7 +5594,7 @@
    "kind": "card",
    "competency": "MATH.trigonometry.compound-angle-identities",
    "title": "Apply compound, multiple-angle and sum-to-product identities",
-   "hash": "5fd9b225",
+   "hash": "2b0a61ee",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5608,7 +5608,7 @@
    "kind": "card",
    "competency": "MATH.trigonometry.equations",
    "title": "Solve trigonometric equations",
-   "hash": "9f7f7dcd",
+   "hash": "698a394c",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5683,7 +5683,7 @@
    "kind": "card",
    "competency": "MATH.trigonometry.radians",
    "title": "Measure angles in radians",
-   "hash": "7bb479db",
+   "hash": "f515ec52",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5712,7 +5712,7 @@
    "kind": "card",
    "competency": "MATH.trigonometry.triangle-laws",
    "title": "Solve triangles using sine, cosine and projection rules",
-   "hash": "a319c7e3",
+   "hash": "a9a58d2a",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -5752,7 +5752,7 @@
    "kind": "card",
    "competency": "MATH.vectors.products",
    "title": "Use dot and cross products",
-   "hash": "dda27d18",
+   "hash": "b483d8e3",
    "source": "rule",
    "from": "lesson",
    "classes": [
@@ -7700,7 +7700,7 @@
    "kind": "help",
    "competency": "MATH.algebra.growing-patterns",
    "title": "Continuing a growing pattern",
-   "hash": "85a2cd8f",
+   "hash": "694ca994",
    "source": "rule",
    "from": "steps",
    "classes": [

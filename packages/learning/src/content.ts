@@ -3,6 +3,7 @@
  * Marking is deterministic and checks mathematical equivalence (packages/mathematics/src/answers.ts): 2/4 = 1/2,
  * "x^2+2x" = "2x + x^2", "2, -1" = "-1,2" for sets.
  */
+import { plainSentences } from "./plain";
 import { canonicalInteger, unbrace } from "./answer-core";
 import data from "../../../content/learning/modules.v1.json";
 import problemsData from "../../../content/learning/problems.v1.json";
@@ -174,6 +175,13 @@ export const withoutQuarantined = (m: Module): Module => {
     ...(m.written ? { written: m.written.filter(keep("written")) } : {}),
   };
 };
+/** plain-reading@1: a maths lesson's sentences are not joined with a semicolon ("…each time; find…" reads as "…each time.
+ * Find…"), so a young reader meets one idea per sentence. The library build applies this (scripts/library.ts); the authored
+ * files were rewritten with it, so the content files are what the app and the server both read. English is not touched. */
+export { plainSentences };
+const plainScreen = <S extends { text?: string[] }>(sc: S): S => (sc.text ? { ...sc, text: sc.text.map(plainSentences) } : sc);
+export const withPlainReading = (m: Module): Module =>
+  m.competency.startsWith("MATH.") ? { ...m, chapter: m.chapter.map(plainScreen), strategies: m.strategies.map((st) => ({ ...st, screens: st.screens.map(plainScreen) })) } : m;
 export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withCorrections).map(withWritten).map(withoutQuarantined);
 /** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
 export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);

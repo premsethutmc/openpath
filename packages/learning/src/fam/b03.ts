@@ -1116,13 +1116,18 @@ export const B03: Def[] = [
     stepWhy: (s) => (s.id === "rule"
         ? ["A growing pattern changes by the same amount each step, so we find that change from two terms next to each other."]
         : ["The pattern keeps growing by the same amount, so we keep adding it until we reach the term we want."]),
-    explain: (s) => (s.id === "rule" ? `From ${s.inputs[0]} to ${s.inputs[1]}: the pattern grows by ${s.value} each step` : `Keep adding ${s.inputs[1]}: ${s.value}`),
+    // plain-steps@1: the first step names the given numbers (step 1, step 2) and the next shows every term it adds, not only the last
+    explain: (s) => {
+      if (s.id === "rule") return `Step 1 has ${s.inputs[0]} and step 2 has ${s.inputs[1]}, so the pattern grows by ${s.value} each step`;
+      const [from, d, n] = s.inputs as number[];
+      return `Keep adding ${d}: ${Array.from({ length: n + 1 }, (_, i) => from + i * d).join(", ")}`;
+    },
     domain: [[1, 10], [1, 6], [4, 8]],
     difficulty: ([, d, k]) => (k === 4 && d <= 3 ? 1 : k >= 7 ? 3 : 2),
     figure: ([a, d]) => ({ type: "table", head: ["Step", "1", "2", "3"], rows: [["Dots", a, a + d, a + 2 * d]] }),
     word: ([a, d, k]) => `${name(a + d)} builds towers of blocks. The first tower has ${a} blocks, the second ${a + d}, the third ${a + 2 * d}, and each new tower has ${d} more than the one before. How many blocks are in tower ${k}?`,
     teach: {
-      idea: "In a growing pattern the same amount is added each time; find that amount and keep adding it.",
+      idea: "A growing pattern grows by the same amount each time. Find that amount and keep adding it.",
       method: "Find how much the pattern grows from one step to the next. Keep adding that amount, step by step, until you reach the step you want.",
       visual: ([a, d]) => ({ type: "table", head: ["Step", "1", "2", "3"], rows: [["Dots", a, a + d, a + 2 * d]] }),
       alternatives: [
