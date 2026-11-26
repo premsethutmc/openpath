@@ -36,3 +36,5 @@
 .own-note{margin:-4px 0 0;color:var(--bad-ink,#8f4524);font-size:.95rem}
 .own-back{min-height:40px;font-weight:700}
 .own-row{display:block;margin-top:6px;font-size:.95rem;color:var(--muted,#5f6b84);font-weight:700}
+/* practice-scene@1: after a sort done as practice, a big Next for a child who does not read yet */
+.sh-next-big{display:block;margin:12px auto 0;min-height:56px;padding:6px 28px;font-size:1.4rem;font-weight:800;background:#2f6fde;color:#fff;border:0;box-shadow:0 4px 0 #1d4aa0}

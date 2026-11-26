@@ -25749,6 +25749,210 @@
    ]
   },
   {
+   "competency": "MATH.reasoning.sort-by-attribute",
+   "class": 1,
+   "concept": "sorting by one thing, then by two",
+   "evidence": "The sorting lesson for 5- and 6-year-olds is only written sentences ('Things that share the same property… Tick every big button: there are 1.') over a table of words. A child who cannot read yet never sees a sort happen, and never meets 'red AND big' as two sorts, one after the other.",
+   "screens": [
+    {
+     "title": "Sort the buttons",
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       2,
+       2,
+       2,
+       2
+      ],
+      "warm": {
+       "size": "big"
+      },
+      "ask": {
+       "colour": "red",
+       "size": "big"
+      },
+      "prompt": "Buttons from the sewing tin",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     },
+     "text": [
+      "Tap the buttons that belong. Then sort again."
+     ]
+    }
+   ],
+   "practice": [
+    {
+     "question": "Put the small buttons in the jar.",
+     "options": [],
+     "answer": 0,
+     "why": "Red or blue, the small ones go in.",
+     "wrong": [],
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       1,
+       2,
+       2,
+       1
+      ],
+      "ask": {
+       "size": "small"
+      },
+      "prompt": "Your turn",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     }
+    },
+    {
+     "question": "Blue and big: sort twice.",
+     "options": [],
+     "answer": 0,
+     "why": "First the blue ones; then, out of those, the big ones.",
+     "wrong": [],
+     "scene": {
+      "type": "scene",
+      "kind": "sort",
+      "counts": [
+       2,
+       1,
+       2,
+       2
+      ],
+      "ask": {
+       "colour": "blue",
+       "size": "big"
+      },
+      "prompt": "Your turn",
+      "success": "Well done!",
+      "goal": {
+       "measure": "done",
+       "equals": 1
+      }
+     }
+    }
+   ],
+   "rounds": [
+    [
+     {
+      "question": "Put the red buttons in the jar.",
+      "options": [],
+      "answer": 0,
+      "why": "Big or small, the red ones go in.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        2,
+        1,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "red"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
+     },
+     {
+      "question": "Red and small: sort twice.",
+      "options": [],
+      "answer": 0,
+      "why": "First the red ones; then, out of those, the small ones.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        1,
+        2,
+        2,
+        1
+       ],
+       "ask": {
+        "colour": "red",
+        "size": "small"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
+     }
+    ],
+    [
+     {
+      "question": "Put the blue buttons in the jar.",
+      "options": [],
+      "answer": 0,
+      "why": "Big or small, the blue ones go in.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        1,
+        2,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "blue"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
+     },
+     {
+      "question": "Blue and small: sort twice.",
+      "options": [],
+      "answer": 0,
+      "why": "First the blue ones; then, out of those, the small ones.",
+      "wrong": [],
+      "scene": {
+       "type": "scene",
+       "kind": "sort",
+       "counts": [
+        2,
+        1,
+        1,
+        2
+       ],
+       "ask": {
+        "colour": "blue",
+        "size": "small"
+       },
+       "prompt": "Your turn",
+       "success": "Well done!",
+       "goal": {
+        "measure": "done",
+        "equals": 1
+       }
+      }
+     }
+    ]
+   ]
+  },
+  {
    "competency": "MATH.number.compare-numbers",
    "class": 1,
    "concept": "what a number line is",

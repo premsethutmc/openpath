@@ -488,7 +488,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aaspan: Comparing lengths measured in hand spans, clips or sticks | `MATH.measurement.non-standard-units` | 300 | 0 | 138/12/150 | `432e9454` |
 | aaweave: Weaving patterns: over and under as an ordered sequence | `MATH.algebra.repeating-patterns` | 300 | 0 | 68/131/101 | `7d9effac` |
 | aamul01: Multiplying by 1 and by 0 | `MATH.number.zero` | 300 | 0 | 9/191/100 | `08a8f4c8` |
-| absort: Sorting buttons by colour and size | `MATH.reasoning.sort-by-attribute` | 400 | 0 | 76/205/119 | `9f4d1684` |
+| absort: Sorting buttons by colour and size | `MATH.reasoning.sort-by-attribute` | 400 | 0 | 76/205/119 | `401521ba` |
 | abpic: Reading a picture record of toys | `MATH.statistics.picture-data` | 400 | 0 | 215/126/59 | `5d38aefb` |
 | abpicmore: How many more in a picture record | `MATH.statistics.picture-data` | 400 | 0 | 154/71/175 | `c57ab305` |
 | abseq: What comes next when skip counting | `MATH.algebra.number-patterns` | 400 | 0 | 151/201/48 | `65f75907` |

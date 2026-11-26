@@ -10,7 +10,8 @@
  */
 import { problemOf } from "./families";
 import type { Step } from "./family-kit";
-import { check } from "./scene";
+import { check, type Scene } from "./scene";
+import type { SortAsk, SortScene } from "./sort";
 import { liftLook } from "./lift";
 import { tallyAt, tallyClicks, type TallyScene } from "./tally";
 
@@ -143,6 +144,26 @@ export function stepScene(questionId: string, cls?: number | null): TallyScene |
   return check(scene).length ? null : scene;
 }
 
+/** sort-step@1: the families whose worked questions are a button sort (sort.ts), from the question's own buttons. */
+export const SORT_SCENE_FAMILIES = ["absort"];
+/**
+ * sort-step@1: the button sort for a worked sorting question (absort): its own buttons (red big, red small, blue big,
+ * blue small) and what it asks (one colour or size, or a colour and a size, sorted twice). Null for any other question,
+ * or when the engine's check fails.
+ */
+export function sortScene(questionId: string): SortScene | null {
+  const fam = /^gen:([a-z0-9]+):/.exec(questionId)?.[1];
+  const pr = fam && SORT_SCENE_FAMILIES.includes(fam) ? problemOf(questionId) : null;
+  if (!pr) return null;
+  const [rb, rs, bb, bs, q] = pr.params;
+  const ask: SortAsk = q === 0 ? { colour: "red" } : q === 1 ? { colour: "blue" } : q === 2 ? { size: "big" } : q === 3 ? { size: "small" } : { colour: q < 6 ? "red" : "blue", size: (q - 4) % 2 ? "small" : "big" };
+  const scene: SortScene = { type: "scene", kind: "sort", counts: [rb, rs, bb, bs], ask, prompt: "Sort the buttons", success: "Well done!", goal: { measure: "done", equals: 1 } };
+  if (check(scene).length) return null;
+  // the picture must arrive at the question's own answer: the buttons that end in the last jar
+  const want = scene.counts.reduce((n, c, k) => n + ((!ask.colour || ask.colour === (k < 2 ? "red" : "blue")) && (!ask.size || ask.size === (k % 2 ? "small" : "big")) ? c : 0), 0);
+  return String(want) === String(pr.answer) ? scene : null;
+}
+
 /**
  * step-scene@1: what "Break it down" opens for a learner in class `cls` (the question's class):
  * - Class 1–5: the picture when there is one, and then no written reasons; with no picture, the written reasons only
@@ -150,8 +171,11 @@ export function stepScene(questionId: string, cls?: number | null): TallyScene |
  * - Class 6 and up: the written reasons, and the picture too when the question goes below 0.
  * An unknown class keeps the written reasons and shows no picture.
  */
-export function breakItDown(questionId: string, cls: number | null): { scene: TallyScene | null; words: boolean } {
+export function breakItDown(questionId: string, cls: number | null): { scene: Scene | null; words: boolean } {
   if (cls === null) return { scene: null, words: true };
+  // sort-step@1: a sorting question is the button sort (Class 1–3: the picture, no written reasons)
+  const sorted = sortScene(questionId);
+  if (sorted) return cls <= 5 ? { scene: sorted as Scene, words: false } : { scene: sorted as Scene, words: true };
   const scene = stepScene(questionId, cls);
   if (cls <= 5) return scene ? { scene, words: false } : { scene: null, words: cls >= 4 };
   const below = !!scene && tallyClicks(scene.start, scene.tiles).some((n) => n < 0);
@@ -162,6 +186,6 @@ export function breakItDown(questionId: string, cls: number | null): { scene: Ta
  * step-scene@1 where the child works the example ("Work it with me", the child build's lessons): the counter and the
  * lift for a Class 1–5 question (`cls`, the question's class) that has one, opened by "Break it down" above the steps.
  */
-export function liftFor(questionId: string, cls: number | null): TallyScene | null {
-  return cls !== null && cls <= 5 ? stepScene(questionId, cls) : null;
+export function liftFor(questionId: string, cls: number | null): Scene | null {
+  return cls !== null && cls <= 5 ? ((sortScene(questionId) as Scene | null) ?? stepScene(questionId, cls)) : null;
 }

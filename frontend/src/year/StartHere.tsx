@@ -73,7 +73,7 @@ export function LiftHelp({ qid, onOpen }: { qid: string; onOpen?: () => void }) 
   if (!scene) return null;
   return (
     <div className="sh-lift" data-lift-help>
-      <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <><span aria-hidden="true" className="sh-lift-icon">▲▼</span> Break it down</>}</button>
+      <button type="button" className="secondary sh-lift-btn" aria-pressed={open} onClick={() => { setOpen(!open); if (!open) onOpen?.(); }}>{open ? "Show less" : <>{scene.kind === "sort" ? null : <span aria-hidden="true" className="sh-lift-icon">▲▼</span>} Break it down</>}</button>
       {open && <div className="sh-tally" data-step-scene><ScenePlayer scene={scene} speakNow young={cls !== null && cls <= 3} /></div>}
     </div>
   );
@@ -138,13 +138,25 @@ export function FoundationCard({ s, competency, cls }: { s: FoundationScreen; co
   );
 }
 
-/** foundation-practice@1: the idea's own questions, one at a time. A wrong choice says what went wrong and can be tried again. */
+/** foundation-practice@1: the idea's own questions, one at a time. A wrong choice says what went wrong and can be tried again.
+ *  practice-scene@1: a question with a scene is done, not read (a Class 1 sort, said aloud): it is right once the scene's
+ *  goal is reached, and right the first time when nothing was refused on the way. */
 export function FoundationPractice({ questions, onDone }: { questions: FoundationQuestion[]; onDone?: (firstTry: number) => void }) {
   const [i, setI] = useState(0);
   const [tried, setTried] = useState<number[]>([]);
   const [firstTry, setFirstTry] = useState(0);
+  // practice-scene@1: the scene of this question was finished; `clean`: with nothing refused
+  const [did, setDid] = useState<{ clean: boolean } | null>(null);
   if (i >= questions.length) return <section className="sh-card sh-done" role="status"><h3>You have got the idea</h3><p>{firstTry} of {questions.length} right the first time. The lesson is next.</p></section>;
   const q = questions[i], last = tried[tried.length - 1], right = last === q.answer;
+  const next = (first: boolean) => { const got = firstTry + (first ? 1 : 0); setFirstTry(got); setTried([]); setDid(null); setI(i + 1); if (i + 1 >= questions.length) onDone?.(got); };
+  if (q.scene) return (
+    <section className="sh-card sh-practice" data-foundation-practice data-practice-scene>
+      <p className="sh-eyebrow">Now you try · {i + 1} of {questions.length}</p>
+      <ScenePlayer key={i} scene={q.scene} young onReached={(st) => setDid((d) => d ?? { clean: !((st.no ?? 0) > 0) })} />
+      {did && <button type="button" className="sh-show sh-next-big" onClick={() => next(did.clean)}><span aria-hidden="true">▶ </span>{i + 1 < questions.length ? "Next" : "Finish"}</button>}
+    </section>
+  );
   return (
     <section className="sh-card sh-practice" data-foundation-practice>
       <p className="sh-eyebrow">Now you try · {i + 1} of {questions.length}</p>
@@ -153,7 +165,7 @@ export function FoundationPractice({ questions, onDone }: { questions: Foundatio
         {shownOrder(q).map((k) => <button key={k} type="button" className={`sh-option${tried.includes(k) ? (k === q.answer ? " right" : " wrong") : ""}`} disabled={right || tried.includes(k)} onClick={() => setTried([...tried, k])}>{mx(q.options[k])}</button>)}
       </div>
       {last !== undefined && <p className={right ? "sh-feedback good" : "sh-feedback"} role="status">{mx(right ? `Yes. ${q.why}` : `Not quite. ${q.wrong[last] || "Look at the idea again and try another choice."}`)}</p>}
-      {right && <button type="button" className="sh-show" onClick={() => { const got = firstTry + (tried.length === 1 ? 1 : 0); setFirstTry(got); setTried([]); setI(i + 1); if (i + 1 >= questions.length) onDone?.(got); }}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
+      {right && <button type="button" className="sh-show" onClick={() => next(tried.length === 1)}>{i + 1 < questions.length ? "Next question" : "Finish"}</button>}
     </section>
   );
 }

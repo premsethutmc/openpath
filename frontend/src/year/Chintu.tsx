@@ -8,8 +8,8 @@
  */
 import { useState } from "react";
 
-/** How a line of maths is said aloud. */
-export const spoken = (t: string) => t.replace(/₹(\d+)/g, "$1 rupees ").replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/=/g, " equals ").replace(/▢|□|\?$/g, " what ").replace(/√/g, " the square root of ").replace(/\s+/g, " ").trim();
+/** How a line of maths is said aloud. A "?" in the place of a number ("6 = ?") is said "what"; a question's own "?" ("which are big?") is not. */
+export const spoken = (t: string) => t.replace(/₹(\d+)/g, "$1 rupees ").replace(/×/g, " times ").replace(/÷/g, " divided by ").replace(/−/g, " minus ").replace(/=/g, " equals ").replace(/▢|□|(?<![A-Za-z])\?$/g, " what ").replace(/√/g, " the square root of ").replace(/\s+/g, " ").trim();
 export const canSpeak = () => typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
 
 /**
