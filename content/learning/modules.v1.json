@@ -183,7 +183,7 @@
     {
      "title": "Equal parts",
      "text": [
-      "A fraction names equal parts of one whole. The bottom number says how many equal parts; the top says how many we mean."
+      "A fraction names equal parts of one whole. The bottom number says how many equal parts. The top says how many we mean."
      ],
      "math": [
       "A strip cut into 4 equal parts, 1 part shaded",
@@ -591,7 +591,7 @@
     {
      "title": "Add the pieces, keep their size",
      "text": [
-      "3/8 + 2/8: three eighths and two eighths make five eighths. The bottom names the piece; it does not change."
+      "3/8 + 2/8: three eighths and two eighths make five eighths. The bottom names the piece. It does not change."
      ],
      "math": [
       "3/8 + 2/8",
@@ -825,7 +825,7 @@
       {
        "title": "Length × width",
        "text": [
-        "One row has 'length' squares; there are 'width' rows."
+        "One row has 'length' squares. There are 'width' rows."
        ]
       }
      ],
@@ -878,7 +878,7 @@
     {
      "title": "Moving a point",
      "text": [
-      "Moving right adds to x and moving left takes away from x; moving up adds to y and moving down takes away from y. The other coordinate does not change."
+      "Moving right adds to x and moving left takes away from x. Moving up adds to y and moving down takes away from y. The other coordinate does not change."
      ],
      "math": [
       "Start at (5, −1); move 2 right, then 2 down",
@@ -890,7 +890,7 @@
     {
      "title": "Corners of a rectangle on a grid",
      "text": [
-      "The sides of a rectangle drawn along the grid lines are horizontal or vertical. Points straight above or below each other share their x-coordinate; points level with each other share their y-coordinate. That gives a missing corner without measuring."
+      "The sides of a rectangle drawn along the grid lines are horizontal or vertical. Points straight above or below each other share their x-coordinate. Points level with each other share their y-coordinate. That gives a missing corner without measuring."
      ],
      "math": [
       "Rectangle ABCD with A(−6, −4), B(−3, −4) and C(−3, −2): find D",
@@ -1148,7 +1148,7 @@
     {
      "title": "Forming and solving a linear equation from a word problem",
      "text": [
-      "Call the number you are asked for x; the story then tells you how to build the total from x, and that is the equation.",
+      "Call the number you are asked for x. The story then tells you how to build the total from x, and that is the equation.",
       "Write each quantity in terms of x, add them as the story says, set the result equal to the total, then undo: take away the constant, divide by the coefficient. Check in the story."
      ],
      "math": [
@@ -1428,7 +1428,7 @@
       {
        "title": "Solve 2x + 17 = 41 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "2x + 17 = 41",
@@ -1469,7 +1469,7 @@
        "text": [
         "In 4x + 16 = 64, one wrong answer is 20.",
         "16 was added to 64 instead of taken away: 4x = 64 + 16. To remove the + 16, take 16 from both sides: 4x = 64 − 16.",
-        "To undo + a number, take it away from both sides; to undo × a number, divide both sides by it."
+        "To undo + a number, take it away from both sides. To undo × a number, divide both sides by it."
        ],
        "math": [
         "Not 20, but 12"
@@ -1480,7 +1480,7 @@
       {
        "title": "Solve 4x + 16 = 64 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "4x + 16 = 64",
@@ -1532,7 +1532,7 @@
       {
        "title": "Solve 8x + 8 = 72 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "8x + 8 = 72",
@@ -1584,7 +1584,7 @@
       {
        "title": "Solve 6x + 5 = 5x + 15 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "6x + 5 = 5x + 15",
@@ -1636,7 +1636,7 @@
       {
        "title": "Solve 3x + 1 = 2x + 11 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "3x + 1 = 2x + 11",
@@ -1688,7 +1688,7 @@
       {
        "title": "Solve 5x + 18 = x + 22 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "5x + 18 = x + 22",
@@ -1742,7 +1742,7 @@
       {
        "title": "Solve 6(x + 3) = 5x + 26 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "6(x + 3) = 5x + 26",
@@ -1796,7 +1796,7 @@
       {
        "title": "Solve 2(x − 1) = x + 12 correctly",
        "text": [
-        "Every line does the same to both sides; the check uses the original equation."
+        "Every line does the same to both sides. The check uses the original equation."
        ],
        "math": [
         "2(x − 1) = x + 12",

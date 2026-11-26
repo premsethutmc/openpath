@@ -179,7 +179,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.240Z",
+      "at": "2026-11-26T14:59:03.393Z",
       "note": "content changed: the decision on sha256:19cf3af4d8c5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -464,7 +464,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.487Z",
+      "at": "2026-11-26T14:59:03.564Z",
       "note": "content changed: the decision on sha256:156ae9e2d5fd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -532,7 +532,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.486Z",
+      "at": "2026-11-26T14:59:03.564Z",
       "note": "content changed: the decision on sha256:fc252aa015d6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -648,7 +648,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.001Z",
+      "at": "2026-11-26T14:59:03.970Z",
       "note": "content changed: the decision on sha256:3c7a626e9ce0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -758,7 +758,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.001Z",
+      "at": "2026-11-26T14:59:03.970Z",
       "note": "content changed: the decision on sha256:6ea4ec7501b4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -878,7 +878,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.490Z",
+      "at": "2026-11-26T14:59:03.567Z",
       "note": "content changed: the decision on sha256:8d24697448f0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -946,7 +946,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.586Z",
+      "at": "2026-11-26T14:59:03.636Z",
       "note": "content changed: the decision on sha256:f2d488e3db63 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1144,7 +1144,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.695Z",
+      "at": "2026-11-26T14:59:03.712Z",
       "note": "content changed: the decision on sha256:2350225cee80 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1212,7 +1212,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.694Z",
+      "at": "2026-11-26T14:59:03.710Z",
       "note": "content changed: the decision on sha256:a8c515c24488 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1286,7 +1286,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.652Z",
+      "at": "2026-11-26T14:59:03.682Z",
       "note": "content changed: the decision on sha256:d94d0d07eea8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1401,7 +1401,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.648Z",
+      "at": "2026-11-26T14:59:03.679Z",
       "note": "content changed: the decision on sha256:c1c81262760f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1443,7 +1443,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.818Z",
+      "at": "2026-11-26T14:59:03.826Z",
       "note": "content changed: the decision on sha256:b4a0d88ea98b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1511,7 +1511,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.818Z",
+      "at": "2026-11-26T14:59:03.826Z",
       "note": "content changed: the decision on sha256:f8391028e702 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1637,7 +1637,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.486Z",
+      "at": "2026-11-26T14:59:03.563Z",
       "note": "content changed: the decision on sha256:e3d4840c3963 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1721,7 +1721,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.485Z",
+      "at": "2026-11-26T14:59:03.563Z",
       "note": "content changed: the decision on sha256:f0c01ada5667 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1779,7 +1779,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.485Z",
+      "at": "2026-11-26T14:59:03.563Z",
       "note": "content changed: the decision on sha256:bc05a911156c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1837,7 +1837,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.653Z",
+      "at": "2026-11-26T14:59:03.683Z",
       "note": "content changed: the decision on sha256:efb5cf2efcd2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -1973,7 +1973,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.842Z",
+      "at": "2026-11-26T14:59:03.841Z",
       "note": "content changed: the decision on sha256:15e0d3f91caf (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2135,7 +2135,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.968Z",
+      "at": "2026-11-26T14:59:03.941Z",
       "note": "content changed: the decision on sha256:b9039f3f3110 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2177,7 +2177,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.965Z",
+      "at": "2026-11-26T14:59:03.940Z",
       "note": "content changed: the decision on sha256:96cf408b50a1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2277,7 +2277,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.298Z",
+      "at": "2026-11-26T14:59:03.426Z",
       "note": "content changed: the decision on sha256:5fa423090764 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2575,7 +2575,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.702Z",
+      "at": "2026-11-26T14:59:03.721Z",
       "note": "content changed: the decision on sha256:afa4044f86f8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2801,7 +2801,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.698Z",
+      "at": "2026-11-26T14:59:03.719Z",
       "note": "content changed: the decision on sha256:70c1b210fd18 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -2859,7 +2859,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.452Z",
+      "at": "2026-11-26T14:59:03.537Z",
       "note": "content changed: the decision on sha256:4f073fbbc9ac (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3047,7 +3047,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.451Z",
+      "at": "2026-11-26T14:59:03.536Z",
       "note": "content changed: the decision on sha256:43eb0a9695f5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3163,7 +3163,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.587Z",
+      "at": "2026-11-26T14:59:03.637Z",
       "note": "content changed: the decision on sha256:8d5f6591e0a7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3263,7 +3263,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.586Z",
+      "at": "2026-11-26T14:59:03.637Z",
       "note": "content changed: the decision on sha256:2a3cbdc9f486 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3321,7 +3321,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.586Z",
+      "at": "2026-11-26T14:59:03.637Z",
       "note": "content changed: the decision on sha256:792353260268 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3363,7 +3363,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.205Z",
+      "at": "2026-11-26T14:59:03.370Z",
       "note": "content changed: the decision on sha256:104a99570ee7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3631,7 +3631,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.209Z",
+      "at": "2026-11-26T14:59:03.372Z",
       "note": "content changed: the decision on sha256:c4ad40125777 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3825,7 +3825,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.974Z",
+      "at": "2026-11-26T14:59:03.947Z",
       "note": "content changed: the decision on sha256:2ea76ab0a39e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3867,7 +3867,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.974Z",
+      "at": "2026-11-26T14:59:03.947Z",
       "note": "content changed: the decision on sha256:c43e0e466c0c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3935,7 +3935,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.973Z",
+      "at": "2026-11-26T14:59:03.946Z",
       "note": "content changed: the decision on sha256:72c6b257026e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -3977,7 +3977,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.971Z",
+      "at": "2026-11-26T14:59:03.944Z",
       "note": "content changed: the decision on sha256:160871b928aa (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4035,7 +4035,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.224Z",
+      "at": "2026-11-26T14:59:03.382Z",
       "note": "content changed: the decision on sha256:9fa4a1881889 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4129,7 +4129,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.223Z",
+      "at": "2026-11-26T14:59:03.381Z",
       "note": "content changed: the decision on sha256:64e906d4e675 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4187,7 +4187,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.222Z",
+      "at": "2026-11-26T14:59:03.380Z",
       "note": "content changed: the decision on sha256:c4bb0bf25cb2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4401,7 +4401,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.642Z",
+      "at": "2026-11-26T14:59:03.675Z",
       "note": "content changed: the decision on sha256:649c8bdb70f9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4521,7 +4521,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.058Z",
+      "at": "2026-11-26T14:59:04.003Z",
       "note": "content changed: the decision on sha256:24f0b1f2b947 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4621,7 +4621,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.719Z",
+      "at": "2026-11-26T14:59:03.728Z",
       "note": "content changed: the decision on sha256:e400f6cbef70 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4867,7 +4867,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.191Z",
+      "at": "2026-11-26T14:59:03.361Z",
       "note": "content changed: the decision on sha256:989f0cbb1dc5 (revision_required) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4939,7 +4939,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.191Z",
+      "at": "2026-11-26T14:59:03.361Z",
       "note": "content changed: the decision on sha256:8b9ab8fc53b5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -4982,7 +4982,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.191Z",
+      "at": "2026-11-26T14:59:03.361Z",
       "note": "content changed: the decision on sha256:f0be3389c9cb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5025,7 +5025,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.189Z",
+      "at": "2026-11-26T14:59:03.360Z",
       "note": "content changed: the decision on sha256:377edebdfa57 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5068,7 +5068,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.189Z",
+      "at": "2026-11-26T14:59:03.359Z",
       "note": "content changed: the decision on sha256:0d182aa99b83 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5111,7 +5111,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.189Z",
+      "at": "2026-11-26T14:59:03.360Z",
       "note": "content changed: the decision on sha256:a5b6f1addea7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5154,7 +5154,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.190Z",
+      "at": "2026-11-26T14:59:03.360Z",
       "note": "content changed: the decision on sha256:67a1f1ee2b11 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5197,7 +5197,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.190Z",
+      "at": "2026-11-26T14:59:03.360Z",
       "note": "content changed: the decision on sha256:dcf7968ab1f8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5240,7 +5240,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.190Z",
+      "at": "2026-11-26T14:59:03.360Z",
       "note": "content changed: the decision on sha256:54d9767fc5f0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5434,7 +5434,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.448Z",
+      "at": "2026-11-26T14:59:03.534Z",
       "note": "content changed: the decision on sha256:61708bf71f54 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5508,7 +5508,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.448Z",
+      "at": "2026-11-26T14:59:03.534Z",
       "note": "content changed: the decision on sha256:a34ce6f7658e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5698,7 +5698,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.448Z",
+      "at": "2026-11-26T14:59:03.534Z",
       "note": "content changed: the decision on sha256:67b7af1aa6d5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5905,7 +5905,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.061Z",
+      "at": "2026-11-26T14:59:04.004Z",
       "note": "content changed: the decision on sha256:26b1af0026dd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -5973,7 +5973,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.061Z",
+      "at": "2026-11-26T14:59:04.004Z",
       "note": "content changed: the decision on sha256:3a5fbe6c6ccb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6105,7 +6105,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.270Z",
+      "at": "2026-11-26T14:59:03.410Z",
       "note": "content changed: the decision on sha256:16dabbde72ea (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6419,7 +6419,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.851Z",
+      "at": "2026-11-26T14:59:03.847Z",
       "note": "content changed: the decision on sha256:4b7c281a459d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6487,7 +6487,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.851Z",
+      "at": "2026-11-26T14:59:03.846Z",
       "note": "content changed: the decision on sha256:8cdcbdb9cb17 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6581,7 +6581,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.848Z",
+      "at": "2026-11-26T14:59:03.843Z",
       "note": "content changed: the decision on sha256:7f740c1a4be1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6649,7 +6649,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.847Z",
+      "at": "2026-11-26T14:59:03.843Z",
       "note": "content changed: the decision on sha256:8c58a3bbe127 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6775,7 +6775,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.822Z",
+      "at": "2026-11-26T14:59:03.830Z",
       "note": "content changed: the decision on sha256:8d1e8ecbb2ea (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -6917,7 +6917,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.822Z",
+      "at": "2026-11-26T14:59:03.829Z",
       "note": "content changed: the decision on sha256:1f69078d8d58 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7205,7 +7205,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.307Z",
+      "at": "2026-11-26T14:59:03.429Z",
       "note": "content changed: the decision on sha256:77f1e8dbf57a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7273,7 +7273,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.072Z",
+      "at": "2026-11-26T14:59:04.008Z",
       "note": "content changed: the decision on sha256:c3895c33427b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7357,7 +7357,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.072Z",
+      "at": "2026-11-26T14:59:04.008Z",
       "note": "content changed: the decision on sha256:cdb5603ec8a2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7399,7 +7399,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.063Z",
+      "at": "2026-11-26T14:59:04.005Z",
       "note": "content changed: the decision on sha256:96a638de6540 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7441,7 +7441,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.085Z",
+      "at": "2026-11-26T14:59:04.014Z",
       "note": "content changed: the decision on sha256:520df1bb7cde (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7483,7 +7483,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.085Z",
+      "at": "2026-11-26T14:59:04.014Z",
       "note": "content changed: the decision on sha256:dafa4b0a9d74 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7551,7 +7551,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.084Z",
+      "at": "2026-11-26T14:59:04.013Z",
       "note": "content changed: the decision on sha256:ebbc3729b151 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7593,7 +7593,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.074Z",
+      "at": "2026-11-26T14:59:04.009Z",
       "note": "content changed: the decision on sha256:25c58b0393f2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7719,7 +7719,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.445Z",
+      "at": "2026-11-26T14:59:03.532Z",
       "note": "content changed: the decision on sha256:01ee9adac7a7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7891,7 +7891,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.444Z",
+      "at": "2026-11-26T14:59:03.531Z",
       "note": "content changed: the decision on sha256:74a929d60421 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -7965,7 +7965,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.445Z",
+      "at": "2026-11-26T14:59:03.531Z",
       "note": "content changed: the decision on sha256:a47720a8c801 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8039,7 +8039,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.445Z",
+      "at": "2026-11-26T14:59:03.532Z",
       "note": "content changed: the decision on sha256:844532e89f6f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8113,7 +8113,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.445Z",
+      "at": "2026-11-26T14:59:03.532Z",
       "note": "content changed: the decision on sha256:5ce9c6e6b727 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8236,7 +8236,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.443Z",
+      "at": "2026-11-26T14:59:03.530Z",
       "note": "content changed: the decision on sha256:25cfc84bcd26 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8328,7 +8328,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.991Z",
+      "at": "2026-11-26T14:59:03.960Z",
       "note": "content changed: the decision on sha256:bbdd7f7fac3d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8532,7 +8532,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.551Z",
+      "at": "2026-11-26T14:59:03.613Z",
       "note": "content changed: the decision on sha256:8fdf90a10eab (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -8872,7 +8872,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.609Z",
+      "at": "2026-11-26T14:59:03.653Z",
       "note": "content changed: the decision on sha256:912257cf68bd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9050,7 +9050,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.998Z",
+      "at": "2026-11-26T14:59:03.967Z",
       "note": "content changed: the decision on sha256:8d36cccb7ac2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9150,7 +9150,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.999Z",
+      "at": "2026-11-26T14:59:03.968Z",
       "note": "content changed: the decision on sha256:e4666b2a68be (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9208,7 +9208,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.998Z",
+      "at": "2026-11-26T14:59:03.968Z",
       "note": "content changed: the decision on sha256:e5204c27edbf (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9292,7 +9292,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.997Z",
+      "at": "2026-11-26T14:59:03.967Z",
       "note": "content changed: the decision on sha256:f79ad4bb21ab (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9350,7 +9350,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.087Z",
+      "at": "2026-11-26T14:59:04.015Z",
       "note": "content changed: the decision on sha256:1b3702eb3899 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9392,7 +9392,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.087Z",
+      "at": "2026-11-26T14:59:04.015Z",
       "note": "content changed: the decision on sha256:746f4f7104e1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9450,7 +9450,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.087Z",
+      "at": "2026-11-26T14:59:04.015Z",
       "note": "content changed: the decision on sha256:a2202929a762 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9524,7 +9524,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.086Z",
+      "at": "2026-11-26T14:59:04.014Z",
       "note": "content changed: the decision on sha256:ba066afaeffa (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9618,7 +9618,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.829Z",
+      "at": "2026-11-26T14:59:03.834Z",
       "note": "content changed: the decision on sha256:2132d2cd9aec (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9764,7 +9764,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.103Z",
+      "at": "2026-11-26T14:59:04.018Z",
       "note": "content changed: the decision on sha256:c884f9e5a31f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9916,7 +9916,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.859Z",
+      "at": "2026-11-26T14:59:03.857Z",
       "note": "content changed: the decision on sha256:fe4c299f509c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -9958,7 +9958,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.854Z",
+      "at": "2026-11-26T14:59:03.852Z",
       "note": "content changed: the decision on sha256:3574b73cfb20 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10000,7 +10000,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.858Z",
+      "at": "2026-11-26T14:59:03.856Z",
       "note": "content changed: the decision on sha256:9cb5d5abf745 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10058,7 +10058,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.852Z",
+      "at": "2026-11-26T14:59:03.849Z",
       "note": "content changed: the decision on sha256:b54602a4507a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10100,7 +10100,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.729Z",
+      "at": "2026-11-26T14:59:03.738Z",
       "note": "content changed: the decision on sha256:f4d24da22e78 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10278,7 +10278,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.817Z",
+      "at": "2026-11-26T14:59:03.825Z",
       "note": "content changed: the decision on sha256:ad6ea28522d3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10388,7 +10388,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.815Z",
+      "at": "2026-11-26T14:59:03.823Z",
       "note": "content changed: the decision on sha256:e0183e19f285 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10566,7 +10566,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.011Z",
+      "at": "2026-11-26T14:59:03.976Z",
       "note": "content changed: the decision on sha256:95a6de49afc2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10660,7 +10660,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.218Z",
+      "at": "2026-11-26T14:59:03.378Z",
       "note": "content changed: the decision on sha256:a17acbcf1b5e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -10838,7 +10838,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.860Z",
+      "at": "2026-11-26T14:59:03.859Z",
       "note": "content changed: the decision on sha256:0f99e3bd87f0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11042,7 +11042,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.841Z",
+      "at": "2026-11-26T14:59:03.840Z",
       "note": "content changed: the decision on sha256:e991f9679f97 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11126,7 +11126,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.836Z",
+      "at": "2026-11-26T14:59:03.839Z",
       "note": "content changed: the decision on sha256:889b5b7af9db (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11168,7 +11168,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.838Z",
+      "at": "2026-11-26T14:59:03.840Z",
       "note": "content changed: the decision on sha256:cffc50fca65f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11236,7 +11236,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.962Z",
+      "at": "2026-11-26T14:59:03.937Z",
       "note": "content changed: the decision on sha256:8758bf271f3c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11278,7 +11278,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.962Z",
+      "at": "2026-11-26T14:59:03.937Z",
       "note": "content changed: the decision on sha256:cc3d068793ce (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11320,7 +11320,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.962Z",
+      "at": "2026-11-26T14:59:03.937Z",
       "note": "content changed: the decision on sha256:b95e2c05cc37 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11614,7 +11614,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.960Z",
+      "at": "2026-11-26T14:59:03.936Z",
       "note": "content changed: the decision on sha256:be025a3cd08b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11766,7 +11766,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.970Z",
+      "at": "2026-11-26T14:59:03.943Z",
       "note": "content changed: the decision on sha256:5b8d699bcd3c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11876,7 +11876,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.969Z",
+      "at": "2026-11-26T14:59:03.943Z",
       "note": "content changed: the decision on sha256:9815fc90ab87 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -11960,7 +11960,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.462Z",
+      "at": "2026-11-26T14:59:03.544Z",
       "note": "content changed: the decision on sha256:d26e650bffc7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12213,7 +12213,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.151Z",
+      "at": "2026-11-26T14:59:04.032Z",
       "note": "content changed: the decision on sha256:10826f2c50cf (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12297,7 +12297,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.352Z",
+      "at": "2026-11-26T14:59:03.462Z",
       "note": "content changed: the decision on sha256:2e3fe6dc73ca (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12365,7 +12365,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.350Z",
+      "at": "2026-11-26T14:59:03.456Z",
       "note": "content changed: the decision on sha256:b6719db3bed8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12449,7 +12449,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.347Z",
+      "at": "2026-11-26T14:59:03.455Z",
       "note": "content changed: the decision on sha256:1e7ea0a06bb4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12559,7 +12559,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.471Z",
+      "at": "2026-11-26T14:59:03.552Z",
       "note": "content changed: the decision on sha256:4ccdd7b7399d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12653,7 +12653,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.469Z",
+      "at": "2026-11-26T14:59:03.551Z",
       "note": "content changed: the decision on sha256:4e4c0b82f0d6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -12779,7 +12779,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.454Z",
+      "at": "2026-11-26T14:59:03.538Z",
       "note": "content changed: the decision on sha256:fe4fd7bb50b3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13025,7 +13025,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.245Z",
+      "at": "2026-11-26T14:59:04.077Z",
       "note": "content changed: the decision on sha256:f801fa122195 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13271,7 +13271,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.256Z",
+      "at": "2026-11-26T14:59:04.082Z",
       "note": "content changed: the decision on sha256:c70bd1538f1f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13381,7 +13381,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.185Z",
+      "at": "2026-11-26T14:59:03.357Z",
       "note": "content changed: the decision on sha256:a53003ff3629 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13465,7 +13465,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.211Z",
+      "at": "2026-11-26T14:59:03.374Z",
       "note": "content changed: the decision on sha256:91bc734529fa (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13633,7 +13633,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.248Z",
+      "at": "2026-11-26T14:59:03.397Z",
       "note": "content changed: the decision on sha256:46f3e1b66e1e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13733,7 +13733,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.245Z",
+      "at": "2026-11-26T14:59:03.396Z",
       "note": "content changed: the decision on sha256:84207021e203 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13791,7 +13791,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.248Z",
+      "at": "2026-11-26T14:59:03.397Z",
       "note": "content changed: the decision on sha256:35cb46509416 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13907,7 +13907,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.244Z",
+      "at": "2026-11-26T14:59:03.395Z",
       "note": "content changed: the decision on sha256:11f99dca548b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -13965,7 +13965,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.246Z",
+      "at": "2026-11-26T14:59:03.396Z",
       "note": "content changed: the decision on sha256:2031fbc85501 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14033,7 +14033,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.261Z",
+      "at": "2026-11-26T14:59:04.088Z",
       "note": "content changed: the decision on sha256:758f19abaa8c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14075,7 +14075,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.261Z",
+      "at": "2026-11-26T14:59:04.088Z",
       "note": "content changed: the decision on sha256:0e6dd3fdea8c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14169,7 +14169,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.258Z",
+      "at": "2026-11-26T14:59:04.084Z",
       "note": "content changed: the decision on sha256:5abbddfcfb12 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14243,7 +14243,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.385Z",
+      "at": "2026-11-26T14:59:03.493Z",
       "note": "content changed: the decision on sha256:c43b362dc727 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14437,7 +14437,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.368Z",
+      "at": "2026-11-26T14:59:03.478Z",
       "note": "content changed: the decision on sha256:98fe2c374f8a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14531,7 +14531,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.286Z",
+      "at": "2026-11-26T14:59:04.138Z",
       "note": "content changed: the decision on sha256:e182799a8a16 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14573,7 +14573,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.285Z",
+      "at": "2026-11-26T14:59:04.138Z",
       "note": "content changed: the decision on sha256:ed0bb10d1699 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14641,7 +14641,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.284Z",
+      "at": "2026-11-26T14:59:04.137Z",
       "note": "content changed: the decision on sha256:56e84d2501c3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14683,7 +14683,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.281Z",
+      "at": "2026-11-26T14:59:04.134Z",
       "note": "content changed: the decision on sha256:6e4e54d47c54 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14819,7 +14819,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.277Z",
+      "at": "2026-11-26T14:59:04.130Z",
       "note": "content changed: the decision on sha256:2696d628213f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14887,7 +14887,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.294Z",
+      "at": "2026-11-26T14:59:04.146Z",
       "note": "content changed: the decision on sha256:0104b4dba718 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -14997,7 +14997,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.293Z",
+      "at": "2026-11-26T14:59:04.145Z",
       "note": "content changed: the decision on sha256:0fe970bc4c1c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15091,7 +15091,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.363Z",
+      "at": "2026-11-26T14:59:04.215Z",
       "note": "content changed: the decision on sha256:d19201a008b5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15159,7 +15159,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.362Z",
+      "at": "2026-11-26T14:59:04.215Z",
       "note": "content changed: the decision on sha256:db40d16ed7d8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15243,7 +15243,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.213Z",
+      "at": "2026-11-26T14:59:03.375Z",
       "note": "content changed: the decision on sha256:792d54968760 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15311,7 +15311,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.213Z",
+      "at": "2026-11-26T14:59:03.375Z",
       "note": "content changed: the decision on sha256:11bc72b1d56e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15443,7 +15443,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.217Z",
+      "at": "2026-11-26T14:59:03.377Z",
       "note": "content changed: the decision on sha256:9bc9cbb34501 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15517,7 +15517,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.215Z",
+      "at": "2026-11-26T14:59:03.376Z",
       "note": "content changed: the decision on sha256:aae3dcf745e1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15601,7 +15601,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.214Z",
+      "at": "2026-11-26T14:59:03.376Z",
       "note": "content changed: the decision on sha256:3e46c4cb715e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15659,7 +15659,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.297Z",
+      "at": "2026-11-26T14:59:04.148Z",
       "note": "content changed: the decision on sha256:9bd7da2f8bd6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15701,7 +15701,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.297Z",
+      "at": "2026-11-26T14:59:04.148Z",
       "note": "content changed: the decision on sha256:46edabafc555 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15769,7 +15769,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.297Z",
+      "at": "2026-11-26T14:59:04.148Z",
       "note": "content changed: the decision on sha256:057fa735b072 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15811,7 +15811,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.295Z",
+      "at": "2026-11-26T14:59:04.146Z",
       "note": "content changed: the decision on sha256:fd52e7fb8928 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -15885,7 +15885,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.386Z",
+      "at": "2026-11-26T14:59:03.494Z",
       "note": "content changed: the decision on sha256:9d1506d069a7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16021,7 +16021,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.385Z",
+      "at": "2026-11-26T14:59:03.493Z",
       "note": "content changed: the decision on sha256:17dd79d4f91d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16063,7 +16063,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.386Z",
+      "at": "2026-11-26T14:59:03.494Z",
       "note": "content changed: the decision on sha256:08d6dc9e4740 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16131,7 +16131,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.299Z",
+      "at": "2026-11-26T14:59:04.150Z",
       "note": "content changed: the decision on sha256:3ee9886f6773 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16199,7 +16199,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.298Z",
+      "at": "2026-11-26T14:59:04.149Z",
       "note": "content changed: the decision on sha256:2ff066b6d140 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16241,7 +16241,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.298Z",
+      "at": "2026-11-26T14:59:04.149Z",
       "note": "content changed: the decision on sha256:48c13e022d97 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16335,7 +16335,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.301Z",
+      "at": "2026-11-26T14:59:04.152Z",
       "note": "content changed: the decision on sha256:29a608d5d5b9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16393,7 +16393,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.300Z",
+      "at": "2026-11-26T14:59:04.151Z",
       "note": "content changed: the decision on sha256:299f108dc0bf (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16461,7 +16461,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.299Z",
+      "at": "2026-11-26T14:59:04.150Z",
       "note": "content changed: the decision on sha256:25c5acf1068d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16503,7 +16503,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.318Z",
+      "at": "2026-11-26T14:59:04.169Z",
       "note": "content changed: the decision on sha256:f7e48f2be959 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16597,7 +16597,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.315Z",
+      "at": "2026-11-26T14:59:04.166Z",
       "note": "content changed: the decision on sha256:a2b97dcff19f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16665,7 +16665,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.324Z",
+      "at": "2026-11-26T14:59:04.175Z",
       "note": "content changed: the decision on sha256:20920cbf1eb9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16707,7 +16707,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.324Z",
+      "at": "2026-11-26T14:59:04.175Z",
       "note": "content changed: the decision on sha256:b3f8c0b80be3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16749,7 +16749,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.321Z",
+      "at": "2026-11-26T14:59:04.172Z",
       "note": "content changed: the decision on sha256:5e9665d7ebd0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16791,7 +16791,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.323Z",
+      "at": "2026-11-26T14:59:04.174Z",
       "note": "content changed: the decision on sha256:78aa34771ecb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16833,7 +16833,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.320Z",
+      "at": "2026-11-26T14:59:04.171Z",
       "note": "content changed: the decision on sha256:7f94496d4054 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16891,7 +16891,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.326Z",
+      "at": "2026-11-26T14:59:04.176Z",
       "note": "content changed: the decision on sha256:c3118f9d98d7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -16933,7 +16933,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.326Z",
+      "at": "2026-11-26T14:59:04.176Z",
       "note": "content changed: the decision on sha256:c70b7813e047 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17027,7 +17027,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.324Z",
+      "at": "2026-11-26T14:59:04.175Z",
       "note": "content changed: the decision on sha256:cfadb600c092 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17147,7 +17147,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.329Z",
+      "at": "2026-11-26T14:59:04.181Z",
       "note": "content changed: the decision on sha256:6752d3f541ec (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17215,7 +17215,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.336Z",
+      "at": "2026-11-26T14:59:04.190Z",
       "note": "content changed: the decision on sha256:dc000282e893 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17257,7 +17257,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.336Z",
+      "at": "2026-11-26T14:59:04.190Z",
       "note": "content changed: the decision on sha256:45689b69bfa2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17299,7 +17299,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.336Z",
+      "at": "2026-11-26T14:59:04.190Z",
       "note": "content changed: the decision on sha256:9c82d2237c50 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17367,7 +17367,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.334Z",
+      "at": "2026-11-26T14:59:04.184Z",
       "note": "content changed: the decision on sha256:d4df0337907d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17435,7 +17435,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.344Z",
+      "at": "2026-11-26T14:59:04.198Z",
       "note": "content changed: the decision on sha256:272994693e6d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17503,7 +17503,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.343Z",
+      "at": "2026-11-26T14:59:04.197Z",
       "note": "content changed: the decision on sha256:f0f316f5623f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17545,7 +17545,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.338Z",
+      "at": "2026-11-26T14:59:04.192Z",
       "note": "content changed: the decision on sha256:8977406649f0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17655,7 +17655,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.348Z",
+      "at": "2026-11-26T14:59:04.201Z",
       "note": "content changed: the decision on sha256:ceaed9ef9df2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17697,7 +17697,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.346Z",
+      "at": "2026-11-26T14:59:04.199Z",
       "note": "content changed: the decision on sha256:1d733d9e4161 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17739,7 +17739,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.350Z",
+      "at": "2026-11-26T14:59:04.204Z",
       "note": "content changed: the decision on sha256:4df18c424874 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17781,7 +17781,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.350Z",
+      "at": "2026-11-26T14:59:04.203Z",
       "note": "content changed: the decision on sha256:6e20fde8ad16 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17875,7 +17875,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.349Z",
+      "at": "2026-11-26T14:59:04.202Z",
       "note": "content changed: the decision on sha256:e701f441ef14 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -17959,7 +17959,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.356Z",
+      "at": "2026-11-26T14:59:04.207Z",
       "note": "content changed: the decision on sha256:61cc0d7a049e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18001,7 +18001,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.353Z",
+      "at": "2026-11-26T14:59:04.206Z",
       "note": "content changed: the decision on sha256:b5fa02a28166 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18043,7 +18043,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.354Z",
+      "at": "2026-11-26T14:59:04.207Z",
       "note": "content changed: the decision on sha256:a957624274dc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18101,7 +18101,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.351Z",
+      "at": "2026-11-26T14:59:04.205Z",
       "note": "content changed: the decision on sha256:2b49424228c0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18185,7 +18185,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.184Z",
+      "at": "2026-11-26T14:59:03.356Z",
       "note": "content changed: the decision on sha256:6553bd48f917 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18227,7 +18227,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.406Z",
+      "at": "2026-11-26T14:59:04.257Z",
       "note": "content changed: the decision on sha256:a5b18005e48d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18295,7 +18295,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.394Z",
+      "at": "2026-11-26T14:59:04.254Z",
       "note": "content changed: the decision on sha256:711350cdf05c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18369,7 +18369,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.405Z",
+      "at": "2026-11-26T14:59:04.256Z",
       "note": "content changed: the decision on sha256:e5208213a422 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18453,7 +18453,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.371Z",
+      "at": "2026-11-26T14:59:04.222Z",
       "note": "content changed: the decision on sha256:26235041cc6b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18495,7 +18495,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.370Z",
+      "at": "2026-11-26T14:59:04.222Z",
       "note": "content changed: the decision on sha256:c69567b9833c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18589,7 +18589,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.365Z",
+      "at": "2026-11-26T14:59:04.217Z",
       "note": "content changed: the decision on sha256:73e5853e43fc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18683,7 +18683,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.864Z",
+      "at": "2026-11-26T14:59:03.867Z",
       "note": "content changed: the decision on sha256:a4045c003fa1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18777,7 +18777,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.488Z",
+      "at": "2026-11-26T14:59:03.565Z",
       "note": "content changed: the decision on sha256:c3001dd21f86 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -18845,7 +18845,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.488Z",
+      "at": "2026-11-26T14:59:03.565Z",
       "note": "content changed: the decision on sha256:4a6d9c6cdb8b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19059,7 +19059,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.387Z",
+      "at": "2026-11-26T14:59:04.241Z",
       "note": "content changed: the decision on sha256:32a678f4c743 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19127,7 +19127,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.387Z",
+      "at": "2026-11-26T14:59:04.241Z",
       "note": "content changed: the decision on sha256:bee145a8c488 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19221,7 +19221,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.867Z",
+      "at": "2026-11-26T14:59:03.869Z",
       "note": "content changed: the decision on sha256:ac3d32742d43 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19419,7 +19419,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.430Z",
+      "at": "2026-11-26T14:59:04.270Z",
       "note": "content changed: the decision on sha256:3284cd5c2ce8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19513,7 +19513,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.408Z",
+      "at": "2026-11-26T14:59:04.260Z",
       "note": "content changed: the decision on sha256:8debc897d2d7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19581,7 +19581,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.408Z",
+      "at": "2026-11-26T14:59:04.259Z",
       "note": "content changed: the decision on sha256:73f0ac414ba4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19649,7 +19649,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.423Z",
+      "at": "2026-11-26T14:59:04.266Z",
       "note": "content changed: the decision on sha256:b2b802a7bd75 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19717,7 +19717,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.422Z",
+      "at": "2026-11-26T14:59:04.265Z",
       "note": "content changed: the decision on sha256:4d2dc4b52548 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19827,7 +19827,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.435Z",
+      "at": "2026-11-26T14:59:04.278Z",
       "note": "content changed: the decision on sha256:81b040300420 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -19973,7 +19973,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.392Z",
+      "at": "2026-11-26T14:59:04.245Z",
       "note": "content changed: the decision on sha256:0dcb4af8abc1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20015,7 +20015,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.391Z",
+      "at": "2026-11-26T14:59:04.245Z",
       "note": "content changed: the decision on sha256:42f910c7d076 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20125,7 +20125,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.654Z",
+      "at": "2026-11-26T14:59:03.684Z",
       "note": "content changed: the decision on sha256:81e529538762 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20219,7 +20219,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.654Z",
+      "at": "2026-11-26T14:59:03.683Z",
       "note": "content changed: the decision on sha256:848eef0b48e3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20335,7 +20335,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.412Z",
+      "at": "2026-11-26T14:59:03.510Z",
       "note": "content changed: the decision on sha256:f82e7a188ada (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20777,7 +20777,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.656Z",
+      "at": "2026-11-26T14:59:03.685Z",
       "note": "content changed: the decision on sha256:819b7e0670ed (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20819,7 +20819,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.656Z",
+      "at": "2026-11-26T14:59:03.685Z",
       "note": "content changed: the decision on sha256:ca7bef2839af (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20913,7 +20913,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.655Z",
+      "at": "2026-11-26T14:59:03.684Z",
       "note": "content changed: the decision on sha256:67a9c5050e5d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -20971,7 +20971,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.610Z",
+      "at": "2026-11-26T14:59:03.654Z",
       "note": "content changed: the decision on sha256:47d94b15648d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21029,7 +21029,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.610Z",
+      "at": "2026-11-26T14:59:03.654Z",
       "note": "content changed: the decision on sha256:53c4f4fb808f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21087,7 +21087,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.610Z",
+      "at": "2026-11-26T14:59:03.654Z",
       "note": "content changed: the decision on sha256:843863360e2a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21145,7 +21145,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.610Z",
+      "at": "2026-11-26T14:59:03.654Z",
       "note": "content changed: the decision on sha256:a97d4f76a8cc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21333,7 +21333,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.912Z",
+      "at": "2026-11-26T14:59:03.897Z",
       "note": "content changed: the decision on sha256:5f95c7a20888 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21427,7 +21427,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.911Z",
+      "at": "2026-11-26T14:59:03.896Z",
       "note": "content changed: the decision on sha256:21842eab0a1f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21573,7 +21573,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.869Z",
+      "at": "2026-11-26T14:59:03.871Z",
       "note": "content changed: the decision on sha256:3e31f7306a17 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21667,7 +21667,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.868Z",
+      "at": "2026-11-26T14:59:03.870Z",
       "note": "content changed: the decision on sha256:ffef3d06cdb7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21751,7 +21751,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.611Z",
+      "at": "2026-11-26T14:59:03.655Z",
       "note": "content changed: the decision on sha256:ae14d94603a8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21819,7 +21819,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.611Z",
+      "at": "2026-11-26T14:59:03.655Z",
       "note": "content changed: the decision on sha256:bd753cbc249f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -21955,7 +21955,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.720Z",
+      "at": "2026-11-26T14:59:03.728Z",
       "note": "content changed: the decision on sha256:41b251979676 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22049,7 +22049,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.199Z",
+      "at": "2026-11-26T14:59:03.366Z",
       "note": "content changed: the decision on sha256:6eaf98213cb0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22143,7 +22143,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.197Z",
+      "at": "2026-11-26T14:59:03.362Z",
       "note": "content changed: the decision on sha256:ca9ea742de36 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22211,7 +22211,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.192Z",
+      "at": "2026-11-26T14:59:03.361Z",
       "note": "content changed: the decision on sha256:754eb3f53e95 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22571,7 +22571,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.555Z",
+      "at": "2026-11-26T14:59:03.616Z",
       "note": "content changed: the decision on sha256:e848055d475c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22613,7 +22613,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.555Z",
+      "at": "2026-11-26T14:59:03.616Z",
       "note": "content changed: the decision on sha256:3e3205091d59 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22739,7 +22739,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.589Z",
+      "at": "2026-11-26T14:59:03.639Z",
       "note": "content changed: the decision on sha256:5b8e2f01f825 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22833,7 +22833,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.588Z",
+      "at": "2026-11-26T14:59:03.638Z",
       "note": "content changed: the decision on sha256:5e7a8fe96313 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -22939,7 +22939,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.559Z",
+      "at": "2026-11-26T14:59:03.618Z",
       "note": "content changed: the decision on sha256:3ab7df83df03 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -23253,7 +23253,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.659Z",
+      "at": "2026-11-26T14:59:03.687Z",
       "note": "content changed: the decision on sha256:a5574f80d386 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -23447,7 +23447,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.723Z",
+      "at": "2026-11-26T14:59:03.730Z",
       "note": "content changed: the decision on sha256:8f76b767d98b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -23807,7 +23807,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.731Z",
+      "at": "2026-11-26T14:59:03.739Z",
       "note": "content changed: the decision on sha256:7a8fa08c61d1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -23917,7 +23917,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.733Z",
+      "at": "2026-11-26T14:59:03.745Z",
       "note": "content changed: the decision on sha256:6409e8b3d6cd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -24547,7 +24547,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.662Z",
+      "at": "2026-11-26T14:59:03.688Z",
       "note": "content changed: the decision on sha256:d8bca2315eb1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -24699,7 +24699,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.736Z",
+      "at": "2026-11-26T14:59:03.749Z",
       "note": "content changed: the decision on sha256:ecf92cf1b606 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -24799,7 +24799,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.735Z",
+      "at": "2026-11-26T14:59:03.748Z",
       "note": "content changed: the decision on sha256:e741051fe2e7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25301,7 +25301,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.199Z",
+      "at": "2026-11-26T14:59:03.363Z",
       "note": "content changed: the decision on sha256:315aad0663e6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25343,7 +25343,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.198Z",
+      "at": "2026-11-26T14:59:03.363Z",
       "note": "content changed: the decision on sha256:fd5552a76d83 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25385,7 +25385,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.198Z",
+      "at": "2026-11-26T14:59:03.362Z",
       "note": "content changed: the decision on sha256:dd11d27eb720 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25427,7 +25427,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.561Z",
+      "at": "2026-11-26T14:59:03.620Z",
       "note": "content changed: the decision on sha256:e98e62efb709 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25797,7 +25797,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.506Z",
+      "at": "2026-11-26T14:59:03.578Z",
       "note": "content changed: the decision on sha256:716fca76dea4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -25907,7 +25907,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.907Z",
+      "at": "2026-11-26T14:59:03.893Z",
       "note": "content changed: the decision on sha256:b520fdd2c7ba (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26017,7 +26017,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.904Z",
+      "at": "2026-11-26T14:59:03.891Z",
       "note": "content changed: the decision on sha256:bbfc8b4e0207 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26059,7 +26059,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.734Z",
+      "at": "2026-11-26T14:59:03.748Z",
       "note": "content changed: the decision on sha256:cd1b5b38a87d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26127,7 +26127,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.734Z",
+      "at": "2026-11-26T14:59:03.746Z",
       "note": "content changed: the decision on sha256:56cf90e3ecf3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26211,7 +26211,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.485Z",
+      "at": "2026-11-26T14:59:04.336Z",
       "note": "content changed: the decision on sha256:f601e563aa09 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26253,7 +26253,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.484Z",
+      "at": "2026-11-26T14:59:04.336Z",
       "note": "content changed: the decision on sha256:d3aabf30aa1e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26295,7 +26295,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.485Z",
+      "at": "2026-11-26T14:59:04.336Z",
       "note": "content changed: the decision on sha256:1b85e87f1cff (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26441,7 +26441,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.562Z",
+      "at": "2026-11-26T14:59:03.620Z",
       "note": "content changed: the decision on sha256:7b96b9e1b96f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26551,7 +26551,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.613Z",
+      "at": "2026-11-26T14:59:03.656Z",
       "note": "content changed: the decision on sha256:a4c74cc54dbd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26893,7 +26893,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.726Z",
+      "at": "2026-11-26T14:59:03.734Z",
       "note": "content changed: the decision on sha256:15778c6ac705 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -26951,7 +26951,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.617Z",
+      "at": "2026-11-26T14:59:03.660Z",
       "note": "content changed: the decision on sha256:bcf7f0a97c83 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -27187,7 +27187,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.482Z",
+      "at": "2026-11-26T14:59:04.333Z",
       "note": "content changed: the decision on sha256:df9b6f199a80 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -27245,7 +27245,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.481Z",
+      "at": "2026-11-26T14:59:04.332Z",
       "note": "content changed: the decision on sha256:34a69a26ef50 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -27455,7 +27455,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.406Z",
+      "at": "2026-11-26T14:59:03.507Z",
       "note": "content changed: the decision on sha256:79eb2afbccb0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -27913,7 +27913,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.403Z",
+      "at": "2026-11-26T14:59:03.505Z",
       "note": "content changed: the decision on sha256:2cf2d258c96e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -27997,7 +27997,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.665Z",
+      "at": "2026-11-26T14:59:03.690Z",
       "note": "content changed: the decision on sha256:116d57240f08 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28117,7 +28117,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.185Z",
+      "at": "2026-11-26T14:59:04.044Z",
       "note": "content changed: the decision on sha256:20f29b520a22 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28159,7 +28159,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.159Z",
+      "at": "2026-11-26T14:59:04.040Z",
       "note": "content changed: the decision on sha256:9dd3e570a5f8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28227,7 +28227,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.155Z",
+      "at": "2026-11-26T14:59:04.036Z",
       "note": "content changed: the decision on sha256:91266147de14 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28311,7 +28311,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.189Z",
+      "at": "2026-11-26T14:59:04.045Z",
       "note": "content changed: the decision on sha256:b9d02cfa76c2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28385,7 +28385,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.189Z",
+      "at": "2026-11-26T14:59:04.045Z",
       "note": "content changed: the decision on sha256:f5c2135bd67d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28453,7 +28453,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.193Z",
+      "at": "2026-11-26T14:59:04.046Z",
       "note": "content changed: the decision on sha256:a9b7d7957fa4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28521,7 +28521,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.191Z",
+      "at": "2026-11-26T14:59:04.046Z",
       "note": "content changed: the decision on sha256:bfc7284e6ce5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28647,7 +28647,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.214Z",
+      "at": "2026-11-26T14:59:04.054Z",
       "note": "content changed: the decision on sha256:76fe3b07ddc7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28793,7 +28793,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.620Z",
+      "at": "2026-11-26T14:59:03.662Z",
       "note": "content changed: the decision on sha256:4606bd6d276f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28835,7 +28835,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.619Z",
+      "at": "2026-11-26T14:59:03.661Z",
       "note": "content changed: the decision on sha256:200428604424 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28877,7 +28877,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.620Z",
+      "at": "2026-11-26T14:59:03.662Z",
       "note": "content changed: the decision on sha256:89de5a457e9d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -28945,7 +28945,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.668Z",
+      "at": "2026-11-26T14:59:03.692Z",
       "note": "content changed: the decision on sha256:b658b9bd028f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29185,7 +29185,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.621Z",
+      "at": "2026-11-26T14:59:03.663Z",
       "note": "content changed: the decision on sha256:e7fd6e824879 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29409,7 +29409,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.509Z",
+      "at": "2026-11-26T14:59:03.580Z",
       "note": "content changed: the decision on sha256:5ddbe031549a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29529,7 +29529,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.564Z",
+      "at": "2026-11-26T14:59:03.621Z",
       "note": "content changed: the decision on sha256:f30530e783a8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29613,7 +29613,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.564Z",
+      "at": "2026-11-26T14:59:03.621Z",
       "note": "content changed: the decision on sha256:0256099d9b46 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29739,7 +29739,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.743Z",
+      "at": "2026-11-26T14:59:03.757Z",
       "note": "content changed: the decision on sha256:96eb84f720d5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29781,7 +29781,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.743Z",
+      "at": "2026-11-26T14:59:03.757Z",
       "note": "content changed: the decision on sha256:a94dedcfe2a8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29891,7 +29891,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.568Z",
+      "at": "2026-11-26T14:59:03.624Z",
       "note": "content changed: the decision on sha256:333f0d570be2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -29959,7 +29959,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.568Z",
+      "at": "2026-11-26T14:59:03.624Z",
       "note": "content changed: the decision on sha256:f9aabfe8f72b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30027,7 +30027,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.895Z",
+      "at": "2026-11-26T14:59:03.886Z",
       "note": "content changed: the decision on sha256:3dc1cbb9d2eb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30263,7 +30263,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.628Z",
+      "at": "2026-11-26T14:59:03.666Z",
       "note": "content changed: the decision on sha256:8fb0ef7ff18f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30321,7 +30321,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.628Z",
+      "at": "2026-11-26T14:59:03.666Z",
       "note": "content changed: the decision on sha256:d0366ff0416f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30363,7 +30363,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.627Z",
+      "at": "2026-11-26T14:59:03.666Z",
       "note": "content changed: the decision on sha256:d1e5cce078e4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30437,7 +30437,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.624Z",
+      "at": "2026-11-26T14:59:03.664Z",
       "note": "content changed: the decision on sha256:ac43f2afd136 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30495,7 +30495,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.875Z",
+      "at": "2026-11-26T14:59:03.876Z",
       "note": "content changed: the decision on sha256:b3a08c8f44fe (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30537,7 +30537,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.874Z",
+      "at": "2026-11-26T14:59:03.875Z",
       "note": "content changed: the decision on sha256:f03aa862c927 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30631,7 +30631,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.871Z",
+      "at": "2026-11-26T14:59:03.872Z",
       "note": "content changed: the decision on sha256:90ce21a8e26d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30689,7 +30689,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.737Z",
+      "at": "2026-11-26T14:59:03.749Z",
       "note": "content changed: the decision on sha256:d54884dd7139 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30799,7 +30799,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.737Z",
+      "at": "2026-11-26T14:59:03.749Z",
       "note": "content changed: the decision on sha256:92d5bcf06825 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30867,7 +30867,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.757Z",
+      "at": "2026-11-26T14:59:03.766Z",
       "note": "content changed: the decision on sha256:f4a976176a5b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30935,7 +30935,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.756Z",
+      "at": "2026-11-26T14:59:03.765Z",
       "note": "content changed: the decision on sha256:d47ad494f669 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -30977,7 +30977,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.756Z",
+      "at": "2026-11-26T14:59:03.766Z",
       "note": "content changed: the decision on sha256:0d7a9723d258 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31045,7 +31045,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.592Z",
+      "at": "2026-11-26T14:59:03.642Z",
       "note": "content changed: the decision on sha256:ddc87f296209 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31217,7 +31217,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.899Z",
+      "at": "2026-11-26T14:59:03.888Z",
       "note": "content changed: the decision on sha256:95b49ca4ef72 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31285,7 +31285,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.897Z",
+      "at": "2026-11-26T14:59:03.887Z",
       "note": "content changed: the decision on sha256:7fd9f75a9b11 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31327,7 +31327,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.896Z",
+      "at": "2026-11-26T14:59:03.887Z",
       "note": "content changed: the decision on sha256:f4f26ef5fca0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31369,7 +31369,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.878Z",
+      "at": "2026-11-26T14:59:03.877Z",
       "note": "content changed: the decision on sha256:421ed32d4fc5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31463,7 +31463,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.879Z",
+      "at": "2026-11-26T14:59:03.878Z",
       "note": "content changed: the decision on sha256:920366c50bf4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31531,7 +31531,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.511Z",
+      "at": "2026-11-26T14:59:03.582Z",
       "note": "content changed: the decision on sha256:0c43bf78101e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -31715,7 +31715,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.437Z",
+      "at": "2026-11-26T14:59:03.526Z",
       "note": "content changed: the decision on sha256:8f1421a98ea3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -32315,7 +32315,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.511Z",
+      "at": "2026-11-26T14:59:03.583Z",
       "note": "content changed: the decision on sha256:721972facd94 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -32357,7 +32357,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.570Z",
+      "at": "2026-11-26T14:59:03.626Z",
       "note": "content changed: the decision on sha256:19bbbe24b13e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -32655,7 +32655,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.432Z",
+      "at": "2026-11-26T14:59:03.522Z",
       "note": "content changed: the decision on sha256:c6f1e4de96e2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33129,7 +33129,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.746Z",
+      "at": "2026-11-26T14:59:03.759Z",
       "note": "content changed: the decision on sha256:b617ade5b5ae (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33197,7 +33197,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.746Z",
+      "at": "2026-11-26T14:59:03.759Z",
       "note": "content changed: the decision on sha256:a1a64b00a475 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33265,7 +33265,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.594Z",
+      "at": "2026-11-26T14:59:03.643Z",
       "note": "content changed: the decision on sha256:932fe777e6ef (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33541,7 +33541,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.183Z",
+      "at": "2026-11-26T14:59:03.356Z",
       "note": "content changed: the decision on sha256:3efdf55decbb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33599,7 +33599,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.473Z",
+      "at": "2026-11-26T14:59:03.553Z",
       "note": "content changed: the decision on sha256:f3c5e3971441 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33667,7 +33667,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.472Z",
+      "at": "2026-11-26T14:59:03.553Z",
       "note": "content changed: the decision on sha256:5d6d45188285 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33809,7 +33809,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.768Z",
+      "at": "2026-11-26T14:59:03.775Z",
       "note": "content changed: the decision on sha256:caf8218dcdf9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33903,7 +33903,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.765Z",
+      "at": "2026-11-26T14:59:03.775Z",
       "note": "content changed: the decision on sha256:6ee266c348a9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -33961,7 +33961,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.571Z",
+      "at": "2026-11-26T14:59:03.626Z",
       "note": "content changed: the decision on sha256:b5eb6009981d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -34107,7 +34107,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.573Z",
+      "at": "2026-11-26T14:59:03.628Z",
       "note": "content changed: the decision on sha256:9a9f12de630c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -34341,7 +34341,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.753Z",
+      "at": "2026-11-26T14:59:03.763Z",
       "note": "content changed: the decision on sha256:a8648c4b0195 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -34659,7 +34659,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.595Z",
+      "at": "2026-11-26T14:59:03.644Z",
       "note": "content changed: the decision on sha256:f5c31da2ab41 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -34853,7 +34853,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.759Z",
+      "at": "2026-11-26T14:59:03.768Z",
       "note": "content changed: the decision on sha256:03e62fc95310 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -34921,7 +34921,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.758Z",
+      "at": "2026-11-26T14:59:03.768Z",
       "note": "content changed: the decision on sha256:66dc01a8b945 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35099,7 +35099,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.740Z",
+      "at": "2026-11-26T14:59:03.753Z",
       "note": "content changed: the decision on sha256:bcb2e2cc784c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35183,7 +35183,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.629Z",
+      "at": "2026-11-26T14:59:03.667Z",
       "note": "content changed: the decision on sha256:4db43d11ed42 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35267,7 +35267,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.629Z",
+      "at": "2026-11-26T14:59:03.667Z",
       "note": "content changed: the decision on sha256:1f80cb58c8da (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35419,7 +35419,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.483Z",
+      "at": "2026-11-26T14:59:03.561Z",
       "note": "content changed: the decision on sha256:e0a17c6286bd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35707,7 +35707,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.526Z",
+      "at": "2026-11-26T14:59:03.594Z",
       "note": "content changed: the decision on sha256:b0c86e3dd953 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -35881,7 +35881,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.523Z",
+      "at": "2026-11-26T14:59:03.594Z",
       "note": "content changed: the decision on sha256:743dc0877d1b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36039,7 +36039,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.527Z",
+      "at": "2026-11-26T14:59:03.595Z",
       "note": "content changed: the decision on sha256:c9152a85b6c3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36201,7 +36201,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.445Z",
+      "at": "2026-11-26T14:59:04.289Z",
       "note": "content changed: the decision on sha256:40f7b9b0452b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36285,7 +36285,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.441Z",
+      "at": "2026-11-26T14:59:04.284Z",
       "note": "content changed: the decision on sha256:70aa27c093b4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36353,7 +36353,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.439Z",
+      "at": "2026-11-26T14:59:04.283Z",
       "note": "content changed: the decision on sha256:014172609eeb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36521,7 +36521,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.438Z",
+      "at": "2026-11-26T14:59:04.282Z",
       "note": "content changed: the decision on sha256:300a2b4295d3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36563,7 +36563,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.438Z",
+      "at": "2026-11-26T14:59:04.281Z",
       "note": "content changed: the decision on sha256:51802623f176 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36909,7 +36909,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.493Z",
+      "at": "2026-11-26T14:59:03.568Z",
       "note": "content changed: the decision on sha256:e31543eb0655 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -36993,7 +36993,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.790Z",
+      "at": "2026-11-26T14:59:03.794Z",
       "note": "content changed: the decision on sha256:bb975c334ec6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37035,7 +37035,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.790Z",
+      "at": "2026-11-26T14:59:03.794Z",
       "note": "content changed: the decision on sha256:c5fd69cae56b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37109,7 +37109,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.790Z",
+      "at": "2026-11-26T14:59:03.793Z",
       "note": "content changed: the decision on sha256:d605f3368501 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37209,7 +37209,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.451Z",
+      "at": "2026-11-26T14:59:04.295Z",
       "note": "content changed: the decision on sha256:818cbd9c9ae6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37597,7 +37597,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.761Z",
+      "at": "2026-11-26T14:59:03.770Z",
       "note": "content changed: the decision on sha256:ccf4c5a4306e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37723,7 +37723,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.760Z",
+      "at": "2026-11-26T14:59:03.770Z",
       "note": "content changed: the decision on sha256:e4b64b36b8ad (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -37871,7 +37871,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.632Z",
+      "at": "2026-11-26T14:59:03.669Z",
       "note": "content changed: the decision on sha256:43931531eed7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38023,7 +38023,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.475Z",
+      "at": "2026-11-26T14:59:03.555Z",
       "note": "content changed: the decision on sha256:6b90c00ccf34 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38111,7 +38111,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.475Z",
+      "at": "2026-11-26T14:59:03.555Z",
       "note": "content changed: the decision on sha256:da2e202cc0bc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38510,7 +38510,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.489Z",
+      "at": "2026-11-26T14:59:03.566Z",
       "note": "content changed: the decision on sha256:7bb91a86ea4d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38552,7 +38552,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.489Z",
+      "at": "2026-11-26T14:59:03.566Z",
       "note": "content changed: the decision on sha256:6f8c80bafc77 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38636,7 +38636,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.634Z",
+      "at": "2026-11-26T14:59:03.670Z",
       "note": "content changed: the decision on sha256:6fcb5f1e2f01 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38678,7 +38678,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.633Z",
+      "at": "2026-11-26T14:59:03.670Z",
       "note": "content changed: the decision on sha256:23c73c09f807 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38746,7 +38746,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.791Z",
+      "at": "2026-11-26T14:59:03.795Z",
       "note": "content changed: the decision on sha256:4813d03ad0a8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38830,7 +38830,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.791Z",
+      "at": "2026-11-26T14:59:03.795Z",
       "note": "content changed: the decision on sha256:872da29dbd86 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -38956,7 +38956,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.204Z",
+      "at": "2026-11-26T14:59:03.370Z",
       "note": "content changed: the decision on sha256:218566ee9cd1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -39102,7 +39102,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.183Z",
+      "at": "2026-11-26T14:59:03.355Z",
       "note": "content changed: the decision on sha256:9e9cc733a220 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -39202,7 +39202,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.479Z",
+      "at": "2026-11-26T14:59:03.558Z",
       "note": "content changed: the decision on sha256:a2f735ab5398 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -39270,7 +39270,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.478Z",
+      "at": "2026-11-26T14:59:03.558Z",
       "note": "content changed: the decision on sha256:32a46fc6305d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -39636,7 +39636,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.152Z",
+      "at": "2026-11-26T14:59:03.333Z",
       "note": "content changed: the decision on sha256:0aeb0d94a642 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -39836,7 +39836,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.478Z",
+      "at": "2026-11-26T14:59:03.558Z",
       "note": "content changed: the decision on sha256:06e00475e954 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -40224,7 +40224,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.762Z",
+      "at": "2026-11-26T14:59:03.771Z",
       "note": "content changed: the decision on sha256:33d5b1c52f72 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -40580,7 +40580,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.673Z",
+      "at": "2026-11-26T14:59:03.695Z",
       "note": "content changed: the decision on sha256:c238692ab983 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -40700,7 +40700,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.576Z",
+      "at": "2026-11-26T14:59:03.629Z",
       "note": "content changed: the decision on sha256:7dd0d5860d78 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -40768,7 +40768,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.575Z",
+      "at": "2026-11-26T14:59:03.629Z",
       "note": "content changed: the decision on sha256:4bf3c26f8ac9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -40926,7 +40926,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.785Z",
+      "at": "2026-11-26T14:59:03.789Z",
       "note": "content changed: the decision on sha256:90bc237a0943 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41168,7 +41168,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.763Z",
+      "at": "2026-11-26T14:59:03.772Z",
       "note": "content changed: the decision on sha256:db9530061418 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41229,7 +41229,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.763Z",
+      "at": "2026-11-26T14:59:03.772Z",
       "note": "content changed: the decision on sha256:d85d8a59668e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41290,7 +41290,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.763Z",
+      "at": "2026-11-26T14:59:03.772Z",
       "note": "content changed: the decision on sha256:39d42b3d016d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41393,7 +41393,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.764Z",
+      "at": "2026-11-26T14:59:03.774Z",
       "note": "content changed: the decision on sha256:f2df5d784eca (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41537,7 +41537,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.764Z",
+      "at": "2026-11-26T14:59:03.774Z",
       "note": "content changed: the decision on sha256:26b8d7d246bc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -41877,7 +41877,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.636Z",
+      "at": "2026-11-26T14:59:03.671Z",
       "note": "content changed: the decision on sha256:8b2183cd0fd7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42003,7 +42003,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.635Z",
+      "at": "2026-11-26T14:59:03.671Z",
       "note": "content changed: the decision on sha256:6c06fa7c152a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42135,7 +42135,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.476Z",
+      "at": "2026-11-26T14:59:03.557Z",
       "note": "content changed: the decision on sha256:4455473f6753 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42351,7 +42351,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.577Z",
+      "at": "2026-11-26T14:59:03.630Z",
       "note": "content changed: the decision on sha256:1ee53c2ac82c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42513,7 +42513,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.676Z",
+      "at": "2026-11-26T14:59:03.697Z",
       "note": "content changed: the decision on sha256:ac9c21356324 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42733,7 +42733,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.926Z",
+      "at": "2026-11-26T14:59:03.904Z",
       "note": "content changed: the decision on sha256:cd8bd7ad031a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42827,7 +42827,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.925Z",
+      "at": "2026-11-26T14:59:03.903Z",
       "note": "content changed: the decision on sha256:4a13de34304f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -42927,7 +42927,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.599Z",
+      "at": "2026-11-26T14:59:03.646Z",
       "note": "content changed: the decision on sha256:4f8db5c87ba7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -43706,7 +43706,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.792Z",
+      "at": "2026-11-26T14:59:03.795Z",
       "note": "content changed: the decision on sha256:d8b19dddbef8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -43816,7 +43816,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.578Z",
+      "at": "2026-11-26T14:59:03.631Z",
       "note": "content changed: the decision on sha256:9151c057828b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44146,7 +44146,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.678Z",
+      "at": "2026-11-26T14:59:03.698Z",
       "note": "content changed: the decision on sha256:161cea76cc85 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44406,7 +44406,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.679Z",
+      "at": "2026-11-26T14:59:03.699Z",
       "note": "content changed: the decision on sha256:f3b6bf332629 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44474,7 +44474,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.679Z",
+      "at": "2026-11-26T14:59:03.699Z",
       "note": "content changed: the decision on sha256:c996a52b13dc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44564,7 +44564,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.479Z",
+      "at": "2026-11-26T14:59:03.559Z",
       "note": "content changed: the decision on sha256:8a8878f3962f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44709,7 +44709,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.427Z",
+      "at": "2026-11-26T14:59:03.519Z",
       "note": "content changed: the decision on sha256:a823196c273d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44783,7 +44783,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.430Z",
+      "at": "2026-11-26T14:59:03.521Z",
       "note": "content changed: the decision on sha256:65f618df0c9a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -44925,7 +44925,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.429Z",
+      "at": "2026-11-26T14:59:03.520Z",
       "note": "content changed: the decision on sha256:632630c4f197 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45377,7 +45377,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.683Z",
+      "at": "2026-11-26T14:59:03.700Z",
       "note": "content changed: the decision on sha256:e181cd0ce074 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45461,7 +45461,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.682Z",
+      "at": "2026-11-26T14:59:03.700Z",
       "note": "content changed: the decision on sha256:d05c56cbe63a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45545,7 +45545,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.786Z",
+      "at": "2026-11-26T14:59:03.790Z",
       "note": "content changed: the decision on sha256:b0a646e7cb33 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45787,7 +45787,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.484Z",
+      "at": "2026-11-26T14:59:03.562Z",
       "note": "content changed: the decision on sha256:83e82aa55458 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45887,7 +45887,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.484Z",
+      "at": "2026-11-26T14:59:03.562Z",
       "note": "content changed: the decision on sha256:eb127c3fec47 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -45971,7 +45971,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.499Z",
+      "at": "2026-11-26T14:59:03.572Z",
       "note": "content changed: the decision on sha256:7594b07f9e8b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46065,7 +46065,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.498Z",
+      "at": "2026-11-26T14:59:03.572Z",
       "note": "content changed: the decision on sha256:fb5d8cb2c021 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46133,7 +46133,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.787Z",
+      "at": "2026-11-26T14:59:03.790Z",
       "note": "content changed: the decision on sha256:fa26b7a17c8c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46191,7 +46191,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.787Z",
+      "at": "2026-11-26T14:59:03.791Z",
       "note": "content changed: the decision on sha256:0fec9addcae6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46391,7 +46391,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.783Z",
+      "at": "2026-11-26T14:59:03.787Z",
       "note": "content changed: the decision on sha256:a03f05a54974 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46475,7 +46475,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.783Z",
+      "at": "2026-11-26T14:59:03.787Z",
       "note": "content changed: the decision on sha256:7809b346977f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46575,7 +46575,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.788Z",
+      "at": "2026-11-26T14:59:03.792Z",
       "note": "content changed: the decision on sha256:17b420f299e4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46636,7 +46636,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.788Z",
+      "at": "2026-11-26T14:59:03.792Z",
       "note": "content changed: the decision on sha256:d349236741ff (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46772,7 +46772,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.903Z",
+      "at": "2026-11-26T14:59:03.891Z",
       "note": "content changed: the decision on sha256:689a7e0a4c16 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -46866,7 +46866,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.900Z",
+      "at": "2026-11-26T14:59:03.889Z",
       "note": "content changed: the decision on sha256:efb517811101 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47038,7 +47038,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.483Z",
+      "at": "2026-11-26T14:59:04.334Z",
       "note": "content changed: the decision on sha256:0e37ca73ec79 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47080,7 +47080,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.483Z",
+      "at": "2026-11-26T14:59:04.335Z",
       "note": "content changed: the decision on sha256:db3cc46ee046 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47148,7 +47148,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.200Z",
+      "at": "2026-11-26T14:59:03.367Z",
       "note": "content changed: the decision on sha256:106aea138c73 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47258,7 +47258,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.639Z",
+      "at": "2026-11-26T14:59:03.673Z",
       "note": "content changed: the decision on sha256:87d0a9f0e70d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47300,7 +47300,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.639Z",
+      "at": "2026-11-26T14:59:03.673Z",
       "note": "content changed: the decision on sha256:4780b02c8b4c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47342,7 +47342,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.639Z",
+      "at": "2026-11-26T14:59:03.673Z",
       "note": "content changed: the decision on sha256:608be04474eb (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47652,7 +47652,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.490Z",
+      "at": "2026-11-26T14:59:04.340Z",
       "note": "content changed: the decision on sha256:b37aac87ba93 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47694,7 +47694,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.491Z",
+      "at": "2026-11-26T14:59:04.341Z",
       "note": "content changed: the decision on sha256:5d49a200caa8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47924,7 +47924,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.482Z",
+      "at": "2026-11-26T14:59:03.560Z",
       "note": "content changed: the decision on sha256:68bfdcabac16 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -47966,7 +47966,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.482Z",
+      "at": "2026-11-26T14:59:03.560Z",
       "note": "content changed: the decision on sha256:5b91fbaa40d8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48050,7 +48050,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.581Z",
+      "at": "2026-11-26T14:59:03.633Z",
       "note": "content changed: the decision on sha256:909feb7ff50f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48196,7 +48196,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.528Z",
+      "at": "2026-11-26T14:59:03.596Z",
       "note": "content changed: the decision on sha256:97c2db6f828d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48342,7 +48342,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.600Z",
+      "at": "2026-11-26T14:59:03.647Z",
       "note": "content changed: the decision on sha256:ed674d8c2c14 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48384,7 +48384,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.600Z",
+      "at": "2026-11-26T14:59:03.647Z",
       "note": "content changed: the decision on sha256:057d9c39ef3f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48478,7 +48478,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.583Z",
+      "at": "2026-11-26T14:59:03.634Z",
       "note": "content changed: the decision on sha256:176a7ec4d8d5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48520,7 +48520,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.582Z",
+      "at": "2026-11-26T14:59:03.634Z",
       "note": "content changed: the decision on sha256:73e208a2c551 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48630,7 +48630,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.582Z",
+      "at": "2026-11-26T14:59:03.633Z",
       "note": "content changed: the decision on sha256:02454539f74c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48688,7 +48688,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.784Z",
+      "at": "2026-11-26T14:59:03.788Z",
       "note": "content changed: the decision on sha256:8f32f5f2f1da (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48928,7 +48928,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.454Z",
+      "at": "2026-11-26T14:59:04.300Z",
       "note": "content changed: the decision on sha256:bd0769e9f002 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -48970,7 +48970,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.454Z",
+      "at": "2026-11-26T14:59:04.300Z",
       "note": "content changed: the decision on sha256:b524f019fbf2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49012,7 +49012,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.453Z",
+      "at": "2026-11-26T14:59:04.300Z",
       "note": "content changed: the decision on sha256:3dca20f15f08 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49080,7 +49080,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.453Z",
+      "at": "2026-11-26T14:59:04.297Z",
       "note": "content changed: the decision on sha256:8e65383e90a9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49122,7 +49122,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.455Z",
+      "at": "2026-11-26T14:59:04.302Z",
       "note": "content changed: the decision on sha256:ab0b31971720 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49216,7 +49216,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.455Z",
+      "at": "2026-11-26T14:59:04.302Z",
       "note": "content changed: the decision on sha256:31bbb69ab9fc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49284,7 +49284,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.796Z",
+      "at": "2026-11-26T14:59:03.802Z",
       "note": "content changed: the decision on sha256:faafa345135d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49530,7 +49530,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.402Z",
+      "at": "2026-11-26T14:59:03.505Z",
       "note": "content changed: the decision on sha256:c0b3c0248803 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49614,7 +49614,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.402Z",
+      "at": "2026-11-26T14:59:03.504Z",
       "note": "content changed: the decision on sha256:f7ee89e787c3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49714,7 +49714,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.930Z",
+      "at": "2026-11-26T14:59:03.906Z",
       "note": "content changed: the decision on sha256:16f59a887f54 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49830,7 +49830,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.929Z",
+      "at": "2026-11-26T14:59:03.906Z",
       "note": "content changed: the decision on sha256:4080575071cc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -49924,7 +49924,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.492Z",
+      "at": "2026-11-26T14:59:03.568Z",
       "note": "content changed: the decision on sha256:af5f260000c1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50008,7 +50008,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.491Z",
+      "at": "2026-11-26T14:59:03.568Z",
       "note": "content changed: the decision on sha256:64543e43a3e4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50102,7 +50102,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.457Z",
+      "at": "2026-11-26T14:59:04.304Z",
       "note": "content changed: the decision on sha256:e698a05deebc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50170,7 +50170,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.457Z",
+      "at": "2026-11-26T14:59:04.304Z",
       "note": "content changed: the decision on sha256:6402226b5596 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50264,7 +50264,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.452Z",
+      "at": "2026-11-26T14:59:04.296Z",
       "note": "content changed: the decision on sha256:8cad146d604a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50306,7 +50306,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.452Z",
+      "at": "2026-11-26T14:59:04.296Z",
       "note": "content changed: the decision on sha256:cc0f750f1de5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50374,7 +50374,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.451Z",
+      "at": "2026-11-26T14:59:04.296Z",
       "note": "content changed: the decision on sha256:d362b4cf3eb6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50588,7 +50588,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.458Z",
+      "at": "2026-11-26T14:59:04.305Z",
       "note": "content changed: the decision on sha256:888b97f181e1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50682,7 +50682,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.459Z",
+      "at": "2026-11-26T14:59:04.306Z",
       "note": "content changed: the decision on sha256:7bb7e0e115f6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -50750,7 +50750,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.459Z",
+      "at": "2026-11-26T14:59:04.306Z",
       "note": "content changed: the decision on sha256:b69220a0a887 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51106,7 +51106,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.460Z",
+      "at": "2026-11-26T14:59:04.307Z",
       "note": "content changed: the decision on sha256:2539e060a95f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51200,7 +51200,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.928Z",
+      "at": "2026-11-26T14:59:03.905Z",
       "note": "content changed: the decision on sha256:30a4be1b0935 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51268,7 +51268,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.927Z",
+      "at": "2026-11-26T14:59:03.905Z",
       "note": "content changed: the decision on sha256:8e3c4c4e5a6d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51420,7 +51420,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.548Z",
+      "at": "2026-11-26T14:59:03.612Z",
       "note": "content changed: the decision on sha256:7fe447c0e3c1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51462,7 +51462,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.548Z",
+      "at": "2026-11-26T14:59:03.611Z",
       "note": "content changed: the decision on sha256:f4289a24fd66 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51504,7 +51504,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.533Z",
+      "at": "2026-11-26T14:59:03.599Z",
       "note": "content changed: the decision on sha256:48b9c67bd197 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51578,7 +51578,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.807Z",
+      "at": "2026-11-26T14:59:03.816Z",
       "note": "content changed: the decision on sha256:3f047cf4289b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51672,7 +51672,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.806Z",
+      "at": "2026-11-26T14:59:03.815Z",
       "note": "content changed: the decision on sha256:3f3839fcf4dc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51746,7 +51746,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.799Z",
+      "at": "2026-11-26T14:59:03.804Z",
       "note": "content changed: the decision on sha256:875ee3f857e9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -51924,7 +51924,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.692Z",
+      "at": "2026-11-26T14:59:03.708Z",
       "note": "content changed: the decision on sha256:65c684f0aa53 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52060,7 +52060,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.803Z",
+      "at": "2026-11-26T14:59:03.810Z",
       "note": "content changed: the decision on sha256:dded836505b7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52228,7 +52228,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.801Z",
+      "at": "2026-11-26T14:59:03.808Z",
       "note": "content changed: the decision on sha256:e1c81452aa44 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52444,7 +52444,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.602Z",
+      "at": "2026-11-26T14:59:03.648Z",
       "note": "content changed: the decision on sha256:ed3347bc92dd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52628,7 +52628,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.601Z",
+      "at": "2026-11-26T14:59:03.648Z",
       "note": "content changed: the decision on sha256:3f8d36ad2c55 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52670,7 +52670,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.462Z",
+      "at": "2026-11-26T14:59:04.309Z",
       "note": "content changed: the decision on sha256:45782a6a2b23 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52786,7 +52786,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.462Z",
+      "at": "2026-11-26T14:59:04.309Z",
       "note": "content changed: the decision on sha256:9ccfff60841b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52828,7 +52828,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.461Z",
+      "at": "2026-11-26T14:59:04.308Z",
       "note": "content changed: the decision on sha256:2b6873e89cee (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -52902,7 +52902,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.932Z",
+      "at": "2026-11-26T14:59:03.908Z",
       "note": "content changed: the decision on sha256:a7d9de3680fc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53180,7 +53180,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.201Z",
+      "at": "2026-11-26T14:59:03.368Z",
       "note": "content changed: the decision on sha256:5643407cbc38 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53238,7 +53238,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.201Z",
+      "at": "2026-11-26T14:59:03.368Z",
       "note": "content changed: the decision on sha256:0894ee9be099 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53280,7 +53280,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.936Z",
+      "at": "2026-11-26T14:59:03.910Z",
       "note": "content changed: the decision on sha256:ba71a174f6d3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53348,7 +53348,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.935Z",
+      "at": "2026-11-26T14:59:03.910Z",
       "note": "content changed: the decision on sha256:54b5dadeb626 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53474,7 +53474,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.642Z",
+      "at": "2026-11-26T14:59:03.675Z",
       "note": "content changed: the decision on sha256:3a9dbe76e159 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -53600,7 +53600,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.641Z",
+      "at": "2026-11-26T14:59:03.674Z",
       "note": "content changed: the decision on sha256:91fb19e60e35 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54008,7 +54008,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.805Z",
+      "at": "2026-11-26T14:59:03.814Z",
       "note": "content changed: the decision on sha256:c415d563cc24 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54076,7 +54076,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.805Z",
+      "at": "2026-11-26T14:59:03.814Z",
       "note": "content changed: the decision on sha256:d71037647f2f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54118,7 +54118,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.804Z",
+      "at": "2026-11-26T14:59:03.812Z",
       "note": "content changed: the decision on sha256:e7e39c8bde2d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54254,7 +54254,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.806Z",
+      "at": "2026-11-26T14:59:03.815Z",
       "note": "content changed: the decision on sha256:72042ee00055 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54522,7 +54522,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.463Z",
+      "at": "2026-11-26T14:59:04.311Z",
       "note": "content changed: the decision on sha256:fcec182c323a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -54610,7 +54610,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.463Z",
+      "at": "2026-11-26T14:59:04.311Z",
       "note": "content changed: the decision on sha256:7095a52c164c (revision_required) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55038,7 +55038,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.645Z",
+      "at": "2026-11-26T14:59:03.677Z",
       "note": "content changed: the decision on sha256:27f0e4453f84 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55132,7 +55132,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.644Z",
+      "at": "2026-11-26T14:59:03.677Z",
       "note": "content changed: the decision on sha256:484515149784 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55174,7 +55174,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.644Z",
+      "at": "2026-11-26T14:59:03.676Z",
       "note": "content changed: the decision on sha256:d295912805ba (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55232,7 +55232,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.202Z",
+      "at": "2026-11-26T14:59:03.368Z",
       "note": "content changed: the decision on sha256:dc75643f3b22 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55404,7 +55404,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.003Z",
+      "at": "2026-11-26T14:59:03.971Z",
       "note": "content changed: the decision on sha256:7758f9ee2ec7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55524,7 +55524,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.016Z",
+      "at": "2026-11-26T14:59:03.979Z",
       "note": "content changed: the decision on sha256:9cda80027e95 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55634,7 +55634,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.716Z",
+      "at": "2026-11-26T14:59:03.726Z",
       "note": "content changed: the decision on sha256:6139c3fff0d1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55828,7 +55828,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.030Z",
+      "at": "2026-11-26T14:59:03.987Z",
       "note": "content changed: the decision on sha256:a8c46ca7c902 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55896,7 +55896,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.029Z",
+      "at": "2026-11-26T14:59:03.987Z",
       "note": "content changed: the decision on sha256:34ff141f87d1 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -55990,7 +55990,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.861Z",
+      "at": "2026-11-26T14:59:03.861Z",
       "note": "content changed: the decision on sha256:4ceacff4d6f9 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56110,7 +56110,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.038Z",
+      "at": "2026-11-26T14:59:03.992Z",
       "note": "content changed: the decision on sha256:cd344e300a0d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56178,7 +56178,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.037Z",
+      "at": "2026-11-26T14:59:03.991Z",
       "note": "content changed: the decision on sha256:e3ec0c244daf (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56220,7 +56220,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.034Z",
+      "at": "2026-11-26T14:59:03.990Z",
       "note": "content changed: the decision on sha256:f3f71f47cdd7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56366,7 +56366,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.040Z",
+      "at": "2026-11-26T14:59:03.993Z",
       "note": "content changed: the decision on sha256:32bd4324fa32 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56434,7 +56434,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.718Z",
+      "at": "2026-11-26T14:59:03.727Z",
       "note": "content changed: the decision on sha256:be416fafeb18 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56606,7 +56606,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.217Z",
+      "at": "2026-11-26T14:59:04.055Z",
       "note": "content changed: the decision on sha256:34af59f4542b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56674,7 +56674,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.217Z",
+      "at": "2026-11-26T14:59:04.055Z",
       "note": "content changed: the decision on sha256:f52cb45efa25 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56742,7 +56742,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.043Z",
+      "at": "2026-11-26T14:59:03.995Z",
       "note": "content changed: the decision on sha256:3ed94690eab2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56810,7 +56810,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.043Z",
+      "at": "2026-11-26T14:59:03.995Z",
       "note": "content changed: the decision on sha256:ec001237508c (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -56978,7 +56978,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.231Z",
+      "at": "2026-11-26T14:59:04.065Z",
       "note": "content changed: the decision on sha256:aaa8652f7b1e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57046,7 +57046,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.052Z",
+      "at": "2026-11-26T14:59:04.001Z",
       "note": "content changed: the decision on sha256:4d3368e23ee5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57166,7 +57166,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.235Z",
+      "at": "2026-11-26T14:59:04.069Z",
       "note": "content changed: the decision on sha256:c656550b4ace (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57266,7 +57266,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.234Z",
+      "at": "2026-11-26T14:59:04.069Z",
       "note": "content changed: the decision on sha256:f457abb65a68 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57308,7 +57308,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.233Z",
+      "at": "2026-11-26T14:59:04.067Z",
       "note": "content changed: the decision on sha256:266860250813 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57366,7 +57366,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.481Z",
+      "at": "2026-11-26T14:59:03.560Z",
       "note": "content changed: the decision on sha256:e8c7a866fba5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57466,7 +57466,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.481Z",
+      "at": "2026-11-26T14:59:03.560Z",
       "note": "content changed: the decision on sha256:8aee9429613b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57628,7 +57628,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.603Z",
+      "at": "2026-11-26T14:59:03.649Z",
       "note": "content changed: the decision on sha256:d303b887cef5 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57822,7 +57822,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.464Z",
+      "at": "2026-11-26T14:59:04.312Z",
       "note": "content changed: the decision on sha256:b2e390d4ef97 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57890,7 +57890,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.464Z",
+      "at": "2026-11-26T14:59:04.312Z",
       "note": "content changed: the decision on sha256:316d147c0811 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -57932,7 +57932,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.464Z",
+      "at": "2026-11-26T14:59:04.312Z",
       "note": "content changed: the decision on sha256:3aa0955d2257 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58146,7 +58146,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.938Z",
+      "at": "2026-11-26T14:59:03.916Z",
       "note": "content changed: the decision on sha256:9ffe4b916ef0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58240,7 +58240,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.945Z",
+      "at": "2026-11-26T14:59:03.921Z",
       "note": "content changed: the decision on sha256:efc36ad04174 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58324,7 +58324,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.944Z",
+      "at": "2026-11-26T14:59:03.920Z",
       "note": "content changed: the decision on sha256:27b02a19a2e2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58434,7 +58434,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.810Z",
+      "at": "2026-11-26T14:59:03.819Z",
       "note": "content changed: the decision on sha256:4bc85f23d433 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58528,7 +58528,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.809Z",
+      "at": "2026-11-26T14:59:03.819Z",
       "note": "content changed: the decision on sha256:18c196db9abc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58570,7 +58570,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.486Z",
+      "at": "2026-11-26T14:59:04.337Z",
       "note": "content changed: the decision on sha256:d9272a7796c3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58732,7 +58732,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.465Z",
+      "at": "2026-11-26T14:59:04.315Z",
       "note": "content changed: the decision on sha256:be23505b1f06 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58800,7 +58800,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.465Z",
+      "at": "2026-11-26T14:59:04.315Z",
       "note": "content changed: the decision on sha256:56f2ff918573 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -58900,7 +58900,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.400Z",
+      "at": "2026-11-26T14:59:03.503Z",
       "note": "content changed: the decision on sha256:4e3ae6fad010 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59000,7 +59000,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.398Z",
+      "at": "2026-11-26T14:59:03.502Z",
       "note": "content changed: the decision on sha256:ac3af86d3814 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59106,7 +59106,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.400Z",
+      "at": "2026-11-26T14:59:03.503Z",
       "note": "content changed: the decision on sha256:9d3059a9bd00 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59174,7 +59174,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.396Z",
+      "at": "2026-11-26T14:59:03.501Z",
       "note": "content changed: the decision on sha256:aad0a123b75b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59336,7 +59336,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.423Z",
+      "at": "2026-11-26T14:59:03.516Z",
       "note": "content changed: the decision on sha256:3e108acd2717 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59456,7 +59456,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.418Z",
+      "at": "2026-11-26T14:59:03.513Z",
       "note": "content changed: the decision on sha256:d5addc0116a2 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59696,7 +59696,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.553Z",
+      "at": "2026-11-26T14:59:03.615Z",
       "note": "content changed: the decision on sha256:bb91576b1b9d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59738,7 +59738,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.554Z",
+      "at": "2026-11-26T14:59:03.615Z",
       "note": "content changed: the decision on sha256:3e98ec08ecb0 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -59874,7 +59874,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.647Z",
+      "at": "2026-11-26T14:59:03.678Z",
       "note": "content changed: the decision on sha256:e988479f12e6 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60177,7 +60177,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.426Z",
+      "at": "2026-11-26T14:59:03.518Z",
       "note": "content changed: the decision on sha256:4046252ebdaa (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60293,7 +60293,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.424Z",
+      "at": "2026-11-26T14:59:03.516Z",
       "note": "content changed: the decision on sha256:1fc3acc9ae90 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60387,7 +60387,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.940Z",
+      "at": "2026-11-26T14:59:03.917Z",
       "note": "content changed: the decision on sha256:9190d1479929 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60659,7 +60659,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.607Z",
+      "at": "2026-11-26T14:59:03.652Z",
       "note": "content changed: the decision on sha256:7c894c128236 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60727,7 +60727,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.606Z",
+      "at": "2026-11-26T14:59:03.651Z",
       "note": "content changed: the decision on sha256:640cc19b4be8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60837,7 +60837,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.942Z",
+      "at": "2026-11-26T14:59:03.919Z",
       "note": "content changed: the decision on sha256:bbdf9f346622 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -60989,7 +60989,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.334Z",
+      "at": "2026-11-26T14:59:03.446Z",
       "note": "content changed: the decision on sha256:ff8f2ba995dd (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61099,7 +61099,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.322Z",
+      "at": "2026-11-26T14:59:03.438Z",
       "note": "content changed: the decision on sha256:da555c493345 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61193,7 +61193,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.328Z",
+      "at": "2026-11-26T14:59:03.440Z",
       "note": "content changed: the decision on sha256:f31d68b6ad6a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61293,7 +61293,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.395Z",
+      "at": "2026-11-26T14:59:03.500Z",
       "note": "content changed: the decision on sha256:e3b61eb4dd0a (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61387,7 +61387,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.391Z",
+      "at": "2026-11-26T14:59:03.498Z",
       "note": "content changed: the decision on sha256:a107f8a423b8 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61497,7 +61497,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.390Z",
+      "at": "2026-11-26T14:59:03.497Z",
       "note": "content changed: the decision on sha256:4153b2a3a7e4 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61591,7 +61591,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.459Z",
+      "at": "2026-11-26T14:59:03.543Z",
       "note": "content changed: the decision on sha256:6b26beaa1554 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61649,7 +61649,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.460Z",
+      "at": "2026-11-26T14:59:03.544Z",
       "note": "content changed: the decision on sha256:a968f608c148 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61853,7 +61853,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.951Z",
+      "at": "2026-11-26T14:59:03.926Z",
       "note": "content changed: the decision on sha256:329322b35057 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61921,7 +61921,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.948Z",
+      "at": "2026-11-26T14:59:03.924Z",
       "note": "content changed: the decision on sha256:70d176a64b2e (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -61963,7 +61963,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.950Z",
+      "at": "2026-11-26T14:59:03.926Z",
       "note": "content changed: the decision on sha256:14d2168e7994 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62261,7 +62261,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.289Z",
+      "at": "2026-11-26T14:59:04.140Z",
       "note": "content changed: the decision on sha256:d46d2a756f70 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62429,7 +62429,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.255Z",
+      "at": "2026-11-26T14:59:03.401Z",
       "note": "content changed: the decision on sha256:e9d84aa94959 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62523,7 +62523,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.253Z",
+      "at": "2026-11-26T14:59:03.400Z",
       "note": "content changed: the decision on sha256:c9fb2012293f (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62607,7 +62607,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.251Z",
+      "at": "2026-11-26T14:59:03.399Z",
       "note": "content changed: the decision on sha256:48a98778b5bc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62675,7 +62675,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.958Z",
+      "at": "2026-11-26T14:59:03.934Z",
       "note": "content changed: the decision on sha256:59520b77ba6b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -62905,7 +62905,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.268Z",
+      "at": "2026-11-26T14:59:03.408Z",
       "note": "content changed: the decision on sha256:3f74616d5dee (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63067,7 +63067,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:10.263Z",
+      "at": "2026-11-26T14:59:03.405Z",
       "note": "content changed: the decision on sha256:52677e8b2812 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63135,7 +63135,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.468Z",
+      "at": "2026-11-26T14:59:04.319Z",
       "note": "content changed: the decision on sha256:b3f6afa27d80 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63203,7 +63203,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.468Z",
+      "at": "2026-11-26T14:59:04.318Z",
       "note": "content changed: the decision on sha256:60cef6f60ffc (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63297,7 +63297,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.475Z",
+      "at": "2026-11-26T14:59:04.326Z",
       "note": "content changed: the decision on sha256:2cdb308e7197 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63365,7 +63365,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.474Z",
+      "at": "2026-11-26T14:59:04.325Z",
       "note": "content changed: the decision on sha256:8cedde474f5b (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63433,7 +63433,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.478Z",
+      "at": "2026-11-26T14:59:04.329Z",
       "note": "content changed: the decision on sha256:624555dd2903 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63475,7 +63475,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.478Z",
+      "at": "2026-11-26T14:59:04.329Z",
       "note": "content changed: the decision on sha256:187d8e6d11c3 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63543,7 +63543,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.478Z",
+      "at": "2026-11-26T14:59:04.329Z",
       "note": "content changed: the decision on sha256:57253c2bb729 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63585,7 +63585,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.476Z",
+      "at": "2026-11-26T14:59:04.327Z",
       "note": "content changed: the decision on sha256:d266d18c2a7d (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63627,7 +63627,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.480Z",
+      "at": "2026-11-26T14:59:04.331Z",
       "note": "content changed: the decision on sha256:e46219170fca (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
@@ -63721,7 +63721,7 @@
      "provenance": {
       "source": "registry",
       "by": "explanation-review sync",
-      "at": "2026-11-26T13:35:11.479Z",
+      "at": "2026-11-26T14:59:04.330Z",
       "note": "content changed: the decision on sha256:8747ff88f1e7 (pending_review) no longer applies; review again"
      },
      "reviewerRole": "none",
