@@ -56,7 +56,7 @@ test("own-numbers@1: every choice a learner can make writes a complete, true exp
     assert.equal(refusal(spec, inputsOf(s.vary)[0], String(valuesOf(s.vary)[inputsOf(s.vary)[0]]), valuesOf(s.vary)), null, `${where}: the first numbers are refused`);
     for (const v of everyChoice(spec)) {
       choices++;
-      const at = `${where} at ${inputsOf(s.vary).map((k) => `${k}=${v[k]}`).join(",")}`;
+      const at: string = `${where} at ${inputsOf(s.vary).map((k) => `${k}=${v[k]}`).join(",")}`;
       for (const [k, n] of Object.entries(v)) assert.ok(Number.isFinite(n) && Number.isInteger(n), `${at}: ${k} is ${n}`);
       const w = filledScreen(s, v);
       for (const t of [...words(w), ...sceneWords(w.scene)]) {

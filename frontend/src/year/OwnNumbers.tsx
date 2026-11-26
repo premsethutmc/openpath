@@ -108,9 +108,13 @@ export function useOwnExample(qid: string | null, competency?: string): OwnExamp
   if (!e) return null;
   const x = at ? explored(e, at.dial, at.value) : null;
   const changed = !!x?.changed;
-  const dials = e.dials.map((d, i) => ({ d, i, place: d.shown === null ? -1 : (base.match(NUM) ?? []).indexOf(d.shown) })).filter((t) => t.place >= 0);
+  const dials = e.dials.map((d, i) => ({ d, i, place: d.shown === null ? -1 : ((base.match(NUM) ?? []) as string[]).indexOf(d.shown) })).filter((t) => t.place >= 0);
   // the number the child sees for each value of a dial (the family's number may be another: x in "x − 4 = 11" is 15)
-  const seen = (dial: number) => { const t = dials.find((q) => q.i === dial)!; return new Map(e.dials[dial].values.map((v) => [(explored(e, dial, v)?.prompt.match(NUM) ?? [])[t.place]?.replace(/,/g, "") ?? "", v] as const).filter(([k]) => k)); };
+  const seen = (dial: number): Map<string, number> => {
+    const t = dials.find((q) => q.i === dial)!, out = new Map<string, number>();
+    for (const v of e.dials[dial].values) { const k = ((explored(e, dial, v)?.prompt.match(NUM) ?? [])[t.place] ?? "").replace(/,/g, ""); if (k) out.set(k, v); }
+    return out;
+  };
   const close = () => {
     setEdit(null); setNote("");
     if (at && changed && competency) { const label = `p${e.dials[at.dial].index}=${at.value}`; if (label !== kept.current) { kept.current = label; ownNumbers.record?.(competency, `example:${qid}`.slice(0, 200), label); } }
