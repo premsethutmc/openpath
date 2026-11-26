@@ -84,6 +84,7 @@ test("chintu@1: Chintu says the step help on questions of Classes 1 to 5 only, a
   assert.equal(spoken("First: multiply 11 by 2."), "First: multiply 11 by 2.");
   assert.equal(spoken("7 × 78 = 546. Left over: 551 − 546 = 5"), "7 times 78 equals 546. Left over: 551 minus 546 equals 5");
   assert.equal(spoken("348 ÷ 6 = ?"), "348 divided by 6 equals what");
+  assert.equal(spoken("Now, out of these red ones, which are big?"), "Now, out of these red ones, which are big?");
   assert.match(coach, /cls !== null && cls <= LAST_CHINTU_CLASS/);
   const { classOfQuestion } = await import("./StepCoach");
   const { pool } = await import("../../../packages/learning/src/families");

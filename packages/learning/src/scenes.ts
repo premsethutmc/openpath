@@ -368,6 +368,8 @@ export function sceneForQuestion(qid: string): Scene | null {
 export function sceneAnswer(s: Scene): number | null {
   if (s.kind === "tally") return s.goal.measure === "total" && s.goal.equals !== undefined ? s.goal.equals : null;
   if (s.kind === "boxes") return s.a + s.b;
+  // sort@1: the buttons that end in the last jar
+  if (s.kind === "sort") return s.counts.reduce((n, c, k) => n + ((!s.ask.colour || s.ask.colour === (k < 2 ? "red" : "blue")) && (!s.ask.size || s.ask.size === (k % 2 ? "small" : "big")) ? c : 0), 0);
   if (s.kind === "triangle") return 180 - s.angles[0] - s.angles[1];
   if (s.kind === "rectangle") return s.ask === "area" ? s.area ?? null : s.ask === "perimeter" ? s.perimeter ?? null : null;
   if (s.kind === "fraction") return s.goal.measure === "exact" ? s.target[0] / s.target[1] : null;

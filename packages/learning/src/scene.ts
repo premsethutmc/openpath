@@ -10,6 +10,8 @@
  *
  * A scene is a teaching picture. Reaching its goal is NOT evidence of a skill: nothing here writes learner records.
  *
+ * scene@13 adds a `sort` kind (sort.ts, the approved button mock): sewing buttons on a table, sorted by tapping into glass
+ * jars by colour, size, or both (sorted twice). It has its own Start and Again, as the lift does.
  * scene@12 gives the `tally` kind its lift look (lift.ts, the approved lift mock): a tally scene that counts floors (no ₹,
  * °C or m) is a building with Chintu in the lift and a panel of ▲ ▼ buttons, one press per floor. A circle can now be
  * a thing the learner taps (`tap`), and a `Frame` can carry a `sound` (a ding as the lift reaches a floor).
@@ -42,6 +44,8 @@ import { tallyAt, tallyClicks, tallyProblems, type TallyScene } from "./tally";
 import { LIFT, liftAct, liftRemind, liftCue, liftCum, liftFloors, liftFrames, liftLook, liftNow, liftProblems, liftRest, liftSum } from "./lift";
 import { liftButtonAt, liftDraw, liftLayout } from "./scene-figures";
 import { boxesDraw, boxesLayout, boxesOnBoard, boxesThingAt, boxesThingXY } from "./scene-figures";
+import { sortButtonAt, sortDraw, sortLayout, sortOnGo } from "./scene-figures";
+import { SORT_GO, sortAct, sortAt, sortButtons, sortCue, sortFrames, sortJars, sortMoves, sortNow, sortParts, sortProblems, sortRefusal, sortRemind, sortRest, sortSum, sortXY, type SortScene } from "./sort";
 import { boxesAct, boxesAt, boxesCue, boxesMany, boxesNow, boxesProblems, boxesRefusal, boxesRest, boxesSum, WORDS, type BoxesScene } from "./boxes";
 export type { PickFigure } from "./scene-figures";
 
@@ -137,7 +141,16 @@ export type TallyKind = Omit<TallyScene, "goal"> & Base;
 export const isLift = (s: Scene): boolean => s.kind === "tally" && liftLook(s);
 /** boxes@1: things in two boxes, counted, then put on a ten-spot board (boxes.ts). */
 export type BoxesKind = Omit<BoxesScene, "goal"> & Base;
-export type Scene = BoxesKind | TallyKind | PickScene | RatiosScene | TangentScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
+/** sort@1: buttons sorted into glass jars by colour, size, or both (sort.ts). */
+export type SortKind = Omit<SortScene, "goal"> & Base;
+/** sort@1 and lift@1: a scene with its own Start and Again, whose lines are said one after another and repeated when the
+ *  child does nothing for a while. */
+export const ownStart = (s: Scene): boolean => isLift(s) || s.kind === "sort";
+/** The tap that is Start for a scene with its own Start (the lift's 2, the sort's SORT_GO), or null. */
+export const startTap = (s: Scene): number | null => (s.kind === "sort" ? SORT_GO : isLift(s) ? 2 : null);
+/** How long the child may do nothing before what to do is said again (at most three times). */
+export const remindMs = (s: Scene): number => (s.kind === "sort" ? 7000 : 6000);
+export type Scene = SortKind | BoxesKind | TallyKind | PickScene | RatiosScene | TangentScene | StripsScene | SlopeScene | AccumulateScene | LineScene | TriangleScene | TransformScene | RectangleScene | JoinScene | FractionScene | NumberLineScene | ArrayScene | CommasScene | OrderScene | BarsScene;
 export type CurveScene = StripsScene | SlopeScene | AccumulateScene;
 export type SceneKind = Scene["kind"];
 
@@ -157,7 +170,9 @@ export type Shape =
 
 export const SCENE_BOX = { w: 340, h: 220 } as const;
 /** The box a scene is drawn in: 340 × 220, except the tall lift of a tally scene. */
-export const sceneBox = (s: Scene): { w: number; h: number } => (s.kind === "tally" ? (liftLook(s) ? { w: 340, h: liftLayout(s.tiles, liftFloors(s)).h } : TALLY_BOX) : s.kind === "boxes" ? (({ w, h }) => ({ w, h }))(boxesLayout(s.a, s.b)) : SCENE_BOX);
+export const sceneBox = (s: Scene): { w: number; h: number } => (s.kind === "tally" ? (liftLook(s) ? { w: 340, h: liftLayout(s.tiles, liftFloors(s)).h } : TALLY_BOX) : s.kind === "boxes" ? (({ w, h }) => ({ w, h }))(boxesLayout(s.a, s.b)) : s.kind === "sort" ? (({ w, h }) => ({ w, h }))(sortLay(s, {})) : SCENE_BOX);
+/** sort@1: the layout of a sort for a state (one jar, or two while a two-property part is sorted). */
+const sortLay = (s: SortKind, st: SceneState) => { const a = sortParts(s)[sortNow(s, st).part]; return sortLayout(s.counts.reduce((x, y) => x + y, 0), a.colour && a.size ? 2 : 1); };
 const L = 34, R = 326, T = 16, B = 190;
 
 const fin = (v: unknown): v is number => typeof v === "number" && Number.isFinite(v);
@@ -225,6 +240,7 @@ function tri(state: SceneState) { const a = state.a, b = Math.min(state.b, 170 -
 
 /** The controls of a scene: what can be set, on what grid, and where it starts. */
 export function controls(s: Scene): Control[] {
+  if (s.kind === "sort") return [{ key: "step", label: "Buttons sorted", min: 0, max: sortMoves(s), step: 1, start: 0 }];
   if (s.kind === "boxes") return [{ key: "step", label: "Steps done", min: 0, max: 2 * (s.a + s.b) - 1, step: 1, start: 0 }];
   if (s.kind === "tally") return [{ key: "dropped", label: "Tiles in the lift", min: 0, max: s.tiles.length, step: 1, start: 0 }];
   if (s.kind === "pick") return [{ key: "part", label: "Which part", min: 0, max: pickParts(s.figure).length, step: 1, start: 0 }];
@@ -265,6 +281,8 @@ export function set(s: Scene, state: SceneState, key: string, value: number): Sc
   if (!c || !fin(value)) return state;
   // boxes@1: the one slider steps through the counting and the placing, in the plain order
   if (s.kind === "boxes") return boxesAt(s, value);
+  // sort@1: the one slider is the buttons moved, in the plain order
+  if (s.kind === "sort") return sortAt(s, Math.min(c.max, Math.max(c.min, value)));
   // lift@1: the slider sets the moves done; the lift is then on the floor they end on
   if ((s.kind === "tally" && liftLook(s))) { const n = Math.round(Math.min(c.max, Math.max(c.min, value))), { p: _p, dropped: _d, no: _n, nb: _b, ...keep } = liftRest(state); return { ...keep, go: 1, p: liftCum(s.tiles)[n] }; }
   const steps = Math.round((Math.min(c.max, Math.max(c.min, value)) - c.min) / c.step);
@@ -337,6 +355,7 @@ function joinOf(s: JoinScene, state: SceneState) {
 export function measures(s: Scene, state: SceneState): Record<string, number> {
   if ((s.kind === "tally" && liftLook(s))) { const n = liftNow(s, state); return { total: tallyAt(s.start, s.tiles, n.moves), dropped: n.moves }; }
   if (s.kind === "tally") return { total: tallyTotal(s, state), dropped: state.dropped };
+  if (s.kind === "sort") { const n = sortNow(s, state); return { done: n.finished ? 1 : 0, step: n.step }; }
   if (s.kind === "boxes") { const b = boxesNow(s, state); return { placed: b.placed, counted: b.counted, step: b.step }; }
   if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return { part: state.part, wrong: id !== undefined && s.ask.includes(id) ? 0 : 1 }; }
   if (s.kind === "tangent") { const t = tangentOf(s.a, s.b, state.turn); return { turn: state.turn, x: r6(t.x), y: r6(t.y), flat: t.flat ? 1 : 0, upright: t.upright ? 1 : 0, slope: t.upright ? 0 : r6(t.slope), sloped: t.upright ? 0 : 1 }; }
@@ -381,7 +400,7 @@ export function measures(s: Scene, state: SceneState): Record<string, number> {
   if (s.kind === "slope") return { x: state.x, value: f.value(state.x), slope: f.slope(state.x) };
   return { x: state.x, height: f.value(state.x), total: f.area(s.from, state.x), width: state.x - s.from };
 }
-const MEASURES: Record<SceneKind, string[]> = { boxes: ["placed", "counted", "step"], tally: ["total", "dropped"], tangent: ["turn", "x", "y", "flat", "upright", "slope", "sloped"], pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved", "size"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
+const MEASURES: Record<SceneKind, string[]> = { sort: ["done", "step"], boxes: ["placed", "counted", "step"], tally: ["total", "dropped"], tangent: ["turn", "x", "y", "flat", "upright", "slope", "sloped"], pick: ["part", "wrong"], ratios: ["angle", "size", "sin", "cos", "tan"], bars: ["y", "miss", "above"], order: ["wrong", "first", "last"], commas: ["a", "b", "c", "miss"], fraction: ["n", "k", "miss", "ahead", "behind", "other", "exact"], numberline: ["x", "moved", "size"], array: ["rows", "cols", "count", "off", "left"], strips: ["n", "sum", "exact", "gap", "gapPercent"], slope: ["x", "value", "slope"], accumulate: ["x", "height", "total", "width"], line: ["m", "c", "miss"], triangle: ["a", "b", "c", "sum", "miss"], transform: ["a", "b", "c", "d", "det", "miss"], rectangle: ["w", "h", "perimeter", "area", "off", "shortOfBest"], join: ["k", "left", "right", "point", "gap", "miss"] };
 
 /** Whether the goal is reached in this state. */
 export function met(s: Scene, state: SceneState): boolean {
@@ -411,6 +430,8 @@ export function triedLine(s: Scene, rows: number): string | null {
 export function nudge(s: Scene, state: SceneState): string | null {
   // boxes@1: a tap on the box that is not its turn: which box (it shakes; the words are also said)
   if (s.kind === "boxes") return state.refused ? boxesRefusal(state.refused) : null;
+  // sort@1: a button that does not belong: what it is ("No. That one is small.")
+  if (s.kind === "sort") return sortRefusal(s, state);
   // tally@1: a tile dropped out of turn went back; the one to drop now is named (it is the next tile, not an answer)
   // lift@1: the other button pressed: which way to go
   if ((s.kind === "tally" && liftLook(s))) { const n = liftNow(s, state); return state.no && n.want ? LIFT.wrong(n.want) : null; }
@@ -440,6 +461,7 @@ export function nudge(s: Scene, state: SceneState): string | null {
 
 export function readout(s: Scene, state: SceneState): string {
   // boxes@1: nothing while counting; "3 and 2" once both boxes are counted; "3 + 2 = 5" at the end
+  if (s.kind === "sort") return sortSum(s, state);
   if (s.kind === "boxes") { const b = boxesNow(s, state); return b.phase === "done" && !state.w && !state.wait ? `${s.a} + ${s.b} = ${s.a + s.b}` : b.phase !== "count" && !state.stay ? `${s.a} and ${s.b}` : ""; }
   if ((s.kind === "tally" && liftLook(s))) return liftSum(s, state);
   if (s.kind === "tally") {
@@ -507,6 +529,18 @@ const TU = 26, TX = (x: number) => px(170 + TU * x), TY = (y: number) => px(110 
 
 /** What to draw for a state. */
 export function draw(s: Scene, state: SceneState): Shape[] {
+  if (s.kind === "sort") {
+    const n = sortNow(s, state), L = sortLay(s, state), B = sortButtons(s.counts), jars = sortJars(s, state), still = state.w || state.ph || state.pd;
+    const can = n.started && !n.finished && !still ? B.map((_, i) => i).filter((i) => n.loc[i] === n.from) : [];
+    return sortDraw(L, {
+      buttons: B, xy: B.map((_, i) => sortXY(s, state, i)), inJar: n.loc.map((l) => l > 0), can,
+      jars: jars.map((j, k) => ({ ...j, n: n.jar[k], glow: n.started && !n.finished && !state.ph && n.into === k + 1 })),
+      go: state.fb || still || state.gx !== undefined ? null : !n.started ? "start" : n.finished ? "again" : null,
+      ...(state.nb ? { shake: { i: state.nb - 1, odd: (state.no ?? 0) % 2 === 1 } } : {}),
+      ...(state.fb ? { fly: { i: state.fb - 1, x: state.fx, y: state.fy, k: state.fk / 100 } } : {}),
+      ...(state.gx !== undefined ? { finger: [state.gx, state.gy] as [number, number] } : {}),
+    });
+  }
   if (s.kind === "boxes") {
     const b = boxesNow(s, state), L = boxesLayout(s.a, s.b), n = s.a + s.b;
     const glow = state.w ? 0 : state.stay ? (b.counted <= s.a ? 1 : 2) : b.want;
@@ -733,6 +767,7 @@ export function grip(s: Scene, state: SceneState, x: number, y: number): number 
   }
   if ((s.kind === "tally" && liftLook(s))) { const n = liftNow(s, state); return liftButtonAt(x, y, !n.started || n.finished); }
   if (s.kind === "tally") return tallyTileAt(s.tiles.length, tallyOrder(s, state), x, y);
+  if (s.kind === "sort") return sortGrip(s, state, x, y);
   if (s.kind === "boxes") return boxesThingAt(boxesLayout(s.a, s.b), s.a, s.b, boxesNow(s, state).gone, x, y);
   if (s.kind !== "transform") return 0;
   const mx = (x - 170) / TU, my = (110 - y) / TU, d0 = Math.hypot(mx - state.a, my - state.b), d1 = Math.hypot(mx - state.c, my - state.d);
@@ -742,6 +777,8 @@ export function grip(s: Scene, state: SceneState, x: number, y: number): number 
 /** A touch or drag at a point of the 340 × 220 box. Draggable scenes follow the finger; others are unchanged.
  *  `hold` is the handle taken at the start of the drag (see `grip`); without it the nearer handle is taken. */
 export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?: number): SceneState {
+  // sort@1: a finger on a button (or on Start) holds it; it is tapped when the finger lifts on it
+  if (s.kind === "sort") { const i = hold ?? grip(s, state, x, y); return i < 0 ? state : { ...state, held: i }; }
   // lift@1: a finger on a button holds it down (it is pressed when the finger lifts)
   if ((s.kind === "tally" && liftLook(s))) { const i = hold ?? grip(s, state, x, y); return i < 0 ? state : { ...state, held: i }; }
   if (s.kind === "tally" || s.kind === "boxes") {
@@ -802,6 +839,7 @@ export function pointer(s: Scene, state: SceneState, x: number, y: number, hold?
  * on the tray, it goes back. Every other kind is unchanged by letting go.
  */
 export function release(s: Scene, state: SceneState, x: number, y: number): SceneState {
+  if (s.kind === "sort") return state.held === undefined ? state : sortGrip(s, state, x, y) === state.held ? sortAct(s, state, state.held) : sortRest(state);
   if (s.kind === "boxes") {
     // boxes@1: while counting, any touch on a thing is a tap; then a thing tapped, or let go on the board, goes on it
     if (state.held === undefined) return state;
@@ -819,18 +857,27 @@ export function release(s: Scene, state: SceneState, x: number, y: number): Scen
 }
 
 /** lift@1: what is said again when nothing has been pressed for a while ("Press down. Four more."), or null. */
-export const remind = (s: Scene, state: SceneState): string | null => (s.kind === "tally" && liftLook(s) ? liftRemind(s, state) : null);
+export const remind = (s: Scene, state: SceneState): string | null => (s.kind === "tally" && liftLook(s) ? liftRemind(s, state) : s.kind === "sort" ? sortRemind(s, state) : null);
 
 /** play@1: whether a move made while pictures still play waits its turn. A lift button pressed the wrong way meanwhile is
  *  dropped (refused seconds later, it would point at nothing); every other move is queued. */
-export const queueable = (s: Scene, from: SceneState, to: SceneState): boolean => !(s.kind === "tally" && liftLook(s) && (to.no ?? 0) > (from.no ?? 0));
+export const queueable = (s: Scene, from: SceneState, to: SceneState): boolean => !(s.kind === "tally" && liftLook(s) && (to.no ?? 0) > (from.no ?? 0)) && !(s.kind === "sort" && from.sn);
+/** sort@1: what a touch at (x, y) takes hold of: Start / Again when it is shown, else a button that can be tapped now
+ *  (on the table, or in the first jar when sorting twice), or −1. */
+function sortGrip(s: SortKind, state: SceneState, x: number, y: number): number {
+  const n = sortNow(s, state), L = sortLay(s, state), B = sortButtons(s.counts);
+  if ((!n.started || n.finished) && sortOnGo(L, x, y)) return SORT_GO;
+  if (!n.started || n.finished) return -1;
+  const xy = B.map((_, i) => sortXY(s, state, i)), can = B.map((_, i) => i).filter((i) => n.loc[i] === n.from);
+  return sortButtonAt(xy, B.map((b, i) => (n.loc[i] ? 23 : b.s === "big" ? 32 : 28)), can, x, y);
+}
 
 /** boxes@1: thing `i` pressed by keyboard (Enter on it): the same as a tap. Other kinds are unchanged. */
-export const press = (s: Scene, state: SceneState, i: number): SceneState => (s.kind === "boxes" ? boxesAct(s as BoxesScene, state, i) : (s.kind === "tally" && liftLook(s)) ? liftAct(s, state, i) : state);
+export const press = (s: Scene, state: SceneState, i: number): SceneState => (s.kind === "sort" ? sortAct(s, state, i) : s.kind === "boxes" ? boxesAct(s as BoxesScene, state, i) : (s.kind === "tally" && liftLook(s)) ? liftAct(s, state, i) : state);
 
 /** boxes@1: the short line shown above the picture for a state ("Count this box", "Watch", "Now you"); null for a kind
  *  whose line is its prompt. */
-export const cue = (s: Scene, state: SceneState): string | null => (s.kind === "boxes" ? boxesCue(s as BoxesScene, state) : (s.kind === "tally" && liftLook(s)) ? liftCue(s, state) : null);
+export const cue = (s: Scene, state: SceneState): string | null => (s.kind === "sort" ? sortCue(s as unknown as SortScene, state) : s.kind === "boxes" ? boxesCue(s as BoxesScene, state) : (s.kind === "tally" && liftLook(s)) ? liftCue(s, state) : null);
 
 /** One picture of a move, and how long it stays before the next (`motion`: only movement; left out for reduced motion).
  *  `say`: what is said as it is shown (boxes@1: every number counted, and what to do next). `sound`: a ding as it is
@@ -876,6 +923,7 @@ function boxesFrames(s: BoxesKind, prev: SceneState, next: SceneState): Frame[] 
  * at 0; a tile let go that goes back slides home.
  */
 export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
+  if (s.kind === "sort") return sortFrames(s, prev, next);
   if (s.kind === "boxes") return boxesFrames(s, prev, next);
   if ((s.kind === "tally" && liftLook(s))) return liftFrames(s, prev, next);
   if (s.kind !== "tally") return [{ state: next, ms: 0 }];
@@ -897,6 +945,10 @@ export function frames(s: Scene, prev: SceneState, next: SceneState): Frame[] {
 
 /** The picture in words, for a screen reader. It says what can be moved, never the answer. */
 export function describe(s: Scene): string {
+  if (s.kind === "sort") {
+    const parts = sortParts(s), say = (a: { colour?: string; size?: string }) => (a.colour && a.size ? `${a.colour} and ${a.size}, sorted twice: first every ${a.colour} button into a first jar, then the ${a.size} ones of those into a second jar` : `${a.colour ?? a.size}, into a glass jar`);
+    return `Sewing buttons on a wooden table, red and blue, big and small. Under the table, glass jars with a tag showing which buttons go in. Tap Start. Then tap each button that belongs: it goes into the jar and the count is said aloud. A button that does not belong is refused and named. ${parts.length > 1 ? `First the buttons that are ${say(parts[0])}; then those that are ${say(parts[1])}.` : `The buttons that are ${say(parts[0])}.`} ${s.prompt}`;
+  }
   if (s.kind === "boxes") return `Two boxes of ${s.names[1]}: ${s.a} in the first box and ${s.b} in the second, and a wooden counting board with ten spots in two rows of five. First count the ${s.names[1]} in each box by tapping each one. Then put them on the board one by one, the first box first, by tapping them or dragging them to the board. Every number is said aloud. ${s.prompt}`;
   if ((s.kind === "tally" && liftLook(s))) {
     const [lo] = liftFloors(s);
@@ -967,7 +1019,10 @@ export function check(v: unknown): string[] {
   const g = s.goal;
   if (!g || typeof g !== "object" || !MEASURES[s.kind].includes(g.measure)) bad.push("goal names no measure of this kind");
   else if ((g.equals === undefined) === (g.below === undefined) || !fin(g.equals ?? g.below) || (g.tol !== undefined && !(fin(g.tol) && g.tol >= 0))) bad.push("goal needs exactly one finite target");
-  if (s.kind === "boxes") {
+  if (s.kind === "sort") {
+    bad.push(...sortProblems(s));
+    if (!bad.length && g && g.measure !== "done") bad.push("the goal is the sort done");
+  } else if (s.kind === "boxes") {
     bad.push(...boxesProblems(s as unknown as BoxesScene));
     if (!bad.length && g && g.measure === "placed" && g.equals !== s.a + s.b) bad.push("the goal is every thing on the board");
   } else if (s.kind === "tally") {

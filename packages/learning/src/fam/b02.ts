@@ -186,7 +186,11 @@ export const B02: Def[] = [
         : s.id === "second"
           ? ["The buttons we kept already match the first thing, so now we keep only those that also match the second."]
           : ["Only one thing has to match, so we tick every button that has it and count the ticks."]),
-    explain: (s) => (s.id === "first" ? `First find the ${s.inputs[0]} buttons: there are ${s.value}.` : s.id === "second" ? `Of the ${s.inputs[1]} buttons, the ${s.inputs[0]} ones are: ${s.value}.` : `Tick every ${s.inputs[0]} button: there are ${s.value}.`),
+    explain: (s) => {
+      // "there is 1", "there are 2"
+      const are = (n: unknown) => `there ${n === 1 ? "is" : "are"} ${n}`;
+      return s.id === "first" ? `First find the ${s.inputs[0]} buttons: ${are(s.value)}.` : s.id === "second" ? `Of the ${s.inputs[1]} buttons, the ${s.inputs[0]} ones are: ${s.value}.` : `Tick every ${s.inputs[0]} button: ${are(s.value)}.`;
+    },
     figure: (p) => ({ type: "table", head: ["Button", "Colour", "Size"], rows: buttons(p).map(([c, s], i) => [i + 1, c, s]) }),
     domain: [[0, 4], [0, 4], [0, 4], [0, 4], [0, 7]],
     keep: (p) => {

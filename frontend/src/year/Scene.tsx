@@ -11,7 +11,7 @@ import { createElement, useEffect, useMemo, useRef, useState, type JSX, type Key
 import type { Mark } from "../../../packages/learning/src/figure-marks";
 import { canSpeak, sayAloud } from "./Chintu";
 import { Playback, type PlayHooks } from "../../../packages/learning/src/scene-play";
-import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, remind, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
+import { check, controls, cue, describe, draw, draggable as follows, grip, initial, isLift, met, ownStart, remind, remindMs, startTap, nudge, pointer, press, readout, release, sceneBox, set, tallyOrder, type Scene, type SceneState, type Shape, triedLine } from "../../../packages/learning/src/scene";
 
 /** lift@1: the lift's ding as it reaches a floor (`high` for the ground floor). Quietly nothing where there is no sound. */
 let audio: AudioContext | null = null;
@@ -58,7 +58,7 @@ function shape(s: Shape, i: number, onTap?: (i: number, e: KeyboardEvent<SVGElem
  * at the learner's first touch on or near the picture (never as the page opens). `young`: a Class 1–3 child, who gets no
  * "Set by sliders" (the focused picture still answers the arrow keys).
  */
-export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: () => void; speakNow?: boolean; young?: boolean }) {
+export function ScenePlayer({ scene, onReached, speakNow = false, young = false }: { scene: Scene; onReached?: (state: SceneState) => void; speakNow?: boolean; young?: boolean }) {
   const ok = useMemo(() => check(scene).length === 0, [scene]);
   const [state, setState] = useState<SceneState>(() => (ok ? initial(scene) : {}));
   const [reached, setReached] = useState(false);
@@ -90,33 +90,47 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   // boxes@1 speaks every move: each picture of a move can carry a line (Frame.say), and the speaker repeats the last one
   // lift@1: the lift ride speaks every line itself, from its frames (and has its own Start), so nothing else is said
   const lift = ok && isLift(scene);
-  const talks = ok && (scene.kind === "boxes" || lift);
+  // sort@1: the button sort, like the lift, has its own Start and Again, says its lines one after another, and reminds
+  const own = ok && ownStart(scene);
+  const talks = ok && (scene.kind === "boxes" || own);
   const speaks = ok && (scene.kind === "tally" || talks);
   const refusal = speaks && touched ? nudge(scene, state) : null;
   const lastSaid = useRef<string | null>(null);
   // boxes@1: the instruction is said at the first tap and that tap still counts, so the two are said as one line
   const pre = useRef<string | null>(null);
   // lift@1: its lines wait for the one being said (a floor word never cuts "Down, not up."); Start and Again begin afresh
-  const say = (t?: string, fresh = false) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line, undefined, lift && !fresh); };
+  // sort@1: a reminder still being said is cut short by what the next tap says (the mock's hush), so a count is not late
+  const reminding = useRef(false);
+  const say = (t?: string, fresh = false) => { if (!t) return; const line = pre.current ? `${pre.current} ${t}` : t; pre.current = null; lastSaid.current = line; sayAloud(line, undefined, own && !fresh && !reminding.current); reminding.current = false; };
   const [doneNow, setDoneNow] = useState(false);
   // said after a tap only: as the page opens it would talk before the child has done anything (and Android Chrome blocks it)
   const said = useRef(false);
-  const sayFirst = () => { if (speaks && !lift && !said.current) { said.current = true; lastSaid.current = scene.prompt; sayAloud(scene.prompt); } };
+  const sayFirst = () => { if (speaks && !own && !said.current) { said.current = true; lastSaid.current = scene.prompt; sayAloud(scene.prompt); } };
   // boxes@1: the first tap only starts (says what to do), where the phone can speak: the mock's "Start"
-  const starting = () => { if (!talks || lift || said.current || !canSpeak()) return false; said.current = true; pre.current = scene.prompt; return false; };
-  useEffect(() => { if (speakNow) sayFirst(); }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
+  const starting = () => { if (!talks || own || said.current || !canSpeak()) return false; said.current = true; pre.current = scene.prompt; return false; };
+  // break-it-down@2: opened by a tap, the picture comes into view; a scene with its own Start (the lift, the sort) begins at
+  // once, so what to do is said on that same tap instead of a silent picture below the screen
+  const fig = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!speakNow) return;
+    sayFirst();
+    const still = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    fig.current?.scrollIntoView?.({ block: "center", behavior: still ? "auto" : "smooth" });
+    const k = own ? startTap(scene) : null;
+    if (k !== null) playback.current!.apply(press(scene, playback.current!.live, k));
+  }, [speakNow, speaks, scene]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (refusal && !talks) sayAloud(refusal); }, [refusal, state.refused]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (speaks && !talks && doneNow && !scene.quiet) sayAloud(scene.success); }, [speaks, talks, doneNow, scene]);
   const reachedNow = useRef(false);
   // lift@1: stuck in the middle of a ride (nothing pressed for 6 s), the move is said again, a few times at most
   useEffect(() => {
-    if (!lift || shown !== null) return;
+    if (!own || shown !== null) return;
     const line = remind(scene, state);
     if (!line) return;
     let n = 0;
-    const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; sayAloud(line, undefined, true); }, 6000);
+    const id = setInterval(() => { if (++n > 3) { clearInterval(id); return; } lastSaid.current = line; reminding.current = true; sayAloud(line, () => { reminding.current = false; }, true); }, remindMs(scene));
     return () => clearInterval(id);
-  }, [lift, shown, state, scene]);
+  }, [own, shown, state, scene]);
   if (!ok) return <p className="hint" role="note" data-scene="unavailable">This picture is not available.</p>;
 
   const gate = scene.first && picked !== scene.first.right ? scene.first : null;
@@ -129,7 +143,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     },
     show: setShown,
     frame: (f) => { say(f.say, f.fresh); if (f.sound) ding(f.sound === 2); },
-    done: (next) => { setTaken(null); if (met(scene, next)) { if (!reachedNow.current) onReached?.(); reachedNow.current = true; setReached(true); setDoneNow(true); } },
+    done: (next) => { setTaken(null); if (met(scene, next)) { if (!reachedNow.current) onReached?.(next); reachedNow.current = true; setReached(true); setDoneNow(true); } },
     // a tile tapped while the counter is still counting is shown taken until its turn
     queued: (from, to) => { if (scene.kind === "tally" && !lift) { const was = tallyOrder(scene, from), now = tallyOrder(scene, to); if (now.length > was.length) setTaken(now[now.length - 1]); } },
     later: () => null,
@@ -143,10 +157,10 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
   const move = (e: PointerEvent<SVGSVGElement>) => { const [x, y] = at(e); apply(pointer(scene, live.current, x, y, hold.current)); };
   const letGo = (e: PointerEvent<SVGSVGElement>) => { if (!dragging.current) return; dragging.current = false; const [x, y] = at(e); apply(release(scene, live.current, x, y)); };
   // (a lift ride can be ridden Again: it is done only while it stands at the end)
-  const done = !busy && (lift ? met(scene, state) : reached || met(scene, state));
+  const done = !busy && (own ? met(scene, state) : reached || met(scene, state));
   // boxes@1 by keyboard: Enter on a thing is a tap; focus stays on that thing, or goes to the first one left
   const tapKey = (i: number, e: KeyboardEvent<SVGElement>) => {
-    if (starting() || (busy && !lift)) return;
+    if (starting() || (busy && !own)) return;
     const svg = e.currentTarget.ownerSVGElement;
     apply(press(scene, live.current, i));
     setTimeout(() => { const el = svg?.querySelector<SVGElement>(`[data-tap="${i}"]`) ?? svg?.querySelector<SVGElement>("[data-tap]"); el?.focus(); }, 0);
@@ -160,7 +174,7 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
     </label>
   ));
   return (
-    <figure className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"} data-look={lift ? "lift" : undefined}
+    <figure ref={fig} className="scene" role="group" aria-label={describe(scene)} data-scene={scene.kind} data-scene-done={done ? "yes" : "no"} data-look={lift ? "lift" : undefined}
       onPointerDown={speaks ? sayFirst : undefined}
       {...(scene.kind === "tally" ? {
         // the lift by keyboard: the picture takes focus, and the arrow keys put a tile in (→ ↑) or take the last out (← ↓);
@@ -180,12 +194,12 @@ export function ScenePlayer({ scene, onReached, speakNow = false, young = false 
         },
       } : {})}>
       {/* what to do is read before the picture, not found under it */}
-      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet && !lift ? scene.success : line ?? scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onPointerDown={(e) => e.stopPropagation()} onClick={() => { said.current = true; if (talks) { sayAloud(lastSaid.current ?? (lift ? "Tap Start." : scene.prompt)); return; } sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt)); }}><span aria-hidden="true">🔊</span></button>}</p>}
+      {!gate && <p className={`scene-goal${done && !scene.quiet ? " done" : ""}`} role="status">{done && !scene.quiet && !own ? scene.success : line ?? scene.prompt}{speaks && canSpeak() && <button type="button" className="scene-say" aria-label="Say it again" data-testid="scene-say" onPointerDown={(e) => e.stopPropagation()} onClick={() => { said.current = true; if (talks) { sayAloud(lastSaid.current ?? (own ? "Tap Start." : scene.prompt)); return; } sayAloud(refusal ?? (done && !scene.quiet ? scene.success : scene.prompt)); }}><span aria-hidden="true">🔊</span></button>}</p>}
       {!(gate && gate.hide) && <svg
         viewBox={`0 0 ${box.w} ${box.h}`}
         aria-hidden={talks ? undefined : "true"}
-        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : scene.kind === "boxes" || lift ? "scene-drag scene-things" : "scene-drag") : undefined}
-        onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally")) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (!dragging.current && pre.current && !(e.target as Element).closest?.("[data-tap]")) { const p = pre.current; pre.current = null; lastSaid.current = p; sayAloud(p); } if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
+        className={draggable ? (scene.kind === "pick" ? "scene-drag scene-tap" : scene.kind === "boxes" || own ? "scene-drag scene-things" : "scene-drag") : undefined}
+        onPointerDown={draggable ? (e) => { if (starting() || (busy && scene.kind !== "tally" && !own)) return; const [x, y] = at(e); hold.current = grip(scene, live.current, x, y); dragging.current = hold.current >= 0; if (!dragging.current && pre.current && !(e.target as Element).closest?.("[data-tap]")) { const p = pre.current; pre.current = null; lastSaid.current = p; sayAloud(p); } if (dragging.current) { e.currentTarget.setPointerCapture?.(e.pointerId); move(e); } } : undefined}
         onPointerMove={draggable ? (e) => { if (dragging.current) move(e); } : undefined}
         onPointerUp={draggable ? letGo : undefined}
         onPointerCancel={draggable ? () => { if (!dragging.current) return; dragging.current = false; apply(release(scene, live.current, -box.w, box.h)); } : undefined}
