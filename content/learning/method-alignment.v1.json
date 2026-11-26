@@ -4,7 +4,7 @@
     {
       "competency": "MATH.calculus.derivatives",
       "strategy": "spot_the_mistake",
-      "contentHash": "9aa2fdf464f41368cc5b3b6038b96113bcbfd042dcc7d306a0c50f96f406995d",
+      "contentHash": "2f1217da8ecd48e211dc68857a312fb5aaab733277f13dd267c718e588924421",
       "methods": [
         "difference-quotient",
         "quadratic-expansion"
@@ -14,7 +14,7 @@
     {
       "competency": "MATH.calculus.derivatives",
       "strategy": "expand_cancel",
-      "contentHash": "b1d8605524f2cc39c484af98c685bbf10a5be80148c613a0f99b04f507b2b775",
+      "contentHash": "b014c1638bca949c7cb7775725756b42a5f9fa999610f07dfbd425559abf1e44",
       "methods": [
         "difference-quotient",
         "quadratic-expansion"
@@ -24,7 +24,7 @@
     {
       "competency": "MATH.calculus.derivatives",
       "strategy": "why_limit",
-      "contentHash": "cdbb8fc716f7a063957c603d95ad135cab81ec3c64343b73537c6c1fa570077c",
+      "contentHash": "480d42472f42b0370fad61edad71920fec0484678e518e89a997466ade5605ad",
       "methods": [
         "difference-quotient",
         "quadratic-expansion"
@@ -34,7 +34,7 @@
     {
       "competency": "MATH.geometry.triangle-properties",
       "strategy": "worked_steps",
-      "contentHash": "2685804a7fd251b1fb11e961311a046b73881b5586e28325be3fbf09a6a5bfd1",
+      "contentHash": "a216a328848840958b725b21aba823ad108ecdfca7d691a3305805f2a2722e94",
       "methods": [
         "triangle-angle-sum"
       ],
@@ -122,7 +122,7 @@
     {
       "competency": "MATH.calculus.integration-methods",
       "strategy": "why_du",
-      "contentHash": "006907cb5dd9e778780669c34a66d342450bfd19a73aaef894410876d3cf3d2f",
+      "contentHash": "7a2da54fe6784c9a1e0ff1c5573e7d5bc340db99af22772c5e4d352ffa8ef1b2",
       "methods": [
         "quadratic-substitution",
         "change-integral-limits",
@@ -134,7 +134,7 @@
     {
       "competency": "MATH.calculus.integration-methods",
       "strategy": "limits_table",
-      "contentHash": "b6c01733561335ac4c7311beef83be1e5ded444ceab1c7a0bab3316627ebeded",
+      "contentHash": "26772c7e750d34262f2fb67bd702753937d59a06f4a7a8873ea356a4633a2ec0",
       "methods": [
         "quadratic-substitution",
         "change-integral-limits",
