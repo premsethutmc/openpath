@@ -63,7 +63,15 @@ export function useOwnNumbers(spec: VarySpec | null, where?: { competency?: stri
       ? <TileInput key={k} value={edit.draft} label={`Change ${p.value}`} onType={(v) => type(p.tap, v)} onDone={close} />
       : <button key={k} type="button" className={`own-tile${hint && !touched ? " pulse" : ""}`} aria-label={what} data-own={p.tap} onClick={() => open(p.tap)}>{p.value}</button>;
   };
-  const line = (text: string) => <>{fillParts(text, values).map((p, k) => (typeof p === "string" ? <Fragment key={k}>{mx(p)}</Fragment> : tile(p, k)))}</>;
+  const line = (text: string) => {
+    const parts = fillParts(text, values);
+    // a matrix written in the sentence ([[a, b], [c, d]]) is drawn from the whole sentence, so its tiles follow it
+    if (/\[\[/.test(text) && parts.some((p) => typeof p !== "string")) {
+      const whole = parts.map((p) => (typeof p === "string" ? p : String(p.value))).join("");
+      return <>{mx(whole)}<span className="own-row"> Change: {parts.filter((p): p is Exclude<Part, string> => typeof p !== "string").map((p, k) => tile(p, k))}</span></>;
+    }
+    return <>{parts.map((p, k) => (typeof p === "string" ? <Fragment key={k}>{mx(p)}</Fragment> : tile(p, k)))}</>;
+  };
   const text = (t: string) => fillParts(t, values).map((p) => (typeof p === "string" ? p : String(p.value))).join("");
   return {
     values, changed, line, text,

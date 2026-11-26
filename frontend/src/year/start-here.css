@@ -35,3 +35,4 @@
 .own-hint{margin:0;color:var(--accent-ink,#7a4a00);font-weight:700;font-size:.95rem}
 .own-note{margin:-4px 0 0;color:var(--bad-ink,#8f4524);font-size:.95rem}
 .own-back{min-height:40px;font-weight:700}
+.own-row{display:block;margin-top:6px;font-size:.95rem;color:var(--muted,#5f6b84);font-weight:700}
