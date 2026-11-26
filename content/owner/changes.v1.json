@@ -18,7 +18,7 @@
   },
   {
    "date": "2026-11-25",
-   "status": "built",
+   "status": "live",
    "title": "Sorting buttons: tap them into glass jars",
    "what": "Class 1 sorting is now the approved button design instead of sentences. Red and blue, big and small sewing buttons lie on a wooden table. The child taps Start; a finger shows one big button going into the jar ('one'), then 'Now you'. Each right tap flies a button into the jar and says the count; a wrong one shakes ('No. That one is small.'). Then 'red AND big' is sorted twice: all the red ones into jar 1, then the big ones out of those into jar 2 ('two buttons are red and big.'), with Again (under the jars, never over a button). Everything is spoken, lines never cut each other off, quick taps all count, and what to do is said again after 7 seconds of nothing. A sorting question's 'Break it down' in the lesson now shows the same sort with that question's own buttons, and 'there are 1' now reads 'there is 1'. Questions read aloud no longer end in a stray 'what' (\"which are big what\"). The 'Now you try' after it is now two more sorts with other buttons (one thing, then two), spoken, with no words to read; a sort with nothing refused counts as right the first time. 'Break it down' (the sort, and the lift) now scrolls the picture into view and starts it at once, so it is heard straight away; a reminder is cut short when the child taps.",
    "links": [
@@ -27,12 +27,12 @@
      "href": "/year/#try-skill=MATH.reasoning.sort-by-attribute"
     }
    ],
-   "pr": null,
-   "commit": null
+   "pr": 367,
+   "commit": "b2bd7fb"
   },
   {
    "date": "2026-11-25",
-   "status": "built",
+   "status": "live",
    "title": "Absolute value: a live number line instead of a still picture",
    "what": "In the polygon-area skill (Class 10–11), the Start here idea on the | | bars now has a number line the learner slides. A bar from 0 to the point shows its distance from 0 and reads |−4| = 4. The lift story and the 'removes a minus sign' shortcut are gone; the text now says plainly why the area formula needs the bars.",
    "links": [
@@ -41,8 +41,8 @@
      "href": "/year/#try-skill=MATH.coordinate.polygon-area"
     }
    ],
-   "pr": null,
-   "commit": null
+   "pr": 365,
+   "commit": "5ff69a3"
   },
   {
    "date": "2026-11-25",
