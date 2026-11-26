@@ -437,7 +437,9 @@ export function nudge(s: Scene, state: SceneState): string | null {
   if ((s.kind === "tally" && liftLook(s))) { const n = liftNow(s, state); return state.no && n.want ? LIFT.wrong(n.want) : null; }
   if (s.kind === "tally") return state.refused && state.dropped < s.tiles.length ? `Not yet. First the ${tallyTileLabel(s.tiles, state.dropped, s.start, s.unit, s.goTo)} tile.` : null;
   // pick-nudge@1: a wrong tap is named back (what that part is), with the scene's own hint; never which part is right
-  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined || s.ask.includes(id) ? null : `That is ${pickName(s.figure, id)}. ${s.hint}`; }
+  // pick-nudge@2: where the question names a place (row 1, column 3; the point (2, −1)) the readout already says which
+  // place was tapped, so the nudge says what is off and which way to go, not the same words again
+  if (s.kind === "pick") { const id = pickParts(s.figure)[state.part - 1]; return id === undefined || s.ask.includes(id) ? null : pickWay(s.figure, id, s.ask[0]) ?? `That is ${pickName(s.figure, id)}. ${s.hint}`; }
   // a point carried to the far end of its line: how far that was, and a pointer to the other end (never which is right)
   if (s.kind === "numberline" && s.jump && !s.quiet && s.goal.measure === "x" && (state.x === s.from || state.x === s.to) && state.x !== s.goal.equals) {
     const steps = Math.abs(r6(state.x - s.start));
@@ -1118,4 +1120,26 @@ export function check(v: unknown): string[] {
   if (!reachable) for (const st of states(s)) if (met(s, st)) { reachable = true; break; }
   if (!reachable) bad.push("no reachable state reaches the goal");
   return bad;
+}
+
+/** pick-nudge@2: what is off in a tapped place, and which way to move, for pictures whose places the question names. */
+export function pickWay(f: PickFigure, chosen: string, want: string | undefined): string | null {
+  if (!want) return null;
+  const n = (k: number, one: string, many: string) => `${k} ${k === 1 ? one : many}`;
+  if (f.of === "matrix" && /^e:/.test(chosen) && /^e:/.test(want)) {
+    const [r, c] = chosen.slice(2).split(",").map(Number), [R, C] = want.slice(2).split(",").map(Number);
+    const col = c === C ? "" : `you need column ${C}, ${n(Math.abs(C - c), "column", "columns")} to the ${C > c ? "right" : "left"}`;
+    const row = r === R ? "" : `you need row ${R}, ${n(Math.abs(R - r), "row", "rows")} ${R > r ? "down" : "up"}`;
+    if (!row) return `That is column ${c}. The row is right: ${col}. Columns go down and are counted from the left.`;
+    if (!col) return `That is row ${r}. The column is right: ${row}. Rows go across and are counted from the top.`;
+    return `That is row ${r}, column ${c}. Row first: ${row}. Then ${col}.`;
+  }
+  if (f.of === "plane" && /^p:/.test(chosen) && /^p:/.test(want)) {
+    const [x, y] = chosen.slice(2).split(",").map(Number), [X, Y] = want.slice(2).split(",").map(Number);
+    const fmt = (v: number) => (v < 0 ? `−${-v}` : String(v));
+    const across = x === X ? "" : `go ${n(Math.abs(X - x), "step", "steps")} to the ${X > x ? "right" : "left"} (the first number, x, is ${fmt(X)})`;
+    const up = y === Y ? "" : `go ${n(Math.abs(Y - y), "step", "steps")} ${Y > y ? "up" : "down"} (the second number, y, is ${fmt(Y)})`;
+    return `That is (${fmt(x)}, ${fmt(y)}). ${[across, up].filter(Boolean).map((t, i) => (i ? `then ${t}` : t[0].toUpperCase() + t.slice(1))).join(", ")}.`;
+  }
+  return null;
 }

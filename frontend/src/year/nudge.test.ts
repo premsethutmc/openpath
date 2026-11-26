@@ -43,3 +43,13 @@ test("rounding in practice: the point is carried to each round number and the st
   assert.ok(n > 100, String(n));
   assert.equal(practiceScene("gen:ahtri:50,60"), null);
 });
+
+test("pick-nudge@2: a wrong tap on a named place says what is off and which way to go, not the same words again", async () => {
+  const { nudge, set: setScene, initial } = await import("../../../packages/learning/src/scene");
+  const { pickParts } = await import("../../../packages/learning/src/scene-figures");
+  const sc = { type: "scene", kind: "pick", figure: { of: "matrix", values: [[6, 3, 2], [7, 4, 8], [5, 1, 9]] }, ask: ["e:1,3"], hint: "Row first, then column.", prompt: "Tap the entry in row 1, column 3.", success: "s", goal: { measure: "right", equals: 1 } } as never;
+  const at = (id: string) => setScene(sc, initial(sc), "part", pickParts((sc as { figure: never }).figure).indexOf(id as never) + 1);
+  assert.equal(nudge(sc, at("e:1,2")), "That is column 2. The row is right: you need column 3, 1 column to the right. Columns go down and are counted from the left.");
+  assert.match(nudge(sc, at("e:3,1"))!, /2 rows up.*2 columns to the right/);
+  assert.equal(nudge(sc, at("e:1,3")), null);
+});
